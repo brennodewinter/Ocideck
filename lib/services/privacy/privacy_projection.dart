@@ -23,6 +23,7 @@ import '../../models/privacy_disposition.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
 import '../../models/used_tool.dart';
+import '../slide_image_refs.dart';
 import 'privacy_own_identity.dart';
 import 'privacy_scanner.dart';
 
@@ -398,12 +399,19 @@ class PrivacyProjection {
     required bool active,
   }) {
     if (!active) return (slide: slide, count: 0);
-    final present = [
-      slide.imagePath,
-      slide.imagePath2,
-      slide.videoPath,
-      slide.audioPath,
-    ].where((p) => p.isNotEmpty).length;
+    // Ook de afbeeldingen ín de lopende tekst. Die staan niet in een veld maar
+    // als `![…](pad)` in de body, en zonder deze slag reisde een geredigeerde
+    // dia gewoon met zijn foto mee naar het scherm en de export — het veld was
+    // leeg, de tekst niet.
+    final inline = inlineImagePaths(slide.customMarkdown);
+    final present =
+        [
+          slide.imagePath,
+          slide.imagePath2,
+          slide.videoPath,
+          slide.audioPath,
+        ].where((p) => p.isNotEmpty).length +
+        inline.length;
     if (present == 0) return (slide: slide, count: 0);
     return (
       slide: slide.copyWith(
@@ -411,6 +419,13 @@ class PrivacyProjection {
         imagePath2: '',
         videoPath: '',
         audioPath: '',
+        // Het pad eruit, de verwijzing laten staan: `![alt]()` houdt zijn plek
+        // in de layout, zodat de tekst niet opschuift alsof er nooit iets stond
+        // en de renderer er hetzelfde zwarte vlak van maakt als bij een veld.
+        customMarkdown: rewriteInlineImagePaths(
+          slide.customMarkdown,
+          (_) => '',
+        ),
         mediaRedacted: true,
       ),
       count: present,

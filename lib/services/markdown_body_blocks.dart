@@ -12,7 +12,11 @@ class MarkdownBodyBlock {
 /// Alles buiten het pad is gewone alt-tekst, dus elke andere markdownlezer toont
 /// gewoon de afbeelding — de maatvoering hieronder is Marp's eigen conventie en
 /// kost niets aan uitwisselbaarheid.
-final _blockImage = RegExp(r'^\s*!\[([^\]]*)\]\(([^)\n]+)\)\s*$');
+/// Het pad mag leeg zijn (`![alt]()`): zo laat de privacyprojectie een
+/// geredigeerde afbeelding achter. Het blok blijft dan een afbeeldingsblok en
+/// houdt zijn plek in de layout, en de renderer maakt er een zwart vlak van in
+/// plaats van de tekst te laten opschuiven alsof er nooit iets stond.
+final _blockImage = RegExp(r'^\s*!\[([^\]]*)\]\(([^)\n]*)\)\s*$');
 
 /// `w:600` / `h:400` in de alt-tekst, in Marp-pixels.
 final _imageSizeDirective = RegExp(r'\b([wh]):(\d+(?:\.\d+)?)\b');
@@ -56,7 +60,6 @@ MarkdownImageSpec? parseMarkdownImageBlock(String markdown) {
   final match = _blockImage.firstMatch(markdown.trim());
   if (match == null) return null;
   final path = (match.group(2) ?? '').trim();
-  if (path.isEmpty) return null;
   final alt = match.group(1) ?? '';
   double? width;
   double? height;

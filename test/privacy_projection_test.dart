@@ -353,4 +353,49 @@ void main() {
       );
     });
   });
+
+  group('media op een geredigeerde dia', () {
+    /// Een dia die op `redact` staat en zowel een afbeeldingsveld als een
+    /// afbeelding in de lopende tekst draagt.
+    Slide slideWithBothImages() => Slide.create(SlideType.bullets).copyWith(
+      privacy: PrivacyDisposition.redact,
+      listStyle: ListStyle.richText,
+      imagePath: 'images/portret.png',
+      customMarkdown: 'Zie de foto:\n\n![Het team](images/team.jpg)\n\nEinde.',
+    );
+
+    test('een afbeelding in de tekst reist niet mee naar het publiek', () {
+      // "Niet beschikbaar is niet beschikbaar": het veld werd al geleegd, maar
+      // een `![…](pad)` in de body bleef staan en kwam gewoon op het scherm en
+      // in de export terecht.
+      final audience = PrivacyProjection.forAudience(
+        Deck(title: 'D', slides: [slideWithBothImages()]),
+      );
+      final projected = audience.slides.single;
+      expect(projected.imagePath, isEmpty);
+      expect(projected.customMarkdown, isNot(contains('images/team.jpg')));
+      expect(projected.mediaRedacted, isTrue);
+    });
+
+    test('de verwijzing houdt zijn plek, zodat de tekst niet opschuift', () {
+      final projected = PrivacyProjection.forAudience(
+        Deck(title: 'D', slides: [slideWithBothImages()]),
+      ).slides.single;
+      // Alleen het pad eruit — het blok blijft een afbeeldingsblok, en de
+      // renderer maakt er hetzelfde zwarte vlak van als bij een leeg veld.
+      expect(projected.customMarkdown, contains('![Het team]()'));
+      expect(projected.customMarkdown, contains('Zie de foto:'));
+      expect(projected.customMarkdown, contains('Einde.'));
+    });
+
+    test('zonder redactie blijft de afbeelding in de tekst staan', () {
+      final slide = slideWithBothImages().copyWith(
+        privacy: PrivacyDisposition.accept,
+      );
+      final projected = PrivacyProjection.forAudience(
+        Deck(title: 'D', slides: [slide]),
+      ).slides.single;
+      expect(projected.customMarkdown, contains('images/team.jpg'));
+    });
+  });
 }
