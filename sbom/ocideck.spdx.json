@@ -5,7 +5,7 @@
   "name": "ocideck-0.2.0+1",
   "documentNamespace": "https://ocideck.app/spdx/613e674b-77e4-5687-8add-1ea9ee2a4d89",
   "creationInfo": {
-    "created": "2026-07-21T23:06:39.556937Z",
+    "created": "2026-07-21T23:10:32.445047Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
