@@ -1689,6 +1689,19 @@ in the presenter to open a local **My notes** panel on the laptop only (never
 mirrored to the beamer). `Esc` closes the panel before other layers; a bare `N`
 types a letter once the panel has the cursor, so closing it takes `Ctrl/Cmd + N`.
 
+Files beside your presentation. OciDeck keeps three things next to the `.md`
+rather than inside it: your drawings (`<name>.ink.json`), these user notes
+(`<name>.user-notes.json`), and — for a pentest report — the agreements with the
+client about which requirements apply (`<name>.miauw.json`). They travel with
+the deck: they move along when you delete it, they sit inside an exported
+`.ocideck` package, and they come back after a crash. The reason they are not in
+the `.md` is the same for all three: that file should stay something you can
+open in a text editor and understand. A drawing is a list of coordinates, and an
+agreement with a client is about the document rather than part of it.
+
+If you copy only the `.md` somewhere, those three stay behind. Copy the whole
+folder, or export a package.
+
 In the visual editor, expand **User notes** below **Speaker notes** to author them
 per slide. Both blocks share the same layout: a collapsible header (icon, title,
 discard button) and the markdown editor underneath. The discard button is enabled
@@ -2380,7 +2393,7 @@ Issues are reported with a **line number**, a **severity**, and a short message.
 | **Per-slide metadata** | error | `<!-- tlp: … -->` with an unknown level. |
 | **Per-slide metadata** | error | `<!-- advance: … -->` where the value is not a number. |
 | **Per-slide metadata** | error | `<!-- ocideck_list_style: … -->` not `bullets`, `numbered`, or `checklist`. |
-| **Two-column bullets** | error | `ocideck_two_bullets_left/right` or `*_title` comments with invalid base64/JSON. |
+| **Two-column bullets** | error | A legacy `ocideck_two_bullets_left/right` or `*_title` comment with invalid base64/JSON. Those comments are no longer written — the visible `<ul><li>` carries the columns — but a file from an older version still reads. |
 | **Images** | error | `![…](…` without a closing `)`. |
 | **Video / audio** | error | `<video>` / `<audio>` tag incomplete, or `<video>` without `src="…"`. |
 | **`code` slides** | error | `_class: code` but fewer than two fence lines (no closed fenced block). |

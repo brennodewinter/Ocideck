@@ -231,6 +231,20 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
   ),
 };
 
+/// De registry andersom: `_class`-token → slidetype.
+///
+/// De serialisatie schrijft `type.marpClass`; het inlezen moet daar niet zijn
+/// eigen lijst van stringliteralen naast leggen. Een nieuw type dat wél
+/// geschreven maar niet gelezen wordt, komt terug als iets anders — en dat is
+/// stil dataverlies, want de dia opent dan in de verkeerde editor.
+///
+/// Types zonder token (bullets, image, twoImages, freeMarkdown) staan er niet
+/// in: die worden aan hun inhoud herkend.
+final Map<String, SlideType> slideTypeByMarpClass = {
+  for (final entry in slideTypeMeta.entries)
+    if (entry.value.marpClass.isNotEmpty) entry.value.marpClass: entry.key,
+};
+
 extension SlideTypeExtension on SlideType {
   String get label => slideTypeMeta[this]!.label;
   String get marpClass => slideTypeMeta[this]!.marpClass;

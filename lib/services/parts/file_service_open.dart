@@ -24,9 +24,35 @@ extension _FileServiceOpen on FileService {
   /// Path of the annotation sidecar next to a deck `<name>.md` → `<name>.ink.json`.
   String _sidecarPath(String mdPath) => p.setExtension(mdPath, '.ink.json');
 
+  /// Of [sidecar] uit een nieuwere OciDeck komt dan deze build ([supported]) —
+  /// dan blijft hij onaangeroerd, inclusief het niet-verwijderen.
+  ///
+  /// De leeskant laadt zo'n bestand al niet in (zie de codecs). Zonder deze
+  /// tweede helft was dat juist gevaarlijk: het deck heeft dan geen strepen of
+  /// notities in het geheugen, en de eerstvolgende opslag zou het bestand
+  /// daarom wíssen. Niets laden en toch overschrijven is erger dan half lezen.
+  Future<bool> _sidecarFromNewerBuild(File sidecar, int supported) async {
+    if (!await sidecar.exists()) return false;
+    try {
+      return sidecarIsFromNewerBuild(await sidecar.readAsString(), supported);
+    } catch (e) {
+      // Onleesbaar is niet "van later": dat valt onder gewone corruptie.
+      logWarning('FileService: sidecar version unreadable', e);
+      return false;
+    }
+  }
+
   /// Write the annotation sidecar next to [filePath], or remove it when empty.
   Future<void> _writeSidecar(Deck deck, String filePath) async {
     final sidecar = File(_sidecarPath(filePath));
+    if (await _sidecarFromNewerBuild(sidecar, AnnotationCodec.version)) {
+      logWarning(
+        'FileService._writeSidecar: annotation sidecar is from a newer '
+        'OciDeck and was left untouched',
+        sidecar.path,
+      );
+      return;
+    }
     final json = AnnotationCodec.encode(deck.slides, deck.annotations);
     if (json == null) {
       if (await sidecar.exists()) await sidecar.delete();
@@ -42,12 +68,96 @@ extension _FileServiceOpen on FileService {
   /// Write the user-notes sidecar next to [filePath], or remove it when empty.
   Future<void> _writeUserNotesSidecar(Deck deck, String filePath) async {
     final sidecar = File(_userNotesSidecarPath(filePath));
+    if (await _sidecarFromNewerBuild(sidecar, UserNotesCodec.version)) {
+      logWarning(
+        'FileService._writeUserNotesSidecar: user-notes sidecar is from a '
+        'newer OciDeck and was left untouched',
+        sidecar.path,
+      );
+      return;
+    }
     final json = UserNotesCodec.encode(deck.slides, deck.userNotes);
     if (json == null) {
       if (await sidecar.exists()) await sidecar.delete();
     } else {
       await writeStringAtomic(sidecar, json);
     }
+  }
+
+  /// Path of the MIAUW-disposition sidecar next to a deck `<name>.md`.
+  String _miauwSidecarPath(String mdPath) =>
+      p.setExtension(mdPath, '.miauw.json');
+
+  /// Write the MIAUW sidecar next to [filePath], or remove it when empty.
+  Future<void> _writeMiauwSidecar(Deck deck, String filePath) async {
+    final sidecar = File(_miauwSidecarPath(filePath));
+    if (await _sidecarFromNewerBuild(sidecar, MiauwCodec.version)) {
+      logWarning(
+        'FileService._writeMiauwSidecar: MIAUW sidecar is from a newer '
+        'OciDeck and was left untouched',
+        sidecar.path,
+      );
+      return;
+    }
+    final json = MiauwCodec.encode(deck.miauwWaivers, deck.miauwConfirmations);
+    if (json == null) {
+      if (await sidecar.exists()) await sidecar.delete();
+    } else {
+      await writeStringAtomic(sidecar, json);
+    }
+  }
+
+  /// Legt de lagen die naast de markdown wonen terug op [deck]: de
+  /// inkt-annotaties, de gebruikersnotities en de MIAUW-dispositie.
+  ///
+  /// Elke laag apart afgeschermd: een kapotte sidecar mag het openen van het
+  /// deck nooit blokkeren — dat zou een tekening van vorige week een hele
+  /// presentatie kosten.
+  Future<Deck> _attachSidecars(Deck deck, String filePath) async {
+    var hydrated = deck;
+    final sidecar = File(_sidecarPath(filePath));
+    if (await sidecar.exists()) {
+      try {
+        final map = AnnotationCodec.decode(
+          await sidecar.readAsString(),
+          hydrated.slides,
+        );
+        if (map.isNotEmpty) hydrated = hydrated.copyWith(annotations: map);
+      } catch (e) {
+        // A broken sidecar must never block opening the deck.
+        logWarning('FileService.openDeck: annotation sidecar unreadable', e);
+      }
+    }
+    final userNotesSidecar = File(_userNotesSidecarPath(filePath));
+    if (await userNotesSidecar.exists()) {
+      try {
+        final map = UserNotesCodec.decode(
+          await userNotesSidecar.readAsString(),
+          hydrated.slides,
+        );
+        if (map.isNotEmpty) hydrated = hydrated.copyWith(userNotes: map);
+      } catch (e) {
+        logWarning('FileService.openDeck: user-notes sidecar unreadable', e);
+      }
+    }
+    // De MIAUW-dispositie. Ligt er een sidecar, dan is die de waarheid; wat
+    // de parser nog uit de oude base64-front matter haalde, is het
+    // opwaardeerpad voor een bestand dat er nog geen heeft.
+    final miauwSidecar = File(_miauwSidecarPath(filePath));
+    if (await miauwSidecar.exists()) {
+      try {
+        final d = MiauwCodec.decode(await miauwSidecar.readAsString());
+        if (!d.isEmpty) {
+          hydrated = hydrated.copyWith(
+            miauwWaivers: d.waivers,
+            miauwConfirmations: d.confirmations,
+          );
+        }
+      } catch (e) {
+        logWarning('FileService.openDeck: MIAUW sidecar unreadable', e);
+      }
+    }
+    return hydrated;
   }
 
   /// Load the external CSV of any chart slide that links one, inlining the data

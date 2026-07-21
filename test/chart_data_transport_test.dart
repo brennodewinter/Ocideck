@@ -7,7 +7,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
-import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
@@ -32,7 +31,6 @@ void main() {
       final markdown = buildBeamerMarkdown(
         slides: [_linkedChartSlide()],
         projectPath: '/decks/demo',
-        themeProfile: const ThemeProfile(),
       );
 
       // The beamer resolves nothing relative to disk, so the numbers themselves
@@ -62,13 +60,14 @@ void main() {
       },
     );
 
-    test('still inlines the style profile', () {
+    test('carries no style profile inside the markdown any more', () {
+      // De styling reist naast de payload mee, in het JSON-veld
+      // [beamerStyleProfileKey]. Ook déze markdown moet leesbaar zijn.
       final markdown = buildBeamerMarkdown(
         slides: [Slide.create(SlideType.bullets)],
         projectPath: null,
-        themeProfile: const ThemeProfile(name: 'Vigilis'),
       );
-      expect(markdown, contains('ocideck_style_profile'));
+      expect(markdown, isNot(contains('ocideck_style_profile')));
     });
   });
 }

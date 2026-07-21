@@ -15,6 +15,7 @@ import '../models/used_tool.dart';
 import '../models/timeline.dart';
 import '../models/video_source.dart';
 import 'front_matter_merge.dart';
+import 'miauw_codec.dart';
 import '../utils/deck_markdown_dashes.dart';
 import '../utils/log.dart';
 import '../utils/markdown_paste_cleanup.dart';
@@ -22,6 +23,8 @@ import '../utils/markdown_paste_cleanup.dart';
 part 'markdown_service_helpers.dart';
 part 'markdown_service_parse.dart';
 part 'parts/markdown_service_parse_directives.dart';
+part 'parts/markdown_service_parse_columns.dart';
+part 'parts/markdown_service_parse_front_matter.dart';
 part 'markdown_service_finding.dart';
 part 'markdown_service_fenced.dart';
 part 'markdown_service_serialize.dart';
@@ -39,16 +42,14 @@ class MarkdownService {
 
   /// Serialise a deck to Marp markdown.
   ///
-  /// The styling (the [ThemeProfile]) is deliberately NOT written to the file:
-  /// a saved `.md` holds only the content (the "base"), and the app applies the
-  /// active style profile when it opens the deck. [inlineStyleProfile] re-adds
-  /// the profile for transient, non-file payloads — currently only the markdown
-  /// streamed to the audience (beamer) window, which has no other way to learn
-  /// the styling. It must stay false for anything written to disk.
+  /// The styling (the [ThemeProfile]) is deliberately NOT written: een `.md`
+  /// draagt alleen de inhoud (de "basis"), en de app legt er het actieve
+  /// stijlprofiel overheen bij het openen. De beamer-payload — de enige lezer
+  /// die de styling nergens anders vandaan kan halen — krijgt het profiel naast
+  /// de markdown mee in dezelfde boodschap; zie `buildBeamerMarkdown`.
   String generateDeck(
     Deck deck, {
     bool inlineChartData = false,
-    bool inlineStyleProfile = false,
     bool forExport = false,
     bool includeFormatVersion = true,
   }) {
@@ -61,7 +62,6 @@ class MarkdownService {
       original: deck.frontMatterSource,
       generated: _frontMatterLines(
         deck,
-        inlineStyleProfile: inlineStyleProfile,
         includeFormatVersion: includeFormatVersion,
       ),
     )) {
@@ -92,7 +92,6 @@ class MarkdownService {
   /// hier thuis; [mergeFrontMatter] weeft ze in wat er al stond.
   List<String> _frontMatterLines(
     Deck deck, {
-    required bool inlineStyleProfile,
     required bool includeFormatVersion,
   }) {
     final out = <String>[];
@@ -172,21 +171,9 @@ class MarkdownService {
     if (deck.sealTimestampToken.isNotEmpty) {
       out.add('ocideck_seal_tsr: ${deck.sealTimestampToken}');
     }
-    if (inlineStyleProfile) {
-      out.add(
-        'ocideck_style_profile: ${base64Url.encode(utf8.encode(jsonEncode(deck.themeProfile.toJson())))}',
-      );
-    }
-    if (deck.miauwWaivers.isNotEmpty) {
-      out.add(
-        'ocideck_miauw_waivers: ${base64Url.encode(utf8.encode(jsonEncode(deck.miauwWaivers)))}',
-      );
-    }
-    if (deck.miauwConfirmations.isNotEmpty) {
-      out.add(
-        'ocideck_miauw_confirmations: ${base64Url.encode(utf8.encode(jsonEncode(deck.miauwConfirmations)))}',
-      );
-    }
+    // Het stijlprofiel en de MIAUW-dispositie stonden hier tot 0.1.0 als
+    // base64. Zie [kRetiredFrontMatterKeys]: wat ondoorzichtig is of over het
+    // document gaat in plaats van erin, hoort ernaast.
     return out;
   }
 
@@ -251,21 +238,6 @@ class MarkdownService {
         .replaceAll('"', r'\"')
         .replaceAll('\n', r'\n');
     return '"$escaped"';
-  }
-
-  /// Decode a base64url-JSON front-matter value ([key] for logging) to a map,
-  /// or null on corruption — a bad token must never fail the whole deck parse
-  /// (which would blank the audience window). Shared by the `ocideck_*` keys
-  /// that store a structured value this way (style profile, MIAUW waivers).
-  Map<String, Object?>? _decodeBase64JsonMap(String value, String key) {
-    try {
-      return Map<String, Object?>.from(
-        jsonDecode(utf8.decode(base64Url.decode(value))) as Map,
-      );
-    } catch (e, s) {
-      logError('MarkdownService: decode $key', e, s);
-      return null;
-    }
   }
 
   /// Inverse of [_yamlScalar] for the simple line-based front matter parser.
@@ -662,11 +634,11 @@ class MarkdownService {
     String? theme;
     String? title;
     for (final rawLine in frontMatter.split('\n')) {
-      final line = rawLine.trim();
-      final colon = line.indexOf(':');
-      if (colon <= 0) continue;
-      final key = line.substring(0, colon).trim();
-      final value = line.substring(colon + 1).trim();
+      // Sleutels op kolom 0, net als de volledige parse: een ingesprongen regel
+      // hoort bij het blok erboven en is geen deck-veld.
+      final key = frontMatterKeyOf(rawLine);
+      if (key == null) continue;
+      final value = rawLine.substring(rawLine.indexOf(':') + 1).trim();
       switch (key) {
         case 'marp':
           marp = value == 'true';

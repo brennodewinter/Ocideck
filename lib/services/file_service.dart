@@ -24,6 +24,8 @@ import '../utils/net_guard.dart';
 import '../utils/project_path.dart';
 import '../utils/zip_encryption.dart';
 import 'annotation_codec.dart';
+import 'miauw_codec.dart';
+import 'sidecar_format.dart';
 import 'user_notes_codec.dart';
 import 'caption_service.dart';
 import 'image_service.dart';
@@ -689,34 +691,8 @@ class FileService {
       chartWarnings,
       deckPath: filePath,
     );
-    // Re-attach separate sidecar layers when reading from disk.
-    if (content == null) {
-      final sidecar = File(_sidecarPath(filePath));
-      if (await sidecar.exists()) {
-        try {
-          final map = AnnotationCodec.decode(
-            await sidecar.readAsString(),
-            hydrated.slides,
-          );
-          if (map.isNotEmpty) hydrated = hydrated.copyWith(annotations: map);
-        } catch (e) {
-          // A broken sidecar must never block opening the deck.
-          logWarning('FileService.openDeck: annotation sidecar unreadable', e);
-        }
-      }
-      final userNotesSidecar = File(_userNotesSidecarPath(filePath));
-      if (await userNotesSidecar.exists()) {
-        try {
-          final map = UserNotesCodec.decode(
-            await userNotesSidecar.readAsString(),
-            hydrated.slides,
-          );
-          if (map.isNotEmpty) hydrated = hydrated.copyWith(userNotes: map);
-        } catch (e) {
-          logWarning('FileService.openDeck: user-notes sidecar unreadable', e);
-        }
-      }
-    }
+    // Losse lagen naast de markdown; alleen bij lezen van schijf.
+    if (content == null) hydrated = await _attachSidecars(hydrated, filePath);
     return (deck: hydrated, failure: null, warnings: chartWarnings);
   }
 

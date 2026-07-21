@@ -15,6 +15,15 @@ import '../../utils/url_launcher_util.dart';
 import '../slides/slide_preview.dart';
 import 'annotation_overlay.dart';
 
+/// Het veld waaronder het stijlprofiel in de openings-envelop van het
+/// publieksvenster zit. Eén constante, gedeeld door de verzender en de
+/// ontvanger: een typefout aan één kant zou het venster stilletjes op het
+/// standaardthema zetten, en dat ziet een zaal wél maar een test niet.
+///
+/// De styling reist naast de markdown mee omdat ze er niet in hoort — zie
+/// `buildBeamerMarkdown`.
+const String beamerStyleProfileKey = 'styleProfile';
+
 /// Channel the audience (beamer) window listens on for updates from the
 /// presenter (laptop) window.
 const audienceChannel = WindowMethodChannel(
@@ -85,7 +94,11 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     final deck = MarkdownService().parseDeck(markdown);
     _slides = deck?.slides ?? const [];
     _reportLanguage = deck?.language ?? '';
-    _theme = deck?.themeProfile ?? const ThemeProfile();
+    // De styling komt naast de markdown binnen; zie [beamerStyleProfileKey].
+    final profileJson = widget.args[beamerStyleProfileKey];
+    _theme = profileJson is Map
+        ? ThemeProfile.fromJson(Map<String, Object?>.from(profileJson))
+        : const ThemeProfile();
     final schemeJson = widget.args['cockpitColorScheme'];
     if (schemeJson is Map) {
       _scheme = CockpitColorScheme.fromJson(

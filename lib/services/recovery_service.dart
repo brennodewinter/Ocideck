@@ -19,6 +19,12 @@ class RecoverySnapshot {
   /// JSON payload from [UserNotesCodec.encode], when the deck has user notes.
   final String? userNotes;
 
+  /// JSON payload from [MiauwCodec.encode], when the deck carries a MIAUW
+  /// disposition. Reist apart mee om dezelfde reden als [userNotes]: sinds
+  /// 0.1.0 staat ze niet meer in de markdown, dus een momentopname die alleen
+  /// de markdown bewaart zou de afspraken met de klant kwijtraken.
+  final String? miauw;
+
   const RecoverySnapshot({
     required this.id,
     required this.savedAt,
@@ -26,6 +32,7 @@ class RecoverySnapshot {
     required this.label,
     required this.markdown,
     this.userNotes,
+    this.miauw,
   });
 
   Map<String, Object?> toJson() => {
@@ -35,6 +42,7 @@ class RecoverySnapshot {
     'label': label,
     'markdown': markdown,
     if (userNotes != null) 'userNotes': userNotes,
+    if (miauw != null) 'miauw': miauw,
   };
 
   static RecoverySnapshot fromJson(Map<String, Object?> json) {
@@ -46,6 +54,7 @@ class RecoverySnapshot {
       label: (json['label'] as String?) ?? 'Presentatie',
       markdown: (json['markdown'] as String?) ?? '',
       userNotes: json['userNotes'] as String?,
+      miauw: json['miauw'] as String?,
     );
   }
 }

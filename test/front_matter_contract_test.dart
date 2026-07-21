@@ -6,6 +6,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/used_tool.dart';
 import 'package:ocideck/services/front_matter_merge.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/markdown_validator.dart';
 
 /// Het formaatcontract van het `.md`-bestand, getoetst als contract en niet als
 /// functie: wat OciDeck belooft over andermans front matter en over de
@@ -93,6 +94,111 @@ style: |
       expect(opnieuw.indexOf('theme: ocideck'), 1);
       expect(opnieuw, isNot(contains('theme: gaia')));
       expect(opnieuw, contains('footer: voet'));
+    });
+  });
+
+  group('een genest blok is een blok, geen losse sleutels', () {
+    // Marp laat een auteur CSS meegeven in een `style: |`-blok. Wat daarin
+    // staat is CSS, geen front matter — ook niet als een regel toevallig op
+    // `sleutel: waarde` lijkt.
+    const metCssBlok = '''
+---
+marp: true
+theme: gaia
+
+style: |
+  section {
+    color: #222;
+  }
+  section.title h1 {
+    theme: dracula;
+  }
+---
+
+# Kwartaalrapport
+''';
+
+    test('een ingesprongen `theme:` in een style-blok is geen deck-thema', () {
+      final deck = MarkdownService().parseDeck(metCssBlok);
+      expect(deck, isNotNull);
+      expect(deck!.theme, 'gaia');
+    });
+
+    test('er komt geen tweede theme-regel bij het opslaan', () {
+      final regels = _frontMatter(_openenEnOpslaan(metCssBlok));
+      expect(regels.where((r) => frontMatterKeyOf(r) == 'theme'), hasLength(1));
+      expect(regels, contains('theme: gaia'));
+    });
+
+    test('opslaan is ook met een genest blok idempotent', () {
+      final eerste = _openenEnOpslaan(metCssBlok);
+      expect(_openenEnOpslaan(eerste), eerste);
+    });
+
+    test('de schijfscan leest het deck-thema, niet dat uit het blok', () {
+      final gesnoven = MarkdownService().sniffFrontmatter(metCssBlok);
+      expect(gesnoven.marp, isTrue);
+      expect(gesnoven.theme, 'gaia');
+    });
+
+    test('de checker klaagt niet over de regels van het blok', () {
+      final meldingen = MarkdownValidator()
+          .validate(metCssBlok)
+          .issues
+          .map((i) => i.message)
+          .toList();
+      // De CSS-regels zijn geen front-matter-regels: geen vormklacht…
+      expect(meldingen, isNot(contains(contains('geen sleutel:waarde-vorm'))));
+      // …en geen "onbekende sleutel" over wat er binnen het blok staat.
+      expect(meldingen, isNot(contains(contains('"color"'))));
+      expect(meldingen, isNot(contains(contains('"theme"'))));
+      // De sleutel `style:` zelf is wél van iemand anders; dát mag de checker
+      // blijven melden — hij blijft bij opslaan behouden.
+      expect(meldingen, contains(contains('"style"')));
+    });
+  });
+
+  group('opgeruimde sleutels verdwijnen, andermans sleutels niet', () {
+    // Het onderscheid dat [kRetiredFrontMatterKeys] maakt: een sleutel die
+    // OciDeck ooit schreef gaat er bij het opslaan uít, terwijl een sleutel van
+    // iemand anders blijft staan. Zonder dat onderscheid zou de base64 die we
+    // net hebben opgeheven tot in lengte van dagen in het bestand blijven.
+    const metOudeSleutels =
+        '---\n'
+        'marp: true\n'
+        'theme: ocideck\n'
+        'ocideck_style_profile: eyJuYW1lIjoiS2xhbnQifQ==\n'
+        'ocideck_miauw_waivers: eyIxLjMiOiJyZWRlbiJ9\n'
+        'ocideck_miauw_confirmations: eyIyLjEiOiJha2tvb3JkIn0=\n'
+        'iemand_anders: blijft staan\n'
+        '---\n\n# T\n';
+
+    test('elke opgeruimde sleutel is weg na één keer opslaan', () {
+      final opnieuw = _openenEnOpslaan(metOudeSleutels);
+      for (final sleutel in kRetiredFrontMatterKeys) {
+        expect(opnieuw, isNot(contains(sleutel)), reason: sleutel);
+      }
+      expect(opnieuw, contains('iemand_anders: blijft staan'));
+    });
+
+    test('de checker noemt ze niet onbekend', () {
+      // Ze zijn bekend; ze staan alleen ergens anders. Een waarschuwing die
+      // zegt "doet niets en blijft behouden" zou bovendien onwaar zijn.
+      final meldingen = MarkdownValidator()
+          .validate(metOudeSleutels)
+          .issues
+          .map((i) => i.message);
+      for (final sleutel in kRetiredFrontMatterKeys) {
+        expect(meldingen, isNot(contains(contains(sleutel))));
+      }
+      expect(meldingen, contains(contains('iemand_anders')));
+    });
+
+    test('geen sleutel staat op beide lijsten', () {
+      expect(
+        kOwnedFrontMatterKeys.intersection(kRetiredFrontMatterKeys),
+        isEmpty,
+      );
     });
   });
 
@@ -198,10 +304,7 @@ style: |
           miauwWaivers: const {'1.6': 'reden'},
           miauwConfirmations: const {'2.3': 'bevestigd'},
         );
-        final markdown = MarkdownService().generateDeck(
-          deck,
-          inlineStyleProfile: true,
-        );
+        final markdown = MarkdownService().generateDeck(deck);
         final geschreven = _frontMatter(
           markdown,
         ).map(frontMatterKeyOf).whereType<String>().toSet();

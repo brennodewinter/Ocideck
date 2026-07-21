@@ -27,6 +27,7 @@ my_presentation/
 ├── My_presentation.md              # the presentation (Marp Markdown)
 ├── My_presentation.ink.json        # annotation-layer sidecar (see §6.2)
 ├── My_presentation.user-notes.json # user-notes sidecar (see §6.3)
+├── My_presentation.miauw.json      # MIAUW-disposition sidecar (see §6.5)
 ├── images/                         # copied images
 │   ├── photo.png
 │   └── .ocideck_captions.json      # caption sidecar (see §6.1)
@@ -77,7 +78,17 @@ presentations.
 > part of the Marp Markdown (so the `.md` stays clean and exchangeable): the
 > annotation layer (`<name>.ink.json`, §6.2), user notes
 > (`<name>.user-notes.json`, §6.3), captions (`.ocideck_captions.json`, §6.1),
-> and linked chart data (`data/*.json`, `data/*.csv`, §6.4).
+> linked chart data (`data/*.json`, `data/*.csv`, §6.4) and the MIAUW
+> disposition (`<name>.miauw.json`, §6.5).
+
+> **No base64 in the `.md`.** As of 0.1.0 nothing OciDeck writes into a
+> presentation file is opaque. Whatever is unreadable to a human, or is *about*
+> the document rather than part of it, lives in a sidecar next to it. What
+> remains in the Markdown as an HTML comment is plain text a reader can
+> understand and edit (`tlp`, `skip`, `advance`, `ocideck_bullet_marker`,
+> `ocideck_image_focus`, `ocideck_title_text_color`, …). The promise this
+> upholds: someone with only a text editor and Marp can keep working. See §3.6
+> for what moved, and where it went.
 
 ---
 
@@ -89,7 +100,6 @@ marp: true
 theme: ocideck
 paginate: true
 ... (other metadata) ...
-ocideck_style_profile: <base64url(JSON)>
 ---
 
 <!-- _class: title -->
@@ -185,9 +195,7 @@ content having changed.
 | `ocideck_target_seconds` | int | Target duration for the presenter countdown, in seconds. Written only when `> 0`. |
 | `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. |
 | `ocideck_play_only` | `true`/absent | Play-only lock. When `true`, the deck opens locked: no editor, toolbar, menus, or export — only the first slide with a play button, presented full screen. Closing the deck restores normal editing. Default (unlocked) stays out of the file; only `true` is written. Removing this key unlocks the deck. |
-| `ocideck_style_profile` | base64url | Complete style profile as JSON (§3.2). **Read-only in practice** — never written to a `.md` or a package; see §3.2. |
-| `ocideck_miauw_waivers` | base64url | MIAUW compliance exclusions as JSON: EIS id → mandatory reason. Written only when non-empty; a corrupt value is ignored. Drives the compliance overview (PENTEST_MIAUW §9). |
-| `ocideck_miauw_confirmations` | base64url | The counterpart of the waivers: MIAUW confirmations as JSON. Same encoding and same "written only when non-empty, corrupt value ignored" rule. |
+| `ocideck_style_profile` · `ocideck_miauw_waivers` · `ocideck_miauw_confirmations` | *retired* | **No longer written** as of 0.1.0 (§3.6). Still read, so an older file opens correctly; removed from the file on the next save. |
 | `ocideck_seal_tsr` | base64url | RFC 3161 timestamp token (`.tsr`) over `ocideck_seal_hash` (PENTEST_MIAUW §8-A2). Written only when present; excluded from the sealed content hash. Checked when the timestamp dialog is open and when an audit dossier is built — **not** on opening the deck — and the check is an imprint comparison only, not a CMS-signature or certificate validation (*corrected 2026-07-21: this cell said "Verified in-app on open"*). See [USER_GUIDE.md](USER_GUIDE.md#timestamp-rfc-3161). |
 | `ocideck_finalized` | `true`/absent | Document integrity (§8 A1): the deck is finalised and read-only. Written only when `true`. |
 | `ocideck_seal_hash` · `ocideck_seal_algo` · `ocideck_seal_at` | string | The content seal: a SHA-512 hash over the canonical content (styling and the seal fields themselves excluded), the algorithm (`sha-512`), and the ISO-8601 UTC timestamp. Recomputed on open → *intact* / *changed after finalising*. |
@@ -208,6 +216,27 @@ looks like a directive (`<!-- _key: … -->` or `<!-- ocideck_key: … -->`) but
 not one OciDeck understands — e.g. Marp's per-slide `_paginate`, `_header`,
 `_footer`, `_color` — is dropped and flagged; plain prose comments remain speaker
 notes.
+
+### 3.6 Retired keys — what moved out of the front matter, and where it went
+
+Three keys carried base64 in the front matter until 0.1.0. None of them do any
+more. They are still **read**, so an existing file opens exactly as before, and
+they are **removed from the file on the next save** — the deck is written back
+in the new shape without the author doing anything.
+
+| Retired key | Where it lives now |
+| --- | --- |
+| `ocideck_style_profile` | Never on disk to begin with; only in the transient beamer stream. Now travels beside that markdown as plain JSON (§3.2). |
+| `ocideck_miauw_waivers` | `<name>.miauw.json`, key `waivers` (§6.5). |
+| `ocideck_miauw_confirmations` | `<name>.miauw.json`, key `confirmations` (§6.5). |
+
+The removal is what makes this a migration rather than a rename. In
+`front_matter_merge.dart` these keys did not simply disappear from the owned
+list — they moved to a second list, `kRetiredFrontMatterKeys`. A key on
+*neither* list falls under rule 1 above ("keys OciDeck does not know are kept")
+and would sit in the file forever. Being on the retired list means the opposite:
+the line is dropped on save and never written back. The markdown checker (§10)
+knows them too, so it does not report them as unknown keys.
 
 ### 3.1 TLP Levels
 
@@ -329,23 +358,23 @@ Two consequences worth knowing about:
   projecting them would let the presenter write blocks over someone's own
   annotations.
 
-### 3.2 `ocideck_style_profile` (Style Profile)
+### 3.2 The Style Profile
 
-**A saved file never contains this key.** Styling is deliberately kept out of the
-`.md`: the file holds content, and the app applies the active style profile when
-it opens the deck. `generateDeck` only emits the key behind an
-`inlineStyleProfile` flag, and the single caller that passes it is the transient
-markdown streamed to the audience window, which has no other way to learn the
-styling. Both the project writer and the package writer call `generateDeck`
-without it.
+**No file ever contains the style profile.** Styling is deliberately kept out of
+the `.md`: the file holds content, and the app applies the active style profile
+when it opens the deck. Styling travels as `themes/<theme>.css` and the app's
+own profile; a standalone profile can be exchanged as `.ocideckstyle` (§9).
 
-So this section describes a key you may need to **read** — in decks from older
-versions, or in that audience stream — but must not expect to find in anything
-you save. Styling travels as `themes/<theme>.css` and the app's own profile.
+Until 0.1.0 there was one exception: the transient markdown streamed to the
+audience (beamer) window carried the profile as `ocideck_style_profile`,
+base64url-encoded, because that window has no other way to learn the styling.
+It now travels **next to** that markdown, as plain JSON in the `styleProfile`
+field of the window's opening message. That was the last thing in OciDeck that
+could put base64 into a Markdown document.
 
-When present, the complete visual profile is serialized as JSON, UTF-8 encoded, and
-**base64url** encoded on one line. Decode as base64url -> UTF-8 -> JSON. The JSON
-has these fields (with defaults):
+A file that still carries the old key opens fine — the key is simply ignored,
+and it is removed on the next save (§3.6). The profile itself is JSON with
+these fields (with defaults):
 
 | Field | Default | Meaning |
 | --- | --- | --- |
@@ -564,21 +593,65 @@ rendering/exports it draws as an accent-coloured label above a thin rule:
 - Borrel
 ```
 
-**Two bullet columns** (`two-bullets`) — besides the visible HTML grid, the two
-columns are also stored **canonically** in comments (base64url of a JSON array),
-so they can be read back losslessly. Each column can optionally have a
-**heading** (`*_title`, base64url of plain text); it is written only when filled
-and appears as `<h3>` above the column:
+**Two bullet columns** (`two-bullets`) — **the visible HTML is the content.**
+Until 0.1.0 both columns were also stored as base64 in four comments above the
+grid, and those comments won; the `<ul><li>` below them was decoration. Worse:
+the parser skipped every non-heading line on a `two-bullets` slide, so a
+hand-written two-column slide did not lose to the comments — it was never read
+at all, and arrived as two empty columns. Both are gone. What you see is what is
+stored:
+
 ```markdown
-<!-- ocideck_two_bullets_left: <base64url(JSON[])> -->
-<!-- ocideck_two_bullets_right: <base64url(JSON[])> -->
-<!-- ocideck_two_bullets_left_title: <base64url(text)> -->   (optional)
-<!-- ocideck_two_bullets_right_title: <base64url(text)> -->  (optional)
-<div class="ocideck-two-bullets" style="...">
-<div><h3>...</h3><ul>...</ul></div>
-<div><h3>...</h3><ul>...</ul></div>
+<!-- _class: two-bullets -->
+
+# Heading
+## Subheading (optional)
+
+<div class="ocideck-two-bullets">
+<div>
+<h3>Left column heading</h3>
+<ul>
+<li>First point</li>
+<li style="margin-left:1.4em;">Subpoint</li>
+</ul>
+</div>
+<div>
+<h3>Right column heading</h3>
+<ul><li>Other point</li></ul>
+</div>
 </div>
 ```
+
+Reading rules, all of them tolerant of hand-written markup (the style
+attributes OciDeck writes are optional):
+
+| What you write | What it means |
+| --- | --- |
+| `<ul>` / `<ol>` | Starts a column. The first is the left column, the second the right; a third is ignored. |
+| `<ol>`, or `<li value="…">` | The list is **numbered**. |
+| `<h3>…</h3>` before a list | The heading above that column. Written only when filled. |
+| `<li>…</li>` | One list item, in the column it sits in. |
+| `<li style="margin-left:1.4em;">` | One indentation level (`1.4em` per level). |
+| `<li>☑ …` / `<li>☐ …` | A **checklist** item, ticked or not. Stored as `[x] …` / `[ ] …`. |
+| `<li style="list-style:none; …">Label</li>` | A group heading (§ above). With no text: a wordless divider. |
+
+Text inside an `<li>` or `<h3>` is HTML-escaped on write and unescaped on read,
+so a bullet may contain `<`, `>`, `&`, `"` **and a pipe** — the very cases the
+base64 was introduced for. `&lt;b&gt;bold&lt;/b&gt;` reads back as the literal
+text `<b>bold</b>`.
+
+The list style follows the visible markup in **both** directions. `<ol>`/`value=`
+makes it numbered, a `☑`/`☐` makes it a checklist, and items carrying neither
+make it a plain bullet list — so deleting the tick boxes by hand actually turns
+the checklist off. `<!-- ocideck_list_style: … -->` is still written and read,
+but only as the starting value; the markup overrules it. (The same downgrade
+applies to a single-column bullet list: a `checklist` comment with no `[x]`/`[ ]`
+items left reads as plain bullets.)
+
+For a file written by an older OciDeck the old comments are still read, but only
+as a fallback for when there is no visible list at all — a file whose grid was
+cut out by hand. When both are present the visible markup wins, and on the next
+save the comments are gone.
 
 **Bullets + image** (`split`) — panel width and text scale are stored in a
 `_style` comment; the image is inside a `split-image` div:
@@ -1254,6 +1327,15 @@ Marp `.md` is never touched by annotations.
 `points` is a flat list `[x0, y0, x1, y1, ...]`; `color` is an ARGB int; `tool`
 is `pen` or `highlighter` (laser pointers are transient and are not stored).
 
+`version` is a single increasing integer, and every sidecar in this chapter
+handles it the same way (`lib/services/sidecar_format.dart`): **a file declaring
+a higher version than this build understands is not loaded, and not
+overwritten.** Both halves matter. Reading half of a file you do not understand
+and then writing back what you did understand deletes the rest; and refusing to
+read it while still saving over it deletes all of it — the deck would hold no
+strokes in memory, and the save would take that as "there is nothing here".
+A missing `version` is version 1.
+
 ### 6.3 User Notes (`<name>.user-notes.json`)
 
 Personal notes for the recipient or learner while following a presentation. They
@@ -1434,6 +1516,34 @@ untouched without a warning.
 
 ---
 
+### 6.5 MIAUW Disposition (`<name>.miauw.json`)
+
+The compliance decisions made **about** a report: requirements the client
+excluded (with a mandatory reason) and requirements the client confirmed. They
+drive the compliance overview (PENTEST_MIAUW §9).
+
+Until 0.1.0 both maps lived in the front matter as base64 (§3.6). They are two
+things at once that the `.md` should not carry: unreadable to anyone opening the
+file in an editor, and *about* the document rather than part of it — the same
+argument that already put annotations and user notes beside the file.
+
+Keyed by EIS id; a key is written only when its map is non-empty, and the file
+is deleted when both are. Same `version` rule as §6.2.
+
+```json
+{
+  "version": 1,
+  "waivers": { "1.3": "Certification not required by the client" },
+  "confirmations": { "2.1": "Intake held on 2026-07-01" }
+}
+```
+
+The sidecar travels with the deck wherever the `.md` alone would not be enough:
+it is a member of the `.ocideck` package (§7), it moves along to the bin with
+the deck, and it rides in the autosave/recovery snapshot. A web download of a
+bare `.md` (§1) does not carry it, exactly as it does not carry annotations or
+user notes; export the deck as a package to take everything.
+
 ## 7. Portable Package (`.ocideck`)
 
 `Export package` writes one **zip file** (extension `.ocideck`; `.zip` is also
@@ -1446,6 +1556,7 @@ yet.
 ├── <title>.md                # Marp Markdown
 ├── <title>.ink.json          # annotation layer (if present, §6.2)
 ├── <title>.user-notes.json   # user notes (if present, §6.3)
+├── <title>.miauw.json        # MIAUW disposition (if present, §6.5)
 ├── images/...                # all used images
 ├── data/...                  # linked chart data files (§6.4)
 ├── media/...                 # used video/audio
@@ -1501,7 +1612,7 @@ for presenter notes):
 | --- | --- |
 | `<!-- _class: ... -->` | Slide type + behavior (§4). |
 | `<!-- _style: --image-width: N%; --split-text-scale: x; -->` | Layout of a `split` slide. |
-| `<!-- ocideck_two_bullets_left/right: <base64url> -->` | Canonical storage for the two bullet columns. |
+| `<!-- ocideck_two_bullets_left/right[_title]: <base64url> -->` | **Retired (0.1.0).** Was the canonical storage for the two bullet columns; the visible `<ul><li>` now carries them (§5). Still read from older files, dropped on save. |
 | `<!-- ocideck_bullet_marker: dot\|paw -->` | Per-slide bullet-marker override (bullets/two-bullets/bullets+image). Absent = inherit the theme's `bulletMarker` (§3.2). |
 | `<!-- ocideck_image_focus: x,y -->` | Image crop focal point (0..1 per axis, `0.5,0.5` = centre) for the slide's image. Decides which part stays in view when the picture is cropped (fill/zoom, or a fixed image panel). Written only when not centred. |
 | `<!-- ocideck_image_focus2: x,y -->` | Same, for the **second** image of a two-images slide. Written only when not centred. |
@@ -1541,6 +1652,15 @@ for presenter notes):
   read unchanged — it is still the only possible form where there is no project
   folder (web). A `source` pointing at a `.csv` keeps being read *and written*
   as CSV; only newly linked data files are JSON (§6.4).
+- **What left the file in 0.1.0** still reads: the three retired front-matter
+  keys (§3.6) and the four `ocideck_two_bullets_*` comments (§5). None of them
+  is written any more, and all of them are dropped from the file on the first
+  save — a one-way migration that needs no action from the author. For the two
+  columns the visible `<ul><li>` wins over the old comment when both are
+  present, which is the whole point: what is on screen is what is stored.
+- **Hand-writing works.** A two-column slide typed by hand, with plain
+  `<ul><li>` and no style attributes, now reads correctly. Before 0.1.0 it
+  parsed as two empty columns.
 
 ---
 
@@ -1606,7 +1726,7 @@ not model is not reported.
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
 | **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `scorecard`, `actions` (read-only, migrates to `table`), `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`, `table-overdue`). |
 | **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
-| **Two columns** | error | Invalid base64/JSON in `ocideck_two_bullets_*` comments. |
+| **Two columns** | error | Invalid base64/JSON in a legacy `ocideck_two_bullets_*` comment (retired; §5). |
 | **Images** | error | `![...](...` without closing `)`. |
 | **Video/audio** | error | Incomplete `<video>`/`<audio>` tag, or `<video>` without `src="..."`. |
 | **`code` slide** | error | No closed fenced ``` block. |

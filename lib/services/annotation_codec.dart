@@ -3,6 +3,7 @@ import 'dart:convert';
 import '../models/annotation.dart';
 import '../models/slide.dart';
 import '../utils/log.dart';
+import 'sidecar_format.dart';
 
 /// Serializes the annotation layer into a sidecar payload that is fully
 /// decoupled from the Marp markdown.
@@ -83,6 +84,17 @@ class AnnotationCodec {
     final result = <String, List<InkStroke>>{};
     try {
       final data = jsonDecode(json);
+      // Een sidecar van later kent velden die deze build niet snapt; er iets
+      // uit oppikken en dan opslaan wist de rest. Zie [sidecarIsFromNewerBuild];
+      // de schrijfkant weigert hetzelfde bestand te overschrijven.
+      if (declaredSidecarVersion(data) > version) {
+        logWarning(
+          'AnnotationCodec.decode: annotation sidecar is version '
+          '${declaredSidecarVersion(data)}, this build reads $version — '
+          'not loading it',
+        );
+        return {};
+      }
       final raw = (data is Map ? data['slides'] : null) as List? ?? const [];
       // Track claimed (slide, page) keys — one slide legitimately carries
       // several entries (one per rich-text page), so we disambiguate on the

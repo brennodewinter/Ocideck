@@ -25,6 +25,31 @@ final _reClassDirective = RegExp(r'<!--\s*_class:\s*([^>]+?)\s*-->');
 final _reHtmlComment = RegExp(r'<!--([\s\S]*?)-->', multiLine: true);
 final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
 
+/// `_class`-tokens van opgeheven slidetypes en het type dat ze nu opleveren.
+///
+/// Het losse 'actions'-type is opgeheven: het was een tabel met een vaste kop en
+/// een getypeerde editor eroverheen. De rijen stonden al als gewone
+/// Markdown-tabel op schijf, dus een bestaand deck migreert door het token als
+/// `table` te lezen — geen dataconversie nodig.
+const Map<String, SlideType> _retiredSlideTypeClasses = {
+  'actions': SlideType.table,
+};
+
+/// Het slidetype dat één `_class`-token aanwijst, of null als het token geen
+/// type is (`logo-safe`, `split`-varianten, een eigen CSS-klasse van de auteur).
+SlideType? _slideTypeForClassToken(String token) =>
+    slideTypeByMarpClass[token] ?? _retiredSlideTypeClasses[token];
+
+/// Het slidetype dat [tokens] declareert: het eerste token dat een type is, of
+/// null wanneer geen enkel token dat doet (dan beslist de inhoud).
+SlideType? _declaredSlideType(Iterable<String> tokens) {
+  for (final token in tokens) {
+    final type = _slideTypeForClassToken(token);
+    if (type != null) return type;
+  }
+  return null;
+}
+
 /// Slide types whose body is stored as a Markdown table, so the parser keeps the
 /// decoded rows in [Slide.tableRows]: the `table` and `scorecard` types plus the
 /// security types that serialise as a table (`checklist` P1-CHK, `scopeMatrix`
@@ -70,54 +95,16 @@ class _BodyParse {
   ListStyle listStyle;
   bool richTextHeaderPhase;
 
+  /// Of er een item met een vinkje (`[x]`) of een nummer is gezien, en of er
+  /// een gewoon item zonder allebei was. Samen laten ze de zichtbare opmaak de
+  /// lijststijl ook naar bénéden bijstellen; zie [_MarkdownParse._parseBodyLines].
+  bool sawMarkedItem = false;
+  bool sawPlainItem = false;
+
   /// Of het blok de `split`-class draagt; één keer bepaald in
   /// [_MarkdownParse._parseBodyLines] zodat de per-regel handlers niet elke
   /// regel opnieuw de cssClass hoeven te splitsen.
   bool isSplit = false;
-}
-
-/// Mutable accumulator for the deck-level front-matter fields, filled by
-/// [_MarkdownParse._parseFrontMatter]. Held as a struct — the same idiom as
-/// [_BodyParse] — so [_MarkdownParse._doParse] stays short and the per-key
-/// switch reads top-to-bottom.
-class _FrontMatter {
-  String theme = 'ocideck';
-  bool paginate = true;
-  ThemeProfile themeProfile = const ThemeProfile();
-  Map<String, String> miauwWaivers = const {};
-  Map<String, String> miauwConfirmations = const {};
-  String? presentationTitle;
-  String author = '';
-  String language = '';
-  List<String> standardsUsed = const [];
-  final List<UsedTool> toolsUsed = [];
-  String organization = '';
-  String version = '';
-  String date = '';
-  String description = '';
-  String keywords = '';
-  TlpLevel tlp = TlpLevel.none;
-  PrivacyDisposition privacy = PrivacyDisposition.warn;
-  int presentationTargetSeconds = 0;
-  bool showRehearsalSummary = true;
-  bool playOnly = false;
-  bool finalized = false;
-  String sealHash = '';
-  String sealAlgo = '';
-  String sealAt = '';
-  String sealTsr = '';
-  DocumentSignature signature = const DocumentSignature();
-
-  /// De front-matter-regels precies zoals ze in het bestand stonden, inclusief
-  /// wat de switch hieronder niet herkent. Zie [Deck.frontMatterSource].
-  List<String> sourceLines = const [];
-
-  /// De formaatversie die het bestand declareerde; ontbreekt de sleutel, dan is
-  /// het de oudste versie. Zie [Deck.formatVersion].
-  int formatVersion = kOldestFormatVersion;
-
-  /// The markdown body with the front-matter block stripped off.
-  String body = '';
 }
 
 extension _MarkdownParse on MarkdownService {
@@ -145,7 +132,6 @@ extension _MarkdownParse on MarkdownService {
       paginate: fm.paginate,
       slides: slides.isEmpty ? [Slide.create(SlideType.title)] : slides,
       projectPath: projectPath,
-      themeProfile: fm.themeProfile,
       author: fm.author,
       organization: fm.organization,
       version: fm.version,
@@ -166,153 +152,11 @@ extension _MarkdownParse on MarkdownService {
       sealAt: fm.sealAt,
       sealTimestampToken: fm.sealTsr,
       signature: fm.signature.isEmpty ? null : fm.signature,
-      miauwWaivers: fm.miauwWaivers,
-      miauwConfirmations: fm.miauwConfirmations,
+      miauwWaivers: fm.legacyMiauwWaivers,
+      miauwConfirmations: fm.legacyMiauwConfirmations,
       frontMatterSource: fm.sourceLines,
       formatVersion: fm.formatVersion,
     );
-  }
-
-  /// Parses and strips the optional `---`-delimited front matter, returning the
-  /// deck-level fields plus the remaining markdown ([_FrontMatter.body]).
-  /// Extracted from [_doParse] to keep that method under the length limit;
-  /// behaviour is identical to the previous inline block.
-  _FrontMatter _parseFrontMatter(String markdown) {
-    final fm = _FrontMatter();
-    String content = markdown;
-
-    if (content.startsWith('---\n')) {
-      final end = content.indexOf('\n---\n', 4);
-      if (end != -1) {
-        final frontMatter = content.substring(4, end);
-        fm.sourceLines = frontMatter.split('\n');
-        for (final rawLine in fm.sourceLines) {
-          // Parse `key: value` generically: split on the first colon and trim,
-          // so leading indentation or extra spacing no longer silently drops a
-          // field. Splitting on the *first* colon keeps colons in the value
-          // (e.g. an ISO date/time).
-          final line = rawLine.trim();
-          final colon = line.indexOf(':');
-          if (colon <= 0) continue;
-          final key = line.substring(0, colon).trim();
-          final value = line.substring(colon + 1).trim();
-          // Visual-signature fields share a prefix; fold them into the
-          // accumulator here so the switch below stays short.
-          if (key.startsWith('ocideck_sig_')) {
-            fm.signature = _applySignatureField(
-              fm.signature,
-              key,
-              _parseScalar(value),
-            );
-            continue;
-          }
-          switch (key) {
-            case 'theme':
-              fm.theme = value;
-            case 'paginate':
-              fm.paginate = value == 'true';
-            case 'title':
-              fm.presentationTitle = _parseScalar(value);
-            case 'author':
-              fm.author = _parseScalar(value);
-            case 'organization':
-              fm.organization = _parseScalar(value);
-            case 'version':
-              fm.version = _parseScalar(value);
-            case 'date':
-              fm.date = _parseScalar(value);
-            case 'description':
-              fm.description = _parseScalar(value);
-            case 'keywords':
-              fm.keywords = _parseScalar(value);
-            case 'language':
-              fm.language = _parseScalar(value);
-            case 'tool':
-              // Meerdere `tool:`-regels stapelen in plaats van elkaar te
-              // overschrijven — anders houdt een deck maar één hulpmiddel over.
-              final tool = UsedTool.parse(_parseScalar(value));
-              if (tool != null) fm.toolsUsed.add(tool);
-            case 'standards':
-              fm.standardsUsed = _parseScalar(value)
-                  .split(',')
-                  .map((e) => e.trim())
-                  .where((e) => e.isNotEmpty)
-                  .toList();
-            case 'tlp':
-              fm.tlp = TlpLevelX.fromKey(value);
-            case 'privacy':
-              fm.privacy = PrivacyDispositionX.fromKey(value);
-            case kFormatVersionKey:
-              fm.formatVersion = readFormatVersion(value);
-            case 'ocideck_target_seconds':
-              fm.presentationTargetSeconds = int.tryParse(value) ?? 0;
-            case 'ocideck_show_rehearsal_summary':
-              fm.showRehearsalSummary = value != 'false';
-            case 'ocideck_play_only':
-              fm.playOnly = value == 'true';
-            case 'ocideck_finalized':
-              fm.finalized = value == 'true';
-            case 'ocideck_seal_hash':
-              fm.sealHash = _parseScalar(value);
-            case 'ocideck_seal_algo':
-              fm.sealAlgo = _parseScalar(value);
-            case 'ocideck_seal_at':
-              fm.sealAt = _parseScalar(value);
-            case 'ocideck_seal_tsr':
-              fm.sealTsr = value;
-            case 'ocideck_style_profile':
-              final styleJson = _decodeBase64JsonMap(value, key);
-              if (styleJson != null) {
-                fm.themeProfile = ThemeProfile.fromJson(styleJson);
-              }
-            case 'ocideck_miauw_waivers':
-              final waiverJson = _decodeBase64JsonMap(value, key);
-              if (waiverJson != null) {
-                fm.miauwWaivers = waiverJson.map((k, v) => MapEntry(k, '$v'));
-              }
-            case 'ocideck_miauw_confirmations':
-              final confirmJson = _decodeBase64JsonMap(value, key);
-              if (confirmJson != null) {
-                fm.miauwConfirmations = confirmJson.map(
-                  (k, v) => MapEntry(k, '$v'),
-                );
-              }
-          }
-        }
-        content = content.substring(end + 5).trim();
-      }
-    }
-
-    fm.body = content;
-    return fm;
-  }
-
-  /// Folds one `ocideck_sig_*` front-matter field into the running visual
-  /// signature (§8 A1). Unknown `ocideck_sig_*` keys are ignored so a future
-  /// field never breaks the parse.
-  DocumentSignature _applySignatureField(
-    DocumentSignature sig,
-    String key,
-    String value,
-  ) {
-    switch (key) {
-      case 'ocideck_sig_name':
-        return sig.copyWith(name: value);
-      case 'ocideck_sig_role':
-        return sig.copyWith(role: value);
-      case 'ocideck_sig_cert':
-        return sig.copyWith(certification: value);
-      case 'ocideck_sig_date':
-        return sig.copyWith(date: value);
-      case 'ocideck_sig_statement':
-        return sig.copyWith(statement: value);
-      case 'ocideck_sig_typed':
-        return sig.copyWith(typedSignature: value);
-      case 'ocideck_sig_image':
-        return sig.copyWith(imagePath: value);
-      default:
-        return sig;
-    }
   }
 
   /// Pulls the image crop focal-point comments out of [block] and returns the
@@ -476,14 +320,26 @@ extension _MarkdownParse on MarkdownService {
     final structured = _structuredSlideOrNull(d, link);
     if (structured != null) return structured;
 
+    final classTokens = d.cssClass.split(_reWhitespace);
+    // De zichtbare kolommen zijn de inhoud. Alleen als er géén lijst-HTML staat
+    // — een oud bestand waarvan de opmaak is weggeknipt, of een handgeschreven
+    // blok met gewone Markdown-bullets — telt wat er verder in het blok stond.
+    final columns = _declaredSlideType(classTokens) == SlideType.twoBullets
+        ? _parseTwoColumnBullets(d.remaining)
+        : null;
+    final visibleColumns = columns != null && columns.found;
     // bullets may already hold the decoded two-column data; the line parser
     // appends to the same list, so pass it through by reference.
-    final bullets = d.bullets;
+    final bullets = visibleColumns ? columns.left : d.bullets;
+    final bullets2 = visibleColumns ? columns.right : d.bullets2;
     final body = _parseBodyLines(
       d.remaining.split('\n'),
       d.cssClass,
       d.listStyle,
       bullets,
+      // Staat de inhoud al in de kolommen, dan zou de generieke regelwandeling
+      // elk `<li>` van béíde kolommen nog eens op één hoop gooien.
+      skipContentLines: visibleColumns,
     );
 
     final imageSize = _cappedImageSize(body.imageSize, d.styleImageWidth);
@@ -504,7 +360,6 @@ extension _MarkdownParse on MarkdownService {
       paragraph: body.paragraph,
     );
 
-    final classTokens = d.cssClass.split(_reWhitespace);
     final showLogo = !classTokens.contains('no-logo');
     final showFooter = !classTokens.contains('no-footer');
 
@@ -527,13 +382,19 @@ extension _MarkdownParse on MarkdownService {
       title: body.h1,
       subtitle: type == SlideType.section ? body.paragraph : body.h2,
       bullets: bullets,
-      bullets2: d.bullets2,
-      listStyle: body.listStyle,
+      bullets2: bullets2,
+      // De zichtbare opmaak beslist over de lijststijl zodra ze er iets over
+      // zegt; de richtlijn is niet meer dan de startwaarde.
+      listStyle: visibleColumns
+          ? (columns.listStyle ?? body.listStyle)
+          : body.listStyle,
       showChecklistProgress: d.showChecklistProgress,
       continueNumbering: d.continueNumbering,
       continuesSplit: d.continuesSplit,
-      columnTitle1: d.columnTitle1,
-      columnTitle2: d.columnTitle2,
+      // Een zichtbare `<h3>` boven een kolom is de kop; alleen zonder kolommen
+      // telt de oude base64-richtlijn nog.
+      columnTitle1: visibleColumns ? columns.leftTitle : d.columnTitle1,
+      columnTitle2: visibleColumns ? columns.rightTitle : d.columnTitle2,
       imagePath: body.imagePath,
       imagePath2: body.imagePath2,
       imageCaption: body.imageCaption,
@@ -609,51 +470,52 @@ extension _MarkdownParse on MarkdownService {
     required String findingId,
     required FindingRole findingRole,
   }) {
-    final tokens = cssClass.split(_reWhitespace);
-    if (tokens.contains('code')) {
-      return _parseCodeBlock(
-        remaining: remaining,
-        cssClass: cssClass,
-        notes: notes,
-        advanceDuration: advanceDuration,
-        skipped: skipped,
-        isDetail: isDetail,
-        tlp: tlp,
-      );
-    }
-    if (tokens.contains('chart')) {
-      return _parseChartBlock(
-        remaining: remaining,
-        cssClass: cssClass,
-        notes: notes,
-        advanceDuration: advanceDuration,
-        skipped: skipped,
-        isDetail: isDetail,
-        tlp: tlp,
-      );
-    }
-    if (tokens.contains('cockpit')) {
-      return _parseCockpitBlock(
-        remaining: remaining,
-        cssClass: cssClass,
-        notes: notes,
-        advanceDuration: advanceDuration,
-        skipped: skipped,
-        isDetail: isDetail,
-        tlp: tlp,
-      );
-    }
-    if (tokens.contains('question')) {
-      return _parseQuestionBlock(
-        remaining: remaining,
-        cssClass: cssClass,
-        notes: notes,
-        advanceDuration: advanceDuration,
-        skipped: skipped,
-        isDetail: isDetail,
-        tlp: tlp,
-        imageSize: styleImageWidth,
-      );
+    // Ook hier beslist de registry welk token welk type is; zie
+    // [_declaredSlideType]. Vier types dragen een eigen fenced body.
+    switch (_declaredSlideType(cssClass.split(_reWhitespace))) {
+      case SlideType.code:
+        return _parseCodeBlock(
+          remaining: remaining,
+          cssClass: cssClass,
+          notes: notes,
+          advanceDuration: advanceDuration,
+          skipped: skipped,
+          isDetail: isDetail,
+          tlp: tlp,
+        );
+      case SlideType.chart:
+        return _parseChartBlock(
+          remaining: remaining,
+          cssClass: cssClass,
+          notes: notes,
+          advanceDuration: advanceDuration,
+          skipped: skipped,
+          isDetail: isDetail,
+          tlp: tlp,
+        );
+      case SlideType.cockpit:
+        return _parseCockpitBlock(
+          remaining: remaining,
+          cssClass: cssClass,
+          notes: notes,
+          advanceDuration: advanceDuration,
+          skipped: skipped,
+          isDetail: isDetail,
+          tlp: tlp,
+        );
+      case SlideType.question:
+        return _parseQuestionBlock(
+          remaining: remaining,
+          cssClass: cssClass,
+          notes: notes,
+          advanceDuration: advanceDuration,
+          skipped: skipped,
+          isDetail: isDetail,
+          tlp: tlp,
+          imageSize: styleImageWidth,
+        );
+      default:
+        break;
     }
     return _tryFindingSlide(
       cssClass: cssClass,
@@ -696,11 +558,11 @@ extension _MarkdownParse on MarkdownService {
     List<String> lines,
     String cssClass,
     ListStyle listStyle,
-    List<String> bullets,
-  ) {
+    List<String> bullets, {
+    required bool skipContentLines,
+  }) {
     final b = _BodyParse(listStyle);
     final classTokens = cssClass.split(_reWhitespace);
-    final isTwoBullets = classTokens.contains('two-bullets');
     b.isSplit = classTokens.contains('split');
 
     for (final line in lines) {
@@ -709,7 +571,7 @@ extension _MarkdownParse on MarkdownService {
         continue;
       }
       final t = line.trim();
-      if (isTwoBullets) {
+      if (skipContentLines) {
         if (t.startsWith('# ')) {
           b.h1 = t.substring(2);
         } else if (t.startsWith('## ')) {
@@ -718,6 +580,18 @@ extension _MarkdownParse on MarkdownService {
         continue;
       }
       _consumeContentLine(line, t, bullets, b);
+    }
+
+    // De zichtbare opmaak mag de stijl ook terugzetten. Stond er `checklist` of
+    // `numbered` in de richtlijn maar draagt geen enkel item nog een vinkje of
+    // een nummer, dan heeft iemand ze weggehaald en is dit een gewone
+    // opsomming. Alleen omhoog kunnen betekende dat je een checklist nooit meer
+    // kwijtraakte door de tekst te bewerken.
+    if (b.sawPlainItem &&
+        !b.sawMarkedItem &&
+        (b.listStyle == ListStyle.checklist ||
+            b.listStyle == ListStyle.numbered)) {
+      b.listStyle = ListStyle.bullets;
     }
 
     return (
@@ -832,8 +706,14 @@ extension _MarkdownParse on MarkdownService {
       bullets.add('\t' * level + body);
       if (_reChecklistMark.hasMatch(body)) {
         b.listStyle = ListStyle.checklist;
+        b.sawMarkedItem = true;
       } else if (_reNumberedMark.hasMatch(marker)) {
         b.listStyle = ListStyle.numbered;
+        b.sawMarkedItem = true;
+      } else if (!isGroupHeading(body)) {
+        // Een tussenkop draagt per ontwerp geen vinkje of nummer, dus hij zegt
+        // niets over de stijl van de lijst eromheen.
+        b.sawPlainItem = true;
       }
     } else if (t == '>' || t.startsWith('> ')) {
       // Aanvullen, niet overschrijven: een citaat mag meerdere regels beslaan.
@@ -909,32 +789,12 @@ extension _MarkdownParse on MarkdownService {
     required String h2,
     required String paragraph,
   }) {
-    final tokens = cssClass.split(_reWhitespace).toSet();
-    if (tokens.contains('title')) return SlideType.title;
-    if (tokens.contains('section')) return SlideType.section;
-    if (tokens.contains('timeline')) return SlideType.timeline;
-    if (tokens.contains('two-bullets')) return SlideType.twoBullets;
-    if (tokens.contains('split')) return SlideType.bulletsImage;
-    if (tokens.contains('quote')) return SlideType.quote;
-    if (tokens.contains('video')) return SlideType.video;
-    if (tokens.contains('table')) return SlideType.table;
-    if (tokens.contains('scorecard')) return SlideType.scorecard;
-    // Het losse 'actions'-type is opgeheven: het was een tabel met een vaste
-    // kop en een getypeerde editer eroverheen. De rijen stonden al als gewone
-    // Markdown-tabel op schijf, dus een bestaand deck migreert door het token
-    // simpelweg als `table` te lezen — geen dataconversie nodig.
-    if (tokens.contains('actions')) return SlideType.table;
-    if (tokens.contains('assets')) return SlideType.assets;
-    if (tokens.contains('discoveries')) return SlideType.discoveries;
-    // Informatieveiligheid-module (PENTEST_MIAUW §4). Elk type draagt een eigen
-    // `_class`-token; de body round-trip't als vrije Markdown (zie de
-    // customMarkdown-toewijzing hieronder). Exacte tokens, dus geen conflict
-    // onderling ('finding' matcht niet 'findings-summary').
-    if (tokens.contains('finding')) return SlideType.finding;
-    if (tokens.contains('findings-summary')) return SlideType.findingsSummary;
-    if (tokens.contains('checklist')) return SlideType.checklist;
-    if (tokens.contains('scope-matrix')) return SlideType.scopeMatrix;
-    if (tokens.contains('sign-off')) return SlideType.signOff;
+    // Het token beslist, en welk token bij welk type hoort staat in de registry
+    // die de serialisatie óók gebruikt ([slideTypeByMarpClass]) — niet in een
+    // tweede lijst hier. Exacte tokens, dus geen conflict onderling ('finding'
+    // matcht niet 'findings-summary').
+    final declared = _declaredSlideType(cssClass.split(_reWhitespace));
+    if (declared != null) return declared;
 
     // No explicit class token — fall back to content heuristics.
     if (quote.isNotEmpty) return SlideType.quote;

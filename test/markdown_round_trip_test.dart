@@ -481,52 +481,30 @@ void main() {
       expect(markdown, isNot(contains('text-decoration:line-through')));
     });
 
-    test('MIAUW waivers round-trip through the front matter', () {
-      final service = MarkdownService();
-      const waivers = {
-        '1.3': 'Certificering niet vereist door klant',
-        '3.3': 'Geen bewijsbestanden in scope',
-      };
-      final markdown = service.generateDeck(
+    test('de MIAUW-dispositie staat niet meer in de markdown', () {
+      // Ze ging naar `<naam>.miauw.json`; zie miauw_sidecar_test.dart voor de
+      // rondgang en het opwaardeerpad van een bestand met de oude sleutels.
+      final markdown = MarkdownService().generateDeck(
         Deck(
           title: 'Pentest',
-          miauwWaivers: waivers,
+          miauwWaivers: const {'1.3': 'Certificering niet vereist door klant'},
+          miauwConfirmations: const {'2.1': 'Intake gehouden op 2026-07-01'},
           slides: [Slide.create(SlideType.title)],
         ),
-      );
-      expect(markdown, contains('ocideck_miauw_waivers:'));
-      expect(service.parseDeck(markdown)!.miauwWaivers, waivers);
-    });
-
-    test('a deck without waivers writes no waiver key', () {
-      final markdown = MarkdownService().generateDeck(
-        Deck(title: 'X', slides: [Slide.create(SlideType.title)]),
       );
       expect(markdown, isNot(contains('ocideck_miauw_waivers')));
-    });
-
-    test('MIAUW confirmations round-trip through the front matter', () {
-      final service = MarkdownService();
-      const confirmations = {
-        '1.2': 'Rapporteur OSCP-gecertificeerd, bewijs bijgevoegd',
-        '2.1': 'Intake gehouden op 2026-07-01',
-      };
-      final markdown = service.generateDeck(
-        Deck(
-          title: 'Pentest',
-          miauwConfirmations: confirmations,
-          slides: [Slide.create(SlideType.title)],
-        ),
-      );
-      expect(markdown, contains('ocideck_miauw_confirmations:'));
-      expect(service.parseDeck(markdown)!.miauwConfirmations, confirmations);
-    });
-
-    test('a deck without confirmations writes no confirmation key', () {
-      final markdown = MarkdownService().generateDeck(
-        Deck(title: 'X', slides: [Slide.create(SlideType.title)]),
-      );
       expect(markdown, isNot(contains('ocideck_miauw_confirmations')));
+    });
+
+    test('een oud bestand met de base64-sleutels blijft leesbaar', () {
+      // Het opwaardeerpad: lezen kan nog, schrijven niet meer.
+      const oud =
+          '---\n'
+          'marp: true\n'
+          'ocideck_miauw_waivers: eyIxLjMiOiJyZWRlbiJ9\n'
+          '---\n\n# T\n';
+      final deck = MarkdownService().parseDeck(oud)!;
+      expect(deck.miauwWaivers, {'1.3': 'reden'});
     });
 
     test(
@@ -2178,4 +2156,68 @@ void main() {
       expect(md, isNot(contains('ocideck_finding_role')));
     });
   });
+
+  group('elk slidetype komt als zichzelf terug', () {
+    // Uitputtend over SlideType.values: de losse tests hierboven dekken de
+    // types die iemand ooit opschreef, en dat waren er niet alle. Een nieuw
+    // type dat de lezer niet kent, valt hier meteen door de mand — de
+    // schrijver gebruikt de registry (`type.marpClass`), dus de lezer moet dat
+    // ook. Elke tak is één regel in [_metInhoud], niet een nieuwe test.
+    for (final type in SlideType.values) {
+      test(type.name, () {
+        final out = _roundTrip(_metInhoud(type));
+        expect(
+          out.type,
+          type,
+          reason:
+              'een ${type.name}-dia kwam terug als ${out.type.name}; '
+              'kent de lezer het `_class`-token "${type.marpClass}"?',
+        );
+      });
+    }
+  });
+}
+
+/// Een dia van [type] met het minimum aan inhoud dat hem herkenbaar maakt.
+///
+/// Types zónder eigen `_class`-token (bullets, image, twoImages, freeMarkdown)
+/// worden aan hun inhoud herkend; die krijgen hier precies wat de heuristiek
+/// nodig heeft. De rest draagt zijn token en heeft alleen inhoud nodig die niet
+/// leeg is.
+Slide _metInhoud(SlideType type) {
+  final basis = Slide.create(type);
+  return switch (type) {
+    SlideType.bullets => basis.copyWith(title: 'T', bullets: const ['Punt']),
+    SlideType.twoBullets => basis.copyWith(
+      title: 'T',
+      bullets: const ['Links'],
+      bullets2: const ['Rechts'],
+    ),
+    SlideType.bulletsImage => basis.copyWith(
+      title: 'T',
+      bullets: const ['Punt'],
+      imagePath: 'images/a.png',
+    ),
+    SlideType.image => basis.copyWith(imagePath: 'images/a.png'),
+    SlideType.twoImages => basis.copyWith(
+      imagePath: 'images/a.png',
+      imagePath2: 'images/b.png',
+    ),
+    SlideType.video => basis.copyWith(videoPath: 'media/film.mp4'),
+    SlideType.quote => basis.copyWith(
+      quote: 'Zo gaat dat',
+      quoteAuthor: 'N.N.',
+    ),
+    SlideType.freeMarkdown => basis.copyWith(
+      customMarkdown: 'Vrije **tekst** zonder kop.',
+    ),
+    SlideType.code => basis.copyWith(
+      codeLanguage: 'dart',
+      customMarkdown: 'void main() {}',
+    ),
+    SlideType.title ||
+    SlideType.section => basis.copyWith(title: 'T', subtitle: 'S'),
+    // De overige types dragen hun token én een gevulde body uit Slide.create.
+    _ => basis.copyWith(title: 'T'),
+  };
 }

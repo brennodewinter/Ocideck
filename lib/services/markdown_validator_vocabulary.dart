@@ -72,6 +72,10 @@ const _supportedCommentDirectives = {
   'ocideck_bullet_marker',
   'ocideck_timeline_duration',
   'ocideck_timeline_current',
+  // Opgeheven per 0.1.0: de tweekolomsdia draagt haar inhoud in de zichtbare
+  // `<ul><li>`. Nog wel bekend, zodat een bestand van vóór die versie niet vol
+  // waarschuwingen komt te staan over commentaren die het gewoon nog mag
+  // hebben; bij het opslaan verdwijnen ze.
   'ocideck_two_bullets_left',
   'ocideck_two_bullets_right',
   'ocideck_two_bullets_left_title',

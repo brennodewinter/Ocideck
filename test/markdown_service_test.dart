@@ -67,10 +67,10 @@ void main() {
     expect(deck.slides.single.imageSize, greaterThan(0));
   });
 
-  test('frontmatter tolerates indentation and missing spaces', () {
+  test('frontmatter tolerates missing spaces around the colon', () {
     const md =
         '---\n'
-        '  title:   Mijn Talk\n' // leading indent + extra spaces
+        'title:   Mijn Talk\n' // extra spaces after the colon
         'theme:ocideck\n' // no space after the colon
         'ocideck_target_seconds: 600\n'
         'date: 2026-06-23T09:30:00\n' // value contains colons
@@ -81,6 +81,30 @@ void main() {
     expect(deck.theme, 'ocideck');
     expect(deck.presentationTargetSeconds, 600);
     expect(deck.date, '2026-06-23T09:30:00');
+  });
+
+  test('an indented key belongs to the block above, not to the deck', () {
+    // Was tolerance ("een ingesprongen sleutel lezen we ook wel"), and that
+    // tolerance is exactly what made CSS inside a `style: |` block set deck
+    // fields. It also duplicated the key on save: the merge keeps an indented
+    // line verbatim (it is a continuation) and appends the generated key after
+    // it. Reader, writer and checker now share one rule: column 0 or nothing.
+    const md =
+        '---\n'
+        'marp: true\n'
+        'title: Echt\n'
+        'style: |\n'
+        '  section {\n'
+        '    title: Nep;\n'
+        '  }\n'
+        '---\n'
+        '# Eerste\n';
+    final service = MarkdownService();
+    final deck = service.parseDeck(md)!;
+    expect(deck.title, 'Echt');
+    final opnieuw = service.generateDeck(deck);
+    expect('title: Echt'.allMatches(opnieuw), hasLength(1));
+    expect(opnieuw, contains('    title: Nep;'));
   });
 
   test('round-trips image slide with title as image slide', () {
@@ -322,9 +346,9 @@ void main() {
     expect(back.meters.last.markerLabel, 'Build');
   });
 
-  test('round-trips deck style profile', () {
+  test('het stijlprofiel reist als JSON, niet als base64', () {
     final service = MarkdownService();
-    final profile = const ThemeProfile(
+    const profile = ThemeProfile(
       name: 'Klant A',
       slideBackgroundColor: '#111827',
       textColor: '#F8FAFC',
@@ -341,21 +365,19 @@ void main() {
       closingSlideMarkdown: '# Einde\n\nDank voor jullie aandacht.',
     );
 
-    // The style profile only travels inside the markdown when explicitly
-    // inlined (transient beamer payloads); a plain save keeps the file clean.
-    final markdown = service.generateDeck(
-      Deck(
-        title: 'Demo',
-        themeProfile: profile,
-        slides: [Slide.create(SlideType.title).copyWith(title: 'Demo')],
-      ),
-      inlineStyleProfile: true,
+    // Het profiel reist als JSON naast de markdown mee (de beamer-envelop);
+    // in de markdown zelf staat het niet meer. Dit is dus een JSON-rondgang.
+    final deck = Deck(
+      title: 'Demo',
+      themeProfile: ThemeProfile.fromJson(profile.toJson()),
+      slides: [Slide.create(SlideType.title).copyWith(title: 'Demo')],
     );
 
-    final deck = service.parseDeck(markdown);
-
-    expect(deck, isNotNull);
-    expect(deck!.themeProfile.name, 'Klant A');
+    expect(
+      service.generateDeck(deck),
+      isNot(contains('ocideck_style_profile')),
+    );
+    expect(deck.themeProfile.name, 'Klant A');
     expect(deck.themeProfile.slideBackgroundColor, '#111827');
     expect(deck.themeProfile.tableTextColor, '#111111');
     expect(deck.themeProfile.tableHeaderTextColor, '#EEEEEE');

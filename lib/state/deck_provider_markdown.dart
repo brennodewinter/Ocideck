@@ -56,6 +56,16 @@ extension DeckNotifierMarkdown on DeckNotifier {
           : const <String, List<InkStroke>>{};
       deck = deck.copyWith(annotations: remapped);
     }
+    // De MIAUW-dispositie staat sinds 0.1.0 niet meer in de markdown (ze ligt
+    // in de `.miauw.json`-sidecar). Zonder dit zou één keer schakelen naar de
+    // markdown-weergave de uitsluitingen en klantbevestigingen wissen, en de
+    // eerstvolgende opslag die sidecar met ze erin.
+    if (current != null) {
+      deck = deck.copyWith(
+        miauwWaivers: current.miauwWaivers,
+        miauwConfirmations: current.miauwConfirmations,
+      );
+    }
     _mutate(deck); // discrete stap → ook ongedaan te maken
     return true;
   }
