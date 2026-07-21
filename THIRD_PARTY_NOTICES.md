@@ -20,6 +20,7 @@ Shipped inside the app and embedded into the **offline HTML export**
 | --- | --- | --- |
 | [marked](https://github.com/markedjs/marked) | Markdown → HTML in the export | MIT |
 | [highlight.js](https://github.com/highlightjs/highlight.js) | Code highlighting in the export | BSD-3-Clause |
+| [highlight.js GitHub theme](https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css) (`highlight.css`) | The colours for that highlighting; hash-pinned, no npm package of its own | BSD-3-Clause |
 | [DOMPurify](https://github.com/cure53/DOMPurify) | Sanitises the rendered Markdown before it hits the DOM in the export | Apache-2.0 / MPL-2.0 |
 | [Mermaid](https://github.com/mermaid-js/mermaid) | Diagrams in the export | MIT |
 | [MathJax](https://github.com/mathjax/MathJax) (`tex-svg.js`) | Math rendering in the export | Apache-2.0 |
@@ -55,33 +56,55 @@ changes; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md#vendored-forks).
 
 ## Dart & Flutter packages
 
-Direct dependencies (see `pubspec.yaml` for exact version constraints). Each is
-distributed under its own OSI-approved licence as published on
-[pub.dev](https://pub.dev); most are MIT, BSD-3-Clause, or Apache-2.0.
+Every **direct** dependency (see `pubspec.yaml` for the exact version
+constraints, and `sbom/` for the resolved versions, hashes and the ~150
+transitive packages behind them). The licence column is the one
+`tool/license_detect.dart` classifies from each package's own LICENSE file — the
+same answer `make licenses` and the SBOM give.
 
-- `flutter`, `flutter_localizations` (Flutter SDK — BSD-3-Clause)
-- `flutter_riverpod`
-- `file_picker`
-- `path_provider`, `path`
-- `uuid`
-- `screen_retriever`, `window_manager`
-- `shared_preferences`
-- `pasteboard`
-- `pdf`
-- `archive`
-- `video_player`
-- `characters`
-- `url_launcher`
-- `desktop_drop`
-- `image`
-- `flutter_highlight`, `highlight`
-- `flutter_math_fork`
-- `wakelock_plus`
-- `fl_chart`
-- `cupertino_icons`
+| Package | Used for | Licence |
+| --- | --- | --- |
+| `flutter`, `flutter_localizations` | The framework and its localisation delegates | BSD-3-Clause (Flutter SDK) |
+| `flutter_riverpod` | Application state | MIT |
+| `file_picker` | Open/save dialogs | MIT |
+| `path_provider`, `path` | Platform directories and path handling | BSD-3-Clause |
+| `uuid` | Slide and asset identifiers | MIT |
+| `screen_retriever`, `window_manager` | Screen geometry and window control for the dual-screen presenter | MIT |
+| `shared_preferences` | Settings storage | BSD-3-Clause |
+| `flutter_secure_storage` | The WebDAV/Nextcloud password in the OS keychain | BSD-3-Clause |
+| `pasteboard` | Paste images from the clipboard | Apache-2.0 |
+| `pdf` | PDF export | Apache-2.0 |
+| `archive` | `.ocideck` bundles and PPTX export | MIT |
+| `crypto` | SHA-256/SHA-512 for the seal, evidence hashes and the SBOM generator | BSD-3-Clause |
+| `video_player` | Video slides | BSD-3-Clause |
+| `characters` | Grapheme-correct text truncation | BSD-3-Clause |
+| `url_launcher` | External links (scheme allowlist) | BSD-3-Clause |
+| `desktop_drop` | Drag-and-drop of files onto the deck | Apache-2.0 |
+| `image` | Image decoding, scaling and re-encoding | MIT |
+| `flutter_svg` | SVG rendering in slides and the UI | MIT |
+| `opencv_core` | On-device face **detection** for the privacy check — counts faces, never identifies | Apache-2.0 |
+| `flutter_highlight`, `highlight` | Syntax highlighting in code slides | MIT |
+| `flutter_math_fork` | Math rendering in the app and PDF | Apache-2.0 |
+| `flutter_quill` | The rich-text slide editor | MIT |
+| `markdown_quill` | Quill ⇄ Markdown conversion for that editor | MIT |
+| `markdown` | Markdown parsing outside the Marp path | BSD-3-Clause |
+| `xml` | PPTX (OOXML) writing and SVG handling | MIT |
+| `http` | WebDAV/Nextcloud and Git-over-HTTPS transport (through NetGuard) | BSD-3-Clause |
+| `webview_flutter`, `webview_flutter_web` | The HTML/Mermaid preview surface | BSD-3-Clause |
+| `web` | Browser interop in the web build | BSD-3-Clause |
+| `wakelock_plus` | Keeps the screen awake while presenting | BSD-3-Clause |
+| `fl_chart` | Chart slides | MIT |
+| `cupertino_icons` | Icon set | MIT |
+| `desktop_multi_window` | The second (audience) window — vendored fork, see above | Apache-2.0 |
 
-> To regenerate an authoritative, version-pinned licence inventory you can use a
-> tool such as `flutter pub deps` together with a licence-collection package.
+> **This table is guarded, not trusted.** `third_party_notices_test.dart` fails
+> when a direct dependency, a vendored JS bundle or a bundled font is missing
+> here, or when the licence in this table disagrees with the classifier. It was
+> added because twelve direct dependencies — including `webview_flutter`,
+> `flutter_secure_storage`, `http`, `opencv_core`, `crypto` and `flutter_quill` —
+> had accumulated in `pubspec.yaml` without ever reaching this list. The SBOM had
+> them all along; a hand-kept companion list is exactly the artefact that falls
+> behind, so it now has a gate instead of good intentions.
 
 ## Licence audit
 
