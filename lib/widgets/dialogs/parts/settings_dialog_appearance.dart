@@ -337,7 +337,7 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
             child: Row(
               children: [
                 Text(
-                  'OciDeck',
+                  context.l10n.d('OciDeck'),
                   style: TextStyle(
                     color: _contrastColor(_parseColor(profile.primaryColor)),
                     fontWeight: FontWeight.w600,

@@ -1815,6 +1815,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'Ceart go leor',
+  'min': 'nóim.',
+  '# Bedankt\n\nVragen?': '# Go raibh maith agat\n\nCeisteanna?',
+  'P {pitch}  B {bank}': 'P {pitch}  B {bank}',
+  'ACT {value}°': 'REA {value}°',
+  'TGT {heading}°': 'SPR {heading}°',
   'Presentatietitel': 'Teideal an chur i láthair',
   'Sectienaam': 'Ainm na rannóige',
   'Optionele toelichting': 'Míniú roghnach',

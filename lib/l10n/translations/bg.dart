@@ -1802,6 +1802,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'Добре',
+  'min': 'мин',
+  '# Bedankt\n\nVragen?': '# Благодаря\n\nВъпроси?',
+  'P {pitch}  B {bank}': 'Т {pitch}  К {bank}',
+  'ACT {value}°': 'ТЕК {value}°',
+  'TGT {heading}°': 'ЦЕЛ {heading}°',
   'Presentatietitel': 'Заглавие на презентацията',
   'Sectienaam': 'Име на секцията',
   'Optionele toelichting': 'Пояснение по избор',

@@ -142,7 +142,11 @@ class _VideoPreviewState extends State<_VideoPreview>
                 !widget.allowRemoteMedia)
               _remoteBlockedPlaceholder(context, widget.slide.videoPath)
             else
-              _mediaPlaceholder(context, Icons.movie_outlined, 'Video'),
+              _mediaPlaceholder(
+                context,
+                Icons.movie_outlined,
+                context.l10n.d('Video'),
+              ),
             if (widget.slide.title.isNotEmpty)
               Positioned(
                 left: widget.w * 0.06,
@@ -463,7 +467,11 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
             // een dood vlak wordt verward.
             if (!_playerReady) const IgnorePointer(child: _VideoEmbedLoading()),
           ] else
-            _mediaPlaceholder(context, Icons.movie_outlined, 'Video'),
+            _mediaPlaceholder(
+              context,
+              Icons.movie_outlined,
+              context.l10n.d('Video'),
+            ),
           if (widget.slide.title.isNotEmpty)
             Positioned(
               left: widget.w * 0.06,

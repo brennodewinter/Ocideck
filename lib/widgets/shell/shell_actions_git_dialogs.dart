@@ -709,7 +709,7 @@ class _TagDialogState extends State<_TagDialog> {
               onChanged: (_) => setState(() {}),
               decoration: InputDecoration(
                 labelText: l10n.d('Versie'),
-                hintText: 'v1.0',
+                hintText: l10n.d('v1.0'),
                 errorText: version.isEmpty || valid
                     ? null
                     : l10n.d('Gebruik vX, bijvoorbeeld v1.0.'),

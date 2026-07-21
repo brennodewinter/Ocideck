@@ -1778,6 +1778,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'min.',
+  '# Bedankt\n\nVragen?': '# Tak\n\nSpørgsmål?',
+  'P {pitch}  B {bank}': 'P {pitch}  K {bank}',
+  'ACT {value}°': 'AKT {value}°',
+  'TGT {heading}°': 'MÅL {heading}°',
   'Presentatietitel': 'Præsentationstitel',
   'Sectienaam': 'Sektionsnavn',
   'Optionele toelichting': 'Valgfri forklaring',

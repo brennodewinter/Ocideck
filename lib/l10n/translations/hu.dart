@@ -1783,6 +1783,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'perc',
+  '# Bedankt\n\nVragen?': '# Köszönöm\n\nKérdések?',
+  'P {pitch}  B {bank}': 'B {pitch}  D {bank}',
+  'ACT {value}°': 'AKT {value}°',
+  'TGT {heading}°': 'CÉL {heading}°',
   'Presentatietitel': 'Prezentációcím',
   'Sectienaam': 'Szakasz neve',
   'Optionele toelichting': 'Opcionális magyarázat',

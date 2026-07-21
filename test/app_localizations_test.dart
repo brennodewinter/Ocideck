@@ -13,6 +13,17 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'OciDeck',
+  'Stichting LibreKAT',
+  'GitHub',
+  'GitLab',
+  'TLP',
+  'SHA-512:',
+  '#33FF33',
+  '#2563EB',
+  'v1.0',
+  'https://...',
+  'brenno@dewinter.com\ndewinter.com',
   'MASWE',
   'MASWE-0005',
   'WSTG-ATHN-07',
@@ -77,12 +88,39 @@ const unchangedInEnglish = {
   // The scorecard's "was 375" line. Dutch and English happen to spell it
   // the same; it is genuinely translated everywhere else.
   'was',
+  // Toetskappen en de minuut-afkorting: het Nederlandse toetsenbord draagt de
+  // Engelse opschriften, dus de bronstring ís al Engels. Elders wel echt
+  // vertaald — Frans zet 'échap' en 'Entrée', Spaans 'Intro', Italiaans
+  // 'Invio', Turks 'dk', Klingon 'tup'.
+  'esc',
+  'Enter',
+  'OK',
+  'min',
+  // De teksten op de cockpitglazen. P/B (pitch/bank) en ACT/TGT zijn de
+  // luchtvaartafkortingen zoals ze op een echt instrument staan, en dat is in
+  // het Engels hetzelfde als in het Nederlands. Talen met een eigen
+  // instrumententaal krijgen die wel: Duits leest IST/SOLL, Grieks Π/Κ,
+  // Frans T/I.
+  'P {pitch}  B {bank}',
+  'ACT {value}°',
+  'TGT {heading}°',
 };
 
 /// Idem, maar voor ALLE talen: termen die overal letterlijk gelijk blijven —
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'OciDeck',
+  'Stichting LibreKAT',
+  'GitHub',
+  'GitLab',
+  'TLP',
+  'SHA-512:',
+  '#33FF33',
+  '#2563EB',
+  'v1.0',
+  'https://...',
+  'brenno@dewinter.com\ndewinter.com',
   'MASWE',
   'MASWE-0005',
   'WSTG-ATHN-07',

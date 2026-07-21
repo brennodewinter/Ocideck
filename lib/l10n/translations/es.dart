@@ -733,6 +733,14 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'esc': 'esc',
+  'Enter': 'Intro',
+  'OK': 'OK',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Gracias\n\n¿Preguntas?',
+  'P {pitch}  B {bank}': 'C {pitch}  A {bank}',
+  'ACT {value}°': 'ACT {value}°',
+  'TGT {heading}°': 'OBJ {heading}°',
   'Citaat tekst...': 'Texto de la cita...',
   'Naam van de auteur': 'Nombre del autor',
   'Presentatietitel': 'Título de presentación',

@@ -341,7 +341,9 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
                 Expanded(
                   flex: 2,
                   child: Text(
-                    series.name.isEmpty ? 'Reeks ${si + 1}' : series.name,
+                    series.name.isEmpty
+                        ? '${context.l10n.d('Reeks')} ${si + 1}'
+                        : series.name,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: _applyFont(

@@ -491,7 +491,7 @@ class _PresentationInfoDialogState
                     child: Text(
                       step == 0
                           ? l10n.d('Geen aftelling')
-                          : '${step ~/ 60} min',
+                          : '${step ~/ 60} ${l10n.d('min')}',
                     ),
                   ),
                 DropdownMenuItem(
@@ -530,7 +530,7 @@ class _PresentationInfoDialogState
                 ],
                 decoration: InputDecoration(
                   labelText: l10n.d('Aangepaste tijd'),
-                  suffixText: 'min',
+                  suffixText: l10n.d('min'),
                   isDense: true,
                   prefixIcon: const Icon(Icons.edit_outlined, size: 18),
                   border: const OutlineInputBorder(),

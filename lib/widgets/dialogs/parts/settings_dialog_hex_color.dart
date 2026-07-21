@@ -61,7 +61,7 @@ class _HexColorDialogState extends State<_HexColorDialog> {
                   autofocus: true,
                   decoration: InputDecoration(
                     labelText: l10n.d('Hexkleur'),
-                    hintText: '#33FF33',
+                    hintText: l10n.d('#33FF33'),
                     isDense: true,
                     border: const OutlineInputBorder(),
                   ),

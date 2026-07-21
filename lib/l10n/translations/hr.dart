@@ -1786,6 +1786,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'U redu',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Hvala\n\nPitanja?',
+  'P {pitch}  B {bank}': 'P {pitch}  B {bank}',
+  'ACT {value}°': 'TRE {value}°',
+  'TGT {heading}°': 'CILJ {heading}°',
   'Presentatietitel': 'Naslov prezentacije',
   'Sectienaam': 'Naziv odjeljka',
   'Optionele toelichting': 'Neobavezno objašnjenje',

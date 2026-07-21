@@ -129,7 +129,7 @@ extension _SettingsAbout on _SettingsDialogState {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Stichting LibreKAT', style: _aboutLabelStyle),
+              Text(l10n.d('Stichting LibreKAT'), style: _aboutLabelStyle),
               const SizedBox(height: 8),
               _aboutKeyValue(
                 l10n.d('Adressen'),
@@ -229,9 +229,9 @@ extension _SettingsAbout on _SettingsDialogState {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'OciDeck',
-                  style: TextStyle(
+                Text(
+                  l10n.d('OciDeck'),
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w800,

@@ -273,6 +273,11 @@ class _CockpitInstrument extends StatelessWidget {
                   sky: sky,
                   ground: ground,
                   font: font,
+                  faceText: (
+                    attitude: context.l10n.d('P {pitch}  B {bank}'),
+                    actual: context.l10n.d('ACT {value}°'),
+                    target: context.l10n.d('TGT {heading}°'),
+                  ),
                 ),
                 child: const SizedBox.expand(),
               ),
@@ -318,6 +323,12 @@ class _CockpitInstrumentPainter extends CustomPainter {
   final Color ground;
   final String font;
 
+  /// De teksten op de instrumentglazen, al vertaald, met plaatshouders voor de
+  /// meterwaarden. Een painter heeft geen BuildContext, dus ze komen van
+  /// buiten; een record omdat dat waarde-gelijkheid heeft en [shouldRepaint]
+  /// er dus in één vergelijking op kan afgaan.
+  final ({String attitude, String actual, String target}) faceText;
+
   _CockpitInstrumentPainter({
     required this.meter,
     required this.progress,
@@ -332,6 +343,7 @@ class _CockpitInstrumentPainter extends CustomPainter {
     required this.sky,
     required this.ground,
     required this.font,
+    required this.faceText,
   });
 
   /// Structural lines (gauge tracks, ticks, glass) derive from the slide text
@@ -702,7 +714,9 @@ class _CockpitInstrumentPainter extends CustomPainter {
     );
     _text(
       canvas,
-      'P ${_fmt(meter.pitch)}  B ${_fmt(meter.bank)}',
+      faceText.attitude
+          .replaceAll('{pitch}', _fmt(meter.pitch))
+          .replaceAll('{bank}', _fmt(meter.bank)),
       Offset(size.width * 0.80, size.height * 0.50),
       size.width * 0.04,
       textColor,
@@ -785,7 +799,7 @@ class _CockpitInstrumentPainter extends CustomPainter {
     _hub(canvas, c, size.shortestSide);
     _text(
       canvas,
-      'ACT ${_fmt(meter.value).padLeft(3, '0')}°',
+      faceText.actual.replaceAll('{value}', _fmt(meter.value).padLeft(3, '0')),
       Offset(size.width * 0.76, size.height * 0.43),
       size.width * 0.05,
       textColor,
@@ -795,7 +809,10 @@ class _CockpitInstrumentPainter extends CustomPainter {
     );
     _text(
       canvas,
-      'TGT ${_fmt(meter.heading).padLeft(3, '0')}°',
+      faceText.target.replaceAll(
+        '{heading}',
+        _fmt(meter.heading).padLeft(3, '0'),
+      ),
       Offset(size.width * 0.76, size.height * 0.59),
       size.width * 0.038,
       mutedColor,
@@ -961,7 +978,8 @@ class _CockpitInstrumentPainter extends CustomPainter {
       oldDelegate.cold != cold ||
       oldDelegate.sky != sky ||
       oldDelegate.ground != ground ||
-      oldDelegate.font != font;
+      oldDelegate.font != font ||
+      oldDelegate.faceText != faceText;
 }
 
 enum _Anchor { topLeft, topCenter, center }

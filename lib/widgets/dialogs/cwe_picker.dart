@@ -83,7 +83,7 @@ class _CwePickerState extends State<CwePicker> {
 
   Widget _tile(BuildContext context, CweEntry entry) {
     return ListTile(
-      title: Text('CWE-${entry.id} — ${entry.name}'),
+      title: Text('${context.l10n.d('CWE')}-${entry.id} — ${entry.name}'),
       subtitle: Text(
         entry.description,
         maxLines: 2,

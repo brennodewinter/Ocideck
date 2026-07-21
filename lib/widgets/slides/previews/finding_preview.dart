@@ -224,7 +224,7 @@ class _FindingPreview extends StatelessWidget {
             '${base.score.toStringAsFixed(1)} · ${base.severity.label}',
             band(base),
           ),
-        if (spec.cweId != null) _outlinedChip('CWE-${spec.cweId}'),
+        if (spec.cweId != null) _outlinedChip('${l10n.d('CWE')}-${spec.cweId}'),
         // MASWE naast CWE, niet in plaats van: een mobiele bevinding hoort in
         // beide talen leesbaar te zijn, en de zwakheid verwijst zelf ook naar
         // een CWE.

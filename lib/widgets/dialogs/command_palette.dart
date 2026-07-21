@@ -305,7 +305,7 @@ class _CommandPaletteState extends State<CommandPalette> {
             const SizedBox(width: 16),
             _footerHint('↵', l10n.d('Uitvoeren')),
             const SizedBox(width: 16),
-            _footerHint('esc', l10n.d('Sluiten')),
+            _footerHint(l10n.d('esc'), l10n.d('Sluiten')),
           ],
         ),
       ),

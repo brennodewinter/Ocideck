@@ -1801,6 +1801,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Grazzi\n\nMistoqsijiet?',
+  'P {pitch}  B {bank}': 'P {pitch}  B {bank}',
+  'ACT {value}°': 'ATT {value}°',
+  'TGT {heading}°': 'MIR {heading}°',
   'Presentatietitel': 'Titlu tal-preżentazzjoni',
   'Sectienaam': 'Isem tas-sezzjoni',
   'Optionele toelichting': 'Spjegazzjoni fakultattiva',

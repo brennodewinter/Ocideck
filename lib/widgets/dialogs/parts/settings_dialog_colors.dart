@@ -578,7 +578,7 @@ extension _SettingsColors on _SettingsDialogState {
         maxLines: 8,
         decoration: InputDecoration(
           labelText: l10n.d('Markdown voor laatste slide'),
-          hintText: '# Bedankt\n\nVragen?',
+          hintText: l10n.d('# Bedankt\n\nVragen?'),
           alignLabelWithHint: true,
           isDense: true,
         ),

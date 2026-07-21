@@ -557,7 +557,7 @@ class _TlpChip extends StatelessWidget {
             const Icon(Icons.shield_outlined, size: 14, color: Colors.white70),
           if (!isSet) const SizedBox(width: 5),
           Text(
-            isSet ? tlp.label : 'TLP',
+            isSet ? tlp.label : l10n.d('TLP'),
             style: TextStyle(
               color: isSet ? fg : Colors.white70,
               fontSize: 11.5,

@@ -1809,6 +1809,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Obrigado\n\nPerguntas?',
+  'P {pitch}  B {bank}': 'A {pitch}  R {bank}',
+  'ACT {value}°': 'ATU {value}°',
+  'TGT {heading}°': 'ALV {heading}°',
   'Presentatietitel': 'Título da apresentação',
   'Sectienaam': 'Nome da secção',
   'Optionele toelichting': 'Explicação opcional',

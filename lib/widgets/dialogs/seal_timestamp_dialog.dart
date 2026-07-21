@@ -73,7 +73,7 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
                     // Afgekapt met een beletselteken, tenzij de hash korter is
                     // dan dat — substring(0, 24) op een beschadigde hash liet
                     // het hele scherm crashen op een RangeError.
-                    'SHA-512: ${_shortHash(deck.sealHash)}',
+                    '${l10n.d('SHA-512:')} ${_shortHash(deck.sealHash)}',
                     style: TextStyle(
                       fontFamily: 'monospace',
                       fontSize: 11,

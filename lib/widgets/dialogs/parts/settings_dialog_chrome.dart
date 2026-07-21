@@ -121,7 +121,7 @@ extension _SettingsChrome on _SettingsDialogState {
                   // EU-yellow recolour of the logo, so it reads on the dark
                   // sidebar without a backing plate.
                   Semantics(
-                    label: 'OciDeck',
+                    label: context.l10n.d('OciDeck'),
                     image: true,
                     child: Image.asset(
                       'assets/images/ocideck-logo-eu.png',
@@ -132,9 +132,9 @@ extension _SettingsChrome on _SettingsDialogState {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  const Expanded(
+                  Expanded(
                     child: Text(
-                      'OciDeck',
+                      context.l10n.d('OciDeck'),
                       style: TextStyle(
                         // EU-vlaggeel: leesbaar op de donkere/EU-blauwe
                         // zijbalk, passend bij het geel-hertinte logo ernaast.

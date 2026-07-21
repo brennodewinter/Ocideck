@@ -1783,6 +1783,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'esc': 'Esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'Min.',
+  '# Bedankt\n\nVragen?': '# Merci\n\nFrooge?',
+  'P {pitch}  B {bank}': 'N {pitch}  Q {bank}',
+  'ACT {value}°': 'IST {value}°',
+  'TGT {heading}°': 'SOLL {heading}°',
   'Presentatietitel': 'Presentationstitel',
   'Sectienaam': 'Abschnittsname',
   'Optionele toelichting': 'Optionali Erklärig',

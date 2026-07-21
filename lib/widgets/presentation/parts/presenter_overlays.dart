@@ -45,9 +45,9 @@ extension _PresenterOverlays on _FullscreenPresenterState {
             ),
           ),
           const SizedBox(width: 12),
-          const Text(
-            'Enter',
-            style: TextStyle(color: Colors.white38, fontSize: 13),
+          Text(
+            context.l10n.d('Enter'),
+            style: const TextStyle(color: Colors.white38, fontSize: 13),
           ),
         ],
       ),
@@ -82,7 +82,8 @@ extension _PresenterOverlays on _FullscreenPresenterState {
           ),
           const SizedBox(width: 12),
           Text(
-            '${context.l10n.d('Doeltijd')} · Enter · 0 = ${context.l10n.d('uit')}',
+            '${context.l10n.d('Doeltijd')} · ${context.l10n.d('Enter')} · '
+            '0 = ${context.l10n.d('uit')}',
             style: const TextStyle(color: Colors.white38, fontSize: 13),
           ),
         ],

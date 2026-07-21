@@ -383,7 +383,7 @@ class _ChartPreviewState extends State<_ChartPreview>
                           constraints: BoxConstraints(maxWidth: w * 0.16),
                           child: Text(
                             spec.series[i].name.isEmpty
-                                ? 'Reeks ${i + 1}'
+                                ? '${context.l10n.d('Reeks')} ${i + 1}'
                                 : spec.series[i].name,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

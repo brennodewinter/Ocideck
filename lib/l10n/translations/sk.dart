@@ -1786,6 +1786,14 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Ďakujem\n\nOtázky?',
+  'P {pitch}  B {bank}': 'K {pitch}  N {bank}',
+  'ACT {value}°': 'AKT {value}°',
+  'TGT {heading}°': 'CIE {heading}°',
   'Presentatietitel': 'Názov prezentácie',
   'Sectienaam': 'Názov sekcie',
   'Optionele toelichting': 'Voliteľné vysvetlenie',

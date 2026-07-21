@@ -1807,6 +1807,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'Εντάξει',
+  'min': 'λεπ.',
+  '# Bedankt\n\nVragen?': '# Ευχαριστώ\n\nΕρωτήσεις;',
+  'P {pitch}  B {bank}': 'Π {pitch}  Κ {bank}',
+  'ACT {value}°': 'ΤΡΕ {value}°',
+  'TGT {heading}°': 'ΣΤΟ {heading}°',
   'Presentatietitel': 'Τίτλος παρουσίασης',
   'Sectienaam': 'Όνομα ενότητας',
   'Optionele toelichting': 'Προαιρετική επεξήγηση',

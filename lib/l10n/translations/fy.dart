@@ -737,6 +737,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Tank\n\nFragen?',
+  'P {pitch}  B {bank}': 'P {pitch}  B {bank}',
+  'ACT {value}°': 'AKT {value}°',
+  'TGT {heading}°': 'DOEL {heading}°',
   'Citaat tekst...': 'Sitaattekst...',
   'Naam van de auteur': 'Namme fan de auteur',
   'Presentatietitel': 'Presintaasjetitel',

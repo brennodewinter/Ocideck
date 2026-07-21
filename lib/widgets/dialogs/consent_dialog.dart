@@ -34,7 +34,7 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Semantics(
-                label: 'OciDeck',
+                label: l10n.d('OciDeck'),
                 image: true,
                 child: Image.asset(
                   'assets/images/ocideck-logo.png',

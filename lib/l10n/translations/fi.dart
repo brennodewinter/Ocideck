@@ -1779,6 +1779,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Kiitos\n\nKysymyksiä?',
+  'P {pitch}  B {bank}': 'N {pitch}  K {bank}',
+  'ACT {value}°': 'NYK {value}°',
+  'TGT {heading}°': 'TAV {heading}°',
   'Presentatietitel': 'Esityksen otsikko',
   'Sectienaam': 'Osion nimi',
   'Optionele toelichting': 'Valinnainen selitys',

@@ -96,7 +96,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                       content: Text(deckState.error!),
                       backgroundColor: Colors.red[700],
                       action: SnackBarAction(
-                        label: 'OK',
+                        label: ctx.l10n.d('OK'),
                         textColor: Colors.white,
                         onPressed: () =>
                             ref.read(deckProvider.notifier).clearError(),
