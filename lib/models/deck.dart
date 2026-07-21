@@ -228,9 +228,15 @@ class Deck {
 
   /// Documentintegriteit (§8 A1): is dit deck 'afgerond en verzegeld'? Een
   /// afgerond deck is bewust alleen-lezen — bekijken en exporteren kan, maar de
-  /// inhoud is niet meer te bewerken. Bewust in de markdown-front-matter
-  /// (`ocideck_finalized`) opgeslagen, zodat de vergrendeling meereist met het
-  /// bestand. Generaliseert dezelfde opslag-/parse-/gate-aanpak als [playOnly].
+  /// inhoud is niet meer te bewerken.
+  ///
+  /// Die vergrendeling is sinds 0.1.0 méér dan een gemak: het zegel gaat over
+  /// de bytes van de `.md`, dus élke herschrijving breekt het. Alleen-lezen is
+  /// dus de manier waarop "verzegeld is bevroren" wordt afgedwongen in plaats
+  /// van gehoopt.
+  ///
+  /// Opgeslagen in `<naam>.seal.json` naast het bestand (voorheen als
+  /// `ocideck_finalized` in de front matter); zie [SealRecord].
   final bool finalized;
 
   /// Het zegel: een SHA-512-hash over de **bytes van de `.md`** waarin dit deck
