@@ -117,6 +117,15 @@ class RecoveryService {
   /// UnsupportedErrors uit de dart:io-stubs.
   static bool get _unavailable => kIsWeb;
 
+  /// Of crashherstel op dit platform überhaupt bestaat.
+  ///
+  /// Vraag dit in plaats van zelf `kIsWeb` te toetsen: de reden dat een tabblad
+  /// in de browser geen herstelkopie krijgt is dat déze dienst er niets kan, en
+  /// wie dat elders naschrijft laat de twee vanzelf uit elkaar lopen. De UI
+  /// meldt aan de hand hiervan eenmalig dat er in de browser niets terugkomt na
+  /// een crash — stilzwijgen is daar een valstrik, want op desktop wérkt het.
+  bool get available => !_unavailable;
+
   Future<void> save(RecoverySnapshot snapshot) {
     if (_unavailable) return Future.value();
     return _enqueue(snapshot.id, () async {

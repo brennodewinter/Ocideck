@@ -7,8 +7,6 @@
 // misgaat waar de app op kan wijzen. Ze alsnog meenemen is een grotere ingreep;
 // de waarschuwing kan niet wachten, en hoort vóór de commit — daarna is de
 // keuze al gemaakt.
-import 'dart:ui' show Offset;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

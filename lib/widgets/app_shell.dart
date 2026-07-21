@@ -9,6 +9,7 @@ import 'package:window_manager/window_manager.dart';
 
 import '../platform/launch_files.dart';
 import '../platform/platform_features.dart';
+import '../platform/unsaved_work_guard.dart';
 import '../utils/display_path.dart';
 import '../utils/log.dart';
 import '../models/asset_origin.dart';
@@ -562,6 +563,48 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     });
   }
 
+  /// Of de eenmalige web-mededeling over crashherstel al is getoond. Per
+  /// sessie, niet per tabblad: hij gaat over de omgeving, niet over dit deck.
+  bool _toldAboutNoWebRecovery = false;
+
+  /// Er staat niet-opgeslagen werk open.
+  ///
+  /// Twee dingen tegelijk, allebei alleen op web nodig:
+  ///
+  ///   * de browser krijgt een rem op het sluiten van het tabblad
+  ///     ([setUnsavedWorkGuard]) — op desktop doet `windowManager` dat al;
+  ///   * en de gebruiker hoort één keer dat crashherstel hier niet bestaat.
+  ///     [RecoveryService.available] is op web onwaar (geen app-supportmap) en
+  ///     de autosave-tik start er niet eens. Dat is een verdedigbare keuze, maar
+  ///     stilzwijgend is het een valstrik: op desktop wérkt het wel, dus de
+  ///     gebruiker heeft geen reden te vermoeden dat het hier anders is.
+  ///
+  /// Bewust bij de eerste bewerking en niet bij het opstarten: een waarschuwing
+  /// over verlies van werk terwijl er nog geen werk is, leest als ruis. En
+  /// bewust aan de dienst gevraagd in plaats van aan `kIsWeb`: als herstel er
+  /// ooit tóch komt, verdwijnt deze mededeling vanzelf mee.
+  void _listenUnsavedWork(BuildContext context, WidgetRef ref) {
+    ref.listen<bool>(tabsProvider.select((s) => s.anyDirty), (_, dirty) {
+      setUnsavedWorkGuard(dirty);
+      if (!dirty ||
+          ref.read(recoveryServiceProvider).available ||
+          _toldAboutNoWebRecovery) {
+        return;
+      }
+      _toldAboutNoWebRecovery = true;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 10),
+          content: Text(
+            context.l10n.d(
+              'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.',
+            ),
+          ),
+        ),
+      );
+    });
+  }
+
   /// Een zojuist geopende presentatie bevat Informatieveiligheid-slidetypes
   /// terwijl de module uit staat: bied aan de module aan te zetten (puur
   /// discovery — de slides renderen sowieso gewoon, MODUS-REGEL). De state-laag
@@ -722,6 +765,8 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     _listenSecurityModulePrompt(context);
 
     _listenChartDataWarning(context, ref);
+
+    _listenUnsavedWork(context, ref);
 
     // Een zojuist geopend bestand heeft elders een byte-identieke kopie:
     // niet-blokkerend melden (de gebruiker wilde gewoon openen), met de
