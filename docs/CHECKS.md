@@ -81,6 +81,7 @@ remote, the number you see locally is the number that gates the push.
 | [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ |
 | [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — |
 | [`make catalogs-outdated`](#make-catalogs-outdated-advisory) | Bundled reference data vs upstream (advisory, pre-release) | — | — | — |
+| [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | — |
 | [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) |
 | [`make check-actions`](#make-check-actions-advisory) | Pinned CI Actions vs their latest release (advisory) | — | — | — |
 
@@ -359,6 +360,32 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Covers:** dependency freshness only. **Advisory** — it may need network
   access and an outdated package is not in itself a regression. Not part of the
   required gate.
+
+### `make check-secrets`
+- **Runs:** `gitleaks` over the working tree and over all history, then
+  `trufflehog` over both, with `--redact` / `--no-verification`. Needs both
+  binaries (`brew install gitleaks trufflehog`).
+- **Covers:** credential-shaped strings anywhere in the repository, including
+  commits that added a secret and later removed it. Two scanners rather than
+  one because they disagree usefully: gitleaks matches entropy and rule
+  patterns, trufflehog carries per-provider detectors.
+- **Failure means:** something outside the allowlist looks like a credential, or
+  a scanner binary is missing. Triage by hand — do not silence a finding without
+  reading it.
+- **Required before a PR.** Wired into `check-full`, deliberately **not** into
+  `check`: the everyday gate cannot assume external binaries are installed.
+- **Verification is off on purpose.** Trufflehog would otherwise send candidate
+  secrets to the issuing service to see whether they are live — outbound traffic
+  carrying credentials to third parties, which contradicts the project's own
+  premise. Verify a single finding by hand if it ever matters.
+- **What is excluded, and the price:** see [`.gitleaks.toml`](../.gitleaks.toml)
+  and [`.trufflehogignore`](../.trufflehogignore). Generated output (`build/`,
+  `.dart_tool/`) is skipped as noise. The OciWacht detection corpus —
+  `lib/services/privacy/privacy_digital_rules.dart` and the `test/privacy_*`
+  fixtures — is skipped because those files exist precisely to hold
+  credential-shaped values. The price is real and is stated in the config: a
+  genuine secret placed in one of those files would not be caught, and would not
+  stand out visually either.
 
 ### `make trivy` (advisory)
 - **Runs:** `trivy fs --config trivy.yaml .` (needs the external

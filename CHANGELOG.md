@@ -186,6 +186,23 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   rij, dus ze kunnen nooit over elkaar heen vallen.
 
 ### Added
+- **Een poort die de repository op weggelekte geheimen doorzoekt**
+  (`make check-secrets`). Twee onafhankelijke scanners — gitleaks en trufflehog
+  — kijken naar de werkbestanden én naar de volledige geschiedenis, want een
+  wachtwoord dat ooit is vastgelegd en later weggehaald, is nog steeds gelekt.
+  De poort hoort bij `make check-full` en is verplicht vóór een wijziging wordt
+  voorgesteld.
+
+  De eerste ronde vond niets echts: alle treffers zaten in de privacyscanner
+  zelf en in zijn tests. Die bestanden bestáán om op geheimen lijkende waarden
+  te bevatten — anders kun je niet aantonen dat de scanner ze herkent — en zijn
+  daarom uitgezonderd. Wat dat kost, staat in `.gitleaks.toml` opgeschreven in
+  plaats van stilzwijgend aangenomen.
+
+  Trufflehog controleert gevonden sleutels standaard door ze naar de
+  uitgevende dienst te sturen. Dat staat hier uit: dan zou een controle op
+  weglekken zelf gegevens wegsturen.
+
 - **Een bestand vertelt nu welke formaatversie het heeft** (`ocideck_format` in
   de front matter). Dat is nodig om oudere bestanden later te kunnen blijven
   openen zonder te raden. Er verandert niets aan wat u ziet, maar drie regels
