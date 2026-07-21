@@ -64,9 +64,31 @@ String cap(String code) => code[0].toUpperCase() + code.substring(1);
 String dartStr(String value) =>
     "'${value.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'";
 
-void fail(String message) {
+Never fail(String message) {
   stderr.writeln('add_l10n: $message');
   exit(1);
+}
+
+/// De naam van de overlay-map van [code], zoals hij in de bron staat.
+String overlayAnchor(String code) => 'const _dutchSourceAdd${cap(code)} = ';
+
+/// Zet [lines] in de overlay-map die op [anchor] volgt, direct ná haar
+/// OPENENDE ACCOLADE. Geeft `null` als die map niet te vinden is.
+///
+/// Bewust ná de accolade en niet ná de regel waarop de declaratie begint. Die
+/// twee vallen alleen samen zolang de map over meerdere regels loopt. Een nog
+/// lege overlay staat op één regel — `const _dutchSourceAddTr = <String,
+/// String>{};`, zoals Turks die had — en dan zet "na de regel" de nieuwe
+/// sleutel ónder de sluitende `};`, buiten elke declaratie. Het bestand
+/// parseerde daarna niet meer, en omdat het schrijven vóór de opmaakcontrole
+/// gebeurt bleef die kapotte versie op schijf achter.
+String? withOverlayEntries(String text, String anchor, List<String> lines) {
+  final anchorAt = text.indexOf(anchor);
+  if (anchorAt < 0) return null;
+  final braceAt = text.indexOf('{', anchorAt);
+  if (braceAt < 0) return null;
+  final at = braceAt + 1;
+  return '${text.substring(0, at)}\n${lines.join('\n')}${text.substring(at)}';
 }
 
 void main(List<String> args) {
@@ -105,11 +127,10 @@ void main(List<String> args) {
     final file = File('lib/l10n/translations/$code.dart');
     if (!file.existsSync()) fail('missing language file: ${file.path}');
     var text = file.readAsStringSync();
-    final anchor = 'const _dutchSourceAdd${cap(code)} = ';
-    final anchorAt = text.indexOf(anchor);
-    if (anchorAt < 0) fail('no overlay map in ${file.path} (run migration?)');
-    // Insertion point: just after the newline that ends the declaration line.
-    final insertAt = text.indexOf('\n', anchorAt) + 1;
+    final anchor = overlayAnchor(code);
+    if (!text.contains(anchor)) {
+      fail('no overlay map in ${file.path} (run migration?)');
+    }
 
     final lines = <String>[];
     additions.forEach((source, value) {
@@ -125,8 +146,8 @@ void main(List<String> args) {
     });
     if (lines.isEmpty) continue;
     text =
-        '${text.substring(0, insertAt)}${lines.join('\n')}\n'
-        '${text.substring(insertAt)}';
+        withOverlayEntries(text, anchor, lines) ??
+        fail('overlay map in ${file.path} has no `{`');
     file.writeAsStringSync(text);
     touched.add(file.path);
   }
