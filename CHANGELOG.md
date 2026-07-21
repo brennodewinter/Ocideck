@@ -80,6 +80,19 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   markdown of de HTML.
 
 ### Fixed
+- **Uw eigen regels in de kop breken het zegel niet meer.** Sinds OciDeck de
+  front matter bijwerkt in plaats van herbouwt, blijft wat u er zelf in zet
+  netjes staan — een eigen `style:`-blok, een commentaarregel, een handmatige
+  `header:`. Alleen dekte het documentzegel die regels óók. Wie zijn eigen CSS
+  bijstelde in een verzegeld deck, kreeg daarna te horen dat het document na het
+  afronden gewijzigd was, terwijl er geen letter inhoud veranderd was.
+
+  Het zegel dekt voortaan wat OciDeck schrijft, niet wat u schrijft. Uw regels
+  blijven in het bestand staan en blijven van u; ze aanpassen geldt niet langer
+  als manipulatie. Uw zichtbare ondertekening valt er bewust wél onder, zodat
+  knoeien daarmee zichtbaar blijft. Dezelfde afweging als bij de formaatversie:
+  een vals alarm is duurder dan geen alarm.
+
 - **De documentatie noemt de juiste dekkingsvloer.** Vijf plaatsen in `docs/`
   hielden vol dat de afgedwongen dekking 78 % was — één zei 79 % — terwijl de
   Makefile al op `--min=80` staat. Wie de documentatie geloofde, dacht ruimte te

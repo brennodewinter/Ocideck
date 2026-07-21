@@ -260,6 +260,49 @@ style: |
         isNot(contains(kFormatVersionKey)),
       );
     });
+
+    test('vreemde front matter valt buiten de gecanonicaliseerde inhoud', () {
+      // Het zegel dekt wat OciDeck beheert, niet wat de gebruiker zelf in de kop
+      // zet. Anders slaat het manipulatie-alarm aan zodra iemand zijn eigen
+      // `style:`-blok bijwerkt terwijl er geen letter inhoud veranderd is — en
+      // een vals alarm is duurder dan geen alarm (zie de doccomment bij
+      // canonicalContentForSeal). Het botst bovendien met de belofte dat wat u
+      // zelf in de kop zet van u blijft.
+      final service = MarkdownService();
+      final deck = Deck(
+        title: 'T',
+        slides: [Slide.create(SlideType.title)],
+        frontMatterSource: const [
+          'marp: true',
+          '# een eigen aantekening',
+          'header: Mijn koptekst',
+          'style: |',
+          '  section { color: red; }',
+        ],
+      );
+
+      final verzegeld = service.canonicalContentForSeal(deck);
+      for (final vreemd in const [
+        '# een eigen aantekening',
+        'header: Mijn koptekst',
+        'style: |',
+        'section { color: red; }',
+      ]) {
+        expect(
+          verzegeld,
+          isNot(contains(vreemd)),
+          reason: '"$vreemd" is van de gebruiker en hoort niet in de hash',
+        );
+      }
+
+      // De andere helft van de belofte: het bestand zelf houdt die regels wél.
+      // Zonder deze assertie zou het zegel ook groen blijven als de bewaring
+      // stukging.
+      final opSchijf = service.generateDeck(deck);
+      expect(opSchijf, contains('style: |'));
+      expect(opSchijf, contains('  section { color: red; }'));
+      expect(opSchijf, contains('# een eigen aantekening'));
+    });
   });
 
   group('de lijst met eigen sleutels loopt niet uit de pas', () {
