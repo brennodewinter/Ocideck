@@ -38,6 +38,7 @@ void main() {
       'ro.cnp': '1800510123458',
       'fi.hetu': '131052-308T',
       'ee.isikukood': '37205030203',
+      'is.kennitala': '290200-7170',
     };
 
     cases.forEach((rule, value) {

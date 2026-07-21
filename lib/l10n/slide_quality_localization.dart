@@ -567,6 +567,7 @@ const Map<String, String> _nationalNumberNames = {
   'se.personnummer': 'personnummer',
   'fi.hetu': 'henkilötunnus',
   'ee.isikukood': 'isikukood',
+  'is.kennitala': 'kennitala',
   'uk.nhs': 'NHS',
   'uk.nino': 'NINO',
 };

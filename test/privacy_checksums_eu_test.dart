@@ -10,6 +10,22 @@ import 'package:ocideck/services/privacy/privacy_checksums_eu.dart';
 //
 // Per land: één geldige waarde, en één die één cijfer verderop zit. Dat tweede
 // is de eigenlijke test — een checksum die alles goedkeurt, keurt niets.
+
+/// De kale mod-11 van de kennitala, zónder de datum- en eeuwcontrole.
+///
+/// Staat hier zodat een testwaarde die de checksum wél haalt maar op de datum
+/// afvalt, dat ook kan bewijzen. Zonder dit onderscheid toont zo'n test alleen
+/// dát hij afvalt, niet dat het de dátum was die hem tegenhield — en dan zou
+/// een kapotte checksum de test net zo goed groen houden.
+bool _haaltDeIsMod11(String d) {
+  const w = [3, 2, 7, 6, 5, 4, 3, 2, 1, 0];
+  var sum = 0;
+  for (var i = 0; i < 10; i++) {
+    sum += (d.codeUnitAt(i) - 0x30) * w[i];
+  }
+  return sum % 11 == 0;
+}
+
 void main() {
   /// Draait de checksum op een geldige waarde en op dezelfde waarde met een
   /// verminkt laatste cijfer.
@@ -113,6 +129,43 @@ void main() {
       '943 476 7016',
       '943 476 7015',
     );
+    checksum(
+      'IJsland — kennitala (mod-11)',
+      isValidIsKennitala,
+      '2902007170',
+      '2902007180',
+    );
+  });
+
+  group('IJsland — de kennitala buiten de checksum om', () {
+    test('accepteert beide schrijfwijzen', () {
+      expect(isValidIsKennitala('120788-3539'), isTrue);
+      expect(isValidIsKennitala('1207883539'), isTrue);
+    });
+
+    test('wijst een bedrijfskennitala af', () {
+      // Rechtspersonen krijgen 40 opgeteld bij de dag. `4105903010` haalt de
+      // mod-11 wél, en zonder de dagcontrole zou elke IJslandse leverancier op
+      // een factuurslide als persoonsgegeven binnenkomen.
+      expect(_haaltDeIsMod11('4105903010'), isTrue);
+      expect(isValidIsKennitala('4105903010'), isFalse);
+    });
+
+    test('wijst een onmogelijk eeuwcijfer af', () {
+      // Alleen `9` (1900-1999) en `0` (vanaf 2000) worden uitgegeven.
+      expect(isValidIsKennitala('2902007175'), isFalse);
+    });
+
+    test('wijst een onmogelijke maand af', () {
+      // Haalt de mod-11 gewoon — maand 13 bestaat alleen niet.
+      expect(_haaltDeIsMod11('0113882059'), isTrue);
+      expect(isValidIsKennitala('0113882059'), isFalse);
+    });
+
+    test('wijst een onmogelijke dag af', () {
+      expect(_haaltDeIsMod11('3207882189'), isTrue);
+      expect(isValidIsKennitala('3207882189'), isFalse);
+    });
   });
 
   group('Duitsland: de cijferherhalingsregel doet echt werk', () {

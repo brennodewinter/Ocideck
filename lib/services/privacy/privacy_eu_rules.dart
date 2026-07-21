@@ -186,6 +186,13 @@ final List<NationalIdentifierRule> euIdentifierRules = [
     validate: isValidNoFodselsnummer,
   ),
   NationalIdentifierRule(
+    id: 'is.kennitala',
+    country: 'IS',
+    // Meestal met een streepje na de zesde positie, soms zonder.
+    pattern: RegExp(r'(?<!\d)\d{6}[-\s]?\d{4}(?!\d)'),
+    validate: isValidIsKennitala,
+  ),
+  NationalIdentifierRule(
     id: 'si.emso',
     country: 'SI',
     pattern: RegExp(r'(?<!\d)\d{13}(?!\d)'),

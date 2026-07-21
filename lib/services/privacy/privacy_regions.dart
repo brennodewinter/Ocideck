@@ -49,19 +49,20 @@ const Set<String> _knownEuropeanCodes = {
 
 /// Europese landen waarvoor werkelijk een regel bestaat.
 ///
-/// De zes die ontbreken zijn niet vergeten maar bewust weggelaten: CY, LU, LV,
-/// MT, IS en LI hebben geen enkele regel, en een chip die aan staat en niets
-/// doet is erger dan geen chip — hij laat "niemand keek" lezen als "niets
-/// gevonden", precies wat `docs/PRIVACY.md` §"Wat de controle níét doet"
-/// verbiedt. LT en SK stáán er wél in: hun nummers worden gedekt door een regel
-/// van de buren, zie [sharedRegionRules].
+/// Wie hier ontbreekt is niet vergeten maar heeft nog geen regel, en een chip
+/// die aan staat en niets doet is erger dan geen chip — hij laat "niemand keek"
+/// lezen als "niets gevonden", precies wat `docs/PRIVACY.md` §"Wat de controle
+/// níét doet" verbiedt. LT en SK stáán er wél in: hun nummers worden gedekt door
+/// een regel van de buren, zie [sharedRegionRules].
+///
+/// Nog open: CY, LU, LV, MT en LI.
 ///
 /// Bouw je zo'n regel, zet het land er dan bij — `privacy_region_coverage_test`
 /// wordt rood tot je dat doet.
 const Set<String> _europeanRegions = {
   'at', 'be', 'bg', 'ch', 'cz', 'de', 'dk', 'ee', 'es', 'fi', 'fr', 'gr', //
-  'hr', 'hu', 'ie', 'it', 'lt', 'nl', 'no', 'pl', 'pt', 'ro', 'se', 'si', //
-  'sk', 'uk', //
+  'hr', 'hu', 'ie', 'is', 'it', 'lt', 'nl', 'no', 'pl', 'pt', 'ro', 'se', //
+  'si', 'sk', 'uk', //
 };
 
 /// Regels die voor meer dan één land gelden.

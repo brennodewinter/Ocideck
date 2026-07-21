@@ -512,6 +512,40 @@ bool isValidNoFodselsnummer(String raw) {
   return (k2 == 11 ? 0 : k2) == d.codeUnitAt(10) - 0x30;
 }
 
+// ── IJsland ──────────────────────────────────────────────────────────────────
+
+/// Kennitala: 10 cijfers, mod-11 met de gewichten 3-2-7-6-5-4-3-2.
+///
+/// Opbouw `ddmmjj` + twee volgnummercijfers + het controlecijfer + het
+/// eeuwcijfer (`9` voor 1900-1999, `0` vanaf 2000). Het controlecijfer telt
+/// zelf mee met gewicht 1 en het eeuwcijfer met 0, zodat de hele gewogen som
+/// restloos door 11 deelbaar moet zijn — dezelfde formulering als de
+/// referentie-implementatie, en één stap minder dan `11 − rest` uitrekenen.
+///
+/// **Rechtspersonen worden bewust afgewezen.** Een bedrijfskennitala heeft
+/// exact dezelfde vorm met 40 opgeteld bij de dag (41-71), en die staat in elk
+/// zakelijk deck met een IJslandse leverancier erin. Het is geen
+/// persoonsgegeven, en de dagcontrole hieronder houdt hem tegen zonder dat er
+/// een aparte regel voor nodig is.
+///
+/// De kerfiskennitala — het systeemnummer voor wie kort in IJsland verblijft —
+/// heeft wél dezelfde vorm én dezelfde betekenis: hij wijst een mens aan. Die
+/// valt dus terecht onder deze regel, en er is niets aan te onderscheiden.
+bool isValidIsKennitala(String raw) {
+  final d = _digits(raw);
+  if (d.length != 10) return false;
+  // Alleen deze twee eeuwcijfers worden uitgegeven. Het is de goedkoopste eis
+  // in de hele controle en hij haalt er meteen tachtig procent uit.
+  if (d[9] != '0' && d[9] != '9') return false;
+  if (!_plausibleDayMonth(
+    int.parse(d.substring(0, 2)),
+    int.parse(d.substring(2, 4)),
+  )) {
+    return false;
+  }
+  return _weighted(d, [3, 2, 7, 6, 5, 4, 3, 2, 1, 0]) % 11 == 0;
+}
+
 // ── Slovenië ─────────────────────────────────────────────────────────────────
 
 /// EMŠO: 13 cijfers, mod-11 over de eerste twaalf.
