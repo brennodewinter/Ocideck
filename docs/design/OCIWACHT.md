@@ -1155,8 +1155,8 @@ parameter te veranderen, bewaakt niets.
 Redactie botst frontaal op het bestaande integriteitsmechanisme, en dat moet opgelost worden
 vóórdat we een regel code schrijven.
 
-**Het probleem.** `document_integrity.dart` legt een SHA-512-zegel over de gecanoniseerde
-markdown (`Deck.sealHash`, `IntegrityStatus.intact` / `.changed`), en `audit_dossier.dart`
+**Het probleem.** `document_integrity.dart` legt een SHA-512-zegel over het rapportbestand
+(`Deck.sealHash`, `IntegrityStatus.intact` / `.changed`), en `audit_dossier.dart`
 reist mee in het auditpakket "zodat een auditor die alleen het pakket heeft, kan zien wat er
 geleverd is en hoe het te verifiëren". Een geredigeerd exportartefact heeft per definitie een
 andere inhoud dan de bron. De auditor rekent de hash na, krijgt een mismatch en concludeert:
@@ -1165,7 +1165,11 @@ integriteitscontrole hebben — het maakt het mechanisme onbetrouwbaar precies o
 het ertoe doet.
 
 **De oplossing.** Het zegel blijft over de **bron**; dat is de identiteit van het rapport, niet
-van één rendering. Elk afgeleid artefact draagt een *bewijsbare relatie* tot dat zegel mee, in
+van één rendering. (*Bijgewerkt 22-07-2026: het zegel ging destijds over de gecanoniseerde
+markdown en gaat nu over de bytes van de `.md` — zie FILE_FORMAT §6.6. Voor de redenering
+hieronder maakt dat niets uit en het maakt haar zelfs sterker: de auditor die een geredigeerd
+artefact narekent, krijgt nu met `sha512sum` een mismatch te zien in plaats van via OciDeck,
+dus het valse alarm is beter bereikbaar en het manifest des te nodiger.*) Elk afgeleid artefact draagt een *bewijsbare relatie* tot dat zegel mee, in
 plaats van te doen alsof het de bron ís.
 
 Per redactie gaat er een **commitment** mee:
