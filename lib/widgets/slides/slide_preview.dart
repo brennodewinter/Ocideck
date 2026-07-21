@@ -86,7 +86,6 @@ part 'previews/scorecard_preview.dart';
 part 'previews/asset_overview_preview.dart';
 part 'previews/discoveries_preview.dart';
 part 'previews/checklist_preview.dart';
-part 'previews/scaffold_previews.dart';
 part 'previews/finding_preview.dart';
 part 'previews/scope_matrix_preview.dart';
 part 'previews/findings_summary_preview.dart';
@@ -764,60 +763,54 @@ class SlidePreviewWidget extends StatelessWidget {
 
   /// Preview for the Informatieveiligheid slide types: all five (`finding`
   /// P1-FIND, `checklist` P1-CHK, `scopeMatrix` P1-SCOPE, `findingsSummary`
-  /// P1-SUM, `signOff` P1-SIGN) have structured previews; the scaffold fallthrough
-  /// stays as a defensive default.
-  Widget _securityPreview(double w) {
-    if (slide.type == SlideType.finding) {
-      return _FindingPreview(
-        slide: slide,
-        w: w,
-        font: fontFamily,
-        profile: themeProfile,
-        scopeCia: scopeCia,
-        reportLanguage: reportLanguage,
-      );
-    }
-    if (slide.type == SlideType.checklist) {
-      return _ChecklistPreview(
-        slide: slide,
-        w: w,
-        font: fontFamily,
-        profile: themeProfile,
-      );
-    }
-    if (slide.type == SlideType.scopeMatrix) {
-      return _ScopeMatrixPreview(
-        slide: slide,
-        w: w,
-        font: fontFamily,
-        profile: themeProfile,
-      );
-    }
-    if (slide.type == SlideType.findingsSummary) {
-      return _FindingsSummaryPreview(
-        slide: slide,
-        w: w,
-        font: fontFamily,
-        profile: themeProfile,
-      );
-    }
-    if (slide.type == SlideType.signOff) {
-      return _SignOffPreview(
-        slide: slide,
-        w: w,
-        font: fontFamily,
-        profile: themeProfile,
-        signature: deckSignature,
-        sealedAt: sealedAt,
-      );
-    }
-    return _ScaffoldPreview(
+  /// P1-SUM, `signOff` P1-SIGN) have a structured preview of their own.
+  ///
+  /// Er stond hier een steigervoorbeeld (`_ScaffoldPreview`, 35 regels) als
+  /// terugval voor een type dat er nog geen had. Alle vijf hebben er inmiddels
+  /// een, en de switch hierboven is uitputtend over `SlideType` — een nieuw
+  /// type moet daar expliciet bij, waar de compiler het afdwingt. De terugval
+  /// was dus onbereikbaar geworden: dertig regels die niemand ooit zag en die
+  /// geen test rood kon krijgen. De default blijft alleen staan om de switch
+  /// totaal te houden, net als in [_reportingPreview].
+  Widget _securityPreview(double w) => switch (slide.type) {
+    SlideType.finding => _FindingPreview(
       slide: slide,
       w: w,
       font: fontFamily,
       profile: themeProfile,
-    );
-  }
+      scopeCia: scopeCia,
+      reportLanguage: reportLanguage,
+    ),
+    SlideType.checklist => _ChecklistPreview(
+      slide: slide,
+      w: w,
+      font: fontFamily,
+      profile: themeProfile,
+    ),
+    SlideType.scopeMatrix => _ScopeMatrixPreview(
+      slide: slide,
+      w: w,
+      font: fontFamily,
+      profile: themeProfile,
+    ),
+    SlideType.findingsSummary => _FindingsSummaryPreview(
+      slide: slide,
+      w: w,
+      font: fontFamily,
+      profile: themeProfile,
+    ),
+    SlideType.signOff => _SignOffPreview(
+      slide: slide,
+      w: w,
+      font: fontFamily,
+      profile: themeProfile,
+      signature: deckSignature,
+      sealedAt: sealedAt,
+    ),
+    // Alleen voor de vijf hierboven aangeroepen; de default houdt de switch
+    // totaal.
+    _ => const SizedBox.shrink(),
+  };
 
   Widget _videoPreview(double w) {
     final source = VideoSource.parse(slide.videoPath);
