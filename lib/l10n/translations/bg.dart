@@ -1804,6 +1804,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Заглавие на раздел, което обявява нова част от презентацията. Дръжте го кратко. Добавете фоново изображение от библиотеката с изображения.',
   'Bronnen doorzoeken…': 'Търсене в източниците…',
   'Niet doorzocht': 'Не е претърсено',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

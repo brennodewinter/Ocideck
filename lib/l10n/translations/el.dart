@@ -1809,6 +1809,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Μια επικεφαλίδα ενότητας που ανακοινώνει ένα νέο μέρος της παρουσίασης. Κρατήστε την σύντομη. Προσθέστε μια εικόνα φόντου από τη βιβλιοθήκη εικόνων.',
   'Bronnen doorzoeken…': 'Αναζήτηση στις πηγές…',
   'Niet doorzocht': 'Δεν αναζητήθηκε',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

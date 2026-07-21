@@ -738,6 +738,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Un enkabesamentu di sekshon ku ta anunsiá un parti nobo di e presentashon. Tenele kòrtiku. Agregá un imágen di fondo for di e biblioteka di imágen.',
   'Bronnen doorzoeken…': 'Ta buska den e fuentenan…',
   'Niet doorzocht': 'No buska',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

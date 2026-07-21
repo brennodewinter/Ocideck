@@ -1789,6 +1789,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Skyriaus antraštė, skelbianti naują pristatymo dalį. Laikykite ją trumpą. Pridėkite fono vaizdą iš vaizdų bibliotekos.',
   'Bronnen doorzoeken…': 'Ieškoma šaltiniuose…',
   'Niet doorzocht': 'Neieškota',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

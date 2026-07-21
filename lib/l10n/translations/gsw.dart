@@ -1785,6 +1785,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'E Zwüschetitel wo en neue Teil vo de Präsentation aakündigt. Halt en churz. Über d Bildbibliothek chasch es Hintergrundbild derzuetue.',
   'Bronnen doorzoeken…': 'Quelle wärde durchsuecht…',
   'Niet doorzocht': 'Nöd durchsuecht',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

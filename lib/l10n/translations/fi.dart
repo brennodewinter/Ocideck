@@ -1781,6 +1781,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Osion väliotsikko, joka ilmoittaa esityksen uudesta osasta. Pidä se lyhyenä. Lisää taustakuva kuvakirjastosta.',
   'Bronnen doorzoeken…': 'Haetaan lähteistä…',
   'Niet doorzocht': 'Ei haettu',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

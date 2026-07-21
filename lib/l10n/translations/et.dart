@@ -1772,6 +1772,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Vahepealkiri, mis kuulutab ette esitluse uue osa. Hoia see lühike. Lisa taustapilt pildikogust.',
   'Bronnen doorzoeken…': 'Otsitakse allikatest…',
   'Niet doorzocht': 'Ei otsitud',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
