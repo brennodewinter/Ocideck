@@ -209,6 +209,16 @@ class MarkdownService {
   /// uitschrijft — bijvoorbeeld bij het bouwen van een pakket — terwijl er geen
   /// letter inhoud veranderd is. Een vals manipulatie-alarm is duurder dan geen
   /// alarm.
+  ///
+  /// Om diezelfde reden valt de front matter van de *gebruiker* er ook buiten.
+  /// Sinds de generator de kop chirurgisch bijwerkt in plaats van herbouwt,
+  /// blijven vreemde regels — een eigen `style: |`-blok, commentaar, een
+  /// handmatige `header:` — in het bestand staan. Dat is de bedoeling, maar het
+  /// zijn geen regels die OciDeck beheert: zou de hash ze dekken, dan sloeg het
+  /// alarm aan zodra iemand zijn eigen CSS bijstelt. Dat is precies het valse
+  /// alarm hierboven, en het botst met de belofte dat wat u zelf in de kop zet
+  /// van u blijft. Het zegel dekt dus wat OciDeck schrijft; de bewaring van uw
+  /// eigen regels wordt door de rondgangstest bewaakt, niet door de hash.
   String canonicalContentForSeal(Deck deck) {
     return generateDeck(
       includeFormatVersion: false,
@@ -220,6 +230,9 @@ class MarkdownService {
         // The RFC3161 token is added *after* sealing and timestamps the hash, so
         // it must stay out of the content the hash covers (else it is circular).
         sealTimestampToken: '',
+        // Leeg, zodat mergeFrontMatter niets te bewaren heeft en de generator
+        // alleen de eigen sleutels uitschrijft.
+        frontMatterSource: const [],
       ),
     );
   }
