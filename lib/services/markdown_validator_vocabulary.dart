@@ -40,49 +40,15 @@ const _knownClassTokens = {
 
 const _validListStyles = {'bullets', 'numbered', 'checklist', 'richText'};
 
-// Front-matter keys MarkdownService._doParse actually reads. `marp` is the
-// canonical Marp marker OciDeck assumes and deliberately ignores. Anything
-// else (a typo, or a Marp option OciDeck does not implement like `header`,
-// `footer`, `size`, `style`) is silently dropped by the parser, so the
-// validator warns that it has no effect.
-const _knownFrontMatterKeys = {
-  'marp',
-  'theme',
-  'paginate',
-  'title',
-  'author',
-  'organization',
-  'version',
-  'date',
-  'description',
-  'keywords',
-  'tlp',
-  // Rapportmetadata die de parser wél leest (zonder deze regels meldt de
-  // checker "wordt genegeerd" bij sleutels die juist effect hebben).
-  'language',
-  'tool',
-  'standards',
-  'privacy',
-  'ocideck_target_seconds',
-  'ocideck_show_rehearsal_summary',
-  'ocideck_play_only',
-  'ocideck_finalized',
-  'ocideck_seal_hash',
-  'ocideck_seal_algo',
-  'ocideck_seal_at',
-  // RFC 3161-tijdstempel bij het zegel + MIAUW-uitzonderingen/-bevestigingen.
-  'ocideck_seal_tsr',
-  'ocideck_miauw_waivers',
-  'ocideck_miauw_confirmations',
-  'ocideck_sig_name',
-  'ocideck_sig_role',
-  'ocideck_sig_cert',
-  'ocideck_sig_date',
-  'ocideck_sig_statement',
-  'ocideck_sig_typed',
-  'ocideck_sig_image',
-  'ocideck_style_profile',
-};
+// De front-matter-sleutels staan niet hier maar in `front_matter_merge.dart`
+// ([kOwnedFrontMatterKeys]) — de checker leest diezelfde lijst.
+//
+// Dat is geen gemakzucht maar een gelijkheid die uit het formaatcontract volgt:
+// een sleutel die OciDeck schrijft, leest hij ook (anders zou hij hem bij het
+// opslaan kwijtraken), en een sleutel die hij leest maar niet schrijft zou bij
+// het eerste opslaan verdwijnen. De twee lijsten zijn dus per definitie
+// dezelfde, en twee kopieën ervan lopen alleen maar uit de pas. Deze stond
+// eerder los en miste toen precies zeven sleutels die de parser wél las.
 
 // Comment directives `_parseBlockDirectives` understands. A comment that looks
 // like a directive (`_key:` / `ocideck_key:`) but is not one of these is

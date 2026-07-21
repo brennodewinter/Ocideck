@@ -43,6 +43,21 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   markdown of de HTML.
 
 ### Fixed
+- **Wat u zelf in de kop van een bestand zet, blijft nu staan.** Zette u met de
+  hand een `header:`, `footer:`, `size:` of `style:` in de front matter — gewone
+  Marp-opties — dan was die verdwenen zodra OciDeck het bestand één keer had
+  opgeslagen. Een commentaarregel, een lege regel of een ingesprongen blok ging
+  op dezelfde manier verloren. OciDeck bouwde de kop namelijk opnieuw op uit wat
+  het zelf kende.
+
+  Dat gebeurt niet meer: bij het opslaan worden alleen de regels bijgewerkt die
+  OciDeck ook echt beheert. Al het andere blijft exact staan waar het stond,
+  inclusief uw eigen aanhalingstekens en de volgorde die u koos. De belofte dat
+  een OciDeck-bestand gewone Marp is, geldt daarmee ook de andere kant op.
+
+  De markdown-controle in de app zei bij zo'n sleutel "wordt genegeerd". Dat
+  klopte niet meer en is nu: hij doet niets in OciDeck, maar hij blijft
+  behouden.
 - **De tijdlijn kapt haar tekst niet langer af.** Een tijdlijn met zes normale
   gebeurtenissen liet van élke titel en élke beschrijving een deel wegvallen
   achter een `…`. De oorzaak was een schatting: het aantal regels werd afgeleid
@@ -59,6 +74,15 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   rij, dus ze kunnen nooit over elkaar heen vallen.
 
 ### Added
+- **Een bestand vertelt nu welke formaatversie het heeft** (`ocideck_format` in
+  de front matter). Dat is nodig om oudere bestanden later te kunnen blijven
+  openen zonder te raden. Er verandert niets aan wat u ziet, maar drie regels
+  liggen vast en staan in `docs/FILE_FORMAT.md`: een bestand zonder die sleutel
+  is versie 1 — dat is elk met de hand geschreven Marp-bestand en nooit een
+  fout; een ouder bestand opent altijd en wordt bijgewerkt bij het opslaan, niet
+  bij het openen; en een bestand van een nieuwere OciDeck wordt niet teruggezet
+  naar een oudere versie. Andermans bestand verandert dus niet doordat u ernaar
+  kijkt.
 - **De interface spreekt nu ook Turks.** OciDeck draaide in 31 talen — alle
   EU-talen plus een paar daarbuiten — maar Turks ontbrak, terwijl het een van de
   grootste talen van Europa is en de taal van een kandidaat-lidstaat. `tr` is nu

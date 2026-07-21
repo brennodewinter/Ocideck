@@ -1,3 +1,4 @@
+import '../services/front_matter_merge.dart';
 import 'privacy_disposition.dart';
 import 'annotation.dart';
 import 'document_signature.dart';
@@ -261,6 +262,27 @@ class Deck {
   /// matter als `ocideck_miauw_confirmations` (base64url-JSON).
   final Map<String, String> miauwConfirmations;
 
+  /// De front-matter-regels zoals ze in het geopende bestand stonden (zonder de
+  /// `---`-hekken). Leeg voor een deck dat nog geen bestand heeft.
+  ///
+  /// Hier staat álles in, ook wat OciDeck niet kent: een Marp-optie die deze
+  /// build niet implementeert, een sleutel van een nieuwere versie, of gewoon
+  /// een aantekening van de auteur. Bij opslaan werkt [mergeFrontMatter] alleen
+  /// de sleutels bij die OciDeck bezit en laat de rest exact staan — dat is wat
+  /// "Marp-compatibel" ook de andere kant op waar maakt.
+  final List<String> frontMatterSource;
+
+  /// De formaatversie die het bestand declareerde (`ocideck_format`), of
+  /// [kOldestFormatVersion] als de sleutel ontbrak of onleesbaar was — en dat
+  /// laatste is de normale toestand van elk handgeschreven Marp-bestand, nooit
+  /// een fout.
+  ///
+  /// Bewust "wat het bestand zei", niet "wat deze build kan": opwaarderen
+  /// gebeurt bij opslaan, niet bij openen (zie [persistedFormatVersion] en
+  /// `docs/MIGRATION_GUIDE.md`). Andermans bestand raak je niet aan door het te
+  /// bekijken.
+  final int formatVersion;
+
   const Deck({
     required this.title,
     this.theme = 'ocideck',
@@ -292,6 +314,8 @@ class Deck {
     this.userNotes = const {},
     this.miauwWaivers = const {},
     this.miauwConfirmations = const {},
+    this.frontMatterSource = const [],
+    this.formatVersion = kOldestFormatVersion,
   });
 
   Deck copyWith({
@@ -327,6 +351,8 @@ class Deck {
     Map<String, String>? userNotes,
     Map<String, String>? miauwWaivers,
     Map<String, String>? miauwConfirmations,
+    List<String>? frontMatterSource,
+    int? formatVersion,
   }) {
     return Deck(
       title: title ?? this.title,
@@ -360,6 +386,8 @@ class Deck {
       userNotes: userNotes ?? this.userNotes,
       miauwWaivers: miauwWaivers ?? this.miauwWaivers,
       miauwConfirmations: miauwConfirmations ?? this.miauwConfirmations,
+      frontMatterSource: frontMatterSource ?? this.frontMatterSource,
+      formatVersion: formatVersion ?? this.formatVersion,
     );
   }
 

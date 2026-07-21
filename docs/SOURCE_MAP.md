@@ -111,6 +111,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `markdown_body_blocks.dart` — Splits markdown into code blocks and paragraphs.
 - `markdown_safety.dart` — Scans raw `.md` for executable content and blocks unsafe imports.
 - `management_summary.dart` — Derives the management summary from the deck (severity counts, scope coverage, standards used).
+- `front_matter_merge.dart` — The front-matter half of the file-format contract: which keys OciDeck owns, the `ocideck_format` version rules, and the surgical update that leaves every other line untouched.
 - `markdown_service.dart` — Serializes decks to Marp markdown and parses it back (the file-format contract).
 - `markdown_service_finding.dart` — Parses/serializes the `finding` slide group's id/role markers and header spec.
 - `markdown_validator.dart` — Line-anchored structural pre-flight against the parser's expectations.
