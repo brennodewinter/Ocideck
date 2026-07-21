@@ -1,0 +1,15 @@
+# Paden die trufflehog overslaat. Eén reguliere expressie per regel.
+# Dezelfde uitsluitingen als .gitleaks.toml — zie daar voor de motivering en
+# voor de prijs die het detectiecorpus met zich meebrengt.
+
+# Gegenereerde uitvoer, gitignored.
+^\.dart_tool/
+^build/
+
+# Lokale werkinstellingen, gitignored.
+^\.claude/
+
+# Het detectiecorpus van OciWacht: bestaat om geheim-vormige waarden te dragen.
+^lib/services/privacy/privacy_digital_rules\.dart$
+^test/privacy_[a-z_]+_test\.dart$
+^test/native_git_mirror_test\.dart$
