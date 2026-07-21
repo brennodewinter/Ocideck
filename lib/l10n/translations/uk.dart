@@ -1797,6 +1797,43 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'У заблокованій презентації огляд ніколи не з\'являється; цей перемикач тоді нічого не робить.',
+  'De twee afbeeldingen': 'Два зображення',
+  'Goed gerekende antwoorden': 'Відповіді, що зараховуються як правильні',
+  'Afbeelding 1': 'Зображення 1',
+  'Afbeelding 2': 'Зображення 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Зараховується лише дослівно однакова відповідь.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Глядач вводить відповідь. Кожна позначена тут відповідь зараховується як правильна; регістр і зайві пробіли не мають значення.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Глядач вказує правильне зображення. Під час показу ліве та праве міняються місцями в кожному раунді, тож не називайте їх "лівим" і "правим".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Друкарська помилка ще зараховується як правильна; інше слово — ні.',
+  'Getypt antwoord': 'Введена відповідь',
+  'Goed gerekend antwoord:': 'Відповідь, що зараховується як правильна:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Виберіть два зображення та позначте правильне.',
+  'Nog geen goed antwoord opgegeven.': 'Правильної відповіді ще не вказано.',
+  'Overeenkomst': 'Збіг',
+  'Tik de juiste afbeelding aan': 'Торкніться правильного зображення',
+  'Twee afbeeldingen': 'Два зображення',
+  'Typ je antwoord': 'Введіть відповідь',
+  'Typ je antwoord en bevestig': 'Введіть відповідь і підтвердьте',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Потрібний збіг із правильною відповіддю',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Позначте принаймні одну відповідь, що зараховується як правильна.',
+  'Vragen': 'Питання',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'відповідей, усі показуються у випадковому порядку',
+  'fout': 'неправильно',
+  'goed': 'правильно',
+  'goed vanaf': 'правильно від',
+  'links en rechts wisselen per ronde':
+      'ліве та праве міняються місцями в кожному раунді',
+  'overeenkomst': 'збігу',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Гаразд',

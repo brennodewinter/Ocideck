@@ -1795,6 +1795,43 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'In praesentatione clausa conspectus numquam apparet; hoc igitur claustrum nihil agit.',
+  'De twee afbeeldingen': 'Duae imagines',
+  'Goed gerekende antwoorden': 'Responsa recta habita',
+  'Afbeelding 1': 'Imago 1',
+  'Afbeelding 2': 'Imago 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Solum responsum ad litteram idem valet.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Spectator responsum scribit. Omne responsum hic signatum rectum habetur; litterae maiusculae et spatia superflua nihil mutant.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Spectator imaginem rectam monstrat. Dum ostenditur, sinistra et dextra singulis vicibus permutantur; noli igitur eas "sinistram" et "dextram" appellare.',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Mendum scripturae adhuc rectum habetur; verbum aliud non.',
+  'Getypt antwoord': 'Responsum scriptum',
+  'Goed gerekend antwoord:': 'Responsum rectum habitum:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Duas imagines elige et rectam signa.',
+  'Nog geen goed antwoord opgegeven.': 'Nullum responsum rectum adhuc datum.',
+  'Overeenkomst': 'Similitudo',
+  'Tik de juiste afbeelding aan': 'Imaginem rectam tange',
+  'Twee afbeeldingen': 'Duae imagines',
+  'Typ je antwoord': 'Responsum tuum scribe',
+  'Typ je antwoord en bevestig': 'Responsum tuum scribe et confirma',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Similitudo cum responso recto requisita',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Signa saltem unum responsum quod rectum habeatur.',
+  'Vragen': 'Quaestiones',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'responsa, omnia ordine fortuito ostensa',
+  'fout': 'falsum',
+  'goed': 'rectum',
+  'goed vanaf': 'rectum a',
+  'links en rechts wisselen per ronde':
+      'sinistra et dextra singulis vicibus permutantur',
+  'overeenkomst': 'similitudinis',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Bene',

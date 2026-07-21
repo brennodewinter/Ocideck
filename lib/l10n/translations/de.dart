@@ -736,6 +736,42 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Bei einer gesperrten Präsentation erscheint die Übersicht nie; dieser Schalter bewirkt dann nichts.',
+  'De twee afbeeldingen': 'Die beiden Bilder',
+  'Goed gerekende antwoorden': 'Als richtig gewertete Antworten',
+  'Afbeelding 1': 'Bild 1',
+  'Afbeelding 2': 'Bild 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Nur eine wörtlich identische Antwort zählt.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Die Zuschauer tippen die Antwort. Jede hier angehakte Antwort zählt als richtig; Groß- und Kleinschreibung und zusätzliche Leerzeichen spielen keine Rolle.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Die Zuschauer zeigen auf das richtige Bild. Beim Präsentieren wechseln links/rechts pro Runde, benenne sie also nicht als "links" und "rechts".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Ein Tippfehler zählt noch als richtig, ein anderes Wort nicht.',
+  'Getypt antwoord': 'Getippte Antwort',
+  'Goed gerekend antwoord:': 'Als richtig gewertete Antwort:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Wähle zwei Bilder und markiere das richtige.',
+  'Nog geen goed antwoord opgegeven.': 'Noch keine richtige Antwort angegeben.',
+  'Overeenkomst': 'Übereinstimmung',
+  'Tik de juiste afbeelding aan': 'Tippe auf das richtige Bild',
+  'Twee afbeeldingen': 'Zwei Bilder',
+  'Typ je antwoord': 'Antwort eingeben',
+  'Typ je antwoord en bevestig': 'Antwort eingeben und bestätigen',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Erforderliche Übereinstimmung mit der richtigen Antwort',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Hake mindestens eine als richtig gewertete Antwort an.',
+  'Vragen': 'Fragen',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'Antworten, alle in zufälliger Reihenfolge angezeigt',
+  'fout': 'falsch',
+  'goed': 'richtig',
+  'goed vanaf': 'richtig ab',
+  'links en rechts wisselen per ronde': 'links und rechts wechseln pro Runde',
+  'overeenkomst': 'Übereinstimmung',
   'esc': 'Esc',
   'Enter': 'Enter',
   'OK': 'OK',

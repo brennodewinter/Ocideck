@@ -1786,6 +1786,42 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Pri zamknutej prezentácii sa prehľad nikdy nezobrazí; tento prepínač potom nič nerobí.',
+  'De twee afbeeldingen': 'Dva obrázky',
+  'Goed gerekende antwoorden': 'Odpovede uznávané za správne',
+  'Afbeelding 1': 'Obrázok 1',
+  'Afbeelding 2': 'Obrázok 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Počíta sa len doslova zhodná odpoveď.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Divák odpoveď píše. Každá tu zaškrtnutá odpoveď sa počíta ako správna; veľké písmená a nadbytočné medzery nehrajú rolu.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Divák ukáže správny obrázok. Pri prezentovaní sa ľavý a pravý v každom kole vymenia, takže ich neoznačuj ako "ľavý" a "pravý".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Preklep sa ešte počíta ako správny; iné slovo nie.',
+  'Getypt antwoord': 'Písaná odpoveď',
+  'Goed gerekend antwoord:': 'Odpoveď uznávaná za správnu:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Vyber dva obrázky a označ ten správny.',
+  'Nog geen goed antwoord opgegeven.': 'Zatiaľ nebola zadaná správna odpoveď.',
+  'Overeenkomst': 'Zhoda',
+  'Tik de juiste afbeelding aan': 'Ťukni na správny obrázok',
+  'Twee afbeeldingen': 'Dva obrázky',
+  'Typ je antwoord': 'Napíš svoju odpoveď',
+  'Typ je antwoord en bevestig': 'Napíš svoju odpoveď a potvrď',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Požadovaná zhoda so správnou odpoveďou',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Zaškrtni aspoň jednu odpoveď uznávanú za správnu.',
+  'Vragen': 'Otázky',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'odpovedí, všetky zobrazené v náhodnom poradí',
+  'fout': 'nesprávne',
+  'goed': 'správne',
+  'goed vanaf': 'správne od',
+  'links en rechts wisselen per ronde': 'ľavý a pravý sa v každom kole vymenia',
+  'overeenkomst': 'zhody',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

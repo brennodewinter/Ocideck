@@ -1802,6 +1802,42 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'При заключена презентация прегледът никога не се появява; този превключвател тогава не прави нищо.',
+  'De twee afbeeldingen': 'Двете изображения',
+  'Goed gerekende antwoorden': 'Отговори, които се броят за верни',
+  'Afbeelding 1': 'Изображение 1',
+  'Afbeelding 2': 'Изображение 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Брои се само дословно същият отговор.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Зрителят въвежда отговора. Всеки отбелязан тук отговор се брои за верен; главните букви и излишните интервали нямат значение.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Зрителят посочва правилното изображение. При представяне ляво и дясно се разменят всеки рунд, затова не ги наричайте "лявото" и "дясното".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Печатна грешка още се брои за вярна; друга дума — не.',
+  'Getypt antwoord': 'Въведен отговор',
+  'Goed gerekend antwoord:': 'Отговор, който се брои за верен:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Изберете две изображения и отбележете правилното.',
+  'Nog geen goed antwoord opgegeven.': 'Още не е посочен верен отговор.',
+  'Overeenkomst': 'Съвпадение',
+  'Tik de juiste afbeelding aan': 'Докоснете правилното изображение',
+  'Twee afbeeldingen': 'Две изображения',
+  'Typ je antwoord': 'Въведете отговора си',
+  'Typ je antwoord en bevestig': 'Въведете отговора си и потвърдете',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Необходимо съвпадение с верния отговор',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Отбележете поне един отговор, който се брои за верен.',
+  'Vragen': 'Въпроси',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'отговора, всички показвани в случаен ред',
+  'fout': 'грешно',
+  'goed': 'вярно',
+  'goed vanaf': 'вярно от',
+  'links en rechts wisselen per ronde': 'ляво и дясно се разменят всеки рунд',
+  'overeenkomst': 'съвпадение',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Добре',

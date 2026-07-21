@@ -1781,6 +1781,43 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Pri zaklenjeni predstavitvi se pregled nikoli ne prikaže; to stikalo takrat ne naredi ničesar.',
+  'De twee afbeeldingen': 'Dve sliki',
+  'Goed gerekende antwoorden': 'Odgovori, ki štejejo kot pravilni',
+  'Afbeelding 1': 'Slika 1',
+  'Afbeelding 2': 'Slika 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Šteje samo dobesedno enak odgovor.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Gledalec vpiše odgovor. Vsak tukaj označen odgovor šteje kot pravilen; velike črke in dodatni presledki niso pomembni.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Gledalec pokaže pravilno sliko. Pri predstavitvi se levo in desno v vsakem krogu zamenjata, zato ju ne poimenuj "leva" in "desna".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Tipkarska napaka še šteje kot pravilna; druga beseda ne.',
+  'Getypt antwoord': 'Vpisani odgovor',
+  'Goed gerekend antwoord:': 'Odgovor, ki šteje kot pravilen:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Izberi dve sliki in označi pravilno.',
+  'Nog geen goed antwoord opgegeven.': 'Pravilen odgovor še ni naveden.',
+  'Overeenkomst': 'Ujemanje',
+  'Tik de juiste afbeelding aan': 'Dotakni se pravilne slike',
+  'Twee afbeeldingen': 'Dve sliki',
+  'Typ je antwoord': 'Vpiši svoj odgovor',
+  'Typ je antwoord en bevestig': 'Vpiši svoj odgovor in potrdi',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Zahtevano ujemanje s pravilnim odgovorom',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Označi vsaj en odgovor, ki šteje kot pravilen.',
+  'Vragen': 'Vprašanja',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'odgovorov, vsi prikazani v naključnem vrstnem redu',
+  'fout': 'napačno',
+  'goed': 'pravilno',
+  'goed vanaf': 'pravilno od',
+  'links en rechts wisselen per ronde':
+      'levo in desno se v vsakem krogu zamenjata',
+  'overeenkomst': 'ujemanja',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'V redu',

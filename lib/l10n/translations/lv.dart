@@ -1778,6 +1778,43 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Bloķētā prezentācijā pārskats nekad neparādās; šis slēdzis tad neko nedara.',
+  'De twee afbeeldingen': 'Abi attēli',
+  'Goed gerekende antwoorden': 'Atbildes, kas skaitās pareizas',
+  'Afbeelding 1': 'Attēls 1',
+  'Afbeelding 2': 'Attēls 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Skaitās tikai burtiski vienāda atbilde.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Skatītājs ieraksta atbildi. Katra šeit atzīmētā atbilde skaitās pareiza; lielie burti un liekas atstarpes nav svarīgas.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Skatītājs norāda pareizo attēlu. Prezentējot kreisais un labais katrā kārtā mainās vietām, tāpēc nesauc tos par "kreiso" un "labo".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Drukas kļūda vēl skaitās pareiza; cits vārds nē.',
+  'Getypt antwoord': 'Ierakstīta atbilde',
+  'Goed gerekend antwoord:': 'Atbilde, kas skaitās pareiza:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Izvēlieties divus attēlus un atzīmējiet pareizo.',
+  'Nog geen goed antwoord opgegeven.': 'Pareizā atbilde vēl nav norādīta.',
+  'Overeenkomst': 'Atbilstība',
+  'Tik de juiste afbeelding aan': 'Pieskarieties pareizajam attēlam',
+  'Twee afbeeldingen': 'Divi attēli',
+  'Typ je antwoord': 'Ierakstiet savu atbildi',
+  'Typ je antwoord en bevestig': 'Ierakstiet savu atbildi un apstipriniet',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Nepieciešamā atbilstība pareizajai atbildei',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Atzīmējiet vismaz vienu atbildi, kas skaitās pareiza.',
+  'Vragen': 'Jautājumi',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'atbildes, visas rādītas nejaušā secībā',
+  'fout': 'nepareizi',
+  'goed': 'pareizi',
+  'goed vanaf': 'pareizi no',
+  'links en rechts wisselen per ronde':
+      'kreisais un labais katrā kārtā mainās vietām',
+  'overeenkomst': 'atbilstības',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Labi',

@@ -732,6 +732,44 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Con una presentazione bloccata il riepilogo non appare mai; questo interruttore quindi non fa nulla.',
+  'De twee afbeeldingen': 'Le due immagini',
+  'Goed gerekende antwoorden': 'Risposte considerate corrette',
+  'Afbeelding 1': 'Immagine 1',
+  'Afbeelding 2': 'Immagine 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Conta solo una risposta letteralmente identica.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Lo spettatore digita la risposta. Ogni risposta che spunti qui conta come corretta; maiuscole e spazi in più non fanno differenza.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Lo spettatore indica l\'immagine giusta. Durante la presentazione sinistra e destra si scambiano a ogni turno, quindi non chiamarle "sinistra" e "destra".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Un refuso conta ancora come corretto; una parola diversa no.',
+  'Getypt antwoord': 'Risposta digitata',
+  'Goed gerekend antwoord:': 'Risposta considerata corretta:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Scegli due immagini e indica quella giusta.',
+  'Nog geen goed antwoord opgegeven.':
+      'Nessuna risposta corretta ancora indicata.',
+  'Overeenkomst': 'Corrispondenza',
+  'Tik de juiste afbeelding aan': 'Tocca l\'immagine giusta',
+  'Twee afbeeldingen': 'Due immagini',
+  'Typ je antwoord': 'Digita la tua risposta',
+  'Typ je antwoord en bevestig': 'Digita la tua risposta e conferma',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Corrispondenza richiesta con la risposta corretta',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Spunta almeno una risposta che conti come corretta.',
+  'Vragen': 'Domande',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'risposte, tutte mostrate in ordine casuale',
+  'fout': 'errata',
+  'goed': 'corretta',
+  'goed vanaf': 'corretta a partire da',
+  'links en rechts wisselen per ronde':
+      'sinistra e destra si scambiano a ogni turno',
+  'overeenkomst': 'di corrispondenza',
   'esc': 'esc',
   'Enter': 'Invio',
   'OK': 'OK',

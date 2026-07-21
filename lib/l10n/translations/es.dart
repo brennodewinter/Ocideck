@@ -733,6 +733,44 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Con una presentación bloqueada el resumen nunca aparece; entonces este interruptor no hace nada.',
+  'De twee afbeeldingen': 'Las dos imágenes',
+  'Goed gerekende antwoorden': 'Respuestas contadas como correctas',
+  'Afbeelding 1': 'Imagen 1',
+  'Afbeelding 2': 'Imagen 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Solo cuenta una respuesta literalmente idéntica.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'El espectador escribe la respuesta. Cada respuesta que marques aquí cuenta como correcta; las mayúsculas y los espacios de más no importan.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'El espectador señala la imagen correcta. Al presentar, izquierda y derecha se intercambian en cada ronda, así que no las llames "izquierda" ni "derecha".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Una errata sigue contando como correcta; otra palabra no.',
+  'Getypt antwoord': 'Respuesta escrita',
+  'Goed gerekend antwoord:': 'Respuesta contada como correcta:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Elige dos imágenes y marca la correcta.',
+  'Nog geen goed antwoord opgegeven.':
+      'Aún no se ha indicado ninguna respuesta correcta.',
+  'Overeenkomst': 'Coincidencia',
+  'Tik de juiste afbeelding aan': 'Toca la imagen correcta',
+  'Twee afbeeldingen': 'Dos imágenes',
+  'Typ je antwoord': 'Escribe tu respuesta',
+  'Typ je antwoord en bevestig': 'Escribe tu respuesta y confirma',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Coincidencia requerida con la respuesta correcta',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Marca al menos una respuesta que cuente como correcta.',
+  'Vragen': 'Preguntas',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'respuestas, todas mostradas en orden aleatorio',
+  'fout': 'incorrecta',
+  'goed': 'correcta',
+  'goed vanaf': 'correcta desde',
+  'links en rechts wisselen per ronde':
+      'izquierda y derecha se intercambian en cada ronda',
+  'overeenkomst': 'de coincidencia',
   'esc': 'esc',
   'Enter': 'Intro',
   'OK': 'OK',

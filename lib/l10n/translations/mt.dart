@@ -1801,6 +1801,43 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'F\'preżentazzjoni msakkra l-ħarsa ġenerali qatt ma tidher; dan is-swiċċ imbagħad ma jagħmel xejn.',
+  'De twee afbeeldingen': 'Iż-żewġ immaġni',
+  'Goed gerekende antwoorden': 'Tweġibiet li jgħoddu bħala korretti',
+  'Afbeelding 1': 'Immaġni 1',
+  'Afbeelding 2': 'Immaġni 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Tgħodd biss tweġiba identika kelma b\'kelma.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'L-ispettatur jittajpja t-tweġiba. Kull tweġiba li timmarka hawn tgħodd bħala korretta; l-ittri kbar u l-ispazji żejda ma jagħmlux differenza.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'L-ispettatur jindika l-immaġni t-tajba. Waqt il-preżentazzjoni x-xellug/il-lemin jinbidlu f\'kull rawnd, għalhekk issejjaħlhomx "tax-xellug" u "tal-lemin".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Żball tat-tajping xorta jgħodd bħala korrett; kelma oħra le.',
+  'Getypt antwoord': 'Tweġiba miktuba',
+  'Goed gerekend antwoord:': 'Tweġiba li tgħodd bħala korretta:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Agħżel żewġ immaġni u mmarka dik korretta.',
+  'Nog geen goed antwoord opgegeven.': 'Għadha ma ngħatatx tweġiba korretta.',
+  'Overeenkomst': 'Qbil',
+  'Tik de juiste afbeelding aan': 'Agħfas fuq l-immaġni t-tajba',
+  'Twee afbeeldingen': 'Żewġ immaġni',
+  'Typ je antwoord': 'Ittajpja t-tweġiba tiegħek',
+  'Typ je antwoord en bevestig': 'Ittajpja t-tweġiba tiegħek u kkonferma',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Qbil meħtieġ mat-tweġiba korretta',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Immarka mill-inqas tweġiba waħda li tgħodd bħala korretta.',
+  'Vragen': 'Mistoqsijiet',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'tweġibiet, kollha murija f\'ordni każwali',
+  'fout': 'żbaljat',
+  'goed': 'korrett',
+  'goed vanaf': 'korrett minn',
+  'links en rechts wisselen per ronde':
+      'ix-xellug u l-lemin jinbidlu f\'kull rawnd',
+  'overeenkomst': 'qbil',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -736,6 +736,44 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Avec une présentation verrouillée, le récapitulatif n\'apparaît jamais ; ce commutateur n\'a alors aucun effet.',
+  'De twee afbeeldingen': 'Les deux images',
+  'Goed gerekende antwoorden': 'Réponses comptées comme correctes',
+  'Afbeelding 1': 'Image 1',
+  'Afbeelding 2': 'Image 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Seule une réponse strictement identique compte.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Le spectateur saisit la réponse. Chaque réponse cochée ici compte comme correcte ; les majuscules et les espaces en trop n\'ont aucune importance.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Le spectateur désigne la bonne image. Lors de la présentation, gauche et droite permutent à chaque tour, ne les appelez donc pas "gauche" et "droite".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Une faute de frappe compte encore comme correcte ; un autre mot non.',
+  'Getypt antwoord': 'Réponse saisie',
+  'Goed gerekend antwoord:': 'Réponse comptée comme correcte :',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Choisissez deux images et indiquez la bonne.',
+  'Nog geen goed antwoord opgegeven.':
+      'Aucune bonne réponse indiquée pour l\'instant.',
+  'Overeenkomst': 'Correspondance',
+  'Tik de juiste afbeelding aan': 'Touchez la bonne image',
+  'Twee afbeeldingen': 'Deux images',
+  'Typ je antwoord': 'Saisissez votre réponse',
+  'Typ je antwoord en bevestig': 'Saisissez votre réponse et confirmez',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Correspondance requise avec la bonne réponse',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Cochez au moins une réponse comptée comme correcte.',
+  'Vragen': 'Questions',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'réponses, toutes affichées dans un ordre aléatoire',
+  'fout': 'incorrect',
+  'goed': 'correct',
+  'goed vanaf': 'correct à partir de',
+  'links en rechts wisselen per ronde':
+      'gauche et droite permutent à chaque tour',
+  'overeenkomst': 'de correspondance',
   'esc': 'échap',
   'Enter': 'Entrée',
   'OK': 'OK',

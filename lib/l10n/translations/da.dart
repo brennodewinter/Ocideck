@@ -1778,6 +1778,44 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Ved en låst præsentation vises oversigten aldrig; denne kontakt gør derfor ingenting.',
+  'De twee afbeeldingen': 'De to billeder',
+  'Goed gerekende antwoorden': 'Svar der tæller som rigtige',
+  'Afbeelding 1': 'Billede 1',
+  'Afbeelding 2': 'Billede 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Kun et ordret identisk svar tæller.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Tilskueren skriver svaret. Hvert svar, du sætter flueben ved her, tæller som rigtigt; store bogstaver og ekstra mellemrum betyder ikke noget.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Tilskueren peger på det rigtige billede. Under præsentationen bytter venstre og højre plads for hver runde, så kald dem ikke "venstre" og "højre".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'En tastefejl tæller stadig som rigtig; et andet ord gør ikke.',
+  'Getypt antwoord': 'Skrevet svar',
+  'Goed gerekend antwoord:': 'Svar der tæller som rigtigt:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Vælg to billeder, og markér det rigtige.',
+  'Nog geen goed antwoord opgegeven.':
+      'Der er endnu ikke angivet et rigtigt svar.',
+  'Overeenkomst': 'Overensstemmelse',
+  'Tik de juiste afbeelding aan': 'Tryk på det rigtige billede',
+  'Twee afbeeldingen': 'To billeder',
+  'Typ je antwoord': 'Skriv dit svar',
+  'Typ je antwoord en bevestig': 'Skriv dit svar, og bekræft',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Krævet overensstemmelse med det rigtige svar',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Sæt flueben ved mindst ét svar, der tæller som rigtigt.',
+  'Vragen': 'Spørgsmål',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'svar, alle vist i tilfældig rækkefølge',
+  'fout': 'forkert',
+  'goed': 'rigtigt',
+  'goed vanaf': 'rigtigt fra',
+  'links en rechts wisselen per ronde':
+      'venstre og højre bytter plads for hver runde',
+  'overeenkomst': 'overensstemmelse',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

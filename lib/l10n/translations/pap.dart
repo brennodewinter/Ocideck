@@ -736,6 +736,43 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Ku un presentashon blokeá e resúmen nunka ta aparesé; e switch aki no ta hasi nada anto.',
+  'De twee afbeeldingen': 'E dos imágennan',
+  'Goed gerekende antwoorden': 'Kontestanan ku ta konta komo korekto',
+  'Afbeelding 1': 'Imágen 1',
+  'Afbeelding 2': 'Imágen 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Solamente un kontesta literalmente igual ta konta.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'E spektadó ta skirbi e kontesta. Tur kontesta ku bo ta marka akinan ta konta komo korekto; lèter kapital i spasio ekstra no ta importá.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'E spektadó ta indiká e imágen korekto. Ora di presentá, robes/drechi ta kambia kada ronde, p\'esei no yama nan "robes" i "drechi".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Un fout di tik ta konta ainda komo korekto; un otro palabra nò.',
+  'Getypt antwoord': 'Kontesta skirbí',
+  'Goed gerekend antwoord:': 'Kontesta ku ta konta komo korekto:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Skohe dos imágen i marka esun korekto.',
+  'Nog geen goed antwoord opgegeven.':
+      'Ainda no a duna ningun kontesta korekto.',
+  'Overeenkomst': 'Similaridat',
+  'Tik de juiste afbeelding aan': 'Toka e imágen korekto',
+  'Twee afbeeldingen': 'Dos imágen',
+  'Typ je antwoord': 'Skirbi bo kontesta',
+  'Typ je antwoord en bevestig': 'Skirbi bo kontesta i konfirmá',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Similaridat rekerí ku e kontesta korekto',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Marka por lo ménos un kontesta ku ta konta komo korekto.',
+  'Vragen': 'Preguntanan',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'kontesta, tur mustrá den òrdu na zar',
+  'fout': 'inkorekto',
+  'goed': 'korekto',
+  'goed vanaf': 'korekto for di',
+  'links en rechts wisselen per ronde': 'robes i drechi ta kambia kada ronde',
+  'overeenkomst': 'di similaridat',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -1786,6 +1786,43 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Kod zaključane prezentacije pregled se nikad ne pojavljuje; ovaj prekidač tada ne radi ništa.',
+  'De twee afbeeldingen': 'Dvije slike',
+  'Goed gerekende antwoorden': 'Odgovori koji se broje kao točni',
+  'Afbeelding 1': 'Slika 1',
+  'Afbeelding 2': 'Slika 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Broji se samo doslovno jednak odgovor.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Gledatelj upisuje odgovor. Svaki ovdje označen odgovor broji se kao točan; velika slova i dodatni razmaci nisu važni.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Gledatelj pokazuje ispravnu sliku. Pri prezentiranju lijevo/desno mijenjaju mjesta u svakoj rundi, pa ih nemoj nazivati "lijevom" i "desnom".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Tipkarska pogreška još se broji kao točna; druga riječ ne.',
+  'Getypt antwoord': 'Upisani odgovor',
+  'Goed gerekend antwoord:': 'Odgovor koji se broji kao točan:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Odaberi dvije slike i označi ispravnu.',
+  'Nog geen goed antwoord opgegeven.': 'Točan odgovor još nije naveden.',
+  'Overeenkomst': 'Podudarnost',
+  'Tik de juiste afbeelding aan': 'Dodirni ispravnu sliku',
+  'Twee afbeeldingen': 'Dvije slike',
+  'Typ je antwoord': 'Upiši svoj odgovor',
+  'Typ je antwoord en bevestig': 'Upiši svoj odgovor i potvrdi',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Potrebna podudarnost s točnim odgovorom',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Označi barem jedan odgovor koji se broji kao točan.',
+  'Vragen': 'Pitanja',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'odgovora, svi prikazani nasumičnim redoslijedom',
+  'fout': 'netočno',
+  'goed': 'točno',
+  'goed vanaf': 'točno od',
+  'links en rechts wisselen per ronde':
+      'lijevo i desno mijenjaju mjesta u svakoj rundi',
+  'overeenkomst': 'podudarnosti',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'U redu',

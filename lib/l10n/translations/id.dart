@@ -1779,6 +1779,42 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Pada presentasi terkunci, ikhtisar tidak pernah muncul; sakelar ini lalu tidak berpengaruh.',
+  'De twee afbeeldingen': 'Kedua gambar',
+  'Goed gerekende antwoorden': 'Jawaban yang dihitung benar',
+  'Afbeelding 1': 'Gambar 1',
+  'Afbeelding 2': 'Gambar 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Hanya jawaban yang persis sama yang dihitung.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Penonton mengetik jawaban. Setiap jawaban yang kamu centang di sini dihitung benar; huruf besar dan spasi tambahan tidak berpengaruh.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Penonton menunjuk gambar yang benar. Saat presentasi, kiri/kanan bertukar tiap ronde, jadi jangan sebut mereka "kiri" dan "kanan".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Salah ketik masih dihitung benar; kata lain tidak.',
+  'Getypt antwoord': 'Jawaban ketik',
+  'Goed gerekend antwoord:': 'Jawaban yang dihitung benar:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Pilih dua gambar dan tandai yang benar.',
+  'Nog geen goed antwoord opgegeven.': 'Belum ada jawaban benar yang diisi.',
+  'Overeenkomst': 'Kemiripan',
+  'Tik de juiste afbeelding aan': 'Ketuk gambar yang benar',
+  'Twee afbeeldingen': 'Dua gambar',
+  'Typ je antwoord': 'Ketik jawabanmu',
+  'Typ je antwoord en bevestig': 'Ketik jawabanmu lalu konfirmasi',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Kemiripan minimal dengan jawaban benar',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Centang setidaknya satu jawaban yang dihitung benar.',
+  'Vragen': 'Pertanyaan',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'jawaban, semua ditampilkan dalam urutan acak',
+  'fout': 'salah',
+  'goed': 'benar',
+  'goed vanaf': 'benar mulai',
+  'links en rechts wisselen per ronde': 'kiri dan kanan bertukar tiap ronde',
+  'overeenkomst': 'kemiripan',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',
