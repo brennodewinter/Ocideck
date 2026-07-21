@@ -1779,6 +1779,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'Di peramban ini tidak dapat disimpan',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Peramban tidak punya gantungan kunci seperti komputer: apa pun yang akan disimpan OciDeck di sini bisa dibaca oleh skrip mana pun di halaman ini. Gunakan versi desktop — di sana rahasianya memang masuk ke gantungan kunci sistem operasi.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

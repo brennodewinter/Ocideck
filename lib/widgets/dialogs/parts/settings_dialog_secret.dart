@@ -125,11 +125,7 @@ extension _SettingsSecret on _SettingsDialogState {
                       ),
                       Text(
                         l10n.d(
-                          'Een browser heeft geen sleutelbos zoals een computer '
-                          'die heeft: wat OciDeck hier zou opslaan, kan elk '
-                          'script op deze pagina meelezen. Gebruik de '
-                          'desktopversie — daar gaat het geheim wél in de '
-                          'sleutelbos van het besturingssysteem.',
+                          'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.',
                         ),
                         style: TextStyle(
                           fontSize: 11,

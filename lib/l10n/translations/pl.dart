@@ -1791,6 +1791,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'W przeglądarce nie można tego zapisać',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Przeglądarka nie ma pęku kluczy, jaki ma komputer: to, co OciDeck by tu zapisał, może odczytać dowolny skrypt na tej stronie. Użyj wersji desktopowej — tam sekret trafia naprawdę do pęku kluczy systemu operacyjnego.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

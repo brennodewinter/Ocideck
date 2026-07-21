@@ -1754,6 +1754,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'In de browser kan dit niet worden bewaard': 'browserDaq vam pollaHbe\'lu\'',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'browserDaq ngaQHa\'moHwI\' ngaSwI\' tu\'lu\'be\'; De\'wI\'Daq tu\'lu\'. naDev pegh pol OciDeck, \'ach laDlaH Hoch script vam. desktop version yIlo\' — pa\' operating system ngaQHa\'moHwI\' ngaSwI\'Daq pegh pollu\'.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'lu\'',

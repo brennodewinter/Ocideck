@@ -1782,6 +1782,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'In de browser kan dit niet worden bewaard': 'V prohlížeči to nelze uložit',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Prohlížeč nemá klíčenku, jakou má počítač: co by tu OciDeck uložil, může přečíst jakýkoli skript na této stránce. Použijte desktopovou verzi — tam se tajemství opravdu uloží do klíčenky operačního systému.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

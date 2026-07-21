@@ -1795,6 +1795,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'In navigatro hoc servari non potest',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Navigatrum clavarium non habet sicut computatrum habet: quidquid OciDeck hic servaret, quodlibet scriptum in hac pagina legere potest. Versione mensali utere — ibi arcanum revera in clavarium systematis operandi reponitur.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Bene',

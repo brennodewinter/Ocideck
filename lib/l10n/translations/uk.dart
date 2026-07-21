@@ -1797,6 +1797,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'У браузері це не можна зберегти',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Браузер не має сховища ключів, як його має комп\'ютер: те, що OciDeck тут зберіг би, може прочитати будь-який скрипт на цій сторінці. Скористайтеся десктопною версією — там секрет справді потрапляє у сховище ключів операційної системи.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Гаразд',

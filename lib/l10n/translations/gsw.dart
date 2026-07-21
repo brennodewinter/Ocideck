@@ -1783,6 +1783,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'Im Browser cha das nöd gspycheret wärde',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'E Browser het kein Schlüsselbund, wie ne Computer ein het: Was OciDeck da spychere wür, cha jedes Skript uf dere Syte mitläse. Nimm d Desktop-Version — dört chunnt s Gheimnis würklich i de Schlüsselbund vom Betriebssystem.',
   'esc': 'Esc',
   'Enter': 'Enter',
   'OK': 'OK',

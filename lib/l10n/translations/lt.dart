@@ -1787,6 +1787,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'Naršyklėje to išsaugoti negalima',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Naršyklė neturi raktinės, kokią turi kompiuteris: tai, ką OciDeck čia išsaugotų, gali perskaityti bet kuris šio puslapio skriptas. Naudokite darbalaukio versiją — ten paslaptis tikrai patenka į operacinės sistemos raktinę.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Gerai',

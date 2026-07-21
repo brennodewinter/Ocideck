@@ -1783,6 +1783,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'In de browser kan dit niet worden bewaard': 'A böngészőben ez nem menthető',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'A böngészőnek nincs kulcstartója, mint a számítógépnek: amit az OciDeck itt eltárolna, azt az oldal bármelyik szkriptje elolvashatja. Használd az asztali verziót — ott a titok tényleg az operációs rendszer kulcstartójába kerül.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

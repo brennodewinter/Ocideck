@@ -1786,6 +1786,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'V prehliadači sa to nedá uložiť',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Prehliadač nemá zväzok kľúčov, aký má počítač: to, čo by tu OciDeck uložil, dokáže prečítať ktorýkoľvek skript na tejto stránke. Použite desktopovú verziu — tam sa tajomstvo naozaj uloží do zväzku kľúčov operačného systému.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

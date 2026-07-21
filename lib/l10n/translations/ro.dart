@@ -1797,6 +1797,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'În browser acest lucru nu poate fi salvat',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Un browser nu are un inel de chei așa cum are un computer: ce ar salva OciDeck aici poate citi orice script de pe această pagină. Folosește versiunea desktop — acolo secretul ajunge într-adevăr în inelul de chei al sistemului de operare.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

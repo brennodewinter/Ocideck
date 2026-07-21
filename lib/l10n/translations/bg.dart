@@ -1802,6 +1802,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'В браузъра това не може да се запази',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Браузърът няма ключодържател, какъвто има компютърът: това, което OciDeck би запазил тук, може да прочете всеки скрипт на тази страница. Използвайте настолната версия — там тайната наистина отива в ключодържателя на операционната система.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Добре',

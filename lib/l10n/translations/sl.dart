@@ -1781,6 +1781,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'V brskalniku tega ni mogoče shraniti',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Brskalnik nima zbirke ključev, kakršno ima računalnik: kar bi OciDeck shranil sem, lahko prebere katera koli skripta na tej strani. Uporabite namizno različico — tam skrivnost res pristane v zbirki ključev operacijskega sistema.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'V redu',

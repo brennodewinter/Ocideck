@@ -737,6 +737,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'In de browser kan dit niet worden bewaard':
+      'Yn de browser kin dit net bewarre wurde',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'In browser hat gjin kaaibosk sa\'t in kompjûter dy hat: wat OciDeck hjir bewarje soe, kin elk skript op dizze side meilêze. Brûk de desktopferzje — dêr komt it geheim wol yn de kaaibosk fan it bestjoeringssysteem.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

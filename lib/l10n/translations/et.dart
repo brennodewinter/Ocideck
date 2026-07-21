@@ -1770,6 +1770,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'Brauseris ei saa seda salvestada',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Brauseril pole võtmehoidjat nagu arvutil: seda, mille OciDeck siia salvestaks, saab lugeda iga selle lehe skript. Kasuta lauaarvuti versiooni — seal läheb saladus tõesti operatsioonisüsteemi võtmehoidjasse.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

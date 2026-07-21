@@ -732,6 +732,10 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'In de browser kan dit niet worden bewaard':
+      'Nel browser questo non può essere salvato',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Un browser non ha un portachiavi come ce l\'ha un computer: quello che OciDeck salverebbe qui può leggerlo qualsiasi script di questa pagina. Usa la versione desktop — lì il segreto finisce davvero nel portachiavi del sistema operativo.',
   'esc': 'esc',
   'Enter': 'Invio',
   'OK': 'OK',

@@ -1809,6 +1809,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'No navegador isto não pode ser guardado',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Um navegador não tem um porta-chaves como um computador tem: o que o OciDeck guardaria aqui pode ser lido por qualquer script desta página. Use a versão para computador — aí o segredo vai mesmo para o porta-chaves do sistema operativo.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

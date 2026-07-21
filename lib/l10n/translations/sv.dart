@@ -1778,6 +1778,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'Det här kan inte sparas i webbläsaren',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'En webbläsare har ingen nyckelring som en dator har: det OciDeck skulle spara här kan vilket skript som helst på den här sidan läsa. Använd skrivbordsversionen — där hamnar hemligheten faktiskt i operativsystemets nyckelring.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

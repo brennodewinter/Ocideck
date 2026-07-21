@@ -736,6 +736,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'In de browser kan dit niet worden bewaard':
+      'Den e browser esaki no por wòrdu wardá',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Un browser no tin un yabero manera un komputadó tin: loke OciDeck lo warda akinan, kualke skript riba e página aki por lesa. Usa e version desktop — einan e sekreto sí ta bai den e yabero di e sistema operativo.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

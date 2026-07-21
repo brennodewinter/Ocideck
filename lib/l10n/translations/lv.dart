@@ -1778,6 +1778,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'Pārlūkprogrammā to nevar saglabāt',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Pārlūkprogrammai nav atslēgu saišķa, kāds ir datoram: to, ko OciDeck šeit saglabātu, var izlasīt jebkurš šīs lapas skripts. Izmantojiet darbvirsmas versiju — tur noslēpums tiešām nonāk operētājsistēmas atslēgu saišķī.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Labi',

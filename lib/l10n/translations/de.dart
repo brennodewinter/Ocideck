@@ -736,6 +736,10 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'In de browser kan dit niet worden bewaard':
+      'Im Browser kann das nicht gespeichert werden',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Ein Browser hat keinen Schlüsselbund, wie ihn ein Computer hat: Was OciDeck hier speichern würde, kann jedes Skript auf dieser Seite mitlesen. Nutze die Desktop-Version — dort landet das Geheimnis wirklich im Schlüsselbund des Betriebssystems.',
   'esc': 'Esc',
   'Enter': 'Enter',
   'OK': 'OK',

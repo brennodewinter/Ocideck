@@ -4,6 +4,8 @@ import 'dart:io';
 import 'dart:typed_data' show BytesBuilder;
 
 import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 
 import 'git_cli.dart';
 
@@ -234,14 +236,70 @@ class NativeGitCli implements GitCli {
 
   /// De lege, app-eigen map die als HOME én als hooks-map dient. Eén keer
   /// aangemaakt; in tests injecteerbaar.
+  ///
+  /// **Niet in de gedeelde tijdelijke ruimte.** Dit was
+  /// `${Directory.systemTemp.path}/ocideck_git_sandbox`: een vaste, te raden
+  /// naam in een map waar op een gedeelde Linux-machine iedereen mag schrijven.
+  /// Wie daar vóór de eerste start een map neerzet met een `post-checkout`
+  /// erin, krijgt die uitgevoerd zodra de gebruiker kloont — want deze map is
+  /// óók `core.hooksPath`. De vorige versie nam een bestaande map zonder meer
+  /// over, dus dat had niets in de weg gestaan.
+  ///
+  /// De app-support-map is per gebruiker en per app (`~/Library/Application
+  /// Support` op macOS, `~/.local/share` op Linux, `%APPDATA%` op Windows). Een
+  /// andere gebruiker komt er niet bij.
+  ///
+  /// [_assertSandboxSafe] blijft er als tweede slot omheen: dat het pad nu goed
+  /// ligt, betekent niet dat wat er staat van ons is.
   Future<Directory> _sandbox() async {
     final cached = _sandboxCache;
     if (cached != null) return cached;
-    final dir =
-        _sandboxOverride ??
-        Directory('${Directory.systemTemp.path}/ocideck_git_sandbox');
+    final dir = _sandboxOverride ?? await _defaultSandboxDir();
     if (!await dir.exists()) await dir.create(recursive: true);
+    await _assertSandboxSafe(dir);
     return _sandboxCache = dir;
+  }
+
+  /// De app-support-map, en anders een privé tijdelijke map.
+  ///
+  /// De terugval is géén stap terug naar het oude gedrag: `createTemp` maakt de
+  /// map via `mkdtemp`, met een naam die niemand vooraf kan raden en — op POSIX
+  /// — rechten 0700. Een andere gebruiker kan hem dus niet vóór ons aanmaken en
+  /// er niet in schrijven. Wat het gat was, is de vaste náám op een plek waar
+  /// iedereen mag schrijven; die is hier weg.
+  ///
+  /// De terugval bestaat omdat `getApplicationSupportDirectory` over een
+  /// platformkanaal loopt en dus een geïnitialiseerde Flutter-binding vereist.
+  /// In de app is die er altijd; op de kale Dart-VM van `flutter test` niet.
+  static Future<Directory> _defaultSandboxDir() async {
+    try {
+      final support = await getApplicationSupportDirectory();
+      return Directory(p.join(support.path, 'git_sandbox'));
+    } catch (_) {
+      return Directory.systemTemp.createTemp('ocideck_git_sandbox_');
+    }
+  }
+
+  /// Zorg dat de zandbak is wat we denken: geen koppeling, en leeg.
+  ///
+  /// Allebei omdat de map als `core.hooksPath` dient. Een symbolische koppeling
+  /// zou de hooks ergens ánders vandaan halen — daar valt niets veilig aan te
+  /// repareren, dus dat is een weigering. Inhoud wordt wél opgeruimd in plaats
+  /// van geweigerd: er hoort hier niets te staan, dus alles wat er staat is
+  /// ofwel rommel ofwel een hook die iemand heeft neergelegd, en in beide
+  /// gevallen is weghalen het goede antwoord. Weigeren zou git in het geheel
+  /// onbruikbaar maken zodra er ooit één bestand belandt, en dat is een duurdere
+  /// fout dan hij oplost.
+  Future<void> _assertSandboxSafe(Directory dir) async {
+    if (await FileSystemEntity.isLink(dir.path)) {
+      throw GitCliException(
+        'De git-zandbak is een symbolische koppeling en wordt niet vertrouwd: '
+        '${dir.path}',
+      );
+    }
+    await for (final entry in dir.list(followLinks: false)) {
+      await entry.delete(recursive: true);
+    }
   }
 
   static String _cap(String s, int max) =>

@@ -1786,6 +1786,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'U pregledniku se ovo ne može spremiti',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Preglednik nema svežanj ključeva kakav ima računalo: ono što bi OciDeck ovdje spremio može pročitati bilo koja skripta na ovoj stranici. Upotrijebite verziju za računalo — ondje tajna doista završi u svežnju ključeva operacijskog sustava.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'U redu',

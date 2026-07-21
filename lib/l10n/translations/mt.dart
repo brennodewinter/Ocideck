@@ -1801,6 +1801,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'Fil-browser dan ma jistax jiġi salvat',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Browser m\'għandux ċurkett taċ-ċwievet bħalma għandu kompjuter: dak li OciDeck jissejvja hawn jista\' jaqrah kwalunkwe skript f\'din il-paġna. Uża l-verżjoni tad-desktop — hemmhekk is-sigriet tabilħaqq imur fiċ-ċurkett taċ-ċwievet tas-sistema operattiva.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

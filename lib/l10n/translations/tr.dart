@@ -2761,6 +2761,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'In de browser kan dit niet worden bewaard': 'Tarayıcıda bu kaydedilemez',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Tarayıcının bir bilgisayardaki gibi anahtar zinciri yoktur: OciDeck\'in buraya kaydedeceği şeyi bu sayfadaki herhangi bir betik okuyabilir. Masaüstü sürümünü kullanın — orada sır gerçekten işletim sisteminin anahtar zincirine gider.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Tamam',

@@ -1807,6 +1807,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'Στο πρόγραμμα περιήγησης αυτό δεν μπορεί να αποθηκευτεί',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Ένα πρόγραμμα περιήγησης δεν έχει κλειδοθήκη όπως έχει ένας υπολογιστής: ό,τι θα αποθήκευε εδώ το OciDeck μπορεί να το διαβάσει οποιοδήποτε script αυτής της σελίδας. Χρησιμοποιήστε την έκδοση για υπολογιστή — εκεί το μυστικό μπαίνει όντως στην κλειδοθήκη του λειτουργικού συστήματος.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Εντάξει',

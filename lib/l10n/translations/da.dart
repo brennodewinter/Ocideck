@@ -1778,6 +1778,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'Dette kan ikke gemmes i browseren',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'En browser har ingen nøglering, sådan som en computer har: det, OciDeck ville gemme her, kan ethvert script på denne side læse med. Brug desktopversionen — dér havner hemmeligheden faktisk i operativsystemets nøglering.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

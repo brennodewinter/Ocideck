@@ -1779,6 +1779,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'Tätä ei voi tallentaa selaimessa',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Selaimessa ei ole avainnippua kuten tietokoneessa: sen, minkä OciDeck tallentaisi tähän, voi lukea mikä tahansa tämän sivun skripti. Käytä työpöytäversiota — siellä salaisuus menee oikeasti käyttöjärjestelmän avainnippuun.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

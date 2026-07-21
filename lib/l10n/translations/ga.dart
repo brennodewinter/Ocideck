@@ -1815,6 +1815,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'In de browser kan dit niet worden bewaard':
+      'Ní féidir é seo a shábháil sa bhrabhsálaí',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Níl eochairslabhra ag brabhsálaí mar atá ag ríomhaire: rud ar bith a shábhálfadh OciDeck anseo, is féidir le haon script ar an leathanach seo é a léamh. Bain úsáid as an leagan deisce — ann téann an rún isteach in eochairslabhra an chórais oibriúcháin i ndáiríre.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Ceart go leor',
