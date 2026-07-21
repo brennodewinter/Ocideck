@@ -1856,6 +1856,35 @@ const _dutchSourceAddRo = <String, String>{
       'enumeră ce a fost omis, fără valorile propriu-zise. Acest fișier poate însoți raportul.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'conține cheile cu care fiecare valoare redactată poate fi recalculată. Nu trimite acest fișier: astfel redactarea este anulată. Păstrează-l lângă sursă.',
+  'slides': 'diapozitive',
+  'Achtergehouden': 'Reținut',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Reținut: clasificat mai strict decât prezentarea',
+  '1 slide achtergehouden door haar TLP':
+      '1 slide reținut din cauza TLP-ului său',
+  'slides achtergehouden door hun TLP':
+      'slide-uri reținute din cauza TLP-ului lor',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Aceste slide-uri nu sunt incluse la prezentare, la export sau în pachet. Ridicați nivelul TLP al prezentării în Informații prezentare pentru a le include.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Toate slide-urile sunt reținute din cauza clasificării lor TLP — nimic de afișat.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Toate slide-urile sunt reținute din cauza clasificării lor TLP — nimic de exportat.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Toate slide-urile sunt omise sau reținute din cauza clasificării lor TLP — nimic de afișat.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Toate slide-urile sunt omise sau reținute din cauza clasificării lor TLP — nimic de exportat.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Cifrele graficelor nu au fost salvate — există doar în această fereastră:',
+  'Niet alles gaat mee naar git': 'Nu tot ajunge în git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Aceste părți nu ajung în commit și nu vor fi în depozit:',
+  'Tekeningen op slides': 'Desene pe slide-uri',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Rămân în această fereastră. Salvați prezentarea și ca fișier sau ca pachet .ocideck pentru a le păstra.',
+  'Toch opslaan': 'Salvează oricum',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'În browser nu există recuperare după blocare: dacă închideți această filă, munca nesalvată se pierde. Salvați-vă singur prezentarea.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Baza de date CVE locală (descărcarea o porniți dumneavoastră): OciDeck preia datele în masă prin api.github.com și fișierul de lansare către care indică acea adresă.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

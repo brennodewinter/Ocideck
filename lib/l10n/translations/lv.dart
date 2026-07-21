@@ -1836,6 +1836,33 @@ const _dutchSourceAddLv = <String, String>{
       'uzskaita, kas ir izlaists, bez pašām vērtībām. Šo failu drīkst sūtīt kopā ar ziņojumu.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'satur atslēgas, ar kurām katru aizklāto vērtību var atrēķināt atpakaļ. Nesūtiet šo failu līdzi: tad aizklāšana ir atcelta. Glabājiet to pie avota.',
+  'slides': 'slaidi',
+  'Achtergehouden': 'Aizturēts',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Aizturēts: klasificēts stingrāk nekā prezentācija',
+  '1 slide achtergehouden door haar TLP': '1 slaids aizturēts tā TLP dēļ',
+  'slides achtergehouden door hun TLP': 'slaidi aizturēti to TLP dēļ',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Šie slaidi netiek iekļauti prezentējot, eksportējot vai pakotnē. Paaugstiniet prezentācijas TLP līmeni sadaļā Prezentācijas informācija, lai tos iekļautu.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Visi slaidi ir aizturēti to TLP klasifikācijas dēļ — nav ko rādīt.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Visi slaidi ir aizturēti to TLP klasifikācijas dēļ — nav ko eksportēt.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Visi slaidi ir izlaisti vai aizturēti to TLP klasifikācijas dēļ — nav ko rādīt.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Visi slaidi ir izlaisti vai aizturēti to TLP klasifikācijas dēļ — nav ko eksportēt.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Diagrammu skaitļi netika saglabāti — tie vairs pastāv tikai šajā logā:',
+  'Niet alles gaat mee naar git': 'Ne viss nonāk git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Šīs daļas nenonāk commit un vēlāk nebūs repozitorijā:',
+  'Tekeningen op slides': 'Zīmējumi uz slaidiem',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Tie paliek šajā logā. Saglabājiet prezentāciju arī kā failu vai kā .ocideck pakotni, lai tos saglabātu.',
+  'Toch opslaan': 'Tomēr saglabāt',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Pārlūkā nav atkopšanas pēc avārijas: aizverot šo cilni, nesaglabātais darbs pazūd. Saglabājiet prezentāciju paši.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Vietējā CVE datubāze (lejupielādi sākat jūs pats): OciDeck iegūst apjoma datus caur api.github.com un laidiena failu, uz kuru šī adrese norāda.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

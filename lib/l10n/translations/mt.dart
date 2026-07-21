@@ -1859,6 +1859,34 @@ const _dutchSourceAddMt = <String, String>{
       'jelenka x\'tħalla barra, mingħajr il-valuri nfushom. Dan il-fajl jista\' jintbagħat mar-rapport.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'fih iċ-ċwievet li bihom kull valur irrediġut jista\' jerġa\' jinħadem lura. Tibgħatx dan il-fajl: hekk ir-redazzjoni tispiċċa mħassra. Żommu mas-sors.',
+  'slides': 'slides',
+  'Achtergehouden': 'Miżmum',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Miżmum: klassifikat b\'mod aktar strett mill-preżentazzjoni',
+  '1 slide achtergehouden door haar TLP':
+      'Slide 1 inżamm minħabba t-TLP tiegħu',
+  'slides achtergehouden door hun TLP': 'slides miżmuma minħabba t-TLP tagħhom',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Dawn is-slides ma jitteħdux waqt il-preżentazzjoni, l-esportazzjoni jew fil-pakkett. Għolli l-livell TLP tal-preżentazzjoni f\'Informazzjoni tal-preżentazzjoni biex tinkludihom.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Is-slides kollha huma miżmuma minħabba l-klassifikazzjoni TLP tagħhom — m\'hemm xejn x\'juri.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Is-slides kollha huma miżmuma minħabba l-klassifikazzjoni TLP tagħhom — m\'hemm xejn x\'jiġi esportat.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Is-slides kollha nqabżu jew huma miżmuma minħabba l-klassifikazzjoni TLP tagħhom — m\'hemm xejn x\'juri.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Is-slides kollha nqabżu jew huma miżmuma minħabba l-klassifikazzjoni TLP tagħhom — m\'hemm xejn x\'jiġi esportat.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Iċ-ċifri tal-graffs ma ġewx issalvati — jinsabu biss f\'din it-tieqa:',
+  'Niet alles gaat mee naar git': 'Mhux kollox imur f\'git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Dawn il-partijiet ma jispiċċawx fil-commit u wara mhux se jkunu fir-repożitorju:',
+  'Tekeningen op slides': 'Tpinġijiet fuq is-slides',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Jibqgħu f\'din it-tieqa. Issalva l-preżentazzjoni wkoll bħala fajl jew bħala pakkett .ocideck biex iżżommhom.',
+  'Toch opslaan': 'Issalva xorta',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Fil-browser m\'hemmx irkupru wara ħabta: jekk tagħlaq din it-tab, ix-xogħol mhux issalvat jintilef. Issalva l-preżentazzjoni tiegħek int stess.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Id-database CVE lokali (id-download tibdieh int stess): OciDeck iġib id-data bl-ingrossa permezz ta\' api.github.com u l-fajl tal-ħruġ li dak l-indirizz jipponta lejh.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

@@ -1853,6 +1853,33 @@ const _dutchSourceAddLa = <String, String>{
       'enumerat quae omissa sint, sine ipsis valoribus. Hoc documentum cum relatione mitti licet.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'claves continet quibus omnis valor obliteratus retro computari potest. Noli hoc documentum una mittere: ita obliteratio irrita fit. Apud fontem id serva.',
+  'slides': 'diapositivae',
+  'Achtergehouden': 'Retentum',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Retentum: severius quam praesentatio classificatum',
+  '1 slide achtergehouden door haar TLP': '1 scida propter TLP suum retenta',
+  'slides achtergehouden door hun TLP': 'scidae propter TLP suum retentae',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Hae scidae in praesentatione, exportatione et fasciculo omittuntur. Gradum TLP praesentationis in Informatione praesentationis auge ut includantur.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Omnes paginae classificatione TLP sua retinentur, itaque nihil est quod ostendatur.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Omnes paginae classificatione TLP sua retinentur, itaque nihil est quod exportetur.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Omnes paginae praetermittuntur aut classificatione TLP sua retinentur, itaque nihil est quod ostendatur.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Omnes paginae praetermittuntur aut classificatione TLP sua retinentur, itaque nihil est quod exportetur.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Numeri diagrammatis servati non sunt — in hac fenestra tantum manent:',
+  'Niet alles gaat mee naar git': 'Non omnia in git eunt',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Hae partes in commissum non veniunt neque postea in promptuario erunt:',
+  'Tekeningen op slides': 'Picturae in diapositivis',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'In hac fenestra manent. Praesentationem etiam ut tabellam vel ut fasciculum .ocideck serva ut retineantur.',
+  'Toch opslaan': 'Nihilominus servare',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'In navigatro nulla est recuperatio post ruinam: si hanc tabellam claudis, opus non servatum perit. Praesentationem tuam ipse serva.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Basis datorum CVE localis (descensum ipse incipis): OciDeck data cumulata per api.github.com petit et per plagulam emissionis quam illa inscriptio monstrat.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

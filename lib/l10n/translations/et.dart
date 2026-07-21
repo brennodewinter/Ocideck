@@ -1829,6 +1829,33 @@ const _dutchSourceAddEt = <String, String>{
       'loetleb, mis on välja jäetud, ilma väärtusteta endita. Selle faili võib aruandega kaasa panna.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'sisaldab võtmeid, millega saab iga redigeeritud väärtuse tagasi arvutada. Ära saada seda faili kaasa: siis on redigeerimine tühistatud. Hoia seda allika juures.',
+  'slides': 'slaidi',
+  'Achtergehouden': 'Kinni peetud',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Kinni peetud: klassifitseeritud rangemalt kui esitlus',
+  '1 slide achtergehouden door haar TLP': '1 slaid peeti kinni selle TLP tõttu',
+  'slides achtergehouden door hun TLP': 'slaidi peeti kinni nende TLP tõttu',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Neid slaide ei võeta kaasa esitamisel, eksportimisel ega paketti. Tõsta esitluse teabes esitluse TLP-taset, et need kaasa võtta.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Kõik slaidid on nende TLP-klassifikatsiooni tõttu kinni peetud — pole midagi näidata.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Kõik slaidid on nende TLP-klassifikatsiooni tõttu kinni peetud — pole midagi eksportida.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Kõik slaidid on vahele jäetud või nende TLP-klassifikatsiooni tõttu kinni peetud — pole midagi näidata.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Kõik slaidid on vahele jäetud või nende TLP-klassifikatsiooni tõttu kinni peetud — pole midagi eksportida.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Diagrammi arve ei salvestatud — need on alles ainult selles aknas:',
+  'Niet alles gaat mee naar git': 'Kõik ei lähe gitti kaasa',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Need osad ei jõua commit\'i ega ole hiljem hoidlas:',
+  'Tekeningen op slides': 'Joonistused slaididel',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Need jäävad sellesse aknasse. Salvesta esitlus ka failina või .ocideck-paketina, et need alles hoida.',
+  'Toch opslaan': 'Salvesta ikkagi',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Brauseris pole krahhitaastet: kui sulged selle vahekaardi, on salvestamata töö kadunud. Salvesta oma esitlus ise.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Kohalik CVE andmebaas (allalaadimise käivitate ise): OciDeck toob masskogumi aadressi api.github.com kaudu ja selle väljalaskefaili, millele see aadress osutab.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

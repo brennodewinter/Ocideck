@@ -1873,6 +1873,33 @@ const _dutchSourceAddGa = <String, String>{
       'liostaíonn sé a bhfuil fágtha ar lár, gan na luachanna féin. Is féidir an comhad seo a chur leis an tuairisc.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'tá na heochracha ann lenar féidir gach luach folaithe a ríomh ar ais. Ná seol an comhad seo leis: cuirtear an folú ar ceal ansin. Coinnigh in aice leis an bhfoinse é.',
+  'slides': 'sleamhnáin',
+  'Achtergehouden': 'Coinnithe siar',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Coinnithe siar: aicmithe níos déine ná an cur i láthair',
+  '1 slide achtergehouden door haar TLP': '1 sleamhnán coinnithe siar ag a TLP',
+  'slides achtergehouden door hun TLP': 'sleamhnáin coinnithe siar ag a TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Fágtar na sleamhnáin seo ar lár agus tú ag cur i láthair, ag easpórtáil nó sa phacáiste. Ardaigh leibhéal TLP an chur i láthair in Eolas an chur i láthair chun iad a chur san áireamh.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Coinnítear gach sleamhnán siar de bharr a n-aicmithe TLP — níl aon rud le taispeáint.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Coinnítear gach sleamhnán siar de bharr a n-aicmithe TLP — níl aon rud le heaspórtáil.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Ligeadh thar bráid gach sleamhnán nó coinníodh siar é de bharr a aicmithe TLP — níl aon rud le taispeáint.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Ligeadh thar bráid gach sleamhnán nó coinníodh siar é de bharr a aicmithe TLP — níl aon rud le heaspórtáil.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Níor sábháladh figiúirí na gcairteacha — níl siad ann a thuilleadh ach san fhuinneog seo:',
+  'Niet alles gaat mee naar git': 'Ní théann gach rud go git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Ní théann na codanna seo isteach sa commit agus ní bheidh siad sa stór:',
+  'Tekeningen op slides': 'Líníochtaí ar sleamhnáin',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Fanann siad san fhuinneog seo. Sábháil an cur i láthair mar chomhad nó mar phacáiste .ocideck freisin chun iad a choinneáil.',
+  'Toch opslaan': 'Sábháil mar sin féin',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Sa bhrabhsálaí níl aon aisghabháil tar éis tuairte: má dhúnann tú an cluaisín seo, imíonn obair nár sábháladh. Sábháil do chur i láthair tú féin.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  An bunachar sonraí CVE áitiúil (tusa a chuireann an íoslódáil ar bun): faigheann OciDeck na sonraí ollmhóra trí api.github.com agus an comhad eisiúna a bhfuil an seoladh sin ag díriú air.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

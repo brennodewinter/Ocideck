@@ -808,6 +808,33 @@ const _dutchSourceAddFy = {
       'somt op wat weilitten is, sûnder de wearden sels. Dit bestân mei meistjoerd wurde mei it rapport.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'befettet de kaaien dêr\'t eltse redigearre wearde mei werom te rekkenjen is. Stjoer dit bestân net mei: dan is de redaksje ûngedien makke. Bewarje it by de boarne.',
+  'slides': 'slides',
+  'Achtergehouden': 'Efterhâlden',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Efterhâlden: strenger klassifisearre as de presintaasje',
+  '1 slide achtergehouden door haar TLP': '1 dia efterhâlden troch har TLP',
+  'slides achtergehouden door hun TLP': 'dia\'s efterhâlden troch harren TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Dizze slides geane net mei by it presintearjen, eksportearjen of yn it pakket. Ferheegje it TLP-nivo fan de presintaasje by Presintaasje-ynfo om se mei te nimmen.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alle dia\'s binne efterhâlden troch harren TLP-klassifikaasje — neat om sjen te litten.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alle dia\'s binne efterhâlden troch harren TLP-klassifikaasje — neat om te eksportearjen.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alle dia\'s binne oerslein of efterhâlden troch harren TLP-klassifikaasje — neat om sjen te litten.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alle dia\'s binne oerslein of efterhâlden troch harren TLP-klassifikaasje — neat om te eksportearjen.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Grafykgetallen binne net bewarre — se steane allinne noch yn dit finster:',
+  'Niet alles gaat mee naar git': 'Net alles giet mei nei git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Dizze ûnderdielen komme net yn de commit en steane aanst net yn de repository:',
+  'Tekeningen op slides': 'Tekeningen op dia\'s',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Se bliuwe yn dit finster stean. Bewarje de presintaasje ek as bestân of as .ocideck-pakket om se te hâlden.',
+  'Toch opslaan': 'Dochs bewarje',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Yn de browser is der gjin crashherstel: slutsto dit ljepblêd, dan is net-bewarre wurk fuort. Bewarje dyn presintaasje sels.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  De lokale CVE-databank (do starte de download sels): OciDeck hellet de bulkgegevens op fia api.github.com en it releasebestân dêr\'t dat adres nei wiist.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

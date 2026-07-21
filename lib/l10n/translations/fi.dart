@@ -1838,6 +1838,33 @@ const _dutchSourceAddFi = <String, String>{
       'luettelee, mitä on jätetty pois, ilman itse arvoja. Tämän tiedoston saa lähettää raportin mukana.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'sisältää avaimet, joilla jokainen peitetty arvo voidaan laskea takaisin. Älä lähetä tätä tiedostoa mukana: silloin peittäminen kumoutuu. Säilytä se lähteen luona.',
+  'slides': 'diaa',
+  'Achtergehouden': 'Pidätetty',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Pidätetty: luokiteltu tiukemmin kuin esitys',
+  '1 slide achtergehouden door haar TLP': '1 dia pidätetty sen TLP:n vuoksi',
+  'slides achtergehouden door hun TLP': 'diaa pidätetty niiden TLP:n vuoksi',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Nämä diat jäävät pois esitettäessä, vietäessä ja paketista. Nosta esityksen TLP-tasoa kohdassa Esityksen tiedot, jotta ne tulevat mukaan.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Kaikki diat on pidätetty niiden TLP-luokituksen vuoksi, joten näytettävää ei ole.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Kaikki diat on pidätetty niiden TLP-luokituksen vuoksi, joten vietävää ei ole.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Kaikki diat on ohitettu tai pidätetty niiden TLP-luokituksen vuoksi, joten näytettävää ei ole.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Kaikki diat on ohitettu tai pidätetty niiden TLP-luokituksen vuoksi, joten vietävää ei ole.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Kaavion lukuja ei tallennettu — ne ovat enää vain tässä ikkunassa:',
+  'Niet alles gaat mee naar git': 'Kaikki ei mene gitiin',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Nämä osat eivät päädy committiin eivätkä ole sen jälkeen repositoriossa:',
+  'Tekeningen op slides': 'Piirrokset dioilla',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Ne jäävät tähän ikkunaan. Tallenna esitys myös tiedostona tai .ocideck-pakettina, jotta ne säilyvät.',
+  'Toch opslaan': 'Tallenna silti',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Selaimessa ei ole kaatumispalautusta: jos suljet tämän välilehden, tallentamaton työ katoaa. Tallenna esityksesi itse.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Paikallinen CVE-tietokanta (käynnistät latauksen itse): OciDeck hakee joukkotiedot osoitteen api.github.com kautta ja sen julkaisutiedoston, johon osoite viittaa.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
