@@ -341,6 +341,15 @@ surface takes a raw `Deck`/`List<Slide>`, so redaction cannot be bypassed by
 forgetting a call. `forExternalProcessing(...)` is the stricter variant for
 hand-off outside the app.
 
+The type says a deck went through the boundary; it does not say the boundary
+looked at every field. That second half is a list written by hand in three
+places — the scanner's fragments, the projection, and the redaction manifest —
+and the compiler connects none of them. When one lags, the export gate reports a
+finding that *Redact* cannot clear and the value travels anyway, which is how six
+deck fields and a slide's checklist scope stayed unredacted until July 2026.
+`test/privacy_scan_redact_parity_test.dart` is the ratchet that holds the three
+lists together; it names the field that is missing rather than only failing.
+
 Adjacent egress control: `services/ai_security_gate.dart` is a pure, I/O-free
 decision run before every AI request (mode, consent, loopback/trusted-internal/
 cloud rules, fail-closed on web); `utils/zip_encryption.dart` backs encrypted

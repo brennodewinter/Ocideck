@@ -1827,6 +1827,19 @@ const _dutchSourceAddCs = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · SQL injection v přihlašovacím formuláři',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Odeslat tento obrázek do modelu AI?',
+  'De afbeelding gaat ongewijzigd naar': 'Obrázek bude beze změny odeslán na',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck v obrázku nic nezačerňuje: tváře, text na snímku obrazovky a viditelné údaje odejdou s ním.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Kontrola obrázků zde našla jednu nebo více rozpoznatelných tváří.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Vedle exportu vzniknou dva soubory, díky nimž si příjemce může začernění ověřit.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'vypisuje, co bylo vynecháno, bez samotných hodnot. Tento soubor může jít se zprávou.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'obsahuje klíče, jimiž lze každou začerněnou hodnotu zpětně dopočítat. Tento soubor neposílejte: začernění by tím bylo zrušeno. Uchovejte jej u zdroje.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Místní databáze CVE (stahování spouštíte sami): OciDeck načítá hromadná data přes api.github.com a soubor vydání, na který tato adresa odkazuje.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

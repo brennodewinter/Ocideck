@@ -426,6 +426,20 @@ also declares them, but see the [CI note](#continuous-integration).)
     is ignored); a bare `logoPath` from someone else's disk is dropped; and a
     crafted colour in a file still comes back neutralised — so the hardened gate
     is proven on the carrier that actually crosses machines.
+  - `test/privacy_scan_redact_parity_test.dart` — the privacy scanner, the
+    projection and the redaction manifest each name their fields by hand, in
+    three files the compiler never connects. This test holds the three lists
+    against each other, so a field that is scanned but not redacted (which
+    leaves the user a finding that *Redact* cannot clear, while the value still
+    exports) fails by name instead of shipping.
+  - `test/privacy_region_coverage_test.dart` — every country pack you can switch
+    on has at least one rule, and every rule hangs on a pack you can switch on.
+    Both directions matter: a pack with no rules lets "nobody looked" read as
+    "nothing found", and a rule outside every pack never runs at all.
+  - `test/log_no_content_test.dart` — a source scan of `lib/` for the shapes
+    that put deck or file *contents* into a log message (a collection joined,
+    taken from, or sliced into the text). It cannot judge a lone variable that
+    happens to hold a cell value; it does catch the pattern that actually did it.
 
 ### Targeted test groups
 

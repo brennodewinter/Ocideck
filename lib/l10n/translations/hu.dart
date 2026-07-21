@@ -1828,6 +1828,20 @@ const _dutchSourceAddHu = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · SQL-injektálás a bejelentkezési űrlapon',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Elküldi ezt a képet az MI-modellnek?',
+  'De afbeelding gaat ongewijzigd naar':
+      'A kép változatlanul ide kerül elküldésre:',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'Az OciDeck semmit sem takar ki a képen: az arcok, a képernyőkép szövege és a látható adatok is elmennek.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'A képellenőrzés egy vagy több felismerhető arcot talált itt.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Az exportálás mellé két fájl kerül, amelyekkel a címzett ellenőrizheti a kitakarásokat.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'felsorolja, mi maradt ki, maguk az értékek nélkül. Ez a fájl mehet a jelentéssel együtt.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'tartalmazza a kulcsokat, amelyekkel minden kitakart érték visszaszámítható. Ezt a fájlt ne küldje el: ezzel a kitakarás érvényét veszti. Tartsa a forrás mellett.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  A helyi CVE-adatbázis (a letöltést Ön indítja): az OciDeck a tömeges adatokat az api.github.com címen és az arra mutató kiadási fájlon keresztül tölti le.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

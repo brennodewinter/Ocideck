@@ -91,6 +91,76 @@ void main() {
     expect(find.text('Exporteer als PDF'), findsOneWidget);
   });
 
+  group('het sleutelbestand wordt bij naam genoemd', () {
+    /// Een bundel mét manifest, dus mét salts: dan schrijft de export
+    /// `…-redaction-keys.json` in dezelfde map als het rapport.
+    ExportBundle bundleMetManifest(
+      PrivacyExportProfile profile, {
+      bool includeDetail = true,
+    }) => ExportBundle(
+      audience: PrivacyProjection.forAudience(
+        const Deck(title: 'Test'),
+        profile: profile,
+      ),
+      markdown: '',
+      manifest: const RedactionManifest(
+        derivedFrom: 'seal-abc',
+        entries: [
+          RedactionEntry(
+            id: 'a3f1',
+            commitment: 'deadbeef',
+            rule: 'nl.bsn',
+            slideIndex: 0,
+            field: 'bullets',
+            salt: 'peper',
+          ),
+        ],
+      ),
+      privacySummary: PrivacyExportSummary.empty,
+    );
+
+    Future<void> toon(
+      WidgetTester tester,
+      ExportBundle Function(PrivacyExportProfile, {bool includeDetail})
+      bundleFor,
+    ) => tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: ExportDialog(
+            deckPath: '/tmp/deck.md',
+            bundleFor: bundleFor,
+            exportService: ExportService(),
+          ),
+        ),
+      ),
+    );
+
+    testWidgets(
+      'met een manifest staan beide bestanden er, met de waarschuwing',
+      (tester) async {
+        // OciDeck schreef de sleutel naast de deur zonder het te zeggen: geen
+        // tekst in de interface, geen regel in de handleiding. Met de salts is
+        // elk weggelakt BSN in seconden terug te rekenen.
+        await toon(tester, bundleMetManifest);
+
+        expect(find.textContaining(kRedactionManifestSuffix), findsOneWidget);
+        expect(find.textContaining(kRedactionKeysSuffix), findsOneWidget);
+        expect(
+          find.textContaining('Stuur dit bestand niet mee'),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets('zonder redacties zwijgt het dialoog erover', (tester) async {
+      // Een waarschuwing bij een export zonder redacties is ruis, en ruis
+      // leert de gebruiker deze alinea over te slaan.
+      await toon(tester, _emptyBundle);
+
+      expect(find.textContaining(kRedactionKeysSuffix), findsNothing);
+    });
+  });
+
   testWidgets('shows quality banner when issues are present', (tester) async {
     await tester.pumpWidget(
       MaterialApp(

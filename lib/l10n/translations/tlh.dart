@@ -1799,6 +1799,18 @@ const _dutchSourceAddTlh = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · \'elmeH nav SQL-injection',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?': 'HaSta vam AIvaD DangeH\'a\'?',
+  'De afbeelding gaat ongewijzigd naar': 'HaSta choHbe\'lu\'bogh poQ',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'HaSta qoDDaq pagh So\' OciDeck: qabmey, ghItlh, leghlu\'bogh De\' je ngeHlu\'.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'naDev qabmey ngu\'lu\'bogh wa\' pagh law\' tu\' HaSta juvwI\'.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'ngeHtaHghach retlhDaq cha\' teywI\' chenmoHlu\'. So\'ta\'ghachmey toblaH HevwI\'.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'So\'lu\'bogh Dochmey tetlh ghaj, \'ach De\' ngaSbe\'. ghItlh tlhej ngeHlu\'laH teywI\'vam.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'So\'lu\'bogh Hoch De\' ngaQHa\'moHmeH ngaQHa\'moHwI\'mey ngaS. teywI\'vam yIngeHQo\': vaj So\'ta\'ghach chIlHa\'lu\'. mung retlhDaq yIpol.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  CVE qawHaq Sumbogh (SoH DaHoSmoH download): api.github.com lo\'taHvIS De\' law\' Sam OciDeck \'ej Daqvetlh \'angbogh release De\'wI\' nav Sam.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

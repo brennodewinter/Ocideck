@@ -1828,6 +1828,18 @@ const _dutchSourceAddGsw = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · SQL-Injection im Aamäldeformular',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?': 'Das Bild as KI-Modäll schicke?',
+  'De afbeelding gaat ongewijzigd naar': 'S Bild gaht unveränderet a',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck schwärzt i mene Bild nüt: Gsichter, Täxt uf eme Screenshot und sichtbari Date gönd mit.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'D Bildkontrolle het do ei oder meh erkennbari Gsichter gfunde.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Näbem Export wärded zwei Dateie abgleit, womit en Empfänger d Schwärzige cha nachprüefe.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'listet uf, was weggloh worde isch, ohni d Wärt sälber. Die Datei tarf mit em Bricht mit.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'enthaltet d Schlüssel, wo mer dermit jede gschwärzti Wärt zrugg cha rächne. Schick die Datei nöd mit: susch isch d Schwärzig ufghobe. Bhalt sie bi de Quelle.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  D lokal CVE-Datebank (de Download startisch du sälber): OciDeck holt d Massedate über api.github.com und d Release-Datei, wo die Adrässe druf zeigt.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

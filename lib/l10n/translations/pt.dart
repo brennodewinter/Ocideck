@@ -1854,6 +1854,20 @@ const _dutchSourceAddPt = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · Injeção de SQL no formulário de início de sessão',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Enviar esta imagem para o modelo de IA?',
+  'De afbeelding gaat ongewijzigd naar':
+      'A imagem será enviada inalterada para',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'O OciDeck não oculta nada dentro de uma imagem: rostos, texto numa captura de ecrã e dados visíveis seguem juntos.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'A verificação de imagens encontrou aqui um ou mais rostos reconhecíveis.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Junto à exportação são criados dois ficheiros que permitem ao destinatário verificar as ocultações.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'enumera o que foi omitido, sem os próprios valores. Este ficheiro pode seguir com o relatório.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'contém as chaves que permitem recalcular cada valor ocultado. Não envie este ficheiro: assim a ocultação fica anulada. Guarde-o junto da fonte.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  A base de dados CVE local (é você que inicia a transferência): o OciDeck obtém os dados em massa através de api.github.com e do ficheiro de lançamento para o qual esse endereço aponta.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

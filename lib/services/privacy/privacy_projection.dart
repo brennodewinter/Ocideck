@@ -22,6 +22,7 @@ import '../../models/deck.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
+import '../../models/used_tool.dart';
 import 'privacy_own_identity.dart';
 import 'privacy_scanner.dart';
 
@@ -160,8 +161,8 @@ class PrivacyProjection {
       active: deckRedact,
     );
 
-    String deckField(String field, String text) {
-      final result = _redact(text, deckFindings['$field:0'] ?? const []);
+    String deckField(String field, String text, [int index = 0]) {
+      final result = _redact(text, deckFindings['$field:$index'] ?? const []);
       count += result.count;
       return result.text;
     }
@@ -193,6 +194,13 @@ class PrivacyProjection {
     // plaats van voorkomen: de presenter schrijft de notitiemap in haar geheel
     // terug, dus één bewerking tijdens het presenteren zou blokken over iemands
     // eigen aantekeningen zetten.
+    // De volgorde van de lijsten en de maps moet dezelfde zijn als in
+    // `_deckFragments`: de scanner nummert daar op positie, niet op sleutel.
+    // Dart-maps itereren in invoegvolgorde, dus dat komt overeen — maar
+    // sorteren of filteren zou de indexen laten verschuiven, en dan landt een
+    // redactie op de motivering van een ándere eis.
+    var waiverIndex = 0;
+    var confirmationIndex = 0;
     final projected = deck.copyWith(
       slides: slides,
       title: deckField('deckTitle', deck.title),
@@ -200,6 +208,37 @@ class PrivacyProjection {
       organization: deckField('organization', deck.organization),
       description: deckField('description', deck.description),
       keywords: deckField('keywords', deck.keywords),
+      // Version en date komen uit hetzelfde dialoogvenster als de vijf
+      // hierboven en belanden in dezelfde front matter. Ze werden wél gescand
+      // maar niet geredigeerd: de exportpoort meldde dan een bevinding die de
+      // gebruiker met "redigeren" niet kón oplossen.
+      version: deckField('version', deck.version),
+      date: deckField('date', deck.date),
+      standardsUsed: [
+        for (var i = 0; i < deck.standardsUsed.length; i++)
+          deckField('standardsUsed', deck.standardsUsed[i], i),
+      ],
+      toolsUsed: [
+        for (var i = 0; i < deck.toolsUsed.length; i++)
+          UsedTool(
+            name: deckField('toolsUsed', deck.toolsUsed[i].name, i),
+            version: deck.toolsUsed[i].version,
+            url: deck.toolsUsed[i].url,
+            description: deck.toolsUsed[i].description,
+          ),
+      ],
+      // De MIAUW-motiveringen reizen base64-gecodeerd mee in de front matter:
+      // onzichtbaar voor wie het bestand naleest, en dus ook voor elk vangnet
+      // dat op platte tekst zoekt. Juist daar staat het vaakst een naam
+      // ("uitgesloten op verzoek van …").
+      miauwWaivers: {
+        for (final e in deck.miauwWaivers.entries)
+          e.key: deckField('miauwWaivers', e.value, waiverIndex++),
+      },
+      miauwConfirmations: {
+        for (final e in deck.miauwConfirmations.entries)
+          e.key: deckField('miauwConfirmations', e.value, confirmationIndex++),
+      },
     );
 
     return AudienceDeck._(projected, count, shielded);
@@ -279,6 +318,11 @@ class PrivacyProjection {
       quoteAuthor: field('quoteAuthor', slide.quoteAuthor),
       customMarkdown: field('customMarkdown', slide.customMarkdown),
       notes: field('notes', slide.notes),
+      // Het scope-object van een checklist. Het wordt gescand én het staat op
+      // de dia (`checklist_preview.dart`), maar het werd nooit geredigeerd: een
+      // scope-URL met een tenant- of gebruikersnaam erin ging mee in
+      // PDF-pixels, PPTX, beamer én HTML, ook in het profiel *geredigeerd*.
+      checklistScope: field('checklistScope', slide.checklistScope),
       bullets: [
         for (var i = 0; i < slide.bullets.length; i++)
           field('bullets', slide.bullets[i], i),

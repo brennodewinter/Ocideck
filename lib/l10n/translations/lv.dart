@@ -1823,6 +1823,19 @@ const _dutchSourceAddLv = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · SQL injekcija pieteikšanās formā',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Vai nosūtīt šo attēlu MI modelim?',
+  'De afbeelding gaat ongewijzigd naar': 'Attēls tiks nosūtīts nemainīts uz',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck attēlā neko neaizklāj: sejas, teksts ekrānuzņēmumā un redzamie dati tiek nosūtīti līdzi.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Attēlu pārbaude šeit atrada vienu vai vairākas atpazīstamas sejas.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Blakus eksportam tiek izveidoti divi faili, ar kuriem saņēmējs var pārbaudīt aizklājumus.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'uzskaita, kas ir izlaists, bez pašām vērtībām. Šo failu drīkst sūtīt kopā ar ziņojumu.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'satur atslēgas, ar kurām katru aizklāto vērtību var atrēķināt atpakaļ. Nesūtiet šo failu līdzi: tad aizklāšana ir atcelta. Glabājiet to pie avota.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Vietējā CVE datubāze (lejupielādi sākat jūs pats): OciDeck iegūst apjoma datus caur api.github.com un laidiena failu, uz kuru šī adrese norāda.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

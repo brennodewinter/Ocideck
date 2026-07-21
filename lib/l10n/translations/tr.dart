@@ -2806,6 +2806,19 @@ const _dutchSourceAddTr = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · Oturum açma formunda SQL enjeksiyonu',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Bu görsel AI modeline gönderilsin mi?',
+  'De afbeelding gaat ongewijzigd naar': 'Görsel olduğu gibi şuraya gönderilir',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck bir görselin içinde hiçbir şeyi redakte etmez: yüzler, ekran görüntüsündeki metin ve görünen veriler de gider.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Görsel denetimi burada bir veya daha fazla tanınabilir yüz buldu.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Dışa aktarmanın yanına, alıcının redaksiyonları doğrulayabileceği iki dosya yazılır.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'değerlerin kendisi olmadan nelerin çıkarıldığını listeler. Bu dosya raporla birlikte gönderilebilir.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'redakte edilmiş her değerin geri hesaplanmasını sağlayan anahtarları içerir. Bu dosyayı birlikte göndermeyin: redaksiyon böylece geçersiz olur. Onu kaynağın yanında saklayın.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Yerel CVE veri tabanı (indirmeyi siz başlatırsınız): OciDeck toplu verileri api.github.com üzerinden ve o adresin işaret ettiği sürüm dosyasından alır.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

@@ -790,6 +790,19 @@ const _dutchSourceAddIt = {
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · SQL injection nel modulo di accesso',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Inviare questa immagine al modello IA?',
+  'De afbeelding gaat ongewijzigd naar': 'L\'immagine sarà inviata invariata a',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck non oscura nulla dentro un\'immagine: volti, testo in una schermata e dati visibili vengono inviati.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Il controllo delle immagini ha trovato qui uno o più volti riconoscibili.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Accanto all\'esportazione vengono creati due file con cui il destinatario può verificare gli oscuramenti.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'elenca ciò che è stato omesso, senza i valori stessi. Questo file può accompagnare il rapporto.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'contiene le chiavi con cui ogni valore oscurato può essere ricostruito. Non inviare questo file: l\'oscuramento sarebbe annullato. Conservalo presso la fonte.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  La banca dati CVE locale (sei tu ad avviare il download): OciDeck recupera i dati in blocco tramite api.github.com e il file di rilascio a cui quell\'indirizzo rimanda.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

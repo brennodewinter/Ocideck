@@ -1842,6 +1842,20 @@ const _dutchSourceAddRo = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · Injecție SQL în formularul de autentificare',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Trimiteți această imagine către modelul IA?',
+  'De afbeelding gaat ongewijzigd naar':
+      'Imaginea va fi trimisă nemodificată către',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck nu redactează nimic într-o imagine: chipurile, textul dintr-o captură de ecran și datele vizibile pleacă odată cu ea.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Verificarea imaginilor a găsit aici unul sau mai multe chipuri recognoscibile.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Lângă export sunt create două fișiere cu care destinatarul poate verifica redactările.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'enumeră ce a fost omis, fără valorile propriu-zise. Acest fișier poate însoți raportul.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'conține cheile cu care fiecare valoare redactată poate fi recalculată. Nu trimite acest fișier: astfel redactarea este anulată. Păstrează-l lângă sursă.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Baza de date CVE locală (descărcarea o porniți dumneavoastră): OciDeck preia datele în masă prin api.github.com și fișierul de lansare către care indică acea adresă.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

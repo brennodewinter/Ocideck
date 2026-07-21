@@ -1860,6 +1860,19 @@ const _dutchSourceAddGa = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · Instealladh SQL san fhoirm logála isteach',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'An íomhá seo a sheoladh chuig an tsamhail II?',
+  'De afbeelding gaat ongewijzigd naar': 'Seolfar an íomhá gan athrú chuig',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'Ní fholaíonn OciDeck aon rud laistigh d\'íomhá: seoltar aghaidheanna, téacs ar ghabháil scáileáin agus sonraí atá le feiceáil leis.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Fuair an tseiceáil íomhánna aghaidh inaitheanta amháin nó níos mó anseo.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Cruthaítear dhá chomhad in aice leis an easpórtáil, ionas gur féidir leis an bhfaighteoir na foluithe a sheiceáil.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'liostaíonn sé a bhfuil fágtha ar lár, gan na luachanna féin. Is féidir an comhad seo a chur leis an tuairisc.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'tá na heochracha ann lenar féidir gach luach folaithe a ríomh ar ais. Ná seol an comhad seo leis: cuirtear an folú ar ceal ansin. Coinnigh in aice leis an bhfoinse é.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  An bunachar sonraí CVE áitiúil (tusa a chuireann an íoslódáil ar bun): faigheann OciDeck na sonraí ollmhóra trí api.github.com agus an comhad eisiúna a bhfuil an seoladh sin ag díriú air.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

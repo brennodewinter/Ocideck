@@ -1,5 +1,4 @@
 import '../../utils/image_limits.dart' show boundedFileImage;
-import '../../models/ai_settings.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,6 +19,7 @@ import '../../state/settings_provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/log.dart';
 import '../../theme/app_theme.dart';
+import 'ai_image_outbound_dialog.dart';
 
 part 'parts/image_carousel_picker_actions.dart';
 part 'parts/image_carousel_picker_delete.dart';

@@ -1823,6 +1823,19 @@ const _dutchSourceAddDa = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · SQL-injektion i loginformularen',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Send dette billede til AI-modellen?',
+  'De afbeelding gaat ongewijzigd naar': 'Billedet sendes uændret til',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck redigerer intet bort i et billede: ansigter, tekst på et skærmbillede og synlige data følger med.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Billedkontrollen fandt her et eller flere genkendelige ansigter.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Ved siden af eksporten lægges der to filer, som modtageren kan bruge til at efterprøve redigeringerne.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'opregner, hvad der er udeladt, uden selve værdierne. Denne fil må følge med rapporten.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'indeholder de nøgler, som enhver bortredigeret værdi kan regnes tilbage med. Send ikke denne fil med: så er redigeringen ophævet. Opbevar den ved kilden.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Den lokale CVE-database (du starter selv downloaden): OciDeck henter massedataene via api.github.com og den udgivelsesfil, som den adresse peger på.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

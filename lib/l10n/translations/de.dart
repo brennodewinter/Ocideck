@@ -793,6 +793,19 @@ const _dutchSourceAddDe = {
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · SQL-Injection im Anmeldeformular',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Dieses Bild an das KI-Modell senden?',
+  'De afbeelding gaat ongewijzigd naar': 'Das Bild geht unverändert an',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck schwärzt nichts in einem Bild: Gesichter, Text auf einem Bildschirmfoto und sichtbare Daten gehen mit.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Die Bildprüfung hat hier ein oder mehrere erkennbare Gesichter gefunden.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Neben dem Export werden zwei Dateien abgelegt, mit denen ein Empfänger die Schwärzungen nachprüfen kann.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'listet auf, was weggelassen wurde, ohne die Werte selbst. Diese Datei darf mit dem Bericht mitgehen.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'enthält die Schlüssel, mit denen sich jeder geschwärzte Wert zurückrechnen lässt. Senden Sie diese Datei nicht mit: damit ist die Schwärzung aufgehoben. Bewahren Sie sie bei der Quelle auf.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Die lokale CVE-Datenbank (den Download starten Sie selbst): OciDeck holt die Massendaten über api.github.com und die Release-Datei, auf die diese Adresse verweist.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
