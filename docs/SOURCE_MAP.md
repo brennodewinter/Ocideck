@@ -69,7 +69,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `ai_client_service.dart` — The gated, provider-agnostic `/v1` client for the optional local AI backend.
 - `ai_request.dart` — `AiChatRequest`/`AiMessage`/`AiImagePart` request model + the shared system guardrail prompt.
 - `ai_security_gate.dart` — Enforces the AI opt-in/consent/endpoint gate before any outbound AI call.
-- `annotation_codec.dart` — Serializes slide annotation layers with content fingerprints.
+- `annotation_codec.dart` — Serializes slide annotation layers with content fingerprints. Refuses a sidecar from a newer build (`sidecar_format.dart`) rather than loading the part it recognises.
 - `audit_dossier.dart` — `buildAuditDossier`: the MIAUW §10.11 audit-dossier index (report identity, seal facts, summary, compliance tally, evidence hash table) as deterministic Markdown.
 - `caption_service.dart` — Stores image captions in JSON sidecars per image directory.
 - `classification_enforcement_policy.dart` — Enforces deck TLP classification rules on export (the authoritative gate).
@@ -111,8 +111,9 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `markdown_body_blocks.dart` — Splits markdown into code blocks and paragraphs.
 - `markdown_safety.dart` — Scans raw `.md` for executable content and blocks unsafe imports.
 - `management_summary.dart` — Derives the management summary from the deck (severity counts, scope coverage, standards used).
-- `front_matter_merge.dart` — The front-matter half of the file-format contract: which keys OciDeck owns, the `ocideck_format` version rules, and the surgical update that leaves every other line untouched.
-- `markdown_service.dart` — Serializes decks to Marp markdown and parses it back (the file-format contract).
+- `front_matter_merge.dart` — The front-matter half of the file-format contract: which keys OciDeck owns, the `ocideck_format` version rules, and the surgical update that leaves every other line untouched. Also the definition of "a key sits at column 0, an indented line belongs to the block above" that the reader, the writer and the checker all share — without it, CSS inside a `style: |` block set deck fields. `kRetiredFrontMatterKeys` holds the keys OciDeck no longer writes but still owns: taking them off the list entirely would mean "unknown, so leave it alone", and the base64 would stay in the file forever.
+- `markdown_service.dart` — Serializes decks to Marp markdown and parses it back (the file-format contract). Writes **no base64**: what is opaque, or is about the document instead of in it, lives in a sidecar. Part `parts/markdown_service_parse_front_matter.dart` holds the `--- … ---` header; `parts/markdown_service_parse_columns.dart` reads the visible `<h3>`/`<ul><li>` of a two-column slide, which is the content itself rather than a rendering of a comment above it. The reader takes a slide's type from the same registry the writer uses (`slideTypeByMarpClass` in `models/slide.dart`) instead of its own list of string literals.
+- `miauw_codec.dart` — The MIAUW disposition (client exclusions and confirmations) as the `<name>.miauw.json` sidecar, plus the read-only decoder for the base64 front-matter keys it replaced, so an older file still opens.
 - `markdown_service_finding.dart` — Parses/serializes the `finding` slide group's id/role markers and header spec.
 - `markdown_validator.dart` — Line-anchored structural pre-flight against the parser's expectations.
 - `marp_html_service.dart` — Builds the self-contained, sanitised HTML export with embedded assets.
@@ -156,6 +157,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `rich_text_layout.dart` — Computes pagination and scaling for rich-text markdown bodies.
 - `scope_coverage.dart` — `deckScopeCoverageGaps`: flags in-scope objects with no test and no finding.
 - `finding_context_score.dart` — builds the deck's scope-object→CIA index and derives each finding's context (environmental) score / effective severity from it.
+- `sidecar_format.dart` — The version contract shared by every sidecar next to a `.md`: a file declaring a higher version is not loaded **and** not overwritten. Refusing to read while still saving over it is worse than reading half, not better — the deck holds nothing in memory, so the save reads as "there is nothing here".
 - `secret_store.dart` — Manages secrets (WebDAV credentials, S3 secret access key, git token, AI API key) in the OS keychain.
 - `slide_layout_metrics.dart` — Layout constants/helpers for text sizing, fonts, and fit scaling; `bulletFitCounts` measures how many bullets fit at natural size (the input to the "Split slide" page capacity).
 - `bullet_pagination.dart` — Pure "Split slide" pagination (`chunkBullets`, `splitBulletsIntoPages`/`splitTwoColumnsIntoPages`): fills pages of a fixed size with the remainder last, never leaving a page under `kMinPageBullets`, and halves a list that already fits. Counts bullets and nothing else — measuring what physically fits used to collapse the page size and turn one slide into a stack.
@@ -163,7 +165,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `slide_quality_analyzer.dart` — Checks deck slides for accessibility and readability issues. Note that the split-run check (`_checkSplitRuns`, in the density part) runs *outside* the per-slide memo: whether a slide renders small depends on its neighbours, and that cache is keyed on slide identity.
 - `slide_rasterizer.dart` — Renders on-screen slide previews to PNG for WYSIWYG PDF/PPTX export.
 - `text_measurement.dart` — `measureTextHeight`/`measureTextWidth` for rendered text dimensions.
-- `user_notes_codec.dart` — Serializes per-slide user notes with content fingerprints.
+- `user_notes_codec.dart` — Serializes per-slide user notes with content fingerprints. Same version rule as `annotation_codec.dart` — it used to read an unknown version `3` as a `2`, which loaded half a file and then wrote that half back.
 - `web_asset_store.dart` — In-memory afbeeldingsopslag (`mem:`-paden) voor de webversie; per-pagina levensduur. `retain` ruimt de assets op die nergens meer gebruikt worden; `TabsNotifier.sweepWebAssets` stelt de complete levende verzameling samen (alle tabbladen + ongedaan/opnieuw + klembord) en roept dat aan na dia-verwijdering en opslag.
 - `s3/s3_sigv4.dart` — AWS Signature Version 4, written by hand rather than pulled from an SDK: an SDK brings its own HTTP stack and would connect around `NetGuard`, losing the socket pinning every other network source applies. Signing only, no network, so it is testable against fixed vectors (`test/s3_sigv4_test.dart`, cross-checked against botocore).
 - `s3/s3_service.dart` — Talks S3 (and S3-compatible endpoints) over a pinned, redirect-free `HttpClient` with SigV4. Lists with a delimiter so prefixes behave as folders. Conditional writes use `If-Match`, but not every S3-compatible endpoint supports them — AWS only since 2024 — so an endpoint that refuses the condition yields `S3Error.conditionalUnsupported` rather than silently overwriting.

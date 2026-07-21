@@ -10,6 +10,28 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Changed
+- **Geen base64 meer in uw presentatiebestand.** De belofte van OciDeck is dat u
+  met alleen een teksteditor en Marp verder kunt. Op zeven plekken klopte dat
+  niet: daar stond een blok onleesbare tekens waar uw inhoud in verstopt zat.
+
+  Het pijnlijkst was de tweekolomsdia. De twee kolommen stonden als base64 in
+  commentaar bovenaan, en de nette `<ul><li>` eronder was slechts een plaatje
+  van diezelfde inhoud. Wie die zichtbare lijst aanpaste, zag zijn wijziging bij
+  het openen verdwijnen — en wie zelf een tweekolomsdia typte, kreeg twee lege
+  kolommen terug. Die dia leest nu gewoon wat er staat: `<h3>` is de kolomkop,
+  `<li>` is een punt, inspringing is een niveau, `☑`/`☐` maakt er een
+  aankruislijst van. Ook een punt met HTML of een liggend streepje erin
+  overleeft dat — precies waarvoor die base64 ooit bedoeld was.
+
+  De drie blokken in de kop van het bestand zijn er ook uit. Het stijlprofiel
+  reisde alleen mee naar het tweede scherm en gaat nu naast de tekst mee in
+  plaats van erin. De afspraken met de klant over de MIAUW-eisen (uitsluitingen
+  en bevestigingen) staan voortaan in `<naam>.miauw.json`, naast uw tekeningen
+  en aantekeningen — het gaat immers óver het rapport, niet erin. Die reist mee
+  naar de prullenbak, in een pakket en in het herstelbestand.
+
+  **Bestaande bestanden hoeft u nergens voor om te zetten.** Ze openen zoals ze
+  zijn; bij de eerstvolgende keer opslaan staat alles in de nieuwe vorm.
 - **De documentatie belooft niet langer meer dan de app doet.** Elf beoordelaars
   liepen de teksten na en vonden op een reeks plekken een belofte die ruimer was
   dan de code. Die zijn teruggebracht tot wat er werkelijk gebeurt, met de datum
@@ -50,7 +72,20 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   dat nu. De twee andere getallen in diezelfde tabel (bestandslengte 1000,
   methodelengte 150) zijn tegen `tool/check_conventions.dart` en
   `tool/check_method_length.dart` nagelopen en kloppen wel.
-
+- **Een `style:`-blok in de kop van het bestand blijft een blok.** Zette u daar
+  Marp-CSS in met een regel die op `thema: iets` leek, dan las OciDeck dat als
+  het thema van de presentatie, en kwam er bij het opslaan een tweede
+  `theme:`-regel bij. De ingebouwde controle klaagde bovendien over elke regel
+  van dat blok. Lezen, schrijven en controleren hanteren nu dezelfde regel.
+- **Een aankruislijst kunt u weer uitzetten door de vinkjes weg te halen.** De
+  zichtbare opmaak kon de lijststijl wel aanzetten maar nooit terug; haalde u
+  de hokjes weg, dan bleef het een aankruislijst.
+- **Een bestand van een nieuwere OciDeck wordt niet meer half gelezen.** De
+  bestanden naast uw presentatie — tekeningen, aantekeningen — dragen een
+  versienummer. Dat werd niet of verkeerd gelezen: wat een nieuwere versie erin
+  had gezet werd voor de helft ingeladen, en bij het eerstvolgende opslaan
+  verdween de rest. Nu wordt zo'n bestand niet geladen én niet overschreven, dus
+  het blijft heel tot u het opent met een versie die het begrijpt.
 - **Wat u zelf in de kop van een bestand zet, blijft nu staan.** Zette u met de
   hand een `header:`, `footer:`, `size:` of `style:` in de front matter — gewone
   Marp-opties — dan was die verdwenen zodra OciDeck het bestand één keer had
