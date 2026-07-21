@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 /// Dit is een op zichzelf staande donkere chrome — géén onderdeel van het
 /// lichte app-thema. Daarom een eigen palet in plaats van [AppTheme]-tokens;
 /// de conventie-ratchet op rauwe `Color(0x…)` zondert dit bestand bewust uit.
-class ImagePickerPalette {
-  const ImagePickerPalette._();
+abstract final class ImagePickerPalette {
 
   // Oppervlakken (donker → lichter)
   static const bgDeepest = Color(0xFF080D14);

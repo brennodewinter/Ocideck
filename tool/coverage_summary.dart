@@ -157,6 +157,14 @@ const Set<String> uncoveredBaseline = {
   'lib/services/cve/local_cve_database_api.dart',
   // NO EXECUTABLE LINES: a single enum declaration.
   'lib/widgets/markdown_editor/notes_editor_mode.dart',
+  // NO EXECUTABLE LINES: the two stand-alone dark palettes — nothing but
+  // `static const Color` tokens. They used to hold one unreachable line each (a
+  // private constructor that existed only to block instantiation) and therefore
+  // sat at 0% forever, which no test could ever fix. They are now
+  // `abstract final class`, the way `finding_severity_palette.dart` already
+  // did it, which says the same thing without a statement to reach.
+  'lib/theme/image_picker_palette.dart',
+  'lib/theme/presenter_palette.dart',
 };
 
 /// The per-file coverage floor: a lib/ file below this fraction of executed
