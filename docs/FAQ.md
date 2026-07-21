@@ -13,14 +13,28 @@ OciDeck supports information autonomy through several key principles:
 5. **Open Standards**: Uses standard Marp Markdown format for maximum interoperability
 
 ### How does OciDeck differ from other presentation tools?
-- **Security Focused**: No application backend means no data leaves your device during processing
-- **Privacy First**: Built-in privacy scanning (OciWacht) to detect sensitive information  
-- **Marp Compatible**: Full compatibility with standard Marp Markdown format
-- **Cross-platform**: Available for macOS, Windows, Linux desktop and web browsers
+- **Security Focused**: There is no application backend for editing; your deck is
+  processed on your device. The network requests that do happen — including the
+  few whose address you did not choose — are listed in
+  [PRIVACY.md](PRIVACY.md#what-leaves-your-device--and-only-when-you-ask).
+- **Privacy First**: Built-in privacy scanning (OciWacht) to detect sensitive information
+- **Marp Compatible**: Reads and writes standard Marp Markdown, so a deck stays
+  usable in other Marp tools
+- **Cross-platform**: Builds for macOS, Windows and Linux desktop, and for the
+  browser
 - **No Telemetry**: Zero tracking or analytics of any kind
 
 ### Is OciDeck free to use?
-Yes, OciDeck is released under the EUPL-1.2 open-source license and is completely free to download and use.
+Yes. OciDeck is released under the EUPL-1.2 open-source licence, which costs
+nothing and lets you use, study, change and redistribute it.
+
+There is, however, **nothing to download yet**. No version has been tagged, no
+signed build is published, and there is no download page or installer. The only
+way to run OciDeck today is to build it from source — see
+[BUILD.md](BUILD.md) and the *Getting started* section of the
+[README](../README.md), which needs the pinned Flutter toolchain. *Corrected
+2026-07-21: this answer used to say OciDeck is "completely free to download and
+use", which described a distribution that does not exist.*
 
 ## Security and Privacy
 
