@@ -1791,6 +1791,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Zegel en handtekening': 'Pieczęć i podpis',
   'Zegel nog niet vastgelegd': 'Pieczęć jeszcze nie zapisana',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Nie ma jeszcze zapisanego pliku, względem którego można sprawdzić pieczęć. Zapisz prezentację.',

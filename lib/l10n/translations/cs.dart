@@ -1782,6 +1782,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Zegel en handtekening': 'Pečeť a podpis',
   'Zegel nog niet vastgelegd': 'Pečeť zatím nezaznamenána',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Zatím neexistuje uložený soubor, proti kterému by šlo pečeť přepočítat. Uložte prezentaci.',

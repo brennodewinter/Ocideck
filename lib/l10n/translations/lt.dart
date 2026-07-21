@@ -1787,6 +1787,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Zegel en handtekening': 'Antspaudas ir parašas',
   'Zegel nog niet vastgelegd': 'Antspaudas dar neįrašytas',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Dar nėra įrašyto failo, pagal kurį būtų galima patikrinti antspaudą. Išsaugokite rinkinį.',

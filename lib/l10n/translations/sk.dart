@@ -1786,6 +1786,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Zegel en handtekening': 'Pečať a podpis',
   'Zegel nog niet vastgelegd': 'Pečať zatiaľ nezaznamenaná',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Zatiaľ neexistuje uložený súbor, voči ktorému by sa dala pečať prepočítať. Uložte balík.',

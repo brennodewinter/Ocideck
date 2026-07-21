@@ -1807,6 +1807,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Zegel en handtekening': 'Σφραγίδα και υπογραφή',
   'Zegel nog niet vastgelegd': 'Η σφραγίδα δεν καταγράφηκε ακόμη',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Δεν υπάρχει ακόμη αποθηκευμένο αρχείο για να ελεγχθεί η σφραγίδα. Αποθηκεύστε το deck.',

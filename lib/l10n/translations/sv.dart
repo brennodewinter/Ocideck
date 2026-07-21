@@ -1778,6 +1778,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Zegel en handtekening': 'Sigill och signatur',
   'Zegel nog niet vastgelegd': 'Sigill ännu inte fastställt',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Det finns ännu ingen sparad fil att kontrollera sigillet mot. Spara decket.',

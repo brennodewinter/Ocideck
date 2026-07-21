@@ -1786,6 +1786,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Zegel en handtekening': 'Pečat i potpis',
   'Zegel nog niet vastgelegd': 'Pečat još nije zabilježen',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Još ne postoji spremljena datoteka prema kojoj bi se pečat mogao provjeriti. Spremite prezentaciju.',

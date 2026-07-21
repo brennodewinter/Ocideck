@@ -1778,6 +1778,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Zegel en handtekening': 'Zīmogs un paraksts',
   'Zegel nog niet vastgelegd': 'Zīmogs vēl nav fiksēts',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Vēl nav saglabāta faila, pret kuru pārbaudīt zīmogu. Saglabājiet deku.',

@@ -1783,6 +1783,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Zegel en handtekening': 'Sigel und Underschrift',
   'Zegel nog niet vastgelegd': 'Sigel no nöd festghalte',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Es git no kei gspeicherti Datei, wo mer s Sigel chönnt nachrächne. Speichere s Deck.',

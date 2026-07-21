@@ -1778,6 +1778,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Zegel en handtekening': 'Segl og underskrift',
   'Zegel nog niet vastgelegd': 'Segl endnu ikke fastlagt',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Der er endnu ingen gemt fil at kontrollere seglet imod. Gem decket.',

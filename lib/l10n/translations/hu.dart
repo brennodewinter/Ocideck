@@ -1783,6 +1783,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Zegel en handtekening': 'Pecsét és aláírás',
   'Zegel nog niet vastgelegd': 'A pecsét még nincs rögzítve',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Még nincs mentett fájl, amelyhez a pecsétet ellenőrizni lehetne. Mentse el a diasort.',

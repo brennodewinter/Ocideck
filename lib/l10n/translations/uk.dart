@@ -1797,6 +1797,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Zegel en handtekening': 'Печатка та підпис',
   'Zegel nog niet vastgelegd': 'Печатку ще не зафіксовано',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Ще немає збереженого файлу, за яким можна перевірити печатку. Збережіть презентацію.',

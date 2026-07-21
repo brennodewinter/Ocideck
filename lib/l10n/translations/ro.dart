@@ -1797,6 +1797,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Zegel en handtekening': 'Sigiliu și semnătură',
   'Zegel nog niet vastgelegd': 'Sigiliu încă neînregistrat',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Încă nu există un fișier salvat față de care să fie verificat sigiliul. Salvați deck-ul.',

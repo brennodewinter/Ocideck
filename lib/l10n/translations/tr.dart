@@ -2761,6 +2761,7 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Zegel en handtekening': 'Mühür ve imza',
   'Zegel nog niet vastgelegd': 'Mühür henüz kaydedilmedi',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Mührün karşılaştırılacağı kayıtlı bir dosya henüz yok. Sunumu kaydedin.',

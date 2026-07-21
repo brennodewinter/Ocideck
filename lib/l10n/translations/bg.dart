@@ -1802,6 +1802,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Zegel en handtekening': 'Печат и подпис',
   'Zegel nog niet vastgelegd': 'Печатът още не е записан',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Още няма запазен файл, спрямо който печатът да бъде проверен. Запазете дека.',

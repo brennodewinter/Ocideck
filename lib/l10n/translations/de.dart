@@ -736,6 +736,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Zegel en handtekening': 'Siegel und Unterschrift',
   'Zegel nog niet vastgelegd': 'Siegel noch nicht festgeschrieben',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Es gibt noch keine gespeicherte Datei, anhand derer das Siegel nachgerechnet werden kann. Speichern Sie das Deck.',

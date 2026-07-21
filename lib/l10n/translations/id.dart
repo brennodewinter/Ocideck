@@ -1779,6 +1779,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Zegel en handtekening': 'Segel dan tanda tangan',
   'Zegel nog niet vastgelegd': 'Segel belum dicatat',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Belum ada berkas tersimpan untuk memeriksa segel. Simpan deck.',

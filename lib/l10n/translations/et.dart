@@ -1770,6 +1770,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Zegel en handtekening': 'Pitser ja allkiri',
   'Zegel nog niet vastgelegd': 'Pitser pole veel fikseeritud',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Salvestatud faili, mille vastu pitserit kontrollida, veel ei ole. Salvesta esitlus.',
