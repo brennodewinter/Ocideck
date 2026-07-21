@@ -706,12 +706,18 @@ Future<void> _searchDecks(BuildContext context, WidgetRef ref) async {
 
   final config = connection.repo;
 
-  // Op desktop met een lokale clone versnelt `git grep` het zoeken: het leest
-  // alleen de matchende decks in plaats van elk deck. Elders (web, of nog geen
-  // clone) blijft de shortlister null en valt DeckSearch terug op de volledige
-  // scan, die overal werkt.
+  // Kies de goedkoopste versneller die kan. Native `git grep` over een lokale
+  // clone is volledig en forge-onafhankelijk; kan dat niet (web, of nog geen
+  // clone), dan de server-codezoekopdracht van GitHub/GitLab — geïndexeerd, dus
+  // best-effort. Kan geen van beide, dan blijft de shortlister null en valt
+  // DeckSearch terug op de volledige scan, die overal werkt.
   final mirror = await ref.read(nativeGitMirrorProvider(connection.id).future);
   if (!context.mounted) return;
+  final DeckShortlister? shortlister = mirror != null
+      ? NativeGrepShortlister(mirror)
+      : forge is CodeSearchCapable
+      ? ServerCodeSearchShortlister(forge)
+      : null;
 
   final deckDir = await showDialog<String>(
     context: context,
@@ -719,7 +725,7 @@ Future<void> _searchDecks(BuildContext context, WidgetRef ref) async {
       searcher: DeckSearch(
         forge: forge,
         branch: config.defaultBranch,
-        shortlister: mirror == null ? null : NativeGrepShortlister(mirror),
+        shortlister: shortlister,
       ),
     ),
   );

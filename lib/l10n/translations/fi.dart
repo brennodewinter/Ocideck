@@ -1785,6 +1785,8 @@ const _dutchSourceAddFi = <String, String>{
   'Niet doorzocht': 'Ei haettu',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Tämä tarkistus ei toimi verkkoversiossa: kasvojen tunnistus vaatii järjestelmäkirjaston, jota selaimessa ei ole. Tarkista kuvien kasvot työpöytäversiolla.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'Nopea palvelinhaku — indeksoinnin viiveen vuoksi juuri muutettu pakka voi puuttua.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Mediaa ei säilytetä pelkässä .md-tiedostossa',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

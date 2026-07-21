@@ -270,8 +270,12 @@ saved version stays retrievable, which a plain folder cannot give you.
   if there were more hits than fit it says so instead of quietly cutting the
   list. On desktop, when the repository is cloned locally, it uses `git grep` to
   read only the decks that actually contain the term — much faster than reading
-  every one. Everywhere else (including in the browser) it falls back to scanning
-  every deck, which is why it runs when you press *Zoeken* — not while you type.
+  every one. Without a local clone (in the browser), on GitHub and GitLab it asks
+  the forge's own code search which decks match and reads only those; that path
+  is index-based, so a deck changed moments ago may not be included yet — the
+  dialog says so when that is the case. When neither is available (Gitea/Forgejo
+  has no code-search API) it falls back to scanning every deck, which is why it
+  runs when you press *Zoeken* — not while you type.
 - **Which decks use an image — *Afbeeldingen in de repository…*.** Images are
   stored once and shared by every deck that uses them, so before you touch one it
   helps to know who else depends on it. This overview lists every image in the

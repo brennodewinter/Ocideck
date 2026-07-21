@@ -1784,6 +1784,8 @@ const _dutchSourceAddDa = <String, String>{
   'Niet doorzocht': 'Ikke søgt',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Denne kontrol kører ikke i webversionen: ansigtsgenkendelse kræver et systembibliotek, som browseren ikke har. Brug desktopversionen til at tjekke billeder for ansigter.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'Hurtig søgning på serveren — på grund af indekseringsforsinkelse kan et netop ændret deck mangle.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Medier bevares ikke i en almindelig .md-fil',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

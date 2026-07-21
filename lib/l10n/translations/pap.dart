@@ -742,6 +742,8 @@ const _dutchSourceAddPap = {
   'Niet doorzocht': 'No buska',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'E kontrol aki no ta kore den e version web: detekshon di kara ta rekerí un biblioteka di sistema ku e browser no tin. Usa e version desktop pa chek kara den imagen.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'Buskeda rápido riba servidó — pa motibu di retraso di indeksashon, un dek net kambiá por falta.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Media no ta keda warda den un simpel archivo .md',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

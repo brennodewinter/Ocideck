@@ -1789,6 +1789,8 @@ const _dutchSourceAddGsw = <String, String>{
   'Niet doorzocht': 'Nöd durchsuecht',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Die Prüefig lauft i de Web-Version nöd: Gsichtserkennig bruucht e Systembibliothek, wo de Browser nöd het. Nimm d Desktop-Version, zum Bilder uf Gsichter z prüefe.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'Schnälli serversitigi Suech — wäge Indexierigsverzögerig cha nes grad gänderets Deck fähle.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Medie bliibe in ere blosse .md-Datei nöd erhalte',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

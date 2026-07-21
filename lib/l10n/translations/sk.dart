@@ -1792,6 +1792,8 @@ const _dutchSourceAddSk = <String, String>{
   'Niet doorzocht': 'Neprehľadané',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Táto kontrola sa vo webovej verzii nespúšťa: rozpoznávanie tvárí vyžaduje systémovú knižnicu, ktorú prehliadač nemá. Na kontrolu tvárí v obrázkoch použite desktopovú verziu.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'Rýchle hľadanie na serveri — pre oneskorenie indexovania môže chýbať práve zmenená sada.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Médiá sa v obyčajnom súbore .md nezachovajú',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

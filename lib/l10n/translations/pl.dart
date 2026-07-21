@@ -1797,6 +1797,8 @@ const _dutchSourceAddPl = <String, String>{
   'Niet doorzocht': 'Nie przeszukano',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Ta kontrola nie działa w wersji internetowej: wykrywanie twarzy wymaga biblioteki systemowej, której przeglądarka nie ma. Użyj wersji desktopowej, aby sprawdzić twarze na obrazach.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'Szybkie wyszukiwanie po stronie serwera — z powodu opóźnienia indeksowania niedawno zmieniona talia może się nie pojawić.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Multimedia nie są zachowywane w zwykłym pliku .md',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

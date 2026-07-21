@@ -21,7 +21,7 @@ import 'git_transport_factory.dart';
 /// - **De API-host verschilt van de web-host.** Voor github.com is dat
 ///   `api.github.com`; voor een eigen Enterprise-server is het `/api/v3` op
 ///   dezelfde host.
-class GitHubForge implements GitForge {
+class GitHubForge implements GitForge, CodeSearchCapable {
   GitHubForge({
     required this.config,
     required this.token,
@@ -73,6 +73,75 @@ class GitHubForge implements GitForge {
       ],
       queryParameters: query,
     );
+  }
+
+  /// De code-zoek-API zit niet onder `/repos/owner/repo` maar op `/search/code`
+  /// — op `api.github.com` voor github.com, op `/api/v3` voor Enterprise.
+  Uri _searchCodeUri(String q) {
+    final origin = config.origin;
+    if (origin == null) {
+      throw const GitForgeException(
+        GitForgeError.config,
+        'Ongeldige server-URL',
+      );
+    }
+    final host = origin.host.toLowerCase();
+    final isDotCom = host == 'github.com' || host == 'www.github.com';
+    final base = isDotCom
+        ? Uri.parse('https://api.github.com')
+        : origin.replace(pathSegments: const ['api', 'v3']);
+    return base.replace(
+      pathSegments: [
+        ...base.pathSegments.where((s) => s.isNotEmpty),
+        'search',
+        'code',
+      ],
+      queryParameters: {'q': q, 'per_page': '100'},
+    );
+  }
+
+  @override
+  Future<Set<String>?> searchDeckCodeDirs(
+    String needle, {
+    required String branch,
+    required String defaultBranch,
+  }) async {
+    final term = needle.trim();
+    if (term.isEmpty) return null;
+    // GitHub indexeert alléén de standaardbranch. Voor een andere branch kan het
+    // niet helpen — dan null, en de volledige scan neemt over.
+    if (branch.trim() != defaultBranch.trim()) return null;
+    final q =
+        '$term repo:${config.owner}/${config.repo} '
+        'path:${GitRepoLayout.decksRoot} filename:deck.md';
+    final GitResponse response;
+    try {
+      response = await _transport.get(
+        _searchCodeUri(q),
+        headers: _headers,
+        maxBytes: maxListingBytes,
+      );
+    } on GitForgeException {
+      // Host geweigerd of netwerk stuk: geen versnelling, val terug.
+      return null;
+    }
+    // Elke niet-200 (401/403/422/429/5xx): geen versnelling. De volledige scan
+    // draait met dezelfde forge en meldt een echt tokenprobleem zelf wél.
+    if (response.status != 200) return null;
+    final json = _decodeJson(response.bytes);
+    if (json is! Map || json['items'] is! List) return null;
+    final dirs = <String>{};
+    for (final raw in json['items'] as List) {
+      if (raw is! Map) continue;
+      final path = raw['path'];
+      if (path is! String) continue;
+      final dir = GitRepoLayout.deckDirOfDeckFile(path);
+      if (dir != null) dirs.add(dir);
+    }
+    // Leeg is dubbelzinnig — geen treffers, óf de index dekt dit (nog) niet, óf
+    // de term viel buiten wat GitHub tokeniseert. Val dan terug op de volledige
+    // scan in plaats van "niets gevonden" te beweren.
+    return dirs.isEmpty ? null : dirs;
   }
 
   // ── Lezen ───────────────────────────────────────────────────────────────────
