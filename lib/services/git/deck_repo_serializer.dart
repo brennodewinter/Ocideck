@@ -119,7 +119,7 @@ Future<({Deck deck, List<String> missing})> withRepoChartData(
   );
 }
 
-/// Wat er van een deck níét meereist naar git (§9.3), geteld per soort.
+/// Wat er van een deck níét meereist naar git (§9.1), geteld per soort.
 ///
 /// De git-opslag schrijft `deck.md`, de afbeeldingenpool en de grafiekdata. Alle
 /// overige lagen blijven achter: video en audio round-trippen nog niet, en de
@@ -194,7 +194,7 @@ class RepoDeckFiles {
   final Map<String, Uint8List> upserts;
 
   /// Mediaverwijzingen die niet mee konden: video/audio (die round-trippen nog
-  /// niet door git, §9.3) en afbeeldingen waarvan de bytes niet te lezen waren.
+  /// niet door git, §9.1) en afbeeldingen waarvan de bytes niet te lezen waren.
   /// Het deck slaat wél op, maar deze verwijzingen zijn niet mee-gecommit — de
   /// aanroeper meldt dat, in plaats van een kapotte verwijzing te verzwijgen.
   final List<String> warnings;
