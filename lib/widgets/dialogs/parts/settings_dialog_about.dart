@@ -172,10 +172,7 @@ extension _SettingsAbout on _SettingsDialogState {
   Widget _aboutLicenses(AppLocalizations l10n) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      _aboutHeading(
-        Icons.gavel_outlined,
-        l10n.d('Licenties van derden'),
-      ),
+      _aboutHeading(Icons.gavel_outlined, l10n.d('Licenties van derden')),
       _aboutCard(
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

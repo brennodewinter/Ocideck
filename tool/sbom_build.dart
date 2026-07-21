@@ -111,9 +111,7 @@ String forkTreeHash(Directory dir) {
   final lines = <String>[];
   for (final entity in dir.listSync(recursive: true, followLinks: false)) {
     if (entity is! File) continue;
-    final rel = entity.path
-        .substring(prefix.length)
-        .replaceAll(r'\', '/');
+    final rel = entity.path.substring(prefix.length).replaceAll(r'\', '/');
     if (rel.split('/').any((seg) => seg.startsWith('.'))) continue;
     lines.add('$rel ${sha256.convert(entity.readAsBytesSync())}');
   }
@@ -609,7 +607,8 @@ Map<String, dynamic> _spdxPackage(SbomComponent c, String spdxId) {
     ];
   }
   if (c.upstreamRevision != null) {
-    pkg['sourceInfo'] = 'Vendored from ${c.vcsUrl} at commit '
+    pkg['sourceInfo'] =
+        'Vendored from ${c.vcsUrl} at commit '
         '${c.upstreamRevision}.';
   }
   if (c.note != null) pkg['comment'] = c.note;

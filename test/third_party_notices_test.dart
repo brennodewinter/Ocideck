@@ -55,8 +55,8 @@ void main() {
       final manifest =
           jsonDecode(File(manifestPath).readAsStringSync())
               as Map<String, dynamic>;
-      for (final b in (manifest['bundles'] as List)
-          .cast<Map<String, dynamic>>()) {
+      for (final b
+          in (manifest['bundles'] as List).cast<Map<String, dynamic>>()) {
         final npm = b['npm'] as String?;
         final file = b['file'] as String;
         // Bundles are named in prose ("Mermaid", "MathJax"); match on the npm
@@ -66,29 +66,36 @@ void main() {
         expect(
           notices.toLowerCase().contains(needle.toLowerCase()),
           isTrue,
-          reason: 'Bundle "$needle" is inlined into every HTML export but is '
+          reason:
+              'Bundle "$needle" is inlined into every HTML export but is '
               'not mentioned in THIRD_PARTY_NOTICES.md.',
         );
       }
     });
 
-    test('every bundled font family and its OFL text appear in the notices', () {
-      final fonts =
-          (pubspec['flutter'] as YamlMap)['fonts'] as YamlList? ?? YamlList();
-      for (final family in fonts) {
-        final name = family['family'].toString();
-        expect(
-          notices.contains(name),
-          isTrue,
-          reason: 'Bundled font family "$name" is not in '
-              'THIRD_PARTY_NOTICES.md. OFL-1.1 §2 requires the notice to '
-              'travel with the font.',
-        );
-      }
-    });
+    test(
+      'every bundled font family and its OFL text appear in the notices',
+      () {
+        final fonts =
+            (pubspec['flutter'] as YamlMap)['fonts'] as YamlList? ?? YamlList();
+        for (final family in fonts) {
+          final name = family['family'].toString();
+          expect(
+            notices.contains(name),
+            isTrue,
+            reason:
+                'Bundled font family "$name" is not in '
+                'THIRD_PARTY_NOTICES.md. OFL-1.1 §2 requires the notice to '
+                'travel with the font.',
+          );
+        }
+      },
+    );
 
     test('the vendored forks are named with their upstream commit', () {
-      for (final fork in Directory('third_party').listSync().whereType<Directory>()) {
+      for (final fork in Directory(
+        'third_party',
+      ).listSync().whereType<Directory>()) {
         final name = fork.path.split(Platform.pathSeparator).last;
         expect(
           mentions(name),
@@ -108,46 +115,54 @@ void main() {
   });
 
   group('accuracy', () {
-    test('the licence stated for each direct dependency is the classified one', () {
-      final cfg =
-          jsonDecode(File('.dart_tool/package_config.json').readAsStringSync())
-              as Map<String, dynamic>;
-      final roots = <String, Directory>{};
-      final base = File('.dart_tool/package_config.json').absolute.parent.uri;
-      for (final pkg in (cfg['packages'] as List).cast<Map<String, dynamic>>()) {
-        final uri = pkg['rootUri'] as String;
-        final normalised = uri.endsWith('/') ? uri : '$uri/';
-        roots[pkg['name'] as String] = Directory.fromUri(
-          normalised.startsWith('file:')
-              ? Uri.parse(normalised)
-              : base.resolve(normalised),
-        );
-      }
+    test(
+      'the licence stated for each direct dependency is the classified one',
+      () {
+        final cfg =
+            jsonDecode(
+                  File('.dart_tool/package_config.json').readAsStringSync(),
+                )
+                as Map<String, dynamic>;
+        final roots = <String, Directory>{};
+        final base = File('.dart_tool/package_config.json').absolute.parent.uri;
+        for (final pkg
+            in (cfg['packages'] as List).cast<Map<String, dynamic>>()) {
+          final uri = pkg['rootUri'] as String;
+          final normalised = uri.endsWith('/') ? uri : '$uri/';
+          roots[pkg['name'] as String] = Directory.fromUri(
+            normalised.startsWith('file:')
+                ? Uri.parse(normalised)
+                : base.resolve(normalised),
+          );
+        }
 
-      // One table row per line: "| `a`, `b` | purpose | Licence |".
-      final wrong = <String>[];
-      for (final line in notices.split('\n')) {
-        if (!line.startsWith('| `')) continue;
-        final cells = line.split('|').map((c) => c.trim()).toList();
-        if (cells.length < 4) continue;
-        final stated = cells[3];
-        for (final match in RegExp(r'`([a-z0-9_]+)`').allMatches(cells[1])) {
-          final name = match.group(1)!;
-          final root = roots[name];
-          if (root == null) continue;
-          final actual = licenseFamily(licenseForPackage(name, root));
-          if (!stated.contains(actual)) {
-            wrong.add('$name: notices say "$stated", LICENSE file says $actual');
+        // One table row per line: "| `a`, `b` | purpose | Licence |".
+        final wrong = <String>[];
+        for (final line in notices.split('\n')) {
+          if (!line.startsWith('| `')) continue;
+          final cells = line.split('|').map((c) => c.trim()).toList();
+          if (cells.length < 4) continue;
+          final stated = cells[3];
+          for (final match in RegExp(r'`([a-z0-9_]+)`').allMatches(cells[1])) {
+            final name = match.group(1)!;
+            final root = roots[name];
+            if (root == null) continue;
+            final actual = licenseFamily(licenseForPackage(name, root));
+            if (!stated.contains(actual)) {
+              wrong.add(
+                '$name: notices say "$stated", LICENSE file says $actual',
+              );
+            }
           }
         }
-      }
-      expect(
-        wrong,
-        isEmpty,
-        reason:
-            'THIRD_PARTY_NOTICES.md states a licence that the package\'s own '
-            'LICENSE file does not support:\n  ${wrong.join('\n  ')}',
-      );
-    });
+        expect(
+          wrong,
+          isEmpty,
+          reason:
+              'THIRD_PARTY_NOTICES.md states a licence that the package\'s own '
+              'LICENSE file does not support:\n  ${wrong.join('\n  ')}',
+        );
+      },
+    );
   });
 }

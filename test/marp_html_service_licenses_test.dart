@@ -32,8 +32,8 @@ void main() {
     final manifest =
         jsonDecode(File('assets/web_export/MANIFEST.json').readAsStringSync())
             as Map<String, dynamic>;
-    for (final b in (manifest['bundles'] as List)
-        .cast<Map<String, dynamic>>()) {
+    for (final b
+        in (manifest['bundles'] as List).cast<Map<String, dynamic>>()) {
       final npm = b['npm'] as String?;
       if (npm == null) continue;
       final entry = BundledLicenses.forNpm(npm)!;

@@ -62,10 +62,9 @@ void main() {
     });
 
     test('every bundled font family has its OFL text registered', () {
-      final families =
-          ((pubspec['flutter'] as YamlMap)['fonts'] as YamlList)
-              .map((f) => f['family'].toString())
-              .toSet();
+      final families = ((pubspec['flutter'] as YamlMap)['fonts'] as YamlList)
+          .map((f) => f['family'].toString())
+          .toSet();
       for (final family in families) {
         expect(
           BundledLicenses.all.any((e) => e.component.startsWith(family)),
@@ -81,8 +80,8 @@ void main() {
       final manifest =
           jsonDecode(File('assets/web_export/MANIFEST.json').readAsStringSync())
               as Map<String, dynamic>;
-      for (final b in (manifest['bundles'] as List)
-          .cast<Map<String, dynamic>>()) {
+      for (final b
+          in (manifest['bundles'] as List).cast<Map<String, dynamic>>()) {
         final npm = b['npm'] as String?;
         if (npm == null) continue; // the hash-pinned theme CSS, see below
         final entry = BundledLicenses.forNpm(npm);

@@ -148,10 +148,9 @@ abstract final class BundledLicenses {
   static Stream<LicenseEntry> _entries(AssetBundle bundle) async* {
     for (final entry in all) {
       final text = await bundle.loadString(entry.licenseAsset);
-      yield LicenseEntryWithLineBreaks(
-        <String>[entry.component],
-        '${entry.component} — ${entry.license}\n${entry.source}\n\n$text',
-      );
+      yield LicenseEntryWithLineBreaks(<String>[
+        entry.component,
+      ], '${entry.component} — ${entry.license}\n${entry.source}\n\n$text');
     }
   }
 }
