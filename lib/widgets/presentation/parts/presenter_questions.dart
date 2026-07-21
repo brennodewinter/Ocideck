@@ -18,8 +18,15 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     if (slide.type != SlideType.question) return false;
     final view = _questionViews[slide.id];
     if (view == null) return true; // nog niet beantwoord
-    // Een onbeantwoordbare vraag (geen goed/fout paar) mag nooit blokkeren.
-    if (view.options.isEmpty) return false;
+    // Een onbeantwoordbare vraag mag nooit blokkeren. De maat daarvoor is of er
+    // een juist antwoord te géven valt, niet of er opties staan: een vraag met
+    // twee opties waarvan er géén als juist is aangemerkt levert een lege
+    // [correctIndices] op, dus elk antwoord telt als fout. In de standaard
+    // retry-stand vergrendelt zo'n fout niet, waardoor de presentatie muurvast
+    // kwam te zitten op een slide die per definitie niet te halen was — alleen
+    // afsluiten hielp nog. De tekenroutines hierboven noemen dit geval al
+    // "niet presenteerbaar"; hier stond de bijpassende uitweg te smal.
+    if (view.correctIndices.isEmpty) return false;
     return !view.passed;
   }
 

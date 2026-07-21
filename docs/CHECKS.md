@@ -237,7 +237,7 @@ also declares them, but see the [CI note](#continuous-integration).)
 
 ### `make coverage`
 - **Runs:** `flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden`
-  then `dart run tool/coverage_summary.dart --min=78 --require-instrumented`.
+  then `dart run tool/coverage_summary.dart --min=79 --require-instrumented`.
 - **Covers:** two things. (1) Line coverage across every `lib/` file a test
   imports. (2) That there **is** such a test for every `lib/` file.
 - **Failure means:** coverage dropped below the floor (currently **78%**), **or**

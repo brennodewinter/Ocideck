@@ -33,6 +33,56 @@ Future<void> _pumpAudience(
   await tester.pump();
 }
 
+/// Twee losse dia's, gescheiden door een `---`. Het deck hierboven is één dia
+/// (kop, tussenkop en bullets horen daar bij elkaar), dus daarmee valt niet te
+/// zien óf de beamer meebeweegt: elke index toont dezelfde tekst.
+const String _twoSlideMarkdown =
+    '---\n'
+    'title: Audience Demo\n'
+    'theme: ocideck\n'
+    '---\n'
+    '# Welkom\n'
+    '\n'
+    '---\n'
+    '\n'
+    '# Tweede dia\n'
+    '\n'
+    '- Eerste punt\n';
+
+const _bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+
+/// Laat de presenter een bericht sturen zoals hij dat over de vensterbrug doet.
+/// De brug moet ook uitgaand gemockt zijn, anders registreert de ontvanger
+/// zijn handler niet en komt er niets aan.
+Future<void> _fromPresenter(
+  WidgetTester tester,
+  String method, [
+  Object? arguments,
+]) => tester.binding.defaultBinaryMessenger.handlePlatformMessage(
+  _bridge.name,
+  _bridge.codec.encodeMethodCall(
+    MethodCall('methodCall', {
+      'channel': 'ocideck/audience',
+      'method': method,
+      'arguments': arguments,
+    }),
+  ),
+  (_) {},
+);
+
+void _mockBridge(WidgetTester tester) {
+  tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+    _bridge,
+    (call) async => null,
+  );
+  addTearDown(
+    () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      _bridge,
+      null,
+    ),
+  );
+}
+
 void main() {
   testWidgets(
     'renders a normal slide from the markdown args without throwing',
@@ -192,6 +242,152 @@ void main() {
     expect(sent['shift'], isTrue);
     expect(sent['meta'], isFalse);
     expect(sent['control'], isFalse);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('the beamer follows the presenter and blanks on command', (
+    tester,
+  ) async {
+    // De hele reden van bestaan van dit venster: in de pas blijven met de
+    // laptop. Zonder deze toets is een beamer die op de vorige slide blijft
+    // hangen pas in de zaal te merken.
+    _mockBridge(tester);
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': _twoSlideMarkdown,
+      'index': 0,
+    });
+    // De ontvanger registreert zijn handler asynchroon over dezelfde brug.
+    await tester.pumpAndSettle();
+    expect(find.text('Welkom'), findsOneWidget);
+
+    await _fromPresenter(tester, 'update', {'index': 1, 'seq': 1});
+    await tester.pump();
+    expect(find.text('Welkom'), findsNothing);
+    expect(find.text('Tweede dia'), findsOneWidget);
+
+    // Zwart scherm (B op de presenter): de zaal ziet niets van de dia.
+    await _fromPresenter(tester, 'update', {'index': 1, 'seq': 2, 'blank': 1});
+    await tester.pump();
+    expect(find.text('Tweede dia'), findsNothing);
+
+    // En terug.
+    await _fromPresenter(tester, 'update', {'index': 1, 'seq': 3, 'blank': 0});
+    await tester.pump();
+    expect(find.text('Tweede dia'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('a late update from an older slide never wins', (tester) async {
+    // Berichten komen niet gegarandeerd in volgorde binnen. Bij snel doorklikken
+    // mag een trage aanroep van slide 1 de al getoonde slide 2 niet terugzetten.
+    _mockBridge(tester);
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': _twoSlideMarkdown,
+      'index': 0,
+    });
+    await tester.pumpAndSettle();
+
+    await _fromPresenter(tester, 'update', {'index': 1, 'seq': 7});
+    await tester.pump();
+    expect(find.text('Tweede dia'), findsOneWidget);
+
+    await _fromPresenter(tester, 'update', {'index': 0, 'seq': 6});
+    await tester.pump();
+    expect(find.text('Tweede dia'), findsOneWidget);
+    expect(find.text('Welkom'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('a live table edit on the laptop lands on the beamer', (
+    tester,
+  ) async {
+    // De tabel die de spreker tijdens het presenteren bijwerkt, moet de zaal
+    // ook zien. Zonder deze spiegeling praat de spreker over cijfers die op het
+    // grote scherm nog de oude zijn — en dat merkt niemand op tijd.
+    const tableDeck =
+        '---\n'
+        'title: Audience Demo\n'
+        '---\n'
+        '<!-- _class: table -->\n'
+        '# Cijfers\n'
+        '\n'
+        '| Rol | Waarde |\n'
+        '| --- | --- |\n'
+        '| Bestuur | oud |\n';
+    _mockBridge(tester);
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': tableDeck,
+      'index': 0,
+    });
+    await tester.pumpAndSettle();
+    expect(find.text('oud'), findsOneWidget);
+
+    await _fromPresenter(tester, 'tableUpdate', {
+      'slideIndex': 0,
+      'tableRows': [
+        ['Rol', 'Waarde'],
+        ['Bestuur', 'nieuw'],
+      ],
+    });
+    await tester.pump();
+
+    expect(find.text('nieuw'), findsOneWidget);
+    expect(find.text('oud'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('a checklist ticked while presenting mirrors to the beamer', (
+    tester,
+  ) async {
+    const checklistDeck =
+        '---\n'
+        'title: Audience Demo\n'
+        '---\n'
+        '# Af te vinken\n'
+        '\n'
+        '- [ ] Back-up getest\n';
+    _mockBridge(tester);
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': checklistDeck,
+      'index': 0,
+    });
+    await tester.pumpAndSettle();
+
+    await _fromPresenter(tester, 'checklistUpdate', {
+      'slideIndex': 0,
+      'bullets': ['[x] Back-up getest'],
+      'bullets2': <String>[],
+    });
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+    expect(find.text('Back-up getest'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('an unknown message from the presenter is ignored, not fatal', (
+    tester,
+  ) async {
+    // De twee vensters kunnen uit versie lopen (de een is bijgewerkt, de ander
+    // nog niet). Een bericht dat dit venster niet kent hoort dan stil te
+    // verdwijnen in plaats van de beamer om te trekken.
+    _mockBridge(tester);
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': _twoSlideMarkdown,
+      'index': 0,
+    });
+    await tester.pumpAndSettle();
+
+    await _fromPresenter(tester, 'ditBestaatNiet', {'wat': 'dan ook'});
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+    expect(find.text('Welkom'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox());
   });
