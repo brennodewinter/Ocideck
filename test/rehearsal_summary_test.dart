@@ -162,7 +162,7 @@ void main() {
 
   // ── 'Alleen afspelen' ──────────────────────────────────────────────────────
 
-  Widget _presenterOverLauncher({required bool playOnly}) => _wrap(
+  Widget presenterOverLauncher({required bool playOnly}) => _wrap(
     Scaffold(
       body: Builder(
         builder: (context) => TextButton(
@@ -214,7 +214,7 @@ void main() {
     // De schakelaar staat expliciet aan; de vergrendeling hoort er dwars
     // doorheen te gaan. Wie een deck afspeelt hoort achteraf geen meetrapport
     // over zichzelf te krijgen.
-    await tester.pumpWidget(_presenterOverLauncher(playOnly: true));
+    await tester.pumpWidget(presenterOverLauncher(playOnly: true));
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
 
@@ -229,7 +229,7 @@ void main() {
     tester,
   ) async {
     mockWindowManager(tester);
-    await tester.pumpWidget(_presenterOverLauncher(playOnly: false));
+    await tester.pumpWidget(presenterOverLauncher(playOnly: false));
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
 
