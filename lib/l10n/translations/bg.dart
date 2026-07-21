@@ -1802,6 +1802,18 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Titel (H1)': 'Заглавие (H1)',
+  'Subtitel (H2)': 'Подзаглавие (H2)',
+  'Tussentitel (H1)': 'Заглавие на секция (H1)',
+  'Ondertitel / toelichting': 'Подзаглавие / пояснение',
+  'Ondertitel (optioneel)': 'Подзаглавие (по избор)',
+  'Titel overlay (optioneel)': 'Заглавие върху изображението (по избор)',
+  'Tekst (links)': 'Текст (ляво)',
+  'Bullets links': 'Водещи символи вляво',
+  'Bullets rechts': 'Водещи символи вдясно',
+  'Titeltekstkleur': 'Цвят на текста на заглавието',
+  'Knippen': 'Изрязване',
+  'Geen achtergrondafbeelding': 'Без фоново изображение',
   'Bijv. 1.0': 'Напр. 1.0',
   'Datum': 'Дата',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

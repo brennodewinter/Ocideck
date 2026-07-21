@@ -918,6 +918,18 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Titel (H1)': 'Title (H1)',
+  'Subtitel (H2)': 'Subtitle (H2)',
+  'Tussentitel (H1)': 'Section heading (H1)',
+  'Ondertitel / toelichting': 'Subtitle / explanation',
+  'Ondertitel (optioneel)': 'Subtitle (optional)',
+  'Titel overlay (optioneel)': 'Title overlay (optional)',
+  'Tekst (links)': 'Text (left)',
+  'Bullets links': 'Bullets left',
+  'Bullets rechts': 'Bullets right',
+  'Titeltekstkleur': 'Title text colour',
+  'Knippen': 'Trimming',
+  'Geen achtergrondafbeelding': 'No background image',
   'Bijv. 1.0': 'E.g. 1.0',
   'Datum': 'Date',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

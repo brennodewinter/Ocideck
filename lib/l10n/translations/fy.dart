@@ -737,6 +737,21 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Titel (H1)': 'Titel (H1)',
+  'Subtitel (H2)': 'Undertitel (H2)',
+  'Tussentitel (H1)': 'Tussentitel (H1)',
+  'Ondertitel / toelichting': 'Undertitel / taljochting',
+  'Ondertitel (optioneel)': 'Undertitel (opsjoneel)',
+  'Titel overlay (optioneel)': 'Titeloverlay (opsjoneel)',
+  'Tekst (links)': 'Tekst (lofts)',
+  'Bullets links': 'Bullets lofts',
+  'Bullets rechts': 'Bullets rjochts',
+  'Titeltekstkleur': 'Kleur fan de titeltekst',
+  'Knippen': 'Knippe',
+  'Geen achtergrondafbeelding': 'Gjin eftergrûnôfbylding',
+  'Breedte afbeeldingspaneel (rechts)':
+      'Breedte fan it ôfbyldingspaniel (rjochts)',
+  'Verdeling (links / rechts)': 'Ferdieling (lofts / rjochts)',
   'TYPE': 'TYPE',
   'STIJL': 'STIL',
   'Bijv. 1.0': 'Bgl. 1.0',

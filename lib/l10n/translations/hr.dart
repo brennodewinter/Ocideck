@@ -1786,6 +1786,18 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Titel (H1)': 'Naslov (H1)',
+  'Subtitel (H2)': 'Podnaslov (H2)',
+  'Tussentitel (H1)': 'Naslov odjeljka (H1)',
+  'Ondertitel / toelichting': 'Podnaslov / objašnjenje',
+  'Ondertitel (optioneel)': 'Podnaslov (neobavezno)',
+  'Titel overlay (optioneel)': 'Naslov preko slike (neobavezno)',
+  'Tekst (links)': 'Tekst (lijevo)',
+  'Bullets links': 'Natuknice lijevo',
+  'Bullets rechts': 'Natuknice desno',
+  'Titeltekstkleur': 'Boja teksta naslova',
+  'Knippen': 'Rezanje',
+  'Geen achtergrondafbeelding': 'Bez pozadinske slike',
   'Bijv. 1.0': 'Npr. 1.0',
   'Datum': 'Datum',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

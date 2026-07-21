@@ -1779,6 +1779,18 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Titel (H1)': 'Otsikko (H1)',
+  'Subtitel (H2)': 'Alaotsikko (H2)',
+  'Tussentitel (H1)': 'Osion otsikko (H1)',
+  'Ondertitel / toelichting': 'Alaotsikko / selitys',
+  'Ondertitel (optioneel)': 'Alaotsikko (valinnainen)',
+  'Titel overlay (optioneel)': 'Otsikko kuvan päällä (valinnainen)',
+  'Tekst (links)': 'Teksti (vasemmalla)',
+  'Bullets links': 'Luettelomerkit vasemmalla',
+  'Bullets rechts': 'Luettelomerkit oikealla',
+  'Titeltekstkleur': 'Otsikkotekstin väri',
+  'Knippen': 'Leikkaus',
+  'Geen achtergrondafbeelding': 'Ei taustakuvaa',
   'Bijv. 1.0': 'Esim. 1.0',
   'Datum': 'Päivämäärä',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

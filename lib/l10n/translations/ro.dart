@@ -1797,6 +1797,18 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Titel (H1)': 'Titlu (H1)',
+  'Subtitel (H2)': 'Subtitlu (H2)',
+  'Tussentitel (H1)': 'Titlu de secțiune (H1)',
+  'Ondertitel / toelichting': 'Subtitlu / explicație',
+  'Ondertitel (optioneel)': 'Subtitlu (opțional)',
+  'Titel overlay (optioneel)': 'Titlu suprapus (opțional)',
+  'Tekst (links)': 'Text (stânga)',
+  'Bullets links': 'Bullets în stânga',
+  'Bullets rechts': 'Bullets în dreapta',
+  'Titeltekstkleur': 'Culoarea textului titlului',
+  'Knippen': 'Decupare',
+  'Geen achtergrondafbeelding': 'Fără imagine de fundal',
   'Bijv. 1.0': 'Ex. 1.0',
   'Datum': 'Dată',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

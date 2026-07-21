@@ -1770,6 +1770,18 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Titel (H1)': 'Pealkiri (H1)',
+  'Subtitel (H2)': 'Alapealkiri (H2)',
+  'Tussentitel (H1)': 'Vahepealkiri (H1)',
+  'Ondertitel / toelichting': 'Alapealkiri / selgitus',
+  'Ondertitel (optioneel)': 'Alapealkiri (valikuline)',
+  'Titel overlay (optioneel)': 'Pealkiri pildi peal (valikuline)',
+  'Tekst (links)': 'Tekst (vasakul)',
+  'Bullets links': 'Täpid vasakul',
+  'Bullets rechts': 'Täpid paremal',
+  'Titeltekstkleur': 'Pealkirja teksti värv',
+  'Knippen': 'Lõikamine',
+  'Geen achtergrondafbeelding': 'Taustapilt puudub',
   'Bijv. 1.0': 'Nt 1.0',
   'Datum': 'Kuupäev',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

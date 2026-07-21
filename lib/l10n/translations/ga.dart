@@ -1815,6 +1815,18 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Titel (H1)': 'Teideal (H1)',
+  'Subtitel (H2)': 'Fotheideal (H2)',
+  'Tussentitel (H1)': 'Ceannteideal rannóige (H1)',
+  'Ondertitel / toelichting': 'Fotheideal / míniú',
+  'Ondertitel (optioneel)': 'Fotheideal (roghnach)',
+  'Titel overlay (optioneel)': 'Forleagan teidil (roghnach)',
+  'Tekst (links)': 'Téacs (ar chlé)',
+  'Bullets links': 'Urchair ar chlé',
+  'Bullets rechts': 'Urchair ar dheis',
+  'Titeltekstkleur': 'Dath théacs an teidil',
+  'Knippen': 'Bearradh',
+  'Geen achtergrondafbeelding': 'Gan íomhá chúlra',
   'Bijv. 1.0': 'm.sh. 1.0',
   'Datum': 'Dáta',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

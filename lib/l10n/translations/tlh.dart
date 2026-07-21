@@ -1754,6 +1754,18 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Titel (H1)': 'per (H1)',
+  'Subtitel (H2)': 'bIng per (H2)',
+  'Tussentitel (H1)': '\'ay\' nab (H1)',
+  'Ondertitel / toelichting': 'bIng per / QIj',
+  'Ondertitel (optioneel)': 'bIng per (DubwI\')',
+  'Titel overlay (optioneel)': 'mIllogh Dung per (DubwI\')',
+  'Tekst (links)': 'mu\' (poS)',
+  'Bullets links': 'ghItlhmey poS',
+  'Bullets rechts': 'ghItlhmey nIH',
+  'Titeltekstkleur': 'per mu\' rItlh',
+  'Knippen': 'pe\'',
+  'Geen achtergrondafbeelding': 'pagh \'em mIllogh',
   'Bijv. 1.0': 'mu\'wIj 1.0',
   'Datum': 'jaj',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

@@ -1787,6 +1787,18 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Titel (H1)': 'Pavadinimas (H1)',
+  'Subtitel (H2)': 'Paantraštė (H2)',
+  'Tussentitel (H1)': 'Skyriaus antraštė (H1)',
+  'Ondertitel / toelichting': 'Paantraštė / paaiškinimas',
+  'Ondertitel (optioneel)': 'Paantraštė (nebūtina)',
+  'Titel overlay (optioneel)': 'Pavadinimas ant paveikslėlio (nebūtinas)',
+  'Tekst (links)': 'Tekstas (kairėje)',
+  'Bullets links': 'Ženklai kairėje',
+  'Bullets rechts': 'Ženklai dešinėje',
+  'Titeltekstkleur': 'Pavadinimo teksto spalva',
+  'Knippen': 'Kirpimas',
+  'Geen achtergrondafbeelding': 'Nėra fono paveikslėlio',
   'Bijv. 1.0': 'Pvz. 1.0',
   'Datum': 'Data',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

@@ -1783,6 +1783,18 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Titel (H1)': 'Cím (H1)',
+  'Subtitel (H2)': 'Alcím (H2)',
+  'Tussentitel (H1)': 'Szakaszcím (H1)',
+  'Ondertitel / toelichting': 'Alcím / magyarázat',
+  'Ondertitel (optioneel)': 'Alcím (opcionális)',
+  'Titel overlay (optioneel)': 'Címfelirat a képen (opcionális)',
+  'Tekst (links)': 'Szöveg (balra)',
+  'Bullets links': 'Felsorolás balra',
+  'Bullets rechts': 'Felsorolás jobbra',
+  'Titeltekstkleur': 'A címszöveg színe',
+  'Knippen': 'Vágás',
+  'Geen achtergrondafbeelding': 'Nincs háttérkép',
   'Bijv. 1.0': 'Pl. 1.0',
   'Datum': 'Dátum',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

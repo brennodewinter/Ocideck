@@ -1779,6 +1779,18 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Titel (H1)': 'Judul (H1)',
+  'Subtitel (H2)': 'Subjudul (H2)',
+  'Tussentitel (H1)': 'Judul bagian (H1)',
+  'Ondertitel / toelichting': 'Subjudul / penjelasan',
+  'Ondertitel (optioneel)': 'Subjudul (opsional)',
+  'Titel overlay (optioneel)': 'Judul hamparan (opsional)',
+  'Tekst (links)': 'Teks (kiri)',
+  'Bullets links': 'Bullet kiri',
+  'Bullets rechts': 'Bullet kanan',
+  'Titeltekstkleur': 'Warna teks judul',
+  'Knippen': 'Pemotongan',
+  'Geen achtergrondafbeelding': 'Tanpa gambar latar',
   'Bijv. 1.0': 'Mis. 1.0',
   'Datum': 'Tanggal',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

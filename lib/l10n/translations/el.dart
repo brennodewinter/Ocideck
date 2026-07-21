@@ -1807,6 +1807,18 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Titel (H1)': 'Τίτλος (H1)',
+  'Subtitel (H2)': 'Υπότιτλος (H2)',
+  'Tussentitel (H1)': 'Επικεφαλίδα ενότητας (H1)',
+  'Ondertitel / toelichting': 'Υπότιτλος / επεξήγηση',
+  'Ondertitel (optioneel)': 'Υπότιτλος (προαιρετικός)',
+  'Titel overlay (optioneel)': 'Τίτλος επικάλυψης (προαιρετικός)',
+  'Tekst (links)': 'Κείμενο (αριστερά)',
+  'Bullets links': 'Κουκκίδες αριστερά',
+  'Bullets rechts': 'Κουκκίδες δεξιά',
+  'Titeltekstkleur': 'Χρώμα κειμένου τίτλου',
+  'Knippen': 'Κόψιμο',
+  'Geen achtergrondafbeelding': 'Χωρίς εικόνα φόντου',
   'Bijv. 1.0': 'Π.χ. 1.0',
   'Datum': 'Ημερομηνία',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

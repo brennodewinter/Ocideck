@@ -736,6 +736,20 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Titel (H1)': 'Titel (H1)',
+  'Subtitel (H2)': 'Untertitel (H2)',
+  'Tussentitel (H1)': 'Abschnittsüberschrift (H1)',
+  'Ondertitel / toelichting': 'Untertitel / Erläuterung',
+  'Ondertitel (optioneel)': 'Untertitel (optional)',
+  'Titel overlay (optioneel)': 'Titel-Overlay (optional)',
+  'Tekst (links)': 'Text (links)',
+  'Bullets links': 'Stichpunkte links',
+  'Bullets rechts': 'Stichpunkte rechts',
+  'Titeltekstkleur': 'Farbe des Titeltextes',
+  'Knippen': 'Schneiden',
+  'Geen achtergrondafbeelding': 'Kein Hintergrundbild',
+  'Breedte afbeeldingspaneel (rechts)': 'Breite des Bildbereichs (rechts)',
+  'Verdeling (links / rechts)': 'Aufteilung (links / rechts)',
   'TYPE': 'TYP',
   'STIJL': 'STIL',
   'Bijv. 1.0': 'Z. B. 1.0',

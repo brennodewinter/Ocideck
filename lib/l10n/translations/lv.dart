@@ -1778,6 +1778,18 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Titel (H1)': 'Virsraksts (H1)',
+  'Subtitel (H2)': 'Apakšvirsraksts (H2)',
+  'Tussentitel (H1)': 'Sadaļas virsraksts (H1)',
+  'Ondertitel / toelichting': 'Apakšvirsraksts / skaidrojums',
+  'Ondertitel (optioneel)': 'Apakšvirsraksts (neobligāts)',
+  'Titel overlay (optioneel)': 'Virsraksts uz attēla (neobligāts)',
+  'Tekst (links)': 'Teksts (pa kreisi)',
+  'Bullets links': 'Aizzīmes pa kreisi',
+  'Bullets rechts': 'Aizzīmes pa labi',
+  'Titeltekstkleur': 'Virsraksta teksta krāsa',
+  'Knippen': 'Griešana',
+  'Geen achtergrondafbeelding': 'Nav fona attēla',
   'Bijv. 1.0': 'Piem., 1.0',
   'Datum': 'Datums',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

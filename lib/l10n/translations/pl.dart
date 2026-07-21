@@ -1791,6 +1791,18 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Titel (H1)': 'Tytuł (H1)',
+  'Subtitel (H2)': 'Podtytuł (H2)',
+  'Tussentitel (H1)': 'Nagłówek sekcji (H1)',
+  'Ondertitel / toelichting': 'Podtytuł / objaśnienie',
+  'Ondertitel (optioneel)': 'Podtytuł (opcjonalnie)',
+  'Titel overlay (optioneel)': 'Tytuł na obrazie (opcjonalnie)',
+  'Tekst (links)': 'Tekst (po lewej)',
+  'Bullets links': 'Punktory po lewej',
+  'Bullets rechts': 'Punktory po prawej',
+  'Titeltekstkleur': 'Kolor tekstu tytułu',
+  'Knippen': 'Przycinanie',
+  'Geen achtergrondafbeelding': 'Brak obrazu tła',
   'Bijv. 1.0': 'Np. 1.0',
   'Datum': 'Data',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

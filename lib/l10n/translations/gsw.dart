@@ -1783,6 +1783,18 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Titel (H1)': 'Titel (H1)',
+  'Subtitel (H2)': 'Undertitel (H2)',
+  'Tussentitel (H1)': 'Abschnittsüberschrift (H1)',
+  'Ondertitel / toelichting': 'Undertitel / Erklärig',
+  'Ondertitel (optioneel)': 'Undertitel (optional)',
+  'Titel overlay (optioneel)': 'Titel-Overlay (optional)',
+  'Tekst (links)': 'Täxt (links)',
+  'Bullets links': 'Bullets links',
+  'Bullets rechts': 'Bullets rächts',
+  'Titeltekstkleur': 'Farb vom Titeltäxt',
+  'Knippen': 'Schniide',
+  'Geen achtergrondafbeelding': 'Kes Hintergrundbild',
   'Bijv. 1.0': 'Z.B. 1.0',
   'Datum': 'Datum',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

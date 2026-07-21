@@ -1795,6 +1795,18 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Titel (H1)': 'Titulus (H1)',
+  'Subtitel (H2)': 'Subtitulus (H2)',
+  'Tussentitel (H1)': 'Titulus sectionis (H1)',
+  'Ondertitel / toelichting': 'Subtitulus / explicatio',
+  'Ondertitel (optioneel)': 'Subtitulus (optativus)',
+  'Titel overlay (optioneel)': 'Titulus superpositus (optativus)',
+  'Tekst (links)': 'Textus (sinistra)',
+  'Bullets links': 'Notae sinistrae',
+  'Bullets rechts': 'Notae dextrae',
+  'Titeltekstkleur': 'Color textus tituli',
+  'Knippen': 'Sectio',
+  'Geen achtergrondafbeelding': 'Nulla imago fundi',
   'Bijv. 1.0': 'E.g. 1.0',
   'Datum': 'Dies',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

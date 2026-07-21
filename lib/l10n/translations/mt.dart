@@ -1801,6 +1801,18 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Titel (H1)': 'Titlu (H1)',
+  'Subtitel (H2)': 'Sottotitlu (H2)',
+  'Tussentitel (H1)': 'Intestatura tas-sezzjoni (H1)',
+  'Ondertitel / toelichting': 'Sottotitlu / spjegazzjoni',
+  'Ondertitel (optioneel)': 'Sottotitlu (mhux obbligatorju)',
+  'Titel overlay (optioneel)': 'Titlu fuq l-immaġni (mhux obbligatorju)',
+  'Tekst (links)': 'Test (xellug)',
+  'Bullets links': 'Bullets fuq ix-xellug',
+  'Bullets rechts': 'Bullets fuq il-lemin',
+  'Titeltekstkleur': 'Kulur tat-test tat-titlu',
+  'Knippen': 'Qtugħ',
+  'Geen achtergrondafbeelding': 'L-ebda immaġni ta\' sfond',
   'Bijv. 1.0': 'Eż. 1.0',
   'Datum': 'Data',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

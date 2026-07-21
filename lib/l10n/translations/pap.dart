@@ -736,6 +736,21 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Titel (H1)': 'Título (H1)',
+  'Subtitel (H2)': 'Subtítulo (H2)',
+  'Tussentitel (H1)': 'Título intermedio (H1)',
+  'Ondertitel / toelichting': 'Subtítulo / splikashon',
+  'Ondertitel (optioneel)': 'Subtítulo (opshonal)',
+  'Titel overlay (optioneel)': 'Título riba imágen (opshonal)',
+  'Tekst (links)': 'Teksto (banda robes)',
+  'Bullets links': 'Bullets banda robes',
+  'Bullets rechts': 'Bullets banda drechi',
+  'Titeltekstkleur': 'Koló di e teksto di título',
+  'Knippen': 'Kòrtamentu',
+  'Geen achtergrondafbeelding': 'Sin imágen di fondo',
+  'Breedte afbeeldingspaneel (rechts)':
+      'Hanchura di e panel di imágen (banda drechi)',
+  'Verdeling (links / rechts)': 'Divishon (banda robes / banda drechi)',
   'TYPE': 'TIPO',
   'STIJL': 'STILO',
   'Bijv. 1.0': 'Por ehèmpel 1.0',

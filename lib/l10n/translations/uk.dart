@@ -1797,6 +1797,18 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Titel (H1)': 'Заголовок (H1)',
+  'Subtitel (H2)': 'Підзаголовок (H2)',
+  'Tussentitel (H1)': 'Заголовок розділу (H1)',
+  'Ondertitel / toelichting': 'Підзаголовок / пояснення',
+  'Ondertitel (optioneel)': 'Підзаголовок (необов’язково)',
+  'Titel overlay (optioneel)': 'Заголовок поверх зображення (необов’язково)',
+  'Tekst (links)': 'Текст (ліворуч)',
+  'Bullets links': 'Пункти ліворуч',
+  'Bullets rechts': 'Пункти праворуч',
+  'Titeltekstkleur': 'Колір тексту заголовка',
+  'Knippen': 'Обрізання',
+  'Geen achtergrondafbeelding': 'Без фонового зображення',
   'Bijv. 1.0': 'Напр. 1.0',
   'Datum': 'Дата',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2': 'Через кому, напр. OWASP WSTG@4.2',

@@ -1782,6 +1782,18 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Titel (H1)': 'Název (H1)',
+  'Subtitel (H2)': 'Podnadpis (H2)',
+  'Tussentitel (H1)': 'Nadpis sekce (H1)',
+  'Ondertitel / toelichting': 'Podnadpis / vysvětlení',
+  'Ondertitel (optioneel)': 'Podnadpis (volitelné)',
+  'Titel overlay (optioneel)': 'Název přes obrázek (volitelné)',
+  'Tekst (links)': 'Text (vlevo)',
+  'Bullets links': 'Odrážky vlevo',
+  'Bullets rechts': 'Odrážky vpravo',
+  'Titeltekstkleur': 'Barva textu názvu',
+  'Knippen': 'Střih',
+  'Geen achtergrondafbeelding': 'Bez obrázku na pozadí',
   'Bijv. 1.0': 'Např. 1.0',
   'Datum': 'Datum',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

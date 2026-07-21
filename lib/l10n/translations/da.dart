@@ -1778,6 +1778,18 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Titel (H1)': 'Titel (H1)',
+  'Subtitel (H2)': 'Undertitel (H2)',
+  'Tussentitel (H1)': 'Sektionsoverskrift (H1)',
+  'Ondertitel / toelichting': 'Undertitel / forklaring',
+  'Ondertitel (optioneel)': 'Undertitel (valgfri)',
+  'Titel overlay (optioneel)': 'Titeloverlay (valgfri)',
+  'Tekst (links)': 'Tekst (venstre)',
+  'Bullets links': 'Bullets til venstre',
+  'Bullets rechts': 'Bullets til højre',
+  'Titeltekstkleur': 'Farve på titeltekst',
+  'Knippen': 'Klipning',
+  'Geen achtergrondafbeelding': 'Intet baggrundsbillede',
   'Bijv. 1.0': 'F.eks. 1.0',
   'Datum': 'Dato',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

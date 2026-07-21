@@ -1778,6 +1778,18 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Titel (H1)': 'Titel (H1)',
+  'Subtitel (H2)': 'Underrubrik (H2)',
+  'Tussentitel (H1)': 'Avsnittsrubrik (H1)',
+  'Ondertitel / toelichting': 'Underrubrik / förklaring',
+  'Ondertitel (optioneel)': 'Underrubrik (valfritt)',
+  'Titel overlay (optioneel)': 'Titelöverlägg (valfritt)',
+  'Tekst (links)': 'Text (vänster)',
+  'Bullets links': 'Punkter till vänster',
+  'Bullets rechts': 'Punkter till höger',
+  'Titeltekstkleur': 'Färg på titeltexten',
+  'Knippen': 'Klippning',
+  'Geen achtergrondafbeelding': 'Ingen bakgrundsbild',
   'Bijv. 1.0': 'T.ex. 1.0',
   'Datum': 'Datum',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':

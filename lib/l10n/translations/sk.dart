@@ -1786,6 +1786,18 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Titel (H1)': 'Názov (H1)',
+  'Subtitel (H2)': 'Podnadpis (H2)',
+  'Tussentitel (H1)': 'Nadpis sekcie (H1)',
+  'Ondertitel / toelichting': 'Podnadpis / vysvetlenie',
+  'Ondertitel (optioneel)': 'Podnadpis (voliteľné)',
+  'Titel overlay (optioneel)': 'Názov cez obrázok (voliteľné)',
+  'Tekst (links)': 'Text (vľavo)',
+  'Bullets links': 'Odrážky vľavo',
+  'Bullets rechts': 'Odrážky vpravo',
+  'Titeltekstkleur': 'Farba textu názvu',
+  'Knippen': 'Strih',
+  'Geen achtergrondafbeelding': 'Bez obrázka na pozadí',
   'Bijv. 1.0': 'Napr. 1.0',
   'Datum': 'Dátum',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':
