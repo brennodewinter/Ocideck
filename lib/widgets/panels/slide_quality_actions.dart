@@ -178,8 +178,8 @@ List<SlideQualityAction> buildSlideQualityActions({
 
   // Overvolle bullets van de vorm "label : uitleg": haal de uitleg van de slide
   // af naar de notities, zodat alleen het label overblijft. De aanvulling op
-  // "Splits slide" en "Zinnen naar losse bullets", die beide álle tekst laten
-  // staan — deze haalt tekst wég.
+  // "Splits slide" en "Zinnen naar losse bullets", die beide álle tekst op de
+  // slide laten staan — deze haalt tekst wég.
   if (issue.category == SlideQualityCategory.textDensity &&
       slide != null &&
       canTrimBulletExplanations(slide)) {
