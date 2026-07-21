@@ -10,7 +10,7 @@ channel, and disclosure terms), not dictated by this tool.
 **Please do not report security vulnerabilities through public issues, pull
 requests, or other public channels.**
 
-Instead, report them privately by e-mail to **security@vigilis.nl**, and wait for
+Instead, report them privately by e-mail to **security@librekat.nl**, and wait for
 a reply before disclosing anything publicly. There is no published PGP key, so a
 report arrives as ordinary e-mail; if that is unacceptable for what you have
 found, send a first message without the details and we will agree on a channel.
