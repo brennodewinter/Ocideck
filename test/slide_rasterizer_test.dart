@@ -14,6 +14,8 @@ import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/services/slide_rasterizer.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 
+import 'slide_fixtures.dart';
+
 /// De rasterizer is de ENIGE renderweg naar PDF en PPTX — en naar "dia als
 /// afbeelding kopiëren". Wat hier uitkomt is letterlijk het artefact dat de
 /// klant in handen krijgt; de HTML-export loopt er langs (die krijgt markdown)
@@ -527,5 +529,31 @@ void main() {
       reason:
           'de fout moet zeggen wat eraan scheelt, niet alleen dát het faalde',
     );
+  });
+
+  // #615: van de 24 slidetypes kwamen er negen door géén enkele exporttest —
+  // section, twoBullets, twoImages, code, cockpit, question, timeline, finding
+  // en signOff. Export is wat de gebruiker uit OciDeck meeneemt, en een type dat
+  // als lege pagina rastert is een fout die de gebruiker als eerste ziet in
+  // plaats van de suite. Uitputtend dus, over het enum, met dezelfde fixture die
+  // de markdown-ronde-trip gebruikt: één lijst, want twee lijsten lopen uiteen.
+  group('elk slidetype rastert iets', () {
+    for (final type in SlideType.values) {
+      testWidgets(type.name, (tester) async {
+        final images = await _rasterize(
+          tester,
+          Deck(title: 'D', slides: [slideMetInhoud(type)]),
+        );
+        expect(images, hasLength(1));
+        final img = await _decode(tester, images.single);
+        expect(
+          _distinctColours(img.rgba),
+          greaterThan(1),
+          reason:
+              'een ${type.name}-dia rastert als een egale vlakte — dat is een '
+              'lege pagina in de PDF en de PPTX',
+        );
+      });
+    }
   });
 }

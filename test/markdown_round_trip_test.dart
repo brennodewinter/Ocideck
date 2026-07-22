@@ -16,6 +16,8 @@ import 'package:ocideck/services/cvss/cvss4.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/seal_codec.dart';
 
+import 'slide_fixtures.dart';
+
 /// Serialize a single slide to markdown and parse it straight back.
 Slide _roundTrip(Slide slide) {
   final service = MarkdownService();
@@ -2241,7 +2243,7 @@ void main() {
     // ook. Elke tak is één regel in [_metInhoud], niet een nieuwe test.
     for (final type in SlideType.values) {
       test(type.name, () {
-        final out = _roundTrip(_metInhoud(type));
+        final out = _roundTrip(slideMetInhoud(type));
         expect(
           out.type,
           type,
@@ -2252,48 +2254,4 @@ void main() {
       });
     }
   });
-}
-
-/// Een dia van [type] met het minimum aan inhoud dat hem herkenbaar maakt.
-///
-/// Types zónder eigen `_class`-token (bullets, image, twoImages, freeMarkdown)
-/// worden aan hun inhoud herkend; die krijgen hier precies wat de heuristiek
-/// nodig heeft. De rest draagt zijn token en heeft alleen inhoud nodig die niet
-/// leeg is.
-Slide _metInhoud(SlideType type) {
-  final basis = Slide.create(type);
-  return switch (type) {
-    SlideType.bullets => basis.copyWith(title: 'T', bullets: const ['Punt']),
-    SlideType.twoBullets => basis.copyWith(
-      title: 'T',
-      bullets: const ['Links'],
-      bullets2: const ['Rechts'],
-    ),
-    SlideType.bulletsImage => basis.copyWith(
-      title: 'T',
-      bullets: const ['Punt'],
-      imagePath: 'images/a.png',
-    ),
-    SlideType.image => basis.copyWith(imagePath: 'images/a.png'),
-    SlideType.twoImages => basis.copyWith(
-      imagePath: 'images/a.png',
-      imagePath2: 'images/b.png',
-    ),
-    SlideType.video => basis.copyWith(videoPath: 'media/film.mp4'),
-    SlideType.quote => basis.copyWith(
-      quote: 'Zo gaat dat',
-      quoteAuthor: 'N.N.',
-    ),
-    SlideType.freeMarkdown => basis.copyWith(
-      customMarkdown: 'Vrije **tekst** zonder kop.',
-    ),
-    SlideType.code => basis.copyWith(
-      codeLanguage: 'dart',
-      customMarkdown: 'void main() {}',
-    ),
-    SlideType.title ||
-    SlideType.section => basis.copyWith(title: 'T', subtitle: 'S'),
-    // De overige types dragen hun token én een gevulde body uit Slide.create.
-    _ => basis.copyWith(title: 'T'),
-  };
 }
