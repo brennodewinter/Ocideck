@@ -49,10 +49,6 @@ Future<bool> _confirmGitOmissions(BuildContext context, Deck deck) async {
   if (missing.isEmpty) return true;
   final l10n = context.l10n;
   final lines = <String>[
-    if (missing.videoSlides > 0)
-      '${l10n.d('Video')}: ${missing.videoSlides} ${l10n.d('slides')}',
-    if (missing.audioSlides > 0)
-      '${l10n.d('Audio')}: ${missing.audioSlides} ${l10n.d('slides')}',
     if (missing.annotatedSlides > 0)
       '${l10n.d('Tekeningen op slides')}: ${missing.annotatedSlides} ${l10n.d('slides')}',
     if (missing.noteSlides > 0)

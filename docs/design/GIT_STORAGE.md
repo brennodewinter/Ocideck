@@ -1157,7 +1157,20 @@ discussion still resolve.
 - **D5 — Large media.** **Partial clone** (`--filter=blob:none`) plus a size
   warning. No hard cap — telling a presentation author their video is too large
   is a bad answer from a tool that supports video — and **no Git-LFS in v1**
-  (§8.2).
+  (§8.2). Confirmed 2026-07-22: if you store presentations in git, the media
+  belongs there too; a warning is the right courtesy, not a substitute for
+  support. See D12 for how it comes back.
+- **D12 — How media comes back.** Media leaves through the pool like an image,
+  but it cannot come back the way an image does. `WebAssetStore` is a
+  `Map<String, Uint8List>` — fine for a picture, wrong for the 1 GiB the media
+  cap allows. So: **on desktop a `repo:` media reference resolves to a staged
+  file** (`AssetStaging.stageBytes`), and the player reads from disk exactly as
+  it does for a deck opened from a folder. **On web it resolves to `mem:` and is
+  refused above a browser-sized cap**, with a reason the user can read — a tab
+  that dies silently is worse than a slide that says why the video is not there.
+  Validation is symmetric with images: a forge is untrusted (P5), so the bytes
+  must sniff as a known container (`mediaMimeFromBytes`) and stay within
+  `maxMediaBytes`, just as an image must pass `looksLikeImage`.
 - **D6 — Repo granularity.** **Many decks per repo**; the shared asset pool
   requires it. A repo whose root is a single deck is **not** supported — one
   layout, no detection. The governing rule is that **a repo is a trust boundary**:

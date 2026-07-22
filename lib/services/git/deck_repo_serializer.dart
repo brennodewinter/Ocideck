@@ -122,10 +122,10 @@ Future<({Deck deck, List<String> missing})> withRepoChartData(
 
 /// Wat er van een deck níét meereist naar git (§9.1), geteld per soort.
 ///
-/// De git-opslag schrijft `deck.md`, de afbeeldingenpool en de grafiekdata. Alle
-/// overige lagen blijven achter: video en audio round-trippen nog niet, en de
-/// sidecars (`.ink.json` met de tekeningen, `.user-notes.json` met de notities,
-/// `.seal.json` met het zegel en de handtekening) worden nergens in
+/// De git-opslag schrijft `deck.md`, de assetpool (afbeeldingen **en** media,
+/// zie D5/D12) en de grafiekdata. Wat achterblijft zijn de sidecars:
+/// `.ink.json` met de tekeningen, `.user-notes.json` met de notities en
+/// `.seal.json` met het zegel en de handtekening worden nergens in
 /// `services/git/` geschreven. Op schijf gaan die wél mee, dus wie van een
 /// bestand naar git verhuist raakt ze kwijt zonder dat er iets misgaat waar de
 /// app op kan wijzen.
@@ -133,12 +133,6 @@ Future<({Deck deck, List<String> missing})> withRepoChartData(
 /// Dit meenemen is een grotere ingreep dan een waarschuwing; de waarschuwing kan
 /// niet wachten. De UI toont hem vóór de commit — daarna is de keuze al gemaakt.
 class GitDeckOmissions {
-  /// Dia's met een video die niet mee-gecommit wordt.
-  final int videoSlides;
-
-  /// Dia's met audio die niet mee-gecommit wordt.
-  final int audioSlides;
-
   /// Dia's waarop getekend is; die tekenlaag gaat niet mee.
   final int annotatedSlides;
 
@@ -155,19 +149,12 @@ class GitDeckOmissions {
   final bool sealed;
 
   const GitDeckOmissions({
-    this.videoSlides = 0,
-    this.audioSlides = 0,
     this.annotatedSlides = 0,
     this.noteSlides = 0,
     this.sealed = false,
   });
 
-  bool get isEmpty =>
-      videoSlides == 0 &&
-      audioSlides == 0 &&
-      annotatedSlides == 0 &&
-      noteSlides == 0 &&
-      !sealed;
+  bool get isEmpty => annotatedSlides == 0 && noteSlides == 0 && !sealed;
 
   bool get isNotEmpty => !isEmpty;
 }
@@ -178,12 +165,6 @@ class GitDeckOmissions {
 /// streken is niets om over te waarschuwen, en een waarschuwing die ook afgaat
 /// wanneer er niets aan de hand is, leert de gebruiker hem weg te klikken.
 GitDeckOmissions gitDeckOmissions(Deck deck) {
-  var video = 0;
-  var audio = 0;
-  for (final slide in deck.slides) {
-    if (slide.videoPath.trim().isNotEmpty) video++;
-    if (slide.audioPath.trim().isNotEmpty) audio++;
-  }
   final ids = {for (final s in deck.slides) s.id};
   final ink = deck.annotations.entries
       .where((e) => ids.contains(e.key) && e.value.isNotEmpty)
@@ -192,8 +173,6 @@ GitDeckOmissions gitDeckOmissions(Deck deck) {
       .where((e) => ids.contains(e.key) && e.value.trim().isNotEmpty)
       .length;
   return GitDeckOmissions(
-    videoSlides: video,
-    audioSlides: audio,
     annotatedSlides: ink,
     noteSlides: notes,
     sealed: deck.finalized || (deck.signature?.isNotEmpty ?? false),
@@ -253,7 +232,7 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
   final bytesForRef = <String, Uint8List>{}; // repo:-verwijzing → bytes
   final warnings = <String>{};
 
-  Future<String?> poolImage(String path) async {
+  Future<String?> poolAsset(String path, {required String fallback}) async {
     if (path.isEmpty) return null;
     // Al gepoold (bv. een afbeelding die ongemoeid bleef sinds het openen).
     if (GitRepoLayout.isRepoAsset(path)) return path;
@@ -266,7 +245,7 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
       return null;
     }
     final name = WebAssetStore.isMemPath(path)
-        ? (WebAssetStore.nameFor(path) ?? 'afbeelding.png')
+        ? (WebAssetStore.nameFor(path) ?? fallback)
         : p.basename(path);
     final ref = await AssetPool.refFor(bytes, name: name);
     if (ref == null) {
@@ -276,10 +255,6 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
     refForMem[path] = ref;
     bytesForRef[ref] = bytes;
     return ref;
-  }
-
-  void warnUnpooledMedia(String path) {
-    if (path.isNotEmpty && !GitRepoLayout.isRepoAsset(path)) warnings.add(path);
   }
 
   final slides = <Slide>[];
@@ -293,12 +268,21 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
     // eerst elke verwijzing naar een `repo:`-pad, dan de dia in haar geheel om.
     final pooled = <String, String>{};
     for (final path in slideImagePaths(slide).toSet()) {
-      final ref = await poolImage(path);
+      final ref = await poolAsset(path, fallback: 'afbeelding.png');
       if (ref != null) pooled[path] = ref;
     }
-    warnUnpooledMedia(slide.videoPath);
-    warnUnpooledMedia(slide.audioPath);
-    slides.add(rewriteSlideImagePaths(slide, (path) => pooled[path]));
+    // Video en audio gaan door dezelfde pool. Wie zijn presentaties in git
+    // bewaart, hoort zijn media daar ook te vinden: een deck waarin de film
+    // ontbreekt is geen kopie maar een fragment (D5). De pool adresseert op
+    // inhoud, dus een ongewijzigde film levert bij elke commit hetzelfde blob
+    // op en groeit de historie niet.
+    final videoRef = await poolAsset(slide.videoPath, fallback: 'video.mp4');
+    final audioRef = await poolAsset(slide.audioPath, fallback: 'audio.m4a');
+
+    var next = rewriteSlideImagePaths(slide, (path) => pooled[path]);
+    if (videoRef != null) next = next.copyWith(videoPath: videoRef);
+    if (audioRef != null) next = next.copyWith(audioPath: audioRef);
+    slides.add(next);
   }
   final rewritten = deck.copyWith(slides: slides);
 

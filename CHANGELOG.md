@@ -288,6 +288,22 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   achterblijft. Voor u verandert er niets aan wat de koppelingen doen; alleen de
   melding bij een te grote maplijst noemt nu overal het aantal.
 
+### Added
+- **Video en audio reizen nu mee naar een git-repository.** Wie zijn
+  presentaties in git bewaart, kreeg tot nu toe een waarschuwing dat de film en
+  het geluid achterbleven — en die waarschuwing had gelijk. Dat is nu niet meer
+  nodig: media gaat door dezelfde gedeelde pool als de afbeeldingen. Twee dia's
+  met dezelfde film delen één bestand, en een film die niet verandert levert bij
+  elke commit hetzelfde bestand op, zodat uw historie er niet van groeit.
+
+  Bij het openen komt de media terug: op macOS, Windows en Linux als bestand op
+  schijf, zodat de speler hem gewoon afspeelt. In de browser geldt een kleinere
+  grens — daar past een film van een gigabyte niet in het werkgeheugen van een
+  tabblad.
+
+  Nog niet meegereisd, en de waarschuwing noemt ze nog steeds: de tekenlaag, uw
+  notities en het zegel.
+
 ### Fixed
 - **Uitgezette landenpakketten werden toch weggelakt.** Zet u een land uit in de
   privacy-instellingen, dan meldt OciWacht die nummers niet meer — maar de
