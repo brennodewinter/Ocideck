@@ -18,9 +18,12 @@ LibreKAT; contributors retain copyright in theirs, licensed under EUPL-1.2.
 *(Corrected 2026-07-22: this said copyright "is held by Stichting LibreKAT"
 without qualification, which is true today only because every commit so far
 has one author, and would become false the moment a first outside pull request
-landed. There is no CLA and no sign-off requirement, so the foundation has no
-instrument that would make the unqualified sentence true — see the open issue
-on adopting a DCO.)*
+landed.)* Every contribution is certified under the
+[Developer Certificate of Origin](dco.txt) — a `Signed-off-by` line per commit,
+the contributor's statement that they had the right to submit it under the
+project licence. That is the instrument that lets the sentence above hold once
+there is more than one author. *(Adopted 2026-07-23, #594; there was no CLA and
+no sign-off before, so the foundation had nothing making the split true.)*
 
 The name is a wink: *Oci* comes from the **Ocicats** (Brenno's cats) and *Deck*
 is short for a presentation deck.
