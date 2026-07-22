@@ -80,6 +80,19 @@ mermaid.initialize({
   theme: 'neutral',
   securityLevel: 'strict',
   htmlLabels: false,
+  // `flowchart.htmlLabels` staat standaard op true en het topniveau zakt daar
+  // niet in door. Zonder deze regel zetten flowchart, classDiagram en
+  // stateDiagram-v2 hun labels in <foreignObject> — en `sanitizeMermaidSvg`
+  // strípt dat, terecht, waardoor de gebruiker lege blokjes en lege pijlen
+  // overhield. Deze drie delen dezelfde renderweg, dus één sleutel repareert
+  // ze alle drie; `class:` en `state:` bestaan wél maar doen hier niets.
+  flowchart: { htmlLabels: false },
+  // `htmlLabels` in `secure` is wat een deck tegenhoudt dat via
+  // `%%{init: {"flowchart": {"htmlLabels": true}}}%%` alsnog HTML in de labels
+  // probeert te krijgen — mermaid past die lijst op élke diepte toe, niet
+  // alleen op het topniveau. `flowchart` zélf hier bijzetten voegt daar niets
+  // aan toe en kost wel iets: dan ligt het hele flowchart-configblok vast en
+  // kan een deck ook geen `curve`, `padding` of `nodeSpacing` meer kiezen.
   secure: ['securityLevel', 'startOnLoad', 'htmlLabels']
 });
 window.__renderMermaid = async function(source) {
