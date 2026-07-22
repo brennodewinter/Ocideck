@@ -146,25 +146,33 @@ Future<void> _saveToGit(
   final l10n = context.l10n;
   try {
     final notifier = ref.read(tabsProvider.notifier);
-    final result = native != null
-        ? await notifier.saveToGitNative(
-            native,
-            config: config,
-            deckDir: deckDir,
-            branch: config.defaultBranch,
-            message: choice.message,
-            connectionId: connection.id,
-          )
-        : await notifier.saveToGit(
-            forge,
-            config: config,
-            deckDir: deckDir,
-            branch: config.defaultBranch,
-            message: choice.message,
-            mirror: ref.read(draftMirrorProvider(connection.id)),
-            outbox: ref.read(outboxProvider(connection.id)),
-            connectionId: connection.id,
-          );
+    final gitConnection = connection;
+    // Pas hier de melding aan: alles hierboven is dialoog en keuze, en "bezig
+    // met opslaan" tonen terwijl de gebruiker nog een commitboodschap typt zou
+    // liegen over wat er gebeurt.
+    final result = await withSaveProgress(
+      ref,
+      SaveTarget.git,
+      () => native != null
+          ? notifier.saveToGitNative(
+              native,
+              config: config,
+              deckDir: deckDir,
+              branch: config.defaultBranch,
+              message: choice.message,
+              connectionId: gitConnection.id,
+            )
+          : notifier.saveToGit(
+              forge,
+              config: config,
+              deckDir: deckDir,
+              branch: config.defaultBranch,
+              message: choice.message,
+              mirror: ref.read(draftMirrorProvider(gitConnection.id)),
+              outbox: ref.read(outboxProvider(gitConnection.id)),
+              connectionId: gitConnection.id,
+            ),
+    );
     if (!context.mounted) return;
     switch (result.status) {
       case GitSaveStatus.committed:

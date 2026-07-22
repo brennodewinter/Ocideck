@@ -1811,6 +1811,40 @@ const _dutchSourceAddEl = <String, String>{
   'Zegel nog niet vastgelegd': 'Η σφραγίδα δεν καταγράφηκε ακόμη',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Δεν υπάρχει ακόμη αποθηκευμένο αρχείο για να ελεγχθεί η σφραγίδα. Αποθηκεύστε το deck.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Η παράλειψη είναι ενεργή: ό,τι χαρακτηρίζει ο έλεγχος ως προσωπικό δεδομένο μαυρίζεται, και όλες οι εικόνες, τα βίντεο και ο ήχος αυτής της διαφάνειας δεν πηγαίνουν στην οθόνη ούτε στην εξαγωγή. Το αρχείο markdown σας τα κρατά όλα.',
+  'Bestand': 'Αρχείο',
+  'Venster': 'Παράθυρο',
+  'Help': 'Βοήθεια',
+  'Alles selecteren': 'Επιλογή όλων',
+  'Plakken': 'Επικόλληση',
+  'Opnieuw': 'Επανάληψη',
+  'Eigenschappen': 'Ιδιότητες',
+  'Opdrachten…': 'Εντολές…',
+  'Opslaan…': 'Αποθήκευση…',
+  'Uploaden naar WebDAV…': 'Μεταφόρτωση στο WebDAV…',
+  'Uploaden naar S3…': 'Μεταφόρτωση στο S3…',
+  'Vastleggen in git…': 'Υποβολή στο git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Γίνεται αποθήκευση. Η εκ νέου αποθήκευση δεν κάνει τίποτα μέχρι να ολοκληρωθεί.',
+  'Klaar — privacy niet gecontroleerd': 'Έτοιμο — το απόρρητο δεν ελέγχθηκε',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Δεν έγινε έλεγχος για προσωπικά δεδομένα, ειδικές κατηγορίες δεδομένων και μυστικά: ο έλεγχος απορρήτου είναι απενεργοποιημένος στην Ασφάλεια.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Παρουσιάσεις που παραμένουν απλά αρχεία Markdown: αναγνώσιμες, με δυνατότητα αναζήτησης και ανοίγουν με οποιονδήποτε επεξεργαστή.',
+  'sjablonen om mee te beginnen, of leeg': 'πρότυπα για να ξεκινήσετε, ή κενή',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Οι διαφάνειες παραδείγματος ενός προτύπου είναι στα ολλανδικά. Το όνομα και η περιγραφή ακολουθούν τη δική σας γλώσσα· το περιεχόμενο το προσαρμόζετε μετά τη δημιουργία.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Η παράλειψη είναι ενεργή: τα δεδομένα που βρέθηκαν μαυρίζονται και όλες οι εικόνες, τα βίντεο και ο ήχος αυτής της διαφάνειας δεν πηγαίνουν στην οθόνη ούτε στην εξαγωγή. Το αρχείο markdown σας τα κρατά όλα.',
+  'Mijn tekst': 'Το κείμενό μου',
+  'Wat zij zien': 'Τι βλέπουν',
+  'Presentatiegegevens': 'Στοιχεία παρουσίασης',
+  'Open presentatiegegevens': 'Άνοιγμα στοιχείων παρουσίασης',
+  'Motivering van een uitsluiting': 'Αιτιολόγηση εξαίρεσης',
+  'Motivering van een bevestiging': 'Αιτιολόγηση επιβεβαίωσης',
+  'Tabel koprij, kolom {kolom}': 'Πίνακας γραμμή κεφαλίδας, στήλη {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Πίνακας γραμμή {rij}, στήλη {kolom}',
   'Via deze website ophalen?': 'Λήψη μέσω αυτού του ιστότοπου;',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'Ο διακομιστής αυτής της παρουσίασης δεν επέτρεψε στο πρόγραμμα περιήγησης να διαβάσει το αρχείο απευθείας. Το OciDeck μπορεί να προωθήσει τη διεύθυνση στον ιστότοπο από τον οποίο προέρχεται το ίδιο το OciDeck, και εκείνος το ανακτά. Έτσι ο ιστότοπος αυτός βλέπει ολόκληρη τη διεύθυνση — αν στον σύνδεσμο υπάρχει κλειδί ή κωδικός, τα βλέπει κι αυτά.',

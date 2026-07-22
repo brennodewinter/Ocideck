@@ -1799,6 +1799,40 @@ const _dutchSourceAddLa = <String, String>{
   'Zegel nog niet vastgelegd': 'Sigillum nondum consignatum',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Nulla adhuc tabella servata est ad sigillum recomputandum. Serva acervum.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Omissio activa est: quod examen datum personale iudicat denigratur, et omnes imagines, pelliculae et soni huius laminae neque ad scrinium neque ad exportationem eunt. Fasciculus tuus markdown omnia servat.',
+  'Bestand': 'Fasciculus',
+  'Venster': 'Fenestra',
+  'Help': 'Auxilium',
+  'Alles selecteren': 'Omnia eligere',
+  'Plakken': 'Agglutinare',
+  'Opnieuw': 'Iterare',
+  'Eigenschappen': 'Proprietates',
+  'Opdrachten…': 'Mandata…',
+  'Opslaan…': 'Servatur…',
+  'Uploaden naar WebDAV…': 'In WebDAV imponitur…',
+  'Uploaden naar S3…': 'In S3 imponitur…',
+  'Vastleggen in git…': 'In git committitur…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Servatur. Iterum servare nihil facit donec hoc perficiatur.',
+  'Klaar — privacy niet gecontroleerd': 'Paratum — secretum non examinatum',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Data personalia, data specialia et arcana quaesita non sunt: examen privati apud Securitatem exstinctum est.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Praesentationes quae simplices fasciculi Markdown manent: legibiles, investigabiles et quovis editore aperiendae.',
+  'sjablonen om mee te beginnen, of leeg': 'exempla ad incipiendum, vel vacuum',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Laminae exempli exemplaris Batavice scriptae sunt. Nomen et descriptio linguam tuam sequuntur; contentum post creationem accommodas.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Omissio activa est: data inventa denigrantur et omnes imagines, pelliculae et soni huius laminae neque ad scrinium neque ad exportationem eunt. Fasciculus tuus markdown omnia servat.',
+  'Mijn tekst': 'Textus meus',
+  'Wat zij zien': 'Quod vident',
+  'Presentatiegegevens': 'Data praesentationis',
+  'Open presentatiegegevens': 'Data praesentationis aperire',
+  'Motivering van een uitsluiting': 'Ratio exclusionis',
+  'Motivering van een bevestiging': 'Ratio confirmationis',
+  'Tabel koprij, kolom {kolom}': 'Tabula ordo capitis, columna {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabula ordo {rij}, columna {kolom}',
   'Via deze website ophalen?': 'Per hunc situm accersere?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'Servitor huius praesentationis navigatro plicam directe legere non permisit. OciDeck inscriptionem tradere potest situi unde ipsum OciDeck venit, qui eam tunc accersit. Ita ille situs totam inscriptionem videt — si clavis aut nota in nexu inest, ille situs eam quoque videt.',

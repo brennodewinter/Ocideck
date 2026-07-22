@@ -1783,6 +1783,40 @@ const _dutchSourceAddFi = <String, String>{
   'Zegel nog niet vastgelegd': 'Sinettiä ei ole vielä kirjattu',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Tallennettua tiedostoa, jota vasten sinetin voisi tarkistaa, ei vielä ole. Tallenna diasarja.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Poisjättö on käytössä: se, minkä tarkistus katsoo henkilötiedoksi, mustataan, eivätkä tämän dian kuvat, video ja ääni mene näytölle tai vientiin. Markdown-tiedostosi säilyttää kaiken.',
+  'Bestand': 'Arkisto',
+  'Venster': 'Ikkuna',
+  'Help': 'Ohje',
+  'Alles selecteren': 'Valitse kaikki',
+  'Plakken': 'Liitä',
+  'Opnieuw': 'Tee uudelleen',
+  'Eigenschappen': 'Ominaisuudet',
+  'Opdrachten…': 'Komennot…',
+  'Opslaan…': 'Tallennetaan…',
+  'Uploaden naar WebDAV…': 'Lähetetään WebDAV-palvelimeen…',
+  'Uploaden naar S3…': 'Lähetetään S3-palveluun…',
+  'Vastleggen in git…': 'Kirjataan gitiin…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Tallennetaan. Uudelleen tallentaminen ei tee mitään, ennen kuin tämä on valmis.',
+  'Klaar — privacy niet gecontroleerd': 'Valmis — yksityisyyttä ei tarkistettu',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Henkilötietoja, erityisiä tietoryhmiä ja salaisuuksia ei ole tarkistettu: yksityisyystarkistus on pois päältä kohdassa Turvallisuus.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Esitykset, jotka pysyvät tavallisina Markdown-tiedostoina: luettavia, haettavia ja avattavissa millä tahansa editorilla.',
+  'sjablonen om mee te beginnen, of leeg': 'mallia aloittamiseen, tai tyhjä',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Mallin esimerkkidiat ovat hollanniksi. Nimi ja kuvaus noudattavat omaa kieltäsi; sisällön muokkaat luonnin jälkeen.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Poisjättö on käytössä: löytyneet tiedot mustataan, eivätkä tämän dian kuvat, video ja ääni mene näytölle tai vientiin. Markdown-tiedostosi säilyttää kaiken.',
+  'Mijn tekst': 'Oma teksti',
+  'Wat zij zien': 'Mitä he näkevät',
+  'Presentatiegegevens': 'Esityksen tiedot',
+  'Open presentatiegegevens': 'Avaa esityksen tiedot',
+  'Motivering van een uitsluiting': 'Poikkeuksen perustelu',
+  'Motivering van een bevestiging': 'Vahvistuksen perustelu',
+  'Tabel koprij, kolom {kolom}': 'Taulukko otsikkorivi, sarake {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Taulukko rivi {rij}, sarake {kolom}',
   'Via deze website ophalen?': 'Haetaanko tämän sivuston kautta?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'Tämän esityksen palvelin ei antanut selaimen lukea tiedostoa suoraan. OciDeck voi välittää osoitteen sille sivustolle, jolta OciDeck itse on peräisin, ja se hakee tiedoston. Silloin tuo sivusto näkee koko osoitteen — jos linkissä on avain tai koodi, sivusto näkee myös sen.',

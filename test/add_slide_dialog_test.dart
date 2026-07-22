@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/dialogs/add_slide_dialog.dart';
+import 'package:ocideck/widgets/editors/slide_type_help.dart';
 
 void main() {
   Future<SlideType?> Function() openDialog(
@@ -188,5 +191,54 @@ void main() {
     await tester.sendKeyEvent(LogicalKeyboardKey.escape);
     await tester.pumpAndSettle();
     expect(find.byType(AddSlideDialog), findsNothing);
+  });
+
+  testWidgets('de uitleg staat waar de keuze wordt gemaakt', (tester) async {
+    // De volledige uitleg per slidetype lag al klaar in 32 talen, maar
+    // verscheen pas ná het invoegen, achter een dichtgeklapte "Wat kan ik
+    // hier?". Wie moest kiezen, koos op een draadframe en een woord.
+    await openDialog(tester)();
+    const l10n = AppLocalizations(Locale('nl'));
+
+    // Het eerste kaartje heeft de focus, dus die uitleg staat er meteen.
+    expect(find.text(slideTypeHelpText(l10n, SlideType.title)), findsOneWidget);
+
+    // Een ander kaartje aanwijzen wisselt de uitleg.
+    final tableHelp = slideTypeHelpText(l10n, SlideType.table);
+    expect(find.text(tableHelp), findsNothing);
+    final card = find.ancestor(
+      of: find.byWidgetPredicate((w) {
+        final painter = w is CustomPaint ? w.painter : null;
+        return painter is SlideTypePreviewPainter &&
+            painter.type == SlideType.table;
+      }),
+      matching: find.byType(InkWell),
+    );
+    await tester.ensureVisible(card.first);
+    await tester.pumpAndSettle();
+    final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+    await gesture.addPointer(location: Offset.zero);
+    addTearDown(gesture.removePointer);
+    await tester.pump();
+    await gesture.moveTo(tester.getCenter(card.first));
+    await tester.pumpAndSettle();
+    expect(find.text(tableHelp), findsOneWidget);
+    // En de uitleg van het vorige type is weg: één vak, één antwoord.
+    expect(find.text(slideTypeHelpText(l10n, SlideType.title)), findsNothing);
+  });
+
+  testWidgets('een schermlezer hoort de uitleg op het kaartje zelf', (
+    tester,
+  ) async {
+    // Het vak onder het rooster wordt door een schermlezer niet vanzelf
+    // gepasseerd; de hint op de knop wél.
+    await openDialog(tester)();
+    const l10n = AppLocalizations(Locale('nl'));
+    final semantics = tester
+        .widgetList<Semantics>(find.byType(Semantics))
+        .where((s) => s.properties.hint != null)
+        .map((s) => s.properties.hint)
+        .toSet();
+    expect(semantics, contains(slideTypeHelpText(l10n, SlideType.quote)));
   });
 }

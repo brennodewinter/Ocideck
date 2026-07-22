@@ -212,4 +212,43 @@ void main() {
       expect(readiness.status, ExportReadinessStatus.blockedByClassification);
     });
   });
+
+  group('privacycontrole uit', () {
+    // Een lege scanuitslag betekent twee volstrekt verschillende dingen: "niets
+    // gevonden" en "niet gekeken". Van buitenaf zien ze er identiek uit, en de
+    // balk koos altijd de geruststellende lezing.
+    test('niets te melden, maar niet gekeken → geen groen oordeel', () {
+      final readiness = evaluateExportReadiness(
+        needsSave: false,
+        classificationDecision: allow,
+        qualityDecision: noQualityIssues,
+        privacyChecksEnabled: false,
+      );
+      expect(readiness.status, ExportReadinessStatus.readyPrivacyUnchecked);
+      expect(readiness.status, isNot(ExportReadinessStatus.ready));
+      // Niet gekeken is geen blokkade: exporteren mag gewoon.
+      expect(readiness.canOpenExport, isTrue);
+    });
+
+    test('een echte blokkade wint nog steeds van "niet gekeken"', () {
+      final readiness = evaluateExportReadiness(
+        needsSave: true,
+        classificationDecision: allow,
+        qualityDecision: noQualityIssues,
+        privacyChecksEnabled: false,
+      );
+      expect(readiness.status, ExportReadinessStatus.needsSave);
+    });
+
+    test('kwaliteitswaarschuwingen blijven leidend boven "niet gekeken"', () {
+      const qualityPolicy = QualityExportPolicy();
+      final readiness = evaluateExportReadiness(
+        needsSave: false,
+        classificationDecision: allow,
+        qualityDecision: qualityPolicy.evaluate(_resultWith(warnings: 2)),
+        privacyChecksEnabled: false,
+      );
+      expect(readiness.status, ExportReadinessStatus.qualityWarnings);
+    });
+  });
 }

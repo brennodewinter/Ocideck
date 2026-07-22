@@ -1790,6 +1790,40 @@ const _dutchSourceAddSk = <String, String>{
   'Zegel nog niet vastgelegd': 'Pečať zatiaľ nezaznamenaná',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Zatiaľ neexistuje uložený súbor, voči ktorému by sa dala pečať prepočítať. Uložte balík.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Vynechanie je zapnuté: to, čo kontrola označí za osobný údaj, sa začierni a všetky obrázky, video aj zvuk tejto snímky nejdú na obrazovku ani do exportu. Tvoj súbor markdown si všetko ponechá.',
+  'Bestand': 'Súbor',
+  'Venster': 'Okno',
+  'Help': 'Pomocník',
+  'Alles selecteren': 'Vybrať všetko',
+  'Plakken': 'Prilepiť',
+  'Opnieuw': 'Znova',
+  'Eigenschappen': 'Vlastnosti',
+  'Opdrachten…': 'Príkazy…',
+  'Opslaan…': 'Ukladanie…',
+  'Uploaden naar WebDAV…': 'Nahrávanie na WebDAV…',
+  'Uploaden naar S3…': 'Nahrávanie na S3…',
+  'Vastleggen in git…': 'Zápis do gitu…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Prebieha ukladanie. Opätovné uloženie neurobí nič, kým sa toto neskončí.',
+  'Klaar — privacy niet gecontroleerd': 'Hotovo — súkromie neskontrolované',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Osobné údaje, osobitné kategórie údajov ani tajomstvá sa nekontrolovali: kontrola súkromia je vypnutá v časti Zabezpečenie.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Prezentácie, ktoré zostávajú obyčajnými súbormi Markdown: čitateľné, prehľadávateľné a otvoriteľné v ľubovoľnom editore.',
+  'sjablonen om mee te beginnen, of leeg': 'šablón na začiatok alebo prázdna',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Ukážkové snímky šablóny sú v holandčine. Názov a popis sa riadia tvojím jazykom; obsah upravíš po vytvorení.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Vynechanie je zapnuté: nájdené údaje sa začiernia a všetky obrázky, video aj zvuk tejto snímky nejdú na obrazovku ani do exportu. Tvoj súbor markdown si všetko ponechá.',
+  'Mijn tekst': 'Môj text',
+  'Wat zij zien': 'Čo vidia oni',
+  'Presentatiegegevens': 'Údaje prezentácie',
+  'Open presentatiegegevens': 'Otvoriť údaje prezentácie',
+  'Motivering van een uitsluiting': 'Odôvodnenie výnimky',
+  'Motivering van een bevestiging': 'Odôvodnenie potvrdenia',
+  'Tabel koprij, kolom {kolom}': 'Tabuľka hlavička, stĺpec {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabuľka riadok {rij}, stĺpec {kolom}',
   'Via deze website ophalen?': 'Načítať cez túto webovú stránku?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'Server tejto prezentácie nedovolil prehliadaču prečítať súbor priamo. OciDeck môže odovzdať adresu webovej stránke, z ktorej sám pochádza, a tá súbor načíta. Tá webová stránka tak vidí celú adresu — ak je v odkaze kľúč alebo kód, vidí aj ten.',

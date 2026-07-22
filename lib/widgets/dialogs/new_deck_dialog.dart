@@ -130,6 +130,45 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
     super.dispose();
   }
 
+  /// Zegt in welke taal de voorbeelddia's staan, als dat niet de taal is die de
+  /// gebruiker leest.
+  ///
+  /// De titel en de omschrijving van een sjabloon lopen door `l10n.d()` en
+  /// verschijnen dus in de eigen taal; de dia-inhoud niet. Wie in het Turks
+  /// kiest, kreeg daardoor een Nederlands deck zonder dat iets dat aankondigde.
+  ///
+  /// Dat is geen omissie maar een keuze, en die staat hier omdat hij zichtbaar
+  /// hoort te zijn: sjablooninhoud is **deck-inhoud**. Ze belandt in het
+  /// opgeslagen markdown-bestand en is vanaf dat moment van de auteur. Vertalen
+  /// zou de inhoud van een document laten afhangen van de menutaal waarin het
+  /// toevallig is aangemaakt — twee mensen die hetzelfde sjabloon kiezen, kregen
+  /// dan onvergelijkbare bestanden. Zie ook `_contentHomes` in
+  /// `tool/check_hardcoded_text.dart`, waar diezelfde regel de poort stuurt.
+  ///
+  /// Eerlijk zijn kost één regel; de 49 sjablonen × 31 talen die het alternatief
+  /// vraagt, kosten tienduizenden regels tekst die niemand onderhoudt.
+  ///
+  /// Alleen zichtbaar buiten het Nederlands: voor een Nederlandse lezer is het
+  /// ruis, en een melding die niets toevoegt leert mensen meldingen overslaan.
+  Widget _templateLanguageNotice(BuildContext context, AppLocalizations l10n) {
+    if (l10n.languageCode == 'nl') return const SizedBox.shrink();
+    return Padding(
+      // Sleutel zodat een test op de aanwezigheid kan toetsen zonder de tekst in
+      // 32 talen te hoeven kennen.
+      key: const ValueKey('templateLanguageNotice'),
+      padding: const EdgeInsets.only(top: 4),
+      child: Text(
+        l10n.d(
+          "De voorbeelddia's van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.",
+        ),
+        style: TextStyle(
+          fontSize: 11,
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+        ),
+      ),
+    );
+  }
+
   /// The catalogue narrowed by the search box and sorted for display. Matches
   /// the localised title and description, plus the Dutch source strings, so a
   /// term in either language finds the template.
@@ -241,6 +280,7 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
                   l10n.d('Sjabloon'),
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
+                _templateLanguageNotice(context, l10n),
                 const SizedBox(height: 6),
                 TextField(
                   key: const ValueKey('templateSearchField'),

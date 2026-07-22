@@ -132,16 +132,20 @@ Future<bool> _saveToS3(
     final ext = choice!.format == DeckSaveFormat.ocideck ? '.ocideck' : '.md';
     final targetPath = '${choice.base}$ext';
     try {
-      await ref
-          .read(tabsProvider.notifier)
-          .saveToS3(
-            tab,
-            service,
-            connectionId: connection.id,
-            format: choice.format,
-            targetPath: targetPath,
-            overwrite: overwrite,
-          );
+      await withSaveProgress(
+        ref,
+        SaveTarget.s3,
+        () => ref
+            .read(tabsProvider.notifier)
+            .saveToS3(
+              tab,
+              service,
+              connectionId: connection.id,
+              format: choice!.format,
+              targetPath: targetPath,
+              overwrite: overwrite,
+            ),
+      );
       // Het opslaan is geslaagd; alleen de melding kan niet meer getoond worden.
       if (!context.mounted) return true;
       messenger.showSnackBar(

@@ -111,6 +111,7 @@ coverage improves rather than treated as a target already met.
 | [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering & file-size ratchets | ✅ | ✅ | ✅ |
 | [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ |
 | [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ |
+| [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
 | [`make coverage-per-file`](#make-coverage-per-file) | At most `filesBelowFloorBudget` `lib/` files run under 20% of their own lines | ✅ | ✅ | — |
@@ -254,6 +255,34 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Not covered:** unused *public symbols* inside a live file (high false-positive
   rate: generated l10n, test-only use). Use `make fix` (`dart fix --apply`) to
   sweep the analyzer-visible kinds; `make analyze` then enforces the result.
+
+### `make check-hardcoded-text`
+- **Runs:** `dart run tool/check_hardcoded_text.dart` (`--list` prints the full
+  inventory per area, for clean-up batches)
+- **Covers:** the first half of the localisation promise — that every visible
+  string actually passes through `l10n.d('…')`. `test/app_localizations_test.dart`
+  guards the second half (every `d('…')` exists in all 32 languages), but nothing
+  guarded that a string reached `d()` at all. The gap sat in the indirect
+  hand-offs: `EditorField` calls `l10n.d(widget.label)`, so
+  `EditorField(label: 'Titel (H1)')` at the call site is invisible to a scanner
+  that only looks for `d('…')`.
+- **How it measures:** an AST dataflow, run backwards from two separate seed
+  sets — the parameters of `d()`/`t()`, and the raw Flutter sinks that put text
+  on screen unchanged (`Text`, `Tooltip`, `Semantics`, `InputDecoration`, …).
+  A parameter that is passed on to a known sink becomes a sink itself, which is
+  how `EditorField.label` is found without anyone listing it. A literal that
+  reaches only the first set is a **source key** (legitimate: it is a `d()`
+  argument, one call further along); one that reaches the second is a violation.
+  The *type* decides, not the parameter name — `title:` on a `MastgTest` is
+  reference data, not interface text.
+- **Not covered on purpose:** the deck templates. `_contentHomes` in the tool
+  lists the `lib/models/deck_template*.dart` files, because their strings are
+  deck *content*: they land in the author's saved file and get typed over.
+  Translating them would make a document's text depend on the menu language it
+  was created in. The new-presentation dialog says so to anyone not reading
+  Dutch rather than leaving it unexplained.
+- **Failure means:** route the string through `l10n.d('…')` — and remember the
+  translation gate then wants it in every language.
 
 ### `make test`
 - **Runs:** `flutter test --test-randomize-ordering-seed random --exclude-tags golden`

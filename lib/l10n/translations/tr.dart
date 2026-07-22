@@ -2765,6 +2765,40 @@ const _dutchSourceAddTr = <String, String>{
   'Zegel nog niet vastgelegd': 'Mühür henüz kaydedilmedi',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Mührün karşılaştırılacağı kayıtlı bir dosya henüz yok. Sunumu kaydedin.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Çıkarma açık: denetimin kişisel veri saydığı şeyler karartılır ve bu slayttaki tüm görseller, video ve ses ekrana ya da dışa aktarmaya gitmez. Markdown dosyanız her şeyi saklar.',
+  'Bestand': 'Dosya',
+  'Venster': 'Pencere',
+  'Help': 'Yardım',
+  'Alles selecteren': 'Tümünü seç',
+  'Plakken': 'Yapıştır',
+  'Opnieuw': 'Yinele',
+  'Eigenschappen': 'Özellikler',
+  'Opdrachten…': 'Komutlar…',
+  'Opslaan…': 'Kaydediliyor…',
+  'Uploaden naar WebDAV…': 'WebDAV\'a yükleniyor…',
+  'Uploaden naar S3…': 'S3\'e yükleniyor…',
+  'Vastleggen in git…': 'git\'e işleniyor…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Kaydediliyor. Bu bitene kadar tekrar kaydetmek bir şey yapmaz.',
+  'Klaar — privacy niet gecontroleerd': 'Hazır — gizlilik denetlenmedi',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Kişisel veriler, özel nitelikli veriler ve sırlar için denetim yapılmadı: gizlilik denetimi Güvenlik altında kapalı.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Düz Markdown dosyası olarak kalan sunumlar: okunabilir, aranabilir ve her düzenleyiciyle açılabilir.',
+  'sjablonen om mee te beginnen, of leeg': 'şablonla başlayın ya da boş',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Bir şablonun örnek slaytları Felemenkçedir. Ad ve açıklama kendi dilinizi izler; içeriği oluşturduktan sonra kendiniz düzenlersiniz.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Çıkarma açık: bulunan veriler karartılır ve bu slayttaki tüm görseller, video ve ses ekrana ya da dışa aktarmaya gitmez. Markdown dosyanız her şeyi saklar.',
+  'Mijn tekst': 'Kendi metnim',
+  'Wat zij zien': 'Onların gördüğü',
+  'Presentatiegegevens': 'Sunum bilgileri',
+  'Open presentatiegegevens': 'Sunum bilgilerini aç',
+  'Motivering van een uitsluiting': 'Bir istisnanın gerekçesi',
+  'Motivering van een bevestiging': 'Bir doğrulamanın gerekçesi',
+  'Tabel koprij, kolom {kolom}': 'Tablo başlık satırı, sütun {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tablo satır {rij}, sütun {kolom}',
   'Via deze website ophalen?': 'Bu site üzerinden alınsın mı?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'Bu sunumun sunucusu, tarayıcının dosyayı doğrudan okumasına izin vermedi. OciDeck adresi, kendisinin geldiği siteye iletebilir ve dosyayı o site alır. Böylece o site adresin tamamını görür — bağlantıda bir anahtar veya kod varsa o site onu da görür.',

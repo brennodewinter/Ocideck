@@ -1782,6 +1782,40 @@ const _dutchSourceAddLv = <String, String>{
   'Zegel nog niet vastgelegd': 'Zīmogs vēl nav fiksēts',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Vēl nav saglabāta faila, pret kuru pārbaudīt zīmogu. Saglabājiet deku.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Izlaišana ir ieslēgta: tas, ko pārbaude atzīst par personas datiem, tiek nomelnots, un visi šī slaida attēli, video un audio nenonāk ne ekrānā, ne eksportā. Tavs markdown fails saglabā visu.',
+  'Bestand': 'Fails',
+  'Venster': 'Logs',
+  'Help': 'Palīdzība',
+  'Alles selecteren': 'Atlasīt visu',
+  'Plakken': 'Ielīmēt',
+  'Opnieuw': 'Atkārtot',
+  'Eigenschappen': 'Īpašības',
+  'Opdrachten…': 'Komandas…',
+  'Opslaan…': 'Notiek saglabāšana…',
+  'Uploaden naar WebDAV…': 'Notiek augšupielāde WebDAV…',
+  'Uploaden naar S3…': 'Notiek augšupielāde S3…',
+  'Vastleggen in git…': 'Notiek reģistrēšana git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Notiek saglabāšana. Atkārtota saglabāšana neko nedara, kamēr šis nav pabeigts.',
+  'Klaar — privacy niet gecontroleerd': 'Gatavs — privātums nav pārbaudīts',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Personas dati, īpašu kategoriju dati un noslēpumi nav pārbaudīti: privātuma pārbaude ir izslēgta sadaļā Drošība.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Prezentācijas, kas paliek parasti Markdown faili: lasāmi, meklējami un atverami jebkurā redaktorā.',
+  'sjablonen om mee te beginnen, of leeg': 'veidnes, ar ko sākt, vai tukša',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Veidnes paraugslaidi ir nīderlandiešu valodā. Nosaukums un apraksts seko tavai valodai; saturu pielāgo pēc izveides.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Izlaišana ir ieslēgta: atrastie dati tiek nomelnoti un visi šī slaida attēli, video un audio nenonāk ne ekrānā, ne eksportā. Tavs markdown fails saglabā visu.',
+  'Mijn tekst': 'Mans teksts',
+  'Wat zij zien': 'Ko redz viņi',
+  'Presentatiegegevens': 'Prezentācijas dati',
+  'Open presentatiegegevens': 'Atvērt prezentācijas datus',
+  'Motivering van een uitsluiting': 'Izņēmuma pamatojums',
+  'Motivering van een bevestiging': 'Apstiprinājuma pamatojums',
+  'Tabel koprij, kolom {kolom}': 'Tabula galvenes rinda, kolonna {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabula rinda {rij}, kolonna {kolom}',
   'Via deze website ophalen?': 'Iegūt caur šo vietni?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'Šīs prezentācijas serveris neļāva pārlūkam nolasīt failu tieši. OciDeck var nodot adresi vietnei, no kuras nāk pats OciDeck, un tā to ielādēs. Tad šī vietne redz visu adresi — ja saitē ir atslēga vai kods, šī vietne redz arī to.',

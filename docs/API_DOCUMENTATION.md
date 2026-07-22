@@ -172,6 +172,18 @@ Export-time gating (does this audience deck satisfy the export policy?) lives in
 `PrivacyDisposition` (`{ warn, accept, shield, redact }`) is defined in
 `lib/models/privacy_disposition.dart`.
 
+`lib/services/privacy/privacy_preview.dart` is the author-facing detour: the same
+projection over a single slide, so the editor preview can show what the recipient
+gets without rescanning the deck on every keystroke.
+
+```dart
+Slide audiencePreviewSlide(Deck deck, Slide slide, {
+  Set<String> disabledRules,
+  OwnIdentity ownIdentity,
+});
+bool slideIsRedacted(Deck deck, Slide slide); // effective disposition == redact
+```
+
 ### Git Integration API
 `lib/services/git/git_forge.dart` — `GitForge` is the abstract forge adapter.
 There are three REST implementations: `GiteaForge` (Forgejo and Gitea),
@@ -291,6 +303,28 @@ it via `FileService.fetchUrlBytes(String url, {int maxBytes, …})`
 (`lib/services/parts/file_service_net.dart`), which falls back to the proxy on
 web; the git web transport uses the same endpoint.
 
+## Export readiness
+`lib/services/export_readiness.dart` — one pure function folds the four gates
+into the single status the status-bar chip and the export dialog both render:
+
+```dart
+ExportReadiness evaluateExportReadiness({
+  required bool needsSave,
+  required ExportDecision classificationDecision,
+  required QualityExportDecision qualityDecision,
+  PrivacyExportDecision privacyDecision,
+  bool privacyChecksEnabled,   // the setting, not the outcome
+});
+```
+
+`ExportReadinessStatus` (8 values): `ready, readyPrivacyUnchecked,
+qualityWarnings, privacyWarnings, needsSave, blockedByClassification,
+blockedByPrivacy, blockedByQuality`. Only `needsSave` makes
+`ExportReadiness.canOpenExport` false. `readyPrivacyUnchecked` exists because a
+disabled privacy check yields an empty scan result, which is indistinguishable
+from a clean one: callers must pass `privacyChecksEnabled` so "we found nothing"
+is not rendered on top of "we did not look".
+
 ## Extending OciDeck
 
 ### Adding a slide type
@@ -310,6 +344,20 @@ Adding a value makes the analyzer reject eleven non-exhaustive switches across
 eight files; those remaining spots are genuinely per-type (renderer, wireframe,
 help text, writer, fit-scale geometry, contrast pairs) and are deliberately not
 tabulated.
+
+### Adding an item to the macOS menu bar
+`lib/widgets/shell/app_menu_bar.dart` — `buildAppMenus(l10n, actions, deck)` is a
+pure function returning `List<PlatformMenuItem>`, so `test/app_menu_bar_test.dart`
+can assert labels, shortcuts and enablement without opening a window.
+
+An action that needs no open presentation goes on `AppMenuActions`, which
+`AppShell` fills directly. An action that lives inside the per-tab editor layer
+goes on `AppDeckMenuActions`, and the workspace publishes it through
+`ShellDeckCommands` / `shellDeckCommandsProvider`
+(`lib/widgets/shell/shell_deck_commands.dart`); a `null` provider value means "no
+deck open", which greys the items rather than removing them. Only the visible tab
+publishes, and only when an enablement flag changes — `sameEnablement` keeps the
+menu from being rewritten to the platform on every frame.
 
 ## Testing APIs
 

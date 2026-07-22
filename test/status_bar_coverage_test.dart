@@ -11,6 +11,7 @@ import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/state/save_progress_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -211,5 +212,49 @@ void main() {
 
     expect(find.text('Gewijzigd na afronden'), findsOneWidget);
     expect(find.byIcon(Icons.gpp_bad), findsOneWidget);
+  });
+
+  testWidgets('een lopende opslag is zichtbaar en blokkeert de knop', (
+    tester,
+  ) async {
+    // Opslaan naar WebDAV, S3 of git kan tientallen seconden duren en liet
+    // niets zien; een tweede poging werd stil genegeerd. Nu draait de chip die
+    // óók de opslagknop is, met de bestemming erbij.
+    await pumpShell(tester);
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(AppShell)),
+    );
+
+    expect(find.text(l10n.d('Uploaden naar WebDAV…')), findsNothing);
+
+    container.read(saveProgressProvider.notifier).state = SaveTarget.webdav;
+    await tester.pump();
+
+    expect(find.text(l10n.d('Uploaden naar WebDAV…')), findsOneWidget);
+    // De gewone opslagchip is weg: dezelfde plek, andere stand.
+    expect(find.text(l10n.t('saved')), findsNothing);
+    // En de knop in de werkbalk is uit, zodat een tweede klik niet meer stil
+    // wegvalt.
+    final saveButton = tester.widget<IconButton>(
+      find.ancestor(
+        of: find.byIcon(Icons.save_outlined),
+        matching: find.byType(IconButton),
+      ),
+    );
+    expect(saveButton.onPressed, isNull);
+
+    container.read(saveProgressProvider.notifier).state = null;
+    await tester.pump();
+    expect(find.text(l10n.d('Uploaden naar WebDAV…')), findsNothing);
+    expect(find.text(l10n.t('saved')), findsWidgets);
+  });
+
+  test('elke bestemming heeft een eigen melding', () {
+    // "Bezig met opslaan" zonder te zeggen waarheen laat de gebruiker raden of
+    // het aan zijn schijf of aan zijn verbinding ligt.
+    final labels = {
+      for (final target in SaveTarget.values) saveProgressLabel(l10n, target),
+    };
+    expect(labels.length, SaveTarget.values.length);
   });
 }

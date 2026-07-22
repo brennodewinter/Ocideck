@@ -1813,6 +1813,40 @@ const _dutchSourceAddPt = <String, String>{
   'Zegel nog niet vastgelegd': 'Selo ainda não registado',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Ainda não existe um ficheiro guardado com o qual verificar o selo. Guarde o deck.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'A omissão está ativa: o que a verificação classifica como dado pessoal é tapado a preto, e todas as imagens, vídeos e áudio deste slide não seguem para o ecrã nem para a exportação. O seu ficheiro markdown mantém tudo.',
+  'Bestand': 'Ficheiro',
+  'Venster': 'Janela',
+  'Help': 'Ajuda',
+  'Alles selecteren': 'Selecionar tudo',
+  'Plakken': 'Colar',
+  'Opnieuw': 'Refazer',
+  'Eigenschappen': 'Propriedades',
+  'Opdrachten…': 'Comandos…',
+  'Opslaan…': 'A guardar…',
+  'Uploaden naar WebDAV…': 'A carregar para WebDAV…',
+  'Uploaden naar S3…': 'A carregar para S3…',
+  'Vastleggen in git…': 'A registar no git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'A guardar. Guardar novamente não faz nada até isto terminar.',
+  'Klaar — privacy niet gecontroleerd': 'Pronto — privacidade não verificada',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Não se procuraram dados pessoais, dados de categorias especiais nem segredos: a verificação de privacidade está desligada em Segurança.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Apresentações que continuam a ser simples ficheiros Markdown: legíveis, pesquisáveis e abertos com qualquer editor.',
+  'sjablonen om mee te beginnen, of leeg': 'modelos para começar, ou em branco',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Os slides de exemplo de um modelo estão em neerlandês. O nome e a descrição seguem a sua própria língua; o conteúdo adapta-o depois de criar.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'A omissão está ativa: os dados encontrados são tapados a preto e todas as imagens, vídeos e áudio deste slide não seguem para o ecrã nem para a exportação. O seu ficheiro markdown mantém tudo.',
+  'Mijn tekst': 'O meu texto',
+  'Wat zij zien': 'O que eles veem',
+  'Presentatiegegevens': 'Dados da apresentação',
+  'Open presentatiegegevens': 'Abrir os dados da apresentação',
+  'Motivering van een uitsluiting': 'Justificação de uma exclusão',
+  'Motivering van een bevestiging': 'Justificação de uma confirmação',
+  'Tabel koprij, kolom {kolom}': 'Tabela linha de cabeçalho, coluna {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabela linha {rij}, coluna {kolom}',
   'Via deze website ophalen?': 'Obter através deste site?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'O servidor desta apresentação não deixou o navegador ler o ficheiro diretamente. O OciDeck pode passar o endereço ao site de onde o próprio OciDeck vem, e é esse site que o obtém. Assim, esse site vê o endereço completo — se o link tiver uma chave ou um código, esse site também os vê.',

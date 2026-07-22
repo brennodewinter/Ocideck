@@ -293,11 +293,22 @@ salutation or label makes them unambiguous, to avoid crying wolf.
 ### Redaction
 
 - Wrap anything in double square brackets — `[[secret]]` — to redact it manually;
-  it is always removed from previews and exports.
+  it is removed from every surface that reaches someone other than you.
 - Automatic redaction replaces sensitive content with a fixed-width block so its
   original length can't be reconstructed.
-- Redaction is applied **before** the content reaches any preview, presentation,
-  or export surface — not painted over afterwards.
+- Redaction is applied **before** the content reaches a presentation, an audience
+  window or an export — not painted over afterwards. There is no unredacted copy
+  behind the blocks for a recipient to recover.
+- **Your own editor keeps showing your own text**, and that is the one deliberate
+  exception. The preview, the thumbnails and the slide list are what you write
+  in; blacking them out would leave you nothing to correct. On a slide set to
+  *leave out of display and export* the preview says so and offers a switch to
+  the recipient's version, so you can check it before anything is sent.
+
+  *Corrected 2026-07-22. The first two entries read "always removed from previews
+  and exports" and "before the content reaches any preview" — which claimed the
+  editor was redacted too. It never was, and the wording promised more than the
+  code does.*
 
 ### The redaction manifest, and the file that must stay home
 
