@@ -3378,7 +3378,7 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   the national number) they are validated against the list of assigned ITU country
   calling codes and a valid E.164 length — a real check, so it becomes a proper
   warning. A national
-  number needs a separator (`06-24681357`); a bare run of digits needs a context
+  number needs a separator (`06-00000000`); a bare run of digits needs a context
   word, because `0417164300` on its own is just as likely to be an old bank
   account number. Dates, ISBNs, amounts and the reserved "drama" ranges that films
   and manuals use are excluded by design.

@@ -123,10 +123,32 @@ void main() {
     // contact.email blijft hier buiten beschouwing: SECURITY.md hoort een echt
     // meldadres te bevatten, en dat is dan ook een echte treffer — geen
     // vals-positieve.
-    final docs = Directory('docs')
-        .listSync(recursive: true)
-        .whereType<File>()
-        .where((f) => f.path.endsWith('.md'));
+    // Ook de Markdown in de wortel: README, CHANGELOG, SECURITY, AUDIT_RESPONSE.
+    // Die stonden er niet in, en dat was precies het gat waardoor een echt
+    // ogend telefoonnummer drie bestanden lang kon blijven staan (#605). Ze
+    // zijn net zo openbaar als docs/ — openbaarder zelfs, want het is het
+    // eerste wat iemand op de forge ziet.
+    final docs = [
+      ...Directory('docs')
+          .listSync(recursive: true)
+          .whereType<File>()
+          .where((f) => f.path.endsWith('.md')),
+      ...Directory('.')
+          .listSync()
+          .whereType<File>()
+          .where((f) => f.path.endsWith('.md'))
+          // CHANGELOG.md niet. Dat is een historisch logboek dat de detectoren
+          // zélf beschrijft en daarbij hun voorbeeldwaarden citeert — de
+          // nep-BSN die de elfproef doorstaat, de voorbeeldadressen, de
+          // bijzondere-categorie-termen. Het schoonvegen daarvan zou neerkomen
+          // op het herschrijven van de geschiedenis om een scanner te
+          // plezieren, en dan is het logboek minder waard dan de poort.
+          //
+          // Dat is geen vrijbrief: de bevinding uit #605 stond wél in dit
+          // bestand en is er gewoon uit. Wat hier niet in mag komen is een
+          // nieuwe echte waarde, en dat blijft mensenwerk.
+          .where((f) => !f.path.endsWith('CHANGELOG.md')),
+    ];
     expect(docs, isNotEmpty, reason: 'geen docs gevonden om te scannen');
 
     for (final doc in docs) {
@@ -140,9 +162,31 @@ void main() {
           ],
         ),
       );
-      final hits = result.certain
-          .where((f) => f.ruleId != 'contact.email')
-          .toList();
+      // Niet alleen `certain`. Een nationaal telefoonnummer scoort
+      // `waarschijnlijk`, en juist dát is de vorm die in een handleiding
+      // terechtkomt — een `+31…` schrijft niemand in een voorbeeld. Deze poort
+      // stond op `certain` en zag daardoor niets (#605).
+      // Twee uitzonderingen, smal en met reden. OCIWACHT.md definieert de
+      // telefoonregel en USER_GUIDE.md legt hem uit; allebei moeten ze per
+      // definitie telefoonvormige voorbeelden bevatten, anders is de tekst
+      // onleesbaar. Wat er wél voor geldt: elke gebruikte waarde is
+      // ONUITGEEFBAAR gekozen (`06-00000000`, `020 0000000`, `0400000000` — de
+      // Nederlandse reeksen beginnen nooit met een nul na het kengetal), zodat
+      // hij van niemand kán zijn. Dát is de eis, niet dat de regel er niet
+      // afgaat.
+      //
+      // De uitzondering geldt alleen voor `waarschijnlijk`. Een `certain`-hit
+      // is de internationale E.164-vorm, en de handleiding belooft op diezelfde
+      // bladzijde dat ze die nooit afdrukt — die belofte blijft hier dus
+      // onverkort bewaakt, ook in deze twee bestanden.
+      final explainsThePhoneRule =
+          doc.path.endsWith('OCIWACHT.md') ||
+          doc.path.endsWith('USER_GUIDE.md');
+      final hits = [
+        ...result.certain.where((f) => f.ruleId != 'contact.email'),
+        if (!explainsThePhoneRule)
+          ...result.findings.where((f) => f.ruleId == 'contact.phone'),
+      ];
       expect(
         hits,
         isEmpty,
