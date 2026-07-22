@@ -24,6 +24,12 @@ void main() {
   /// tekstlat niet te halen. Wat hier staat is wat ergens als
   /// `TextStyle(color: …)` of als icoonkleur op het papieren oppervlak terecht
   /// komt.
+  /// `accent`, `navy` en `teal` stonden hier tot #606 ook in. Ze zijn er nu
+  /// uit, en niet omdat ze plotseling slagen: hun tékstgebruik in de interface
+  /// is verhuisd naar de mode-afhankelijke [modeAware]-tegenhangers hieronder.
+  /// Wat er van de merkkleuren overblijft zijn vlakken, randen en dia-inhoud —
+  /// en dia-inhoud rendert op de dia, niet op dit oppervlak, dus tegen `paper`
+  /// meten zou daar het verkeerde paar zijn.
   const measured = <String, int>{
     'severityCritical': 0xFFB91C1C,
     'danger700': 0xFFB91C1C,
@@ -37,13 +43,35 @@ void main() {
     'severityNone': 0xFF475569,
     'checklistNotTested': 0xFF64748B,
     'scopeNotTested': 0xFF64748B,
-    'accent': 0xFF2563EB,
+
     'severityHigh': 0xFFEA580C,
     'severityMedium': 0xFFD97706,
     'checklistNotTestable': 0xFFB45309,
     'scopeDeviation': 0xFFB45309,
-    'navy': 0xFF1C2B47,
-    'teal': 0xFF2E7D64,
+  };
+
+  /// De mode-afhankelijke tegenhangers, gemeten in de modus die ze schilderen.
+  ///
+  /// Deze horen de lat wél te halen — daar zijn ze voor. Ze staan apart omdat
+  /// [measured] const-kleuren bevat en deze getters zijn: hun waarde hangt van
+  /// [AppTheme.isDark] af en is dus pas in de test te lezen.
+  const modeAware = <String>[
+    'accentFg',
+    'brandFg',
+    'tealFg',
+    'successFg',
+    'dangerFg',
+    'warningFg',
+  ];
+
+  Color modeAwareColor(String naam) => switch (naam) {
+    'accentFg' => AppTheme.accentFg,
+    'brandFg' => AppTheme.brandFg,
+    'tealFg' => AppTheme.tealFg,
+    'successFg' => AppTheme.successFg,
+    'dangerFg' => AppTheme.dangerFg,
+    'warningFg' => AppTheme.warningFg,
+    _ => throw ArgumentError(naam),
   };
 
   /// De tokens die de AA-lat voor gewone tekst (4,5:1) niet halen, per modus.
@@ -71,9 +99,6 @@ void main() {
     'scopeNotTested',
     'checklistNotTestable',
     'scopeDeviation',
-    'accent',
-    'navy',
-    'teal',
   };
   const baselineLight = <String>{'severityHigh', 'severityMedium'};
 
@@ -114,4 +139,28 @@ void main() {
       );
     });
   }
+
+  group('de mode-afhankelijke tekstkleuren halen de lat wél', () {
+    // Daar zijn ze voor. Zonder deze toets kan iemand een Fg-token invoeren dat
+    // net zo onleesbaar is als de merkkleur die het verving — dan is de
+    // verhuizing kosmetiek geweest.
+    for (final (naam, dark) in [('donker', true), ('licht', false)]) {
+      test(naam, () {
+        AppTheme.isDark = dark;
+        final paper = AppTheme.paper;
+        final tekort = <String, double>{};
+        for (final token in modeAware) {
+          final ratio = contrastRatio(modeAwareColor(token), paper);
+          if (ratio < kWcagAaNormalText) tekort[token] = ratio;
+        }
+        expect(
+          tekort,
+          isEmpty,
+          reason:
+              'Deze tokens bestaan juist om leesbaar te zijn in de modus die ze '
+              'schilderen: $tekort',
+        );
+      });
+    }
+  });
 }

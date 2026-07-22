@@ -429,7 +429,7 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
             child: MarkdownNotesEditor.legacy(
               controller: _richText,
               baseStyle: const TextStyle(fontSize: 14, height: 1.45),
-              linkColor: AppTheme.accent,
+              linkColor: AppTheme.accentFg,
               hintText: l10n.d('Tekst...'),
               expand: true,
               minLines: 8,
@@ -489,7 +489,7 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
       ),
       child: Row(
         children: [
-          const Icon(Icons.splitscreen, size: 16, color: AppTheme.accent),
+          Icon(Icons.splitscreen, size: 16, color: AppTheme.accentFg),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
@@ -533,7 +533,7 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
             icon: Icon(
               Icons.horizontal_split,
               size: 18,
-              color: heading ? AppTheme.accent : AppTheme.slate300,
+              color: heading ? AppTheme.accentFg : AppTheme.slate300,
             ),
             onPressed: () => _toggleHeading(i),
             tooltip: heading

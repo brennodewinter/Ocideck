@@ -23,10 +23,10 @@ class _DropOverlay extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(
+                Icon(
                   Icons.file_download_outlined,
                   size: 40,
-                  color: AppTheme.accent,
+                  color: AppTheme.accentFg,
                 ),
                 const SizedBox(height: 10),
                 Text(

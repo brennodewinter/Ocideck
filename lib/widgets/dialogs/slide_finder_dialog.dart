@@ -318,9 +318,9 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
           if (_addedCount > 0)
             Text(
               '$_addedCount ${l10n.d('toegevoegd')}',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
-                color: AppTheme.accent,
+                color: AppTheme.accentFg,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -616,16 +616,16 @@ class _SlideHitCard extends StatelessWidget {
             ),
           ),
         ],
-        const SizedBox(height: 4),
+        SizedBox(height: 4),
         SizedBox(
           height: 28,
           child: added
               ? OutlinedButton.icon(
                   onPressed: onAdd,
-                  icon: const Icon(Icons.check, size: 14),
+                  icon: Icon(Icons.check, size: 14),
                   label: Text(l10n.d('Toegevoegd')),
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: AppTheme.accent,
+                    foregroundColor: AppTheme.accentFg,
                     side: const BorderSide(color: AppTheme.accent),
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     textStyle: const TextStyle(fontSize: 11),

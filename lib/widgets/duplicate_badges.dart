@@ -56,14 +56,14 @@ class IdenticalCopiesChip extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.copy_outlined, size: 10, color: AppTheme.accent),
+            Icon(Icons.copy_outlined, size: 10, color: AppTheme.accentFg),
             const SizedBox(width: 3),
             Text(
               '+${otherPaths.length}',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.w700,
-                color: AppTheme.accent,
+                color: AppTheme.accentFg,
               ),
             ),
           ],

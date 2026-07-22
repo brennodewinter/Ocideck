@@ -139,20 +139,20 @@ class SlideTypeHelpToggle extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.help_outline, size: 14, color: AppTheme.teal),
+            Icon(Icons.help_outline, size: 14, color: AppTheme.tealFg),
             const SizedBox(width: 5),
             Text(
               l10n.d('Wat kan ik hier?'),
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 11.5,
-                color: AppTheme.teal,
+                color: AppTheme.tealFg,
                 fontWeight: FontWeight.w600,
               ),
             ),
             Icon(
               open ? Icons.expand_less : Icons.expand_more,
               size: 15,
-              color: AppTheme.teal,
+              color: AppTheme.tealFg,
             ),
           ],
         ),
@@ -185,7 +185,7 @@ class SlideTypeHelpBody extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Icon(Icons.lightbulb_outline, size: 16, color: AppTheme.teal),
+            Icon(Icons.lightbulb_outline, size: 16, color: AppTheme.tealFg),
             const SizedBox(width: 8),
             Expanded(
               child: Text(

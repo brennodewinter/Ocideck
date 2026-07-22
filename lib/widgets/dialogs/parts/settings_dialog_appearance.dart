@@ -438,7 +438,9 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
                         font,
                         TextStyle(
                           fontSize: 15,
-                          color: selected ? AppTheme.accent : AppTheme.slate700,
+                          color: selected
+                              ? AppTheme.accentFg
+                              : AppTheme.slate700,
                           fontWeight: selected
                               ? FontWeight.w600
                               : FontWeight.normal,
@@ -447,7 +449,7 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
                     ),
                   ),
                   if (selected)
-                    const Icon(Icons.check, size: 16, color: AppTheme.accent),
+                    Icon(Icons.check, size: 16, color: AppTheme.accentFg),
                 ],
               ),
             ),
@@ -471,7 +473,7 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
       ),
       child: Row(
         children: [
-          Icon(Icons.style_outlined, size: 16, color: AppTheme.accent),
+          Icon(Icons.style_outlined, size: 16, color: AppTheme.accentFg),
           const SizedBox(width: 8),
           Expanded(
             child: Text.rich(

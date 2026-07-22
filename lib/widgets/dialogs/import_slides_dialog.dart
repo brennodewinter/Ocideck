@@ -223,9 +223,9 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
           if (selectedCount > 0)
             Text(
               '$selectedCount ${l10n.d('geselecteerd')}',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
-                color: AppTheme.accent,
+                color: AppTheme.accentFg,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -430,11 +430,7 @@ class _PresentationSection extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(
-                Icons.slideshow_outlined,
-                size: 16,
-                color: AppTheme.navy,
-              ),
+              Icon(Icons.slideshow_outlined, size: 16, color: AppTheme.brandFg),
               const SizedBox(width: 6),
               Expanded(
                 child: Text.rich(

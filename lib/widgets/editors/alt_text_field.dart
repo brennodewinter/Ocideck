@@ -260,14 +260,18 @@ class _AltTextFieldState extends ConsumerState<AltTextField> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.auto_awesome, size: 12, color: AppTheme.accent),
+                    Icon(
+                      Icons.auto_awesome,
+                      size: 12,
+                      color: AppTheme.accentFg,
+                    ),
                     const SizedBox(width: 4),
                     Text(
                       l10n.d('AI-concept'),
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
-                        color: AppTheme.accent,
+                        color: AppTheme.accentFg,
                       ),
                     ),
                   ],

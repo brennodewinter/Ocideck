@@ -234,15 +234,11 @@ extension _SettingsAi on _SettingsDialogState {
             if (_ai.testOk == true)
               Row(
                 children: [
-                  const Icon(
-                    Icons.check_circle,
-                    color: AppTheme.teal,
-                    size: 18,
-                  ),
+                  Icon(Icons.check_circle, color: AppTheme.tealFg, size: 18),
                   const SizedBox(width: 6),
                   Text(
                     l10n.d('Verbinding gelukt'),
-                    style: const TextStyle(fontSize: 12, color: AppTheme.teal),
+                    style: TextStyle(fontSize: 12, color: AppTheme.tealFg),
                   ),
                 ],
               ),

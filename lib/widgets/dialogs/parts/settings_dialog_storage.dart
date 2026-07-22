@@ -296,7 +296,7 @@ extension _SettingsStorageTab on _SettingsDialogState {
               ? AppTheme.slate400
               : needsTest
               ? AppTheme.amber700
-              : AppTheme.teal,
+              : AppTheme.tealFg,
         ),
       );
       final tip = verifiedAt != null

@@ -129,7 +129,7 @@ that everywhere. Measured against the surface each mode actually paints on
 (`AppTheme.paper`, white or `#181B21`), and counting only tokens the interface
 uses as *text*:
 
-- **dark mode: 17 tokens below 4.5:1.** The worst are the red used for a
+- **dark mode: 14 tokens below 4.5:1.** The worst are the red used for a
   critical finding, a checklist anomaly and an unreachable scope object
   (`#B91C1C`, 2.67:1), the neutral grey for "no severity" (`#475569`, 2.28:1),
   and the green for a tested item (`#15803D`, 3.44:1);
@@ -137,20 +137,43 @@ uses as *text*:
   medium severity bands (`#EA580C` 3.6:1, `#D97706` 3.3:1). The issue that
   raised this measured dark mode only and treated light as fine; it is not.
 
+*(Was 17 in dark mode. Three tokens left the list on 2026-07-23 — see below —
+and none of them by being recoloured.)*
+
 The exact list lives in `test/app_theme_contrast_test.dart` as a ratchet, so the
 number is in the repository rather than in a reviewer's notebook, and it can
 only go down: the test fails both when a new token drops below the bar and when
 one that has been fixed is left in the baseline.
 
-Three call sites are corrected — the seal indicator in the status bar, the
-asset-overview warning, and the error colour in the quality panel now use the
-mode-aware `dangerFg`/`successFg` instead of the fixed `danger700`/`success700`.
-The rest is not done. It is not a matter of flipping the tokens: the fixed ones
-are fixed **on purpose**, because a finding must render identically in the
-preview and in a headless export isolate, and a colour that moves with the app's
-appearance would break that. So each of the roughly two hundred uses has to be
-read as either slide content (leave it) or interface chrome (make it
-mode-aware), and that audit is still open.
+### What the audit changed, and what it did not
+
+**The brand colours no longer paint interface text.** `accent` (`#2563EB`),
+`navy` (`#1C2B47`) and `teal` (`#2E7D64`) were used as a text and icon colour in
+seventy places across dialogs, editors, panels and the shell. On a dark surface
+that is 3.3:1 for the blue, and the navy all but disappears. They now have
+mode-aware counterparts — `accentFg`, `brandFg`, `tealFg` — and the interface
+uses those.
+
+**The brand colours themselves did not change**, and that is the point. They
+still fill surfaces, draw borders and paint gradients, and some of them render
+inside a slide. A slide has to look the same in the on-screen preview and in a
+headless export isolate, where the app's appearance setting does not exist; a
+colour that follows the theme would produce two different PDFs of one deck
+(PENTEST_MIAUW §11). So the split is not light-versus-dark but **chrome versus
+content**: text you read *in* the app follows the app, ink that lands *on a
+slide* does not. The golden tests confirm the second half — every slide renders
+byte-identically to before.
+
+Three call sites were corrected earlier in the same way (the seal indicator in
+the status bar, the asset-overview warning, and the error colour in the quality
+panel, now on `dangerFg`/`successFg`).
+
+**What is left.** The fourteen remaining dark-mode tokens are the severity,
+checklist and scope palettes. Those are the ones that genuinely render into
+slides, so recolouring them is not an option and neither is a mode-aware
+counterpart used everywhere. What they need is the same read, use by use — and
+where a use turns out to be chrome after all, a counterpart like the three
+above. That is what remains of #606.
 
 **A few blocking messages are still built in Dutch.** *(Rewritten 2026-07-22.)*
 This entry used to say that roughly fifty editor labels showed their Dutch

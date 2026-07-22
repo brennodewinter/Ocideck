@@ -324,7 +324,7 @@ class ImageZoomControl extends StatelessWidget {
                 '$_effective%',
                 style: TextStyle(
                   fontSize: 12,
-                  color: zoomed ? AppTheme.accent : AppTheme.slate500,
+                  color: zoomed ? AppTheme.accentFg : AppTheme.slate500,
                   fontWeight: zoomed ? FontWeight.w600 : FontWeight.normal,
                 ),
                 textAlign: TextAlign.right,

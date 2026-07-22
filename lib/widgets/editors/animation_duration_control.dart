@@ -38,10 +38,10 @@ class AnimationDurationControl extends StatelessWidget {
         const SizedBox(width: 8),
         Text(
           context.l10n.d('Activatieduur'),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
-            color: AppTheme.navy,
+            color: AppTheme.brandFg,
           ),
         ),
         const SizedBox(width: 10),
@@ -72,7 +72,7 @@ class AnimationDurationControl extends StatelessWidget {
           icon: const Icon(Icons.restart_alt, size: 18),
           visualDensity: VisualDensity.compact,
           tooltip: context.l10n.d('Volg thema-animatieduur'),
-          color: AppTheme.navy,
+          color: AppTheme.brandFg,
           onPressed: inheritsTheme ? null : () => onChanged(null),
         ),
       ],

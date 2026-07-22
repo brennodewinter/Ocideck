@@ -373,7 +373,7 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
                 templatePickerIcons[template.icon] ??
                     Icons.crop_landscape_outlined,
                 size: 22,
-                color: AppTheme.accent,
+                color: AppTheme.accentFg,
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -404,7 +404,7 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
                       ? Icons.radio_button_checked
                       : Icons.radio_button_unchecked,
                   size: 18,
-                  color: selected ? AppTheme.accent : AppTheme.slate300,
+                  color: selected ? AppTheme.accentFg : AppTheme.slate300,
                 ),
               ),
             ],

@@ -283,11 +283,7 @@ class _HitRow extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
         child: Row(
           children: [
-            const Icon(
-              Icons.slideshow_outlined,
-              size: 18,
-              color: AppTheme.navy,
-            ),
+            Icon(Icons.slideshow_outlined, size: 18, color: AppTheme.brandFg),
             const SizedBox(width: 10),
             Expanded(
               child: Column(

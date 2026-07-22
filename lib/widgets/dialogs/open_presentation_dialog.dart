@@ -422,10 +422,10 @@ class _PresentationRow extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
               child: Row(
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.slideshow_outlined,
                     size: 18,
-                    color: AppTheme.navy,
+                    color: AppTheme.brandFg,
                   ),
                   const SizedBox(width: 10),
                   Expanded(
@@ -508,10 +508,10 @@ class _PresentationRow extends StatelessWidget {
                           children: [
                             Text(
                               '${l10n.d('Slide')} ${hit.index + 1}',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w600,
-                                color: AppTheme.accent,
+                                color: AppTheme.accentFg,
                               ),
                             ),
                             const SizedBox(width: 8),
