@@ -355,10 +355,11 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
   required String deckDir,
   required AssetByteResolver resolveBytes,
 
-  /// Waarmee een bestand ín de deckmap te lezen is. Alleen gebruikt om te
-  /// bepalen of het notitiebestand wég mag wanneer dit deck geen notities
-  /// draagt — zie [_userNotesMayBeDeleted]. Zonder lezer wordt er nooit
-  /// verwijderd: niet weten is hier geen reden om te wissen.
+  /// Waarmee een bestand ín de deckmap te lezen is. Alleen gebruikt om vast te
+  /// stellen wat er op het notitiepad ligt vóórdat we het aanraken — zie
+  /// [repoUserNotesState]. Zonder lezer wordt er nooit verwíjderd (niet weten
+  /// is geen reden om te wissen) maar wél geschreven: anders zouden de notities
+  /// op het native pad, dat geen lezer meegeeft, nooit reizen.
   RepoFileReader? read,
 }) async {
   final refForMem = <String, String>{}; // bronpad → repo:-verwijzing (dedup)
@@ -449,23 +450,27 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
   // op één regel botst élke wijziging met élke andere. Zie
   // [UserNotesCodec.encode].
   //
-  // Geen notities meer? Dan het bestand weghalen in plaats van het oude te
-  // laten staan — anders komt een gewiste notitie bij de volgende open terug.
-  //
-  // Maar alleen als we weten dát het bestand er een is dat wíj geschreven
-  // konden hebben — zie [_userNotesMayBeDeleted]. "Ik zag geen notities" en
-  // "er zijn er geen" is niet hetzelfde zodra het bestand van je mede-auteurs
-  // is.
+  // De notities. Eérst de vraag "mag ik hier überhaupt aan komen?", dan pas wat
+  // erin moet — dezelfde volgorde als `_sidecarUntouchable` op schijf, en niet
+  // toevallig: overschrijven is net zo goed half inlezen als verwijderen dat is.
+  // Ligt er een bestand dat deze build niet las, dan zou een v2-bestand met
+  // jouw ene notitie er overheen gaan en de rest ongemerkt weg zijn — erger dan
+  // een verwijdering, want het resultaat ziet er gezond uit.
   final notesPath = p.posix.join(deckDir, userNotesRepoFileName);
-  final notes = UserNotesCodec.encode(
-    rewritten.slides,
-    rewritten.userNotes,
-    forTextMerge: true,
-  );
-  if (notes != null) {
-    upserts[notesPath] = Uint8List.fromList(utf8.encode(notes));
-  } else if (await userNotesMayBeDeleted(notesPath, read)) {
-    deletes.add(notesPath);
+  final notesState = await repoUserNotesState(notesPath, read);
+  if (notesState != RepoSidecarState.untouchable) {
+    final notes = UserNotesCodec.encode(
+      rewritten.slides,
+      rewritten.userNotes,
+      forTextMerge: true,
+    );
+    if (notes != null) {
+      upserts[notesPath] = Uint8List.fromList(utf8.encode(notes));
+    } else if (notesState == RepoSidecarState.ours) {
+      // Alleen weghalen wat we ook hadden kunnen schrijven; anders komt een
+      // gewiste notitie bij de volgende open gewoon terug.
+      deletes.add(notesPath);
+    }
   }
 
   // Met een pool alleen de nog niet aanwezige blobs; zonder pool (native) alle.
@@ -485,56 +490,73 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
   );
 }
 
-/// Of het notitiebestand op [path] weg mag nu het deck dat ernaar wijst geen
-/// notities draagt.
+/// Wat er op een sidecarpad in de repo ligt, voor zover deze build ermee
+/// overweg kan.
+enum RepoSidecarState {
+  /// Er ligt niets, of we konden niet kijken. Schrijven mag; verwijderen niet —
+  /// er valt niets te verwijderen, en "ik weet het niet" is geen opdracht.
+  absent,
+
+  /// Een bestand van dit formaat, niet nieuwer dan deze build. Schrijven én
+  /// verwijderen mag: we hadden het zelf kunnen schrijven.
+  ours,
+
+  /// Er ligt iets dat deze build niet begrijpt — conflictmarkeringen uit een
+  /// merge buiten OciDeck, een hogere `version`, of iets wat geen sidecar is.
+  /// Niet aanraken, in geen van beide richtingen.
+  untouchable,
+}
+
+/// De toestand van het notitiebestand op [path], gelezen via [read].
 ///
-/// De regel is opzettelijk streng, en de reden is asymmetrie. Ten onrechte
-/// laten staan kost een verweesd bestand dat bij de volgende opslag mét
-/// notities vanzelf overschreven wordt. Ten onrechte verwijderen kost werk van
-/// iemand anders, en dat weet die pas als hij ernaar zoekt.
+/// De regel is opzettelijk streng, en de reden is asymmetrie. Ten onrechte met
+/// rust laten kost een verweesd bestand dat bij de volgende opslag vanzelf
+/// wordt bijgewerkt. Ten onrechte aanraken kost werk van iemand anders, en dat
+/// weet die pas als hij ernaar zoekt.
 ///
-/// Dus: alleen weg als we het bestand hebben gelézen én het is er een van dit
-/// formaat en niet nieuwer dan deze build aankan. Geen lezer, onbereikbaar, te
-/// groot, geen geldige JSON (zoals conflictmarkeringen uit een merge buiten
-/// OciDeck) of een hogere `version` — dan blijft het staan. Zelfde contract als
-/// `_sidecarUntouchable` op schijf, en hier strenger toegepast omdat een repo
-/// gedeeld is.
-Future<bool> userNotesMayBeDeleted(String path, RepoFileReader? read) async {
-  if (read == null) return false;
+/// Bewust níét via [sidecarIsFromNewerBuild]: die beantwoordt de vraag "komt
+/// dit van later?" en zegt bij onleesbare JSON terecht nee. Hier is de vraag
+/// een andere — "mag ik hieraan komen?" — en daar is onleesbaar juist het
+/// sterkste nee dat er is. Dezelfde bytes, tegengesteld antwoord; vandaar dat
+/// het hier uitgeschreven staat in plaats van omgekeerd hergebruikt.
+///
+/// Zonder [read] is de uitkomst [RepoSidecarState.absent]: het native pad geeft
+/// geen lezer mee, en daar moeten de notities wél kunnen reizen. Dat verwijderen
+/// er dan nooit gebeurt, is de veilige helft van diezelfde onwetendheid.
+Future<RepoSidecarState> repoUserNotesState(
+  String path,
+  RepoFileReader? read,
+) async {
+  if (read == null) return RepoSidecarState.absent;
   Uint8List? bytes;
   try {
     bytes = await read(path);
   } catch (e) {
     logWarning(
-      'buildDeckRepoFiles: notitiebestand onbereikbaar, blijft staan',
+      'repoUserNotesState: notitiebestand onbereikbaar, niet aanraken',
       e,
     );
-    return false;
+    return RepoSidecarState.untouchable;
   }
-  // Er ligt niets: dan valt er ook niets te verwijderen, en het scheelt een
-  // zinloze delete in de commit.
-  if (bytes == null || bytes.isEmpty) return false;
-  if (bytes.length > maxRepoUserNotesBytes) return false;
-  // Bewust níét via [sidecarIsFromNewerBuild]: die beantwoordt de vraag "komt
-  // dit van later?" en zegt bij onleesbare JSON terecht nee. Hier is de vraag
-  // een andere — "mag ik dit weggooien?" — en daar is onleesbaar juist het
-  // sterkste nee dat er is. Dezelfde bytes, tegengesteld antwoord; vandaar dat
-  // het hier uitgeschreven staat in plaats van omgekeerd hergebruikt.
+  if (bytes == null || bytes.isEmpty) return RepoSidecarState.absent;
+  if (bytes.length > maxRepoUserNotesBytes) return RepoSidecarState.untouchable;
   try {
     final data = jsonDecode(utf8.decode(bytes));
     // Geldige JSON is nog geen sidecar. `declaredSidecarVersion` valt bij alles
-    // wat geen map is terug op versie 1 — een top-level array zou dus
-    // "verwijderbaar" heten. Sinds FILE_FORMAT §6.3.1 uitnodigt dit bestand
-    // vanuit een ander werktuig te schrijven, is dat geen theorie meer.
-    if (data is! Map) return false;
-    return declaredSidecarVersion(data) <= UserNotesCodec.version;
+    // wat geen map is terug op versie 1 — een top-level array zou dus van ons
+    // heten. Sinds FILE_FORMAT §6.3.1 uitnodigt dit bestand vanuit een ander
+    // werktuig te schrijven, is dat geen theorie meer.
+    if (data is! Map) return RepoSidecarState.untouchable;
+    return declaredSidecarVersion(data) <= UserNotesCodec.version
+        ? RepoSidecarState.ours
+        : RepoSidecarState.untouchable;
   } on FormatException catch (e) {
     logWarning(
-      'buildDeckRepoFiles: notitiebestand is geen leesbare JSON '
-      '(conflictmarkeringen?) — blijft staan',
+      'repoUserNotesState: notitiebestand is geen leesbare JSON '
+      '(conflictmarkeringen?) — niet aanraken',
       e,
     );
-    return false;
+    return RepoSidecarState.untouchable;
   }
 }
 
@@ -629,9 +651,11 @@ Future<RepoMergeOutcome> resolveRepoDeckMerge({
   final theirs = gate(theirBytes);
   if (base == null || ours == null || theirs == null) {
     // Onze kant ongewijzigd — en dat is méér dan `deck.md`. De grafiekdata
-    // ontbreekt hier nog; dat vraagt een wijziging aan wat `mergeRemote` belooft
-    // over bestanden die de resolver niet noemt (issue #670), en die fout stond
-    // er vóór de notities al.
+    // ontbreekt nog, hier én in de gelukte tak hieronder: `merge.merged` draagt
+    // geen inline cijfers, dus `chartDataFilesOf` levert niets en de
+    // deckmap-vervanging ruimt `data/*.json` op. Issue #670; de fout stond er
+    // vóór de notities al en vraagt een wijziging aan wat `mergeRemote` belooft
+    // over bestanden die de resolver niet noemt.
     final notesPath = p.posix.join(deckDir, userNotesRepoFileName);
     return (
       files: <String, Uint8List>{

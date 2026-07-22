@@ -675,6 +675,66 @@ void main() {
       });
     });
 
+    group('en wordt ook niet overschreven', () {
+      // De spiegel van de groep hierboven, en de nare helft: overschrijven is
+      // net zo goed half inlezen als verwijderen dat is, maar het resultaat
+      // ziet er daarna gezónd uit. Niemand gaat dan in de historie zoeken.
+      //
+      // Op schijf staat `_sidecarUntouchable` daarom vóór de vertakking en dekt
+      // hij beide richtingen; hier moest dat nog gelijkgetrokken.
+      Future<RepoDeckFiles> schrijfMet(Uint8List inhoud) =>
+          build(deckWithNote('mijn ene notitie'), inRepo: {notesPath: inhoud});
+
+      test('een sidecar van een nieuwere build blijft ongemoeid', () async {
+        // Het scenario: een collega op een nieuwere build schreef version 3.
+        // Jij ziet terecht geen notities, typt er één, slaat op — en zonder
+        // deze poort ging jouw ene v2-notitie over hun hele bestand heen.
+        final out = await schrijfMet(
+          Uint8List.fromList(utf8.encode('{"version":99,"slides":[]}')),
+        );
+
+        expect(out.upserts.containsKey(notesPath), isFalse);
+        expect(out.deletes, isEmpty);
+      });
+
+      test('conflictmarkeringen blijven staan voor een mens', () async {
+        final out = await schrijfMet(
+          Uint8List.fromList(
+            utf8.encode('<<<<<<< HEAD\n{"version":2}\n=======\n{}\n>>>>>>> x'),
+          ),
+        );
+
+        expect(out.upserts.containsKey(notesPath), isFalse);
+        expect(out.deletes, isEmpty);
+      });
+
+      test('maar over ons eigen bestand schrijven mag gewoon', () async {
+        // Tegenproef: anders zou deze groep ook slagen als er nooit meer iets
+        // geschreven werd, en dan reisde er niets.
+        final out = await schrijfMet(onzeNotities());
+
+        expect(out.upserts.containsKey(notesPath), isTrue);
+        expect(
+          utf8.decode(out.upserts[notesPath]!),
+          contains('mijn ene notitie'),
+        );
+      });
+
+      test('en zonder lezer ook — anders reist er op native niets', () async {
+        // Het native pad geeft geen lezer mee. Niet weten mag daar het
+        // schrijven niet blokkeren; het blokkeert alleen het verwijderen.
+        final out = await buildDeckRepoFiles(
+          deckWithNote('op native'),
+          md: md,
+          pool: poolFor(FakeRepo(branches: {'main': 'c0'}, files: {})),
+          deckDir: deckDir,
+          resolveBytes: resolverFrom({}),
+        );
+
+        expect(out.upserts.containsKey(notesPath), isTrue);
+      });
+    });
+
     group('de werkkopie voor de wachtrij', () {
       // mirrorDeckFiles bepaalt wat er offline wordt weggeschreven, en dat is
       // scherper dan het lijkt: SyncEngine leidt zijn `deletes` af uit wat er

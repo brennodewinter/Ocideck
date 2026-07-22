@@ -208,7 +208,8 @@ class SyncEngine {
       for (final path in remote.keys) {
         if (deckLocal.containsKey(path)) continue;
         if (p.posix.basename(path) == userNotesRepoFileName &&
-            !await userNotesMayBeDeleted(path, (String q) async => remote[q])) {
+            await repoUserNotesState(path, (String q) async => remote[q]) !=
+                RepoSidecarState.ours) {
           continue;
         }
         deletes.add(path);
