@@ -684,8 +684,19 @@ Native: clone or fetch, then read from the working tree. REST: `listTree` the
 deck dir → `readBlob` `deck.md` and sidecars → resolve `repo:` assets from the
 pool (fetch blobs lazily, cache in `AssetPool`/`WebAssetStore`). Both paths then
 converge: **run the import gate** (`MarkdownSafetyScanner`) on the `.md` bytes
-(P5) → parse via `markdown_service.parseDeck` → `openDeckFromBytes`-style
-placement into a tab with a `GitOrigin` attached.
+(P5) → parse via `markdown_service.parseDeck` → `withRepoSidecars` to re-attach
+the layers that live next to `deck.md` → `openDeckFromBytes`-style placement
+into a tab with a `GitOrigin` attached.
+
+> *Corrected 22-07-2026 (#670): the native path skipped `withRepoSidecars`
+> entirely, so a deck opened from a clone carried neither its chart data nor its
+> notes. That is not a display defect — every write path **replaces** the deck
+> folder with what the app assembled (§9.1), so the next save wrote a folder
+> those files were not in and they were gone. No conflict, no warning, and the
+> deck looked intact: the chart's `source` reference was still there, only the
+> numbers were not. The layers had to be named in this paragraph rather than
+> implied by "and sidecars", because that phrasing was true of the REST path
+> only and read as though it covered both.*
 
 ### 9.3 Searching (text) and searching images
 
@@ -806,6 +817,30 @@ are not the same kind of file, and each has its own right answer (§14, D7).
   decode and the deck opens without its notes rather than with mangled ones —
   the same trade as an unreadable sidecar on disk. Surfacing that to the user
   belongs with the same work as the ink driver.
+  **What the resolver does not mention stays.** *(Added 22-07-2026, #670.)* The
+  native merge used to hand `NativeGitMirror.mergeRemote` a complete picture of
+  the deck folder: it emptied the folder and wrote back exactly what came out of
+  `resolveRepoDeckMerge`. The resolver cannot make that completeness true — it
+  is given three `deck.md` blobs and a per-side reader, and knows nothing else
+  about the folder — so every file it did not think of was deleted. That cost
+  the chart data on **every** merge, including a clean one, because
+  `merge.merged` carries no inline numbers and `chartDataFilesOf` therefore
+  returns nothing.
+
+  The contract is now additive, matching what the REST plane already did with
+  `commitFiles(upserts:, deletes:)`: `files` is written, `deletes` is removed,
+  and anything else in the folder is left alone. Deleting is something the
+  resolver has to ask for. On the refusal path — one of the three sides did not
+  pass the import gate — it asks for nothing at all and writes our whole side
+  back, not just `deck.md`: git's own text merge has already been over the
+  folder by then, so the sidecars there may carry conflict markers. One rejected
+  side should never have cost the rest of the deck folder as well.
+
+  This does not apply to `commitDeck`, which keeps replacing the folder. There
+  the app genuinely is the authority on what the deck contains — that is how a
+  removed slide's data file disappears — and `buildDeckRepoFiles` produces every
+  member. The asymmetry is the point: replacement is safe exactly when the
+  writer knows the whole set, and the merge resolver does not.
 - **`deck.ink.json` — ink strokes are additive.** Two people who drew on the same
   slide did not disagree; they both drew. The merge is a **union of the stroke
   sets**, keyed per slide and deduplicated by stroke identity. That is

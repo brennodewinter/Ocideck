@@ -693,9 +693,10 @@ Future<RepoMergeOutcome> resolveRepoDeckMerge({
         p.posix.join(deckDir, userNotesRepoFileName),
       ),
     };
-    for (final path in ours == null
-        ? const <String>[]
-        : chartDataPathsOf(ours, deckDir: deckDir)) {
+    for (final path
+        in ours == null
+            ? const <String>[]
+            : chartDataPathsOf(ours, deckDir: deckDir)) {
       final bytes = await read(MergeSide.ours, path);
       if (bytes != null) files[path] = bytes;
     }

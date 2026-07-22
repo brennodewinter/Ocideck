@@ -94,6 +94,33 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Fixed
+- **Een deck in git raakte de cijfers van zijn grafieken kwijt.** Een deckmap is
+  meer dan `deck.md`: de gegevens van een gekoppelde grafiek staan in
+  `data/*.json` ernaast, en sinds vandaag de notities in
+  `deck.user-notes.json`. Het native git-pad las die bestanden bij het openen
+  niet in. Er stond dus een deck in de editor dat ze niet kende — en omdat elke
+  schrijfweg de deckmap *vervangt* door wat de app samenstelde, ruimde de
+  eerstvolgende opslag ze op.
+
+  Er was geen botsing voor nodig en er kwam geen melding. Het deck zág er ook
+  heel uit: de verwijzing naar het databestand stond er nog, alleen de cijfers
+  waren weg. Wie het pas bij de volgende presentatie zag, keek naar een lege
+  grafiek waar hij zelf de getallen in had gezet.
+
+  Gerepareerd op de drie plekken waar het misging: openen hydrateert nu net als
+  het REST-pad, samenvoegen doet dat per kant (anders verdwijnt de grafiekdata
+  ook bij een *geslaagde* merge), en de terugvalweg — één kant kwam niet door de
+  importpoort — houdt onze hele kant vast in plaats van alleen `deck.md`.
+
+  Daaronder zat de eigenlijke fout, en die is ook weg. `mergeRemote` beloofde
+  dat wat de resolver niet noemt verwijderd mag worden. Die volledigheid kón de
+  resolver niet waarmaken: hij krijgt drie `deck.md`'s en een lezer, en weet
+  verder niets van de map. Het contract is omgedraaid naar bijwerken — schrijven
+  wat genoemd wordt, verwijderen wat expliciet gevraagd wordt, de rest laten
+  staan. Dat is ook hoe het REST-vlak al werkte, dus de twee vlakken zeggen nu
+  hetzelfde in plaats van elk iets anders.
+
 ### Added
 - **De webbundel reist niet meer kaal.** `make build-web` legt nu ook
   `LICENSE.md` en `THIRD_PARTY_NOTICES.md` naast de bundel — zonder die
