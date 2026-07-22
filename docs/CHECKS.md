@@ -784,7 +784,8 @@ For focused work, run only the relevant slice instead of the whole suite:
   dead or untested predicate to review. Slow and triage-heavy, so it stays out of
   `make check`. Override the target: `make mutate FILE=lib/services/markdown_service.dart TESTS="test/markdown_round_trip_test.dart"`.
 - **`make test-golden`** — visual-regression goldens for the slide renderer
-  (`test/golden/`). Renders each slide type through `SlidePreviewWidget` (the
+  (`test/golden/`). Renders **every one of the 24 slide types** through
+  `SlidePreviewWidget` (the
   widget behind the editor preview, presenter, thumbnails and the PDF/PPTX
   raster) with the default flutter-test font, so the PNGs catch layout /
   structure / colour regressions (elements moving, resizing, disappearing, wrong
@@ -794,6 +795,17 @@ For focused work, run only the relevant slice instead of the whole suite:
   `make test-golden UPDATE=1` accepts an intentional visual change. (To gate them
   once a CI runner exists, add a single-platform job that runs `make test-golden`
   and regenerate the PNGs on that platform.)
+
+  *Corrected 2026-07-22 (#617): this said "each slide type" while the file
+  covered **eight** of the 24. Everything built after the first round — chart,
+  cockpit, timeline, scorecard, finding, checklist, scopeMatrix, discoveries,
+  findingsSummary, question — had no visual regression test at all, so a theme
+  change could shift their layout with nothing turning red. The loop is now over
+  `SlideType.values`, which also means a new type gets its golden without anyone
+  remembering to add one. Two sentences to keep straight: they are still
+  excluded from `make check`, deliberately — a pixel comparison in the default
+  gate would fail on any machine but this one — and they are still only as good
+  as somebody typing `make test-golden`.*
 
 ---
 

@@ -8,6 +8,8 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
+import '../slide_fixtures.dart';
+
 /// Visual-regression goldens for the slide renderer (`SlidePreviewWidget`) — the
 /// same widget that drives the editor preview, presenter, thumbnails and the
 /// PDF/PPTX rasterisation, so a layout regression here ships everywhere.
@@ -163,5 +165,25 @@ void main() {
       slideNumber: 3,
       slideCount: 10,
     );
+  });
+
+  // #617: de negen tests hierboven dekken acht van de 24 slidetypes. Elk type
+  // dat ná de eerste ronde gebouwd is — chart, cockpit, timeline, scorecard,
+  // finding, checklist, scopeMatrix, discoveries, findingsSummary, question —
+  // had géén visuele regressietest. Een themawijziging of een aanpassing in
+  // `SlidePreviewWidget` kon hun layout verschuiven zonder dat er iets rood
+  // werd.
+  //
+  // Uitputtend over het enum dus, met dezelfde fixture die de
+  // markdown-ronde-trip en de rasterizer gebruiken: één lijst, want twee
+  // lijsten lopen uiteen. De negen hierboven blijven — die dragen rijkere
+  // inhoud (een TLP-markering, een ontbrekende afbeelding) dan een
+  // standaardfixture kan.
+  group('elk slidetype heeft een golden', () {
+    for (final type in SlideType.values) {
+      testWidgets(type.name, (tester) async {
+        await _match(tester, 'type_${type.name}', slideMetInhoud(type));
+      });
+    }
   });
 }
