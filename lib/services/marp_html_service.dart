@@ -91,7 +91,7 @@ class MarpHtmlService {
       loadAsset('$_assetDir/highlight.css'),
       loadAsset('$_assetDir/tex-svg.js'),
       loadAsset('$_assetDir/mermaid.min.js'),
-      theme == null ? Future.value(_baseCss) : _themedCss(theme),
+      theme == null ? Future.value(_defaultThemeCss) : _themedCss(theme),
     ]);
 
     // Per-export CSP nonce. Every executable <script> we emit carries it; the
@@ -162,7 +162,7 @@ class MarpHtmlService {
         'connect-src \'none\'">'
         '<title>$title</title>'
         '$headMeta'
-        '<style>$css\n$hljsCss</style>'
+        '<style>$_structuralCss\n$css\n$hljsCss</style>'
         '<script nonce="$nonce">$_mathjaxConfig</script>'
         '${inline(marked)}'
         '${inline(purify)}'
@@ -556,6 +556,14 @@ class MarpHtmlService {
   /// CSS that mirrors the deck's [ThemeProfile]: slide background, text and
   /// accent colours, table colours and font. The EB Garamond font is embedded
   /// (base64) so it renders offline; other fonts resolve to system families.
+  ///
+  /// Alleen de thema-afhankelijke helft. De rest — tijdlijn, ondertekening,
+  /// media-redactie, de classificatiebanner en de printregels — staat in
+  /// [_structuralCss] en wordt altijd meegestuurd. Toen dit één blok was dat de
+  /// ongethematiseerde variant *verving*, verloor elke export mét thema (dus
+  /// elke export uit de app) die opmaak: de tijdlijn viel terug op een kale
+  /// genummerde lijst en de TLP-banner werd een regel zwarte tekst op de
+  /// achtergrond in plaats van een balk bovenaan het document.
   Future<String> _themedCss(ThemeProfile t) async {
     final fontFace = await _ebGaramondFontFace(t.fontFamily);
     final family = _cssFontStack(t.fontFamily);
@@ -565,8 +573,7 @@ class MarpHtmlService {
     final codeFamily =
         '${codePrefix}SFMono-Regular,Consolas,"Liberation Mono",monospace';
     return '$fontFace\n'
-        '*{box-sizing:border-box}'
-        'html,body{margin:0;padding:0}'
+        ':root{--ocideck-accent:${t.accentColor}}'
         'body{background:#1e1e1e;font-family:$family;color:${t.textColor}}'
         '.slide{position:relative;width:1280px;min-height:720px;margin:24px auto;'
         'background:${t.slideBackgroundColor};color:${t.textColor};padding:48px;'
@@ -597,9 +604,7 @@ class MarpHtmlService {
         '.slide table{border-collapse:collapse;width:100%}'
         '.slide th{background:${t.tableHeaderBackgroundColor};color:${t.tableHeaderTextColor};'
         'border:1px solid #ccc;padding:6px 12px;font-size:20px}'
-        '.slide td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px;font-size:20px}'
-        '@media print{body{background:#fff}.slide{margin:0;box-shadow:none;'
-        'border-radius:0;page-break-after:always;width:100%;min-height:100vh}}';
+        '.slide td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px;font-size:20px}';
   }
 
   String _cssFontStack(String font) {
@@ -638,35 +643,53 @@ class MarpHtmlService {
   static const _mathjaxConfig =
       r'''window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'},startup:{typeset:false}};''';
 
-  static const _baseCss = r'''
+  /// De opmaak die van geen enkel thema afhangt: de dia-doos, de tijdlijn, de
+  /// ondertekening, het media-redactievlak, de classificatiebanner en de
+  /// printregels. Deze gaat **altijd** mee, vóór [_defaultThemeCss] of
+  /// [_themedCss], zodat een gethematiseerde export dezelfde structuur houdt en
+  /// een thema alleen de kleuren en de letter overneemt.
+  ///
+  /// `--ocideck-accent` is de enige haak die het thema hier binnenkomt: de
+  /// tijdlijn en de ondertekening tekenen ermee, met EU-blauw als waarde voor
+  /// een export zonder thema.
+  static const _structuralCss = r'''
+:root{--ocideck-accent:#003399}
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1a1a1a}
-.slide{position:relative;width:1280px;min-height:720px;margin:24px auto;background:#fff;padding:48px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.4);border-radius:4px}
-.slide h1{font-size:48px;margin:.15em 0;color:var(--ocideck-title-color,inherit)}
+.slide{position:relative;width:1280px;min-height:720px;margin:24px auto;padding:48px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.4);border-radius:4px}
+.slide h1{font-size:48px;margin:.15em 0}
 .slide h2{font-size:34px;margin:.15em 0}
 .slide p,.slide li{font-size:24px;line-height:1.45}
-.slide pre{background:#f6f8fa;border:1px solid #e1e4e8;border-radius:6px;padding:16px;overflow:auto;font-size:18px}
-.slide code{font-family:SFMono-Regular,Consolas,"Liberation Mono",monospace}
 .slide pre.mermaid{background:transparent;border:0;text-align:center}
 .slide img{max-width:100%}
-.slide blockquote{border-left:4px solid #ccc;margin:.5em 0;padding-left:16px;color:#555}
-.slide table{border-collapse:collapse;width:100%}.slide th,.slide td{border:1px solid #ccc;padding:6px 12px;font-size:20px}
+.slide table{border-collapse:collapse;width:100%}
 .slide ol.timeline{list-style:none;margin:.6em 0;padding:0 0 0 24px;border-left:3px solid #ccc}
 .slide ol.timeline li{position:relative;margin:0 0 .9em;padding-left:16px}
-.slide ol.timeline li::before{content:"";position:absolute;left:-31px;top:.45em;width:11px;height:11px;border-radius:50%;background:#003399}
-.slide .tl-marker{display:block;font-size:18px;font-weight:700;color:#003399;letter-spacing:.04em}
+.slide ol.timeline li::before{content:"";position:absolute;left:-31px;top:.45em;width:11px;height:11px;border-radius:50%;background:var(--ocideck-accent)}
+.slide .tl-marker{display:block;font-size:18px;font-weight:700;color:var(--ocideck-accent);letter-spacing:.04em}
 .slide .tl-title{display:block;font-size:26px;font-weight:600;line-height:1.3}
-.slide .tl-desc{display:block;font-size:20px;color:#555;line-height:1.35}
+.slide .tl-desc{display:block;font-size:20px;opacity:.7;line-height:1.35}
 .slide .signoff{margin-top:.8em;max-width:900px}
-.slide .signoff-statement{font-style:italic;color:#334155;font-size:22px}
-.slide .signoff-mark{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:40px;color:#0f2a5c;margin:.35em 0 .1em}
-.slide .signoff-none{font-style:italic;color:#64748b;font-size:22px}
-.slide .signoff-meta{font-size:20px;color:#475569;margin:.1em 0}
-.slide .signoff-seal{font-size:18px;color:#64748b;letter-spacing:.03em;margin-top:.7em}
+.slide .signoff-statement{font-style:italic;opacity:.85;font-size:22px}
+.slide .signoff-mark{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:40px;color:var(--ocideck-accent);margin:.35em 0 .1em}
+.slide .signoff-none{font-style:italic;opacity:.6;font-size:22px}
+.slide .signoff-meta{font-size:20px;opacity:.8;margin:.1em 0}
+.slide .signoff-seal{font-size:18px;opacity:.6;letter-spacing:.03em;margin-top:.7em}
 .slide .media-redacted{display:flex;align-items:center;justify-content:center;min-height:200px;margin:.6em 0;background:#000;color:#fff;font-size:20px;letter-spacing:.05em;border-radius:4px;text-align:center;padding:24px}
 .tlp-export-banner{position:fixed;top:0;left:0;right:0;background:#000;color:#ffc000;text-align:center;font:700 14px/2.4 monospace;z-index:9999;letter-spacing:.06em}
 @media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}}
+''';
+
+  /// De kleuren en letters voor een export zonder [ThemeProfile] — de
+  /// tegenhanger van [_themedCss], op dezelfde plek in de cascade.
+  static const _defaultThemeCss = r'''
+body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1a1a1a}
+.slide{background:#fff}
+.slide h1{color:var(--ocideck-title-color,inherit)}
+.slide pre{background:#f6f8fa;border:1px solid #e1e4e8;border-radius:6px;padding:16px;overflow:auto;font-size:18px}
+.slide code{font-family:SFMono-Regular,Consolas,"Liberation Mono",monospace}
+.slide blockquote{border-left:4px solid #ccc;margin:.5em 0;padding-left:16px;color:#555}
+.slide th,.slide td{border:1px solid #ccc;padding:6px 12px;font-size:20px}
 ''';
 
   static String _htmlAttr(String value) {

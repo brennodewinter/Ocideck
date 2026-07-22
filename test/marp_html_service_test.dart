@@ -161,6 +161,28 @@ void main() {}
     expect(html, isNot(contains('data:font/ttf;base64,')));
   });
 
+  test('a themed export keeps the structural stylesheet', () async {
+    // De opmaak van de tijdlijn, de ondertekening, het redactievlak en de
+    // classificatiebanner hoort niet bij het thema. Toen de themed CSS het
+    // basisblok verving in plaats van aanvulde, verloor élke export uit de app
+    // (die geeft altijd een thema mee) die vier — de banner met de TLP-marking
+    // voorop.
+    final service = MarpHtmlService(
+      loadAsset: _diskLoader,
+      loadBytes: _diskBytes,
+    );
+    const theme = ThemeProfile(accentColor: '#33CC99');
+    final html = await service.build('# Titel', theme: theme);
+
+    expect(html, contains('.slide ol.timeline'));
+    expect(html, contains('.slide .signoff'));
+    expect(html, contains('.slide .media-redacted'));
+    expect(html, contains('.tlp-export-banner{'));
+    expect(html, contains('@media print'));
+    // En het thema kleurt de tijdlijn mee via de enige haak die het heeft.
+    expect(html, contains('--ocideck-accent:#33CC99'));
+  });
+
   group('per-slide title colour override', () {
     test('a title override becomes a scoped variable the h1 reads', () async {
       final service = MarpHtmlService(
