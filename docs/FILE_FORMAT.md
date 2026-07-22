@@ -1356,7 +1356,6 @@ Marp `.md` is never touched by annotations.
 `points` is a flat list `[x0, y0, x1, y1, ...]`; `color` is an ARGB int; `tool`
 is `pen` or `highlighter` (laser pointers are transient and are not stored).
 
-<<<<<<< HEAD
 `version` is a single increasing integer, and every sidecar in this chapter
 handles it the same way (`lib/services/sidecar_format.dart`): **a file declaring
 a higher version than this build understands is not loaded, and not
@@ -1365,7 +1364,7 @@ and then writing back what you did understand deletes the rest; and refusing to
 read it while still saving over it deletes all of it — the deck would hold no
 strokes in memory, and the save would take that as "there is nothing here".
 A missing `version` is version 1.
-=======
+
 The same payload rides along in an **autosave/recovery snapshot**, since drawing
 marks a deck as changed and the strokes are not in the markdown: without it a
 deck that had only been drawn on came back after a crash with the drawings gone.
@@ -1375,7 +1374,6 @@ A snapshot that carries an unreadable ink payload still restores the text.
 `services/git/` writes it — so drawings do not travel that way. Saving to a
 folder or into a package does take them along. OciDeck says so before the commit
 is made rather than after; see `design/GIT_STORAGE.md` §9.1.
->>>>>>> 26b3fa16 (docs: breng de gidsen in overeenstemming met de vijf gedichte paden)
 
 ### 6.3 User Notes (`<name>.user-notes.json`)
 
@@ -1744,13 +1742,29 @@ out-of-band; OciDeck makes no network connection). OciDeck checks **one** thing
 about it: that its message imprint equals `hash` — does this token belong to
 this document?
 
-It does **not** verify the token's CMS signature, does **not** validate the
-TSA's certificate chain or its timestamping EKU, and sends **no nonce** in the
-request. So `genTime` is a *claim made by the token*, not an established fact:
-whoever holds the deck can mint a token with an arbitrary time and a matching
-imprint. The interface says so and shows no "verified" badge, and the audit
-dossier repeats it. For non-repudiable time anchoring, verify the token against
-the TSA; OciDeck stores it unaltered so that stays possible.
+It does **not** verify the token's CMS signature and does **not** validate the
+TSA's certificate chain or its timestamping EKU. So `genTime` is a *claim made
+by the token*, not an established fact: whoever holds the deck can mint a token
+with an arbitrary time and a matching imprint. The interface says so and shows
+no "verified" badge, and the audit dossier repeats it. For non-repudiable time
+anchoring, verify the token against the TSA; OciDeck stores it unaltered so that
+stays possible.
+
+The exported `.tsq` **does** carry a random RFC 3161 nonce, and §2.4.2 obliges
+the TSA to echo it back in the token. That echo is what binds one request to one
+token — without it, any valid token for the same imprint is interchangeable with
+any other, and re-submitting an old one goes unnoticed. Anyone holding both
+files can check the echo (`openssl ts -reply -in … -text`, or
+`timeStampEchoesNonce`).
+
+**OciDeck cannot check it on import**, because it does not keep the nonce: the
+request travels to the TSA outside the app, and after a restart the other half
+is gone. A token whose imprint matches is therefore accepted whatever its nonce
+says. The original reason for not storing it — that an extra front-matter key
+would clash with the ongoing move of the seal into a sidecar — no longer holds:
+that move is done, and this file is exactly where such a nonce belongs (it is
+opaque, and it is *about* the document rather than part of it). What remains is
+the decision to build it.
 
 ## 7. Portable Package (`.ocideck`)
 

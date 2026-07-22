@@ -2391,10 +2391,16 @@ say the token "is verified again every time the deck opens"*):
   called `timeStampImprintMatchesHash`. It parses the token far enough to read
   the hashed value and the generation time and compares that value with the seal
   hash. It does not validate the TSA's CMS signature, its certificate, or the
-  chain behind it, and the request carries no nonce. A token whose imprint
-  matches will therefore be accepted even if it was never signed by anyone you
-  trust, and its time is a claim rather than a checked fact. Establishing *who*
-  issued it, and when, is out-of-band work with the TSA's own tooling.
+  chain behind it. A token whose imprint matches will therefore be accepted even
+  if it was never signed by anyone you trust, and its time is a claim rather
+  than a checked fact. Establishing *who* issued it, and when, is out-of-band
+  work with the TSA's own tooling.
+- The request you export **does** carry a random nonce that the timestamp
+  service has to repeat in the token, which is what ties the token you get back
+  to the request you sent. OciDeck cannot check that on import — it does not
+  keep your request, so after a restart the other half is gone — but you can,
+  with both files in hand: `openssl ts -reply -in token.tsr -text` shows the
+  nonce it echoed.
 - It runs **when you look**, not on open. The comparison happens in the timestamp
   dialog (and again when an audit dossier is built). Opening a deck stores and
   displays the token without re-checking it, so no "does not match" warning

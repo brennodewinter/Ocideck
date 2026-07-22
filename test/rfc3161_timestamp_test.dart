@@ -75,7 +75,7 @@ void main() {
         '20260721120000Z',
         nonce: const [0x00, 0x00, 0x00, 0x01],
       );
-      expect(timeStampMatchesHash(token, hexOf(hash)), isTrue);
+      expect(timeStampImprintMatchesHash(token, hexOf(hash)), isTrue);
       expect(timeStampEchoesNonce(token, nonce), isFalse);
     });
 

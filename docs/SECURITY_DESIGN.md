@@ -299,11 +299,19 @@ model.
   (`evidence_hash_service.dart`), and an audit dossier (`audit_dossier.dart`).
   The timestamp handling is deliberately shallow:
   `timeStampImprintMatchesHash` compares the token's message imprint with the
-  seal hash and stops there — no CMS signature, no certificate, no chain, and no
-  nonce in the request. It shows that *this* token was issued over *this* hash,
-  not that a trustworthy authority issued it, and `genTime` is therefore a claim
-  rather than a checked fact. Calling it a "trusted timestamp" overstated that;
-  *corrected 2026-07-21, function renamed to say so 2026-07-22*. Building the
+  seal hash and stops there — no CMS signature, no certificate, no chain. It
+  shows that *this* token was issued over *this* hash, not that a trustworthy
+  authority issued it, and `genTime` is therefore a claim rather than a checked
+  fact. Calling it a "trusted timestamp" overstated that; *corrected 2026-07-21,
+  function renamed to say so 2026-07-22*.
+
+  The request **does** carry a random nonce, which the TSA must echo back; that
+  echo binds one request to one token and defeats replay of an older token for
+  the same imprint. OciDeck does not check the echo on import — it does not keep
+  the nonce, so after a restart the other half is gone — but anyone holding both
+  files can (`timeStampEchoesNonce`). The reason originally given for not
+  storing it, a clash with the seal's move into a sidecar, has lapsed now that
+  the move has landed; `<name>.seal.json` is where it would go. Building the
   real check would mean X.509 path validation against a bundled trust anchor
   list — a new dependency with SBOM and licence consequences, plus reference
   data that ages — in an application that makes no network connection and
