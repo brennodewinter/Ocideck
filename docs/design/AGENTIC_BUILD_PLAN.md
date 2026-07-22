@@ -9,16 +9,20 @@
 > [`AI_ASSIST.md`](AI_ASSIST.md), where Phase 4 / MCP is the only open item).
 > Running the work packages below would rebuild things that already exist.
 >
-> **One package is actively wrong to execute: P0-MOD**, which specifies the pack
-> fetch / mirror provisioning pipeline. That pipeline was built, tested, never
-> went live, and was **removed on 2026-07-16** — see `PENTEST_MIAUW.md` §6, "Why
-> the provisioning pipeline went". The module is now a plain on/off toggle over
+> **Shortened on 2026-07-22.** The work-package tables, the dependency graph and
+> the 33-step runbook — roughly half the file — were removed; §5 says what they
+> were and why they went. A walked queue is not a reference, and one of its
+> packages (`P0-MOD`, the pack fetch / mirror provisioning pipeline) was
+> **actively wrong to execute**: that pipeline was built, tested, never went
+> live, and was **removed on 2026-07-16** — see `PENTEST_MIAUW.md` §6, "Why the
+> provisioning pipeline went". The module is now a plain on/off toggle over
 > built-in catalogues with no network egress. Do not reinstate it.
 >
-> Kept because the decomposition, the isolation rules and the §7 human decision
-> gates are a **reusable pattern** for the next agentic build, and because §7
-> records which calls were escalated to a human rather than guessed. Read it as a
-> worked example, not as a queue.
+> What is kept is the part that does not expire: why an agentic build is safe in
+> *this* repo (§1), what "done" means (§2), the orchestration shape (§3), the
+> choke files that must be edited serially (§4), the §7 decisions that were
+> escalated to a human rather than guessed — now with their outcomes — and the
+> risk table (§8). Read it as a worked example, not as a queue.
 >
 > Original framing follows.
 >
@@ -117,95 +121,75 @@ phases. Human decision gates (§7) pause the relevant phase.
 
 ---
 
-## 5. Work breakdown (packages)
+## 5. Work breakdown, dependency graph and runbook — removed
 
-IDs: `P<phase>-<pkg>`. "Key surfaces" are the primary files/spec sections.
+This document used to carry the full decomposition: five phases of work-package
+tables (`P0-PICK` through `P4-V`), an ASCII dependency graph, and a 33-step
+sequential runbook — about half its length. All of it has been executed, and
+several of its packages describe things that no longer exist: `P0-MOD` specifies
+the pack fetch / mirror provisioning pipeline that was removed on 2026-07-16 and
+must not be reinstated, and the MIAUW schema step names 92 EIS where the
+catalogue now holds 88 testable ones (`kMiauwFullSchemaSize`).
 
-### Phase 0 — foundations (unblock everything)
+Kept out rather than corrected, on 2026-07-22, because a work queue that has
+been walked is not a reference: correcting it would produce an accurate
+description of work nobody should do, at the cost of the pages a reader has to
+walk past to reach the parts that are still useful. The package IDs still
+referenced in §4, §7 and §8 read as `P<phase>-<package>`; what each one built is
+visible in the code and in [`PENTEST_MIAUW.md`](PENTEST_MIAUW.md) and
+[`AI_ASSIST.md`](AI_ASSIST.md), which are the specifications, not this.
 
-| ID | Package | Depends | Key surfaces | Local DoD |
-|---|---|---|---|---|
-| P0-PICK | `SlideCategory` + tabbed/searchable/sorted picker | — | `slide.dart` (`SlideTypeMeta.category`), `add_slide_dialog.dart` (PENTEST §5) | Picker shows Algemeen/Alle tabs (Informatieveiligheid hidden until module on), search + sort work; wireframes for new types are stubs |
-| P0-INTEG | Document integrity A1 (general) | — | new `finalize` front-matter (`ocideck_finalized`), SHA-512 seal (`crypto`), read-only lock (generalise `playOnly`), reusable visual-signature element (PENTEST §8) | Finalise → deck read-only; reopen verifies hash → intact/changed; signature element renders |
-| P0-AIBK | AI shared backend | — | new **provider-agnostic** AI client (OpenAI-compatible `/v1` wire format = any model, local/remote — not a vendor dependency), settings toggle, 3-tier backend, guardrail scaffolding (AI_ASSIST §3–4); reuse `consent_provider`, `net_guard`, `flutter_secure_storage`. Optional later: an MCP-server surface so external agents drive OciDeck (AI_ASSIST §10). | Toggle off by default; "test connection" to a local endpoint works; no egress in local mode |
-| P0-MOD | Module framework + provisioning skeleton | — | settings module toggle, app-support cache, content-addressed pack fetch + `sha256` verify (reuse `MANIFEST.json`/`check_bundled_js.dart`/`NetGuard`), **build-time pack tooling** (PENTEST §6) | Enable → fetch+verify+cache a pack across a mirror list; offline after; disable hides features |
-| P0-CVSS | CVSS 4.0 native Dart engine | — | new engine + MacroVector lookup port (PENTEST §7) | Vector→score→severity matches FIRST fixtures; `make mutate-parsers` 0 survivors |
+What survives that decomposition, and is the reason this file exists at all:
+the safety properties in §1, the definition of done in §2, the orchestration
+shape in §3, the choke-file rules in §4, the decision gates in §7 and the risk
+table in §8. Those are about *how* to run an agentic build in this repo, and
+they do not expire when a particular build finishes.
 
-### Phase 1 — parallel fan-out
-
-| ID | Package | Depends | Key surfaces | Local DoD |
-|---|---|---|---|---|
-| P1-S | **Scaffold** the 5 new slide types (enum + meta + switches + stubs) | P0-PICK | `slide.dart`, all exhaustive switches, widget registry | Guard test + l10n test green with stub editors/previews |
-| P1-FIND | `finding` **slide group** (header+detail+evidence, shared id) | P1-S, P0-CVSS | `markdown_service_*` (`ocideck_finding_id`), editor/preview, PENTEST §3.1/§4 | Group round-trips Markdown-close; one id/severity across its slides; CVSS badge |
-| P1-CHK | `checklist` type (MIAUW tri-state + finding link) | P1-S | `markdown_service_*` (table form), PENTEST §3.2/§6 | Round-trips as MD table; statuses + finding link |
-| P1-SCOPE | `scopeMatrix` type | P1-S | editor/preview, serialize | Round-trips; per-object standard mapping |
-| P1-SUM | `findingsSummary` type | P1-S | `fl_chart` severity chart | Derives counts from deck findings |
-| P1-SIGN | `signOff` type | P1-S, P0-INTEG | signature + attestation binding | Renders MIAUW 1.6 statement; blocks seal until AI-markers cleared |
-| P1-IMG | AI image tagging (Consumer B) | P0-AIBK | `slide.dart` (`imageAltText`), `ocideck_image_alt` round-trip, `imageSemanticsLabel`, `description_service`, `image_carousel_picker*`, `_editor_field.dart`, `slide_quality_analyzer` (AI_ASSIST §6) | Suggest alt-text (local vision model); tags fill the search sidecar; never overwrites human alt; decorative→empty alt |
-| P1-CWE | CWE offline + CVE opt-in + snippet/finding-template library | P0-MOD | pack CWE JSON, `![…]` CWE/CVE links, importable finding library (PENTEST §5/§10.6/§17) | CWE picker (Mapping-Notes-aware); CVE link + opt-in enrich; snippet autofill |
-| P1-THEME | Security theme profile (severity tokens, eye-candy) | P0-PICK | `ThemeProfile`, severity palette (PENTEST §11) | Severity colours/badges applied via the profile |
-
-### Phase 2 — assembly
-
-| ID | Package | Depends | Key surfaces | Local DoD |
-|---|---|---|---|---|
-| P2-WIZ | Finding wizard + report-setup wizard | P1-FIND, P0-CVSS, P1-CWE | multi-step stepper (PENTEST §4.1) | Finding wizard emits the slide group; report-setup captures CIA per scope object → CIA-weighted CVSS |
-| P2-COMP | MIAUW compliance analyzer + waivers panel | P0-MOD, P1-* | `MiauwComplianceAnalyzer` (sibling of `slide_quality_analyzer`), panel (PENTEST §9) | Per-EIS auto/manual status + waiver-with-reason; all 92 waivable |
-| P2-AUTO | Automation suite | P1-FIND/CHK/SCOPE | numbering/list/ToC, evidence SHA1+SHA-256, coverage checker, CIA→CVSS, consistency lint (PENTEST §10) | Auto findings list + evidence hash tables + coverage gaps flagged |
-| P2-MSUM | Management-summary derivation | P1-SUM, P2-AUTO | derive severity roll-up + standards used (PENTEST §10.3) | Summary regenerates from deck content |
-
-### Phase 3 — finalise & integrate
-
-| ID | Package | Depends | Key surfaces | Local DoD |
-|---|---|---|---|---|
-| P3-A2 | Document integrity A2 (RFC3161/OpenKAT) | P0-INTEG | `.tsq`/token sidecar, TSA/OpenKAT verify (PENTEST §8-A2) | Hash timestamped + verified in-app |
-| P3-AIA | Pentest AI text drafting (Consumer A) | P0-AIBK, P1-FIND | field "Suggest" + `ocideck_ai_assisted` markers (PENTEST §16) | Draft-only; seal blocked until markers cleared |
-| P3-TPL | MIAUW report template + eye-candy polish | P1-* | `deck_template*` entry (PENTEST §1) | Template scaffolds all MIAUW chapters |
-| P3-EXP | Export / PDF/A + audit dossier | P1-*, P0-INTEG | `pdf` export, AES package (PENTEST §8) | Findings/checklists/summary export deterministically; sealed dossier |
-
-### Phase 4 — cross-cutting closeout
-
-| ID | Package | Depends | Key surfaces | Local DoD |
-|---|---|---|---|---|
-| P4-L | l10n sweep (all new strings → ~30 langs) | all UI packages | `app_localizations.dart`, translation pipeline + `assemble.py` | l10n test green in all languages |
-| P4-DOC | Docs update | all | USER_GUIDE / FILE_FORMAT / CHANGELOG / SOURCE_MAP / ARCHITECTURE / LICENSE_COMPLIANCE / SBOM (memory `keep-docs-updated`) | Docs reflect shipped behaviour |
-| P4-V | Full integration verify | all | `make check` + tests + mutation + `verify` skill end-to-end | Whole flow green; a real MIAUW deck authored, sealed, exported |
+The one structural lesson worth carrying forward from the removed §10: the
+sequential single-track alternative existed because parallelism costs worktree
+coordination and merge work. Its per-step invariant — implement, run the whole
+gate green *including* the localisation coverage test in the same step, one
+coherent commit, never advance on red — is the part that mattered, and it is
+worth more than the order the steps happened to be in.
 
 ---
 
-## 6. Dependency graph (phases)
+## 7. Human decision gates — and what was decided
 
-```
-P0-PICK ─┬─ P1-S ─┬─ P1-FIND ─┬─ P2-WIZ ─┐
-P0-CVSS ─┘        ├─ P1-CHK   ├─ P2-COMP ├─ P3-TPL ─┐
-P0-INTEG ─ P1-SIGN├─ P1-SCOPE ├─ P2-AUTO ┤          ├─ P4-L ─ P4-DOC ─ P4-V
-P0-AIBK ─┬ P1-IMG ├─ P1-SUM ──┴─ P2-MSUM ┘          │
-         └ P3-AIA                     P3-A2 ─────────┤
-P0-MOD ── P1-CWE ───────────────────────── P3-EXP ──┘
-P1-THEME ───────────────────────────────────────────┘
-```
+These were the open questions an agentic run had to **pause** for rather than
+guess. They are the most reusable part of this document: not the answers, but
+the fact that these five were recognised in advance as calls a machine should
+not make. Where the outcome is readable in the code today it is recorded here;
+where it is not, that is said rather than filled in. *(Outcomes added
+2026-07-22.)*
 
-Phase 0 packages are mutually independent → run all five in parallel first.
-Phase 1 fans out after the scaffold (P1-S) and its Phase-0 deps land. Phases 2–3
-fan out on their deps. Phase 4 is the closeout barrier.
-
----
-
-## 7. Human decision gates (resolve before the dependent phase)
-
-These are the still-open questions from the design docs; an agentic run must
-**pause** for a human answer, not guess:
-
-- **Before P0-INTEG / P3-A2:** signing approach — RFC3161/OpenKAT only (no new
-  crypto dep) vs adding an Ed25519/minisign signature dep (also gates the pack
-  signature, PENTEST §14-Q2).
-- **Before P0-MOD:** the second mirror host, and whether the pack is signed in
-  phase 1 (PENTEST §14-Q1/Q2).
-- **Before P1-IMG / P0-AIBK:** AI as a separate toggle vs inside the module; the
-  recommended model roster / "install Ollama" help (AI_ASSIST §8).
-- **Before P3-EXP:** PDF/A strictness for EIS 1.1 (PENTEST §14-Q4).
-- **Before P1-CHK / P1-CWE:** additional standards (MASTG/ASVS) now or later;
-  CVSS v3.1 import (PENTEST §14-Q3/Q5).
+- **Before P0-INTEG / P3-A2 — signing approach:** RFC3161/OpenKAT only (no new
+  crypto dependency) versus adding an Ed25519/minisign signature dependency
+  (also gated the pack signature, PENTEST §14-Q2).
+  → **Decided: RFC 3161, no new dependency.** `rfc3161_timestamp.dart` builds a
+  `.tsq` and verifies the returned token's message imprint against the seal;
+  `pubspec.yaml` carries `crypto` and no signature package. Note the deliberate
+  shallowness: the token is checked against *this* hash, not against a
+  trustworthy authority (`SECURITY_DESIGN.md` §9).
+- **Before P0-MOD — the second mirror host, and whether the pack is signed in
+  phase 1** (PENTEST §14-Q1/Q2).
+  → **Moot.** The whole pack/provisioning pipeline was removed on 2026-07-16;
+  the module is a toggle over built-in catalogues with no network egress. There
+  is no pack to mirror or sign (PENTEST_MIAUW §6).
+- **Before P1-IMG / P0-AIBK — AI as a separate toggle or inside the module**, and
+  the recommended model roster / "install Ollama" help (AI_ASSIST §8).
+  → **Decided: separate.** `AiSettings.enabled` is its own setting, off by
+  default and independent of the security module.
+- **Before P3-EXP — PDF/A strictness for EIS 1.1** (PENTEST §14-Q4).
+  → **Still open**, and deliberately so: [`VERIFICATION.md`](VERIFICATION.md)
+  §10 carries it as a decision to take before anything is built for it.
+- **Before P1-CHK / P1-CWE — additional standards (MASTG/ASVS) now or later, and
+  CVSS v3.1 import** (PENTEST §14-Q3/Q5).
+  → **Partly decided.** MASTG and MASWE are bundled catalogues today
+  (`mastg_catalog.dart`, `maswe_catalog.dart`); there is no ASVS catalogue and
+  `lib/services/cvss/` implements v4.0 only, with no v3.1 import. Whether either
+  was decided against or simply not reached is not recorded anywhere, so it is
+  not claimed here.
 
 ---
 
@@ -222,83 +206,3 @@ These are the still-open questions from the design docs; an agentic run must
 | Over-parallelism thrash | Cap concurrency at the Workflow default; keep Phase-0 barrier strict |
 
 ---
-
-## 9. Kicking it off (when the human says go)
-
-This plan is executed with the **Workflow** tool: one `parallel([...])` per phase,
-each element a `build → verify → review` pipeline with `isolation: 'worktree'`,
-`SendMessage` loop-until-green on verify failure, a scaffold-alone step before the
-Phase-1 fan-out, and a merge agent between phases. Nothing runs until a human
-confirms the §7 decision gates and explicitly authorises the build — this document
-is the plan, not the trigger.
-
----
-
-## 10. Sequential execution order (single-track runbook)
-
-The phased fan-out (§3/§5/§6) is the *fast* path. This section is the **strictly
-sequential alternative**: one ordered track, walked top to bottom by a single
-agent (or one agent per step, in order), with **no parallelism**. It trades speed
-for simplicity and determinism — no worktree coordination, no merge agent, no
-cross-package races; the tree is always in one known state.
-
-**Per-step invariant.** Every step ends the same way before the next begins:
-
-1. implement the step from its spec;
-2. run the full §2 gate green — *including* the l10n coverage test, so **any step
-   that adds `.d(...)` strings must add their ~30-language translations in the
-   same step** (via the index-keyed translation pipeline + `assemble.py`); there
-   is no deferred translation phase;
-3. one coherent commit (memory `ocideck-commit-granularity`);
-4. only then move to the next step.
-
-If a step fails the gate, fix it in place — never advance on red.
-
-### The order
-
-| # | Step | Spec | Done when |
-|---|---|---|---|
-| **Prep** | | | |
-| 1 | Answer decisions #1–#6 | §7; PENTEST §14; AI_ASSIST §8 | All six recorded (human) |
-| 2 | MIAUW schema (xlsx) → bundled JSON (92 EIS, NL+EN) | PENTEST §9 | JSON validated against the source |
-| 3 | CVSS 4.0 test fixtures from the FIRST reference | PENTEST §7 | Vector→score fixture set committed |
-| 4 | Licence/attribution (LICENSE_COMPLIANCE + SBOM) | PENTEST §15 | MIAUW/WSTG/CWE/CVSS entries added |
-| 5 | Pack tooling + cut the first data pack | PENTEST §6 | Pack + inner MANIFEST (sha256) built; needs #2 |
-| 6 | Model defaults + "install Ollama" help | AI_ASSIST §6 | Recommended models + help text |
-| 7 | RFC3161/OpenKAT integration decision | PENTEST §8-A2 | Endpoint + token flow chosen; needs #1 |
-| 8 | Verification baseline + worktree strategy | §2/§4 | Gate green on a fresh worktree |
-| **Foundations** | | | |
-| 9 | P0-PICK — `SlideCategory` + tabbed/searchable picker | PENTEST §5 | Picker tabs/search/sort |
-| 10 | P0-CVSS — native CVSS 4.0 engine | PENTEST §7 | Matches #3 fixtures; `make mutate-parsers` 0 |
-| 11 | P0-INTEG — Document integrity A1 (finalise+hash+signature) | PENTEST §8; AI_ASSIST §8 | Finalise→read-only; hash verify |
-| 12 | P0-AIBK — AI shared backend (`/v1`, 3-tier, guardrails) | AI_ASSIST §3–4 | Local endpoint test works; off by default |
-| 13 | P0-MOD — module toggle + provisioning (uses #5 pack) | PENTEST §6 | Enable→fetch+verify+cache; offline after |
-| **Slide types & consumers** | | | |
-| 14 | P1-S — scaffold all 5 slide types (enum+meta+switches+stubs) | PENTEST §4; §4-choke | Guard + l10n tests green with stubs |
-| 15 | P1-FIND — `finding` **slide group** (header+detail+evidence, shared id) | PENTEST §3.1/§4 | Group round-trips; one id/severity; CVSS badge |
-| 16 | P1-CHK — `checklist` (MIAUW tri-state + finding link) | PENTEST §3.2/§6 | Round-trips as MD table |
-| 17 | P1-SCOPE — `scopeMatrix` | PENTEST §4 | Round-trips; standard mapping |
-| 18 | P1-SUM — `findingsSummary` (fl_chart) | PENTEST §11 | Counts derived from findings |
-| 19 | P1-SIGN — `signOff` (binds to A1 seal) | PENTEST §7-there/§8 | 1.6 statement; seal blocked until markers cleared |
-| 20 | P1-IMG — AI image tagging (alt-text + tags) | AI_ASSIST §6 | Suggest alt-text; tags → search sidecar |
-| 21 | P1-CWE — CWE offline + CVE opt-in + finding library | PENTEST §5/§10.6/§17 | CWE picker + CVE link + snippet autofill |
-| 22 | P1-THEME — security theme profile (severity tokens) | PENTEST §11 | Severity colours/badges via profile |
-| **Assembly** | | | |
-| 23 | P2-WIZ — finding + report-setup wizards | PENTEST §4.1 | Wizard emits finding group; CIA captured per scope object → CIA-weighted CVSS |
-| 24 | P2-COMP — compliance analyzer + waivers panel | PENTEST §9 | Per-EIS status + waiver; all 92 waivable |
-| 25 | P2-AUTO — automation suite | PENTEST §10 | Auto list/numbering + evidence hashes + coverage gaps |
-| 26 | P2-MSUM — management-summary derivation | PENTEST §10.3 | Summary regenerates from deck |
-| **Finalise** | | | |
-| 27 | P3-A2 — RFC3161/OpenKAT timestamp | PENTEST §8-A2 | Hash timestamped + verified |
-| 28 | P3-AIA — pentest AI text drafting (Consumer A) | PENTEST §16 | Draft-only; seal-gated markers |
-| 29 | P3-TPL — MIAUW report template | PENTEST §1 | Scaffolds all MIAUW chapters |
-| 30 | P3-EXP — export / PDF/A + audit dossier | PENTEST §8 | Deterministic export; sealed dossier |
-| **Closeout** | | | |
-| 31 | l10n consistency audit (dedup, fallback, no orphan keys) | memory `ocideck-add-language` | l10n test + audit clean |
-| 32 | Docs update (USER_GUIDE/FILE_FORMAT/CHANGELOG/SOURCE_MAP/…) | memory `keep-docs-updated` | Docs match shipped behaviour |
-| 33 | Full integration verify (author→seal→export a real MIAUW deck) | §2 + `verify` skill | End-to-end flow green |
-
-Steps 2–4 are the only ones with no code-under-test dependency and can be done
-first in any order; everything from 5 onward follows the table order. Because the
-gate runs every step, the build is releasable at every commit — you can stop after
-any step with a working tree.
