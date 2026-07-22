@@ -10,6 +10,39 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Changed
+- **De HTML-export is nu écht één bestand.** Er stond dat hij self-contained was,
+  maar de afbeeldingen zaten er niet in: die bleven verwijzen naar uw eigen
+  `images/`-map. Wie de HTML doorstuurde, stuurde een rapport met kapotte
+  plaatjes en zijn eigen mappenstructuur eronder — bij een pentestrapport
+  uitgerekend het bewijsmateriaal.
+
+  Nu reist elk beeld mee. Om te voorkomen dat een deck met twintig foto's
+  tientallen megabytes wordt, gaat een afbeelding op schermformaat mee (maximaal
+  1920 pixels, ruimer dan de dia zelf zodat inzoomen op een schermafdruk scherp
+  blijft) en staat hij één keer in het bestand, hoe vaak u hem ook gebruikt. Een
+  logo of doorzichtig beeld houdt zijn doorzichtigheid; een bewegende GIF blijft
+  bewegen.
+
+  **En de EXIF gaat eraf.** Een foto uit een telefoon draagt de GPS-locatie, het
+  tijdstip en het serienummer van het toestel. Die reisden niet mee naar de
+  ontvanger van uw rapport.
+
+  Eén uitzondering, met opzet: **video** gaat niet mee. Een videobestand insluiten
+  maakt een document van honderden megabytes, en een YouTube- of Vimeo-speler
+  werkt niet in een export die per definitie niets van internet mag halen.
+- **De zes rapportagedia's zien er in de HTML uit zoals in de app.** Scorecard,
+  aanvalsoppervlak, ontdekkingen, checklist, scope-matrix en
+  bevindingenoverzicht kwamen in de HTML-export als kale tabel binnen, terwijl u
+  in de app kaarten, balken en tellers ziet. Juist de dia's van een
+  pentestrapport verloren dus hun vorm in het bestand dat de klant het vaakst
+  krijgt. Ze tekenen nu wat de app tekent, inclusief de getallen die worden
+  afgeleid en nergens in de tabel staan — "2/4 gedekt", "3/4 getoetst", het
+  verschil met het vorige rapport, de langst onopgemerkte blootstelling.
+- **De diagramtekenaar is twee grote versies bijgewerkt** (mermaid 10.9.6 →
+  11.16.0), en de HTML-sanitiser een patchversie (DOMPurify 3.4.11 → 3.4.12, die
+  een lek dicht in de omgang met eigen HTML-elementen). Beide zitten zowel in de
+  app als in de HTML-export. U merkt er niets van, behalve dat nieuwere
+  diagramsoorten en schrijfwijzen nu werken.
 - **Geen base64 meer in uw presentatiebestand.** De belofte van OciDeck is dat u
   met alleen een teksteditor en Marp verder kunt. Op zeven plekken klopte dat
   niet: daar stond een blok onleesbare tekens waar uw inhoud in verstopt zat.
@@ -86,6 +119,20 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   melding bij een te grote maplijst noemt nu overal het aantal.
 
 ### Fixed
+- **Een HTML-export met huisstijl verloor haar opmaak.** De tijdlijn, de
+  akkoordpagina, het zwarte vlak van een privacyredactie en — het ergst — de
+  balk met de TLP-classificatie bovenaan het document bestonden alleen in de
+  variant zónder thema. De app geeft altijd een thema mee, dus in elke echte
+  export vielen die vier weg: de tijdlijn werd een genummerde lijst zonder
+  tijdbalk, en de markering die de ontvanger moet vertellen hoe hij met het stuk
+  om moet gaan, werd een losse regel tekst.
+- **Een kapot diagram vertelt nu wat eraan mankeert.** Kon de tekenaar een
+  mermaid-diagram niet lezen, dan stond er in de HTML-export een Engels bommetje
+  met "Syntax error in text" — zonder te zeggen wélk diagram of wat eraan fout
+  was. De ontvanger van een export heeft geen ontwikkelaarsconsole om dat na te
+  kijken, en de auteur zag helemaal niets. Nu staat er een leesbare melding op de
+  dia zelf, met wat de tekenaar erover zegt en de brontekst van het diagram
+  eronder.
 - **Een export die niets doet, blijft niet meer eeuwig niets doen.** De PDF- en
   PPTX-export maakt zijn afbeeldingen door de échte dia te laten tekenen en het
   resultaat vast te leggen. Daarvoor moet het venster beelden produceren — en

@@ -204,11 +204,28 @@ the key thing to understand before touching rendering:
    playhead reporting; remote rendering is gated by the **Online media** setting.
 2. **HTML export** — `services/marp_html_service.dart` produces a single `.html`
    that renders in a browser using inlined JavaScript (marked, highlight.js,
-   mermaid, MathJax), inlined CSS and an inlined font. Charts are pre-rendered to
-   inline **SVG in Dart** here (no JS chart library). Fidelity differs from the
-   in-app renderer by design. The service never reads image files: an `![](…)`
-   reaches the browser as a relative `<img src>`, so the export is
-   self-contained in everything except slide images (corrected 2026-07-21).
+   mermaid, MathJax), inlined CSS and an inlined font. Charts, the cockpit and
+   the six reporting slide types (`scorecard`, `assets`, `discoveries`,
+   `checklist`, `scope-matrix`, `findings-summary`) are pre-rendered **in Dart**
+   here — SVG for the charts, HTML+CSS for the rest — so no JS chart library is
+   needed and the MIAUW slides keep their shape instead of falling back to a
+   bare table.
+
+   **Slide images are inlined as `data:` URIs** (updated 2026-07-22). The
+   service itself never touches the filesystem: `build()` takes an
+   `HtmlImageResolver` and `ExportService` supplies one that resolves the path
+   inside the deck's project folder (same containment as the preview) and hands
+   the bytes to `services/html_image_embedder.dart`, which caps the long edge at
+   `kHtmlEmbedMaxEdge`, re-encodes (JPEG, or PNG when the image really has
+   transparent pixels), and strips EXIF. Each source is embedded **once**,
+   behind a `#ocideck-img-N` placeholder the render script swaps back, so a
+   background repeated across slides costs one copy. An image that cannot be
+   embedded becomes a visible notice, never a dangling reference.
+
+   Two things still differ from the in-app renderer by design: theme fidelity
+   (this is `marked`, not Marp Core) and **video** — a local `<video src>` is
+   *not* inlined (size), and a YouTube/Vimeo `<iframe>` is blocked by the
+   export's `frame-src 'none'`.
 
 Both worlds converge at one chokepoint: `services/export_service.dart`
 (`ExportService.export()`) is the only place that writes an export.
