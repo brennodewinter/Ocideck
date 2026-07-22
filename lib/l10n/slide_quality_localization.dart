@@ -3,6 +3,7 @@ import '../theme/app_theme.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/markdown_validation.dart';
+import '../models/slide.dart';
 import '../models/slide_quality.dart';
 import '../services/slide_layout_metrics.dart'
     show kTextDensityCriticalScale, kTextDensityWarningScale;
@@ -31,9 +32,18 @@ import '../utils/color_contrast.dart' show kWcagCriticalBodyText;
 ///
 /// Geeft `null` voor een veld dat we niet kennen: liever geen aanduiding dan een
 /// verkeerde.
-String? slideQualityFieldLabel(AppLocalizations l10n, SlideQualityIssue issue) {
+///
+/// [slide] is de dia waar de melding op zit, als de aanroeper hem heeft. Alleen
+/// een tabel heeft hem nodig — zie [_tableCellLabel] — en zonder blijft de
+/// aanduiding bij het kale "Tabel".
+String? slideQualityFieldLabel(
+  AppLocalizations l10n,
+  SlideQualityIssue issue, {
+  Slide? slide,
+}) {
   final field = issue.field;
   if (field == null || field.isEmpty) return null;
+  if (field == 'tableRows') return _tableCellLabel(l10n, issue, slide);
   final label = switch (field) {
     'title' => l10n.d('Titel'),
     'subtitle' => l10n.d('Ondertitel'),
@@ -48,7 +58,6 @@ String? slideQualityFieldLabel(AppLocalizations l10n, SlideQualityIssue issue) {
     'imageAltText' || 'imageAltText2' => l10n.d('Alt-tekst'),
     'customMarkdown' => l10n.d('Inhoud'),
     'notes' => l10n.d('Notities'),
-    'tableRows' => l10n.d('Tabel'),
     'imagePath' || 'imagePath2' => l10n.d('Afbeelding'),
     'videoPath' => l10n.d('Video'),
     'audioPath' => l10n.d('Audio'),
@@ -57,6 +66,15 @@ String? slideQualityFieldLabel(AppLocalizations l10n, SlideQualityIssue issue) {
     'organization' => l10n.d('Organisatie'),
     'description' => l10n.d('Beschrijving'),
     'keywords' => l10n.d('Trefwoorden'),
+    // De overige frontmatter-velden ontbraken hier, waardoor een bevinding op
+    // bijvoorbeeld het versieveld zonder plaatsaanduiding in het paneel kwam —
+    // "Presentatiegegevens · Privacy" en verder zoeken maar.
+    'version' => l10n.d('Versie'),
+    'date' => l10n.d('Datum'),
+    'standardsUsed' => l10n.d('Gebruikte standaarden'),
+    'toolsUsed' => l10n.d('Gebruikte hulpmiddelen'),
+    'miauwWaivers' => l10n.d('Motivering van een uitsluiting'),
+    'miauwConfirmations' => l10n.d('Motivering van een bevestiging'),
     _ => null,
   };
   if (label == null) return null;
@@ -67,6 +85,43 @@ String? slideQualityFieldLabel(AppLocalizations l10n, SlideQualityIssue issue) {
   final fragment = issue.span?.fragmentIndex ?? 0;
   if (fragment == 0) return label;
   return '$label ${fragment + 1}';
+}
+
+/// De plaatsaanduiding van een tabelcel: rij en kolom, zoals de auteur ze telt.
+///
+/// De scanner bewaart één doorlopende celindex (`rij × staplengte + kolom`),
+/// want daar heeft de redactie genoeg aan. Getoond als volgnummer werd dat
+/// "Tabel 14" — een getal dat nergens op de slide staat en dat je zonder de
+/// tabelbreedte niet eens kunt terugrekenen. Dat is geen plaatsaanduiding maar
+/// een tweede raadsel bovenop het eerste.
+///
+/// De staplengte is de breedste rij, precies zoals bij het scannen: alleen dan
+/// komt de cel weer op zijn eigen plek terug, ook bij een tabel met ongelijke
+/// rijen. Zonder de dia kan die berekening niet, en dan blijft het bij "Tabel" —
+/// liever geen aanduiding dan een verkeerde.
+String _tableCellLabel(
+  AppLocalizations l10n,
+  SlideQualityIssue issue,
+  Slide? slide,
+) {
+  final label = l10n.d('Tabel');
+  final index = issue.span?.fragmentIndex ?? 0;
+  final rows = slide?.tableRows;
+  if (rows == null || rows.isEmpty) return label;
+  final stride = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
+  if (stride == 0) return label;
+  final row = index ~/ stride;
+  final column = index % stride;
+  if (row >= rows.length) return label;
+  // De koprij heeft geen nummer op het scherm — de editor noemt hem "Koprij" —
+  // dus krijgt hij hier ook geen nummer. De rijen daaronder tellen mee vanaf de
+  // bovenkant, zoals het oog ze telt.
+  return _fillParams(
+    row == 0
+        ? l10n.d('Tabel koprij, kolom {kolom}')
+        : l10n.d('Tabel rij {rij}, kolom {kolom}'),
+    {'rij': row + 1, 'kolom': column + 1},
+  );
 }
 
 String formatSlideQualityCountSummary(

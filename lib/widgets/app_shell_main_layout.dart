@@ -880,43 +880,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     );
   }
 
-  Future<void> _openProperties() async {
-    final deckNotifier = ref.read(deckProvider.notifier);
-    final deck = ref.read(deckProvider).deck!;
-    final info = await PresentationInfoDialog.show(context, deck);
-    if (info == null) return;
-    deckNotifier.updateInfo(
-      title: info.title,
-      author: info.author,
-      organization: info.organization,
-      version: info.version,
-      date: info.date,
-      description: info.description,
-      keywords: info.keywords,
-      language: info.language,
-      standardsUsed: info.standardsUsed,
-      toolsUsed: info.toolsUsed,
-      presentationTargetSeconds: info.presentationTargetSeconds,
-      showRehearsalSummary: info.showRehearsalSummary,
-      playOnly: info.playOnly,
-    );
-    // Een hier gekozen stijlprofiel geldt app-breed (profielen zijn globaal)
-    // en wordt meteen op het open deck toegepast.
-    final profileName = info.styleProfileName;
-    final settings = ref.read(settingsProvider);
-    if (profileName != null &&
-        profileName != ref.read(deckProvider).deck?.themeProfile.name) {
-      final profile = settings.themeProfiles
-          .where((p) => p.name == profileName)
-          .firstOrNull;
-      if (profile != null) {
-        await ref
-            .read(settingsProvider.notifier)
-            .selectThemeProfile(profileName);
-        deckNotifier.updateThemeProfile(profile);
-      }
-    }
-  }
+  Future<void> _openProperties() => editPresentationInfo(context, ref);
 
   Future<void> _importPackage() async {
     // Web: hetzelfde bytes-pad als "Openen..." — de picker levert inhoud en

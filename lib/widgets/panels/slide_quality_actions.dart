@@ -90,7 +90,21 @@ List<SlideQualityAction> buildSlideQualityActions({
     );
   }
 
-  // Deck-wijd = thema: de oplossing zit in de kleurinstellingen.
+  // Deckbreed is twee dingen. Een contrastmelding gaat over het thema en wordt
+  // in de kleurinstellingen opgelost; een privacybevinding op de front matter
+  // (auteur, organisatie, trefwoorden) hoort in de presentatiegegevens thuis.
+  // Beide "Open kleurinstellingen" noemen stuurde de tweede soort de verkeerde
+  // kant op, met een knop die de verkeerde belofte deed.
+  if (issueBelongsToDeckInfo(issue)) {
+    actions.add(
+      SlideQualityAction(
+        label: l10n.d('Open presentatiegegevens'),
+        icon: Icons.info_outline,
+        run: navigate,
+      ),
+    );
+    return actions;
+  }
   if (issue.isDeckWide) {
     actions.add(
       SlideQualityAction(
