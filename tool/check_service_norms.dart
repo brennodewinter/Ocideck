@@ -4,6 +4,10 @@
 //   dart run tool/check_service_norms.dart --advisory   (rapporteert, faalt nooit)
 //   dart run tool/check_service_norms.dart --quiet      (zwijgt als alles goed is)
 //
+// Dit meet géén CRA-conformiteit; die verordening legt dit project ook geen
+// verplichtingen op. Waarom niet, en waarom we hem tóch als leidraad
+// aanhouden, staat in `assurance/CRA-2024-2847-positie.md`.
+//
 // ── Waarom dit hier staat en niet in docs/ ──────────────────────────────────
 //
 // OciDeck legt zichzelf termijnen op voor het afhandelen van
