@@ -41,11 +41,18 @@ Individual steps:
 | `make analyze` | `flutter analyze --fatal-infos` (analyzer + lints + strict type checks). |
 | `make check-conventions` | No `print()`; no raw control bytes; the bare `catch (_)`, raw-colour, layering and file-size ratchets may not grow. |
 | `make test` | The full test suite (randomised order). |
-| `make coverage` | The suite with coverage: enforces the 78% floor **and** that every `lib/` file is in some test. Part of `make check`. |
+| `make coverage` | The suite with coverage: enforces the 80% floor **and** that every `lib/` file is in some test. Part of `make check`. |
 | `make licenses` | Verify every dependency uses an open-source licence. |
 | `make deps-check` | Verify the vendored export JS bundles (integrity + known CVEs via OSV). |
 | `make check-web` | Build the web bundle and assert its hardening (CSP, self-hosted, fonts). |
 | `make check-full` | `check` plus licences, bundled-JS, web hardening, and a freshness report. |
+
+*(Corrected 2026-07-22: the coverage row said "the 78% floor". The `Makefile`
+runs `coverage_summary.dart --min=80`, and `docs/CHECKS.md`,
+`docs/CONTRIBUTING_GUIDELINES.md` and `docs/DEVELOPMENT_SETUP_GUIDE.md` already
+said 80 — this file was the one that had drifted. The floor is a ratchet that
+gets raised as coverage improves, so when a document and the `Makefile`
+disagree, the `Makefile` is the answer.)*
 
 See [`docs/CHECKS.md`](docs/CHECKS.md) for the full reference — what each check
 covers, what a failure means, and how the CI workflows (defined but not currently
