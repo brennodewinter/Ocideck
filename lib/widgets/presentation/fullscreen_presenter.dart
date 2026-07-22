@@ -35,7 +35,7 @@ import '../../utils/page_scoped_notes.dart';
 import '../../utils/project_path.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
-import '../slides/inline_markdown.dart';
+import '../../utils/inline_markdown.dart';
 import '../slides/slide_preview.dart';
 import '../markdown_notes_editor.dart';
 import 'annotation_overlay.dart';

@@ -246,6 +246,7 @@ deliberately manual).
 - `image_focal.dart` — Maps a normalized image crop focal point (0..1) to the `Alignment` used to reposition a cropped/cover image.
 - `image_limits.dart` — Caps decoded image dimensions to prevent OOM; the `CappedImage` provider only downscales over-cap images so within-cap animated GIFs/WebP decode natively and keep animating.
 - `image_luminance.dart` — Computes average image colour, cached by mtime/size.
+- `inline_markdown.dart` — The widget-free half of the inline markdown: `parseInlineRuns`/`stripInlineMarkdown`/`inlineRunStyle`/`buildInlineSpans`. Text and its styling, not a widget tree, so the headless services (`text_measurement`, `slide_quality_analyzer`) can measure and analyse exactly what the render will show without importing the UI layer.
 - `log.dart` — Fail-soft logging to DevTools without exposing sensitive data (`logError`/`logWarning`). The rule is that a message carries an operation description and the caught error, never deck or file *contents*; `test/log_no_content_test.dart` scans `lib/` for the shapes that break it (a collection joined, taken from or sliced into a message), which is how a chart warning holding real cell values was found.
 - `lru_cache.dart` — Fixed-capacity LRU cache backed by `LinkedHashMap`.
 - `markdown_paste_cleanup.dart` — Cleans pasted website markdown and normalizes rich-text quirks.
@@ -467,7 +468,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 
 - `image_crop_dialog.dart` — Interactive crop/reposition dialog: drag to set the focal point (and zoom for full-slide/title images), WYSIWYG in the slot's aspect ratio.
 - `image_zoom_dialog.dart` — Full-screen pan/zoom image viewer.
-- `inline_markdown.dart` — Lightweight inline-markdown parser (bold/italic/code/links).
+- `inline_markdown.dart` — `InlineMarkdownText`: renders inline markdown with tappable links (and disposes their recognizers). The parsing and styling live in `lib/utils/inline_markdown.dart`.
 - `mermaid_diagram.dart` — Renders Mermaid definitions to inline SVG in previews.
 - `slide_preview.dart` — Central preview library coordinating all slide-type renderers + shared helpers. `sharedSplitFitScale`/`splitRunMemberScale` compute the one font size a split run renders at; the quality analyzer calls the same functions, so a reported size is the size actually rendered.
 - `slide_thumbnail.dart` — Thumbnail with slide preview, metadata, and action buttons. Carries the two finding badges (quality left, privacy right): click to read, double-click to accept or undo. Top-left it flags the two ways a slide can fail to reach the audience: *Overgeslagen* and *Achtergehouden* (`slideWithheldByTlp`), each dimming the preview, each in its own colour, stacked rather than side by side because a slide can be both — and the withheld one names its level in a tooltip, since knowing *that* it drops out does not tell you which control to change. Both states also go into the semantics label, so a screen-reader user hears them.

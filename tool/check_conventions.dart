@@ -80,12 +80,14 @@ const Set<String> _quoteScannerHomes = {
 /// UI imports inside `lib/services/`. RATCHET: may shrink, never grow.
 ///
 /// A service is the headless core: usable without a widget tree, testable
-/// without pumping one. Seven import lines across three services reach into
-/// Flutter's UI layer or into `lib/widgets/` today. Four have a real reason —
-/// slide_rasterizer paints actual widgets into an image — but text_measurement
-/// and slide_quality_analyzer pull in widget code for layout helpers, which
-/// pins the core to the UI. Lower this as they are untangled; never raise it.
-const int serviceUiImportBaseline = 7;
+/// without pumping one. Four import lines are left, all in slide_rasterizer,
+/// and all of them earned: that service paints actual widgets into an image, so
+/// the widget tree IS its subject. text_measurement, slide_quality_analyzer and
+/// mermaid_render_service used to sit here too; they were untangled by moving
+/// the widget half out (`lib/widgets/mermaid_render_host.dart`) and the
+/// text-only half in (`lib/utils/inline_markdown.dart`). A new entry means a
+/// service grew a UI dependency it almost certainly does not need.
+const int serviceUiImportBaseline = 4;
 
 /// UI imports inside `lib/models/`. Hard zero — do not raise. A model that
 /// imports Flutter cannot be reused, tested, or reasoned about on its own.
