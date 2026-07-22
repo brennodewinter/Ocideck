@@ -42,7 +42,8 @@ void main() {
     expect(
       security.existsSync(),
       isTrue,
-      reason: 'SECURITY.md is the source of truth for this guard and must exist',
+      reason:
+          'SECURITY.md is the source of truth for this guard and must exist',
     );
     final matches = addressPattern.allMatches(security.readAsStringSync());
     expect(

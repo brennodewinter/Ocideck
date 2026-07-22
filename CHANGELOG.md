@@ -289,6 +289,13 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   melding bij een te grote maplijst noemt nu overal het aantal.
 
 ### Fixed
+- **Een kwetsbaarheidsmelding kwam op het verkeerde adres uit.** Het
+  contactkaartje in de issuetracker verwees naar `security@vigilis.nl`, terwijl
+  `SECURITY.md` en de gedragscode allebei `security@librekat.nl` noemen. Wie de
+  tracker volgde — precies de route die we zelf aanwijzen — mailde een adres dat
+  in onze eigen documentatie niet bestaat. Rechtgezet, en er staat nu een test
+  op die elk contactadres vergelijkt met `SECURITY.md`, zodat de drie plekken
+  niet opnieuw uit elkaar kunnen lopen.
 - **Een HTML-export met huisstijl verloor haar opmaak.** De tijdlijn, de
   akkoordpagina, het zwarte vlak van een privacyredactie en — het ergst — de
   balk met de TLP-classificatie bovenaan het document bestonden alleen in de
