@@ -730,6 +730,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Un livello accanto a questo deck era troppo grande e non è stato caricato; il file stesso è invariato:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Questa marca temporale non appartiene all\'ultima richiesta',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

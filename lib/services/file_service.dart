@@ -585,19 +585,17 @@ class FileService {
   /// tell the user (e.g. "this isn't a presentation") instead of a generic
   /// failure. Returns `(deck: <deck>, failure: null)` on success, or
   /// `(deck: null, failure: <reason>)` on any refusal.
-  Future<({Deck? deck, OpenFailure? failure, List<String> warnings})>
-  openDeckDetailed(String filePath, {String? content}) async {
+  Future<DeckOpenResult> openDeckDetailed(
+    String filePath, {
+    String? content,
+  }) async {
     String raw;
     if (content != null) {
       raw = content;
     } else {
       final file = File(filePath);
       if (!await file.exists()) {
-        return (
-          deck: null,
-          failure: OpenFailure.notFound,
-          warnings: const <String>[],
-        );
+        return const DeckOpenResult.failed(OpenFailure.notFound);
       }
       // A deck is plain text (images/media are sidecar files), so a huge .md is
       // pathological. Cap it to avoid loading/parsing an attacker-sized file.
@@ -606,30 +604,18 @@ class FileService {
           logWarning(
             'FileService.openDeck: file exceeds ${maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap',
           );
-          return (
-            deck: null,
-            failure: OpenFailure.tooLarge,
-            warnings: const <String>[],
-          );
+          return const DeckOpenResult.failed(OpenFailure.tooLarge);
         }
       } catch (e) {
         logWarning('FileService.openDeck: cannot stat file', e);
-        return (
-          deck: null,
-          failure: OpenFailure.unreadable,
-          warnings: const <String>[],
-        );
+        return const DeckOpenResult.failed(OpenFailure.unreadable);
       }
       try {
         raw = await file.readAsString();
       } catch (e) {
         // Non-UTF8 / unreadable bytes must not crash the open flow.
         logWarning('FileService.openDeck: file not readable as UTF-8', e);
-        return (
-          deck: null,
-          failure: OpenFailure.unreadable,
-          warnings: const <String>[],
-        );
+        return const DeckOpenResult.failed(OpenFailure.unreadable);
       }
     }
     // Fail-closed: never parse/open a deck that carries executable content.
@@ -643,11 +629,7 @@ class FileService {
         '(${findings.length} finding(s))',
         filePath,
       );
-      return (
-        deck: null,
-        failure: OpenFailure.unsafe,
-        warnings: const <String>[],
-      );
+      return const DeckOpenResult.failed(OpenFailure.unsafe);
     }
     // Only open Marp/OciDeck presentations. Every deck declares `marp: true` in
     // its front matter (the serializer always writes it), so this rejects an
@@ -660,19 +642,11 @@ class FileService {
         '(no `marp: true` front matter)',
         filePath,
       );
-      return (
-        deck: null,
-        failure: OpenFailure.notPresentation,
-        warnings: const <String>[],
-      );
+      return const DeckOpenResult.failed(OpenFailure.notPresentation);
     }
     final parsed = _md.parseDeck(raw, filePath: filePath);
     if (parsed == null) {
-      return (
-        deck: null,
-        failure: OpenFailure.corrupt,
-        warnings: const <String>[],
-      );
+      return const DeckOpenResult.failed(OpenFailure.corrupt);
     }
     // Guard against silently opening a truncated/corrupt file as a blank deck:
     // a valid save always emits at least one slide block after the frontmatter,
@@ -682,25 +656,28 @@ class FileService {
         'FileService.openDeck: frontmatter present but no slide body',
         filePath,
       );
-      return (
-        deck: null,
-        failure: OpenFailure.corrupt,
-        warnings: const <String>[],
-      );
+      return const DeckOpenResult.failed(OpenFailure.corrupt);
     }
     // The file carries only content; apply the active style profile on open.
     final deck = parsed.copyWith(
       themeProfile: activeProfileFor(projectPath: parsed.projectPath),
     );
     final chartWarnings = <String>[];
+    final skipped = <String>[];
     var hydrated = await _hydrateCharts(
       await _hydrateImageCaptions(deck),
       chartWarnings,
       deckPath: filePath,
     );
     // Losse lagen naast de markdown; alleen bij lezen van schijf.
-    if (content == null) hydrated = await _attachSidecars(hydrated, filePath);
-    return (deck: hydrated, failure: null, warnings: chartWarnings);
+    if (content == null) {
+      hydrated = await _attachSidecars(hydrated, filePath, skipped);
+    }
+    return DeckOpenResult(
+      deck: hydrated,
+      warnings: chartWarnings,
+      skippedSidecars: skipped,
+    );
   }
 
   /// Als [saveDeckAs], maar mét de grafiekdata-waarschuwingen.

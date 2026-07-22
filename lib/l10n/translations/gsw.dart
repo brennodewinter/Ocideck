@@ -1781,6 +1781,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'En Ebeni näbe dem Deck isch z gross gsi und isch nöd glade worde; d Datei sälber isch unveränderet:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Dä Ziitstämpel ghört nöd zur letschte Aafrog',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

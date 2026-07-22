@@ -1789,6 +1789,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Warstwa obok tej prezentacji była za duża i nie została wczytana; sam plik pozostaje niezmieniony:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Ten znacznik czasu nie należy do ostatniego żądania',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

@@ -1805,6 +1805,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Ένα επίπεδο δίπλα σε αυτό το deck ήταν πολύ μεγάλο και δεν φορτώθηκε· το ίδιο το αρχείο παραμένει αμετάβλητο:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Αυτή η χρονοσήμανση δεν ανήκει στο τελευταίο αίτημα',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

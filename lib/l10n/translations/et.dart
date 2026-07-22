@@ -1768,6 +1768,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Selle decki kõrval olev kiht oli liiga suur ja seda ei laaditud; fail ise on muutmata:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'See ajatempel ei kuulu viimase päringu juurde',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

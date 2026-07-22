@@ -1785,6 +1785,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Šalia šio rinkinio esantis sluoksnis buvo per didelis ir nebuvo įkeltas; pats failas liko nepakeistas:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Ši laiko žyma nepriklauso paskutinei užklausai',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

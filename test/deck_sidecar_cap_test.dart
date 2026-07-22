@@ -102,6 +102,51 @@ void main() {
     );
   });
 
+  test('een overgeslagen laag wordt gemeld, niet alleen gelogd', () async {
+    // De reden dat #564 bestond: het bestand blijft heel, maar de gebruiker zag
+    // alleen dat zijn strepen er niet waren. Dat leest als "die zijn er nooit
+    // geweest" in plaats van "deze laag is overgeslagen".
+    final map = await _tijdelijkeMap('ocideck_sidecar_cap_melding_');
+    final pad = p.join(map.path, 'deck.md');
+    final slide = Slide.create(SlideType.bullets).copyWith(title: 'A');
+    await _dienst().saveDeck(Deck(title: 'A', slides: [slide]), pad);
+    await File(p.join(map.path, 'deck.ink.json')).writeAsString(
+      _teGroot(
+        AnnotationCodec.encode(
+          [slide],
+          {
+            slide.id: [_streek],
+          },
+        )!,
+      ),
+    );
+
+    final uitkomst = await _dienst().openDeckDetailed(pad);
+    expect(uitkomst.deck, isNotNull, reason: 'het deck opent gewoon');
+    expect(
+      uitkomst.skippedSidecars,
+      contains('ink'),
+      reason: 'wie niets meldt, laat de gebruiker denken dat er niets was',
+    );
+  });
+
+  test('een deck zonder problemen meldt niets', () async {
+    final map = await _tijdelijkeMap('ocideck_sidecar_cap_stil_');
+    final pad = p.join(map.path, 'deck.md');
+    final slide = Slide.create(SlideType.bullets).copyWith(title: 'A');
+    await _dienst().saveDeck(
+      Deck(
+        title: 'A',
+        slides: [slide],
+        annotations: {
+          slide.id: [_streek],
+        },
+      ),
+      pad,
+    );
+    expect((await _dienst().openDeckDetailed(pad)).skippedSidecars, isEmpty);
+  });
+
   test('een sidecar onder de grens werkt gewoon', () async {
     final map = await _tijdelijkeMap('ocideck_sidecar_cap_ok_');
     final pad = p.join(map.path, 'deck.md');

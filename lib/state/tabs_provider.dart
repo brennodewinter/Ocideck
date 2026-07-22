@@ -361,11 +361,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final deck = outcome.deck;
     if (deck == null) return;
     if (!mounted) return; // notifier disposed during the await
-    if (outcome.warnings.isNotEmpty) {
-      _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
-        outcome.warnings,
-      );
-    }
+    _reportOpenOutcome(_ref, outcome);
 
     final current = state.current;
     if (current != null && !current.isOpen) {
@@ -434,11 +430,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     }
     // notifier disposed during the await
     if (!mounted) return OpenResult.unreadable;
-    if (outcome.warnings.isNotEmpty) {
-      _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
-        outcome.warnings,
-      );
-    }
+    _reportOpenOutcome(_ref, outcome);
     final index = (selectIndex ?? 0).clamp(0, deck.slides.length - 1);
     _placeDeckInTab(deck, filePath: path, index: index);
     await _settings.addRecentFile(
@@ -786,6 +778,43 @@ class ChartDataWarning {
   ChartDataWarning(this.sources, {this.whileSaving = false});
 }
 
+/// Welke lagen naast het deck niet zijn ingelezen omdat ze te groot waren.
+///
+/// Eigen kanaal en niet dat van de grafiekdata: de tekst is anders, en het gaat
+/// hier over werk van de gebruiker zélf (strepen, notities) in plaats van over
+/// een ontbrekend databestand. Het bestand op schijf is niet aangeraakt, dus dit
+/// is te herstellen — maar alleen als iemand het te weten komt.
+class SidecarSkippedWarning {
+  /// De lagen, met de namen die de leeskant gebruikt (`ink`, `user-notes`, …).
+  final List<String> layers;
+
+  /// Niet-const, om dezelfde reden als [ChartDataWarning].
+  SidecarSkippedWarning(this.layers);
+}
+
+final sidecarSkippedProvider = StateProvider<SidecarSkippedWarning?>(
+  (ref) => null,
+);
+
 final chartDataWarningProvider = StateProvider<ChartDataWarning?>(
   (ref) => null,
 );
+
+/// Zet wat het openen te melden had door naar de schil.
+///
+/// Top-level en geen methode: het raakt geen enkel veld van [TabsNotifier], en
+/// die klasse zit tegen zijn plafond. Twee kanalen, bewust gescheiden — een
+/// ontbrekend grafiekbestand vraagt iets anders van de gebruiker dan een laag
+/// die te groot was.
+void _reportOpenOutcome(Ref ref, DeckOpenResult outcome) {
+  if (outcome.warnings.isNotEmpty) {
+    ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
+      outcome.warnings,
+    );
+  }
+  if (outcome.skippedSidecars.isNotEmpty) {
+    ref.read(sidecarSkippedProvider.notifier).state = SidecarSkippedWarning(
+      outcome.skippedSidecars,
+    );
+  }
+}

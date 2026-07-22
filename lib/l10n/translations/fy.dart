@@ -735,6 +735,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'In laach neist dit deck wie te grut en is net ynlêzen; it bestân sels is ûnferoare:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Dizze tiidstimpel heart net by it lêste fersyk',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

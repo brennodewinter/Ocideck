@@ -582,6 +582,26 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     });
   }
 
+  /// Een laag naast het deck is niet ingelezen omdat hij te groot was.
+  ///
+  /// Het bestand op schijf is niet aangeraakt en wordt bij opslaan ook niet
+  /// vervangen, dus er is niets weg — maar zonder deze melding ziet de gebruiker
+  /// alleen dat zijn strepen er niet zijn, en dat leest als "die zijn er nooit
+  /// geweest". Foutkleur, want dit is werk van de gebruiker zelf (#564).
+  void _listenSidecarSkipped(BuildContext context, WidgetRef ref) {
+    ref.listen<SidecarSkippedWarning?>(sidecarSkippedProvider, (_, warning) {
+      if (warning == null) return;
+      ref.read(sidecarSkippedProvider.notifier).state = null;
+      final l10n = context.l10n;
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        l10n,
+        '${l10n.d('Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:')} '
+        '${warning.layers.join(', ')}',
+      );
+    });
+  }
+
   /// Of de eenmalige web-mededeling over crashherstel al is getoond. Per
   /// sessie, niet per tabblad: hij gaat over de omgeving, niet over dit deck.
   bool _toldAboutNoWebRecovery = false;
@@ -784,6 +804,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     _listenSecurityModulePrompt(context);
 
     _listenChartDataWarning(context, ref);
+    _listenSidecarSkipped(context, ref);
 
     _listenUnsavedWork(context, ref);
 

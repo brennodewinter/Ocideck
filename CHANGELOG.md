@@ -311,6 +311,13 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   notities en het zegel.
 
 ### Fixed
+- **Een overgeslagen laag zegt dat nu, in plaats van stilletjes te verdwijnen.**
+  Naast uw presentatie liggen aparte bestanden met uw tekeningen, uw notities en
+  het zegel. Is zo'n bestand groter dan de veiligheidsgrens, dan wordt het niet
+  ingelezen — en tot nu toe merkte u dat alleen doordat uw strepen er niet
+  waren, wat leest als "die heb ik nooit gemaakt". Nu staat er een melding, mét
+  de geruststelling die ertoe doet: het bestand zelf is niet aangeraakt en wordt
+  bij opslaan ook niet overschreven, dus er is niets kwijt.
 - **Security: een oud tijdstempelbestand wordt niet meer aangezien voor een
   nieuw.** Wie een rapport verzegelt, kan het door een externe dienst laten
   tijdstempelen: OciDeck maakt een verzoek, u stuurt het weg, en u leest het

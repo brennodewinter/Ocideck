@@ -1813,6 +1813,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Bhí sraith in aice leis an deic seo rómhór agus níor lódáladh í; níl aon athrú ar an gcomhad féin:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Ní bhaineann an stampa ama seo leis an iarratas is déanaí',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

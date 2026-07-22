@@ -1780,6 +1780,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Vrstva vedle této prezentace byla příliš velká a nebyla načtena; samotný soubor zůstává nezměněný:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Toto časové razítko nepatří k poslední žádosti',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

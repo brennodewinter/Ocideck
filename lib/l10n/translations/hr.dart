@@ -1784,6 +1784,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Sloj uz ovu prezentaciju bio je prevelik i nije učitan; sama datoteka ostaje nepromijenjena:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Ova vremenska oznaka ne pripada posljednjem zahtjevu',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

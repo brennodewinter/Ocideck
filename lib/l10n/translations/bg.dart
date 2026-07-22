@@ -1800,6 +1800,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Слой до това дек беше твърде голям и не беше зареден; самият файл остава непроменен:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Този времеви печат не принадлежи на последната заявка',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
