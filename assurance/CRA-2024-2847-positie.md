@@ -45,6 +45,39 @@ deel dat voor een project als dit inhoudelijk iets zegt.
 | §7 — veilige distributie van updates | Geen releases; de gebruiker bouwt uit de bron | Onderdeel van #520 |
 | §8 — patches onverwijld verspreiden | Idem — een fix staat op `main` zodra hij gemerged is | Idem |
 
+## De leidraad, deel I — de producteisen
+
+*Toegevoegd 2026-07-22.* De tabel hierboven meet tegen Annex I **deel II**, en
+dat was een keuze: dat deel zegt inhoudelijk iets over kwetsbaarhedenbeheer. Het
+gevolg was wel dat deel I — de eisen aan het product zelf — nergens stond,
+terwijl dit project daar juist sterk is. De ORC WG-mapping merkt datzelfde
+patroon breed op: bij een lichte attestatie staat élke regel van deel I als *not
+addressed*.
+
+Dus staat hij hier. Zelfde vorm, zelfde voorbehoud: leidraad, geen
+conformiteitsclaim, geen audit.
+
+| Wat de verordening beschrijft | Waar we staan | Open |
+|---|---|---|
+| Veilig bij oplevering, naar risico | Lokaal-eerst; netwerk staat uit tenzij aangewezen (NetGuard, SECURITY_DESIGN §3) | De risicoafweging zelf stond nergens — zie hieronder |
+| Geen bekende exploiteerbare kwetsbaarheden | `make deps-check` (OSV) over de gebundelde JS, `make sast`, `make check-secrets` | De Dart-graaf alleen adviserend (#517) |
+| Veilige standaardinstelling | Uitgaand verkeer staat standaard uit; de beveiligingsmodule is een schakelaar over ingebakken catalogi, zonder netwerkuitgang | — |
+| Bescherming tegen ongeoorloofde toegang | Sleutels in de sleutelbos van het besturingssysteem, nooit in voorkeuren (§13); pakketversleuteling met WinZip-AES | PBKDF2-SHA1 op 1000 iteraties is een vastgelegde afwijking (ASVS-dossier) |
+| Vertrouwelijkheid van gegevens | Geen backend, geen telemetrie; wat de deur uit gaat staat per adres in `PRIVACY.md` | — |
+| Integriteit van gegevens en commando's | Zegel (SHA-512) over de canonieke inhoud, met wijzigingsdetectie (§9); atomair schrijven overal | Het zegel is bewijs van wijziging, niet van herkomst — zie §12 |
+| Gegevensminimalisatie | OciWacht spoort persoonsgegevens op en toont de gevonden waarde nooit (§8); de projectiegrens is compileertijd afgedwongen | — |
+| Beschikbaarheid van essentiële functies | Alles werkt offline; er is geen dienst die uit kan vallen | — |
+| Beperken van schade aan andere systemen | Geen serverdeel, geen luisterende poort | — |
+| Aanvalsoppervlak beperken | Webbundel gehard (§1), padinsluiting (§4), HTML-exportopschoning (§5), AI-uitgang beheerst (§7) | Eén niet-geheugenveilige afhankelijkheid op het beeldpad (§6.1) |
+| Beperken van de gevolgen van een incident | Begrensde leesbewerkingen, fail-closed poorten, subproces zonder geërfde omgeving (§10.2) | — |
+| Vastleggen van beveiligingsrelevante activiteit | Wat er gelogd wordt staat in §14, inclusief wat er bewust níét in gaat | Geen auditspoor als voorziening; dat past niet bij een lokale editor |
+| Veilig verwijderen van gegevens | `DiskTraces` verzamelt op één plek wat er van OciDeck op schijf achterblijft en ruimt het op; `chmod 700` op de datamappen (Linux) | **Unlink, geen overschrijving.** Op een SSD met wear levelling is overschrijven ook geen garantie. Dit is de zwakste regel, en hij hoort zo gelezen te worden |
+
+Twee dingen die deze tabel niet doet. Hij vinkt niets af — de rechterkolom is
+even belangrijk als de middelste. En hij vervangt de risicoafweging niet: die is
+een ánder artefact, en het feit dat hij ontbrak was de echte bevinding achter dit
+punt.
+
 ## Wat hieruit volgt
 
 Drie richtingen, uit het gesprek waarin dit besluit viel. Ze gaan niet over
