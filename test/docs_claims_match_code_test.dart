@@ -257,4 +257,96 @@ void main() {
       );
     });
   });
+
+  group('de server die de uitgever zelf draait', () {
+    // #579: `PRIVACY.md` opende met "no OciDeck server" en `COMPLIANCE.md` zei
+    // dat de stichting niets als dienst host — terwijl `cveapi.librekat.nl` in
+    // de code als standaard staat. Beide zinnen waren precies de zin die een
+    // kritische lezer als eerste natrekt.
+    //
+    // Wat hier bewaakt wordt is de kóppeling, niet de formulering: zolang de
+    // code een host van de uitgever als standaard declareert, moeten de twee
+    // documenten die host noemen én mag de absolute claim er niet staan. Zet
+    // iemand de standaard om naar een host die niet van de uitgever is, dan
+    // vervalt de eis vanzelf — dan is er ook niets meer te melden.
+    final settings = lees('lib/models/settings.dart');
+    final standaard = RegExp(
+      r"defaultCveApiBaseUrl\s*=\s*'([^']+)'",
+    ).firstMatch(settings)?.group(1);
+
+    test('de standaard-mirror staat nog in de code', () {
+      // Zonder deze meting meet de rest niets: een hernoemde constante zou de
+      // hele groep stilzwijgend groen maken.
+      expect(
+        standaard,
+        isNotNull,
+        reason:
+            'defaultCveApiBaseUrl niet gevonden in lib/models/settings.dart',
+      );
+    });
+
+    /// De hostnaam zonder schema, zoals proza hem schrijft.
+    final host = standaard == null ? '' : Uri.parse(standaard).host;
+    final vanDeUitgever = host.endsWith('librekat.nl');
+
+    test('PRIVACY.md noemt hem bij naam', () {
+      if (!vanDeUitgever) return;
+      expect(
+        lees('docs/PRIVACY.md'),
+        contains(host),
+        reason:
+            'De standaard-CVE-mirror is van de uitgever; PRIVACY.md hoort te '
+            'zeggen dat hij bestaat en wat de app ernaartoe stuurt.',
+      );
+    });
+
+    test('COMPLIANCE.md noemt hem ook', () {
+      if (!vanDeUitgever) return;
+      expect(
+        lees('COMPLIANCE.md'),
+        contains(host),
+        reason:
+            'COMPLIANCE.md zegt wat de stichting wél en niet doet; één '
+            'draaiende dienst hoort daarbij.',
+      );
+    });
+
+    /// De tekst zónder de cursieve correctienotities.
+    ///
+    /// Deze repo citeert in zo'n notitie bewust de oude, onware zin — dat is
+    /// hoe je later terugvindt wat er stond en waarom het veranderde. Een poort
+    /// die op de kale zin zoekt zou dus precies de correctie bestraffen die hij
+    /// wilde afdwingen. Beweringen tellen; geschiedenis niet.
+    String zonderCorrecties(String tekst) =>
+        tekst.replaceAll(RegExp(r'\*\(?Corrected.*?\)?\*', dotAll: true), '');
+
+    test('en de absolute claim staat er niet meer', () {
+      if (!vanDeUitgever) return;
+      // Precies de zin die onwaar werd. Niet op "server" in het algemeen — dat
+      // woord komt terecht tientallen keren voor over servers van de gebruiker.
+      expect(
+        zonderCorrecties(lees('docs/PRIVACY.md')),
+        isNot(contains('no OciDeck server')),
+        reason:
+            'Er draait er wél één. Schrijf op wat waar is ("no server that '
+            'holds your decks"), niet wat prettig klinkt.',
+      );
+      expect(
+        zonderCorrecties(lees('COMPLIANCE.md')),
+        isNot(contains('host it as a service')),
+        reason:
+            'Die zin las als "de stichting draait geen servers". Ze draait er '
+            'één, en dat hoort in dezelfde alinea te staan.',
+      );
+    });
+
+    test('PRIVACY.md wijst de verantwoordelijke aan', () {
+      if (!vanDeUitgever) return;
+      final privacy = lees('docs/PRIVACY.md');
+      // Een dienst zonder aanwijsbare verwerkingsverantwoordelijke is precies
+      // het gat waar dit issue over ging: niet de gebruiker, en niet "niemand".
+      expect(privacy, contains('controller'));
+      expect(privacy, contains('Stichting LibreKAT'));
+    });
+  });
 }

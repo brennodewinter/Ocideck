@@ -47,7 +47,18 @@ published by the foundation itself, on <https://librekat.nl/nl/contact/> and in
 the app under **Settings → About OciDeck**.
 
 The foundation publishes OciDeck and holds the copyright. It does not sell it,
-host it as a service, or monetise it in any form.
+does not host OciDeck itself as a service, and does not monetise it in any form.
+
+It does run **one** service the application can talk to: `cveapi.librekat.nl`, a
+CVE mirror, off by default and repointable at any other mirror. That is not
+hosting OciDeck — no deck ever reaches it — but it is a processing operation by
+the foundation, with the foundation as controller, and it belongs in this
+paragraph rather than only in a table further away.
+[`docs/PRIVACY.md`](docs/PRIVACY.md#the-one-server-the-publisher-runs) says what
+the application sends, what this repository can establish about it, and what it
+cannot. *(Corrected 2026-07-22, #579: "does not host it as a service" read as
+"runs no servers at all", and that was the sentence a critical reader would
+check first.)*
 
 On the CRA's own vocabulary: the foundation is **not a manufacturer**, because
 the software is not made available on the market. Whether it is an *open-source

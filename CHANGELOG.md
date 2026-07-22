@@ -95,6 +95,35 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Fixed
+- **De privacyverklaring beweerde dat er geen server is. Die is er wél — één.**
+  `cveapi.librekat.nl` is een CVE-spiegel die de stichting zelf draait, en hij
+  staat als standaard in de code — terwijl de samenvatting bovenaan
+  `PRIVACY.md` opende met "no OciDeck server" en `COMPLIANCE.md` zei dat de
+  stichting niets als dienst host. Verderop in de tabel stond hij netjes
+  vermeld, maar de samenvatting is de alinea die mensen lezen, en dat is precies
+  de zin die een kritische lezer als eerste natrekt.
+
+  Er staat nu een eigen sectie, en die verdient hij: wélk lek je opzoekt is
+  zelden neutraal. De zoekterm gaat als **query-parameter in de URL** mee, en
+  dat is het deel dat elke gewone webserver standaard in zijn toegangslog
+  schrijft, naast uw IP-adres. Ga er dus van uit dat het gelogd wordt tenzij de
+  beheerder zegt van niet.
+
+  Wat er nu in staat: dat de stichting hiervoor verwerkingsverantwoordelijke is,
+  dat rechten op inzage en verwijdering dáár liggen, en drie manieren om de
+  spiegel helemaal te vermijden — hem uit laten (dat is de standaard), de lokale
+  CVE-database gebruiken, of de instelling naar uw eigen spiegel wijzen.
+
+  Wat er bewust **niet** in staat: welke velden die server bewaart en hoe lang.
+  Dat is een eigenschap van een installatie en niet van de code, en deze repo
+  kan het niet vaststellen. Een bewaartermijn verzinnen zou erger zijn dan het
+  gat; er staat nu wat de bron wél kan bewijzen, en waar de grens ligt.
+
+  Bewaakt door een poort: zolang de code een host van de uitgever als standaard
+  declareert, moeten beide documenten hem noemen en mag de absolute claim er
+  niet meer staan. Geciteerde geschiedenis in een correctienotitie telt niet
+  mee — anders bestraft de poort precies de correctie die hij afdwingt.
+
 - **Een deck in git raakte de cijfers van zijn grafieken kwijt.** Een deckmap is
   meer dan `deck.md`: de gegevens van een gekoppelde grafiek staan in
   `data/*.json` ernaast, en sinds vandaag de notities in

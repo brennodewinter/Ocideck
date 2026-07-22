@@ -10,7 +10,13 @@ technical mechanisms behind these guarantees, see
 ## The short version
 
 - **Your presentations stay on your device.** There is no OciDeck account, no
-  OciDeck server, and no telemetry. Nothing is uploaded in the background.
+  server that holds your decks, and no telemetry. Nothing is uploaded in the
+  background. *(Corrected 2026-07-22: this said "no OciDeck server", full stop.
+  That is not true — the publisher runs one, `cveapi.librekat.nl`, for CVE
+  lookups. It never sees a deck, it is off by default, and you can point the app
+  somewhere else or use the offline database instead — but "no server" was an
+  absolute claim and the exception belongs in the summary, not only in a table
+  170 lines down. See [The one server the publisher runs](#the-one-server-the-publisher-runs).)*
 - **Almost everything that leaves your device is something you explicitly
   send** — by importing from a URL, saving to your own Nextcloud/git server, or
   turning on the AI assistant. Three paths are the exception, and two of them you
@@ -191,8 +197,9 @@ naming them is the only honest way to keep the sentence above true:
   fallback never runs. If you host the web build yourself, §4 of
   [HOSTING.md](HOSTING.md) covers deploying (or deliberately not deploying) it.
 - The **CVE lookup** is off by default and desktop-only, and the mirror address
-  is a setting you can repoint at your own spiegel. The ENISA and MITRE
-  fallbacks are not settings; they are compiled in.
+  is a setting you can repoint at your own mirror. The ENISA and MITRE
+  fallbacks are not settings; they are compiled in. This is the one destination
+  in the table that belongs to the publisher, so it gets its own section below.
 - **YouTube and Vimeo** load their player from their own service, which is
   inherent to embedding a video hosted there. Remote media is off by default
   (*Settings → Security → allow remote media*). For YouTube the player is a
@@ -201,6 +208,67 @@ naming them is the only honest way to keep the sentence above true:
   a click during a presentation cannot swap the slide for the tracking origin.
   That is not the same as "nothing is observed" — YouTube still sees the
   request, and the video bytes still come from its media hosts.
+
+### The one server the publisher runs
+
+Everything above goes to a service you chose, or to a video platform you
+embedded. One destination is different: **`cveapi.librekat.nl` is operated by
+Stichting LibreKAT**, the same foundation that publishes OciDeck. It is the
+default mirror for CVE lookups.
+
+**Why it deserves this much text.** What you look up is not neutral. Someone
+searching for a specific vulnerability is usually working on a specific system,
+often for a specific client, and often before the finding is public. The code
+says so where the feature lives (`cve_picker.dart`): *wélk lek je opzoekt is
+het gevoeligste dat je prijsgeeft*. A document that lists this in a table row
+and moves on would be technically complete and practically useless.
+
+**What the app sends.** One `GET` per lookup:
+
+```
+GET https://cveapi.librekat.nl/api/search?q=<your search term>&limit=25
+GET https://cveapi.librekat.nl/api/cve/<CVE-id>          (exact-id lookups)
+```
+
+No account, no identifier, no deck content, no custom headers. But note where
+the search term sits: **in the URL**, not in a request body. A URL query string
+is the part every ordinary web server writes to its access log by default, next
+to your IP address and a timestamp. Assume it is logged unless the operator says
+otherwise.
+
+**Who is responsible.** For this service, Stichting LibreKAT is the controller
+under the GDPR — not you, and not "nobody". Questions, access or erasure
+requests about it go to the address in [SECURITY.md](../SECURITY.md); for
+everything else in OciDeck there is no controller because there is no
+processing (see *Your rights and this tool*).
+
+**What this document cannot tell you.** Which fields that server records, for
+how long it keeps them, and whether it keeps them at all are **not documented
+here, because this repository cannot establish them.** They are properties of a
+deployment, not of the code, and inventing a retention period would be worse
+than the gap. The foundation needs to publish that separately; until it does,
+this section is the honest limit of what the source can prove.
+
+**How to avoid it entirely**, in increasing order of effort:
+
+1. Leave the CVE lookup **off** — it is off by default, and nothing contacts
+   this server until you switch it on and accept the outbound prompt.
+2. Use the **local CVE database** instead (*Settings → Security → Local CVE database*). It downloads
+   a bulk release once, from GitHub, and then searches offline. After that
+   download, no lookup leaves your machine.
+3. Point the mirror setting at **your own** instance, or at any NVD mirror you
+   trust. The address is a plain setting.
+
+The ENISA EU Vulnerability Database and MITRE fallbacks are a separate matter:
+they are compiled in rather than configurable, and they are consulted only when
+the mirror returns nothing. They are not run by the publisher.
+
+*Added 2026-07-22 (#579). The summary at the top of this document said "no
+OciDeck server" while this one existed and was described 170 lines further
+down, and `COMPLIANCE.md` said the foundation does not host anything as a
+service. Both were corrected in the same commit. A privacy document is the
+first thing a critical reader checks, and it was wrong in the sentence most
+people read.*
 
 *Corrected 2026-07-21: this table previously listed only the five rows you
 choose yourself, and the sentence "Nothing here goes to OciDeck" was true of
@@ -404,9 +472,18 @@ them — the same overstatement corrected elsewhere on 2026-07-21.*
 ## Your rights and this tool
 
 OciDeck is a **local tool**, not a service that processes your data on your
-behalf, so there is no OciDeck-held copy of your data to request or erase — your
-files are yours, on your disk. When you use it with your own Nextcloud or git
-server, the privacy terms of *those* services apply to what you store there.
+behalf, so there is no OciDeck-held copy of your decks to request or erase —
+your files are yours, on your disk. When you use it with your own Nextcloud or
+git server, the privacy terms of *those* services apply to what you store there.
+
+**One exception, and it is the publisher's.** If you switched on the CVE lookup
+and left it pointed at the default mirror, then `cveapi.librekat.nl` received
+your search terms, and Stichting LibreKAT is controller for whatever that server
+kept. Rights of access and erasure under articles 15 and 17 apply there, to the
+foundation — see [The one server the publisher runs](#the-one-server-the-publisher-runs),
+including what that section can and cannot tell you. *(Added 2026-07-22: this
+paragraph said there was nothing to request or erase, full stop, which was true
+of your decks and untrue of that one service.)*
 
 Because OciDeck is open source (EUPL-1.2), you can verify every claim in this
 document against the code.
