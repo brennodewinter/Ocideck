@@ -1,3 +1,21 @@
+# ⚠️  NO RUNNER EXECUTES THIS FILE.
+#
+# OciDeck's remote is a Forgejo instance with no Actions runner registered, so
+# nothing here has ever run — not on push, not on a pull request, not on a tag.
+# A green tick you do not see is not a check that passed; it is a check that
+# never started. Treat this file as a *reference definition*: it says what the
+# gate would be, and it is kept ready for a GitHub mirror or a future runner.
+#
+# **The real gate is `make check`, run locally before every merge.** It takes
+# about three minutes (measured; see docs/CHECKS.md), so a contributor can run
+# the same thing this file describes. `make check-full` adds the slow scans.
+#
+# Written here and not only in the docs because this is the file a contributor
+# finds first — seeing `.github/workflows/` reasonably suggests the project
+# lives on GitHub and that CI will check their work. Both are false, and
+# discovering that after opening a pull request is a poor first experience
+# (#592).
+
 name: Release builds
 
 # Produces distributable artifacts for every supported target. Desktop bundles
