@@ -790,7 +790,10 @@ whose participants share a repo), but neither doc depends on the other landing.
 > committed since #541 and takes git's ordinary text merge as decided below — for
 > which it had to be written one field per line; see D7. The ink sidecar is still
 > not committed (§9.1), so the union driver below describes a decision, not
-> running behaviour.
+> running behaviour — and since 22-07-2026 that decision includes the tombstone,
+> which the annotation format has to carry before any of it can be built. The
+> seal is settled too, in the opposite direction: tag only, no merge semantics
+> (§14, D12).
 
 "Sidecars merge poorly" flattened a distinction worth keeping: the two sidecars
 are not the same kind of file, and each has its own right answer (§14, D7).
@@ -858,11 +861,23 @@ consequences must be respected rather than discovered later:
   be reproducible in-app, for when git hands back a file it could not merge.
 - **Union has one real failure mode: erasure.** If one side deletes a stroke and
   the other keeps it, the union resolves to "kept" — the erase silently loses.
-  For ink that is usually the safe direction (P2: never lose content without
-  intent), but it *is* a semantic loss and it must be a conscious one. If erasure
-  needs to survive a merge, model it as a tombstone rather than an absence. Decide
-  this when the annotation format is pinned down; the choice belongs to that
-  format, not to this document.
+
+  *Decided 22-07-2026 (#541): **erasure becomes a tombstone.*** Pure union was
+  the obvious choice and it is the wrong one here. An erased stroke would come
+  back, and that is exactly the behaviour the notes half closed off: a deletion
+  that returns is worse than one that does not work, because the user believed
+  it was gone. "Never lose content without intent" must not curdle into "nothing
+  can be removed". So the annotation format gains a stable per-stroke identity
+  **and** an erased marker, and the union honours the marker. Build order in
+  §14, D7 — format first, then the driver, then the write path.
+
+**And the seal does not belong in this section at all.** *(Decided 22-07-2026,
+#541 — see §14, D12.)* A sealed deck goes to a release **tag**, never to a work
+branch, so two versions of one seal cannot arise: that is a mistake, not a
+conflict. A normal save to a work branch refuses a sealed deck instead of
+warning about it afterwards. The asymmetry with ink is deliberate and worth
+holding on to — ink is work two people can both add to, a seal is a statement
+one person made about one exact set of bytes.
 
 ---
 
@@ -1273,6 +1288,38 @@ discussion still resolve.
   (`UserNotesCodec.encode(forTextMerge: true)`). The on-disk sidecar, which
   nothing ever merges, stays compact. Decided here rather than in the format:
   it is a property of the transport, not of the notes.*
+
+  *Decided 22-07-2026 for the ink half (#541): **erasure becomes a tombstone.**
+  The union stays the merge, but the annotation format gains a stable per-stroke
+  identity **and** an erased marker, so that erasing survives a merge. Pure
+  union was the obvious choice and it is the wrong one — an erased stroke would
+  come back, which is exactly the behaviour the notes half closed off. A
+  deletion that returns is worse than one that does not work, because the user
+  believed it was gone. "Never lose content" must not curdle into "nothing can
+  be removed."*
+
+  *The build order follows from that, and it matters: **first** the annotation
+  format (stroke identity + tombstone, with a version bump and a read path for
+  older files), **then** the merge driver `merge=ocideck-ink`, **then** the
+  write path. The driver must also be reproducible in-app, because a clone made
+  by another tool does not have it.*
+- **D12 — A seal belongs on a tag, not on a branch.** *(Decided 22-07-2026,
+  #541.)* A sealed deck may travel to a release tag; it may not be committed to
+  a work branch.
+
+  That follows from what a seal means — *these* bytes, *this* artefact — and a
+  branch does not offer it: a branch can be rewritten, cherry-picked and
+  force-pushed, and a seal that survives all of that says nothing any more. A
+  tag is meant to be a snapshot and sits under ref protection (P8).
+
+  Two consequences for the build. The seal travels in the commit set of a
+  version release, and **a normal save to a work branch refuses a sealed deck,
+  with an explanation** — so today's after-the-fact warning becomes a refusal at
+  the point of decision. And a seal needs **no merge semantics at all**: two
+  versions of one seal is not a conflict but a mistake, and on a tag it cannot
+  arise. That is the opposite of the ink answer above, for a reason worth
+  keeping straight — ink is work that two people can both add to, a seal is a
+  statement one person made about one set of bytes.
 - **D8 — Minimum git version.** Required, and enforced by the probe. Below it the
   native plane is refused **wholesale** and the repo falls back to REST — never
   feature-by-feature. `--filter=blob:none` (D5) puts the floor at **≥2.19**; pin
