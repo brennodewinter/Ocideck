@@ -1,3 +1,17 @@
+// ── lib/services/info_safety/ ────────────────────────────────────────────────
+// Eén bestand, en dat is met opzet zo: dit cluster telt alleen op wat er van de
+// module Informatieveiligheid lókaal beschikbaar is, zodat het scherm een getal
+// kan tonen in plaats van een belofte. Het bevat géén referentiedata — die
+// blijven staan waar ze horen (../cwe_catalog.dart, ../wstg_catalog.dart,
+// ../maswe_catalog.dart, ../mastg_catalog.dart, ../miauw_eis_catalog.dart,
+// ../cvss/) — en géén moduleschakelaar; die zit in
+// lib/state/info_safety_provider.dart.
+//
+// Nieuwe module-functionaliteit hoort dus niet vanzelf hier: een nieuwe
+// catalogus is een bestand in ../, en alleen de telling ervan komt hierbij.
+// Overzicht: docs/SOURCE_MAP.md.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import '../cvss/cvss4.dart';
 import '../cwe_catalog.dart';
 import '../finding_template_library.dart';
