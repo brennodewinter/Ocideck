@@ -96,6 +96,36 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   melding bij een te grote maplijst noemt nu overal het aantal.
 
 ### Fixed
+- **Een ingesloten YouTube-video gaat niet langer langs het domein dat u
+  volgt.** OciDeck gebruikt overal de nocookie-variant van YouTube — behalve op
+  één plek, en dat was uitgerekend de speler zelf. Die haalde zijn script van
+  `www.youtube.com`, en met dat script bouwde YouTube de speler vervolgens óók
+  op `www.youtube.com` in plaats van op de nocookie-vorm. Wie *online media*
+  aanzette om één video te tonen, gaf daarmee ongemerkt een bezoek weg aan het
+  domein dat wél een profiel opbouwt.
+
+  De speler kan zonder dat script. Het startpunt, het eindpunt, automatisch
+  afspelen en het onderdrukken van gerelateerde video's zaten al in de
+  insluit-URL, en de meldingen over positie, einde en fouten komen via het
+  kanaal dat de speler zelf openzet — hetzelfde kanaal waar dat script een
+  omhulsel omheen was. YouTube gaat daarmee dezelfde weg als Vimeo: één kaal
+  kader, één adres. Een niet-volgende bron voor dat script bestaat niet;
+  `youtube-nocookie.com` levert het niet uit (getoetst 22-07-2026), dus
+  weglaten was de enige route.
+
+  Twee dingen erbij. Het YouTube-logo in de speler is een link naar de
+  kijkpagina, en één klik daarop tijdens een presentatie verving uw dia door die
+  pagina — op precies het domein dat u wilde vermijden. Die navigatie wordt nu
+  geweigerd, en de controle kijkt daarbij naar de hostnaam in plaats van naar
+  "staat deze tekst er ergens in", zodat een adres dat de naam alleen nabootst
+  er niet meer doorheen glipt. En een kader dat wél laadt maar niets terugmeldt,
+  levert geen valse foutmelding meer op; laadt er werkelijk niets, dan blijft de
+  melding staan.
+
+  Wat er niet mee opgelost is: YouTube ziet nog steeds dát u de video opvraagt,
+  en de beelden komen nog steeds van zijn eigen mediaservers. `PRIVACY.md` is
+  daarop bijgewerkt.
+
 - **Een export die niets doet, blijft niet meer eeuwig niets doen.** De PDF- en
   PPTX-export maakt zijn afbeeldingen door de échte dia te laten tekenen en het
   resultaat vast te leggen. Daarvoor moet het venster beelden produceren — en
@@ -302,6 +332,47 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   rij, dus ze kunnen nooit over elkaar heen vallen.
 
 ### Added
+- **Een export met ongecontroleerde AI-tekst zegt dat voortaan zelf.** OciDeck
+  markeert een veld dat een AI heeft opgesteld en houdt *Afronden & verzegelen*
+  tegen tot een mens erop **Nagekeken** heeft gedrukt. Die poort werkte, maar
+  alleen binnen de app: wie de PDF, de PPTX of de HTML in handen kreeg, zag
+  nergens dat er nog niet-nagekeken AI-tekst in stond. De transparantie hield op
+  precies waar ze nodig werd.
+
+  De melding reist nu mee, in dezelfde gelaagde vorm als de TLP-markering:
+  machineleesbaar in de trefwoorden van de PDF en de PPTX en in een
+  `<meta name="ai-generated">` in de HTML; leesbaar in het veld *Onderwerp*, dat
+  elke lezer in de eigenschappenkaart van het bestand ziet; zichtbaar als balk
+  boven aan de HTML-export, onder de TLP-balk; en als `-ai-concept` in de
+  bestandsnaam. Dat laatste om dezelfde reden als bij een geredigeerde export:
+  de duurste fout is de verwisseling, en die moet u kunnen zien zonder het
+  bestand te openen.
+
+  Het exportvenster meldt het vóór u op een formaatknop drukt, zodat de andere
+  bestandsnaam geen verrassing achteraf is. Exporteren blijft gewoon mogelijk —
+  verzegelen is een verklaring en blijft geblokkeerd, maar de normale manier om
+  iets nagekeken te krijgen is het naar een lezer sturen. Ook de geredigeerde
+  uitvoering houdt de melding vast: redigeren haalt persoonsgegevens weg, niet
+  de herkomst van de tekst, en juist dat exemplaar bereikt de wijdste kring.
+
+  Zodra u de tekst hebt nagekeken meldt de export niets meer. Dat is geen gat
+  maar precies waar die knop voor staat.
+
+- **Bij elk merk dat OciDeck voert, staat nu wie het bezit.**
+  `THIRD_PARTY_NOTICES.md` heeft een merkenparagraaf met Marp, Nextcloud,
+  YouTube en Vimeo: per naam de eigenaar, en de mededeling dat er geen band mee
+  bestaat. Die namen staan in de interface en in de documentatie omdat er geen
+  andere manier is om te zeggen wat het product doet — het formaat dat het
+  schrijft, de server waar het heen praat, de speler die het insluit. Dat is
+  nominatief gebruik en juridisch laag risico, maar alleen zolang de eigenaar
+  erbij staat; zonder vermelding blijft de suggestie hangen dat het merk van ons
+  is of dat er wordt samengewerkt.
+
+  Er is geen nieuw document voor gemaakt; het staat waar de andere
+  kennisgevingen al stonden. Een controle bewaakt het voortaan: elke
+  embed-aanbieder en elke WebDAV-smaak zit in een opsomming in de code, dus een
+  nieuwe merknaam valt op vóórdat hij ongenoemd in de interface belandt.
+
 - **Een scan die de webversie aanvalt zoals een buitenstaander dat zou doen**
   (`make dast`, met OWASP ZAP). Waar de andere controles de broncode lezen,
   bekijkt deze wat er werkelijk over de lijn gaat wanneer de pagina wordt

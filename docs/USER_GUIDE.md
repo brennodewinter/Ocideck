@@ -843,6 +843,16 @@ private, the link is invalid, or there is no connection to the source. While a
 valid embed is still loading you see a small spinner, so a slow load is no longer
 mistaken for a broken one.
 
+A **YouTube** embed is played on `youtube-nocookie.com`, and only there: the
+player frame fetches no script from `youtube.com`, and the "Watch on YouTube"
+logo inside the player is refused rather than followed, so a stray click during
+a presentation cannot replace your slide with YouTube's own watch page. That
+does not make the embed invisible — YouTube still sees that the video is being
+requested, and the picture still comes from its media servers. See
+[PRIVACY.md](PRIVACY.md#what-leaves-your-device--and-only-when-you-ask). *(This
+was corrected on 22-07-2026; before that the player loaded a script from
+`youtube.com` and ended up running there.)*
+
 The same Security tab has **CVE opzoeken (online)** for the finding editor's
 **Zoek CVE…** action — also off by default, and additionally gated on your
 consent. When on, you can set the **CVE mirror** base URL (default
@@ -1860,6 +1870,48 @@ HTML exports also show a fixed top banner with the TLP label when classified.
 These properties are for discovery and handling downstream — they do not replace
 the visible banner, badge, and optional watermark on the slides themselves.
 
+**Unreviewed AI text is declared in the file.** When any slide still carries an
+AI-drafted field you have not pressed **Nagekeken** on (see *AI drafting for
+finding text* below), the export says so — in more than one place, because no
+single one reaches every reader:
+
+| Where | What it looks like |
+| --- | --- |
+| PDF / PPTX **Keywords** (`cp:keywords`) | `AI-generated (unreviewed)`, alongside the deck's own keywords and the TLP entries |
+| PDF / PPTX **Subject** (`dc:subject`) | appended after the title: `TLP:GREEN — My deck — contains AI-drafted text that no human has checked` |
+| HTML `<head>` | `<meta name="ai-generated">` with that same marking, plus `<meta name="ai-generated-slides">` with the number of slides it applies to |
+| HTML page | a second fixed banner directly under the TLP banner, saying that the deck holds AI text nobody has checked |
+| Filename | `-ai-concept` before the extension, next to `-geredigeerd` and `-beknopt` |
+
+The keyword and the Subject note are deliberately **not** translated: they are
+fields a tool reads, not sentences on screen, and a value that changes with the
+interface language cannot be searched for. The banner in the HTML is a sentence,
+and like the rest of the text the HTML export generates itself (the redacted-media
+box, the sign-off page) it is written in Dutch regardless of your interface
+language.
+
+There is no banner on the PDF or PPTX slides. A slide-level stamp would have to
+be repeated on every page of a printed hand-out, where it competes with your
+content; the document properties and the filename carry it instead.
+
+Only the HTML gets a visible banner, for the mirror-image reason: it is read on
+a screen, where a bar at the top is already how this deck says something about
+the whole document.
+
+**Exporting is not blocked by this.** *Afronden & verzegelen* stays blocked
+until every AI-drafted field is reviewed — sealing is a statement about the
+content. Exporting is not: the normal way to get something reviewed is to send
+it to someone. The export dialog shows a line about it *before* you pick a
+format, so the changed filename is not a surprise afterwards.
+
+The **redacted** export keeps the marking too. Redaction removes personal data,
+not the provenance of the text — and that copy is the one that reaches the
+widest circle.
+
+Press **Nagekeken** on the last field and the export declares nothing: no
+keyword, no banner, no suffix. That is not an omission; it is what the review
+button is for.
+
 **Slide quality at export.** When the deck has open quality issues, the export
 dialog shows a summary banner with a link to the full issue list. Depending on
 your settings (see *Slide quality* below), export may ask for
@@ -2302,6 +2354,11 @@ id the model emits that is not already in your facts is stripped out
 **AI-concept** badge and **Afronden & verzegelen** stays blocked until you press
 **Nagekeken** on each one, so the truthful-reporting signature always covers
 human-verified text. Off by default; desktop only.
+
+The badge does not stop at the app. Export a deck that still holds an unreviewed
+AI-drafted field and the PDF, PPTX or HTML says so in its document properties,
+the HTML shows a banner, and the filename gets `-ai-concept` — see *Export
+metadata* under *Exporting*. Reviewing the last field removes all of it.
 
 ### MIAUW compliance overview
 
