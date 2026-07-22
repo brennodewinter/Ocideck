@@ -117,7 +117,8 @@ void main() {
     // but not "what pulls this in?" — and the second question is the one asked
     // the morning a CVE lands on a transitive parser.
     final graph = {
-      for (final d in (cdx['dependencies'] as List).cast<Map<String, dynamic>>())
+      for (final d
+          in (cdx['dependencies'] as List).cast<Map<String, dynamic>>())
         d['ref'] as String: (d['dependsOn'] as List).cast<String>(),
     };
     final rootRef = cdx['metadata']['component']['bom-ref'] as String;
@@ -180,8 +181,8 @@ void main() {
         idByRef[ordered[i] as String] = packages[i]['SPDXID'] as String;
       }
       final spdxEdges = <String>{
-        for (final r in (spdx['relationships'] as List)
-            .cast<Map<String, dynamic>>())
+        for (final r
+            in (spdx['relationships'] as List).cast<Map<String, dynamic>>())
           if (r['relationshipType'] == 'DEPENDS_ON')
             '${r['spdxElementId']}->${r['relatedSpdxElement']}',
       };
