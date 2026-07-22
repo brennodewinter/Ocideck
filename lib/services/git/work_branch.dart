@@ -62,3 +62,46 @@ WorkBranchChoice workBranchFor({
     baseSha: sameDeck ? origin.baseSha : '',
   );
 }
+
+/// De commit waar een opslag tegenaan botst, of de reden dat hij niet doorgaat.
+///
+/// Precies één van beide is gevuld. Een null [baseSha] is geen fout maar een
+/// uitkomst: er valt niets te botsen en niets samen te voegen, en [blocked]
+/// vertelt de gebruiker in gewone taal waarom.
+typedef RoundBase = ({String? baseSha, String? blocked});
+
+/// De commit waar deze opslag tegenaan botst — de kern van de guard.
+///
+/// Midden in een ronde is dat de gelezen basis. Bij een verse ronde takken we
+/// de werkbranch net af, en dan ís zijn kop onze basis. Bestaat die branch al
+/// — de werkbranchnaam draagt alleen een datum, dus een tweede ronde op
+/// dezelfde dag of een collega die eerder was — dan nemen we zijn kop juist
+/// **niet** over: de guard zou dan per definitie tevreden zijn en we schreven
+/// weg wat daar staat. De gelezen basis is dan de gemeenschappelijke
+/// voorouder, zodat het botst en de driewegs-merge zijn werk kan doen.
+///
+/// Is er geen gelezen basis én bestaat de branch al, dan valt er niets te
+/// botsen en niets samen te voegen; `baseSha` is dan null en [blocked] legt
+/// uit waarom de opslag niet doorgaat.
+Future<RoundBase> roundBaseSha(
+  GitForge forge, {
+  required bool midRound,
+  required String roundBase,
+  required String workBranch,
+  required String branch,
+}) async {
+  if (midRound) return (baseSha: roundBase, blocked: null);
+  final branches = await forge.listBranches();
+  if (branches.every((b) => b.name != workBranch)) {
+    final created = await forge.createBranch(workBranch, fromRef: branch);
+    return (baseSha: created.sha, blocked: null);
+  }
+  if (roundBase.isNotEmpty) return (baseSha: roundBase, blocked: null);
+  return (
+    baseSha: null,
+    blocked:
+        'Er staat al een concept van vandaag op $workBranch, en dit deck '
+        'komt daar niet uit voort. Open dat concept eerst, of geef dit deck '
+        'een andere naam.',
+  );
+}

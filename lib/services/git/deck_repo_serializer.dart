@@ -15,6 +15,7 @@ import '../slide_image_refs.dart';
 import '../web_asset_store.dart';
 import 'asset_pool.dart';
 import 'deck_merge.dart';
+import 'git_forge.dart';
 import 'native_git_mirror_api.dart';
 
 /// Standaardnaam van het markdown-bestand binnen een deckmap (§6). Gespiegeld in
@@ -729,4 +730,86 @@ Future<RepoMergeOutcome> resolveRepoDeckMerge({
     merge: merge,
     missingChartData: missing,
   );
+}
+
+/// Wat een poging tot samenvoegen-na-conflict opleverde.
+///
+/// Drie uitkomsten, en ze sluiten elkaar uit. [merge] null: er viel niets
+/// samen te voegen (geen voorouder, of een van de twee kanten was niet te
+/// lezen) — de aanroeper houdt het conflict. [merge] gezet maar niet schoon:
+/// er zijn botsingen die de gebruiker moet beslechten, en er is niets gecommit.
+/// [sha] gezet: schoon samengevoegd én geland.
+typedef RepoConflictMerge = ({
+  DeckMergeResult? merge,
+  String? sha,
+  String? head,
+  List<String> warnings,
+});
+
+/// Voeg [ours] samen met wat er inmiddels op [branch] staat, en commit het als
+/// het schoon ging (§8.6).
+///
+/// Hoort hier en niet in de state-laag omdat elke stap over de repo gaat: welke
+/// twee refs de andere kanten zijn, wat de nieuwe basis wordt, en welke
+/// bestanden de commit draagt. Wat de state-laag ervan moet weten staat in
+/// [RepoConflictMerge]; het bijwerken van het tabblad blijft daar.
+///
+/// [readDeckAt] leest een deck op een ref — door de importpoort, want de branch
+/// van een ander is niet vertrouwder dan welke invoer ook (P5). Die poort woont
+/// in de state-laag, dus hij komt als parameter binnen.
+///
+/// Zonder [baseSha] valt er niets driewegs te doen: dan is er geen
+/// gemeenschappelijke voorouder en is de enige eerlijke uitkomst "conflict".
+///
+/// [RepoConflictMerge.head] is hún kop op het moment van samenvoegen, en die
+/// hoort de nieuwe basis van het tabblad te worden — óók wanneer de merge niet
+/// schoon was. De gebruiker kijkt dan naar een deck dat tegen die kop is
+/// samengevoegd; blijft de oude basis staan, dan botst zijn volgende opslag
+/// tegen een voorouder die hij allang voorbij is.
+Future<RepoConflictMerge> mergeIntoRemote(
+  GitForge forge, {
+  required String deckDir,
+  required String branch,
+  required String baseSha,
+  required Deck ours,
+  required String message,
+  required MarkdownService md,
+  required AssetByteResolver Function(Deck merged) resolveBytesFor,
+  required Future<Deck?> Function(String ref) readDeckAt,
+}) async {
+  if (baseSha.isEmpty) {
+    return (merge: null, sha: null, head: null, warnings: const <String>[]);
+  }
+
+  final base = await readDeckAt(baseSha);
+  final theirs = await readDeckAt(branch);
+  if (base == null || theirs == null) {
+    return (merge: null, sha: null, head: null, warnings: const <String>[]);
+  }
+
+  final merge = mergeDeckVersions(base, ours, theirs);
+  // Hun kop vóór de commit: dat is de basis waar deze merge tegenaan is
+  // gemaakt. Erna opvragen zou een commit kunnen meenemen die er tussendoor
+  // kwam, en dan claimt de guard een voorouder die hij niet gelezen heeft.
+  final head = await forge.headSha(branch);
+  if (!merge.isClean) {
+    return (merge: merge, sha: null, head: head, warnings: const <String>[]);
+  }
+
+  final files = await buildDeckRepoFiles(
+    merge.merged,
+    md: md,
+    pool: AssetPool(forge: forge, branch: branch),
+    deckDir: deckDir,
+    resolveBytes: resolveBytesFor(merge.merged),
+    read: (path) => forge.readBlob(branch, path),
+  );
+  final result = await forge.commitFiles(
+    branch: branch,
+    message: message,
+    upserts: files.upserts,
+    deletes: files.deletes,
+    baseSha: head,
+  );
+  return (merge: merge, sha: result.sha, head: head, warnings: files.warnings);
 }
