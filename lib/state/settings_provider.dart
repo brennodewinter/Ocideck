@@ -140,6 +140,9 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
         logWarning('SettingsNotifier: ongeldige aiSettings-prefs', e);
       }
     }
+    // Uit de sleutelbos, met een eenmalige verhuizing uit prefs; zie
+    // [SettingsPrivacy.migratePrivacyOwnIdentity].
+    final ownIdentity = await migratePrivacyOwnIdentity(prefs);
     state = AppSettings(
       languageCode: prefs.getString('languageCode') ?? 'nl',
       connections: _loadConnections(prefs),
@@ -192,7 +195,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       privacyExportGate: PrivacyExportGateX.fromKey(
         prefs.getString('privacyExportGate'),
       ),
-      privacyOwnIdentity: prefs.getString('privacyOwnIdentity') ?? '',
+      privacyOwnIdentity: ownIdentity,
       uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
       docReaderTextScale: (prefs.getDouble('docReaderTextScale') ?? 1.0).clamp(
         0.8,

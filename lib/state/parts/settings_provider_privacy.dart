@@ -63,12 +63,52 @@ extension SettingsPrivacy on SettingsNotifier {
     );
   }
 
+  /// De prefs-sleutel waar "je eigen gegevens" tot en met 0.1.0 stond. Blijft
+  /// bestaan voor de eenmalige verhuizing naar de sleutelbos; zie
+  /// [migratePrivacyOwnIdentity].
+  static const legacyOwnIdentityKey = 'privacyOwnIdentity';
+
+  /// Leg vast wie de gebruiker zelf is — naam, e-mailadres, telefoonnummer,
+  /// domein.
+  ///
+  /// Gaat naar de sleutelbos van het besturingssysteem en niet naar prefs. Het
+  /// is geen wachtwoord, maar het is wél het enige instellingenveld met
+  /// persoonsgegevens van een natuurlijke persoon erin, en een app die decks
+  /// nakijkt op precies zulke gegevens hoort ze zelf niet in klaartekst naast
+  /// haar voorkeuren te zetten.
+  ///
+  /// Mislukt de sleutelbos, dan blijft de waarde wel in het geheugen staan (de
+  /// scan blijft deze sessie werken) en meldt [_reportSecretFailure] het. Stil
+  /// terugvallen op prefs zou de reden van deze verhuizing ongedaan maken.
   Future<void> setPrivacyOwnIdentity(String value) async {
     currentState = currentState.copyWith(privacyOwnIdentity: value);
+    final ok = await _secrets.writePrivacyOwnIdentity(value);
+    if (!ok) {
+      _reportSecretFailure('setPrivacyOwnIdentity', 'keychain write failed');
+      return;
+    }
+    // De oude plek moet leeg zijn, anders staat de klaartekst er nog.
     await _persist(
       'setPrivacyOwnIdentity',
-      (prefs) => prefs.setString('privacyOwnIdentity', value),
+      (prefs) => prefs.remove(legacyOwnIdentityKey),
     );
+  }
+
+  /// Haal "je eigen gegevens" op, en verhuis ze eenmalig uit prefs.
+  ///
+  /// Wordt bij het laden aangeroepen. De prefs-sleutel gaat pas weg wanneer de
+  /// sleutelbos de waarde heeft aangenomen — anders kost een geweigerde
+  /// keychain de gebruiker zijn hele uitzonderingslijst, en begint de scanner
+  /// zijn eigen naam als bevinding te melden.
+  Future<String> migratePrivacyOwnIdentity(SharedPreferences prefs) async {
+    final legacy = prefs.getString(legacyOwnIdentityKey);
+    if (legacy != null) {
+      if (await _secrets.writePrivacyOwnIdentity(legacy)) {
+        await prefs.remove(legacyOwnIdentityKey);
+      }
+      return legacy;
+    }
+    return await _secrets.readPrivacyOwnIdentity() ?? '';
   }
 
   /// Zet één landpakket aan of uit (OCIWACHT §5.7).

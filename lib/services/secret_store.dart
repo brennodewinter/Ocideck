@@ -171,6 +171,52 @@ class SecretStore {
     }
   }
 
+  /// Keychain-sleutel voor "je eigen gegevens" van de privacycontrole.
+  ///
+  /// Eén entry, want het gaat over de gebruiker van deze installatie en niet
+  /// over een server. Geen wachtwoord, maar wel het enige veld in de
+  /// instellingen dat naam, e-mailadres en telefoonnummer van een natuurlijke
+  /// persoon bevat — en dat hoort niet in het onversleutelde prefs-domein te
+  /// staan in een app die er zelf op controleert.
+  static const privacyOwnIdentityKey = 'privacy_own_identity';
+
+  /// Schrijf "je eigen gegevens" weg; leeg wist de entry. `false` bij een
+  /// mislukte schrijf, zodat de aanroeper de prefs-migratie kan uitstellen in
+  /// plaats van de gegevens kwijt te raken.
+  Future<bool> writePrivacyOwnIdentity(String value) async {
+    try {
+      if (value.trim().isEmpty) {
+        await _storage.delete(key: privacyOwnIdentityKey);
+      } else {
+        await _storage.write(key: privacyOwnIdentityKey, value: value);
+      }
+      return true;
+    } catch (e) {
+      logError('SecretStore.writePrivacyOwnIdentity: keychain write failed', e);
+      return false;
+    }
+  }
+
+  Future<String?> readPrivacyOwnIdentity() async {
+    try {
+      return await _storage.read(key: privacyOwnIdentityKey);
+    } catch (e) {
+      logError('SecretStore.readPrivacyOwnIdentity: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deletePrivacyOwnIdentity() async {
+    try {
+      await _storage.delete(key: privacyOwnIdentityKey);
+    } catch (e) {
+      logWarning(
+        'SecretStore.deletePrivacyOwnIdentity: keychain delete failed',
+        e,
+      );
+    }
+  }
+
   /// Wis het geheim dat bij elk van [connections] hoort.
   ///
   /// Voor het terugzetten naar de begintoestand. Bewust gekeyd op de
