@@ -114,6 +114,13 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   }
 
   Future<void> _pickDirectory() async {
+    // Ook hier, niet alleen bij de aanroeper in shell_actions.dart: op web
+    // bestaat `getDirectoryPath` niet en geeft het stil null terug, en dan
+    // doet de knop niets zonder één woord uitleg (#150). De poort bij de
+    // aanroeper is vandaag correct, maar dit bestand kon dat niet zelf
+    // bewijzen — en een garantie die elders staat, verdwijnt bij de
+    // eerstvolgende nieuwe aanroeper.
+    if (!supportsLocalProjectFolders) return;
     final result = await FilePicker.getDirectoryPath(
       dialogTitle: context.l10n.d('Map met presentaties kiezen'),
       initialDirectory: _firstRootPath,

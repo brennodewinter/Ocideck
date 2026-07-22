@@ -833,13 +833,16 @@ class _AudioSetting extends StatelessWidget {
                     style: TextStyle(fontSize: 12, color: AppTheme.slate700),
                   ),
                 ),
-              TextButton(
-                onPressed: _pick,
-                child: Text(
-                  has ? l10n.d('Wijzigen') : l10n.d('Kiezen'),
-                  style: const TextStyle(fontSize: 12),
+              // Geen audiokiezer op web: geen projectmap om in te importeren.
+              // Een bestaand pad uit een pakket blijft wél zichtbaar.
+              if (supportsLocalProjectFolders)
+                TextButton(
+                  onPressed: _pick,
+                  child: Text(
+                    has ? l10n.d('Wijzigen') : l10n.d('Kiezen'),
+                    style: const TextStyle(fontSize: 12),
+                  ),
                 ),
-              ),
               if (has)
                 _StepperButton(
                   icon: Icons.clear,

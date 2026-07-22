@@ -17,6 +17,7 @@ import '../models/settings.dart';
 import '../models/chart.dart';
 import '../models/seal_record.dart';
 import '../models/slide.dart';
+import '../platform/platform_features.dart';
 import '../utils/atomic_file.dart';
 import '../utils/bundled_asset.dart';
 import '../utils/file_download.dart';
@@ -515,29 +516,22 @@ class FileService {
     // panel, so a loose presentation anywhere on disk can't be picked. Any file
     // is selectable here; [openDeck] then validates that it is a Marp/OciDeck
     // presentation (front matter `marp: true`) and refuses anything else.
-    final result = await FilePicker.pickFiles(
+    //
+    // Op web levert dit null: zie [_pickPathGated]. De aanroepers sturen daar
+    // al naar [pickDeckFileBytes], dat met bytes werkt in plaats van een pad.
+    return _pickPathGated(
       dialogTitle: _d('Presentatie openen'),
       type: FileType.any,
       initialDirectory: initialDirectory,
     );
-    return result?.files.single.path;
   }
 
   /// Kies een presentatiebestand en lever de inhoud als bytes — het open-pad
   /// voor web, waar bestanden geen pad hebben. `withData` laat de browser de
   /// gekozen file in het geheugen aanleveren; desktop werkt ook (leest de
   /// bytes), maar gebruikt normaliter [pickMarkdownFile].
-  Future<({String name, Uint8List bytes})?> pickDeckFileBytes() async {
-    final result = await FilePicker.pickFiles(
-      dialogTitle: _d('Presentatie openen'),
-      type: FileType.any,
-      withData: true,
-    );
-    final file = result?.files.single;
-    final bytes = file?.bytes;
-    if (file == null || bytes == null) return null;
-    return (name: file.name, bytes: bytes);
-  }
+  Future<({String name, Uint8List bytes})?> pickDeckFileBytes() =>
+      _pickBytes(dialogTitle: _d('Presentatie openen'));
 
   /// Web-opslaan: serialiseer het deck en laat de browser het als `.md`
   /// downloaden. Bewust alleen de markdown-inhoud — sidecars (annotaties,
@@ -975,13 +969,14 @@ class FileService {
   }
 
   Future<String?> pickPackageFile({String? initialDirectory}) async {
-    final result = await FilePicker.pickFiles(
+    // Op web null (zie [_pickPathGated]); daar pakt `_openWithBytesPicker` een
+    // pakket in het geheugen uit.
+    return _pickPathGated(
       dialogTitle: _d('Pakket importeren'),
       type: FileType.custom,
       allowedExtensions: [packageExtension, 'zip'],
       initialDirectory: initialDirectory,
     );
-    return result?.files.single.path;
   }
 
   Future<String?> pickPackageDestination(Deck deck) async {

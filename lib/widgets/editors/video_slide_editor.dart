@@ -8,6 +8,7 @@ import '_editor_field.dart';
 import 'advanced_section.dart';
 import 'audio_attachment_editor.dart';
 import '../../theme/app_theme.dart';
+import '../../platform/platform_features.dart';
 
 class VideoSlideEditor extends StatefulWidget {
   final Slide slide;
@@ -146,11 +147,15 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
           children: [
             _SourceKindChip(source: source),
             const Spacer(),
-            ElevatedButton.icon(
-              onPressed: _pickVideo,
-              icon: const Icon(Icons.movie_outlined, size: 16),
-              label: Text(l10n.d('Bestand kiezen')),
-            ),
+            // Geen bestandskiezer op web: daar is geen projectmap om een
+            // video in te importeren. De URL-tak erboven werkt er wél, dus de
+            // dia blijft bruikbaar — een knop die niets doet niet (#150).
+            if (supportsLocalProjectFolders)
+              ElevatedButton.icon(
+                onPressed: _pickVideo,
+                icon: const Icon(Icons.movie_outlined, size: 16),
+                label: Text(l10n.d('Bestand kiezen')),
+              ),
           ],
         ),
         const SizedBox(height: 8),

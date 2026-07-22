@@ -4,6 +4,7 @@ import 'package:path/path.dart' as p;
 import '../../l10n/app_localizations.dart';
 import '../../models/library_folder.dart';
 import '../../theme/app_theme.dart';
+import '../../platform/platform_features.dart';
 
 /// Uitkomst van de bestemmingsdialoog: de gekozen doelmap (of null om op de
 /// standaardlocatie te beginnen). `null` uit [SaveDestinationDialog.show] zelf
@@ -71,6 +72,13 @@ class _SaveDestinationDialogState extends State<SaveDestinationDialog> {
   }
 
   Future<void> _pickCustom() async {
+    // Ook hier, niet alleen bij de aanroeper in deck_provider.dart: op web
+    // bestaat `getDirectoryPath` niet en geeft het stil null terug, en dan
+    // doet de knop niets zonder één woord uitleg (#150). De poort bij de
+    // aanroeper is vandaag correct, maar dit bestand kon dat niet zelf
+    // bewijzen — en een garantie die elders staat, verdwijnt bij de
+    // eerstvolgende nieuwe aanroeper.
+    if (!supportsLocalProjectFolders) return;
     final result = await FilePicker.getDirectoryPath(
       dialogTitle: context.l10n.d('Map kiezen'),
       initialDirectory: _selectedPath,

@@ -145,7 +145,7 @@ const Map<String, int> classSizeBaseline = {
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState': 7295,
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
       3419,
-  'lib/services/file_service.dart#FileService': 2885,
+  'lib/services/file_service.dart#FileService': 2879,
   'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 2667,
   'lib/state/tabs_provider.dart#TabsNotifier': 2403,
   'lib/services/markdown_service.dart#MarkdownService': 2322,
@@ -235,7 +235,10 @@ bool _isPaletteHome(String path) {
 // Twee gedaanten, allebei "ik krijg een pad in het bestandssysteem":
 //   * `getDirectoryPath(` — bestaat niet op web, geeft stil null.
 //   * `pickFiles(` waarvan `.path` gelezen wordt zonder `withData: true` —
-//     werkt wél, maar levert een `blob:`-URL die nergens heen wijst.
+//     `PlatformFile.path` GOOIT op web een kale String (file_picker 5.5.0,
+//     platform_file.dart). Hier stond dat het een `blob:`-URL oplevert; dat is
+//     onjuist, en het maakt uit: een blob-URL faalt stil en verkeerd, een worp
+//     vliegt ongevangen omhoog. Nagekeken in de pakketbron op 2026-07-22.
 // `saveFile(bytes:)` staat er bewust NIET bij: dat is op web een download en
 // doet precies wat het belooft.
 final _getDirectoryPath = RegExp(r'FilePicker\.getDirectoryPath\s*\(');
@@ -255,33 +258,11 @@ final _platformFlag = RegExp(
 /// regel genoteerd. Zolang een bestand hier staat, is het níet goedgekeurd: het
 /// is opgeschreven.
 const Map<String, String> filePickerPathBaseline = {
-  // ── Gepoort bij de aanroeper, niet in de methode zelf ─────────────────────
-  // Deze dialogen zijn vandaag correct: de knop die ze opent staat achter
-  // `supportsLocalProjectFolders`. Het bestand kan dat alleen niet zelf
-  // bewijzen, en dát is de kwetsbaarheid — verplaats de poort naar binnen, of
-  // geef de dialoog de vlag als vereiste parameter mee.
-  'lib/widgets/dialogs/open_presentation_dialog.dart':
-      'regel 117; gepoort in shell_actions.dart',
-  'lib/widgets/dialogs/slide_finder_dialog.dart':
-      'regel 187; gepoort in slide_list_panel.dart',
-  'lib/widgets/dialogs/import_slides_dialog.dart':
-      'regel 99; gepoort in slide_list_panel.dart',
-  'lib/widgets/dialogs/save_destination_dialog.dart':
-      'regel 74; gepoort in deck_provider.dart',
-  'lib/widgets/dialogs/settings_dialog.dart':
-      'regels 433 en 597 (exportmap, presentatiemap); de sectie eromheen is '
-      'gepoort in settings_dialog_storage.dart. De logokiezer op 612 is '
-      'sinds #506 wél in de methode zelf gepoort',
-
-  // ── Echte, openstaande gaten ──────────────────────────────────────────────
-  'lib/services/image_service.dart':
-      'regels 265 en 276 — pickVideo en pickAudio lezen .path zonder poort, '
-      'terwijl pickImageDetailed er pal boven wél een kIsWeb-tak heeft. '
-      'Zie #526',
-  'lib/services/file_service.dart':
-      'regels 518 en 957 — pickMarkdownFile en pickPackageFile lezen .path; '
-      'voor het openen bestaat er een bytes-variant naast, voor pakketten '
-      'niet. Zie #526',
+  // Leeg, en dat is de bedoeling (#528). Elke kiezer die een PAD uit
+  // `FilePicker` haalt noemt nu zelf `supportsLocalProjectFolders`, in plaats
+  // van te leunen op een poort bij zijn aanroeper. Een nieuwe regel hier is
+  // geen boekhouding maar een besluit: schrijf erbij waarom dit bestand het
+  // niet zelf kan.
 };
 
 /// Leest een `pickFiles(`-aanroep uit en zegt of hij een pad oplevert dat op
@@ -819,9 +800,9 @@ void main() {
   if (pickerHits.isNotEmpty) {
     failures.add(
       'Een pad uit FilePicker zonder platformpoort. In de browser bestaat '
-      '`getDirectoryPath` niet (stil null) en levert `pickFiles` een '
-      '`blob:`-URL in `.path` — de knop doet dan niets, of erger: hij lijkt te '
-      'lukken en de instelling is na herladen weg. Dat was #150 en daarna '
+      '`getDirectoryPath` niet (stil null) en GOOIT `PlatformFile.path` een '
+      'kale String — de knop doet dan niets, of hij laat een ongevangen fout '
+      'omhoog vliegen. Dat was #150 en daarna '
       '#506. Noem `supportsLocalProjectFolders` (of `isWebPlatform`) in dit '
       'bestand, of gebruik `withData: true` en werk met de bytes. Zie '
       'filePickerPathBaseline in tool/check_conventions.dart — die lijst mag '

@@ -6,6 +6,7 @@ import 'package:pasteboard/pasteboard.dart';
 import 'package:path/path.dart' as p;
 import '../l10n/app_localizations.dart';
 import '../models/slide.dart';
+import '../platform/platform_features.dart';
 import '../utils/asset_destination.dart';
 import '../utils/atomic_file.dart';
 import '../utils/log.dart';
@@ -262,6 +263,14 @@ class ImageService {
   }
 
   Future<String?> pickVideo({String? projectPath}) async {
+    // Op web bestaat dit pad niet, en het faalt luidruchtiger dan je zou
+    // denken: `PlatformFile.path` GOOIT daar een kale String (file_picker
+    // 5.5.0 — geen null en geen blob:-URL, zoals hier eerder stond). Die vloog
+    // ongevangen omhoog zodra iemand in de webversie op "Bestand kiezen" drukte.
+    // Bovendien schrijft `_importIntoProject` naar schijf, wat er ook niet is.
+    // De knop is inmiddels ook verborgen (video_slide_editor.dart); deze poort
+    // staat er zodat het bestand zijn eigen belofte waarmaakt.
+    if (!supportsLocalProjectFolders) return null;
     final result = await FilePicker.pickFiles(
       type: FileType.video,
       dialogTitle: _d('Kies een video'),
@@ -273,6 +282,8 @@ class ImageService {
   }
 
   Future<String?> pickAudio({String? projectPath}) async {
+    // Zelfde verhaal als [pickVideo]: `path` gooit op web.
+    if (!supportsLocalProjectFolders) return null;
     final result = await FilePicker.pickFiles(
       type: FileType.audio,
       dialogTitle: _d('Kies een audiobestand'),
