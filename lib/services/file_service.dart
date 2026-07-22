@@ -236,6 +236,24 @@ Future<String?> _systemSaveDestination({
   initialDirectory: initialDirectory,
 );
 
+/// Everything that reaches the filesystem on a deck's behalf: opening and
+/// saving, the project folder around a `.md`, the sidecars, the `.ocideck`
+/// package, and scanning a library for decks.
+///
+/// The invariant worth knowing before you change anything here: **a save must
+/// never leave a half-written deck on disk.** Writes go to a temporary file and
+/// are moved into place, because the alternative — a truncated `.md` where the
+/// user's presentation used to be — is the one failure this application cannot
+/// apologise its way out of.
+///
+/// The second rule is containment: an asset path that resolves outside the
+/// project folder is refused rather than followed. A deck is something people
+/// exchange, so its paths are untrusted input.
+///
+/// What not to expect: it does not know the Markdown format ([MarkdownService]
+/// does) and it does not decide *when* to save — that is [DeckNotifier] and the
+/// tab layer. On web most of this degrades to in-memory behaviour; the platform
+/// gates in `lib/platform/` say which parts.
 class FileService {
   final MarkdownService _md;
   final ImageService _img;

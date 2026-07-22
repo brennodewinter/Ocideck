@@ -151,6 +151,23 @@ bool canSplitSlide(Slide slide) => switch (slide.type.bulletColumns) {
 
 // ── DeckNotifier ─────────────────────────────────────────────────────────────
 
+/// Holds the deck currently being edited, and is the only thing allowed to
+/// change it.
+///
+/// Every mutation goes through a method here rather than through a slide
+/// object, and that is deliberate: **undo/redo is built on whole-deck snapshots
+/// taken at this boundary.** A caller that reaches around this class and edits
+/// a [Slide] in place produces a change the user cannot undo, and a preview
+/// that does not repaint.
+///
+/// `revision` increments on every accepted change and is what the editor
+/// column watches to rebuild after an undo — it is not a document version and
+/// never reaches disk.
+///
+/// Saving is not here: this class marks the deck dirty and [FileService] writes
+/// it, driven by the tab layer. The class is split across
+/// `deck_provider_*.dart` by subject (slides, markdown, checklist, MIAUW, AI,
+/// auto); those are the same class.
 class DeckNotifier extends StateNotifier<DeckState> {
   final MarkdownService _md;
   final FileService _file;

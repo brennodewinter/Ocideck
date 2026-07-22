@@ -61,6 +61,18 @@ const _uuid = Uuid();
 
 // ── Tabs notifier ─────────────────────────────────────────────────────────────
 
+/// Owns the open tabs: which decks are open, which one is in front, and where
+/// each of them came from (a local file, WebDAV, S3, or a git branch).
+///
+/// The distinction that matters: [DeckNotifier] holds *the* deck being edited —
+/// one at a time — while this class holds the set of decks the user has open
+/// and swaps the active one in and out. So per-tab state that must survive a
+/// switch (the origin, the dirty flag, the undo history's owner) lives here,
+/// and anything about the slides themselves lives there.
+///
+/// Opening is where the untrusted input arrives — an import from a URL, a
+/// package from someone else — so the import gate and its security alarm are
+/// reached from here rather than from the file layer.
 class TabsNotifier extends StateNotifier<TabsState> {
   final Ref _ref;
   final MarkdownService _md;

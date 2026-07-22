@@ -177,7 +177,19 @@ single risk in this project — larger than anything a scanner has reported.
   floor. See [`docs/CHECKS.md`](docs/CHECKS.md).
 - The ratchets only move one way. A baseline that is allowed to grow is not a
   baseline, and several of them are at zero.
-- `make sast`, `make check-secrets` and mutation testing exist as separate gates.
+- `make sast` and `make check-secrets` exist as separate gates.
+- **Mutation testing is narrower than the word suggests, so here is its exact
+  scope.** `tool/mutation_check.dart` applies **one** operator — it negates each
+  `String.startsWith` / `.endsWith` predicate — and `make mutate-parsers` points
+  it at **seven files**, the Markdown parsers and serialisers. There are 309
+  such predicates across 96 files in `lib/`. There is no condition, boundary-value
+  or return-value mutant. It is manual and not part of `make check`. Last run
+  2026-07-22: 26 mutants, **one survivor**
+  (`markdown_service_finding.dart`, the `ocideck_checklist_scope:` predicate),
+  which halted the sweep before the remaining five files ran. *(Added
+  2026-07-22: this line called mutation testing a "gate" without qualification,
+  which invites the reader to upgrade the 86.2% line coverage into evidence of
+  assertion strength that one operator over seven files does not provide.)*
 - Everything lands through a pull request with a written description, so the
   reasoning is reviewable after the fact even when nobody reviewed it before.
 

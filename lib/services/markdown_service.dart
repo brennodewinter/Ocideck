@@ -39,6 +39,24 @@ const _uuid = Uuid();
 final _reYamlSpecial = RegExp(r'[:#"\n]');
 final _reYamlLeadingSigil = RegExp(r'''^[\[\]{}>|*&!%@`,?-]''');
 
+/// Converts between a [Deck] and the Marp Markdown on disk, in both directions.
+///
+/// This class is where OciDeck's central premise lives: the `.md` is the source
+/// of truth, and everything the editor knows must survive a round trip through
+/// it. The contract is therefore **lossless in both directions** — parse a file
+/// and serialise it back and you get the same bytes, apart from normalisation
+/// this class performs deliberately. The round-trip tests exist to keep that
+/// true; treat a failure there as a defect in this class, not in the test.
+///
+/// Anything Marp itself does not define is carried in places Marp ignores —
+/// front-matter keys and HTML comments — so a deck stays readable by other Marp
+/// tooling. See `docs/FILE_FORMAT.md` for the format this class implements; it
+/// is the specification, and this class is the implementation of it.
+///
+/// What not to expect: it does not render (that is `marp_html_service.dart`),
+/// it does not touch the filesystem (that is [FileService]), and it does not
+/// validate a deck's *meaning* — a structurally valid deck that says something
+/// silly parses fine.
 class MarkdownService {
   // ── Generation ──────────────────────────────────────────────────────────────
 
