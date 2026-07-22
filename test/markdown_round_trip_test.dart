@@ -1640,7 +1640,7 @@ void main() {
         withAudio(
           Slide.create(SlideType.cockpit).copyWith(
             title: 'Cockpit',
-            customMarkdown: CockpitSpec.pentestPreset().toBlock(),
+            customMarkdown: CockpitSpec.samplePreset().toBlock(),
           ),
         ),
       );

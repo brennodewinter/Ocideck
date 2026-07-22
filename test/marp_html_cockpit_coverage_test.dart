@@ -34,7 +34,7 @@ void main() {
     ground: '#606060',
   );
 
-  test('empty meters fall back to the pentest preset', () {
+  test('empty meters fall back to the sample preset', () {
     // CockpitSpec.parse of `{}` yields no meters, so _cockpitSvg substitutes
     // the built-in preset (four instruments).
     final svg = MarpHtmlService.renderCockpitBlocks('```cockpit\n{}\n```');
@@ -42,8 +42,9 @@ void main() {
     expect(svg, contains('<svg'));
     expect(svg, contains('</svg>'));
     expect(svg, contains('COCKPIT VIEW'));
-    // Preset carries an "Overall risk" speedometer.
-    expect(svg, contains('Overall risk'));
+    // Preset carries a "Capacity used" speedometer — domain-neutral since
+    // #646, because this fallback also reaches the exported HTML.
+    expect(svg, contains('Capacity used'));
   });
 
   test('arc gauge renders both zone orderings (green-low and green-high)', () {

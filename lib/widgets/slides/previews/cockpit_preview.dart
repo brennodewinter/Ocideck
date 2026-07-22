@@ -80,7 +80,7 @@ class _CockpitPreviewState extends State<_CockpitPreview>
   Widget build(BuildContext context) {
     final spec = _spec;
     final meters = spec.meters.isEmpty
-        ? CockpitSpec.pentestPreset().meters
+        ? CockpitSpec.samplePreset().meters
         : spec.meters.take(cockpitMaxMeters).toList();
     final bg = AppTheme.parseHexColor(widget.profile.slideBackgroundColor);
     final accent = AppTheme.parseHexColor(widget.profile.accentColor);

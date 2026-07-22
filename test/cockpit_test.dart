@@ -147,8 +147,8 @@ void main() {
   });
 
   group('CockpitSpec parse and copyWith', () {
-    test('falls back to the pentest preset on invalid or non-object JSON', () {
-      final preset = CockpitSpec.pentestPreset();
+    test('falls back to the sample preset on invalid or non-object JSON', () {
+      final preset = CockpitSpec.samplePreset();
       expect(
         CockpitSpec.parse('not json').meters,
         hasLength(preset.meters.length),
