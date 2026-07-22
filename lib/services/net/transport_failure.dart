@@ -1,3 +1,17 @@
+// ── lib/services/net/ ────────────────────────────────────────────────────────
+// Wat élke netwerkdienst nodig heeft en geen van hen bezit. Nu: de vraag "wat
+// voor transportfout was dit", die WebDAV, S3 en de git-forge alle drie stelden
+// en alle drie zelf beantwoordden.
+//
+// Wat hier níét thuishoort: de netwerkbeheersing zelf (`utils/net_guard.dart` —
+// hostcontrole, socketpinning, certificaatpinning), de protocollen (WebDAV, S3,
+// de forge-adapters) en alles wat de gebruiker leest. Een zin die "de
+// WebDAV-server" of "het S3-endpoint" noemt hoort per definitie bij die
+// backend, niet hier. De vuistregel: verhuist het antwoord niet mee als je er
+// een vierde opslag bij zet, dan hoort het hier niet.
+// Bestand voor bestand: docs/SOURCE_MAP.md.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import 'dart:io';
 
 import '../../utils/log.dart';

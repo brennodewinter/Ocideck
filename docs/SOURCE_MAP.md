@@ -84,6 +84,7 @@ code rather than only here. This map stays the file-by-file index.
 | `presentation_search/` | The network-backed sources 'Slide zoeken' scans (git, WebDAV, S3). | `presentation_search/presentation_source.dart` |
 | `cvss/` | The CVSS v4.0 scoring engine — a faithful port, nothing else. | `cvss/cvss4.dart` |
 | `s3/` | S3 and S3-compatible storage: SigV4 signing, and the pinned client. | `s3/s3_service.dart` |
+| `net/` | What every network-facing service needs and none of them owns — starting with sorting a caught transport error into its kind. | `net/transport_failure.dart` |
 | `info_safety/` | Counting what reference data the security module has locally. | `info_safety/info_safety_reference_inventory.dart` |
 | `parts/` | Not a cluster: `part of` spillover, so a large service stays navigable and under the 1000-line file ratchet (`tool/check_conventions.dart`). Each file names its library in its first line. | — |
 
