@@ -111,17 +111,15 @@ extension _PresenterInk on _FullscreenPresenterState {
     ];
     Widget toolBtn(InkTool tool, IconData icon, String tip) {
       final active = _tool == tool;
-      return Tooltip(
-        message: tip,
-        child: IconButton(
-          onPressed: () => _setTool(tool),
-          icon: Icon(icon, size: 20),
-          color: active ? AppTheme.blue400 : Colors.white70,
-          style: IconButton.styleFrom(
-            backgroundColor: active ? Colors.white10 : Colors.transparent,
-          ),
-          visualDensity: VisualDensity.compact,
+      return IconButton(
+        tooltip: tip,
+        onPressed: () => _setTool(tool),
+        icon: Icon(icon, size: 20),
+        color: active ? AppTheme.blue400 : Colors.white70,
+        style: IconButton.styleFrom(
+          backgroundColor: active ? Colors.white10 : Colors.transparent,
         ),
+        visualDensity: VisualDensity.compact,
       );
     }
 
@@ -173,26 +171,22 @@ extension _PresenterInk on _FullscreenPresenterState {
             ),
           const SizedBox(width: 8),
           Container(width: 1, height: 22, color: Colors.white24),
-          Tooltip(
-            message: context.l10n.d('Wis annotaties (C)'),
-            child: IconButton(
-              onPressed: _clearCurrentInk,
-              icon: const Icon(Icons.delete_outline, size: 20),
-              color: Colors.white70,
-              visualDensity: VisualDensity.compact,
-            ),
+          IconButton(
+            tooltip: context.l10n.d('Wis annotaties (C)'),
+            onPressed: _clearCurrentInk,
+            icon: const Icon(Icons.delete_outline, size: 20),
+            color: Colors.white70,
+            visualDensity: VisualDensity.compact,
           ),
-          Tooltip(
-            message: context.l10n.d('Stoppen (Esc)'),
-            child: IconButton(
-              onPressed: () {
-                _rebuild(() => _tool = null);
-                _onLaserMove(null);
-              },
-              icon: const Icon(Icons.close, size: 20),
-              color: Colors.white70,
-              visualDensity: VisualDensity.compact,
-            ),
+          IconButton(
+            tooltip: context.l10n.d('Stoppen (Esc)'),
+            onPressed: () {
+              _rebuild(() => _tool = null);
+              _onLaserMove(null);
+            },
+            icon: const Icon(Icons.close, size: 20),
+            color: Colors.white70,
+            visualDensity: VisualDensity.compact,
           ),
         ],
       ),

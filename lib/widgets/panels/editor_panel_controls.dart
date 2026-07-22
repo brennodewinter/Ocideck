@@ -121,17 +121,15 @@ class _EditorToolbar extends StatelessWidget {
           // voegt het niets toe. Eén klik zet 'm terug op het standaardprofiel.
           if (activeProfile.name != defaultProfile.name) ...[
             const SizedBox(width: 2),
-            Tooltip(
-              message:
+            IconButton(
+              tooltip:
                   '${context.l10n.d('Terug naar standaardstijl')} ${defaultProfile.name}',
-              child: IconButton(
-                onPressed: onDefaultProfileRequested,
-                icon: const Icon(Icons.restart_alt, size: 16),
-                color: AppTheme.teal,
-                visualDensity: VisualDensity.compact,
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-              ),
+              onPressed: onDefaultProfileRequested,
+              icon: const Icon(Icons.restart_alt, size: 16),
+              color: AppTheme.teal,
+              visualDensity: VisualDensity.compact,
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
             ),
           ],
           ...trailing,
@@ -333,17 +331,15 @@ class _NotesDiscardButton extends StatelessWidget {
       valueListenable: controller,
       builder: (context, value, _) {
         final enabled = value.text.trim().isNotEmpty;
-        return Tooltip(
-          message: l10n.d('Notities weggooien'),
-          child: IconButton(
-            onPressed: enabled ? onDiscard : null,
-            icon: const Icon(Icons.delete_outline, size: 16),
-            color: color,
-            disabledColor: color.withValues(alpha: 0.35),
-            visualDensity: VisualDensity.compact,
-            padding: EdgeInsets.zero,
-            constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-          ),
+        return IconButton(
+          tooltip: l10n.d('Notities weggooien'),
+          onPressed: enabled ? onDiscard : null,
+          icon: const Icon(Icons.delete_outline, size: 16),
+          color: color,
+          disabledColor: color.withValues(alpha: 0.35),
+          visualDensity: VisualDensity.compact,
+          padding: EdgeInsets.zero,
+          constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
         );
       },
     );

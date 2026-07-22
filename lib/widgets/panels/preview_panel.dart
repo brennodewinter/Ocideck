@@ -273,15 +273,13 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
           ),
           const Spacer(),
           // ── Zoom controls ──────────────────────────────────────
-          Tooltip(
-            message: l10n.d('Uitzoomen'),
-            child: IconButton(
-              icon: const Icon(Icons.remove, size: 16),
-              onPressed: _zoom > _minZoom ? _zoomOut : null,
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-              color: AppTheme.slate500,
-            ),
+          IconButton(
+            tooltip: l10n.d('Uitzoomen'),
+            icon: const Icon(Icons.remove, size: 16),
+            onPressed: _zoom > _minZoom ? _zoomOut : null,
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+            color: AppTheme.slate500,
           ),
           GestureDetector(
             onTap: _zoom != _minZoom ? _resetZoom : null,
@@ -301,15 +299,13 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
               ),
             ),
           ),
-          Tooltip(
-            message: l10n.d('Inzoomen'),
-            child: IconButton(
-              icon: const Icon(Icons.add, size: 16),
-              onPressed: _zoom < _maxZoom ? _zoomIn : null,
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-              color: AppTheme.slate500,
-            ),
+          IconButton(
+            tooltip: l10n.d('Inzoomen'),
+            icon: const Icon(Icons.add, size: 16),
+            onPressed: _zoom < _maxZoom ? _zoomIn : null,
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+            color: AppTheme.slate500,
           ),
           const SizedBox(width: 8),
           Text(
@@ -326,16 +322,14 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
             ),
           ),
           const SizedBox(width: 4),
-          Tooltip(
-            message: l10n.d('Preview inklappen'),
-            child: IconButton(
-              icon: const Icon(Icons.chevron_right, size: 18),
-              onPressed: () =>
-                  ref.read(previewCollapsedProvider.notifier).state = true,
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-              color: AppTheme.slate500,
-            ),
+          IconButton(
+            tooltip: l10n.d('Preview inklappen'),
+            icon: const Icon(Icons.chevron_right, size: 18),
+            onPressed: () =>
+                ref.read(previewCollapsedProvider.notifier).state = true,
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+            color: AppTheme.slate500,
           ),
         ],
       ),
@@ -671,16 +665,14 @@ class CollapsedPreviewBar extends ConsumerWidget {
       child: Column(
         children: [
           const SizedBox(height: 6),
-          Tooltip(
-            message: l10n.d('Preview uitklappen'),
-            child: IconButton(
-              icon: const Icon(Icons.chevron_left, size: 18),
-              onPressed: () =>
-                  ref.read(previewCollapsedProvider.notifier).state = false,
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-              color: AppTheme.slate500,
-            ),
+          IconButton(
+            tooltip: l10n.d('Preview uitklappen'),
+            icon: const Icon(Icons.chevron_left, size: 18),
+            onPressed: () =>
+                ref.read(previewCollapsedProvider.notifier).state = false,
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+            color: AppTheme.slate500,
           ),
           const SizedBox(height: 8),
           // Verticaal label "PREVIEW".

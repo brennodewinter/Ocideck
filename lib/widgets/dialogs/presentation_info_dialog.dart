@@ -506,14 +506,12 @@ class _PresentationInfoDialogState
               ),
             ),
             const SizedBox(width: 8),
-            Tooltip(
-              message: l10n.d('Stijlprofielen beheren…'),
-              child: IconButton(
-                icon: const Icon(Icons.tune, size: 18),
-                onPressed: () => SettingsDialog.show(
-                  context,
-                  initialSection: SettingsSection.presentation,
-                ),
+            IconButton(
+              tooltip: l10n.d('Stijlprofielen beheren…'),
+              icon: const Icon(Icons.tune, size: 18),
+              onPressed: () => SettingsDialog.show(
+                context,
+                initialSection: SettingsSection.presentation,
               ),
             ),
           ],

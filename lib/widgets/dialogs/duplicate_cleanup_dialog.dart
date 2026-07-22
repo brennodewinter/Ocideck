@@ -249,18 +249,14 @@ class _DuplicateCleanupDialogState
               child: CircularProgressIndicator(strokeWidth: 2),
             )
           else
-            Tooltip(
-              message: blockReason ?? l10n.d('Naar prullenbak'),
-              child: IconButton(
-                icon: const Icon(Icons.delete_outline, size: 18),
-                visualDensity: VisualDensity.compact,
-                color: blockReason == null
-                    ? AppTheme.slate600
-                    : AppTheme.slate200,
-                onPressed: blockReason == null
-                    ? () => _moveToTrash(path)
-                    : null,
-              ),
+            IconButton(
+              tooltip: blockReason ?? l10n.d('Naar prullenbak'),
+              icon: const Icon(Icons.delete_outline, size: 18),
+              visualDensity: VisualDensity.compact,
+              color: blockReason == null
+                  ? AppTheme.slate600
+                  : AppTheme.slate200,
+              onPressed: blockReason == null ? () => _moveToTrash(path) : null,
             ),
         ],
       ),
