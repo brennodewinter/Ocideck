@@ -1,5 +1,7 @@
 # OciDeck — Accessibility
 
+> **Status:** current-state description of what is and is not accessible · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 What OciDeck does for accessibility, and — the longer half of this document —
 what it does not do. Both halves are here on purpose. A tool that only lists its
 accessibility features leaves the reader to discover the gaps at the worst
@@ -46,8 +48,32 @@ following a presentation is told which slide is up.
 
 **Keyboard operation of the parts that are easy to miss.** The panel divider
 between the slide list and the editor takes focus with `Tab` and resizes with
-`←`/`→`. The add-slide dialog is fully keyboard-operable. General navigation and
-the shortcuts are in [SHORTCUTS.md](SHORTCUTS.md).
+`←`/`→`. The add-slide dialog is fully keyboard-operable, and tabbing between the
+type cards also drives the explanation below the grid, so the keyboard reaches
+the same information the mouse does. General navigation and the shortcuts are in
+[SHORTCUTS.md](SHORTCUTS.md).
+
+**Explanations attached to the control, not only beside it.** Each card in the
+add-slide dialog carries its type's explanation as a screen-reader hint, because
+the strip below the grid is a separate widget that a reader walking the cards
+never passes. The same reasoning puts the save-progress message on the status-bar
+chip as a live region: it is a statement about what is happening, so it is
+announced without moving the focus to it.
+
+**A menu bar on macOS.** `PlatformMenuBar` gives the system menu bar the app's
+actions — file, edit (including cut/copy/paste), presentation, window and help.
+A menu bar is a surface that can be walked end to end to find out what a program
+can do, instead of hunting a toolbar for icons. Items that need an
+open presentation grey out rather than disappearing, so the list a user learns
+stays the same list. Windows and Linux get their menu from the desktop
+environment; the browser build has none.
+
+**Markings that do not rest on colour alone.** Where the app points at part of a
+text, it pairs the colour with a shape. The correction after a typed question
+answer strikes through what was there too much and underlines what was missing,
+so the two lines still read apart for anyone who tells red and green apart
+poorly. On an image-pair question the two pictures carry an **A**/**B** badge
+that becomes a ✓ or ✗, rather than only a green or red border.
 
 **Contrast checking of the deck you are making.** The slide-quality panel checks
 body text, titles, table text and headers, code colours and the accent colour

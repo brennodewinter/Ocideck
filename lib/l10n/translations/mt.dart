@@ -1781,8 +1781,6 @@ const _dutchSourceMt = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Iffinalizza u ssiġilla',
   'Verzegelen': 'Issiġilla',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Iffinalizza din il-preżentazzjoni u kkalkula siġill SHA-512 fuq il-kontenut tagħha. Wara, il-fajl jiġi msakkar u ma jistax jiġi editjat aktar; il-bidliet ta\' wara jsiru viżibbli. Dan ma jistax jiġi żvolut fl-app.',
   'Handtekening (optioneel)': 'Firma (mhux obbligatorja)',
   'Naam': 'Isem',
   'Rol of functie': 'Rwol jew funzjoni',
@@ -1805,6 +1803,139 @@ const _dutchSourceAddMt = <String, String>{
   'Afbeelding niet ingesloten': 'L-istampa mhijiex inkorporata',
   'Dit diagram kon niet worden getekend': 'Dan id-dijagramma ma setax jitpinġa',
   'Brontekst van het diagram': 'It-test sors tad-dijagramma',
+  'Jouw antwoord': 'It-tweġiba tiegħek',
+  'nodig': 'meħtieġ',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'F\'preżentazzjoni msakkra l-ħarsa ġenerali qatt ma tidher; dan is-swiċċ imbagħad ma jagħmel xejn.',
+  'De twee afbeeldingen': 'Iż-żewġ immaġni',
+  'Goed gerekende antwoorden': 'Tweġibiet li jgħoddu bħala korretti',
+  'Afbeelding 1': 'Immaġni 1',
+  'Afbeelding 2': 'Immaġni 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Tgħodd biss tweġiba identika kelma b\'kelma.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'L-ispettatur jittajpja t-tweġiba. Kull tweġiba li timmarka hawn tgħodd bħala korretta; l-ittri kbar u l-ispazji żejda ma jagħmlux differenza.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'L-ispettatur jindika l-immaġni t-tajba. Waqt il-preżentazzjoni x-xellug/il-lemin jinbidlu f\'kull rawnd, għalhekk issejjaħlhomx "tax-xellug" u "tal-lemin".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Żball tat-tajping xorta jgħodd bħala korrett; kelma oħra le.',
+  'Getypt antwoord': 'Tweġiba miktuba',
+  'Goed gerekend antwoord:': 'Tweġiba li tgħodd bħala korretta:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Agħżel żewġ immaġni u mmarka dik korretta.',
+  'Nog geen goed antwoord opgegeven.': 'Għadha ma ngħatatx tweġiba korretta.',
+  'Overeenkomst': 'Qbil',
+  'Tik de juiste afbeelding aan': 'Agħfas fuq l-immaġni t-tajba',
+  'Twee afbeeldingen': 'Żewġ immaġni',
+  'Typ je antwoord': 'Ittajpja t-tweġiba tiegħek',
+  'Typ je antwoord en bevestig': 'Ittajpja t-tweġiba tiegħek u kkonferma',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Qbil meħtieġ mat-tweġiba korretta',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Immarka mill-inqas tweġiba waħda li tgħodd bħala korretta.',
+  'Vragen': 'Mistoqsijiet',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'tweġibiet, kollha murija f\'ordni każwali',
+  'fout': 'żbaljat',
+  'goed': 'korrett',
+  'goed vanaf': 'korrett minn',
+  'links en rechts wisselen per ronde':
+      'ix-xellug u l-lemin jinbidlu f\'kull rawnd',
+  'overeenkomst': 'qbil',
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Dan it-test fih kapitli. Il-qsim jipproduċi',
+  'dia\'s op.': 'slides.',
+  'Splits op hoofdstukken': 'Aqsam skont il-kapitli',
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Dan id-deck fih test IA li għadek ma rrevedejtx. Xorta tista\' tesporta; il-fajl jgħid dan hu stess u jieħu "-ai-concept" f\'ismu.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Abbozz: hawn test IA li għadu ma ġiex rivedut minn ħadd',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Iffinalizza din il-preżentazzjoni u rreġistra siġill SHA-512 fuq il-fajl issejvjat. Wara, dan jiġi msakkar u ma jistax jiġi editjat aktar; kull bidla ta\' wara ssir viżibbli. Min jirċievi r-rapport jiċċekkja s-siġill hu stess b\'sha512sum. Dan ma jistax jiġi żvolut fl-app.',
+  'Zegel en handtekening': 'Siġill u firma',
+  'Zegel nog niet vastgelegd': 'Siġill għadu mhux irreġistrat',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Għad m\'hemmx fajl issejvjat li miegħu jista\' jiġi ċċekkjat is-siġill. Issejvja d-deck.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'It-tħassir huwa mixgħul: dak li l-kontroll jikklassifika bħala data personali jiġi mgħotti bl-iswed, u l-immaġni, il-video u l-awdjo kollha ta\' din is-slide ma jmorrux fuq l-iskrin jew fl-esportazzjoni. Il-fajl markdown tiegħek iżomm kollox.',
+  'Bestand': 'Fajl',
+  'Venster': 'Tieqa',
+  'Help': 'Għajnuna',
+  'Alles selecteren': 'Agħżel kollox',
+  'Plakken': 'Waħħal',
+  'Opnieuw': 'Erġa\' agħmel',
+  'Eigenschappen': 'Proprjetajiet',
+  'Opdrachten…': 'Kmandi…',
+  'Opslaan…': 'Qed jissalva…',
+  'Uploaden naar WebDAV…': 'Qed jittella\' fuq WebDAV…',
+  'Uploaden naar S3…': 'Qed jittella\' fuq S3…',
+  'Vastleggen in git…': 'Qed jiġi kkommittjat f\'git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Qed jissalva. Li tissalva mill-ġdid ma jagħmel xejn sakemm dan jitlesta.',
+  'Klaar — privacy niet gecontroleerd': 'Lest — il-privatezza mhux iċċekkjata',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Ma sarx kontroll għal data personali, data ta\' kategoriji speċjali u sigrieti: il-kontroll tal-privatezza huwa mitfi taħt Sigurtà.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Preżentazzjonijiet li jibqgħu fajls Markdown sempliċi: jinqraw, jitfittxew u jinfetħu bi kwalunkwe editur.',
+  'sjablonen om mee te beginnen, of leeg': 'mudelli biex tibda, jew vojta',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Is-slides ta\' eżempju ta\' mudell huma bl-Olandiż. L-isem u d-deskrizzjoni jsegwu l-lingwa tiegħek; il-kontenut taddattah wara l-ħolqien.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'It-tħassir huwa mixgħul: id-data misjuba tiġi mgħottija bl-iswed u l-immaġni, il-video u l-awdjo kollha ta\' din is-slide ma jmorrux fuq l-iskrin jew fl-esportazzjoni. Il-fajl markdown tiegħek iżomm kollox.',
+  'Mijn tekst': 'It-test tiegħi',
+  'Wat zij zien': 'Dak li jaraw',
+  'Presentatiegegevens': 'Data tal-preżentazzjoni',
+  'Open presentatiegegevens': 'Iftaħ id-data tal-preżentazzjoni',
+  'Motivering van een uitsluiting': 'Ġustifikazzjoni ta\' eċċezzjoni',
+  'Motivering van een bevestiging': 'Ġustifikazzjoni ta\' konferma',
+  'Tabel koprij, kolom {kolom}':
+      'Tabella ringiela ta\' intestatura, kolonna {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabella ringiela {rij}, kolonna {kolom}',
+  'Via deze website ophalen?': 'Iġib permezz ta\' dan is-sit?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Is-server ta\' din il-preżentazzjoni ma ħalliex lill-brawżer jaqra l-fajl direttament. OciDeck jista\' jgħaddi l-indirizz lis-sit li minnu ġej OciDeck stess, u dak is-sit iġibu. B\'hekk dak is-sit jara l-indirizz sħiħ — jekk fil-link hemm ċavetta jew kodiċi, dak is-sit jarahom ukoll.',
+  'In de browser kan dit niet worden bewaard':
+      'Fil-browser dan ma jistax jiġi salvat',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Browser m\'għandux ċurkett taċ-ċwievet bħalma għandu kompjuter: dak li OciDeck jissejvja hawn jista\' jaqrah kwalunkwe skript f\'din il-paġna. Uża l-verżjoni tad-desktop — hemmhekk is-sigriet tabilħaqq imur fiċ-ċurkett taċ-ċwievet tas-sistema operattiva.',
+  'Licenties van derden': 'Liċenzji ta\' partijiet terzi',
+  'Alle licentieteksten tonen': 'Uri t-testi kollha tal-liċenzji',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck innifsu huwa taħt il-EUPL-1.2. Barra minn hekk jiġbor fih softwer ta\' partijiet terzi: il-pakketti Dart u Flutter, żewġ plugins inklużi, erba\' familji ta\' tipi ta\' karattri, il-mudell tal-wiċċ għall-verifika tal-privatezza u l-JavaScript li jivvjaġġa ma\' esportazzjoni HTML. Kull wieħed iżomm il-liċenzja tiegħu.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Dan il-fajl fih softwer ta\' partijiet terzi u xi kultant tipa ta\' karattri. Hawn taħt hemm it-testi sħaħ tal-liċenzji li jappartjenu; għaddihom magħhom meta tgħaddi dan il-fajl.',
+  'Sporen op dit apparaat': 'Traċċi fuq dan l-apparat',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Minbarra s-settings tiegħek, OciDeck iżomm ukoll lista tal-fajls riċenti u, f\'każ ta\' crash, fajl tal-irkupru bil-kontenut sħiħ tal-preżentazzjoni tiegħek. Xejn minn dan ma joħroġ minn dan l-apparat, imma qiegħed hemm — f\'test sempliċi, protett mill-kont tiegħek fuq din is-sistema operattiva u minn xejn aktar.',
+  'Recent geopende presentaties': 'Preżentazzjonijiet miftuħa dan l-aħħar',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Il-lista żżomm il-mogħdija sħiħa u l-klassifikazzjoni ta\' kull preżentazzjoni li nfetħet — flimkien, tagħrif dwar fuq xiex qed taħdem u għal min.',
+  'Recente lijst wissen': 'Ħassar il-lista tal-fajls riċenti',
+  'De recente lijst was al leeg.':
+      'Il-lista tal-fajls riċenti kienet diġà vojta.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'entrata/i mħassra mil-lista tal-fajls riċenti.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Il-fajls tal-irkupru fihom il-kontenut sħiħ tal-preżentazzjonijiet tiegħek f\'test sempliċi. Jitnaddfu awtomatikament wara 7 ijiem, u minnufih meta l-programm jingħalaq sew.',
+  'Alles terugzetten': 'Irrisettja kollox',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Iħassar kull setting, il-lista tal-fajls riċenti, il-fajls tal-irkupru, il-kopji tax-xogħol tal-git u l-passwords fil-keychain tiegħek. Il-preżentazzjonijiet tiegħek jibqgħu: huma tiegħek, mhux ta\' OciDeck.',
+  'Zet alles terug naar de begintoestand':
+      'Erġa\' daħħal kollox fl-istat inizjali',
+  'Alles terugzetten naar de begintoestand?':
+      'Terġa\' ddaħħal kollox fl-istat inizjali?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Jitħassru s-settings tiegħek, il-lista tal-fajls riċenti, il-fajls tal-irkupru, il-kopji tax-xogħol tal-git u l-passwords maħżuna. Dan ma jistax jitreġġa\' lura. Il-preżentazzjonijiet tiegħek jibqgħu.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'tibdila/tibdiliet għadhom ma ntbagħtux lil server git u jeżistu biss fuq dan l-apparat. Dawk imorru wkoll.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Kollox reġa\' daħal fl-istat inizjali.',
+  'Terugzetten is niet gelukt.': 'Ir-risettjar ma rnexxiex.',
+  'Er wacht nog werk dat niet verstuurd is': 'Għad hemm xogħol li ma ntbagħatx',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Din il-konnessjoni git għandha tibdiliet li għadhom ma ntbagħtux lis-server. Jekk tneħħi l-konnessjoni, tmur ukoll il-kopja tax-xogħol fuq dan l-apparat — u dan ix-xogħol ma jibqa\' jeżisti mkien.',
+  'Verbinding behouden': 'Żomm il-konnessjoni',
+  'Toch verwijderen': 'Neħħi xorta',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -164,39 +164,17 @@ class ExportService {
     /// altijd al heette.
     bool includeDetail = true,
   }) async {
-    // Classificatie-gate. Dit is het enige chokepoint waar elk formaat
-    // (PDF/PPTX/HTML) doorheen moet, dus de handhaving zit hier en niet in de
-    // UI-laag: zo kan geen exportpad de gate omzeilen. Fail-closed — bij een
-    // weigering wordt er niets gebouwd of weggeschreven.
-    final decision = enforcementPolicy.evaluate(tlp);
-    if (!decision.allowed) {
-      return ExportResult.fail(decision.reason!);
-    }
-    // Privacy-gate. Op hetzelfde chokepoint als de classificatie-gate, en om
-    // dezelfde reden: geen exportpad mag eromheen. De harde blokkade telt hier
-    // ook zonder de UI — een gate die alleen in een dialoog leeft, is er geen.
-    final privacyDecision = privacyPolicy.evaluate(privacySummary);
-    if (!privacyDecision.allowed &&
-        (privacyDecision.hardBlocked || !privacyAcknowledged)) {
-      const l10n = AppLocalizations(Locale('nl'));
-      return ExportResult.fail(
-        privacyDecision.hardBlocked
-            ? l10n.d(
-                'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.',
-              )
-            : l10n.d('Export afgebroken vanwege privacybevindingen.'),
-      );
-    }
-
-    final quality = qualityResult ?? const SlideQualityResult([]);
-    final qualityDecision = qualityPolicy.evaluate(
-      quality,
-      acknowledged: qualityAcknowledged,
+    final refusal = _gateOrRefuse(
+      tlp: tlp,
+      enforcementPolicy: enforcementPolicy,
+      privacyPolicy: privacyPolicy,
+      privacySummary: privacySummary,
+      privacyAcknowledged: privacyAcknowledged,
+      qualityResult: qualityResult,
+      qualityPolicy: qualityPolicy,
+      qualityAcknowledged: qualityAcknowledged,
     );
-    if (!qualityDecision.allowed) {
-      final l10n = AppLocalizations(const Locale('nl'));
-      return ExportResult.fail(formatQualityExportReason(l10n, quality));
-    }
+    if (refusal != null) return refusal;
     final markdown = audience?.markdown;
     if (format == ExportFormat.html) {
       if (markdown == null || markdown.trim().isEmpty) {
@@ -206,8 +184,16 @@ class ExportService {
       return ExportResult.fail('Geen slides om te exporteren.');
     }
     final fallbackTitle = p.basenameWithoutExtension(deckPath);
-    final docMeta =
+    final given =
         metadata ?? ExportDocumentMetadata(title: fallbackTitle, tlp: tlp);
+    // De AI-markering wordt hier gételd, niet aangenomen. `metadata` is
+    // optioneel en door de aanroeper samen te stellen; zou de melding daaruit
+    // moeten komen, dan is "vergeten door te geven" genoeg om ongecontroleerde
+    // AI-tekst zwijgend de deur uit te laten gaan. Het geprojecteerde deck
+    // weet het zelf, en dit is de ene poort waar elk formaat langskomt.
+    final docMeta = audience == null
+        ? given
+        : given.withAiMarkingFrom(audience.audience);
     final compactSuffix = compress && format == ExportFormat.pdf
         ? '-compact'
         : '';
@@ -215,10 +201,14 @@ class ExportService {
         ? outputDirectory
         : p.dirname(deckPath);
     final prefix = '${natoDtg(DateTime.now())} ';
+    // `docMeta.fileSuffix` is leeg zodra de AI-tekst is nagekeken, dus een
+    // afgerond rapport heet zoals het altijd heette. Alleen een export mét
+    // ongecontroleerde AI-tekst draagt het concept-achtervoegsel — daar is de
+    // naam de enige plek die de ontvanger ziet zónder het bestand te openen.
     final fileName =
         '$prefix${p.basenameWithoutExtension(deckPath)}'
         '${privacyProfile.fileSuffix}${includeDetail ? '' : '-beknopt'}'
-        '$compactSuffix${format.extension}';
+        '${docMeta.fileSuffix}$compactSuffix${format.extension}';
     final outputPath = p.join(dir, fileName);
     try {
       final Uint8List bytes;
@@ -341,6 +331,61 @@ class ExportService {
   /// Zware bouwstappen draaien op desktop in een eigen isolate zodat de UI
   /// responsief blijft; op web bestaan isolates niet en draait dezelfde stap
   /// op de main thread — de export duurt daar merkbaar, maar werkt.
+  /// De drie fail-closed poorten waar élke export doorheen moet: classificatie,
+  /// privacy en kwaliteit. Geeft de weigering terug, of `null` als er niets in
+  /// de weg staat.
+  ///
+  /// Ze staan hier bij elkaar en niet in de UI-laag, want dit is het enige
+  /// chokepoint waar alle formaten (PDF/PPTX/HTML) langskomen — een poort die
+  /// alleen in een dialoog leeft, is er geen. Bij een weigering wordt er niets
+  /// gebouwd en niets weggeschreven.
+  ExportResult? _gateOrRefuse({
+    required TlpLevel tlp,
+    required ClassificationEnforcementPolicy enforcementPolicy,
+    required PrivacyExportPolicy privacyPolicy,
+    required PrivacyExportSummary privacySummary,
+    required bool privacyAcknowledged,
+    required SlideQualityResult? qualityResult,
+    required QualityExportPolicy qualityPolicy,
+    required bool qualityAcknowledged,
+  }) {
+    final decision = enforcementPolicy.evaluate(tlp);
+    if (!decision.allowed) {
+      // Vastleggen dát de poort dichtging. Dit is de enige plek waar te zien is
+      // dat een uitgave op de classificatie is tegengehouden. Alleen het
+      // niveau — de reden is een gebruikersmelding en de deckinhoud hoort niet
+      // in een log.
+      logWarning(
+        'ExportService: export geweigerd op classificatie (TLP: ${tlp.name})',
+      );
+      return ExportResult.fail(decision.reason!);
+    }
+
+    final privacyDecision = privacyPolicy.evaluate(privacySummary);
+    if (!privacyDecision.allowed &&
+        (privacyDecision.hardBlocked || !privacyAcknowledged)) {
+      const l10n = AppLocalizations(Locale('nl'));
+      return ExportResult.fail(
+        privacyDecision.hardBlocked
+            ? l10n.d(
+                'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.',
+              )
+            : l10n.d('Export afgebroken vanwege privacybevindingen.'),
+      );
+    }
+
+    final quality = qualityResult ?? const SlideQualityResult([]);
+    final qualityDecision = qualityPolicy.evaluate(
+      quality,
+      acknowledged: qualityAcknowledged,
+    );
+    if (!qualityDecision.allowed) {
+      final l10n = AppLocalizations(const Locale('nl'));
+      return ExportResult.fail(formatQualityExportReason(l10n, quality));
+    }
+    return null;
+  }
+
   static Future<R> _offload<R>(FutureOr<R> Function() body) {
     if (kIsWeb) return Future.sync(body);
     return Isolate.run(body);

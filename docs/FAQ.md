@@ -1,5 +1,7 @@
 # OciDeck — Frequently Asked Questions
 
+> **Status:** current-state answers; where one conflicts with the code, the code wins · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This document answers common questions about OciDeck's features, usage, and functionality.
 
 ## General Usage
@@ -285,7 +287,17 @@ protected with a password. It was listed here as planned long after it landed;
 corrected 2026-07-18.
 
 ### Are there mobile plans?
-While OciDeck is primarily designed as a desktop application, the team continues to evaluate mobile platform support based on community feedback and requirements.
+Nothing is planned. The supported targets are macOS, Windows, Linux and the
+browser: those are the ones with `make build-*` recipes, the ones the CI
+workflow names, and the ones anything is tested on. The repository does contain
+`android/` and `ios/` folders, but only because `flutter create` writes them —
+no build target points at them, no test runs there, and the desktop file model
+(sibling asset folders next to the opened `.md`) does not fit a mobile sandbox.
+
+*(Corrected 2026-07-22: this answer said "the team continues to evaluate mobile
+platform support based on community feedback and requirements". Neither the team
+nor the feedback process it describes exists — twelve lines further down, this
+same file says there is no discussion forum, mailing list or chat channel.)*
 
 ## Contributing and Community
 

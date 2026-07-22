@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/markdown_validation.dart';
 import 'package:ocideck/models/slide_quality.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/export_service.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/redaction_manifest.dart';
@@ -161,6 +162,58 @@ void main() {
     });
   });
 
+  group('AI-concept: de auteur hoort het vóór de exportknop te lezen', () {
+    ExportBundle bundelMetAiVeld(
+      PrivacyExportProfile profile, {
+      bool includeDetail = true,
+    }) => ExportBundle(
+      audience: PrivacyProjection.forAudience(
+        Deck(
+          title: 'Test',
+          slides: [
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(aiAssistedFields: const ['description']),
+          ],
+        ),
+        profile: profile,
+      ),
+      markdown: '',
+      manifest: RedactionManifest.empty,
+      privacySummary: PrivacyExportSummary.empty,
+    );
+
+    Future<void> toon(
+      WidgetTester tester,
+      ExportBundle Function(PrivacyExportProfile, {bool includeDetail})
+      bundleFor,
+    ) => tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: ExportDialog(
+            deckPath: '/tmp/deck.md',
+            bundleFor: bundleFor,
+            exportService: ExportService(),
+          ),
+        ),
+      ),
+    );
+
+    testWidgets('meldt het achtervoegsel voordat het bestand er is', (
+      tester,
+    ) async {
+      await toon(tester, bundelMetAiVeld);
+      // Een naamsverandering die je pas achteraf ziet, is een verrassing —
+      // dezelfde reden waarom "-geredigeerd" hier ook wordt aangekondigd.
+      expect(find.textContaining('-ai-concept'), findsOneWidget);
+    });
+
+    testWidgets('zwijgt zodra de tekst is nagekeken', (tester) async {
+      await toon(tester, _emptyBundle);
+      expect(find.textContaining('-ai-concept'), findsNothing);
+    });
+  });
+
   testWidgets('shows quality banner when issues are present', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -201,5 +254,39 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Exporteer als PDF'), findsNothing);
+  });
+
+  testWidgets('de groene balk belooft niets als de privacycontrole uit staat', (
+    tester,
+  ) async {
+    Future<void> pump({required bool privacyChecksEnabled}) =>
+        tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ExportDialog(
+                deckPath: '/tmp/deck.md',
+                bundleFor: _emptyBundle,
+                exportService: ExportService(),
+                privacyChecksEnabled: privacyChecksEnabled,
+              ),
+            ),
+          ),
+        );
+
+    await pump(privacyChecksEnabled: true);
+    expect(
+      find.textContaining('Geen kwaliteitsproblemen gevonden'),
+      findsOneWidget,
+    );
+
+    // Zelfde deck, zelfde lege uitslag — maar er is niet gekeken. Dan mag de
+    // balk dat niet als "schoon" verkopen, en moet hij zeggen waar het
+    // aanstaat.
+    await pump(privacyChecksEnabled: false);
+    expect(
+      find.textContaining('Geen kwaliteitsproblemen gevonden'),
+      findsNothing,
+    );
+    expect(find.textContaining('de privacycontrole staat uit'), findsOneWidget);
   });
 }

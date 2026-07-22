@@ -8,6 +8,7 @@ import '../../models/slide.dart';
 import '../../models/timeline.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/image_service.dart';
+import '../../services/rich_text_chapters.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/split_run.dart';
 import '../../state/deck_provider.dart';
@@ -131,6 +132,11 @@ class EditorPanel extends ConsumerWidget {
                     // Spring naar het nieuwe vervolgdeel zodat je het meteen ziet.
                     editorNotifier.select(idx + 1);
                   },
+                  // Alleen aanbieden als er echt iets te knippen valt; de editor
+                  // toont de knop niet bij een null-callback.
+                  onSplitChapters: richTextChapterCount(slide) > 1
+                      ? () => deckNotifier.splitIntoChapters(idx)
+                      : null,
                 ),
                 ..._belowEditorControls(
                   slide: slide,
@@ -320,6 +326,7 @@ class EditorPanel extends ConsumerWidget {
     bool canContinueSplit = false,
     bool nestedInScrollView = false,
     void Function(int atMs)? onSplitVideo,
+    VoidCallback? onSplitChapters,
     List<Cvss4Severity> deckFindingSeverities = const [],
     int deckResolvedCount = 0,
   }) {
@@ -336,6 +343,7 @@ class EditorPanel extends ConsumerWidget {
         canContinueSplit: canContinueSplit,
         nestedInScrollView: nestedInScrollView,
         onSplitVideo: onSplitVideo,
+        onSplitChapters: onSplitChapters,
         deckFindingSeverities: deckFindingSeverities,
         deckResolvedCount: deckResolvedCount,
       ),

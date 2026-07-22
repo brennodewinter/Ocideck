@@ -1,6 +1,8 @@
 # OciDeck — Git-Repository Storage (Design)
 
-> **Status: phases 0 through 6 have landed.** Reading, writing, the native `git`
+> **Status:** design; phases 0–6 landed — what remains is verification, not construction · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
+> **Phases 0 through 6 have landed.** Reading, writing, the native `git`
 > plane, releases, the GitHub and GitLab adapters and the cross-deck asset index
 > all exist — see §12 for what each phase actually delivered, together with the
 > gaps each one recorded rather than hid. What remains open is verification, not
@@ -651,6 +653,17 @@ does**.
 > non-empty layers count; a warning that also fires when nothing is at stake
 > trains people to dismiss it. Note that the §9.7 merge semantics therefore have
 > nothing to merge yet: they describe the sidecars once they are committed.
+>
+> *Updated 22-07-2026:* the **document seal and the visible signature** joined
+> that list. They used to ride along inside `deck.md`'s front matter, so a
+> sealed report survived a git round trip by accident; since they moved to
+> `<name>.seal.json` (FILE_FORMAT §6.6) they do not. The failure mode is worse
+> than a lost ink layer — a sealed report comes back reading as one that was
+> never sealed — so `gitDeckOmissions` now reports it and the dialog names it.
+> Committing the seal file itself is the real fix and belongs with the sidecar
+> work above; note that a seal has no merge semantics to design, because a
+> sealed deck is frozen and two versions of one seal is not a conflict but a
+> mistake.
 
 ### 9.2 Opening / loading
 

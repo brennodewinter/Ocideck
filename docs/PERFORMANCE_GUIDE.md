@@ -1,5 +1,7 @@
 # OciDeck — Performance Guide
 
+> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This document describes OciDeck's performance characteristics using the **actual
 limits and sizes enforced in the codebase** (with `file:line` citations), plus a
 few measured figures. Where a number is a hard cap in code, it is authoritative;
@@ -47,8 +49,15 @@ optimisation.
 - PDF/PPTX exports rasterize each slide to a PNG at a default **1920 × 1080**
   (16:9) target (`lib/services/slide_rasterizer.dart`, `logicalSize` and `targetWidth`); rasterization cost
   scales with slide count and per-slide complexity.
+- The slide count it scales with is the **expanded** one: an overflowing finding
+  and a rich-text body longer than one slide each become several full-size slides
+  before rasterization (ARCHITECTURE § *Render-time pagination*), so a deck with
+  long prose costs more images than it has slides in the editor.
 - HTML export pre-renders charts to inline SVG in Dart and inlines the vendored
-  JS/CSS, producing a self-contained file (see measured bundle sizes below).
+  JS/CSS (see measured bundle sizes below). Slide images are the exception — they
+  stay relative `<img src>` references and are not inlined. *Corrected 2026-07-22:
+  this called the result "a self-contained file", the same overstatement corrected
+  in ARCHITECTURE and USER_GUIDE on 2026-07-21.*
 
 ## Network limits
 
@@ -110,11 +119,7 @@ project folders reasonably shallow.
 |---|---|---|
 | Max file length | **1000 lines** | `tool/check_conventions.dart`, `maxFileLines` |
 | Max method/function length | **150 lines** | `tool/check_method_length.dart:26` |
-<<<<<<< HEAD
 | Coverage floor | **80 %** line coverage | `Makefile`, the `coverage` target |
-=======
-| Coverage floor | **79 %** line coverage | `Makefile`, the `coverage` target |
->>>>>>> 26b3fa16 (docs: breng de gidsen in overeenstemming met de vijf gedichte paden)
 
 ## Measured figures
 

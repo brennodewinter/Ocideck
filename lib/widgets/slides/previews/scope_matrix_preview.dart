@@ -31,53 +31,35 @@ class _ScopeMatrixPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     final pad = w * 0.07; // vertical margin
     final hPad = w * 0.045; // narrower side margin — use the width (feedback)
-    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final spec = ScopeMatrixSpec.fromSlide(slide.title, slide.tableRows);
-    final accent = _hexColor(profile.accentColor);
+    final accent = AppTheme.parseHexColor(profile.accentColor);
 
-    return Container(
-      color: Colors.white,
-      child: SizedBox.expand(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          alignment: Alignment.topLeft,
-          child: SizedBox(
-            width: w,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                hPad,
-                pad + safe.top,
-                hPad,
-                _logoAwareBottomPadding(pad, safe.bottom),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (spec.title.isNotEmpty)
-                    Text(
-                      spec.title,
-                      style: _applyFont(
-                        font,
-                        TextStyle(
-                          fontSize: w * 0.04,
-                          fontWeight: FontWeight.w700,
-                          color: AppTheme.navy,
-                        ),
-                      ),
-                    ),
-                  SizedBox(height: w * 0.02),
-                  _coverage(context, spec, accent),
-                  SizedBox(height: w * 0.03),
-                  _headerRow(context),
-                  Divider(height: w * 0.02, color: AppTheme.slate300),
-                  for (final row in spec.rows) _dataRow(context, row),
-                ],
+    return _PreviewScaffold(
+      width: w,
+      slide: slide,
+      profile: profile,
+      horizontalPadding: hPad,
+      verticalPadding: pad,
+      children: [
+        if (spec.title.isNotEmpty)
+          Text(
+            spec.title,
+            style: _applyFont(
+              font,
+              TextStyle(
+                fontSize: w * 0.04,
+                fontWeight: FontWeight.w700,
+                color: AppTheme.navy,
               ),
             ),
           ),
-        ),
-      ),
+        SizedBox(height: w * 0.02),
+        _coverage(context, spec, accent),
+        SizedBox(height: w * 0.03),
+        _headerRow(context),
+        Divider(height: w * 0.02, color: AppTheme.slate300),
+        for (final row in spec.rows) _dataRow(context, row),
+      ],
     );
   }
 

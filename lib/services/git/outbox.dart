@@ -201,5 +201,46 @@ class Outbox {
   Future<void> remove(String deckDir) async =>
       (await _prefs()).remove(_keyFor(deckDir));
 
+  /// Elke repo-scope die op dit moment iets in de wachtrij heeft.
+  ///
+  /// Voor de opruimer, die niet weet welke repo's er ooit zijn ingesteld: een
+  /// verbinding kan al verwijderd zijn terwijl haar wachtrij nog staat. Leest
+  /// alleen de sleutels, nooit de inhoud.
+  Future<Set<String>> knownScopes() async {
+    final prefs = await _prefs();
+    final out = <String>{};
+    for (final key in prefs.getKeys()) {
+      if (!key.startsWith(_prefix)) continue;
+      final rest = key.substring(_prefix.length);
+      final sep = rest.indexOf('::');
+      if (sep > 0) out.add(rest.substring(0, sep));
+    }
+    return out;
+  }
+
+  /// Gooi de hele wachtrij van déze repo weg; geeft terug hoeveel sleutels dat
+  /// waren.
+  ///
+  /// Alleen voor het opruimen van een verbinding die verdwijnt. De sleutelkennis
+  /// hoort hier en niet bij de aanroeper: een opruimer die zelf op
+  /// `git_outbox::` gaat matchen, neemt bij de eerste scope-wijziging ook de
+  /// wachtrij van een ándere repo mee — en dat is stil dataverlies.
+  ///
+  /// Zonder scope raakt dit alleen de ongescopede sleutels, om dezelfde reden
+  /// als in [pending].
+  Future<int> clear() async {
+    final prefs = await _prefs();
+    var removed = 0;
+    for (final key in prefs.getKeys().toList()) {
+      if (!key.startsWith(_scopedPrefix)) continue;
+      if (scope.isEmpty && key.substring(_prefix.length).contains('::')) {
+        continue;
+      }
+      await prefs.remove(key);
+      removed++;
+    }
+    return removed;
+  }
+
   Future<bool> get isEmpty async => (await pending()).isEmpty;
 }

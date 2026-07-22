@@ -1,3 +1,15 @@
+// ── lib/services/finding_templates/ ──────────────────────────────────────────
+// Alleen inhoud: één bestand per taal met de sjabloonteksten, plus dit bestand
+// dat ze op taalcode ontsluit. Er staat hier geen logica — het parsen, zoeken
+// en kiezen van een sjabloon zit in ../finding_template_library.dart, en de
+// datatypes in lib/models/finding_template.dart.
+//
+// Een taal toevoegen is dus: een `<code>.dart` erbij en een regel in de map
+// hieronder. Wat er per bestand wél en niet vertaald mag worden, staat in de
+// kop van elk taalbestand en wordt bewaakt door
+// test/finding_template_languages_test.dart. Overzicht: docs/SOURCE_MAP.md.
+// ─────────────────────────────────────────────────────────────────────────────
+//
 // De sjabloonbronnen per taal, bij elkaar gebracht.
 //
 // Eén bestand per taal, net als lib/l10n/translations/: sjablonen zijn

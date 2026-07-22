@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.2.0+1",
-  "documentNamespace": "https://ocideck.app/spdx/0262bf0e-ae65-5c6e-8a1b-d6a6f32f329e",
+  "documentNamespace": "https://ocideck.app/spdx/2833013b-9163-5f72-8b7c-1a2946ee81d1",
   "creationInfo": {
-    "created": "2026-07-22T00:16:27.366483Z",
+    "created": "2026-07-22T09:04:23.436749Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -4282,21 +4282,35 @@
       "SPDXID": "SPDXRef-198-desktop-multi-window",
       "name": "desktop_multi_window",
       "versionInfo": "0.3.0",
-      "downloadLocation": "https://github.com/MixinNetwork/flutter-plugins",
+      "downloadLocation": "https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window",
       "filesAnalyzed": false,
-      "licenseConcluded": "MIT",
-      "licenseDeclared": "MIT",
-      "comment": "Vendored fork in third_party/desktop_multi_window (local native changes)."
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "10296c973c10a77f20929aa163224c21aa9883cb094dd0e69dda6b0b4ef57860"
+        }
+      ],
+      "sourceInfo": "Vendored from https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window at commit 58a5868d1cb9031defa5db5868d6aaea0486d24a.",
+      "comment": "Vendored fork in third_party/desktop_multi_window; the local changes are recorded in third_party/desktop_multi_window/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
     },
     {
       "SPDXID": "SPDXRef-199-screen-retriever-macos",
       "name": "screen_retriever_macos",
       "versionInfo": "0.2.0",
-      "downloadLocation": "https://github.com/leanflutter/screen_retriever",
+      "downloadLocation": "https://github.com/leanflutter/screen_retriever/tree/ed1e52204d75b69330fb4b0e0b8d4d57e3c53833/packages/screen_retriever_macos",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
-      "comment": "Vendored fork in third_party/screen_retriever_macos (local native changes)."
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c2dd845611ec1e289ae202094766bb0591017f598ff7f289cb4f53addfaaed53"
+        }
+      ],
+      "sourceInfo": "Vendored from https://github.com/leanflutter/screen_retriever/tree/ed1e52204d75b69330fb4b0e0b8d4d57e3c53833/packages/screen_retriever_macos at commit ed1e52204d75b69330fb4b0e0b8d4d57e3c53833.",
+      "comment": "Vendored fork in third_party/screen_retriever_macos; the local changes are recorded in third_party/screen_retriever_macos/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
     }
   ],
   "relationships": [

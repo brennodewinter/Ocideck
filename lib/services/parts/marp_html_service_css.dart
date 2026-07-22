@@ -59,6 +59,10 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 .slide code{font-family:SFMono-Regular,Consolas,"Liberation Mono",monospace}
 .slide blockquote{border-left:4px solid #ccc;margin:.5em 0;padding-left:16px;color:#555}
 .slide th,.slide td{border:1px solid #ccc;padding:6px 12px;font-size:20px}
+
+/* De melding dat er ongecontroleerde AI-tekst in dit document staat.
+   Kwam van de juridische tak; deze CSS verhuisde intussen hierheen. */
+.ai-export-banner{position:fixed;left:0;right:0;background:#3a2c00;color:#ffd75e;text-align:center;font:600 13px/2.4 system-ui,sans-serif;z-index:9998}
 ''';
 
 /// De stylesheet die vóór het themablok in elk document gaat: de structuur plus

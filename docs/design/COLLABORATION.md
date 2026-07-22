@@ -1,6 +1,8 @@
 # OciDeck — Real-time Collaboration, Presenting & Calls (Design)
 
-> **Status: design proposal — not yet implemented.**
+> **Status:** design proposal — unbuilt · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
+> **A design proposal — not yet implemented.**
 > This document describes a *future* capability and the architecture chosen for
 > it. It is deliberately kept separate from the current-state contributor docs
 > ([`ARCHITECTURE.md`](../ARCHITECTURE.md), [`SOURCE_MAP.md`](../SOURCE_MAP.md),

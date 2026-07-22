@@ -737,6 +737,38 @@ void main() {
       );
     });
 
+    // Bij een beeldparen-vraag is de afbeelding het antwoord zelf. Ontbreekt
+    // ze, dan staat er in de zaal een lege tegel waar een antwoord hoort.
+    test('detects a missing answer image on an image-pair question', () {
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.question).copyWith(
+            customMarkdown: const QuestionSpec(
+              kind: QuestionKind.imagePair,
+              prompt: 'Welke is echt?',
+              answers: [
+                QuestionAnswer(
+                  image: '/elders/bestaat-niet.png',
+                  correct: true,
+                ),
+                QuestionAnswer(image: '/elders/ook-niet.png'),
+              ],
+            ).toBlock(),
+          ),
+        ],
+      );
+
+      expect(
+        analyzer
+            .analyze(deck)
+            .issues
+            .where((i) => i.kind == SlideQualityIssueKind.missingMediaFile)
+            .length,
+        2,
+      );
+    });
+
     // Juist een deck dat nog niet is opgeslagen heeft de grootste kans op een
     // kapotte verwijzing — daar hangt de slide nog aan een pad elders op de
     // schijf. Tot voor kort zweeg de controle precies daar.
@@ -884,6 +916,88 @@ void main() {
             .issues
             .any((i) => i.kind == SlideQualityIssueKind.missingMediaFile),
         isFalse,
+      );
+    });
+
+    // Een afbeelding in de vrije tekst kan net zo goed ontbreken als eentje in
+    // een afbeeldingsveld; de melding wijst met `customMarkdown` de plek aan.
+    test('detects a missing image referenced from the free text', () async {
+      final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
+      addTearDown(() => dir.delete(recursive: true));
+
+      final deck = Deck(
+        title: 'Demo',
+        projectPath: dir.path,
+        slides: [
+          Slide.create(SlideType.freeMarkdown).copyWith(
+            title: 'Verhaal',
+            customMarkdown: 'Zie ![de foto](images/weg.png) hierboven.',
+          ),
+        ],
+      );
+
+      final issue = analyzer
+          .analyze(deck)
+          .issues
+          .firstWhere((i) => i.kind == SlideQualityIssueKind.missingMediaFile);
+      expect(issue.field, 'customMarkdown');
+      expect(issue.args['path'], 'images/weg.png');
+    });
+
+    test(
+      'reports a free-text image that lies outside the presentation',
+      () async {
+        final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
+        addTearDown(() => dir.delete(recursive: true));
+
+        final deck = Deck(
+          title: 'Demo',
+          projectPath: dir.path,
+          slides: [
+            Slide.create(SlideType.freeMarkdown).copyWith(
+              title: 'Verhaal',
+              customMarkdown: 'Zie ![de foto](/elders/foto.png) hierboven.',
+            ),
+          ],
+        );
+
+        expect(
+          analyzer
+              .analyze(deck)
+              .issues
+              .any((i) => i.kind == SlideQualityIssueKind.externalMediaFile),
+          isTrue,
+        );
+      },
+    );
+
+    test('stays quiet about a free-text image that is really there', () async {
+      final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
+      addTearDown(() => dir.delete(recursive: true));
+      Directory('${dir.path}/images').createSync();
+      File('${dir.path}/images/er.png').writeAsStringSync('x');
+
+      final deck = Deck(
+        title: 'Demo',
+        projectPath: dir.path,
+        slides: [
+          Slide.create(SlideType.freeMarkdown).copyWith(
+            title: 'Verhaal',
+            customMarkdown: 'Zie ![de foto](images/er.png) hierboven.',
+          ),
+        ],
+      );
+
+      expect(
+        analyzer
+            .analyze(deck)
+            .issues
+            .where(
+              (i) =>
+                  i.kind == SlideQualityIssueKind.missingMediaFile ||
+                  i.kind == SlideQualityIssueKind.externalMediaFile,
+            ),
+        isEmpty,
       );
     });
 

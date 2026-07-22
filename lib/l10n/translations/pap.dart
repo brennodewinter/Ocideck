@@ -717,8 +717,6 @@ const _dutchSourcePap = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Finalisá & seyá',
   'Verzegelen': 'Seyá',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Finalisá e presentashon aki i kalkulá un seyo SHA-512 riba su kontenido. Despues e archivo ta wòrdu será i no por wòrdu editá mas; kambionan posterior ta bira visibel. Esaki no por wòrdu deshasí den e app.',
   'Handtekening (optioneel)': 'Firma (opshonal)',
   'Naam': 'Nòmber',
   'Rol of functie': 'Ròl òf funshon',
@@ -740,6 +738,139 @@ const _dutchSourceAddPap = {
   'Afbeelding niet ingesloten': 'Imagen no inkluí',
   'Dit diagram kon niet worden getekend': 'No por a dibuhá e diagrama aki',
   'Brontekst van het diagram': 'Teksto fuente di e diagrama',
+  'Jouw antwoord': 'Bo kontesta',
+  'nodig': 'nesesario',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Ku un presentashon blokeá e resúmen nunka ta aparesé; e switch aki no ta hasi nada anto.',
+  'De twee afbeeldingen': 'E dos imágennan',
+  'Goed gerekende antwoorden': 'Kontestanan ku ta konta komo korekto',
+  'Afbeelding 1': 'Imágen 1',
+  'Afbeelding 2': 'Imágen 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Solamente un kontesta literalmente igual ta konta.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'E spektadó ta skirbi e kontesta. Tur kontesta ku bo ta marka akinan ta konta komo korekto; lèter kapital i spasio ekstra no ta importá.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'E spektadó ta indiká e imágen korekto. Ora di presentá, robes/drechi ta kambia kada ronde, p\'esei no yama nan "robes" i "drechi".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Un fout di tik ta konta ainda komo korekto; un otro palabra nò.',
+  'Getypt antwoord': 'Kontesta skirbí',
+  'Goed gerekend antwoord:': 'Kontesta ku ta konta komo korekto:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Skohe dos imágen i marka esun korekto.',
+  'Nog geen goed antwoord opgegeven.':
+      'Ainda no a duna ningun kontesta korekto.',
+  'Overeenkomst': 'Similaridat',
+  'Tik de juiste afbeelding aan': 'Toka e imágen korekto',
+  'Twee afbeeldingen': 'Dos imágen',
+  'Typ je antwoord': 'Skirbi bo kontesta',
+  'Typ je antwoord en bevestig': 'Skirbi bo kontesta i konfirmá',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Similaridat rekerí ku e kontesta korekto',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Marka por lo ménos un kontesta ku ta konta komo korekto.',
+  'Vragen': 'Preguntanan',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'kontesta, tur mustrá den òrdu na zar',
+  'fout': 'inkorekto',
+  'goed': 'korekto',
+  'goed vanaf': 'korekto for di',
+  'links en rechts wisselen per ronde': 'robes i drechi ta kambia kada ronde',
+  'overeenkomst': 'di similaridat',
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'E teksto aki tin kapítulonan. Si bo parti e, bo ta haña',
+  'dia\'s op.': 'slide.',
+  'Splits op hoofdstukken': 'Parti pa kapítulo',
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Den e deck aki tin teksto di IA ku bo no a revisá ainda. Bo por eksportá tòg; e file mes ta bisa esei i ta haña "-ai-concept" den su nòmber.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Konsepto: aki tin teksto di IA ku ainda no a ser revisá',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalisá e presentashon aki i registrá un seyo SHA-512 riba e archivo wardá. Despues e ta será i no por wòrdu editá mas; kada kambio posterior ta bira visibel. Ken ta risibí e rapòrt ta kontrolá e seyo su mes ku sha512sum. Esaki no por wòrdu deshasí den e app.',
+  'Zegel en handtekening': 'Seyo i firma',
+  'Zegel nog niet vastgelegd': 'Seyo no registrá ainda',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'No tin ainda un archivo wardá pa kontrolá e seyo kuné. Warda e deck.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Laga afó ta prendí: loke e kontròl ta konsiderá komo dato personal ta wòrdu tapá pretu, i tur imagen, video i audio di e dia aki no ta bai na pantaya ni na eksportashon. Bo archivo markdown ta warda tur kos.',
+  'Bestand': 'Archivo',
+  'Venster': 'Bentana',
+  'Help': 'Yudansa',
+  'Alles selecteren': 'Selektá tur',
+  'Plakken': 'Pega',
+  'Opnieuw': 'Hasi atrobe',
+  'Eigenschappen': 'Propiedatnan',
+  'Opdrachten…': 'Komandonan…',
+  'Opslaan…': 'Ta warda…',
+  'Uploaden naar WebDAV…': 'Ta subi na WebDAV…',
+  'Uploaden naar S3…': 'Ta subi na S3…',
+  'Vastleggen in git…': 'Ta registrá den git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Ta warda. Warda atrobe no ta hasi nada te ora esaki ta kla.',
+  'Klaar — privacy niet gecontroleerd': 'Kla — privasidat no kontrolá',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'No a buska datos personal, datos spesial i sekretonan: e kontròl di privasidat ta pagá bou di Seguridat.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Presentashonnan ku ta keda simpel archivo Markdown: legibel, buskabel i bo por habri nan ku kualke editor.',
+  'sjablonen om mee te beginnen, of leeg': 'plantia pa kuminsá kuné, òf bashí',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'E dianan di ehèmpel di un plantia ta na hulandes. Nòmber i deskripshon ta sigui bo mes idioma; e kontenido bo ta adaptá despues di krea e presentashon.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Laga afó ta prendí: datos hañá ta wòrdu tapá pretu i tur imagen, video i audio di e dia aki no ta bai na pantaya ni na eksportashon. Bo archivo markdown ta warda tur kos.',
+  'Mijn tekst': 'Mi teksto',
+  'Wat zij zien': 'Loke nan ta mira',
+  'Presentatiegegevens': 'Datos di e presentashon',
+  'Open presentatiegegevens': 'Habri datos di e presentashon',
+  'Motivering van een uitsluiting': 'Motivashon di un eksklushon',
+  'Motivering van een bevestiging': 'Motivashon di un konfirmashon',
+  'Tabel koprij, kolom {kolom}': 'Tabel fila di kabes, kolòm {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabel fila {rij}, kolòm {kolom}',
+  'Via deze website ophalen?': 'Buska via e website aki?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'E server di e presentashon aki no a laga e browser lesa e archivo direktamente. OciDeck por pasa e adrès pa e website di unda OciDeck mes ta bini, i e website ei ta buska. Asina e website ei ta mira e adrès kompleto — si tin un yabi of un kódigo den e link, e website ei ta mira esei tambe.',
+  'In de browser kan dit niet worden bewaard':
+      'Den e browser esaki no por wòrdu wardá',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Un browser no tin un yabero manera un komputadó tin: loke OciDeck lo warda akinan, kualke skript riba e página aki por lesa. Usa e version desktop — einan e sekreto sí ta bai den e yabero di e sistema operativo.',
+  'Licenties van derden': 'Lisensia di terseronan',
+  'Alle licentieteksten tonen': 'Mustra tur teksto di lisensia',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck mes ta bou di EUPL-1.2. Ademas e ta inkluí software di terseronan: e paketenan di Dart i Flutter, dos plugin inkorporá, kuater famia di lèter, e modelo di kara pa e kontrol di privasidat i e JavaScript ku ta bai huntu den un eksportashon HTML. Kada un ta warda su mes lisensia.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'E archivo aki tin software di terseronan i tin biaha un tipo di lèter. Abou ta e tekstonan kompleto di lisensia ku ta pertenesé na nan; manda nan huntu ora bo pasa e archivo aki.',
+  'Sporen op dit apparaat': 'Rastronan riba e aparato aki',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Banda di bo konfigurashonnan, OciDeck ta warda tambe un lista di archivonan resien i, ora un crash sosodé, un archivo di rekuperashon ku henter e kontenido di bo presentashon. Nada di esei no ta sali for di e aparato aki, ma e ta einan — den teksto simpel, protehá pa bo kuenta riba e sistema operativo aki i nada mas.',
+  'Recent geopende presentaties': 'Presentashonnan habrí resientemente',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'E lista ta warda e kaminda kompleto i e klasifikashon di kada presentashon ku tabata habrí — huntu un dato tokante kiko bo ta traha riba dje i pa ken.',
+  'Recente lijst wissen': 'Wisa e lista di archivonan resien',
+  'De recente lijst was al leeg.':
+      'E lista di archivonan resien tabata bashí kaba.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'entrada(nan) kitá for di e lista di archivonan resien.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Archivonan di rekuperashon ta kontené henter e kontenido di bo presentashonnan den teksto simpel. Nan ta ser limpiá outomátikamente despues di 7 dia, i mesora ora e programa sera bon.',
+  'Alles terugzetten': 'Poni tur kos bèk',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Ta wisa tur konfigurashon, e lista di archivonan resien, e archivonan di rekuperashon, e kopianan di trabou di git i e kontraseñanan den bo yaberu. Bo presentashonnan ta keda: nan ta di bo, no di OciDeck.',
+  'Zet alles terug naar de begintoestand':
+      'Poni tur kos bèk na e estado inisial',
+  'Alles terugzetten naar de begintoestand?':
+      'Poni tur kos bèk na e estado inisial?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Bo konfigurashonnan, e lista di archivonan resien, e archivonan di rekuperashon, e kopianan di trabou di git i e kontraseñanan wardá lo wòrdu wisá. Esaki no por wòrdu deshasí. Bo presentashonnan ta keda.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'kambio(nan) ainda no a wòrdu mandá pa un servidó git i ta eksistí solamente riba e aparato aki. Esakinan tambe ta bai.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Tur kos a wòrdu poní bèk na e estado inisial.',
+  'Terugzetten is niet gelukt.': 'E reset no a lukra.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Tin trabou ku ainda no a wòrdu mandá',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'E konekshon git aki tin kambionan ku ainda no a wòrdu mandá pa e servidó. Si bo kita e konekshon, e kopia di trabou riba e aparato aki ta bai tambe — i e trabou aki lo no eksistí niun kaminda mas.',
+  'Verbinding behouden': 'Wanta e konekshon',
+  'Toch verwijderen': 'Kita tòg',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

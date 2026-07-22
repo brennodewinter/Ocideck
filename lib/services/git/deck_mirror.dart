@@ -43,6 +43,26 @@ abstract class DeckMirror {
   /// alsof. Beide huidige stores melden waar — op desktop bestanden, op web de
   /// sleutel/waarde-opslag van de browser (§8.3).
   bool get isDurable;
+
+  /// Of de werkkopie van een deck weg mag zodra het werk bevestigd op de forge
+  /// staat.
+  ///
+  /// **Waar voor [DraftMirror].** Dat concept bestáát alleen om werk vast te
+  /// houden tot het geland is; daarna is het een kopie zonder taak. Op web
+  /// staat het in de sleutel/waarde-opslag van de browser — gedeeld met wie
+  /// dat profiel verder gebruikt — en het draagt de volledige markdown, de
+  /// gebruikersnotities en de annotaties. Voor een deck met een
+  /// TLP-classificatie of persoonsgegevens is blijven staan de verkeerde
+  /// standaard.
+  ///
+  /// **Onwaar voor `NativeGitMirror`.** Daar is de werkkopie een échte clone,
+  /// en dat is precies waar `openDeckFromGitNative` het deck uit leest.
+  /// Weghalen zou het bestand onder de gebruiker vandaan trekken en de historie
+  /// die de clone draagt onbruikbaar maken. Die clone staat bovendien in de
+  /// app-support-map, met de accountbescherming van het besturingssysteem
+  /// eromheen — niet in een opslag die het hele browserprofiel deelt. Hier
+  /// gelden dus andere feiten, niet alleen een andere implementatie.
+  bool get discardsLandedWork;
 }
 
 /// De werkkopie zonder git: één concept per deck, dat in Fase 2 als één commit
@@ -61,6 +81,9 @@ class DraftMirror implements DeckMirror {
 
   @override
   bool get isDurable => _store.isDurable;
+
+  @override
+  bool get discardsLandedWork => true;
 
   void _requireDeckDir(String deckDir) {
     if (GitRepoLayout.deckNameOf(deckDir) == null) {

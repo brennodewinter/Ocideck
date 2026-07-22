@@ -3,6 +3,8 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/miauw_compliance.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/document_integrity.dart';
+import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/miauw_compliance_analyzer.dart';
 
 const _analyzer = MiauwComplianceAnalyzer();
@@ -83,13 +85,25 @@ void main() {
       expect(_status(r, '1.5'), EisStatus.voldaan); // report version
     });
 
-    test('sealing satisfies 1.1', () {
+    test('1.1 vraagt een zegel dat klópt, niet een zegel dat er staat', () {
       final open = _analyzer.analyze(Deck(title: 'X'));
       expect(_status(open, '1.1'), EisStatus.open);
-      final sealed = _analyzer.analyze(
-        Deck(title: 'X', finalized: true, sealHash: 'abc123'),
+
+      // Een verzegeld én opgeslagen rapport: de hash gaat over de bytes van de
+      // `.md`, dus die ontstaat bij het schrijven.
+      final md = MarkdownService();
+      final afgerond = DocumentIntegrity(md).seal(Deck(title: 'X'));
+      final verzegeld = DocumentIntegrity.recordWrittenBytes(
+        afgerond,
+        md.generateDeck(afgerond),
       );
-      expect(_status(sealed, '1.1'), EisStatus.voldaan);
+      expect(_status(_analyzer.analyze(verzegeld), '1.1'), EisStatus.voldaan);
+
+      // En het geval waar het om gaat: een gemanipuleerd rapport draagt zijn
+      // oude hash gewoon mee. Dat mag zich niet als voldaan melden in het
+      // overzicht dat een auditor leest.
+      final geknoeid = verzegeld.copyWith(fileHash: 'iets-anders');
+      expect(_status(_analyzer.analyze(geknoeid), '1.1'), EisStatus.open);
     });
 
     test('a waiver marks the EIS excluded and carries the reason', () {

@@ -89,6 +89,55 @@ void main() {
     expect(c.hasMeaningfulData, isTrue);
   });
 
+  group('vraagpogingen', () {
+    test('elke beantwoorde poging komt apart in de run', () {
+      final c = RehearsalController(now: clock);
+      c.observe('q', 3);
+
+      c.startQuestion('q', 3);
+      advance(const Duration(seconds: 12));
+      c.finishQuestion(correct: false);
+
+      c.startQuestion('q', 3);
+      advance(const Duration(seconds: 4));
+      c.finishQuestion(correct: true);
+
+      final attempts = c.finish().questionAttempts;
+      expect(attempts.length, 2);
+      expect(attempts[0].spent, const Duration(seconds: 12));
+      expect(attempts[0].correct, isFalse);
+      expect(attempts[1].spent, const Duration(seconds: 4));
+      expect(attempts[1].correct, isTrue);
+      expect(attempts.every((a) => a.slideId == 'q' && a.index == 3), isTrue);
+    });
+
+    test('een vraag die je verlaat zonder te antwoorden telt niet mee', () {
+      final c = RehearsalController(now: clock);
+      c.startQuestion('q', 0);
+      advance(const Duration(seconds: 30));
+      // Geen finishQuestion: doorgebladerd zonder antwoord.
+      expect(c.finish().questionAttempts, isEmpty);
+    });
+
+    test('een tweede oordeel over dezelfde poging telt niet dubbel', () {
+      final c = RehearsalController(now: clock);
+      c.startQuestion('q', 0);
+      advance(const Duration(seconds: 5));
+      c.finishQuestion(correct: false);
+      c.finishQuestion(correct: false);
+      expect(c.finish().questionAttempts.length, 1);
+    });
+
+    test('reset wist ook de vraagpogingen', () {
+      final c = RehearsalController(now: clock);
+      c.startQuestion('q', 0);
+      advance(const Duration(seconds: 5));
+      c.finishQuestion(correct: true);
+      c.reset();
+      expect(c.finish().questionAttempts, isEmpty);
+    });
+  });
+
   test('delta beschrijft over/onder de doeltijd', () {
     final c = RehearsalController(
       now: clock,

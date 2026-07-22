@@ -395,6 +395,49 @@ void main() {
     );
   });
 
+  // Een afbeelding in de vrije tekst moet net zo goed voorgeladen worden als
+  // eentje in een afbeeldingsveld: zonder precache is hij nog niet gedecodeerd
+  // wanneer het beeldje wordt vastgelegd, en staat er een leeg vak in de PDF.
+  // Het voorladen meldt zijn totaal via onStage, dus dáár is te zien of hij
+  // meegeteld is.
+  testWidgets('laadt ook een afbeelding uit de vrije tekst voor', (
+    tester,
+  ) async {
+    final dir = Directory.systemTemp.createTempSync('ocideck_raster_inline');
+    addTearDown(() => dir.deleteSync(recursive: true));
+
+    late Deck deck;
+    await tester.runAsync(() async {
+      await _writeSolidPng(dir, 'tekstfoto.png', const Color(0xFF7B1FA2));
+      deck = Deck(
+        title: 'Tekst met beeld',
+        projectPath: dir.path,
+        slides: [
+          Slide.create(SlideType.freeMarkdown).copyWith(
+            title: 'Verhaal',
+            customMarkdown: 'Kijk:\n\n![w:400 de foto](tekstfoto.png)\n',
+          ),
+        ],
+      );
+    });
+
+    var precacheTotal = 0;
+    await _rasterize(
+      tester,
+      deck,
+      targetWidth: 640,
+      onStage: (phase, _, total) {
+        if (phase == 'precache') precacheTotal = total;
+      },
+    );
+
+    expect(
+      precacheTotal,
+      1,
+      reason: 'de afbeelding uit de tekst hoort in het voorladen te zitten',
+    );
+  });
+
   // Twee paden die géén bestand op schijf zijn en die de gewone padresolutie
   // dus ongemoeid moet laten: een `mem:`-afbeelding (webversie, bytes in het
   // geheugen) en een `asset:`-logo (ingebouwd stijlprofiel). Gaat een van beide

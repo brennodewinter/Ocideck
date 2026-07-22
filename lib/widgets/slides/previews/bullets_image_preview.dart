@@ -10,8 +10,6 @@ class _BulletsImagePreview extends StatelessWidget {
   final String font;
   final ThemeProfile profile;
   final int richTextPage;
-  final bool showRichTextPageControls;
-  final ValueChanged<int>? onRichTextPageChanged;
 
   /// First number for a numbered list (continues a chain across slides).
   final int numberStart;
@@ -26,8 +24,6 @@ class _BulletsImagePreview extends StatelessWidget {
     required this.font,
     required this.profile,
     this.richTextPage = 0,
-    this.showRichTextPageControls = false,
-    this.onRichTextPageChanged,
     this.numberStart = 1,
     this.fitScaleOverride,
   });
@@ -68,7 +64,7 @@ class _BulletsImagePreview extends StatelessWidget {
     );
 
     return Container(
-      color: _hexColor(profile.slideBackgroundColor),
+      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
       child: Stack(
         children: [
           Positioned(
@@ -241,7 +237,7 @@ class _BulletsImagePreview extends StatelessWidget {
     );
 
     return Container(
-      color: _hexColor(profile.slideBackgroundColor),
+      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
       child: Stack(
         children: [
           Positioned(
@@ -303,8 +299,8 @@ class _BulletsImagePreview extends StatelessWidget {
                         contentW: availW,
                         availH: availH,
                         splitWithImage: true,
+                        projectPath: projectPath,
                         richTextPage: richTextPage,
-                        showPageControls: showRichTextPageControls,
                       ),
                     ),
                   ),
@@ -343,10 +339,10 @@ class _BulletsImagePreview extends StatelessWidget {
                 TextStyle(
                   fontSize: titleSize * scale,
                   fontWeight: FontWeight.bold,
-                  color: _hexColor(profile.textColor),
+                  color: AppTheme.parseHexColor(profile.textColor),
                 ),
               ),
-              linkColor: _hexColor(profile.accentColor),
+              linkColor: AppTheme.parseHexColor(profile.accentColor),
             ),
           if (hasTitle && bullets.isNotEmpty) SizedBox(height: spacing * scale),
           if (slide.listStyle == ListStyle.checklist &&

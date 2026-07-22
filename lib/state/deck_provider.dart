@@ -8,6 +8,7 @@ import '../models/deck_template.dart';
 import '../models/document_signature.dart';
 import '../models/scope_matrix_spec.dart';
 import '../models/settings.dart';
+import '../models/seal_record.dart';
 import '../models/slide.dart';
 import '../models/used_tool.dart';
 import '../services/ai_alt_text_cleanup.dart';
@@ -15,6 +16,7 @@ import '../services/annotation_codec.dart';
 import '../services/bullet_pagination.dart';
 import '../services/checklist_templates.dart';
 import '../services/document_integrity.dart';
+import '../services/rich_text_chapters.dart';
 import '../services/finding_context_score.dart';
 import '../services/finding_numbering.dart';
 import '../services/scope_coverage.dart';
@@ -136,40 +138,16 @@ class DeckState {
 /// Whether [DeckNotifier.splitSlide] would actually split [slide]: a bullet
 /// slide type with at least two bullets to divide. Mirrors the guards in
 /// `_splitSlide`, so the UI can offer a "split" action exactly when it works.
-bool canSplitSlide(Slide slide) {
-  switch (slide.type) {
-    case SlideType.bullets:
-    case SlideType.bulletsImage:
-      return slide.bullets.length >= 2;
-    case SlideType.twoBullets:
-      return slide.bullets.length >= 2 || slide.bullets2.length >= 2;
-    // Uitgeschreven in plaats van een `default:`, zodat de compiler een nieuw
-    // slidetype hier aanwijst. Anders zou een type dat wél bullets draagt
-    // stilzwijgend 'niet splitsbaar' heten en de actie in de UI ontbreken.
-    case SlideType.title ||
-        SlideType.section ||
-        SlideType.twoImages ||
-        SlideType.image ||
-        SlideType.video ||
-        SlideType.quote ||
-        SlideType.table ||
-        SlideType.freeMarkdown ||
-        SlideType.code ||
-        SlideType.chart ||
-        SlideType.cockpit ||
-        SlideType.question ||
-        SlideType.timeline ||
-        SlideType.scorecard ||
-        SlideType.assets ||
-        SlideType.discoveries ||
-        SlideType.finding ||
-        SlideType.findingsSummary ||
-        SlideType.checklist ||
-        SlideType.scopeMatrix ||
-        SlideType.signOff:
-      return false;
-  }
-}
+///
+/// Welke types doorlopende bullets tonen staat in de registry naast de enum
+/// ([SlideTypeMeta.bulletColumns]) en niet meer als uitgeschreven lijst hier:
+/// een nieuw bullettype is dan overal tegelijk splitsbaar, in plaats van in de
+/// paneelknop wel en in de slidestrook niet.
+bool canSplitSlide(Slide slide) => switch (slide.type.bulletColumns) {
+  BulletColumns.none => false,
+  BulletColumns.one => slide.bullets.length >= 2,
+  BulletColumns.two => slide.bullets.length >= 2 || slide.bullets2.length >= 2,
+};
 
 // ── DeckNotifier ─────────────────────────────────────────────────────────────
 
@@ -550,11 +528,16 @@ class DeckNotifier extends StateNotifier<DeckState> {
     );
   }
 
-  /// Documentintegriteit (§8 A1): rond het deck af en verzegel het. Berekent een
-  /// SHA-512-zegel over de inhoud (met de optionele [signature] eronder), zet de
-  /// vergrendeling en het zegel, en wist de ongedaan-maken-historie zodat het
-  /// afronden in de app niet terug te draaien is (bewust eenrichtingsverkeer).
-  /// Doet niets wanneer het deck al verzegeld is.
+  /// Documentintegriteit (§8 A1): rond het deck af en verzegel het. Zet de
+  /// vergrendeling, de optionele [signature] en het moment van verzegelen, en
+  /// wist de ongedaan-maken-historie zodat het afronden in de app niet terug te
+  /// draaien is (bewust eenrichtingsverkeer). Doet niets wanneer het deck al
+  /// verzegeld is.
+  ///
+  /// De hash zelf ontstaat pas bij het opslaan: die gaat over de bytes van de
+  /// `.md`, en die bestaan hier nog niet. Tot dat moment meldt het zegel zich
+  /// als [IntegrityStatus.notVerifiable] — de aanroepende schermen slaan daarom
+  /// meteen op, of zeggen dat het moet gebeuren.
   void finalizeAndSeal({DocumentSignature? signature}) {
     final deck = state.deck;
     if (deck == null || deck.finalized) return;

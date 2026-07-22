@@ -17,6 +17,9 @@
 //   * No raw control bytes — write the escape (\u0000), never the
 //     byte itself. See [controlByteBaseline]: this is a review hazard, not a
 //     nitpick.
+//   * Layer direction — a model may not import state/ or widgets/, a service may
+//     not import state/, and state/ may not import widgets/. Hard zero; see
+//     [layerRules]. Kept the layers acyclic on discipline alone until now.
 //
 // Exits non-zero (with the offending locations) when a rule is violated.
 
@@ -80,13 +83,14 @@ const Set<String> _quoteScannerHomes = {
 /// UI imports inside `lib/services/`. RATCHET: may shrink, never grow.
 ///
 /// A service is the headless core: usable without a widget tree, testable
-/// without pumping one. Eight import lines across four services reach into
-/// Flutter's UI layer or into `lib/widgets/` today. One has a real reason —
-/// slide_rasterizer paints actual widgets into an image — but text_measurement,
-/// slide_quality_analyzer and mermaid_render_service pull in widget code for
-/// layout helpers, which pins the core to the UI. Lower this as they are
-/// untangled; never raise it.
-const int serviceUiImportBaseline = 8;
+/// without pumping one. Four import lines are left, all in slide_rasterizer,
+/// and all of them earned: that service paints actual widgets into an image, so
+/// the widget tree IS its subject. text_measurement, slide_quality_analyzer and
+/// mermaid_render_service used to sit here too; they were untangled by moving
+/// the widget half out (`lib/widgets/mermaid_render_host.dart`) and the
+/// text-only half in (`lib/utils/inline_markdown.dart`). A new entry means a
+/// service grew a UI dependency it almost certainly does not need.
+const int serviceUiImportBaseline = 4;
 
 /// UI imports inside `lib/models/`. Hard zero — do not raise. A model that
 /// imports Flutter cannot be reused, tested, or reasoned about on its own.
@@ -116,6 +120,33 @@ final _uiImport = RegExp(
   r"^import 'package:flutter/(material|widgets|cupertino|rendering)\.dart'"
   r"|^import '[^']*widgets/",
 );
+
+/// De toegestane richting van het verkeer tussen de lagen.
+///
+/// Sleutel = de map, waarde = de mappen die daaruit niet geïmporteerd mogen
+/// worden. Dit is een HARDE nul, geen ratchet: elke overtreding is er één te
+/// veel, en er zijn er vandaag geen.
+///
+/// De richting is nu schoon — niets in `lib/models/` kent `state/` of
+/// `widgets/`, niets in `lib/services/` kent `state/`, en niets in `lib/state/`
+/// kent `widgets/`. Dat bleef zo op discipline en op reviewers die het zagen.
+/// Eén import op een ongelukkige dag draait dat om, en dan is de kern niet meer
+/// headless te draaien of te testen zonder een widgetboom eromheen — met een
+/// cyclus tussen de lagen als volgende stap. Een reviewer die het mist is geen
+/// verwijt; een check die het nooit mist is goedkoper.
+///
+/// De UI-imports (`package:flutter/material` en `lib/widgets/`) worden apart
+/// geteld door [_uiImport] — dáár zit een ratchet omdat `slide_rasterizer`
+/// terecht widgets schildert. Deze lijst gaat over de rest van de richting.
+const Map<String, List<String>> layerRules = {
+  'lib/models/': ['state/', 'widgets/'],
+  'lib/services/': ['state/'],
+  'lib/state/': ['widgets/'],
+};
+
+/// Een import uit een van de verboden mappen, relatief of via `package:ocideck`.
+RegExp _forbiddenImport(String dir) =>
+    RegExp("^import '(?:package:ocideck/|[./]+)[^']*$dir");
 
 /// The token/palette homes, exempt from the raw-colour ratchet: the app theme
 /// and the deliberately-dark image-picker palette (its own dark chrome, not
@@ -239,6 +270,41 @@ Iterable<String> _controlBytesIn(File file) sync* {
   }
 }
 
+/// Achtergebleven conflictmarkeringen in [file].
+///
+/// Alleen `<<<<<<< ` en `>>>>>>> ` tellen, niet `=======`: dat laatste is in
+/// Markdown een geldige onderstreping van een kop (setext-H1), en een poort die
+/// daarop afgaat, roept wolf over gewone tekst.
+///
+/// Waarom dit een poort is en geen afspraak: het is precies één keer misgegaan,
+/// en meteen twee bestanden tegelijk. Bij het oplossen van een rebase werden de
+/// markeringen uit één bestand gehaald, waarna `git add -A` de twee andere
+/// mét markeringen instageerde. Dat viel niemand op, want `docs/` compileert
+/// niet — het reist alleen mee als asset en verschijnt in de ingebouwde lezer.
+Iterable<String> _conflictMarkersIn(File file) sync* {
+  final lines = file.readAsLinesSync();
+  for (var i = 0; i < lines.length; i++) {
+    final l = lines[i];
+    if (l.startsWith('<<<<<<< ') || l.startsWith('>>>>>>> ')) {
+      yield '${file.path}:${i + 1}: ${l.length > 60 ? '${l.substring(0, 60)}…' : l}';
+    }
+  }
+}
+
+/// De tekstbestanden waarin een achtergebleven markering schade doet: alles wat
+/// meereist met de app of wat een bijdrager leest.
+Iterable<File> _textFilesToScan() sync* {
+  for (final entity in Directory('docs').listSync(recursive: true)) {
+    if (entity is File && entity.path.endsWith('.md')) yield entity;
+  }
+  for (final entity in Directory('.').listSync()) {
+    if (entity is File && entity.path.endsWith('.md')) yield entity;
+  }
+  for (final dir in ['lib', 'test', 'tool']) {
+    yield* _dartFiles(Directory(dir));
+  }
+}
+
 void main() {
   final printHits = <String>[];
   final debugPrintHits = <String>[];
@@ -250,6 +316,7 @@ void main() {
   final controlByteHits = <String>[];
   final quoteScanners = <String>[];
   final serviceUiImports = <String>[];
+  final layerViolations = <String>[];
   final modelUiImports = <String>[];
 
   for (final file in _dartFiles(Directory('lib'))) {
@@ -281,6 +348,14 @@ void main() {
       if ((isService || isModel) && _uiImport.hasMatch(line)) {
         (isModel ? modelUiImports : serviceUiImports).add('$path:${i + 1}');
       }
+      layerRules.forEach((from, forbidden) {
+        if (!path.startsWith(from)) return;
+        for (final dir in forbidden) {
+          if (_forbiddenImport(dir).hasMatch(line)) {
+            layerViolations.add('$path:${i + 1} → $dir');
+          }
+        }
+      });
     }
 
     if (!_isTranslationData(path)) {
@@ -306,7 +381,22 @@ void main() {
     }
   }
 
+  final conflictHits = <String>[];
+  for (final file in _textFilesToScan()) {
+    conflictHits.addAll(_conflictMarkersIn(file));
+  }
+
   final failures = <String>[];
+
+  if (conflictHits.isNotEmpty) {
+    failures.add(
+      'Found ${conflictHits.length} leftover merge-conflict marker(s). Een '
+      'half opgeloste samenvoeging is ingecheckt: los het conflict alsnog op '
+      'en haal de markeringen weg. Let op dat `git add -A` na het opschonen '
+      'van één bestand de andere ongemoeid instageert:\n'
+      '    ${conflictHits.join('\n    ')}',
+    );
+  }
 
   final boundaryHits = _audienceBoundaryViolations();
   if (boundaryHits.isNotEmpty) {
@@ -315,6 +405,18 @@ void main() {
       'rauw Deck/List<Slide> accepteren, alleen een AudienceDeck (die alleen '
       'PrivacyProjection kan maken). Zie docs/design/OCIWACHT.md §6:\n'
       '    ${boundaryHits.join('\n    ')}',
+    );
+  }
+
+  if (layerViolations.isNotEmpty) {
+    failures.add(
+      'De laagrichting is doorbroken in ${layerViolations.length} '
+      'import(s). Een model of service dat de laag boven zich binnenhaalt is '
+      'niet meer los te draaien of te testen, en een cyclus tussen de lagen is '
+      'dan nog maar één import verderop. Verplaats de code naar beneden of '
+      'geef de bovenlaag een parameter mee (zie layerRules in '
+      'tool/check_conventions.dart):\n'
+      '    ${layerViolations.join('\n    ')}',
     );
   }
 
@@ -418,7 +520,8 @@ void main() {
       'Color(0x…) at $rawColorCount (baseline $rawColorBaseline); UI imports in '
       'lib/services at ${serviceUiImports.length} (baseline '
       '$serviceUiImportBaseline) and in lib/models at '
-      '${modelUiImports.length}; file sizes within ceilings.',
+      '${modelUiImports.length}; layer direction clean; file sizes within '
+      'ceilings.',
     );
     if (serviceUiImports.length < serviceUiImportBaseline) {
       stdout.writeln(

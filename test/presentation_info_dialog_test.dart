@@ -180,6 +180,45 @@ void main() {
     expect(info!.playOnly, isTrue);
   });
 
+  testWidgets(
+    "'Alleen afspelen' zet de tijden-overzichtschakelaar buiten werking",
+    (tester) async {
+      // Een schakelaar die aan lijkt te staan maar niets doet, is erger dan
+      // geen schakelaar: bij een vergrendeld deck verschijnt het overzicht
+      // hoe dan ook niet.
+      await pumpDialog(
+        tester,
+        reveal: false,
+        deck: const Deck(title: 'Test', showRehearsalSummary: true),
+      );
+
+      SwitchListTile summarySwitch() => tester.widget<SwitchListTile>(
+        find.ancestor(
+          of: find.text('Tijden-overzicht tonen na afloop'),
+          matching: find.byType(SwitchListTile),
+        ),
+      );
+
+      expect(summarySwitch().value, isTrue);
+      expect(summarySwitch().onChanged, isNotNull);
+
+      await tester.scrollUntilVisible(
+        find.text('Alleen afspelen (vergrendeld)'),
+        100,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await tester.tap(find.text('Alleen afspelen (vergrendeld)'));
+      await tester.pumpAndSettle();
+
+      expect(summarySwitch().value, isFalse);
+      expect(summarySwitch().onChanged, isNull);
+      expect(
+        find.textContaining('deze schakelaar doet dan niets'),
+        findsOneWidget,
+      );
+    },
+  );
+
   testWidgets('120 min-preset komt in seconden in het resultaat', (
     tester,
   ) async {

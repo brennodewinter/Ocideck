@@ -21,3 +21,17 @@
 # prijs voor het niet met de hand hoeven oplossen van dertig identieke
 # conflicten, en die prijs is de moeite waard zolang de guard bestaat.
 lib/l10n/translations/*.dart merge=union
+
+# ── De CHANGELOG ─────────────────────────────────────────────────────────────
+#
+# Hetzelfde patroon, andere oorzaak. Elke tak schrijft zijn regel onder dezelfde
+# kop in `[Unreleased]` — meestal onder *Fixed* — en dus op dezelfde plek. Op één
+# dag met negen parallelle takken leverde dat zes botsingen op, allemaal met
+# dezelfde oplossing: beide kanten behouden. Er viel nooit iets te kiezen.
+#
+# Wat het níét oplost: corrigeren twee takken dezelfde zin, dan houdt union ze
+# allebei en staat de tekst er dubbel. Dat compileert niet weg zoals bij een
+# map-literal — het staat er gewoon, in proza, en het valt op bij het lezen. Kijk
+# de CHANGELOG dus na na een merge die hem raakte, net zoals je `make l10n-check`
+# draait na een merge in de vertaalbestanden.
+CHANGELOG.md merge=union

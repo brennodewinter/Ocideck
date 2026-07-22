@@ -716,8 +716,6 @@ const _dutchSourceDe = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Abschließen & versiegeln',
   'Verzegelen': 'Versiegeln',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Schließen Sie diese Präsentation ab und berechnen Sie ein SHA-512-Siegel über den Inhalt. Danach ist die Datei gesperrt und kann nicht mehr bearbeitet werden; spätere Änderungen werden sichtbar. Dies kann in der App nicht rückgängig gemacht werden.',
   'Handtekening (optioneel)': 'Unterschrift (optional)',
   'Naam': 'Name',
   'Rol of functie': 'Rolle oder Funktion',
@@ -741,6 +739,138 @@ const _dutchSourceAddDe = {
   'Dit diagram kon niet worden getekend':
       'Dieses Diagramm konnte nicht gezeichnet werden',
   'Brontekst van het diagram': 'Quelltext des Diagramms',
+  'Jouw antwoord': 'Deine Antwort',
+  'nodig': 'nötig',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Bei einer gesperrten Präsentation erscheint die Übersicht nie; dieser Schalter bewirkt dann nichts.',
+  'De twee afbeeldingen': 'Die beiden Bilder',
+  'Goed gerekende antwoorden': 'Als richtig gewertete Antworten',
+  'Afbeelding 1': 'Bild 1',
+  'Afbeelding 2': 'Bild 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Nur eine wörtlich identische Antwort zählt.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Die Zuschauer tippen die Antwort. Jede hier angehakte Antwort zählt als richtig; Groß- und Kleinschreibung und zusätzliche Leerzeichen spielen keine Rolle.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Die Zuschauer zeigen auf das richtige Bild. Beim Präsentieren wechseln links/rechts pro Runde, benenne sie also nicht als "links" und "rechts".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Ein Tippfehler zählt noch als richtig, ein anderes Wort nicht.',
+  'Getypt antwoord': 'Getippte Antwort',
+  'Goed gerekend antwoord:': 'Als richtig gewertete Antwort:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Wähle zwei Bilder und markiere das richtige.',
+  'Nog geen goed antwoord opgegeven.': 'Noch keine richtige Antwort angegeben.',
+  'Overeenkomst': 'Übereinstimmung',
+  'Tik de juiste afbeelding aan': 'Tippe auf das richtige Bild',
+  'Twee afbeeldingen': 'Zwei Bilder',
+  'Typ je antwoord': 'Antwort eingeben',
+  'Typ je antwoord en bevestig': 'Antwort eingeben und bestätigen',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Erforderliche Übereinstimmung mit der richtigen Antwort',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Hake mindestens eine als richtig gewertete Antwort an.',
+  'Vragen': 'Fragen',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'Antworten, alle in zufälliger Reihenfolge angezeigt',
+  'fout': 'falsch',
+  'goed': 'richtig',
+  'goed vanaf': 'richtig ab',
+  'links en rechts wisselen per ronde': 'links und rechts wechseln pro Runde',
+  'overeenkomst': 'Übereinstimmung',
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Dieser Text enthält Kapitel. Das Aufteilen ergibt',
+  'dia\'s op.': 'Folien.',
+  'Splits op hoofdstukken': 'Nach Kapiteln aufteilen',
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'In diesem Deck steht KI-Text, den du noch nicht geprüft hast. Exportieren geht trotzdem; die Datei weist selbst darauf hin und bekommt "-ai-concept" im Namen.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Entwurf: enthält KI-Text, den noch niemand geprüft hat',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Schließen Sie diese Präsentation ab und schreiben Sie ein SHA-512-Siegel über die gespeicherte Datei fest. Danach ist sie gesperrt und kann nicht mehr bearbeitet werden; jede spätere Änderung wird sichtbar. Wer den Bericht erhält, rechnet das Siegel selbst mit sha512sum nach. Dies kann in der App nicht rückgängig gemacht werden.',
+  'Zegel en handtekening': 'Siegel und Unterschrift',
+  'Zegel nog niet vastgelegd': 'Siegel noch nicht festgeschrieben',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Es gibt noch keine gespeicherte Datei, anhand derer das Siegel nachgerechnet werden kann. Speichern Sie das Deck.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Weglassen ist an: was die Prüfung als personenbezogenes Datum einstuft, wird geschwärzt, und alle Bilder, Videos und Audios dieser Folie gehen nicht auf den Bildschirm oder in den Export. Deine Markdown-Datei behält alles.',
+  'Bestand': 'Ablage',
+  'Venster': 'Fenster',
+  'Help': 'Hilfe',
+  'Alles selecteren': 'Alles auswählen',
+  'Plakken': 'Einfügen',
+  'Opnieuw': 'Wiederholen',
+  'Eigenschappen': 'Eigenschaften',
+  'Opdrachten…': 'Befehle…',
+  'Opslaan…': 'Speichern…',
+  'Uploaden naar WebDAV…': 'Hochladen zu WebDAV…',
+  'Uploaden naar S3…': 'Hochladen zu S3…',
+  'Vastleggen in git…': 'Commit in git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Wird gespeichert. Erneutes Speichern bewirkt nichts, bis dies abgeschlossen ist.',
+  'Klaar — privacy niet gecontroleerd': 'Bereit — Datenschutz nicht geprüft',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Es wurde nicht nach personenbezogenen Daten, besonderen Datenkategorien und Geheimnissen gesucht: die Datenschutzprüfung ist unter Sicherheit ausgeschaltet.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Präsentationen, die einfache Markdown-Dateien bleiben: lesbar, durchsuchbar und mit jedem Editor zu öffnen.',
+  'sjablonen om mee te beginnen, of leeg': 'Vorlagen zum Starten, oder leer',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Die Beispielfolien einer Vorlage sind auf Niederländisch. Name und Beschreibung folgen deiner eigenen Sprache; den Inhalt passt du nach dem Erstellen an.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Weglassen ist an: gefundene Daten werden geschwärzt und alle Bilder, Videos und Audios dieser Folie gehen nicht auf den Bildschirm oder in den Export. Deine Markdown-Datei behält alles.',
+  'Mijn tekst': 'Mein Text',
+  'Wat zij zien': 'Was sie sehen',
+  'Presentatiegegevens': 'Präsentationsdaten',
+  'Open presentatiegegevens': 'Präsentationsdaten öffnen',
+  'Motivering van een uitsluiting': 'Begründung einer Ausnahme',
+  'Motivering van een bevestiging': 'Begründung einer Bestätigung',
+  'Tabel koprij, kolom {kolom}': 'Tabelle Kopfzeile, Spalte {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabelle Zeile {rij}, Spalte {kolom}',
+  'Via deze website ophalen?': 'Über diese Website abrufen?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Der Server dieser Präsentation hat den Browser die Datei nicht direkt lesen lassen. OciDeck kann die Adresse an die Website weitergeben, von der OciDeck selbst stammt, und diese ruft sie dann ab. Damit sieht jene Website die vollständige Adresse — steht im Link ein Schlüssel oder Code, sieht jene Website ihn ebenfalls.',
+  'In de browser kan dit niet worden bewaard':
+      'Im Browser kann das nicht gespeichert werden',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Ein Browser hat keinen Schlüsselbund, wie ihn ein Computer hat: Was OciDeck hier speichern würde, kann jedes Skript auf dieser Seite mitlesen. Nutze die Desktop-Version — dort landet das Geheimnis wirklich im Schlüsselbund des Betriebssystems.',
+  'Licenties van derden': 'Lizenzen Dritter',
+  'Alle licentieteksten tonen': 'Alle Lizenztexte anzeigen',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck selbst steht unter der EUPL-1.2. Darüber hinaus bündelt es Software Dritter: die Dart- und Flutter-Pakete, zwei mitgelieferte Plugins, vier Schriftfamilien, das Gesichtsmodell für die Datenschutzprüfung und das JavaScript, das in einem HTML-Export mitreist. Jedes davon behält seine eigene Lizenz.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Diese Datei enthält Software Dritter und mitunter eine Schriftart. Unten stehen die zugehörigen vollständigen Lizenztexte; geben Sie sie mit, wenn Sie diese Datei weitergeben.',
+  'Sporen op dit apparaat': 'Spuren auf diesem Gerät',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Neben deinen Einstellungen bewahrt OciDeck auch eine Liste der zuletzt geöffneten Dateien auf und, bei einem Absturz, eine Wiederherstellungsdatei mit dem vollständigen Inhalt deiner Präsentation. Nichts davon verlässt dieses Gerät, aber es liegt hier — im Klartext, geschützt durch dein Konto auf diesem Betriebssystem und durch nicht mehr als das.',
+  'Recent geopende presentaties': 'Zuletzt geöffnete Präsentationen',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Die Liste speichert den vollständigen Pfad und die Klassifizierung jeder Präsentation, die offen war — zusammen eine Aussage darüber, woran du arbeitest und für wen.',
+  'Recente lijst wissen': 'Liste der zuletzt geöffneten Dateien löschen',
+  'De recente lijst was al leeg.':
+      'Die Liste der zuletzt geöffneten Dateien war bereits leer.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'Eintrag/Einträge aus der Liste der zuletzt geöffneten Dateien gelöscht.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Absturz-Wiederherstellungsdateien enthalten den vollständigen Inhalt deiner Präsentationen im Klartext. Sie werden nach 7 Tagen automatisch aufgeräumt, und bei einem sauberen Beenden sofort.',
+  'Alles terugzetten': 'Alles zurücksetzen',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Löscht jede Einstellung, die Liste der zuletzt geöffneten Dateien, die Wiederherstellungsdateien, die Git-Arbeitskopien und die Passwörter in deinem Schlüsselbund. Deine Präsentationen bleiben: die gehören dir, nicht OciDeck.',
+  'Zet alles terug naar de begintoestand':
+      'Alles auf den Anfangszustand zurücksetzen',
+  'Alles terugzetten naar de begintoestand?':
+      'Alles auf den Anfangszustand zurücksetzen?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Deine Einstellungen, die Liste der zuletzt geöffneten Dateien, die Wiederherstellungsdateien, die Git-Arbeitskopien und die gespeicherten Passwörter werden gelöscht. Das lässt sich nicht rückgängig machen. Deine Präsentationen bleiben.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'Änderung(en) wurden noch nicht an einen Git-Server gesendet und existieren nur auf diesem Gerät. Auch die verschwinden.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Alles wurde auf den Anfangszustand zurückgesetzt.',
+  'Terugzetten is niet gelukt.': 'Das Zurücksetzen ist nicht gelungen.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Es wartet noch nicht gesendete Arbeit',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Diese Git-Verbindung hat Änderungen, die noch nicht an den Server gesendet wurden. Entfernst du die Verbindung, verschwindet auch die Arbeitskopie auf diesem Gerät — und diese Arbeit existiert nirgendwo mehr.',
+  'Verbinding behouden': 'Verbindung behalten',
+  'Toch verwijderen': 'Trotzdem entfernen',
   'esc': 'Esc',
   'Enter': 'Enter',
   'OK': 'OK',

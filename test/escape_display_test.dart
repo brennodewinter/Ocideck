@@ -3,7 +3,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/utils/markdown_paste_cleanup.dart';
-import 'package:ocideck/widgets/slides/inline_markdown.dart';
+import 'package:ocideck/utils/inline_markdown.dart';
 
 void main() {
   group('presentation escape display', () {

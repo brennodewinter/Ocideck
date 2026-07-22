@@ -17,6 +17,7 @@ import '../utils/bundled_asset.dart';
 import '../utils/image_limits.dart';
 import '../utils/project_path.dart';
 import 'finding_context_score.dart';
+import 'slide_image_refs.dart';
 import 'slide_layout_metrics.dart';
 import '../widgets/document_signature_view.dart'
     show decodeEmbeddedSignatureImage;
@@ -136,12 +137,15 @@ class SlideRasterizer {
     final logo = isBundledAssetPath(rawLogo)
         ? rawLogo
         : resolveTrustedAssetPath(rawLogo, projectPath);
+    // Élke afbeelding van de dia wordt voorgeladen, ook een `![…](…)` in de
+    // vrije tekst: zonder precache is de afbeelding nog niet gedecodeerd op het
+    // moment dat het beeldje wordt vastgelegd, en belandt er een leeg vak in de
+    // PDF of PPTX.
     final allPaths = <String>{
       ?logo,
-      for (final slide in slides) ...[
-        ?_resolveOrMem(slide.imagePath, projectPath),
-        ?_resolveOrMem(slide.imagePath2, projectPath),
-      ],
+      for (final slide in slides)
+        for (final path in slideImagePaths(slide))
+          ?_resolveOrMem(path, projectPath),
     };
 
     final repaintKey = GlobalKey();

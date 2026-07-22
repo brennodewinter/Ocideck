@@ -1,6 +1,7 @@
 import 'package:path/path.dart' as p;
 
 import '../services/asset_staging.dart';
+import '../services/slide_image_refs.dart';
 import '../services/web_asset_store.dart';
 import 'deck.dart';
 import 'slide.dart';
@@ -87,23 +88,23 @@ bool deckCarriesMemoryAssets(Deck deck) {
   bool mem(String path) => WebAssetStore.isMemPath(path.trim());
   if (mem(deck.themeProfile.logoPath ?? '')) return true;
   for (final s in deck.slides) {
-    if (mem(s.imagePath) ||
-        mem(s.imagePath2) ||
-        mem(s.videoPath) ||
-        mem(s.audioPath)) {
-      return true;
-    }
+    if (mem(s.videoPath) || mem(s.audioPath)) return true;
+    if (slideImagePaths(s).any(mem)) return true;
   }
   return false;
 }
 
-/// Voegt elk `mem:`-pad van [slide] toe aan [into] (beeld, tweede beeld, video,
+/// Voegt elk `mem:`-pad van [slide] toe aan [into] (elke afbeelding, video,
 /// audio). Losse functie zodat zowel een dia op het klembord als een dia in een
 /// deck met dezelfde regel wordt afgetast.
+///
+/// De afbeeldingen komen via [slideImagePaths] binnen en niet uit de velden
+/// alleen: een `mem:`-afbeelding die enkel in de vrije tekst staat, is voor de
+/// sweep anders onzichtbaar en zou worden opgeruimd terwijl de dia hem nog
+/// tekent.
 void addSlideMemoryAssetPaths(Slide slide, Set<String> into) {
   for (final path in [
-    slide.imagePath,
-    slide.imagePath2,
+    ...slideImagePaths(slide),
     slide.videoPath,
     slide.audioPath,
   ]) {

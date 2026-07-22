@@ -15,6 +15,8 @@ import 'package:ocideck/widgets/dialogs/open_presentation_dialog.dart';
 import 'package:ocideck/widgets/dialogs/scan_library_dialog.dart';
 import 'package:ocideck/widgets/dialogs/slide_finder_dialog.dart';
 
+import 'support/pump_until.dart';
+
 /// A FileService backed only by real, local services — enough for the dialogs
 /// to perform their on-disk directory scans against a temp fixture.
 FileService _fileService(String homeDir) {
@@ -57,15 +59,23 @@ Future<void> _openAndScan(WidgetTester tester) async {
   addTearDown(() => tester.binding.setSurfaceSize(null));
   await tester.tap(find.text('open'));
   await tester.pump(); // dialog appears (loading)
-  await tester.runAsync(
-    () => Future<void>.delayed(const Duration(milliseconds: 400)),
+  // Wachten tot de scan klaar ís, niet tot een klok is afgelopen. Alle vier de
+  // dialogen tonen een voortgangsindicator zolang ze de map aflopen en halen
+  // die weg als ze klaar zijn — dat is dus de uitkomst waarop te wachten valt.
+  //
+  // Hier stond 400 ms plus vijf begrensde frames. Dat is een gok op hoe traag de
+  // schijf vandaag is: te krap onder belasting, en elke groene draai betaalt de
+  // volle 400 ms ook als de scan in 5 ms klaar was.
+  //
+  // `pumpAndSettle` kan hier niet: een knipperende tekstcursor (autofocus) en de
+  // voortgangsindicator zelf laten de framewachtrij nooit leeglopen, dus die zou
+  // aflopen op een time-out. `pumpUntil` pompt losse frames en heeft daar geen
+  // last van.
+  await pumpUntil(
+    tester,
+    () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
+    reason: 'de mapscan bleef laden',
   );
-  // A blinking text-field cursor (autofocus) and the scan-progress indicator
-  // never let the frame queue drain, so pumpAndSettle would time out. Pump a
-  // few bounded frames instead to flush the scan results into the tree.
-  for (int i = 0; i < 5; i++) {
-    await tester.pump(const Duration(milliseconds: 100));
-  }
 }
 
 void main() {

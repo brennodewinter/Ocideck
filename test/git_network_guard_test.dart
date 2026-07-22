@@ -81,9 +81,12 @@ void main() {
     test('een netwerkaanroep pint de host en verbiedt omleidingen', () async {
       final git = _CapturingGitCli();
       // localhost mag hier alleen omdat de server als vertrouwd intern staat;
-      // zo blijft de test offline en toetst hij toch het echte pad.
+      // zo blijft de test offline en toetst hij toch het echte pad. https, want
+      // `_mirror` geeft een token mee en dat gaat sinds 2026-07-22 niet meer
+      // over platte tekst — ook niet naar een vertrouwde interne host. Er wordt
+      // niets opgezet: de git-CLI is hier een dubbel.
       final mirror = await _mirror(
-        _config('http://localhost:3000', trustedInternal: true),
+        _config('https://localhost:3000', trustedInternal: true),
         git,
         temp,
       );
@@ -104,7 +107,7 @@ void main() {
         'en gaat de lijn niet op', () async {
       final git = _CapturingGitCli();
       final mirror = await _mirror(
-        _config('http://localhost:3000', trustedInternal: true),
+        _config('https://localhost:3000', trustedInternal: true),
         git,
         temp,
       );
@@ -152,6 +155,55 @@ void main() {
       );
       expect(git.calls, isEmpty);
     });
+
+    test('een token gaat niet over plat http, ook niet naar een vertrouwde '
+        'interne host', () async {
+      final git = _CapturingGitCli();
+      // Precies de combinatie die hiervoor wél mocht: de vink "vertrouwd
+      // intern" stond plain http toe, en `_hardenedEnv` hing er een
+      // `Authorization: Basic` aan. Die vink gaat over de host, niet over de
+      // lijn ernaartoe — en een geplukt token blijft werken nadat de
+      // verbinding weg is.
+      final mirror = await _mirror(
+        _config('http://localhost:3000', trustedInternal: true),
+        git,
+        temp,
+      );
+
+      await expectLater(
+        mirror.prepareForOpen(),
+        throwsA(
+          isA<GitForgeException>().having(
+            (e) => e.kind,
+            'kind',
+            GitForgeError.config,
+          ),
+        ),
+      );
+      expect(
+        git.calls,
+        isEmpty,
+        reason: 'geweigerd vóór er iets de lijn opgaat',
+      );
+    });
+
+    test(
+      'zonder token blijft plat http naar een vertrouwde interne host wel '
+      'werken — daar valt niets te stelen dat de verbinding overleeft',
+      () async {
+        final git = _CapturingGitCli();
+        final mirror = (await createNativeGitMirror(
+          git: git,
+          config: _config('http://localhost:3000', trustedInternal: true),
+          token: '',
+          baseDir: temp.path,
+        ))!;
+
+        await mirror.prepareForOpen();
+
+        expect(git.calls, isNotEmpty);
+      },
+    );
 
     test('ssh:// wordt geweigerd — de app spreekt het niet, en een schema dat '
         'stilletjes doorglipt is hoe dit gat ontstond', () async {

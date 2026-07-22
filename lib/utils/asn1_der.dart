@@ -46,6 +46,22 @@ List<int> derInteger(int value) {
   return derTlv(0x02, bytes);
 }
 
+/// An `INTEGER` (tag `0x02`) from an already-generated magnitude [bytes],
+/// most-significant byte first.
+///
+/// Bestaat naast [derInteger] omdat een Dart-`int` maar 64 bits draagt én
+/// getekend is: een willekeurige 64-bits nonce past er niet veilig in. Leidende
+/// nulbytes gaan eruit (DER eist de kortste vorm) en er komt er één bij zodra
+/// de hoogste bit staat, anders leest de waarde als negatief.
+List<int> derPositiveInteger(List<int> bytes) {
+  var start = 0;
+  while (start < bytes.length - 1 && bytes[start] == 0) {
+    start++;
+  }
+  final magnitude = bytes.sublist(start);
+  return derTlv(0x02, [if (magnitude.first & 0x80 != 0) 0, ...magnitude]);
+}
+
 /// An `OCTET STRING` (tag `0x04`) carrying [bytes] verbatim.
 List<int> derOctetString(List<int> bytes) => derTlv(0x04, bytes);
 

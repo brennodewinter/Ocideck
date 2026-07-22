@@ -9,8 +9,8 @@ This is **ocideck 0.2.0+1** (licence EUPL-1.2) and every third-party component i
 | Licence | Components |
 | --- | ---: |
 | BSD-3-Clause | 127 |
-| MIT | 50 |
-| Apache-2.0 | 14 |
+| MIT | 49 |
+| Apache-2.0 | 15 |
 | OFL-1.1 | 5 |
 | MPL-2.0 | 1 |
 | BSL-1.0 | 1 |
@@ -211,8 +211,8 @@ This is **ocideck 0.2.0+1** (licence EUPL-1.2) and every third-party component i
 
 | Component | Version | Licence | Source |
 | --- | --- | --- | --- |
-| desktop_multi_window _(direct main)_ | 0.3.0 | MIT | https://github.com/MixinNetwork/flutter-plugins |
-| screen_retriever_macos _(direct overridden)_ | 0.2.0 | MIT | https://github.com/leanflutter/screen_retriever |
+| desktop_multi_window _(direct main)_ | 0.3.0 | Apache-2.0 | https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window |
+| screen_retriever_macos _(direct overridden)_ | 0.2.0 | MIT | https://github.com/leanflutter/screen_retriever/tree/ed1e52204d75b69330fb4b0e0b8d4d57e3c53833/packages/screen_retriever_macos |
 
 ### Vendored JavaScript bundles (HTML export) (5)
 

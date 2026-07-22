@@ -7,9 +7,12 @@ import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/git/asset_index.dart';
 import 'package:ocideck/services/git/asset_pool.dart';
 import 'package:ocideck/services/git/deck_repo_serializer.dart';
+import 'package:ocideck/services/git/repo_asset_resolver.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/web_asset_store.dart';
 
 import 'git_forge_fake.dart';
 
@@ -369,6 +372,77 @@ void main() {
       );
       expect(asked, isFalse, reason: 'het pad mag niet eens opgevraagd worden');
       expect(back.missing, ['../../geheim.json']);
+    });
+  });
+
+  // Afbeeldingen in de vrije tekst horen dezelfde route te lopen als de velden.
+  // Blijft er een gewoon pad staan, dan kent de forge de verwijzing niet én
+  // telt de asset voor AssetIndex als ongebruikt — en opruimen is onomkeerbaar.
+  group('afbeeldingen in de vrije tekst', () {
+    Slide textSlide(String markdown) => Slide.create(
+      SlideType.freeMarkdown,
+    ).copyWith(title: 'Tekst', customMarkdown: markdown);
+
+    test('een inline mem:-afbeelding wordt gepoold en herschreven', () async {
+      final bytes = png(11);
+      final ref = refFor(bytes, 'png');
+      final poolPath = GitRepoLayout.assetPathOf(ref)!;
+
+      final repo = FakeRepo(branches: {'main': 'c0'}, files: {});
+      final out = await buildDeckRepoFiles(
+        deckWith([textSlide('Kijk hier:\n\n![w:600 de foto](mem:inline)\n')]),
+        md: md,
+        pool: poolFor(repo),
+        deckDir: deckDir,
+        resolveBytes: resolverFrom({'mem:inline': bytes}),
+      );
+
+      final markdown = utf8.decode(out.upserts['$deckDir/deck.md']!);
+      expect(markdown, contains('![w:600 de foto]($ref)'));
+      expect(markdown, isNot(contains('mem:inline')));
+      expect(out.upserts[poolPath], bytes);
+      expect(out.warnings, isEmpty);
+    });
+
+    test('AssetIndex ziet die verwijzing terug in de deck.md', () async {
+      final bytes = png(12);
+      final ref = refFor(bytes, 'png');
+      final repo = FakeRepo(branches: {'main': 'c0'}, files: {});
+      final out = await buildDeckRepoFiles(
+        deckWith([textSlide('![x](mem:inline)')]),
+        md: md,
+        pool: poolFor(repo),
+        deckDir: deckDir,
+        resolveBytes: resolverFrom({'mem:inline': bytes}),
+      );
+
+      // referencesIn scant de ruwe tekst, dus een inline verwijzing komt daar
+      // gratis in mee — zolang hij maar gepoold ís.
+      expect(
+        AssetIndex.referencesIn(utf8.decode(out.upserts['$deckDir/deck.md']!)),
+        {ref},
+      );
+    });
+
+    test('en komt bij het openen als mem: weer terug', () async {
+      final bytes = png(13);
+      final ref = refFor(bytes, 'png');
+      final poolPath = GitRepoLayout.assetPathOf(ref)!;
+
+      final repo = FakeRepo(branches: {'main': 'c0'}, files: {poolPath: bytes});
+      final deck = await resolveRepoAssetsToMem(
+        deckWith([textSlide('tekst ![alt]($ref) tekst')]),
+        poolFor(repo),
+        sourceName: 'test',
+      );
+
+      final markdown = deck.slides.single.customMarkdown;
+      expect(markdown, isNot(contains(ref)));
+      final mem = RegExp(
+        r'!\[alt\]\(([^)]+)\)',
+      ).firstMatch(markdown)!.group(1)!;
+      expect(WebAssetStore.isMemPath(mem), isTrue);
+      expect(WebAssetStore.bytesFor(mem), bytes);
     });
   });
 }

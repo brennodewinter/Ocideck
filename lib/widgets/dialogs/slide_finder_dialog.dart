@@ -6,6 +6,7 @@ import '../../models/slide.dart';
 import '../../services/file_service.dart';
 import '../../services/presentation_search/presentation_source.dart';
 import '../../services/slide_dedup_service.dart';
+import '../../services/slide_image_refs.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/log.dart';
 import '../../l10n/app_localizations.dart';
@@ -251,9 +252,12 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
   void _add(SlideGroup<_Hit> group) {
     final hit = group.primary;
     final projectPath = hit.source.deck.projectPath;
-    final resolved = hit.slide.copyWith(
-      imagePath: _resolve(hit.slide.imagePath, projectPath),
-      imagePath2: _resolve(hit.slide.imagePath2, projectPath),
+    // Élke verwijzing wordt absoluut gemaakt tegen het bron-deck, ook een
+    // `![…](…)` in de vrije tekst — anders wijst een relatief pad na het
+    // toevoegen naar de map van de ontvangende presentatie.
+    final resolved = rewriteSlideImagePaths(
+      hit.slide,
+      (path) => _resolve(path, projectPath),
     );
     widget.onAdd(resolved);
     setState(() {

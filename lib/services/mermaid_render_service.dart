@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+// `requestHost` plant een post-frame callback; de klassen die dit
+// meebrachten wonen sinds main's afsplitsing in widgets/mermaid_render_host.
+import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -14,9 +16,11 @@ import '../utils/sanitize_svg.dart';
 /// Renders Mermaid diagram source to inline SVG for preview, presenter, and
 /// raster export (WYSIWYG). Results are cached by trimmed source text.
 ///
-/// The hidden [WebViewWidget] is mounted lazily via [MermaidRenderHostLayer]
-/// only after the first diagram is requested — never in the MaterialApp builder,
-/// which breaks macOS frame scheduling when combined with multi-window.
+/// De verborgen WebView zelf is een widget en woont daarom in
+/// `lib/widgets/mermaid_render_host.dart`; die mount pas na het eerste
+/// diagramverzoek — nooit in de MaterialApp-builder, want dat sloopt de
+/// frameplanning op macOS in combinatie met meerdere vensters. Deze dienst
+/// kent alleen de controller die de host aanreikt.
 class MermaidRenderService {
   MermaidRenderService._();
 
@@ -63,6 +67,13 @@ class MermaidRenderService {
     final mermaidJs = await rootBundle.loadString(
       'assets/web_export/mermaid.min.js',
     );
+    // Geen `eval()` meer — zie het commentaar in de pagina hieronder voor hoe
+    // de bundel er wél in komt. Daarmee kan `'unsafe-eval'` uit de CSP van deze
+    // pagina en is de enige `eval()` in het product weg.
+    //
+    // `'unsafe-inline'` blijft nodig: dit ís een inline script. Dat is een
+    // wezenlijk zwakkere ontheffing — er kan geen code meer ontstaan uit een
+    // string die op dat moment wordt samengesteld.
     final escapedJs = jsonEncode(mermaidJs);
     await _controller!.loadHtmlString('''
 <!DOCTYPE html>
@@ -197,93 +208,5 @@ bool get isFlutterTest {
   } catch (e) {
     logWarning('isFlutterTest: Platform.environment unavailable', e);
     return false;
-  }
-}
-
-/// Mounts [MermaidRenderHost] only after a diagram is first requested.
-class MermaidRenderHostLayer extends StatelessWidget {
-  const MermaidRenderHostLayer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    if (isFlutterTest) return const SizedBox.shrink();
-    return ValueListenableBuilder<bool>(
-      valueListenable: MermaidRenderService.instance.hostNeeded,
-      builder: (context, needed, child) {
-        if (!needed) return const SizedBox.shrink();
-        return child!;
-      },
-      child: const MermaidRenderHost(),
-    );
-  }
-}
-
-/// Offstage WebView that boots the shared Mermaid renderer.
-class MermaidRenderHost extends StatefulWidget {
-  const MermaidRenderHost({super.key});
-
-  @override
-  State<MermaidRenderHost> createState() => _MermaidRenderHostState();
-}
-
-class _MermaidRenderHostState extends State<MermaidRenderHost> {
-  WebViewController? _controller;
-  var _initialLoadDone = false;
-
-  @override
-  void initState() {
-    super.initState();
-    // Defer platform-view creation until after the first frame so we never
-    // compete with engine/window startup (macOS multi-window + WebView).
-    WidgetsBinding.instance.addPostFrameCallback((_) => _initWebView());
-  }
-
-  void _initWebView() {
-    if (!mounted || _controller != null) return;
-    final controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onNavigationRequest: (request) {
-            if (!_initialLoadDone) {
-              _initialLoadDone = true;
-              return NavigationDecision.navigate;
-            }
-            return NavigationDecision.prevent;
-          },
-          onHttpAuthRequest: (request) async {
-            // Deny auth prompts from the offline renderer.
-          },
-        ),
-      );
-    // GEEN setBackgroundColor. Die stond hierboven in de cascade en gooide op
-    // macOS `UnimplementedError: opaque is not implemented` — waarmee alles
-    // wat erna kwam werd overgeslagen: de controller werd nooit toegekend,
-    // `attachController` draaide nooit, en elk diagram bleef eeuwig op zijn
-    // laadtolletje staan. De fout landde in een scheduler-callback en bereikte
-    // de interface nooit.
-    //
-    // Weggelaten in plaats van afgevangen. Deze WebView staat offstage en
-    // tekent niets — wat eruit komt is SVG-tekst — dus de achtergrondkleur was
-    // decoratie zonder kijker. Een try/catch eromheen zou een tak opleveren die
-    // op de meeste platforms nooit draait en dus stil kan rotten.
-    setState(() => _controller = controller);
-    MermaidRenderService.instance.attachController(controller);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = _controller;
-    if (controller == null) return const SizedBox.shrink();
-    return IgnorePointer(
-      child: Offstage(
-        offstage: true,
-        child: SizedBox(
-          width: 320,
-          height: 240,
-          child: WebViewWidget(controller: controller),
-        ),
-      ),
-    );
   }
 }

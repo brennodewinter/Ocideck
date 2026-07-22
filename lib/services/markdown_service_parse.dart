@@ -4,6 +4,11 @@
 // an extension — same library, same members, no behaviour change.
 part of 'markdown_service.dart';
 
+// Welke slidetypes hun inhoud als tabel dragen staat níet hier maar in de
+// registry naast de enum ([SlideTypeMeta.backedByTable]). De parser hield daar
+// een tweede, handgeschreven lijst van bij, en een type daarin vergeten was
+// stil verlies: het deck parseerde, de dia verscheen, en de rijen waren leeg.
+
 // Hoisted hot-path regexes: compiled once at library load instead of on every
 // line/slide while parsing (they ran in the per-line body loop and the
 // slide-type inference, recompiling the same patterns thousands of times).
@@ -49,20 +54,6 @@ SlideType? _declaredSlideType(Iterable<String> tokens) {
   return null;
 }
 
-/// Slide types whose body is stored as a Markdown table, so the parser keeps the
-/// decoded rows in [Slide.tableRows]: the `table` and `scorecard` types plus the
-/// security types that serialise as a table (`checklist` P1-CHK, `scopeMatrix`
-/// P1-SCOPE, `findingsSummary` P1-SUM).
-const _tableBackedTypes = {
-  SlideType.table,
-  SlideType.scorecard,
-  SlideType.assets,
-  SlideType.discoveries,
-  SlideType.checklist,
-  SlideType.scopeMatrix,
-  SlideType.findingsSummary,
-};
-
 /// Mutable accumulator for [_MarkdownParse._parseBodyLines]: the per-line
 /// handlers fill these fields as they walk a slide block's body.
 class _BodyParse {
@@ -104,10 +95,24 @@ class _BodyParse {
   /// [_MarkdownParse._parseBodyLines] zodat de per-regel handlers niet elke
   /// regel opnieuw de cssClass hoeven te splitsen.
   bool isSplit = false;
+
+  /// Of we op dit moment binnen `<div class="split-image">` lezen — de stellage
+  /// waar de serialiser de zij-afbeelding van een split-slide in zet.
+  ///
+  /// Nodig sinds de vrije tekst zélf afbeeldingen mag bevatten. Daarvóór gold
+  /// "de eerste `![…]` op een split-slide is de zij-afbeelding", en dat is niet
+  /// langer waar: een `![…]` in de `split-text`-helft is een afbeelding in de
+  /// lopende tekst en hoort in de body te blijven staan.
+  ///
+  /// Veilig om op de stellage te leunen: deze tak geldt alleen voor een body met
+  /// `<!-- ocideck_list_style: richText -->`, en die aanwijzing schrijft alleen
+  /// OciDeck zelf — dus staat de `split-image`-div er ook. Een handgeschreven
+  /// Marp-split-slide heeft geen richText-body en loopt langs de bullet-tak.
+  bool inSplitImageDiv = false;
 }
 
 extension _MarkdownParse on MarkdownService {
-  Deck _doParse(String markdown, {String? filePath}) {
+  Deck _doParse(String markdown, {String? filePath, String fileHash = ''}) {
     final fm = _parseFrontMatter(markdown);
 
     final blocks = MarkdownService.splitSlideBlocks(fm.body);
@@ -148,9 +153,14 @@ extension _MarkdownParse on MarkdownService {
       finalized: fm.finalized,
       sealHash: fm.sealHash,
       sealAlgo: fm.sealAlgo,
+      // Een zegel dat nog uit de front matter komt is per definitie van vóór
+      // 0.1.0 en gaat dus over de gecanonicaliseerde inhoud. Ligt er een
+      // `.seal.json` naast, dan overschrijft die dit bij het openen.
+      sealForm: SealForm.canonical,
       sealAt: fm.sealAt,
       sealTimestampToken: fm.sealTsr,
       signature: fm.signature.isEmpty ? null : fm.signature,
+      fileHash: fileHash,
       miauwWaivers: fm.legacyMiauwWaivers,
       miauwConfirmations: fm.legacyMiauwConfirmations,
       frontMatterSource: fm.sourceLines,
@@ -432,7 +442,7 @@ extension _MarkdownParse on MarkdownService {
       tlp: d.tlp,
       privacy: d.privacy,
       quality: d.quality,
-      tableRows: _tableBackedTypes.contains(type) ? tableRows : const [],
+      tableRows: type.backedByTable ? tableRows : const [],
       tableEditable:
           type == SlideType.table && classTokens.contains('table-editable'),
       tableMarkOverdue:
@@ -618,6 +628,18 @@ extension _MarkdownParse on MarkdownService {
 
   void _consumeRichTextLine(String line, _BodyParse b) {
     final t = line.trim();
+    // De split-stellage bijhouden vóór al het andere. De kopfase hieronder slikt
+    // elke `<div`-regel en keert meteen terug, en bij een dia met een lége body
+    // is die fase nog actief wanneer `<div class="split-image">` langskomt: de
+    // vlag ging dan nooit aan, de zij-afbeelding viel in de body-tak en was na
+    // opslaan-en-heropenen weg.
+    if (b.isSplit) {
+      if (t.startsWith('<div class="split-image"')) {
+        b.inSplitImageDiv = true;
+      } else if (t == '</div>') {
+        b.inSplitImageDiv = false;
+      }
+    }
     if (b.richTextHeaderPhase) {
       if (t.isEmpty) return;
       if (t.startsWith('<div') || t == '</div>') {
@@ -646,7 +668,10 @@ extension _MarkdownParse on MarkdownService {
     if (isSplit && t.startsWith('<div class="image-caption">')) {
       final captionParts = _splitTwoCaptions(_decodeImageCaption(t));
       b.imageCaption = captionParts.isNotEmpty ? captionParts.first : '';
-    } else if (isSplit && _reImageMd.hasMatch(t)) {
+    } else if (isSplit && b.inSplitImageDiv && _reImageMd.hasMatch(t)) {
+      // Alleen binnen `<div class="split-image">`: dát is de zij-afbeelding.
+      // Een `![…]` in de `split-text`-helft is een afbeelding in de lopende
+      // tekst en valt hieronder in de body-tak.
       final m = _reImageMd.firstMatch(t);
       if (m != null && b.imagePath.isEmpty) {
         b.imagePath = m.group(1) ?? '';
@@ -661,6 +686,9 @@ extension _MarkdownParse on MarkdownService {
       // serialiser schrijft deze markup nergens anders, en zonder die
       // voorwaarde verdween een door de auteur getypte `<div>`-regel — met zijn
       // inhoud en al — uit een gewone vrije-tekstslide.
+      //
+      // De `split-image`-vlag wordt bovenaan deze methode al bijgehouden, want
+      // die moet ook aangaan wanneer de kopfase deze regel opslokt.
     } else {
       b.richTextLines.add(line);
     }

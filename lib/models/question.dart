@@ -8,17 +8,40 @@ const int questionMaxOptionCount = 8;
 const int questionDefaultOptionCount = 4;
 const int questionMaxTimeLimitSeconds = 3600;
 
+/// Hoeveel een getypt antwoord op het juiste moet lijken (Jaro-Winkler) om als
+/// goed te tellen. De standaard laat een typefout door, maar geen ander woord.
+const double questionDefaultSimilarity = 0.85;
+const double questionMinSimilarity = 0.5;
+const double questionMaxSimilarity = 1.0;
+
+/// Het aantal afbeeldingen in een [QuestionKind.imagePair]-vraag: links en
+/// rechts, en één ervan is de juiste.
+const int questionImagePairCount = 2;
+
 /// The concrete kind of question. The `question` slide carries one [QuestionKind]
-/// (chosen in the editor); more kinds (open answer, …) slot in here without a
-/// model rebuild.
+/// (chosen in the editor); more kinds slot in here without a model rebuild.
 ///
 /// - [multipleChoice]: one correct answer + a random pick of wrong ones; pick 1.
 /// - [trueFalse]: the prompt is a statement; pick Juist/Onjuist.
 /// - [multipleCorrect]: several answers may be correct; pick all correct ones.
+///   Anders dan bij [multipleChoice] worden ze *allemaal* getoond — je kunt niet
+///   "alle juiste" aanwijzen in een set waar er een paar van weggelaten zijn.
 /// - [ordering]: the authored order of the answers is the correct order; the
 ///   viewer taps the shuffled options into that order. `correct` flags are
 ///   ignored for this kind.
-enum QuestionKind { multipleChoice, trueFalse, multipleCorrect, ordering }
+/// - [imagePair]: twee afbeeldingen naast elkaar; de kijker wijst de juiste aan.
+///   Werkt als [trueFalse], maar omdat het beelden zijn wisselt links/rechts per
+///   ronde willekeurig.
+/// - [openText]: de kijker typt het antwoord; het telt als goed wanneer het
+///   genoeg lijkt op een van de juiste antwoorden (zie [QuestionSpec.similarityThreshold]).
+enum QuestionKind {
+  multipleChoice,
+  trueFalse,
+  multipleCorrect,
+  ordering,
+  imagePair,
+  openText,
+}
 
 QuestionKind _kindFromName(String? name) => QuestionKind.values.firstWhere(
   (k) => k.name == name,
@@ -41,17 +64,32 @@ class QuestionAnswer {
   final String text;
   final bool correct;
 
-  const QuestionAnswer({this.text = '', this.correct = false});
+  /// Pad naar de afbeelding die dít antwoord ís (alleen [QuestionKind.imagePair]).
+  /// Leeg bij een tekstantwoord; [text] dient er dan als bijschrift.
+  final String image;
+
+  const QuestionAnswer({this.text = '', this.correct = false, this.image = ''});
 
   factory QuestionAnswer.fromJson(Map<String, dynamic> json) => QuestionAnswer(
     text: (json['text'] ?? '').toString(),
     correct: json['correct'] == true,
+    image: (json['image'] ?? '').toString(),
   );
 
-  QuestionAnswer copyWith({String? text, bool? correct}) =>
-      QuestionAnswer(text: text ?? this.text, correct: correct ?? this.correct);
+  QuestionAnswer copyWith({String? text, bool? correct, String? image}) =>
+      QuestionAnswer(
+        text: text ?? this.text,
+        correct: correct ?? this.correct,
+        image: image ?? this.image,
+      );
 
-  Map<String, dynamic> toJson() => {'text': text, 'correct': correct};
+  Map<String, dynamic> toJson() => {
+    'text': text,
+    'correct': correct,
+    // Alleen schrijven wanneer er een afbeelding ís: een tekstvraag hoort geen
+    // lege sleutel in haar blok te krijgen.
+    if (image.isNotEmpty) 'image': image,
+  };
 }
 
 /// The authored specification of a question slide, stored as a fenced
@@ -76,6 +114,10 @@ class QuestionSpec {
   /// For [QuestionKind.trueFalse]: whether the statement in [prompt] is true.
   final bool statementIsTrue;
 
+  /// Voor [QuestionKind.openText]: hoeveel het getypte antwoord op een van de
+  /// juiste antwoorden moet lijken (Jaro-Winkler, 0..1) om goed te zijn.
+  final double similarityThreshold;
+
   const QuestionSpec({
     this.kind = QuestionKind.multipleChoice,
     this.prompt = '',
@@ -84,6 +126,7 @@ class QuestionSpec {
     this.timeLimitSeconds = 0,
     this.onWrong = QuestionOnWrong.retry,
     this.statementIsTrue = true,
+    this.similarityThreshold = questionDefaultSimilarity,
   });
 
   /// A friendly starting point shown when a question slide is first created.
@@ -113,6 +156,7 @@ class QuestionSpec {
         timeLimitSeconds: _clampTimeLimit(data['timeLimitSeconds']),
         onWrong: _onWrongFromName(data['onWrong']?.toString()),
         statementIsTrue: data['statementIsTrue'] != false,
+        similarityThreshold: _clampSimilarity(data['similarityThreshold']),
       ).normalized();
     } catch (e, s) {
       logError('QuestionSpec.parse: decode question JSON block', e, s);
@@ -128,6 +172,7 @@ class QuestionSpec {
     int? timeLimitSeconds,
     QuestionOnWrong? onWrong,
     bool? statementIsTrue,
+    double? similarityThreshold,
   }) => QuestionSpec(
     kind: kind ?? this.kind,
     prompt: prompt ?? this.prompt,
@@ -138,24 +183,40 @@ class QuestionSpec {
     ),
     onWrong: onWrong ?? this.onWrong,
     statementIsTrue: statementIsTrue ?? this.statementIsTrue,
+    similarityThreshold: _clampSimilarity(
+      similarityThreshold ?? this.similarityThreshold,
+    ),
   );
 
-  /// Answers with non-empty text, partitioned for quick access. For
+  /// Whether an answer counts as filled in. Normally that means it has text;
+  /// bij een beeldvraag ís de afbeelding het antwoord en is de tekst hooguit
+  /// een bijschrift.
+  bool _isFilled(QuestionAnswer a) => kind == QuestionKind.imagePair
+      ? a.image.trim().isNotEmpty
+      : a.text.trim().isNotEmpty;
+
+  /// Answers that are filled in, partitioned for quick access. For
   /// [QuestionKind.ordering], [filledAnswers] in list order IS the correct
   /// order.
-  List<QuestionAnswer> get filledAnswers =>
-      answers.where((a) => a.text.trim().isNotEmpty).toList();
+  List<QuestionAnswer> get filledAnswers => answers.where(_isFilled).toList();
   List<QuestionAnswer> get correctAnswers =>
       filledAnswers.where((a) => a.correct).toList();
   List<QuestionAnswer> get wrongAnswers =>
       filledAnswers.where((a) => !a.correct).toList();
 
   /// Whether the spec can actually be presented. True/false always can;
-  /// ordering needs at least two answers to order; the other kinds need at
-  /// least one correct and one wrong answer.
+  /// ordering needs at least two answers to order; een getypt antwoord heeft
+  /// alleen een juist antwoord nodig (er valt niets fouts te tonen); the other
+  /// kinds need at least one correct and one wrong answer.
   bool get isPresentable {
     if (kind == QuestionKind.trueFalse) return true;
     if (kind == QuestionKind.ordering) return filledAnswers.length >= 2;
+    if (kind == QuestionKind.openText) return correctAnswers.isNotEmpty;
+    if (kind == QuestionKind.imagePair) {
+      return filledAnswers.length >= questionImagePairCount &&
+          correctAnswers.isNotEmpty &&
+          wrongAnswers.isNotEmpty;
+    }
     return correctAnswers.isNotEmpty && wrongAnswers.isNotEmpty;
   }
 
@@ -167,6 +228,7 @@ class QuestionSpec {
     timeLimitSeconds: _clampTimeLimit(timeLimitSeconds),
     onWrong: onWrong,
     statementIsTrue: statementIsTrue,
+    similarityThreshold: _clampSimilarity(similarityThreshold),
   );
 
   String toBlock() {
@@ -177,6 +239,8 @@ class QuestionSpec {
       'timeLimitSeconds': timeLimitSeconds,
       'onWrong': onWrong.name,
       if (kind == QuestionKind.trueFalse) 'statementIsTrue': statementIsTrue,
+      if (kind == QuestionKind.openText)
+        'similarityThreshold': similarityThreshold,
       'answers': [for (final a in answers) a.toJson()],
     };
     return const JsonEncoder.withIndent('  ').convert(map);
@@ -185,6 +249,13 @@ class QuestionSpec {
   static int _clampOptionCount(Object? raw) {
     final v = _asInt(raw, questionDefaultOptionCount);
     return v.clamp(questionMinOptionCount, questionMaxOptionCount);
+  }
+
+  static double _clampSimilarity(Object? raw) {
+    final v = raw is num
+        ? raw.toDouble()
+        : double.tryParse(raw?.toString() ?? '') ?? questionDefaultSimilarity;
+    return v.clamp(questionMinSimilarity, questionMaxSimilarity);
   }
 
   static int _clampTimeLimit(Object? raw) {
@@ -212,6 +283,11 @@ enum QuestionResult { none, correct, wrong }
 class QuestionView {
   final List<String> options;
 
+  /// Paden naar de afbeeldingen die bij [options] horen, in dezelfde volgorde
+  /// ([QuestionKind.imagePair]). Leeg bij een tekstvraag. De inhoud van
+  /// [options] is dan het bijschrift, niet het antwoord zelf.
+  final List<String> optionImages;
+
   /// Indices into [options] of the correct answer(s). One entry for single-pick
   /// kinds (multiple choice, true/false); one or more for [multi]. For
   /// [ordering] this is the correct sequence: entry k is the index in [options]
@@ -238,6 +314,11 @@ class QuestionView {
   /// after an answer or a timeout.
   final bool revealed;
 
+  /// Of er überhaupt een juist antwoord te géven valt. Een vraag zonder
+  /// aangemerkt juist antwoord is niet te halen; die mag het doorbladeren dan
+  /// ook niet tegenhouden, hoe de auteur de fout-afhandeling ook instelde.
+  final bool answerable;
+
   /// When locked, the options are no longer tappable (answered, or wrong with
   /// "lock & continue").
   final bool locked;
@@ -248,20 +329,49 @@ class QuestionView {
   /// Remaining time in milliseconds, for the countdown bar.
   final int remainingMs;
 
+  /// Of dit een getypt antwoord is ([QuestionKind.openText]). [options] blijft
+  /// dan leeg tot het antwoord onthuld is — de juiste antwoorden mogen niet
+  /// vooraf naar het beamervenster reizen.
+  final bool openText;
+
+  /// Wat de kijker tot nu toe getypt heeft (alleen [openText]).
+  final String typedAnswer;
+
+  /// Het juiste antwoord om te tonen ná het onthullen (alleen [openText]).
+  /// Leeg zolang er niet geantwoord is.
+  final String expectedAnswer;
+
+  /// De gemeten gelijkenis (0..1) van het getypte antwoord met het juiste,
+  /// zodat de kijker ziet hoe dichtbij het was. Alleen zinvol na onthullen.
+  final double matchScore;
+
   const QuestionView({
     this.options = const [],
+    this.optionImages = const [],
     this.correctIndices = const [],
     this.selectedIndices = const [],
     this.multi = false,
     this.ordering = false,
     this.result = QuestionResult.none,
     this.revealed = false,
+    this.answerable = true,
     this.locked = false,
     this.totalSeconds = 0,
     this.remainingMs = 0,
+    this.openText = false,
+    this.typedAnswer = '',
+    this.expectedAnswer = '',
+    this.matchScore = 0,
   });
 
   bool get hasTimer => totalSeconds > 0;
+
+  /// Of de opties beelden zijn in plaats van tekst.
+  bool get hasImages => optionImages.any((p) => p.isNotEmpty);
+
+  /// Het pad bij optie [i], of leeg wanneer die geen afbeelding heeft.
+  String imageAt(int i) =>
+      i >= 0 && i < optionImages.length ? optionImages[i] : '';
 
   bool isCorrect(int i) => correctIndices.contains(i);
   bool isSelected(int i) => selectedIndices.contains(i);
@@ -294,43 +404,64 @@ class QuestionView {
 
   QuestionView copyWith({
     List<String>? options,
+    List<String>? optionImages,
     List<int>? correctIndices,
     List<int>? selectedIndices,
     bool? multi,
     bool? ordering,
     QuestionResult? result,
     bool? revealed,
+    bool? answerable,
     bool? locked,
     int? totalSeconds,
     int? remainingMs,
+    bool? openText,
+    String? typedAnswer,
+    String? expectedAnswer,
+    double? matchScore,
   }) => QuestionView(
     options: options ?? this.options,
+    optionImages: optionImages ?? this.optionImages,
     correctIndices: correctIndices ?? this.correctIndices,
     selectedIndices: selectedIndices ?? this.selectedIndices,
     multi: multi ?? this.multi,
     ordering: ordering ?? this.ordering,
     result: result ?? this.result,
     revealed: revealed ?? this.revealed,
+    answerable: answerable ?? this.answerable,
     locked: locked ?? this.locked,
     totalSeconds: totalSeconds ?? this.totalSeconds,
     remainingMs: remainingMs ?? this.remainingMs,
+    openText: openText ?? this.openText,
+    typedAnswer: typedAnswer ?? this.typedAnswer,
+    expectedAnswer: expectedAnswer ?? this.expectedAnswer,
+    matchScore: matchScore ?? this.matchScore,
   );
 
   Map<String, dynamic> toJson() => {
     'options': options,
+    'optionImages': optionImages,
     'correctIndices': correctIndices,
     'selectedIndices': selectedIndices,
     'multi': multi,
     'ordering': ordering,
     'result': result.name,
     'revealed': revealed,
+    'answerable': answerable,
     'locked': locked,
     'totalSeconds': totalSeconds,
     'remainingMs': remainingMs,
+    'openText': openText,
+    'typedAnswer': typedAnswer,
+    'expectedAnswer': expectedAnswer,
+    'matchScore': matchScore,
   };
 
   factory QuestionView.fromJson(Map<String, dynamic> json) => QuestionView(
     options: [for (final o in (json['options'] as List? ?? const [])) '$o'],
+    optionImages: [
+      for (final o in (json['optionImages'] as List? ?? const [])) '$o',
+    ],
     correctIndices: [
       for (final i in (json['correctIndices'] as List? ?? const []))
         (i as num).toInt(),
@@ -346,8 +477,13 @@ class QuestionView {
       orElse: () => QuestionResult.none,
     ),
     revealed: json['revealed'] == true,
+    answerable: json['answerable'] != false,
     locked: json['locked'] == true,
     totalSeconds: (json['totalSeconds'] as num?)?.toInt() ?? 0,
     remainingMs: (json['remainingMs'] as num?)?.toInt() ?? 0,
+    openText: json['openText'] == true,
+    typedAnswer: (json['typedAnswer'] ?? '').toString(),
+    expectedAnswer: (json['expectedAnswer'] ?? '').toString(),
+    matchScore: (json['matchScore'] as num?)?.toDouble() ?? 0,
   );
 }

@@ -15,6 +15,7 @@ extension FileServiceNet on FileService {
   Future<Uint8List?> fetchUrlBytes(
     String url, {
     int maxBytes = FileService.maxDeckMarkdownBytes,
+    ProxyFallbackConfirm? onConfirmProxy,
     @visibleForTesting http.Client? client,
     @visibleForTesting bool? viaProxyFallback,
     @visibleForTesting bool closeInjectedClient = false,
@@ -36,6 +37,7 @@ extension FileServiceNet on FileService {
       // server-zijdig ophaalt. Zonder gedeployd hulppunt faalt dit net zo
       // stil als de directe poging; de melding noemt dan CORS.
       if (viaProxyFallback ?? kIsWeb) {
+        if (!await _mayFallBackToProxy(uri, onConfirmProxy)) return null;
         final proxied = Uri.base.resolve(
           'fetch-proxy?url=${Uri.encodeComponent(url.trim())}',
         );
@@ -53,6 +55,36 @@ extension FileServiceNet on FileService {
     } finally {
       if (owned) c.close();
     }
+  }
+
+  /// Of de terugval op het fetch-hulppunt mag lopen.
+  ///
+  /// Twee sloten, en het eerste staat vast.
+  ///
+  /// **Een URL mét inloggegevens gaat er nooit doorheen.** Het hulppunt haalt
+  /// server-zijdig op, dus het krijgt alles wat in de URL staat in handen —
+  /// inclusief `https://gebruiker:wachtwoord@…`. Dit is hetzelfde slot dat
+  /// `GitWebTransport` op zijn token zet; daar heet het `_mayUseProxy`.
+  ///
+  /// **En anders vraagt hij het.** Zonder die vraag verhuisde de hele URL
+  /// automatisch en zonder melding van de bronserver naar de origin die de app
+  /// serveert — een derde partij die de gebruiker niet had aangewezen. De URL
+  /// zelf kan een gegeven zijn (een deellink met een sleutel erin). Geen
+  /// bevestiger geregistreerd betekent geen toestemming: dan valt de terugval
+  /// weg en meldt de import gewoon dat het niet lukte.
+  Future<bool> _mayFallBackToProxy(
+    Uri uri,
+    ProxyFallbackConfirm? onConfirmProxy,
+  ) async {
+    if (uri.userInfo.isNotEmpty) {
+      logWarning(
+        'FileService.fetchUrlBytes: URL draagt inloggegevens, geen terugval '
+        'op het fetch-hulppunt',
+      );
+      return false;
+    }
+    if (onConfirmProxy == null) return false;
+    return onConfirmProxy(host: uri.host);
   }
 
   /// Eén begrensde GET: 200-only, harde bytecap, elke fout wordt null.

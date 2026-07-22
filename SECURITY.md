@@ -1,9 +1,16 @@
 # Security Policy
 
+> **Status:** policy, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This policy covers vulnerabilities in **OciDeck itself** (the application). It does
 **not** govern how findings from a penetration test authored *with* OciDeck are
 disclosed — that is arranged per engagement with the client (scope, reporting
 channel, and disclosure terms), not dictated by this tool.
+
+The mailbox below is the project's only published address, so it also receives
+Code-of-Conduct reports, which follow [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
+rather than this policy. *(Noted 2026-07-22: the scope sentence above admits only
+vulnerabilities, which made the shared use of the address look like a mistake.)*
 
 ## Reporting a vulnerability
 
@@ -41,6 +48,90 @@ When reporting, please include as much of the following as you can:
 We ask that you give us a reasonable opportunity to address the issue before any
 public disclosure, and that you avoid privacy violations, data destruction, or
 service disruption while researching.
+
+## What happens to your report on our side
+
+This section was added on 2026-07-22 because the one above only described what
+you get back, not what is done. It describes the working method, so you can tell
+whether your report has fallen through a crack.
+
+**Triage.** A report is first reproduced against the current default branch. If
+it cannot be reproduced, you are asked for what is missing rather than told no.
+A reproduced report becomes an issue in the tracker — a private one where the
+detail would itself be the exploit, public where it would not.
+
+**Severity.** Severity is judged on what an attacker actually gains on the
+machine in front of the user, not on the label of the mechanism. The questions
+that decide it, in order: can it be reached from a deck or a file a user opens
+without any further action; does it cross one of the boundaries this project
+exists to hold (the export classification gate, asset-path containment, the
+privacy projection boundary, the SSRF guard, the keychain); does it need a
+setting that is off by default. The pentest module's own CVSS v4.0 engine is
+available for putting a number on it, but the number is a communication aid, not
+the decision.
+
+**Ownership.** OciDeck is maintained by a small group under Stichting LibreKAT;
+there is no rota and no second line. A report is owned by whoever picks it up,
+and that person stays the correspondent until it is closed — so you are not
+handed on. If nothing has come back, a reminder to the same address is the right
+move; see [Reporting a vulnerability](#reporting-a-vulnerability).
+
+**When the report is about something we bundle, not something we wrote.** That is
+a large part of the attack surface: five vendored JavaScript bundles in the HTML
+export, the Dart/Flutter package graph, two plugin forks, and the offline
+reference datasets. The report is still handled here, because a user runs what
+we ship regardless of who wrote it. What changes is the fix: an upstream
+advisory is answered by moving the pin and refreshing
+`assets/web_export/MANIFEST.json`, not by patching a vendored copy — a local
+patch is invisible to `make deps-check` and to every external scanner reading the
+SBOM. Where no upgrade is available, the mitigation and the residual are written
+down in [Vendored bundle currency](#vendored-bundle-currency) under the
+component's own name, so a reader can see it rather than infer it.
+
+## Keeping vulnerable third-party components out
+
+**This describes how the maintainers order their own work. It is not a service
+commitment, and no timeframe here is promised to anyone.** OciDeck is an
+open-source project with no release process (see [Supported
+versions](#supported-versions)); a fixed remediation deadline is exactly the kind
+of promise that becomes untrue the first quiet month. What follows is the
+steering instrument, written down so it can be held to in behaviour.
+
+**What is a gate and what is advice**, because the difference decides how fast
+something has to move:
+
+| Check | Fails the work? | Covers |
+| --- | --- | --- |
+| `make deps-check` | **Yes** — part of `make check-full` | The five vendored export bundles: SHA-256 against the manifest, plus an OSV query per pinned version. Also the bundled reference standards against upstream. |
+| `make sbom-verify` | **Yes** — in the test suite | The committed SBOM still matches the dependency set. |
+| `make trivy` | **No, by configuration** | CVEs in the resolved Dart packages, plus a committed-secret sweep. [`trivy.yaml`](trivy.yaml) says so itself: it reports every severity and never fails the build, because Dart/pub advisory coverage is sparse enough that a gate would mostly teach people to skip it. Findings are triaged by hand. |
+| `make deps-outdated`, `make catalogs-outdated` | **No** | Freshness of packages and of the bundled standards. A newer upstream is not a defect in what you built. |
+
+**The rhythm.** `make check-full` — which is where the gates above live — is run
+before any dependency or web-facing change, and before a build meant for anyone
+else. There is no scheduled scan, because there is no runner to schedule it on:
+the Forgejo remote has none, so the CI workflow that declares these checks is
+written but never fires. Whoever commits is the scan.
+
+**How urgency is decided.** In descending order, and this is the whole of it:
+
+1. A component that untrusted deck content or a network response can reach
+   *without* a setting being turned on — the sanitiser, the parsers, the export
+   bundles — moves ahead of whatever else was planned.
+2. A component reachable only behind an off-by-default switch (the AI backend,
+   the CVE lookup, online media) is upgraded on the ordinary rhythm, and the
+   exposure is named in this file meanwhile.
+3. An advisory that is disputed, or whose worst case is denial of service on
+   input the user chose to open, is tracked by name and version rather than
+   rushed — as `CVE-2023-39663` against MathJax 3.2.2 is below.
+4. An upgrade with no advisory behind it waits until its behaviour can be
+   validated, and the reason for waiting is written down — as the mermaid 10 → 11
+   upgrade is below.
+
+The point of writing the order down is that the third and fourth categories are
+where a project quietly stops looking. Naming a deferred item, with its version
+and its reason, is what keeps it from becoming a decision nobody remembers
+taking.
 
 ## Scope notes
 
@@ -80,6 +171,20 @@ As of the last review all
 pins (marked 18.0.5, highlight.js 11.11.1, DOMPurify 3.4.12, mermaid 11.16.0,
 MathJax 3.2.2) carry **no known advisories**. One tracked (non-urgent)
 maintenance item:
+As of 2026-07-22 one pin carries an advisory (DOMPurify 3.4.11, below); the
+others (marked 18.0.5, highlight.js 11.11.1, mermaid 10.9.6, MathJax 3.2.2)
+carry none. Three tracked (non-urgent) maintenance items:
+
+- **DOMPurify 3.4.11 → 3.4.12** — `GHSA-c2j3-45gr-mqc4`: an element allowed via
+  `CUSTOM_ELEMENT_HANDLING.tagNameCheck` skips `afterSanitizeElements`, so an
+  application relying on that hook as a policy layer keeps attributes on custom
+  elements it strips everywhere else. **Both preconditions are absent here**:
+  the export calls `DOMPurify.sanitize()` with defaults (and the SVG profile for
+  mermaid output), sets no `CUSTOM_ELEMENT_HANDLING`, and registers no hook at
+  all — `addHook` appears nowhere in `lib/`. The advisory is a second-order
+  gadget in code paths OciDeck does not execute, CVSS v4 vector `AV:N/AC:H/UI:A`
+  with no confidentiality or integrity impact on the vulnerable component.
+  Upgrade with the next bundle refresh; not a release blocker.
 
 - **MathJax 3.2.2** — the only report against it is a disputed ReDoS
   (CVE-2023-39663), impact bounded to DoS on crafted TeX; upgrade tracked.
@@ -102,11 +207,15 @@ gate in the test suite (`make check`).
 Two boundaries, because both were overstated here before (*corrected
 2026-07-21*):
 
-- **SHA-256 covers most components, not all.** Of the 199 components listed, 190
-  carry a hash. The nine that do not are the two vendored plugin forks under
-  `third_party/` (`desktop_multi_window`, `screen_retriever_macos`), the
-  packages that ship inside the Flutter SDK rather than from pub, and the SDKs
-  themselves — none of which has a pub archive hash to record.
+- **SHA-256 covers most components, not all.** Of the 199 components listed, 192
+  carry a hash. The seven that do not are the packages that ship inside the
+  Flutter SDK rather than from pub (`flutter`, `flutter_localizations`,
+  `flutter_test`, `flutter_web_plugins`, `sky_engine`) and the two build SDKs
+  themselves — none of which has a pub archive hash to record. The two vendored
+  plugin forks under `third_party/` used to be in this list; since 2026-07-22
+  they carry a **tree hash** (SHA-256 over the sorted per-file digests of the
+  vendored directory) plus the upstream commit they were branched from, so what
+  we ship is verifiable even though a path dependency has no archive.
 - **It travels with the web build only.** `make build-web` copies `sbom/` into
   `build/web/sbom/`, so a hosted instance serves it from its own origin. The
   desktop build recipes do not bundle it; there, the SBOM lives in the
@@ -163,6 +272,16 @@ OciDeck constrains what an opened deck can do:
   validated address** (`connectionFactory`), so a DNS rebind between the check
   and the connect can't redirect the socket internally. TLS still validates
   against the original hostname.
+- **The scanner's own-identity allowlist.** *Settings → Security → Your own
+  details* holds the user's name, e-mail address, phone number and organisation
+  domain so the privacy scanner does not report the sender as a finding. It is
+  not a credential, but it is the only preference carrying personal data about a
+  natural person, so it lives in the keychain
+  (`SecretStore.privacyOwnIdentityKey`) rather than in the preferences file.
+  Migration order matters and is deliberate: the legacy `privacyOwnIdentity`
+  preference is removed only once the keychain has accepted the value, because
+  losing the allowlist makes the scanner start flagging the user's own name —
+  the single largest false-positive source there is.
 - **WebDAV/Nextcloud source — credentials and trust boundary.** The app
   password is stored encrypted in the OS keychain (`flutter_secure_storage`,
   keyed by server URL + username via `SecretStore`), never in the preferences
@@ -241,7 +360,12 @@ OciDeck constrains what an opened deck can do:
   pinning the socket to the validated address. Remote images keep the decode-dimension
   cap (`cappedNetworkImage`); magic-byte validation does not apply to live
   streams (no pre-fetched bytes), a deliberate trade-off. The embed WebView
-  restricts navigation to the player origins and refuses auth prompts/pop-ups.
+  restricts navigation to the player origins and refuses auth prompts/pop-ups;
+  since 2026-07-22 that check matches on the parsed **host** rather than on a
+  substring of the URL, and the YouTube list is `youtube-nocookie.com`,
+  `ytimg.com` and `googlevideo.com` — `www.youtube.com` is refused, so the
+  player's own "Watch on YouTube" link cannot navigate the frame onto the
+  tracking origin.
 
 Known residual hardening: the render-path symlink cache is keyed by path for the
 session, so a symlink swapped *after* its first render isn't re-checked (a
@@ -252,12 +376,34 @@ narrow TOCTOU on an already-open deck).
 Autosave writes each dirty tab's full markdown (and user notes) as **unencrypted
 JSON** to `<app-support>/recovery/<uuid>.json`, so work survives a crash. This
 means deck content — including a **classified** deck — sits in plaintext on disk
-until the tab is saved or discarded. Mitigations: the directory is the
-per-user, OS-permissioned app-support path; snapshots are deleted on save and on
-"tab became clean"; and orphaned snapshots older than 7 days are pruned on
-startup (`RecoveryService.pruneOlderThan`) so a forgotten crash file can't linger
-indefinitely. Encrypting these snapshots at rest (keyed via the keychain) is a
-known residual improvement, not yet implemented.
+until the tab is saved or discarded. Mitigations: the directory is the per-user,
+OS-permissioned app-support path; snapshots are deleted on save, on "tab became
+clean" and on a normal window close; and orphans older than 7 days are pruned
+both at startup (`RecoveryService.pruneOlderThan` via `loadAll`) and while the
+app runs (`pruneIfDue`, rate-limited to once an hour, driven by the autosave
+tick) so a long-uptime machine cannot hold a forgotten crash file indefinitely.
+
+**Encryption at rest was considered and deliberately not implemented.** The only
+defensible key location is the OS keychain — a key stored beside the ciphertext
+is not encryption — and the app already uses that store. But a snapshot almost
+always duplicates a deck that exists as an unencrypted `.md` in the user's own
+project folder, on the same disk under the same permissions; encrypting the copy
+while the original lies beside it protects only the never-saved deck, which is
+also the shortest-lived case. Against that: OciDeck ships no symmetric cipher
+(`crypto` provides hashes only), so this means adding a full cryptography
+library to the dependency tree and SBOM of the whole application, or hand-rolling
+a cipher inside a privacy tool. It also costs recoverability — a snapshot that is
+unreadable without its keychain entry fails silently on a restored machine, at
+precisely the moment recovery exists for. Bounding the plaintext's lifetime and
+making the OS-permission claim actually true was judged the better trade.
+
+That second half is a real fix, not a restatement. On macOS `~/Library` is 0700
+and `$TMPDIR` is per-user, so the "per-user, OS-permissioned" claim holds by
+itself. On **Linux** it did not: `getApplicationSupportDirectory()` and the
+media-staging root under `/tmp` are created with the ordinary umask, leaving deck
+content and the images of an unsaved deck readable by any other local account.
+`DiskTraces.restrictToOwner()` now runs one fixed `chmod 700` over both at
+startup (Linux only, argv form, no shell, best effort, never `/tmp` itself).
 
 A connected **git repository** puts far more than a snapshot there: a native
 clone under `<app-support>/git_clone/<storageSlug>/` holds the full deck content
@@ -266,11 +412,24 @@ pushed, all unencrypted. The 7-day prune deliberately does not apply — a worki
 copy is meant to persist. Whatever sensitivity the repository has on the server,
 it has on this disk too.
 
-Removing the connection does not remove any of it: `removeConnection` rewrites
-the connection list in preferences and stops there, so `git_clone/<slug>/`,
-`git_mirror/<slug>/` and the `git_outbox::` keys survive. Deleting them is
-manual. *Corrected 2026-07-21: this paragraph used to end "so it stays until the
-connection is removed", which implied a cleanup that is not implemented.*
+Removing the connection now removes all of it. `SettingsNotifier.setConnections`
+is the single funnel for every connection-list mutation, and it hands each
+disappeared connection to `DiskTraces.removeTracesOf`, which deletes
+`git_clone/<slug>/`, `git_mirror/<slug>/` and the `git_outbox::<slug>::` keys.
+The keychain secret survives on purpose (it belongs to the account, not to this
+connection), and a `LocalConnection` is never touched — that path is the user's
+own folder.
+
+The one case where cleanup is refused is **unpushed work**. Queued commits exist
+nowhere else, so `removeGitTraces` returns a refusal and leaves the working copy
+alone unless the caller passes `discardPendingWork`. The settings dialog obtains
+that flag only from an explicit confirmation that names the deck, branch and
+commit message at stake; declining keeps the connection. The same rule guards
+`SettingsNotifier.resetToInitialState`, which otherwise wipes settings, recovery
+snapshots, style logos, every working copy and the per-connection keychain
+entries. *Corrected 2026-07-22: this section previously documented that none of
+this was cleaned up. That was accurate then; the behaviour, not the wording, was
+the defect.*
 
 ## Platform sandboxing (macOS)
 
@@ -306,3 +465,37 @@ version), `pubspec.yaml` says `0.2.0+1`, and the app does not display a version
 number anywhere, so a user cannot read off what they are running. Fixes land on
 the default development branch, which is what everyone runs. Once releases are
 tagged, fixes will target the latest release plus that branch.
+
+## How a fix reaches you
+
+Stated plainly, because the honest answer is thinner than most projects' and a
+reader deserves to know it before relying on this (*added 2026-07-22*).
+
+There is **no update mechanism**. The app never phones home, never checks for a
+newer version, and shows no version of its own. There is no release feed to
+subscribe to, no signed installer that updates itself, and no notification of any
+kind. A fix reaches you when you fetch the default branch and rebuild — and not
+before.
+
+So the notification channel is the repository itself. Three places carry it, in
+increasing detail:
+
+- **[`CHANGELOG.md`](CHANGELOG.md)** — the `[Unreleased]` section, written in the
+  user's language rather than in commit shorthand. This is the one to read if you
+  only read one.
+- **The commit log and the merged pull requests** on the default branch. Every
+  change lands through a PR, so the PR is where the reasoning is.
+- **This file**, for anything about a bundled component that is deferred rather
+  than fixed — see [Vendored bundle
+  currency](#vendored-bundle-currency).
+
+If you reported something, you also get told directly: the correspondent named
+under [What happens to your report](#what-happens-to-your-report-on-our-side)
+points you at the commit that closes it.
+
+What this means for a deployment that matters: pin the commit you built from and
+record it, because it is the only version identifier that exists, and decide
+yourself how often you refetch. The project cannot tell you that you are behind.
+When a release scheme does arrive, this section and
+[`docs/MIGRATION_GUIDE.md`](docs/MIGRATION_GUIDE.md) are where it gets written
+down.

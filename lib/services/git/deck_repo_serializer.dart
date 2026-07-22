@@ -9,6 +9,7 @@ import '../../models/slide.dart';
 import '../../models/chart.dart';
 import '../../utils/log.dart';
 import '../markdown_service.dart';
+import '../slide_image_refs.dart';
 import '../web_asset_store.dart';
 import 'asset_pool.dart';
 
@@ -123,10 +124,11 @@ Future<({Deck deck, List<String> missing})> withRepoChartData(
 ///
 /// De git-opslag schrijft `deck.md`, de afbeeldingenpool en de grafiekdata. Alle
 /// overige lagen blijven achter: video en audio round-trippen nog niet, en de
-/// twee sidecars (`.ink.json` met de tekeningen, `.user-notes.json` met de
-/// notities) worden nergens in `services/git/` geschreven. Op schijf gaan die
-/// wél mee, dus wie van een bestand naar git verhuist raakt ze kwijt zonder dat
-/// er iets misgaat waar de app op kan wijzen.
+/// sidecars (`.ink.json` met de tekeningen, `.user-notes.json` met de notities,
+/// `.seal.json` met het zegel en de handtekening) worden nergens in
+/// `services/git/` geschreven. Op schijf gaan die wél mee, dus wie van een
+/// bestand naar git verhuist raakt ze kwijt zonder dat er iets misgaat waar de
+/// app op kan wijzen.
 ///
 /// Dit meenemen is een grotere ingreep dan een waarschuwing; de waarschuwing kan
 /// niet wachten. De UI toont hem vóór de commit — daarna is de keuze al gemaakt.
@@ -143,18 +145,29 @@ class GitDeckOmissions {
   /// Dia's met gebruikersnotities; die notities gaan niet mee.
   final int noteSlides;
 
+  /// Of het deck een zegel of een handtekening draagt die niet meegaat.
+  ///
+  /// Zwaarder dan de andere drie, want hier verdwijnt niet alleen werk maar een
+  /// verklaring: een verzegeld rapport dat via git terugkomt, leest als een
+  /// rapport dat nooit verzegeld is. Sinds 0.1.0 staat het zegel naast de
+  /// markdown in plaats van erin, dus het reist niet meer vanzelf mee in
+  /// `deck.md` — precies de stilte waar deze waarschuwing voor bestaat.
+  final bool sealed;
+
   const GitDeckOmissions({
     this.videoSlides = 0,
     this.audioSlides = 0,
     this.annotatedSlides = 0,
     this.noteSlides = 0,
+    this.sealed = false,
   });
 
   bool get isEmpty =>
       videoSlides == 0 &&
       audioSlides == 0 &&
       annotatedSlides == 0 &&
-      noteSlides == 0;
+      noteSlides == 0 &&
+      !sealed;
 
   bool get isNotEmpty => !isEmpty;
 }
@@ -183,6 +196,7 @@ GitDeckOmissions gitDeckOmissions(Deck deck) {
     audioSlides: audio,
     annotatedSlides: ink,
     noteSlides: notes,
+    sealed: deck.finalized || (deck.signature?.isNotEmpty ?? false),
   );
 }
 
@@ -212,9 +226,9 @@ class RepoDeckFiles {
 /// en omdat de pool op inhoud adresseert, levert opnieuw hashen dezelfde
 /// verwijzing op, dus de heenweg is omkeerbaar.
 ///
-/// Alleen afbeeldingen (`imagePath`/`imagePath2`), gelijk aan wat het open-pad
-/// terugzet; video en audio round-trippen nog niet door git en worden gemeld in
-/// plaats van als kapotte verwijzing weggeschreven.
+/// Alleen afbeeldingen — de velden én de `![…](…)` in de vrije tekst, gelijk aan
+/// wat het open-pad terugzet; video en audio round-trippen nog niet door git en
+/// worden gemeld in plaats van als kapotte verwijzing weggeschreven.
 ///
 /// Grafiekdata volgt geen van beide routes: die krijgt een eigen bestand naast
 /// `deck.md`, op het pad dat de chart-`source` noemt. Bewust niet in de pool —
@@ -270,16 +284,21 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
 
   final slides = <Slide>[];
   for (final slide in deck.slides) {
-    final img1 = await poolImage(slide.imagePath);
-    final img2 = await poolImage(slide.imagePath2);
+    // Élke afbeeldingsverwijzing van de dia gaat door de pool, ook eentje midden
+    // in de vrije tekst. Blijft die achter als gewoon bestandspad, dan staat er
+    // in `deck.md` een verwijzing die de forge niet kent én telt de asset voor
+    // [AssetIndex] als ongebruikt — en opruimen is onomkeerbaar.
+    //
+    // Poolen is asynchroon en herschrijven niet, dus het gaat in twee slagen:
+    // eerst elke verwijzing naar een `repo:`-pad, dan de dia in haar geheel om.
+    final pooled = <String, String>{};
+    for (final path in slideImagePaths(slide).toSet()) {
+      final ref = await poolImage(path);
+      if (ref != null) pooled[path] = ref;
+    }
     warnUnpooledMedia(slide.videoPath);
     warnUnpooledMedia(slide.audioPath);
-    slides.add(
-      slide.copyWith(
-        imagePath: img1 ?? slide.imagePath,
-        imagePath2: img2 ?? slide.imagePath2,
-      ),
-    );
+    slides.add(rewriteSlideImagePaths(slide, (path) => pooled[path]));
   }
   final rewritten = deck.copyWith(slides: slides);
 
