@@ -86,10 +86,7 @@ mixin ForgeHttp {
   }
 
   /// Eén POST met een JSON-body die als JSON terugkomt.
-  Future<Object?> post(
-    List<String> segments,
-    Map<String, Object?> body,
-  ) async {
+  Future<Object?> post(List<String> segments, Map<String, Object?> body) async {
     final response = await sendJson('POST', segments, body);
     checkStatus(response.status);
     return decodeJson(response.bytes);
