@@ -6,7 +6,9 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/git_settings.dart';
+import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/git/git_cli_io.dart';
 import 'package:ocideck/services/git/native_git_mirror_api.dart';
 import 'package:ocideck/services/git/native_git_mirror_io.dart';
@@ -158,6 +160,23 @@ void main() {
       baseSha: tab.gitOrigin!.baseSha,
     );
   }
+
+  /// Een notitiebestand zoals OciDeck het schrijft: verankerd op de
+  /// vingerafdruk van een dia, niet op haar id.
+  String notesFor({required int index, required String text}) => jsonEncode({
+    'version': UserNotesCodec.version,
+    'slides': [
+      {
+        'index': index,
+        'fp': AnnotationCodec.fingerprint(
+          MarkdownService()
+              .parseDeck(_deck(alfa: 'alfa origineel', beta: 'beta origineel'))!
+              .slides[index],
+        ),
+        'text': text,
+      },
+    ],
+  });
 
   /// Bewerk één bullet van het geopende deck.
   void editBeta(ProviderContainer container, String item) {
@@ -313,25 +332,6 @@ void main() {
   // het pad dat de app kiest zodra git geïnstalleerd is, en bij het gewoonste
   // scenario dat er is.
   group('notities overleven de native merge', () {
-    /// Een notitiebestand zoals OciDeck het schrijft: verankerd op de
-    /// vingerafdruk van een dia, niet op haar id.
-    String notesFor({required int index, required String text}) => jsonEncode({
-      'version': UserNotesCodec.version,
-      'slides': [
-        {
-          'index': index,
-          'fp': AnnotationCodec.fingerprint(
-            MarkdownService()
-                .parseDeck(
-                  _deck(alfa: 'alfa origineel', beta: 'beta origineel'),
-                )!
-                .slides[index],
-          ),
-          'text': text,
-        },
-      ],
-    });
-
     test('van beide kanten, op verschillende dia\'s', () async {
       final (container, tabs) = build();
       await openOnWorkBranch(container, tabs);
@@ -427,5 +427,170 @@ void main() {
     expect(landed, isNot(contains('<<<<<<<')));
     expect(landed, isNot(contains('>>>>>>>')));
     expect(MarkdownService().parseDeck(landed), isNotNull);
+  });
+
+  // Een deckmap is meer dan `deck.md`: de cijfers van een gekoppelde grafiek
+  // staan in `data/*.json` ernaast, en de notities in `deck.user-notes.json`.
+  // Het native pad las die bestanden bij het openen niet in, dus stond er een
+  // deck in de editor dat ze niet kende — en omdat elke schrijfweg de deckmap
+  // *vervangt* door wat hij zelf samenstelde, ruimde de eerstvolgende opslag ze
+  // op. Zonder botsing, zonder melding, en zonder dat het deck er kapot uitzag:
+  // de verwijzing bleef staan, alleen de cijfers waren weg. Issue #670.
+  group('de lagen naast deck.md overleven het native pad', () {
+    const dataPath = 'data/omzet.json';
+    const cijfers = ChartSpec(
+      x: ['Q1', 'Q2'],
+      series: [
+        ChartSeries(name: '2025', data: [10, 14]),
+      ],
+    );
+
+    /// Hetzelfde deck als [_deck], plus een grafiekdia die haar cijfers uit
+    /// [dataPath] haalt in plaats van ze inline te dragen — de vorm waarin een
+    /// deck in de repo staat.
+    String deckMetGrafiek({required String alfa, required String beta}) {
+      final md = MarkdownService();
+      final basis = md.parseDeck(_deck(alfa: alfa, beta: beta))!;
+      return md.generateDeck(
+        basis.copyWith(
+          slides: [
+            ...basis.slides,
+            Slide.create(SlideType.chart).copyWith(
+              title: 'Omzet',
+              customMarkdown: const ChartSpec(
+                type: ChartType.line,
+                title: 'Omzet',
+                source: dataPath,
+                x: ['Q1', 'Q2'],
+                series: [
+                  ChartSeries(name: '2025', data: [10, 14]),
+                ],
+              ).toBlock(forStorage: true),
+            ),
+          ],
+        ),
+      );
+    }
+
+    /// Zet de deckmap in de origin op een deck mét grafiekdata en een notitie,
+    /// op main én op de werkbranch — zodat wat de app straks opent precies is
+    /// wat een echte repo draagt.
+    Future<void> seedLagen() async {
+      final her = '${temp.path}/herseed';
+      await _rawGit(['clone', bare, her], temp.path);
+      File('$her/$deckDir/deck.md').writeAsStringSync(
+        deckMetGrafiek(alfa: 'alfa origineel', beta: 'beta origineel'),
+      );
+      File('$her/$deckDir/$dataPath')
+        ..parent.createSync(recursive: true)
+        ..writeAsStringSync(cijfers.dataToJson());
+      File(
+        '$her/$deckDir/deck.user-notes.json',
+      ).writeAsStringSync(notesFor(index: 0, text: 'onze eerdere notitie'));
+      await _rawGit(['add', '-A'], her);
+      await _rawGit(['commit', '-m', 'grafiekdata erbij'], her);
+      await _rawGit(['push', 'origin', 'main'], her);
+      await _rawGit(['push', 'origin', 'HEAD:$work'], her);
+    }
+
+    /// De cijfers zoals ze na afloop in de origin staan.
+    Future<String> geland(String naam) async {
+      final verify = '${temp.path}/$naam';
+      await _rawGit(['clone', '--branch', work, bare, verify], temp.path);
+      final file = File('$verify/$deckDir/$dataPath');
+      expect(
+        file.existsSync(),
+        isTrue,
+        reason: 'het databestand mag niet uit de deckmap verdwijnen',
+      );
+      return file.readAsStringSync();
+    }
+
+    test('een gewone opslag laat de grafiekdata staan', () async {
+      // Geen botsing, geen merge — de kortste weg die er is, en precies daar
+      // ging het mis: openen hydrateerde niet, dus de opslag stelde een deckmap
+      // samen waar het databestand niet in zat.
+      await seedLagen();
+      final (container, tabs) = build();
+      await openOnWorkBranch(container, tabs);
+      editBeta(container, 'beta VAN ONS');
+
+      await tabs.saveToGitNative(
+        mirror,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'onze wijziging',
+        now: DateTime(2026, 7, 18),
+      );
+
+      expect(await geland('verify-data1'), contains('14'));
+
+      // Dezelfde weg, dezelfde oorzaak: de notitie die er lag stond niet in het
+      // deck dat we opsloegen, dus verdween ze. De bestaande tests hierboven
+      // dekken alleen de merge — en die hydrateerde wél.
+      final verify = '${temp.path}/verify-data1';
+      expect(
+        File('$verify/$deckDir/deck.user-notes.json').readAsStringSync(),
+        contains('onze eerdere notitie'),
+      );
+    });
+
+    test('een samengevoegde opslag laat de grafiekdata staan', () async {
+      await seedLagen();
+      final (container, tabs) = build();
+      await openOnWorkBranch(container, tabs);
+
+      await theyPush(
+        deckMetGrafiek(alfa: 'alfa VAN HEN', beta: 'beta origineel'),
+      );
+      editBeta(container, 'beta VAN ONS');
+
+      await tabs.saveToGitNative(
+        mirror,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'onze wijziging',
+        now: DateTime(2026, 7, 18),
+      );
+
+      expect(await geland('verify-data2'), contains('14'));
+    });
+
+    test('een geweigerde kant kost je de rest van de deckmap niet', () async {
+      // De ander pusht iets dat de importpoort niet doorlaat. Dan blijft ónze
+      // kant staan — en "onze kant" is de hele deckmap, niet alleen `deck.md`.
+      // Twee straffen voor één gebeurtenis is er één te veel.
+      //
+      // Hier wordt niets gepusht (`clean: false` houdt de merge lokaal), dus de
+      // origin bewijst hier niets. Wat telt is de clone: dát is de werkkopie
+      // waar de editor uit leest en waar de volgende geslaagde push vandaan
+      // komt.
+      await seedLagen();
+      final (container, tabs) = build();
+      await openOnWorkBranch(container, tabs);
+
+      await theyPush('dit is geen deck');
+      editBeta(container, 'beta VAN ONS');
+
+      await tabs.saveToGitNative(
+        mirror,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'onze wijziging',
+        now: DateTime(2026, 7, 18),
+      );
+
+      final inDeClone = await mirror.readDeck(deckDir);
+      final data = inDeClone['$deckDir/$dataPath'];
+      expect(
+        data,
+        isNotNull,
+        reason: 'het databestand mag niet uit de werkkopie verdwijnen',
+      );
+      expect(utf8.decode(data!), contains('14'));
+    });
   });
 }

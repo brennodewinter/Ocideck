@@ -67,6 +67,23 @@ String? repoChartDataPath(String deckDir, String source) {
 /// Zonder inline data valt er niets te schrijven: het bestand in de repo is dan
 /// het enige exemplaar en moet met rust gelaten worden, niet met een leeg
 /// bestand overschreven.
+/// De databestanden die [deck] noemt, als repo-paden onder [deckDir].
+///
+/// Anders dan [chartDataFilesOf] kijkt dit niet of de cijfers in het geheugen
+/// staan: de vraag is wélke bestanden bij dit deck horen, niet wat er
+/// geschreven moet worden. Dat onderscheid is precies wat de terugvalweg van
+/// [resolveRepoDeckMerge] nodig heeft — daar zijn de cijfers per definitie niet
+/// ingelezen, en moeten de bestanden toch overeind blijven.
+Iterable<String> chartDataPathsOf(Deck deck, {required String deckDir}) sync* {
+  for (final slide in deck.slides) {
+    if (slide.type != SlideType.chart) continue;
+    final source = ChartSpec.parse(slide.customMarkdown).source;
+    if (source == null) continue;
+    final path = repoChartDataPath(deckDir, source);
+    if (path != null) yield path;
+  }
+}
+
 Map<String, String> chartDataFilesOf(Deck deck) {
   final files = <String, String>{};
   for (final slide in deck.slides) {
@@ -612,20 +629,27 @@ Map<String, Uint8List> mirrorDeckFiles(
 /// wordt. De state-laag levert alleen wat zij als enige weet — de importpoort
 /// ([gate]) en waar afbeeldingsbytes vandaan komen.
 ///
-/// **Wat er niet in [RepoMergeOutcome.files] staat, bestaat na afloop niet
-/// meer**: de deckmap wordt vervangen, niet bijgewerkt. Daarom hydrateert dit
-/// elke kant eerst met zijn notities — zonder dat lijken alle drie de decks
-/// notitieloos, komt er geen notitiebestand uit, en verdwijnt het uit de
-/// merge-commit. Twee auteurs met notities op verschillende dia's zijn dan
-/// beiden alles kwijt, op precies het pad dat de app kiest zodra git
-/// geïnstalleerd is.
+/// **Wat hier terugkomt wordt geschreven; wat níet genoemd wordt blijft staan.**
+/// Dat was ooit andersom — de deckmap werd leeggemaakt en opnieuw gevuld — en
+/// dat kostte elk bestand waar de resolver geen weet van had: `data/*.json` bij
+/// élke merge, ook een geslaagde, en sinds #541 ook de notities. De resolver
+/// kán die volledigheid niet waarmaken (hij kent de deckmap niet, alleen de
+/// drie `deck.md`'s), dus ligt de bewijslast nu de andere kant op: verwijderen
+/// gebeurt alleen op verzoek, via [RepoMergeOutcome.deletes]. Zie #670.
+///
+/// Elke kant wordt eerst gehydrateerd met de lagen die naast zijn `deck.md`
+/// staan. Zonder dat lijken alle drie de decks notitie- en cijferloos, komt er
+/// niets van beide uit de merge, en verdwijnt andermans werk zonder dat er ooit
+/// een conflict was.
 ///
 /// [merge] is null wanneer een van de drie kanten niet door de poort kwam; dan
 /// draagt [RepoMergeOutcome.files] ónze kant ongewijzigd.
 typedef RepoMergeOutcome = ({
   Map<String, Uint8List> files,
+  List<String> deletes,
   bool clean,
   DeckMergeResult? merge,
+  List<String> missingChartData,
 });
 
 Future<RepoMergeOutcome> resolveRepoDeckMerge({
@@ -639,38 +663,56 @@ Future<RepoMergeOutcome> resolveRepoDeckMerge({
   required MarkdownService md,
   required AssetByteResolver resolveBytes,
 }) async {
-  Future<Deck> withNotes(Deck deck, MergeSide side) async =>
-      (await withRepoUserNotes(
-        deck,
-        deckDir: deckDir,
-        read: (path) => read(side, path),
-      )).deck;
+  final missing = <String>[];
+
+  Future<Deck> hydrated(Deck deck, MergeSide side) async {
+    final sidecars = await withRepoSidecars(
+      deck,
+      deckDir: deckDir,
+      read: (path) => read(side, path),
+    );
+    // Alleen over ónze kant valt iets zinnigs te melden: een bestand dat bij
+    // hen ontbreekt is hun zaak, en de voorouder is historie.
+    if (side == MergeSide.ours) missing.addAll(sidecars.missingChartData);
+    return sidecars.deck;
+  }
 
   final base = gate(baseBytes);
   final ours = gate(ourBytes);
   final theirs = gate(theirBytes);
   if (base == null || ours == null || theirs == null) {
-    // Onze kant ongewijzigd — en dat is méér dan `deck.md`. De grafiekdata
-    // ontbreekt nog, hier én in de gelukte tak hieronder: `merge.merged` draagt
-    // geen inline cijfers, dus `chartDataFilesOf` levert niets en de
-    // deckmap-vervanging ruimt `data/*.json` op. Issue #670; de fout stond er
-    // vóór de notities al en vraagt een wijziging aan wat `mergeRemote` belooft
-    // over bestanden die de resolver niet noemt.
-    final notesPath = p.posix.join(deckDir, userNotesRepoFileName);
+    // Onze kant ongewijzigd — en dat is méér dan `deck.md`. Git's eigen
+    // tekst-merge is hierboven al over de deckmap gegaan, dus de notities en de
+    // grafiekdata kunnen conflictmarkeringen dragen; die schrijven we terug
+    // zoals ze bij ons stonden. Verwijderen doen we niets: één geweigerde kant
+    // hoort de rest van de deckmap niet te kosten.
+    final files = <String, Uint8List>{
+      deckFile: ?ourBytes,
+      p.posix.join(deckDir, userNotesRepoFileName): ?await read(
+        MergeSide.ours,
+        p.posix.join(deckDir, userNotesRepoFileName),
+      ),
+    };
+    for (final path
+        in ours == null
+            ? const <String>[]
+            : chartDataPathsOf(ours, deckDir: deckDir)) {
+      final bytes = await read(MergeSide.ours, path);
+      if (bytes != null) files[path] = bytes;
+    }
     return (
-      files: <String, Uint8List>{
-        deckFile: ?ourBytes,
-        notesPath: ?await read(MergeSide.ours, notesPath),
-      },
+      files: files,
+      deletes: const <String>[],
       clean: false,
       merge: null,
+      missingChartData: const <String>[],
     );
   }
 
   final merge = mergeDeckVersions(
-    await withNotes(base, MergeSide.base),
-    await withNotes(ours, MergeSide.ours),
-    await withNotes(theirs, MergeSide.theirs),
+    await hydrated(base, MergeSide.base),
+    await hydrated(ours, MergeSide.ours),
+    await hydrated(theirs, MergeSide.theirs),
   );
   final built = await buildDeckRepoFiles(
     merge.merged,
@@ -678,6 +720,13 @@ Future<RepoMergeOutcome> resolveRepoDeckMerge({
     pool: null, // native: git ontdubbelt zelf op inhoud
     deckDir: deckDir,
     resolveBytes: resolveBytes,
+    read: (path) => read(MergeSide.ours, path),
   );
-  return (files: built.upserts, clean: merge.isClean, merge: merge);
+  return (
+    files: built.upserts,
+    deletes: built.deletes,
+    clean: merge.isClean,
+    merge: merge,
+    missingChartData: missing,
+  );
 }

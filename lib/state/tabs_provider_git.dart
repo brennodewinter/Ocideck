@@ -78,11 +78,7 @@ extension TabsNotifierGit on TabsNotifier {
     );
     final deck = sidecars.deck;
     if (!mounted) return OpenResult.unreadable;
-    if (sidecars.missingChartData.isNotEmpty) {
-      _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
-        sidecars.missingChartData,
-      );
-    }
+    _reportMissingChartData(_ref, sidecars.missingChartData);
 
     _placeDeckInTab(deck, remoteOrigin: label);
     currentState.current?.gitOrigin = GitOrigin(
@@ -275,15 +271,12 @@ extension TabsNotifierGit on TabsNotifier {
     required String branch,
     required String deckDir,
   }) {
-    final image = ImageService();
     return buildDeckRepoFiles(
       deck,
       md: _md,
       pool: AssetPool(forge: forge, branch: branch),
       deckDir: deckDir,
-      resolveBytes: (path) async => WebAssetStore.isMemPath(path)
-          ? WebAssetStore.bytesFor(path)
-          : image.readSlideImageBytes(path, projectPath: deck.projectPath),
+      resolveBytes: _repoAssetBytes(deck.projectPath),
       read: (path) => forge.readBlob(branch, path),
     );
   }
@@ -568,18 +561,12 @@ extension TabsNotifierGit on TabsNotifier {
 
       // Schoon samengevoegd: doorgaan met opslaan, en achteraf melden wat er van
       // de ander bij kwam.
-      final image = ImageService();
       final mergedFiles = await buildDeckRepoFiles(
         merge.merged,
         md: _md,
         pool: AssetPool(forge: forge, branch: branch),
         deckDir: deckDir,
-        resolveBytes: (path) async => WebAssetStore.isMemPath(path)
-            ? WebAssetStore.bytesFor(path)
-            : image.readSlideImageBytes(
-                path,
-                projectPath: merge.merged.projectPath,
-              ),
+        resolveBytes: _repoAssetBytes(merge.merged.projectPath),
         read: (path) => forge.readBlob(branch, path),
       );
       final result = await forge.commitFiles(
@@ -691,16 +678,13 @@ extension TabsNotifierGit on TabsNotifier {
       read: (path) async => stored[path],
     );
 
-    final image = ImageService();
     final files = await buildDeckRepoFiles(
       sidecars.deck,
       md: _md,
       pool: AssetPool(forge: forge, branch: commit.branch),
       deckDir: commit.deckDir,
       read: (path) async => stored[path],
-      resolveBytes: (path) async => WebAssetStore.isMemPath(path)
-          ? WebAssetStore.bytesFor(path)
-          : image.readSlideImageBytes(path, projectPath: deck.projectPath),
+      resolveBytes: _repoAssetBytes(deck.projectPath),
     );
     return files.upserts;
   }
@@ -781,4 +765,30 @@ class GitSaveResult {
     this.warnings = const [],
     this.conflicts = const [],
   });
+}
+
+/// Waar de bytes van een afbeelding vandaan komen bij het schrijven naar een
+/// repo: uit de webstore als het een `mem:`-pad is, anders van schijf, relatief
+/// aan het project waar het deck bij hoort.
+///
+/// Stond vijf keer letterlijk uitgeschreven in dit bestand en zijn buren — één
+/// per schrijfpad. Vijf kopieën van dezelfde regel is er vier te veel: een
+/// zesde pad dat er één vergeet, schrijft een kapotte verwijzing zonder dat er
+/// iets misgaat waar de app op kan wijzen.
+AssetByteResolver _repoAssetBytes(String? projectPath) {
+  final image = ImageService();
+  return (path) async => WebAssetStore.isMemPath(path)
+      ? WebAssetStore.bytesFor(path)
+      : image.readSlideImageBytes(path, projectPath: projectPath);
+}
+
+/// Meld de grafiekbronnen die niet te lezen waren.
+///
+/// Een grafiek zonder cijfers tekent leeg in plaats van het openen te laten
+/// mislukken — dezelfde ruil als op schijf — maar dan hoort er wel iemand iets
+/// te zeggen. Drie openpaden doen precies dit, dus staat het hier één keer, en
+/// bewust búiten [TabsNotifier]: die klasse zit tegen haar plafond.
+void _reportMissingChartData(Ref ref, List<String> missing) {
+  if (missing.isEmpty) return;
+  ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(missing);
 }

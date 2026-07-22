@@ -147,7 +147,7 @@ const Map<String, int> classSizeBaseline = {
       3419,
   'lib/services/file_service.dart#FileService': 2864,
   'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 2667,
-  'lib/state/tabs_provider.dart#TabsNotifier': 2325,
+  'lib/state/tabs_provider.dart#TabsNotifier': 2316,
   'lib/services/markdown_service.dart#MarkdownService': 2322,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2160,

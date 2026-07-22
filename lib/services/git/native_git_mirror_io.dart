@@ -389,7 +389,10 @@ class _NativeGitMirror implements NativeGitMirror {
     required String deckDir,
     required String deckFile,
     required String message,
-    required Future<({Map<String, Uint8List> files, bool clean})> Function(
+    required Future<
+      ({Map<String, Uint8List> files, List<String> deletes, bool clean})
+    >
+    Function(
       Uint8List? base,
       Uint8List? ours,
       Uint8List? theirs,
@@ -455,10 +458,11 @@ class _NativeGitMirror implements NativeGitMirror {
     }
 
     try {
-      final deckAbs = Directory(
-        p.join(_worktree.path, p.joinAll(deckDir.split('/'))),
-      );
-      if (await deckAbs.exists()) await deckAbs.delete(recursive: true);
+      // Bijwerken, niet vervangen. De aanroeper kent de deckmap niet — alleen
+      // de drie `deck.md`'s — dus "wat hij niet noemt, hoort weg" was een
+      // belofte die hij niet kon nakomen: het kostte de grafiekdata bij élke
+      // merge (#670). Verwijderen gebeurt daarom alleen op verzoek.
+      await _deleteAll(resolved.deletes);
       await _writeAll(resolved.files);
       await _run(['add', '-A']);
       await _commit(message);
@@ -560,6 +564,26 @@ class _NativeGitMirror implements NativeGitMirror {
       return true;
     } on GitCliException {
       return false;
+    }
+  }
+
+  /// Verwijder de genoemde repo-paden uit de werkkopie. Een pad dat er niet is
+  /// telt als gedaan: verwijderen is idempotent, en de aanroeper hoeft niet te
+  /// weten wat er al weg was.
+  Future<void> _deleteAll(List<String> paths) async {
+    for (final path in paths) {
+      final abs = p.normalize(
+        p.join(_worktree.path, p.joinAll(path.split('/'))),
+      );
+      // Zelfde vangnet als bij het schrijven: nooit buiten de werkboom.
+      if (!p.isWithin(_worktree.path, abs)) {
+        throw GitForgeException(
+          GitForgeError.malformed,
+          'Pad valt buiten de werkkopie: $path',
+        );
+      }
+      final file = File(abs);
+      if (await file.exists()) await file.delete();
     }
   }
 
