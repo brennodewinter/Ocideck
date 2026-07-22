@@ -1,6 +1,6 @@
 # OciDeck — OciWacht (ontwerp)
 
-> **Status:** ontwerp; deels geleverd — de tabel hieronder zegt per onderdeel wat · **Status laatst herzien:** 22-07-2026 · **Uitgever:** Stichting LibreKAT
+> **Status:** ontwerp; deels geleverd — de tabel hieronder zegt per onderdeel wat · **Status laatst herzien:** 22-07-2026 · **Uitgever:** Stichting LibreKAT · **Language:** Nederlands
 
 Detectie van privacygevoelige informatie in slides, met per-slide afhandeling:
 accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in export.

@@ -731,6 +731,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Bekende beperkingen': 'Limitaciones conocidas',
   'naam@example.org\nexample.org': 'nombre@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Una capa junto a esta presentación era demasiado grande y no se ha cargado; el archivo en sí no ha cambiado:',

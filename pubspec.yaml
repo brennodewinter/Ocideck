@@ -144,6 +144,7 @@ flutter:
     - docs/TROUBLESHOOTING_GUIDE.md
     - docs/PRIVACY.md
     - docs/ACCESSIBILITY.md
+    - docs/KNOWN_LIMITATIONS.md
     - docs/GLOSSARY.md
     - docs/API_DOCUMENTATION.md
     - docs/PERFORMANCE_GUIDE.md

@@ -147,6 +147,18 @@ labelled with the tracker's own label set:
 *(Corrected 2026-07-22: this listed `Feature` and `Documentation`, which are not
 labels on this tracker, and omitted `privacy` and the whole triage set.)*
 
+So: you file an issue, it gets `triage`, and it leaves that state with a written
+reason. `declined` is a real outcome and not a euphemism for silence — an issue
+that will not be built is closed and says why. There is one maintainer, so
+expect the assessment to take days rather than hours.
+
+**Looking for somewhere to start?** Issues labelled `good first issue` are
+small, self-contained, and do not require knowing the rest of the codebase
+first. If none are open, say so in a new issue and one will be found — that is a
+reasonable thing to ask for, not an imposition. *(Added 2026-07-22: the labels
+already encoded a decision path, but only as label names, so a newcomer could
+not tell whether a proposal gets an answer or disappears.)*
+
 ## Release Process
 
 **There is no release process yet, because there has been no release.** `git tag`

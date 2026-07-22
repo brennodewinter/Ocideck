@@ -735,6 +735,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bekende beperkingen': 'Bekende beheiningen',
   'naam@example.org\nexample.org': 'namme@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'In laach neist dit deck wie te grut en is net ynlêzen; it bestân sels is ûnferoare:',

@@ -1784,6 +1784,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Bekende beperkingen': 'Poznata ograničenja',
   'naam@example.org\nexample.org': 'ime@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Sloj uz ovu prezentaciju bio je prevelik i nije učitan; sama datoteka ostaje nepromijenjena:',

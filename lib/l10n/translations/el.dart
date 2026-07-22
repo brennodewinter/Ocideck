@@ -1805,6 +1805,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bekende beperkingen': 'Γνωστοί περιορισμοί',
   'naam@example.org\nexample.org': 'onoma@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Ένα επίπεδο δίπλα σε αυτό το deck ήταν πολύ μεγάλο και δεν φορτώθηκε· το ίδιο το αρχείο παραμένει αμετάβλητο:',

@@ -1779,6 +1779,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Bekende beperkingen': 'Znane omejitve',
   'naam@example.org\nexample.org': 'ime@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Sloj ob tem decku je bil prevelik in ni bil naložen; sama datoteka ostaja nespremenjena:',

@@ -2,6 +2,36 @@
 
 > **Status:** current-state user manual · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
 
+## Contents
+
+- [Creating and opening decks](#creating-and-opening-decks)
+- [Command palette](#command-palette)
+- [The menu bar (macOS)](#the-menu-bar-macos)
+- [Storage](#storage)
+- [S3 bucket](#s3-bucket)
+- [Git repository](#git-repository)
+- [WebDAV](#webdav)
+- [Slide types](#slide-types)
+- [Organising the slide list](#organising-the-slide-list)
+- [Images and media travel with the presentation](#images-and-media-travel-with-the-presentation)
+- [Image library](#image-library)
+- [Per-slide options](#per-slide-options)
+- [Traffic Light Protocol (TLP)](#traffic-light-protocol-tlp)
+- [Privacy check](#privacy-check)
+- [What to do with a finding](#what-to-do-with-a-finding)
+- [Depth — a management version and a technical one](#depth-a-management-version-and-a-technical-one)
+- [Two versions from one source](#two-versions-from-one-source)
+- [Redaction — leaving data out](#redaction-leaving-data-out)
+- [Presenting](#presenting)
+- [Exporting](#exporting)
+- [Accessibility](#accessibility)
+- [Information security module (pentest reports)](#information-security-module-pentest-reports)
+- [Markdown mode](#markdown-mode)
+- [What the browser version cannot do](#what-the-browser-version-cannot-do)
+- [Theming and language](#theming-and-language)
+
+*(Added 2026-07-22: this document is around 2,992 lines and had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not.)*
+
 OciDeck builds [Marp](https://marp.app/) presentations through a structured,
 slide-by-slide editor. You compose typed slides, preview them live, present them
 (on one or two screens), and export to Markdown, PDF, PPTX, or a single offline
@@ -2468,11 +2498,22 @@ still show while editing).
 
 ## Information security module (pentest reports)
 
-OciDeck has an optional module for writing **MIAUW-conforming penetration-test
-reports** ("Informatieveiligheidsonderzoek"). It is **off by default** and adds a
+OciDeck has an optional module for writing penetration-test reports
+**structured to the MIAUW methodology** ("Informatieveiligheidsonderzoek"). It
+is **off by default** and adds a
 set of security slide types, a guided finding flow, a compliance overview and
 report-automation commands. Everything below is offline; the AI helpers are the
 same optional, off-by-default backend used elsewhere.
+
+> **"Structured to", not "conforming".** *(Reworded 2026-07-22: this said
+> "MIAUW-conforming".)* The compliance overview is a gap analysis and never a
+> hard gate — every requirement is waivable with a mandatory reason, as the
+> *MIAUW compliance overview* section below sets out. So the tool cannot, and
+> does not, certify that a delivered report conforms to anything; what it does
+> is give the report MIAUW's structure and show you where the gaps are. The
+> methodology itself is published separately under EUPL-1.2, and its author is
+> also OciDeck's initiator — see the *Trademarks* table in
+> [`THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md).
 
 ### Enabling the module
 
@@ -2537,8 +2578,8 @@ card no longer offers buttons suggesting otherwise.
 ### Starting from the MIAUW report template
 
 Once the module is on, the new-presentation dialog gains a
-**MIAUW-pentestrapport** template. It scaffolds a complete, MIAUW-conforming
-report in one step: a cover page, the four MIAUW parts as section dividers
+**MIAUW-pentestrapport** template. It scaffolds a complete report structured to
+the MIAUW methodology in one step: a cover page, the four MIAUW parts as section dividers
 (*Algemeen*, *Plan van aanpak*, *Executie*, *Rapportage*), a document-management
 overview, a sign-off page, a scope matrix, a management summary, a research
 timeline, an example finding, a per-standard checklist and an appendix list.

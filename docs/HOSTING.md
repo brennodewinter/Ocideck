@@ -46,7 +46,28 @@ web root, or, for a quick local check:
 cd build/web && python3 -m http.server 8080
 ```
 
+That one-liner is for a **local check only**. It serves nothing compressed, and
+this bundle is large enough that the difference is the whole first impression.
+
 Serve over **HTTPS** in production.
+
+### Enable compression — this is not optional in practice
+
+Turn on brotli or gzip for `.js`, `.wasm`, `.json` and `.ttf`. Measured on this
+tree with `make build-web` on 2026-07-22, what a browser fetches **before the
+first paint**:
+
+| Part | Raw | Compressed |
+| --- | --- | --- |
+| `main.dart.js` | 13.8 MB | 3.8 MB |
+| `canvaskit/canvaskit.wasm` | 6.9 MB | 2.8 MB |
+| Fonts in `FontManifest.json` (18 files: 4 variable TTFs, Material icons, KaTeX) | 2.7 MB | 1.4 MB |
+| `assets/privacy/health_lexicon.json` — awaited before `runApp` | 2.0 MB | 0.5 MB |
+| **Total before the first frame** | **~25 MB** | **~9 MB** |
+
+Uncompressed that is roughly 25 MB and tens of seconds of blank white on an
+ordinary connection. There is no loading indicator in `web/index.html` yet, so
+the visitor has nothing to look at while it arrives.
 
 ## 3. Set the Content-Security-Policy as an HTTP header
 

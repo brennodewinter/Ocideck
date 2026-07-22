@@ -64,7 +64,7 @@ read that banner first. All nine ship with the app.
 | [GIT_STORAGE.md](design/GIT_STORAGE.md) | Design of the git storage plane; phases 0–6 have landed, what remains is verification. |
 | [PENTEST_MIAUW.md](design/PENTEST_MIAUW.md) | The original design for the MIAUW pentest module, which ships. Parts are contradicted by the code. |
 | [AI_ASSIST.md](design/AI_ASSIST.md) | The optional AI assistance design; phases 0–3 are built, phase 4 (MCP) is not. |
-| [OCIWACHT.md](design/OCIWACHT.md) | The privacy scanner design, with a per-section delivered/open table at the top. |
+| [OCIWACHT.md](design/OCIWACHT.md) | The privacy scanner design, **in Dutch**, with a per-section delivered/open table at the top. At 2,668 lines it is the largest of the three Dutch documents. |
 | [AGENTIC_BUILD_PLAN.md](design/AGENTIC_BUILD_PLAN.md) | Historical: the agentic build plan for the pentest/AI work. Executed; kept as a worked example, not a queue. |
 | [PROCESS_IMPROVEMENT.md](design/PROCESS_IMPROVEMENT.md) | Design proposal, unbuilt: a Lean Six Sigma authoring module. Despite the name it is a product design, not a report about our process. |
 | [VERIFICATION.md](design/VERIFICATION.md) | A worklist, in Dutch: what has been built and passes its own tests but has never met a real server, a second operating system or a real report. |

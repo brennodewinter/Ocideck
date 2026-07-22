@@ -1780,6 +1780,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Bekende beperkingen': 'Známá omezení',
   'naam@example.org\nexample.org': 'jmeno@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Vrstva vedle této prezentace byla příliš velká a nebyla načtena; samotný soubor zůstává nezměněný:',

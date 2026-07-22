@@ -1752,6 +1752,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bekende beperkingen': 'Sovlu\'bogh chuvmey',
   'naam@example.org\nexample.org': 'pong@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'cha\'nobvam \'ay\' teHwI\' tIn qu\'; vaj laDlu\'pu\'be\'. teHwI\' choHlu\'pu\'be\':',

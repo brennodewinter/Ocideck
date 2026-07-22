@@ -42,6 +42,23 @@ String _startupLanguageCode() {
       );
 }
 
+/// The single owner of application-wide settings: everything in [AppSettings],
+/// persisted in one `shared_preferences` domain.
+///
+/// Two properties this class must keep. **A read never blocks the UI**: the
+/// notifier starts from defaults and fills in from disk asynchronously, so a
+/// slow or unreadable preference store degrades to "the default is in force"
+/// rather than to a frozen app. And **a failed write loses persistence, not the
+/// session** — the in-memory state is updated first, so a preference the user
+/// just set still applies even when it could not be stored.
+///
+/// Settings that are somebody's credentials do not live here; they go through
+/// `secret_store.dart` into the OS keychain, and only the non-secret half of a
+/// storage connection is kept in [AppSettings].
+///
+/// The class is split across `parts/settings_provider_*.dart` by subject
+/// (connections, git, privacy, traces). Those are the same class — add a
+/// setting beside its neighbours rather than here.
 class SettingsNotifier extends StateNotifier<AppSettings> {
   /// De huidige instellingen, leesbaar en schrijfbaar vanuit een `part`.
   ///

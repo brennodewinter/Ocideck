@@ -86,19 +86,30 @@ void main() {
     expect(notices, contains('Marp Team'));
   });
 
-  test('each branded row disclaims affiliation', () {
+  test('each branded row settles the relationship, either way', () {
     // Een merkvermelding die alleen de eigenaar noemt, laat de suggestie van
     // samenwerking staan. Dat is precies de suggestie die je niet mag wekken.
+    //
+    // Meestal is het antwoord "geen band" — dan hoort de afstandsverklaring in
+    // de rij. Maar bij MIAUW is er wél een band: de auteur van de methodologie
+    // en de initiatiefnemer van OciDeck zijn dezelfde persoon. Daar zou
+    // "not affiliated with" een leugen zijn, en een poort die een leugen
+    // afdwingt is erger dan geen poort. De eis is daarom niet "ontken een
+    // band" maar "laat de vraag niet open": ontken hem, of noem hem.
     final rows = notices
         .split('\n')
         .where((l) => l.startsWith('| **'))
         .toList();
     expect(rows, isNotEmpty);
     for (final row in rows) {
+      final lower = row.toLowerCase();
       expect(
-        row.toLowerCase(),
-        contains('not affiliated with'),
-        reason: 'Rij zonder afstandsverklaring: $row',
+        lower.contains('not affiliated with') ||
+            lower.contains('disclosed deliberately:'),
+        isTrue,
+        reason:
+            'Rij die de band niet afhandelt — ontken hem met "not affiliated '
+            'with", of noem hem met "**Disclosed deliberately:**": $row',
       );
     }
   });

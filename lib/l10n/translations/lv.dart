@@ -1776,6 +1776,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bekende beperkingen': 'Zināmie ierobežojumi',
   'naam@example.org\nexample.org': 'vards@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Slānis blakus šim dekam bija pārāk liels un netika ielādēts; pats fails ir nemainīts:',

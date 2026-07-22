@@ -113,25 +113,28 @@ you to, and why it is not the default recommendation.
 > A plain `flutter build web` still works, but it falls back to the gstatic CDN
 > and an `unsafe-*` loader — use `make build-web` so the hardening stays pinned.
 
-### Deeplink: app + presentatie in één URL
+### Deep link: app plus presentation in one URL
 
-`https://<host>/?deck=<url>` opent OciDeck én haalt direct de presentatie op
-het meegegeven adres op (URL-encoderen!). Dezelfde importpoort geldt als bij
-"Importeren via URL": veiligheidsscan, marp-controle en de CORS-regels
-hieronder. Voorbeeld:
+`https://<host>/?deck=<url>` opens OciDeck *and* fetches the presentation at the
+address you pass (URL-encode it). The same import gate applies as for *Import
+from URL*: the safety scan, the Marp check, and the CORS rules below. Example:
 
 ```
 https://ocideck.librekat.nl/?deck=https%3A%2F%2Fexample.org%2Fdeck.ocideck
 ```
 
-### Fetch-hulppunt voor URL-import (optioneel, aanbevolen)
+### Fetch-proxy for URL import (optional, recommended)
 
-"Importeren via URL" werkt in de browser alleen direct voor bronnen die CORS
-toestaan. Om een deck van **elke** URL te kunnen openen, deploy je naast de
-statische bundel het SSRF-bewaakte fetch-hulppunt: zie
-[`server/fetch-proxy/README.md`](../server/fetch-proxy/README.md). De webapp
-valt automatisch terug op het same-origin pad `/fetch-proxy?url=…`; zonder
-hulppunt blijft alles werken en legt de foutmelding de CORS-beperking uit.
+In the browser, *Import from URL* works directly only for sources that allow
+CORS. To be able to open a deck from **any** URL, deploy the SSRF-guarded
+fetch-proxy alongside the static bundle — see
+[`server/fetch-proxy/README.md`](../server/fetch-proxy/README.md). The web app
+falls back automatically to the same-origin path `/fetch-proxy?url=…`. Without
+the proxy everything still works, and the error message explains the CORS
+restriction.
+
+*(Translated 2026-07-22: these two sections were the only Dutch inside an
+otherwise English document.)*
 
 ## Quality gate
 

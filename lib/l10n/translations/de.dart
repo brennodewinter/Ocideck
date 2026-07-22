@@ -734,6 +734,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Bekende beperkingen': 'Bekannte Einschränkungen',
   'naam@example.org\nexample.org': 'name@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Eine Ebene neben diesem Deck war zu groß und wurde nicht geladen; die Datei selbst ist unverändert:',

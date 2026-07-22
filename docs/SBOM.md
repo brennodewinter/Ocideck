@@ -50,8 +50,15 @@ recorded in `assurance/CRA-2024-2847-positie.md`.
 
 ## What it covers
 
-The inventory is assembled from files under version control, so it can never
-disagree with what is actually built (see [`tool/sbom_build.dart`](../tool/sbom_build.dart)):
+The inventory is derived from the files that pin the build — `pubspec.lock`,
+`assets/web_export/MANIFEST.json` and `.tool-versions` (see
+[`tool/sbom_build.dart`](../tool/sbom_build.dart)). That makes it exact about
+what the repository *declares*. One gap is worth naming: the build-SDK row is
+read from `.tool-versions`, and nothing checks that the Flutter actually
+resolved on the building machine matches it. Build with a different toolchain
+and the SBOM will not notice. *(Corrected 2026-07-22: this said the inventory
+"can never disagree with what is actually built", which is falsifiable on any
+machine whose Flutter differs from the pin.)*
 
 | Group | Source of truth | Per-component data |
 | --- | --- | --- |
@@ -213,19 +220,23 @@ want the answer for yourself.
 
 ## Where it ships
 
-The SBOM travels with the product, not just the repository:
-
 - **Web build** — `make build-web` copies all three files into
   `build/web/sbom/`, so a deployed instance serves them from `/sbom/` on the
   same origin.
+- **Desktop bundles** — the `.app`, `.exe` and Linux bundle do **not** carry the
+  SBOM inside them. `make build-macos`, `build-windows` and `build-linux` do run
+  the freshness gate (`sbom-verify`) first, so a stale inventory cannot be built
+  against, but the files themselves travel in the release artefact rather than
+  in the bundle.
 - **Releases** — `.github/workflows/release.yml` uploads them as the
   `ocideck-sbom` artifact and the web bundle carries its copy. That workflow has
   never run: there is no CI runner (see [CHECKS.md](CHECKS.md)).
-- **Desktop builds do not carry it.** `make build-macos`, `build-windows` and
-  `build-linux` run a bare `flutter build` — no copy step, and not even
-  `sbom-verify` as a prerequisite, so a hand-made desktop bundle can ship
-  against a stale SBOM. Hand `sbom/` over alongside the binary until the release
-  process exists (#520).
+- **Desktop builds do not carry it *inside* the bundle.** `make build-macos`,
+  `build-windows` and `build-linux` have no copy step, so hand `sbom/` over
+  alongside the binary until the release process exists (#520). They do now run
+  `sbom-verify` first, so at least a desktop bundle cannot be built against a
+  stale inventory. *(Amended 2026-07-22: that prerequisite was added in the same
+  pass; before it, a hand-made desktop bundle could ship against a stale SBOM.)*
 
 *(Corrected 2026-07-22: the summary at the top of this document said "shipped
 with every build", which was true only of the web build — and README calls

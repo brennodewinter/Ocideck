@@ -1781,6 +1781,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bekende beperkingen': 'Bekannti Yyschränkige',
   'naam@example.org\nexample.org': 'name@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'En Ebeni näbe dem Deck isch z gross gsi und isch nöd glade worde; d Datei sälber isch unveränderet:',
