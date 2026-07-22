@@ -62,25 +62,16 @@ extension TabsNotifierGitNative on TabsNotifier {
       AssetPool(forge: forge, branch: branch),
       sourceName: label,
     );
-    // Een deckmap is meer dan `deck.md`: de cijfers van een gekoppelde grafiek
-    // en de notities staan in eigen bestanden ernaast. Zonder ze hier terug te
-    // hangen opent er een deck dat ze niet kent — en omdat elke schrijfweg de
-    // deckmap vervángt door wat de app samenstelt, ruimt de eerstvolgende
-    // opslag ze op. Geen botsing, geen melding, en het deck ziet er heel uit:
-    // de verwijzing staat er nog, alleen de cijfers zijn weg (#670).
-    //
-    // `readDeck` gaf ze hierboven al mee, dus dit kost geen tweede leesronde.
+    // Ook hier de lagen naast `deck.md` terughangen, net als op het REST-pad —
+    // zonder dat wist de eerstvolgende opslag ze (#670). `readDeck` gaf ze
+    // hierboven al mee, dus het kost geen tweede leesronde.
     final sidecars = await withRepoSidecars(
       deck,
       deckDir: deckDir,
       read: (path) async => files[path],
     );
     if (!mounted) return OpenResult.unreadable;
-    if (sidecars.missingChartData.isNotEmpty) {
-      _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
-        sidecars.missingChartData,
-      );
-    }
+    _reportMissingChartData(_ref, sidecars.missingChartData);
 
     _placeDeckInTab(sidecars.deck, remoteOrigin: label);
     currentState.current?.gitOrigin = GitOrigin(
@@ -151,15 +142,12 @@ extension TabsNotifierGitNative on TabsNotifier {
       workBranch = generated;
     }
 
-    final image = ImageService();
     final files = await buildDeckRepoFiles(
       deck,
       md: _md,
       pool: null, // native: git ontdubbelt zelf, dus alle blobs mee
       deckDir: deckDir,
-      resolveBytes: (path) async => WebAssetStore.isMemPath(path)
-          ? WebAssetStore.bytesFor(path)
-          : image.readSlideImageBytes(path, projectPath: deck.projectPath),
+      resolveBytes: _repoAssetBytes(deck.projectPath),
     );
 
     final result = await mirror.commitDeck(
@@ -239,7 +227,6 @@ extension TabsNotifierGitNative on TabsNotifier {
       deckFile: deckFile,
       message: message,
       resolve: (baseBytes, ourBytes, theirBytes, read) async {
-        final image = ImageService();
         final outcome = await resolveRepoDeckMerge(
           deckDir: deckDir,
           deckFile: deckFile,
@@ -249,20 +236,13 @@ extension TabsNotifierGitNative on TabsNotifier {
           read: read,
           gate: gated,
           md: _md,
-          resolveBytes: (path) async => WebAssetStore.isMemPath(path)
-              ? WebAssetStore.bytesFor(path)
-              : image.readSlideImageBytes(
-                  path,
-                  projectPath: tab?.deckNotifier.currentState.deck?.projectPath,
-                ),
+          resolveBytes: _repoAssetBytes(
+            tab?.deckNotifier.currentState.deck?.projectPath,
+          ),
         );
         mergedDeck = outcome.merge?.merged;
         conflicts = outcome.merge?.conflicts ?? const [];
-        if (outcome.missingChartData.isNotEmpty) {
-          _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
-            outcome.missingChartData,
-          );
-        }
+        _reportMissingChartData(_ref, outcome.missingChartData);
         return (
           files: outcome.files,
           deletes: outcome.deletes,
