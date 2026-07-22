@@ -82,6 +82,69 @@ naleving maar over of het werk goed genoeg is.
 
 Elk van de drie krijgt een eigen issue; de uitwerking hoort daar, niet hier.
 
+## Is de stichting een rentmeester (artikel 24)?
+
+*Toegevoegd 2026-07-22.* Het besluit hierboven beslist één rol goed — geen
+fabrikant — en zweeg over de andere rol die de verordening kent. Die stilte was
+dragend geworden: een vrijwillige attestatie (#549) moet in AU.01 zeggen wát de
+uitgevende partij is, en "een stichting, maar geen rentmeester" is een bewering
+en geen leeg vakje.
+
+**De definitie.** Artikel 3(14) omschrijft een rentmeester als een rechtspersoon,
+niet zijnde een fabrikant, die tot doel heeft om stelselmatig en duurzaam
+ondersteuning te bieden aan de ontwikkeling van bepaalde producten met digitale
+elementen die kwalificeren als vrije en opensourcesoftware **en bestemd zijn voor
+commerciële activiteiten**, en die de levensvatbaarheid van die producten
+waarborgt.
+
+**Wat pleit vóór.** Overweging 19 noemt uitdrukkelijk "certain foundations" en de
+Commissie noemde op FOSDEM 2024 als eerste voorbeeld: stichtingen die een
+specifiek opensourceproject ondersteunen. Dat is letterlijk wat Stichting
+LibreKAT met OciDeck doet. Dat het geld noch verkoop betreft, sluit de rol niet
+uit — de rentmeester ís juist de categorie voor wie niet monetiseert.
+
+**Wat de doorslag geeft.** De zinsnede "bestemd voor commerciële activiteiten"
+gaat over de *aanbodkant*, niet over wie het gebruikt. Overweging 15 beperkt de
+verordening tot producten die worden geleverd in het kader van een commerciële
+activiteit, en overweging 18 zegt dat het aanbieden van vrije en
+opensourcesoftware die door de fabrikant niet wordt gemonetiseerd, niet als
+commerciële activiteit geldt. De ORC WG werkt dat expliciet uit: een project kan
+miljoenen gebruikers hebben, ook in ondernemingen en vitale infrastructuur,
+zonder daardoor onder de verordening te vallen, zolang er niet gemonetiseerd
+wordt.
+
+Daarmee valt het argument weg waarop deze vraag gesteld was — OciDeck richt zich
+op pentesters en dat is commercieel werk. Dat maakt het *gebruik* commercieel,
+niet de *levering*. De stichting monetiseert niet, in geen van de vormen die de
+verordening als zodanig aanmerkt.
+
+**Het oordeel: waarschijnlijk geen rentmeester — en dat blijft een oordeel.**
+Niet omdat de redenering wankel is, maar omdat de bron dat zelf zegt: de
+FAQ-ingang over de reikwijdte voor rechtspersonen (stichtingen, verenigingen)
+staat open in afwachting van verduidelijking door de Commissie, en de
+whitepaper over rentmeesters onthoudt zich uitdrukkelijk van een oordeel over
+wíé rentmeester is. Dat is precies onze vraag. Wie hier een stellig ja of nee
+neerzet, doet alsof hij meer weet dan de werkgroep die eraan rekent.
+
+**Wat er verandert als het kantelt.** De verplichtingen van artikel 24 zijn een
+beveiligingsbeleid, een beleid voor kwetsbaarhedenbeheer, medewerking aan
+markttoezicht, en melding aan het bevoegde CSIRT en ENISA. De eerste drie hebben
+we al: `SECURITY.md`, de termijnen die `tool/check_service_norms.dart` meet, en
+een openbare tracker.
+
+Het vierde bestaat niet. Er is geen route naar het CSIRT of ENISA, en er is niet
+opgeschreven welk CSIRT dat zou zijn. Voor Nederland is dat het CSIRT dat onder
+NIS2 als coördinator is aangewezen. Dat is de enige echte leemte, en hij is
+klein: het is een adres en een afspraak, geen bouwwerk. Hij hoort er te staan
+vóórdat hij nodig is, want een meldplicht die pas wordt uitgezocht op het moment
+dat er iets actief misbruikt wordt, is te laat.
+
+**Voor AU.01 betekent dit:** de attestatie noemt Stichting LibreKAT als
+uitgevende rechtspersoon en beschrijft de relatie tot het project, zonder de term
+rentmeester te claimen en zonder hem te ontkennen. De ORC WG's eigen voorstel
+laat die ruimte: het beschrijft de niet-gerentmeesterde projecten als het lastige
+geval, niet als een ongeldig geval.
+
 ## Wanneer dit besluit opnieuw op tafel moet
 
 - Er komt geld aan OciDeck vast te zitten — betaalde inzet, gesponsorde
@@ -92,6 +155,9 @@ Elk van de drie krijgt een eigen issue; de uitwerking hoort daar, niet hier.
 - De Commissie publiceert de aangekondigde leidraad over de reikwijdte voor
   opensourcesoftware.
 - De statuten van de stichting wijzigen.
+- **De Commissie of de ORC WG verduidelijkt wanneer een stichting rentmeester
+  is.** Die ingang staat vandaag open in afwachting daarvan; zie de paragraaf
+  hierboven.
 
-Bij elk van deze vijf is de vraag niet "geldt het nu wel", maar: **wat verandert
+Bij elk van deze zes is de vraag niet "geldt het nu wel", maar: **wat verandert
 er feitelijk, en klopt de eerste alinea dan nog.**
