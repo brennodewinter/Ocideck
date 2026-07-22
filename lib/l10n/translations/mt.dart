@@ -1801,6 +1801,51 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Via deze website ophalen?': 'Iġib permezz ta\' dan is-sit?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Is-server ta\' din il-preżentazzjoni ma ħalliex lill-brawżer jaqra l-fajl direttament. OciDeck jista\' jgħaddi l-indirizz lis-sit li minnu ġej OciDeck stess, u dak is-sit iġibu. B\'hekk dak is-sit jara l-indirizz sħiħ — jekk fil-link hemm ċavetta jew kodiċi, dak is-sit jarahom ukoll.',
+  'In de browser kan dit niet worden bewaard':
+      'Fil-browser dan ma jistax jiġi salvat',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Browser m\'għandux ċurkett taċ-ċwievet bħalma għandu kompjuter: dak li OciDeck jissejvja hawn jista\' jaqrah kwalunkwe skript f\'din il-paġna. Uża l-verżjoni tad-desktop — hemmhekk is-sigriet tabilħaqq imur fiċ-ċurkett taċ-ċwievet tas-sistema operattiva.',
+  'Licenties van derden': 'Liċenzji ta\' partijiet terzi',
+  'Alle licentieteksten tonen': 'Uri t-testi kollha tal-liċenzji',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck innifsu huwa taħt il-EUPL-1.2. Barra minn hekk jiġbor fih softwer ta\' partijiet terzi: il-pakketti Dart u Flutter, żewġ plugins inklużi, erba\' familji ta\' tipi ta\' karattri, il-mudell tal-wiċċ għall-verifika tal-privatezza u l-JavaScript li jivvjaġġa ma\' esportazzjoni HTML. Kull wieħed iżomm il-liċenzja tiegħu.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Dan il-fajl fih softwer ta\' partijiet terzi u xi kultant tipa ta\' karattri. Hawn taħt hemm it-testi sħaħ tal-liċenzji li jappartjenu; għaddihom magħhom meta tgħaddi dan il-fajl.',
+  'Sporen op dit apparaat': 'Traċċi fuq dan l-apparat',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Minbarra s-settings tiegħek, OciDeck iżomm ukoll lista tal-fajls riċenti u, f\'każ ta\' crash, fajl tal-irkupru bil-kontenut sħiħ tal-preżentazzjoni tiegħek. Xejn minn dan ma joħroġ minn dan l-apparat, imma qiegħed hemm — f\'test sempliċi, protett mill-kont tiegħek fuq din is-sistema operattiva u minn xejn aktar.',
+  'Recent geopende presentaties': 'Preżentazzjonijiet miftuħa dan l-aħħar',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Il-lista żżomm il-mogħdija sħiħa u l-klassifikazzjoni ta\' kull preżentazzjoni li nfetħet — flimkien, tagħrif dwar fuq xiex qed taħdem u għal min.',
+  'Recente lijst wissen': 'Ħassar il-lista tal-fajls riċenti',
+  'De recente lijst was al leeg.':
+      'Il-lista tal-fajls riċenti kienet diġà vojta.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'entrata/i mħassra mil-lista tal-fajls riċenti.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Il-fajls tal-irkupru fihom il-kontenut sħiħ tal-preżentazzjonijiet tiegħek f\'test sempliċi. Jitnaddfu awtomatikament wara 7 ijiem, u minnufih meta l-programm jingħalaq sew.',
+  'Alles terugzetten': 'Irrisettja kollox',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Iħassar kull setting, il-lista tal-fajls riċenti, il-fajls tal-irkupru, il-kopji tax-xogħol tal-git u l-passwords fil-keychain tiegħek. Il-preżentazzjonijiet tiegħek jibqgħu: huma tiegħek, mhux ta\' OciDeck.',
+  'Zet alles terug naar de begintoestand':
+      'Erġa\' daħħal kollox fl-istat inizjali',
+  'Alles terugzetten naar de begintoestand?':
+      'Terġa\' ddaħħal kollox fl-istat inizjali?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Jitħassru s-settings tiegħek, il-lista tal-fajls riċenti, il-fajls tal-irkupru, il-kopji tax-xogħol tal-git u l-passwords maħżuna. Dan ma jistax jitreġġa\' lura. Il-preżentazzjonijiet tiegħek jibqgħu.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'tibdila/tibdiliet għadhom ma ntbagħtux lil server git u jeżistu biss fuq dan l-apparat. Dawk imorru wkoll.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Kollox reġa\' daħal fl-istat inizjali.',
+  'Terugzetten is niet gelukt.': 'Ir-risettjar ma rnexxiex.',
+  'Er wacht nog werk dat niet verstuurd is': 'Għad hemm xogħol li ma ntbagħatx',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Din il-konnessjoni git għandha tibdiliet li għadhom ma ntbagħtux lis-server. Jekk tneħħi l-konnessjoni, tmur ukoll il-kopja tax-xogħol fuq dan l-apparat — u dan ix-xogħol ma jibqa\' jeżisti mkien.',
+  'Verbinding behouden': 'Żomm il-konnessjoni',
+  'Toch verwijderen': 'Neħħi xorta',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

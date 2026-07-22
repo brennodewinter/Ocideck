@@ -13,8 +13,8 @@ import '../models/slide.dart';
 import '../models/slide_quality.dart';
 import '../models/video_source.dart';
 import '../utils/color_contrast.dart';
+import '../utils/inline_markdown.dart';
 import '../utils/project_path.dart';
-import '../widgets/slides/inline_markdown.dart';
 import 'slide_layout_metrics.dart';
 import 'split_run.dart';
 
@@ -355,7 +355,34 @@ class SlideQualityAnalyzer {
           foreground: theme.titleTextColor,
           background: theme.sectionBackgroundColor,
         );
-      default:
+      // Bewust uitgeschreven in plaats van een `default:`. Een `default` zet de
+      // exhaustiviteitswaarschuwing van de analyzer uit, en dan valt slidetype
+      // #25 hier stil: geen contrastcontrole, en niemand die het merkt. Nu
+      // weigert de compiler een nieuw type tot iemand beslist heeft of het een
+      // eigen voor-/achtergrondpaar heeft dat gekeurd moet worden.
+      case SlideType.title ||
+          SlideType.bullets ||
+          SlideType.twoBullets ||
+          SlideType.bulletsImage ||
+          SlideType.twoImages ||
+          SlideType.image ||
+          SlideType.video ||
+          SlideType.quote ||
+          SlideType.table ||
+          SlideType.freeMarkdown ||
+          SlideType.code ||
+          SlideType.chart ||
+          SlideType.cockpit ||
+          SlideType.question ||
+          SlideType.timeline ||
+          SlideType.scorecard ||
+          SlideType.assets ||
+          SlideType.discoveries ||
+          SlideType.finding ||
+          SlideType.findingsSummary ||
+          SlideType.checklist ||
+          SlideType.scopeMatrix ||
+          SlideType.signOff:
         break;
     }
   }

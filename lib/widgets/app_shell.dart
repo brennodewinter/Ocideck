@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:desktop_drop/desktop_drop.dart';
@@ -49,7 +50,7 @@ import '../services/privacy/redaction_manifest_service.dart';
 import '../services/web_asset_store.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
-import '../services/mermaid_render_service.dart';
+import 'mermaid_render_host.dart';
 import '../models/git_settings.dart';
 import '../services/git/asset_index.dart';
 import '../services/git/deck_merge.dart';
@@ -95,6 +96,7 @@ import 'dialogs/new_deck_dialog.dart';
 import 'dialogs/open_presentation_dialog.dart';
 import 'dialogs/package_encrypt_dialog.dart';
 import 'dialogs/package_password_dialog.dart';
+import 'dialogs/proxy_fallback_dialog.dart';
 import 'dialogs/presentation_info_dialog.dart';
 import 'dialogs/save_destination_dialog.dart';
 import 'dialogs/scan_library_dialog.dart';
@@ -172,6 +174,14 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
         .packagePasswordResolver = ({required bool retry}) async {
       if (!mounted) return null;
       return PackagePasswordDialog.show(context, retry: retry);
+    };
+    // Idem voor de vraag of de web-import de URL aan het eigen fetch-hulppunt
+    // mag doorgeven. Zonder deze registratie vervalt die terugval.
+    ref
+        .read(tabsProvider.notifier)
+        .proxyFallbackConfirm = ({required String host}) async {
+      if (!mounted) return false;
+      return ProxyFallbackDialog.show(context, host: host);
     };
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _maybeRestore();

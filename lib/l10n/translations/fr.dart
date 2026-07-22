@@ -736,6 +736,51 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Via deze website ophalen?': 'Récupérer via ce site ?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Le serveur de cette présentation n\'a pas laissé le navigateur lire le fichier directement. OciDeck peut transmettre l\'adresse au site d\'où provient OciDeck lui-même, et c\'est ce site qui la récupère. Ce site voit ainsi l\'adresse complète — si le lien contient une clé ou un code, ce site les voit aussi.',
+  'In de browser kan dit niet worden bewaard':
+      'Impossible d\'enregistrer ceci dans le navigateur',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Un navigateur n\'a pas de trousseau comme en a un ordinateur : ce qu\'OciDeck enregistrerait ici, n\'importe quel script de cette page peut le lire. Utilisez la version bureau — là, le secret va bien dans le trousseau du système d\'exploitation.',
+  'Licenties van derden': 'Licences de tiers',
+  'Alle licentieteksten tonen': 'Afficher tous les textes de licence',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck lui-même est publié sous EUPL-1.2. Il regroupe en outre des logiciels tiers : les paquets Dart et Flutter, deux extensions intégrées, quatre familles de polices, le modèle de visage du contrôle de confidentialité et le JavaScript qui accompagne une exportation HTML. Chacun conserve sa propre licence.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Ce fichier contient des logiciels tiers et parfois une police. Les textes complets des licences correspondantes figurent ci-dessous ; transmettez-les avec le fichier.',
+  'Sporen op dit apparaat': 'Traces sur cet appareil',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Outre vos paramètres, OciDeck conserve aussi une liste des fichiers récents et, en cas de plantage, un fichier de récupération contenant l\'intégralité de votre présentation. Rien de tout cela ne quitte cet appareil, mais tout y reste — en texte brut, protégé par votre compte sur ce système d\'exploitation et rien de plus.',
+  'Recent geopende presentaties': 'Présentations ouvertes récemment',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'La liste conserve le chemin complet et la classification de chaque présentation qui a été ouverte — ensemble, une information sur ce sur quoi vous travaillez et pour qui.',
+  'Recente lijst wissen': 'Effacer la liste des fichiers récents',
+  'De recente lijst was al leeg.':
+      'La liste des fichiers récents était déjà vide.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'entrée(s) effacée(s) de la liste des fichiers récents.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Les fichiers de récupération contiennent l\'intégralité de vos présentations en texte brut. Ils sont nettoyés automatiquement après 7 jours, et immédiatement lors d\'une fermeture propre.',
+  'Alles terugzetten': 'Tout réinitialiser',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Efface tous les paramètres, la liste des fichiers récents, les fichiers de récupération, les copies de travail git et les mots de passe de votre trousseau. Vos présentations restent : elles sont à vous, pas à OciDeck.',
+  'Zet alles terug naar de begintoestand': 'Tout remettre à l\'état initial',
+  'Alles terugzetten naar de begintoestand?':
+      'Tout remettre à l\'état initial ?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Vos paramètres, la liste des fichiers récents, les fichiers de récupération, les copies de travail git et les mots de passe enregistrés seront effacés. Cette action est irréversible. Vos présentations restent.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'modification(s) n\'ont pas encore été envoyées à un serveur git et n\'existent que sur cet appareil. Elles disparaissent aussi.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Tout a été remis à l\'état initial.',
+  'Terugzetten is niet gelukt.': 'La réinitialisation a échoué.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Du travail non envoyé est en attente',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Cette connexion git contient des modifications qui n\'ont pas encore été envoyées au serveur. Si vous supprimez la connexion, la copie de travail sur cet appareil disparaît aussi — et ce travail n\'existe plus nulle part.',
+  'Verbinding behouden': 'Conserver la connexion',
+  'Toch verwijderen': 'Supprimer quand même',
   'esc': 'échap',
   'Enter': 'Entrée',
   'OK': 'OK',

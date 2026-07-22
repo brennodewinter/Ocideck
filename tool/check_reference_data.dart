@@ -380,7 +380,13 @@ int? _bundledCweCount() {
   final f = File('assets/cwe/cwe_full.json');
   if (!f.existsSync()) return null;
   try {
-    return (jsonDecode(f.readAsStringSync()) as List).length;
+    final decoded = jsonDecode(f.readAsStringSync());
+    // The asset carries a MITRE attribution header around the rows; the older
+    // bare-array shape is still counted so this never reports a false zero.
+    final rows = decoded is Map<String, dynamic>
+        ? decoded['weaknesses'] as List
+        : decoded as List;
+    return rows.length;
   } on Object {
     return null;
   }

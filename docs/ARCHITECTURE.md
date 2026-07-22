@@ -1,5 +1,7 @@
 # OciDeck — Architecture
 
+> **Status:** current-state description of the system and its layering · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 A high-level map of how OciDeck is put together, for contributors. For how files
 are stored on disk, see [`FILE_FORMAT.md`](FILE_FORMAT.md). For a one-line
 description of the files under `lib/`, see [`SOURCE_MAP.md`](SOURCE_MAP.md).
@@ -96,14 +98,28 @@ a connection that arrives at all can only have come from the pin.
 ```
 lib/
   models/     # Deck, Slide, Settings/ThemeProfile, Chart, Annotation
-  services/   # markdown, markdown_validator, file, export,
-              # classification_policy, classification_enforcement_policy,
-              # export_metadata, image, caption,
-              # description, image_dedup (md5 duplicates),
+  services/   # mostly loose files, one subject each: markdown,
+              # markdown_validator, file, export, classification_policy,
+              # classification_enforcement_policy, export_metadata, image,
+              # caption, description, image_dedup (md5 duplicates),
               # image_reference (.md rewrites), recovery, rasterizer,
               # marp_html, annotation_codec, rehearsal_controller,
-              # webdav (Nextcloud source), s3/ (bucket source),
-              # git/ (forge source), secret_store (keychain)
+              # webdav (Nextcloud source), secret_store (keychain)
+              #
+              # …plus the subdirectories that are a subject of their own:
+              #   privacy/             detect, weigh, redact, gate the export
+              #   git/                 forge source (docs/design/GIT_STORAGE.md)
+              #   s3/                  bucket source (SigV4 + pinned client)
+              #   cve/                 the offline CVE corpus
+              #   cvss/                the CVSS v4.0 scoring engine
+              #   finding_templates/   template content, one file per language
+              #   presentation_search/ the network sources 'Slide zoeken' scans
+              #   info_safety/         what reference data is locally present
+              #   parts/               `part of` spillover, not a cluster
+              #
+              # Each of those (except parts/) carries a header comment naming
+              # what belongs in it and what does not; SOURCE_MAP.md lists which
+              # file holds it.
   state/      # Riverpod providers (top-level + parts/): deck, editor,
               # settings, tabs, clipboard, webdav, s3, git, consent, privacy,
               # info_safety, local_cve, deck_quality, …
@@ -113,6 +129,18 @@ lib/
   theme/      # app theming
   utils/      # small shared helpers (clipboard table parsing, URL launching)
 ```
+
+The direction of traffic between those layers is enforced, not just intended: a
+`check_conventions` guard (`layerRules`) fails the build when `models/` imports
+`state/` or `widgets/`, when `services/` imports `state/`, or when `state/`
+imports `widgets/`. All three are a hard zero. A separate ratchet
+(`serviceUiImportBaseline`, now 4) counts UI imports inside `services/`; the
+remaining four are in `slide_rasterizer`, which paints real widgets into an
+image and therefore has the widget tree as its subject.
+
+Together those keep the core headless: runnable and testable without pumping a
+widget tree, and acyclic between layers. They held on discipline alone until
+2026-07-22, which is exactly the kind of invariant a reviewer eventually misses.
 
 ## Data model
 
@@ -370,15 +398,21 @@ cloud rules, fail-closed on web); `utils/zip_encryption.dart` backs encrypted
 Two upstream plugins are forked into `third_party/` and wired via `pubspec.yaml`
 (path dependency / `dependency_overrides`):
 
-- **`desktop_multi_window`** (MixinNetwork) — vendored fork with
+- **`desktop_multi_window`** (MixinNetwork, **Apache-2.0**) — vendored fork with
   `window_setFrame`, `window_coverScreen` (borderless fill of a chosen screen),
   and `window_close` on **macOS, Windows, and Linux**. macOS additionally tracks
   the mouse for non-key windows so chart hover works on the beamer.
-- **`screen_retriever_macos`** (leanflutter) — a packaging fix for recent
-  Xcode/CocoaPods.
+- **`screen_retriever_macos`** (leanflutter, MIT) — a Swift Package Manager
+  layout added for recent Xcode/CocoaPods; no upstream file edited.
 
-If you bump either upstream, re-apply the local changes (they're small and
-documented in the diff) and re-test the dual-screen presenter.
+Each fork carries a `MODIFICATIONS.md` naming the upstream commit it descends
+from and every local change, and — for the Apache-2.0 one — each changed file
+opens with the §4(b) notice that licence requires. The SBOM records the same
+commit plus a SHA-256 tree hash of the directory.
+
+If you bump either upstream, re-apply the local changes, update
+`MODIFICATIONS.md` and `_forkOrigins` in `tool/sbom_build.dart`, run `make sbom`,
+and re-test the dual-screen presenter.
 
 ## Information-security module (optional, off by default)
 

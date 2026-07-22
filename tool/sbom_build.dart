@@ -65,17 +65,59 @@ const _validSpdxIds = <String>{
 
 /// Upstream origins of the two vendored (forked) plugins in `third_party/`.
 /// Kept here (and in THIRD_PARTY_NOTICES.md) because a path dependency carries
-/// no upstream URL of its own.
-const _forkOrigins = <String, ({String vcs, String license})>{
+/// no upstream URL, no upstream revision and no archive hash of its own.
+///
+/// [revision] is the upstream commit the fork was branched from, verified by
+/// hashing every file in the package subtree at that commit and comparing it
+/// with the vendored copy: every file matches except the ones listed in the
+/// fork's own `MODIFICATIONS.md`. [subdir] is the package's path inside the
+/// upstream monorepo, so `$vcs/tree/$revision/$subdir` resolves to the exact
+/// source this fork descends from.
+///
+/// The **licence is deliberately absent here**. It is classified from the
+/// fork's own LICENSE file by [licenseForPackage] — the same classifier the
+/// `make licenses` gate uses — because hardcoding it is precisely how
+/// `desktop_multi_window` came to be listed as MIT in every SBOM while the
+/// file on disk was the Apache-2.0 text (© 2021 Mixin). The MIT that GitHub's
+/// API reports for `MixinNetwork/flutter-plugins` is the *root* LICENSE of the
+/// monorepo; the package directory carries its own, and that one governs.
+const _forkOrigins = <String, ({String vcs, String revision, String subdir})>{
   'desktop_multi_window': (
     vcs: 'https://github.com/MixinNetwork/flutter-plugins',
-    license: 'MIT',
+    revision: '58a5868d1cb9031defa5db5868d6aaea0486d24a',
+    subdir: 'packages/desktop_multi_window',
   ),
   'screen_retriever_macos': (
     vcs: 'https://github.com/leanflutter/screen_retriever',
-    license: 'MIT',
+    revision: 'ed1e52204d75b69330fb4b0e0b8d4d57e3c53833',
+    subdir: 'packages/screen_retriever_macos',
   ),
 };
+
+/// SHA-256 over a vendored fork's entire directory tree.
+///
+/// A path dependency has no pub archive, so there is no upstream hash to
+/// record — but "no hash at all" leaves the two forks as the only components a
+/// verifier cannot check. This fills that gap with a hash of what we actually
+/// ship: the digest of a sorted `<relative path> <sha256>` line per file. It is
+/// recomputed on every `make sbom-verify`, so a tampered or accidentally-edited
+/// fork shows up as a stale SBOM rather than passing unnoticed.
+///
+/// Dot-directories and dot-files are skipped: they are build/editor droppings
+/// (`.DS_Store`, `.dart_tool`) that are not part of the vendored source and
+/// would make the hash machine-dependent.
+String forkTreeHash(Directory dir) {
+  final prefix = '${dir.path}${Platform.pathSeparator}';
+  final lines = <String>[];
+  for (final entity in dir.listSync(recursive: true, followLinks: false)) {
+    if (entity is! File) continue;
+    final rel = entity.path.substring(prefix.length).replaceAll(r'\', '/');
+    if (rel.split('/').any((seg) => seg.startsWith('.'))) continue;
+    lines.add('$rel ${sha256.convert(entity.readAsBytesSync())}');
+  }
+  lines.sort();
+  return sha256.convert(utf8.encode('${lines.join('\n')}\n')).toString();
+}
 
 /// One entry in the bill of materials.
 class SbomComponent {
@@ -90,6 +132,7 @@ class SbomComponent {
     this.sha256,
     this.downloadUrl,
     this.vcsUrl,
+    this.upstreamRevision,
     this.scope,
     this.note,
   });
@@ -109,6 +152,10 @@ class SbomComponent {
   final String? sha256;
   final String? downloadUrl;
   final String? vcsUrl;
+
+  /// Upstream commit a vendored fork descends from, or null for anything that
+  /// has a version-pinned archive instead.
+  final String? upstreamRevision;
 
   /// Classified licence family or SPDX expression (e.g. `Apache-2.0 OR MPL-2.0`).
   final String license;
@@ -232,6 +279,7 @@ List<SbomComponent> _dartPackages() {
       );
     } else if (source == 'path') {
       final fork = _forkOrigins[name];
+      final dir = Directory('third_party/$name');
       out.add(
         SbomComponent(
           ref: 'fork:$name@$version',
@@ -239,10 +287,18 @@ List<SbomComponent> _dartPackages() {
           type: 'library',
           name: name,
           version: version,
-          license: fork?.license ?? license,
-          vcsUrl: fork?.vcs,
+          license: license,
+          sha256: dir.existsSync() ? forkTreeHash(dir) : null,
+          vcsUrl: fork == null
+              ? null
+              : '${fork.vcs}/tree/${fork.revision}/${fork.subdir}',
+          upstreamRevision: fork?.revision,
           scope: scope,
-          note: 'Vendored fork in third_party/$name (local native changes).',
+          note:
+              'Vendored fork in third_party/$name; the local changes are '
+              'recorded in third_party/$name/MODIFICATIONS.md. The SHA-256 is '
+              'a tree hash of the vendored directory, not an upstream archive '
+              'hash — a path dependency has none.',
         ),
       );
     } else {
@@ -454,6 +510,8 @@ Map<String, dynamic> _cdxComponent(SbomComponent c) {
   final props = <Map<String, String>>[
     {'name': 'ocideck:group', 'value': c.group},
     if (c.scope != null) {'name': 'cdx:pub:scope', 'value': c.scope!},
+    if (c.upstreamRevision != null)
+      {'name': 'ocideck:upstream-revision', 'value': c.upstreamRevision!},
     if (c.note != null) {'name': 'ocideck:note', 'value': c.note!},
   ];
   m['properties'] = props;
@@ -547,6 +605,11 @@ Map<String, dynamic> _spdxPackage(SbomComponent c, String spdxId) {
         'referenceLocator': c.purl,
       },
     ];
+  }
+  if (c.upstreamRevision != null) {
+    pkg['sourceInfo'] =
+        'Vendored from ${c.vcsUrl} at commit '
+        '${c.upstreamRevision}.';
   }
   if (c.note != null) pkg['comment'] = c.note;
   return pkg;

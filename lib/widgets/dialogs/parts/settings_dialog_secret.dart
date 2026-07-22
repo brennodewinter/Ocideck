@@ -59,3 +59,87 @@ class KeychainSecret {
 
   void dispose() => field.dispose();
 }
+
+extension _SettingsSecret on _SettingsDialogState {
+  /// Het invulveld van een geheim: [_webdavField], plus de weigering wanneer dit
+  /// platform geen sleutelbos heeft.
+  ///
+  /// Waarom hier en niet één melding bovenaan de dialoog: de gebruiker die een
+  /// token komt invullen, kijkt naar dít veld. Een uitgegrijsd vak zonder tekst
+  /// laat hem zoeken naar wat hij fout doet; de reden hoort ernaast te staan, op
+  /// het moment dat hij het probeert.
+  ///
+  /// Alleen het geheim gaat op slot. Een bron zonder geheim — een openbare
+  /// URL, een lokaal bestand — blijft op het web gewoon werken, dus de rest van
+  /// het formulier wordt niet meegenomen in de weigering.
+  Widget _secretField(
+    TextEditingController controller,
+    String label, {
+    String? hint,
+    IconData icon = Icons.key_outlined,
+  }) {
+    if (platformCanStoreSecrets) {
+      return _webdavField(
+        controller,
+        label,
+        hint: hint,
+        obscure: true,
+        icon: icon,
+      );
+    }
+    final l10n = context.l10n;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextField(
+            controller: controller,
+            enabled: false,
+            obscureText: true,
+            style: const TextStyle(fontSize: 13),
+            decoration: InputDecoration(
+              isDense: true,
+              labelText: label,
+              prefixIcon: Icon(icon, size: 18),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.lock_outline, size: 14, color: AppTheme.amber700),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.d('In de browser kan dit niet worden bewaard'),
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.amber700,
+                        ),
+                      ),
+                      Text(
+                        l10n.d(
+                          'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.',
+                        ),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: AppTheme.slate400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

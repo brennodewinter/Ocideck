@@ -55,6 +55,21 @@
   -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https:; worker-src 'self' blob:; child-src 'self' blob: data:; frame-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'">
 
+  <!--
+    Referrer-Policy, delivered from the document itself.
+
+    Unlike frame-ancestors, `no-referrer` IS honoured from a <meta> tag, so this
+    one does not depend on the static host cooperating — it ships inside the
+    bundle. It matters because connect-src permits `https:`: a URL-import
+    fetches a host the user pasted, and without this the deck's own URL would
+    travel to that host in the Referer header. The path of a deck link can
+    itself be the sensitive part.
+
+    Kept as a companion header in docs/HOSTING.md too; the header wins where
+    both are present, and they say the same thing.
+  -->
+  <meta name="referrer" content="no-referrer">
+
   <meta name="description" content="Feline and human friendly presentations">
 
   <!-- iOS meta tags & icons -->

@@ -1754,6 +1754,48 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Via deze website ophalen?': 'Suqlu\'meH website vam lo\'lu\'\'a\'?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'De\' nIH laD browser \'e\' chaw\'be\' cha\'nob vam Server. OciDeck ghoSpu\'bogh websiteDaq Daq ngeHlaH OciDeck, vaj De\' Suq websitevetlh. Daq naQ legh websitevetlh — rarDaq ngaQHa\'moHwI\' ghap ngoq tu\'lu\'chugh, \'oH je legh websitevetlh.',
+  'In de browser kan dit niet worden bewaard': 'browserDaq vam pollaHbe\'lu\'',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'browserDaq ngaQHa\'moHwI\' ngaSwI\' tu\'lu\'be\'; De\'wI\'Daq tu\'lu\'. naDev pegh pol OciDeck, \'ach laDlaH Hoch script vam. desktop version yIlo\' — pa\' operating system ngaQHa\'moHwI\' ngaSwI\'Daq pegh pollu\'.',
+  'Licenties van derden': 'latlhpu\' chuvmey chut',
+  'Alle licentieteksten tonen': 'Hoch chut ghItlh \'ang',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'EUPL-1.2 bIng OciDeck. latlhpu\' De\'wI\' De\' je qengmeH: Dart Flutter je ngaq, cha\' plugin, loS ghItlh qorDu\', qab De\'wI\' \'ej JavaScript, HTML lupoQmeH. Hoch chut Dajmey polbe\'chugh, chut chaj polta\'.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'naDev latlhpu\' De\'wI\' De\' \'ej rut ghItlh qorDu\' tu\'lu\'. bIng chut ghItlhmey naQ tu\'lu\'; De\' DangeHDI\', chut ghItlhmey je yIngeH.',
+  'Sporen op dit apparaat': 'jan vamDaq ratlhbogh Dochmey',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'cherlu\'bogh polbe\' neH OciDeck: teHwI\'mey chu\' tetlh je pol, \'ej Qaghpu\'DI\' De\'wI\', \'anghomlIj Hoch ngaSbogh qa\'meH teHwI\' pol. pagh mej jan vamvo\', \'ach naDev ratlh — ghItlh nIt, pat vamDaq per\'onlIj neH Hub, latlh pagh.',
+  'Recent geopende presentaties': 'poSlu\'pu\'bogh \'anghommey chu\'',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'poSlu\'pu\'bogh \'anghom Hoch He naQ Segh je pol tetlh — vaj nuq DavangtaH \'ej \'Iv DavangmoH, \'e\' \'ang.',
+  'Recente lijst wissen': 'teHwI\'mey chu\' tetlh teq',
+  'De recente lijst was al leeg.': 'chIm teHwI\'mey chu\' tetlh.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'teHwI\'mey chu\' tetlhvo\' teqlu\'ta\'.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'qa\'meH teHwI\'mey Hoch \'anghom ngaS, ghItlh nIt. 7 jaj tlhoch Say\'moHlu\', \'ej QaQ mevlu\'DI\' SIbI\' Say\'moHlu\'.',
+  'Alles terugzetten': 'Hoch cheghmoH',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Hoch cherlu\'bogh, teHwI\'mey chu\' tetlh, qa\'meH teHwI\'mey, git vumwI\' velmey, ghewmey velDaq per\'onmey je Qaw\'. ratlh \'anghomlIjmey: SoHvaD chaH, OciDeckvaD chaHbe\'.',
+  'Zet alles terug naar de begintoestand': 'taghDotlhDaq Hoch yIcheghmoH',
+  'Alles terugzetten naar de begintoestand?':
+      'taghDotlhDaq Hoch cheghmoH\'a\'?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'cherlu\'bogh, teHwI\'mey chu\' tetlh, qa\'meH teHwI\'mey, git vumwI\' velmey, per\'onmey polbogh je Qaw\'lu\'. cheghmoHqa\'laHbe\'lu\'. ratlh \'anghomlIjmey.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'choHmey git ServerDaq ngeHlu\'pu\'be\' \'ej jan vamDaq neH tu\'lu\'. bIH je Haw\'lu\'.',
+  'Alles is teruggezet naar de begintoestand.':
+      'taghDotlhDaq Hoch cheghmoHlu\'ta\'.',
+  'Terugzetten is niet gelukt.': 'cheghmoHmeH Qu\' Qapbe\'.',
+  'Er wacht nog werk dat niet verstuurd is': 'ngeHlu\'pu\'be\'bogh Qu\' loS',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'choHmey ngeHlu\'pu\'be\'bogh ghaj git rar vam. rar Dateqchugh, jan vamDaq vumwI\' vel je Haw\' — \'ej Daq\'a\'Daq Qu\'vam tu\'lu\'be\'.',
+  'Verbinding behouden': 'rar pol',
+  'Toch verwijderen': 'vaj rar teq',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'lu\'',

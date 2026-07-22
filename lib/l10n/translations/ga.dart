@@ -1815,6 +1815,51 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Via deze website ophalen?': 'Faigh tríd an suíomh seo?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Níor lig freastalaí na láithreoireachta seo don bhrabhsálaí an comhad a léamh go díreach. Is féidir le OciDeck an seoladh a chur ar aghaidh chuig an suíomh as a dtagann OciDeck féin, agus faigheann an suíomh sin é. Mar sin feiceann an suíomh sin an seoladh iomlán — má tá eochair nó cód sa nasc, feiceann an suíomh sin iad sin freisin.',
+  'In de browser kan dit niet worden bewaard':
+      'Ní féidir é seo a shábháil sa bhrabhsálaí',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Níl eochairslabhra ag brabhsálaí mar atá ag ríomhaire: rud ar bith a shábhálfadh OciDeck anseo, is féidir le haon script ar an leathanach seo é a léamh. Bain úsáid as an leagan deisce — ann téann an rún isteach in eochairslabhra an chórais oibriúcháin i ndáiríre.',
+  'Licenties van derden': 'Ceadúnais tríú páirtí',
+  'Alle licentieteksten tonen': 'Taispeáin gach téacs ceadúnais',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Tá OciDeck féin faoi cheadúnas EUPL-1.2. Ina theannta sin cuachann sé bogearraí tríú páirtí: na pacáistí Dart agus Flutter, dhá bhreiseán atá san áireamh, ceithre theaghlach cló, an tsamhail aghaidhe don seiceáil príobháideachais agus an JavaScript a thaistealaíonn le heaspórtáil HTML. Coinníonn gach ceann acu a cheadúnas féin.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Tá bogearraí tríú páirtí sa chomhad seo, agus cló uaireanta. Tá téacsanna iomlána na gceadúnas a bhaineann leo thíos; seol ar aghaidh iad nuair a chuireann tú an comhad seo ar aghaidh.',
+  'Sporen op dit apparaat': 'Rianta ar an ngléas seo',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Chomh maith le do shocruithe, coinníonn OciDeck liosta de na comhaid le déanaí agus, i gcás tuairte, comhad athshlánaithe ina bhfuil ábhar iomlán do chur i láthair. Ní fhágann aon chuid de sin an gléas seo, ach tá sé anseo — i ngnáth-théacs, gan de chosaint air ach do chuntas ar an gcóras oibriúcháin seo.',
+  'Recent geopende presentaties': 'Cur i láthair a osclaíodh le déanaí',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Coinníonn an liosta an chonair iomlán agus aicmiú gach cur i láthair a bhí oscailte — le chéile, eolas faoin rud a bhfuil tú ag obair air agus do cé.',
+  'Recente lijst wissen': 'Scrios liosta na gcomhad le déanaí',
+  'De recente lijst was al leeg.':
+      'Bhí liosta na gcomhad le déanaí folamh cheana.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'iontráil(eacha) scriosta ó liosta na gcomhad le déanaí.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Bíonn ábhar iomlán do chur i láthair i ngnáth-théacs sna comhaid athshlánaithe. Glantar go huathoibríoch iad tar éis 7 lá, agus láithreach nuair a dhúntar an feidhmchlár mar is ceart.',
+  'Alles terugzetten': 'Athshocraigh gach rud',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Scriosann sé gach socrú, liosta na gcomhad le déanaí, na comhaid athshlánaithe, na cóipeanna oibre git agus na pasfhocail in eochairslabhra do chórais. Fanann do chuid cur i láthair: is leatsa iad, ní le OciDeck.',
+  'Zet alles terug naar de begintoestand':
+      'Cuir gach rud ar ais chuig an mbunstaid',
+  'Alles terugzetten naar de begintoestand?':
+      'Gach rud a chur ar ais chuig an mbunstaid?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Scriosfar do shocruithe, liosta na gcomhad le déanaí, na comhaid athshlánaithe, na cóipeanna oibre git agus na pasfhocail shábháilte. Ní féidir é seo a chur ar ceal. Fanann do chuid cur i láthair.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'athrú/athruithe nár seoladh chuig freastalaí git fós agus nach bhfuil ann ach ar an ngléas seo. Imeoidh siad sin freisin.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Tá gach rud curtha ar ais chuig an mbunstaid.',
+  'Terugzetten is niet gelukt.': 'Theip ar an athshocrú.',
+  'Er wacht nog werk dat niet verstuurd is': 'Tá obair gan seoladh fós ann',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Tá athruithe sa nasc git seo nár seoladh chuig an bhfreastalaí fós. Má bhaineann tú an nasc, imíonn an chóip oibre ar an ngléas seo freisin — agus ní bheidh an obair seo ann in aon áit a thuilleadh.',
+  'Verbinding behouden': 'Coinnigh an nasc',
+  'Toch verwijderen': 'Bain mar sin féin',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Ceart go leor',

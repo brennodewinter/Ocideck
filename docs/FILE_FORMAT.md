@@ -1,5 +1,7 @@
 # OciDeck — File Format
 
+> **Status:** specification of the on-disk format — the stable contract · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 OciDeck stores presentations as **standard [Marp](https://marp.app/) Markdown**
 (`.md`). There is no custom binary format: a saved presentation can be processed
 directly with the Marp CLI or the VS Code Marp extension. OciDeck-specific
@@ -196,7 +198,7 @@ content having changed.
 | `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. |
 | `ocideck_play_only` | `true`/absent | Play-only lock. When `true`, the deck opens locked: no editor, toolbar, menus, or export — only the first slide with a play button, presented full screen. Closing the deck restores normal editing. Default (unlocked) stays out of the file; only `true` is written. Removing this key unlocks the deck. |
 | `ocideck_style_profile` · `ocideck_miauw_waivers` · `ocideck_miauw_confirmations` | *retired* | **No longer written** as of 0.1.0 (§3.6). Still read, so an older file opens correctly; removed from the file on the next save. |
-| `ocideck_seal_tsr` | base64url | RFC 3161 timestamp token (`.tsr`) over `ocideck_seal_hash` (PENTEST_MIAUW §8-A2). Written only when present; excluded from the sealed content hash. Checked when the timestamp dialog is open and when an audit dossier is built — **not** on opening the deck — and the check is an imprint comparison only, not a CMS-signature or certificate validation (*corrected 2026-07-21: this cell said "Verified in-app on open"*). See [USER_GUIDE.md](USER_GUIDE.md#timestamp-rfc-3161). |
+| `ocideck_seal_tsr` | base64url | RFC 3161 timestamp token (`.tsr`) over `ocideck_seal_hash` (PENTEST_MIAUW §8-A2). Written only when present; excluded from the sealed content hash. Checked when the timestamp dialog is open and when an audit dossier is built — **not** on opening the deck — and the check is an imprint comparison only, not a CMS-signature or certificate validation. The exported `.tsq` carries a random RFC 3161 nonce, which the TSA must echo in the token; that echo binds one request to one token and is verifiable by anyone holding both files (`openssl ts -reply -in … -text`). OciDeck cannot check it on import — the deck does not store the request — so a token whose imprint matches is accepted regardless of its nonce (*corrected 2026-07-21: this cell said "Verified in-app on open"*). See [USER_GUIDE.md](USER_GUIDE.md#timestamp-rfc-3161). |
 | `ocideck_finalized` | `true`/absent | Document integrity (§8 A1): the deck is finalised and read-only. Written only when `true`. |
 | `ocideck_seal_hash` · `ocideck_seal_algo` · `ocideck_seal_at` | string | The content seal: a SHA-512 hash over the canonical content, the algorithm (`sha-512`), and the ISO-8601 UTC timestamp. Recomputed on open → *intact* / *changed after finalising*. **The hash covers what OciDeck writes, not what you write**: styling, the seal fields themselves, the format version (§3.0), and any front-matter lines OciDeck does not own — your own `style:` block, comments, a hand-placed `header:` — all stay outside it. Those lines are preserved in the file (§3.0) but editing them is not tampering, and a false tamper alarm is more expensive than none. Your visible signature (`ocideck_sig_*`) *is* covered, deliberately, so altering it is detectable (*corrected 2026-07-21: the hash briefly covered preserved foreign front matter, so editing your own `style:` block broke the seal*). |
 | `ocideck_sig_name` · `ocideck_sig_role` · `ocideck_sig_cert` · `ocideck_sig_date` · `ocideck_sig_statement` · `ocideck_sig_typed` · `ocideck_sig_image` | string | The deck-level **visual signature** rendered by the `signOff` slide (§5): signer name, role, certification, date, attested statement, typed signature, and an optional embedded (`data:`) signature image — a **hand-drawn signature** (drawn on the pad in the sign-off editor / seal dialog) is stored here as a self-contained base64 PNG. Written before the seal fields, so the signature is covered by the hash. Each key is written only when non-empty. |
@@ -1335,7 +1337,6 @@ Marp `.md` is never touched by annotations.
 `points` is a flat list `[x0, y0, x1, y1, ...]`; `color` is an ARGB int; `tool`
 is `pen` or `highlighter` (laser pointers are transient and are not stored).
 
-<<<<<<< HEAD
 `version` is a single increasing integer, and every sidecar in this chapter
 handles it the same way (`lib/services/sidecar_format.dart`): **a file declaring
 a higher version than this build understands is not loaded, and not
@@ -1344,7 +1345,7 @@ and then writing back what you did understand deletes the rest; and refusing to
 read it while still saving over it deletes all of it — the deck would hold no
 strokes in memory, and the save would take that as "there is nothing here".
 A missing `version` is version 1.
-=======
+
 The same payload rides along in an **autosave/recovery snapshot**, since drawing
 marks a deck as changed and the strokes are not in the markdown: without it a
 deck that had only been drawn on came back after a crash with the drawings gone.
@@ -1354,7 +1355,6 @@ A snapshot that carries an unreadable ink payload still restores the text.
 `services/git/` writes it — so drawings do not travel that way. Saving to a
 folder or into a package does take them along. OciDeck says so before the commit
 is made rather than after; see `design/GIT_STORAGE.md` §9.1.
->>>>>>> 26b3fa16 (docs: breng de gidsen in overeenstemming met de vijf gedichte paden)
 
 ### 6.3 User Notes (`<name>.user-notes.json`)
 
@@ -1634,6 +1634,24 @@ When exporting a package you may protect it with a password. Encryption is
   export dialog therefore shows an entropy-based strength meter and offers a
   generator (32 or 256 random characters); with a long or generated password the
   weak KDF is irrelevant.
+- **Keep the password to ASCII if you type it yourself.** *(Added 2026-07-22;
+  this was documented nowhere.)* The ZIP-AES key derivation takes the password's
+  bytes as `Uint8List.fromList(password.codeUnits)` — it truncates every UTF-16
+  code unit to its low 8 bits. For plain ASCII that is exact and nothing is lost.
+  For anything above U+00FF it is not: Cyrillic, Greek, Hebrew, Arabic, CJK and
+  emoji characters are silently folded onto whichever byte their low half
+  happens to be, and different characters collapse onto the same byte. Two
+  consequences, both quiet. You lose entropy you thought you had — a
+  twelve-character Cyrillic passphrase is not worth what its length suggests —
+  and the derived key depends on a truncation rule that other tools need not
+  share, so 7-Zip or WinZip may refuse a password OciDeck accepted, or the
+  reverse. Nothing warns you; the package simply will not open.
+
+  This is a property of the format's key derivation as implemented, not of
+  OciDeck's own code, and it cannot be fixed from here without producing
+  packages other tools cannot read. **A generated password is unaffected**:
+  `passwordAlphabet` is printable ASCII by construction, so the generator route
+  never meets this at all.
 - **Caveat.** Because file names stay visible and the KDF is weak, ZIP-AES suits
   "keep casual readers out". For strong confidentiality of sensitive material,
   wrap the package in a container with a modern KDF and hidden names (age, GPG,
@@ -1833,7 +1851,7 @@ two Dutch names that look alike while needing opposite handling.
   "derived_from": "9f1c…",
   "algorithm": "sha-256(salt || value)",
   "redactions": [
-    { "id": "a3f1", "commitment": "a3f1…", "rule": "nl.bsn", "slide": 4, "field": "bullets" },
+    { "id": "a3f1e2b7", "commitment": "a3f1e2b7…", "rule": "nl.bsn", "slide": 4, "field": "bullets" },
     { "id": "77bd", "commitment": "77bd…", "rule": "contact.email", "slide": -1, "field": "author" }
   ]
 }
@@ -1846,8 +1864,15 @@ two Dutch names that look alike while needing opposite handling.
   when the deck is not sealed. It pins provenance; it does **not** put the
   manifest under the seal, which is impossible — the manifest is made at export,
   after the seal, with fresh random salts.
-- `id` is the first four hex characters of the commitment: enough to name one
-  redaction in a conversation ("I dispute a3f1"), too little to reveal anything.
+- `id` is a prefix of the commitment — at least **eight** hex characters, and
+  longer whenever eight would not tell two entries in the same manifest apart.
+  Enough to name one redaction in a conversation ("I dispute a3f1e2b7"), too
+  little to reveal anything. Every entry in one manifest uses the same length,
+  the way git abbreviates its hashes. *(Corrected 2026-07-22: this was four
+  characters — 16 bits, so by the birthday bound a document with ~300 redactions
+  had an even chance of two entries sharing an id, and a dispute then pointed at
+  both.)* Older manifests keep their shorter ids; nothing verifies against the
+  id, only against the full `commitment`.
 - `commitment` is `SHA-256(salt ‖ value)` in hex. The values themselves are never
   in either file.
 - `salt` appears only in the keys file. Without it a commitment over a short,
@@ -1868,3 +1893,69 @@ entry — before 2026-07-21 they did, which sent recipients looking for blocks
 that were not there. See [`design/OCIWACHT.md`](design/OCIWACHT.md) §6.6 for the
 reasoning and [`USER_GUIDE.md`](USER_GUIDE.md) (*The two manifest files*) for
 what to do with them.
+
+---
+
+## 13. Accepted Files and Their Limits
+
+*Added 2026-07-22.* Every number here was already enforced by the code and stated
+somewhere — scattered across §7, `SECURITY.md` under *Untrusted deck handling*,
+and the constants themselves. What was missing was the one place a reader can
+check "will OciDeck take this file, and how big may it be" without reading three
+documents. The constant name is given for each so a changed limit can be found
+rather than guessed.
+
+Every limit is a **refusal**, not a truncation: a file over its cap is rejected
+whole, with a reason, and nothing partial is ever read into a deck.
+
+### Files you open or import
+
+| What | Accepted as | Cap | Constant |
+|---|---|---:|---|
+| Deck | `.md` | 32 MiB | `FileService.maxDeckMarkdownBytes` |
+| Package | `.ocideck` (`.zip` also accepted on import) | 512 MiB, 10 000 entries, path ≤ 512 chars | `maxPackageBytes`, `maxPackageEntries`, `maxZipEntryPathLength` |
+| Package, **unpacked** | — | 512 MiB total across all entries | same `maxPackageBytes`, applied to the running total |
+| Style profile | `.ocideckstyle` | 16 MiB | `maxStyleProfileBytes` |
+| Logo embedded in a style profile | PNG/JPEG/GIF/BMP/WebP by magic bytes | 8 MiB | `maxStyleProfileLogoBytes` |
+
+The unpacked cap deserves its own row because it is the one a crafted archive
+attacks. A zip bomb understates its declared size, so the declared figure is only
+a cheap early reject; the real guard inflates each entry into a capped stream
+that aborts mid-decompression the moment the running total would exceed the
+budget. An encrypted package is the exception — WinZip-AES members must be
+decrypted whole before they can be measured, so there the guard falls back to the
+declared size plus the running total. That is accepted deliberately: the user
+encrypted and unlocked that package themselves.
+
+### Assets you add to a deck
+
+| What | Accepted as | Cap | Constant |
+|---|---|---:|---|
+| Image (picked or pasted) | PNG, JPEG, GIF, BMP, WebP — validated by **magic bytes**, not by the file extension | 64 MiB | `ImageService.maxImageBytes` |
+| Video / audio | Size-checked only; no magic-byte validation | 1 GiB | `ImageService.maxMediaBytes` |
+| Image offered to the face scan | As above | 24 MiB | `kFaceScanMaxBytes` |
+
+Every image is additionally decoded with its dimensions capped
+(`cappedFileImage` / `kMaxImageDecodeDimension`), so a small file that declares
+enormous dimensions cannot exhaust memory on display or export.
+
+### Files that arrive over the network
+
+| Route | What it accepts | Cap | Constant |
+|---|---|---:|---|
+| URL import | Sniffs the bytes: zip magic `PK\x03\x04` → package, otherwise plain Markdown | 512 MiB on the download (checked on `Content-Length` **and** while streaming), then the `.md` or package cap above | `maxPackageBytes`, then `maxDeckMarkdownBytes` |
+| WebDAV / Nextcloud | Deck or package, through the same gate as a local import | 512 MiB per file; PROPFIND listing capped at 16 MiB and by entry count | `WebdavService.maxDownloadBytes`, `maxListingBytes` |
+| S3 | As WebDAV | 512 MiB per object; listing capped at 16 MiB across **all** pages together | `S3Service.maxDownloadBytes`, `maxListingBytes` |
+| Git (REST) | Deck files from a forge | Listing responses capped at 16 MiB per forge adapter | `maxListingBytes` in `gitea_forge.dart`, `github_forge.dart`, `gitlab_forge.dart` |
+| Git (native subprocess) | As above | Subprocess output capped at 8 MiB | `_maxOutputBytes` in `git_cli_io.dart` |
+| AI backend response | JSON from an OpenAI-compatible `/v1` endpoint | 8 MiB | `AiClientService.maxResponseBytes` |
+| CVE lookup | JSON | 2 MiB | `_maxBytes` in `cve_transport_io.dart` |
+
+Note what the first row means in practice: extension does not decide anything on
+the URL route. A file served as `deck.md` that begins with zip magic is treated
+as a package, and one served as `deck.ocideck` that does not is treated as
+Markdown. The bytes decide, which is the safer way round — but it is worth
+knowing if you are the one serving the file.
+
+A deck arriving by any of these routes passes the same `MarkdownSafetyScanner`
+gate as a local one; none of them is a shortcut past it.

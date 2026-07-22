@@ -1802,6 +1802,51 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Via deze website ophalen?': 'Изтегляне през този сайт?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Сървърът на тази презентация не позволи на браузъра да прочете файла директно. OciDeck може да подаде адреса на сайта, от който идва самият OciDeck, и той ще го изтегли. Така този сайт вижда пълния адрес — ако във връзката има ключ или код, този сайт вижда и него.',
+  'In de browser kan dit niet worden bewaard':
+      'В браузъра това не може да се запази',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Браузърът няма ключодържател, какъвто има компютърът: това, което OciDeck би запазил тук, може да прочете всеки скрипт на тази страница. Използвайте настолната версия — там тайната наистина отива в ключодържателя на операционната система.',
+  'Licenties van derden': 'Лицензи на трети страни',
+  'Alle licentieteksten tonen': 'Показване на всички лицензни текстове',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Самият OciDeck се разпространява под EUPL-1.2. Освен това включва софтуер на трети страни: пакетите Dart и Flutter, две вградени приставки, четири шрифтови семейства, модела на лице за проверката на поверителност и JavaScript, който пътува заедно с експорт в HTML. Всеки от тях запазва собствения си лиценз.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Този файл съдържа софтуер на трети страни, а понякога и шрифт. По-долу са пълните текстове на съответните лицензи; предайте ги заедно с файла.',
+  'Sporen op dit apparaat': 'Следи на това устройство',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Освен настройките ви OciDeck пази и списък със скорошни файлове, а при срив — файл за възстановяване с цялото съдържание на презентацията ви. Нищо от това не напуска устройството, но си стои тук — в обикновен текст, защитено от акаунта ви в тази операционна система и от нищо повече.',
+  'Recent geopende presentaties': 'Наскоро отваряни презентации',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Списъкът пази пълния път и класификацията на всяка презентация, която е била отворена — заедно това е сведение за какво работите и за кого.',
+  'Recente lijst wissen': 'Изтрий списъка със скорошни файлове',
+  'De recente lijst was al leeg.':
+      'Списъкът със скорошни файлове вече беше празен.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'запис(а) изтрити от списъка със скорошни файлове.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Файловете за възстановяване съдържат цялото съдържание на презентациите ви в обикновен текст. Изчистват се автоматично след 7 дни, а при коректно затваряне — веднага.',
+  'Alles terugzetten': 'Връщане на всичко',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Изтрива всяка настройка, списъка със скорошни файлове, файловете за възстановяване, работните копия на git и паролите в ключодържателя ви. Презентациите ви остават: те са ваши, а не на OciDeck.',
+  'Zet alles terug naar de begintoestand':
+      'Върни всичко към началното състояние',
+  'Alles terugzetten naar de begintoestand?':
+      'Да се върне ли всичко към началното състояние?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Ще бъдат изтрити вашите настройки, списъкът със скорошни файлове, файловете за възстановяване, работните копия на git и запазените пароли. Това не може да се отмени. Презентациите ви остават.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'промени още не са изпратени към git сървър и съществуват само на това устройство. И те ще изчезнат.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Всичко е върнато към началното състояние.',
+  'Terugzetten is niet gelukt.': 'Връщането не успя.',
+  'Er wacht nog werk dat niet verstuurd is': 'Има още неизпратена работа',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Тази git връзка има промени, които още не са изпратени към сървъра. Ако премахнете връзката, изчезва и работното копие на това устройство — и тази работа вече няма да съществува никъде.',
+  'Verbinding behouden': 'Запази връзката',
+  'Toch verwijderen': 'Премахни въпреки това',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Добре',

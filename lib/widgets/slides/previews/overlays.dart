@@ -247,7 +247,7 @@ class _FooterOverlay extends StatelessWidget {
     // Iets kleiner dan voorheen, zodat 'ie niet tegen het logo aan drukt.
     final fontSize = w * 0.0145;
     final style = TextStyle(
-      color: _hexColor(profile.textColor).withValues(alpha: 0.7),
+      color: AppTheme.parseHexColor(profile.textColor).withValues(alpha: 0.7),
       fontSize: fontSize,
       // Lichte schaduw zodat de footer ook over een afbeelding leesbaar blijft.
       shadows: [
@@ -449,10 +449,12 @@ class _RichTextPageControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = _hexColor(profile.textColor);
+    final textColor = AppTheme.parseHexColor(profile.textColor);
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: _hexColor(profile.slideBackgroundColor).withValues(alpha: 0.82),
+        color: AppTheme.parseHexColor(
+          profile.slideBackgroundColor,
+        ).withValues(alpha: 0.82),
         borderRadius: BorderRadius.circular(w * 0.004),
         border: Border.all(color: textColor.withValues(alpha: 0.12)),
       ),

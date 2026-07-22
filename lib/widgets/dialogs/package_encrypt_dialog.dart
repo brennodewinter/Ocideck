@@ -94,7 +94,27 @@ class _PackageEncryptDialogState extends State<PackageEncryptDialog> {
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
                 value: _encrypt,
-                onChanged: (v) => setState(() => _encrypt = v),
+                onChanged: (v) => setState(() {
+                  _encrypt = v;
+                  // Zet het aan, dan staat er meteen een sterk wachtwoord.
+                  //
+                  // Dat is hier geen gemak maar de maatregel zélf. De
+                  // sleutelafleiding van het AES-zip-formaat is PBKDF2-HMAC-SHA1
+                  // met 1000 iteraties — vastgelegd door de WinZip-AES-spec en
+                  // van hieruit niet te verhogen. Die iteratietelling is niet te
+                  // repareren zonder het formaat te verlaten, en dan kan geen
+                  // enkel ander zip-gereedschap het pakket meer openen. Wat wél
+                  // in onze hand ligt is de entropie van het wachtwoord, en dat
+                  // is precies waar een zwakke KDF op leunt.
+                  //
+                  // Een leeg veld nodigt uit tot iets wat de gebruiker kan
+                  // onthouden. Een gegenereerd wachtwoord is minder werk én
+                  // sterker; overtypen mag altijd nog.
+                  if (v && _ctrl.text.isEmpty) {
+                    _ctrl.text = generatePassword(_genLength);
+                    _obscure = false; // te kopiëren, en zichtbaar dat het er is
+                  }
+                }),
                 title: Text(l10n.d('Beschermen met een wachtwoord (AES-256)')),
                 subtitle: Text(
                   l10n.d(

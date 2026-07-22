@@ -35,7 +35,6 @@ class _FindingPreview extends StatelessWidget {
     // content becomes ~0.91·w instead of 0.86·w, fewer findings spill to a
     // second page.
     final hPad = w * 0.045;
-    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final spec = FindingSpec.parse(slide.customMarkdown);
     // The context (environmental) score when the scope object is rated; the
     // header card and its primary badge then track the CIA-weighted severity.
@@ -45,34 +44,17 @@ class _FindingPreview extends StatelessWidget {
       profile: profile,
     );
 
-    return Container(
-      color: Colors.white,
-      child: SizedBox.expand(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          alignment: Alignment.topLeft,
-          child: SizedBox(
-            width: w,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                hPad,
-                pad + safe.top,
-                hPad,
-                _logoAwareBottomPadding(pad, safe.bottom),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _headerCard(context, spec, severityColor, ctxCvss),
-                  SizedBox(height: w * 0.03),
-                  ..._sectionBlocks(context, spec),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
+    return _PreviewScaffold(
+      width: w,
+      slide: slide,
+      profile: profile,
+      horizontalPadding: hPad,
+      verticalPadding: pad,
+      children: [
+        _headerCard(context, spec, severityColor, ctxCvss),
+        SizedBox(height: w * 0.03),
+        ..._sectionBlocks(context, spec),
+      ],
     );
   }
 
@@ -170,7 +152,7 @@ class _FindingPreview extends StatelessWidget {
       redFrom: 7,
       value: cvss.score,
     );
-    final textColor = _hexColor(profile.textColor);
+    final textColor = AppTheme.parseHexColor(profile.textColor);
     return Padding(
       padding: EdgeInsets.only(left: w * 0.02),
       child: SizedBox(
@@ -179,8 +161,8 @@ class _FindingPreview extends StatelessWidget {
         child: _CockpitInstrument(
           meter: meter,
           progress: 1,
-          accent: _hexColor(profile.accentColor),
-          surface: _hexColor(profile.slideBackgroundColor),
+          accent: AppTheme.parseHexColor(profile.accentColor),
+          surface: AppTheme.parseHexColor(profile.slideBackgroundColor),
           textColor: textColor,
           mutedColor: textColor.withValues(alpha: 0.62),
           good: AppTheme.success700,

@@ -518,20 +518,60 @@ String chartDataAsCsv(ChartSpec spec) {
   return buf.toString();
 }
 
+/// De tekens waarmee een spreadsheet een cel als fórmule begint te lezen.
+///
+/// `=` en `@` starten er onmiskenbaar één; `+` en `-` doen dat in Excel ook
+/// (`-2+3` is een berekening, niet de tekst). Tab en carriage return staan
+/// erbij omdat Excel die als voorloop wegpoetst en dán pas naar het volgende
+/// teken kijkt — `\t=cmd|…` glipt anders langs een controle op alleen `=`.
+const _csvFormulaLeaders = {'=', '+', '-', '@', '\t', '\r'};
+
+/// Het teken dat een spreadsheet leest als "wat hierna komt is tekst".
+const _csvTextGuard = "'";
+
 /// A cell as CSV: quoted when it contains a separator, a quote or edge
 /// whitespace, with `"` doubled — the form [parseCsv] reads back verbatim.
 ///
 /// Ook `;` en tab krijgen aanhalingstekens. Dat helpt de lezer die op de komma
 /// splitst; de tweede helft van dezelfde bevinding zit in [_detectDelimiter],
 /// dat de rijen op gelijke kolomaantallen toetst.
-String _csvValue(String raw) =>
-    raw.contains(',') ||
-        raw.contains(';') ||
-        raw.contains('\t') ||
-        raw.contains('"') ||
-        raw.trim() != raw
-    ? '"${raw.replaceAll('"', '""')}"'
-    : raw;
+///
+/// Begint de cel met een [_csvFormulaLeaders]-teken, dan gaat er een `'` voor.
+/// Een `data/*.csv` reist mee met het deck, en de labels erin komen uit de
+/// tekst van dat deck — dus uit onvertrouwde invoer. Zonder die voorloop opent
+/// `=HYPERLINK("https://…"&A1)` bij de ontvánger als een formule die bij het
+/// openen wordt uitgevoerd. Aanhalingstekens alléén houden dat niet tegen:
+/// Excel haalt ze eraf en leest de inhoud daarna alsnog als formule. De `'`
+/// wel — dat is precies het teken waarmee een spreadsheet "dit is tekst" noteert.
+///
+/// [_csvUnguard] draait het bij het lezen weer terug, zodat het label van de
+/// gebruiker onveranderd terugkomt in zijn eigen grafiek.
+String _csvValue(String raw) {
+  final guarded = raw.isNotEmpty && _csvFormulaLeaders.contains(raw[0])
+      ? '$_csvTextGuard$raw'
+      : raw;
+  return guarded.contains(',') ||
+          guarded.contains(';') ||
+          guarded.contains('\t') ||
+          guarded.contains('"') ||
+          guarded.trim() != guarded
+      ? '"${guarded.replaceAll('"', '""')}"'
+      : guarded;
+}
+
+/// De tegenhanger van de voorloop die [_csvValue] zet: haal één `'` weg die
+/// vlak vóór een formuletekens staat.
+///
+/// Alleen in díe combinatie, zodat een label dat echt met een apostrof begint
+/// (`'s Gravenhage`) ongemoeid blijft. Wordt op de labels van élke gelezen CSV
+/// toegepast, ook op een export uit een vreemde spreadsheet — dat is dezelfde
+/// afspraak, en het is wat een rondgang deck → bestand → deck sluitend maakt.
+String _csvUnguard(String cell) =>
+    cell.length >= 2 &&
+        cell.startsWith(_csvTextGuard) &&
+        _csvFormulaLeaders.contains(cell[1])
+    ? cell.substring(1)
+    : cell;
 
 /// Parse the contents of a `data/<naam>.json` into (x labels, series), or null
 /// when the file is not usable — bad JSON, or not an object with an `x` list.
@@ -640,7 +680,9 @@ parseCsv(String csv, {DecimalConvention? convention}) {
 
   final delimiter = _detectDelimiter(lines);
   final header = parseCsvLine(lines.first, delimiter: delimiter);
-  final seriesNames = header.length > 1 ? header.sublist(1) : <String>[];
+  final seriesNames = header.length > 1
+      ? [for (final name in header.sublist(1)) _csvUnguard(name)]
+      : <String>[];
   final rows = [
     for (final line in lines.skip(1)) parseCsvLine(line, delimiter: delimiter),
   ];
@@ -666,7 +708,7 @@ parseCsv(String csv, {DecimalConvention? convention}) {
 
   for (final row in rows) {
     if (row.isEmpty) continue;
-    x.add(row.first);
+    x.add(_csvUnguard(row.first));
     for (var i = 0; i < seriesNames.length; i++) {
       final raw = (i + 1) < row.length ? row[i + 1] : '';
       if (raw.isEmpty) {

@@ -91,12 +91,7 @@ extension _SettingsS3 on _SettingsDialogState {
           l10n.d('Access key ID'),
           icon: Icons.badge_outlined,
         ),
-        _webdavField(
-          form.secret.field,
-          l10n.d('Secret access key'),
-          obscure: true,
-          icon: Icons.key_outlined,
-        ),
+        _secretField(form.secret.field, l10n.d('Secret access key')),
         _webdavField(
           form.root,
           l10n.d('Prefix (optioneel)'),

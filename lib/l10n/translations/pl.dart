@@ -1791,6 +1791,50 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Via deze website ophalen?': 'Pobrać przez tę witrynę?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Serwer tej prezentacji nie pozwolił przeglądarce odczytać pliku bezpośrednio. OciDeck może przekazać adres witrynie, z której sam pochodzi, a ona go pobierze. Ta witryna zobaczy wtedy pełny adres — jeśli w linku jest klucz lub kod, ta witryna zobaczy również jego.',
+  'In de browser kan dit niet worden bewaard':
+      'W przeglądarce nie można tego zapisać',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Przeglądarka nie ma pęku kluczy, jaki ma komputer: to, co OciDeck by tu zapisał, może odczytać dowolny skrypt na tej stronie. Użyj wersji desktopowej — tam sekret trafia naprawdę do pęku kluczy systemu operacyjnego.',
+  'Licenties van derden': 'Licencje stron trzecich',
+  'Alle licentieteksten tonen': 'Pokaż wszystkie teksty licencji',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Sam OciDeck jest objęty licencją EUPL-1.2. Poza tym dołącza oprogramowanie stron trzecich: pakiety Dart i Flutter, dwie dołączone wtyczki, cztery rodziny krojów pisma, model twarzy do kontroli prywatności oraz JavaScript, który podróżuje z eksportem HTML. Każdy z nich zachowuje własną licencję.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Ten plik zawiera oprogramowanie stron trzecich, a czasem także krój pisma. Poniżej znajdują się pełne teksty odpowiednich licencji; przekaż je razem z plikiem.',
+  'Sporen op dit apparaat': 'Ślady na tym urządzeniu',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Poza ustawieniami OciDeck przechowuje też listę ostatnich plików, a po awarii plik odzyskiwania z pełną treścią prezentacji. Nic z tego nie opuszcza tego urządzenia, ale tu leży — zwykłym tekstem, chronione przez twoje konto w tym systemie operacyjnym i przez nic więcej.',
+  'Recent geopende presentaties': 'Ostatnio otwierane prezentacje',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Lista przechowuje pełną ścieżkę i klasyfikację każdej otwieranej prezentacji — razem jest to informacja o tym, nad czym pracujesz i dla kogo.',
+  'Recente lijst wissen': 'Usuń listę ostatnich plików',
+  'De recente lijst was al leeg.': 'Lista ostatnich plików była już pusta.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'wpis(y) usunięto z listy ostatnich plików.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Pliki odzyskiwania zawierają pełną treść prezentacji w postaci zwykłego tekstu. Są automatycznie czyszczone po 7 dniach, a przy porządnym zamknięciu programu od razu.',
+  'Alles terugzetten': 'Przywróć wszystko',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Usuwa każde ustawienie, listę ostatnich plików, pliki odzyskiwania, kopie robocze git i hasła z twojego pęku kluczy. Twoje prezentacje pozostają: należą do ciebie, nie do OciDecka.',
+  'Zet alles terug naar de begintoestand':
+      'Przywróć wszystko do stanu początkowego',
+  'Alles terugzetten naar de begintoestand?':
+      'Przywrócić wszystko do stanu początkowego?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Twoje ustawienia, lista ostatnich plików, pliki odzyskiwania, kopie robocze git i zapisane hasła zostaną usunięte. Tego nie da się cofnąć. Twoje prezentacje pozostają.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'zmian(y) nie zostały jeszcze wysłane na serwer git i istnieją tylko na tym urządzeniu. One też znikną.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Wszystko zostało przywrócone do stanu początkowego.',
+  'Terugzetten is niet gelukt.': 'Przywracanie się nie powiodło.',
+  'Er wacht nog werk dat niet verstuurd is': 'Czeka jeszcze niewysłana praca',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'To połączenie git ma zmiany, które nie zostały jeszcze wysłane na serwer. Jeśli usuniesz połączenie, zniknie też kopia robocza na tym urządzeniu — a ta praca nie będzie istnieć nigdzie indziej.',
+  'Verbinding behouden': 'Zachowaj połączenie',
+  'Toch verwijderen': 'Usuń mimo to',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

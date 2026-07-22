@@ -21,41 +21,51 @@ const idCtTstInfo = [
   0x04,
 ];
 
-List<int> _tstInfo(List<int> hash, String genTime) => derSequence([
-  derInteger(1),
-  derOid(const [0x2b, 0x06, 0x01]), // arbitrary policy OID
-  derSequence([
-    derSequence([derOid(sha512Oid), derNull()]),
-    derOctetString(hash),
-  ]),
-  derInteger(42), // serialNumber
-  derTlv(0x18, genTime.codeUnits), // genTime (GeneralizedTime)
-]);
+List<int> _tstInfo(List<int> hash, String genTime, List<int>? nonce) =>
+    derSequence([
+      derInteger(1),
+      derOid(const [0x2b, 0x06, 0x01]), // arbitrary policy OID
+      derSequence([
+        derSequence([derOid(sha512Oid), derNull()]),
+        derOctetString(hash),
+      ]),
+      derInteger(42), // serialNumber
+      derTlv(0x18, genTime.codeUnits), // genTime (GeneralizedTime)
+      // Accuracy staat tussen genTime en de nonce en draagt zelf INTEGERs.
+      // Hij zit hier zodat een parser die de platte knopenlijst afloopt de
+      // secondenwaarde hieruit voor de nonce aanziet — precies de fout die
+      // deze fixture moet kunnen aantonen.
+      derSequence([derInteger(1)]), // accuracy { seconds 1 }
+      if (nonce != null) derPositiveInteger(nonce),
+    ]);
 
 /// A minimal but structurally-faithful timestamp token: a CMS wrapper whose
 /// digestAlgorithms carry a **decoy** SHA-512 OID (to prove the parser navigates
 /// to the real TSTInfo instead), then the TSTInfo inside the eContent.
-Uint8List fakeTimeStampToken(List<int> hash, String genTime) =>
-    Uint8List.fromList(
+Uint8List fakeTimeStampToken(
+  List<int> hash,
+  String genTime, {
+  List<int>? nonce,
+}) => Uint8List.fromList(
+  derSequence([
+    derOid(idSignedData),
+    derTlv(
+      0xa0,
       derSequence([
-        derOid(idSignedData),
         derTlv(
-          0xa0,
+          0x31,
           derSequence([
-            derTlv(
-              0x31,
-              derSequence([
-                derSequence([derOid(sha512Oid), derNull()]),
-              ]),
-            ),
-            derSequence([
-              derOid(idCtTstInfo),
-              derTlv(0xa0, derOctetString(_tstInfo(hash, genTime))),
-            ]),
+            derSequence([derOid(sha512Oid), derNull()]),
           ]),
         ),
+        derSequence([
+          derOid(idCtTstInfo),
+          derTlv(0xa0, derOctetString(_tstInfo(hash, genTime, nonce))),
+        ]),
       ]),
-    );
+    ),
+  ]),
+);
 
 /// Hex-encode bytes the way a deck stores its seal hash.
 String hexOf(List<int> bytes) =>

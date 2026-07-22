@@ -1,5 +1,7 @@
 # OciDeck — Glossary
 
+> **Status:** reference, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 OciDeck-specific terms and the acronyms that recur in the codebase and docs. For
 where things live in `lib/`, see [SOURCE_MAP.md](SOURCE_MAP.md).
 
