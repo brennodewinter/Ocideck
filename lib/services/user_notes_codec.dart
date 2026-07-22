@@ -21,7 +21,23 @@ class UserNotesCodec {
 
   /// Encode the id-keyed [userNotes] for [slides] into a JSON string, or null
   /// when there is nothing to store.
-  static String? encode(List<Slide> slides, Map<String, String> userNotes) {
+  ///
+  /// With [forTextMerge] the JSON is written indented, one field per line.
+  /// That is not cosmetic — it is what makes GIT_STORAGE D7 true. D7 says the
+  /// notes sidecar takes git's ordinary text merge, so that "two authors
+  /// editing different slides' notes merge cleanly". On a single line, which is
+  /// what `jsonEncode` produces and what the on-disk sidecar has always been,
+  /// *every* edit is a collision on the same line and nothing ever merges
+  /// cleanly. Line-based merging needs lines.
+  ///
+  /// Only the copy that goes into a repository pays for it (a few hundred bytes
+  /// per note); the sidecar next to a deck on disk is never merged by anything
+  /// and stays compact. Both forms decode identically — JSON does not care.
+  static String? encode(
+    List<Slide> slides,
+    Map<String, String> userNotes, {
+    bool forTextMerge = false,
+  }) {
     final entries = <Map<String, dynamic>>[];
     for (var i = 0; i < slides.length; i++) {
       final slideId = slides[i].id;
@@ -39,7 +55,10 @@ class UserNotesCodec {
       }
     }
     if (entries.isEmpty) return null;
-    return jsonEncode({'version': version, 'slides': entries});
+    final payload = {'version': version, 'slides': entries};
+    return forTextMerge
+        ? '${const JsonEncoder.withIndent('  ').convert(payload)}\n'
+        : jsonEncode(payload);
   }
 
   /// Decode [json] against the freshly parsed [slides], returning a map keyed

@@ -9,6 +9,7 @@ import '../../models/slide.dart';
 import '../../models/chart.dart';
 import '../../utils/log.dart';
 import '../markdown_service.dart';
+import '../user_notes_codec.dart';
 import '../slide_image_refs.dart';
 import '../web_asset_store.dart';
 import 'asset_pool.dart';
@@ -17,6 +18,24 @@ import 'asset_pool.dart';
 /// `TabsNotifierGit.deckFileName`; hier apart zodat de serializer los te testen
 /// is zonder de state-laag.
 const String deckRepoFileName = 'deck.md';
+
+/// Naam van de notitie-sidecar binnen een deckmap (§9.1).
+///
+/// Precies de naam die het deck op schijf ook draagt, zodat wie een deck van
+/// een map naar een repo verhuist hetzelfde bestand terugziet en niet hoeft te
+/// raden dat `deck.notes` en `<naam>.user-notes.json` hetzelfde zijn. Het
+/// ontwerp schetste `deck.notes`; dat was een schets, en de `.json` zegt elk
+/// ander werktuig wat het is.
+const String userNotesRepoFileName = 'deck.user-notes.json';
+
+/// Bovengrens voor de notitie-sidecar bij het teruglezen uit een repo.
+///
+/// Dezelfde herkomst als `FileService.maxDeckSidecarBytes`: het bestand komt
+/// van buiten en wordt door `jsonDecode` nog eens gekopieerd. Hier lager, want
+/// notities zijn tekst en tellen in kilobytes — de 16 MiB op schijf is er voor
+/// de inktlaag, die deze weg niet neemt. Een repo waarin dit bestand tientallen
+/// megabytes groot is, is geen deck met veel notities maar iets anders.
+const int maxRepoUserNotesBytes = 2 * 1024 * 1024; // 2 MiB
 
 /// Levert de bytes achter een afbeeldingsverwijzing, of null wanneer die niet te
 /// lezen is (web zonder mem:-treffer, een pad buiten het project, een leesfout).
@@ -120,61 +139,124 @@ Future<({Deck deck, List<String> missing})> withRepoChartData(
   );
 }
 
+/// Hang de notities uit `deck.user-notes.json` weer aan [deck] — de omkering
+/// van wat [buildDeckRepoFiles] schrijft.
+///
+/// Geen bestand is de gewone toestand: een deck zonder notities heeft er geen,
+/// en een deck dat vóór deze functie bestond gedroeg zich zo. Een bestand dat
+/// er wél is maar niet te lezen valt, levert een deck zónder notities op in
+/// plaats van een mislukte open — dezelfde ruil als op schijf en bij
+/// grafiekdata. Notities zijn een laag over het deck, niet het deck.
+///
+/// [UserNotesCodec.decode] hangt elke notitie terug aan de dia met dezelfde
+/// vingerafdruk, dus dit moet ná het parsen van `deck.md` gebeuren: de dia-id's
+/// zijn dan pas bekend.
+Future<Deck> withRepoUserNotes(
+  Deck deck, {
+  required String deckDir,
+  required RepoFileReader read,
+}) async {
+  Uint8List? bytes;
+  try {
+    bytes = await read(p.posix.join(deckDir, userNotesRepoFileName));
+  } catch (e) {
+    logWarning('withRepoUserNotes: notitiebestand onbereikbaar', e);
+    return deck;
+  }
+  if (bytes == null || bytes.isEmpty) return deck;
+  if (bytes.length > maxRepoUserNotesBytes) {
+    logWarning(
+      'withRepoUserNotes: notitiebestand is ${bytes.length} bytes '
+      '(grens $maxRepoUserNotesBytes) — niet geladen',
+    );
+    return deck;
+  }
+  final String json;
+  try {
+    json = utf8.decode(bytes);
+  } on FormatException catch (e) {
+    logWarning('withRepoUserNotes: notitiebestand is geen geldige UTF-8', e);
+    return deck;
+  }
+  final notes = UserNotesCodec.decode(json, deck.slides);
+  return notes.isEmpty ? deck : deck.copyWith(userNotes: notes);
+}
+
+/// Alles wat naast `deck.md` in de deckmap ligt, terug aan [deck] gehangen —
+/// de omkering van [buildDeckRepoFiles] in één stap.
+///
+/// Bestaat omdat elk leespad in de app dezelfde twee dingen moet doen in
+/// dezelfde volgorde, met dezelfde lezer: eerst de grafiekdata, dan de
+/// notities. Drie keer los aanroepen betekent drie plekken waar een volgende
+/// laag vergeten kan worden — en die vergissing is stil: het deck opent
+/// gewoon, alleen zonder wat er ook nog bij hoorde. Er is er hier maar één.
+///
+/// De ontbrekende grafiekbronnen reizen mee terug omdat de aanroeper daarover
+/// meldt. Bij de notities is er niets te melden: geen bestand is de gewone
+/// toestand voor een deck zonder notities.
+Future<({Deck deck, List<String> missingChartData})> withRepoSidecars(
+  Deck deck, {
+  required String deckDir,
+  required RepoFileReader read,
+}) async {
+  final charts = await withRepoChartData(deck, deckDir: deckDir, read: read);
+  final withNotes = await withRepoUserNotes(
+    charts.deck,
+    deckDir: deckDir,
+    read: read,
+  );
+  return (deck: withNotes, missingChartData: charts.missing);
+}
+
 /// Wat er van een deck níét meereist naar git (§9.1), geteld per soort.
 ///
 /// De git-opslag schrijft `deck.md`, de assetpool (afbeeldingen **en** media,
-/// zie D5/D12) en de grafiekdata. Wat achterblijft zijn de sidecars:
-/// `.ink.json` met de tekeningen, `.user-notes.json` met de notities en
-/// `.seal.json` met het zegel en de handtekening worden nergens in
-/// `services/git/` geschreven. Op schijf gaan die wél mee, dus wie van een
-/// bestand naar git verhuist raakt ze kwijt zonder dat er iets misgaat waar de
-/// app op kan wijzen.
+/// zie D5/D12), de grafiekdata en — sinds #541 — de notities. Wat achterblijft
+/// zijn nog twee sidecars: `.ink.json` met de tekeningen en `.seal.json` met
+/// het zegel en de handtekening worden nergens in `services/git/` geschreven.
+/// Op schijf gaan die wél mee, dus wie van een bestand naar git verhuist raakt
+/// ze kwijt zonder dat er iets misgaat waar de app op kan wijzen.
 ///
 /// Dit meenemen is een grotere ingreep dan een waarschuwing; de waarschuwing kan
 /// niet wachten. De UI toont hem vóór de commit — daarna is de keuze al gemaakt.
+///
+/// **De waarschuwing krimpt mee.** Toen de notities gingen reizen, verdween hun
+/// regel hieruit — niet "voor de zekerheid" laten staan. Een waarschuwing die
+/// meer opsomt dan er werkelijk misgaat, leert de gebruiker hem in zijn geheel
+/// weg te klikken, en dan is ook de regel over het zegel weg. Zie #540, waar
+/// media om dezelfde reden eruit ging.
 class GitDeckOmissions {
   /// Dia's waarop getekend is; die tekenlaag gaat niet mee.
   final int annotatedSlides;
 
-  /// Dia's met gebruikersnotities; die notities gaan niet mee.
-  final int noteSlides;
-
   /// Of het deck een zegel of een handtekening draagt die niet meegaat.
   ///
-  /// Zwaarder dan de andere drie, want hier verdwijnt niet alleen werk maar een
+  /// Zwaarder dan de tekenlaag, want hier verdwijnt niet alleen werk maar een
   /// verklaring: een verzegeld rapport dat via git terugkomt, leest als een
   /// rapport dat nooit verzegeld is. Sinds 0.1.0 staat het zegel naast de
   /// markdown in plaats van erin, dus het reist niet meer vanzelf mee in
   /// `deck.md` — precies de stilte waar deze waarschuwing voor bestaat.
   final bool sealed;
 
-  const GitDeckOmissions({
-    this.annotatedSlides = 0,
-    this.noteSlides = 0,
-    this.sealed = false,
-  });
+  const GitDeckOmissions({this.annotatedSlides = 0, this.sealed = false});
 
-  bool get isEmpty => annotatedSlides == 0 && noteSlides == 0 && !sealed;
+  bool get isEmpty => annotatedSlides == 0 && !sealed;
 
   bool get isNotEmpty => !isEmpty;
 }
 
 /// Tel per soort wat er bij een commit van [deck] achterblijft.
 ///
-/// Alleen niet-lege lagen tellen mee: een lege notitie of een dia zonder
-/// streken is niets om over te waarschuwen, en een waarschuwing die ook afgaat
-/// wanneer er niets aan de hand is, leert de gebruiker hem weg te klikken.
+/// Alleen niet-lege lagen tellen mee: een dia zonder streken is niets om over
+/// te waarschuwen, en een waarschuwing die ook afgaat wanneer er niets aan de
+/// hand is, leert de gebruiker hem weg te klikken.
 GitDeckOmissions gitDeckOmissions(Deck deck) {
   final ids = {for (final s in deck.slides) s.id};
   final ink = deck.annotations.entries
       .where((e) => ids.contains(e.key) && e.value.isNotEmpty)
       .length;
-  final notes = deck.userNotes.entries
-      .where((e) => ids.contains(e.key) && e.value.trim().isNotEmpty)
-      .length;
   return GitDeckOmissions(
     annotatedSlides: ink,
-    noteSlides: notes,
     sealed: deck.finalized || (deck.signature?.isNotEmpty ?? false),
   );
 }
@@ -186,13 +268,29 @@ class RepoDeckFiles {
   /// plus elke pool-blob (`assets/<sha>.<ext>`) die nog geüpload moet worden.
   final Map<String, Uint8List> upserts;
 
+  /// Paden voor `GitForge.commitFiles(deletes:)` — bestanden die er in de repo
+  /// nog wél zijn maar in dit deck niet meer.
+  ///
+  /// Vandaag alleen de notitie-sidecar. Zonder dit zou het wissen van je laatste
+  /// notitie niets doen: de commit laat het oude bestand staan, en bij de
+  /// volgende open hangt de notitie er weer aan. Een wissing die terugkomt is
+  /// erger dan een die niet werkt — de gebruiker denkt dat het weg is.
+  ///
+  /// Een pad hier is een *belofte over deze deckmap*, geen vrije opdracht: de
+  /// samensteller zet er alleen paden in die hij zelf ook kan schrijven.
+  final List<String> deletes;
+
   /// Mediaverwijzingen die niet mee konden: video/audio (die round-trippen nog
   /// niet door git, §9.1) en afbeeldingen waarvan de bytes niet te lezen waren.
   /// Het deck slaat wél op, maar deze verwijzingen zijn niet mee-gecommit — de
   /// aanroeper meldt dat, in plaats van een kapotte verwijzing te verzwijgen.
   final List<String> warnings;
 
-  const RepoDeckFiles({required this.upserts, required this.warnings});
+  const RepoDeckFiles({
+    required this.upserts,
+    required this.warnings,
+    this.deletes = const [],
+  });
 }
 
 /// Zet [deck] om naar zijn repo-bestandenset onder [deckDir].
@@ -231,6 +329,7 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
   final refForMem = <String, String>{}; // bronpad → repo:-verwijzing (dedup)
   final bytesForRef = <String, Uint8List>{}; // repo:-verwijzing → bytes
   final warnings = <String>{};
+  final deletes = <String>[];
 
   Future<String?> poolAsset(String path, {required String fallback}) async {
     if (path.isEmpty) return null;
@@ -306,6 +405,29 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
     upserts[path] = Uint8List.fromList(utf8.encode(entry.value));
   }
 
+  // De notities gaan mee (#541). Op een stabiel pad naast deck.md, om dezelfde
+  // reden als de grafiekdata: een poolpad ís de hash van de inhoud, dus elk
+  // getypt teken zou een nieuw bestand minten en het vorige laten wegkwijnen.
+  //
+  // Ingesprongen geschreven, en dat is geen opmaakvoorkeur maar de reden dat
+  // D7 klopt: die zegt dat dit bestand door git's gewone tekst-merge gaat, en
+  // op één regel botst élke wijziging met élke andere. Zie
+  // [UserNotesCodec.encode].
+  //
+  // Geen notities meer? Dan het bestand weghalen in plaats van het oude te
+  // laten staan — anders komt een gewiste notitie bij de volgende open terug.
+  final notesPath = p.posix.join(deckDir, userNotesRepoFileName);
+  final notes = UserNotesCodec.encode(
+    rewritten.slides,
+    rewritten.userNotes,
+    forTextMerge: true,
+  );
+  if (notes == null) {
+    deletes.add(notesPath);
+  } else {
+    upserts[notesPath] = Uint8List.fromList(utf8.encode(notes));
+  }
+
   // Met een pool alleen de nog niet aanwezige blobs; zonder pool (native) alle.
   final already = pool == null
       ? const <String>{}
@@ -316,5 +438,9 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
     if (poolPath != null) upserts[poolPath] = entry.value;
   }
 
-  return RepoDeckFiles(upserts: upserts, warnings: warnings.toList());
+  return RepoDeckFiles(
+    upserts: upserts,
+    warnings: warnings.toList(),
+    deletes: deletes,
+  );
 }
