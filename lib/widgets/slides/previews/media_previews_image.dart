@@ -200,10 +200,16 @@ Widget _resolvedImage(
     return _imagePlaceholder(context, ImagePlaceholderReason.outsideDeck);
   }
 
+  // Cap the decode so a huge-dimensioned (possibly untrusted) image can't
+  // exhaust memory; see cappedFileImage / kMaxImageDecodeDimension. De
+  // slidestrook zet daarbovenop een veel lagere grens via de scope — daar is
+  // een thumbnail van ~180 px breed, en op ware grootte kost één telefoonfoto
+  // bijna 49 MiB (#612).
+  final maxEdge = _SlideLinkScope.decodeMaxEdgeOf(context);
   return Image(
-    // Cap the decode so a huge-dimensioned (possibly untrusted) image can't
-    // exhaust memory; see cappedFileImage / kMaxImageDecodeDimension.
-    image: cappedFileImage(File(resolved)),
+    image: maxEdge == null
+        ? cappedFileImage(File(resolved))
+        : boundedFileImage(File(resolved), maxEdge),
     fit: fit,
     alignment: alignment,
     width: double.infinity,

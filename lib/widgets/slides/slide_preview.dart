@@ -126,11 +126,27 @@ class _SlideLinkScope extends InheritedWidget {
   /// slide. Zie [Slide.mediaRedacted].
   final bool mediaRedacted;
 
+  /// Bovengrens voor de decodeerresolutie van een dia-afbeelding, of null voor
+  /// de gewone cap.
+  ///
+  /// Reist mee in de scope om precies de reden die hierboven bij
+  /// [mediaRedacted] staat: er zijn negen aanroepplekken van `_resolvedImage`,
+  /// en een tiende die de parameter vergeet decodeert stilzwijgend weer op
+  /// volle resolutie.
+  ///
+  /// Alleen de slidestrook zet hem. Een telefoonfoto van 4032×3024 kost
+  /// gedecodeerd bijna 49 MiB; tien zichtbare thumbnails met verschillende
+  /// foto's zijn een halve gigabyte aan levende bitmaps voor een strook van
+  /// ~180 px breed. Op desktop is dat een geheugengrafiek die niemand ziet, op
+  /// web valt de tab om — en web is de demo-route (#612).
+  final int? decodeMaxEdge;
+
   const _SlideLinkScope({
     required this.onTapLink,
     this.hasBottomTlp = false,
     this.allowRemoteMedia = false,
     this.mediaRedacted = false,
+    this.decodeMaxEdge,
     required super.child,
   });
 
@@ -161,12 +177,17 @@ class _SlideLinkScope extends InheritedWidget {
         false;
   }
 
+  static int? decodeMaxEdgeOf(BuildContext context) => context
+      .dependOnInheritedWidgetOfExactType<_SlideLinkScope>()
+      ?.decodeMaxEdge;
+
   @override
   bool updateShouldNotify(_SlideLinkScope oldWidget) =>
       oldWidget.onTapLink != onTapLink ||
       oldWidget.hasBottomTlp != hasBottomTlp ||
       oldWidget.allowRemoteMedia != allowRemoteMedia ||
-      oldWidget.mediaRedacted != mediaRedacted;
+      oldWidget.mediaRedacted != mediaRedacted ||
+      oldWidget.decodeMaxEdge != decodeMaxEdge;
 }
 
 /// Tekst met inline-markdown (**vet**, *cursief*, `code`, ~~door~~, [link](url)).
@@ -257,6 +278,14 @@ class SlidePreviewWidget extends StatelessWidget {
   /// Optioneel: maakt links in de tekst klikbaar (preview/presenter). In
   /// thumbnails en bij export blijft dit null → links zijn alleen gestyled.
   final void Function(String url)? onLinkTap;
+
+  /// Bovengrens voor de decodeerresolutie van dia-afbeeldingen, in pixels op de
+  /// langste zijde. Null = de gewone cap.
+  ///
+  /// Alleen de slidestrook zet dit (#612). Preview, presentatiemodus en de
+  /// rasteraar tekenen op ware grootte en houden dus null: daar is de
+  /// resolutie het product.
+  final int? decodeMaxEdge;
 
   /// 1-gebaseerd slidenummer en totaal, voor footer-paginanummers en de
   /// {page}/{total}-tokens. Null → geen paginanummers.
@@ -421,6 +450,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.fitScaleOverride,
     this.scopeCia = const {},
     this.reportLanguage = '',
+    this.decodeMaxEdge,
   });
 
   @override
@@ -471,6 +501,7 @@ class SlidePreviewWidget extends StatelessWidget {
                 hasBottomTlp: hasBottomRightTlp,
                 allowRemoteMedia: allowRemoteMedia,
                 mediaRedacted: slide.mediaRedacted,
+                decodeMaxEdge: decodeMaxEdge,
                 child: _buildSlide(),
               ),
             ),

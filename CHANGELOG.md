@@ -427,6 +427,13 @@ read a book to find out.
   notities en het zegel.
 
 ### Fixed
+- **Een presentatie vol foto's kon de app het geheugen in jagen.** De strook met
+  dia-miniaturen decodeerde elke afbeelding op volledige resolutie — voor een
+  vakje van nog geen twee centimeter breed. Eén telefoonfoto kostte daarmee 49
+  MB, en tien zichtbare miniaturen een halve gigabyte. Op een desktop merkte u
+  daar weinig van; in de browser viel het tabblad om. Miniaturen decoderen nu op
+  512 pixels. Wat u presenteert, exporteert of op het scherm ziet, is
+  onveranderd scherp.
 - **De module Informatieveiligheid liet drie stukken interface staan als hij
   uit stond.** Een heel tabblad *Checklists* waarin u sjablonen kon maken die
   nergens te laden waren, en in *Beveiliging* het aanbod om een online
