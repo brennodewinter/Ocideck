@@ -529,19 +529,15 @@ read a book to find out.
 - **Een kwetsbaarheidsmelding kwam op het verkeerde adres uit.** Het
   contactkaartje in de issuetracker verwees naar `security@vigilis.nl` (een
   adres dat níét in gebruik is — het staat hier alleen omdat het de fout was),
-  terwijl
-  `SECURITY.md` en de gedragscode allebei `security@librekat.nl` noemen. Wie de
-  contactkaartje in de issuetracker verwees naar een adres op een domein dat de
-  stichting hiervoor niet gebruikt, terwijl
-  `SECURITY.md` en de gedragscode allebei `security@librekat.nl` noemen — nog
-  steeds het enige geldige meldadres. Wie de
-  tracker volgde — precies de route die we zelf aanwijzen — mailde een adres dat
-  in onze eigen documentatie niet bestaat. Rechtgezet, en er staat nu een test
-  op die elk contactadres vergelijkt met `SECURITY.md`, zodat de drie plekken
-  niet opnieuw uit elkaar kunnen lopen. *(Aangepast 22-07-2026: deze regel
-  citeerde het foute adres letterlijk. Een `grep -rn "security@"` over de
-  repository leverde daardoor twee adressen op zonder aanwijzing welk het
-  huidige is — en het verkeerde stond in de tekst die de fout beschreef.)*
+  terwijl `SECURITY.md` en de gedragscode allebei `security@librekat.nl`
+  noemen — nog steeds het enige geldige meldadres. Wie de tracker volgde —
+  precies de route die we zelf aanwijzen — mailde een adres dat in onze eigen
+  documentatie niet bestaat. Rechtgezet, en er staat nu een test op die elk
+  contactadres vergelijkt met `SECURITY.md`, zodat de drie plekken niet
+  opnieuw uit elkaar kunnen lopen. *(Aangepast 22-07-2026: deze regel citeerde
+  het foute adres zonder aanwijzing dat het dood was, zodat een
+  `grep -rn "security@"` twee adressen opleverde en niet verried welk het
+  huidige is.)*
 - **Een HTML-export met huisstijl verloor haar opmaak.** De tijdlijn, de
   akkoordpagina, het zwarte vlak van een privacyredactie en — het ergst — de
   balk met de TLP-classificatie bovenaan het document bestonden alleen in de
