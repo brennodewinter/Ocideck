@@ -127,6 +127,10 @@ class SlideThumbnail extends ConsumerWidget {
   final VoidCallback onCopyImage;
   final VoidCallback onSplit;
 
+  /// Start de presentatie bij deze dia (#607). Null wanneer presenteren hier
+  /// niet kan — dan verschijnt het menu-item niet.
+  final void Function(int index)? onPresentFromHere;
+
   /// Persoonlijke gebruikersnotities (sidecar), los van sprekersnotities.
   final bool hasUserNotes;
 
@@ -156,6 +160,7 @@ class SlideThumbnail extends ConsumerWidget {
     required this.onToggleSkip,
     required this.onCopyImage,
     required this.onSplit,
+    this.onPresentFromHere,
     this.hasUserNotes = false,
     this.projectPath,
     this.themeProfile = const ThemeProfile(),
@@ -606,6 +611,11 @@ class SlideThumbnail extends ConsumerWidget {
                         : l10n.d('Overslaan'),
                   ),
                 ),
+                if (onPresentFromHere != null)
+                  PopupMenuItem(
+                    value: 'present_here',
+                    child: Text(l10n.d('Presenteer vanaf hier')),
+                  ),
                 PopupMenuItem(
                   value: 'delete',
                   child: Text(
@@ -622,6 +632,7 @@ class SlideThumbnail extends ConsumerWidget {
                 if (v == 'duplicate') onDuplicate();
                 if (v == 'split') onSplit();
                 if (v == 'skip') onToggleSkip();
+                if (v == 'present_here') onPresentFromHere?.call(index);
                 if (v == 'delete') onDelete();
               },
             ),

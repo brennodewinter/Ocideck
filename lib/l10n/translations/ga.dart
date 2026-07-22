@@ -1812,6 +1812,7 @@ const _dutchSourceGa = {
 
 const _dutchSourceAddGa = <String, String>{
   'De export is mislukt.': 'Theip ar an easpórtáil.',
+  'Presenteer vanaf hier': 'Cuir i láthair ón áit seo',
   'Teams-gastclient (ontwerp)': 'Cliant aoi Teams (dearadh)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: cé chomh forleathan is féidir an t-ábhar seo a roinnt?',

@@ -360,7 +360,7 @@ class Deck {
     this.tlp = TlpLevel.none,
     this.privacy = PrivacyDisposition.warn,
     this.presentationTargetSeconds = 0,
-    this.showRehearsalSummary = true,
+    this.showRehearsalSummary = false,
     this.playOnly = false,
     this.finalized = false,
     this.sealHash = '',

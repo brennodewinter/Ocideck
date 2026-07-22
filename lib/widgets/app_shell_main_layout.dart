@@ -172,7 +172,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                 children: [
                   SizedBox(
                     width: railWidth,
-                    child: SlideListPanel(railWidth: railWidth),
+                    child: SlideListPanel(
+                      railWidth: railWidth,
+                      onPresentFromHere: (i) =>
+                          _presentFromSlide(context, ref, i),
+                    ),
                   ),
                   _ResizableDivider(
                     onDrag: (delta) {
@@ -694,7 +698,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     deckNotifier.updateSlide(idx, updated);
   }
 
-  void _presentDeck() => presentDeck(context, ref);
+  /// De gewone startknop presenteert vanaf dia 1 (#607); "presenteer vanaf hier"
+  /// in het diamenu is de bewuste uitzondering.
+  void _presentDeck() => presentDeck(context, ref, fromStart: true);
 
   Future<void> _exportDeck() async {
     final deckState = ref.read(deckProvider);

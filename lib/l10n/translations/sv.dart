@@ -1776,6 +1776,7 @@ const _dutchSourceSv = {
 
 const _dutchSourceAddSv = <String, String>{
   'De export is mislukt.': 'Exporten misslyckades.',
+  'Presenteer vanaf hier': 'Presentera härifrån',
   'Teams-gastclient (ontwerp)': 'Teams-gästklient (design)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: hur brett får det här materialet delas?',

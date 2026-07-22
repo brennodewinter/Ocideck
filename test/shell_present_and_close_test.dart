@@ -110,30 +110,30 @@ void main() {
 
   // ── Presenteren ───────────────────────────────────────────────────────────
 
-  testWidgets('presenteren begint bij de dia waar de editor staat', (
+  testWidgets('de startknop presenteert vanaf dia 1, niet bij de selectie', (
     tester,
   ) async {
+    // Sinds #607: wie op dia drie werkte en op afspelen drukte, viel met de
+    // zaal middenin de presentatie. De knop begint nu bij het begin; wie tóch
+    // vanaf de selectie wil, kiest "presenteer vanaf hier" in het diamenu (zie
+    // present_from_slide_test.dart).
     final tab = await pumpShell(
       tester,
       deckOf([bullets('Eerste'), bullets('Tweede'), bullets('Derde')]),
     );
-    // De editor is per tabblad; de keuze moet naar díe notifier.
     tab.editorNotifier.select(2);
     await tester.pumpAndSettle();
 
     await present(tester);
 
-    // Niet vanaf het begin: wie op presenteren drukt terwijl hij aan dia drie
-    // werkt, wil dia drie zien.
-    expect(presenter(tester).initialIndex, 2);
-    expect(find.text('Derde'), findsWidgets);
+    expect(presenter(tester).initialIndex, 0);
+    expect(find.text('Eerste'), findsWidgets);
   });
 
-  testWidgets('een overgeslagen dia haalt de presentatie niet, en de selectie '
-      'schuift mee', (tester) async {
-    // De tweede dia is overgeslagen. Staat de editor daarop, dan is er geen
-    // overeenkomstige dia in de presentatie — de startindex moet dan naar de
-    // eerstvolgende zichtbare schuiven en niet naar de verkeerde dia wijzen.
+  testWidgets('een overgeslagen dia haalt de presentatie niet', (tester) async {
+    // De tweede dia is overgeslagen: die hoort niet in de presentatie, ongeacht
+    // waar de startknop begint. De knop begint sinds #607 bij dia 1, dus de
+    // startindex is 0 — de eerste zichtbare.
     final tab = await pumpShell(
       tester,
       deckOf([
@@ -149,10 +149,7 @@ void main() {
 
     final shown = presenter(tester);
     expect(shown.slides.map((s) => s.title), ['Eerste', 'Derde']);
-    // De selectie stond op de overgeslagen dia; die bestaat in de presentatie
-    // niet, dus schuift de start naar de eerstvolgende zichtbare — index 1,
-    // niet index 1 van het oorspronkelijke deck.
-    expect(shown.initialIndex, 1);
+    expect(shown.initialIndex, 0);
     expect(find.text('Overgeslagen'), findsNothing);
   });
 

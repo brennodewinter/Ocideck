@@ -735,6 +735,7 @@ const _dutchSourceFr = {
 
 const _dutchSourceAddFr = {
   'De export is mislukt.': 'L’export a échoué.',
+  'Presenteer vanaf hier': 'Présenter à partir d\'ici',
   'Teams-gastclient (ontwerp)': 'Client invité Teams (conception)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol : dans quelle mesure ce matériel peut-il être partagé ?',

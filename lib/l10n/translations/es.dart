@@ -732,6 +732,7 @@ const _dutchSourceEs = {
 
 const _dutchSourceAddEs = {
   'De export is mislukt.': 'La exportación ha fallado.',
+  'Presenteer vanaf hier': 'Presentar desde aquí',
   'Teams-gastclient (ontwerp)': 'Cliente invitado de Teams (diseño)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: ¿hasta dónde se puede compartir este material?',

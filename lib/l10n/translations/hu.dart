@@ -1781,6 +1781,7 @@ const _dutchSourceHu = {
 
 const _dutchSourceAddHu = <String, String>{
   'De export is mislukt.': 'Az exportálás nem sikerült.',
+  'Presenteer vanaf hier': 'Bemutatás innen',
   'Teams-gastclient (ontwerp)': 'Teams vendégkliens (terv)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: milyen széles körben osztható meg ez az anyag?',

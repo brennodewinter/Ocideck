@@ -94,6 +94,19 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Changed
+- **Presenteren begint nu bij dia 1, niet bij de dia die je bewerkt.** Wie op
+  dia 12 werkte en op afspelen drukte, viel met de zaal middenin de presentatie
+  — een verrassing op precies het verkeerde moment. Wil je toch ergens anders
+  beginnen, dan is dat een bewuste keuze: rechtsklik een dia in de strook en
+  kies *Presenteer vanaf hier*.
+- **De repetitiesamenvatting verschijnt niet meer vanzelf.** Hij stond standaard
+  aan en werd je voorgeschoteld op het moment dat je net klaar was voor een
+  zaal — wat leest als de app die je optreden een cijfer geeft. Nu standaard
+  uit, en per deck aan te zetten onder *Presentatie-eigenschappen → toon
+  tijdsoverzicht* voor wie hem als repetitiehulp wil. Je opgeslagen keuze blijft
+  ongemoeid.
+
 ### Fixed
 - **De webbouw was de eerste tien seconden wit.** CanvasKit verft pas na een
   seconde of tien, en tot dan stond er niets — geen logo, geen "even geduld",

@@ -896,6 +896,12 @@ Future<void> requestCloseTab(
 /// Met [fromStart] begint de presentatie bij de eerste zichtbare slide; anders
 /// bij de huidige selectie in de editor. Toont een melding en doet niets als er
 /// (na filtering) geen slides zijn.
+/// Presenteer vanaf een gekozen dia (#607): selecteer hem, dan [presentDeck].
+void _presentFromSlide(BuildContext context, WidgetRef ref, int index) {
+  ref.read(editorProvider.notifier).select(index);
+  presentDeck(context, ref);
+}
+
 void presentDeck(
   BuildContext context,
   WidgetRef ref, {
