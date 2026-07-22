@@ -12,6 +12,15 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
   **tabs**. Opening a deck that is already open just jumps to its existing tab —
   the same file is never loaded into two tabs at once, so you can't accidentally
   edit two out-of-sync copies.
+- **The welcome screen** answers the question you have before you have any of the
+  others. Under the logo, one line says what OciDeck makes (presentations that
+  stay ordinary Markdown files); under *New presentation*, how many templates are
+  waiting behind that button — counted from the catalogue itself, so it cannot
+  drift, and leaving out the security-module template until that module is
+  enabled. A **User guide** button beside *Settings* opens this document in the
+  built-in reader. It used to live three clicks deep under *Settings →
+  Documentation*, which is exactly where someone who knows nothing yet does not
+  look.
 - **Start from a template**: the new-presentation dialog offers a searchable
   catalogue of starting points — from an empty deck to shift briefings, security
   and privacy work decks, crisis and flight-prep sessions, and **conversation-
@@ -23,6 +32,14 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
   high-stakes, emotional ones weave in the *Crucial Conversations* method; each
   comes with fill-in preparation tables and a progress checklist. Everything is
   placeholder text you overwrite with your own content.
+
+  **The example slides in a template are Dutch**, and outside Dutch the picker
+  says so above the list. A template's name and description follow your interface
+  language; its slide content does not. That is a decision, not an oversight:
+  template content becomes *your* content the moment the deck is created, and
+  translating it would make what a document says depend on the menu language it
+  happened to be created in — two people picking the same template would get
+  files they could not compare.
 - **Opened from a URL**: a deck fetched from a web address (the URL import, or a
   `?deck=…` share link on the web build) shows an **“Extern”** privacy badge in
   the status bar. Opening such a link made your device contact that server;
@@ -31,6 +48,14 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
 - **Save**: `Ctrl/Cmd + S`. Saving lays out a tidy project folder next to your
   `.md` (`images/`, `data/`, `logos/`, `themes/`) and copies assets in. See
   [`FILE_FORMAT.md`](FILE_FORMAT.md).
+- **While a save is running** the save chip on the left of the status bar turns
+  into a spinner that names the destination — *Saving…*, *Uploading to WebDAV…*,
+  *Uploading to S3…*, *Committing to git…* — and the save button in the toolbar
+  is switched off until it finishes. A save to a server is one upload per media
+  file, and a git commit is several round trips; on a slow line that used to be
+  indistinguishable from a hung app, so people clicked again, and again. The
+  destination is named because it tells you whether to blame your disk or your
+  connection.
 - **Crash recovery**: unsaved work is snapshotted automatically and offered back
   after an unexpected exit. The snapshot carries the deck text, your user notes
   and the drawing layer, so a deck you only drew on comes back with the drawings
@@ -43,12 +68,31 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
 ## Command palette
 
 Press `Ctrl/Cmd + K` for a searchable list of the common actions — present,
-export, save, add a chart, find & replace, the image library, toggle
-markdown/visual mode, full-deck preview, new tab, open, package/URL import,
-settings, and setting each TLP level. Start typing to filter (accents and case
-don't matter), use `↑`/`↓` to move, `Enter` to run, and `Esc` to close. Actions
-that aren't available yet (for example export before you've saved) stay visible
-but greyed out. The palette is also in the `⋮` menu.
+export, save, **undo** and **redo**, **find**, add a chart, find & replace, the
+image library, toggle markdown/visual mode, full-deck preview, new tab, open,
+package/URL import, **presentation properties**, settings, **this user guide**,
+**the shortcut sheet**, and setting each TLP level. Start typing to filter
+(accents and case don't matter), use `↑`/`↓` to move, `Enter` to run, and `Esc`
+to close. Actions that aren't available yet (for example export before you've
+saved, or undo with nothing to undo) stay visible but greyed out. The palette is
+also in the `⋮` menu.
+
+Undo and redo were the notable absentees: they existed as two small toolbar icons
+and nowhere else, while the palette is the place where a function gets found in
+this app.
+
+## The menu bar (macOS)
+
+On macOS the app has a real menu bar — **OciDeck, File, Edit, Presentation,
+Window, Help** — with the same actions the toolbar and the palette offer, plus
+cut/copy/paste/select-all and the standard window items. It exists because on
+macOS the menu bar is where you find out what a program can do without already
+knowing where to look. Items that need an open presentation stay visible and grey
+out instead of disappearing.
+
+Windows and Linux take their window menu from the desktop environment and the
+browser build has none, so this bar is macOS-only. The full list of menus and
+their keys is in [SHORTCUTS.md](SHORTCUTS.md).
 
 ## Storage
 
