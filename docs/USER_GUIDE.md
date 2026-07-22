@@ -433,7 +433,10 @@ dashboard of aviation-style instrument gauges),
 dated events), **scorecard** (a few headline figures, each beside the figure from
 the previous report), and
 **free Markdown**. Each card in the chooser shows a miniature
-wireframe of the layout, and the dialog works entirely with the keyboard
+wireframe of the layout, and **below the grid stands the explanation of whatever
+the mouse or the keyboard focus is pointing at** — so you choose on a sentence
+rather than on a wireframe and a single word. The same sentence is what a screen
+reader announces on the card itself. The dialog works entirely with the keyboard
 (`Tab`/`Enter` to choose, `Esc` to cancel). Each type has a dedicated editor on
 the left and a live preview on the right. You can change an existing slide's type
 at any time from the **TYPE** control in the editor header: it opens the same
@@ -443,8 +446,9 @@ types. (Both pickers are category-filtered: the seven Informatieveiligheid types
 and sign-off — appear only once the security module is enabled; see the
 pentest-reporting section below.)
 
-Not sure what a slide type is for? Click the small **"What can I do here?"**
-button at the top of the editor for a one-line hint about the selected type (for
+Not sure what a slide type is for? The chooser already tells you before you pick
+(above), and afterwards the small **"What can I do here?"**
+button at the top of the editor repeats the hint for the selected type (for
 example, how to import CSV data into a chart, how to trim a video, or how to
 paste a table from a spreadsheet). The info icon next to a slide's **TLP** picker
 explains that slides classified above the deck's level are left out when you
@@ -1478,12 +1482,33 @@ Under **Slide settings** (the gear in the editor header), each slide offers:
 | **Only report** | Findings stay in the quality panel; nothing shows on the slide. |
 | **Accept** | The data belongs here. The notice disappears. Nothing changes on the slide. |
 | **Accept + warn** | The data stays, and the slide gets a **PERSONAL DATA** badge — the PrivacyKat shield mark next to the TLP marking, travelling into the PDF, the PPTX and the HTML. Whoever receives the deck knows what they have. |
-| **Leave out of display and export** | The data found is redacted everywhere: screen, presentation, audience window, PDF, PPTX, HTML, speaker notes, document metadata. Your Markdown keeps the original text. |
+| **Leave out of display and export** | The data found is redacted in the presentation, the audience window, PDF, PPTX, HTML, the speaker notes and the document metadata. Your Markdown keeps the original text. The editor preview keeps showing *your* text so you can still edit it — see below for the switch that shows the other version. |
 
 The same four values exist deck-wide (`privacy:` in the front matter). A slide
 **overrides** the deck — unlike TLP, where the stricter level wins. A deck set to
 *accept* (the whole briefing is known) with one slide set to *leave out* (this one
 detail is for nobody) has to just work, and the author of that slide knows best.
+
+### Seeing it before you send it
+
+A slide set to *leave out* now says so above the preview, and the notice states
+both halves of what will happen: the data found is blacked out, **and all of that
+slide's pictures, video and audio drop out** — the second is the more expensive
+surprise, because a slide that is suddenly empty in the export looks like a
+mistake rather than a decision. Your Markdown file keeps everything.
+
+Beside the notice sits a **What they see / My text** switch. It runs the slide you
+are looking at through the same projection the presentation and the export use,
+so you can check the result before the file exists rather than after. It is **off
+by default**, it appears only on slides where there is something to check, and it
+is meant as a check rather than a working mode: an author who cannot see his own
+sentence cannot correct it. The editor fields beside the preview always show your
+own text.
+
+This closes a gap that was easy to miss. Until now the label promised redaction,
+the screen changed nothing, and the first honest answer came out of the PDF — at
+which point the file had already been written.
+*(Added 2026-07-22.)*
 
 ### Before you export
 
@@ -1545,6 +1570,17 @@ The privacy check can be switched off under *Settings → Security*. That switch
 off **warnings** — it does not switch off redaction. A deck that says *leave out*
 keeps leaving data out, even for someone who never wants to see a notice.
 Otherwise you could silence the messages and leak your briefing without noticing.
+
+**And with the check off, the export verdict stops being green.** The status-bar
+chip reads *Ready — privacy not checked*, in grey, and the export dialog's banner
+says the same in words: nothing was looked at for personal data, special-category
+data or secrets, and the switch is under *Settings → Security*. Nothing is
+blocked — you turned the check off yourself, so this is not an alarm — but the
+reassurance is withdrawn. With the check off the scanner returns an empty result,
+and from the outside "we found nothing" and "we did not look" are the same empty
+result; a green *Ready to export* on top of that is a promise nobody made. Grey
+rather than amber for the same reason the panel already says which checks ran
+when the bar is green.
 
 ### Accepting is not consent for an AI backend
 
@@ -1643,8 +1679,16 @@ leaves it out of everything it shows and exports.
 The suspect, [[Jan de Vries]], was arrested at [[Kalverstraat 12]].
 ```
 
-On the slide, in the presentation, in the audience window, in the PDF, the PPTX
-and the HTML you get `████████`. Anywhere.
+In the presentation, in the audience window, in the PDF, the PPTX and the HTML
+you get `████████`. Anywhere a reader other than you can end up.
+
+**Your own editor preview is the exception, and deliberately so.** It shows the
+text as you typed it, brackets and all, because a preview that blacks out your
+own sentence leaves you nothing to edit. On a slide set to *leave out* you can
+switch the preview to the recipient's version — see *Seeing it before you send
+it* above. *Corrected 2026-07-22: this paragraph opened with "On the slide", which
+read as though the editor blacked things out too; the thumbnails and the slide
+list also show your own text.*
 
 ### It is left out, not covered up
 
@@ -1968,6 +2012,20 @@ issues** or only **Errors**, **Warnings**, or **Tips**. Click a slide-specific
 issue to jump to that slide and focus the relevant editor field; click a **theme
 (entire presentation)** issue to open *Settings → Presentation style → Colours* with the matching
 colour field scrolled into view and highlighted.
+
+Not every deck-wide finding is about the theme, and the panel no longer pretends
+it is. A privacy finding on a **front-matter field** — author, organisation,
+description, keywords, version, date, the standards and tools used, or a MIAUW
+motivation — is headed *Presentation info*, and its button says **Open
+presentation info** and opens that window. It used to be labelled as a theme
+issue and sent you into the colour pickers to look for a field that is not there.
+*(Corrected 2026-07-22.)*
+
+Findings inside a **table** now say where they sit: *Table row 4, column 2*, or
+*Table header row, column 2* for the top row, counted the way you count them on
+the slide. They used to read *Table 14* — the scanner's running cell number,
+which appears nowhere on the slide and cannot be converted back without knowing
+the table's width.
 
 Issues also appear as badges on slide thumbnails, as a blue badge when a slide
 has **user notes**, and as inline hints on relevant editor fields (for example
