@@ -1779,6 +1779,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Video niet ingesloten': 'Videota ei upotettu',
   'Afbeelding niet ingesloten': 'Kuvaa ei upotettu',
   'Dit diagram kon niet worden getekend': 'Tätä kaaviota ei voitu piirtää',
   'Brontekst van het diagram': 'Kaavion lähdeteksti',

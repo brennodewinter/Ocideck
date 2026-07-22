@@ -1802,6 +1802,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Video niet ingesloten': 'Видеото не е вградено',
   'Afbeelding niet ingesloten': 'Изображението не е вградено',
   'Dit diagram kon niet worden getekend':
       'Тази диаграма не можа да бъде начертана',

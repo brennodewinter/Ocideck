@@ -1770,6 +1770,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Video niet ingesloten': 'Videot ei manustatud',
   'Afbeelding niet ingesloten': 'Pilti ei manustatud',
   'Dit diagram kon niet worden getekend':
       'Seda diagrammi ei õnnestunud joonistada',

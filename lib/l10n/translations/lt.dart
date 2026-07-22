@@ -1787,6 +1787,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Video niet ingesloten': 'Vaizdo įrašas neįterptas',
   'Afbeelding niet ingesloten': 'Paveikslėlis neįterptas',
   'Dit diagram kon niet worden getekend': 'Nepavyko nubraižyti šios diagramos',
   'Brontekst van het diagram': 'Diagramos pirminis tekstas',

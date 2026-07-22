@@ -1809,6 +1809,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Video niet ingesloten': 'Vídeo não incorporado',
   'Afbeelding niet ingesloten': 'Imagem não incorporada',
   'Dit diagram kon niet worden getekend':
       'Não foi possível desenhar este diagrama',

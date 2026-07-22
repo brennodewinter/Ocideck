@@ -1783,6 +1783,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Video niet ingesloten': 'A videó nincs beágyazva',
   'Afbeelding niet ingesloten': 'A kép nincs beágyazva',
   'Dit diagram kon niet worden getekend':
       'Ezt a diagramot nem sikerült megrajzolni',

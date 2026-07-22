@@ -134,21 +134,22 @@ class MarpHtmlService {
     final signature = signatureFields(embedded.markdown);
     final sections = StringBuffer();
     for (final slide in marpSlides(embedded.markdown)) {
+      // De keten van omzettingen, van binnen naar buiten. Elke stap laat een
+      // dia die haar niet aangaat onveranderd, dus de volgorde is vrij; het
+      // rapportagetype gaat als eerste omdat het de hele body vervangt.
+      var body = renderReportingSlide(slide, theme: theme);
+      body = renderChartBlocks(body, theme: theme);
+      body = renderQuestionBlocks(body);
+      body = renderMediaRedacted(body);
+      body = renderVideoNotice(body);
+      body = renderTimelineBlocks(body);
+      body = renderSignOffBlock(
+        body,
+        signature,
+        sealedAt: signature['ocideck_seal_at'] ?? '',
+      );
       final renderedBlocks = renderCockpitBlocks(
-        renderSignOffBlock(
-          renderTimelineBlocks(
-            renderMediaRedacted(
-              renderQuestionBlocks(
-                renderChartBlocks(
-                  renderReportingSlide(slide, theme: theme),
-                  theme: theme,
-                ),
-              ),
-            ),
-          ),
-          signature,
-          sealedAt: signature['ocideck_seal_at'] ?? '',
-        ),
+        body,
         theme: theme,
         scheme: cockpitColorScheme,
       );
@@ -538,6 +539,45 @@ class MarpHtmlService {
     return slideMarkdown.replaceAll(_mediaRedactedMarker, box);
   }
 
+  // ── Video → melding ───────────────────────────────────────────────────────
+
+  static final RegExp _videoElement = RegExp(
+    r'<video\b[^>]*>\s*</video>',
+    caseSensitive: false,
+  );
+  static final RegExp _embedElement = RegExp(
+    r'<iframe\b[^>]*class="ocideck-embed"[^>]*>\s*</iframe>',
+    caseSensitive: false,
+  );
+
+  /// Zet een videospeler om in een zichtbare melding.
+  ///
+  /// De andere helft van dezelfde belofte als [_embedImages], en de enige die
+  /// niet in te lossen is. Een videobestand insluiten maakt een document van
+  /// honderden megabytes; een YouTube- of Vimeo-speler kan per definitie niet
+  /// werken in een export die niets van internet mag halen — de eigen CSP van
+  /// het bestand zet `frame-src 'none'` en laat `media-src` alleen lokale
+  /// bronnen toe.
+  ///
+  /// Wat er stond was dus een speler die zwart bleef en niets deed, zonder dat
+  /// de ontvanger kon weten dat er iets ontbrak. Nu staat het er. Bij een
+  /// online bron schrijft de serialiser er al een aanklikbare URL onder, dus de
+  /// bron zelf blijft bereikbaar.
+  static String renderVideoNotice(String slideMarkdown) {
+    if (!_videoElement.hasMatch(slideMarkdown) &&
+        !_embedElement.hasMatch(slideMarkdown)) {
+      return slideMarkdown;
+    }
+    const l10n = AppLocalizations(Locale('nl'));
+    final label = l10n.d('Video niet ingesloten');
+    final box =
+        '<div class="media-absent" role="img" '
+        'aria-label="${_htmlAttr(label)}">${_htmlText(label)}</div>';
+    return slideMarkdown
+        .replaceAll(_videoElement, box)
+        .replaceAll(_embedElement, box);
+  }
+
   // ── Ondertekening → HTML ──────────────────────────────────────────────────
 
   static final RegExp _signOffClass = RegExp(
@@ -818,6 +858,7 @@ html,body{margin:0;padding:0}
 .slide .signoff-seal{font-size:18px;opacity:.6;letter-spacing:.03em;margin-top:.7em}
 .slide .media-redacted{display:flex;align-items:center;justify-content:center;min-height:200px;margin:.6em 0;background:#000;color:#fff;font-size:20px;letter-spacing:.05em;border-radius:4px;text-align:center;padding:24px}
 .slide .image-missing{display:inline-block;padding:14px 20px;border:2px dashed rgba(100,116,139,.5);border-radius:6px;font-size:19px;opacity:.6;font-style:italic}
+.slide .media-absent{display:flex;align-items:center;justify-content:center;min-height:180px;margin:.6em 0;border:2px dashed rgba(100,116,139,.5);border-radius:6px;font-size:20px;opacity:.6;font-style:italic;text-align:center;padding:24px}
 .slide .mermaid-error{margin:.6em 0;padding:16px 20px;border:1px solid #B91C1C;border-left-width:6px;border-radius:6px;background:#FEE2E2;color:#7F1D1D;text-align:left}
 .slide .mermaid-error-title{font-size:22px;font-weight:700;margin:0 0 .3em;color:#7F1D1D}
 .slide .mermaid-error-label{font-size:16px;font-weight:600;margin:.7em 0 .2em;opacity:.8;color:#7F1D1D}

@@ -686,6 +686,7 @@ void main() {}
 
   group('rapportagedia\'s in de HTML-export', _reportingTests);
   group('afbeeldingen insluiten', _imageEmbedTests);
+  group('video in de HTML-export', _videoTests);
 }
 
 // ── Rapportagedia's ────────────────────────────────────────────────────────
@@ -959,5 +960,46 @@ void _imageEmbedTests() {
     // zet alleen een waarde die echt een data:image/-URI uit OCIDECK_IMG is.
     expect(html, contains("uri.indexOf('data:image/')===0"));
     expect(html, contains('OCIDECK_IMG'));
+  });
+}
+
+// ── Video ──────────────────────────────────────────────────────────────────
+
+void _videoTests() {
+  test('een lokale video wordt een zichtbare melding', () {
+    final slide = Slide.create(
+      SlideType.video,
+    ).copyWith(title: 'Demo', videoPath: 'media/demo.mp4');
+    final md = MarkdownService().generateSlide(slide, forExport: true);
+    expect(md, contains('<video'), reason: 'de opslagvorm is een speler');
+
+    final html = MarpHtmlService.renderVideoNotice(md);
+    // Een speler die naar een bestand wijst dat de ontvanger niet heeft, blijft
+    // zwart en zegt niets. De melding zegt tenminste dát er iets ontbreekt.
+    expect(html, isNot(contains('<video')));
+    expect(html, contains('Video niet ingesloten'));
+    expect(html, contains('media-absent'));
+  });
+
+  test('een YouTube-insluiting wordt dezelfde melding', () {
+    final slide = Slide.create(
+      SlideType.video,
+    ).copyWith(videoPath: 'https://www.youtube.com/watch?v=aaaaaaaaaaa');
+    final md = MarkdownService().generateSlide(slide, forExport: true);
+    expect(md, contains('ocideck-embed'));
+
+    final html = MarpHtmlService.renderVideoNotice(md);
+    // De CSP van de export zet frame-src 'none', dus de speler kan hier niet
+    // werken — een leeg vak zonder uitleg was het gevolg.
+    expect(html, isNot(contains('<iframe')));
+    expect(html, contains('Video niet ingesloten'));
+    // De letterlijke URL die de serialiser eronder schrijft blijft staan, dus
+    // de bron zelf is nog te bereiken.
+    expect(html, contains('youtube.com/watch'));
+  });
+
+  test('een dia zonder video blijft ongemoeid', () {
+    const md = '# Gewone dia\n\nTekst.\n';
+    expect(MarpHtmlService.renderVideoNotice(md), md);
   });
 }

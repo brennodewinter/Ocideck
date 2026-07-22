@@ -732,6 +732,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Video niet ingesloten': 'Video non incorporato',
   'Afbeelding niet ingesloten': 'Immagine non incorporata',
   'Dit diagram kon niet worden getekend':
       'Non è stato possibile disegnare questo diagramma',

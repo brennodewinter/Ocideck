@@ -733,6 +733,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Video niet ingesloten': 'Vídeo no incrustado',
   'Afbeelding niet ingesloten': 'Imagen no incrustada',
   'Dit diagram kon niet worden getekend':
       'No se ha podido dibujar este diagrama',

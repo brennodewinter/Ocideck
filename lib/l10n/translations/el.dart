@@ -1807,6 +1807,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Video niet ingesloten': 'Το βίντεο δεν ενσωματώθηκε',
   'Afbeelding niet ingesloten': 'Η εικόνα δεν ενσωματώθηκε',
   'Dit diagram kon niet worden getekend':
       'Δεν ήταν δυνατή η σχεδίαση αυτού του διαγράμματος',

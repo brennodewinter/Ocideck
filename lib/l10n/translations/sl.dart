@@ -1781,6 +1781,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Video niet ingesloten': 'Videoposnetek ni vdelan',
   'Afbeelding niet ingesloten': 'Slika ni vdelana',
   'Dit diagram kon niet worden getekend':
       'Tega diagrama ni bilo mogoče narisati',

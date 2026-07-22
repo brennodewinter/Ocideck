@@ -1791,6 +1791,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Video niet ingesloten': 'Wideo nieosadzone',
   'Afbeelding niet ingesloten': 'Obraz nieosadzony',
   'Dit diagram kon niet worden getekend':
       'Nie udało się narysować tego diagramu',

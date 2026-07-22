@@ -736,6 +736,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Video niet ingesloten': 'Video nicht eingebettet',
   'Afbeelding niet ingesloten': 'Bild nicht eingebettet',
   'Dit diagram kon niet worden getekend':
       'Dieses Diagramm konnte nicht gezeichnet werden',

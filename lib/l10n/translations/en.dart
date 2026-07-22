@@ -918,6 +918,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Video niet ingesloten': 'Video not embedded',
   'Afbeelding niet ingesloten': 'Image not embedded',
   'Dit diagram kon niet worden getekend': 'This diagram could not be drawn',
   'Brontekst van het diagram': 'Diagram source text',

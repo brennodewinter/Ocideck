@@ -1786,6 +1786,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Video niet ingesloten': 'Videozapis nije ugrađen',
   'Afbeelding niet ingesloten': 'Slika nije ugrađena',
   'Dit diagram kon niet worden getekend':
       'Ovaj dijagram nije bilo moguće nacrtati',
