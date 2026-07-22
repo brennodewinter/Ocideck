@@ -1312,8 +1312,8 @@ Phone numbers follow the same three-step logic. In international form (`+CC`
 followed by the national number) the calling code is checked against the list of
 *assigned* ITU country codes together with a valid E.164 length — that is a real
 validation, so it becomes a proper warning. A national number needs a separator
-(`06-24681357`); a bare run of digits needs a context word ("tel", "mobiel",
-"phone"), because `0417164300` on its own is just as likely to be an old bank
+(`06-00000000`); a bare run of digits needs a context word ("tel", "mobiel",
+"phone"), because `0400000000` on its own is just as likely to be an old bank
 account number.
 
 (You will notice this manual never prints a real-looking international number.
