@@ -120,6 +120,30 @@ Targeted test groups for focused work:
   likely to turn a first contribution into a last one, because a contributor met
   it as a failing build rather than as a stated division of labour. The count
   "30 other languages" was also stale since the 32nd language landed.)*
+
+  **Correcting one language is a different job, and it has its own route.**
+  Everything above is about *adding* a string. If you are a native speaker who
+  wants to fix wording that is wrong, clumsy or machine-flavoured, you do not
+  need Dart and you do not need the other 30 languages:
+
+  ```bash
+  make l10n-export LANG_=ga OUT=my-irish.json   # 2,261 strings, flat JSON
+  # …edit the values in any editor. The keys are the Dutch source sentences,
+  # so you always see what you are translating.
+  make l10n-import LANG_=ga IN=my-irish.json    # writes them back, formatted
+  ```
+
+  (`LANG_`, not `LANG` — make inherits your shell's environment, and `LANG` is
+  almost always already set to your locale.)
+
+  A pull request that touches **one** language file and adds no keys is welcome
+  on its own; it does not need to wait for anything else. The importer refuses a
+  file that introduces an unknown key, on purpose — a new string belongs with
+  the code that uses it and must land in all 31 languages at once, which is what
+  `add_l10n.dart` enforces. *(Added 2026-07-22, #633: the strings live in 32
+  Dart `part` files of roughly 3,000 lines each, and that was the whole barrier
+  — it pushed away exactly the contribution this project needs most, native
+  review of 31 languages, and toward more machine translation.)*
 - **Comment language: Dutch or English, but never both in one comment.** The
   codebase is bilingual and stays that way. Measured over `lib/` (2026-07-22):
   of the ~3,100 comment blocks of three lines or more, 71% are Dutch, 28% are

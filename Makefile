@@ -1,4 +1,4 @@
-.PHONY: dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help servicenormen doorlooptijd ratchets
+.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help servicenormen doorlooptijd ratchets
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -64,6 +64,8 @@ help:
 	@echo "  make check-hardcoded-text  Hard gate: no visible string in lib/ may bypass l10n.d()."
 	@echo "  make coverage-per-file  Per-file coverage floor: budget of files below it (must reach 0)."
 	@echo "  make add-l10n SPEC=… Add d('…') source strings to every language from a JSON spec."
+	@echo "  make l10n-export LANG_=ga OUT=ga.json  One language out as flat JSON (for translators)."
+	@echo "  make l10n-import LANG_=ga IN=ga.json   …and back in. Refuses unknown keys."
 	@echo "  make catalogs-outdated Advisory: bundled reference data vs upstream (run before a release build)."
 	@echo "  make refresh-catalogs Regenerate WSTG/MASTG/MASWE from upstream (not in check)."
 	@echo "  make refresh-lexicon  Regenerate the bundled health lexicon from Orphanet (read the term diff)."
@@ -669,6 +671,22 @@ add-l10n:
 # translation change can be validated without the full suite: no duplicate keys,
 # every d()/t() literal covered in every language, and the language files are
 # dart-format-clean (the exact failures that used to slip through by hand).
+# Eén taal eruit en er weer in, via plat JSON — zodat een moedertaalspreker die
+# één zin wil verbeteren geen Dart hoeft aan te raken (#633). Voegt bewust geen
+# sleutels toe: nieuwe strings gaan via add-l10n, dat alle 31 talen afdwingt.
+#
+# De variabele heet LANG_ en niet LANG, omdat make de omgeving erft: op vrijwel
+# elke shell staat LANG al gezet (nl_NL.UTF-8), en dan draait `make l10n-export`
+# stilzwijgend op de verkeerde taal in plaats van te vragen wat je bedoelt.
+l10n-export:
+	@[ -n "$(LANG_)" ] || { echo "Usage: make l10n-export LANG_=ga OUT=ga.json"; exit 2; }
+	dart run tool/l10n_po.dart export $(LANG_) $(OUT)
+
+l10n-import:
+	@[ -n "$(LANG_)" ] || { echo "Usage: make l10n-import LANG_=ga IN=ga.json"; exit 2; }
+	@[ -n "$(IN)" ] || { echo "Usage: make l10n-import LANG_=ga IN=ga.json"; exit 2; }
+	dart run tool/l10n_po.dart import $(LANG_) $(IN)
+
 l10n-check:
 	@echo "== OciDeck check: l10n =="
 	@echo "Covers: duplicate keys, per-language d()/t() coverage, untranslated English, and l10n formatting."
