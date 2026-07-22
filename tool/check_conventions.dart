@@ -17,6 +17,9 @@
 //   * No raw control bytes — write the escape (\u0000), never the
 //     byte itself. See [controlByteBaseline]: this is a review hazard, not a
 //     nitpick.
+//   * Layer direction — a model may not import state/ or widgets/, a service may
+//     not import state/, and state/ may not import widgets/. Hard zero; see
+//     [layerRules]. Kept the layers acyclic on discipline alone until now.
 //
 // Exits non-zero (with the offending locations) when a rule is violated.
 
@@ -117,6 +120,33 @@ final _uiImport = RegExp(
   r"^import 'package:flutter/(material|widgets|cupertino|rendering)\.dart'"
   r"|^import '[^']*widgets/",
 );
+
+/// De toegestane richting van het verkeer tussen de lagen.
+///
+/// Sleutel = de map, waarde = de mappen die daaruit niet geïmporteerd mogen
+/// worden. Dit is een HARDE nul, geen ratchet: elke overtreding is er één te
+/// veel, en er zijn er vandaag geen.
+///
+/// De richting is nu schoon — niets in `lib/models/` kent `state/` of
+/// `widgets/`, niets in `lib/services/` kent `state/`, en niets in `lib/state/`
+/// kent `widgets/`. Dat bleef zo op discipline en op reviewers die het zagen.
+/// Eén import op een ongelukkige dag draait dat om, en dan is de kern niet meer
+/// headless te draaien of te testen zonder een widgetboom eromheen — met een
+/// cyclus tussen de lagen als volgende stap. Een reviewer die het mist is geen
+/// verwijt; een check die het nooit mist is goedkoper.
+///
+/// De UI-imports (`package:flutter/material` en `lib/widgets/`) worden apart
+/// geteld door [_uiImport] — dáár zit een ratchet omdat `slide_rasterizer`
+/// terecht widgets schildert. Deze lijst gaat over de rest van de richting.
+const Map<String, List<String>> layerRules = {
+  'lib/models/': ['state/', 'widgets/'],
+  'lib/services/': ['state/'],
+  'lib/state/': ['widgets/'],
+};
+
+/// Een import uit een van de verboden mappen, relatief of via `package:ocideck`.
+RegExp _forbiddenImport(String dir) =>
+    RegExp("^import '(?:package:ocideck/|[./]+)[^']*$dir");
 
 /// The token/palette homes, exempt from the raw-colour ratchet: the app theme
 /// and the deliberately-dark image-picker palette (its own dark chrome, not
@@ -251,6 +281,7 @@ void main() {
   final controlByteHits = <String>[];
   final quoteScanners = <String>[];
   final serviceUiImports = <String>[];
+  final layerViolations = <String>[];
   final modelUiImports = <String>[];
 
   for (final file in _dartFiles(Directory('lib'))) {
@@ -282,6 +313,14 @@ void main() {
       if ((isService || isModel) && _uiImport.hasMatch(line)) {
         (isModel ? modelUiImports : serviceUiImports).add('$path:${i + 1}');
       }
+      layerRules.forEach((from, forbidden) {
+        if (!path.startsWith(from)) return;
+        for (final dir in forbidden) {
+          if (_forbiddenImport(dir).hasMatch(line)) {
+            layerViolations.add('$path:${i + 1} → $dir');
+          }
+        }
+      });
     }
 
     if (!_isTranslationData(path)) {
@@ -316,6 +355,18 @@ void main() {
       'rauw Deck/List<Slide> accepteren, alleen een AudienceDeck (die alleen '
       'PrivacyProjection kan maken). Zie docs/design/OCIWACHT.md §6:\n'
       '    ${boundaryHits.join('\n    ')}',
+    );
+  }
+
+  if (layerViolations.isNotEmpty) {
+    failures.add(
+      'De laagrichting is doorbroken in ${layerViolations.length} '
+      'import(s). Een model of service dat de laag boven zich binnenhaalt is '
+      'niet meer los te draaien of te testen, en een cyclus tussen de lagen is '
+      'dan nog maar één import verderop. Verplaats de code naar beneden of '
+      'geef de bovenlaag een parameter mee (zie layerRules in '
+      'tool/check_conventions.dart):\n'
+      '    ${layerViolations.join('\n    ')}',
     );
   }
 
@@ -419,7 +470,8 @@ void main() {
       'Color(0x…) at $rawColorCount (baseline $rawColorBaseline); UI imports in '
       'lib/services at ${serviceUiImports.length} (baseline '
       '$serviceUiImportBaseline) and in lib/models at '
-      '${modelUiImports.length}; file sizes within ceilings.',
+      '${modelUiImports.length}; layer direction clean; file sizes within '
+      'ceilings.',
     );
     if (serviceUiImports.length < serviceUiImportBaseline) {
       stdout.writeln(

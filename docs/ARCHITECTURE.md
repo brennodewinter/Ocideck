@@ -130,6 +130,18 @@ lib/
   utils/      # small shared helpers (clipboard table parsing, URL launching)
 ```
 
+The direction of traffic between those layers is enforced, not just intended: a
+`check_conventions` guard (`layerRules`) fails the build when `models/` imports
+`state/` or `widgets/`, when `services/` imports `state/`, or when `state/`
+imports `widgets/`. All three are a hard zero. A separate ratchet
+(`serviceUiImportBaseline`, now 4) counts UI imports inside `services/`; the
+remaining four are in `slide_rasterizer`, which paints real widgets into an
+image and therefore has the widget tree as its subject.
+
+Together those keep the core headless: runnable and testable without pumping a
+widget tree, and acyclic between layers. They held on discipline alone until
+2026-07-22, which is exactly the kind of invariant a reviewer eventually misses.
+
 ## Data model
 
 - **`Deck`** holds metadata, a list of **`Slide`**s, the active **`ThemeProfile`**,
