@@ -1776,6 +1776,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Ange detta versionsnummer när du rapporterar ett säkerhetsproblem.',
   'Video niet ingesloten': 'Videon är inte inbäddad',
   'Afbeelding niet ingesloten': 'Bilden är inte inbäddad',
   'Dit diagram kon niet worden getekend': 'Det här diagrammet kunde inte ritas',

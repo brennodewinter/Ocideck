@@ -1768,6 +1768,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Märkige see versiooninumber, kui teatate turvaprobleemist.',
   'Video niet ingesloten': 'Videot ei manustatud',
   'Afbeelding niet ingesloten': 'Pilti ei manustatud',
   'Dit diagram kon niet worden getekend':

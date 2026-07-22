@@ -1777,6 +1777,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Ilmoita tämä versionumero, kun ilmoitat tietoturvaongelmasta.',
   'Video niet ingesloten': 'Videota ei upotettu',
   'Afbeelding niet ingesloten': 'Kuvaa ei upotettu',
   'Dit diagram kon niet worden getekend': 'Tätä kaaviota ei voitu piirtää',

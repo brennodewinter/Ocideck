@@ -1780,6 +1780,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Uveďte toto číslo verze, když nahlásíte bezpečnostní problém.',
   'Video niet ingesloten': 'Video není vloženo',
   'Afbeelding niet ingesloten': 'Obrázek není vložen',
   'Dit diagram kon niet worden getekend':

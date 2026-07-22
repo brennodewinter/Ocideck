@@ -734,6 +734,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Menshoná e number di vershon aki ora bo ta rapportá un problema di seguridat.',
   'Video niet ingesloten': 'Video no inkluí',
   'Afbeelding niet ingesloten': 'Imagen no inkluí',
   'Dit diagram kon niet worden getekend': 'No por a dibuhá e diagrama aki',

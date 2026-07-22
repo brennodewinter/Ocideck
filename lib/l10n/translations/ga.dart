@@ -1813,6 +1813,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Luaigh an uimhir leagain seo nuair a thuairiscíonn tú fadhb slándála.',
   'Video niet ingesloten': 'Físeán gan leabú',
   'Afbeelding niet ingesloten': 'Íomhá gan leabú',
   'Dit diagram kon niet worden getekend':

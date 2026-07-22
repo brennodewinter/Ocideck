@@ -1800,6 +1800,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Посочете този номер на версията, когато докладвате проблем със сигурността.',
   'Video niet ingesloten': 'Видеото не е вградено',
   'Afbeelding niet ingesloten': 'Изображението не е вградено',
   'Dit diagram kon niet worden getekend':

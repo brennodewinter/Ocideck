@@ -1784,6 +1784,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Navedite ovaj broj verzije kada prijavljujete sigurnosni problem.',
   'Video niet ingesloten': 'Videozapis nije ugrađen',
   'Afbeelding niet ingesloten': 'Slika nije ugrađena',
   'Dit diagram kon niet worden getekend':

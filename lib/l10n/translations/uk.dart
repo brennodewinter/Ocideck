@@ -1795,6 +1795,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Вкажіть цей номер версії, коли повідомляєте про проблему безпеки.',
   'Video niet ingesloten': 'Відео не вбудовано',
   'Afbeelding niet ingesloten': 'Зображення не вбудовано',
   'Dit diagram kon niet worden getekend': 'Не вдалося намалювати цю діаграму',

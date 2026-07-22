@@ -916,6 +916,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'State this version number when you report a security issue.',
   'Video niet ingesloten': 'Video not embedded',
   'Afbeelding niet ingesloten': 'Image not embedded',
   'Dit diagram kon niet worden getekend': 'This diagram could not be drawn',

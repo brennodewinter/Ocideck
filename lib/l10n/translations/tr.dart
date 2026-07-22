@@ -2759,6 +2759,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Bir güvenlik sorunu bildirirken bu sürüm numarasını belirtin.',
   'Video niet ingesloten': 'Video gömülmedi',
   'Afbeelding niet ingesloten': 'Görsel gömülmedi',
   'Dit diagram kon niet worden getekend': 'Bu diyagram çizilemedi',

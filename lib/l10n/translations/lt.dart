@@ -1785,6 +1785,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Nurodykite šį versijos numerį, kai pranešate apie saugumo problemą.',
   'Video niet ingesloten': 'Vaizdo įrašas neįterptas',
   'Afbeelding niet ingesloten': 'Paveikslėlis neįterptas',
   'Dit diagram kon niet worden getekend': 'Nepavyko nubraižyti šios diagramos',

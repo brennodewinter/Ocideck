@@ -731,6 +731,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Indique este número de versión cuando informe de un problema de seguridad.',
   'Video niet ingesloten': 'Vídeo no incrustado',
   'Afbeelding niet ingesloten': 'Imagen no incrustada',
   'Dit diagram kon niet worden getekend':
