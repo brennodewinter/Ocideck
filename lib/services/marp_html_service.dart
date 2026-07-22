@@ -6,19 +6,30 @@ import 'dart:ui' show Locale;
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../l10n/app_localizations.dart';
+import '../models/asset_overview_spec.dart';
 import '../models/chart.dart';
+import '../models/checklist_spec.dart';
 import '../models/cockpit.dart';
+import '../models/discoveries_spec.dart';
+import '../models/findings_summary_spec.dart';
 import '../models/question.dart';
 import '../models/deck.dart';
+import '../models/scope_matrix_spec.dart';
+import '../models/scorecard_spec.dart';
 import '../models/settings.dart';
 import '../models/timeline.dart';
 import '../utils/log.dart';
+import 'cvss/cvss4.dart';
 import 'export_metadata.dart';
+import 'markdown_table_codec.dart';
 
 part 'parts/marp_html_service_cockpit.dart';
 part 'parts/marp_html_service_charts.dart';
 part 'parts/marp_html_service_charts_radial.dart';
 part 'parts/marp_html_service_charts_bullet.dart';
+part 'parts/marp_html_service_reporting.dart';
+part 'parts/marp_html_service_reporting_miauw.dart';
+part 'parts/marp_html_service_reporting_css.dart';
 
 /// Builds a single, self-contained HTML file from a deck's Marp Markdown.
 ///
@@ -111,7 +122,12 @@ class MarpHtmlService {
         renderSignOffBlock(
           renderTimelineBlocks(
             renderMediaRedacted(
-              renderQuestionBlocks(renderChartBlocks(slide, theme: theme)),
+              renderQuestionBlocks(
+                renderChartBlocks(
+                  renderReportingSlide(slide, theme: theme),
+                  theme: theme,
+                ),
+              ),
             ),
           ),
           signature,
@@ -162,7 +178,7 @@ class MarpHtmlService {
         'connect-src \'none\'">'
         '<title>$title</title>'
         '$headMeta'
-        '<style>$_structuralCss\n$css\n$hljsCss</style>'
+        '<style>$_structuralCss\n$_reportingCss\n$css\n$hljsCss</style>'
         '<script nonce="$nonce">$_mathjaxConfig</script>'
         '${inline(marked)}'
         '${inline(purify)}'
@@ -532,6 +548,46 @@ class MarpHtmlService {
       .replaceAll('&', '&amp;')
       .replaceAll('<', '&lt;')
       .replaceAll('>', '&gt;');
+
+  // ── Rapportagedia's → HTML ────────────────────────────────────────────────
+
+  /// Vervangt de body van een rapportagedia door zijn eigen weergave.
+  ///
+  /// Zes slidetypes bewaren hun inhoud als een gewone Markdown-tabel, en de
+  /// export liet die tabel staan. In de app heeft elk van de zes een eigen
+  /// weergave — kaarten met een verandering, balken op één gedeelde schaal,
+  /// een dekkingsteller, gekleurde statuspillen — en juist bij de MIAUW-types
+  /// draagt die weergave de boodschap. Een klant kreeg in de HTML dus iets
+  /// anders dan de auteur had goedgekeurd.
+  ///
+  /// Een dia die geen rapportagetype is, komt onveranderd terug.
+  static String renderReportingSlide(
+    String slideMarkdown, {
+    ThemeProfile? theme,
+  }) {
+    final slide = _readReportingSlide(slideMarkdown);
+    if (slide == null) return slideMarkdown;
+    final html = switch (slide.cssClass) {
+      'scorecard' => _repScorecard(slide, theme),
+      'assets' => _repAssets(slide, theme),
+      'discoveries' => _repDiscoveries(slide, theme),
+      'checklist' => _repChecklist(slide, theme),
+      'scope-matrix' => _repScopeMatrix(slide, theme),
+      'findings-summary' => _repFindingsSummary(slide, theme),
+      _ => null,
+    };
+    if (html == null) return slideMarkdown;
+    // De kop en de tabel gaan op in de weergave; de overige regels (de
+    // `_class`-regel, notities, andere markeringen) blijven staan zodat de
+    // stappen na deze ze nog zien.
+    final kept = [
+      for (final line in slideMarkdown.split('\n'))
+        if (!isMarkdownTableLine(line) &&
+            _repHeading.firstMatch(line.trim()) == null)
+          line,
+    ];
+    return '${kept.join('\n')}\n\n$html\n';
+  }
 
   // ── Cockpit → inline SVG ──────────────────────────────────────────────────
 

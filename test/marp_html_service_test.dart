@@ -683,4 +683,191 @@ void main() {}
       isNot(contains('ocideck_media_redacted')),
     );
   });
+
+  group('rapportagedia\'s in de HTML-export', _reportingTests);
+}
+
+// ── Rapportagedia's ────────────────────────────────────────────────────────
+//
+// Zes slidetypes bewaren hun inhoud als een Markdown-tabel en vielen in de
+// export terug op precies dat. Deze tests bewaken dat elk van de zes zijn eigen
+// weergave krijgt, en dat de afgeleide getallen — de teller boven een
+// dekkingsbalk, de verandering op een scorecard — meekomen. Die zijn de reden
+// dat een tabel niet volstaat: ze staan nergens in de rijen.
+
+/// Bouwt de dia via de échte serialiser, zodat de test breekt zodra de
+/// opslagvorm verandert in plaats van een handgeschreven tabel te bevestigen.
+String _reportingSlideMarkdown(Slide slide) =>
+    MarkdownService().generateSlide(slide, forExport: true);
+
+void _reportingTests() {
+  test('een scorecard wordt een reeks kaarten met de verandering', () {
+    final slide = Slide.create(SlideType.scorecard).copyWith(
+      title: 'Kerncijfers',
+      tableRows: const [
+        ['Label', 'Value', 'Previous', 'Unit', 'Polarity'],
+        ['Open bevindingen', '12', '19', '', 'lower-better'],
+        ['Dekking', '87', '74', '%', 'higher-better'],
+      ],
+    );
+    final html = MarpHtmlService.renderReportingSlide(
+      _reportingSlideMarkdown(slide),
+    );
+
+    expect(html, contains('rep-scorecard'));
+    expect(html, contains('Open bevindingen'));
+    // De verandering is afgeleid en staat nergens in de tabel: minder open
+    // bevindingen is goed nieuws (lower-better), meer dekking ook.
+    expect(html, contains('-7'));
+    expect(html, contains('+13'));
+    expect(html, contains(RegExp('color:#15803D')));
+    // En de kale tabel is weg: dat was de hele klacht.
+    expect(html, isNot(contains('| Open bevindingen |')));
+  });
+
+  test('een aanvalsoppervlak krijgt balken op één gedeelde schaal', () {
+    final slide = Slide.create(SlideType.assets).copyWith(
+      title: 'Aanvalsoppervlak',
+      tableRows: const [
+        ['Group', 'Total', 'AtRisk', 'New', 'Unowned'],
+        ['Web', '200', '50', '3', '1'],
+        ['Mail', '50', '0', '0', '0'],
+      ],
+    );
+    final html = MarpHtmlService.renderReportingSlide(
+      _reportingSlideMarkdown(slide),
+    );
+
+    expect(html, contains('rep-assets'));
+    // Mail is een kwart van Web, niet even breed: de schaal is gedeeld.
+    expect(html, contains('width:100.0%'));
+    expect(html, contains('width:25.0%'));
+    // Het totaal is afgeleid, niet ingetypt.
+    expect(html, contains('>250<'));
+  });
+
+  test('een ontdekking zonder bekende blootstelling krijgt geen balk', () {
+    final slide = Slide.create(SlideType.discoveries).copyWith(
+      title: 'Ontdekkingen',
+      tableRows: const [
+        ['Discovery', 'Kind', 'DaysUnnoticed', 'Owner'],
+        ['oud.klant.nl', 'Web', '420', ''],
+        ['vpn.klant.nl', 'Infra', '', 'Team Netwerk'],
+      ],
+    );
+    final html = MarpHtmlService.renderReportingSlide(
+      _reportingSlideMarkdown(slide),
+    );
+
+    expect(html, contains('rep-discoveries'));
+    // 420 dagen leest als 14 maanden, en dat is de kop van de dia.
+    expect(html, contains('14 maanden'));
+    expect(html, contains('langst onopgemerkt bereikbaar'));
+    // "onbekend" is geen nul: een lege baan zou "meteen gevonden" beweren.
+    expect(html, contains('onbekend'));
+    expect('class="rep-bar"'.allMatches(html).length, 1);
+    expect(html, contains('geen eigenaar'));
+  });
+
+  test('een checklist krijgt haar voortgang en gekleurde statuspillen', () {
+    final slide = Slide.create(SlideType.checklist).copyWith(
+      title: 'Checklist — OWASP WSTG',
+      checklistScope: 'portaal.klant.nl',
+      tableRows: const [
+        ['ID', 'Test', 'Status', 'Finding', 'Note'],
+        ['WSTG-INFO-01', 'Zoekmachines', 'Tested', '—', ''],
+        ['WSTG-CONF-02', 'Beheerinterfaces', 'Anomaly', 'BEV-03', ''],
+        ['WSTG-SESS-01', 'Sessiebeheer', '', '—', ''],
+      ],
+    );
+    final html = MarpHtmlService.renderReportingSlide(
+      _reportingSlideMarkdown(slide),
+    );
+
+    expect(html, contains('rep-checklist'));
+    // 2 van de 3 getoetst — afgeleid, nergens opgeslagen.
+    expect(html, contains('2/3 getoetst'));
+    expect(html, contains('Scope-object'));
+    expect(html, contains('portaal.klant.nl'));
+    expect(html, contains('Afwijking'));
+    // Een afwijking is rood, niet zomaar een woord in een kolom.
+    expect(html, contains('color:#B91C1C'));
+    expect(html, contains('BEV-03'));
+  });
+
+  test('een scope-matrix krijgt haar dekkingsteller en standaard', () {
+    final slide = Slide.create(SlideType.scopeMatrix).copyWith(
+      title: 'Scope-matrix',
+      tableRows: const [
+        ['Object', 'Type', 'Standard', 'Status', 'Note', 'C', 'I', 'A'],
+        ['portaal.klant.nl', 'Web', 'WSTG', 'Tested', '', '', '', ''],
+        ['app iOS', 'Mobile', 'MASTG', 'Unreachable', '', '', '', ''],
+      ],
+    );
+    final html = MarpHtmlService.renderReportingSlide(
+      _reportingSlideMarkdown(slide),
+    );
+
+    expect(html, contains('rep-scope'));
+    // Onbereikbaar telt níét als getoetst — dat is de hele reden dat de teller
+    // afgeleid is en niet opgeteld uit de rijen.
+    expect(html, contains('1/2 gedekt'));
+    expect(html, contains('MASTG'));
+    expect(html, contains('Onbereikbaar'));
+  });
+
+  test('een bevindingenoverzicht wordt een staafje per ernstband', () {
+    final slide = Slide.create(SlideType.findingsSummary).copyWith(
+      title: 'Bevindingenoverzicht',
+      tableRows: const [
+        ['Severity', 'Count'],
+        ['Critical', '2'],
+        ['High', '4'],
+        ['Medium', '8'],
+        ['Low', '0'],
+        ['None', '0'],
+        ['Resolved', '5'],
+      ],
+    );
+    final html = MarpHtmlService.renderReportingSlide(
+      _reportingSlideMarkdown(slide),
+    );
+
+    expect(html, contains('rep-findings'));
+    // 2 + 4 + 8 — afgeleid, en de hertest staat er los naast.
+    expect(html, contains('Totaal: 14'));
+    expect(html, contains('Opgelost na hertest: 5'));
+    // De hoogste band vult de staaf; de rest schaalt eraan mee.
+    expect(html, contains('height:100.0%'));
+    expect(html, contains('height:25.0%'));
+    expect(html, contains('Kritiek'));
+    expect(html, contains('Informatief'));
+  });
+
+  test('een gewone dia komt onveranderd terug', () {
+    const md = '# Gewone dia\n\n| A | B |\n| --- | --- |\n| 1 | 2 |\n';
+    expect(MarpHtmlService.renderReportingSlide(md), md);
+  });
+
+  test('een tabeldia blijft een tabel', () {
+    final slide = Slide.create(SlideType.table).copyWith(
+      title: 'Planning',
+      tableRows: const [
+        ['Fase', 'Datum'],
+        ['Start', '2026-01'],
+      ],
+    );
+    final md = _reportingSlideMarkdown(slide);
+    expect(MarpHtmlService.renderReportingSlide(md), md);
+  });
+
+  test('de opmaak van de rapportagedia\'s zit in de export', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    final html = await service.build('# X');
+    // Thema-onafhankelijk, dus altijd meegestuurd — dezelfde les als bij de
+    // tijdlijn, die zijn opmaak verloor zodra er een thema meeging.
+    expect(html, contains('.slide .rep-title'));
+    expect(html, contains('.slide .sc-card'));
+    expect(html, contains('.slide .fs-bar'));
+  });
 }
