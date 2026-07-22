@@ -18,7 +18,10 @@ import '../../services/privacy/privacy_regions.dart';
 import '../../services/reference_standards.dart';
 import '../../services/ai_client_service.dart';
 import '../../services/ai_security_gate.dart';
+import '../../services/disk_traces.dart';
 import '../../services/file_service.dart';
+import '../../services/git/outbox.dart';
+import '../../services/secret_store.dart';
 import '../../services/recovery_service.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/git/git_forge.dart';
@@ -476,13 +479,97 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     });
   }
 
+  /// Verbindingen waarvan de gebruiker heeft bevestigd dat hun wachtende,
+  /// nog niet gepushte werk verloren mag gaan. Zie [_removeConnection].
+  final Set<String> _discardPendingWorkFor = {};
+
   /// Verwijder een verbinding uit de bewerkkopie. Het formulier blijft staan:
   /// pas bij Opslaan telt de lijst, en tot dan mag Annuleren alles terugdraaien.
-  void _removeConnection(String id) {
+  ///
+  /// Bij een git-verbinding wordt bij Opslaan ook de werkkopie op schijf
+  /// gewist — de hele repo-inhoud mét historie. Wacht daar nog werk in dat
+  /// nergens anders bestaat, dan is dat dataverlies, en dan hoort de gebruiker
+  /// éérst te horen wát hij kwijtraakt.
+  Future<void> _removeConnection(String id) async {
+    final connection = _connections.where((c) => c.id == id).firstOrNull;
+    if (connection is GitConnection) {
+      final pending = await DiskTraces().pendingCommitsFor(
+        connection.repo.storageSlug,
+      );
+      if (!mounted) return;
+      if (pending.isNotEmpty) {
+        final go = await _confirmDiscardPendingWork(connection, pending);
+        if (!go || !mounted) return;
+        _discardPendingWorkFor.add(id);
+      }
+    }
     setState(() {
       _connections.removeWhere((c) => c.id == id);
       if (_expandedConnectionId == id) _expandedConnectionId = null;
     });
+  }
+
+  /// Vraagt of het wachtende werk van [connection] weg mag, en noemt het bij
+  /// naam: welk deck, op welke tak, met welke boodschap. Een aantal alleen zegt
+  /// niets — de gebruiker moet kunnen herkennen of dít het werk is waar hij
+  /// gisteren een uur aan zat.
+  Future<bool> _confirmDiscardPendingWork(
+    GitConnection connection,
+    List<PendingCommit> pending,
+  ) async {
+    final l10n = context.l10n;
+    final answer = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.d('Er wacht nog werk dat niet verstuurd is')),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              l10n.d(
+                'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.',
+              ),
+              style: const TextStyle(fontSize: 13),
+            ),
+            const SizedBox(height: 10),
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 200),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final commit in pending)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 3),
+                        child: Text(
+                          '•  ${commit.deckDir}  ·  ${commit.branch}  ·  ${commit.message}',
+                          style: TextStyle(
+                            fontSize: 12.5,
+                            color: AppTheme.slate600,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(l10n.d('Verbinding behouden')),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(l10n.d('Toch verwijderen')),
+          ),
+        ],
+      ),
+    );
+    return answer ?? false;
   }
 
   /// Hernoem een verbinding in de bewerkkopie.
@@ -569,7 +656,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _saved = true;
     final notifier = ref.read(settingsProvider.notifier);
     final profile = _editedProfile();
-    notifier.setConnections(_normalizedConnections());
+    notifier.setConnections(
+      _normalizedConnections(),
+      discardPendingWorkFor: _discardPendingWorkFor,
+    );
     notifier.setExportDirectory(_exportDirectory);
     notifier.saveThemeProfile(profile, previousName: _originalName);
     if (_appearanceProfile.isBuiltIn) {

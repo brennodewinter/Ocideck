@@ -105,7 +105,11 @@ Future<bool> saveDeckWithDestination(
   final settings = ref.read(settingsProvider);
   final isNewDeck = deckNotifier.currentState.filePath == null;
   if (!isNewDeck || !supportsLocalProjectFolders) {
-    return deckNotifier.save(initialDirectory: settings.homeDirectory);
+    return withSaveProgress(
+      ref,
+      SaveTarget.local,
+      () => deckNotifier.save(initialDirectory: settings.homeDirectory),
+    );
   }
   final choice = await SaveDestinationDialog.show(
     context,
@@ -113,7 +117,11 @@ Future<bool> saveDeckWithDestination(
     deckTitle: deckNotifier.currentState.deck?.title ?? '',
   );
   if (choice == null || !context.mounted) return false;
-  return deckNotifier.save(initialDirectory: choice.directory);
+  return withSaveProgress(
+    ref,
+    SaveTarget.local,
+    () => deckNotifier.save(initialDirectory: choice.directory),
+  );
 }
 
 /// Waarschuwt dat een kale .md-download de geheugenmedia niet bewaart, en vraagt

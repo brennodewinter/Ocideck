@@ -123,10 +123,11 @@ Future<({Deck deck, List<String> missing})> withRepoChartData(
 ///
 /// De git-opslag schrijft `deck.md`, de afbeeldingenpool en de grafiekdata. Alle
 /// overige lagen blijven achter: video en audio round-trippen nog niet, en de
-/// twee sidecars (`.ink.json` met de tekeningen, `.user-notes.json` met de
-/// notities) worden nergens in `services/git/` geschreven. Op schijf gaan die
-/// wél mee, dus wie van een bestand naar git verhuist raakt ze kwijt zonder dat
-/// er iets misgaat waar de app op kan wijzen.
+/// sidecars (`.ink.json` met de tekeningen, `.user-notes.json` met de notities,
+/// `.seal.json` met het zegel en de handtekening) worden nergens in
+/// `services/git/` geschreven. Op schijf gaan die wél mee, dus wie van een
+/// bestand naar git verhuist raakt ze kwijt zonder dat er iets misgaat waar de
+/// app op kan wijzen.
 ///
 /// Dit meenemen is een grotere ingreep dan een waarschuwing; de waarschuwing kan
 /// niet wachten. De UI toont hem vóór de commit — daarna is de keuze al gemaakt.
@@ -143,18 +144,29 @@ class GitDeckOmissions {
   /// Dia's met gebruikersnotities; die notities gaan niet mee.
   final int noteSlides;
 
+  /// Of het deck een zegel of een handtekening draagt die niet meegaat.
+  ///
+  /// Zwaarder dan de andere drie, want hier verdwijnt niet alleen werk maar een
+  /// verklaring: een verzegeld rapport dat via git terugkomt, leest als een
+  /// rapport dat nooit verzegeld is. Sinds 0.1.0 staat het zegel naast de
+  /// markdown in plaats van erin, dus het reist niet meer vanzelf mee in
+  /// `deck.md` — precies de stilte waar deze waarschuwing voor bestaat.
+  final bool sealed;
+
   const GitDeckOmissions({
     this.videoSlides = 0,
     this.audioSlides = 0,
     this.annotatedSlides = 0,
     this.noteSlides = 0,
+    this.sealed = false,
   });
 
   bool get isEmpty =>
       videoSlides == 0 &&
       audioSlides == 0 &&
       annotatedSlides == 0 &&
-      noteSlides == 0;
+      noteSlides == 0 &&
+      !sealed;
 
   bool get isNotEmpty => !isEmpty;
 }
@@ -183,6 +195,7 @@ GitDeckOmissions gitDeckOmissions(Deck deck) {
     audioSlides: audio,
     annotatedSlides: ink,
     noteSlides: notes,
+    sealed: deck.finalized || (deck.signature?.isNotEmpty ?? false),
   );
 }
 

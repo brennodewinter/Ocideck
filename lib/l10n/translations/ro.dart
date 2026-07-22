@@ -1778,8 +1778,6 @@ const _dutchSourceRo = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Finalizează și sigilează',
   'Verzegelen': 'Sigilează',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Finalizați această prezentare și calculați un sigiliu SHA-512 asupra conținutului. Fișierul este apoi blocat și nu mai poate fi editat; modificările ulterioare devin vizibile. Această acțiune nu poate fi anulată în aplicație.',
   'Handtekening (optioneel)': 'Semnătură (opțional)',
   'Naam': 'Nume',
   'Rol of functie': 'Rol sau funcție',
@@ -1797,6 +1795,94 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Acest deck conține text IA pe care nu l-ai verificat încă. Exportul este totuși posibil; fișierul semnalează el însuși acest lucru și primește "-ai-concept" în nume.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Schiță: conține text IA pe care nimeni nu l-a verificat încă',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalizați această prezentare și consemnați un sigiliu SHA-512 asupra fișierului salvat. Acesta este apoi blocat și nu mai poate fi editat; orice modificare ulterioară devine vizibilă. Cine primește raportul verifică singur sigiliul cu sha512sum. Această acțiune nu poate fi anulată în aplicație.',
+  'Zegel en handtekening': 'Sigiliu și semnătură',
+  'Zegel nog niet vastgelegd': 'Sigiliu încă neînregistrat',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Încă nu există un fișier salvat față de care să fie verificat sigiliul. Salvați deck-ul.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Omiterea este activă: ceea ce verificarea consideră dată cu caracter personal este înnegrit, iar toate imaginile, videoclipurile și sunetul acestui slide nu ajung pe ecran sau în export. Fișierul tău markdown păstrează tot.',
+  'Bestand': 'Fișier',
+  'Venster': 'Fereastră',
+  'Help': 'Ajutor',
+  'Alles selecteren': 'Selectează tot',
+  'Plakken': 'Lipește',
+  'Opnieuw': 'Refă',
+  'Eigenschappen': 'Proprietăți',
+  'Opdrachten…': 'Comenzi…',
+  'Opslaan…': 'Se salvează…',
+  'Uploaden naar WebDAV…': 'Se încarcă în WebDAV…',
+  'Uploaden naar S3…': 'Se încarcă în S3…',
+  'Vastleggen in git…': 'Se înregistrează în git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Se salvează. O nouă salvare nu face nimic până când aceasta nu se încheie.',
+  'Klaar — privacy niet gecontroleerd':
+      'Gata — confidențialitatea nu a fost verificată',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Nu s-au căutat date personale, date din categorii speciale și secrete: verificarea de confidențialitate este dezactivată la Securitate.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Prezentări care rămân simple fișiere Markdown: lizibile, în care se poate căuta și care se deschid cu orice editor.',
+  'sjablonen om mee te beginnen, of leeg': 'șabloane pentru a începe sau goală',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Slide-urile de exemplu ale unui șablon sunt în neerlandeză. Numele și descrierea urmează limba ta; conținutul îl adaptezi după creare.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Omiterea este activă: datele găsite sunt înnegrite, iar toate imaginile, videoclipurile și sunetul acestui slide nu ajung pe ecran sau în export. Fișierul tău markdown păstrează tot.',
+  'Mijn tekst': 'Textul meu',
+  'Wat zij zien': 'Ce văd ei',
+  'Presentatiegegevens': 'Datele prezentării',
+  'Open presentatiegegevens': 'Deschide datele prezentării',
+  'Motivering van een uitsluiting': 'Justificarea unei excluderi',
+  'Motivering van een bevestiging': 'Justificarea unei confirmări',
+  'Tabel koprij, kolom {kolom}': 'Tabel rând de antet, coloana {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabel rândul {rij}, coloana {kolom}',
+  'Via deze website ophalen?': 'Preluare prin acest site?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Serverul acestei prezentări nu a lăsat browserul să citească fișierul direct. OciDeck poate transmite adresa către site-ul de la care vine însuși OciDeck, iar acel site îl preia. Astfel, acel site vede adresa completă — dacă în link există o cheie sau un cod, acel site le vede și pe acestea.',
+  'In de browser kan dit niet worden bewaard':
+      'În browser acest lucru nu poate fi salvat',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Un browser nu are un inel de chei așa cum are un computer: ce ar salva OciDeck aici poate citi orice script de pe această pagină. Folosește versiunea desktop — acolo secretul ajunge într-adevăr în inelul de chei al sistemului de operare.',
+  'Licenties van derden': 'Licențe ale terților',
+  'Alle licentieteksten tonen': 'Afișează toate textele licențelor',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck în sine este licențiat sub EUPL-1.2. În plus, include software terț: pachetele Dart și Flutter, două module incluse, patru familii de fonturi, modelul facial pentru verificarea confidențialității și JavaScript-ul care călătorește odată cu un export HTML. Fiecare își păstrează propria licență.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Acest fișier conține software terț și uneori un font. Mai jos se află textele complete ale licențelor aferente; transmite-le împreună cu fișierul.',
+  'Sporen op dit apparaat': 'Urme pe acest dispozitiv',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Pe lângă setările tale, OciDeck păstrează și o listă a fișierelor recente, iar la o blocare, un fișier de recuperare cu întregul conținut al prezentării tale. Nimic din toate acestea nu părăsește dispozitivul, dar se află aici — în text simplu, protejat de contul tău din acest sistem de operare și de nimic mai mult.',
+  'Recent geopende presentaties': 'Prezentări deschise recent',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Lista păstrează calea completă și clasificarea fiecărei prezentări care a fost deschisă — împreună, o informație despre la ce lucrezi și pentru cine.',
+  'Recente lijst wissen': 'Șterge lista fișierelor recente',
+  'De recente lijst was al leeg.': 'Lista fișierelor recente era deja goală.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'intrare/intrări șterse din lista fișierelor recente.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Fișierele de recuperare conțin întregul conținut al prezentărilor tale în text simplu. Sunt curățate automat după 7 zile, iar la o închidere corectă, imediat.',
+  'Alles terugzetten': 'Resetează tot',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Șterge toate setările, lista fișierelor recente, fișierele de recuperare, copiile de lucru git și parolele din inelul tău de chei. Prezentările tale rămân: sunt ale tale, nu ale OciDeck.',
+  'Zet alles terug naar de begintoestand': 'Resetează tot la starea inițială',
+  'Alles terugzetten naar de begintoestand?':
+      'Resetezi tot la starea inițială?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Vor fi șterse setările tale, lista fișierelor recente, fișierele de recuperare, copiile de lucru git și parolele salvate. Această acțiune nu poate fi anulată. Prezentările tale rămân.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'modificare/modificări nu au fost încă trimise pe un server git și există doar pe acest dispozitiv. Și acelea dispar.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Totul a fost readus la starea inițială.',
+  'Terugzetten is niet gelukt.': 'Resetarea nu a reușit.',
+  'Er wacht nog werk dat niet verstuurd is': 'Mai există lucru netrimis',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Această conexiune git are modificări care încă nu au fost trimise pe server. Dacă elimini conexiunea, dispare și copia de lucru de pe acest dispozitiv — iar munca aceasta nu va mai exista nicăieri.',
+  'Verbinding behouden': 'Păstrează conexiunea',
+  'Toch verwijderen': 'Elimină oricum',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

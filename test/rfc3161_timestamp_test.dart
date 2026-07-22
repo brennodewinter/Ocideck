@@ -75,7 +75,7 @@ void main() {
         '20260721120000Z',
         nonce: const [0x00, 0x00, 0x00, 0x01],
       );
-      expect(timeStampMatchesHash(token, hexOf(hash)), isTrue);
+      expect(timeStampImprintMatchesHash(token, hexOf(hash)), isTrue);
       expect(timeStampEchoesNonce(token, nonce), isFalse);
     });
 
@@ -187,10 +187,10 @@ void main() {
     });
   });
 
-  group('timeStampMatchesHash', () {
+  group('timeStampImprintMatchesHash', () {
     test('true when the imprint equals the seal hash', () {
       expect(
-        timeStampMatchesHash(
+        timeStampImprintMatchesHash(
           fakeTimeStampToken(hash, '20260712120000Z'),
           hexOf(hash),
         ),
@@ -200,7 +200,7 @@ void main() {
 
     test('false for a different hash', () {
       expect(
-        timeStampMatchesHash(
+        timeStampImprintMatchesHash(
           fakeTimeStampToken(hash, '20260712120000Z'),
           'deadbeef',
         ),

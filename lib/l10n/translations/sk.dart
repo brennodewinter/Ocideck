@@ -1767,8 +1767,6 @@ const _dutchSourceSk = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Dokončiť a zapečatiť',
   'Verzegelen': 'Zapečatiť',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Dokončite túto prezentáciu a vypočítajte pečať SHA-512 z jej obsahu. Súbor sa potom uzamkne a už ho nemožno upravovať; neskoršie zmeny sa stanú viditeľnými. Túto akciu nemožno v aplikácii vrátiť späť.',
   'Handtekening (optioneel)': 'Podpis (voliteľné)',
   'Naam': 'Meno',
   'Rol of functie': 'Rola alebo funkcia',
@@ -1786,6 +1784,95 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'V tejto prezentácii je AI text, ktorý si zatiaľ neskontroloval. Export je aj tak možný; súbor to sám uvádza a dostane v názve "-ai-concept".',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Koncept: obsahuje AI text, ktorý zatiaľ nikto neskontroloval',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Dokončite túto prezentáciu a zaznamenajte pečať SHA-512 nad uloženým súborom. Ten sa potom uzamkne a už ho nemožno upravovať; každá neskoršia zmena sa stane viditeľnou. Kto správu dostane, overí si pečať sám pomocou sha512sum. Túto akciu nemožno v aplikácii vrátiť späť.',
+  'Zegel en handtekening': 'Pečať a podpis',
+  'Zegel nog niet vastgelegd': 'Pečať zatiaľ nezaznamenaná',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Zatiaľ neexistuje uložený súbor, voči ktorému by sa dala pečať prepočítať. Uložte balík.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Vynechanie je zapnuté: to, čo kontrola označí za osobný údaj, sa začierni a všetky obrázky, video aj zvuk tejto snímky nejdú na obrazovku ani do exportu. Tvoj súbor markdown si všetko ponechá.',
+  'Bestand': 'Súbor',
+  'Venster': 'Okno',
+  'Help': 'Pomocník',
+  'Alles selecteren': 'Vybrať všetko',
+  'Plakken': 'Prilepiť',
+  'Opnieuw': 'Znova',
+  'Eigenschappen': 'Vlastnosti',
+  'Opdrachten…': 'Príkazy…',
+  'Opslaan…': 'Ukladanie…',
+  'Uploaden naar WebDAV…': 'Nahrávanie na WebDAV…',
+  'Uploaden naar S3…': 'Nahrávanie na S3…',
+  'Vastleggen in git…': 'Zápis do gitu…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Prebieha ukladanie. Opätovné uloženie neurobí nič, kým sa toto neskončí.',
+  'Klaar — privacy niet gecontroleerd': 'Hotovo — súkromie neskontrolované',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Osobné údaje, osobitné kategórie údajov ani tajomstvá sa nekontrolovali: kontrola súkromia je vypnutá v časti Zabezpečenie.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Prezentácie, ktoré zostávajú obyčajnými súbormi Markdown: čitateľné, prehľadávateľné a otvoriteľné v ľubovoľnom editore.',
+  'sjablonen om mee te beginnen, of leeg': 'šablón na začiatok alebo prázdna',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Ukážkové snímky šablóny sú v holandčine. Názov a popis sa riadia tvojím jazykom; obsah upravíš po vytvorení.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Vynechanie je zapnuté: nájdené údaje sa začiernia a všetky obrázky, video aj zvuk tejto snímky nejdú na obrazovku ani do exportu. Tvoj súbor markdown si všetko ponechá.',
+  'Mijn tekst': 'Môj text',
+  'Wat zij zien': 'Čo vidia oni',
+  'Presentatiegegevens': 'Údaje prezentácie',
+  'Open presentatiegegevens': 'Otvoriť údaje prezentácie',
+  'Motivering van een uitsluiting': 'Odôvodnenie výnimky',
+  'Motivering van een bevestiging': 'Odôvodnenie potvrdenia',
+  'Tabel koprij, kolom {kolom}': 'Tabuľka hlavička, stĺpec {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabuľka riadok {rij}, stĺpec {kolom}',
+  'Via deze website ophalen?': 'Načítať cez túto webovú stránku?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Server tejto prezentácie nedovolil prehliadaču prečítať súbor priamo. OciDeck môže odovzdať adresu webovej stránke, z ktorej sám pochádza, a tá súbor načíta. Tá webová stránka tak vidí celú adresu — ak je v odkaze kľúč alebo kód, vidí aj ten.',
+  'In de browser kan dit niet worden bewaard':
+      'V prehliadači sa to nedá uložiť',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Prehliadač nemá zväzok kľúčov, aký má počítač: to, čo by tu OciDeck uložil, dokáže prečítať ktorýkoľvek skript na tejto stránke. Použite desktopovú verziu — tam sa tajomstvo naozaj uloží do zväzku kľúčov operačného systému.',
+  'Licenties van derden': 'Licencie tretích strán',
+  'Alle licentieteksten tonen': 'Zobraziť všetky texty licencií',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Samotný OciDeck je pod licenciou EUPL-1.2. Okrem toho pribaľuje softvér tretích strán: balíky Dart a Flutter, dva priložené doplnky, štyri rodiny písem, model tváre pre kontrolu súkromia a JavaScript, ktorý cestuje s exportom do HTML. Každý si ponecháva vlastnú licenciu.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Tento súbor obsahuje softvér tretích strán a niekedy aj písmo. Nižšie sú úplné texty príslušných licencií; odovzdaj ich spolu so súborom.',
+  'Sporen op dit apparaat': 'Stopy na tomto zariadení',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Okrem vašich nastavení uchováva OciDeck aj zoznam nedávnych súborov a pri páde súbor obnovenia s úplným obsahom vašej prezentácie. Nič z toho neopúšťa toto zariadenie, ale je to tu — v čistom texte, chránené vaším účtom v tomto operačnom systéme a ničím ďalším.',
+  'Recent geopende presentaties': 'Naposledy otvorené prezentácie',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Zoznam uchováva úplnú cestu a klasifikáciu každej prezentácie, ktorá bola otvorená — dohromady je to údaj o tom, na čom pracujete a pre koho.',
+  'Recente lijst wissen': 'Vymazať zoznam nedávnych súborov',
+  'De recente lijst was al leeg.': 'Zoznam nedávnych súborov už bol prázdny.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'položiek vymazaných zo zoznamu nedávnych súborov.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Súbory obnovenia obsahujú úplný obsah vašich prezentácií v čistom texte. Automaticky sa vyčistia po 7 dňoch a pri riadnom ukončení hneď.',
+  'Alles terugzetten': 'Vrátiť všetko',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Vymaže všetky nastavenia, zoznam nedávnych súborov, súbory obnovenia, pracovné kópie git a heslá vo vašom zväzku kľúčov. Vaše prezentácie zostávajú: patria vám, nie OciDecku.',
+  'Zet alles terug naar de begintoestand':
+      'Vrátiť všetko do počiatočného stavu',
+  'Alles terugzetten naar de begintoestand?':
+      'Vrátiť všetko do počiatočného stavu?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Vaše nastavenia, zoznam nedávnych súborov, súbory obnovenia, pracovné kópie git a uložené heslá budú vymazané. Tento krok sa nedá vrátiť späť. Vaše prezentácie zostávajú.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'zmien zatiaľ nebolo odoslaných na git server a existujú len na tomto zariadení. Aj tie zmiznú.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Všetko bolo vrátené do počiatočného stavu.',
+  'Terugzetten is niet gelukt.':
+      'Vrátenie do počiatočného stavu sa nepodarilo.',
+  'Er wacht nog werk dat niet verstuurd is': 'Čaká ešte neodoslaná práca',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Toto git pripojenie má zmeny, ktoré ešte neboli odoslané na server. Keď pripojenie odstránite, zmizne aj pracovná kópia na tomto zariadení — a táto práca už nebude existovať nikde.',
+  'Verbinding behouden': 'Ponechať pripojenie',
+  'Toch verwijderen': 'Napriek tomu odstrániť',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

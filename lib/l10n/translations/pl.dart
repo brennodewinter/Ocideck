@@ -1771,8 +1771,6 @@ const _dutchSourcePl = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Sfinalizuj i zapieczętuj',
   'Verzegelen': 'Zapieczętuj',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Sfinalizuj tę prezentację i oblicz pieczęć SHA-512 na jej zawartości. Plik zostanie następnie zablokowany i nie będzie można go już edytować; późniejsze zmiany staną się widoczne. Tego nie można cofnąć w aplikacji.',
   'Handtekening (optioneel)': 'Podpis (opcjonalnie)',
   'Naam': 'Imię i nazwisko',
   'Rol of functie': 'Rola lub funkcja',
@@ -1791,6 +1789,94 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'W tej talii jest tekst AI, którego jeszcze nie sprawdziłeś. Eksport jest możliwy; plik sam o tym informuje i dostaje "-ai-concept" w nazwie.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Szkic: zawiera tekst AI, którego nikt jeszcze nie sprawdził',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Sfinalizuj tę prezentację i utrwal pieczęć SHA-512 na zapisanym pliku. Plik zostanie następnie zablokowany i nie będzie można go już edytować; każda późniejsza zmiana stanie się widoczna. Kto otrzyma raport, sam sprawdzi pieczęć za pomocą sha512sum. Tego nie można cofnąć w aplikacji.',
+  'Zegel en handtekening': 'Pieczęć i podpis',
+  'Zegel nog niet vastgelegd': 'Pieczęć jeszcze nie zapisana',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Nie ma jeszcze zapisanego pliku, względem którego można sprawdzić pieczęć. Zapisz prezentację.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Pomijanie jest włączone: to, co kontrola uznaje za dane osobowe, jest zaczerniane, a wszystkie obrazy, wideo i dźwięk z tego slajdu nie trafiają na ekran ani do eksportu. Twój plik markdown zachowuje wszystko.',
+  'Bestand': 'Plik',
+  'Venster': 'Okno',
+  'Help': 'Pomoc',
+  'Alles selecteren': 'Zaznacz wszystko',
+  'Plakken': 'Wklej',
+  'Opnieuw': 'Ponów',
+  'Eigenschappen': 'Właściwości',
+  'Opdrachten…': 'Polecenia…',
+  'Opslaan…': 'Zapisywanie…',
+  'Uploaden naar WebDAV…': 'Wysyłanie do WebDAV…',
+  'Uploaden naar S3…': 'Wysyłanie do S3…',
+  'Vastleggen in git…': 'Zatwierdzanie w git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Trwa zapisywanie. Ponowne zapisanie nic nie zrobi, dopóki to się nie zakończy.',
+  'Klaar — privacy niet gecontroleerd': 'Gotowe — prywatność niesprawdzona',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Nie sprawdzono danych osobowych, danych szczególnych kategorii ani sekretów: kontrola prywatności jest wyłączona w sekcji Bezpieczeństwo.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Prezentacje, które pozostają zwykłymi plikami Markdown: czytelne, przeszukiwalne i możliwe do otwarcia w dowolnym edytorze.',
+  'sjablonen om mee te beginnen, of leeg': 'szablonów na początek albo pusta',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Przykładowe slajdy szablonu są po niderlandzku. Nazwa i opis podążają za Twoim językiem; treść dostosujesz po utworzeniu.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Pomijanie jest włączone: znalezione dane są zaczernione, a wszystkie obrazy, wideo i dźwięk z tego slajdu nie trafiają na ekran ani do eksportu. Twój plik markdown zachowuje wszystko.',
+  'Mijn tekst': 'Mój tekst',
+  'Wat zij zien': 'Co widzą',
+  'Presentatiegegevens': 'Dane prezentacji',
+  'Open presentatiegegevens': 'Otwórz dane prezentacji',
+  'Motivering van een uitsluiting': 'Uzasadnienie wyłączenia',
+  'Motivering van een bevestiging': 'Uzasadnienie potwierdzenia',
+  'Tabel koprij, kolom {kolom}': 'Tabela wiersz nagłówka, kolumna {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabela wiersz {rij}, kolumna {kolom}',
+  'Via deze website ophalen?': 'Pobrać przez tę witrynę?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Serwer tej prezentacji nie pozwolił przeglądarce odczytać pliku bezpośrednio. OciDeck może przekazać adres witrynie, z której sam pochodzi, a ona go pobierze. Ta witryna zobaczy wtedy pełny adres — jeśli w linku jest klucz lub kod, ta witryna zobaczy również jego.',
+  'In de browser kan dit niet worden bewaard':
+      'W przeglądarce nie można tego zapisać',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Przeglądarka nie ma pęku kluczy, jaki ma komputer: to, co OciDeck by tu zapisał, może odczytać dowolny skrypt na tej stronie. Użyj wersji desktopowej — tam sekret trafia naprawdę do pęku kluczy systemu operacyjnego.',
+  'Licenties van derden': 'Licencje stron trzecich',
+  'Alle licentieteksten tonen': 'Pokaż wszystkie teksty licencji',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Sam OciDeck jest objęty licencją EUPL-1.2. Poza tym dołącza oprogramowanie stron trzecich: pakiety Dart i Flutter, dwie dołączone wtyczki, cztery rodziny krojów pisma, model twarzy do kontroli prywatności oraz JavaScript, który podróżuje z eksportem HTML. Każdy z nich zachowuje własną licencję.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Ten plik zawiera oprogramowanie stron trzecich, a czasem także krój pisma. Poniżej znajdują się pełne teksty odpowiednich licencji; przekaż je razem z plikiem.',
+  'Sporen op dit apparaat': 'Ślady na tym urządzeniu',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Poza ustawieniami OciDeck przechowuje też listę ostatnich plików, a po awarii plik odzyskiwania z pełną treścią prezentacji. Nic z tego nie opuszcza tego urządzenia, ale tu leży — zwykłym tekstem, chronione przez twoje konto w tym systemie operacyjnym i przez nic więcej.',
+  'Recent geopende presentaties': 'Ostatnio otwierane prezentacje',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Lista przechowuje pełną ścieżkę i klasyfikację każdej otwieranej prezentacji — razem jest to informacja o tym, nad czym pracujesz i dla kogo.',
+  'Recente lijst wissen': 'Usuń listę ostatnich plików',
+  'De recente lijst was al leeg.': 'Lista ostatnich plików była już pusta.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'wpis(y) usunięto z listy ostatnich plików.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Pliki odzyskiwania zawierają pełną treść prezentacji w postaci zwykłego tekstu. Są automatycznie czyszczone po 7 dniach, a przy porządnym zamknięciu programu od razu.',
+  'Alles terugzetten': 'Przywróć wszystko',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Usuwa każde ustawienie, listę ostatnich plików, pliki odzyskiwania, kopie robocze git i hasła z twojego pęku kluczy. Twoje prezentacje pozostają: należą do ciebie, nie do OciDecka.',
+  'Zet alles terug naar de begintoestand':
+      'Przywróć wszystko do stanu początkowego',
+  'Alles terugzetten naar de begintoestand?':
+      'Przywrócić wszystko do stanu początkowego?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Twoje ustawienia, lista ostatnich plików, pliki odzyskiwania, kopie robocze git i zapisane hasła zostaną usunięte. Tego nie da się cofnąć. Twoje prezentacje pozostają.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'zmian(y) nie zostały jeszcze wysłane na serwer git i istnieją tylko na tym urządzeniu. One też znikną.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Wszystko zostało przywrócone do stanu początkowego.',
+  'Terugzetten is niet gelukt.': 'Przywracanie się nie powiodło.',
+  'Er wacht nog werk dat niet verstuurd is': 'Czeka jeszcze niewysłana praca',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'To połączenie git ma zmiany, które nie zostały jeszcze wysłane na serwer. Jeśli usuniesz połączenie, zniknie też kopia robocza na tym urządzeniu — a ta praca nie będzie istnieć nigdzie indziej.',
+  'Verbinding behouden': 'Zachowaj połączenie',
+  'Toch verwijderen': 'Usuń mimo to',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

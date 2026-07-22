@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/app.dart';
@@ -14,59 +13,667 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/storage_connection.dart';
 import 'package:ocideck/services/s3/s3_service.dart';
 import 'package:ocideck/state/s3_provider.dart';
-import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
-import 'package:ocideck/widgets/dialogs/s3_browser_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+/// Openen uit en opslaan naar een S3-bucket, gedreven door de échte shell:
+/// `lib/widgets/shell/shell_actions_s3.dart`, plus de gedeelde stukken die het
+/// gebruikt (het opslaan- en botsingsdialoog in `shell_actions.dart` en de
+/// verbindingskeuze in `shell_actions_connections.dart`). Dat bestand stond op
+/// nul uitgevoerde regels.
+///
+/// De naad is [S3Service]: die wordt hier vervangen door een bucket die niets
+/// over de lijn doet maar wél onthoudt wát er heen ging (zelfde vorm als
+/// `tabs_provider_s3_test.dart`). Alles daarboven — het menu, de dialogen, de
+/// herkomstlogica, de conflictafhandeling, de meldingen — is de echte code.
+///
+/// Wat hier bewust NIET gebeurt: het pad tot en met een echte S3-server, en de
+/// SigV4-ondertekening. Dat hoort in `s3_service_test.dart`; hier gaat het om
+/// de opdrachtlaag erboven.
+///
+/// ## Waarom twee soorten pompen
+///
+/// Het bouwen van een pakket leest de thema-CSS uit de asset-bundel, en
+/// `AssetBundle.loadString` decodeert alles boven 10 kB in een eigen isolate.
+/// Een isolate die *buiten* [WidgetTester.runAsync] wordt gestart, komt in een
+/// testproces precies één keer terug; elke volgende hangt. Dat maakt zo'n test
+/// groen op zijn plek in de lijst en rood zodra de volgorde wisselt — en de
+/// volgorde wisselt hier per run.
+///
+/// Daarom draait alles wat een pakket bouwt via [act]: de tik zélf gebeurt
+/// binnen [WidgetTester.runAsync], zodat de hele keten in de echte async-zone
+/// blijft. Dat kan alleen bij knoppen — een `PopupMenuButton` levert zijn keuze
+/// af via een route-animatie die binnen [WidgetTester.runAsync] niet loopt, dus
+/// menu-handelingen gaan via [settleUntil], dat nep-klok en echte async om
+/// beurten de gelegenheid geeft.
+/// Eén frame op de nep-klok.
+const _frame = Duration(milliseconds: 16);
+
+/// Hoeveel pomp-stappen de nep-klok vooruitzetten.
+///
+/// Alleen de eerste stappen hoeven dat: animaties (een dialoogovergang, een
+/// menu dat sluit) zijn ruim binnen anderhalve testseconde uitgespeeld. Daarna
+/// pompen we frames zónder de klok te verzetten, zodat écht werk — schijf,
+/// isolates — alle tijd van de wereld krijgt terwijl een `SnackBar` (vier
+/// testseconden) niet door het wachten zelf verdwijnt.
+///
+/// Zo hangt het budget aan het aantal stappen en niet aan de klok: op een
+/// zwaarbelaste machine duurt elke stap langer in échte tijd, en dat is precies
+/// wat er dan nodig is.
+const _clockSteps = 100;
+
+void main() {
+  const connectionId = 's3-verbinding';
+
+  const bucket = S3Bucket(
+    endpoint: 'https://s3.example',
+    region: 'eu-central-1',
+    bucket: 'presentaties',
+    accessKeyId: 'AKIA-wegwerp',
+  );
+
+  late _RecordingS3 s3;
+  late Directory tmp;
+
+  /// De container van de gepompte app; nodig om het *huidige* tabblad te
+  /// bevragen, want openen uit de bucket landt in een nieuw tabblad.
+  late ProviderContainer container;
+
+  /// De verbindingen die in de instellingen staan; per test aanpasbaar vóór
+  /// [pumpShell].
+  late List<StorageConnection> connections;
+
+  void seedPrefs() {
+    SharedPreferences.setMockInitialValues({
+      'app_consent_accepted': true,
+      'storageConnections': jsonEncode([
+        for (final c in connections) c.toJson(),
+      ]),
+    });
+  }
+
+  setUp(() {
+    AppLocalizations.setActiveLanguageCode('nl');
+    s3 = _RecordingS3();
+    tmp = Directory.systemTemp.createTempSync('ocideck_shell_s3');
+    connections = [
+      // Een lokale map als thuisbasis: het openpad schrijft de gedownloade
+      // presentatie daarin weg. Zonder deze valt het terug op
+      // `getApplicationDocumentsDirectory`, dat onder `flutter test` niet
+      // bestaat.
+      LocalConnection(id: 'lokaal', name: 'Mijn presentaties', path: tmp.path),
+      S3Connection(id: connectionId, name: 'Klant A – bucket', bucket: bucket),
+    ];
+    seedPrefs();
+  });
+
+  tearDown(() {
+    if (tmp.existsSync()) tmp.deleteSync(recursive: true);
+  });
+
+  Deck sampleDeck() => Deck(
+    title: 'Testrapport 2026!',
+    slides: [
+      Slide.create(SlideType.title).copyWith(title: 'Testrapport'),
+      Slide.create(
+        SlideType.bullets,
+      ).copyWith(title: 'Bevindingen', bullets: const ['Een', 'Twee']),
+    ],
+  );
+
+  Finder appBarIcon(IconData icon) =>
+      find.descendant(of: find.byType(AppBar), matching: find.byIcon(icon));
+  Finder menuItemIcon(IconData icon) => find.descendant(
+    of: find.byWidgetPredicate((w) => w is PopupMenuItem),
+    matching: find.byIcon(icon),
+  );
+
+  /// Pompt tot [until] waar is, met echte async-vensters tussen de frames.
+  ///
+  /// Voor handelingen die buiten [WidgetTester.runAsync] beginnen (het
+  /// overloopmenu) en onderweg echt bestandswerk doen: de nep-klok drijft de
+  /// animaties, de vensters laten het schijfwerk vorderen.
+  ///
+  /// Het budget is bewust een áántal stappen en geen tijdsgrens. Elke stap zet
+  /// de testklok 16 ms vooruit; met een tijdsgrens zou de klok meelopen met hoe
+  /// traag de machine is, en dan verdwijnt een `SnackBar` (vier testseconden)
+  /// door het wachten zelf.
+  Future<void> settleUntil(
+    WidgetTester tester,
+    bool Function() until, {
+    required String reason,
+    int steps = 400,
+  }) async {
+    for (var i = 0; i < steps && !until(); i++) {
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 5)),
+      );
+      await tester.pump(i < _clockSteps ? _frame : Duration.zero);
+    }
+    expect(until(), isTrue, reason: reason);
+  }
+
+  /// Voert [gesture] uit binnen [WidgetTester.runAsync] en pompt daar tot
+  /// [until] waar is — de weg voor alles wat een pakket bouwt.
+  Future<void> act(
+    WidgetTester tester,
+    Future<void> Function() gesture,
+    bool Function() until, {
+    required String reason,
+  }) async {
+    var reached = false;
+    await tester.runAsync(() async {
+      await gesture();
+      for (var i = 0; i < 400; i++) {
+        if (until()) {
+          reached = true;
+          break;
+        }
+        await tester.pump(i < _clockSteps ? _frame : Duration.zero);
+        await Future<void>.delayed(const Duration(milliseconds: 5));
+      }
+      reached = reached || until();
+    });
+    await tester.pump();
+    expect(reached, isTrue, reason: reason);
+  }
+
+  /// Pompt de app met [s3] achter de S3-verbinding en laadt [deck].
+  ///
+  /// Met [serviceAvailable] op `false` doet de test alsof de sleutel uit de
+  /// keychain weg is — de verbinding staat er, maar er valt niets mee te doen.
+  Future<TabInfo> pumpShell(
+    WidgetTester tester, {
+    Deck? deck,
+    bool serviceAvailable = true,
+  }) async {
+    await tester.binding.setSurfaceSize(const Size(1600, 1000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          s3ServiceProvider(
+            connectionId,
+          ).overrideWith((ref) async => serviceAvailable ? s3 : null),
+        ],
+        child: const OciDeckApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+    container = ProviderScope.containerOf(
+      tester.element(find.byType(AppShell)),
+    );
+    final tab = container.read(tabsProvider).current!;
+    tab.deckNotifier.loadDeck(deck ?? sampleDeck());
+    await tester.pumpAndSettle();
+    return tab;
+  }
+
+  S3Origin originAt(
+    String remotePath, {
+    String? etag,
+    String bucket = 'presentaties',
+    String connection = connectionId,
+  }) => S3Origin(
+    connectionId: connection,
+    endpoint: 'https://s3.example',
+    bucket: bucket,
+    remotePath: remotePath,
+    etag: etag,
+  );
+
+  bool saveDialogShown() => find.text('Opslaan naar S3').evaluate().isNotEmpty;
+  bool conflictDialogShown() => find
+      .text('Iemand anders heeft dit bestand gewijzigd')
+      .evaluate()
+      .isNotEmpty;
+
+  /// Opent het overloopmenu, kiest een item en wacht tot [until] waar is.
+  Future<void> pickFromMenu(
+    WidgetTester tester,
+    IconData icon,
+    bool Function() until, {
+    required String reason,
+  }) async {
+    await tester.tap(appBarIcon(Icons.more_vert));
+    await tester.pumpAndSettle();
+    await tester.tap(menuItemIcon(icon));
+    await settleUntil(tester, until, reason: reason);
+  }
+
+  /// Tikt op de opslaanknop in de werkbalk en wacht tot [until] waar is.
+  Future<void> tapSave(
+    WidgetTester tester,
+    bool Function() until, {
+    required String reason,
+  }) => act(
+    tester,
+    () => tester.tap(appBarIcon(Icons.save_outlined)),
+    until,
+    reason: reason,
+  );
+
+  String pathFieldText(WidgetTester tester) =>
+      tester.widget<TextField>(find.byType(TextField).last).controller!.text;
+
+  // ── Menu-ingangen ─────────────────────────────────────────────────────────
+
+  testWidgets(
+    '"Opslaan naar…" stelt een naam voor die uit de decktitel volgt',
+    (tester) async {
+      await pumpShell(tester);
+      await pickFromMenu(
+        tester,
+        Icons.cloud_upload_outlined,
+        saveDialogShown,
+        reason: 'het opslaandialoog kwam niet op',
+      );
+
+      // Eén bruikbare verbinding (de lokale map telt niet mee), dus geen
+      // tussenvraag welke het moet zijn: het opslaandialoog staat er meteen.
+      expect(find.text('Welke verbinding?'), findsNothing);
+      // Uitroepteken en spatie eruit: de sleutel moet een nette bestandsnaam
+      // zijn, niet de ruwe titel.
+      expect(pathFieldText(tester), 'Testrapport_2026');
+    },
+  );
+
+  testWidgets('een leeg doelpad sluit het opslaandialoog niet', (tester) async {
+    await pumpShell(tester);
+    await pickFromMenu(
+      tester,
+      Icons.cloud_upload_outlined,
+      saveDialogShown,
+      reason: 'het opslaandialoog kwam niet op',
+    );
+
+    await tester.enterText(find.byType(TextField).last, '   ');
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Opslaan'));
+    await tester.pumpAndSettle();
+
+    expect(saveDialogShown(), isTrue);
+    expect(s3.puts, isEmpty);
+  });
+
+  testWidgets('annuleren in het opslaandialoog uploadt niets', (tester) async {
+    await pumpShell(tester);
+    await pickFromMenu(
+      tester,
+      Icons.cloud_upload_outlined,
+      saveDialogShown,
+      reason: 'het opslaandialoog kwam niet op',
+    );
+
+    await tester.tap(find.widgetWithText(TextButton, 'Annuleren'));
+    await tester.pumpAndSettle();
+
+    expect(saveDialogShown(), isFalse);
+    expect(s3.puts, isEmpty);
+    expect(find.textContaining('Opgeslagen in S3:'), findsNothing);
+  });
+
+  testWidgets('"Openen uit…" haalt het gekozen deck uit de bucket', (
+    tester,
+  ) async {
+    s3.objects['rapport.md'] = Uint8List.fromList(
+      utf8.encode('---\nmarp: true\n---\n\n# Uit de bucket\n'),
+    );
+    await pumpShell(tester);
+
+    // Eén verbinding, dus geen tussenvraag: de bladeraar staat er meteen, met
+    // de listing van de bucket erin.
+    await pickFromMenu(
+      tester,
+      Icons.cloud_download_outlined,
+      () => find.text('rapport.md').evaluate().isNotEmpty,
+      reason: 'de bladeraar toonde de bucket niet',
+    );
+
+    // Het geopende deck landt in een eigen tabblad, dus kijk naar het huidige.
+    TabInfo? current() => container.read(tabsProvider).current;
+    await tester.tap(find.text('rapport.md'));
+    await settleUntil(
+      tester,
+      () => current()?.deckNotifier.currentState.deck?.title == 'Uit de bucket',
+      reason: 'het gekozen object is niet als deck geopend',
+    );
+
+    expect(s3.downloads, contains('rapport.md'));
+    // De herkomst blijft hangen, zodat opslaan er straks naar terug kan — en
+    // met de ETag erbij, want dáárop toetst de volgende opslag.
+    expect(current()?.s3Origin?.remotePath, 'rapport.md');
+    expect(current()?.s3Origin?.etag, '"bestaand"');
+  });
+
+  testWidgets(
+    'een onleesbaar object levert een melding op, geen leeg tabblad',
+    (tester) async {
+      // Geen frontmatter, geen Marp: de importpoort weigert de bytes al vóór er
+      // iets op schijf komt, en dat hoort de gebruiker te horen.
+      s3.objects['rapport.md'] = Uint8List.fromList(
+        utf8.encode('gewoon tekst'),
+      );
+      await pumpShell(tester);
+      final tabsBefore = container.read(tabsProvider).tabs.length;
+
+      await pickFromMenu(
+        tester,
+        Icons.cloud_download_outlined,
+        () => find.text('rapport.md').evaluate().isNotEmpty,
+        reason: 'de bladeraar toonde de bucket niet',
+      );
+
+      await tester.tap(find.text('rapport.md'));
+      await settleUntil(
+        tester,
+        () => find.text('Kon dit bestand niet openen.').evaluate().isNotEmpty,
+        reason: 'een geweigerd object bleef stil',
+      );
+
+      expect(container.read(tabsProvider).tabs, hasLength(tabsBefore));
+    },
+  );
+
+  testWidgets('een mislukte download meldt de reden', (tester) async {
+    s3.objects['rapport.md'] = Uint8List(0);
+    await pumpShell(tester);
+
+    await pickFromMenu(
+      tester,
+      Icons.cloud_download_outlined,
+      () => find.text('rapport.md').evaluate().isNotEmpty,
+      reason: 'de bladeraar toonde de bucket niet',
+    );
+
+    s3.failWith = S3Exception(S3Error.network, 'verbinding weg');
+    await tester.tap(find.text('rapport.md'));
+    await settleUntil(
+      tester,
+      () => find.textContaining('Downloaden mislukt:').evaluate().isNotEmpty,
+      reason: 'een mislukte download bleef stil',
+    );
+
+    expect(find.text('Kopiëren'), findsOneWidget);
+  });
+
+  // ── De opslaanknop: terug naar waar het vandaan kwam ───────────────────────
+
+  testWidgets('een deck dat uit de bucket kwam gaat er stil naar terug', (
+    tester,
+  ) async {
+    // Dít is waar de opslaanknop voor bedoeld is: waar het vandaan kwam, gaat
+    // het naartoe terug — zonder opnieuw te vragen waar het heen moet, want
+    // dan zou de gebruiker het elke keer bij de verkeerde klant kunnen laten
+    // belanden.
+    final tab = await pumpShell(tester);
+    tab.s3Origin = originAt('klant/bestaand.md', etag: '"oud"');
+
+    await tapSave(
+      tester,
+      () => s3.puts.isNotEmpty,
+      reason: 'de opslaanknop schreef niets terug naar de bucket',
+    );
+
+    expect(
+      saveDialogShown(),
+      isFalse,
+      reason: 'er mocht niets gevraagd worden',
+    );
+    // Zelfde pad, en het formaat volgt de extensie die er al stond: een platte
+    // spiegel blijft plat, geen pakket eroverheen.
+    expect(s3.puts.first.path, 'klant/bestaand.md');
+    expect(
+      s3.puts.length,
+      greaterThan(1),
+      reason: 'een platte spiegel is meer dan alleen de markdown',
+    );
+    // En met de bewaking eraan: de ETag die we ophaalden gaat als If-Match mee.
+    expect(s3.puts.first.ifMatch, '"oud"');
+    expect(find.text('Opgeslagen in S3: /klant/bestaand.md'), findsOneWidget);
+  });
+
+  testWidgets('een pakketherkomst gaat als pakket terug', (tester) async {
+    final tab = await pumpShell(tester);
+    tab.s3Origin = originAt('klant/bestaand.ocideck');
+
+    await tapSave(
+      tester,
+      () => s3.puts.isNotEmpty,
+      reason: 'de opslaanknop schreef niets terug naar de bucket',
+    );
+
+    expect(s3.puts.single.path, 'klant/bestaand.ocideck');
+    expect(
+      find.text('Opgeslagen in S3: /klant/bestaand.ocideck'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('een herkomst uit een ándere bucket vraagt wél opnieuw', (
+    tester,
+  ) async {
+    // De verbinding wijst naar `presentaties`; dit deck kwam uit `archief`.
+    // Blind terugschrijven zou het bij de verkeerde bucket neerzetten.
+    final tab = await pumpShell(tester);
+    tab.s3Origin = originAt('oud/rapport.md', bucket: 'archief');
+
+    await tapSave(
+      tester,
+      saveDialogShown,
+      reason: 'er werd niet om een doelpad gevraagd',
+    );
+
+    expect(s3.puts, isEmpty);
+    expect(
+      pathFieldText(tester),
+      'Testrapport_2026',
+      reason: 'een vreemde herkomst mag het doelpad niet voorstellen',
+    );
+  });
+
+  testWidgets('zonder bruikbare sleutel meldt de opslaanknop wat er mist', (
+    tester,
+  ) async {
+    // De verbinding staat er nog, maar de sleutel is uit de keychain — dan
+    // valt er niets op te slaan en hoort dat gezegd te worden.
+    final tab = await pumpShell(tester, serviceAvailable: false);
+    tab.s3Origin = originAt('klant/bestaand.md');
+
+    await tapSave(
+      tester,
+      () => find.byType(SnackBar).evaluate().isNotEmpty,
+      reason: 'de ontbrekende sleutel bleef stil',
+    );
+
+    expect(
+      find.text('Stel eerst een S3-bucket in bij Instellingen → Opslag.'),
+      findsOneWidget,
+    );
+    expect(s3.puts, isEmpty);
+  });
+
+  testWidgets('een verdwenen verbinding meldt dat er niets is ingesteld', (
+    tester,
+  ) async {
+    // Het deck kwam uit een bucket die intussen uit de instellingen is
+    // verwijderd. Er valt dan niets te kiezen, en de melding wijst naar de plek
+    // waar je het weer kunt instellen.
+    connections = [
+      LocalConnection(id: 'lokaal', name: 'Mijn presentaties', path: tmp.path),
+    ];
+    seedPrefs();
+    final tab = await pumpShell(tester);
+    tab.s3Origin = originAt('klant/bestaand.md', connection: 'weg');
+
+    await tapSave(
+      tester,
+      () => find.byType(SnackBar).evaluate().isNotEmpty,
+      reason: 'de verdwenen verbinding bleef stil',
+    );
+
+    expect(
+      find.text('Stel eerst een S3-bucket in bij Instellingen → Opslag.'),
+      findsOneWidget,
+    );
+    expect(s3.puts, isEmpty);
+  });
+
+  testWidgets('een mislukte upload meldt de reden', (tester) async {
+    s3.failWith = S3Exception(S3Error.auth, 'geen toegang');
+    final tab = await pumpShell(tester);
+    tab.s3Origin = originAt('klant/bestaand.md');
+
+    await tapSave(
+      tester,
+      () => find.textContaining('Opslaan mislukt:').evaluate().isNotEmpty,
+      reason: 'een mislukte upload bleef stil',
+    );
+
+    // De melding is te kopiëren, zodat hij door te sturen is.
+    expect(find.text('Kopiëren'), findsOneWidget);
+  });
+
+  // ── Botsingen ─────────────────────────────────────────────────────────────
+
+  /// Laat een opslag op een botsing lopen en wacht tot de vraag er staat.
+  Future<void> saveIntoConflict(WidgetTester tester, TabInfo tab) async {
+    s3.conflictOn = 'klant/bestaand.md';
+    tab.s3Origin = originAt('klant/bestaand.md', etag: '"oud"');
+    await tapSave(
+      tester,
+      conflictDialogShown,
+      reason: 'de botsing werd niet voorgelegd',
+    );
+  }
+
+  testWidgets('een botsing laat kiezen, en overschrijven schrijft alsnog', (
+    tester,
+  ) async {
+    final tab = await pumpShell(tester);
+    await saveIntoConflict(tester, tab);
+
+    // Vanaf nu accepteert de bucket het weer; overschrijven moet dan slagen.
+    s3.conflictOn = null;
+    await act(
+      tester,
+      () => tester.tap(find.widgetWithText(TextButton, 'Overschrijven')),
+      () => s3.puts.length >= 2,
+      reason: 'na "Overschrijven" ging er niets alsnog omhoog',
+    );
+
+    // De tweede poging gaat naar hetzelfde pad, maar zónder bewaking — dat is
+    // precies wat "overschrijven" betekent, en het verschil met de eerste.
+    expect(s3.puts[1].path, 'klant/bestaand.md');
+    expect(s3.puts[0].ifMatch, '"oud"');
+    expect(s3.puts[1].ifMatch, isNull);
+  });
+
+  testWidgets('"Opslaan als" na een botsing vraagt om een nieuw pad', (
+    tester,
+  ) async {
+    final tab = await pumpShell(tester);
+    await saveIntoConflict(tester, tab);
+
+    await act(
+      tester,
+      () => tester.tap(find.widgetWithText(FilledButton, 'Opslaan als')),
+      saveDialogShown,
+      reason: 'er werd niet om een nieuw pad gevraagd',
+    );
+    // Het tweede opslaandialoog begint bij het pad dat botste, zodat de
+    // gebruiker er alleen iets aan hoeft toe te voegen.
+    expect(pathFieldText(tester), 'klant/bestaand');
+
+    await tester.enterText(find.byType(TextField).last, 'klant/bestaand-mijn');
+    await tester.pumpAndSettle();
+    // Bewust als pakket: de keuze uit het dialoog moet het doelpad bepalen, en
+    // niet de extensie waarmee het deck ooit binnenkwam.
+    await tester.tap(
+      find.text('Als .ocideck-pakket (één bestand, met assets)'),
+    );
+    await tester.pumpAndSettle();
+    await act(
+      tester,
+      () => tester.tap(find.widgetWithText(ElevatedButton, 'Opslaan')),
+      () => s3.puts.length >= 2,
+      reason: 'er ging niets naar het nieuwe pad',
+    );
+
+    expect(s3.puts[1].path, 'klant/bestaand-mijn.ocideck');
+    // Een ánder pad hebben we nooit opgehaald, dus valt er niets te bewaken.
+    expect(s3.puts[1].ifMatch, isNull);
+  });
+
+  testWidgets('een botsing wegklikken laat het bestand met rust', (
+    tester,
+  ) async {
+    final tab = await pumpShell(tester);
+    await saveIntoConflict(tester, tab);
+
+    await tester.tap(find.widgetWithText(TextButton, 'Annuleren'));
+    await tester.pumpAndSettle();
+
+    expect(conflictDialogShown(), isFalse);
+    expect(s3.puts, hasLength(1), reason: 'er mag niets tweede omhoog');
+    expect(find.textContaining('Opgeslagen in S3:'), findsNothing);
+  });
+}
 
 /// Eén upload zoals de bucket hem zag.
 typedef _Put = ({String path, String? ifMatch, int bytes});
 
 /// Een bucket die niets over de lijn doet, maar wél onthoudt wát er in welke
-/// volgorde heen ging en met welke voorwaarde — precies waar de beloften van
-/// dit pad over gaan.
-class _FakeBucket extends S3Service {
-  _FakeBucket({
-    required super.bucket,
-    this.objects = const {},
-    this.downloadFailure,
-    this.uploadFailure,
-    this.conflictOn,
-  }) : super(secretAccessKey: 'wegwerp');
-
-  /// Sleutel (relatief aan de wortel) → inhoud.
-  final Map<String, Uint8List> objects;
-
-  final S3Exception? downloadFailure;
-  final S3Exception? uploadFailure;
-
-  /// Pad waarop het endpoint één keer een botsing meldt (412).
-  final String? conflictOn;
+/// volgorde heen ging — en die op commando kan botsen of falen.
+///
+/// Zelfde vorm als `_RecordingS3` in `tabs_provider_s3_test.dart`; hier met een
+/// listing erbij, want de shell bladert eerst.
+class _RecordingS3 extends S3Service {
+  _RecordingS3()
+    : super(
+        bucket: const S3Bucket(
+          endpoint: 'https://s3.example',
+          region: 'eu-central-1',
+          bucket: 'presentaties',
+          accessKeyId: 'AKIA-wegwerp',
+        ),
+        secretAccessKey: 'wegwerp',
+      );
 
   final puts = <_Put>[];
-  final botsingenGemeld = <String>[];
+  final downloads = <String>[];
+
+  /// Sleutel → inhoud; wat de bladeraar toont en wat een download oplevert.
+  final objects = <String, Uint8List>{};
+
+  /// Pad waarop het endpoint een botsing meldt (412 Precondition Failed).
+  String? conflictOn;
+
+  /// Als dit gezet is, faalt élke upload en download ermee.
+  S3Exception? failWith;
 
   @override
-  Future<List<S3Entry>> list(String remotePath) async {
-    return [
-      for (final key in objects.keys)
-        S3Entry(
-          name: key.split('/').last,
-          relativePath: key,
-          isCollection: false,
-          size: objects[key]!.length,
-          etag: '"opgehaald"',
-        ),
-    ];
-  }
+  Future<List<S3Entry>> list(String remotePath) async => [
+    for (final entry in objects.entries)
+      S3Entry(
+        name: entry.key.split('/').last,
+        relativePath: entry.key,
+        isCollection: false,
+        size: entry.value.length,
+        etag: '"bestaand"',
+      ),
+  ];
 
   @override
-  Future<S3File> download(String remotePath, {int maxBytes = 0}) async {
-    if (downloadFailure != null) throw downloadFailure!;
-    final body = objects[remotePath];
-    if (body == null) throw S3Exception(S3Error.notFound, 'weg');
-    return S3File(body, '"opgehaald"');
+  Future<S3File> download(
+    String remotePath, {
+    int maxBytes = S3Service.maxDownloadBytes,
+  }) async {
+    downloads.add(remotePath);
+    final fail = failWith;
+    if (fail != null) throw fail;
+    return S3File(objects[remotePath] ?? Uint8List(0), '"bestaand"');
   }
 
   @override
@@ -77,600 +684,11 @@ class _FakeBucket extends S3Service {
     bool onlyIfAbsent = false,
   }) async {
     puts.add((path: remotePath, ifMatch: ifMatch, bytes: bytes.length));
-    if (uploadFailure != null) throw uploadFailure!;
-    // Eén keer botsen: daarna moet de gekozen uitweg wél doorkomen, anders
-    // toetst de test alleen dat het dialoog blijft terugkomen.
-    if (remotePath == conflictOn && !botsingenGemeld.contains(remotePath)) {
-      botsingenGemeld.add(remotePath);
-      throw const S3ConflictException(
-        expectedEtag: '"nieuwer"',
-        message: 'botst',
-      );
+    final fail = failWith;
+    if (fail != null) throw fail;
+    if (remotePath == conflictOn) {
+      throw const S3ConflictException(expectedEtag: '"oud"', message: 'botst');
     }
-    return '"na-opslaan"';
+    return '"nieuw"';
   }
 }
-
-/// Openen uit en opslaan naar een S3-bucket zoals de shell het aanstuurt
-/// (`widgets/shell/shell_actions_s3.dart`, plus het gedeelde opslaan- en
-/// botsingsdialoog uit `shell_actions.dart`). Die bestanden draaiden geen
-/// enkele regel: alles zit achter de bladeraar en een netwerkaanroep.
-///
-/// De netwerkkant zelf (ondertekening, pinning, paginering) staat in
-/// `s3_service_test.dart`; hier gaat het om wat de shell ermee doet — waar een
-/// deck heen gaat, of er eerst gevraagd wordt, en of de bewaking tegen
-/// andermans versie blijft staan.
-void main() {
-  late Directory tmp;
-  late _FakeBucket fake;
-
-  const validDeck = '''
----
-marp: true
-theme: ocideck
----
-
-# Kwartaalcijfers
-
----
-
-## Tweede dia
-
-- punt één
-''';
-
-  Uint8List bytes(String s) => Uint8List.fromList(utf8.encode(s));
-
-  void useSettings({List<StorageConnection> extra = const []}) {
-    SharedPreferences.setMockInitialValues({
-      'app_consent_accepted': true,
-      'storageConnections': StorageConnection.encodeList([
-        // De eerste lokale map is tegelijk de "home": daar landt een import.
-        LocalConnection(id: 'lokaal', name: 'Werkmap', path: tmp.path),
-        const S3Connection(id: 'bucket-1', name: 'Klant A', bucket: _bucket),
-        ...extra,
-      ]),
-    });
-  }
-
-  setUp(() {
-    AppLocalizations.setActiveLanguageCode('nl');
-    tmp = Directory.systemTemp.createTempSync('ocideck_shell_s3');
-    fake = _FakeBucket(bucket: _bucket, objects: {'deck.md': bytes(validDeck)});
-    useSettings();
-  });
-
-  tearDown(() {
-    if (tmp.existsSync()) tmp.deleteSync(recursive: true);
-  });
-
-  Finder appBarIcon(IconData icon) =>
-      find.descendant(of: find.byType(AppBar), matching: find.byIcon(icon));
-  Finder menuItemIcon(IconData icon) => find.descendant(
-    of: find.byWidgetPredicate((w) => w is PopupMenuItem),
-    matching: find.byIcon(icon),
-  );
-
-  /// Pompt de app met de nep-bucket in plaats van de echte dienst.
-  ///
-  /// Alleen `s3ServiceProvider` gaat om: de bladeraar leest zijn listing via
-  /// datzelfde element, dus hij bladert door dezelfde nep als waar de shell
-  /// naartoe schrijft.
-  Future<ProviderContainer> pumpShell(
-    WidgetTester tester, {
-    Deck? deck,
-    _FakeBucket? service,
-  }) async {
-    final bucketService = service ?? fake;
-    // Zet de asset-cache warm vóór er iets te doen valt.
-    //
-    // Het pakket krijgt zijn thema-CSS uit `rootBundle`, en het testbinding
-    // leegt die cache tussen tests. Een kóude lees vraagt een echte beurt op de
-    // gebeurtenislus, en die krijgt de opslaanketen binnen [runAsync] niet: de
-    // eerste opslag in een testproces lukte, de volgende bleef hangen — groen
-    // of rood puur afhankelijk van de plek in de lijst. Eén keer vooraf lezen
-    // maakt dat deterministisch zonder iets van het pad over te slaan: het
-    // bouwen van het pakket loopt daarna gewoon door `_packageThemeCss`.
-    await tester.runAsync(
-      () => rootBundle.loadString('assets/themes/ocideck.css'),
-    );
-    await tester.binding.setSurfaceSize(const Size(1600, 1000));
-    addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [
-          s3ServiceProvider(
-            'bucket-1',
-          ).overrideWith((ref) async => bucketService),
-        ],
-        child: const OciDeckApp(),
-      ),
-    );
-    await tester.pumpAndSettle();
-    final container = ProviderScope.containerOf(
-      tester.element(find.byType(AppShell)),
-    );
-    if (deck != null) {
-      container.read(tabsProvider).current!.deckNotifier.loadDeck(deck);
-      await tester.pumpAndSettle();
-    }
-    return container;
-  }
-
-  /// Laat het echte werk (bestanden lezen/schrijven, het pakket bouwen)
-  /// vorderen en pompt ondertussen frames, tot [until] waar is.
-  ///
-  /// `pumpAndSettle` volstaat niet: de import schrijft naar schijf en het
-  /// pakket wordt in een isolate gebouwd, en dat vordert alleen binnen
-  /// [WidgetTester.runAsync]. De klok wordt bewust niet vooruitgezet — anders
-  /// verdwijnt een melding door het wachten zelf. Zie
-  /// `shell_export_actions_test.dart`, waar dit patroon vandaan komt.
-  Future<bool> settleAsync(
-    WidgetTester tester,
-    bool Function() until, {
-    Future<void> Function()? start,
-    Duration timeout = const Duration(seconds: 30),
-  }) async {
-    var reached = false;
-    await tester.runAsync(() async {
-      if (start != null) {
-        await start();
-        await tester.pump();
-      }
-      final deadline = DateTime.now().add(timeout);
-      while (DateTime.now().isBefore(deadline)) {
-        if (until()) {
-          reached = true;
-          break;
-        }
-        await tester.pump();
-        await Future<void>.delayed(const Duration(milliseconds: 5));
-      }
-      reached = reached || until();
-      // Staart: de voorwaarde is bereikt, maar de rest van de keten (tot en met
-      // het frame met de melding) moet nog vallen, en buiten deze zone kan dat
-      // niet meer.
-      for (var i = 0; i < 20; i++) {
-        await tester.pump();
-        await Future<void>.delayed(const Duration(milliseconds: 5));
-      }
-    });
-    await tester.pumpAndSettle();
-    return reached;
-  }
-
-  /// Tikt op [target] en wacht tot [until] waar is — voor elke tik die echt
-  /// werk in gang zet of hervat.
-  ///
-  /// De tik hoort BINNEN [WidgetTester.runAsync] te vallen, en dat is geen
-  /// smaakkwestie: opslaan en openen zijn één lange async-keten (dialoog →
-  /// pakket bouwen → uploaden), en die keten draait in de zone waarin hij is
-  /// begonnen. Start hij in de fake-async-zone, dan komt het echte werk in het
-  /// eerste geval nog terug en daarna niet meer — groen op zijn plek in de
-  /// lijst, rood zodra de volgorde wisselt. En hier wisselt de volgorde per
-  /// run. Zie `shell_export_actions_test.dart`, waar dit is uitgezocht.
-  Future<void> startChain(
-    WidgetTester tester,
-    Finder target,
-    bool Function() until, {
-    required String reason,
-  }) async {
-    expect(
-      await settleAsync(tester, until, start: () => tester.tap(target)),
-      isTrue,
-      reason: reason,
-    );
-  }
-
-  /// "Openen uit…" op het welkomscherm — de ingang zolang er nog geen deck
-  /// open is, en daarmee de plek waar dit pad in de praktijk begint.
-  Future<void> openFromWelcome(WidgetTester tester) => startChain(
-    tester,
-    find.widgetWithText(OutlinedButton, 'Openen uit\u2026'),
-    () => find.byType(S3BrowserDialog).evaluate().isNotEmpty,
-    reason: 'de bladeraar kwam niet op',
-  );
-
-  bool textShown(String needle) =>
-      find.textContaining(needle).evaluate().isNotEmpty;
-
-  /// Het invoerveld ín het geopende dialoog. Ongescoopt zou dit het zoekveld
-  /// of een editorveld van de shell kunnen pakken.
-  Finder dialogField() => find.descendant(
-    of: find.byType(AlertDialog),
-    matching: find.byType(TextField),
-  );
-
-  Deck sampleDeck() => Deck(
-    title: 'Rapport: Klant A/B',
-    slides: [
-      Slide.create(SlideType.title).copyWith(title: 'Rapport'),
-      Slide.create(
-        SlideType.bullets,
-      ).copyWith(title: 'Bevindingen', bullets: const ['Een']),
-    ],
-  );
-
-  group('openen uit de bucket', () {
-    testWidgets('een gekozen deck wordt geopend en onthoudt zijn herkomst', (
-      tester,
-    ) async {
-      final container = await pumpShell(tester);
-      await openFromWelcome(tester);
-
-      // Eén S3-verbinding: geen keuzedialoog, meteen de bladeraar.
-      expect(find.byType(S3BrowserDialog), findsOneWidget);
-      await startChain(
-        tester,
-        find.text('deck.md'),
-        () => container.read(tabsProvider).current?.s3Origin != null,
-        reason: 'het deck is niet geopend',
-      );
-
-      final tab = container.read(tabsProvider).current!;
-      expect(tab.deckNotifier.currentState.deck!.title, 'Kwartaalcijfers');
-      final origin = tab.s3Origin!;
-      expect(origin.connectionId, 'bucket-1');
-      expect(origin.remotePath, 'deck.md');
-      expect(
-        origin.etag,
-        '"opgehaald"',
-        reason: 'zonder de opgehaalde versie is er later niets te bewaken',
-      );
-    });
-
-    testWidgets('een mislukte download meldt waaróm', (tester) async {
-      final stuk = _FakeBucket(
-        bucket: _bucket,
-        objects: {'deck.md': bytes(validDeck)},
-        downloadFailure: S3Exception(S3Error.auth, '403'),
-      );
-      final container = await pumpShell(tester, service: stuk);
-      await openFromWelcome(tester);
-
-      await startChain(
-        tester,
-        find.text('deck.md'),
-        () => textShown('Downloaden mislukt:'),
-        reason: 'een mislukte download bleef stil',
-      );
-
-      expect(find.textContaining('Aanmelden mislukt.'), findsOneWidget);
-      expect(container.read(tabsProvider).current?.s3Origin, isNull);
-    });
-
-    testWidgets('de bladeraar sluiten opent niets', (tester) async {
-      final container = await pumpShell(tester);
-      await openFromWelcome(tester);
-
-      await tester.tap(find.widgetWithText(TextButton, 'Annuleren'));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(S3BrowserDialog), findsNothing);
-      expect(container.read(tabsProvider).current?.s3Origin, isNull);
-      expect(
-        container.read(tabsProvider).current?.deckNotifier.currentState.isOpen,
-        isFalse,
-      );
-    });
-  });
-
-  group('opslaan naar de bucket', () {
-    /// Voert "Opslaan naar…" uit tot het opslaandialoog er staat.
-    Future<void> openSaveDialog(WidgetTester tester) async {
-      await tester.tap(appBarIcon(Icons.more_vert));
-      await tester.pumpAndSettle();
-      await startChain(
-        tester,
-        menuItemIcon(Icons.cloud_upload_outlined),
-        () => find.text('Opslaan naar S3').evaluate().isNotEmpty,
-        reason: 'het opslaanvenster kwam niet op',
-      );
-    }
-
-    Future<void> confirmSave(WidgetTester tester, bool Function() until) async {
-      expect(
-        await settleAsync(
-          tester,
-          until,
-          start: () =>
-              tester.tap(find.widgetWithText(ElevatedButton, 'Opslaan')),
-        ),
-        isTrue,
-        reason: 'het opslaan kwam niet af',
-      );
-    }
-
-    testWidgets('het voorstelpad komt uit de decktitel, ontdaan van tekens', (
-      tester,
-    ) async {
-      await pumpShell(tester, deck: sampleDeck());
-      await openSaveDialog(tester);
-
-      // 'Rapport: Klant A/B' → geen dubbele punt, geen slash, spaties als _.
-      expect(
-        tester.widget<TextField>(dialogField()).controller!.text,
-        'Rapport_Klant_AB',
-      );
-    });
-
-    testWidgets('opslaan als pakket schrijft één object op het gekozen pad', (
-      tester,
-    ) async {
-      await pumpShell(tester, deck: sampleDeck());
-      await openSaveDialog(tester);
-
-      await tester.enterText(dialogField(), 'klanten/rapport');
-      await tester.pumpAndSettle();
-      await confirmSave(tester, () => fake.puts.isNotEmpty);
-
-      expect(fake.puts, hasLength(1));
-      expect(fake.puts.single.path, 'klanten/rapport.ocideck');
-      expect(
-        fake.puts.single.ifMatch,
-        isNull,
-        reason: 'een zelfgekozen pad hebben we nooit opgehaald',
-      );
-      expect(find.textContaining('/klanten/rapport.ocideck'), findsOneWidget);
-    });
-
-    testWidgets('losse bestanden zetten de .md vóór de afbeeldingen', (
-      tester,
-    ) async {
-      await pumpShell(tester, deck: sampleDeck());
-      await openSaveDialog(tester);
-
-      await tester.tap(find.text('Als losse .md plus afbeeldingen'));
-      await tester.pumpAndSettle();
-      await confirmSave(tester, () => fake.puts.isNotEmpty);
-
-      expect(fake.puts.first.path, 'Rapport_Klant_AB.md');
-    });
-
-    testWidgets('een leeg doelpad sluit het venster niet', (tester) async {
-      await pumpShell(tester, deck: sampleDeck());
-      await openSaveDialog(tester);
-
-      await tester.enterText(dialogField(), '   ');
-      await tester.pumpAndSettle();
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Opslaan'));
-      await tester.pumpAndSettle();
-
-      expect(find.text('Opslaan naar S3'), findsOneWidget);
-      expect(fake.puts, isEmpty);
-    });
-
-    testWidgets('annuleren schrijft niets', (tester) async {
-      await pumpShell(tester, deck: sampleDeck());
-      await openSaveDialog(tester);
-
-      await tester.tap(find.widgetWithText(TextButton, 'Annuleren'));
-      await tester.pumpAndSettle();
-
-      expect(fake.puts, isEmpty);
-      expect(find.textContaining('Opgeslagen in S3:'), findsNothing);
-    });
-
-    testWidgets('een mislukte upload meldt waaróm', (tester) async {
-      final stuk = _FakeBucket(
-        bucket: _bucket,
-        uploadFailure: S3Exception(S3Error.conditionalUnsupported, '501'),
-      );
-      await pumpShell(tester, deck: sampleDeck(), service: stuk);
-      await openSaveDialog(tester);
-      await confirmSave(tester, () => textShown('Opslaan mislukt:'));
-
-      expect(
-        find.textContaining('Dit endpoint kan niet voorwaardelijk schrijven'),
-        findsOneWidget,
-      );
-    });
-  });
-
-  group('terug naar waar het vandaan kwam', () {
-    /// Opent `deck.md` uit de bucket, zodat het tabblad een herkomst draagt.
-    Future<ProviderContainer> openFromBucket(
-      WidgetTester tester, {
-      _FakeBucket? service,
-    }) async {
-      final container = await pumpShell(tester, service: service);
-      await openFromWelcome(tester);
-      await startChain(
-        tester,
-        find.text('deck.md'),
-        () => container.read(tabsProvider).current?.s3Origin != null,
-        reason: 'het deck is niet geopend',
-      );
-      return container;
-    }
-
-    testWidgets('de opslaanknop vraagt niets en bewaakt de opgehaalde versie', (
-      tester,
-    ) async {
-      await openFromBucket(tester);
-
-      await startChain(
-        tester,
-        appBarIcon(Icons.save_outlined),
-        () => fake.puts.isNotEmpty,
-        reason: 'er is niets opgeslagen',
-      );
-
-      expect(
-        find.text('Opslaan naar S3'),
-        findsNothing,
-        reason: 'een deck dat ergens vandaan komt hoort niet opnieuw te vragen',
-      );
-      expect(fake.puts.first.path, 'deck.md');
-      expect(
-        fake.puts.first.ifMatch,
-        '"opgehaald"',
-        reason: 'zonder If-Match overschrijft de knop stil andermans werk',
-      );
-      expect(find.textContaining('Opgeslagen in S3: /deck.md'), findsOneWidget);
-    });
-
-    testWidgets('een botsing vraagt, en Overschrijven laat de bewaking los', (
-      tester,
-    ) async {
-      final botsend = _FakeBucket(
-        bucket: _bucket,
-        objects: {'deck.md': bytes(validDeck)},
-        conflictOn: 'deck.md',
-      );
-      await openFromBucket(tester, service: botsend);
-
-      await startChain(
-        tester,
-        appBarIcon(Icons.save_outlined),
-        () => textShown('Iemand anders heeft dit bestand gewijzigd'),
-        reason: 'de botsing werd niet gemeld',
-      );
-
-      expect(
-        await settleAsync(
-          tester,
-          () => botsend.puts.length > 1,
-          start: () =>
-              tester.tap(find.widgetWithText(TextButton, 'Overschrijven')),
-        ),
-        isTrue,
-        reason: 'overschrijven leverde geen tweede poging op',
-      );
-
-      // De eerste twee pogingen zijn allebei het markdownbestand: de botsing
-      // viel vóórdat er één asset was aangeraakt. Ging de `.md` niet eerst,
-      // dan stond andermans afbeelding al overschreven op het moment dat de
-      // shell meldde dat er niets was gebeurd.
-      expect(botsend.puts.take(2).map((p) => p.path), ['deck.md', 'deck.md']);
-      expect(botsend.puts.first.ifMatch, '"opgehaald"');
-      expect(
-        botsend.puts[1].ifMatch,
-        isNull,
-        reason: 'overschrijven betekent: zonder voorwaarde opnieuw',
-      );
-      expect(
-        botsend.puts.skip(2).map((p) => p.path),
-        everyElement(isNot(endsWith('.md'))),
-        reason: 'de assets horen pas ná het deck te gaan',
-      );
-      expect(find.textContaining('Opgeslagen in S3: /deck.md'), findsOneWidget);
-    });
-
-    testWidgets('een botsing afbreken laat de bucket met rust', (tester) async {
-      final botsend = _FakeBucket(
-        bucket: _bucket,
-        objects: {'deck.md': bytes(validDeck)},
-        conflictOn: 'deck.md',
-      );
-      await openFromBucket(tester, service: botsend);
-
-      await startChain(
-        tester,
-        appBarIcon(Icons.save_outlined),
-        () => textShown('Iemand anders heeft dit bestand gewijzigd'),
-        reason: 'de botsing werd niet gemeld',
-      );
-      await tester.tap(find.widgetWithText(TextButton, 'Annuleren'));
-      await tester.pumpAndSettle();
-
-      expect(
-        botsend.puts,
-        hasLength(1),
-        reason: 'na afbreken mag er geen tweede poging komen',
-      );
-      expect(find.textContaining('Opgeslagen in S3:'), findsNothing);
-    });
-
-    testWidgets('na een botsing onder een andere naam opslaan doet dat ook', (
-      tester,
-    ) async {
-      final botsend = _FakeBucket(
-        bucket: _bucket,
-        objects: {'deck.md': bytes(validDeck)},
-        conflictOn: 'deck.md',
-      );
-      await openFromBucket(tester, service: botsend);
-
-      await startChain(
-        tester,
-        appBarIcon(Icons.save_outlined),
-        () => textShown('Iemand anders heeft dit bestand gewijzigd'),
-        reason: 'de botsing werd niet gemeld',
-      );
-
-      await startChain(
-        tester,
-        find.widgetWithText(FilledButton, 'Opslaan als'),
-        () => dialogField().evaluate().isNotEmpty,
-        reason: 'het opslaanvenster kwam niet terug',
-      );
-      // Het opslaandialoog begint bij het pad dat botste.
-      expect(
-        tester.widget<TextField>(dialogField()).controller!.text,
-        'deck',
-        reason: 'het venster hoort te beginnen bij het pad dat botste',
-      );
-      await tester.enterText(dialogField(), 'deck-van-mij');
-      await tester.pumpAndSettle();
-
-      expect(
-        await settleAsync(
-          tester,
-          () => botsend.puts.length > 1,
-          start: () =>
-              tester.tap(find.widgetWithText(ElevatedButton, 'Opslaan')),
-        ),
-        isTrue,
-        reason: 'de tweede poging kwam er niet',
-      );
-
-      // Eerste poging: het oude pad, bewaakt. Tweede: het nieuwe pad, en dan
-      // valt er niets te bewaken — dat object hebben we nooit opgehaald.
-      expect(botsend.puts.map((p) => p.path), [
-        'deck.md',
-        'deck-van-mij.ocideck',
-      ]);
-      expect(
-        botsend.puts.last.ifMatch,
-        isNull,
-        reason: 'een ander pad hebben we nooit opgehaald',
-      );
-    });
-  });
-
-  testWidgets('zonder bucket zegt de app waar je er een instelt', (
-    tester,
-  ) async {
-    // Het deck kwam van een bucket die daarna uit de instellingen verdween;
-    // dan valt de opslaanknop terug op de keuze, en die is leeg.
-    final container = await pumpShell(tester);
-    await openFromWelcome(tester);
-    await startChain(
-      tester,
-      find.text('deck.md'),
-      () => container.read(tabsProvider).current?.s3Origin != null,
-      reason: 'het deck is niet geopend',
-    );
-
-    await container
-        .read(settingsProvider.notifier)
-        .removeConnection('bucket-1');
-    await tester.pumpAndSettle();
-
-    await startChain(
-      tester,
-      appBarIcon(Icons.save_outlined),
-      () => textShown('Stel eerst een S3-bucket in'),
-      reason: 'de app zweeg over de verdwenen bucket',
-    );
-    expect(fake.puts, isEmpty);
-  });
-}
-
-const _bucket = S3Bucket(
-  endpoint: 'https://s3.example',
-  region: 'eu-central-1',
-  bucket: 'presentaties',
-  accessKeyId: 'AKIA-wegwerp',
-);

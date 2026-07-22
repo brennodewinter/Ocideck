@@ -45,6 +45,8 @@ class _RejectingMirror implements DeckMirror {
   bool get hasRealHistory => false;
   @override
   bool get isDurable => true;
+  @override
+  bool get discardsLandedWork => true;
 }
 
 /// Een forge die je op scherp kunt zetten: online tot [online] op false gaat,

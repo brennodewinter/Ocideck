@@ -18,6 +18,8 @@ import '../../l10n/slide_quality_localization.dart';
 import 'slide_quality_details_dialog.dart';
 import '../../theme/app_theme.dart';
 
+part 'parts/export_dialog_notices.dart';
+
 /// Exports the deck by rendering the on-screen slide previews to images and
 /// packing them into a PDF or PPTX (WYSIWYG — the export matches the preview).
 class ExportDialog extends StatefulWidget {
@@ -61,6 +63,11 @@ class ExportDialog extends StatefulWidget {
   /// Waarschuwen of blokkeren bij onafgehandelde bevindingen.
   final PrivacyExportPolicy privacyPolicy;
 
+  /// Of de privacycontrole heeft gedraaid. Staat ze uit, dan is een leeg
+  /// scanresultaat geen schone uitslag maar een niet-gestelde vraag, en mag de
+  /// groene balk dat niet als geruststelling verkopen.
+  final bool privacyChecksEnabled;
+
   /// Na een geslaagde export aangeroepen met het formaat-label ("PDF",
   /// "PPTX", "HTML") — bijv. om het bij de recente bestanden te noteren.
   final void Function(String formatLabel)? onExported;
@@ -79,6 +86,7 @@ class ExportDialog extends StatefulWidget {
     this.exportDirectory,
     this.showClassificationWatermark = false,
     this.privacyPolicy = const PrivacyExportPolicy(),
+    this.privacyChecksEnabled = true,
     this.onExported,
   });
 
@@ -98,6 +106,7 @@ class ExportDialog extends StatefulWidget {
     String? exportDirectory,
     bool showClassificationWatermark = false,
     PrivacyExportPolicy privacyPolicy = const PrivacyExportPolicy(),
+    bool privacyChecksEnabled = true,
     void Function(String formatLabel)? onExported,
   }) {
     return showDialog(
@@ -116,6 +125,7 @@ class ExportDialog extends StatefulWidget {
         exportDirectory: exportDirectory,
         showClassificationWatermark: showClassificationWatermark,
         privacyPolicy: privacyPolicy,
+        privacyChecksEnabled: privacyChecksEnabled,
         onExported: onExported,
       ),
     );
@@ -529,79 +539,6 @@ class _ExportDialogState extends State<ExportDialog> {
     );
   }
 
-  /// De twee bestanden die naast de export komen te staan, bij naam.
-  ///
-  /// Dit stond nergens. OciDeck schreef `…-redaction-keys.json` in dezelfde map
-  /// als het rapport — op web in dezelfde downloadmap — zónder er iets over te
-  /// zeggen: geen tekst in de interface, geen regel in de handleiding. Met de
-  /// salts uit dat bestand is elk weggelakt BSN in seconden terug te rekenen,
-  /// dus wie het per ongeluk meestuurt, heft zijn eigen redactie op. Een
-  /// waarborg waar je overheen kunt kijken omdat niemand hem noemt, is geen
-  /// waarborg.
-  ///
-  /// Alleen tonen wanneer er werkelijk een manifest komt: een waarschuwing bij
-  /// een export zonder redacties is ruis, en ruis leert de gebruiker om deze
-  /// hele alinea over te slaan.
-  Widget _manifestNotice(AppLocalizations l10n) {
-    if (_bundle.manifest.isEmpty) return const SizedBox.shrink();
-    final style = TextStyle(fontSize: 11, color: AppTheme.slate400);
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            l10n.d(
-              'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.',
-            ),
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            '…$kRedactionManifestSuffix — '
-            '${l10n.d('somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.')}',
-            style: style,
-          ),
-          if (_bundle.manifest.carriesSalts) ...[
-            const SizedBox(height: 2),
-            Text(
-              '…$kRedactionKeysSuffix — '
-              '${l10n.d('bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.')}',
-              // Themabewust: in het donkere thema is amber700 op donkergrijs
-              // niet te lezen, en dit is juist de regel die gelezen moet worden.
-              style: style.copyWith(
-                color: AppTheme.warningFg,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-
-  /// De grens, op het moment van delen.
-  ///
-  /// Deze regel staat er **altijd**, en juist het stille geval is de reden. Een
-  /// deck met bevindingen waarschuwt zichzelf al; een deck zonder bevindingen
-  /// toont een groen "Klaar voor export — geen kwaliteitsproblemen gevonden", en
-  /// dát leest als "schoon". Terwijl het niet meer zegt dan: wij hebben niets
-  /// gevonden. Wie op die aanname deelt, is slechter af dan wie helemaal geen
-  /// controle had — dan had hij tenminste zelf gekeken.
-  Widget _privacyCaveat(AppLocalizations l10n) => Padding(
-    padding: const EdgeInsets.only(bottom: 8),
-    child: Text(
-      l10n.d(
-        'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.',
-      ),
-      style: TextStyle(
-        fontSize: 11,
-        color: AppTheme.slate500,
-        fontStyle: FontStyle.italic,
-      ),
-    ),
-  );
-
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -801,6 +738,7 @@ class _ExportDialogState extends State<ExportDialog> {
         ),
         const SizedBox(height: 8),
         if (widget.hasPrivacyFindings) _profileSelector(l10n),
+        _aiDraftNotice(l10n),
         _manifestNotice(l10n),
         if (widget.hasDepthChoice) _depthSelector(l10n),
         // De formaatknoppen zijn de hoofdactie; de beeldkwaliteit is een
@@ -841,24 +779,38 @@ class _ExportDialogState extends State<ExportDialog> {
     );
   }
 
+  /// De balk boven de exportknoppen als er niets te melden valt.
+  ///
+  /// Groen zegt "wij hebben gekeken en niets gevonden". Staat de privacycontrole
+  /// uit, dan is de tweede helft van die zin niet waar, en juist die helft leest
+  /// de gebruiker als toestemming om te delen. Dan wordt de balk neutraal en
+  /// zegt hij wát er niet is nagekeken — plus waar hij dat aanzet, want een
+  /// melding zonder uitweg is een doodlopende straat met tekst.
   Widget _readyBanner(AppLocalizations l10n) {
+    final checked = widget.privacyChecksEnabled;
+    final foreground = checked ? AppTheme.successFg : AppTheme.slate600;
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: AppTheme.successBg,
+        color: checked ? AppTheme.successBg : AppTheme.slate100,
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: AppTheme.successBgSoft),
+        border: Border.all(
+          color: checked ? AppTheme.successBgSoft : AppTheme.slate300,
+        ),
       ),
       child: Row(
         children: [
-          Icon(Icons.task_alt, size: 16, color: AppTheme.successFg),
+          Icon(Icons.task_alt, size: 16, color: foreground),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              '${l10n.d('Klaar voor export')} — '
-              '${l10n.d('Geen kwaliteitsproblemen gevonden')}',
-              style: TextStyle(fontSize: 11, color: AppTheme.successFg),
+              checked
+                  ? '${l10n.d('Klaar voor export')} — '
+                        '${l10n.d('Geen kwaliteitsproblemen gevonden')}'
+                  : '${l10n.d('Klaar voor export')} — '
+                        '${l10n.d('Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.')}',
+              style: TextStyle(fontSize: 11, color: foreground),
             ),
           ),
         ],

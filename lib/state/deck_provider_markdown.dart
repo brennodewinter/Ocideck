@@ -60,11 +60,22 @@ extension DeckNotifierMarkdown on DeckNotifier {
     // in de `.miauw.json`-sidecar). Zonder dit zou één keer schakelen naar de
     // markdown-weergave de uitsluitingen en klantbevestigingen wissen, en de
     // eerstvolgende opslag die sidecar met ze erin.
+    //
+    // Hetzelfde geldt sindsdien voor het zegel en de handtekening
+    // (`.seal.json`). Een verzegeld deck komt hier niet eens langs — [_mutate]
+    // weigert elke bewerking — maar een handtekening die op de akkoorddia is
+    // opgesteld en nog niet verzegeld, wél. Zonder deze regel was die na één
+    // keer schakelen weg, en de eerstvolgende opslag had de sidecar erbij
+    // opgeruimd. De bestandshash reist mee om dezelfde reden dat hij bestaat:
+    // hij hoort bij het bestand op schijf, niet bij de tekst in de editor.
     if (current != null) {
-      deck = deck.copyWith(
-        miauwWaivers: current.miauwWaivers,
-        miauwConfirmations: current.miauwConfirmations,
-      );
+      deck = SealRecord.of(current)
+          .applyTo(deck)
+          .copyWith(
+            miauwWaivers: current.miauwWaivers,
+            miauwConfirmations: current.miauwConfirmations,
+            fileHash: current.fileHash,
+          );
     }
     _mutate(deck); // discrete stap → ook ongedaan te maken
     return true;

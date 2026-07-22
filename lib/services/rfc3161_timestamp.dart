@@ -3,14 +3,41 @@ import 'dart:typed_data';
 
 import '../utils/asn1_der.dart';
 
-/// RFC 3161 trusted timestamping (PENTEST_MIAUW §8-A2). OciDeck stays a
-/// **producer of hashes**: it builds a TimeStampReq (`.tsq`) from the deck's
-/// SHA-512 seal hash, the user has OpenKAT / a TSA timestamp it out-of-band, and
-/// the returned token (`.tsr`) is imported and **verified in-app** — the token's
-/// message imprint must equal the current seal hash, and its `genTime` proves
-/// the seal existed before that moment. Full CMS-signature verification of the
-/// TSA certificate is deliberately deferred (§8-A3); this verifies that the token
-/// timestamps *this* document.
+/// RFC 3161-tijdstempels voor het documentzegel (PENTEST_MIAUW §8-A2). OciDeck
+/// is hier een **producent van hashes**: het bouwt een TimeStampReq (`.tsq`) uit
+/// de SHA-512-zegelhash, de gebruiker laat OpenKAT of een TSA die buiten de app
+/// om tijdstempelen, en het teruggekomen token (`.tsr`) wordt geïmporteerd.
+///
+/// **Wat dit bestand doet, en wat het niet doet.** Het ontleedt de TSTInfo uit
+/// het token en vergelijkt de message imprint met de zegelhash. Dat is één
+/// controle, en het is de enige: *hoort dit token bij dit document?*
+///
+/// Niet gecontroleerd worden:
+///
+/// - de **CMS-handtekening** van het token — er wordt niets geverifieerd van
+///   wat de TSA over de TSTInfo heeft ondertekend;
+/// - de **certificaatketen** van de TSA, en dus ook niet of de ondertekenaar
+///   een TSA is (`id-kp-timeStamping`) of überhaupt te vertrouwen valt;
+/// - de **echo van de nonce**. Het verzoek dráágt sinds kort een nonce, en RFC
+///   3161 §2.4.2 verplicht de TSA die te herhalen — maar OciDeck bewaart de
+///   nonce niet, dus bij het importeren valt er niets mee te vergelijken. Een
+///   ouder token voor dezelfde hash, opnieuw ingediend, is voor deze app dus
+///   niet te onderscheiden van een vers token. Wie beide helften heeft kan het
+///   wél nakijken; zie [timeStampEchoesNonce] en [buildTimeStampRequest].
+///
+/// De praktische betekenis: `genTime` is een *bewering van het token*, geen
+/// vastgesteld feit. Wie het deck heeft, kan zelf een token maken met een
+/// willekeurige tijd en een kloppende imprint. Daarom heet dit hier geen
+/// "trusted timestamp" en toont de interface geen groen vinkje, maar een
+/// neutrale melding met de kanttekening erbij.
+///
+/// Waarom niet gebouwd: echte tokenverificatie vraagt X.509-padvalidatie tegen
+/// een vertrouwensanker. Dat is een afhankelijkheid erbij (met SBOM- en
+/// licentiegevolgen) plus een meegeleverde ankerlijst die per definitie
+/// veroudert — in een applicatie die verder geen netwerk op gaat en waarvan de
+/// belofte tamper-*evidence* is, niet tamper-*proof*. Wie onweerlegbare
+/// tijdsverankering nodig heeft, verifieert het token bij de TSA; OciDeck
+/// bewaart het ongewijzigd zodat dat kan.
 
 /// The hash algorithms whose OID this module recognises (for building a request
 /// and for locating the message imprint in a token).
@@ -62,11 +89,16 @@ const int kTimeStampNonceBytes = 8;
 /// stellen dát dit token het antwoord op dít verzoek is.
 ///
 /// De echo is met [timeStampEchoesNonce] te controleren door wie beide helften
-/// heeft. OciDeck zelf kan dat (nog) niet bij het importeren: het verzoek gaat
+/// heeft. OciDeck zelf doet dat niet bij het importeren: het verzoek gaat
 /// buiten de app om naar een TSA en het deck bewaart de nonce niet, dus na een
-/// herstart is de andere helft weg. Dat is een bewuste grens en geen omissie —
-/// een sleutel erbij in de front matter zou botsen met de lopende verhuizing
-/// van het zegel naar een sidecar.
+/// herstart is de andere helft weg. Dat is een bewuste grens en geen omissie.
+///
+/// De reden die daar oorspronkelijk bij stond — een sleutel erbij zou botsen
+/// met de lopende verhuizing van het zegel naar een sidecar — geldt niet meer:
+/// die verhuizing is af. `<naam>.seal.json` is nu precies de plek waar zo'n
+/// nonce hoort (hij is ondoorzichtig en gaat over het document in plaats van
+/// erin), dus de belemmering is weg. Wat overblijft is de keuze om het te
+/// bouwen; tot dat gebeurt geldt de grens hierboven onverkort.
 Uint8List buildTimeStampRequest(
   Uint8List hash, {
   Rfc3161HashAlgorithm algorithm = Rfc3161HashAlgorithm.sha512,
@@ -150,7 +182,8 @@ Uint8List? buildTimeStampRequestForSealHash(
   return buildTimeStampRequest(hash, algorithm: algorithm, nonce: nonce);
 }
 
-/// The data extracted from a timestamp token that OciDeck can verify offline.
+/// De twee velden die OciDeck uit een tijdstempeltoken leest. Uitgelezen, niet
+/// geverifieerd — zie de kop van dit bestand.
 class TimeStampToken {
   const TimeStampToken({
     required this.messageImprintHex,
@@ -161,7 +194,8 @@ class TimeStampToken {
   /// The hex of the hash the TSA timestamped (the token's message imprint).
   final String messageImprintHex;
 
-  /// The TSA's asserted time (`genTime`), in UTC.
+  /// Het tijdstip dat het token *beweert* (`genTime`), in UTC. Geen
+  /// gecontroleerd feit: de handtekening eronder wordt niet geverifieerd.
   final DateTime genTime;
 
   /// De nonce die de TSA terugkaatste, of null wanneer het token er geen draagt
@@ -272,9 +306,15 @@ bool timeStampEchoesNonce(Uint8List token, Uint8List nonce) {
   return trim(parsed!.nonceHex!) == trim(_hex(nonce));
 }
 
-/// Whether [token] is a valid timestamp for [sealHashHex] (case-insensitive):
-/// its message imprint equals the seal hash.
-bool timeStampMatchesHash(Uint8List token, String sealHashHex) {
+/// Of de **message imprint** van [token] gelijk is aan [sealHashHex]
+/// (hoofdletterongevoelig) — oftewel: hoort dit token bij dit document?
+///
+/// De naam zegt met opzet `Imprint` en niet `IsValid`. Dit is geen
+/// geldigheidscontrole: de CMS-handtekening van de TSA en haar certificaatketen
+/// worden niet gecontroleerd (zie de kop van dit bestand). Een aanroeper die
+/// hieruit "het token is geldig" leest, vertelt de gebruiker meer dan er is
+/// gecontroleerd, en dat is precies de bewering die dit zegel niet wil doen.
+bool timeStampImprintMatchesHash(Uint8List token, String sealHashHex) {
   final parsed = parseTimeStampToken(token);
   return parsed != null &&
       parsed.messageImprintHex.toLowerCase() == sealHashHex.toLowerCase();

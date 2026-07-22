@@ -55,4 +55,43 @@ void main() {
     expect(state.selection, {2});
     expect(state.focusQualityField, 'textColor');
   });
+
+  test('een privacybevinding op de front matter hoort niet bij het thema', () {
+    // Deckbreed betekende ooit vanzelf "thema". Sinds de privacyscanner ook de
+    // front matter leest is dat niet meer waar, en stuurde de navigatie een
+    // e-mailadres in het auteursveld naar de kleurinstellingen — waar het veld
+    // niet bestaat, dus zonder markering en zonder scroll.
+    const finding = SlideQualityIssue(
+      slideIndex: kDeckWideSlideIndex,
+      kind: SlideQualityIssueKind.privacyContact,
+      category: SlideQualityCategory.privacy,
+      severity: MarkdownValidationSeverity.warning,
+      field: 'author',
+    );
+    expect(issueBelongsToDeckInfo(finding), isTrue);
+  });
+
+  test('een deckbrede contrastmelding blijft bij de kleurinstellingen', () {
+    const contrast = SlideQualityIssue(
+      slideIndex: kDeckWideSlideIndex,
+      kind: SlideQualityIssueKind.themeContrast,
+      category: SlideQualityCategory.contrast,
+      severity: MarkdownValidationSeverity.warning,
+      field: 'textColor',
+    );
+    expect(issueBelongsToDeckInfo(contrast), isFalse);
+  });
+
+  test('een melding op een dia is nooit een deckgegeven', () {
+    const onSlide = SlideQualityIssue(
+      slideIndex: 3,
+      kind: SlideQualityIssueKind.privacyContact,
+      category: SlideQualityCategory.privacy,
+      severity: MarkdownValidationSeverity.warning,
+      // Zelfde veldnaam als een deckveld ('title' bestaat op beide niveaus);
+      // de slide-index moet de doorslag geven.
+      field: 'deckTitle',
+    );
+    expect(issueBelongsToDeckInfo(onSlide), isFalse);
+  });
 }

@@ -1751,8 +1751,6 @@ const _dutchSourceEt = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Vormista ja pitseeri',
   'Verzegelen': 'Pitseeri',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Vormista see esitlus ja arvuta selle sisu kohta SHA-512 pitser. Seejärel on fail lukustatud ega ole enam muudetav; hilisemad muudatused muutuvad nähtavaks. Seda ei saa rakenduses tagasi võtta.',
   'Handtekening (optioneel)': 'Allkiri (valikuline)',
   'Naam': 'Nimi',
   'Rol of functie': 'Roll või ametikoht',
@@ -1770,6 +1768,94 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Selles esitluses on AI tekst, mida sa pole veel üle vaadanud. Eksportida saab siiski; fail teatab sellest ise ja saab nimesse "-ai-concept".',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Mustand: sisaldab AI teksti, mida keegi pole veel üle vaadanud',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Vormista see esitlus ja fikseeri salvestatud faili SHA-512 pitser. Seejärel on see lukustatud ega ole enam muudetav; iga hilisem muudatus muutub nähtavaks. Aruande saaja kontrollib pitserit ise käsuga sha512sum. Seda ei saa rakenduses tagasi võtta.',
+  'Zegel en handtekening': 'Pitser ja allkiri',
+  'Zegel nog niet vastgelegd': 'Pitser pole veel fikseeritud',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Salvestatud faili, mille vastu pitserit kontrollida, veel ei ole. Salvesta esitlus.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Väljajätmine on sees: see, mida kontroll peab isikuandmeteks, muudetakse mustaks ning selle slaidi kõik pildid, video ja heli ei lähe ekraanile ega ekspordisse. Sinu markdown-fail säilitab kõik.',
+  'Bestand': 'Fail',
+  'Venster': 'Aken',
+  'Help': 'Abi',
+  'Alles selecteren': 'Vali kõik',
+  'Plakken': 'Kleebi',
+  'Opnieuw': 'Tee uuesti',
+  'Eigenschappen': 'Omadused',
+  'Opdrachten…': 'Käsud…',
+  'Opslaan…': 'Salvestamine…',
+  'Uploaden naar WebDAV…': 'Üleslaadimine WebDAV-i…',
+  'Uploaden naar S3…': 'Üleslaadimine S3-e…',
+  'Vastleggen in git…': 'Salvestamine git-i…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Salvestamine käib. Uuesti salvestamine ei tee midagi, kuni see on lõpetatud.',
+  'Klaar — privacy niet gecontroleerd':
+      'Valmis — privaatsust pole kontrollitud',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Isikuandmeid, eriliiki andmeid ja saladusi ei kontrollitud: privaatsuse kontroll on jaotises Turvalisus välja lülitatud.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Esitlused, mis jäävad tavalisteks Markdown-failideks: loetavad, otsitavad ja avatavad mis tahes redaktoriga.',
+  'sjablonen om mee te beginnen, of leeg': 'malli alustamiseks või tühi',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Malli näidisslaidid on hollandi keeles. Nimi ja kirjeldus järgivad sinu enda keelt; sisu kohandad pärast loomist.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Väljajätmine on sees: leitud andmed muudetakse mustaks ning selle slaidi kõik pildid, video ja heli ei lähe ekraanile ega ekspordisse. Sinu markdown-fail säilitab kõik.',
+  'Mijn tekst': 'Minu tekst',
+  'Wat zij zien': 'Mida nemad näevad',
+  'Presentatiegegevens': 'Esitluse andmed',
+  'Open presentatiegegevens': 'Ava esitluse andmed',
+  'Motivering van een uitsluiting': 'Erandi põhjendus',
+  'Motivering van een bevestiging': 'Kinnituse põhjendus',
+  'Tabel koprij, kolom {kolom}': 'Tabel päiserida, veerg {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabel rida {rij}, veerg {kolom}',
+  'Via deze website ophalen?': 'Kas tuua selle veebisaidi kaudu?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Selle esitluse server ei lubanud brauseril faili otse lugeda. OciDeck saab anda aadressi edasi veebisaidile, kust OciDeck ise pärineb, ja see toob faili. Nii näeb see veebisait kogu aadressi — kui lingis on võti või kood, näeb see veebisait ka seda.',
+  'In de browser kan dit niet worden bewaard':
+      'Brauseris ei saa seda salvestada',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Brauseril pole võtmehoidjat nagu arvutil: seda, mille OciDeck siia salvestaks, saab lugeda iga selle lehe skript. Kasuta lauaarvuti versiooni — seal läheb saladus tõesti operatsioonisüsteemi võtmehoidjasse.',
+  'Licenties van derden': 'Kolmandate osapoolte litsentsid',
+  'Alle licentieteksten tonen': 'Näita kõiki litsentsitekste',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck ise on litsentsitud EUPL-1.2 alusel. Lisaks koondab see kolmandate osapoolte tarkvara: Darti ja Flutteri paketid, kaks kaasasolevat pistikprogrammi, neli kirjaperekonda, privaatsuskontrolli näomudeli ja JavaScripti, mis reisib kaasa HTML-ekspordiga. Igaüks neist säilitab oma litsentsi.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'See fail sisaldab kolmandate osapoolte tarkvara ja mõnikord ka kirjatüüpi. Allpool on nende juurde kuuluvad täielikud litsentsitekstid; anna need edasi koos failiga.',
+  'Sporen op dit apparaat': 'Jäljed selles seadmes',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Lisaks sinu seadetele hoiab OciDeck ka hiljutiste failide loendit ja krahhi korral taastefaili sinu esitluse kogu sisuga. Miski sellest ei lahku sellest seadmest, aga siin see on — lihttekstina, kaitstuna sinu kontoga selles operatsioonisüsteemis ja mitte enamaga.',
+  'Recent geopende presentaties': 'Hiljuti avatud esitlused',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Loend hoiab iga avatud esitluse täisteed ja klassifikatsiooni — koos on see teave selle kohta, mille kallal sa töötad ja kelle jaoks.',
+  'Recente lijst wissen': 'Kustuta hiljutiste failide loend',
+  'De recente lijst was al leeg.': 'Hiljutiste failide loend oli juba tühi.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'kirjet kustutatud hiljutiste failide loendist.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Taastefailid sisaldavad sinu esitluste kogu sisu lihttekstina. Need koristatakse automaatselt 7 päeva pärast ja korraliku sulgemise korral kohe.',
+  'Alles terugzetten': 'Lähtesta kõik',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Kustutab kõik seaded, hiljutiste failide loendi, taastefailid, giti töökoopiad ja paroolid sinu võtmehoidlas. Sinu esitlused jäävad alles: need on sinu omad, mitte OciDecki omad.',
+  'Zet alles terug naar de begintoestand': 'Lähtesta kõik algolekusse',
+  'Alles terugzetten naar de begintoestand?':
+      'Kas lähtestada kõik algolekusse?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Sinu seaded, hiljutiste failide loend, taastefailid, giti töökoopiad ja salvestatud paroolid kustutatakse. Seda ei saa tagasi võtta. Sinu esitlused jäävad alles.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'muudatust pole veel git-serverisse saadetud ja need on ainult selles seadmes. Ka need kaovad.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Kõik on lähtestatud algolekusse.',
+  'Terugzetten is niet gelukt.': 'Lähtestamine ebaõnnestus.',
+  'Er wacht nog werk dat niet verstuurd is': 'Ootel on saatmata töö',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Sellel git-ühendusel on muudatusi, mida pole veel serverisse saadetud. Kui ühenduse eemaldad, kaob ka töökoopia sellest seadmest — ja seda tööd pole enam kusagil.',
+  'Verbinding behouden': 'Säilita ühendus',
+  'Toch verwijderen': 'Eemalda siiski',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

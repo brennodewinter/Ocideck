@@ -1,3 +1,22 @@
+// ── THIRD-PARTY CONTENT — NOT EUPL-1.2 ──────────────────────────────────────
+//
+// The test index in this library (see the `_android` and `_ios` parts)
+// reproduces 186 verbatim test ids, titles and MASVS categories of the **OWASP
+// Mobile Application Security Testing Guide v2.0.0**, © the OWASP Foundation and
+// its contributors, licensed under CC-BY-SA-4.0.
+//
+//   Licence: https://creativecommons.org/licenses/by-sa/4.0/
+//   Source:  https://owasp.org/www-project-mobile-app-security/
+//
+// **Share-alike travels with this dataset.** Anyone redistributing it — as part
+// of OciDeck or lifted out of it — does so under CC-BY-SA-4.0 with this
+// attribution. It does not reach the surrounding EUPL-1.2 code: OciDeck bundles
+// this material as a *Collection* in the licence's own sense.
+//
+// See docs/LICENSE_COMPLIANCE.md, § "OWASP WSTG, MASTG and MASWE", for what is
+// bundled and what deliberately is not.
+// ────────────────────────────────────────────────────────────────────────────
+
 import '../models/mastg_test.dart';
 
 part 'mastg_catalog_android.dart';

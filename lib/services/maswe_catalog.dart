@@ -1,3 +1,22 @@
+// ── THIRD-PARTY CONTENT — NOT EUPL-1.2 ──────────────────────────────────────
+//
+// The weakness list in this library (see the `_written` and `_draft` parts)
+// reproduces 117 verbatim weakness ids, titles, MASVS categories and CWE
+// mappings of the **OWASP Mobile Application Security Weakness Enumeration**
+// (snapshot 2026-06-12 — the project publishes no releases or tags).
+// © the OWASP Foundation and its contributors, licensed under CC-BY-SA-4.0.
+//
+//   Licence: https://creativecommons.org/licenses/by-sa/4.0/
+//   Source:  https://mas.owasp.org/MASWE/
+//
+// **Share-alike travels with this dataset.** Anyone redistributing it — as part
+// of OciDeck or lifted out of it — does so under CC-BY-SA-4.0 with this
+// attribution. It does not reach the surrounding EUPL-1.2 code: OciDeck bundles
+// this material as a *Collection* in the licence's own sense.
+//
+// See docs/LICENSE_COMPLIANCE.md, § "OWASP WSTG, MASTG and MASWE".
+// ────────────────────────────────────────────────────────────────────────────
+
 import '../models/maswe_weakness.dart';
 
 part 'maswe_catalog_written.dart';

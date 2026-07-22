@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart' show StateController;
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 import 'package:window_manager/window_manager.dart';
@@ -14,6 +16,7 @@ import '../utils/display_path.dart';
 import '../utils/log.dart';
 import '../models/asset_origin.dart';
 import '../models/deck.dart';
+import '../models/deck_template.dart';
 import '../models/privacy_disposition.dart';
 import '../models/recent_file.dart';
 import '../models/settings.dart' show AppSettings;
@@ -66,6 +69,7 @@ import '../state/image_contrast_provider.dart';
 import '../state/image_privacy_provider.dart';
 import '../state/privacy_provider.dart';
 import '../state/provider_warmup.dart';
+import '../state/save_progress_provider.dart';
 import '../state/info_safety_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
@@ -96,7 +100,11 @@ import 'dialogs/new_deck_dialog.dart';
 import 'dialogs/open_presentation_dialog.dart';
 import 'dialogs/package_encrypt_dialog.dart';
 import 'dialogs/package_password_dialog.dart';
+import 'dialogs/proxy_fallback_dialog.dart';
 import 'dialogs/presentation_info_dialog.dart';
+import 'reader/document_reader_screen.dart';
+import 'shell/app_menu_bar.dart';
+import 'shell/shell_deck_commands.dart';
 import 'dialogs/save_destination_dialog.dart';
 import 'dialogs/scan_library_dialog.dart';
 import 'dialogs/seal_timestamp_dialog.dart';
@@ -128,6 +136,7 @@ part 'shell/shell_actions_git.dart';
 part 'shell/shell_actions_git_dialogs.dart';
 part 'shell/ai_actions.dart';
 part 'shell/command_palette_actions.dart';
+part 'shell/menu_commands.dart';
 part 'shell/tab_bar.dart';
 part 'shell/welcome_screen.dart';
 part 'shell/play_only_screen.dart';
@@ -172,6 +181,14 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
         .packagePasswordResolver = ({required bool retry}) async {
       if (!mounted) return null;
       return PackagePasswordDialog.show(context, retry: retry);
+    };
+    // Idem voor de vraag of de web-import de URL aan het eigen fetch-hulppunt
+    // mag doorgeven. Zonder deze registratie vervalt die terugval.
+    ref
+        .read(tabsProvider.notifier)
+        .proxyFallbackConfirm = ({required String host}) async {
+      if (!mounted) return false;
+      return ProxyFallbackDialog.show(context, host: host);
     };
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _maybeRestore();
@@ -802,58 +819,106 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       );
     });
 
-    return CallbackShortcuts(
-      bindings: {
-        const SingleActivator(LogicalKeyboardKey.keyS, control: true):
-            _saveActive,
-        const SingleActivator(LogicalKeyboardKey.keyS, meta: true): _saveActive,
-        const SingleActivator(LogicalKeyboardKey.keyO, control: true):
-            _openActive,
-        const SingleActivator(LogicalKeyboardKey.keyO, meta: true): _openActive,
-      },
-      child: FocusScope(
-        autofocus: true,
-        child: DropTarget(
-          onDragEntered: (_) => setState(() => _dragging = true),
-          onDragExited: (_) => setState(() => _dragging = false),
-          onDragDone: (detail) {
-            setState(() => _dragging = false);
-            if (isWebPlatform) {
-              _onWebFilesDropped(detail.files);
-            } else {
-              _onFilesDropped(detail.files.map((f) => f.path).toList());
-            }
-          },
-          child: Material(
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    _AppTabBar(
-                      tabsState: tabsState,
-                      onSelect: (i) =>
-                          ref.read(tabsProvider.notifier).selectTab(i),
-                      onClose: _onCloseTab,
-                      onAdd: () =>
-                          ref.read(tabsProvider.notifier).newEmptyTab(),
-                    ),
-                    Expanded(
-                      child: IndexedStack(
-                        index: tabsState.clampedIndex,
-                        children: [
-                          for (final tab in tabsState.tabs) _tabScope(tab),
-                        ],
+    return AppPlatformMenuBar(
+      actions: _menuActions(context.l10n),
+      deckActions: _deckMenuActions(),
+      child: CallbackShortcuts(
+        bindings: {
+          const SingleActivator(LogicalKeyboardKey.keyS, control: true):
+              _saveActive,
+          const SingleActivator(LogicalKeyboardKey.keyS, meta: true):
+              _saveActive,
+          const SingleActivator(LogicalKeyboardKey.keyO, control: true):
+              _openActive,
+          const SingleActivator(LogicalKeyboardKey.keyO, meta: true):
+              _openActive,
+        },
+        child: FocusScope(
+          autofocus: true,
+          child: DropTarget(
+            onDragEntered: (_) => setState(() => _dragging = true),
+            onDragExited: (_) => setState(() => _dragging = false),
+            onDragDone: (detail) {
+              setState(() => _dragging = false);
+              if (isWebPlatform) {
+                _onWebFilesDropped(detail.files);
+              } else {
+                _onFilesDropped(detail.files.map((f) => f.path).toList());
+              }
+            },
+            child: Material(
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      _AppTabBar(
+                        tabsState: tabsState,
+                        onSelect: (i) =>
+                            ref.read(tabsProvider.notifier).selectTab(i),
+                        onClose: _onCloseTab,
+                        onAdd: () =>
+                            ref.read(tabsProvider.notifier).newEmptyTab(),
                       ),
-                    ),
-                  ],
-                ),
-                if (_dragging) const _DropOverlay(),
-                const MermaidRenderHostLayer(),
-              ],
+                      Expanded(
+                        child: IndexedStack(
+                          index: tabsState.clampedIndex,
+                          children: [
+                            for (final tab in tabsState.tabs) _tabScope(tab),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  if (_dragging) const _DropOverlay(),
+                  const MermaidRenderHostLayer(),
+                ],
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  /// De menubalk-handelingen die geen open presentatie nodig hebben.
+  AppMenuActions _menuActions(AppLocalizations l10n) => AppMenuActions(
+    newDeck: () => ref.read(tabsProvider.notifier).newEmptyTab(),
+    open: _openActive,
+    settings: () => SettingsDialog.show(context),
+    userGuide: () => DocumentReaderScreen.open(
+      context,
+      title: l10n.d('Gebruikershandleiding'),
+      assetBase: 'docs/USER_GUIDE.md',
+    ),
+    shortcuts: () => DocumentReaderScreen.open(
+      context,
+      title: l10n.d('Sneltoetsen'),
+      assetBase: 'docs/SHORTCUTS.md',
+    ),
+  );
+
+  /// De menubalk-handelingen van de werkruimte, of null zolang er geen
+  /// presentatie open is — dan staan ze uitgeschakeld in het menu in plaats van
+  /// te verdwijnen.
+  AppDeckMenuActions? _deckMenuActions() {
+    // `deckProvider` is per tabblad overschreven en op dit niveau dus leeg; de
+    // werkruimte publiceert zelf wat ze kan zodra ze er is.
+    final commands = ref.watch(shellDeckCommandsProvider);
+    if (commands == null) return null;
+    return AppDeckMenuActions(
+      save: commands.save,
+      export: commands.export,
+      present: commands.present,
+      fullDeckPreview: commands.fullDeckPreview,
+      properties: commands.properties,
+      find: commands.find,
+      findReplace: commands.findReplace,
+      commandPalette: commands.commandPalette,
+      undo: commands.undo,
+      redo: commands.redo,
+      canExport: commands.canExport,
+      canUndo: commands.canUndo,
+      canRedo: commands.canRedo,
     );
   }
 }

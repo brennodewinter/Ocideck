@@ -274,6 +274,10 @@ class _NativeGitMirror implements NativeGitMirror {
   bool get hasRealHistory => true;
   @override
   bool get isDurable => true;
+  @override
+  // De clone ís de werkkopie waar de editor uit leest; zie de toelichting bij
+  // [DeckMirror.discardsLandedWork].
+  bool get discardsLandedWork => false;
 
   // ── Native versiebeheer ────────────────────────────────────────────────────
   @override

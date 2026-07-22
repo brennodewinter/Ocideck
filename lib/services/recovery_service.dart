@@ -25,6 +25,13 @@ class RecoverySnapshot {
   /// de markdown bewaart zou de afspraken met de klant kwijtraken.
   final String? miauw;
 
+  /// JSON-payload van [SealCodec.encode], als het deck is afgerond of een
+  /// handtekening draagt. Reist mee om dezelfde reden als [userNotes]: sinds
+  /// 0.1.0 staat het zegelblok niet meer in de markdown, en juist ná het
+  /// verzegelen — wanneer het deck vuil is maar nog niet opgeslagen — zou een
+  /// momentopname anders de zojuist gezette handtekening kwijtraken.
+  final String? seal;
+
   /// JSON-payload van [AnnotationCodec.encode], als er tekeningen op de slides
   /// staan.
   ///
@@ -43,6 +50,7 @@ class RecoverySnapshot {
     required this.markdown,
     this.userNotes,
     this.miauw,
+    this.seal,
     this.annotations,
   });
 
@@ -54,6 +62,7 @@ class RecoverySnapshot {
     'markdown': markdown,
     if (userNotes != null) 'userNotes': userNotes,
     if (miauw != null) 'miauw': miauw,
+    if (seal != null) 'seal': seal,
     if (annotations != null) 'annotations': annotations,
   };
 
@@ -67,6 +76,7 @@ class RecoverySnapshot {
       markdown: (json['markdown'] as String?) ?? '',
       userNotes: json['userNotes'] as String?,
       miauw: json['miauw'] as String?,
+      seal: json['seal'] as String?,
       annotations: json['annotations'] as String?,
     );
   }
@@ -167,6 +177,33 @@ class RecoveryService {
   /// Wis álle herstelbestanden, ongeacht leeftijd (knop in Instellingen →
   /// Privacy). Best-effort; geeft het aantal verwijderde bestanden terug.
   Future<int> discardAll() => pruneOlderThan(Duration.zero);
+
+  /// Wanneer er voor het laatst tijdens deze sessie is opgeruimd.
+  DateTime? _lastPrune;
+
+  /// Hoe vaak er tijdens het draaien wordt opgeruimd.
+  ///
+  /// Ruim genoeg dat het niets kost, vaak genoeg dat [defaultMaxAge] ook een
+  /// grens is voor een machine die weken aan blijft staan.
+  static const pruneInterval = Duration(hours: 1);
+
+  /// Ruim verlopen herstelbestanden op terwijl de app draait.
+  ///
+  /// Zonder dit gold de houdbaarheid alleen bij het opstarten: wie zijn laptop
+  /// niet afsluit, hield een momentopname van een crash van vorige maand op
+  /// schijf, want alleen [loadAll] veegde. Een bewaartermijn die je pas
+  /// handhaaft bij de volgende start, is geen bewaartermijn.
+  ///
+  /// Zelf-beperkend op [pruneInterval], zodat de autosave-tik hem elke 25
+  /// seconden mag aanroepen zonder de map elke keer te doorlopen.
+  Future<void> pruneIfDue() async {
+    if (_unavailable) return;
+    final last = _lastPrune;
+    final now = DateTime.now();
+    if (last != null && now.difference(last) < pruneInterval) return;
+    _lastPrune = now;
+    await pruneOlderThan(defaultMaxAge);
+  }
 
   /// Delete recovery files last modified more than [maxAge] ago. Best-effort:
   /// failures are logged, never thrown. Returns the number of files removed.

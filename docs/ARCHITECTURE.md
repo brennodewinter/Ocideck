@@ -228,8 +228,16 @@ the key thing to understand before touching rendering:
    also seeks to the segment start and stops at the segment end (the per-slide
    trim window that powers "cut a video across slides"). YouTube/Vimeo play in a
    second on-screen WebView (`_VideoEmbedPreview`, the same pattern as the
-   Mermaid host) wired to the provider's iframe API for end-detection and
-   playhead reporting; remote rendering is gated by the **Online media** setting.
+   Mermaid host); remote rendering is gated by the **Online media** setting. Both
+   embeds are a bare iframe on the URL `VideoSource.embedUri` builds. End
+   detection and playhead reporting come from the provider: Vimeo through its
+   `player.js` API, YouTube through the player's own `postMessage` channel
+   (`enablejsapi=1`) with **no** script fetched from YouTube — that script came
+   from `www.youtube.com` and put the player itself on that origin, which is the
+   one the `youtube-nocookie.com` variant exists to avoid (*corrected
+   2026-07-22*). `_youTubePlayerNavigationAllowed` matches on host, not
+   substring, and refuses `www.youtube.com` so the player's "Watch on YouTube"
+   link cannot navigate the slide there.
 2. **HTML export** — `services/marp_html_service.dart` produces a single `.html`
    that renders in a browser using inlined JavaScript (marked, highlight.js,
    mermaid, MathJax), inlined CSS and an inlined font. Charts are pre-rendered to
@@ -266,6 +274,18 @@ control visibility via `slideVisibleAtTlp`).
 metadata and passed into PDF (`pw.Document` title/author/subject/keywords/creator/producer),
 PPTX core properties, and HTML `<meta>` tags. HTML also gets a fixed
 `.tlp-export-banner` when classified.
+
+The same object carries the **unreviewed-AI declaration**, counted from
+`Slide.aiAssistedFields` (`unreviewedAiSlideCount`). It rides the existing
+channels rather than adding a new one: the keyword `kAiDraftKeyword` joins
+`exportKeywords()`, `kAiDraftSubjectNote` is appended to `subject()` behind the
+TLP prefix, `htmlAiMarking` emits `<meta name="ai-generated">` beside
+`ai-generated-slides`, `MarpHtmlService._aiBanner` renders an
+`.ai-export-banner` (offset below the TLP banner when there is one, at the top
+when there is not), and `fileSuffix` puts `-ai-concept` in the filename that
+`ExportService.export` composes. Every one of them is empty when the count is
+zero, so a reviewed deck exports exactly as before. The count is taken from the
+**projected** deck the export dialog holds, so the redacted copy declares it too.
 
 ### Visual TLP marking
 
@@ -379,6 +399,17 @@ surface takes a raw `Deck`/`List<Slide>`, so redaction cannot be bypassed by
 forgetting a call. `forExternalProcessing(...)` is the stricter variant for
 hand-off outside the app.
 
+The boundary is about what *leaves*, so the author's own editor sits on the
+source side: the preview, the thumbnails and the slide list render the raw deck,
+because a screen that blacks out your own sentence leaves you nothing to correct.
+`services/privacy/privacy_preview.dart` is the one deliberate crossing back —
+`audiencePreviewSlide` runs a *single* slide through `forAudience` and hands the
+projected `Slide` to the preview, on request, so the author can look at the
+recipient's version. It projects one slide rather than the deck because the
+projection scans, and rescanning a deck on every keystroke in the editor beside
+it would make the preview unusable; the scanner escalates within a slide, so the
+result for that slide is the same either way.
+
 The type says a deck went through the boundary; it does not say the boundary
 looked at every field. That second half is a list written by hand in three
 places — the scanner's fragments, the projection, and the redaction manifest —
@@ -398,15 +429,21 @@ cloud rules, fail-closed on web); `utils/zip_encryption.dart` backs encrypted
 Two upstream plugins are forked into `third_party/` and wired via `pubspec.yaml`
 (path dependency / `dependency_overrides`):
 
-- **`desktop_multi_window`** (MixinNetwork) — vendored fork with
+- **`desktop_multi_window`** (MixinNetwork, **Apache-2.0**) — vendored fork with
   `window_setFrame`, `window_coverScreen` (borderless fill of a chosen screen),
   and `window_close` on **macOS, Windows, and Linux**. macOS additionally tracks
   the mouse for non-key windows so chart hover works on the beamer.
-- **`screen_retriever_macos`** (leanflutter) — a packaging fix for recent
-  Xcode/CocoaPods.
+- **`screen_retriever_macos`** (leanflutter, MIT) — a Swift Package Manager
+  layout added for recent Xcode/CocoaPods; no upstream file edited.
 
-If you bump either upstream, re-apply the local changes (they're small and
-documented in the diff) and re-test the dual-screen presenter.
+Each fork carries a `MODIFICATIONS.md` naming the upstream commit it descends
+from and every local change, and — for the Apache-2.0 one — each changed file
+opens with the §4(b) notice that licence requires. The SBOM records the same
+commit plus a SHA-256 tree hash of the directory.
+
+If you bump either upstream, re-apply the local changes, update
+`MODIFICATIONS.md` and `_forkOrigins` in `tool/sbom_build.dart`, run `make sbom`,
+and re-test the dual-screen presenter.
 
 ## Information-security module (optional, off by default)
 
@@ -428,17 +465,26 @@ the existing rails rather than adding a parallel stack:
   compliance-analyzer derivations, and the audit-dossier index builder
   (`services/audit_dossier.dart`).
 - **Document integrity** — `services/document_integrity.dart` seals a finalised
-  deck with a SHA-512 hash over the canonicalised content (front matter
-  `ocideck_finalized` / `ocideck_seal_*`), re-verified on open. An optional **RFC
-  3161** timestamp (`services/rfc3161_timestamp.dart`, with a hand-rolled ASN.1
-  DER codec in `utils/asn1_der.dart` — no new dependency) anchors that hash in
-  time; OciDeck only produces and verifies, never contacts a TSA itself.
+  deck with a SHA-512 hash over the **bytes of the `.md`**, recorded beside the
+  file in `<name>.seal.json` (`services/seal_codec.dart`) together with the
+  visible signature. Because the seal sits outside the file it covers, a
+  recipient recomputes it with `sha512sum` — no OciDeck, no specification to
+  replay. Re-verified on open by comparing that value with the hash of the bytes
+  just read. An optional **RFC 3161** token
+  (`services/rfc3161_timestamp.dart`, with a hand-rolled ASN.1 DER codec in
+  `utils/asn1_der.dart` — no new dependency) binds the hash to a claimed time;
+  OciDeck compares the token's imprint and nothing else — no CMS signature, no
+  certificate chain — and never contacts a TSA itself.
 - **Audit dossier** — `parts/file_service_dossier.dart` reuses the AES-256
   package builder to bundle the sealed report, its evidence and the hash tables
   into one encrypted `.ocideck` archive plus an `AUDIT_DOSSIER.md` index.
 - **Optional AI** — a shared, off-by-default backend (`services/ai_*`) drafts
   finding text and image alt-text behind the outbound-privacy consent; drafts are
-  marked `ocideck_ai_assisted` and block sealing until a human reviews them.
+  marked `ocideck_ai_assisted` and block sealing until a human reviews them. The
+  marker also survives the file boundary: while it is present, every PDF, PPTX
+  and HTML export declares it in its document properties and its filename (see
+  § Classification enforcement). Export itself is not blocked — sealing is a statement,
+  sending a draft to a reviewer is the normal way to get it cleared.
 
 ## Localization
 
