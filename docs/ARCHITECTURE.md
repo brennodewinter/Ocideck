@@ -445,11 +445,16 @@ the existing rails rather than adding a parallel stack:
   compliance-analyzer derivations, and the audit-dossier index builder
   (`services/audit_dossier.dart`).
 - **Document integrity** — `services/document_integrity.dart` seals a finalised
-  deck with a SHA-512 hash over the canonicalised content (front matter
-  `ocideck_finalized` / `ocideck_seal_*`), re-verified on open. An optional **RFC
-  3161** timestamp (`services/rfc3161_timestamp.dart`, with a hand-rolled ASN.1
-  DER codec in `utils/asn1_der.dart` — no new dependency) anchors that hash in
-  time; OciDeck only produces and verifies, never contacts a TSA itself.
+  deck with a SHA-512 hash over the **bytes of the `.md`**, recorded beside the
+  file in `<name>.seal.json` (`services/seal_codec.dart`) together with the
+  visible signature. Because the seal sits outside the file it covers, a
+  recipient recomputes it with `sha512sum` — no OciDeck, no specification to
+  replay. Re-verified on open by comparing that value with the hash of the bytes
+  just read. An optional **RFC 3161** token
+  (`services/rfc3161_timestamp.dart`, with a hand-rolled ASN.1 DER codec in
+  `utils/asn1_der.dart` — no new dependency) binds the hash to a claimed time;
+  OciDeck compares the token's imprint and nothing else — no CMS signature, no
+  certificate chain — and never contacts a TSA itself.
 - **Audit dossier** — `parts/file_service_dossier.dart` reuses the AES-256
   package builder to bundle the sealed report, its evidence and the hash tables
   into one encrypted `.ocideck` archive plus an `AUDIT_DOSSIER.md` index.

@@ -717,8 +717,6 @@ const _dutchSourceFr = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Finaliser et sceller',
   'Verzegelen': 'Sceller',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Finalisez cette présentation et calculez un sceau SHA-512 sur son contenu. Le fichier est alors verrouillé et ne peut plus être modifié ; les modifications ultérieures deviennent visibles. Cette action est irréversible dans l\'application.',
   'Handtekening (optioneel)': 'Signature (facultative)',
   'Naam': 'Nom',
   'Rol of functie': 'Rôle ou fonction',
@@ -736,6 +734,12 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalisez cette présentation et apposez un sceau SHA-512 sur le fichier enregistré. Il est alors verrouillé et ne peut plus être modifié ; toute modification ultérieure devient visible. Celui qui reçoit le rapport recalcule lui-même le sceau avec sha512sum. Cette action est irréversible dans l\'application.',
+  'Zegel en handtekening': 'Sceau et signature',
+  'Zegel nog niet vastgelegd': 'Sceau pas encore enregistré',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Il n\'existe pas encore de fichier enregistré permettant de recalculer le sceau. Enregistrez le deck.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'L\'omission est activée : ce que le contrôle qualifie de donnée personnelle est caviardé, et toutes les images, vidéos et pistes audio de cette diapositive ne partent ni à l\'écran ni à l\'export. Votre fichier markdown conserve tout.',
   'Bestand': 'Fichier',

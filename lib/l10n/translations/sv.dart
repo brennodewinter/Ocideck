@@ -1758,8 +1758,6 @@ const _dutchSourceSv = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Slutför och försegla',
   'Verzegelen': 'Försegla',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Slutför den här presentationen och beräkna ett SHA-512-sigill över innehållet. Filen låses sedan och kan inte längre redigeras; senare ändringar blir synliga. Detta kan inte ångras i appen.',
   'Handtekening (optioneel)': 'Signatur (valfritt)',
   'Naam': 'Namn',
   'Rol of functie': 'Roll eller funktion',
@@ -1778,6 +1776,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Slutför den här presentationen och fastställ ett SHA-512-sigill över den sparade filen. Den låses sedan och kan inte längre redigeras; varje senare ändring blir synlig. Den som tar emot rapporten kontrollerar själv sigillet med sha512sum. Detta kan inte ångras i appen.',
+  'Zegel en handtekening': 'Sigill och signatur',
+  'Zegel nog niet vastgelegd': 'Sigill ännu inte fastställt',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Det finns ännu ingen sparad fil att kontrollera sigillet mot. Spara decket.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Utelämnande är på: det som kontrollen bedömer som en personuppgift svärtas, och alla bilder, all video och allt ljud på den här bilden följer inte med till skärmen eller exporten. Din markdown-fil behåller allt.',
   'Bestand': 'Arkiv',

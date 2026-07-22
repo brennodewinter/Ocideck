@@ -2369,8 +2369,45 @@ else.
   The signature can be **typed** or **drawn**: click **Handtekening tekenen (Draw
   signature)** — in the sign-off editor or the seal dialog — to sign on a pad with
   the mouse, trackpad, touch or stylus. A drawn signature is stored as an embedded
-  image inside the report (so it travels with the `.md` and is covered by the
-  seal) and takes precedence over the typed name wherever the sign-off is shown.
+  image beside the report, in the seal file, and takes precedence over the typed
+  name wherever the sign-off is shown.
+
+#### What sealing does, and how the recipient checks it
+
+Sealing does two things: it locks the report — a finalised deck is read-only, so
+nothing in OciDeck edits or rewrites it again — and it records a **SHA-512 hash
+of the report file** in `<naam>.seal.json` next to it, together with the
+signature and the seal time.
+
+The hash is over the **bytes of the `.md`**, with no processing of any kind in
+between. That makes the check something anyone can do, with no OciDeck and no
+specification to follow:
+
+```console
+$ sha512sum rapport.md
+76f87f10…5c8936f  rapport.md
+```
+
+Compare that with `hash` in `rapport.seal.json`. Equal means the report is
+exactly what was sealed. (`shasum -a 512` on macOS, `certutil -hashfile rapport.md
+SHA512` on Windows, and `openssl dgst -sha512` all give the same answer.) The
+same recipe is printed inside the audit dossier, so a recipient does not need
+this guide either.
+
+The trade-off is strictness: **any** change to the file breaks the seal, even
+one that changes nothing you would call content — converting line endings, for
+instance. That is the point of *frozen*. It also means the two files belong
+together: send `rapport.md` and `rapport.seal.json` (or export a package, which
+puts both inside).
+
+Until you save, the status bar shows **Zegel nog niet vastgelegd**: the hash is
+of a file, and the file does not exist yet. Save once, and the badge turns into
+**Integriteit intact**.
+
+Sealing is **tamper-evidence, not tamper-proof.** There is no signing key, so
+someone who alters the report can also rewrite the seal file. What the seal buys
+you is that alteration cannot happen *unnoticed* by anyone holding the hash from
+another route — the audit dossier, an email, a timestamp token.
 
 ### The finding wizard
 
@@ -2459,7 +2496,7 @@ small dialog that lets you:
   hand to OpenKAT or any RFC 3161 timestamp authority (TSA) out-of-band.
 - **Import the token (`.tsr`)** — the token the TSA returns. OciDeck compares its
   message imprint with the current seal hash and, when the two match, stores it
-  in the deck (`ocideck_seal_tsr`) and shows the timestamp.
+  beside the deck in `<name>.seal.json` and shows the timestamp.
 
 This keeps OciDeck a *producer of hashes* — it never has to contact the TSA itself.
 
@@ -2467,13 +2504,20 @@ This keeps OciDeck a *producer of hashes* — it never has to contact the TSA it
 you lean on a timestamp in a report (*corrected 2026-07-21; this passage used to
 say the token "is verified again every time the deck opens"*):
 
-- It is an **imprint comparison**, not a signature check. `timeStampMatchesHash`
-  parses the token far enough to read the hashed value and the generation time
-  and compares that value with the seal hash. It does not validate the TSA's CMS
-  signature, its certificate, or the chain behind it. A token whose imprint
-  matches will therefore be accepted even if it was never signed by anyone you
-  trust. Establishing *who* issued it is out-of-band work, with the TSA's own
-  tooling.
+- It is an **imprint comparison**, not a signature check — the function is even
+  called `timeStampImprintMatchesHash`. It parses the token far enough to read
+  the hashed value and the generation time and compares that value with the seal
+  hash. It does not validate the TSA's CMS signature, its certificate, or the
+  chain behind it. A token whose imprint matches will therefore be accepted even
+  if it was never signed by anyone you trust, and its time is a claim rather
+  than a checked fact. Establishing *who* issued it, and when, is out-of-band
+  work with the TSA's own tooling.
+- The request you export **does** carry a random nonce that the timestamp
+  service has to repeat in the token, which is what ties the token you get back
+  to the request you sent. OciDeck cannot check that on import — it does not
+  keep your request, so after a restart the other half is gone — but you can,
+  with both files in hand: `openssl ts -reply -in token.tsr -text` shows the
+  nonce it echoed.
 - It runs **when you look**, not on open. The comparison happens in the timestamp
   dialog (and again when an audit dossier is built). Opening a deck stores and
   displays the token without re-checking it, so no "does not match" warning

@@ -716,8 +716,6 @@ const _dutchSourceDe = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Abschließen & versiegeln',
   'Verzegelen': 'Versiegeln',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Schließen Sie diese Präsentation ab und berechnen Sie ein SHA-512-Siegel über den Inhalt. Danach ist die Datei gesperrt und kann nicht mehr bearbeitet werden; spätere Änderungen werden sichtbar. Dies kann in der App nicht rückgängig gemacht werden.',
   'Handtekening (optioneel)': 'Unterschrift (optional)',
   'Naam': 'Name',
   'Rol of functie': 'Rolle oder Funktion',
@@ -736,6 +734,12 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Schließen Sie diese Präsentation ab und schreiben Sie ein SHA-512-Siegel über die gespeicherte Datei fest. Danach ist sie gesperrt und kann nicht mehr bearbeitet werden; jede spätere Änderung wird sichtbar. Wer den Bericht erhält, rechnet das Siegel selbst mit sha512sum nach. Dies kann in der App nicht rückgängig gemacht werden.',
+  'Zegel en handtekening': 'Siegel und Unterschrift',
+  'Zegel nog niet vastgelegd': 'Siegel noch nicht festgeschrieben',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Es gibt noch keine gespeicherte Datei, anhand derer das Siegel nachgerechnet werden kann. Speichern Sie das Deck.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Weglassen ist an: was die Prüfung als personenbezogenes Datum einstuft, wird geschwärzt, und alle Bilder, Videos und Audios dieser Folie gehen nicht auf den Bildschirm oder in den Export. Deine Markdown-Datei behält alles.',
   'Bestand': 'Ablage',

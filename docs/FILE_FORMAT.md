@@ -30,6 +30,7 @@ my_presentation/
 ├── My_presentation.ink.json        # annotation-layer sidecar (see §6.2)
 ├── My_presentation.user-notes.json # user-notes sidecar (see §6.3)
 ├── My_presentation.miauw.json      # MIAUW-disposition sidecar (see §6.5)
+├── My_presentation.seal.json       # seal + signature sidecar (see §6.6)
 ├── images/                         # copied images
 │   ├── photo.png
 │   └── .ocideck_captions.json      # caption sidecar (see §6.1)
@@ -80,8 +81,9 @@ presentations.
 > part of the Marp Markdown (so the `.md` stays clean and exchangeable): the
 > annotation layer (`<name>.ink.json`, §6.2), user notes
 > (`<name>.user-notes.json`, §6.3), captions (`.ocideck_captions.json`, §6.1),
-> linked chart data (`data/*.json`, `data/*.csv`, §6.4) and the MIAUW
-> disposition (`<name>.miauw.json`, §6.5).
+> linked chart data (`data/*.json`, `data/*.csv`, §6.4), the MIAUW
+> disposition (`<name>.miauw.json`, §6.5) and the document seal plus visible
+> signature (`<name>.seal.json`, §6.6).
 
 > **No base64 in the `.md`.** As of 0.1.0 nothing OciDeck writes into a
 > presentation file is opaque. Whatever is unreadable to a human, or is *about*
@@ -171,11 +173,17 @@ keys it *does* recognise still mean what they meant. Renaming or repurposing a
 key would break every older build silently, which is the worst way to break
 something.
 
-The version is deliberately **not** part of the sealed content hash (§3
-`ocideck_seal_hash`): it describes the file's encoding, not its content. Were it
-inside the hash, a sealed deck would report tampering the moment a newer build
-wrote it out again — for instance while building a package — without a letter of
-content having changed.
+**The version line is inside the seal, because the seal is over the file.**
+Since 0.1.0 the seal hashes the `.md`'s bytes (§6.6), and `ocideck_format` is
+one of those bytes. A build that writes a higher version therefore changes the
+file and breaks the seal. That is strict on purpose and it is the honest
+answer — the file *did* change — but it only bites if something rewrites a
+sealed deck, and OciDeck does not: a finalised deck is read-only, so nothing in
+the app produces a save. A future format upgrade must skip sealed decks, or
+accept that it re-issues them; silently rewriting one and calling the result
+intact is the thing this design refuses to do. (Before 0.1.0 the version was
+excluded from the hash, because the hash was over a canonicalisation instead of
+over the file. See §6.6 for why that changed.)
 
 | Key | Type | Meaning |
 | --- | --- | --- |
@@ -197,11 +205,7 @@ content having changed.
 | `ocideck_target_seconds` | int | Target duration for the presenter countdown, in seconds. Written only when `> 0`. |
 | `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. |
 | `ocideck_play_only` | `true`/absent | Play-only lock. When `true`, the deck opens locked: no editor, toolbar, menus, or export — only the first slide with a play button, presented full screen. Closing the deck restores normal editing. Default (unlocked) stays out of the file; only `true` is written. Removing this key unlocks the deck. |
-| `ocideck_style_profile` · `ocideck_miauw_waivers` · `ocideck_miauw_confirmations` | *retired* | **No longer written** as of 0.1.0 (§3.6). Still read, so an older file opens correctly; removed from the file on the next save. |
-| `ocideck_seal_tsr` | base64url | RFC 3161 timestamp token (`.tsr`) over `ocideck_seal_hash` (PENTEST_MIAUW §8-A2). Written only when present; excluded from the sealed content hash. Checked when the timestamp dialog is open and when an audit dossier is built — **not** on opening the deck — and the check is an imprint comparison only, not a CMS-signature or certificate validation. The exported `.tsq` carries a random RFC 3161 nonce, which the TSA must echo in the token; that echo binds one request to one token and is verifiable by anyone holding both files (`openssl ts -reply -in … -text`). OciDeck cannot check it on import — the deck does not store the request — so a token whose imprint matches is accepted regardless of its nonce (*corrected 2026-07-21: this cell said "Verified in-app on open"*). See [USER_GUIDE.md](USER_GUIDE.md#timestamp-rfc-3161). |
-| `ocideck_finalized` | `true`/absent | Document integrity (§8 A1): the deck is finalised and read-only. Written only when `true`. |
-| `ocideck_seal_hash` · `ocideck_seal_algo` · `ocideck_seal_at` | string | The content seal: a SHA-512 hash over the canonical content, the algorithm (`sha-512`), and the ISO-8601 UTC timestamp. Recomputed on open → *intact* / *changed after finalising*. **The hash covers what OciDeck writes, not what you write**: styling, the seal fields themselves, the format version (§3.0), and any front-matter lines OciDeck does not own — your own `style:` block, comments, a hand-placed `header:` — all stay outside it. Those lines are preserved in the file (§3.0) but editing them is not tampering, and a false tamper alarm is more expensive than none. Your visible signature (`ocideck_sig_*`) *is* covered, deliberately, so altering it is detectable (*corrected 2026-07-21: the hash briefly covered preserved foreign front matter, so editing your own `style:` block broke the seal*). |
-| `ocideck_sig_name` · `ocideck_sig_role` · `ocideck_sig_cert` · `ocideck_sig_date` · `ocideck_sig_statement` · `ocideck_sig_typed` · `ocideck_sig_image` | string | The deck-level **visual signature** rendered by the `signOff` slide (§5): signer name, role, certification, date, attested statement, typed signature, and an optional embedded (`data:`) signature image — a **hand-drawn signature** (drawn on the pad in the sign-off editor / seal dialog) is stored here as a self-contained base64 PNG. Written before the seal fields, so the signature is covered by the hash. Each key is written only when non-empty. |
+| `ocideck_style_profile` · `ocideck_miauw_waivers` · `ocideck_miauw_confirmations` · `ocideck_finalized` · `ocideck_seal_hash` · `ocideck_seal_algo` · `ocideck_seal_at` · `ocideck_seal_tsr` · `ocideck_sig_name` · `ocideck_sig_role` · `ocideck_sig_cert` · `ocideck_sig_date` · `ocideck_sig_statement` · `ocideck_sig_typed` · `ocideck_sig_image` | *retired* | **No longer written** as of 0.1.0 (§3.6). Still read, so an older file opens correctly; removed from the file on the next save. The seal and signature blocks now live in `<name>.seal.json` (§6.6). |
 
 Metadata fields are written only when they are not empty. Text is written as a
 YAML scalar and quoted only when needed (empty value, leading/trailing
@@ -221,16 +225,32 @@ notes.
 
 ### 3.6 Retired keys — what moved out of the front matter, and where it went
 
-Three keys carried base64 in the front matter until 0.1.0. None of them do any
-more. They are still **read**, so an existing file opens exactly as before, and
-they are **removed from the file on the next save** — the deck is written back
-in the new shape without the author doing anything.
+Fifteen keys left the front matter in 0.1.0. None of them are written any more.
+They are still **read**, so an existing file opens exactly as before, and they
+are **removed from the file on the next save** — the deck is written back in the
+new shape without the author doing anything.
 
 | Retired key | Where it lives now |
 | --- | --- |
 | `ocideck_style_profile` | Never on disk to begin with; only in the transient beamer stream. Now travels beside that markdown as plain JSON (§3.2). |
 | `ocideck_miauw_waivers` | `<name>.miauw.json`, key `waivers` (§6.5). |
 | `ocideck_miauw_confirmations` | `<name>.miauw.json`, key `confirmations` (§6.5). |
+| `ocideck_finalized` · `ocideck_seal_hash` · `ocideck_seal_algo` · `ocideck_seal_at` · `ocideck_seal_tsr` | `<name>.seal.json` (§6.6). |
+| `ocideck_sig_name` · `ocideck_sig_role` · `ocideck_sig_cert` · `ocideck_sig_date` · `ocideck_sig_statement` · `ocideck_sig_typed` · `ocideck_sig_image` | `<name>.seal.json`, key `signature` (§6.6). |
+
+Two of these carried base64 (`ocideck_seal_tsr` is a DER timestamp token,
+`ocideck_sig_image` a PNG), which is reason enough on its own. But the seal
+block had a second, larger reason to move: as long as the seal lived *inside*
+the file, the hash could not be a hash *of* the file. Moving it out is what made
+the integrity check reproducible by a third party — see §6.6.
+
+**Migrating a sealed deck.** A deck sealed before 0.1.0 opens normally, its seal
+still verifies, and its seal block moves into `<name>.seal.json` on the first
+save. What does **not** happen is a recomputation: the sidecar records the old
+hash together with `"form": "canonical-v1"`, and OciDeck keeps verifying it the
+old way. Re-issuing that hash would invalidate any RFC 3161 token the report
+carries — the token timestamps that exact value — and a real notarisation is
+worth more than the convenience of one uniform format.
 
 The removal is what makes this a migration rather than a rename. In
 `front_matter_merge.dart` these keys did not simply disappear from the owned
@@ -1180,9 +1200,8 @@ mirrors the `Finding` column of that test's row in the scope object's checklist.
 
 **Sign-off** (`sign-off`) — the report's truthful-reporting attestation (MIAUW
 1.6). The slide itself carries **no body of its own** — only an optional heading;
-the attestation is the **deck-level visual signature** (`ocideck_sig_*`) and the
-document seal (`ocideck_finalized` / `ocideck_seal_*`), both in the front matter
-(§3) and covered by the seal:
+the attestation is the **deck-level visual signature** and the document seal,
+which live together in `<name>.seal.json` beside the file (§6.6):
 
 ```markdown
 <!-- _class: sign-off -->
@@ -1193,7 +1212,9 @@ The editor authors the deck signature (statement, rapporteur name/role,
 certification, typed signature) and offers **Afronden & verzegelen**; the preview
 renders the signature plus the seal status. Because the signature is deck-level,
 one report has one signer, and the sign-off page round-trips as just its class
-token and heading — the signer's details live once in the front matter.
+token and heading — the signer's details live once, in the seal sidecar. The
+HTML export therefore gets them handed to it rather than reading them back out
+of the front matter, which is where they used to be.
 
 Rules:
 
@@ -1582,6 +1603,171 @@ the deck, and it rides in the autosave/recovery snapshot. A web download of a
 bare `.md` (§1) does not carry it, exactly as it does not carry annotations or
 user notes; export the deck as a package to take everything.
 
+---
+
+### 6.6 Document Seal and Signature (`<name>.seal.json`)
+
+Everything that is *about* the report rather than part of it: the read-only
+lock, the seal, an optional RFC 3161 timestamp token, and the visible signature
+of whoever attested to it. Until 0.1.0 all of this sat in the front matter
+(§3.6).
+
+```json
+{
+  "version": 1,
+  "finalized": true,
+  "hash": "76f87f10…5c8936f",
+  "algo": "sha-512",
+  "form": "file-bytes-v1",
+  "at": "2026-07-22T09:12:33.000Z",
+  "timestamp_token": "MIIF…",
+  "signature": {
+    "name": "Jan Jansen",
+    "role": "Onderzoeker",
+    "certification": "OSCP",
+    "date": "2026-07-10",
+    "statement": "Naar waarheid opgesteld.",
+    "typed": "J. Jansen",
+    "image": "data:image/png;base64,…"
+  }
+}
+```
+
+The file is written when there is something to record and deleted when there is
+not. Same `version` rule as §6.2. It travels with the deck the way the other
+sidecars do: as a member of the `.ocideck` package (§7), into the bin, and in
+the autosave/recovery snapshot. A web download of a bare `.md` (§1) does not
+carry it.
+
+**Seal and signature share one file on purpose.** They are one act — *I attest
+to this, and this is the fixing of what I attested to* — and a recipient needs
+them together: a signature with no seal has nothing to anchor it, and a seal
+with no signer does not say who stands behind it. Two files would mainly mean
+one of them can go missing.
+
+#### How to verify the seal yourself
+
+For `"form": "file-bytes-v1"` the hash is a plain SHA-512 over the **bytes of
+the `.md` file**. No canonicalisation, no line-ending conversion, no field
+selection, no BOM handling, no OciDeck:
+
+```console
+$ sha512sum rapport.md
+76f87f10…5c8936f  rapport.md
+```
+
+Compare that to `hash` in `rapport.seal.json`. Equal means the report is
+byte-for-byte what was sealed; different means it changed. `shasum -a 512`,
+`openssl dgst -sha512`, `certutil -hashfile … SHA512` and any other SHA-512
+implementation give the same answer, because there is nothing to reproduce
+beyond the hash function itself.
+
+That absence of steps is the design. Every normalisation step would be a step
+the recipient has to replay, and therefore a step where an honest file can be
+declared tampered with. There are none.
+
+**Test vector.** This is the smallest deck OciDeck writes — a single title
+slide, no metadata beyond the title. `test/document_integrity_test.dart` asserts
+both halves, so if this ever stops being true the build fails.
+
+`rapport.md` (118 bytes, LF line endings, no trailing whitespace, final blank
+line included):
+
+```markdown
+---
+marp: true
+ocideck_format: 1
+theme: ocideck
+paginate: true
+title: Rapport
+---
+
+<!-- _class: title -->
+
+# Rapport
+
+```
+
+SHA-512:
+
+```
+76f87f10084f69911d3742e2e64eb9b9f2ac99d90686e1f24e3c6c3d14e34ed7
+d637fefa0252f49ece0e3fb9bbccd0803877c9d050ab87a616ae4af9d5c8936f
+```
+
+(one line in the file; wrapped here for width).
+
+#### What the seal does and does not prove
+
+- It proves the `.md` is unchanged since sealing — **tamper-evidence**, relative
+  to a hash you obtained by another route (the audit dossier, an email, the
+  timestamp token). It is not tamper-*proof*: there is no signing key, so anyone
+  who edits the `.md` can also rewrite the sidecar. That was equally true when
+  the seal lived in the front matter.
+- It covers the `.md` only. Images, chart data files, annotations and notes are
+  separate files and are not in the hash. Evidence images have their own hash
+  table in the audit dossier (PENTEST_MIAUW §10.11).
+- It no longer covers the visible signature, which moved out of the `.md` in the
+  same step. The signature now sits next to the hash in this file rather than
+  under it. That is a real narrowing of the seal's reach: what the hash proves
+  is that the *report* is unchanged, and the attestation beside it is worth
+  what the channel that delivered it is worth.
+- Any change to the `.md` breaks it, including one that changes no content —
+  converting line endings, adding a trailing newline, or a future OciDeck
+  writing a higher `ocideck_format` (§3.0). **A sealed deck is frozen**, and
+  OciDeck enforces that by making a finalised deck read-only, so it never
+  rewrites one on its own.
+- **Your own front-matter lines are inside the hash again**, and this reverses a
+  deliberate exemption made a day earlier. When the seal still lived in the
+  front matter it skipped the lines OciDeck does not own — your `style:` block,
+  your comments, a hand-placed `header:` — because editing your own CSS in a
+  sealed deck raised a tamper alarm that was simply wrong (*fixed 2026-07-21*).
+
+  A hash over the file cannot make that exemption: the recipient runs
+  `sha512sum` over the whole file, so any line the app excluded would make the
+  app's verdict disagree with theirs — and a verdict only OciDeck can reproduce
+  is the thing this change exists to eliminate. The exemption is not lost so
+  much as made unnecessary: a finalised deck is read-only, so there is no way to
+  adjust your CSS inside a sealed report and be surprised afterwards. Edit it
+  outside the app and you no longer hold the sealed artefact — which is the
+  literal truth, and now the recipient sees exactly what you see.
+
+For `"form": "canonical-v1"` — only ever produced before 0.1.0 — the hash is
+over OciDeck's own serialiser output instead, and **cannot** be recomputed
+outside the application. Such a seal is kept as it is rather than converted; see
+§3.6.
+
+#### The RFC 3161 timestamp
+
+`timestamp_token` is a base64url DER token from an external TSA (obtained
+out-of-band; OciDeck makes no network connection). OciDeck checks **one** thing
+about it: that its message imprint equals `hash` — does this token belong to
+this document?
+
+It does **not** verify the token's CMS signature and does **not** validate the
+TSA's certificate chain or its timestamping EKU. So `genTime` is a *claim made
+by the token*, not an established fact: whoever holds the deck can mint a token
+with an arbitrary time and a matching imprint. The interface says so and shows
+no "verified" badge, and the audit dossier repeats it. For non-repudiable time
+anchoring, verify the token against the TSA; OciDeck stores it unaltered so that
+stays possible.
+
+The exported `.tsq` **does** carry a random RFC 3161 nonce, and §2.4.2 obliges
+the TSA to echo it back in the token. That echo is what binds one request to one
+token — without it, any valid token for the same imprint is interchangeable with
+any other, and re-submitting an old one goes unnoticed. Anyone holding both
+files can check the echo (`openssl ts -reply -in … -text`, or
+`timeStampEchoesNonce`).
+
+**OciDeck cannot check it on import**, because it does not keep the nonce: the
+request travels to the TSA outside the app, and after a restart the other half
+is gone. A token whose imprint matches is therefore accepted whatever its nonce
+says. The original reason for not storing it — that an extra front-matter key
+would clash with the ongoing move of the seal into a sidecar — no longer holds:
+that move is done, and this file is exactly where such a nonce belongs (it is
+opaque, and it is *about* the document rather than part of it). What remains is
+the decision to build it.
+
 ## 7. Portable Package (`.ocideck`)
 
 `Export package` writes one **zip file** (extension `.ocideck`; `.zip` is also
@@ -1595,6 +1781,7 @@ yet.
 ├── <title>.ink.json          # annotation layer (if present, §6.2)
 ├── <title>.user-notes.json   # user notes (if present, §6.3)
 ├── <title>.miauw.json        # MIAUW disposition (if present, §6.5)
+├── <title>.seal.json         # seal + signature (if present, §6.6)
 ├── images/...                # all used images
 ├── data/...                  # linked chart data files (§6.4)
 ├── media/...                 # used video/audio
@@ -1860,7 +2047,7 @@ two Dutch names that look alike while needing opposite handling.
 - `notice` is the one-line statement of what the file is and whether it may be
   sent on. It is there because a filename does not survive being renamed, zipped
   or forwarded, and the keys file is the one you must not attach.
-- `derived_from` is the seal hash (§ Document seal) of the source deck, empty
+- `derived_from` is the seal hash (§6.6) of the source deck, empty
   when the deck is not sealed. It pins provenance; it does **not** put the
   manifest under the seal, which is impossible — the manifest is made at export,
   after the seal, with fresh random salts.

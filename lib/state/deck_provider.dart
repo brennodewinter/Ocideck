@@ -8,6 +8,7 @@ import '../models/deck_template.dart';
 import '../models/document_signature.dart';
 import '../models/scope_matrix_spec.dart';
 import '../models/settings.dart';
+import '../models/seal_record.dart';
 import '../models/slide.dart';
 import '../models/used_tool.dart';
 import '../services/ai_alt_text_cleanup.dart';
@@ -526,11 +527,16 @@ class DeckNotifier extends StateNotifier<DeckState> {
     );
   }
 
-  /// Documentintegriteit (§8 A1): rond het deck af en verzegel het. Berekent een
-  /// SHA-512-zegel over de inhoud (met de optionele [signature] eronder), zet de
-  /// vergrendeling en het zegel, en wist de ongedaan-maken-historie zodat het
-  /// afronden in de app niet terug te draaien is (bewust eenrichtingsverkeer).
-  /// Doet niets wanneer het deck al verzegeld is.
+  /// Documentintegriteit (§8 A1): rond het deck af en verzegel het. Zet de
+  /// vergrendeling, de optionele [signature] en het moment van verzegelen, en
+  /// wist de ongedaan-maken-historie zodat het afronden in de app niet terug te
+  /// draaien is (bewust eenrichtingsverkeer). Doet niets wanneer het deck al
+  /// verzegeld is.
+  ///
+  /// De hash zelf ontstaat pas bij het opslaan: die gaat over de bytes van de
+  /// `.md`, en die bestaan hier nog niet. Tot dat moment meldt het zegel zich
+  /// als [IntegrityStatus.notVerifiable] — de aanroepende schermen slaan daarom
+  /// meteen op, of zeggen dat het moet gebeuren.
   void finalizeAndSeal({DocumentSignature? signature}) {
     final deck = state.deck;
     if (deck == null || deck.finalized) return;

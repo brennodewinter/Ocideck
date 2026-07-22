@@ -1760,8 +1760,6 @@ const _dutchSourceId = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Finalisasi & segel',
   'Verzegelen': 'Segel',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Finalisasi presentasi ini dan hitung segel SHA-512 atas kontennya. Setelah itu berkas dikunci dan tidak dapat diedit lagi; perubahan berikutnya menjadi terlihat. Ini tidak dapat dibatalkan di aplikasi.',
   'Handtekening (optioneel)': 'Tanda tangan (opsional)',
   'Naam': 'Nama',
   'Rol of functie': 'Peran atau jabatan',
@@ -1779,6 +1777,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalisasi presentasi ini dan tetapkan segel SHA-512 atas berkas yang disimpan. Setelah itu berkas dikunci dan tidak dapat diedit lagi; setiap perubahan berikutnya menjadi terlihat. Penerima laporan memeriksa sendiri segel itu dengan sha512sum. Ini tidak dapat dibatalkan di aplikasi.',
+  'Zegel en handtekening': 'Segel dan tanda tangan',
+  'Zegel nog niet vastgelegd': 'Segel belum dicatat',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Belum ada berkas tersimpan untuk memeriksa segel. Simpan deck.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Penyembunyian aktif: apa yang ditandai pemeriksaan sebagai data pribadi dihitamkan, dan semua gambar, video, dan audio pada slide ini tidak ikut ke layar atau ekspor. Berkas markdown Anda menyimpan semuanya.',
   'Bestand': 'Berkas',

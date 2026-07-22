@@ -25,6 +25,13 @@ class RecoverySnapshot {
   /// de markdown bewaart zou de afspraken met de klant kwijtraken.
   final String? miauw;
 
+  /// JSON-payload van [SealCodec.encode], als het deck is afgerond of een
+  /// handtekening draagt. Reist mee om dezelfde reden als [userNotes]: sinds
+  /// 0.1.0 staat het zegelblok niet meer in de markdown, en juist ná het
+  /// verzegelen — wanneer het deck vuil is maar nog niet opgeslagen — zou een
+  /// momentopname anders de zojuist gezette handtekening kwijtraken.
+  final String? seal;
+
   /// JSON-payload van [AnnotationCodec.encode], als er tekeningen op de slides
   /// staan.
   ///
@@ -43,6 +50,7 @@ class RecoverySnapshot {
     required this.markdown,
     this.userNotes,
     this.miauw,
+    this.seal,
     this.annotations,
   });
 
@@ -54,6 +62,7 @@ class RecoverySnapshot {
     'markdown': markdown,
     if (userNotes != null) 'userNotes': userNotes,
     if (miauw != null) 'miauw': miauw,
+    if (seal != null) 'seal': seal,
     if (annotations != null) 'annotations': annotations,
   };
 
@@ -67,6 +76,7 @@ class RecoverySnapshot {
       markdown: (json['markdown'] as String?) ?? '',
       userNotes: json['userNotes'] as String?,
       miauw: json['miauw'] as String?,
+      seal: json['seal'] as String?,
       annotations: json['annotations'] as String?,
     );
   }

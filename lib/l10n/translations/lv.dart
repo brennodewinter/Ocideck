@@ -1759,8 +1759,6 @@ const _dutchSourceLv = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Pabeigt un aizzīmogot',
   'Verzegelen': 'Aizzīmogot',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Pabeidziet šo prezentāciju un aprēķiniet SHA-512 zīmogu tās saturam. Pēc tam fails tiek bloķēts, un to vairs nevar rediģēt; vēlākās izmaiņas kļūst redzamas. To lietotnē nevar atsaukt.',
   'Handtekening (optioneel)': 'Paraksts (neobligāts)',
   'Naam': 'Vārds',
   'Rol of functie': 'Loma vai amats',
@@ -1778,6 +1776,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Pabeidziet šo prezentāciju un fiksējiet SHA-512 zīmogu saglabātajam failam. Pēc tam tas tiek bloķēts, un to vairs nevar rediģēt; katra vēlākā izmaiņa kļūst redzama. Tas, kurš saņem ziņojumu, pats pārrēķina zīmogu ar sha512sum. To lietotnē nevar atsaukt.',
+  'Zegel en handtekening': 'Zīmogs un paraksts',
+  'Zegel nog niet vastgelegd': 'Zīmogs vēl nav fiksēts',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Vēl nav saglabāta faila, pret kuru pārbaudīt zīmogu. Saglabājiet deku.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Izlaišana ir ieslēgta: tas, ko pārbaude atzīst par personas datiem, tiek nomelnots, un visi šī slaida attēli, video un audio nenonāk ne ekrānā, ne eksportā. Tavs markdown fails saglabā visu.',
   'Bestand': 'Fails',

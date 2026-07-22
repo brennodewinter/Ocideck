@@ -1778,8 +1778,6 @@ const _dutchSourceRo = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Finalizează și sigilează',
   'Verzegelen': 'Sigilează',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Finalizați această prezentare și calculați un sigiliu SHA-512 asupra conținutului. Fișierul este apoi blocat și nu mai poate fi editat; modificările ulterioare devin vizibile. Această acțiune nu poate fi anulată în aplicație.',
   'Handtekening (optioneel)': 'Semnătură (opțional)',
   'Naam': 'Nume',
   'Rol of functie': 'Rol sau funcție',
@@ -1797,6 +1795,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalizați această prezentare și consemnați un sigiliu SHA-512 asupra fișierului salvat. Acesta este apoi blocat și nu mai poate fi editat; orice modificare ulterioară devine vizibilă. Cine primește raportul verifică singur sigiliul cu sha512sum. Această acțiune nu poate fi anulată în aplicație.',
+  'Zegel en handtekening': 'Sigiliu și semnătură',
+  'Zegel nog niet vastgelegd': 'Sigiliu încă neînregistrat',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Încă nu există un fișier salvat față de care să fie verificat sigiliul. Salvați deck-ul.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Omiterea este activă: ceea ce verificarea consideră dată cu caracter personal este înnegrit, iar toate imaginile, videoclipurile și sunetul acestui slide nu ajung pe ecran sau în export. Fișierul tău markdown păstrează tot.',
   'Bestand': 'Fișier',

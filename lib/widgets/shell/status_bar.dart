@@ -163,8 +163,23 @@ class _DeckStatusBar extends StatelessWidget {
 
   /// Documentintegriteit-badge (§8 A1): toont of het verzegelde deck intact is
   /// of ná afronden is gewijzigd. Alleen zichtbaar wanneer het deck verzegeld is.
+  ///
+  /// De derde stand is de eerlijke: vlak na het afronden bestaat het bestand
+  /// nog niet waar het zegel over gaat, dus valt er niets na te rekenen. Groen
+  /// tonen zou dan een controle voorspiegelen die niemand heeft uitgevoerd, en
+  /// rood zou een manipulatie melden die er niet is.
   Widget _integrityBadge(AppLocalizations l10n, Deck deck) {
     final status = deckIntegrityStatus(deck);
+    if (status == IntegrityStatus.notVerifiable) {
+      return _StatusItem(
+        icon: Icons.gpp_maybe_outlined,
+        label: l10n.d('Zegel nog niet vastgelegd'),
+        tooltip: l10n.d(
+          'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.',
+        ),
+        color: AppTheme.slate600,
+      );
+    }
     final intact = status == IntegrityStatus.intact;
     return _StatusItem(
       icon: intact ? Icons.verified_user : Icons.gpp_bad,

@@ -91,8 +91,11 @@ travel with the report, and `<name>-redaction-keys.json`, which holds the salts
 and stays with the source — the separation between them is what keeps a
 commitment from being reversible. See FILE_FORMAT.md §12.
 
-**Document seal** — a SHA-512 hash over a deck's canonical content, stored in the
-front matter, giving tamper-evidence for finalised documents.
+**Document seal** — a SHA-512 hash over the **bytes of a deck's `.md` file**,
+recorded beside it in `<name>.seal.json` together with the visible signature.
+Gives tamper-evidence for finalised documents, and — because the seal sits
+outside the file it covers — lets a recipient recompute it with `sha512sum`
+alone. See FILE_FORMAT.md §6.6.
 
 ## Security mechanisms
 

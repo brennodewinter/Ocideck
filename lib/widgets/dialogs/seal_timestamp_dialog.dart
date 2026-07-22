@@ -13,13 +13,20 @@ import '../../theme/app_theme.dart';
 import '../../utils/atomic_file.dart';
 import '../../utils/log.dart';
 
-/// RFC 3161 trusted-timestamp workflow for the deck seal (PENTEST_MIAUW §8-A2).
-/// OciDeck stays a producer of hashes: it **exports** a `.tsq` for the current
-/// seal hash, the user has OpenKAT / a TSA timestamp it out-of-band, and the
-/// returned `.tsr` is **imported and verified** — its message imprint must equal
-/// the seal hash. Takes the tab's [DeckNotifier] (root-navigator dialog, so it
-/// must not read the scoped provider) and subscribes to it so the status updates
-/// after an import.
+/// De RFC 3161-tijdstempelroute voor het documentzegel (PENTEST_MIAUW §8-A2).
+/// OciDeck blijft een producent van hashes: het **exporteert** een `.tsq` voor
+/// de huidige zegelhash, de gebruiker laat OpenKAT of een TSA die buiten de app
+/// om tijdstempelen, en het teruggekomen `.tsr` wordt geïmporteerd zodra zijn
+/// message imprint gelijk is aan de zegelhash.
+///
+/// Dat is ook alles wat er wordt gecontroleerd — de handtekening van de TSA en
+/// haar certificaatketen niet (zie `rfc3161_timestamp.dart`). Deze dialoog
+/// toont daarom nooit een groen "geverifieerd"-vinkje: het tijdstip staat er
+/// als neutrale mededeling met de kanttekening eronder.
+///
+/// Neemt de [DeckNotifier] van het tabblad aan (dialoog op de root-navigator,
+/// dus de scoped provider mag niet gelezen worden) en luistert erop, zodat de
+/// status meebeweegt na een import.
 class SealTimestampDialog extends StatefulWidget {
   const SealTimestampDialog({super.key, required this.notifier});
 
@@ -120,7 +127,8 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
     }
     final token = _decodeToken(deck.sealTimestampToken);
     final parsed = token == null ? null : parseTimeStampToken(token);
-    final matches = token != null && timeStampMatchesHash(token, deck.sealHash);
+    final matches =
+        token != null && timeStampImprintMatchesHash(token, deck.sealHash);
     if (parsed == null || !matches) {
       return Row(
         children: [
@@ -212,7 +220,7 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
       final result = await FilePicker.pickFiles(withData: true);
       final bytes = result?.files.single.bytes;
       if (bytes == null) return;
-      if (timeStampMatchesHash(bytes, deck.sealHash)) {
+      if (timeStampImprintMatchesHash(bytes, deck.sealHash)) {
         widget.notifier.setSealTimestampToken(base64Url.encode(bytes));
         _toast(l10n.d('Tijdstempel geïmporteerd'));
       } else {

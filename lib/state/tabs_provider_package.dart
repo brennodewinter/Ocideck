@@ -167,6 +167,15 @@ extension _TabsPackageAssets on TabsNotifier {
         logWarning('TabsNotifier._attachPackageSidecars: MIAUW unreadable', e);
       }
     }
+    final seal = textFor('$base.seal.json');
+    if (seal != null) {
+      try {
+        final record = SealCodec.decode(seal);
+        if (record != null) result = record.applyTo(result);
+      } catch (e) {
+        logWarning('TabsNotifier._attachPackageSidecars: seal unreadable', e);
+      }
+    }
     return result;
   }
 }
