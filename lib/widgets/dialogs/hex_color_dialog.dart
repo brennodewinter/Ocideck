@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../theme/app_theme.dart';
-import '../../utils/color_contrast.dart';
 
 /// Een eigen kleur intikken als hexwaarde, met een voorbeeldvlak dat meeloopt
 /// met wat er staat.
@@ -73,9 +72,10 @@ class _HexColorDialogState extends State<HexColorDialog> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  // Onleesbaar getikte tekst laat het vlak wit, zodat het
-                  // voorbeeld nooit een kleur toont die niet gekozen kan worden.
-                  color: parseHexColor(normalized) ?? const Color(0xFFFFFFFF),
+                  // Onleesbaar getikte tekst laat het vlak wit (de terugval van
+                  // [AppTheme.parseHex]), zodat het voorbeeld nooit een kleur
+                  // toont die niet gekozen kan worden.
+                  color: AppTheme.parseHex(normalized ?? ''),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: AppTheme.slate300),
                 ),

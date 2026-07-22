@@ -8,7 +8,6 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 import 'package:screen_retriever/screen_retriever.dart';
-import 'package:screen_retriever_platform_interface/screen_retriever_platform_interface.dart';
 
 /// Een schermenlijst die de test bepaalt, in plaats van de schermen van deze
 /// machine.

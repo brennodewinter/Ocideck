@@ -1,8 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/mermaid_render_service.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+// `PlatformWebViewController` wordt niet door webview_flutter doorgegeven,
+// terwijl het de enige manier is om de platformlaag te vervangen. Zie
+// media_previews_video_coverage_test, dat om dezelfde reden hetzelfde doet.
+// ignore: depend_on_referenced_packages
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
 /// Een WebView die geen WebView is: hij onthoudt de geladen HTML en geeft op
