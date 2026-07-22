@@ -208,4 +208,89 @@ void main() {
       );
     });
   });
+
+  // ── Het oordeel bij importeren ────────────────────────────────────────────
+  //
+  // De imprint zegt "dit token gaat over deze hash". De nonce zegt "en het is
+  // het antwoord op míjn verzoek". Zonder dat tweede is een ouder token voor
+  // dezelfde hash, opnieuw ingediend, niet te onderscheiden van een vers
+  // token — en dat is precies wat een nonce hoort af te vangen (#563).
+  group('judgeTimeStampImport', () {
+    final digest = sampleSealDigest();
+    final sealHash = hexOf(digest);
+    final nonce = List<int>.generate(8, (i) => i + 1);
+    final nonceHex = hexOf(nonce);
+
+    test('een token dat de echo teruggeeft wordt aanvaard', () {
+      final token = fakeTimeStampToken(digest, '20260722120000Z', nonce: nonce);
+      expect(
+        judgeTimeStampImport(
+          token,
+          sealHash: sealHash,
+          expectedNonceHex: nonceHex,
+        ),
+        TimeStampImportVerdict.accepted,
+      );
+    });
+
+    test('een ouder token voor dezelfde hash wordt geweigerd', () {
+      // Dit is de aanval waar de nonce voor bestaat: de imprint klopt, dus de
+      // oude controle liet het door.
+      final ander = fakeTimeStampToken(
+        digest,
+        '20200101000000Z',
+        nonce: const [9, 9, 9, 9, 9, 9, 9, 9],
+      );
+      expect(
+        timeStampImprintMatchesHash(ander, sealHash),
+        isTrue,
+        reason: 'de imprint alleen ziet het verschil niet — dat is het punt',
+      );
+      expect(
+        judgeTimeStampImport(
+          ander,
+          sealHash: sealHash,
+          expectedNonceHex: nonceHex,
+        ),
+        TimeStampImportVerdict.wrongRequest,
+      );
+    });
+
+    test('een token zonder nonce wordt geweigerd zolang er een uitstaat', () {
+      final zonder = fakeTimeStampToken(digest, '20260722120000Z');
+      expect(
+        judgeTimeStampImport(
+          zonder,
+          sealHash: sealHash,
+          expectedNonceHex: nonceHex,
+        ),
+        TimeStampImportVerdict.wrongRequest,
+      );
+    });
+
+    test('zonder uitstaand verzoek blijft de imprint het enige oordeel', () {
+      // Een token dat van elders komt — meegeleverd bij een deck, of van vóór
+      // deze build. Streng doen op een nonce die nooit verstuurd is, zou een
+      // geldig token weigeren.
+      final zonder = fakeTimeStampToken(digest, '20260722120000Z');
+      expect(
+        judgeTimeStampImport(zonder, sealHash: sealHash, expectedNonceHex: ''),
+        TimeStampImportVerdict.accepted,
+      );
+    });
+
+    test('een andere hash heet anders dan een ander verzoek', () {
+      // Twee faalvormen, twee meldingen: "dit is niet dit document" is iets
+      // anders dan "dit is een ouder antwoord".
+      final ander = Uint8List.fromList(List.generate(64, (i) => 255 - i));
+      expect(
+        judgeTimeStampImport(
+          fakeTimeStampToken(ander, '20260722120000Z', nonce: nonce),
+          sealHash: sealHash,
+          expectedNonceHex: nonceHex,
+        ),
+        TimeStampImportVerdict.imprintMismatch,
+      );
+    });
+  });
 }

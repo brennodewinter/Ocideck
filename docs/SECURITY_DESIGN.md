@@ -414,17 +414,20 @@ model.
   fact. Calling it a "trusted timestamp" overstated that; *corrected 2026-07-21,
   function renamed to say so 2026-07-22*.
 
-  The request **does** carry a random nonce, which the TSA must echo back; that
-  echo binds one request to one token and defeats replay of an older token for
-  the same imprint. OciDeck does not check the echo on import — it does not keep
-  the nonce, so after a restart the other half is gone — but anyone holding both
-  files can (`timeStampEchoesNonce`). The reason originally given for not
-  storing it, a clash with the seal's move into a sidecar, has lapsed now that
-  the move has landed; `<name>.seal.json` is where it would go. Building the
-  real check would mean X.509 path validation against a bundled trust anchor
-  list — a new dependency with SBOM and licence consequences, plus reference
-  data that ages — in an application that makes no network connection and
-  promises tamper-evidence, not tamper-proofing.
+  The request carries a random nonce, which the TSA must echo back; that echo
+  binds one request to one token and defeats replay of an older token for the
+  same imprint. **Since 2026-07-22 that echo is checked on import** (#563): the
+  nonce of the outstanding request is kept in `<name>.seal.json`, so a token that
+  shares the imprint but answers a *different* request is refused. Before that
+  only someone holding both files could see it.
+  The limit that remains: with no request outstanding there is nothing to compare
+  against, so a token that arrives from elsewhere — shipped with a deck, or made
+  on another machine — is judged on its imprint alone.
+  What is still not built is CMS and certificate-chain verification, and that
+  stands: it would mean X.509 path validation against a bundled trust anchor
+  list — a new dependency with SBOM and licence consequences, plus reference data
+  that ages — in an application that makes no network connection and promises
+  tamper-evidence, not tamper-proofing.
 - **Encrypted packages.** `.ocideck` packages can be encrypted
   (`lib/utils/zip_encryption.dart`, wired into `FileService`); an encrypted
   package cannot be opened without its password.

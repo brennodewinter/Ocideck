@@ -1781,6 +1781,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Deze tijdstempel hoort niet bij het laatste verzoek':
+      'Ez az időbélyeg nem a legutóbbi kéréshez tartozik',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Adja meg ezt a verziószámot, amikor biztonsági problémát jelent.',
   'Video niet ingesloten': 'A videó nincs beágyazva',

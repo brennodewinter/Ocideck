@@ -47,6 +47,9 @@ class SealRecord {
   final String at;
   final SealForm form;
   final String timestampToken;
+
+  /// De nonce (hex) van het uitstaande verzoek; zie [Deck.sealTimestampNonce].
+  final String timestampNonce;
   final DocumentSignature? signature;
 
   const SealRecord({
@@ -56,6 +59,7 @@ class SealRecord {
     this.at = '',
     this.form = SealForm.fileBytes,
     this.timestampToken = '',
+    this.timestampNonce = '',
     this.signature,
   });
 
@@ -65,6 +69,7 @@ class SealRecord {
       hash.isEmpty &&
       at.isEmpty &&
       timestampToken.isEmpty &&
+      timestampNonce.isEmpty &&
       (signature?.isEmpty ?? true);
 
   /// De vaststelling zoals [deck] hem draagt.
@@ -75,6 +80,7 @@ class SealRecord {
     at: deck.sealAt,
     form: deck.sealForm,
     timestampToken: deck.sealTimestampToken,
+    timestampNonce: deck.sealTimestampNonce,
     signature: deck.signature,
   );
 
@@ -87,6 +93,7 @@ class SealRecord {
     sealAt: at,
     sealForm: form,
     sealTimestampToken: timestampToken,
+    sealTimestampNonce: timestampNonce,
     signature: signature,
     clearSignature: signature?.isEmpty ?? true,
   );

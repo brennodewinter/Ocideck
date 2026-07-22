@@ -730,6 +730,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Deze tijdstempel hoort niet bij het laatste verzoek':
+      'Questa marca temporale non appartiene all\'ultima richiesta',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Indichi questo numero di versione quando segnala un problema di sicurezza.',
   'Video niet ingesloten': 'Video non incorporato',

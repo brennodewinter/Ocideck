@@ -41,6 +41,14 @@ class SealCodec {
   static const String atKey = 'at';
   static const String formKey = 'form';
   static const String timestampTokenKey = 'timestamp_token';
+
+  /// De nonce van een uitstaand verzoek.
+  ///
+  /// Toegevoegd zonder [version] te verhogen, en dat is opzet: een oudere build
+  /// leest per sleutel en negeert deze gewoon. Wél verhogen zou die build de
+  /// hele sidecar laten weigeren — dan zou het zegel zoekraken om een veld dat
+  /// hij niet nodig heeft.
+  static const String timestampNonceKey = 'timestamp_nonce';
   static const String signatureKey = 'signature';
 
   /// De JSON voor [record], of null wanneer er niets vast te leggen is.
@@ -58,6 +66,8 @@ class SealCodec {
       if (record.at.isNotEmpty) atKey: record.at,
       if (record.timestampToken.isNotEmpty)
         timestampTokenKey: record.timestampToken,
+      if (record.timestampNonce.isNotEmpty)
+        timestampNonceKey: record.timestampNonce,
       if (sig != null && sig.isNotEmpty) signatureKey: _signatureToJson(sig),
     });
   }
@@ -84,6 +94,7 @@ class SealCodec {
         at: _text(data[atKey]),
         form: SealForm.fromKey(_text(data[formKey])),
         timestampToken: _text(data[timestampTokenKey]),
+        timestampNonce: _text(data[timestampNonceKey]),
         signature: _signatureFromJson(data[signatureKey]),
       );
       return record.isEmpty ? null : record;

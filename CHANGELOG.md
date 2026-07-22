@@ -311,6 +311,19 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   notities en het zegel.
 
 ### Fixed
+- **Security: een oud tijdstempelbestand wordt niet meer aangezien voor een
+  nieuw.** Wie een rapport verzegelt, kan het door een externe dienst laten
+  tijdstempelen: OciDeck maakt een verzoek, u stuurt het weg, en u leest het
+  antwoord terug in. OciDeck keek daarbij alleen of het antwoord over hetzelfde
+  document ging — niet of het het antwoord op úw verzoek was. Een ouder
+  tijdstempelbestand van datzelfde rapport paste dus ook, en dat zou een
+  onjuiste datum aan uw bewijs kunnen hangen.
+
+  Elk verzoek draagt al een uniek kenmerk dat de tijdstempeldienst verplicht
+  terugstuurt; dat kenmerk wordt nu onthouden en bij het inlezen nagekeken. Past
+  het niet, dan zegt OciDeck dat met zoveel woorden in plaats van het bestand
+  stil te aanvaarden. Staat er geen verzoek uit — bijvoorbeeld bij een
+  tijdstempel die met een deck is meegekomen — dan verandert er niets.
 - **In de webversie gooide "Bestand kiezen" bij video en audio een fout.** Niet
   "de knop deed niets" — er vloog een onafgevangen fout omhoog. De browser kent
   geen bestandspaden, en de bibliotheek die de kiezer levert reageert daarop

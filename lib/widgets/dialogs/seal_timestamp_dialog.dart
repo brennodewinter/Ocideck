@@ -185,13 +185,11 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
     final l10n = context.l10n;
     // Een verse nonce per verzoek: zo bindt het token dat terugkomt zich aan
     // dít verzoek en niet aan een willekeurig eerder verzoek voor dezelfde
-    // hash. OciDeck kan die echo bij het importeren niet zelf nakijken — het
-    // deck bewaart het verzoek niet — maar wie beide bestanden heeft wél, en
-    // zonder nonce in het verzoek valt er überhaupt niets te binden.
-    final tsq = buildTimeStampRequestForSealHash(
-      deck.sealHash,
-      nonce: newTimeStampNonce(),
-    );
+    // hash. Hij wordt bewaard in de zegel-sidecar, zodat [_importTsr] de echo
+    // kán nakijken — het verzoek gaat buiten de app om naar de TSA, dus zonder
+    // die opslag was de andere helft na een herstart weg.
+    final nonce = newTimeStampNonce();
+    final tsq = buildTimeStampRequestForSealHash(deck.sealHash, nonce: nonce);
     if (tsq == null) {
       // Een zegel dat geen SHA-512 is, is geen zegel. Eerder werd de hash
       // half ingelezen en alsnog een verzoek geëxporteerd — dan laat je een
@@ -205,9 +203,16 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
         fileName: 'ocideck-seal.tsq',
         bytes: kIsWeb ? tsq : null,
       );
-      if (path == null || kIsWeb) return; // web already downloaded via bytes
-      final target = path.endsWith('.tsq') ? path : '$path.tsq';
-      await writeBytesAtomic(File(target), tsq);
+      if (path == null && !kIsWeb) return;
+      if (!kIsWeb) {
+        final target = path!.endsWith('.tsq') ? path : '$path.tsq';
+        await writeBytesAtomic(File(target), tsq);
+      }
+      // Pas onthouden als het verzoek de deur uit is. Andersom zou een
+      // afgebroken bestandskiezer een nonce achterlaten voor een verzoek dat
+      // nooit verstuurd is, en dan weigert de volgende import terecht maar
+      // onbegrijpelijk.
+      widget.notifier.setSealTimestampNonce(timeStampNonceHex(nonce));
       _toast(l10n.d('Tijdstempelverzoek opgeslagen'));
     } catch (e, s) {
       logError('SealTimestampDialog._exportTsq', e, s);
@@ -220,11 +225,21 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
       final result = await FilePicker.pickFiles(withData: true);
       final bytes = result?.files.single.bytes;
       if (bytes == null) return;
-      if (timeStampImprintMatchesHash(bytes, deck.sealHash)) {
-        widget.notifier.setSealTimestampToken(base64Url.encode(bytes));
-        _toast(l10n.d('Tijdstempel geïmporteerd'));
-      } else {
-        _toast(l10n.d('Tijdstempel komt niet overeen met de seal-hash'));
+      // De imprint zegt "dit token gaat over deze hash". De nonce zegt "en het
+      // is het antwoord op mijn verzoek". Het oordeel zelf staat in
+      // rfc3161_timestamp.dart, zodat het toetsbaar is zonder bestandskiezer.
+      switch (judgeTimeStampImport(
+        bytes,
+        sealHash: deck.sealHash,
+        expectedNonceHex: deck.sealTimestampNonce,
+      )) {
+        case TimeStampImportVerdict.imprintMismatch:
+          _toast(l10n.d('Tijdstempel komt niet overeen met de seal-hash'));
+        case TimeStampImportVerdict.wrongRequest:
+          _toast(l10n.d('Deze tijdstempel hoort niet bij het laatste verzoek'));
+        case TimeStampImportVerdict.accepted:
+          widget.notifier.setSealTimestampToken(base64Url.encode(bytes));
+          _toast(l10n.d('Tijdstempel geïmporteerd'));
       }
     } catch (e, s) {
       logError('SealTimestampDialog._importTsr', e, s);
