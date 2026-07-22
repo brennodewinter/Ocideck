@@ -12,6 +12,12 @@ class _FakeDocService implements DocumentationService {
   @override
   Future<String> load(String baseAsset, String languageCode) async =>
       bodies[baseAsset] ?? '';
+
+  @override
+  Future<({String text, bool isBaseVersion})> loadDetailed(
+    String baseAsset,
+    String languageCode,
+  ) async => (text: await load(baseAsset, languageCode), isBaseVersion: true);
 }
 
 void main() {
