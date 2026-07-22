@@ -19,6 +19,16 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 
   double _slideRailWidth = _defaultSlideRailWidth;
 
+  /// De menubalk-doorgeefluik, in [initState] opgehaald zodat [dispose] hem nog
+  /// kan leegmaken — `ref` mag daar niet meer.
+  StateController<ShellDeckCommands?>? _commands;
+
+  @override
+  void initState() {
+    super.initState();
+    _commands = ref.read(shellDeckCommandsProvider.notifier);
+  }
+
   // Laatst berekende exportstatus, zodat het commandopalet (geopend via een
   // sneltoets/menu, buiten build) de export-gate kan respecteren zonder een
   // provider te watchen in een callback.
@@ -51,6 +61,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       l10n,
     );
     _canExport = canExport;
+    _publishMenuCommands(deckState, canExport);
 
     return Focus(
       canRequestFocus: false,
@@ -160,6 +171,83 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         ),
       ),
     );
+  }
+
+  /// Geef de menubalk toegang tot de handelingen van de werkruimte.
+  ///
+  /// De balk hangt boven de hele app — ook boven het openscherm, want een
+  /// menubalk die verschijnt en verdwijnt is er geen — terwijl presenteren,
+  /// exporteren en het commandopalet hier privé wonen.
+  ///
+  /// Alleen doorgeven als een aan/uit-stand verandert. De closures hieronder
+  /// zijn elke frame nieuw, maar sluiten om deze langlevende `State` heen; ze
+  /// elke frame publiceren zou de menubalk elke frame opnieuw naar het platform
+  /// laten schrijven.
+  void _publishMenuCommands(DeckState deckState, bool canExport) {
+    // De tabbladen leven in een IndexedStack, dus élk geopend tabblad bouwt
+    // elke frame mee. Alleen het zichtbare tabblad mag de menubalk vullen —
+    // anders bedient "Presenteren" een presentatie die niet in beeld staat.
+    final notifier = ref.read(deckProvider.notifier);
+    if (!identical(ref.watch(tabsProvider).current?.deckNotifier, notifier)) {
+      return;
+    }
+    final next = ShellDeckCommands(
+      present: _presentDeck,
+      export: _exportDeck,
+      save: _saveDeck,
+      find: _openFind,
+      findReplace: _openFindReplace,
+      properties: _openProperties,
+      commandPalette: _openCommandPalette,
+      fullDeckPreview: _openFullDeckPreview,
+      undo: () => _undo(ref.read(deckProvider.notifier)),
+      redo: () => _redo(ref.read(deckProvider.notifier)),
+      canExport: canExport,
+      canUndo: deckState.canUndo,
+      canRedo: deckState.canRedo,
+    );
+    final current = ref.read(shellDeckCommandsProvider);
+    if (current != null &&
+        identical(_publishedFor, notifier) &&
+        current.sameEnablement(next)) {
+      return;
+    }
+    _publishedFor = notifier;
+    _published = next;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      ref.read(shellDeckCommandsProvider.notifier).state = next;
+    });
+  }
+
+  /// Voor welk tabblad er als laatste is gepubliceerd. Wisselt de gebruiker van
+  /// tabblad, dan moet de menubalk opnieuw gevuld worden, ook als de aan/uit-
+  /// standen toevallig gelijk zijn.
+  DeckNotifier? _publishedFor;
+
+  /// Wat deze werkruimte als laatste publiceerde, zodat [dispose] alleen zijn
+  /// eigen bijdrage opruimt.
+  ShellDeckCommands? _published;
+
+  @override
+  void dispose() {
+    // Deze werkruimte gaat dicht: haal de handelingen weg, zodat het menu niets
+    // meer aanbiedt dat nergens meer op slaat. Alleen als er sindsdien geen
+    // ander tabblad heeft gepubliceerd — die is dan de nieuwe eigenaar. De
+    // notifier komt uit [initState]: `ref` is in dispose niet meer bruikbaar.
+    final commands = _commands;
+    final mine = _published;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // `mounted`: bij het afsluiten van de app is de container al opgeruimd
+      // voordat deze callback aan de beurt is.
+      if (commands != null &&
+          commands.mounted &&
+          mine != null &&
+          identical(commands.state, mine)) {
+        commands.state = null;
+      }
+    });
+    super.dispose();
   }
 
   /// Read-only-banner voor een afgerond & verzegeld deck (§8 A1). Slank, boven

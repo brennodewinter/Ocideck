@@ -35,6 +35,58 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
         shortcut: 'Ctrl/Cmd+S',
         onInvoke: _saveDeck,
       ),
+      // Ongedaan maken en opnieuw ontbraken hier, terwijl ze alleen als twee
+      // kleine icoontjes in de werkbalk bestonden. Het palet is in deze app de
+      // plek waar een functie gevonden wordt; de twee handelingen die iemand het
+      // vaakst zoekt, hoorden er als eerste in.
+      PaletteCommand(
+        label: l10n.d('Ongedaan maken'),
+        icon: Icons.undo,
+        shortcut: 'Ctrl/Cmd+Z',
+        keywords: const ['undo', 'terug'],
+        enabled: deckNotifier.currentState.canUndo,
+        onInvoke: () => _undo(deckNotifier),
+      ),
+      PaletteCommand(
+        label: l10n.d('Opnieuw'),
+        icon: Icons.redo,
+        shortcut: 'Ctrl/Cmd+Shift+Z',
+        keywords: const ['redo', 'opnieuw'],
+        enabled: deckNotifier.currentState.canRedo,
+        onInvoke: () => _redo(deckNotifier),
+      ),
+      PaletteCommand(
+        label: l10n.d('Zoeken'),
+        icon: Icons.search,
+        shortcut: 'Ctrl/Cmd+F',
+        onInvoke: _openFind,
+      ),
+      PaletteCommand(
+        label: l10n.d('Eigenschappen'),
+        icon: Icons.info_outline,
+        keywords: const ['auteur', 'organisatie', 'metadata'],
+        onInvoke: _openProperties,
+      ),
+      PaletteCommand(
+        label: l10n.d('Gebruikershandleiding'),
+        icon: Icons.menu_book_outlined,
+        keywords: const ['help', 'handleiding', 'documentatie'],
+        onInvoke: () => DocumentReaderScreen.open(
+          context,
+          title: l10n.d('Gebruikershandleiding'),
+          assetBase: 'docs/USER_GUIDE.md',
+        ),
+      ),
+      PaletteCommand(
+        label: l10n.d('Sneltoetsen'),
+        icon: Icons.keyboard_outlined,
+        keywords: const ['shortcuts', 'toetsen'],
+        onInvoke: () => DocumentReaderScreen.open(
+          context,
+          title: l10n.d('Sneltoetsen'),
+          assetBase: 'docs/SHORTCUTS.md',
+        ),
+      ),
       PaletteCommand(
         label: l10n.d('Nieuwe grafiek'),
         icon: Icons.insert_chart_outlined,
