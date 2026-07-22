@@ -455,13 +455,19 @@ To keep the `.md` pure Marp, five kinds of data live beside it (see
 - **Linked chart data** — `data/*.json` for anything new, `data/*.csv` for a deck
   that already links one (the living source for a chart).
 
-The last two carry a consequence worth stating where the layers are listed: a
-commit to a git repository takes `deck.md`, the pooled images and the chart data
-— and **not** the ink or the user-notes sidecar, since nothing in `services/git/`
-writes them. `gitDeckOmissions` counts what stays behind and the save path asks
-before committing (`design/GIT_STORAGE.md` §9.1). The ink and the notes *are*
-carried in an autosave snapshot, because both live outside the markdown and
-drawing alone already makes a deck dirty.
+These carry a consequence worth stating where the layers are listed: a commit to
+a git repository takes `deck.md`, the pooled images, the chart data and the user
+notes (`<deckDir>/deck.user-notes.json`, on a stable path so a change reads as a
+change) — and **not** the ink sidecar, since nothing in `services/git/` writes
+it. `gitDeckOmissions` counts what stays behind and the save path asks before
+committing (`design/GIT_STORAGE.md` §9.1). The ink and the notes *are* carried in
+an autosave snapshot, because both live outside the markdown and drawing alone
+already makes a deck dirty.
+
+The notes are written indented rather than compact, which is the only reason the
+"ordinary text merge" of D7 is true: on one line every edit collides with every
+other. That formatting difference between the disk sidecar and the repo copy is
+deliberate, and `UserNotesCodec.encode(forTextMerge:)` is where it lives.
 
 ## Git storage (`services/git/`)
 

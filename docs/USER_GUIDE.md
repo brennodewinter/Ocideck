@@ -268,24 +268,35 @@ saved version stays retrievable, which a plain folder cannot give you.
   trusted.
 - **Save** with the ordinary save button, or *Save to…* to publish somewhere
   else: the deck is written back as one
-  commit — the markdown, its images, which go into the shared pool exactly as
-  opening reads them, and the linked chart data files. A deck you opened from git offers its own name and updates
+  commit — the markdown, its images and media, which go into the shared pool
+  exactly as opening reads them, the linked chart data files, and your notes.
+  A deck you opened from git offers its own name and updates
   in place; a new deck is published by choosing a name (it becomes
   `decks/<name>`). If someone moved the branch since you opened it, the save is
   refused so you do not overwrite their work — reload and save again.
 - **Not everything travels to git, and you are asked first.** A commit carries
-  `deck.md`, the images in the shared pool, and the linked chart data files.
-  Video and audio are not written yet, and neither are the two sidecars: the
-  drawings made on your slides (`.ink.json`) and the user notes
-  (`.user-notes.json`). Saving to a folder or to an `.ocideck` package does take
-  all of those along, so moving a deck from disk into a repository is where they
-  would be lost. Before the commit is made, a dialog therefore counts per kind
-  what stays behind and lets you cancel or go ahead; empty notes and slides with
-  no strokes are not counted, so it stays quiet when there is nothing to lose.
+  `deck.md`, the images **and** the video and audio in the shared pool, the
+  linked chart data files, and your notes. What still stays behind are the
+  drawings made on your slides (`.ink.json`) and, on a sealed deck, the seal and
+  visible signature (`.seal.json`). Saving to a folder or to an `.ocideck`
+  package does take those along, so moving a deck from disk into a repository is
+  where they would be lost. Before the commit is made, a dialog therefore counts
+  per kind what stays behind and lets you cancel or go ahead; slides with no
+  strokes are not counted, so it stays quiet when there is nothing to lose.
   Going ahead does not delete anything — the layers stay in this window, and a
   save to a file or a package still keeps them. *(Until 21-07-2026 the only word
   about this came after the commit had been made, and only about video and
-  audio; that line after the fact is still there.)*
+  audio; that line after the fact is still there. Corrected 22-07-2026: this
+  still said video, audio and the notes stayed behind, which had not been true
+  for the media since #515 and stopped being true for the notes with #541. The
+  warning itself shrank at the same time — a list that names more than actually
+  goes wrong is one people learn to dismiss whole.)*
+- **Your notes travel, and your co-authors' notes merge.** The notes live next to
+  the deck in the repository as `deck.user-notes.json`, so two people writing
+  notes on different slides both keep theirs when their work comes together. Two
+  people rewriting the *same* note is a genuine disagreement and git will say so.
+  Clearing your last note removes the file, so a note you deleted does not come
+  back the next time you open the deck.
 - **Lose your connection while saving** and the deck's text is kept locally and
   queued instead of failing — you see "saved, syncs when you're back online".
   The queue survives closing the app; it empties on your next successful save

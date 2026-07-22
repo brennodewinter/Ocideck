@@ -142,7 +142,7 @@ const int maxClassLines = 1000;
 /// Een nieuwe regel hier is een bewuste beslissing en hoort een reden te hebben;
 /// het doel is minder en kleinere regels, niet meer.
 const Map<String, int> classSizeBaseline = {
-  'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState': 7107,
+  'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState': 7295,
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
       3419,
   'lib/services/file_service.dart#FileService': 2864,

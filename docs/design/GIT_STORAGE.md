@@ -329,8 +329,8 @@ repo/
   decks/
     kwartaalcijfers/
       deck.md            # references  repo:assets/3f9a1c8e….png
-      deck.annotations   # sidecar (ink strokes)
-      deck.notes         # sidecar (speaker notes)
+      deck.annotations       # sidecar (ink strokes) — not written yet, §9.1
+      deck.user-notes.json   # sidecar (user notes) — since #541
     jaarplan/
       deck.md            # references  repo:assets/3f9a1c8e….png  ← same blob
   themes/                # optional shared theme CSS
@@ -641,10 +641,22 @@ does**.
 > one). `buildDeckRepoFiles` produces exactly three things: `<deckDir>/deck.md`,
 > the pool blobs that are not in the repo yet, and each linked chart's data file
 > at the path its `source` names. **Video and audio are not written**, and
-> **neither sidecar is**: nothing in `services/git/` writes `deck.annotations` or
-> `deck.notes`, so the ink layer and the user notes stay behind. Saving the same
-> deck to a folder or a package does take all four along, which makes moving a
-> deck from disk into a repository the moment they would be lost.
+> **the ink sidecar is not**: nothing in `services/git/` writes
+> `deck.annotations`, so the ink layer stays behind. Saving the same deck to a
+> folder or a package does take it along, which makes moving a deck from disk
+> into a repository the moment it would be lost.
+>
+> *Updated 22-07-2026 (#541): the **user notes** no longer stay behind.
+> `buildDeckRepoFiles` writes `<deckDir>/deck.user-notes.json` on a stable path
+> next to `deck.md` — not in the content-addressed pool, where every typed
+> character would mint a new blob and orphan the last one — and
+> `withRepoUserNotes` reads it back after the parse, because the codec re-attaches
+> notes by slide fingerprint and the ids do not exist before then. Emptying the
+> last note **deletes** the file (`RepoDeckFiles.deletes`, the first use of
+> `commitFiles(deletes:)`); leaving a stale file behind would resurrect a note the
+> user believed they had removed. `gitDeckOmissions` lost its notes count and the
+> dialog lost that line — a warning that lists more than actually goes wrong
+> teaches people to dismiss the whole thing, and then the seal line goes with it.*
 >
 > Carrying them is a larger change than a warning, and the warning could not wait
 > for it. `gitDeckOmissions` counts what stays behind per kind, and
@@ -761,18 +773,28 @@ whose participants share a repo), but neither doc depends on the other landing.
 
 ### 9.7 Sidecar merge semantics
 
-> **Design, not yet built** (recorded 21-07-2026). Neither sidecar is committed
-> today — see the note in §9.1 — so nothing below is running. It stays here
-> because it is the decision to implement *when* they travel, not a description
-> of current behaviour.
+> **Half built** (recorded 21-07-2026, updated 22-07-2026). The notes sidecar is
+> committed since #541 and takes git's ordinary text merge as decided below — for
+> which it had to be written one field per line; see D7. The ink sidecar is still
+> not committed (§9.1), so the union driver below describes a decision, not
+> running behaviour.
 
 "Sidecars merge poorly" flattened a distinction worth keeping: the two sidecars
 are not the same kind of file, and each has its own right answer (§14, D7).
 
-- **`.notes` — speaker notes are text.** Git's ordinary text merge applies. No
-  special case, no custom driver. Two authors editing different slides' notes
+- **`deck.user-notes.json` — notes are text.** Git's ordinary text merge applies.
+  No special case, no custom driver. Two authors editing different slides' notes
   merge cleanly, and a genuine same-line collision produces a conflict a human
-  can actually read and resolve.
+  can actually read and resolve. **This only holds because the file is written
+  with one field per line** — the compact single-line JSON that the on-disk
+  sidecar uses would make every edit a same-line collision, and the sentence
+  above would be false. Live since #541.
+
+  Not yet done: OciDeck does not *resolve* such a conflict in-app. Git leaves
+  conflict markers, which are not valid JSON, so a conflicted file fails to
+  decode and the deck opens without its notes rather than with mangled ones —
+  the same trade as an unreadable sidecar on disk. Surfacing that to the user
+  belongs with the same work as the ink driver.
 - **`.annotations` — ink strokes are additive.** Two people who drew on the same
   slide did not disagree; they both drew. The merge is a **union of the stroke
   sets**, keyed per slide and deduplicated by stroke identity. That is
@@ -1190,11 +1212,21 @@ discussion still resolve.
   one per client, engagement or classification level, because forge access is
   all-or-nothing and the pool cannot straddle a boundary the forge does not
   enforce (§6).
-- **D7 — Sidecar conflicts.** **Per type**: `.notes` is text and takes git's
-  ordinary text merge; `.annotations` is ink and **unions** the stroke sets via a
-  merge driver, because two people drawing on one slide did not disagree. Manual
-  resolution only where both fail (§9.7). Erasure-vs-union and per-stroke identity
-  are consequences that belong to the annotation file format, not to this document.
+- **D7 — Sidecar conflicts.** **Per type**: the notes sidecar is text and takes
+  git's ordinary text merge; `.annotations` is ink and **unions** the stroke sets
+  via a merge driver, because two people drawing on one slide did not disagree.
+  Manual resolution only where both fail (§9.7). Erasure-vs-union and per-stroke
+  identity are consequences that belong to the annotation file format, not to
+  this document.
+
+  *Built 22-07-2026 for the notes half (#541), with one thing this entry had not
+  reckoned with: the sidecar is JSON, and `jsonEncode` puts it on a single line.
+  A line-based merge over a single line makes every edit a collision, so "two
+  authors editing different slides' notes merge cleanly" was false as written.
+  The repo copy is therefore written **indented, one field per line**
+  (`UserNotesCodec.encode(forTextMerge: true)`). The on-disk sidecar, which
+  nothing ever merges, stays compact. Decided here rather than in the format:
+  it is a property of the transport, not of the notes.*
 - **D8 — Minimum git version.** Required, and enforced by the probe. Below it the
   native plane is refused **wholesale** and the repo falls back to REST — never
   feature-by-feature. `--filter=blob:none` (D5) puts the floor at **≥2.19**; pin
