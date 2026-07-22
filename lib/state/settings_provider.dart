@@ -8,6 +8,7 @@ import '../models/privacy_disposition.dart';
 import '../models/privacy_finding.dart';
 import '../models/settings.dart';
 import '../models/storage_connection.dart';
+import '../services/disk_traces.dart';
 import '../services/privacy/privacy_regions.dart';
 import '../services/secret_store.dart';
 import '../utils/log.dart';
@@ -24,13 +25,19 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   AppSettings get currentState => state;
   set currentState(AppSettings value) => state = value;
 
-  SettingsNotifier({SecretStore? secretStore})
+  SettingsNotifier({SecretStore? secretStore, DiskTraces? diskTraces})
     : _secrets = secretStore ?? SecretStore(),
+      _diskTraces = diskTraces ?? DiskTraces(),
       super(const AppSettings()) {
     _load();
   }
 
   final SecretStore _secrets;
+
+  /// De opruimer voor wat een verbinding op schijf achterlaat. Injecteerbaar,
+  /// zodat een test in een tijdelijke map kan kijken in plaats van in de echte
+  /// app-supportmap van de gebruiker die de test draait.
+  final DiskTraces _diskTraces;
 
   /// Broadcast: één event (een oplopend volgnummer) per mislukte prefs-schrijf,
   /// zie [_persist]. De app-shell luistert hierop en toont een niet-blokkerende
