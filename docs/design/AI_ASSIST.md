@@ -18,6 +18,15 @@
 > [`SOURCE_MAP.md`](../SOURCE_MAP.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md) and
 > [`USER_GUIDE.md`](../USER_GUIDE.md).
 >
+> **How far that distrust reaches, as of 2026-07-22.** What has been checked is
+> narrow and worth naming so the rest is not mistaken for checked: every file
+> named in the paragraph above exists at the path given, and `AiSettings.enabled`
+> is indeed a setting of its own that is off by default. That is all. The prose,
+> the data shapes and the guardrail descriptions in §§2–6 have still never been
+> compared to the code line by line. Read a claim here as a claim; if you check
+> one, either fix it or note that it held, with the date — an unchecked section
+> that quietly looks checked is worse than one that says so.
+>
 > It is written to be **picked up cold**: exact file paths, integration points,
 > data shapes, invariants and open questions are spelled out so a later
 > implementation session has everything it needs without re-deriving context.
