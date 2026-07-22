@@ -140,9 +140,10 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
         logWarning('SettingsNotifier: ongeldige aiSettings-prefs', e);
       }
     }
-    // Uit de sleutelbos, met een eenmalige verhuizing uit prefs; zie
-    // [SettingsPrivacy.migratePrivacyOwnIdentity].
-    final ownIdentity = await migratePrivacyOwnIdentity(prefs);
+    // Het laden is asynchroon; een scope die in die tussentijd verdwijnt — een
+    // venster dat sluit, een test die afloopt — mag geen "gebruikt na dispose"
+    // opleveren. Er valt dan ook niets meer bij te werken.
+    if (!mounted) return;
     state = AppSettings(
       languageCode: prefs.getString('languageCode') ?? 'nl',
       connections: _loadConnections(prefs),
@@ -195,7 +196,11 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       privacyExportGate: PrivacyExportGateX.fromKey(
         prefs.getString('privacyExportGate'),
       ),
-      privacyOwnIdentity: ownIdentity,
+      // De echte plek is de sleutelbos; dit is de nog niet gemigreerde
+      // waarde, die meteen beschikbaar is. Zie [adoptPrivacyOwnIdentity],
+      // dat de sleutelbos náást het laden raadpleegt.
+      privacyOwnIdentity:
+          prefs.getString(SettingsPrivacy.legacyOwnIdentityKey) ?? '',
       uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
       docReaderTextScale: (prefs.getDouble('docReaderTextScale') ?? 1.0).clamp(
         0.8,
@@ -215,6 +220,8 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       aiSettings: ai,
     );
     _persistedLogoPaths = _referencedLogoPaths;
+    // Niet awaiten: de sleutelbos mag de instellingen niet ophouden.
+    unawaited(adoptPrivacyOwnIdentity(prefs));
   }
 
   /// Persisteer een prefs-mutatie. Vangt schrijffouten af en logt ze, zodat een
