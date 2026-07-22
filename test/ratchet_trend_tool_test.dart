@@ -123,6 +123,7 @@ const Map<String, String> b = {
       required int service,
       required int nosemgrep,
       int picker = 2,
+      int klassen = 2,
     }) =>
         '''
 const int catchUnderscoreBaseline = $katch;
@@ -132,6 +133,9 @@ const int controlByteBaseline = 0;
 const int serviceUiImportBaseline = $service;
 const int modelUiImportBaseline = 0;
 const Map<String, int> fileSizeBaseline = {};
+const Map<String, int> classSizeBaseline = {
+${List.generate(klassen, (i) => "  'lib/x.dart#Klasse\$i': 1200,").join('\n')}
+};
 const Map<String, String> filePickerPathBaseline = {
 ${List.generate(picker, (i) => "  'lib/een$i.dart': 'reden',").join('\n')}
 };
@@ -153,6 +157,7 @@ const int perFileFloorPercent = $bestandsvloer;
       required int service,
       required int nosemgrep,
       int picker = 2,
+      int klassen = 2,
       int vloer = 80,
       int ongedekt = 1,
       int bestandsvloer = 20,
@@ -162,6 +167,7 @@ const int perFileFloorPercent = $bestandsvloer;
         service: service,
         nosemgrep: nosemgrep,
         picker: picker,
+        klassen: klassen,
       ),
       'tool/check_method_length.dart': methodeLengte,
       'tool/coverage_summary.dart': dekking(
@@ -178,6 +184,7 @@ const int perFileFloorPercent = $bestandsvloer;
       service: nu ? 2 : 6,
       nosemgrep: 0,
       picker: nu ? 1 : 3,
+      klassen: nu ? 1 : 3,
       vloer: nu ? 82 : 80,
       ongedekt: nu ? 0 : 4,
       bestandsvloer: nu ? 25 : 20,
@@ -190,7 +197,10 @@ const int perFileFloorPercent = $bestandsvloer;
       );
       expect(standen.where((s) => s.onvindbaar), isEmpty);
       expect(standen.where((s) => s.stilstand), isEmpty);
-      expect(standen.where((s) => s.verbeterd).length, 5);
+      // Zes: service, picker, klassen, vloer, ongedekt en bestandsvloer —
+      // precies de zes die `alleenVooruit` laat bewegen. Geteld en niet
+      // afgeleid, want dit ís de bewering van deze test.
+      expect(standen.where((s) => s.verbeterd).length, 6);
       expect(exitCodeVoor(standen), 0);
     });
 
@@ -242,7 +252,15 @@ const int perFileFloorPercent = $bestandsvloer;
           kapot,
           stand(katch: 0, service: 4, nosemgrep: 1),
         );
-        expect(standen.where((s) => s.onvindbaar).length, 9);
+        // Afgeleid, niet overgetypt: dit getal is het aantal ratchets dat in
+        // check_conventions.dart woont, en dat verandert zodra er een
+        // basislijn bijkomt. Een hardgecodeerde 9 maakte deze test rood op
+        // werk dat er niets mee te maken had — precies de fout die
+        // docs_claims_match_code_test elders bestrijdt.
+        final inConventions = ratchets
+            .where((r) => r.bestand == 'tool/check_conventions.dart')
+            .length;
+        expect(standen.where((s) => s.onvindbaar).length, inConventions);
         final tekst = rapport(
           standen: standen,
           dekking: const [],

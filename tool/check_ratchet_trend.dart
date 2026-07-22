@@ -146,6 +146,13 @@ const List<Ratchet> ratchets = [
     wat: 'bestanden met een eigen plafond boven de 1000 regels',
   ),
   Ratchet(
+    naam: 'classSizeBaseline',
+    bestand: 'tool/check_conventions.dart',
+    soort: RatchetSoort.omvang,
+    richting: Richting.omlaag,
+    wat: 'klassen met een eigen plafond boven de 1000 regels',
+  ),
+  Ratchet(
     naam: 'filePickerPathBaseline',
     bestand: 'tool/check_conventions.dart',
     soort: RatchetSoort.omvang,
