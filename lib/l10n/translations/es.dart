@@ -731,6 +731,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Reglas actualmente desactivadas. No se notifican ni se redactan. Tres de ellas están desactivadas de forma predeterminada — sus palabras clave aparecen con demasiada frecuencia en diapositivas de trabajo corrientes. Toca para activar una.',
   'Bekende beperkingen': 'Limitaciones conocidas',
   'naam@example.org\nexample.org': 'nombre@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -1773,8 +1775,6 @@ const _dutchSourceAddEs = {
   'geredigeerd': 'redactados',
   'met waarschuwing': 'con aviso',
   'Deze regel nooit meer melden': 'No volver a notificar esta regla',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Reglas desactivadas. No se notifican ni se redactan. Toca para volver a activarlas.',
   'politieke opvatting': 'opinión política',
   'etnische afkomst': 'origen étnico',
   'seksuele geaardheid': 'orientación sexual',

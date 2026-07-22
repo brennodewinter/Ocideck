@@ -1776,6 +1776,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Noteikumi, kas pašlaik ir izslēgti. Par tiem neziņo un tos neaizklāj. Trīs no tiem pēc noklusējuma ir izslēgti — to atslēgvārdi pārāk bieži sastopami parastos darba slaidos. Pieskaries, lai vienu ieslēgtu.',
   'Bekende beperkingen': 'Zināmie ierobežojumi',
   'naam@example.org\nexample.org': 'vards@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2796,8 +2798,6 @@ const _dutchSourceAddLv = <String, String>{
   'geredigeerd': 'aizklāti',
   'met waarschuwing': 'ar brīdinājumu',
   'Deze regel nooit meer melden': 'Vairs neziņot par šo noteikumu',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Izslēgtie noteikumi. Par tiem neziņo un tos neaizklāj. Pieskaries, lai atkal ieslēgtu.',
   'politieke opvatting': 'politiskie uzskati',
   'etnische afkomst': 'etniskā izcelsme',
   'seksuele geaardheid': 'seksuālā orientācija',

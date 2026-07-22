@@ -2695,6 +2695,17 @@ someone who alters the report can also rewrite the seal file. What the seal buys
 you is that alteration cannot happen *unnoticed* by anyone holding the hash from
 another route — the audit dossier, an email, a timestamp token.
 
+**What the seal covers, precisely** *(stated 2026-07-22)*: the bytes of the
+stored `.md`. A recipient can re-check it with `sha512sum` and needs nothing from
+us to do so. It does **not** cover the files beside it — the drawings
+(`.ink.json`), the speaker notes, chart data under `data/`, the evidence images,
+or the seal sidecar itself. Replace a chart's CSV or an evidence screenshot and
+the seal stays green.
+
+That is worth knowing before you rely on it in a dispute. If the integrity of the
+evidence matters as much as the text, hand over the **encrypted audit dossier**
+rather than the loose folder: that is one file, and one hash covers all of it.
+
 ### The finding wizard
 
 Adding a **Bevinding** opens a step-by-step wizard instead of a blank slide:

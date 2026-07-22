@@ -1800,6 +1800,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Правила, които сега са изключени. Те не се съобщават и не се заличават. Три от тях са изключени по подразбиране — ключовите им думи се срещат твърде често в обикновени служебни слайдове. Докоснете, за да включите едно от тях.',
   'Bekende beperkingen': 'Известни ограничения',
   'naam@example.org\nexample.org': 'ime@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2828,8 +2830,6 @@ const _dutchSourceAddBg = <String, String>{
   'geredigeerd': 'заличени',
   'met waarschuwing': 'с предупреждение',
   'Deze regel nooit meer melden': 'Повече да не се съобщава за това правило',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Изключени правила. Те не се съобщават и не се заличават. Докоснете, за да ги включите отново.',
   'politieke opvatting': 'политическо мнение',
   'etnische afkomst': 'етнически произход',
   'seksuele geaardheid': 'сексуална ориентация',

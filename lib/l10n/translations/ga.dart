@@ -1813,6 +1813,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Rialacha atá múchta faoi láthair. Ní thuairiscítear iad agus ní fholaítear iad. Tá trí cinn díobh múchta de réir réamhshocraithe — bíonn a n-eochairfhocail le feiceáil rómhinic ar ghnáthshleamhnáin oibre. Tapáil chun ceann a chur ar siúl.',
   'Bekende beperkingen': 'Teorainneacha aitheanta',
   'naam@example.org\nexample.org': 'ainm@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2846,8 +2848,6 @@ const _dutchSourceAddGa = <String, String>{
   'geredigeerd': 'folaithe',
   'met waarschuwing': 'le rabhadh',
   'Deze regel nooit meer melden': 'Ná tuairiscigh an riail seo arís',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Rialacha díchumasaithe. Ní thuairiscítear iad agus ní fholaítear iad. Tapáil chun iad a chur ar siúl arís.',
   'politieke opvatting': 'tuairim pholaitiúil',
   'etnische afkomst': 'bunús eitneach',
   'seksuele geaardheid': 'claonadh gnéasach',

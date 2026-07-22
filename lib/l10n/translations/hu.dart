@@ -1781,6 +1781,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Jelenleg kikapcsolt szabályok. Ezeket nem jelzi és nem takarja ki. Három közülük alapértelmezetten ki van kapcsolva — a kulcsszavaik túl gyakran fordulnak elő a szokásos munkahelyi diákon. Koppints az egyik bekapcsolásához.',
   'Bekende beperkingen': 'Ismert korlátozások',
   'naam@example.org\nexample.org': 'nev@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2807,8 +2809,6 @@ const _dutchSourceAddHu = <String, String>{
   'geredigeerd': 'kitakarva',
   'met waarschuwing': 'figyelmeztetéssel',
   'Deze regel nooit meer melden': 'Ne jelezze többé ezt a szabályt',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Kikapcsolt szabályok. Ezeket nem jelzi és nem takarja ki. Koppints a visszakapcsoláshoz.',
   'politieke opvatting': 'politikai vélemény',
   'etnische afkomst': 'etnikai származás',
   'seksuele geaardheid': 'szexuális irányultság',

@@ -734,6 +734,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Reglanan ku ta pagá awor. Nan no ta wòrdu reportá ni redaktá. Tres di nan ta pagá pa defekto — nan palabranan klave ta aparesé muchu frekuentemente riba slides di trabou normal. Toka pa sendé un di nan.',
   'Bekende beperkingen': 'Limitashonnan konosí',
   'naam@example.org\nexample.org': 'nomber@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -1772,8 +1774,6 @@ const _dutchSourceAddPap = {
   'geredigeerd': 'redaktá',
   'met waarschuwing': 'ku advertensia',
   'Deze regel nooit meer melden': 'No reportá e regla aki nunka mas',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Reglanan apagá. Nan no ta wòrdu reportá ni redaktá. Toka pa prendé nan atrobe.',
   'politieke opvatting': 'opinion polítiko',
   'etnische afkomst': 'orígen étniko',
   'seksuele geaardheid': 'orientashon seksual',

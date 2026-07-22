@@ -1795,6 +1795,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Reguli care sunt acum dezactivate. Nu sunt raportate și nici redactate. Trei dintre ele sunt dezactivate implicit — cuvintele lor cheie apar prea des pe diapozitive de lucru obișnuite. Atinge pentru a activa una.',
   'Bekende beperkingen': 'Limitări cunoscute',
   'naam@example.org\nexample.org': 'nume@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2830,8 +2832,6 @@ const _dutchSourceAddRo = <String, String>{
   'geredigeerd': 'redactate',
   'met waarschuwing': 'cu avertisment',
   'Deze regel nooit meer melden': 'Nu mai raporta niciodată această regulă',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Reguli dezactivate. Nu sunt raportate și nici redactate. Atinge pentru a le reactiva.',
   'politieke opvatting': 'opinie politică',
   'etnische afkomst': 'origine etnică',
   'seksuele geaardheid': 'orientare sexuală',

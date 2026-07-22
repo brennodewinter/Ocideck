@@ -348,7 +348,7 @@ model.
   `name`), financial (`iban`, checksum-validated), Dutch `bsn` (11-proof +
   context), secrets (vendor tokens, private keys, JWTs, plaintext passwords),
   national identifiers for 13 EU member states plus two UK ones (15 rules in
-  total), GDPR Art. 9 special-category keywords, and
+  total), GDPR Art. 9 special-category keywords (three of which — ethnic origin, political opinion, sexual orientation — ship **off by default**; see PRIVACY.md), and
   structural leaks (user paths, tokens-in-URLs, `mailto:`/`data:` URIs).
 - **Deliberately non-NER names.** Name detection only fires behind a
   salutation/label (`dhr.`/`mevr.`/`naam:`) and stays a *possible* finding — a

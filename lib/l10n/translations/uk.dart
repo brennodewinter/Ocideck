@@ -1795,6 +1795,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Правила, які зараз вимкнені. Вони не повідомляються і не редагуються. Три з них типово вимкнені — їхні ключові слова надто часто трапляються на звичайних робочих слайдах. Торкніться, щоб увімкнути одне з них.',
   'Bekende beperkingen': 'Відомі обмеження',
   'naam@example.org\nexample.org': 'imya@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2818,8 +2820,6 @@ const _dutchSourceAddUk = <String, String>{
   'geredigeerd': 'відредаговано',
   'met waarschuwing': 'з попередженням',
   'Deze regel nooit meer melden': 'Більше не повідомляти про це правило',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Вимкнені правила. Вони не повідомляються і не редагуються. Торкніться, щоб увімкнути знову.',
   'politieke opvatting': 'політичні погляди',
   'etnische afkomst': 'етнічне походження',
   'seksuele geaardheid': 'сексуальна орієнтація',

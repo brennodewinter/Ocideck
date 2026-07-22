@@ -1799,6 +1799,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Regoli li bħalissa huma mitfija. Dawn ma jiġux irrapportati u lanqas irrediġuti. Tlieta minnhom huma mitfija awtomatikament — il-kliem ċavetta tagħhom jidher spiss wisq fuq slides tax-xogħol ordinarji. Mess biex tixgħel waħda.',
   'Bekende beperkingen': 'Limitazzjonijiet magħrufa',
   'naam@example.org\nexample.org': 'isem@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2832,8 +2834,6 @@ const _dutchSourceAddMt = <String, String>{
   'geredigeerd': 'irrediġuti',
   'met waarschuwing': 'b\'twissija',
   'Deze regel nooit meer melden': 'Qatt aktar tirrapporta din ir-regola',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Regoli mitfija. Dawn ma jiġux irrapportati u lanqas irrediġuti. Mess biex terġa\' tixgħelhom.',
   'politieke opvatting': 'opinjoni politika',
   'etnische afkomst': 'oriġini etnika',
   'seksuele geaardheid': 'orjentazzjoni sesswali',

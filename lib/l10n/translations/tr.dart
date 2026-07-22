@@ -1697,8 +1697,6 @@ const _dutchSourceTr = {
   'geredigeerd': 'redakte edildi',
   'met waarschuwing': 'uyarı ile',
   'Deze regel nooit meer melden': 'Bu kuralı bir daha bildirme',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Kapatılan kurallar. Bunlar bildirilmez ve redakte edilmez. Yeniden açmak için dokunun.',
   'politieke opvatting': 'siyasi görüş',
   'etnische afkomst': 'etnik köken',
   'seksuele geaardheid': 'cinsel yönelim',
@@ -2759,6 +2757,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Şu anda kapalı olan kurallar. Bunlar bildirilmez ve redakte edilmez. Üçü varsayılan olarak kapalıdır — anahtar kelimeleri sıradan iş slaytlarında çok sık geçer. Birini açmak için dokunun.',
   'Bekende beperkingen': 'Bilinen sınırlamalar',
   'naam@example.org\nexample.org': 'ad@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':

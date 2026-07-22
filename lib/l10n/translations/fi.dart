@@ -1777,6 +1777,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Säännöt, jotka ovat nyt pois päältä. Niistä ei ilmoiteta eikä niitä peitetä. Kolme niistä on oletuksena pois päältä — niiden avainsanat esiintyvät liian usein tavallisissa työdioissa. Napauta ottaaksesi yhden käyttöön.',
   'Bekende beperkingen': 'Tunnetut rajoitukset',
   'naam@example.org\nexample.org': 'nimi@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2802,8 +2804,6 @@ const _dutchSourceAddFi = <String, String>{
   'geredigeerd': 'peitetty',
   'met waarschuwing': 'varoituksen kanssa',
   'Deze regel nooit meer melden': 'Älä ilmoita tästä säännöstä enää',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Poistetut säännöt. Niistä ei ilmoiteta eikä niitä peitetä. Napauta ottaaksesi taas käyttöön.',
   'politieke opvatting': 'poliittinen mielipide',
   'etnische afkomst': 'etninen alkuperä',
   'seksuele geaardheid': 'seksuaalinen suuntautuminen',

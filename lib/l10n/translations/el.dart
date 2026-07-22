@@ -1805,6 +1805,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Κανόνες που είναι τώρα ανενεργοί. Δεν αναφέρονται ούτε αποκρύπτονται. Τρεις από αυτούς είναι απενεργοποιημένοι από προεπιλογή — οι λέξεις-κλειδιά τους εμφανίζονται πολύ συχνά σε συνηθισμένες επαγγελματικές διαφάνειες. Πάτησε για να ενεργοποιήσεις έναν.',
   'Bekende beperkingen': 'Γνωστοί περιορισμοί',
   'naam@example.org\nexample.org': 'onoma@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2842,8 +2844,6 @@ const _dutchSourceAddEl = <String, String>{
   'geredigeerd': 'αποκρυμμένα',
   'met waarschuwing': 'με προειδοποίηση',
   'Deze regel nooit meer melden': 'Να μην αναφέρεται ξανά αυτός ο κανόνας',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Απενεργοποιημένοι κανόνες. Δεν αναφέρονται ούτε αποκρύπτονται. Πάτησε για επανενεργοποίηση.',
   'politieke opvatting': 'πολιτική άποψη',
   'etnische afkomst': 'εθνοτική καταγωγή',
   'seksuele geaardheid': 'σεξουαλικός προσανατολισμός',

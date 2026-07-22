@@ -427,6 +427,19 @@ read a book to find out.
   notities en het zegel.
 
 ### Fixed
+- **Drie privacyregels stonden af fabriek uit, maar het scherm zei dat u ze zelf
+  had uitgezet.** Etnische afkomst, politieke opvatting en seksuele gerichtheid
+  worden standaard niet gemeld — niet omdat ze minder belangrijk zijn, maar
+  omdat hun trefwoorden op gewone zakelijke slides te vaak voorkomen, en een
+  controle die te vaak loos alarm slaat wordt in zijn geheel uitgezet. Dat staat
+  er nu, in het scherm zelf en overal waar OciDeck artikel 9-dekking noemt. Wie
+  in die hoek werkt, zet ze met één tik aan.
+- **Het zegel dekt het `.md`-bestand, en dat stond nergens.** De handleiding zei
+  al dat het om aantoonbaarheid gaat en niet om onmogelijkheid, maar niet wát er
+  precies onder valt: de tekeningen, de sprekersnotities, de grafiekdata en de
+  bewijsafbeeldingen vallen erbuiten. Vervang een schermafdruk en het zegel
+  blijft groen. Dat is het weten waard vóór u erop leunt in een geschil — en het
+  versleutelde auditdossier is wél één bestand met één hash.
 - **Een presentatie vol foto's kon de app het geheugen in jagen.** De strook met
   dia-miniaturen decodeerde elke afbeelding op volledige resolutie — voor een
   vakje van nog geen twee centimeter breed. Eén telefoonfoto kostte daarmee 49
