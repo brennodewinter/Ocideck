@@ -135,8 +135,8 @@ now the only passing state.
 | [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ |
 | [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — |
 | [`make catalogs-outdated`](#make-catalogs-outdated-advisory) | Bundled reference data vs upstream (advisory, pre-release) | — | — | — |
-| [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | — |
-| [`make sast`](#make-sast) | Semgrep rules over shipped Dart (cert validation, subprocesses, weak randomness) | — | ✅ | — |
+| [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | ✅ |
+| [`make sast`](#make-sast) | Semgrep rules over shipped Dart (cert validation, subprocesses, weak randomness) | — | ✅ | ✅ |
 | [`make dast`](#make-dast-advisory) | ZAP baseline over a served build (advisory) | — | — | — |
 | [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) |
 | [`make check-actions`](#make-check-actions-advisory) | Pinned CI Actions vs their latest release (advisory) | — | — | — |
@@ -547,6 +547,14 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Runs:** `semgrep scan --config semgrep/ocideck.yaml --metrics=off --error`
   over `lib/`, `tool/` and `test/`. Needs the `semgrep` binary
   (`brew install semgrep`).
+- **What "SAST" means here, precisely.** Three project-specific rules and no
+  vendored community ruleset. That is narrower than the label suggests, and the
+  narrowness is the point: a community pack for Dart barely exists, and
+  `--config auto` would fetch rules over the network at scan time. Read this as
+  "three invariants a parser can check", not as "a general static analysis
+  sweep" — the general sweep is `flutter analyze --fatal-infos` plus the
+  purpose-built gates above. *(Stated 2026-07-22, because the word SAST reads
+  wider than the ruleset is.)*
 - **Covers:** three invariants that the Dart-specific tools do not check —
   certificate validation being overridden outside `net_guard.dart`, a subprocess
   started outside the git layer (it escapes NetGuard), and a non-cryptographic
