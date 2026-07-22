@@ -103,10 +103,21 @@ void main() {
     );
     await tester.pump();
 
-    // Rasterising uses real (not fake-async) image encoding, so let it run.
+    // Rasteriseren gebruikt échte beeldcodering (geen fake-async), dus dat moet
+    // binnen [WidgetTester.runAsync] gebeuren.
+    //
+    // Wacht op de uitkomst, niet op de klok. Hier stond een vaste slaap van
+    // 80 ms; die haalde het op een rustige machine en niet onder een volle
+    // `make check`, en dan viel de test om terwijl er niets mis was. De grens
+    // is nu een tijdsgrens: hij faalt alsnog als het codering écht vastloopt,
+    // maar hij wacht net zo lang als nodig.
     await tester.runAsync(() async {
       await tester.tap(find.text('Klaar'));
-      await Future<void>.delayed(const Duration(milliseconds: 80));
+      final deadline = DateTime.now().add(const Duration(seconds: 10));
+      while (result == null && DateTime.now().isBefore(deadline)) {
+        await tester.pump();
+        await Future<void>.delayed(const Duration(milliseconds: 5));
+      }
     });
     await tester.pumpAndSettle();
 
