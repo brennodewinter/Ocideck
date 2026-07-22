@@ -1775,6 +1775,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Teams viesu klients (dizains)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: cik plaši šo materiālu drīkst kopīgot?',
   'Wat betekenen deze niveaus?': 'Ko nozīmē šie līmeņi?',

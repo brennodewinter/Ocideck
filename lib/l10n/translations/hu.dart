@@ -1780,6 +1780,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Teams vendégkliens (terv)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: milyen széles körben osztható meg ez az anyag?',
   'Wat betekenen deze niveaus?': 'Mit jelentenek ezek a szintek?',

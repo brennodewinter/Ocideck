@@ -1783,6 +1783,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Teams svečio klientas (projektas)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kaip plačiai galima dalytis šia medžiaga?',
   'Wat betekenen deze niveaus?': 'Ką reiškia šie lygiai?',

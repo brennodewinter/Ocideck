@@ -1775,6 +1775,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Teams-gæsteklient (design)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: hvor bredt må dette materiale deles?',
   'Wat betekenen deze niveaus?': 'Hvad betyder disse niveauer?',

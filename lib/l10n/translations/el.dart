@@ -1803,6 +1803,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Teams-gastclient (ontwerp)':
+      'Πρόγραμμα-πελάτης επισκέπτη Teams (σχεδιασμός)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: πόσο ευρέως επιτρέπεται να κοινοποιηθεί αυτό το υλικό;',
   'Wat betekenen deze niveaus?': 'Τι σημαίνουν αυτά τα επίπεδα;',

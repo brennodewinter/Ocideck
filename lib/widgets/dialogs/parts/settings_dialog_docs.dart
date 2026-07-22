@@ -195,6 +195,11 @@ DocSection _designDocs(AppLocalizations l10n) => DocSection(
       assetBase: 'docs/design/COLLABORATION.md',
     ),
     DocEntry(
+      icon: Icons.video_call_outlined,
+      title: l10n.d('Teams-gastclient (ontwerp)'),
+      assetBase: 'docs/design/TEAMS_GUEST_CLIENT.md',
+    ),
+    DocEntry(
       icon: Icons.commit_outlined,
       title: l10n.d('Git-opslag (ontwerp)'),
       assetBase: 'docs/design/GIT_STORAGE.md',

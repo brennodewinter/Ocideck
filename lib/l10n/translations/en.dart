@@ -916,6 +916,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Teams-gastclient (ontwerp)': 'Teams guest client (design)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: how widely may this material be shared?',
   'Wat betekenen deze niveaus?': 'What do these levels mean?',

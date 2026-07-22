@@ -1775,6 +1775,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Teams-gästklient (design)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: hur brett får det här materialet delas?',
   'Wat betekenen deze niveaus?': 'Vad betyder de här nivåerna?',

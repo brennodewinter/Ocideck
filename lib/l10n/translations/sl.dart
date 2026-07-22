@@ -1778,6 +1778,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Odjemalec Teams za goste (zasnova)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kako široko se sme to gradivo deliti?',
   'Wat betekenen deze niveaus?': 'Kaj pomenijo te ravni?',

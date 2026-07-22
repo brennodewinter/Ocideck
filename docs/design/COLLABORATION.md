@@ -23,6 +23,13 @@
 > sync channel; a git repo is durable versioned storage. Both share the principle
 > *file = truth*, and neither depends on the other landing.
 
+> Interoperability sibling: [`TEAMS_GUEST_CLIENT.md`](TEAMS_GUEST_CLIENT.md)
+> defines an optional ACS-backed guest client for joining supported Microsoft
+> Teams work/school meetings without a Microsoft account. That path is operated
+> through Microsoft infrastructure, cannot join E2EE Teams meetings and is
+> deliberately **outside** the `CollabTransport`/Matrix session defined here. It
+> does not relax this document's P4 E2EE invariant.
+
 ---
 
 ## 1. Purpose & scope

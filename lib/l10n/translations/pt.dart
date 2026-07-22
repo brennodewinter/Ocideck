@@ -1805,6 +1805,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Cliente convidado do Teams (design)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: até que ponto este material pode ser partilhado?',
   'Wat betekenen deze niveaus?': 'O que significam estes níveis?',

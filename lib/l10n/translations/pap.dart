@@ -734,6 +734,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Teams-gastclient (ontwerp)': 'Kliènt invitá di Teams (diseño)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: te unda e material aki por wòrdu kompartí?',
   'Wat betekenen deze niveaus?': 'Kiko e nivelnan aki ta nifiká?',

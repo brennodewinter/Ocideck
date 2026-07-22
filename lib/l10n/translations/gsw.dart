@@ -1779,6 +1779,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Teams-Gaschtclient (Entwurf)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: wie breit dörf das Material teilt werde?',
   'Wat betekenen deze niveaus?': 'Was bedüted die Stuefe?',

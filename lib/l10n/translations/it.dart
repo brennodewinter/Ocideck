@@ -730,6 +730,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Teams-gastclient (ontwerp)': 'Client guest di Teams (progetto)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: quanto ampiamente può essere condiviso questo materiale?',
   'Wat betekenen deze niveaus?': 'Che cosa significano questi livelli?',

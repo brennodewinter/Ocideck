@@ -1776,6 +1776,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Klien tamu Teams (desain)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: seberapa luas materi ini boleh dibagikan?',
   'Wat betekenen deze niveaus?': 'Apa arti tingkatan ini?',

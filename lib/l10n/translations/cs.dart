@@ -1779,6 +1779,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Klient Teams pro hosty (návrh)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: jak široce se tento materiál smí sdílet?',
   'Wat betekenen deze niveaus?': 'Co znamenají tyto úrovně?',

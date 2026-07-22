@@ -154,6 +154,7 @@ flutter:
     - docs/DEVELOPMENT_SETUP_GUIDE.md
     - docs/MIGRATION_GUIDE.md
     - docs/design/COLLABORATION.md
+    - docs/design/TEAMS_GUEST_CLIENT.md
     - docs/design/GIT_STORAGE.md
     - docs/design/VERIFICATION.md
     - docs/design/PENTEST_MIAUW.md

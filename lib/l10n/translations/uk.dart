@@ -1793,6 +1793,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Гостьовий клієнт Teams (проєкт)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: наскільки широко можна поширювати цей матеріал?',
   'Wat betekenen deze niveaus?': 'Що означають ці рівні?',
