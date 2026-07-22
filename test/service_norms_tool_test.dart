@@ -209,4 +209,241 @@ void main() {
       expect(metingen, hasLength(serviceNormen.length));
     });
   });
+
+  group('de forge uitlezen', () {
+    test('het adres komt uit de remote, in welke vorm dan ook', () {
+      // Verzonnen host; het gaat om de vorm, niet om de plek.
+      const vormen = [
+        'ssh://git@forge.voorbeeld.test:2222/Groep/Project.git',
+        'git@forge.voorbeeld.test:Groep/Project.git',
+        'https://forge.voorbeeld.test/Groep/Project.git',
+        'https://forge.voorbeeld.test/Groep/Project',
+      ];
+      for (final vorm in vormen) {
+        final adres = forgeUit(vorm);
+        expect(adres, isNotNull, reason: vorm);
+        expect(adres!.host, 'forge.voorbeeld.test', reason: vorm);
+        expect(adres.eigenaar, 'Groep', reason: vorm);
+        expect(adres.repo, 'Project', reason: vorm);
+        // De git-poort mag niet meeliften naar de API, en de API gaat over
+        // https ook al praat git over ssh.
+        expect(
+          adres.api.toString(),
+          startsWith('https://forge.voorbeeld.test/'),
+        );
+        expect(adres.api.toString(), isNot(contains('2222')));
+      }
+    });
+
+    test('een remote die nergens op lijkt geeft null', () {
+      expect(forgeUit('dit is geen url'), isNull);
+      expect(forgeUit(''), isNull);
+    });
+
+    Map<String, Object?> issue({
+      required int nummer,
+      List<String> labels = const ['beveiliging'],
+      String melder = 'melder',
+      String gemeld = '2026-07-01T09:00:00Z',
+      String? gesloten,
+      String? uiterlijk,
+    }) => {
+      'number': nummer,
+      'created_at': gemeld,
+      'closed_at': gesloten,
+      'due_date': uiterlijk,
+      'user': {'login': melder},
+      'labels': [
+        for (final naam in labels) {'name': naam},
+      ],
+    };
+
+    Map<String, Object?> gebeurtenis({
+      required String type,
+      required String wie,
+      required String wanneer,
+      String? label,
+      String? inhoud,
+    }) => {
+      'type': type,
+      'created_at': wanneer,
+      'user': {'login': wie},
+      if (label != null) 'label': {'name': label},
+      if (inhoud != null) 'content': inhoud,
+    };
+
+    test('zonder beveiligingslabel is het geen melding', () {
+      expect(meldingUit(issue(nummer: 1, labels: ['bug']), const []), isNull);
+      expect(meldingUit(issue(nummer: 1, labels: []), const []), isNull);
+      // Hoofdletters horen er niet toe te doen.
+      expect(
+        meldingUit(issue(nummer: 1, labels: ['Beveiliging']), const []),
+        isNotNull,
+      );
+    });
+
+    test('de eerste reactie is die van iemand anders dan de melder', () {
+      final melding = meldingUit(issue(nummer: 12), [
+        // De melder die zichzelf aanvult is geen reactie.
+        gebeurtenis(
+          type: 'comment',
+          wie: 'melder',
+          wanneer: '2026-07-01T10:00:00Z',
+        ),
+        gebeurtenis(
+          type: 'comment',
+          wie: 'beheerder',
+          wanneer: '2026-07-02T11:00:00Z',
+        ),
+        gebeurtenis(
+          type: 'comment',
+          wie: 'beheerder',
+          wanneer: '2026-07-03T11:00:00Z',
+        ),
+      ])!;
+      expect(melding.nummer, 12);
+      expect(melding.eersteReactie, DateTime.parse('2026-07-02T11:00:00Z'));
+    });
+
+    test('een automatische kruisverwijzing is geen reactie', () {
+      // De forge maakt deze zelf aan zodra elders naar de melding verwezen
+      // wordt. Zou die de klok stoppen, dan meet dit gereedschap zichzelf een
+      // reactie aan die niemand gegeven heeft.
+      final melding = meldingUit(issue(nummer: 13), [
+        gebeurtenis(
+          type: 'commit_ref',
+          wie: 'iemand-anders',
+          wanneer: '2026-07-01T10:00:00Z',
+        ),
+      ])!;
+      expect(melding.eersteReactie, isNull);
+    });
+
+    test('het oordeel is het eerste oordeellabel, de uitkomst het huidige', () {
+      final melding =
+          meldingUit(issue(nummer: 14, labels: ['beveiliging', 'bevestigd']), [
+            gebeurtenis(
+              type: 'label',
+              wie: 'beheerder',
+              wanneer: '2026-07-06T09:00:00Z',
+              label: 'ruis',
+              inhoud: '1',
+            ),
+            gebeurtenis(
+              type: 'label',
+              wie: 'beheerder',
+              wanneer: '2026-07-20T09:00:00Z',
+              label: 'bevestigd',
+              inhoud: '1',
+            ),
+          ])!;
+      // Het oordeel is op de 6e geveld, ook al is het later herzien: de
+      // oordeelnorm gaat over hoe snel er geoordeeld is.
+      expect(melding.oordeelOp, DateTime.parse('2026-07-06T09:00:00Z'));
+      // De uitkomst is wat er nú staat.
+      expect(melding.bevestigd, isTrue);
+    });
+
+    test('een weggehaald label is geen oordeel', () {
+      final melding = meldingUit(issue(nummer: 15), [
+        gebeurtenis(
+          type: 'label',
+          wie: 'beheerder',
+          wanneer: '2026-07-06T09:00:00Z',
+          label: 'ruis',
+          inhoud: '0',
+        ),
+      ])!;
+      expect(melding.oordeelOp, isNull);
+    });
+
+    test('een leeg tijdstip is geen datum', () {
+      // Forgejo schrijft een niet-gezette datum als het jaar 1.
+      final melding = meldingUit(
+        issue(nummer: 16, gesloten: '0001-01-01T00:00:00Z'),
+        const [],
+      )!;
+      expect(melding.gesloten, isNull);
+      expect(melding.afgesprokenUiterlijk, isNull);
+    });
+  });
+
+  group('het rapport', () {
+    const bron = 'https://forge.voorbeeld.test/Groep/Project';
+    final nu = DateTime(2026, 7, 22);
+
+    test('nul metingen zegt nadrukkelijk niet dat het goed gaat', () {
+      final regels = rapport(meldingen: const [], nu: nu, bron: bron);
+      final tekst = regels.join('\n');
+      expect(tekst, contains('Er is niets gemeten'));
+      expect(tekst, contains('geen bewijs dat de normen gehaald worden'));
+      // De normen staan er wél, met het voorbehoud erbij.
+      expect(tekst, contains('geen toezegging aan derden'));
+      expect(exitCodeVoor(meetAlles(const [], nu)), 0);
+    });
+
+    test('een overschrijding kleurt de uitkomst rood', () {
+      final metingen = meetAlles([
+        Melding(nummer: 20, gemeld: DateTime(2026, 6, 1)),
+      ], nu);
+      expect(exitCodeVoor(metingen), 1);
+      expect(
+        rapport(
+          meldingen: [Melding(nummer: 20, gemeld: DateTime(2026, 6, 1))],
+          nu: nu,
+          bron: bron,
+        ).join('\n'),
+        contains('OVERSCHREDEN'),
+      );
+    });
+
+    test('een dreiging meldt zich maar laat de poort groen', () {
+      // Vier werkdagen open: over de waarschuwingsdrempel, binnen de norm.
+      final melding = Melding(nummer: 21, gemeld: DateTime(2026, 7, 16));
+      final metingen = meetAlles([melding], nu);
+      expect(exitCodeVoor(metingen), 0);
+      expect(ietsTeMelden(metingen), isTrue);
+      expect(
+        rapport(meldingen: [melding], nu: nu, bron: bron).join('\n'),
+        contains('DREIGT'),
+      );
+    });
+
+    test('quiet zwijgt als er niets aan de hand is, en anders niet', () {
+      // Vandaag gemeld: alles loopt nog.
+      final rustig = Melding(nummer: 22, gemeld: nu);
+      expect(
+        rapport(meldingen: [rustig], nu: nu, bron: bron, quiet: true),
+        isEmpty,
+      );
+      // Ook een lege verzameling hoort in cron niets te zeggen.
+      expect(
+        rapport(meldingen: const [], nu: nu, bron: bron, quiet: true),
+        isEmpty,
+      );
+      // Maar een te oude melding wél.
+      final oud = Melding(nummer: 23, gemeld: DateTime(2026, 6, 1));
+      expect(
+        rapport(
+          meldingen: [rustig, oud],
+          nu: nu,
+          bron: bron,
+          quiet: true,
+        ).join('\n'),
+        allOf(contains('#23'), isNot(contains('#22'))),
+      );
+    });
+
+    test('het rapport draagt geen titel of melder mee', () {
+      // Wat hier uit komt kan in een cron-mail belanden. De inhoud van een
+      // openstaande kwetsbaarheidsmelding hoort daar niet in.
+      final tekst = rapport(
+        meldingen: [Melding(nummer: 24, gemeld: DateTime(2026, 6, 1))],
+        nu: nu,
+        bron: bron,
+      ).join('\n');
+      expect(tekst, contains('#24'));
+      expect(tekst.toLowerCase(), isNot(contains('melder')));
+    });
+  });
 }

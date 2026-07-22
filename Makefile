@@ -51,6 +51,7 @@ help:
 	@echo "  make check-secrets   Sweep working tree and history for committed secrets (needs gitleaks + trufflehog)."
 	@echo "  make trivy           Advisory supply-chain scan: Dart-dep CVEs + committed secrets (needs trivy)."
 	@echo "  make check-actions   Advisory: exact-pinned CI Actions vs their latest release."
+	@echo "  make servicenormen   Interne reactietermijnen op beveiligingsmeldingen (--quiet voor cron)."
 	@echo "  make licenses        Verify all dependencies use open-source licences."
 	@echo "  make sbom            Generate the SBOM (CycloneDX + SPDX) in sbom/."
 	@echo "  make sbom-verify     Fail if the committed SBOM is stale (CRA staleness gate)."
@@ -376,6 +377,30 @@ check-actions:
 	@echo "Failure means: a pinned Action is behind (bump it + the manifest) or the release API was unreachable."
 	dart run tool/check_pinned_actions.dart
 
+# Interne servicenormen rond beveiligingsmeldingen: hoe snel er gereageerd,
+# geoordeeld en opgelost wordt. Meet uit de tijdstempels die de meldingen in de
+# forge toch al dragen — een handgeschreven lijst veroudert en niemand vult hem.
+#
+# Bewust GEEN onderdeel van `make check`: dat moet offline en zonder sleutel
+# kunnen draaien. Wel van `check-full`, zodat een verlopen termijn vóór een
+# release onder ogen komt. Voor de tijd daartussen is de --quiet-variant er; zie
+# de kop van tool/check_service_norms.dart.
+#
+# De normen zelf staan in dat bestand en nergens anders. Ze zijn intern:
+# alarmdrempels waarop dit project zichzelf wekt, geen toezegging aan derden.
+# Daarom staan ze niet in docs/ (dat reist als asset mee in de app) en niet in
+# SECURITY.md. Zie de kop van het gereedschap voor de redenering.
+servicenormen:
+	@echo "== OciDeck check: servicenormen (intern) =="
+	@echo "Command: dart run tool/check_service_norms.dart"
+	@echo "Covers: eerste reactie, oordeel echt-of-ruis en oplostermijn over de"
+	@echo "        meldingen met een beveiligingslabel in de forge."
+	@echo "Failure means: een interne alarmdrempel is overschreden — kijk of de"
+	@echo "        praktijk of de norm moet veranderen. Exit 2 betekent iets"
+	@echo "        anders: er kón niet gemeten worden (geen leessleutel, geen"
+	@echo "        netwerk). Dat is geen normoverschrijding maar wél een defect."
+	dart run tool/check_service_norms.dart
+
 # Security gate for the vendored JS bundles inlined into the HTML export.
 # Verifies each file still matches assets/web_export/MANIFEST.json (sha256) and
 # queries the OSV database for known vulnerabilities in the pinned versions.
@@ -674,6 +699,6 @@ check: format-check analyze check-conventions check-method-length check-dead-cod
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
-check-full: check check-secrets sast licenses sbom-verify deps-check check-web deps-outdated
+check-full: check check-secrets sast licenses sbom-verify deps-check check-web deps-outdated servicenormen
 	@echo "== OciDeck extended check complete =="
-	@echo "Validated: required quality gate, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, and dependency freshness."
+	@echo "Validated: required quality gate, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, dependency freshness, and the internal service norms."
