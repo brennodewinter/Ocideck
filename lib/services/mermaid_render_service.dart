@@ -3,9 +3,12 @@ import 'dart:convert';
 import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart';
-// `requestHost` plant een post-frame callback; de klassen die dit
-// meebrachten wonen sinds main's afsplitsing in widgets/mermaid_render_host.
-import 'package:flutter/widgets.dart';
+// `requestHost` plant een post-frame callback. Bewust `scheduler` en niet
+// `widgets`: een dienst hoort headless te draaien, en `SchedulerBinding` doet
+// hier precies hetzelfde zonder de widgetboom binnen te halen. De klassen die
+// deze import ooit meebrachten wonen sinds main's afsplitsing in
+// widgets/mermaid_render_host.dart.
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -50,7 +53,7 @@ class MermaidRenderService {
   /// wordt maar één keer per sessie omgezet.
   void requestHost() {
     if (hostNeeded.value) return;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
       if (!hostNeeded.value) hostNeeded.value = true;
     });
   }

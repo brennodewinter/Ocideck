@@ -34,6 +34,8 @@ part 'parts/marp_html_service_reporting.dart';
 part 'parts/marp_html_service_reporting_miauw.dart';
 part 'parts/marp_html_service_css.dart';
 part 'parts/marp_html_service_render_script.dart';
+part 'parts/marp_html_service_images.dart';
+part 'parts/marp_html_service_markup.dart';
 
 /// Maakt van een afbeeldingsverwijzing uit een deck een `data:`-URI, of geeft
 /// null wanneer de afbeelding niet in te sluiten is (niet gevonden, buiten de
@@ -352,77 +354,6 @@ class MarpHtmlService {
         '</details>';
   }
 
-  // ── Afbeeldingen → data:-URI ──────────────────────────────────────────────
-
-  /// Een afbeeldingsverwijzing (`![alt](hier)`), zoals de serialiser hem
-  /// schrijft. Geen haakjes of regeleindes in het pad — dat is ook wat Markdown
-  /// zelf toestaat zonder aanhalingstekens.
-  static final RegExp _imageRef = RegExp(r'!\[([^\]]*)\]\(([^)\n]+)\)');
-
-  /// De plaatshouder die in de markdown komt te staan in plaats van het pad.
-  ///
-  /// Een fragment (`#…`) en geen `data:`-URI ter plekke, om één reden: dedupe.
-  /// Een achtergrondafbeelding die op veertig dia's staat, zou anders veertig
-  /// keer als base64 in het bestand belanden. Nu staat elke afbeelding precies
-  /// één keer in het document en dragen de dia's er een verwijzing naar.
-  ///
-  /// Een fragment overleeft bovendien DOMPurify ongeschonden — een eigen
-  /// URI-schema zou eruit gefilterd worden.
-  static const _imagePlaceholder = '#ocideck-img-';
-
-  /// Vervangt elke afbeeldingsverwijzing in [markdown] door een plaatshouder, en
-  /// levert de bijbehorende `data:`-URI's.
-  ///
-  /// Dit is wat "self-contained" waarmaakt. De README belooft een offline
-  /// HTML-deck; zonder deze stap wees elke `![…](images/foto.png)` naar een
-  /// bestand dat de ontvanger niet heeft, en kreeg hij een rij kapotte
-  /// afbeeldingspictogrammen met de bestandsnamen van de auteur eronder.
-  ///
-  /// Zonder [resolve] blijft alles staan zoals het stond — dat pad bestaat voor
-  /// tests en voor aanroepers zonder toegang tot een bestandssysteem.
-  Future<({String markdown, List<String> dataUris})> _embedImages(
-    String markdown,
-    HtmlImageResolver? resolve,
-  ) async {
-    const unchanged = <String>[];
-    if (resolve == null) return (markdown: markdown, dataUris: unchanged);
-    final sources = {
-      for (final m in _imageRef.allMatches(markdown)) m.group(2)!.trim(),
-    };
-    if (sources.isEmpty) return (markdown: markdown, dataUris: unchanged);
-
-    final index = <String, int>{};
-    final dataUris = <String>[];
-    for (final source in sources) {
-      // Een bron die al een data:-URI is (of een lege verwijzing) hoeft niets:
-      // die reist per definitie al mee.
-      if (source.isEmpty || source.startsWith('data:')) continue;
-      final uri = await resolve(source);
-      if (uri == null) continue;
-      index[source] = dataUris.length;
-      dataUris.add(uri);
-    }
-
-    const l10n = AppLocalizations(Locale('nl'));
-    final missing = _htmlAttr(l10n.d('Afbeelding niet ingesloten'));
-    final rewritten = markdown.replaceAllMapped(_imageRef, (m) {
-      final source = m.group(2)!.trim();
-      if (source.isEmpty || source.startsWith('data:')) return m.group(0)!;
-      final at = index[source];
-      // Niet in te sluiten: liever een zichtbare melding dan een verwijzing naar
-      // een bestand dat de ontvanger niet heeft. Het pad zelf blijft eruit — dat
-      // is de map van de auteur, en die hoeft de ontvanger niet te kennen.
-      if (at == null) {
-        return '<span class="image-missing" role="img" '
-            'aria-label="$missing">$missing</span>';
-      }
-      return '![${m.group(1)}]($_imagePlaceholder$at)';
-    });
-    return (markdown: rewritten, dataUris: dataUris);
-  }
-
-  /// Split Marp Markdown into per-slide Markdown chunks: drop the leading YAML
-  /// front-matter, then break on lines that contain only `---`.
   static List<String> marpSlides(String markdown) {
     var text = markdown.replaceAll('\r\n', '\n');
     // Strip a leading YAML front-matter block: ---\n ... \n---\n
@@ -446,103 +377,6 @@ class MarpHtmlService {
     slides.add(buf.toString().trim());
     return slides.where((s) => s.isNotEmpty).toList();
   }
-
-  static final RegExp _listStyleComment = RegExp(
-    r'<!--\s*ocideck_list_style:\s*(\w+)',
-  );
-  static final RegExp _bulletMarkerComment = RegExp(
-    r'<!--\s*ocideck_bullet_marker:\s*(\w+)',
-  );
-
-  /// Strict hex so the matched value can never break out of the `style`
-  /// attribute it is written into (see [_titleColorSectionStyle]).
-  static final RegExp _titleColorComment = RegExp(
-    r'<!--\s*ocideck_title_text_color:\s*(#[0-9A-Fa-f]{3,8})',
-  );
-
-  /// Inline style carrying a title slide's per-slide title-text-colour override
-  /// (`ocideck_title_text_color`) as a CSS custom property, or `''` when the
-  /// slide sets none. The title `h1` reads this variable (with the theme's title
-  /// colour as fallback), so a slide that dims or lightens its title for a busy
-  /// background image keeps that choice in the HTML export — matching the app
-  /// preview, presenter and PDF/PPTX, which already honour the override.
-  static String _titleColorSectionStyle(String slideMarkdown) {
-    final hex = _titleColorComment.firstMatch(slideMarkdown)?.group(1);
-    return hex == null ? '' : ' style="--ocideck-title-color:$hex"';
-  }
-
-  /// Extra `<section>` class that turns this slide's plain bullets into cat-paw
-  /// markers (` paw-bullets`), or `''`. The decision is taken entirely from the
-  /// `ocideck_bullet_marker` comment that the *export* markdown carries for
-  /// every paw-rendering bullet slide (see `MarkdownService`, `forExport`). A
-  /// free-markdown slide that merely contains a `-` list never carries that
-  /// comment, so it never gets a paw — keeping HTML, app and PDF/PPTX identical.
-  /// Numbered, checklist and rich-text slides keep their own markers.
-  static String _bulletMarkerSectionClass(String slideMarkdown) {
-    final style = _listStyleComment.firstMatch(slideMarkdown)?.group(1);
-    if (style == 'numbered' || style == 'checklist' || style == 'richText') {
-      return '';
-    }
-    final marker = _bulletMarkerComment.firstMatch(slideMarkdown)?.group(1);
-    return marker == BulletMarker.paw.name ? ' paw-bullets' : '';
-  }
-
-  /// A self-contained cat-paw as an inline SVG `data:` URI, with [accent] baked
-  /// in as the fill. Used as the `li::before` marker for paw bullet lists. The
-  /// whole SVG is percent-encoded, so the (theme-controlled) colour value can
-  /// never break out of the attribute.
-  static String _pawDataUri(String accent) {
-    const path =
-        "M8 9.28Q12.64 9.28 10.32 12.4Q8 15.52 5.68 12.4Q3.36 9.28 8 9.28Z";
-    final svg =
-        "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'>"
-        "<path d='$path' fill='$accent'/>"
-        "<ellipse cx='2.56' cy='6.88' rx='1.76' ry='2.4' fill='$accent' transform='rotate(-31.5 2.56 6.88)'/>"
-        "<ellipse cx='6.24' cy='3.36' rx='1.92' ry='2.8' fill='$accent' transform='rotate(-10.3 6.24 3.36)'/>"
-        "<ellipse cx='9.76' cy='3.36' rx='1.92' ry='2.8' fill='$accent' transform='rotate(10.3 9.76 3.36)'/>"
-        "<ellipse cx='13.44' cy='6.88' rx='1.76' ry='2.4' fill='$accent' transform='rotate(31.5 13.44 6.88)'/>"
-        "</svg>";
-    return 'data:image/svg+xml,${Uri.encodeComponent(svg)}';
-  }
-
-  /// Neutralise any `</script` inside inlined content so it can't break out of
-  /// the surrounding <script> element. Case-insensitive — `</ScRiPt>` must not
-  /// slip through. Safe for both JS (string contexts) and the embedded Markdown
-  /// payloads.
-  static final RegExp _scriptClose = RegExp(
-    r'</(script)',
-    caseSensitive: false,
-  );
-
-  /// Maakt [s] veilig als inhoud van een `<script type="text/markdown">`.
-  ///
-  /// `</script` is niet de enige uitgang. De HTML-tokenizer kent binnen een
-  /// script-element ook *script data escaped*: een `<!--` zet hem in die stand,
-  /// en een daaropvolgende `<script` in *double escaped* — en dáár sluit een
-  /// echte `</script>` het element níét meer, hij zet alleen één stand terug.
-  /// Alles erna wordt scripttekst: de rest van de dia's, én het renderscript dat
-  /// de markdown-houders pas zichtbaar maakt. De export opende dan als een lege
-  /// witte pagina, zonder enige foutmelding.
-  ///
-  /// Dat is geen exotische invoer. Een codedia die kwetsbare paginabron citeert
-  /// — precies wat een pentestrapport doet — bevat routineus een uitgezette
-  /// `<script>` in commentaar. In de app, de presenter en de PDF klopte die dia.
-  ///
-  /// Het renderscript draait de ontsnapping terug vóórdat marked de tekst ziet
-  /// (zie [_renderScript]). Zonder die terugdraai zou een `<!-- _class: … -->`
-  /// als zichtbare tekst mét backslash in het document belanden — en dat was al
-  /// het geval voor `</script`, dat werd ontsnapt maar nooit hersteld.
-  static String _guardMarkdown(String s) =>
-      _guardScript(s).replaceAll('<!--', r'<\!--');
-
-  /// Neutraliseert `</script` in échte JavaScript.
-  ///
-  /// Hier bewust géén `<!--`-behandeling: in JavaScript is `<!--` een geldige
-  /// (legacy) regelcommentaar en `<\!--` een syntaxfout, dus die ontsnapping
-  /// zou de gebundelde bibliotheken slopen. Nodig is het ook niet — deze code is
-  /// vendored en vast, geen inhoud uit een deck.
-  static String _guardScript(String s) =>
-      s.replaceAllMapped(_scriptClose, (m) => '<\\/${m.group(1)}');
 
   // ── Charts → inline SVG ────────────────────────────────────────────────────
 
