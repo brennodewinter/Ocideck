@@ -220,6 +220,18 @@ also declares them, but see the [CI note](#continuous-integration).)
     conditional import with no injection point, and there is no
     `--platform chrome` target — so a widget test sits green around the broken
     branch. That is how the buttons in issue #150 came back as #506.
+  - **no fixed delay inside `runAsync` in tests** — `runAsync(() =>
+    Future.delayed(const Duration(milliseconds: 80)))` waits on a guess about
+    how long real work takes on this machine, not on the result. Such a test
+    passes in isolation and fails under a loaded `make check`, which is the
+    most expensive failure mode there is: it gets re-run, passes, and everyone
+    concludes it was a fluke. Four tests were repaired for exactly this reason
+    on a single day. Use `pumpUntil` from `test/support/pump_until.dart`, which
+    alternates short steps of real time with a `pump` and checks whether the
+    result is *there*, with an upper bound so a genuinely stuck future still
+    fails with a readable message. Line comments are stripped before matching,
+    so the helper's own documentation — which spells the anti-pattern out to
+    explain it — does not trip the gate.
   - **privacy projection boundary** — every surface that hands slide content to
     a recipient (`SlideRasterizer.rasterize`, `FullscreenPresenter.present`,
     `ExportDialog.show`) must take an `AudienceDeck` and must not accept a raw
