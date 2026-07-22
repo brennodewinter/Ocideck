@@ -396,6 +396,15 @@ read a book to find out.
   notities en het zegel.
 
 ### Fixed
+- **De module Informatieveiligheid liet drie stukken interface staan als hij
+  uit stond.** Een heel tabblad *Checklists* waarin u sjablonen kon maken die
+  nergens te laden waren, en in *Beveiliging* het aanbod om een online
+  CVE-opzoeking aan te zetten — en op desktop honderden megabytes CVE-data
+  binnen te halen — voor een zoekfunctie die niet opengaat zonder de module.
+  Weg, tenzij u ze al gebruikt: wie sjablonen heeft gemaakt of de database al
+  heeft gedownload, ziet ze staan en kan ze weghalen. Zoeken in de instellingen
+  vindt ze ook niet meer, want een treffer die naar een verborgen blok springt
+  is verwarrender dan de knop die er niet is.
 - **Security: de bytecap en de omleidingsweigering op remote afbeeldingen
   hadden geen echte toets.** Beide werken, en SECURITY.md belooft ze allebei —
   maar de test die naar de bytecap heette, controleerde alleen dát het getal

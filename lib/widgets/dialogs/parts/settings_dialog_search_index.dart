@@ -238,18 +238,21 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     tab: SettingsSection.security,
     label: 'CVE opzoeken (online)',
     section: 'CVE opzoeken',
+    infoSafetyOnly: true,
     keywords: ['cve', 'kwetsbaarheid', 'lek', 'nvd', 'mitre', 'enisa'],
   ),
   SettingsSearchEntry(
     tab: SettingsSection.security,
     label: 'CVE-mirror (basis-URL)',
     section: 'CVE opzoeken',
+    infoSafetyOnly: true,
     keywords: ['cve', 'mirror', 'url', 'server'],
   ),
   SettingsSearchEntry(
     tab: SettingsSection.security,
     label: 'Database ophalen',
     section: 'Lokale CVE-database',
+    infoSafetyOnly: true,
     keywords: [
       'cve',
       'offline',
@@ -389,6 +392,7 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   // ── Checklists ────────────────────────────────────────────────────────────
   SettingsSearchEntry(
     tab: SettingsSection.checklists,
+    infoSafetyOnly: true,
     label: 'Nieuw sjabloon',
     section: 'Eigen checklists',
     keywords: ['checklist', 'sjabloon', 'template'],

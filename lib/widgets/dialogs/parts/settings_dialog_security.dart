@@ -75,57 +75,70 @@ extension _SettingsSecurity on _SettingsDialogState {
           onChanged: (value) =>
               ref.read(settingsProvider.notifier).setAllowRemoteMedia(value),
         ),
-        const SizedBox(height: 20),
-        Row(
-          children: [
-            _sectionTitle(l10n.d('CVE opzoeken')),
-            const SizedBox(width: 8),
-            // De badge blokkeert niets — hij maakt zichtbaar wát er weglekt als
-            // je dit aanzet: niet dát je zoekt, maar wáárnaar.
-            PrivacyBadge(
-              tooltip: l10n.d(
-                'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.',
-              ),
-            ),
-          ],
-        ),
-        SwitchListTile(
-          contentPadding: EdgeInsets.zero,
-          title: Text(
-            l10n.d('CVE opzoeken (online)'),
-            style: const TextStyle(fontSize: 13),
-          ),
-          subtitle: Text(
-            l10n.d(
-              'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.',
-            ),
-            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-          ),
-          value: ref.watch(settingsProvider.select((s) => s.allowCveLookup)),
-          onChanged: (value) =>
-              ref.read(settingsProvider.notifier).setAllowCveLookup(value),
-        ),
-        if (ref.watch(settingsProvider.select((s) => s.allowCveLookup)))
-          Padding(
-            padding: const EdgeInsets.only(top: 4),
-            child: TextFormField(
-              initialValue: ref.read(settingsProvider).cveApiBaseUrl,
-              decoration: InputDecoration(
-                labelText: l10n.d('CVE-mirror (basis-URL)'),
-                hintText: AppSettings.defaultCveApiBaseUrl,
-                isDense: true,
-              ),
-              onFieldSubmitted: (value) =>
-                  ref.read(settingsProvider.notifier).setCveApiBaseUrl(value),
-            ),
-          ),
-        // Alleen op desktop: op het web is er geen bestandssysteem voor een
-        // index van honderden megabytes, en een download van 550 MB hoort niet
-        // in een browsertab. Dan tonen we de sectie niet, in plaats van een
-        // knop die niets kan.
-        if (localCveSupported) ...[
+        // De twee CVE-blokken horen bij de module Informatieveiligheid: de
+        // enige plek waar een CVE-opzoeking te openen is, is de bevindingen-
+        // editor, en die zit achter de module. Met de module uit bood dit
+        // tabblad dus aan om een online opzoeking aan te zetten die nergens te
+        // bereiken is — en op desktop om honderden megabytes binnen te halen
+        // voor een zoekfunctie die niet opengaat (#648).
+        //
+        // Tonen zodra de inhoud er is: wie de lokale database al heeft
+        // gedownload, moet hem kunnen zien en weghalen. Anders laat een
+        // schakelaar stilzwijgend een gigabyte achter zonder route terug.
+        if (ref.watch(infoSafetyRevealProvider) ||
+            ref.watch(localCveProvider).stats != null) ...[
           const SizedBox(height: 20),
-          _localCveSection(l10n),
+          Row(
+            children: [
+              _sectionTitle(l10n.d('CVE opzoeken')),
+              const SizedBox(width: 8),
+              // De badge blokkeert niets — hij maakt zichtbaar wát er weglekt als
+              // je dit aanzet: niet dát je zoekt, maar wáárnaar.
+              PrivacyBadge(
+                tooltip: l10n.d(
+                  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.',
+                ),
+              ),
+            ],
+          ),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(
+              l10n.d('CVE opzoeken (online)'),
+              style: const TextStyle(fontSize: 13),
+            ),
+            subtitle: Text(
+              l10n.d(
+                'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.',
+              ),
+              style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+            ),
+            value: ref.watch(settingsProvider.select((s) => s.allowCveLookup)),
+            onChanged: (value) =>
+                ref.read(settingsProvider.notifier).setAllowCveLookup(value),
+          ),
+          if (ref.watch(settingsProvider.select((s) => s.allowCveLookup)))
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: TextFormField(
+                initialValue: ref.read(settingsProvider).cveApiBaseUrl,
+                decoration: InputDecoration(
+                  labelText: l10n.d('CVE-mirror (basis-URL)'),
+                  hintText: AppSettings.defaultCveApiBaseUrl,
+                  isDense: true,
+                ),
+                onFieldSubmitted: (value) =>
+                    ref.read(settingsProvider.notifier).setCveApiBaseUrl(value),
+              ),
+            ),
+          // Alleen op desktop: op het web is er geen bestandssysteem voor een
+          // index van honderden megabytes, en een download van 550 MB hoort niet
+          // in een browsertab. Dan tonen we de sectie niet, in plaats van een
+          // knop die niets kan.
+          if (localCveSupported) ...[
+            const SizedBox(height: 20),
+            _localCveSection(l10n),
+          ],
         ],
         const SizedBox(height: 20),
         _diskTracesSection(l10n),

@@ -91,7 +91,10 @@ void main() {
     // De resultatenlijst is weg (geen kruimelpad meer) en het Beveiliging-
     // tabblad staat open, met zijn eigen schakelaars in beeld.
     expect(find.text('Beveiliging › Online media'), findsNothing);
-    expect(find.text('CVE opzoeken (online)'), findsOneWidget);
+    // Een baken uit een sectie die er altijd staat. Hier stond 'CVE opzoeken
+    // (online)', en dat blok hoort sinds #648 bij de module Informatieveiligheid
+    // — met de module uit staat het er niet, en dan toetste dit baken de
+    // module in plaats van de sprong.
     expect(find.text('Herstelbestanden nu wissen'), findsOneWidget);
   });
 

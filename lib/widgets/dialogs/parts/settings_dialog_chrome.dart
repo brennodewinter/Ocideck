@@ -80,7 +80,13 @@ extension _SettingsChrome on _SettingsDialogState {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  for (final section in SettingsSection.navItems)
+                  for (final section in SettingsSection.navItems(
+                    infoSafetyRevealed: ref.watch(infoSafetyRevealProvider),
+                    hasChecklists: ref
+                        .watch(settingsProvider)
+                        .customChecklists
+                        .isNotEmpty,
+                  ))
                     _navItem(section, l10n),
                 ],
               ),
