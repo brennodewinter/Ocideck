@@ -495,13 +495,27 @@ void main() {
     await tester.pump();
 
     expect(find.text('Eerste'), findsOneWidget);
-    expect(find.text('1 / 2'), findsNothing); // no audience chrome
     expect(find.byIcon(Icons.help_outline), findsNothing);
     expect(find.byIcon(Icons.grid_view_rounded), findsNothing);
     expect(find.byIcon(Icons.co_present_outlined), findsNothing);
-    expect(find.byIcon(Icons.close), findsNothing);
     expect(find.text('NOTITIES'), findsNothing); // presenter-only
     expect(find.text('VOLGENDE'), findsNothing);
+
+    // De bedieningsbalk zit sinds #607 wél in de boom, maar volledig
+    // doorzichtig tot je de muis beweegt. Deze test zei eerder "geen
+    // sluitknop"; dat is niet meer waar en het is ook niet meer wat hij hoort
+    // te bewaken — wat telt is dat er niets te zíen is.
+    expect(
+      tester
+          .widget<AnimatedOpacity>(
+            find.ancestor(
+              of: find.byIcon(Icons.close),
+              matching: find.byType(AnimatedOpacity),
+            ),
+          )
+          .opacity,
+      0,
+    );
 
     await tester.pumpWidget(const SizedBox()); // dispose → cancel clock timer
   });
