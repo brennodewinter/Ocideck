@@ -10,12 +10,14 @@ import '../models/settings.dart';
 import '../models/storage_connection.dart';
 import '../services/disk_traces.dart';
 import '../services/privacy/privacy_regions.dart';
+import '../services/recovery_service.dart';
 import '../services/secret_store.dart';
 import '../utils/log.dart';
 
 part 'parts/settings_provider_connections.dart';
 part 'parts/settings_provider_git.dart';
 part 'parts/settings_provider_privacy.dart';
+part 'parts/settings_provider_traces.dart';
 
 class SettingsNotifier extends StateNotifier<AppSettings> {
   /// De huidige instellingen, leesbaar en schrijfbaar vanuit een `part`.
@@ -876,38 +878,14 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     });
   }
 
-  /// De `logoPath`-waarden die de bewaarde stijlprofielen nu aanhalen.
-  Set<String> get _referencedLogoPaths => {
-    for (final profile in state.themeProfiles)
-      if ((profile.logoPath ?? '').trim().isNotEmpty) profile.logoPath!.trim(),
-  };
-
   /// De logo's zoals ze in de laatst weggeschreven profielenlijst stonden.
   ///
   /// Een eigen veld en niet "de staat van vóór het opslaan": de aanroepers
   /// werken de staat bij en persisteren daarná, dus op het moment dat
-  /// [_saveProfiles] draait is het verschil al vervlogen.
+  /// [_saveProfiles] draait is het verschil al vervlogen. Een extensie in een
+  /// `part` kan geen veld dragen, dus dit blijft hier; het gedrag eromheen staat
+  /// in `parts/settings_provider_traces.dart`.
   Set<String> _persistedLogoPaths = const {};
-
-  /// Ruim verweesde logo's op zodra de profielenlijst verandert.
-  ///
-  /// Een geïmporteerde stijl legt zijn logo neer in `style_logos/`. Wordt het
-  /// profiel verwijderd of krijgt het een ander logo, dan bleef dat bestand
-  /// staan — soms het bedrijfslogo van een opdrachtgever, blijvend zichtbaar in
-  /// de app-supportmap. Hier wordt precies weggehaald wat er uit de lijst is
-  /// verdwenen; de grove veger bij het opstarten pakt de rest.
-  Future<void> _sweepDroppedLogos() async {
-    final before = _persistedLogoPaths;
-    _persistedLogoPaths = _referencedLogoPaths;
-    final dropped = before.difference(_persistedLogoPaths);
-    if (dropped.isEmpty) return;
-    await _diskTraces.removeStyleLogos(dropped);
-  }
-
-  /// De opstartveger: alles in `style_logos/` dat geen profiel meer aanhaalt en
-  /// oud genoeg is. Vangt wat een oudere versie heeft laten liggen.
-  Future<int> pruneOrphanStyleLogos() =>
-      _diskTraces.pruneOrphanStyleLogos(_referencedLogoPaths);
 
   Future<void> _saveProfiles() async {
     state = state.copyWith(themeProfiles: _uniqueProfiles(state.themeProfiles));

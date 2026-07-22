@@ -224,6 +224,26 @@ class DiskTraces {
     return _deleteDir(Directory(p.join(temp.path, gitSandboxDirName)));
   }
 
+  /// Hoeveel nog niet gepushte commits er in totaal wachten, over alle repo's —
+  /// ook die van een verbinding die al is verwijderd.
+  Future<int> pendingCommitCount() async {
+    final scopeless = Outbox();
+    var total = (await scopeless.pending()).length;
+    for (final slug in await scopeless.knownScopes()) {
+      total += (await Outbox(scope: slug).pending()).length;
+    }
+    return total;
+  }
+
+  /// Gooi de hele logomap weg. Alleen voor de terugzetknop; het gewone opruimen
+  /// loopt via [removeStyleLogos] en [pruneOrphanStyleLogos].
+  Future<bool> clearStyleLogos() async {
+    if (kIsWeb) return false;
+    final support = await _support();
+    if (support == null) return false;
+    return _deleteDir(Directory(p.join(support.path, styleLogosDirName)));
+  }
+
   /// Gooi élke git-werkkopie weg, van welke verbinding ook, plus de hele
   /// wachtrij. Voor de terugzetknop in Instellingen; de aanroeper heeft de
   /// gebruiker al gevraagd.

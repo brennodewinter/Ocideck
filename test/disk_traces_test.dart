@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart' show TlpLevel;
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/storage_connection.dart';
@@ -310,6 +311,97 @@ void main() {
         ..writeAsBytesSync([1]);
       expect(await traces.removeStyleLogos([elders.path]), 0);
       expect(elders.existsSync(), isTrue);
+    });
+  });
+
+  group('de recente lijst en het terugzetten', () {
+    Future<SettingsNotifier> loaded() async {
+      final notifier = SettingsNotifier(diskTraces: traces);
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      return notifier;
+    }
+
+    test('de recente lijst wissen laat niets in prefs achter', () async {
+      final notifier = await loaded();
+      await notifier.addRecentFile(
+        '/klanten/politie/incident.md',
+        tlp: TlpLevel.red,
+      );
+      await notifier.setRecentFileOrigin(
+        '/klanten/politie/incident.md',
+        'https://cloud.klant.nl',
+      );
+      expect(notifier.state.recentFiles, hasLength(1));
+
+      await notifier.clearRecentFiles();
+
+      expect(notifier.state.recentFiles, isEmpty);
+      expect(notifier.state.recentFileOrigins, isEmpty);
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getString('recentFilesV2'), isNull);
+      expect(prefs.getString('recentFileOrigins'), isNull);
+    });
+
+    test(
+      'een gewiste lijst komt niet terug uit de oude prefs-sleutel',
+      () async {
+        SharedPreferences.setMockInitialValues({
+          'recentFiles': ['/klanten/politie/incident.md'],
+        });
+        final notifier = await loaded();
+        expect(notifier.state.recentFiles, hasLength(1));
+
+        await notifier.clearRecentFiles();
+        final reloaded = SettingsNotifier(diskTraces: traces);
+        await Future<void>.delayed(const Duration(milliseconds: 50));
+
+        expect(
+          reloaded.state.recentFiles,
+          isEmpty,
+          reason: 'de migratie mag de opruiming niet ongedaan maken',
+        );
+      },
+    );
+
+    test('terugzetten wist prefs, werkkopieën en logo\'s', () async {
+      workingCopy('git_clone', slug);
+      Directory('${support.path}/style_logos').createSync();
+      File('${support.path}/style_logos/logo.png').writeAsBytesSync([1]);
+      final notifier = await loaded();
+      await notifier.addRecentFile('/klanten/politie/incident.md');
+      await notifier.setLanguageCode('de');
+
+      expect(await notifier.resetToInitialState(), isTrue);
+
+      expect(notifier.state.recentFiles, isEmpty);
+      expect(notifier.state.languageCode, 'nl');
+      expect(Directory('${support.path}/git_clone').existsSync(), isFalse);
+      expect(Directory('${support.path}/style_logos').existsSync(), isFalse);
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getKeys(), isEmpty);
+    });
+
+    test('terugzetten weigert zolang er werk wacht', () async {
+      workingCopy('git_clone', slug);
+      await Outbox(scope: slug).enqueue(
+        const PendingCommit(
+          deckDir: 'decks/kwartaal',
+          branch: 'main',
+          message: 'nog niet gepusht',
+          baseSha: 'abc',
+        ),
+      );
+      final notifier = await loaded();
+
+      expect(await notifier.pendingCommitCount(), 1);
+      expect(await notifier.resetToInitialState(), isFalse);
+      expect(Directory('${support.path}/git_clone').existsSync(), isTrue);
+
+      expect(
+        await notifier.resetToInitialState(discardPendingWork: true),
+        isTrue,
+      );
+      expect(Directory('${support.path}/git_clone').existsSync(), isFalse);
     });
   });
 }

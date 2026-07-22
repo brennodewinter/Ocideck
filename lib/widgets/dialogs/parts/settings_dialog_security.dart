@@ -128,25 +128,112 @@ extension _SettingsSecurity on _SettingsDialogState {
           _localCveSection(l10n),
         ],
         const SizedBox(height: 20),
-        _sectionTitle(l10n.d('Herstelbestanden')),
+        _diskTracesSection(l10n),
+      ],
+    );
+  }
+
+  /// Wat OciDeck op dit apparaat achterlaat, en de knoppen om het weg te halen.
+  ///
+  /// Bij elkaar in één blok, want los van elkaar zijn het drie weetjes en samen
+  /// zijn ze het antwoord op één vraag: wat weet deze machine straks nog van
+  /// mij? Dat is de vraag van iemand die zijn laptop inlevert, of die de app op
+  /// een gedeelde machine heeft gebruikt.
+  Widget _diskTracesSection(AppLocalizations l10n) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _sectionTitle(l10n.d('Sporen op dit apparaat')),
         Padding(
-          padding: const EdgeInsets.only(bottom: 8),
+          padding: const EdgeInsets.only(bottom: 10),
           child: Text(
             l10n.d(
-              'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.',
+              'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.',
             ),
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: OutlinedButton.icon(
-            onPressed: _clearRecoveryFiles,
-            icon: const Icon(Icons.delete_sweep_outlined, size: 16),
-            label: Text(l10n.d('Herstelbestanden nu wissen')),
+        _traceRow(
+          l10n.d('Recent geopende presentaties'),
+          l10n.d(
+            'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.',
           ),
+          l10n.d('Recente lijst wissen'),
+          Icons.history_toggle_off,
+          _clearRecentFiles,
+        ),
+        _traceRow(
+          l10n.d('Herstelbestanden'),
+          l10n.d(
+            'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.',
+          ),
+          l10n.d('Herstelbestanden nu wissen'),
+          Icons.delete_sweep_outlined,
+          _clearRecoveryFiles,
+        ),
+        _traceRow(
+          l10n.d('Alles terugzetten'),
+          l10n.d(
+            'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.',
+          ),
+          l10n.d('Zet alles terug naar de begintoestand'),
+          Icons.restart_alt,
+          _resetEverything,
+          destructive: true,
         ),
       ],
+    );
+  }
+
+  Widget _traceRow(
+    String title,
+    String explanation,
+    String action,
+    IconData icon,
+    Future<void> Function() onPressed, {
+    bool destructive = false,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            explanation,
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+          const SizedBox(height: 6),
+          OutlinedButton.icon(
+            onPressed: () => onPressed(),
+            icon: Icon(icon, size: 16),
+            label: Text(action),
+            style: destructive
+                ? OutlinedButton.styleFrom(foregroundColor: AppTheme.dangerFg)
+                : null,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _clearRecentFiles() async {
+    final l10n = context.l10n;
+    final had = ref.read(settingsProvider).recentFiles.length;
+    await ref.read(settingsProvider.notifier).clearRecentFiles();
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          had == 0
+              ? l10n.d('De recente lijst was al leeg.')
+              : '$had ${l10n.d('vermelding(en) uit de recente lijst gewist.')}',
+        ),
+      ),
     );
   }
 
@@ -163,6 +250,72 @@ extension _SettingsSecurity on _SettingsDialogState {
         ),
       ),
     );
+  }
+
+  /// Terug naar de begintoestand — met twee drempels, niet één.
+  ///
+  /// De eerste is de gewone bevestiging. De tweede is wachtend git-werk: dat
+  /// bestaat nergens anders, en een knop die "alles terugzetten" heet mag daar
+  /// niet stilzwijgend overheen. Wie dat niet wil kwijtraken, sluit eerst zijn
+  /// werk af en komt terug.
+  Future<void> _resetEverything() async {
+    final l10n = context.l10n;
+    final notifier = ref.read(settingsProvider.notifier);
+    final pending = await notifier.pendingCommitCount();
+    if (!mounted) return;
+    final confirmed = await _confirmReset(l10n, pending);
+    if (!confirmed || !mounted) return;
+    final done = await notifier.resetToInitialState(discardPendingWork: true);
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          done
+              ? l10n.d('Alles is teruggezet naar de begintoestand.')
+              : l10n.d('Terugzetten is niet gelukt.'),
+        ),
+      ),
+    );
+    if (done && mounted) Navigator.pop(context);
+  }
+
+  Future<bool> _confirmReset(AppLocalizations l10n, int pending) async {
+    final answer = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.d('Alles terugzetten naar de begintoestand?')),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              l10n.d(
+                'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.',
+              ),
+              style: const TextStyle(fontSize: 13),
+            ),
+            if (pending > 0) ...[
+              const SizedBox(height: 10),
+              Text(
+                '$pending ${l10n.d('wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.')}',
+                style: TextStyle(fontSize: 12.5, color: AppTheme.dangerFg),
+              ),
+            ],
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(l10n.d('Annuleren')),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(l10n.d('Alles terugzetten')),
+          ),
+        ],
+      ),
+    );
+    return answer ?? false;
   }
 
   /// De uitgezette detectieregels, als chips die je weer aanzet.
