@@ -1781,6 +1781,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'A deck melletti egyik réteg túl nagy volt, ezért nem töltődött be; maga a fájl változatlan:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Ez az időbélyeg nem a legutóbbi kéréshez tartozik',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

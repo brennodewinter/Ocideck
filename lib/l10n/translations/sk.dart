@@ -1784,6 +1784,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Vrstva vedľa tejto prezentácie bola príliš veľká a nenačítala sa; samotný súbor zostáva nezmenený:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Táto časová pečiatka nepatrí k poslednej žiadosti',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

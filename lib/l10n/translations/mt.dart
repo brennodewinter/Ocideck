@@ -1799,6 +1799,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Saff maġenb dan id-deck kien kbir wisq u ma ġiex mgħobbi; il-fajl innifsu baqa\' ma nbidilx:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Dan it-timbru tal-ħin ma jappartjenix għall-aħħar talba',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

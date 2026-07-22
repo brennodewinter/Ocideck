@@ -1795,6 +1795,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Un strat de lângă acest deck era prea mare și nu a fost încărcat; fișierul în sine este neschimbat:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Acest marcaj temporal nu aparține ultimei cereri',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

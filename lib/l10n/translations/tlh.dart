@@ -1752,6 +1752,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'cha\'nobvam \'ay\' teHwI\' tIn qu\'; vaj laDlu\'pu\'be\'. teHwI\' choHlu\'pu\'be\':',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'tlhob Qav jangbe\' poH deghvam',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

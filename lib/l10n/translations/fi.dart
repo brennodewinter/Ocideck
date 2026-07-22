@@ -1777,6 +1777,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Tämän deckin vieressä ollut taso oli liian suuri eikä sitä ladattu; itse tiedosto on muuttumaton:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Tämä aikaleima ei kuulu viimeisimpään pyyntöön',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

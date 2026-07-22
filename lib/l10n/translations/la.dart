@@ -1793,6 +1793,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Stratum iuxta hanc praesentationem nimis magnum erat neque lectum est; plica ipsa immutata manet:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Hoc signaculum temporis ad ultimam petitionem non pertinet',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

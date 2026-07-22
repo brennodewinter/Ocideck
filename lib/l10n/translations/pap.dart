@@ -734,6 +734,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Un kapa banda di e deck aki tabata muchu grandi i no a wòrdu lesá; e archivo mes no a kambia:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'E seyo di tempu aki no ta pertenesé na e último petishon',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

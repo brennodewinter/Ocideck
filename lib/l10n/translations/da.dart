@@ -1776,6 +1776,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Et lag ved siden af dette deck var for stort og blev ikke indlæst; selve filen er uændret:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Dette tidsstempel hører ikke til den seneste anmodning',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

@@ -1776,6 +1776,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Ett lager bredvid detta deck var för stort och lästes inte in; själva filen är oförändrad:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Den här tidsstämpeln hör inte till den senaste begäran',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

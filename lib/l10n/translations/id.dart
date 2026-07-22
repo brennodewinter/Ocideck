@@ -1777,6 +1777,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Sebuah lapisan di samping deck ini terlalu besar dan tidak dimuat; berkasnya sendiri tidak berubah:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Stempel waktu ini bukan milik permintaan terakhir',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

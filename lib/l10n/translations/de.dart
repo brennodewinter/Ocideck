@@ -734,6 +734,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Eine Ebene neben diesem Deck war zu groß und wurde nicht geladen; die Datei selbst ist unverändert:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Dieser Zeitstempel gehört nicht zur letzten Anfrage',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

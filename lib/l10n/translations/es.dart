@@ -731,6 +731,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Una capa junto a esta presentación era demasiado grande y no se ha cargado; el archivo en sí no ha cambiado:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Este sello de tiempo no pertenece a la última solicitud',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

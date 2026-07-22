@@ -4,6 +4,43 @@
 // into an extension on FileService, same library, no behaviour change.
 part of '../file_service.dart';
 
+/// Wat [FileService.openDeckDetailed] oplevert.
+///
+/// Een benoemde klasse en geen anoniem record: dit resultaat groeit mee met wat
+/// het openen te melden heeft (eerst alleen het deck, toen de reden van een
+/// weigering, toen grafiekdata-waarschuwingen, nu overgeslagen lagen). Elk veld
+/// erbij kostte een regel op negen returnplekken, en dat zag je alleen doordat
+/// de klassenratchet omviel. Een fabriek voor de weigering scheelt dat.
+class DeckOpenResult {
+  const DeckOpenResult({
+    this.deck,
+    this.failure,
+    this.warnings = const <String>[],
+    this.skippedSidecars = const <String>[],
+  });
+
+  /// Het geopende deck, of null bij een weigering.
+  final Deck? deck;
+
+  /// Waarom er geweigerd is, of null wanneer het gelukt is.
+  final OpenFailure? failure;
+
+  /// Grafiekdatabestanden die niet gelezen konden worden; die grafieken blijven
+  /// leeg.
+  final List<String> warnings;
+
+  /// Lagen naast het deck die te groot waren om in te lezen — het bestand zelf
+  /// is niet aangeraakt. Zie [FileService.maxDeckSidecarBytes].
+  final List<String> skippedSidecars;
+
+  /// Een weigering, met de reden.
+  const DeckOpenResult.failed(OpenFailure reason)
+    : deck = null,
+      failure = reason,
+      warnings = const <String>[],
+      skippedSidecars = const <String>[];
+}
+
 extension _FileServiceOpen on FileService {
   /// True when [raw] opens with a complete frontmatter block but carries no
   /// slide body after it, while [parsed] degraded to the single placeholder
@@ -103,12 +140,16 @@ extension _FileServiceOpen on FileService {
   /// Elke laag apart afgeschermd: een kapotte sidecar mag het openen van het
   /// deck nooit blokkeren — dat zou een tekening van vorige week een hele
   /// presentatie kosten.
-  Future<Deck> _attachSidecars(Deck deck, String filePath) async {
+  Future<Deck> _attachSidecars(
+    Deck deck,
+    String filePath,
+    List<String> skipped,
+  ) async {
     var hydrated = deck;
     final sidecar = File(_sidecarPath(filePath));
     if (await sidecar.exists()) {
       try {
-        final raw = await _readSidecarCapped(sidecar, 'ink');
+        final raw = await _readSidecarCapped(sidecar, 'ink', skipped);
         if (raw != null) {
           final map = AnnotationCodec.decode(raw, hydrated.slides);
           if (map.isNotEmpty) hydrated = hydrated.copyWith(annotations: map);
@@ -121,7 +162,11 @@ extension _FileServiceOpen on FileService {
     final userNotesSidecar = File(_userNotesSidecarPath(filePath));
     if (await userNotesSidecar.exists()) {
       try {
-        final raw = await _readSidecarCapped(userNotesSidecar, 'user-notes');
+        final raw = await _readSidecarCapped(
+          userNotesSidecar,
+          'user-notes',
+          skipped,
+        );
         if (raw != null) {
           final map = UserNotesCodec.decode(raw, hydrated.slides);
           if (map.isNotEmpty) hydrated = hydrated.copyWith(userNotes: map);
@@ -136,7 +181,7 @@ extension _FileServiceOpen on FileService {
     final miauwSidecar = File(_miauwSidecarPath(filePath));
     if (await miauwSidecar.exists()) {
       try {
-        final raw = await _readSidecarCapped(miauwSidecar, 'MIAUW');
+        final raw = await _readSidecarCapped(miauwSidecar, 'MIAUW', skipped);
         final d = raw == null
             ? const MiauwDisposition()
             : MiauwCodec.decode(raw);
@@ -157,7 +202,7 @@ extension _FileServiceOpen on FileService {
     final sealSidecar = File(_sealSidecarPath(filePath));
     if (await sealSidecar.exists()) {
       try {
-        final raw = await _readSidecarCapped(sealSidecar, 'seal');
+        final raw = await _readSidecarCapped(sealSidecar, 'seal', skipped);
         final record = raw == null ? null : SealCodec.decode(raw);
         if (record != null) hydrated = record.applyTo(hydrated);
       } catch (e) {
@@ -482,7 +527,11 @@ extension _FileServiceOpen on FileService {
 /// pakket, een repo of iemands map, en werd hier onbegrensd ingelezen — met de
 /// tweede kopie die `jsonDecode` er meteen bovenop legt. [laag] noemt de laag
 /// in de logregel, want stil overslaan leest als "er stond niets in".
-Future<String?> _readSidecarCapped(File sidecar, String laag) async {
+Future<String?> _readSidecarCapped(
+  File sidecar,
+  String laag, [
+  List<String>? skipped,
+]) async {
   final length = await sidecar.length();
   if (length > FileService.maxDeckSidecarBytes) {
     logWarning(
@@ -491,6 +540,10 @@ Future<String?> _readSidecarCapped(File sidecar, String laag) async {
       'not read',
       sidecar.path,
     );
+    // De gebruiker hoort dit ook te zien, niet alleen het logbestand: zijn
+    // strepen zijn er niet, en zonder melding leest dat als "ik heb nooit
+    // getekend" in plaats van "deze laag is overgeslagen" (#564).
+    skipped?.add(laag);
     return null;
   }
   return sidecar.readAsString();

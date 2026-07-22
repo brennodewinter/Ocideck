@@ -1795,6 +1795,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Шар поруч із цим деком був завеликий і не був завантажений; сам файл лишився незмінним:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Ця мітка часу не належить до останнього запиту',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

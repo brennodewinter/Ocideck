@@ -1807,6 +1807,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Uma camada ao lado deste deck era demasiado grande e não foi carregada; o próprio ficheiro está inalterado:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Este carimbo de data/hora não pertence ao último pedido',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':

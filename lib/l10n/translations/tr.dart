@@ -2759,6 +2759,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
+      'Bu sunumun yanındaki bir katman çok büyük olduğu için yüklenmedi; dosyanın kendisi değişmedi:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
       'Bu zaman damgası son isteğe ait değil',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
