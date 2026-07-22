@@ -311,6 +311,12 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   notities en het zegel.
 
 ### Fixed
+- **Security: de bytecap en de omleidingsweigering op remote afbeeldingen
+  hadden geen echte toets.** Beide werken, en SECURITY.md belooft ze allebei —
+  maar de test die naar de bytecap heette, controleerde alleen dát het getal
+  bestond. Wie de begrenzing eruit sloopte, kreeg een groene bouw. Nu niet meer:
+  de grens wordt echt uitgeoefend (ook tegen een liegende Content-Length), en
+  elke gepinde verbinding moet aantoonbaar omleidingen weigeren.
 - **De privacycontrole meldde het eigen werkmap-pad van OciDeck als mogelijk
   lek.** Dat was voor een nieuwe gebruiker vaak de állereerste privacymelding
   die hij ooit zag: dia toevoegen, plaatje kiezen, "Kwaliteit" indrukken — en
@@ -436,7 +442,9 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   die hebben geen bestandssysteem nodig. Op macOS, Windows en Linux verandert er
   niets.
 - **Een kwetsbaarheidsmelding kwam op het verkeerde adres uit.** Het
-  contactkaartje in de issuetracker verwees naar `security@vigilis.nl`, terwijl
+  contactkaartje in de issuetracker verwees naar `security@vigilis.nl` (een
+  adres dat níét in gebruik is — het staat hier alleen omdat het de fout was),
+  terwijl
   `SECURITY.md` en de gedragscode allebei `security@librekat.nl` noemen. Wie de
   tracker volgde — precies de route die we zelf aanwijzen — mailde een adres dat
   in onze eigen documentatie niet bestaat. Rechtgezet, en er staat nu een test
