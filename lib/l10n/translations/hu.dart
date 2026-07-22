@@ -1781,6 +1781,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'naam@example.org\nexample.org': 'nev@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'A deck melletti egyik réteg túl nagy volt, ezért nem töltődött be; maga a fájl változatlan:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2783,8 +2784,8 @@ const _dutchSourceAddHu = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'beágyazott kép — nem tudunk belenézni',
   'Je eigen gegevens': 'A saját adataid',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Soronként egy: a neved, e-mail-címed, telefonszámod vagy a szervezeted domainje. Ami itt szerepel, azt nem jelzi és nem takarja ki — az a feladó, nem megállapítás. Egy domain (politie.nl) minden alatta lévő címet lefed.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Soronként egy: a neved, e-mail-címed, telefonszámod vagy a szervezeted domainje. Ami itt szerepel, azt nem jelzi és nem takarja ki — az a feladó, nem megállapítás. Egy domain (example.org) minden alatta lévő címet lefed.',
   'Bij onafgehandelde persoonsgegevens': 'Kezeletlen személyes adatok esetén',
   'Export afgebroken vanwege privacybevindingen.':
       'Az exportálás adatvédelmi megállapítások miatt megszakadt.',

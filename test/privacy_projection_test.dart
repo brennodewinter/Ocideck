@@ -252,7 +252,7 @@ void main() {
       privacy: deckStand ?? PrivacyDisposition.warn,
       slides: [
         bulletSlide().copyWith(
-          bullets: ['mail j.jansen@politie.nl en BSN 728398242'],
+          bullets: ['mail j.jansen@andersbureau.nl en BSN 728398242'],
           privacy: slideStand,
           clearPrivacy: slideStand == null,
         ),
@@ -261,14 +261,14 @@ void main() {
 
     test('warn laat de gegevens staan — melden is niet weghalen', () {
       final out = PrivacyProjection.forAudience(deckMet(null)).slides.single;
-      expect(out.bullets.single, contains('j.jansen@politie.nl'));
+      expect(out.bullets.single, contains('j.jansen@andersbureau.nl'));
     });
 
     test('accept laat de gegevens staan — de briefing hoort ze te tonen', () {
       final out = PrivacyProjection.forAudience(
         deckMet(PrivacyDisposition.accept),
       ).slides.single;
-      expect(out.bullets.single, contains('j.jansen@politie.nl'));
+      expect(out.bullets.single, contains('j.jansen@andersbureau.nl'));
     });
 
     test('redact haalt de gedetecteerde gegevens weg', () {
@@ -277,7 +277,7 @@ void main() {
       );
       final bullet = audience.slides.single.bullets.single;
 
-      expect(bullet.contains('j.jansen@politie.nl'), isFalse);
+      expect(bullet.contains('j.jansen@andersbureau.nl'), isFalse);
       expect(bullet.contains('728398242'), isFalse);
       expect(bullet, contains(kRedactionToken));
       expect(audience.redactionCount, 2);
@@ -289,7 +289,7 @@ void main() {
       );
       expect(
         audience.slides.single.bullets.single,
-        contains('j.jansen@politie.nl'),
+        contains('j.jansen@andersbureau.nl'),
       );
       expect(audience.shieldedSlides, contains(0));
     });
@@ -303,7 +303,7 @@ void main() {
       );
       expect(
         audience.slides.single.bullets.single,
-        contains('j.jansen@politie.nl'),
+        contains('j.jansen@andersbureau.nl'),
       );
     });
 
@@ -335,7 +335,7 @@ void main() {
         title: 'D',
         slides: [
           bulletSlide().copyWith(
-            bullets: ['mail j.jansen@politie.nl'],
+            bullets: ['mail j.jansen@andersbureau.nl'],
             privacy: PrivacyDisposition.accept,
           ),
         ],
@@ -343,12 +343,12 @@ void main() {
 
       expect(
         PrivacyProjection.forAudience(deck).slides.single.bullets.single,
-        contains('j.jansen@politie.nl'),
+        contains('j.jansen@andersbureau.nl'),
       );
       expect(
         PrivacyProjection.forExternalProcessing(
           deck,
-        ).slides.single.bullets.single.contains('j.jansen@politie.nl'),
+        ).slides.single.bullets.single.contains('j.jansen@andersbureau.nl'),
         isFalse,
       );
     });

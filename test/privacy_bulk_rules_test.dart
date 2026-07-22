@@ -28,9 +28,9 @@ void main() {
         tabel(
           ['Naam', 'E-mail', 'BSN'],
           [
-            ['Jan', 'j@politie.nl', '728398242'],
-            ['Piet', 'p@politie.nl', '100000009'],
-            ['Klaas', 'k@politie.nl', '123456782'],
+            ['Jan', 'j@andersbureau.nl', '728398242'],
+            ['Piet', 'p@andersbureau.nl', '100000009'],
+            ['Klaas', 'k@andersbureau.nl', '123456782'],
           ],
         ),
       );
@@ -94,9 +94,9 @@ void main() {
       final result = scanSlide(
         Slide.create(SlideType.bullets).copyWith(
           bullets: [
-            'j.jansen@politie.nl',
-            'p.smit@politie.nl',
-            'k.bakker@politie.nl',
+            'j.jansen@andersbureau.nl',
+            'p.smit@andersbureau.nl',
+            'k.bakker@andersbureau.nl',
           ],
         ),
       );
@@ -120,7 +120,7 @@ void main() {
         Slide.create(SlideType.bullets).copyWith(
           bullets: [
             'Jan Jansen',
-            'j.jansen@politie.nl',
+            'j.jansen@andersbureau.nl',
             'Bereikbaar op werkdagen',
           ],
         ),
@@ -136,7 +136,7 @@ void main() {
       // wilden oplossen.
       final result = scanSlide(
         Slide.create(SlideType.bullets).copyWith(
-          bullets: [for (var i = 0; i < 10; i++) 'persoon$i@politie.nl'],
+          bullets: [for (var i = 0; i < 10; i++) 'persoon$i@andersbureau.nl'],
         ),
       );
       expect(
@@ -184,9 +184,9 @@ void main() {
   });
 
   test('uitzetten werkt ook op de massa-regel', () {
-    final slide = Slide.create(
-      SlideType.bullets,
-    ).copyWith(bullets: ['a@politie.nl', 'b@politie.nl', 'c@politie.nl']);
+    final slide = Slide.create(SlideType.bullets).copyWith(
+      bullets: ['a@andersbureau.nl', 'b@andersbureau.nl', 'c@andersbureau.nl'],
+    );
     final result = const PrivacyScanner(
       disabledRules: {'bulk.repeat'},
     ).scan(Deck(title: 'D', slides: [slide]));

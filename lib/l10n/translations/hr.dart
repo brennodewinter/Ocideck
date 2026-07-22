@@ -1784,6 +1784,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'naam@example.org\nexample.org': 'ime@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Sloj uz ovu prezentaciju bio je prevelik i nije učitan; sama datoteka ostaje nepromijenjena:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2780,8 +2781,8 @@ const _dutchSourceAddHr = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'ugrađena slika — ne možemo pogledati u nju',
   'Je eigen gegevens': 'Tvoji vlastiti podaci',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Jedan po retku: tvoje ime, e-adresa, broj telefona ili domena tvoje organizacije. Ono što je ovdje nije prijavljeno ni redigirano — to je pošiljatelj, ne nalaz. Domena (politie.nl) pokriva svaku adresu ispod nje.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Jedan po retku: tvoje ime, e-adresa, broj telefona ili domena tvoje organizacije. Ono što je ovdje nije prijavljeno ni redigirano — to je pošiljatelj, ne nalaz. Domena (example.org) pokriva svaku adresu ispod nje.',
   'Bij onafgehandelde persoonsgegevens': 'Kod neriješenih osobnih podataka',
   'Export afgebroken vanwege privacybevindingen.':
       'Izvoz prekinut zbog nalaza o privatnosti.',

@@ -1805,6 +1805,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'naam@example.org\nexample.org': 'onoma@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Ένα επίπεδο δίπλα σε αυτό το deck ήταν πολύ μεγάλο και δεν φορτώθηκε· το ίδιο το αρχείο παραμένει αμετάβλητο:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2818,8 +2819,8 @@ const _dutchSourceAddEl = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'ενσωματωμένη εικόνα — δεν μπορούμε να δούμε μέσα',
   'Je eigen gegevens': 'Τα δικά σου στοιχεία',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Ένα ανά γραμμή: το όνομά σου, η διεύθυνση email, το τηλέφωνο ή ο τομέας του οργανισμού σου. Ό,τι γράφεις εδώ δεν αναφέρεται και δεν αποκρύπτεται — είναι ο αποστολέας, όχι εύρημα. Ένας τομέας (politie.nl) καλύπτει κάθε διεύθυνση κάτω από αυτόν.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Ένα ανά γραμμή: το όνομά σου, η διεύθυνση email, το τηλέφωνο ή ο τομέας του οργανισμού σου. Ό,τι γράφεις εδώ δεν αναφέρεται και δεν αποκρύπτεται — είναι ο αποστολέας, όχι εύρημα. Ένας τομέας (example.org) καλύπτει κάθε διεύθυνση κάτω από αυτόν.',
   'Bij onafgehandelde persoonsgegevens': 'Με ανεπίλυτα προσωπικά δεδομένα',
   'Export afgebroken vanwege privacybevindingen.':
       'Η εξαγωγή ακυρώθηκε λόγω ευρημάτων απορρήτου.',

@@ -1779,6 +1779,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'naam@example.org\nexample.org': 'ime@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Sloj ob tem decku je bil prevelik in ni bil naložen; sama datoteka ostaja nespremenjena:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2780,8 +2781,8 @@ const _dutchSourceAddSl = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'vdelana slika — vanjo ne moremo pogledati',
   'Je eigen gegevens': 'Tvoji lastni podatki',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Eno na vrstico: tvoje ime, e-poštni naslov, telefonska številka ali domena tvoje organizacije. Kar je tu, se ne javi in ne prekrije — to je pošiljatelj, ne ugotovitev. Domena (politie.nl) pokriva vsak naslov pod njo.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Eno na vrstico: tvoje ime, e-poštni naslov, telefonska številka ali domena tvoje organizacije. Kar je tu, se ne javi in ne prekrije — to je pošiljatelj, ne ugotovitev. Domena (example.org) pokriva vsak naslov pod njo.',
   'Bij onafgehandelde persoonsgegevens': 'Pri nerešenih osebnih podatkih',
   'Export afgebroken vanwege privacybevindingen.':
       'Izvoz preklican zaradi ugotovitev o zasebnosti.',

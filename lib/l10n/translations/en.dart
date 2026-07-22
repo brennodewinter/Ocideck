@@ -916,6 +916,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'naam@example.org\nexample.org': 'name@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'A layer next to this deck was too large and was not loaded; the file itself is unchanged:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -1909,8 +1910,8 @@ const _dutchSourceAddEn = {
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'embedded image — we cannot look inside it',
   'Je eigen gegevens': 'Your own details',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'One per line: your name, email address, phone number, or your organisation\'s domain. What you list here is not reported and not redacted — it is the sender, not a finding. A domain (politie.nl) covers every address under it.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'One per line: your name, email address, phone number, or your organisation\'s domain. What you list here is not reported and not redacted — it is the sender, not a finding. A domain (example.org) covers every address under it.',
   'Bij onafgehandelde persoonsgegevens': 'With unresolved personal data',
   'Export afgebroken vanwege privacybevindingen.':
       'Export cancelled because of privacy findings.',

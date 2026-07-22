@@ -872,7 +872,7 @@ void main() {
       for (final url in const [
         'https://www.youtube.com/watch?v=fZ5u46AjFCU',
         'https://vimeo.com/181000543',
-        'https://dewinter.com/img/video/ik-zal-je-leren-toxisch.mp4',
+        'https://eigenbureau.nl/img/video/ik-zal-je-leren-toxisch.mp4',
       ]) {
         final deck = Deck(
           title: 'Demo',
@@ -904,7 +904,7 @@ void main() {
         projectPath: dir.path,
         slides: [
           Slide.create(SlideType.image).copyWith(
-            imagePath: 'https://dewinter.com/img/foto.jpg',
+            imagePath: 'https://eigenbureau.nl/img/foto.jpg',
             imageAltText: 'Een foto',
           ),
         ],

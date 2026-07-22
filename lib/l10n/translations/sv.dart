@@ -1776,6 +1776,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'naam@example.org\nexample.org': 'namn@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Ett lager bredvid detta deck var för stort och lästes inte in; själva filen är oförändrad:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2772,8 +2773,8 @@ const _dutchSourceAddSv = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'inbäddad bild — vi kan inte titta in i den',
   'Je eigen gegevens': 'Dina egna uppgifter',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Ett per rad: ditt namn, din e-postadress, ditt telefonnummer eller din organisations domän. Det som står här rapporteras inte och maskas inte — det är avsändaren, inte ett fynd. En domän (politie.nl) täcker varje adress under den.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Ett per rad: ditt namn, din e-postadress, ditt telefonnummer eller din organisations domän. Det som står här rapporteras inte och maskas inte — det är avsändaren, inte ett fynd. En domän (example.org) täcker varje adress under den.',
   'Bij onafgehandelde persoonsgegevens': 'Vid ohanterade personuppgifter',
   'Export afgebroken vanwege privacybevindingen.':
       'Exporten avbröts på grund av integritetsfynd.',

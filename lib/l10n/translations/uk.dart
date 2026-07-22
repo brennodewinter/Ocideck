@@ -1795,6 +1795,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'naam@example.org\nexample.org': 'imya@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Шар поруч із цим деком був завеликий і не був завантажений; сам файл лишився незмінним:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2793,8 +2794,8 @@ const _dutchSourceAddUk = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'вбудоване зображення — ми не можемо зазирнути всередину',
   'Je eigen gegevens': 'Ваші власні дані',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'По одному в рядку: ваше ім\'я, адреса електронної пошти, телефон або домен вашої організації. Те, що тут вказано, не повідомляється і не редагується — це відправник, а не виявлення. Домен (politie.nl) охоплює всі адреси під ним.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'По одному в рядку: ваше ім\'я, адреса електронної пошти, телефон або домен вашої організації. Те, що тут вказано, не повідомляється і не редагується — це відправник, а не виявлення. Домен (example.org) охоплює всі адреси під ним.',
   'Bij onafgehandelde persoonsgegevens':
       'За наявності неопрацьованих персональних даних',
   'Export afgebroken vanwege privacybevindingen.':

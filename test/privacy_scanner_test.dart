@@ -22,14 +22,16 @@ void main() {
 
   group('contact.email', () {
     test('vindt een gewoon adres', () {
-      final result = scanText('Mail naar jan.jansen@politie.nl voor vragen.');
+      final result = scanText(
+        'Mail naar jan.jansen@andersbureau.nl voor vragen.',
+      );
       expect(result.firedRules, contains('contact.email'));
       expect(result.findings.single.confidence, PrivacyConfidence.certain);
       expect(result.findings.single.family, PrivacyFamily.contact);
     });
 
     test('maskeert de waarde in plaats van hem te bewaren', () {
-      final finding = scanText('jan.jansen@politie.nl').findings.single;
+      final finding = scanText('jan.jansen@andersbureau.nl').findings.single;
       expect(finding.maskedSample, 'j…l');
       expect(finding.maskedSample.contains('jansen'), isFalse);
     });
@@ -41,8 +43,8 @@ void main() {
     });
 
     test('negeert onpersoonlijke postbussen', () {
-      expect(rulesIn('noreply@politie.nl'), isEmpty);
-      expect(rulesIn('abuse@politie.nl'), isEmpty);
+      expect(rulesIn('noreply@andersbureau.nl'), isEmpty);
+      expect(rulesIn('abuse@andersbureau.nl'), isEmpty);
     });
 
     test('vuurt niet op gewone tekst met een apenstaartje', () {
@@ -163,10 +165,10 @@ void main() {
         title: 'D',
         slides: [
           Slide.create(SlideType.bullets).copyWith(
-            bullets: ['eerste', 'mail a.bakker@politie.nl'],
+            bullets: ['eerste', 'mail a.bakker@andersbureau.nl'],
             tableRows: [
               ['Naam', 'Mail'],
-              ['Piet', 'p.smit@politie.nl'],
+              ['Piet', 'p.smit@andersbureau.nl'],
             ],
           ),
         ],
@@ -182,7 +184,7 @@ void main() {
     test('scant de deckvelden die de documentmetadata voeden', () {
       final deck = Deck(
         title: 'Dossier',
-        author: 'r.devries@politie.nl',
+        author: 'r.devries@andersbureau.nl',
         slides: [Slide.create(SlideType.bullets)],
       );
       final result = scanner.scan(deck);

@@ -1768,6 +1768,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'naam@example.org\nexample.org': 'nimi@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Selle decki kõrval olev kiht oli liiga suur ja seda ei laaditud; fail ise on muutmata:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2767,8 +2768,8 @@ const _dutchSourceAddEt = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'manustatud pilt — me ei näe selle sisse',
   'Je eigen gegevens': 'Sinu enda andmed',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Üks rea kohta: sinu nimi, e-posti aadress, telefoninumber või organisatsiooni domeen. Siin olevat ei teatata ega redigeerita — see on saatja, mitte leid. Domeen (politie.nl) katab kõik selle all olevad aadressid.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Üks rea kohta: sinu nimi, e-posti aadress, telefoninumber või organisatsiooni domeen. Siin olevat ei teatata ega redigeerita — see on saatja, mitte leid. Domeen (example.org) katab kõik selle all olevad aadressid.',
   'Bij onafgehandelde persoonsgegevens': 'Lahendamata isikuandmete korral',
   'Export afgebroken vanwege privacybevindingen.':
       'Eksport katkestati privaatsusleidude tõttu.',

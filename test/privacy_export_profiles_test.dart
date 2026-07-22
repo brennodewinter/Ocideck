@@ -18,7 +18,7 @@ void main() {
     title: 'Briefing',
     slides: [
       Slide.create(SlideType.bullets).copyWith(
-        bullets: ['BSN 728398242 — mail j.jansen@politie.nl'],
+        bullets: ['BSN 728398242 — mail j.jansen@andersbureau.nl'],
         privacy: stand,
       ),
     ],
@@ -59,7 +59,7 @@ void main() {
       final bullet = out.slides.single.bullets.single;
 
       expect(bullet.contains('728398242'), isFalse);
-      expect(bullet.contains('j.jansen@politie.nl'), isFalse);
+      expect(bullet.contains('j.jansen@andersbureau.nl'), isFalse);
       expect(out.redactionCount, 2);
     });
 

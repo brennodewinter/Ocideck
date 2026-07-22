@@ -15,7 +15,7 @@ void main() {
     slides: [
       Slide.create(
         SlideType.bullets,
-      ).copyWith(bullets: ['contact j.jansen@politie.nl']),
+      ).copyWith(bullets: ['contact j.jansen@andersbureau.nl']),
     ],
   );
 

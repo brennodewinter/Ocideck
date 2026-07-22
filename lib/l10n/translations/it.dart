@@ -730,6 +730,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'naam@example.org\nexample.org': 'nome@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Un livello accanto a questo deck era troppo grande e non è stato caricato; il file stesso è invariato:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -1754,8 +1755,8 @@ const _dutchSourceAddIt = {
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'immagine incorporata — non possiamo guardarci dentro',
   'Je eigen gegevens': 'I tuoi dati',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Uno per riga: il tuo nome, indirizzo e-mail, numero di telefono o il dominio della tua organizzazione. Ciò che indichi qui non viene segnalato né oscurato: è il mittente, non una rilevazione. Un dominio (politie.nl) copre ogni indirizzo sottostante.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Uno per riga: il tuo nome, indirizzo e-mail, numero di telefono o il dominio della tua organizzazione. Ciò che indichi qui non viene segnalato né oscurato: è il mittente, non una rilevazione. Un dominio (example.org) copre ogni indirizzo sottostante.',
   'Bij onafgehandelde persoonsgegevens': 'Con dati personali non gestiti',
   'Export afgebroken vanwege privacybevindingen.':
       'Esportazione annullata a causa di rilevazioni di privacy.',

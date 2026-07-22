@@ -311,6 +311,12 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   notities en het zegel.
 
 ### Fixed
+- **Het instellingenscherm toonde het privé-adres van de maker als voorbeeld.**
+  Bij *Je eigen gegevens* stond letterlijk zijn e-mailadres in het invoerveld,
+  en de uitleg erboven gebruikte een echt overheidsdomein als illustratie — in
+  alle 31 talen. In een programma dat persoonsgegevens hoort te herkennen en te
+  beschermen is dat de verkeerde eerste indruk. Nu staan er de adressen die
+  daarvoor gereserveerd zijn (`naam@example.org`).
 - **Een overgeslagen laag zegt dat nu, in plaats van stilletjes te verdwijnen.**
   Naast uw presentatie liggen aparte bestanden met uw tekeningen, uw notities en
   het zegel. Is zo'n bestand groter dan de veiligheidsgrens, dan wordt het niet

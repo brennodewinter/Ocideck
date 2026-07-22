@@ -1793,6 +1793,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'naam@example.org\nexample.org': 'nomen@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Stratum iuxta hanc praesentationem nimis magnum erat neque lectum est; plica ipsa immutata manet:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2786,8 +2787,8 @@ const _dutchSourceAddLa = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'imago insita — intus inspicere non possumus',
   'Je eigen gegevens': 'Data tua propria',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Unum in versu: nomen tuum, inscriptio electronica, numerus telephonicus vel dominium consociationis tuae. Quae hic stant nec nuntiantur nec obliterantur — mittens est, non inventum. Dominium (politie.nl) omnem inscriptionem sub eo tegit.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Unum in versu: nomen tuum, inscriptio electronica, numerus telephonicus vel dominium consociationis tuae. Quae hic stant nec nuntiantur nec obliterantur — mittens est, non inventum. Dominium (example.org) omnem inscriptionem sub eo tegit.',
   'Bij onafgehandelde persoonsgegevens': 'Cum datis personalibus non tractatis',
   'Export afgebroken vanwege privacybevindingen.':
       'Exportatio ob inventa privata abrupta.',

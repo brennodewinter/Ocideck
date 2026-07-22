@@ -1784,6 +1784,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'naam@example.org\nexample.org': 'meno@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Vrstva vedľa tejto prezentácie bola príliš veľká a nenačítala sa; samotný súbor zostáva nezmenený:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2781,8 +2782,8 @@ const _dutchSourceAddSk = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'vložený obrázok — nevidíme dovnútra',
   'Je eigen gegevens': 'Tvoje vlastné údaje',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Jeden na riadok: tvoje meno, e-mailová adresa, telefón alebo doména tvojej organizácie. To, čo je tu, sa nehlási ani nezačierňuje — je to odosielateľ, nie nález. Doména (politie.nl) pokrýva každú adresu pod ňou.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Jeden na riadok: tvoje meno, e-mailová adresa, telefón alebo doména tvojej organizácie. To, čo je tu, sa nehlási ani nezačierňuje — je to odosielateľ, nie nález. Doména (example.org) pokrýva každú adresu pod ňou.',
   'Bij onafgehandelde persoonsgegevens': 'Pri nevyriešených osobných údajoch',
   'Export afgebroken vanwege privacybevindingen.':
       'Export prerušený pre nálezy súkromia.',

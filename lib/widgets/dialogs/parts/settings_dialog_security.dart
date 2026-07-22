@@ -578,7 +578,7 @@ extension _SettingsSecurity on _SettingsDialogState {
         const SizedBox(height: 2),
         Text(
           l10n.d(
-            'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.',
+            'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.',
           ),
           style: TextStyle(fontSize: 11, color: AppTheme.slate400),
         ),
@@ -591,7 +591,7 @@ extension _SettingsSecurity on _SettingsDialogState {
           decoration: InputDecoration(
             isDense: true,
             border: const OutlineInputBorder(),
-            hintText: l10n.d('brenno@dewinter.com\ndewinter.com'),
+            hintText: l10n.d('naam@example.org\nexample.org'),
             hintStyle: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
           onChanged: (value) =>

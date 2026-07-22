@@ -735,6 +735,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'naam@example.org\nexample.org': 'namme@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'In laach neist dit deck wie te grut en is net ynlêzen; it bestân sels is ûnferoare:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -1745,8 +1746,8 @@ const _dutchSourceAddFy = {
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'ynsletten ôfbylding — wy kinne der net yn sjen',
   'Je eigen gegevens': 'Dyn eigen gegevens',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Ien de regel: dyn namme, e-mailadres, telefoannûmer of it domein fan dyn organisaasje. Wat hjir stiet wurdt net meld en net redigearre — it is de ôfstjoerder, gjin befining. In domein (politie.nl) dekt elk adres derûnder.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Ien de regel: dyn namme, e-mailadres, telefoannûmer of it domein fan dyn organisaasje. Wat hjir stiet wurdt net meld en net redigearre — it is de ôfstjoerder, gjin befining. In domein (example.org) dekt elk adres derûnder.',
   'Bij onafgehandelde persoonsgegevens': 'By ûnôfhannele persoansgegevens',
   'Export afgebroken vanwege privacybevindingen.':
       'Eksport ôfbrutsen fanwegen privacybefinings.',

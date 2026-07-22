@@ -1807,6 +1807,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'naam@example.org\nexample.org': 'nome@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Uma camada ao lado deste deck era demasiado grande e não foi carregada; o próprio ficheiro está inalterado:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2812,8 +2813,8 @@ const _dutchSourceAddPt = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'imagem incorporada — não conseguimos ver lá dentro',
   'Je eigen gegevens': 'Os teus próprios dados',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Um por linha: o teu nome, endereço de e-mail, telefone ou o domínio da tua organização. O que estiver aqui não é comunicado nem ocultado — é o remetente, não uma deteção. Um domínio (politie.nl) cobre todos os endereços sob ele.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Um por linha: o teu nome, endereço de e-mail, telefone ou o domínio da tua organização. O que estiver aqui não é comunicado nem ocultado — é o remetente, não uma deteção. Um domínio (example.org) cobre todos os endereços sob ele.',
   'Bij onafgehandelde persoonsgegevens': 'Com dados pessoais por resolver',
   'Export afgebroken vanwege privacybevindingen.':
       'Exportação cancelada devido a deteções de privacidade.',

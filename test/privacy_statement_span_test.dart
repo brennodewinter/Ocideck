@@ -62,7 +62,7 @@ void main() {
     test('een geëscaleerd gezondheidsgegeven beslaat de hele mededeling', () {
       final result = scanner.scan(
         deckOf([
-          'Contactpersoon j.jansen@politie.nl',
+          'Contactpersoon j.jansen@andersbureau.nl',
           'Marieke de Vries meldde zich ziek met een diabetes-diagnose',
         ]),
       );
@@ -95,7 +95,7 @@ void main() {
       // nummer is er hooguit het bewijs van.
       final out = PrivacyProjection.forAudience(
         deckOf([
-          'j.jansen@politie.nl',
+          'j.jansen@andersbureau.nl',
           'Zaak 01/234567-19 tegen M. de Vries',
         ], stand: PrivacyDisposition.redact),
       );
@@ -106,7 +106,7 @@ void main() {
     test('en een genetische variant ook', () {
       final out = PrivacyProjection.forAudience(
         deckOf([
-          'j.jansen@politie.nl',
+          'j.jansen@andersbureau.nl',
           'Bij Marieke is rs334 aangetroffen',
         ], stand: PrivacyDisposition.redact),
       );
@@ -125,7 +125,7 @@ void main() {
       // van het woord dat ernaar verwijst.
       final result = scanner.scan(
         deckOf([
-          'j.jansen@politie.nl',
+          'j.jansen@andersbureau.nl',
           'Marieke de Vries heeft een diabetes-diagnose',
         ]),
       );
@@ -142,7 +142,7 @@ void main() {
       // De regressietest van het echte geval: dit is wat er op het scherm stond.
       final out = PrivacyProjection.forAudience(
         deckOf([
-          'Contactpersoon j.jansen@politie.nl',
+          'Contactpersoon j.jansen@andersbureau.nl',
           'Marieke de Vries meldde zich ziek met een diabetes-diagnose',
         ], stand: PrivacyDisposition.redact),
       );
@@ -158,7 +158,7 @@ void main() {
     test('de belendende bullet blijft leesbaar', () {
       final out = PrivacyProjection.forAudience(
         deckOf([
-          'j.jansen@politie.nl',
+          'j.jansen@andersbureau.nl',
           'Marieke de Vries heeft een diabetes-diagnose',
           'Herhaaltest over twee weken',
         ], stand: PrivacyDisposition.redact),
