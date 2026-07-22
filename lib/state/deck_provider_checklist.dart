@@ -39,36 +39,6 @@ extension DeckNotifierChecklist on DeckNotifier {
   /// Build a checklist slide linked to [object]: WSTG rows for a WSTG-standard
   /// type, [template] rows when one is given for a non-WSTG type, otherwise an
   /// empty checklist titled with the derived standard.
-  Slide _checklistForScope(
-    String object,
-    ScopeObjectType type,
-    ChecklistTemplate? template,
-  ) {
-    final ChecklistSource source;
-    if (type.standard == 'WSTG') {
-      source = wstgChecklistSource();
-    } else if (template != null) {
-      source = templateChecklistSource(template);
-    } else {
-      source = ChecklistSource(
-        label: type.standard,
-        standardLabel: type.standard,
-        rows: const [ChecklistRow()],
-      );
-    }
-    final label = source.standardLabel.isNotEmpty
-        ? source.standardLabel
-        : type.standard;
-    return Slide.create(SlideType.checklist).copyWith(
-      title: label,
-      tableRows: ChecklistSpec(
-        standardLabel: label,
-        rows: source.rows,
-      ).toTableRows(),
-      checklistScope: object,
-    );
-  }
-
   /// Vink in één keer alle checklist-items in de hele presentatie uit (bijv.
   /// om een ingevulde checklist opnieuw te kunnen aflopen). Eén
   /// ongedaan-maken-stap. No-op wanneer er niets is aangevinkt.
@@ -168,4 +138,40 @@ extension DeckNotifierChecklist on DeckNotifier {
     if (changed) _mutate(deck.copyWith(slides: slides), bumpRevision: true);
     return found;
   }
+}
+
+/// De checklist-dia voor één scope-object.
+///
+/// Top-level en geen methode: hij raakt geen enkel veld van [DeckNotifier],
+/// en die klasse zit tegen zijn plafond (#630). Wat hij nodig heeft komt
+/// allemaal binnen via zijn parameters — dit was een pure functie die per
+/// ongeluk een methode werd.
+Slide _checklistForScope(
+  String object,
+  ScopeObjectType type,
+  ChecklistTemplate? template,
+) {
+  final ChecklistSource source;
+  if (type.standard == 'WSTG') {
+    source = wstgChecklistSource();
+  } else if (template != null) {
+    source = templateChecklistSource(template);
+  } else {
+    source = ChecklistSource(
+      label: type.standard,
+      standardLabel: type.standard,
+      rows: const [ChecklistRow()],
+    );
+  }
+  final label = source.standardLabel.isNotEmpty
+      ? source.standardLabel
+      : type.standard;
+  return Slide.create(SlideType.checklist).copyWith(
+    title: label,
+    tableRows: ChecklistSpec(
+      standardLabel: label,
+      rows: source.rows,
+    ).toTableRows(),
+    checklistScope: object,
+  );
 }

@@ -46,3 +46,10 @@ app.*.map.json
 
 # Local Claude Code / agent and IDE working files
 /.claude/
+
+# Golden-vergelijkingen die Flutter schrijft als een beeldtest valt. Ze stonden
+# ooit gecommit (#639): een map met de naam "failures" en een masked diff erin
+# leest als een openstaande regressie, terwijl de fout allang weg was. En zolang
+# ze getrackt waren, meldde een échte nieuwe fout zich als "modified" in plaats
+# van als een nieuw bestand.
+test/golden/failures/
