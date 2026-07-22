@@ -1776,6 +1776,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'naam@example.org\nexample.org': 'vards@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Slānis blakus šim dekam bija pārāk liels un netika ielādēts; pats fails ir nemainīts:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2772,8 +2773,8 @@ const _dutchSourceAddLv = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'iegults attēls — mēs nevaram tajā ieskatīties',
   'Je eigen gegevens': 'Tavi paša dati',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Viens rindā: tavs vārds, e-pasta adrese, tālruņa numurs vai tavas organizācijas domēns. Tas, kas šeit ir, netiek ziņots un netiek aizklāts — tas ir sūtītājs, nevis atradums. Domēns (politie.nl) sedz katru adresi zem tā.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Viens rindā: tavs vārds, e-pasta adrese, tālruņa numurs vai tavas organizācijas domēns. Tas, kas šeit ir, netiek ziņots un netiek aizklāts — tas ir sūtītājs, nevis atradums. Domēns (example.org) sedz katru adresi zem tā.',
   'Bij onafgehandelde persoonsgegevens': 'Ar neatrisinātiem personas datiem',
   'Export afgebroken vanwege privacybevindingen.':
       'Eksports pārtraukts privātuma atradumu dēļ.',

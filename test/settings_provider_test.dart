@@ -577,7 +577,7 @@ void main() {
         ]),
         'webdavServer': jsonEncode({
           'baseUrl': 'https://cloud.voorbeeld.nl',
-          'username': 'brenno',
+          'username': 'a.bakker',
         }),
         'gitRepo': jsonEncode({
           'baseUrl': 'https://git.voorbeeld.nl',
@@ -597,7 +597,7 @@ void main() {
       // De afgeleide getters wijzen naar precies wat er vóór de migratie stond,
       // zodat de open- en opslaanflows niets merken.
       expect(n.state.homeDirectory, '/home/prive');
-      expect(n.state.webdavServer?.username, 'brenno');
+      expect(n.state.webdavServer?.username, 'a.bakker');
       expect(n.state.gitRepo?.slug, 'librekat/decks');
       // Elke verbinding krijgt een eigen, niet-lege id.
       final ids = n.state.connections.map((c) => c.id).toSet();
@@ -630,11 +630,11 @@ void main() {
         final n = await _loadedNotifier();
         const eersteServer = WebdavServer(
           baseUrl: 'https://a.voorbeeld.nl',
-          username: 'brenno',
+          username: 'a.bakker',
         );
         const tweedeServer = WebdavServer(
           baseUrl: 'https://b.voorbeeld.nl',
-          username: 'brenno',
+          username: 'a.bakker',
         );
         // Een half ingevulde verbinding telt niet mee: die staat in de lijst
         // omdat de gebruiker er nog aan werkt, niet omdat hij dienst kan doen.

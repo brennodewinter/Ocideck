@@ -25,7 +25,7 @@ void main() {
         privacy: deckStand ?? PrivacyDisposition.warn,
         slides: [
           Slide.create(SlideType.bullets).copyWith(
-            bullets: ['BSN 728398242', 'mail j.jansen@politie.nl'],
+            bullets: ['BSN 728398242', 'mail j.jansen@andersbureau.nl'],
             privacy: stand,
           ),
         ],

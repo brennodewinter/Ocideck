@@ -90,7 +90,7 @@ void main() {
     });
 
     test('met een persoon erbij gaat de hele mededeling weg', () {
-      final out = redact('Jan, jan.jansen@politie.nl, diagnose F32.1');
+      final out = redact('Jan, jan.jansen@andersbureau.nl, diagnose F32.1');
       expect(out, isNot(contains('diagnose')));
       expect(out, isNot(contains('jan.jansen')));
       expect(out, contains('█'));

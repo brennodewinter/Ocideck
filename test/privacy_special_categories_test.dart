@@ -51,7 +51,9 @@ void main() {
     });
 
     test('een e-mailadres telt ook als persoon', () {
-      final result = scan(['j.jansen@politie.nl is verdachte in deze zaak']);
+      final result = scan([
+        'j.jansen@andersbureau.nl is verdachte in deze zaak',
+      ]);
       expect(
         findingFor(result, 'special.criminal')!.confidence,
         PrivacyConfidence.certain,

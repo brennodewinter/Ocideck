@@ -1800,6 +1800,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'naam@example.org\nexample.org': 'ime@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Слой до това дек беше твърде голям и не беше зареден; самият файл остава непроменен:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2804,8 +2805,8 @@ const _dutchSourceAddBg = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'вградено изображение — не можем да погледнем вътре',
   'Je eigen gegevens': 'Вашите собствени данни',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'По едно на ред: вашето име, имейл, телефон или домейнът на организацията ви. Каквото е тук, не се съобщава и не се заличава — това е подателят, а не констатация. Домейн (politie.nl) покрива всеки адрес под него.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'По едно на ред: вашето име, имейл, телефон или домейнът на организацията ви. Каквото е тук, не се съобщава и не се заличава — това е подателят, а не констатация. Домейн (example.org) покрива всеки адрес под него.',
   'Bij onafgehandelde persoonsgegevens': 'При необработени лични данни',
   'Export afgebroken vanwege privacybevindingen.':
       'Експортът е прекратен заради констатации за поверителност.',

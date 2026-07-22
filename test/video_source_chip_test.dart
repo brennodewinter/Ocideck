@@ -66,7 +66,7 @@ void main() {
   ) async {
     for (final url in const [
       'https://www.youtube.com/watch?v=fZ5u46AjFCU',
-      'https://dewinter.com/img/video/ik-zal-je-leren-toxisch.mp4',
+      'https://eigenbureau.nl/img/video/ik-zal-je-leren-toxisch.mp4',
     ]) {
       await tester.pumpWidget(
         _host(Slide.create(SlideType.video).copyWith(videoPath: url)),

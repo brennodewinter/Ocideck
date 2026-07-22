@@ -139,7 +139,7 @@ void main() {
   group('struct.url_pii', () {
     test('herkent een persoonsgegeven in de query', () {
       expect(
-        rulesIn('https://nieuwsbrief.nl/uit?email=jan.jansen@politie.nl'),
+        rulesIn('https://nieuwsbrief.nl/uit?email=jan.jansen@andersbureau.nl'),
         contains('struct.url_pii'),
       );
     });
@@ -164,7 +164,7 @@ void main() {
 
   test('struct.mailto herkent een adres in een link', () {
     expect(
-      rulesIn('[Mail ons](mailto:j.jansen@politie.nl)'),
+      rulesIn('[Mail ons](mailto:j.jansen@andersbureau.nl)'),
       contains('struct.mailto'),
     );
   });

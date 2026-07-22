@@ -21,7 +21,7 @@ void main() {
     });
 
     final slide = Slide.create(SlideType.video).copyWith(
-      videoPath: 'https://dewinter.com/img/video/ik-zal-je-leren-toxisch.mp4',
+      videoPath: 'https://eigenbureau.nl/img/video/ik-zal-je-leren-toxisch.mp4',
       title: 'Online clip',
     );
 

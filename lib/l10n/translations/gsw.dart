@@ -1781,6 +1781,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'naam@example.org\nexample.org': 'name@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'En Ebeni näbe dem Deck isch z gross gsi und isch nöd glade worde; d Datei sälber isch unveränderet:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2779,8 +2780,8 @@ const _dutchSourceAddGsw = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'iibettets Bild — mir chönd nöd inegluege',
   'Je eigen gegevens': 'Dini eigene Date',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Eis pro Ziile: din Name, dini E-Mail-Adrässe, dini Telefonnummere oder d Domain vo dinere Organisation. Was da staht, wird weder gmäldet no gschwärzt — es isch de Absänder, kei Befund. E Domain (politie.nl) deckt jedi Adrässe drunder ab.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Eis pro Ziile: din Name, dini E-Mail-Adrässe, dini Telefonnummere oder d Domain vo dinere Organisation. Was da staht, wird weder gmäldet no gschwärzt — es isch de Absänder, kei Befund. E Domain (example.org) deckt jedi Adrässe drunder ab.',
   'Bij onafgehandelde persoonsgegevens': 'Bi unbehandlete Persoonedate',
   'Export afgebroken vanwege privacybevindingen.':
       'Export wäge Dateschutzbefund abbroche.',

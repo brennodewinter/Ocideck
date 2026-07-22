@@ -23,7 +23,7 @@ void main() {
 
   group('een uitgezette regel vuurt niet', () {
     test('de regel verdwijnt uit de bevindingen', () {
-      final deck = deckMet('BSN 728398242 en mail j.jansen@politie.nl');
+      final deck = deckMet('BSN 728398242 en mail j.jansen@andersbureau.nl');
 
       expect(
         const PrivacyScanner().scan(deck).firedRules,
@@ -93,7 +93,7 @@ void main() {
     // ordernummers niet zwart in zijn export terugzien.
     test('een uitgezette regel wordt niet geredigeerd', () {
       final deck = deckMet(
-        'BSN 728398242 en mail j.jansen@politie.nl',
+        'BSN 728398242 en mail j.jansen@andersbureau.nl',
         stand: PrivacyDisposition.redact,
       );
 
@@ -106,13 +106,13 @@ void main() {
       // Het BSN blijft staan: de gebruiker heeft gezegd dat die regel er naast zit.
       expect(bullet, contains('728398242'));
       // Het e-mailadres gaat wél weg.
-      expect(bullet.contains('j.jansen@politie.nl'), isFalse);
+      expect(bullet.contains('j.jansen@andersbureau.nl'), isFalse);
       expect(zonder.redactionCount, 1);
     });
 
     test('zonder uitgezette regels wordt alles geredigeerd', () {
       final deck = deckMet(
-        'BSN 728398242 en mail j.jansen@politie.nl',
+        'BSN 728398242 en mail j.jansen@andersbureau.nl',
         stand: PrivacyDisposition.redact,
       );
       final alles = PrivacyProjection.forAudience(deck);

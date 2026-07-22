@@ -1674,8 +1674,8 @@ const _dutchSourceTr = {
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'gömülü görsel — içine bakamıyoruz',
   'Je eigen gegevens': 'Kendi bilgileriniz',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Her satıra bir tane: adınız, e-posta adresiniz, telefon numaranız veya kurumunuzun alan adı. Burada yazanlar bildirilmez ve redakte edilmez — bunlar gönderendir, bulgu değil. Bir alan adı (politie.nl) altındaki her adresi kapsar.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Her satıra bir tane: adınız, e-posta adresiniz, telefon numaranız veya kurumunuzun alan adı. Burada yazanlar bildirilmez ve redakte edilmez — bunlar gönderendir, bulgu değil. Bir alan adı (example.org) altındaki her adresi kapsar.',
   'Bij onafgehandelde persoonsgegevens':
       'Karara bağlanmamış kişisel veriler olduğunda',
   'Export afgebroken vanwege privacybevindingen.':
@@ -2759,6 +2759,7 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'naam@example.org\nexample.org': 'ad@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Bu sunumun yanındaki bir katman çok büyük olduğu için yüklenmedi; dosyanın kendisi değişmedi:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':

@@ -1777,6 +1777,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'naam@example.org\nexample.org': 'nama@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Sebuah lapisan di samping deck ini terlalu besar dan tidak dimuat; berkasnya sendiri tidak berubah:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2773,8 +2774,8 @@ const _dutchSourceAddId = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'gambar tersemat — kami tidak bisa melihat isinya',
   'Je eigen gegevens': 'Data Anda sendiri',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Satu per baris: nama, alamat email, nomor telepon, atau domain organisasi Anda. Yang ada di sini tidak dilaporkan dan tidak diredaksi — itu pengirim, bukan temuan. Sebuah domain (politie.nl) mencakup semua alamat di bawahnya.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Satu per baris: nama, alamat email, nomor telepon, atau domain organisasi Anda. Yang ada di sini tidak dilaporkan dan tidak diredaksi — itu pengirim, bukan temuan. Sebuah domain (example.org) mencakup semua alamat di bawahnya.',
   'Bij onafgehandelde persoonsgegevens':
       'Dengan data pribadi yang belum ditangani',
   'Export afgebroken vanwege privacybevindingen.':

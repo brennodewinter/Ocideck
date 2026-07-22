@@ -30,7 +30,7 @@ void main() {
     slides: [
       Slide.create(SlideType.bullets).copyWith(
         privacy: PrivacyDisposition.redact,
-        bullets: ['BSN $bsn van betrokkene', 'mail j.jansen@politie.nl'],
+        bullets: ['BSN $bsn van betrokkene', 'mail j.jansen@andersbureau.nl'],
       ),
     ],
   );

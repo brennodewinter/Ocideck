@@ -1795,6 +1795,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'naam@example.org\nexample.org': 'nume@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Un strat de lângă acest deck era prea mare și nu a fost încărcat; fișierul în sine este neschimbat:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2806,8 +2807,8 @@ const _dutchSourceAddRo = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'imagine încorporată — nu putem privi în interior',
   'Je eigen gegevens': 'Propriile tale date',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Câte unul pe rând: numele tău, adresa de e-mail, telefonul sau domeniul organizației tale. Ce este aici nu se raportează și nu se redactează — este expeditorul, nu o constatare. Un domeniu (politie.nl) acoperă orice adresă de sub el.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Câte unul pe rând: numele tău, adresa de e-mail, telefonul sau domeniul organizației tale. Ce este aici nu se raportează și nu se redactează — este expeditorul, nu o constatare. Un domeniu (example.org) acoperă orice adresă de sub el.',
   'Bij onafgehandelde persoonsgegevens': 'La date personale nerezolvate',
   'Export afgebroken vanwege privacybevindingen.':
       'Export anulat din cauza constatărilor de confidențialitate.',

@@ -1752,6 +1752,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'naam@example.org\nexample.org': 'pong@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'cha\'nobvam \'ay\' teHwI\' tIn qu\'; vaj laDlu\'pu\'be\'. teHwI\' choHlu\'pu\'be\':',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2729,8 +2730,8 @@ const _dutchSourceAddTlh = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'nagh mIllogh — qoDDaq wIleghlaHbe\'',
   'Je eigen gegevens': 'De\'lIj\'e\'',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'wa\' Hoch tlhoy\'Daq: ponglIj, jabbI\'ID DaqlIj, jIH mI\'lIj, pagh ghom DaqlIj. naDev tu\'lu\'bogh luja\'lu\'be\' \'ej So\'lu\'be\' — ngeHwI\' \'oH, tu\'lu\'bogh \'oHbe\'. wa\' Daq (politie.nl) bIng Hoch Daq DevlaH.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'wa\' Hoch tlhoy\'Daq: ponglIj, jabbI\'ID DaqlIj, jIH mI\'lIj, pagh ghom DaqlIj. naDev tu\'lu\'bogh luja\'lu\'be\' \'ej So\'lu\'be\' — ngeHwI\' \'oH, tu\'lu\'bogh \'oHbe\'. wa\' Daq (example.org) bIng Hoch Daq DevlaH.',
   'Bij onafgehandelde persoonsgegevens': 'nuv De\' Sovbe\'lu\'bogh',
   'Export afgebroken vanwege privacybevindingen.':
       'pegh tu\'lu\'mo\' ngeH mev.',

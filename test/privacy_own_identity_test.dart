@@ -26,57 +26,57 @@ void main() {
 
   group('covers', () {
     test('exacte match, hoofdletterongevoelig', () {
-      const own = OwnIdentity(['Brenno@dewinter.com']);
-      expect(own.covers('brenno@dewinter.com'), isTrue);
-      expect(own.covers('BRENNO@DEWINTER.COM'), isTrue);
+      const own = OwnIdentity(['A.Bakker@eigenbureau.nl']);
+      expect(own.covers('a.bakker@eigenbureau.nl'), isTrue);
+      expect(own.covers('A.BAKKER@EIGENBUREAU.NL'), isTrue);
       // Een collega op hetzelfde domein is géén afzender maar een derde: dat is
       // wél een bevinding. Wie de hele organisatie wil dekken, geeft het domein op.
-      expect(own.covers('iemand.anders@dewinter.com'), isFalse);
+      expect(own.covers('iemand.anders@eigenbureau.nl'), isFalse);
     });
 
     test('een domein dekt elk adres eronder', () {
       // Zodat een organisatie niet elke collega hoeft op te sommen.
-      const own = OwnIdentity(['politie.nl']);
-      expect(own.covers('j.jansen@politie.nl'), isTrue);
-      expect(own.covers('woordvoerder@pers.politie.nl'), isTrue);
+      const own = OwnIdentity(['andersbureau.nl']);
+      expect(own.covers('j.jansen@andersbureau.nl'), isTrue);
+      expect(own.covers('woordvoerder@pers.andersbureau.nl'), isTrue);
     });
 
     test('dekt geen ander domein', () {
-      const own = OwnIdentity(['politie.nl']);
+      const own = OwnIdentity(['andersbureau.nl']);
       expect(own.covers('j.jansen@om.nl'), isFalse);
-      expect(own.covers('j.jansen@nietpolitie.com'), isFalse);
+      expect(own.covers('j.jansen@nietandersbureau.com'), isFalse);
     });
 
     test('een look-alike domein wordt NIET gedekt', () {
-      // Dit is de val. Een losse substring-match zou `nietpolitie.nl` laten
-      // dekken door de opgave `politie.nl` — een heel andere organisatie, en de
+      // Dit is de val. Een losse substring-match zou `nietandersbureau.nl` laten
+      // dekken door de opgave `andersbureau.nl` — een heel andere organisatie, en de
       // bevinding zou stilletjes verdwijnen. De grens moet een punt of een
       // apenstaartje zijn.
-      const own = OwnIdentity(['politie.nl']);
-      expect(own.covers('j.jansen@nietpolitie.nl'), isFalse);
-      expect(own.covers('x@mijnpolitie.nl'), isFalse);
+      const own = OwnIdentity(['andersbureau.nl']);
+      expect(own.covers('j.jansen@nietandersbureau.nl'), isFalse);
+      expect(own.covers('x@mijnandersbureau.nl'), isFalse);
     });
 
     test('een lege lijst dekt niets', () {
       expect(OwnIdentity.empty.covers('wat dan ook'), isFalse);
       expect(
-        const OwnIdentity(['', '   ']).covers('brenno@dewinter.com'),
+        const OwnIdentity(['', '   ']).covers('a.bakker@eigenbureau.nl'),
         isFalse,
       );
     });
 
     test('round-trip door het tekstveld', () {
       final own = OwnIdentity.fromLines(
-        'brenno@dewinter.com\n\n  dewinter.com  \n',
+        'a.bakker@eigenbureau.nl\n\n  eigenbureau.nl  \n',
       );
-      expect(own.entries, ['brenno@dewinter.com', 'dewinter.com']);
-      expect(own.toLines(), 'brenno@dewinter.com\ndewinter.com');
+      expect(own.entries, ['a.bakker@eigenbureau.nl', 'eigenbureau.nl']);
+      expect(own.toLines(), 'a.bakker@eigenbureau.nl\neigenbureau.nl');
     });
   });
 
   group('in de scanner', () {
     test('het eigen adres is geen bevinding', () {
-      final deck = deckMet('Contact: brenno@dewinter.com');
+      final deck = deckMet('Contact: a.bakker@eigenbureau.nl');
 
       expect(
         const PrivacyScanner().scan(deck).firedRules,
@@ -84,7 +84,7 @@ void main() {
       );
       expect(
         PrivacyScanner(
-          ownIdentity: OwnIdentity.fromLines('brenno@dewinter.com'),
+          ownIdentity: OwnIdentity.fromLines('a.bakker@eigenbureau.nl'),
         ).scan(deck).firedRules,
         isEmpty,
       );
@@ -92,10 +92,10 @@ void main() {
 
     test('het adres van iemand anders wél', () {
       final deck = deckMet(
-        'Contact: brenno@dewinter.com en j.jansen@politie.nl',
+        'Contact: a.bakker@eigenbureau.nl en j.jansen@andersbureau.nl',
       );
       final result = PrivacyScanner(
-        ownIdentity: OwnIdentity.fromLines('dewinter.com'),
+        ownIdentity: OwnIdentity.fromLines('eigenbureau.nl'),
       ).scan(deck);
 
       expect(result.findings, hasLength(1));
@@ -105,12 +105,15 @@ void main() {
     test('ook het auteursveld van het deck', () {
       // Dat veld reist mee in de PDF-properties, dus het wordt gescand — maar de
       // auteur van het deck is per definitie de afzender.
-      final deck = deckMet('Kwartaalcijfers', auteur: 'brenno@dewinter.com');
+      final deck = deckMet(
+        'Kwartaalcijfers',
+        auteur: 'a.bakker@eigenbureau.nl',
+      );
 
       expect(const PrivacyScanner().scan(deck).findings, hasLength(1));
       expect(
         PrivacyScanner(
-          ownIdentity: OwnIdentity.fromLines('dewinter.com'),
+          ownIdentity: OwnIdentity.fromLines('eigenbureau.nl'),
         ).scan(deck).isEmpty,
         isTrue,
       );
@@ -122,18 +125,18 @@ void main() {
       // Zwart in de export zetten zou de contactslide onbruikbaar maken — en die
       // staat er in vrijwel elk deck in.
       final deck = deckMet(
-        'Contact: brenno@dewinter.com of j.jansen@politie.nl',
+        'Contact: a.bakker@eigenbureau.nl of j.jansen@andersbureau.nl',
         stand: PrivacyDisposition.redact,
       );
 
       final out = PrivacyProjection.forAudience(
         deck,
-        ownIdentity: OwnIdentity.fromLines('dewinter.com'),
+        ownIdentity: OwnIdentity.fromLines('eigenbureau.nl'),
       );
       final bullet = out.slides.single.bullets.single;
 
-      expect(bullet, contains('brenno@dewinter.com'));
-      expect(bullet.contains('j.jansen@politie.nl'), isFalse);
+      expect(bullet, contains('a.bakker@eigenbureau.nl'));
+      expect(bullet.contains('j.jansen@andersbureau.nl'), isFalse);
       expect(out.redactionCount, 1);
     });
   });

@@ -1777,6 +1777,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'naam@example.org\nexample.org': 'nimi@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Tämän deckin vieressä ollut taso oli liian suuri eikä sitä ladattu; itse tiedosto on muuttumaton:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -2777,8 +2778,8 @@ const _dutchSourceAddFi = <String, String>{
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'upotettu kuva — emme näe sen sisään',
   'Je eigen gegevens': 'Omat tietosi',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Yksi riviä kohti: nimesi, sähköpostiosoitteesi, puhelinnumerosi tai organisaatiosi verkkotunnus. Tässä olevaa ei ilmoiteta eikä peitetä — se on lähettäjä, ei havainto. Verkkotunnus (politie.nl) kattaa kaikki sen alla olevat osoitteet.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Yksi riviä kohti: nimesi, sähköpostiosoitteesi, puhelinnumerosi tai organisaatiosi verkkotunnus. Tässä olevaa ei ilmoiteta eikä peitetä — se on lähettäjä, ei havainto. Verkkotunnus (example.org) kattaa kaikki sen alla olevat osoitteet.',
   'Bij onafgehandelde persoonsgegevens':
       'Käsittelemättömien henkilötietojen kohdalla',
   'Export afgebroken vanwege privacybevindingen.':

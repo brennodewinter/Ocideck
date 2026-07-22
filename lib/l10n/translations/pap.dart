@@ -734,6 +734,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'naam@example.org\nexample.org': 'nomber@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Un kapa banda di e deck aki tabata muchu grandi i no a wòrdu lesá; e archivo mes no a kambia:',
   'Deze tijdstempel hoort niet bij het laatste verzoek':
@@ -1748,8 +1749,8 @@ const _dutchSourceAddPap = {
   'ingesloten afbeelding — wij kunnen er niet in kijken':
       'imagen inkorporá — nos no por wak paden',
   'Je eigen gegevens': 'Bo mes datos',
-  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
-      'Un pa liña: bo nòmber, adres di e-mail, number di telefòn òf e dominio di bo organisashon. Loke ta pará aki no ta wòrdu reportá ni redaktá — ta e remitente, no un hayasgo. Un dominio (politie.nl) ta kubri tur adres bou di dje.',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
+      'Un pa liña: bo nòmber, adres di e-mail, number di telefòn òf e dominio di bo organisashon. Loke ta pará aki no ta wòrdu reportá ni redaktá — ta e remitente, no un hayasgo. Un dominio (example.org) ta kubri tur adres bou di dje.',
   'Bij onafgehandelde persoonsgegevens': 'Ku datos personal no resolví',
   'Export afgebroken vanwege privacybevindingen.':
       'Eksportashon kanselá pa motibu di hayasgo di privasidat.',

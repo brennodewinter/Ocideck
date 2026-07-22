@@ -40,14 +40,14 @@ class OwnIdentity {
   ///
   /// Twee manieren, allebei exact:
   ///
-  ///   * een exacte match na normalisatie — `Brenno@dewinter.com` dekt
-  ///     `brenno@dewinter.com`, maar niet het adres van een collega;
-  ///   * een domeinopgave dekt elk adres eronder — `politie.nl` dekt
-  ///     `j.jansen@politie.nl` en `pers@woordvoering.politie.nl`, zodat een
+  ///   * een exacte match na normalisatie — `Naam@example.org` dekt
+  ///     `naam@example.org`, maar niet het adres van een collega;
+  ///   * een domeinopgave dekt elk adres eronder — `example.org` dekt
+  ///     `jansen@example.org` en `pers@afdeling.example.org`, zodat een
   ///     organisatie niet elke collega hoeft op te sommen.
   ///
-  /// Bewust **geen** losse substring-match. Die zou `politie.nl` ook
-  /// `j.jansen@nietpolitie.nl` laten dekken — een adres van een heel andere
+  /// Bewust **geen** losse substring-match. Die zou `example.org` ook
+  /// `jansen@nietexample.org` laten dekken — een adres van een heel andere
   /// organisatie, stilletjes onderdrukt. Wie zich hierin vergist, onderdrukt een
   /// échte bevinding, en dat is precies het soort fout dat je niet merkt.
   bool covers(String value) {
@@ -63,8 +63,8 @@ class OwnIdentity {
       if (needle == own) return true;
 
       // Een domeinopgave (geen apenstaartje, wel een punt) dekt elk adres
-      // eronder. De grens is een punt of een apenstaartje — `nietpolitie.nl`
-      // eindigt weliswaar op `politie.nl`, maar niet op `.politie.nl`.
+      // eronder. De grens is een punt of een apenstaartje — `nietexample.org`
+      // eindigt weliswaar op `example.org`, maar niet op `.example.org`.
       if (!own.contains('@') && own.contains('.')) {
         if (needle.endsWith('@$own') || needle.endsWith('.$own')) return true;
       }
