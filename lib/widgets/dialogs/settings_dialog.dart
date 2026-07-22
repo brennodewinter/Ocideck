@@ -604,6 +604,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   }
 
   Future<void> _pickLogo() async {
+    // De knop bestaat op web niet (zie _logoSectionChildren), maar de poort
+    // staat hier ook: op web levert pickFiles een blob:-URL in `path`, en die
+    // zou als logoPath in het themaprofiel belanden en na herladen nergens meer
+    // heen wijzen. Een stille, onherstelbare instelling is erger dan een
+    // ontbrekende knop.
+    if (!supportsLocalProjectFolders) return;
     final result = await FilePicker.pickFiles(
       dialogTitle: context.l10n.d('Logo kiezen'),
       type: FileType.image,

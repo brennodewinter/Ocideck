@@ -405,79 +405,88 @@ extension _SettingsColors on _SettingsDialogState {
   List<Widget> _logoSectionChildren() {
     final l10n = context.l10n;
     return [
-      Row(
-        children: [
-          Expanded(
-            child: _pathBox(
-              _themeProfile.logoPath ?? l10n.d('Geen logo ingesteld'),
-              muted: _themeProfile.logoPath == null,
+      // Een logo wordt als pad in het themaprofiel bewaard, en zo'n pad bestaat
+      // in de browser niet: de bestandskiezer geeft daar een blob:-URL terug
+      // die na herladen nergens meer heen wijst. Dus verbergen we de hele
+      // logo-instelling op web, net als de andere kiezers (zie
+      // settings_dialog_storage.dart) — liever geen knop dan een knop die niet
+      // doet wat hij belooft. Footer en slotdia blijven wél staan; die hebben
+      // geen bestandssysteem nodig.
+      if (supportsLocalProjectFolders) ...[
+        Row(
+          children: [
+            Expanded(
+              child: _pathBox(
+                _themeProfile.logoPath ?? l10n.d('Geen logo ingesteld'),
+                muted: _themeProfile.logoPath == null,
+              ),
             ),
-          ),
-          const SizedBox(width: 8),
-          ElevatedButton.icon(
-            onPressed: _pickLogo,
-            icon: const Icon(Icons.image_outlined, size: 16),
-            label: Text(l10n.d('Kiezen')),
-          ),
-          if (_themeProfile.logoPath != null)
-            IconButton(
-              onPressed: () => _rebuild(() {
-                _themeProfile = _themeProfile.copyWith(clearLogo: true);
-                _profileTouched = true;
-              }),
-              icon: const Icon(Icons.clear, size: 18),
-              tooltip: l10n.d('Verwijder logo'),
+            const SizedBox(width: 8),
+            ElevatedButton.icon(
+              onPressed: _pickLogo,
+              icon: const Icon(Icons.image_outlined, size: 16),
+              label: Text(l10n.d('Kiezen')),
             ),
-        ],
-      ),
-      const SizedBox(height: 18),
-      DropdownButtonFormField<String>(
-        initialValue: _themeProfile.logoPosition,
-        decoration: InputDecoration(
-          labelText: l10n.d('Logo positie'),
-          isDense: true,
+            if (_themeProfile.logoPath != null)
+              IconButton(
+                onPressed: () => _rebuild(() {
+                  _themeProfile = _themeProfile.copyWith(clearLogo: true);
+                  _profileTouched = true;
+                }),
+                icon: const Icon(Icons.clear, size: 18),
+                tooltip: l10n.d('Verwijder logo'),
+              ),
+          ],
         ),
-        items: [
-          DropdownMenuItem(
-            value: 'top-left',
-            child: Text(l10n.d('Linksboven')),
-          ),
-          DropdownMenuItem(
-            value: 'top-right',
-            child: Text(l10n.d('Rechtsboven')),
-          ),
-          DropdownMenuItem(
-            value: 'bottom-left',
-            child: Text(l10n.d('Linksonder')),
-          ),
-          DropdownMenuItem(
-            value: 'bottom-right',
-            child: Text(l10n.d('Rechtsonder')),
-          ),
-        ],
-        onChanged: (v) {
-          if (v != null) {
-            _rebuild(() {
-              _themeProfile = _themeProfile.copyWith(logoPosition: v);
-              _profileTouched = true;
-            });
-          }
-        },
-      ),
-      const SizedBox(height: 14),
-      SizedBox(
-        width: 160,
-        child: TextField(
-          controller: _logoSize,
+        const SizedBox(height: 18),
+        DropdownButtonFormField<String>(
+          initialValue: _themeProfile.logoPosition,
           decoration: InputDecoration(
-            labelText: context.l10n.d('Logo px'),
+            labelText: l10n.d('Logo positie'),
             isDense: true,
           ),
-          keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-          onChanged: (_) => _profileTouched = true,
+          items: [
+            DropdownMenuItem(
+              value: 'top-left',
+              child: Text(l10n.d('Linksboven')),
+            ),
+            DropdownMenuItem(
+              value: 'top-right',
+              child: Text(l10n.d('Rechtsboven')),
+            ),
+            DropdownMenuItem(
+              value: 'bottom-left',
+              child: Text(l10n.d('Linksonder')),
+            ),
+            DropdownMenuItem(
+              value: 'bottom-right',
+              child: Text(l10n.d('Rechtsonder')),
+            ),
+          ],
+          onChanged: (v) {
+            if (v != null) {
+              _rebuild(() {
+                _themeProfile = _themeProfile.copyWith(logoPosition: v);
+                _profileTouched = true;
+              });
+            }
+          },
         ),
-      ),
+        const SizedBox(height: 14),
+        SizedBox(
+          width: 160,
+          child: TextField(
+            controller: _logoSize,
+            decoration: InputDecoration(
+              labelText: context.l10n.d('Logo px'),
+              isDense: true,
+            ),
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            onChanged: (_) => _profileTouched = true,
+          ),
+        ),
+      ],
       ..._footerSettings(),
       ..._closingSlideSettings(),
     ];
