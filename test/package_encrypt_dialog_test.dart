@@ -55,6 +55,17 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  /// Versleutelen aanzetten vult het veld sinds 2026-07-22 met een gegenereerd
+  /// wachtwoord: de sleutelafleiding van het zip-formaat is zwak en vastgelegd,
+  /// dus de entropie van het wachtwoord is de maatregel die nog in onze hand
+  /// ligt. Toetsen die juist de lége staat als onderwerp hebben, maken hem hier
+  /// expliciet leeg in plaats van erop te vertrouwen.
+  Future<void> enableAndClear(WidgetTester tester) async {
+    await enableEncryption(tester);
+    await tester.enterText(find.byType(TextField), '');
+    await tester.pumpAndSettle();
+  }
+
   testWidgets('versleutelen staat uit, en dan is er niets in te vullen', (
     tester,
   ) async {
@@ -92,7 +103,7 @@ void main() {
       const MaterialApp(home: Scaffold(body: PackageEncryptDialog())),
     );
     await tester.pumpAndSettle();
-    await enableEncryption(tester);
+    await enableAndClear(tester);
 
     expect(find.byType(TextField), findsOneWidget);
     // Een leeg wachtwoord zou een pakket opleveren dat niemand kan openen.
@@ -168,6 +179,58 @@ void main() {
     expect(choice, isNull);
   });
 
+  testWidgets('versleutelen aanzetten levert meteen een sterk wachtwoord', (
+    tester,
+  ) async {
+    // Geen gemak maar de maatregel zelf: de sleutelafleiding van het AES-zip
+    // formaat (PBKDF2-HMAC-SHA1, 1000 iteraties) ligt vast in de WinZip-spec en
+    // is van hieruit niet te verhogen zonder het formaat te verlaten — en dan
+    // kan geen ander zip-gereedschap het pakket meer openen. Wat wél in onze
+    // hand ligt is de entropie van het wachtwoord, en daar leunt een zwakke KDF
+    // volledig op. Een leeg veld nodigt uit tot iets onthoudbaars.
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: PackageEncryptDialog())),
+    );
+    await tester.pumpAndSettle();
+    await enableEncryption(tester);
+
+    final field = tester.widget<TextField>(find.byType(TextField));
+    expect(field.controller!.text.length, shortPasswordLength);
+    expect(
+      estimatePasswordStrength(field.controller!.text).isWeak,
+      isFalse,
+      reason: 'wat er standaard staat mag nooit als zwak gelden',
+    );
+    expect(
+      field.obscureText,
+      isFalse,
+      reason: 'niemand kan een wachtwoord bewaren dat hij nooit heeft gezien',
+    );
+  });
+
+  testWidgets('een zelf getypt wachtwoord wordt niet overschreven', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: PackageEncryptDialog())),
+    );
+    await tester.pumpAndSettle();
+    await enableEncryption(tester);
+    await tester.enterText(find.byType(TextField), 'mijn-eigen-zin');
+    await tester.pumpAndSettle();
+
+    // Uit en weer aan: wat de gebruiker zelf koos blijft staan.
+    await tester.tap(find.byType(SwitchListTile));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(SwitchListTile));
+    await tester.pumpAndSettle();
+
+    expect(
+      tester.widget<TextField>(find.byType(TextField)).controller!.text,
+      'mijn-eigen-zin',
+    );
+  });
+
   testWidgets('de generator levert de gekozen lengte en toont hem meteen', (
     tester,
   ) async {
@@ -178,7 +241,10 @@ void main() {
     await enableEncryption(tester);
 
     TextField field() => tester.widget<TextField>(find.byType(TextField));
-    expect(field().obscureText, isTrue);
+    // Aanzetten vult het veld al met de korte gedocumenteerde lengte; de knop
+    // moet daarna nog steeds een vers wachtwoord van diezelfde lengte leveren.
+    expect(field().controller!.text.length, shortPasswordLength);
+    final eerste = field().controller!.text;
 
     await tester.tap(
       find.widgetWithText(OutlinedButton, 'Genereer sterk wachtwoord'),
@@ -186,6 +252,11 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(field().controller!.text.length, shortPasswordLength);
+    expect(
+      field().controller!.text,
+      isNot(eerste),
+      reason: 'de knop hoort een nieuw wachtwoord te trekken',
+    );
     // Net gegenereerd: verborgen houden zou het onmogelijk maken om het over
     // te nemen en door te geven.
     expect(field().obscureText, isFalse);
@@ -222,7 +293,7 @@ void main() {
       const MaterialApp(home: Scaffold(body: PackageEncryptDialog())),
     );
     await tester.pumpAndSettle();
-    await enableEncryption(tester);
+    await enableAndClear(tester);
 
     IconButton copyButton() => tester.widget<IconButton>(
       find.ancestor(
@@ -250,7 +321,7 @@ void main() {
       const MaterialApp(home: Scaffold(body: PackageEncryptDialog())),
     );
     await tester.pumpAndSettle();
-    await enableEncryption(tester);
+    await enableAndClear(tester);
 
     // Leeg: geen balk, wel de tip die uitlegt wat wél helpt.
     expect(find.byType(LinearProgressIndicator), findsNothing);
@@ -329,14 +400,17 @@ void main() {
     await enableEncryption(tester);
 
     TextField field() => tester.widget<TextField>(find.byType(TextField));
-    expect(field().obscureText, isTrue);
-
-    await tester.tap(find.byTooltip('Wachtwoord tonen'));
-    await tester.pumpAndSettle();
+    // Vers gegenereerd staat het zichtbaar: verborgen houden zou het onmogelijk
+    // maken over te nemen, en niemand kan een wachtwoord bewaren dat hij nooit
+    // heeft gezien.
     expect(field().obscureText, isFalse);
 
     await tester.tap(find.byTooltip('Wachtwoord verbergen'));
     await tester.pumpAndSettle();
     expect(field().obscureText, isTrue);
+
+    await tester.tap(find.byTooltip('Wachtwoord tonen'));
+    await tester.pumpAndSettle();
+    expect(field().obscureText, isFalse);
   });
 }
