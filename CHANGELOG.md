@@ -112,6 +112,29 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   exporteren gewoon op de voorgrond staan. De HTML-export heeft hier geen last
   van; die tekent geen dia's.
 
+- **Uw wachtwoord en uw git-token gaan niet meer onversleuteld over het
+  netwerk.** Had u een opslagserver als "vertrouwd intern" gemarkeerd — bedoeld
+  voor een eigen doos op uw eigen netwerk — dan stond OciDeck een gewone
+  `http`-verbinding toe. Bij WebDAV en git ging uw inloggegeven daar bij élk
+  verzoek in leesbare vorm overheen.
+
+  Die vink gaat over de sérver, niet over de weg ernaartoe. Dat verschil is bij
+  de inhoud van een presentatie te overzien — u kiest zelf of u dat over uw LAN
+  wilt sturen — maar bij een wachtwoord of token niet: wie het één keer
+  onderschept, houdt het, en het blijft werken lang nadat die persoon weg is.
+
+  Voor zo'n verbinding is `https` nu vereist. Wat blijft werken: een openbare
+  bron zonder inloggegeven, en S3/MinIO (dat ondertekent elk verzoek apart, dus
+  er gaat geen herbruikbaar geheim over de lijn). Draait de server op deze
+  computer zelf, dan verandert er ook niets — dat verkeer verlaat de machine
+  niet.
+
+  Merkt u dit? Dan werd uw wachtwoord tot nu toe leesbaar verstuurd. Zet de
+  server op https, of gebruik hem zonder inloggegeven.
+- **Een presentatie kan niet meer naar willekeurige poorten verbinden.** Haalde
+  een dia een afbeelding of video van een adres op, dan werd wel gecontroleerd
+  wélke computer dat was, maar niet op welke poort. De webversie deed dat al
+  wel. Beide kanten hanteren nu dezelfde lijst.
 - **De webversie zegt nu ook waar een formulier níet heen mag.** De
   beveiligingsregels van de webbundel bepalen per soort verkeer waar de pagina
   iets vandaan mag halen. Voor het versturen van een formulier stond dat er niet
