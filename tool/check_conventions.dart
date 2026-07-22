@@ -190,6 +190,109 @@ const Map<String, List<String>> audienceBoundary = {
   'lib/widgets/dialogs/export_dialog.dart': ['show'],
 };
 
+// ── FilePicker: een pad uit de kiezer, zonder platformpoort ─────────────────
+//
+// Issue #150: knoppen in de web-demo deden niets. De oorzaak was
+// `FilePicker.getDirectoryPath()`, dat in de browser geen implementatie heeft
+// en stil null teruggeeft. Gerepareerd door de knoppen te verbergen — maar niets
+// bewaakte die reparatie, en een dag later stond dezelfde fout er alweer bij
+// (#506, de logokiezer).
+//
+// Een test kan dit niet vangen: onder `flutter test` is `kIsWeb` altijd false,
+// de vlag komt via een conditionele import zonder injectiepunt, en er is geen
+// `--platform chrome`-doel. Vandaar een statische regel.
+//
+// Twee gedaanten, allebei "ik krijg een pad in het bestandssysteem":
+//   * `getDirectoryPath(` — bestaat niet op web, geeft stil null.
+//   * `pickFiles(` waarvan `.path` gelezen wordt zonder `withData: true` —
+//     werkt wél, maar levert een `blob:`-URL die nergens heen wijst.
+// `saveFile(bytes:)` staat er bewust NIET bij: dat is op web een download en
+// doet precies wat het belooft.
+final _getDirectoryPath = RegExp(r'FilePicker\.getDirectoryPath\s*\(');
+final _pickFiles = RegExp(r'FilePicker\.pickFiles\s*\(');
+final _platformFlag = RegExp(
+  r'\b(supportsLocalProjectFolders|isWebPlatform)\b',
+);
+
+/// Bestanden die vandaag een pad uit de kiezer halen zonder de vlag zelf te
+/// noemen. **Deze lijst mag alleen krimpen.** Elk geval vraagt een eigen
+/// afweging — verbergen op web, of de bytes-route nemen — en die staat per
+/// regel genoteerd. Zolang een bestand hier staat, is het níet goedgekeurd: het
+/// is opgeschreven.
+const Map<String, String> filePickerPathBaseline = {
+  'lib/services/file_service.dart':
+      'twee pickFiles die .path lezen; de aanroepers poorten, het bestand zelf niet',
+  'lib/services/image_service.dart':
+      'drie pickFiles die .path lezen, terwijl dit juist de service is die op web mem:-sleutels hanteert — zie #526',
+  'lib/widgets/dialogs/open_presentation_dialog.dart':
+      'getDirectoryPath; gepoort bij de aanroeper (shell_actions.dart)',
+  'lib/widgets/dialogs/slide_finder_dialog.dart':
+      'getDirectoryPath; gepoort bij de aanroeper (slide_list_panel.dart)',
+  'lib/widgets/dialogs/import_slides_dialog.dart':
+      'getDirectoryPath; gepoort bij de aanroeper (slide_list_panel.dart)',
+  'lib/widgets/dialogs/save_destination_dialog.dart':
+      'getDirectoryPath; gepoort bij de aanroeper (deck_provider.dart)',
+  'lib/widgets/dialogs/parts/image_carousel_picker_actions.dart':
+      'pickFiles die .path leest, aanroepers ongepoort — openstaande bug, zie #526',
+};
+
+/// Leest een `pickFiles(`-aanroep uit en zegt of hij een pad oplevert dat op
+/// web onbruikbaar is. Kijkt naar het venster ná de aanroep in plaats van naar
+/// de aanroep alleen, omdat `withData:` in de argumenten staat en `.path` een
+/// paar regels verderop wordt gelezen.
+bool _pickFilesYieldsPath(String source, int from) {
+  // Ruim genomen: de langste bestaande aanroep beslaat zes regels tussen
+  // `pickFiles(` en het lezen van `.path`. Twintig regels vangt een wat
+  // ruimere schrijfwijze zonder de volgende methode binnen te trekken.
+  const window = 20;
+  final lines = source.substring(from).split('\n');
+  final scope = lines.take(window).join('\n');
+  if (scope.contains('withData: true')) return false;
+  return scope.contains('.path');
+}
+
+/// Bestanden in `lib/` die een pad uit FilePicker halen zonder ergens in
+/// hetzelfde bestand een platformvlag te noemen.
+List<String> _filePickerPathViolations() {
+  final hits = <String>[];
+  final seen = <String>{};
+
+  for (final file in Directory('lib').listSync(recursive: true)) {
+    if (file is! File || !file.path.endsWith('.dart')) continue;
+    final source = file.readAsStringSync();
+    if (!source.contains('FilePicker.')) continue;
+
+    final reasons = <String>[];
+    if (_getDirectoryPath.hasMatch(source)) reasons.add('getDirectoryPath');
+    for (final match in _pickFiles.allMatches(source)) {
+      if (_pickFilesYieldsPath(source, match.end)) {
+        reasons.add('pickFiles → .path');
+        break;
+      }
+    }
+    if (reasons.isEmpty) continue;
+
+    final path = file.path;
+    seen.add(path);
+    if (_platformFlag.hasMatch(source)) continue;
+    if (filePickerPathBaseline.containsKey(path)) continue;
+
+    hits.add('$path: ${reasons.join(', ')} — zonder platformpoort');
+  }
+
+  // Een basislijn die niet meer klopt is erger dan geen basislijn: hij leest als
+  // "hier is over nagedacht" terwijl het bestand allang weg is of gerepareerd.
+  for (final path in filePickerPathBaseline.keys) {
+    if (!seen.contains(path)) {
+      hits.add(
+        '$path: staat in filePickerPathBaseline maar haalt geen pad meer uit '
+        'FilePicker — haal de regel weg, de lijst mag alleen krimpen',
+      );
+    }
+  }
+  return hits;
+}
+
 /// Typen die in zo'n parameterlijst een lek zouden betekenen.
 final _rawDeckParam = RegExp(r'\b(Deck|List<Slide>)\b\s+\w+');
 
@@ -398,6 +501,21 @@ void main() {
     );
   }
 
+  final pickerHits = _filePickerPathViolations();
+  if (pickerHits.isNotEmpty) {
+    failures.add(
+      'Een pad uit FilePicker zonder platformpoort. In de browser bestaat '
+      '`getDirectoryPath` niet (stil null) en levert `pickFiles` een '
+      '`blob:`-URL in `.path` — de knop doet dan niets, of erger: hij lijkt te '
+      'lukken en de instelling is na herladen weg. Dat was #150 en daarna '
+      '#506. Noem `supportsLocalProjectFolders` (of `isWebPlatform`) in dit '
+      'bestand, of gebruik `withData: true` en werk met de bytes. Zie '
+      'filePickerPathBaseline in tool/check_conventions.dart — die lijst mag '
+      'alleen krimpen:\n'
+      '    ${pickerHits.join('\n    ')}',
+    );
+  }
+
   final boundaryHits = _audienceBoundaryViolations();
   if (boundaryHits.isNotEmpty) {
     failures.add(
@@ -521,7 +639,8 @@ void main() {
       'lib/services at ${serviceUiImports.length} (baseline '
       '$serviceUiImportBaseline) and in lib/models at '
       '${modelUiImports.length}; layer direction clean; file sizes within '
-      'ceilings.',
+      'ceilings; FilePicker paths gated '
+      '(baseline ${filePickerPathBaseline.length}).',
     );
     if (serviceUiImports.length < serviceUiImportBaseline) {
       stdout.writeln(

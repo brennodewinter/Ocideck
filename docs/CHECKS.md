@@ -108,7 +108,7 @@ coverage improves rather than treated as a target already met.
 | --- | --- | :---: | :---: | :---: |
 | [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ |
 | [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ |
-| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering & file-size ratchets | ✅ | ✅ | ✅ |
+| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering, file-size & FilePicker-gate ratchets | ✅ | ✅ | ✅ |
 | [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ |
 | [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ |
 | [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — |
@@ -193,7 +193,7 @@ also declares them, but see the [CI note](#continuous-integration).)
     and the escape costs nothing: the resulting string is byte-identical;
   - **layering ratchet** — `lib/models/` may not import Flutter's UI layer or
     `lib/widgets/` at all (hard **0**), and the count in `lib/services/` may
-    shrink but never grow (`serviceUiImportBaseline`, currently **8**). A
+    shrink but never grow (`serviceUiImportBaseline`, currently **4**). A
     service is the headless core: usable without a widget tree, testable
     without pumping one. `foundation.dart`/`services.dart` are exempt — they
     carry no widget tree.
@@ -204,6 +204,22 @@ also declares them, but see the [CI note](#continuous-integration).)
     time. A ceiling may shrink (split the file) but never grow, so large files
     trend smaller instead of creeping bigger. `lib/l10n/translations/*` is
     exempt (those grow with every UI string).
+  - **FilePicker paths behind a platform gate** — a file in `lib/` that takes a
+    filesystem path from the file picker must name
+    `supportsLocalProjectFolders` (or `isWebPlatform`) itself. Two shapes count:
+    `FilePicker.getDirectoryPath(`, which has no web implementation and returns
+    `null` without a sound, and `FilePicker.pickFiles(` whose `.path` is read
+    without `withData: true`, which on web hands back a `blob:` URL that points
+    nowhere after a reload. `saveFile(bytes:)` is deliberately excluded — in a
+    browser that is a download and does what it promises. This is a **ratchet**:
+    `filePickerPathBaseline` lists the files that gate at their *caller* rather
+    than in the file itself, and it may only shrink; a stale entry is reported
+    too, because a baseline that no longer matches reality reads as "someone
+    thought about this" when nobody did. The rule exists because a test cannot:
+    `kIsWeb` is always `false` under `flutter test`, the flag arrives through a
+    conditional import with no injection point, and there is no
+    `--platform chrome` target — so a widget test sits green around the broken
+    branch. That is how the buttons in issue #150 came back as #506.
   - **privacy projection boundary** — every surface that hands slide content to
     a recipient (`SlideRasterizer.rasterize`, `FullscreenPresenter.present`,
     `ExportDialog.show`) must take an `AudienceDeck` and must not accept a raw
