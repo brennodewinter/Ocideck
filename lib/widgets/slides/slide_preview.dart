@@ -64,6 +64,7 @@ import 'image_zoom_dialog.dart';
 
 // Slide preview widgets, split into part files by slide type for
 // navigability. These parts share this library's imports and private scope.
+part 'previews/preview_scaffold.dart';
 part 'previews/text_previews.dart';
 part 'previews/bullets_previews.dart';
 part 'previews/bullets_image_preview.dart';

@@ -476,6 +476,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 
 ### `lib/widgets/slides/previews/` (each `part of slide_preview.dart`)
 
+- `preview_scaffold.dart` — `_PreviewScaffold`: the outer skeleton the report-style previews share — a filled area, a scale-down `FittedBox` over a fixed slide width, the logo-aware margin, and the column under it. Checklist, scope matrix, findings summary, sign-off, finding, free markdown, asset overview and discoveries use it. Chart, cockpit, table and scorecard deliberately do not: they compute their own aspect ratio, drop the `SizedBox.expand`, or give the box a fixed height, and bending the scaffold to cover them would turn it into a widget with ten switches.
 - `bullets_previews.dart` — Bullet-point slide layout.
 - `chart_preview.dart` — Chart slide rendering + dispatch, legend, hover, and screen-reader text for every chart type.
 - `chart_preview_extra.dart` — Hand-drawn builders for the horizontal-bar, horizontal-stacked-bar, combo, waterfall, and heatmap chart types.
