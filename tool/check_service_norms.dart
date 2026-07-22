@@ -2,7 +2,7 @@
 //
 //   dart run tool/check_service_norms.dart              (of: make servicenormen)
 //   dart run tool/check_service_norms.dart --advisory   (rapporteert, faalt nooit)
-//   dart run tool/check_service_norms.dart --quiet       (zwijgt als alles goed is)
+//   dart run tool/check_service_norms.dart --quiet      (zwijgt als alles goed is)
 //
 // ── Waarom dit hier staat en niet in docs/ ──────────────────────────────────
 //
