@@ -1783,6 +1783,12 @@ const _dutchSourceAddFi = <String, String>{
   'Zegel nog niet vastgelegd': 'Sinettiä ei ole vielä kirjattu',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Tallennettua tiedostoa, jota vasten sinetin voisi tarkistaa, ei vielä ole. Tallenna diasarja.',
+  'Licenties van derden': 'Kolmansien osapuolten lisenssit',
+  'Alle licentieteksten tonen': 'Näytä kaikki lisenssitekstit',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck itse julkaistaan EUPL-1.2-lisenssillä. Lisäksi se niputtaa kolmansien osapuolten ohjelmistoja: Dart- ja Flutter-paketit, kaksi mukana toimitettua liitännäistä, neljä kirjasinperhettä, yksityisyystarkistuksen kasvomallin ja JavaScriptin, joka kulkee HTML-viennin mukana. Kukin säilyttää oman lisenssinsä.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Tämä tiedosto sisältää kolmansien osapuolten ohjelmistoja ja toisinaan kirjasimen. Alla ovat niihin kuuluvat täydet lisenssitekstit; välitä ne tiedoston mukana.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

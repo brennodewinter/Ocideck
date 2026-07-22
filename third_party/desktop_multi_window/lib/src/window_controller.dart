@@ -1,3 +1,9 @@
+// NOTICE: This file was modified by the OciDeck project.
+// Original: desktop_multi_window (c) 2021 Mixin, Apache License 2.0 (see
+// ../../LICENSE), commit 58a5868d1cb9031defa5db5868d6aaea0486d24a.
+// Change: added the close(), setFrame() and coverScreen() window methods.
+// Modification notice per Apache-2.0 section 4(b); see ../../MODIFICATIONS.md.
+
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';

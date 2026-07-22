@@ -1799,6 +1799,12 @@ const _dutchSourceAddLa = <String, String>{
   'Zegel nog niet vastgelegd': 'Sigillum nondum consignatum',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Nulla adhuc tabella servata est ad sigillum recomputandum. Serva acervum.',
+  'Licenties van derden': 'Licentiae aliorum',
+  'Alle licentieteksten tonen': 'Omnes textus licentiarum monstrare',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck ipsum sub EUPL-1.2 est. Praeterea programmata aliorum colligit: fasciculos Dart et Flutter, duo additamenta inclusa, quattuor familias litterarum, exemplar vultus ad privatam custodiam et JavaScript quod in exportatione HTML comitatur. Unumquodque licentiam suam servat.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Hic fasciculus programmata aliorum et interdum litterarum formam continet. Infra sunt textus licentiarum pleni ad ea pertinentes; eos simul mitte cum hunc fasciculum tradis.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Bene',

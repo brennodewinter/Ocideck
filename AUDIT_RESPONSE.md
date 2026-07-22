@@ -1,8 +1,8 @@
 # Audit response
 
-> **Status:** report; the response to one external audit, with measurements re-taken on 2026-07-21 · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** report; the response to two external audits, with measurements re-taken on 2026-07-22 · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
 
-A response to an external code audit of OciDeck, point by point. Each item is
+A response to the external code audits of OciDeck, point by point. Each item is
 weighed against what the codebase actually does, with the measurement that
 supports the verdict. Where the audit found something real, the fix and its
 commit are named; where the premise did not hold, the counter-evidence is
@@ -19,6 +19,8 @@ behaviour to satisfy a metric which is already met is a net loss.
 > using `async`/`await` from 143 to 185, and the tooltips from 198 to 209. None
 > of the verdicts changed — every premise the audit got wrong is still wrong —
 > but a document that argues from numbers has to keep them true.
+
+# Audit I — code quality and usability
 
 ## Summary
 
@@ -181,3 +183,207 @@ The full suite passed when this response was written (3078 tests at that moment;
 it has grown since, and `make check` is where the current number lives). The
 changes above are additive — two new test files, three tooltip attachments and
 one decode hint — so no existing behaviour was modified.
+
+---
+
+# Audit II — security and architecture (2026-07-21)
+
+A four-stream review — architecture, code quality, static security, dynamic
+security (DAST) — of `lib/`, the Python fetch-proxy and the web shell. It rated
+one finding Critical, three High, thirteen Medium and six Low, and found **zero
+exploitable defects** in live testing: the SSRF defence held against all 24
+attack variants with a positive control ruling out a false pass.
+
+Every finding was taken up. The table below is the ledger; the sections after it
+give the reasoning where the verdict is anything other than "fixed".
+
+## Summary
+
+| ID | Finding | Severity | Verdict |
+|---|---|---|---|
+| AEG-01 | Redaction bypass on 7 scanned-but-unprojected fields | Critical | **Already closed** before the report landed — with the parity test the audit itself recommended |
+| AEG-02 | RFC 3161 TSA signature not verified | High | **Already degraded** — dialog, dossier and FILE_FORMAT all say so explicitly; full CMS verification stays §8-A3 |
+| AEG-03 | Fetch-proxy usable as an open relay when misconfigured | High | **Fixed** — release conditions in `docs/HOSTING.md` (#483); found an inverted claim in the proxy README on the way |
+| U-01 | New slide type is shotgun surgery over ~56 switch sites | High | **Partly fixed** (#473, #486); the rest is deliberate — see below |
+| X-02 | Redaction boundary thins below the entry points | Medium | **Fixed** (#472) — `export()` now takes an `ExportBundle`, `fromDeck` an `AudienceDeck` |
+| X-03 | SSRF guard is 7 copies without a build guard | Medium | **Premise stale**; the residual per-file gap fixed (#471) |
+| U-02 | Storage backends share no exception shape | Medium | **Deliberately not done** (#492) — no caller catches two; reasoning recorded in the code |
+| O-01 | 182 service units, no cluster docs | Medium | **Fixed** (#488) — cluster headers, and four real gaps in SOURCE_MAP closed |
+| O-02 | Settings god-provider | Medium | **Deliberately not now** — on the audit's own advice |
+| AEG-04 | Media URL gate does not pin the socket | Medium | **Fixed** for images (#485); for video the window is documented, not closed |
+| AEG-05 | RFC 3161 request carries no nonce | Medium | **Fixed** (#476), with an honest limit on in-app echo checking |
+| AEG-06 | 4-hex commitment id collides | Medium | **Fixed** (#480) — ≥8 chars, growing on collision |
+| K1.1 | Git-forge HTTP plumbing duplicated 3× | Medium | **Fixed** (#474) — 162 lines less |
+| K1.2 | Hex→Color parser written 6× | Medium | **Fixed** (#487) |
+| K1.3 | `PreviewScaffold` boilerplate repeated | Medium | **Fixed** (#479) — 8 previews; 4 deliberately left out |
+| K2.1 | Enum `switch` with `default:` disables the compiler net | Medium | **Fixed** (#473) — from 8 to 13 guarded sites |
+| AEG-07 | PBKDF2 iteration count is low (1000) | Low | **Already handled** — fixed by the WinZip AES spec, mitigated and documented |
+| AEG-10 | AI output must be human-reviewed before sealing | Low | **Already covered** by a real test |
+| AEG-11 | Content-Length trusted in the proxy stream | Low | No defect — the proxy counts bytes itself; the audit says so too |
+| M-01 | Import direction rests on reviewers | Info | **Fixed** (#489) — hard zero in `check_conventions` |
+| M-03 | UI imports inside `lib/services/` | Low | **Fixed** (#481) — ratchet from 8 to 4 |
+| K1.4 | `_asFailure` duplicated (WebDAV/S3) | Low | **Fixed** (#490) — one shared transport-error classifier |
+| K2.2 | Wide `Slide` value constructor | Low | Not done — the audit advises against it too |
+
+## AEG-01 — the Critical finding was already closed
+
+The audit is right about the mechanism and right that it mattered. It was also
+already fixed when the report arrived: `privacy_projection.dart` projects all
+seven fields (`version`, `date`, `standardsUsed`, `toolsUsed`, `miauwWaivers`,
+`miauwConfirmations`, `checklistScope`).
+
+Worth recording is *how*, because the audit offered two options and the code took
+the robust one. `test/privacy_scan_redact_parity_test.dart` puts all three
+hand-written field lists — the scanner's fragments, the projection, and the
+redaction manifest — side by side. Add a field to the scanner without adding it
+to the other two and the test goes red **naming that field**. The audit's
+sentence "there is no test that stops this" is the one line of its report that
+was already out of date.
+
+## X-03 — the premise was stale, the gap underneath was real
+
+The audit reports "no build guard against a forgotten 8th egress site". There
+is one, and it is broader than the proposal: `test/network_sink_guard_test.dart`
+scans for `HttpClient`, `package:http`, `dio`, and raw `Socket`/`SecureSocket`/
+`WebSocket`/`RawDatagramSocket`.
+
+What the audit's instinct did catch is a blind spot in that guard's *shape*: the
+allowlist is per **file**, so once `webdav_service.dart` is on it, a second,
+unpinned client inside that same file slips past. The allowlist proves "this file
+knows about the gate", not "every client in this file goes through it". Proving
+statically that an instance receives a `connectionFactory` is not possible —
+`local_cve_database_io.dart` constructs in `getJson` and pins in `_get`, and that
+is legitimate. So the *count* per file is now a ratchet (#471), tested in both
+directions: zero on the repo, red on a planted extra client.
+
+## U-01 — partly fixed, and the rest is deliberate
+
+Two things the audit could not weigh:
+
+**The silent-failure half is largely gone.** Six enum switches carrying
+`default:` were written out (#473). A planted 25th slide type now produces a
+compile error in **13** places where it produced 8. What remains is workload, not
+risk.
+
+**The registry cannot carry UI behaviour.** `slideTypeMeta` lives in
+`lib/models/slide.dart`, and `modelUiImportBaseline = 0` is a hard zero: a model
+may not import Flutter. A `buildPreview` hook there is impossible without
+breaking a boundary that is worth more than the convenience.
+
+So the work went where the compiler *cannot* see (#486): `backedByTable` replaced
+a hand-written set in the parser that duplicated a case group in the serializer —
+the silent trap the project's own slide-type checklist warns about — and
+`bulletColumns` replaced three copies of "can this bullet slide be split". The
+third copy, in `slide_thumbnail.dart`, was a `switch` with `_ => false`: a new
+bullet type would have been silently unsplittable there, so the split action
+appeared in the panel but not on the card. That was a latent defect, found by
+looking where the audit pointed.
+
+The 11 remaining switches are genuinely type-specific — the renderer, the
+wireframe drawing, the help text, the writer, three fit-scale functions, contrast
+pairs, media fields. Tabulating those yields an equally long table and nothing
+safer.
+
+## AEG-02 — degraded, deliberately and everywhere
+
+The audit offers "verify in full, or degrade the claim explicitly". The claim was
+already degraded, and consistently: the seal dialog states that the TSA signature
+is not verified in-app and deliberately shows no green "verified" badge; the
+audit dossier records `genTime` as a *claim*; `FILE_FORMAT.md` says the check is
+an imprint comparison only. Full CMS `SignedData` verification against the TSA
+certificate chain remains PENTEST_MIAUW §8-A3.
+
+## AEG-04 — closed for images, documented for video
+
+Images now fetch their own bytes over a socket pinned by `NetGuard.connectPinned`
+(#485), so `NetworkImage` never re-resolves the host and the TOCTOU window is
+gone.
+
+For **video** the window remains, and this is the honest part:
+`VideoPlayerController.networkUrl` hands the URL to a platform player that opens
+its own connection, and there is no byte-level seam to pin. What is left is an
+internal GET whose response never reaches the app — no credentials travel, and
+the static-internal and resolves-to-internal cases are still refused. That
+residual now sits in the docstring of `isAllowedMediaUrlResolved` instead of a
+general remark that read as if it covered images too.
+
+## AEG-05 — the nonce, and what it cannot do here
+
+The request now carries a `Random.secure` nonce (#476). What OciDeck cannot do is
+verify the echo on import: the request goes to a TSA out of band and the deck
+does not store it, so after a restart the other half is gone. Storing it would
+mean a new front-matter key, which would collide with the in-flight move of the
+seal to a sidecar. Anyone holding both files can check it
+(`openssl ts -reply -in … -text`). That limit is written down rather than left
+implied.
+
+## AEG-07 — fixed by the format, mitigated where it counts
+
+The audit is correct that WinZip AES derives its key with PBKDF2-HMAC-SHA1 at
+1000 iterations, and that this is low. The count is not ours to raise: it is
+fixed by the WinZip AES specification, and `archive` hard-codes it as a `const`.
+
+The proposed alternative — an own AES-256-GCM envelope with Argon2/scrypt —
+would trade away the property that makes the package worth having: any
+AES-zip-aware tool (7-Zip, Keka, WinZip) can open it. For a project whose stated
+purpose is maximal interchangeability, that is the wrong trade.
+
+What is under our control is the passphrase, and that is where the defence
+already sits: the export dialog shows an entropy-based strength meter and offers
+a generator (32 or 256 random characters) that is on by default. With a generated
+password the weak KDF is irrelevant. `FILE_FORMAT.md` §on key derivation states
+all of this, including a subtler hazard the audit did not reach — the ZIP-AES
+derivation truncates every UTF-16 code unit to its low 8 bits, so a non-ASCII
+passphrase silently loses entropy and may not open in other tools.
+
+## AEG-10 — already covered, and not vacuously
+
+`test/ai_assist_marker_test.dart` asserts that `finalizeAndSeal` refuses while a
+slide carries an unreviewed AI marker, and — the positive control that makes it
+mean something — that it *does* seal once the markers are cleared.
+
+## U-02 — measured, then declined
+
+The audit is right that three parallel exception hierarchies exist, and right to
+warn against forcing a fat shared base class. The proposal it *does* make — one
+`StorageConflictException` with a `source` field — was measured against the
+callers before being built, and it does not pay:
+
+- **No call site catches two of them.** `shell_actions.dart:341` (WebDAV),
+  `shell_actions_s3.dart:151` (S3), `tabs_provider_git.dart:490`/`:660` and
+  `sync_engine.dart:214` (git). Next to every conflict catch sits an
+  `on WebdavException` / `on S3Exception` for the ordinary failures, which stays
+  backend-specific either way — so the number of `catch` arms does not drop.
+- **"Conflict" means something different per backend.** For WebDAV and S3 it is a
+  question to the user (overwrite, or save elsewhere). For git it does not reach
+  the shell as a failure at all: it becomes a three-way merge, and only after
+  that a `GitSaveStatus.conflict`.
+- **The payloads genuinely differ** — an ETag versus `baseSha` + branch. That is
+  the same argument `storage_origin.dart` already makes against a shared base
+  class, and it applies here too.
+
+The reasoning now sits in the docstring of `WebdavConflictException`, next to the
+code it is about.
+
+What the audit's instinct *did* point at, correctly, is real duplication one
+level over: the save loop in `shell_actions.dart` and `shell_actions_s3.dart` is
+near word-for-word identical, and `_retryRead` exists three times carrying the
+same "mirrors the other one" comment that gave `_asFailure` away. That is noted
+as follow-up work — it is duplication of behaviour, not of an exception type.
+
+## O-02 — deliberately not now
+
+The audit's own advice: split `AppSettings` "when the file has to take in the
+next domain, not preventively". `settings_provider.dart` is not taking one in.
+Splitting a 970-line provider that every setting flows through, with no feature
+asking for it, is churn that risks behaviour to satisfy a shape. Recorded here so
+the recommendation does not have to be re-litigated when it next comes up.
+
+## What the audit got right that no measurement shows
+
+Two of its Medium findings were not really about the code they named. X-02 and
+X-03 are the same observation from two directions — *critical invariants are
+enforced hard at the top entry points and thin out into convention-over-copies in
+the layer below* — and that framing was worth more than either individual fix.
+It is why the boundary work went into types and build guards (#471, #472, #489)
+rather than into one-off corrections.

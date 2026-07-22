@@ -741,6 +741,12 @@ const _dutchSourceAddFy = {
   'Zegel nog niet vastgelegd': 'Segel noch net fêstlein',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Der is noch gjin bewarre bestân dêr\'t it segel tsjin neirekkene wurde kin. Bewarje it deck.',
+  'Licenties van derden': 'Lisinsjes fan tredden',
+  'Alle licentieteksten tonen': 'Alle lisinsjeteksten sjen litte',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck sels stiet ûnder de EUPL-1.2. Dêrneist bondelet it software fan tredden: de Dart- en Flutter-pakketten, twa meilevere plugins, fjouwer lettertypefamyljes, it gesichtsmodel foar de privacykontrôle en it JavaScript dat yn in HTML-eksport meireizget. Elk dêrfan hâldt syn eigen lisinsje.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Dit bestân befettet software fan tredden en soms in lettertype. Hjirûnder steane de folsleine lisinsjeteksten dy\'t dêrby hearre; stjoer se mei as jo dit bestân trochjouwe.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

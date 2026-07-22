@@ -1,3 +1,17 @@
+// ── THIRD-PARTY CONTENT — NOT EUPL-1.2 ──────────────────────────────────────
+//
+// The weakness ids, names and descriptions in this file and in the bundled
+// asset `assets/cwe/cwe_full.json` are **MITRE CWE** content (CWE 4.20). CWE is
+// © The MITRE Corporation; use is governed by MITRE's Terms of Use, which
+// require attribution to MITRE. The remediation snippets in the curated floor
+// below are OciDeck's own text under EUPL-1.2.
+//
+//   Terms:  https://cwe.mitre.org/about/termsofuse.html
+//   Source: https://cwe.mitre.org/
+//
+// See docs/LICENSE_COMPLIANCE.md, "Bundled reference data".
+// ────────────────────────────────────────────────────────────────────────────
+
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart' show visibleForTesting;
@@ -13,6 +27,24 @@ import '../utils/log.dart';
 /// `tool/build_cwe_catalog.dart`) and merged over the floor once
 /// [ensureLoaded] runs. No runtime network; every entry links back to
 /// `cwe.mitre.org`.
+/// The weakness rows of the bundled CWE asset, from either shape it may have.
+///
+/// The asset used to be a bare JSON array — 969 MITRE names and descriptions
+/// with nothing in the file saying whose they were or on what terms. It is now
+/// an object that carries `source`, `licence` and `attribution` next to the
+/// data, the same way `assets/privacy/health_lexicon.json` does, so the
+/// attribution MITRE's terms ask for cannot be separated from the content by
+/// copying one file.
+///
+/// The old array shape is still accepted: an attribution is worth having, not
+/// worth a crash, and tests that hand-roll a two-entry list stay readable.
+List<Map<String, dynamic>> cweEntriesFromAsset(Object? decoded) {
+  final rows = decoded is Map<String, dynamic>
+      ? decoded['weaknesses'] as List? ?? const []
+      : decoded as List;
+  return rows.cast<Map<String, dynamic>>();
+}
+
 class CweCatalog {
   CweCatalog._();
 
@@ -34,7 +66,7 @@ class CweCatalog {
     if (_merged != null) return;
     try {
       final raw = await (bundle ?? rootBundle).loadString(_assetKey);
-      final list = (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
+      final list = cweEntriesFromAsset(jsonDecode(raw));
       final byId = <int, CweEntry>{
         for (final m in list)
           (m['id'] as num).toInt(): CweEntry(

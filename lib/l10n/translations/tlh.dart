@@ -1758,6 +1758,12 @@ const _dutchSourceAddTlh = <String, String>{
   'Zegel nog niet vastgelegd': 'DaH SoQmoHmeH HablI\' qonlu\'be\'',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'teywI\' choqlu\'bogh tu\'lu\'be\', vaj SoQ toblaHbe\'lu\'. cha\'nob yIchoq.',
+  'Licenties van derden': 'latlhpu\' chuvmey chut',
+  'Alle licentieteksten tonen': 'Hoch chut ghItlh \'ang',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'EUPL-1.2 bIng OciDeck. latlhpu\' De\'wI\' De\' je qengmeH: Dart Flutter je ngaq, cha\' plugin, loS ghItlh qorDu\', qab De\'wI\' \'ej JavaScript, HTML lupoQmeH. Hoch chut Dajmey polbe\'chugh, chut chaj polta\'.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'naDev latlhpu\' De\'wI\' De\' \'ej rut ghItlh qorDu\' tu\'lu\'. bIng chut ghItlhmey naQ tu\'lu\'; De\' DangeHDI\', chut ghItlhmey je yIngeH.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'lu\'',

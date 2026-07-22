@@ -1774,6 +1774,12 @@ const _dutchSourceAddEt = <String, String>{
   'Zegel nog niet vastgelegd': 'Pitser pole veel fikseeritud',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Salvestatud faili, mille vastu pitserit kontrollida, veel ei ole. Salvesta esitlus.',
+  'Licenties van derden': 'Kolmandate osapoolte litsentsid',
+  'Alle licentieteksten tonen': 'Näita kõiki litsentsitekste',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck ise on litsentsitud EUPL-1.2 alusel. Lisaks koondab see kolmandate osapoolte tarkvara: Darti ja Flutteri paketid, kaks kaasasolevat pistikprogrammi, neli kirjaperekonda, privaatsuskontrolli näomudeli ja JavaScripti, mis reisib kaasa HTML-ekspordiga. Igaüks neist säilitab oma litsentsi.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'See fail sisaldab kolmandate osapoolte tarkvara ja mõnikord ka kirjatüüpi. Allpool on nende juurde kuuluvad täielikud litsentsitekstid; anna need edasi koos failiga.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

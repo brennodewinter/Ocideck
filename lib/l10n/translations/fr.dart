@@ -740,6 +740,12 @@ const _dutchSourceAddFr = {
   'Zegel nog niet vastgelegd': 'Sceau pas encore enregistré',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Il n\'existe pas encore de fichier enregistré permettant de recalculer le sceau. Enregistrez le deck.',
+  'Licenties van derden': 'Licences de tiers',
+  'Alle licentieteksten tonen': 'Afficher tous les textes de licence',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck lui-même est publié sous EUPL-1.2. Il regroupe en outre des logiciels tiers : les paquets Dart et Flutter, deux extensions intégrées, quatre familles de polices, le modèle de visage du contrôle de confidentialité et le JavaScript qui accompagne une exportation HTML. Chacun conserve sa propre licence.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Ce fichier contient des logiciels tiers et parfois une police. Les textes complets des licences correspondantes figurent ci-dessous ; transmettez-les avec le fichier.',
   'esc': 'échap',
   'Enter': 'Entrée',
   'OK': 'OK',

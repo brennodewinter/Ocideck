@@ -1811,6 +1811,12 @@ const _dutchSourceAddEl = <String, String>{
   'Zegel nog niet vastgelegd': 'Η σφραγίδα δεν καταγράφηκε ακόμη',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Δεν υπάρχει ακόμη αποθηκευμένο αρχείο για να ελεγχθεί η σφραγίδα. Αποθηκεύστε το deck.',
+  'Licenties van derden': 'Άδειες τρίτων',
+  'Alle licentieteksten tonen': 'Εμφάνιση όλων των κειμένων αδειών',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Το ίδιο το OciDeck διατίθεται υπό την EUPL-1.2. Επιπλέον ενσωματώνει λογισμικό τρίτων: τα πακέτα Dart και Flutter, δύο ενσωματωμένα πρόσθετα, τέσσερις οικογένειες γραμματοσειρών, το μοντέλο προσώπου για τον έλεγχο ιδιωτικότητας και τη JavaScript που ταξιδεύει μαζί με μια εξαγωγή HTML. Καθένα διατηρεί τη δική του άδεια.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Αυτό το αρχείο περιέχει λογισμικό τρίτων και ενίοτε μια γραμματοσειρά. Παρακάτω βρίσκονται τα πλήρη κείμενα των σχετικών αδειών· διαβιβάστε τα μαζί με το αρχείο.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Εντάξει',

@@ -1862,6 +1862,18 @@ HTML exports also show a fixed top banner with the TLP label when classified.
 These properties are for discovery and handling downstream — they do not replace
 the visible banner, badge, and optional watermark on the slides themselves.
 
+**Third-party notices in an HTML export.** An HTML export is a single file that
+carries five JavaScript libraries and, when your theme uses the bundled EB
+Garamond, the font itself. Forwarding that file makes *you* the distributing
+party, so the notices travel inside it: every inlined library opens with a
+licence line, and the very bottom of the file holds a collapsed **Licenties van
+derden** block with the full licence texts. It is collapsed by default and is
+not printed, so it never shows up on a slide. Leave it in place when you pass
+the file on — that is what lets you pass it on.
+
+The same texts, plus the licence of every package OciDeck is built from, are in
+the app under **Settings → Over OciDeck → Alle licentieteksten tonen**.
+
 **Slide quality at export.** When the deck has open quality issues, the export
 dialog shows a summary banner with a link to the full issue list. Depending on
 your settings (see *Slide quality* below), export may ask for

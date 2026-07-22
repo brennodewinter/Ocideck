@@ -1787,6 +1787,12 @@ const _dutchSourceAddGsw = <String, String>{
   'Zegel nog niet vastgelegd': 'Sigel no nöd festghalte',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Es git no kei gspeicherti Datei, wo mer s Sigel chönnt nachrächne. Speichere s Deck.',
+  'Licenties van derden': 'Lizänze vo Dritte',
+  'Alle licentieteksten tonen': 'Alli Lizänztäxt zeige',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck sälber schtoht under de EUPL-1.2. Zuesätzlich bündlet\'s Software vo Dritte: d Dart- und Flutter-Päckli, zwe mitgliferti Plugins, vier Schriftfamilie, s Gsichtsmodäll für d Privatschprüefig und s JavaScript, wo bimene HTML-Export mitgoht. Jedes dervo bhaltet sini eigeni Lizänz.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Die Datei enthaltet Software vo Dritte und mängisch au e Schrift. Unte schtönd di vollschtändige Lizänztäxt derzue; gib si mit, wänn du die Datei witergisch.',
   'esc': 'Esc',
   'Enter': 'Enter',
   'OK': 'OK',

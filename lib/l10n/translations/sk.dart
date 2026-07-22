@@ -1790,6 +1790,12 @@ const _dutchSourceAddSk = <String, String>{
   'Zegel nog niet vastgelegd': 'Pečať zatiaľ nezaznamenaná',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Zatiaľ neexistuje uložený súbor, voči ktorému by sa dala pečať prepočítať. Uložte balík.',
+  'Licenties van derden': 'Licencie tretích strán',
+  'Alle licentieteksten tonen': 'Zobraziť všetky texty licencií',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Samotný OciDeck je pod licenciou EUPL-1.2. Okrem toho pribaľuje softvér tretích strán: balíky Dart a Flutter, dva priložené doplnky, štyri rodiny písem, model tváre pre kontrolu súkromia a JavaScript, ktorý cestuje s exportom do HTML. Každý si ponecháva vlastnú licenciu.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Tento súbor obsahuje softvér tretích strán a niekedy aj písmo. Nižšie sú úplné texty príslušných licencií; odovzdaj ich spolu so súborom.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

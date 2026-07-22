@@ -1783,6 +1783,12 @@ const _dutchSourceAddId = <String, String>{
   'Zegel nog niet vastgelegd': 'Segel belum dicatat',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Belum ada berkas tersimpan untuk memeriksa segel. Simpan deck.',
+  'Licenties van derden': 'Lisensi pihak ketiga',
+  'Alle licentieteksten tonen': 'Tampilkan semua teks lisensi',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck sendiri berlisensi EUPL-1.2. Selain itu ia menyertakan perangkat lunak pihak ketiga: paket Dart dan Flutter, dua plugin bawaan, empat keluarga fon, model wajah untuk pemeriksaan privasi, dan JavaScript yang ikut serta dalam ekspor HTML. Masing-masing mempertahankan lisensinya sendiri.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Berkas ini memuat perangkat lunak pihak ketiga dan kadang sebuah fon. Teks lisensi lengkap yang menyertainya ada di bawah; sertakan saat Anda meneruskan berkas ini.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

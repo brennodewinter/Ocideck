@@ -57,6 +57,11 @@ Dart/Flutter packages use recognised open-source licences:
 | 1 | BSL-1.0 |
 | 1 | EUPL-1.2 (OciDeck itself) |
 
+> A count in prose goes stale the moment a dependency lands, and nothing fails
+> when it does. The **generated** equivalent is the licence table at the top of
+> [`../sbom/ocideck.sbom.md`](../sbom/ocideck.sbom.md), rebuilt by `make sbom`
+> and held current by `make sbom-verify` — read that one if the two disagree.
+
 Counting the whole SBOM (**199** components — packages plus the vendored JS
 bundles, bundled fonts, plugin forks and SDKs) adds 5 × OFL-1.1 (the bundled
 fonts) and 1 × `Apache-2.0 OR MPL-2.0` (DOMPurify, which the generated
@@ -69,11 +74,33 @@ moved on. Both numbers are re-counted above and dated; re-run the command and
 `make sbom-verify` when dependencies change, and move the date with them.)*
 
 Bundled assets: marked (MIT), highlight.js (BSD-3-Clause), Mermaid (MIT, bundling
-DOMPurify under Apache-2.0/MPL-2.0), MathJax (Apache-2.0), and the EB Garamond
-font (SIL OFL-1.1, see `assets/fonts/OFL.txt`). The OciDeck-owned brand images in
+DOMPurify under Apache-2.0/MPL-2.0), MathJax (Apache-2.0), five fonts under SIL
+OFL-1.1 (EB Garamond, Roboto, Inter, Lora — licence texts in `assets/fonts/`) and
+the YuNet face-detection model (MIT). The OciDeck-owned brand images in
 `assets/images/` and the theme in `assets/themes/` are the project's own work.
 
 **Conclusion: no non-open-source software is included.**
+
+## What the user redistributes
+
+Two of OciDeck's outputs make the *user* the distributing party, so the notices
+have to travel inside them rather than only living in this repository:
+
+- **The app itself.** The four OFL licence texts (`assets/fonts/OFL.txt`,
+  `Inter-OFL.txt`, `Lora-OFL.txt`, `Roboto-OFL.txt`) are declared assets and are
+  reachable in the running app under **Settings → Documentatie → Licenties van
+  derden**, which also lists the YuNet model and the vendored forks. OFL-1.1 §2
+  requires the copyright notice and licence to accompany the font; shipping the
+  `.ttf` without them would not.
+- **The HTML export.** Every exported deck inlines five third-party bundles and
+  embeds the EB Garamond font as base64. The export therefore opens with a
+  third-party notice block, and each inlined `<script>` carries its own licence
+  banner. MathJax (Apache-2.0) and Mermaid (MIT) ship minified *without* the
+  banner their upstream build strips; OciDeck re-adds it, because a user who
+  mails an export cannot discharge a duty we removed the evidence of.
+
+`marp_html_service_licenses_test.dart` fails if a bundle listed in
+`assets/web_export/MANIFEST.json` reaches the export without a notice.
 
 ## Bundled reference data (information-security module)
 
@@ -182,3 +209,38 @@ works under Article 5 EUPL). This only matters if you create a combined
 derivative work that must be relicensed; it does not affect bundling these
 libraries as-is. If you need formal certainty for a specific distribution
 scenario, have it confirmed by someone with licence expertise.
+
+### The case this section did not cover: a *modified* Apache-2.0 component
+
+The paragraph above only settles the *unmodified dependency*. OciDeck has one
+component that is neither: `third_party/desktop_multi_window` is a **fork with
+local source changes**, and it is Apache-2.0 (© 2021 Mixin) — not MIT, which is
+what this project recorded until 2026-07-22. Modification triggers obligations
+the unmodified case does not:
+
+| Apache-2.0 clause | What it asks | How OciDeck discharges it |
+| --- | --- | --- |
+| §4(a) | Give recipients a copy of the licence | `third_party/desktop_multi_window/LICENSE` ships in the repository and in every source distribution |
+| §4(b) | **Modified files must carry prominent notices stating that you changed them** | Each of the six changed files opens with a `NOTICE:`-block naming the change, the upstream commit and the licence |
+| §4(c) | Retain attribution notices from the source form | The upstream copyright line is kept verbatim in `LICENSE`; no upstream header was removed |
+| §4(d) | Carry a `NOTICE` file's contents if the original has one | Upstream ships no `NOTICE` file, so nothing to carry |
+
+`third_party/desktop_multi_window/MODIFICATIONS.md` is the human summary: the
+upstream commit the fork descends from, why it exists, and a per-file table of
+what changed. The SBOM records the same commit plus a SHA-256 tree hash of the
+directory, so "which source is this, exactly" has a machine-readable answer too.
+
+**Outbound, this changes nothing.** The fork stays under Apache-2.0 and is
+distributed as a separate component alongside OciDeck's EUPL-1.2 code, exactly
+as the unmodified Apache-2.0 packages are; our changes to it are contributed
+under that same Apache-2.0, not relicensed to EUPL. The Article 5 question above
+would only arise if the two were merged into one work needing a single outbound
+licence, which they are not.
+
+> **Why this is written down.** The trap is genuinely sharp: the GitHub API
+> reports **MIT** for `MixinNetwork/flutter-plugins`, because that is the
+> monorepo's *root* LICENSE. The package directory carries its own Apache-2.0
+> file, and that one governs. Any tooling that classifies a fork by repository
+> rather than by the vendored directory will make the same mistake. Ours no
+> longer guesses: `tool/sbom_build.dart` classifies both forks from the LICENSE
+> file on disk with the same classifier `make licenses` uses.

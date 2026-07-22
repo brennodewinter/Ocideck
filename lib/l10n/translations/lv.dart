@@ -1782,6 +1782,12 @@ const _dutchSourceAddLv = <String, String>{
   'Zegel nog niet vastgelegd': 'Zīmogs vēl nav fiksēts',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Vēl nav saglabāta faila, pret kuru pārbaudīt zīmogu. Saglabājiet deku.',
+  'Licenties van derden': 'Trešo pušu licences',
+  'Alle licentieteksten tonen': 'Rādīt visus licenču tekstus',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Pats OciDeck ir licencēts ar EUPL-1.2. Turklāt tas iekļauj trešo pušu programmatūru: Dart un Flutter pakotnes, divus komplektā iekļautus spraudņus, četras fontu saimes, sejas modeli privātuma pārbaudei un JavaScript, kas ceļo līdzi HTML eksportam. Katrs no tiem patur savu licenci.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Šajā failā ir trešo pušu programmatūra un dažkārt arī fonts. Zemāk ir pilni attiecīgo licenču teksti; nododiet tos līdzi, kad nododat šo failu.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Labi',

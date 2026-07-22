@@ -922,6 +922,12 @@ const _dutchSourceAddEn = {
   'Zegel nog niet vastgelegd': 'Seal not yet recorded',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'There is no saved file yet to check the seal against. Save the deck.',
+  'Licenties van derden': 'Third-party licences',
+  'Alle licentieteksten tonen': 'Show all licence texts',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck itself is licensed under the EUPL-1.2. On top of that it bundles third-party software: the Dart and Flutter packages, two vendored plugins, four font families, the face model for the privacy check, and the JavaScript that travels along in an HTML export. Each of those keeps its own licence.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'This file contains third-party software and sometimes a font. The full licence texts that belong with them are below; pass them on when you pass this file on.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

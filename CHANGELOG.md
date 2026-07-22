@@ -282,6 +282,34 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   zitten. En de losse ophaaldienst zet zijn "niet zelf raden wat voor bestand
   dit is"-kop voortaan óók op een weigering, niet alleen als het lukt.
 
+- **De licenties, kennisgevingen en SBOM kloppen weer.** Een reeks dingen die
+  stil fout stonden, en die u pas merkt als u OciDeck of een export van OciDeck
+  aan iemand anders doorgeeft.
+
+  De gevendorde plugin `desktop_multi_window` stond overal als MIT genoteerd,
+  maar is Apache-2.0. Dat is nu rechtgezet in de SBOM en de kennisgevingen, de
+  zes bestanden die wij in die fork wijzigden dragen de wijzigingsnotitie die
+  Apache-2.0 vraagt, en beide forks hebben een `MODIFICATIONS.md` met de
+  herkomstcommit erbij. In de SBOM dragen ze nu ook een hash — daarvoor waren
+  zij de enige twee onderdelen zonder.
+
+  Twaalf afhankelijkheden die u wél meekrijgt, stonden niet in
+  `THIRD_PARTY_NOTICES.md`. Ze staan er nu allemaal in, met hun licentie, en een
+  test houdt die lijst voortaan bij de tijd.
+
+  Belangrijker voor u: de licentieteksten reisden niet mee. De vier
+  OFL-bestanden van de lettertypen zaten in geen enkele build, en er was geen
+  plek in de app om een licentie te lezen. Onder **Instellingen → Over OciDeck**
+  staat nu **Alle licentieteksten tonen**, met alles erin — pakketten,
+  lettertypen, het gezichtsmodel en de JavaScript uit de HTML-export. Diezelfde
+  export draagt voortaan zelf een blok met de volledige licentieteksten en per
+  ingesloten bibliotheek een licentieregel; bij het doorsturen van een export
+  bent u de verspreidende partij, en die kunt u nu ook zijn.
+
+  Tot slot: het Klingon-vlaggetje in de taalkiezer was het embleem van het
+  Klingon-rijk — een beeldmerk van iemand anders dat in elke uitgeleverde
+  versie meereisde. Het is vervangen door een nuchter `tlh`-plaatje. De taal
+  blijft gewoon.
 - **Uw eigen regels in de kop breken het zegel niet meer.** Sinds OciDeck de
   front matter bijwerkt in plaats van herbouwt, blijft wat u er zelf in zet
   netjes staan — een eigen `style:`-blok, een commentaarregel, een handmatige
