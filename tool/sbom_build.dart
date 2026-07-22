@@ -119,6 +119,110 @@ String forkTreeHash(Directory dir) {
   return sha256.convert(utf8.encode('${lines.join('\n')}\n')).toString();
 }
 
+/// Hosts that distribute someone else's package rather than supplying it. A
+/// registry or a CDN is the delivery channel, not the supplier, so a URL
+/// pointing at one yields no supplier at all instead of a wrong one.
+const _nonSupplierHosts = <String>{
+  'pub.dev',
+  'pub.dartlang.org',
+  'cdn.jsdelivr.net',
+  'cdnjs.cloudflare.com',
+  'unpkg.com',
+  'npmjs.com',
+  'registry.npmjs.org',
+};
+
+/// Where each SDK that pub resolves packages *from* is published.
+///
+/// A `source: sdk` entry in pubspec.lock says the package is shipped inside
+/// that SDK, and that is the one thing the lock file states about its origin:
+/// `flutter_test`, `flutter_localizations` and `sky_engine` declare no
+/// repository of their own. So the SDK's publisher is their supplier, and this
+/// map is also what the SDK components themselves are built from — one
+/// statement, not two that can drift.
+const _sdkVcsUrls = <String, String>{
+  'flutter': 'https://github.com/flutter/flutter',
+  'dart': 'https://github.com/dart-lang/sdk',
+};
+
+/// Forges where the first path segment is the account a project is published
+/// under — the closest thing to a supplier name that a package declares about
+/// itself without asking the network.
+const _forgeHosts = <String>{
+  'github.com',
+  'gitlab.com',
+  'bitbucket.org',
+  'codeberg.org',
+  'sr.ht',
+};
+
+/// The supplier a declared source URL names, or null when it names none.
+///
+/// This is the whole of the NTIA "supplier name" derivation, and it is
+/// deliberately thin: `https://github.com/dart-lang/tools` yields `dart-lang`,
+/// `https://flutter.dev` yields `flutter.dev`, and a registry or CDN URL yields
+/// nothing. There is no lookup table of "who really maintains what" — such a
+/// table is a guess that ages badly and reads as a fact once it is in an SBOM.
+///
+/// The account is emitted as an SPDX `Organization:`. Whether a forge account
+/// belongs to a company or to one person is not determinable offline, and
+/// picking the account namespace is the conventional choice; the [url] travels
+/// with the name so a reader can check who it is.
+({String name, String url})? supplierFromUrl(String? url) {
+  if (url == null || url.trim().isEmpty) return null;
+  final uri = Uri.tryParse(url.trim());
+  if (uri == null || !uri.hasScheme || uri.host.isEmpty) return null;
+  final host = uri.host.toLowerCase().replaceFirst(RegExp(r'^www\.'), '');
+  if (_nonSupplierHosts.contains(host)) return null;
+  if (_forgeHosts.contains(host)) {
+    final segments = uri.pathSegments.where((s) => s.isNotEmpty).toList();
+    if (segments.isEmpty) return null;
+    return (
+      name: segments.first,
+      url: '${uri.scheme}://$host/${segments.first}',
+    );
+  }
+  return (name: host, url: '${uri.scheme}://$host');
+}
+
+/// What a package declares about itself in its own `pubspec.yaml`, read from
+/// the resolved on-disk root. This is the only local source for the two facts
+/// the SBOM was missing: who supplies it, and what *it* depends on.
+class _PackageFacts {
+  const _PackageFacts({required this.dependencies, this.sourceUrl});
+
+  /// Names from the package's own `dependencies:` block. Its `dev_dependencies`
+  /// are deliberately excluded: they build that package, they are not shipped
+  /// inside ours, and pub does not resolve them for a transitive dependency —
+  /// listing them would put edges in the graph that no artefact of ours has.
+  final List<String> dependencies;
+
+  /// Its declared `repository:`, else `homepage:`.
+  final String? sourceUrl;
+}
+
+/// Read [dir]'s `pubspec.yaml`. Returns null when there is none (or it will not
+/// parse), which keeps `dependsOn` null for that component — "not examined"
+/// rather than "no dependencies".
+_PackageFacts? _packageFacts(Directory? dir) {
+  if (dir == null) return null;
+  final file = File.fromUri(dir.uri.resolve('pubspec.yaml'));
+  if (!file.existsSync()) return null;
+  try {
+    final yaml = loadYaml(file.readAsStringSync());
+    if (yaml is! YamlMap) return null;
+    final deps = yaml['dependencies'];
+    return _PackageFacts(
+      dependencies: deps is YamlMap
+          ? deps.keys.map((k) => k.toString()).toList()
+          : const [],
+      sourceUrl: yaml['repository']?.toString() ?? yaml['homepage']?.toString(),
+    );
+  } on Object {
+    return null;
+  }
+}
+
 /// One entry in the bill of materials.
 class SbomComponent {
   SbomComponent({
@@ -135,6 +239,9 @@ class SbomComponent {
     this.upstreamRevision,
     this.scope,
     this.note,
+    this.supplier,
+    this.supplierUrl,
+    this.dependsOn,
   });
 
   /// Stable, unique identifier used as the CycloneDX `bom-ref`.
@@ -165,6 +272,27 @@ class SbomComponent {
   final String? scope;
   final String? note;
 
+  /// NTIA minimum element "Supplier Name": the entity that supplies this
+  /// component. **Derived, never invented** — see [supplierFromUrl] for the
+  /// rule and [supplierUrl] for the declaration it was derived from. Null when
+  /// no local source of truth names one; an absent field says "we do not know",
+  /// which is the honest answer and the one a consumer can act on.
+  final String? supplier;
+
+  /// The declared URL [supplier] was derived from, so the derivation is
+  /// checkable rather than asserted.
+  final String? supplierUrl;
+
+  /// The [ref]s of the components this one depends on.
+  ///
+  /// The distinction between `null` and `[]` is load-bearing and is carried
+  /// through into both output formats: `[]` means "we read this component's own
+  /// manifest and it declares no dependencies", `null` means "we have no
+  /// manifest for it, so we cannot say". CycloneDX gives those two the same
+  /// meanings (an omitted `dependencies` entry is "unknown"), so a consumer is
+  /// never told an unexamined component is a leaf.
+  final List<String>? dependsOn;
+
   bool get isDirect => scope != null && scope!.startsWith('direct');
 }
 
@@ -177,6 +305,11 @@ class Inventory {
   List<SbomComponent> get all => [root, ...components];
   List<SbomComponent> get directDeps =>
       components.where((c) => c.isDirect).toList();
+
+  /// Total number of dependency edges in the graph — the number the SBOM tests
+  /// and the Markdown summary quote, so "the graph is one layer deep" is a
+  /// claim that can be checked instead of assumed.
+  int get edgeCount => all.fold(0, (n, c) => n + (c.dependsOn?.length ?? 0));
 }
 
 // ---------------------------------------------------------------------------
@@ -187,17 +320,6 @@ class Inventory {
 Inventory buildInventory() {
   final pubspec = loadYaml(File('pubspec.yaml').readAsStringSync()) as YamlMap;
   final appVersion = pubspec['version'].toString();
-
-  final root = SbomComponent(
-    ref: 'ocideck@$appVersion',
-    group: 'application',
-    type: 'application',
-    name: 'ocideck',
-    version: appVersion,
-    license: 'EUPL-1.2',
-    purl: 'pkg:generic/ocideck@$appVersion',
-    note: pubspec['description']?.toString(),
-  );
 
   final components = <SbomComponent>[
     ..._dartPackages(),
@@ -213,6 +335,39 @@ Inventory buildInventory() {
     if (byName != 0) return byName;
     return a.ref.compareTo(b.ref);
   });
+
+  // What the application itself pulls in: the packages pubspec.yaml names
+  // directly, plus everything it bundles that no package pulled in for it (the
+  // vendored JS, the fonts, the build SDKs). Those last three would otherwise
+  // sit in the document in no relation at all, and "shipped but unreferenced"
+  // is exactly the state that makes an SBOM unusable for impact questions.
+  final rootEdges =
+      components
+          .where(
+            (c) => c.group == 'dart-package' || c.group == 'vendored-fork'
+                ? c.isDirect
+                : true,
+          )
+          .map((c) => c.ref)
+          .toList()
+        ..sort();
+
+  final root = SbomComponent(
+    ref: 'ocideck@$appVersion',
+    group: 'application',
+    type: 'application',
+    name: 'ocideck',
+    version: appVersion,
+    license: 'EUPL-1.2',
+    purl: 'pkg:generic/ocideck@$appVersion',
+    // The publisher named in the header of every document under docs/. The one
+    // supplier in this file that is stated rather than derived, because it is
+    // ours to state.
+    supplier: 'Stichting LibreKAT',
+    supplierUrl: 'https://librekat.nl',
+    dependsOn: rootEdges,
+    note: pubspec['description']?.toString(),
+  );
 
   return Inventory(root, components);
 }
@@ -241,12 +396,37 @@ Map<String, Directory> _packageRoots() {
 }
 
 /// All resolved Dart/Flutter packages from pubspec.lock (direct + transitive).
+///
+/// Every package carries **its own** dependency edges, read from its own
+/// `pubspec.yaml` in the resolved package root and narrowed to the names pub
+/// actually resolved. pubspec.lock is a flat list — it says what is in the
+/// build, not who pulled it in — so a graph built from the lock file alone is
+/// one layer deep and leaves every transitive package hanging in no relation at
+/// all. That is what this repo shipped until now: 46 edges over 200 components,
+/// 153 of them unreferenced. An unreferenced component cannot be reasoned about
+/// ("can I drop this?", "what reaches the parser that just got a CVE?"), which
+/// is most of what a dependency graph is for.
 List<SbomComponent> _dartPackages() {
   final lock = loadYaml(File('pubspec.lock').readAsStringSync()) as YamlMap;
   final packages = lock['packages'] as YamlMap;
   final roots = _packageRoots();
-  final out = <SbomComponent>[];
 
+  // Pass 1: the ref each package name resolves to, so pass 2 can turn a
+  // declared dependency name into an edge to a component that really exists.
+  final refByName = <String, String>{};
+  for (final entry in packages.entries) {
+    final name = entry.key.toString();
+    final data = entry.value as YamlMap;
+    final version = data['version'].toString();
+    final source = data['source'].toString();
+    refByName[name] = switch (source) {
+      'hosted' => 'pkg:pub/$name@$version',
+      'path' => 'fork:$name@$version',
+      _ => '$source:$name@$version',
+    };
+  }
+
+  final out = <SbomComponent>[];
   for (final entry in packages.entries) {
     final name = entry.key.toString();
     final data = entry.value as YamlMap;
@@ -260,12 +440,25 @@ List<SbomComponent> _dartPackages() {
         ? licenseForPackage(name, root)
         : 'NOASSERTION';
 
+    final facts = _packageFacts(root);
+    final edges = resolveEdges(facts?.dependencies, refByName);
+    final fork = _forkOrigins[name];
+    // A fork's upstream URL is the stronger statement of origin than whatever
+    // the vendored copy's own pubspec still says, so it wins where we have one;
+    // an SDK-shipped package is supplied by that SDK whatever its own pubspec
+    // links to, which also keeps all five Flutter-SDK packages on one supplier.
+    final supplier = supplierFromUrl(
+      fork?.vcs ??
+          (source == 'sdk' ? _sdkVcsUrls[desc?.toString()] : null) ??
+          facts?.sourceUrl,
+    );
+
     if (source == 'hosted') {
       final descMap = desc as YamlMap;
       final host = descMap['url'].toString();
       out.add(
         SbomComponent(
-          ref: 'pkg:pub/$name@$version',
+          ref: refByName[name]!,
           group: 'dart-package',
           type: 'library',
           name: name,
@@ -275,14 +468,16 @@ List<SbomComponent> _dartPackages() {
           downloadUrl: '$host/packages/$name/versions/$version',
           license: license,
           scope: scope,
+          supplier: supplier?.name,
+          supplierUrl: supplier?.url,
+          dependsOn: edges,
         ),
       );
     } else if (source == 'path') {
-      final fork = _forkOrigins[name];
       final dir = Directory('third_party/$name');
       out.add(
         SbomComponent(
-          ref: 'fork:$name@$version',
+          ref: refByName[name]!,
           group: 'vendored-fork',
           type: 'library',
           name: name,
@@ -294,6 +489,9 @@ List<SbomComponent> _dartPackages() {
               : '${fork.vcs}/tree/${fork.revision}/${fork.subdir}',
           upstreamRevision: fork?.revision,
           scope: scope,
+          supplier: supplier?.name,
+          supplierUrl: supplier?.url,
+          dependsOn: edges,
           note:
               'Vendored fork in third_party/$name; the local changes are '
               'recorded in third_party/$name/MODIFICATIONS.md. The SHA-256 is '
@@ -305,19 +503,40 @@ List<SbomComponent> _dartPackages() {
       // sdk / git — carry name+version+licence; no archive hash to pin.
       out.add(
         SbomComponent(
-          ref: '$source:$name@$version',
+          ref: refByName[name]!,
           group: 'dart-package',
           type: 'library',
           name: name,
           version: version,
           license: license,
           scope: scope,
+          supplier: supplier?.name,
+          supplierUrl: supplier?.url,
+          dependsOn: edges,
           note: 'Source: $source.',
         ),
       );
     }
   }
   return out;
+}
+
+/// Turn declared dependency [names] into component refs, dropping any name that
+/// pub did not resolve into this build.
+///
+/// Returns null for null input, preserving "not examined" — see
+/// [SbomComponent.dependsOn]. A name with no ref is dropped rather than
+/// invented: it means the dependency is conditional or dev-only and no artefact
+/// of ours contains it, and a dangling ref would make the document invalid.
+List<String>? resolveEdges(List<String>? names, Map<String, String> refByName) {
+  if (names == null) return null;
+  final refs = <String>{};
+  for (final n in names) {
+    final ref = refByName[n];
+    if (ref != null) refs.add(ref);
+  }
+  final sorted = refs.toList()..sort();
+  return sorted;
 }
 
 /// Vendored JS/CSS bundles inlined into the offline HTML export.
@@ -388,6 +607,7 @@ List<SbomComponent> _fonts(YamlMap pubspec) {
           ? sha256.convert(file.readAsBytesSync()).toString()
           : null;
       final base = asset.split('/').last;
+      final holder = _fontCopyrightHolder(familyName);
       out.add(
         SbomComponent(
           ref: 'font:$asset',
@@ -397,12 +617,45 @@ List<SbomComponent> _fonts(YamlMap pubspec) {
           purl: 'pkg:generic/${Uri.encodeComponent(familyName)}',
           sha256: sha,
           license: 'OFL-1.1',
+          supplier: holder?.name,
+          supplierUrl: holder?.url,
+          // A font file has no manifest of its own, but "a .ttf depends on
+          // nothing" is a fact and not a gap, so this is an empty list rather
+          // than an unknown.
+          dependsOn: const [],
           note: 'Bundled font file assets/$base.',
         ),
       );
     }
   }
   return out;
+}
+
+/// The copyright holder a bundled font's OFL text names, as
+/// `Copyright 2011 The Roboto Project Authors (https://…)`.
+///
+/// The licence files in `assets/fonts/` are shipped alongside the fonts and are
+/// the authoritative statement of who the font comes from — no table of font
+/// vendors is needed, and none is kept. The family is matched against the
+/// copyright line, so adding a font with its OFL text is enough; adding one
+/// without simply leaves the supplier absent.
+({String name, String url})? _fontCopyrightHolder(String family) {
+  final dir = Directory('assets/fonts');
+  if (!dir.existsSync()) return null;
+  for (final entity in dir.listSync()) {
+    if (entity is! File || !entity.path.toLowerCase().endsWith('.txt')) {
+      continue;
+    }
+    final head = entity.readAsStringSync();
+    final m = RegExp(
+      r'Copyright\s+\d{4}\s+(.+?)\s*\((https?://[^)\s]+)\)',
+    ).firstMatch(head);
+    if (m == null) continue;
+    final holder = m.group(1)!.trim();
+    if (!holder.toLowerCase().contains(family.toLowerCase())) continue;
+    return (name: holder, url: m.group(2)!);
+  }
+  return null;
 }
 
 /// The pinned build SDKs — the runtime foundation the product ships on.
@@ -415,6 +668,7 @@ List<SbomComponent> _sdks(YamlMap pubspec) {
       final parts = line.trim().split(RegExp(r'\s+'));
       if (parts.length >= 2 && parts[0] == 'flutter') {
         final version = parts[1].replaceAll('-stable', '');
+        final supplier = supplierFromUrl(_sdkVcsUrls['flutter']);
         out.add(
           SbomComponent(
             ref: 'sdk:flutter@$version',
@@ -424,7 +678,9 @@ List<SbomComponent> _sdks(YamlMap pubspec) {
             version: version,
             license: 'BSD-3-Clause',
             downloadUrl: 'https://flutter.dev',
-            vcsUrl: 'https://github.com/flutter/flutter',
+            vcsUrl: _sdkVcsUrls['flutter'],
+            supplier: supplier?.name,
+            supplierUrl: supplier?.url,
             note: 'Pinned build SDK (.tool-versions).',
           ),
         );
@@ -435,6 +691,7 @@ List<SbomComponent> _sdks(YamlMap pubspec) {
   final sdkConstraint = (pubspec['environment'] as YamlMap?)?['sdk']
       ?.toString();
   if (sdkConstraint != null) {
+    final supplier = supplierFromUrl(_sdkVcsUrls['dart']);
     out.add(
       SbomComponent(
         ref: 'sdk:dart@$sdkConstraint',
@@ -444,7 +701,9 @@ List<SbomComponent> _sdks(YamlMap pubspec) {
         version: sdkConstraint,
         license: 'BSD-3-Clause',
         downloadUrl: 'https://dart.dev',
-        vcsUrl: 'https://github.com/dart-lang/sdk',
+        vcsUrl: _sdkVcsUrls['dart'],
+        supplier: supplier?.name,
+        supplierUrl: supplier?.url,
         note: 'Dart SDK constraint from pubspec.yaml (environment.sdk).',
       ),
     );
@@ -496,6 +755,11 @@ Map<String, dynamic> _cdxComponent(SbomComponent c) {
   final m = <String, dynamic>{
     'bom-ref': c.ref,
     'type': c.type,
+    if (c.supplier != null)
+      'supplier': {
+        'name': c.supplier,
+        if (c.supplierUrl != null) 'url': [c.supplierUrl],
+      },
     'name': c.name,
     if (c.version != null) 'version': c.version,
     if (c.purl != null) 'purl': c.purl,
@@ -547,15 +811,21 @@ String toCycloneDx(Inventory inv, String timestamp) {
       'properties': _craProperties(),
     },
     'components': components,
-    'dependencies': [
-      {
-        'ref': inv.root.ref,
-        'dependsOn': inv.directDeps.map((c) => c.ref).toList(),
-      },
-    ],
+    'dependencies': dependencyGraph(inv),
   };
   return _jsonEncoder.convert(bom);
 }
+
+/// The CycloneDX `dependencies` array: one entry per component whose own
+/// dependencies we established, the root included.
+///
+/// A component with an unread manifest gets **no entry**, which CycloneDX reads
+/// as "unknown". Emitting `dependsOn: []` for it would claim we checked and
+/// found none — the same silent over-claim as a one-layer graph, only quieter.
+List<Map<String, dynamic>> dependencyGraph(Inventory inv) => [
+  for (final c in inv.all)
+    if (c.dependsOn != null) {'ref': c.ref, 'dependsOn': c.dependsOn},
+];
 
 List<Map<String, String>> _craProperties() => [
   {'name': 'cra:regulation', 'value': 'EU 2024/2847 (Cyber Resilience Act)'},
@@ -587,6 +857,11 @@ Map<String, dynamic> _spdxPackage(SbomComponent c, String spdxId) {
     'SPDXID': spdxId,
     'name': c.name,
     if (c.version != null) 'versionInfo': c.version,
+    // NTIA minimum element. Absent — not `NOASSERTION` — where no local source
+    // names one: SPDX treats an omitted supplier and an explicit "no assertion"
+    // the same way, and writing out a name we do not have is the one thing that
+    // would make this field worse than empty.
+    if (c.supplier != null) 'supplier': 'Organization: ${c.supplier}',
     'downloadLocation': c.downloadUrl ?? c.vcsUrl ?? 'NOASSERTION',
     'filesAnalyzed': false,
     'licenseConcluded': lic,
@@ -635,12 +910,16 @@ String toSpdx(Inventory inv, String timestamp) {
       'relationshipType': 'DESCRIBES',
       'relatedSpdxElement': rootId,
     },
-    for (final c in inv.directDeps)
-      {
-        'spdxElementId': rootId,
-        'relationshipType': 'DEPENDS_ON',
-        'relatedSpdxElement': ids[c.ref]!,
-      },
+    // The full graph, not just the root's own row: every component that
+    // declares dependencies gets its own DEPENDS_ON edges, so a reader can walk
+    // from a vulnerable leaf back up to what pulls it in.
+    for (final c in all)
+      for (final dep in c.dependsOn ?? const <String>[])
+        {
+          'spdxElementId': ids[c.ref]!,
+          'relationshipType': 'DEPENDS_ON',
+          'relatedSpdxElement': ids[dep]!,
+        },
   ];
 
   final doc = <String, dynamic>{
@@ -676,13 +955,13 @@ void _markdownGroup(StringBuffer b, String group, List<SbomComponent> items) {
   if (items.isEmpty) return;
   final label = _groupLabels[group] ?? group;
   b.writeln('### $label (${items.length})\n');
-  b.writeln('| Component | Version | Licence | Source |');
-  b.writeln('| --- | --- | --- | --- |');
+  b.writeln('| Component | Version | Licence | Supplier | Source |');
+  b.writeln('| --- | --- | --- | --- | --- |');
   for (final c in items) {
     final scope = c.scope != null ? ' _(${c.scope})_' : '';
     b.writeln(
       '| ${c.name}$scope | ${c.version ?? '—'} | ${c.license} '
-      '| ${_sourceHint(c)} |',
+      '| ${c.supplier ?? '—'} | ${_sourceHint(c)} |',
     );
   }
   b.writeln();
@@ -704,12 +983,21 @@ String toMarkdown(Inventory inv) {
     '[`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the '
     'SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).\n',
   );
+  final unknownSupplier = inv.all.where((c) => c.supplier == null).length;
   b.writeln(
     'This is **${inv.root.name} ${inv.root.version}** (licence '
     '${inv.root.license}) and every third-party component it ships '
     '(${inv.components.length} in total), direct and transitive — the '
     'inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I '
     'Part II §1) requires.\n',
+  );
+  b.writeln(
+    'The JSON documents carry **${inv.edgeCount} dependency relations** between '
+    'these components: each package declares its own dependencies, so the graph '
+    'can be walked from a leaf back to what pulls it in. '
+    '${unknownSupplier == 0 ? 'Every component names a supplier.' : '$unknownSupplier '
+              'component(s) name no supplier — no local source of truth states one, '
+              'and the field is left empty rather than guessed.'}\n',
   );
 
   // Licence summary.
