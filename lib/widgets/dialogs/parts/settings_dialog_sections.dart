@@ -57,6 +57,28 @@ enum SettingsSection {
 
   /// De tabbladen die als gewone navigatieknop in de zijbalk staan — alles
   /// behalve [about], dat vanuit de merkvoet wordt geopend.
-  static List<SettingsSection> get navItems =>
-      values.where((s) => s != SettingsSection.about).toList();
+  ///
+  /// [infoSafetyRevealed] is of de module Informatieveiligheid aan staat, en
+  /// [hasChecklists] of de gebruiker al eigen checklists heeft.
+  ///
+  /// **Waarom die tweede.** De checklists-tab bouwt sjablonen die maar één
+  /// afnemer hebben: het `checklist`-slidetype, en dat zit achter de module. Met
+  /// de module uit kon je dus sjablonen maken, benoemen, vullen — en ze nergens
+  /// laden. Elf tabbladen, en één ervan deed niets (#648).
+  ///
+  /// Maar verbergen op alléén de moduleschakelaar zou werk onbereikbaar maken
+  /// dat er al ligt. Vandaar de vaste regel van dit project: **tonen zodra de
+  /// inhoud er is.** Wie sjablonen heeft gemaakt en daarna de module uitzet,
+  /// ziet ze nog steeds staan en kan ze weghalen. Dezelfde truc als bij de
+  /// MIAUW-velden in `presentation_info_dialog.dart`.
+  static List<SettingsSection> navItems({
+    required bool infoSafetyRevealed,
+    required bool hasChecklists,
+  }) => values.where((s) {
+    if (s == SettingsSection.about) return false;
+    if (s == SettingsSection.checklists) {
+      return infoSafetyRevealed || hasChecklists;
+    }
+    return true;
+  }).toList();
 }

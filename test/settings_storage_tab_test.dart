@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -519,6 +520,15 @@ void main() {
     tester,
   ) async {
     await openSettings(tester, section: SettingsSection.general);
+    // De checklists-ingang zit sinds #648 achter de module Informatieveiligheid;
+    // zonder die aan bestaat de treffer niet. De regressie die deze test
+    // bewaakt gaat over de kóppeling treffer→tabblad, dus die blijft precies
+    // zoals hij was — alleen het baken moet er weer zijn.
+    await ProviderScope.containerOf(
+      tester.element(find.text('open')),
+      listen: false,
+    ).read(infoSafetyProvider.notifier).enable();
+    await tester.pumpAndSettle();
 
     // Dit is de regressie. Met volgnummers sprong "sjabloon" naar
     // Git-repository, omdat de zoekindex onder het ingeschoven git-tabblad niet

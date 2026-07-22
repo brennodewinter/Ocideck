@@ -44,6 +44,14 @@ class SettingsSearchEntry {
   /// "lettertype"). Nederlandstalig; ze staan naast de vertaalde tekst.
   final List<String> keywords;
 
+  /// Of deze ingang bij de module Informatieveiligheid hoort.
+  ///
+  /// Staat die module uit, dan wordt de bijbehorende instelling niet getekend —
+  /// en dan hoort hij ook niet vindbaar te zijn. Een treffer die naar een blok
+  /// springt dat er niet staat, is verwarrender dan de instelling die we net
+  /// hebben weggehaald (#648).
+  final bool infoSafetyOnly;
+
   const SettingsSearchEntry({
     required this.tab,
     this.label,
@@ -51,6 +59,7 @@ class SettingsSearchEntry {
     this.section,
     this.sectionKey,
     this.keywords = const [],
+    this.infoSafetyOnly = false,
   });
 
   String resolvedLabel(AppLocalizations l10n) =>
@@ -143,8 +152,13 @@ extension _SettingsSearch on _SettingsDialogState {
     final q = AppLocalizations.sortKey(_searchQuery);
     if (q.isEmpty) return const [];
 
+    // Wat niet getekend wordt, wordt niet gevonden. Een treffer die naar een
+    // verborgen blok springt is verwarrender dan de instelling die er niet is.
+    final revealed = ref.watch(infoSafetyRevealProvider);
+
     final scored = <({int score, SettingsSearchEntry entry})>[];
     for (final entry in kSettingsSearchIndex) {
+      if (entry.infoSafetyOnly && !revealed) continue;
       var best = -1;
       final haystack = [
         entry.resolvedLabel(l10n),

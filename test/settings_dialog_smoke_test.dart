@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
@@ -202,6 +203,13 @@ void main() {
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
 
+    // De module Informatieveiligheid aanzetten: sinds #648 zit dit oppervlak
+    // erachter, en met de module uit hoort het er juist níét te staan.
+    await ProviderScope.containerOf(
+      tester.element(find.text('open')),
+      listen: false,
+    ).read(infoSafetyProvider.notifier).enable();
+    await tester.pumpAndSettle();
     // Het Beveiliging-tabblad draagt er inmiddels twee: één bij de online
     // zoekopdracht (wat je prijsgeeft) en één bij de lokale database (dat je
     // dan niets meer prijsgeeft). Die van de online schakelaar moet de keten
