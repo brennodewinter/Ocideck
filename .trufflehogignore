@@ -2,6 +2,16 @@
 # Dezelfde uitsluitingen als .gitleaks.toml — zie daar voor de motivering en
 # voor de prijs die het detectiecorpus met zich meebrengt.
 
+# Gits eigen boekhouding. NIET de historie — die wordt door de aparte
+# `trufflehog git`- en `gitleaks git`-pas volledig gedekt. Dit is de map als
+# *bestandssysteem*: een reflog van tweeduizend commit-SHA's, waarin een
+# 40-teken hexadecimale SHA als LokaliseToken wordt herkend. Dat is geen
+# repository-inhoud maar machinelokale toestand: hij is nooit gepusht, en de
+# poort ging er rood van afhankelijk van hoeveel commits jíj toevallig had
+# gedaan. Twee mensen op dezelfde commit kregen een ander antwoord, en opnieuw
+# draaien repareerde niets. Zie #522.
+^\.git/
+
 # Gegenereerde uitvoer, gitignored.
 ^\.dart_tool/
 ^build/

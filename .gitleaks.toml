@@ -11,6 +11,15 @@ useDefault = true
 description = "Gegenereerde uitvoer en het detectiecorpus van OciWacht"
 
 paths = [
+  # ── Gits eigen boekhouding ─────────────────────────────────────────────────
+  # Niet de historie: die wordt gedekt door de aparte `git`-pas van beide
+  # scanners. Dit is `.git/` als bestandssysteem — de reflog, de index, de
+  # packfiles. Daar staat geen repository-inhoud in die niet ook elders staat,
+  # wél tweeduizend regels commit-SHA's, en een 40-teken hex-SHA leest als een
+  # API-sleutel. De poort werd daarmee afhankelijk van machinelokale toestand.
+  # Zie #522.
+  '''^\.git/''',
+
   # ── Gegenereerde uitvoer ───────────────────────────────────────────────────
   # Deze mappen staan in .gitignore en bevatten kopieën van de testfixtures
   # hieronder. Ze zijn nooit gecommit; ze scannen kost een minuut en levert
