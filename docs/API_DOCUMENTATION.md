@@ -172,6 +172,12 @@ Future<Uint8List> readBlob(String ref, String path);
 Future<String> headSha(String branch);
 ```
 
+The three REST adapters share their HTTP plumbing through the `ForgeHttp` mixin
+(`lib/services/git/forge_http.dart`): request/JSON handling, the status-to-
+`GitForgeException` translation and the ref check. It is deliberately not a new
+layer — `GitForge` stays the contract — and each adapter still supplies its own
+URL shape, auth header, error-message name and 409 meaning.
+
 Alongside the REST path, a native-git path (`NativeGitMirror`,
 `lib/services/git/native_git_mirror_api.dart`) makes real local commits and
 carries version history; see [`docs/design/GIT_STORAGE.md`](design/GIT_STORAGE.md).

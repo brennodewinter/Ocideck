@@ -78,6 +78,12 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   geen alt-tekst en geen structuur — ook niet de alt-tekst die u in de editor
   invulde. Moet de ontvanger kunnen lézen in plaats van kijken, lever dan de
   markdown of de HTML.
+- **De drie git-koppelingen praten voortaan via dezelfde plumbing.** GitHub,
+  GitLab en Forgejo/Gitea hadden elk hun eigen — nagenoeg woordelijk gelijke —
+  afhandeling van verzoeken, foutstatussen en antwoorden. Dat is samengetrokken,
+  zodat een verscherping niet meer op één plek landt en op de andere twee
+  achterblijft. Voor u verandert er niets aan wat de koppelingen doen; alleen de
+  melding bij een te grote maplijst noemt nu overal het aantal.
 
 ### Fixed
 - **Een export die niets doet, blijft niet meer eeuwig niets doen.** De PDF- en
