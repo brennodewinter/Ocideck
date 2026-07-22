@@ -134,6 +134,44 @@ Targeted test groups for focused work:
 4. Open a pull request describing the change and linking any related issue. Fill
    in the PR template checklist.
 
+## Who reviews this, and who does not
+
+*Added 2026-07-22. Written down because a reader deserves it before relying on
+this project, and because a checklist that hides its weakest row teaches you to
+distrust the rows that are true.*
+
+**There is one active maintainer.** [`AUTHORS.md`](AUTHORS.md) lists one person
+under Contributors, and that is accurate. Changes are merged by their author.
+There is no CI runner on the forge, so the checks below run on the maintainer's
+machine and nowhere else. That is a bus factor of one, and it is the largest
+single risk in this project — larger than anything a scanner has reported.
+
+**What stands in for peer review**, and it is not nothing:
+
+- `make check` must be green before a merge: analysis with `--fatal-infos`, the
+  full test suite, conventions, method length, file and class size, dead code,
+  the privacy projection boundary, a coverage floor and a per-file coverage
+  floor. See [`docs/CHECKS.md`](docs/CHECKS.md).
+- The ratchets only move one way. A baseline that is allowed to grow is not a
+  baseline, and several of them are at zero.
+- `make sast`, `make check-secrets` and mutation testing exist as separate gates.
+- Everything lands through a pull request with a written description, so the
+  reasoning is reviewable after the fact even when nobody reviewed it before.
+
+**None of that is four eyes, and it is worth saying so precisely because it is
+not the same thing.** A machine reviews what a machine can review. It does not
+notice that a design is wrong, that a promise in the interface overstates what
+the code does, or that a feature should not exist.
+
+**The gap runs one way.** If *you* send a pull request, it is reviewed by a human
+who is not its author — the maintainer. It is only the maintainer's own changes
+that go in unreviewed. That asymmetry is worth knowing in both directions.
+
+**What changes with a second maintainer.** Self-merge stops, and every change
+needs a review by a non-author. That is not a policy waiting to be written; it is
+the point at which the row above becomes tickable, and this section gets
+rewritten rather than extended.
+
 ## Reporting bugs and requesting features
 
 Use the issue templates in the Forgejo tracker. For **security issues, do not open a public
