@@ -1,0 +1,17 @@
+# Security contact for OciDeck (RFC 9116).
+#
+# This file travels with the web build: everything under web/ is copied to
+# build/web/, so wherever this app is hosted it answers the standard discovery
+# route at /.well-known/security.txt.
+#
+# It does not replace the one on the publisher's own site — that covers the
+# foundation, this one covers this application. Both point at the same mailbox.
+#
+# Expires is mandatory under RFC 9116 and must be under a year out. An expired
+# file is worse than none: it reads as "nobody is home". test/security_txt_test
+# fails the build when this date has passed, so it cannot rot unnoticed.
+
+Contact: mailto:security@librekat.nl
+Expires: 2027-07-01T00:00:00.000Z
+Preferred-Languages: nl, en
+Policy: https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/SECURITY.md

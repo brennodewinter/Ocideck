@@ -465,6 +465,18 @@ whether a fix has landed since — for that, the commit is still what matters.
 Fixes land on the default development branch, which is what everyone runs. Once
 releases are tagged, fixes will target the latest release plus that branch.
 
+## Finding this the standard way
+
+*Added 2026-07-22.* The web build serves its own
+[`/.well-known/security.txt`](../web/.well-known/security.txt) (RFC 9116), so a
+researcher who follows the standard discovery route lands on the same mailbox
+this file names. Delivery to that address was tested by the publisher on
+2026-07-22.
+
+The publisher's own site carries a separate `security.txt` covering the
+foundation rather than this application; the two are expected to name the same
+mailbox.
+
 ## The same facts, machine-readable
 
 *Added 2026-07-22.* [`security-insights.yml`](security-insights.yml) carries the
