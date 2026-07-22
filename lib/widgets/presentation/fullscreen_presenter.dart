@@ -22,7 +22,7 @@ import '../../models/slide.dart';
 import '../../models/timeline.dart';
 import '../../services/markdown_service.dart';
 import '../../services/privacy/privacy_projection.dart';
-import '../../services/mermaid_render_service.dart';
+import '../mermaid_render_host.dart';
 import '../../services/rehearsal_controller.dart';
 import '../../services/rich_text_layout.dart';
 import '../../services/finding_context_score.dart';

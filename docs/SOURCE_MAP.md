@@ -118,7 +118,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `markdown_service_finding.dart` — Parses/serializes the `finding` slide group's id/role markers and header spec.
 - `markdown_validator.dart` — Line-anchored structural pre-flight against the parser's expectations.
 - `marp_html_service.dart` — Builds the self-contained, sanitised HTML export with embedded assets.
-- `mermaid_render_service.dart` — Renders Mermaid diagrams to cached inline SVG via a shared WebView.
+- `mermaid_render_service.dart` — Renders Mermaid diagrams to cached inline SVG via a shared WebView. Headless: the WebView host itself is a widget and lives in `lib/widgets/mermaid_render_host.dart`.
 - `miauw_compliance_analyzer.dart` — Scores each MIAUW EIS (Voldaan/Openstaand/Uitgesloten) from deck content + waivers.
 - `miauw_eis_catalog.dart` — The bundled offline MIAUW EIS catalog (`MiauwEisCatalog`): all 88 testable EIS, parsed from the authoritative MIAUW workbook.
 - `open_file_channel.dart` — Receives file-open paths from macOS for `.md` files.
@@ -303,6 +303,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 
 - `app_shell.dart` — Main application shell: layout, file IO, and dialog coordination. Also the listeners for the one-shot signals: `_listenChartDataWarning` (two texts, since a data file that could not be *read* leaves a chart empty while one that could not be *written* leaves the numbers only in this window — the second is shown as an error) and `_listenUnsavedWork`, which passes the dirty state to `setUnsavedWorkGuard` and, where `RecoveryService.available` is false, says once that a crash recovers nothing here. That notice waits for the first edit rather than firing at startup: a warning about losing work when there is no work yet reads as noise.
 - `markdown_notes_editor.dart` — Barrel re-export of the markdown notes editor.
+- `mermaid_render_host.dart` — `MermaidRenderHostLayer`/`MermaidRenderHost`: the offstage WebView that `MermaidRenderService` renders its diagrams in, mounted only after the first diagram is requested.
 - `asset_origin_badge.dart` — `AssetOriginBadge`: makes visible what happens to a slide's media once the presentation is passed on. Says what the origin *means* rather than where the file sits, with the consequence and the way out in the tooltip. Deliberately confined to the editor — the rendered slide is also what the audience and the export see, and a work instruction does not belong there.
 - `privacy_badge.dart` — `PrivacyBadge`, the bare `PrivacyKatMark`, and the `privacyKatSvg` mark: the non-blocking marker (with an explanation on hover) for a spot where personal data is pointed at or something leaves the device. Used by the status bar's remote-origin badge, the export-readiness chip's privacy warnings, and the Security tab's online-CVE switch.
 - `privacy_statement_content.dart` — Privacy/license content shared by the consent and settings dialogs.
