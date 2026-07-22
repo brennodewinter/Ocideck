@@ -1778,6 +1778,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Šajā deksā ir MI teksts, ko vēl neesi pārbaudījis. Eksportēt tomēr var; fails pats to norāda un nosaukumā parādās "-ai-concept".',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Melnraksts: satur MI tekstu, ko vēl neviens nav pārbaudījis',
   'esc': 'esc',

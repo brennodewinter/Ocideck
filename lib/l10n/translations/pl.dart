@@ -1791,6 +1791,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'W tej talii jest tekst AI, którego jeszcze nie sprawdziłeś. Eksport jest możliwy; plik sam o tym informuje i dostaje "-ai-concept" w nazwie.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Szkic: zawiera tekst AI, którego nikt jeszcze nie sprawdził',
   'esc': 'esc',

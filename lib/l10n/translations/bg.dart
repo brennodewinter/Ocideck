@@ -1802,6 +1802,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'В този дек има AI текст, който още не си прегледал. Експортът е възможен; файлът сам съобщава това и получава „-ai-concept“ в името.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Чернова: съдържа AI текст, който още никой не е прегледал',
   'esc': 'esc',

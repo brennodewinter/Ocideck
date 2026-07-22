@@ -602,6 +602,41 @@ class _ExportDialogState extends State<ExportDialog> {
     ),
   );
 
+  /// Wat er met ongecontroleerde AI-tekst gebeurt zodra dit bestand weggaat.
+  ///
+  /// Exporteren blijft mogelijk — verzegelen is een verklaring en blijft
+  /// geblokkeerd, maar de normale weg om iets nagekeken te krijgen is het naar
+  /// een reviewer sturen. Wél verandert er dan iets aan het bestand: het draagt
+  /// de melding in zijn eigenschappen, in de HTML een balk, en `-ai-concept` in
+  /// de naam. Dat hoort de auteur te weten vóórdat hij op een formaatknop
+  /// drukt, om dezelfde reden als bij `-geredigeerd`: een verandering aan de
+  /// bestandsnaam die je pas achteraf ziet, is een verrassing.
+  Widget _aiDraftNotice(AppLocalizations l10n) {
+    if (!ExportDocumentMetadata.fromDeck(
+      _bundle.audience.deck,
+    ).hasUnreviewedAi) {
+      return const SizedBox.shrink();
+    }
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.auto_awesome_outlined, size: 15, color: AppTheme.slate400),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              l10n.d(
+                'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.',
+              ),
+              style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -801,6 +836,7 @@ class _ExportDialogState extends State<ExportDialog> {
         ),
         const SizedBox(height: 8),
         if (widget.hasPrivacyFindings) _profileSelector(l10n),
+        _aiDraftNotice(l10n),
         _manifestNotice(l10n),
         if (widget.hasDepthChoice) _depthSelector(l10n),
         // De formaatknoppen zijn de hoofdactie; de beeldkwaliteit is een

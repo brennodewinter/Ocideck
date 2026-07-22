@@ -1782,6 +1782,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'V tomto decku je AI text, který jsi zatím nezkontroloval. Export je přesto možný; soubor to sám uvádí a dostane v názvu "-ai-concept".',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Koncept: obsahuje AI text, který zatím nikdo nezkontroloval',
   'esc': 'esc',

@@ -1783,6 +1783,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Ebben a deckben AI-szöveg van, amelyet még nem ellenőriztél. Az exportálás így is lehetséges; a fájl maga jelzi ezt, és a neve "-ai-concept" toldalékot kap.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Vázlat: AI-szöveget tartalmaz, amelyet még senki nem ellenőrzött',
   'esc': 'esc',

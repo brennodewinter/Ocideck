@@ -1786,6 +1786,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Ovaj deck sadrži AI tekst koji još nisi pregledao. Izvoz je svejedno moguć; datoteka to sama navodi i dobiva "-ai-concept" u nazivu.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Nacrt: sadrži AI tekst koji još nitko nije pregledao',
   'esc': 'esc',

@@ -1770,6 +1770,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Selles esitluses on AI tekst, mida sa pole veel üle vaadanud. Eksportida saab siiski; fail teatab sellest ise ja saab nimesse "-ai-concept".',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Mustand: sisaldab AI teksti, mida keegi pole veel üle vaadanud',
   'esc': 'esc',

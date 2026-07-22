@@ -1807,6 +1807,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Αυτό το deck περιέχει κείμενο AI που δεν έχεις ελέγξει ακόμη. Η εξαγωγή επιτρέπεται· το αρχείο το αναφέρει από μόνο του και παίρνει «-ai-concept» στο όνομα.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Προσχέδιο: περιέχει κείμενο AI που δεν έχει ελέγξει ακόμη κανείς',
   'esc': 'esc',

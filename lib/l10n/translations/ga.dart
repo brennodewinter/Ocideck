@@ -1815,6 +1815,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Tá téacs IS sa deic seo nár sheiceáil tú fós. Is féidir easpórtáil mar sin féin; luann an comhad féin é agus faigheann sé "-ai-concept" ina ainm.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Dréacht: tá téacs IS anseo nár sheiceáil duine ar bith fós',
   'esc': 'esc',

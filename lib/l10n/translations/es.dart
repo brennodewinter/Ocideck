@@ -733,6 +733,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Este deck contiene texto de IA que aún no has revisado. Puedes exportar igualmente; el archivo lo indica por sí mismo y lleva "-ai-concept" en el nombre.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Borrador: contiene texto de IA que nadie ha revisado todavía',
   'esc': 'esc',

@@ -1754,6 +1754,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'deckvamDaq AI-ghItlh tu\'lu\'; DanuDpu\'be\'. ngeHlu\'laH; teywI\' pongDaq "-ai-concept" chelu\'.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'nab: AI-ghItlh tu\'lu\'. not nuDlu\'pu\'.',
   'esc': 'esc',

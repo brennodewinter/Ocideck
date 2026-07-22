@@ -1778,6 +1778,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Dette deck indeholder AI-tekst, du endnu ikke har gennemgået. Du kan godt eksportere; filen oplyser selv om det og får "-ai-concept" i navnet.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Udkast: indeholder AI-tekst, som ingen har gennemgået endnu',
   'esc': 'esc',

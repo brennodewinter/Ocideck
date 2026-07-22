@@ -1797,6 +1797,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Acest deck conține text IA pe care nu l-ai verificat încă. Exportul este totuși posibil; fișierul semnalează el însuși acest lucru și primește "-ai-concept" în nume.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Schiță: conține text IA pe care nimeni nu l-a verificat încă',
   'esc': 'esc',

@@ -1795,6 +1795,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'In hoc acervo est textus IA quem nondum recognovisti. Exportare licet: plica ipsa id nuntiat et "-ai-concept" in nomine accipit.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Adumbratio: hic est textus IA quem nemo adhuc recognovit',
   'esc': 'esc',

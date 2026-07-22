@@ -736,6 +736,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'In diesem Deck steht KI-Text, den du noch nicht geprüft hast. Exportieren geht trotzdem; die Datei weist selbst darauf hin und bekommt "-ai-concept" im Namen.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Entwurf: enthält KI-Text, den noch niemand geprüft hat',
   'esc': 'Esc',

@@ -737,6 +737,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Yn dit deck stiet AI-tekst dy\'tst noch net neisjoen hast. Eksportearje kin; it bestân meldt dat sels en krijt "-ai-concept" yn de namme.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Konsept: hjir stiet AI-tekst dy\'t noch nimmen neisjoen hat',
   'esc': 'esc',

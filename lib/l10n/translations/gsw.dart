@@ -1783,6 +1783,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'I dem Deck staht KI-Text, wo du no nöd prüeft häsch. Exportiere gaht trotzdem; d Datei seit das sälber und überchunnt "-ai-concept" im Name.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Entwurf: da staht KI-Text, wo no niemert prüeft hät',
   'esc': 'Esc',
