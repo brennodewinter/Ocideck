@@ -250,3 +250,186 @@ int afstandVoor(ServiceNorm norm, DateTime van, DateTime tot) =>
     norm.inWerkdagen
     ? werkdagenTussen(van, tot)
     : kalenderdagenTussen(van, tot);
+
+// ── De melding ─────────────────────────────────────────────────────────────
+
+/// Eén beveiligingsmelding, teruggebracht tot de momenten die ertoe doen.
+///
+/// Geen titel, geen tekst, geen melder. Dit gereedschap kan in een cron-mail
+/// terechtkomen, en de inhoud van een openstaande kwetsbaarheidsmelding hoort
+/// niet ongevraagd in iemands postvak. Het nummer is genoeg om hem op te
+/// zoeken; wie hem mag lezen, leest hem in de forge.
+class Melding {
+  const Melding({
+    required this.nummer,
+    required this.gemeld,
+    this.eersteReactie,
+    this.oordeelOp,
+    this.bevestigd = false,
+    this.gesloten,
+    this.afgesprokenUiterlijk,
+  });
+
+  /// Het issuenummer in de forge.
+  final int nummer;
+
+  /// Wanneer de melding binnenkwam.
+  final DateTime gemeld;
+
+  /// De eerste gebeurtenis van iemand anders dan de melder, of null.
+  final DateTime? eersteReactie;
+
+  /// Wanneer een oordeellabel (echt of ruis) geplakt is, of null.
+  final DateTime? oordeelOp;
+
+  /// Luidde het oordeel "dit is echt"?
+  final bool bevestigd;
+
+  /// Wanneer de melding gesloten is, of null.
+  final DateTime? gesloten;
+
+  /// Een in overleg afgesproken eerdere einddatum (de due date op het issue).
+  ///
+  /// De norm is "binnen 90 dagen **of eerder in overleg**". Zo'n afspraak is
+  /// geen aantekening in een verslag maar een datum op de melding zelf — dan
+  /// meet dit gereedschap er ook tegen.
+  final DateTime? afgesprokenUiterlijk;
+}
+
+/// Hoe een melding er tegenover één norm voor staat.
+enum Stand {
+  /// Binnen de norm afgerond.
+  gehaald,
+
+  /// Nog bezig, ruim binnen de norm.
+  loopt,
+
+  /// Nog bezig, over de waarschuwingsdrempel: dit gaat mis als het zo blijft.
+  dreigt,
+
+  /// Over de norm heen — of hij nu nog loopt of te laat is afgerond.
+  overschreden,
+
+  /// Deze norm geldt hier niet (ruis hoeft niet opgelost te worden).
+  nietVanToepassing,
+}
+
+/// De uitkomst van één norm tegen één melding.
+class Meting {
+  const Meting({
+    required this.nummer,
+    required this.norm,
+    required this.stand,
+    required this.verstreken,
+    required this.limiet,
+    required this.afgerond,
+  });
+
+  final int nummer;
+  final ServiceNorm norm;
+  final Stand stand;
+
+  /// Verstreken tijd in de eenheid van de norm.
+  final int verstreken;
+
+  /// De limiet waartegen gemeten is — lager dan de norm als er een eerdere
+  /// datum is afgesproken.
+  final int limiet;
+
+  /// Is de klok gestopt, of loopt hij nog?
+  final bool afgerond;
+
+  bool get vraagtAandacht =>
+      stand == Stand.dreigt || stand == Stand.overschreden;
+}
+
+/// De drempel waarboven het "dreigt" heet, meegeschaald met [limiet].
+///
+/// Bij de volle norm is dat gewoon `norm.waarschuwVanaf`. Is er een kortere
+/// termijn afgesproken, dan schuift de waarschuwing evenredig mee: een afspraak
+/// van 30 dagen waarschuwt op 25, niet op 75 — dat laatste zou pas na afloop
+/// vallen en de waarschuwing zinloos maken.
+int waarschuwingsdrempel(ServiceNorm norm, int limiet) {
+  if (limiet >= norm.limiet) return norm.waarschuwVanaf;
+  final geschaald = (limiet * norm.waarschuwVanaf) ~/ norm.limiet;
+  return geschaald < 1 ? 1 : geschaald;
+}
+
+Stand _standVoor({
+  required int verstreken,
+  required int limiet,
+  required int drempel,
+  required bool afgerond,
+}) {
+  if (verstreken > limiet) return Stand.overschreden;
+  if (afgerond) return Stand.gehaald;
+  return verstreken >= drempel ? Stand.dreigt : Stand.loopt;
+}
+
+/// Het moment waarop de klok voor [norm] stopte, of null als hij nog loopt.
+///
+/// Sluiten stopt elke klok. Een gesloten melding wacht niet meer op een eerste
+/// reactie — anders zou een zelf gemelde en zelf afgehandelde bevinding tot in
+/// eeuwigheid als onbeantwoord blijven staan.
+DateTime? _eindpuntVoor(ServiceNorm norm, Melding melding) {
+  switch (norm.id) {
+    case 'eerste-reactie':
+      return melding.eersteReactie ?? melding.gesloten;
+    case 'oordeel':
+      return melding.oordeelOp ?? melding.gesloten;
+    default:
+      return melding.gesloten;
+  }
+}
+
+/// De effectieve limiet voor [norm]: de norm, of de eerder afgesproken datum.
+int _limietVoor(ServiceNorm norm, Melding melding) {
+  final afspraak = melding.afgesprokenUiterlijk;
+  if (norm.id != 'oplossing' || afspraak == null) return norm.limiet;
+  final afgesproken = kalenderdagenTussen(melding.gemeld, afspraak);
+  return afgesproken < norm.limiet ? afgesproken : norm.limiet;
+}
+
+/// Meet [melding] langs [norm], met [nu] als peilmoment.
+Meting beoordeel({
+  required ServiceNorm norm,
+  required Melding melding,
+  required DateTime nu,
+}) {
+  // De oplossingsnorm geldt alleen voor een bevestigde melding: ruis hoeft niet
+  // opgelost te worden, en een melding zonder oordeel valt nog onder de
+  // oordeelnorm — die telt hem al.
+  if (norm.id == 'oplossing' && !melding.bevestigd) {
+    return Meting(
+      nummer: melding.nummer,
+      norm: norm,
+      stand: Stand.nietVanToepassing,
+      verstreken: 0,
+      limiet: norm.limiet,
+      afgerond: melding.gesloten != null,
+    );
+  }
+  final eindpunt = _eindpuntVoor(norm, melding);
+  final limiet = _limietVoor(norm, melding);
+  final verstreken = afstandVoor(norm, melding.gemeld, eindpunt ?? nu);
+  return Meting(
+    nummer: melding.nummer,
+    norm: norm,
+    stand: _standVoor(
+      verstreken: verstreken,
+      limiet: limiet,
+      drempel: waarschuwingsdrempel(norm, limiet),
+      afgerond: eindpunt != null,
+    ),
+    verstreken: verstreken,
+    limiet: limiet,
+    afgerond: eindpunt != null,
+  );
+}
+
+/// Elke norm langs elke melding.
+List<Meting> meetAlles(List<Melding> meldingen, DateTime nu) => [
+  for (final melding in meldingen)
+    for (final norm in serviceNormen)
+      beoordeel(norm: norm, melding: melding, nu: nu),
+];
