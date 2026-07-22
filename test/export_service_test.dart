@@ -7,6 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/markdown_validation.dart';
+import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/slide_quality.dart';
 import 'package:ocideck/models/redaction_manifest.dart';
 import 'package:ocideck/services/classification_enforcement_policy.dart';
@@ -358,6 +359,64 @@ void main() {
         p.basename(reviewed.outputPath!),
         isNot(contains(kAiDraftFileSuffix)),
       );
+    },
+  );
+
+  test(
+    'de markering wordt uit de bundel geteld, niet uit wat de aanroeper meegaf',
+    () async {
+      // De poort waar élk formaat langskomt telt zelf. Dat is het verschil
+      // tussen een melding die kan ontbreken en een die dat niet kan: `metadata`
+      // is optioneel én door de aanroeper samen te stellen, dus zou de melding
+      // dáár vandaan komen, dan volstond "vergeten" om ongecontroleerde
+      // AI-tekst zwijgend te laten vertrekken.
+      final bundel = bundleFor(
+        Deck(
+          title: 'Conceptrapport',
+          slides: [
+            Slide.create(SlideType.title),
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(aiAssistedFields: const ['description']),
+          ],
+        ),
+      );
+
+      // Metadata die de markering níét noemt — het geval "vergeten".
+      final r = await service.export(
+        deckPath(),
+        ExportFormat.pdf,
+        [_png()],
+        audience: bundel,
+        metadata: const ExportDocumentMetadata(title: 'Conceptrapport'),
+      );
+      expect(r.success, isTrue, reason: r.error);
+      expect(p.basename(r.outputPath!), contains(kAiDraftFileSuffix));
+      final text = String.fromCharCodes(
+        await File(r.outputPath!).readAsBytes(),
+      );
+      expect(text, contains(r'AI-generated \(unreviewed\)'));
+    },
+  );
+
+  test(
+    'een nagekeken bundel laat de melding weg, ook als metadata hem noemt',
+    () async {
+      // De andere kant op, en even belangrijk: geteld is geteld. Zou de aanroeper
+      // de melding erin kunnen houden, dan draagt een afgerond rapport voorgoed
+      // het stempel "concept" en betekent het niets meer.
+      final bundel = bundleFor(
+        Deck(title: 'Rapport', slides: [Slide.create(SlideType.title)]),
+      );
+      final r = await service.export(
+        deckPath(),
+        ExportFormat.pdf,
+        [_png()],
+        audience: bundel,
+        metadata: aiMeta,
+      );
+      expect(r.success, isTrue, reason: r.error);
+      expect(p.basename(r.outputPath!), isNot(contains(kAiDraftFileSuffix)));
     },
   );
 

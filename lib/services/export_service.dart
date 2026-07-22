@@ -235,8 +235,16 @@ class ExportService {
       return ExportResult.fail('Geen slides om te exporteren.');
     }
     final fallbackTitle = p.basenameWithoutExtension(deckPath);
-    final docMeta =
+    final given =
         metadata ?? ExportDocumentMetadata(title: fallbackTitle, tlp: tlp);
+    // De AI-markering wordt hier gételd, niet aangenomen. `metadata` is
+    // optioneel en door de aanroeper samen te stellen; zou de melding daaruit
+    // moeten komen, dan is "vergeten door te geven" genoeg om ongecontroleerde
+    // AI-tekst zwijgend de deur uit te laten gaan. Het geprojecteerde deck
+    // weet het zelf, en dit is de ene poort waar elk formaat langskomt.
+    final docMeta = audience == null
+        ? given
+        : given.withAiMarkingFrom(audience.audience);
     final compactSuffix = compress && format == ExportFormat.pdf
         ? '-compact'
         : '';

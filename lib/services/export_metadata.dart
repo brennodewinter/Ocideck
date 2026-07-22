@@ -90,6 +90,33 @@ class ExportDocumentMetadata {
   /// Of deze export ongecontroleerde AI-tekst bevat en dat dus moet melden.
   bool get hasUnreviewedAi => unreviewedAiSlideCount > 0;
 
+  /// Dezelfde metadata, met de AI-markering opnieuw geteld uit [audience].
+  ///
+  /// Bedoeld voor het exportchokepoint, en daar is een reden voor. `metadata`
+  /// is optioneel: een aanroeper die wél een `audience` meegeeft maar géén
+  /// metadata, kreeg een terugvalexemplaar zonder markering — en dan gaat er
+  /// ongecontroleerde AI-tekst de deur uit die zichzelf niet meldt. Erger nog:
+  /// een aanroeper die zélf een `ExportDocumentMetadata` samenstelt, kon de
+  /// telling op nul laten staan en zo de melding wegnemen zonder dat iets klaagt.
+  ///
+  /// Dit is precies waarom de andere velden hier al niet meer los reizen. De
+  /// zes auteursvelden zijn keuzes van de auteur; het aantal dia's met
+  /// ongecontroleerde AI-tekst is dat niet — dat is een feit over het deck.
+  /// Feiten hoor je te tellen op de plek waar je ze kunt tellen, en dat is de
+  /// ene poort waar PDF, PPTX en HTML alledrie langs komen.
+  ExportDocumentMetadata withAiMarkingFrom(AudienceDeck audience) =>
+      ExportDocumentMetadata(
+        title: title,
+        author: author,
+        organization: organization,
+        description: description,
+        keywords: keywords,
+        tlp: tlp,
+        unreviewedAiSlideCount: slidesWithUnreviewedAiMarkers(
+          audience.deck,
+        ).length,
+      );
+
   /// Fallback title when [title] is empty.
   String displayTitle(String fallback) =>
       title.trim().isNotEmpty ? title.trim() : fallback;
