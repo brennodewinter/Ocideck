@@ -872,8 +872,24 @@ double _contentLeftInset(Slide slide, double w) {
       return w * 0.06;
     case SlideType.quote:
       return w * 0.08;
-    default:
-      // Beeld/video: geen tekstmarge om mee uit te lijnen.
+    // De rest deelt de standaardmarge — beeld en video hebben geen tekst om
+    // mee uit te lijnen, de overige typen tekenen hun eigen padding. Bewust
+    // uitgeschreven en niet als `default:`: die zet het compiler-vangnet uit,
+    // en dan krijgt slidetype #25 stilzwijgend deze waarde toegewezen terwijl
+    // zijn footer scheef onder de inhoud komt te staan.
+    case SlideType.title ||
+        SlideType.section ||
+        SlideType.twoImages ||
+        SlideType.image ||
+        SlideType.video ||
+        SlideType.scorecard ||
+        SlideType.assets ||
+        SlideType.discoveries ||
+        SlideType.finding ||
+        SlideType.findingsSummary ||
+        SlideType.checklist ||
+        SlideType.scopeMatrix ||
+        SlideType.signOff:
       return w * 0.04;
   }
 }
