@@ -240,6 +240,17 @@ void main() {
       expect(forgeUit(''), isNull);
     });
 
+    test('de scp-vorm pakt geen ssh-url af', () {
+      // Zonder vooruitblik leest die vorm de poort als eigenaar. Dat gaat nu
+      // alleen goed door de volgorde van de patronen — een afhankelijkheid
+      // die niemand ziet tot iemand de lijst herschikt.
+      final adres = forgeUit(
+        'ssh://git@forge.voorbeeld.test:2222/Groep/P.git',
+      )!;
+      expect(adres.eigenaar, 'Groep');
+      expect(adres.eigenaar, isNot('2222'));
+    });
+
     Map<String, Object?> issue({
       required int nummer,
       List<String> labels = const ['beveiliging'],
@@ -264,13 +275,16 @@ void main() {
       required String wanneer,
       String? label,
       String? inhoud,
-    }) => {
-      'type': type,
-      'created_at': wanneer,
-      'user': {'login': wie},
-      if (label != null) 'label': {'name': label},
-      if (inhoud != null) 'content': inhoud,
-    };
+    }) {
+      final labelDeel = label == null ? null : <String, String>{'name': label};
+      return {
+        'type': type,
+        'created_at': wanneer,
+        'user': {'login': wie},
+        'label': ?labelDeel,
+        'content': ?inhoud,
+      };
+    }
 
     test('zonder beveiligingslabel is het geen melding', () {
       expect(meldingUit(issue(nummer: 1, labels: ['bug']), const []), isNull);

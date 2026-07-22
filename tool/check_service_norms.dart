@@ -459,7 +459,13 @@ class ForgeAdres {
 final _sshVorm = RegExp(
   r'^ssh://[^@]+@([^:/]+)(?::\d+)?/(.+?)/(.+?)(?:\.git)?$',
 );
-final _scpVorm = RegExp(r'^[^@]+@([^:]+):(.+?)/(.+?)(?:\.git)?$');
+// De negatieve vooruitblik is niet overbodig: zonder hem slikt deze vorm ook
+// `ssh://git@host:2222/Groep/Project.git` en leest hij de poort als eigenaar.
+// Dat gaat nu alleen goed omdat _sshVorm eerder wordt geprobeerd — een
+// volgorde-afhankelijkheid die niemand ziet tot iemand de lijst herschikt.
+final _scpVorm = RegExp(
+  r'^(?![a-z][a-z0-9+.-]*://)[^@]+@([^:]+):(.+?)/(.+?)(?:\.git)?$',
+);
 final _httpVorm = RegExp(
   r'^https?://(?:[^@/]+@)?([^:/]+)(?::\d+)?/(.+?)/(.+?)(?:\.git)?$',
 );
