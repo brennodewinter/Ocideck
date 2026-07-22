@@ -4,6 +4,11 @@
 // an extension — same library, same members, no behaviour change.
 part of 'markdown_service.dart';
 
+// Welke slidetypes hun inhoud als tabel dragen staat níet hier maar in de
+// registry naast de enum ([SlideTypeMeta.backedByTable]). De parser hield daar
+// een tweede, handgeschreven lijst van bij, en een type daarin vergeten was
+// stil verlies: het deck parseerde, de dia verscheen, en de rijen waren leeg.
+
 // Hoisted hot-path regexes: compiled once at library load instead of on every
 // line/slide while parsing (they ran in the per-line body loop and the
 // slide-type inference, recompiling the same patterns thousands of times).
@@ -49,20 +54,6 @@ SlideType? _declaredSlideType(Iterable<String> tokens) {
   }
   return null;
 }
-
-/// Slide types whose body is stored as a Markdown table, so the parser keeps the
-/// decoded rows in [Slide.tableRows]: the `table` and `scorecard` types plus the
-/// security types that serialise as a table (`checklist` P1-CHK, `scopeMatrix`
-/// P1-SCOPE, `findingsSummary` P1-SUM).
-const _tableBackedTypes = {
-  SlideType.table,
-  SlideType.scorecard,
-  SlideType.assets,
-  SlideType.discoveries,
-  SlideType.checklist,
-  SlideType.scopeMatrix,
-  SlideType.findingsSummary,
-};
 
 /// Mutable accumulator for [_MarkdownParse._parseBodyLines]: the per-line
 /// handlers fill these fields as they walk a slide block's body.
@@ -433,7 +424,7 @@ extension _MarkdownParse on MarkdownService {
       tlp: d.tlp,
       privacy: d.privacy,
       quality: d.quality,
-      tableRows: _tableBackedTypes.contains(type) ? tableRows : const [],
+      tableRows: type.backedByTable ? tableRows : const [],
       tableEditable:
           type == SlideType.table && classTokens.contains('table-editable'),
       tableMarkOverdue:

@@ -138,7 +138,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
               radius: w * 0.007,
               color: _seriesDisplayColor(spec.series[si], si),
               strokeWidth: w * 0.002,
-              strokeColor: _hexColor(profile.slideBackgroundColor),
+              strokeColor: AppTheme.parseHexColor(profile.slideBackgroundColor),
             ),
           ),
         );
@@ -180,7 +180,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
               radius: w * 0.005,
               color: _seriesDisplayColor(spec.series[si], si),
               strokeWidth: w * 0.0025,
-              strokeColor: _hexColor(profile.slideBackgroundColor),
+              strokeColor: AppTheme.parseHexColor(profile.slideBackgroundColor),
             ),
           ),
           belowBarData: BarAreaData(
@@ -302,7 +302,9 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
                                 labels: spec.x,
                                 colors: [
                                   for (var xi = 0; xi < values.length; xi++)
-                                    _hexColor(chartRowColor(spec, xi)),
+                                    AppTheme.parseHexColor(
+                                      chartRowColor(spec, xi),
+                                    ),
                                 ],
                                 radius: radius,
                                 centerSpaceRadius:

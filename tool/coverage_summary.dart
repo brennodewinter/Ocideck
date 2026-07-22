@@ -37,6 +37,13 @@ import 'dart:io';
 ///
 /// A file that is merely *untested* does not belong here: write the test.
 const Set<String> uncoveredBaseline = {
+  // NO EXECUTABLE LINES: `media_fetch.dart` is een kale export-facade — één
+  // conditional export en verder niets. PLATFORM: `media_fetch_web.dart` is de
+  // web-helft daarvan; daar opent de browser de verbinding en valt er niets te
+  // pinnen. De io-helft, waar de SSRF-poort zit, wordt wél getest
+  // (media_fetch_test.dart).
+  'lib/utils/media_fetch.dart',
+  'lib/utils/media_fetch_web.dart',
   // NO EXECUTABLE LINES: `StorageOrigin` is een abstract interface met twee
   // getters en verder niets — het contract dat WebdavOrigin, S3Origin en
   // GitOrigin delen. De implementaties worden wél getest

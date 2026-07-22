@@ -1,5 +1,7 @@
 # Third-Party Notices
 
+> **Status:** current-state notices, maintained by hand; the SBOM is the machine-readable authority · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 OciDeck is licensed under the EUPL-1.2 (see [`LICENSE.md`](LICENSE.md)). It
 builds on, and bundles, third-party components that remain under their own
 licences. This file lists them; each component's full licence text is available

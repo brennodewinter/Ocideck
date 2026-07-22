@@ -27,70 +27,49 @@ class _FindingsSummaryPreview extends StatelessWidget {
     final l10n = context.l10n;
     final pad = w * 0.07; // vertical margin
     final hPad = w * 0.045; // narrower side margin — use the width (feedback)
-    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final spec = FindingsSummarySpec.fromSlide(slide.title, slide.tableRows);
 
-    return Container(
-      color: Colors.white,
-      child: SizedBox.expand(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          alignment: Alignment.topLeft,
-          child: SizedBox(
-            width: w,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                hPad,
-                pad + safe.top,
-                hPad,
-                _logoAwareBottomPadding(pad, safe.bottom),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (spec.title.isNotEmpty)
-                    Text(
-                      spec.title,
-                      style: _applyFont(
-                        font,
-                        TextStyle(
-                          fontSize: w * 0.04,
-                          fontWeight: FontWeight.w700,
-                          color: AppTheme.navy,
-                        ),
-                      ),
-                    ),
-                  SizedBox(height: w * 0.015),
-                  Text(
-                    '${l10n.d('Totaal')}: ${spec.total}',
-                    style: _applyFont(
-                      font,
-                      TextStyle(fontSize: w * 0.026, color: AppTheme.slate600),
-                    ),
-                  ),
-                  SizedBox(height: w * 0.008),
-                  // Retest is always named — also when nothing was resolved.
-                  Text(
-                    '${l10n.d('Opgelost na hertest')}: ${spec.resolved}',
-                    style: _applyFont(
-                      font,
-                      TextStyle(
-                        fontSize: w * 0.024,
-                        color: AppTheme.success700,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: w * 0.03),
-                  SizedBox(height: w * 0.42, child: _chart(spec)),
-                  SizedBox(height: w * 0.03),
-                  _legend(context, spec),
-                ],
+    return _PreviewScaffold(
+      width: w,
+      slide: slide,
+      profile: profile,
+      horizontalPadding: hPad,
+      verticalPadding: pad,
+      children: [
+        if (spec.title.isNotEmpty)
+          Text(
+            spec.title,
+            style: _applyFont(
+              font,
+              TextStyle(
+                fontSize: w * 0.04,
+                fontWeight: FontWeight.w700,
+                color: AppTheme.navy,
               ),
             ),
           ),
+        SizedBox(height: w * 0.015),
+        Text(
+          '${l10n.d('Totaal')}: ${spec.total}',
+          style: _applyFont(
+            font,
+            TextStyle(fontSize: w * 0.026, color: AppTheme.slate600),
+          ),
         ),
-      ),
+        SizedBox(height: w * 0.008),
+        // Retest is always named — also when nothing was resolved.
+        Text(
+          '${l10n.d('Opgelost na hertest')}: ${spec.resolved}',
+          style: _applyFont(
+            font,
+            TextStyle(fontSize: w * 0.024, color: AppTheme.success700),
+          ),
+        ),
+        SizedBox(height: w * 0.03),
+        SizedBox(height: w * 0.42, child: _chart(spec)),
+        SizedBox(height: w * 0.03),
+        _legend(context, spec),
+      ],
     );
   }
 

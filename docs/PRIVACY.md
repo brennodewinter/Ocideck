@@ -1,5 +1,7 @@
 # OciDeck — Privacy & Data Handling
 
+> **Status:** current-state description of what stays local and what leaves · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 A plain-language guide to what happens to your data in OciDeck: what stays on your
 device, what leaves it and only when you ask, and the controls you have. For the
 technical mechanisms behind these guarantees, see

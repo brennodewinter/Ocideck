@@ -1,5 +1,7 @@
 # OciDeck — Open-Source Licence Compliance
 
+> **Status:** policy, with a dated result under *Latest result* · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 OciDeck is released under the **EUPL-1.2** (see [`../LICENSE.md`](../LICENSE.md)).
 This document records the policy that the project only includes open-source
 software, how that is verified, and the result of the latest check.
@@ -42,8 +44,8 @@ disagree.
 
 ## Latest result
 
-All **187** resolved Dart/Flutter packages (including OciDeck itself) use
-recognised open-source licences — *as of 2026-07-22*:
+Run on **2026-07-22** (`dart run tool/check_licenses.dart`). All **187** resolved
+Dart/Flutter packages use recognised open-source licences:
 
 | Count | Licence |
 | ---: | --- |
@@ -60,10 +62,16 @@ recognised open-source licences — *as of 2026-07-22*:
 > [`../sbom/ocideck.sbom.md`](../sbom/ocideck.sbom.md), rebuilt by `make sbom`
 > and held current by `make sbom-verify` — read that one if the two disagree.
 
-Counting the whole SBOM (199 components — packages plus the vendored JS bundles,
-bundled fonts, plugin forks and SDKs) adds 5 × OFL-1.1 (the bundled fonts) and
-1 × `Apache-2.0 OR MPL-2.0` (DOMPurify), and lifts BSD-3-Clause to 127, MIT to 49
-and Apache-2.0 to 14.
+Counting the whole SBOM (**199** components — packages plus the vendored JS
+bundles, bundled fonts, plugin forks and SDKs) adds 5 × OFL-1.1 (the bundled
+fonts) and 1 × `Apache-2.0 OR MPL-2.0` (DOMPurify, which the generated
+`sbom/ocideck.sbom.md` tallies under Apache-2.0), and lifts BSD-3-Clause to 127
+and MIT to 50.
+
+*(Corrected 2026-07-22: this section said 182 packages and 197 components with
+no date on either, so a reader could not tell that the dependency graph had
+moved on. Both numbers are re-counted above and dated; re-run the command and
+`make sbom-verify` when dependencies change, and move the date with them.)*
 
 Bundled assets: marked (MIT), highlight.js (BSD-3-Clause), Mermaid (MIT, bundling
 DOMPurify under Apache-2.0/MPL-2.0), MathJax (Apache-2.0), five fonts under SIL

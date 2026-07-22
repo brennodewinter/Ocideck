@@ -1,9 +1,16 @@
 # Security Policy
 
+> **Status:** policy, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This policy covers vulnerabilities in **OciDeck itself** (the application). It does
 **not** govern how findings from a penetration test authored *with* OciDeck are
 disclosed — that is arranged per engagement with the client (scope, reporting
 channel, and disclosure terms), not dictated by this tool.
+
+The mailbox below is the project's only published address, so it also receives
+Code-of-Conduct reports, which follow [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
+rather than this policy. *(Noted 2026-07-22: the scope sentence above admits only
+vulnerabilities, which made the shared use of the address look like a mistake.)*
 
 ## Reporting a vulnerability
 
@@ -41,6 +48,90 @@ When reporting, please include as much of the following as you can:
 We ask that you give us a reasonable opportunity to address the issue before any
 public disclosure, and that you avoid privacy violations, data destruction, or
 service disruption while researching.
+
+## What happens to your report on our side
+
+This section was added on 2026-07-22 because the one above only described what
+you get back, not what is done. It describes the working method, so you can tell
+whether your report has fallen through a crack.
+
+**Triage.** A report is first reproduced against the current default branch. If
+it cannot be reproduced, you are asked for what is missing rather than told no.
+A reproduced report becomes an issue in the tracker — a private one where the
+detail would itself be the exploit, public where it would not.
+
+**Severity.** Severity is judged on what an attacker actually gains on the
+machine in front of the user, not on the label of the mechanism. The questions
+that decide it, in order: can it be reached from a deck or a file a user opens
+without any further action; does it cross one of the boundaries this project
+exists to hold (the export classification gate, asset-path containment, the
+privacy projection boundary, the SSRF guard, the keychain); does it need a
+setting that is off by default. The pentest module's own CVSS v4.0 engine is
+available for putting a number on it, but the number is a communication aid, not
+the decision.
+
+**Ownership.** OciDeck is maintained by a small group under Stichting LibreKAT;
+there is no rota and no second line. A report is owned by whoever picks it up,
+and that person stays the correspondent until it is closed — so you are not
+handed on. If nothing has come back, a reminder to the same address is the right
+move; see [Reporting a vulnerability](#reporting-a-vulnerability).
+
+**When the report is about something we bundle, not something we wrote.** That is
+a large part of the attack surface: five vendored JavaScript bundles in the HTML
+export, the Dart/Flutter package graph, two plugin forks, and the offline
+reference datasets. The report is still handled here, because a user runs what
+we ship regardless of who wrote it. What changes is the fix: an upstream
+advisory is answered by moving the pin and refreshing
+`assets/web_export/MANIFEST.json`, not by patching a vendored copy — a local
+patch is invisible to `make deps-check` and to every external scanner reading the
+SBOM. Where no upgrade is available, the mitigation and the residual are written
+down in [Vendored bundle currency](#vendored-bundle-currency) under the
+component's own name, so a reader can see it rather than infer it.
+
+## Keeping vulnerable third-party components out
+
+**This describes how the maintainers order their own work. It is not a service
+commitment, and no timeframe here is promised to anyone.** OciDeck is an
+open-source project with no release process (see [Supported
+versions](#supported-versions)); a fixed remediation deadline is exactly the kind
+of promise that becomes untrue the first quiet month. What follows is the
+steering instrument, written down so it can be held to in behaviour.
+
+**What is a gate and what is advice**, because the difference decides how fast
+something has to move:
+
+| Check | Fails the work? | Covers |
+| --- | --- | --- |
+| `make deps-check` | **Yes** — part of `make check-full` | The five vendored export bundles: SHA-256 against the manifest, plus an OSV query per pinned version. Also the bundled reference standards against upstream. |
+| `make sbom-verify` | **Yes** — in the test suite | The committed SBOM still matches the dependency set. |
+| `make trivy` | **No, by configuration** | CVEs in the resolved Dart packages, plus a committed-secret sweep. [`trivy.yaml`](trivy.yaml) says so itself: it reports every severity and never fails the build, because Dart/pub advisory coverage is sparse enough that a gate would mostly teach people to skip it. Findings are triaged by hand. |
+| `make deps-outdated`, `make catalogs-outdated` | **No** | Freshness of packages and of the bundled standards. A newer upstream is not a defect in what you built. |
+
+**The rhythm.** `make check-full` — which is where the gates above live — is run
+before any dependency or web-facing change, and before a build meant for anyone
+else. There is no scheduled scan, because there is no runner to schedule it on:
+the Forgejo remote has none, so the CI workflow that declares these checks is
+written but never fires. Whoever commits is the scan.
+
+**How urgency is decided.** In descending order, and this is the whole of it:
+
+1. A component that untrusted deck content or a network response can reach
+   *without* a setting being turned on — the sanitiser, the parsers, the export
+   bundles — moves ahead of whatever else was planned.
+2. A component reachable only behind an off-by-default switch (the AI backend,
+   the CVE lookup, online media) is upgraded on the ordinary rhythm, and the
+   exposure is named in this file meanwhile.
+3. An advisory that is disputed, or whose worst case is denial of service on
+   input the user chose to open, is tracked by name and version rather than
+   rushed — as `CVE-2023-39663` against MathJax 3.2.2 is below.
+4. An upgrade with no advisory behind it waits until its behaviour can be
+   validated, and the reason for waiting is written down — as the mermaid 10 → 11
+   upgrade is below.
+
+The point of writing the order down is that the third and fourth categories are
+where a project quietly stops looking. Naming a deferred item, with its version
+and its reason, is what keeps it from becoming a decision nobody remembers
+taking.
 
 ## Scope notes
 
@@ -321,3 +412,37 @@ version), `pubspec.yaml` says `0.2.0+1`, and the app does not display a version
 number anywhere, so a user cannot read off what they are running. Fixes land on
 the default development branch, which is what everyone runs. Once releases are
 tagged, fixes will target the latest release plus that branch.
+
+## How a fix reaches you
+
+Stated plainly, because the honest answer is thinner than most projects' and a
+reader deserves to know it before relying on this (*added 2026-07-22*).
+
+There is **no update mechanism**. The app never phones home, never checks for a
+newer version, and shows no version of its own. There is no release feed to
+subscribe to, no signed installer that updates itself, and no notification of any
+kind. A fix reaches you when you fetch the default branch and rebuild — and not
+before.
+
+So the notification channel is the repository itself. Three places carry it, in
+increasing detail:
+
+- **[`CHANGELOG.md`](CHANGELOG.md)** — the `[Unreleased]` section, written in the
+  user's language rather than in commit shorthand. This is the one to read if you
+  only read one.
+- **The commit log and the merged pull requests** on the default branch. Every
+  change lands through a PR, so the PR is where the reasoning is.
+- **This file**, for anything about a bundled component that is deferred rather
+  than fixed — see [Vendored bundle
+  currency](#vendored-bundle-currency).
+
+If you reported something, you also get told directly: the correspondent named
+under [What happens to your report](#what-happens-to-your-report-on-our-side)
+points you at the commit that closes it.
+
+What this means for a deployment that matters: pin the commit you built from and
+record it, because it is the only version identifier that exists, and decide
+yourself how often you refetch. The project cannot tell you that you are behind.
+When a release scheme does arrive, this section and
+[`docs/MIGRATION_GUIDE.md`](docs/MIGRATION_GUIDE.md) are where it gets written
+down.

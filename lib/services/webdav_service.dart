@@ -9,6 +9,7 @@ import '../models/webdav_settings.dart';
 import '../utils/log.dart';
 import '../utils/net_guard.dart';
 import 'file_service.dart';
+import 'net/transport_failure.dart';
 
 /// Eén item in een WebDAV-maplisting.
 class WebdavEntry {
@@ -180,16 +181,23 @@ class WebdavService {
       throw WebdavException(WebdavError.config, 'Ongeldige server-URL');
     }
     // Basic-auth stuurt de Nextcloud-credentials in (base64) mee bij élke
-    // request. Over plain http gaan die in leesbare vorm over de lijn, dus
-    // eisen we https — tenzij de gebruiker de server bewust als vertrouwd
-    // intern (LAN) heeft gemarkeerd, waar een box zonder TLS gangbaar is.
+    // request — een herbruikbaar geheim, geen handtekening per verzoek. Over
+    // plain http gaan die in leesbare vorm over de lijn.
+    //
+    // Corrected 2026-07-22: hier stond "tenzij de gebruiker de server als
+    // vertrouwd intern heeft gemarkeerd". Die vink zegt iets over de host, niet
+    // over de lijn ernaartoe, en het wachtwoord blijft werken lang nadat wie
+    // dan ook het van dat LAN-segment heeft geplukt. Zie
+    // [NetGuard.maySendReusableSecret].
     final scheme = server.origin?.scheme.toLowerCase();
-    if (scheme != 'https' && !(scheme == 'http' && server.trustedInternal)) {
+    if (!NetGuard.maySendReusableSecret(scheme, host: host)) {
       throw WebdavException(
         WebdavError.config,
         scheme == 'http'
-            ? 'Gebruik https of markeer de server als vertrouwd intern; '
-                  'anders gaat je wachtwoord onversleuteld over het netwerk.'
+            ? 'WebDAV vereist https: je wachtwoord gaat bij élk verzoek mee, '
+                  'dus het zou onversleuteld over het netwerk gaan. Vertrouwd '
+                  'intern verandert daar niets aan — die instelling gaat over '
+                  'de server, niet over de verbinding ernaartoe.'
             : 'Alleen https-servers worden ondersteund.',
       );
     }
@@ -261,33 +269,32 @@ class WebdavService {
   /// verbinding werden zo één zin, en de enige plek waar het verschil nog
   /// stond was het logboek — waar de gebruiker niet kijkt. De informatie was
   /// er al; ze werd één laag te vroeg weggegooid.
+  /// Welke soort het is, deelt [classifyTransportFailure] in — dat is voor elke
+  /// opslag hetzelfde. Wat de gebruiker te horen krijgt is dat niet: die zin
+  /// noemt de WebDAV-server, en blijft daarom hier staan.
   static Never _asFailure(String where, Object e, String fallback) {
-    // TlsException dekt zowel HandshakeException als CertificateException.
-    if (e is TlsException) {
-      logWarning('WebdavService.$where: TLS geweigerd', e);
-      throw WebdavException(WebdavError.tls, 'Certificaat niet vertrouwd');
-    }
-    if (e is SocketException) {
-      logWarning('WebdavService.$where: socket onbereikbaar', e);
-      throw WebdavException(
+    final kind = classifyTransportFailure(e);
+    logTransportFailure('WebdavService.$where', kind, e);
+    throw switch (kind) {
+      TransportFailure.tls => WebdavException(
+        WebdavError.tls,
+        'Certificaat niet vertrouwd',
+      ),
+      TransportFailure.unreachable => WebdavException(
         WebdavError.network,
         'Server niet bereikbaar',
         transient: true,
-      );
-    }
-    // Een verbinding die halverwege wegviel meldt Dart als HttpException
-    // ("Connection closed before full header was received"), niet als
-    // SocketException. Dat is juist het geval waarvoor opnieuw proberen bestaat.
-    if (e is HttpException) {
-      logWarning('WebdavService.$where: verbinding afgebroken', e);
-      throw WebdavException(
+      ),
+      TransportFailure.interrupted => WebdavException(
         WebdavError.network,
         'Verbinding afgebroken',
         transient: true,
-      );
-    }
-    logError('WebdavService.$where: mislukt', e);
-    throw WebdavException(WebdavError.network, fallback);
+      ),
+      TransportFailure.unknown => WebdavException(
+        WebdavError.network,
+        fallback,
+      ),
+    };
   }
 
   /// Voer een *leesactie* uit en probeer hem één keer opnieuw wanneer de

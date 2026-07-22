@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ocideck/widgets/slides/inline_markdown.dart';
+import 'package:ocideck/utils/inline_markdown.dart';
 
 void main() {
   group('stripInlineMarkdown', () {

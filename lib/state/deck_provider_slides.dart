@@ -151,9 +151,12 @@ extension DeckNotifierSlides on DeckNotifier {
           continuesSplit: i == 0 ? slide.continuesSplit : true,
         ),
     ];
-    switch (slide.type) {
-      case SlideType.bullets:
-      case SlideType.bulletsImage:
+    // Het aantal bulletkolommen komt uit de registry naast de enum, zodat deze
+    // knip en [canSplitSlide] niet elk hun eigen typelijst bijhouden.
+    switch (slide.type.bulletColumns) {
+      case BulletColumns.none:
+        return null;
+      case BulletColumns.one:
         if (slide.bullets.length < 2) return null;
         // Checklists houden hun ruimere optimum aan (consistent met de
         // waarschuwingsdrempel), zodat een lijst van 12 niet onnodig krimpt.
@@ -164,36 +167,12 @@ extension DeckNotifierSlides on DeckNotifier {
           for (final p in splitBulletsIntoPages(slide.bullets, size))
             (p, const <String>[]),
         ]);
-      case SlideType.twoBullets:
+      case BulletColumns.two:
         if (slide.bullets.length < 2 && slide.bullets2.length < 2) return null;
         const perColumn = kTwoColumnBulletWarningCount ~/ 2;
         return build(
           splitTwoColumnsIntoPages(slide.bullets, slide.bullets2, perColumn),
         );
-      // Uitgeschreven: met een `default:` valt een nieuw bullet-dragend type hier
-      // stil terug op 'niet op te knippen', zonder dat iets dat meldt.
-      case SlideType.title ||
-          SlideType.section ||
-          SlideType.twoImages ||
-          SlideType.image ||
-          SlideType.video ||
-          SlideType.quote ||
-          SlideType.table ||
-          SlideType.freeMarkdown ||
-          SlideType.code ||
-          SlideType.chart ||
-          SlideType.cockpit ||
-          SlideType.question ||
-          SlideType.timeline ||
-          SlideType.scorecard ||
-          SlideType.assets ||
-          SlideType.discoveries ||
-          SlideType.finding ||
-          SlideType.findingsSummary ||
-          SlideType.checklist ||
-          SlideType.scopeMatrix ||
-          SlideType.signOff:
-        return null;
     }
   }
 

@@ -1,5 +1,7 @@
 # OciDeck — Migration Guide
 
+> **Status:** current-state — and there is nothing to migrate between yet · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 ## There is nothing to migrate between yet
 
 OciDeck has **never tagged a release**. The repository carries no release tag

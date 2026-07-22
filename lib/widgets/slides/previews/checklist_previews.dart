@@ -44,9 +44,9 @@ class _ChecklistProgress extends StatelessWidget {
     final total = items.length;
     final checkedPercent = _checkedPercent(checked, total);
     final openPercent = total == 0 ? 0 : 100 - checkedPercent;
-    final textColor = _hexColor(profile.textColor);
-    final checkedColor = _hexColor(profile.checklistCheckedColor);
-    final openColor = _hexColor(profile.checklistUncheckedColor);
+    final textColor = AppTheme.parseHexColor(profile.textColor);
+    final checkedColor = AppTheme.parseHexColor(profile.checklistCheckedColor);
+    final openColor = AppTheme.parseHexColor(profile.checklistUncheckedColor);
     final labelStyle = _applyFont(
       font,
       TextStyle(
@@ -233,7 +233,9 @@ class _ChecklistBulletRow extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: highlighted ? wScale(6) : 0),
       decoration: BoxDecoration(
         color: highlighted
-            ? _hexColor(profile.accentColor).withValues(alpha: 0.16)
+            ? AppTheme.parseHexColor(
+                profile.accentColor,
+              ).withValues(alpha: 0.16)
             : Colors.transparent,
         borderRadius: BorderRadius.circular(wScale(5)),
       ),
@@ -257,13 +259,13 @@ class _ChecklistBulletRow extends StatelessWidget {
                   marker == BulletMarker.paw && listStyle == ListStyle.bullets
                   ? _PawMarker(
                       fontSize: fontSize,
-                      color: _hexColor(profile.accentColor),
+                      color: AppTheme.parseHexColor(profile.accentColor),
                     )
                   : Text(
                       '${bulletListMarker(bullets, itemIndex, listStyle, startNumber: startNumber)} ',
                       style: TextStyle(
                         fontSize: fontSize,
-                        color: _hexColor(profile.accentColor),
+                        color: AppTheme.parseHexColor(profile.accentColor),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -278,14 +280,14 @@ class _ChecklistBulletRow extends StatelessWidget {
                 TextStyle(
                   fontSize: fontSize,
                   height: kBulletLineHeight,
-                  color: _hexColor(profile.textColor),
+                  color: AppTheme.parseHexColor(profile.textColor),
                   decoration: checked && profile.checklistStrikeThrough
                       ? TextDecoration.lineThrough
                       : null,
-                  decorationColor: _hexColor(profile.textColor),
+                  decorationColor: AppTheme.parseHexColor(profile.textColor),
                 ),
               ),
-              linkColor: _hexColor(profile.accentColor),
+              linkColor: AppTheme.parseHexColor(profile.accentColor),
             ),
           ),
         ],
@@ -339,7 +341,7 @@ class _GroupHeadingRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final accent = _hexColor(profile.accentColor);
+    final accent = AppTheme.parseHexColor(profile.accentColor);
     final hasLabel = label.trim().isNotEmpty;
     final topGap = isFirst
         ? 0.0

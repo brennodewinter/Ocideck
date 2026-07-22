@@ -1,8 +1,19 @@
 # OciDeck — Build & Release
 
+> **Status:** procedure, current — and the authority on the toolchain pin · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 How to build OciDeck from source and produce distributable apps.
 
 ## Prerequisites
+
+> **This section is the authority on toolchain versions.** `CONTRIBUTING.md`,
+> [`CONTRIBUTING_GUIDELINES.md`](CONTRIBUTING_GUIDELINES.md) and
+> [`DEVELOPMENT_SETUP_GUIDE.md`](DEVELOPMENT_SETUP_GUIDE.md) point here rather
+> than repeating a number; when one of them disagrees with this section, this
+> section wins, and when this section disagrees with `.tool-versions`, that file
+> wins. *(Noted 2026-07-22: those documents had drifted into two different
+> answers — "3.44+ / 3.12+" in one place and "3.44.6 / 3.12.2" in two others —
+> without either saying which one mattered and why.)*
 
 - **Flutter 3.44.6** (stable) — the exact version CI pins (see `.tool-versions`
   and both `.github/workflows/*.yml`). Only Flutter is pinned; the Dart SDK comes
@@ -13,6 +24,9 @@ How to build OciDeck from source and produce distributable apps.
   `dart` (not a separately installed standalone Dart, which can drift) so
   `make format-check` stays reproducible across machines. Check with
   `flutter --version`.
+
+  In short: *build* with 3.44 or newer if you must, but *pass the gate* with
+  3.44.6. The two are different requirements and only the second is enforced.
 - A desktop toolchain for your target:
   - **macOS**: Xcode + CocoaPods.
   - **Windows**: Visual Studio with the "Desktop development with C++" workload.
