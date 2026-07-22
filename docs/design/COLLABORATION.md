@@ -386,6 +386,7 @@ abstract interface class MeetingSession {
   MeetingProviderId get provider;
   Stream<MeetingEvent> get events;
   MeetingCapabilities get capabilities;
+  MeetingRole get role;
 
   Future<void> setMicrophone(bool enabled);
   Future<void> setCamera(bool enabled);
@@ -407,7 +408,13 @@ abstract interface class MeetingSession {
   `appApprovalRequired`, `meetingTypeUnsupported` or `providerUnavailable`.
 
 The UI renders controls only from `MeetingCapabilities`. It must not imitate a
-control that an adapter cannot perform.
+control that an adapter cannot perform. Both capabilities and role are live
+state: a host may promote an attendee to presenter, demote a moderator or revoke
+screen sharing while the call is running. Adapters emit typed role/capability
+changes and the UI removes lost controls immediately without ending the session.
+Use a provider-neutral role vocabulary (`guest`, `attendee`, `presenter`,
+`moderator`, `organiser`, `unknown`) while retaining the provider's original role
+label for diagnostics. Never infer authority merely because a button is visible.
 
 #### 7.1.2 Provider register
 
@@ -419,15 +426,21 @@ about the other.
 |---|---|---|---|---|
 | Microsoft Teams work/school | Supported target through ACS, subject to tenant and meeting policy | No | Dedicated ACS bridge and least-privilege token broker | Detailed sibling design |
 | Cisco Webex | Candidate through the Meetings Web SDK and Service App guest identity | Possible only within Webex's licensed service model | Browser SDK bridge; server-issued guest token; capability-gated UI | Spike required |
+| Pexip Infinity | Strong candidate for cooperating enterprise/government deployments | Yes, on a configured Infinity deployment | Official Infinity web packages expose local, remote and presentation streams plus conference signals | High-value spike |
 | Zoom Meetings | Candidate through Meeting SDK; external-account meetings require Zoom review and attributed authorisation under current policy | Possible within the app/service account model | Web Meeting SDK plus signature service; do not promise arbitrary links before approval | Policy spike required |
 | Jitsi Meet | Strong candidate for public or cooperating deployments | Yes, public, managed or self-hosted | Official IFrame API for the first slice; evaluate `lib-jitsi-meet` only for a fully native OciDeck layout | First proof of concept |
 | BigBlueButton | Candidate when the operator supplies a valid join flow; arbitrary third-party server secrets are unavailable | Yes, on a cooperating/self-hosted server | Signed server-side join URL; redirect/embed official HTML5 client before custom media work | Spike required |
 | Nextcloud Talk | Candidate for public guest conversations and cooperating instances | Yes, on a configured Nextcloud instance | Talk participant/signalling APIs or a constrained official-client embed | Research |
+| OpenTalk | Candidate for a known SaaS or self-hosted deployment | Yes | Controller REST API plus meeting signalling; optional SIP component stays a separate capability | Sovereign-hosting candidate |
 | Element Call / MatrixRTC | Candidate inside a configured Matrix ecosystem; guest access depends on homeserver deployment | Yes | Prefer the MatrixRTC/LiveKit path already aligned with this design | Research after Matrix phases |
 | Google Meet | No supported production OciDeck client today; official-client redirect only | No | Revisit when the Meet Media API is generally available and suitable for interactive clients | Watch list |
 | Whereby | Candidate for rooms created/configured through an embedding customer | Yes, within that customer account | Official embedded experience or browser SDK | Research |
 | RingCentral Video, GoTo Meeting, Dialpad Meetings, Zoho Meeting | Link recognition and official-browser fallback until an approved interactive SDK path is proven | Provider-specific | Never automate or reverse-engineer the vendor web client | Watch list |
+| Slack Huddles, Discord, FaceTime web guests, Mattermost Calls | Recognise known invitation families; official-client fallback unless a supported participant SDK emerges | No generic OciDeck room path | Provide a specific explanation instead of claiming the link is unknown | Explicit fallback families |
 | Daily | Not a generic adapter for unrelated meeting links | Yes | `daily-js` call object for custom UI or Daily Prebuilt for an embedded slice | Backend candidate |
+| Vonage Video API | Not a generic adapter for unrelated meeting links | Yes | OpenTok client plus server-created session and short-lived participant token | Backend candidate |
+| SignalWire | Not a generic adapter for unrelated meeting links | Yes | Browser `RoomSession` plus server-issued room token | Backend/SIP candidate |
+| Amazon Chime SDK | Not the same as joining arbitrary Amazon Chime invitations; the SDK creates application-owned meetings | Yes | JavaScript meeting session plus backend-created attendee and join token | Backend candidate |
 | LiveKit | Not a public meeting-link ecosystem | Yes | Native Flutter SDK with backend-issued room JWT | Preferred custom SFU candidate |
 | OpenVidu | Only for an OpenVidu deployment that OciDeck is configured to trust | Yes | Embedded Meet component first; client SDK if custom UI is justified | Backend candidate |
 | Janus VideoRoom | Only for a known Janus deployment and room contract | Yes | Build signalling/UI around the VideoRoom plug-in | Advanced/backend candidate |
@@ -512,18 +525,161 @@ Promotion to `supported` requires all of the following:
 7. Reuse **MatrixRTC/LiveKit** for OciDeck-owned rooms if the Matrix media phases
    land. Evaluate Daily/OpenVidu/Galene/Janus only against a concrete deployment
    need, not merely to grow the provider count.
+8. Spike **Pexip** and **OpenTalk** when a cooperating organisational deployment
+   is available; they are more relevant to public-sector/self-hosted adoption
+   than adding another consumer-only redirect.
+
+#### 7.1.6 Near-future hardening
+
+These items are part of the design for the next implementation horizon. They do
+not expand the first Jitsi/Teams vertical slices, but the common contract must
+leave room for them from day one.
+
+##### Self-hosted provider profiles and discovery
+
+Hard-coded public domains cannot represent an organisation's Jitsi,
+BigBlueButton, Nextcloud Talk, OpenTalk, Pexip, Galene or OpenVidu deployment.
+Do not identify such a deployment by sending an unknown invitation to a list of
+probe endpoints. Add an administrator/user-approved profile:
+
+```dart
+class MeetingProviderProfile {
+  final String id;
+  final MeetingProviderId provider;
+  final Uri origin;
+  final Set<String> allowedJoinPathPrefixes;
+  final Uri? tokenBroker;
+  final bool trustedInternal;
+  final Set<String> pinnedCapabilities;
+}
+```
+
+- Store public profile metadata in preferences and secrets in `SecretStore`.
+- Validate origins with the same `NetGuard`, redirect refusal, DNS-rebinding and
+  private-address posture as WebDAV. `trustedInternal` is an explicit opt-in.
+- A configured profile wins only for its exact origin and allowed paths; it
+  never claims every subdomain or rewrites an opaque invitation token.
+- A future `.well-known` discovery document may suggest a provider type and
+  public endpoints, but it is untrusted input: show the result and require
+  approval before persisting or contacting a token broker.
+- Export/import of profiles excludes credentials and makes the receiving user
+  re-approve private-network access.
+
+##### Vendor SDK isolation
+
+A vendor JavaScript SDK running in OciDeck's top-level page could potentially
+observe deck DOM/state, intercept browser APIs or widen the application's network
+surface. Choose and document one isolation mode per adapter:
+
+1. a cross-origin sandboxed official iframe with the smallest `allow` policy;
+2. a dedicated OciDeck meeting page that never loads an open deck;
+3. a locally bundled, pinned and reviewed SDK behind a narrow serialisable
+   `postMessage`/Dart bridge; or
+4. a native SDK isolated behind the platform channel on a separately supported
+   target.
+
+Never load vendor code dynamically into the editor page. Each adapter declares
+its CSP `connect-src`/`media-src`/`frame-src`, Permissions-Policy, iframe sandbox
+flags, Subresource Integrity applicability, bundled hashes and data-access
+boundary. The provider bridge may receive only the meeting fields it needs; the
+deck model, presenter notes, AI configuration, credentials of other providers
+and collaboration keys are outside its interface. Dependency or origin drift
+fails closed and disables only that adapter.
+
+##### Invitation ingestion
+
+Pasting one URL is the first slice, not the complete entry surface. The resolver
+must later accept:
+
+- a plain URL or copied invitation body;
+- an `.ics` event supplied as a local file;
+- an operating-system share target/deep link;
+- a QR code scanned locally; and
+- an optional calendar connector that is separately installed and authorised.
+
+Extraction is local and returns **all** credible meeting candidates with their
+provider and displayed origin. It never silently selects the first URL from an
+email/calendar body, follows redirects, expands short links or prefers a
+tracking link. The user chooses when multiple candidates remain. Calendar
+connectors request the narrowest read scope and are not required for manual
+joining.
+
+Known but unsupported families (for example Slack Huddles, Discord and
+FaceTime-web links) produce `redirectOnly` with a provider-specific explanation.
+An unrecognised link remains `unknown`; OciDeck never claims that opening it will
+join a meeting safely.
+
+##### Identity, roles and dual-session consent
+
+"No personal account" can mean different things. Preflight and the join screen
+must distinguish an anonymous display name, ephemeral provider guest, persistent
+service-app guest, host-sponsored identity and signed-in account. Show which
+identity other participants and the provider will see and whether the provider
+may retain it.
+
+An external meeting and an OciDeck collaboration room may run simultaneously,
+but no membership crosses automatically:
+
+```text
+external MeetingProvider session = audio, video, roster, provider consent
+OciDeck CollabTransport session  = deck ops, locks, chat, presenter control
+```
+
+Joining a call never grants access to the deck/Matrix room. Starting a
+collaboration room never invites the external roster. A future bridge that maps
+presenter state, captions or identities across the boundary requires a separate
+design, visible participant consent, minimised mapping and an explicit stop
+control. Screen-sharing the audience window remains the safe first bridge.
+
+##### Meeting media and AI are separate consent domains
+
+Meeting audio, video, screen content, captions, transcript fragments, roster and
+speaker metadata never enter AI Assist merely because AI Assist is enabled. Any
+future transcription, summarisation, translation, action-item or notetaker
+feature needs all of:
+
+- a provider-permitted integration route (never an undisclosed bot or raw-media
+  workaround);
+- a separate feature design and data-flow diagram;
+- explicit per-meeting, purpose-specific consent that names the AI destination;
+- a persistent in-call indicator and immediate stop control;
+- participant/host consent semantics appropriate to the provider and law;
+- retention, deletion, access and model-training statements; and
+- a deterministic mode that forwards nothing when consent or provider state is
+  unknown or revoked.
+
+Local captions are still meeting-derived personal data; on-device processing
+removes network egress but not the need for truthful notice and lifecycle rules.
+The shipped deck/image AI consumers remain unable to read `MeetingSession`.
+
+##### Operational ownership
+
+Add a maintained provider manifest containing adapter/SDK version, release
+state, supported browser/OS versions, tested meeting types, required backend,
+credential owner, billing owner, data regions, last real-service test date and
+sunset contact. Generate the user-facing capability matrix from this manifest
+instead of maintaining a second marketing table by hand.
+
+Provider terms, app review, pricing, guest policy and SDK behaviour change
+outside OciDeck's release cycle. A stale manifest moves the adapter back to
+`experimental` or `redirectOnly`; it must not silently preserve a support claim.
 
 Primary implementation references (re-check at spike time):
 
 - Jitsi IFrame API: <https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe/>
 - Webex Meetings Web SDK: <https://developer.webex.com/meeting/docs/sdks/webex-meetings-sdk-web-join-a-meeting>
 - Webex Service App guests: <https://developer.webex.com/create/docs/sa-guest-management>
+- Pexip Infinity web client tutorial: <https://developer.pexip.com/docs/infinity/web/tutorials/npm-packages/join-a-conference/index.html>
 - Zoom Meeting SDK authorisation: <https://developers.zoom.us/docs/meeting-sdk/auth/>
 - BigBlueButton API: <https://docs.bigbluebutton.org/development/api/>
 - Nextcloud Talk participant API: <https://nextcloud-talk.readthedocs.io/en/stable/participant/>
+- OpenTalk controller HTTP/API surface: <https://docs.opentalk.eu/admin/controller/core/http_server/>
 - MatrixRTC configuration: <https://docs.element.io/latest/element-server-suite-pro/configuring-components/matrix-rtc/configuring/>
 - LiveKit access tokens and grants: <https://docs.livekit.io/frontends/reference/tokens-grants/>
 - Daily call client: <https://docs.daily.co/reference/daily-js/daily-call-client>
+- Vonage Video API: <https://developer.vonage.com/en/video/getting-started>
+- SignalWire browser RoomSession: <https://developer.signalwire.com/sdks/browser-sdk/video/room-session>
+- Amazon Chime SDK meetings: <https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html>
 - OpenVidu embedded Meet: <https://openvidu.io/latest/meet/embedded/step-by-step-guide/>
 - Janus VideoRoom: <https://janus.conf.meetecho.com/docs/videoroom.html>
 - Galene client guide: <https://galene.org/galene-client.html>
@@ -705,12 +861,19 @@ introduces an infrastructure dependency (an SFU, still not run by OciDeck).
   capabilities, typed events and failure taxonomy (§7.1).
 - `lib/meetings/meeting_link_resolver.dart` — local allowlisted URL recognition;
   no speculative network probes.
+- `lib/meetings/meeting_provider_profile.dart` — approved self-hosted origin,
+  path constraints, broker reference and trust flags; never credentials.
+- `lib/meetings/meeting_provider_manifest.dart` — versioned operational support
+  facts that drive the capability matrix and stale-support downgrade.
 - `lib/meetings/providers/<provider>/…` — one isolated adapter per documented
   provider contract; no vendor SDK objects outside its adapter/bridge.
 - `lib/state/meeting_session_provider.dart` — root-scoped meeting lifetime,
   deliberately outside every deck-tab `ProviderScope` override.
 - `web/meeting_bridges/…` — pinned JavaScript SDK bridges for providers whose
   supported client surface is browser-only.
+- Tests: `test/meetings/meeting_link_resolver_test.dart`,
+  `meeting_provider_contract_test.dart`, `meeting_provider_profile_test.dart`
+  and synthetic `.ics`/invitation fixtures with no real meeting credentials.
 
 **Dependencies to add (proposed, none present today):**
 

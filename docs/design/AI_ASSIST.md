@@ -1,6 +1,6 @@
 # OciDeck — Optional AI Assistance (Design)
 
-> **Status:** design; phases 0–3 shipped, phase 4 unbuilt — not a current-state reference · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** design; phases 0–3 shipped, phase 4 unbuilt — not a current-state reference · **Status last reviewed:** 2026-07-23 · **Published by:** Stichting LibreKAT
 
 > **Phases 0–3 are built and shipped. Only Phase 4 (the MCP server
 > surface) is unbuilt.** This header said "design proposal — not yet
@@ -75,6 +75,10 @@ per-image sidecars return null on web.
 - No AI in the deterministic paths — CVSS scoring, CWE/CVE ids, compliance, and
   generated roll-ups stay deterministic (see [`PENTEST_MIAUW.md`](PENTEST_MIAUW.md)
   §7/§10). AI only drafts free text and *suggests* image metadata.
+- No access to meeting audio, video, screen content, captions, transcripts,
+  roster or speaker metadata. [`COLLABORATION.md`](COLLABORATION.md) §7.1.6
+  defines that as a separate consent domain requiring a future feature design;
+  enabling AI Assist never enables meeting capture or an AI notetaker.
 
 ### Two connection directions
 
@@ -106,6 +110,7 @@ second is optional):
 | Never silently overwrite | Human-authored text is preserved; AI offers an explicit "regenerate". |
 | Provenance-marked | AI output carries a flag + a visible "AI-generated — review" badge. |
 | Consent-gated egress | Any off-device tier goes through the existing outbound-privacy consent + SSRF opt-in. |
+| Meeting-media isolation | Shipped deck/image AI consumers cannot read `MeetingSession`; future meeting-derived AI needs separate per-meeting consent and provider support. |
 | Graceful failure | Endpoint down / model absent / timeout → clear, non-blocking error; manual entry always works. |
 
 ---
@@ -180,6 +185,12 @@ Note Ollama's OpenAI-compat layer is officially experimental.
   review step.
 - **Low temperature, output shaping** in the prompt (length caps, locale, format).
 - **Cache by input hash** to avoid recompute/cost.
+- **No ambient meeting context.** The AI request builder accepts only the
+  consumer's explicit deck/image payload. It has no dependency on meeting state,
+  media tracks, captions, roster or speaker events. Do not add `MeetingSession`
+  to the shared AI client or global prompt context; a future meeting-derived
+  consumer gets its own threat model, consent gate, provenance and retention
+  design first.
 
 ---
 
