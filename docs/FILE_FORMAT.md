@@ -21,8 +21,14 @@
 *(Added 2026-07-22: this document is around 2,253 lines and had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not.)*
 
 OciDeck stores presentations as **standard [Marp](https://marp.app/) Markdown**
-(`.md`). There is no custom binary format: a saved presentation can be processed
-directly with the Marp CLI or the VS Code Marp extension. OciDeck-specific
+(`.md`). There is no custom binary format: a saved presentation is *designed* to
+be processed directly with the Marp CLI or the VS Code Marp extension. **That has
+not been verified against the real tools** — there is no Node tooling in this
+repository and no test that runs one, so treat it as a design goal rather than a
+tested guarantee, and tell us if a deck fails in real Marp. *(Corrected
+2026-07-22: this promised the round-trip outright. OciDeck has its own renderer
+built on `marked` and does not embed Marp Core, which is exactly why the promise
+needed testing rather than asserting.)* OciDeck-specific
 information is written in places Marp ignores (front-matter keys and HTML
 comments), so the file remains fully Marp-compatible while still round-tripping
 losslessly in OciDeck.

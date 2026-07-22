@@ -142,6 +142,7 @@ the part that turns a low risk into a complaint.
 | **Nextcloud** | Nextcloud GmbH — "Nextcloud" is a registered trademark | OciDeck saves and opens decks over WebDAV, with a Nextcloud preset because Nextcloud puts its DAV root in a fixed place. Not affiliated with, endorsed by, or a product of Nextcloud GmbH. |
 | **YouTube** | Google LLC | A video slide may point at a YouTube URL; OciDeck embeds the player. Not affiliated with, endorsed by, or a product of Google LLC. |
 | **Vimeo** | Vimeo.com, Inc. | A video slide may point at a Vimeo URL; OciDeck embeds the player. Not affiliated with, endorsed by, or a product of Vimeo.com, Inc. |
+| **MIAUW** | Brenno de Winter — published as [Informatiebeveiligingsonderzoek](https://github.com/brennodewinter/Informatiebeveiligingsonderzoek) under EUPL-1.2 | The optional information-security module structures a report to the MIAUW methodology and bundles its requirement schema. **Disclosed deliberately:** the author of the MIAUW methodology and the initiator of OciDeck are the same person. That does not make the module wrong, but it is an overlap you should hear from us rather than discover. |
 
 Other names that appear in the interface or the documentation — operating
 systems, browsers, standards bodies, the reference catalogues listed in

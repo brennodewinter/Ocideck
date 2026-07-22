@@ -1,3 +1,21 @@
+// ── THIRD-PARTY CONTENT — NOT EUPL-1.2 (see below) ──────────────────────────
+//
+// The requirement numbers and titles in this file are the **MIAUW** schema,
+// from the workbook in `github.com/brennodewinter/Informatiebeveiligings-
+// onderzoek`, published under EUPL-1.2. That is the same licence OciDeck
+// carries, so nothing here is licence-incompatible — the header exists for the
+// same reason the CWE, WSTG, MASTG and MASWE ones do: the text is somebody
+// else's normative content, not ours, and the reader should be able to see
+// that at the top of the file rather than infer it.
+//
+// The methodology's author and OciDeck's initiator are the same person. Named
+// here, and in THIRD_PARTY_NOTICES.md under Trademarks, because an undisclosed
+// overlap is the part that costs credibility.
+//
+//   Source: https://github.com/brennodewinter/Informatiebeveiligingsonderzoek
+//
+// See docs/LICENSE_COMPLIANCE.md, "Bundled reference data".
+
 import '../models/eis_entry.dart';
 
 /// The full MIAUW compliance schema (PENTEST_MIAUW §1/§9): all 88 testable EIS

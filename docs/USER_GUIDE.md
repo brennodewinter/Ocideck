@@ -2498,11 +2498,22 @@ still show while editing).
 
 ## Information security module (pentest reports)
 
-OciDeck has an optional module for writing **MIAUW-conforming penetration-test
-reports** ("Informatieveiligheidsonderzoek"). It is **off by default** and adds a
+OciDeck has an optional module for writing penetration-test reports
+**structured to the MIAUW methodology** ("Informatieveiligheidsonderzoek"). It
+is **off by default** and adds a
 set of security slide types, a guided finding flow, a compliance overview and
 report-automation commands. Everything below is offline; the AI helpers are the
 same optional, off-by-default backend used elsewhere.
+
+> **"Structured to", not "conforming".** *(Reworded 2026-07-22: this said
+> "MIAUW-conforming".)* The compliance overview is a gap analysis and never a
+> hard gate — every requirement is waivable with a mandatory reason, as the
+> *MIAUW compliance overview* section below sets out. So the tool cannot, and
+> does not, certify that a delivered report conforms to anything; what it does
+> is give the report MIAUW's structure and show you where the gaps are. The
+> methodology itself is published separately under EUPL-1.2, and its author is
+> also OciDeck's initiator — see the *Trademarks* table in
+> [`THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md).
 
 ### Enabling the module
 
@@ -2567,8 +2578,8 @@ card no longer offers buttons suggesting otherwise.
 ### Starting from the MIAUW report template
 
 Once the module is on, the new-presentation dialog gains a
-**MIAUW-pentestrapport** template. It scaffolds a complete, MIAUW-conforming
-report in one step: a cover page, the four MIAUW parts as section dividers
+**MIAUW-pentestrapport** template. It scaffolds a complete report structured to
+the MIAUW methodology in one step: a cover page, the four MIAUW parts as section dividers
 (*Algemeen*, *Plan van aanpak*, *Executie*, *Rapportage*), a document-management
 overview, a sign-off page, a scope matrix, a management summary, a research
 timeline, an example finding, a per-standard checklist and an appendix list.
