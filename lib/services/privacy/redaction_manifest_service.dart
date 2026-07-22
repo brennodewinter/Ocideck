@@ -51,24 +51,65 @@ class RedactionManifestService {
     Deck deck, {
     PrivacyExportProfile profile = PrivacyExportProfile.full,
   }) {
-    final entries = <RedactionEntry>[];
-    for (final r in redactedValues(deck, profile: profile)) {
-      final salt = _newSalt();
-      final commitment = commitmentFor(salt: salt, value: r.value);
-      entries.add(
+    final values = redactedValues(deck, profile: profile);
+    final salts = [for (final _ in values) _newSalt()];
+    final commitments = [
+      for (var i = 0; i < values.length; i++)
+        commitmentFor(salt: salts[i], value: values[i].value),
+    ];
+    final idLength = shortUniqueIdLength(commitments);
+
+    final entries = <RedactionEntry>[
+      for (var i = 0; i < values.length; i++)
         RedactionEntry(
-          // Vier hex-tekens zijn genoeg om één redactie in een gesprek aan te
-          // wijzen ("ik betwist redactie a3f1") en te weinig om iets te verraden.
-          id: commitment.substring(0, 4),
-          commitment: commitment,
-          salt: salt,
-          rule: r.finding.ruleId,
-          slideIndex: r.finding.slideIndex,
-          field: r.finding.field,
+          id: commitments[i].substring(0, idLength),
+          commitment: commitments[i],
+          salt: salts[i],
+          rule: values[i].finding.ruleId,
+          slideIndex: values[i].finding.slideIndex,
+          field: values[i].finding.field,
         ),
-      );
-    }
+    ];
     return RedactionManifest(derivedFrom: deck.sealHash, entries: entries);
+  }
+
+  /// De kortste referentie die binnen dít manifest niemand dubbel aanwijst.
+  ///
+  /// Het id bestaat om één redactie in een gesprek aan te kunnen wijzen ("ik
+  /// betwist redactie a3f1e2b7"). Dat werkt alleen als het er precies één
+  /// aanwijst. Hier stonden vier hex-tekens: 65.536 mogelijkheden, en dus — het
+  /// verjaardagsprobleem — bij ongeveer 300 redacties al een kans van één op
+  /// twee dat er twee samenvallen. Een pentestrapport met 300 redacties is niet
+  /// bijzonder, en dan wijst een betwisting naar twee dingen tegelijk.
+  ///
+  /// [kRedactionIdMinChars] is de ondergrond; wordt dat binnen dit manifest niet
+  /// uniek, dan groeit de lengte tot het wel zo is. Eén lengte voor álle entries
+  /// (zoals git zijn hashes afkort), want een lijst met ids van wisselende
+  /// lengte leest slecht en nodigt uit tot verkeerd overtypen.
+  ///
+  /// Alleen uniciteit *binnen* een manifest telt: een betwisting gaat altijd
+  /// over één document. Dat het commitment volledig meereist blijft de
+  /// bewijslast — het id is de handgreep, niet het bewijs.
+  static int shortUniqueIdLength(List<String> commitments) {
+    for (
+      var length = kRedactionIdMinChars;
+      length < kCommitmentHexChars;
+      length++
+    ) {
+      final seen = <String>{};
+      var unique = true;
+      for (final c in commitments) {
+        if (!seen.add(c.substring(0, length))) {
+          unique = false;
+          break;
+        }
+      }
+      if (unique) return length;
+    }
+    // Twee gelijke commitments betekenen twee gelijke (salt, waarde)-paren, en
+    // salts zijn 128 willekeurige bits. Onbereikbaar, maar dan is de volledige
+    // hash het enige eerlijke antwoord.
+    return kCommitmentHexChars;
   }
 
   /// Elke waarde die de projectie op dit deck zou wegredigeren, in vaste

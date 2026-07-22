@@ -10,6 +10,15 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Changed
+- **Het kenmerk van een redactie is langer geworden.** In het bestand met
+  redacties naast een geredigeerd rapport draagt elke redactie een kort kenmerk,
+  zodat een lezer kan zeggen: "ik betwist redactie a3f1e2b7". Dat kenmerk was
+  vier tekens lang, en dat is te kort: bij ongeveer driehonderd redacties in één
+  rapport is de kans al één op twee dat er twee hetzelfde heten — en dan wijst
+  een betwisting naar twee dingen tegelijk. Voortaan zijn het er minstens acht,
+  en meer zodra dat nodig is om ze uit elkaar te houden. Bestaande bestanden
+  blijven gewoon leesbaar; het bewijs zat altijd al in de volledige waarde
+  ernaast, niet in het kenmerk.
 - **Het tijdstempelverzoek draagt nu een nonce.** Vraagt u een RFC 3161-stempel
   aan, dan zit er voortaan een willekeurig getal in het `.tsq`-bestand dat de
   tijdstempeldienst in het token moet herhalen. Daarmee is aan te tonen dát het

@@ -1566,7 +1566,7 @@ into the same folder as the export (on the web, into the same download folder):
 
 | File | What is in it | Does it go with the report? |
 | --- | --- | --- |
-| `<name>-redactions.json` | One entry per redaction: a short id (`a3f1`), the rule that found it, the slide and field, and a cryptographic commitment. **No values, no keys.** | **Yes.** It is what lets a recipient say "I dispute redaction a3f1" and lets you prove what it hid — without opening any of the others. |
+| `<name>-redactions.json` | One entry per redaction: a short id (`a3f1e2b7`), the rule that found it, the slide and field, and a cryptographic commitment. **No values, no keys.** | **Yes.** It is what lets a recipient say "I dispute redaction a3f1e2b7" and lets you prove what it hid — without opening any of the others. |
 | `<name>-redaction-keys.json` | The same entries **plus the salts**. | **No. Never.** |
 
 The salts are the whole security of this scheme. A commitment is a SHA-256 over
