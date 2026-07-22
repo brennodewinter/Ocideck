@@ -17,6 +17,34 @@ installer or download page. The only way to run OciDeck is to build it from
 source with the pinned Flutter toolchain. → [BUILD.md](BUILD.md),
 [FAQ.md](FAQ.md#is-ocideck-free-to-use)
 
+### When 0.1.0 does ship, it is a web bundle and nothing else
+
+*(Scope decided 2026-07-22.)* The desktop builds stay build-from-source. Saying
+so is the published position, not a placeholder for a later apology:
+
+- **macOS, Windows and Linux are built from source.** The macOS project is
+  ad-hoc signed with no hardened runtime, so a downloaded `.app` would not start
+  on someone else's machine at all — and notarisation *requires* hardened
+  runtime, so that is not one flag. Windows and Linux have never been built or
+  tested by this project on their own operating systems. Building them yourself
+  works and is documented; a binary from us is what does not exist. And building
+  from source is not a consolation prize: it is the only route where you do not
+  have to trust our build machine. The toolchain is pinned, and `make check-web`
+  asserts on your bundle what we assert on ours.
+- **No code signing, no notarisation, no detached signature.** They follow the
+  desktop artefact and come back with it. A web bundle does not run into
+  signing — the browser refuses no unsigned code; it runs what the origin serves
+  under the CSP the origin sets. **That is a trade, not an absence.** With a
+  downloaded binary you trust an artefact once and then hold it. With a hosted
+  web app you trust whoever runs that origin on *every* load, the code can be
+  swapped underneath you, and there is no moment at which the artefact is fixed.
+  Of the three ways to get OciDeck, the hosted web app is the least sovereign,
+  and building from source is the most.
+- **The web bundle travels with its licence, source indication, third-party
+  notices, SBOM and a `SHA256SUMS` list.** That list lets you detect a damaged
+  or incomplete download; it is not a signature. →
+  [BUILD.md](BUILD.md#verifying-a-bundle-you-downloaded)
+
 ## The exports are pictures, not documents
 
 PDF and PPTX are one bitmap per slide: no text layer, no alt-text, no reading

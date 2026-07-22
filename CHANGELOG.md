@@ -94,7 +94,38 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Added
+- **De webbundel reist niet meer kaal.** `make build-web` legt nu ook
+  `LICENSE.md` en `THIRD_PARTY_NOTICES.md` naast de bundel — zonder die
+  voorwaarden mag een ontvanger het ding niet doorgeven, en dat is geen
+  nettigheid maar de afspraak waaronder de afhankelijkheden zélf meereizen. De
+  SBOM lag er al.
+
+  Als laatste stap schrijft `tool/pack_web_release.dart` een `SHA256SUMS` over
+  de afgeronde bundel, in het gewone `sha256sum`-formaat, zodat
+  `shasum -a 256 -c SHA256SUMS` volstaat en er geen eigen gereedschap voor
+  nodig is. Dat het de laatste stap is, is de hele truc: zolang kopiëren en
+  hashen op twee plekken staan, komt er een dag waarop iemand er een bestand
+  tussen schuift en de lijst stil onvolledig wordt. `--check` loopt een
+  klaargezette bundel na en klaagt óók over een bestand dat er onaangekondigd
+  bij is gekomen.
+
+  Wat het niet is, staat er met zoveel woorden bij: geen handtekening. Wie de
+  bundel kan vervangen, kan de lijst vervangen. De controle die wél iets zegt
+  is de sha256 van `SHA256SUMS` zelf vergelijken met de waarde uit de
+  aankondiging — één regel, via een ander kanaal dan de download.
+
 ### Changed
+- **0.1.0 wordt een webbundel, en verder niets.** Ondertekening en notarisatie
+  waren de poort voor een desktopartefact: macOS is ad-hoc ondertekend zonder
+  hardened runtime, dus een gedownloade `.app` start op andermans machine
+  überhaupt niet, en notarisatie *vereist* die hardened runtime. Windows en
+  Linux zijn nooit gebouwd of getoetst op hun eigen besturingssysteem. Die drie
+  blijven zelf-bouwen-uit-de-bron, en dat staat nu zo in
+  `docs/KNOWN_LIMITATIONS.md` — als de gepubliceerde positie, niet als een
+  plaatshouder voor een excuus later. Een webbundel heeft dat probleem niet: de
+  browser draait wat de origin serveert, onder de CSP die de origin zet.
+
 - **De HTML-export is nu écht één bestand.** Er stond dat hij self-contained was,
   maar de afbeeldingen zaten er niet in: die bleven verwijzen naar uw eigen
   `images/`-map. Wie de HTML doorstuurde, stuurde een rapport met kapotte

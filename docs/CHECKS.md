@@ -525,17 +525,30 @@ also declares them, but see the [CI note](#continuous-integration).)
   binnen twee maanden permanent rood en gaat uit.
 
 ### `make check-web`
-- **Runs:** `make build-web` then `dart run tool/check_web_hardening.dart`.
-- **Covers:** that the built `build/web` keeps its hardening — a strict CSP in
-  `index.html` (`script-src 'self' 'wasm-unsafe-eval'`, no `unsafe-inline`/
-  `unsafe-eval`, `connect-src 'self'`, `object-src 'none'`, `form-action
-  'none'` — that last one does *not* fall back to `default-src`, so it is
-  asserted separately), CanvasKit
-  **self-hosted** (local wasm + the `useLocalCanvasKit` flag), and the UI font
-  **bundled** — so the running app pulls zero third-party origins.
-- **Failure means:** a change weakened the CSP or re-introduced a CDN/font fetch;
-  the script lists every broken invariant. See [`BUILD.md`](BUILD.md) for the
-  hardened build.
+- **Runs:** `make build-web`, then `dart run tool/check_web_hardening.dart` and
+  `dart run tool/pack_web_release.dart --check`.
+- **Covers:** two things about the built `build/web`.
+
+  *Hardening* — a strict CSP in `index.html` (`script-src 'self'
+  'wasm-unsafe-eval'`, no `unsafe-inline`/`unsafe-eval`, `connect-src 'self'`,
+  `object-src 'none'`, `form-action 'none'` — that last one does *not* fall back
+  to `default-src`, so it is asserted separately), CanvasKit **self-hosted**
+  (local wasm + the `useLocalCanvasKit` flag), and the UI font **bundled** — so
+  the running app pulls zero third-party origins.
+
+  *Release artefacts* — that `LICENSE.md`, `THIRD_PARTY_NOTICES.md` and the
+  three SBOM files are in the bundle, and that `SHA256SUMS` describes exactly
+  the files that are there. It complains about a file that was **added** after
+  packing as loudly as about one that changed, which is the case that actually
+  bites: a later build step that drops something in would otherwise fall outside
+  the list unnoticed.
+- **Failure means:** a change weakened the CSP, re-introduced a CDN/font fetch,
+  or moved something in the bundle after it was sealed; the scripts list every
+  broken invariant. See [`BUILD.md`](BUILD.md) for the hardened build and for
+  what the checksum list does and does not prove.
+- **Note:** the packing logic itself is tested in
+  `test/pack_web_release_test.dart`, which runs in `make check` — so a broken
+  checksum list surfaces without waiting for a web build.
 
 ### `make deps-outdated` (advisory)
 - **Runs:** `flutter pub outdated`
@@ -780,7 +793,8 @@ For focused work, run only the relevant slice instead of the whole suite:
   `make` is not reliably present on the Windows runner, so this job calls Flutter
   directly.
 - **Web hardening (Linux)** — `make check-web`: builds the web bundle and asserts
-  its hardening invariants.
+  its hardening invariants, plus that the release artefacts travel with it and
+  `SHA256SUMS` still matches.
 - **Docs links (Linux)** — `lychee --offline` validates internal Markdown links
   across the repo (external URLs are skipped so it can't flake).
 - **Supply-chain (Linux, advisory)** — the [`trivy-action`](https://github.com/aquasecurity/trivy-action)

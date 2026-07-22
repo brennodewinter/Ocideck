@@ -29,13 +29,21 @@ security prerequisites, and produces `build/web/`. What the flags buy you:
 - `--csp` — a CSP-safe loader (no inline/`eval` scripts).
 
 The build also:
-- copies the SBOM to `build/web/sbom/` (both machine-readable formats + the
-  Markdown view), so the EU-CRA artefact travels with the distribution; and
+- copies `LICENSE.md`, `THIRD_PARTY_NOTICES.md` and the SBOM (both
+  machine-readable formats + the Markdown view) into the bundle, so the licence
+  terms and the EU-CRA artefact travel with the distribution;
+- writes `build/web/SHA256SUMS` over the finished bundle, and prints the sha256
+  of that file — the one value to publish alongside a download; and
 - normalises file permissions to world-readable (`644`/`755`) so a locally
   `600` asset doesn't become a silent `403` on the server.
 
+**Serve all of them.** They are the artefacts a downstream user or auditor needs
+to establish what you handed them; a deployment that 404s on `/LICENSE.md` or
+`/sbom/` still works but can no longer account for itself.
+
 You can sanity-check the hardening with `make check-web`
-(`tool/check_web_hardening.dart`).
+(`tool/check_web_hardening.dart` plus `tool/pack_web_release.dart --check`, which
+verifies that nothing was added, changed or lost after packing).
 
 ## 2. Serve `build/web/` statically
 
@@ -240,11 +248,24 @@ are seeing.
 If your users handle decks containing photographs of people, this is a reason
 to give them the desktop build.
 
-## 6. Compliance artefact
+## 6. Compliance artefacts
 
-The SBOM is served at `/sbom/` (`ocideck.cdx.json`, `ocideck.spdx.json`,
-`ocideck.sbom.md`). Leave it reachable so downstream users/auditors can retrieve
-the CRA inventory that matches the exact build you shipped. See [SBOM.md](SBOM.md).
+Five things are served from the bundle itself, and all five should stay
+reachable:
+
+| Path | What it is for |
+| --- | --- |
+| `/sbom/` (`ocideck.cdx.json`, `ocideck.spdx.json`, `ocideck.sbom.md`) | The CRA inventory matching the exact build you shipped. → [SBOM.md](SBOM.md) |
+| `/LICENSE.md` | The terms under which you may serve it, and the recipient may pass it on. |
+| `/SOURCE.md` | Where the source of this compiled bundle lives. **Hosting counts as communicating the Work under EUPL-1.2 article 1, so article 5's source indication applies to you, not only to us.** If you serve a modified bundle, point it at your source. |
+| `/THIRD_PARTY_NOTICES.md` | The attribution the dependencies require. → [LICENSE_COMPLIANCE.md](LICENSE_COMPLIANCE.md) |
+| `/SHA256SUMS` | Lets someone confirm their copy of the bundle is complete and undamaged. |
+
+If you offer OciDeck as a **download** rather than only as a hosted app, publish
+the sha256 of `SHA256SUMS` next to the download link — over a different channel
+than the file itself, since a checksum served from the same place proves nothing
+against whoever can replace both. →
+[BUILD.md](BUILD.md#verifying-a-bundle-you-downloaded)
 
 ## Checklist
 

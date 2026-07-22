@@ -61,8 +61,9 @@ make build-web        # flutter build web --release --no-web-resources-cdn --csp
 
 Note this target has prerequisites: it first runs `deps-verify-offline` (bundled-JS
 integrity against the manifest) and `sbom-verify` (SBOM drift), either of which can
-fail the build *before* Flutter is invoked. Afterwards it copies the SBOM into
-`build/web/sbom/` and normalises file permissions.
+fail the build *before* Flutter is invoked. Afterwards it runs
+`tool/pack_web_release.dart` (see [What travels with the bundle](#what-travels-with-the-bundle))
+and normalises file permissions.
 
 The two flags make the bundle **self-contained and CSP-safe**:
 
@@ -80,6 +81,80 @@ Serve `build/web/` from any static host. The web build supports editing, preview
 HTML export, and presenting in a single window. Dual-screen presenter mode and
 direct filesystem project folders are desktop-only; use **Open** / **Save** via
 the browser file picker on web.
+
+### What travels with the bundle
+
+A bundle you hand to someone else is not just the app. `make build-web` finishes
+by running `tool/pack_web_release.dart`, which puts four things in `build/web/`:
+
+| Artefact | Why it must travel |
+| --- | --- |
+| `LICENSE.md` | Without its licence terms the bundle is not redistributable. This is the condition under which the dependencies themselves travel, not a courtesy. |
+| `SOURCE.md` | `main.dart.js` is compiled; this says where the source is. EUPL-1.2 article 5 asks for the source or an indication of it when the Work is distributed **or communicated**, and article 1 counts hosting as communicating. Without it the licence grants a right to study and adapt that the recipient cannot exercise. |
+| `THIRD_PARTY_NOTICES.md` | The attribution those dependencies require. See [LICENSE_COMPLIANCE.md](LICENSE_COMPLIANCE.md). |
+| `sbom/` (CycloneDX, SPDX, Markdown) | The CRA inventory belongs to the exact build you hand out, not to the repository it came from. Served under `/sbom/`. See [SBOM.md](SBOM.md). |
+
+It also **removes** `.last_build_id`, which Flutter leaves behind. That file is
+an md5 over, among other things, the absolute path of the output directory on
+the machine that built it, so two people building identical source get different
+values. Sealed into `SHA256SUMS` it would guarantee that anyone who builds their
+own copy can never reproduce a published digest — for a reason that has nothing
+to do with the code.
+
+The step ends by writing `SHA256SUMS` over the finished bundle, so it must stay
+the last thing that touches file contents. It prints the sha256 of `SHA256SUMS`
+itself — put that one value in the release announcement.
+
+### Verifying a bundle you downloaded
+
+`SHA256SUMS` is in the ordinary `sha256sum` format, so no OciDeck-specific tool
+is needed:
+
+```sh
+cd ocideck-web && shasum -a 256 -c SHA256SUMS    # macOS/BSD
+cd ocideck-web && sha256sum -c SHA256SUMS        # GNU coreutils
+```
+
+Every line must say `OK`. A `FAILED` line names the file that differs; a
+`No such file` line names one that is missing.
+
+That catches files that changed or went missing, but not a file that was
+*added* — `SHA256SUMS` says nothing about a path it never mentions. Comparing
+the path column against what is actually on disk closes that, again with
+ordinary tools:
+
+```sh
+diff <(cut -c 67- SHA256SUMS | sort) \
+     <(find . -type f | sed 's|^\./||' | grep -v '^SHA256SUMS$' | sort)
+```
+
+From a checkout, with the bundle in `build/web`, one command does both that and
+the presence of the licence, source indication and SBOM:
+
+```sh
+dart run tool/pack_web_release.dart --check
+```
+
+**What this proves, and what it does not.** It lets you check that your copy is
+complete and undamaged. On its own the list proves nothing — it only says
+something once you set it against a value from another channel. It is **not a
+signature**: whoever can replace the bundle can replace `SHA256SUMS` with it.
+
+So compare the sha256 of `SHA256SUMS` itself against the value published in the
+release announcement — one 64-character value, read over a channel other than
+the one you downloaded from:
+
+```sh
+shasum -a 256 SHA256SUMS
+```
+
+That catches a damaged download, a modified mirror, and a third party rehosting
+a changed bundle. It does **not** catch a compromise of our own publishing
+chain: whoever can change both the download and the announcement changes both,
+and you would see them agree. Only a signature or a reproducible build helps
+there, and OciDeck has neither today. Signed artefacts (Authenticode,
+notarisation, a detached signature) are a desktop-release concern and are not
+part of the web-only 0.1.0. See [KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md).
 
 ### Response headers the host must add
 
