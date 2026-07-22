@@ -96,8 +96,54 @@
 
   <title>OciDeck — Feline and human friendly presentations</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Zie het laadscherm in de body. Inline mag: het CSP staat
+       `style-src 'self' 'unsafe-inline'` toe, scripts nadrukkelijk niet. -->
+  <style>
+    html, body { margin: 0; height: 100%; background: transparent; }
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #14161b;
+      color: #e8ecf3;
+      font: 15px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            "Helvetica Neue", Arial, sans-serif;
+    }
+    #splash p { margin: 0; font-weight: 600; letter-spacing: 0.3px; }
+    #splash .sub { font-weight: 400; color: #8b95a6; font-size: 13px; }
+    @media (prefers-color-scheme: light) {
+      #splash { background: #f8f9fa; color: #1e293b; }
+      #splash .sub { color: #64748b; }
+    }
+  </style>
 </head>
 <body>
+  <!--
+    Laadscherm. De webbouw is CanvasKit, dus het duurt ongeveer tien seconden
+    voordat er iets staat — en dat waren tien seconden wit, zonder enig teken
+    van leven. Voor een bezoeker die dit product voor het eerst ziet is dat de
+    conclusie "stuk", niet "even geduld" (#589).
+
+    Geen JavaScript, met opzet: het CSP van deze pagina staat geen inline
+    script toe (`script-src 'self' 'wasm-unsafe-eval'`), en een los .js-bestand
+    erbij om een div te verwijderen is meer bewegende delen dan de taak vraagt.
+    Dit laagje ligt eronder (`z-index: -1`) en wordt door het app-oppervlak
+    bedekt zodra Flutter verft. Het hoeft dus nooit opgeruimd te worden — en
+    als Flutter nooit komt, blijft er iets staan dat uitlegt wat je ziet, wat
+    beter is dan wit.
+  -->
+  <div id="splash" role="status" aria-live="polite">
+    <img src="icons/Icon-192.png" alt="" width="72" height="72">
+    <p>OciDeck</p>
+    <p class="sub">Laden… · Loading…</p>
+  </div>
+
   <!--
     You can customize the "flutter_bootstrap.js" script.
     This is useful to provide a custom configuration to the Flutter loader
