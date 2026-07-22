@@ -102,7 +102,9 @@ void main() {
     expect(find.byType(HexColorDialog), findsNothing);
   });
 
-  testWidgets('Enter op een halve kleur sluit het venster niet', (tester) async {
+  testWidgets('Enter op een halve kleur sluit het venster niet', (
+    tester,
+  ) async {
     final gekozen = await open(tester, '#000000');
     await tester.enterText(find.byType(TextField), '#AB');
     await tester.pumpAndSettle();

@@ -26,13 +26,12 @@ void main() {
     SharedPreferences.setMockInitialValues({'app_consent_accepted': true});
   });
 
-  Slide image({required String alt, required bool ai}) => Slide.create(
-    SlideType.image,
-  ).copyWith(
-    imagePath: 'a.png',
-    imageAltText: alt,
-    aiAssistedFields: ai ? const ['imageAltText'] : const [],
-  );
+  Slide image({required String alt, required bool ai}) =>
+      Slide.create(SlideType.image).copyWith(
+        imagePath: 'a.png',
+        imageAltText: alt,
+        aiAssistedFields: ai ? const ['imageAltText'] : const [],
+      );
 
   /// Twee AI-concepten en één met de hand geschreven alt-tekst.
   Deck deckWithAiAltTexts() => Deck(

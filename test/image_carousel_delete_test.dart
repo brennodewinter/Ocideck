@@ -46,20 +46,22 @@ void main() {
   /// Schrijft een presentatie op schijf die [imageName] [times] keer gebruikt.
   String deckOnDisk(String name, String imageName, {int times = 1}) {
     final path = p.join(tmp.path, name);
-    File(path).writeAsStringSync([
-      '---',
-      'marp: true',
-      '---',
-      '',
-      for (var i = 0; i < times; i++) ...[
-        '# Dia ${i + 1}',
-        '',
-        '![]($imageName)',
-        '',
+    File(path).writeAsStringSync(
+      [
+        '---',
+        'marp: true',
         '---',
         '',
-      ],
-    ].join('\n'));
+        for (var i = 0; i < times; i++) ...[
+          '# Dia ${i + 1}',
+          '',
+          '![]($imageName)',
+          '',
+          '---',
+          '',
+        ],
+      ].join('\n'),
+    );
     return path;
   }
 
@@ -146,24 +148,25 @@ void main() {
     await settle(tester);
   }
 
-  testWidgets('een ongebruikte afbeelding gaat na bevestiging echt van schijf', (
-    tester,
-  ) async {
-    await pumpPicker(tester);
-    await openDeleteDialog(tester);
+  testWidgets(
+    'een ongebruikte afbeelding gaat na bevestiging echt van schijf',
+    (tester) async {
+      await pumpPicker(tester);
+      await openDeleteDialog(tester);
 
-    expect(find.text('alpha.png'), findsWidgets);
-    expect(
-      find.textContaining('permanent van schijf verwijderd'),
-      findsOneWidget,
-      reason: 'de gebruiker moet weten dat er geen prullenbak is',
-    );
-    expect(File(alpha).existsSync(), isTrue, reason: 'nog niets gebeurd');
+      expect(find.text('alpha.png'), findsWidgets);
+      expect(
+        find.textContaining('permanent van schijf verwijderd'),
+        findsOneWidget,
+        reason: 'de gebruiker moet weten dat er geen prullenbak is',
+      );
+      expect(File(alpha).existsSync(), isTrue, reason: 'nog niets gebeurd');
 
-    await answer(tester, confirm: true);
+      await answer(tester, confirm: true);
 
-    expect(File(alpha).existsSync(), isFalse);
-  });
+      expect(File(alpha).existsSync(), isFalse);
+    },
+  );
 
   testWidgets('annuleren laat het bestand staan', (tester) async {
     await pumpPicker(tester);
@@ -179,8 +182,9 @@ void main() {
   ) async {
     await pumpPicker(
       tester,
-      usageOf: (path) =>
-          path == alpha ? const ['Rapport · dia 3', 'Rapport · dia 7'] : const [],
+      usageOf: (path) => path == alpha
+          ? const ['Rapport · dia 3', 'Rapport · dia 7']
+          : const [],
     );
     await openDeleteDialog(tester);
 

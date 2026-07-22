@@ -40,7 +40,8 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  MermaidRenderer returns(String? svg) => (_) async => svg;
+  MermaidRenderer returns(String? svg) =>
+      (_) async => svg;
 
   const goodSvg =
       '<svg xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10"/></svg>';

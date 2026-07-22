@@ -197,7 +197,6 @@ theme: ocideck
     return container;
   }
 
-
   /// Laat het echte werk (bestanden lezen/schrijven, het pakket bouwen)
   /// vorderen en pompt ondertussen frames, tot [until] waar is.
   ///
@@ -374,7 +373,8 @@ theme: ocideck
         await settleAsync(
           tester,
           until,
-          start: () => tester.tap(find.widgetWithText(ElevatedButton, 'Opslaan')),
+          start: () =>
+              tester.tap(find.widgetWithText(ElevatedButton, 'Opslaan')),
         ),
         isTrue,
         reason: 'het opslaan kwam niet af',
@@ -653,7 +653,9 @@ theme: ocideck
       reason: 'het deck is niet geopend',
     );
 
-    await container.read(settingsProvider.notifier).removeConnection('bucket-1');
+    await container
+        .read(settingsProvider.notifier)
+        .removeConnection('bucket-1');
     await tester.pumpAndSettle();
 
     await startChain(

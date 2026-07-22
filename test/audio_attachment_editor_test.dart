@@ -31,11 +31,9 @@ class _FakeImageService extends ImageService {
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
-  Slide videoSlide({String audio = '', bool autoplay = false}) =>
-      Slide.create(SlideType.video).copyWith(
-        audioPath: audio,
-        audioAutoplay: autoplay,
-      );
+  Slide videoSlide({String audio = '', bool autoplay = false}) => Slide.create(
+    SlideType.video,
+  ).copyWith(audioPath: audio, audioAutoplay: autoplay);
 
   /// Pompt de editor en verzamelt elke dia die hij teruggeeft.
   Future<List<Slide>> pump(
