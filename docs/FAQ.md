@@ -42,7 +42,11 @@ use", which described a distribution that does not exist.*
 
 ### What security measures does OciDeck implement?
 OciDeck implements several security layers:
-- Client-side only architecture with no backend
+- No application backend for editing. The one optional server-side component is
+  the web build's CORS fetch-proxy (`server/fetch-proxy/`), which relays raw
+  bytes only — see [ARCHITECTURE.md](ARCHITECTURE.md#runtime--network-model)
+  *(corrected 2026-07-22: this said "client-side only architecture with no
+  backend", which the section two headings above already contradicted)*
 - Strict network controls through NetGuard preventing SSRF attacks  
 - Asset containment that prevents files from outside project folders
 - Privacy scanning (OciWacht) to detect sensitive information

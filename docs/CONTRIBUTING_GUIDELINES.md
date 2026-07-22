@@ -112,22 +112,40 @@ Reviewers look for:
 
 ## Branch Naming Conventions
 
-Use descriptive branch names following this pattern:
-- `feature/short-description` (for new features)
-- `bugfix/issue-number-short-description` (for bug fixes)  
-- `docs/update-documentation` (for documentation changes)
-- `security/patch-name` (for security-related work)
+Use descriptive branch names with one of the prefixes this repository actually
+uses, measured over the last 200 merges to `main`:
+
+| Prefix | Used for | Merges |
+| --- | --- | --- |
+| `fix/` | bug fixes | 63 |
+| `feat/` | new features | 48 |
+| `docs/` | documentation | 21 |
+| `land/` | landing work split across branches | 11 |
+| `test/` | tests only | 8 |
+| `refactor/` | restructuring, no behaviour change | 8 |
+| `chore/` | tooling and housekeeping | 3 |
+| `sec/` | security work | 2 |
+
+*(Corrected 2026-07-22: this prescribed `feature/` and `bugfix/`, which appear
+zero times in the history — the two most mechanical instructions in this
+document, both checkable in one command.)*
 
 ## Issue Tracking
 
 We use the project's issue tracker on the Forgejo instance that hosts the
 repository to track bugs, enhancements, and feature requests. Issues are
-categorized by:
-- **Bug**: Defects in functionality
-- **Enhancement**: Improvements to existing features  
-- **Feature**: New capabilities being added
-- **Documentation**: Updates needed for documentation
-- **Security**: Security-related matters
+labelled with the tracker's own label set:
+
+- **`bug`** — defects in functionality
+- **`enhancement`** — improvements and new capabilities
+- **`docs`** — documentation
+- **`security`** / **`privacy`** — the two that sort above everything else
+- **`triage`** — read but not yet weighed
+- **`accepted`** / **`declined`** / **`needs-info`** / **`duplicate`** — the
+  outcome of triage
+
+*(Corrected 2026-07-22: this listed `Feature` and `Documentation`, which are not
+labels on this tracker, and omitted `privacy` and the whole triage set.)*
 
 ## Release Process
 

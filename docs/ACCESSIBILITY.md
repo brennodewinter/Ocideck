@@ -129,6 +129,20 @@ VoiceOver, NVDA, JAWS or Orca, so "carries a semantic label" is proven and
 capability gap rather than an accessibility one, but it lands in the same place:
 see [PRIVACY.md](PRIVACY.md) and [HOSTING.md](HOSTING.md) §5.
 
+**The interface and the slide canvas are left-to-right only.** None of the 32
+interface languages is right-to-left, which is a scope choice. The sharper point
+is that it also governs the *content*: `lib/widgets/slides/slide_preview.dart`
+wraps the whole canvas in `Directionality(textDirection: TextDirection.ltr)`, so
+an author who puts a Hebrew or Arabic paragraph on a slide gets the wrong base
+direction — left-aligned, with punctuation on the wrong side. That affects
+authors regardless of the language they read the interface in. There are also no
+direction-aware layout primitives in use (`EdgeInsetsDirectional`,
+`AlignmentDirectional` and `BorderDirectional` appear zero times in `lib/`,
+against 29 physical `EdgeInsets.only(left|right`), so supporting RTL later is a
+change to layout code and not a translation job. *(Added 2026-07-22: this was
+true but written down nowhere, so it was something you discovered on the
+projector.)*
+
 ## If you rely on this
 
 - Author in the editor with text scaling turned up if you need it; the deck is

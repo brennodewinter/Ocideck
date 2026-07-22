@@ -1099,14 +1099,21 @@ New:
 - `lib/services/git/git_forge.dart` — interface + shared value types.
 - `lib/services/git/gitea_forge.dart`, `github_forge.dart`, `gitlab_forge.dart`.
 - `lib/services/git/deck_mirror.dart` — the `DeckMirror` interface.
-- `lib/services/git/native_git_mirror.dart` — desktop clone (Phase 3).
-- `lib/services/git/draft_mirror.dart` — the text draft + outbox (Phase 2).
+- `lib/services/git/native_git_mirror_io.dart` — desktop clone (Phase 3), met
+  `_api`/`_factory`/`_stub` ernaast voor de voorwaardelijke import.
+- `lib/services/git/draft_store.dart` — the text draft + outbox (Phase 2), met
+  `_factory`/`_io`/`_web` ernaast.
 - `lib/services/git/git_cli.dart` — **the only** `Process.run` site; §10.2 lives
   here.
-- `lib/services/git/git_cli_stub.dart` — web stub, wired by conditional import
+- `lib/services/git/git_cli_web.dart` — web stub, wired by conditional import
   exactly as `lib/platform/native_window.dart` does it.
 - `lib/services/git/sync_engine.dart`, `lib/services/git/asset_pool.dart`.
 - `lib/models/git_settings.dart` — `GitRepoConfig`, `GitOrigin`, `GitProvider`.
+*(Corrected 2026-07-22: three of the paths above named files that were renamed
+during construction — `native_git_mirror.dart`, `draft_mirror.dart` and
+`git_cli_stub.dart`. The implementation is there; the map was not updated. This
+document promises exact file paths, so a wrong one reads as a missing feature.)*
+
 - `lib/state/git_provider.dart` — `gitForgeProvider`, `deckMirrorProvider`,
   `gitCapabilityProvider` (the lazy probe of §8.4), family providers for
   tree/history/tags (mirrors `lib/state/webdav_provider.dart`).

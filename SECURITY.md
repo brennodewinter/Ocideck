@@ -172,23 +172,17 @@ As of the last review all
 pins (marked 18.0.5, highlight.js 11.11.1, DOMPurify 3.4.12, mermaid 11.16.0,
 MathJax 3.2.2) carry **no known advisories**. One tracked (non-urgent)
 maintenance item:
-As of 2026-07-22 one pin carries an advisory (DOMPurify 3.4.11, below); the
-others (marked 18.0.5, highlight.js 11.11.1, mermaid 10.9.6, MathJax 3.2.2)
-carry none. Three tracked (non-urgent) maintenance items:
-
-- **DOMPurify 3.4.11 → 3.4.12** — `GHSA-c2j3-45gr-mqc4`: an element allowed via
-  `CUSTOM_ELEMENT_HANDLING.tagNameCheck` skips `afterSanitizeElements`, so an
-  application relying on that hook as a policy layer keeps attributes on custom
-  elements it strips everywhere else. **Both preconditions are absent here**:
-  the export calls `DOMPurify.sanitize()` with defaults (and the SVG profile for
-  mermaid output), sets no `CUSTOM_ELEMENT_HANDLING`, and registers no hook at
-  all — `addHook` appears nowhere in `lib/`. The advisory is a second-order
-  gadget in code paths OciDeck does not execute, CVSS v4 vector `AV:N/AC:H/UI:A`
-  with no confidentiality or integrity impact on the vulnerable component.
-  Upgrade with the next bundle refresh; not a release blocker.
 
 - **MathJax 3.2.2** — the only report against it is a disputed ReDoS
   (CVE-2023-39663), impact bounded to DoS on crafted TeX; upgrade tracked.
+
+*(Corrected 2026-07-22: this section carried two contradicting opening
+paragraphs — one saying every pin was clean, the next saying DOMPurify 3.4.11
+carried an advisory and naming mermaid 10.9.6 — followed by a count that
+matched neither list. The second was left behind by the DOMPurify upgrade:
+`assets/web_export/MANIFEST.json` pins 3.4.12 and mermaid 11.16.0, and the
+checked-in bundles hash to those. So the document was reporting a
+vulnerability in a version this project does not ship.)*
 
 Note that mermaid bundles its **own** DOMPurify internally, independent of the
 pinned one; a DOMPurify advisory is therefore only caught via the

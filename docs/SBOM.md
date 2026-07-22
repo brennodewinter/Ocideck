@@ -6,7 +6,8 @@ OciDeck ships a machine-readable **Software Bill of Materials**: a complete,
 version-pinned inventory of every third-party component in the product. It is
 generated from the files that are already the source of truth, checked into the
 repository, kept current by a staleness gate in the test suite (enforced by every
-`make check`), and shipped with every build.
+`make check`), and shipped with the web build and with release artefacts —
+see *Where it ships* below.
 
 Two industry-standard formats are produced from one generator:
 
@@ -56,6 +57,22 @@ disagree with what is actually built (see [`tool/sbom_build.dart`](../tool/sbom_
 | --- | --- | --- |
 | **Dart/Flutter packages** (direct + transitive) | `pubspec.lock` + each package's own `pubspec.yaml` | version, `pkg:pub` purl, archive SHA-256, hosted URL, dependency scope, licence, supplier, **its own dependencies** |
 | **Vendored JS/CSS export bundles** | `assets/web_export/MANIFEST.json` | version, `pkg:npm` purl, SHA-256, source URL, licence |
+
+Each vendored bundle is an **unmodified upstream build**, and you do not have to
+take that on trust: the `source` field in `MANIFEST.json` is the URL it came
+from, so
+
+```sh
+curl -sL "<source>" | shasum -a 256
+```
+
+must print the `sha256` recorded beside it. `make deps-check`
+(`tool/check_bundled_js.dart`) compares the files on disk against that same
+manifest — which is a within-repository check, so it catches a file changed
+without its hash, not a hash and file changed together. The command above is the
+one that reaches outside. *(Added 2026-07-22: this property held but was written
+down nowhere, and "why should I believe you did not touch 3.5 MB of minified
+mermaid" is the first question a reviewer asks.)*
 | **Vendored plugin forks** | `pubspec.lock` (`third_party/`) | version, upstream VCS URL **pinned to the exact commit**, upstream revision, SHA-256 **tree hash** of the vendored directory, licence, supplier |
 | **Bundled fonts** | `pubspec.yaml` (`flutter.fonts`) + the OFL texts in `assets/fonts/` | file SHA-256, licence (OFL-1.1), supplier |
 | **Build SDKs** | `.tool-versions`, `pubspec.yaml` | Flutter version, Dart SDK constraint, supplier |
@@ -168,7 +185,18 @@ The SBOM travels with the product, not just the repository:
   `build/web/sbom/`, so a deployed instance serves them from `/sbom/` on the
   same origin.
 - **Releases** — `.github/workflows/release.yml` uploads them as the
-  `ocideck-sbom` artifact and the web bundle carries its copy.
+  `ocideck-sbom` artifact and the web bundle carries its copy. That workflow has
+  never run: there is no CI runner (see [CHECKS.md](CHECKS.md)).
+- **Desktop builds do not carry it.** `make build-macos`, `build-windows` and
+  `build-linux` run a bare `flutter build` — no copy step, and not even
+  `sbom-verify` as a prerequisite, so a hand-made desktop bundle can ship
+  against a stale SBOM. Hand `sbom/` over alongside the binary until the release
+  process exists (#520).
+
+*(Corrected 2026-07-22: the summary at the top of this document said "shipped
+with every build", which was true only of the web build — and README calls
+OciDeck a desktop application, so the three targets that do not carry it are the
+primary product.)*
 
 ## CRA mapping
 

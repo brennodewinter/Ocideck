@@ -38,7 +38,7 @@ deel dat voor een project als dit inhoudelijk iets zegt.
 |---|---|---|
 | §1 — componenten kennen en documenteren (SBOM) | `sbom/` in CycloneDX 1.6 + SPDX 2.3, álle componenten; `make sbom-verify` als verouderingspoort | Diepte: de graaf is één laag, en `supplier` ontbreekt (#517) |
 | §2 — kwetsbaarheden zonder uitstel afhandelen | `make deps-check` (OSV) over de gebundelde JS; SBOM voedt externe scanners | Geen automatische controle op de Dart-graaf zelf (#517) |
-| §3 — regelmatig testen | `make check` (analyse, conventies, volledige suite, dekkingsvloer), `make sast`, `make check-secrets`, mutatietesten | — |
+| §3 — regelmatig testen | `make check` (analyse, conventies, volledige suite, dekkingsvloer), `make sast`, `make check-secrets` | Mutatietesten zijn handwerk en smal: één operator (`startsWith`/`endsWith`) over de Markdown-parsers — 7 vaste doelen van de 96 bestanden in `lib/` waar zo'n predicaat in staat (309 in totaal). Er is geen conditie-, grenswaarde- of retourwaardemutant en geen vastgelegde score |
 | §4 — gerepareerde kwetsbaarheden openbaar maken | CHANGELOG en de tracker zijn openbaar | Geen advisory-vorm; nooit nodig gehad |
 | §5 — een beleid voor gecoördineerde openbaarmaking | `SECURITY.md`, meldadres `security@librekat.nl`, eigen termijnen gemeten door `tool/check_service_norms.dart` | — |
 | §6 — informatie over kwetsbaarheden delen | Openbare tracker | — |

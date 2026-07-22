@@ -79,9 +79,16 @@ The web build is designed to pull **zero third-party origins** at runtime.
   SBOM, so the CRA artefact can never silently drift.
 - **License compliance.** `tool/check_licenses.dart` (`make licenses`) fails if
   any resolved package uses an unrecognised or non-open-source license.
-- **Pinned CI Actions.** Third-party CI Actions are pinned to exact versions
-  (`.github/pinned-actions.json`); `tool/check_pinned_actions.dart` reports when
-  a pin falls behind upstream. The workflows declare least-privilege
+- **Pinned CI Actions.** One third-party CI Action is pinned to an exact
+  version and tracked in `.github/pinned-actions.json`
+  (`aquasecurity/trivy-action`); `tool/check_pinned_actions.dart` reports when
+  it falls behind upstream. The other four (`actions/checkout`,
+  `subosito/flutter-action`, `lycheeverse/lychee-action`,
+  `actions/upload-artifact`) follow their major tag deliberately, so they pick
+  up fixes within that major without a commit here. Note that a tag is mutable:
+  this is drift *monitoring*, not the immutability a commit-SHA pin would give.
+  *(Corrected 2026-07-22: this said all third-party Actions were pinned to
+  exact versions, while the `_comment` in that same file said the opposite.)* The workflows declare least-privilege
   (`permissions: contents: read`, `persist-credentials: false`) and a
   reproducible dependency set (`flutter pub get --enforce-lockfile`) — declared,
   not currently executed, since no runner is attached.
@@ -668,7 +675,7 @@ be any.
 | **Network / SSRF** | NetGuard classification, resolve-then-pin, no redirect following, byte caps (§3); trusted-internal is opt-in (§10) | Live media rendering (`NetworkImage`, the video controller, the embed WebView) does its own DNS and cannot be socket-pinned, and a positive host resolution is cached for the session. This is why online media is **off by default** and scoped to sessions the user enables (§7 of `SECURITY.md`) | 2026-07-22 |
 | **Data exfiltration via AI** | Fail-closed egress gate, dual consent for a cloud backend, blocked on web (§7) | The gate governs what OciDeck sends. What the configured backend then does with it is outside this design entirely — a self-hosted model and a cloud API get the same bytes and offer different guarantees, and only the user knows which they configured | 2026-07-22 |
 | **Tampering with a finalised report** | SHA-512 seal over the file's bytes, in a `.seal.json` sidecar (§9, §12) — a recipient recomputes it with `sha512sum` alone | Tamper-**evidence**, not tamper-proofing: anyone who edits the deck can recompute the seal. It shows *that* something changed, never *who* sealed it — and the sign-off now sits beside the hash rather than under it, so the statement is worth what the channel that carried it is worth. An RFC 3161 token adds *when*, and only as far as the message imprint — the TSA's own signature is not verified | 2026-07-22 |
-| **Supply-chain drift** | Hashed and OSV-checked export bundles, SBOM staleness gate, licence and pinned-action gates (§2) | The Dart package graph is scanned only advisorily (`make trivy` never fails, by configuration), because pub advisory coverage is sparse. Two bundled components carry named, deferred items — mermaid 10.9.6 and MathJax 3.2.2 — recorded in `SECURITY.md` | 2026-07-22 |
+| **Supply-chain drift** | Hashed and OSV-checked export bundles, SBOM staleness gate, licence and pinned-action gates (§2) | The Dart package graph is scanned only advisorily (`make trivy` never fails, by configuration), because pub advisory coverage is sparse. One bundled component carries a named, deferred item — MathJax 3.2.2 — recorded in `SECURITY.md` *(corrected 2026-07-22: this named mermaid 10.9.6 as a second; the pin is 11.16.0 and carries no advisory)* | 2026-07-22 |
 | **Deck content at rest on the machine** | Recovery snapshots are pruned after 7 days; the app-support directory carries OS user permissions | Snapshots and git working copies are **unencrypted**, and a git clone additionally keeps full history with no expiry. Removing the connection does not remove them. Encrypting snapshots at rest is a known, unimplemented improvement | 2026-07-22 |
 | **A compromised or hostile operating-system account** | Out of scope, by the assumption above | Everything. The keychain, the snapshots, the working copies and the preferences all trust the OS account. On macOS the App Sandbox is deliberately **off**, so there is no OS-level process isolation either (`SECURITY.md`, *Platform sandboxing*) | 2026-07-22 |
 

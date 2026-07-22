@@ -129,7 +129,7 @@ expectations for build size and test speed.
 ### Bundled asset sizes
 | Asset group | Size |
 |---|---|
-| `assets/` total | **10 MB** |
+| `assets/` total | **13 MB** — of which the two privacy lexicons are 2.0 MB *(measured 2026-07-22; this said 10 MB, from before the lexicons were bundled)* |
 | Vendored web-export JS/CSS (`assets/web_export/`) | **5.4 MB** |
 | — `mermaid.min.js` | 3.2 MB |
 | — `tex-svg.js` (MathJax) | 2.0 MB |
