@@ -1795,6 +1795,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Acest slide este gol: nu afișează nimic pe ecran și nici în export.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Export blocat de politica de clasificare: setează un nivel TLP pentru această prezentare.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

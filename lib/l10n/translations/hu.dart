@@ -1781,6 +1781,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Ez a dia üres: sem a képernyőn, sem az exportban nem jelenít meg semmit.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Az exportálást az osztályozási házirend letiltja: állítson be TLP-szintet ehhez az előadáshoz.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

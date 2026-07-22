@@ -1795,6 +1795,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Цей слайд порожній: він нічого не показує ні на екрані, ні в експорті.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Експорт заблоковано політикою класифікації: установіть рівень TLP для цієї презентації.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

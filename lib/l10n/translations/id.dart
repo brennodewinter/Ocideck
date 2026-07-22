@@ -1777,6 +1777,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Slide ini kosong: tidak menampilkan apa pun di layar maupun dalam ekspor.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Ekspor diblokir oleh kebijakan klasifikasi: tetapkan tingkat TLP untuk presentasi ini.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

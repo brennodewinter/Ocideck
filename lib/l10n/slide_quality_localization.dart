@@ -394,6 +394,9 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.questionNotAnswerable => l10n.d(
       'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.',
     ),
+    SlideQualityIssueKind.emptySlide => l10n.d(
+      'Deze dia is leeg: hij toont niets op het scherm en in de export.',
+    ),
     SlideQualityIssueKind.privacyIdentifier ||
     SlideQualityIssueKind.privacyFinancial ||
     SlideQualityIssueKind.privacyContact ||

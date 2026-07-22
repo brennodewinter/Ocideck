@@ -1776,6 +1776,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Den här bilden är tom: den visar ingenting på skärmen eller i exporten.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Export blockerad av klassificeringspolicyn: ange en TLP-nivå för den här presentationen.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

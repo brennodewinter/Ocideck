@@ -1807,6 +1807,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Este slide está vazio: não mostra nada no ecrã nem na exportação.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Exportação bloqueada pela política de classificação: defina um nível TLP para esta apresentação.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

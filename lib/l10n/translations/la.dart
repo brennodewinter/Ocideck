@@ -1793,6 +1793,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Hoc folium vacuum est: nihil ostendit nec in tabula nec in exportatione.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Exportatio a politia classificationis impedita: gradum TLP huic praesentationi statue.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

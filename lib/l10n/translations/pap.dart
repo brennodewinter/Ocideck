@@ -734,6 +734,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'E slide aki ta bashí: e no ta mustra nada riba pantaya ni den e eksport.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Eksportashon blokeá pa e polítika di klasifikashon: pone un nivel TLP pa e presentashon aki.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

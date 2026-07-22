@@ -1768,6 +1768,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'See slaid on tühi: see ei näita midagi ekraanil ega ekspordis.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Eksport on blokeeritud klassifikatsioonipoliitika tõttu: määra sellele esitlusele TLP-tase.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

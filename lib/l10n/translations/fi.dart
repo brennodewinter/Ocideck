@@ -1777,6 +1777,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Tämä dia on tyhjä: se ei näytä mitään näytöllä eikä viennissä.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Vienti estetty luokituskäytännön vuoksi: aseta tälle esitykselle TLP-taso.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

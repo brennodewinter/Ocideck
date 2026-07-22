@@ -731,6 +731,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Esta diapositiva está vacía: no muestra nada en pantalla ni en la exportación.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Exportación bloqueada por la política de clasificación: establece un nivel TLP para esta presentación.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

@@ -1752,6 +1752,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      '\'anghom vam chIm: jIHDaq ngeHDaq je vay\' \'angbe\'lu\'.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Segh chot chutmo\' ngeH botlu\': cha\'navvamvaD TLP patlh yIcher.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
