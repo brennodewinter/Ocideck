@@ -193,12 +193,29 @@ void main() {
       // is de internationale E.164-vorm, en de handleiding belooft op diezelfde
       // bladzijde dat ze die nooit afdrukt — die belofte blijft hier dus
       // onverkort bewaakt, ook in deze twee bestanden.
+      // COMPLIANCE.md identificeert de uitgever — dat is het doel van dat
+      // document. Zijn vestigingsadressen en telefoonnummer zijn dus échte
+      // treffers en geen valse positieven, net als het meldadres in SECURITY.md
+      // hierboven. Een rechtspersoon die zichzelf kenbaar maakt is precies het
+      // tegenovergestelde van een lek: de attestatie is waardeloos als niemand
+      // weet wie hem afgeeft (#644).
+      //
+      // Dat de scanner hierop afgaat is trouwens het bewijs dat hij werkt. Wat
+      // hij niet kan weten is wiens adres het is, en dat is nu juist waarom er
+      // in de app een eigen-identiteitslijst zit.
+      final identifiesThePublisher = doc.path.endsWith('COMPLIANCE.md');
+
       final explainsThePhoneRule =
           doc.path.endsWith('OCIWACHT.md') ||
           doc.path.endsWith('USER_GUIDE.md');
+      const publisherRules = {'contact.phone', 'contact.address'};
       final hits = [
-        ...result.certain.where((f) => f.ruleId != 'contact.email'),
-        if (!explainsThePhoneRule)
+        ...result.certain.where(
+          (f) =>
+              f.ruleId != 'contact.email' &&
+              !(identifiesThePublisher && publisherRules.contains(f.ruleId)),
+        ),
+        if (!explainsThePhoneRule && !identifiesThePublisher)
           ...result.findings.where((f) => f.ruleId == 'contact.phone'),
       ];
       expect(

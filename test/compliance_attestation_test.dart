@@ -47,12 +47,18 @@ void main() {
     );
   });
 
-  test('het meldadres is hetzelfde als in SECURITY.md', () {
-    // De twee documenten mogen niet uit elkaar lopen: dit is het adres waarop
-    // iemand een kwetsbaarheid meldt, en de attestatie is de kopie die een
-    // machine of een inkoper leest.
+  test('het MELDadres is hetzelfde als in SECURITY.md', () {
+    // Alleen het meldadres, niet elk adres. De attestatie noemt sinds #644 ook
+    // het algemene adres van de stichting, en dat hoort niet in SECURITY.md —
+    // dat bestand gaat over kwetsbaarheden. Deze poort eiste eerst dat élk
+    // adres in beide stond, en ging daardoor af op een tweede adres dat er
+    // volkomen terecht bij was gekomen. Te breed is óók kapot.
+    //
+    // Wat er wél moet gelden: er is één meldadres, en beide documenten noemen
+    // hetzelfde. Dat is het adres waarop iemand een kwetsbaarheid stuurt, en de
+    // attestatie is de kopie die een machine of een inkoper leest.
     final security = File('SECURITY.md').readAsStringSync();
-    final address = RegExp(r'[\w.+-]+@[\w.-]+\.\w+');
+    final address = RegExp(r'security@[\w.-]+\.\w+');
     final inSecurity = address
         .allMatches(security)
         .map((m) => m.group(0)!)
@@ -62,14 +68,40 @@ void main() {
         .map((m) => m.group(0)!)
         .toSet();
 
-    expect(inCompliance, isNotEmpty);
+    expect(inCompliance, isNotEmpty, reason: 'geen meldadres in COMPLIANCE.md');
     expect(
       inCompliance.difference(inSecurity),
       isEmpty,
       reason:
-          'COMPLIANCE.md noemt een adres dat niet in SECURITY.md staat. Eén van '
-          'de twee is verouderd, en de melder ontdekt welke.',
+          'COMPLIANCE.md noemt een meldadres dat niet in SECURITY.md staat. Eén '
+          'van de twee is verouderd, en de melder ontdekt welke.',
     );
+  });
+
+  test('de gegevens van de stichting lopen niet weg van de Over-sectie', () {
+    // Ze staan nu op twee plekken: in dit document en in het Over-paneel dat de
+    // gebruiker in de app ziet. Twee plekken lopen uit elkaar — en dan wijst de
+    // attestatie een andere rechtspersoon aan dan de app, precies bij het
+    // gegeven waar een aansprakelijkheidsvraag op landt (#644).
+    final about = File(
+      'lib/widgets/dialogs/parts/settings_dialog_about.dart',
+    ).readAsStringSync();
+
+    for (final fact in const [
+      '98657836', // KvK
+      'Weidemolen 12',
+      'Wilhelminaplein 12',
+      'stichting@librekat.nl',
+    ]) {
+      expect(
+        about.contains(fact),
+        isTrue,
+        reason:
+            'COMPLIANCE.md noemt "$fact" en het Over-paneel niet. Werk ze '
+            'samen bij, of haal het hier weg.',
+      );
+      expect(compliance.contains(fact), isTrue, reason: fact);
+    }
   });
 
   test('de niet-aangevinkte regels staan er nog als niet-aangevinkt', () {
