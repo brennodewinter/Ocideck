@@ -730,6 +730,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Alleen een titelpagina.': 'Solo una pagina del titolo.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Questa diapositiva è vuota: non mostra nulla sullo schermo né nell\'esportazione.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
@@ -2890,8 +2891,6 @@ const _dutchSourceAddIt = {
   'Onderzoeksverhaal': 'Racconto d\'indagine',
   'Technische uitleg': 'Spiegazione tecnica',
   'Interactieve quiz': 'Quiz interattivo',
-  'Alleen een titelpagina en een agenda.':
-      'Solo una pagina del titolo e un\'agenda.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situazione, fatti e decisione richiesta in sei slide.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':

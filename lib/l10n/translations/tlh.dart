@@ -1550,7 +1550,6 @@ const _dutchSourceTlh = {
   'Onderzoeksverhaal': 'Qul lut',
   'Technische uitleg': 'cham QIjghach',
   'Interactieve quiz': 'yu\'meH Quj',
-  'Alleen een titelpagina en een agenda.': 'pong nav qep nab je neH.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'wanI\', ngoDmey, wuqghach poQlu\'bogh je, jav \'echletHommeyDaq.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1752,6 +1751,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Alleen een titelpagina.': 'pong nav neH.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       '\'anghom vam chIm: jIHDaq ngeHDaq je vay\' \'angbe\'lu\'.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

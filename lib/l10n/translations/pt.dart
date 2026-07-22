@@ -1595,8 +1595,6 @@ const _dutchSourcePt = {
   'Onderzoeksverhaal': 'Narrativa de investigação',
   'Technische uitleg': 'Explicação técnica',
   'Interactieve quiz': 'Quiz interativo',
-  'Alleen een titelpagina en een agenda.':
-      'Apenas uma página de título e uma agenda.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situação, factos e decisão pedida em seis diapositivos.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1807,6 +1805,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Alleen een titelpagina.': 'Apenas uma página de título.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Este slide está vazio: não mostra nada no ecrã nem na exportação.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

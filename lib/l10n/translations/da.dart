@@ -1569,7 +1569,6 @@ const _dutchSourceDa = {
   'Onderzoeksverhaal': 'Undersøgelsesfortælling',
   'Technische uitleg': 'Teknisk forklaring',
   'Interactieve quiz': 'Interaktiv quiz',
-  'Alleen een titelpagina en een agenda.': 'Kun en titelside og en dagsorden.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situation, fakta og ønsket beslutning på seks slides.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1776,6 +1775,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Alleen een titelpagina.': 'Kun en titelside.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Denne slide er tom: den viser ingenting på skærmen eller i eksporten.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

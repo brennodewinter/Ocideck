@@ -61,7 +61,7 @@ final List<DeckTemplate> deckTemplates = [
   DeckTemplate(
     id: 'empty',
     title: 'Leeg deck',
-    description: 'Alleen een titelpagina en een agenda.',
+    description: 'Alleen een titelpagina.',
     icon: 'empty',
     buildSlides: _buildEmpty,
   ),

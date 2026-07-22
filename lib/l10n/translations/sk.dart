@@ -1578,7 +1578,6 @@ const _dutchSourceSk = {
   'Onderzoeksverhaal': 'Výskumný príbeh',
   'Technische uitleg': 'Technické vysvetlenie',
   'Interactieve quiz': 'Interaktívny kvíz',
-  'Alleen een titelpagina en een agenda.': 'Iba titulná strana a program.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situácia, fakty a požadované rozhodnutie na šiestich snímkach.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1784,6 +1783,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Alleen een titelpagina.': 'Iba titulná strana.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Táto snímka je prázdna: nezobrazuje nič na obrazovke ani v exporte.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

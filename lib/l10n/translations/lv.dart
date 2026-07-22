@@ -1570,7 +1570,6 @@ const _dutchSourceLv = {
   'Onderzoeksverhaal': 'Pētījuma stāsts',
   'Technische uitleg': 'Tehnisks skaidrojums',
   'Interactieve quiz': 'Interaktīva viktorīna',
-  'Alleen een titelpagina en een agenda.': 'Tikai titullapa un darba kārtība.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situācija, fakti un pieprasītais lēmums sešos slaidos.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1776,6 +1775,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Alleen een titelpagina.': 'Tikai titullapa.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Šis slaids ir tukšs: tas neko nerāda ne ekrānā, ne eksportā.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

@@ -1574,7 +1574,6 @@ const _dutchSourceCs = {
   'Onderzoeksverhaal': 'Výzkumný příběh',
   'Technische uitleg': 'Technické vysvětlení',
   'Interactieve quiz': 'Interaktivní kvíz',
-  'Alleen een titelpagina en een agenda.': 'Pouze titulní strana a program.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situace, fakta a požadované rozhodnutí na šesti snímcích.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1780,6 +1779,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Alleen een titelpagina.': 'Pouze titulní strana.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Tento snímek je prázdný: nezobrazuje nic na obrazovce ani v exportu.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

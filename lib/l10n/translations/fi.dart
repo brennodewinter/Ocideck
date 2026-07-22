@@ -1574,7 +1574,6 @@ const _dutchSourceFi = {
   'Onderzoeksverhaal': 'Tutkimustarina',
   'Technische uitleg': 'Tekninen selitys',
   'Interactieve quiz': 'Interaktiivinen tietovisa',
-  'Alleen een titelpagina en een agenda.': 'Vain otsikkosivu ja esityslista.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Tilanne, faktat ja pyydetty päätös kuudella dialla.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1777,6 +1776,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Alleen een titelpagina.': 'Vain otsikkosivu.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Tämä dia on tyhjä: se ei näytä mitään näytöllä eikä viennissä.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

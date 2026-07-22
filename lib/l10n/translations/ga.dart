@@ -1601,8 +1601,6 @@ const _dutchSourceGa = {
   'Onderzoeksverhaal': 'Scéal taighde',
   'Technische uitleg': 'Míniú teicniúil',
   'Interactieve quiz': 'Quiz idirghníomhach',
-  'Alleen een titelpagina en een agenda.':
-      'Leathanach teidil agus clár oibre amháin.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Cás, fíricí agus an cinneadh atá á iarraidh i sé shleamhnán.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1813,6 +1811,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Alleen een titelpagina.': 'Leathanach teidil amháin.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Tá an sleamhnán seo folamh: ní thaispeánann sé aon rud ar an scáileán ná san easpórtáil.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

@@ -1580,7 +1580,6 @@ const _dutchSourceLa = {
   'Onderzoeksverhaal': 'Narratio investigationis',
   'Technische uitleg': 'Explicatio technica',
   'Interactieve quiz': 'Quiz interactivum',
-  'Alleen een titelpagina en een agenda.': 'Solum pagina tituli et agenda.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situatio, facta et decretum petitum in sex paginis.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1793,6 +1792,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Alleen een titelpagina.': 'Solum pagina tituli.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Hoc folium vacuum est: nihil ostendit nec in tabula nec in exportatione.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

@@ -1577,8 +1577,6 @@ const _dutchSourceHr = {
   'Onderzoeksverhaal': 'Istraživačka priča',
   'Technische uitleg': 'Tehničko objašnjenje',
   'Interactieve quiz': 'Interaktivni kviz',
-  'Alleen een titelpagina en een agenda.':
-      'Samo naslovna stranica i dnevni red.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situacija, činjenice i tražena odluka u šest slajdova.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1784,6 +1782,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Alleen een titelpagina.': 'Samo naslovna stranica.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ovaj slajd je prazan: ne prikazuje ništa na zaslonu ni u izvozu.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

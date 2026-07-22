@@ -1577,8 +1577,6 @@ const _dutchSourceLt = {
   'Onderzoeksverhaal': 'Tyrimo pasakojimas',
   'Technische uitleg': 'Techninis paaiškinimas',
   'Interactieve quiz': 'Interaktyvi viktorina',
-  'Alleen een titelpagina en een agenda.':
-      'Tik titulinis puslapis ir darbotvarkė.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situacija, faktai ir prašomas sprendimas šešiose skaidrėse.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1785,6 +1783,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Alleen een titelpagina.': 'Tik titulinis puslapis.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ši skaidrė tuščia: ji nieko nerodo nei ekrane, nei eksporte.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

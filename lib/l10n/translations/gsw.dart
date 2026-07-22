@@ -1574,8 +1574,6 @@ const _dutchSourceGsw = {
   'Onderzoeksverhaal': 'Untersuechigs-Gschicht',
   'Technische uitleg': 'Technischi Erklärig',
   'Interactieve quiz': 'Interaktivs Quiz',
-  'Alleen een titelpagina en een agenda.':
-      'Nur e Titelsiite und e Traktandeliste.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situation, Fakte und dr verlangti Entscheid in sächs Folie.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1781,6 +1779,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Alleen een titelpagina.': 'Nur e Titelsiite.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Die Slide isch läär: si zeigt nüt uf em Bildschirm und nüt im Export.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
