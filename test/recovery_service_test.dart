@@ -212,4 +212,39 @@ void main() {
     final all = await service.loadAll();
     expect(all.map((s) => s.id), ['goed']);
   });
+
+  test(
+    'pruneIfDue ruimt op tijdens het draaien, hoogstens één keer per uur',
+    () async {
+      await service.save(snap('vers'));
+      final stale = File('${tempDir.path}/oud.json')
+        ..writeAsStringSync(
+          '{"id":"oud","savedAt":"2026-01-01T00:00:00.000",'
+          '"filePath":null,"label":"Oud","markdown":"# Klantgegevens"}',
+        )
+        ..setLastModifiedSync(
+          DateTime.now().subtract(const Duration(days: 30)),
+        );
+
+      await service.pruneIfDue();
+
+      expect(
+        stale.existsSync(),
+        isFalse,
+        reason:
+            'een bewaartermijn die pas bij de volgende start geldt, is geen '
+            'bewaartermijn',
+      );
+      expect(File('${tempDir.path}/vers.json').existsSync(), isTrue);
+
+      // Tweede aanroep binnen het uur doet niets — de tik komt elke 25 seconden.
+      final second = File('${tempDir.path}/nog_ouder.json')
+        ..writeAsStringSync('{}')
+        ..setLastModifiedSync(
+          DateTime.now().subtract(const Duration(days: 30)),
+        );
+      await service.pruneIfDue();
+      expect(second.existsSync(), isTrue);
+    },
+  );
 }

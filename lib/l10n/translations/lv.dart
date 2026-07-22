@@ -1782,12 +1782,49 @@ const _dutchSourceAddLv = <String, String>{
   'Zegel nog niet vastgelegd': 'Zīmogs vēl nav fiksēts',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Vēl nav saglabāta faila, pret kuru pārbaudīt zīmogu. Saglabājiet deku.',
+  'Via deze website ophalen?': 'Iegūt caur šo vietni?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Šīs prezentācijas serveris neļāva pārlūkam nolasīt failu tieši. OciDeck var nodot adresi vietnei, no kuras nāk pats OciDeck, un tā to ielādēs. Tad šī vietne redz visu adresi — ja saitē ir atslēga vai kods, šī vietne redz arī to.',
+  'In de browser kan dit niet worden bewaard':
+      'Pārlūkprogrammā to nevar saglabāt',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Pārlūkprogrammai nav atslēgu saišķa, kāds ir datoram: to, ko OciDeck šeit saglabātu, var izlasīt jebkurš šīs lapas skripts. Izmantojiet darbvirsmas versiju — tur noslēpums tiešām nonāk operētājsistēmas atslēgu saišķī.',
   'Licenties van derden': 'Trešo pušu licences',
   'Alle licentieteksten tonen': 'Rādīt visus licenču tekstus',
   'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'Pats OciDeck ir licencēts ar EUPL-1.2. Turklāt tas iekļauj trešo pušu programmatūru: Dart un Flutter pakotnes, divus komplektā iekļautus spraudņus, četras fontu saimes, sejas modeli privātuma pārbaudei un JavaScript, kas ceļo līdzi HTML eksportam. Katrs no tiem patur savu licenci.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Šajā failā ir trešo pušu programmatūra un dažkārt arī fonts. Zemāk ir pilni attiecīgo licenču teksti; nododiet tos līdzi, kad nododat šo failu.',
+  'Sporen op dit apparaat': 'Pēdas šajā ierīcē',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Papildus jūsu iestatījumiem OciDeck glabā arī neseno failu sarakstu un avārijas gadījumā atkopšanas failu ar visu jūsu prezentācijas saturu. Nekas no tā nepamet šo ierīci, bet tas te ir — vienkāršā tekstā, aizsargāts ar jūsu kontu šajā operētājsistēmā un ne vairāk.',
+  'Recent geopende presentaties': 'Nesen atvērtās prezentācijas',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Sarakstā glabājas pilns ceļš un klasifikācija katrai prezentācijai, kas ir bijusi atvērta, — kopā tā ir ziņa par to, pie kā jūs strādājat un kam.',
+  'Recente lijst wissen': 'Izdzēst neseno failu sarakstu',
+  'De recente lijst was al leeg.': 'Neseno failu saraksts jau bija tukšs.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'ieraksti izdzēsti no neseno failu saraksta.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Atkopšanas faili satur visu jūsu prezentāciju saturu vienkāršā tekstā. Tie tiek automātiski iztīrīti pēc 7 dienām, bet, programmu korekti aizverot, uzreiz.',
+  'Alles terugzetten': 'Atjaunot visu',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Izdzēš visus iestatījumus, neseno failu sarakstu, atkopšanas failus, git darba kopijas un paroles jūsu atslēgu saišķī. Jūsu prezentācijas paliek: tās ir jūsu, nevis OciDeck.',
+  'Zet alles terug naar de begintoestand': 'Atjaunot visu sākotnējā stāvoklī',
+  'Alles terugzetten naar de begintoestand?':
+      'Atjaunot visu sākotnējā stāvoklī?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Tiks izdzēsti jūsu iestatījumi, neseno failu saraksts, atkopšanas faili, git darba kopijas un saglabātās paroles. To nevar atsaukt. Jūsu prezentācijas paliek.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'izmaiņas vēl nav nosūtītas uz git serveri un pastāv tikai šajā ierīcē. Arī tās pazudīs.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Viss ir atjaunots sākotnējā stāvoklī.',
+  'Terugzetten is niet gelukt.': 'Atjaunošana neizdevās.',
+  'Er wacht nog werk dat niet verstuurd is': 'Vēl gaida nenosūtīts darbs',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Šim git savienojumam ir izmaiņas, kas vēl nav nosūtītas uz serveri. Ja noņemsiet savienojumu, pazudīs arī darba kopija šajā ierīcē — un šis darbs vairs nekur nepastāvēs.',
+  'Verbinding behouden': 'Paturēt savienojumu',
+  'Toch verwijderen': 'Tomēr noņemt',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Labi',

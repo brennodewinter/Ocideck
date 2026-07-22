@@ -1782,12 +1782,52 @@ const _dutchSourceAddDa = <String, String>{
   'Zegel nog niet vastgelegd': 'Segl endnu ikke fastlagt',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Der er endnu ingen gemt fil at kontrollere seglet imod. Gem decket.',
+  'Via deze website ophalen?': 'Hent via dette websted?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Serveren for denne præsentation lod ikke browseren læse filen direkte. OciDeck kan give adressen videre til det websted, OciDeck selv kommer fra, og så henter det filen. Dermed ser det websted hele adressen — står der en nøgle eller en kode i linket, ser webstedet også den.',
+  'In de browser kan dit niet worden bewaard':
+      'Dette kan ikke gemmes i browseren',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'En browser har ingen nøglering, sådan som en computer har: det, OciDeck ville gemme her, kan ethvert script på denne side læse med. Brug desktopversionen — dér havner hemmeligheden faktisk i operativsystemets nøglering.',
   'Licenties van derden': 'Tredjepartslicenser',
   'Alle licentieteksten tonen': 'Vis alle licenstekster',
   'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'OciDeck selv er udgivet under EUPL-1.2. Derudover samler det tredjepartssoftware: Dart- og Flutter-pakkerne, to medfølgende plugins, fire skriftfamilier, ansigtsmodellen til privatlivskontrollen og den JavaScript, der følger med en HTML-eksport. Hver af dem beholder sin egen licens.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Denne fil indeholder tredjepartssoftware og undertiden en skrifttype. Nedenfor står de fulde licenstekster, der hører til; send dem med, når du videregiver filen.',
+  'Sporen op dit apparaat': 'Spor på denne enhed',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Ud over dine indstillinger gemmer OciDeck også en liste over seneste filer og, ved et nedbrud, en gendannelsesfil med hele indholdet af din præsentation. Intet af det forlader denne enhed, men det ligger her — i klartekst, beskyttet af din konto på dette styresystem og ikke mere end det.',
+  'Recent geopende presentaties': 'Senest åbnede præsentationer',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Listen gemmer den fulde sti og klassifikationen for hvert deck, der har været åbent — tilsammen en oplysning om, hvad du arbejder på, og for hvem.',
+  'Recente lijst wissen': 'Slet listen over seneste filer',
+  'De recente lijst was al leeg.':
+      'Listen over seneste filer var allerede tom.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'post(er) slettet fra listen over seneste filer.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Gendannelsesfiler indeholder hele indholdet af dine præsentationer i klartekst. De ryddes automatisk op efter 7 dage, og med det samme ved en pæn afslutning.',
+  'Alles terugzetten': 'Nulstil alt',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Sletter alle indstillinger, listen over seneste filer, gendannelsesfilerne, git-arbejdskopierne og adgangskoderne i din nøglering. Dine præsentationer bliver stående: de er dine, ikke OciDecks.',
+  'Zet alles terug naar de begintoestand':
+      'Sæt alt tilbage til udgangstilstanden',
+  'Alles terugzetten naar de begintoestand?':
+      'Sæt alt tilbage til udgangstilstanden?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Dine indstillinger, listen over seneste filer, gendannelsesfilerne, git-arbejdskopierne og de gemte adgangskoder bliver slettet. Det kan ikke fortrydes. Dine præsentationer bliver stående.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'ændring(er) er endnu ikke sendt til en git-server og findes kun på denne enhed. De forsvinder også.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Alt er sat tilbage til udgangstilstanden.',
+  'Terugzetten is niet gelukt.': 'Nulstillingen mislykkedes.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Der venter arbejde, som ikke er sendt',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Denne git-forbindelse har ændringer, som endnu ikke er sendt til serveren. Fjerner du forbindelsen, forsvinder arbejdskopien på denne enhed også — og så findes arbejdet ingen steder.',
+  'Verbinding behouden': 'Behold forbindelsen',
+  'Toch verwijderen': 'Fjern alligevel',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

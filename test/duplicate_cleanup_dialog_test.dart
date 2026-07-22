@@ -8,27 +8,7 @@ import 'package:ocideck/widgets/dialogs/duplicate_cleanup_dialog.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Pompt frames binnen [WidgetTester.runAsync] tot [tot] waar is, of tot de
-/// tijdsgrens verstrijkt.
-///
-/// Het alternatief — een vaste `Future.delayed` — wacht een gok in plaats van
-/// een uitkomst. Dat haalt het op een rustige machine en niet onder een volle
-/// `make check`, en dan faalt een test die niets mankeert. Los draait hij dan
-/// gewoon groen, dus je zoekt op de verkeerde plek.
-Future<void> _wachtTot(
-  WidgetTester tester,
-  bool Function() tot, {
-  Duration grens = const Duration(seconds: 10),
-}) async {
-  await tester.runAsync(() async {
-    final deadline = DateTime.now().add(grens);
-    while (!tot() && DateTime.now().isBefore(deadline)) {
-      await tester.pump();
-      await Future<void>.delayed(const Duration(milliseconds: 5));
-    }
-  });
-  await tester.pump();
-}
+import 'support/pump_until.dart';
 
 void main() {
   setUp(() {
@@ -64,21 +44,41 @@ void main() {
       ),
     );
     // Echte bestand-I/O (stat, verplaatsen) komt onder FakeAsync alleen klaar
-    // binnen runAsync. Wachten op de uitkomst in plaats van op de klok: hier
-    // stonden vaste slaapjes van 50 en 100 ms.
-    await _wachtTot(
+    // binnen runAsync. Wachten tot de rijen er zíjn — dat is waarneembaar, in
+    // tegenstelling tot de 50 ms die hier stond.
+    final buttons = find.byIcon(Icons.delete_outline);
+    await pumpUntil(
       tester,
-      () => find.byIcon(Icons.delete_outline).evaluate().length == 2,
+      () => buttons.evaluate().length == 2,
+      reason: 'de twee kopieën verschenen niet als rijen',
     );
 
     // Twee rijen met elk een prullenbakknop, beide actief.
-    final buttons = find.byIcon(Icons.delete_outline);
     expect(buttons, findsNWidgets(2));
 
     await tester.tap(buttons.last);
-    await tester.pump();
-    await _wachtTot(tester, () => !b.existsSync());
-    await tester.pump(const Duration(milliseconds: 300));
+    // Twee dingen om op te wachten, en ze zijn niet hetzelfde: eerst is het
+    // bestand van schijf, dáárna verwerkt de setState-continuatie dat in de
+    // boom. Alleen op het bestand wachten liet de rij nog actief staan; vandaar
+    // dat hier eerder een extra venster van 100 ms plus een pump van 300 ms
+    // achteraan stond. Beide voorwaarden expliciet is korter én zeker.
+    await pumpUntil(
+      tester,
+      () => !b.existsSync(),
+      reason: 'de kopie werd nooit naar de prullenbak verplaatst',
+    );
+    await pumpUntil(
+      tester,
+      () {
+        if (buttons.evaluate().length != 1) return false;
+        final row = find
+            .ancestor(of: buttons, matching: find.byType(IconButton))
+            .evaluate();
+        return row.length == 1 &&
+            (row.single.widget as IconButton).onPressed == null;
+      },
+      reason: 'de laatste kopie werd niet beschermd nadat de andere weg was',
+    );
 
     // De tweede kopie is verplaatst; het origineel staat er nog.
     expect(b.existsSync(), isFalse);

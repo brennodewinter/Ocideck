@@ -6,6 +6,7 @@
 
 import 'dart:typed_data';
 
+import 'package:image/image.dart' as img;
 import 'package:opencv_core/opencv.dart' as cv;
 
 import '../../utils/log.dart';
@@ -43,6 +44,51 @@ const List<int> kFaceScanWidths = [1920, 1280, 640];
 /// Een dia met een RAW-scan van 80 MB hoort de kwaliteitscontrole niet te laten
 /// haperen. De grens is ruim: gewone dia-afbeeldingen zitten er ver onder.
 const int kFaceScanMaxBytes = 24 * 1024 * 1024;
+
+/// Boven dit aantal beeldpunten slaan we een afbeelding over — gemeten aan de
+/// **kop** van het bestand, dus vóór er iets gedecodeerd is.
+///
+/// [kFaceScanMaxBytes] is hiervoor geen vervanging. Wat `cv.imdecode` alloceert
+/// hangt niet aan de bestandsgrootte maar aan breedte × hoogte × 3: een egale
+/// PNG van 30000 × 30000 is nog geen megabyte op schijf en wordt 2,7 GB in het
+/// geheugen. Die allocatie gebeurt buiten de Dart-heap, dus een `try` eromheen
+/// vangt hem niet — het proces valt om. En dit draait standaard, zodra een deck
+/// met afbeeldingen open staat, op bestanden die uit dat deck komen.
+///
+/// 40 megapixel is ruim: een foto uit een moderne camera zit rond de 24, een
+/// 4K-schermafdruk op 8. De gedecodeerde matrix blijft daarmee onder ~120 MB, en
+/// alles wordt daarna toch teruggeschaald naar [kFaceScanWidths].
+const int kFaceScanMaxPixels = 40 * 1000 * 1000;
+
+/// Leest alléén de kop van [imageBytes] en zegt of de afmetingen binnen
+/// [kFaceScanMaxPixels] vallen. Draait vóór `cv.imdecode`.
+///
+/// **Fail-closed.** Is de kop niet te lezen, dan is het antwoord nee. Dat kost
+/// niets: een formaat waarvan wij de kop niet kunnen lezen, gaf hierna toch al
+/// `unreadable` terug — HEIC is daarvan het voorbeeld in [ImageFaceScanner]. Het
+/// alternatief, bij twijfel toch decoderen, laat precies het geval door waar
+/// deze poort voor bestaat: de aanvaller kiest zijn eigen kop.
+///
+/// `startDecode` doet wat de naam belooft: het leest de kop (bij PNG de IHDR,
+/// bij JPEG de SOF-markering) en zet nog geen enkel beeldpunt om. De
+/// image-bibliotheek zat al in het project, dus dit kost geen afhankelijkheid.
+///
+/// Staat los van de klasse zodat de poort toetsbaar is zónder native laag: die
+/// laadt niet onder `flutter test` (zie de kop van `image_face_scan_test.dart`),
+/// en dan zou een test via `countFaces` vacuüm groen staan.
+bool faceScanDimensionsWithinBudget(Uint8List imageBytes) {
+  try {
+    final info = img.findDecoderForData(imageBytes)?.startDecode(imageBytes);
+    if (info == null) return false;
+    final pixels = info.width * info.height;
+    return pixels > 0 && pixels <= kFaceScanMaxPixels;
+  } catch (e, s) {
+    // Bewust zonder pad of dianummer: zie de toelichting bij de catch in
+    // [ImageFaceScanner.countFaces] — dit gaat over beeld mét personen erop.
+    logError('faceScanDimensionsWithinBudget', e, s);
+    return false;
+  }
+}
 
 /// De scoredrempel waarboven een treffer als gezicht telt.
 ///
@@ -140,6 +186,9 @@ class _OpenCvImageFaceScanner implements ImageFaceScanner {
       return ImageFaceScanResult.unreadable;
     }
     if (imageBytes.lengthInBytes > kFaceScanMaxBytes) {
+      return ImageFaceScanResult.unreadable;
+    }
+    if (!faceScanDimensionsWithinBudget(imageBytes)) {
       return ImageFaceScanResult.unreadable;
     }
 

@@ -178,6 +178,33 @@ class RecoveryService {
   /// Privacy). Best-effort; geeft het aantal verwijderde bestanden terug.
   Future<int> discardAll() => pruneOlderThan(Duration.zero);
 
+  /// Wanneer er voor het laatst tijdens deze sessie is opgeruimd.
+  DateTime? _lastPrune;
+
+  /// Hoe vaak er tijdens het draaien wordt opgeruimd.
+  ///
+  /// Ruim genoeg dat het niets kost, vaak genoeg dat [defaultMaxAge] ook een
+  /// grens is voor een machine die weken aan blijft staan.
+  static const pruneInterval = Duration(hours: 1);
+
+  /// Ruim verlopen herstelbestanden op terwijl de app draait.
+  ///
+  /// Zonder dit gold de houdbaarheid alleen bij het opstarten: wie zijn laptop
+  /// niet afsluit, hield een momentopname van een crash van vorige maand op
+  /// schijf, want alleen [loadAll] veegde. Een bewaartermijn die je pas
+  /// handhaaft bij de volgende start, is geen bewaartermijn.
+  ///
+  /// Zelf-beperkend op [pruneInterval], zodat de autosave-tik hem elke 25
+  /// seconden mag aanroepen zonder de map elke keer te doorlopen.
+  Future<void> pruneIfDue() async {
+    if (_unavailable) return;
+    final last = _lastPrune;
+    final now = DateTime.now();
+    if (last != null && now.difference(last) < pruneInterval) return;
+    _lastPrune = now;
+    await pruneOlderThan(defaultMaxAge);
+  }
+
   /// Delete recovery files last modified more than [maxAge] ago. Best-effort:
   /// failures are logged, never thrown. Returns the number of files removed.
   Future<int> pruneOlderThan(Duration maxAge) async {

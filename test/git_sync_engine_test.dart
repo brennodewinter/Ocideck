@@ -33,6 +33,64 @@ class _CorruptMirror implements DeckMirror {
   bool get hasRealHistory => false;
   @override
   bool get isDurable => true;
+  @override
+  bool get discardsLandedWork => true;
+}
+
+/// Een werkkopie die zich als échte clone gedraagt: hij houdt zijn bestanden,
+/// ook nadat het werk geland is. Zo werkt `NativeGitMirror` — de clone ís waar
+/// de editor het deck uit leest.
+class _KeepingMirror implements DeckMirror {
+  _KeepingMirror(this._inner);
+
+  final DeckMirror _inner;
+
+  @override
+  bool get discardsLandedWork => false;
+  @override
+  bool get hasRealHistory => true;
+  @override
+  bool get isDurable => true;
+  @override
+  Future<Map<String, Uint8List>> readDeck(String d) => _inner.readDeck(d);
+  @override
+  Future<void> writeDeck(String d, Map<String, Uint8List> f) =>
+      _inner.writeDeck(d, f);
+  @override
+  Future<bool> hasDeck(String d) => _inner.hasDeck(d);
+  @override
+  Future<void> discardDeck(String d) =>
+      throw StateError('een clone gooit zijn werkkopie niet weg');
+  @override
+  Future<List<String>> deckDirs() => _inner.deckDirs();
+}
+
+/// Een forge die de gebruiker laat opslaan terwijl de push loopt. Precies de
+/// wedloop die het opruimen gevaarlijk maakt: de commit landt met de óude
+/// bytes, en op dat moment staat er alweer nieuwer werk in de werkkopie.
+class _SavesDuringPushForge extends FakeForge {
+  _SavesDuringPushForge(super.repo, this._onCommit);
+
+  final Future<void> Function() _onCommit;
+
+  @override
+  Future<CommitResult> commitFiles({
+    required String branch,
+    required String message,
+    required Map<String, Uint8List> upserts,
+    required List<String> deletes,
+    required String baseSha,
+  }) async {
+    final result = await super.commitFiles(
+      branch: branch,
+      message: message,
+      upserts: upserts,
+      deletes: deletes,
+      baseSha: baseSha,
+    );
+    await _onCommit();
+    return result;
+  }
 }
 
 /// A forge that is simply not there — the aeroplane.
@@ -255,6 +313,109 @@ void main() {
       },
     );
 
+    // De werkkopie bestaat om werk vast te houden tot het geland is. Daarna is
+    // het een kopie zonder taak — en op web staat die in de opslag van de
+    // browser, gedeeld met wie dat profiel verder gebruikt, mét de volledige
+    // markdown, de notities en de annotaties.
+    //
+    // De harde randvoorwaarde: opruimen alleen ná een bevestigde landing.
+    group('de werkkopie na de landing', () {
+      Future<Map<String, Uint8List>> draft() =>
+          mirror.readDeck('decks/kwartaalcijfers');
+
+      test('een geslaagde push laat niets achter', () async {
+        await save('# Mijn werk');
+        expect(await draft(), isNotEmpty);
+
+        final outcome = await engineWith(
+          FakeForge(repo),
+        ).flushDeck('decks/kwartaalcijfers');
+
+        expect(outcome.status, SyncStatus.committed);
+        expect(
+          await draft(),
+          isEmpty,
+          reason: 'het deck staat op de forge; de werkkopie hoort weg',
+        );
+      });
+
+      test('werk dat al op de forge stond wordt ook opgeruimd', () async {
+        // alreadyLanded: de inhoud is identiek, dus het werk ís geland.
+        await save('# Zoals op de forge');
+        final outcome = await engineWith(
+          FakeForge(repo),
+        ).flushDeck('decks/kwartaalcijfers');
+
+        expect(outcome.status, SyncStatus.alreadyLanded);
+        expect(await draft(), isEmpty);
+      });
+
+      test('een MISLUKTE push laat de werkkopie staan', () async {
+        // De kern van de randvoorwaarde. Offline is geen landing, dus het werk
+        // moet er nog zijn — anders is dit dataverlies in plaats van hygiëne.
+        await save('# Werk in het vliegtuig');
+        final outcome = await engineWith(
+          _OfflineForge(repo),
+        ).flushDeck('decks/kwartaalcijfers');
+
+        expect(outcome.status, SyncStatus.failed);
+        expect(await draft(), isNotEmpty);
+        expect(await outbox.forDeck('decks/kwartaalcijfers'), isNotNull);
+      });
+
+      test('een conflict laat de werkkopie staan', () async {
+        await save('# Mijn werk', baseSha: 'verouderd');
+        final outcome = await engineWith(
+          FakeForge(repo),
+        ).flushDeck('decks/kwartaalcijfers');
+
+        expect(outcome.status, SyncStatus.conflict);
+        expect(await draft(), isNotEmpty);
+      });
+
+      test('werk dat tijdens de push binnenkomt blijft staan', () async {
+        // De wedloop, en de reden dat het opruimen niet blind mag zijn: de
+        // commit landt met de oude bytes terwijl de gebruiker alweer heeft
+        // opgeslagen. Dat nieuwe werk is NIET geland en heeft zijn eigen
+        // wachtende commit — het weggooien zou precies het dataverlies zijn
+        // dat de wachtrij hoort te voorkomen.
+        await save('# Mijn werk');
+        final forge = _SavesDuringPushForge(
+          repo,
+          () => save('# Nieuwer werk, nog niet geland'),
+        );
+
+        final outcome = await engineWith(
+          forge,
+        ).flushDeck('decks/kwartaalcijfers');
+
+        expect(outcome.status, SyncStatus.committed);
+        final left = await draft();
+        expect(left, isNotEmpty, reason: 'nieuw werk mag niet verdwijnen');
+        expect(
+          utf8.decode(left['decks/kwartaalcijfers/deck.md']!),
+          '# Nieuwer werk, nog niet geland',
+        );
+      });
+
+      test('een echte clone houdt zijn werkkopie', () async {
+        // NativeGitMirror leest het deck juist uit de clone; weghalen zou het
+        // bestand onder de gebruiker vandaan trekken.
+        final keeper = _KeepingMirror(
+          DraftMirror(store: FileDraftStore(baseDir: temp)),
+        );
+        await save('# Mijn werk');
+        final outcome = await SyncEngine(
+          forge: FakeForge(repo),
+          mirror: keeper,
+          outbox: outbox,
+        ).flushDeck('decks/kwartaalcijfers');
+
+        expect(outcome.status, SyncStatus.committed);
+        expect(await keeper.readDeck('decks/kwartaalcijfers'), isNotEmpty);
+      });
+    });
+
     test('commits the mirror and clears the queue', () async {
       await save('# Mijn werk');
       final outcome = await engineWith(
@@ -401,15 +562,14 @@ void main() {
       await engineWith(forge).flushDeck('decks/kwartaalcijfers');
       final shaAfterFirst = await forge.headSha('main');
 
-      // Re-queue with the now-stale base, as a crashed run would have left it.
-      await outbox.enqueue(
-        const PendingCommit(
-          deckDir: 'decks/kwartaalcijfers',
-          branch: 'main',
-          message: 'Update Kwartaalcijfers',
-          baseSha: 'commit-main',
-        ),
-      );
+      // Herstel de staat die een gecrashte run zou hebben achtergelaten: de
+      // commit landde, maar níéts van het lokale opruimen kwam er nog aan toe.
+      // Dus zowel de wachtende commit (met de inmiddels verouderde basis) als
+      // de werkkopie staan er nog. Alleen de wachtrij terugzetten zou een staat
+      // nabootsen die in werkelijkheid niet bestaat — het opruimen van de
+      // werkkopie gebeurt ná dat van de wachtrij, dus wie het eerste niet haalt,
+      // haalt het tweede zeker niet.
+      await save('# Mijn werk');
 
       final outcome = await engineWith(
         forge,

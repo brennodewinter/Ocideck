@@ -5,6 +5,8 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
+import 'support/pump_until.dart';
+
 /// De placeholder dekte vier wezenlijk verschillende situaties af met exact
 /// hetzelfde grijze vlak: leeg veld, ontbrekend bestand, pad buiten de
 /// presentatie, decodeerfout. Wie de presentatie doorstuurde, kon dus niet zien
@@ -43,15 +45,16 @@ void main() {
     tester,
   ) async {
     // Het laden van het bestand loopt echt over de schijf; de errorBuilder komt
-    // pas een paar frames later. Begrensd doorpompen tot de placeholder er is,
-    // in plaats van gokken met één pump.
-    await tester.runAsync(() async {
-      await tester.pumpWidget(
-        _host(_imageSlide('images/weg.png'), projectPath: '/deck'),
-      );
-      await Future<void>.delayed(const Duration(milliseconds: 300));
-      await tester.pump();
-    });
+    // pas een paar frames later. Wachten tot de placeholder er ís — hier stond
+    // een vaste 300 ms, en dat is een gok op hoe traag de schijf vandaag is.
+    await tester.pumpWidget(
+      _host(_imageSlide('images/weg.png'), projectPath: '/deck'),
+    );
+    await pumpUntil(
+      tester,
+      () => find.text('Bestand niet gevonden').evaluate().isNotEmpty,
+      reason: 'de errorBuilder toonde nooit de reden',
+    );
 
     expect(find.text('Bestand niet gevonden'), findsOneWidget);
     expect(find.text('Afbeelding'), findsNothing);

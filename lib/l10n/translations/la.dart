@@ -1799,12 +1799,49 @@ const _dutchSourceAddLa = <String, String>{
   'Zegel nog niet vastgelegd': 'Sigillum nondum consignatum',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Nulla adhuc tabella servata est ad sigillum recomputandum. Serva acervum.',
+  'Via deze website ophalen?': 'Per hunc situm accersere?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Servitor huius praesentationis navigatro plicam directe legere non permisit. OciDeck inscriptionem tradere potest situi unde ipsum OciDeck venit, qui eam tunc accersit. Ita ille situs totam inscriptionem videt — si clavis aut nota in nexu inest, ille situs eam quoque videt.',
+  'In de browser kan dit niet worden bewaard':
+      'In navigatro hoc servari non potest',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Navigatrum clavarium non habet sicut computatrum habet: quidquid OciDeck hic servaret, quodlibet scriptum in hac pagina legere potest. Versione mensali utere — ibi arcanum revera in clavarium systematis operandi reponitur.',
   'Licenties van derden': 'Licentiae aliorum',
   'Alle licentieteksten tonen': 'Omnes textus licentiarum monstrare',
   'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'OciDeck ipsum sub EUPL-1.2 est. Praeterea programmata aliorum colligit: fasciculos Dart et Flutter, duo additamenta inclusa, quattuor familias litterarum, exemplar vultus ad privatam custodiam et JavaScript quod in exportatione HTML comitatur. Unumquodque licentiam suam servat.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Hic fasciculus programmata aliorum et interdum litterarum formam continet. Infra sunt textus licentiarum pleni ad ea pertinentes; eos simul mitte cum hunc fasciculum tradis.',
+  'Sporen op dit apparaat': 'Vestigia in hoc instrumento',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Praeter optiones tuas OciDeck etiam indicem recentium servat et, si programma corruit, plicam recuperationis cum toto contento praesentationis tuae. Nihil eorum hoc instrumentum relinquit, sed hic manet — in textu plano, ratione tua in hoc systemate operandi protectum, nec amplius.',
+  'Recent geopende presentaties': 'Praesentationes nuper apertae',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Index viam plenam et classificationem cuiusque praesentationis apertae servat — simul indicium de eo quod agis et cui.',
+  'Recente lijst wissen': 'Indicem recentium delere',
+  'De recente lijst was al leeg.': 'Index recentium iam vacuus erat.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'inscriptiones ex indice recentium deletae.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Plicae recuperationis totum contentum praesentationum tuarum in textu plano continent. Post 7 dies automatice purgantur, et statim cum programma rite clauditur.',
+  'Alles terugzetten': 'Omnia restituere',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Delet omnem optionem, indicem recentium, plicas recuperationis, exemplaria operis git et tesseras in clavario tuo. Praesentationes tuae manent: tuae sunt, non OciDeck.',
+  'Zet alles terug naar de begintoestand': 'Omnia ad statum initialem restitue',
+  'Alles terugzetten naar de begintoestand?':
+      'Omnia ad statum initialem restituere?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Optiones tuae, index recentium, plicae recuperationis, exemplaria operis git et tesserae servatae delebuntur. Hoc revocari non potest. Praesentationes tuae manent.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'mutationes nondum ad servum git missae sunt et solum in hoc instrumento exstant. Etiam illae peribunt.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Omnia ad statum initialem reducta sunt.',
+  'Terugzetten is niet gelukt.': 'Restitutio non successit.',
+  'Er wacht nog werk dat niet verstuurd is': 'Opus nondum missum exspectat',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Haec conexio git mutationes habet quae nondum ad servum missae sunt. Si conexionem removes, etiam exemplar operis in hoc instrumento perit — et hoc opus nusquam amplius exstat.',
+  'Verbinding behouden': 'Conexionem servare',
+  'Toch verwijderen': 'Nihilominus removere',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Bene',

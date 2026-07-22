@@ -15,13 +15,52 @@
 // Dat vraagt een echte app-run met een afbeelding waar iemand op staat — zie
 // OCIWACHT.md, fase beeldcontrole.
 
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:archive/archive.dart' show getCrc32;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/privacy/image_face_scan.dart';
+import 'package:ocideck/services/privacy/image_face_scan_io.dart'
+    show faceScanDimensionsWithinBudget;
 // Rechtstreeks, want op desktop kiest de voorwaardelijke import de native kant.
 import 'package:ocideck/services/privacy/image_face_scan_stub.dart';
+
+/// Een PNG met niets dan een geldige signatuur en een IHDR die [width] × [height]
+/// claimt. Precies wat een aanvaller stuurt: een paar tientallen bytes op schijf
+/// die een decoder gigabytes laten reserveren. Zonder IDAT, want de poort hoort
+/// toe te slaan lang voordat er iets te decoderen valt.
+///
+/// Twee dingen moeten écht kloppen, anders toetst de test niets: de afsluitende
+/// IEND (zonder die chunk loopt de koplezer voorbij het einde van de bytes en
+/// gooit hij) en de CRC van elke chunk (de PNG-lezer controleert die wél). In
+/// beide gevallen weigert de poort dan nog steeds — maar om de verkéérde reden,
+/// en dan zou deze groep groen staan met een kapotte grens. Allebei één keer
+/// gebeurd tijdens het schrijven hiervan.
+Uint8List pngHeader(int width, int height) {
+  List<int> chunk(String type, List<int> data) {
+    final typed = [...ascii.encode(type), ...data];
+    return [..._uint32(data.length), ...typed, ..._uint32(getCrc32(typed))];
+  }
+
+  return Uint8List.fromList([
+    137, 80, 78, 71, 13, 10, 26, 10, // PNG-signatuur
+    ...chunk('IHDR', [
+      ..._uint32(width),
+      ..._uint32(height),
+      8, 0, 0, 0, 0, // bitdiepte 8, grijswaarden, geen interlace
+    ]),
+    ...chunk('IEND', const []),
+  ]);
+}
+
+List<int> _uint32(int v) => [
+  (v >> 24) & 0xFF,
+  (v >> 16) & 0xFF,
+  (v >> 8) & 0xFF,
+  v & 0xFF,
+];
 
 void main() {
   late ImageFaceScanner scanner;
@@ -99,6 +138,55 @@ void main() {
       final r = await scanner.countFaces(Uint8List(25 * 1024 * 1024));
       expect(r.faces, 0);
       expect(r.readable, isFalse);
+    });
+
+    test('een afbeelding met absurde afmetingen wordt overgeslagen', () async {
+      final r = await scanner.countFaces(pngHeader(30000, 30000));
+      expect(r.faces, 0);
+      expect(r.readable, isFalse);
+    });
+  });
+
+  // De bytecap is géén afmetingscap. Wat `cv.imdecode` alloceert hangt aan
+  // breedte × hoogte × 3, niet aan de bestandsgrootte: een egale PNG van
+  // 30000 × 30000 blijft ruim onder de 24 MiB en wordt 2,7 GB in het geheugen —
+  // buiten de Dart-heap, dus geen `try` vangt dat. Deze poort leest de kop en
+  // weigert vóór het decoderen.
+  //
+  // Rechtstreeks getoetst en niet via `countFaces`, omdat die zonder native
+  // laag al bij `isSupported` afslaat en de test dan vacuüm groen zou staan.
+  group('afmetingspoort vóór het decoderen', () {
+    test('een kop die 30000 × 30000 claimt komt er niet door', () {
+      expect(faceScanDimensionsWithinBudget(pngHeader(30000, 30000)), isFalse);
+    });
+
+    test('ook een langgerekte kop telt op oppervlak, niet op één as', () {
+      // 40000 × 2000 = 80 Mpx: geen enkele as is absurd, het product wel.
+      expect(faceScanDimensionsWithinBudget(pngHeader(40000, 2000)), isFalse);
+    });
+
+    test('een gewone afbeelding uit de assets komt er wél door', () {
+      expect(faceScanDimensionsWithinBudget(asset('cat-keiko.jpg')), isTrue);
+      expect(faceScanDimensionsWithinBudget(asset('ocideck-logo.png')), isTrue);
+    });
+
+    test('vlak onder de grens mag, vlak erboven niet', () {
+      expect(faceScanDimensionsWithinBudget(pngHeader(6000, 6000)), isTrue);
+      expect(faceScanDimensionsWithinBudget(pngHeader(6500, 6500)), isFalse);
+    });
+
+    test('een onleesbare kop wordt geweigerd, niet gegokt', () {
+      // Fail-closed: wie de kop niet kan lezen, weet de afmeting niet, en dan
+      // is doorlopen naar imdecode precies het gat.
+      expect(faceScanDimensionsWithinBudget(Uint8List(0)), isFalse);
+      expect(
+        faceScanDimensionsWithinBudget(Uint8List.fromList([1, 2, 3, 4, 5])),
+        isFalse,
+      );
+    });
+
+    test('een kop die nul beeldpunten claimt telt niet als "past"', () {
+      expect(faceScanDimensionsWithinBudget(pngHeader(0, 0)), isFalse);
     });
   });
 

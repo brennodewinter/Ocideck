@@ -741,12 +741,52 @@ const _dutchSourceAddFy = {
   'Zegel nog niet vastgelegd': 'Segel noch net fêstlein',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
       'Der is noch gjin bewarre bestân dêr\'t it segel tsjin neirekkene wurde kin. Bewarje it deck.',
+  'Via deze website ophalen?': 'Fia dizze webside ophelje?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'De server fan dizze presintaasje liet de browser it bestân net streekrjocht lêze. OciDeck kin it adres trochjaan oan de webside dêr\'t OciDeck sels weikomt, en dy hellet it dan op. Dy webside sjocht dêrmei it folsleine adres — stiet der in kaai of koade yn de link, dan sjocht dy webside dy ek.',
+  'In de browser kan dit niet worden bewaard':
+      'Yn de browser kin dit net bewarre wurde',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'In browser hat gjin kaaibosk sa\'t in kompjûter dy hat: wat OciDeck hjir bewarje soe, kin elk skript op dizze side meilêze. Brûk de desktopferzje — dêr komt it geheim wol yn de kaaibosk fan it bestjoeringssysteem.',
   'Licenties van derden': 'Lisinsjes fan tredden',
   'Alle licentieteksten tonen': 'Alle lisinsjeteksten sjen litte',
   'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'OciDeck sels stiet ûnder de EUPL-1.2. Dêrneist bondelet it software fan tredden: de Dart- en Flutter-pakketten, twa meilevere plugins, fjouwer lettertypefamyljes, it gesichtsmodel foar de privacykontrôle en it JavaScript dat yn in HTML-eksport meireizget. Elk dêrfan hâldt syn eigen lisinsje.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Dit bestân befettet software fan tredden en soms in lettertype. Hjirûnder steane de folsleine lisinsjeteksten dy\'t dêrby hearre; stjoer se mei as jo dit bestân trochjouwe.',
+  'Sporen op dit apparaat': 'Spoaren op dit apparaat',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Neist jo ynstellingen bewarret OciDeck ek in list mei resinte bestannen en, by in crash, in werstelbestân mei de folsleine ynhâld fan jo presintaasje. Neat dêrfan ferlit dit apparaat, mar it stiet der wol — yn platte tekst, beskerme troch jo akkount op dit bestjoeringssysteem en net mear as dat.',
+  'Recent geopende presentaties': 'Koartlyn iepene presintaasjes',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'De list bewarret it folsleine paad en de klassifikaasje fan elke presintaasje dy\'t iepen west hat — mei-inoar in gegeven oer wêr\'t jo oan wurkje en foar wa.',
+  'Recente lijst wissen': 'Resinte list wiskje',
+  'De recente lijst was al leeg.':
+      'De list mei resinte bestannen wie al leech.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'fermelding(en) út de resinte list wiske.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Crash-werstelbestannen befetsje de folsleine ynhâld fan jo presintaasjes yn platte tekst. Se wurde nei 7 dagen automatysk oprêden, en by in kreas ôfsluten daliks.',
+  'Alles terugzetten': 'Alles weromsette',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Wisket elke ynstelling, de list mei resinte bestannen, de werstelbestannen, de git-wurkkopyen en de wachtwurden yn jo kaaibosk. Jo presintaasjes bliuwe stean: dy binne fan jo, net fan OciDeck.',
+  'Zet alles terug naar de begintoestand':
+      'Set alles werom nei de begjintastân',
+  'Alles terugzetten naar de begintoestand?':
+      'Alles weromsette nei de begjintastân?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Jo ynstellingen, de list mei resinte bestannen, de werstelbestannen, de git-wurkkopyen en de bewarre wachtwurden wurde wiske. Dit kin net ûngedien makke wurde. Jo presintaasjes bliuwe stean.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'wiziging(en) binne noch net nei in git-server stjoerd en besteane allinne op dit apparaat. Dy geane ek fuort.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Alles is weromset nei de begjintastân.',
+  'Terugzetten is niet gelukt.': 'It weromsetten is net slagge.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Der wachtet noch wurk dat net ferstjoerd is',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Dizze git-ferbining hat wizigingen dy\'t noch net nei de server stjoerd binne. Smite jo de ferbining fuort, dan giet ek de wurkkopy op dit apparaat wei — en bestiet dit wurk nearne mear.',
+  'Verbinding behouden': 'Ferbining hâlde',
+  'Toch verwijderen': 'Dochs fuortsmite',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

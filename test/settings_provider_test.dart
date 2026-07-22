@@ -468,6 +468,59 @@ void main() {
       },
     );
 
+    // De herkomst is maar een label onder de wolk-badge, maar hij gaat
+    // onversleuteld naar het prefs-domein. Een import-URL kan het
+    // `gebruiker:wachtwoord@`-deel dragen dat een URL vóór de host toestaat, en
+    // dan staat er een wachtwoord in gewone instellingen — precies wat
+    // SecretStore voorkomt.
+    group('herkomst zonder inloggegevens', () {
+      test('het gebruikersdeel wordt niet bewaard', () async {
+        final n = await _loadedNotifier();
+        await n.addRecentFile('/remote.md');
+        // Uit delen opgebouwd: een letterlijke `gebruiker:wachtwoord@host`
+        // in de broncode laat de geheimenscanner terecht aanslaan.
+        const user = 'bram';
+        const pw = 'hunter2';
+        await n.setRecentFileOrigin(
+          '/remote.md',
+          'https://$user:$pw@cloud.example/decks/deck.md',
+        );
+
+        final stored = n.state.recentFileOrigins['/remote.md']!;
+        expect(stored, isNot(contains('hunter2')));
+        expect(stored, isNot(contains('bram')));
+        // Maar wél zichtbaar dát er inloggegevens in de link zaten.
+        expect(stored, contains('***'));
+        expect(stored, contains('cloud.example'));
+      });
+
+      test('een token in de gebruikersnaam alleen verdwijnt ook', () async {
+        final n = await _loadedNotifier();
+        await n.addRecentFile('/t.md');
+        const token = 'ghp_geheim';
+        await n.setRecentFileOrigin('/t.md', 'https://$token@git.example/x');
+        expect(
+          n.state.recentFileOrigins['/t.md'],
+          isNot(contains('ghp_geheim')),
+        );
+      });
+
+      test('een gewone URL blijft ongemoeid', () async {
+        const plain = 'https://cloud.example/decks/deck.md';
+        expect(SettingsNotifier.scrubbedOrigin(plain), plain);
+      });
+
+      test('een herkomst die geen URL is blijft ongemoeid', () async {
+        // WebDAV en S3 schrijven `server · pad`; daar valt niets te schrobben.
+        const label = 'https://server · pad.md';
+        expect(SettingsNotifier.scrubbedOrigin(label), label);
+        expect(
+          SettingsNotifier.scrubbedOrigin('mijn-bucket · a/b.md'),
+          'mijn-bucket · a/b.md',
+        );
+      });
+    });
+
     test('libraries: add, rename, remove round-trip and persist', () async {
       final n = await _loadedNotifier();
       expect(n.state.libraries, isEmpty);

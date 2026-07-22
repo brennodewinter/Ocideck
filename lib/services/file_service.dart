@@ -189,6 +189,15 @@ enum ImportFailure {
 typedef PackagePasswordResolver =
     Future<String?> Function({required bool retry});
 
+/// Vraagt of de web-import mag terugvallen op het same-origin fetch-hulppunt.
+///
+/// Die terugval stuurt de hele URL naar de origin die de app serveert — een
+/// partij die de gebruiker niet zelf heeft aangewezen, en de URL kan een
+/// deelsleutel bevatten. Daarom een vraag en geen automatisme. [host] is de
+/// bronhost, zodat de vraag concreet kan zijn. De service kent geen UI; de
+/// shell levert de implementatie. Geen implementatie = geen toestemming.
+typedef ProxyFallbackConfirm = Future<bool> Function({required String host});
+
 /// Uitkomst van een import: het pad naar de hoofd-markdown bij succes, anders
 /// een [failure] met de reden.
 class ImportOutcome {
@@ -823,12 +832,21 @@ class FileService {
         try {
           raw = f.content;
         } catch (e) {
-          logWarning(
-            'FileService.decodePackageEntries: unreadable encrypted entry '
-            'skipped (${f.name})',
+          // **Fail-closed.** WinZip-AES toetst per lid een HMAC; `archive`
+          // gooit hier ("macs don't match") zodra die niet klopt. Dat is geen
+          // leesfout maar een bewijs van wijziging ná het versleutelen.
+          //
+          // Dit lid overslaan en doorgaan leverde stil een pakket op waar één
+          // bestand uit verdwenen was — precies het lid dat een aanvaller
+          // eruit wilde hebben. Wie een pakket versleutelt, doet dat om te
+          // kunnen vertrouwen wat eruit komt; dan is een half pakket zonder
+          // melding de verkeerde uitkomst. Het hele pakket wordt geweigerd.
+          logError(
+            'FileService.decodePackageEntries: encrypted entry failed its '
+            'integrity check, refusing the package (${f.name})',
             e,
           );
-          continue;
+          return null;
         }
         if (extracted + raw.length > maxBytes) {
           logWarning(
