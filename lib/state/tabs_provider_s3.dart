@@ -12,6 +12,17 @@ part of 'tabs_provider.dart';
 bool _isRootMd(MapEntry<String, List<int>> entry) =>
     entry.key.toLowerCase().endsWith('.md') && !entry.key.contains('/');
 
+/// Het pad van één pakket-lid naast een doelpad in de map [dir].
+///
+/// `p.posix.dirname` geeft `.` voor een doelpad zonder map, en `join('.', x)`
+/// maakt daar `./x` van. Dat is geen pad dat iemand intikt: op S3 is de sleutel
+/// waarnaar we uploaden dan anders gespeld dan de herkomst die we bewaren, en
+/// op WebDAV probeert `_ensureParents` er een map `.` van te maken. Beide
+/// kanten normaliseren het weg, dus er ging niets mis — maar wat over de lijn
+/// gaat hoort te staan zoals de gebruiker het koos.
+String _remoteMemberPath(String dir, String member) =>
+    dir == '.' || dir.isEmpty ? member : p.posix.join(dir, member);
+
 extension TabsNotifierS3 on TabsNotifier {
   /// Download het gekozen object, haal het door de security-gate en open het in
   /// een tab.
@@ -122,9 +133,7 @@ extension TabsNotifierS3 on TabsNotifier {
         // Het pakket-markdownbestand heet naar de deck-titel; geef het in de
         // bucket de naam die de gebruiker koos. Assets houden hun submap.
         final isRootMd = _isRootMd(entry);
-        final remote = isRootMd
-            ? p.posix.join(dir, mdBase)
-            : p.posix.join(dir, entry.key);
+        final remote = _remoteMemberPath(dir, isRootMd ? mdBase : entry.key);
         // Alleen het markdownbestand ís het deck; de assets ernaast hebben we
         // nooit opgehaald, dus daar valt niets te toetsen.
         final etag = await service.upload(

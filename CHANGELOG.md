@@ -256,6 +256,14 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   melding bij een te grote maplijst noemt nu overal het aantal.
 
 ### Fixed
+- **Een presentatie die naar een submap gaat, komt daar ook onder die naam
+  aan.** Sloeg u een deck op naar S3 of WebDAV op een pad zónder map ervoor,
+  dan ging het object met een `./` ervoor de lijn over: de sleutel waar
+  daadwerkelijk naartoe werd geschreven was anders gespeld dan de herkomst die
+  het tabblad bewaarde, en op WebDAV probeerde de client er ook nog een map `.`
+  van te maken. Beide kanten normaliseerden dat weg, dus er raakte niets kwijt —
+  maar wat over de lijn gaat, hoort te staan zoals u het koos.
+
 - **Een ingesloten YouTube-video gaat niet langer langs het domein dat u
   volgt.** OciDeck gebruikt overal de nocookie-variant van YouTube — behalve op
   één plek, en dat was uitgerekend de speler zelf. Die haalde zijn script van

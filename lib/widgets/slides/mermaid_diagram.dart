@@ -5,12 +5,30 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../services/mermaid_render_service.dart';
 import '../../utils/sanitize_svg.dart';
 
+/// Zet Mermaid-brontekst om in SVG-opmaak, of `null` als dat niet lukt.
+/// Standaard de gedeelde [MermaidRenderService].
+///
+/// Eén dunne indirectie, in hetzelfde patroon als `FileService.saveDestination`:
+/// de renderer draait op een verborgen [WebView] die onder `flutter test` niet
+/// bestaat, en zonder deze naad is alles eráchter onbereikbaar — het opschonen
+/// van de SVG, het kader eromheen, en de terugval op de brontekst wanneer de
+/// opmaak wordt geweigerd.
+typedef MermaidRenderer = Future<String?> Function(String source);
+
 /// Renders a Mermaid diagram definition as inline SVG in slide previews.
 class MermaidDiagram extends StatefulWidget {
   final String source;
   final double width;
 
-  const MermaidDiagram({super.key, required this.source, required this.width});
+  /// Zie [MermaidRenderer]. `null` betekent: de gedeelde renderdienst.
+  final MermaidRenderer? renderer;
+
+  const MermaidDiagram({
+    super.key,
+    required this.source,
+    required this.width,
+    this.renderer,
+  });
 
   @override
   State<MermaidDiagram> createState() => _MermaidDiagramState();
@@ -19,17 +37,20 @@ class MermaidDiagram extends StatefulWidget {
 class _MermaidDiagramState extends State<MermaidDiagram> {
   late Future<String?> _svgFuture;
 
+  MermaidRenderer get _render =>
+      widget.renderer ?? MermaidRenderService.instance.render;
+
   @override
   void initState() {
     super.initState();
-    _svgFuture = MermaidRenderService.instance.render(widget.source);
+    _svgFuture = _render(widget.source);
   }
 
   @override
   void didUpdateWidget(MermaidDiagram oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.source != widget.source) {
-      _svgFuture = MermaidRenderService.instance.render(widget.source);
+      _svgFuture = _render(widget.source);
     }
   }
 

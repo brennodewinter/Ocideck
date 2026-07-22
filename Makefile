@@ -143,12 +143,12 @@ coverage:
 # average says how much of lib/ runs; it says nothing about *where*. A file that
 # a test imports but never calls sits at 0% inside an 80% average and no gate
 # above notices — twenty-two files were in exactly that state. This one looks at
-# the worst case per file and budgets how many may be there.
+# the worst case per file, en er is geen budget meer: één zo'n bestand is rood.
 coverage-per-file:
 	@echo "== OciDeck check: per-file coverage floor =="
 	@echo "Command: dart run tool/coverage_summary.dart --per-file-floor"
 	@echo "Covers: how many lib/ files run less than a fifth of their own lines — the worst case per file, which the overall average cannot show."
-	@echo "Failure means: more files sit below the floor than the budget allows (write a test for one of the files listed), or the budget is stale after an improvement (lower it to the number printed)."
+	@echo "Failure means: minstens één lib/-bestand draait minder dan een vijfde van zijn eigen regels — schrijf er een test voor (of zet het met reden in uncoveredBaseline als het een platformhelft is)."
 	dart run tool/coverage_summary.dart --per-file-floor
 
 # Slide-renderer visual-regression goldens (test/golden/). Pixel- and
