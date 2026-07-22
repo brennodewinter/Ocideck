@@ -51,8 +51,25 @@ void main() {
     final html = await buildExport();
     // MathJax and Mermaid are the two that ship without an upstream banner —
     // the exact gap this guards.
-    expect(html, contains('@license MathJax 3.2.2 — Apache-2.0'));
-    expect(html, contains('@license Mermaid 10.9.6 — MIT'));
+    //
+    // The version comes from the manifest, not from a literal here. It used to
+    // be hard-coded, and the mermaid 10.9.6 -> 11.16.0 upgrade broke this test
+    // for a reason that had nothing to do with what it guards: whether a
+    // synthesised banner names the licence and points at the source.
+    final manifest =
+        jsonDecode(File('assets/web_export/MANIFEST.json').readAsStringSync())
+            as Map<String, dynamic>;
+    String versionOf(String npm) =>
+        (manifest['bundles'] as List).cast<Map<String, dynamic>>().firstWhere(
+              (b) => b['npm'] == npm,
+            )['version']
+            as String;
+
+    expect(
+      html,
+      contains('@license MathJax ${versionOf('mathjax')} — Apache-2.0'),
+    );
+    expect(html, contains('@license Mermaid ${versionOf('mermaid')} — MIT'));
     expect(html, contains('github.com/mathjax/MathJax'));
     expect(html, contains('github.com/mermaid-js/mermaid'));
   });
