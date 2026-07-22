@@ -55,10 +55,12 @@ hosting OciDeck — no deck ever reaches it — but it is a processing operation
 the foundation, with the foundation as controller, and it belongs in this
 paragraph rather than only in a table further away.
 [`docs/PRIVACY.md`](docs/PRIVACY.md#the-one-server-the-publisher-runs) says what
-the application sends, what this repository can establish about it, and what it
-cannot. *(Corrected 2026-07-22, #579: "does not host it as a service" read as
-"runs no servers at all", and that was the sentence a critical reader would
-check first.)*
+the application sends, what this repository can establish, and — since the
+operator stated it (2026-07-23) — that the foundation keeps what the service
+receives only as long as it needs to run it (art. 5(1)(e), no fixed schedule)
+and judges the privacy impact minor. *(Corrected 2026-07-22, #579: "does not
+host it as a service" read as "runs no servers at all", and that was the
+sentence a critical reader would check first.)*
 
 On the CRA's own vocabulary: the foundation is **not a manufacturer**, because
 the software is not made available on the market. Whether it is an *open-source
