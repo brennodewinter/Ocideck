@@ -222,7 +222,9 @@ class _AssetOverviewEditorState extends State<AssetOverviewEditor> {
                     l10n.d(
                       'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.',
                     ),
-                    style: TextStyle(fontSize: 11, color: AppTheme.danger700),
+                    // `dangerFg` en niet `danger700`: dit staat op het
+                    // paneel, niet op een dia (#606).
+                    style: TextStyle(fontSize: 11, color: AppTheme.dangerFg),
                   ),
                 ),
               ],

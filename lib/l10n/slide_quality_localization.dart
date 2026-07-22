@@ -269,7 +269,9 @@ slideQualityPerformedChecks(
 
 Color slideQualitySeverityColor(MarkdownValidationSeverity severity) {
   return switch (severity) {
-    MarkdownValidationSeverity.error => AppTheme.danger700,
+    // Het kwaliteitspaneel is chrome, dus de mode-afhankelijke variant. De
+    // andere twee waren dat al.
+    MarkdownValidationSeverity.error => AppTheme.dangerFg,
     MarkdownValidationSeverity.warning => AppTheme.warningFg,
     MarkdownValidationSeverity.informational => AppTheme.slate600,
   };
