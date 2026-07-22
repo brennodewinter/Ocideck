@@ -233,7 +233,11 @@ void main() {
       reason: 'de opslaanknop schreef niets terug naar de server',
     );
 
-    expect(saveDialogShown(), isFalse, reason: 'er mocht niets gevraagd worden');
+    expect(
+      saveDialogShown(),
+      isFalse,
+      reason: 'er mocht niets gevraagd worden',
+    );
     expect(dav.puts.first.path, 'map/bestaand.md');
     // De ETag die we ophaalden gaat als If-Match mee: alleen zó merkt de app
     // dat iemand anders er ondertussen aan heeft gezeten.
@@ -416,8 +420,7 @@ void main() {
     await tester.tap(find.text('rapport.md'));
     await settleUntil(
       tester,
-      () =>
-          current()?.deckNotifier.currentState.deck?.title == 'Van de server',
+      () => current()?.deckNotifier.currentState.deck?.title == 'Van de server',
       reason: 'het gekozen bestand is niet als deck geopend',
     );
 
@@ -510,10 +513,7 @@ class _RecordingWebdav extends WebdavService {
     final fail = failWith;
     if (fail != null) throw fail;
     if (remotePath == conflictOn) {
-      throw WebdavConflictException(
-        expectedEtag: '"oud"',
-        message: 'botst',
-      );
+      throw WebdavConflictException(expectedEtag: '"oud"', message: 'botst');
     }
     return '"nieuw"';
   }

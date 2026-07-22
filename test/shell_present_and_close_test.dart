@@ -172,10 +172,7 @@ void main() {
   ) async {
     await pumpShell(
       tester,
-      deckOf([
-        bullets('Een', skipped: true),
-        bullets('Twee', skipped: true),
-      ]),
+      deckOf([bullets('Een', skipped: true), bullets('Twee', skipped: true)]),
     );
 
     await present(
@@ -194,32 +191,34 @@ void main() {
     );
   });
 
-  testWidgets('is TLP de oorzaak, dan zegt de melding dát — niet "overgeslagen"',
-      (tester) async {
-    // De melding wees vroeger naar de verkeerde knop: "Alles tonen" haalt een
-    // achtergehouden dia niet terug.
-    await pumpShell(
-      tester,
-      deckOf([
-        bullets('Een', tlp: TlpLevel.red),
-        bullets('Twee', tlp: TlpLevel.amber),
-      ], tlp: TlpLevel.clear),
-    );
+  testWidgets(
+    'is TLP de oorzaak, dan zegt de melding dát — niet "overgeslagen"',
+    (tester) async {
+      // De melding wees vroeger naar de verkeerde knop: "Alles tonen" haalt een
+      // achtergehouden dia niet terug.
+      await pumpShell(
+        tester,
+        deckOf([
+          bullets('Een', tlp: TlpLevel.red),
+          bullets('Twee', tlp: TlpLevel.amber),
+        ], tlp: TlpLevel.clear),
+      );
 
-    await present(
-      tester,
-      until: () => find
-          .text(
-            'Alle slides zijn achtergehouden door hun TLP-classificatie — '
-            'niets om te tonen.',
-          )
-          .evaluate()
-          .isNotEmpty,
-      reason: 'de TLP-reden werd niet gemeld',
-    );
+      await present(
+        tester,
+        until: () => find
+            .text(
+              'Alle slides zijn achtergehouden door hun TLP-classificatie — '
+              'niets om te tonen.',
+            )
+            .evaluate()
+            .isNotEmpty,
+        reason: 'de TLP-reden werd niet gemeld',
+      );
 
-    expect(find.byType(FullscreenPresenter), findsNothing);
-  });
+      expect(find.byType(FullscreenPresenter), findsNothing);
+    },
+  );
 
   testWidgets('een ingeschakelde slotdia wordt achteraan geplakt', (
     tester,
@@ -287,7 +286,12 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      container.read(tabsProvider).current?.deckNotifier.currentState.deck
+      container
+          .read(tabsProvider)
+          .current
+          ?.deckNotifier
+          .currentState
+          .deck
           ?.slides
           .first
           .title,

@@ -243,24 +243,25 @@ void main() {
 
   // ── Menu-ingangen ─────────────────────────────────────────────────────────
 
-  testWidgets('"Opslaan naar…" stelt een naam voor die uit de decktitel volgt', (
-    tester,
-  ) async {
-    await pumpShell(tester);
-    await pickFromMenu(
-      tester,
-      Icons.cloud_upload_outlined,
-      saveDialogShown,
-      reason: 'het opslaandialoog kwam niet op',
-    );
+  testWidgets(
+    '"Opslaan naar…" stelt een naam voor die uit de decktitel volgt',
+    (tester) async {
+      await pumpShell(tester);
+      await pickFromMenu(
+        tester,
+        Icons.cloud_upload_outlined,
+        saveDialogShown,
+        reason: 'het opslaandialoog kwam niet op',
+      );
 
-    // Eén bruikbare verbinding (de lokale map telt niet mee), dus geen
-    // tussenvraag welke het moet zijn: het opslaandialoog staat er meteen.
-    expect(find.text('Welke verbinding?'), findsNothing);
-    // Uitroepteken en spatie eruit: de sleutel moet een nette bestandsnaam
-    // zijn, niet de ruwe titel.
-    expect(pathFieldText(tester), 'Testrapport_2026');
-  });
+      // Eén bruikbare verbinding (de lokale map telt niet mee), dus geen
+      // tussenvraag welke het moet zijn: het opslaandialoog staat er meteen.
+      expect(find.text('Welke verbinding?'), findsNothing);
+      // Uitroepteken en spatie eruit: de sleutel moet een nette bestandsnaam
+      // zijn, niet de ruwe titel.
+      expect(pathFieldText(tester), 'Testrapport_2026');
+    },
+  );
 
   testWidgets('een leeg doelpad sluit het opslaandialoog niet', (tester) async {
     await pumpShell(tester);
@@ -330,31 +331,34 @@ void main() {
     expect(current()?.s3Origin?.etag, '"bestaand"');
   });
 
-  testWidgets('een onleesbaar object levert een melding op, geen leeg tabblad', (
-    tester,
-  ) async {
-    // Geen frontmatter, geen Marp: de importpoort weigert de bytes al vóór er
-    // iets op schijf komt, en dat hoort de gebruiker te horen.
-    s3.objects['rapport.md'] = Uint8List.fromList(utf8.encode('gewoon tekst'));
-    await pumpShell(tester);
-    final tabsBefore = container.read(tabsProvider).tabs.length;
+  testWidgets(
+    'een onleesbaar object levert een melding op, geen leeg tabblad',
+    (tester) async {
+      // Geen frontmatter, geen Marp: de importpoort weigert de bytes al vóór er
+      // iets op schijf komt, en dat hoort de gebruiker te horen.
+      s3.objects['rapport.md'] = Uint8List.fromList(
+        utf8.encode('gewoon tekst'),
+      );
+      await pumpShell(tester);
+      final tabsBefore = container.read(tabsProvider).tabs.length;
 
-    await pickFromMenu(
-      tester,
-      Icons.cloud_download_outlined,
-      () => find.text('rapport.md').evaluate().isNotEmpty,
-      reason: 'de bladeraar toonde de bucket niet',
-    );
+      await pickFromMenu(
+        tester,
+        Icons.cloud_download_outlined,
+        () => find.text('rapport.md').evaluate().isNotEmpty,
+        reason: 'de bladeraar toonde de bucket niet',
+      );
 
-    await tester.tap(find.text('rapport.md'));
-    await settleUntil(
-      tester,
-      () => find.text('Kon dit bestand niet openen.').evaluate().isNotEmpty,
-      reason: 'een geweigerd object bleef stil',
-    );
+      await tester.tap(find.text('rapport.md'));
+      await settleUntil(
+        tester,
+        () => find.text('Kon dit bestand niet openen.').evaluate().isNotEmpty,
+        reason: 'een geweigerd object bleef stil',
+      );
 
-    expect(container.read(tabsProvider).tabs, hasLength(tabsBefore));
-  });
+      expect(container.read(tabsProvider).tabs, hasLength(tabsBefore));
+    },
+  );
 
   testWidgets('een mislukte download meldt de reden', (tester) async {
     s3.objects['rapport.md'] = Uint8List(0);
@@ -396,7 +400,11 @@ void main() {
       reason: 'de opslaanknop schreef niets terug naar de bucket',
     );
 
-    expect(saveDialogShown(), isFalse, reason: 'er mocht niets gevraagd worden');
+    expect(
+      saveDialogShown(),
+      isFalse,
+      reason: 'er mocht niets gevraagd worden',
+    );
     // Zelfde pad, en het formaat volgt de extensie die er al stond: een platte
     // spiegel blijft plat, geen pakket eroverheen.
     expect(s3.puts.first.path, 'klant/bestaand.md');

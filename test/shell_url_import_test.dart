@@ -67,12 +67,18 @@ void main() {
     container = ProviderScope.containerOf(
       tester.element(find.byType(AppShell)),
     );
-    container.read(tabsProvider).current!.deckNotifier.loadDeck(
-      Deck(
-        title: 'Testrapport',
-        slides: [Slide.create(SlideType.title).copyWith(title: 'Testrapport')],
-      ),
-    );
+    container
+        .read(tabsProvider)
+        .current!
+        .deckNotifier
+        .loadDeck(
+          Deck(
+            title: 'Testrapport',
+            slides: [
+              Slide.create(SlideType.title).copyWith(title: 'Testrapport'),
+            ],
+          ),
+        );
     await tester.pumpAndSettle();
   }
 
@@ -95,7 +101,10 @@ void main() {
 
   Future<void> type(WidgetTester tester, String text) async {
     await tester.enterText(
-      find.descendant(of: find.byType(AlertDialog), matching: find.byType(TextField)),
+      find.descendant(
+        of: find.byType(AlertDialog),
+        matching: find.byType(TextField),
+      ),
       text,
     );
     await tester.pumpAndSettle();

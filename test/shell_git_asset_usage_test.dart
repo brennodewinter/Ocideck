@@ -88,10 +88,7 @@ void main() {
 
   /// Pompt de app met [forge] achter de git-verbinding en opent het
   /// pool-overzicht uit het overloopmenu.
-  Future<void> openAssetOverview(
-    WidgetTester tester, {
-    GitForge? forge,
-  }) async {
+  Future<void> openAssetOverview(WidgetTester tester, {GitForge? forge}) async {
     await tester.binding.setSurfaceSize(const Size(1600, 1000));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     await tester.pumpWidget(
@@ -109,12 +106,18 @@ void main() {
     final container = ProviderScope.containerOf(
       tester.element(find.byType(AppShell)),
     );
-    container.read(tabsProvider).current!.deckNotifier.loadDeck(
-      Deck(
-        title: 'Testrapport',
-        slides: [Slide.create(SlideType.title).copyWith(title: 'Testrapport')],
-      ),
-    );
+    container
+        .read(tabsProvider)
+        .current!
+        .deckNotifier
+        .loadDeck(
+          Deck(
+            title: 'Testrapport',
+            slides: [
+              Slide.create(SlideType.title).copyWith(title: 'Testrapport'),
+            ],
+          ),
+        );
     await tester.pumpAndSettle();
 
     await tester.tap(appBarIcon(Icons.more_vert));
@@ -182,10 +185,7 @@ void main() {
     await openAssetOverview(tester, forge: FakeForge(repo));
 
     expect(find.text('Elke afbeelding wordt ergens gebruikt.'), findsOneWidget);
-    expect(
-      find.textContaining('worden nergens meer aangehaald'),
-      findsNothing,
-    );
+    expect(find.textContaining('worden nergens meer aangehaald'), findsNothing);
   });
 
   testWidgets('een onleesbaar deck onderdrukt élk opruim-voorstel', (
@@ -194,7 +194,10 @@ void main() {
     // Dit is de kern van het scherm: "niemand gebruikt dit" is een bewering die
     // je niet mag doen op grond van een deck dat je niet hebt kunnen lezen.
     // Weggooien is onomkeerbaar, dus fail-closed — geen lijst, maar de reden.
-    await openAssetOverview(tester, forge: _BrokenDeckForge(repo, 'decks/beta'));
+    await openAssetOverview(
+      tester,
+      forge: _BrokenDeckForge(repo, 'decks/beta'),
+    );
 
     expect(
       find.textContaining('Niet te zeggen wat ongebruikt is'),
@@ -318,8 +321,6 @@ class _FailingForge extends FakeForge {
     String ref,
     String path, {
     bool recursive = false,
-  }) async => throw const GitForgeException(
-    GitForgeError.network,
-    'Geen verbinding',
-  );
+  }) async =>
+      throw const GitForgeException(GitForgeError.network, 'Geen verbinding');
 }
