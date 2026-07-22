@@ -20,6 +20,14 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   OciDeck kan die controle bij het inlezen niet zelf doen — het bestand bewaart
   uw verzoek niet, dus na een herstart is de andere helft weg. Wie beide
   bestanden heeft, kan het wél nakijken (`openssl ts -reply -in … -text`).
+- **Zet u versleuteling aan bij een pakket, dan staat er meteen een sterk
+  wachtwoord klaar.** Het veld was leeg, en dan verzint een mens iets dat hij
+  kan onthouden. Juist bij dit bestandsformaat is dat de zwakke plek: de manier
+  waarop het wachtwoord tot een sleutel wordt omgerekend ligt vast in de
+  zip-standaard en is niet te versterken zonder dat andere programma's uw
+  pakket niet meer kunnen openen. De sterkte van het wachtwoord is dus wat
+  telt. Het staat zichtbaar in beeld zodat u het kunt overnemen, en u kunt er
+  altijd uw eigen zin voor in de plaats zetten.
 - **Geen base64 meer in uw presentatiebestand.** De belofte van OciDeck is dat u
   met alleen een teksteditor en Marp verder kunt. Op zeven plekken klopte dat
   niet: daar stond een blok onleesbare tekens waar uw inhoud in verstopt zat.
@@ -96,6 +104,17 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   melding bij een te grote maplijst noemt nu overal het aantal.
 
 ### Fixed
+- **Video en audio worden nu ook op hun inhoud gecontroleerd.** Van een
+  afbeelding werd altijd al nagegaan of het écht een afbeelding was; bij video
+  en audio werd alleen naar de omvang gekeken. Een willekeurig bestand met de
+  naam `.mp4` kwam zo uw presentatie in. Nu wordt de soort aan de inhoud
+  herkend, net als bij afbeeldingen.
+- **Weigeringen laten voortaan een spoor na.** Werd een deck tegengehouden
+  omdat er uitvoerbare inhoud in zat, of een export omdat de rubricering het
+  niet toeliet, dan zag u dat wel maar bleef er niets van bewaard. Voor een
+  gereedschap dat verzegelde rapporten uitgeeft is juist dát het feit dat u
+  achteraf wilt kunnen navertellen. Er komt geen inhoud van uw presentatie in
+  te staan — alleen wat voor soort weigering het was.
 - **Een export die niets doet, blijft niet meer eeuwig niets doen.** De PDF- en
   PPTX-export maakt zijn afbeeldingen door de échte dia te laten tekenen en het
   resultaat vast te leggen. Daarvoor moet het venster beelden produceren — en
