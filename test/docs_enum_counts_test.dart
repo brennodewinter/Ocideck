@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/export_readiness.dart';
 
 /// De documentatie schrijft een paar tellingen en opsommingen uit die nergens
 /// uit de code worden afgeleid. Die verrotten stil: het actie-slidetype werd
@@ -33,6 +34,33 @@ void main() {
           doc,
           contains(type.name),
           reason: '${type.name} ontbreekt in API_DOCUMENTATION.md',
+        );
+      }
+    });
+
+    // Dezelfde vorm, dezelfde reden: de exportstatus kreeg er op 2026-07-22 een
+    // waarde bij (`readyPrivacyUnchecked`), en zonder deze poort was de telling
+    // in het document vanaf de eerstvolgende toevoeging weer stil onwaar.
+    test('het aantal ExportReadinessStatus-waarden klopt', () {
+      final doc = read('docs/API_DOCUMENTATION.md');
+      final match = RegExp(
+        r'`ExportReadinessStatus` \((\d+) values\)',
+      ).firstMatch(doc);
+      expect(match, isNotNull, reason: 'de statustelling staat er niet');
+      expect(
+        int.parse(match!.group(1)!),
+        ExportReadinessStatus.values.length,
+        reason: 'werk de telling in API_DOCUMENTATION.md bij',
+      );
+    });
+
+    test('elke ExportReadinessStatus wordt bij naam genoemd', () {
+      final doc = read('docs/API_DOCUMENTATION.md');
+      for (final status in ExportReadinessStatus.values) {
+        expect(
+          doc,
+          contains(status.name),
+          reason: '${status.name} ontbreekt in API_DOCUMENTATION.md',
         );
       }
     });
