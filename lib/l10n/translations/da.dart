@@ -1776,6 +1776,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Regler, der er slået fra lige nu. De rapporteres ikke og redigeres ikke bort. Tre af dem er slået fra som standard — deres nøgleord optræder for ofte på almindelige forretningsslides. Tryk for at slå en til.',
   'Bekende beperkingen': 'Kendte begrænsninger',
   'naam@example.org\nexample.org': 'navn@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2799,8 +2801,6 @@ const _dutchSourceAddDa = <String, String>{
   'geredigeerd': 'redigeret bort',
   'met waarschuwing': 'med advarsel',
   'Deze regel nooit meer melden': 'Rapportér aldrig denne regel igen',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Deaktiverede regler. De rapporteres ikke og redigeres ikke bort. Tryk for at slå til igen.',
   'politieke opvatting': 'politisk holdning',
   'etnische afkomst': 'etnisk oprindelse',
   'seksuele geaardheid': 'seksuel orientering',

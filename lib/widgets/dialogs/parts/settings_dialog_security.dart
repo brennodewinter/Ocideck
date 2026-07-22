@@ -502,7 +502,7 @@ extension _SettingsSecurity on _SettingsDialogState {
         children: [
           Text(
             l10n.d(
-              'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.',
+              'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.',
             ),
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),

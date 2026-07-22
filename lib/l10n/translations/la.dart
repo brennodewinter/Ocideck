@@ -1793,6 +1793,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Regulae nunc exstinctae. Neque nuntiantur neque obliterantur. Tres earum praedefinite exstinctae sunt — verba clavis earum in diapositivis negotialibus usitatis nimis saepe occurrunt. Tange ut unam accendas.',
   'Bekende beperkingen': 'Limitationes notae',
   'naam@example.org\nexample.org': 'nomen@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2810,8 +2812,6 @@ const _dutchSourceAddLa = <String, String>{
   'geredigeerd': 'obliterata',
   'met waarschuwing': 'cum monito',
   'Deze regel nooit meer melden': 'Hanc regulam numquam iterum nuntiare',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Regulae exstinctae. Neque nuntiantur neque obliterantur. Tange ut rursus accendas.',
   'politieke opvatting': 'opinio politica',
   'etnische afkomst': 'origo ethnica',
   'seksuele geaardheid': 'propensio sexualis',

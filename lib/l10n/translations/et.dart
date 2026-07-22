@@ -1768,6 +1768,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Reeglid, mis on praegu välja lülitatud. Neist ei teatata ega redigeerita. Kolm neist on vaikimisi väljas — nende märksõnad esinevad tavalistel tööslaididel liiga sageli. Puuduta, et üks sisse lülitada.',
   'Bekende beperkingen': 'Teadaolevad piirangud',
   'naam@example.org\nexample.org': 'nimi@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2791,8 +2793,6 @@ const _dutchSourceAddEt = <String, String>{
   'geredigeerd': 'redigeeritud',
   'met waarschuwing': 'hoiatusega',
   'Deze regel nooit meer melden': 'Ära enam sellest reeglist teata',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Väljalülitatud reeglid. Neist ei teatata ega redigeerita. Puuduta uuesti sisselülitamiseks.',
   'politieke opvatting': 'poliitiline veendumus',
   'etnische afkomst': 'etniline päritolu',
   'seksuele geaardheid': 'seksuaalne sättumus',

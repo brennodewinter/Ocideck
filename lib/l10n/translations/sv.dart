@@ -1776,6 +1776,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Regler som är avstängda just nu. De rapporteras inte och maskas inte. Tre av dem är avstängda som standard — deras nyckelord förekommer för ofta på vanliga affärsbilder. Tryck för att slå på en.',
   'Bekende beperkingen': 'Kända begränsningar',
   'naam@example.org\nexample.org': 'namn@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2796,8 +2798,6 @@ const _dutchSourceAddSv = <String, String>{
   'geredigeerd': 'maskade',
   'met waarschuwing': 'med varning',
   'Deze regel nooit meer melden': 'Rapportera aldrig den här regeln igen',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Avstängda regler. De rapporteras inte och maskas inte. Tryck för att slå på igen.',
   'politieke opvatting': 'politisk åsikt',
   'etnische afkomst': 'etniskt ursprung',
   'seksuele geaardheid': 'sexuell läggning',

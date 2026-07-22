@@ -1781,6 +1781,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Regle wo grad us sind. Die wärded weder gmäldet no gschwärzt. Drü dervo sind standardmässig us — ihri Schlüsselwörter chömed uf normale Gschäftsslides z\'oft vor. Tipp zum eis ischalte.',
   'Bekende beperkingen': 'Bekannti Yyschränkige',
   'naam@example.org\nexample.org': 'name@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2803,8 +2805,6 @@ const _dutchSourceAddGsw = <String, String>{
   'geredigeerd': 'gschwärzt',
   'met waarschuwing': 'mit Warnig',
   'Deze regel nooit meer melden': 'Die Regle nie meh mälde',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Deaktivierti Regle. Die wärded weder gmäldet no gschwärzt. Tipp zum wieder ischalte.',
   'politieke opvatting': 'politischi Meinig',
   'etnische afkomst': 'ethnischi Herkunft',
   'seksuele geaardheid': 'sexuelli Orientierig',

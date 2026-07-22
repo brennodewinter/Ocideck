@@ -1784,6 +1784,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Pravidlá, ktoré sú teraz vypnuté. Nehlásia sa ani sa nezačierňujú. Tri z nich sú predvolene vypnuté — ich kľúčové slová sa na bežných pracovných snímkach vyskytujú príliš často. Ťuknutím jedno zapneš.',
   'Bekende beperkingen': 'Známe obmedzenia',
   'naam@example.org\nexample.org': 'meno@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2805,8 +2807,6 @@ const _dutchSourceAddSk = <String, String>{
   'geredigeerd': 'začiernené',
   'met waarschuwing': 's upozornením',
   'Deze regel nooit meer melden': 'Toto pravidlo už nikdy nehlásiť',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Vypnuté pravidlá. Nehlásia sa ani sa nezačierňujú. Ťuknutím ich znova zapneš.',
   'politieke opvatting': 'politický názor',
   'etnische afkomst': 'etnický pôvod',
   'seksuele geaardheid': 'sexuálna orientácia',

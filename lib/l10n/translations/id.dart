@@ -1777,6 +1777,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Aturan yang saat ini dimatikan. Ini tidak dilaporkan dan tidak diredaksi. Tiga di antaranya mati secara bawaan — kata kuncinya terlalu sering muncul pada slide kerja biasa. Ketuk untuk menyalakan salah satunya.',
   'Bekende beperkingen': 'Keterbatasan yang diketahui',
   'naam@example.org\nexample.org': 'nama@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2798,8 +2800,6 @@ const _dutchSourceAddId = <String, String>{
   'geredigeerd': 'diredaksi',
   'met waarschuwing': 'dengan peringatan',
   'Deze regel nooit meer melden': 'Jangan laporkan aturan ini lagi',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Aturan yang dimatikan. Ini tidak dilaporkan dan tidak diredaksi. Ketuk untuk mengaktifkan lagi.',
   'politieke opvatting': 'pandangan politik',
   'etnische afkomst': 'asal etnis',
   'seksuele geaardheid': 'orientasi seksual',

@@ -1785,6 +1785,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Taisyklės, kurios dabar išjungtos. Apie jas nepranešama ir jos neredaguojamos. Trys iš jų numatytai išjungtos — jų raktažodžiai per dažnai pasitaiko įprastose darbo skaidrėse. Bakstelėk, kad vieną įjungtum.',
   'Bekende beperkingen': 'Žinomi apribojimai',
   'naam@example.org\nexample.org': 'vardas@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2808,8 +2810,6 @@ const _dutchSourceAddLt = <String, String>{
   'geredigeerd': 'paslėpta',
   'met waarschuwing': 'su įspėjimu',
   'Deze regel nooit meer melden': 'Daugiau nepranešti apie šią taisyklę',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Išjungtos taisyklės. Apie jas nepranešama ir jos neredaguojamos. Bakstelėk, kad vėl įjungtum.',
   'politieke opvatting': 'politinės pažiūros',
   'etnische afkomst': 'etninė kilmė',
   'seksuele geaardheid': 'seksualinė orientacija',

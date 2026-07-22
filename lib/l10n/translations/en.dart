@@ -916,6 +916,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Rules that are currently off. These are not reported and not redacted. Three of them are off by default — their keywords occur too often on ordinary business slides. Tap to turn one on.',
   'Bekende beperkingen': 'Known limitations',
   'naam@example.org\nexample.org': 'name@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -1933,8 +1935,6 @@ const _dutchSourceAddEn = {
   'geredigeerd': 'redacted',
   'met waarschuwing': 'with a warning',
   'Deze regel nooit meer melden': 'Never report this rule again',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Disabled rules. These are not reported and not redacted. Tap to turn back on.',
   'politieke opvatting': 'political opinion',
   'etnische afkomst': 'ethnic origin',
   'seksuele geaardheid': 'sexual orientation',

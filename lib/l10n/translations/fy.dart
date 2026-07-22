@@ -735,6 +735,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Regels dy\'t no út steane. Dizze wurde net meld en net redigearre. Trije dêrfan steane standert út — harren trefwurden komme op gewoane saaklike slides te faak foar. Tik om der ien oan te setten.',
   'Bekende beperkingen': 'Bekende beheiningen',
   'naam@example.org\nexample.org': 'namme@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -1769,8 +1771,6 @@ const _dutchSourceAddFy = {
   'geredigeerd': 'redigearre',
   'met waarschuwing': 'mei warskôging',
   'Deze regel nooit meer melden': 'Dizze regel noait mear melde',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Utsette regels. Dizze wurde net meld en net redigearre. Tik om wer oan te setten.',
   'politieke opvatting': 'politike opfetting',
   'etnische afkomst': 'etnyske komôf',
   'seksuele geaardheid': 'seksuele oanstriid',

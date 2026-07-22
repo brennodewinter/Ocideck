@@ -325,7 +325,13 @@ redact it. It detects, among others:
   worse than having none: it would reject genuine numbers and wave invented ones
   through.
 - Secrets (API tokens, private keys, JWTs, plaintext passwords)
-- GDPR Article 9 special-category keywords
+- GDPR Article 9 special-category keywords — **with three of them off by
+  default**: ethnic origin, political opinion and sexual orientation. Not
+  because they matter less, but because their keywords appear too often on
+  ordinary business slides, and a check that cries wolf gets switched off
+  wholesale. They are one tap away under **Settings → Security**, and anyone
+  working in that corner should turn them on. *(Stated 2026-07-22: the setting
+  screen presented this factory state as though the user had disabled them.)*
 - Structural leaks such as tokens embedded in URLs or local file paths
 
 Name detection is intentionally conservative — it flags names only where a

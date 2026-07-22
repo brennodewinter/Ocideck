@@ -1779,6 +1779,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Pravila, ki so zdaj izklopljena. Ne javljajo se in se ne prekrivajo. Tri od njih so privzeto izklopljena — njihove ključne besede se prepogosto pojavljajo na običajnih poslovnih prosojnicah. Tapni za vklop enega.',
   'Bekende beperkingen': 'Znane omejitve',
   'naam@example.org\nexample.org': 'ime@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2804,8 +2806,6 @@ const _dutchSourceAddSl = <String, String>{
   'geredigeerd': 'prekrito',
   'met waarschuwing': 'z opozorilom',
   'Deze regel nooit meer melden': 'Tega pravila ne javljaj več',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Izklopljena pravila. Ne javljajo se in se ne prekrivajo. Tapni za ponovni vklop.',
   'politieke opvatting': 'politično prepričanje',
   'etnische afkomst': 'etnično poreklo',
   'seksuele geaardheid': 'spolna usmerjenost',

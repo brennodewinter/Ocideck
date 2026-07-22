@@ -1784,6 +1784,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Pravila koja su sada isključena. Ne prijavljuju se i ne redigiraju. Tri od njih prema zadanome su isključena — njihove ključne riječi prečesto se pojavljuju na običnim poslovnim slajdovima. Dodirni za uključivanje jednoga.',
   'Bekende beperkingen': 'Poznata ograničenja',
   'naam@example.org\nexample.org': 'ime@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2804,8 +2806,6 @@ const _dutchSourceAddHr = <String, String>{
   'geredigeerd': 'redigirano',
   'met waarschuwing': 's upozorenjem',
   'Deze regel nooit meer melden': 'Nikad više ne prijavljuj ovo pravilo',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Isključena pravila. Ne prijavljuju se i ne redigiraju. Dodirni za ponovno uključivanje.',
   'politieke opvatting': 'političko mišljenje',
   'etnische afkomst': 'etničko podrijetlo',
   'seksuele geaardheid': 'seksualna orijentacija',

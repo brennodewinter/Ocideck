@@ -1752,6 +1752,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'DaH chu\'Ha\'lu\'bogh chutmey. luja\'lu\'be\' \'ej So\'lu\'be\'. wej chutmey motlh chu\'Ha\'lu\' — vum \'anghommey motlhDaq pIj lutu\'lu\' \'oS mu\'meychaj. wa\' chu\'meH yI\'uy.',
   'Bekende beperkingen': 'Sovlu\'bogh chuvmey',
   'naam@example.org\nexample.org': 'pong@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2753,8 +2755,6 @@ const _dutchSourceAddTlh = <String, String>{
   'geredigeerd': 'So\'lu\'',
   'met waarschuwing': 'ghuHmoHwI\' tlhej',
   'Deze regel nooit meer melden': 'chutvam yIja\'Qo\' not',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'chutmey chu\'Ha\'lu\'bogh. luja\'lu\'be\' \'ej So\'lu\'be\'. chu\'qa\'meH yIuS.',
   'politieke opvatting': 'wo\' qech',
   'etnische afkomst': 'tuq',
   'seksuele geaardheid': 'ngagh mIw',

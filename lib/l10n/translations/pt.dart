@@ -1807,6 +1807,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
+      'Regras que estão agora desativadas. Não são comunicadas nem ocultadas. Três delas estão desativadas por predefinição — as suas palavras-chave surgem demasiadas vezes em slides de trabalho comuns. Toca para ativar uma.',
   'Bekende beperkingen': 'Limitações conhecidas',
   'naam@example.org\nexample.org': 'nome@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
@@ -2836,8 +2838,6 @@ const _dutchSourceAddPt = <String, String>{
   'geredigeerd': 'ocultados',
   'met waarschuwing': 'com aviso',
   'Deze regel nooit meer melden': 'Nunca mais comunicar esta regra',
-  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
-      'Regras desativadas. Não são comunicadas nem ocultadas. Toca para voltar a ativar.',
   'politieke opvatting': 'opinião política',
   'etnische afkomst': 'origem étnica',
   'seksuele geaardheid': 'orientação sexual',
