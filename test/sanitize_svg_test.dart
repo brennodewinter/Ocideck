@@ -73,4 +73,53 @@ void main() {
     expect(sanitizeMermaidSvg('<html></html>'), isNull);
     expect(sanitizeMermaidSvg(''), isNull);
   });
+
+  // ── Drie gaten uit #516 ───────────────────────────────────────────────────
+  // Alle drie hetzelfde patroon: de lijst was volledig voor het aanvalstype
+  // waar iemand aan dacht, en blind voor het mechanisme ernaast.
+
+  test('SMIL kan geen event-handler meer installeren', () {
+    // <set> schrijft een attribuut dat er bij het parsen nog niet stond, dus
+    // geen enkele attribuutcontrole op de ouder ziet dit ooit.
+    const svg =
+        '<svg xmlns="http://www.w3.org/2000/svg">'
+        '<rect width="10" height="10">'
+        '<set attributeName="onload" to="alert(1)"/>'
+        '</rect></svg>';
+    final safe = sanitizeMermaidSvg(svg)!;
+    expect(safe, isNot(contains('<set')));
+    expect(safe, isNot(contains('onload')));
+    expect(safe, contains('<rect'), reason: 'de vorm zelf blijft staan');
+  });
+
+  test('de overige animatie-elementen gaan ook weg', () {
+    for (final tag in ['animate', 'animateTransform', 'animateMotion']) {
+      final svg =
+          '<svg xmlns="http://www.w3.org/2000/svg">'
+          '<rect width="10" height="10"><$tag attributeName="x" to="1"/>'
+          '</rect></svg>';
+      expect(sanitizeMermaidSvg(svg)!, isNot(contains('<$tag')), reason: tag);
+    }
+  });
+
+  test('een stylesheet gaat eruit, want niemand leest hier CSS', () {
+    const svg =
+        '<svg xmlns="http://www.w3.org/2000/svg">'
+        '<style>rect { fill: url(javascript:alert(1)); }</style>'
+        '<rect width="10" height="10"/></svg>';
+    final safe = sanitizeMermaidSvg(svg)!;
+    expect(safe, isNot(contains('<style')));
+    expect(safe.toLowerCase(), isNot(contains('javascript:')));
+    expect(safe, contains('<rect'));
+  });
+
+  test('een puntkomma-lijst verbergt de payload niet meer', () {
+    // De controle keek alleen naar het begin van de hele waarde, dus een
+    // onschuldige eerste entry dekte de tweede af.
+    const svg =
+        '<svg xmlns="http://www.w3.org/2000/svg">'
+        '<rect width="10" height="10" values="a;javascript:alert(1)"/></svg>';
+    final safe = sanitizeMermaidSvg(svg)!;
+    expect(safe.toLowerCase(), isNot(contains('javascript:')));
+  });
 }
