@@ -483,6 +483,32 @@ does not implement, and the RFC 3161 timestamp support is not it either — that
 proves *when* a hash existed, and only as far as the token's message imprint,
 since the TSA's own CMS signature is deliberately not verified (§9).
 
+**Decided 2026-07-22: real signing (Ed25519 or PKI) is not going to be built
+alongside it.** The question was raised properly — an unkeyed hash over a name
+looks like a signature and is not one — so it deserves an answer rather than
+silence.
+
+A signature that a third party can check needs a trust anchor, and that anchor
+is a party in the critical path. This project's third core value puts it plainly:
+no closed or foreign platform where the user must depend on it. A self-signed
+key avoids the CA and proves correspondingly little — it shows two documents came
+from the same keypair, not who holds it, which is roughly what the seal already
+shows. Between those two, neither is worth the key management, the new
+dependency, and above all the *promise*: the moment the interface shows a
+signature, a reader stops looking for the caveat.
+
+There is also a route that already works. Whoever needs a legally meaningful
+signature signs the **exported PDF** with eIDAS tooling — a signing certificate,
+a smart card, a qualified provider — outside this application, where the trust
+already lives. OciDeck's job there is to produce a stable document and a seal
+over it, and it does.
+
+This would be revisited if signing arrived without a new trust party in the
+critical path: an OS-held key the user already has and already trusts (a
+platform signing API), or a format the user's own organisation verifies. Not
+because the cryptography got easier — it is easy already — but because the
+sovereignty cost is the reason, and only that cost changing changes the answer.
+
 ## 13. Key management
 
 *Added 2026-07-22.* Four kinds of secret exist. None of them is a key OciDeck
