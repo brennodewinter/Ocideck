@@ -202,9 +202,12 @@ const int perFileFloorPercent = 20;
 ///
 /// Where it must go: 0. Every step down is one file that went from decoration
 /// to something a test can hold accountable. It started at 39 on 2026-07-21
-/// (22 of those files ran not a single line); what is left is mostly the
-/// app-shell command layer and a handful of dialogs.
-const int filesBelowFloorBudget = 21;
+/// (22 of those files ran not a single line). On 2026-07-22 the shell command
+/// layer came down: `ai_actions`, `shell_actions_git_assets`,
+/// `shell_actions_s3`, `shell_actions` and `shell_actions_connections` went
+/// from decoration to tested, and only two files still run not a single line.
+/// What is left is mostly the git dialogs and a handful of platform halves.
+const int filesBelowFloorBudget = 14;
 
 /// Slack on the downward ratchet. Coverage of a file that sits near the floor
 /// can wobble by one when an optional dependency (the native OpenCV library
