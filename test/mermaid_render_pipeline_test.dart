@@ -1,0 +1,208 @@
+import 'dart:async';
+
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/services/mermaid_render_service.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
+
+/// Een WebView die geen WebView is: hij onthoudt de geladen HTML en geeft op
+/// elke JS-aanroep terug wat de test klaarzet.
+class _FakeController extends PlatformWebViewController {
+  _FakeController(super.params) : super.implementation();
+
+  String? html;
+  final scripts = <String>[];
+
+  /// Wat `window.__renderMermaid(...)` teruggeeft, of een fout om te gooien.
+  Object? Function(String script)? answer;
+
+  @override
+  Future<void> loadHtmlString(String html, {String? baseUrl}) async {
+    this.html = html;
+  }
+
+  @override
+  Future<void> setJavaScriptMode(JavaScriptMode mode) async {}
+
+  @override
+  Future<Object> runJavaScriptReturningResult(String javaScript) async {
+    scripts.add(javaScript);
+    final result = answer?.call(javaScript);
+    if (result is Exception) throw result;
+    return result ?? '';
+  }
+}
+
+class _FakePlatform extends WebViewPlatform {
+  _FakePlatform(this.controller);
+
+  final _FakeController controller;
+
+  @override
+  PlatformWebViewController createPlatformWebViewController(
+    PlatformWebViewControllerCreationParams params,
+  ) => controller;
+}
+
+/// De renderketen van [MermaidRenderService]: bootstrappen, de wachtrij, en wat
+/// er met het antwoord van de JS-kant gebeurt.
+///
+/// Dit stuk stond onbeproefd omdat het strikt een WebViewController nodig heeft.
+/// Die is hier een dubbel, en daarmee is te tonen wat er werkelijk toe doet: de
+/// pagina waarin de opmaak wordt gebouwd is dichtgetimmerd, het antwoord gaat
+/// door de zeef vóór het de cache in mag, een fout aan de JS-kant wedgt de
+/// wachtrij niet, en de macOS-eigenaardigheid (een JSON-geciteerde string) komt
+/// er heel uit.
+void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  late _FakeController controller;
+
+  /// De pagina die bij het bootstrappen is geladen.
+  ///
+  /// De dienst is een singleton en bootstrapt precies één keer per proces, dus
+  /// alleen de eerste test die draait ziet zijn eigen controller geladen
+  /// worden. De volgorde is willekeurig; dus wordt de pagina hier vastgehouden
+  /// zodra ze er is, en niet uit de controller van dít geval gelezen.
+  String? geladenPagina;
+
+  /// Elke test een eigen bron: de dienst is een singleton met een cache, en
+  /// een gedeelde bron zou de tweede test op het antwoord van de eerste laten
+  /// leunen.
+  var teller = 0;
+  String verseBron() => 'graph TD; A${teller++}-->B;';
+
+  String svgVoor(String id) =>
+      '<svg xmlns="http://www.w3.org/2000/svg"><rect id="$id"/></svg>';
+
+  setUp(() async {
+    controller = _FakeController(
+      const PlatformWebViewControllerCreationParams(),
+    );
+    WebViewPlatform.instance = _FakePlatform(controller);
+    MermaidRenderService.instance.attachController(WebViewController());
+    // Het bootstrappen leest de mermaid-bundel van de asset-bundel; laat dat
+    // afronden voordat er iets te renderen valt.
+    for (var i = 0; i < 200; i++) {
+      await Future<void>.delayed(Duration.zero);
+      if (geladenPagina != null || controller.html != null) break;
+    }
+    geladenPagina ??= controller.html;
+  });
+
+  test('de pagina waarin gerenderd wordt is dichtgetimmerd', () async {
+    final html = geladenPagina;
+    expect(html, isNotNull, reason: 'er is geen pagina geladen');
+    // Geen netwerk, geen externe scripts: de enige bron is de meegeleverde
+    // bundel. Zonder deze regels zou een diagram een uitgang kunnen worden.
+    expect(html, contains("default-src 'none'"));
+    expect(html, contains('img-src data:'));
+    // En mermaid zelf op zijn strengste stand, zonder HTML-labels.
+    expect(html, contains("securityLevel: 'strict'"));
+    expect(html, contains('htmlLabels: false'));
+  });
+
+  test(
+    'een geldig diagram komt geschoond terug en blijft in de cache',
+    () async {
+      final bron = verseBron();
+      controller.answer = (_) => svgVoor('een');
+
+      final eerste = await MermaidRenderService.instance.render(bron);
+      expect(eerste, contains('<svg'));
+      expect(eerste, contains('id="een"'));
+
+      // Tweede keer dezelfde bron: uit de cache, dus geen tweede JS-aanroep.
+      final aantal = controller.scripts.length;
+      controller.answer = (_) => svgVoor('twee');
+      final tweede = await MermaidRenderService.instance.render(bron);
+      expect(
+        tweede,
+        eerste,
+        reason: 'de cache hoort het antwoord vast te houden',
+      );
+      expect(controller.scripts.length, aantal);
+    },
+  );
+
+  test('de bron gaat als JSON de JS-aanroep in', () async {
+    // Een aanhalingsteken of een backslash in de brontekst zou de aanroep
+    // anders openbreken — dat is een injectie in de eigen pagina.
+    controller.answer = (_) => svgVoor('drie');
+    final bron = 'graph TD; A["hij zei \\"hoi\\""]-->B; ${verseBron()}';
+    await MermaidRenderService.instance.render(bron);
+
+    final script = controller.scripts.last;
+    expect(script, startsWith('window.__renderMermaid('));
+    expect(
+      script,
+      isNot(contains('hij zei "hoi"')),
+      reason: 'ongeciteerd zou de aanroep openbreken',
+    );
+  });
+
+  test('een JSON-geciteerd antwoord wordt uitgepakt', () async {
+    // macOS levert het resultaat als geciteerde JSON-string; Android niet.
+    // Zonder uitpakken komt er `"<svg …>"` uit en weigert de zeef het.
+    controller.answer = (_) =>
+        '"<svg xmlns=\\"http://www.w3.org/2000/svg\\"><rect id=\\"mac\\"/></svg>"';
+
+    final svg = await MermaidRenderService.instance.render(verseBron());
+    expect(svg, isNotNull);
+    expect(svg, contains('id="mac"'));
+    expect(svg, isNot(startsWith('"')));
+  });
+
+  test('opmaak die geen SVG is haalt de cache niet', () async {
+    controller.answer = (_) => '<html>fout</html>';
+    expect(await MermaidRenderService.instance.render(verseBron()), isNull);
+  });
+
+  test('een script dat een gebeurtenis meesmokkelt wordt geschoond', () async {
+    controller.answer = (_) =>
+        '<svg xmlns="http://www.w3.org/2000/svg" onload="steel()">'
+        '<script>alert(1)</script><rect id="vier"/></svg>';
+
+    final svg = await MermaidRenderService.instance.render(verseBron());
+    expect(svg, isNotNull);
+    expect(svg, isNot(contains('<script')));
+    expect(svg, isNot(contains('onload')));
+    expect(svg, contains('id="vier"'));
+  });
+
+  test(
+    'een fout aan de JS-kant levert null op en blokkeert de rij niet',
+    () async {
+      controller.answer = (_) => Exception('boem');
+      expect(await MermaidRenderService.instance.render(verseBron()), isNull);
+
+      // De volgende render moet gewoon doorkomen: bleef de rij hangen, dan
+      // stond elk diagram daarna eeuwig op het wachtwieltje.
+      controller.answer = (_) => svgVoor('vijf');
+      final daarna = await MermaidRenderService.instance.render(verseBron());
+      expect(daarna, contains('id="vijf"'));
+    },
+  );
+
+  test('twee renders tegelijk komen allebei terug', () async {
+    // De rij wordt één voor één afgehandeld; wie de tweede laat vallen, laat
+    // een dia met twee diagrammen half leeg.
+    final a = verseBron();
+    final b = verseBron();
+    controller.answer = (script) => svgVoor(script.contains(a) ? 'a' : 'b');
+
+    final uitkomsten = await Future.wait([
+      MermaidRenderService.instance.render(a),
+      MermaidRenderService.instance.render(b),
+    ]);
+
+    expect(uitkomsten[0], contains('id="a"'));
+    expect(uitkomsten[1], contains('id="b"'));
+  });
+
+  test('een lege bron kost geen JS-aanroep', () async {
+    final aantal = controller.scripts.length;
+    expect(await MermaidRenderService.instance.render('   '), isNull);
+    expect(controller.scripts.length, aantal);
+  });
+}
