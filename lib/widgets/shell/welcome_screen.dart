@@ -44,13 +44,48 @@ class _WelcomeScreen extends ConsumerWidget {
                             filterQuality: FilterQuality.high,
                           ),
                         ),
-                        const SizedBox(height: 36),
+                        // Wat is dit? Het openscherm was logo plus knoppen: wie
+                        // hier voor het eerst kwam, kreeg vier handelingen en
+                        // geen antwoord op de enige vraag die hij had.
+                        const SizedBox(height: 18),
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 340),
+                          child: Text(
+                            l10n.d(
+                              'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.',
+                            ),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 12.5,
+                              height: 1.45,
+                              color: palette.mutedText,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 22),
                         SizedBox(
                           width: 220,
                           child: ElevatedButton.icon(
                             onPressed: () => _newDeck(context, ref),
                             icon: const Icon(Icons.add, size: 18),
                             label: Text(l10n.t('newPresentation')),
+                          ),
+                        ),
+                        // De sjablonen zijn het beste dat een nieuwkomer kan
+                        // overkomen en zaten één klik verstopt achter deze knop.
+                        // Het aantal komt uit de catalogus zelf, zodat het
+                        // meebeweegt in plaats van te verouderen.
+                        const SizedBox(height: 5),
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 240),
+                          child: Text(
+                            '${_visibleTemplateCount(ref)} '
+                            '${l10n.d('sjablonen om mee te beginnen, of leeg')}',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: palette.mutedText,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -112,10 +147,33 @@ class _WelcomeScreen extends ConsumerWidget {
                           ),
                         ],
                         const SizedBox(height: 8),
-                        TextButton.icon(
-                          onPressed: () => SettingsDialog.show(context),
-                          icon: const Icon(Icons.settings_outlined, size: 17),
-                          label: Text(l10n.t('settings')),
+                        // De handleiding stond alleen achter Instellingen →
+                        // Documentatie: drie klikken diep, precies daar waar
+                        // iemand die nog niets weet niet gaat kijken.
+                        Wrap(
+                          alignment: WrapAlignment.center,
+                          children: [
+                            TextButton.icon(
+                              onPressed: () => DocumentReaderScreen.open(
+                                context,
+                                title: l10n.d('Gebruikershandleiding'),
+                                assetBase: 'docs/USER_GUIDE.md',
+                              ),
+                              icon: const Icon(
+                                Icons.menu_book_outlined,
+                                size: 17,
+                              ),
+                              label: Text(l10n.d('Gebruikershandleiding')),
+                            ),
+                            TextButton.icon(
+                              onPressed: () => SettingsDialog.show(context),
+                              icon: const Icon(
+                                Icons.settings_outlined,
+                                size: 17,
+                              ),
+                              label: Text(l10n.t('settings')),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -187,6 +245,15 @@ class _WelcomeScreen extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  /// Hoeveel sjablonen deze gebruiker straks te kiezen krijgt. Dezelfde
+  /// zichtbaarheidsregel als de kiezer zelf: de module-sjablonen tellen pas mee
+  /// als Informatieveiligheid aan staat, anders belooft het openscherm er één
+  /// te veel.
+  int _visibleTemplateCount(WidgetRef ref) {
+    final revealed = ref.watch(infoSafetyRevealProvider);
+    return deckTemplates.where((t) => revealed || !t.requiresInfoSafety).length;
   }
 
   Future<void> _newDeck(BuildContext context, WidgetRef ref) async {

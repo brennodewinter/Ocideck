@@ -249,4 +249,38 @@ void main() {
     expect(harness.choice!.template.id, 'bobCrisis');
     expect(harness.choice!.title, 'Crisis 12:00');
   });
+
+  group('taal van de sjablooninhoud', () {
+    // Titel en omschrijving lopen door l10n.d(), de dia-inhoud niet: die is
+    // deck-inhoud en blijft Nederlands (zie _templateLanguageNotice). Dat mag,
+    // maar dan moet de kiezer het zeggen in plaats van het te laten ontdekken.
+    tearDown(() => AppLocalizations.setActiveLanguageCode('nl'));
+
+    testWidgets('wordt gemeld zodra de interface niet Nederlands is', (
+      tester,
+    ) async {
+      AppLocalizations.setActiveLanguageCode('tr');
+      final harness = _Harness();
+      await harness.open(tester);
+      expect(
+        find.textContaining(
+          AppLocalizations(
+            const Locale('tr'),
+          ).d("De voorbeelddia's van een sjabloon staan in het Nederlands."),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('zwijgt in het Nederlands', (tester) async {
+      // Een melding die niets toevoegt leert mensen meldingen overslaan.
+      AppLocalizations.setActiveLanguageCode('nl');
+      final harness = _Harness();
+      await harness.open(tester);
+      expect(
+        find.textContaining("De voorbeelddia's van een sjabloon"),
+        findsNothing,
+      );
+    });
+  });
 }
