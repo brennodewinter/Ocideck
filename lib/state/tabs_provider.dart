@@ -833,9 +833,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
         // Het pakket-markdownbestand heet naar de deck-titel; geef het op de
         // server de naam die de gebruiker koos. Assets behouden hun submap.
         final isRootMd = _isRootMd(entry);
-        final remote = isRootMd
-            ? p.posix.join(dir, mdBase)
-            : p.posix.join(dir, entry.key);
+        final remote = _remoteMemberPath(dir, isRootMd ? mdBase : entry.key);
         // Alleen het markdownbestand ís het deck; de assets ernaast hebben we
         // nooit opgehaald, dus daar valt niets te toetsen.
         final etag = await service.upload(
