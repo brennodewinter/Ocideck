@@ -12,6 +12,17 @@ import 'package:flutter_test/flutter_test.dart';
 ///   * any OTHER egress primitive — `package:http`, `package:dio`, `Socket`,
 ///     `SecureSocket`, `WebSocket`, `RawDatagramSocket` — likewise.
 ///
+/// Twee uitgangen kunnen die guard *niet* aan, en stonden daarom eerst helemaal
+/// niet in dit bestand: een subproces en een WebView. Bij allebei opent iets
+/// anders dan deze app de socket — `git` doet zijn eigen DNS, de webview-engine
+/// ook — dus `safeResolve` + socket-pinning bestaan daar niet. De grens
+/// verschuift dan naar hoe het proces of de pagina wordt opgezet: argv zonder
+/// schil en zonder geërfde omgeving, of een navigatiedelegate die op HOST
+/// weigert. Dat valt niet statisch te bewijzen; wat wél te bewijzen valt is dat
+/// er niet stilletjes een uitgang bij komt. Vandaar dezelfde vorm: allowlist per
+/// bestand, plus een telling voor het geval dat een tweede uitgang in een
+/// bestaand bestand verschijnt.
+///
 /// That last group is why this file was widened. The guard used to scan for
 /// `HttpClient(` alone, so its own promise ("a new raw client fails this test")
 /// was false for every other way to open a socket: a `http.get(deckSuppliedUrl)`
@@ -185,6 +196,90 @@ void main() {
           'hier bewust bijgesteld worden, met de reden dat ook hij door '
           'NetGuard.safeResolve(Trusted) + connectPinned gaat. Is er juist een '
           'client verdwenen, verlaag het getal dan om de winst vast te zetten.',
+    );
+  });
+
+  /// Hoeveel subproces-starts elk toegelaten bestand mag hebben — dezelfde
+  /// ratchet-vorm als [pinnedClientCount], en om dezelfde reden.
+  ///
+  /// Bij `disk_traces.dart` staat die reden zelfs al opgeschreven: de
+  /// semgrep-uitzondering daar zit bewust op de régel en niet op het bestand,
+  /// "een tweede subproces hier moet wél alarm geven". Alleen draait semgrep
+  /// niet in `make check`, dus dat alarm bestond nergens. Nu wel.
+  const subprocessCount = <String, int>{
+    // De git-laag. Eén start, met argv-array, zonder schil, met een
+    // dichtgetimmerde omgeving (includeParentEnvironment: false) zodat een
+    // GIT_TRACE_* uit de schil van de gebruiker het token niet wegschrijft.
+    'lib/services/git/git_cli_io.dart': 1,
+    // `chmod 700` op de datamappen, alleen op Linux: vaste argv, geen schil, en
+    // het pad komt van path_provider. Dart heeft geen permissie-API.
+    'lib/services/disk_traces.dart': 1,
+  };
+
+  test('een subproces blijft binnen de twee plekken die het mogen', () {
+    scan(
+      sink: RegExp(r'\bProcess\.(start|run|runSync|startSync)\('),
+      allowedFiles: subprocessCount.keys.toSet(),
+      guidance:
+          'Nieuw subproces. Een subproces is een netwerkuitgang die NetGuard '
+          'niet kan zien — het proces opent zijn eigen sockets, en geen enkele '
+          'poort in deze app zit ertussen. Wat er in plaats daarvan moet '
+          'gebeuren staat in GIT_STORAGE.md §10.2: de beperking wordt aan het '
+          'proces zelf opgelegd (argv-array, geen schil, geen geërfde '
+          'omgeving, tijdslimiet, begrensde uitvoer). Doe dat, en zet het '
+          'bestand erbij:',
+    );
+  });
+
+  test('een toegelaten bestand krijgt er niet stilletjes een subproces bij', () {
+    final sink = RegExp(r'\bProcess\.(start|run|runSync|startSync)\(');
+    final actual = <String, int>{};
+    for (final file in dartFiles()) {
+      if (!subprocessCount.containsKey(rel(file))) continue;
+      var count = 0;
+      for (final line in file.readAsLinesSync()) {
+        if (line.trimLeft().startsWith('//')) continue;
+        count += sink.allMatches(line).length;
+      }
+      if (count > 0) actual[rel(file)] = count;
+    }
+
+    expect(
+      actual,
+      subprocessCount,
+      reason:
+          'Het aantal subproces-starts in een toegelaten bestand is veranderd. '
+          'De allowlist bewijst alleen dat het bestand van de regel weet, niet '
+          'dat élke start eraan voldoet — dus moet een tweede start hier '
+          'bewust bijgesteld worden, met de reden dat ook hij zonder schil, '
+          'zonder geërfde omgeving en met een tijdslimiet draait.',
+    );
+  });
+
+  test('een WebView blijft op de drie plekken die hem afschermen', () {
+    scan(
+      sink: RegExp(r'WebViewController\(|\.loadRequest\(|WebViewWidget\('),
+      allowedFiles: {
+        // De verborgen Mermaid-renderer. Laadt één keer een lokale HTML-string
+        // met een eigen CSP (`default-src 'none'`), en de navigatiedelegate
+        // weigert daarna élke navigatie — de bundel komt uit de assets, niet
+        // van het netwerk.
+        'lib/widgets/mermaid_render_host.dart',
+        'lib/services/mermaid_render_service.dart',
+        // De video-embed. De navigatiedelegate laat na de eerste lading alleen
+        // navigatie binnen de speler-origin door, en die toets kijkt naar de
+        // HOST — niet naar een `contains`, want `youtube.com.kwaadaardig.nl`
+        // bevat die tekst ook.
+        'lib/widgets/slides/previews/media_previews_video.dart',
+      },
+      guidance:
+          'Nieuwe WebView. Een WebView is een netwerkuitgang die NetGuard niet '
+          'ziet: de engine lost hosts zelf op en opent zijn eigen sockets, dus '
+          'safeResolve + socket-pinning bestaan hier niet. Wat er wél moet: een '
+          'NavigationDelegate die na de eerste lading weigert wat niet op een '
+          'toegestane HOST staat (host vergelijken, nooit `contains`), '
+          'onHttpAuthRequest dichtzetten, en een CSP op de pagina zelf als de '
+          'inhoud lokaal is. Doe dat, en zet het bestand erbij:',
     );
   });
 
