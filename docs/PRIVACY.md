@@ -115,10 +115,11 @@ against accessing internal/private network addresses.
 | **AI assistant** (off by default) | The specific text/image you request help with | The endpoint you configured |
 | **CVE lookup** (off by default, desktop only) | Your search term or CVE id | The CVE mirror in Settings — by default `cveapi.librekat.nl`, run by the publisher — and, when that yields nothing, ENISA's EU Vulnerability Database and MITRE (neither of those two is configurable) |
 | **Local CVE database** (you start the download) | A request for the latest bulk release | `api.github.com`, then the release asset it points to |
-| **Embedded YouTube / Vimeo video** | A request for that service's player script and the video itself; the service can see that the video is being played | `youtube.com` / `vimeo.com` |
+| **Embedded YouTube video** | A request for the player page and the video itself; the service can see that the video is being played | `youtube-nocookie.com` (and its media/thumbnail hosts) — **not** `youtube.com` |
+| **Embedded Vimeo video** | A request for that service's player script and the video itself; the service can see that the video is being played | `vimeo.com` |
 
 Everything in the first six rows goes to servers **you** point it at — not to
-OciDeck. The last three rows are the exceptions, and they are listed because
+OciDeck. The last four rows are the exceptions, and they are listed because
 naming them is the only honest way to keep the sentence above true:
 
 - The **fetch-proxy** exists because most servers send no CORS headers, so a
@@ -133,11 +134,22 @@ naming them is the only honest way to keep the sentence above true:
   fallbacks are not settings; they are compiled in.
 - **YouTube and Vimeo** load their player from their own service, which is
   inherent to embedding a video hosted there. Remote media is off by default
-  (*Settings → Security → allow remote media*).
+  (*Settings → Security → allow remote media*). For YouTube the player is a
+  bare `youtube-nocookie.com` frame: no script is fetched from `youtube.com`,
+  and the player's "Watch on YouTube" link is refused rather than followed, so
+  a click during a presentation cannot swap the slide for the tracking origin.
+  That is not the same as "nothing is observed" — YouTube still sees the
+  request, and the video bytes still come from its media hosts.
 
 *Corrected 2026-07-21: this table previously listed only the five rows you
 choose yourself, and the sentence "Nothing here goes to OciDeck" was true of
 that shortened list rather than of the code.*
+
+*Corrected 2026-07-22: the YouTube row named `youtube.com`, and it was right to
+— the embed loaded its player script from there, so `YT.Player` put the player
+on that origin too. The nocookie form was used everywhere else in the code. The
+embed now loads no script at all; the row was split so the two services are not
+described by one sentence that fits neither.*
 
 ### Secrets are stored in your OS keychain
 

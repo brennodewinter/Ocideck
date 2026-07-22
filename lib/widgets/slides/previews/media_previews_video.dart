@@ -304,10 +304,7 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
             }
             final u = request.url;
             final allowed = origin == 'youtube'
-                ? (u.contains('youtube.com') ||
-                      u.contains('youtube-nocookie.com') ||
-                      u.contains('ytimg.com') ||
-                      u.contains('google.com'))
+                ? _youTubePlayerNavigationAllowed(u)
                 : (u.contains('vimeo.com') || u.contains('vimeocdn.com'));
             return allowed
                 ? NavigationDecision.navigate
@@ -372,7 +369,7 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
     final html = _buildEmbedHtml();
     if (html == null) return;
     final baseUrl = widget.source.kind == VideoSourceKind.youtube
-        ? 'https://www.youtube-nocookie.com'
+        ? kYouTubeEmbedOrigin
         : 'https://player.vimeo.com';
     controller.loadHtmlString(html, baseUrl: baseUrl);
   }
@@ -419,14 +416,9 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
   }
 
   String? _buildEmbedHtml() {
-    final id = widget.source.embedId;
-    if (id == null) return null;
-    final startSec = (widget.slide.videoStartMs / 1000).floor();
+    // `embedUri` levert null zodra er geen embed-id is, dus die ene bron is de
+    // hele bewaking; beide spelers bouwen nu op dezelfde URL.
     final endMs = widget.slide.videoEndMs;
-    final auto = widget.autoplay ? 1 : 0;
-    if (widget.source.kind == VideoSourceKind.youtube) {
-      return _youTubeHtml(id, startSec, endMs, auto);
-    }
     final embed = widget.source
         .embedUri(
           startMs: widget.slide.videoStartMs,
@@ -435,7 +427,9 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
         )
         ?.toString();
     if (embed == null) return null;
-    return _vimeoHtml(embed, endMs);
+    return widget.source.kind == VideoSourceKind.youtube
+        ? _youTubeHtml(embed, endMs)
+        : _vimeoHtml(embed, endMs);
   }
 
   @override
@@ -499,31 +493,95 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
   }
 }
 
-/// HTML voor een YouTube-embed via de IFrame Player API. Bewaakt het knip-einde
-/// ([endMs] > 0) en meldt positie/einde via de `OciDeck`-channel.
+/// De enige oorsprong die een YouTube-embed van OciDeck mag aanspreken.
 ///
-/// `onError` meldt de fout terug (`err:<code>`), plus een tijdslot: laadt het
-/// IFrame-script niet of komt de speler nooit klaar, dan hoort de gebruiker een
-/// reden te zien in plaats van een zwart vlak (`err:noapi`). Dit is precies de
-/// stille faalmodus waar "de video laadt niet en ik zie niet waarom" vandaan
-/// kwam — de meest voorkomende oorzaak is dat de eigenaar insluiten heeft
-/// uitgezet, en dat wist de gebruiker niet.
-String _youTubeHtml(String id, int startSec, int endMs, int autoplay) {
-  return '''<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1">
-<style>html,body{margin:0;background:#000;height:100%}#p{width:100%;height:100%}</style></head>
-<body><div id="p"></div>
-<script src="https://www.youtube.com/iframe_api"></script>
-<script>
-var player, endMs=$endMs, ready=false;
-function post(m){try{OciDeck.postMessage(m)}catch(e){}}
-function onYouTubeIframeAPIReady(){
-  player=new YT.Player('p',{videoId:'$id',playerVars:{autoplay:$autoplay,controls:1,rel:0,modestbranding:1,playsinline:1,start:$startSec},events:{onReady:onReady,onStateChange:onState,onError:onErr}});
+/// `youtube-nocookie.com` is de variant die pas een profiel opbouwt als er
+/// werkelijk gekeken wordt; `youtube.com` volgt de bezoeker vanaf de eerste
+/// byte. Elders in de code werd de nocookie-vorm al netjes gebruikt — behalve
+/// hier, waar het speler-script van de trackende oorsprong kwam en de speler
+/// zelf daarmee óók daar terechtkwam. Eén constante, zodat dat niet opnieuw
+/// uiteen kan lopen.
+const String kYouTubeEmbedOrigin = 'https://www.youtube-nocookie.com';
+
+/// Of de speler naar [url] mag navigeren.
+///
+/// De speler zelf en zijn beeldmateriaal mogen; `www.youtube.com` mag niet.
+/// Dat lijkt streng tot je ziet waar die navigatie vandaan komt: het YouTube-
+/// logo in de speler is een link naar de kijkpagina. Eén klik daarop tijdens
+/// een presentatie verving de dia door de trackende oorsprong — precies wat de
+/// nocookie-variant moest voorkomen — en liet de presentator achter op een
+/// pagina die niet zijn presentatie is. Weigeren doet allebei die dingen niet.
+///
+/// Let op de vorm: dit toetst de hóst, niet "komt deze tekenreeks ergens voor".
+/// Met een `contains` zou `https://youtube.com.kwaadaardig.example/` erdoor
+/// glippen.
+bool _youTubePlayerNavigationAllowed(String url) {
+  final host = Uri.tryParse(url)?.host.toLowerCase();
+  if (host == null || host.isEmpty) return false;
+  const players = {
+    'youtube-nocookie.com', // de speler zelf
+    'ytimg.com', // miniaturen en speler-assets
+    'googlevideo.com', // de videostroom
+  };
+  return players.any((d) => host == d || host.endsWith('.$d'));
 }
-function onReady(e){ready=true;post('ok');tick()}
-function onErr(e){post('err:'+e.data)}
-function onState(e){if(e.data===YT.PlayerState.ENDED){post('ended')}}
-function tick(){try{if(player&&player.getCurrentTime){var ms=Math.round(player.getCurrentTime()*1000);post('pos:'+ms);if(endMs>0&&ms>=endMs){player.pauseVideo();post('ended')}}}catch(e){}setTimeout(tick,250)}
-// Laadt het IFrame-script niet (offline, geblokkeerd), dan komt de speler nooit
+
+/// HTML voor een YouTube-embed: een kále `youtube-nocookie`-iframe, precies
+/// zoals de Vimeo-embed.
+///
+/// Er komt geen script meer van YouTube aan te pas. Dat was de vorige opzet
+/// (`www.youtube.com/iframe_api`) en die had twee gaten tegelijk: het script
+/// zelf kwam van de trackende oorsprong, én `YT.Player` bouwde daarmee een
+/// speler-iframe op `www.youtube.com` in plaats van op de nocookie-variant. De
+/// gebruiker die "online media" aanzette voor één video, gaf daarmee ongemerkt
+/// een bezoek aan het domein dat wél volgt.
+///
+/// Wat het script deed, kan de speler zelf: `start`, `end`, `autoplay` en
+/// `rel` zitten al in de embed-URL ([VideoSource.embedUri]), en de
+/// gebeurtenissen (klaar, fout, einde, positie) komen via het postMessage-kanaal
+/// dat de speler met `enablejsapi=1` opent — hetzelfde kanaal waar het
+/// IFrame-script zelf een omhulsel omheen is.
+///
+/// Drie meldpaden, in oplopende wanhoop:
+/// * de speler meldt zelf (`onReady`, `onError`, `infoDelivery`) — het normale
+///   geval, en de enige die `err:<code>` kan opleveren (101/150 = insluiten
+///   staat uit, verreweg de vaakste oorzaak van "hij laadt niet");
+/// * het iframe laadt wél maar de speler zwijgt: na een korte marge melden we
+///   `ok`, zodat er geen valse fout over een video komt die gewoon speelt;
+/// * er laadt niets: `err:noapi`, in plaats van een zwart vlak zonder reden.
+String _youTubeHtml(String embedUrl, int endMs) {
+  return '''<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1">
+<style>html,body{margin:0;background:#000;height:100%}iframe{width:100%;height:100%;border:0}</style></head>
+<body><iframe id="f" src="$embedUrl" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+<script>
+var endMs=$endMs, ready=false, ended=false, f=document.getElementById('f');
+function post(m){try{OciDeck.postMessage(m)}catch(e){}}
+function send(o){try{f.contentWindow.postMessage(JSON.stringify(o),'$kYouTubeEmbedOrigin')}catch(e){}}
+// De speler stuurt pas gebeurtenissen zodra hij een luisteraar kent. Blijven
+// aankloppen tot dat lukt: het iframe kan nog bezig zijn.
+function listen(){send({event:'listening',id:1,channel:'ocideck'})}
+function markReady(){if(!ready){ready=true;post('ok')}}
+function finish(){if(!ended){ended=true;post('ended')}}
+var tries=0, poke=setInterval(function(){listen();if(++tries>40||ready){clearInterval(poke)}},250);
+f.addEventListener('load',function(){listen();setTimeout(markReady,3000)});
+window.addEventListener('message',function(e){
+  if(e.origin!=='$kYouTubeEmbedOrigin'){return}
+  var d;try{d=(typeof e.data==='string')?JSON.parse(e.data):e.data}catch(x){return}
+  if(!d||!d.event){return}
+  if(d.event==='onReady'||d.event==='initialDelivery'){markReady()}
+  else if(d.event==='onError'){post('err:'+d.info)}
+  else if(d.event==='onStateChange'&&d.info===0){finish()}
+  else if(d.event==='infoDelivery'&&d.info){
+    markReady();
+    if(typeof d.info.currentTime==='number'){
+      var ms=Math.round(d.info.currentTime*1000);
+      post('pos:'+ms);
+      if(endMs>0&&ms>=endMs){send({event:'command',func:'pauseVideo',args:[],id:1,channel:'ocideck'});finish()}
+    }
+    if(d.info.playerState===0){finish()}
+  }
+});
+// Laadt er helemaal niets (offline, geblokkeerd), dan komt de speler nooit
 // klaar. Meld dat na een royale marge in plaats van zwart te blijven.
 setTimeout(function(){if(!ready){post('err:noapi')}},8000);
 </script></body></html>''';

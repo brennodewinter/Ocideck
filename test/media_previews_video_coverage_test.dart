@@ -415,10 +415,16 @@ void main() {
 
     final controller = fakeWeb.lastController!;
     expect(controller.loadedBaseUrl, 'https://www.youtube-nocookie.com');
-    expect(controller.loadedHtml, contains('YT.Player'));
     expect(controller.loadedHtml, contains('dQw4w9WgXcQ'));
-    // start = floor(10000/1000) folds into the player vars.
-    expect(controller.loadedHtml, contains('start:10'));
+    // De speler is een kaal iframe op de nocookie-oorsprong…
+    expect(
+      controller.loadedHtml,
+      contains('https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ'),
+    );
+    // …en de knipgrenzen zitten in die URL, niet in een script van YouTube.
+    // start = floor(10000/1000), end = ceil(30000/1000).
+    expect(controller.loadedHtml, contains('start=10'));
+    expect(controller.loadedHtml, contains('end=30'));
 
     // Before any player message: a subtle loader over the still-blank player.
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
@@ -559,7 +565,19 @@ void main() {
         ),
         NavigationDecision.navigate,
       );
-      // A subsequent same-origin navigation stays allowed.
+      // De videostroom en de miniaturen mogen; die zijn de speler.
+      expect(
+        await nav(
+          const NavigationRequest(
+            url: 'https://r1---sn-x.googlevideo.com/videoplayback?x=1',
+            isMainFrame: true,
+          ),
+        ),
+        NavigationDecision.navigate,
+      );
+      // De kijkpagina op de trackende oorsprong niet — dat is waar het
+      // YouTube-logo in de speler heen wijst. Eén klik daarop verving de dia
+      // door youtube.com.
       expect(
         await nav(
           const NavigationRequest(
@@ -567,7 +585,17 @@ void main() {
             isMainFrame: true,
           ),
         ),
-        NavigationDecision.navigate,
+        NavigationDecision.prevent,
+      );
+      // En de host wordt écht getoetst, niet als tekenreeks gezocht.
+      expect(
+        await nav(
+          const NavigationRequest(
+            url: 'https://youtube-nocookie.com.kwaadaardig.example/embed/x',
+            isMainFrame: true,
+          ),
+        ),
+        NavigationDecision.prevent,
       );
       // A foreign origin is prevented.
       expect(
@@ -597,6 +625,61 @@ void main() {
       await tester.pump();
       expect(find.byKey(const ValueKey('fake-webview')), findsNothing);
       expect(find.text('Online media staat uit'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets('de YouTube-embed haalt niets van de trackende oorsprong', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _host(
+        _video(path: 'https://youtu.be/dQw4w9WgXcQ'),
+        allowRemoteMedia: true,
+      ),
+    );
+    await tester.pump();
+
+    final html = fakeWeb.lastController!.loadedHtml!;
+    // Dit is de hele bedoeling: `youtube-nocookie.com` bouwt pas een profiel
+    // op als er werkelijk gekeken wordt, `youtube.com` volgt vanaf de eerste
+    // byte. Het speler-script kwam daar vandaan, en `YT.Player` zette de
+    // speler er dan ook neer. Streep elke nocookie-vermelding weg; wat
+    // overblijft mag het woord niet meer bevatten.
+    final zonderNocookie = html.replaceAll('youtube-nocookie.com', '');
+    expect(
+      zonderNocookie,
+      isNot(contains('youtube.com')),
+      reason:
+          'De embed spreekt de trackende oorsprong aan. Online media staat '
+          'standaard uit; wie hem aanzet voor één video, geeft daarmee geen '
+          'toestemming voor een bezoek aan het domein dat volgt.',
+    );
+    expect(html, isNot(contains('<script src=')));
+    expect(html, isNot(contains('iframe_api')));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets(
+    'een iframe dat laadt maar zwijgt levert geen valse foutmelding op',
+    (tester) async {
+      await tester.pumpWidget(
+        _host(
+          _video(path: 'https://youtu.be/dQw4w9WgXcQ'),
+          allowRemoteMedia: true,
+        ),
+      );
+      await tester.pump();
+
+      // Zonder het IFrame-script komt "klaar" van de speler zelf via
+      // postMessage. Blijft die stil terwijl het iframe wél laadde, dan is de
+      // video vermoedelijk gewoon in orde: de HTML moet dan `ok` melden en niet
+      // na acht seconden alsnog `err:noapi` op een spelende video plakken.
+      final html = fakeWeb.lastController!.loadedHtml!;
+      expect(html, contains("f.addEventListener('load'"));
+      expect(html, contains('markReady'));
+      // En het foutpad blijft bestaan voor het geval er niets laadt.
+      expect(html, contains("post('err:noapi')"));
       expect(tester.takeException(), isNull);
     },
   );
