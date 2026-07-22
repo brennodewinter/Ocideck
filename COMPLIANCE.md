@@ -73,7 +73,7 @@ attestation therefore describes the relationship rather than claiming the label.
 | Valid for versions | **The default branch.** There are no releases and no version tags |
 | Valid for dates | Issued 2026-07-22; describes the branch as of that date |
 
-There is no version identifier to attest to. `pubspec.yaml` carries `0.2.0+1`,
+There is no version identifier to attest to. `pubspec.yaml` carries `0.1.0+1`,
 but that changes only when someone bumps it, so many different commits show the
 same number. **The commit hash is the only real identifier** — pin it and record
 it. See [`SECURITY.md`](SECURITY.md), *Supported versions*.

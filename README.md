@@ -3,7 +3,7 @@
 > **Status:** current-state project overview · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
 
 > **Unreleased alpha — no release has ever been tagged.** Every user builds from
-> source and runs whatever commit they built. `pubspec.yaml` says `0.2.0+1`, but
+> source and runs whatever commit they built. `pubspec.yaml` says `0.1.0+1`, but
 > no tag carries that string and the app never shows it. The file format is the
 > part meant to be stable ([FILE_FORMAT.md](docs/FILE_FORMAT.md)); the
 > application is not. What is missing, rough or untested is collected in

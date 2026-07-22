@@ -3,6 +3,8 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
 
+import 'support/fastest_of.dart';
+
 /// Prestatie- en schaalbaarheidstests voor grote presentaties.
 ///
 /// De rest van de suite dekt gedrag functioneel af, maar duwde nooit een deck
@@ -106,18 +108,6 @@ Slide _slideForIndex(int i) {
             'lang genoeg om de serialiser echt werk te geven.',
       );
   }
-}
-
-/// Voert [action] [runs] keer uit en geeft de snelste doorloop terug.
-Duration fastestOf(int runs, void Function() action) {
-  var best = const Duration(days: 1);
-  for (var r = 0; r < runs; r++) {
-    final sw = Stopwatch()..start();
-    action();
-    sw.stop();
-    if (sw.elapsed < best) best = sw.elapsed;
-  }
-  return best;
 }
 
 void main() {

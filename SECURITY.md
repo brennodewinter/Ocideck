@@ -456,7 +456,7 @@ OS-level process isolation. The `com.apple.security.cs.allow-jit` entitlement in
 
 There is no released version yet. The repository carries no release tag (the one
 tag that exists, `archive/git-mirror`, marks an archived branch and is not a
-version), and `pubspec.yaml` says `0.2.0+1`. The app displays that version under
+version), and `pubspec.yaml` says `0.1.0+1`. The app displays that version under
 **Settings → Over OciDeck** (*added 2026-07-22*), but it is not a release marker:
 it only changes when someone bumps `pubspec.yaml`, which does not happen on every
 commit, so many different commits on the default branch can show the same

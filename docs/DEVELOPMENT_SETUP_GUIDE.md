@@ -155,7 +155,7 @@ Create `.vscode/launch.json` for debugging:
 
 ```json
 {
-  "version": "0.2.0",
+  "version": "0.1.0",
   "configurations": [
     {
       "name": "Debug OciDeck (macOS)",
