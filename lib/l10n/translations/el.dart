@@ -1592,8 +1592,6 @@ const _dutchSourceEl = {
   'Onderzoeksverhaal': 'Ερευνητική αφήγηση',
   'Technische uitleg': 'Τεχνική επεξήγηση',
   'Interactieve quiz': 'Διαδραστικό κουίζ',
-  'Alleen een titelpagina en een agenda.':
-      'Μόνο μια σελίδα τίτλου και μια ατζέντα.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Κατάσταση, γεγονότα και ζητούμενη απόφαση σε έξι διαφάνειες.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1805,6 +1803,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Alleen een titelpagina.': 'Μόνο μια σελίδα τίτλου.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Αυτή η διαφάνεια είναι κενή: δεν εμφανίζει τίποτα στην οθόνη ούτε στην εξαγωγή.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

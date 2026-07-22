@@ -1588,8 +1588,6 @@ const _dutchSourceBg = {
   'Onderzoeksverhaal': 'Изследователски разказ',
   'Technische uitleg': 'Техническо обяснение',
   'Interactieve quiz': 'Интерактивен куиз',
-  'Alleen een titelpagina en een agenda.':
-      'Само заглавна страница и дневен ред.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Ситуация, факти и искано решение в шест слайда.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1800,6 +1798,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Alleen een titelpagina.': 'Само заглавна страница.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Този слайд е празен: не показва нищо на екрана, нито в експорта.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

@@ -104,11 +104,21 @@ class _WelcomeScreen extends ConsumerWidget {
       const SizedBox(height: 5),
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 240),
-        child: Text(
-          '${_visibleTemplateCount(ref)} '
-          '${l10n.d('sjablonen om mee te beginnen, of leeg')}',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11, color: palette.mutedText),
+        // Dezelfde waarschuwing als in de nieuw-presentatie-dialoog, want dit
+        // is de plek waar de belofte gedáán wordt. Wie hier "48 sjablonen om
+        // mee te beginnen" leest en er een opent, kreeg Nederlands terug
+        // zonder dat er iets op wees (#622). Letterlijk dezelfde bronstring,
+        // dus geen tweede tekst om uit de pas te laten lopen.
+        child: Tooltip(
+          message: l10n.d(
+            "De voorbeelddia's van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.",
+          ),
+          child: Text(
+            '${_visibleTemplateCount(ref)} '
+            '${l10n.d('sjablonen om mee te beginnen, of leeg')}',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 11, color: palette.mutedText),
+          ),
         ),
       ),
       const SizedBox(height: 12),

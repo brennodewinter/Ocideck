@@ -1586,8 +1586,6 @@ const _dutchSourceUk = {
   'Onderzoeksverhaal': 'Дослідницька розповідь',
   'Technische uitleg': 'Технічне пояснення',
   'Interactieve quiz': 'Інтерактивна вікторина',
-  'Alleen een titelpagina en een agenda.':
-      'Лише титульна сторінка та порядок денний.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Ситуація, факти та запитуване рішення на шести слайдах.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1795,6 +1793,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Alleen een titelpagina.': 'Лише титульна сторінка.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Цей слайд порожній: він нічого не показує ні на екрані, ні в експорті.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

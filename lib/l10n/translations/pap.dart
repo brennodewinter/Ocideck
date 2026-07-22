@@ -734,6 +734,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Alleen een titelpagina.': 'Solamente un página di título.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'E slide aki ta bashí: e no ta mustra nada riba pantaya ni den e eksport.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
@@ -2871,8 +2872,6 @@ const _dutchSourceAddPap = {
   'Onderzoeksverhaal': 'Historia di investigashon',
   'Technische uitleg': 'Splikashon tékniko',
   'Interactieve quiz': 'Quiz interaktivo',
-  'Alleen een titelpagina en een agenda.':
-      'Solamente un página di título i un agenda.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situashon, echonan i e desishon pidí den seis slide.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':

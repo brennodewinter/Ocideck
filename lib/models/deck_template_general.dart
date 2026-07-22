@@ -2,14 +2,18 @@ part of 'deck_template.dart';
 
 // ── Template builders ────────────────────────────────────────────────────────
 
-List<Slide> _buildEmpty(String deckTitle) => [
-  _title(deckTitle),
-  _bullets('Agenda', [
-    'Opening en aanleiding',
-    'Kern van het verhaal',
-    'Vervolg en afspraken',
-  ]),
-];
+/// Het lege deck: alléén een titeldia.
+///
+/// Er stond een agenda bij, met Nederlandse voorbeeldregels. Dat is voor een
+/// *sjabloon* een verdedigbare keuze — de nieuw-presentatie-dialoog zegt er
+/// met zoveel woorden bij dat sjabloonvoorbeelden in het Nederlands staan — maar
+/// dit is het lege deck. Het is de standaardkeuze, het wordt niet als sjabloon
+/// gepresenteerd, en een Engelstalige gebruiker kreeg er dus onontkoombaar
+/// Nederlands terug op het eerste scherm dat hij ziet (#622).
+///
+/// Leeg is bovendien wat de naam belooft. Wie een agenda wil, kiest een
+/// sjabloon dat er een heeft.
+List<Slide> _buildEmpty(String deckTitle) => [_title(deckTitle)];
 
 List<Slide> _buildBriefing(String deckTitle) => [
   _title(deckTitle),

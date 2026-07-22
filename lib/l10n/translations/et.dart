@@ -1564,7 +1564,6 @@ const _dutchSourceEt = {
   'Onderzoeksverhaal': 'Uurimislugu',
   'Technische uitleg': 'Tehniline selgitus',
   'Interactieve quiz': 'Interaktiivne viktoriin',
-  'Alleen een titelpagina en een agenda.': 'Ainult tiitelleht ja päevakord.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Olukord, faktid ja soovitud otsus kuuel slaidil.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1768,6 +1767,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Alleen een titelpagina.': 'Ainult tiitelleht.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'See slaid on tühi: see ei näita midagi ekraanil ega ekspordis.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

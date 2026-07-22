@@ -731,6 +731,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Alleen een titelpagina.': 'Solo una portada.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Esta diapositiva está vacía: no muestra nada en pantalla ni en la exportación.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
@@ -2889,7 +2890,6 @@ const _dutchSourceAddEs = {
   'Onderzoeksverhaal': 'Relato de investigación',
   'Technische uitleg': 'Explicación técnica',
   'Interactieve quiz': 'Quiz interactivo',
-  'Alleen een titelpagina en een agenda.': 'Solo una portada y una agenda.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situación, hechos y decisión solicitada en seis diapositivas.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':

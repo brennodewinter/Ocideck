@@ -1587,7 +1587,6 @@ const _dutchSourceMt = {
   'Onderzoeksverhaal': 'Storja ta\' riċerka',
   'Technische uitleg': 'Spjegazzjoni teknika',
   'Interactieve quiz': 'Kwiżż interattiv',
-  'Alleen een titelpagina en een agenda.': 'Paġna tat-titlu u aġenda biss.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Sitwazzjoni, fatti u d-deċiżjoni mitluba f\'sitt slajds.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1799,6 +1798,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Alleen een titelpagina.': 'Paġna tat-titlu biss.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Din is-slide hija vojta: ma turi xejn fuq l-iskrin u lanqas fl-esportazzjoni.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

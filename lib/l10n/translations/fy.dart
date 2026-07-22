@@ -735,6 +735,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Alleen een titelpagina.': 'Allinnich in titelside.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Dizze slide is leech: hy lit neat sjen op it skerm en yn de eksport.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
@@ -2862,8 +2863,6 @@ const _dutchSourceAddFy = {
   'Onderzoeksverhaal': 'Ûndersyksferhaal',
   'Technische uitleg': 'Technyske útlis',
   'Interactieve quiz': 'Ynteraktive quiz',
-  'Alleen een titelpagina en een agenda.':
-      'Allinnich in titelside en in aginda.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Sitewaasje, feiten en frege beslút yn seis slides.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':

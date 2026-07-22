@@ -2611,8 +2611,6 @@ const _dutchSourceTr = {
   'Onderzoeksverhaal': 'Araştırma anlatısı',
   'Technische uitleg': 'Teknik açıklama',
   'Interactieve quiz': 'Etkileşimli quiz',
-  'Alleen een titelpagina en een agenda.':
-      'Yalnızca bir başlık sayfası ve bir gündem.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Altı slaytta durum, gerçekler ve istenen karar.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -2757,6 +2755,7 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Alleen een titelpagina.': 'Yalnızca bir başlık sayfası.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Bu slayt boş: ekranda da dışa aktarmada da hiçbir şey göstermiyor.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

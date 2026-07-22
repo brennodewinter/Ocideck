@@ -1569,7 +1569,6 @@ const _dutchSourceSv = {
   'Onderzoeksverhaal': 'Undersökningsberättelse',
   'Technische uitleg': 'Teknisk förklaring',
   'Interactieve quiz': 'Interaktivt quiz',
-  'Alleen een titelpagina en een agenda.': 'Endast en titelsida och en agenda.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situation, fakta och begärt beslut på sex bilder.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1776,6 +1775,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Alleen een titelpagina.': 'Endast en titelsida.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Den här bilden är tom: den visar ingenting på skärmen eller i exporten.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

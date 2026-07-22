@@ -120,8 +120,27 @@ void main() {
     List<SlideType> typesOf(String id) =>
         deckTemplateById(id)!.buildSlides('T').map((s) => s.type).toList();
 
-    test('empty deck is a title page plus an agenda', () {
-      expect(typesOf('empty'), [SlideType.title, SlideType.bullets]);
+    test('empty deck is a title page and nothing else', () {
+      // Het was een titeldia plús een agenda met Nederlandse voorbeeldregels.
+      // Voor een sjabloon is dat verdedigbaar — de dialoog waarschuwt ervoor —
+      // maar dit is het lege deck: de standaardkeuze, niet als sjabloon
+      // gepresenteerd, en dus onontkoombaar voor wie de app in het Engels
+      // draait (#622).
+      expect(typesOf('empty'), [SlideType.title]);
+    });
+
+    test('geen enkel sjabloon draagt de oude agenda-voorbeeldregels', () {
+      // Een regressie hier is stil: het deck opent gewoon, alleen staat er
+      // Nederlands in een Engelse app.
+      for (final template in deckTemplates) {
+        for (final slide in template.buildSlides('T')) {
+          expect(
+            slide.bullets,
+            isNot(contains('Opening en aanleiding')),
+            reason: 'sjabloon ${template.id}',
+          );
+        }
+      }
     });
 
     test('briefing is title plus five bullet slides', () {

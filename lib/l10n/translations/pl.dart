@@ -1580,7 +1580,6 @@ const _dutchSourcePl = {
   'Onderzoeksverhaal': 'Opowieść badawcza',
   'Technische uitleg': 'Wyjaśnienie techniczne',
   'Interactieve quiz': 'Interaktywny quiz',
-  'Alleen een titelpagina en een agenda.': 'Tylko strona tytułowa i agenda.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Sytuacja, fakty i oczekiwana decyzja w sześciu slajdach.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1789,6 +1788,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Alleen een titelpagina.': 'Tylko strona tytułowa.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ten slajd jest pusty: nie pokazuje nic na ekranie ani w eksporcie.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

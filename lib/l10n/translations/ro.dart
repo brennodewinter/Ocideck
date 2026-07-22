@@ -1582,8 +1582,6 @@ const _dutchSourceRo = {
   'Onderzoeksverhaal': 'Poveste de investigație',
   'Technische uitleg': 'Explicație tehnică',
   'Interactieve quiz': 'Quiz interactiv',
-  'Alleen een titelpagina en een agenda.':
-      'Doar o pagină de titlu și o agendă.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situație, fapte și decizia cerută în șase slide-uri.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1795,6 +1793,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Alleen een titelpagina.': 'Doar o pagină de titlu.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Acest slide este gol: nu afișează nimic pe ecran și nici în export.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

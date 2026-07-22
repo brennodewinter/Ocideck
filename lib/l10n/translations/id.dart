@@ -1571,7 +1571,6 @@ const _dutchSourceId = {
   'Onderzoeksverhaal': 'Narasi penelitian',
   'Technische uitleg': 'Penjelasan teknis',
   'Interactieve quiz': 'Kuis interaktif',
-  'Alleen een titelpagina en een agenda.': 'Hanya halaman judul dan agenda.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Situasi, fakta, dan keputusan yang diminta dalam enam slide.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1777,6 +1776,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Alleen een titelpagina.': 'Hanya halaman judul.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Slide ini kosong: tidak menampilkan apa pun di layar maupun dalam ekspor.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

@@ -1575,7 +1575,6 @@ const _dutchSourceHu = {
   'Onderzoeksverhaal': 'Kutatási történet',
   'Technische uitleg': 'Műszaki magyarázat',
   'Interactieve quiz': 'Interaktív kvíz',
-  'Alleen een titelpagina en een agenda.': 'Csak egy címoldal és egy napirend.',
   'Situatie, feiten en gevraagd besluit in zes slides.':
       'Helyzet, tények és a kért döntés hat dián.',
   'Statusdashboard, voortgang per werkstroom en besluiten.':
@@ -1781,6 +1780,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Alleen een titelpagina.': 'Csak egy címoldal.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ez a dia üres: sem a képernyőn, sem az exportban nem jelenít meg semmit.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
