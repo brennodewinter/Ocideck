@@ -405,6 +405,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // openen — dat voorkomt versieverwarring (twee tabs, twee losse bewerkingen
     // van hetzelfde bestand). De veiligheidsscan is bij het eerste openen al
     // gedaan, dus die hoeft hier niet opnieuw.
+    _clearOpenFailure(_ref, mounted);
     final existing = _indexOfOpenPath(path);
     if (existing != null) {
       selectTab(existing);
@@ -437,12 +438,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final outcome = await _file.openDeckDetailed(path);
     final deck = outcome.deck;
     if (deck == null) {
-      // A readable file that simply isn't a presentation gets its own result so
-      // the UI can say "not a Marp/OciDeck presentation" rather than a generic
-      // "couldn't open".
-      return outcome.failure == OpenFailure.notPresentation
-          ? OpenResult.notAPresentation
-          : OpenResult.unreadable;
+      return _openFailureResult(_ref, mounted, outcome.failure);
     }
     // notifier disposed during the await
     if (!mounted) return OpenResult.unreadable;
@@ -559,18 +555,19 @@ class TabsNotifier extends StateNotifier<TabsState> {
     String name, {
     String? remoteOrigin,
   }) async {
+    _clearOpenFailure(_ref, mounted);
     if (FileService.looksLikeZipBytes(bytes)) {
       return _openPackageFromBytes(bytes, name, remoteOrigin: remoteOrigin);
     }
     if (bytes.length > FileService.maxDeckMarkdownBytes) {
-      return OpenResult.unreadable;
+      return _failOpen(_ref, mounted, OpenFailure.tooLarge);
     }
     final String raw;
     try {
       raw = utf8.decode(bytes);
     } on FormatException catch (e) {
       logWarning('TabsNotifier.openDeckFromBytes: not valid UTF-8', e);
-      return OpenResult.unreadable;
+      return _failOpen(_ref, mounted, OpenFailure.unreadable);
     }
     final gated = _gateAndParseContent(raw, sourceName: name);
     final deck = gated.deck;
@@ -727,6 +724,59 @@ final tabsProvider = StateNotifierProvider<TabsNotifier, TabsState>((ref) {
 final importSecurityAlarmProvider = StateProvider<ImportSecurityAlarm?>(
   (ref) => null,
 );
+
+/// De reden van de laatst mislukte open, of null wanneer die onbekend is.
+///
+/// `FileService.openDeckDetailed` wéét al waarom het misging — [OpenFailure]
+/// onderscheidt zes gevallen — maar de state-laag gooide dat weg en vertaalde
+/// alles behalve "geen presentatie" naar één [OpenResult.unreadable]. De
+/// gebruiker kreeg dus "Kon dit bestand niet openen.", zonder reden en zonder
+/// suggestie, terwijl het antwoord twee lagen lager gewoon bekend was.
+///
+/// Zelfde vorm als [importSecurityAlarmProvider]: het openpad zet hem, de schil
+/// leest hem bij het tonen van de melding. Dat scheelt een reden door 26
+/// return-plekken heen dragen die hem meestal toch niet kennen — en bij die
+/// plekken is de generieke melding ook eerlijk.
+///
+/// Wordt bij elke open gewist voordat er iets kan mislukken: een reden van de
+/// vorige keer is erger dan geen reden, want die wijst de verkeerde kant op.
+final openFailureProvider = StateProvider<OpenFailure?>((ref) => null);
+
+/// Legt vast waaróm een open mislukte en geeft [OpenResult.unreadable] terug.
+///
+/// Eén plek, zodat een volgend geval de reden niet vergeet te zetten. Buiten
+/// [TabsNotifier] omdat die klasse tegen haar plafond zit — en omdat dit geen
+/// state is maar een notitie erover; [alive] draagt de `mounted`-controle mee,
+/// want na dispose is er geen container meer om in te schrijven.
+OpenResult _failOpen(Ref ref, bool alive, OpenFailure reason) {
+  if (alive) ref.read(openFailureProvider.notifier).state = reason;
+  return OpenResult.unreadable;
+}
+
+/// Vertaalt de uitkomst van `FileService.openDeckDetailed` naar een
+/// [OpenResult] én legt de reden vast.
+///
+/// "Geen presentatie" had altijd al zijn eigen uitkomst, zodat de schil dat kon
+/// zeggen in plaats van een algemeen "kon niet openen". De ándere vijf oorzaken
+/// kende `openDeckDetailed` net zo goed, maar die werden hier weggegooid — dus
+/// wist de gebruiker niet of hij het verkeerde bestand koos, of dat er iets
+/// stuk was. Nu reizen ze mee (#646).
+OpenResult _openFailureResult(Ref ref, bool alive, OpenFailure? failure) {
+  if (failure == null) return OpenResult.unreadable;
+  _failOpen(ref, alive, failure);
+  return failure == OpenFailure.notPresentation
+      ? OpenResult.notAPresentation
+      : OpenResult.unreadable;
+}
+
+/// Wist de reden aan het begin van een open.
+///
+/// Vóór de poging, niet erna: blijft de reden van de vorige mislukking staan,
+/// dan krijgt de volgende fout een verklaring die niet van hem is — en een
+/// melding die de verkeerde kant op wijst kost meer tijd dan een vage.
+void _clearOpenFailure(Ref ref, bool alive) {
+  if (alive) ref.read(openFailureProvider.notifier).state = null;
+}
 
 /// Een zojuist geopend bestand blijkt elders een byte-identieke kopie te
 /// hebben. De shell toont hierop een snackbar met opruim-ingang (zelfde

@@ -287,7 +287,12 @@ class _WelcomeScreen extends ConsumerWidget {
     final messenger = ScaffoldMessenger.of(context);
     final l10n = context.l10n;
     final result = await ref.read(tabsProvider.notifier).openFileByPath(path);
-    _reportOpenFailure(messenger, l10n, result);
+    _reportOpenFailure(
+      messenger,
+      l10n,
+      result,
+      reason: ref.read(openFailureProvider),
+    );
     if (result == OpenResult.unreadable && !File(path).existsSync()) {
       // Het bestand bestaat niet meer: opruimen i.p.v. blijven aanbieden.
       await ref.read(settingsProvider.notifier).removeRecentFile(path);

@@ -736,6 +736,14 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'Dit document bestaat alleen in het Engels.':
       'E dokumento aki ta eksistí solamente na ingles.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'E archivo aki no ta na e lugá aki mas.',
+  'Dit bestand is te groot om te openen.':
+      'E archivo aki ta muchu grandi pa habri.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'E presentashon aki ta daña òf guardá pa mitar.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'E archivo aki no ta teksto legibel. OciDeck ta habri Markdown.',
   'Alleen een titelpagina.': 'Solamente un página di título.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'E slide aki ta bashí: e no ta mustra nada riba pantaya ni den e eksport.',

@@ -1813,6 +1813,14 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Níl an cháipéis seo ar fáil ach i mBéarla.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Níl an comhad seo san áit seo a thuilleadh.',
+  'Dit bestand is te groot om te openen.':
+      'Tá an comhad seo rómhór le hoscailt.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Tá an láithreoireacht seo damáiste nó níor sábháladh í ach go páirteach.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Ní téacs inléite é an comhad seo. Osclaíonn OciDeck Markdown.',
   'Alleen een titelpagina.': 'Leathanach teidil amháin.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Tá an sleamhnán seo folamh: ní thaispeánann sé aon rud ar an scáileán ná san easpórtáil.',

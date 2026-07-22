@@ -1777,6 +1777,14 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Šis dokuments ir pieejams tikai angļu valodā.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Šī faila šajā vietā vairs nav.',
+  'Dit bestand is te groot om te openen.':
+      'Šis fails ir pārāk liels, lai to atvērtu.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Šī prezentācija ir bojāta vai saglabāta tikai daļēji.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Šis fails nav lasāms teksts. OciDeck atver Markdown.',
   'Alleen een titelpagina.': 'Tikai titullapa.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Šis slaids ir tukšs: tas neko nerāda ne ekrānā, ne eksportā.',

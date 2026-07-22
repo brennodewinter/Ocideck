@@ -1769,6 +1769,13 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'See dokument on olemas ainult inglise keeles.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Seda faili pole selles asukohas enam.',
+  'Dit bestand is te groot om te openen.': 'See fail on avamiseks liiga suur.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'See esitlus on kahjustatud või salvestus jäi pooleli.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'See fail ei ole loetav tekst. OciDeck avab Markdowni.',
   'Alleen een titelpagina.': 'Ainult tiitelleht.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'See slaid on tühi: see ei näita midagi ekraanil ega ekspordis.',

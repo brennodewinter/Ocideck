@@ -1800,6 +1800,14 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Dan id-dokument jeżisti bl-Ingliż biss.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Dan il-fajl m’għadux jinsab f’dan il-post.',
+  'Dit bestand is te groot om te openen.':
+      'Dan il-fajl huwa kbir wisq biex jinfetaħ.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Din il-preżentazzjoni bil-ħsara jew inħażnet biss parzjalment.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Dan il-fajl mhuwiex test li jinqara. OciDeck jiftaħ Markdown.',
   'Alleen een titelpagina.': 'Paġna tat-titlu biss.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Din is-slide hija vojta: ma turi xejn fuq l-iskrin u lanqas fl-esportazzjoni.',

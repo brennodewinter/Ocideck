@@ -737,6 +737,14 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'Dit document bestaat alleen in het Engels.':
       'Dit dokumint bestiet allinnich yn it Ingelsk.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Dit bestân stiet net mear op dit plak.',
+  'Dit bestand is te groot om te openen.':
+      'Dit bestân is te grut om te iepenjen.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Dizze presintaasje is skansearre of mar heal bewarre.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Dit bestân is gjin lêsbere tekst. OciDeck iepenet Markdown.',
   'Alleen een titelpagina.': 'Allinnich in titelside.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Dizze slide is leech: hy lit neat sjen op it skerm en yn de eksport.',

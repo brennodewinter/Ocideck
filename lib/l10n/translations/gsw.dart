@@ -1781,6 +1781,13 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Das Dokumänt git\'s nume uf Änglisch.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Die Datei git s a dem Ort nüme.',
+  'Dit bestand is te groot om te openen.': 'Die Datei isch z gross zum Öffne.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Die Präsentation isch kaputt oder nur halb gspicheret.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Die Datei isch kein läsbare Text. OciDeck öffnet Markdown.',
   'Alleen een titelpagina.': 'Nur e Titelsiite.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Die Slide isch läär: si zeigt nüt uf em Bildschirm und nüt im Export.',

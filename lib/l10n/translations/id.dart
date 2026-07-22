@@ -1778,6 +1778,14 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Dokumen ini hanya tersedia dalam bahasa Inggris.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Berkas ini tidak ada lagi di lokasi ini.',
+  'Dit bestand is te groot om te openen.':
+      'Berkas ini terlalu besar untuk dibuka.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Presentasi ini rusak atau hanya tersimpan sebagian.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Berkas ini bukan teks yang terbaca. OciDeck membuka Markdown.',
   'Alleen een titelpagina.': 'Hanya halaman judul.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Slide ini kosong: tidak menampilkan apa pun di layar maupun dalam ekspor.',

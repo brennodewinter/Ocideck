@@ -1753,6 +1753,13 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'DIvI\' Hol neH lo\' ghItlhvam.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'DaqvamDaq De\'vam tu\'lu\'be\'.',
+  'Dit bestand is te groot om te openen.': 'poSmoHlu\'meH tInqu\' De\'vam.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'cha\'nobvam Qaw\'lu\'pu\' pagh naQbe\'taHvIS pollu\'pu\'.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'laDlaHbogh ghItlh \'oHbe\' De\'vam\'e\'. Markdown poSmoH OciDeck.',
   'Alleen een titelpagina.': 'pong nav neH.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       '\'anghom vam chIm: jIHDaq ngeHDaq je vay\' \'angbe\'lu\'.',

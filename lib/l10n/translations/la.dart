@@ -1794,6 +1794,14 @@ const _dutchSourceLa = {
 const _dutchSourceAddLa = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Hoc documentum Anglice tantum exstat.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Hic fasciculus hoc loco iam non est.',
+  'Dit bestand is te groot om te openen.':
+      'Hic fasciculus nimis magnus est ut aperiatur.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Haec praesentatio corrupta est aut ex parte tantum servata.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Hic fasciculus textus legibilis non est. OciDeck Markdown aperit.',
   'Alleen een titelpagina.': 'Solum pagina tituli.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Hoc folium vacuum est: nihil ostendit nec in tabula nec in exportatione.',

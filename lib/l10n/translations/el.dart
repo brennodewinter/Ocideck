@@ -1805,6 +1805,14 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Αυτό το έγγραφο υπάρχει μόνο στα αγγλικά.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Αυτό το αρχείο δεν βρίσκεται πλέον σε αυτή τη θέση.',
+  'Dit bestand is te groot om te openen.':
+      'Αυτό το αρχείο είναι πολύ μεγάλο για να ανοίξει.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Αυτή η παρουσίαση είναι κατεστραμμένη ή αποθηκεύτηκε μόνο εν μέρει.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Αυτό το αρχείο δεν είναι αναγνώσιμο κείμενο. Το OciDeck ανοίγει Markdown.',
   'Alleen een titelpagina.': 'Μόνο μια σελίδα τίτλου.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Αυτή η διαφάνεια είναι κενή: δεν εμφανίζει τίποτα στην οθόνη ούτε στην εξαγωγή.',

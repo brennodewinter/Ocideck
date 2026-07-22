@@ -1780,6 +1780,14 @@ const _dutchSourceSl = {
 const _dutchSourceAddSl = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Ta dokument obstaja samo v angleščini.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Te datoteke na tem mestu ni več.',
+  'Dit bestand is te groot om te openen.':
+      'Ta datoteka je prevelika za odpiranje.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Ta predstavitev je poškodovana ali shranjena le delno.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Ta datoteka ni berljivo besedilo. OciDeck odpira Markdown.',
   'Alleen een titelpagina.': 'Samo naslovna stran.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ta diapozitiv je prazen: na zaslonu in v izvozu ne prikaže ničesar.',

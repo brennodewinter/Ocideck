@@ -1795,6 +1795,14 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Acest document există doar în engleză.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Acest fișier nu mai există în această locație.',
+  'Dit bestand is te groot om te openen.':
+      'Acest fișier este prea mare pentru a fi deschis.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Această prezentare este deteriorată sau a fost salvată doar parțial.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Acest fișier nu este text lizibil. OciDeck deschide Markdown.',
   'Alleen een titelpagina.': 'Doar o pagină de titlu.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Acest slide este gol: nu afișează nimic pe ecran și nici în export.',

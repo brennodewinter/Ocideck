@@ -1800,6 +1800,14 @@ const _dutchSourceBg = {
 const _dutchSourceAddBg = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Този документ съществува само на английски.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Този файл вече не е на това място.',
+  'Dit bestand is te groot om te openen.':
+      'Този файл е твърде голям, за да бъде отворен.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Тази презентация е повредена или е запазена само наполовина.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Този файл не е четим текст. OciDeck отваря Markdown.',
   'Alleen een titelpagina.': 'Само заглавна страница.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Този слайд е празен: не показва нищо на екрана, нито в експорта.',
