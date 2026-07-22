@@ -9,6 +9,8 @@ import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../services/finding_context_score.dart';
+import '../../services/privacy/privacy_own_identity.dart';
+import '../../services/privacy/privacy_preview.dart';
 import '../../services/finding_pagination.dart';
 import '../../services/rich_text_layout.dart';
 import '../../services/slide_layout_metrics.dart';
@@ -23,6 +25,16 @@ final previewCollapsedProvider = StateProvider<bool>((_) => false);
 /// Huidige rich-text-pagina (0-gebaseerd) in het preview-paneel; gedeeld met
 /// notitievelden in de editor.
 final richTextPreviewPageProvider = StateProvider<int>((_) => 0);
+
+/// Of de preview de dia toont zoals de zaal en de export hem krijgen, in plaats
+/// van de eigen tekst van de auteur.
+///
+/// **Standaard uit, en dat is de hele opzet.** De auteur moet zijn eigen tekst
+/// kunnen zien om hem te kunnen wijzigen; een preview die zwarte blokken toont
+/// waar zijn zin stond, maakt bewerken onmogelijk. De schakelaar staat er om te
+/// kunnen *controleren*, niet om in te werken — en hij verschijnt alleen op een
+/// dia waar er iets te controleren valt.
+final audiencePreviewProvider = StateProvider<bool>((_) => false);
 
 class PreviewPanel extends ConsumerStatefulWidget {
   const PreviewPanel({super.key});
@@ -156,7 +168,20 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
     final pageCount = isPagedFinding ? findingPageSlides.length : richTextPages;
     final hasRichTextPages = pageCount > 1;
     final previewPage = richTextPage.clamp(0, pageCount - 1);
-    final canvasSlide = isPagedFinding ? findingPageSlides[previewPage] : slide;
+    final sourceSlide = isPagedFinding ? findingPageSlides[previewPage] : slide;
+    // De publieksweergave: dezelfde projectie die presenteren en exporteren
+    // gebruiken, maar op één dia — zie [audiencePreviewSlide] voor waarom niet
+    // op het hele deck.
+    final redacted = slideIsRedacted(deck, slide);
+    final showAudience = redacted && ref.watch(audiencePreviewProvider);
+    final canvasSlide = showAudience
+        ? audiencePreviewSlide(
+            deck,
+            sourceSlide,
+            disabledRules: settings.privacyDisabledRules,
+            ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
+          )
+        : sourceSlide;
 
     return Focus(
       focusNode: _focusNode,
@@ -178,6 +203,9 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                 hasRichTextPages,
               ),
               const Divider(height: 1),
+
+              // ── Redactiemelding ──────────────────────────────────────────────
+              if (redacted) _redactionNotice(l10n, showAudience),
 
               // ── Slide canvas ─────────────────────────────────────────────────
               _slideCanvas(
@@ -296,6 +324,65 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
               color: AppTheme.slate500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// De balk die zegt wat er met deze dia gebeurt bij tonen en exporteren.
+  ///
+  /// Staat er altijd zolang de dia op "weglaten" staat, want dít is de stand die
+  /// tot nu toe nergens te zien was: het label in de editor beloofde het, het
+  /// scherm deed niets, en pas de PDF gaf antwoord. De melding noemt óók dat
+  /// álle media van de dia verdwijnt — dat stond nergens, en het is de duurste
+  /// verrassing van de twee: een dia die in de export ineens leeg is.
+  ///
+  /// De schakelaar ernaast is de controle. Uit toont hij de eigen tekst (anders
+  /// valt er niets meer te bewerken), aan toont hij precies wat de ontvanger
+  /// krijgt.
+  Widget _redactionNotice(AppLocalizations l10n, bool showAudience) {
+    return Container(
+      width: double.infinity,
+      color: AppTheme.warningBg,
+      padding: const EdgeInsets.fromLTRB(12, 6, 8, 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.visibility_off_outlined,
+            size: 15,
+            color: AppTheme.amber700,
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              l10n.d(
+                'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.',
+              ),
+              style: TextStyle(
+                fontSize: 11,
+                height: 1.35,
+                color: AppTheme.slate700,
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          TextButton.icon(
+            onPressed: () =>
+                ref.read(audiencePreviewProvider.notifier).update((on) => !on),
+            icon: Icon(
+              showAudience ? Icons.edit_outlined : Icons.groups_outlined,
+              size: 15,
+            ),
+            label: Text(
+              showAudience ? l10n.d('Mijn tekst') : l10n.d('Wat zij zien'),
+              style: const TextStyle(fontSize: 11),
+            ),
+            style: TextButton.styleFrom(
+              visualDensity: VisualDensity.compact,
+              padding: const EdgeInsets.symmetric(horizontal: 8),
             ),
           ),
         ],
