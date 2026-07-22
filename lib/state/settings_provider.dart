@@ -209,6 +209,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           prefs.getString('cveApiBaseUrl') ?? AppSettings.defaultCveApiBaseUrl,
       aiSettings: ai,
     );
+    _persistedLogoPaths = _referencedLogoPaths;
   }
 
   /// Persisteer een prefs-mutatie. Vangt schrijffouten af en logt ze, zodat een
@@ -875,6 +876,39 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     });
   }
 
+  /// De `logoPath`-waarden die de bewaarde stijlprofielen nu aanhalen.
+  Set<String> get _referencedLogoPaths => {
+    for (final profile in state.themeProfiles)
+      if ((profile.logoPath ?? '').trim().isNotEmpty) profile.logoPath!.trim(),
+  };
+
+  /// De logo's zoals ze in de laatst weggeschreven profielenlijst stonden.
+  ///
+  /// Een eigen veld en niet "de staat van vóór het opslaan": de aanroepers
+  /// werken de staat bij en persisteren daarná, dus op het moment dat
+  /// [_saveProfiles] draait is het verschil al vervlogen.
+  Set<String> _persistedLogoPaths = const {};
+
+  /// Ruim verweesde logo's op zodra de profielenlijst verandert.
+  ///
+  /// Een geïmporteerde stijl legt zijn logo neer in `style_logos/`. Wordt het
+  /// profiel verwijderd of krijgt het een ander logo, dan bleef dat bestand
+  /// staan — soms het bedrijfslogo van een opdrachtgever, blijvend zichtbaar in
+  /// de app-supportmap. Hier wordt precies weggehaald wat er uit de lijst is
+  /// verdwenen; de grove veger bij het opstarten pakt de rest.
+  Future<void> _sweepDroppedLogos() async {
+    final before = _persistedLogoPaths;
+    _persistedLogoPaths = _referencedLogoPaths;
+    final dropped = before.difference(_persistedLogoPaths);
+    if (dropped.isEmpty) return;
+    await _diskTraces.removeStyleLogos(dropped);
+  }
+
+  /// De opstartveger: alles in `style_logos/` dat geen profiel meer aanhaalt en
+  /// oud genoeg is. Vangt wat een oudere versie heeft laten liggen.
+  Future<int> pruneOrphanStyleLogos() =>
+      _diskTraces.pruneOrphanStyleLogos(_referencedLogoPaths);
+
   Future<void> _saveProfiles() async {
     state = state.copyWith(themeProfiles: _uniqueProfiles(state.themeProfiles));
     await _persist('_saveProfiles', (prefs) async {
@@ -891,6 +925,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
         jsonEncode(state.themeProfile.toJson()),
       );
     });
+    await _sweepDroppedLogos();
   }
 
   List<ThemeProfile> _uniqueProfiles(List<ThemeProfile> profiles) {

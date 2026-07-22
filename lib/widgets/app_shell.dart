@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:desktop_drop/desktop_drop.dart';
@@ -175,6 +176,10 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     };
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _maybeRestore();
+      // Logo's van stijlprofielen die er niet meer zijn. Pas hier, want de
+      // veger heeft de geladen profielenlijst nodig om te weten wat er nog wél
+      // wordt aangehaald.
+      unawaited(ref.read(settingsProvider.notifier).pruneOrphanStyleLogos());
       // Open any file the app was launched with, and start listening for files
       // opened from Finder while the app is running.
       _openFileChannel.start();

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/git_settings.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/storage_connection.dart';
 import 'package:ocideck/services/disk_traces.dart';
 import 'package:ocideck/services/git/outbox.dart';
@@ -160,6 +161,10 @@ void main() {
     final used = File('${dir.path}/in-gebruik.png')..writeAsBytesSync([1]);
     final orphan = File('${dir.path}/verweesd.png')..writeAsBytesSync([2]);
 
+    orphan.setLastModifiedSync(
+      DateTime.now().subtract(const Duration(days: 30)),
+    );
+
     final removed = await traces.pruneOrphanStyleLogos([used.path]);
 
     expect(removed, 1);
@@ -250,5 +255,61 @@ void main() {
         );
       },
     );
+  });
+
+  group('stijl-logo\'s', () {
+    late Directory logos;
+
+    setUp(() {
+      logos = Directory('${support.path}/style_logos')..createSync();
+    });
+
+    File logo(String name, {Duration? age}) {
+      final file = File('${logos.path}/$name')..writeAsBytesSync([1, 2, 3]);
+      if (age != null) file.setLastModifiedSync(DateTime.now().subtract(age));
+      return file;
+    }
+
+    test('een vers logo overleeft de veger, ook zonder profiel', () async {
+      final fresh = logo('vers.png');
+      expect(await traces.pruneOrphanStyleLogos(const []), 0);
+      expect(
+        fresh.existsSync(),
+        isTrue,
+        reason: 'een tweede venster kan het net hebben neergezet',
+      );
+    });
+
+    test('een oud, niet-aangehaald logo gaat weg', () async {
+      final old = logo('oud.png', age: const Duration(days: 30));
+      expect(await traces.pruneOrphanStyleLogos(const []), 1);
+      expect(old.existsSync(), isFalse);
+    });
+
+    test('een profiel verwijderen wist zijn logo meteen', () async {
+      final mine = logo('klantlogo.png');
+      final notifier = SettingsNotifier(diskTraces: traces);
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      await notifier.saveThemeProfile(
+        ThemeProfile(name: 'Klant', logoPath: mine.path),
+        previousName: 'Klant',
+      );
+      expect(mine.existsSync(), isTrue);
+
+      await notifier.deleteThemeProfile('Klant');
+
+      expect(
+        mine.existsSync(),
+        isFalse,
+        reason: 'het logo van een opdrachtgever hoort niet te blijven liggen',
+      );
+    });
+
+    test('een pad buiten style_logos blijft van ons af', () async {
+      final elders = File('${support.path}/eigen-map-logo.png')
+        ..writeAsBytesSync([1]);
+      expect(await traces.removeStyleLogos([elders.path]), 0);
+      expect(elders.existsSync(), isTrue);
+    });
   });
 }

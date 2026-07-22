@@ -129,31 +129,76 @@ class DiskTraces {
     return TraceRemoval(removedPaths: removed, removedOutboxKeys: keys);
   }
 
+  /// Gooi precies deze logo's weg — de bestanden waar zojuist het laatste
+  /// stijlprofiel van af is gehaald.
+  ///
+  /// De nauwkeurige helft van het opruimen: de aanroeper wéét welke paden er uit
+  /// zijn lijst zijn verdwenen. Paden buiten `style_logos/` worden genegeerd,
+  /// want een logo kan ook gewoon in de projectmap van de gebruiker liggen en
+  /// dat is niet van ons.
+  Future<int> removeStyleLogos(Iterable<String> paths) async {
+    if (kIsWeb) return 0;
+    final support = await _support();
+    if (support == null) return 0;
+    final root = p.join(support.path, styleLogosDirName);
+    var removed = 0;
+    for (final raw in paths) {
+      final path = p.normalize(raw.trim());
+      if (path.isEmpty || !p.isWithin(root, path)) continue;
+      try {
+        final file = File(path);
+        if (file.existsSync()) {
+          file.deleteSync();
+          removed++;
+        }
+      } catch (e) {
+        logWarning('DiskTraces: logo niet verwijderd', e);
+      }
+    }
+    return removed;
+  }
+
+  /// Hoe lang een niet-aangehaald logo mag blijven liggen voordat de veger hem
+  /// meeneemt.
+  ///
+  /// De veger is de grove helft van het opruimen en draait bij het opstarten,
+  /// met de profielenlijst van dít venster. Draait er een tweede venster dat
+  /// zojuist een stijl heeft geïmporteerd, dan staat dat logo nog niet in de
+  /// lijst die hier binnenkomt. De ondergrens maakt dat onschadelijk: een vers
+  /// bestand blijft altijd staan, hoe de twee vensters ook uit de pas lopen.
+  static const orphanLogoGrace = Duration(days: 7);
+
   /// Gooi logo's weg die bij geen enkel bewaard stijlprofiel meer horen.
   ///
   /// [referenced] zijn de `logoPath`-waarden van de profielen die de gebruiker
-  /// nú heeft. Een profiel verwijderen liet zijn logo achter, en dat kan een
+  /// nú heeft. Een profiel verwijderen liet zijn logo achter, en dat kan het
   /// bedrijfslogo van een opdrachtgever zijn — een bestand dat verraadt voor wie
   /// er gewerkt is, lang nadat de klus voorbij is.
   ///
   /// De vergelijking gaat over paden en niet over namen: twee profielen mogen
   /// dezelfde naam dragen, hun logo's hebben altijd een eigen uuid.
-  Future<int> pruneOrphanStyleLogos(Iterable<String> referenced) async {
+  Future<int> pruneOrphanStyleLogos(
+    Iterable<String> referenced, {
+    Duration? minAge,
+  }) async {
     if (kIsWeb) return 0;
     final support = await _support();
     if (support == null) return 0;
+    final grace = minAge ?? orphanLogoGrace;
     final keep = {
       for (final path in referenced)
         if (path.trim().isNotEmpty) p.normalize(path.trim()),
     };
     final dir = Directory(p.join(support.path, styleLogosDirName));
     if (!dir.existsSync()) return 0;
+    final now = DateTime.now();
     var removed = 0;
     try {
       for (final entry in dir.listSync()) {
         if (entry is! File) continue;
         if (keep.contains(p.normalize(entry.path))) continue;
         try {
+          if (now.difference(entry.statSync().modified) <= grace) continue;
           entry.deleteSync();
           removed++;
         } catch (e) {
