@@ -34,9 +34,22 @@
       img-src AND media-src.
     - connect-src additionally allows https: for the user-initiated URL-import
       (fetching a deck the user pastes a link to). The browser's CORS policy
-      gates every cross-origin read, so a non-cooperating (e.g. internal) host
+      gates every cross-origin READ, so a non-cooperating (e.g. internal) host
       cannot be read through this; keep it https:-only so plaintext hosts stay
       unreachable.
+      Be precise about what that does NOT cover: CORS does not stop a `no-cors`
+      POST. Such a request is sent, the response is merely opaque — so this
+      directive leaves a one-way write channel to any https host. That is an
+      exfiltration path, not a read path, and CORS was never the control for it.
+      It is accepted deliberately, because closing it means removing URL-import
+      on web (a feature the user asked for and initiates), and because reaching
+      it requires script execution in this origin — which `script-src 'self'`
+      plus the absence of 'unsafe-inline'/'unsafe-eval' is what actually
+      prevents. In other words the control here is script-src, not connect-src;
+      connect-src narrows the blast radius if script-src ever fails, and
+      `no-referrer` below keeps the deck's own URL out of the request.
+      Revisit if URL-import ever moves behind a fixed set of hosts: then
+      connect-src can name them instead of allowing https: wholesale.
     - child-src/frame-src allow blob:/data: for the offscreen Mermaid render
       WebView (an iframe on web).
     - base-uri is 'self' (NOT 'none') because Flutter relies on <base href>.
