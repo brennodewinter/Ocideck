@@ -37,9 +37,14 @@ machine (desktop) or in your browser tab (web). This includes:
   protected store: anything with access to that browser profile can read it.
   It holds your own document, never a password or token — those are refused
   outright in the browser (see *Secrets are stored in your OS keychain*). The
-  entry is overwritten as you work, but it is **not** removed after a
-  successful push: the last state of a deck stays in that storage until you
-  clear the site's data in your browser.
+  entry is removed as soon as the work is confirmed on the forge, so what stays
+  behind is only what has not been pushed yet. Two deliberate exceptions, both
+  on the side of not losing your work: if the push fails, conflicts, or you are
+  offline, the entry stays; and if you saved again while the push was running,
+  the newer version stays too, because that version has not landed. On the
+  desktop the equivalent is a real git clone in a per-user application-support
+  folder — that one keeps its files, because it is what the editor reads the
+  deck from and it carries the history.
 - **Staged media.** A deck you have not saved yet has no project folder to keep
   its images in, so an image you insert is copied into a per-session folder under
   your operating system's temporary directory. That is what keeps the picture
