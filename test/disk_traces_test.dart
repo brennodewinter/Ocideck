@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart' show TlpLevel;
-import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/storage_connection.dart';
 import 'package:ocideck/services/disk_traces.dart';
