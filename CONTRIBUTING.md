@@ -94,13 +94,23 @@ Targeted test groups for focused work:
 - **Localization is enforced.** UI strings go through `context.l10n.d('Nederlandse
   brontekst')`. The test `test/app_localizations_test.dart` fails if a literal
   `.d('…')` string lacks a translation in **every** supported language (Dutch is
-  the source; all 30 other languages need an entry). Rather than hand-editing 30
+  the source; all 31 other languages need an entry). Rather than hand-editing 31
   files, write the translations into a small JSON spec and run
   `make add-l10n SPEC=…` — it inserts them into each language's additions overlay,
   `dart format`s the result, skips anything already present, and whitelists any
   `"unchanged"` loanwords (see `tool/add_l10n.dart` for the format). Validate with
   `make l10n-check`. A loanword kept identical in every language (e.g. `Heatmap`)
   goes in the spec's `unchanged` list instead of being translated.
+
+  **If you are not the maintainer, you are not expected to produce 31
+  translations.** The list includes Maltese, Irish, Frisian, Papiamento, Latin
+  and Klingon; nobody has all of those. **Supply Dutch and English, leave the
+  other 30 blank, and say so in the pull request — the maintainer fills them in
+  before merge.** The gate is non-negotiable about the *end state*, not about
+  who does which part of it. *(Added 2026-07-22: this was the single rule most
+  likely to turn a first contribution into a last one, because a contributor met
+  it as a failing build rather than as a stated division of labour. The count
+  "30 other languages" was also stale since the 32nd language landed.)*
 - **Comment language: Dutch or English, but never both in one comment.** The
   codebase is bilingual and stays that way. Measured over `lib/` (2026-07-22):
   of the ~3,100 comment blocks of three lines or more, 71% are Dutch, 28% are
@@ -111,9 +121,19 @@ Targeted test groups for focused work:
     reasoning, the commit messages and the design documents are Dutch, and a
     *why* is easier to write well in the language you think in.
   - English is equally acceptable, and is the natural choice where the
-    surrounding vocabulary is English anyway: API doc comments on a public type,
-    a reference to a spec or standard, a file whose comments are already
-    English.
+    surrounding vocabulary is English anyway: a reference to a spec or standard,
+    a file whose comments are already English.
+  - **New public types in `lib/models/` and `lib/services/` get English
+    dartdoc.** That is the layer `dart doc`, pub.dev and the IDE hover show —
+    the only part of this codebase an outsider reads without reading the code.
+    The rule is deliberately about *new* types and those two directories.
+    Measured on 2026-07-22, 278 of the 484 documented public types across
+    `lib/` lean Dutch, and translating them is explicitly forbidden by the rule
+    below; a clause claiming otherwise would describe an intention rather than a
+    practice. *(Corrected 2026-07-22: this said English was "the natural choice"
+    for "API doc comments on a public type", which read as a rule the tree does
+    not follow. No automated ceiling enforces the new rule yet — a language
+    heuristic that is wrong 5% of the time is a worse gate than none.)*
   - **Do not rewrite existing comments only to change their language.** That is
     thousands of lines of pure noise, it changes no behaviour, and it puts your
     name on every line of `git blame` for reasoning somebody else worked out.

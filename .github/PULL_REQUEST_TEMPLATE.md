@@ -18,6 +18,8 @@
 - [ ] New UI strings go through `context.l10n.d('…')` **and** are translated in
       every supported language. Use `make add-l10n SPEC=…`; the authoritative
       set is `AppLocalizations.languageNames`, not a list written down here.
+      **Not the maintainer?** Supply Dutch and English, leave the other 30
+      blank, and say so below — the maintainer fills them in before merge.
 - [ ] If I changed how anything is stored, I updated
       [`docs/FILE_FORMAT.md`](../docs/FILE_FORMAT.md).
 - [ ] Docs updated where relevant (README / docs/).

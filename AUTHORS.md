@@ -13,6 +13,15 @@ including an external biography this project does not control, while the legal
 entity that carries the liability stayed vague. That asymmetry invited people to
 knock on the wrong door.)*
 
+Copyright in the foundation's own contributions is held by Stichting
+LibreKAT; contributors retain copyright in theirs, licensed under EUPL-1.2.
+*(Corrected 2026-07-22: this said copyright "is held by Stichting LibreKAT"
+without qualification, which is true today only because every commit so far
+has one author, and would become false the moment a first outside pull request
+landed. There is no CLA and no sign-off requirement, so the foundation has no
+instrument that would make the unqualified sentence true — see the open issue
+on adopting a DCO.)*
+
 The name is a wink: *Oci* comes from the **Ocicats** (Brenno's cats) and *Deck*
 is short for a presentation deck.
 
@@ -20,6 +29,29 @@ is short for a presentation deck.
 
 Thanks to everyone who has contributed code, translations, documentation, bug
 reports, and ideas. (Add yourself here in your first pull request.)
+
+### About the machine
+
+**Roughly two thirds of the commits in this repository have an AI co-author.**
+On 2026-07-22: 1,485 of 2,208 commits (67%) carry a `Co-Authored-By:` trailer
+naming Claude. For `lib/l10n/translations/` it is 289 of 314. You can check it
+yourself:
+
+```sh
+git log --format=%B | grep -ci "co-authored-by:.*claude"
+```
+
+`git log --format=%an` shows exactly one human author, and that is the point
+worth being precise about: **one named person reviewed and merged every one of
+those commits and is accountable for the result.** The trailer records who
+helped write a change, not who is answerable for it. What stood in for peer
+review — and where it falls short of four eyes — is set out under *Who reviews
+this, and who does not* in [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+This is written down because the trailer is in the public history and anyone can
+count it on their first day. A project that documents its own drift with dated
+correction notes throughout would be judged harshly for the one number it left
+implicit. *(Added 2026-07-22.)*
 
 ---
 
