@@ -35,6 +35,11 @@ class _PreviewScaffold extends StatelessWidget {
   /// Boven- en ondermarge vóór de logo-correctie.
   final double verticalPadding;
 
+  /// De vlakvulling. Standaard wit: de rapportageslides houden dat aan
+  /// ongeacht het thema, omdat ze als document gelezen worden. De previews die
+  /// wél de themakleur volgen geven hem hier mee.
+  final Color background;
+
   /// De inhoud van de kolom. De kolom zelf — links uitgelijnd, hoogte naar de
   /// inhoud — hoort bij de stellage, want daarop rekent de `FittedBox`.
   final List<Widget> children;
@@ -46,6 +51,7 @@ class _PreviewScaffold extends StatelessWidget {
     required this.horizontalPadding,
     required this.verticalPadding,
     required this.children,
+    this.background = Colors.white,
   });
 
   @override
@@ -55,7 +61,7 @@ class _PreviewScaffold extends StatelessWidget {
         : EdgeInsets.zero;
 
     return Container(
-      color: Colors.white,
+      color: background,
       child: SizedBox.expand(
         child: FittedBox(
           fit: BoxFit.scaleDown,
