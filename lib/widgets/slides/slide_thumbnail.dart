@@ -385,6 +385,12 @@ class SlideThumbnail extends ConsumerWidget {
                     slide: slide,
                     projectPath: projectPath,
                     themeProfile: themeProfile,
+                    // Een thumbnail is ~180 px breed; op ware grootte
+                    // decoderen kost per telefoonfoto bijna 49 MiB, en tien
+                    // zichtbare stroken met verschillende foto's zijn een halve
+                    // gigabyte aan levende bitmaps (#612). 512 houdt hem scherp
+                    // op een hidpi-scherm en kost een dertigste.
+                    decodeMaxEdge: 512,
                     cockpitColorScheme: ref.watch(
                       settingsProvider.select((s) => s.cockpitColorScheme),
                     ),
