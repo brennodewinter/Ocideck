@@ -792,6 +792,15 @@ are not the same kind of file, and each has its own right answer (§14, D7).
   sidecar uses would make every edit a same-line collision, and the sentence
   above would be false. Live since #541.
 
+  **A note belongs to the slide as it was.** The codec anchors on a content
+  fingerprint, so if the other side *rewrote* the slide your note sits on, your
+  note has nothing left to attach to and falls away — and on a real conflict,
+  where one side's slide wins, the losing side's note on that slide goes with
+  it. That is the codec's rule everywhere, not something the merge invents, and
+  D7 only ever promised something about notes on *different* slides. But in a
+  shared repository it is now destructive rather than local, so it is written
+  down here instead of being rediscovered.
+
   Not yet done: OciDeck does not *resolve* such a conflict in-app. Git leaves
   conflict markers, which are not valid JSON, so a conflicted file fails to
   decode and the deck opens without its notes rather than with mangled ones —

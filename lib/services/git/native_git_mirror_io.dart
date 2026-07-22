@@ -393,6 +393,7 @@ class _NativeGitMirror implements NativeGitMirror {
       Uint8List? base,
       Uint8List? ours,
       Uint8List? theirs,
+      MergeSideReader read,
     )
     resolve,
   }) async {
@@ -430,10 +431,18 @@ class _NativeGitMirror implements NativeGitMirror {
       );
     }
 
+    // De drie refs één keer vastleggen, zodat de lezer die de aanroeper
+    // meekrijgt naar exact dezelfde kanten wijst als de drie bytes hierboven.
+    final refOf = {
+      MergeSide.base: base,
+      MergeSide.ours: 'HEAD',
+      MergeSide.theirs: remote,
+    };
     final resolved = await resolve(
       await _showAtRef(base, deckFile),
       await _showAtRef('HEAD', deckFile),
       await _showAtRef(remote, deckFile),
+      (side, path) => _showAtRef(refOf[side]!, path),
     );
 
     // Laat git de rest van de boom samenvoegen — de pool-blobs zijn

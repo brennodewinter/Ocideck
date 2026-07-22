@@ -220,34 +220,27 @@ extension TabsNotifierGitNative on TabsNotifier {
       deckDir: deckDir,
       deckFile: deckFile,
       message: message,
-      resolve: (baseBytes, ourBytes, theirBytes) async {
-        // Komen we er niet uit, dan blijft ónze kant staan zoals hij was: een
-        // lege set zou de deckmap wissen, en dat is precies wat nooit mag.
-        final fallback = <String, Uint8List>{deckFile: ?ourBytes};
-        final base = gated(baseBytes);
-        final ours = gated(ourBytes);
-        final theirs = gated(theirBytes);
-        if (base == null || ours == null || theirs == null) {
-          return (files: fallback, clean: false);
-        }
-
-        final merge = mergeDeckVersions(base, ours, theirs);
-        mergedDeck = merge.merged;
-        conflicts = merge.conflicts;
+      resolve: (baseBytes, ourBytes, theirBytes, read) async {
         final image = ImageService();
-        final built = await buildDeckRepoFiles(
-          merge.merged,
-          md: _md,
-          pool: null, // native: git ontdubbelt zelf
+        final outcome = await resolveRepoDeckMerge(
           deckDir: deckDir,
+          deckFile: deckFile,
+          baseBytes: baseBytes,
+          ourBytes: ourBytes,
+          theirBytes: theirBytes,
+          read: read,
+          gate: gated,
+          md: _md,
           resolveBytes: (path) async => WebAssetStore.isMemPath(path)
               ? WebAssetStore.bytesFor(path)
               : image.readSlideImageBytes(
                   path,
-                  projectPath: merge.merged.projectPath,
+                  projectPath: tab?.deckNotifier.currentState.deck?.projectPath,
                 ),
         );
-        return (files: built.upserts, clean: merge.isClean);
+        mergedDeck = outcome.merge?.merged;
+        conflicts = outcome.merge?.conflicts ?? const [];
+        return (files: outcome.files, clean: outcome.clean);
       },
     );
 

@@ -3,6 +3,26 @@ import 'dart:typed_data';
 import 'deck_mirror.dart';
 import 'deck_search.dart';
 
+/// Welke van de drie kanten van een driewegs-merge bedoeld is.
+enum MergeSide {
+  /// De gemeenschappelijke voorouder.
+  base,
+
+  /// Onze lokale historie (`HEAD`).
+  ours,
+
+  /// Wat er op de forge staat (`origin/<branch>`).
+  theirs,
+}
+
+/// Leest een bestand uit de deckmap zoals het op [side] stond.
+///
+/// Bestaat omdat een deckmap meer bevat dan `deck.md` — de notities, en straks
+/// de tekenlaag — en die lagen per kant gelezen moeten kunnen worden vóór er
+/// iets samen te voegen valt. Null wanneer het bestand op die kant niet bestond.
+typedef MergeSideReader =
+    Future<Uint8List?> Function(MergeSide side, String path);
+
 /// Hoe een native commit + push afliep (§8.2).
 enum GitCommitOutcome {
   /// Gecommit én op de forge geland.
@@ -100,6 +120,13 @@ abstract class NativeGitMirror implements DeckMirror {
   /// staat, en geeft terug wat de deckmap moet worden. Zo blijft het samenvoegen
   /// van slides waar het thuishoort en weet dit bestand niets van decks.
   ///
+  /// Naast die drie bytes krijgt [resolve] een [MergeSideReader], want een deck
+  /// is meer dan zijn `deck.md`: de notities staan in een eigen bestand naast
+  /// de markdown, en zonder een manier om díé per kant te lezen zou de
+  /// aanroeper drie decks samenvoegen die alle drie leeg lijken — en het
+  /// resultaat overschrijft dan de deckmap. Wat de aanroeper niét teruggeeft,
+  /// bestaat na afloop niet meer.
+  ///
   /// `clean: false` betekent dat de aanroeper er niet uitkwam: de merge-commit
   /// wordt dan wél lokaal gemaakt — anders blijft de branch uiteenlopen en botst
   /// de volgende poging opnieuw — maar niet gepusht.
@@ -112,6 +139,7 @@ abstract class NativeGitMirror implements DeckMirror {
       Uint8List? base,
       Uint8List? ours,
       Uint8List? theirs,
+      MergeSideReader read,
     )
     resolve,
   });

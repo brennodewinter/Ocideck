@@ -14,6 +14,8 @@ import '../user_notes_codec.dart';
 import '../slide_image_refs.dart';
 import '../web_asset_store.dart';
 import 'asset_pool.dart';
+import 'deck_merge.dart';
+import 'native_git_mirror_api.dart';
 
 /// Standaardnaam van het markdown-bestand binnen een deckmap (§6). Gespiegeld in
 /// `TabsNotifierGit.deckFileName`; hier apart zodat de serializer los te testen
@@ -462,7 +464,7 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
   );
   if (notes != null) {
     upserts[notesPath] = Uint8List.fromList(utf8.encode(notes));
-  } else if (await _userNotesMayBeDeleted(notesPath, read)) {
+  } else if (await userNotesMayBeDeleted(notesPath, read)) {
     deletes.add(notesPath);
   }
 
@@ -483,7 +485,8 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
   );
 }
 
-/// Of het notitiebestand op [path] weg mag nu dit deck geen notities draagt.
+/// Of het notitiebestand op [path] weg mag nu het deck dat ernaar wijst geen
+/// notities draagt.
 ///
 /// De regel is opzettelijk streng, en de reden is asymmetrie. Ten onrechte
 /// laten staan kost een verweesd bestand dat bij de volgende opslag mét
@@ -496,7 +499,7 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
 /// OciDeck) of een hogere `version` — dan blijft het staan. Zelfde contract als
 /// `_sidecarUntouchable` op schijf, en hier strenger toegepast omdat een repo
 /// gedeeld is.
-Future<bool> _userNotesMayBeDeleted(String path, RepoFileReader? read) async {
+Future<bool> userNotesMayBeDeleted(String path, RepoFileReader? read) async {
   if (read == null) return false;
   Uint8List? bytes;
   try {
@@ -519,6 +522,11 @@ Future<bool> _userNotesMayBeDeleted(String path, RepoFileReader? read) async {
   // het hier uitgeschreven staat in plaats van omgekeerd hergebruikt.
   try {
     final data = jsonDecode(utf8.decode(bytes));
+    // Geldige JSON is nog geen sidecar. `declaredSidecarVersion` valt bij alles
+    // wat geen map is terug op versie 1 — een top-level array zou dus
+    // "verwijderbaar" heten. Sinds FILE_FORMAT §6.3.1 uitnodigt dit bestand
+    // vanuit een ander werktuig te schrijven, is dat geen theorie meer.
+    if (data is! Map) return false;
     return declaredSidecarVersion(data) <= UserNotesCodec.version;
   } on FormatException catch (e) {
     logWarning(
@@ -571,4 +579,81 @@ Map<String, Uint8List> mirrorDeckFiles(
       null => null,
     },
   };
+}
+
+/// Los één native merge van een deckmap op: de drie kanten samenvoegen, mét de
+/// lagen die naast hun `deck.md` staan, en er de nieuwe deckmap van maken.
+///
+/// Dit is de hele opdracht die `NativeGitMirror.mergeRemote` aan zijn aanroeper
+/// geeft, en hij hoort hier omdat elke regel erin over opslag gaat: welke lagen
+/// een kant draagt, wat er overblijft als het niet lukt, en wat de deckmap
+/// wordt. De state-laag levert alleen wat zij als enige weet — de importpoort
+/// ([gate]) en waar afbeeldingsbytes vandaan komen.
+///
+/// **Wat er niet in [RepoMergeOutcome.files] staat, bestaat na afloop niet
+/// meer**: de deckmap wordt vervangen, niet bijgewerkt. Daarom hydrateert dit
+/// elke kant eerst met zijn notities — zonder dat lijken alle drie de decks
+/// notitieloos, komt er geen notitiebestand uit, en verdwijnt het uit de
+/// merge-commit. Twee auteurs met notities op verschillende dia's zijn dan
+/// beiden alles kwijt, op precies het pad dat de app kiest zodra git
+/// geïnstalleerd is.
+///
+/// [merge] is null wanneer een van de drie kanten niet door de poort kwam; dan
+/// draagt [RepoMergeOutcome.files] ónze kant ongewijzigd.
+typedef RepoMergeOutcome = ({
+  Map<String, Uint8List> files,
+  bool clean,
+  DeckMergeResult? merge,
+});
+
+Future<RepoMergeOutcome> resolveRepoDeckMerge({
+  required String deckDir,
+  required String deckFile,
+  required Uint8List? baseBytes,
+  required Uint8List? ourBytes,
+  required Uint8List? theirBytes,
+  required Future<Uint8List?> Function(MergeSide side, String path) read,
+  required Deck? Function(Uint8List? bytes) gate,
+  required MarkdownService md,
+  required AssetByteResolver resolveBytes,
+}) async {
+  Future<Deck> withNotes(Deck deck, MergeSide side) async =>
+      (await withRepoUserNotes(
+        deck,
+        deckDir: deckDir,
+        read: (path) => read(side, path),
+      )).deck;
+
+  final base = gate(baseBytes);
+  final ours = gate(ourBytes);
+  final theirs = gate(theirBytes);
+  if (base == null || ours == null || theirs == null) {
+    // Onze kant ongewijzigd — en dat is méér dan `deck.md`. De grafiekdata
+    // ontbreekt hier nog; dat vraagt een wijziging aan wat `mergeRemote` belooft
+    // over bestanden die de resolver niet noemt (issue #670), en die fout stond
+    // er vóór de notities al.
+    final notesPath = p.posix.join(deckDir, userNotesRepoFileName);
+    return (
+      files: <String, Uint8List>{
+        deckFile: ?ourBytes,
+        notesPath: ?await read(MergeSide.ours, notesPath),
+      },
+      clean: false,
+      merge: null,
+    );
+  }
+
+  final merge = mergeDeckVersions(
+    await withNotes(base, MergeSide.base),
+    await withNotes(ours, MergeSide.ours),
+    await withNotes(theirs, MergeSide.theirs),
+  );
+  final built = await buildDeckRepoFiles(
+    merge.merged,
+    md: md,
+    pool: null, // native: git ontdubbelt zelf op inhoud
+    deckDir: deckDir,
+    resolveBytes: resolveBytes,
+  );
+  return (files: built.upserts, clean: merge.isClean, merge: merge);
 }
