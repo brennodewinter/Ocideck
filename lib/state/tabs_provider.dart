@@ -620,6 +620,20 @@ class TabsNotifier extends StateNotifier<TabsState> {
   }) {
     final findings = MarkdownSafetyScanner.scan(raw);
     if (findings.isNotEmpty) {
+      // Ook vastleggen, niet alleen tonen. De twee andere poorten op deze
+      // scanner (`FileService.openDeck` en `openDeckFromContent`) loggen hun
+      // weigering wél; deze deed dat niet, terwijl het juist de weg is waarlangs
+      // een deck van buiten binnenkomt. Een alarm dat de gebruiker wegklikt,
+      // laat niets na — en "dit deck tripte de poort" is precies wat je
+      // achteraf wilt kunnen navertellen bij een gereedschap dat verzegelde
+      // rapporten uitgeeft. Alleen de soort en de telling: de bevinding zelf
+      // draagt deckinhoud, en die hoort niet in een log.
+      logWarning(
+        'TabsProvider: geopend deck geweigerd — uitvoerbare inhoud '
+        '(${findings.length} bevinding(en): '
+        '${findings.map((f) => f.kind.name).toSet().join(', ')})',
+        sourceName,
+      );
       if (mounted) {
         _ref.read(importSecurityAlarmProvider.notifier).state =
             ImportSecurityAlarm(path: sourceName, findings: findings);

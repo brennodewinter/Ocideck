@@ -168,6 +168,14 @@ class ExportService {
     // weigering wordt er niets gebouwd of weggeschreven.
     final decision = enforcementPolicy.evaluate(tlp);
     if (!decision.allowed) {
+      // Vastleggen dat de poort dichtging. Dit is het chokepoint waar élk
+      // exportpad langskomt, dus dit is óók de enige plek waar te zien is dat
+      // een uitgave op de classificatie is tegengehouden. Alleen het niveau —
+      // de reden is een gebruikersmelding en de deckinhoud hoort niet in een
+      // log.
+      logWarning(
+        'ExportService: export geweigerd op classificatie (TLP: ${tlp.name})',
+      );
       return ExportResult.fail(decision.reason!);
     }
     // Privacy-gate. Op hetzelfde chokepoint als de classificatie-gate, en om
