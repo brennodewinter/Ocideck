@@ -19,6 +19,23 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   en meer zodra dat nodig is om ze uit elkaar te houden. Bestaande bestanden
   blijven gewoon leesbaar; het bewijs zat altijd al in de volledige waarde
   ernaast, niet in het kenmerk.
+- **De hostinggids stelt nu voorwaarden in plaats van aanbevelingen.** Wie de
+  webversie publiek zet, vindt in `docs/HOSTING.md` een blok release-voorwaarden:
+  de beveiligingsheaders als échte HTTP-header, en — als u het optionele
+  fetch-hulppunt inzet — binden op `127.0.0.1`, een origin-lijst plus
+  authenticatie zodra het verder reikt dan strikt same-origin, en verlaagde
+  plafonds wanneer u het bewust als open fetcher draait.
+
+  Aanleiding is dat de standaardcontrole van dat hulppunt (`Sec-Fetch-Site:
+  same-origin`) wel elke andere *website* buiten de deur houdt, maar geen `curl`.
+  Dat is met een header niet op te lossen en stond al eerlijk in de code; het
+  stond alleen nergens waar een beheerder erlangs moet. De SSRF-grens zelf
+  verandert niet — interne adressen bleven en blijven onbereikbaar.
+
+  In de instellingentabel van `server/fetch-proxy/README.md` stond bovendien dat
+  een lege `OCIDECK_PROXY_ALLOWED_ORIGINS` "geen check" betekende. Dat was het
+  omgekeerde van wat de code doet: leeg betekent juist de striktste stand.
+  Rechtgezet, samen met drie instellingen die er helemaal niet in stonden.
 - **Het tijdstempelverzoek draagt nu een nonce.** Vraagt u een RFC 3161-stempel
   aan, dan zit er voortaan een willekeurig getal in het `.tsq`-bestand dat de
   tijdstempeldienst in het token moet herhalen. Daarmee is aan te tonen dát het
