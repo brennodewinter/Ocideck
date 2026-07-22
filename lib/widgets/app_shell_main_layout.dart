@@ -407,11 +407,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           onPressed: _toggleMarkdownMode,
         ),
       ),
+      // Uitgeschakeld zolang er een opslag loopt: de knop deed er tot nu toe
+      // niets aan af dat een tweede poging stil werd genegeerd, en zag er dus
+      // uit alsof er niets gebeurde.
       Tooltip(
         message: l10n.t('saveShortcut'),
         child: IconButton(
           icon: const Icon(Icons.save_outlined, size: 18),
-          onPressed: _saveDeck,
+          onPressed: ref.watch(saveProgressProvider) == null ? _saveDeck : null,
         ),
       ),
       const _ActionsDivider(),
