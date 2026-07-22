@@ -175,7 +175,15 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
 
   Future<void> _exportTsq(Deck deck) async {
     final l10n = context.l10n;
-    final tsq = buildTimeStampRequestForSealHash(deck.sealHash);
+    // Een verse nonce per verzoek: zo bindt het token dat terugkomt zich aan
+    // dít verzoek en niet aan een willekeurig eerder verzoek voor dezelfde
+    // hash. OciDeck kan die echo bij het importeren niet zelf nakijken — het
+    // deck bewaart het verzoek niet — maar wie beide bestanden heeft wél, en
+    // zonder nonce in het verzoek valt er überhaupt niets te binden.
+    final tsq = buildTimeStampRequestForSealHash(
+      deck.sealHash,
+      nonce: newTimeStampNonce(),
+    );
     if (tsq == null) {
       // Een zegel dat geen SHA-512 is, is geen zegel. Eerder werd de hash
       // half ingelezen en alsnog een verzoek geëxporteerd — dan laat je een
