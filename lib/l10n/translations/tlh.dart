@@ -1754,6 +1754,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Afbeelding niet ingesloten': 'mIllogh chelbe\'lu\'',
   'Dit diagram kon niet worden getekend': 'De\'wI\'ghomvam ghItlhlaHbe\'.',
   'Brontekst van het diagram': 'De\'wI\'ghom mung mu\'ghom',
   'esc': 'esc',

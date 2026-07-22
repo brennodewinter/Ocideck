@@ -685,6 +685,7 @@ void main() {}
   });
 
   group('rapportagedia\'s in de HTML-export', _reportingTests);
+  group('afbeeldingen insluiten', _imageEmbedTests);
 }
 
 // ── Rapportagedia's ────────────────────────────────────────────────────────
@@ -869,5 +870,94 @@ void _reportingTests() {
     expect(html, contains('.slide .rep-title'));
     expect(html, contains('.slide .sc-card'));
     expect(html, contains('.slide .fs-bar'));
+  });
+}
+
+// ── Afbeeldingen insluiten ─────────────────────────────────────────────────
+//
+// "Self-contained" was niet waar voor een deck met beeld: de export droeg de
+// paden van de auteur, en de ontvanger kreeg kapotte pictogrammen.
+
+void _imageEmbedTests() {
+  test('elke afbeelding gaat één keer mee, ook op tien dia\'s', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    const md =
+        '# A\n\n![bg](images/achtergrond.png)\n\n---\n\n'
+        '# B\n\n![bg](images/achtergrond.png)\n\n'
+        '![Bewijs](images/bewijs.jpg)\n';
+    final resolved = <String>[];
+    final html = await service.build(
+      md,
+      embedImage: (source) async {
+        resolved.add(source);
+        return 'data:image/jpeg;base64,AAA${resolved.length}';
+      },
+    );
+
+    // Geen enkel bronpad blijft over: dat is wat "self-contained" betekent.
+    expect(html, isNot(contains('images/achtergrond.png')));
+    expect(html, isNot(contains('images/bewijs.jpg')));
+    // Twee bronnen, twee keer gelezen en twee keer ingesloten — niet drie. Een
+    // achtergrond op veertig dia\'s mag het bestand niet veertig keer zo groot
+    // maken, en hem veertig keer van schijf lezen is even zinloos.
+    expect(resolved, hasLength(2));
+    expect(html, contains('#ocideck-img-0'));
+    expect(html, contains('#ocideck-img-1'));
+    expect(html, isNot(contains('#ocideck-img-2')));
+    expect('data:image/jpeg;base64,AAA'.allMatches(html).length, 2);
+    // De alt-tekst blijft staan; die is het toegankelijkheidsanker.
+    expect(html, contains('![Bewijs]'));
+  });
+
+  test('een afbeelding die niet mee kan, wordt een zichtbare melding', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    final html = await service.build(
+      '# A\n\n![Foto](images/weg.png)\n',
+      embedImage: (source) async => null,
+    );
+
+    // Zichtbaar, want een stille lege plek ziet de ontvanger over het hoofd.
+    expect(html, contains('image-missing'));
+    expect(html, contains('Afbeelding niet ingesloten'));
+    // En het pad van de auteur blijft eruit: dat is zijn mappenstructuur, niet
+    // iets wat de ontvanger hoeft te kennen.
+    expect(html, isNot(contains('images/weg.png')));
+    expect(html, contains('.slide .image-missing{'));
+  });
+
+  test('zonder insluiter blijft de markdown zoals hij was', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    final html = await service.build('# A\n\n![Foto](images/foto.png)\n');
+
+    expect(html, contains('images/foto.png'));
+    expect(html, contains('var OCIDECK_IMG=[]'));
+  });
+
+  test('een bron die al een data:-URI is blijft onaangeroerd', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    var calls = 0;
+    final html = await service.build(
+      '# A\n\n![Al ingesloten](data:image/gif;base64,R0lGOD)\n',
+      embedImage: (source) async {
+        calls++;
+        return 'data:image/png;base64,ZZZ';
+      },
+    );
+
+    expect(calls, 0);
+    expect(html, contains('data:image/gif;base64,R0lGOD'));
+  });
+
+  test('de plaatshouder wordt alleen door onze eigen lijst ingevuld', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    final html = await service.build(
+      '# A\n\n![X](images/x.png)\n',
+      embedImage: (source) async => 'data:image/png;base64,ZZZ',
+    );
+
+    // De index komt uit het document en is dus onbetrouwbaar: het renderscript
+    // zet alleen een waarde die echt een data:image/-URI uit OCIDECK_IMG is.
+    expect(html, contains("uri.indexOf('data:image/')===0"));
+    expect(html, contains('OCIDECK_IMG'));
   });
 }

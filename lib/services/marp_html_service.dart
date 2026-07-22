@@ -31,6 +31,16 @@ part 'parts/marp_html_service_reporting.dart';
 part 'parts/marp_html_service_reporting_miauw.dart';
 part 'parts/marp_html_service_reporting_css.dart';
 
+/// Maakt van een afbeeldingsverwijzing uit een deck een `data:`-URI, of geeft
+/// null wanneer de afbeelding niet in te sluiten is (niet gevonden, buiten de
+/// projectmap, of niet te decoderen).
+///
+/// Geïnjecteerd in plaats van hier uitgevoerd: het lezen van een bestand en het
+/// hercoderen van beeld horen niet in een service die ook op web moet draaien,
+/// en de projectbegrenzing die een deck ervan weerhoudt willekeurige bestanden
+/// mee te exporteren, hoort bij de laag die het bestandssysteem kent.
+typedef HtmlImageResolver = Future<String?> Function(String source);
+
 /// Builds a single, self-contained HTML file from a deck's Marp Markdown.
 ///
 /// The output embeds (inlines) `marked` for Markdown, `highlight.js` for code,
@@ -78,12 +88,17 @@ class MarpHtmlService {
 
   /// Builds the HTML. When [theme] is given, the slides take that profile's
   /// colours and font so the export matches the in-app / PDF look.
+  ///
+  /// [embedImage] maakt van een afbeeldingsverwijzing een `data:`-URI. Zonder
+  /// deze functie blijven de paden staan zoals ze in de markdown stonden, en
+  /// dan is de uitvoer géén self-contained document — zie [_embedImages].
   Future<String> build(
     String deckMarkdown, {
     ThemeProfile? theme,
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     ExportDocumentMetadata? metadata,
     String fallbackTitle = 'Presentatie',
+    HtmlImageResolver? embedImage,
   }) async {
     // De zes bundel-assets en de themed CSS zijn onafhankelijk; sequentieel
     // wachten stapelde hun laadtijden op.
@@ -115,9 +130,10 @@ class MarpHtmlService {
       List<int>.generate(16, (_) => rng.nextInt(256)),
     );
 
-    final signature = signatureFields(deckMarkdown);
+    final embedded = await _embedImages(deckMarkdown, embedImage);
+    final signature = signatureFields(embedded.markdown);
     final sections = StringBuffer();
-    for (final slide in marpSlides(deckMarkdown)) {
+    for (final slide in marpSlides(embedded.markdown)) {
       final renderedBlocks = renderCockpitBlocks(
         renderSignOffBlock(
           renderTimelineBlocks(
@@ -188,8 +204,77 @@ class MarpHtmlService {
         '</head><body>'
         '$banner'
         '$sections'
-        '${inline(_renderScript())}'
+        '${inline(_renderScript(embedded.dataUris))}'
         '</body></html>';
+  }
+
+  // ── Afbeeldingen → data:-URI ──────────────────────────────────────────────
+
+  /// Een afbeeldingsverwijzing (`![alt](hier)`), zoals de serialiser hem
+  /// schrijft. Geen haakjes of regeleindes in het pad — dat is ook wat Markdown
+  /// zelf toestaat zonder aanhalingstekens.
+  static final RegExp _imageRef = RegExp(r'!\[([^\]]*)\]\(([^)\n]+)\)');
+
+  /// De plaatshouder die in de markdown komt te staan in plaats van het pad.
+  ///
+  /// Een fragment (`#…`) en geen `data:`-URI ter plekke, om één reden: dedupe.
+  /// Een achtergrondafbeelding die op veertig dia's staat, zou anders veertig
+  /// keer als base64 in het bestand belanden. Nu staat elke afbeelding precies
+  /// één keer in het document en dragen de dia's er een verwijzing naar.
+  ///
+  /// Een fragment overleeft bovendien DOMPurify ongeschonden — een eigen
+  /// URI-schema zou eruit gefilterd worden.
+  static const _imagePlaceholder = '#ocideck-img-';
+
+  /// Vervangt elke afbeeldingsverwijzing in [markdown] door een plaatshouder, en
+  /// levert de bijbehorende `data:`-URI's.
+  ///
+  /// Dit is wat "self-contained" waarmaakt. De README belooft een offline
+  /// HTML-deck; zonder deze stap wees elke `![…](images/foto.png)` naar een
+  /// bestand dat de ontvanger niet heeft, en kreeg hij een rij kapotte
+  /// afbeeldingspictogrammen met de bestandsnamen van de auteur eronder.
+  ///
+  /// Zonder [resolve] blijft alles staan zoals het stond — dat pad bestaat voor
+  /// tests en voor aanroepers zonder toegang tot een bestandssysteem.
+  Future<({String markdown, List<String> dataUris})> _embedImages(
+    String markdown,
+    HtmlImageResolver? resolve,
+  ) async {
+    const unchanged = <String>[];
+    if (resolve == null) return (markdown: markdown, dataUris: unchanged);
+    final sources = {
+      for (final m in _imageRef.allMatches(markdown)) m.group(2)!.trim(),
+    };
+    if (sources.isEmpty) return (markdown: markdown, dataUris: unchanged);
+
+    final index = <String, int>{};
+    final dataUris = <String>[];
+    for (final source in sources) {
+      // Een bron die al een data:-URI is (of een lege verwijzing) hoeft niets:
+      // die reist per definitie al mee.
+      if (source.isEmpty || source.startsWith('data:')) continue;
+      final uri = await resolve(source);
+      if (uri == null) continue;
+      index[source] = dataUris.length;
+      dataUris.add(uri);
+    }
+
+    const l10n = AppLocalizations(Locale('nl'));
+    final missing = _htmlAttr(l10n.d('Afbeelding niet ingesloten'));
+    final rewritten = markdown.replaceAllMapped(_imageRef, (m) {
+      final source = m.group(2)!.trim();
+      if (source.isEmpty || source.startsWith('data:')) return m.group(0)!;
+      final at = index[source];
+      // Niet in te sluiten: liever een zichtbare melding dan een verwijzing naar
+      // een bestand dat de ontvanger niet heeft. Het pad zelf blijft eruit — dat
+      // is de map van de auteur, en die hoeft de ontvanger niet te kennen.
+      if (at == null) {
+        return '<span class="image-missing" role="img" '
+            'aria-label="$missing">$missing</span>';
+      }
+      return '![${m.group(1)}]($_imagePlaceholder$at)';
+    });
+    return (markdown: rewritten, dataUris: dataUris);
   }
 
   /// Split Marp Markdown into per-slide Markdown chunks: drop the leading YAML
@@ -732,6 +817,7 @@ html,body{margin:0;padding:0}
 .slide .signoff-meta{font-size:20px;opacity:.8;margin:.1em 0}
 .slide .signoff-seal{font-size:18px;opacity:.6;letter-spacing:.03em;margin-top:.7em}
 .slide .media-redacted{display:flex;align-items:center;justify-content:center;min-height:200px;margin:.6em 0;background:#000;color:#fff;font-size:20px;letter-spacing:.05em;border-radius:4px;text-align:center;padding:24px}
+.slide .image-missing{display:inline-block;padding:14px 20px;border:2px dashed rgba(100,116,139,.5);border-radius:6px;font-size:19px;opacity:.6;font-style:italic}
 .slide .mermaid-error{margin:.6em 0;padding:16px 20px;border:1px solid #B91C1C;border-left-width:6px;border-radius:6px;background:#FEE2E2;color:#7F1D1D;text-align:left}
 .slide .mermaid-error-title{font-size:22px;font-weight:700;margin:0 0 .3em;color:#7F1D1D}
 .slide .mermaid-error-label{font-size:16px;font-weight:600;margin:.7em 0 .2em;opacity:.8;color:#7F1D1D}
@@ -795,10 +881,15 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
   }
 
   /// Het script dat de ingesloten markdown in het geopende document omzet.
+  ///
   /// Een functie en geen constante, omdat de zichtbare woorden erin
-  /// gelokaliseerd worden (zie [_renderScriptLabels]).
-  static String _renderScript() =>
-      'var OCIDECK_L=${_renderScriptLabels()};\n$_renderScriptBody';
+  /// gelokaliseerd worden (zie [_renderScriptLabels]) en omdat de ingesloten
+  /// afbeeldingen als [dataUris] meegaan — één keer, hoe vaak een dia er ook
+  /// naar verwijst.
+  static String _renderScript(List<String> dataUris) =>
+      'var OCIDECK_L=${_renderScriptLabels()};\n'
+      'var OCIDECK_IMG=${jsonEncode(dataUris)};\n'
+      '$_renderScriptBody';
 
   static const _renderScriptBody = r'''
 (function(){
@@ -831,6 +922,17 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
     // If the sanitiser somehow isn't present, fail closed to plain text.
     if(window.DOMPurify){div.innerHTML=DOMPurify.sanitize(html);}else{div.textContent=src;}
     sec.innerHTML='';sec.appendChild(div);
+  });
+  // De ingesloten afbeeldingen terugzetten. Ze staan één keer in OCIDECK_IMG en
+  // de dia's dragen alleen een verwijzing, zodat dezelfde achtergrond op veertig
+  // dia's het bestand niet veertig keer zo groot maakt. Alleen een echte
+  // data:image/-waarde uit onze eigen lijst wordt gezet — de index komt uit het
+  // document en moet dus als onbetrouwbaar worden behandeld.
+  document.querySelectorAll('img[src^="#ocideck-img-"]').forEach(function(el){
+    var n=parseInt(el.getAttribute('src').replace('#ocideck-img-',''),10);
+    var uri=OCIDECK_IMG[n];
+    if(typeof uri==='string'&&uri.indexOf('data:image/')===0){el.setAttribute('src',uri);}
+    else{el.removeAttribute('src');}
   });
   document.querySelectorAll('code.language-mermaid').forEach(function(code){
     var pre=code.closest('pre');if(!pre)return;

@@ -1795,6 +1795,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Afbeelding niet ingesloten': 'Imago non inclusa',
   'Dit diagram kon niet worden getekend': 'Hoc diagramma depingi non potuit',
   'Brontekst van het diagram': 'Textus fontis diagrammatis',
   'esc': 'esc',

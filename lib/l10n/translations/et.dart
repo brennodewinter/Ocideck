@@ -1770,6 +1770,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Afbeelding niet ingesloten': 'Pilti ei manustatud',
   'Dit diagram kon niet worden getekend':
       'Seda diagrammi ei õnnestunud joonistada',
   'Brontekst van het diagram': 'Diagrammi lähtetekst',

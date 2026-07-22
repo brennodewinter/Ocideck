@@ -1778,6 +1778,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Afbeelding niet ingesloten': 'Bilden är inte inbäddad',
   'Dit diagram kon niet worden getekend': 'Det här diagrammet kunde inte ritas',
   'Brontekst van het diagram': 'Diagrammets källtext',
   'esc': 'esc',

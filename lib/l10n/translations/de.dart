@@ -736,6 +736,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Afbeelding niet ingesloten': 'Bild nicht eingebettet',
   'Dit diagram kon niet worden getekend':
       'Dieses Diagramm konnte nicht gezeichnet werden',
   'Brontekst van het diagram': 'Quelltext des Diagramms',

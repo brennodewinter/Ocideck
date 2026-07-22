@@ -1797,6 +1797,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Afbeelding niet ingesloten': 'Imaginea nu este încorporată',
   'Dit diagram kon niet worden getekend':
       'Această diagramă nu a putut fi desenată',
   'Brontekst van het diagram': 'Textul sursă al diagramei',

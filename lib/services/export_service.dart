@@ -27,6 +27,8 @@ import 'classification_enforcement_policy.dart';
 import '../models/slide_quality.dart';
 import 'export_bundle.dart';
 import 'export_metadata.dart';
+import 'html_image_embedder.dart';
+import 'image_service.dart';
 import 'quality_export_policy.dart';
 import 'marp_html_service.dart';
 
@@ -246,6 +248,11 @@ class ExportService {
                 cockpitColorScheme: cockpitColorScheme,
                 metadata: docMeta,
                 fallbackTitle: fallbackTitle,
+                // De projectmap is de map van het deck; dezelfde begrenzing als
+                // overal, zodat een deck van een derde geen bestanden buiten
+                // zijn eigen map de export in kan trekken.
+                embedImage: (source) =>
+                    _embedImage(source, p.dirname(deckPath)),
               ),
             ),
           );
@@ -282,6 +289,28 @@ class ExportService {
       const l10n = AppLocalizations(Locale('nl'));
       return ExportResult.fail(userFacingError(l10n, e));
     }
+  }
+
+  /// Leest de afbeelding op [source] en maakt er een `data:`-URI van, zodat de
+  /// HTML-export werkelijk één bestand is.
+  ///
+  /// De begrenzing zit hier, niet in de HTML-bouwer: [ImageService] lost het pad
+  /// op binnen [projectPath] en weigert alles daarbuiten, precies zoals de
+  /// preview, de presenter en de andere exports dat doen. Zonder die grens zou
+  /// een deck van een derde met `![](/etc/passwd)` een willekeurig bestand de
+  /// export in trekken — en die export gaat naar buiten.
+  ///
+  /// Het hercoderen kost honderden milliseconden per afbeelding en draait
+  /// daarom in een isolate; een export van een deck met twintig foto's zou de
+  /// interface anders seconden laten staan.
+  Future<String?> _embedImage(String source, String projectPath) async {
+    final bytes = await ImageService().readSlideImageBytes(
+      source,
+      projectPath: projectPath,
+    );
+    if (bytes == null) return null;
+    final encoded = await _offload(() => encodeForHtmlEmbed(bytes, source));
+    return encoded == null ? null : htmlImageDataUri(encoded);
   }
 
   /// Zware bouwstappen draaien op desktop in een eigen isolate zodat de UI

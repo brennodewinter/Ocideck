@@ -1783,6 +1783,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Afbeelding niet ingesloten': 'Bild nöd iibettet',
   'Dit diagram kon niet worden getekend':
       'Das Diagramm het nöd chöne zeichnet werde',
   'Brontekst van het diagram': 'Quälltext vom Diagramm',

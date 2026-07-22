@@ -1815,6 +1815,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Afbeelding niet ingesloten': 'Íomhá gan leabú',
   'Dit diagram kon niet worden getekend':
       'Níorbh fhéidir an léaráid seo a tharraingt',
   'Brontekst van het diagram': 'Téacs foinseach na léaráide',

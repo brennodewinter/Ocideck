@@ -1786,6 +1786,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Afbeelding niet ingesloten': 'Obrázok nie je vložený',
   'Dit diagram kon niet worden getekend':
       'Tento diagram sa nepodarilo vykresliť',
   'Brontekst van het diagram': 'Zdrojový text diagramu',

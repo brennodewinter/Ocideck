@@ -1791,6 +1791,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Afbeelding niet ingesloten': 'Obraz nieosadzony',
   'Dit diagram kon niet worden getekend':
       'Nie udało się narysować tego diagramu',
   'Brontekst van het diagram': 'Tekst źródłowy diagramu',

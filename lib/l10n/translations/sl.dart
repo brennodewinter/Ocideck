@@ -1781,6 +1781,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Afbeelding niet ingesloten': 'Slika ni vdelana',
   'Dit diagram kon niet worden getekend':
       'Tega diagrama ni bilo mogoče narisati',
   'Brontekst van het diagram': 'Izvorno besedilo diagrama',
