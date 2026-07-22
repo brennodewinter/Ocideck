@@ -10,6 +10,20 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Changed
+- **Een afbeelding van internet wordt nu opgehaald over een vastgezette
+  verbinding.** Staat er een `http(s)`-afbeelding op een dia, dan controleerde
+  OciDeck eerst of die host niet naar binnen wees — maar liet het ophalen daarna
+  aan Flutter over, en dat zoekt de naam nóg een keer op. Wie het domeinnaamsysteem
+  in handen heeft, kon in dat korte venster van een publiek adres naar een intern
+  adres omschakelen. OciDeck haalt de bytes nu zelf op, over een verbinding die
+  vastzit op het gekeurde adres; er is dus geen tweede opzoeking meer.
+
+  Bijkomstig: bewegende afbeeldingen (GIF, geanimeerde WebP) van internet bewegen
+  nu ook, net als die uit een map. Ze toonden eerder alleen het eerste beeldje.
+
+  Voor **video** blijft dat venster bestaan — de videospeler van het besturingssysteem
+  opent zijn eigen verbinding en er is geen plek om die vast te zetten. Wat daar
+  overblijft is een verzoek naar binnen waarvan het antwoord de app nooit bereikt.
 - **Het kenmerk van een redactie is langer geworden.** In het bestand met
   redacties naast een geredigeerd rapport draagt elke redactie een kort kenmerk,
   zodat een lezer kan zeggen: "ik betwist redactie a3f1e2b7". Dat kenmerk was
