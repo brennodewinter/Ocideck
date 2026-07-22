@@ -781,6 +781,17 @@ class FileService {
   /// is en dus nog niets kan afbreken.
   static const maxChartDataBytes = 8 * 1024 * 1024; // 8 MiB
 
+  /// Grens voor één sidecar naast een deck (`.ink.json`, `.user-notes.json`,
+  /// `.miauw.json`, `.seal.json`).
+  ///
+  /// Dezelfde herkomst als grafiekdata — een sidecar reist met het deck mee uit
+  /// een pakket, een repo of iemands map — en werd bij het openen onbegrensd
+  /// ingelezen, met de kopie die `jsonDecode` erbovenop legt. De inkt-sidecar is
+  /// veruit de grootste van de vier (punten per streek per slide) en blijft bij
+  /// zwaar annoteren nog ruim onder deze grens; notities, MIAUW en het zegel
+  /// tellen in kilobytes.
+  static const maxDeckSidecarBytes = 16 * 1024 * 1024; // 16 MiB
+
   static const maxStyleProfileBytes = 16 * 1024 * 1024; // 16 MiB
   static const maxStyleProfileLogoBytes = 8 * 1024 * 1024; // 8 MiB
 
