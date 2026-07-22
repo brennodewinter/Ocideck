@@ -781,12 +781,26 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       // aan: de rasterizer, de markdown voor de HTML-export, de PPTX-notities
       // en de documentmetadata worden allemaal uit dit ene object afgeleid.
       final source = deck.copyWith(slides: _expandForExport(chosen, deck));
+
+      // Eén scan voor de hele bundel. Er stonden er drie: de projectie, het
+      // manifest en de samenvatting draaiden er elk hun eigen over hetzelfde
+      // deck — ~1,07 ms per dia, dus ruim 600 ms bij 200 dia's, op de UI-draad
+      // en vóór de eerste frame van het dialoog. Het rasteren erna heeft
+      // voortgang, fasen en annuleren; de enige plek waar de export voelde
+      // alsof hij hing was de plek die nog niets deed (#613).
+      final scan = PrivacyScanner(
+        disabledRules: disabledRules,
+        ownIdentity: ownIdentity,
+        regions: regions,
+      ).scan(source);
+
       final audience = PrivacyProjection.forAudience(
         source,
         disabledRules: disabledRules,
         ownIdentity: ownIdentity,
         regions: regions,
         profile: profile,
+        scan: scan,
       );
       return ExportBundle(
         audience: audience,
@@ -803,24 +817,20 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           disabledRules: disabledRules,
           ownIdentity: ownIdentity,
           regions: regions,
-        ).build(source, profile: profile),
+        ).build(source, profile: profile, scan: scan),
         // De gate telt op de ONGEFILTERDE scan: de provider onderdrukt bevindingen
         // op slides die de auteur al heeft afgehandeld — precies wat je in het
         // paneel wilt, en precies wat je in deze samenvatting niet wilt.
-        privacySummary: summarisePrivacyForExport(
-          source,
-          PrivacyScanner(
-            disabledRules: disabledRules,
-            ownIdentity: ownIdentity,
-            regions: regions,
-          ).scan(source),
-        ),
+        privacySummary: summarisePrivacyForExport(source, scan),
       );
     }
 
-    final hasPrivacyFindings = !bundleFor(
-      PrivacyExportProfile.full,
-    ).privacySummary.isEmpty;
+    // Uit de gememoiseerde provider, niet uit een hele bundel. Deze regel
+    // bepaalt alleen of er íets te melden valt, en dat kostte een complete
+    // tweede bundel — drie scans plus een manifest met verse salts, waarvan
+    // alles op één bool na werd weggegooid (#613). De provider leest dezelfde
+    // ongefilterde scan en draait al voor de statusbalk.
+    final hasPrivacyFindings = !ref.read(privacyExportSummaryProvider).isEmpty;
 
     // De diepgangkeuze verschijnt alleen als er iets te kiezen valt: minstens
     // één verdiepingsslide én minstens één gewone, zodat de beknopte versie

@@ -60,8 +60,12 @@ class RedactionManifestService {
   RedactionManifest build(
     Deck deck, {
     PrivacyExportProfile profile = PrivacyExportProfile.full,
+
+    /// De scan van [deck], als de aanroeper hem al heeft — zie
+    /// [redactedValues].
+    PrivacyScanResult? scan,
   }) {
-    final values = redactedValues(deck, profile: profile);
+    final values = redactedValues(deck, profile: profile, scan: scan);
     final salts = [for (final _ in values) _newSalt()];
     final commitments = [
       for (var i = 0; i < values.length; i++)
@@ -136,8 +140,15 @@ class RedactionManifestService {
   List<({PrivacyFinding finding, String value})> redactedValues(
     Deck deck, {
     PrivacyExportProfile profile = PrivacyExportProfile.full,
+
+    /// De scan van [deck], als de aanroeper hem al heeft.
+    ///
+    /// Bestaat om herhaling te vermijden, niet om de uitkomst te sturen: hij
+    /// moet met dezelfde drie instellingen over hetzelfde deck gemaakt zijn als
+    /// de scan die deze dienst anders zelf zou draaien. Zie #613.
+    PrivacyScanResult? scan,
   }) {
-    final scan = PrivacyScanner(
+    scan ??= PrivacyScanner(
       disabledRules: disabledRules,
       ownIdentity: ownIdentity,
       regions: regions,

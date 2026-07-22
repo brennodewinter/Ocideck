@@ -107,6 +107,15 @@ class PrivacyProjection {
     OwnIdentity ownIdentity = OwnIdentity.empty,
     Set<String> regions = defaultPrivacyRegions,
     PrivacyExportProfile profile = PrivacyExportProfile.full,
+
+    /// De scan van [deck], als de aanroeper hem al heeft.
+    ///
+    /// Bestaat om herhaling te vermijden, niet om de uitkomst te sturen: hij
+    /// moet met dezelfde drie instellingen over hetzelfde deck gemaakt zijn.
+    /// Het exportdialoog bouwde er drie achter elkaar over hetzelfde deck —
+    /// ~1,07 ms per dia, dus ruim 600 ms bij 200 dia's, op de UI-draad en
+    /// zonder dat er iets draaide om naar te kijken (#613).
+    PrivacyScanResult? scan,
   }) => _project(
     deck,
     // In het geredigeerde profiel telt de dispositie niet: "deze zaal mag het
@@ -115,6 +124,7 @@ class PrivacyProjection {
     disabledRules: disabledRules,
     ownIdentity: ownIdentity,
     regions: regions,
+    precomputed: scan,
   );
 
   /// De projectie voor verwerking buiten dit apparaat (AI-backends).
@@ -159,6 +169,7 @@ class PrivacyProjection {
     Set<String> disabledRules = const {},
     OwnIdentity ownIdentity = OwnIdentity.empty,
     Set<String> regions = defaultPrivacyRegions,
+    PrivacyScanResult? precomputed,
   }) {
     // De uitgezette regels tellen hier wél mee (anders dan de hoofdschakelaar):
     // wie een regel uitzet omdat die het mis heeft over zijn inhoud, wil die
@@ -177,11 +188,13 @@ class PrivacyProjection {
     // aanroeper die dit vergeet moet méér redigeren, niet minder. De universele
     // regels (IBAN, e-mail, paspoort) hangen aan geen enkel pakket en blijven
     // hoe dan ook draaien.
-    final scan = PrivacyScanner(
-      disabledRules: disabledRules,
-      ownIdentity: ownIdentity,
-      regions: regions,
-    ).scan(deck);
+    final scan =
+        precomputed ??
+        PrivacyScanner(
+          disabledRules: disabledRules,
+          ownIdentity: ownIdentity,
+          regions: regions,
+        ).scan(deck);
 
     var count = 0;
     final shielded = <int>{};
