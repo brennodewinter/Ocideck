@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ocideck/services/mermaid_render_service.dart';
 import 'package:ocideck/widgets/mermaid_render_host.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 // `PlatformWebViewController` wordt niet door webview_flutter doorgegeven,
 // terwijl het de enige manier is om de platformlaag te vervangen. Zie
 // mermaid_render_pipeline_test, dat om dezelfde reden hetzelfde doet.
