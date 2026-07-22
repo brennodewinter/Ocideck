@@ -1,6 +1,6 @@
 # OciDeck — Wat nog tegen de werkelijkheid moet
 
-> **Status:** openstaande werklijst — geen verificatierapport · **Status laatst herzien:** 22-07-2026 · **Uitgever:** Stichting LibreKAT
+> **Status:** openstaande werklijst — geen verificatierapport · **Status laatst herzien:** 22-07-2026 · **Uitgever:** Stichting LibreKAT · **Language:** Nederlands
 
 > **Een openstaande werklijst — géén verificatierapport en géén
 > ontwerp.** De bestandsnaam zegt `VERIFICATION`, maar hier staat niets wat is

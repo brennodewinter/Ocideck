@@ -127,15 +127,22 @@ These are measured on the current tree (not enforced limits), to set
 expectations for build size and test speed.
 
 ### Bundled asset sizes
+Measured 2026-07-22.
+
 | Asset group | Size |
 |---|---|
 | `assets/` total | **13 MB** — of which the two privacy lexicons are 2.0 MB *(measured 2026-07-22; this said 10 MB, from before the lexicons were bundled)* |
-| Vendored web-export JS/CSS (`assets/web_export/`) | **5.4 MB** |
+| Vendored web-export JS/CSS (`assets/web_export/`) | **5.6 MB** |
 | — `mermaid.min.js` | 3.2 MB |
 | — `tex-svg.js` (MathJax) | 2.0 MB |
 | — `highlight.min.js` / `marked.min.js` / `purify.min.js` | 127 KB / 43 KB / 28 KB |
 | Bundled fonts (`assets/fonts/`) | **3.1 MB** |
-| Offline CWE catalog (`assets/cwe/cwe_full.json`) | ~234 KB |
+| Privacy lexicons (`assets/privacy/`) | **2.0 MB** |
+| Offline CWE catalog (`assets/cwe/cwe_full.json`) | ~237 KB |
+
+*(Corrected 2026-07-22: the total read 10 MB, from before the two privacy
+lexicons landed. It was 13 MB when this line was written, and the lexicons are
+now broken out so the next drift is visible rather than hidden in a total.)*
 
 Mermaid and MathJax dominate the web/HTML-export payload; they are only pulled in
 where a deck actually uses diagrams or math.
@@ -151,11 +158,26 @@ Counted on 2026-07-19. These grow with every feature; treat them as an order of
 magnitude, not a current figure.
 
 ### Measured timing
+
+**First visit to the web build: ~25 MB raw, ~9 MB compressed before the first
+frame** (`make build-web`, measured 2026-07-22). That is `main.dart.js`
+(13.8 MB / 3.8 MB), `canvaskit.wasm` (6.9 / 2.8), the eighteen fonts in
+`FontManifest.json` (2.7 / 1.4) and `assets/privacy/health_lexicon.json`
+(2.0 / 0.5), which `lib/main.dart` deliberately awaits before `runApp`. Serve
+it compressed — see [HOSTING.md](HOSTING.md) §2 — and expect a blank page while
+it arrives, because there is no loading indicator yet.
+
 A single small test (`flutter test test/tlp_test.dart`, 15 cases) completes in
 **~4.7 s** wall-clock — dominated by the Flutter test harness warm-up, not the
-tests themselves. There are **no** automated wall-clock or throughput benchmarks
-in CI; profile a specific slowdown with Flutter DevTools rather than relying on
-fixed budgets.
+tests themselves.
+
+**Still missing, and worth saying so:** there is no measured wall-clock for a
+PDF export of a large deck, which is the figure a user actually feels.
+`test/large_deck_performance_test.dart` covers serialise and parse only (150
+slides, confirming the behaviour is not quadratic) — not the scan, not the
+export, not the UI. There are **no** automated wall-clock or throughput
+benchmarks in CI; profile a specific slowdown with Flutter DevTools rather than
+relying on fixed budgets.
 
 ## Best practices for users
 

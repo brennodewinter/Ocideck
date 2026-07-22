@@ -113,6 +113,23 @@ read Dutch this is an accessibility problem and not only a cosmetic one. A few
 blocking messages (classification-policy refusals, the export-failure text) are
 built in Dutch for the same reason.
 
+**Left-to-right only, and that governs your content too.** No
+direction-sensitive layout primitive is in use anywhere — `EdgeInsetsDirectional`,
+`AlignmentDirectional` and `BorderDirectional` appear zero times in `lib/`,
+against twenty-nine physical `EdgeInsets.only(left:`/`right:`. Of the thirteen
+places that mention `TextDirection`, eleven hard-code `TextDirection.ltr`,
+including a `Directionality` wrapper around the **entire slide canvas** in
+`slide_preview.dart` (counted 2026-07-22).
+
+That none of the 32 interface languages is right-to-left is a scope choice. The
+sharper consequence is the canvas: an author who puts an Arabic or Hebrew
+paragraph on a slide gets the wrong base direction — left-aligned, punctuation
+on the wrong side — regardless of the interface language they chose. Nothing
+warns them, so it is discovered on the projector. Nothing is being built for
+this yet; it is written down here so it is a known limitation rather than a
+surprise, and so the day someone wants RTL the starting point is already
+mapped. *(Added 2026-07-22.)*
+
 **Wider WCAG conformance is not claimed.** Contrast ratios inside the
 *application interface*, focus order across the whole app, and reading order are
 a programme of work rather than a test file. What exists is the guard rail above

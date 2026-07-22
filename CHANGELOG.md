@@ -1,5 +1,9 @@
 # Changelog
 
+> **Language:** Nederlands. The entries below are written in Dutch; this
+> preamble and the release headings are English. *(Marked 2026-07-22: a reader
+> arriving from the English README had no warning.)*
+
 All notable changes to OciDeck are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),

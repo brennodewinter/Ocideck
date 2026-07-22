@@ -2,6 +2,36 @@
 
 > **Status:** current-state user manual · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
 
+## Contents
+
+- [Creating and opening decks](#creating-and-opening-decks)
+- [Command palette](#command-palette)
+- [The menu bar (macOS)](#the-menu-bar-macos)
+- [Storage](#storage)
+- [S3 bucket](#s3-bucket)
+- [Git repository](#git-repository)
+- [WebDAV](#webdav)
+- [Slide types](#slide-types)
+- [Organising the slide list](#organising-the-slide-list)
+- [Images and media travel with the presentation](#images-and-media-travel-with-the-presentation)
+- [Image library](#image-library)
+- [Per-slide options](#per-slide-options)
+- [Traffic Light Protocol (TLP)](#traffic-light-protocol-tlp)
+- [Privacy check](#privacy-check)
+- [What to do with a finding](#what-to-do-with-a-finding)
+- [Depth — a management version and a technical one](#depth-a-management-version-and-a-technical-one)
+- [Two versions from one source](#two-versions-from-one-source)
+- [Redaction — leaving data out](#redaction-leaving-data-out)
+- [Presenting](#presenting)
+- [Exporting](#exporting)
+- [Accessibility](#accessibility)
+- [Information security module (pentest reports)](#information-security-module-pentest-reports)
+- [Markdown mode](#markdown-mode)
+- [What the browser version cannot do](#what-the-browser-version-cannot-do)
+- [Theming and language](#theming-and-language)
+
+*(Added 2026-07-22: this document is around 2,992 lines and had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not.)*
+
 OciDeck builds [Marp](https://marp.app/) presentations through a structured,
 slide-by-slide editor. You compose typed slides, preview them live, present them
 (on one or two screens), and export to Markdown, PDF, PPTX, or a single offline

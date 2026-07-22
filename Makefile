@@ -715,19 +715,19 @@ check-web: build-web
 # cannot cross-compile a desktop bundle (a macOS .app needs macOS, a Windows
 # .exe needs Windows, a Linux bundle needs Linux). Run the matching target on
 # the matching machine, or use the release CI workflow to produce all at once.
-build-macos:
+build-macos: sbom-verify
 	@echo "== OciDeck build: macOS app (.app) =="
 	@echo "Command: flutter build macos --release"
 	@echo "Output: build/macos/Build/Products/Release/*.app"
 	flutter build macos --release
 
-build-windows:
+build-windows: sbom-verify
 	@echo "== OciDeck build: Windows app (.exe) =="
 	@echo "Command: flutter build windows --release"
 	@echo "Output: build/windows/x64/runner/Release"
 	flutter build windows --release
 
-build-linux:
+build-linux: sbom-verify
 	@echo "== OciDeck build: Linux bundle =="
 	@echo "Command: flutter build linux --release"
 	@echo "Output: build/linux/x64/release/bundle"
