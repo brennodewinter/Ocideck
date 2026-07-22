@@ -297,7 +297,14 @@ class ExportService {
     required ExportDocumentMetadata metadata,
     required String fallbackTitle,
   }) async {
-    final projectPath = p.dirname(deckPath);
+    // Een bewaard deck heeft een projectmap: de map van het `.md`, en daar
+    // blijft het lezen binnen. Een deck dat nog nooit is opgeslagen heeft er
+    // geen — dan is [deckPath] alleen een voorgestelde bestandsnaam, en zou
+    // `dirname` de werkmap van het proces opleveren. `null` betekent hier
+    // precies wat de resolver ervan maakt: absolute paden uit de lopende
+    // bewerksessie mogen (dat zijn de wachtruimte-kopieën van net ingevoegd
+    // beeld), relatieve niet. Zelfde regel als de preview.
+    final projectPath = p.isAbsolute(deckPath) ? p.dirname(deckPath) : null;
     final html = await _html.build(
       markdown,
       theme: themeProfile,
@@ -321,7 +328,7 @@ class ExportService {
   /// Het hercoderen kost honderden milliseconden per afbeelding en draait
   /// daarom in een isolate; een export van een deck met twintig foto's zou de
   /// interface anders seconden laten staan.
-  Future<String?> _embedImage(String source, String projectPath) async {
+  Future<String?> _embedImage(String source, String? projectPath) async {
     final bytes = await ImageService().readSlideImageBytes(
       source,
       projectPath: projectPath,
