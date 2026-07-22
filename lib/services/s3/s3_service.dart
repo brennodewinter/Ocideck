@@ -1,3 +1,19 @@
+// ── lib/services/s3/ ─────────────────────────────────────────────────────────
+// S3 en S3-compatible opslag als deckbron, in twee bewust gescheiden helften:
+// s3_sigv4.dart ondertekent en raakt het netwerk niet (daardoor toetsbaar tegen
+// vaste vectoren), dit bestand doet het verkeer over een gepinde,
+// redirect-vrije `HttpClient`. Dat is geen willekeurige knip: een AWS-SDK zou
+// zijn eigen HTTP-stack meebrengen en om `NetGuard` heen verbinden, en dan is
+// er van de socketpinning die elke andere netwerkbron toepast niets over.
+//
+// Wat hier níét thuishoort: de bucketconfiguratie (lib/models/s3_settings.dart),
+// de bedrading naar tabbladen en instellingen (lib/state/s3_provider.dart,
+// tabs_provider_s3.dart) en het aftasten van een bucket voor 'Slide zoeken'
+// (../presentation_search/), dat deze dienst alleen gebruikt. WebDAV is de
+// zusterbron en ligt met opzet één map hoger, als los bestand: hij deelt de
+// vorm, niet de ondertekening. Bestand voor bestand: docs/SOURCE_MAP.md.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';

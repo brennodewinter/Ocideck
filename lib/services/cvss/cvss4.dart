@@ -1,3 +1,15 @@
+// ── lib/services/cvss/ ───────────────────────────────────────────────────────
+// The scoring engine, and only the scoring engine: three files that together
+// reproduce FIRST's CVSS v4.0 arithmetic. Because it is a port, the rule for
+// this directory is narrower than elsewhere — changes belong here when the
+// reference changed, not when OciDeck wants a different number.
+//
+// Everything the *app* does with a score is therefore somewhere else. Building
+// a vector from what a user picked, the CIA-weighted context score and the
+// metric metadata behind the builder live in lib/models/cvss_builder.dart; the
+// editors that show them are in lib/widgets/. File by file: docs/SOURCE_MAP.md.
+// ─────────────────────────────────────────────────────────────────────────────
+//
 // Native Dart port of the FIRST CVSS v4.0 reference calculator
 // (github.com/FIRSTdotorg/cvss-v4-calculator). Pure Dart, no Flutter imports,
 // isolate-safe. The metric model, the MacroVector→score lookup table and the

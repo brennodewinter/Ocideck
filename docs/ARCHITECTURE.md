@@ -98,14 +98,28 @@ a connection that arrives at all can only have come from the pin.
 ```
 lib/
   models/     # Deck, Slide, Settings/ThemeProfile, Chart, Annotation
-  services/   # markdown, markdown_validator, file, export,
-              # classification_policy, classification_enforcement_policy,
-              # export_metadata, image, caption,
-              # description, image_dedup (md5 duplicates),
+  services/   # mostly loose files, one subject each: markdown,
+              # markdown_validator, file, export, classification_policy,
+              # classification_enforcement_policy, export_metadata, image,
+              # caption, description, image_dedup (md5 duplicates),
               # image_reference (.md rewrites), recovery, rasterizer,
               # marp_html, annotation_codec, rehearsal_controller,
-              # webdav (Nextcloud source), s3/ (bucket source),
-              # git/ (forge source), secret_store (keychain)
+              # webdav (Nextcloud source), secret_store (keychain)
+              #
+              # …plus the subdirectories that are a subject of their own:
+              #   privacy/             detect, weigh, redact, gate the export
+              #   git/                 forge source (docs/design/GIT_STORAGE.md)
+              #   s3/                  bucket source (SigV4 + pinned client)
+              #   cve/                 the offline CVE corpus
+              #   cvss/                the CVSS v4.0 scoring engine
+              #   finding_templates/   template content, one file per language
+              #   presentation_search/ the network sources 'Slide zoeken' scans
+              #   info_safety/         what reference data is locally present
+              #   parts/               `part of` spillover, not a cluster
+              #
+              # Each of those (except parts/) carries a header comment naming
+              # what belongs in it and what does not; SOURCE_MAP.md lists which
+              # file holds it.
   state/      # Riverpod providers (top-level + parts/): deck, editor,
               # settings, tabs, clipboard, webdav, s3, git, consent, privacy,
               # info_safety, local_cve, deck_quality, …
