@@ -2102,6 +2102,16 @@ agreement with a client is about the document rather than part of it.
 If you copy only the `.md` somewhere, those three stay behind. Copy the whole
 folder, or export a package.
 
+**Who can read your notes.** Next to a file on your own disk, only you. They are
+never shown on the projector, never in a PDF, PPTX or HTML export, and the
+privacy scan does not read them — so nothing you write here is checked before it
+goes anywhere. That last point matters more once the deck lives in a **git
+repository**: since these notes travel there too, everyone with read access to
+that repository can read them, under your name in the commit log. That is what
+makes shared notes on a shared deck work, and it is worth knowing before you use
+this field for something you would not say out loud in the room. For a private
+thought about a deck you share, keep a file of your own.
+
 In the visual editor, expand **User notes** below **Speaker notes** to author them
 per slide. Both blocks share the same layout: a collapsible header (icon, title,
 discard button) and the markdown editor underneath. The discard button is enabled

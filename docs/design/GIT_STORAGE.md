@@ -329,7 +329,7 @@ repo/
   decks/
     kwartaalcijfers/
       deck.md            # references  repo:assets/3f9a1c8e….png
-      deck.annotations       # sidecar (ink strokes) — not written yet, §9.1
+      deck.ink.json          # sidecar (ink strokes) — NOT written yet, §9.1
       deck.user-notes.json   # sidecar (user notes) — since #541
     jaarplan/
       deck.md            # references  repo:assets/3f9a1c8e….png  ← same blob
@@ -642,7 +642,8 @@ does**.
 > the pool blobs that are not in the repo yet, and each linked chart's data file
 > at the path its `source` names. **Video and audio are not written**, and
 > **the ink sidecar is not**: nothing in `services/git/` writes
-> `deck.annotations`, so the ink layer stays behind. Saving the same deck to a
+> the ink sidecar (`deck.ink.json`, matching its name on disk), so the ink layer
+> stays behind. Saving the same deck to a
 > folder or a package does take it along, which makes moving a deck from disk
 > into a repository the moment it would be lost.
 >
@@ -762,7 +763,8 @@ requests. What OciDeck must add is small but real:
   signed-commit badge on the history entry, never a claim about the deck.
 - **Awareness** — show that `main` has moved, and whose branch is open, from
   `listBranches`/`fetch`. Not presence, just freshness.
-- **Sidecar conflicts** — `.notes` merges as text; `.annotations` unions (§14,
+- **Sidecar conflicts** — `deck.user-notes.json` merges as text; the ink sidecar
+  unions (§14,
   D7). See §9.7.
 
 The boundary with [`COLLABORATION.md`](COLLABORATION.md) is deliberate and should
@@ -795,7 +797,7 @@ are not the same kind of file, and each has its own right answer (§14, D7).
   decode and the deck opens without its notes rather than with mangled ones —
   the same trade as an unreadable sidecar on disk. Surfacing that to the user
   belongs with the same work as the ink driver.
-- **`.annotations` — ink strokes are additive.** Two people who drew on the same
+- **`deck.ink.json` — ink strokes are additive.** Two people who drew on the same
   slide did not disagree; they both drew. The merge is a **union of the stroke
   sets**, keyed per slide and deduplicated by stroke identity. That is
   semantically right rather than merely convenient: no ink is lost and there is
@@ -960,7 +962,7 @@ Each phase is shippable and preserves the invariants.
   and the macOS `xcode-select` guard (§8.4).
 - `NativeGitMirror implements DeckMirror` — partial clone (D5), commit, fetch,
   push, merge, log, tag. Real offline history; real merges.
-- The `.annotations` union merge driver + `.gitattributes` in the clone (§9.7).
+- The ink-sidecar union merge driver + `.gitattributes` in the clone (§9.7).
   **Not built** (recorded 21-07-2026): there is no `.gitattributes` and no
   `merge=ocideck-ink` anywhere in `lib/`. It has nothing to act on yet either —
   the commit set carries no sidecars at all (§9.1) — so this belongs with the
@@ -1213,7 +1215,7 @@ discussion still resolve.
   all-or-nothing and the pool cannot straddle a boundary the forge does not
   enforce (§6).
 - **D7 — Sidecar conflicts.** **Per type**: the notes sidecar is text and takes
-  git's ordinary text merge; `.annotations` is ink and **unions** the stroke sets
+  git's ordinary text merge; the ink sidecar **unions** the stroke sets
   via a merge driver, because two people drawing on one slide did not disagree.
   Manual resolution only where both fail (§9.7). Erasure-vs-union and per-stroke
   identity are consequences that belong to the annotation file format, not to

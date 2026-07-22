@@ -9,6 +9,7 @@ import '../../models/slide.dart';
 import '../../models/chart.dart';
 import '../../utils/log.dart';
 import '../markdown_service.dart';
+import '../sidecar_format.dart';
 import '../user_notes_codec.dart';
 import '../slide_image_refs.dart';
 import '../web_asset_store.dart';
@@ -148,10 +149,25 @@ Future<({Deck deck, List<String> missing})> withRepoChartData(
 /// plaats van een mislukte open — dezelfde ruil als op schijf en bij
 /// grafiekdata. Notities zijn een laag over het deck, niet het deck.
 ///
+/// **Maar dan mag de schrijfkant het bestand niet weggooien**, en dáárvoor is
+/// [RepoUserNotes.onleesbaar]. Op schijf is dat contract al dichtgezet
+/// (`_sidecarUntouchable`, zie `sidecar_format.dart`: "half inlezen is het
+/// gevaarlijke geval"); hier weegt het zwaarder, want dit bestand is niet van
+/// jou alleen. Conflictmarkeringen uit een merge búiten OciDeck zijn geen
+/// geldige JSON, en een sidecar van een nieuwere build leest deze build
+/// bewust niet — in beide gevallen zou "ik zag geen notities, dus ik verwijder
+/// het bestand" andermans werk wissen bij je eerstvolgende opslag.
+///
+/// Daarom is de vlag ruim: elk bestand dat er ligt maar géén notities opleverde
+/// telt als onleesbaar. Dat kost hoogstens een verweesd bestand dat blijft
+/// staan; de andere kant kost werk dat niemand terug kan halen.
+///
 /// [UserNotesCodec.decode] hangt elke notitie terug aan de dia met dezelfde
 /// vingerafdruk, dus dit moet ná het parsen van `deck.md` gebeuren: de dia-id's
 /// zijn dan pas bekend.
-Future<Deck> withRepoUserNotes(
+typedef RepoUserNotes = ({Deck deck, bool onleesbaar});
+
+Future<RepoUserNotes> withRepoUserNotes(
   Deck deck, {
   required String deckDir,
   required RepoFileReader read,
@@ -160,26 +176,32 @@ Future<Deck> withRepoUserNotes(
   try {
     bytes = await read(p.posix.join(deckDir, userNotesRepoFileName));
   } catch (e) {
+    // Onbereikbaar is niet hetzelfde als afwezig: een netwerkhapering mag geen
+    // verwijdering worden.
     logWarning('withRepoUserNotes: notitiebestand onbereikbaar', e);
-    return deck;
+    return (deck: deck, onleesbaar: true);
   }
-  if (bytes == null || bytes.isEmpty) return deck;
+  if (bytes == null || bytes.isEmpty) {
+    return (deck: deck, onleesbaar: false);
+  }
   if (bytes.length > maxRepoUserNotesBytes) {
     logWarning(
       'withRepoUserNotes: notitiebestand is ${bytes.length} bytes '
       '(grens $maxRepoUserNotesBytes) — niet geladen',
     );
-    return deck;
+    return (deck: deck, onleesbaar: true);
   }
   final String json;
   try {
     json = utf8.decode(bytes);
   } on FormatException catch (e) {
     logWarning('withRepoUserNotes: notitiebestand is geen geldige UTF-8', e);
-    return deck;
+    return (deck: deck, onleesbaar: true);
   }
   final notes = UserNotesCodec.decode(json, deck.slides);
-  return notes.isEmpty ? deck : deck.copyWith(userNotes: notes);
+  return notes.isEmpty
+      ? (deck: deck, onleesbaar: true)
+      : (deck: deck.copyWith(userNotes: notes), onleesbaar: false);
 }
 
 /// Alles wat naast `deck.md` in de deckmap ligt, terug aan [deck] gehangen —
@@ -194,18 +216,23 @@ Future<Deck> withRepoUserNotes(
 /// De ontbrekende grafiekbronnen reizen mee terug omdat de aanroeper daarover
 /// meldt. Bij de notities is er niets te melden: geen bestand is de gewone
 /// toestand voor een deck zonder notities.
-Future<({Deck deck, List<String> missingChartData})> withRepoSidecars(
+Future<({Deck deck, List<String> missingChartData, bool userNotesUnreadable})>
+withRepoSidecars(
   Deck deck, {
   required String deckDir,
   required RepoFileReader read,
 }) async {
   final charts = await withRepoChartData(deck, deckDir: deckDir, read: read);
-  final withNotes = await withRepoUserNotes(
+  final notes = await withRepoUserNotes(
     charts.deck,
     deckDir: deckDir,
     read: read,
   );
-  return (deck: withNotes, missingChartData: charts.missing);
+  return (
+    deck: notes.deck,
+    missingChartData: charts.missing,
+    userNotesUnreadable: notes.onleesbaar,
+  );
 }
 
 /// Wat er van een deck níét meereist naar git (§9.1), geteld per soort.
@@ -325,6 +352,12 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
   required AssetPool? pool,
   required String deckDir,
   required AssetByteResolver resolveBytes,
+
+  /// Waarmee een bestand ín de deckmap te lezen is. Alleen gebruikt om te
+  /// bepalen of het notitiebestand wég mag wanneer dit deck geen notities
+  /// draagt — zie [_userNotesMayBeDeleted]. Zonder lezer wordt er nooit
+  /// verwijderd: niet weten is hier geen reden om te wissen.
+  RepoFileReader? read,
 }) async {
   final refForMem = <String, String>{}; // bronpad → repo:-verwijzing (dedup)
   final bytesForRef = <String, Uint8List>{}; // repo:-verwijzing → bytes
@@ -416,16 +449,21 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
   //
   // Geen notities meer? Dan het bestand weghalen in plaats van het oude te
   // laten staan — anders komt een gewiste notitie bij de volgende open terug.
+  //
+  // Maar alleen als we weten dát het bestand er een is dat wíj geschreven
+  // konden hebben — zie [_userNotesMayBeDeleted]. "Ik zag geen notities" en
+  // "er zijn er geen" is niet hetzelfde zodra het bestand van je mede-auteurs
+  // is.
   final notesPath = p.posix.join(deckDir, userNotesRepoFileName);
   final notes = UserNotesCodec.encode(
     rewritten.slides,
     rewritten.userNotes,
     forTextMerge: true,
   );
-  if (notes == null) {
-    deletes.add(notesPath);
-  } else {
+  if (notes != null) {
     upserts[notesPath] = Uint8List.fromList(utf8.encode(notes));
+  } else if (await _userNotesMayBeDeleted(notesPath, read)) {
+    deletes.add(notesPath);
   }
 
   // Met een pool alleen de nog niet aanwezige blobs; zonder pool (native) alle.
@@ -443,4 +481,94 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
     warnings: warnings.toList(),
     deletes: deletes,
   );
+}
+
+/// Of het notitiebestand op [path] weg mag nu dit deck geen notities draagt.
+///
+/// De regel is opzettelijk streng, en de reden is asymmetrie. Ten onrechte
+/// laten staan kost een verweesd bestand dat bij de volgende opslag mét
+/// notities vanzelf overschreven wordt. Ten onrechte verwijderen kost werk van
+/// iemand anders, en dat weet die pas als hij ernaar zoekt.
+///
+/// Dus: alleen weg als we het bestand hebben gelézen én het is er een van dit
+/// formaat en niet nieuwer dan deze build aankan. Geen lezer, onbereikbaar, te
+/// groot, geen geldige JSON (zoals conflictmarkeringen uit een merge buiten
+/// OciDeck) of een hogere `version` — dan blijft het staan. Zelfde contract als
+/// `_sidecarUntouchable` op schijf, en hier strenger toegepast omdat een repo
+/// gedeeld is.
+Future<bool> _userNotesMayBeDeleted(String path, RepoFileReader? read) async {
+  if (read == null) return false;
+  Uint8List? bytes;
+  try {
+    bytes = await read(path);
+  } catch (e) {
+    logWarning(
+      'buildDeckRepoFiles: notitiebestand onbereikbaar, blijft staan',
+      e,
+    );
+    return false;
+  }
+  // Er ligt niets: dan valt er ook niets te verwijderen, en het scheelt een
+  // zinloze delete in de commit.
+  if (bytes == null || bytes.isEmpty) return false;
+  if (bytes.length > maxRepoUserNotesBytes) return false;
+  // Bewust níét via [sidecarIsFromNewerBuild]: die beantwoordt de vraag "komt
+  // dit van later?" en zegt bij onleesbare JSON terecht nee. Hier is de vraag
+  // een andere — "mag ik dit weggooien?" — en daar is onleesbaar juist het
+  // sterkste nee dat er is. Dezelfde bytes, tegengesteld antwoord; vandaar dat
+  // het hier uitgeschreven staat in plaats van omgekeerd hergebruikt.
+  try {
+    final data = jsonDecode(utf8.decode(bytes));
+    return declaredSidecarVersion(data) <= UserNotesCodec.version;
+  } on FormatException catch (e) {
+    logWarning(
+      'buildDeckRepoFiles: notitiebestand is geen leesbare JSON '
+      '(conflictmarkeringen?) — blijft staan',
+      e,
+    );
+    return false;
+  }
+}
+
+/// De tekstbestanden van [deck] voor de lokale werkkopie ([DeckMirror]) —
+/// wat er in de wachtrij belandt als er geen verbinding is (§8.5).
+///
+/// Alleen tekst: geen afbeeldingen en geen media. Die staan bij een offline
+/// opslag nog in het geheugen en worden bij het legen van de wachtrij alsnog
+/// gepoold; de werkkopie is er om de *inhoud* veilig te stellen, niet om de
+/// repo na te bouwen.
+///
+/// **Wat hier niet in staat, wordt verwijderd.** Dat is geen bijwerking maar
+/// het contract van [SyncEngine], die zijn `deletes` afleidt uit wat er in de
+/// repo staat maar hier niet — zodat een dia die je weghaalde ook echt zijn
+/// bestanden meeneemt. Elk bestand dat de werkkopie in hoort, hoort dus hier,
+/// en een vergeten laag is geen "reist niet mee" maar een verwíjdering op de
+/// tak. Vandaar dat dit één functie is met één lijst, in plaats van een map
+/// die ergens in de state-laag wordt opgebouwd.
+Map<String, Uint8List> mirrorDeckFiles(
+  Deck deck, {
+  required String deckDir,
+  required MarkdownService md,
+}) {
+  final notes = UserNotesCodec.encode(
+    deck.slides,
+    deck.userNotes,
+    forTextMerge: true,
+  );
+  return <String, Uint8List>{
+    p.posix.join(deckDir, deckRepoFileName): Uint8List.fromList(
+      utf8.encode(md.generateDeck(deck)),
+    ),
+    // De markdown draagt straks alleen de verwijzing naar de grafiekdata; zonder
+    // deze bestanden komt daar bij het legen van de wachtrij een lege grafiek
+    // uit.
+    for (final entry in chartDataFilesOf(deck).entries)
+      ?repoChartDataPath(deckDir, entry.key): Uint8List.fromList(
+        utf8.encode(entry.value),
+      ),
+    p.posix.join(deckDir, userNotesRepoFileName): ?switch (notes) {
+      final String json => Uint8List.fromList(utf8.encode(json)),
+      null => null,
+    },
+  };
 }

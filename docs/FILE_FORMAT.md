@@ -1514,9 +1514,36 @@ not stored; when there are no notes, the sidecar file is deleted or not written.
 }
 ```
 
-Like the annotation layer, user notes ride along in an autosave/recovery snapshot
-and are **not** carried by a commit to a git repository; the warning before the
-commit counts them separately (`design/GIT_STORAGE.md` §9.1).
+Like the annotation layer, user notes ride along in an autosave/recovery
+snapshot. Unlike it, they **are** carried by a commit to a git repository — see
+below. *(Corrected 2026-07-22: this said they were not, and that the warning
+before the commit counted them. Both stopped being true with #541.)*
+
+#### 6.3.1 In a git repository
+
+A deck in a repository keeps its notes at **`<deckDir>/deck.user-notes.json`** —
+the same file name as on disk, on a stable path next to `deck.md`, deliberately
+not in the content-addressed asset pool (a pool path *is* the hash of the
+contents, so every typed character would mint a new blob and orphan the last).
+
+**The repository copy is written indented, one field per line.** Same schema,
+same `version`, and it decodes identically — `jq .` makes the two forms equal.
+The difference exists because the storage design has git's ordinary text merge
+resolve this file (`design/GIT_STORAGE.md` D7), and a line-based merge over a
+single line makes every edit a collision. If you write this file from another
+tool, either form is read; write the indented one if you expect anyone to merge
+it.
+
+Two consequences worth knowing if you build on this format:
+
+- **A conflicted file is not valid JSON.** Git leaves conflict markers, which
+  no JSON parser accepts. OciDeck then opens the deck *without* its notes rather
+  than with mangled ones — and deliberately leaves the file alone instead of
+  rewriting or deleting it, so the markers stay there for a human to resolve.
+- **Notes in a repository are as readable as the repository.** On disk they sit
+  next to your own file; in a shared repo everyone with read access has them,
+  under your name in the commit log. See §6.3 above for what the layer is meant
+  to hold.
 
 ### 6.4 Chart Data (`data/*.json`, `data/*.csv`)
 

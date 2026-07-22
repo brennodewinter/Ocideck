@@ -222,11 +222,18 @@ class PrivacyProjection {
     }
 
     // Deck.userNotes staat er bewust NIET bij. Dat zijn de notities die de
-    // ontvanger zélf typt; ze gaan naar een sidecar naast het bestand en
-    // bereiken geen enkel exportartefact. Ze wél projecteren zou schade doen in
-    // plaats van voorkomen: de presenter schrijft de notitiemap in haar geheel
-    // terug, dus één bewerking tijdens het presenteren zou blokken over iemands
-    // eigen aantekeningen zetten.
+    // ontvanger zélf typt; ze bereiken geen enkel exportartefact en geen
+    // projectiescherm. Ze wél projecteren zou schade doen in plaats van
+    // voorkomen: de presenter schrijft de notitiemap in haar geheel terug, dus
+    // één bewerking tijdens het presenteren zou blokken over iemands eigen
+    // aantekeningen zetten.
+    //
+    // Let op: "bereikt geen exportartefact" is niet hetzelfde als "blijft bij
+    // jou". Sinds #541 reizen deze notities mee naar een git-repo, en daar
+    // leest iedereen met leesrechten ze — ongescand, want deze projectie slaat
+    // ze over. Dat is een bewuste keuze (samenwerken wint hier van afscherming,
+    // ontwerpbesluit D7), maar hij hoort zichtbaar te zijn: FILE_FORMAT §6.3.1
+    // en de gebruikersgids zeggen het waar iemand het leest vóórdat hij typt.
     // De volgorde van de lijsten en de maps moet dezelfde zijn als in
     // `_deckFragments`: de scanner nummert daar op positie, niet op sleutel.
     // Dart-maps itereren in invoegvolgorde, dus dat komt overeen — maar

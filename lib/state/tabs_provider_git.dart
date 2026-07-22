@@ -338,6 +338,7 @@ extension TabsNotifierGit on TabsNotifier {
       resolveBytes: (path) async => WebAssetStore.isMemPath(path)
           ? WebAssetStore.bytesFor(path)
           : image.readSlideImageBytes(path, projectPath: deck.projectPath),
+      read: (path) => forge.readBlob(branch, path),
     );
   }
 
@@ -633,6 +634,7 @@ extension TabsNotifierGit on TabsNotifier {
                 path,
                 projectPath: merge.merged.projectPath,
               ),
+        read: (path) => forge.readBlob(branch, path),
       );
       final result = await forge.commitFiles(
         branch: branch,
@@ -694,19 +696,7 @@ extension TabsNotifierGit on TabsNotifier {
     required List<String> warnings,
     String? forkFrom,
   }) async {
-    final deckFiles = <String, Uint8List>{
-      p.posix.join(deckDir, deckRepoFileName): Uint8List.fromList(
-        utf8.encode(_md.generateDeck(deck)),
-      ),
-      // De databestanden moeten mee de werkkopie in, niet alleen deck.md: de
-      // markdown draagt straks alleen nog de verwijzing, en bij het legen van
-      // de wachtrij wordt het deck hiervandaan opnieuw gelezen. Zonder deze
-      // bestanden zou daar een grafiek zonder cijfers uit komen.
-      for (final entry in chartDataFilesOf(deck).entries)
-        ?repoChartDataPath(deckDir, entry.key): Uint8List.fromList(
-          utf8.encode(entry.value),
-        ),
-    };
+    final deckFiles = mirrorDeckFiles(deck, deckDir: deckDir, md: _md);
     try {
       await mirror.writeDeck(deckDir, deckFiles);
     } on DraftStoreUnsupported catch (e) {
@@ -761,6 +751,7 @@ extension TabsNotifierGit on TabsNotifier {
       md: _md,
       pool: AssetPool(forge: forge, branch: commit.branch),
       deckDir: commit.deckDir,
+      read: (path) async => stored[path],
       resolveBytes: (path) async => WebAssetStore.isMemPath(path)
           ? WebAssetStore.bytesFor(path)
           : image.readSlideImageBytes(path, projectPath: deck.projectPath),
