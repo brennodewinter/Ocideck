@@ -739,6 +739,36 @@ const _dutchSourceAddEs = {
       'OciDeck se publica bajo la EUPL-1.2. Además incluye software de terceros: los paquetes de Dart y Flutter, dos complementos incorporados, cuatro familias tipográficas, el modelo facial del control de privacidad y el JavaScript que viaja en una exportación HTML. Cada uno conserva su propia licencia.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Este archivo contiene software de terceros y, a veces, una tipografía. Abajo están los textos completos de las licencias correspondientes; transmítelos junto con el archivo.',
+  'Sporen op dit apparaat': 'Rastros en este dispositivo',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Además de tus ajustes, OciDeck guarda una lista de recientes y, si se produce un fallo, un archivo de recuperación con el contenido completo de tu presentación. Nada de eso sale de este dispositivo, pero ahí está: en texto plano, protegido por tu cuenta en este sistema operativo y por nada más.',
+  'Recent geopende presentaties': 'Presentaciones abiertas recientemente',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'La lista guarda la ruta completa y la clasificación de cada presentación que ha estado abierta: en conjunto, un dato sobre en qué trabajas y para quién.',
+  'Recente lijst wissen': 'Borrar la lista de recientes',
+  'De recente lijst was al leeg.': 'La lista de recientes ya estaba vacía.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'entrada(s) borrada(s) de la lista de recientes.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Los archivos de recuperación contienen el contenido completo de tus presentaciones en texto plano. Se limpian automáticamente a los 7 días, y de inmediato al cerrar el programa correctamente.',
+  'Alles terugzetten': 'Restablecer todo',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Borra todos los ajustes, la lista de recientes, los archivos de recuperación, las copias de trabajo de git y las contraseñas de tu llavero. Tus presentaciones se mantienen: son tuyas, no de OciDeck.',
+  'Zet alles terug naar de begintoestand': 'Restablecer todo al estado inicial',
+  'Alles terugzetten naar de begintoestand?':
+      '¿Restablecer todo al estado inicial?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Se borrarán tus ajustes, la lista de recientes, los archivos de recuperación, las copias de trabajo de git y las contraseñas guardadas. Esto no se puede deshacer. Tus presentaciones se mantienen.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'cambio(s) aún no se han enviado a un servidor git y solo existen en este dispositivo. También desaparecerán.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Todo se ha restablecido al estado inicial.',
+  'Terugzetten is niet gelukt.': 'No se ha podido restablecer.',
+  'Er wacht nog werk dat niet verstuurd is': 'Queda trabajo sin enviar',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Esta conexión git tiene cambios que aún no se han enviado al servidor. Si eliminas la conexión, también desaparece la copia de trabajo en este dispositivo, y ese trabajo ya no existirá en ninguna parte.',
+  'Verbinding behouden': 'Conservar la conexión',
+  'Toch verwijderen': 'Eliminar de todos modos',
   'esc': 'esc',
   'Enter': 'Intro',
   'OK': 'OK',
