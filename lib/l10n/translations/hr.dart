@@ -1767,8 +1767,6 @@ const _dutchSourceHr = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Dovrši i zapečati',
   'Verzegelen': 'Zapečati',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Dovršite ovu prezentaciju i izračunajte SHA-512 pečat nad njezinim sadržajem. Datoteka se zatim zaključava i više se ne može uređivati; kasnije promjene postaju vidljive. To se u aplikaciji ne može poništiti.',
   'Handtekening (optioneel)': 'Potpis (neobavezno)',
   'Naam': 'Ime',
   'Rol of functie': 'Uloga ili funkcija',
@@ -1790,6 +1788,12 @@ const _dutchSourceAddHr = <String, String>{
       'Ovaj deck sadrži AI tekst koji još nisi pregledao. Izvoz je svejedno moguć; datoteka to sama navodi i dobiva "-ai-concept" u nazivu.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Nacrt: sadrži AI tekst koji još nitko nije pregledao',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Dovršite ovu prezentaciju i zabilježite SHA-512 pečat nad spremljenom datotekom. Zatim je zaključana i više se ne može uređivati; svaka kasnija promjena postaje vidljiva. Tko primi izvješće, sam provjerava pečat pomoću sha512sum. To se u aplikaciji ne može poništiti.',
+  'Zegel en handtekening': 'Pečat i potpis',
+  'Zegel nog niet vastgelegd': 'Pečat još nije zabilježen',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Još ne postoji spremljena datoteka prema kojoj bi se pečat mogao provjeriti. Spremite prezentaciju.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Izostavljanje je uključeno: ono što provjera označi kao osobni podatak zacrnjuje se, a sve slike, videozapisi i zvuk s ovog slajda ne idu na zaslon ni u izvoz. Tvoja markdown datoteka zadržava sve.',
   'Bestand': 'Datoteka',

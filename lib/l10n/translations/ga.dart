@@ -1795,8 +1795,6 @@ const _dutchSourceGa = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Cuir i gcrích agus séalaigh',
   'Verzegelen': 'Séalaigh',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Cuir an cur i láthair seo i gcrích agus ríomh séala SHA-512 ar a bhfuil ann. Ansin cuirtear an comhad faoi ghlas agus ní féidir é a chur in eagar a thuilleadh; feictear athruithe níos déanaí. Ní féidir é seo a chealú san aip.',
   'Handtekening (optioneel)': 'Síniú (roghnach)',
   'Naam': 'Ainm',
   'Rol of functie': 'Ról nó feidhm',
@@ -1819,6 +1817,12 @@ const _dutchSourceAddGa = <String, String>{
       'Tá téacs IS sa deic seo nár sheiceáil tú fós. Is féidir easpórtáil mar sin féin; luann an comhad féin é agus faigheann sé "-ai-concept" ina ainm.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Dréacht: tá téacs IS anseo nár sheiceáil duine ar bith fós',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Cuir an cur i láthair seo i gcrích agus taifead séala SHA-512 ar an gcomhad sábháilte. Ansin cuirtear faoi ghlas é agus ní féidir é a chur in eagar a thuilleadh; feictear gach athrú a dhéantar ina dhiaidh sin. Déanann an té a fhaigheann an tuairisc an séala a sheiceáil é féin le sha512sum. Ní féidir é seo a chealú san aip.',
+  'Zegel en handtekening': 'Séala agus síniú',
+  'Zegel nog niet vastgelegd': 'Séala gan taifeadadh fós',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Níl comhad sábháilte ann fós chun an séala a sheiceáil ina choinne. Sábháil an deic.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Tá an fágáil ar lár ann: cuirtear dubh ar cibé rud a mheasann an tseiceáil a bheith ina shonra pearsanta, agus ní théann na híomhánna, an físeán ná an fhuaim ar fad ón sleamhnán seo chuig an scáileán ná chuig an easpórtáil. Coinníonn do chomhad markdown gach rud.',
   'Bestand': 'Comhad',

@@ -178,4 +178,27 @@ void main() {
     expect(find.text('Niet alles gaat mee naar git'), findsNothing);
     expect(find.text('Deknaam'), findsOneWidget);
   });
+
+  testWidgets('een verzegeld deck waarschuwt dat het zegel niet meegaat', (
+    tester,
+  ) async {
+    // Sinds het zegel naast de markdown woont, reist het niet meer vanzelf mee
+    // in `deck.md`. Zonder deze melding kwam een verzegeld rapport via git
+    // terug als een rapport dat nooit verzegeld is — zonder dat iets dat zei.
+    await pumpWithDeck(
+      tester,
+      Deck(
+        title: 'Test',
+        slides: [plain('Test')],
+        finalized: true,
+        sealAlgo: 'sha-512',
+        sealHash: 'a' * 128,
+        sealAt: '2026-07-10T12:00:00.000Z',
+      ),
+    );
+    await tapSaveTo(tester);
+
+    expect(find.text('Niet alles gaat mee naar git'), findsOneWidget);
+    expect(find.text('• Zegel en handtekening'), findsOneWidget);
+  });
 }

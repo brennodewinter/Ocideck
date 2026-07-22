@@ -283,19 +283,56 @@ model.
   rasterized PDF/PPTX output (`SlideRasterizer`) and rendered as a banner in HTML
   export.
 - **Document integrity seal.** `lib/services/document_integrity.dart` computes a
-  **SHA-512** seal over a deck's canonical Markdown content; `verify()` reports
-  `intact` / `changed` (tamper-evidence, not tamper-proofing), and
+  **SHA-512** over the **bytes of the deck's `.md` file** and records it beside
+  that file in `<name>.seal.json`, together with the visible signature
+  (`services/seal_codec.dart`, FILE_FORMAT §6.6). `verify()` reports `intact` /
+  `changed` / `notVerifiable` — tamper-evidence, not tamper-proofing: there is
+  no signing key, so anyone who can rewrite the `.md` can rewrite the sidecar
+  too. What the design does buy is **reproducibility by a third party**:
+  `sha512sum rapport.md` reproduces the value with no OciDeck and no
+  specification to replay, because there is no normalisation step at all
+  (*changed 2026-07-22: the hash used to cover the output of OciDeck's own
+  serialiser, which nobody outside the app could recompute and which any later
+  change to that serialiser would silently invalidate*). The consequence is
+  strictness — any byte change breaks the seal, including a format-version bump
+  — which is why a finalised deck is read-only and OciDeck never rewrites one on
+  its own. A seal made before 0.1.0 keeps its old form (`canonical-v1`) rather
+  than being re-issued, so an RFC 3161 token over that hash stays meaningful.
   `verifyRedactedDerivative()` reconciles a redacted export against its sealed
   source via the redaction manifest so a legitimate redaction is not a false
-  alarm. An optional `DocumentSignature` is folded into the seal. Related
-  audit-value tooling exists for the pentest module: RFC 3161 timestamp tokens
-  (`rfc3161_timestamp.dart`), evidence hashing (`evidence_hash_service.dart`),
-  and an audit dossier (`audit_dossier.dart`). The timestamp handling is
-  deliberately shallow: `timeStampMatchesHash` compares the token's message
-  imprint with the seal hash and stops there — no CMS signature, no certificate,
-  no chain. It shows that *this* token was issued over *this* hash, not that a
-  trustworthy authority issued it. Calling it a "trusted timestamp" overstated
-  that; *corrected 2026-07-21*.
+  alarm.
+
+  The seal's reach narrowed in the same step: the visible signature moved out of
+  the `.md` and is no longer inside the hash. It now sits next to the hash
+  rather than under it — the hash proves the *report* is unchanged, and the
+  attestation beside it is worth what its delivery channel is worth.
+
+  `MiauwComplianceAnalyzer` calls `verify()` for EIS 1.1; it previously scored
+  the requirement as met whenever a hash was merely *present*, so a tampered
+  report reported itself as compliant (*fixed 2026-07-22*).
+
+  Related audit-value tooling exists for the pentest module: RFC 3161 timestamp
+  tokens (`rfc3161_timestamp.dart`), evidence hashing
+  (`evidence_hash_service.dart`), and an audit dossier (`audit_dossier.dart`).
+  The timestamp handling is deliberately shallow:
+  `timeStampImprintMatchesHash` compares the token's message imprint with the
+  seal hash and stops there — no CMS signature, no certificate, no chain. It
+  shows that *this* token was issued over *this* hash, not that a trustworthy
+  authority issued it, and `genTime` is therefore a claim rather than a checked
+  fact. Calling it a "trusted timestamp" overstated that; *corrected 2026-07-21,
+  function renamed to say so 2026-07-22*.
+
+  The request **does** carry a random nonce, which the TSA must echo back; that
+  echo binds one request to one token and defeats replay of an older token for
+  the same imprint. OciDeck does not check the echo on import — it does not keep
+  the nonce, so after a restart the other half is gone — but anyone holding both
+  files can (`timeStampEchoesNonce`). The reason originally given for not
+  storing it, a clash with the seal's move into a sidecar, has lapsed now that
+  the move has landed; `<name>.seal.json` is where it would go. Building the
+  real check would mean X.509 path validation against a bundled trust anchor
+  list — a new dependency with SBOM and licence consequences, plus reference
+  data that ages — in an application that makes no network connection and
+  promises tamper-evidence, not tamper-proofing.
 - **Encrypted packages.** `.ocideck` packages can be encrypted
   (`lib/utils/zip_encryption.dart`, wired into `FileService`); an encrypted
   package cannot be opened without its password.
@@ -509,7 +546,7 @@ be any.
 | **Malicious deck or asset** | Structural validation (§6), asset-path containment (§4), HTML-export sanitization (§5), magic-byte image checks (§6), bounded image decoding | The render-path symlink cache is keyed by path for the session, so a symlink swapped *after* its first render is not re-checked — a narrow TOCTOU on an already-open deck (also stated in `SECURITY.md`) | 2026-07-22 |
 | **Network / SSRF** | NetGuard classification, resolve-then-pin, no redirect following, byte caps (§3); trusted-internal is opt-in (§10) | Live media rendering (`NetworkImage`, the video controller, the embed WebView) does its own DNS and cannot be socket-pinned, and a positive host resolution is cached for the session. This is why online media is **off by default** and scoped to sessions the user enables (§7 of `SECURITY.md`) | 2026-07-22 |
 | **Data exfiltration via AI** | Fail-closed egress gate, dual consent for a cloud backend, blocked on web (§7) | The gate governs what OciDeck sends. What the configured backend then does with it is outside this design entirely — a self-hosted model and a cloud API get the same bytes and offer different guarantees, and only the user knows which they configured | 2026-07-22 |
-| **Tampering with a finalised report** | SHA-512 seal over canonical content, with the sign-off block folded in (§9, §12) | Tamper-**evidence**, not tamper-proofing: anyone who edits the deck can recompute the seal. It shows *that* something changed, never *who* sealed it. An RFC 3161 token adds *when*, and only as far as the message imprint — the TSA's own signature is not verified | 2026-07-22 |
+| **Tampering with a finalised report** | SHA-512 seal over the file's bytes, in a `.seal.json` sidecar (§9, §12) — a recipient recomputes it with `sha512sum` alone | Tamper-**evidence**, not tamper-proofing: anyone who edits the deck can recompute the seal. It shows *that* something changed, never *who* sealed it — and the sign-off now sits beside the hash rather than under it, so the statement is worth what the channel that carried it is worth. An RFC 3161 token adds *when*, and only as far as the message imprint — the TSA's own signature is not verified | 2026-07-22 |
 | **Supply-chain drift** | Hashed and OSV-checked export bundles, SBOM staleness gate, licence and pinned-action gates (§2) | The Dart package graph is scanned only advisorily (`make trivy` never fails, by configuration), because pub advisory coverage is sparse. Two bundled components carry named, deferred items — mermaid 10.9.6 and MathJax 3.2.2 — recorded in `SECURITY.md` | 2026-07-22 |
 | **Deck content at rest on the machine** | Recovery snapshots are pruned after 7 days; the app-support directory carries OS user permissions | Snapshots and git working copies are **unencrypted**, and a git clone additionally keeps full history with no expiry. Removing the connection does not remove them. Encrypting snapshots at rest is a known, unimplemented improvement | 2026-07-22 |
 | **A compromised or hostile operating-system account** | Out of scope, by the assumption above | Everything. The keychain, the snapshots, the working copies and the preferences all trust the OS account. On macOS the App Sandbox is deliberately **off**, so there is no OS-level process isolation either (`SECURITY.md`, *Platform sandboxing*) | 2026-07-22 |

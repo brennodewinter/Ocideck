@@ -7,6 +7,8 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/document_signature.dart';
+import 'package:ocideck/models/seal_record.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/document_integrity.dart';
 import 'package:ocideck/services/file_service.dart';
@@ -884,6 +886,29 @@ void main() {
     expect(strokes.first.color, 0xFF112233);
   });
 
+  test('applyMarkdown preserves the signature across a toggle', () {
+    // De handtekening staat sinds 0.1.0 niet meer in de markdown. Zonder dat de
+    // toggle haar apart meeneemt, was ze na één keer schakelen naar de
+    // markdown-weergave weg — en had de eerstvolgende opslag het zegelbestand
+    // met haar erin opgeruimd.
+    final n = _notifier();
+    n.loadDeck(
+      Deck(
+        title: 'Rapport',
+        slides: [Slide.create(SlideType.signOff)],
+        signature: const DocumentSignature(
+          name: 'Jan Jansen',
+          role: 'Onderzoeker',
+        ),
+      ),
+    );
+    final md = n.generateMarkdown();
+    expect(md, isNot(contains('ocideck_sig_')));
+    expect(n.applyMarkdown(md), isTrue);
+    expect(n.state.deck!.signature?.name, 'Jan Jansen');
+    expect(n.state.deck!.signature?.role, 'Onderzoeker');
+  });
+
   test('generateMarkdown inlines linked chart data for the editor', () {
     final n = _notifier();
     const chartBlock =
@@ -929,9 +954,13 @@ void main() {
       final deck = n.state.deck!;
       expect(deck.finalized, isTrue);
       expect(deck.sealAlgo, 'sha-512');
-      expect(deck.sealHash.length, 128);
+      expect(deck.sealForm, SealForm.fileBytes);
       expect(deck.sealAt, isNotEmpty);
-      expect(n.integrityStatus, IntegrityStatus.intact);
+      // De hash gaat over de bytes van de `.md`, en die bestaan pas na het
+      // opslaan. Tot dan is er niets om tegen na te rekenen — dat is eerlijker
+      // dan een groen vinkje voor een controle die niemand deed.
+      expect(deck.sealHash, isEmpty);
+      expect(n.integrityStatus, IntegrityStatus.notVerifiable);
     });
 
     test('a finalised deck is read-only: content edits are refused', () {
@@ -951,7 +980,6 @@ void main() {
       expect(n.state.deck!.slides, hasLength(2));
       expect(n.state.deck!.author, isEmpty);
       expect(n.generateMarkdown(), before);
-      expect(n.integrityStatus, IntegrityStatus.intact);
     });
 
     test('finalizeAndSeal clears history so finalising cannot be undone', () {
@@ -966,9 +994,9 @@ void main() {
     test('finalizeAndSeal is a no-op on an already finalised deck', () {
       final n = _notifier()..newDeck('Rapport');
       n.finalizeAndSeal();
-      final hash = n.state.deck!.sealHash;
+      final at = n.state.deck!.sealAt;
       n.finalizeAndSeal();
-      expect(n.state.deck!.sealHash, hash);
+      expect(n.state.deck!.sealAt, at);
     });
   });
 

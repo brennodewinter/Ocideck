@@ -1758,8 +1758,6 @@ const _dutchSourceDa = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Færdiggør & forsegl',
   'Verzegelen': 'Forsegl',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Færdiggør denne præsentation, og beregn et SHA-512-segl over indholdet. Derefter er filen låst og kan ikke længere redigeres; senere ændringer bliver synlige. Dette kan ikke fortrydes i appen.',
   'Handtekening (optioneel)': 'Underskrift (valgfri)',
   'Naam': 'Navn',
   'Rol of functie': 'Rolle eller funktion',
@@ -1782,6 +1780,12 @@ const _dutchSourceAddDa = <String, String>{
       'Dette deck indeholder AI-tekst, du endnu ikke har gennemgået. Du kan godt eksportere; filen oplyser selv om det og får "-ai-concept" i navnet.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Udkast: indeholder AI-tekst, som ingen har gennemgået endnu',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Færdiggør denne præsentation, og fastlæg et SHA-512-segl over den gemte fil. Derefter er den låst og kan ikke længere redigeres; enhver senere ændring bliver synlig. Den, der modtager rapporten, efterregner selv seglet med sha512sum. Dette kan ikke fortrydes i appen.',
+  'Zegel en handtekening': 'Segl og underskrift',
+  'Zegel nog niet vastgelegd': 'Segl endnu ikke fastlagt',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Der er endnu ingen gemt fil at kontrollere seglet imod. Gem decket.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Udeladelse er slået til: det, som tjekket anser for en personoplysning, sværtes, og alle billeder, video og lyd på dette slide kommer ikke med på skærmen eller i eksporten. Din markdown-fil beholder alt.',
   'Bestand': 'Arkiv',

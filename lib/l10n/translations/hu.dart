@@ -1764,8 +1764,6 @@ const _dutchSourceHu = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Véglegesítés és lezárás',
   'Verzegelen': 'Lezárás',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Véglegesítse ezt a bemutatót, és számítson ki egy SHA-512 pecsétet a tartalmáról. Ezután a fájl zárolva lesz, és többé nem szerkeszthető; a későbbi módosítások láthatóvá válnak. Ez az alkalmazásban nem vonható vissza.',
   'Handtekening (optioneel)': 'Aláírás (opcionális)',
   'Naam': 'Név',
   'Rol of functie': 'Szerep vagy beosztás',
@@ -1787,6 +1785,12 @@ const _dutchSourceAddHu = <String, String>{
       'Ebben a deckben AI-szöveg van, amelyet még nem ellenőriztél. Az exportálás így is lehetséges; a fájl maga jelzi ezt, és a neve "-ai-concept" toldalékot kap.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Vázlat: AI-szöveget tartalmaz, amelyet még senki nem ellenőrzött',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Véglegesítse ezt a bemutatót, és rögzítsen egy SHA-512 pecsétet a mentett fájlra. Ezután zárolva lesz, és többé nem szerkeszthető; minden későbbi módosítás láthatóvá válik. Aki megkapja a jelentést, maga számolja újra a pecsétet a sha512sum paranccsal. Ez az alkalmazásban nem vonható vissza.',
+  'Zegel en handtekening': 'Pecsét és aláírás',
+  'Zegel nog niet vastgelegd': 'A pecsét még nincs rögzítve',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Még nincs mentett fájl, amelyhez a pecsétet ellenőrizni lehetne. Mentse el a diasort.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'A kihagyás be van kapcsolva: amit az ellenőrzés személyes adatnak minősít, azt kitakarjuk, és ennek a diának egyetlen képe, videója és hangja sem kerül a képernyőre vagy az exportba. A markdown-fájlod mindent megőriz.',
   'Bestand': 'Fájl',

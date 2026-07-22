@@ -1763,8 +1763,6 @@ const _dutchSourceGsw = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Abschliesse & versiegle',
   'Verzegelen': 'Versiegle',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Schliess die Präsentation ab und rächne e SHA-512-Sigel über de Inhalt. Denn isch d Datei gsperrt und cha nüme bearbeitet werde; spöteri Änderige wärded sichtbar. Das cha i de App nöd rückgängig gmacht werde.',
   'Handtekening (optioneel)': 'Underschrift (optional)',
   'Naam': 'Name',
   'Rol of functie': 'Rolle oder Funktion',
@@ -1787,6 +1785,12 @@ const _dutchSourceAddGsw = <String, String>{
       'I dem Deck staht KI-Text, wo du no nöd prüeft häsch. Exportiere gaht trotzdem; d Datei seit das sälber und überchunnt "-ai-concept" im Name.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Entwurf: da staht KI-Text, wo no niemert prüeft hät',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Schliess die Präsentation ab und halt es SHA-512-Sigel über di gspeicherti Datei fest. Denn isch si gsperrt und cha nüme bearbeitet werde; jedi spöteri Änderig wird sichtbar. Wer de Bricht überchunnt, rächnet s Sigel sälber mit sha512sum na. Das cha i de App nöd rückgängig gmacht werde.',
+  'Zegel en handtekening': 'Sigel und Underschrift',
+  'Zegel nog niet vastgelegd': 'Sigel no nöd festghalte',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Es git no kei gspeicherti Datei, wo mer s Sigel chönnt nachrächne. Speichere s Deck.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'S Weglah isch aa: was d Prüefig als persönlichs Datum iistueft, wird gschwärzt, und alli Bilder, Video und Audio vo dere Folie chömed nid uf de Bildschirm oder in Export. Dis Markdown-File behaltet alles.',
   'Bestand': 'Datei',

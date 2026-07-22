@@ -1751,8 +1751,6 @@ const _dutchSourceEt = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Vormista ja pitseeri',
   'Verzegelen': 'Pitseeri',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Vormista see esitlus ja arvuta selle sisu kohta SHA-512 pitser. Seejärel on fail lukustatud ega ole enam muudetav; hilisemad muudatused muutuvad nähtavaks. Seda ei saa rakenduses tagasi võtta.',
   'Handtekening (optioneel)': 'Allkiri (valikuline)',
   'Naam': 'Nimi',
   'Rol of functie': 'Roll või ametikoht',
@@ -1774,6 +1772,12 @@ const _dutchSourceAddEt = <String, String>{
       'Selles esitluses on AI tekst, mida sa pole veel üle vaadanud. Eksportida saab siiski; fail teatab sellest ise ja saab nimesse "-ai-concept".',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Mustand: sisaldab AI teksti, mida keegi pole veel üle vaadanud',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Vormista see esitlus ja fikseeri salvestatud faili SHA-512 pitser. Seejärel on see lukustatud ega ole enam muudetav; iga hilisem muudatus muutub nähtavaks. Aruande saaja kontrollib pitserit ise käsuga sha512sum. Seda ei saa rakenduses tagasi võtta.',
+  'Zegel en handtekening': 'Pitser ja allkiri',
+  'Zegel nog niet vastgelegd': 'Pitser pole veel fikseeritud',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Salvestatud faili, mille vastu pitserit kontrollida, veel ei ole. Salvesta esitlus.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Väljajätmine on sees: see, mida kontroll peab isikuandmeteks, muudetakse mustaks ning selle slaidi kõik pildid, video ja heli ei lähe ekraanile ega ekspordisse. Sinu markdown-fail säilitab kõik.',
   'Bestand': 'Fail',

@@ -1,4 +1,5 @@
 import '../models/deck.dart';
+import '../models/document_signature.dart';
 import 'document_integrity.dart';
 import 'privacy/privacy_projection.dart';
 
@@ -40,6 +41,16 @@ class ExportDocumentMetadata {
   final String keywords;
   final TlpLevel tlp;
 
+  /// De zichtbare handtekening op dekniveau, en het moment van verzegelen.
+  ///
+  /// Ze reizen sinds 0.1.0 niet meer mee in de front matter van de `.md` (ze
+  /// wonen in `<naam>.seal.json`), en de HTML-export las ze daar tot dan uit
+  /// terug. Zonder deze twee velden zou de akkoordpagina in het document dat de
+  /// klant krijgt een kop met wit eronder worden — precies de pagina waar de
+  /// verklaring hoort te staan.
+  final DocumentSignature? signature;
+  final String sealedAt;
+
   /// Hoeveel dia's een AI-opgesteld veld dragen dat nog niet is nagekeken
   /// (`Slide.aiAssistedFields`, AI_ASSIST §16.3).
   ///
@@ -57,19 +68,30 @@ class ExportDocumentMetadata {
     this.description = '',
     this.keywords = '',
     this.tlp = TlpLevel.none,
+    this.signature,
+    this.sealedAt = '',
     this.unreviewedAiSlideCount = 0,
   });
 
   /// De documentmetadata van een geprojecteerd deck.
   ///
-  /// Bewust een [AudienceDeck] en geen rauwe [Deck]. De zes auteursvelden
-  /// belanden leesbaar in de PDF-info, de PPTX-docProps en de HTML-kop — ook al
-  /// staat er op geen enkele dia iets van te zien. Nam deze fabriek een `Deck`,
-  /// dan was "vergeten te projecteren" hier een stille lek van precies de velden
+  /// Bewust een [AudienceDeck] en geen rauwe [Deck]. Deze velden belanden
+  /// leesbaar in de PDF-info, de PPTX-docProps en de HTML-kop — ook al staat er
+  /// op geen enkele dia iets van te zien. Nam deze fabriek een `Deck`, dan was
+  /// "vergeten te projecteren" hier een stille lek van precies de velden
   /// (`title`, `author`, `organization`, `description`, `keywords`) die de
   /// scanner deckbreed naloopt. Nu weigert de compiler het: een `AudienceDeck`
   /// is alleen door [PrivacyProjection] te maken.
   ///
+  /// **De ondertekening is een uitzondering, en die moet u kennen.** Anders dan
+  /// de vijf velden hierboven wordt [DocumentSignature] niet door de projectie
+  /// geredigeerd: hij ís de akkoordverklaring en hoort zichtbaar te zijn op de
+  /// ondertekeningsdia die de ontvanger krijgt. Het `AudienceDeck`-type
+  /// garandeert dus dat het *deck* door de projectie is gegaan, niet dat dít
+  /// veld is nagelopen. Dat was vóór 0.1.0 niet anders — de handtekening reisde
+  /// toen als `ocideck_sig_*` mee in de front matter van dezelfde geprojecteerde
+  /// markdown — maar daar was het een bijverschijnsel en hier is het een keuze,
+  /// en een keuze hoort opgeschreven te staan.
   /// [unreviewedAiSlideCount] hoort niet in dat rijtje. Het is geen veld dat de
   /// auteur invult maar een feit dat híér uit het deck wordt geteld, en dat is
   /// het verschil dat telt: een melding die je moet dóórgeven, kun je vergeten
@@ -83,6 +105,8 @@ class ExportDocumentMetadata {
       description: deck.description,
       keywords: deck.keywords,
       tlp: deck.tlp,
+      signature: deck.signature,
+      sealedAt: deck.finalized ? deck.sealAt : '',
       unreviewedAiSlideCount: slidesWithUnreviewedAiMarkers(deck).length,
     );
   }

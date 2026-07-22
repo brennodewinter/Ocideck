@@ -1771,8 +1771,6 @@ const _dutchSourcePl = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Sfinalizuj i zapieczętuj',
   'Verzegelen': 'Zapieczętuj',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Sfinalizuj tę prezentację i oblicz pieczęć SHA-512 na jej zawartości. Plik zostanie następnie zablokowany i nie będzie można go już edytować; późniejsze zmiany staną się widoczne. Tego nie można cofnąć w aplikacji.',
   'Handtekening (optioneel)': 'Podpis (opcjonalnie)',
   'Naam': 'Imię i nazwisko',
   'Rol of functie': 'Rola lub funkcja',
@@ -1795,6 +1793,12 @@ const _dutchSourceAddPl = <String, String>{
       'W tej talii jest tekst AI, którego jeszcze nie sprawdziłeś. Eksport jest możliwy; plik sam o tym informuje i dostaje "-ai-concept" w nazwie.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Szkic: zawiera tekst AI, którego nikt jeszcze nie sprawdził',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Sfinalizuj tę prezentację i utrwal pieczęć SHA-512 na zapisanym pliku. Plik zostanie następnie zablokowany i nie będzie można go już edytować; każda późniejsza zmiana stanie się widoczna. Kto otrzyma raport, sam sprawdzi pieczęć za pomocą sha512sum. Tego nie można cofnąć w aplikacji.',
+  'Zegel en handtekening': 'Pieczęć i podpis',
+  'Zegel nog niet vastgelegd': 'Pieczęć jeszcze nie zapisana',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Nie ma jeszcze zapisanego pliku, względem którego można sprawdzić pieczęć. Zapisz prezentację.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Pomijanie jest włączone: to, co kontrola uznaje za dane osobowe, jest zaczerniane, a wszystkie obrazy, wideo i dźwięk z tego slajdu nie trafiają na ekran ani do eksportu. Twój plik markdown zachowuje wszystko.',
   'Bestand': 'Plik',

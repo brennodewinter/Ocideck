@@ -11,6 +11,17 @@ import 'package:ocideck/services/privacy/redaction_manifest_service.dart';
 
 // Het redactiemanifest: hoe een derde partij een geredigeerd rapport controleert
 // zonder dat het zegel breekt.
+/// Een deck dat is afgerond én opgeslagen: pas dan bestaat de zegelhash, want
+/// die gaat over de bytes van de `.md`.
+Deck _verzegeldEnOpgeslagen(Deck deck) {
+  final md = MarkdownService();
+  final afgerond = DocumentIntegrity(md).seal(deck);
+  return DocumentIntegrity.recordWrittenBytes(
+    afgerond,
+    md.generateDeck(afgerond),
+  );
+}
+
 void main() {
   final service = RedactionManifestService();
 
@@ -198,7 +209,7 @@ void main() {
       // "GEMANIPULEERD" concluderen — en een vals alarm op een echt rapport is
       // erger dan geen integriteitscontrole hebben.
       final integrity = DocumentIntegrity(MarkdownService());
-      final sealed = integrity.seal(redactedDeck());
+      final sealed = _verzegeldEnOpgeslagen(redactedDeck());
       final manifest = service.build(sealed);
 
       expect(integrity.verify(sealed), IntegrityStatus.intact);
@@ -214,8 +225,8 @@ void main() {
 
     test('een manifest dat bij een andere bron hoort, is wél verdacht', () {
       final integrity = DocumentIntegrity(MarkdownService());
-      final sealed = integrity.seal(redactedDeck());
-      final andereBron = integrity.seal(redactedDeck(bsn: '100000009'));
+      final sealed = _verzegeldEnOpgeslagen(redactedDeck());
+      final andereBron = _verzegeldEnOpgeslagen(redactedDeck(bsn: '100000009'));
       final manifest = service.build(sealed);
 
       expect(
@@ -229,8 +240,7 @@ void main() {
     });
 
     test('het manifest pint de herkomst vast op de zegelhash', () {
-      final integrity = DocumentIntegrity(MarkdownService());
-      final sealed = integrity.seal(redactedDeck());
+      final sealed = _verzegeldEnOpgeslagen(redactedDeck());
       expect(service.build(sealed).derivedFrom, sealed.sealHash);
     });
   });

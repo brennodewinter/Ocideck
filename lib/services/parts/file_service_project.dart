@@ -63,11 +63,13 @@ extension _FileServiceProject on FileService {
 
     final markdown = _md.generateDeck(updatedDeck);
     await writeStringAtomic(File(filePath), markdown);
-    // Annotaties, notities en de MIAUW-dispositie leven in eigen sidecars,
-    // zodat de `.md` pure, leesbare Marp blijft.
+    updatedDeck = DocumentIntegrity.recordWrittenBytes(updatedDeck, markdown);
+    // Annotaties, notities, de MIAUW-dispositie en het zegel leven in eigen
+    // sidecars, zodat de `.md` pure, leesbare Marp blijft.
     await _writeSidecar(updatedDeck, filePath);
     await _writeUserNotesSidecar(updatedDeck, filePath);
     await _writeMiauwSidecar(updatedDeck, filePath);
+    await _writeSealSidecar(updatedDeck, filePath);
     return (deck: updatedDeck, chartWarnings: chartWarnings);
   }
 

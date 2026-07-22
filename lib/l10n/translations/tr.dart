@@ -900,8 +900,6 @@ const _dutchSourceTr = {
       'İndirilenler klasörünüze indirme olarak kaydedildi.',
   'Afronden & verzegelen': 'Sonlandır & mühürle',
   'Verzegelen': 'Mühürle',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Bu sunumu sonlandırın ve içeriği üzerinde bir SHA-512 mührü hesaplayın. Ardından dosya kilitlenir ve artık düzenlenemez; sonraki değişiklikler görünür hale gelir. Bu işlem uygulamada geri alınamaz.',
   'Handtekening (optioneel)': 'İmza (isteğe bağlı)',
   'Naam': 'Ad',
   'Rol of functie': 'Rol veya görev',
@@ -2765,6 +2763,12 @@ const _dutchSourceAddTr = <String, String>{
       'Bu sunumda henüz gözden geçirmediğiniz AI metni var. Yine de dışa aktarabilirsiniz; dosya bunu kendisi belirtir ve adına "-ai-concept" eklenir.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Taslak: kimsenin henüz gözden geçirmediği AI metni içeriyor',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Bu sunumu sonlandırın ve kaydedilen dosya üzerinde bir SHA-512 mührü sabitleyin. Ardından dosya kilitlenir ve artık düzenlenemez; sonraki her değişiklik görünür hale gelir. Raporu alan kişi mührü sha512sum ile kendisi doğrular. Bu işlem uygulamada geri alınamaz.',
+  'Zegel en handtekening': 'Mühür ve imza',
+  'Zegel nog niet vastgelegd': 'Mühür henüz kaydedilmedi',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Mührün karşılaştırılacağı kayıtlı bir dosya henüz yok. Sunumu kaydedin.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Çıkarma açık: denetimin kişisel veri saydığı şeyler karartılır ve bu slayttaki tüm görseller, video ve ses ekrana ya da dışa aktarmaya gitmez. Markdown dosyanız her şeyi saklar.',
   'Bestand': 'Dosya',

@@ -714,8 +714,6 @@ const _dutchSourceEs = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Finalizar y sellar',
   'Verzegelen': 'Sellar',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Finalice esta presentación y calcule un sello SHA-512 sobre su contenido. Después el archivo queda bloqueado y ya no se puede editar; los cambios posteriores se hacen visibles. Esto no se puede deshacer en la aplicación.',
   'Handtekening (optioneel)': 'Firma (opcional)',
   'Naam': 'Nombre',
   'Rol of functie': 'Rol o función',
@@ -737,6 +735,12 @@ const _dutchSourceAddEs = {
       'Este deck contiene texto de IA que aún no has revisado. Puedes exportar igualmente; el archivo lo indica por sí mismo y lleva "-ai-concept" en el nombre.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Borrador: contiene texto de IA que nadie ha revisado todavía',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalice esta presentación y fije un sello SHA-512 sobre el archivo guardado. Después queda bloqueado y ya no se puede editar; cada cambio posterior se hace visible. Quien reciba el informe comprueba el sello por sí mismo con sha512sum. Esto no se puede deshacer en la aplicación.',
+  'Zegel en handtekening': 'Sello y firma',
+  'Zegel nog niet vastgelegd': 'Sello aún no registrado',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Todavía no hay un archivo guardado con el que comprobar el sello. Guarde el deck.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'La omisión está activada: lo que la comprobación califica como dato personal se tacha, y todas las imágenes, vídeos y audios de esta diapositiva no pasan a la pantalla ni a la exportación. Tu archivo markdown lo conserva todo.',
   'Bestand': 'Archivo',

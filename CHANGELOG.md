@@ -96,6 +96,50 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   OciDeck kan die controle bij het inlezen niet zelf doen — het bestand bewaart
   uw verzoek niet, dus na een herstart is de andere helft weg. Wie beide
   bestanden heeft, kan het wél nakijken (`openssl ts -reply -in … -text`).
+- **Het zegel is voortaan zelf na te rekenen — met één commando, zonder
+  OciDeck.** Tot nu toe stond het zegel in de kop van uw rapport en ging de hash
+  over een tussenvorm die OciDeck zelf uitschrijft. Die vorm stond nergens
+  beschreven, dus een ontvanger kón hem niet narekenen; en elke latere wijziging
+  aan die uitschrijving zou "intact" stil in "gemanipuleerd" veranderen op een
+  document dat als bewijsstuk bedoeld is.
+
+  Het zegel en de handtekening staan nu naast het rapport, in
+  `<naam>.seal.json`, net als uw tekeningen en aantekeningen. Daardoor kan de
+  hash gaan over het rapportbestand zelf. Wie uw rapport ontvangt, doet:
+
+  ```
+  sha512sum rapport.md
+  ```
+
+  en vergelijkt de uitkomst met `hash` in `rapport.seal.json`. Verder niets: geen
+  specificatie om na te spelen, geen bewerking vooraf, geen OciDeck. Datzelfde
+  recept staat ook in het auditdossier, dus u hoeft er niets bij uit te leggen.
+  De testvector staat in `docs/FILE_FORMAT.md` §6.6 en wordt door een test
+  bewaakt.
+
+  Twee dingen om te weten. **Verzegeld is bevroren**: élke wijziging aan het
+  bestand breekt het zegel, ook een die u geen inhoud zou noemen — andere
+  regeleindes bijvoorbeeld. Dat is de bedoeling, en daarom maakt OciDeck een
+  afgerond rapport alleen-lezen en schrijft het er uit zichzelf nooit meer
+  overheen. En: stuur `rapport.md` en `rapport.seal.json` samen, of exporteer een
+  pakket — dan zitten ze allebei erin.
+
+  Tussen afronden en opslaan staat er kort **Zegel nog niet vastgelegd** in de
+  statusbalk: de hash gaat over een bestand, en dat bestaat op dat moment nog
+  niet. Eén keer opslaan en de melding wordt **Integriteit intact**.
+
+  **Bestaande verzegelde rapporten hoeft u nergens voor om te zetten.** Ze
+  openen zoals ze zijn, hun zegel blijft kloppen, en bij de eerstvolgende keer
+  opslaan verhuist het blok naar de nieuwe plek. De hash zelf blijft daarbij
+  ongemoeid: een RFC 3161-tijdstempel dekt precies díé waarde, en die notarisatie
+  is meer waard dan één uniform formaat.
+- **Een gemanipuleerd rapport meldt zichzelf niet langer als in orde.** Het
+  nalevingsoverzicht vinkte eis 1.1 ("verzegeld") af zodra er een hash in het
+  bestand stond — zonder die hash na te rekenen. Een rapport waar na het
+  verzegelen in was geknoeid, droeg zijn oude hash gewoon mee en kwam dus als
+  voldaan uit het overzicht dat een auditor leest. De eis rekent de hash nu na,
+  en het auditdossier schrijft de uitkomst van die controle erbij in plaats van
+  alleen de waarde.
 - **Zet u versleuteling aan bij een pakket, dan staat er meteen een sterk
   wachtwoord klaar.** Het veld was leeg, en dan verzint een mens iets dat hij
   kan onthouden. Juist bij dit bestandsformaat is dat de zwakke plek: de manier
@@ -385,6 +429,17 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   als manipulatie. Uw zichtbare ondertekening valt er bewust wél onder, zodat
   knoeien daarmee zichtbaar blijft. Dezelfde afweging als bij de formaatversie:
   een vals alarm is duurder dan geen alarm.
+
+  *Bijgesteld een dag later, toen het zegel over het bestand ging in plaats van
+  erin (zie hierboven).* Beide helften van deze alinea zijn daarmee achterhaald.
+  Een hash over het bestand kan geen regels overslaan — de ontvanger draait
+  `sha512sum` over het hele bestand, en een oordeel dat alleen OciDeck kan
+  navertellen was nu juist wat we kwijt wilden. Uw eigen regels vallen er dus
+  weer onder, en uw ondertekening er juist niet meer (die staat nu naast het
+  zegel in plaats van eronder). Wat het valse alarm wegneemt is niet langer een
+  uitzondering maar de bevriezing zelf: een afgerond rapport is alleen-lezen,
+  dus u kunt uw CSS er niet meer in bijstellen en er achteraf door verrast
+  worden.
 
 - **De documentatie noemt de juiste dekkingsvloer.** Vijf plaatsen in `docs/`
   hielden vol dat de afgedwongen dekking 78 % was — één zei 79 % — terwijl de

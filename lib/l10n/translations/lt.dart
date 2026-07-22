@@ -1767,8 +1767,6 @@ const _dutchSourceLt = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Užbaigti ir užantspauduoti',
   'Verzegelen': 'Užantspauduoti',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Užbaikite šią prezentaciją ir apskaičiuokite jos turinio SHA-512 antspaudą. Tada failas užrakinamas ir jo nebegalima redaguoti; vėlesni pakeitimai tampa matomi. Programoje to atšaukti negalima.',
   'Handtekening (optioneel)': 'Parašas (nebūtina)',
   'Naam': 'Vardas',
   'Rol of functie': 'Vaidmuo arba pareigos',
@@ -1791,6 +1789,12 @@ const _dutchSourceAddLt = <String, String>{
       'Šiame rinkinyje yra DI tekstas, kurio dar neperžiūrėjai. Eksportuoti vis tiek galima; failas pats tai nurodo, o pavadinime atsiranda „-ai-concept“.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Juodraštis: čia yra DI tekstas, kurio dar niekas neperžiūrėjo',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Užbaikite šią prezentaciją ir užfiksuokite įrašyto failo SHA-512 antspaudą. Tada jis užrakinamas ir jo nebegalima redaguoti; kiekvienas vėlesnis pakeitimas tampa matomas. Ataskaitą gavęs asmuo antspaudą patikrina pats su sha512sum. Programoje to atšaukti negalima.',
+  'Zegel en handtekening': 'Antspaudas ir parašas',
+  'Zegel nog niet vastgelegd': 'Antspaudas dar neįrašytas',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Dar nėra įrašyto failo, pagal kurį būtų galima patikrinti antspaudą. Išsaugokite rinkinį.',
   'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Praleidimas įjungtas: tai, ką patikra laiko asmens duomenimis, užjuodinama, o visi šios skaidrės vaizdai, vaizdo ir garso įrašai nepatenka nei į ekraną, nei į eksportą. Tavo markdown failas išsaugo viską.',
   'Bestand': 'Failas',

@@ -653,6 +653,17 @@ does**.
 > non-empty layers count; a warning that also fires when nothing is at stake
 > trains people to dismiss it. Note that the §9.7 merge semantics therefore have
 > nothing to merge yet: they describe the sidecars once they are committed.
+>
+> *Updated 22-07-2026:* the **document seal and the visible signature** joined
+> that list. They used to ride along inside `deck.md`'s front matter, so a
+> sealed report survived a git round trip by accident; since they moved to
+> `<name>.seal.json` (FILE_FORMAT §6.6) they do not. The failure mode is worse
+> than a lost ink layer — a sealed report comes back reading as one that was
+> never sealed — so `gitDeckOmissions` now reports it and the dialog names it.
+> Committing the seal file itself is the real fix and belongs with the sidecar
+> work above; note that a seal has no merge semantics to design, because a
+> sealed deck is frozen and two versions of one seal is not a conflict but a
+> mistake.
 
 ### 9.2 Opening / loading
 
