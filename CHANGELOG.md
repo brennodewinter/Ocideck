@@ -289,6 +289,14 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   melding bij een te grote maplijst noemt nu overal het aantal.
 
 ### Fixed
+- **In de browser kon u een logo kiezen dat daarna nergens meer was.** De
+  logokiezer in Instellingen bewaart het pad naar een bestand op uw eigen
+  machine, en zo'n pad bestaat in een browser niet: u koos een afbeelding, het
+  venster sloot, en na herladen was de instelling leeg. Op web verdwijnt de
+  logo-instelling nu, net als de andere mapkiezers — liever geen knop dan een
+  knop die niet doet wat hij belooft. Footer en slotdia blijven gewoon staan;
+  die hebben geen bestandssysteem nodig. Op macOS, Windows en Linux verandert er
+  niets.
 - **Een kwetsbaarheidsmelding kwam op het verkeerde adres uit.** Het
   contactkaartje in de issuetracker verwees naar `security@vigilis.nl`, terwijl
   `SECURITY.md` en de gedragscode allebei `security@librekat.nl` noemen. Wie de

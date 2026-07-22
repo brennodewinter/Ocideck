@@ -58,6 +58,53 @@ void main() {
     expect(find.byType(SettingsDialog), findsOneWidget);
   });
 
+  // De logo-instelling staat sinds #506 achter `supportsLocalProjectFolders`,
+  // omdat een logo als pad in het themaprofiel wordt bewaard en de browser geen
+  // bruikbaar pad teruggeeft. Deze test dekt de dráaiende helft van die poort:
+  // op een platform mét bestandssysteem moet de instelling er gewoon zijn.
+  //
+  // De web-helft is hier structureel niet te toetsen: onder `flutter test` is
+  // `kIsWeb` altijd false, de vlag komt via een conditionele import zonder
+  // injectiepunt, en er is geen `--platform chrome`-doel. Die kant wordt door
+  // #505 bewaakt, met een statische regel in plaats van een test.
+  testWidgets(
+    'de logo-instelling staat er op een platform met bestandssysteem',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1500, 1100));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      await tester.pumpWidget(
+        ProviderScope(
+          child: MaterialApp(
+            home: Scaffold(
+              body: Builder(
+                builder: (context) => ElevatedButton(
+                  onPressed: () => SettingsDialog.show(
+                    context,
+                    initialSection: SettingsSection.presentation,
+                  ),
+                  child: const Text('open'),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+
+      // Positie en grootte horen bij de logokeuze en staan er dus alleen als de
+      // poort openstaat. Het pad zelf is geen anker: standaard staat er al een
+      // logo ingesteld, dus de "geen logo"-tekst verschijnt nooit.
+      expect(find.text('Logo positie'), findsOneWidget);
+      expect(find.text('Logo px'), findsOneWidget);
+
+      // De footer hoort er náást te staan: die heeft geen bestandssysteem nodig
+      // en mag door de logo-poort niet zijn meegesleept.
+      expect(find.text('Footertekst'), findsOneWidget);
+    },
+  );
+
   // De taalkeuze wisselt de interface meteen en schrijft dus buiten Opslaan om
   // in de instellingen. Annuleren moet dat terugdraaien, anders verwerpt het je
   // andere wijzigingen wél en blijft de taal staan.
