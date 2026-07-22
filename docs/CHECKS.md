@@ -204,9 +204,12 @@ also declares them, but see the [CI note](#continuous-integration).)
     time. A ceiling may shrink (split the file) but never grow, so large files
     trend smaller instead of creeping bigger. `lib/l10n/translations/*` is
     exempt (those grow with every UI string).
-  - **FilePicker paths behind a platform gate** — a file in `lib/` that takes a
-    filesystem path from the file picker must name
-    `supportsLocalProjectFolders` (or `isWebPlatform`) itself. Two shapes count:
+  - **FilePicker paths behind a platform gate** — a *call site* in `lib/` that
+    takes a filesystem path from the file picker must have a platform gate
+    (`kIsWeb`, `supportsLocalProjectFolders` or `isWebPlatform`) **in the same
+    method**. Per call site, not per file: a gate in one method says nothing
+    about the next, and `image_service.dart` gates `pickImageDetailed` properly
+    while `pickVideo` and `pickAudio` sit ungated right beside it. Two shapes count:
     `FilePicker.getDirectoryPath(`, which has no web implementation and returns
     `null` without a sound, and `FilePicker.pickFiles(` whose `.path` is read
     without `withData: true`, which on web hands back a `blob:` URL that points

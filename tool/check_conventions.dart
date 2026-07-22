@@ -210,8 +210,13 @@ const Map<String, List<String>> audienceBoundary = {
 // doet precies wat het belooft.
 final _getDirectoryPath = RegExp(r'FilePicker\.getDirectoryPath\s*\(');
 final _pickFiles = RegExp(r'FilePicker\.pickFiles\s*\(');
+
+/// De vormen waarin de poort geschreven wordt. `kIsWeb` hoort er nadrukkelijk
+/// bij: dat is de meest directe vorm, en `image_service.dart` gebruikt hem al
+/// zo. De eerste versie van deze regel kende hem niet en zette twee correct
+/// gepoorte bestanden daardoor ten onrechte in de basislijn.
 final _platformFlag = RegExp(
-  r'\b(supportsLocalProjectFolders|isWebPlatform)\b',
+  r'\b(supportsLocalProjectFolders|isWebPlatform|kIsWeb)\b',
 );
 
 /// Bestanden die vandaag een pad uit de kiezer halen zonder de vlag zelf te
@@ -220,20 +225,35 @@ final _platformFlag = RegExp(
 /// regel genoteerd. Zolang een bestand hier staat, is het níet goedgekeurd: het
 /// is opgeschreven.
 const Map<String, String> filePickerPathBaseline = {
-  'lib/services/file_service.dart':
-      'twee pickFiles die .path lezen; de aanroepers poorten, het bestand zelf niet',
-  'lib/services/image_service.dart':
-      'drie pickFiles die .path lezen, terwijl dit juist de service is die op web mem:-sleutels hanteert — zie #526',
+  // ── Gepoort bij de aanroeper, niet in de methode zelf ─────────────────────
+  // Deze dialogen zijn vandaag correct: de knop die ze opent staat achter
+  // `supportsLocalProjectFolders`. Het bestand kan dat alleen niet zelf
+  // bewijzen, en dát is de kwetsbaarheid — verplaats de poort naar binnen, of
+  // geef de dialoog de vlag als vereiste parameter mee.
   'lib/widgets/dialogs/open_presentation_dialog.dart':
-      'getDirectoryPath; gepoort bij de aanroeper (shell_actions.dart)',
+      'regel 117; gepoort in shell_actions.dart',
   'lib/widgets/dialogs/slide_finder_dialog.dart':
-      'getDirectoryPath; gepoort bij de aanroeper (slide_list_panel.dart)',
+      'regel 187; gepoort in slide_list_panel.dart',
   'lib/widgets/dialogs/import_slides_dialog.dart':
-      'getDirectoryPath; gepoort bij de aanroeper (slide_list_panel.dart)',
+      'regel 99; gepoort in slide_list_panel.dart',
   'lib/widgets/dialogs/save_destination_dialog.dart':
-      'getDirectoryPath; gepoort bij de aanroeper (deck_provider.dart)',
+      'regel 74; gepoort in deck_provider.dart',
+  'lib/widgets/dialogs/settings_dialog.dart':
+      'regels 433 en 597 (exportmap, presentatiemap); de sectie eromheen is '
+      'gepoort in settings_dialog_storage.dart. De logokiezer op 612 is '
+      'sinds #506 wél in de methode zelf gepoort',
+
+  // ── Echte, openstaande gaten ──────────────────────────────────────────────
+  'lib/services/image_service.dart':
+      'regels 265 en 276 — pickVideo en pickAudio lezen .path zonder poort, '
+      'terwijl pickImageDetailed er pal boven wél een kIsWeb-tak heeft. '
+      'Zie #526',
+  'lib/services/file_service.dart':
+      'regels 518 en 957 — pickMarkdownFile en pickPackageFile lezen .path; '
+      'voor het openen bestaat er een bytes-variant naast, voor pakketten '
+      'niet. Zie #526',
   'lib/widgets/dialogs/parts/image_carousel_picker_actions.dart':
-      'pickFiles die .path leest, aanroepers ongepoort — openstaande bug, zie #526',
+      'regel 613 — pickFiles die .path leest, aanroepers ongepoort. Zie #526',
 };
 
 /// Leest een `pickFiles(`-aanroep uit en zegt of hij een pad oplevert dat op
@@ -241,18 +261,47 @@ const Map<String, String> filePickerPathBaseline = {
 /// de aanroep alleen, omdat `withData:` in de argumenten staat en `.path` een
 /// paar regels verderop wordt gelezen.
 bool _pickFilesYieldsPath(String source, int from) {
-  // Ruim genomen: de langste bestaande aanroep beslaat zes regels tussen
-  // `pickFiles(` en het lezen van `.path`. Twintig regels vangt een wat
-  // ruimere schrijfwijze zonder de volgende methode binnen te trekken.
+  // Twintig regels vangt de ruimste schrijfwijze die hier voorkomt (zes regels
+  // tussen `pickFiles(` en het lezen van `.path`).
   const window = 20;
-  final lines = source.substring(from).split('\n');
-  final scope = lines.take(window).join('\n');
+  var scope = source.substring(from).split('\n').take(window).join('\n');
+
+  // ...maar knip bij de volgende methodekop. Zonder die knip pleitte een
+  // `withData: true` uit de *volgende* methode de huidige vrij:
+  // `file_service.pickMarkdownFile` leest `.path` en de bytes-variant staat er
+  // elf regels onder, waardoor de aanroep ten onrechte schoon leek.
+  final next = _methodStart.firstMatch(scope);
+  if (next != null) scope = scope.substring(0, next.start);
+
   if (scope.contains('withData: true')) return false;
   return scope.contains('.path');
 }
 
-/// Bestanden in `lib/` die een pad uit FilePicker halen zonder ergens in
-/// hetzelfde bestand een platformvlag te noemen.
+/// Een methodekop op klasseniveau, zoals deze codebase ze schrijft.
+final _methodStart = RegExp(
+  r'\n  (Future|void|String|bool|int|List|Set|Map)\b',
+);
+
+/// Of er vóór positie [at] een platformpoort staat die deze aanroep dekt.
+///
+/// Zonder parser is de omsluitende methode niet exact af te bakenen. Het venster
+/// loopt daarom terug tot de vorige methodekop op hetzelfde inspringniveau — in
+/// deze codebase `  Future<`, `  void ` of `  String ` op twee spaties — of
+/// anders 1200 tekens. Dat is ruim genoeg voor een poort bovenin een methode en
+/// te krap om er één uit de vorige methode voor aan te zien.
+bool _gatedBefore(String source, int at) {
+  var from = at - 1200;
+  if (from < 0) from = 0;
+  final window = source.substring(from, at);
+  final lastMethod = _methodStart.allMatches(window).lastOrNull;
+  final scope = lastMethod == null
+      ? window
+      : window.substring(lastMethod.start);
+  return _platformFlag.hasMatch(scope);
+}
+
+/// Aanroepen in `lib/` die een pad uit FilePicker halen zonder dat er in
+/// dezelfde methode een platformpoort staat.
 List<String> _filePickerPathViolations() {
   final hits = <String>[];
   final seen = <String>{};
@@ -262,22 +311,33 @@ List<String> _filePickerPathViolations() {
     final source = file.readAsStringSync();
     if (!source.contains('FilePicker.')) continue;
 
-    final reasons = <String>[];
-    if (_getDirectoryPath.hasMatch(source)) reasons.add('getDirectoryPath');
+    // Per AANROEP kijken, niet per bestand. Een poort in de ene methode zegt
+    // niets over de volgende: `image_service.dart` poort `pickImageDetailed`
+    // keurig met `kIsWeb` en laat `pickVideo`/`pickAudio` er pal naast
+    // ongepoort staan. De eerste versie van deze regel keek naar het hele
+    // bestand en zag dat verschil niet.
+    final ongepoort = <String>[];
+    void beoordeel(int at, String vorm) {
+      if (_gatedBefore(source, at)) return;
+      final line = '\n'.allMatches(source.substring(0, at)).length + 1;
+      ongepoort.add('regel $line ($vorm)');
+    }
+
+    for (final match in _getDirectoryPath.allMatches(source)) {
+      beoordeel(match.start, 'getDirectoryPath');
+    }
     for (final match in _pickFiles.allMatches(source)) {
       if (_pickFilesYieldsPath(source, match.end)) {
-        reasons.add('pickFiles → .path');
-        break;
+        beoordeel(match.start, 'pickFiles → .path');
       }
     }
-    if (reasons.isEmpty) continue;
+    if (ongepoort.isEmpty) continue;
 
     final path = file.path;
     seen.add(path);
-    if (_platformFlag.hasMatch(source)) continue;
     if (filePickerPathBaseline.containsKey(path)) continue;
 
-    hits.add('$path: ${reasons.join(', ')} — zonder platformpoort');
+    hits.add('$path: ${ongepoort.join('; ')} — zonder platformpoort');
   }
 
   // Een basislijn die niet meer klopt is erger dan geen basislijn: hij leest als
