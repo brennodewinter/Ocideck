@@ -40,6 +40,7 @@ import '../../utils/inline_markdown.dart';
 import '../slides/slide_preview.dart';
 import '../markdown_notes_editor.dart';
 import 'annotation_overlay.dart';
+import 'audience_controls_bar.dart';
 import 'audience_window.dart';
 import 'rehearsal_summary.dart';
 import '../../theme/app_theme.dart';
@@ -494,17 +495,6 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   Timer? _clockTimer;
   double _progress = 0; // 0..1 voor de voortgangsbalk
 
-  /// Of de bedieningsbalk in publieksweergave nu zichtbaar is.
-  ///
-  /// De publieksweergave had géén bediening: geen dianummer, geen pijlen, geen
-  /// sluitknop, en nergens stond dat Esc werkt. Wie voor het eerst presenteert
-  /// moest raden hoe hij eruit kwam — voor een zaal, op het moment van de
-  /// grootste spanning (#607). Nu verschijnt er bij muisbeweging drie seconden
-  /// een balk. Verborgen tenzij je hem zoekt: een projectiebeeld hoort niet
-  /// permanent knoppen te dragen, want die staan straks op de foto van de zaal.
-  bool _audienceControls = false;
-  Timer? _audienceControlsTimer;
-
   /// Presenter view (notities, klok, volgende slide) vs. publieksweergave.
   bool _presenterView = false;
 
@@ -720,24 +710,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     });
   }
 
-  /// Laat de balk zien en zet de klok terug op drie seconden.
-  ///
-  /// Wordt bij élke muisbeweging aangeroepen, dus doet niets als de balk al
-  /// staat en de klok nog loopt — anders zou een bewegende muis een
-  /// setState-storm opleveren tijdens het presenteren.
-  void _revealAudienceControls() {
-    _audienceControlsTimer?.cancel();
-    _audienceControlsTimer = Timer(const Duration(seconds: 3), () {
-      if (mounted) setState(() => _audienceControls = false);
-    });
-    if (_audienceControls) return;
-    setState(() => _audienceControls = true);
-  }
-
   @override
   void dispose() {
     _advanceTimer?.cancel();
-    _audienceControlsTimer?.cancel();
     _clockTimer?.cancel();
     _typedTimer?.cancel();
     _questionTimer?.cancel();
