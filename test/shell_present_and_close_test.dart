@@ -23,6 +23,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// de fout onzichtbaar tot hij duur is. Een dia die het publiek niet had mogen
 /// bereiken staat op het scherm van de zaal; een tabblad dat zonder vragen
 /// sluit neemt het werk van een middag mee.
+/// Eén frame op de nep-klok.
+const _frame = Duration(milliseconds: 16);
+
+/// Hoeveel pomp-stappen de nep-klok vooruitzetten; daarna pompen we frames
+/// zonder de klok te verzetten. Zie de gelijknamige uitleg in
+/// `shell_s3_actions_test.dart`: zo hangt het budget aan het aantal stappen en
+/// niet aan de klok, en verdwijnt een melding niet door het wachten zelf.
+const _clockSteps = 100;
+
 void main() {
   setUp(() {
     AppLocalizations.setActiveLanguageCode('nl');
@@ -65,19 +74,19 @@ void main() {
     var reached = false;
     await tester.runAsync(() async {
       await tester.tap(appBarIcon(Icons.play_circle_outline));
-      for (var i = 0; i < 100; i++) {
+      for (var i = 0; i < 400; i++) {
         if (done()) {
           reached = true;
           break;
         }
-        await tester.pump(const Duration(milliseconds: 16));
-        await Future<void>.delayed(const Duration(milliseconds: 2));
+        await tester.pump(i < _clockSteps ? _frame : Duration.zero);
+        await Future<void>.delayed(const Duration(milliseconds: 5));
       }
       reached = reached || done();
       // Staart: de overgang moet nog uitgeanimeerd worden voordat er iets
       // aan te wijzen valt.
       for (var i = 0; i < 20; i++) {
-        await tester.pump(const Duration(milliseconds: 16));
+        await tester.pump(_frame);
       }
     });
     await tester.pump();

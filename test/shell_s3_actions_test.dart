@@ -47,6 +47,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// af via een route-animatie die binnen [WidgetTester.runAsync] niet loopt, dus
 /// menu-handelingen gaan via [settleUntil], dat nep-klok en echte async om
 /// beurten de gelegenheid geeft.
+/// Eén frame op de nep-klok.
+const _frame = Duration(milliseconds: 16);
+
+/// Hoeveel pomp-stappen de nep-klok vooruitzetten.
+///
+/// Alleen de eerste stappen hoeven dat: animaties (een dialoogovergang, een
+/// menu dat sluit) zijn ruim binnen anderhalve testseconde uitgespeeld. Daarna
+/// pompen we frames zónder de klok te verzetten, zodat écht werk — schijf,
+/// isolates — alle tijd van de wereld krijgt terwijl een `SnackBar` (vier
+/// testseconden) niet door het wachten zelf verdwijnt.
+///
+/// Zo hangt het budget aan het aantal stappen en niet aan de klok: op een
+/// zwaarbelaste machine duurt elke stap langer in échte tijd, en dat is precies
+/// wat er dan nodig is.
+const _clockSteps = 100;
+
 void main() {
   const connectionId = 's3-verbinding';
 
@@ -127,13 +143,13 @@ void main() {
     WidgetTester tester,
     bool Function() until, {
     required String reason,
-    int steps = 150,
+    int steps = 400,
   }) async {
     for (var i = 0; i < steps && !until(); i++) {
       await tester.runAsync(
-        () => Future<void>.delayed(const Duration(milliseconds: 2)),
+        () => Future<void>.delayed(const Duration(milliseconds: 5)),
       );
-      await tester.pump(const Duration(milliseconds: 16));
+      await tester.pump(i < _clockSteps ? _frame : Duration.zero);
     }
     expect(until(), isTrue, reason: reason);
   }
@@ -149,13 +165,13 @@ void main() {
     var reached = false;
     await tester.runAsync(() async {
       await gesture();
-      for (var i = 0; i < 150; i++) {
+      for (var i = 0; i < 400; i++) {
         if (until()) {
           reached = true;
           break;
         }
-        await tester.pump(const Duration(milliseconds: 16));
-        await Future<void>.delayed(const Duration(milliseconds: 2));
+        await tester.pump(i < _clockSteps ? _frame : Duration.zero);
+        await Future<void>.delayed(const Duration(milliseconds: 5));
       }
       reached = reached || until();
     });

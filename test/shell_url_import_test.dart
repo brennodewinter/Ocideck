@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/app.dart';
@@ -189,12 +188,18 @@ void main() {
     var reached = false;
     await tester.runAsync(() async {
       await tester.tap(find.widgetWithText(ElevatedButton, 'Ophalen'));
-      for (var i = 0; i < 150; i++) {
+      for (var i = 0; i < 400; i++) {
         if (find.byType(SnackBar).evaluate().isNotEmpty) {
           reached = true;
           break;
         }
-        await tester.pump(const Duration(milliseconds: 16));
+        // Alleen de eerste stappen zetten de nep-klok vooruit (genoeg voor de
+        // dialoogovergang); daarna pompen we frames zonder klok, zodat het
+        // netwerkverzoek alle tijd krijgt zonder dat de melding erna door het
+        // wachten zelf weer verdwijnt.
+        await tester.pump(
+          i < 100 ? const Duration(milliseconds: 16) : Duration.zero,
+        );
         await Future<void>.delayed(const Duration(milliseconds: 5));
       }
     });
