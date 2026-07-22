@@ -213,10 +213,14 @@ class ExportService {
         ? outputDirectory
         : p.dirname(deckPath);
     final prefix = '${natoDtg(DateTime.now())} ';
+    // `docMeta.fileSuffix` is leeg zodra de AI-tekst is nagekeken, dus een
+    // afgerond rapport heet zoals het altijd heette. Alleen een export mét
+    // ongecontroleerde AI-tekst draagt het concept-achtervoegsel — daar is de
+    // naam de enige plek die de ontvanger ziet zónder het bestand te openen.
     final fileName =
         '$prefix${p.basenameWithoutExtension(deckPath)}'
         '${privacyProfile.fileSuffix}${includeDetail ? '' : '-beknopt'}'
-        '$compactSuffix${format.extension}';
+        '${docMeta.fileSuffix}$compactSuffix${format.extension}';
     final outputPath = p.join(dir, fileName);
     try {
       final Uint8List bytes;
