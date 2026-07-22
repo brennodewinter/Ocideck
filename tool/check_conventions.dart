@@ -14,6 +14,11 @@
 //     baselined files below whose ceiling is their size at ratchet time. A
 //     ceiling may shrink (split the file) but never grow, so big files trend
 //     smaller instead of creeping bigger. Translation data is exempt.
+//   * Class-size RATCHET — a class may not exceed [maxClassLines], counted over
+//     ALL `part` files of its library (the class plus every `extension … on` it
+//     carries). The file ratchet counts files, and a `part` split quiets it
+//     without anything getting smaller; this counts the unit you actually have
+//     to hold in your head. See [classSizeBaseline].
 //   * No raw control bytes — write the escape (\u0000), never the
 //     byte itself. See [controlByteBaseline]: this is a review hazard, not a
 //     nitpick.
@@ -105,6 +110,56 @@ const int maxFileLines = 1000;
 /// deliberate reason; the goal is fewer and smaller entries over time.
 /// `lib/l10n/translations/*` is exempt — those files grow with every UI string.
 const Map<String, int> fileSizeBaseline = {};
+
+/// Een klasse mag niet groter worden dan dit, opgeteld over álle
+/// `part`-bestanden van haar library — de klasse zelf plus elke `extension … on`
+/// die eraan hangt.
+///
+/// Waarom naast [maxFileLines], die immers al op 1000 staat: die telt
+/// *bestanden*, en een `part`-splitsing haalt die teller onderuit zonder dat er
+/// iets kleiner wordt. `TabsNotifier` staat op ~2.400 regels over zeven
+/// `part`-bestanden, `_SettingsDialogState` op ~7.300 over tweeëntwintig — elk
+/// bestand netjes onder de duizend, de klasse allang niet meer. De poort lag dus
+/// stil op precies de plek waar hij bedoeld was: het ding dat één geheel vormt
+/// en dat je in je hoofd moet houden om het te wijzigen.
+///
+/// Hetzelfde getal als [maxFileLines], met opzet: de belofte was "geen eenheid
+/// boven de duizend regels", en dit herstelt die belofte voor de eenheid die
+/// werkelijk telt. Dat er vandaag vijftien klassen boven zitten is de meting,
+/// niet het doel — zie [classSizeBaseline].
+const int maxClassLines = 1000;
+
+/// Klassen die bij invoering van [maxClassLines] al te groot waren. De waarde is
+/// het plafond van die klasse: het mag KRIMPEN (haal er iets uit, verlaag dan
+/// dit getal — de run drukt een tip af) maar nooit groeien.
+///
+/// De sleutel is `<library>#<Naam>`, niet `<bestand>#<Naam>`: een `extension
+/// TabsNotifierGit on TabsNotifier` in een `part` telt mee bij `TabsNotifier`,
+/// want dat is waar de code terechtkomt. De library maakt de sleutel ook
+/// eenduidig — twee private `_FooState`-klassen in verschillende schermen zijn
+/// niet dezelfde klasse en mogen niet bij elkaar opgeteld worden.
+///
+/// Een nieuwe regel hier is een bewuste beslissing en hoort een reden te hebben;
+/// het doel is minder en kleinere regels, niet meer.
+const Map<String, int> classSizeBaseline = {
+  'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState': 7295,
+  'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
+      3419,
+  'lib/services/file_service.dart#FileService': 2904,
+  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 2667,
+  'lib/state/tabs_provider.dart#TabsNotifier': 2403,
+  'lib/services/markdown_service.dart#MarkdownService': 2322,
+  'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
+      2160,
+  'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
+  'lib/widgets/app_shell.dart#_MainLayoutState': 1510,
+  'lib/state/settings_provider.dart#SettingsNotifier': 1331,
+  'lib/state/deck_provider.dart#DeckNotifier': 1307,
+  'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1214,
+  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1123,
+  'lib/widgets/editors/chart_editor.dart#_ChartEditorState': 1062,
+  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1053,
+};
 
 final _print = RegExp(r'(?<![\w.])print\(');
 final _debugPrint = RegExp(r'(?<![\w.])debugPrint\(');
@@ -434,6 +489,150 @@ const int nosemgrepBaseline = 1;
 
 final _nosemgrep = RegExp(r'//\s*nosemgrep\b');
 
+/// De kop van een top-level type: `class`, `mixin`, `enum` of `extension`.
+///
+/// Bij een `extension … on Foo` telt `Foo` — dat is de klasse die groeit; de
+/// naam van de extensie zelf zegt alleen wáár het stuk staat. Een naamloze
+/// extensie valt terug op haar `on`-type.
+final _typeDecl = RegExp(
+  r'^(?:abstract\s+|sealed\s+|final\s+|base\s+|interface\s+|mixin\s+)*'
+  r'(class|mixin|enum|extension)\s+([A-Za-z_$][\w$]*)?'
+  r'(?:<[^>]*>)?\s*(?:on\s+([A-Za-z_$][\w$]*))?',
+);
+
+final _partOfDirective = RegExp("^part of '([^']+)';");
+
+/// Het pad van [target], relatief aan de map van [from], genormaliseerd.
+String _resolveRelative(String from, String target) {
+  final base = from.substring(0, from.lastIndexOf('/'));
+  final segments = <String>[];
+  for (final s in '$base/$target'.split('/')) {
+    if (s == '.' || s.isEmpty) continue;
+    if (s == '..') {
+      if (segments.isNotEmpty) segments.removeLast();
+      continue;
+    }
+    segments.add(s);
+  }
+  return segments.join('/');
+}
+
+/// De library waar [path] toe behoort: zichzelf, of — bij een `part of` — het
+/// bestand dat de library opent. Een `part` van een `part` bestaat niet in Dart,
+/// maar de lus is er voor de zekerheid begrensd.
+String _libraryOf(String path, Map<String, List<String>> linesByPath) {
+  var current = path;
+  for (var hop = 0; hop < 4; hop++) {
+    String? target;
+    for (final line in linesByPath[current] ?? const <String>[]) {
+      final m = _partOfDirective.firstMatch(line);
+      if (m != null) {
+        target = m.group(1);
+        break;
+      }
+    }
+    if (target == null) return current;
+    final next = _resolveRelative(current, target);
+    if (!linesByPath.containsKey(next)) return current;
+    current = next;
+  }
+  return current;
+}
+
+/// Telt per type hoeveel regels het beslaat, opgeteld over de hele library.
+///
+/// Een regelteller in plaats van een echte parse, en dat kan hier omdat
+/// `make format-check` de opmaak vastlegt: een top-level declaratie begint op
+/// kolom 0 en sluit met een `}` op kolom 0. Alleen een `'''`-string kan daar een
+/// valse sluitregel in leggen, dus die worden overgeslagen.
+///
+/// Geeft de totalen terug plus, per type, waar de stukken staan — zodat een
+/// overschrijding niet alleen zegt *dat* een klasse te groot is maar ook waar de
+/// zeven brokken liggen.
+///
+/// [linesByPath] is pad → regels; publiek en zonder schijftoegang, zodat
+/// `test/class_size_ratchet_test.dart` de teller met verzonnen bestanden kan
+/// voeden in plaats van met de echte boom.
+({Map<String, int> lines, Map<String, List<String>> sites}) classSizesIn(
+  Map<String, List<String>> linesByPath,
+) {
+  final totals = <String, int>{};
+  final sites = <String, List<String>>{};
+  final tripleQuote = RegExp("r?('''|\"\"\")");
+
+  linesByPath.forEach((path, lines) {
+    final library = _libraryOf(path, linesByPath);
+    String? open;
+    var start = 0;
+    String? inTriple;
+
+    void close(int endIndex) {
+      totals[open!] = (totals[open!] ?? 0) + (endIndex - start + 1);
+      (sites[open!] ??= []).add('$path:${start + 1}');
+      open = null;
+    }
+
+    for (var i = 0; i < lines.length; i++) {
+      final line = lines[i];
+      final triple = inTriple;
+      if (triple != null) {
+        if (line.contains(triple)) inTriple = null;
+        continue;
+      }
+      final quote = tripleQuote.firstMatch(line);
+      if (quote != null &&
+          !line.substring(quote.end).contains(quote.group(1)!)) {
+        inTriple = quote.group(1);
+        continue;
+      }
+      if (open != null) {
+        if (line == '}') close(i);
+        continue;
+      }
+      if (line.isEmpty || line.startsWith(' ') || line.startsWith('}')) {
+        continue;
+      }
+      final m = _typeDecl.firstMatch(line);
+      if (m == null) continue;
+      final kind = m.group(1)!;
+      final name = kind == 'extension'
+          ? (m.group(3) ?? m.group(2))
+          : m.group(2);
+      if (name == null) continue;
+      // `class Foo = Bar with Baz;` — een mixin-toepassing, geen body.
+      if (line.trimRight().endsWith(';')) continue;
+      // De kop mag over meer regels lopen (`class X extends Y\n    with Z {`).
+      // De vervolgregels zijn ingesprongen, dus zodra er weer iets op kolom 0
+      // begint is dit geen declaratie met een body.
+      var head = i;
+      while (head < lines.length && !lines[head].contains('{')) {
+        head++;
+        if (head < lines.length && !lines[head].startsWith(' ')) head = -1;
+        if (head < 0) break;
+      }
+      if (head < 0 || head >= lines.length) continue;
+      open = '$library#$name';
+      start = i;
+      // `enum NotesEditorMode { visual, markdown }` opent en sluit op één regel.
+      if (lines[head].trimRight().endsWith('}')) {
+        close(head);
+      }
+      i = head;
+    }
+  });
+
+  return (lines: totals, sites: sites);
+}
+
+/// [classSizesIn] over de echte boom.
+({Map<String, int> lines, Map<String, List<String>> sites}) _classSizes() {
+  final linesByPath = <String, List<String>>{};
+  for (final file in _dartFiles(Directory('lib'))) {
+    linesByPath[file.path.replaceAll(r'\', '/')] = file.readAsLinesSync();
+  }
+  return classSizesIn(linesByPath);
+}
+
 /// Typen die in zo'n parameterlijst een lek zouden betekenen.
 final _rawDeckParam = RegExp(r'\b(Deck|List<Slide>)\b\s+\w+');
 
@@ -630,6 +829,27 @@ void main() {
     conflictHits.addAll(_conflictMarkersIn(file));
   }
 
+  final classSizes = _classSizes();
+  final fatClasses = <String>[];
+  final shrunkClasses = <String>[];
+  classSizes.lines.forEach((key, count) {
+    final ceiling = classSizeBaseline[key];
+    final where = (classSizes.sites[key] ?? const <String>[]).join(', ');
+    if (ceiling != null) {
+      if (count > ceiling) {
+        fatClasses.add('$key: $count lines (ceiling $ceiling) — $where');
+      } else if (count < ceiling) {
+        shrunkClasses.add('$key: $count (ceiling $ceiling)');
+      }
+    } else if (count > maxClassLines) {
+      fatClasses.add('$key: $count lines (max $maxClassLines) — $where');
+    }
+  });
+  final staleClassBaseline = [
+    for (final key in classSizeBaseline.keys)
+      if (!classSizes.lines.containsKey(key)) key,
+  ];
+
   final failures = <String>[];
 
   if (conflictHits.isNotEmpty) {
@@ -763,6 +983,26 @@ void main() {
     );
   }
 
+  if (fatClasses.isNotEmpty) {
+    failures.add(
+      '${fatClasses.length} klasse(n) boven hun plafond, geteld over álle '
+      '`part`-bestanden van hun library. Een `part`-splitsing maakt de '
+      'bestanden kleiner maar de klasse niet: haal er werkelijk gedrag uit — '
+      'naar een service, een losse klasse of een widget — of verhoog bewust de '
+      'regel in classSizeBaseline (tool/check_conventions.dart):\n'
+      '    ${fatClasses.join('\n    ')}',
+    );
+  }
+
+  if (staleClassBaseline.isNotEmpty) {
+    failures.add(
+      '${staleClassBaseline.length} regel(s) in classSizeBaseline wijzen naar '
+      'een klasse die niet meer bestaat (hernoemd, verplaatst of weg). Haal ze '
+      'eruit — een plafond zonder klasse dekt de volgende klasse niet af:\n'
+      '    ${staleClassBaseline.join('\n    ')}',
+    );
+  }
+
   if (modelUiImports.length > modelUiImportBaseline) {
     failures.add(
       'lib/models/ imports the UI layer in ${modelUiImports.length} place(s). A '
@@ -814,7 +1054,8 @@ void main() {
       'lib/services at ${serviceUiImports.length} (baseline '
       '$serviceUiImportBaseline) and in lib/models at '
       '${modelUiImports.length}; layer direction clean; file sizes within '
-      'ceilings; FilePicker paths gated '
+      'ceilings; class sizes within ceilings (max $maxClassLines, '
+      '${classSizeBaseline.length} baselined); FilePicker paths gated '
       '(baseline ${filePickerPathBaseline.length}).',
     );
     if (serviceUiImports.length < serviceUiImportBaseline) {
@@ -840,6 +1081,13 @@ void main() {
       stdout.writeln(
         'Tip: ${shrunk.length} baselined file(s) shrank — lower their '
         'fileSizeBaseline to lock in the win:\n    ${shrunk.join('\n    ')}',
+      );
+    }
+    if (shrunkClasses.isNotEmpty) {
+      stdout.writeln(
+        'Tip: ${shrunkClasses.length} baselined class(es) shrank — lower their '
+        'classSizeBaseline to lock in the win:\n'
+        '    ${shrunkClasses.join('\n    ')}',
       );
     }
     exit(0);

@@ -55,7 +55,7 @@ Individual steps:
 | `make format` | Rewrites Dart files with `dart format`. |
 | `make format-check` | Fails if any file needs formatting. |
 | `make analyze` | `flutter analyze --fatal-infos` (analyzer + lints + strict type checks). |
-| `make check-conventions` | No `print()`; no raw control bytes; the bare `catch (_)`, raw-colour, layering and file-size ratchets may not grow. |
+| `make check-conventions` | No `print()`; no raw control bytes; the bare `catch (_)`, raw-colour, layering, file-size and class-size ratchets may not grow. |
 | `make test` | The full test suite (randomised order). |
 | `make coverage` | The suite with coverage: enforces the 80% floor **and** that every `lib/` file is in some test. Part of `make check`. |
 | `make licenses` | Verify every dependency uses an open-source licence. |
@@ -101,6 +101,25 @@ Targeted test groups for focused work:
   `"unchanged"` loanwords (see `tool/add_l10n.dart` for the format). Validate with
   `make l10n-check`. A loanword kept identical in every language (e.g. `Heatmap`)
   goes in the spec's `unchanged` list instead of being translated.
+- **Comment language: Dutch or English, but never both in one comment.** The
+  codebase is bilingual and stays that way. Measured over `lib/` (2026-07-22):
+  of the ~3,100 comment blocks of three lines or more, 71% are Dutch, 28% are
+  English, and **1% mix the two inside a single block**. So the convention the
+  code already follows is not "one language for the project" but "one language
+  per comment": pick the one that fits, and finish the thought in it.
+  - Dutch is the working language and the default for new comments — the
+    reasoning, the commit messages and the design documents are Dutch, and a
+    *why* is easier to write well in the language you think in.
+  - English is equally acceptable, and is the natural choice where the
+    surrounding vocabulary is English anyway: API doc comments on a public type,
+    a reference to a spec or standard, a file whose comments are already
+    English.
+  - **Do not rewrite existing comments only to change their language.** That is
+    thousands of lines of pure noise, it changes no behaviour, and it puts your
+    name on every line of `git blame` for reasoning somebody else worked out.
+    When you edit a comment, follow the language of the block you are editing.
+  - This says nothing about *identifiers*, which are English throughout, or
+    about user-visible text, which has its own rule (see localization above).
 - **Tests**: add or update tests for behaviour you change — especially the
   Markdown round-trip and any file-format change.
 - **File format**: if you change how anything is stored, update
