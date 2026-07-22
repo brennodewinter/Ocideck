@@ -134,6 +134,58 @@ class ExportService {
       ? null
       : [for (final s in audience.audience.slides) s.notes];
 
+  /// De drie poorten die élke export moet passeren, of `null` als hij door mag.
+  ///
+  /// Ze staan hier bij elkaar omdat ze één ding zijn: het chokepoint waar
+  /// PDF, PPTX en HTML alledrie doorheen gaan. De handhaving hoort niet in de
+  /// UI-laag — een gate die alleen in een dialoog leeft, is er geen — en door
+  /// ze samen te nemen kan geen exportpad er per ongeluk eentje overslaan.
+  ///
+  /// Fail-closed: bij een weigering wordt er niets gebouwd en niets
+  /// weggeschreven.
+  ExportResult? _refuseByPolicy({
+    required TlpLevel tlp,
+    required ClassificationEnforcementPolicy enforcementPolicy,
+    required PrivacyExportPolicy privacyPolicy,
+    required PrivacyExportSummary privacySummary,
+    required bool privacyAcknowledged,
+    required SlideQualityResult? qualityResult,
+    required QualityExportPolicy qualityPolicy,
+    required bool qualityAcknowledged,
+  }) {
+    final decision = enforcementPolicy.evaluate(tlp);
+    if (!decision.allowed) {
+      return ExportResult.fail(decision.reason!);
+    }
+
+    // De harde blokkade telt ook zonder de UI: bevestigen mag een zachte
+    // bevinding wegnemen, een harde nooit.
+    final privacyDecision = privacyPolicy.evaluate(privacySummary);
+    if (!privacyDecision.allowed &&
+        (privacyDecision.hardBlocked || !privacyAcknowledged)) {
+      const l10n = AppLocalizations(Locale('nl'));
+      return ExportResult.fail(
+        privacyDecision.hardBlocked
+            ? l10n.d(
+                'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.',
+              )
+            : l10n.d('Export afgebroken vanwege privacybevindingen.'),
+      );
+    }
+
+    final quality = qualityResult ?? const SlideQualityResult([]);
+    final qualityDecision = qualityPolicy.evaluate(
+      quality,
+      acknowledged: qualityAcknowledged,
+    );
+    if (!qualityDecision.allowed) {
+      final l10n = AppLocalizations(const Locale('nl'));
+      return ExportResult.fail(formatQualityExportReason(l10n, quality));
+    }
+
+    return null;
+  }
+
   Future<ExportResult> export(
     String deckPath,
     ExportFormat format,
@@ -162,39 +214,18 @@ class ExportService {
     /// altijd al heette.
     bool includeDetail = true,
   }) async {
-    // Classificatie-gate. Dit is het enige chokepoint waar elk formaat
-    // (PDF/PPTX/HTML) doorheen moet, dus de handhaving zit hier en niet in de
-    // UI-laag: zo kan geen exportpad de gate omzeilen. Fail-closed — bij een
-    // weigering wordt er niets gebouwd of weggeschreven.
-    final decision = enforcementPolicy.evaluate(tlp);
-    if (!decision.allowed) {
-      return ExportResult.fail(decision.reason!);
-    }
-    // Privacy-gate. Op hetzelfde chokepoint als de classificatie-gate, en om
-    // dezelfde reden: geen exportpad mag eromheen. De harde blokkade telt hier
-    // ook zonder de UI — een gate die alleen in een dialoog leeft, is er geen.
-    final privacyDecision = privacyPolicy.evaluate(privacySummary);
-    if (!privacyDecision.allowed &&
-        (privacyDecision.hardBlocked || !privacyAcknowledged)) {
-      const l10n = AppLocalizations(Locale('nl'));
-      return ExportResult.fail(
-        privacyDecision.hardBlocked
-            ? l10n.d(
-                'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.',
-              )
-            : l10n.d('Export afgebroken vanwege privacybevindingen.'),
-      );
-    }
-
-    final quality = qualityResult ?? const SlideQualityResult([]);
-    final qualityDecision = qualityPolicy.evaluate(
-      quality,
-      acknowledged: qualityAcknowledged,
+    final refusal = _refuseByPolicy(
+      tlp: tlp,
+      enforcementPolicy: enforcementPolicy,
+      privacyPolicy: privacyPolicy,
+      privacySummary: privacySummary,
+      privacyAcknowledged: privacyAcknowledged,
+      qualityResult: qualityResult,
+      qualityPolicy: qualityPolicy,
+      qualityAcknowledged: qualityAcknowledged,
     );
-    if (!qualityDecision.allowed) {
-      final l10n = AppLocalizations(const Locale('nl'));
-      return ExportResult.fail(formatQualityExportReason(l10n, quality));
-    }
+    if (refusal != null) return refusal;
+
     final markdown = audience?.markdown;
     if (format == ExportFormat.html) {
       if (markdown == null || markdown.trim().isEmpty) {
