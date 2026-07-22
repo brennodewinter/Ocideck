@@ -15,6 +15,8 @@ import 'package:ocideck/widgets/dialogs/import_slides_dialog.dart';
 import 'package:ocideck/widgets/dialogs/slide_diff_dialog.dart';
 import 'package:ocideck/widgets/dialogs/slide_finder_dialog.dart';
 
+import 'support/pump_until.dart';
+
 /// Een remote bron met vaste inhoud, om het samenvoegen in de finder te toetsen
 /// zonder een echte git/WebDAV/S3-server.
 class _FakeRemoteSource implements PresentationSource {
@@ -56,29 +58,13 @@ Widget _host(void Function(BuildContext context) onPressed) {
   );
 }
 
-/// Pumps a handful of bounded real-time frames so any pending async `setState`
-/// rebuild reaches the widget tree.
+/// Opent de dialoog, laat zijn schijfscan afmaken en typt [query] in het
+/// zoekveld. [then] doet daarna nog één handeling.
 ///
-/// The dialog's scan result and its per-keystroke re-dedup both land via
-/// `setState` on the real event loop (we are inside [WidgetTester.runAsync]). A
-/// single zero-duration `pump()` races those async rebuilds: under a loaded
-/// suite the rebuild can be applied a frame late, leaving the results grid empty
-/// exactly when the count assertions run — the order-dependent flakiness this
-/// test used to show. `pumpAndSettle` is no help either: the blinking autofocus
-/// cursor and the scan-progress spinner keep the frame queue from ever draining,
-/// so it would time out. Pumping a few bounded frames flushes every pending
-/// rebuild deterministically (the open/scan dialog smoke test settles the same
-/// way).
-Future<void> _flushFrames(WidgetTester tester) async {
-  for (int i = 0; i < 5; i++) {
-    await tester.pump(const Duration(milliseconds: 100));
-  }
-}
-
-/// Opens [dialog], lets its on-disk scan complete, and types [query] into the
-/// search box. The whole flow runs inside [WidgetTester.runAsync] so the
-/// dialog's real file-I/O scan actually resolves (a fake-async pump never lets
-/// dart:io futures complete). [then] runs one more interaction before settling.
+/// Het wachten loopt via [pumpUntil], dat zelf afwisselend echte tijd (waarin
+/// de dart:io-futures vooruitkomen) en een frame geeft. Daarom hoeft deze
+/// helper niet meer als geheel binnen [WidgetTester.runAsync] te draaien — wat
+/// hij eerder wél deed, met vaste wachttijden van 400 en 250 ms erin.
 Future<void> _openAndSearch(
   WidgetTester tester, {
   required void Function(BuildContext context) show,
@@ -87,17 +73,22 @@ Future<void> _openAndSearch(
 }) async {
   await tester.binding.setSurfaceSize(const Size(1800, 1200));
   addTearDown(() => tester.binding.setSurfaceSize(null));
-  await tester.runAsync(() async {
-    await tester.pumpWidget(_host(show));
-    await tester.tap(find.text('open'));
-    await tester.pump(); // dialog appears (loading)
-    await Future<void>.delayed(const Duration(milliseconds: 400)); // disk scan
-    await _flushFrames(tester); // flush the scan results into the tree
-    await tester.enterText(find.byType(TextField).first, query);
-    await Future<void>.delayed(const Duration(milliseconds: 250));
-    await _flushFrames(tester); // flush the re-dedup into the tree
-    if (then != null) await then();
-  });
+  await tester.pumpWidget(_host(show));
+  await tester.tap(find.text('open'));
+  await tester.pump(); // dialog appears (loading)
+  // Wachten tot de schijfscan klaar ís — de dialoog haalt zijn
+  // voortgangsindicator weg. Hier stond een vaste 400 ms plus vijf frames.
+  await pumpUntil(
+    tester,
+    () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
+    reason: 'de schijfscan van de zoekdialoog bleef laden',
+  );
+  await tester.enterText(find.byType(TextField).first, query);
+  // Filteren op de zoekterm is een gewone setState, geen I/O: één frame
+  // volstaat. De 250 ms die hier stond kocht niets — er viel niets af te
+  // wachten.
+  await tester.pump();
+  if (then != null) await then();
   await tester.pump();
 }
 
@@ -163,8 +154,11 @@ void main() {
       query: 'Netwerksegmentatie',
       then: () async {
         await tester.tap(find.text('Verschillen').first);
-        await Future<void>.delayed(const Duration(milliseconds: 200));
-        await _flushFrames(tester); // let the comparison dialog build
+        await pumpUntil(
+          tester,
+          () => find.byType(SlideDiffDialog).evaluate().isNotEmpty,
+          reason: 'het vergelijkingsvenster kwam niet open',
+        );
       },
     );
 
