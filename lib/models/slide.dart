@@ -660,7 +660,7 @@ class Slide {
           ? const DiscoveriesSpec().toTableRows()
           : const [],
       customMarkdown: type == SlideType.cockpit
-          ? CockpitSpec.pentestPreset().toBlock()
+          ? CockpitSpec.samplePreset().toBlock()
           : type == SlideType.question
           ? QuestionSpec.defaultMultipleChoice().toBlock()
           : type == SlideType.finding

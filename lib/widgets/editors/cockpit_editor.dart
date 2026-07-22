@@ -128,7 +128,7 @@ class _CockpitEditorState extends State<CockpitEditor> {
   @override
   Widget build(BuildContext context) {
     final meters = _spec.meters.isEmpty
-        ? CockpitSpec.pentestPreset().meters
+        ? CockpitSpec.samplePreset().meters
         : _spec.meters;
     if (_spec.meters.isEmpty) {
       WidgetsBinding.instance.addPostFrameCallback(

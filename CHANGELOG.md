@@ -95,6 +95,25 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Fixed
+- **Een cockpit-dia toonde pentestmetrieken terwijl de module Informatieveiligheid
+  uit stond.** Die module staat standaard uit en belooft dan verborgen te
+  blijven. Toch kreeg wie een cockpit-dia toevoegde meters met "Overall risk",
+  "Exploitability heat", "Evidence confidence" en "Findings trend" — voorbeelddata
+  die `pentestPreset` heette en dat ook was.
+
+  De cockpit zelf is niet van die module: het is een algemeen dashboard, en dat
+  blijft het. Maar die preset was de terugval op **vijf** plekken — een nieuwe
+  dia, een lege spec, een onleesbare spec, de editor en de preview — en op een
+  zesde die er het meest toe doet: de **HTML-export**. Daar bleef het niet in een
+  venster maar belandde het in een rapport dat de deur uit ging.
+
+  De voorbeelddata is nu domeinneutraal ("Capacity used", "Load", "Signal
+  quality", "Trend") en heet `samplePreset`. Dezelfde vier metertypes, dus er
+  gaat niets verloren aan wat het laat zien. Een test bewaakt woordelijk dat er
+  geen pentestbegrip meer in opduikt, ook niet via een kapot blok — juist bij een
+  fout kwam die data eerder tevoorschijn.
+
+### Fixed
 - **Het instellingenvenster brak bij 200% tekstgrootte — de instelling die het
   zelf aanbiedt.** Wie de tekstschaling opendraaide (uitdrukkelijk als
   toegankelijkheidsinstelling, WCAG 1.4.4) kreeg een zijbalk met "Einste…",

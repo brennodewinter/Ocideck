@@ -71,7 +71,7 @@ void main() {
     }
   });
 
-  testWidgets('an empty meter list falls back to the pentest preset', (
+  testWidgets('an empty meter list falls back to the sample preset', (
     tester,
   ) async {
     const spec = CockpitSpec(meters: []);
@@ -79,10 +79,13 @@ void main() {
     await tester.pump();
 
     // The preset supplies four named meters when the slide carries none.
-    expect(find.text('Overall risk'), findsOneWidget);
-    expect(find.text('Exploitability heat'), findsOneWidget);
-    expect(find.text('Evidence confidence'), findsOneWidget);
-    expect(find.text('Findings trend'), findsOneWidget);
+    // Deliberately domain-neutral since #646: these labels used to be
+    // "Overall risk" / "Exploitability heat", which showed the
+    // Informatieveiligheid module to users who had it switched off.
+    expect(find.text('Capacity used'), findsOneWidget);
+    expect(find.text('Load'), findsOneWidget);
+    expect(find.text('Signal quality'), findsOneWidget);
+    expect(find.text('Trend'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 

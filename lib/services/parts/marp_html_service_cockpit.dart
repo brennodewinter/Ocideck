@@ -11,7 +11,7 @@ String _cockpitSvg(
   CockpitColorScheme scheme,
 ) {
   final meters =
-      (spec.meters.isEmpty ? CockpitSpec.pentestPreset().meters : spec.meters)
+      (spec.meters.isEmpty ? CockpitSpec.samplePreset().meters : spec.meters)
           .take(cockpitMaxMeters)
           .toList();
   final accent = theme?.accentColor ?? '#38BDF8';

@@ -230,11 +230,24 @@ class CockpitSpec {
     this.meters = const [],
   });
 
-  factory CockpitSpec.pentestPreset() => const CockpitSpec(
+  /// De voorbeeldmeters die een lege cockpit-dia laat zien.
+  ///
+  /// **Bewust domeinneutraal.** Dit heette `pentestPreset` en toonde "Overall
+  /// risk", "Exploitability heat", "Evidence confidence" en "Findings trend".
+  /// Die waarden zijn de terugval op vijf plekken — een nieuwe dia, een lege of
+  /// onleesbare spec, de editor, de preview en de HTML-export — dus wie de
+  /// module Informatieveiligheid uit had staan kreeg tóch pentestmetrieken op
+  /// zijn scherm, en in een geëxporteerd rapport. Die module belooft verborgen
+  /// te blijven zolang hij uit staat; dat is dan geen belofte meer (#646).
+  ///
+  /// Een cockpit is een algemeen dashboard. De voorbeelddata hoort dus nergens
+  /// naar te verwijzen — en de vier metertypes komen hier alle vier langs, want
+  /// dat is waar voorbeelddata voor is: laten zien wat er kan.
+  factory CockpitSpec.samplePreset() => const CockpitSpec(
     meters: [
       CockpitMeterSpec(
         type: CockpitMeterType.speedometer,
-        label: 'Overall risk',
+        label: 'Capacity used',
         unit: '%',
         value: 78,
         greenFrom: 0,
@@ -243,7 +256,7 @@ class CockpitSpec {
       ),
       CockpitMeterSpec(
         type: CockpitMeterType.thermometer,
-        label: 'Exploitability heat',
+        label: 'Load',
         unit: '/10',
         min: 0,
         max: 10,
@@ -254,7 +267,7 @@ class CockpitSpec {
       ),
       CockpitMeterSpec(
         type: CockpitMeterType.voltmeter,
-        label: 'Evidence confidence',
+        label: 'Signal quality',
         unit: '%',
         greenFrom: 75,
         greenTo: 100,
@@ -263,7 +276,7 @@ class CockpitSpec {
       ),
       CockpitMeterSpec(
         type: CockpitMeterType.climbDescent,
-        label: 'Findings trend',
+        label: 'Trend',
         unit: '',
         min: -20,
         max: 20,
@@ -277,7 +290,7 @@ class CockpitSpec {
   factory CockpitSpec.parse(String raw) {
     try {
       final data = jsonDecode(raw.trim());
-      if (data is! Map) return CockpitSpec.pentestPreset();
+      if (data is! Map) return CockpitSpec.samplePreset();
       return CockpitSpec(
         layout: (data['layout'] ?? 'auto').toString(),
         animateOnEnter: data['animateOnEnter'] != false,
@@ -290,7 +303,7 @@ class CockpitSpec {
       );
     } catch (e, s) {
       logError('CockpitSpec.parse: decode cockpit JSON block', e, s);
-      return CockpitSpec.pentestPreset();
+      return CockpitSpec.samplePreset();
     }
   }
 
