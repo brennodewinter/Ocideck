@@ -124,16 +124,23 @@ extension _PresenterViews on _FullscreenPresenterState {
     // Blanco scherm vult in publieksweergave het hele beeld.
     if (_blank != _Blank.none) return _blankFill();
 
-    return GestureDetector(
-      onTap: _tableEditMode ? null : _next,
-      onSecondaryTap: _tableEditMode ? null : _prev,
-      child: Stack(
-        children: [
-          SizedBox.expand(child: _slideCanvas(slide)),
-          // Bij een quiz is "we wachten op een antwoord" ook voor de zaal
-          // zinvolle informatie; zonder badge lijkt auto-play vastgelopen.
-          if (_showQuestionWaitBadge) _buildQuestionWaitBadge(context),
-        ],
+    return AudienceSurface(
+      index: _index,
+      total: total,
+      onPrev: _index > 0 ? _prev : null,
+      onNext: _index < total - 1 ? _next : null,
+      onExit: _exit,
+      child: GestureDetector(
+        onTap: _tableEditMode ? null : _next,
+        onSecondaryTap: _tableEditMode ? null : _prev,
+        child: Stack(
+          children: [
+            SizedBox.expand(child: _slideCanvas(slide)),
+            // Bij een quiz is "we wachten op een antwoord" ook voor de zaal
+            // zinvolle informatie; zonder badge lijkt auto-play vastgelopen.
+            if (_showQuestionWaitBadge) _buildQuestionWaitBadge(context),
+          ],
+        ),
       ),
     );
   }

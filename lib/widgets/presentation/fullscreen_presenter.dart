@@ -40,6 +40,7 @@ import '../../utils/inline_markdown.dart';
 import '../slides/slide_preview.dart';
 import '../markdown_notes_editor.dart';
 import 'annotation_overlay.dart';
+import 'audience_controls_bar.dart';
 import 'audience_window.dart';
 import 'rehearsal_summary.dart';
 import '../../theme/app_theme.dart';

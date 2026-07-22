@@ -1988,6 +1988,18 @@ Start the fullscreen presenter from the toolbar. See
 `G` for the grid overview, `B`/`W` to blank, `P` for presenter view, `K` for the
 countdown, `R` to reset the timing, `H` for the in-app cheatsheet.
 
+**Move the mouse and a small bar appears for three seconds**, at the bottom of
+the screen: where you are (`Slide 3 / 18`), an arrow each way, and a close
+button. It fades again by itself. That is deliberate — a projected image should
+not carry permanent buttons, because those end up in every photo of the room —
+but it means you never have to remember a key to get out. `Esc` does the same
+thing, and the close button says so.
+
+*Added 2026-07-22 (#607): there was no bar. Full screen, no slide number, no
+arrows, no way out that the screen mentioned. Someone presenting for the first
+time had to guess, in front of an audience, which is the worst possible moment
+to be guessing.*
+
 ### Play-only decks
 
 You can hand out a deck **locked for presenting only**. Turn on **Play only
