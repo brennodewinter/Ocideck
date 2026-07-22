@@ -200,8 +200,16 @@ the key thing to understand before touching rendering:
    also seeks to the segment start and stops at the segment end (the per-slide
    trim window that powers "cut a video across slides"). YouTube/Vimeo play in a
    second on-screen WebView (`_VideoEmbedPreview`, the same pattern as the
-   Mermaid host) wired to the provider's iframe API for end-detection and
-   playhead reporting; remote rendering is gated by the **Online media** setting.
+   Mermaid host); remote rendering is gated by the **Online media** setting. Both
+   embeds are a bare iframe on the URL `VideoSource.embedUri` builds. End
+   detection and playhead reporting come from the provider: Vimeo through its
+   `player.js` API, YouTube through the player's own `postMessage` channel
+   (`enablejsapi=1`) with **no** script fetched from YouTube — that script came
+   from `www.youtube.com` and put the player itself on that origin, which is the
+   one the `youtube-nocookie.com` variant exists to avoid (*corrected
+   2026-07-22*). `_youTubePlayerNavigationAllowed` matches on host, not
+   substring, and refuses `www.youtube.com` so the player's "Watch on YouTube"
+   link cannot navigate the slide there.
 2. **HTML export** — `services/marp_html_service.dart` produces a single `.html`
    that renders in a browser using inlined JavaScript (marked, highlight.js,
    mermaid, MathJax), inlined CSS and an inlined font. Charts are pre-rendered to
@@ -238,6 +246,18 @@ control visibility via `slideVisibleAtTlp`).
 metadata and passed into PDF (`pw.Document` title/author/subject/keywords/creator/producer),
 PPTX core properties, and HTML `<meta>` tags. HTML also gets a fixed
 `.tlp-export-banner` when classified.
+
+The same object carries the **unreviewed-AI declaration**, counted from
+`Slide.aiAssistedFields` (`unreviewedAiSlideCount`). It rides the existing
+channels rather than adding a new one: the keyword `kAiDraftKeyword` joins
+`exportKeywords()`, `kAiDraftSubjectNote` is appended to `subject()` behind the
+TLP prefix, `htmlAiMarking` emits `<meta name="ai-generated">` beside
+`ai-generated-slides`, `MarpHtmlService._aiBanner` renders an
+`.ai-export-banner` (offset below the TLP banner when there is one, at the top
+when there is not), and `fileSuffix` puts `-ai-concept` in the filename that
+`ExportService.export` composes. Every one of them is empty when the count is
+zero, so a reviewed deck exports exactly as before. The count is taken from the
+**projected** deck the export dialog holds, so the redacted copy declares it too.
 
 ### Visual TLP marking
 
@@ -410,7 +430,11 @@ the existing rails rather than adding a parallel stack:
   into one encrypted `.ocideck` archive plus an `AUDIT_DOSSIER.md` index.
 - **Optional AI** — a shared, off-by-default backend (`services/ai_*`) drafts
   finding text and image alt-text behind the outbound-privacy consent; drafts are
-  marked `ocideck_ai_assisted` and block sealing until a human reviews them.
+  marked `ocideck_ai_assisted` and block sealing until a human reviews them. The
+  marker also survives the file boundary: while it is present, every PDF, PPTX
+  and HTML export declares it in its document properties and its filename (see
+  § Classification enforcement). Export itself is not blocked — sealing is a statement,
+  sending a draft to a reviewer is the normal way to get it cleared.
 
 ## Localization
 

@@ -1877,11 +1877,11 @@ single one reaches every reader:
 
 | Where | What it looks like |
 | --- | --- |
-| PDF / PPTX **Keywords** (`cp:keywords`) | `AI-generated (unreviewed)`, alongside the deck's own keywords and the TLP entries |
-| PDF / PPTX **Subject** (`dc:subject`) | appended after the title: `TLP:GREEN — My deck — contains AI-drafted text that no human has checked` |
+| PDF **Keywords** / PPTX `cp:keywords` | `AI-generated (unreviewed)`, alongside the deck's own keywords and the TLP entries |
+| PDF **Subject** / PPTX `dc:subject` | appended after the title: `TLP:GREEN — My deck — contains AI-drafted text that no human has checked` |
 | HTML `<head>` | `<meta name="ai-generated">` with that same marking, plus `<meta name="ai-generated-slides">` with the number of slides it applies to |
-| HTML page | a second fixed banner directly under the TLP banner, saying that the deck holds AI text nobody has checked |
-| Filename | `-ai-concept` before the extension, next to `-geredigeerd` and `-beknopt` |
+| HTML page | a fixed banner at the top, directly under the TLP banner when the deck is classified and in its place when it is not |
+| Filename | `-ai-concept` before the extension, after `-geredigeerd` and `-beknopt` |
 
 The keyword and the Subject note are deliberately **not** translated: they are
 fields a tool reads, not sentences on screen, and a value that changes with the

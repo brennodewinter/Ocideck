@@ -140,6 +140,22 @@ organization, description, keywords, TLP) land readable in PDF info and PPTX
 docProps, so taking a raw `Deck` there would make "forgot to project" a silent
 leak.
 
+That same factory counts one value over the projected slides rather than copying
+it, because it is a fact about the deck and not something an author fills in:
+
+```dart
+final int unreviewedAiSlideCount; // slidesWithUnreviewedAiMarkers(deck).length
+bool    get hasUnreviewedAi;      // count > 0
+String? get htmlAiMarking;        // kAiDraftKeyword, or null — mirrors htmlClassification
+String  get fileSuffix;           // kAiDraftFileSuffix ('-ai-concept'), or ''
+```
+
+`subject()` and `exportKeywords()` fold the same state in (`kAiDraftSubjectNote`
+after the title, `kAiDraftKeyword` among the keywords). All of them are inert
+when the count is zero, which is the state a reviewed deck is in — the marker
+exists to be cleared. The three constants are untranslated on purpose: they are
+read by tools, not by people.
+
 ### Privacy Projection API
 `lib/services/privacy/privacy_projection.dart` — applies redaction and audience
 scoping. The entry points are **static**:

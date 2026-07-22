@@ -529,6 +529,13 @@ also declares them, but see the [CI note](#continuous-integration).)
     that put deck or file *contents* into a log message (a collection joined,
     taken from, or sliced into the text). It cannot judge a lone variable that
     happens to hold a cell value; it does catch the pattern that actually did it.
+  - `test/trademark_notices_test.dart` — every brand OciDeck carries as a
+    *feature* sits in an enum (`VideoSourceKind`, `WebdavServerKind`), so the
+    test holds those enums against the trademark table in
+    `THIRD_PARTY_NOTICES.md`: a new embed provider or WebDAV flavour fails here
+    before its brand name can reach the interface unattributed. It also requires
+    each branded row to disclaim affiliation, because naming only the owner
+    leaves the suggestion of a partnership standing.
 
 ### Targeted test groups
 
