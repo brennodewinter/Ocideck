@@ -37,8 +37,13 @@ void main() {
         for (final level in [TlpLevel.amberStrict, TlpLevel.red]) {
           final decision = policy.evaluate(level);
           expect(decision.allowed, isFalse, reason: level.name);
-          expect(decision.reason, contains(level.label));
-          expect(decision.reason, contains(TlpLevel.amber.label));
+          // Sinds #576 is de reden een enum plus de twee niveaus in plaats van
+          // een zin — een weigering die het niveau interpoleert kan niet
+          // vertaald worden. De zin zelf staat onder toets in
+          // export_block_localization_test.dart.
+          expect(decision.reason, ExportBlockReason.aboveCeiling);
+          expect(decision.deckLevel, level);
+          expect(decision.limit, TlpLevel.amber);
         }
       });
 
@@ -67,8 +72,9 @@ void main() {
           minRequiredLevel: TlpLevel.green,
         );
         final decision = policy.evaluate(TlpLevel.none);
-        expect(decision.reason, contains('niet geclassificeerd'));
-        expect(decision.reason, contains(TlpLevel.green.label));
+        expect(decision.reason, ExportBlockReason.belowMinimum);
+        expect(decision.deckLevel, TlpLevel.none);
+        expect(decision.limit, TlpLevel.green);
       });
     });
 
@@ -99,11 +105,11 @@ void main() {
       );
       final low = policy.evaluate(TlpLevel.clear);
       expect(low.allowed, isFalse);
-      expect(low.reason, contains('minimum'));
+      expect(low.reason, ExportBlockReason.belowMinimum);
 
       final high = policy.evaluate(TlpLevel.red);
       expect(high.allowed, isFalse);
-      expect(high.reason, contains('vrijgaveniveau'));
+      expect(high.reason, ExportBlockReason.aboveCeiling);
     });
 
     group('fromAppSettings', () {

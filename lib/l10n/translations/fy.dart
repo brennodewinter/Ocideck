@@ -735,6 +735,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Eksport blokkearre troch it klassifikaasjebelied: stel in TLP-nivo yn foar dizze presintaasje.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Eksport blokkearre troch it klassifikaasjebelied: dizze presintaasje is {deck}, leger as it fereaske minimum {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Eksport blokkearre troch it klassifikaasjebelied: dizze presintaasje is {deck}, heger as it tastiene frijwaringsplafond {limit}.',
+  'niet geclassificeerd': 'net klassifisearre',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Regels dy\'t no út steane. Dizze wurde net meld en net redigearre. Trije dêrfan steane standert út — harren trefwurden komme op gewoane saaklike slides te faak foar. Tik om der ien oan te setten.',
   'Bekende beperkingen': 'Bekende beheiningen',

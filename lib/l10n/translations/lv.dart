@@ -1776,6 +1776,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Eksportu bloķē klasifikācijas politika: iestatiet šai prezentācijai TLP līmeni.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Eksportu bloķē klasifikācijas politika: šī prezentācija ir {deck}, zem prasītā minimuma {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Eksportu bloķē klasifikācijas politika: šī prezentācija ir {deck}, virs atļautajiem izlaišanas griestiem {limit}.',
+  'niet geclassificeerd': 'bez klasifikācijas',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Noteikumi, kas pašlaik ir izslēgti. Par tiem neziņo un tos neaizklāj. Trīs no tiem pēc noklusējuma ir izslēgti — to atslēgvārdi pārāk bieži sastopami parastos darba slaidos. Pieskaries, lai vienu ieslēgtu.',
   'Bekende beperkingen': 'Zināmie ierobežojumi',

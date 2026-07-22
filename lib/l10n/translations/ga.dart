@@ -1813,6 +1813,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Easpórtáil bactha ag an mbeartas aicmithe: socraigh leibhéal TLP don láithreoireacht seo.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Easpórtáil bactha ag an mbeartas aicmithe: tá an láithreoireacht seo {deck}, faoi bhun an íosmhéid riachtanaigh {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Easpórtáil bactha ag an mbeartas aicmithe: tá an láithreoireacht seo {deck}, os cionn na huasteorann scaoilte ceadaithe {limit}.',
+  'niet geclassificeerd': 'gan aicmiú',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Rialacha atá múchta faoi láthair. Ní thuairiscítear iad agus ní fholaítear iad. Tá trí cinn díobh múchta de réir réamhshocraithe — bíonn a n-eochairfhocail le feiceáil rómhinic ar ghnáthshleamhnáin oibre. Tapáil chun ceann a chur ar siúl.',
   'Bekende beperkingen': 'Teorainneacha aitheanta',

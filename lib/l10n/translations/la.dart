@@ -1793,6 +1793,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Exportatio a politia classificationis impedita: gradum TLP huic praesentationi statue.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Exportatio a politia classificationis impedita: haec praesentatio est {deck}, infra minimum requisitum {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Exportatio a politia classificationis impedita: haec praesentatio est {deck}, supra fastigium emissionis permissum {limit}.',
+  'niet geclassificeerd': 'sine classificatione',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Regulae nunc exstinctae. Neque nuntiantur neque obliterantur. Tres earum praedefinite exstinctae sunt — verba clavis earum in diapositivis negotialibus usitatis nimis saepe occurrunt. Tange ut unam accendas.',
   'Bekende beperkingen': 'Limitationes notae',

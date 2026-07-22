@@ -47,6 +47,9 @@ import 'deck_provider.dart';
 import 'editor_provider.dart';
 import 'settings_provider.dart';
 import 'slide_clipboard_provider.dart';
+import '../services/classification_policy.dart';
+import 'package:flutter/widgets.dart';
+import '../l10n/app_localizations.dart';
 
 part 'tabs_provider_import_types.dart';
 part 'tabs_provider_import.dart';

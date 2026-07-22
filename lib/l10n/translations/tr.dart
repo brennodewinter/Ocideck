@@ -2757,6 +2757,13 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Dışa aktarma sınıflandırma politikası tarafından engellendi: bu sunum için bir TLP düzeyi belirleyin.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Dışa aktarma sınıflandırma politikası tarafından engellendi: bu sunum {deck}, yani gereken asgari {limit} düzeyinin altında.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Dışa aktarma sınıflandırma politikası tarafından engellendi: bu sunum {deck}, yani izin verilen {limit} yayın üst sınırının üzerinde.',
+  'niet geclassificeerd': 'sınıflandırılmamış',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Şu anda kapalı olan kurallar. Bunlar bildirilmez ve redakte edilmez. Üçü varsayılan olarak kapalıdır — anahtar kelimeleri sıradan iş slaytlarında çok sık geçer. Birini açmak için dokunun.',
   'Bekende beperkingen': 'Bilinen sınırlamalar',

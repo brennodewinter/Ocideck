@@ -1777,6 +1777,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Vienti estetty luokituskäytännön vuoksi: aseta tälle esitykselle TLP-taso.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Vienti estetty luokituskäytännön vuoksi: tämä esitys on {deck}, alle vaaditun vähimmäistason {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Vienti estetty luokituskäytännön vuoksi: tämä esitys on {deck}, yli sallitun julkaisukaton {limit}.',
+  'niet geclassificeerd': 'ilman luokitusta',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Säännöt, jotka ovat nyt pois päältä. Niistä ei ilmoiteta eikä niitä peitetä. Kolme niistä on oletuksena pois päältä — niiden avainsanat esiintyvät liian usein tavallisissa työdioissa. Napauta ottaaksesi yhden käyttöön.',
   'Bekende beperkingen': 'Tunnetut rajoitukset',

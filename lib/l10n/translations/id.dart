@@ -1777,6 +1777,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Ekspor diblokir oleh kebijakan klasifikasi: tetapkan tingkat TLP untuk presentasi ini.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Ekspor diblokir oleh kebijakan klasifikasi: presentasi ini {deck}, di bawah minimum yang diwajibkan {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Ekspor diblokir oleh kebijakan klasifikasi: presentasi ini {deck}, di atas batas atas rilis yang diizinkan {limit}.',
+  'niet geclassificeerd': 'tanpa klasifikasi',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Aturan yang saat ini dimatikan. Ini tidak dilaporkan dan tidak diredaksi. Tiga di antaranya mati secara bawaan — kata kuncinya terlalu sering muncul pada slide kerja biasa. Ketuk untuk menyalakan salah satunya.',
   'Bekende beperkingen': 'Keterbatasan yang diketahui',

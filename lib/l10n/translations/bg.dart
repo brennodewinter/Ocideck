@@ -1800,6 +1800,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Експортът е блокиран от политиката за класификация: задайте TLP ниво за тази презентация.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Експортът е блокиран от политиката за класификация: тази презентация е {deck}, под изисквания минимум {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Експортът е блокиран от политиката за класификация: тази презентация е {deck}, над разрешения таван за освобождаване {limit}.',
+  'niet geclassificeerd': 'без класификация',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Правила, които сега са изключени. Те не се съобщават и не се заличават. Три от тях са изключени по подразбиране — ключовите им думи се срещат твърде често в обикновени служебни слайдове. Докоснете, за да включите едно от тях.',
   'Bekende beperkingen': 'Известни ограничения',

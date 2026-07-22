@@ -45,7 +45,9 @@ void main() {
   test('opslaan gaat vóór alle andere gates', () {
     final readiness = evaluateExportReadiness(
       needsSave: true,
-      classificationDecision: ExportDecision.block('TLP'),
+      classificationDecision: ExportDecision.block(
+        ExportBlockReason.aboveCeiling,
+      ),
       qualityDecision: QualityExportDecision.needsAcknowledgement(
         errorCount: 2,
         warningCount: 1,
@@ -59,14 +61,21 @@ void main() {
   test('classificatieblokkade gaat vóór kwaliteit en draagt de reden', () {
     final readiness = evaluateExportReadiness(
       needsSave: false,
-      classificationDecision: ExportDecision.block('reden van beleid'),
+      classificationDecision: ExportDecision.block(
+        ExportBlockReason.aboveCeiling,
+      ),
       qualityDecision: QualityExportDecision.needsAcknowledgement(
         errorCount: 1,
         warningCount: 0,
       ),
     );
     expect(readiness.status, ExportReadinessStatus.blockedByClassification);
-    expect(readiness.blockReason, 'reden van beleid');
+    // Sinds #576 draagt readiness de beslissing en niet een kant-en-klare
+    // zin; de zin wordt in de schil gemaakt met de taal van de gebruiker.
+    expect(
+      readiness.classificationDecision?.reason,
+      ExportBlockReason.aboveCeiling,
+    );
   });
 
   test('harde kwaliteitsblokkade wordt blockedByQuality met tellingen', () {
@@ -114,7 +123,7 @@ void main() {
       qualityDecision: noQualityIssues,
     );
     expect(readiness.status, ExportReadinessStatus.blockedByClassification);
-    expect(readiness.blockReason, isNotNull);
+    expect(readiness.classificationDecision, isNotNull);
   });
 
   group('de privacy-gate telt mee', () {
@@ -205,7 +214,9 @@ void main() {
       const policy = PrivacyExportPolicy(gate: PrivacyExportGate.block);
       final readiness = evaluateExportReadiness(
         needsSave: false,
-        classificationDecision: ExportDecision.block('TLP'),
+        classificationDecision: ExportDecision.block(
+          ExportBlockReason.aboveCeiling,
+        ),
         qualityDecision: noQualityIssues,
         privacyDecision: policy.evaluate(openstaand),
       );

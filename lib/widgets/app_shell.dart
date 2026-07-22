@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 import 'package:window_manager/window_manager.dart';
 
+import '../l10n/export_block_localization.dart';
 import '../platform/launch_files.dart';
 import '../platform/platform_features.dart';
 import '../platform/unsaved_work_guard.dart';

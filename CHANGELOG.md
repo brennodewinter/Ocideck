@@ -427,6 +427,13 @@ read a book to find out.
   notities en het zegel.
 
 ### Fixed
+- **De meldingen die u tegenhouden, kwamen altijd in het Nederlands.** Wanneer
+  het classificatiebeleid een export blokkeert, legt OciDeck uit waarom — maar
+  die uitleg werd in het Nederlands opgebouwd en bereikte u zo in elke taal.
+  Juist bij een melding die u tegenhoudt is dat schadelijk: wie hem niet leest,
+  weet niet waarom zijn export niet doorgaat. Nu volgt hij uw taalkeuze, in alle
+  32 talen. Hetzelfde gold voor het woord **Nieuw** linksboven op een leeg
+  tabblad.
 - **Drie privacyregels stonden af fabriek uit, maar het scherm zei dat u ze zelf
   had uitgezet.** Etnische afkomst, politieke opvatting en seksuele gerichtheid
   worden standaard niet gemeld — niet omdat ze minder belangrijk zijn, maar

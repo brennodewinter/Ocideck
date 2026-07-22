@@ -47,8 +47,10 @@ class ExportReadiness {
   final int errorCount;
   final int warningCount;
 
-  /// Reden van het classificatiebeleid bij [blockedByClassification].
-  final String? blockReason;
+  /// De volledige beslissing van het classificatiebeleid bij
+  /// [blockedByClassification] — de reden én de niveaus, zodat de schil er een
+  /// zin in de táál van de gebruiker van kan maken (#576).
+  final ExportDecision? classificationDecision;
 
   /// Aantal privacybevindingen zonder keuze (0 buiten de privacystatussen).
   final int privacyUnresolved;
@@ -57,7 +59,7 @@ class ExportReadiness {
     this.status, {
     this.errorCount = 0,
     this.warningCount = 0,
-    this.blockReason,
+    this.classificationDecision,
     this.privacyUnresolved = 0,
   });
 
@@ -99,7 +101,7 @@ ExportReadiness evaluateExportReadiness({
   if (!classificationDecision.allowed) {
     return ExportReadiness(
       ExportReadinessStatus.blockedByClassification,
-      blockReason: classificationDecision.reason,
+      classificationDecision: classificationDecision,
     );
   }
   if (privacyDecision.hardBlocked) {

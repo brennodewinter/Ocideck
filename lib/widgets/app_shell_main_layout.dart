@@ -333,7 +333,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             ? l10n.t('exportNeedsSave')
             : l10n.t('exportNeedsClean'),
       ExportReadinessStatus.blockedByClassification =>
-        readiness.blockReason ?? l10n.t('exportReady'),
+        exportBlockMessage(l10n, readiness.classificationDecision) ?? '',
       ExportReadinessStatus.blockedByQuality ||
       ExportReadinessStatus.qualityWarnings => formatQualityExportReason(
         l10n,

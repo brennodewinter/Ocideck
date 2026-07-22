@@ -1776,6 +1776,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Eksport blokeret af klassifikationspolitikken: angiv et TLP-niveau for denne præsentation.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Eksport blokeret af klassifikationspolitikken: denne præsentation er {deck}, under det krævede minimum {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Eksport blokeret af klassifikationspolitikken: denne præsentation er {deck}, over det tilladte frigivelsesloft {limit}.',
+  'niet geclassificeerd': 'ikke klassificeret',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Regler, der er slået fra lige nu. De rapporteres ikke og redigeres ikke bort. Tre af dem er slået fra som standard — deres nøgleord optræder for ofte på almindelige forretningsslides. Tryk for at slå en til.',
   'Bekende beperkingen': 'Kendte begrænsninger',

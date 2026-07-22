@@ -1,18 +1,47 @@
 import '../models/deck.dart';
 
 /// Uitkomst van de export-gate: mag deze export door, en zo niet, waarom niet.
+/// Waaróm een export geweigerd is.
+///
+/// Een reden en geen zin. De dienst bouwde hier tot 2026-07-22 kant-en-klaar
+/// Nederlands proza, en dat kón niet vertaald worden: de vertaallaag sleutelt op
+/// letterlijke brontekst, en een zin die een niveau interpoleert heeft geen
+/// letterlijke vorm om op te sleutelen. Dat trof precies de verkeerde
+/// categorie — dit zijn de meldingen die je tegenhouden (#576).
+enum ExportBlockReason {
+  /// Het beleid eist een classificatie en het deck heeft er geen.
+  classificationMissing,
+
+  /// Het deck zit onder het vereiste minimum.
+  belowMinimum,
+
+  /// Het deck zit boven het toegestane vrijgaveniveau.
+  aboveCeiling,
+}
+
 class ExportDecision {
   /// Of de export is toegestaan.
   final bool allowed;
 
-  /// Reden waarom de export geweigerd is (`null` wanneer toegestaan). Bedoeld om
-  /// 1-op-1 aan de gebruiker te tonen.
-  final String? reason;
+  /// Waarom er geweigerd is (`null` wanneer toegestaan).
+  final ExportBlockReason? reason;
 
-  const ExportDecision._(this.allowed, this.reason);
+  /// Het niveau van het deck, voor de melding. Null bij [allow].
+  final TlpLevel? deckLevel;
 
-  const ExportDecision.allow() : this._(true, null);
-  const ExportDecision.block(String reason) : this._(false, reason);
+  /// De grens waar het deck tegenaan liep — het vereiste minimum of het
+  /// toegestane plafond, afhankelijk van [reason].
+  final TlpLevel? limit;
+
+  const ExportDecision._(this.allowed, this.reason, this.deckLevel, this.limit);
+
+  const ExportDecision.allow() : this._(true, null, null, null);
+
+  const ExportDecision.block(
+    ExportBlockReason reason, {
+    TlpLevel? deckLevel,
+    TlpLevel? limit,
+  }) : this._(false, reason, deckLevel, limit);
 }
 
 /// Centrale, pure beslisser voor classificatie bij export.
@@ -48,9 +77,9 @@ class ClassificationPolicy {
     final ceiling = maxReleaseLevel;
     if (ceiling != null && deckLevel.index > ceiling.index) {
       return ExportDecision.block(
-        'Export geblokkeerd door classificatiebeleid: dit deck is '
-        '${deckLevel.label}, hoger dan het toegestane vrijgaveniveau '
-        '${ceiling.label}.',
+        ExportBlockReason.aboveCeiling,
+        deckLevel: deckLevel,
+        limit: ceiling,
       );
     }
     return const ExportDecision.allow();
