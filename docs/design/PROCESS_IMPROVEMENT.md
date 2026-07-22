@@ -1,8 +1,16 @@
-# OciDeck — Procesverbetering (Design)
+# OciDeck — Procesverbetering: a product design for an unbuilt module
 
-*The module that supports Lean Six Sigma methods — DMAIC, DMADV, Kaizen, A3, 8D.
-The neutral name is deliberate; see §19.*
+*The module that would support Lean Six Sigma methods — DMAIC, DMADV, Kaizen,
+A3, 8D. The neutral name is deliberate; see §19.*
 
+> **This is not a report about how OciDeck's own development process is
+> improved.** The title says "Procesverbetering" because that is the name of the
+> *product feature* being designed: a module in which a user authors Lean Six
+> Sigma work. Nothing here describes our own way of working, and nothing here
+> has been measured. *(Clarified 2026-07-22: the old heading, "Procesverbetering
+> (Design)", read to anyone scanning the folder as a process-improvement report,
+> which is the one thing it is not.)*
+>
 > **Status: design proposal — not yet implemented.**
 > This document describes a *future* capability (a Lean Six Sigma authoring
 > module) and the architecture chosen for it. It is deliberately kept separate
