@@ -80,6 +80,22 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   markdown of de HTML.
 
 ### Fixed
+- **Een export die niets doet, blijft niet meer eeuwig niets doen.** De PDF- en
+  PPTX-export maakt zijn afbeeldingen door de échte dia te laten tekenen en het
+  resultaat vast te leggen. Daarvoor moet het venster beelden produceren — en
+  dat doet macOS niet zodra u het minimaliseert, er een ander venster overheen
+  legt, of naar een ander bureaublad wisselt. De export stond dan stil: geen
+  dia, geen voortgang, geen melding, en wachten hielp niet.
+
+  Er zit nu een grens op dat wachten. Komt er twintig seconden lang geen beeld,
+  dan stopt de export met een melding die zegt wat eraan scheelt in plaats van
+  eindeloos stil te staan. En de voortgang meldt zich voortaan al vóórdat er
+  gewacht wordt, zodat u tenminste ziet dát hij begonnen is.
+
+  De praktische oplossing blijft eenvoudig: laat het venster tijdens het
+  exporteren gewoon op de voorgrond staan. De HTML-export heeft hier geen last
+  van; die tekent geen dia's.
+
 - **De webversie zegt nu ook waar een formulier níet heen mag.** De
   beveiligingsregels van de webbundel bepalen per soort verkeer waar de pagina
   iets vandaan mag halen. Voor het versturen van een formulier stond dat er niet
