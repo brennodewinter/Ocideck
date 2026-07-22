@@ -254,6 +254,15 @@ class DiskTraces {
     for (final dir in dirs) {
       if (dir == null || !await dir.exists()) continue;
       try {
+        // De SAST-regel bewaakt netwerkverkeer dat NetGuard niet ziet. `chmod`
+        // is niet netwerkvaardig: vaste argv, geen schil, geen invoer van
+        // buiten (het pad komt van `path_provider`), en alleen op Linux. Dart
+        // heeft geen permissie-API, dus het alternatief is een FFI-binding naar
+        // libc — méér aanvalsoppervlak voor minder.
+        //
+        // De uitzondering staat bewust op déze regel en niet op dit bestand:
+        // een tweede subproces hier moet wél alarm geven. Zie #521.
+        // nosemgrep: ocideck-subproces-buiten-de-gitlaag
         final result = await Process.run('chmod', ['700', dir.path]);
         if (result.exitCode == 0) hardened++;
       } catch (e) {
