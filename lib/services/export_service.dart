@@ -240,21 +240,13 @@ class ExportService {
             ),
           );
         case ExportFormat.html:
-          bytes = Uint8List.fromList(
-            utf8.encode(
-              await _html.build(
-                markdown!,
-                theme: themeProfile,
-                cockpitColorScheme: cockpitColorScheme,
-                metadata: docMeta,
-                fallbackTitle: fallbackTitle,
-                // De projectmap is de map van het deck; dezelfde begrenzing als
-                // overal, zodat een deck van een derde geen bestanden buiten
-                // zijn eigen map de export in kan trekken.
-                embedImage: (source) =>
-                    _embedImage(source, p.dirname(deckPath)),
-              ),
-            ),
+          bytes = await _buildHtml(
+            markdown!,
+            deckPath: deckPath,
+            themeProfile: themeProfile,
+            cockpitColorScheme: cockpitColorScheme,
+            metadata: docMeta,
+            fallbackTitle: fallbackTitle,
           );
       }
       if (kIsWeb) {
@@ -289,6 +281,32 @@ class ExportService {
       const l10n = AppLocalizations(Locale('nl'));
       return ExportResult.fail(userFacingError(l10n, e));
     }
+  }
+
+  /// Bouwt het HTML-document en levert het als bytes.
+  ///
+  /// De insluitfunctie voor afbeeldingen wordt hier gemaakt en niet in de
+  /// bouwer: de projectmap is de map van het deck, en die begrenzing hoort bij
+  /// de laag die het bestandssysteem kent — zodat een deck van een derde geen
+  /// bestanden buiten zijn eigen map de export in kan trekken.
+  Future<Uint8List> _buildHtml(
+    String markdown, {
+    required String deckPath,
+    required ThemeProfile? themeProfile,
+    required CockpitColorScheme cockpitColorScheme,
+    required ExportDocumentMetadata metadata,
+    required String fallbackTitle,
+  }) async {
+    final projectPath = p.dirname(deckPath);
+    final html = await _html.build(
+      markdown,
+      theme: themeProfile,
+      cockpitColorScheme: cockpitColorScheme,
+      metadata: metadata,
+      fallbackTitle: fallbackTitle,
+      embedImage: (source) => _embedImage(source, projectPath),
+    );
+    return Uint8List.fromList(utf8.encode(html));
   }
 
   /// Leest de afbeelding op [source] en maakt er een `data:`-URI van, zodat de

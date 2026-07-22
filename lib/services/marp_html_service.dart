@@ -30,6 +30,8 @@ part 'parts/marp_html_service_charts_bullet.dart';
 part 'parts/marp_html_service_reporting.dart';
 part 'parts/marp_html_service_reporting_miauw.dart';
 part 'parts/marp_html_service_reporting_css.dart';
+part 'parts/marp_html_service_css.dart';
+part 'parts/marp_html_service_render_script.dart';
 
 /// Maakt van een afbeeldingsverwijzing uit een deck een `data:`-URI, of geeft
 /// null wanneer de afbeelding niet in te sluiten is (niet gevonden, buiten de
@@ -824,61 +826,6 @@ class MarpHtmlService {
   static const _mathjaxConfig =
       r'''window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'},startup:{typeset:false}};''';
 
-  /// De opmaak die van geen enkel thema afhangt: de dia-doos, de tijdlijn, de
-  /// ondertekening, het media-redactievlak, de classificatiebanner en de
-  /// printregels. Deze gaat **altijd** mee, vóór [_defaultThemeCss] of
-  /// [_themedCss], zodat een gethematiseerde export dezelfde structuur houdt en
-  /// een thema alleen de kleuren en de letter overneemt.
-  ///
-  /// `--ocideck-accent` is de enige haak die het thema hier binnenkomt: de
-  /// tijdlijn en de ondertekening tekenen ermee, met EU-blauw als waarde voor
-  /// een export zonder thema.
-  static const _structuralCss = r'''
-:root{--ocideck-accent:#003399}
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-.slide{position:relative;width:1280px;min-height:720px;margin:24px auto;padding:48px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.4);border-radius:4px}
-.slide h1{font-size:48px;margin:.15em 0}
-.slide h2{font-size:34px;margin:.15em 0}
-.slide p,.slide li{font-size:24px;line-height:1.45}
-.slide pre.mermaid{background:transparent;border:0;text-align:center}
-.slide img{max-width:100%}
-.slide table{border-collapse:collapse;width:100%}
-.slide ol.timeline{list-style:none;margin:.6em 0;padding:0 0 0 24px;border-left:3px solid #ccc}
-.slide ol.timeline li{position:relative;margin:0 0 .9em;padding-left:16px}
-.slide ol.timeline li::before{content:"";position:absolute;left:-31px;top:.45em;width:11px;height:11px;border-radius:50%;background:var(--ocideck-accent)}
-.slide .tl-marker{display:block;font-size:18px;font-weight:700;color:var(--ocideck-accent);letter-spacing:.04em}
-.slide .tl-title{display:block;font-size:26px;font-weight:600;line-height:1.3}
-.slide .tl-desc{display:block;font-size:20px;opacity:.7;line-height:1.35}
-.slide .signoff{margin-top:.8em;max-width:900px}
-.slide .signoff-statement{font-style:italic;opacity:.85;font-size:22px}
-.slide .signoff-mark{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:40px;color:var(--ocideck-accent);margin:.35em 0 .1em}
-.slide .signoff-none{font-style:italic;opacity:.6;font-size:22px}
-.slide .signoff-meta{font-size:20px;opacity:.8;margin:.1em 0}
-.slide .signoff-seal{font-size:18px;opacity:.6;letter-spacing:.03em;margin-top:.7em}
-.slide .media-redacted{display:flex;align-items:center;justify-content:center;min-height:200px;margin:.6em 0;background:#000;color:#fff;font-size:20px;letter-spacing:.05em;border-radius:4px;text-align:center;padding:24px}
-.slide .image-missing{display:inline-block;padding:14px 20px;border:2px dashed rgba(100,116,139,.5);border-radius:6px;font-size:19px;opacity:.6;font-style:italic}
-.slide .media-absent{display:flex;align-items:center;justify-content:center;min-height:180px;margin:.6em 0;border:2px dashed rgba(100,116,139,.5);border-radius:6px;font-size:20px;opacity:.6;font-style:italic;text-align:center;padding:24px}
-.slide .mermaid-error{margin:.6em 0;padding:16px 20px;border:1px solid #B91C1C;border-left-width:6px;border-radius:6px;background:#FEE2E2;color:#7F1D1D;text-align:left}
-.slide .mermaid-error-title{font-size:22px;font-weight:700;margin:0 0 .3em;color:#7F1D1D}
-.slide .mermaid-error-label{font-size:16px;font-weight:600;margin:.7em 0 .2em;opacity:.8;color:#7F1D1D}
-.slide .mermaid-error-detail,.slide .mermaid-error-source{margin:0;padding:10px 12px;background:rgba(255,255,255,.65);border:0;border-radius:4px;font-size:15px;line-height:1.35;white-space:pre-wrap;overflow:auto;max-height:220px;color:#7F1D1D}
-.tlp-export-banner{position:fixed;top:0;left:0;right:0;background:#000;color:#ffc000;text-align:center;font:700 14px/2.4 monospace;z-index:9999;letter-spacing:.06em}
-@media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}}
-''';
-
-  /// De kleuren en letters voor een export zonder [ThemeProfile] — de
-  /// tegenhanger van [_themedCss], op dezelfde plek in de cascade.
-  static const _defaultThemeCss = r'''
-body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1a1a1a}
-.slide{background:#fff}
-.slide h1{color:var(--ocideck-title-color,inherit)}
-.slide pre{background:#f6f8fa;border:1px solid #e1e4e8;border-radius:6px;padding:16px;overflow:auto;font-size:18px}
-.slide code{font-family:SFMono-Regular,Consolas,"Liberation Mono",monospace}
-.slide blockquote{border-left:4px solid #ccc;margin:.5em 0;padding-left:16px;color:#555}
-.slide th,.slide td{border:1px solid #ccc;padding:6px 12px;font-size:20px}
-''';
-
   static String _htmlAttr(String value) {
     return value
         .replaceAll('&', '&amp;')
@@ -908,136 +855,4 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
     tag('generator', meta.producer);
     return buf.toString();
   }
-
-  /// De labels die het renderscript in het document zet, als JSON. Het script
-  /// is vaste, vendorloze code; alleen deze woorden zijn zichtbare tekst en gaan
-  /// dus door [AppLocalizations.d]. Een `</script` in een vertaling wordt door
-  /// [_guardScript] afgevangen, net als bij de bibliotheken.
-  static String _renderScriptLabels() {
-    const l10n = AppLocalizations(Locale('nl'));
-    return jsonEncode({
-      'mermaidFailed': l10n.d('Dit diagram kon niet worden getekend'),
-      'mermaidSource': l10n.d('Brontekst van het diagram'),
-    });
-  }
-
-  /// Het script dat de ingesloten markdown in het geopende document omzet.
-  ///
-  /// Een functie en geen constante, omdat de zichtbare woorden erin
-  /// gelokaliseerd worden (zie [_renderScriptLabels]) en omdat de ingesloten
-  /// afbeeldingen als [dataUris] meegaan — één keer, hoe vaak een dia er ook
-  /// naar verwijst.
-  static String _renderScript(List<String> dataUris) =>
-      'var OCIDECK_L=${_renderScriptLabels()};\n'
-      'var OCIDECK_IMG=${jsonEncode(dataUris)};\n'
-      '$_renderScriptBody';
-
-  static const _renderScriptBody = r'''
-(function(){
-  // Defence-in-depth: mermaid injects its SVG into the DOM AFTER DOMPurify has
-  // run on the markdown, so sanitise the produced SVG ourselves too (mirrors
-  // the in-app sanitize_svg.dart). Mermaid also runs with securityLevel strict.
-  function sanitizeMermaid(){
-    if(!window.DOMPurify)return;
-    document.querySelectorAll('.mermaid svg').forEach(function(svg){
-      try{
-        var clean=DOMPurify.sanitize(svg.outerHTML,{USE_PROFILES:{svg:true,svgFilters:true}});
-        var tpl=document.createElement('template');tpl.innerHTML=clean;
-        var node=tpl.content.firstElementChild;
-        if(node)svg.replaceWith(node);
-      }catch(e){}
-    });
-  }
-  if(window.marked&&marked.setOptions){marked.setOptions({gfm:true,breaks:false});}
-  document.querySelectorAll('section.slide').forEach(function(sec){
-    var holder=sec.querySelector('script[type="text/markdown"]');
-    var src=holder?holder.textContent:'';
-    // De ontsnapping uit _guardMarkdown terugdraaien: die bestaat alleen om de
-    // HTML-tokenizer binnen dit script-element te houden, niet om de markdown
-    // te veranderen.
-    src=src.split('<\\/').join('</').split('<\\!--').join('<!--');
-    var div=document.createElement('div');div.className='content';
-    var html=window.marked?marked.parse(src):src;
-    // Sanitise rendered Markdown before it touches the DOM: a deck must not be
-    // able to run script/onerror/javascript: payloads when the export is opened.
-    // If the sanitiser somehow isn't present, fail closed to plain text.
-    if(window.DOMPurify){div.innerHTML=DOMPurify.sanitize(html);}else{div.textContent=src;}
-    sec.innerHTML='';sec.appendChild(div);
-  });
-  // De ingesloten afbeeldingen terugzetten. Ze staan één keer in OCIDECK_IMG en
-  // de dia's dragen alleen een verwijzing, zodat dezelfde achtergrond op veertig
-  // dia's het bestand niet veertig keer zo groot maakt. Alleen een echte
-  // data:image/-waarde uit onze eigen lijst wordt gezet — de index komt uit het
-  // document en moet dus als onbetrouwbaar worden behandeld.
-  document.querySelectorAll('img[src^="#ocideck-img-"]').forEach(function(el){
-    var n=parseInt(el.getAttribute('src').replace('#ocideck-img-',''),10);
-    var uri=OCIDECK_IMG[n];
-    if(typeof uri==='string'&&uri.indexOf('data:image/')===0){el.setAttribute('src',uri);}
-    else{el.removeAttribute('src');}
-  });
-  document.querySelectorAll('code.language-mermaid').forEach(function(code){
-    var pre=code.closest('pre');if(!pre)return;
-    var holder=document.createElement('pre');holder.className='mermaid';
-    holder.textContent=code.textContent;pre.replaceWith(holder);
-  });
-  if(window.hljs){document.querySelectorAll('pre code').forEach(function(el){try{hljs.highlightElement(el);}catch(e){}});}
-  // Een diagram dat mermaid niet kan lezen wordt een leesbare melding IN het
-  // document. De ontvanger van een export heeft geen console: zonder dit zag hij
-  // mermaids eigen Engelse bom-plaatje ("Syntax error in text") zonder enige
-  // aanwijzing wélk diagram het betrof of wat eraan mankeerde, en de auteur zag
-  // helemaal niets. Alles gaat via textContent, dus de brontekst van het
-  // diagram kan hier nooit opmaak of markup worden.
-  function mermaidNotice(pre,err){
-    var box=document.createElement('div');box.className='mermaid-error';
-    var title=document.createElement('p');
-    title.className='mermaid-error-title';
-    title.textContent=OCIDECK_L.mermaidFailed;
-    box.appendChild(title);
-    var detail=err&&err.message?String(err.message):'';
-    if(detail){
-      var d=document.createElement('pre');
-      d.className='mermaid-error-detail';d.textContent=detail;
-      box.appendChild(d);
-    }
-    var label=document.createElement('p');
-    label.className='mermaid-error-label';
-    label.textContent=OCIDECK_L.mermaidSource;
-    var src=document.createElement('pre');
-    src.className='mermaid-error-source';src.textContent=pre.textContent;
-    box.appendChild(label);box.appendChild(src);
-    pre.replaceWith(box);
-  }
-  function noticeForUnrendered(err){
-    document.querySelectorAll('pre.mermaid').forEach(function(pre){
-      if(!pre.querySelector('svg'))mermaidNotice(pre,err);
-    });
-  }
-  function runMermaid(){
-    // htmlLabels UIT, per diagramsoort én globaal. Mermaid tekent labels
-    // anders in een <foreignObject> met HTML erin, en juist dat element haalt
-    // de sanitisatie hieronder weg (het is de plek waar HTML een SVG binnen kan
-    // komen). Het resultaat waren lege vakjes en pijlen zonder één woord erbij
-    // — een diagram dat er wél stond maar niets meer zei.
-    mermaid.initialize({startOnLoad:false,securityLevel:'strict',
-      htmlLabels:false,flowchart:{htmlLabels:false},class:{htmlLabels:false}});
-    // Elk diagram eerst apart laten controleren. Zo tekent mermaid zijn eigen
-    // foutplaatje niet, blijft een kapot diagram beperkt tot zijn eigen dia, en
-    // draait de sanitisatie hieronder ALTIJD — bij de oude stille catch sloeg
-    // die voor het hele document over zodra er één diagram omviel, ook voor de
-    // diagrammen die het wél deden.
-    var checked=[];
-    document.querySelectorAll('pre.mermaid').forEach(function(pre){
-      checked.push(Promise.resolve()
-        .then(function(){return mermaid.parse(pre.textContent);})
-        .catch(function(e){mermaidNotice(pre,e);}));
-    });
-    return Promise.all(checked)
-      .then(function(){return mermaid.run();})
-      .catch(noticeForUnrendered)
-      .then(sanitizeMermaid);
-  }
-  if(window.mermaid){try{runMermaid();}catch(e){noticeForUnrendered(e);}}
-  if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}
-})();
-''';
 }

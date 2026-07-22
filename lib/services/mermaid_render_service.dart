@@ -242,7 +242,6 @@ class _MermaidRenderHostState extends State<MermaidRenderHost> {
     if (!mounted || _controller != null) return;
     final controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(Colors.white)
       ..setNavigationDelegate(
         NavigationDelegate(
           onNavigationRequest: (request) {
@@ -257,6 +256,20 @@ class _MermaidRenderHostState extends State<MermaidRenderHost> {
           },
         ),
       );
+    // Achtergrondkleur apart, en met een vangnet. `setBackgroundColor` gooit op
+    // macOS `UnimplementedError: opaque is not implemented` — en omdat dit
+    // hierboven in de cascade stond, sloopte die fout alles wat erna kwam: de
+    // controller werd nooit toegekend, `attachController` draaide nooit, en elk
+    // diagram bleef eeuwig op zijn laadtolletje staan. De UnimplementedError
+    // landde in een scheduler-callback en bereikte de interface nooit.
+    //
+    // Deze WebView staat offstage en tekent niets; wat eruit komt is SVG-tekst.
+    // De kleur is dus decoratie, en decoratie mag de renderer niet slopen.
+    try {
+      controller.setBackgroundColor(Colors.white);
+    } catch (e) {
+      logWarning('MermaidRender: setBackgroundColor not supported here', e);
+    }
     setState(() => _controller = controller);
     MermaidRenderService.instance.attachController(controller);
   }
