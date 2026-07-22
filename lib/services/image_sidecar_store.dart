@@ -6,6 +6,15 @@ import 'package:path/path.dart' as p;
 import '../utils/atomic_file.dart';
 import '../utils/log.dart';
 
+/// De grens waarboven een sidecar niet meer wordt gelezen.
+///
+/// Een sidecar hoort bij een deck en reist er dus mee, ook uit een pakket, een
+/// repo of een map die iemand anders heeft gemaakt. Zonder grens leest een
+/// gemanipuleerd bestand van een gigabyte zich zo het geheugen in — en `jsonDecode`
+/// erna doet er nog een kopie bovenop. Het gaat om een platte map van
+/// bestandsnaam naar bijschrift: één MiB is ruim voor duizenden afbeeldingen.
+const int maxImageSidecarBytes = 1024 * 1024;
+
 /// Gedeelde opslaglaag voor beeld-sidecars: één plat JSON-bestand per map
 /// ([sidecarName]), keyed op bestandsnaam van de afbeelding. Caption- en
 /// descriptionservice verschillen alleen in bestandsnaam en in hun
@@ -41,6 +50,7 @@ class ImageSidecarStore {
     final file = fileFor(resolvedImagePath);
     if (!file.existsSync()) return null;
     try {
+      if (!await _withinCap(file)) return null;
       final data = jsonDecode(await file.readAsString()) as Map;
       final value = data[p.basename(resolvedImagePath)];
       return value is String ? value : null;
@@ -57,6 +67,11 @@ class ImageSidecarStore {
     Map<String, dynamic> data = {};
     if (file.existsSync()) {
       try {
+        // Boven de grens niet lezen, en dus ook niet schrijven: doorgaan met een
+        // lege map zou het bestand overschrijven en alle andere bijschriften in
+        // deze map wissen — precies de fout die het catch-blok hieronder
+        // beschrijft, alleen met een andere aanleiding.
+        if (!await _withinCap(file)) return;
         data = Map<String, dynamic>.from(
           jsonDecode(await file.readAsString()) as Map,
         );
@@ -92,6 +107,7 @@ class ImageSidecarStore {
     final file = File(p.join(dir, sidecarName));
     if (!file.existsSync()) return const {};
     try {
+      if (!await _withinCap(file)) return const {};
       final data = jsonDecode(await file.readAsString()) as Map;
       return {
         for (final entry in data.entries)
@@ -101,5 +117,18 @@ class ImageSidecarStore {
       logWarning('$logLabel: read sidecar', e);
       return const {};
     }
+  }
+
+  /// Of [file] onder [maxImageSidecarBytes] blijft. Meldt het overschot, want
+  /// stil overslaan laat de gebruiker denken dat zijn bijschriften weg zijn
+  /// terwijl ze er nog staan.
+  Future<bool> _withinCap(File file) async {
+    final length = await file.length();
+    if (length <= maxImageSidecarBytes) return true;
+    logWarning(
+      '$logLabel: sidecar van $length bytes overschrijdt de grens van '
+      '$maxImageSidecarBytes — overgeslagen',
+    );
+    return false;
   }
 }
