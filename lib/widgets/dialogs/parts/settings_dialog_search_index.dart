@@ -264,8 +264,34 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   SettingsSearchEntry(
     tab: SettingsSection.security,
     label: 'Herstelbestanden nu wissen',
-    section: 'Herstelbestanden',
+    section: 'Sporen op dit apparaat',
     keywords: ['herstel', 'recovery', 'wissen', 'autosave', 'sporen'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.security,
+    label: 'Recente lijst wissen',
+    section: 'Sporen op dit apparaat',
+    keywords: [
+      'recent',
+      'geschiedenis',
+      'wissen',
+      'sporen',
+      'privacy',
+      'lijst',
+    ],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.security,
+    label: 'Zet alles terug naar de begintoestand',
+    section: 'Sporen op dit apparaat',
+    keywords: [
+      'terugzetten',
+      'reset',
+      'wissen',
+      'fabrieksinstellingen',
+      'opnieuw',
+      'sporen',
+    ],
   ),
 
   // ── AI-assistentie (geen sectiekoppen op desktop) ─────────────────────────
