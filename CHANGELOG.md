@@ -10,6 +10,29 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Changed
+- **Een uitgezette privacycontrole levert geen groen oordeel meer op.** Zette u
+  de controle uit bij *Instellingen → Beveiliging*, dan meldde de statusbalk
+  daarna gewoon een groen "Klaar voor export". Dat was de gevaarlijkste stand van
+  allemaal: met de controle uit levert de scanner een lege uitslag, en van
+  buitenaf is "wij hebben niets gevonden" dan niet te onderscheiden van "wij
+  hebben niet gekeken". U deelde op een geruststelling die niemand had gegeven.
+
+  Het oordeel is nu grijs en zegt wat er niet is nagekeken — persoonsgegevens,
+  bijzondere gegevens en geheimen — met de plek erbij waar u de controle weer
+  aanzet. Het exportvenster zegt hetzelfde in woorden. Er wordt niets
+  geblokkeerd: u hebt die controle zelf uitgezet, dus dit is geen alarm maar het
+  intrekken van een belofte. Grijs en niet oranje, om precies die reden.
+- **De sjabloonkiezer zegt buiten het Nederlands dat de voorbeelddia's
+  Nederlands zijn.** De naam en de omschrijving van een sjabloon volgen uw eigen
+  taal; de dia's erin niet. Wie in het Turks een sjabloon koos, kreeg een
+  Nederlands deck zonder dat iets dat had aangekondigd.
+
+  Dat blijft zo, en dat is een keuze. Sjablooninhoud is *deck*-inhoud: ze belandt
+  in uw opgeslagen bestand en is vanaf dat moment van u. Zou ze meevertalen, dan
+  hing de inhoud van een document af van de menutaal waarin het toevallig is
+  aangemaakt, en kregen twee mensen die hetzelfde sjabloon kiezen bestanden die
+  ze niet kunnen vergelijken. Eerlijk zijn kost één regel tekst; het alternatief
+  kost tienduizenden regels die niemand onderhoudt.
 - **Geen base64 meer in uw presentatiebestand.** De belofte van OciDeck is dat u
   met alleen een teksteditor en Marp verder kunt. Op zeven plekken klopte dat
   niet: daar stond een blok onleesbare tekens waar uw inhoud in verstopt zat.
@@ -80,6 +103,28 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   markdown of de HTML.
 
 ### Fixed
+- **Een bevinding in een tabel zegt nu in welke cel hij zit.** Er stond "Tabel
+  14". Dat is het volgnummer dat de scanner intern gebruikt — een getal dat
+  nergens op uw dia staat en dat u zonder de breedte van de tabel niet eens kunt
+  terugrekenen. Een plaatsaanduiding die zelf een raadsel is, helpt niemand. Er
+  staat nu "Tabel rij 4, kolom 2", geteld zoals u ze op de dia telt; de koprij
+  heet "Tabel koprij", want die heeft op het scherm ook geen nummer.
+- **Een bevinding op een presentatiegegeven stuurt u niet langer naar de
+  kleurinstellingen.** Een bevinding die over de hele presentatie gaat, was ooit
+  vanzelf een themakwestie: alleen de contrastcontroles meldden zich op dat
+  niveau. Sinds de privacycontrole ook de kop van het bestand leest, klopt dat
+  niet meer — een e-mailadres in het auteursveld gaat over de hele presentatie en
+  heeft niets met kleur te maken.
+
+  Zo'n melding opende toch de kleurinstellingen, zocht daar een veld dat niet
+  bestaat, markeerde dus niets, en liet u achter tussen de kleurkiezers. Ze heet
+  nu *Presentatiegegevens*, de knop zegt "Open presentatiegegevens", en dat is
+  ook wat er opengaat. Het geldt voor alle velden uit de kop: auteur,
+  organisatie, beschrijving, trefwoorden, versie, datum, gebruikte standaarden en
+  hulpmiddelen, en de twee MIAUW-motiveringen. Zes daarvan hadden bovendien
+  helemaal geen plaatsaanduiding in het paneel — een bevinding op het versieveld
+  kwam binnen als "Presentatiegegevens · Privacy", en verder zoeken maar. Ze
+  worden nu bij naam genoemd.
 - **Een export die niets doet, blijft niet meer eeuwig niets doen.** De PDF- en
   PPTX-export maakt zijn afbeeldingen door de échte dia te laten tekenen en het
   resultaat vast te leggen. Daarvoor moet het venster beelden produceren — en
@@ -269,6 +314,67 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   rij, dus ze kunnen nooit over elkaar heen vallen.
 
 ### Added
+- **Op macOS heeft OciDeck nu een menubalk.** Bestand, Bewerken, Presentatie,
+  Venster en Help, met de handelingen die u tot nu toe alleen vond als u wist
+  waar u moest kijken: in een `⋮`-menu, in de statusbalk, of achter een sneltoets
+  die nergens stond. Op een Mac is de menubalk de plek waar u ontdekt wát een
+  programma kan.
+
+  Er komen maar twee sneltoetsen bij (`Cmd + ,` voor de instellingen en
+  `Cmd + N` voor een nieuw tabblad); de rest bestond al en wordt er alleen
+  zichtbaar. Knippen, kopiëren, plakken en alles selecteren staan er ook in —
+  deze balk vervangt het standaardmenu van macOS, en dat mag u geen
+  tekstbewerking kosten. Een handeling waarvoor geen presentatie open staat,
+  blijft staan maar grijs: een menu-item dat komt en gaat, leert niemand wat de
+  app kan.
+
+  Windows en Linux krijgen hun venstermenu van het bureaublad zelf en de
+  webversie heeft er geen, dus daar verandert er niets.
+- **Ongedaan maken, opnieuw, zoeken, de eigenschappen, deze handleiding en het
+  sneltoetsenoverzicht staan nu ook in het opdrachtenpalet** (`Ctrl/Cmd + K`).
+  Ongedaan maken en opnieuw bestonden alleen als twee kleine icoontjes in de
+  werkbalk, terwijl het palet in deze app de plek is waar een functie gevonden
+  wordt. Wat er niet in staat, bestaat voor de meeste mensen niet.
+- **Het openscherm zegt eindelijk waar u bent.** Er stonden een logo en vier
+  knoppen, en geen antwoord op de enige vraag die iemand daar heeft. Onder het
+  logo staat nu één regel over wat OciDeck maakt, onder *Nieuwe presentatie*
+  hoeveel sjablonen er achter die knop klaarstaan — geteld uit de catalogus
+  zelf, dus dat aantal kan niet verouderen — en naast *Instellingen* een knop
+  **Gebruikershandleiding**. Die stond tot nu toe drie klikken diep onder
+  *Instellingen → Documentatie*, precies waar iemand die nog niets weet niet
+  gaat kijken.
+- **Bij het kiezen van een slidetype staat de uitleg er nu bij.** Onder het
+  rooster verschijnt de toelichting van het type dat uw muis of uw
+  toetsenbordfocus aanwijst. Die tekst bestond al — volledig, in alle talen —
+  maar verscheen pas ná het invoegen, achter een dichtgeklapte "Wat kan ik
+  hier?". Wie moest kiezen, koos dus op een tekening en één woord. Dezelfde zin
+  gaat mee als schermlezer-tekst op het kaartje zelf, zodat wie niet kijkt hem
+  hoort op het moment dat de keuze valt.
+- **U kunt nu zien wat de ontvanger krijgt, vóórdat u iets verstuurt.** Staat een
+  dia op *weglaten uit tonen en exporteren*, dan verschijnt boven de
+  voorvertoning een melding die zegt wat er gebeurt — de gevonden gegevens worden
+  zwart gemaakt, én álle afbeeldingen, video en audio van die dia gaan niet mee.
+  Dat tweede stond nergens, en het is de duurste verrassing van de twee: een dia
+  die in de export ineens leeg is, ziet eruit als een fout in plaats van als uw
+  besluit.
+
+  Naast die melding staat een schakelaar **Wat zij zien / Mijn tekst**. Aan toont
+  hij die ene dia door dezelfde bewerking waar presenteren en exporteren doorheen
+  gaan. Tot nu toe beloofde het label in de editor dat er iets zou worden
+  weggelaten, veranderde het scherm niets, en gaf pas de PDF antwoord — en dan is
+  het bestand er al.
+
+  De schakelaar staat standaard uit en dat is de hele opzet: u moet uw eigen
+  tekst kunnen zien om hem te kunnen wijzigen. Uw markdown-bestand houdt hoe dan
+  ook alles.
+- **Opslaan laat zien dat het bezig is.** In de statusbalk draait tijdens een
+  opslag een melding met de bestemming erbij — *Opslaan…*, *Uploaden naar
+  WebDAV…*, *Uploaden naar S3…*, *Vastleggen in git…* — en de opslagknop in de
+  werkbalk staat zolang uit. Een opslag naar een server is één upload per
+  mediabestand en een git-commit zijn meerdere heen-en-weertjes; op een trage
+  verbinding was dat niet te onderscheiden van een vastgelopen programma, en dus
+  klikte u nog eens, en nog eens. De bestemming staat erbij omdat die zegt of het
+  aan uw schijf of aan uw verbinding ligt.
 - **Een scan die de webversie aanvalt zoals een buitenstaander dat zou doen**
   (`make dast`, met OWASP ZAP). Waar de andere controles de broncode lezen,
   bekijkt deze wat er werkelijk over de lijn gaat wanneer de pagina wordt
