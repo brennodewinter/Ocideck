@@ -21,9 +21,9 @@
     {
       "file": "purify.min.js",
       "npm": "dompurify",
-      "version": "3.4.11",
-      "sha256": "dbabb5b205a333ec49c8c09e7fca30ef66df0523bb8bc0fa9ea843841f111dbd",
-      "source": "https://cdn.jsdelivr.net/npm/dompurify@3.4.11/dist/purify.min.js",
+      "version": "3.4.12",
+      "sha256": "c45ba939765574f96cbf35ee9b6d89f73756a17921814425e74b82f7c54603ce",
+      "source": "https://cdn.jsdelivr.net/npm/dompurify@3.4.12/dist/purify.min.js",
       "license": "Apache-2.0 OR MPL-2.0"
     },
     {
