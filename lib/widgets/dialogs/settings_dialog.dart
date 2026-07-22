@@ -84,15 +84,6 @@ TextStyle _fontStyle(String font, TextStyle base) {
   return base.copyWith(fontFamily: font);
 }
 
-Color _parseHexColor(String hex) {
-  final cleaned = hex.replaceFirst('#', '');
-  final value = int.tryParse(
-    cleaned.length == 6 ? 'FF$cleaned' : cleaned,
-    radix: 16,
-  );
-  return Color(value ?? 0xFFFFFFFF);
-}
-
 class SettingsDialog extends ConsumerStatefulWidget {
   /// Het tabblad dat bij openen actief is.
   final SettingsSection initialSection;
@@ -792,9 +783,5 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       borderRadius: BorderRadius.circular(6),
       color: AppTheme.paper,
     );
-  }
-
-  Color _parseColor(String hex) {
-    return _parseHexColor(hex);
   }
 }
