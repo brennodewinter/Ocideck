@@ -127,6 +127,30 @@ class WebdavException implements Exception {
 /// opnieuw probeert, maar een uitkomst waar de aanroeper een keuze over moet
 /// voorleggen. Als foutsoort zou hij bovendien opduiken in switches van
 /// bewerkingen waar hij niet kán ontstaan, zoals de verbindingstest.
+///
+/// Overwogen en niet gedaan (externe audit U-02, juli 2026): de drie opslagen
+/// samen laten vallen op één `StorageConflictException` met een `source`-veld,
+/// zodat een aanroeper op één type kan vangen. Die aanroeper bestaat niet, en
+/// er is geen zicht op dat hij komt:
+///
+/// - Geen enkele plek vangt er twee. Dit type wordt gevangen in
+///   `widgets/shell/shell_actions.dart`, `S3ConflictException` in
+///   `shell_actions_s3.dart`, en `GitConflictException` in
+///   `state/tabs_provider_git.dart` en `services/git/sync_engine.dart`. Elk in
+///   een pad dat sowieso al voor één backend geschreven is: een andere
+///   dienstaanroep, een ander standaardpad, een andere melding.
+/// - "Conflict" betekent per backend iets anders. Bij WebDAV en S3 is het een
+///   vraag aan de gebruiker (overschrijven of onder een andere naam); bij git
+///   bereikt het de shell niet eens als fout, maar wordt het een poging tot
+///   driewegs-merge en pas daarna een uitkomst.
+/// - De inhoud verschilt echt: een ETag hier, een `baseSha` en werkbranch
+///   daar. Eén type zou dat allebei moeten dragen, en dat is precies de brede
+///   basisklasse die `models/storage_origin.dart` om dezelfde reden afwijst.
+///
+/// Wat de audit terecht zag is dat de twee *afhandelingen* in `shell_actions`
+/// en `shell_actions_s3` sterk op elkaar lijken. Dat is echter duplicatie van
+/// de opslaglus eromheen, niet van het uitzonderingstype; een gedeeld type
+/// haalt daar niets van weg.
 class WebdavConflictException implements Exception {
   /// De versie waarop ons werk gebaseerd was, dus wat we de server vroegen te
   /// bevestigen. Voor de melding en om te kunnen zien wat er misging.
