@@ -309,7 +309,13 @@ Community contributions are welcome through:
 - Testing new features in development builds
 
 There is no discussion forum, mailing list or chat channel — the issue tracker
-is the only channel.
+is the only channel for questions and reports.
+
+For **security news** that is not the whole answer, and saying only the above was
+misleading: you should not have to watch a tracker to learn that a vulnerability
+was fixed. The forge serves a releases feed you can subscribe to, and
+`SECURITY.md` explains what it carries today and what it does not. Corrected
+2026-07-22.
 
 ### Where can I find more information?
 The documentation in this repository is all of it: the `docs/` directory and the

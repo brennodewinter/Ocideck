@@ -239,6 +239,66 @@ The HTML export is defence-in-depth against script injection in deck content:
   PNG/JPEG/GIF/BMP/WebP by signature bytes, not by file extension, and import is
   size-capped (64 MiB image / 1 GiB media).
 
+### 6.1 The one non-memory-safe surface
+
+*Added 2026-07-22 (QA.05 of the light-weight attestation).* Dart is memory-safe,
+which makes this an easy box to tick and a wrong one. One dependency is not:
+`opencv_core` pulls in `dartcv`, which is C++, and it is the layer that decodes
+**untrusted image data** — the exact place where a malformed file becomes a
+memory-safety bug rather than an exception.
+
+**How wide the surface is.** One file: `lib/services/privacy/image_face_scan_io.dart`
+is the only place in `lib/` that imports it. It runs when a deck containing
+images is open, on bytes that came from that deck.
+
+**What stands in front of it**, in order, all before `cv.imdecode` sees anything:
+
+1. **A byte cap** — `kFaceScanMaxBytes`, 24 MiB.
+2. **A pixel cap read from the header alone** — `faceScanDimensionsWithinBudget`
+   uses the `image` package's `startDecode`, which reads the PNG IHDR or the JPEG
+   SOF and converts no pixel. The cap is 40 megapixels. This exists because the
+   byte cap cannot replace it: a flat 30000 × 30000 PNG is under a megabyte on
+   disk and 2.7 GB once decoded, and that allocation happens outside the Dart
+   heap, where a `try` does not reach it.
+3. **Fail-closed on an unreadable header.** If the dimensions cannot be read, the
+   answer is no. Letting an unparseable header through "just in case" would admit
+   precisely the input this gate exists for, since the attacker picks the header.
+4. **An empty-matrix check after decode**, because an unknown format returns an
+   empty `Mat` rather than throwing, and that must not read as "zero faces".
+
+**What the gate does *not* do, measured rather than assumed** (2026-07-22, and
+now asserted in `test/image_face_scan_test.dart`):
+
+- **Truncated files never reach the decoder**, in either format. Cutting a real
+  PNG or JPEG at 8, 32, 64, 512 or 4096 bytes fails the header gate every time —
+  well past the point where the dimensions themselves are present.
+- **A corrupted PNG never reaches the decoder either**, because PNG carries a CRC
+  per chunk and a mandatory IEND; even corrupting only the last hundred bytes is
+  refused.
+- **A corrupted JPEG does reach it.** JPEG carries its dimensions in the SOF
+  marker with no checksum, so a JPEG with a mangled image field is, to this gate,
+  an ordinary picture. Those bytes go into C++.
+
+That last line is the honest shape of the mitigation: **the gate bounds
+allocation, not content.** What catches content is the `try` around the decode
+plus the contract that a broken image reports *unreadable* rather than *zero
+faces* — "we could not look here" and "we looked and found nothing" are different
+statements, and the privacy warning depends on the difference.
+
+**When the native layer is absent or broken**, `isSupported` says so and every
+image reports unreadable. That is deliberate: an early version let every call
+fall into the error path and cheerfully report zero faces on a machine where the
+library had never loaded.
+
+**What is not covered, plainly.** There is no fuzzing corpus and no
+property-based campaign against the decode path; the tests above are hand-picked
+malformed inputs, not a search. `make check` runs them without the native library
+(it is not present on a bare test machine), in which case they assert the
+contract rather than exercise C++; the Makefile exports `DARTCV_LIB_PATH` when a
+platform build exists, and then they run for real — that is the run that proves
+the JPEG path. A crash inside `dartcv` takes the process down, and nothing here
+would catch it.
+
 ## 7. AI egress control
 
 The optional AI assistant is fail-closed and is the most security-sensitive

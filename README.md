@@ -127,6 +127,7 @@ package format — is documented in
 | [Build & release](docs/BUILD.md) | Building from source and producing distributables |
 | [Changelog](CHANGELOG.md) | Notable changes (nothing is released yet) |
 | [Checks & CI](docs/CHECKS.md) | Every automated check, what it covers, and how each is enforced |
+| [Compliance attestation](COMPLIANCE.md) | Voluntary security attestation (ORC WG light-weight checklist), including the rows we cannot tick |
 | [Contributing](CONTRIBUTING.md) | Setup, the quality gate, and how to propose changes |
 | [File format](docs/FILE_FORMAT.md) | The Marp Markdown, front matter, sidecars, the `.ocideck` package, and the `.ocideckstyle` style profile |
 | [Keyboard shortcuts](docs/SHORTCUTS.md) | Editor and presenter shortcuts |

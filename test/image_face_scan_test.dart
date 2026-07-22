@@ -190,6 +190,103 @@ void main() {
     });
   });
 
+  // ── Beschadigde invoer, met een échte kop ─────────────────────────────────
+  //
+  // De groep hierboven toetst verzonnen koppen en losse rommel. Dat is niet de
+  // invoer waar een decoder op omvalt: die ziet er van voren normaal uit en gaat
+  // pas verderop stuk. Dit is de niet-geheugenveilige laag — `cv.imdecode` is
+  // C++, en het is de enige plek in dit project waar niet-vertrouwde bytes een
+  // native decoder bereiken (QA.05, #553).
+  //
+  // **Wat hier gemeten is, en niet aangenomen.** De poort en de twee formaten
+  // gedragen zich verschillend, en dat verschil is de kern van het verhaal:
+  //
+  //   * **PNG faalt altijd dicht.** Elke afkapping en elke verminking — ook
+  //     alleen de laatste honderd bytes — laat de koplezer weigeren, want PNG
+  //     heeft een CRC per chunk en een verplichte IEND. Beschadigde PNG-bytes
+  //     bereiken `cv.imdecode` dus nooit.
+  //   * **JPEG komt er wél doorheen.** De afmetingen staan in de SOF-markering
+  //     vooraan en er is geen checksum, dus een JPEG met een verminkt beeldveld
+  //     is voor de poort een gewone afbeelding. Die bytes gáán de C++-decoder in.
+  //
+  // Dat is geen gat maar de grens van wat deze poort ís: hij begrenst de
+  // *allocatie* (breedte × hoogte), niet de *inhoud*. Wat de inhoud opvangt is
+  // de `try` in `countFaces` plus het onleesbaar-contract hieronder.
+  group('beschadigde afbeeldingen', () {
+    /// De eerste [keep] bytes van een echte asset — een halve upload, of een
+    /// bestand dat een transportfout niet heeft overleefd.
+    Uint8List truncated(String name, int keep) =>
+        Uint8List.sublistView(asset(name), 0, keep);
+
+    /// Een echte kop met bewust verminkt beeldveld erachter.
+    Uint8List corruptBody(String name) {
+      final bytes = Uint8List.fromList(asset(name));
+      for (var i = bytes.length ~/ 2; i < bytes.length; i++) {
+        bytes[i] = (i * 37 + 11) & 0xFF;
+      }
+      return bytes;
+    }
+
+    test('een afgekapt bestand komt nooit door de poort', () {
+      // Ook ruim voorbij de kop niet: 4 KiB is lang na de IHDR/SOF, en het
+      // antwoord blijft nee. Gemeten op beide formaten, 8 t/m 4096 bytes.
+      for (final name in const ['ocideck-logo.png', 'cat-keiko.jpg']) {
+        for (final keep in const [8, 32, 64, 512, 4096]) {
+          expect(
+            faceScanDimensionsWithinBudget(truncated(name, keep)),
+            isFalse,
+            reason: '$name afgekapt op $keep bytes',
+          );
+        }
+      }
+    });
+
+    test('een verminkte PNG faalt dicht, een verminkte JPEG niet', () {
+      // Geen bug, maar de grens van de poort — en juist daarom vastgelegd: gaat
+      // dit ooit stilletjes de andere kant op, dan verandert er iets aan welke
+      // bytes de C++-decoder bereiken, en dat hoort niemand per ongeluk te doen.
+      expect(
+        faceScanDimensionsWithinBudget(corruptBody('ocideck-logo.png')),
+        isFalse,
+        reason: 'PNG heeft een CRC per chunk en een verplichte IEND',
+      );
+      expect(
+        faceScanDimensionsWithinBudget(corruptBody('cat-keiko.jpg')),
+        isTrue,
+        reason:
+            'JPEG draagt zijn afmetingen in de SOF zonder checksum; deze bytes '
+            'gaan dus wél de native decoder in, en dat is wat de try in '
+            'countFaces moet opvangen',
+      );
+    });
+
+    test('een kapotte afbeelding levert onleesbaar op, en geen worp', () async {
+      // Het gedrag dat telt: één stukgelopen afbeelding mag de controle niet
+      // meenemen, en mag al helemaal geen nul melden alsof er gekeken is.
+      //
+      // Zonder native laag valt dit op `isSupported` en is het een contracttest;
+      // mét native laag (DARTCV_LIB_PATH gezet) gaat de verminkte JPEG hierboven
+      // werkelijk door de C++-decoder heen. Dát is de run waar dit voor bedoeld
+      // is, en de reden dat de JPEG in deze lijst staat.
+      for (final bytes in [
+        truncated('ocideck-logo.png', 64),
+        truncated('cat-keiko.jpg', 512),
+        corruptBody('ocideck-logo.png'),
+        corruptBody('cat-keiko.jpg'),
+      ]) {
+        final result = await scanner.countFaces(bytes);
+        expect(result.faces, 0);
+        expect(
+          result.readable,
+          isFalse,
+          reason:
+              'een beschadigde afbeelding hoort "hier kon ik niet kijken" te '
+              'zeggen, niet "ik heb gekeken en niets gevonden"',
+        );
+      }
+    });
+  });
+
   group('de webvariant', () {
     // Op het web bestaat FFI niet en is er dus geen detector. Deze helft moet
     // dat zéggen in plaats van nul gezichten te melden — anders leest een lege
