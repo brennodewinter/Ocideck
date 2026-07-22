@@ -1778,6 +1778,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Dit diagram kon niet worden getekend': 'Dette diagram kunne ikke tegnes',
+  'Brontekst van het diagram': 'Diagrammets kildetekst',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

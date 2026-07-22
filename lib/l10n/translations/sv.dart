@@ -1778,6 +1778,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Dit diagram kon niet worden getekend': 'Det här diagrammet kunde inte ritas',
+  'Brontekst van het diagram': 'Diagrammets källtext',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -1786,6 +1786,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Dit diagram kon niet worden getekend':
+      'Ovaj dijagram nije bilo moguće nacrtati',
+  'Brontekst van het diagram': 'Izvorni tekst dijagrama',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'U redu',

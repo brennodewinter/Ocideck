@@ -1815,6 +1815,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Dit diagram kon niet worden getekend':
+      'Níorbh fhéidir an léaráid seo a tharraingt',
+  'Brontekst van het diagram': 'Téacs foinseach na léaráide',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Ceart go leor',

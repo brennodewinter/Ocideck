@@ -1782,6 +1782,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Dit diagram kon niet worden getekend':
+      'Tento diagram se nepodařilo vykreslit',
+  'Brontekst van het diagram': 'Zdrojový text diagramu',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

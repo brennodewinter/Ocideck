@@ -1797,6 +1797,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Dit diagram kon niet worden getekend':
+      'Această diagramă nu a putut fi desenată',
+  'Brontekst van het diagram': 'Textul sursă al diagramei',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

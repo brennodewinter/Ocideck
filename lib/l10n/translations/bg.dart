@@ -1802,6 +1802,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Dit diagram kon niet worden getekend':
+      'Тази диаграма не можа да бъде начертана',
+  'Brontekst van het diagram': 'Изходен текст на диаграмата',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Добре',

@@ -172,7 +172,7 @@ class MarpHtmlService {
         '</head><body>'
         '$banner'
         '$sections'
-        '${inline(_renderScript)}'
+        '${inline(_renderScript())}'
         '</body></html>';
   }
 
@@ -676,6 +676,10 @@ html,body{margin:0;padding:0}
 .slide .signoff-meta{font-size:20px;opacity:.8;margin:.1em 0}
 .slide .signoff-seal{font-size:18px;opacity:.6;letter-spacing:.03em;margin-top:.7em}
 .slide .media-redacted{display:flex;align-items:center;justify-content:center;min-height:200px;margin:.6em 0;background:#000;color:#fff;font-size:20px;letter-spacing:.05em;border-radius:4px;text-align:center;padding:24px}
+.slide .mermaid-error{margin:.6em 0;padding:16px 20px;border:1px solid #B91C1C;border-left-width:6px;border-radius:6px;background:#FEE2E2;color:#7F1D1D;text-align:left}
+.slide .mermaid-error-title{font-size:22px;font-weight:700;margin:0 0 .3em;color:#7F1D1D}
+.slide .mermaid-error-label{font-size:16px;font-weight:600;margin:.7em 0 .2em;opacity:.8;color:#7F1D1D}
+.slide .mermaid-error-detail,.slide .mermaid-error-source{margin:0;padding:10px 12px;background:rgba(255,255,255,.65);border:0;border-radius:4px;font-size:15px;line-height:1.35;white-space:pre-wrap;overflow:auto;max-height:220px;color:#7F1D1D}
 .tlp-export-banner{position:fixed;top:0;left:0;right:0;background:#000;color:#ffc000;text-align:center;font:700 14px/2.4 monospace;z-index:9999;letter-spacing:.06em}
 @media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}}
 ''';
@@ -722,7 +726,25 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
     return buf.toString();
   }
 
-  static const _renderScript = r'''
+  /// De labels die het renderscript in het document zet, als JSON. Het script
+  /// is vaste, vendorloze code; alleen deze woorden zijn zichtbare tekst en gaan
+  /// dus door [AppLocalizations.d]. Een `</script` in een vertaling wordt door
+  /// [_guardScript] afgevangen, net als bij de bibliotheken.
+  static String _renderScriptLabels() {
+    const l10n = AppLocalizations(Locale('nl'));
+    return jsonEncode({
+      'mermaidFailed': l10n.d('Dit diagram kon niet worden getekend'),
+      'mermaidSource': l10n.d('Brontekst van het diagram'),
+    });
+  }
+
+  /// Het script dat de ingesloten markdown in het geopende document omzet.
+  /// Een functie en geen constante, omdat de zichtbare woorden erin
+  /// gelokaliseerd worden (zie [_renderScriptLabels]).
+  static String _renderScript() =>
+      'var OCIDECK_L=${_renderScriptLabels()};\n$_renderScriptBody';
+
+  static const _renderScriptBody = r'''
 (function(){
   // Defence-in-depth: mermaid injects its SVG into the DOM AFTER DOMPurify has
   // run on the markdown, so sanitise the produced SVG ourselves too (mirrors
@@ -760,11 +782,56 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
     holder.textContent=code.textContent;pre.replaceWith(holder);
   });
   if(window.hljs){document.querySelectorAll('pre code').forEach(function(el){try{hljs.highlightElement(el);}catch(e){}});}
-  if(window.mermaid){try{
+  // Een diagram dat mermaid niet kan lezen wordt een leesbare melding IN het
+  // document. De ontvanger van een export heeft geen console: zonder dit zag hij
+  // mermaids eigen Engelse bom-plaatje ("Syntax error in text") zonder enige
+  // aanwijzing wélk diagram het betrof of wat eraan mankeerde, en de auteur zag
+  // helemaal niets. Alles gaat via textContent, dus de brontekst van het
+  // diagram kan hier nooit opmaak of markup worden.
+  function mermaidNotice(pre,err){
+    var box=document.createElement('div');box.className='mermaid-error';
+    var title=document.createElement('p');
+    title.className='mermaid-error-title';
+    title.textContent=OCIDECK_L.mermaidFailed;
+    box.appendChild(title);
+    var detail=err&&err.message?String(err.message):'';
+    if(detail){
+      var d=document.createElement('pre');
+      d.className='mermaid-error-detail';d.textContent=detail;
+      box.appendChild(d);
+    }
+    var label=document.createElement('p');
+    label.className='mermaid-error-label';
+    label.textContent=OCIDECK_L.mermaidSource;
+    var src=document.createElement('pre');
+    src.className='mermaid-error-source';src.textContent=pre.textContent;
+    box.appendChild(label);box.appendChild(src);
+    pre.replaceWith(box);
+  }
+  function noticeForUnrendered(err){
+    document.querySelectorAll('pre.mermaid').forEach(function(pre){
+      if(!pre.querySelector('svg'))mermaidNotice(pre,err);
+    });
+  }
+  function runMermaid(){
     mermaid.initialize({startOnLoad:false,securityLevel:'strict'});
-    var mres=mermaid.run();
-    if(mres&&mres.then){mres.then(sanitizeMermaid).catch(function(e){});}else{sanitizeMermaid();}
-  }catch(e){}}
+    // Elk diagram eerst apart laten controleren. Zo tekent mermaid zijn eigen
+    // foutplaatje niet, blijft een kapot diagram beperkt tot zijn eigen dia, en
+    // draait de sanitisatie hieronder ALTIJD — bij de oude stille catch sloeg
+    // die voor het hele document over zodra er één diagram omviel, ook voor de
+    // diagrammen die het wél deden.
+    var checked=[];
+    document.querySelectorAll('pre.mermaid').forEach(function(pre){
+      checked.push(Promise.resolve()
+        .then(function(){return mermaid.parse(pre.textContent);})
+        .catch(function(e){mermaidNotice(pre,e);}));
+    });
+    return Promise.all(checked)
+      .then(function(){return mermaid.run();})
+      .catch(noticeForUnrendered)
+      .then(sanitizeMermaid);
+  }
+  if(window.mermaid){try{runMermaid();}catch(e){noticeForUnrendered(e);}}
   if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}
 })();
 ''';

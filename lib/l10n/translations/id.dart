@@ -1779,6 +1779,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Dit diagram kon niet worden getekend': 'Diagram ini tidak dapat digambar',
+  'Brontekst van het diagram': 'Teks sumber diagram',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

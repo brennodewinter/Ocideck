@@ -161,6 +161,33 @@ void main() {}
     expect(html, isNot(contains('data:font/ttf;base64,')));
   });
 
+  group('een kapot mermaid-diagram', () {
+    test('krijgt een leesbare melding in het document zelf', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build('# X\n\n```mermaid\ngraph TD\n```');
+
+      // De ontvanger heeft geen console: de melding moet in het document staan,
+      // in zijn taal, met de brontekst van het diagram erbij.
+      expect(html, contains('Dit diagram kon niet worden getekend'));
+      expect(html, contains('Brontekst van het diagram'));
+      expect(html, contains('mermaid-error'));
+      expect(html, contains('.slide .mermaid-error{'));
+      // Elk diagram wordt eerst apart gecontroleerd, zodat mermaid zijn eigen
+      // Engelse foutplaatje niet tekent.
+      expect(html, contains('mermaid.parse('));
+    });
+
+    test('laat de sanitisatie van de andere diagrammen niet vallen', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build('# X');
+
+      // De stille `.catch(function(e){})` op mermaid.run() sloeg
+      // sanitizeMermaid over voor het HELE document zodra één diagram omviel.
+      expect(html, isNot(contains('.catch(function(e){})')));
+      expect(html, contains('.then(sanitizeMermaid)'));
+    });
+  });
+
   test('a themed export keeps the structural stylesheet', () async {
     // De opmaak van de tijdlijn, de ondertekening, het redactievlak en de
     // classificatiebanner hoort niet bij het thema. Toen de themed CSS het

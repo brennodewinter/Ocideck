@@ -1783,6 +1783,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Dit diagram kon niet worden getekend':
+      'Ezt a diagramot nem sikerült megrajzolni',
+  'Brontekst van het diagram': 'A diagram forrásszövege',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

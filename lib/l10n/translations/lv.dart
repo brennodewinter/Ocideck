@@ -1778,6 +1778,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Dit diagram kon niet worden getekend': 'Šo diagrammu nevarēja uzzīmēt',
+  'Brontekst van het diagram': 'Diagrammas pirmteksts',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Labi',

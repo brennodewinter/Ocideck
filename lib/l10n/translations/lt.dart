@@ -1787,6 +1787,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Dit diagram kon niet worden getekend': 'Nepavyko nubraižyti šios diagramos',
+  'Brontekst van het diagram': 'Diagramos pirminis tekstas',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Gerai',

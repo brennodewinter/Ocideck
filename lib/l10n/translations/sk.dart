@@ -1786,6 +1786,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Dit diagram kon niet worden getekend':
+      'Tento diagram sa nepodarilo vykresliť',
+  'Brontekst van het diagram': 'Zdrojový text diagramu',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

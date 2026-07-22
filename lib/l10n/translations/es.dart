@@ -733,6 +733,9 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Dit diagram kon niet worden getekend':
+      'No se ha podido dibujar este diagrama',
+  'Brontekst van het diagram': 'Texto fuente del diagrama',
   'esc': 'esc',
   'Enter': 'Intro',
   'OK': 'OK',

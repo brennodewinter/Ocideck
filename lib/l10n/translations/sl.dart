@@ -1781,6 +1781,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Dit diagram kon niet worden getekend':
+      'Tega diagrama ni bilo mogoče narisati',
+  'Brontekst van het diagram': 'Izvorno besedilo diagrama',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'V redu',

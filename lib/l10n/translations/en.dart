@@ -918,6 +918,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Dit diagram kon niet worden getekend': 'This diagram could not be drawn',
+  'Brontekst van het diagram': 'Diagram source text',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

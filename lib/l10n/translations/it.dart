@@ -732,6 +732,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Dit diagram kon niet worden getekend':
+      'Non è stato possibile disegnare questo diagramma',
+  'Brontekst van het diagram': 'Testo sorgente del diagramma',
   'esc': 'esc',
   'Enter': 'Invio',
   'OK': 'OK',

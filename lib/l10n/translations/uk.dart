@@ -1797,6 +1797,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Dit diagram kon niet worden getekend': 'Не вдалося намалювати цю діаграму',
+  'Brontekst van het diagram': 'Вихідний текст діаграми',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Гаразд',

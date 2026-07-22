@@ -737,6 +737,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Dit diagram kon niet worden getekend': 'Dit diagram koe net tekene wurde',
+  'Brontekst van het diagram': 'Boarnetekst fan it diagram',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

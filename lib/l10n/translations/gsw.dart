@@ -1783,6 +1783,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Dit diagram kon niet worden getekend':
+      'Das Diagramm het nöd chöne zeichnet werde',
+  'Brontekst van het diagram': 'Quälltext vom Diagramm',
   'esc': 'Esc',
   'Enter': 'Enter',
   'OK': 'OK',

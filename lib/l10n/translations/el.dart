@@ -1807,6 +1807,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Dit diagram kon niet worden getekend':
+      'Δεν ήταν δυνατή η σχεδίαση αυτού του διαγράμματος',
+  'Brontekst van het diagram': 'Πηγαίο κείμενο του διαγράμματος',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Εντάξει',

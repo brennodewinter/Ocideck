@@ -736,6 +736,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Dit diagram kon niet worden getekend': 'Ce diagramme n\'a pas pu être tracé',
+  'Brontekst van het diagram': 'Texte source du diagramme',
   'esc': 'échap',
   'Enter': 'Entrée',
   'OK': 'OK',

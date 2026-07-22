@@ -1809,6 +1809,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Dit diagram kon niet worden getekend':
+      'Não foi possível desenhar este diagrama',
+  'Brontekst van het diagram': 'Texto de origem do diagrama',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',
