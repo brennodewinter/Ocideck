@@ -24,13 +24,23 @@ String? sanitizeMermaidSvg(String svg) {
   final root = document.rootElement;
   if (root.name.local != 'svg') return null;
 
-  final dropped = <String>{};
+  final dropped = _Dropped();
   _keepOnlyAllowed(root, dropped);
-  if (dropped.isNotEmpty) {
+  if (!dropped.isEmpty) {
     // Geweigerd, niet stil verdwenen. Een allow-list die zwijgt is niet te
-    // onderhouden: als Mermaid ooit iets uitstuurt dat hier niet in staat,
-    // moet dat in het log staan en niet in een half getekend diagram.
-    logWarning('sanitizeMermaidSvg: dropped ${dropped.join(', ')}');
+    // onderhouden: gaat Mermaid ooit iets uitsturen dat hier niet in staat, dan
+    // hoort dat op te vallen en niet te eindigen in een half getekend diagram.
+    //
+    // Het AANTAL, nooit de namen — de regel uit de kop van `log.dart`. Een
+    // elementnaam voelt als structuur en niet als inhoud, maar hij komt uit een
+    // document dat de gebruiker heeft geschreven, en een attribuutnaam is in
+    // een gemaakt diagram vrij te kiezen. Wie wil weten wát er wegviel, heeft
+    // het diagram zelf; het logbestand hoeft er niet nog een kopie van te
+    // dragen.
+    logWarning(
+      'sanitizeMermaidSvg: dropped ${dropped.elements} element(s) and '
+      '${dropped.attributes} attribute(s) the renderer does not read',
+    );
   }
 
   return document.toXmlString(pretty: false);
@@ -97,14 +107,21 @@ const _allowedAttributes = {
 bool _isNamespaceDeclaration(XmlAttribute attr) =>
     attr.name.qualified == 'xmlns' || attr.name.prefix == 'xmlns';
 
-void _keepOnlyAllowed(XmlElement element, Set<String> dropped) {
+/// Hoeveel er wegviel, gesplitst naar soort — zonder één naam te bewaren.
+class _Dropped {
+  int elements = 0;
+  int attributes = 0;
+
+  bool get isEmpty => elements == 0 && attributes == 0;
+}
+
+void _keepOnlyAllowed(XmlElement element, _Dropped dropped) {
   for (final child in element.childElements.toList()) {
-    final name = child.name.local;
-    if (!_allowedElements.contains(name)) {
+    if (!_allowedElements.contains(child.name.local)) {
       // Met subboom en al, net als de renderer: een `<foreignObject>` waarvan
       // alleen de schil verdwijnt laat zijn HTML-inhoud achter op een plek waar
       // niemand die meer keurt.
-      dropped.add('<$name>');
+      dropped.elements++;
       child.remove();
       continue;
     }
@@ -113,12 +130,11 @@ void _keepOnlyAllowed(XmlElement element, Set<String> dropped) {
   _keepOnlyAllowedAttributes(element, dropped);
 }
 
-void _keepOnlyAllowedAttributes(XmlElement element, Set<String> dropped) {
+void _keepOnlyAllowedAttributes(XmlElement element, _Dropped dropped) {
   for (final attr in element.attributes.toList()) {
     if (_isNamespaceDeclaration(attr)) continue;
-    final name = attr.name.local;
-    if (!_allowedAttributes.contains(name)) {
-      dropped.add(name);
+    if (!_allowedAttributes.contains(attr.name.local)) {
+      dropped.attributes++;
       element.attributes.remove(attr);
       continue;
     }
@@ -126,7 +142,7 @@ void _keepOnlyAllowedAttributes(XmlElement element, Set<String> dropped) {
     // gelezen worden, niet wat erin staat, en `href` en `style` dragen allebei
     // iets wat op een URL lijkt.
     if (_hasUnsafeUrl(attr.value.trim())) {
-      dropped.add('$name (unsafe url)');
+      dropped.attributes++;
       element.attributes.remove(attr);
     }
   }

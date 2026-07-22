@@ -24,59 +24,6 @@ extension _FileServiceOpen on FileService {
   /// Path of the annotation sidecar next to a deck `<name>.md` → `<name>.ink.json`.
   String _sidecarPath(String mdPath) => p.setExtension(mdPath, '.ink.json');
 
-  /// De tekst van [sidecar], of null zodra hij groter is dan
-  /// [FileService.maxDeckSidecarBytes].
-  ///
-  /// Dezelfde herkomst als een deck of grafiekdata: een sidecar komt uit een
-  /// pakket, een repo of iemands map, en werd hier onbegrensd ingelezen — met
-  /// de tweede kopie die `jsonDecode` er meteen bovenop legt. [laag] noemt de
-  /// laag in de logregel, want stil overslaan leest als "er stond niets in".
-  Future<String?> _readSidecarCapped(File sidecar, String laag) async {
-    final length = await sidecar.length();
-    if (length > FileService.maxDeckSidecarBytes) {
-      logWarning(
-        'FileService: $laag sidecar of $length bytes exceeds the '
-        '${FileService.maxDeckSidecarBytes ~/ (1024 * 1024)} MiB cap and was '
-        'not read',
-        sidecar.path,
-      );
-      return null;
-    }
-    return sidecar.readAsString();
-  }
-
-  /// Of de sidecar op [sidecar] bij het opslaan met rust gelaten moet worden,
-  /// inclusief het niet-verwijderen. [laag] noemt de laag in de logregel.
-  ///
-  /// Twee aanleidingen, één uitkomst. Hij komt uit een nieuwere OciDeck dan
-  /// deze build ([supported]) — de leeskant laadt zo'n bestand al niet in (zie
-  /// de codecs). Of hij is te groot om te lezen. In beide gevallen draagt het
-  /// deck de inhoud niet in het geheugen, en dan wist de eerstvolgende opslag
-  /// het bestand: niets laden en toch overschrijven is erger dan half lezen.
-  Future<bool> _sidecarUntouchable(
-    File sidecar,
-    int supported,
-    String laag,
-  ) async {
-    if (!await sidecar.exists()) return false;
-    try {
-      final raw = await _readSidecarCapped(sidecar, laag);
-      // De cap-reden staat al in het log van _readSidecarCapped.
-      if (raw == null) return true;
-      if (!sidecarIsFromNewerBuild(raw, supported)) return false;
-      logWarning(
-        'FileService: $laag sidecar is from a newer OciDeck and was left '
-        'untouched',
-        sidecar.path,
-      );
-      return true;
-    } catch (e) {
-      // Onleesbaar is niet "van later": dat valt onder gewone corruptie.
-      logWarning('FileService: sidecar version unreadable', e);
-      return false;
-    }
-  }
-
   /// Write the annotation sidecar next to [filePath], or remove it when empty.
   Future<void> _writeSidecar(Deck deck, String filePath) async {
     final sidecar = File(_sidecarPath(filePath));
@@ -519,5 +466,64 @@ extension _FileServiceOpen on FileService {
       await out.parent.create(recursive: true);
       await writeBytesAtomic(out, await from.readAsBytes());
     }
+  }
+}
+
+// ── De sidecar-poort ────────────────────────────────────────────────────────
+//
+// Buiten de klasse, en niet alleen om de klassenratchet: deze twee raken geen
+// enkel veld van FileService. Ze gaan over één bestand op schijf, en dat is de
+// hele reden dat ze los te lezen zijn.
+
+/// De tekst van [sidecar], of null zodra hij groter is dan
+/// [FileService.maxDeckSidecarBytes].
+///
+/// Dezelfde herkomst als een deck of grafiekdata: een sidecar komt uit een
+/// pakket, een repo of iemands map, en werd hier onbegrensd ingelezen — met de
+/// tweede kopie die `jsonDecode` er meteen bovenop legt. [laag] noemt de laag
+/// in de logregel, want stil overslaan leest als "er stond niets in".
+Future<String?> _readSidecarCapped(File sidecar, String laag) async {
+  final length = await sidecar.length();
+  if (length > FileService.maxDeckSidecarBytes) {
+    logWarning(
+      'FileService: $laag sidecar of $length bytes exceeds the '
+      '${FileService.maxDeckSidecarBytes ~/ (1024 * 1024)} MiB cap and was '
+      'not read',
+      sidecar.path,
+    );
+    return null;
+  }
+  return sidecar.readAsString();
+}
+
+/// Of de sidecar op [sidecar] bij het opslaan met rust gelaten moet worden,
+/// inclusief het niet-verwijderen. [laag] noemt de laag in de logregel.
+///
+/// Twee aanleidingen, één uitkomst. Hij komt uit een nieuwere OciDeck dan deze
+/// build ([supported]) — de leeskant laadt zo'n bestand al niet in (zie de
+/// codecs). Of hij is te groot om te lezen. In beide gevallen draagt het deck
+/// de inhoud niet in het geheugen, en dan wist de eerstvolgende opslag het
+/// bestand: niets laden en toch overschrijven is erger dan half lezen.
+Future<bool> _sidecarUntouchable(
+  File sidecar,
+  int supported,
+  String laag,
+) async {
+  if (!await sidecar.exists()) return false;
+  try {
+    final raw = await _readSidecarCapped(sidecar, laag);
+    // De cap-reden staat al in het log van _readSidecarCapped.
+    if (raw == null) return true;
+    if (!sidecarIsFromNewerBuild(raw, supported)) return false;
+    logWarning(
+      'FileService: $laag sidecar is from a newer OciDeck and was left '
+      'untouched',
+      sidecar.path,
+    );
+    return true;
+  } catch (e) {
+    // Onleesbaar is niet "van later": dat valt onder gewone corruptie.
+    logWarning('FileService: sidecar version unreadable', e);
+    return false;
   }
 }
