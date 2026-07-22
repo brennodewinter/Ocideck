@@ -31,6 +31,7 @@ import 'html_image_embedder.dart';
 import 'image_service.dart';
 import 'quality_export_policy.dart';
 import 'marp_html_service.dart';
+import 'classification_policy.dart';
 
 enum ExportFormat { pdf, pptx, html }
 
@@ -63,12 +64,27 @@ class ExportResult {
   final String? outputPath;
   final String? error;
 
-  const ExportResult._({required this.success, this.outputPath, this.error});
+  /// Gezet wanneer het classificatiebeleid de export tegenhield.
+  ///
+  /// Een beslissing en geen zin: de dienst kent de taal van de gebruiker niet,
+  /// en een weigering die het TLP-niveau in de zin noemt heeft geen letterlijke
+  /// vorm om op te vertalen (#576). De schil maakt er een zin van met
+  /// `exportBlockMessage`.
+  final ExportDecision? classificationDecision;
+
+  const ExportResult._({
+    required this.success,
+    this.outputPath,
+    this.error,
+    this.classificationDecision,
+  });
 
   factory ExportResult.ok(String path) =>
       ExportResult._(success: true, outputPath: path);
   factory ExportResult.fail(String error) =>
       ExportResult._(success: false, error: error);
+  factory ExportResult.blockedByClassification(ExportDecision decision) =>
+      ExportResult._(success: false, classificationDecision: decision);
 }
 
 /// Builds PDF and PPTX files from pre-rendered slide images (WYSIWYG export).
@@ -358,7 +374,9 @@ class ExportService {
       logWarning(
         'ExportService: export geweigerd op classificatie (TLP: ${tlp.name})',
       );
-      return ExportResult.fail(decision.reason!);
+      // De dienst kent de taal van de gebruiker niet; de schil vertaalt
+      // deze beslissing (zie l10n/export_block_localization.dart, #576).
+      return ExportResult.blockedByClassification(decision);
     }
 
     final privacyDecision = privacyPolicy.evaluate(privacySummary);

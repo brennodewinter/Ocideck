@@ -1779,6 +1779,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Izvoz blokiran s pravilnikom o klasifikaciji: nastavite raven TLP za to predstavitev.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Izvoz blokiran s pravilnikom o klasifikaciji: ta predstavitev je {deck}, pod zahtevanim minimumom {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Izvoz blokiran s pravilnikom o klasifikaciji: ta predstavitev je {deck}, nad dovoljeno zgornjo mejo objave {limit}.',
+  'niet geclassificeerd': 'brez klasifikacije',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Pravila, ki so zdaj izklopljena. Ne javljajo se in se ne prekrivajo. Tri od njih so privzeto izklopljena — njihove ključne besede se prepogosto pojavljajo na običajnih poslovnih prosojnicah. Tapni za vklop enega.',
   'Bekende beperkingen': 'Znane omejitve',

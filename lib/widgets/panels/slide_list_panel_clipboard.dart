@@ -29,14 +29,11 @@ extension _SlideClipboardExport on _SlideListPanelState {
     final policy = ClassificationEnforcementPolicy.fromAppSettings(
       ref.read(settingsProvider),
     );
-    final decision = policy.evaluate(
-      effectiveTlp(deckTlp: deck.tlp, slideTlp: slide.tlp),
-    );
-    if (!decision.allowed) {
-      messenger.showSnackBar(SnackBar(content: Text(decision.reason!)));
-      return false;
-    }
-    return true;
+    final tlp = effectiveTlp(deckTlp: deck.tlp, slideTlp: slide.tlp);
+    final why = exportBlockMessage(context.l10n, policy.evaluate(tlp));
+    if (why == null) return true;
+    messenger.showSnackBar(SnackBar(content: Text(why)));
+    return false;
   }
 
   Future<void> _copySlideAsImage(Slide slide) async {

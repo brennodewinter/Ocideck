@@ -26,7 +26,7 @@ Future<void> _exportPackage(BuildContext context, WidgetRef ref) async {
     showErrorSnackBar(
       ScaffoldMessenger.of(context),
       context.l10n,
-      decision.reason!,
+      exportBlockMessage(context.l10n, decision) ?? '',
     );
     return;
   }

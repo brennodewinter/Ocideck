@@ -33,8 +33,13 @@ void main() {
       for (final level in [TlpLevel.amberStrict, TlpLevel.red]) {
         final decision = policy.evaluate(level);
         expect(decision.allowed, isFalse, reason: level.name);
-        expect(decision.reason, contains(level.label));
-        expect(decision.reason, contains(TlpLevel.amber.label));
+        // De reden is sinds #576 een enum plus de twee niveaus, geen zin: een
+        // weigering die het niveau interpoleert kan niet vertaald worden. De
+        // zin zelf wordt in de schil gemaakt; hier toetsen we dat de gegevens
+        // om hem te máken kloppen.
+        expect(decision.reason, ExportBlockReason.aboveCeiling);
+        expect(decision.deckLevel, level);
+        expect(decision.limit, TlpLevel.amber);
       }
     });
 

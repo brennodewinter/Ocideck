@@ -53,30 +53,30 @@ class ClassificationEnforcementPolicy {
 
   /// Beoordeel of een deck met niveau [deckLevel] geëxporteerd mag worden.
   ExportDecision evaluate(TlpLevel deckLevel) {
+    // Een reden terug, geen zin. Zie [ExportBlockReason]: proza dat een niveau
+    // interpoleert is per definitie onvertaalbaar, en de schil weet wél in
+    // welke taal de gebruiker leest.
     if (requireClassification && deckLevel == TlpLevel.none) {
-      return ExportDecision.block(
-        'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in '
-        'voor deze presentatie.',
+      return const ExportDecision.block(
+        ExportBlockReason.classificationMissing,
       );
     }
 
     final floor = minRequiredLevel;
     if (floor != null && deckLevel.index < floor.index) {
-      final actual = deckLevel == TlpLevel.none
-          ? 'niet geclassificeerd'
-          : deckLevel.label;
       return ExportDecision.block(
-        'Export geblokkeerd door classificatiebeleid: dit deck is $actual, '
-        'lager dan het vereiste minimum ${floor.label}.',
+        ExportBlockReason.belowMinimum,
+        deckLevel: deckLevel,
+        limit: floor,
       );
     }
 
     final ceiling = maxReleaseLevel;
     if (ceiling != null && deckLevel.index > ceiling.index) {
       return ExportDecision.block(
-        'Export geblokkeerd door classificatiebeleid: dit deck is '
-        '${deckLevel.label}, hoger dan het toegestane vrijgaveniveau '
-        '${ceiling.label}.',
+        ExportBlockReason.aboveCeiling,
+        deckLevel: deckLevel,
+        limit: ceiling,
       );
     }
 

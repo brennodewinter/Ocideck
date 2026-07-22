@@ -734,6 +734,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Eksportashon blokeá pa e polítika di klasifikashon: pone un nivel TLP pa e presentashon aki.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Eksportashon blokeá pa e polítika di klasifikashon: e presentashon aki ta {deck}, mas abou ku e mínimo rekerí {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Eksportashon blokeá pa e polítika di klasifikashon: e presentashon aki ta {deck}, mas haltu ku e techo di difushon permití {limit}.',
+  'niet geclassificeerd': 'sin klasifikashon',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Reglanan ku ta pagá awor. Nan no ta wòrdu reportá ni redaktá. Tres di nan ta pagá pa defekto — nan palabranan klave ta aparesé muchu frekuentemente riba slides di trabou normal. Toka pa sendé un di nan.',
   'Bekende beperkingen': 'Limitashonnan konosí',

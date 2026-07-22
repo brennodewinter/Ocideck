@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
+import '../../l10n/export_block_localization.dart';
 import '../../models/deck.dart';
 import '../../models/library_folder.dart';
 import '../../models/slide.dart';

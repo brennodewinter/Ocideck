@@ -1781,6 +1781,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Export gsperrt dur d Klassifizierigsrichtlinie: schtell es TLP-Niveau für die Präsentation i.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Export gsperrt dur d Klassifizierigsrichtlinie: die Präsentation isch {deck}, under em verlangte Minimum {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Export gsperrt dur d Klassifizierigsrichtlinie: die Präsentation isch {deck}, über em erlaubte Freigab-Plafond {limit}.',
+  'niet geclassificeerd': 'nöd klassifiziert',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Regle wo grad us sind. Die wärded weder gmäldet no gschwärzt. Drü dervo sind standardmässig us — ihri Schlüsselwörter chömed uf normale Gschäftsslides z\'oft vor. Tipp zum eis ischalte.',
   'Bekende beperkingen': 'Bekannti Yyschränkige',

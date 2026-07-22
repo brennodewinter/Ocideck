@@ -1781,6 +1781,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Az exportálást az osztályozási házirend letiltja: állítson be TLP-szintet ehhez az előadáshoz.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Az exportálást az osztályozási házirend letiltja: ez az előadás {deck}, ami alacsonyabb az előírt {limit} minimumnál.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Az exportálást az osztályozási házirend letiltja: ez az előadás {deck}, ami magasabb az engedélyezett {limit} kiadási plafonnál.',
+  'niet geclassificeerd': 'nincs besorolva',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Jelenleg kikapcsolt szabályok. Ezeket nem jelzi és nem takarja ki. Három közülük alapértelmezetten ki van kapcsolva — a kulcsszavaik túl gyakran fordulnak elő a szokásos munkahelyi diákon. Koppints az egyik bekapcsolásához.',
   'Bekende beperkingen': 'Ismert korlátozások',

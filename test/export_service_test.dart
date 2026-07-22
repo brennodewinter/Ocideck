@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
+import 'package:ocideck/services/classification_policy.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/markdown_validation.dart';
 import 'package:ocideck/models/slide.dart';
@@ -82,7 +83,9 @@ void main() {
 
       expect(r.success, isFalse);
       expect(r.outputPath, isNull);
-      expect(r.error, contains('classificatiebeleid'));
+      // Sinds #576 draagt het resultaat de beslissing en niet een zin — die
+      // wordt in de schil gemaakt, in de taal van de gebruiker.
+      expect(r.classificationDecision?.reason, ExportBlockReason.aboveCeiling);
       // Fail-closed: no file may be produced when the gate refuses.
       final produced = tmp.listSync().whereType<File>().where(
         (f) => p.extension(f.path) == '.pdf',
@@ -120,7 +123,7 @@ void main() {
       );
 
       expect(r.success, isFalse);
-      expect(r.error, contains('minimum'));
+      expect(r.classificationDecision?.reason, ExportBlockReason.belowMinimum);
       expect(
         tmp.listSync().whereType<File>().where(
           (f) => p.extension(f.path) == '.pdf',
@@ -141,7 +144,10 @@ void main() {
       ], enforcementPolicy: policy);
 
       expect(r.success, isFalse);
-      expect(r.error, contains('TLP-niveau'));
+      expect(
+        r.classificationDecision?.reason,
+        ExportBlockReason.classificationMissing,
+      );
     },
   );
 

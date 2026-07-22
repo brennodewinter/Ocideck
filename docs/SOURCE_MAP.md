@@ -383,6 +383,7 @@ deliberately manual).
 ## `lib/l10n/` — localization
 
 - `app_localizations.dart` — `AppLocalizations` class + delegate; assembles the lookup maps from per-language files.
+- `export_block_localization.dart` — De weigering van het classificatiebeleid als zin, in de taal van de gebruiker. Staat hier en niet in de dienst omdat de vertaallaag op letterlijke brontekst sleutelt: een zin die een TLP-niveau interpoleert heeft geen sleutel, en bereikte de gebruiker daardoor altijd in het Nederlands (#576).
 - `slide_quality_localization.dart` — Localized formatting for slide-quality issues and export summaries. `slideQualityFieldLabel` names the spot a finding sits in; given the slide it turns a table finding into "table row 4, column 2" by dividing the scanner's running cell index by the widest row — the same stride the scan used — and leaves it at the bare "Table" when it cannot, since no location beats a wrong one.
 - `slide_quality_navigation.dart` — Routes a quality issue to the relevant editor field. `kDeckInfoFields` + `issueBelongsToDeckInfo` split the deck-wide issues in two: a contrast complaint is about the theme and opens the colour settings, while a privacy finding on a front-matter field (author, organisation, keywords, version, date, standards, tools, the two MIAUW motivations) opens *Presentation info* instead — it used to send the user hunting for a colour field that does not exist.
 

@@ -290,7 +290,7 @@ class _ExportReadinessChip extends StatelessWidget {
         l10n.d('TLP blokkeert export'),
         Icons.shield_outlined,
         red,
-        readiness.blockReason ?? '',
+        exportBlockMessage(l10n, readiness.classificationDecision) ?? '',
       ),
       ExportReadinessStatus.blockedByQuality => (
         l10n.d('Kwaliteit blokkeert export'),

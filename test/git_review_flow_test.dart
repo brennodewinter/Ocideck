@@ -111,7 +111,7 @@ void main() {
       );
 
       expect(result.status, ReviewStatus.blocked);
-      expect(result.message, isNotNull);
+      expect(result.classificationDecision, isNotNull);
       expect(forge.repo.pulls, isEmpty); // fail-closed: niets naar de forge
     });
 

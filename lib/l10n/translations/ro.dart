@@ -1795,6 +1795,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Export blocat de politica de clasificare: setează un nivel TLP pentru această prezentare.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Export blocat de politica de clasificare: această prezentare este {deck}, sub minimul cerut {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Export blocat de politica de clasificare: această prezentare este {deck}, peste plafonul de eliberare permis {limit}.',
+  'niet geclassificeerd': 'fără clasificare',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Reguli care sunt acum dezactivate. Nu sunt raportate și nici redactate. Trei dintre ele sunt dezactivate implicit — cuvintele lor cheie apar prea des pe diapozitive de lucru obișnuite. Atinge pentru a activa una.',
   'Bekende beperkingen': 'Limitări cunoscute',

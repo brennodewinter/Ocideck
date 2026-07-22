@@ -1799,6 +1799,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'L-esportazzjoni mblukkata mill-politika tal-klassifikazzjoni: issettja livell TLP għal din il-preżentazzjoni.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'L-esportazzjoni mblukkata mill-politika tal-klassifikazzjoni: din il-preżentazzjoni hija {deck}, taħt il-minimu meħtieġ {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'L-esportazzjoni mblukkata mill-politika tal-klassifikazzjoni: din il-preżentazzjoni hija {deck}, ogħla mil-limitu tar-rilaxx permess {limit}.',
+  'niet geclassificeerd': 'mingħajr klassifikazzjoni',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Regoli li bħalissa huma mitfija. Dawn ma jiġux irrapportati u lanqas irrediġuti. Tlieta minnhom huma mitfija awtomatikament — il-kliem ċavetta tagħhom jidher spiss wisq fuq slides tax-xogħol ordinarji. Mess biex tixgħel waħda.',
   'Bekende beperkingen': 'Limitazzjonijiet magħrufa',

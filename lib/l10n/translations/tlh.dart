@@ -1752,6 +1752,13 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Segh chot chutmo\' ngeH botlu\': cha\'navvamvaD TLP patlh yIcher.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Segh chot chutmo\' ngeH botlu\': cha\'navvam {deck}; poQlu\'bogh patlh {limit} bIng.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Segh chot chutmo\' ngeH botlu\': cha\'navvam {deck}; chawlu\'bogh \'aqroS {limit} Dung.',
+  'niet geclassificeerd': 'Segh pagh',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'DaH chu\'Ha\'lu\'bogh chutmey. luja\'lu\'be\' \'ej So\'lu\'be\'. wej chutmey motlh chu\'Ha\'lu\' — vum \'anghommey motlhDaq pIj lutu\'lu\' \'oS mu\'meychaj. wa\' chu\'meH yI\'uy.',
   'Bekende beperkingen': 'Sovlu\'bogh chuvmey',

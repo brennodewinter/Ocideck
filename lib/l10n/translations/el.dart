@@ -1805,6 +1805,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Η εξαγωγή αποκλείστηκε από την πολιτική ταξινόμησης: ορίστε ένα επίπεδο TLP για αυτήν την παρουσίαση.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Η εξαγωγή αποκλείστηκε από την πολιτική ταξινόμησης: αυτή η παρουσίαση είναι {deck}, κάτω από το απαιτούμενο ελάχιστο {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Η εξαγωγή αποκλείστηκε από την πολιτική ταξινόμησης: αυτή η παρουσίαση είναι {deck}, πάνω από το επιτρεπόμενο ανώτατο όριο δημοσίευσης {limit}.',
+  'niet geclassificeerd': 'χωρίς ταξινόμηση',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Κανόνες που είναι τώρα ανενεργοί. Δεν αναφέρονται ούτε αποκρύπτονται. Τρεις από αυτούς είναι απενεργοποιημένοι από προεπιλογή — οι λέξεις-κλειδιά τους εμφανίζονται πολύ συχνά σε συνηθισμένες επαγγελματικές διαφάνειες. Πάτησε για να ενεργοποιήσεις έναν.',
   'Bekende beperkingen': 'Γνωστοί περιορισμοί',

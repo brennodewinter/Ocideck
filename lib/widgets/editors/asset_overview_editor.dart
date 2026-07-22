@@ -306,7 +306,7 @@ class _AssetOverviewEditorState extends State<AssetOverviewEditor> {
               const SizedBox(width: 8),
               Expanded(
                 child: EditorField(
-                  label: 'Nieuw',
+                  label: l10n.d('Nieuw'),
                   controller: group.newlyFound,
                   hint: '7',
                 ),

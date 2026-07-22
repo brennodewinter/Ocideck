@@ -42,7 +42,7 @@ extension TabsNotifierGitReview on TabsNotifier {
     if (!decision.allowed) {
       return ReviewResult(
         status: ReviewStatus.blocked,
-        message: decision.reason,
+        classificationDecision: decision,
       );
     }
 
@@ -134,7 +134,7 @@ extension TabsNotifierGitReview on TabsNotifier {
     if (!decision.allowed) {
       return ReleaseResult(
         status: ReleaseStatus.blocked,
-        message: decision.reason,
+        classificationDecision: decision,
       );
     }
 
@@ -178,7 +178,16 @@ class ReviewResult {
   /// Uitlegbare tekst bij [ReviewStatus.blocked] en [ReviewStatus.failed].
   final String? message;
 
-  const ReviewResult({required this.status, this.pr, this.message});
+  /// Gezet wanneer het classificatiebeleid blokkeerde. Een beslissing en geen
+  /// zin, om dezelfde reden als bij [ExportResult] (#576).
+  final ExportDecision? classificationDecision;
+
+  const ReviewResult({
+    required this.status,
+    this.pr,
+    this.message,
+    this.classificationDecision,
+  });
 }
 
 /// Hoe een [TabsNotifierGit.mergeConcept] afliep.
@@ -235,5 +244,13 @@ class ReleaseResult {
   /// Uitlegbare tekst bij [ReleaseStatus.blocked] en [ReleaseStatus.failed].
   final String? message;
 
-  const ReleaseResult({required this.status, this.tag, this.message});
+  /// Gezet wanneer het classificatiebeleid blokkeerde; zie [ReviewResult].
+  final ExportDecision? classificationDecision;
+
+  const ReleaseResult({
+    required this.status,
+    this.tag,
+    this.message,
+    this.classificationDecision,
+  });
 }

@@ -17,6 +17,7 @@ import '../editors/advanced_section.dart';
 import '../../l10n/slide_quality_localization.dart';
 import 'slide_quality_details_dialog.dart';
 import '../../theme/app_theme.dart';
+import '../../l10n/export_block_localization.dart';
 
 part 'parts/export_dialog_notices.dart';
 part 'parts/export_dialog_sections.dart';
@@ -542,7 +543,7 @@ class _ExportDialogState extends State<ExportDialog> {
           const Icon(Icons.block, color: Colors.red, size: 36),
           const SizedBox(height: 12),
           Text(
-            decision.reason!,
+            exportBlockMessage(context.l10n, decision) ?? '',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 13, color: Colors.red[800]),
           ),

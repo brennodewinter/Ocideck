@@ -158,7 +158,7 @@ const Map<String, int> classSizeBaseline = {
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1214,
   'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1123,
   'lib/widgets/editors/chart_editor.dart#_ChartEditorState': 1062,
-  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1053,
+  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1050,
 };
 
 final _print = RegExp(r'(?<![\w.])print\(');

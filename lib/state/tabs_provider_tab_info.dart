@@ -74,7 +74,11 @@ class TabInfo {
     // hebben opgeruimd (de ProviderScope van de tab is dan ontmanteld) terwijl
     // dit TabInfo nog één rebuild lang in beeld is. Lezen van een gedisposede
     // StateNotifier gooit; val dan terug op neutrale waarden.
-    if (!deckNotifier.mounted) return 'Nieuw';
+    // Via de actieve taal en niet als kale literal: dit is het eerste woord
+    // linksboven in het venster, en het stond in alle 32 talen in het
+    // Nederlands (#576). De Locale is hier een handvat — `d()` leest de
+    // statisch gezette taal.
+    if (!deckNotifier.mounted) return _newTabLabel;
     final st = deckNotifier.currentState;
     // A saved deck is identified by its file name — that is what the user
     // recognises, not the parsed first-slide title (which falls back to the
@@ -85,7 +89,7 @@ class TabInfo {
       if (name.isNotEmpty) return name;
     }
     final deck = st.deck;
-    return deck?.title.isNotEmpty == true ? deck!.title : 'Nieuw';
+    return deck?.title.isNotEmpty == true ? deck!.title : _newTabLabel;
   }
 
   bool get isDirty => deckNotifier.mounted && deckNotifier.currentState.isDirty;
@@ -116,3 +120,6 @@ class TabsState {
     );
   }
 }
+
+/// Het opschrift van een tabblad zonder deck.
+String get _newTabLabel => const AppLocalizations(Locale('nl')).d('Nieuw');

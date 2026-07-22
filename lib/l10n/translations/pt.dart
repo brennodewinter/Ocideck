@@ -1807,6 +1807,13 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Exportação bloqueada pela política de classificação: defina um nível TLP para esta apresentação.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Exportação bloqueada pela política de classificação: esta apresentação, {deck}, está abaixo do mínimo exigido {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Exportação bloqueada pela política de classificação: esta apresentação, {deck}, está acima do limite de divulgação permitido {limit}.',
+  'niet geclassificeerd': 'sem classificação',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Regras que estão agora desativadas. Não são comunicadas nem ocultadas. Três delas estão desativadas por predefinição — as suas palavras-chave surgem demasiadas vezes em slides de trabalho comuns. Toca para ativar uma.',
   'Bekende beperkingen': 'Limitações conhecidas',

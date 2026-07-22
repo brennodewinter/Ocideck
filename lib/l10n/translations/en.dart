@@ -916,6 +916,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
+      'Export blocked by the classification policy: set a TLP level for this presentation.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
+      'Export blocked by the classification policy: this deck is {deck}, below the required minimum {limit}.',
+  'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, hoger dan het toegestane vrijgaveniveau {limit}.':
+      'Export blocked by the classification policy: this deck is {deck}, above the permitted release ceiling {limit}.',
+  'niet geclassificeerd': 'not classified',
   'Regels die nu uit staan. Deze worden niet gemeld en niet geredigeerd. Drie ervan staan standaard uit — hun trefwoorden komen op gewone zakelijke slides te vaak voor. Tik om er een aan te zetten.':
       'Rules that are currently off. These are not reported and not redacted. Three of them are off by default — their keywords occur too often on ordinary business slides. Tap to turn one on.',
   'Bekende beperkingen': 'Known limitations',
