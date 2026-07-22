@@ -20,7 +20,6 @@ final _reNumberedMark = RegExp(r'^\d+[.)]$');
 final _reBgImage = RegExp(r'!\[bg');
 final _reBgImageUrl = RegExp(r'!\[bg[^\]]*\]\(([^)]+)\)');
 final _reBgImageSize = RegExp(r'!\[bg[^\]]*?(\d+)%[^\]]*\]');
-final _reSeparatorCell = RegExp(r'^:?-+:?$');
 final _reClassDirective = RegExp(r'<!--\s*_class:\s*([^>]+?)\s*-->');
 final _reHtmlComment = RegExp(r'<!--([\s\S]*?)-->', multiLine: true);
 final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
