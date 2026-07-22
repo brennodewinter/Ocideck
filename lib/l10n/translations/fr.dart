@@ -734,6 +734,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Indiquez ce numéro de version lorsque vous signalez un problème de sécurité.',
   'Video niet ingesloten': 'Vidéo non intégrée',
   'Afbeelding niet ingesloten': 'Image non intégrée',
   'Dit diagram kon niet worden getekend': 'Ce diagramme n\'a pas pu être tracé',

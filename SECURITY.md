@@ -32,9 +32,10 @@ When reporting, please include as much of the following as you can:
 
 - A description of the issue and its impact.
 - Steps to reproduce (a minimal deck or input file if relevant).
-- The commit you built from, your operating system, and the Flutter version.
-  (There is no released version to quote, and the app does not display a version
-  of its own — see [Supported versions](#supported-versions).)
+- The version shown under **Settings → Over OciDeck**, the commit you built
+  from, your operating system, and the Flutter version. (There is no released
+  version yet, so the number alone does not pin down which commit you ran — see
+  [Supported versions](#supported-versions) — the commit hash is what does that.)
 - Any proof-of-concept, logs, or screenshots.
 
 ## What to expect
@@ -461,21 +462,26 @@ OS-level process isolation. The `com.apple.security.cs.allow-jit` entitlement in
 
 There is no released version yet. The repository carries no release tag (the one
 tag that exists, `archive/git-mirror`, marks an archived branch and is not a
-version), `pubspec.yaml` says `0.2.0+1`, and the app does not display a version
-number anywhere, so a user cannot read off what they are running. Fixes land on
-the default development branch, which is what everyone runs. Once releases are
-tagged, fixes will target the latest release plus that branch.
+version), and `pubspec.yaml` says `0.2.0+1`. The app displays that version under
+**Settings → Over OciDeck** (*added 2026-07-22*), but it is not a release marker:
+it only changes when someone bumps `pubspec.yaml`, which does not happen on every
+commit, so many different commits on the default branch can show the same
+number. Quoting it narrows down roughly what you ran; it does not tell you
+whether a fix has landed since — for that, the commit is still what matters.
+Fixes land on the default development branch, which is what everyone runs. Once
+releases are tagged, fixes will target the latest release plus that branch.
 
 ## How a fix reaches you
 
 Stated plainly, because the honest answer is thinner than most projects' and a
 reader deserves to know it before relying on this (*added 2026-07-22*).
 
-There is **no update mechanism**. The app never phones home, never checks for a
-newer version, and shows no version of its own. There is no release feed to
-subscribe to, no signed installer that updates itself, and no notification of any
-kind. A fix reaches you when you fetch the default branch and rebuild — and not
-before.
+There is **no update mechanism**. The app never phones home and never checks for
+a newer version — showing you its own version (see [Supported
+versions](#supported-versions)) is not the same as knowing whether a newer one
+exists. There is no release feed to subscribe to, no signed installer that
+updates itself, and no notification of any kind. A fix reaches you when you
+fetch the default branch and rebuild — and not before.
 
 So the notification channel is the repository itself. Three places carry it, in
 increasing detail:

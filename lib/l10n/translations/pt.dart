@@ -1807,6 +1807,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Indique este número de versão ao comunicar um problema de segurança.',
   'Video niet ingesloten': 'Vídeo não incorporado',
   'Afbeelding niet ingesloten': 'Imagem não incorporada',
   'Dit diagram kon niet worden getekend':

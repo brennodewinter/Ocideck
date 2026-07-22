@@ -19,6 +19,7 @@ import '../../services/reference_standards.dart';
 import '../../services/ai_client_service.dart';
 import '../../services/ai_security_gate.dart';
 import '../../services/disk_traces.dart';
+import '../../services/export_metadata.dart';
 import '../../services/file_service.dart';
 import '../../services/git/outbox.dart';
 import '../../services/secret_store.dart';

@@ -735,6 +735,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Neam dit ferzjenûmer as jo in feiligensprobleem melde.',
   'Video niet ingesloten': 'Fideo net ynsletten',
   'Afbeelding niet ingesloten': 'Ofbylding net ynsletten',
   'Dit diagram kon niet worden getekend': 'Dit diagram koe net tekene wurde',

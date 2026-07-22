@@ -1752,6 +1752,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'mo\' mI\'vam yIja\' Hub Qagh Dalaj\'DI\'.',
   'Video niet ingesloten': 'HaSta chelbe\'lu\'',
   'Afbeelding niet ingesloten': 'mIllogh chelbe\'lu\'',
   'Dit diagram kon niet worden getekend': 'De\'wI\'ghomvam ghItlhlaHbe\'.',

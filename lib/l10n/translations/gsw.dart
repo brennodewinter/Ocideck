@@ -1781,6 +1781,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Nenn die Versionsnummere, wenn Sie es Sicherheitsproblem melde.',
   'Video niet ingesloten': 'Video nöd iibettet',
   'Afbeelding niet ingesloten': 'Bild nöd iibettet',
   'Dit diagram kon niet worden getekend':

@@ -1781,6 +1781,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Adja meg ezt a verziószámot, amikor biztonsági problémát jelent.',
   'Video niet ingesloten': 'A videó nincs beágyazva',
   'Afbeelding niet ingesloten': 'A kép nincs beágyazva',
   'Dit diagram kon niet worden getekend':

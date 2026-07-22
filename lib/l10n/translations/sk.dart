@@ -1784,6 +1784,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Uveďte toto číslo verzie, keď nahlásite bezpečnostný problém.',
   'Video niet ingesloten': 'Video nie je vložené',
   'Afbeelding niet ingesloten': 'Obrázok nie je vložený',
   'Dit diagram kon niet worden getekend':

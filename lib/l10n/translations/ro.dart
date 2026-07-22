@@ -1795,6 +1795,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Menționați acest număr de versiune când raportați o problemă de securitate.',
   'Video niet ingesloten': 'Videoclipul nu este încorporat',
   'Afbeelding niet ingesloten': 'Imaginea nu este încorporată',
   'Dit diagram kon niet worden getekend':

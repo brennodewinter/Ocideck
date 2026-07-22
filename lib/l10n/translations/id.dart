@@ -1777,6 +1777,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Sebutkan nomor versi ini saat Anda melaporkan masalah keamanan.',
   'Video niet ingesloten': 'Video tidak disertakan',
   'Afbeelding niet ingesloten': 'Gambar tidak disertakan',
   'Dit diagram kon niet worden getekend': 'Diagram ini tidak dapat digambar',

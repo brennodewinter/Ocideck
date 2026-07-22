@@ -289,6 +289,12 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   melding bij een te grote maplijst noemt nu overal het aantal.
 
 ### Added
+- **De toepassingsversie staat nu in het About-paneel** (*Settings → Over
+  OciDeck*), bovenaan, met een korte toelichting waarom: `SECURITY.md` vraagt een
+  melder die versie te noemen, maar er was tot nu toe geen scherm waar iemand hem
+  kon aflezen. Dezelfde constante wordt ook in de metadata van elke geëxporteerde
+  PDF/PPTX gestempeld — een test bewaakt voortaan dat hij niet uiteenloopt van de
+  versie in `pubspec.yaml`.
 - **Video en audio reizen nu mee naar een git-repository.** Wie zijn
   presentaties in git bewaart, kreeg tot nu toe een waarschuwing dat de film en
   het geluid achterbleven — en die waarschuwing had gelijk. Dat is nu niet meer
@@ -305,6 +311,12 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   notities en het zegel.
 
 ### Fixed
+- **Windows en Linux droegen nog de Flutter-sjabloonidentiteit `com.example`**
+  in `windows/runner/Runner.rc` (CompanyName/copyright) en
+  `linux/CMakeLists.txt` (de GTK app-id). Een Authenticode-handtekening of een
+  Flatpak-app-id die `com.example` als uitgever noemt is niet verdedigbaar.
+  Beide dragen nu `com.dewinter.ocideck`, dezelfde identiteit die macOS al
+  gebruikt.
 - **Uitgezette landenpakketten werden toch weggelakt.** Zet u een land uit in de
   privacy-instellingen, dan meldt OciWacht die nummers niet meer — maar de
   voorvertoning, de export en het beamerscherm lakten ze nog wél weg. U kreeg

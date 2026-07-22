@@ -1799,6 +1799,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Semmi dan in-numru tal-verżjoni meta tirrapporta problema ta\' sigurtà.',
   'Video niet ingesloten': 'Il-vidjo mhuwiex inkorporat',
   'Afbeelding niet ingesloten': 'L-istampa mhijiex inkorporata',
   'Dit diagram kon niet worden getekend': 'Dan id-dijagramma ma setax jitpinġa',

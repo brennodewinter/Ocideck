@@ -1776,6 +1776,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Norādiet šo versijas numuru, ziņojot par drošības problēmu.',
   'Video niet ingesloten': 'Videoklips nav iegults',
   'Afbeelding niet ingesloten': 'Attēls nav iegults',
   'Dit diagram kon niet worden getekend': 'Šo diagrammu nevarēja uzzīmēt',

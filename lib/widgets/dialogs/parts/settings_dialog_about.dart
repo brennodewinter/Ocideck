@@ -25,6 +25,10 @@ extension _SettingsAbout on _SettingsDialogState {
         _aboutBanner(l10n),
         const SizedBox(height: 22),
 
+        // ── Version: SECURITY.md asks reporters to state it ──────────────────
+        _aboutVersion(l10n),
+        const SizedBox(height: 18),
+
         // ── Origin: the Pilot Informatieautonomie ────────────────────────────
         _aboutOrigin(l10n),
         const SizedBox(height: 18),
@@ -309,6 +313,42 @@ extension _SettingsAbout on _SettingsDialogState {
       ),
     );
   }
+
+  /// De toepassingsversie, uit dezelfde `const` als de exportmetadata
+  /// ([kOciDeckVersion]) — geen los getal dat hier zijn eigen leven leidt.
+  ///
+  /// `SECURITY.md` vraagt een melder deze versie te noemen; zonder dit paneel
+  /// was er nergens in de app een plek waar iemand hem kon aflezen.
+  Widget _aboutVersion(AppLocalizations l10n) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      _aboutHeading(Icons.info_outline, l10n.d('Versie')),
+      _aboutCard(
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              kOciDeckVersion,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'monospace',
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                l10n.d(
+                  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.',
+                ),
+                style: _aboutBodyStyle,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
 
   /// Where the project came from. The pilot is a proper noun and its domain a
   /// bare URL, so both stay out of the translated line.

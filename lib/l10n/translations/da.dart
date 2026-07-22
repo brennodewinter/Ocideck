@@ -1776,6 +1776,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
+      'Angiv dette versionsnummer, når du rapporterer et sikkerhedsproblem.',
   'Video niet ingesloten': 'Videoen er ikke indlejret',
   'Afbeelding niet ingesloten': 'Billedet er ikke indlejret',
   'Dit diagram kon niet worden getekend': 'Dette diagram kunne ikke tegnes',
