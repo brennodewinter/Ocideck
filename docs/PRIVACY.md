@@ -11,9 +11,17 @@ technical mechanisms behind these guarantees, see
 
 - **Your presentations stay on your device.** There is no OciDeck account, no
   OciDeck server, and no telemetry. Nothing is uploaded in the background.
-- **The only data that leaves your device is data you explicitly send** — by
-  importing from a URL, saving to your own Nextcloud/git server, or turning on
-  the AI assistant. Each of those is described below.
+- **Almost everything that leaves your device is something you explicitly
+  send** — by importing from a URL, saving to your own Nextcloud/git server, or
+  turning on the AI assistant. Three paths are the exception, and two of them you
+  do not choose in the moment: the **CORS fallback** on the web build (used
+  automatically, without a separate prompt), an **embedded YouTube or Vimeo
+  video** (the service is contacted when the slide plays), and the **CVE lookup**
+  if you switch it on. The table below is complete; it has ten rows, not three.
+  *(Corrected 2026-07-22: this bullet said "the only data … is data you
+  explicitly send", which was already contradicted 170 lines further down. The
+  summary is the paragraph most people actually read, so it was wrong exactly
+  where it counted most.)*
 - **You control sharing** through privacy scanning (OciWacht), redaction, and TLP
   classification before anything is exported.
 
@@ -270,6 +278,17 @@ privacy projection every other outbound path uses, so anything the scanner flags
 as personal data is redacted before it is sent. The technical identifiers a
 finding needs to make sense — its CVSS vector, CWE and CVE ids — are not personal
 data and are left intact.
+
+**An image is a different matter, and the difference is not a gap.** The privacy
+projection works by substituting characters, and a JPEG has none — so an image
+*cannot* be run through it. That is precisely why OciDeck asks you to confirm
+every single image before it goes, naming the destination and how many
+recognisable faces it found in that image. For a penetration tester the evidence
+screenshot is the most sensitive thing in the deck, and one click should not be
+able to send a screenshot of an admin panel or a group photo to a third party.
+*(Added 2026-07-22: this paragraph named image and text in one breath and applied
+the safeguard only to text, so it read as though the image was equally
+protected.)*
 
 ## Controls for sharing safely
 
