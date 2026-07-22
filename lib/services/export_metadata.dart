@@ -6,8 +6,19 @@ import 'privacy/privacy_projection.dart';
 /// Application name embedded in PDF Creator / XMP CreatorTool.
 const kOciDeckCreator = 'OciDeck';
 
+/// De toepassingsversie (semver, zonder buildnummer): de ene plek waar hij
+/// letterlijk staat.
+///
+/// `pubspec.yaml` blijft de bron van de waarheid — dit is een afgeleide
+/// kopie, niet een tweede bron. Een Dart `const` kan `pubspec.yaml` niet op
+/// compileertijd inlezen, dus de twee kunnen uiteenlopen als iemand alleen
+/// hier of alleen daar de versie ophoogt. `test/version_consistency_test.dart`
+/// vergelijkt ze bij elke testrun; die test faalt zodra ze niet meer gelijk
+/// zijn.
+const kOciDeckVersion = '0.2.0';
+
 /// Producer string embedded in PDF/PPTX metadata.
-const kOciDeckProducer = 'OciDeck 0.2.0';
+const kOciDeckProducer = 'OciDeck $kOciDeckVersion';
 
 /// De machineleesbare markering voor inhoud die een AI heeft opgesteld en die
 /// nog geen mens heeft nagekeken.
