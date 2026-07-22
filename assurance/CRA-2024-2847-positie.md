@@ -64,6 +64,12 @@ naleving maar over of het werk goed genoeg is.
    Ze meten niet of de dekking op de juiste plekken zit, of een test werkelijk
    iets bewijst, of de basislijnen krimpen in plaats van stil te blijven staan.
    Er zijn er nu zeven of acht; niets laat zien of ze de goede kant op bewegen.
+   *Deels uitgevoerd (#538):* `tool/check_ratchet_trend.dart` (`make ratchets`)
+   zet elke basislijn naast haar waarde op een ijkpunt, noemt de langst staande
+   basislijnregels en splitst de dekking uit per map. Adviserend, om dezelfde
+   reden: stilstand tot een rode bouw maken straft een rustige maand. Wat
+   hiermee níét beantwoord is, blijft staan: of een test werkelijk iets bewijst
+   (`make mutate`) en het maandelijkse beeld op de wiki.
 3. **Documentatie — voldoende en duidelijk.** `docs_registration_test` bewaakt
    dát een document bereikbaar is, niet dát het klopt of te volgen valt. De
    d7b609bf-episode (gegenereerde gidsen die niets beschreven) laat zien dat dat
