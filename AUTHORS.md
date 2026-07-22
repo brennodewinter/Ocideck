@@ -33,12 +33,15 @@ reports, and ideas. (Add yourself here in your first pull request.)
 ### About the machine
 
 **Roughly two thirds of the commits in this repository have an AI co-author.**
-On 2026-07-22: 1,485 of 2,208 commits (67%) carry a `Co-Authored-By:` trailer
-naming Claude. For `lib/l10n/translations/` it is 289 of 314. You can check it
-yourself:
+Measured 2026-07-22, late: **1,539 of 2,321 commits (66%)** carry a
+`Co-Authored-By:` trailer naming Claude. For `lib/l10n/translations/` it is
+**296 of 323**. The share is what matters, not the digits — it moved by a
+hundred commits in a single day of work, and the numbers above will be stale
+before this sentence is old. So check it yourself rather than trusting them:
 
 ```sh
 git log --format=%B | grep -ci "co-authored-by:.*claude"
+git log --oneline | wc -l
 ```
 
 `git log --format=%an` shows exactly one human author, and that is the point
