@@ -25,12 +25,31 @@ void main() {
     expect(await service.render('   \n\t'), isNull);
   });
 
-  test('requestHost flips the hostNeeded notifier and is idempotent', () {
+  testWidgets('requestHost zet de vlag ná het frame, niet erin', (
+    tester,
+  ) async {
     final service = MermaidRenderService.instance;
+    // De service is een singleton; een eerdere test in dit bestand heeft de
+    // vlag mogelijk al gezet.
+    service.hostNeeded.value = false;
+    // De aanroep komt in het echt uit initState van MermaidDiagram, dus midden
+    // in de buildfase. Meteen omzetten markeerde de ValueListenableBuilder die
+    // de verborgen WebView draagt als vuil terwijl die al gebouwd was —
+    // "setState() called during build" — en dan werd de host nooit gemonteerd
+    // en bleef elk diagram eeuwig laden.
     service.requestHost();
+    expect(
+      service.hostNeeded.value,
+      isFalse,
+      reason: 'binnen het frame verandert er niets',
+    );
+
+    await tester.pumpWidget(const SizedBox.shrink());
     expect(service.hostNeeded.value, isTrue);
-    // Calling again keeps it set (the guard avoids a redundant notification).
+
+    // Nog een keer vragen kost niets en meldt niets.
     service.requestHost();
+    await tester.pump();
     expect(service.hostNeeded.value, isTrue);
   });
 

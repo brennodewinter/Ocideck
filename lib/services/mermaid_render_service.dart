@@ -31,8 +31,24 @@ class MermaidRenderService {
   bool _busy = false;
 
   /// Ask the UI layer to mount the offstage WebView host.
+  ///
+  /// Ná het frame, niet erin. De aanroep komt uit `initState` van
+  /// [MermaidDiagram], dus midden in de buildfase — en de
+  /// `ValueListenableBuilder` die de verborgen WebView draagt
+  /// ([MermaidRenderHostLayer]) staat hóger in de boom en is op dat moment al
+  /// gebouwd. Hem dan als vuil markeren gooit "setState() or markNeedsBuild()
+  /// called during build": de host werd nooit gemonteerd, [attachController]
+  /// draaide nooit, [_controller] bleef null, en elk diagram bleef eeuwig op
+  /// zijn laadtolletje staan — in de preview, in de presentatiemodus, én in de
+  /// PDF/PPTX-export, die dezelfde renderer gebruikt.
+  ///
+  /// De uitzondering aan het begin houdt de tweede aanroep gratis; de vlag
+  /// wordt maar één keer per sessie omgezet.
   void requestHost() {
-    if (!hostNeeded.value) hostNeeded.value = true;
+    if (hostNeeded.value) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!hostNeeded.value) hostNeeded.value = true;
+    });
   }
 
   /// Attach the hidden [WebViewController] created by [MermaidRenderHost].
@@ -77,7 +93,14 @@ mermaid.initialize({
   htmlLabels: false,
   flowchart: { htmlLabels: false },
   class: { htmlLabels: false },
-  secure: ['securityLevel', 'startOnLoad', 'htmlLabels']
+  // De onaantastbare sleutels. Mermaids eigen standaardlijst wordt hierdoor
+  // VERVANGEN, dus 'secure' en 'maxTextSize' moeten er zelf in: zonder 'secure'
+  // kan een diagramrichtlijn de lijst overschrijven en daarmee de rest van de
+  // beperkingen alsnog opheffen.
+  secure: [
+    'secure', 'securityLevel', 'startOnLoad', 'maxTextSize',
+    'suppressErrorRendering', 'htmlLabels'
+  ]
 });
 window.__renderMermaid = async function(source) {
   const id = 'm' + Math.abs(source.split('').reduce((h,c)=>((h<<5)-h+c.charCodeAt(0))|0,0));
