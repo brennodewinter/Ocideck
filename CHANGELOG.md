@@ -94,6 +94,20 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Fixed
+- **De webbouw was de eerste tien seconden wit.** CanvasKit verft pas na een
+  seconde of tien, en tot dan stond er niets — geen logo, geen "even geduld",
+  niets. Voor een bezoeker die dit product voor het eerst in zijn browser opent
+  is dat het moment waarop hij concludeert dat het stuk is en wegklikt, precies
+  bij een gereedschap waarvan de hele waarde is dat het iets laat zien.
+
+  Er ligt nu een laadscherm onder het app-oppervlak: het logo, "OciDeck", en
+  "Laden… · Loading…". Geen JavaScript, met opzet — het CSP van de pagina staat
+  geen inline script toe — dus het is een `<div>` met `z-index: -1` die vanzelf
+  bedekt raakt zodra Flutter verft, en die blijft staan als Flutter nooit komt.
+  Dat laatste is de bijvangst: waar eerst een leeg wit vlak "stuk" zei, staat nu
+  iets dat uitlegt wat je ziet.
+
 ### Added
 - **De TLP-knop legt nu uit waar hij over gaat.** Hij staat op de op één na
   prominentste plek van de hele interface, naast de titel van je presentatie, en
