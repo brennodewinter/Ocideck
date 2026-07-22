@@ -11,11 +11,13 @@ no application backend; all processing is local.
 **Deck** — a complete presentation: metadata, an ordered list of slides, a theme
 profile, and a TLP classification. Immutable model (`lib/models/deck.dart`).
 
-**Slide** — one immutable, strongly-typed slide. Its `SlideType` (21 values)
+**Slide** — one immutable, strongly-typed slide. Its `SlideType` (24 values)
 selects the layout: `title`, `section`, `bullets`, `twoBullets`, `bulletsImage`,
 `twoImages`, `image`, `video`, `quote`, `table`, `freeMarkdown`, `code`, `chart`,
-`cockpit`, `question`, `timeline`, and the pentest layouts (`finding`,
-`findingsSummary`, `checklist`, `scopeMatrix`, `signOff`).
+`cockpit`, `question`, `timeline`, `scorecard`, and the pentest layouts
+(`assets`, `discoveries`, `finding`, `findingsSummary`, `checklist`,
+`scopeMatrix`, `signOff`). *Corrected 2026-07-22: the count said 21 and three
+types were missing from the list.*
 
 **Marp** — the open Markdown-for-presentations format OciDeck reads and writes.
 Decks stay close to plain Marp Markdown, so they interoperate with other Marp
@@ -48,10 +50,14 @@ applies the same SSRF rules as NetGuard. See [HOSTING.md](HOSTING.md).
 ## Privacy & classification
 
 **OciWacht** — OciDeck's built-in privacy scanner. It detects personal data
-(email, phone, IBAN, BSN and national IDs for 13 EU member states plus two UK
-ones, addresses, names, secrets) and
+(email, phone, IBAN, BSN and national identifiers covering all 27 EU member
+states — some through a shared rule, as Czechia and Slovakia and as Estonia and
+Lithuania each share a number format — plus Iceland, Liechtenstein, Norway,
+Switzerland and two UK numbers, addresses, names, secrets) and
 can flag or redact it. Name detection is deliberately not NER (see
-[design/OCIWACHT.md](design/OCIWACHT.md)).
+[design/OCIWACHT.md](design/OCIWACHT.md)). *Corrected 2026-07-22: this said 13
+member states, which was the state before the later European batches landed;
+[PRIVACY.md](PRIVACY.md) carries the same correction.*
 
 **TLP (Traffic Light Protocol)** — the sharing-classification scheme: `CLEAR`,
 `GREEN`, `AMBER`, `AMBER+STRICT`, `RED` (plus an unset `none`). OciDeck can
