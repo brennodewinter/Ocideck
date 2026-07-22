@@ -311,6 +311,14 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   notities en het zegel.
 
 ### Fixed
+- **De privacycontrole meldde het eigen werkmap-pad van OciDeck als mogelijk
+  lek.** Dat was voor een nieuwe gebruiker vaak de állereerste privacymelding
+  die hij ooit zag: dia toevoegen, plaatje kiezen, "Kwaliteit" indrukken — en
+  dan een waarschuwing over een pad dat hij nooit heeft getypt, met een advies
+  dat op een afbeeldingspad niet uitvoerbaar is. Zo leert iemand dat deze
+  meldingen ruis zijn, en dat is het tegenovergestelde van waarvoor ze bestaan.
+  Mappen die OciDeck zelf aanmaakt tellen niet meer mee; een map die u zélf zo
+  noemt nog steeds wel.
 - **Het instellingenscherm toonde het privé-adres van de maker als voorbeeld.**
   Bij *Je eigen gegevens* stond letterlijk zijn e-mailadres in het invoerveld,
   en de uitleg erboven gebruikte een echt overheidsdomein als illustratie — in

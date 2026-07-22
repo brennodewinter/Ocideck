@@ -11,6 +11,8 @@
 // `/home/runner/` in een CI-log verraadt niemand.
 
 import '../../models/privacy_finding.dart';
+import '../asset_staging.dart';
+import '../disk_traces.dart';
 
 /// Eén structurele regel.
 class StructuralRule {
@@ -98,6 +100,52 @@ const Set<String> personalQueryKeys = {
   'naam',
 };
 
+/// Mappen die OciDeck zélf aanmaakt onder de map van de gebruiker.
+///
+/// Eén bron van waarheid: de constanten van de diensten die ze maken, zodat een
+/// hernoeming hier vanzelf meekomt in plaats van stilletjes te verlopen.
+final Set<String> _ownDirNames = {
+  AssetStaging.rootDirName,
+  DiskTraces.cloneDirName,
+  DiskTraces.mirrorDirName,
+  DiskTraces.styleLogosDirName,
+  DiskTraces.gitSandboxDirName,
+};
+
+/// Of het pad ná de accountnaam in een map van OciDeck zelf uitkomt.
+///
+/// **Waarom dit geen lek is.** Zo'n pad heeft de gebruiker niet getypt — wij
+/// hebben het gemaakt toen hij een afbeelding koos. Het is bovendien het
+/// állereerste wat een nieuwe gebruiker te zien kreeg: dia toevoegen, plaatje
+/// kiezen, "Kwaliteit" indrukken, en dan een privacymelding over een pad dat
+/// hij nooit heeft gezien, met als enig advies "zet er dubbele blokhaken
+/// omheen" — wat op een afbeeldingspad niet kán. De les die hij daaruit trekt
+/// is dat deze meldingen ruis zijn, en dat is precies het tegenovergestelde van
+/// wat deze scanner nodig heeft (#608).
+///
+/// De accountnaam ís er nog steeds, en die staat in het pad. Maar hij lekt pas
+/// als het deck de deur uit gaat, en dán is het pad allang relatief: bij het
+/// opslaan verhuist het bestand mee. De melding verdween daarom ook vanzelf na
+/// een keer opslaan — wat het als bevinding onbruikbaar maakte en als
+/// waarschuwing verwarrend.
+bool _isOwnAppPath(RegExpMatch match) {
+  final segments = match.input
+      .substring(match.end)
+      .split(RegExp(r'[/\\]'))
+      .where((s) => s.isNotEmpty);
+  // Alleen dicht bij de accountnaam, niet ergens verderop: een map die de
+  // gebruiker zélf zo noemt (`~/werk/ocideck_staging_backup`) is gewoon zijn
+  // pad, en zijn accountnaam staat er dan nog steeds in.
+  //
+  // Vijf, omdat het diepste echte containerpad er vier heeft:
+  // `~/Library/Application Support/<bundle-id>/git_mirror` op macOS. Linux
+  // (`~/.local/share/…`) en Windows (`AppData\Local\…`) hebben er drie.
+  for (final segment in segments.take(5)) {
+    if (_ownDirNames.contains(segment)) return true;
+  }
+  return false;
+}
+
 /// Is dit accountnaam-deel van een pad een echte naam?
 bool _isPersonalAccountName(RegExpMatch match) {
   final name = match.group(1)?.toLowerCase();
@@ -105,6 +153,7 @@ bool _isPersonalAccountName(RegExpMatch match) {
   if (genericAccountNames.contains(name)) return false;
   // Een naam van één of twee tekens zegt niets. `/Users/x/` is geen lek.
   if (name.length < 3) return false;
+  if (_isOwnAppPath(match)) return false;
   return true;
 }
 
