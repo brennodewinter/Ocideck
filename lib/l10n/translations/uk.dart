@@ -1795,6 +1795,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Deze tijdstempel hoort niet bij het laatste verzoek':
+      'Ця мітка часу не належить до останнього запиту',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Вкажіть цей номер версії, коли повідомляєте про проблему безпеки.',
   'Video niet ingesloten': 'Відео не вбудовано',

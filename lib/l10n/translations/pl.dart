@@ -1789,6 +1789,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Deze tijdstempel hoort niet bij het laatste verzoek':
+      'Ten znacznik czasu nie należy do ostatniego żądania',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Podaj ten numer wersji, zgłaszając problem z bezpieczeństwem.',
   'Video niet ingesloten': 'Wideo nieosadzone',

@@ -18,12 +18,12 @@ import '../utils/asn1_der.dart';
 ///   wat de TSA over de TSTInfo heeft ondertekend;
 /// - de **certificaatketen** van de TSA, en dus ook niet of de ondertekenaar
 ///   een TSA is (`id-kp-timeStamping`) of überhaupt te vertrouwen valt;
-/// - de **echo van de nonce**. Het verzoek dráágt sinds kort een nonce, en RFC
-///   3161 §2.4.2 verplicht de TSA die te herhalen — maar OciDeck bewaart de
-///   nonce niet, dus bij het importeren valt er niets mee te vergelijken. Een
-///   ouder token voor dezelfde hash, opnieuw ingediend, is voor deze app dus
-///   niet te onderscheiden van een vers token. Wie beide helften heeft kan het
-///   wél nakijken; zie [timeStampEchoesNonce] en [buildTimeStampRequest].
+/// Wat OciDeck **sinds 2026-07-22 wél** doet (#563): de nonce van het uitstaande
+/// verzoek bewaren in de zegel-sidecar en de echo bij het importeren nakijken.
+/// Een ouder token voor dezelfde hash, opnieuw ingediend, wordt daardoor
+/// geweigerd zolang er een verzoek uitstaat. Staat er geen verzoek uit, dan is
+/// er niets te vergelijken en blijft de imprint het enige oordeel — zie
+/// [timeStampEchoesNonce] en [buildTimeStampRequest].
 ///
 /// De praktische betekenis: `genTime` is een *bewering van het token*, geen
 /// vastgesteld feit. Wie het deck heeft, kan zelf een token maken met een
@@ -88,17 +88,16 @@ const int kTimeStampNonceBytes = 8;
 /// voor dezelfde imprint inwisselbaar voor elk ander — er valt dan niet vast te
 /// stellen dát dit token het antwoord op dít verzoek is.
 ///
-/// De echo is met [timeStampEchoesNonce] te controleren door wie beide helften
-/// heeft. OciDeck zelf doet dat niet bij het importeren: het verzoek gaat
-/// buiten de app om naar een TSA en het deck bewaart de nonce niet, dus na een
-/// herstart is de andere helft weg. Dat is een bewuste grens en geen omissie.
+/// De echo wordt sinds 2026-07-22 (#563) ook door OciDeck zelf nagekeken: de
+/// nonce van het uitstaande verzoek staat in `<naam>.seal.json`
+/// ([Deck.sealTimestampNonce]), zodat `_importTsr` een token kan weigeren dat
+/// de imprint deelt maar het antwoord op een ánder verzoek is. Daarvóór kon
+/// alleen iemand die beide bestanden bij de hand had dat zien.
 ///
-/// De reden die daar oorspronkelijk bij stond — een sleutel erbij zou botsen
-/// met de lopende verhuizing van het zegel naar een sidecar — geldt niet meer:
-/// die verhuizing is af. `<naam>.seal.json` is nu precies de plek waar zo'n
-/// nonce hoort (hij is ondoorzichtig en gaat over het document in plaats van
-/// erin), dus de belemmering is weg. Wat overblijft is de keuze om het te
-/// bouwen; tot dat gebeurt geldt de grens hierboven onverkort.
+/// De grens die daar wél blijft: staat er geen verzoek uit, dan is er niets te
+/// vergelijken en blijft het bij de imprint. Een token dat van elders komt —
+/// meegeleverd bij een deck, of van een eerdere machine — wordt dus op de
+/// imprint beoordeeld en niet op de nonce.
 Uint8List buildTimeStampRequest(
   Uint8List hash, {
   Rfc3161HashAlgorithm algorithm = Rfc3161HashAlgorithm.sha512,
@@ -280,6 +279,49 @@ String? _nonceOf(Asn1Node tstInfo) {
   return null;
 }
 
+/// Waarom een geïmporteerd tijdstempeltoken wel of niet als bewijs telt.
+///
+/// Twee faalvormen die uit elkaar gehouden moeten worden, want ze betekenen iets
+/// anders voor de gebruiker: het token gaat over een ánder document, of het gaat
+/// over dít document maar beantwoordt een ánder verzoek.
+enum TimeStampImportVerdict {
+  /// Imprint klopt, en de echo ook (of er stond geen verzoek uit).
+  accepted,
+
+  /// Het token stempelt een andere hash. Dit is niet dit document.
+  imprintMismatch,
+
+  /// De imprint klopt, maar de nonce van het uitstaande verzoek komt niet
+  /// terug — een ouder token voor dezelfde hash, opnieuw ingediend.
+  wrongRequest,
+}
+
+/// Beoordeelt [token] tegen [sealHash] en, wanneer er een verzoek uitstaat,
+/// tegen [expectedNonceHex].
+///
+/// Los van de dialoog zodat dit oordeel toetsbaar is: in een widget-methode zou
+/// het alleen via de bestandskiezer bereikbaar zijn, en die is platformspul.
+///
+/// **Geen uitstaand verzoek is geen fout.** Een leeg [expectedNonceHex] betekent
+/// dat er niets te vergelijken valt — het token komt van elders, of is van vóór
+/// deze build — en dan blijft de imprint het enige oordeel. Streng doen op een
+/// nonce die nooit is verstuurd, zou een geldig token weigeren.
+TimeStampImportVerdict judgeTimeStampImport(
+  Uint8List token, {
+  required String sealHash,
+  required String expectedNonceHex,
+}) {
+  if (!timeStampImprintMatchesHash(token, sealHash)) {
+    return TimeStampImportVerdict.imprintMismatch;
+  }
+  if (expectedNonceHex.isEmpty) return TimeStampImportVerdict.accepted;
+  final nonce = decodeHashHex(expectedNonceHex);
+  if (nonce == null || !timeStampEchoesNonce(token, nonce)) {
+    return TimeStampImportVerdict.wrongRequest;
+  }
+  return TimeStampImportVerdict.accepted;
+}
+
 /// Of [token] de [nonce] terugkaatst die in het bijbehorende verzoek stond.
 ///
 /// Dit is wat een nonce doet: hij bindt één token aan één verzoek. Een token
@@ -287,9 +329,9 @@ String? _nonceOf(Asn1Node tstInfo) {
 /// op een ándere vraag — mogelijk een oudere, opnieuw ingediende. Een
 /// imprint-vergelijking alleen ziet dat verschil niet.
 ///
-/// Merk op: dit vergt beide helften. Wie alleen het token heeft — en dat is
-/// OciDeck na een herstart, want het deck bewaart het verzoek niet — kan hier
-/// niets mee. Zie [buildTimeStampRequest].
+/// Merk op: dit vergt beide helften. Het deck bewaart de nonce van het
+/// uitstaande verzoek daarom in zijn zegel-sidecar; zonder uitstaand verzoek is
+/// er niets te vergelijken. Zie [buildTimeStampRequest].
 bool timeStampEchoesNonce(Uint8List token, Uint8List nonce) {
   final parsed = parseTimeStampToken(token);
   if (parsed?.nonceHex == null) return false;
@@ -334,6 +376,12 @@ bool _bytesEqual(List<int> a, List<int> b) {
   }
   return true;
 }
+
+/// De hex-vorm waarin een nonce in de zegel-sidecar wordt bewaard.
+///
+/// Dezelfde vorm als waarin [TimeStampToken.nonceHex] terugkomt, zodat de
+/// vergelijking bij het importeren geen omweg nodig heeft.
+String timeStampNonceHex(List<int> nonce) => _hex(nonce);
 
 String _hex(List<int> bytes) =>
     [for (final b in bytes) b.toRadixString(16).padLeft(2, '0')].join();

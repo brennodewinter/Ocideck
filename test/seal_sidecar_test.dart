@@ -89,6 +89,37 @@ void main() {
       expect(SealCodec.decode(json)!.form, SealForm.canonical);
     });
 
+    test('de nonce van een uitstaand verzoek reist mee in de sidecar', () {
+      // Zonder deze sleutel viel er bij het importeren niets te vergelijken:
+      // het verzoek gaat buiten de app om naar de TSA, dus na een herstart was
+      // de andere helft weg (#563).
+      const record = SealRecord(
+        hash: 'abc',
+        algo: 'SHA-512',
+        at: '2026-07-22',
+        timestampNonce: 'a1b2c3d4',
+      );
+      final back = SealCodec.decode(SealCodec.encode(record)!)!;
+      expect(back.timestampNonce, 'a1b2c3d4');
+    });
+
+    test('een oudere build weigert de sidecar niet om deze sleutel', () {
+      // Additief toegevoegd, dus BEWUST zonder versiebump: een build die de
+      // sleutel niet kent hoort hem te negeren en de rest gewoon te lezen.
+      // Verhogen zou het hele zegel laten zoekraken om een veld dat die build
+      // niet nodig heeft.
+      expect(SealCodec.version, 1, reason: 'timestamp_nonce is additief');
+      final json = SealCodec.encode(
+        const SealRecord(hash: 'abc', algo: 'SHA-512', timestampNonce: 'ff00'),
+      )!;
+      expect(json, contains('timestamp_nonce'));
+      // Zoals een oudere build hem leest: alle bekende sleutels, deze niet.
+      final data = jsonDecode(json) as Map<String, dynamic>;
+      expect(data['hash'], 'abc');
+      expect(data.remove('timestamp_nonce'), isNotNull);
+      expect(SealCodec.decode(jsonEncode(data))!.hash, 'abc');
+    });
+
     test('een nieuwere versie wordt niet half gelezen', () {
       final json = SealCodec.encode(
         const SealRecord(finalized: true, hash: 'abc', algo: 'sha-512'),

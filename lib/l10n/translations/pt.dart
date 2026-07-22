@@ -1807,6 +1807,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Deze tijdstempel hoort niet bij het laatste verzoek':
+      'Este carimbo de data/hora não pertence ao último pedido',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Indique este número de versão ao comunicar um problema de segurança.',
   'Video niet ingesloten': 'Vídeo não incorporado',

@@ -1784,6 +1784,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Deze tijdstempel hoort niet bij het laatste verzoek':
+      'Ova vremenska oznaka ne pripada posljednjem zahtjevu',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Navedite ovaj broj verzije kada prijavljujete sigurnosni problem.',
   'Video niet ingesloten': 'Videozapis nije ugrađen',

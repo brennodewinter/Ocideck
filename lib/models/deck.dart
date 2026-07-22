@@ -266,6 +266,21 @@ class Deck {
   /// wanneer er geen tijdstempel is. Woont in `<naam>.seal.json`.
   final String sealTimestampToken;
 
+  /// De nonce (hex) uit het laatst geëxporteerde tijdstempelverzoek, zolang het
+  /// antwoord nog niet binnen is. Leeg zodra er niets uitstaat.
+  ///
+  /// **Waarom dit bewaard wordt.** RFC 3161 §2.4.2 verplicht de TSA de nonce
+  /// terug te kaatsen, en dát is waar hij voor dient: hij bindt één token aan
+  /// één verzoek. Zonder de nonce te onthouden viel er bij het importeren niets
+  /// te vergelijken — het verzoek gaat buiten de app om naar de TSA, en na een
+  /// herstart was de andere helft weg. Een imprint-vergelijking alleen ziet het
+  /// verschil niet tussen dit antwoord en een ouder token voor dezelfde hash.
+  ///
+  /// Woont in `<naam>.seal.json`, naast het token zelf. Ondoorzichtig en over
+  /// het document in plaats van erin, dus hij hoort in de sidecar en niet in de
+  /// markdown.
+  final String sealTimestampNonce;
+
   /// De SHA-512 van de bestandsbytes waaruit dit deck is gelezen, of die er bij
   /// de laatste opslag voor zijn geschreven. Leeg voor een deck dat nooit een
   /// bestand is geweest.
@@ -353,6 +368,7 @@ class Deck {
     this.sealForm = SealForm.fileBytes,
     this.sealAt = '',
     this.sealTimestampToken = '',
+    this.sealTimestampNonce = '',
     this.fileHash = '',
     this.signature,
     this.annotations = const {},
@@ -391,6 +407,7 @@ class Deck {
     SealForm? sealForm,
     String? sealAt,
     String? sealTimestampToken,
+    String? sealTimestampNonce,
     String? fileHash,
     DocumentSignature? signature,
     bool clearSignature = false,
@@ -429,6 +446,7 @@ class Deck {
       sealForm: sealForm ?? this.sealForm,
       sealAt: sealAt ?? this.sealAt,
       sealTimestampToken: sealTimestampToken ?? this.sealTimestampToken,
+      sealTimestampNonce: sealTimestampNonce ?? this.sealTimestampNonce,
       fileHash: fileHash ?? this.fileHash,
       signature: clearSignature ? null : (signature ?? this.signature),
       annotations: annotations ?? this.annotations,

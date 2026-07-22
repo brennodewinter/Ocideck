@@ -1784,6 +1784,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Deze tijdstempel hoort niet bij het laatste verzoek':
+      'Táto časová pečiatka nepatrí k poslednej žiadosti',
   'Vermeld dit versienummer wanneer u een beveiligingsprobleem meldt.':
       'Uveďte toto číslo verzie, keď nahlásite bezpečnostný problém.',
   'Video niet ingesloten': 'Video nie je vložené',
