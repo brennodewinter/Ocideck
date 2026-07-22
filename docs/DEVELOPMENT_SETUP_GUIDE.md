@@ -21,8 +21,10 @@ Setting up a proper development environment is crucial for contributing to OciDe
 
 ### Software Dependencies
 
-- **Flutter**: Version 3.44.6 (stable)
-- **Dart**: Version 3.12.2
+- **Flutter**: Version 3.44.6 (stable) — the pinned version. Use the `dart` that
+  ships inside it (3.12.2) rather than a separately installed one.
+  [BUILD.md](BUILD.md) is the authority here and explains why the exact version
+  matters for `make format-check` but not for building.
 - **Git**: any recent version. (The *app's* git integration requires 2.19+, see
   `kMinGitVersion`; that is a runtime requirement, not a build one.)
 - **Xcode Command Line Tools** (macOS only)  

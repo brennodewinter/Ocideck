@@ -3,13 +3,27 @@
 Thanks for your interest in improving OciDeck! This document explains how to set
 up the project, the quality bar, and how to propose changes.
 
+> **There are two contributing documents, and this is the practical one.** This
+> file covers the commands: the quality gate, the individual `make` targets, the
+> localisation tooling, and what to run before a push. Its companion,
+> [`docs/CONTRIBUTING_GUIDELINES.md`](docs/CONTRIBUTING_GUIDELINES.md), covers
+> the process around them — issue reporting, review, branch naming, the (absent)
+> release process, and the Code of Conduct — and is shipped inside the app as a
+> readable document, which this file is not. Neither replaces the other.
+> *(Noted 2026-07-22: the two had grown apart without either mentioning that the
+> other existed.)*
+
 By contributing you agree that your contributions are licensed under the project
 licence, the **European Union Public Licence v. 1.2 (EUPL-1.2)** — see
 [`LICENSE.md`](LICENSE.md).
 
 ## Prerequisites
 
-- **Flutter** 3.44+ (stable channel) with **Dart 3.12+**.
+- **Flutter 3.44.6** (stable), using the `dart` bundled with it. Building
+  tolerates 3.44+, but `make format-check` does not: `dart format` reflows
+  whitespace between releases, so an unpinned toolchain fails the gate on files
+  it never touched. [`docs/BUILD.md`](docs/BUILD.md) is the authority on this and
+  explains the difference; `.tool-versions` is the pin itself.
 - A desktop target enabled: **macOS**, **Windows**, or **Linux**.
 - `make` (the `Makefile` is the entry point for all quality checks).
 

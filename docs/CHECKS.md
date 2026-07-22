@@ -40,14 +40,20 @@ guards plus formatting), handy while iterating on translations.
 
 ## How intensively is it tested?
 
-To give a sense of scale (point-in-time figures — they only grow):
+To give a sense of scale. These are counts from one moment, and they only grow,
+so read the date with them:
 
-| Metric | Approx. |
+| Metric | Counted on 2026-07-22 |
 | --- | ---: |
-| Automated tests in the suite | **~4570** |
-| Test files under `test/` | **~435** |
-| Source files under `lib/` | ~564 excl. translations (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
+| Automated tests in the suite | **4852** (excluding the `golden` tag) |
+| Test files under `test/` | **450** |
+| Source files under `lib/` | 574 excl. the 32 translation files (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
 | Line coverage (enforced floor: 80%) | **≥ 80%** |
+
+*(Corrected 2026-07-22: this table said "~4570 / ~435 / ~564" and called them
+"point-in-time figures" without saying which point in time, so there was no way
+to tell how far they had drifted. They are now dated, and re-counting them is
+part of the procedure under [Latest result](#latest-result).)*
 
 Coverage is a floor **and** a census: `make coverage` also fails when a `lib/`
 file appears in no test at all. Such a file is not 0% — lcov never records it,
