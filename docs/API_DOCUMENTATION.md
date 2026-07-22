@@ -123,11 +123,22 @@ null when the user dismissed the file picker.
 Future<ExportResult> export(
   String deckPath,
   ExportFormat format,
-  List<Uint8List> images, { /* … */ });
+  List<Uint8List> images, {
+  ExportBundle? audience, /* … */ });
 ```
 
-Export metadata is built from the deck via the factory
-`ExportDocumentMetadata.fromDeck(Deck deck)` (`lib/services/export_metadata.dart`).
+The HTML markdown and the PPTX speaker notes come from `audience`, never from
+loose strings: an `ExportBundle` cannot be built without an `AudienceDeck`, and
+that type can only be produced by `PrivacyProjection`. `export` is listed in the
+`audienceBoundary` guard (`tool/check_conventions.dart`), so the build fails if
+that parameter is ever replaced by a raw `Deck` or `List<Slide>`.
+
+Export metadata is built from the projected deck via the factory
+`ExportDocumentMetadata.fromDeck(AudienceDeck audience)`
+(`lib/services/export_metadata.dart`) — the six fields it copies (title, author,
+organization, description, keywords, TLP) land readable in PDF info and PPTX
+docProps, so taking a raw `Deck` there would make "forgot to project" a silent
+leak.
 
 ### Privacy Projection API
 `lib/services/privacy/privacy_projection.dart` — applies redaction and audience

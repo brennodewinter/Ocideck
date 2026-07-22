@@ -5,9 +5,12 @@ import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/models/redaction_manifest.dart';
+import 'package:ocideck/services/export_bundle.dart';
 import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/services/export_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/privacy/privacy_export_policy.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 
 // De invariant van de hele feature (OCIWACHT §6.5):
@@ -87,10 +90,17 @@ void main() {
       format,
       slideAfbeeldingen(audience.slides.length),
       outputDirectory: tempDir.path,
-      notes: [for (final s in audience.slides) s.notes],
-      markdown: MarkdownService().generateDeck(audience.deck, forExport: true),
+      audience: ExportBundle(
+        audience: audience,
+        markdown: MarkdownService().generateDeck(
+          audience.deck,
+          forExport: true,
+        ),
+        manifest: RedactionManifest.empty,
+        privacySummary: PrivacyExportSummary.empty,
+      ),
       themeProfile: audience.deck.themeProfile,
-      metadata: ExportDocumentMetadata.fromDeck(audience.deck),
+      metadata: ExportDocumentMetadata.fromDeck(audience),
     );
     expect(result.success, isTrue, reason: result.error);
     return result.outputPath!;

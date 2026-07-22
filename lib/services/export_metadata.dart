@@ -1,4 +1,5 @@
 import '../models/deck.dart';
+import 'privacy/privacy_projection.dart';
 
 /// Application name embedded in PDF Creator / XMP CreatorTool.
 const kOciDeckCreator = 'OciDeck';
@@ -24,14 +25,26 @@ class ExportDocumentMetadata {
     this.tlp = TlpLevel.none,
   });
 
-  factory ExportDocumentMetadata.fromDeck(Deck deck) => ExportDocumentMetadata(
-    title: deck.title,
-    author: deck.author,
-    organization: deck.organization,
-    description: deck.description,
-    keywords: deck.keywords,
-    tlp: deck.tlp,
-  );
+  /// De documentmetadata van een geprojecteerd deck.
+  ///
+  /// Bewust een [AudienceDeck] en geen rauwe [Deck]. Deze zes velden belanden
+  /// leesbaar in de PDF-info, de PPTX-docProps en de HTML-kop — ook al staat er
+  /// op geen enkele dia iets van te zien. Nam deze fabriek een `Deck`, dan was
+  /// "vergeten te projecteren" hier een stille lek van precies de velden
+  /// (`title`, `author`, `organization`, `description`, `keywords`) die de
+  /// scanner deckbreed naloopt. Nu weigert de compiler het: een `AudienceDeck`
+  /// is alleen door [PrivacyProjection] te maken.
+  factory ExportDocumentMetadata.fromDeck(AudienceDeck audience) {
+    final deck = audience.deck;
+    return ExportDocumentMetadata(
+      title: deck.title,
+      author: deck.author,
+      organization: deck.organization,
+      description: deck.description,
+      keywords: deck.keywords,
+      tlp: deck.tlp,
+    );
+  }
 
   /// Fallback title when [title] is empty.
   String displayTitle(String fallback) =>
