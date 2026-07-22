@@ -269,6 +269,16 @@ OciDeck constrains what an opened deck can do:
   validated address** (`connectionFactory`), so a DNS rebind between the check
   and the connect can't redirect the socket internally. TLS still validates
   against the original hostname.
+- **The scanner's own-identity allowlist.** *Settings → Security → Your own
+  details* holds the user's name, e-mail address, phone number and organisation
+  domain so the privacy scanner does not report the sender as a finding. It is
+  not a credential, but it is the only preference carrying personal data about a
+  natural person, so it lives in the keychain
+  (`SecretStore.privacyOwnIdentityKey`) rather than in the preferences file.
+  Migration order matters and is deliberate: the legacy `privacyOwnIdentity`
+  preference is removed only once the keychain has accepted the value, because
+  losing the allowlist makes the scanner start flagging the user's own name —
+  the single largest false-positive source there is.
 - **WebDAV/Nextcloud source — credentials and trust boundary.** The app
   password is stored encrypted in the OS keychain (`flutter_secure_storage`,
   keyed by server URL + username via `SecretStore`), never in the preferences
@@ -358,12 +368,34 @@ narrow TOCTOU on an already-open deck).
 Autosave writes each dirty tab's full markdown (and user notes) as **unencrypted
 JSON** to `<app-support>/recovery/<uuid>.json`, so work survives a crash. This
 means deck content — including a **classified** deck — sits in plaintext on disk
-until the tab is saved or discarded. Mitigations: the directory is the
-per-user, OS-permissioned app-support path; snapshots are deleted on save and on
-"tab became clean"; and orphaned snapshots older than 7 days are pruned on
-startup (`RecoveryService.pruneOlderThan`) so a forgotten crash file can't linger
-indefinitely. Encrypting these snapshots at rest (keyed via the keychain) is a
-known residual improvement, not yet implemented.
+until the tab is saved or discarded. Mitigations: the directory is the per-user,
+OS-permissioned app-support path; snapshots are deleted on save, on "tab became
+clean" and on a normal window close; and orphans older than 7 days are pruned
+both at startup (`RecoveryService.pruneOlderThan` via `loadAll`) and while the
+app runs (`pruneIfDue`, rate-limited to once an hour, driven by the autosave
+tick) so a long-uptime machine cannot hold a forgotten crash file indefinitely.
+
+**Encryption at rest was considered and deliberately not implemented.** The only
+defensible key location is the OS keychain — a key stored beside the ciphertext
+is not encryption — and the app already uses that store. But a snapshot almost
+always duplicates a deck that exists as an unencrypted `.md` in the user's own
+project folder, on the same disk under the same permissions; encrypting the copy
+while the original lies beside it protects only the never-saved deck, which is
+also the shortest-lived case. Against that: OciDeck ships no symmetric cipher
+(`crypto` provides hashes only), so this means adding a full cryptography
+library to the dependency tree and SBOM of the whole application, or hand-rolling
+a cipher inside a privacy tool. It also costs recoverability — a snapshot that is
+unreadable without its keychain entry fails silently on a restored machine, at
+precisely the moment recovery exists for. Bounding the plaintext's lifetime and
+making the OS-permission claim actually true was judged the better trade.
+
+That second half is a real fix, not a restatement. On macOS `~/Library` is 0700
+and `$TMPDIR` is per-user, so the "per-user, OS-permissioned" claim holds by
+itself. On **Linux** it did not: `getApplicationSupportDirectory()` and the
+media-staging root under `/tmp` are created with the ordinary umask, leaving deck
+content and the images of an unsaved deck readable by any other local account.
+`DiskTraces.restrictToOwner()` now runs one fixed `chmod 700` over both at
+startup (Linux only, argv form, no shell, best effort, never `/tmp` itself).
 
 A connected **git repository** puts far more than a snapshot there: a native
 clone under `<app-support>/git_clone/<storageSlug>/` holds the full deck content
@@ -372,11 +404,24 @@ pushed, all unencrypted. The 7-day prune deliberately does not apply — a worki
 copy is meant to persist. Whatever sensitivity the repository has on the server,
 it has on this disk too.
 
-Removing the connection does not remove any of it: `removeConnection` rewrites
-the connection list in preferences and stops there, so `git_clone/<slug>/`,
-`git_mirror/<slug>/` and the `git_outbox::` keys survive. Deleting them is
-manual. *Corrected 2026-07-21: this paragraph used to end "so it stays until the
-connection is removed", which implied a cleanup that is not implemented.*
+Removing the connection now removes all of it. `SettingsNotifier.setConnections`
+is the single funnel for every connection-list mutation, and it hands each
+disappeared connection to `DiskTraces.removeTracesOf`, which deletes
+`git_clone/<slug>/`, `git_mirror/<slug>/` and the `git_outbox::<slug>::` keys.
+The keychain secret survives on purpose (it belongs to the account, not to this
+connection), and a `LocalConnection` is never touched — that path is the user's
+own folder.
+
+The one case where cleanup is refused is **unpushed work**. Queued commits exist
+nowhere else, so `removeGitTraces` returns a refusal and leaves the working copy
+alone unless the caller passes `discardPendingWork`. The settings dialog obtains
+that flag only from an explicit confirmation that names the deck, branch and
+commit message at stake; declining keeps the connection. The same rule guards
+`SettingsNotifier.resetToInitialState`, which otherwise wipes settings, recovery
+snapshots, style logos, every working copy and the per-connection keychain
+entries. *Corrected 2026-07-22: this section previously documented that none of
+this was cleaned up. That was accurate then; the behaviour, not the wording, was
+the defect.*
 
 ## Platform sandboxing (macOS)
 

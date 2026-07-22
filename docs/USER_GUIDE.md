@@ -41,6 +41,7 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
   edit. While unsaved work is open the browser also asks for confirmation before
   the tab closes; the wording of that question is the browser's own and cannot be
   set by the app. On desktop the window asks the same thing itself.
+- **Traces on this device**: *Settings → Beveiliging → Sporen op dit apparaat* shows what OciDeck keeps locally and lets you remove it: the recent list (which stores the full path and the TLP classification of every deck you opened), the crash-recovery snapshots, and a full reset that also clears the git working copies and the passwords in your keychain. Your presentations are never touched. Removing a git connection now takes its working copy with it — unless commits are still waiting to be pushed, in which case OciDeck names them and asks first.
 
 ## Command palette
 
