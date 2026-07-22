@@ -431,7 +431,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// overgeslagen.
   Future<void> _addLocalConnection() async {
     final locals = _localConnections;
-    final result = await FilePicker.getDirectoryPath(
+    final result = await _pickDirectoryGated(
       dialogTitle: context.l10n.d('Map kiezen'),
       initialDirectory: locals.isEmpty ? null : locals.last.path,
     );
@@ -595,7 +595,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   Future<void> _pickExportDirectory() async {
     final locals = _localConnections;
-    final result = await FilePicker.getDirectoryPath(
+    final result = await _pickDirectoryGated(
       dialogTitle: context.l10n.d('Map voor exports'),
       initialDirectory:
           _exportDirectory ?? (locals.isEmpty ? null : locals.first.path),
@@ -881,4 +881,24 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       color: AppTheme.paper,
     );
   }
+}
+
+/// Kies een map — of null wanneer dit platform er geen heeft.
+///
+/// Buiten de klasse, en niet alleen omdat `_SettingsDialogState` tegen zijn
+/// plafond aan zit: de poort hoort één keer te staan in plaats van bij elke
+/// kiezer opnieuw. `getDirectoryPath` bestaat op web niet en geeft daar stil
+/// null terug, en dan doet de knop niets zonder één woord uitleg — dat was #150
+/// en daarna #506. De secties eromheen zijn óók gepoort
+/// (settings_dialog_storage.dart); dit is de helft die dit bestand zelf kan
+/// bewijzen.
+Future<String?> _pickDirectoryGated({
+  required String dialogTitle,
+  String? initialDirectory,
+}) async {
+  if (!supportsLocalProjectFolders) return null;
+  return FilePicker.getDirectoryPath(
+    dialogTitle: dialogTitle,
+    initialDirectory: initialDirectory,
+  );
 }

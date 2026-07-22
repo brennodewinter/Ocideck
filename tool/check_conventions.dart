@@ -145,7 +145,7 @@ const Map<String, int> classSizeBaseline = {
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState': 7295,
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
       3419,
-  'lib/services/file_service.dart#FileService': 2885,
+  'lib/services/file_service.dart#FileService': 2879,
   'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 2667,
   'lib/state/tabs_provider.dart#TabsNotifier': 2403,
   'lib/services/markdown_service.dart#MarkdownService': 2322,
@@ -258,22 +258,11 @@ final _platformFlag = RegExp(
 /// regel genoteerd. Zolang een bestand hier staat, is het níet goedgekeurd: het
 /// is opgeschreven.
 const Map<String, String> filePickerPathBaseline = {
-  // ── Gepoort bij de aanroeper, niet in de methode zelf ─────────────────────
-  // De vier dialogen die hier stonden hebben de poort nu in de methode zelf
-  // staan, dus ze zijn weg uit deze lijst. Ze waren vandaag correct — de knop
-  // stond achter `supportsLocalProjectFolders` — maar het bestand kon dat niet
-  // zelf bewijzen, en een garantie die elders staat verdwijnt bij de
-  // eerstvolgende nieuwe aanroeper.
-  'lib/widgets/dialogs/settings_dialog.dart':
-      'regels 433 en 597 (exportmap, presentatiemap); de sectie eromheen is '
-      'gepoort in settings_dialog_storage.dart. De logokiezer op 612 is '
-      'sinds #506 wél in de methode zelf gepoort',
-
-  // ── Echte, openstaande gaten ──────────────────────────────────────────────
-  'lib/services/file_service.dart':
-      'regels 518 en 957 — pickMarkdownFile en pickPackageFile lezen .path; '
-      'voor het openen bestaat er een bytes-variant naast, voor pakketten '
-      'niet. Zie #526',
+  // Leeg, en dat is de bedoeling (#528). Elke kiezer die een PAD uit
+  // `FilePicker` haalt noemt nu zelf `supportsLocalProjectFolders`, in plaats
+  // van te leunen op een poort bij zijn aanroeper. Een nieuwe regel hier is
+  // geen boekhouding maar een besluit: schrijf erbij waarom dit bestand het
+  // niet zelf kan.
 };
 
 /// Leest een `pickFiles(`-aanroep uit en zegt of hij een pad oplevert dat op

@@ -311,6 +311,12 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   notities en het zegel.
 
 ### Fixed
+- **In de webversie gooide "Bestand kiezen" bij video en audio een fout.** Niet
+  "de knop deed niets" — er vloog een onafgevangen fout omhoog. De browser kent
+  geen bestandspaden, en de bibliotheek die de kiezer levert reageert daarop
+  door te wéigeren in plaats van niets terug te geven. Die knoppen zijn nu weg
+  op web, waar ze toch nergens heen konden: er is daar geen projectmap om een
+  bestand in te zetten. Video via een URL werkt er gewoon.
 - **De privacygrens werd bewaakt met een lijst van vier namen.** OciDeck belooft
   dat wat u aan een ontvanger geeft — een PDF, een presentatie, het klembord —
   langs de redactie is geweest, en dat de compiler dat afdwingt in plaats van

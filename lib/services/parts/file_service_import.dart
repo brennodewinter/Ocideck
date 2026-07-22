@@ -345,3 +345,51 @@ extension FileServiceImport on FileService {
     return ImportOutcome.ok(mdPath);
   }
 }
+
+// ── De bestandskiezers ──────────────────────────────────────────────────────
+//
+// Top-level en niet in de klasse: ze raken geen enkel veld van FileService, en
+// de klasse zit tegen zijn plafond. Ze wonen hier omdat kiezen het begin van
+// importeren is.
+
+/// Kies een bestand en lever het PAD — of null wanneer dit platform er geen
+/// heeft.
+///
+/// Buiten de klasse: dit raakt geen enkel veld van [FileService], en de poort
+/// hoort één keer te staan in plaats van bij elke kiezer opnieuw.
+///
+/// Op web is die poort geen nettigheid maar noodzaak: `PlatformFile.path`
+/// GOOIT daar een kale String (file_picker 5.5.0, platform_file.dart) in plaats
+/// van null terug te geven. Wie een pad nodig heeft op web, heeft in werkelijk-
+/// heid bytes nodig — zie [FileService.pickDeckFileBytes].
+Future<String?> _pickPathGated({
+  required String dialogTitle,
+  required FileType type,
+  List<String>? allowedExtensions,
+  String? initialDirectory,
+}) async {
+  if (!supportsLocalProjectFolders) return null;
+  final result = await FilePicker.pickFiles(
+    dialogTitle: dialogTitle,
+    type: type,
+    allowedExtensions: allowedExtensions,
+    initialDirectory: initialDirectory,
+  );
+  return result?.files.single.path;
+}
+
+/// Kies een bestand en lever NAAM + BYTES. Werkt overal, ook op web — dit is de
+/// tegenhanger van [_pickPathGated] voor het pad dat daar niet bestaat.
+Future<({String name, Uint8List bytes})?> _pickBytes({
+  required String dialogTitle,
+}) async {
+  final result = await FilePicker.pickFiles(
+    dialogTitle: dialogTitle,
+    type: FileType.any,
+    withData: true,
+  );
+  final file = result?.files.single;
+  final bytes = file?.bytes;
+  if (file == null || bytes == null) return null;
+  return (name: file.name, bytes: bytes);
+}
