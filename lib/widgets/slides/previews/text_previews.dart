@@ -474,38 +474,20 @@ class _MarkdownPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pad = w * 0.07;
-    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
 
-    return Container(
-      color: Colors.white,
-      child: SizedBox.expand(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          alignment: Alignment.topLeft,
-          child: SizedBox(
-            width: w,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                pad,
-                pad + safe.top,
-                pad,
-                _logoAwareBottomPadding(pad, safe.bottom),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: _markdownBodyBlocks(
-                  context,
-                  markdown: slide.customMarkdown,
-                  w: w,
-                  font: font,
-                  profile: profile,
-                  headingColor: AppTheme.navy,
-                ),
-              ),
-            ),
-          ),
-        ),
+    return _PreviewScaffold(
+      width: w,
+      slide: slide,
+      profile: profile,
+      horizontalPadding: pad,
+      verticalPadding: pad,
+      children: _markdownBodyBlocks(
+        context,
+        markdown: slide.customMarkdown,
+        w: w,
+        font: font,
+        profile: profile,
+        headingColor: AppTheme.navy,
       ),
     );
   }

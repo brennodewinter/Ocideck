@@ -32,66 +32,45 @@ class _ChecklistPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     final pad = w * 0.07; // vertical margin
     final hPad = w * 0.045; // narrower side margin — use the width (feedback)
-    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final spec = ChecklistSpec.fromSlide(slide.title, slide.tableRows);
     final accent = _hexColor(profile.accentColor);
 
-    return Container(
-      color: Colors.white,
-      child: SizedBox.expand(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          alignment: Alignment.topLeft,
-          child: SizedBox(
-            width: w,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                hPad,
-                pad + safe.top,
-                hPad,
-                _logoAwareBottomPadding(pad, safe.bottom),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (spec.standardLabel.isNotEmpty)
-                    Text(
-                      spec.standardLabel,
-                      style: _applyFont(
-                        font,
-                        TextStyle(
-                          fontSize: w * 0.04,
-                          fontWeight: FontWeight.w700,
-                          color: AppTheme.navy,
-                        ),
-                      ),
-                    ),
-                  // The scope object this checklist covers (feedback #8).
-                  if (slide.checklistScope.isNotEmpty) ...[
-                    SizedBox(height: w * 0.008),
-                    Text(
-                      '${context.l10n.d('Scope-object')}: '
-                      '${slide.checklistScope}',
-                      style: _applyFont(
-                        font,
-                        TextStyle(
-                          fontSize: w * 0.024,
-                          color: AppTheme.slate600,
-                        ),
-                      ),
-                    ),
-                  ],
-                  SizedBox(height: w * 0.02),
-                  _progress(context, spec, accent),
-                  SizedBox(height: w * 0.03),
-                  _table(context, spec),
-                ],
+    return _PreviewScaffold(
+      width: w,
+      slide: slide,
+      profile: profile,
+      horizontalPadding: hPad,
+      verticalPadding: pad,
+      children: [
+        if (spec.standardLabel.isNotEmpty)
+          Text(
+            spec.standardLabel,
+            style: _applyFont(
+              font,
+              TextStyle(
+                fontSize: w * 0.04,
+                fontWeight: FontWeight.w700,
+                color: AppTheme.navy,
               ),
             ),
           ),
-        ),
-      ),
+        // The scope object this checklist covers (feedback #8).
+        if (slide.checklistScope.isNotEmpty) ...[
+          SizedBox(height: w * 0.008),
+          Text(
+            '${context.l10n.d('Scope-object')}: '
+            '${slide.checklistScope}',
+            style: _applyFont(
+              font,
+              TextStyle(fontSize: w * 0.024, color: AppTheme.slate600),
+            ),
+          ),
+        ],
+        SizedBox(height: w * 0.02),
+        _progress(context, spec, accent),
+        SizedBox(height: w * 0.03),
+        _table(context, spec),
+      ],
     );
   }
 
