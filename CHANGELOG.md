@@ -95,6 +95,25 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Fixed
+- **Het instellingenvenster brak bij 200% tekstgrootte — de instelling die het
+  zelf aanbiedt.** Wie de tekstschaling opendraaide (uitdrukkelijk als
+  toegankelijkheidsinstelling, WCAG 1.4.4) kreeg een zijbalk met "Einste…",
+  "App-De…", "Präsent…", "Lizenz u…": een navigatie waarop je niet meer kunt
+  navigeren, voor precies de gebruiker die de instelling nodig had.
+
+  De zijbalk had een vaste breedte van 234 pixels en elk label kapte af op één
+  regel. Nu groeit hij mee — tot anderhalf keer, want één-op-één zou het venster
+  opeten — mogen labels twee regels gebruiken, en draagt elk item een tooltip met
+  de volle naam als vangnet.
+
+  Bij het schrijven van de test kwamen er drie fouten uit die niemand gemeld had,
+  alle drie in dezelfde klasse: een rij met tekst zonder ruimte om te wijken. De
+  knoppenbalk onderaan liep 261 pixels buiten beeld — mét de opslaanknop aan de
+  kant die wegviel; een inklapbare sectiekop 398 pixels; en de kolom van het
+  venster zelf 65 pixels naar onderen, waardoor de voet onder de rand verdween.
+  De knoppen stapelen nu, de koppen breken af, en het venster groeit mee.
+
+### Fixed
 - **De privacyverklaring beweerde dat er geen server is. Die is er wél — één.**
   `cveapi.librekat.nl` is een CVE-spiegel die de stichting zelf draait, en hij
   staat als standaard in de code — terwijl de samenvatting bovenaan

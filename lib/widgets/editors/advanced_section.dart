@@ -51,12 +51,18 @@ class _AdvancedSectionState extends State<AdvancedSection> {
                   color: AppTheme.slate500,
                 ),
                 const SizedBox(width: 4),
-                Text(
-                  widget.title,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: AppTheme.slate500,
+                // Flexible, want deze rij staat op mainAxisSize.min en de titel
+                // is een vertaalde string: bij 200% tekstschaal liep hij 398
+                // pixels buiten beeld. Twee regels mogen; wegvallen niet.
+                Flexible(
+                  child: Text(
+                    widget.title,
+                    maxLines: 2,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: AppTheme.slate500,
+                    ),
                   ),
                 ),
               ],

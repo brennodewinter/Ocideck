@@ -15,9 +15,26 @@
 part of '../settings_dialog.dart';
 
 extension _SettingsChrome on _SettingsDialogState {
+  /// De breedte van de zijbalk bij de standaard tekstgrootte.
+  static const double _sidebarWidth = 234;
+
+  /// Hoeveel de zijbalk hoogstens meegroeit met de tekstschaal.
+  ///
+  /// Eén-op-één meegroeien zou bij 200% op 468 px uitkomen en het venster
+  /// opeten — dan is de navigatie leesbaar en de inhoud niet. Anderhalf keer
+  /// haalt de meeste labels heel; wat dan nog niet past breekt over twee
+  /// regels af in [_navItem]. Verticale ruimte is hier goedkoper dan
+  /// horizontale, want de lijst scrolt toch al.
+  static const double _sidebarMaxGrowth = 1.5;
+
   Widget _sidebar(AppLocalizations l10n) {
+    // Bij schaal 1.0 exact 234, zodat er voor wie niets instelt niets verandert.
+    final scale = MediaQuery.textScalerOf(context).scale(1);
     return Container(
-      width: 234,
+      // Benoemd zodat een test de zijbalk kan aanwijzen zonder op een breedte
+      // of een kleurverloop te moeten raden — die veranderen, de rol niet.
+      key: const Key('settings-sidebar'),
+      width: _sidebarWidth * scale.clamp(1.0, _sidebarMaxGrowth),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -60,6 +77,9 @@ extension _SettingsChrome on _SettingsDialogState {
                 Expanded(
                   child: Text(
                     l10n.t('settings'),
+                    // Ook de kop, en om dezelfde reden: "Einstellungen" past bij
+                    // 17px al niet naast het logo op één regel.
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       color: Colors.white,
@@ -178,49 +198,62 @@ extension _SettingsChrome on _SettingsDialogState {
         child: InkWell(
           borderRadius: BorderRadius.circular(11),
           onTap: () => _rebuild(() => _selectedTab = section),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 150),
-            padding: const EdgeInsets.fromLTRB(12, 11, 14, 11),
-            decoration: BoxDecoration(
-              color: selected
-                  ? Colors.white.withValues(alpha: 0.13)
-                  : Colors.transparent,
-              borderRadius: BorderRadius.circular(11),
-            ),
-            child: Row(
-              children: [
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 150),
-                  width: 3,
-                  height: 18,
-                  margin: const EdgeInsets.only(right: 11),
-                  decoration: BoxDecoration(
-                    color: selected ? AppTheme.blue400 : Colors.transparent,
-                    borderRadius: BorderRadius.circular(3),
-                  ),
-                ),
-                Icon(
-                  icon,
-                  size: 19,
-                  color: selected
-                      ? Colors.white
-                      : Colors.white.withValues(alpha: 0.62),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    label,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: selected
-                          ? Colors.white
-                          : Colors.white.withValues(alpha: 0.72),
-                      fontSize: 13.5,
-                      fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+          child: Tooltip(
+            message: label,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 150),
+              padding: const EdgeInsets.fromLTRB(12, 11, 14, 11),
+              decoration: BoxDecoration(
+                color: selected
+                    ? Colors.white.withValues(alpha: 0.13)
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(11),
+              ),
+              child: Row(
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 150),
+                    width: 3,
+                    height: 18,
+                    margin: const EdgeInsets.only(right: 11),
+                    decoration: BoxDecoration(
+                      color: selected ? AppTheme.blue400 : Colors.transparent,
+                      borderRadius: BorderRadius.circular(3),
                     ),
                   ),
-                ),
-              ],
+                  Icon(
+                    icon,
+                    size: 19,
+                    color: selected
+                        ? Colors.white
+                        : Colors.white.withValues(alpha: 0.62),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    // Twee regels in plaats van afkappen. Bij 200% — een schaal
+                    // die dit product zelf aanbiedt als WCAG 1.4.4-instelling —
+                    // werden de labels "Einste…", "App-De…", "Präsent…": een
+                    // navigatie waar je niet meer op kunt navigeren. Een tooltip
+                    // eromheen vangt het uiterste geval, maar de tooltip is het
+                    // vangnet en niet de oplossing; die moet je immers eerst
+                    // ontdekken.
+                    child: Text(
+                      label,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: selected
+                            ? Colors.white
+                            : Colors.white.withValues(alpha: 0.72),
+                        fontSize: 13.5,
+                        fontWeight: selected
+                            ? FontWeight.w600
+                            : FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -240,6 +273,11 @@ extension _SettingsChrome on _SettingsDialogState {
           Expanded(
             child: Text(
               title,
+              // Begrensd, anders groeit de kop bij grote tekst ongelimiteerd en
+              // duwt hij de inhoud en de opslaanknop uit het venster. Twee
+              // regels voor een tabbladtitel is ruim.
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
@@ -268,14 +306,20 @@ extension _SettingsChrome on _SettingsDialogState {
         color: AppTheme.paper,
         border: const Border(top: BorderSide(color: AppTheme.iceBlue)),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+      // Wrap in plaats van Row: bij 200% tekstschaal passen "Abbrechen" en
+      // "Einstellungen speichern" niet meer naast elkaar en liep deze balk 261
+      // pixels buiten het venster — met de opslaanknop aan de kant die
+      // wegviel. Dan stapelen ze liever onder elkaar.
+      child: Wrap(
+        alignment: WrapAlignment.end,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 10,
+        runSpacing: 8,
         children: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(l10n.t('cancel')),
           ),
-          const SizedBox(width: 10),
           ElevatedButton.icon(
             onPressed: _save,
             icon: const Icon(Icons.check_rounded, size: 18),

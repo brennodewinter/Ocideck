@@ -723,12 +723,20 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     final l10n = context.l10n;
     final profiles = _profiles;
     final screen = MediaQuery.sizeOf(context);
+    // Het venster groeit mee met de tekstschaal, want kop, voet en zijbalk doen
+    // dat ook: op 200% liep de kolom 65 pixels buiten zijn eigen hoogte en
+    // verdween de opslaanknop onder de rand. Begrensd op anderhalf keer en
+    // altijd binnen het scherm — een dialoog die groter is dan het scherm
+    // ruilt het ene probleem voor het andere.
+    final scale = MediaQuery.textScalerOf(context).scale(1).clamp(1.0, 1.5);
     final dialogWidth = math
-        .min(920.0, screen.width * 0.88)
-        .clamp(640.0, 920.0);
+        .min(920.0 * scale, screen.width * 0.88)
+        .clamp(640.0, math.max(640.0, screen.width * 0.88))
+        .toDouble();
     final dialogHeight = math
-        .min(760.0, screen.height * 0.86)
-        .clamp(560.0, 760.0);
+        .min(760.0 * scale, screen.height * 0.86)
+        .clamp(560.0, math.max(560.0, screen.height * 0.86))
+        .toDouble();
 
     // Eén ingang per tabblad, in de volgorde van de enum, zodat de IndexedStack
     // hieronder nooit uit de pas kan lopen met de zijbalk.
