@@ -710,22 +710,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 
   void _presentDeck() => presentDeck(context, ref);
 
-  /// Wat de export daadwerkelijk opsomt: dezelfde slides, maar met alles wat op
-  /// het scherm één slide is en op papier meerdere pagina's, uitgeklapt.
-  ///
-  /// Een overlopende bevinding wordt zo geëxporteerd als een paar dia's op ware
-  /// grootte in plaats van één ineengekrompen dia. Voor een lange vrije-
-  /// tekstslide gold hetzelfde probleem omgekeerd: de editor en de presentator
-  /// bladeren door zijn pagina's, maar de export somt op — hij rasterde pagina 1
-  /// en de rest verdween geruisloos uit het bestand. Beide uitklappen laten het
-  /// deck zelf ongemoeid, en omdat de voettekst zijn nummer uit de positie in
-  /// deze lijst haalt, telt hij de pagina's nu vanzelf mee.
-  static List<Slide> _expandForExport(List<Slide> slides, Deck deck) =>
-      expandRichTextForRender(
-        expandFindingsForRender(slides),
-        deck.themeProfile,
-      );
-
   Future<void> _exportDeck() async {
     final deckState = ref.read(deckProvider);
     final deck = deckState.deck!;
@@ -769,58 +753,21 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     ExportBundle bundleFor(
       PrivacyExportProfile profile, {
       bool includeDetail = true,
-    }) {
-      // De beknopte versie laat de verdiepingsslides weg. Filteren gebeurt vóór
-      // de paginering: een overlopende bevinding die in drie slides uiteenvalt
-      // erft zijn verdiepingsvlag, en die drie horen samen te blijven.
-      final chosen = includeDetail
-          ? slides
-          : slides.where((s) => !s.isDetail).toList();
+    }) => buildExportBundle(
+      deck,
+      slides,
+      profile: profile,
+      includeDetail: includeDetail,
+      disabledRules: disabledRules,
+      ownIdentity: ownIdentity,
+      regions: regions,
+      markdownService: markdownService,
+    );
 
-      // De projectiegrens. Vanaf hier raakt geen enkel exportpad de bron nog
-      // aan: de rasterizer, de markdown voor de HTML-export, de PPTX-notities
-      // en de documentmetadata worden allemaal uit dit ene object afgeleid.
-      final source = deck.copyWith(slides: _expandForExport(chosen, deck));
-      final audience = PrivacyProjection.forAudience(
-        source,
-        disabledRules: disabledRules,
-        ownIdentity: ownIdentity,
-        regions: regions,
-        profile: profile,
-      );
-      return ExportBundle(
-        audience: audience,
-        // Inline chart data so the HTML export can render charts standalone,
-        // even when a chart links an external CSV. Gegenereerd uit het
-        // geprojecteerde deck: de HTML-export zet deze markdown letterlijk in het
-        // bestand.
-        markdown: markdownService.generateDeck(
-          audience.deck,
-          inlineChartData: true,
-          forExport: true,
-        ),
-        manifest: RedactionManifestService(
-          disabledRules: disabledRules,
-          ownIdentity: ownIdentity,
-          regions: regions,
-        ).build(source, profile: profile),
-        // De gate telt op de ONGEFILTERDE scan: de provider onderdrukt bevindingen
-        // op slides die de auteur al heeft afgehandeld — precies wat je in het
-        // paneel wilt, en precies wat je in deze samenvatting niet wilt.
-        privacySummary: summarisePrivacyForExport(
-          source,
-          PrivacyScanner(
-            disabledRules: disabledRules,
-            ownIdentity: ownIdentity,
-            regions: regions,
-          ).scan(source),
-        ),
-      );
-    }
-
-    final hasPrivacyFindings = !bundleFor(
-      PrivacyExportProfile.full,
-    ).privacySummary.isEmpty;
+    // Uit de gememoiseerde provider, niet uit een hele bundel: deze bool kostte
+    // drie scans plus een manifest met verse salts, en al het andere daarvan
+    // werd weggegooid (#613).
+    final hasPrivacyFindings = !ref.read(privacyExportSummaryProvider).isEmpty;
 
     // De diepgangkeuze verschijnt alleen als er iets te kiezen valt: minstens
     // één verdiepingsslide én minstens één gewone, zodat de beknopte versie

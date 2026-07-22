@@ -2,7 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/models/privacy_finding.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
+import 'package:ocideck/services/privacy/privacy_scanner.dart';
 
 /// De projectiegrens (OCIWACHT §6). De kern van elke test hier is
 /// dezelfde vraag: bevat het geprojecteerde deck de oorspronkelijke tekens nog?
@@ -396,6 +398,51 @@ void main() {
         Deck(title: 'D', slides: [slide]),
       ).slides.single;
       expect(projected.customMarkdown, contains('images/team.jpg'));
+    });
+  });
+
+  // #613: het exportdialoog draaide drie scans per bundel en twee bundels vóór
+  // de eerste frame. De scan mag daarom worden meegegeven. Wat hier bewaakt
+  // wordt is niet de snelheidswinst maar de voorwaarde eronder: dat de
+  // meegegeven scan werkelijk gebruikt wordt, én dat hem weglaten precies
+  // hetzelfde oplevert als voorheen.
+  group('een al gemaakte scan meegeven', () {
+    Deck deckMetTelefoonnummer() => Deck(
+      title: 'D',
+      slides: [
+        Slide.create(SlideType.bullets).copyWith(
+          title: 'Betaling',
+          bullets: const ['Bel 06-12345678'],
+          privacy: PrivacyDisposition.redact,
+        ),
+      ],
+    );
+
+    test('zonder scan redigeert de projectie zoals altijd', () {
+      final projected = PrivacyProjection.forAudience(
+        deckMetTelefoonnummer(),
+      ).slides.single;
+      expect(projected.bullets.single, isNot(contains('12345678')));
+    });
+
+    test('de meegegeven scan is de scan die telt', () {
+      // Een lege scan betekent "hier is niets gevonden". Redigeert de projectie
+      // dan alsnog, dan negeerde ze de parameter en scande ze zelf — en dan is
+      // de winst uit #613 er niet, hoe groen de rest ook staat.
+      final projected = PrivacyProjection.forAudience(
+        deckMetTelefoonnummer(),
+        scan: PrivacyScanResult.empty,
+      ).slides.single;
+      expect(projected.bullets.single, 'Bel 06-12345678');
+    });
+
+    test('dezelfde scan meegeven verandert niets aan de uitkomst', () {
+      final deck = deckMetTelefoonnummer();
+      final scan = PrivacyScanner().scan(deck);
+      expect(
+        PrivacyProjection.forAudience(deck, scan: scan).slides.single.bullets,
+        PrivacyProjection.forAudience(deck).slides.single.bullets,
+      );
     });
   });
 }

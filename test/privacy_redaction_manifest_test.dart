@@ -7,6 +7,8 @@ import 'package:ocideck/models/redaction_manifest.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/document_integrity.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/models/privacy_finding.dart';
+import 'package:ocideck/services/privacy/privacy_scanner.dart';
 import 'package:ocideck/services/privacy/redaction_manifest_service.dart';
 
 // Het redactiemanifest: hoe een derde partij een geredigeerd rapport controleert
@@ -253,5 +255,28 @@ void main() {
     expect(back.entries, hasLength(manifest.entries.length));
     expect(back.entries.first.commitment, manifest.entries.first.commitment);
     expect(back.entries.first.salt, manifest.entries.first.salt);
+  });
+
+  // #613: het exportdialoog bouwde per bundel drie scans over hetzelfde deck.
+  // Het manifest mag de zijne meekrijgen. Bewaakt is niet de winst maar de
+  // voorwaarde: dat de meegegeven scan werkelijk gebruikt wordt.
+  group('een al gemaakte scan meegeven', () {
+    test('een lege scan levert een leeg manifest', () {
+      // Zou de dienst hem negeren en zelf scannen, dan stonden hier entries —
+      // en dan is de herhaling die #613 wegneemt er gewoon nog.
+      expect(
+        service.build(redactedDeck(), scan: PrivacyScanResult.empty).entries,
+        isEmpty,
+      );
+    });
+
+    test('dezelfde scan meegeven verandert het manifest niet', () {
+      final deck = redactedDeck();
+      final scan = PrivacyScanner().scan(deck);
+      expect(
+        service.redactedValues(deck, scan: scan).map((e) => e.value),
+        service.redactedValues(deck).map((e) => e.value),
+      );
+    });
   });
 }

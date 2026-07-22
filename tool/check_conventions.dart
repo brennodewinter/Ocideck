@@ -152,7 +152,7 @@ const Map<String, int> classSizeBaseline = {
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2160,
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
-  'lib/widgets/app_shell.dart#_MainLayoutState': 1510,
+  'lib/widgets/app_shell.dart#_MainLayoutState': 1457,
   'lib/state/settings_provider.dart#SettingsNotifier': 1331,
   'lib/state/deck_provider.dart#DeckNotifier': 1256,
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1214,
