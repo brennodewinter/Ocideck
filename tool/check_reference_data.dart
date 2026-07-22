@@ -24,6 +24,26 @@
 // "Onbekend" wordt nooit als "actueel" geteld. Stilte mag hier niet als
 // goedkeuring lezen; dat is precies hoe een catalogus jarenlang veroudert.
 //
+// ── Wat je vergelijkt, moet dezelfde grootheid zijn ─────────────────────────
+//
+// Een poort die alleen groen kan zijn is erger dan geen poort, want hij wordt
+// voor bewijs gehouden. MIAUW was er zo een: de gebundelde "versie" was de dag
+// waarop wij het schema overnamen en de probe leverde de datum van de bron. Een
+// overnamedatum ligt per definitie ná de bronwijziging, dus de vergelijking
+// "is upstream nieuwer?" kon daar nooit met ja worden beantwoord. De poort
+// meldde jaren "actueel" zonder ooit iets te hebben kunnen zeggen.
+//
+// Twee dingen zijn daarop veranderd, en ze horen bij elkaar:
+//   * de gebundelde versie is de waarde die de **bron** draagt, nooit de dag
+//     van overname (zie `miauwBundledVersion`);
+//   * de vergelijking is `!=` en niet `>` — elke afwijking alarmeert, ook een
+//     upstreamwaarde die ouder lijkt, want dan klopt onze boekhouding niet.
+//     Zie [deviates]; het is dezelfde regel als `StandardFreshness.isOutdated`.
+//
+// test/check_reference_data_tool_test.dart toetst beide richtingen: schoon op
+// het echte register, en rood op een geplante verouderde bron — inclusief
+// precies de boekhouding die hem groen hield.
+//
 // Exit codes:  0 = alles actueel (of alleen onbekenden)
 //              1 = ten minste één standaard is verouderd
 //              2 = de controle kon niet draaien (geen netwerk)
@@ -61,41 +81,66 @@ import 'dart:io';
 /// gereedschap moet voorkomen.
 final _sourceFile = File('lib/services/reference_standards.dart');
 
-class _Standard {
+class Standard {
   final String id, name, version, probe, target;
+
+  /// Het pad binnen [target] waar de gebundelde inhoud vandaan komt, of leeg
+  /// voor een bron waar de hele repo het signaal is. Zie
+  /// `ReferenceStandard.probePath`.
+  final String path;
 
   /// Mag een nieuwere upstreamversie de poort laten falen? Zie
   /// `ReferenceStandard.advisory`: detectielexicons melden zich wél maar
   /// blokkeren niet, want die brengen maandelijks uit en een poort die altijd
   /// rood staat wordt uitgezet.
   final bool advisory;
-  _Standard(
+  Standard(
     this.id,
     this.name,
     this.version,
     this.probe,
     this.target, {
+    this.path = '',
     this.advisory = false,
   });
 }
 
-void main(List<String> args) async {
-  final advisory = args.contains('--advisory');
-  if (!_sourceFile.existsSync()) {
-    stderr.writeln(
-      'check_reference_data: ${_sourceFile.path} niet gevonden — '
-      'draai dit vanuit de repo-root.',
-    );
-    exit(2);
-  }
+/// Wat de poort van één ronde overhoudt: de tabel, de losse toelichtingen en de
+/// tellingen waar de afloopcode uit volgt.
+class GateOutcome {
+  GateOutcome({
+    required this.rows,
+    required this.notes,
+    required this.outdated,
+    required this.outdatedAdvisory,
+    required this.unreachable,
+    required this.total,
+  });
 
-  final standards = _parseStandards(_sourceFile.readAsStringSync());
-  if (standards.isEmpty) {
-    stderr.writeln('check_reference_data: geen standaarden gevonden.');
-    exit(2);
-  }
+  final List<List<String>> rows;
+  final List<String> notes;
+  final int outdated, outdatedAdvisory, unreachable, total;
 
+  /// De afloopcode: 2 = niet kunnen kijken, 1 = verouderd, 0 = in orde.
+  /// Adviserend meldt hetzelfde maar eindigt nooit op 1 — zie de kop.
+  int exitCode({required bool advisory}) {
+    if (total > 0 && unreachable == total) return 2;
+    if (outdated > 0 && !advisory) return 1;
+    return 0;
+  }
+}
+
+/// Hoe één standaard bij zijn bron wordt opgehaald. Injecteerbaar zodat de
+/// poort zelf te toetsen is: zonder deze naad kun je alleen vaststellen dat de
+/// poort *groen* is, en dat is precies de eigenschap die MIAUW jarenlang had
+/// terwijl hij structureel niet rood kón worden.
+typedef Prober = Future<ProbeResult> Function(Standard standard);
+
+/// Weegt elke standaard en telt de uitkomsten op. Bevat geen netwerk en geen
+/// exit(), zodat er in beide richtingen op te toetsen valt.
+Future<GateOutcome> evaluate(List<Standard> standards, Prober prober) async {
   final rows = <List<String>>[];
+  final notes = <String>[];
   var outdated = 0;
   // Adviserende bronnen tellen apart: ze worden gemeld maar laten de poort niet
   // vallen. Zie ReferenceStandard.advisory voor waarom een detectielexicon daar
@@ -103,10 +148,8 @@ void main(List<String> args) async {
   var outdatedAdvisory = 0;
   var unreachable = 0;
 
-  final notes = <String>[];
-
   for (final s in standards) {
-    final result = await _probe(s);
+    final result = await prober(s);
     if (result.latest == null) {
       unreachable++;
       rows.add([s.name, s.version, '?', 'onbekend (bron onbereikbaar)']);
@@ -130,61 +173,97 @@ void main(List<String> args) async {
     }
   }
 
-  _printTable(rows);
+  return GateOutcome(
+    rows: rows,
+    notes: notes,
+    outdated: outdated,
+    outdatedAdvisory: outdatedAdvisory,
+    unreachable: unreachable,
+    total: standards.length,
+  );
+}
 
-  for (final n in notes) {
+void main(List<String> args) async {
+  final advisory = args.contains('--advisory');
+  if (!_sourceFile.existsSync()) {
+    stderr.writeln(
+      'check_reference_data: ${_sourceFile.path} niet gevonden — '
+      'draai dit vanuit de repo-root.',
+    );
+    exit(2);
+  }
+
+  final standards = parseStandards(_sourceFile.readAsStringSync());
+  if (standards.isEmpty) {
+    stderr.writeln('check_reference_data: geen standaarden gevonden.');
+    exit(2);
+  }
+
+  final outcome = await evaluate(standards, probeUpstream);
+
+  _printTable(outcome.rows);
+
+  for (final n in outcome.notes) {
     stdout.writeln('\n$n');
   }
 
-  if (unreachable == standards.length) {
+  // Eén afloopcode, uit één plek: main mag hier geen tweede regel naast
+  // GateOutcome.exitCode zetten, want dan toetst de test iets anders dan er
+  // draait.
+  final code = outcome.exitCode(advisory: advisory);
+
+  if (outcome.unreachable == standards.length) {
     stderr.writeln(
       '\ncheck_reference_data: geen enkele bron bereikbaar — '
       'controle niet uitgevoerd (netwerk?).',
     );
     // Ook adviserend blijft dit een 2: "ik heb niet kunnen kijken" is iets
     // anders dan "er is niets nieuws", en dat verschil mag nooit verdwijnen.
-    exit(2);
+    exit(code);
   }
   // Adviserende bronnen melden zich altijd, in beide standen — alleen laten ze
   // de poort niet vallen.
-  if (outdatedAdvisory > 0) {
+  if (outcome.outdatedAdvisory > 0) {
     stdout.writeln(
-      '\n$outdatedAdvisory adviserende bron(nen) hebben een nieuwere uitgave.\n'
+      '\n${outcome.outdatedAdvisory} adviserende bron(nen) hebben een nieuwere '
+      'uitgave.\n'
       'Dat is geen defect: bij een detectielexicon vuurt elke term, dus een '
       'verversing vraagt om de termdiff lezen en de vals-positievencorpus '
       'opnieuw wegen. Doe dat bewust, niet reflexmatig.',
     );
   }
-  if (outdated > 0) {
+  if (outcome.outdated > 0) {
     final where =
         'Werk de catalogus bij, pas de versie aan in '
         '${_sourceFile.path} én docs/LICENSE_COMPLIANCE.md, en controleer of de '
         'licentie van de bron is gewijzigd.';
     if (advisory) {
       stdout.writeln(
-        '\ncheck_reference_data: $outdated standaard(en) hebben een nieuwere '
-        'upstreamversie.\n$where\n'
+        '\ncheck_reference_data: ${outcome.outdated} standaard(en) hebben een '
+        'nieuwere upstreamversie.\n$where\n'
         'Adviserend: dit breekt de build niet. Weeg zelf of deze release met de '
         'huidige bundel de deur uit mag.',
       );
-      exit(0);
+    } else {
+      stderr.writeln(
+        '\ncheck_reference_data: ${outcome.outdated} standaard(en) verouderd.'
+        '\n$where',
+      );
     }
-    stderr.writeln(
-      '\ncheck_reference_data: $outdated standaard(en) verouderd.\n$where',
-    );
-    exit(1);
+    exit(code);
   }
   stdout.writeln(
-    outdatedAdvisory > 0
+    outcome.outdatedAdvisory > 0
         ? '\nReference data OK (op de adviserende meldingen na).'
         : '\nReference data OK.',
   );
+  exit(code);
 }
 
 /// Trekt de standaarden uit de Dart-bron. Bewust regel-voor-regel en niet met
 /// één grote regexp over het hele bestand: zo is een gemiste standaard een
 /// zichtbaar gat in de tabel in plaats van een stille nul.
-List<_Standard> _parseStandards(String source) {
+List<Standard> parseStandards(String source) {
   final consts = <String, String>{};
   for (final m in RegExp(
     r"^const (\w+) = '([^']*)';",
@@ -193,7 +272,7 @@ List<_Standard> _parseStandards(String source) {
     consts[m.group(1)!] = m.group(2)!;
   }
 
-  final out = <_Standard>[];
+  final out = <Standard>[];
   for (final block in RegExp(
     r'ReferenceStandard\((.*?)\n  \),',
     dotAll: true,
@@ -208,12 +287,13 @@ List<_Standard> _parseStandards(String source) {
         : consts[versionRef] ?? _knownExternalConst(versionRef, source);
 
     out.add(
-      _Standard(
+      Standard(
         field('id'),
         field('name'),
         version,
         RegExp(r'probe: UpstreamProbe\.(\w+)').firstMatch(b)?.group(1) ?? '',
         field('probeTarget'),
+        path: field('probePath'),
         advisory: RegExp(r'advisory: true').hasMatch(b),
       ),
     );
@@ -244,18 +324,19 @@ String _knownExternalConst(String name, String _) {
 }
 
 /// Wat één probe oplevert.
-class _Result {
+class ProbeResult {
   final String? latest;
   final bool stale;
 
   /// Een bevinding die géén veroudering is maar wel fout — nu: een bundel die
-  /// niet zoveel items bevat als de bron zegt.
+  /// niet zoveel items bevat als de bron zegt, of een gebundelde bron die niet
+  /// meer op het opgegeven pad staat.
   final String integrityProblem;
 
   /// Vrije toelichting voor onder de tabel.
   final String note;
 
-  _Result(
+  ProbeResult(
     this.latest, {
     this.stale = false,
     this.integrityProblem = '',
@@ -263,38 +344,71 @@ class _Result {
   });
 }
 
-Future<_Result> _probe(_Standard s) async {
+/// Wijkt de gebundelde versie af van wat de bron nu zegt?
+///
+/// **Elke** afwijking telt, ook een upstreamwaarde die *ouder* lijkt. Dat is
+/// niet netjes-zijn maar de reparatie van een echte fout: de datumprobes
+/// vergeleken met `>`, en MIAUW droeg als "versie" de dag waarop wij het schema
+/// hadden overgenomen (2026-07-16) terwijl de bron 2024-12-06 meldde. Een
+/// overnamedatum ligt per definitie ná de bronwijziging, dus `latest > bundled`
+/// kon daar nooit waar worden: de poort stond structureel groen over een
+/// vergelijking van twee verschillende klokken. Met `!=` was dat op dag één
+/// rood geweest.
+///
+/// Dit is dezelfde regel als `StandardFreshness.isOutdated` in de app, en dat
+/// is geen toeval: dat de poort en het instellingenoverzicht hetzelfde
+/// antwoord geven hoort een eigenschap te zijn, geen toeval. Bij OWASP is
+/// "nieuwer" bovendien niet uit de getallen af te leiden — MASTG hernummerde bij
+/// de herbouw van 1.x naar 2.0.
+bool deviates(String bundled, String? latest) =>
+    latest != null && bundled.isNotEmpty && latest != bundled;
+
+/// De echte, netwerkgebonden probe. Zie [Prober] voor waarom dit een los
+/// aanwijsbare functie is en geen vaste tak in [evaluate].
+Future<ProbeResult> probeUpstream(Standard s) async {
   switch (s.probe) {
     case 'githubReleases':
       final latest = await _latestGithubRelease(s.target);
-      // Elke afwijking alarmeert: OWASP hernummerde MASTG van 1.x naar 2.0,
-      // dus groter-is-nieuwer gaat hier niet op.
-      return _Result(latest, stale: latest != null && latest != s.version);
+      return ProbeResult(latest, stale: deviates(s.version, latest));
     case 'githubCommitDate':
-      final latest = await _latestCommitDate(s.target);
-      return _Result(
-        latest,
-        stale: latest != null && latest.compareTo(s.version) > 0,
-      );
-    case 'githubReleaseDate':
-      final latest = await _latestGithubRelease(s.target, byDate: true);
-      return _Result(
-        latest,
-        stale: latest != null && latest.compareTo(s.version) > 0,
-      );
+      return _probeCommitDate(s);
     case 'orphanetDate':
       final latest = await _probeOrphanetDate(s.target);
-      return _Result(
-        latest,
-        stale: latest != null && latest.compareTo(s.version) > 0,
-      );
+      return ProbeResult(latest, stale: deviates(s.version, latest));
     case 'cweApi':
       return _probeCweApi(s);
     case 'successorDocument':
       return _probeSuccessor(s);
     default:
-      return _Result(null);
+      return ProbeResult(null);
   }
+}
+
+/// De laatste-commitdatum, eventueel versmald tot het bestand waar de gebundelde
+/// inhoud werkelijk uit komt ([Standard.path]).
+///
+/// Die versmalling is het punt: MIAUW's schema komt uit één werkboek in de
+/// methodologie-repo, en die repo krijgt ook commits die het schema niet raken.
+/// Een repobrede datum zou dan rood worden om een README-typefout, en een
+/// releasedatum zou groen blijven bij een werkboekwijziging zonder release.
+/// Beide leren mensen wegkijken.
+Future<ProbeResult> _probeCommitDate(Standard s) async {
+  final commits = await _commits(s.target, path: s.path);
+  if (commits == null) return ProbeResult(null);
+  if (commits.isEmpty) {
+    // De repo antwoordde wél, maar over dit pad bestaat geen historie: het
+    // bestand is hernoemd of verplaatst. Dat is geen "onbereikbaar" — dan zou
+    // het stil doorglippen — maar een bevinding met een naam.
+    return ProbeResult(
+      s.version,
+      integrityProblem:
+          '${s.name}: ${s.target} kent geen commits voor "${s.path}". Het '
+          'gebundelde bronbestand is hernoemd of verplaatst — zoek het nieuwe '
+          'pad op en werk probePath bij, anders bewaakt deze poort niets meer.',
+    );
+  }
+  final latest = _committerDate(commits.first);
+  return ProbeResult(latest, stale: deviates(s.version, latest));
 }
 
 /// De uitgavedatum uit de kop van een Orphanet-productbestand.
@@ -321,18 +435,27 @@ Future<String?> _probeOrphanetDate(String url) async {
   }
 }
 
-/// De datum van de laatste commit op de standaardbranch, als `JJJJ-MM-DD`.
-Future<String?> _latestCommitDate(String repo) async {
+/// De nieuwste commit(s) op de standaardbranch, eventueel alleen die welke
+/// [path] raken. Null wanneer de bron niet te bevragen was; een lege lijst is
+/// een antwoord — zie [_probeCommitDate].
+Future<List<dynamic>?> _commits(String repo, {String path = ''}) async {
   if (repo.isEmpty) return null;
+  final query = {'per_page': '1', if (path.isNotEmpty) 'path': path};
   final body = await _get(
-    Uri.parse('https://api.github.com/repos/$repo/commits?per_page=1'),
+    Uri.https('api.github.com', '/repos/$repo/commits', query),
   );
   if (body == null) return null;
   try {
-    final list = jsonDecode(body) as List;
-    if (list.isEmpty) return null;
-    final date = ((list.first as Map)['commit'] as Map)['committer'] as Map;
-    final at = date['date'];
+    return jsonDecode(body) as List;
+  } on Object {
+    return null;
+  }
+}
+
+/// De committerdatum van één commit uit de GitHub-API, als `JJJJ-MM-DD`.
+String? _committerDate(dynamic commit) {
+  try {
+    final at = ((commit as Map)['commit'] as Map)['committer']['date'];
     if (at is! String || at.length < 10) return null;
     return at.substring(0, 10);
   } on Object {
@@ -341,17 +464,17 @@ Future<String?> _latestCommitDate(String repo) async {
 }
 
 /// MITRE's CWE-API: versie, inhoudsdatum én het aantal zwakheden.
-Future<_Result> _probeCweApi(_Standard s) async {
+Future<ProbeResult> _probeCweApi(Standard s) async {
   final body = await _get(Uri.parse(s.target));
-  if (body == null) return _Result(null);
+  if (body == null) return ProbeResult(null);
   final Map<String, dynamic> json;
   try {
     json = jsonDecode(body) as Map<String, dynamic>;
   } on Object {
-    return _Result(null);
+    return ProbeResult(null);
   }
   final version = json['ContentVersion']?.toString();
-  if (version == null || version.isEmpty) return _Result(null);
+  if (version == null || version.isEmpty) return ProbeResult(null);
   final date = json['ContentDate']?.toString() ?? '';
 
   // Het aantal is een gratis integriteitscontrole: onze bundel hoort er even
@@ -367,7 +490,7 @@ Future<_Result> _probeCweApi(_Standard s) async {
         'tool/build_cwe_catalog.dart.';
   }
 
-  return _Result(
+  return ProbeResult(
     version,
     stale: version != s.version,
     integrityProblem: integrity,
@@ -398,15 +521,15 @@ int? _bundledCweCount() {
 /// Geeft geen versienummer terug maar wel het antwoord dat telt. Zolang geen
 /// enkele opvolger bestaat, is wat we bundelen de nieuwste — en dát is een
 /// bevestiging, geen stilte.
-Future<_Result> _probeSuccessor(_Standard s) async {
+Future<ProbeResult> _probeSuccessor(Standard s) async {
   final candidates = _successorVersions(s.version);
-  if (candidates.isEmpty) return _Result(null);
+  if (candidates.isEmpty) return ProbeResult(null);
   for (final candidate in candidates) {
     final url = Uri.parse(s.target.replaceAll('{version}', candidate));
     final exists = await _exists(url);
-    if (exists == null) return _Result(null); // bron onbereikbaar
+    if (exists == null) return ProbeResult(null); // bron onbereikbaar
     if (exists) {
-      return _Result(
+      return ProbeResult(
         candidate,
         stale: true,
         note:
@@ -415,7 +538,7 @@ Future<_Result> _probeSuccessor(_Standard s) async {
       );
     }
   }
-  return _Result(
+  return ProbeResult(
     s.version,
     note:
         '${s.name}: geen opvolger gevonden (geprobeerd: '
@@ -433,9 +556,8 @@ List<String> _successorVersions(String version) {
   return ['$major.${minor + 1}', '${major + 1}.0'];
 }
 
-/// De laatste release van een GitHub-repo: de tag (ontdaan van een `v`-prefix),
-/// of met [byDate] de publicatiedatum als `JJJJ-MM-DD`.
-Future<String?> _latestGithubRelease(String repo, {bool byDate = false}) async {
+/// De laatste release van een GitHub-repo: de tag, ontdaan van een `v`-prefix.
+Future<String?> _latestGithubRelease(String repo) async {
   if (repo.isEmpty) return null;
   final client = HttpClient()..connectionTimeout = const Duration(seconds: 15);
   try {
@@ -448,11 +570,6 @@ Future<String?> _latestGithubRelease(String repo, {bool byDate = false}) async {
     if (response.statusCode != 200) return null;
     final body = await response.transform(utf8.decoder).join();
     final json = jsonDecode(body) as Map<String, dynamic>;
-    if (byDate) {
-      final at = json['published_at'];
-      if (at is! String || at.length < 10) return null;
-      return at.substring(0, 10);
-    }
     final tag = json['tag_name'];
     if (tag is! String || tag.isEmpty) return null;
     return tag.startsWith('v') ? tag.substring(1) : tag;
