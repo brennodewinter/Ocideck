@@ -10,6 +10,16 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Changed
+- **Het tijdstempelverzoek draagt nu een nonce.** Vraagt u een RFC 3161-stempel
+  aan, dan zit er voortaan een willekeurig getal in het `.tsq`-bestand dat de
+  tijdstempeldienst in het token moet herhalen. Daarmee is aan te tonen dát het
+  token dat u terugkrijgt het antwoord op úw verzoek is, en niet een ouder token
+  voor dezelfde hash dat iemand opnieuw indient. Zonder dat getal was er niets
+  om die twee aan elkaar te knopen.
+
+  OciDeck kan die controle bij het inlezen niet zelf doen — het bestand bewaart
+  uw verzoek niet, dus na een herstart is de andere helft weg. Wie beide
+  bestanden heeft, kan het wél nakijken (`openssl ts -reply -in … -text`).
 - **Geen base64 meer in uw presentatiebestand.** De belofte van OciDeck is dat u
   met alleen een teksteditor en Marp verder kunt. Op zeven plekken klopte dat
   niet: daar stond een blok onleesbare tekens waar uw inhoud in verstopt zat.
