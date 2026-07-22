@@ -271,6 +271,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       privacyDecision: PrivacyExportPolicy(
         gate: settings.privacyExportGate,
       ).evaluate(ref.watch(privacyExportSummaryProvider)),
+      privacyChecksEnabled: settings.privacyChecksEnabled,
     );
     return (readiness: readiness, quality: quality);
   }
@@ -304,6 +305,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.',
       ),
       ExportReadinessStatus.ready => l10n.t('exportReady'),
+      ExportReadinessStatus.readyPrivacyUnchecked => l10n.d(
+        'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.',
+      ),
     };
     return (canExport: readiness.canOpenExport, exportTooltip: exportTooltip);
   }
@@ -793,6 +797,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       privacyPolicy: PrivacyExportPolicy(
         gate: ref.read(settingsProvider).privacyExportGate,
       ),
+      privacyChecksEnabled: ref.read(settingsProvider).privacyChecksEnabled,
       // Noteer een geslaagde export bij het recente bestand, zodat de
       // welkomstlijst "laatst geëxporteerd als …" kan tonen. Alleen zinvol
       // met een echt bestandspad (op web is een deck een download).

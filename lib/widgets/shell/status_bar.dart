@@ -242,6 +242,18 @@ class _ExportReadinessChip extends StatelessWidget {
         green,
         l10n.t('exportReady'),
       ),
+      // Bewust grijs en niet groen: groen is een uitspraak over wat er gevonden
+      // is, en er is niet gekeken. Ook bewust niet amber — de gebruiker heeft de
+      // controle zelf uitgezet, dus dit is geen alarm maar het intrekken van een
+      // belofte.
+      ExportReadinessStatus.readyPrivacyUnchecked => (
+        l10n.d('Klaar — privacy niet gecontroleerd'),
+        Icons.task_alt,
+        AppTheme.slate600,
+        l10n.d(
+          'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.',
+        ),
+      ),
       ExportReadinessStatus.qualityWarnings => (
         '$issueCount ${l10n.d('kwaliteitswaarschuwing(en)')}',
         Icons.warning_amber_outlined,
