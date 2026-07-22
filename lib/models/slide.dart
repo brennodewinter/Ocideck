@@ -49,10 +49,10 @@ enum SlideType {
 
 /// Broad grouping a [SlideType] belongs to, used by the add-slide picker to
 /// offer category tabs. The pentest-reporting layouts carry
-/// [SlideCategory.informatieveiligheid]; the picker derives its tab bar from the
+/// [SlideCategory.informationSecurity]; the picker derives its tab bar from the
 /// categories actually present, so a tab appears only once the module reveals
 /// its types.
-enum SlideCategory { algemeen, informatieveiligheid }
+enum SlideCategory { general, informationSecurity }
 
 /// Hoeveel kolommen *doorlopende* bullettekst een [SlideType] toont — de vorm
 /// die zich over pagina's laat verdelen.
@@ -148,7 +148,7 @@ class SlideTypeMeta {
   final bool isHeading;
 
   /// Which picker category this type belongs to. Drives the add-slide dialog's
-  /// category tabs; defaults to [SlideCategory.algemeen] so existing types need
+  /// category tabs; defaults to [SlideCategory.general] so existing types need
   /// no per-entry change.
   final SlideCategory category;
 
@@ -178,7 +178,7 @@ class SlideTypeMeta {
     required this.marpClass,
     this.splitWithImage = false,
     this.isHeading = false,
-    this.category = SlideCategory.algemeen,
+    this.category = SlideCategory.general,
     this.bulletColumns = BulletColumns.none,
     this.backedByTable = false,
   });
@@ -233,48 +233,48 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     marpClass: 'scorecard',
     backedByTable: true,
   ),
-  // Informatieveiligheid-module — categorie [SlideCategory.informatieveiligheid],
+  // Informatieveiligheid-module — categorie [SlideCategory.informationSecurity],
   // waardoor de kiezer automatisch een tabblad toont (P0-PICK). marpClass-tokens
   // volgen PENTEST_MIAUW §4.
   SlideType.assets: SlideTypeMeta(
     label: 'Aanvalsoppervlak',
     marpClass: 'assets',
-    category: SlideCategory.informatieveiligheid,
+    category: SlideCategory.informationSecurity,
     backedByTable: true,
   ),
   SlideType.discoveries: SlideTypeMeta(
     label: 'Ontdekkingen',
     marpClass: 'discoveries',
-    category: SlideCategory.informatieveiligheid,
+    category: SlideCategory.informationSecurity,
     backedByTable: true,
   ),
   SlideType.finding: SlideTypeMeta(
     label: 'Bevinding',
     marpClass: 'finding',
-    category: SlideCategory.informatieveiligheid,
+    category: SlideCategory.informationSecurity,
   ),
   SlideType.findingsSummary: SlideTypeMeta(
     label: 'Bevindingenoverzicht',
     marpClass: 'findings-summary',
-    category: SlideCategory.informatieveiligheid,
+    category: SlideCategory.informationSecurity,
     backedByTable: true,
   ),
   SlideType.checklist: SlideTypeMeta(
     label: 'Uitvoering testen conform standaard',
     marpClass: 'checklist',
-    category: SlideCategory.informatieveiligheid,
+    category: SlideCategory.informationSecurity,
     backedByTable: true,
   ),
   SlideType.scopeMatrix: SlideTypeMeta(
     label: 'Scope-matrix',
     marpClass: 'scope-matrix',
-    category: SlideCategory.informatieveiligheid,
+    category: SlideCategory.informationSecurity,
     backedByTable: true,
   ),
   SlideType.signOff: SlideTypeMeta(
     label: 'Ondertekening',
     marpClass: 'sign-off',
-    category: SlideCategory.informatieveiligheid,
+    category: SlideCategory.informationSecurity,
   ),
 };
 
@@ -324,7 +324,7 @@ extension SlideTypeExtension on SlideType {
   /// van bij naam: een nieuw tabelgedragen module-type is dan meteen goed
   /// ingedeeld, in plaats van stil als scaffold-Markdown te worden gelezen.
   bool get usesScaffoldMarkdownBody =>
-      category == SlideCategory.informatieveiligheid &&
+      category == SlideCategory.informationSecurity &&
       !backedByTable &&
       this != SlideType.signOff;
 }

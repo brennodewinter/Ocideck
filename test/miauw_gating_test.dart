@@ -16,7 +16,7 @@ void main() {
   });
 
   test('every info-security slide type carries the gated category', () {
-    // The add-slide picker hides SlideCategory.informatieveiligheid types when
+    // The add-slide picker hides SlideCategory.informationSecurity types when
     // the module is off, so each security type must declare that category.
     const securityTypes = {
       // Aanvalsoppervlak hoort hier: het is MIAUW-materiaal, geen algemeen
@@ -34,13 +34,13 @@ void main() {
     for (final type in securityTypes) {
       expect(
         slideTypeMeta[type]!.category,
-        SlideCategory.informatieveiligheid,
+        SlideCategory.informationSecurity,
         reason: '$type must be gated behind the security module',
       );
     }
     // And no other type is in that category (so nothing else is hidden).
     final gated = slideTypeMeta.entries
-        .where((e) => e.value.category == SlideCategory.informatieveiligheid)
+        .where((e) => e.value.category == SlideCategory.informationSecurity)
         .map((e) => e.key)
         .toSet();
     expect(gated, securityTypes);

@@ -65,14 +65,14 @@ void main() {
   testWidgets('hides the security types and tab bar until the module is on', (
     tester,
   ) async {
-    // Module off (the default): only SlideCategory.algemeen types are offered,
+    // Module off (the default): only SlideCategory.general types are offered,
     // so no tab bar is drawn and no Informatieveiligheid type is reachable.
     await openDialog(tester)();
     expect(find.byType(ChoiceChip), findsNothing);
     expect(
       visibleTypes(
         tester,
-      ).any((t) => t.category == SlideCategory.informatieveiligheid),
+      ).any((t) => t.category == SlideCategory.informationSecurity),
       isFalse,
     );
   });
@@ -87,7 +87,7 @@ void main() {
     expect(
       visibleTypes(
         tester,
-      ).any((t) => t.category == SlideCategory.informatieveiligheid),
+      ).any((t) => t.category == SlideCategory.informationSecurity),
       isFalse,
     );
     // The Informatieveiligheid tab shows exactly the module's types.
