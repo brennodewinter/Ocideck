@@ -642,10 +642,13 @@ void main() {
     });
 
     test('forSlide returns only matching slide issues', () {
+      // Dia 0 draagt een titel, en dat is sinds #583 het verschil: een dia
+      // zonder énige inhoud meldt zichzelf nu, en dan toetst deze test niet
+      // meer of `forSlide` op index filtert maar of de lege-dia-regel bestaat.
       final deck = Deck(
         title: 'Demo',
         slides: [
-          Slide.create(SlideType.bullets),
+          Slide.create(SlideType.bullets).copyWith(title: 'Kop'),
           Slide.create(SlideType.image).copyWith(imagePath: 'media/foto.jpg'),
         ],
       );
