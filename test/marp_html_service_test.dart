@@ -851,6 +851,19 @@ void _reportingTests() {
     expect(MarpHtmlService.renderReportingSlide(md), md);
   });
 
+  test('een opsomming met aankruisvakjes is geen checklist-dia', () {
+    // De aankruislijst is een LIJSTSTIJL op een bullets-dia; het MIAUW-type
+    // `checklist` is iets anders. Zou de export op het woord "checklist" gaan,
+    // dan verdween hier de opsomming.
+    final slide = Slide.create(SlideType.bullets).copyWith(
+      title: 'Voorbereiding',
+      listStyle: ListStyle.checklist,
+      bullets: const ['[x] Scope afgestemd', '[ ] Testaccounts ontvangen'],
+    );
+    final md = _reportingSlideMarkdown(slide);
+    expect(MarpHtmlService.renderReportingSlide(md), md);
+  });
+
   test('een tabeldia blijft een tabel', () {
     final slide = Slide.create(SlideType.table).copyWith(
       title: 'Planning',
