@@ -63,6 +63,35 @@ jobs:
       - name: Dead code (make check-dead-code)
         run: make check-dead-code
 
+      # Geheimen en SAST. Ze stonden alleen in `check-full`, dus zelfs de
+      # *gedeclareerde* pijplijn draaide ze niet — en met vier configuratie-
+      # bestanden in de wortel (.gitleaks.toml, .trufflehogignore,
+      # semgrep/ocideck.yaml, zap/baseline.conf) leek het alsof ze erin zaten.
+      # Op de dag dat er een runner komt, doen ze dat nu wel.
+      #
+      # Ze installeren hun eigen gereedschap: het zijn externe binaries, en dat
+      # is precies de reden dat ze niet in `make check` zitten — die poort mag
+      # niets aannemen wat niet in de repo staat.
+      # Bewust géén marketplace-actions: die zouden gepind moeten worden en de
+      # stapnaam zou liegen — `make check-secrets` draait gitleaks én
+      # trufflehog. Dit installeert dezelfde binaries en roept dezelfde
+      # make-doelen aan als lokaal, zodat CI en de werkbank niet uit elkaar
+      # kunnen lopen.
+      - name: Gereedschap voor de scanners
+        run: |
+          set -euo pipefail
+          curl -sSfL https://raw.githubusercontent.com/gitleaks/gitleaks/master/scripts/install.sh \
+            | sh -s -- -b /usr/local/bin
+          curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh \
+            | sh -s -- -b /usr/local/bin
+          python3 -m pip install --quiet semgrep
+
+      - name: Geheimenscan (make check-secrets)
+        run: make check-secrets
+
+      - name: SAST (make sast)
+        run: make sast
+
       # De beeldcontrole draait op OpenCV via FFI, en die bibliotheek ontstaat
       # pas bij een platformbuild — zonder deze stap slaan de detectietests
       # zichzelf over en bewaken ze niets. De Makefile vindt de `.so` daarna
