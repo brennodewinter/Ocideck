@@ -42,22 +42,29 @@ disagree.
 
 ## Latest result
 
-All **182** resolved Dart/Flutter packages use recognised open-source licences:
+Run on **2026-07-22** (`dart run tool/check_licenses.dart`). All **187** resolved
+Dart/Flutter packages use recognised open-source licences:
 
 | Count | Licence |
 | ---: | --- |
 | 123 | BSD-3-Clause |
-| 46 | MIT |
-| 10 | Apache-2.0 |
+| 47 | MIT |
+| 13 | Apache-2.0 |
 | 1 | MPL-2.0 (`dbus`, Linux only) |
 | 1 | BSD |
 | 1 | BSL-1.0 |
 | 1 | EUPL-1.2 (OciDeck itself) |
 
-Counting the whole SBOM (197 components — packages plus the vendored JS bundles,
-bundled fonts, plugin forks and SDKs) adds 5 × OFL-1.1 (the bundled fonts) and
-1 × `Apache-2.0 OR MPL-2.0` (DOMPurify), and lifts BSD-3-Clause to 127, MIT to 50
-and Apache-2.0 to 11.
+Counting the whole SBOM (**199** components — packages plus the vendored JS
+bundles, bundled fonts, plugin forks and SDKs) adds 5 × OFL-1.1 (the bundled
+fonts) and 1 × `Apache-2.0 OR MPL-2.0` (DOMPurify, which the generated
+`sbom/ocideck.sbom.md` tallies under Apache-2.0), and lifts BSD-3-Clause to 127
+and MIT to 50.
+
+*(Corrected 2026-07-22: this section said 182 packages and 197 components with
+no date on either, so a reader could not tell that the dependency graph had
+moved on. Both numbers are re-counted above and dated; re-run the command and
+`make sbom-verify` when dependencies change, and move the date with them.)*
 
 Bundled assets: marked (MIT), highlight.js (BSD-3-Clause), Mermaid (MIT, bundling
 DOMPurify under Apache-2.0/MPL-2.0), MathJax (Apache-2.0), and the EB Garamond
