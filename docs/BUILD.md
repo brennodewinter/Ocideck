@@ -77,15 +77,24 @@ host must send these as HTTP **response headers** for the app's HTML:
 ```
 Content-Security-Policy: frame-ancestors 'none'
 X-Frame-Options: DENY
+Strict-Transport-Security: max-age=63072000; includeSubDomains
 ```
+
+`Strict-Transport-Security` has no `<meta>` equivalent at all — a browser only
+honours it as a response header — so without the host sending it, the first
+plaintext request stays available to whoever is on the path. `Referrer-Policy`
+is the exception in this list: the bundle already ships it as a meta tag.
 
 (When embedding the bundle inside Nextcloud, replace `'none'` with the host
 origin instead of dropping the header.) Ideally serve the **entire** CSP as a
 response header rather than relying on the meta tag. Example snippets:
 
-- **nginx**: `add_header Content-Security-Policy "frame-ancestors 'none'" always; add_header X-Frame-Options "DENY" always;`
-- **Caddy**: `header Content-Security-Policy "frame-ancestors 'none'"` and `header X-Frame-Options "DENY"`
-- **Apache**: `Header always set X-Frame-Options "DENY"` and `Header always set Content-Security-Policy "frame-ancestors 'none'"`
+- **nginx**: `add_header Content-Security-Policy "frame-ancestors 'none'" always; add_header X-Frame-Options "DENY" always; add_header Strict-Transport-Security "max-age=63072000; includeSubDomains" always;`
+- **Caddy**: `header Content-Security-Policy "frame-ancestors 'none'"`, `header X-Frame-Options "DENY"` and `header Strict-Transport-Security "max-age=63072000; includeSubDomains"`
+- **Apache**: `Header always set X-Frame-Options "DENY"`, `Header always set Content-Security-Policy "frame-ancestors 'none'"` and `Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"`
+
+See [`HOSTING.md`](HOSTING.md) §3 for what `preload` would additionally commit
+you to, and why it is not the default recommendation.
 
 > A plain `flutter build web` still works, but it falls back to the gstatic CDN
 > and an `unsafe-*` loader — use `make build-web` so the hardening stays pinned.
