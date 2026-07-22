@@ -2,13 +2,37 @@
 
 > **Status:** current-state index of `lib/` · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
 
-A one-line index of the Dart files under `lib/`, grouped by directory. It aims at
-the files worth naming; large uniform families (the 31 per-language translation
-files, the 32 per-language finding-template tables, the `settings_dialog_*` parts)
-are described as a group rather than file by file. It
+A one-line index of the Dart **libraries** under `lib/`, grouped by directory. It
 complements [`ARCHITECTURE.md`](ARCHITECTURE.md) (the *why* and the cross-cutting
 flows) with a *what-is-this-file* lookup. For the on-disk file format see
 [`FILE_FORMAT.md`](FILE_FORMAT.md).
+
+## What this map covers
+
+The claim used to be "a line per file under `lib/`", and 156 files did not have
+one. A map that is silently partial is worse than one that says what it covers,
+so the claim is now narrower — and enforced. `test/source_map_coverage_test.dart`
+holds these four rules against the tree on every `make check`:
+
+1. **Every Dart library under `lib/` has a line here.** A library is a file that
+   is not a `part of` another one.
+2. **A `part` file inherits its library's line.** A `part` may have a line of its
+   own — many do, because they carry a subject worth naming — but it is not
+   promised. Where the split matters, the parent's line names its parts.
+3. **A conditional-import half is covered by its façade.** `x_io.dart`,
+   `x_web.dart`, `x_stub.dart`, `x_factory.dart` and `x_api.dart` need no line as
+   long as `x.dart` (or `x_api.dart`) has one — they are the platform halves of a
+   single subject, and describing them apart from the selector would say the same
+   thing three times.
+4. **A declared group is described as a group.** A group is written as a glob in
+   its own line (`lib/l10n/translations/*.dart`,
+   `lib/services/finding_templates/*.dart`) and must still match real files, so a
+   group cannot outlive the family it stands for.
+
+The test also refuses a line pointing at a file that no longer exists, and a file
+with two lines — both of which the tree had accumulated: twenty-four files were
+listed twice or three times, each with a different description, because parallel
+branches enriched the same line and the merge kept both copies.
 
 > Keep this in sync when you add, remove, or repurpose a file. The directory
 > structure mirrors the layers in `ARCHITECTURE.md` § Module layout.
@@ -50,7 +74,6 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `scorecard_spec.dart` — `ScorecardSpec`/`ScorecardEntry` for the scorecard slide: a figure plus the figure it replaces, with the delta, direction and sentiment all derived. Polarity is stored because the deck cannot know whether a rise is good news.
 - `privacy_disposition.dart` — `PrivacyDisposition` (warn/accept/shield/redact) and the slide-overrides-deck resolution.
 - `quality_disposition.dart` — `QualityDisposition` (warn/accept): the same idea for quality findings, per slide only. Two values and not four — a contrast problem has no recipient to warn and nothing to black out.
-- `privacy/image_face_scan.dart` — de beeldcontrole: staat er een herkenbaar gezicht op een dia-afbeelding? Alléén tellen, nooit identificeren — de kop van dat bestand legt uit waarom dat het verschil is tussen een privacycontrole en een biometrische verwerking (EDPB 3/2019 §74-76). `image_face_scan_io.dart` is de native helft (YuNet via OpenCV, multischaal), `image_face_scan_stub.dart` de webhelft die eerlijk meldt dat ze niets kan.
 - `redaction_manifest.dart` — `RedactionEntry`/`RedactionManifest`: what an export removed, provably, without the values. Holds the two file suffixes (`-redactions.json`, `-redaction-keys.json`) and the two `notice` lines that go inside them. Both are English while the rest of the export naming is Dutch, and both say the same thing twice on purpose: the separation between the two files *is* the security, so it has to be readable without knowing Dutch, and a filename does not survive being renamed or zipped whereas the first line of the JSON does. `withoutSalts` produces the copy that may travel.
 - `privacy_finding.dart` — `PrivacyFinding`/`PrivacyScanResult`: what the privacy scanner found. Never stores the raw value — only a masked sample. `PrivacyTermRole` splits an *indicator* ("diagnose") from the *value* itself (`F32.1`): redacting the first hides nothing and misleads the reader, so only the second is blacked out unless the escalator widened the span to the whole statement.
 - `used_tool.dart` — `UsedTool` + `toolsAppendixRows`: de hulpmiddelen die bij het onderzoek zijn gebruikt (MIAUW EIS 4.8.2 — beschrijving, versie, publieke referentie), met een tolerante `naam@versie | url | beschrijving`-vorm omdat het veld met de hand wordt getypt. Levert de bijlagetabel in eisvolgorde; de kopteksten komen van de aanroeper zodat ze in de taal van het *rapport* staan.
@@ -66,6 +89,15 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `storage_connection.dart` — `StorageConnection` (sealed: `LocalConnection`/`WebdavConnection`/`S3Connection`/`GitConnection`) — the single notion of "a place decks live". One list, user-ordered, replacing the old split between a libraries list and one-of-each network source. Each carries a stable `id` so renaming a connection or fixing a typo in its URL never detaches an open deck from its origin; secrets stay in the keychain, keyed on server + user, so two connections to one account share one password.
 - `s3_settings.dart` — `S3Bucket` for S3 source configuration: endpoint, region, bucket, access key id, prefix and addressing style. The endpoint is a free field rather than a list of AWS regions because the self-hosted (MinIO) and European providers are the interesting case; `S3AddressingStyle` decides whether the bucket goes in the host name (AWS) or the path (most self-hosted endpoints). `uriForKey` encodes the path with the strict AWS rules instead of leaving it to `Uri` — S3 compares our signature against a canonical form derived from the path it received, so what goes over the wire must match what was signed byte for byte.
 - `webdav_settings.dart` — `WebdavServer`/`WebdavOrigin` (the origin carries the `etag` a save is checked against, plus the `connectionId` that sends a save back to the connection it came from) for WebDAV source configuration (Nextcloud, ownCloud, or any other server).
+- `git_settings.dart` — `GitProvider`/`GitRepoConfig`/`GitRepoLayout`/`GitOrigin`: one git repository as a deck source. Deliberately mirrors `webdav_settings.dart` — the git backend *is* the WebDAV source with version control on top, so the same shape, the same SSRF opt-in, and the same split between configuration and secret (the token lives in the keychain, keyed on `baseUrl` + `owner`).
+- `library_folder.dart` — `LibraryFolder`: one storage location in the user's library, a free name plus a path on disk. The name lets the user tell two folders apart without reading the whole path; it doubles as the starting point for open/save and as the search root for the presentation and image libraries.
+- `recent_file.dart` — `RecentFile`: one entry in the recent-presentations list — the path plus the metadata that makes it findable again (when it was opened, how many slides, which TLP level, what it was last exported as). The metadata is refreshed on open and export; the file itself stays the source of the content.
+- `ai_settings.dart` — `AiSettings` + `AiBackendMode`: the optional AI assistance, and deliberately no API key (that sits in the keychain, keyed on `baseUrl`). Three tiers in ascending egress impact, everything off by default — nothing leaves this device until the user picks a backend *and* starts an action.
+- `deck_template.dart` — `DeckTemplate` + the `deckTemplates` catalogue: a starting-point recipe for a new presentation (title page plus example slides to overwrite). Pure data with no IO. The builder bodies live in `deck_template_*.dart` parts, grouped by theme, so no one file outgrows the line ratchet as the catalogue grows.
+- `cve_hit.dart` — `CveHit`: one CVE returned by an *online* lookup (id, short description, CVSS score/severity). Only the id is attached to a finding — the finding's own CVSS 4.0 vector is never overwritten by a v3.x score from a CVE — the rest is there so the tester can confirm he picked the right one.
+- `local_cve_record.dart` — `LocalCveRecord`: one CVE as it sits in the *local* index, deliberately not the whole upstream record. The source (CVE List V5) is several gigabytes; keeping only the handful of fields the finding editor shows turns searching into a file scan instead of a database problem.
+- `local_cve_status.dart` — `LocalCveStats` (which release is on disk, how many records, how big), `CveIngestPhase`/`CveIngestProgress` for the build, and `CveIngestException`/`CveIngestFailure` for a build that could not finish.
+- `privacy_lexicon.dart` — `PrivacyLexiconEntry` + `PrivacyTermMatch`/`PrivacyLexiconRole`/`PrivacyLexiconSource`: one lexicon keyword with everything the scanner must know about it. The match mode used to be *derived* from term length (four characters as the cut-off), which held up surprisingly far and then failed on the exceptions the file header lists; it is now declared per term.
 
 ## `lib/services/` — business logic & IO
 
@@ -115,7 +147,7 @@ list below, which made "where does this belong" slower than it needed to be.)*
 - `wstg_catalog_data.dart` — de gegenereerde WSTG-index (97 tests), `part` van `wstg_catalog.dart`. Komt uit `tool/build_wstg_catalog.dart`.
 - `wstg_catalog.dart` — The bundled offline OWASP WSTG v4.2 test catalog (`WstgCatalog`, 97 tests + pinned version) used to one-click-fill a `checklist` slide.
 - `finding_template_library.dart` — `FindingTemplateLibrary`: the bundled finding templates, resolved **per report language** (`Deck.language`, not the interface language — PENTEST_MIAUW §12.3), with a per-template fallback to English.
-- `finding_templates/<code>.dart` (+ `all.dart`) — the template sources, one file per language like `lib/l10n/translations/`: a template is content, not a `d(...)` string. Only the prose is translated; the `## …` anchors, `cwe:`, `severity:` and the CVSS tokens are fixed. Guard: `test/finding_template_languages_test.dart`.
+- `lib/services/finding_templates/*.dart` — **A declared group** (see *What this map covers*): the template sources, one file per language like `lib/l10n/translations/`, plus the `all.dart` barrel. A template is content, not a `d(...)` string. Only the prose is translated; the `## …` anchors, `cwe:`, `severity:` and the CVSS tokens are fixed. Guard: `test/finding_template_languages_test.dart`.
 - `info_safety/info_safety_reference_inventory.dart` — `InfoSafetyReferenceInventory` + `ReferenceCatalog`: counts what reference data is *actually* available locally (CWE, WSTG, MIAUW, the CVSS table, finding templates) for the Uitbreidingen tab, so "data available locally" is a number rather than a claim.
 - `checklist_templates.dart` — `ChecklistSource` + helpers that present WSTG and each user `ChecklistTemplate` uniformly to the checklist editor and the per-scope generator (feedback #9).
 - `description_service.dart` — Stores searchable image descriptions as JSON sidecars.
@@ -215,6 +247,12 @@ list below, which made "where does this belong" slower than it needed to be.)*
 - `presentation_search/remote_presentation_source.dart` — The same for WebDAV and S3: walks the directory tree and reads both loose `.md` files and `.ocideck` packages, again through `FileService.openDeckFromContent`.
 - `presentation_search/remote_file_client.dart` — `RemoteFileClient`/`RemoteFileEntry`: a listing detached from the WebDAV- and S3-specific types, so the tree-walking exists once instead of once per protocol.
 - `presentation_search/storage_file_clients.dart` — The two adapters that put that interface on top of `WebdavService` and `S3Service`.
+- `privacy/image_face_scan.dart` — de beeldcontrole: staat er een herkenbaar gezicht op een dia-afbeelding? Alléén tellen, nooit identificeren — de kop van dat bestand legt uit waarom dat het verschil is tussen een privacycontrole en een biometrische verwerking (EDPB 3/2019 §74-76). `image_face_scan_io.dart` is de native helft (YuNet via OpenCV, multischaal), `image_face_scan_stub.dart` de webhelft die eerlijk meldt dat ze niets kan.
+- `documentation_service.dart` — Loads the bundled Markdown documentation for the in-app reader. Locale-aware and forward-looking: for language `xx` it prefers `docs/NAME.xx.md` and otherwise falls back to `docs/NAME.md`, so a translated document can be added later without touching a single call site. A leading HTML/SPDX comment header (as `LICENSE.md` carries) is stripped so it does not show up as literal text.
+- `duplicate_service.dart` — `DuplicateService`/`DuplicateInfo`: enriches an open-list entry with what else is on disk under that name — byte-identical copies (the same presentation in another place) and name-mates with *different* content. The two are kept apart on purpose: a name-mate is confusing but not a duplicate, and merging one away would destroy work.
+- `slide_dedup_service.dart` — `SlideDedupService` + `SlideGroup`/`SlideFieldDiff`: finds slides that recur across decks and says per field where two copies differ. Flutter- and l10n-free (`SlideField` is an enum the widget layer labels), so the comparison is testable without a widget tree.
+- `trash_service.dart` — Moves presentation files to the OS trash — never a hard delete, in line with the app's fail-safe line. macOS `~/.Trash`, Linux the XDG trash (`Trash/files` + `.trashinfo`); on Windows and web there is no safe equivalent without platform code, so `isSupported` is false there and the UI hides the clean-up action.
+- `package_asset_resolver.dart` — `attachPackageAssetsToMem`: puts an `.ocideck` package's image members in the `WebAssetStore` and rewrites the slide paths that point at them to their `mem:` path. Only members that pass the image validation join, and a reference escaping the package root with `../` is not followed. Shared by opening a package in a tab and by searching packages on a remote source, so both apply the same containment and validation.
 
 ### `lib/services/git/` — Git-repository storage (design: `docs/design/GIT_STORAGE.md`)
 
@@ -275,6 +313,9 @@ deliberately manual).
 - `tabs_provider_package.dart` — `_TabsPackageAssets` extension: the unpack path of an `.ocideck` opened in memory (web, or an import without a project folder). Images go to the `WebAssetStore` and slide paths are rewritten to `mem:`; chart data is inlined into the spec (it is text belonging in the spec, and on web there is no project folder for a separate file to sit in); the sidecars are re-attached as layers. All three refuse a reference that points outside the package root with `../`.
 - `tabs_provider.dart` — `TabInfo` and the tabs notifier: open editor tabs, recovery, WebDAV origin. Also hosts the one-shot open-time signals the shell listens on, including `securityModulePromptProvider` — set once per open when a deck carries Informatieveiligheid slide types, driving the "enable the module" discovery banner. The signal carries only the tab id; which slide the banner points at is read from the live deck on every click, because slides can be deleted or moved while it is up. The shell takes the banner away as soon as its claim stops holding — another tab in view, the deck closed, or the last security slide deleted. The autosave tick writes the ink layer into the snapshot alongside the user notes, and `restoreRecovered` decodes it back; an unreadable ink payload is logged and skipped rather than allowed to block the recovery of the text. `chartDataWarningProvider` is the same one-shot shape, now carrying a `whileSaving` flag: reading and writing need different words, because a failed read leaves a chart empty while a failed write leaves the numbers nowhere but the open window.
 - `webdav_provider.dart` — Providers for `WebdavService`, connection lookup and directory listings, all keyed on connection id. The listing key carries the connection too: two servers with the same folder name were otherwise served each other's contents from cache.
+- `s3_provider.dart` — The S3 counterparts: `s3ServiceProvider` (bucket config + secret access key from the keychain, `null` when the connection is gone, half-filled or keyless), `s3ConnectionsProvider`/`primaryS3ConnectionProvider` and `s3ListingProvider`. Keyed on connection id for the same reason as WebDAV — a corrected typo in the endpoint must not detach an open deck from its source.
+- `presentation_sources.dart` — Builds a `PresentationSource` per configured remote connection (git, WebDAV, S3) — the sources *Slide zoeken* sweeps beside the local libraries. The clients (with their keychain secret) are prepared here; the network traffic itself only happens in the finder, on the user's search.
+- `provider_retry.dart` — `noAutoRetry`: the retry policy for providers whose failure is *shown* to the user. Riverpod 3 retries a throwing provider by itself, endlessly, and a retrying provider reads as `AsyncLoading` — so every screen with a careful `when(error: …)` explanation sat spinning forever instead. For these sources retrying is pointless anyway (configuration, sign-in, a blocked host), so retry belongs on a button the user presses.
 
 ## `lib/utils/` — small shared helpers
 
@@ -313,6 +354,8 @@ deliberately manual).
 - `title_contrast.dart` — Evaluates title contrast and recommends WCAG fixes.
 - `url_launcher_util.dart` — Opens external links with scheme and SSRF validation.
 - `zip_encryption.dart` — Detects whether a `.ocideck` zip is password-encrypted (header inspection, no password needed).
+- `display_path.dart` — `displayFolder`: the readable *whereabouts* of a file for open-lists, not the whole path — the filename is already the title above it. A full path is unusable in a narrow list: the shared prefix eats the space and the ellipsis swallows exactly the distinguishing end. Shows the full path in a tooltip and the short form here.
+- `error_snackbar.dart` — `showErrorSnackBar`: an error the user can **copy**. The SnackBar carries a copy action putting the exact text on the clipboard, so a failure can be forwarded without retyping it, and it lingers a little longer than a normal notification so there is time to read it. Takes the `ScaffoldMessengerState` the caller already holds, so it is safe after an async gap.
 
 ## `lib/platform/` — platform abstraction (conditional imports)
 
@@ -333,6 +376,9 @@ deliberately manual).
 ## `lib/theme/`
 
 - `app_theme.dart` — Material 3 theme builder with brand colours and appearance profiles. Also home to `AppTheme.parseHexColor`, the single hex→`Color` reader for everything that renders a stored theme colour (previews, presenter, dialogs): it accepts `#RRGGBB`, `RRGGBB` or `AARRGGBB` and falls back rather than failing. Four private copies of that logic had accumulated elsewhere before this became one function.
+- `finding_severity_palette.dart` — `FindingSeverityPalette`: severity → colour tokens for finding cards and CVSS badges, following the FIRST rating bands (PENTEST_MIAUW §11). With a `ThemeProfile` the bands come from its severity tokens (so the built-in security profile or a tuned deck restyles findings); without one, the deterministic `const` `AppTheme` tokens. Every token resolves through `AppTheme.parseHexColor` with the `const` default as fallback, so a finding renders identically on screen and in a headless export isolate.
+- `image_picker_palette.dart` — `ImagePickerPalette`: the deliberately dark chrome of the image picker (coverflow/grid). A palette of its own rather than `AppTheme` tokens, because this is a self-contained dark surface and not part of the light app theme; the raw-`Color(0x…)` conventions ratchet exempts this file for that reason.
+- `presenter_palette.dart` — `PresenterPalette`: the same idea for full-screen presentation mode (presenter view, overlays, ink).
 
 ## `lib/l10n/` — localization
 
@@ -342,12 +388,7 @@ deliberately manual).
 
 ### `lib/l10n/translations/` (each `part of app_localizations.dart`)
 
-One file per language, 32 in total. `nl.dart` is the source language; the other 31
-carry the translations and are kept in step by `make add-l10n` / `make l10n-check`:
-`en` (English), `de`, `fr`, `es`, `it`, `pt`, `pl`, `uk`, `el`, `da`, `sv`, `fi`,
-`cs`, `sk`, `sl`, `hr`, `hu`, `ro`, `bg`, `et`, `lv`, `lt`, `ga`, `mt`, `tr`, `id`,
-`fy` (Frisian), `pap` (Papiamento), `gsw` (Swiss German), `la` (Latin) and
-`tlh` (Klingon).
+- `lib/l10n/translations/*.dart` — **A declared group** (see *What this map covers*). One file per language, 32 in total. `nl.dart` is the source language; the other 31 carry the translations and are kept in step by `make add-l10n` / `make l10n-check`: `en` (English), `de`, `fr`, `es`, `it`, `pt`, `pl`, `uk`, `el`, `da`, `sv`, `fi`, `cs`, `sk`, `sl`, `hr`, `hu`, `ro`, `bg`, `et`, `lv`, `lt`, `ga`, `mt`, `tr`, `id`, `fy` (Frisian), `pap` (Papiamento), `gsw` (Swiss German), `la` (Latin) and `tlh` (Klingon). No line each: they carry the same 2,150 keys and differ only in the language, so a per-file line would say the same thing 32 times.
 
 ## `lib/widgets/` — UI
 
@@ -357,6 +398,10 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `asset_origin_badge.dart` — `AssetOriginBadge`: makes visible what happens to a slide's media once the presentation is passed on. Says what the origin *means* rather than where the file sits, with the consequence and the way out in the tooltip. Deliberately confined to the editor — the rendered slide is also what the audience and the export see, and a work instruction does not belong there.
 - `privacy_badge.dart` — `PrivacyBadge`, the bare `PrivacyKatMark`, and the `privacyKatSvg` mark: the non-blocking marker (with an explanation on hover) for a spot where personal data is pointed at or something leaves the device. Used by the status bar's remote-origin badge, the export-readiness chip's privacy warnings, and the Security tab's online-CVE switch.
 - `privacy_statement_content.dart` — Privacy/license content shared by the consent and settings dialogs.
+- `language_flag.dart` — `languageFlag`/`languageOptionRow`: the small flag beside a language in the pickers. Most languages get a platform flag emoji; Frisian a bundled image of the Frisian flag (a regional flag, not a protected mark); Klingon a neutral letter badge with its ISO 639-3 code — the Klingon trefoil is someone else's emblem, and reproducing it as artwork in every distributed binary is not nominative use.
+- `duplicate_badges.dart` — The shared badges and `formatModifiedDate` for the duplicate lists: which copy is the newest, and which entries are name-mates rather than duplicates.
+- `document_signature_view.dart` — `DocumentSignatureView` plus the decoder for an embedded `data:…;base64,…` signature image. The decoded bytes are memoised per URI so every caller gets the *same* `Uint8List`: `cappedMemoryImage` then compares equal across the export precache and the preview, which is what lets a drawn signature paint on the very first frame the rasteriser captures.
+- `signature_draw_dialog.dart` — `SignatureDrawDialog`: a freehand signature pad (mouse, trackpad, touch or stylus) rasterised to a transparent PNG and returned as the same embedded `data:` URI `DocumentSignature.imagePath` already expects — so a drawn signature round-trips in the deck and is covered by the seal like the rest of the attestation. Cancelling returns null, so the caller keeps the typed signature.
 
 ### `lib/widgets/shell/` (`part of app_shell.dart`, except the two noted below)
 
@@ -382,6 +427,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `slide_list_panel_bars.dart` — The bars above the list (`part of slide_list_panel.dart`): `_SkipBanner` (how many slides are skipped, with *Alles tonen* to clear the marks), `_WithheldBanner` (how many are held back by their TLP) and `_BulkActionBar` for a multi-selection. Two separate banners on purpose: withholding is not a per-slide choice the author made and cannot be cleared by a button, so the withheld bar carries no action — raising the deck's level belongs with the TLP chip, not with a tidy-up in a sidebar.
 - `slide_list_panel.dart` — Searchable, reorderable thumbnail list with import/paste/add controls.
 - `slide_quality_panel.dart` — Slide accessibility/quality checks with issue filtering.
+- `slide_quality_actions.dart` — `SlideQualityAction`: the concrete *do it* button beside a quality finding ("split this slide", "raise the contrast", "add alt text"), so the assistant does not only point at a problem but offers the fix.
 
 ### `lib/widgets/dialogs/`
 
@@ -467,6 +513,14 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `storage_connection_picker.dart` — Asks which file connection an action works with, for WebDAV, S3 and git alike. Shows nothing at all when there is exactly one usable connection of that kind, so the single-server case keeps the flow it always had; the question only appears once it is a real question. Deck-bound actions never reach it — they follow the origin (see `AppSettings.gitConnectionFor`).
 - `s3_browser_dialog.dart` — Browses an S3 bucket to pick a deck or images, on the connection it is given rather than one it looks up itself. S3 has no folders; the common prefixes a delimited listing returns arrive as `S3Entry.isCollection`, so this screen needs to know nothing about prefixes.
 - `webdav_browser_dialog.dart` — Browses WebDAV folders to pick a deck or images, on the connection it is given rather than one it looks up itself.
+- `git_browser_dialog.dart` — Picks a deck from a configured git repository and hands back the deck folder (`decks/<name>`). The fetching and opening stay with the caller, so the security gate and the error wording live in one place, exactly as with `webdav_browser_dialog.dart`. Takes the connection it is given: the user already chose, and that choice may not quietly become another one here.
+- `save_destination_dialog.dart` — `SaveDestinationDialog`/`SaveDestinationChoice`: pick a library (or another folder) for a new presentation and see exactly where the deck, images and media will land *before* the system save panel opens. Returns the chosen folder as that panel's starting directory; `null` means cancelled, which is not the same as "start somewhere default".
+- `finalize_seal_dialog.dart` — "Afronden & verzegelen": explains the one-way finalise plus the SHA-512 seal, and collects the optional visual signature (typed or drawn). Returns a `FinalizeSealResult`; cancelling returns null.
+- `certificate_trust_dialog.dart` — Asks whether the user trusts *this* certificate, and shows what he can base that on. The case is a self-hosted server without a recognised issuer: refusing shuts that whole population out, accepting anything self-signed throws the security away — so it is this one certificate, recognised by its fingerprint, printed in full so it can be compared with what the server itself shows.
+- `proxy_fallback_dialog.dart` — Asks whether a web import may send the whole URL to the app's own fetch helper. That helper fetches server-side and thereby holds the full URL — a different party than the one the user pointed at, and the URL itself can be the secret (a share link carries its key in the address). The fallback used to run automatically and silently; now whoever does not answer sends nothing.
+- `ai_image_outbound_dialog.dart` — The confirmation before an image goes to an AI model. Text is redacted by `PrivacyProjection.forExternalProcessing` first; an image cannot be — the projection replaces characters and a JPEG has none, and the face detection demonstrably misses (from behind, in profile, masked, in HEIC). What is left is not stricter redaction but honesty: saying *what* leaves and *where to*, before it leaves. `docs/design/OCIWACHT.md` §6.1 calls this channel "no projection" and names this dialog as the safeguard standing in its place.
+- `duplicate_cleanup_dialog.dart` — `DuplicateCleanupDialog`/`CleanupGroup`: one set of byte-identical copies of the same presentation, with the removal going through `TrashService` rather than a hard delete.
+- `slide_diff_dialog.dart` — `SlideDiffRef` + the dialog that puts two versions of a slide side by side: each side rendered, with its project base path and its deck's theme, above a per-field list of what differs.
 
 ### `lib/widgets/editors/` — per-slide-type editors
 
@@ -504,6 +558,10 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `two_bullets_editor.dart` — Edits a two-column bullet slide (per-column titles).
 - `two_images_editor.dart` — Edits a two-image slide.
 - `video_slide_editor.dart` — Edits a video slide (source, trim points, audio).
+- `slide_editor_registry.dart` — `SlideEditorContext` + `slideEditorBuilders`: the `SlideType` → editor map, so `editor_panel.dart` routes through one table instead of a growing `switch`. A new slide type is registered here (see `docs/design/`'s slide-type chain).
+- `advanced_section.dart` — `AdvancedSection`: the collapsible block for advanced options (progressive disclosure) — basics stay visible, the rarely-needed sits behind one quiet header. Deliberately a lightweight widget of its own instead of `ExpansionTile`, whose dividers and Material margins are out of place in the compact editors. Starts expanded when the option already has a non-default value, because hiding it then is the confusing choice.
+- `animation_duration_control.dart` — The per-slide activation-duration slider shared by the animated editors (cockpit, chart). While the slide inherits the theme's duration the read-out is muted and the reset button disabled; dragging starts a per-slide override.
+- `split_continuation_switch.dart` — `SplitContinuationSwitch`: makes `Slide.continuesSplit` visible and adjustable. That flag arose as a by-product of *Split slide* and could afterwards only be found in the Markdown — while it decides how large the text is drawn, since pages of one run share the fullest page's size. The subtitle names that consequence on purpose: the label sounds like an administrative tick box, and coupling your font size to the neighbour's is the reason you would switch it off.
 
 ### `lib/widgets/markdown_editor/` — notes editor
 
@@ -569,3 +627,9 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `presenter_playback.dart` — Auto-advance and media playback.
 - `presenter_questions.dart` — Question-slide logic: drawing a round per kind, judging the answer, the timer, and feeding `RehearsalController.startQuestion`/`finishQuestion`. `_answerInput` is derived from the current view rather than kept as its own flag, and is what tells `presenter_keys.dart` that the keyboard belongs to the answer field. Three rules are enforced here: a round that is not `answerable` gets no countdown and never blocks; an open-text question keeps its `expectedAnswer` out of the `QuestionView` until the reveal, because that object is the render state and whatever is in it gets painted (not a confidentiality measure — `buildBeamerMarkdown` sends the whole deck, `correct` flags included); and an image pair draws one correct and one wrong answer per round rather than taking the first two, so a pool longer than the editor's two slots stays presentable.
 - `presenter_table.dart` — Live table editing during presentation.
+
+### `lib/widgets/reader/` — the in-app documentation reader
+
+- `document_reader_screen.dart` — `DocumentReaderScreen`: a full-screen, accessible reader for one bundled Markdown document. Content fills the height and most of the width — tables and code blocks span the full measure, prose stays at a readable line length — and a text-size control in the app bar is remembered separately from the app-wide interface scale. Pushed on the root navigator, so it sits above dialogs and can be opened from the consent gate and the settings screen alike.
+- `document_markdown_view.dart` — `DocumentMarkdownView`: renders a whole Markdown document as widgets (headings, paragraphs, bullet and numbered lists, GFM task lists, block quotes, fenced code, rules, pipe tables), reusing the slide renderer's `InlineMarkdownText` for inline formatting. A pragmatic reader, not a CommonMark engine: it covers what the bundled documentation uses, and anything it does not recognise falls back to a paragraph so unknown syntax shows as readable text rather than disappearing.
+- `documentation_search_tab.dart` — `DocEntry` and the search across the bundled documents for Settings → Documentation. The `assetBase` string literals deliberately live where the entries are built (`settings_dialog_docs.dart`) so `docs_registration_test` keeps finding them.
