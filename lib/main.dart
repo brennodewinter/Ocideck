@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app.dart';
 import 'platform/launch_files.dart';
 import 'platform/native_window.dart';
+import 'services/bundled_licenses.dart';
 import 'services/privacy/privacy_bulk_lexicon.dart';
 import 'services/asset_staging.dart';
 import 'utils/log.dart';
@@ -22,6 +23,12 @@ void main(List<String> args) {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
     _installErrorHandlers();
+
+    // De fonts, het gezichtsmodel en de gebundelde JavaScript zijn geen
+    // Dart-pakketten, dus Flutter's eigen NOTICES-asset kent ze niet. Ze hier
+    // aanmelden zorgt dat de licentiepagina ze wél toont — OFL-1.1 §2 laat een
+    // lettertype alleen meereizen mét zijn licentie.
+    BundledLicenses.register();
 
     if (!kIsWeb && args.isNotEmpty && args.first == 'multi_window') {
       final raw = args.length >= 3 ? args[2] : '';

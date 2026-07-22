@@ -167,10 +167,20 @@ wholly inside a browser tab. Areas of particular interest:
 `assets/web_export/MANIFEST.json`; it is part of `make check-full`, which the
 committer runs before a dependency or web-facing change (the CI workflow that
 also declares it does not currently run — the remote is Forgejo with no runner).
-As of the last review all
-pins (marked 18.0.5, highlight.js 11.11.1, DOMPurify 3.4.11, mermaid 10.9.6,
-MathJax 3.2.2) carry **no known advisories**. Two tracked (non-urgent)
-maintenance items:
+As of 2026-07-22 one pin carries an advisory (DOMPurify 3.4.11, below); the
+others (marked 18.0.5, highlight.js 11.11.1, mermaid 10.9.6, MathJax 3.2.2)
+carry none. Three tracked (non-urgent) maintenance items:
+
+- **DOMPurify 3.4.11 → 3.4.12** — `GHSA-c2j3-45gr-mqc4`: an element allowed via
+  `CUSTOM_ELEMENT_HANDLING.tagNameCheck` skips `afterSanitizeElements`, so an
+  application relying on that hook as a policy layer keeps attributes on custom
+  elements it strips everywhere else. **Both preconditions are absent here**:
+  the export calls `DOMPurify.sanitize()` with defaults (and the SVG profile for
+  mermaid output), sets no `CUSTOM_ELEMENT_HANDLING`, and registers no hook at
+  all — `addHook` appears nowhere in `lib/`. The advisory is a second-order
+  gadget in code paths OciDeck does not execute, CVSS v4 vector `AV:N/AC:H/UI:A`
+  with no confidentiality or integrity impact on the vulnerable component.
+  Upgrade with the next bundle refresh; not a release blocker.
 
 - **mermaid 10.9.6 → 11.x** is a planned major upgrade, deferred until its
   rendering can be validated (real offscreen WebView), as it fixes no known
@@ -194,11 +204,15 @@ gate in the test suite (`make check`).
 Two boundaries, because both were overstated here before (*corrected
 2026-07-21*):
 
-- **SHA-256 covers most components, not all.** Of the 199 components listed, 190
-  carry a hash. The nine that do not are the two vendored plugin forks under
-  `third_party/` (`desktop_multi_window`, `screen_retriever_macos`), the
-  packages that ship inside the Flutter SDK rather than from pub, and the SDKs
-  themselves — none of which has a pub archive hash to record.
+- **SHA-256 covers most components, not all.** Of the 199 components listed, 192
+  carry a hash. The seven that do not are the packages that ship inside the
+  Flutter SDK rather than from pub (`flutter`, `flutter_localizations`,
+  `flutter_test`, `flutter_web_plugins`, `sky_engine`) and the two build SDKs
+  themselves — none of which has a pub archive hash to record. The two vendored
+  plugin forks under `third_party/` used to be in this list; since 2026-07-22
+  they carry a **tree hash** (SHA-256 over the sorted per-file digests of the
+  vendored directory) plus the upstream commit they were branched from, so what
+  we ship is verifiable even though a path dependency has no archive.
 - **It travels with the web build only.** `make build-web` copies `sbom/` into
   `build/web/sbom/`, so a hosted instance serves it from its own origin. The
   desktop build recipes do not bundle it; there, the SBOM lives in the

@@ -1797,6 +1797,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Licenties van derden': 'Licențe ale terților',
+  'Alle licentieteksten tonen': 'Afișează toate textele licențelor',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck în sine este licențiat sub EUPL-1.2. În plus, include software terț: pachetele Dart și Flutter, două module incluse, patru familii de fonturi, modelul facial pentru verificarea confidențialității și JavaScript-ul care călătorește odată cu un export HTML. Fiecare își păstrează propria licență.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Acest fișier conține software terț și uneori un font. Mai jos se află textele complete ale licențelor aferente; transmite-le împreună cu fișierul.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

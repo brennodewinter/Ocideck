@@ -1815,6 +1815,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Licenties van derden': 'Ceadúnais tríú páirtí',
+  'Alle licentieteksten tonen': 'Taispeáin gach téacs ceadúnais',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Tá OciDeck féin faoi cheadúnas EUPL-1.2. Ina theannta sin cuachann sé bogearraí tríú páirtí: na pacáistí Dart agus Flutter, dhá bhreiseán atá san áireamh, ceithre theaghlach cló, an tsamhail aghaidhe don seiceáil príobháideachais agus an JavaScript a thaistealaíonn le heaspórtáil HTML. Coinníonn gach ceann acu a cheadúnas féin.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Tá bogearraí tríú páirtí sa chomhad seo, agus cló uaireanta. Tá téacsanna iomlána na gceadúnas a bhaineann leo thíos; seol ar aghaidh iad nuair a chuireann tú an comhad seo ar aghaidh.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Ceart go leor',

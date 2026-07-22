@@ -1778,6 +1778,12 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Licenties van derden': 'Tredjepartslicenser',
+  'Alle licentieteksten tonen': 'Vis alle licenstekster',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck selv er udgivet under EUPL-1.2. Derudover samler det tredjepartssoftware: Dart- og Flutter-pakkerne, to medfølgende plugins, fire skriftfamilier, ansigtsmodellen til privatlivskontrollen og den JavaScript, der følger med en HTML-eksport. Hver af dem beholder sin egen licens.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Denne fil indeholder tredjepartssoftware og undertiden en skrifttype. Nedenfor står de fulde licenstekster, der hører til; send dem med, når du videregiver filen.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',
