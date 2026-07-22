@@ -1776,6 +1776,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Dokumen ini hanya tersedia dalam bahasa Inggris.',
   'Alleen een titelpagina.': 'Hanya halaman judul.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Slide ini kosong: tidak menampilkan apa pun di layar maupun dalam ekspor.',

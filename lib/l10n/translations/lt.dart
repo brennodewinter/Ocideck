@@ -1783,6 +1783,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Šis dokumentas yra tik anglų kalba.',
   'Alleen een titelpagina.': 'Tik titulinis puslapis.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ši skaidrė tuščia: ji nieko nerodo nei ekrane, nei eksporte.',

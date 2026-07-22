@@ -1780,6 +1780,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Ez a dokumentum csak angolul érhető el.',
   'Alleen een titelpagina.': 'Csak egy címoldal.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ez a dia üres: sem a képernyőn, sem az exportban nem jelenít meg semmit.',

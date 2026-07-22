@@ -1783,6 +1783,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Tento dokument existuje iba v angličtine.',
   'Alleen een titelpagina.': 'Iba titulná strana.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Táto snímka je prázdna: nezobrazuje nič na obrazovke ani v exporte.',

@@ -1751,6 +1751,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'DIvI\' Hol neH lo\' ghItlhvam.',
   'Alleen een titelpagina.': 'pong nav neH.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       '\'anghom vam chIm: jIHDaq ngeHDaq je vay\' \'angbe\'lu\'.',

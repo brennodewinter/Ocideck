@@ -1778,6 +1778,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Ta dokument obstaja samo v angleščini.',
   'Alleen een titelpagina.': 'Samo naslovna stran.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ta diapozitiv je prazen: na zaslonu in v izvozu ne prikaže ničesar.',

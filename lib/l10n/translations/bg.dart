@@ -1798,6 +1798,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Този документ съществува само на английски.',
   'Alleen een titelpagina.': 'Само заглавна страница.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Този слайд е празен: не показва нищо на екрана, нито в експорта.',

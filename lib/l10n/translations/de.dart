@@ -734,6 +734,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Dit document bestaat alleen in het Engels.':
+      'Dieses Dokument liegt nur auf Englisch vor.',
   'Alleen een titelpagina.': 'Nur eine Titelseite.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Diese Folie ist leer: Sie zeigt weder auf dem Bildschirm noch im Export etwas.',

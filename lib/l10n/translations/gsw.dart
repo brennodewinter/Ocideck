@@ -1779,6 +1779,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Das Dokumänt git\'s nume uf Änglisch.',
   'Alleen een titelpagina.': 'Nur e Titelsiite.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Die Slide isch läär: si zeigt nüt uf em Bildschirm und nüt im Export.',

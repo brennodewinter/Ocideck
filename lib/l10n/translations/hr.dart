@@ -1782,6 +1782,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Ovaj dokument postoji samo na engleskom.',
   'Alleen een titelpagina.': 'Samo naslovna stranica.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ovaj slajd je prazan: ne prikazuje ništa na zaslonu ni u izvozu.',

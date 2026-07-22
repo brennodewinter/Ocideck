@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/documentation_service.dart';
 import '../../state/settings_provider.dart';
+import '../../theme/app_theme.dart';
 import '../../utils/url_launcher_util.dart';
 import 'document_markdown_view.dart';
 
@@ -101,13 +102,14 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
             ),
         ],
       ),
-      body: FutureBuilder<String>(
-        future: widget.service.load(widget.assetBase, languageCode),
+      body: FutureBuilder<({String text, bool isBaseVersion})>(
+        future: widget.service.loadDetailed(widget.assetBase, languageCode),
         builder: (context, snap) {
           if (snap.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (snap.hasError || !snap.hasData) {
+          final loaded = snap.data;
+          if (snap.hasError || loaded == null) {
             return Center(
               child: Padding(
                 padding: const EdgeInsets.all(24),
@@ -115,7 +117,16 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
               ),
             );
           }
-          return _body(context, snap.data!, scale);
+          // De titel van dit document staat in 32 talen, de inhoud in één. Dat
+          // verschil hoort de lezer te horen vóór hij begint te lezen, niet
+          // halverwege te ontdekken (#626).
+          final showNotice = loaded.isBaseVersion && languageCode != 'nl';
+          return Column(
+            children: [
+              if (showNotice) _languageNotice(context, l10n),
+              Expanded(child: _body(context, loaded.text, scale)),
+            ],
+          );
         },
       ),
     );
@@ -149,6 +160,32 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
         onPressed: canGrow ? () => nudge(step) : null,
       ),
     ];
+  }
+
+  /// Eén regel boven een document dat alleen in de basisversie bestaat.
+  ///
+  /// Bewust een melding en geen waarschuwing: er is niets misgegaan, er is
+  /// alleen iets er nog niet. De kleinste eerlijke oplossing voor #626 — 19.382
+  /// regels vertalen is dat niet, maar zwijgen ook niet, want de app wekt de
+  /// verwachting zélf met een vertaalde titel.
+  Widget _languageNotice(BuildContext context, AppLocalizations l10n) {
+    return Container(
+      width: double.infinity,
+      color: AppTheme.infoBg,
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+      child: Row(
+        children: [
+          Icon(Icons.translate, size: 16, color: AppTheme.slate600),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              l10n.d('Dit document bestaat alleen in het Engels.'),
+              style: TextStyle(fontSize: 12, color: AppTheme.slate700),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _body(BuildContext context, String markdown, double scale) {

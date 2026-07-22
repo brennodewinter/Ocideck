@@ -1803,6 +1803,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Αυτό το έγγραφο υπάρχει μόνο στα αγγλικά.',
   'Alleen een titelpagina.': 'Μόνο μια σελίδα τίτλου.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Αυτή η διαφάνεια είναι κενή: δεν εμφανίζει τίποτα στην οθόνη ούτε στην εξαγωγή.',
