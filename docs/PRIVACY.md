@@ -242,12 +242,20 @@ requests about it go to the address in [SECURITY.md](../SECURITY.md); for
 everything else in OciDeck there is no controller because there is no
 processing (see *Your rights and this tool*).
 
-**What this document cannot tell you.** Which fields that server records, for
-how long it keeps them, and whether it keeps them at all are **not documented
-here, because this repository cannot establish them.** They are properties of a
-deployment, not of the code, and inventing a retention period would be worse
-than the gap. The foundation needs to publish that separately; until it does,
-this section is the honest limit of what the source can prove.
+**What the operator states.** Which fields that server records, and for how
+long, are properties of a deployment and not of the code, so this repository
+cannot *prove* them. What it can do is record what the operator has said.
+Stichting LibreKAT, as the operator, states two things (2026-07-23): it judges
+the privacy impact of a CVE lookup to be **minor**, and it keeps what the
+service receives **only for as long as it is needed to run the service** — the
+storage-limitation principle of art. 5(1)(e), not a fixed schedule and not
+indefinitely. There is no separate published retention table beyond that
+statement; if a formal one is issued later it belongs on the foundation's site,
+not in this repository. Two things do not depend on the operator, and this
+document *can* prove them: the search term travels in the URL (logged by default
+unless suppressed), and the foundation is the controller for the request. Treat
+a term you send as disclosed, decide accordingly, and if the "minor" judgement
+is not yours to make for a given engagement, use one of the routes below.
 
 **How to avoid it entirely**, in increasing order of effort:
 
@@ -532,10 +540,12 @@ One thing does not fit this division, and it should not be smoothed over: the
 **CVE lookup**. Its first stop is a mirror the publisher runs itself
 (`cveapi.librekat.nl`), so a search term you send there is a search term the
 publisher receives — and for that one path Stichting LibreKAT is not your
-processor but a controller in its own right, for the request it receives. What
-that mirror records, and for how long, has not been published. Until it is,
-treat a search term you send there as disclosed, and assume nothing about how
-long it is kept.
+processor but a controller in its own right, for the request it receives. The
+operator keeps what that server receives only for as long as it needs to run the
+service (art. 5(1)(e); no fixed schedule is published), and judges the privacy
+impact minor — see [The one server the publisher runs](#the-one-server-the-publisher-runs)
+for the full statement. Either way, treat a search term you send there as
+disclosed.
 
 Two limits on the mitigations, because the setting reads more reassuring than it
 is. **Emptying the mirror field does not point the lookup at nothing** — it
