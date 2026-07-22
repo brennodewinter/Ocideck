@@ -16,6 +16,7 @@ import '../models/used_tool.dart';
 import '../models/timeline.dart';
 import '../models/video_source.dart';
 import 'front_matter_merge.dart';
+import 'markdown_table_codec.dart';
 import 'miauw_codec.dart';
 import '../utils/content_hash.dart';
 import '../utils/deck_markdown_dashes.dart';
@@ -33,11 +34,10 @@ part 'markdown_service_serialize.dart';
 
 const _uuid = Uuid();
 
-// Hoisted regexes (zie markdown_service_parse.dart voor het patroon):
-// _reUnescapedPipe draait per tabelrij, de YAML-checks per frontmatter-veld.
+// Hoisted regexes (zie markdown_service_parse.dart voor het patroon): de
+// YAML-checks draaien per frontmatter-veld.
 final _reYamlSpecial = RegExp(r'[:#"\n]');
 final _reYamlLeadingSigil = RegExp(r'''^[\[\]{}>|*&!%@`,?-]''');
-final _reUnescapedPipe = RegExp(r'(?<!\\)\|');
 
 class MarkdownService {
   // ── Generation ──────────────────────────────────────────────────────────────
@@ -293,17 +293,8 @@ class MarkdownService {
     final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
     if (colCount == 0) return;
 
-    String cell(List<String> row, int c) {
-      final v = c < row.length ? row[c] : '';
-      return v
-          .replaceAll('\\', r'\\')
-          .replaceAll('|', r'\|')
-          // Escape an author-typed literal "<br>" before encoding real newlines
-          // as "<br>", so the two are distinguishable on parse (otherwise a
-          // literal "<br>" silently became a line break every load).
-          .replaceAll('<br>', r'\<br>')
-          .replaceAll('\n', '<br>');
-    }
+    String cell(List<String> row, int c) =>
+        encodeMarkdownTableCell(c < row.length ? row[c] : '');
 
     String renderRow(List<String> row) =>
         '| ${List.generate(colCount, (c) => cell(row, c)).join(' | ')} |';
@@ -313,40 +304,6 @@ class MarkdownService {
     for (var i = 1; i < rows.length; i++) {
       buf.writeln(renderRow(rows[i]));
     }
-  }
-
-  List<String> _splitTableRow(String line) {
-    var s = line.trim();
-    if (s.startsWith('|')) s = s.substring(1);
-    if (s.endsWith('|')) s = s.substring(0, s.length - 1);
-    return s
-        .split(_reUnescapedPipe)
-        .map((c) => _unescapeCell(c.trim()))
-        .toList();
-  }
-
-  String _unescapeCell(String s) {
-    final out = StringBuffer();
-    for (var i = 0; i < s.length; i++) {
-      if (s[i] == r'\'[0] && i + 1 < s.length) {
-        final n = s[i + 1];
-        // `\|`, `\\` and `\<` unescape to the literal char; a `\<` keeps a
-        // following `br>` as literal text rather than an author newline.
-        if (n == '|' || n == r'\'[0] || n == '<') {
-          out.write(n);
-          i++;
-          continue;
-        }
-      }
-      // An unescaped `<br>` is an author-inserted line break.
-      if (s.startsWith('<br>', i)) {
-        out.write('\n');
-        i += 3; // skip 'br>'; the loop's i++ steps past the '<'
-        continue;
-      }
-      out.write(s[i]);
-    }
-    return out.toString();
   }
 
   /// De per-slide classificaties: TLP (welke slides achtergehouden worden bij

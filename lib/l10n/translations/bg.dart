@@ -1800,6 +1800,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Video niet ingesloten': 'Видеото не е вградено',
+  'Afbeelding niet ingesloten': 'Изображението не е вградено',
+  'Dit diagram kon niet worden getekend':
+      'Тази диаграма не можа да бъде начертана',
+  'Brontekst van het diagram': 'Изходен текст на диаграмата',
   'Jouw antwoord': 'Вашият отговор',
   'nodig': 'нужно',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

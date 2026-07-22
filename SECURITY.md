@@ -167,6 +167,10 @@ wholly inside a browser tab. Areas of particular interest:
 `assets/web_export/MANIFEST.json`; it is part of `make check-full`, which the
 committer runs before a dependency or web-facing change (the CI workflow that
 also declares it does not currently run — the remote is Forgejo with no runner).
+As of the last review all
+pins (marked 18.0.5, highlight.js 11.11.1, DOMPurify 3.4.12, mermaid 11.16.0,
+MathJax 3.2.2) carry **no known advisories**. One tracked (non-urgent)
+maintenance item:
 As of 2026-07-22 one pin carries an advisory (DOMPurify 3.4.11, below); the
 others (marked 18.0.5, highlight.js 11.11.1, mermaid 10.9.6, MathJax 3.2.2)
 carry none. Three tracked (non-urgent) maintenance items:
@@ -182,15 +186,14 @@ carry none. Three tracked (non-urgent) maintenance items:
   with no confidentiality or integrity impact on the vulnerable component.
   Upgrade with the next bundle refresh; not a release blocker.
 
-- **mermaid 10.9.6 → 11.x** is a planned major upgrade, deferred until its
-  rendering can be validated (real offscreen WebView), as it fixes no known
-  advisory. Note mermaid bundles its **own** DOMPurify (3.4.2) internally,
-  independent of the pinned 3.4.11; a DOMPurify advisory is only caught via the
-  `mermaid@version` OSV query. This is mitigated in depth: mermaid runs with
-  `securityLevel: 'strict'` and `htmlLabels: false`, its SVG output is run
-  through `sanitizeMermaidSvg` and then the pinned DOMPurify (SVG profile).
 - **MathJax 3.2.2** — the only report against it is a disputed ReDoS
   (CVE-2023-39663), impact bounded to DoS on crafted TeX; upgrade tracked.
+
+Note that mermaid bundles its **own** DOMPurify internally, independent of the
+pinned one; a DOMPurify advisory is therefore only caught via the
+`mermaid@version` OSV query. This is mitigated in depth: mermaid runs with
+`securityLevel: 'strict'` and `htmlLabels: false`, its SVG output is run through
+`sanitizeMermaidSvg` and then the pinned DOMPurify (SVG profile).
 
 ### Software Bill of Materials
 

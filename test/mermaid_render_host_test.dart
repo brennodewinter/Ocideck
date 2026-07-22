@@ -145,8 +145,14 @@ void main() {
 
     // Mermaid ís JavaScript; zonder dit rendert er niets.
     expect(controller.mode, JavaScriptMode.unrestricted);
-    // Wit, niet doorzichtig: de SVG wordt van deze pagina geplukt.
-    expect(controller.background, Colors.white);
+    // En er wordt géén achtergrondkleur gezet. Dat is geen omissie maar de
+    // reparatie: `setBackgroundColor` gooit op macOS
+    // `UnimplementedError: opaque is not implemented`, en omdat hij in dezelfde
+    // cascade stond werd alles erna overgeslagen — de controller werd nooit
+    // toegekend, `attachController` draaide nooit, en elk diagram bleef eeuwig
+    // laden. Deze WebView staat offstage en levert SVG-tekst, dus er is geen
+    // kijker voor wie die kleur iets deed.
+    expect(controller.background, isNull);
 
     // Hij hangt in de boom maar mag niet te zien of te raken zijn. Zoeken
     // binnen de host: MaterialApp brengt zijn eigen Offstage/IgnorePointer mee.

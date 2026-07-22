@@ -7,21 +7,45 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../l10n/app_localizations.dart';
+import '../models/asset_overview_spec.dart';
 import '../models/chart.dart';
+import '../models/checklist_spec.dart';
 import '../models/cockpit.dart';
+import '../models/discoveries_spec.dart';
+import '../models/findings_summary_spec.dart';
 import '../models/question.dart';
 import '../models/deck.dart';
+import '../models/scope_matrix_spec.dart';
+import '../models/scorecard_spec.dart';
 import '../models/settings.dart';
 import '../models/timeline.dart';
 import '../utils/log.dart';
 import '../models/document_signature.dart';
 import 'bundled_licenses.dart';
+import 'cvss/cvss4.dart';
 import 'export_metadata.dart';
+import 'markdown_table_codec.dart';
 
 part 'parts/marp_html_service_cockpit.dart';
 part 'parts/marp_html_service_charts.dart';
 part 'parts/marp_html_service_charts_radial.dart';
 part 'parts/marp_html_service_charts_bullet.dart';
+part 'parts/marp_html_service_reporting.dart';
+part 'parts/marp_html_service_reporting_miauw.dart';
+part 'parts/marp_html_service_css.dart';
+part 'parts/marp_html_service_render_script.dart';
+part 'parts/marp_html_service_images.dart';
+part 'parts/marp_html_service_markup.dart';
+
+/// Maakt van een afbeeldingsverwijzing uit een deck een `data:`-URI, of geeft
+/// null wanneer de afbeelding niet in te sluiten is (niet gevonden, buiten de
+/// projectmap, of niet te decoderen).
+///
+/// Geïnjecteerd in plaats van hier uitgevoerd: het lezen van een bestand en het
+/// hercoderen van beeld horen niet in een service die ook op web moet draaien,
+/// en de projectbegrenzing die een deck ervan weerhoudt willekeurige bestanden
+/// mee te exporteren, hoort bij de laag die het bestandssysteem kent.
+typedef HtmlImageResolver = Future<String?> Function(String source);
 
 /// The third-party notices for one HTML export: a licence banner per inlined
 /// script (keyed by npm package name) and the collapsible block that carries the
@@ -92,12 +116,17 @@ class MarpHtmlService {
 
   /// Builds the HTML. When [theme] is given, the slides take that profile's
   /// colours and font so the export matches the in-app / PDF look.
+  ///
+  /// [embedImage] maakt van een afbeeldingsverwijzing een `data:`-URI. Zonder
+  /// deze functie blijven de paden staan zoals ze in de markdown stonden, en
+  /// dan is de uitvoer géén self-contained document — zie [_embedImages].
   Future<String> build(
     String deckMarkdown, {
     ThemeProfile? theme,
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     ExportDocumentMetadata? metadata,
     String fallbackTitle = 'Presentatie',
+    HtmlImageResolver? embedImage,
   }) async {
     // De zes bundel-assets en de themed CSS zijn onafhankelijk; sequentieel
     // wachten stapelde hun laadtijden op.
@@ -116,7 +145,7 @@ class MarpHtmlService {
       loadAsset('$_assetDir/highlight.css'),
       loadAsset('$_assetDir/tex-svg.js'),
       loadAsset('$_assetDir/mermaid.min.js'),
-      theme == null ? Future.value(_baseCss) : _themedCss(theme),
+      theme == null ? Future.value(_defaultThemeCss) : _themedCss(theme),
     ]);
 
     // Wie een export doorstuurt, verspreidt vijf JavaScript-bundels en — als het
@@ -136,6 +165,7 @@ class MarpHtmlService {
       List<int>.generate(16, (_) => rng.nextInt(256)),
     );
 
+    final embedded = await _embedImages(deckMarkdown, embedImage);
     // De ondertekening komt van het deck mee (het zegelblok staat sinds 0.1.0
     // niet meer in de front matter). Een `.md` van vóór die verhuizing draagt
     // hem nog wél in de kop, en die blijft leesbaar: [signatureFields] is het
@@ -143,19 +173,25 @@ class MarpHtmlService {
     final docMeta = metadata ?? const ExportDocumentMetadata();
     final signature = docMeta.signature != null
         ? signatureFieldsOf(docMeta.signature!, sealedAt: docMeta.sealedAt)
-        : signatureFields(deckMarkdown);
+        : signatureFields(embedded.markdown);
     final sections = StringBuffer();
-    for (final slide in marpSlides(deckMarkdown)) {
+    for (final slide in marpSlides(embedded.markdown)) {
+      // De keten van omzettingen, van binnen naar buiten. Elke stap laat een
+      // dia die haar niet aangaat onveranderd, dus de volgorde is vrij; het
+      // rapportagetype gaat als eerste omdat het de hele body vervangt.
+      var body = renderReportingSlide(slide, theme: theme);
+      body = renderChartBlocks(body, theme: theme);
+      body = renderQuestionBlocks(body);
+      body = renderMediaRedacted(body);
+      body = renderVideoNotice(body);
+      body = renderTimelineBlocks(body);
+      body = renderSignOffBlock(
+        body,
+        signature,
+        sealedAt: signature['ocideck_seal_at'] ?? '',
+      );
       final renderedBlocks = renderCockpitBlocks(
-        renderSignOffBlock(
-          renderTimelineBlocks(
-            renderMediaRedacted(
-              renderQuestionBlocks(renderChartBlocks(slide, theme: theme)),
-            ),
-          ),
-          signature,
-          sealedAt: signature['ocideck_seal_at'] ?? '',
-        ),
+        body,
         theme: theme,
         scheme: cockpitColorScheme,
       );
@@ -220,7 +256,7 @@ class MarpHtmlService {
         'connect-src \'none\'">'
         '<title>$title</title>'
         '$headMeta'
-        '<style>$css\n$hljsCss</style>'
+        '<style>${exportBaseCss()}\n$css\n$hljsCss</style>'
         '<script nonce="$nonce">$_mathjaxConfig</script>'
         '${inline(marked, 'marked')}'
         '${inline(purify, 'dompurify')}'
@@ -230,7 +266,7 @@ class MarpHtmlService {
         '</head><body>'
         '$banner'
         '$sections'
-        '${inline(_renderScript)}'
+        '${inline(_renderScript(embedded.dataUris))}'
         '${notices.html}'
         '</body></html>';
   }
@@ -318,8 +354,6 @@ class MarpHtmlService {
         '</details>';
   }
 
-  /// Split Marp Markdown into per-slide Markdown chunks: drop the leading YAML
-  /// front-matter, then break on lines that contain only `---`.
   static List<String> marpSlides(String markdown) {
     var text = markdown.replaceAll('\r\n', '\n');
     // Strip a leading YAML front-matter block: ---\n ... \n---\n
@@ -343,103 +377,6 @@ class MarpHtmlService {
     slides.add(buf.toString().trim());
     return slides.where((s) => s.isNotEmpty).toList();
   }
-
-  static final RegExp _listStyleComment = RegExp(
-    r'<!--\s*ocideck_list_style:\s*(\w+)',
-  );
-  static final RegExp _bulletMarkerComment = RegExp(
-    r'<!--\s*ocideck_bullet_marker:\s*(\w+)',
-  );
-
-  /// Strict hex so the matched value can never break out of the `style`
-  /// attribute it is written into (see [_titleColorSectionStyle]).
-  static final RegExp _titleColorComment = RegExp(
-    r'<!--\s*ocideck_title_text_color:\s*(#[0-9A-Fa-f]{3,8})',
-  );
-
-  /// Inline style carrying a title slide's per-slide title-text-colour override
-  /// (`ocideck_title_text_color`) as a CSS custom property, or `''` when the
-  /// slide sets none. The title `h1` reads this variable (with the theme's title
-  /// colour as fallback), so a slide that dims or lightens its title for a busy
-  /// background image keeps that choice in the HTML export — matching the app
-  /// preview, presenter and PDF/PPTX, which already honour the override.
-  static String _titleColorSectionStyle(String slideMarkdown) {
-    final hex = _titleColorComment.firstMatch(slideMarkdown)?.group(1);
-    return hex == null ? '' : ' style="--ocideck-title-color:$hex"';
-  }
-
-  /// Extra `<section>` class that turns this slide's plain bullets into cat-paw
-  /// markers (` paw-bullets`), or `''`. The decision is taken entirely from the
-  /// `ocideck_bullet_marker` comment that the *export* markdown carries for
-  /// every paw-rendering bullet slide (see `MarkdownService`, `forExport`). A
-  /// free-markdown slide that merely contains a `-` list never carries that
-  /// comment, so it never gets a paw — keeping HTML, app and PDF/PPTX identical.
-  /// Numbered, checklist and rich-text slides keep their own markers.
-  static String _bulletMarkerSectionClass(String slideMarkdown) {
-    final style = _listStyleComment.firstMatch(slideMarkdown)?.group(1);
-    if (style == 'numbered' || style == 'checklist' || style == 'richText') {
-      return '';
-    }
-    final marker = _bulletMarkerComment.firstMatch(slideMarkdown)?.group(1);
-    return marker == BulletMarker.paw.name ? ' paw-bullets' : '';
-  }
-
-  /// A self-contained cat-paw as an inline SVG `data:` URI, with [accent] baked
-  /// in as the fill. Used as the `li::before` marker for paw bullet lists. The
-  /// whole SVG is percent-encoded, so the (theme-controlled) colour value can
-  /// never break out of the attribute.
-  static String _pawDataUri(String accent) {
-    const path =
-        "M8 9.28Q12.64 9.28 10.32 12.4Q8 15.52 5.68 12.4Q3.36 9.28 8 9.28Z";
-    final svg =
-        "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'>"
-        "<path d='$path' fill='$accent'/>"
-        "<ellipse cx='2.56' cy='6.88' rx='1.76' ry='2.4' fill='$accent' transform='rotate(-31.5 2.56 6.88)'/>"
-        "<ellipse cx='6.24' cy='3.36' rx='1.92' ry='2.8' fill='$accent' transform='rotate(-10.3 6.24 3.36)'/>"
-        "<ellipse cx='9.76' cy='3.36' rx='1.92' ry='2.8' fill='$accent' transform='rotate(10.3 9.76 3.36)'/>"
-        "<ellipse cx='13.44' cy='6.88' rx='1.76' ry='2.4' fill='$accent' transform='rotate(31.5 13.44 6.88)'/>"
-        "</svg>";
-    return 'data:image/svg+xml,${Uri.encodeComponent(svg)}';
-  }
-
-  /// Neutralise any `</script` inside inlined content so it can't break out of
-  /// the surrounding <script> element. Case-insensitive — `</ScRiPt>` must not
-  /// slip through. Safe for both JS (string contexts) and the embedded Markdown
-  /// payloads.
-  static final RegExp _scriptClose = RegExp(
-    r'</(script)',
-    caseSensitive: false,
-  );
-
-  /// Maakt [s] veilig als inhoud van een `<script type="text/markdown">`.
-  ///
-  /// `</script` is niet de enige uitgang. De HTML-tokenizer kent binnen een
-  /// script-element ook *script data escaped*: een `<!--` zet hem in die stand,
-  /// en een daaropvolgende `<script` in *double escaped* — en dáár sluit een
-  /// echte `</script>` het element níét meer, hij zet alleen één stand terug.
-  /// Alles erna wordt scripttekst: de rest van de dia's, én het renderscript dat
-  /// de markdown-houders pas zichtbaar maakt. De export opende dan als een lege
-  /// witte pagina, zonder enige foutmelding.
-  ///
-  /// Dat is geen exotische invoer. Een codedia die kwetsbare paginabron citeert
-  /// — precies wat een pentestrapport doet — bevat routineus een uitgezette
-  /// `<script>` in commentaar. In de app, de presenter en de PDF klopte die dia.
-  ///
-  /// Het renderscript draait de ontsnapping terug vóórdat marked de tekst ziet
-  /// (zie [_renderScript]). Zonder die terugdraai zou een `<!-- _class: … -->`
-  /// als zichtbare tekst mét backslash in het document belanden — en dat was al
-  /// het geval voor `</script`, dat werd ontsnapt maar nooit hersteld.
-  static String _guardMarkdown(String s) =>
-      _guardScript(s).replaceAll('<!--', r'<\!--');
-
-  /// Neutraliseert `</script` in échte JavaScript.
-  ///
-  /// Hier bewust géén `<!--`-behandeling: in JavaScript is `<!--` een geldige
-  /// (legacy) regelcommentaar en `<\!--` een syntaxfout, dus die ontsnapping
-  /// zou de gebundelde bibliotheken slopen. Nodig is het ook niet — deze code is
-  /// vendored en vast, geen inhoud uit een deck.
-  static String _guardScript(String s) =>
-      s.replaceAllMapped(_scriptClose, (m) => '<\\/${m.group(1)}');
 
   // ── Charts → inline SVG ────────────────────────────────────────────────────
 
@@ -607,6 +544,45 @@ class MarpHtmlService {
     return slideMarkdown.replaceAll(_mediaRedactedMarker, box);
   }
 
+  // ── Video → melding ───────────────────────────────────────────────────────
+
+  static final RegExp _videoElement = RegExp(
+    r'<video\b[^>]*>\s*</video>',
+    caseSensitive: false,
+  );
+  static final RegExp _embedElement = RegExp(
+    r'<iframe\b[^>]*class="ocideck-embed"[^>]*>\s*</iframe>',
+    caseSensitive: false,
+  );
+
+  /// Zet een videospeler om in een zichtbare melding.
+  ///
+  /// De andere helft van dezelfde belofte als [_embedImages], en de enige die
+  /// niet in te lossen is. Een videobestand insluiten maakt een document van
+  /// honderden megabytes; een YouTube- of Vimeo-speler kan per definitie niet
+  /// werken in een export die niets van internet mag halen — de eigen CSP van
+  /// het bestand zet `frame-src 'none'` en laat `media-src` alleen lokale
+  /// bronnen toe.
+  ///
+  /// Wat er stond was dus een speler die zwart bleef en niets deed, zonder dat
+  /// de ontvanger kon weten dat er iets ontbrak. Nu staat het er. Bij een
+  /// online bron schrijft de serialiser er al een aanklikbare URL onder, dus de
+  /// bron zelf blijft bereikbaar.
+  static String renderVideoNotice(String slideMarkdown) {
+    if (!_videoElement.hasMatch(slideMarkdown) &&
+        !_embedElement.hasMatch(slideMarkdown)) {
+      return slideMarkdown;
+    }
+    const l10n = AppLocalizations(Locale('nl'));
+    final label = l10n.d('Video niet ingesloten');
+    final box =
+        '<div class="media-absent" role="img" '
+        'aria-label="${_htmlAttr(label)}">${_htmlText(label)}</div>';
+    return slideMarkdown
+        .replaceAll(_videoElement, box)
+        .replaceAll(_embedElement, box);
+  }
+
   // ── Ondertekening → HTML ──────────────────────────────────────────────────
 
   static final RegExp _signOffClass = RegExp(
@@ -730,6 +706,46 @@ class MarpHtmlService {
       .replaceAll('<', '&lt;')
       .replaceAll('>', '&gt;');
 
+  // ── Rapportagedia's → HTML ────────────────────────────────────────────────
+
+  /// Vervangt de body van een rapportagedia door zijn eigen weergave.
+  ///
+  /// Zes slidetypes bewaren hun inhoud als een gewone Markdown-tabel, en de
+  /// export liet die tabel staan. In de app heeft elk van de zes een eigen
+  /// weergave — kaarten met een verandering, balken op één gedeelde schaal,
+  /// een dekkingsteller, gekleurde statuspillen — en juist bij de MIAUW-types
+  /// draagt die weergave de boodschap. Een klant kreeg in de HTML dus iets
+  /// anders dan de auteur had goedgekeurd.
+  ///
+  /// Een dia die geen rapportagetype is, komt onveranderd terug.
+  static String renderReportingSlide(
+    String slideMarkdown, {
+    ThemeProfile? theme,
+  }) {
+    final slide = _readReportingSlide(slideMarkdown);
+    if (slide == null) return slideMarkdown;
+    final html = switch (slide.cssClass) {
+      'scorecard' => _repScorecard(slide, theme),
+      'assets' => _repAssets(slide, theme),
+      'discoveries' => _repDiscoveries(slide, theme),
+      'checklist' => _repChecklist(slide, theme),
+      'scope-matrix' => _repScopeMatrix(slide, theme),
+      'findings-summary' => _repFindingsSummary(slide, theme),
+      _ => null,
+    };
+    if (html == null) return slideMarkdown;
+    // De kop en de tabel gaan op in de weergave; de overige regels (de
+    // `_class`-regel, notities, andere markeringen) blijven staan zodat de
+    // stappen na deze ze nog zien.
+    final kept = [
+      for (final line in slideMarkdown.split('\n'))
+        if (!isMarkdownTableLine(line) &&
+            _repHeading.firstMatch(line.trim()) == null)
+          line,
+    ];
+    return '${kept.join('\n')}\n\n$html\n';
+  }
+
   // ── Cockpit → inline SVG ──────────────────────────────────────────────────
 
   static final RegExp _cockpitFence = RegExp(
@@ -753,6 +769,14 @@ class MarpHtmlService {
   /// CSS that mirrors the deck's [ThemeProfile]: slide background, text and
   /// accent colours, table colours and font. The EB Garamond font is embedded
   /// (base64) so it renders offline; other fonts resolve to system families.
+  ///
+  /// Alleen de thema-afhankelijke helft. De rest — tijdlijn, ondertekening,
+  /// media-redactie, de classificatiebanner en de printregels — staat in
+  /// [_structuralCss] en wordt altijd meegestuurd. Toen dit één blok was dat de
+  /// ongethematiseerde variant *verving*, verloor elke export mét thema (dus
+  /// elke export uit de app) die opmaak: de tijdlijn viel terug op een kale
+  /// genummerde lijst en de TLP-banner werd een regel zwarte tekst op de
+  /// achtergrond in plaats van een balk bovenaan het document.
   Future<String> _themedCss(ThemeProfile t) async {
     final fontFace = await _ebGaramondFontFace(t.fontFamily);
     final family = _cssFontStack(t.fontFamily);
@@ -762,8 +786,7 @@ class MarpHtmlService {
     final codeFamily =
         '${codePrefix}SFMono-Regular,Consolas,"Liberation Mono",monospace';
     return '$fontFace\n'
-        '*{box-sizing:border-box}'
-        'html,body{margin:0;padding:0}'
+        ':root{--ocideck-accent:${t.accentColor}}'
         'body{background:#1e1e1e;font-family:$family;color:${t.textColor}}'
         '.slide{position:relative;width:1280px;min-height:720px;margin:24px auto;'
         'background:${t.slideBackgroundColor};color:${t.textColor};padding:48px;'
@@ -794,9 +817,7 @@ class MarpHtmlService {
         '.slide table{border-collapse:collapse;width:100%}'
         '.slide th{background:${t.tableHeaderBackgroundColor};color:${t.tableHeaderTextColor};'
         'border:1px solid #ccc;padding:6px 12px;font-size:20px}'
-        '.slide td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px;font-size:20px}'
-        '@media print{body{background:#fff}.slide{margin:0;box-shadow:none;'
-        'border-radius:0;page-break-after:always;width:100%;min-height:100vh}}';
+        '.slide td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px;font-size:20px}';
   }
 
   String _cssFontStack(String font) {
@@ -834,38 +855,6 @@ class MarpHtmlService {
 
   static const _mathjaxConfig =
       r'''window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'},startup:{typeset:false}};''';
-
-  static const _baseCss = r'''
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1a1a1a}
-.slide{position:relative;width:1280px;min-height:720px;margin:24px auto;background:#fff;padding:48px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.4);border-radius:4px}
-.slide h1{font-size:48px;margin:.15em 0;color:var(--ocideck-title-color,inherit)}
-.slide h2{font-size:34px;margin:.15em 0}
-.slide p,.slide li{font-size:24px;line-height:1.45}
-.slide pre{background:#f6f8fa;border:1px solid #e1e4e8;border-radius:6px;padding:16px;overflow:auto;font-size:18px}
-.slide code{font-family:SFMono-Regular,Consolas,"Liberation Mono",monospace}
-.slide pre.mermaid{background:transparent;border:0;text-align:center}
-.slide img{max-width:100%}
-.slide blockquote{border-left:4px solid #ccc;margin:.5em 0;padding-left:16px;color:#555}
-.slide table{border-collapse:collapse;width:100%}.slide th,.slide td{border:1px solid #ccc;padding:6px 12px;font-size:20px}
-.slide ol.timeline{list-style:none;margin:.6em 0;padding:0 0 0 24px;border-left:3px solid #ccc}
-.slide ol.timeline li{position:relative;margin:0 0 .9em;padding-left:16px}
-.slide ol.timeline li::before{content:"";position:absolute;left:-31px;top:.45em;width:11px;height:11px;border-radius:50%;background:#003399}
-.slide .tl-marker{display:block;font-size:18px;font-weight:700;color:#003399;letter-spacing:.04em}
-.slide .tl-title{display:block;font-size:26px;font-weight:600;line-height:1.3}
-.slide .tl-desc{display:block;font-size:20px;color:#555;line-height:1.35}
-.slide .signoff{margin-top:.8em;max-width:900px}
-.slide .signoff-statement{font-style:italic;color:#334155;font-size:22px}
-.slide .signoff-mark{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:40px;color:#0f2a5c;margin:.35em 0 .1em}
-.slide .signoff-none{font-style:italic;color:#64748b;font-size:22px}
-.slide .signoff-meta{font-size:20px;color:#475569;margin:.1em 0}
-.slide .signoff-seal{font-size:18px;color:#64748b;letter-spacing:.03em;margin-top:.7em}
-.slide .media-redacted{display:flex;align-items:center;justify-content:center;min-height:200px;margin:.6em 0;background:#000;color:#fff;font-size:20px;letter-spacing:.05em;border-radius:4px;text-align:center;padding:24px}
-.tlp-export-banner{position:fixed;top:0;left:0;right:0;background:#000;color:#ffc000;text-align:center;font:700 14px/2.4 monospace;z-index:9999;letter-spacing:.06em}
-.ai-export-banner{position:fixed;left:0;right:0;background:#3a2c00;color:#ffd75e;text-align:center;font:600 13px/2.4 system-ui,sans-serif;z-index:9998}
-@media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}}
-''';
 
   static String _htmlAttr(String value) {
     return value
@@ -929,51 +918,4 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
     tag('generator', meta.producer);
     return buf.toString();
   }
-
-  static const _renderScript = r'''
-(function(){
-  // Defence-in-depth: mermaid injects its SVG into the DOM AFTER DOMPurify has
-  // run on the markdown, so sanitise the produced SVG ourselves too (mirrors
-  // the in-app sanitize_svg.dart). Mermaid also runs with securityLevel strict.
-  function sanitizeMermaid(){
-    if(!window.DOMPurify)return;
-    document.querySelectorAll('.mermaid svg').forEach(function(svg){
-      try{
-        var clean=DOMPurify.sanitize(svg.outerHTML,{USE_PROFILES:{svg:true,svgFilters:true}});
-        var tpl=document.createElement('template');tpl.innerHTML=clean;
-        var node=tpl.content.firstElementChild;
-        if(node)svg.replaceWith(node);
-      }catch(e){}
-    });
-  }
-  if(window.marked&&marked.setOptions){marked.setOptions({gfm:true,breaks:false});}
-  document.querySelectorAll('section.slide').forEach(function(sec){
-    var holder=sec.querySelector('script[type="text/markdown"]');
-    var src=holder?holder.textContent:'';
-    // De ontsnapping uit _guardMarkdown terugdraaien: die bestaat alleen om de
-    // HTML-tokenizer binnen dit script-element te houden, niet om de markdown
-    // te veranderen.
-    src=src.split('<\\/').join('</').split('<\\!--').join('<!--');
-    var div=document.createElement('div');div.className='content';
-    var html=window.marked?marked.parse(src):src;
-    // Sanitise rendered Markdown before it touches the DOM: a deck must not be
-    // able to run script/onerror/javascript: payloads when the export is opened.
-    // If the sanitiser somehow isn't present, fail closed to plain text.
-    if(window.DOMPurify){div.innerHTML=DOMPurify.sanitize(html);}else{div.textContent=src;}
-    sec.innerHTML='';sec.appendChild(div);
-  });
-  document.querySelectorAll('code.language-mermaid').forEach(function(code){
-    var pre=code.closest('pre');if(!pre)return;
-    var holder=document.createElement('pre');holder.className='mermaid';
-    holder.textContent=code.textContent;pre.replaceWith(holder);
-  });
-  if(window.hljs){document.querySelectorAll('pre code').forEach(function(el){try{hljs.highlightElement(el);}catch(e){}});}
-  if(window.mermaid){try{
-    mermaid.initialize({startOnLoad:false,securityLevel:'strict'});
-    var mres=mermaid.run();
-    if(mres&&mres.then){mres.then(sanitizeMermaid).catch(function(e){});}else{sanitizeMermaid();}
-  }catch(e){}}
-  if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}
-})();
-''';
 }

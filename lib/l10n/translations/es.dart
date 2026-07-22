@@ -731,6 +731,11 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Video niet ingesloten': 'Vídeo no incrustado',
+  'Afbeelding niet ingesloten': 'Imagen no incrustada',
+  'Dit diagram kon niet worden getekend':
+      'No se ha podido dibujar este diagrama',
+  'Brontekst van het diagram': 'Texto fuente del diagrama',
   'Jouw antwoord': 'Tu respuesta',
   'nodig': 'necesario',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

@@ -735,6 +735,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Video niet ingesloten': 'Fideo net ynsletten',
+  'Afbeelding niet ingesloten': 'Ofbylding net ynsletten',
+  'Dit diagram kon niet worden getekend': 'Dit diagram koe net tekene wurde',
+  'Brontekst van het diagram': 'Boarnetekst fan it diagram',
   'Jouw antwoord': 'Dyn antwurd',
   'nodig': 'nedich',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

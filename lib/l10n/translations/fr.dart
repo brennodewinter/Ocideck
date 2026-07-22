@@ -734,6 +734,10 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Video niet ingesloten': 'Vidéo non intégrée',
+  'Afbeelding niet ingesloten': 'Image non intégrée',
+  'Dit diagram kon niet worden getekend': 'Ce diagramme n\'a pas pu être tracé',
+  'Brontekst van het diagram': 'Texte source du diagramme',
   'Jouw antwoord': 'Votre réponse',
   'nodig': 'requis',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

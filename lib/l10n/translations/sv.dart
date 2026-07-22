@@ -1776,6 +1776,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Video niet ingesloten': 'Videon är inte inbäddad',
+  'Afbeelding niet ingesloten': 'Bilden är inte inbäddad',
+  'Dit diagram kon niet worden getekend': 'Det här diagrammet kunde inte ritas',
+  'Brontekst van het diagram': 'Diagrammets källtext',
   'Jouw antwoord': 'Ditt svar',
   'nodig': 'krävs',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

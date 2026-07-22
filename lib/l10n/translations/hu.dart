@@ -1781,6 +1781,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Video niet ingesloten': 'A videó nincs beágyazva',
+  'Afbeelding niet ingesloten': 'A kép nincs beágyazva',
+  'Dit diagram kon niet worden getekend':
+      'Ezt a diagramot nem sikerült megrajzolni',
+  'Brontekst van het diagram': 'A diagram forrásszövege',
   'Jouw antwoord': 'A te válaszod',
   'nodig': 'szükséges',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

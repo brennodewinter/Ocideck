@@ -7,26 +7,10 @@ part of 'markdown_service.dart';
 
 extension _MarkdownFindingParse on MarkdownService {
   /// Split each Markdown table body line into cells, dropping the GFM separator
-  /// row (`| --- | :---: |`). Lives here (a `part` of the parser library) to keep
-  /// `_parseBlock` under the file-size ratchet; shares the library-private
-  /// `_splitTableRow` / `_reSeparatorCell` helpers.
-  List<List<String>> _decodeTableRows(List<String> tableLines) {
-    final rows = <List<String>>[];
-    for (final line in tableLines) {
-      final cells = _splitTableRow(line);
-      // Alleen de regel direct ná de kop is de scheidingsrij. Verderop is een
-      // streepje gewoon inhoud — in een bevindingen- of scopetabel de
-      // gebruikelijke invulling voor "niet van toepassing" — en zo'n rij werd
-      // hier in zijn geheel weggegooid, inclusief de andere kolommen.
-      if (rows.length == 1 &&
-          cells.isNotEmpty &&
-          cells.every((c) => _reSeparatorCell.hasMatch(c.trim()))) {
-        continue;
-      }
-      rows.add(cells);
-    }
-    return rows;
-  }
+  /// row (`| --- | :---: |`). De codering zelf staat in
+  /// `markdown_table_codec.dart`, omdat de HTML-export dezelfde tabellen leest.
+  List<List<String>> _decodeTableRows(List<String> tableLines) =>
+      decodeMarkdownTableRows(tableLines);
 
   /// Pulls the per-slide attestation link comments out of [block]: the
   /// finding-group link (`ocideck_finding_id` / `ocideck_finding_role`) and the

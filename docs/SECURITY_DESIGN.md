@@ -199,9 +199,25 @@ The HTML export is defence-in-depth against script injection in deck content:
   export cannot beacon home.
 - A `</script>` breakout guard neutralises case-insensitive `</script` inside
   inlined payloads, and Mermaid's injected SVG is re-sanitised with DOMPurify's
-  SVG profile (Mermaid runs at `securityLevel: strict`). An in-app SVG sanitizer
+  SVG profile (Mermaid runs at `securityLevel: strict`, `htmlLabels: false` — its
+  HTML labels would ride in a `foreignObject`, exactly what the sanitizers
+  remove). That re-sanitisation runs **whatever the outcome**: it used to sit
+  behind a `.then()` with an empty `.catch()`, so one unparseable diagram made
+  the whole document skip it. An in-app SVG sanitizer
   (`lib/utils/sanitize_svg.dart`) strips `script`/`foreignObject`/event handlers
   and `javascript:`/`data:` URLs.
+- **Embedded images are bounded on both ends.** Which files may be read is
+  decided by `resolveSlideAssetPath` in `ExportService` (project containment —
+  the HTML builder itself never touches the filesystem), so a deck from an
+  untrusted source cannot pull `/etc/passwd` into an export that then leaves the
+  machine. What is written is decided by
+  `lib/services/html_image_embedder.dart`: a decode-bomb cap
+  (`kMaxImageDecodeDimension`), a re-encode that also **strips EXIF** (raw bytes
+  would carry a photo's GPS location and camera serial to every recipient), and
+  a `data:image/…` URI — already allowed by the export CSP's `img-src`, so no
+  directive had to be widened. In the browser, the placeholder-to-URI swap only
+  accepts a value from the export's own list that starts with `data:image/`; the
+  index it reads comes from the document and is treated as untrusted.
 
 ## 6. Input validation
 

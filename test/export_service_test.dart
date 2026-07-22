@@ -647,4 +647,47 @@ void main() {
     final r = await service.export(deckPath(), ExportFormat.html, const []);
     expect(r.success, isFalse);
   });
+
+  test('de HTML-export sluit beeld uit de projectmap in', () async {
+    // Één afbeelding binnen de projectmap en één erbuiten. Die tweede is de
+    // reden dat het lezen in ExportService zit en niet in de HTML-bouwer: een
+    // deck van een derde mag met `![](…)` geen willekeurig bestand de export in
+    // trekken, en die export gaat naar buiten.
+    final images = Directory(p.join(tmp.path, 'images'))..createSync();
+    final photo = img.Image(width: 40, height: 30);
+    for (final pixel in photo) {
+      pixel.setRgb(0, 51, 153);
+    }
+    File(
+      p.join(images.path, 'binnen.png'),
+    ).writeAsBytesSync(img.encodePng(photo));
+    final buiten = Directory.systemTemp.createTempSync('ocideck-buiten');
+    addTearDown(() => buiten.deleteSync(recursive: true));
+    final outsidePath = p.join(buiten.path, 'geheim.png');
+    File(outsidePath).writeAsBytesSync(img.encodePng(photo));
+
+    final htmlService = ExportService(
+      htmlService: MarpHtmlService(loadAsset: (a) => File(a).readAsString()),
+    );
+    final r = await htmlService.export(
+      deckPath(),
+      ExportFormat.html,
+      const [],
+      audience: bundleFor(
+        const Deck(title: 'Met beeld'),
+        markdown:
+            '# Met beeld\n\n![Binnen](images/binnen.png)\n\n---\n\n'
+            '# Buiten de map\n\n![Buiten]($outsidePath)\n',
+      ),
+    );
+
+    expect(r.success, isTrue, reason: r.error);
+    final html = await File(r.outputPath!).readAsString();
+    // Het beeld uit de projectmap reist mee — en het pad blijft eruit.
+    expect(html, contains('data:image/'));
+    expect(html, isNot(contains('images/binnen.png')));
+    // Het bestand erbuiten wordt niet gelezen en niet genoemd.
+    expect(html, isNot(contains(outsidePath)));
+    expect(html, contains('Afbeelding niet ingesloten'));
+  });
 }

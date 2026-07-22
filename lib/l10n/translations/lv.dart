@@ -1776,6 +1776,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Video niet ingesloten': 'Videoklips nav iegults',
+  'Afbeelding niet ingesloten': 'Attēls nav iegults',
+  'Dit diagram kon niet worden getekend': 'Šo diagrammu nevarēja uzzīmēt',
+  'Brontekst van het diagram': 'Diagrammas pirmteksts',
   'Jouw antwoord': 'Jūsu atbilde',
   'nodig': 'nepieciešams',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

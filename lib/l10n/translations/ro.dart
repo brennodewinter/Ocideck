@@ -1795,6 +1795,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Video niet ingesloten': 'Videoclipul nu este încorporat',
+  'Afbeelding niet ingesloten': 'Imaginea nu este încorporată',
+  'Dit diagram kon niet worden getekend':
+      'Această diagramă nu a putut fi desenată',
+  'Brontekst van het diagram': 'Textul sursă al diagramei',
   'Jouw antwoord': 'Răspunsul tău',
   'nodig': 'necesar',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

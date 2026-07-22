@@ -5,7 +5,7 @@
 OciDeck builds [Marp](https://marp.app/) presentations through a structured,
 slide-by-slide editor. You compose typed slides, preview them live, present them
 (on one or two screens), and export to Markdown, PDF, PPTX, or a single offline
-HTML file (which keeps its images beside it — see [Exporting](#exporting)).
+HTML file (one file, images and all — see [Exporting](#exporting)).
 Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
 
 ## Creating and opening decks
@@ -2077,17 +2077,32 @@ Export to:
 - **PDF** and **PPTX** (PPTX includes speaker notes) — rendered from the in-app
   slide renderer.
 - **HTML** — one file, with the JavaScript (marked, highlight.js, MathJax,
-  mermaid), the CSS and the bundled EB Garamond font inlined, and charts
-  pre-rendered to inline SVG, so code highlighting, math, charts and diagrams all
-  render offline with no network fetch.
+  mermaid), the CSS, the bundled EB Garamond font **and your images** inlined,
+  and charts pre-rendered to inline SVG, so code highlighting, math, charts,
+  diagrams and pictures all render offline with no network fetch. Mail the
+  `.html` on its own and it still shows everything.
 
-  **Images are the exception.** The export writes only the `.html`; a picture on
-  a slide stays an ordinary relative `<img src="images/…">`. The file is
-  therefore self-contained for a deck of text, and needs its `images/` folder
-  alongside it for a deck with pictures — move the `.html` on its own and the
-  pictures break. If you need one artefact that travels, use the portable
-  package or PDF. *Corrected 2026-07-21: this entry read "self-contained HTML —
-  one offline file", which is true of everything except the images.*
+  **What happens to your images.** Each one is re-encoded to screen size (at
+  most 1920 pixels on the long edge — wider than a slide, so zooming into a
+  screenshot stays sharp) and embedded once, however many slides use it. A deck
+  of twenty photos therefore costs a few megabytes rather than tens of them.
+  Transparency is kept, an animated GIF keeps animating, and an SVG travels as
+  it is. The **EXIF is stripped**: a phone photo carries its GPS location, the
+  time it was taken and the camera's serial number, and none of that belongs in
+  a report you hand to someone else. An image the export cannot read — missing,
+  or outside the deck's own folder — becomes a visible "image not embedded" note
+  rather than a silent gap.
+
+  **Video is the exception.** A video file is not embedded (it would make the
+  document hundreds of megabytes), and a YouTube or Vimeo player cannot work in
+  a document that by design fetches nothing from the internet. For a deck built
+  around video, hand over the portable package.
+
+  **The reporting slides keep their shape.** Scorecard, attack surface,
+  discoveries, checklist, scope matrix and findings summary render as the cards,
+  bars and coverage counters you see in the app, not as the plain table they are
+  stored as. *Updated 2026-07-22: images and those six slide types used to be
+  the export's blind spots.*
 - **Portable package** (`.ocideck`) — a single zip with the Markdown and all
   assets, to hand the whole deck to someone else.
 

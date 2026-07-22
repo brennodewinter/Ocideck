@@ -1768,6 +1768,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Video niet ingesloten': 'Videot ei manustatud',
+  'Afbeelding niet ingesloten': 'Pilti ei manustatud',
+  'Dit diagram kon niet worden getekend':
+      'Seda diagrammi ei õnnestunud joonistada',
+  'Brontekst van het diagram': 'Diagrammi lähtetekst',
   'Jouw antwoord': 'Sinu vastus',
   'nodig': 'vajalik',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

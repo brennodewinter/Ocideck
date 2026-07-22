@@ -27,6 +27,8 @@ import 'classification_enforcement_policy.dart';
 import '../models/slide_quality.dart';
 import 'export_bundle.dart';
 import 'export_metadata.dart';
+import 'html_image_embedder.dart';
+import 'image_service.dart';
 import 'quality_export_policy.dart';
 import 'marp_html_service.dart';
 
@@ -228,16 +230,13 @@ class ExportService {
             ),
           );
         case ExportFormat.html:
-          bytes = Uint8List.fromList(
-            utf8.encode(
-              await _html.build(
-                markdown!,
-                theme: themeProfile,
-                cockpitColorScheme: cockpitColorScheme,
-                metadata: docMeta,
-                fallbackTitle: fallbackTitle,
-              ),
-            ),
+          bytes = await _buildHtml(
+            markdown!,
+            deckPath: deckPath,
+            themeProfile: themeProfile,
+            cockpitColorScheme: cockpitColorScheme,
+            metadata: docMeta,
+            fallbackTitle: fallbackTitle,
           );
       }
       if (kIsWeb) {
@@ -272,6 +271,61 @@ class ExportService {
       const l10n = AppLocalizations(Locale('nl'));
       return ExportResult.fail(userFacingError(l10n, e));
     }
+  }
+
+  /// Bouwt het HTML-document en levert het als bytes.
+  ///
+  /// De insluitfunctie voor afbeeldingen wordt hier gemaakt en niet in de
+  /// bouwer: de projectmap is de map van het deck, en die begrenzing hoort bij
+  /// de laag die het bestandssysteem kent — zodat een deck van een derde geen
+  /// bestanden buiten zijn eigen map de export in kan trekken.
+  Future<Uint8List> _buildHtml(
+    String markdown, {
+    required String deckPath,
+    required ThemeProfile? themeProfile,
+    required CockpitColorScheme cockpitColorScheme,
+    required ExportDocumentMetadata metadata,
+    required String fallbackTitle,
+  }) async {
+    // Een bewaard deck heeft een projectmap: de map van het `.md`, en daar
+    // blijft het lezen binnen. Een deck dat nog nooit is opgeslagen heeft er
+    // geen — dan is [deckPath] alleen een voorgestelde bestandsnaam, en zou
+    // `dirname` de werkmap van het proces opleveren. `null` betekent hier
+    // precies wat de resolver ervan maakt: absolute paden uit de lopende
+    // bewerksessie mogen (dat zijn de wachtruimte-kopieën van net ingevoegd
+    // beeld), relatieve niet. Zelfde regel als de preview.
+    final projectPath = p.isAbsolute(deckPath) ? p.dirname(deckPath) : null;
+    final html = await _html.build(
+      markdown,
+      theme: themeProfile,
+      cockpitColorScheme: cockpitColorScheme,
+      metadata: metadata,
+      fallbackTitle: fallbackTitle,
+      embedImage: (source) => _embedImage(source, projectPath),
+    );
+    return Uint8List.fromList(utf8.encode(html));
+  }
+
+  /// Leest de afbeelding op [source] en maakt er een `data:`-URI van, zodat de
+  /// HTML-export werkelijk één bestand is.
+  ///
+  /// De begrenzing zit hier, niet in de HTML-bouwer: [ImageService] lost het pad
+  /// op binnen [projectPath] en weigert alles daarbuiten, precies zoals de
+  /// preview, de presenter en de andere exports dat doen. Zonder die grens zou
+  /// een deck van een derde met `![](/etc/passwd)` een willekeurig bestand de
+  /// export in trekken — en die export gaat naar buiten.
+  ///
+  /// Het hercoderen kost honderden milliseconden per afbeelding en draait
+  /// daarom in een isolate; een export van een deck met twintig foto's zou de
+  /// interface anders seconden laten staan.
+  Future<String?> _embedImage(String source, String? projectPath) async {
+    final bytes = await ImageService().readSlideImageBytes(
+      source,
+      projectPath: projectPath,
+    );
+    if (bytes == null) return null;
+    final encoded = await _offload(() => encodeForHtmlEmbed(bytes, source));
+    return encoded == null ? null : htmlImageDataUri(encoded);
   }
 
   /// Zware bouwstappen draaien op desktop in een eigen isolate zodat de UI

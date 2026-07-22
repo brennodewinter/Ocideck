@@ -734,6 +734,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Video niet ingesloten': 'Video no inkluí',
+  'Afbeelding niet ingesloten': 'Imagen no inkluí',
+  'Dit diagram kon niet worden getekend': 'No por a dibuhá e diagrama aki',
+  'Brontekst van het diagram': 'Teksto fuente di e diagrama',
   'Jouw antwoord': 'Bo kontesta',
   'nodig': 'nesesario',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

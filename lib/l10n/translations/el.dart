@@ -1805,6 +1805,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Video niet ingesloten': 'Το βίντεο δεν ενσωματώθηκε',
+  'Afbeelding niet ingesloten': 'Η εικόνα δεν ενσωματώθηκε',
+  'Dit diagram kon niet worden getekend':
+      'Δεν ήταν δυνατή η σχεδίαση αυτού του διαγράμματος',
+  'Brontekst van het diagram': 'Πηγαίο κείμενο του διαγράμματος',
   'Jouw antwoord': 'Η απάντησή σας',
   'nodig': 'απαιτείται',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

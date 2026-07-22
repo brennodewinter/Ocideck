@@ -1799,6 +1799,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Video niet ingesloten': 'Il-vidjo mhuwiex inkorporat',
+  'Afbeelding niet ingesloten': 'L-istampa mhijiex inkorporata',
+  'Dit diagram kon niet worden getekend': 'Dan id-dijagramma ma setax jitpinġa',
+  'Brontekst van het diagram': 'It-test sors tad-dijagramma',
   'Jouw antwoord': 'It-tweġiba tiegħek',
   'nodig': 'meħtieġ',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

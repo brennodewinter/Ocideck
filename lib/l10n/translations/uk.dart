@@ -1795,6 +1795,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Video niet ingesloten': 'Відео не вбудовано',
+  'Afbeelding niet ingesloten': 'Зображення не вбудовано',
+  'Dit diagram kon niet worden getekend': 'Не вдалося намалювати цю діаграму',
+  'Brontekst van het diagram': 'Вихідний текст діаграми',
   'Jouw antwoord': 'Ваша відповідь',
   'nodig': 'потрібно',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

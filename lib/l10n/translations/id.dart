@@ -1777,6 +1777,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Video niet ingesloten': 'Video tidak disertakan',
+  'Afbeelding niet ingesloten': 'Gambar tidak disertakan',
+  'Dit diagram kon niet worden getekend': 'Diagram ini tidak dapat digambar',
+  'Brontekst van het diagram': 'Teks sumber diagram',
   'Jouw antwoord': 'Jawabanmu',
   'nodig': 'dibutuhkan',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

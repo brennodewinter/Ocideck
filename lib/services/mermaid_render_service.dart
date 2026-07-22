@@ -3,6 +3,12 @@ import 'dart:convert';
 import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart';
+// `requestHost` plant een post-frame callback. Bewust `scheduler` en niet
+// `widgets`: een dienst hoort headless te draaien, en `SchedulerBinding` doet
+// hier precies hetzelfde zonder de widgetboom binnen te halen. De klassen die
+// deze import ooit meebrachten wonen sinds main's afsplitsing in
+// widgets/mermaid_render_host.dart.
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -32,8 +38,24 @@ class MermaidRenderService {
   bool _busy = false;
 
   /// Ask the UI layer to mount the offstage WebView host.
+  ///
+  /// Ná het frame, niet erin. De aanroep komt uit `initState` van
+  /// [MermaidDiagram], dus midden in de buildfase — en de
+  /// `ValueListenableBuilder` die de verborgen WebView draagt
+  /// ([MermaidRenderHostLayer]) staat hóger in de boom en is op dat moment al
+  /// gebouwd. Hem dan als vuil markeren gooit "setState() or markNeedsBuild()
+  /// called during build": de host werd nooit gemonteerd, [attachController]
+  /// draaide nooit, [_controller] bleef null, en elk diagram bleef eeuwig op
+  /// zijn laadtolletje staan — in de preview, in de presentatiemodus, én in de
+  /// PDF/PPTX-export, die dezelfde renderer gebruikt.
+  ///
+  /// De uitzondering aan het begin houdt de tweede aanroep gratis; de vlag
+  /// wordt maar één keer per sessie omgezet.
   void requestHost() {
-    if (!hostNeeded.value) hostNeeded.value = true;
+    if (hostNeeded.value) return;
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (!hostNeeded.value) hostNeeded.value = true;
+    });
   }
 
   /// Attach the hidden [WebViewController] created by [MermaidRenderHost].
@@ -48,23 +70,14 @@ class MermaidRenderService {
     final mermaidJs = await rootBundle.loadString(
       'assets/web_export/mermaid.min.js',
     );
-    // Het bundeltje gaat rechtstreeks in een <script>-blok, niet meer via
-    // `textContent` + `eval()`.
+    // Geen `eval()` meer — zie het commentaar in de pagina hieronder voor hoe
+    // de bundel er wél in komt. Daarmee kan `'unsafe-eval'` uit de CSP van deze
+    // pagina en is de enige `eval()` in het product weg.
     //
-    // Die omweg bestond om een `</script`-reeks binnen de geminificeerde bundel
-    // het HTML-blok niet te laten afbreken. Dat is op te lossen door die reeks
-    // te ontsnappen — dezelfde `<\/script`-truc die `MarpHtmlService` op de
-    // export toepast — en dan is er geen dynamische code-evaluatie meer nodig.
-    // Daarmee kan `'unsafe-eval'` uit de CSP van deze pagina: de enige `eval()`
-    // in het product is hiermee weg.
-    //
-    // `'unsafe-inline'` blijft nodig — dit ís een inline script — maar dat is
-    // een wezenlijk zwakkere ontheffing: er kan geen code meer ontstaan uit een
+    // `'unsafe-inline'` blijft nodig: dit ís een inline script. Dat is een
+    // wezenlijk zwakkere ontheffing — er kan geen code meer ontstaan uit een
     // string die op dat moment wordt samengesteld.
-    final inlineJs = mermaidJs.replaceAllMapped(
-      RegExp(r'</(script)', caseSensitive: false),
-      (m) => '<\\/${m.group(1)}',
-    );
+    final escapedJs = jsonEncode(mermaidJs);
     await _controller!.loadHtmlString('''
 <!DOCTYPE html>
 <html>
@@ -73,28 +86,35 @@ class MermaidRenderService {
 </head>
 <body>
 <script>
-$inlineJs
-</script>
-<script>
+// De bundel wordt als NIEUW script-element aan het document toegevoegd, niet
+// ge-eval'd. Twee redenen. De CSP hierboven hoeft daardoor geen 'unsafe-eval'
+// meer toe te staan. En een `var` op het hoogste niveau van een script wordt
+// een globale — in een strict-mode eval niet, en moderne mermaid-bundels
+// (esbuild, v11) hangen daarop: die zetten hun namespace met `var` en lezen
+// hem daarna terug van globalThis. Onder eval liep dat dood op "Cannot read
+// properties of undefined", zonder dat de app iets anders liet zien dan een
+// diagram dat nooit verscheen.
+var mermaidBundle = document.createElement('script');
+mermaidBundle.textContent = $escapedJs;
+document.head.appendChild(mermaidBundle);
+// htmlLabels moet ook PER DIAGRAMSOORT uit: mermaid tekent labels anders in een
+// <foreignObject>, en dat element haalt sanitizeMermaidSvg weg — dan houdt de
+// preview lege vakjes over zonder één woord erin.
 mermaid.initialize({
   startOnLoad: false,
   theme: 'neutral',
   securityLevel: 'strict',
   htmlLabels: false,
-  // `flowchart.htmlLabels` staat standaard op true en het topniveau zakt daar
-  // niet in door. Zonder deze regel zetten flowchart, classDiagram en
-  // stateDiagram-v2 hun labels in <foreignObject> — en `sanitizeMermaidSvg`
-  // strípt dat, terecht, waardoor de gebruiker lege blokjes en lege pijlen
-  // overhield. Deze drie delen dezelfde renderweg, dus één sleutel repareert
-  // ze alle drie; `class:` en `state:` bestaan wél maar doen hier niets.
   flowchart: { htmlLabels: false },
-  // `htmlLabels` in `secure` is wat een deck tegenhoudt dat via
-  // `%%{init: {"flowchart": {"htmlLabels": true}}}%%` alsnog HTML in de labels
-  // probeert te krijgen — mermaid past die lijst op élke diepte toe, niet
-  // alleen op het topniveau. `flowchart` zélf hier bijzetten voegt daar niets
-  // aan toe en kost wel iets: dan ligt het hele flowchart-configblok vast en
-  // kan een deck ook geen `curve`, `padding` of `nodeSpacing` meer kiezen.
-  secure: ['securityLevel', 'startOnLoad', 'htmlLabels']
+  class: { htmlLabels: false },
+  // De onaantastbare sleutels. Mermaids eigen standaardlijst wordt hierdoor
+  // VERVANGEN, dus 'secure' en 'maxTextSize' moeten er zelf in: zonder 'secure'
+  // kan een diagramrichtlijn de lijst overschrijven en daarmee de rest van de
+  // beperkingen alsnog opheffen.
+  secure: [
+    'secure', 'securityLevel', 'startOnLoad', 'maxTextSize',
+    'suppressErrorRendering', 'htmlLabels'
+  ]
 });
 window.__renderMermaid = async function(source) {
   const id = 'm' + Math.abs(source.split('').reduce((h,c)=>((h<<5)-h+c.charCodeAt(0))|0,0));

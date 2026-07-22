@@ -1752,6 +1752,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Video niet ingesloten': 'HaSta chelbe\'lu\'',
+  'Afbeelding niet ingesloten': 'mIllogh chelbe\'lu\'',
+  'Dit diagram kon niet worden getekend': 'De\'wI\'ghomvam ghItlhlaHbe\'.',
+  'Brontekst van het diagram': 'De\'wI\'ghom mung mu\'ghom',
   'Jouw antwoord': 'janglIj',
   'nodig': 'poQlu\'',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

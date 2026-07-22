@@ -88,6 +88,10 @@ void main() {}
     // Mermaid runs strict and its injected SVG is sanitised post-render.
     expect(html, contains("securityLevel:'strict'"));
     expect(html, contains('sanitizeMermaid'));
+    // …en zonder HTML-labels, want die reizen in een <foreignObject> dat de
+    // sanitisatie eruit haalt: het diagram houdt dan lege vakjes over.
+    expect(html, contains('htmlLabels:false'));
+    expect(html, contains('flowchart:{htmlLabels:false}'));
   });
 
   test(
@@ -208,6 +212,55 @@ void main() {}
     expect(html, contains("'Arial'"));
     // A system font is not embedded as base64.
     expect(html, isNot(contains('data:font/ttf;base64,')));
+  });
+
+  group('een kapot mermaid-diagram', () {
+    test('krijgt een leesbare melding in het document zelf', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build('# X\n\n```mermaid\ngraph TD\n```');
+
+      // De ontvanger heeft geen console: de melding moet in het document staan,
+      // in zijn taal, met de brontekst van het diagram erbij.
+      expect(html, contains('Dit diagram kon niet worden getekend'));
+      expect(html, contains('Brontekst van het diagram'));
+      expect(html, contains('mermaid-error'));
+      expect(html, contains('.slide .mermaid-error{'));
+      // Elk diagram wordt eerst apart gecontroleerd, zodat mermaid zijn eigen
+      // Engelse foutplaatje niet tekent.
+      expect(html, contains('mermaid.parse('));
+    });
+
+    test('laat de sanitisatie van de andere diagrammen niet vallen', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build('# X');
+
+      // De stille `.catch(function(e){})` op mermaid.run() sloeg
+      // sanitizeMermaid over voor het HELE document zodra één diagram omviel.
+      expect(html, isNot(contains('.catch(function(e){})')));
+      expect(html, contains('.then(sanitizeMermaid)'));
+    });
+  });
+
+  test('a themed export keeps the structural stylesheet', () async {
+    // De opmaak van de tijdlijn, de ondertekening, het redactievlak en de
+    // classificatiebanner hoort niet bij het thema. Toen de themed CSS het
+    // basisblok verving in plaats van aanvulde, verloor élke export uit de app
+    // (die geeft altijd een thema mee) die vier — de banner met de TLP-marking
+    // voorop.
+    final service = MarpHtmlService(
+      loadAsset: _diskLoader,
+      loadBytes: _diskBytes,
+    );
+    const theme = ThemeProfile(accentColor: '#33CC99');
+    final html = await service.build('# Titel', theme: theme);
+
+    expect(html, contains('.slide ol.timeline'));
+    expect(html, contains('.slide .signoff'));
+    expect(html, contains('.slide .media-redacted'));
+    expect(html, contains('.tlp-export-banner{'));
+    expect(html, contains('@media print'));
+    // En het thema kleurt de tijdlijn mee via de enige haak die het heeft.
+    expect(html, contains('--ocideck-accent:#33CC99'));
   });
 
   group('per-slide title colour override', () {
@@ -678,5 +731,337 @@ void main() {}
       MarkdownService().generateSlide(slide),
       isNot(contains('ocideck_media_redacted')),
     );
+  });
+
+  group('rapportagedia\'s in de HTML-export', _reportingTests);
+  group('afbeeldingen insluiten', _imageEmbedTests);
+  group('video in de HTML-export', _videoTests);
+}
+
+// ── Rapportagedia's ────────────────────────────────────────────────────────
+//
+// Zes slidetypes bewaren hun inhoud als een Markdown-tabel en vielen in de
+// export terug op precies dat. Deze tests bewaken dat elk van de zes zijn eigen
+// weergave krijgt, en dat de afgeleide getallen — de teller boven een
+// dekkingsbalk, de verandering op een scorecard — meekomen. Die zijn de reden
+// dat een tabel niet volstaat: ze staan nergens in de rijen.
+
+/// Bouwt de dia via de échte serialiser, zodat de test breekt zodra de
+/// opslagvorm verandert in plaats van een handgeschreven tabel te bevestigen.
+String _reportingSlideMarkdown(Slide slide) =>
+    MarkdownService().generateSlide(slide, forExport: true);
+
+void _reportingTests() {
+  test('een scorecard wordt een reeks kaarten met de verandering', () {
+    final slide = Slide.create(SlideType.scorecard).copyWith(
+      title: 'Kerncijfers',
+      tableRows: const [
+        ['Label', 'Value', 'Previous', 'Unit', 'Polarity'],
+        ['Open bevindingen', '12', '19', '', 'lower-better'],
+        ['Dekking', '87', '74', '%', 'higher-better'],
+      ],
+    );
+    final html = MarpHtmlService.renderReportingSlide(
+      _reportingSlideMarkdown(slide),
+    );
+
+    expect(html, contains('rep-scorecard'));
+    expect(html, contains('Open bevindingen'));
+    // De verandering is afgeleid en staat nergens in de tabel: minder open
+    // bevindingen is goed nieuws (lower-better), meer dekking ook.
+    expect(html, contains('-7'));
+    expect(html, contains('+13'));
+    expect(html, contains(RegExp('color:#15803D')));
+    // En de kale tabel is weg: dat was de hele klacht.
+    expect(html, isNot(contains('| Open bevindingen |')));
+  });
+
+  test('een aanvalsoppervlak krijgt balken op één gedeelde schaal', () {
+    final slide = Slide.create(SlideType.assets).copyWith(
+      title: 'Aanvalsoppervlak',
+      tableRows: const [
+        ['Group', 'Total', 'AtRisk', 'New', 'Unowned'],
+        ['Web', '200', '50', '3', '1'],
+        ['Mail', '50', '0', '0', '0'],
+      ],
+    );
+    final html = MarpHtmlService.renderReportingSlide(
+      _reportingSlideMarkdown(slide),
+    );
+
+    expect(html, contains('rep-assets'));
+    // Mail is een kwart van Web, niet even breed: de schaal is gedeeld.
+    expect(html, contains('width:100.0%'));
+    expect(html, contains('width:25.0%'));
+    // Het totaal is afgeleid, niet ingetypt.
+    expect(html, contains('>250<'));
+  });
+
+  test('een ontdekking zonder bekende blootstelling krijgt geen balk', () {
+    final slide = Slide.create(SlideType.discoveries).copyWith(
+      title: 'Ontdekkingen',
+      tableRows: const [
+        ['Discovery', 'Kind', 'DaysUnnoticed', 'Owner'],
+        ['oud.klant.nl', 'Web', '420', ''],
+        ['vpn.klant.nl', 'Infra', '', 'Team Netwerk'],
+      ],
+    );
+    final html = MarpHtmlService.renderReportingSlide(
+      _reportingSlideMarkdown(slide),
+    );
+
+    expect(html, contains('rep-discoveries'));
+    // 420 dagen leest als 14 maanden, en dat is de kop van de dia.
+    expect(html, contains('14 maanden'));
+    expect(html, contains('langst onopgemerkt bereikbaar'));
+    // "onbekend" is geen nul: een lege baan zou "meteen gevonden" beweren.
+    expect(html, contains('onbekend'));
+    expect('class="rep-bar"'.allMatches(html).length, 1);
+    expect(html, contains('geen eigenaar'));
+  });
+
+  test('een checklist krijgt haar voortgang en gekleurde statuspillen', () {
+    final slide = Slide.create(SlideType.checklist).copyWith(
+      title: 'Checklist — OWASP WSTG',
+      checklistScope: 'portaal.klant.nl',
+      tableRows: const [
+        ['ID', 'Test', 'Status', 'Finding', 'Note'],
+        ['WSTG-INFO-01', 'Zoekmachines', 'Tested', '—', ''],
+        ['WSTG-CONF-02', 'Beheerinterfaces', 'Anomaly', 'BEV-03', ''],
+        ['WSTG-SESS-01', 'Sessiebeheer', '', '—', ''],
+      ],
+    );
+    final html = MarpHtmlService.renderReportingSlide(
+      _reportingSlideMarkdown(slide),
+    );
+
+    expect(html, contains('rep-checklist'));
+    // 2 van de 3 getoetst — afgeleid, nergens opgeslagen.
+    expect(html, contains('2/3 getoetst'));
+    expect(html, contains('Scope-object'));
+    expect(html, contains('portaal.klant.nl'));
+    expect(html, contains('Afwijking'));
+    // Een afwijking is rood, niet zomaar een woord in een kolom.
+    expect(html, contains('color:#B91C1C'));
+    expect(html, contains('BEV-03'));
+  });
+
+  test('een scope-matrix krijgt haar dekkingsteller en standaard', () {
+    final slide = Slide.create(SlideType.scopeMatrix).copyWith(
+      title: 'Scope-matrix',
+      tableRows: const [
+        ['Object', 'Type', 'Standard', 'Status', 'Note', 'C', 'I', 'A'],
+        ['portaal.klant.nl', 'Web', 'WSTG', 'Tested', '', '', '', ''],
+        ['app iOS', 'Mobile', 'MASTG', 'Unreachable', '', '', '', ''],
+      ],
+    );
+    final html = MarpHtmlService.renderReportingSlide(
+      _reportingSlideMarkdown(slide),
+    );
+
+    expect(html, contains('rep-scope'));
+    // Onbereikbaar telt níét als getoetst — dat is de hele reden dat de teller
+    // afgeleid is en niet opgeteld uit de rijen.
+    expect(html, contains('1/2 gedekt'));
+    expect(html, contains('MASTG'));
+    expect(html, contains('Onbereikbaar'));
+  });
+
+  test('een bevindingenoverzicht wordt een staafje per ernstband', () {
+    final slide = Slide.create(SlideType.findingsSummary).copyWith(
+      title: 'Bevindingenoverzicht',
+      tableRows: const [
+        ['Severity', 'Count'],
+        ['Critical', '2'],
+        ['High', '4'],
+        ['Medium', '8'],
+        ['Low', '0'],
+        ['None', '0'],
+        ['Resolved', '5'],
+      ],
+    );
+    final html = MarpHtmlService.renderReportingSlide(
+      _reportingSlideMarkdown(slide),
+    );
+
+    expect(html, contains('rep-findings'));
+    // 2 + 4 + 8 — afgeleid, en de hertest staat er los naast.
+    expect(html, contains('Totaal: 14'));
+    expect(html, contains('Opgelost na hertest: 5'));
+    // De hoogste band vult de staaf; de rest schaalt eraan mee.
+    expect(html, contains('height:100.0%'));
+    expect(html, contains('height:25.0%'));
+    expect(html, contains('Kritiek'));
+    expect(html, contains('Informatief'));
+  });
+
+  test('een gewone dia komt onveranderd terug', () {
+    const md = '# Gewone dia\n\n| A | B |\n| --- | --- |\n| 1 | 2 |\n';
+    expect(MarpHtmlService.renderReportingSlide(md), md);
+  });
+
+  test('een opsomming met aankruisvakjes is geen checklist-dia', () {
+    // De aankruislijst is een LIJSTSTIJL op een bullets-dia; het MIAUW-type
+    // `checklist` is iets anders. Zou de export op het woord "checklist" gaan,
+    // dan verdween hier de opsomming.
+    final slide = Slide.create(SlideType.bullets).copyWith(
+      title: 'Voorbereiding',
+      listStyle: ListStyle.checklist,
+      bullets: const ['[x] Scope afgestemd', '[ ] Testaccounts ontvangen'],
+    );
+    final md = _reportingSlideMarkdown(slide);
+    expect(MarpHtmlService.renderReportingSlide(md), md);
+  });
+
+  test('een tabeldia blijft een tabel', () {
+    final slide = Slide.create(SlideType.table).copyWith(
+      title: 'Planning',
+      tableRows: const [
+        ['Fase', 'Datum'],
+        ['Start', '2026-01'],
+      ],
+    );
+    final md = _reportingSlideMarkdown(slide);
+    expect(MarpHtmlService.renderReportingSlide(md), md);
+  });
+
+  test('de opmaak van de rapportagedia\'s zit in de export', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    final html = await service.build('# X');
+    // Thema-onafhankelijk, dus altijd meegestuurd — dezelfde les als bij de
+    // tijdlijn, die zijn opmaak verloor zodra er een thema meeging.
+    expect(html, contains('.slide .rep-title'));
+    expect(html, contains('.slide .sc-card'));
+    expect(html, contains('.slide .fs-bar'));
+  });
+}
+
+// ── Afbeeldingen insluiten ─────────────────────────────────────────────────
+//
+// "Self-contained" was niet waar voor een deck met beeld: de export droeg de
+// paden van de auteur, en de ontvanger kreeg kapotte pictogrammen.
+
+void _imageEmbedTests() {
+  test('elke afbeelding gaat één keer mee, ook op tien dia\'s', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    const md =
+        '# A\n\n![bg](images/achtergrond.png)\n\n---\n\n'
+        '# B\n\n![bg](images/achtergrond.png)\n\n'
+        '![Bewijs](images/bewijs.jpg)\n';
+    final resolved = <String>[];
+    final html = await service.build(
+      md,
+      embedImage: (source) async {
+        resolved.add(source);
+        return 'data:image/jpeg;base64,AAA${resolved.length}';
+      },
+    );
+
+    // Geen enkel bronpad blijft over: dat is wat "self-contained" betekent.
+    expect(html, isNot(contains('images/achtergrond.png')));
+    expect(html, isNot(contains('images/bewijs.jpg')));
+    // Twee bronnen, twee keer gelezen en twee keer ingesloten — niet drie. Een
+    // achtergrond op veertig dia\'s mag het bestand niet veertig keer zo groot
+    // maken, en hem veertig keer van schijf lezen is even zinloos.
+    expect(resolved, hasLength(2));
+    expect(html, contains('#ocideck-img-0'));
+    expect(html, contains('#ocideck-img-1'));
+    expect(html, isNot(contains('#ocideck-img-2')));
+    expect('data:image/jpeg;base64,AAA'.allMatches(html).length, 2);
+    // De alt-tekst blijft staan; die is het toegankelijkheidsanker.
+    expect(html, contains('![Bewijs]'));
+  });
+
+  test('een afbeelding die niet mee kan, wordt een zichtbare melding', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    final html = await service.build(
+      '# A\n\n![Foto](images/weg.png)\n',
+      embedImage: (source) async => null,
+    );
+
+    // Zichtbaar, want een stille lege plek ziet de ontvanger over het hoofd.
+    expect(html, contains('image-missing'));
+    expect(html, contains('Afbeelding niet ingesloten'));
+    // En het pad van de auteur blijft eruit: dat is zijn mappenstructuur, niet
+    // iets wat de ontvanger hoeft te kennen.
+    expect(html, isNot(contains('images/weg.png')));
+    expect(html, contains('.slide .image-missing{'));
+  });
+
+  test('zonder insluiter blijft de markdown zoals hij was', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    final html = await service.build('# A\n\n![Foto](images/foto.png)\n');
+
+    expect(html, contains('images/foto.png'));
+    expect(html, contains('var OCIDECK_IMG=[]'));
+  });
+
+  test('een bron die al een data:-URI is blijft onaangeroerd', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    var calls = 0;
+    final html = await service.build(
+      '# A\n\n![Al ingesloten](data:image/gif;base64,R0lGOD)\n',
+      embedImage: (source) async {
+        calls++;
+        return 'data:image/png;base64,ZZZ';
+      },
+    );
+
+    expect(calls, 0);
+    expect(html, contains('data:image/gif;base64,R0lGOD'));
+  });
+
+  test('de plaatshouder wordt alleen door onze eigen lijst ingevuld', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    final html = await service.build(
+      '# A\n\n![X](images/x.png)\n',
+      embedImage: (source) async => 'data:image/png;base64,ZZZ',
+    );
+
+    // De index komt uit het document en is dus onbetrouwbaar: het renderscript
+    // zet alleen een waarde die echt een data:image/-URI uit OCIDECK_IMG is.
+    expect(html, contains("uri.indexOf('data:image/')===0"));
+    expect(html, contains('OCIDECK_IMG'));
+  });
+}
+
+// ── Video ──────────────────────────────────────────────────────────────────
+
+void _videoTests() {
+  test('een lokale video wordt een zichtbare melding', () {
+    final slide = Slide.create(
+      SlideType.video,
+    ).copyWith(title: 'Demo', videoPath: 'media/demo.mp4');
+    final md = MarkdownService().generateSlide(slide, forExport: true);
+    expect(md, contains('<video'), reason: 'de opslagvorm is een speler');
+
+    final html = MarpHtmlService.renderVideoNotice(md);
+    // Een speler die naar een bestand wijst dat de ontvanger niet heeft, blijft
+    // zwart en zegt niets. De melding zegt tenminste dát er iets ontbreekt.
+    expect(html, isNot(contains('<video')));
+    expect(html, contains('Video niet ingesloten'));
+    expect(html, contains('media-absent'));
+  });
+
+  test('een YouTube-insluiting wordt dezelfde melding', () {
+    final slide = Slide.create(
+      SlideType.video,
+    ).copyWith(videoPath: 'https://www.youtube.com/watch?v=aaaaaaaaaaa');
+    final md = MarkdownService().generateSlide(slide, forExport: true);
+    expect(md, contains('ocideck-embed'));
+
+    final html = MarpHtmlService.renderVideoNotice(md);
+    // De CSP van de export zet frame-src 'none', dus de speler kan hier niet
+    // werken — een leeg vak zonder uitleg was het gevolg.
+    expect(html, isNot(contains('<iframe')));
+    expect(html, contains('Video niet ingesloten'));
+    // De letterlijke URL die de serialiser eronder schrijft blijft staan, dus
+    // de bron zelf is nog te bereiken.
+    expect(html, contains('youtube.com/watch'));
+  });
+
+  test('een dia zonder video blijft ongemoeid', () {
+    const md = '# Gewone dia\n\nTekst.\n';
+    expect(MarpHtmlService.renderVideoNotice(md), md);
   });
 }

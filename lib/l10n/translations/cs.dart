@@ -1780,6 +1780,11 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Video niet ingesloten': 'Video není vloženo',
+  'Afbeelding niet ingesloten': 'Obrázek není vložen',
+  'Dit diagram kon niet worden getekend':
+      'Tento diagram se nepodařilo vykreslit',
+  'Brontekst van het diagram': 'Zdrojový text diagramu',
   'Jouw antwoord': 'Tvoje odpověď',
   'nodig': 'potřeba',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

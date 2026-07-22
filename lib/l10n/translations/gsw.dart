@@ -1781,6 +1781,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Video niet ingesloten': 'Video nöd iibettet',
+  'Afbeelding niet ingesloten': 'Bild nöd iibettet',
+  'Dit diagram kon niet worden getekend':
+      'Das Diagramm het nöd chöne zeichnet werde',
+  'Brontekst van het diagram': 'Quälltext vom Diagramm',
   'Jouw antwoord': 'Dini Antwort',
   'nodig': 'nötig',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':

@@ -1784,6 +1784,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Video niet ingesloten': 'Videozapis nije ugrađen',
+  'Afbeelding niet ingesloten': 'Slika nije ugrađena',
+  'Dit diagram kon niet worden getekend':
+      'Ovaj dijagram nije bilo moguće nacrtati',
+  'Brontekst van het diagram': 'Izvorni tekst dijagrama',
   'Jouw antwoord': 'Tvoj odgovor',
   'nodig': 'potrebno',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
