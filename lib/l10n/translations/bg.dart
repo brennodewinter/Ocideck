@@ -1798,6 +1798,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: колко широко може да се споделя този материал?',
+  'Wat betekenen deze niveaus?': 'Какво означават тези нива?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'политиката за класификация следи какво може да излезе.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'маркировката пътува заедно с файла, но няма никаква преграда: включете политиката за класификация в Настройки → Общи.',
   'Dit document bestaat alleen in het Engels.':
       'Този документ съществува само на английски.',
   'Dit bestand bestaat niet meer op deze plek.':

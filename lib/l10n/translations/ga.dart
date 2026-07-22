@@ -1811,6 +1811,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: cé chomh forleathan is féidir an t-ábhar seo a roinnt?',
+  'Wat betekenen deze niveaus?': 'Cad is brí leis na leibhéil seo?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'coinníonn an polasaí aicmithe súil ar a bhfuil cead imeacht.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'taistealaíonn an marc leis, ach níl aon bhac ann: cuir an polasaí aicmithe ar siúl faoi Socruithe → Ginearálta.',
   'Dit document bestaat alleen in het Engels.':
       'Níl an cháipéis seo ar fáil ach i mBéarla.',
   'Dit bestand bestaat niet meer op deze plek.':

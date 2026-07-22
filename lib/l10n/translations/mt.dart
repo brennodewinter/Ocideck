@@ -1798,6 +1798,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: kemm wiesa\' jista\' jinqasam dan il-materjal?',
+  'Wat betekenen deze niveaus?': 'Xi jfissru dawn il-livelli?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'il-politika tal-klassifikazzjoni tgħasses x\'jista\' joħroġ.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'il-marka tivvjaġġa magħha, imma m\'hemm ebda ostakolu: ixgħel il-politika tal-klassifikazzjoni taħt Settings → Ġenerali.',
   'Dit document bestaat alleen in het Engels.':
       'Dan id-dokument jeżisti bl-Ingliż biss.',
   'Dit bestand bestaat niet meer op deze plek.':

@@ -1788,6 +1788,13 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: jak szeroko można udostępniać ten materiał?',
+  'Wat betekenen deze niveaus?': 'Co oznaczają te poziomy?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'zasady klasyfikacji pilnują, co może wyjść na zewnątrz.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'oznaczenie podróżuje razem z plikiem, ale nie ma żadnej blokady: włącz zasady klasyfikacji w Ustawienia → Ogólne.',
   'Dit document bestaat alleen in het Engels.':
       'Ten dokument istnieje tylko w języku angielskim.',
   'Dit bestand bestaat niet meer op deze plek.':

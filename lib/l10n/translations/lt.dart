@@ -1783,6 +1783,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: kaip plačiai galima dalytis šia medžiaga?',
+  'Wat betekenen deze niveaus?': 'Ką reiškia šie lygiai?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'klasifikavimo politika prižiūri, ką galima išleisti.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'žymė keliauja kartu, bet jokios užtvaros nėra: įjunkite klasifikavimo politiką skiltyje Nustatymai → Bendra.',
   'Dit document bestaat alleen in het Engels.':
       'Šis dokumentas yra tik anglų kalba.',
   'Dit bestand bestaat niet meer op deze plek.':

@@ -1783,6 +1783,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: ako široko sa tento materiál smie zdieľať?',
+  'Wat betekenen deze niveaus?': 'Čo znamenajú tieto úrovne?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'pravidlá klasifikácie strážia, čo smie von.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'značka putuje spolu so súborom, ale nie je tu žiadna zábrana: zapni pravidlá klasifikácie v Nastavenia → Všeobecné.',
   'Dit document bestaat alleen in het Engels.':
       'Tento dokument existuje iba v angličtine.',
   'Dit bestand bestaat niet meer op deze plek.':

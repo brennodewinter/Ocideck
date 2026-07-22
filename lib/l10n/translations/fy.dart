@@ -735,6 +735,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: hoe breed mei dit materiaal dield wurde?',
+  'Wat betekenen deze niveaus?': 'Wat betsjutte dizze nivo\'s?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'it klassifikaasjebelied bewekket wat der út mei.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'de markearring reizget mei, mar der is gjin drompel: set it klassifikaasjebelied oan by Ynstellingen → Algemien.',
   'Dit document bestaat alleen in het Engels.':
       'Dit dokumint bestiet allinnich yn it Ingelsk.',
   'Dit bestand bestaat niet meer op deze plek.':

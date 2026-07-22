@@ -1767,6 +1767,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: kui laialt tohib seda materjali jagada?',
+  'Wat betekenen deze niveaus?': 'Mida need tasemed tähendavad?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'klassifitseerimispoliitika valvab, mida tohib välja lasta.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'märgistus liigub kaasa, kuid künnist ei ole: lülita klassifitseerimispoliitika sisse jaotises Seaded → Üldine.',
   'Dit document bestaat alleen in het Engels.':
       'See dokument on olemas ainult inglise keeles.',
   'Dit bestand bestaat niet meer op deze plek.':

@@ -686,7 +686,50 @@ class _TlpChip extends StatelessWidget {
           : l10n.d('TLP-classificatie (Traffic Light Protocol)'),
       position: PopupMenuPosition.under,
       onSelected: onSelected,
-      itemBuilder: (_) => [
+      itemBuilder: (context) => [
+        // Wát TLP is, boven de keuzes. Deze knop staat op de op één na
+        // prominentste plek van de hele interface, naast de titel van je
+        // presentatie, en toonde zes afkortingen zonder één woord uitleg. Voor
+        // wie een productpresentatie maakt is dat een drieletterwoord uit de
+        // incidentafhandeling; voor wie het wél kent wekt het een verwachting
+        // over wat er dan gebeurt (#627).
+        PopupMenuItem<TlpLevel>(
+          enabled: false,
+          height: 34,
+          child: Text(
+            l10n.d(
+              'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?',
+            ),
+            style: TextStyle(fontSize: 11.5, color: AppTheme.slate600),
+          ),
+        ),
+        PopupMenuItem<TlpLevel>(
+          height: 34,
+          // Geen waarde: dit kiest geen niveau maar opent de uitleg. `onTap`
+          // loopt ná het sluiten van het menu, dus de lezer komt niet onder
+          // een verdwijnende overlay terecht.
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => DocumentReaderScreen(
+                title: l10n.d('Gebruikershandleiding'),
+                assetBase: 'docs/USER_GUIDE.md',
+              ),
+            ),
+          ),
+          child: Row(
+            children: [
+              Icon(Icons.help_outline, size: 15, color: AppTheme.slate600),
+              const SizedBox(width: 9),
+              Expanded(
+                child: Text(
+                  l10n.d('Wat betekenen deze niveaus?'),
+                  style: const TextStyle(fontSize: 12.5),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const PopupMenuDivider(),
         for (final level in TlpLevel.values)
           PopupMenuItem<TlpLevel>(
             value: level,

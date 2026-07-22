@@ -1782,6 +1782,13 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: koliko se široko ovaj materijal smije dijeliti?',
+  'Wat betekenen deze niveaus?': 'Što znače ove razine?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'pravila klasifikacije nadziru što smije izaći.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'oznaka putuje s datotekom, ali nema nikakve zapreke: uključi pravila klasifikacije u Postavke → Općenito.',
   'Dit document bestaat alleen in het Engels.':
       'Ovaj dokument postoji samo na engleskom.',
   'Dit bestand bestaat niet meer op deze plek.':

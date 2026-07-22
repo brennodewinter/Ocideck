@@ -1780,6 +1780,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: milyen széles körben osztható meg ez az anyag?',
+  'Wat betekenen deze niveaus?': 'Mit jelentenek ezek a szintek?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'a besorolási szabályzat őrzi, mi mehet ki.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'a jelölés vele utazik, de nincs semmilyen küszöb: kapcsold be a besorolási szabályzatot a Beállítások → Általános alatt.',
   'Dit document bestaat alleen in het Engels.':
       'Ez a dokumentum csak angolul érhető el.',
   'Dit bestand bestaat niet meer op deze plek.':

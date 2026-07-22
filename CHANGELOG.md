@@ -94,6 +94,20 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Added
+- **De TLP-knop legt nu uit waar hij over gaat.** Hij staat op de op één na
+  prominentste plek van de hele interface, naast de titel van je presentatie, en
+  toonde zes afkortingen zonder één woord uitleg. Voor wie een productpresentatie
+  maakt is dat een drieletterwoord uit de incidentafhandeling; voor wie het wél
+  kent wekt het een verwachting over wat er dan gebeurt. Boven de niveaus staat
+  nu één zin, met eronder een ingang naar de handleiding.
+
+  En het exportdialoog zwijgt niet meer over de classificatie. Staat er een
+  niveau, dan zegt het welk — en, belangrijker, of er iets aan vastzit: bewaakt
+  het classificatiebeleid wat eruit mag, of reist de markering alleen mee. Dat
+  tweede is de gewone toestand, want handhaving is een aparte instelling, en een
+  `TLP:RED` die stilletjes niets doet is erger dan geen classificatie.
+
 ### Fixed
 - **"Kon dit bestand niet openen." zei niet wát er mis was — terwijl de app het
   wist.** Vier verschillende dingen kregen dezelfde zin: het bestand bestaat niet

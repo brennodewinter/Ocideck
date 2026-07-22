@@ -1779,6 +1779,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: wie breit dörf das Material teilt werde?',
+  'Wat betekenen deze niveaus?': 'Was bedüted die Stuefe?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'd Klassifizierigsrichtlinie luegt, was use dörf.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'd Markierig reist mit, aber es git kei Schrangge: schalt d Klassifizierigsrichtlinie under Istellige → Allgemein i.',
   'Dit document bestaat alleen in het Engels.':
       'Das Dokumänt git\'s nume uf Änglisch.',
   'Dit bestand bestaat niet meer op deze plek.':

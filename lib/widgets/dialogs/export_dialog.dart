@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide_quality.dart';
 import '../../services/classification_enforcement_policy.dart';
@@ -595,6 +596,42 @@ class _ExportDialogState extends State<ExportDialog> {
     return _optionsContent(l10n);
   }
 
+  /// De classificatie van dit deck, zolang die niet *geen* is — plus of er
+  /// iets aan vastzit.
+  ///
+  /// Het dialoog zweeg erover en exporteerde naar PDF, PPTX en HTML zonder
+  /// enige drempel. Wie TLP:RED had gekozen zag rode markeringen op elke dia en
+  /// mocht daar iets van verwachten; als het alleen opmaak is, is dat erger dan
+  /// geen classificatie (#627). Handhaving bestáát, maar alleen met het
+  /// classificatiebeleid aan — en dat is nergens te zien vanaf hier.
+  Widget _classificationBanner(AppLocalizations l10n) {
+    final tlp = _bundle.audience.deck.tlp;
+    if (tlp == TlpLevel.none) return const SizedBox.shrink();
+    final enforced = widget.enforcementPolicy.isEnforcing;
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppTheme.infoBg,
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.shield_outlined, size: 15, color: AppTheme.slate600),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              enforced
+                  ? '${tlp.label} — ${l10n.d('het classificatiebeleid bewaakt wat er uit mag.')}'
+                  : '${tlp.label} — ${l10n.d('de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.')}',
+              style: TextStyle(fontSize: 11.5, color: AppTheme.slate700),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _optionsContent(AppLocalizations l10n) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -606,6 +643,7 @@ class _ExportDialogState extends State<ExportDialog> {
           _qualityBanner(l10n)
         else
           _readyBanner(l10n),
+        _classificationBanner(l10n),
         _privacyCaveat(l10n),
         Padding(
           padding: const EdgeInsets.only(bottom: 8),

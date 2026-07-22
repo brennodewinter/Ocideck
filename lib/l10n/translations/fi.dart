@@ -1776,6 +1776,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: kuinka laajasti tätä aineistoa saa jakaa?',
+  'Wat betekenen deze niveaus?': 'Mitä nämä tasot tarkoittavat?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'luokittelukäytäntö valvoo, mitä saa viedä ulos.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'merkintä kulkee mukana, mutta estettä ei ole: ota luokittelukäytäntö käyttöön kohdassa Asetukset → Yleiset.',
   'Dit document bestaat alleen in het Engels.':
       'Tämä asiakirja on olemassa vain englanniksi.',
   'Dit bestand bestaat niet meer op deze plek.':

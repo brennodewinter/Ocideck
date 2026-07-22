@@ -1775,6 +1775,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: cik plaši šo materiālu drīkst kopīgot?',
+  'Wat betekenen deze niveaus?': 'Ko nozīmē šie līmeņi?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'klasifikācijas politika uzrauga, ko drīkst izvadīt.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'marķējums ceļo līdzi, taču nav nekāda sliekšņa: ieslēdziet klasifikācijas politiku sadaļā Iestatījumi → Vispārīgi.',
   'Dit document bestaat alleen in het Engels.':
       'Šis dokuments ir pieejams tikai angļu valodā.',
   'Dit bestand bestaat niet meer op deze plek.':

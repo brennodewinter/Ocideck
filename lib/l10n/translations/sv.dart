@@ -1775,6 +1775,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: hur brett får det här materialet delas?',
+  'Wat betekenen deze niveaus?': 'Vad betyder de här nivåerna?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'klassificeringspolicyn bevakar vad som får lämna.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'markeringen följer med, men det finns ingen spärr: slå på klassificeringspolicyn under Inställningar → Allmänt.',
   'Dit document bestaat alleen in het Engels.':
       'Det här dokumentet finns bara på engelska.',
   'Dit bestand bestaat niet meer op deze plek.':
