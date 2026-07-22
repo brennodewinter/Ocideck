@@ -25,6 +25,7 @@ import '../../models/s3_settings.dart';
 import '../../utils/log.dart';
 import '../../utils/net_guard.dart';
 import '../file_service.dart';
+import '../net/transport_failure.dart';
 import 's3_sigv4.dart';
 
 /// Eén item in een S3-listing.
@@ -272,36 +273,32 @@ class S3Service {
     }
   }
 
-  /// Listing van [remotePath] (relatief aan de wortelprefix), met een delimiter
-  /// zodat onderliggende prefixen als mappen terugkomen in plaats van als één
-  /// platte sleutellijst.
   /// Vertaal een gevangen laag-niveau fout naar een [S3Exception] die weet of
-  /// hij het opnieuw proberen waard is. Spiegelt `WebdavService._asFailure`.
+  /// hij het opnieuw proberen waard is.
+  ///
+  /// De soortindeling deelt hij met elke andere opslag
+  /// ([classifyTransportFailure]); de zin die de gebruiker leest noemt het
+  /// S3-endpoint en blijft daarom hier.
   static Never _asFailure(String where, Object e, String fallback) {
-    // TlsException dekt zowel HandshakeException als CertificateException.
-    if (e is TlsException) {
-      logWarning('S3Service.$where: TLS geweigerd', e);
-      throw S3Exception(S3Error.tls, 'Certificaat niet vertrouwd');
-    }
-    if (e is SocketException) {
-      logWarning('S3Service.$where: endpoint onbereikbaar', e);
-      throw S3Exception(
+    final kind = classifyTransportFailure(e);
+    logTransportFailure('S3Service.$where', kind, e);
+    throw switch (kind) {
+      TransportFailure.tls => S3Exception(
+        S3Error.tls,
+        'Certificaat niet vertrouwd',
+      ),
+      TransportFailure.unreachable => S3Exception(
         S3Error.network,
         'Endpoint niet bereikbaar',
         transient: true,
-      );
-    }
-    // Een verbinding die halverwege wegviel meldt Dart als HttpException.
-    if (e is HttpException) {
-      logWarning('S3Service.$where: verbinding afgebroken', e);
-      throw S3Exception(
+      ),
+      TransportFailure.interrupted => S3Exception(
         S3Error.network,
         'Verbinding afgebroken',
         transient: true,
-      );
-    }
-    logError('S3Service.$where: mislukt', e);
-    throw S3Exception(S3Error.network, fallback);
+      ),
+      TransportFailure.unknown => S3Exception(S3Error.network, fallback),
+    };
   }
 
   /// Voer een *leesactie* uit en probeer hem één keer opnieuw wanneer de
@@ -321,6 +318,9 @@ class S3Service {
     }
   }
 
+  /// Listing van [remotePath] (relatief aan de wortelprefix), met een delimiter
+  /// zodat onderliggende prefixen als mappen terugkomen in plaats van als één
+  /// platte sleutellijst.
   Future<List<S3Entry>> list(String remotePath) =>
       _retryRead('list', () => _listOnce(remotePath));
 
