@@ -183,6 +183,17 @@ a security fix will be in its notes. There is deliberately no mailing list — a
 subscriber list is personal data we would have to hold and protect, and a feed is
 not. [`SECURITY.md`](SECURITY.md) lists the alternatives and what they carry.
 
+## Where the risk assessment lives
+
+The Cyber Resilience Act's Annex I Part I asks for a documented risk assessment,
+and it is a different artefact from a threat model. Ours is
+[`assurance/risicoafweging.md`](assurance/risicoafweging.md): ten risks, their
+consequence and likelihood, and — the part that matters — the five that are
+deliberately **accepted**, each with what would put the decision back on the
+table.
+
+The largest risk in it is not technical. It is R9: one maintainer.
+
 ## Machine-readable
 
 The same facts in a form a tool can read, without anyone having to ask us:

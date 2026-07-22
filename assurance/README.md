@@ -31,6 +31,7 @@ onderdeel van wat het product over zichzelf beweert.
 | [`ASVS-5.0.0-scope.md`](ASVS-5.0.0-scope.md) | Welke ASVS-hoofdstukken hier een onderwerp hebben en welke niet, mét de motivering. Het waardevolle deel. |
 | [`ASVS-5.0.0-afwijkingen.md`](ASVS-5.0.0-afwijkingen.md) | Eisen die bewust niet worden gehaald, en waarom dat de juiste keuze is. |
 | [`CRA-2024-2847-positie.md`](CRA-2024-2847-positie.md) | Waarom de Cyberweerbaarheidsverordening hier geen verplichting is, en waarom we hem tóch als leidraad aanhouden. |
+| [`risicoafweging.md`](risicoafweging.md) | Wat er mis kan gaan, hoe erg dat is voor wie het overkomt, en welke risico's bewust zijn aanvaard. Het document waar de aanvaarde afwijkingen elders in dit dossier hun kader vinden. |
 
 ## De bronnen, en waar het weten ophoudt
 
