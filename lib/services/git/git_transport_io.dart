@@ -4,6 +4,7 @@ import 'dart:typed_data' show BytesBuilder;
 import '../../models/git_settings.dart';
 import '../../utils/log.dart';
 import '../../utils/net_guard.dart';
+import '../net/transport_failure.dart';
 import 'git_forge.dart';
 import 'git_transport.dart';
 
@@ -102,29 +103,27 @@ class PinnedGitTransport implements GitTransport {
       return GitResponse(response.statusCode, builder.takeBytes());
     } on GitForgeException {
       rethrow;
-    } on TlsException catch (e) {
-      // Dekt HandshakeException en CertificateException. Niet transient: een
-      // afgewezen certificaat verandert niet door het nog eens te proberen.
-      throw GitForgeException(
-        GitForgeError.tls,
-        'Certificaat niet vertrouwd: $e',
-      );
-    } on SocketException catch (e) {
-      throw GitForgeException(
-        GitForgeError.network,
-        'Netwerkfout: $e',
-        transient: true,
-      );
-    } on HttpException catch (e) {
-      // Een verbinding die halverwege wegviel; juist het geval waarvoor
-      // opnieuw proberen bestaat.
-      throw GitForgeException(
-        GitForgeError.network,
-        'Netwerkfout: $e',
-        transient: true,
-      );
     } catch (e) {
-      throw GitForgeException(GitForgeError.network, 'Netwerkfout: $e');
+      // Dezelfde soortindeling als bij WebDAV en S3; alleen de boodschap is
+      // van de forge. Een afgewezen certificaat is niet transient — dat
+      // verandert niet door het nog eens te proberen — en een verbinding die
+      // halverwege wegviel juist wél.
+      throw switch (classifyTransportFailure(e)) {
+        TransportFailure.tls => GitForgeException(
+          GitForgeError.tls,
+          'Certificaat niet vertrouwd: $e',
+        ),
+        TransportFailure.unreachable ||
+        TransportFailure.interrupted => GitForgeException(
+          GitForgeError.network,
+          'Netwerkfout: $e',
+          transient: true,
+        ),
+        TransportFailure.unknown => GitForgeException(
+          GitForgeError.network,
+          'Netwerkfout: $e',
+        ),
+      };
     }
   }
 
