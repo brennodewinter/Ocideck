@@ -83,6 +83,20 @@ class BrowserGitTransport implements GitTransport {
         'Alleen https-servers worden ondersteund.',
       );
     }
+    // En een token gaat nooit over platte tekst, ook niet naar een vertrouwde
+    // interne host — dezelfde regel als op io (`NetGuard.maySendReusableSecret`),
+    // hier met de koppenlijst die deze klasse al bijhoudt. De pagina-CSP
+    // (`connect-src 'self' https:`) houdt plain http in de praktijk al tegen;
+    // dit staat er zodat de regel niet aan die ene laag hangt. Zonder token —
+    // een publieke repo — blijft plain http op een vertrouwd LAN werken.
+    // (Toegevoegd 2026-07-22.)
+    if (scheme != 'https' && !_mayUseProxy(headers)) {
+      throw const GitForgeException(
+        GitForgeError.config,
+        'Een git-server met een token vereist https: het token gaat bij élk '
+        'verzoek mee, dus het zou onversleuteld over het netwerk gaan.',
+      );
+    }
 
     final direct = await _fetchCapped(
       uri,

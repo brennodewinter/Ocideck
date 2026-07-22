@@ -180,16 +180,23 @@ class WebdavService {
       throw WebdavException(WebdavError.config, 'Ongeldige server-URL');
     }
     // Basic-auth stuurt de Nextcloud-credentials in (base64) mee bij élke
-    // request. Over plain http gaan die in leesbare vorm over de lijn, dus
-    // eisen we https — tenzij de gebruiker de server bewust als vertrouwd
-    // intern (LAN) heeft gemarkeerd, waar een box zonder TLS gangbaar is.
+    // request — een herbruikbaar geheim, geen handtekening per verzoek. Over
+    // plain http gaan die in leesbare vorm over de lijn.
+    //
+    // Corrected 2026-07-22: hier stond "tenzij de gebruiker de server als
+    // vertrouwd intern heeft gemarkeerd". Die vink zegt iets over de host, niet
+    // over de lijn ernaartoe, en het wachtwoord blijft werken lang nadat wie
+    // dan ook het van dat LAN-segment heeft geplukt. Zie
+    // [NetGuard.maySendReusableSecret].
     final scheme = server.origin?.scheme.toLowerCase();
-    if (scheme != 'https' && !(scheme == 'http' && server.trustedInternal)) {
+    if (!NetGuard.maySendReusableSecret(scheme, host: host)) {
       throw WebdavException(
         WebdavError.config,
         scheme == 'http'
-            ? 'Gebruik https of markeer de server als vertrouwd intern; '
-                  'anders gaat je wachtwoord onversleuteld over het netwerk.'
+            ? 'WebDAV vereist https: je wachtwoord gaat bij élk verzoek mee, '
+                  'dus het zou onversleuteld over het netwerk gaan. Vertrouwd '
+                  'intern verandert daar niets aan — die instelling gaat over '
+                  'de server, niet over de verbinding ernaartoe.'
             : 'Alleen https-servers worden ondersteund.',
       );
     }
