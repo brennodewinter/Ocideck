@@ -610,15 +610,15 @@ extension _CarouselActions on _ImageCarouselPickerState {
   }
 
   Future<void> _browse() async {
-    final result = await FilePicker.pickFiles(
-      type: FileType.image,
-      dialogTitle: context.l10n.d('Kies een afbeelding'),
-    );
-    if (result?.files.single.path != null && mounted) {
-      final path = result!.files.single.path!;
-      final caption = await widget.captionService.getCaption(path) ?? '';
-      await _close(ImagePickResult(path, caption));
-    }
+    // Las hier `.path` uit een eigen FilePicker-aanroep; op web is dat een
+    // blob:-URL die nergens heen wijst, terwijl de app een mem:-sleutel
+    // verwacht. ImageService kent die route al, mét grens en inhoudscontrole
+    // (#526).
+    final path = (await ImageService().pickImageDetailed()).path;
+    if (path == null || !mounted) return;
+    final caption = await widget.captionService.getCaption(path) ?? '';
+    if (!mounted) return;
+    await _close(ImagePickResult(path, caption));
   }
 
   Future<void> _select(String path) async {
