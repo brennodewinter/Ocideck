@@ -111,9 +111,9 @@ class _TimelinePreviewState extends State<_TimelinePreview>
   @override
   Widget build(BuildContext context) {
     final events = parseTimelineEvents(widget.slide.bullets);
-    final bg = _hexColor(widget.profile.slideBackgroundColor);
-    final accent = _hexColor(widget.profile.accentColor);
-    final textColor = _hexColor(widget.profile.textColor);
+    final bg = AppTheme.parseHexColor(widget.profile.slideBackgroundColor);
+    final accent = AppTheme.parseHexColor(widget.profile.accentColor);
+    final textColor = AppTheme.parseHexColor(widget.profile.textColor);
     // Secondary text is the configured text colour, only slightly softened so it
     // still reads as the same colour as the rest of the slides.
     final muted = textColor.withValues(alpha: 0.74);
@@ -123,7 +123,7 @@ class _TimelinePreviewState extends State<_TimelinePreview>
     // never become unreadable on an unlucky palette.
     final onAccent = _readableOn(
       accent,
-      _hexColor(widget.profile.titleTextColor),
+      AppTheme.parseHexColor(widget.profile.titleTextColor),
     );
 
     final pad = widget.w * 0.045;

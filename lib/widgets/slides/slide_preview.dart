@@ -188,15 +188,6 @@ Widget _md(
   );
 }
 
-Color _hexColor(String hex) {
-  final cleaned = hex.replaceFirst('#', '');
-  final value = int.tryParse(
-    cleaned.length == 6 ? 'FF$cleaned' : cleaned,
-    radix: 16,
-  );
-  return Color(value ?? 0xFFFFFFFF);
-}
-
 EdgeInsets _logoSafeInsets(double w, ThemeProfile profile) {
   final (top, bottom) = logoSafeReserveEdges(w, profile);
   return EdgeInsets.only(top: top, bottom: bottom);
@@ -454,7 +445,7 @@ class SlidePreviewWidget extends StatelessWidget {
             textDirection: TextDirection.ltr,
             child: DefaultTextStyle(
               style: TextStyle(
-                color: _hexColor(themeProfile.textColor),
+                color: AppTheme.parseHexColor(themeProfile.textColor),
                 decoration: TextDecoration.none,
                 fontWeight: FontWeight.normal,
                 fontStyle: FontStyle.normal,

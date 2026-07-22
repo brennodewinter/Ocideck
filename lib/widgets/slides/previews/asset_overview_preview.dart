@@ -158,7 +158,11 @@ class _AssetOverviewPreview extends StatelessWidget {
           _num(group.atRisk, _tone(group.atRisk, AppTheme.danger700, text)),
           _num(
             group.newlyFound,
-            _tone(group.newlyFound, _hexColor(profile.accentColor), text),
+            _tone(
+              group.newlyFound,
+              AppTheme.parseHexColor(profile.accentColor),
+              text,
+            ),
           ),
           _num(group.unowned, _tone(group.unowned, AppTheme.danger700, text)),
         ],
@@ -209,7 +213,11 @@ class _AssetOverviewPreview extends StatelessWidget {
           ),
           _num(
             spec.totalNew,
-            _tone(spec.totalNew, _hexColor(profile.accentColor), text),
+            _tone(
+              spec.totalNew,
+              AppTheme.parseHexColor(profile.accentColor),
+              text,
+            ),
             emphasised: true,
           ),
           _num(
@@ -228,7 +236,7 @@ class _AssetOverviewPreview extends StatelessWidget {
     final pad = w * 0.07;
     final hPad = w * 0.045;
     final spec = AssetOverviewSpec.fromSlide(slide.title, slide.tableRows);
-    final text = _hexColor(profile.textColor);
+    final text = AppTheme.parseHexColor(profile.textColor);
     final groups = spec.groups.where((g) => !g.isBlank).toList();
     final largest = spec.largestGroup;
 
@@ -238,7 +246,7 @@ class _AssetOverviewPreview extends StatelessWidget {
       profile: profile,
       horizontalPadding: hPad,
       verticalPadding: pad,
-      background: _hexColor(profile.slideBackgroundColor),
+      background: AppTheme.parseHexColor(profile.slideBackgroundColor),
       children: [
         if (spec.title.isNotEmpty) ...[
           Text(

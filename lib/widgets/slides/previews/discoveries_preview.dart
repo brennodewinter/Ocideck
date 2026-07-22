@@ -192,7 +192,7 @@ class _DiscoveriesPreview extends StatelessWidget {
           width: constraints.maxWidth * spec.barFraction(discovery),
           height: barHeight,
           decoration: BoxDecoration(
-            color: _hexColor(profile.accentColor),
+            color: AppTheme.parseHexColor(profile.accentColor),
             borderRadius: BorderRadius.circular(barHeight / 2),
           ),
         ),
@@ -309,7 +309,7 @@ class _DiscoveriesPreview extends StatelessWidget {
     final pad = w * 0.07;
     final hPad = w * 0.045;
     final spec = DiscoveriesSpec.fromSlide(slide.title, slide.tableRows);
-    final text = _hexColor(profile.textColor);
+    final text = AppTheme.parseHexColor(profile.textColor);
     final discoveries = spec.discoveries.where((d) => !d.isBlank).toList();
 
     return _PreviewScaffold(
@@ -318,7 +318,7 @@ class _DiscoveriesPreview extends StatelessWidget {
       profile: profile,
       horizontalPadding: hPad,
       verticalPadding: pad,
-      background: _hexColor(profile.slideBackgroundColor),
+      background: AppTheme.parseHexColor(profile.slideBackgroundColor),
       children: [
         if (spec.title.isNotEmpty) ...[
           Text(

@@ -253,10 +253,14 @@ class _TablePreview extends StatelessWidget {
       titleSize: titleSize,
     );
 
-    final accent = _hexColor(profile.accentColor);
-    final textColor = _hexColor(profile.tableTextColor);
-    final headerTextColor = _hexColor(profile.tableHeaderTextColor);
-    final headerBackground = _hexColor(profile.tableHeaderBackgroundColor);
+    final accent = AppTheme.parseHexColor(profile.accentColor);
+    final textColor = AppTheme.parseHexColor(profile.tableTextColor);
+    final headerTextColor = AppTheme.parseHexColor(
+      profile.tableHeaderTextColor,
+    );
+    final headerBackground = AppTheme.parseHexColor(
+      profile.tableHeaderBackgroundColor,
+    );
     final borderColor = accent.withValues(alpha: 0.35);
     final editing = edit?.enabled == true;
     // Tegen de dag waarop het deck getoond wordt, niet tegen een opgeslagen
@@ -475,7 +479,7 @@ class _TablePreview extends StatelessWidget {
     required int colCount,
   }) {
     return Container(
-      color: _hexColor(profile.slideBackgroundColor),
+      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
       child: FittedBox(
         fit: BoxFit.scaleDown,
         alignment: Alignment.topLeft,
@@ -501,10 +505,10 @@ class _TablePreview extends StatelessWidget {
                       TextStyle(
                         fontSize: titleSize,
                         fontWeight: FontWeight.bold,
-                        color: _hexColor(profile.textColor),
+                        color: AppTheme.parseHexColor(profile.textColor),
                       ),
                     ),
-                    linkColor: _hexColor(profile.accentColor),
+                    linkColor: AppTheme.parseHexColor(profile.accentColor),
                   ),
                   SizedBox(height: pad * 0.35),
                 ],
