@@ -35,8 +35,16 @@ distrust the rows that are true.
 | | |
 |---|---|
 | Name | Stichting LibreKAT |
-| Registered address | *to be filled in by the foundation* — see [#644](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/644) |
+| Chamber of Commerce (KvK) | 98657836 |
+| Address | Weidemolen 12, 2211 PW Noordwijkerhout, Netherlands |
+| | Wilhelminaplein 12, 8911 BS Leeuwarden, Netherlands |
 | Website | <https://librekat.nl> |
+| General contact | stichting@librekat.nl · +31 85 333 2942 |
+
+The KvK number is the unambiguous identifier: an address can be shared or
+change, a registration number identifies the legal person. Both addresses are as
+published by the foundation itself, on <https://librekat.nl/nl/contact/> and in
+the app under **Settings → About OciDeck**.
 
 The foundation publishes OciDeck and holds the copyright. It does not sell it,
 host it as a service, or monetise it in any form.
