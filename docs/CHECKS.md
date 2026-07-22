@@ -180,8 +180,9 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Covers:** these project conventions in `lib/`:
   - **no `print()`** (diagnostics go through the logger in `lib/utils/log.dart`);
   - **no bare `catch (_)`** (silently swallowing errors) — a **ratchet**: a
-    baseline count that may shrink but never grow, currently **0**, so every
-    swallow routes a named error through `logError`/`logWarning`;
+    baseline count that may shrink but never grow (`catchUnderscoreBaseline`,
+    currently **0**), so every swallow routes a named error through
+    `logError`/`logWarning`;
   - **raw-colour ratchet** — literal `Color(0x…)` outside
     `lib/theme/app_theme.dart` may shrink but never grow (`rawColorBaseline`);
   - **no raw control bytes** in any `lib/`, `test/` or `tool/` source. A
@@ -199,7 +200,8 @@ also declares them, but see the [CI note](#continuous-integration).)
     carry no widget tree.
     Prefer a semantic `AppTheme` token so a palette change — and a future dark
     mode — touches one place instead of dozens;
-  - **file-size ratchet** — no file may exceed **1000** lines, except the
+  - **file-size ratchet** — no file may exceed the line ceiling
+    (`maxFileLines`, currently **1000**), except the
     files listed in `fileSizeBaseline` whose ceiling is their size at ratchet
     time. A ceiling may shrink (split the file) but never grow, so large files
     trend smaller instead of creeping bigger. `lib/l10n/translations/*` is
@@ -289,7 +291,8 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Runs:** `dart run tool/check_method_length.dart`
 - **Covers:** a **per-method/function-length ratchet** — the per-declaration
   sibling of the file-size ratchet. No method, top-level function or constructor
-  body may exceed **150** lines (signature through closing brace, excluding the
+  body may run longer than `maxMethodLines`
+  (currently **150**) lines (signature through closing brace, excluding the
   doc comment), except the declarations listed in `methodLengthBaseline` whose
   ceiling is their length at ratchet time. A ceiling may shrink (split the
   method) but never grow.
@@ -377,8 +380,8 @@ also declares them, but see the [CI note](#continuous-integration).)
   then `dart run tool/coverage_summary.dart --min=80 --require-instrumented`.
 - **Covers:** two things. (1) Line coverage across every `lib/` file a test
   imports. (2) That there **is** such a test for every `lib/` file.
-- **Failure means:** coverage dropped below the floor (currently **80%**), **or**
-  a `lib/` file is in no test at all.
+- **Failure means:** coverage dropped below the floor (`--min` in the Makefile
+  recipe, currently **80%**), **or** a `lib/` file is in no test at all.
 - **Why (2) exists:** lcov only records files a test imported, so a file no test
   touches is not 0% — it is absent from the denominator altogether. Add a
   brand-new, wholly untested file and the percentage does not move a hair: the
@@ -398,7 +401,8 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Runs:** `dart run tool/coverage_summary.dart --per-file-floor`, over the
   report `make coverage` just wrote — no second test run.
 - **Covers:** the worst case *per file* instead of the average: how many `lib/`
-  files execute less than **20%** of their own lines.
+  files execute less than `perFileFloorPercent` (currently **20%**) of their own
+  lines.
 - **Failure means:** at least one file sits below that floor. Write a test for
   it, or — only when it is a platform half or has no executable lines — put it
   in `uncoveredBaseline` with a reason.
