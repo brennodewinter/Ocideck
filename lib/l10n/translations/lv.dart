@@ -1778,6 +1778,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Izlaišana ir ieslēgta: tas, ko pārbaude atzīst par personas datiem, tiek nomelnots, un visi šī slaida attēli, video un audio nenonāk ne ekrānā, ne eksportā. Tavs markdown fails saglabā visu.',
   'Bestand': 'Fails',
   'Venster': 'Logs',
   'Help': 'Palīdzība',

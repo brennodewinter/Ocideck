@@ -1807,6 +1807,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Η παράλειψη είναι ενεργή: ό,τι χαρακτηρίζει ο έλεγχος ως προσωπικό δεδομένο μαυρίζεται, και όλες οι εικόνες, τα βίντεο και ο ήχος αυτής της διαφάνειας δεν πηγαίνουν στην οθόνη ούτε στην εξαγωγή. Το αρχείο markdown σας τα κρατά όλα.',
   'Bestand': 'Αρχείο',
   'Venster': 'Παράθυρο',
   'Help': 'Βοήθεια',

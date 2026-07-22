@@ -1770,6 +1770,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Väljajätmine on sees: see, mida kontroll peab isikuandmeteks, muudetakse mustaks ning selle slaidi kõik pildid, video ja heli ei lähe ekraanile ega ekspordisse. Sinu markdown-fail säilitab kõik.',
   'Bestand': 'Fail',
   'Venster': 'Aken',
   'Help': 'Abi',

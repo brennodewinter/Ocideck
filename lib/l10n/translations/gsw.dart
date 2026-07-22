@@ -1783,6 +1783,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'S Weglah isch aa: was d Prüefig als persönlichs Datum iistueft, wird gschwärzt, und alli Bilder, Video und Audio vo dere Folie chömed nid uf de Bildschirm oder in Export. Dis Markdown-File behaltet alles.',
   'Bestand': 'Datei',
   'Venster': 'Fänschter',
   'Help': 'Hilf',

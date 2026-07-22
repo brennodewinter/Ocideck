@@ -1795,6 +1795,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Omissio activa est: quod examen datum personale iudicat denigratur, et omnes imagines, pelliculae et soni huius laminae neque ad scrinium neque ad exportationem eunt. Fasciculus tuus markdown omnia servat.',
   'Bestand': 'Fasciculus',
   'Venster': 'Fenestra',
   'Help': 'Auxilium',

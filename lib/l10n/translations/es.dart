@@ -733,6 +733,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'La omisión está activada: lo que la comprobación califica como dato personal se tacha, y todas las imágenes, vídeos y audios de esta diapositiva no pasan a la pantalla ni a la exportación. Tu archivo markdown lo conserva todo.',
   'Bestand': 'Archivo',
   'Venster': 'Ventana',
   'Help': 'Ayuda',

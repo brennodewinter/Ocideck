@@ -736,6 +736,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Laga afó ta prendí: loke e kontròl ta konsiderá komo dato personal ta wòrdu tapá pretu, i tur imagen, video i audio di e dia aki no ta bai na pantaya ni na eksportashon. Bo archivo markdown ta warda tur kos.',
   'Bestand': 'Archivo',
   'Venster': 'Bentana',
   'Help': 'Yudansa',

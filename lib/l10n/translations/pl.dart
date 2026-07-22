@@ -1791,6 +1791,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Pomijanie jest włączone: to, co kontrola uznaje za dane osobowe, jest zaczerniane, a wszystkie obrazy, wideo i dźwięk z tego slajdu nie trafiają na ekran ani do eksportu. Twój plik markdown zachowuje wszystko.',
   'Bestand': 'Plik',
   'Venster': 'Okno',
   'Help': 'Pomoc',

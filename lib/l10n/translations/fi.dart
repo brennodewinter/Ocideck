@@ -1779,6 +1779,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Poisjättö on käytössä: se, minkä tarkistus katsoo henkilötiedoksi, mustataan, eivätkä tämän dian kuvat, video ja ääni mene näytölle tai vientiin. Markdown-tiedostosi säilyttää kaiken.',
   'Bestand': 'Arkisto',
   'Venster': 'Ikkuna',
   'Help': 'Ohje',

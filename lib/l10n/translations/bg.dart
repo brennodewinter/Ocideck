@@ -1802,6 +1802,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Пропускането е включено: това, което проверката определя като лични данни, се зачернява, а всички изображения, видео и звук от този слайд не отиват на екрана или в експорта. Вашият markdown файл запазва всичко.',
   'Bestand': 'Файл',
   'Venster': 'Прозорец',
   'Help': 'Помощ',

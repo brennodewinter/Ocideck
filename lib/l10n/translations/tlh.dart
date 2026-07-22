@@ -1754,6 +1754,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'chIllu\': nuv De\' \'oH \'e\' wuqbogh ninSar qIjlu\', \'ej cha\'nobvam mIlloghmey, HaSta, wab je cha\'be\'lu\' \'ej ngeHbe\'lu\'. markdown ghItlhlIj Hoch polta\'.',
   'Bestand': 'ghItlh',
   'Venster': 'Qorwagh',
   'Help': 'QaH',

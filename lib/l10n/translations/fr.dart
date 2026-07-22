@@ -736,6 +736,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'L\'omission est activée : ce que le contrôle qualifie de donnée personnelle est caviardé, et toutes les images, vidéos et pistes audio de cette diapositive ne partent ni à l\'écran ni à l\'export. Votre fichier markdown conserve tout.',
   'Bestand': 'Fichier',
   'Venster': 'Fenêtre',
   'Help': 'Aide',

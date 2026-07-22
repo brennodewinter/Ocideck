@@ -1779,6 +1779,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Penyembunyian aktif: apa yang ditandai pemeriksaan sebagai data pribadi dihitamkan, dan semua gambar, video, dan audio pada slide ini tidak ikut ke layar atau ekspor. Berkas markdown Anda menyimpan semuanya.',
   'Bestand': 'Berkas',
   'Venster': 'Jendela',
   'Help': 'Bantuan',

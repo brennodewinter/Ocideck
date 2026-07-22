@@ -1801,6 +1801,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'It-tħassir huwa mixgħul: dak li l-kontroll jikklassifika bħala data personali jiġi mgħotti bl-iswed, u l-immaġni, il-video u l-awdjo kollha ta\' din is-slide ma jmorrux fuq l-iskrin jew fl-esportazzjoni. Il-fajl markdown tiegħek iżomm kollox.',
   'Bestand': 'Fajl',
   'Venster': 'Tieqa',
   'Help': 'Għajnuna',

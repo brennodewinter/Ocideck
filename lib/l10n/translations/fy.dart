@@ -737,6 +737,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Weilitte stiet oan: wat de kontrôle as persoansgegeven oanmerket wurdt swart makke, en álle ôfbyldings, fideo en audio fan dizze dia geane net mei nei it skerm of de eksport. Dyn markdown-bestân hâldt alles.',
   'Bestand': 'Bestân',
   'Venster': 'Finster',
   'Help': 'Help',

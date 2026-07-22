@@ -1782,6 +1782,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Vynechání je zapnuté: to, co kontrola označí za osobní údaj, se začerní a všechny obrázky, video i zvuk tohoto snímku nejdou na obrazovku ani do exportu. Tvůj soubor markdown si vše ponechá.',
   'Bestand': 'Soubor',
   'Venster': 'Okno',
   'Help': 'Nápověda',

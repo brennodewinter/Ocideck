@@ -1797,6 +1797,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Omiterea este activă: ceea ce verificarea consideră dată cu caracter personal este înnegrit, iar toate imaginile, videoclipurile și sunetul acestui slide nu ajung pe ecran sau în export. Fișierul tău markdown păstrează tot.',
   'Bestand': 'Fișier',
   'Venster': 'Fereastră',
   'Help': 'Ajutor',

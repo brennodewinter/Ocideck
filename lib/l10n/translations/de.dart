@@ -736,6 +736,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Weglassen ist an: was die Prüfung als personenbezogenes Datum einstuft, wird geschwärzt, und alle Bilder, Videos und Audios dieser Folie gehen nicht auf den Bildschirm oder in den Export. Deine Markdown-Datei behält alles.',
   'Bestand': 'Ablage',
   'Venster': 'Fenster',
   'Help': 'Hilfe',

@@ -1815,6 +1815,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Tá an fágáil ar lár ann: cuirtear dubh ar cibé rud a mheasann an tseiceáil a bheith ina shonra pearsanta, agus ní théann na híomhánna, an físeán ná an fhuaim ar fad ón sleamhnán seo chuig an scáileán ná chuig an easpórtáil. Coinníonn do chomhad markdown gach rud.',
   'Bestand': 'Comhad',
   'Venster': 'Fuinneog',
   'Help': 'Cabhair',

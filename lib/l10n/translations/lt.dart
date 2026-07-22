@@ -1787,6 +1787,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Praleidimas įjungtas: tai, ką patikra laiko asmens duomenimis, užjuodinama, o visi šios skaidrės vaizdai, vaizdo ir garso įrašai nepatenka nei į ekraną, nei į eksportą. Tavo markdown failas išsaugo viską.',
   'Bestand': 'Failas',
   'Venster': 'Langas',
   'Help': 'Pagalba',

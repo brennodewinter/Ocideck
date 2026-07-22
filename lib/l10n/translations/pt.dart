@@ -1809,6 +1809,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'A omissão está ativa: o que a verificação classifica como dado pessoal é tapado a preto, e todas as imagens, vídeos e áudio deste slide não seguem para o ecrã nem para a exportação. O seu ficheiro markdown mantém tudo.',
   'Bestand': 'Ficheiro',
   'Venster': 'Janela',
   'Help': 'Ajuda',

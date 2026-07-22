@@ -1778,6 +1778,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Utelämnande är på: det som kontrollen bedömer som en personuppgift svärtas, och alla bilder, all video och allt ljud på den här bilden följer inte med till skärmen eller exporten. Din markdown-fil behåller allt.',
   'Bestand': 'Arkiv',
   'Venster': 'Fönster',
   'Help': 'Hjälp',

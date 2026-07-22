@@ -1797,6 +1797,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Приховування ввімкнено: те, що перевірка визначає як персональні дані, зачорнюється, а всі зображення, відео та звук цього слайда не потрапляють ані на екран, ані в експорт. Ваш markdown-файл зберігає все.',
   'Bestand': 'Файл',
   'Venster': 'Вікно',
   'Help': 'Довідка',

@@ -1781,6 +1781,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Izpuščanje je vklopljeno: kar preverjanje označi za osebni podatek, je počrnjeno, vse slike, video in zvok tega diapozitiva pa ne gredo na zaslon ali v izvoz. Tvoja datoteka markdown ohrani vse.',
   'Bestand': 'Datoteka',
   'Venster': 'Okno',
   'Help': 'Pomoč',

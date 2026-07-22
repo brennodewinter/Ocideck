@@ -732,6 +732,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'L\'omissione è attiva: ciò che il controllo qualifica come dato personale viene oscurato, e tutte le immagini, i video e l\'audio di questa diapositiva non arrivano allo schermo né all\'esportazione. Il tuo file markdown conserva tutto.',
   'Bestand': 'Archivio',
   'Venster': 'Finestra',
   'Help': 'Aiuto',

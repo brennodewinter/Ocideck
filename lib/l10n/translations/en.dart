@@ -918,6 +918,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Redaction is on: whatever the check marks as personal data is blacked out, and all images, video and audio on this slide do not go to the screen or the export. Your markdown file keeps everything.',
   'Bestand': 'File',
   'Venster': 'Window',
   'Help': 'Help',

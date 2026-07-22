@@ -1778,6 +1778,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Udeladelse er slået til: det, som tjekket anser for en personoplysning, sværtes, og alle billeder, video og lyd på dette slide kommer ikke med på skærmen eller i eksporten. Din markdown-fil beholder alt.',
   'Bestand': 'Arkiv',
   'Venster': 'Vindue',
   'Help': 'Hjælp',
