@@ -311,6 +311,23 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   notities en het zegel.
 
 ### Fixed
+- **Vier lekken van dezelfde soort dichtgezet: dingen die zonder grens werden
+  ingelezen.** Een bestand dat met uw presentatie meereist — de laag met uw
+  strepen, uw notities, uw MIAUW-uitspraken of het zegel — werd bij het openen
+  ingelezen hoe groot het ook was. Hetzelfde gold voor de CVE-lijst die OciDeck
+  binnenhaalt: die kon doorgroeien tot de schijf vol was. Alle vier zitten nu
+  achter een grens.
+
+  De schrijfkant was de scherpste helft, en die is meegenomen: wat OciDeck niet
+  heeft ingelezen, mag het ook niet vervangen. Zonder die regel zou opslaan de
+  tekeningen wissen die het alleen maar had overgeslagen.
+- **De opschoning van diagrammen keert de bewijslast om.** Een Mermaid-diagram
+  wordt getekend uit SVG, en die SVG werd geschoond met een lijst van wat er
+  wég moest. Zo'n lijst is nooit af — er zaten er drie gaten in — en de
+  volgende manier om er iets in te verstoppen was steeds al bedacht voordat wij
+  hem kenden. Nu blijft alleen staan wat de tekenaar werkelijk leest, en gaat
+  de rest eruit, met een regel in het logboek. Aan het beeld verandert niets:
+  wat er nu uit valt, tekende de tekenaar toch al niet.
 - **Windows en Linux droegen nog de Flutter-sjabloonidentiteit `com.example`**
   in `windows/runner/Runner.rc` (CompanyName/copyright) en
   `linux/CMakeLists.txt` (de GTK app-id). Een Authenticode-handtekening of een

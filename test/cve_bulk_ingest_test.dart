@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -63,12 +64,18 @@ void main() {
     return ZipEncoder().encode(outerArchive);
   }
 
-  CveBulkIngest makeIngest(List<int> archiveBytes, {String tag = 'cve_2026'}) {
+  CveBulkIngest makeIngest(
+    List<int> archiveBytes, {
+    String tag = 'cve_2026',
+    int? maxInnerArchiveBytes,
+  }) {
     return CveBulkIngest(
       transport: _FakeTransport(archiveBytes, tag: tag),
       index: LocalCveIndex(Directory('${tmp.path}/db')),
       workDirectory: Directory('${tmp.path}/work'),
       releaseApi: Uri.parse('https://example.invalid/releases/latest'),
+      maxInnerArchiveBytes:
+          maxInnerArchiveBytes ?? CveBulkIngest.defaultMaxInnerArchiveBytes,
     );
   }
 
@@ -311,6 +318,82 @@ void main() {
     expect(seen, contains(CveIngestPhase.extracting));
     expect(seen, contains(CveIngestPhase.indexing));
   });
+
+  // Per record was er al een grens; op het archief zelf niet. Een buitenste zip
+  // van een paar kilobyte kan een genest bestand aankondigen dat de schijf
+  // volschrijft, en de gebruiker drukte alleen maar op "binnenhalen".
+  group('het geneste archief blijft onder een grens', () {
+    final bytes = nestedArchive({
+      'cves/2021/44xxx/CVE-2021-44228.json': cveJson('CVE-2021-44228'),
+    });
+
+    test('een te grote aankondiging wordt geweigerd vóór het uitpakken', () {
+      expect(
+        () => run(makeIngest(bytes, maxInnerArchiveBytes: 64)),
+        throwsA(
+          isA<CveIngestException>()
+              .having(
+                (e) => e.failure,
+                'failure',
+                CveIngestFailure.invalidArchive,
+              )
+              .having((e) => e.detail, 'detail', contains('kondigt')),
+        ),
+      );
+    });
+
+    test('een liegende aankondiging wordt tijdens het uitpakken gestopt', () {
+      // De aankondiging is de goedkope helft van de toets, en precies de helft
+      // die een bom vervalst. Deze zip zegt één byte te bevatten; de inflater
+      // levert er duizenden, en moet daar middenin worden afgekapt.
+      final gelogen = _withLiedAboutSize(bytes, 1);
+      expect(
+        () => run(makeIngest(gelogen, maxInnerArchiveBytes: 64)),
+        throwsA(
+          isA<CveIngestException>()
+              .having(
+                (e) => e.failure,
+                'failure',
+                CveIngestFailure.invalidArchive,
+              )
+              .having(
+                (e) => e.detail,
+                'detail',
+                contains('tijdens het uitpakken'),
+              ),
+        ),
+      );
+    });
+
+    test('het halve archief blijft niet op schijf achter', () async {
+      await expectLater(
+        run(makeIngest(bytes, maxInnerArchiveBytes: 64)),
+        throwsA(isA<CveIngestException>()),
+      );
+      expect(Directory('${tmp.path}/work').listSync(), isEmpty);
+    });
+  });
+}
+
+/// Zet de aangekondigde uitgepakte omvang van élke entry in [zip] op [size],
+/// in zowel de lokale kop als de centrale map.
+///
+/// Zo ziet een bom eruit: de kop zegt iets onschuldigs, de deflate-stroom
+/// daarachter loopt door tot hij de schijf vol heeft. De offsets zijn die van
+/// het zip-formaat — 22 in de lokale kop (PK\x03\x04), 24 in de centrale map
+/// (PK\x01\x02).
+List<int> _withLiedAboutSize(List<int> zip, int size) {
+  final out = Uint8List.fromList(zip);
+  final view = ByteData.sublistView(out);
+  for (var i = 0; i + 30 <= out.length; i++) {
+    if (out[i] != 0x50 || out[i + 1] != 0x4b) continue;
+    if (out[i + 2] == 0x03 && out[i + 3] == 0x04) {
+      view.setUint32(i + 22, size, Endian.little);
+    } else if (out[i + 2] == 0x01 && out[i + 3] == 0x02) {
+      view.setUint32(i + 24, size, Endian.little);
+    }
+  }
+  return out;
 }
 
 /// Serveert de release-metadata en het archief uit het geheugen.

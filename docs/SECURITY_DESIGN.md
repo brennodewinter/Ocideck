@@ -205,8 +205,16 @@ The HTML export is defence-in-depth against script injection in deck content:
   remove). That re-sanitisation runs **whatever the outcome**: it used to sit
   behind a `.then()` with an empty `.catch()`, so one unparseable diagram made
   the whole document skip it. An in-app SVG sanitizer
-  (`lib/utils/sanitize_svg.dart`) strips `script`/`foreignObject`/event handlers
-  and `javascript:`/`data:` URLs.
+  (`lib/utils/sanitize_svg.dart`) keeps only the elements and attributes that
+  `flutter_svg` actually reads, and drops the rest with a log line. That list is
+  read off `vector_graphics_compiler` — the parser behind `flutter_svg` — rather
+  than guessed, which is what makes an allow-list affordable here: everything it
+  refuses, the renderer discarded anyway, so nothing can go missing from a
+  diagram without also having been missing before. It replaces a deny-list that
+  had grown three separate holes (`<style>`, SMIL `<set attributeName="on…">`,
+  semicolon-separated values); `script`, `foreignObject`, event handlers and
+  `javascript:`/`data:` URLs now fall outside the list instead of having to be
+  enumerated inside it.
 - **Embedded images are bounded on both ends.** Which files may be read is
   decided by `resolveSlideAssetPath` in `ExportService` (project containment —
   the HTML builder itself never touches the filesystem), so a deck from an

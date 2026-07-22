@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 
@@ -56,11 +57,30 @@ class CveBulkIngest {
   /// is geen record maar een probleem (zip-bom).
   static const maxRecordBytes = 4 * 1024 * 1024;
 
+  /// Bovengrens voor de binnenste zip, die naar schijf wordt uitgepakt.
+  ///
+  /// Per record was er al een grens, maar op het archief zelf niet: een
+  /// buitenste zip van een paar honderd kilobyte kan een genest bestand
+  /// aankondigen dat de schijf volschrijft, en `writeContent` inflateert net zo
+  /// lang als de stroom duurt. De echte binnenste zip zit rond de 600 MB en
+  /// groeit met de corpus mee; 3 GiB laat die groei ruim toe en scheelt in het
+  /// slechtste geval een volgelopen schijf van een gebruiker die alleen maar op
+  /// "binnenhalen" drukte.
+  ///
+  /// Aangekondigde omvang én werkelijk geschreven bytes worden getoetst: het
+  /// eerste is gratis, het tweede is wat een liegende header opvangt.
+  static const defaultMaxInnerArchiveBytes = 3 * 1024 * 1024 * 1024;
+
+  /// De werkelijke grens voor deze ingest. Instelbaar omdat een test anders
+  /// drie gigabyte zou moeten schrijven om te bewijzen dat de grens er is.
+  final int maxInnerArchiveBytes;
+
   CveBulkIngest({
     required this.transport,
     required this.index,
     required this.workDirectory,
     Uri? releaseApi,
+    this.maxInnerArchiveBytes = defaultMaxInnerArchiveBytes,
   }) : releaseApi =
            releaseApi ??
            Uri.parse(
@@ -218,9 +238,20 @@ class CveBulkIngest {
           'geen genest zip-archief gevonden',
         );
       }
-      final output = OutputFileStream(inner.path);
+      if (nested.size > maxInnerArchiveBytes) {
+        throw CveIngestException(
+          CveIngestFailure.invalidArchive,
+          'het geneste archief kondigt ${nested.size} bytes aan',
+        );
+      }
+      final output = _CappedFileOutputStream(inner.path, maxInnerArchiveBytes);
       try {
         nested.writeContent(output);
+      } on _ExtractionLimitException {
+        throw const CveIngestException(
+          CveIngestFailure.invalidArchive,
+          'het geneste archief groeide voorbij de grens tijdens het uitpakken',
+        );
       } finally {
         output.closeSync();
       }
@@ -295,4 +326,75 @@ class CveBulkIngest {
       return null;
     }
   }
+}
+
+/// Gegooid door [_CappedFileOutputStream] zodra het uitpakken voorbij zijn
+/// budget groeit — het teken dat het geneste archief een decompressiebom is.
+class _ExtractionLimitException implements Exception {
+  const _ExtractionLimitException();
+}
+
+/// Een [OutputStream] die naar een bestand schrijft en weigert voorbij [limit]
+/// te groeien.
+///
+/// De inflater schrijft incrementeel, dus hier gooien stopt een zip-bom mídden
+/// in het uitpakken in plaats van erna. `file_service_package.dart` heeft
+/// dezelfde constructie voor pakketten, maar dan in het geheugen; de binnenste
+/// CVE-zip is honderden megabytes en moet daarom naar schijf. Delegeren in
+/// plaats van erven: `OutputFileStream` is een factory-constructor, en de
+/// generatieve variant vraagt om een bestandsgreep uit de interne laag van het
+/// pakket.
+class _CappedFileOutputStream extends OutputStream {
+  _CappedFileOutputStream(String path, this.limit)
+    : _out = OutputFileStream(path),
+      super(byteOrder: ByteOrder.littleEndian);
+
+  final OutputFileStream _out;
+  final int limit;
+
+  void _guard(int add) {
+    if (_out.length + add > limit) throw const _ExtractionLimitException();
+  }
+
+  @override
+  int get length => _out.length;
+
+  @override
+  bool get isOpen => _out.isOpen;
+
+  @override
+  void open() => _out.open();
+
+  @override
+  void clear() => _out.clear();
+
+  @override
+  void flush() => _out.flush();
+
+  @override
+  Future<void> close() => _out.close();
+
+  @override
+  void closeSync() => _out.closeSync();
+
+  @override
+  void writeByte(int value) {
+    _guard(1);
+    _out.writeByte(value);
+  }
+
+  @override
+  void writeBytes(List<int> bytes, {int? length}) {
+    _guard(length ?? bytes.length);
+    _out.writeBytes(bytes, length: length);
+  }
+
+  @override
+  void writeStream(InputStream stream) {
+    _guard(stream.length);
+    _out.writeStream(stream);
+  }
+
+  @override
+  Uint8List subset(int start, [int? end]) => _out.subset(start, end);
 }

@@ -122,4 +122,136 @@ void main() {
     final safe = sanitizeMermaidSvg(svg)!;
     expect(safe.toLowerCase(), isNot(contains('javascript:')));
   });
+
+  // ── De allow-list ─────────────────────────────────────────────────────────
+  // De drie gevallen hierboven waren alle drie hetzelfde: de deny-list was
+  // volledig voor het aanvalstype waar iemand aan dacht, en blind voor het
+  // mechanisme ernaast. Een allow-list draait de bewijslast om, en deze is
+  // afgelezen van `flutter_svg` in plaats van geraden — wat hier wegvalt, viel
+  // bij de renderer al weg.
+
+  group('alleen wat de renderer leest komt erdoor', () {
+    test('een onbekend element verdwijnt mét zijn inhoud', () {
+      // De schil weghalen en de inhoud laten staan is de slechtste uitkomst:
+      // die inhoud belandt dan op een plek waar niemand hem meer keurt.
+      const svg =
+          '<svg xmlns="http://www.w3.org/2000/svg">'
+          '<filter id="f"><feImage href="https://elders.example/pixel.png"/>'
+          '</filter><rect width="10" height="10"/></svg>';
+      final safe = sanitizeMermaidSvg(svg)!;
+      expect(safe, isNot(contains('filter')));
+      expect(safe, isNot(contains('feImage')));
+      expect(safe, isNot(contains('elders.example')));
+      expect(safe, contains('<rect'));
+    });
+
+    test('de hele getekende woordenschat blijft staan', () {
+      // Zou hier iets uitvallen, dan verdwijnt er beeld zonder foutmelding —
+      // precies de ruil waarom deze allow-list er eerder niet was.
+      const svg =
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">'
+          '<defs><linearGradient id="g"><stop offset="0" stop-color="#fff"/>'
+          '</linearGradient><clipPath id="c"><rect width="1" height="1"/>'
+          '</clipPath></defs>'
+          '<g transform="translate(1,1)" fill="#003399" opacity="0.9">'
+          '<path d="M0 0 L1 1" stroke="#000" stroke-width="2"/>'
+          '<circle cx="1" cy="1" r="1"/><ellipse cx="1" cy="1" rx="1" ry="2"/>'
+          '<line x1="0" y1="0" x2="1" y2="1"/><polygon points="0,0 1,1"/>'
+          '<polyline points="0,0 1,1"/><rect width="1" height="1"/>'
+          '<text x="1" y="2" font-size="10" text-anchor="middle">'
+          '<tspan dx="1">hoi</tspan></text>'
+          '<use href="#c"/></g></svg>';
+      final safe = sanitizeMermaidSvg(svg)!;
+
+      for (final tag in const [
+        'defs',
+        'linearGradient',
+        'stop',
+        'clipPath',
+        'g',
+        'path',
+        'circle',
+        'ellipse',
+        'line',
+        'polygon',
+        'polyline',
+        'rect',
+        'text',
+        'tspan',
+        'use',
+      ]) {
+        expect(safe, contains('<$tag'), reason: tag);
+      }
+      // Op de attributen, niet alleen op de tags. Een `<line>` waarvan x1/y1
+      // wegvalt is nog steeds een `<line>` — en tekent een punt.
+      for (final attr in const [
+        'viewBox=',
+        'transform=',
+        'fill=',
+        'opacity=',
+        'd=',
+        'stroke-width=',
+        'cx=',
+        'cy=',
+        'r=',
+        'rx=',
+        'ry=',
+        'x1=',
+        'y1=',
+        'x2=',
+        'y2=',
+        'points=',
+        'font-size=',
+        'text-anchor=',
+        'dx=',
+        'offset=',
+        'stop-color=',
+        'href=',
+        'id=',
+      ]) {
+        expect(safe, contains(attr), reason: attr);
+      }
+      expect(safe, contains('hoi'), reason: 'de tekst zelf hoort te blijven');
+    });
+
+    test('opsmuk die niemand leest gaat eruit, het beeld niet', () {
+      // Mermaid stuurt dit mee; `flutter_svg` kijkt er niet naar. Weghalen kost
+      // dus geen pixel, en het scheelt een plek om iets in te verstoppen.
+      const svg =
+          '<svg xmlns="http://www.w3.org/2000/svg" role="graphics-document" '
+          'aria-roledescription="flowchart" class="flowchart">'
+          '<rect class="node" data-id="A" width="10" height="10"/></svg>';
+      final safe = sanitizeMermaidSvg(svg)!;
+      expect(safe, isNot(contains('role=')));
+      expect(safe, isNot(contains('aria-')));
+      expect(safe, isNot(contains('class=')));
+      expect(safe, isNot(contains('data-id')));
+      expect(safe, contains('width="10"'));
+    });
+
+    test('de namespace-verklaringen blijven staan', () {
+      // Ze dragen een URI maar halen niets op. Weghalen is juist riskant: een
+      // achtergebleven `xlink:href` zonder verklaring maakt het document
+      // onherleesbaar.
+      const svg =
+          '<svg xmlns="http://www.w3.org/2000/svg" '
+          'xmlns:xlink="http://www.w3.org/1999/xlink"><rect/></svg>';
+      final safe = sanitizeMermaidSvg(svg)!;
+      expect(safe, contains('xmlns="http://www.w3.org/2000/svg"'));
+      expect(safe, contains('xmlns:xlink'));
+    });
+
+    test('een marker gaat eruit — de renderer tekende hem toch al niet', () {
+      // Verrassend genoeg geen regressie: `<marker>` staat niet in de
+      // elementenlijst van vector_graphics_compiler, dus pijlpunten in een
+      // flowchart verschenen ook onder de oude deny-list niet.
+      const svg =
+          '<svg xmlns="http://www.w3.org/2000/svg">'
+          '<defs><marker id="arrow"><path d="M0 0 L1 1"/></marker></defs>'
+          '<path d="M0 0 L9 9"/></svg>';
+      final safe = sanitizeMermaidSvg(svg)!;
+      expect(safe, isNot(contains('<marker')));
+      expect(safe, contains('<path d="M0 0 L9 9"'));
+    });
+  });
 }

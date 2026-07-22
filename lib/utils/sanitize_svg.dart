@@ -2,14 +2,14 @@ import 'package:xml/xml.dart';
 
 import 'log.dart';
 
-/// Strip dangerous elements/attributes from Mermaid SVG output before display.
-/// Returns null when the markup is empty or cannot be parsed safely.
+/// Strip everything from Mermaid SVG output that the renderer does not read,
+/// before display. Returns null when the markup is empty or cannot be parsed.
 ///
-/// This is a deny-list, which is the weaker shape — an allow-list cannot be
-/// written honestly until we know the element and attribute vocabulary Mermaid
-/// actually emits, and the tests here use synthetic SVG rather than real
-/// diagram output. Narrowing it by guesswork would silently drop parts of real
-/// diagrams. See the note at the bottom of this file and issue #516.
+/// Dit is een allow-list, en de lijst is niet geraden: hij is afgelezen van de
+/// enige lezer die deze SVG ooit krijgt, `flutter_svg` (zie [_allowedElements]).
+/// Daarmee vervalt het bezwaar dat hier stond — dat een allow-list op gevoel de
+/// eerste de beste sequentiediagram half zou renderen zonder foutmelding. Wat
+/// hier wegvalt, viel bij de renderer óók al weg.
 String? sanitizeMermaidSvg(String svg) {
   if (svg.trim().isEmpty || !svg.contains('<svg')) return null;
 
@@ -24,68 +24,135 @@ String? sanitizeMermaidSvg(String svg) {
   final root = document.rootElement;
   if (root.name.local != 'svg') return null;
 
-  _removeForbiddenElements(root);
-  _stripUnsafeAttributes(root);
+  final dropped = _Dropped();
+  _keepOnlyAllowed(root, dropped);
+  if (!dropped.isEmpty) {
+    // Geweigerd, niet stil verdwenen. Een allow-list die zwijgt is niet te
+    // onderhouden: gaat Mermaid ooit iets uitsturen dat hier niet in staat, dan
+    // hoort dat op te vallen en niet te eindigen in een half getekend diagram.
+    //
+    // Het AANTAL, nooit de namen — de regel uit de kop van `log.dart`. Een
+    // elementnaam voelt als structuur en niet als inhoud, maar hij komt uit een
+    // document dat de gebruiker heeft geschreven, en een attribuutnaam is in
+    // een gemaakt diagram vrij te kiezen. Wie wil weten wát er wegviel, heeft
+    // het diagram zelf; het logbestand hoeft er niet nog een kopie van te
+    // dragen.
+    logWarning(
+      'sanitizeMermaidSvg: dropped ${dropped.elements} element(s) and '
+      '${dropped.attributes} attribute(s) the renderer does not read',
+    );
+  }
 
   return document.toXmlString(pretty: false);
 }
 
-const _forbiddenElements = {
-  'script',
-  'foreignObject',
-  'iframe',
-  'object',
-  'embed',
-  // SMIL animation can assign to *any* attribute, including an event handler:
-  // `<set attributeName="onload" to="alert(1)"/>` installs a handler that no
-  // attribute check on the parent would ever see, because at parse time the
-  // parent carries no `on…` attribute at all. The animation elements earn
-  // nothing in a Mermaid diagram — Mermaid animates with CSS, not SMIL — so
-  // they go entirely rather than being filtered on `attributeName`.
-  'set',
-  'animate',
-  'animateTransform',
-  'animateMotion',
-  // `<style>` carries CSS, and CSS carries URLs. Nothing here parses that
-  // dialect, so a `url(javascript:…)` or an `@import` inside a stylesheet
-  // travelled straight through a check that only ever looked at attributes.
-  // Dropping the element costs Mermaid's theming inside the SVG; the diagram
-  // still renders, because Mermaid also writes presentation attributes.
-  'style',
+/// De elementen die `flutter_svg` werkelijk tekent.
+///
+/// Afgelezen van `vector_graphics_compiler`, de parser achter `flutter_svg`:
+/// `_svgElementParsers` (containers en verwijzingen), `_svgPathFuncs` (de
+/// vormen), plus `defs` en `stop`, die de parser in hun eigen tak afhandelt.
+/// Alles daarbuiten gooit die parser zélf al weg — `_discardSubtree()` — dus
+/// hier weghalen kost geen enkele pixel. Dát is wat deze lijst afdwingbaar
+/// maakt in plaats van een gok: hij is niet strenger dan de lezer.
+///
+/// Wat er zo vanzelf uit valt is precies de lijst waar de vorige deny-list
+/// achteraan liep: `script`, `style`, `foreignObject`, `iframe`, `object`,
+/// `embed`, en de SMIL-animatie-elementen (`set`, `animate`, `animateTransform`,
+/// `animateMotion`) waarmee een `attributeName="onload"` een handler installeert
+/// die geen enkele attribuutcontrole op de ouder ooit ziet.
+const _allowedElements = {
+  // Containers en verwijzingen.
+  'svg', 'g', 'a', 'defs', 'use', 'symbol', 'mask', 'pattern', 'clipPath',
+  'linearGradient', 'radialGradient', 'stop', 'image', 'text', 'tspan',
+  // Vormen.
+  'circle', 'ellipse', 'line', 'path', 'polygon', 'polyline', 'rect',
 };
 
-void _removeForbiddenElements(XmlElement element) {
+/// De attributen die diezelfde parser uitleest.
+///
+/// Ook afgelezen, en wel uit twee plekken: de directe `attribute('…')`-aanroepen
+/// (vorm- en verloopgeometrie) en de sleutels waarmee `_createAttributeMap` de
+/// presentatie-eigenschappen opzoekt. `style` staat erbij omdat diezelfde
+/// functie een `style="fill:red;…"` uit elkaar haalt en de onderdelen in
+/// dezelfde map legt — de CSS-dialect-vrees gold het `<style>`-elémént, dat
+/// stylesheets en `@import` draagt, en dat staat hierboven niet in de lijst.
+///
+/// `on…`-handlers, `attributeName` en alles wat Mermaid verder aan opsmuk
+/// meestuurt (`class`, `role`, `aria-…`) staan er niet in en verdwijnen dus,
+/// zonder dat er iets aan het beeld verandert: de renderer las ze toch niet.
+const _allowedAttributes = {
+  // Geometrie en verlopen.
+  'cx', 'cy', 'd', 'fx', 'fy', 'gradientTransform', 'gradientUnits', 'height',
+  'offset', 'points', 'r', 'rx', 'ry', 'spreadMethod', 'transform', 'viewBox',
+  'width', 'x', 'y', 'x1', 'x2', 'y1', 'y2',
+  // Presentatie.
+  'clip-path', 'clip-rule', 'color', 'display', 'dx', 'dy', 'fill',
+  'fill-opacity', 'fill-rule', 'font-family', 'font-size', 'font-weight',
+  'mask', 'mix-blend-mode', 'opacity', 'stop-color', 'stop-opacity', 'stroke',
+  'stroke-dasharray', 'stroke-dashoffset', 'stroke-linecap', 'stroke-linejoin',
+  'stroke-miterlimit', 'stroke-opacity', 'stroke-width', 'style',
+  'text-anchor', 'text-decoration', 'text-decoration-color',
+  'text-decoration-style', 'visibility',
+  // Verwijzingen. `href` haalt bij `<image>` alleen een `data:`-URI binnen —
+  // een externe URL negeert de parser — maar de waardecontrole hieronder blijft
+  // erop staan: dit is het enige attribuut hier dat een URL draagt.
+  'href', 'id',
+};
+
+/// Namespace-verklaringen blijven staan.
+///
+/// Ze dragen een URI maar halen niets op, en weghalen is juist riskant: laat je
+/// `xmlns:xlink` vallen terwijl er een `xlink:href` overblijft, dan is het
+/// document niet meer geldig te heropenen.
+bool _isNamespaceDeclaration(XmlAttribute attr) =>
+    attr.name.qualified == 'xmlns' || attr.name.prefix == 'xmlns';
+
+/// Hoeveel er wegviel, gesplitst naar soort — zonder één naam te bewaren.
+class _Dropped {
+  int elements = 0;
+  int attributes = 0;
+
+  bool get isEmpty => elements == 0 && attributes == 0;
+}
+
+void _keepOnlyAllowed(XmlElement element, _Dropped dropped) {
   for (final child in element.childElements.toList()) {
-    if (_forbiddenElements.contains(child.name.local)) {
+    if (!_allowedElements.contains(child.name.local)) {
+      // Met subboom en al, net als de renderer: een `<foreignObject>` waarvan
+      // alleen de schil verdwijnt laat zijn HTML-inhoud achter op een plek waar
+      // niemand die meer keurt.
+      dropped.elements++;
       child.remove();
       continue;
     }
-    _removeForbiddenElements(child);
+    _keepOnlyAllowed(child, dropped);
   }
+  _keepOnlyAllowedAttributes(element, dropped);
 }
 
-void _stripUnsafeAttributes(XmlElement element) {
+void _keepOnlyAllowedAttributes(XmlElement element, _Dropped dropped) {
   for (final attr in element.attributes.toList()) {
-    final name = attr.name.local;
-    final value = attr.value.trim();
-    if (name.startsWith('on')) {
+    if (_isNamespaceDeclaration(attr)) continue;
+    if (!_allowedAttributes.contains(attr.name.local)) {
+      dropped.attributes++;
       element.attributes.remove(attr);
       continue;
     }
-    if (_hasUnsafeUrl(value)) {
+    // Tweede slot op de toegelaten waarden. De allow-list zegt welke attributen
+    // gelezen worden, niet wat erin staat, en `href` en `style` dragen allebei
+    // iets wat op een URL lijkt.
+    if (_hasUnsafeUrl(attr.value.trim())) {
+      dropped.attributes++;
       element.attributes.remove(attr);
     }
-  }
-  for (final child in element.childElements) {
-    _stripUnsafeAttributes(child);
   }
 }
 
 /// Whether [value] carries an unsafe URL **anywhere**, not just at its start.
 ///
-/// SMIL and CSS both use semicolon-separated lists, so a payload can sit in the
-/// second entry of a `values=` list while the first is innocent. Checking only
-/// the start of the whole string read `a;javascript:alert(1)` as safe.
+/// CSS in een `style`-attribuut gebruikt puntkomma-lijsten, dus een payload kan
+/// in de tweede regel staan terwijl de eerste onschuldig is. Alleen naar het
+/// begin van de hele string kijken las `a;javascript:alert(1)` als veilig.
 bool _hasUnsafeUrl(String value) {
   for (final part in value.split(';')) {
     if (_isUnsafeUrl(part)) return true;
@@ -105,21 +172,3 @@ bool _isUnsafeUrl(String value) {
       lower.startsWith('vbscript:') ||
       lower.startsWith('data:');
 }
-
-// ── Waarom dit (nog) geen allow-list is ─────────────────────────────────────
-//
-// Een allow-list is de juiste vorm: hij weigert wat hij niet kent in plaats van
-// te hopen dat de lijst met gevaren volledig is. Deze drie toevoegingen laten
-// precies zien waarom — SMIL, CSS en puntkomma-lijsten waren alle drie gaten in
-// een lijst waarvan iemand dacht dat hij compleet was.
-//
-// Wat ervoor nodig is: de werkelijke woordenschat die Mermaid uitstuurt, per
-// diagramsoort. Die staat hier nergens — de tests gebruiken met de hand
-// geschreven SVG, geen echte Mermaid-uitvoer — en een allow-list op gevoel
-// laat de eerste de beste sequentiediagram half renderen zónder foutmelding.
-// Dat is een slechtere ruil dan deze deny-list: stil verlies is erger dan een
-// bekend gat.
-//
-// De weg ernaartoe: verzamel de uitvoer van elk diagramtype door de echte
-// renderer, leid daar de elementen- en attributenlijst uit af, en laat een
-// geweigerd element een waarschuwing loggen in plaats van stil te verdwijnen.
