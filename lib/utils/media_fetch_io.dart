@@ -56,19 +56,7 @@ Future<Uint8List> _fetchPinned(String url) async {
     if (response.statusCode != 200) {
       throw _RemoteMediaRefused('HTTP ${response.statusCode}');
     }
-    // De aangekondigde lengte is een hint, geen belofte: we tellen zelf mee.
-    // Een liegende Content-Length levert hooguit een afgekapte respons op.
-    if (response.contentLength > kMaxRemoteMediaBytes) {
-      throw const _RemoteMediaRefused('afbeelding te groot');
-    }
-    final builder = BytesBuilder(copy: false);
-    await for (final chunk in response) {
-      builder.add(chunk);
-      if (builder.length > kMaxRemoteMediaBytes) {
-        throw const _RemoteMediaRefused('afbeelding te groot');
-      }
-    }
-    return builder.takeBytes();
+    return readCappedMedia(response, contentLength: response.contentLength);
   } catch (e) {
     // De aanroeper is een `Image`-widget: die vangt de fout en toont zijn
     // errorBuilder-placeholder. Loggen zodat een geweigerde host niet
@@ -85,4 +73,34 @@ class _RemoteMediaRefused implements Exception {
   final String reason;
   @override
   String toString() => 'Remote media geweigerd: $reason';
+}
+
+/// Leest [chunks] tot [maxBytes] en weigert daarboven.
+///
+/// Los van [guardedNetworkImageBytes] omdat de grens daar onbereikbaar is voor
+/// een test: die pint de socket via [NetGuard], en die weigert loopback — een
+/// testserver op deze machine bestaat per ontwerp niet. De grens is precies het
+/// stuk dat wél te toetsen valt, dus staat het apart (#618).
+///
+/// [contentLength] is een hint, geen belofte: er wordt zélf meegeteld. Een
+/// liegende of ontbrekende Content-Length (-1) mag niet meer opleveren dan een
+/// afgekapte respons.
+@visibleForTesting
+Future<Uint8List> readCappedMedia(
+  Stream<List<int>> chunks, {
+  required int contentLength,
+  int maxBytes = kMaxRemoteMediaBytes,
+}) async {
+  if (contentLength > maxBytes) {
+    throw const _RemoteMediaRefused('afbeelding te groot');
+  }
+  final builder = BytesBuilder(copy: false);
+  await for (final chunk in chunks) {
+    builder.add(chunk);
+    // Ná het optellen: de brok die eroverheen gaat mag niet meer meetellen.
+    if (builder.length > maxBytes) {
+      throw const _RemoteMediaRefused('afbeelding te groot');
+    }
+  }
+  return builder.takeBytes();
 }

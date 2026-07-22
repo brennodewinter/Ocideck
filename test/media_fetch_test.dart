@@ -4,7 +4,8 @@ library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/utils/image_limits.dart';
 import 'package:ocideck/utils/media_fetch.dart';
-import 'package:ocideck/utils/media_fetch_io.dart' show kMaxRemoteMediaBytes;
+import 'package:ocideck/utils/media_fetch_io.dart'
+    show kMaxRemoteMediaBytes, readCappedMedia;
 
 /// De gepinde ophaalweg voor een remote dia-afbeelding (audit AEG-04).
 ///
@@ -51,6 +52,74 @@ void main() {
     // die tweede vult een eindeloos zendende server het werkgeheugen vóór de
     // decoder ook maar iets ziet.
     expect(kMaxRemoteMediaBytes, greaterThan(0));
+  });
+
+  // ── De bytecap, werkelijk uitgeoefend ─────────────────────────────────────
+  //
+  // Hierboven stond alleen `greaterThan(0)`: de constante bestaat. Dat is geen
+  // toets op de grens maar op het bestaan van een getal — schrap de regel die
+  // hem gebruikt, en er wordt niets rood (#618). SECURITY.md doet hier een
+  // publieke belofte over, dus die hoort een assertie te hebben.
+  //
+  // `guardedNetworkImageBytes` zelf is onbereikbaar voor een test: die pint de
+  // socket via NetGuard, en die weigert loopback. Daarom staat de grens apart.
+  group('de bytecap wordt echt uitgeoefend', () {
+    Stream<List<int>> chunksOf(int total, {int chunk = 64}) async* {
+      var sent = 0;
+      while (sent < total) {
+        final n = (total - sent) < chunk ? total - sent : chunk;
+        yield List.filled(n, 0);
+        sent += n;
+      }
+    }
+
+    test('een aangekondigde lengte boven de grens wordt meteen geweigerd', () {
+      expect(
+        () => readCappedMedia(
+          const Stream.empty(),
+          contentLength: 1000,
+          maxBytes: 100,
+        ),
+        throwsA(anything),
+      );
+    });
+
+    test('een liegende Content-Length redt de zender niet', () async {
+      // Dit is het geval waar de tweede telling voor bestaat: de kop zegt iets
+      // onschuldigs (of -1, "onbekend") en de stroom blijft doorkomen.
+      await expectLater(
+        readCappedMedia(chunksOf(1000), contentLength: -1, maxBytes: 100),
+        throwsA(anything),
+      );
+      await expectLater(
+        readCappedMedia(chunksOf(1000), contentLength: 10, maxBytes: 100),
+        throwsA(anything),
+      );
+    });
+
+    test('precies op de grens mag nog, één byte erover niet', () async {
+      expect(
+        (await readCappedMedia(
+          chunksOf(100),
+          contentLength: 100,
+          maxBytes: 100,
+        )).length,
+        100,
+      );
+      await expectLater(
+        readCappedMedia(chunksOf(101), contentLength: -1, maxBytes: 100),
+        throwsA(anything),
+      );
+    });
+
+    test('een normale afbeelding komt er gewoon door', () async {
+      final bytes = await readCappedMedia(
+        chunksOf(256),
+        contentLength: 256,
+        maxBytes: 1024,
+      );
+      expect(bytes.length, 256);
+    });
   });
 
   test('dezelfde URL levert dezelfde cache-identiteit op', () {

@@ -283,6 +283,34 @@ void main() {
     );
   });
 
+  test('elke gepinde client weigert ook omleidingen', () {
+    // SECURITY.md belooft dit met zoveel woorden: "een 3xx mag niet om de
+    // hostcontrole heen lopen". Die belofte stond in dit bestand alleen in een
+    // regel commentaar — schrap `followRedirects = false` uit een van deze
+    // bestanden, en er werd niets rood (#618).
+    //
+    // Waarom het uitmaakt: het pinnen hierboven zet de socket vast op het adres
+    // dat door de poort kwam. Volgt de client daarna zelf een 3xx, dan doet hij
+    // een NIEUWE verbinding naar een adres dat nooit gekeurd is — en dan was
+    // het pinnen voor niets.
+    final setsIt = RegExp(r'followRedirects\s*=\s*false');
+    final missing = <String>[];
+    for (final path in pinnedClientCount.keys) {
+      if (pinnedClientCount[path] == 0) continue; // net_guard maakt er geen
+      final source = File(path).readAsStringSync();
+      if (!setsIt.hasMatch(source)) missing.add(path);
+    }
+    expect(
+      missing,
+      isEmpty,
+      reason:
+          'Een gepinde HttpClient die omleidingen volgt, loopt om zijn eigen '
+          'hostcontrole heen. Zet `request.followRedirects = false`, of — als '
+          'dit pad ze bewust zelf volgt, zoals de CVE-bulkdownload — haal elke '
+          'sprong opnieuw door NetGuard en schrijf dat hier op:',
+    );
+  });
+
   test('every other egress primitive stays behind the same gate', () {
     scan(
       sink: RegExp(
