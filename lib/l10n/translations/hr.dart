@@ -1786,6 +1786,40 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Izostavljanje je uključeno: ono što provjera označi kao osobni podatak zacrnjuje se, a sve slike, videozapisi i zvuk s ovog slajda ne idu na zaslon ni u izvoz. Tvoja markdown datoteka zadržava sve.',
+  'Bestand': 'Datoteka',
+  'Venster': 'Prozor',
+  'Help': 'Pomoć',
+  'Alles selecteren': 'Odaberi sve',
+  'Plakken': 'Zalijepi',
+  'Opnieuw': 'Ponovi',
+  'Eigenschappen': 'Svojstva',
+  'Opdrachten…': 'Naredbe…',
+  'Opslaan…': 'Spremanje…',
+  'Uploaden naar WebDAV…': 'Prijenos na WebDAV…',
+  'Uploaden naar S3…': 'Prijenos na S3…',
+  'Vastleggen in git…': 'Predavanje u git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Spremanje je u tijeku. Ponovno spremanje ne čini ništa dok se ovo ne završi.',
+  'Klaar — privacy niet gecontroleerd': 'Spremno — privatnost nije provjerena',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Nisu se tražili osobni podaci, posebne kategorije podataka ni tajne: provjera privatnosti isključena je u odjeljku Sigurnost.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Prezentacije koje ostaju obične Markdown datoteke: čitljive, pretražive i otvorive bilo kojim uređivačem.',
+  'sjablonen om mee te beginnen, of leeg': 'predložaka za početak ili prazna',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Primjeri slajdova u predlošku su na nizozemskom. Naziv i opis prate tvoj jezik; sadržaj prilagođavaš nakon stvaranja.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Izostavljanje je uključeno: pronađeni podaci se zacrnjuju i sve slike, videozapisi i zvuk s ovog slajda ne idu na zaslon ni u izvoz. Tvoja markdown datoteka zadržava sve.',
+  'Mijn tekst': 'Moj tekst',
+  'Wat zij zien': 'Što oni vide',
+  'Presentatiegegevens': 'Podaci prezentacije',
+  'Open presentatiegegevens': 'Otvori podatke prezentacije',
+  'Motivering van een uitsluiting': 'Obrazloženje izuzeća',
+  'Motivering van een bevestiging': 'Obrazloženje potvrde',
+  'Tabel koprij, kolom {kolom}': 'Tablica zaglavlje, stupac {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tablica redak {rij}, stupac {kolom}',
   'Via deze website ophalen?': 'Dohvatiti putem ovog web-mjesta?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'Poslužitelj ove prezentacije nije dopustio pregledniku da izravno pročita datoteku. OciDeck može proslijediti adresu web-mjestu s kojega dolazi i sam OciDeck, pa će je ono dohvatiti. To web-mjesto tada vidi cijelu adresu — ako je u poveznici ključ ili kôd, to web-mjesto vidi i njega.',

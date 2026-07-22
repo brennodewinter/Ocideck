@@ -976,7 +976,7 @@ gemarkeerd. Elk kanaal krijgt een eigen test.
 
 | Kanaal | Code | Behandeling |
 | --- | --- | --- |
-| Preview / thumbnail / slidelijst | `slide_preview.dart`, `slide_thumbnail.dart` | **Nog bron** — zie de noot onder deze tabel |
+| Preview / thumbnail / slidelijst | `slide_preview.dart`, `slide_thumbnail.dart`, `preview_panel.dart` | **Bron**, met één schakelaar naar de projectie — zie de noot onder deze tabel |
 | Volledig scherm + **publieksvenster** | `fullscreen_presenter.dart`, `audience_window.dart` | AudienceDeck |
 | PDF | `export_service.dart:238-255` — puur raster (`pw.Image`), **geen tekstlaag** ✓ | AudienceDeck (pixels) |
 | PPTX-slides | `slide_rasterizer.dart` → PNG in de zip | AudienceDeck (pixels) |
@@ -994,16 +994,30 @@ gemarkeerd. Elk kanaal krijgt een eigen test.
 | Opslaan / WebDAV / Nextcloud | `file_service.dart`, `webdav_service.dart` | **Bron-kanaal** — de `.md` blijft integraal, dat was de eis |
 | Logging | `lib/utils/log.dart` | Veldinhoud wordt nooit gelogd; bevindingen loggen alleen regel-id + slide-index, nooit de waarde. Bewaakt door `log_no_content_test.dart` — zie de noot onder deze tabel |
 
-> **De editor-preview is nog geen ontvangend oppervlak** (*gecorrigeerd
-> 2026-07-21*). De eerste rij zei "AudienceDeck", en §6 staat in de statustabel
-> bovenaan als *geleverd*, wat samen leest als: de preview toont geredigeerde
-> tekst. Dat doet ze niet. `preview_panel.dart` leest `deckProvider` rechtstreeks
-> en geeft het rauwe deck door; de slidelijst en de miniaturen ook. De projectie
-> wordt wél toegepast waar een ander dan de auteur meekijkt: presenteren en het
-> publieksvenster (`shell_actions.dart`), elke export (`app_shell_main_layout.dart`),
-> het klembord van de slidelijst en het auditdossier. De grens klopt dus voor
-> iedereen behalve de auteur aan zijn eigen scherm — wat verdedigbaar is, maar
-> niet is wat hier stond.
+> **De editor-preview is geen ontvangend oppervlak, maar kan de projectie wél
+> tonen** (*gecorrigeerd 2026-07-21, bijgewerkt 2026-07-22*). De eerste rij zei
+> ooit "AudienceDeck", en §6 staat in de statustabel bovenaan als *geleverd*, wat
+> samen las als: de preview toont geredigeerde tekst. Dat deed ze niet.
+> `preview_panel.dart` leest `deckProvider` rechtstreeks en geeft het rauwe deck
+> door; de slidelijst en de miniaturen ook. De projectie wordt wél toegepast waar
+> een ander dan de auteur meekijkt: presenteren en het publieksvenster
+> (`shell_actions.dart`), elke export (`app_shell_main_layout.dart`), het
+> klembord van de slidelijst en het auditdossier.
+>
+> Sinds 2026-07-22 is de bron niet meer het énige dat de preview kan tonen. Staat
+> een dia op `redact`, dan verschijnt er een melding boven de preview met een
+> schakelaar *Wat zij zien / Mijn tekst*; aan toont de preview die ene dia door
+> `audiencePreviewSlide` (`privacy/privacy_preview.dart`), wat dezelfde
+> `PrivacyProjection.forAudience` is met een deck van één dia. Standaard uit, want
+> de auteur moet zijn eigen tekst kunnen bewerken. Op één dia en niet op het hele
+> deck omdat de projectie zelf scant: het deck herprojecteren bij elke
+> toetsaanslag in de editor ernaast maakt de preview onbruikbaar traag, en voor
+> wat er te zien valt maakt het niets uit — de scanner escaleert binnen een dia,
+> en de deckvelden staan er niet op.
+>
+> **De miniaturen en de slidelijst blijven bron**, zonder schakelaar. De grens
+> klopt dus nog steeds voor iedereen behalve de auteur aan zijn eigen scherm; hij
+> kan er nu alleen zelf doorheen kijken.
 
 > **De logregel was er één keer doorheen geglipt** (*hersteld 2026-07-21*). De
 > laatste rij belooft dat veldinhoud nooit gelogd wordt, en de kop van `log.dart`

@@ -202,4 +202,38 @@ void main() {
     );
     expect(find.text('Exporteer als PDF'), findsNothing);
   });
+
+  testWidgets('de groene balk belooft niets als de privacycontrole uit staat', (
+    tester,
+  ) async {
+    Future<void> pump({required bool privacyChecksEnabled}) =>
+        tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ExportDialog(
+                deckPath: '/tmp/deck.md',
+                bundleFor: _emptyBundle,
+                exportService: ExportService(),
+                privacyChecksEnabled: privacyChecksEnabled,
+              ),
+            ),
+          ),
+        );
+
+    await pump(privacyChecksEnabled: true);
+    expect(
+      find.textContaining('Geen kwaliteitsproblemen gevonden'),
+      findsOneWidget,
+    );
+
+    // Zelfde deck, zelfde lege uitslag — maar er is niet gekeken. Dan mag de
+    // balk dat niet als "schoon" verkopen, en moet hij zeggen waar het
+    // aanstaat.
+    await pump(privacyChecksEnabled: false);
+    expect(
+      find.textContaining('Geen kwaliteitsproblemen gevonden'),
+      findsNothing,
+    );
+    expect(find.textContaining('de privacycontrole staat uit'), findsOneWidget);
+  });
 }

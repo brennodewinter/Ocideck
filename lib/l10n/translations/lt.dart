@@ -1787,6 +1787,40 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Praleidimas įjungtas: tai, ką patikra laiko asmens duomenimis, užjuodinama, o visi šios skaidrės vaizdai, vaizdo ir garso įrašai nepatenka nei į ekraną, nei į eksportą. Tavo markdown failas išsaugo viską.',
+  'Bestand': 'Failas',
+  'Venster': 'Langas',
+  'Help': 'Pagalba',
+  'Alles selecteren': 'Pažymėti viską',
+  'Plakken': 'Įklijuoti',
+  'Opnieuw': 'Pakartoti',
+  'Eigenschappen': 'Savybės',
+  'Opdrachten…': 'Komandos…',
+  'Opslaan…': 'Įrašoma…',
+  'Uploaden naar WebDAV…': 'Įkeliama į WebDAV…',
+  'Uploaden naar S3…': 'Įkeliama į S3…',
+  'Vastleggen in git…': 'Įrašoma į git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Vyksta įrašymas. Pakartotinis įrašymas nieko nedaro, kol tai nebus baigta.',
+  'Klaar — privacy niet gecontroleerd': 'Paruošta — privatumas nepatikrintas',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Asmens duomenų, specialių kategorijų duomenų ir paslapčių nebuvo ieškoma: privatumo patikra išjungta skiltyje Saugumas.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Pristatymai, kurie lieka paprasti Markdown failai: skaitomi, juose galima ieškoti ir atveriami bet kuria rengykle.',
+  'sjablonen om mee te beginnen, of leeg': 'šablonų pradžiai arba tuščia',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Šablono pavyzdinės skaidrės yra olandų kalba. Pavadinimas ir aprašymas atitinka tavo kalbą; turinį pritaikai jį sukūręs.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Praleidimas įjungtas: rasti duomenys užjuodinami, o visi šios skaidrės vaizdai, vaizdo ir garso įrašai nepatenka nei į ekraną, nei į eksportą. Tavo markdown failas išsaugo viską.',
+  'Mijn tekst': 'Mano tekstas',
+  'Wat zij zien': 'Ką jie mato',
+  'Presentatiegegevens': 'Pristatymo duomenys',
+  'Open presentatiegegevens': 'Atverti pristatymo duomenis',
+  'Motivering van een uitsluiting': 'Išimties pagrindimas',
+  'Motivering van een bevestiging': 'Patvirtinimo pagrindimas',
+  'Tabel koprij, kolom {kolom}': 'Lentelė antraštės eilutė, stulpelis {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Lentelė eilutė {rij}, stulpelis {kolom}',
   'Via deze website ophalen?': 'Gauti per šią svetainę?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'Šios prezentacijos serveris neleido naršyklei perskaityti failo tiesiogiai. OciDeck gali perduoti adresą svetainei, iš kurios atkeliavo pats OciDeck, ir ji failą paims. Tada ta svetainė mato visą adresą — jei nuorodoje yra raktas ar kodas, ta svetainė mato ir jį.',

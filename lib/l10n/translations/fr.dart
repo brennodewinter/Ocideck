@@ -736,6 +736,40 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'L\'omission est activée : ce que le contrôle qualifie de donnée personnelle est caviardé, et toutes les images, vidéos et pistes audio de cette diapositive ne partent ni à l\'écran ni à l\'export. Votre fichier markdown conserve tout.',
+  'Bestand': 'Fichier',
+  'Venster': 'Fenêtre',
+  'Help': 'Aide',
+  'Alles selecteren': 'Tout sélectionner',
+  'Plakken': 'Coller',
+  'Opnieuw': 'Rétablir',
+  'Eigenschappen': 'Propriétés',
+  'Opdrachten…': 'Commandes…',
+  'Opslaan…': 'Enregistrement…',
+  'Uploaden naar WebDAV…': 'Envoi vers WebDAV…',
+  'Uploaden naar S3…': 'Envoi vers S3…',
+  'Vastleggen in git…': 'Commit dans git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Enregistrement en cours. Enregistrer à nouveau ne fait rien tant que ce n\'est pas terminé.',
+  'Klaar — privacy niet gecontroleerd': 'Prêt — confidentialité non vérifiée',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Aucune recherche de données personnelles, de données sensibles et de secrets n\'a été effectuée : le contrôle de confidentialité est désactivé dans Sécurité.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Des présentations qui restent de simples fichiers Markdown : lisibles, consultables et ouvrables avec n\'importe quel éditeur.',
+  'sjablonen om mee te beginnen, of leeg': 'modèles pour commencer, ou vierge',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Les diapositives d\'exemple d\'un modèle sont en néerlandais. Le nom et la description suivent votre propre langue ; le contenu, vous l\'adaptez après la création.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'L\'omission est activée : les données trouvées sont caviardées et toutes les images, vidéos et pistes audio de cette diapositive ne partent ni à l\'écran ni à l\'export. Votre fichier markdown conserve tout.',
+  'Mijn tekst': 'Mon texte',
+  'Wat zij zien': 'Ce qu\'ils voient',
+  'Presentatiegegevens': 'Informations de la présentation',
+  'Open presentatiegegevens': 'Ouvrir les informations de la présentation',
+  'Motivering van een uitsluiting': 'Justification d\'une exclusion',
+  'Motivering van een bevestiging': 'Justification d\'une confirmation',
+  'Tabel koprij, kolom {kolom}': 'Tableau ligne d\'en-tête, colonne {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tableau ligne {rij}, colonne {kolom}',
   'Via deze website ophalen?': 'Récupérer via ce site ?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'Le serveur de cette présentation n\'a pas laissé le navigateur lire le fichier directement. OciDeck peut transmettre l\'adresse au site d\'où provient OciDeck lui-même, et c\'est ce site qui la récupère. Ce site voit ainsi l\'adresse complète — si le lien contient une clé ou un code, ce site les voit aussi.',

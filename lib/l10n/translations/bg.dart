@@ -1802,6 +1802,41 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Пропускането е включено: това, което проверката определя като лични данни, се зачернява, а всички изображения, видео и звук от този слайд не отиват на екрана или в експорта. Вашият markdown файл запазва всичко.',
+  'Bestand': 'Файл',
+  'Venster': 'Прозорец',
+  'Help': 'Помощ',
+  'Alles selecteren': 'Избери всичко',
+  'Plakken': 'Постави',
+  'Opnieuw': 'Повтори',
+  'Eigenschappen': 'Свойства',
+  'Opdrachten…': 'Команди…',
+  'Opslaan…': 'Запазване…',
+  'Uploaden naar WebDAV…': 'Качване в WebDAV…',
+  'Uploaden naar S3…': 'Качване в S3…',
+  'Vastleggen in git…': 'Записване в git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Запазва се. Повторното запазване няма да направи нищо, докато това не приключи.',
+  'Klaar — privacy niet gecontroleerd':
+      'Готово — поверителността не е проверена',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Не са търсени лични данни, специални категории данни и тайни: проверката на поверителността е изключена в Сигурност.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Презентации, които остават обикновени файлове Markdown: четими, с възможност за търсене и отваряеми с всеки редактор.',
+  'sjablonen om mee te beginnen, of leeg': 'шаблона за начало или празна',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Примерните слайдове на шаблона са на нидерландски. Името и описанието следват вашия език; съдържанието променяте след създаването.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Пропускането е включено: намерените данни се зачерняват и всички изображения, видео и звук от този слайд не отиват на екрана или в експорта. Вашият markdown файл запазва всичко.',
+  'Mijn tekst': 'Моят текст',
+  'Wat zij zien': 'Какво виждат те',
+  'Presentatiegegevens': 'Данни за презентацията',
+  'Open presentatiegegevens': 'Отвори данните за презентацията',
+  'Motivering van een uitsluiting': 'Обосновка на изключение',
+  'Motivering van een bevestiging': 'Обосновка на потвърждение',
+  'Tabel koprij, kolom {kolom}': 'Таблица заглавен ред, колона {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Таблица ред {rij}, колона {kolom}',
   'Via deze website ophalen?': 'Изтегляне през този сайт?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'Сървърът на тази презентация не позволи на браузъра да прочете файла директно. OciDeck може да подаде адреса на сайта, от който идва самият OciDeck, и той ще го изтегли. Така този сайт вижда пълния адрес — ако във връзката има ключ или код, този сайт вижда и него.',

@@ -736,6 +736,40 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Laga afó ta prendí: loke e kontròl ta konsiderá komo dato personal ta wòrdu tapá pretu, i tur imagen, video i audio di e dia aki no ta bai na pantaya ni na eksportashon. Bo archivo markdown ta warda tur kos.',
+  'Bestand': 'Archivo',
+  'Venster': 'Bentana',
+  'Help': 'Yudansa',
+  'Alles selecteren': 'Selektá tur',
+  'Plakken': 'Pega',
+  'Opnieuw': 'Hasi atrobe',
+  'Eigenschappen': 'Propiedatnan',
+  'Opdrachten…': 'Komandonan…',
+  'Opslaan…': 'Ta warda…',
+  'Uploaden naar WebDAV…': 'Ta subi na WebDAV…',
+  'Uploaden naar S3…': 'Ta subi na S3…',
+  'Vastleggen in git…': 'Ta registrá den git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Ta warda. Warda atrobe no ta hasi nada te ora esaki ta kla.',
+  'Klaar — privacy niet gecontroleerd': 'Kla — privasidat no kontrolá',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'No a buska datos personal, datos spesial i sekretonan: e kontròl di privasidat ta pagá bou di Seguridat.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Presentashonnan ku ta keda simpel archivo Markdown: legibel, buskabel i bo por habri nan ku kualke editor.',
+  'sjablonen om mee te beginnen, of leeg': 'plantia pa kuminsá kuné, òf bashí',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'E dianan di ehèmpel di un plantia ta na hulandes. Nòmber i deskripshon ta sigui bo mes idioma; e kontenido bo ta adaptá despues di krea e presentashon.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Laga afó ta prendí: datos hañá ta wòrdu tapá pretu i tur imagen, video i audio di e dia aki no ta bai na pantaya ni na eksportashon. Bo archivo markdown ta warda tur kos.',
+  'Mijn tekst': 'Mi teksto',
+  'Wat zij zien': 'Loke nan ta mira',
+  'Presentatiegegevens': 'Datos di e presentashon',
+  'Open presentatiegegevens': 'Habri datos di e presentashon',
+  'Motivering van een uitsluiting': 'Motivashon di un eksklushon',
+  'Motivering van een bevestiging': 'Motivashon di un konfirmashon',
+  'Tabel koprij, kolom {kolom}': 'Tabel fila di kabes, kolòm {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabel fila {rij}, kolòm {kolom}',
   'Via deze website ophalen?': 'Buska via e website aki?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'E server di e presentashon aki no a laga e browser lesa e archivo direktamente. OciDeck por pasa e adrès pa e website di unda OciDeck mes ta bini, i e website ei ta buska. Asina e website ei ta mira e adrès kompleto — si tin un yabi of un kódigo den e link, e website ei ta mira esei tambe.',

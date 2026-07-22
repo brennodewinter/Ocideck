@@ -1778,6 +1778,41 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Udeladelse er slået til: det, som tjekket anser for en personoplysning, sværtes, og alle billeder, video og lyd på dette slide kommer ikke med på skærmen eller i eksporten. Din markdown-fil beholder alt.',
+  'Bestand': 'Arkiv',
+  'Venster': 'Vindue',
+  'Help': 'Hjælp',
+  'Alles selecteren': 'Vælg alle',
+  'Plakken': 'Sæt ind',
+  'Opnieuw': 'Gentag',
+  'Eigenschappen': 'Egenskaber',
+  'Opdrachten…': 'Kommandoer…',
+  'Opslaan…': 'Gemmer…',
+  'Uploaden naar WebDAV…': 'Uploader til WebDAV…',
+  'Uploaden naar S3…': 'Uploader til S3…',
+  'Vastleggen in git…': 'Committer til git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Gemmer. At gemme igen gør ingenting, før dette er færdigt.',
+  'Klaar — privacy niet gecontroleerd': 'Klar — privatliv ikke tjekket',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Der er ikke søgt efter personoplysninger, særlige kategorier af oplysninger og hemmeligheder: privatlivstjekket er slået fra under Sikkerhed.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Præsentationer, der forbliver almindelige Markdown-filer: læsbare, søgbare og kan åbnes med enhver editor.',
+  'sjablonen om mee te beginnen, of leeg':
+      'skabeloner at starte med, eller tom',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'En skabelons eksempeldias er på nederlandsk. Navn og beskrivelse følger dit eget sprog; indholdet tilpasser du efter oprettelsen.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Udeladelse er slået til: fundne data sværtes, og alle billeder, video og lyd på dette slide kommer ikke med på skærmen eller i eksporten. Din markdown-fil beholder alt.',
+  'Mijn tekst': 'Min tekst',
+  'Wat zij zien': 'Hvad de ser',
+  'Presentatiegegevens': 'Præsentationsoplysninger',
+  'Open presentatiegegevens': 'Åbn præsentationsoplysninger',
+  'Motivering van een uitsluiting': 'Begrundelse for en undtagelse',
+  'Motivering van een bevestiging': 'Begrundelse for en bekræftelse',
+  'Tabel koprij, kolom {kolom}': 'Tabel overskriftsrække, kolonne {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabel række {rij}, kolonne {kolom}',
   'Via deze website ophalen?': 'Hent via dette websted?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'Serveren for denne præsentation lod ikke browseren læse filen direkte. OciDeck kan give adressen videre til det websted, OciDeck selv kommer fra, og så henter det filen. Dermed ser det websted hele adressen — står der en nøgle eller en kode i linket, ser webstedet også den.',

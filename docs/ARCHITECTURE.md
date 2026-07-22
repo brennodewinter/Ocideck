@@ -379,6 +379,17 @@ surface takes a raw `Deck`/`List<Slide>`, so redaction cannot be bypassed by
 forgetting a call. `forExternalProcessing(...)` is the stricter variant for
 hand-off outside the app.
 
+The boundary is about what *leaves*, so the author's own editor sits on the
+source side: the preview, the thumbnails and the slide list render the raw deck,
+because a screen that blacks out your own sentence leaves you nothing to correct.
+`services/privacy/privacy_preview.dart` is the one deliberate crossing back —
+`audiencePreviewSlide` runs a *single* slide through `forAudience` and hands the
+projected `Slide` to the preview, on request, so the author can look at the
+recipient's version. It projects one slide rather than the deck because the
+projection scans, and rescanning a deck on every keystroke in the editor beside
+it would make the preview unusable; the scanner escalates within a slide, so the
+result for that slide is the same either way.
+
 The type says a deck went through the boundary; it does not say the boundary
 looked at every field. That second half is a list written by hand in three
 places — the scanner's fragments, the projection, and the redaction manifest —

@@ -142,6 +142,7 @@ import 'package:analyzer/source/line_info.dart';
 const Set<String> _contentHomes = {
   'lib/models/deck_template.dart',
   'lib/models/deck_template_briefings.dart',
+  'lib/models/deck_template_conversations.dart',
   'lib/models/deck_template_general.dart',
   'lib/models/deck_template_info_safety.dart',
   'lib/models/deck_template_sessions.dart',

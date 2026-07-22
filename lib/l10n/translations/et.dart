@@ -1770,6 +1770,41 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Väljajätmine on sees: see, mida kontroll peab isikuandmeteks, muudetakse mustaks ning selle slaidi kõik pildid, video ja heli ei lähe ekraanile ega ekspordisse. Sinu markdown-fail säilitab kõik.',
+  'Bestand': 'Fail',
+  'Venster': 'Aken',
+  'Help': 'Abi',
+  'Alles selecteren': 'Vali kõik',
+  'Plakken': 'Kleebi',
+  'Opnieuw': 'Tee uuesti',
+  'Eigenschappen': 'Omadused',
+  'Opdrachten…': 'Käsud…',
+  'Opslaan…': 'Salvestamine…',
+  'Uploaden naar WebDAV…': 'Üleslaadimine WebDAV-i…',
+  'Uploaden naar S3…': 'Üleslaadimine S3-e…',
+  'Vastleggen in git…': 'Salvestamine git-i…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Salvestamine käib. Uuesti salvestamine ei tee midagi, kuni see on lõpetatud.',
+  'Klaar — privacy niet gecontroleerd':
+      'Valmis — privaatsust pole kontrollitud',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Isikuandmeid, eriliiki andmeid ja saladusi ei kontrollitud: privaatsuse kontroll on jaotises Turvalisus välja lülitatud.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Esitlused, mis jäävad tavalisteks Markdown-failideks: loetavad, otsitavad ja avatavad mis tahes redaktoriga.',
+  'sjablonen om mee te beginnen, of leeg': 'malli alustamiseks või tühi',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Malli näidisslaidid on hollandi keeles. Nimi ja kirjeldus järgivad sinu enda keelt; sisu kohandad pärast loomist.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Väljajätmine on sees: leitud andmed muudetakse mustaks ning selle slaidi kõik pildid, video ja heli ei lähe ekraanile ega ekspordisse. Sinu markdown-fail säilitab kõik.',
+  'Mijn tekst': 'Minu tekst',
+  'Wat zij zien': 'Mida nemad näevad',
+  'Presentatiegegevens': 'Esitluse andmed',
+  'Open presentatiegegevens': 'Ava esitluse andmed',
+  'Motivering van een uitsluiting': 'Erandi põhjendus',
+  'Motivering van een bevestiging': 'Kinnituse põhjendus',
+  'Tabel koprij, kolom {kolom}': 'Tabel päiserida, veerg {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabel rida {rij}, veerg {kolom}',
   'Via deze website ophalen?': 'Kas tuua selle veebisaidi kaudu?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'Selle esitluse server ei lubanud brauseril faili otse lugeda. OciDeck saab anda aadressi edasi veebisaidile, kust OciDeck ise pärineb, ja see toob faili. Nii näeb see veebisait kogu aadressi — kui lingis on võti või kood, näeb see veebisait ka seda.',

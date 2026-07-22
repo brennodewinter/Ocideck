@@ -114,7 +114,10 @@ class _BadgeFindings extends ConsumerWidget {
           for (final issue in issues)
             Padding(
               padding: const EdgeInsets.only(bottom: 5),
-              child: _FindingLine(issue: issue),
+              child: _FindingLine(
+                issue: issue,
+                slide: _slideAt(ref, slideIndex),
+              ),
             ),
           if (issues.isEmpty)
             Text(
@@ -159,13 +162,17 @@ class _BadgeFindings extends ConsumerWidget {
 class _FindingLine extends StatelessWidget {
   final SlideQualityIssue issue;
 
-  const _FindingLine({required this.issue});
+  /// De dia waar de melding op zit — nodig om een tabelcel als rij en kolom aan
+  /// te wijzen in plaats van als doorlopend celnummer.
+  final Slide? slide;
+
+  const _FindingLine({required this.issue, this.slide});
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final color = slideQualitySeverityColor(issue.severity);
-    final field = slideQualityFieldLabel(l10n, issue);
+    final field = slideQualityFieldLabel(l10n, issue, slide: slide);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,6 +193,15 @@ class _FindingLine extends StatelessWidget {
       ],
     );
   }
+}
+
+/// De dia op [slideIndex], of null als hij niet (meer) bestaat.
+Slide? _slideAt(WidgetRef ref, int slideIndex) {
+  final slides = ref.read(deckProvider).deck?.slides;
+  if (slides == null || slideIndex < 0 || slideIndex >= slides.length) {
+    return null;
+  }
+  return slides[slideIndex];
 }
 
 /// De meldingen van één slide voor één familie, uit de **ruwe** uitslag.

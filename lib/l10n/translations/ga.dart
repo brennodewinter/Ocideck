@@ -1815,6 +1815,41 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Tá an fágáil ar lár ann: cuirtear dubh ar cibé rud a mheasann an tseiceáil a bheith ina shonra pearsanta, agus ní théann na híomhánna, an físeán ná an fhuaim ar fad ón sleamhnán seo chuig an scáileán ná chuig an easpórtáil. Coinníonn do chomhad markdown gach rud.',
+  'Bestand': 'Comhad',
+  'Venster': 'Fuinneog',
+  'Help': 'Cabhair',
+  'Alles selecteren': 'Roghnaigh gach rud',
+  'Plakken': 'Greamaigh',
+  'Opnieuw': 'Athdhéan',
+  'Eigenschappen': 'Airíonna',
+  'Opdrachten…': 'Orduithe…',
+  'Opslaan…': 'Á shábháil…',
+  'Uploaden naar WebDAV…': 'Á uaslódáil chuig WebDAV…',
+  'Uploaden naar S3…': 'Á uaslódáil chuig S3…',
+  'Vastleggen in git…': 'Á thiomnú chuig git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Á shábháil. Ní dhéanann sábháil arís aon rud go dtí go mbeidh sé seo críochnaithe.',
+  'Klaar — privacy niet gecontroleerd':
+      'Réidh — níor seiceáladh an príobháideachas',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Ní dhearnadh seiceáil ar shonraí pearsanta, ar shonraí catagóire speisialta ná ar rúin: tá an tseiceáil príobháideachais múchta faoi Slándáil.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Láithreoireachtaí a fhanann ina ngnáthchomhaid Markdown: inléite, inchuardaithe agus infhoscailte le heagarthóir ar bith.',
+  'sjablonen om mee te beginnen, of leeg': 'teimpléad le tosú leo, nó folamh',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Tá sleamhnáin shamplacha teimpléid san Ollainnis. Leanann an t-ainm agus an cur síos do theanga féin; cuireann tú an t-ábhar in oiriúint tar éis é a chruthú.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Tá an fágáil ar lár ann: cuirtear dubh ar na sonraí a aimsíodh agus ní théann na híomhánna, an físeán ná an fhuaim ar fad ón sleamhnán seo chuig an scáileán ná chuig an easpórtáil. Coinníonn do chomhad markdown gach rud.',
+  'Mijn tekst': 'Mo théacs',
+  'Wat zij zien': 'A bhfeiceann siad',
+  'Presentatiegegevens': 'Sonraí na láithreoireachta',
+  'Open presentatiegegevens': 'Oscail sonraí na láithreoireachta',
+  'Motivering van een uitsluiting': 'Réasúnú le haghaidh eisceachta',
+  'Motivering van een bevestiging': 'Réasúnú le haghaidh dearbhaithe',
+  'Tabel koprij, kolom {kolom}': 'Tábla ró ceanntáisc, colún {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tábla ró {rij}, colún {kolom}',
   'Via deze website ophalen?': 'Faigh tríd an suíomh seo?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'Níor lig freastalaí na láithreoireachta seo don bhrabhsálaí an comhad a léamh go díreach. Is féidir le OciDeck an seoladh a chur ar aghaidh chuig an suíomh as a dtagann OciDeck féin, agus faigheann an suíomh sin é. Mar sin feiceann an suíomh sin an seoladh iomlán — má tá eochair nó cód sa nasc, feiceann an suíomh sin iad sin freisin.',

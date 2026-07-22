@@ -1801,6 +1801,41 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'It-tħassir huwa mixgħul: dak li l-kontroll jikklassifika bħala data personali jiġi mgħotti bl-iswed, u l-immaġni, il-video u l-awdjo kollha ta\' din is-slide ma jmorrux fuq l-iskrin jew fl-esportazzjoni. Il-fajl markdown tiegħek iżomm kollox.',
+  'Bestand': 'Fajl',
+  'Venster': 'Tieqa',
+  'Help': 'Għajnuna',
+  'Alles selecteren': 'Agħżel kollox',
+  'Plakken': 'Waħħal',
+  'Opnieuw': 'Erġa\' agħmel',
+  'Eigenschappen': 'Proprjetajiet',
+  'Opdrachten…': 'Kmandi…',
+  'Opslaan…': 'Qed jissalva…',
+  'Uploaden naar WebDAV…': 'Qed jittella\' fuq WebDAV…',
+  'Uploaden naar S3…': 'Qed jittella\' fuq S3…',
+  'Vastleggen in git…': 'Qed jiġi kkommittjat f\'git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Qed jissalva. Li tissalva mill-ġdid ma jagħmel xejn sakemm dan jitlesta.',
+  'Klaar — privacy niet gecontroleerd': 'Lest — il-privatezza mhux iċċekkjata',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Ma sarx kontroll għal data personali, data ta\' kategoriji speċjali u sigrieti: il-kontroll tal-privatezza huwa mitfi taħt Sigurtà.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Preżentazzjonijiet li jibqgħu fajls Markdown sempliċi: jinqraw, jitfittxew u jinfetħu bi kwalunkwe editur.',
+  'sjablonen om mee te beginnen, of leeg': 'mudelli biex tibda, jew vojta',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Is-slides ta\' eżempju ta\' mudell huma bl-Olandiż. L-isem u d-deskrizzjoni jsegwu l-lingwa tiegħek; il-kontenut taddattah wara l-ħolqien.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'It-tħassir huwa mixgħul: id-data misjuba tiġi mgħottija bl-iswed u l-immaġni, il-video u l-awdjo kollha ta\' din is-slide ma jmorrux fuq l-iskrin jew fl-esportazzjoni. Il-fajl markdown tiegħek iżomm kollox.',
+  'Mijn tekst': 'It-test tiegħi',
+  'Wat zij zien': 'Dak li jaraw',
+  'Presentatiegegevens': 'Data tal-preżentazzjoni',
+  'Open presentatiegegevens': 'Iftaħ id-data tal-preżentazzjoni',
+  'Motivering van een uitsluiting': 'Ġustifikazzjoni ta\' eċċezzjoni',
+  'Motivering van een bevestiging': 'Ġustifikazzjoni ta\' konferma',
+  'Tabel koprij, kolom {kolom}':
+      'Tabella ringiela ta\' intestatura, kolonna {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabella ringiela {rij}, kolonna {kolom}',
   'Via deze website ophalen?': 'Iġib permezz ta\' dan is-sit?',
   'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
       'Is-server ta\' din il-preżentazzjoni ma ħalliex lill-brawżer jaqra l-fajl direttament. OciDeck jista\' jgħaddi l-indirizz lis-sit li minnu ġej OciDeck stess, u dak is-sit iġibu. B\'hekk dak is-sit jara l-indirizz sħiħ — jekk fil-link hemm ċavetta jew kodiċi, dak is-sit jarahom ukoll.',

@@ -14,12 +14,45 @@
 | `Ctrl/Cmd + Z` | Undo |
 | `Ctrl/Cmd + Shift + Z` | Redo |
 | `Ctrl + Y` | Redo (alternative) |
+| `Ctrl/Cmd + F` | Find (visual mode: the find & replace dialog; markdown mode: the in-editor bar — see below) |
 | `Ctrl/Cmd + H` | Find & replace (visual mode: dialog; markdown mode: in-editor bar — see below) |
 | `Ctrl/Cmd + V` (in a table cell) | Paste a spreadsheet/CSV/markdown selection as a table (also `Shift + Insert`) |
 | `Tab` to the panel divider, then `←` / `→` | Resize the slide panel |
 
+*Added 2026-07-22: `Ctrl/Cmd + F` was bound app-wide but only listed under
+Markdown mode, so in visual mode it looked as though there was no find key.*
+
 In the **add-slide dialog**, `Tab` moves between the type cards, `Enter` picks
-the focused one, and `Esc` cancels.
+the focused one, and `Esc` cancels. The card that has focus also drives the
+explanation strip below the grid, so tabbing through the types reads out what
+each one is for.
+
+## macOS menu bar
+
+On macOS the app carries a real menu bar. It is the only surface that shows what
+OciDeck can do without knowing where to look, so it repeats the shortcuts above
+rather than adding a second set. Two accelerators exist **only** there:
+`Cmd + ,` for the settings and `Cmd + N` for a new tab. Windows and Linux get
+their window menu from the desktop environment and the browser build has none, so
+this bar is not built outside macOS.
+
+| Menu | Items |
+| --- | --- |
+| **OciDeck** | About · Settings (`Cmd + ,`) · Hide, Hide others, Show all · Quit |
+| **File** | New presentation (`Cmd + N`, opens a new tab on the welcome screen) · Open… (`Cmd + O`) · Save (`Cmd + S`) · Export · Properties |
+| **Edit** | Undo (`Cmd + Z`) · Redo (`Cmd + Shift + Z`) · Cut, Copy, Paste, Select all (`Cmd + X/C/V/A`) · Find (`Cmd + F`) · Find & replace (`Cmd + H`) |
+| **Presentation** | Present · Full-deck preview · Commands… (`Cmd + K`, the command palette) |
+| **Window** | Minimise · Zoom · Toggle full screen |
+| **Help** | User guide · Keyboard shortcuts |
+
+Items that need an open presentation stay **visible but greyed out** when there
+is none, and *Export*, *Undo* and *Redo* grey out when they have nothing to do.
+Greying rather than hiding is deliberate: a menu item that comes and goes teaches
+nobody what the app can do.
+
+Cut, copy, paste and select all go to whatever field has focus, exactly as the
+key combinations do. They are listed because this bar replaces the standard macOS
+menu, and adding a menu bar must not take text editing away.
 
 ## Markdown mode
 

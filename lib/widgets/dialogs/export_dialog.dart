@@ -61,6 +61,11 @@ class ExportDialog extends StatefulWidget {
   /// Waarschuwen of blokkeren bij onafgehandelde bevindingen.
   final PrivacyExportPolicy privacyPolicy;
 
+  /// Of de privacycontrole heeft gedraaid. Staat ze uit, dan is een leeg
+  /// scanresultaat geen schone uitslag maar een niet-gestelde vraag, en mag de
+  /// groene balk dat niet als geruststelling verkopen.
+  final bool privacyChecksEnabled;
+
   /// Na een geslaagde export aangeroepen met het formaat-label ("PDF",
   /// "PPTX", "HTML") — bijv. om het bij de recente bestanden te noteren.
   final void Function(String formatLabel)? onExported;
@@ -79,6 +84,7 @@ class ExportDialog extends StatefulWidget {
     this.exportDirectory,
     this.showClassificationWatermark = false,
     this.privacyPolicy = const PrivacyExportPolicy(),
+    this.privacyChecksEnabled = true,
     this.onExported,
   });
 
@@ -98,6 +104,7 @@ class ExportDialog extends StatefulWidget {
     String? exportDirectory,
     bool showClassificationWatermark = false,
     PrivacyExportPolicy privacyPolicy = const PrivacyExportPolicy(),
+    bool privacyChecksEnabled = true,
     void Function(String formatLabel)? onExported,
   }) {
     return showDialog(
@@ -116,6 +123,7 @@ class ExportDialog extends StatefulWidget {
         exportDirectory: exportDirectory,
         showClassificationWatermark: showClassificationWatermark,
         privacyPolicy: privacyPolicy,
+        privacyChecksEnabled: privacyChecksEnabled,
         onExported: onExported,
       ),
     );
@@ -841,24 +849,38 @@ class _ExportDialogState extends State<ExportDialog> {
     );
   }
 
+  /// De balk boven de exportknoppen als er niets te melden valt.
+  ///
+  /// Groen zegt "wij hebben gekeken en niets gevonden". Staat de privacycontrole
+  /// uit, dan is de tweede helft van die zin niet waar, en juist die helft leest
+  /// de gebruiker als toestemming om te delen. Dan wordt de balk neutraal en
+  /// zegt hij wát er niet is nagekeken — plus waar hij dat aanzet, want een
+  /// melding zonder uitweg is een doodlopende straat met tekst.
   Widget _readyBanner(AppLocalizations l10n) {
+    final checked = widget.privacyChecksEnabled;
+    final foreground = checked ? AppTheme.successFg : AppTheme.slate600;
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: AppTheme.successBg,
+        color: checked ? AppTheme.successBg : AppTheme.slate100,
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: AppTheme.successBgSoft),
+        border: Border.all(
+          color: checked ? AppTheme.successBgSoft : AppTheme.slate300,
+        ),
       ),
       child: Row(
         children: [
-          Icon(Icons.task_alt, size: 16, color: AppTheme.successFg),
+          Icon(Icons.task_alt, size: 16, color: foreground),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              '${l10n.d('Klaar voor export')} — '
-              '${l10n.d('Geen kwaliteitsproblemen gevonden')}',
-              style: TextStyle(fontSize: 11, color: AppTheme.successFg),
+              checked
+                  ? '${l10n.d('Klaar voor export')} — '
+                        '${l10n.d('Geen kwaliteitsproblemen gevonden')}'
+                  : '${l10n.d('Klaar voor export')} — '
+                        '${l10n.d('Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.')}',
+              style: TextStyle(fontSize: 11, color: foreground),
             ),
           ),
         ],
