@@ -293,6 +293,72 @@ List<String> _filePickerPathViolations() {
   return hits;
 }
 
+// ── Vaste vertragingen in tests ─────────────────────────────────────────────
+//
+// `runAsync(() => Future.delayed(const Duration(milliseconds: 80)))` wacht niet
+// op een resultaat maar gokt hoe lang echt werk duurt op deze machine. Onder een
+// volle `make check` — meerdere sessies op één machine — is die gok soms te krap,
+// en dan faalt een test op iets wat een paar milliseconden later wél klaar was.
+// Het getal verhogen verplaatst de gok alleen.
+//
+// Dat is geen theorie: vier tests werden op één dag om deze reden gerepareerd
+// (shell_export_actions ×2, signature_draw, duplicate_cleanup_dialog). Ze slagen
+// los en falen onder belasting — de duurste faalvorm die er is, want de test
+// wordt opnieuw gedraaid, slaagt, en iedereen concludeert dat het toeval was.
+//
+// Het alternatief staat in `test/support/pump_until.dart`: wissel korte stapjes
+// echte tijd af met een `pump` en kijk na elke stap of het resultaat er ís, met
+// een bovengrens zodat een vastloper alsnog faalt.
+final _runAsync = RegExp(r'runAsync\s*\(');
+final _futureDelayed = RegExp(r'Future\.delayed\s*\(');
+
+/// Haalt regelcommentaar weg vóór het zoeken.
+///
+/// Zonder dit valt de poort over zijn eigen tegenvoorbeeld: het doc-commentaar
+/// van `pump_until.dart` schrijft het antipatroon voluit op om uit te leggen
+/// waaróm het fout is. Een poort die zijn eigen uitleg verbiedt, wordt weggezet
+/// — en terecht.
+String _withoutLineComments(String source) => source
+    .split('\n')
+    .map((line) {
+      final at = line.indexOf('//');
+      if (at < 0) return line;
+      // Een `//` binnen een string laten we staan; het gaat hier om
+      // commentaarregels, niet om URL's in testdata.
+      final before = line.substring(0, at);
+      final quotes =
+          "'".allMatches(before).length + '"'.allMatches(before).length;
+      if (quotes.isOdd) return line;
+      return before;
+    })
+    .join('\n');
+
+/// Tests die binnen een `runAsync` op een vaste klok wachten.
+List<String> _fixedDelayInRunAsync() {
+  final hits = <String>[];
+  for (final file in Directory('test').listSync(recursive: true)) {
+    if (file is! File || !file.path.endsWith('.dart')) continue;
+    final source = _withoutLineComments(file.readAsStringSync());
+    if (!source.contains('runAsync')) continue;
+
+    for (final start in _runAsync.allMatches(source)) {
+      // Het venster loopt tot het einde van de aanroep; bij gebrek aan een
+      // parser is 400 tekens ruim genoeg voor de vormen die hier voorkomen en
+      // te krap om de volgende test binnen te trekken.
+      final end = (start.end + 400).clamp(0, source.length);
+      final scope = source.substring(start.end, end);
+      final delay = _futureDelayed.firstMatch(scope);
+      if (delay == null) continue;
+      final line = '\n'.allMatches(source.substring(0, start.start)).length + 1;
+      hits.add(
+        '${file.path}:$line: Future.delayed binnen runAsync — wacht op het '
+        'resultaat, niet op de klok (zie test/support/pump_until.dart)',
+      );
+    }
+  }
+  return hits;
+}
+
 /// Typen die in zo'n parameterlijst een lek zouden betekenen.
 final _rawDeckParam = RegExp(r'\b(Deck|List<Slide>)\b\s+\w+');
 
@@ -498,6 +564,19 @@ void main() {
       'en haal de markeringen weg. Let op dat `git add -A` na het opschonen '
       'van één bestand de andere ongemoeid instageert:\n'
       '    ${conflictHits.join('\n    ')}',
+    );
+  }
+
+  final delayHits = _fixedDelayInRunAsync();
+  if (delayHits.isNotEmpty) {
+    failures.add(
+      'Een test wacht binnen `runAsync` op een vaste klok in plaats van op het '
+      'resultaat. Zo\'n test slaagt los en faalt onder een volle `make check` — '
+      'de duurste faalvorm die er is, want hij wordt opnieuw gedraaid, slaagt, '
+      'en dan heet het toeval. Gebruik `pumpUntil` uit '
+      'test/support/pump_until.dart: die wacht tot het er ís, met een '
+      'bovengrens zodat een vastloper alsnog faalt:\n'
+      '    ${delayHits.join('\n    ')}',
     );
   }
 
