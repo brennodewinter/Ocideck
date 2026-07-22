@@ -183,6 +183,13 @@ a security fix will be in its notes. There is deliberately no mailing list — a
 subscriber list is personal data we would have to hold and protect, and a feed is
 not. [`SECURITY.md`](SECURITY.md) lists the alternatives and what they carry.
 
+## Machine-readable
+
+The same facts in a form a tool can read, without anyone having to ask us:
+[`security-insights.yml`](security-insights.yml) (OpenSSF Security Insights
+v2.2.0). It is guarded against drifting from `SECURITY.md` — see
+`test/security_insights_test.dart`.
+
 ## Where this is weakest
 
 Read this section first if you are deciding whether to depend on the project.
