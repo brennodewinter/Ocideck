@@ -311,6 +311,21 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   notities en het zegel.
 
 ### Fixed
+- **De privacygrens werd bewaakt met een lijst van vier namen.** OciDeck belooft
+  dat wat u aan een ontvanger geeft — een PDF, een presentatie, het klembord —
+  langs de redactie is geweest, en dat de compiler dat afdwingt in plaats van
+  een afspraak. Die belofte klopte, maar alleen voor de vier plekken die met de
+  hand in de poort stonden. Wie er een vijfde uitvoerkanaal bij bouwde, werd
+  door niets tegengehouden.
+
+  De poort zoekt ze nu zelf op, en dwingt per kanaal een uitgesproken keuze af:
+  gaat dit naar een ontvanger (dan moet het geredigeerd zijn), of schrijft het
+  uw eigen bron terug (dan mag het juist níet geredigeerd worden — een
+  `.ocideck`-pakket is uw project, en dat hoort compleet te blijven). Die twee
+  zien er voor een machine identiek uit, dus de poort kiest niet; hij weigert
+  alleen nog de vraag over te slaan. Dat bracht twaalf kanalen aan het licht die
+  nergens geclassificeerd stonden — geen lek, wel twaalf plekken waar de
+  volgende bouwer moest raden.
 - **Vier lekken van dezelfde soort dichtgezet: dingen die zonder grens werden
   ingelezen.** Een bestand dat met uw presentatie meereist — de laag met uw
   strepen, uw notities, uw MIAUW-uitspraken of het zegel — werd bij het openen

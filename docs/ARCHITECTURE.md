@@ -491,10 +491,11 @@ must never lose work. Deck↔repo conversion lives in `deck_repo_serializer.dart
 convention. `PrivacyProjection.forAudience(...)` is the only way to obtain an
 `AudienceDeck` (its constructor is private), and every surface that can *emit*
 content — the rasterizer, the export bundle and dialog, the fullscreen presenter,
-the slide-list clipboard — accepts an `AudienceDeck` rather than a raw `Deck`. A
-`check_conventions` guard (`audienceBoundary`) fails the build if a receiving
-surface takes a raw `Deck`/`List<Slide>`, so redaction cannot be bypassed by
-forgetting a call. `forExternalProcessing(...)` is the stricter variant for
+the slide-list clipboard — accepts an `AudienceDeck` rather than a raw `Deck`. The
+`tool/check_audience_boundary.dart` gate fails the build if a registered
+receiving surface takes a raw `Deck`/`List<Slide>`, and also if a *new* output
+channel appears without being classified at all — so redaction cannot be
+bypassed by forgetting a call, nor by adding a surface nobody thought to list. `forExternalProcessing(...)` is the stricter variant for
 hand-off outside the app.
 
 The boundary is about what *leaves*, so the author's own editor sits on the

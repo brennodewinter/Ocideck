@@ -122,6 +122,7 @@ now the only passing state.
 | [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ |
 | [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ |
 | [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering, file-size, class-size & FilePicker-gate ratchets | ✅ | ✅ | ✅ |
+| [`make check-audience-boundary`](#make-check-audience-boundary) | Every output channel classified: audience surface (needs `AudienceDeck`) or deliberately source-faithful | ✅ | ✅ | ✅ |
 | [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ |
 | [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ |
 | [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — |
@@ -281,16 +282,6 @@ also declares them, but see the [CI note](#continuous-integration).)
     semgrep installed. The single entry today is the `chmod` in
     `lib/services/disk_traces.dart`: the rule guards network traffic that
     NetGuard cannot see, and `chmod` is not network-capable.
-  - **privacy projection boundary** — every surface that hands slide content to
-    a recipient (`SlideRasterizer.rasterize`, `FullscreenPresenter.present`,
-    `ExportDialog.show`) must take an `AudienceDeck` and must not accept a raw
-    `Deck` or `List<Slide>`. That type can only be minted by `PrivacyProjection`,
-    so as long as the entry points hold the line, no unredacted text can escape —
-    the compiler refuses it. The risk here is not technical but human: someone
-    adds a fourth export format in six months, hands it a `Deck`, and the
-    guarantee is quietly gone without a single test going red. A convention in a
-    design document does not stop data; a compile error does. See
-    `audienceBoundary` in the tool and `docs/design/OCIWACHT.md` §6;
 - **Failure means:** route the diagnostic through `logError`; **or** replace the
   literal colour with an `AppTheme` token (then lower `rawColorBaseline`); **or**
   split the oversized file (then lower its `fileSizeBaseline` entry — the run
@@ -299,6 +290,39 @@ also declares them, but see the [CI note](#continuous-integration).)
   widget) rather than into another `part`, since a `part` split leaves the class
   the same size and this ratchet says so; **or** — if you removed a
   `catch (_)` — lower `catchUnderscoreBaseline` to lock it in.
+
+### `make check-audience-boundary`
+- **Runs:** `dart run tool/check_audience_boundary.dart`
+- **Covers:** the **privacy projection boundary** (`docs/design/OCIWACHT.md` §6).
+  Only `PrivacyProjection` can mint an `AudienceDeck`, so a surface that demands
+  that type cannot be handed unredacted text — the compiler refuses it. The open
+  question is *which* surfaces must demand it, and until 2026-07-22 that was a
+  list of four hard-coded entry points. A fifth output channel was invisible to
+  the gate: exactly the fail-open shape §6.0 warns about.
+- **How it measures:** the **`analyzer` package's AST**. It flags every
+  declaration that takes slide content (`Deck`, `List<Slide>`, `AudienceDeck`,
+  `ExportBundle`) **and** reaches an artefact primitive in its own body —
+  `FilePicker.saveFile`, `Clipboard.setData`, `toImage`/`toByteData`, or the
+  atomic write helpers. Each hit must appear in `_registry` classified as one of
+  two kinds, with a written reason:
+  - `audience` — hands content to a **recipient**. Must take an `AudienceDeck`
+    or `ExportBundle`; a raw `Deck` here is a leak.
+  - `source` — writes the **source** back for the user, verbatim. Redacting here
+    would be the bug: a `.ocideck` package is the user's project, and §6.0 says
+    in so many words that the deck goes to the `.md` one-to-one.
+- **Why it classifies rather than decides:** the two kinds look identical to a
+  static rule — same parameter, same primitive, opposite requirement. Inverting
+  the naive way (suspect every raw `Deck`) yields 208 parameters across 67 files,
+  which is noise, not signal. So the gate does not answer the question; it
+  refuses to let the question be skipped. A new output channel breaks the build
+  until someone writes down which side it is on.
+- **Blind spot, stated plainly:** a surface that delegates the write two layers
+  down and itself only passes strings is not seen — the analysis is per
+  declaration, not across the call graph. The layer that finally touches the
+  primitive *is* seen, as long as it still holds the slide content.
+- **Failure means:** classify the new channel in `_registry` (kind **and**
+  reason); or give the registered audience surface back its `AudienceDeck`; or
+  update a registration that went stale when something was renamed.
 
 ### `make check-method-length`
 - **Runs:** `dart run tool/check_method_length.dart`
