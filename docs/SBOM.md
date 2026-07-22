@@ -177,6 +177,40 @@ This runs:
 
 So a dependency change that forgets to refresh the SBOM fails `make check`.
 
+## Proving the bundled JavaScript is unmodified
+
+*Added 2026-07-22.* The offline HTML export inlines about 5.8 MB of third-party
+JavaScript, and the first question a reviewer asks about that is fair: **why
+should I believe you have not touched 3.5 MB of minified mermaid?**
+
+`make deps-check` alone does not answer it. It compares each file against the
+`sha256` in `assets/web_export/MANIFEST.json`, and both live in this repository —
+whoever changes one changes the other. That check catches an accident or a
+half-finished upgrade, not a deliberate edit.
+
+What does answer it is the `source` URL the manifest records per bundle:
+
+```
+dart run tool/check_bundled_js.dart --verify-upstream
+```
+
+That refetches every bundle from its upstream URL and compares hashes. As of
+2026-07-22 all six are **byte-identical to upstream** — marked, highlight.js,
+DOMPurify, mermaid, MathJax and the highlight.js stylesheet.
+
+To check one by hand, without trusting this tool either:
+
+```bash
+curl -sL https://cdn.jsdelivr.net/npm/marked@18.0.5/lib/marked.umd.js | shasum -a 256
+```
+
+and compare against the `sha256` for that entry in `MANIFEST.json`.
+
+It is **opt-in rather than part of `make deps-check`**, deliberately: it pulls
+~6 MB from a CDN, and the daily gate should not fail because someone else's CDN
+is down. Run it when you upgrade a bundle, before a release, or whenever you
+want the answer for yourself.
+
 ## Where it ships
 
 The SBOM travels with the product, not just the repository:

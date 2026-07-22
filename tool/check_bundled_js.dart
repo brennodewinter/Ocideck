@@ -5,6 +5,7 @@
 // tool is their dedicated safety net.
 //
 //   dart run tool/check_bundled_js.dart     (or: make deps-check)
+//   dart run tool/check_bundled_js.dart --verify-upstream
 //
 // It does two independent things, both of which can fail the build:
 //
@@ -12,6 +13,16 @@
 //      assets/web_export/MANIFEST.json must still hash to the recorded sha256.
 //      Catches a bundle that was swapped, truncated, or edited without the
 //      manifest (and therefore this review) being updated.
+//
+//   1b. Upstream identity (online, opt-in via --verify-upstream): each bundle
+//      is refetched from the `source` URL in the manifest and its sha256 is
+//      compared. This answers the question a reviewer actually asks — "why
+//      should I believe you have not touched 3.5 MB of minified mermaid?" —
+//      which the integrity check above cannot: manifest and file live in the
+//      same repository, so whoever changes one changes the other.
+//
+//      Opt-in rather than part of `make deps-check`, because it fetches ~6 MB
+//      from a CDN and would make the daily gate depend on that CDN being up.
 //
 //   2. Known vulnerabilities (online): each pinned package@version is queried
 //      against the OSV database (https://osv.dev). Any advisory fails the gate
@@ -36,6 +47,7 @@ const _osvUrl = 'https://api.osv.dev/v1/query';
 
 Future<void> main(List<String> args) async {
   final offline = args.contains('--offline');
+  final verifyUpstream = args.contains('--verify-upstream');
 
   final manifestFile = File(_manifestPath);
   if (!manifestFile.existsSync()) {
@@ -103,9 +115,30 @@ Future<void> main(List<String> args) async {
       }
     }
 
+    // --- 1b. Upstream identity ---------------------------------------------
+    var upstreamStatus = 'not checked (--verify-upstream)';
+    final source = b['source'] as String?;
+    if (verifyUpstream && source != null) {
+      final upstream = await _sha256Of(Uri.parse(source));
+      if (upstream == null) {
+        upstreamStatus = 'UNREACHABLE  $source';
+        networkFailed = true;
+      } else if (upstream == expected) {
+        upstreamStatus = 'byte-identical to upstream';
+      } else {
+        upstreamStatus = 'DIFFERS FROM UPSTREAM';
+        integrityProblems.add(
+          '$file — sha256 differs from $source\n'
+          '      manifest: $expected\n'
+          '      upstream: $upstream',
+        );
+      }
+    }
+
     final label = npm == null ? file : '$npm@$version  ($file)';
     stdout.writeln('  $label');
     stdout.writeln('      integrity : $integrity');
+    if (verifyUpstream) stdout.writeln('      upstream  : $upstreamStatus');
     stdout.writeln('      osv       : $vulnStatus');
   }
 
@@ -176,6 +209,29 @@ Future<List<String>?> _queryOsv(
         .map((v) => (v as Map<String, dynamic>)['id'] as String)
         .toList();
   } on Object {
+    return null;
+  } finally {
+    client.close(force: true);
+  }
+}
+
+/// De sha256 van wat [url] serveert, of null als het niet op te halen is.
+///
+/// Volgt omleidingen: een CDN stuurt er standaard een paar, en dit pad haalt
+/// geen gebruikersinvoer op maar een adres uit onze eigen manifest. De
+/// NetGuard-redenering die voor de app geldt (een 3xx mag niet om de hostcheck
+/// heen) gaat hier niet op — dit is gereedschap, niet het product.
+Future<String?> _sha256Of(Uri url) async {
+  final client = HttpClient()..connectionTimeout = const Duration(seconds: 20);
+  try {
+    final response = await (await client.getUrl(url)).close();
+    if (response.statusCode != 200) return null;
+    final bytes = <int>[];
+    await for (final chunk in response) {
+      bytes.addAll(chunk);
+    }
+    return sha256.convert(bytes).toString();
+  } catch (_) {
     return null;
   } finally {
     client.close(force: true);
