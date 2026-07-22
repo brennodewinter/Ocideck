@@ -11,7 +11,88 @@ and the project aims to follow [Semantic Versioning](https://semver.org/) once i
 starts tagging releases. It has not yet: everything below is unreleased work on
 `main`.
 
-## [Unreleased]
+## [0.1.0] — unreleased
+
+The first release, when it is cut, is everything below. No tag carries it yet.
+This section is the short answer to "what is in it"; the **Development log**
+further down is the long one, entry by entry, in Dutch.
+
+### Added
+
+- Structured, slide-by-slide editing with a dedicated editor per slide type:
+  title, section, bullets, two-column bullets, bullets + image, one or two
+  images, quote, table, source code, free Markdown, video and audio.
+- Thirteen chart types, entered in an in-app grid or imported from CSV, with an
+  optional link to a CSV kept in `data/`.
+- Cockpit dashboard slides, scorecards, animated timelines, and interactive
+  question (quiz) slides that stay in sync with the audience window.
+- Live preview with inline Markdown, LaTeX math, Mermaid diagrams and syntax
+  highlighting.
+- Fullscreen presenter with a presenter view, dual-screen support, a rehearsal
+  clock, an annotation layer kept in an `.ink.json` sidecar, and live table
+  editing in front of an audience.
+- The privacy check (OciWacht): identification numbers, IBANs, payment cards,
+  e-mail addresses, phone numbers, keys and tokens, GDPR art. 9/10 special
+  categories, and structural leaks — scanned on this device, with a
+  co-occurrence escalator to keep false positives down.
+- Redaction at a single projection boundary, so a value left out is absent from
+  screen, presenter, audience window, PDF, PPTX, HTML, speaker notes and
+  document metadata — while the Markdown keeps the original.
+- Two versions from one source (full and redacted) with a salted-commitment
+  redaction manifest.
+- Traffic Light Protocol: deck-wide and per-slide levels, FIRST TLP 2.0 visual
+  marking, and optional classification enforcement that fails closed.
+- Slide-quality checks (contrast, readability, overflow) with an export gate.
+- Export to Marp Markdown, PDF, PPTX with speaker notes, and a self-contained
+  offline HTML deck with JavaScript, CSS, fonts, charts and images inlined.
+- Storage: local project folders, a portable `.ocideck` package (optionally
+  AES-256 encrypted), Nextcloud/WebDAV, S3, and a git repository with history,
+  release tags, review branches and a three-way merge.
+- The optional information-security module (off by default): finding,
+  findings-summary, checklist, scope-matrix and sign-off slides, a CVSS 4.0
+  builder, offline CWE/WSTG/MASTG/MASWE catalogues, a finding wizard, a MIAUW
+  compliance overview, evidence hashing, sealing with an optional RFC 3161
+  timestamp, and an encrypted audit dossier.
+- The optional AI assistance (off by default): finding-text drafting and image
+  alt-text, marked as AI-drafted and blocking a seal until a human reviews it.
+- An offline CVE database for local lookup, so a search term never leaves the
+  device.
+- Markdown mode over the whole deck, with find & replace and a structural
+  syntax check.
+- Interface in 32 languages, text scaling to 200%, style profiles that travel
+  as a `.ocideckstyle` file, a dark interface, crash recovery, and tabbed
+  multi-deck editing.
+- A documentation reader in the app with full-text search over every bundled
+  document.
+
+### Security
+
+- NetGuard: outbound requests are checked against internal and private
+  addresses on every path, with certificate pinning where the platform allows.
+- Asset containment: a path that resolves outside the project folder is
+  refused, not followed.
+- An import gate over every incoming deck, with a security alarm the user has
+  to answer.
+- A build gate (`tool/check_audience_boundary.dart`) that forces a new output
+  surface to be classified as audience-side or source-side before it can land.
+
+### Known limitations
+
+Collected in [`docs/KNOWN_LIMITATIONS.md`](docs/KNOWN_LIMITATIONS.md) — read
+that before deciding whether this alpha fits what you are doing.
+
+---
+
+## Development log
+
+*Renamed 2026-07-22.* Everything below was under a single `## [Unreleased]`
+heading: 52,000 words in 455 entries, averaging 114 words each, with the
+`### Added` / `### Fixed` / `### Changed` subheadings repeating nine times over.
+That is not a Keep a Changelog release section; it is a reverse-chronological
+development diary, and it is a good one — the entries explain *why*, which is
+rare. It stays, in full, under a heading that says what it is. The release
+summary is above, so a reader looking for "what is in 0.1.0" no longer has to
+read a book to find out.
 
 ### Changed
 - **De HTML-export is nu écht één bestand.** Er stond dat hij self-contained was,
@@ -450,10 +531,17 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   adres dat níét in gebruik is — het staat hier alleen omdat het de fout was),
   terwijl
   `SECURITY.md` en de gedragscode allebei `security@librekat.nl` noemen. Wie de
+  contactkaartje in de issuetracker verwees naar een adres op een domein dat de
+  stichting hiervoor niet gebruikt, terwijl
+  `SECURITY.md` en de gedragscode allebei `security@librekat.nl` noemen — nog
+  steeds het enige geldige meldadres. Wie de
   tracker volgde — precies de route die we zelf aanwijzen — mailde een adres dat
   in onze eigen documentatie niet bestaat. Rechtgezet, en er staat nu een test
   op die elk contactadres vergelijkt met `SECURITY.md`, zodat de drie plekken
-  niet opnieuw uit elkaar kunnen lopen.
+  niet opnieuw uit elkaar kunnen lopen. *(Aangepast 22-07-2026: deze regel
+  citeerde het foute adres letterlijk. Een `grep -rn "security@"` over de
+  repository leverde daardoor twee adressen op zonder aanwijzing welk het
+  huidige is — en het verkeerde stond in de tekst die de fout beschreef.)*
 - **Een HTML-export met huisstijl verloor haar opmaak.** De tijdlijn, de
   akkoordpagina, het zwarte vlak van een privacyredactie en — het ergst — de
   balk met de TLP-classificatie bovenaan het document bestonden alleen in de
