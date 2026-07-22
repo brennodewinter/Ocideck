@@ -6,6 +6,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_finding.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/privacy/privacy_bulk_lexicon.dart';
+import 'package:ocideck/services/privacy/privacy_own_identity.dart';
 import 'package:ocideck/services/privacy/privacy_scanner.dart';
 
 // De vals-positieven-regressietest.
@@ -151,8 +152,21 @@ void main() {
     ];
     expect(docs, isNotEmpty, reason: 'geen docs gevonden om te scannen');
 
+    // De eigen afzender van dit project, precies zoals een gebruiker zijn
+    // eigen gegevens in de instellingen opgeeft. `security@librekat.nl` staat
+    // in README en SECURITY.md omdat lezers het nodig hebben; het is de
+    // afzender, geen bevinding.
+    //
+    // Zonder dit escaleert de co-occurrence-regel: één contactwaarde tilt élke
+    // artikel 9-term in hetzelfde bestand van `waarschijnlijk` naar `zeker`,
+    // en README noemt er zes op één regel omdat hij de scanner beschrijft.
+    // De melding ging dus af op het woord "health" naast ons eigen meldadres.
+    const docsScanner = PrivacyScanner(
+      ownIdentity: OwnIdentity(['security@librekat.nl', 'librekat.nl']),
+    );
+
     for (final doc in docs) {
-      final result = scanner.scan(
+      final result = docsScanner.scan(
         Deck(
           title: 'Docs',
           slides: [

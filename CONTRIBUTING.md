@@ -127,7 +127,10 @@ Targeted test groups for focused work:
 
 ## Proposing changes
 
-1. Branch from the default branch; keep each branch/PR focused on one topic.
+1. Fork <https://pawprint.vigilis.online/LibreKAT/Ocideck> and branch from the
+   default branch; keep each branch/PR focused on one topic. (Registration on
+   the forge is open. If you have push rights you can branch directly, but the
+   fork route is the one an outside contributor takes.)
 2. Write clear commit messages (imperative subject, a short body explaining the
    *why*).
 3. Make sure `make check` is green.
@@ -174,5 +177,5 @@ rewritten rather than extended.
 
 ## Reporting bugs and requesting features
 
-Use the issue templates in the Forgejo tracker. For **security issues, do not open a public
+Use the issue templates in the [Forgejo tracker](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues). For **security issues, do not open a public
 issue** — follow [`SECURITY.md`](SECURITY.md).

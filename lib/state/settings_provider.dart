@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ui' show PlatformDispatcher;
 import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../l10n/app_localizations.dart' show AppLocalizations;
 import '../models/deck.dart' show TlpLevel;
 import '../models/privacy_disposition.dart';
 import '../models/privacy_finding.dart';
@@ -19,6 +21,26 @@ part 'parts/settings_provider_connections.dart';
 part 'parts/settings_provider_git.dart';
 part 'parts/settings_provider_privacy.dart';
 part 'parts/settings_provider_traces.dart';
+
+/// Vaste startwaarde voor de testsuite, in plaats van de taal van de machine.
+///
+/// Zonder dit hangt de uitkomst van elke widgettest af van de landinstelling
+/// van wie hem draait: de suite zoekt Nederlandse knopteksten, en op een
+/// Engelse machine zijn die er niet. `test/flutter_test_config.dart` zet dit
+/// één keer voor de hele suite. In productie blijft het null.
+@visibleForTesting
+String? debugStartupLanguageOverride;
+
+/// De taal voor een installatie die er nog geen heeft.
+///
+/// Staat los van [SettingsNotifier] omdat het geen toestand is maar een vraag
+/// aan het platform, en omdat de klasse aan haar regelplafond zit.
+String _startupLanguageCode() {
+  return debugStartupLanguageOverride ??
+      AppLocalizations.preferredLanguageCode(
+        PlatformDispatcher.instance.locales,
+      );
+}
 
 class SettingsNotifier extends StateNotifier<AppSettings> {
   /// De huidige instellingen, leesbaar en schrijfbaar vanuit een `part`.
@@ -146,7 +168,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     // opleveren. Er valt dan ook niets meer bij te werken.
     if (!mounted) return;
     state = AppSettings(
-      languageCode: prefs.getString('languageCode') ?? 'nl',
+      languageCode: prefs.getString('languageCode') ?? _startupLanguageCode(),
       connections: _loadConnections(prefs),
       customChecklists: ChecklistTemplate.decodeList(
         prefs.getString('customChecklists'),

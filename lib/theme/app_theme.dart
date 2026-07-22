@@ -347,6 +347,17 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: surfaceColor,
+        // Een tip moet er als een tip uitzien. Zonder deze regel erft
+        // `hintText` de gewone tekstkleur, en dan is een leeg veld met een
+        // voorbeeldwaarde niet te onderscheiden van een ingevuld veld. Dat
+        // kostte een scorecard-dia: het formulier oogde gevuld, de dia
+        // renderde wit, en dat bleek pas op de beamer. Bewaakt door
+        // `test/input_hint_contrast_test.dart`.
+        //
+        // `muted` en niet `scheme.onSurfaceVariant`: die laatste ligt maar
+        // 0,04 luminantie van de gewone tekstkleur af — een verschil dat je
+        // met een kleurenkiezer ziet en met het oog niet.
+        hintStyle: TextStyle(color: muted),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 12,
           vertical: 10,

@@ -83,7 +83,7 @@ sudo apt install curl git unzip clang cmake ninja-build pkg-config libgtk-3-dev 
 ### Step 3: Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://pawprint.vigilis.online/LibreKAT/Ocideck.git
 cd Ocideck
 ```
 
@@ -327,4 +327,4 @@ Refer to the contributing guidelines document for complete contribution workflow
 
 This setup guide should enable you to fully develop and test OciDeck locally. If
 issues persist, see [TROUBLESHOOTING_GUIDE.md](TROUBLESHOOTING_GUIDE.md) or open
-an issue in the Forgejo tracker — that is the only contact channel.
+an issue in the [Forgejo tracker](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues) — that is the only contact channel.

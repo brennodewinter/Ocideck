@@ -176,6 +176,57 @@ const unchangedInAllLanguages = {
 void main() {
   tearDown(() => AppLocalizations.setActiveLanguageCode('nl'));
 
+  group('startup language for an installation without a choice', () {
+    test('takes the first system locale the app actually speaks', () {
+      expect(
+        AppLocalizations.preferredLanguageCode(const [Locale('de')]),
+        'de',
+      );
+      expect(
+        AppLocalizations.preferredLanguageCode(const [
+          Locale('de', 'DE'),
+          Locale('en'),
+        ]),
+        'de',
+      );
+    });
+
+    test(
+      'skips locales it does not speak instead of stopping at the first',
+      () {
+        expect(
+          AppLocalizations.preferredLanguageCode(const [
+            Locale('ja'),
+            Locale('ar'),
+            Locale('pl'),
+          ]),
+          'pl',
+        );
+      },
+    );
+
+    // Engels, niet Nederlands: wie een taal opgeeft die wij niet spreken leest
+    // met veel grotere kans Engels. Dit is de regel die maakte dat elke
+    // eerste gebruiker ter wereld een Nederlands toestemmingsscherm kreeg.
+    test(
+      'falls back to English, not Dutch, for a language it does not have',
+      () {
+        expect(
+          AppLocalizations.preferredLanguageCode(const [Locale('ja')]),
+          'en',
+        );
+        expect(AppLocalizations.preferredLanguageCode(const []), 'en');
+      },
+    );
+
+    test('still returns Dutch when the system asks for Dutch', () {
+      expect(
+        AppLocalizations.preferredLanguageCode(const [Locale('nl')]),
+        'nl',
+      );
+    });
+  });
+
   test('supports Frisian and Papiamento language choices', () {
     expect(AppLocalizations.languageNames['fy'], 'Frysk');
     expect(AppLocalizations.languageNames['pap'], 'Papiamento');

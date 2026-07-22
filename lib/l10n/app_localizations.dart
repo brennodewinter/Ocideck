@@ -250,6 +250,25 @@ class AppLocalizations {
     return _materialLocaleFallbacks[code] ?? const Locale('nl');
   }
 
+  /// De taal waarin de app opstart als de gebruiker er nog geen koos.
+  ///
+  /// [systemLocales] is de voorkeurslijst van het besturingssysteem, op
+  /// volgorde van voorkeur; de eerste die wij spreken wint. Spreken we er geen
+  /// enkele, dan wordt het Engels — niet Nederlands. Dat is geen bescheidenheid
+  /// maar rekenkunde: wie een taal opgeeft die hier niet in staat, leest met
+  /// veel grotere kans Engels dan Nederlands.
+  ///
+  /// Dit gaat alléén over de startwaarde. Zodra de gebruiker zelf kiest, staat
+  /// die keuze in de voorkeuren en komt deze functie er niet meer aan te pas.
+  static String preferredLanguageCode(Iterable<Locale> systemLocales) {
+    for (final locale in systemLocales) {
+      if (languageNames.containsKey(locale.languageCode)) {
+        return locale.languageCode;
+      }
+    }
+    return 'en';
+  }
+
   static const LocalizationsDelegate<AppLocalizations> delegate =
       _AppLocalizationsDelegate();
 

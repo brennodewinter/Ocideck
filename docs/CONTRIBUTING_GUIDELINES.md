@@ -73,7 +73,7 @@ All code changes should include:
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://pawprint.vigilis.online/LibreKAT/Ocideck.git
 
 # Install dependencies
 make setup
@@ -156,7 +156,7 @@ All contributors are expected to follow our code of conduct, and to commit to th
 
 ## Contact
 
-For questions about contributing, open an issue in the Forgejo tracker. That is
+For questions about contributing, open an issue in the [Forgejo tracker](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues). That is
 the only channel; security reports are the exception and follow
 [SECURITY.md](../SECURITY.md).
 

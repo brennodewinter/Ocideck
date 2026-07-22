@@ -298,7 +298,7 @@ repository is the documentation. Security issues follow a different route; see
 
 ## If this guide does not solve it
 
-There is one channel: an issue in the Forgejo tracker. Include what you tried
+There is one channel: an issue in the [Forgejo tracker](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues). Include what you tried
 from this guide, the exact steps that reproduce the problem, your operating
 system, and the commit you built from — the app displays no version number, so
 the commit is the only way to say which OciDeck you are running. A security

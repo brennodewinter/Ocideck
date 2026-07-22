@@ -287,10 +287,20 @@ redact it. It detects, among others:
   raised to 21 that same day, and to the full 27 on 2026-07-22 when Cyprus,
   Latvia, Luxembourg and Malta got their rules*)
 
-  Two of those rules deliberately have no checksum, because none is published
-  that we could verify: the Maltese identity card number and the Liechtenstein
-  PEID. Both only report when a matching label sits next to the number, and
-  neither ever rises above "likely". For Cyprus, the rule covers the tax
+  Four of those rules deliberately have no checksum. Two because none is
+  published that we could verify: the Maltese identity card number and the
+  Liechtenstein PEID. Two because the published one was withdrawn or never
+  existed: the Danish CPR, whose mod-11 check was abandoned in 2007 and whose
+  rule therefore validates only the date part, and the UK National Insurance
+  number, which has a strict format and no check digit. All four only report
+  when a matching label sits next to the number, and none ever rises above
+  "likely".
+
+  *(Corrected 2026-07-22: this said "Two", and named only Malta and
+  Liechtenstein. Denmark and the UK were missing — `docs/design/OCIWACHT.md`
+  already listed all four, and `privacy_checksums_eu.dart` says so in its own
+  comments. The README made the matching claim that every EU number carries a
+  checksum; that has been corrected in the same change.)* For Cyprus, the rule covers the tax
   identification code (which does carry a check character) and not the identity
   card number, which has no check digit at all. Guessing an algorithm would be
   worse than having none: it would reject genuine numbers and wave invented ones
