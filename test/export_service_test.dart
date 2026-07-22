@@ -17,6 +17,8 @@ import 'package:ocideck/services/marp_html_service.dart';
 import 'package:path/path.dart' as p;
 import 'package:xml/xml.dart';
 
+import 'support/export_bundle_fixture.dart';
+
 Uint8List _png() {
   final image = img.Image(width: 320, height: 180);
   img.fill(image, color: img.ColorRgb8(30, 40, 60));
@@ -371,7 +373,7 @@ void main() {
       deckPath(),
       ExportFormat.pptx,
       [_png(), _png()],
-      notes: ['', 'Vergeet de cijfers niet <3 & co'],
+      audience: bundleWithNotes(const ['', 'Vergeet de cijfers niet <3 & co']),
     );
     expect(r.success, isTrue, reason: r.error);
 
@@ -492,7 +494,10 @@ void main() {
       deckPath(),
       ExportFormat.html,
       const [], // HTML needs no rasterized slides
-      markdown: '# Titel\n\n---\n\n# Tweede',
+      audience: bundleFor(
+        const Deck(title: 'Titel'),
+        markdown: '# Titel\n\n---\n\n# Tweede',
+      ),
     );
 
     expect(r.success, isTrue, reason: r.error);

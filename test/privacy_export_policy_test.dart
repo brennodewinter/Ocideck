@@ -6,6 +6,8 @@ import 'package:ocideck/services/export_service.dart';
 import 'package:ocideck/services/privacy/privacy_export_policy.dart';
 import 'package:ocideck/services/privacy/privacy_scanner.dart';
 
+import 'support/export_bundle_fixture.dart';
+
 // De export-gate.
 //
 // De kern: hij straft geen persoonsgegevens af, hij straft ONOPGEMERKTE
@@ -132,7 +134,7 @@ void main() {
         '/tmp/deck.md',
         ExportFormat.html,
         const [],
-        markdown: '# Kop',
+        audience: bundleFor(const Deck(title: 'Kop'), markdown: '# Kop'),
         privacySummary: summary,
         privacyPolicy: const PrivacyExportPolicy(gate: PrivacyExportGate.block),
         // Zelfs mét een "de gebruiker heeft het gezien" gaat hij niet door.

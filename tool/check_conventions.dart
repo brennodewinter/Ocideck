@@ -146,8 +146,15 @@ bool _isPaletteHome(String path) {
 ///
 /// Toegestane types: `AudienceDeck`, of `ExportBundle` (die er een bevat en niet
 /// zonder te maken is).
+/// De dekking was lang asymmetrisch: sterk bij de emit-widgets, dun bij de
+/// servicepoort eronder. `ExportService.export()` nam losse `String? markdown`
+/// en `List<String>? notes`, dus een nieuwe aanroeper kon daar ongeprojecteerde
+/// tekst binnendragen zonder dat het typesysteem hem tegenhield — precies het
+/// faalpad dat deze check elders juist afvangt. Sinds die twee parameters één
+/// `ExportBundle` zijn, hoort `export` hier thuis.
 const Map<String, List<String>> audienceBoundary = {
   'lib/services/slide_rasterizer.dart': ['rasterize'],
+  'lib/services/export_service.dart': ['export'],
   'lib/widgets/presentation/fullscreen_presenter.dart': ['present'],
   'lib/widgets/dialogs/export_dialog.dart': ['show'],
 };

@@ -25,6 +25,7 @@ import 'privacy/privacy_export_policy.dart';
 import '../models/settings.dart';
 import 'classification_enforcement_policy.dart';
 import '../models/slide_quality.dart';
+import 'export_bundle.dart';
 import 'export_metadata.dart';
 import 'quality_export_policy.dart';
 import 'marp_html_service.dart';
@@ -112,14 +113,35 @@ class ExportService {
   /// When [compress] is set (PDF only), each slide is re-encoded as JPEG instead
   /// of being embedded as lossless PNG, and `-compact` is appended to the file
   /// name so it never overwrites a full-quality export.
+  ///
+  /// ── Waarom [audience] één bundel is en geen losse strings ──
+  ///
+  /// De HTML-markdown en de PPTX-sprekersnotities komen allebei uit [audience].
+  /// Dat waren eerder een `String? markdown` en een `List<String>? notes`, en
+  /// dáár verdunde de projectiegrens: de rasterizer en het presentatievenster
+  /// eisen al een `AudienceDeck`, maar hier kon een aanroeper ongeredigeerde
+  /// tekst binnendragen zonder dat het typesysteem hem tegenhield. De huidige
+  /// aanroepers deden het goed — het risico was menselijk en toekomstig, precies
+  /// het faalpad dat deze codebase elders juist met een compileerfout afvangt.
+  ///
+  /// Een [ExportBundle] is niet te maken zonder een `AudienceDeck`, en die is
+  /// alleen door `PrivacyProjection` te maken. Er reist dus geen bron meer langs
+  /// deze poort, en `tool/check_conventions.dart` (`audienceBoundary`) houdt dat
+  /// zo: de build faalt zodra hier weer een rauw `Deck` of `List<Slide>` in kan.
+  /// De sprekersnotities van de geprojecteerde slides, in dezelfde volgorde als
+  /// de gerasterde beelden — het PPTX-notitiepaneel koppelt op index.
+  static List<String>? _notesOf(ExportBundle? audience) => audience == null
+      ? null
+      : [for (final s in audience.audience.slides) s.notes];
+
   Future<ExportResult> export(
     String deckPath,
     ExportFormat format,
     List<Uint8List> images, {
     bool compress = false,
     String? outputDirectory,
-    List<String>? notes,
-    String? markdown,
+
+    ExportBundle? audience,
     ThemeProfile? themeProfile,
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     TlpLevel tlp = TlpLevel.none,
@@ -173,6 +195,7 @@ class ExportService {
       final l10n = AppLocalizations(const Locale('nl'));
       return ExportResult.fail(formatQualityExportReason(l10n, quality));
     }
+    final markdown = audience?.markdown;
     if (format == ExportFormat.html) {
       if (markdown == null || markdown.trim().isEmpty) {
         return ExportResult.fail('Geen inhoud om te exporteren.');
@@ -211,7 +234,7 @@ class ExportService {
               images,
               metadata: docMeta,
               fallbackTitle: fallbackTitle,
-              notes: notes,
+              notes: _notesOf(audience),
             ),
           );
         case ExportFormat.html:
