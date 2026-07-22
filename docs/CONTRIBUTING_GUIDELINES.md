@@ -162,7 +162,7 @@ not tell whether a proposal gets an answer or disappears.)*
 ## Release Process
 
 **There is no release process yet, because there has been no release.** `git tag`
-is empty and the version sits at `0.2.0+1`. Changes are merged to `main` through
+is empty and the version sits at `0.1.0+1`. Changes are merged to `main` through
 pull requests and that is the whole of it; you run what you build.
 
 The release workflow in `.github/workflows/` is written but has never fired — it

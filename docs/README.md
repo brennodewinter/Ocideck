@@ -7,12 +7,12 @@ application backend — everything runs locally. This folder holds the project
 documentation. Start here and jump to what you need.
 
 > **Status:** unreleased. No release has ever been tagged. `pubspec.yaml` says
-> `0.2.0+1`, but that string is not a version anyone can act on: no tag carries
+> `0.1.0+1`, but that string is not a version anyone can act on: no tag carries
 > it, the app never shows it, and every user runs whatever commit they built
 > from. See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) and
 > [`../SECURITY.md`](../SECURITY.md) under *Supported versions*.
 >
-> *(Corrected 2026-07-22: this line read "pre-release (currently 0.2.0)", which
+> *(Corrected 2026-07-22: this line read "pre-release (currently 0.1.0)", which
 > reads as a version claim and contradicted both documents named above.)*
 
 ## For users

@@ -21,6 +21,8 @@ import 'package:ocideck/services/privacy/privacy_bulk_lexicon.dart';
 import 'package:ocideck/services/privacy/privacy_lexicon_data.dart';
 import 'package:ocideck/services/privacy/privacy_scanner.dart';
 
+import 'support/fastest_of.dart';
+
 void main() {
   const scanner = PrivacyScanner();
   final lexicon = PrivacyBulkLexicon.instance;
@@ -243,12 +245,17 @@ void main() {
         'voor het komende jaar in detail.',
       ).join(' ');
 
-      final sw = Stopwatch()..start();
-      for (var i = 0; i < 20; i++) {
-        lexicon.findIn(text.toLowerCase()).toList();
-      }
-      sw.stop();
-      final perScan = sw.elapsedMicroseconds / 20 / 1000;
+      // De snelste van vijf, niet het gemiddelde van twintig. Een gemiddelde
+      // is gevoeliger voor één uitschieter dan een minimum, en onder een volle
+      // suite met parallelle isolates is dat de klassieke wandklokval: een
+      // rode prestatietest voor een wijziging die er niets mee te maken heeft
+      // (#638). Zie de kop van fastestOf voor waarom dat erger is dan het
+      // lijkt.
+      final perScan =
+          fastestOf(5, () {
+            lexicon.findIn(text.toLowerCase()).toList();
+          }).inMicroseconds /
+          1000;
       // Het budget is 5 ms per slide voor de héle scan; deze index hoort daar
       // een fractie van te zijn. Ruim gezet omdat een testrunner geen bank is —
       // het gaat erom dat dit lineair in de tekst is en niet in het lexicon.

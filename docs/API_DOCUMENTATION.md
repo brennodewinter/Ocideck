@@ -471,6 +471,6 @@ version these interfaces are stable *against* — see
 between commits; the `.md`/Marp on-disk format is the stable contract and is
 documented in [`docs/FILE_FORMAT.md`](FILE_FORMAT.md).
 
-*(Corrected 2026-07-22: this read "pre-release (currently 0.2.0)", which reads as
-a version claim. `0.2.0+1` is a string in `pubspec.yaml`; no tag carries it and
+*(Corrected 2026-07-22: this read "pre-release (currently 0.1.0)", which reads as
+a version claim. `0.1.0+1` is a string in `pubspec.yaml`; no tag carries it and
 the app never shows it.)*
