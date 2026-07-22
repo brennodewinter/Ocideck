@@ -29,7 +29,6 @@ part 'parts/marp_html_service_charts_radial.dart';
 part 'parts/marp_html_service_charts_bullet.dart';
 part 'parts/marp_html_service_reporting.dart';
 part 'parts/marp_html_service_reporting_miauw.dart';
-part 'parts/marp_html_service_reporting_css.dart';
 part 'parts/marp_html_service_css.dart';
 part 'parts/marp_html_service_render_script.dart';
 
@@ -197,7 +196,7 @@ class MarpHtmlService {
         'connect-src \'none\'">'
         '<title>$title</title>'
         '$headMeta'
-        '<style>$_structuralCss\n$_reportingCss\n$css\n$hljsCss</style>'
+        '<style>${exportBaseCss()}\n$css\n$hljsCss</style>'
         '<script nonce="$nonce">$_mathjaxConfig</script>'
         '${inline(marked)}'
         '${inline(purify)}'
