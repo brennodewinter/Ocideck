@@ -1791,6 +1791,38 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bestand': 'Plik',
+  'Venster': 'Okno',
+  'Help': 'Pomoc',
+  'Alles selecteren': 'Zaznacz wszystko',
+  'Plakken': 'Wklej',
+  'Opnieuw': 'Ponów',
+  'Eigenschappen': 'Właściwości',
+  'Opdrachten…': 'Polecenia…',
+  'Opslaan…': 'Zapisywanie…',
+  'Uploaden naar WebDAV…': 'Wysyłanie do WebDAV…',
+  'Uploaden naar S3…': 'Wysyłanie do S3…',
+  'Vastleggen in git…': 'Zatwierdzanie w git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Trwa zapisywanie. Ponowne zapisanie nic nie zrobi, dopóki to się nie zakończy.',
+  'Klaar — privacy niet gecontroleerd': 'Gotowe — prywatność niesprawdzona',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Nie sprawdzono danych osobowych, danych szczególnych kategorii ani sekretów: kontrola prywatności jest wyłączona w sekcji Bezpieczeństwo.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Prezentacje, które pozostają zwykłymi plikami Markdown: czytelne, przeszukiwalne i możliwe do otwarcia w dowolnym edytorze.',
+  'sjablonen om mee te beginnen, of leeg': 'szablonów na początek albo pusta',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Przykładowe slajdy szablonu są po niderlandzku. Nazwa i opis podążają za Twoim językiem; treść dostosujesz po utworzeniu.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Pomijanie jest włączone: znalezione dane są zaczernione, a wszystkie obrazy, wideo i dźwięk z tego slajdu nie trafiają na ekran ani do eksportu. Twój plik markdown zachowuje wszystko.',
+  'Mijn tekst': 'Mój tekst',
+  'Wat zij zien': 'Co widzą',
+  'Presentatiegegevens': 'Dane prezentacji',
+  'Open presentatiegegevens': 'Otwórz dane prezentacji',
+  'Motivering van een uitsluiting': 'Uzasadnienie wyłączenia',
+  'Motivering van een bevestiging': 'Uzasadnienie potwierdzenia',
+  'Tabel koprij, kolom {kolom}': 'Tabela wiersz nagłówka, kolumna {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabela wiersz {rij}, kolumna {kolom}',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

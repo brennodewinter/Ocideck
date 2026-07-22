@@ -1807,6 +1807,38 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bestand': 'Αρχείο',
+  'Venster': 'Παράθυρο',
+  'Help': 'Βοήθεια',
+  'Alles selecteren': 'Επιλογή όλων',
+  'Plakken': 'Επικόλληση',
+  'Opnieuw': 'Επανάληψη',
+  'Eigenschappen': 'Ιδιότητες',
+  'Opdrachten…': 'Εντολές…',
+  'Opslaan…': 'Αποθήκευση…',
+  'Uploaden naar WebDAV…': 'Μεταφόρτωση στο WebDAV…',
+  'Uploaden naar S3…': 'Μεταφόρτωση στο S3…',
+  'Vastleggen in git…': 'Υποβολή στο git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Γίνεται αποθήκευση. Η εκ νέου αποθήκευση δεν κάνει τίποτα μέχρι να ολοκληρωθεί.',
+  'Klaar — privacy niet gecontroleerd': 'Έτοιμο — το απόρρητο δεν ελέγχθηκε',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Δεν έγινε έλεγχος για προσωπικά δεδομένα, ειδικές κατηγορίες δεδομένων και μυστικά: ο έλεγχος απορρήτου είναι απενεργοποιημένος στην Ασφάλεια.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Παρουσιάσεις που παραμένουν απλά αρχεία Markdown: αναγνώσιμες, με δυνατότητα αναζήτησης και ανοίγουν με οποιονδήποτε επεξεργαστή.',
+  'sjablonen om mee te beginnen, of leeg': 'πρότυπα για να ξεκινήσετε, ή κενή',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Οι διαφάνειες παραδείγματος ενός προτύπου είναι στα ολλανδικά. Το όνομα και η περιγραφή ακολουθούν τη δική σας γλώσσα· το περιεχόμενο το προσαρμόζετε μετά τη δημιουργία.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Η παράλειψη είναι ενεργή: τα δεδομένα που βρέθηκαν μαυρίζονται και όλες οι εικόνες, τα βίντεο και ο ήχος αυτής της διαφάνειας δεν πηγαίνουν στην οθόνη ούτε στην εξαγωγή. Το αρχείο markdown σας τα κρατά όλα.',
+  'Mijn tekst': 'Το κείμενό μου',
+  'Wat zij zien': 'Τι βλέπουν',
+  'Presentatiegegevens': 'Στοιχεία παρουσίασης',
+  'Open presentatiegegevens': 'Άνοιγμα στοιχείων παρουσίασης',
+  'Motivering van een uitsluiting': 'Αιτιολόγηση εξαίρεσης',
+  'Motivering van een bevestiging': 'Αιτιολόγηση επιβεβαίωσης',
+  'Tabel koprij, kolom {kolom}': 'Πίνακας γραμμή κεφαλίδας, στήλη {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Πίνακας γραμμή {rij}, στήλη {kolom}',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Εντάξει',

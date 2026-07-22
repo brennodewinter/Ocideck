@@ -1795,6 +1795,38 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bestand': 'Fasciculus',
+  'Venster': 'Fenestra',
+  'Help': 'Auxilium',
+  'Alles selecteren': 'Omnia eligere',
+  'Plakken': 'Agglutinare',
+  'Opnieuw': 'Iterare',
+  'Eigenschappen': 'Proprietates',
+  'Opdrachten…': 'Mandata…',
+  'Opslaan…': 'Servatur…',
+  'Uploaden naar WebDAV…': 'In WebDAV imponitur…',
+  'Uploaden naar S3…': 'In S3 imponitur…',
+  'Vastleggen in git…': 'In git committitur…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Servatur. Iterum servare nihil facit donec hoc perficiatur.',
+  'Klaar — privacy niet gecontroleerd': 'Paratum — secretum non examinatum',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Data personalia, data specialia et arcana quaesita non sunt: examen privati apud Securitatem exstinctum est.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Praesentationes quae simplices fasciculi Markdown manent: legibiles, investigabiles et quovis editore aperiendae.',
+  'sjablonen om mee te beginnen, of leeg': 'exempla ad incipiendum, vel vacuum',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Laminae exempli exemplaris Batavice scriptae sunt. Nomen et descriptio linguam tuam sequuntur; contentum post creationem accommodas.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Omissio activa est: data inventa denigrantur et omnes imagines, pelliculae et soni huius laminae neque ad scrinium neque ad exportationem eunt. Fasciculus tuus markdown omnia servat.',
+  'Mijn tekst': 'Textus meus',
+  'Wat zij zien': 'Quod vident',
+  'Presentatiegegevens': 'Data praesentationis',
+  'Open presentatiegegevens': 'Data praesentationis aperire',
+  'Motivering van een uitsluiting': 'Ratio exclusionis',
+  'Motivering van een bevestiging': 'Ratio confirmationis',
+  'Tabel koprij, kolom {kolom}': 'Tabula ordo capitis, columna {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabula ordo {rij}, columna {kolom}',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Bene',

@@ -1797,6 +1797,39 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bestand': 'Fișier',
+  'Venster': 'Fereastră',
+  'Help': 'Ajutor',
+  'Alles selecteren': 'Selectează tot',
+  'Plakken': 'Lipește',
+  'Opnieuw': 'Refă',
+  'Eigenschappen': 'Proprietăți',
+  'Opdrachten…': 'Comenzi…',
+  'Opslaan…': 'Se salvează…',
+  'Uploaden naar WebDAV…': 'Se încarcă în WebDAV…',
+  'Uploaden naar S3…': 'Se încarcă în S3…',
+  'Vastleggen in git…': 'Se înregistrează în git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Se salvează. O nouă salvare nu face nimic până când aceasta nu se încheie.',
+  'Klaar — privacy niet gecontroleerd':
+      'Gata — confidențialitatea nu a fost verificată',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Nu s-au căutat date personale, date din categorii speciale și secrete: verificarea de confidențialitate este dezactivată la Securitate.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Prezentări care rămân simple fișiere Markdown: lizibile, în care se poate căuta și care se deschid cu orice editor.',
+  'sjablonen om mee te beginnen, of leeg': 'șabloane pentru a începe sau goală',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Slide-urile de exemplu ale unui șablon sunt în neerlandeză. Numele și descrierea urmează limba ta; conținutul îl adaptezi după creare.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Omiterea este activă: datele găsite sunt înnegrite, iar toate imaginile, videoclipurile și sunetul acestui slide nu ajung pe ecran sau în export. Fișierul tău markdown păstrează tot.',
+  'Mijn tekst': 'Textul meu',
+  'Wat zij zien': 'Ce văd ei',
+  'Presentatiegegevens': 'Datele prezentării',
+  'Open presentatiegegevens': 'Deschide datele prezentării',
+  'Motivering van een uitsluiting': 'Justificarea unei excluderi',
+  'Motivering van een bevestiging': 'Justificarea unei confirmări',
+  'Tabel koprij, kolom {kolom}': 'Tabel rând de antet, coloana {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabel rândul {rij}, coloana {kolom}',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

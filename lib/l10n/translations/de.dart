@@ -736,6 +736,38 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Bestand': 'Ablage',
+  'Venster': 'Fenster',
+  'Help': 'Hilfe',
+  'Alles selecteren': 'Alles auswählen',
+  'Plakken': 'Einfügen',
+  'Opnieuw': 'Wiederholen',
+  'Eigenschappen': 'Eigenschaften',
+  'Opdrachten…': 'Befehle…',
+  'Opslaan…': 'Speichern…',
+  'Uploaden naar WebDAV…': 'Hochladen zu WebDAV…',
+  'Uploaden naar S3…': 'Hochladen zu S3…',
+  'Vastleggen in git…': 'Commit in git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Wird gespeichert. Erneutes Speichern bewirkt nichts, bis dies abgeschlossen ist.',
+  'Klaar — privacy niet gecontroleerd': 'Bereit — Datenschutz nicht geprüft',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Es wurde nicht nach personenbezogenen Daten, besonderen Datenkategorien und Geheimnissen gesucht: die Datenschutzprüfung ist unter Sicherheit ausgeschaltet.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Präsentationen, die einfache Markdown-Dateien bleiben: lesbar, durchsuchbar und mit jedem Editor zu öffnen.',
+  'sjablonen om mee te beginnen, of leeg': 'Vorlagen zum Starten, oder leer',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Die Beispielfolien einer Vorlage sind auf Niederländisch. Name und Beschreibung folgen deiner eigenen Sprache; den Inhalt passt du nach dem Erstellen an.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Weglassen ist an: gefundene Daten werden geschwärzt und alle Bilder, Videos und Audios dieser Folie gehen nicht auf den Bildschirm oder in den Export. Deine Markdown-Datei behält alles.',
+  'Mijn tekst': 'Mein Text',
+  'Wat zij zien': 'Was sie sehen',
+  'Presentatiegegevens': 'Präsentationsdaten',
+  'Open presentatiegegevens': 'Präsentationsdaten öffnen',
+  'Motivering van een uitsluiting': 'Begründung einer Ausnahme',
+  'Motivering van een bevestiging': 'Begründung einer Bestätigung',
+  'Tabel koprij, kolom {kolom}': 'Tabelle Kopfzeile, Spalte {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabelle Zeile {rij}, Spalte {kolom}',
   'esc': 'Esc',
   'Enter': 'Enter',
   'OK': 'OK',

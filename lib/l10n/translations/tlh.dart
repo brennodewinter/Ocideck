@@ -1754,6 +1754,38 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bestand': 'ghItlh',
+  'Venster': 'Qorwagh',
+  'Help': 'QaH',
+  'Alles selecteren': 'Hoch yIwIv',
+  'Plakken': 'yIlan',
+  'Opnieuw': 'yIruchqa\'',
+  'Eigenschappen': 'Seghmey',
+  'Opdrachten…': 'ra\'mey…',
+  'Opslaan…': 'polIu\'…',
+  'Uploaden naar WebDAV…': 'WebDAV-Daq ngeHlu\'…',
+  'Uploaden naar S3…': 'S3-Daq ngeHlu\'…',
+  'Vastleggen in git…': 'git-Daq qonlu\'…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'polIu\'. rInpa\', polqa\'meH ra\' lI\'be\'.',
+  'Klaar — privacy niet gecontroleerd': 'rInpu\' — pegh ninSarlu\'be\'',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'nuv De\', De\' pIn\'a\', pegh je nejlu\'be\'. Hubqu\'Daq pegh ninSar chu\'Ha\'lu\'pu\'.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Markdown ghItlhmey neH rurtaH \'echletHommey: laDlaH, nejlaH, \'ej Hoch choHwI\' lo\'laH.',
+  'sjablonen om mee te beginnen, of leeg': 'taghmeH ghItlh\'a\'mey, pagh chIm',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'ghItlh\'a\' cha\'nobmey: Nederland Hol lu\'. per QIn je: Hol lIj lu\'. chenpu\'DI\', qech yIchoH.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'chIllu\': De\' tu\'lu\'bogh qIjlu\' \'ej cha\'nobvam mIlloghmey, HaSta, wab je cha\'be\'lu\' \'ej ngeHbe\'lu\'. markdown ghItlhlIj Hoch polta\'.',
+  'Mijn tekst': 'mu\'wIj',
+  'Wat zij zien': 'bejwI\' legh',
+  'Presentatiegegevens': '\'echletHommey De\'',
+  'Open presentatiegegevens': '\'echletHommey De\' yIpoSmoH',
+  'Motivering van een uitsluiting': 'chIlmeH meq',
+  'Motivering van een bevestiging': 'chIDmeH meq',
+  'Tabel koprij, kolom {kolom}': 'romuS nach ret, \'och {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'romuS ret {rij}, \'och {kolom}',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'lu\'',

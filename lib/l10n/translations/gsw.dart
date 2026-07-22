@@ -1783,6 +1783,38 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bestand': 'Datei',
+  'Venster': 'Fänschter',
+  'Help': 'Hilf',
+  'Alles selecteren': 'Alles uuswähle',
+  'Plakken': 'Iifüege',
+  'Opnieuw': 'Wiederhole',
+  'Eigenschappen': 'Eigeschafte',
+  'Opdrachten…': 'Befähl…',
+  'Opslaan…': 'Am Speichere…',
+  'Uploaden naar WebDAV…': 'Am Uelade uf WebDAV…',
+  'Uploaden naar S3…': 'Am Uelade uf S3…',
+  'Vastleggen in git…': 'Am Commite i git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Wird grad gspeicheret. Nomol speichere macht nüt, bis das fertig isch.',
+  'Klaar — privacy niet gecontroleerd': 'Parat — Dateschutz nid prüeft',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Es isch nid nach persönliche Date, bsundere Date und Gheimnis gsuecht worde: d Dateschutzprüefig isch under Sicherheit usgschalte.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Presentatione, wo eifachi Markdown-Dateie bliibed: läsbar, durchsuechbar und mit jedem Editor z öffne.',
+  'sjablonen om mee te beginnen, of leeg': 'Vorlage zum Aafange, oder leer',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'D Bispilfolie vo ere Vorlag sind uf Niderländisch. Name und Beschriibig folged dinere eigete Sprooch; de Inhalt passisch nach em Aalege aa.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'S Weglah isch aa: gfundeni Date werded gschwärzt und alli Bilder, Video und Audio vo dere Folie chömed nid uf de Bildschirm oder in Export. Dis Markdown-File behaltet alles.',
+  'Mijn tekst': 'Min Täxt',
+  'Wat zij zien': 'Was si gsehnd',
+  'Presentatiegegevens': 'Presentationsdate',
+  'Open presentatiegegevens': 'Presentationsdate uufmache',
+  'Motivering van een uitsluiting': 'Begründig vo ere Uusnahm',
+  'Motivering van een bevestiging': 'Begründig vo ere Bestätigung',
+  'Tabel koprij, kolom {kolom}': 'Tabälle Chopfzile, Spalte {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabälle Zile {rij}, Spalte {kolom}',
   'esc': 'Esc',
   'Enter': 'Enter',
   'OK': 'OK',

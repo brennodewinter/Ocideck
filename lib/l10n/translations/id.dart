@@ -1779,6 +1779,38 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bestand': 'Berkas',
+  'Venster': 'Jendela',
+  'Help': 'Bantuan',
+  'Alles selecteren': 'Pilih semua',
+  'Plakken': 'Tempel',
+  'Opnieuw': 'Ulangi',
+  'Eigenschappen': 'Properti',
+  'Opdrachten…': 'Perintah…',
+  'Opslaan…': 'Menyimpan…',
+  'Uploaden naar WebDAV…': 'Mengunggah ke WebDAV…',
+  'Uploaden naar S3…': 'Mengunggah ke S3…',
+  'Vastleggen in git…': 'Menyimpan ke git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Sedang menyimpan. Menyimpan lagi tidak melakukan apa pun sampai ini selesai.',
+  'Klaar — privacy niet gecontroleerd': 'Siap — privasi tidak diperiksa',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Tidak ada pemeriksaan untuk data pribadi, data khusus, dan rahasia: pemeriksaan privasi dimatikan di Keamanan.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Presentasi yang tetap berupa berkas Markdown biasa: dapat dibaca, dicari, dan dibuka dengan editor apa pun.',
+  'sjablonen om mee te beginnen, of leeg': 'templat untuk memulai, atau kosong',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Slide contoh dari sebuah templat berbahasa Belanda. Nama dan deskripsi mengikuti bahasa Anda sendiri; isinya Anda sesuaikan setelah dibuat.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Penyembunyian aktif: data yang ditemukan dihitamkan dan semua gambar, video, dan audio pada slide ini tidak ikut ke layar atau ekspor. Berkas markdown Anda menyimpan semuanya.',
+  'Mijn tekst': 'Teks saya',
+  'Wat zij zien': 'Yang mereka lihat',
+  'Presentatiegegevens': 'Data presentasi',
+  'Open presentatiegegevens': 'Buka data presentasi',
+  'Motivering van een uitsluiting': 'Alasan pengecualian',
+  'Motivering van een bevestiging': 'Alasan konfirmasi',
+  'Tabel koprij, kolom {kolom}': 'Tabel baris header, kolom {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabel baris {rij}, kolom {kolom}',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

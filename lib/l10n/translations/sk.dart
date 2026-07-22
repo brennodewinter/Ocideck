@@ -1786,6 +1786,38 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Bestand': 'Súbor',
+  'Venster': 'Okno',
+  'Help': 'Pomocník',
+  'Alles selecteren': 'Vybrať všetko',
+  'Plakken': 'Prilepiť',
+  'Opnieuw': 'Znova',
+  'Eigenschappen': 'Vlastnosti',
+  'Opdrachten…': 'Príkazy…',
+  'Opslaan…': 'Ukladanie…',
+  'Uploaden naar WebDAV…': 'Nahrávanie na WebDAV…',
+  'Uploaden naar S3…': 'Nahrávanie na S3…',
+  'Vastleggen in git…': 'Zápis do gitu…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Prebieha ukladanie. Opätovné uloženie neurobí nič, kým sa toto neskončí.',
+  'Klaar — privacy niet gecontroleerd': 'Hotovo — súkromie neskontrolované',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Osobné údaje, osobitné kategórie údajov ani tajomstvá sa nekontrolovali: kontrola súkromia je vypnutá v časti Zabezpečenie.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Prezentácie, ktoré zostávajú obyčajnými súbormi Markdown: čitateľné, prehľadávateľné a otvoriteľné v ľubovoľnom editore.',
+  'sjablonen om mee te beginnen, of leeg': 'šablón na začiatok alebo prázdna',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Ukážkové snímky šablóny sú v holandčine. Názov a popis sa riadia tvojím jazykom; obsah upravíš po vytvorení.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Vynechanie je zapnuté: nájdené údaje sa začiernia a všetky obrázky, video aj zvuk tejto snímky nejdú na obrazovku ani do exportu. Tvoj súbor markdown si všetko ponechá.',
+  'Mijn tekst': 'Môj text',
+  'Wat zij zien': 'Čo vidia oni',
+  'Presentatiegegevens': 'Údaje prezentácie',
+  'Open presentatiegegevens': 'Otvoriť údaje prezentácie',
+  'Motivering van een uitsluiting': 'Odôvodnenie výnimky',
+  'Motivering van een bevestiging': 'Odôvodnenie potvrdenia',
+  'Tabel koprij, kolom {kolom}': 'Tabuľka hlavička, stĺpec {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabuľka riadok {rij}, stĺpec {kolom}',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

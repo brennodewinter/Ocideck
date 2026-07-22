@@ -1783,6 +1783,39 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bestand': 'Fájl',
+  'Venster': 'Ablak',
+  'Help': 'Súgó',
+  'Alles selecteren': 'Az összes kijelölése',
+  'Plakken': 'Beillesztés',
+  'Opnieuw': 'Újra',
+  'Eigenschappen': 'Tulajdonságok',
+  'Opdrachten…': 'Parancsok…',
+  'Opslaan…': 'Mentés…',
+  'Uploaden naar WebDAV…': 'Feltöltés a WebDAV-ra…',
+  'Uploaden naar S3…': 'Feltöltés az S3-ra…',
+  'Vastleggen in git…': 'Rögzítés a gitben…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Mentés folyamatban. Az ismételt mentés nem csinál semmit, amíg ez be nem fejeződik.',
+  'Klaar — privacy niet gecontroleerd':
+      'Kész — az adatvédelem nincs ellenőrizve',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Nem történt ellenőrzés személyes adatokra, különleges adatokra és titkokra: az adatvédelmi ellenőrzés ki van kapcsolva a Biztonság alatt.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Prezentációk, amelyek egyszerű Markdown-fájlok maradnak: olvashatók, kereshetők és bármilyen szerkesztővel megnyithatók.',
+  'sjablonen om mee te beginnen, of leeg': 'sablon a kezdéshez, vagy üres',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'A sablon példadiái hollandul vannak. A név és a leírás a saját nyelvedet követi; a tartalmat a létrehozás után igazítod hozzá.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'A kihagyás be van kapcsolva: a megtalált adatokat kitakarjuk, és ennek a diának egyetlen képe, videója és hangja sem kerül a képernyőre vagy az exportba. A markdown-fájlod mindent megőriz.',
+  'Mijn tekst': 'Saját szöveg',
+  'Wat zij zien': 'Amit ők látnak',
+  'Presentatiegegevens': 'Prezentációs adatok',
+  'Open presentatiegegevens': 'Prezentációs adatok megnyitása',
+  'Motivering van een uitsluiting': 'Kivétel indoklása',
+  'Motivering van een bevestiging': 'Megerősítés indoklása',
+  'Tabel koprij, kolom {kolom}': 'Táblázat fejlécsor, {kolom}. oszlop',
+  'Tabel rij {rij}, kolom {kolom}': 'Táblázat {rij}. sor, {kolom}. oszlop',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

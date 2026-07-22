@@ -733,6 +733,39 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Bestand': 'Archivo',
+  'Venster': 'Ventana',
+  'Help': 'Ayuda',
+  'Alles selecteren': 'Seleccionar todo',
+  'Plakken': 'Pegar',
+  'Opnieuw': 'Rehacer',
+  'Eigenschappen': 'Propiedades',
+  'Opdrachten…': 'Comandos…',
+  'Opslaan…': 'Guardando…',
+  'Uploaden naar WebDAV…': 'Subiendo a WebDAV…',
+  'Uploaden naar S3…': 'Subiendo a S3…',
+  'Vastleggen in git…': 'Confirmando en git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Guardando. Volver a guardar no hace nada hasta que esto termine.',
+  'Klaar — privacy niet gecontroleerd': 'Listo — privacidad no comprobada',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'No se han buscado datos personales, datos de categorías especiales ni secretos: la comprobación de privacidad está desactivada en Seguridad.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Presentaciones que siguen siendo simples archivos Markdown: legibles, consultables y abribles con cualquier editor.',
+  'sjablonen om mee te beginnen, of leeg':
+      'plantillas para empezar, o en blanco',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Las diapositivas de ejemplo de una plantilla están en neerlandés. El nombre y la descripción siguen tu propio idioma; el contenido lo adaptas después de crearla.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'La omisión está activada: los datos encontrados se tachan y todas las imágenes, vídeos y audios de esta diapositiva no pasan a la pantalla ni a la exportación. Tu archivo markdown lo conserva todo.',
+  'Mijn tekst': 'Mi texto',
+  'Wat zij zien': 'Lo que ven',
+  'Presentatiegegevens': 'Datos de la presentación',
+  'Open presentatiegegevens': 'Abrir los datos de la presentación',
+  'Motivering van een uitsluiting': 'Justificación de una exclusión',
+  'Motivering van een bevestiging': 'Justificación de una confirmación',
+  'Tabel koprij, kolom {kolom}': 'Tabla fila de encabezado, columna {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabla fila {rij}, columna {kolom}',
   'esc': 'esc',
   'Enter': 'Intro',
   'OK': 'OK',

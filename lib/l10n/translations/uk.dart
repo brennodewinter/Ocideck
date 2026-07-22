@@ -1797,6 +1797,38 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bestand': 'Файл',
+  'Venster': 'Вікно',
+  'Help': 'Довідка',
+  'Alles selecteren': 'Вибрати все',
+  'Plakken': 'Вставити',
+  'Opnieuw': 'Повторити',
+  'Eigenschappen': 'Властивості',
+  'Opdrachten…': 'Команди…',
+  'Opslaan…': 'Збереження…',
+  'Uploaden naar WebDAV…': 'Вивантаження до WebDAV…',
+  'Uploaden naar S3…': 'Вивантаження до S3…',
+  'Vastleggen in git…': 'Фіксація в git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Триває збереження. Повторне збереження нічого не дасть, доки це не завершиться.',
+  'Klaar — privacy niet gecontroleerd': 'Готово — приватність не перевірено',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Персональні дані, особливі категорії даних і секрети не перевірялися: перевірку приватності вимкнено в розділі Безпека.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Презентації, що лишаються звичайними файлами Markdown: читабельні, придатні для пошуку й такі, що відкриваються будь-яким редактором.',
+  'sjablonen om mee te beginnen, of leeg': 'шаблонів для початку або порожня',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Приклади слайдів у шаблоні — нідерландською. Назва й опис відповідають вашій мові; вміст ви зміните після створення.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Приховування ввімкнено: знайдені дані зачорнюються, а всі зображення, відео та звук цього слайда не потрапляють ані на екран, ані в експорт. Ваш markdown-файл зберігає все.',
+  'Mijn tekst': 'Мій текст',
+  'Wat zij zien': 'Що бачать вони',
+  'Presentatiegegevens': 'Дані презентації',
+  'Open presentatiegegevens': 'Відкрити дані презентації',
+  'Motivering van een uitsluiting': 'Обґрунтування виключення',
+  'Motivering van een bevestiging': 'Обґрунтування підтвердження',
+  'Tabel koprij, kolom {kolom}': 'Таблиця, рядок заголовка, колонка {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Таблиця, рядок {rij}, колонка {kolom}',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Гаразд',

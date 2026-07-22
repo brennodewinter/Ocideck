@@ -1778,6 +1778,38 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bestand': 'Arkiv',
+  'Venster': 'Fönster',
+  'Help': 'Hjälp',
+  'Alles selecteren': 'Markera allt',
+  'Plakken': 'Klistra in',
+  'Opnieuw': 'Gör om',
+  'Eigenschappen': 'Egenskaper',
+  'Opdrachten…': 'Kommandon…',
+  'Opslaan…': 'Sparar…',
+  'Uploaden naar WebDAV…': 'Laddar upp till WebDAV…',
+  'Uploaden naar S3…': 'Laddar upp till S3…',
+  'Vastleggen in git…': 'Committar till git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Sparar. Att spara igen gör ingenting förrän det här är klart.',
+  'Klaar — privacy niet gecontroleerd': 'Klar — integritet inte kontrollerad',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Ingen sökning har gjorts efter personuppgifter, känsliga uppgifter och hemligheter: integritetskontrollen är avstängd under Säkerhet.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Presentationer som förblir vanliga Markdown-filer: läsbara, sökbara och går att öppna med vilken editor som helst.',
+  'sjablonen om mee te beginnen, of leeg': 'mallar att börja med, eller tom',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'En malls exempelbilder är på nederländska. Namn och beskrivning följer ditt eget språk; innehållet anpassar du efter att du har skapat den.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Utelämnande är på: hittade uppgifter svärtas och alla bilder, all video och allt ljud på den här bilden följer inte med till skärmen eller exporten. Din markdown-fil behåller allt.',
+  'Mijn tekst': 'Min text',
+  'Wat zij zien': 'Vad de ser',
+  'Presentatiegegevens': 'Presentationsuppgifter',
+  'Open presentatiegegevens': 'Öppna presentationsuppgifter',
+  'Motivering van een uitsluiting': 'Motivering av ett undantag',
+  'Motivering van een bevestiging': 'Motivering av en bekräftelse',
+  'Tabel koprij, kolom {kolom}': 'Tabell rubrikrad, kolumn {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabell rad {rij}, kolumn {kolom}',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -737,6 +737,39 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bestand': 'Bestân',
+  'Venster': 'Finster',
+  'Help': 'Help',
+  'Alles selecteren': 'Alles selektearje',
+  'Plakken': 'Plakke',
+  'Opnieuw': 'Opnij',
+  'Eigenschappen': 'Eigenskippen',
+  'Opdrachten…': 'Opdrachten…',
+  'Opslaan…': 'Bewarje…',
+  'Uploaden naar WebDAV…': 'Oplade nei WebDAV…',
+  'Uploaden naar S3…': 'Oplade nei S3…',
+  'Vastleggen in git…': 'Fêstlizze yn git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Dwaande mei bewarjen. Nochris bewarje docht neat oant dit klear is.',
+  'Klaar — privacy niet gecontroleerd': 'Klear — privacy net kontrolearre',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Der is net socht nei persoansgegevens, bysûndere gegevens en geheimen: de privacykontrôle stiet út by Befeiliging.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Presintaasjes dy\'t gewoane Markdown-bestannen bliuwe: lêsber, trochsykber en te iepenjen mei elke editor.',
+  'sjablonen om mee te beginnen, of leeg':
+      'sjabloanen om mei te begjinnen, of leech',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'De foarbylddia\'s fan in sjabloan steane yn it Nederlânsk. Namme en omskriuwing folgje dyn eigen taal; de ynhâld kinst nei it oanmeitsjen oanpasse.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Weilitte stiet oan: fûne gegevens wurde swart makke en álle ôfbyldings, fideo en audio fan dizze dia geane net mei nei it skerm of de eksport. Dyn markdown-bestân hâldt alles.',
+  'Mijn tekst': 'Myn tekst',
+  'Wat zij zien': 'Wat sy sjogge',
+  'Presentatiegegevens': 'Presintaasjegegevens',
+  'Open presentatiegegevens': 'Presintaasjegegevens iepenje',
+  'Motivering van een uitsluiting': 'Motivearring fan in útslutering',
+  'Motivering van een bevestiging': 'Motivearring fan in befêstiging',
+  'Tabel koprij, kolom {kolom}': 'Tabel koprige, kolom {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabel rige {rij}, kolom {kolom}',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

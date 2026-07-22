@@ -918,6 +918,38 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Bestand': 'File',
+  'Venster': 'Window',
+  'Help': 'Help',
+  'Alles selecteren': 'Select All',
+  'Plakken': 'Paste',
+  'Opnieuw': 'Redo',
+  'Eigenschappen': 'Properties',
+  'Opdrachten…': 'Commands…',
+  'Opslaan…': 'Saving…',
+  'Uploaden naar WebDAV…': 'Uploading to WebDAV…',
+  'Uploaden naar S3…': 'Uploading to S3…',
+  'Vastleggen in git…': 'Committing to git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Saving. Saving again does nothing until this is finished.',
+  'Klaar — privacy niet gecontroleerd': 'Ready — privacy not checked',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'No check was made for personal data, special category data and secrets: the privacy check is switched off under Security.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Presentations that stay plain Markdown files: readable, searchable and openable with any editor.',
+  'sjablonen om mee te beginnen, of leeg': 'templates to start with, or blank',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'A template\'s example slides are in Dutch. The name and description follow your own language; you adapt the content after creating it.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Redaction is on: data that was found is blacked out and all images, video and audio on this slide do not go to the screen or the export. Your markdown file keeps everything.',
+  'Mijn tekst': 'My text',
+  'Wat zij zien': 'What they see',
+  'Presentatiegegevens': 'Presentation details',
+  'Open presentatiegegevens': 'Open presentation details',
+  'Motivering van een uitsluiting': 'Justification for a waiver',
+  'Motivering van een bevestiging': 'Justification for a confirmation',
+  'Tabel koprij, kolom {kolom}': 'Table header row, column {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Table row {rij}, column {kolom}',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

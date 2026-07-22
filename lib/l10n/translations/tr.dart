@@ -2761,6 +2761,38 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Bestand': 'Dosya',
+  'Venster': 'Pencere',
+  'Help': 'Yardım',
+  'Alles selecteren': 'Tümünü seç',
+  'Plakken': 'Yapıştır',
+  'Opnieuw': 'Yinele',
+  'Eigenschappen': 'Özellikler',
+  'Opdrachten…': 'Komutlar…',
+  'Opslaan…': 'Kaydediliyor…',
+  'Uploaden naar WebDAV…': 'WebDAV\'a yükleniyor…',
+  'Uploaden naar S3…': 'S3\'e yükleniyor…',
+  'Vastleggen in git…': 'git\'e işleniyor…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Kaydediliyor. Bu bitene kadar tekrar kaydetmek bir şey yapmaz.',
+  'Klaar — privacy niet gecontroleerd': 'Hazır — gizlilik denetlenmedi',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Kişisel veriler, özel nitelikli veriler ve sırlar için denetim yapılmadı: gizlilik denetimi Güvenlik altında kapalı.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Düz Markdown dosyası olarak kalan sunumlar: okunabilir, aranabilir ve her düzenleyiciyle açılabilir.',
+  'sjablonen om mee te beginnen, of leeg': 'şablonla başlayın ya da boş',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Bir şablonun örnek slaytları Felemenkçedir. Ad ve açıklama kendi dilinizi izler; içeriği oluşturduktan sonra kendiniz düzenlersiniz.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Çıkarma açık: bulunan veriler karartılır ve bu slayttaki tüm görseller, video ve ses ekrana ya da dışa aktarmaya gitmez. Markdown dosyanız her şeyi saklar.',
+  'Mijn tekst': 'Kendi metnim',
+  'Wat zij zien': 'Onların gördüğü',
+  'Presentatiegegevens': 'Sunum bilgileri',
+  'Open presentatiegegevens': 'Sunum bilgilerini aç',
+  'Motivering van een uitsluiting': 'Bir istisnanın gerekçesi',
+  'Motivering van een bevestiging': 'Bir doğrulamanın gerekçesi',
+  'Tabel koprij, kolom {kolom}': 'Tablo başlık satırı, sütun {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tablo satır {rij}, sütun {kolom}',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Tamam',
