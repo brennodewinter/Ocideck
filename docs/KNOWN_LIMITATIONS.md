@@ -17,6 +17,25 @@ installer or download page. The only way to run OciDeck is to build it from
 source with the pinned Flutter toolchain. → [BUILD.md](BUILD.md),
 [FAQ.md](FAQ.md#is-ocideck-free-to-use)
 
+### When 0.1.0 does ship, it is a web bundle and nothing else
+
+*(Scope decided 2026-07-22.)* The desktop builds stay build-from-source. Saying
+so is the published position, not a placeholder for a later apology:
+
+- **macOS, Windows and Linux are built from source.** The macOS project is
+  ad-hoc signed with no hardened runtime, so a downloaded `.app` would not start
+  on someone else's machine at all — and notarisation *requires* hardened
+  runtime, so that is not one flag. Windows and Linux have never been built or
+  tested by this project on their own operating systems. Building them yourself
+  works and is documented; a binary from us is what does not exist.
+- **No code signing, no notarisation, no detached signature.** They follow the
+  desktop artefact and come back with it. A web bundle has no equivalent
+  problem: the browser runs what the origin serves, under the CSP the origin
+  sets.
+- **The web bundle travels with its licence, third-party notices, SBOM and a
+  `SHA256SUMS` list.** That list detects a damaged or incomplete download; it is
+  not a signature. → [BUILD.md](BUILD.md#verifying-a-bundle-you-downloaded)
+
 ## The exports are pictures, not documents
 
 PDF and PPTX are one bitmap per slide: no text layer, no alt-text, no reading

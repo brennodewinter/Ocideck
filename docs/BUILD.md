@@ -61,8 +61,9 @@ make build-web        # flutter build web --release --no-web-resources-cdn --csp
 
 Note this target has prerequisites: it first runs `deps-verify-offline` (bundled-JS
 integrity against the manifest) and `sbom-verify` (SBOM drift), either of which can
-fail the build *before* Flutter is invoked. Afterwards it copies the SBOM into
-`build/web/sbom/` and normalises file permissions.
+fail the build *before* Flutter is invoked. Afterwards it runs
+`tool/pack_web_release.dart` (see [What travels with the bundle](#what-travels-with-the-bundle))
+and normalises file permissions.
 
 The two flags make the bundle **self-contained and CSP-safe**:
 
@@ -80,6 +81,54 @@ Serve `build/web/` from any static host. The web build supports editing, preview
 HTML export, and presenting in a single window. Dual-screen presenter mode and
 direct filesystem project folders are desktop-only; use **Open** / **Save** via
 the browser file picker on web.
+
+### What travels with the bundle
+
+A bundle you hand to someone else is not just the app. `make build-web` finishes
+by running `tool/pack_web_release.dart`, which puts three things in `build/web/`:
+
+| Artefact | Why it must travel |
+| --- | --- |
+| `LICENSE.md` | Without its licence terms the bundle is not redistributable. This is the condition under which the dependencies themselves travel, not a courtesy. |
+| `THIRD_PARTY_NOTICES.md` | The attribution those dependencies require. See [LICENSE_COMPLIANCE.md](LICENSE_COMPLIANCE.md). |
+| `sbom/` (CycloneDX, SPDX, Markdown) | The CRA inventory belongs to the exact build you hand out, not to the repository it came from. Served under `/sbom/`. See [SBOM.md](SBOM.md). |
+
+The step ends by writing `SHA256SUMS` over the finished bundle, so it must stay
+the last thing that touches file contents. It prints the sha256 of `SHA256SUMS`
+itself — put that one value in the release announcement.
+
+### Verifying a bundle you downloaded
+
+`SHA256SUMS` is in the ordinary `sha256sum` format, so no OciDeck-specific tool
+is needed:
+
+```sh
+cd ocideck-web && shasum -a 256 -c SHA256SUMS    # macOS/BSD
+cd ocideck-web && sha256sum -c SHA256SUMS        # GNU coreutils
+```
+
+Every line must say `OK`. A `FAILED` line names the file that differs; a
+`No such file` line names one that is missing. To check that nothing was *added*
+as well, and that the licence and SBOM are present:
+
+```sh
+dart run tool/pack_web_release.dart --check      # from a checkout, over build/web
+```
+
+**What this proves, and what it does not.** It shows your copy is complete and
+undamaged and that it matches a value published elsewhere. It is **not a
+signature**: whoever can replace the bundle can replace `SHA256SUMS` with it. So
+the check that carries weight is comparing the sha256 of `SHA256SUMS` itself
+against the value in the release announcement — one 64-character value, obtained
+over a different channel than the download:
+
+```sh
+shasum -a 256 SHA256SUMS
+```
+
+Signed artefacts (Authenticode, notarisation, a detached signature) are a
+desktop-release concern and are not part of the web-only 0.1.0. See
+[KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md).
 
 ### Response headers the host must add
 
