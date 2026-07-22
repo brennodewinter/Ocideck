@@ -25,6 +25,7 @@ import '../../models/slide.dart';
 import '../../models/used_tool.dart';
 import '../slide_image_refs.dart';
 import 'privacy_own_identity.dart';
+import 'privacy_regions.dart';
 import 'privacy_scanner.dart';
 
 /// Het teken waarmee geredigeerde tekst wordt vervangen (U+2588 FULL BLOCK).
@@ -94,6 +95,7 @@ class PrivacyProjection {
     Deck deck, {
     Set<String> disabledRules = const {},
     OwnIdentity ownIdentity = OwnIdentity.empty,
+    Set<String> regions = defaultPrivacyRegions,
     PrivacyExportProfile profile = PrivacyExportProfile.full,
   }) => _project(
     deck,
@@ -102,6 +104,7 @@ class PrivacyProjection {
     external: profile == PrivacyExportProfile.redacted,
     disabledRules: disabledRules,
     ownIdentity: ownIdentity,
+    regions: regions,
   );
 
   /// De projectie voor verwerking buiten dit apparaat (AI-backends).
@@ -110,6 +113,12 @@ class PrivacyProjection {
   /// een zaal de namen mag zien, is geen toestemming om ze naar een extern model
   /// te sturen. Alles wat de scanner vindt gaat eruit, ook op een slide die op
   /// `accept` staat.
+  /// Neemt bewust **geen** `regions`: de landkeuze van de gebruiker geldt hier
+  /// niet. Dat iemand het Nederlandse pakket uitzet omdat het in zíjn deck te
+  /// vaak aanslaat, is een uitspraak over zijn kwaliteitspaneel en zijn eigen
+  /// export — niet om een BSN naar een model van een derde te sturen. Dezelfde
+  /// redenering als hierboven bij de dispositie: strenger, omdat de data het
+  /// apparaat verlaat en niet meer terug te halen is.
   static AudienceDeck forExternalProcessing(
     Deck deck, {
     Set<String> disabledRules = const {},
@@ -139,6 +148,7 @@ class PrivacyProjection {
     required bool external,
     Set<String> disabledRules = const {},
     OwnIdentity ownIdentity = OwnIdentity.empty,
+    Set<String> regions = defaultPrivacyRegions,
   }) {
     // De uitgezette regels tellen hier wél mee (anders dan de hoofdschakelaar):
     // wie een regel uitzet omdat die het mis heeft over zijn inhoud, wil die
@@ -146,9 +156,21 @@ class PrivacyProjection {
     // De eigen gegevens van de gebruiker tellen hier ook mee: zijn adres in de
     // footer is geen bevinding maar de afzender, en zwart in de export zetten zou
     // de contactslide onbruikbaar maken.
+    // De landenpakketten tellen hier mee, op dezelfde grond als de uitgezette
+    // regels: wie een pakket uitzet zegt "dit zijn voor mij geen
+    // persoonsgegevens", en krijgt die waarden dan ook niet zwart in zijn
+    // export terug. Zonder dit stonden het kwaliteitspaneel en de export lijnrecht
+    // tegenover elkaar — precies waar de gebruiker op het paneel afgaat om te
+    // beslissen wat hij deelt.
+    //
+    // De standaardwaarde blijft `defaultPrivacyRegions` en niet `const {}`: een
+    // aanroeper die dit vergeet moet méér redigeren, niet minder. De universele
+    // regels (IBAN, e-mail, paspoort) hangen aan geen enkel pakket en blijven
+    // hoe dan ook draaien.
     final scan = PrivacyScanner(
       disabledRules: disabledRules,
       ownIdentity: ownIdentity,
+      regions: regions,
     ).scan(deck);
 
     var count = 0;

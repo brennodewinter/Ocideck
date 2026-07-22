@@ -2,6 +2,7 @@ import '../../models/deck.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/slide.dart';
 import 'privacy_own_identity.dart';
+import 'privacy_regions.dart';
 import 'privacy_projection.dart';
 
 /// De projectie van één dia, voor de auteur zelf.
@@ -32,11 +33,13 @@ AudienceDeck audiencePreviewOf(
   Slide slide, {
   Set<String> disabledRules = const {},
   OwnIdentity ownIdentity = OwnIdentity.empty,
+  Set<String> regions = defaultPrivacyRegions,
 }) {
   return PrivacyProjection.forAudience(
     deck.copyWith(slides: [slide]),
     disabledRules: disabledRules,
     ownIdentity: ownIdentity,
+    regions: regions,
   );
 }
 

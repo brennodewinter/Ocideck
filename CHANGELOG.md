@@ -289,6 +289,18 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   melding bij een te grote maplijst noemt nu overal het aantal.
 
 ### Fixed
+- **Uitgezette landenpakketten werden toch weggelakt.** Zet u een land uit in de
+  privacy-instellingen, dan meldt OciWacht die nummers niet meer — maar de
+  voorvertoning, de export en het beamerscherm lakten ze nog wél weg. U kreeg
+  zwarte blokken over waarden waarvan u nooit een melding had gezien, en het
+  kwaliteitspaneel voorspelde dus niet meer wat er in uw export zou staan. Precies
+  daar gaat u op af om te beslissen wat u deelt. De redactie, het redactiemanifest
+  en de exportsamenvatting volgen nu dezelfde pakketten als de waarschuwingen.
+
+  Twee dingen blijven met opzet zoals ze waren. De universele regels — IBAN,
+  e-mailadres, paspoortstrook — hangen aan geen enkel land en blijven altijd
+  draaien. En de route naar een AI-model buiten uw apparaat trekt zich niets aan
+  van uw landkeuze: wat weg is, is daar niet meer terug te halen.
 - **In de browser kon u een logo kiezen dat daarna nergens meer was.** De
   logokiezer in Instellingen bewaart het pad naar een bestand op uw eigen
   machine, en zo'n pad bestaat in een browser niet: u koos een afbeelding, het

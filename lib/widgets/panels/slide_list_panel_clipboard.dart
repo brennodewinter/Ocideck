@@ -59,6 +59,7 @@ extension _SlideClipboardExport on _SlideListPanelState {
         audience: PrivacyProjection.forAudience(
           deck.copyWith(slides: [slide]),
           disabledRules: ref.read(settingsProvider).privacyDisabledRules,
+          regions: ref.read(settingsProvider).privacyRegions,
           ownIdentity: OwnIdentity.fromLines(
             ref.read(settingsProvider).privacyOwnIdentity,
           ),
