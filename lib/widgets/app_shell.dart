@@ -134,6 +134,7 @@ part 'shell/shell_actions_git_dialogs.dart';
 part 'shell/shell_actions_git_assets.dart';
 part 'shell/ai_actions.dart';
 part 'shell/command_palette_actions.dart';
+part 'shell/menu_commands.dart';
 part 'shell/tab_bar.dart';
 part 'shell/welcome_screen.dart';
 part 'shell/play_only_screen.dart';

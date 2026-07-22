@@ -90,30 +90,8 @@ List<SlideQualityAction> buildSlideQualityActions({
     );
   }
 
-  // Deckbreed is twee dingen. Een contrastmelding gaat over het thema en wordt
-  // in de kleurinstellingen opgelost; een privacybevinding op de front matter
-  // (auteur, organisatie, trefwoorden) hoort in de presentatiegegevens thuis.
-  // Beide "Open kleurinstellingen" noemen stuurde de tweede soort de verkeerde
-  // kant op, met een knop die de verkeerde belofte deed.
-  if (issueBelongsToDeckInfo(issue)) {
-    actions.add(
-      SlideQualityAction(
-        label: l10n.d('Open presentatiegegevens'),
-        icon: Icons.info_outline,
-        run: navigate,
-      ),
-    );
-    return actions;
-  }
   if (issue.isDeckWide) {
-    actions.add(
-      SlideQualityAction(
-        label: l10n.d('Open kleurinstellingen'),
-        icon: Icons.palette_outlined,
-        run: navigate,
-      ),
-    );
-    return actions;
+    return [...actions, _deckWideAction(l10n, issue, navigate)];
   }
 
   // Titeltekst over een achtergrondafbeelding: pas de aanbevolen
@@ -213,4 +191,30 @@ List<SlideQualityAction> buildSlideQualityActions({
   }
 
   return actions;
+}
+
+/// De handeling bij een deckbrede melding.
+///
+/// Deckbreed is twee dingen. Een contrastmelding gaat over het thema en wordt in
+/// de kleurinstellingen opgelost; een privacybevinding op de front matter
+/// (auteur, organisatie, trefwoorden) hoort in de presentatiegegevens thuis.
+/// Beide "Open kleurinstellingen" noemen stuurde de tweede soort de verkeerde
+/// kant op, met een knop die de verkeerde belofte deed.
+SlideQualityAction _deckWideAction(
+  AppLocalizations l10n,
+  SlideQualityIssue issue,
+  VoidCallback navigate,
+) {
+  if (issueBelongsToDeckInfo(issue)) {
+    return SlideQualityAction(
+      label: l10n.d('Open presentatiegegevens'),
+      icon: Icons.info_outline,
+      run: navigate,
+    );
+  }
+  return SlideQualityAction(
+    label: l10n.d('Open kleurinstellingen'),
+    icon: Icons.palette_outlined,
+    run: navigate,
+  );
 }

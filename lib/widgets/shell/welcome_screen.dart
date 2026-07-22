@@ -33,149 +33,7 @@ class _WelcomeScreen extends ConsumerWidget {
                     alignment: const Alignment(-0.15, 0.12),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Semantics(
-                          label: l10n.d('OciDeck'),
-                          image: true,
-                          child: Image.asset(
-                            'assets/images/ocideck-logo.png',
-                            width: 200,
-                            fit: BoxFit.contain,
-                            filterQuality: FilterQuality.high,
-                          ),
-                        ),
-                        // Wat is dit? Het openscherm was logo plus knoppen: wie
-                        // hier voor het eerst kwam, kreeg vier handelingen en
-                        // geen antwoord op de enige vraag die hij had.
-                        const SizedBox(height: 18),
-                        ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 340),
-                          child: Text(
-                            l10n.d(
-                              'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.',
-                            ),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 12.5,
-                              height: 1.45,
-                              color: palette.mutedText,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 22),
-                        SizedBox(
-                          width: 220,
-                          child: ElevatedButton.icon(
-                            onPressed: () => _newDeck(context, ref),
-                            icon: const Icon(Icons.add, size: 18),
-                            label: Text(l10n.t('newPresentation')),
-                          ),
-                        ),
-                        // De sjablonen zijn het beste dat een nieuwkomer kan
-                        // overkomen en zaten één klik verstopt achter deze knop.
-                        // Het aantal komt uit de catalogus zelf, zodat het
-                        // meebeweegt in plaats van te verouderen.
-                        const SizedBox(height: 5),
-                        ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 240),
-                          child: Text(
-                            '${_visibleTemplateCount(ref)} '
-                            '${l10n.d('sjablonen om mee te beginnen, of leeg')}',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: palette.mutedText,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        SizedBox(
-                          width: 220,
-                          child: OutlinedButton.icon(
-                            onPressed: () => _openWithSearch(context, ref),
-                            icon: const Icon(
-                              Icons.folder_open_outlined,
-                              size: 18,
-                            ),
-                            label: Text(l10n.t('open')),
-                          ),
-                        ),
-                        // URL-import werkt overal: op desktop via het
-                        // gehardende dart:io-pad, op web via de browser
-                        // (CORS + CSP `connect-src https:`) met dezelfde
-                        // security-gate. Nextcloud blijft een netwerkbron
-                        // achter [supportsNetworkDeckSources]; de
-                        // bibliotheekscan doorzoekt het lokale
-                        // bestandssysteem en kan op web niet.
-                        const SizedBox(height: 12),
-                        SizedBox(
-                          width: 220,
-                          child: OutlinedButton.icon(
-                            onPressed: () => _importFromUrl(context, ref),
-                            icon: const Icon(
-                              Icons.cloud_download_outlined,
-                              size: 18,
-                            ),
-                            label: Text(l10n.t('importUrl')),
-                          ),
-                        ),
-                        if (supportsLocalProjectFolders) ...[
-                          const SizedBox(height: 12),
-                          SizedBox(
-                            width: 220,
-                            child: OutlinedButton.icon(
-                              onPressed: () => _scanLibrary(context, ref),
-                              icon: const Icon(Icons.travel_explore, size: 18),
-                              label: Text(l10n.d('Zoek op deze computer')),
-                            ),
-                          ),
-                        ],
-                        // Dezelfde ingang als in het menu: één knop voor alle
-                        // soorten opslag. Hier stond alleen WebDAV, waardoor
-                        // wie met S3 of git werkte vanaf dit scherm nergens
-                        // heen kon.
-                        if (_remoteConnections(ref).isNotEmpty) ...[
-                          const SizedBox(height: 12),
-                          SizedBox(
-                            width: 220,
-                            child: OutlinedButton.icon(
-                              onPressed: () =>
-                                  _openFromConnection(context, ref),
-                              icon: const Icon(Icons.cloud_outlined, size: 18),
-                              label: Text(l10n.d('Openen uit…')),
-                            ),
-                          ),
-                        ],
-                        const SizedBox(height: 8),
-                        // De handleiding stond alleen achter Instellingen →
-                        // Documentatie: drie klikken diep, precies daar waar
-                        // iemand die nog niets weet niet gaat kijken.
-                        Wrap(
-                          alignment: WrapAlignment.center,
-                          children: [
-                            TextButton.icon(
-                              onPressed: () => DocumentReaderScreen.open(
-                                context,
-                                title: l10n.d('Gebruikershandleiding'),
-                                assetBase: 'docs/USER_GUIDE.md',
-                              ),
-                              icon: const Icon(
-                                Icons.menu_book_outlined,
-                                size: 17,
-                              ),
-                              label: Text(l10n.d('Gebruikershandleiding')),
-                            ),
-                            TextButton.icon(
-                              onPressed: () => SettingsDialog.show(context),
-                              icon: const Icon(
-                                Icons.settings_outlined,
-                                size: 17,
-                              ),
-                              label: Text(l10n.t('settings')),
-                            ),
-                          ],
-                        ),
-                      ],
+                      children: _startColumn(context, ref, l10n, palette),
                     ),
                   ),
                 ),
@@ -188,6 +46,146 @@ class _WelcomeScreen extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  /// De middenkolom: logo, wat dit is, en de handelingen waarmee je begint.
+  ///
+  /// Losse methode omdat de kolom hard tegen de methodelengte-ratchet aan liep
+  /// zodra de uitleg erbij kwam — en omdat dít het openscherm ís; de Scaffold
+  /// eromheen is verpakking.
+  List<Widget> _startColumn(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+    AppPalette palette,
+  ) {
+    return [
+      Semantics(
+        label: l10n.d('OciDeck'),
+        image: true,
+        child: Image.asset(
+          'assets/images/ocideck-logo.png',
+          width: 200,
+          fit: BoxFit.contain,
+          filterQuality: FilterQuality.high,
+        ),
+      ),
+      // Wat is dit? Het openscherm was logo plus knoppen: wie
+      // hier voor het eerst kwam, kreeg vier handelingen en
+      // geen antwoord op de enige vraag die hij had.
+      const SizedBox(height: 18),
+      ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 340),
+        child: Text(
+          l10n.d(
+            'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.',
+          ),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 12.5,
+            height: 1.45,
+            color: palette.mutedText,
+          ),
+        ),
+      ),
+      const SizedBox(height: 22),
+      SizedBox(
+        width: 220,
+        child: ElevatedButton.icon(
+          onPressed: () => _newDeck(context, ref),
+          icon: const Icon(Icons.add, size: 18),
+          label: Text(l10n.t('newPresentation')),
+        ),
+      ),
+      // De sjablonen zijn het beste dat een nieuwkomer kan
+      // overkomen en zaten één klik verstopt achter deze knop.
+      // Het aantal komt uit de catalogus zelf, zodat het
+      // meebeweegt in plaats van te verouderen.
+      const SizedBox(height: 5),
+      ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 240),
+        child: Text(
+          '${_visibleTemplateCount(ref)} '
+          '${l10n.d('sjablonen om mee te beginnen, of leeg')}',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 11, color: palette.mutedText),
+        ),
+      ),
+      const SizedBox(height: 12),
+      SizedBox(
+        width: 220,
+        child: OutlinedButton.icon(
+          onPressed: () => _openWithSearch(context, ref),
+          icon: const Icon(Icons.folder_open_outlined, size: 18),
+          label: Text(l10n.t('open')),
+        ),
+      ),
+      // URL-import werkt overal: op desktop via het
+      // gehardende dart:io-pad, op web via de browser
+      // (CORS + CSP `connect-src https:`) met dezelfde
+      // security-gate. Nextcloud blijft een netwerkbron
+      // achter [supportsNetworkDeckSources]; de
+      // bibliotheekscan doorzoekt het lokale
+      // bestandssysteem en kan op web niet.
+      const SizedBox(height: 12),
+      SizedBox(
+        width: 220,
+        child: OutlinedButton.icon(
+          onPressed: () => _importFromUrl(context, ref),
+          icon: const Icon(Icons.cloud_download_outlined, size: 18),
+          label: Text(l10n.t('importUrl')),
+        ),
+      ),
+      if (supportsLocalProjectFolders) ...[
+        const SizedBox(height: 12),
+        SizedBox(
+          width: 220,
+          child: OutlinedButton.icon(
+            onPressed: () => _scanLibrary(context, ref),
+            icon: const Icon(Icons.travel_explore, size: 18),
+            label: Text(l10n.d('Zoek op deze computer')),
+          ),
+        ),
+      ],
+      // Dezelfde ingang als in het menu: één knop voor alle
+      // soorten opslag. Hier stond alleen WebDAV, waardoor
+      // wie met S3 of git werkte vanaf dit scherm nergens
+      // heen kon.
+      if (_remoteConnections(ref).isNotEmpty) ...[
+        const SizedBox(height: 12),
+        SizedBox(
+          width: 220,
+          child: OutlinedButton.icon(
+            onPressed: () => _openFromConnection(context, ref),
+            icon: const Icon(Icons.cloud_outlined, size: 18),
+            label: Text(l10n.d('Openen uit…')),
+          ),
+        ),
+      ],
+      const SizedBox(height: 8),
+      // De handleiding stond alleen achter Instellingen →
+      // Documentatie: drie klikken diep, precies daar waar
+      // iemand die nog niets weet niet gaat kijken.
+      Wrap(
+        alignment: WrapAlignment.center,
+        children: [
+          TextButton.icon(
+            onPressed: () => DocumentReaderScreen.open(
+              context,
+              title: l10n.d('Gebruikershandleiding'),
+              assetBase: 'docs/USER_GUIDE.md',
+            ),
+            icon: const Icon(Icons.menu_book_outlined, size: 17),
+            label: Text(l10n.d('Gebruikershandleiding')),
+          ),
+          TextButton.icon(
+            onPressed: () => SettingsDialog.show(context),
+            icon: const Icon(Icons.settings_outlined, size: 17),
+            label: Text(l10n.t('settings')),
+          ),
+        ],
+      ),
+    ];
   }
 
   Widget _recentFilesPanel(
