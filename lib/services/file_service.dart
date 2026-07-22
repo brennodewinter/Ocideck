@@ -771,6 +771,16 @@ class FileService {
 
   /// Een stijlprofiel is een handvol kleuren plus hooguit één ingesloten logo;
   /// beide caps zijn ruim voor echt gebruik en begrenzen een gemaakt bestand.
+  /// Grens voor een los grafiekdatabestand (`data/*.json`, of CSV).
+  ///
+  /// Grafiekdata reist naast het deck mee — uit een pakket, een repo of iemands
+  /// map — en werd bij het openen onbegrensd ingelezen, met een tweede kopie
+  /// bovenop zodra de CSV geparseerd werd. Het gaat om een handvol rijen; 8 MiB
+  /// is ruim genoeg voor elke grafiek die een mens leest, en houdt een
+  /// opgeblazen bestand buiten het geheugen van een app die nog aan het openen
+  /// is en dus nog niets kan afbreken.
+  static const maxChartDataBytes = 8 * 1024 * 1024; // 8 MiB
+
   static const maxStyleProfileBytes = 16 * 1024 * 1024; // 16 MiB
   static const maxStyleProfileLogoBytes = 8 * 1024 * 1024; // 8 MiB
 

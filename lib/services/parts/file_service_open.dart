@@ -229,6 +229,18 @@ extension _FileServiceOpen on FileService {
         slides.add(s);
         continue;
       }
+      if (await file.length() > FileService.maxChartDataBytes) {
+        // Dezelfde behandeling als een ontbrekend bestand: de grafiek tekent
+        // leeg, en de waarschuwing zegt welk bestand het was. Stil overslaan
+        // zou lezen als "deze grafiek heeft geen cijfers".
+        logWarning(
+          'FileService.openDeck: chart data exceeds '
+          '${FileService.maxChartDataBytes ~/ (1024 * 1024)} MiB cap',
+        );
+        warnings.add(spec.source!);
+        slides.add(s);
+        continue;
+      }
       try {
         final raw = await file.readAsString();
         final filled = spec.withData(raw, path: abs!);
