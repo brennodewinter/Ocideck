@@ -1784,6 +1784,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Bekende beperkingen': 'Známe obmedzenia',
   'naam@example.org\nexample.org': 'meno@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Vrstva vedľa tejto prezentácie bola príliš veľká a nenačítala sa; samotný súbor zostáva nezmenený:',

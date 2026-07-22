@@ -1793,6 +1793,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bekende beperkingen': 'Limitationes notae',
   'naam@example.org\nexample.org': 'nomen@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Stratum iuxta hanc praesentationem nimis magnum erat neque lectum est; plica ipsa immutata manet:',

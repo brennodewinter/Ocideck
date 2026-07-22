@@ -1768,6 +1768,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bekende beperkingen': 'Teadaolevad piirangud',
   'naam@example.org\nexample.org': 'nimi@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Selle decki kõrval olev kiht oli liiga suur ja seda ei laaditud; fail ise on muutmata:',

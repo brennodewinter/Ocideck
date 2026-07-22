@@ -1789,6 +1789,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bekende beperkingen': 'Znane ograniczenia',
   'naam@example.org\nexample.org': 'imie@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Warstwa obok tej prezentacji była za duża i nie została wczytana; sam plik pozostaje niezmieniony:',

@@ -1795,6 +1795,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bekende beperkingen': 'Limitări cunoscute',
   'naam@example.org\nexample.org': 'nume@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Un strat de lângă acest deck era prea mare și nu a fost încărcat; fișierul în sine este neschimbat:',

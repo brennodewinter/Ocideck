@@ -1777,6 +1777,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bekende beperkingen': 'Tunnetut rajoitukset',
   'naam@example.org\nexample.org': 'nimi@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Tämän deckin vieressä ollut taso oli liian suuri eikä sitä ladattu; itse tiedosto on muuttumaton:',

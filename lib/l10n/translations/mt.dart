@@ -1799,6 +1799,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bekende beperkingen': 'Limitazzjonijiet magħrufa',
   'naam@example.org\nexample.org': 'isem@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Saff maġenb dan id-deck kien kbir wisq u ma ġiex mgħobbi; il-fajl innifsu baqa\' ma nbidilx:',

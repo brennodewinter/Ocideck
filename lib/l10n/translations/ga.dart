@@ -1813,6 +1813,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bekende beperkingen': 'Teorainneacha aitheanta',
   'naam@example.org\nexample.org': 'ainm@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Bhí sraith in aice leis an deic seo rómhór agus níor lódáladh í; níl aon athrú ar an gcomhad féin:',

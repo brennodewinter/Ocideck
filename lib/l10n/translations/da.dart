@@ -1776,6 +1776,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bekende beperkingen': 'Kendte begrænsninger',
   'naam@example.org\nexample.org': 'navn@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Et lag ved siden af dette deck var for stort og blev ikke indlæst; selve filen er uændret:',

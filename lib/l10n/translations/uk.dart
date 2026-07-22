@@ -1795,6 +1795,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bekende beperkingen': 'Відомі обмеження',
   'naam@example.org\nexample.org': 'imya@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Шар поруч із цим деком був завеликий і не був завантажений; сам файл лишився незмінним:',

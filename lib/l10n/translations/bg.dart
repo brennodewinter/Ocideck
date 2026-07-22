@@ -1800,6 +1800,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bekende beperkingen': 'Известни ограничения',
   'naam@example.org\nexample.org': 'ime@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Слой до това дек беше твърде голям и не беше зареден; самият файл остава непроменен:',

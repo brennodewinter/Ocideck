@@ -281,14 +281,18 @@ prefixes show up as if they were folders.
 ## Future Features and Roadmap
 
 ### What's planned for future development?
-Current roadmap items include:
-- More granular privacy controls in exports
-- Improved performance for large presentations
-- Additional chart visualizations and data types
+What is planned is decided in the issue tracker, in the open. There is no
+separate roadmap document, because one that nobody maintains is worse than
+none — this section was itself the proof: it listed encrypted package export
+as planned for months after it had shipped, and "additional chart
+visualizations" while thirteen chart types were already in the app.
 
-Encrypted package export **has since shipped** — `.ocideck` packages can be
-protected with a password. It was listed here as planned long after it landed;
-corrected 2026-07-18.
+What OciDeck does *not* do yet is written down, in one place:
+[KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md).
+
+*Corrected 2026-07-22: this answer listed three stale roadmap items. The
+earlier correction of 2026-07-18, about encrypted package export having
+shipped, is folded into this note.*
 
 ### Are there mobile plans?
 Nothing is planned. The supported targets are macOS, Windows, Linux and the

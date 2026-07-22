@@ -1807,6 +1807,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Bekende beperkingen': 'Limitações conhecidas',
   'naam@example.org\nexample.org': 'nome@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Uma camada ao lado deste deck era demasiado grande e não foi carregada; o próprio ficheiro está inalterado:',

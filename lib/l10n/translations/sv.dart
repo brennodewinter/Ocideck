@@ -1776,6 +1776,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bekende beperkingen': 'Kända begränsningar',
   'naam@example.org\nexample.org': 'namn@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Ett lager bredvid detta deck var för stort och lästes inte in; själva filen är oförändrad:',

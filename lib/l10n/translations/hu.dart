@@ -1781,6 +1781,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bekende beperkingen': 'Ismert korlátozások',
   'naam@example.org\nexample.org': 'nev@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'A deck melletti egyik réteg túl nagy volt, ezért nem töltődött be; maga a fájl változatlan:',

@@ -734,6 +734,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bekende beperkingen': 'Limitashonnan konosí',
   'naam@example.org\nexample.org': 'nomber@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Un kapa banda di e deck aki tabata muchu grandi i no a wòrdu lesá; e archivo mes no a kambia:',

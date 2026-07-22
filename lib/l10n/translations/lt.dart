@@ -1785,6 +1785,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bekende beperkingen': 'Žinomi apribojimai',
   'naam@example.org\nexample.org': 'vardas@example.org\nexample.org',
   'Een laag naast dit deck was te groot en is niet ingelezen; het bestand zelf is ongewijzigd:':
       'Šalia šio rinkinio esantis sluoksnis buvo per didelis ir nebuvo įkeltas; pats failas liko nepakeistas:',
