@@ -104,6 +104,38 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   pakket niet meer kunnen openen. De sterkte van het wachtwoord is dus wat
   telt. Het staat zichtbaar in beeld zodat u het kunt overnemen, en u kunt er
   altijd uw eigen zin voor in de plaats zetten.
+- **OciDeck laat minder op uw schijf achter, en u kunt de rest zelf wissen.**
+
+  Een git-verbinding verwijderen haalde alleen het regeltje uit uw instellingen
+  weg. De volledige inhoud van die repository — inclusief de historie — bleef in
+  een verborgen map staan, samen met de commitboodschappen die u had getypt. Bij
+  een repository met klantgegevens betekende dat: de verbinding is weg, de
+  gegevens niet. Die werkkopie gaat nu mee. Wacht er nog werk dat niet naar de
+  server is gestuurd, dan gooit OciDeck dat nooit stilzwijgend weg: u ziet welk
+  deck, welke tak en welke boodschap het betreft, en u kiest zelf. Zegt u nee,
+  dan blijft de verbinding gewoon staan.
+
+  Ook nieuw in *Instellingen → Beveiliging*, onder **Sporen op dit apparaat**:
+  de recente lijst in één keer wissen — die bewaart het volledige pad én de
+  classificatie van elk deck dat open is geweest — en *alles terugzetten naar de
+  begintoestand*, dat ook de herstelbestanden, de git-werkkopieën en de
+  wachtwoorden in uw sleutelbos opruimt. Uw presentaties blijven staan: die zijn
+  van u.
+
+  Verder ruimt OciDeck nu op wat het zelf liet slingeren: het logo van een
+  stijlprofiel dat u verwijdert, en de tijdelijke map waarin `git` draait.
+
+  Uw eigen gegevens uit de privacycontrole — naam, e-mailadres, telefoonnummer —
+  stonden in klaartekst bij de instellingen. Die verhuizen bij de eerste start
+  naar de sleutelbos van uw besturingssysteem, waar de wachtwoorden ook staan.
+
+  Herstelbestanden worden niet versleuteld, en dat blijft zo; `SECURITY.md` legt
+  uit waarom opruimen hier meer oplevert. Wél gelden de zeven dagen nu ook
+  terwijl de app draait — voorheen werd er alleen bij het opstarten opgeruimd,
+  dus op een machine die aan blijft staan bleef een oud herstelbestand liggen.
+  En op Linux zet OciDeck zijn eigen mappen bij de start op "alleen voor u",
+  zodat andere accounts op dezelfde computer niet meelezen.
+
 - **Geen base64 meer in uw presentatiebestand.** De belofte van OciDeck is dat u
   met alleen een teksteditor en Marp verder kunt. Op zeven plekken klopte dat
   niet: daar stond een blok onleesbare tekens waar uw inhoud in verstopt zat.
@@ -283,6 +315,34 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   zitten. En de losse ophaaldienst zet zijn "niet zelf raden wat voor bestand
   dit is"-kop voortaan óók op een weigering, niet alleen als het lukt.
 
+- **De licenties, kennisgevingen en SBOM kloppen weer.** Een reeks dingen die
+  stil fout stonden, en die u pas merkt als u OciDeck of een export van OciDeck
+  aan iemand anders doorgeeft.
+
+  De gevendorde plugin `desktop_multi_window` stond overal als MIT genoteerd,
+  maar is Apache-2.0. Dat is nu rechtgezet in de SBOM en de kennisgevingen, de
+  zes bestanden die wij in die fork wijzigden dragen de wijzigingsnotitie die
+  Apache-2.0 vraagt, en beide forks hebben een `MODIFICATIONS.md` met de
+  herkomstcommit erbij. In de SBOM dragen ze nu ook een hash — daarvoor waren
+  zij de enige twee onderdelen zonder.
+
+  Twaalf afhankelijkheden die u wél meekrijgt, stonden niet in
+  `THIRD_PARTY_NOTICES.md`. Ze staan er nu allemaal in, met hun licentie, en een
+  test houdt die lijst voortaan bij de tijd.
+
+  Belangrijker voor u: de licentieteksten reisden niet mee. De vier
+  OFL-bestanden van de lettertypen zaten in geen enkele build, en er was geen
+  plek in de app om een licentie te lezen. Onder **Instellingen → Over OciDeck**
+  staat nu **Alle licentieteksten tonen**, met alles erin — pakketten,
+  lettertypen, het gezichtsmodel en de JavaScript uit de HTML-export. Diezelfde
+  export draagt voortaan zelf een blok met de volledige licentieteksten en per
+  ingesloten bibliotheek een licentieregel; bij het doorsturen van een export
+  bent u de verspreidende partij, en die kunt u nu ook zijn.
+
+  Tot slot: het Klingon-vlaggetje in de taalkiezer was het embleem van het
+  Klingon-rijk — een beeldmerk van iemand anders dat in elke uitgeleverde
+  versie meereisde. Het is vervangen door een nuchter `tlh`-plaatje. De taal
+  blijft gewoon.
 - **Uw eigen regels in de kop breken het zegel niet meer.** Sinds OciDeck de
   front matter bijwerkt in plaats van herbouwt, blijft wat u er zelf in zet
   netjes staan — een eigen `style:`-blok, een commentaarregel, een handmatige

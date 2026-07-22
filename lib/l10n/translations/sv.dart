@@ -1812,6 +1812,50 @@ const _dutchSourceAddSv = <String, String>{
   'Motivering van een bevestiging': 'Motivering av en bekräftelse',
   'Tabel koprij, kolom {kolom}': 'Tabell rubrikrad, kolumn {kolom}',
   'Tabel rij {rij}, kolom {kolom}': 'Tabell rad {rij}, kolumn {kolom}',
+  'Via deze website ophalen?': 'Hämta via den här webbplatsen?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Servern för den här presentationen lät inte webbläsaren läsa filen direkt. OciDeck kan skicka adressen vidare till den webbplats som OciDeck självt kommer från, och den hämtar filen. Därmed ser den webbplatsen hela adressen — finns det en nyckel eller kod i länken ser webbplatsen även den.',
+  'In de browser kan dit niet worden bewaard':
+      'Det här kan inte sparas i webbläsaren',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'En webbläsare har ingen nyckelring som en dator har: det OciDeck skulle spara här kan vilket skript som helst på den här sidan läsa. Använd skrivbordsversionen — där hamnar hemligheten faktiskt i operativsystemets nyckelring.',
+  'Licenties van derden': 'Tredjepartslicenser',
+  'Alle licentieteksten tonen': 'Visa alla licenstexter',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck självt ges ut under EUPL-1.2. Dessutom paketerar det programvara från tredje part: Dart- och Flutter-paketen, två medföljande insticksmoduler, fyra teckensnittsfamiljer, ansiktsmodellen för integritetskontrollen och den JavaScript som följer med en HTML-export. Var och en behåller sin egen licens.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Den här filen innehåller programvara från tredje part och ibland ett teckensnitt. Nedan finns de fullständiga licenstexterna som hör till; skicka med dem när du för filen vidare.',
+  'Sporen op dit apparaat': 'Spår på den här enheten',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Förutom dina inställningar sparar OciDeck också en lista över senaste filer och, vid en krasch, en återställningsfil med hela innehållet i din presentation. Inget av det lämnar den här enheten, men det ligger här — i klartext, skyddat av ditt konto i det här operativsystemet och inte mer än så.',
+  'Recent geopende presentaties': 'Senast öppnade presentationer',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Listan sparar hela sökvägen och klassificeringen för varje presentation som har varit öppen — tillsammans en uppgift om vad du arbetar med och för vem.',
+  'Recente lijst wissen': 'Radera listan över senaste filer',
+  'De recente lijst was al leeg.': 'Listan över senaste filer var redan tom.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'post(er) raderade från listan över senaste filer.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Återställningsfiler innehåller hela innehållet i dina presentationer i klartext. De rensas automatiskt efter 7 dagar, och direkt vid en normal avslutning.',
+  'Alles terugzetten': 'Återställ allt',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Raderar alla inställningar, listan över senaste filer, återställningsfilerna, git-arbetskopiorna och lösenorden i din nyckelring. Dina presentationer blir kvar: de är dina, inte OciDecks.',
+  'Zet alles terug naar de begintoestand': 'Återställ allt till ursprungsläget',
+  'Alles terugzetten naar de begintoestand?':
+      'Återställa allt till ursprungsläget?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Dina inställningar, listan över senaste filer, återställningsfilerna, git-arbetskopiorna och de sparade lösenorden raderas. Det går inte att ångra. Dina presentationer blir kvar.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'ändring(ar) har ännu inte skickats till en git-server och finns bara på den här enheten. De försvinner också.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Allt har återställts till ursprungsläget.',
+  'Terugzetten is niet gelukt.': 'Återställningen misslyckades.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Det finns arbete som inte har skickats',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Den här git-anslutningen har ändringar som ännu inte har skickats till servern. Tar du bort anslutningen försvinner även arbetskopian på den här enheten — och då finns arbetet ingenstans.',
+  'Verbinding behouden': 'Behåll anslutningen',
+  'Toch verwijderen': 'Ta bort ändå',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

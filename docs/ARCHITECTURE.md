@@ -409,15 +409,21 @@ cloud rules, fail-closed on web); `utils/zip_encryption.dart` backs encrypted
 Two upstream plugins are forked into `third_party/` and wired via `pubspec.yaml`
 (path dependency / `dependency_overrides`):
 
-- **`desktop_multi_window`** (MixinNetwork) — vendored fork with
+- **`desktop_multi_window`** (MixinNetwork, **Apache-2.0**) — vendored fork with
   `window_setFrame`, `window_coverScreen` (borderless fill of a chosen screen),
   and `window_close` on **macOS, Windows, and Linux**. macOS additionally tracks
   the mouse for non-key windows so chart hover works on the beamer.
-- **`screen_retriever_macos`** (leanflutter) — a packaging fix for recent
-  Xcode/CocoaPods.
+- **`screen_retriever_macos`** (leanflutter, MIT) — a Swift Package Manager
+  layout added for recent Xcode/CocoaPods; no upstream file edited.
 
-If you bump either upstream, re-apply the local changes (they're small and
-documented in the diff) and re-test the dual-screen presenter.
+Each fork carries a `MODIFICATIONS.md` naming the upstream commit it descends
+from and every local change, and — for the Apache-2.0 one — each changed file
+opens with the §4(b) notice that licence requires. The SBOM records the same
+commit plus a SHA-256 tree hash of the directory.
+
+If you bump either upstream, re-apply the local changes, update
+`MODIFICATIONS.md` and `_forkOrigins` in `tool/sbom_build.dart`, run `make sbom`,
+and re-test the dual-screen presenter.
 
 ## Information-security module (optional, off by default)
 

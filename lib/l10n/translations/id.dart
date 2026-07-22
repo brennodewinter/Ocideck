@@ -1813,6 +1813,51 @@ const _dutchSourceAddId = <String, String>{
   'Motivering van een bevestiging': 'Alasan konfirmasi',
   'Tabel koprij, kolom {kolom}': 'Tabel baris header, kolom {kolom}',
   'Tabel rij {rij}, kolom {kolom}': 'Tabel baris {rij}, kolom {kolom}',
+  'Via deze website ophalen?': 'Ambil lewat situs ini?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Server presentasi ini tidak mengizinkan peramban membaca berkasnya secara langsung. OciDeck dapat meneruskan alamatnya ke situs web asal OciDeck sendiri, dan situs itulah yang mengambilnya. Dengan begitu situs tersebut melihat alamat lengkapnya — jika ada kunci atau kode di dalam tautan, situs itu juga melihatnya.',
+  'In de browser kan dit niet worden bewaard':
+      'Di peramban ini tidak dapat disimpan',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Peramban tidak punya gantungan kunci seperti komputer: apa pun yang akan disimpan OciDeck di sini bisa dibaca oleh skrip mana pun di halaman ini. Gunakan versi desktop — di sana rahasianya memang masuk ke gantungan kunci sistem operasi.',
+  'Licenties van derden': 'Lisensi pihak ketiga',
+  'Alle licentieteksten tonen': 'Tampilkan semua teks lisensi',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck sendiri berlisensi EUPL-1.2. Selain itu ia menyertakan perangkat lunak pihak ketiga: paket Dart dan Flutter, dua plugin bawaan, empat keluarga fon, model wajah untuk pemeriksaan privasi, dan JavaScript yang ikut serta dalam ekspor HTML. Masing-masing mempertahankan lisensinya sendiri.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Berkas ini memuat perangkat lunak pihak ketiga dan kadang sebuah fon. Teks lisensi lengkap yang menyertainya ada di bawah; sertakan saat Anda meneruskan berkas ini.',
+  'Sporen op dit apparaat': 'Jejak di perangkat ini',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Selain pengaturan Anda, OciDeck juga menyimpan daftar terbaru dan, jika terjadi crash, sebuah file pemulihan berisi seluruh isi presentasi Anda. Tidak satu pun dari itu meninggalkan perangkat ini, tetapi semuanya ada di sini — dalam teks biasa, dilindungi oleh akun Anda pada sistem operasi ini dan tidak lebih dari itu.',
+  'Recent geopende presentaties': 'Presentasi yang baru dibuka',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Daftar ini menyimpan jalur lengkap dan klasifikasi setiap presentasi yang pernah dibuka — bersama-sama, keterangan tentang apa yang sedang Anda kerjakan dan untuk siapa.',
+  'Recente lijst wissen': 'Hapus daftar terbaru',
+  'De recente lijst was al leeg.': 'Daftar terbaru sudah kosong.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'entri dihapus dari daftar terbaru.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'File pemulihan berisi seluruh isi presentasi Anda dalam teks biasa. Dibersihkan otomatis setelah 7 hari, dan segera saat aplikasi ditutup dengan rapi.',
+  'Alles terugzetten': 'Setel ulang semuanya',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Menghapus setiap pengaturan, daftar terbaru, file pemulihan, salinan kerja git dan kata sandi di gantungan kunci Anda. Presentasi Anda tetap ada: itu milik Anda, bukan milik OciDeck.',
+  'Zet alles terug naar de begintoestand':
+      'Kembalikan semuanya ke keadaan awal',
+  'Alles terugzetten naar de begintoestand?':
+      'Kembalikan semuanya ke keadaan awal?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Pengaturan Anda, daftar terbaru, file pemulihan, salinan kerja git dan kata sandi yang tersimpan akan dihapus. Ini tidak dapat dibatalkan. Presentasi Anda tetap ada.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'perubahan belum dikirim ke server git dan hanya ada di perangkat ini. Itu pun ikut hilang.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Semuanya telah dikembalikan ke keadaan awal.',
+  'Terugzetten is niet gelukt.': 'Penyetelan ulang tidak berhasil.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Masih ada pekerjaan yang belum terkirim',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Koneksi git ini memiliki perubahan yang belum dikirim ke server. Jika Anda menghapus koneksinya, salinan kerja di perangkat ini ikut hilang — dan pekerjaan ini tidak ada lagi di mana pun.',
+  'Verbinding behouden': 'Pertahankan koneksi',
+  'Toch verwijderen': 'Tetap hapus',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

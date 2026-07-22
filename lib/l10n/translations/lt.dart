@@ -1821,6 +1821,49 @@ const _dutchSourceAddLt = <String, String>{
   'Motivering van een bevestiging': 'Patvirtinimo pagrindimas',
   'Tabel koprij, kolom {kolom}': 'Lentelė antraštės eilutė, stulpelis {kolom}',
   'Tabel rij {rij}, kolom {kolom}': 'Lentelė eilutė {rij}, stulpelis {kolom}',
+  'Via deze website ophalen?': 'Gauti per šią svetainę?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Šios prezentacijos serveris neleido naršyklei perskaityti failo tiesiogiai. OciDeck gali perduoti adresą svetainei, iš kurios atkeliavo pats OciDeck, ir ji failą paims. Tada ta svetainė mato visą adresą — jei nuorodoje yra raktas ar kodas, ta svetainė mato ir jį.',
+  'In de browser kan dit niet worden bewaard':
+      'Naršyklėje to išsaugoti negalima',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Naršyklė neturi raktinės, kokią turi kompiuteris: tai, ką OciDeck čia išsaugotų, gali perskaityti bet kuris šio puslapio skriptas. Naudokite darbalaukio versiją — ten paslaptis tikrai patenka į operacinės sistemos raktinę.',
+  'Licenties van derden': 'Trečiųjų šalių licencijos',
+  'Alle licentieteksten tonen': 'Rodyti visus licencijų tekstus',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Pats OciDeck platinamas pagal EUPL-1.2. Be to, jis sujungia trečiųjų šalių programinę įrangą: Dart ir Flutter paketus, du kartu pateikiamus papildinius, keturias šriftų šeimas, veido modelį privatumo patikrai ir JavaScript, kuris keliauja kartu su HTML eksportu. Kiekvienas išlaiko savo licenciją.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Šiame faile yra trečiųjų šalių programinės įrangos ir kartais šriftas. Žemiau pateikti pilni atitinkamų licencijų tekstai; perduokite juos kartu su failu.',
+  'Sporen op dit apparaat': 'Pėdsakai šiame įrenginyje',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Be jūsų nustatymų, OciDeck saugo ir paskutinių failų sąrašą, o strigties atveju – atkūrimo failą su visu jūsų pristatymo turiniu. Niekas iš to neišeina iš šio įrenginio, bet čia guli – paprastu tekstu, apsaugotas jūsų paskyra šioje operacinėje sistemoje ir niekuo daugiau.',
+  'Recent geopende presentaties': 'Neseniai atverti pristatymai',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Sąraše saugomas visas kelias ir kiekvieno atverto pristatymo klasifikacija – kartu tai duomenys apie tai, ties kuo dirbate ir kam.',
+  'Recente lijst wissen': 'Ištrinti paskutinių failų sąrašą',
+  'De recente lijst was al leeg.': 'Paskutinių failų sąrašas jau buvo tuščias.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'įrašai ištrinti iš paskutinių failų sąrašo.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Atkūrimo failuose yra visas jūsų pristatymų turinys paprastu tekstu. Jie automatiškai išvalomi po 7 dienų, o tvarkingai užvėrus programą – iš karto.',
+  'Alles terugzetten': 'Grąžinti viską',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Ištrina visus nustatymus, paskutinių failų sąrašą, atkūrimo failus, git darbines kopijas ir slaptažodžius jūsų raktinėje. Jūsų pristatymai lieka: jie yra jūsų, o ne OciDeck.',
+  'Zet alles terug naar de begintoestand': 'Grąžinti viską į pradinę būseną',
+  'Alles terugzetten naar de begintoestand?':
+      'Grąžinti viską į pradinę būseną?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Bus ištrinti jūsų nustatymai, paskutinių failų sąrašas, atkūrimo failai, git darbinės kopijos ir įrašyti slaptažodžiai. To atšaukti nebus galima. Jūsų pristatymai lieka.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'pakeitimai dar neišsiųsti į git serverį ir yra tik šiame įrenginyje. Jie taip pat dings.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Viskas grąžinta į pradinę būseną.',
+  'Terugzetten is niet gelukt.': 'Grąžinti nepavyko.',
+  'Er wacht nog werk dat niet verstuurd is': 'Dar laukia neišsiųstas darbas',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Šiame git ryšyje yra pakeitimų, kurie dar neišsiųsti į serverį. Pašalinus ryšį, dings ir darbinė kopija šiame įrenginyje – ir šio darbo nebeliks niekur.',
+  'Verbinding behouden': 'Palikti jungtį',
+  'Toch verwijderen': 'Vis tiek šalinti',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Gerai',

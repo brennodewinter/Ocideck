@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
+import 'package:ocideck/utils/csv.dart';
 import 'package:ocideck/utils/number_convention.dart';
 
 void main() {
@@ -210,6 +211,59 @@ void main() {
       final result = parseCsv(',A\nQ1,"€ 1000"\nQ2,"12%"');
       expect(result.$2.single.data, [0, 0]);
       expect(result.unreadable, ['€ 1000', '12%']);
+    });
+  });
+
+  group('chartDataAsCsv weert formules', () {
+    // Een data/*.csv reist mee met het deck en wordt bij de ontvanger in een
+    // spreadsheet geopend. Labels komen uit de deck-tekst — onvertrouwde
+    // invoer — dus mag geen enkele cel daar als formule aankomen.
+    ChartSpec specWithLabel(String label) => ChartSpec(
+      type: ChartType.bar,
+      x: [label],
+      series: const [
+        ChartSeries(name: 'A', data: [1]),
+      ],
+    );
+
+    for (final leader in ['=', '+', '-', '@', '\t', '\r']) {
+      test('een label dat met ${leader.trim().isEmpty ? 'witruimte' : leader} '
+          'begint krijgt de tekstvoorloop', () {
+        final csv = chartDataAsCsv(specWithLabel('${leader}HYPERLINK("x")'));
+        final label = parseCsvLine(csv.split('\n')[1]).first;
+        expect(
+          label.startsWith(leader),
+          isFalse,
+          reason: 'de cel begint nog met $leader en wordt dus een formule',
+        );
+        expect(label.startsWith("'"), isTrue);
+      });
+    }
+
+    test('een reeksnaam die met = begint krijgt de tekstvoorloop', () {
+      final csv = chartDataAsCsv(
+        ChartSpec(
+          type: ChartType.bar,
+          x: const ['Q1'],
+          series: const [
+            ChartSeries(name: '=cmd|calc', data: [1]),
+          ],
+        ),
+      );
+      expect(parseCsvLine(csv.split('\n').first)[1], "'=cmd|calc");
+    });
+
+    test(
+      'de voorloop overleeft de rondgang niet: het label komt heel terug',
+      () {
+        final csv = chartDataAsCsv(specWithLabel('=SUM(A1)'));
+        expect(parseCsv(csv).$1, ['=SUM(A1)']);
+      },
+    );
+
+    test('een label dat écht met een apostrof begint blijft ongemoeid', () {
+      final csv = chartDataAsCsv(specWithLabel("'s Gravenhage"));
+      expect(parseCsv(csv).$1, ["'s Gravenhage"]);
     });
   });
 

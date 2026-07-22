@@ -1337,7 +1337,6 @@ Marp `.md` is never touched by annotations.
 `points` is a flat list `[x0, y0, x1, y1, ...]`; `color` is an ARGB int; `tool`
 is `pen` or `highlighter` (laser pointers are transient and are not stored).
 
-<<<<<<< HEAD
 `version` is a single increasing integer, and every sidecar in this chapter
 handles it the same way (`lib/services/sidecar_format.dart`): **a file declaring
 a higher version than this build understands is not loaded, and not
@@ -1346,7 +1345,7 @@ and then writing back what you did understand deletes the rest; and refusing to
 read it while still saving over it deletes all of it — the deck would hold no
 strokes in memory, and the save would take that as "there is nothing here".
 A missing `version` is version 1.
-=======
+
 The same payload rides along in an **autosave/recovery snapshot**, since drawing
 marks a deck as changed and the strokes are not in the markdown: without it a
 deck that had only been drawn on came back after a crash with the drawings gone.
@@ -1356,7 +1355,6 @@ A snapshot that carries an unreadable ink payload still restores the text.
 `services/git/` writes it — so drawings do not travel that way. Saving to a
 folder or into a package does take them along. OciDeck says so before the commit
 is made rather than after; see `design/GIT_STORAGE.md` §9.1.
->>>>>>> 26b3fa16 (docs: breng de gidsen in overeenstemming met de vijf gedichte paden)
 
 ### 6.3 User Notes (`<name>.user-notes.json`)
 

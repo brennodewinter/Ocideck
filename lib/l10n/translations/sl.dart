@@ -1816,6 +1816,49 @@ const _dutchSourceAddSl = <String, String>{
   'Motivering van een bevestiging': 'Utemeljitev potrditve',
   'Tabel koprij, kolom {kolom}': 'Tabela glava, stolpec {kolom}',
   'Tabel rij {rij}, kolom {kolom}': 'Tabela vrstica {rij}, stolpec {kolom}',
+  'Via deze website ophalen?': 'Pridobitev prek tega spletnega mesta?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Strežnik te predstavitve brskalniku ni dovolil neposredno prebrati datoteke. OciDeck lahko naslov posreduje spletnemu mestu, s katerega prihaja sam OciDeck, in to ga bo pridobilo. Tako to spletno mesto vidi celoten naslov — če je v povezavi ključ ali koda, to spletno mesto vidi tudi tega.',
+  'In de browser kan dit niet worden bewaard':
+      'V brskalniku tega ni mogoče shraniti',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Brskalnik nima zbirke ključev, kakršno ima računalnik: kar bi OciDeck shranil sem, lahko prebere katera koli skripta na tej strani. Uporabite namizno različico — tam skrivnost res pristane v zbirki ključev operacijskega sistema.',
+  'Licenties van derden': 'Licence tretjih oseb',
+  'Alle licentieteksten tonen': 'Pokaži vsa besedila licenc',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Sam OciDeck je izdan pod EUPL-1.2. Poleg tega vključuje programsko opremo tretjih oseb: paketa Dart in Flutter, dva priložena vtičnika, štiri družine pisav, model obraza za preverjanje zasebnosti in JavaScript, ki potuje z izvozom v HTML. Vsak od njih obdrži svojo licenco.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Ta datoteka vsebuje programsko opremo tretjih oseb in včasih tudi pisavo. Spodaj so celotna besedila pripadajočih licenc; posreduj jih skupaj z datoteko.',
+  'Sporen op dit apparaat': 'Sledi na tej napravi',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Poleg vaših nastavitev OciDeck hrani tudi seznam nedavnih datotek in ob sesutju obnovitveno datoteko s celotno vsebino vaše predstavitve. Nič od tega ne zapusti te naprave, a je tu — v navadnem besedilu, zaščiteno z vašim računom v tem operacijskem sistemu in z nič več.',
+  'Recent geopende presentaties': 'Nedavno odprte predstavitve',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Seznam hrani celotno pot in klasifikacijo vsake predstavitve, ki je bila odprta — skupaj je to podatek o tem, na čem delate in za koga.',
+  'Recente lijst wissen': 'Izbriši seznam nedavnih datotek',
+  'De recente lijst was al leeg.': 'Seznam nedavnih datotek je bil že prazen.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'vnosov izbrisanih s seznama nedavnih datotek.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Obnovitvene datoteke vsebujejo celotno vsebino vaših predstavitev v navadnem besedilu. Samodejno se počistijo po 7 dneh, ob urejenem izhodu pa takoj.',
+  'Alles terugzetten': 'Ponastavi vse',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Izbriše vse nastavitve, seznam nedavnih datotek, obnovitvene datoteke, delovne kopije git in gesla v vaši zbirki ključev. Vaše predstavitve ostanejo: so vaše, ne OciDeckove.',
+  'Zet alles terug naar de begintoestand': 'Ponastavi vse na začetno stanje',
+  'Alles terugzetten naar de begintoestand?':
+      'Ponastavim vse na začetno stanje?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Izbrisane bodo vaše nastavitve, seznam nedavnih datotek, obnovitvene datoteke, delovne kopije git in shranjena gesla. Tega ni mogoče razveljaviti. Vaše predstavitve ostanejo.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'sprememb še ni bilo poslanih na strežnik git in obstajajo samo na tej napravi. Tudi te bodo izginile.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Vse je ponastavljeno na začetno stanje.',
+  'Terugzetten is niet gelukt.': 'Ponastavitev ni uspela.',
+  'Er wacht nog werk dat niet verstuurd is': 'Čaka še neposlano delo',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Ta povezava git ima spremembe, ki še niso bile poslane na strežnik. Če povezavo odstranite, izgine tudi delovna kopija na tej napravi — in tega dela ne bo nikjer več.',
+  'Verbinding behouden': 'Ohrani povezavo',
+  'Toch verwijderen': 'Vseeno odstrani',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'V redu',

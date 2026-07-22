@@ -1820,6 +1820,48 @@ const _dutchSourceAddHr = <String, String>{
   'Motivering van een bevestiging': 'Obrazloženje potvrde',
   'Tabel koprij, kolom {kolom}': 'Tablica zaglavlje, stupac {kolom}',
   'Tabel rij {rij}, kolom {kolom}': 'Tablica redak {rij}, stupac {kolom}',
+  'Via deze website ophalen?': 'Dohvatiti putem ovog web-mjesta?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Poslužitelj ove prezentacije nije dopustio pregledniku da izravno pročita datoteku. OciDeck može proslijediti adresu web-mjestu s kojega dolazi i sam OciDeck, pa će je ono dohvatiti. To web-mjesto tada vidi cijelu adresu — ako je u poveznici ključ ili kôd, to web-mjesto vidi i njega.',
+  'In de browser kan dit niet worden bewaard':
+      'U pregledniku se ovo ne može spremiti',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Preglednik nema svežanj ključeva kakav ima računalo: ono što bi OciDeck ovdje spremio može pročitati bilo koja skripta na ovoj stranici. Upotrijebite verziju za računalo — ondje tajna doista završi u svežnju ključeva operacijskog sustava.',
+  'Licenties van derden': 'Licencije trećih strana',
+  'Alle licentieteksten tonen': 'Prikaži sve tekstove licencija',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Sam OciDeck objavljen je pod licencijom EUPL-1.2. Uz to uključuje softver trećih strana: pakete Dart i Flutter, dva ugrađena dodatka, četiri obitelji fontova, model lica za provjeru privatnosti i JavaScript koji putuje uz HTML izvoz. Svaki od njih zadržava vlastitu licenciju.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Ova datoteka sadrži softver trećih strana, a ponekad i font. Ispod su cjeloviti tekstovi pripadajućih licencija; proslijedite ih zajedno s datotekom.',
+  'Sporen op dit apparaat': 'Tragovi na ovom uređaju',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Uz vaše postavke OciDeck čuva i popis nedavnih datoteka te, u slučaju rušenja, datoteku za oporavak s cjelokupnim sadržajem vaše prezentacije. Ništa od toga ne napušta ovaj uređaj, ali ovdje jest — u običnom tekstu, zaštićeno vašim računom na ovom operacijskom sustavu i ničim više.',
+  'Recent geopende presentaties': 'Nedavno otvorene prezentacije',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Popis čuva punu putanju i klasifikaciju svake prezentacije koja je bila otvorena — zajedno je to podatak o tome na čemu radite i za koga.',
+  'Recente lijst wissen': 'Izbriši popis nedavnih datoteka',
+  'De recente lijst was al leeg.': 'Popis nedavnih datoteka već je bio prazan.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'unos(a) izbrisano s popisa nedavnih datoteka.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Datoteke za oporavak sadrže cjelokupan sadržaj vaših prezentacija u običnom tekstu. Automatski se čiste nakon 7 dana, a kod urednog zatvaranja odmah.',
+  'Alles terugzetten': 'Vrati sve',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Briše sve postavke, popis nedavnih datoteka, datoteke za oporavak, git radne kopije i lozinke u vašem svežnju ključeva. Vaše prezentacije ostaju: one su vaše, a ne OciDeckove.',
+  'Zet alles terug naar de begintoestand': 'Vrati sve na početno stanje',
+  'Alles terugzetten naar de begintoestand?': 'Vratiti sve na početno stanje?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Izbrisat će se vaše postavke, popis nedavnih datoteka, datoteke za oporavak, git radne kopije i spremljene lozinke. To se ne može poništiti. Vaše prezentacije ostaju.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'promjena/promjene nisu poslane na git poslužitelj i postoje samo na ovom uređaju. I one nestaju.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Sve je vraćeno na početno stanje.',
+  'Terugzetten is niet gelukt.': 'Vraćanje nije uspjelo.',
+  'Er wacht nog werk dat niet verstuurd is': 'Još čeka posao koji nije poslan',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Ova git veza ima promjene koje još nisu poslane poslužitelju. Ako uklonite vezu, nestaje i radna kopija na ovom uređaju — i taj posao više nigdje ne postoji.',
+  'Verbinding behouden': 'Zadrži vezu',
+  'Toch verwijderen': 'Ipak ukloni',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'U redu',

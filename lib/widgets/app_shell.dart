@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:desktop_drop/desktop_drop.dart';
@@ -98,6 +99,7 @@ import 'dialogs/new_deck_dialog.dart';
 import 'dialogs/open_presentation_dialog.dart';
 import 'dialogs/package_encrypt_dialog.dart';
 import 'dialogs/package_password_dialog.dart';
+import 'dialogs/proxy_fallback_dialog.dart';
 import 'dialogs/presentation_info_dialog.dart';
 import 'reader/document_reader_screen.dart';
 import 'shell/app_menu_bar.dart';
@@ -179,6 +181,14 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
         .packagePasswordResolver = ({required bool retry}) async {
       if (!mounted) return null;
       return PackagePasswordDialog.show(context, retry: retry);
+    };
+    // Idem voor de vraag of de web-import de URL aan het eigen fetch-hulppunt
+    // mag doorgeven. Zonder deze registratie vervalt die terugval.
+    ref
+        .read(tabsProvider.notifier)
+        .proxyFallbackConfirm = ({required String host}) async {
+      if (!mounted) return false;
+      return ProxyFallbackDialog.show(context, host: host);
     };
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _maybeRestore();

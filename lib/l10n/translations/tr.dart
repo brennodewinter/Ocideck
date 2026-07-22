@@ -2795,6 +2795,48 @@ const _dutchSourceAddTr = <String, String>{
   'Motivering van een bevestiging': 'Bir doğrulamanın gerekçesi',
   'Tabel koprij, kolom {kolom}': 'Tablo başlık satırı, sütun {kolom}',
   'Tabel rij {rij}, kolom {kolom}': 'Tablo satır {rij}, sütun {kolom}',
+  'Via deze website ophalen?': 'Bu site üzerinden alınsın mı?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Bu sunumun sunucusu, tarayıcının dosyayı doğrudan okumasına izin vermedi. OciDeck adresi, kendisinin geldiği siteye iletebilir ve dosyayı o site alır. Böylece o site adresin tamamını görür — bağlantıda bir anahtar veya kod varsa o site onu da görür.',
+  'In de browser kan dit niet worden bewaard': 'Tarayıcıda bu kaydedilemez',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Tarayıcının bir bilgisayardaki gibi anahtar zinciri yoktur: OciDeck\'in buraya kaydedeceği şeyi bu sayfadaki herhangi bir betik okuyabilir. Masaüstü sürümünü kullanın — orada sır gerçekten işletim sisteminin anahtar zincirine gider.',
+  'Licenties van derden': 'Üçüncü taraf lisansları',
+  'Alle licentieteksten tonen': 'Tüm lisans metinlerini göster',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck\'in kendisi EUPL-1.2 ile lisanslıdır. Bunun yanında üçüncü taraf yazılımları da paketler: Dart ve Flutter paketleri, birlikte gelen iki eklenti, dört yazı tipi ailesi, gizlilik denetiminin yüz modeli ve HTML dışa aktarımıyla birlikte giden JavaScript. Her biri kendi lisansını korur.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Bu dosya üçüncü taraf yazılımı ve bazen bir yazı tipi içerir. Bunlara ait tam lisans metinleri aşağıdadır; bu dosyayı iletirken onları da birlikte iletin.',
+  'Sporen op dit apparaat': 'Bu cihazdaki izler',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'OciDeck, ayarlarınızın yanı sıra bir son kullanılanlar listesi de tutar ve bir çökme olursa sunumunuzun tüm içeriğini barındıran bir kurtarma dosyası bırakır. Bunların hiçbiri bu cihazdan çıkmaz, ama burada durur — düz metin olarak, yalnızca bu işletim sistemindeki hesabınızla korunarak.',
+  'Recent geopende presentaties': 'Son açılan sunumlar',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Liste, açılmış olan her sunumun tam yolunu ve sınıflandırmasını saklar — birlikte, neyin üzerinde ve kimin için çalıştığınıza dair bir bilgi.',
+  'Recente lijst wissen': 'Son kullanılanlar listesini sil',
+  'De recente lijst was al leeg.': 'Son kullanılanlar listesi zaten boştu.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'kayıt son kullanılanlar listesinden silindi.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Çökme kurtarma dosyaları, sunumlarınızın tüm içeriğini düz metin olarak barındırır. 7 gün sonra otomatik olarak temizlenir, düzgün bir kapanışta ise hemen.',
+  'Alles terugzetten': 'Her şeyi sıfırla',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Tüm ayarları, son kullanılanlar listesini, kurtarma dosyalarını, git çalışma kopyalarını ve anahtar zincirinizdeki parolaları siler. Sunumlarınız kalır: onlar sizindir, OciDeck\'in değil.',
+  'Zet alles terug naar de begintoestand': 'Her şeyi ilk hâline sıfırla',
+  'Alles terugzetten naar de begintoestand?':
+      'Her şey ilk hâline sıfırlansın mı?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Ayarlarınız, son kullanılanlar listesi, kurtarma dosyaları, git çalışma kopyaları ve kayıtlı parolalar silinecek. Bu geri alınamaz. Sunumlarınız kalır.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'değişiklik henüz bir git sunucusuna gönderilmedi ve yalnızca bu cihazda var. Onlar da gider.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Her şey ilk hâline sıfırlandı.',
+  'Terugzetten is niet gelukt.': 'Sıfırlama başarısız oldu.',
+  'Er wacht nog werk dat niet verstuurd is': 'Gönderilmemiş iş bekliyor',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Bu git bağlantısında sunucuya henüz gönderilmemiş değişiklikler var. Bağlantıyı kaldırırsanız bu cihazdaki çalışma kopyası da gider — ve bu iş hiçbir yerde kalmaz.',
+  'Verbinding behouden': 'Bağlantıyı koru',
+  'Toch verwijderen': 'Yine de kaldır',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Tamam',

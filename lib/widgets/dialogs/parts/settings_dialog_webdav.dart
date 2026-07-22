@@ -109,7 +109,7 @@ extension _SettingsWebdav on _SettingsDialogState {
           l10n.d('Gebruikersnaam'),
           icon: Icons.person_outline,
         ),
-        _webdavField(
+        _secretField(
           form.password.field,
           // Het app-wachtwoord is een Nextcloud-voorziening; bij een andere
           // server zou die tip de gebruiker naar een niet-bestaand scherm sturen.
@@ -117,8 +117,6 @@ extension _SettingsWebdav on _SettingsDialogState {
           hint: isNextcloud
               ? l10n.d('Maak hiervoor een app-wachtwoord aan in Nextcloud')
               : null,
-          obscure: true,
-          icon: Icons.key_outlined,
         ),
         _webdavField(
           form.root,

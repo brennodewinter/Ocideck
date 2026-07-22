@@ -66,6 +66,7 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
   edit. While unsaved work is open the browser also asks for confirmation before
   the tab closes; the wording of that question is the browser's own and cannot be
   set by the app. On desktop the window asks the same thing itself.
+- **Traces on this device**: *Settings → Beveiliging → Sporen op dit apparaat* shows what OciDeck keeps locally and lets you remove it: the recent list (which stores the full path and the TLP classification of every deck you opened), the crash-recovery snapshots, and a full reset that also clears the git working copies and the passwords in your keychain. Your presentations are never touched. Removing a git connection now takes its working copy with it — unless commits are still waiting to be pushed, in which case OciDeck names them and asks first.
 
 ## Command palette
 
@@ -1949,6 +1950,18 @@ key), and written to HTML `<meta name="classification">` and `<meta name="tlp">`
 HTML exports also show a fixed top banner with the TLP label when classified.
 These properties are for discovery and handling downstream — they do not replace
 the visible banner, badge, and optional watermark on the slides themselves.
+
+**Third-party notices in an HTML export.** An HTML export is a single file that
+carries five JavaScript libraries and, when your theme uses the bundled EB
+Garamond, the font itself. Forwarding that file makes *you* the distributing
+party, so the notices travel inside it: every inlined library opens with a
+licence line, and the very bottom of the file holds a collapsed **Licenties van
+derden** block with the full licence texts. It is collapsed by default and is
+not printed, so it never shows up on a slide. Leave it in place when you pass
+the file on — that is what lets you pass it on.
+
+The same texts, plus the licence of every package OciDeck is built from, are in
+the app under **Settings → Over OciDeck → Alle licentieteksten tonen**.
 
 **Slide quality at export.** When the deck has open quality issues, the export
 dialog shows a summary banner with a link to the full issue list. Depending on
