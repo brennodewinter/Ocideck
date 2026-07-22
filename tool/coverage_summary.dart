@@ -207,7 +207,13 @@ const int perFileFloorPercent = 20;
 /// `shell_actions_s3`, `shell_actions` and `shell_actions_connections` went
 /// from decoration to tested, and only two files still run not a single line.
 /// What is left is mostly the git dialogs and a handful of platform halves.
-const int filesBelowFloorBudget = 14;
+///
+/// 15 and not 14: the shell work brought the count to 14, and rebasing onto a
+/// main that had moved on by 76 commits added `widgets/mermaid_render_host.dart`
+/// (31 lines, 12.9%). That is a shared WebView host — the kind of component a
+/// headless test cannot drive — so it is counted rather than papered over. The
+/// step in this change is still 21 -> 15.
+const int filesBelowFloorBudget = 15;
 
 /// Slack on the downward ratchet. Coverage of a file that sits near the floor
 /// can wobble by one when an optional dependency (the native OpenCV library
