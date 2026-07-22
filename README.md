@@ -15,6 +15,10 @@ wrangling required. Compose decks from typed slide templates, preview them live,
 present them fullscreen across two screens, and export to Marp Markdown, PDF,
 PPTX and offline HTML.
 
+![The OciDeck editor: the slide strip on the left, a per-type editor in the
+middle, and a thumbnail preview — here a penetration-test report deck with a
+finding slide open.](docs/images/editor.png)
+
 And because a deck is something you hand to other people, OciDeck reads it back
 to you before you do: it flags the personal data it can recognise, and — if you
 ask it to — removes that data from everything you show and export, while your
@@ -53,6 +57,18 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 
 The full account of each — every slide type, every option, and the limits — is
 in the [User Guide](docs/USER_GUIDE.md).
+
+Three of those, seen rather than described:
+
+| Privacy scan (OciWacht) | Export for a recipient |
+|---|---|
+| ![The quality panel showing two privacy findings; the matched value is shown truncated — "IP-adres (1…0)", "telefoonnummer (+…8)" — never in full, the same way the app treats it everywhere.](docs/images/privacy-panel.png) | ![The export dialog with the audience choice: Full for the client or auditor, Redacted for a wider circle.](docs/images/export-dialog.png) |
+
+![The presenter view: the current slide, the next one, your notes and a rehearsal clock — on the screen the audience never sees.](docs/images/presenter.png)
+
+*(These are the desktop build. The web build in your browser runs the same
+renderer; a few things are desktop-only — video, the CVE lookup, the local CVE
+database.)*
 
 ### Specialist modules (off by default)
 
