@@ -1782,6 +1782,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Teams klijent za goste (dizajn)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: koliko se široko ovaj materijal smije dijeliti?',
   'Wat betekenen deze niveaus?': 'Što znače ove razine?',

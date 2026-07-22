@@ -1811,6 +1811,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Cliant aoi Teams (dearadh)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: cé chomh forleathan is féidir an t-ábhar seo a roinnt?',
   'Wat betekenen deze niveaus?': 'Cad is brí leis na leibhéil seo?',

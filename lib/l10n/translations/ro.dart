@@ -1793,6 +1793,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Client Teams pentru invitați (design)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: cât de larg poate fi distribuit acest material?',
   'Wat betekenen deze niveaus?': 'Ce înseamnă aceste niveluri?',

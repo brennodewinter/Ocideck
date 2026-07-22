@@ -56,11 +56,12 @@ documentation. Start here and jump to what you need.
 Design proposals, rationale and open work — historical or forward-looking, **not**
 current-state references. Where one disagrees with the code, the code wins. Each
 of these carries its own status banner saying how far it has been overtaken;
-read that banner first. All nine ship with the app.
+read that banner first. All ten ship with the app.
 
 | Document | What it is |
 |---|---|
 | [COLLABORATION.md](design/COLLABORATION.md) | Design proposal, unbuilt: real-time collaboration, presenting and calls. |
+| [TEAMS_GUEST_CLIENT.md](design/TEAMS_GUEST_CLIENT.md) | Design proposal, unbuilt: join supported Teams work/school meetings through an OciDeck web/PWA guest client without a Microsoft account. |
 | [GIT_STORAGE.md](design/GIT_STORAGE.md) | Design of the git storage plane; phases 0–6 have landed, what remains is verification. |
 | [PENTEST_MIAUW.md](design/PENTEST_MIAUW.md) | The original design for the MIAUW pentest module, which ships. Parts are contradicted by the code. |
 | [AI_ASSIST.md](design/AI_ASSIST.md) | The optional AI assistance design; phases 0–3 are built, phase 4 (MCP) is not. |
@@ -70,7 +71,7 @@ read that banner first. All nine ship with the app.
 | [VERIFICATION.md](design/VERIFICATION.md) | A worklist, in Dutch: what has been built and passes its own tests but has never met a real server, a second operating system or a real report. |
 | [LEXICON_LICENTIENAVRAAG.md](design/LEXICON_LICENTIENAVRAAG.md) | A licensing dossier, in Dutch: three lexicon sources that would enrich the privacy check, and why none of them can be bundled yet. |
 
-*(Corrected 2026-07-22: this list named seven of the nine documents in
+*(Corrected 2026-07-22: this list named seven of the then-nine documents in
 `design/`; `VERIFICATION.md` and `LEXICON_LICENTIENAVRAAG.md` were missing while
 both are bundled as assets in `pubspec.yaml` and readable in the app. No test
 compares the two lists, so nothing caught it.)*

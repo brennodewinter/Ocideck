@@ -1767,6 +1767,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Teamsi külalisklient (kavand)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kui laialt tohib seda materjali jagada?',
   'Wat betekenen deze niveaus?': 'Mida need tasemed tähendavad?',

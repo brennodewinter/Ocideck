@@ -735,6 +735,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Teams-gastclient (ontwerp)': 'Teams-gastclient (ûntwerp)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: hoe breed mei dit materiaal dield wurde?',
   'Wat betekenen deze niveaus?': 'Wat betsjutte dizze nivo\'s?',

@@ -1776,6 +1776,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Teams-vierasohjelma (suunnitelma)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kuinka laajasti tätä aineistoa saa jakaa?',
   'Wat betekenen deze niveaus?': 'Mitä nämä tasot tarkoittavat?',

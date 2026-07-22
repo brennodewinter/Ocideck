@@ -1798,6 +1798,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Teams-gastclient (ontwerp)': 'Klijent mistieden ta\' Teams (disinn)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kemm wiesa\' jista\' jinqasam dan il-materjal?',
   'Wat betekenen deze niveaus?': 'Xi jfissru dawn il-livelli?',
