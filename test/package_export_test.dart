@@ -269,6 +269,39 @@ void main() {
         );
         expect(outcome.mdPath, isNull);
       });
+
+      test('een aangetast pakket heet aangetast, en de vraag om het wachtwoord '
+          'wordt niet eindeloos herhaald', () async {
+        // Hier zat een echte vastloper. `canDecodePackage` faalt zowel bij een
+        // fout wachtwoord als bij een aangetast pakket — WinZip-AES controleert
+        // een MAC — en de lus vroeg daarom eindeloos om een nieuwe zin. Een
+        // aanroeper die (zoals hierboven) altijd dezelfde zin teruggeeft, liet
+        // de poort meer dan twintig minuten op één kern draaien.
+        final tampered = tamperFirstMember(twoMemberPackage());
+        final out = Directory(p.join(tmp.path, 'out_tampered_reason'))
+          ..createSync();
+
+        var gevraagd = 0;
+        final outcome = await file.importPackageBytesDetailed(
+          tampered,
+          out.path,
+          onPassword: ({required bool retry}) async {
+            gevraagd++;
+            return 'pw';
+          },
+        );
+
+        expect(
+          outcome.failure,
+          ImportFailure.corrupt,
+          reason: 'niet "verkeerd wachtwoord": de zin klopte, het pakket niet',
+        );
+        expect(
+          gevraagd,
+          lessThanOrEqualTo(2),
+          reason: 'dezelfde zin tweemaal aanbieden kan niet alsnog lukken',
+        );
+      });
     });
   });
 
