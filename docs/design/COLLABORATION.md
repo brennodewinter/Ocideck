@@ -1,6 +1,6 @@
 # OciDeck — Real-time Collaboration, Presenting & Calls (Design)
 
-> **Status:** design proposal — unbuilt · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** design proposal — unbuilt · **Status last reviewed:** 2026-07-23 · **Published by:** Stichting LibreKAT
 
 > **A design proposal — not yet implemented.**
 > This document describes a *future* capability and the architecture chosen for
@@ -24,11 +24,13 @@
 > *file = truth*, and neither depends on the other landing.
 
 > Interoperability sibling: [`TEAMS_GUEST_CLIENT.md`](TEAMS_GUEST_CLIENT.md)
-> defines an optional ACS-backed guest client for joining supported Microsoft
-> Teams work/school meetings without a Microsoft account. That path is operated
-> through Microsoft infrastructure, cannot join E2EE Teams meetings and is
-> deliberately **outside** the `CollabTransport`/Matrix session defined here. It
-> does not relax this document's P4 E2EE invariant.
+> defines the first concrete external-meeting adapter: an optional ACS-backed
+> guest client for joining supported Microsoft Teams work/school meetings
+> without a Microsoft account. Section 7.1 generalises that seam for Webex,
+> Zoom, Jitsi, BigBlueButton, Nextcloud Talk and smaller/self-hosted systems.
+> External meeting adapters remain deliberately **outside** the
+> `CollabTransport`/Matrix session defined here and do not relax this document's
+> P4 E2EE invariant.
 
 ---
 
@@ -341,6 +343,191 @@ Jitsi's UI (contradicts the "presentation-central, own interface" goal) or
 speaking lib-jitsi-meet signalling from Flutter (significant work). Hence the SFU
 is abstracted behind the transport, with LiveKit/MatrixRTC as the cleaner target.
 
+### 7.1 External meeting-provider adapters
+
+OciDeck-owned collaboration and joining somebody else's meeting are related
+product experiences but different trust and protocol domains:
+
+- `CollabTransport` carries OciDeck deck operations, authority, locks and
+  presenter state. Its P4 E2EE invariant applies.
+- `MeetingProvider` joins an external or separately operated conferencing
+  system. That provider controls identity, admission, signalling, media,
+  recording and feature availability. OciDeck must describe those boundaries
+  truthfully and must not inherit an E2EE claim from the collaboration session.
+
+There is no universal "WebRTC meeting link". WebRTC standardises media building
+blocks, not each service's signalling, authentication, lobby, consent or roster
+protocol. Every supported family therefore needs an explicit adapter. Unknown
+links go to a deliberate browser fallback; they are never probed against every
+configured provider.
+
+#### 7.1.1 Shared contract
+
+Add the provider-neutral domain under `lib/meetings/`; keep vendor SDK objects in
+`lib/meetings/providers/<provider>/` or a local JavaScript bridge. The interface
+is intentionally separate from `CollabTransport`:
+
+```dart
+abstract interface class MeetingProvider {
+  String get id;
+  Set<String> get trustedHosts;
+
+  /// Pure local recognition. Must not make a network request.
+  MeetingLinkMatch? match(Uri invitation);
+
+  /// Resolves capabilities after disclosure and explicit user action.
+  Future<MeetingPreflight> preflight(MeetingLinkMatch link);
+
+  /// Creates one root-scoped session; never a deck/tab-scoped provider.
+  Future<MeetingSession> join(MeetingJoinRequest request);
+}
+
+abstract interface class MeetingSession {
+  MeetingProviderId get provider;
+  Stream<MeetingEvent> get events;
+  MeetingCapabilities get capabilities;
+
+  Future<void> setMicrophone(bool enabled);
+  Future<void> setCamera(bool enabled);
+  Future<void> startScreenShare();
+  Future<void> stopScreenShare();
+  Future<void> leave();
+}
+```
+
+`MeetingPreflight` returns typed support and policy facts, never a boolean:
+
+- `nativeClient`, `embeddedOfficialClient`, `redirectOnly` or `unsupported`;
+- account/guest-token requirements and the identity label shown to others;
+- lobby, password, registration and host-admission requirements;
+- available audio, video, roster, screen-share, chat and consent capabilities;
+- provider/broker origins that will receive traffic;
+- known E2EE status and an explicit `unknown` value; and
+- a stable failure reason such as `guestDisabled`, `accountRequired`,
+  `appApprovalRequired`, `meetingTypeUnsupported` or `providerUnavailable`.
+
+The UI renders controls only from `MeetingCapabilities`. It must not imitate a
+control that an adapter cannot perform.
+
+#### 7.1.2 Provider register
+
+The register separates **joining an existing invitation** from **using a media
+backend for an OciDeck-created room**. A check mark in one column says nothing
+about the other.
+
+| Provider/family | Existing invitation through OciDeck | OciDeck-created room | Initial strategy | Design status |
+|---|---|---|---|---|
+| Microsoft Teams work/school | Supported target through ACS, subject to tenant and meeting policy | No | Dedicated ACS bridge and least-privilege token broker | Detailed sibling design |
+| Cisco Webex | Candidate through the Meetings Web SDK and Service App guest identity | Possible only within Webex's licensed service model | Browser SDK bridge; server-issued guest token; capability-gated UI | Spike required |
+| Zoom Meetings | Candidate through Meeting SDK; external-account meetings require Zoom review and attributed authorisation under current policy | Possible within the app/service account model | Web Meeting SDK plus signature service; do not promise arbitrary links before approval | Policy spike required |
+| Jitsi Meet | Strong candidate for public or cooperating deployments | Yes, public, managed or self-hosted | Official IFrame API for the first slice; evaluate `lib-jitsi-meet` only for a fully native OciDeck layout | First proof of concept |
+| BigBlueButton | Candidate when the operator supplies a valid join flow; arbitrary third-party server secrets are unavailable | Yes, on a cooperating/self-hosted server | Signed server-side join URL; redirect/embed official HTML5 client before custom media work | Spike required |
+| Nextcloud Talk | Candidate for public guest conversations and cooperating instances | Yes, on a configured Nextcloud instance | Talk participant/signalling APIs or a constrained official-client embed | Research |
+| Element Call / MatrixRTC | Candidate inside a configured Matrix ecosystem; guest access depends on homeserver deployment | Yes | Prefer the MatrixRTC/LiveKit path already aligned with this design | Research after Matrix phases |
+| Google Meet | No supported production OciDeck client today; official-client redirect only | No | Revisit when the Meet Media API is generally available and suitable for interactive clients | Watch list |
+| Whereby | Candidate for rooms created/configured through an embedding customer | Yes, within that customer account | Official embedded experience or browser SDK | Research |
+| RingCentral Video, GoTo Meeting, Dialpad Meetings, Zoho Meeting | Link recognition and official-browser fallback until an approved interactive SDK path is proven | Provider-specific | Never automate or reverse-engineer the vendor web client | Watch list |
+| Daily | Not a generic adapter for unrelated meeting links | Yes | `daily-js` call object for custom UI or Daily Prebuilt for an embedded slice | Backend candidate |
+| LiveKit | Not a public meeting-link ecosystem | Yes | Native Flutter SDK with backend-issued room JWT | Preferred custom SFU candidate |
+| OpenVidu | Only for an OpenVidu deployment that OciDeck is configured to trust | Yes | Embedded Meet component first; client SDK if custom UI is justified | Backend candidate |
+| Janus VideoRoom | Only for a known Janus deployment and room contract | Yes | Build signalling/UI around the VideoRoom plug-in | Advanced/backend candidate |
+| Galene | Candidate for a known Galene group URL | Yes | JavaScript/TypeScript client library or documented protocol | Lightweight self-hosted candidate |
+| MiroTalk and similar packaged WebRTC apps | Only after their stable embed/auth contract is verified | Yes, by operating/forking the package | Treat as an application integration, not a generic WebRTC adapter | Watch list |
+| mediasoup or Pion building blocks | No: these are libraries, not invitation ecosystems | Yes, with a new OciDeck service and protocol | Out of scope until operating a conferencing backend is approved | Not planned |
+| SIP/H.323 | Only when the invitation exposes a dialable URI and a configured gateway accepts it | Via gateway | Separate gateway adapter; never infer dial strings from arbitrary URLs | Future research |
+
+The table records architectural fit, not a promise that the current code joins
+any of these services. Before implementation, verify current vendor terms, SDK
+support, browser support, licensing, branding requirements and guest policy.
+
+#### 7.1.3 Resolution and safe fallback
+
+`MeetingLinkResolver` owns a versioned, testable list of exact host and path
+rules. Resolution follows this order:
+
+1. parse locally and reject non-HTTPS URLs except explicitly configured local
+   development endpoints;
+2. strip fragments and known tracking parameters before storing/displaying the
+   link, without changing provider-required opaque values;
+3. select at most one adapter using an exact or suffix-safe hostname match;
+4. show the provider, network destinations, identity type and privacy boundary;
+5. perform `preflight()` only after explicit user action;
+6. join using the provider adapter, or offer the official browser client when
+   the adapter reports `redirectOnly`; and
+7. leave unknown links unopened until the user confirms the external origin.
+
+Fallback means opening a top-level official browser page. It never means DOM
+automation, credential interception, an unapproved iframe, reverse engineering
+of private signalling, or disguising OciDeck as the provider's client.
+
+Meeting links are bearer-like confidential data. They remain device-local unless
+a documented provider call requires them. A token/signature broker receives
+only the minimum fields required by its provider; where possible, copy the Teams
+design's invariant that the broker never receives the invitation URL, display
+name, deck or device labels.
+
+#### 7.1.4 Provider lifecycle and release gates
+
+Every register entry has one of four machine-readable release states:
+
+1. `research` — documentation review only; no user-facing join claim;
+2. `spike` — isolated prototype against sandbox/test meetings;
+3. `experimental` — opt-in UI, pinned SDK, known-limitations page and dated
+   real-service evidence; or
+4. `supported` — maintained browser/platform matrix, operational owner,
+   accessibility/privacy/security review and regression fixtures.
+
+Promotion to `supported` requires all of the following:
+
+- invitation fixtures contain synthetic identifiers and cover malformed,
+  deceptive and unsupported URLs;
+- guest, account-required, lobby, denied, ended and reconnecting paths have
+  typed outcomes;
+- the adapter has no background network activity before disclosure and consent;
+- credentials and signing secrets stay in an appropriate backend/secret store;
+- media, listeners, renderers and temporary identities are disposed on leave;
+- recording/transcription indicators and provider consent flows are preserved;
+- the audience window cannot expose presenter notes, diagnostics or private
+  collaboration state;
+- keyboard, screen-reader, 200% text and reduced-motion checks pass;
+- licences, SDK integrity, CSP/Permissions-Policy and SBOM entries are current;
+- provider naming does not imply affiliation or endorsement; and
+- a dated real meeting on every promised browser/platform has passed.
+
+#### 7.1.5 Delivery order
+
+1. Build `MeetingProvider`, `MeetingSession`, `MeetingLinkResolver`, typed events
+   and a fake adapter without adding an external SDK.
+2. Add **Jitsi** as the smallest end-to-end proof through its official IFrame
+   API. This validates link resolution, consent, root-scoped lifetime and common
+   controls quickly; it does not yet prove a custom remote-video layout.
+3. Implement the already-specified **Teams** vertical slice.
+4. Spike **Webex**, including Service App guest issuance and ordinary
+   licensed-host meetings.
+5. Spike **BigBlueButton** and **Nextcloud Talk** with cooperating self-hosted
+   servers; record where only an official-client embed/redirect is supportable.
+6. Pursue **Zoom** only after external-meeting app review and identity policy are
+   resolved; do not build a demo that works only inside the developer account
+   and market it as general support.
+7. Reuse **MatrixRTC/LiveKit** for OciDeck-owned rooms if the Matrix media phases
+   land. Evaluate Daily/OpenVidu/Galene/Janus only against a concrete deployment
+   need, not merely to grow the provider count.
+
+Primary implementation references (re-check at spike time):
+
+- Jitsi IFrame API: <https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe/>
+- Webex Meetings Web SDK: <https://developer.webex.com/meeting/docs/sdks/webex-meetings-sdk-web-join-a-meeting>
+- Webex Service App guests: <https://developer.webex.com/create/docs/sa-guest-management>
+- Zoom Meeting SDK authorisation: <https://developers.zoom.us/docs/meeting-sdk/auth/>
+- BigBlueButton API: <https://docs.bigbluebutton.org/development/api/>
+- Nextcloud Talk participant API: <https://nextcloud-talk.readthedocs.io/en/stable/participant/>
+- MatrixRTC configuration: <https://docs.element.io/latest/element-server-suite-pro/configuring-components/matrix-rtc/configuring/>
+- LiveKit access tokens and grants: <https://docs.livekit.io/frontends/reference/tokens-grants/>
+- Daily call client: <https://docs.daily.co/reference/daily-js/daily-call-client>
+- OpenVidu embedded Meet: <https://openvidu.io/latest/meet/embedded/step-by-step-guide/>
+- Janus VideoRoom: <https://janus.conf.meetecho.com/docs/videoroom.html>
+- Galene client guide: <https://galene.org/galene-client.html>
+
 ---
 
 ## 8. Account onboarding — make getting an account easy (requirement)
@@ -460,6 +647,14 @@ confidential webinars; optional WHIP/WHEP/HLS broadcast.
 Q&A, polls, richer chat (all data-plane events); recording via SFU egress;
 federation/bridges so external systems interoperate (requirement 4 in full).
 
+The external `MeetingProvider` track in §7.1 is deliberately orthogonal to
+Phases 0–5. Its provider-neutral foundation can start beside Phase 0, and each
+adapter advances through `research` → `spike` → `experimental` → `supported`
+independently. Joining a Jitsi or Teams invitation does not imply that its room
+has become an OciDeck/Matrix collaboration session; deck co-authoring and
+presenter control cross that boundary only through an explicitly designed,
+consented bridge.
+
 ### Coverage against the four goals
 
 | | Calls (1) | Data channel / co-author / chat (2) | Teaching / webinars (3) | Interop (4) | Infra outside OciDeck |
@@ -506,6 +701,16 @@ introduces an infrastructure dependency (an SFU, still not run by OciDeck).
 - `lib/collab/matrix_transport.dart` — Matrix implementation (Phase 1).
 - `lib/state/collab_session_provider.dart` — Riverpod wiring.
 - Media (Phase 3+): `lib/collab/media/…` (WebRTC/SFU adapters).
+- `lib/meetings/meeting_provider.dart` — external-provider contract, preflight,
+  capabilities, typed events and failure taxonomy (§7.1).
+- `lib/meetings/meeting_link_resolver.dart` — local allowlisted URL recognition;
+  no speculative network probes.
+- `lib/meetings/providers/<provider>/…` — one isolated adapter per documented
+  provider contract; no vendor SDK objects outside its adapter/bridge.
+- `lib/state/meeting_session_provider.dart` — root-scoped meeting lifetime,
+  deliberately outside every deck-tab `ProviderScope` override.
+- `web/meeting_bridges/…` — pinned JavaScript SDK bridges for providers whose
+  supported client surface is browser-only.
 
 **Dependencies to add (proposed, none present today):**
 
@@ -542,7 +747,8 @@ non-NL languages (single string literal per `.d`); update `USER_GUIDE.md` /
 4. **Presence granularity** — expose "who is viewing which slide" to all, or only
    to the owner?
 5. **Federation reach (Phase 5)** — which external systems are first-class bridge
-   targets for requirement 4?
+   targets for Matrix data-plane interoperability? This is distinct from the
+   external meeting-client adapters in §7.1.
 6. **Web parity** — how much of media (Phase 3–4) do we commit to on the web
    target given CSP and `flutter_webrtc` web maturity?
 
@@ -557,4 +763,8 @@ saved file remains the single source of truth while the room is just a
 disposable, replayable sync channel. The data plane — co-authoring, chat,
 presenter control, all encrypted — is the high-value, low-infra core; live audio
 and video are a later, optional media plane that only leans on an SFU (still run
-by someone else) when an audience is large.
+by someone else) when an audience is large. A separate `MeetingProvider` seam
+lets OciDeck recognise and, where an official supported route exists, join
+Teams, Webex, Zoom, Jitsi, BigBlueButton, Nextcloud Talk and smaller/self-hosted
+systems without pretending that their signalling, identity, consent or E2EE
+properties are interchangeable.

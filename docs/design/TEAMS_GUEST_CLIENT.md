@@ -1,6 +1,6 @@
 # OciDeck — Microsoft Teams Guest Client (Design)
 
-> **Status:** design proposal — unbuilt · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** design proposal — unbuilt · **Status last reviewed:** 2026-07-23 · **Published by:** Stichting LibreKAT
 
 > **A design proposal, not current behaviour.**
 > OciDeck cannot currently join a Microsoft Teams meeting. This document defines
@@ -16,10 +16,13 @@
 > compatibility.
 
 Sibling design: [`COLLABORATION.md`](COLLABORATION.md) defines OciDeck-owned,
-end-to-end encrypted collaboration over Matrix/WebRTC. This document defines a
-separate, explicitly Microsoft-operated interoperability path. A Teams guest
-session is **not** a `CollabTransport`, does not weaken the collaboration design's
-E2EE invariant and must never be presented as providing OciDeck E2EE.
+end-to-end encrypted collaboration over Matrix/WebRTC and, in §7.1, the common
+`MeetingProvider` boundary and register for Teams, Webex, Zoom, Jitsi,
+BigBlueButton, Nextcloud Talk and smaller/self-hosted systems. This document is
+the first provider-specific design: a separate, explicitly Microsoft-operated
+interoperability path. A Teams guest session is **not** a `CollabTransport`, does
+not weaken the collaboration design's E2EE invariant and must never be presented
+as providing OciDeck E2EE.
 
 ---
 
