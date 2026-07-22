@@ -101,7 +101,7 @@ void main() {
 
     test('het volledige profiel houdt de melding vast', () {
       final audience = PrivacyProjection.forAudience(bron());
-      final meta = ExportDocumentMetadata.fromDeck(audience.deck);
+      final meta = ExportDocumentMetadata.fromDeck(audience);
       expect(meta.hasUnreviewedAi, isTrue);
     });
 
@@ -111,7 +111,7 @@ void main() {
         profile: PrivacyExportProfile.redacted,
       );
       expect(audience.hasRedactions, isTrue);
-      final meta = ExportDocumentMetadata.fromDeck(audience.deck);
+      final meta = ExportDocumentMetadata.fromDeck(audience);
       expect(
         meta.hasUnreviewedAi,
         isTrue,

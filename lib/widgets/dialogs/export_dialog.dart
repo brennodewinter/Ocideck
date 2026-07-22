@@ -620,9 +620,7 @@ class _ExportDialogState extends State<ExportDialog> {
   /// drukt, om dezelfde reden als bij `-geredigeerd`: een verandering aan de
   /// bestandsnaam die je pas achteraf ziet, is een verrassing.
   Widget _aiDraftNotice(AppLocalizations l10n) {
-    if (!ExportDocumentMetadata.fromDeck(
-      _bundle.audience.deck,
-    ).hasUnreviewedAi) {
+    if (!ExportDocumentMetadata.fromDeck(_bundle.audience).hasUnreviewedAi) {
       return const SizedBox.shrink();
     }
     return Padding(
