@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -172,4 +174,67 @@ void main() {
 
     expect(offenders, isNotEmpty);
   });
+
+  // ── De bronscan (#586) ────────────────────────────────────────────────────
+  //
+  // De tests hierboven pompen zes editors. Er zijn er 26, plus 41 dialogen,
+  // plus de presentatiemodus — die allemaal pompen is duur, en tot het zover is
+  // liet deze poort 23 knoppen door met precies de fout die hij bewaakt.
+  //
+  // Het waren er 23 van één soort: `Tooltip(message: …, child: IconButton(…))`.
+  // Dat lést als een knop met een naam en is het niet — een `Tooltip` eromheen
+  // zet géén semantieklabel op de knop, alleen `IconButton(tooltip:)` doet dat.
+  // Voor een schermlezer heet de uitknop van een presentatie dan "knop".
+  //
+  // Eén patroon, mechanisch te herkennen, dus een bronscan is hier goedkoper
+  // dan 67 widgettests en vangt bovendien de plekken die niemand ooit pompt.
+  test('geen enkele IconButton zit in een kale Tooltip', () {
+    final offenders = <String>[];
+    for (final file in Directory('lib').listSync(recursive: true)) {
+      if (file is! File || !file.path.endsWith('.dart')) continue;
+      final source = file.readAsStringSync();
+      for (final match in RegExp(r'\bTooltip\(').allMatches(source)) {
+        final close = _matchingParen(source, match.end - 1);
+        if (close < 0) continue;
+        final body = source.substring(match.end, close);
+        if (!RegExp(r'child:\s*IconButton\(').hasMatch(body)) continue;
+        if (RegExp(r'tooltip:').hasMatch(body)) continue;
+        final line =
+            '\n'.allMatches(source.substring(0, match.start)).length + 1;
+        offenders.add('${file.path}:$line');
+      }
+    }
+    expect(
+      offenders,
+      isEmpty,
+      reason:
+          'een Tooltip om een IconButton geeft de knop géén toegankelijke '
+          'naam; zet de tekst in IconButton(tooltip: …) — dat doet allebei',
+    );
+  });
+}
+
+/// De index van de `)` die hoort bij de `(` op [open], met aanhalingstekens
+/// overgeslagen zodat een haakje in een tekst niet meetelt.
+int _matchingParen(String source, int open) {
+  var depth = 0;
+  var i = open;
+  while (i < source.length) {
+    final c = source[i];
+    if (c == "'" || c == '"') {
+      final quote = c;
+      i++;
+      while (i < source.length && source[i] != quote) {
+        if (source[i] == r'\') i++;
+        i++;
+      }
+    } else if (c == '(') {
+      depth++;
+    } else if (c == ')') {
+      depth--;
+      if (depth == 0) return i;
+    }
+    i++;
+  }
+  return -1;
 }

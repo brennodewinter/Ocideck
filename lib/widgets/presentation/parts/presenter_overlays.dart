@@ -270,23 +270,19 @@ extension _PresenterOverlays on _FullscreenPresenterState {
               Expanded(
                 child: _metric(l10n.d('Verstreken'), _fmtElapsed(elapsed)),
               ),
-              Tooltip(
-                message: l10n.d('Doeltijd / aftellen (K)'),
-                child: IconButton(
-                  onPressed: _beginTargetInput,
-                  icon: const Icon(Icons.timer_outlined, size: 18),
-                  color: Colors.white38,
-                  visualDensity: VisualDensity.compact,
-                ),
+              IconButton(
+                tooltip: l10n.d('Doeltijd / aftellen (K)'),
+                onPressed: _beginTargetInput,
+                icon: const Icon(Icons.timer_outlined, size: 18),
+                color: Colors.white38,
+                visualDensity: VisualDensity.compact,
               ),
-              Tooltip(
-                message: l10n.d('Tijd resetten (R)'),
-                child: IconButton(
-                  onPressed: _resetTimer,
-                  icon: const Icon(Icons.restart_alt, size: 18),
-                  color: Colors.white38,
-                  visualDensity: VisualDensity.compact,
-                ),
+              IconButton(
+                tooltip: l10n.d('Tijd resetten (R)'),
+                onPressed: _resetTimer,
+                icon: const Icon(Icons.restart_alt, size: 18),
+                color: Colors.white38,
+                visualDensity: VisualDensity.compact,
               ),
               const SizedBox(width: 4),
               _metric(
@@ -384,14 +380,12 @@ extension _PresenterOverlays on _FullscreenPresenterState {
           ),
         ),
         const SizedBox(width: 12),
-        Tooltip(
-          message: l10n.d('Afsluiten (Escape)'),
-          child: IconButton(
-            onPressed: _exit,
-            icon: const Icon(Icons.close),
-            color: Colors.white,
-            style: IconButton.styleFrom(backgroundColor: Colors.black45),
-          ),
+        IconButton(
+          tooltip: l10n.d('Afsluiten (Escape)'),
+          onPressed: _exit,
+          icon: const Icon(Icons.close),
+          color: Colors.white,
+          style: IconButton.styleFrom(backgroundColor: Colors.black45),
         ),
       ],
     );
@@ -423,15 +417,13 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                     style: const TextStyle(color: Colors.white38, fontSize: 12),
                   ),
                   const Spacer(),
-                  Tooltip(
-                    message: l10n.d('Sluiten (G of Esc)'),
-                    child: IconButton(
-                      onPressed: _toggleGrid,
-                      icon: const Icon(Icons.close),
-                      color: Colors.white,
-                      style: IconButton.styleFrom(
-                        backgroundColor: Colors.white10,
-                      ),
+                  IconButton(
+                    tooltip: l10n.d('Sluiten (G of Esc)'),
+                    onPressed: _toggleGrid,
+                    icon: const Icon(Icons.close),
+                    color: Colors.white,
+                    style: IconButton.styleFrom(
+                      backgroundColor: Colors.white10,
                     ),
                   ),
                 ],

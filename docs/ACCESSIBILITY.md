@@ -30,12 +30,29 @@ two coloured flags that carry the same message on screen are of no use here. Cha
 data as a text alternative (`_semanticsLabel` in `chart_preview.dart`), so a
 chart is readable and not merely present. Icon-only buttons carry a name.
 
-**A test that fails the build.** `test/accessibility_labels_test.dart` walks the
-interface and asserts that every button has an accessible name (WCAG 4.1.2). It
-was written after an audit and immediately found three real defects — buttons
-wrapped in a `Tooltip` widget instead of carrying `IconButton(tooltip:)`, which
-attaches the name to the surrounding row rather than to the button. That test is
-the reason this claim is a claim rather than a hope.
+**A test that fails the build — and exactly how much of the app it sees.**
+`test/accessibility_labels_test.dart` asserts that every button has an
+accessible name (WCAG 4.1.2). It works two ways, and the difference matters:
+
+- it **pumps six editors** (bullets, table, timeline, two-images, sign-off,
+  video) and inspects the real semantics tree. That is six of the 26 editors,
+  none of the 41 dialogs, and not presentation mode. Whatever it does not pump,
+  it does not see;
+- it **scans the source** of all of `lib/` for one specific mistake:
+  `Tooltip(message: …, child: IconButton(…))`. That reads like a named button
+  and is not one — a `Tooltip` around a button attaches no semantic label to it;
+  only `IconButton(tooltip:)` does. This half is cheap and covers everything,
+  including the code nobody pumps.
+
+*Corrected 2026-07-22 (#586). This entry said the test "walks the interface" and
+that it had found three defects. Both were too generous. It pumps six widgets,
+and behind them the very fault it guards against stood **23 more times** —
+seven in the main layout, four in the preview panel, four in the presenter
+overlays including the button you press to leave a presentation, and the whole
+three-button drawing toolbar. Someone using a screen reader heard "button" on
+the exit control. The 23 are fixed and the source scan is what keeps the
+twenty-fourth from arriving; but the honest summary of the coverage is the two
+bullets above, not "walks the interface".*
 
 **Alt-text as a first-class field.** The image, two-images and bullets-with-image
 editors have an **Alt-tekst** field separate from the visible caption. A screen

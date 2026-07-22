@@ -200,16 +200,14 @@ class _BulkIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Tooltip(
-      message: tooltip,
-      child: IconButton(
-        icon: Icon(icon, size: 16),
-        onPressed: onTap,
-        color: color ?? AppTheme.slate300,
-        padding: EdgeInsets.zero,
-        constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-        visualDensity: VisualDensity.compact,
-      ),
+    return IconButton(
+      tooltip: tooltip,
+      icon: Icon(icon, size: 16),
+      onPressed: onTap,
+      color: color ?? AppTheme.slate300,
+      padding: EdgeInsets.zero,
+      constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+      visualDensity: VisualDensity.compact,
     );
   }
 }

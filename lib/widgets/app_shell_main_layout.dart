@@ -387,12 +387,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             onSelected: (level) => deckNotifier.updateInfo(tlp: level),
           ),
           const SizedBox(width: 6),
-          Tooltip(
-            message: l10n.t('presentationProperties'),
-            child: IconButton(
-              icon: const Icon(Icons.info_outline, size: 18),
-              onPressed: _openProperties,
-            ),
+          IconButton(
+            tooltip: l10n.t('presentationProperties'),
+            icon: const Icon(Icons.info_outline, size: 18),
+            onPressed: _openProperties,
           ),
         ],
       ),
@@ -409,54 +407,42 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     final deckNotifier = ref.read(deckProvider.notifier);
     return [
       // ── Bewerken ────────────────────────────────────────────────
-      Tooltip(
-        message: l10n.t('undo'),
-        child: IconButton(
-          icon: const Icon(Icons.undo, size: 18),
-          onPressed: deckState.canUndo ? () => _undo(deckNotifier) : null,
-        ),
+      IconButton(
+        tooltip: l10n.t('undo'),
+        icon: const Icon(Icons.undo, size: 18),
+        onPressed: deckState.canUndo ? () => _undo(deckNotifier) : null,
       ),
-      Tooltip(
-        message: l10n.t('redo'),
-        child: IconButton(
-          icon: const Icon(Icons.redo, size: 18),
-          onPressed: deckState.canRedo ? () => _redo(deckNotifier) : null,
-        ),
+      IconButton(
+        tooltip: l10n.t('redo'),
+        icon: const Icon(Icons.redo, size: 18),
+        onPressed: deckState.canRedo ? () => _redo(deckNotifier) : null,
       ),
       const _ActionsDivider(),
       // ── Inhoud ──────────────────────────────────────────────────
-      Tooltip(
-        message: l10n.t('imageLibrary'),
-        child: IconButton(
-          icon: const Icon(Icons.photo_library_outlined, size: 18),
-          onPressed: _openImageCarousel,
-        ),
+      IconButton(
+        tooltip: l10n.t('imageLibrary'),
+        icon: const Icon(Icons.photo_library_outlined, size: 18),
+        onPressed: _openImageCarousel,
       ),
       const _ActionsDivider(),
       // ── Presenteren & uitvoer ───────────────────────────────────
-      Tooltip(
-        message: l10n.t('presentFullscreen'),
-        child: IconButton(
-          icon: const Icon(Icons.play_circle_outline, size: 20),
-          onPressed: _presentDeck,
-        ),
+      IconButton(
+        tooltip: l10n.t('presentFullscreen'),
+        icon: const Icon(Icons.play_circle_outline, size: 20),
+        onPressed: _presentDeck,
       ),
-      Tooltip(
-        message: isMarkdownMode ? l10n.t('visualMode') : l10n.t('markdownMode'),
-        child: IconButton(
-          icon: Icon(isMarkdownMode ? Icons.view_quilt : Icons.code, size: 18),
-          onPressed: _toggleMarkdownMode,
-        ),
+      IconButton(
+        tooltip: isMarkdownMode ? l10n.t('visualMode') : l10n.t('markdownMode'),
+        icon: Icon(isMarkdownMode ? Icons.view_quilt : Icons.code, size: 18),
+        onPressed: _toggleMarkdownMode,
       ),
       // Uitgeschakeld zolang er een opslag loopt: de knop deed er tot nu toe
       // niets aan af dat een tweede poging stil werd genegeerd, en zag er dus
       // uit alsof er niets gebeurde.
-      Tooltip(
-        message: l10n.t('saveShortcut'),
-        child: IconButton(
-          icon: const Icon(Icons.save_outlined, size: 18),
-          onPressed: ref.watch(saveProgressProvider) == null ? _saveDeck : null,
-        ),
+      IconButton(
+        tooltip: l10n.t('saveShortcut'),
+        icon: const Icon(Icons.save_outlined, size: 18),
+        onPressed: ref.watch(saveProgressProvider) == null ? _saveDeck : null,
       ),
       const _ActionsDivider(),
       // ── Overig (minder vaak gebruikt) ───────────────────────────
