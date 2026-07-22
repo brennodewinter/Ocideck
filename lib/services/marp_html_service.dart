@@ -814,7 +814,13 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
     });
   }
   function runMermaid(){
-    mermaid.initialize({startOnLoad:false,securityLevel:'strict'});
+    // htmlLabels UIT, per diagramsoort én globaal. Mermaid tekent labels
+    // anders in een <foreignObject> met HTML erin, en juist dat element haalt
+    // de sanitisatie hieronder weg (het is de plek waar HTML een SVG binnen kan
+    // komen). Het resultaat waren lege vakjes en pijlen zonder één woord erbij
+    // — een diagram dat er wél stond maar niets meer zei.
+    mermaid.initialize({startOnLoad:false,securityLevel:'strict',
+      htmlLabels:false,flowchart:{htmlLabels:false},class:{htmlLabels:false}});
     // Elk diagram eerst apart laten controleren. Zo tekent mermaid zijn eigen
     // foutplaatje niet, blijft een kapot diagram beperkt tot zijn eigen dia, en
     // draait de sanitisatie hieronder ALTIJD — bij de oude stille catch sloeg

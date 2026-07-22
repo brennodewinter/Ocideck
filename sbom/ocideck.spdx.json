@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.2.0+1",
-  "documentNamespace": "https://ocideck.app/spdx/99a4ed00-18fc-5b2e-8f93-932ec9b5f754",
+  "documentNamespace": "https://ocideck.app/spdx/0262bf0e-ae65-5c6e-8a1b-d6a6f32f329e",
   "creationInfo": {
-    "created": "2026-07-19T14:45:45.854834Z",
+    "created": "2026-07-22T00:16:27.366483Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -4146,22 +4146,22 @@
     {
       "SPDXID": "SPDXRef-191-dompurify",
       "name": "dompurify",
-      "versionInfo": "3.4.11",
-      "downloadLocation": "https://cdn.jsdelivr.net/npm/dompurify@3.4.11/dist/purify.min.js",
+      "versionInfo": "3.4.12",
+      "downloadLocation": "https://cdn.jsdelivr.net/npm/dompurify@3.4.12/dist/purify.min.js",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0 OR MPL-2.0",
       "licenseDeclared": "Apache-2.0 OR MPL-2.0",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "dbabb5b205a333ec49c8c09e7fca30ef66df0523bb8bc0fa9ea843841f111dbd"
+          "checksumValue": "c45ba939765574f96cbf35ee9b6d89f73756a17921814425e74b82f7c54603ce"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/dompurify@3.4.11"
+          "referenceLocator": "pkg:npm/dompurify@3.4.12"
         }
       ],
       "comment": "Vendored into purify.min.js, inlined into the HTML export."
@@ -4238,22 +4238,22 @@
     {
       "SPDXID": "SPDXRef-195-mermaid",
       "name": "mermaid",
-      "versionInfo": "10.9.6",
-      "downloadLocation": "https://cdn.jsdelivr.net/npm/mermaid@10.9.6/dist/mermaid.min.js",
+      "versionInfo": "11.16.0",
+      "downloadLocation": "https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "eda3a0ad572bbe69a318c1be0163e8233dd824f3f12939e5168feba207767151"
+          "checksumValue": "74d7c46dabca328c2294733910a8aa1ed0c37451776e8d5295da38a2b758fb9b"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/mermaid@10.9.6"
+          "referenceLocator": "pkg:npm/mermaid@11.16.0"
         }
       ],
       "comment": "Vendored into mermaid.min.js, inlined into the HTML export."

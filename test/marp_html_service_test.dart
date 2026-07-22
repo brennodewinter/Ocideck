@@ -88,6 +88,10 @@ void main() {}
     // Mermaid runs strict and its injected SVG is sanitised post-render.
     expect(html, contains("securityLevel:'strict'"));
     expect(html, contains('sanitizeMermaid'));
+    // …en zonder HTML-labels, want die reizen in een <foreignObject> dat de
+    // sanitisatie eruit haalt: het diagram houdt dan lege vakjes over.
+    expect(html, contains('htmlLabels:false'));
+    expect(html, contains('flowchart:{htmlLabels:false}'));
   });
 
   test(

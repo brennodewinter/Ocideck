@@ -67,11 +67,16 @@ class MermaidRenderService {
 var mermaidBundle = document.createElement('script');
 mermaidBundle.textContent = $escapedJs;
 document.head.appendChild(mermaidBundle);
+// htmlLabels moet ook PER DIAGRAMSOORT uit: mermaid tekent labels anders in een
+// <foreignObject>, en dat element haalt sanitizeMermaidSvg weg — dan houdt de
+// preview lege vakjes over zonder één woord erin.
 mermaid.initialize({
   startOnLoad: false,
   theme: 'neutral',
   securityLevel: 'strict',
   htmlLabels: false,
+  flowchart: { htmlLabels: false },
+  class: { htmlLabels: false },
   secure: ['securityLevel', 'startOnLoad', 'htmlLabels']
 });
 window.__renderMermaid = async function(source) {

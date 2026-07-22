@@ -218,11 +218,11 @@ This is **ocideck 0.2.0+1** (licence EUPL-1.2) and every third-party component i
 
 | Component | Version | Licence | Source |
 | --- | --- | --- | --- |
-| dompurify | 3.4.11 | Apache-2.0 OR MPL-2.0 | `pkg:npm/dompurify@3.4.11` |
+| dompurify | 3.4.12 | Apache-2.0 OR MPL-2.0 | `pkg:npm/dompurify@3.4.12` |
 | highlight.js | 11.11.1 | BSD-3-Clause | `pkg:npm/highlight.js@11.11.1` |
 | marked | 18.0.5 | MIT | `pkg:npm/marked@18.0.5` |
 | mathjax | 3.2.2 | Apache-2.0 | `pkg:npm/mathjax@3.2.2` |
-| mermaid | 10.9.6 | MIT | `pkg:npm/mermaid@10.9.6` |
+| mermaid | 11.16.0 | MIT | `pkg:npm/mermaid@11.16.0` |
 
 ### Vendored export assets (1)
 
