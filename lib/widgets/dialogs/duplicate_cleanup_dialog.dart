@@ -191,7 +191,7 @@ class _DuplicateCleanupDialogState
         children: [
           Row(
             children: [
-              const Icon(Icons.copy_outlined, size: 14, color: AppTheme.accent),
+              Icon(Icons.copy_outlined, size: 14, color: AppTheme.accentFg),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(

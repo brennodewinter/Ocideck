@@ -155,7 +155,7 @@ class _CockpitEditorState extends State<CockpitEditor> {
           const SizedBox(height: 14),
           Row(
             children: [
-              const Icon(Icons.speed_outlined, color: AppTheme.teal),
+              Icon(Icons.speed_outlined, color: AppTheme.tealFg),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -282,9 +282,9 @@ class _MeterCard extends StatelessWidget {
               children: [
                 Text(
                   '${l10n.d('Meter')} ${index + 1}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    color: AppTheme.navy,
+                    color: AppTheme.brandFg,
                   ),
                 ),
                 const Spacer(),

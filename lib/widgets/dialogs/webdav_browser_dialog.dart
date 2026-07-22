@@ -199,7 +199,7 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
                 : entry.isImage
                 ? Icons.image_outlined
                 : Icons.slideshow_outlined,
-            color: entry.isCollection ? AppTheme.accent : AppTheme.slate600,
+            color: entry.isCollection ? AppTheme.accentFg : AppTheme.slate600,
             size: 20,
           ),
           title: Text(entry.name, style: const TextStyle(fontSize: 13)),

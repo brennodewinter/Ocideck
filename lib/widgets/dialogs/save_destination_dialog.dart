@@ -178,7 +178,7 @@ class _SaveDestinationDialogState extends State<SaveDestinationDialog> {
                     ? Icons.radio_button_checked
                     : Icons.radio_button_unchecked,
                 size: 18,
-                color: selected ? AppTheme.accent : AppTheme.slate400,
+                color: selected ? AppTheme.accentFg : AppTheme.slate400,
               ),
               const SizedBox(width: 10),
               Expanded(

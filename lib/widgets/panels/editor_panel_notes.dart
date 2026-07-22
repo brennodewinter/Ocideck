@@ -265,10 +265,10 @@ class _UserNotesFieldState extends State<_UserNotesField> {
           initiallyExpanded: widget.note.trim().isNotEmpty,
           tilePadding: const EdgeInsets.symmetric(horizontal: 12),
           childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
-          leading: const Icon(
+          leading: Icon(
             Icons.edit_note_outlined,
             size: 18,
-            color: AppTheme.accent,
+            color: AppTheme.accentFg,
           ),
           title: Row(
             children: [
@@ -312,7 +312,7 @@ class _UserNotesFieldState extends State<_UserNotesField> {
                   color: AppTheme.userNotesText,
                   height: 1.45,
                 ),
-                linkColor: AppTheme.accent,
+                linkColor: AppTheme.accentFg,
                 codeBackground: AppTheme.infoBg,
                 hintText: l10n.d('Gebruikersnotities voor deze slide...'),
                 minLines: 10,

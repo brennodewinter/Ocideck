@@ -145,6 +145,28 @@ class AppTheme {
   static const danger700 = Color(0xFFB91C1C);
   static const danger800 = Color(0xFFC62828);
 
+  // ── Merkkleuren als tékst, mode-afhankelijk (#606) ────────────────────────
+  //
+  // [accent], [navy] en [teal] zijn merkkleuren en blijven const: ze vullen
+  // vlakken, kleuren randen en verlopen, en een deel ervan rendert in een
+  // headless export-isolate waar de app-modus niet bestaat. Meebewegen zou daar
+  // twee verschillende PDF's opleveren van hetzelfde deck (PENTEST_MIAUW §11).
+  //
+  // Als *tekst of icoon* op het app-oppervlak halen ze de AA-lat niet zodra dat
+  // oppervlak donker is: #2563EB komt daar op 3,3:1, #1C2B47 verdwijnt zo goed
+  // als helemaal. Vandaar deze drie: dezelfde rol, maar geschikt voor de modus
+  // waarin ze gelezen worden. De lichte varianten zijn iets dieper dan de
+  // merkkleur zelf, zodat ook op wit de 4,5:1 gehaald wordt.
+  //
+  // Gebruik deze in de interface (dialogen, editors, panelen, de schil).
+  // Gebruik de const-merkkleuren in wat een dia wordt.
+  static Color get accentFg =>
+      _m(const Color(0xFF1D4ED8), const Color(0xFF8AB4F8));
+  static Color get brandFg =>
+      _m(const Color(0xFF1C2B47), const Color(0xFFC7D2E4));
+  static Color get tealFg =>
+      _m(const Color(0xFF1F6B55), const Color(0xFF7FD8BE));
+
   // ── Bevinding-ernst (FIRST CVSS-banden) ───────────────────────────────────
   // Deterministische const-tokens zodat een `finding` identiek rendert in de
   // on-screen preview én in een headless export-isolate (PENTEST_MIAUW §11).

@@ -290,7 +290,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                 style: TextStyle(
                   fontSize: 11,
                   color: _zoom != _minZoom
-                      ? AppTheme.accent
+                      ? AppTheme.accentFg
                       : AppTheme.slate400,
                   fontWeight: _zoom != _minZoom
                       ? FontWeight.w600
@@ -315,7 +315,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                 : '${idx + 1} / ${deck.slides.length}',
             style: TextStyle(
               fontSize: 12,
-              color: hasRichTextPages ? AppTheme.accent : AppTheme.slate400,
+              color: hasRichTextPages ? AppTheme.accentFg : AppTheme.slate400,
               fontWeight: hasRichTextPages
                   ? FontWeight.w600
                   : FontWeight.normal,

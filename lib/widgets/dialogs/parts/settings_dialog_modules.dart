@@ -71,7 +71,11 @@ extension _SettingsModules on _SettingsDialogState {
       children: [
         Row(
           children: [
-            Icon(Icons.check_circle_outline, size: 15, color: AppTheme.accent),
+            Icon(
+              Icons.check_circle_outline,
+              size: 15,
+              color: AppTheme.accentFg,
+            ),
             const SizedBox(width: 6),
             Expanded(
               // Selectable so the message can be copied (e.g. to report it)

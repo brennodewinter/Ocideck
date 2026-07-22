@@ -77,9 +77,9 @@ class _EditorToolbar extends StatelessWidget {
                   isExpanded: true,
                   isDense: true,
                   borderRadius: BorderRadius.circular(6),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
-                    color: AppTheme.teal,
+                    color: AppTheme.tealFg,
                     fontWeight: FontWeight.w600,
                   ),
                   items: [
@@ -89,10 +89,10 @@ class _EditorToolbar extends StatelessWidget {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.palette_outlined,
                               size: 14,
-                              color: AppTheme.teal,
+                              color: AppTheme.tealFg,
                             ),
                             const SizedBox(width: 4),
                             Flexible(
@@ -126,7 +126,7 @@ class _EditorToolbar extends StatelessWidget {
                   '${context.l10n.d('Terug naar standaardstijl')} ${defaultProfile.name}',
               onPressed: onDefaultProfileRequested,
               icon: const Icon(Icons.restart_alt, size: 16),
-              color: AppTheme.teal,
+              color: AppTheme.tealFg,
               visualDensity: VisualDensity.compact,
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
@@ -280,24 +280,20 @@ class _SlideTypePickerButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 3),
             child: Row(
               children: [
-                Icon(slideTypeIcons[type]!, size: 14, color: AppTheme.navy),
+                Icon(slideTypeIcons[type]!, size: 14, color: AppTheme.brandFg),
                 const SizedBox(width: 4),
                 Expanded(
                   child: Text(
                     l10n.d(type.label),
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: AppTheme.navy,
+                      color: AppTheme.brandFg,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-                const Icon(
-                  Icons.arrow_drop_down,
-                  size: 18,
-                  color: AppTheme.navy,
-                ),
+                Icon(Icons.arrow_drop_down, size: 18, color: AppTheme.brandFg),
               ],
             ),
           ),

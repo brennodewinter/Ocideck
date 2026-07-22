@@ -132,6 +132,29 @@ read a book to find out.
   melding getoond — met de technische reden erbij, want "de export is mislukt"
   alleen laat je met niets achter. (Gevonden uit een "hij hangt gewoon"-melding.)
 
+- **De merkkleuren waren in de donkere modus slecht leesbaar als tekst.** Blauw
+  (`#2563EB`) haalt op de donkere achtergrond 3,3:1 waar 4,5:1 de eis is, en het
+  marineblauw verdween zo goed als helemaal. Ze stonden op zeventig plekken als
+  tekst- of icoonkleur in dialogen, editors, panelen en de schil.
+
+  Ze hebben nu mode-afhankelijke tegenhangers (`accentFg`, `brandFg`, `tealFg`)
+  en de interface gebruikt die. **De merkkleuren zelf zijn niet veranderd**, en
+  dat is de kern: ze vullen nog steeds vlakken, tekenen randen, en een deel
+  ervan rendert ín een dia. Een dia moet er in de preview net zo uitzien als in
+  een headless export, waar de weergavemodus van de app niet bestaat — een kleur
+  die met het thema meebeweegt zou daar twee verschillende PDF's van één deck
+  opleveren.
+
+  De scheidslijn is dus niet licht-tegen-donker maar **chroom tegen inhoud**:
+  tekst die u ín de app leest volgt de app, inkt die óp een dia landt niet. De
+  goldens bevestigen die tweede helft — elke dia rendert byte-identiek aan
+  ervoor.
+
+  Daarmee zakt de donkere modus van 17 naar 14 tokens onder de lat. Wat
+  overblijft zijn de ernst-, checklist- en scopepaletten; díé renderen werkelijk
+  in dia's, en die vragen dezelfde lezing per gebruik.
+
+### Fixed
 - **Het toestemmingsscherm liet u zoeken naar het vinkje.** "Akkoord gaan" stond
   grijs, en het vakje dat die knop vrijgeeft stond ónder de hele
   privacyverklaring — vijf schermen naar beneden. U zag dus een geblokkeerde

@@ -175,7 +175,7 @@ class _FindReplaceDialogState extends State<FindReplaceDialog> {
           : '$_matches ${l10n.d('resultaten')}',
       style: TextStyle(
         fontSize: 12,
-        color: _matches == 0 ? AppTheme.slate400 : AppTheme.accent,
+        color: _matches == 0 ? AppTheme.slate400 : AppTheme.accentFg,
         fontWeight: FontWeight.w600,
       ),
     );

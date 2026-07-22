@@ -345,7 +345,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
               icon: Icon(
                 row.current ? Icons.place : Icons.place_outlined,
                 size: 18,
-                color: row.current ? AppTheme.navy : AppTheme.slate500,
+                color: row.current ? AppTheme.brandFg : AppTheme.slate500,
               ),
               onPressed: () => _toggleCurrent(i),
               tooltip: row.current
@@ -386,10 +386,10 @@ class _TimelineEditorState extends State<TimelineEditor> {
           const SizedBox(width: 8),
           Text(
             context.l10n.d('Activatieduur'),
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w700,
-              color: AppTheme.navy,
+              color: AppTheme.brandFg,
             ),
           ),
           const SizedBox(width: 10),
@@ -435,7 +435,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
             icon: const Icon(Icons.restart_alt, size: 18),
             visualDensity: VisualDensity.compact,
             tooltip: context.l10n.d('Volg thema-animatieduur'),
-            color: AppTheme.navy,
+            color: AppTheme.brandFg,
             onPressed: _inheritsTheme
                 ? null
                 : () {

@@ -424,7 +424,7 @@ class _BulletColumnState extends State<_BulletColumn> {
             icon: Icon(
               Icons.horizontal_split,
               size: 18,
-              color: heading ? AppTheme.accent : AppTheme.slate300,
+              color: heading ? AppTheme.accentFg : AppTheme.slate300,
             ),
             onPressed: () => set.toggleHeading((fn) => setState(fn), i),
             tooltip: heading

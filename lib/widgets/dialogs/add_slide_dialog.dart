@@ -355,11 +355,7 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(
-                Icons.lightbulb_outline,
-                size: 15,
-                color: AppTheme.teal,
-              ),
+              Icon(Icons.lightbulb_outline, size: 15, color: AppTheme.tealFg),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(

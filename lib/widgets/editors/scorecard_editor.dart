@@ -153,15 +153,15 @@ class _ScorecardEditorState extends State<ScorecardEditor> {
         // author runs into it.
         Row(
           children: [
-            const Icon(Icons.insights_outlined, size: 16, color: AppTheme.teal),
+            Icon(Icons.insights_outlined, size: 16, color: AppTheme.tealFg),
             const SizedBox(width: 6),
             Expanded(
               child: Text(
                 l10n.d('Cijfers'),
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
-                  color: AppTheme.navy,
+                  color: AppTheme.brandFg,
                 ),
               ),
             ),
@@ -242,10 +242,10 @@ class _ScorecardEditorState extends State<ScorecardEditor> {
                 const SizedBox(width: 6),
                 Text(
                   '${l10n.d('Cijfer')} ${index + 1}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
-                    color: AppTheme.navy,
+                    color: AppTheme.brandFg,
                   ),
                 ),
                 const Spacer(),
@@ -373,7 +373,7 @@ class _ScorecardEditorState extends State<ScorecardEditor> {
         initialValue: _entries[index].polarity,
         isDense: true,
         isExpanded: true,
-        style: const TextStyle(fontSize: 13, color: AppTheme.navy),
+        style: TextStyle(fontSize: 13, color: AppTheme.brandFg),
         decoration: InputDecoration(
           labelText: l10n.d('Richting'),
           isDense: true,

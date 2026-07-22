@@ -141,9 +141,9 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
     final current = widget.matchIndex + 1;
     return Text(
       '$current / ${widget.matchCount}',
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 11,
-        color: AppTheme.accent,
+        color: AppTheme.accentFg,
         fontWeight: FontWeight.w600,
       ),
     );

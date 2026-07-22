@@ -43,7 +43,7 @@ class _GitHistoryDialog extends StatelessWidget {
                             ? Icons.cloud_done_outlined
                             : Icons.cloud_upload_outlined,
                         size: 18,
-                        color: e.pushed ? AppTheme.slate400 : AppTheme.accent,
+                        color: e.pushed ? AppTheme.slate400 : AppTheme.accentFg,
                       ),
                     ),
                     title: Text(
