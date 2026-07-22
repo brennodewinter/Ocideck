@@ -8,6 +8,28 @@ import 'package:ocideck/widgets/dialogs/duplicate_cleanup_dialog.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Pompt frames binnen [WidgetTester.runAsync] tot [tot] waar is, of tot de
+/// tijdsgrens verstrijkt.
+///
+/// Het alternatief — een vaste `Future.delayed` — wacht een gok in plaats van
+/// een uitkomst. Dat haalt het op een rustige machine en niet onder een volle
+/// `make check`, en dan faalt een test die niets mankeert. Los draait hij dan
+/// gewoon groen, dus je zoekt op de verkeerde plek.
+Future<void> _wachtTot(
+  WidgetTester tester,
+  bool Function() tot, {
+  Duration grens = const Duration(seconds: 10),
+}) async {
+  await tester.runAsync(() async {
+    final deadline = DateTime.now().add(grens);
+    while (!tot() && DateTime.now().isBefore(deadline)) {
+      await tester.pump();
+      await Future<void>.delayed(const Duration(milliseconds: 5));
+    }
+  });
+  await tester.pump();
+}
+
 void main() {
   setUp(() {
     SharedPreferences.setMockInitialValues({});
@@ -41,12 +63,13 @@ void main() {
         ),
       ),
     );
-    // Echte bestand-I/O (stat, verplaatsen) komt onder FakeAsync alleen
-    // klaar binnen runAsync; daarna gewone pumps voor de frames.
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 50)),
+    // Echte bestand-I/O (stat, verplaatsen) komt onder FakeAsync alleen klaar
+    // binnen runAsync. Wachten op de uitkomst in plaats van op de klok: hier
+    // stonden vaste slaapjes van 50 en 100 ms.
+    await _wachtTot(
+      tester,
+      () => find.byIcon(Icons.delete_outline).evaluate().length == 2,
     );
-    await tester.pump();
 
     // Twee rijen met elk een prullenbakknop, beide actief.
     final buttons = find.byIcon(Icons.delete_outline);
@@ -54,18 +77,7 @@ void main() {
 
     await tester.tap(buttons.last);
     await tester.pump();
-    for (var i = 0; i < 10 && b.existsSync(); i++) {
-      await tester.runAsync(
-        () => Future<void>.delayed(const Duration(milliseconds: 100)),
-      );
-      await tester.pump();
-    }
-    // Nog één echt-async venster zodat de setState-continuatie na de
-    // geslaagde verplaatsing ook verwerkt is.
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 100)),
-    );
-    await tester.pump();
+    await _wachtTot(tester, () => !b.existsSync());
     await tester.pump(const Duration(milliseconds: 300));
 
     // De tweede kopie is verplaatst; het origineel staat er nog.
