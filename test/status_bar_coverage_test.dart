@@ -5,7 +5,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/services/document_integrity.dart';
 import 'package:ocideck/services/git/outbox.dart';
+import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
@@ -139,12 +141,50 @@ void main() {
     },
   );
 
-  testWidgets('sealing a deck shows the intact integrity badge', (
+  // ── De integriteitsbadge, in zijn drie standen ────────────────────────────
+  //
+  // Het zegel hasht sinds 0.1.0 de **bytes van de `.md`** en vergelijkt die met
+  // [Deck.fileHash], de waargenomen toestand van het bestand. Daarmee is er een
+  // toestand bijgekomen die eerder niet bestond: verzegeld, maar er is nog geen
+  // bestand om tegen na te rekenen. Die duurt van het verzegelen tot de
+  // eerstvolgende opslag, en dat is geen randgeval — `finalizeAndSeal` zet
+  // `isDirty: true`, dus dat moment zit er áltijd tussen.
+
+  /// Een deck zoals het na het opslaan is: afgerond, en met de zegelhash
+  /// vastgelegd over de bytes die zojuist zijn weggeschreven. Loopt bewust via
+  /// dezelfde [DocumentIntegrity.recordWrittenBytes] als de opslagroute, zodat
+  /// deze test niet zijn eigen versie van de regel bijhoudt.
+  Deck sealedAndSaved() {
+    final md = MarkdownService();
+    final finalised = DocumentIntegrity(md).seal(sampleDeck());
+    return DocumentIntegrity.recordWrittenBytes(
+      finalised,
+      md.generateDeck(finalised),
+    );
+  }
+
+  testWidgets('een verzegeld deck dat nog niet is opgeslagen claimt niets', (
     tester,
   ) async {
+    // Niet groen: het zegel gaat over een bestand dat nog niet bestaat, dus
+    // "intact" zou een controle voorspiegelen die niemand heeft uitgevoerd.
+    // Niet rood: er is niets gemanipuleerd. Wel een badge, want de gebruiker
+    // die zojuist verzegelde moet zien dát het gelukt is — en wat er nog moet
+    // gebeuren.
     final tab = await pumpShell(tester);
     tab.deckNotifier.finalizeAndSeal();
     await tester.pumpAndSettle();
+
+    expect(find.text('Zegel nog niet vastgelegd'), findsOneWidget);
+    expect(find.byIcon(Icons.gpp_maybe_outlined), findsOneWidget);
+    expect(find.text('Integriteit intact'), findsNothing);
+    expect(find.text('Gewijzigd na afronden'), findsNothing);
+  });
+
+  testWidgets('een opgeslagen, ongewijzigd deck toont de intacte badge', (
+    tester,
+  ) async {
+    await pumpShell(tester, deck: sealedAndSaved());
 
     expect(find.text('Integriteit intact'), findsOneWidget);
     expect(find.byIcon(Icons.verified_user), findsOneWidget);
@@ -152,9 +192,22 @@ void main() {
 
   testWidgets('a finalized deck whose content no longer matches shows the '
       'modified badge', (tester) async {
-    // Loaded as finalized but without a valid seal for the (restyled) content,
-    // so the integrity check reports it as changed after finalising.
-    await pumpShell(tester, deck: sampleDeck(finalized: true));
+    // Het bestand op schijf is na het verzegelen veranderd: de zegelhash blijft
+    // die van het oorspronkelijke bestand, de waargenomen bytehash is een
+    // andere. Opgebouwd via de echte opslagregel — die werkt de bestandshash
+    // bij maar laat een bestaande zegelhash met rust, want anders zou elke
+    // wijziging zichzelf goedkeuren.
+    final md = MarkdownService();
+    final tampered = sealedAndSaved().copyWith(
+      slides: [Slide.create(SlideType.bullets).copyWith(title: 'Gewijzigd')],
+    );
+    await pumpShell(
+      tester,
+      deck: DocumentIntegrity.recordWrittenBytes(
+        tampered,
+        md.generateDeck(tampered),
+      ),
+    );
 
     expect(find.text('Gewijzigd na afronden'), findsOneWidget);
     expect(find.byIcon(Icons.gpp_bad), findsOneWidget);
