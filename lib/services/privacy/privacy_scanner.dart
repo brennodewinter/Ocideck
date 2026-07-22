@@ -1,3 +1,24 @@
+// ── lib/services/privacy/ ────────────────────────────────────────────────────
+// De privacylaag, in vier stappen die elk hun eigen bestanden hebben:
+//
+//   signaleren  — deze scanner met zijn regeltabellen (`*_rules.dart`), de
+//                 checksums, de artikel 9/10-lexicons en de beeldcontrole
+//                 (image_face_scan*.dart);
+//   temperen    — wat een treffer alsnog laat vallen of verzwakt: de
+//                 allowlist, de eigen identiteit, de landpakketten en de rol
+//                 waarin iemand in een strafrechtelijke zin voorkomt;
+//   afschermen  — privacy_projection.dart, de enige grens waarlangs een deck
+//                 een tonend of exporterend oppervlak bereikt, plus het
+//                 redactiemanifest dat verantwoordt wat er weg is;
+//   tegenhouden — privacy_export_policy.dart, de gate vóór een export.
+//
+// Een nieuwe detectieregel is dus een tabel in dit cluster; een nieuw *soort*
+// gegeven krijgt een eigen `*_rules.dart`. Wat hier níét thuishoort: de
+// datatypes van een bevinding (lib/models/privacy_*.dart), de bedrading naar de
+// UI (lib/state/privacy_provider.dart, image_privacy_provider.dart) en het
+// tonen ervan (lib/widgets/). Bestand-voor-bestand: docs/SOURCE_MAP.md.
+// ─────────────────────────────────────────────────────────────────────────────
+//
 // De privacyscanner: leest een deck na op gegevens die privacygevoelig kunnen
 // zijn.
 //

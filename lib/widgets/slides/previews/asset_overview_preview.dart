@@ -158,7 +158,11 @@ class _AssetOverviewPreview extends StatelessWidget {
           _num(group.atRisk, _tone(group.atRisk, AppTheme.danger700, text)),
           _num(
             group.newlyFound,
-            _tone(group.newlyFound, _hexColor(profile.accentColor), text),
+            _tone(
+              group.newlyFound,
+              AppTheme.parseHexColor(profile.accentColor),
+              text,
+            ),
           ),
           _num(group.unowned, _tone(group.unowned, AppTheme.danger700, text)),
         ],
@@ -209,7 +213,11 @@ class _AssetOverviewPreview extends StatelessWidget {
           ),
           _num(
             spec.totalNew,
-            _tone(spec.totalNew, _hexColor(profile.accentColor), text),
+            _tone(
+              spec.totalNew,
+              AppTheme.parseHexColor(profile.accentColor),
+              text,
+            ),
             emphasised: true,
           ),
           _num(
@@ -227,54 +235,37 @@ class _AssetOverviewPreview extends StatelessWidget {
     final l10n = context.l10n;
     final pad = w * 0.07;
     final hPad = w * 0.045;
-    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final spec = AssetOverviewSpec.fromSlide(slide.title, slide.tableRows);
-    final text = _hexColor(profile.textColor);
+    final text = AppTheme.parseHexColor(profile.textColor);
     final groups = spec.groups.where((g) => !g.isBlank).toList();
     final largest = spec.largestGroup;
 
-    return Container(
-      color: _hexColor(profile.slideBackgroundColor),
-      child: SizedBox.expand(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          alignment: Alignment.topLeft,
-          child: SizedBox(
-            width: w,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                hPad,
-                pad + safe.top,
-                hPad,
-                _logoAwareBottomPadding(pad, safe.bottom),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (spec.title.isNotEmpty) ...[
-                    Text(
-                      spec.title,
-                      style: _applyFont(
-                        font,
-                        TextStyle(
-                          fontSize: w * 0.04,
-                          fontWeight: FontWeight.w700,
-                          color: text,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: w * 0.03),
-                  ],
-                  if (groups.isNotEmpty) _headerRow(l10n, text),
-                  for (final group in groups) _groupRow(group, text, largest),
-                  if (groups.isNotEmpty) _totalsRow(spec, l10n, text),
-                ],
+    return _PreviewScaffold(
+      width: w,
+      slide: slide,
+      profile: profile,
+      horizontalPadding: hPad,
+      verticalPadding: pad,
+      background: AppTheme.parseHexColor(profile.slideBackgroundColor),
+      children: [
+        if (spec.title.isNotEmpty) ...[
+          Text(
+            spec.title,
+            style: _applyFont(
+              font,
+              TextStyle(
+                fontSize: w * 0.04,
+                fontWeight: FontWeight.w700,
+                color: text,
               ),
             ),
           ),
-        ),
-      ),
+          SizedBox(height: w * 0.03),
+        ],
+        if (groups.isNotEmpty) _headerRow(l10n, text),
+        for (final group in groups) _groupRow(group, text, largest),
+        if (groups.isNotEmpty) _totalsRow(spec, l10n, text),
+      ],
     );
   }
 }

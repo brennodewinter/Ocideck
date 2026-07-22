@@ -30,65 +30,47 @@ class _SignOffPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final pad = w * 0.07;
-    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final sig = signature;
     final heading = slide.title.isNotEmpty
         ? slide.title
         : l10n.d('Ondertekening');
 
-    return Container(
-      color: Colors.white,
-      child: SizedBox.expand(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          alignment: Alignment.topLeft,
-          child: SizedBox(
-            width: w,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                pad,
-                pad + safe.top,
-                pad,
-                _logoAwareBottomPadding(pad, safe.bottom),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    heading,
-                    style: _applyFont(
-                      font,
-                      TextStyle(
-                        fontSize: w * 0.04,
-                        fontWeight: FontWeight.w700,
-                        color: AppTheme.navy,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: w * 0.03),
-                  if (sig != null && sig.isNotEmpty)
-                    _signatureBlock(context, sig)
-                  else
-                    Text(
-                      l10n.d('Nog niet ondertekend'),
-                      style: _applyFont(
-                        font,
-                        TextStyle(
-                          fontSize: w * 0.026,
-                          fontStyle: FontStyle.italic,
-                          color: AppTheme.slate500,
-                        ),
-                      ),
-                    ),
-                  SizedBox(height: w * 0.035),
-                  _sealBadge(context),
-                ],
-              ),
+    return _PreviewScaffold(
+      width: w,
+      slide: slide,
+      profile: profile,
+      horizontalPadding: pad,
+      verticalPadding: pad,
+      children: [
+        Text(
+          heading,
+          style: _applyFont(
+            font,
+            TextStyle(
+              fontSize: w * 0.04,
+              fontWeight: FontWeight.w700,
+              color: AppTheme.navy,
             ),
           ),
         ),
-      ),
+        SizedBox(height: w * 0.03),
+        if (sig != null && sig.isNotEmpty)
+          _signatureBlock(context, sig)
+        else
+          Text(
+            l10n.d('Nog niet ondertekend'),
+            style: _applyFont(
+              font,
+              TextStyle(
+                fontSize: w * 0.026,
+                fontStyle: FontStyle.italic,
+                color: AppTheme.slate500,
+              ),
+            ),
+          ),
+        SizedBox(height: w * 0.035),
+        _sealBadge(context),
+      ],
     );
   }
 

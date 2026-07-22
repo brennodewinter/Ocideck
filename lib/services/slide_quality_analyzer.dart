@@ -13,8 +13,8 @@ import '../models/slide.dart';
 import '../models/slide_quality.dart';
 import '../models/video_source.dart';
 import '../utils/color_contrast.dart';
+import '../utils/inline_markdown.dart';
 import '../utils/project_path.dart';
-import '../widgets/slides/inline_markdown.dart';
 import 'slide_layout_metrics.dart';
 import 'split_run.dart';
 

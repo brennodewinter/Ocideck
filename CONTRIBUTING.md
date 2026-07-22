@@ -1,7 +1,19 @@
 # Contributing to OciDeck
 
+> **Status:** procedure, current — the practical half of contributing · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 Thanks for your interest in improving OciDeck! This document explains how to set
 up the project, the quality bar, and how to propose changes.
+
+> **There are two contributing documents, and this is the practical one.** This
+> file covers the commands: the quality gate, the individual `make` targets, the
+> localisation tooling, and what to run before a push. Its companion,
+> [`docs/CONTRIBUTING_GUIDELINES.md`](docs/CONTRIBUTING_GUIDELINES.md), covers
+> the process around them — issue reporting, review, branch naming, the (absent)
+> release process, and the Code of Conduct — and is shipped inside the app as a
+> readable document, which this file is not. Neither replaces the other.
+> *(Noted 2026-07-22: the two had grown apart without either mentioning that the
+> other existed.)*
 
 By contributing you agree that your contributions are licensed under the project
 licence, the **European Union Public Licence v. 1.2 (EUPL-1.2)** — see
@@ -9,7 +21,11 @@ licence, the **European Union Public Licence v. 1.2 (EUPL-1.2)** — see
 
 ## Prerequisites
 
-- **Flutter** 3.44+ (stable channel) with **Dart 3.12+**.
+- **Flutter 3.44.6** (stable), using the `dart` bundled with it. Building
+  tolerates 3.44+, but `make format-check` does not: `dart format` reflows
+  whitespace between releases, so an unpinned toolchain fails the gate on files
+  it never touched. [`docs/BUILD.md`](docs/BUILD.md) is the authority on this and
+  explains the difference; `.tool-versions` is the pin itself.
 - A desktop target enabled: **macOS**, **Windows**, or **Linux**.
 - `make` (the `Makefile` is the entry point for all quality checks).
 
@@ -41,11 +57,18 @@ Individual steps:
 | `make analyze` | `flutter analyze --fatal-infos` (analyzer + lints + strict type checks). |
 | `make check-conventions` | No `print()`; no raw control bytes; the bare `catch (_)`, raw-colour, layering and file-size ratchets may not grow. |
 | `make test` | The full test suite (randomised order). |
-| `make coverage` | The suite with coverage: enforces the 78% floor **and** that every `lib/` file is in some test. Part of `make check`. |
+| `make coverage` | The suite with coverage: enforces the 80% floor **and** that every `lib/` file is in some test. Part of `make check`. |
 | `make licenses` | Verify every dependency uses an open-source licence. |
 | `make deps-check` | Verify the vendored export JS bundles (integrity + known CVEs via OSV). |
 | `make check-web` | Build the web bundle and assert its hardening (CSP, self-hosted, fonts). |
 | `make check-full` | `check` plus licences, bundled-JS, web hardening, and a freshness report. |
+
+*(Corrected 2026-07-22: the coverage row said "the 78% floor". The `Makefile`
+runs `coverage_summary.dart --min=80`, and `docs/CHECKS.md`,
+`docs/CONTRIBUTING_GUIDELINES.md` and `docs/DEVELOPMENT_SETUP_GUIDE.md` already
+said 80 — this file was the one that had drifted. The floor is a ratchet that
+gets raised as coverage improves, so when a document and the `Makefile`
+disagree, the `Makefile` is the answer.)*
 
 See [`docs/CHECKS.md`](docs/CHECKS.md) for the full reference — what each check
 covers, what a failure means, and how the CI workflows (defined but not currently

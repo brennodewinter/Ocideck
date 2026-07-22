@@ -208,7 +208,55 @@ class NetGuard {
     if (uri == null || !uri.hasScheme || !uri.hasAuthority) return false;
     final scheme = uri.scheme.toLowerCase();
     if (scheme != 'http' && scheme != 'https') return false;
+    if (!allowedWebPorts.contains(uri.port)) return false;
     return !isBlockedHost(uri.host);
+  }
+
+  /// Poorten waarheen een deck-geleverde URL mag wijzen.
+  ///
+  /// Dezelfde verzameling als `ALLOWED_PORTS` in de fetch-proxy. Die twee zijn
+  /// de twee helften van één wacht — de webbouw haalt via de proxy op, het
+  /// bureaublad rechtstreeks — en ze hoorden hetzelfde te doen. Dat deden ze
+  /// niet: de proxy begrensde de poort, de Dart-kant liet elke poort toe. Een
+  /// deck kon zo verbindingen sturen naar willekeurige poorten op publieke
+  /// hosts, wat een hostcontrole niet tegenhoudt.
+  ///
+  /// Een `Uri` zonder expliciete poort geeft hier de standaard van het schema
+  /// (80 of 443), dus een gewone URL valt er vanzelf binnen.
+  static const Set<int> allowedWebPorts = {80, 443, 8080, 8443};
+
+  /// Of een verzoek dat een herbruikbaar geheim meedraagt naar [host] over
+  /// [scheme] mag vertrekken.
+  ///
+  /// Het onderscheid met een handtekening per verzoek is wezenlijk. SigV4
+  /// ondertekent elk verzoek apart: die handtekening vervalt en is niet opnieuw
+  /// te gebruiken, dus S3 valt hier niet onder. Een wachtwoord of token dat bij
+  /// élk verzoek meegaat, valt er wél onder.
+  ///
+  /// **`trustedInternal` weegt hier bewust niet mee.** Die vink zegt iets over
+  /// de *host* — "dit is mijn eigen doos op mijn eigen LAN" — en niet over de
+  /// lijn ernaartoe. Voor de inhoud van een deck is dat een verdedigbare
+  /// afweging die de gebruiker zelf maakt. Voor een herbruikbaar geheim is het
+  /// dat niet: één meeluisteraar op dat netwerksegment heeft het token, en dat
+  /// token blijft werken lang nadat hij weg is. De schade overleeft de
+  /// verbinding, dus de afweging is niet dezelfde.
+  ///
+  /// De enige uitzondering is een **letterlijk loopback-adres**: dat verkeer
+  /// verlaat de machine niet, dus er is geen lijn om op mee te luisteren. Alleen
+  /// het adres zelf telt, niet de naam `localhost` — een naam gaat langs DNS en
+  /// kan ergens anders uitkomen, en dan zou de uitzondering juist het geheim
+  /// naar buiten dragen.
+  static bool maySendReusableSecret(String? scheme, {required String host}) =>
+      scheme?.toLowerCase() == 'https' || isLiteralLoopbackHost(host);
+
+  /// Of [host] een letterlijk loopback-adres is (`127.0.0.0/8` of `::1`).
+  /// Bewust géén namen: zie [maySendReusableSecret].
+  static bool isLiteralLoopbackHost(String host) {
+    final bare = host.startsWith('[') && host.endsWith(']')
+        ? host.substring(1, host.length - 1)
+        : host;
+    final addr = InternetAddress.tryParse(bare);
+    return addr != null && addr.isLoopback;
   }
 
   /// Per-host memo of the resolved media gate. Positive results stay cached for
@@ -225,10 +273,18 @@ class NetGuard {
   /// `VideoPlayerController`, which otherwise resolve and connect with no host
   /// check of their own.
   ///
-  /// NOTE: those higher-level APIs re-resolve the host at fetch time, so this
-  /// does not pin the socket; a DNS rebind in the window between this check and
-  /// the fetch stays possible. It closes the static-internal and
-  /// resolves-to-internal cases, which are the realistic deck-driven attacks.
+  /// NOTE: this check does not pin the socket, so on its own it leaves a
+  /// DNS-rebind window between check and fetch. For **images** that window is
+  /// closed elsewhere: `guardedNetworkImage` (utils/media_fetch_io.dart) fetches
+  /// the bytes itself over a socket pinned by [connectPinned], so there is no
+  /// second name lookup at all — this call stays as the UI gate that decides
+  /// whether to show a "blocked" placeholder instead of an error.
+  ///
+  /// For **video** the window remains: `VideoPlayerController.networkUrl` hands
+  /// the URL to a platform player that opens its own connection, and there is no
+  /// byte-level seam to pin. The residual risk is an internal GET whose response
+  /// never reaches the app — no credentials travel, and the static-internal and
+  /// resolves-to-internal cases are closed here.
   static Future<bool> isAllowedMediaUrlResolved(String url) {
     if (!isAllowedMediaUrl(url)) return Future.value(false);
     final host = Uri.parse(url.trim()).host;

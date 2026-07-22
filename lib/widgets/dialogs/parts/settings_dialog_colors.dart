@@ -792,7 +792,7 @@ extension _SettingsColors on _SettingsDialogState {
     required bool selected,
     required VoidCallback onTap,
   }) {
-    final parsed = _parseColor(color);
+    final parsed = AppTheme.parseHexColor(color);
     final checkColor = parsed.computeLuminance() > 0.55
         ? AppTheme.ink
         : Colors.white;
@@ -860,7 +860,7 @@ extension _SettingsColors on _SettingsDialogState {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
-        color: _parseColor(_themeProfile.titleBackgroundColor),
+        color: AppTheme.parseHexColor(_themeProfile.titleBackgroundColor),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Column(
@@ -873,7 +873,7 @@ extension _SettingsColors on _SettingsDialogState {
               TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: _parseColor(_themeProfile.titleTextColor),
+                color: AppTheme.parseHexColor(_themeProfile.titleTextColor),
               ),
             ),
           ),
@@ -884,7 +884,7 @@ extension _SettingsColors on _SettingsDialogState {
               _themeProfile.fontFamily,
               TextStyle(
                 fontSize: 12,
-                color: _parseColor(
+                color: AppTheme.parseHexColor(
                   _themeProfile.titleTextColor,
                 ).withValues(alpha: 0.72),
               ),

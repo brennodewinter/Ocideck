@@ -23,8 +23,13 @@ Een server-side fetcher is per definitie een SSRF-doelwit. De regels spiegelen
   de socket niet meer verleggen); TLS valideert via SNI tegen de échte
   hostnaam;
 - redirects worden niet gevolgd (een 3xx kan naar binnen wijzen);
-- de respons is hard begrensd (standaard 512 MiB) en wordt gestreamd;
-- optioneel een Origin/Referer-allowlist tegen gebruik door derden.
+- alleen bekende poorten (standaard 80, 443, 8080 en 8443), zodat het hulppunt
+  geen poortscanner op andermans naam wordt;
+- de respons is hard begrensd (standaard 512 MiB) en wordt gestreamd, en er zijn
+  standaard hooguit acht opvragen tegelijk onderweg;
+- standaard alleen de same-origin fetch van de app zelf, met optioneel een
+  Origin/Referer-allowlist erbij. Wat die grens wél en niet waard is tegenover
+  een niet-browser staat onder "Vóór publieke inzet".
 
 ## Installatie (Ubuntu + Apache)
 
@@ -89,8 +94,24 @@ Een server-side fetcher is per definitie een SSRF-doelwit. De regels spiegelen
 | --- | --- | --- |
 | `OCIDECK_PROXY_BIND` | `127.0.0.1` | Bind-adres (achter de webserver laten) |
 | `OCIDECK_PROXY_PORT` | `8123` | Poort |
-| `OCIDECK_PROXY_MAX_BYTES` | `536870912` | Harde bytecap per opvraag |
-| `OCIDECK_PROXY_ALLOWED_ORIGINS` | *(leeg = geen check)* | Komma-lijst. Indien gezet volstaat `Sec-Fetch-Site: same-origin` (stuurt elke moderne browser automatisch mee), anders moet `Origin` of `Referer` met een item beginnen. Direct ingetikte adressen en andere sites blijven geweigerd. |
+| `OCIDECK_PROXY_MAX_BYTES` | `536870912` | Harde bytecap per opvraag (512 MiB) |
+| `OCIDECK_PROXY_MAX_INFLIGHT` | `8` | Hoeveel opvragen er tegelijk onderweg mogen zijn; daarboven volgt een 503 |
+| `OCIDECK_PROXY_ALLOWED_PORTS` | `80,443,8080,8443` | Poorten die een deck-URL mag gebruiken; ruimer zetten maakt er een poortscanner van |
+| `OCIDECK_PROXY_ALLOWED_ORIGINS` | *(leeg)* | Komma-lijst. Leeg betekent **niet** "geen check": dan bedient het hulppunt alleen verzoeken met `Sec-Fetch-Site: same-origin`. Is de lijst gezet, dan volstaat die header óók, en anders moet `Origin` of `Referer` met een item beginnen. Direct ingetikte adressen en andere sites blijven geweigerd. *(Rechtgezet 22-07-2026: hier stond "leeg = geen check", wat het omgekeerde was van wat de code doet.)* |
+| `OCIDECK_PROXY_ALLOW_ANY` | *(leeg = uit)* | Op `1`/`true`/`yes` vervalt de origin-controle volledig en bedient het hulppunt elke aanvrager. Alleen doen achter authenticatie en snelheidsbegrenzing — zie hieronder. |
+
+## Vóór publieke inzet
+
+`Sec-Fetch-Site` houdt *pagina's* tegen, geen `curl`: die header staat op de
+verboden-headerlijst, dus geen enkele andere site krijgt hem verstuurd, maar een
+niet-browser zet hem gewoon zelf. Een publiek bereikbaar, verder ongeconfigureerd
+hulppunt is daarmee een open fetch-relais. De SSRF-regels blijven wél altijd
+gelden, dus interne doelen blijven onbereikbaar; wat overblijft is dat derden
+publieke URL's via uw server en op uw IP-adres kunnen ophalen.
+
+De harde voorwaarden voor een publieke deployment staan in
+[`docs/HOSTING.md`](../../docs/HOSTING.md) §4b, en de bijbehorende
+release-checklist onderaan datzelfde document.
 
 Zonder gedeployd hulppunt blijft de webversie gewoon werken: direct fetchen
 dekt same-origin en CORS-vriendelijke bronnen, en de foutmelding legt de

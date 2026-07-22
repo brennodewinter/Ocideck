@@ -1,5 +1,7 @@
 # OciDeck — Software Bill of Materials (SBOM)
 
+> **Status:** current-state description of a generated artefact · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 OciDeck ships a machine-readable **Software Bill of Materials**: a complete,
 version-pinned inventory of every third-party component in the product. It is
 generated from the files that are already the source of truth, checked into the

@@ -10,6 +10,59 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Changed
+- **Twee stille valkuilen bij een nieuw slidetype weggenomen.** Welke slidetypes
+  hun inhoud als tabel bewaren, stond op twee plekken met de hand bijgehouden:
+  in de parser én in de serialisatie. Wie een nieuw tabeltype in de parser
+  vergat, kreeg geen foutmelding — het deck opende, de dia stond er, en de rijen
+  waren na herladen leeg. Datzelfde gold voor "kan deze bulletslide in tweeën?",
+  dat op drie plekken apart was uitgeschreven; de kopie in de slidestrook viel
+  bij een onbekend type stil terug op "nee", zodat de knip in het paneel wel
+  verscheen en op de kaart niet.
+
+  Beide feiten staan nu één keer opgeschreven, naast de opsomming van
+  slidetypes zelf, en een toets vergelijkt ze met wat het opslaan-en-teruglezen
+  werkelijk doet. Voor u verandert er niets aan wat u ziet; het scheelt bij het
+  toevoegen van een slidetype twee bestanden waar het stil mis kon gaan.
+- **Een afbeelding van internet wordt nu opgehaald over een vastgezette
+  verbinding.** Staat er een `http(s)`-afbeelding op een dia, dan controleerde
+  OciDeck eerst of die host niet naar binnen wees — maar liet het ophalen daarna
+  aan Flutter over, en dat zoekt de naam nóg een keer op. Wie het domeinnaamsysteem
+  in handen heeft, kon in dat korte venster van een publiek adres naar een intern
+  adres omschakelen. OciDeck haalt de bytes nu zelf op, over een verbinding die
+  vastzit op het gekeurde adres; er is dus geen tweede opzoeking meer.
+
+  Bijkomstig: bewegende afbeeldingen (GIF, geanimeerde WebP) van internet bewegen
+  nu ook, net als die uit een map. Ze toonden eerder alleen het eerste beeldje.
+
+  Voor **video** blijft dat venster bestaan — de videospeler van het besturingssysteem
+  opent zijn eigen verbinding en er is geen plek om die vast te zetten. Wat daar
+  overblijft is een verzoek naar binnen waarvan het antwoord de app nooit bereikt.
+- **Het kenmerk van een redactie is langer geworden.** In het bestand met
+  redacties naast een geredigeerd rapport draagt elke redactie een kort kenmerk,
+  zodat een lezer kan zeggen: "ik betwist redactie a3f1e2b7". Dat kenmerk was
+  vier tekens lang, en dat is te kort: bij ongeveer driehonderd redacties in één
+  rapport is de kans al één op twee dat er twee hetzelfde heten — en dan wijst
+  een betwisting naar twee dingen tegelijk. Voortaan zijn het er minstens acht,
+  en meer zodra dat nodig is om ze uit elkaar te houden. Bestaande bestanden
+  blijven gewoon leesbaar; het bewijs zat altijd al in de volledige waarde
+  ernaast, niet in het kenmerk.
+- **De hostinggids stelt nu voorwaarden in plaats van aanbevelingen.** Wie de
+  webversie publiek zet, vindt in `docs/HOSTING.md` een blok release-voorwaarden:
+  de beveiligingsheaders als échte HTTP-header, en — als u het optionele
+  fetch-hulppunt inzet — binden op `127.0.0.1`, een origin-lijst plus
+  authenticatie zodra het verder reikt dan strikt same-origin, en verlaagde
+  plafonds wanneer u het bewust als open fetcher draait.
+
+  Aanleiding is dat de standaardcontrole van dat hulppunt (`Sec-Fetch-Site:
+  same-origin`) wel elke andere *website* buiten de deur houdt, maar geen `curl`.
+  Dat is met een header niet op te lossen en stond al eerlijk in de code; het
+  stond alleen nergens waar een beheerder erlangs moet. De SSRF-grens zelf
+  verandert niet — interne adressen bleven en blijven onbereikbaar.
+
+  In de instellingentabel van `server/fetch-proxy/README.md` stond bovendien dat
+  een lege `OCIDECK_PROXY_ALLOWED_ORIGINS` "geen check" betekende. Dat was het
+  omgekeerde van wat de code doet: leeg betekent juist de striktste stand.
+  Rechtgezet, samen met drie instellingen die er helemaal niet in stonden.
 - **Het tijdstempelverzoek draagt nu een nonce.** Vraagt u een RFC 3161-stempel
   aan, dan zit er voortaan een willekeurig getal in het `.tsq`-bestand dat de
   tijdstempeldienst in het token moet herhalen. Daarmee is aan te tonen dát het
@@ -64,6 +117,14 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   voldaan uit het overzicht dat een auditor leest. De eis rekent de hash nu na,
   en het auditdossier schrijft de uitkomst van die controle erbij in plaats van
   alleen de waarde.
+- **Zet u versleuteling aan bij een pakket, dan staat er meteen een sterk
+  wachtwoord klaar.** Het veld was leeg, en dan verzint een mens iets dat hij
+  kan onthouden. Juist bij dit bestandsformaat is dat de zwakke plek: de manier
+  waarop het wachtwoord tot een sleutel wordt omgerekend ligt vast in de
+  zip-standaard en is niet te versterken zonder dat andere programma's uw
+  pakket niet meer kunnen openen. De sterkte van het wachtwoord is dus wat
+  telt. Het staat zichtbaar in beeld zodat u het kunt overnemen, en u kunt er
+  altijd uw eigen zin voor in de plaats zetten.
 - **Geen base64 meer in uw presentatiebestand.** De belofte van OciDeck is dat u
   met alleen een teksteditor en Marp verder kunt. Op zeven plekken klopte dat
   niet: daar stond een blok onleesbare tekens waar uw inhoud in verstopt zat.
@@ -140,6 +201,17 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   melding bij een te grote maplijst noemt nu overal het aantal.
 
 ### Fixed
+- **Video en audio worden nu ook op hun inhoud gecontroleerd.** Van een
+  afbeelding werd altijd al nagegaan of het écht een afbeelding was; bij video
+  en audio werd alleen naar de omvang gekeken. Een willekeurig bestand met de
+  naam `.mp4` kwam zo uw presentatie in. Nu wordt de soort aan de inhoud
+  herkend, net als bij afbeeldingen.
+- **Weigeringen laten voortaan een spoor na.** Werd een deck tegengehouden
+  omdat er uitvoerbare inhoud in zat, of een export omdat de rubricering het
+  niet toeliet, dan zag u dat wel maar bleef er niets van bewaard. Voor een
+  gereedschap dat verzegelde rapporten uitgeeft is juist dát het feit dat u
+  achteraf wilt kunnen navertellen. Er komt geen inhoud van uw presentatie in
+  te staan — alleen wat voor soort weigering het was.
 - **Een export die niets doet, blijft niet meer eeuwig niets doen.** De PDF- en
   PPTX-export maakt zijn afbeeldingen door de échte dia te laten tekenen en het
   resultaat vast te leggen. Daarvoor moet het venster beelden produceren — en
@@ -156,6 +228,29 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   exporteren gewoon op de voorgrond staan. De HTML-export heeft hier geen last
   van; die tekent geen dia's.
 
+- **Uw wachtwoord en uw git-token gaan niet meer onversleuteld over het
+  netwerk.** Had u een opslagserver als "vertrouwd intern" gemarkeerd — bedoeld
+  voor een eigen doos op uw eigen netwerk — dan stond OciDeck een gewone
+  `http`-verbinding toe. Bij WebDAV en git ging uw inloggegeven daar bij élk
+  verzoek in leesbare vorm overheen.
+
+  Die vink gaat over de sérver, niet over de weg ernaartoe. Dat verschil is bij
+  de inhoud van een presentatie te overzien — u kiest zelf of u dat over uw LAN
+  wilt sturen — maar bij een wachtwoord of token niet: wie het één keer
+  onderschept, houdt het, en het blijft werken lang nadat die persoon weg is.
+
+  Voor zo'n verbinding is `https` nu vereist. Wat blijft werken: een openbare
+  bron zonder inloggegeven, en S3/MinIO (dat ondertekent elk verzoek apart, dus
+  er gaat geen herbruikbaar geheim over de lijn). Draait de server op deze
+  computer zelf, dan verandert er ook niets — dat verkeer verlaat de machine
+  niet.
+
+  Merkt u dit? Dan werd uw wachtwoord tot nu toe leesbaar verstuurd. Zet de
+  server op https, of gebruik hem zonder inloggegeven.
+- **Een presentatie kan niet meer naar willekeurige poorten verbinden.** Haalde
+  een dia een afbeelding of video van een adres op, dan werd wel gecontroleerd
+  wélke computer dat was, maar niet op welke poort. De webversie deed dat al
+  wel. Beide kanten hanteren nu dezelfde lijst.
 - **De webversie zegt nu ook waar een formulier níet heen mag.** De
   beveiligingsregels van de webbundel bepalen per soort verkeer waar de pagina
   iets vandaan mag halen. Voor het versturen van een formulier stond dat er niet

@@ -1,6 +1,8 @@
 # OciDeck — Git-Repository Storage (Design)
 
-> **Status: phases 0 through 6 have landed.** Reading, writing, the native `git`
+> **Status:** design; phases 0–6 landed — what remains is verification, not construction · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
+> **Phases 0 through 6 have landed.** Reading, writing, the native `git`
 > plane, releases, the GitHub and GitLab adapters and the cross-deck asset index
 > all exist — see §12 for what each phase actually delivered, together with the
 > gaps each one recorded rather than hid. What remains open is verification, not

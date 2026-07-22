@@ -1,5 +1,7 @@
 # OciDeck — OciWacht (ontwerp)
 
+> **Status:** ontwerp; deels geleverd — de tabel hieronder zegt per onderdeel wat · **Status laatst herzien:** 22-07-2026 · **Uitgever:** Stichting LibreKAT
+
 Detectie van privacygevoelige informatie in slides, met per-slide afhandeling:
 accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in export.
 
@@ -1188,8 +1190,8 @@ Het geredigeerde artefact bevat:
 
 - de blokken zelf: acht keer U+2588, ongeacht de lengte van het origineel (§6.3);
 - een **redactiemanifest**: per redactie `id`, `commitment`, `rule`, `slide`, `field` — en een
-  stabiele referentie in dat `id` (`a3f1`), zodat een verificateur kan zeggen "ik betwist
-  redactie a3f1" (staande praktijk in juridische redactie);
+  stabiele referentie in dat `id` (`a3f1e2b7`), zodat een verificateur kan zeggen "ik betwist
+  redactie a3f1e2b7" (staande praktijk in juridische redactie);
 - de hash van de gezegelde bron (`derived_from`), zodat de herkomst vaststaat.
 
 De salts en de klaartekst zitten **alleen** in de volledige versie.

@@ -1,3 +1,19 @@
+// ── lib/services/s3/ ─────────────────────────────────────────────────────────
+// S3 en S3-compatible opslag als deckbron, in twee bewust gescheiden helften:
+// s3_sigv4.dart ondertekent en raakt het netwerk niet (daardoor toetsbaar tegen
+// vaste vectoren), dit bestand doet het verkeer over een gepinde,
+// redirect-vrije `HttpClient`. Dat is geen willekeurige knip: een AWS-SDK zou
+// zijn eigen HTTP-stack meebrengen en om `NetGuard` heen verbinden, en dan is
+// er van de socketpinning die elke andere netwerkbron toepast niets over.
+//
+// Wat hier níét thuishoort: de bucketconfiguratie (lib/models/s3_settings.dart),
+// de bedrading naar tabbladen en instellingen (lib/state/s3_provider.dart,
+// tabs_provider_s3.dart) en het aftasten van een bucket voor 'Slide zoeken'
+// (../presentation_search/), dat deze dienst alleen gebruikt. WebDAV is de
+// zusterbron en ligt met opzet één map hoger, als los bestand: hij deelt de
+// vorm, niet de ondertekening. Bestand voor bestand: docs/SOURCE_MAP.md.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -168,9 +184,14 @@ class S3Service {
       throw S3Exception(S3Error.config, 'Ongeldige endpoint-URL');
     }
     // SigV4 ondertekent elk verzoek, dus er gaat geen herbruikbaar geheim over
-    // de lijn zoals bij basic-auth. De inhoud van de decks is niettemin
-    // vertrouwelijk, dus geldt dezelfde eis als bij WebDAV: https, tenzij de
-    // gebruiker de server bewust als vertrouwd intern heeft gemarkeerd.
+    // de lijn zoals bij basic-auth: de handtekening is aan dit ene verzoek
+    // gebonden en vervalt. Daarom staat S3 hier bewust anders dan WebDAV en
+    // git, die sinds 2026-07-22 onvoorwaardelijk https eisen — daar overleeft
+    // het gestolen geheim de verbinding, hier niet. Wat op platte tekst wél
+    // meekijkbaar is, is de inhoud van de decks; dat is de afweging die de
+    // gebruiker met "vertrouwd intern" zelf maakt, en die laten we bij hem.
+    // Zie [NetGuard.maySendReusableSecret] voor de andere kant van dat
+    // onderscheid.
     final scheme = bucket.origin?.scheme.toLowerCase();
     if (scheme != 'https' && !(scheme == 'http' && bucket.trustedInternal)) {
       throw S3Exception(

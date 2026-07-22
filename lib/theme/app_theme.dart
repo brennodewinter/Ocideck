@@ -267,7 +267,13 @@ class AppTheme {
   /// gedempt genoeg om niet met echte inhoud te worden verward.
   static const redactionMark = Color(0xFF9AA3AE);
 
-  static Color parseHex(String hex, {Color fallback = Colors.white}) {
+  /// Leest een hexkleur (`#RRGGBB`, `RRGGBB` of `AARRGGBB`) en geeft altijd
+  /// een kleur terug: bij onleesbare invoer komt [fallback] eruit.
+  ///
+  /// Dit is de enige plek waar die vertaling hoort te staan. Wie juist wil
+  /// wéten dat de invoer niet deugde, neemt `tryParseHexColor` uit
+  /// `utils/color_contrast.dart`; die is strenger en geeft `null`.
+  static Color parseHexColor(String hex, {Color fallback = Colors.white}) {
     final cleaned = hex.replaceFirst('#', '');
     final value = int.tryParse(
       cleaned.length == 6 ? 'FF$cleaned' : cleaned,
@@ -277,17 +283,23 @@ class AppTheme {
   }
 
   static ThemeData fromProfile(AppAppearanceProfile profile) {
-    final primary = parseHex(profile.primaryColor, fallback: navy);
-    final accentColor = parseHex(profile.accentColor, fallback: accent);
-    final background = parseHex(profile.backgroundColor, fallback: surface);
-    final surfaceColor = parseHex(profile.surfaceColor);
-    final text = parseHex(profile.textColor, fallback: const Color(0xFF1E293B));
-    final muted = parseHex(
+    final primary = parseHexColor(profile.primaryColor, fallback: navy);
+    final accentColor = parseHexColor(profile.accentColor, fallback: accent);
+    final background = parseHexColor(
+      profile.backgroundColor,
+      fallback: surface,
+    );
+    final surfaceColor = parseHexColor(profile.surfaceColor);
+    final text = parseHexColor(
+      profile.textColor,
+      fallback: const Color(0xFF1E293B),
+    );
+    final muted = parseHexColor(
       profile.mutedTextColor,
       fallback: const Color(0xFF64748B),
     );
-    final panel = parseHex(profile.panelColor, fallback: panelBg);
-    final panelText = parseHex(profile.panelTextColor, fallback: panelFg);
+    final panel = parseHexColor(profile.panelColor, fallback: panelBg);
+    final panelText = parseHexColor(profile.panelTextColor, fallback: panelFg);
     final brightness = profile.isDark ? Brightness.dark : Brightness.light;
     final scheme = ColorScheme.fromSeed(
       seedColor: primary,
