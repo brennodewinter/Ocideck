@@ -85,8 +85,17 @@ void main() {
     MermaidRenderService.instance.attachController(WebViewController());
     // Het bootstrappen leest de mermaid-bundel van de asset-bundel; laat dat
     // afronden voordat er iets te renderen valt.
+    //
+    // Écht wachten, niet alleen microtaken. `AssetBundle.loadString` decodeert
+    // alles boven 10 kB in een eigen isolate, en de mermaid-bundel is ruim
+    // groter. Een isolate-heenweg komt niet terug op een `Duration.zero` —
+    // die pompt alleen de microtaakrij van dit isolate leeg. Met tweehonderd
+    // van die rondes bleef `controller.html` dus altijd null en faalde deze
+    // toets op "er is geen pagina geladen", nog vóór er iets over de CSP werd
+    // beweerd. Vijf milliseconden per ronde geeft de isolate de kans om te
+    // antwoorden; hij breekt af zodra de pagina er is, dus het kost niets.
     for (var i = 0; i < 200; i++) {
-      await Future<void>.delayed(Duration.zero);
+      await Future<void>.delayed(const Duration(milliseconds: 5));
       if (geladenPagina != null || controller.html != null) break;
     }
     geladenPagina ??= controller.html;
