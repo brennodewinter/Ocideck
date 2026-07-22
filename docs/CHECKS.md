@@ -108,7 +108,7 @@ coverage improves rather than treated as a target already met.
 | --- | --- | :---: | :---: | :---: |
 | [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ |
 | [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ |
-| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering, file-size & FilePicker-gate ratchets | ✅ | ✅ | ✅ |
+| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering, file-size, class-size & FilePicker-gate ratchets | ✅ | ✅ | ✅ |
 | [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ |
 | [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ |
 | [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — |
@@ -204,6 +204,28 @@ also declares them, but see the [CI note](#continuous-integration).)
     time. A ceiling may shrink (split the file) but never grow, so large files
     trend smaller instead of creeping bigger. `lib/l10n/translations/*` is
     exempt (those grow with every UI string).
+  - **class-size ratchet** — no *class* may exceed **1000** lines either,
+    counted over **all `part` files of its library**: the class itself plus
+    every `extension … on` hanging off it. This exists because the file ratchet
+    counts files, and a `part` split quiets it without anything getting
+    smaller — `TabsNotifier` sits at ~2,400 lines across seven parts and
+    `_SettingsDialogState` at ~7,300 across twenty-two, every file neatly under
+    a thousand while the class kept growing. The unit that costs you is the one
+    you have to hold in your head to change it, which is the class, not the
+    file. Same number as the file ceiling on purpose: the promise was "no unit
+    over a thousand lines", and this restores it for the unit that counts.
+    Fifteen classes were already over when the ratchet went in; they sit in
+    `classSizeBaseline` with their current size as their ceiling, which may
+    shrink (the run prints a tip) but never grow. The key is
+    `<library>#<Name>`, not `<file>#<Name>` — an extension in a part counts
+    towards the class it extends, and the library keeps two private
+    `_FooState`s in different screens from being added together. A baseline
+    entry naming a class that no longer exists is reported as well: a ceiling
+    without a class covers nothing. Measured by line scan rather than an AST,
+    which holds because `make format-check` fixes the layout: a top-level
+    declaration starts at column 0 and closes with a `}` at column 0; only
+    `'''` strings are skipped, since they are the one thing that can put a
+    false closing line there.
   - **FilePicker paths behind a platform gate** — a *call site* in `lib/` that
     takes a filesystem path from the file picker must have a platform gate
     (`kIsWeb`, `supportsLocalProjectFolders` or `isWebPlatform`) **in the same
@@ -257,8 +279,11 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Failure means:** route the diagnostic through `logError`; **or** replace the
   literal colour with an `AppTheme` token (then lower `rawColorBaseline`); **or**
   split the oversized file (then lower its `fileSizeBaseline` entry — the run
-  prints a tip), or deliberately raise the entry with a reason; **or** — if you
-  removed a `catch (_)` — lower `catchUnderscoreBaseline` to lock it in.
+  prints a tip), or deliberately raise the entry with a reason; **or** — for an
+  oversized class — move real behaviour out (to a service, a separate class or a
+  widget) rather than into another `part`, since a `part` split leaves the class
+  the same size and this ratchet says so; **or** — if you removed a
+  `catch (_)` — lower `catchUnderscoreBaseline` to lock it in.
 
 ### `make check-method-length`
 - **Runs:** `dart run tool/check_method_length.dart`
