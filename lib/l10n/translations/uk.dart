@@ -1793,6 +1793,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: наскільки широко можна поширювати цей матеріал?',
+  'Wat betekenen deze niveaus?': 'Що означають ці рівні?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'політика класифікації стежить за тим, що дозволено випускати.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'позначка мандрує разом із файлом, але жодного бар\'єра немає: увімкніть політику класифікації у Налаштування → Загальні.',
   'Dit document bestaat alleen in het Engels.':
       'Цей документ існує лише англійською.',
   'Dit bestand bestaat niet meer op deze plek.':

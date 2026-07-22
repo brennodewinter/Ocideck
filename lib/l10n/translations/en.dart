@@ -916,6 +916,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: how widely may this material be shared?',
+  'Wat betekenen deze niveaus?': 'What do these levels mean?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'the classification policy guards what may leave.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'the marking travels with it, but there is no barrier: turn on the classification policy under Settings → General.',
   'Dit document bestaat alleen in het Engels.':
       'This document is available in English only.',
   'Dit bestand bestaat niet meer op deze plek.':

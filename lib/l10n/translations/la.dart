@@ -1792,6 +1792,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: quam late haec materia communicari licet?',
+  'Wat betekenen deze niveaus?': 'Quid significant hi gradus?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'consilium classificationis custodit quid exire liceat.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'nota comitatur, sed nullus est obex: consilium classificationis apud Optiones → Generalia adhibe.',
   'Dit document bestaat alleen in het Engels.':
       'Hoc documentum Anglice tantum exstat.',
   'Dit bestand bestaat niet meer op deze plek.':

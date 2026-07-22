@@ -4,6 +4,7 @@ import 'package:ocideck/models/markdown_validation.dart';
 import 'package:ocideck/models/slide_quality.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/classification_enforcement_policy.dart';
 import 'package:ocideck/services/export_service.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/redaction_manifest.dart';
@@ -36,11 +37,10 @@ const _qualityError = SlideQualityResult([
 ExportBundle _emptyBundle(
   PrivacyExportProfile profile, {
   bool includeDetail = true,
-}) => ExportBundle(
-  audience: PrivacyProjection.forAudience(
-    const Deck(title: 'Test'),
-    profile: profile,
-  ),
+}) => _bundleOf(const Deck(title: 'Test'), profile);
+
+ExportBundle _bundleOf(Deck deck, PrivacyExportProfile profile) => ExportBundle(
+  audience: PrivacyProjection.forAudience(deck, profile: profile),
   markdown: '',
   manifest: RedactionManifest.empty,
   privacySummary: PrivacyExportSummary.empty,
@@ -288,5 +288,62 @@ void main() {
       findsNothing,
     );
     expect(find.textContaining('de privacycontrole staat uit'), findsOneWidget);
+  });
+
+  // #627: het dialoog zweeg over de classificatie en exporteerde zonder enige
+  // drempel. Wie TLP:RED koos zag rode markeringen op elke dia en mocht daar
+  // iets van verwachten; als het alleen opmaak is, is dat erger dan geen
+  // classificatie — dus zegt het dialoog nu welk van de twee het is.
+  group('classificatie in het exportdialoog', () {
+    Future<void> pumpMet(
+      WidgetTester tester,
+      TlpLevel tlp, {
+      ClassificationEnforcementPolicy policy =
+          const ClassificationEnforcementPolicy(),
+    }) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ExportDialog(
+              deckPath: '/tmp/deck.md',
+              bundleFor: (profile, {bool includeDetail = true}) =>
+                  _bundleOf(Deck(title: 'Test', tlp: tlp), profile),
+              exportService: ExportService(),
+              enforcementPolicy: policy,
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('zonder classificatie staat er niets over', (tester) async {
+      await pumpMet(tester, TlpLevel.none);
+      expect(find.textContaining('TLP:'), findsNothing);
+    });
+
+    testWidgets('zonder handhaving zegt het dat het alleen een markering is', (
+      tester,
+    ) async {
+      // Dit is de gewone toestand — handhaving is een aparte instelling — en
+      // precies het geval waarin het dialoog eerder zweeg.
+      await pumpMet(tester, TlpLevel.amber);
+      expect(find.textContaining('TLP:AMBER'), findsOneWidget);
+      expect(find.textContaining('geen drempel'), findsOneWidget);
+    });
+
+    testWidgets('mét handhaving zegt het dat er wél iets bewaakt wordt', (
+      tester,
+    ) async {
+      await pumpMet(
+        tester,
+        TlpLevel.amber,
+        policy: const ClassificationEnforcementPolicy(
+          maxReleaseLevel: TlpLevel.red,
+        ),
+      );
+      expect(find.textContaining('TLP:AMBER'), findsOneWidget);
+      expect(find.textContaining('geen drempel'), findsNothing);
+    });
   });
 }

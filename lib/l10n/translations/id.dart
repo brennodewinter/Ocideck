@@ -1776,6 +1776,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: seberapa luas materi ini boleh dibagikan?',
+  'Wat betekenen deze niveaus?': 'Apa arti tingkatan ini?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'kebijakan klasifikasi menjaga apa yang boleh keluar.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'penandaan ikut serta, tetapi tidak ada penghalang: aktifkan kebijakan klasifikasi di Pengaturan → Umum.',
   'Dit document bestaat alleen in het Engels.':
       'Dokumen ini hanya tersedia dalam bahasa Inggris.',
   'Dit bestand bestaat niet meer op deze plek.':

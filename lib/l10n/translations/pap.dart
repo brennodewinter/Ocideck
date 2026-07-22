@@ -734,6 +734,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: te unda e material aki por wòrdu kompartí?',
+  'Wat betekenen deze niveaus?': 'Kiko e nivelnan aki ta nifiká?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'e polítika di klasifikashon ta vigilá kiko por sali.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'e marka ta biaha huntu, pero no tin ningun barera: aktivá e polítika di klasifikashon na Preferensianan → General.',
   'Dit document bestaat alleen in het Engels.':
       'E dokumento aki ta eksistí solamente na ingles.',
   'Dit bestand bestaat niet meer op deze plek.':

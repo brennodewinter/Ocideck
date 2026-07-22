@@ -24,6 +24,18 @@ class ClassificationEnforcementPolicy {
     this.requireClassification = false,
   });
 
+  /// Of dit beleid werkelijk iets tegenhoudt.
+  ///
+  /// Zonder een van de drie is een classificatie alleen opmaak: de markering
+  /// reist mee, maar niets weigert een export. Het exportdialoog zegt dat nu
+  /// met zoveel woorden, want een TLP:RED die niets doet wekt een verwachting
+  /// die niet wordt waargemaakt — en dat is erger dan geen classificatie
+  /// (#627).
+  bool get isEnforcing =>
+      maxReleaseLevel != null ||
+      minRequiredLevel != null ||
+      requireClassification;
+
   /// Alleen het plafond — backward compatible met [ClassificationPolicy].
   factory ClassificationEnforcementPolicy.fromMaxReleaseKey(String? key) =>
       ClassificationEnforcementPolicy(

@@ -2755,6 +2755,13 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: bu materyal ne kadar geniş paylaşılabilir?',
+  'Wat betekenen deze niveaus?': 'Bu düzeyler ne anlama geliyor?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'sınıflandırma ilkesi neyin dışarı çıkabileceğini denetler.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'işaret dosyayla birlikte gider, ama hiçbir engel yoktur: sınıflandırma ilkesini Ayarlar → Genel altında açın.',
   'Dit document bestaat alleen in het Engels.':
       'Bu belge yalnızca İngilizce olarak mevcut.',
   'Dit bestand bestaat niet meer op deze plek.':

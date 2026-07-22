@@ -1803,6 +1803,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: πόσο ευρέως επιτρέπεται να κοινοποιηθεί αυτό το υλικό;',
+  'Wat betekenen deze niveaus?': 'Τι σημαίνουν αυτά τα επίπεδα;',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'η πολιτική διαβάθμισης ελέγχει τι επιτρέπεται να βγει.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'η σήμανση ταξιδεύει μαζί, αλλά δεν υπάρχει κανένα φράγμα: ενεργοποιήστε την πολιτική διαβάθμισης στις Ρυθμίσεις → Γενικά.',
   'Dit document bestaat alleen in het Engels.':
       'Αυτό το έγγραφο υπάρχει μόνο στα αγγλικά.',
   'Dit bestand bestaat niet meer op deze plek.':

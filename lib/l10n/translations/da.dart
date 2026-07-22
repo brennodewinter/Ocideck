@@ -1775,6 +1775,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: hvor bredt må dette materiale deles?',
+  'Wat betekenen deze niveaus?': 'Hvad betyder disse niveauer?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'klassifikationspolitikken holder øje med, hvad der må ud.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'markeringen følger med, men der er ingen spærre: slå klassifikationspolitikken til under Indstillinger → Generelt.',
   'Dit document bestaat alleen in het Engels.':
       'Dette dokument findes kun på engelsk.',
   'Dit bestand bestaat niet meer op deze plek.':

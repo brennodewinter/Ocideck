@@ -1793,6 +1793,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: cât de larg poate fi distribuit acest material?',
+  'Wat betekenen deze niveaus?': 'Ce înseamnă aceste niveluri?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'politica de clasificare supraveghează ce poate ieși.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'marcajul călătorește odată cu fișierul, dar nu există nicio barieră: activează politica de clasificare în Setări → General.',
   'Dit document bestaat alleen in het Engels.':
       'Acest document există doar în engleză.',
   'Dit bestand bestaat niet meer op deze plek.':

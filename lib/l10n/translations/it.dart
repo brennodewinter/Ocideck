@@ -730,6 +730,13 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: quanto ampiamente può essere condiviso questo materiale?',
+  'Wat betekenen deze niveaus?': 'Che cosa significano questi livelli?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'il criterio di classificazione controlla ciò che può uscire.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'la marcatura viaggia con il file, ma non c\'è alcuna barriera: attiva il criterio di classificazione in Impostazioni → Generale.',
   'Dit document bestaat alleen in het Engels.':
       'Questo documento esiste solo in inglese.',
   'Dit bestand bestaat niet meer op deze plek.':

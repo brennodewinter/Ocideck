@@ -1751,6 +1751,13 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
+      'Traffic Light Protocol: De\'vam luHevlaH nuv \'ar?',
+  'Wat betekenen deze niveaus?': 'nuq lu\'oS patlhmeyvam?',
+  'het classificatiebeleid bewaakt wat er uit mag.':
+      'mejlaHbogh Dochmey \'av patlh chut.',
+  'de markering reist mee, maar er is geen drempel: zet het classificatiebeleid aan onder Instellingen → Algemeen.':
+      'lengtaH per, \'ach ngaQwI\' tu\'lu\'be\': cherlu\'bogh → motlh-Daq patlh chut yIchu\'.',
   'Dit document bestaat alleen in het Engels.':
       'DIvI\' Hol neH lo\' ghItlhvam.',
   'Dit bestand bestaat niet meer op deze plek.':

@@ -1266,6 +1266,23 @@ question again for that slide.
 
 ## Traffic Light Protocol (TLP)
 
+**What it is, in one sentence:** the Traffic Light Protocol is a shared way of
+saying *how widely may this material be shared* — a convention from
+incident-response work (FIRST TLP 2.0), not something OciDeck invented. Least to
+most restrictive: `CLEAR` (no restriction) · `GREEN` (the wider community) ·
+`AMBER` (your organisation and its clients, need-to-know) · `AMBER+STRICT` (your
+organisation only) · `RED` (the named people in the room, and nobody else).
+
+**By itself it is a marking, not a lock.** Choosing a level puts the official
+marking on every slide and carries it into exports and file metadata, which is
+what the protocol asks for — the recipient is told what the rules are. It does
+not by itself stop you from exporting. Turning it into a threshold is a separate
+switch: *Settings → General → Classification enforcement*, described below. The
+export dialog says which of the two you are in, because a `TLP:RED` that quietly
+does nothing raises an expectation it does not meet. *(Said out loud here and in
+the interface on 2026-07-22, #627: the chip sat in the second-most prominent
+place in the app with no explanation at all.)*
+
 A deck has an overall TLP level (set from the **TLP** chip in the title bar, or
 under *Presentation properties*). Each slide can *also* carry its own level
 (*Per-slide options*). When you present or export, slides whose level is
