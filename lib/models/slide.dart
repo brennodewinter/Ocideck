@@ -54,6 +54,14 @@ enum SlideType {
 /// its types.
 enum SlideCategory { algemeen, informatieveiligheid }
 
+/// Hoeveel kolommen *doorlopende* bullettekst een [SlideType] toont — de vorm
+/// die zich over pagina's laat verdelen.
+///
+/// Nadrukkelijk niet "draagt iets in [Slide.bullets]": `timeline` bewaart zijn
+/// gebeurtenissen dáár ook, maar dat is gecodeerde gegevens, geen lopende
+/// lijst, en die knip je niet in tweeën. Vandaar [none] voor zulke types.
+enum BulletColumns { none, one, two }
+
 /// The part a slide plays inside a finding *group* (PENTEST_MIAUW §3.1). A real
 /// finding spans a header/summary card plus detail slides (description,
 /// reproduction, impact, recommendation) and evidence screenshots; every slide
@@ -144,6 +152,15 @@ class SlideTypeMeta {
   /// no per-entry change.
   final SlideCategory category;
 
+  /// Hoeveel kolommen doorlopende bullettekst dit type toont; bepaalt of en hoe
+  /// "in tweeën splitsen" werkt. Zie [BulletColumns].
+  ///
+  /// Dezelfde regel stond driemaal uitgeschreven — in `canSplitSlide`, in
+  /// `DeckNotifier._splitSlide` en nog eens in de slidestrook, die laatste met
+  /// een `_ => false` die een nieuw type stilzwijgend onsplitsbaar maakte. Drie
+  /// kopieën die uit de pas konden lopen; nu één veld.
+  final BulletColumns bulletColumns;
+
   /// Stores its content as a Markdown table in [Slide.tableRows], and therefore
   /// round-trips through the shared table writer/reader.
   ///
@@ -162,6 +179,7 @@ class SlideTypeMeta {
     this.splitWithImage = false,
     this.isHeading = false,
     this.category = SlideCategory.algemeen,
+    this.bulletColumns = BulletColumns.none,
     this.backedByTable = false,
   });
 }
@@ -179,15 +197,21 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     marpClass: 'section',
     isHeading: true,
   ),
-  SlideType.bullets: SlideTypeMeta(label: 'Alleen Bullets', marpClass: ''),
+  SlideType.bullets: SlideTypeMeta(
+    label: 'Alleen Bullets',
+    marpClass: '',
+    bulletColumns: BulletColumns.one,
+  ),
   SlideType.twoBullets: SlideTypeMeta(
     label: 'Twee Bulletkolommen',
     marpClass: 'two-bullets',
+    bulletColumns: BulletColumns.two,
   ),
   SlideType.bulletsImage: SlideTypeMeta(
     label: 'Bullets + Afbeelding',
     marpClass: 'split',
     splitWithImage: true,
+    bulletColumns: BulletColumns.one,
   ),
   SlideType.twoImages: SlideTypeMeta(label: 'Twee Afbeeldingen', marpClass: ''),
   SlideType.image: SlideTypeMeta(label: 'Grote Afbeelding', marpClass: ''),
@@ -280,6 +304,9 @@ extension SlideTypeExtension on SlideType {
 
   /// The picker category this type belongs to.
   SlideCategory get category => slideTypeMeta[this]!.category;
+
+  /// Hoeveel kolommen doorlopende bullettekst dit type toont.
+  BulletColumns get bulletColumns => slideTypeMeta[this]!.bulletColumns;
 
   /// True when the type's content lives in [Slide.tableRows] and round-trips
   /// through the shared table writer/reader. See [SlideTypeMeta.backedByTable].

@@ -57,6 +57,18 @@ void main() {
       SlideType.title,
       SlideType.section,
     });
+    // bulletColumns verving drie kopieën van dezelfde splitsregel.
+    expect(
+      {
+        for (final t in SlideType.values)
+          if (t.bulletColumns != BulletColumns.none) t: t.bulletColumns,
+      },
+      {
+        SlideType.bullets: BulletColumns.one,
+        SlideType.bulletsImage: BulletColumns.one,
+        SlideType.twoBullets: BulletColumns.two,
+      },
+    );
     // backedByTable verving `_tableBackedTypes` in de parser naast de
     // cases-groep in de serialisatie.
     expect(SlideType.values.where((t) => t.backedByTable).toSet(), {
