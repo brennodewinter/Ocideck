@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -314,6 +315,43 @@ void main() {
       expect(await traces.pruneOrphanStyleLogos(const []), 1);
       expect(old.existsSync(), isFalse);
     });
+
+    test(
+      'de veger bij het laden spaart een logo dat nog in gebruik is',
+      () async {
+        // De valkuil: de veger draaide in de shell, vóór de profielenlijst was
+        // geladen. Dan zag hij alleen de ingebouwde profielen, hield elk
+        // geïmporteerd logo voor verweesd, en gooide er een weg dat gewoon in
+        // gebruik was. Vandaar dit oude bestand mét een profiel dat ernaar wijst.
+        final old = logo(
+          'oud-maar-in-gebruik.png',
+          age: const Duration(days: 30),
+        );
+        SharedPreferences.setMockInitialValues({
+          'themeProfiles': jsonEncode([
+            ThemeProfile(name: 'Klant', logoPath: old.path).toJson(),
+          ]),
+        });
+
+        SettingsNotifier(diskTraces: traces);
+        await Future<void>.delayed(const Duration(milliseconds: 50));
+
+        expect(old.existsSync(), isTrue);
+      },
+    );
+
+    test(
+      'de veger bij het laden neemt wél een echt verweesd logo mee',
+      () async {
+        final orphan = logo('echt-verweesd.png', age: const Duration(days: 30));
+        SharedPreferences.setMockInitialValues({});
+
+        SettingsNotifier(diskTraces: traces);
+        await Future<void>.delayed(const Duration(milliseconds: 50));
+
+        expect(orphan.existsSync(), isFalse);
+      },
+    );
 
     test('een profiel verwijderen wist zijn logo meteen', () async {
       final mine = logo('klantlogo.png');

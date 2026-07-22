@@ -222,6 +222,12 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     _persistedLogoPaths = _referencedLogoPaths;
     // Niet awaiten: de sleutelbos mag de instellingen niet ophouden.
     unawaited(adoptPrivacyOwnIdentity(prefs));
+    // De opstartveger voor verweesde stijl-logo's hoort hier en niet in de
+    // shell: hij vergelijkt tegen de profielenlijst, en die is pas op dit punt
+    // geladen. Een veger die eerder draait ziet de ingebouwde profielen, houdt
+    // elk geïmporteerd logo voor verweesd, en gooit er een weg dat gewoon in
+    // gebruik is.
+    unawaited(pruneOrphanStyleLogos());
   }
 
   /// Persisteer een prefs-mutatie. Vangt schrijffouten af en logt ze, zodat een
