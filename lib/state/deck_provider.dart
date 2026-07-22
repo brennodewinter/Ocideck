@@ -16,6 +16,7 @@ import '../services/annotation_codec.dart';
 import '../services/bullet_pagination.dart';
 import '../services/checklist_templates.dart';
 import '../services/document_integrity.dart';
+import '../services/rich_text_chapters.dart';
 import '../services/finding_context_score.dart';
 import '../services/finding_numbering.dart';
 import '../services/scope_coverage.dart';

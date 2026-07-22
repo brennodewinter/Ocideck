@@ -2759,6 +2759,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Bu metin bölümler içeriyor. Bölme işlemi',
+  'dia\'s op.': 'slayt oluşturur.',
+  'Splits op hoofdstukken': 'Bölümlere göre ayır',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'Bu sunumda henüz gözden geçirmediğiniz AI metni var. Yine de dışa aktarabilirsiniz; dosya bunu kendisi belirtir ve adına "-ai-concept" eklenir.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

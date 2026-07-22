@@ -1784,6 +1784,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Tento text obsahuje kapitoly. Počet snímok po rozdelení:',
+  'dia\'s op.': '(jedna na kapitolu).',
+  'Splits op hoofdstukken': 'Rozdeliť podľa kapitol',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'V tejto prezentácii je AI text, ktorý si zatiaľ neskontroloval. Export je aj tak možný; súbor to sám uvádza a dostane v názve "-ai-concept".',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

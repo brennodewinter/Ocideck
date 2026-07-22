@@ -1779,6 +1779,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'To besedilo vsebuje poglavja. Število prosojnic po razdelitvi:',
+  'dia\'s op.': '(po ena na poglavje).',
+  'Splits op hoofdstukken': 'Razdeli po poglavjih',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'V tem kompletu je besedilo UI, ki ga še nisi pregledal. Izvoz je vseeno mogoč; datoteka to sama navede in dobi "-ai-concept" v imenu.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

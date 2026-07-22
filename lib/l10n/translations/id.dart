@@ -1777,6 +1777,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Teks ini berisi bab. Pemisahan menghasilkan',
+  'dia\'s op.': 'slide.',
+  'Splits op hoofdstukken': 'Pisahkan per bab',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'Dek ini berisi teks AI yang belum Anda tinjau. Ekspor tetap bisa; berkas itu sendiri menyebutkannya dan mendapat "-ai-concept" pada namanya.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

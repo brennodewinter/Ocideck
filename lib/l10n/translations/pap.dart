@@ -734,6 +734,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'E teksto aki tin kapítulonan. Si bo parti e, bo ta haña',
+  'dia\'s op.': 'slide.',
+  'Splits op hoofdstukken': 'Parti pa kapítulo',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'Den e deck aki tin teksto di IA ku bo no a revisá ainda. Bo por eksportá tòg; e file mes ta bisa esei i ta haña "-ai-concept" den su nòmber.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

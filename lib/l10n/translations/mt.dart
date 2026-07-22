@@ -1799,6 +1799,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Dan it-test fih kapitli. Il-qsim jipproduċi',
+  'dia\'s op.': 'slides.',
+  'Splits op hoofdstukken': 'Aqsam skont il-kapitli',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'Dan id-deck fih test IA li għadek ma rrevedejtx. Xorta tista\' tesporta; il-fajl jgħid dan hu stess u jieħu "-ai-concept" f\'ismu.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

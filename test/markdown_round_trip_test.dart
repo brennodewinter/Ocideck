@@ -592,6 +592,65 @@ void main() {
       expect(markdown, contains('Dit is **vet** tekst'));
     });
 
+    test('an image inside the text survives next to the side image', () {
+      // De zij-afbeelding staat in `<div class="split-image">`; een `![…]` in de
+      // tekst hoort daar niets mee te maken. Vroeger gold "de eerste `![…]` op
+      // een split-slide is de zij-afbeelding", en dan werd de afbeelding in de
+      // lopende tekst opgeslokt en verdween hij uit de body.
+      const body =
+          'Kijk naar deze grafiek:\n\n'
+          '![De omzet per kwartaal](images/grafiek.png)\n\n'
+          'En dat verklaart het verschil.';
+      final out = _roundTrip(
+        Slide.create(SlideType.bulletsImage).copyWith(
+          listStyle: ListStyle.richText,
+          customMarkdown: body,
+          imagePath: 'images/portret.png',
+        ),
+      );
+      expect(out.customMarkdown, body);
+      expect(
+        out.imagePath,
+        'images/portret.png',
+        reason: 'de zij-afbeelding blijft de zij-afbeelding',
+      );
+    });
+
+    test('the side image survives every combination of title and body', () {
+      // De lege body is het randgeval: de kopfase van de parser slikt elke
+      // `<div`-regel, en zonder body is die fase n\u00f3g actief wanneer
+      // `<div class="split-image">` langskomt. De zij-afbeelding viel dan in de
+      // body-tak en was na opslaan-en-heropenen weg.
+      for (final title in ['', 'Titel']) {
+        for (final body in ['', 'Tekst.']) {
+          final out = _roundTrip(
+            Slide.create(SlideType.bulletsImage).copyWith(
+              listStyle: ListStyle.richText,
+              title: title,
+              customMarkdown: body,
+              imagePath: 'images/photo.png',
+            ),
+          );
+          final where = 'titel=<$title> body=<$body>';
+          expect(out.imagePath, 'images/photo.png', reason: where);
+          expect(out.customMarkdown, body, reason: where);
+          expect(out.title, title, reason: where);
+        }
+      }
+    });
+
+    test('a text image alone does not become the side image', () {
+      const body =
+          'Een dia zonder zij-afbeelding:\n\n![Alt](images/in-tekst.png)';
+      final out = _roundTrip(
+        Slide.create(
+          SlideType.bulletsImage,
+        ).copyWith(listStyle: ListStyle.richText, customMarkdown: body),
+      );
+      expect(out.customMarkdown, body);
+      expect(out.imagePath, isEmpty);
+    });
+
     test('twoImages slide keeps both images, split and captions', () {
       final out = _roundTrip(
         Slide.create(SlideType.twoImages).copyWith(

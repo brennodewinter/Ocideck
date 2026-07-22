@@ -38,6 +38,7 @@ import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/finding_context_score.dart';
+import '../../services/markdown_body_blocks.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/rich_text_layout.dart';
 // De split-run-metingen zijn services (headless rekenwerk), maar hun natuurlijke
@@ -316,6 +317,10 @@ class SlidePreviewWidget extends StatelessWidget {
 
   /// Pagina binnen een rich-text slide (0-gebaseerd). Alleen relevant bij
   /// [ListStyle.richText] wanneer de tekst over meerdere schermen loopt.
+  ///
+  /// Voor oppervlakken die zélf door de pagina's bladeren (het editorpaneel, de
+  /// presentator). Een oppervlak dat slides opsomt in plaats van doorbladert —
+  /// de export — krijgt de pagina mee op de slide zelf; zie [_effectivePage].
   final int richTextPage;
 
   /// Toont vorige/volgende-knoppen op rich-text slides met meerdere pagina's.
@@ -465,6 +470,13 @@ class SlidePreviewWidget extends StatelessWidget {
     );
   }
 
+  /// De pagina die deze render toont: de vaste pagina van een uitgeklapte
+  /// render-kopie ([Slide.renderPage]) gaat vóór, anders de pagina waar het
+  /// oppervlak zelf naartoe gebladerd heeft. De twee sluiten elkaar uit — een
+  /// uitgeklapte kopie komt alleen voor waar niemand bladert.
+  int get _effectivePage =>
+      slide.renderPage > 0 ? slide.renderPage : richTextPage;
+
   Widget _buildSlide() {
     final markingTlp = effectiveTlp(deckTlp: tlp, slideTlp: slide.tlp);
     return LayoutBuilder(
@@ -601,11 +613,10 @@ class SlidePreviewWidget extends StatelessWidget {
         return _BulletsPreview(
           slide: slide,
           w: w,
+          projectPath: projectPath,
           font: fontFamily,
           profile: themeProfile,
-          richTextPage: richTextPage,
-          showRichTextPageControls: showRichTextPageControls,
-          onRichTextPageChanged: onRichTextPageChanged,
+          richTextPage: _effectivePage,
           numberStart: numberStart,
           fitScaleOverride: fitScaleOverride,
         );
@@ -624,9 +635,7 @@ class SlidePreviewWidget extends StatelessWidget {
           projectPath: projectPath,
           font: fontFamily,
           profile: themeProfile,
-          richTextPage: richTextPage,
-          showRichTextPageControls: showRichTextPageControls,
-          onRichTextPageChanged: onRichTextPageChanged,
+          richTextPage: _effectivePage,
           numberStart: numberStart,
           fitScaleOverride: fitScaleOverride,
         );

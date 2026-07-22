@@ -1777,6 +1777,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Tässä tekstissä on lukuja. Jakaminen tuottaa',
+  'dia\'s op.': 'diaa.',
+  'Splits op hoofdstukken': 'Jaa luvuittain',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'Tässä deckissä on tekoälytekstiä, jota et ole vielä tarkistanut. Vienti onnistuu silti; tiedosto kertoo siitä itse ja saa nimeensä "-ai-concept".',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

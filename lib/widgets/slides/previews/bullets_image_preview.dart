@@ -10,8 +10,6 @@ class _BulletsImagePreview extends StatelessWidget {
   final String font;
   final ThemeProfile profile;
   final int richTextPage;
-  final bool showRichTextPageControls;
-  final ValueChanged<int>? onRichTextPageChanged;
 
   /// First number for a numbered list (continues a chain across slides).
   final int numberStart;
@@ -26,8 +24,6 @@ class _BulletsImagePreview extends StatelessWidget {
     required this.font,
     required this.profile,
     this.richTextPage = 0,
-    this.showRichTextPageControls = false,
-    this.onRichTextPageChanged,
     this.numberStart = 1,
     this.fitScaleOverride,
   });
@@ -303,8 +299,8 @@ class _BulletsImagePreview extends StatelessWidget {
                         contentW: availW,
                         availH: availH,
                         splitWithImage: true,
+                        projectPath: projectPath,
                         richTextPage: richTextPage,
-                        showPageControls: showRichTextPageControls,
                       ),
                     ),
                   ),

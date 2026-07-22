@@ -41,6 +41,10 @@ class SlideEditorContext {
   final bool nestedInScrollView;
   final void Function(int atMs)? onSplitVideo;
 
+  /// Knipt de vrije tekst van deze dia op zijn `#`-koppen in losse dia's. Null
+  /// wanneer er niets te knippen valt, en dán biedt de editor het ook niet aan.
+  final VoidCallback? onSplitChapters;
+
   /// The active theme's shared activation duration (ms), shown by animated-slide
   /// editors as the inherited value when the slide sets no own duration.
   final int themeAnimationDurationMs;
@@ -75,6 +79,7 @@ class SlideEditorContext {
     this.canContinueSplit = false,
     this.nestedInScrollView = false,
     this.onSplitVideo,
+    this.onSplitChapters,
     this.deckFindingSeverities = const [],
     this.deckResolvedCount = 0,
   });
@@ -108,6 +113,7 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         key: c._key,
         slide: c.slide,
         onUpdate: c.onUpdate,
+        onSplitChapters: c.onSplitChapters,
         previousSlideIsNumbered: c.previousSlideIsNumbered,
         canContinueSplit: c.canContinueSplit,
         nestedInScrollView: c.nestedInScrollView,

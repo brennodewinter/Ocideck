@@ -1795,6 +1795,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Цей текст містить розділи. Кількість слайдів після поділу:',
+  'dia\'s op.': '(по одному на кожен розділ).',
+  'Splits op hoofdstukken': 'Поділити за розділами',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'У цій презентації є текст ШІ, який ти ще не перевірив. Експортувати можна; файл сам про це повідомляє й отримує «-ai-concept» у назві.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

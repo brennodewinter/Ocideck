@@ -731,6 +731,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Este texto contiene capítulos. Al dividirlo se obtienen',
+  'dia\'s op.': 'diapositivas.',
+  'Splits op hoofdstukken': 'Dividir por capítulos',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'Este deck contiene texto de IA que aún no has revisado. Puedes exportar igualmente; el archivo lo indica por sí mismo y lleva "-ai-concept" en el nombre.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

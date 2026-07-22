@@ -1752,6 +1752,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      '\'ay\'mey ngaS ghItlh vam. wavlu\'chugh, chen',
+  'dia\'s op.': 'cha\'nob.',
+  'Splits op hoofdstukken': '\'ay\'meyDaq yIwav',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'deckvamDaq AI-ghItlh tu\'lu\'; DanuDpu\'be\'. ngeHlu\'laH; teywI\' pongDaq "-ai-concept" chelu\'.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

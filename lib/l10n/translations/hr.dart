@@ -1784,6 +1784,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Ovaj tekst sadrži poglavlja. Broj slajdova nakon dijeljenja:',
+  'dia\'s op.': '(po jedan za svako poglavlje).',
+  'Splits op hoofdstukken': 'Podijeli po poglavljima',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'Ovaj deck sadrži AI tekst koji još nisi pregledao. Izvoz je svejedno moguć; datoteka to sama navodi i dobiva "-ai-concept" u nazivu.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

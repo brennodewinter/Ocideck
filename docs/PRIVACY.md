@@ -308,6 +308,17 @@ salutation or label makes them unambiguous, to avoid crying wolf.
   it is removed from every surface that reaches someone other than you.
 - Automatic redaction replaces sensitive content with a fixed-width block so its
   original length can't be reconstructed.
+- Redaction is applied **before** the content reaches any preview, presentation,
+  or export surface — not painted over afterwards.
+- On a slide set to **redact**, the media goes too: image, video and audio are
+  removed and a black redaction block takes their place, rather than the grey box
+  that means "no picture chosen yet". This includes a picture typed into the
+  running text of a rich-text body (`![…](…)`) — the path is emptied while the
+  reference itself stays, so the text does not shift as if nothing had ever been
+  there. *Added 2026-07-22: until then only the image, video and audio fields were
+  cleared, so a redacted slide travelled to the screen and the export with the
+  picture from its body intact.* The source file keeps its images; this is about
+  what is shown and exported.
 - Redaction is applied **before** the content reaches a presentation, an audience
   window or an export — not painted over afterwards. There is no unredacted copy
   behind the blocks for a recipient to recover.
@@ -346,11 +357,14 @@ Tag a deck with a Traffic Light Protocol level — `CLEAR`, `GREEN`, `AMBER`,
 allowed level are blocked, and optionally stamp the classification as a watermark
 on exported files.
 
-### Exports are self-contained and can't phone home
+### Exports can't phone home
 
 HTML exports are sanitised and carry their own strict content-security policy, so
 an exported file opened in a browser cannot run injected scripts or send data
-anywhere. `.ocideck` packages can be password-encrypted.
+anywhere. `.ocideck` packages can be password-encrypted. *Corrected 2026-07-22:
+this heading also called an export "self-contained". It is not, in one respect:
+the HTML export leaves slide images as relative references instead of embedding
+them — the same overstatement corrected elsewhere on 2026-07-21.*
 
 ## Your rights and this tool
 

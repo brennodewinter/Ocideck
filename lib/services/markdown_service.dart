@@ -74,14 +74,25 @@ class MarkdownService {
     buf.writeln('---');
     buf.writeln();
 
-    for (int i = 0; i < deck.slides.length; i++) {
+    // Een render-kopie van een vrije-tekstpagina heeft geen gedaante in het
+    // bestandsformaat: hij draagt de héle body en verschilt alleen in
+    // [Slide.renderPage], dat niet geserialiseerd wordt. Wie zo'n lijst tóch
+    // uitschrijft, krijgt dezelfde dia N keer achter elkaar met steeds de
+    // volledige tekst. De filter staat hier en niet bij de aanroeper, want de
+    // regel geldt overal: `expandRichTextForRender` levert een lijst om te
+    // tékenen, nooit om weg te schrijven.
+    final slides = [
+      for (final slide in deck.slides)
+        if (slide.renderPage == 0) slide,
+    ];
+    for (int i = 0; i < slides.length; i++) {
       if (i > 0) {
         buf.writeln('---');
         buf.writeln();
       }
       buf.write(
         generateSlide(
-          deck.slides[i],
+          slides[i],
           themeProfile: deck.themeProfile,
           inlineChartData: inlineChartData,
           forExport: forExport,

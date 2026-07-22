@@ -96,6 +96,20 @@ class _BodyParse {
   /// [_MarkdownParse._parseBodyLines] zodat de per-regel handlers niet elke
   /// regel opnieuw de cssClass hoeven te splitsen.
   bool isSplit = false;
+
+  /// Of we op dit moment binnen `<div class="split-image">` lezen — de stellage
+  /// waar de serialiser de zij-afbeelding van een split-slide in zet.
+  ///
+  /// Nodig sinds de vrije tekst zélf afbeeldingen mag bevatten. Daarvóór gold
+  /// "de eerste `![…]` op een split-slide is de zij-afbeelding", en dat is niet
+  /// langer waar: een `![…]` in de `split-text`-helft is een afbeelding in de
+  /// lopende tekst en hoort in de body te blijven staan.
+  ///
+  /// Veilig om op de stellage te leunen: deze tak geldt alleen voor een body met
+  /// `<!-- ocideck_list_style: richText -->`, en die aanwijzing schrijft alleen
+  /// OciDeck zelf — dus staat de `split-image`-div er ook. Een handgeschreven
+  /// Marp-split-slide heeft geen richText-body en loopt langs de bullet-tak.
+  bool inSplitImageDiv = false;
 }
 
 extension _MarkdownParse on MarkdownService {
@@ -615,6 +629,18 @@ extension _MarkdownParse on MarkdownService {
 
   void _consumeRichTextLine(String line, _BodyParse b) {
     final t = line.trim();
+    // De split-stellage bijhouden vóór al het andere. De kopfase hieronder slikt
+    // elke `<div`-regel en keert meteen terug, en bij een dia met een lége body
+    // is die fase nog actief wanneer `<div class="split-image">` langskomt: de
+    // vlag ging dan nooit aan, de zij-afbeelding viel in de body-tak en was na
+    // opslaan-en-heropenen weg.
+    if (b.isSplit) {
+      if (t.startsWith('<div class="split-image"')) {
+        b.inSplitImageDiv = true;
+      } else if (t == '</div>') {
+        b.inSplitImageDiv = false;
+      }
+    }
     if (b.richTextHeaderPhase) {
       if (t.isEmpty) return;
       if (t.startsWith('<div') || t == '</div>') {
@@ -643,7 +669,10 @@ extension _MarkdownParse on MarkdownService {
     if (isSplit && t.startsWith('<div class="image-caption">')) {
       final captionParts = _splitTwoCaptions(_decodeImageCaption(t));
       b.imageCaption = captionParts.isNotEmpty ? captionParts.first : '';
-    } else if (isSplit && _reImageMd.hasMatch(t)) {
+    } else if (isSplit && b.inSplitImageDiv && _reImageMd.hasMatch(t)) {
+      // Alleen binnen `<div class="split-image">`: dát is de zij-afbeelding.
+      // Een `![…]` in de `split-text`-helft is een afbeelding in de lopende
+      // tekst en valt hieronder in de body-tak.
       final m = _reImageMd.firstMatch(t);
       if (m != null && b.imagePath.isEmpty) {
         b.imagePath = m.group(1) ?? '';
@@ -658,6 +687,9 @@ extension _MarkdownParse on MarkdownService {
       // serialiser schrijft deze markup nergens anders, en zonder die
       // voorwaarde verdween een door de auteur getypte `<div>`-regel — met zijn
       // inhoud en al — uit een gewone vrije-tekstslide.
+      //
+      // De `split-image`-vlag wordt bovenaan deze methode al bijgehouden, want
+      // die moet ook aangaan wanneer de kopfase deze regel opslokt.
     } else {
       b.richTextLines.add(line);
     }

@@ -1781,6 +1781,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Dä Text hät Kapitel. S Uufteile git',
+  'dia\'s op.': 'Slides.',
+  'Splits op hoofdstukken': 'Nach Kapitel uufteile',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'I dem Deck staht KI-Text, wo du no nöd prüeft häsch. Exportiere gaht trotzdem; d Datei seit das sälber und überchunnt "-ai-concept" im Name.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

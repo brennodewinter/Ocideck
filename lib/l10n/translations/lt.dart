@@ -1785,6 +1785,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Šiame tekste yra skyrių. Skaidrių skaičius po padalijimo:',
+  'dia\'s op.': '(po vieną kiekvienam skyriui).',
+  'Splits op hoofdstukken': 'Skaidyti pagal skyrius',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'Šiame rinkinyje yra DI tekstas, kurio dar neperžiūrėjai. Eksportuoti vis tiek galima; failas pats tai nurodo, o pavadinime atsiranda „-ai-concept“.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

@@ -112,6 +112,30 @@ void main() {
       expect(out.single.imagePath, dangling);
       expect(Directory(p.join(project.path, 'images')).listSync(), isEmpty);
     });
+
+    test('kopieert ook een afbeelding uit de vrije tekst', () async {
+      // Zonder deze stap houdt de opgeslagen presentatie een absoluut pad naar
+      // een bestand buiten haar eigen map: bij de maker in orde, bij de
+      // ontvanger een leeg vak.
+      final src = File(p.join(tmp.path, 'inline.png'))
+        ..writeAsBytesSync([1, 2, 3]);
+      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+
+      final out = await service.copyImagesToProject([
+        Slide.create(SlideType.freeMarkdown).copyWith(
+          customMarkdown: 'Zie ![w:600 de foto](${src.path}) hierboven.',
+        ),
+      ], project.path);
+
+      expect(
+        out.single.customMarkdown,
+        'Zie ![w:600 de foto](images/inline.png) hierboven.',
+      );
+      expect(
+        File(p.join(project.path, 'images', 'inline.png')).existsSync(),
+        isTrue,
+      );
+    });
   });
 
   group('copyMediaToProject', () {

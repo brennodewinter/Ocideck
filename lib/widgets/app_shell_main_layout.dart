@@ -710,6 +710,22 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 
   void _presentDeck() => presentDeck(context, ref);
 
+  /// Wat de export daadwerkelijk opsomt: dezelfde slides, maar met alles wat op
+  /// het scherm één slide is en op papier meerdere pagina's, uitgeklapt.
+  ///
+  /// Een overlopende bevinding wordt zo geëxporteerd als een paar dia's op ware
+  /// grootte in plaats van één ineengekrompen dia. Voor een lange vrije-
+  /// tekstslide gold hetzelfde probleem omgekeerd: de editor en de presentator
+  /// bladeren door zijn pagina's, maar de export somt op — hij rasterde pagina 1
+  /// en de rest verdween geruisloos uit het bestand. Beide uitklappen laten het
+  /// deck zelf ongemoeid, en omdat de voettekst zijn nummer uit de positie in
+  /// deze lijst haalt, telt hij de pagina's nu vanzelf mee.
+  static List<Slide> _expandForExport(List<Slide> slides, Deck deck) =>
+      expandRichTextForRender(
+        expandFindingsForRender(slides),
+        deck.themeProfile,
+      );
+
   Future<void> _exportDeck() async {
     final deckState = ref.read(deckProvider);
     final deck = deckState.deck!;
@@ -760,13 +776,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           ? slides
           : slides.where((s) => !s.isDetail).toList();
 
-      // Render-time pagination: an overflowing finding is exported as several
-      // full-size slides instead of one shrunken one. The deck itself is
-      // unchanged — this only affects what the export enumerates.
       // De projectiegrens. Vanaf hier raakt geen enkel exportpad de bron nog
       // aan: de rasterizer, de markdown voor de HTML-export, de PPTX-notities
       // en de documentmetadata worden allemaal uit dit ene object afgeleid.
-      final source = deck.copyWith(slides: expandFindingsForRender(chosen));
+      final source = deck.copyWith(slides: _expandForExport(chosen, deck));
       final audience = PrivacyProjection.forAudience(
         source,
         disabledRules: disabledRules,

@@ -40,11 +40,10 @@ Widget _bulletsSlideShell({
 class _BulletsPreview extends StatelessWidget {
   final Slide slide;
   final double w;
+  final String? projectPath;
   final String font;
   final ThemeProfile profile;
   final int richTextPage;
-  final bool showRichTextPageControls;
-  final ValueChanged<int>? onRichTextPageChanged;
 
   /// First number for a numbered list (continues a chain across slides).
   final int numberStart;
@@ -55,11 +54,10 @@ class _BulletsPreview extends StatelessWidget {
   const _BulletsPreview({
     required this.slide,
     required this.w,
+    this.projectPath,
     required this.font,
     required this.profile,
     this.richTextPage = 0,
-    this.showRichTextPageControls = false,
-    this.onRichTextPageChanged,
     this.numberStart = 1,
     this.fitScaleOverride,
   });
@@ -264,8 +262,8 @@ class _BulletsPreview extends StatelessWidget {
         contentW: contentW,
         availH: availH,
         splitWithImage: false,
+        projectPath: projectPath,
         richTextPage: richTextPage,
-        showPageControls: showRichTextPageControls,
       ),
     );
   }
@@ -280,8 +278,8 @@ Widget _richTextPaginatedContent({
   required double contentW,
   required double availH,
   required bool splitWithImage,
+  String? projectPath,
   int richTextPage = 0,
-  bool showPageControls = false,
 }) {
   final pad = splitWithImage ? w * 0.038 : w * 0.07;
   final vPad = splitWithImage ? w * 0.042 : w * 0.05;
@@ -371,55 +369,22 @@ Widget _richTextPaginatedContent({
                     emptyLineHeight: w * 0.01 * scale,
                     heading1Size: w * 0.04 * scale,
                     heading2Size: w * 0.03 * scale,
+                    projectPath: projectPath,
+                    scale: scale,
                   ),
                 ],
               ),
             ),
           ),
         ),
-        if (plan.pageCount > 1 && !showPageControls)
-          Positioned(
-            top: w * 0.012,
-            right: w * 0.012,
-            child: _richTextPageBadge(
-              label: '${pageIndex + 1} / ${plan.pageCount}',
-              w: w,
-              font: font,
-              profile: profile,
-            ),
-          ),
+        // Geen "1 / 3"-teller op de dia. Die telde per slide opnieuw vanaf één,
+        // terwijl de zaal naar dia 7 van 24 kijkt — twee nummeringen door
+        // elkaar, waarvan de opvallendste de minst betekenisvolle was. Wie wél
+        // moet weten waar hij is, ziet het waar het thuishoort: de editor en de
+        // presentatorweergave tonen "Pagina 2 / 3" in hun eigen rand, en de
+        // export klapt de pagina's uit tot echte dia's zodat de voettekst ze
+        // gewoon meetelt (`expandRichTextForRender`).
       ],
-    ),
-  );
-}
-
-Widget _richTextPageBadge({
-  required String label,
-  required double w,
-  required String font,
-  required ThemeProfile profile,
-}) {
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: w * 0.014, vertical: w * 0.005),
-    decoration: BoxDecoration(
-      color: AppTheme.parseHexColor(profile.textColor).withValues(alpha: 0.12),
-      borderRadius: BorderRadius.circular(w * 0.008),
-      border: Border.all(
-        color: AppTheme.parseHexColor(profile.textColor).withValues(alpha: 0.2),
-      ),
-    ),
-    child: Text(
-      label,
-      style: _applyFont(
-        font,
-        TextStyle(
-          fontSize: w * 0.018,
-          color: AppTheme.parseHexColor(
-            profile.textColor,
-          ).withValues(alpha: 0.85),
-          fontWeight: FontWeight.w600,
-        ),
-      ),
     ),
   );
 }

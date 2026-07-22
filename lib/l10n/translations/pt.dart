@@ -1807,6 +1807,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Este texto contém capítulos. A divisão produz',
+  'dia\'s op.': 'slides.',
+  'Splits op hoofdstukken': 'Dividir por capítulos',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'Este deck contém texto de IA que ainda não reviste. Podes exportar à mesma; o ficheiro indica-o por si e fica com "-ai-concept" no nome.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

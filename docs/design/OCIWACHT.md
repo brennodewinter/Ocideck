@@ -2042,6 +2042,21 @@ verwijzing is. Klopt, maar het gevolg was dat op een `redact`-slide
 gedetecteerd, gemeld, en vervolgens meegeleverd. Nu verdwijnt de verwijzing als
 geheel, dus het pad kán er niet meer in staan.
 
+**Ook de afbeelding in de lopende tekst** (*aangevuld 2026-07-22*). De projectie
+leegde `imagePath`, `imagePath2`, `videoPath` en `audioPath`, en dat waren tot dan
+toe alle plekken waar een dia een afbeelding kon dragen. Sinds een vrije-tekstbody
+zelf een `![…](pad)` mag bevatten (FILE_FORMAT § *Rich text*) is dat niet meer
+waar: zo'n afbeelding staat in geen van die velden en reisde op een
+`redact`-slide dus gewoon mee naar het scherm en de export, terwijl de tekst
+ernaast al blokken toonde. `inlineImagePaths` telt hem nu mee in het aantal
+geredigeerde media, en `rewriteInlineImagePaths` haalt het pad eruit.
+
+Alleen het pad; `![alt]()` blijft staan. Dezelfde keuze als bij een leeggemaakt
+veld: het blok houdt zijn plek in de layout, de tekst schuift niet op alsof er
+nooit iets stond, en de renderer maakt er via `mediaRedacted` hetzelfde zwarte
+vlak van. Dat is meteen de reden dat `markdown_body_blocks.dart` een
+afbeeldingsblok met een leeg pad als afbeeldingsblok blijft lezen.
+
 **Eerlijkheid in de melding.** De detector telt structureel onder en nooit over —
 hij vindt gezichten, dus iemand van achteren of met het hoofd buiten de uitsnede
 ontbreekt per definitie. De melding zegt daarom "minstens N", en spreekt van

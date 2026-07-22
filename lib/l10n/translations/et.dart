@@ -1768,6 +1768,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'See tekst sisaldab peatükke. Tükeldamine annab',
+  'dia\'s op.': 'slaidi.',
+  'Splits op hoofdstukken': 'Tükelda peatükkide kaupa',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'Selles esitluses on AI tekst, mida sa pole veel üle vaadanud. Eksportida saab siiski; fail teatab sellest ise ja saab nimesse "-ai-concept".',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

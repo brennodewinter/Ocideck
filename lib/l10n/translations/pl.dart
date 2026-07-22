@@ -1789,6 +1789,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Ten tekst zawiera rozdziały. Liczba slajdów po podziale:',
+  'dia\'s op.': '(po jednym na rozdział).',
+  'Splits op hoofdstukken': 'Podziel na rozdziały',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'W tej talii jest tekst AI, którego jeszcze nie sprawdziłeś. Eksport jest możliwy; plik sam o tym informuje i dostaje "-ai-concept" w nazwie.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

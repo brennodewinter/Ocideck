@@ -5,6 +5,7 @@ import '../../models/git_settings.dart';
 import '../../models/slide.dart';
 import '../../utils/log.dart';
 import '../image_service.dart';
+import '../slide_image_refs.dart';
 import '../web_asset_store.dart';
 import 'asset_pool.dart';
 import 'git_forge.dart';
@@ -53,14 +54,18 @@ Future<Deck> resolveRepoAssetsToMem(
     }
   }
 
+  // Ook de `![…](repo:…)` in de vrije tekst wordt teruggelezen — anders opent
+  // het deck met een verwijzing die alleen de forge kent en tekent de dia een
+  // leeg vak. Ophalen is asynchroon en herschrijven niet, dus eerst elke
+  // verwijzing omzetten, dan de dia in haar geheel.
   final slides = <Slide>[];
   for (final slide in deck.slides) {
-    slides.add(
-      slide.copyWith(
-        imagePath: await memPath(slide.imagePath) ?? slide.imagePath,
-        imagePath2: await memPath(slide.imagePath2) ?? slide.imagePath2,
-      ),
-    );
+    final resolved = <String, String>{};
+    for (final reference in slideImagePaths(slide).toSet()) {
+      final mem = await memPath(reference);
+      if (mem != null) resolved[reference] = mem;
+    }
+    slides.add(rewriteSlideImagePaths(slide, (path) => resolved[path]));
   }
   return memFor.isEmpty ? deck : deck.copyWith(slides: slides);
 }

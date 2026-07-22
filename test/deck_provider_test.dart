@@ -142,6 +142,50 @@ void main() {
     expect(slides[1].id, isNot(originalId));
   });
 
+  test('splitIntoChapters knips op koppen en is met één keer ongedaan terug', () {
+    final n = _notifier()..newDeck('D');
+    n.addSlide(SlideType.bullets, afterIndex: 0);
+    n.updateSlide(
+      1,
+      n.state.deck!.slides[1].copyWith(
+        listStyle: ListStyle.richText,
+        title: 'Bestaande titel',
+        customMarkdown: 'Inleiding.\n\n# Eerste\n\nA.\n\n# Tweede\n\nB.',
+      ),
+    );
+    final before = n.state.deck!.slides.length;
+
+    n.splitIntoChapters(1);
+
+    final after = n.state.deck!.slides;
+    expect(after, hasLength(before + 2));
+    expect(after[1].title, 'Bestaande titel');
+    expect(after[2].title, 'Eerste');
+    expect(after[3].title, 'Tweede');
+
+    // Eén mutatie, dus één keer ongedaan maken. Dat is de voorwaarde om dit als
+    // knop aan te durven bieden: wie het per ongeluk aanklikt op een lang
+    // document is niet twintig dia's aan het terugvoegen.
+    n.undo();
+    expect(n.state.deck!.slides, hasLength(before));
+    expect(n.state.deck!.slides[1].customMarkdown, contains('# Eerste'));
+  });
+
+  test('splitIntoChapters doet niets als er geen koppen staan', () {
+    final n = _notifier()..newDeck('D');
+    n.addSlide(SlideType.bullets, afterIndex: 0);
+    n.updateSlide(
+      1,
+      n.state.deck!.slides[1].copyWith(
+        listStyle: ListStyle.richText,
+        customMarkdown: 'Gewoon wat tekst zonder koppen.',
+      ),
+    );
+    final before = n.state.deck!.slides.length;
+    n.splitIntoChapters(1);
+    expect(n.state.deck!.slides, hasLength(before));
+  });
+
   test('splitSlide spreads a full slide over enough pages that none stays full', () {
     // Layout-metingen gebruiken TextPainter; binding moet geïnitialiseerd zijn.
     TestWidgetsFlutterBinding.ensureInitialized();

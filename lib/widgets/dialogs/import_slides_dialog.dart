@@ -5,6 +5,7 @@ import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/file_service.dart';
 import '../../services/slide_dedup_service.dart';
+import '../../services/slide_image_refs.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/slide_preview.dart';
@@ -151,11 +152,15 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
     for (final pres in _presentations) {
       for (final slide in pres.deck.slides) {
         if (!_selectedIds.contains(slide.id)) continue;
-        final resolved = _resolveImage(slide.imagePath, pres.deck.projectPath);
+        // Élke verwijzing wordt absoluut gemaakt tegen het bron-deck, ook een
+        // `![…](…)` in de vrije tekst. Een relatief pad betekent hier iets
+        // anders dan in de presentatie waar de dia naartoe gaat, dus zonder
+        // deze stap wijst het na de import naar de verkeerde map.
         result.add(
-          resolved == slide.imagePath
-              ? slide
-              : slide.copyWith(imagePath: resolved),
+          rewriteSlideImagePaths(
+            slide,
+            (path) => _resolveImage(path, pres.deck.projectPath),
+          ),
         );
       }
     }

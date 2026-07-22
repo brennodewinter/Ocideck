@@ -47,10 +47,18 @@ withholding is a policy consequence, so the UI has to be able to say which.
 ### Slide Model
 `lib/models/slide.dart` — `Slide` is an immutable value object (all fields
 `final`, `const` constructor). It is **not** a generic property bag: besides
-`id` and `SlideType type`, it carries ~50 strongly-typed, type-specific fields
-(`title`, `subtitle`, `bullets`, `tableRows`, `imagePath`, `quote`, `findingId`,
-`tlp`, per-slide style overrides such as `titleTextColorOverride`, …). A field is
-only meaningful for the slide types that use it.
+`id` and `SlideType type`, it carries close to sixty strongly-typed,
+type-specific fields (`title`, `subtitle`, `bullets`, `tableRows`, `imagePath`,
+`quote`, `findingId`, `tlp`, per-slide style overrides such as
+`titleTextColorOverride`, …). A field is only meaningful for the slide types that
+use it. *Corrected 2026-07-22: this said "~50"; the constructor takes 60
+parameters, `id` and `type` included.*
+
+Two of those fields exist **only while rendering** and never reach a saved file:
+`mediaRedacted`, set by the privacy projection, and `renderPage` (added
+2026-07-22), set by `expandRichTextForRender` to say which page of a paginated
+rich-text body a copy draws. Neither is read back by the parser and neither is
+carried over by `Slide.duplicate`; see ARCHITECTURE § *Render-time pagination*.
 
 `SlideType` (24 values): `title, section, bullets, twoBullets, bulletsImage,
 twoImages, image, video, quote, table, freeMarkdown, code, chart, cockpit,
@@ -93,6 +101,13 @@ String generateDeck(Deck deck, {
 // Parse Markdown back into a Deck. Returns null on unparseable input.
 Deck? parseDeck(String markdown, {String? filePath});
 ```
+
+`generateDeck` drops every slide whose `renderPage > 0` (2026-07-22). Those are
+render copies of one paginated rich-text body: each carries the whole body and
+differs only in a field that is not serialized, so writing them out repeats the
+same slide. Passing an `expandRichTextForRender` result to `generateDeck` is
+therefore always a caller mistake, and the filter sits in the service rather than
+at the call site.
 
 Structural pre-flight validation is a separate class; `validate` is an instance
 method, `MarkdownValidationResult validate(String markdown)`, in
@@ -311,6 +326,29 @@ bytes, not extension (`imageMimeFromBytes` accepts PNG, JPEG, GIF, BMP, WebP).
 Key methods: `pickImage` / `pickImageDetailed` (→ `ImageImportOutcome`),
 `pasteImage` / `pasteImageDetailed`, `readSlideImageBytes`, `copyImagesToProject`,
 `copyMediaToProject`.
+
+### Slide image references
+`lib/services/slide_image_refs.dart` — the single answer to "which images does
+this slide use". Do **not** read `imagePath`/`imagePath2` directly: a rich-text
+body may hold `![…](…)` of its own, and those are slide images as well.
+
+```dart
+// Every reference, in reading order: the fields first, then the body.
+// SlideImageSlot is { image, image2, inline }; empty paths are dropped.
+List<SlideImageRef> slideImageRefs(Slide slide);
+Iterable<String> slideImagePaths(Slide slide);
+
+// The counterpart: rewrite the same set. `null` (or the same path) keeps it.
+Slide rewriteSlideImagePaths(Slide slide, String? Function(String path) map);
+String rewriteInlineImagePaths(String markdown, String? Function(String) map);
+List<String> inlineImagePaths(String markdown);
+```
+
+`lib/services/image_usage.dart` builds the library's two questions on top of it:
+`slideIndexesUsingImage(deck, target, resolve)` and
+`slideWithImageReplaced(slide, target, resolve, replacement)`, where
+`ImagePathResolver resolve` is what differs per call site (with or without the
+containment guard) rather than what the questions themselves mean.
 
 ### WebAssetStore
 `lib/services/web_asset_store.dart` — in-memory image store for the web build,

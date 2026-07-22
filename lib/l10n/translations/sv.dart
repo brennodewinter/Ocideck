@@ -1776,6 +1776,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Den här texten innehåller kapitel. Uppdelningen ger',
+  'dia\'s op.': 'bilder.',
+  'Splits op hoofdstukken': 'Dela upp efter kapitel',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'Den här presentationen innehåller AI-text som du inte har granskat än. Du kan exportera ändå; filen anger det själv och får "-ai-concept" i namnet.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

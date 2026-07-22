@@ -1813,6 +1813,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Tá caibidlí sa téacs seo. Líon na sleamhnán tar éis roinnte:',
+  'dia\'s op.': '(ceann in aghaidh gach caibidle).',
+  'Splits op hoofdstukken': 'Roinn de réir caibidlí',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'Tá téacs IS sa deic seo nár sheiceáil tú fós. Is féidir easpórtáil mar sin féin; luann an comhad féin é agus faigheann sé "-ai-concept" ina ainm.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':

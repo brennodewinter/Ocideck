@@ -735,6 +735,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Dizze tekst befettet haadstikken. Opknippen leveret',
+  'dia\'s op.': 'slides op.',
+  'Splits op hoofdstukken': 'Splits op haadstikken',
   'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
       'Yn dit deck stiet AI-tekst dy\'tst noch net neisjoen hast. Eksportearje kin; it bestân meldt dat sels en krijt "-ai-concept" yn de namme.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
