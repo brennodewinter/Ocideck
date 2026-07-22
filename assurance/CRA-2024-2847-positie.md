@@ -74,6 +74,11 @@ naleving maar over of het werk goed genoeg is.
    dát een document bereikbaar is, niet dát het klopt of te volgen valt. De
    d7b609bf-episode (gegenereerde gidsen die niets beschreven) laat zien dat dat
    verschil echt is.
+   *Deels uitgevoerd (#539):* `test/docs_claims_match_code_test.dart` houdt de
+   mechanische helft tegen de code aan — de ratchetwaarden in `CHECKS.md`, de
+   dekkingsvloeren en de taaltellingen. De menselijke helft (valt het te volgen)
+   is bewust niet geautomatiseerd: een test die doet alsof, verplaatst het
+   probleem alleen.
 
 Elk van de drie krijgt een eigen issue; de uitwerking hoort daar, niet hier.
 

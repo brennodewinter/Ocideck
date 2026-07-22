@@ -47,15 +47,22 @@ so read the date with them:
 
 | Metric | Counted on 2026-07-22 |
 | --- | ---: |
-| Automated tests in the suite | **4852** (excluding the `golden` tag) |
-| Test files under `test/` | **450** |
-| Source files under `lib/` | 574 excl. the 32 translation files (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
-| Line coverage (enforced floor: 80%) | **82.5%** — 42 798 of 51 862 lines, 508 instrumented files |
+| Automated tests in the suite | **5587** (excluding the `golden` tag) |
+| Test files under `test/` | **512** |
+| Source files under `lib/` | 613 excl. the 32 translation files (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
+| Line coverage (enforced floor: 80%) | **86.2%** — 46 761 of 54 264 lines, 545 instrumented files |
 
 *(Corrected 2026-07-22: this table said "~4570 / ~435 / ~564" and called them
 "point-in-time figures" without saying which point in time, so there was no way
 to tell how far they had drifted. They are now dated, and re-counting them is
 part of the procedure under [Latest result](#latest-result).)*
+
+*(Re-counted 2026-07-22, later the same day: the figures above were from an
+earlier commit and already read 4852 / 450 / 574 / 82.5%. These counts are
+deliberately **not** guarded by a test the way the constants further down are —
+they are a snapshot of one moment, and a gate over them would redden the build
+on every new test file. The date is the guard: read it, and re-count rather than
+believe.)*
 
 Coverage is a floor **and** a census: `make coverage` also fails when a `lib/`
 file appears in no test at all. Such a file is not 0% — lcov never records it,
@@ -78,27 +85,33 @@ out of it, the way [`LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md) records its
 own last run. A dated outcome next to a repeatable command is the difference
 between "we check this" and "we checked this".
 
-**Run on 2026-07-22**, on macOS (arm64), Flutter 3.44.6, at commit `b98ee072`:
+**Run on 2026-07-22**, on macOS (arm64), Flutter 3.44.2, at commit `299fb65a`
+(branch `feat/meetinstrumenten`):
 
 | Command | Outcome |
 | --- | --- |
-| `flutter test --test-randomize-ordering-seed random --exclude-tags golden` | pass — 4852 tests, 2 skipped |
-| `dart run tool/coverage_summary.dart --min=80 --require-instrumented` | pass — 82.5% (42 798/51 862 lines, 508 instrumented files); no `lib/` file outside the census |
-| `dart run tool/coverage_summary.dart --per-file-floor` | pass — 19 files below the per-file floor, 5 of them at zero, against a budget of 21 |
+| `make check` (the whole gate) | pass — exit 0 |
+| `flutter test --test-randomize-ordering-seed random --exclude-tags golden` | pass — 5587 tests, 2 skipped |
+| `dart run tool/coverage_summary.dart --min=80 --require-instrumented` | pass — 86.2% (46 761/54 264 lines, 545 instrumented files); no `lib/` file outside the census |
+| `dart run tool/coverage_summary.dart --per-file-floor` | pass — 0 files below the per-file floor |
 | `dart run tool/check_licenses.dart` | pass — 187 packages, all recognised open-source ([`LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md)) |
 
-**What this run did not cover.** Only the four commands above were executed. The
-rest of `make check` — `format-check`, `analyze`, `check-conventions`,
-`check-method-length`, `check-dead-code`, `check-hardcoded-text` — and the
-`check-full` extras (`sbom-verify`, `deps-check`, `check-web`) were not run here,
-so this table says nothing about them. It is a snapshot, not a certificate: the
-only run that means anything for a given commit is the one you do yourself
-before pushing it.
+**What this run did not cover.** `make check` ran in full, so `format-check`,
+`analyze`, `check-conventions`, `check-method-length`, `check-dead-code` and
+`check-hardcoded-text` are included above; `check_licenses` was run separately in
+the same working copy. The `check-full` extras (`sbom-verify`, `deps-check`,
+`check-web`) and the advisory scans (`sast`, `dast`, `trivy`, `check-secrets`)
+were **not** run here, so this table says nothing about them. It is a snapshot,
+not a certificate: the only run that means anything for a given commit is the one
+you do yourself before pushing it.
 
-Two of these numbers are budgets rather than achievements. The per-file floor
-allows 21 files below it and 19 are there, so that gate is nearly full; the
-overall 82.5% sits above an 80% floor that is a ratchet, meant to be raised as
-coverage improves rather than treated as a target already met.
+One of these numbers is a floor rather than an achievement: 86.2% sits above an
+80% floor that is a ratchet, meant to be raised as coverage improves rather than
+treated as a target already met. The per-file floor no longer carries a budget —
+until 2026-07-22 this table read "19 files below the floor, against a budget of
+21", and that budget was removed the same day (see
+[`make coverage-per-file`](#make-coverage-per-file)). Zero below the floor is
+now the only passing state.
 
 ---
 
