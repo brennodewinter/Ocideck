@@ -168,9 +168,14 @@ class S3Service {
       throw S3Exception(S3Error.config, 'Ongeldige endpoint-URL');
     }
     // SigV4 ondertekent elk verzoek, dus er gaat geen herbruikbaar geheim over
-    // de lijn zoals bij basic-auth. De inhoud van de decks is niettemin
-    // vertrouwelijk, dus geldt dezelfde eis als bij WebDAV: https, tenzij de
-    // gebruiker de server bewust als vertrouwd intern heeft gemarkeerd.
+    // de lijn zoals bij basic-auth: de handtekening is aan dit ene verzoek
+    // gebonden en vervalt. Daarom staat S3 hier bewust anders dan WebDAV en
+    // git, die sinds 2026-07-22 onvoorwaardelijk https eisen — daar overleeft
+    // het gestolen geheim de verbinding, hier niet. Wat op platte tekst wél
+    // meekijkbaar is, is de inhoud van de decks; dat is de afweging die de
+    // gebruiker met "vertrouwd intern" zelf maakt, en die laten we bij hem.
+    // Zie [NetGuard.maySendReusableSecret] voor de andere kant van dat
+    // onderscheid.
     final scheme = bucket.origin?.scheme.toLowerCase();
     if (scheme != 'https' && !(scheme == 'http' && bucket.trustedInternal)) {
       throw S3Exception(

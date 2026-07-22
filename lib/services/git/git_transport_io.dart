@@ -154,16 +154,24 @@ class PinnedGitTransport implements GitTransport {
       );
     }
     // Het token gaat als header mee bij élke request. Over plain http zou dat
-    // leesbaar over de lijn gaan, dus eisen we https — tenzij de gebruiker de
-    // server bewust als vertrouwd intern heeft gemarkeerd, waar een box zonder
-    // TLS gangbaar is.
+    // leesbaar over de lijn gaan.
+    //
+    // Corrected 2026-07-22: hier stond "tenzij de gebruiker de server als
+    // vertrouwd intern heeft gemarkeerd". Een token is een herbruikbaar geheim:
+    // wie het één keer van de lijn plukt, houdt het. Anders dan de inhoud van
+    // een deck overleeft die schade de verbinding, dus de afweging die de
+    // gebruiker met die vink maakt gaat hier niet op. Zie
+    // [NetGuard.maySendReusableSecret]; de webkant van deze transportlaag
+    // weigert om dezelfde reden een verzoek met inloggegevens via de proxy.
     final scheme = origin.scheme.toLowerCase();
-    if (scheme != 'https' && !(scheme == 'http' && config.trustedInternal)) {
+    if (!NetGuard.maySendReusableSecret(scheme, host: origin.host)) {
       throw GitForgeException(
         GitForgeError.config,
         scheme == 'http'
-            ? 'Gebruik https of markeer de server als vertrouwd intern; anders '
-                  'gaat je token onversleuteld over het netwerk.'
+            ? 'Een git-server vereist https: je token gaat bij élk verzoek '
+                  'mee, dus het zou onversleuteld over het netwerk gaan. '
+                  'Vertrouwd intern verandert daar niets aan — die instelling '
+                  'gaat over de server, niet over de verbinding ernaartoe.'
             : 'Alleen https-servers worden ondersteund.',
       );
     }
