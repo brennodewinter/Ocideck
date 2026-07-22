@@ -237,6 +237,28 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   /// is op dat punt al bijgewerkt — de UI klopt voor deze sessie; bij een
   /// schrijffout gaat enkel de persistentie verloren (gelogd). Zelfde rationale
   /// als [setWebdavPassword] voor de keychain.
+  /// Haal de inloggegevens uit een herkomst-URL vóórdat die bewaard wordt.
+  ///
+  /// De herkomst is niets dan een label onder de wolk-badge in de recente
+  /// lijst, maar hij gaat wél onversleuteld naar het prefs-domein — en een
+  /// import-URL kan het `gebruiker:wachtwoord@`-deel dragen dat een URL vóór de
+  /// host toestaat (het `userInfo`-veld). Dan staat er een wachtwoord in gewone
+  /// instellingen, precies wat `SecretStore` bestaat om te voorkomen. Het
+  /// gebruikersdeel wordt vervangen door `***`, zodat de gebruiker nog steeds
+  /// ziet dát er inloggegevens in de link zaten. ASCII, en geen `…`:
+  /// `Uri.replace` procent-codeert dat tot `%E2%80%A6`, wat er in de lijst
+  /// uitziet als rommel in plaats van als een weggelaten geheim.
+  ///
+  /// Alleen dit, en niet de query: een sleutel in de query is niet als zodanig
+  /// herkenbaar, en de hele query weglaten maakt van twee verschillende
+  /// herkomsten één regel.
+  @visibleForTesting
+  static String scrubbedOrigin(String origin) {
+    final uri = Uri.tryParse(origin.trim());
+    if (uri == null || !uri.hasAuthority || uri.userInfo.isEmpty) return origin;
+    return uri.replace(userInfo: '***').toString();
+  }
+
   Future<void> _persist(
     String label,
     Future<void> Function(SharedPreferences prefs) write,

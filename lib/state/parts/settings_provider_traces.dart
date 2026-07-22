@@ -124,35 +124,13 @@ extension SettingsTraces on SettingsNotifier {
     if (!currentState.recentFiles.any((f) => f.path == path)) return;
     final origins = {
       ...currentState.recentFileOrigins,
-      path: scrubbedOrigin(origin),
+      path: SettingsNotifier.scrubbedOrigin(origin),
     };
     currentState = currentState.copyWith(recentFileOrigins: origins);
     await _persist(
       'setRecentFileOrigin',
       (prefs) => prefs.setString('recentFileOrigins', jsonEncode(origins)),
     );
-  }
-
-  /// Haal de inloggegevens uit een herkomst-URL vóórdat die bewaard wordt.
-  ///
-  /// De herkomst is niets dan een label onder de wolk-badge in de recente
-  /// lijst, maar hij gaat wél onversleuteld naar het prefs-domein — en een
-  /// import-URL kan het `gebruiker:wachtwoord@`-deel dragen dat een URL vóór de
-  /// host toestaat (het `userInfo`-veld). Dan staat er een wachtwoord in gewone
-  /// instellingen, precies wat `SecretStore` bestaat om te voorkomen. Het
-  /// gebruikersdeel wordt vervangen door `***`, zodat de gebruiker nog steeds
-  /// ziet dát er inloggegevens in de link zaten. ASCII, en geen `…`:
-  /// `Uri.replace` procent-codeert dat tot `%E2%80%A6`, wat er in de lijst
-  /// uitziet als rommel in plaats van als een weggelaten geheim.
-  ///
-  /// Alleen dit, en niet de query: een sleutel in de query is niet als zodanig
-  /// herkenbaar, en de hele query weglaten maakt van twee verschillende
-  /// herkomsten één regel.
-  @visibleForTesting
-  static String scrubbedOrigin(String origin) {
-    final uri = Uri.tryParse(origin.trim());
-    if (uri == null || !uri.hasAuthority || uri.userInfo.isEmpty) return origin;
-    return uri.replace(userInfo: '***').toString();
   }
 
   Map<String, String> _decodeRecentFileOrigins(String? raw) {
