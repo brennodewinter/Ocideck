@@ -1789,6 +1789,46 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Jouw antwoord': 'Twoja odpowiedź',
+  'nodig': 'wymagane',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Przy zablokowanej prezentacji przegląd nigdy się nie pojawia; ten przełącznik nic wtedy nie robi.',
+  'De twee afbeeldingen': 'Dwa obrazy',
+  'Goed gerekende antwoorden': 'Odpowiedzi uznawane za poprawne',
+  'Afbeelding 1': 'Obraz 1',
+  'Afbeelding 2': 'Obraz 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Liczy się tylko dosłownie identyczna odpowiedź.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Widz wpisuje odpowiedź. Każda zaznaczona tutaj odpowiedź liczy się jako poprawna; wielkość liter i dodatkowe spacje nie mają znaczenia.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Widz wskazuje właściwy obraz. Podczas prezentacji lewy i prawy zamieniają się w każdej rundzie, więc nie nazywaj ich "lewym" i "prawym".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Literówka nadal liczy się jako poprawna; inne słowo już nie.',
+  'Getypt antwoord': 'Odpowiedź wpisywana',
+  'Goed gerekend antwoord:': 'Odpowiedź uznawana za poprawną:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Wybierz dwa obrazy i zaznacz właściwy.',
+  'Nog geen goed antwoord opgegeven.':
+      'Nie podano jeszcze poprawnej odpowiedzi.',
+  'Overeenkomst': 'Zgodność',
+  'Tik de juiste afbeelding aan': 'Dotknij właściwego obrazu',
+  'Twee afbeeldingen': 'Dwa obrazy',
+  'Typ je antwoord': 'Wpisz odpowiedź',
+  'Typ je antwoord en bevestig': 'Wpisz odpowiedź i potwierdź',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Wymagana zgodność z poprawną odpowiedzią',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Zaznacz co najmniej jedną odpowiedź uznawaną za poprawną.',
+  'Vragen': 'Pytania',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'odpowiedzi, wszystkie pokazywane w losowej kolejności',
+  'fout': 'błędnie',
+  'goed': 'poprawnie',
+  'goed vanaf': 'poprawne od',
+  'links en rechts wisselen per ronde':
+      'lewy i prawy zamieniają się w każdej rundzie',
+  'overeenkomst': 'zgodności',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       'Ten tekst zawiera rozdziały. Liczba slajdów po podziale:',
   'dia\'s op.': '(po jednym na rozdział).',

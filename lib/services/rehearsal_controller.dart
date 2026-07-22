@@ -34,6 +34,15 @@ class RehearsalController {
   /// Volgorde van eerste verschijning, voor een leesbare samenvatting.
   final List<String> _order = [];
 
+  /// Elke beantwoorde vraagpoging, in antwoordvolgorde.
+  final List<QuestionAttempt> _questionAttempts = [];
+
+  /// De vraagronde die nu loopt: wanneer ze begon en op welke slide. Null
+  /// zolang er geen vraag open staat.
+  DateTime? _questionStart;
+  String? _questionSlideId;
+  int _questionIndex = 0;
+
   /// Huidige doeltijd, of null als er geen aftelling loopt.
   Duration? get target => _target;
 
@@ -78,8 +87,36 @@ class RehearsalController {
     }
   }
 
-  /// Reset de hele run (verstreken tijd én per-slide-tijden). De doeltijd blijft
-  /// staan. De eerstvolgende [observe] registreert de huidige slide opnieuw.
+  /// Registreer dat er een verse vraagronde begint op slide [id] (positie
+  /// [index]). Een lopende, onbeantwoorde ronde vervalt daarmee: wie de vraag
+  /// verlaat zonder te antwoorden, heeft haar niet beantwoord.
+  void startQuestion(String id, int index) {
+    _questionSlideId = id;
+    _questionIndex = index;
+    _questionStart = _now();
+  }
+
+  /// Registreer dat de lopende vraagronde beantwoord is. Zonder lopende ronde
+  /// gebeurt er niets, zodat een tweede oordeel over dezelfde poging (fout →
+  /// vergrendeld, bijvoorbeeld) niet dubbel geteld wordt.
+  void finishQuestion({required bool correct}) {
+    final start = _questionStart;
+    final id = _questionSlideId;
+    if (start == null || id == null) return;
+    _questionStart = null;
+    _questionAttempts.add(
+      QuestionAttempt(
+        slideId: id,
+        index: _questionIndex,
+        spent: _now().difference(start),
+        correct: correct,
+      ),
+    );
+  }
+
+  /// Reset de hele run (verstreken tijd, per-slide-tijden én vraagpogingen).
+  /// De doeltijd blijft staan. De eerstvolgende [observe] registreert de
+  /// huidige slide opnieuw.
   void reset() {
     final t = _now();
     _runStart = t;
@@ -88,6 +125,9 @@ class RehearsalController {
     _firstIndex.clear();
     _order.clear();
     _currentId = null;
+    _questionAttempts.clear();
+    _questionStart = null;
+    _questionSlideId = null;
   }
 
   /// Sluit de lopende slide af en geef de samenvatting van deze run terug.
@@ -111,6 +151,7 @@ class RehearsalController {
       total: t.difference(_runStart),
       target: _target,
       perSlide: perSlide,
+      questionAttempts: List.unmodifiable(_questionAttempts),
     );
   }
 }

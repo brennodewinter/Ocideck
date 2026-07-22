@@ -1805,6 +1805,46 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Jouw antwoord': 'Η απάντησή σας',
+  'nodig': 'απαιτείται',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Σε κλειδωμένη παρουσίαση η επισκόπηση δεν εμφανίζεται ποτέ· αυτός ο διακόπτης τότε δεν κάνει τίποτα.',
+  'De twee afbeeldingen': 'Οι δύο εικόνες',
+  'Goed gerekende antwoorden': 'Απαντήσεις που μετρούν ως σωστές',
+  'Afbeelding 1': 'Εικόνα 1',
+  'Afbeelding 2': 'Εικόνα 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Μετράει μόνο μια κατά γράμμα ίδια απάντηση.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Ο θεατής πληκτρολογεί την απάντηση. Κάθε απάντηση που επιλέγετε εδώ μετράει ως σωστή· τα κεφαλαία και τα επιπλέον κενά δεν παίζουν ρόλο.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Ο θεατής δείχνει τη σωστή εικόνα. Κατά την παρουσίαση αριστερά και δεξιά εναλλάσσονται σε κάθε γύρο, γι\' αυτό μην τις αποκαλείτε "αριστερή" και "δεξιά".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Ένα τυπογραφικό λάθος μετράει ακόμη ως σωστό· μια άλλη λέξη όχι.',
+  'Getypt antwoord': 'Πληκτρολογημένη απάντηση',
+  'Goed gerekend antwoord:': 'Απάντηση που μετρά ως σωστή:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Επιλέξτε δύο εικόνες και σημειώστε τη σωστή.',
+  'Nog geen goed antwoord opgegeven.': 'Δεν έχει δοθεί ακόμη σωστή απάντηση.',
+  'Overeenkomst': 'Αντιστοιχία',
+  'Tik de juiste afbeelding aan': 'Πατήστε τη σωστή εικόνα',
+  'Twee afbeeldingen': 'Δύο εικόνες',
+  'Typ je antwoord': 'Πληκτρολογήστε την απάντησή σας',
+  'Typ je antwoord en bevestig':
+      'Πληκτρολογήστε την απάντησή σας και επιβεβαιώστε',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Απαιτούμενη αντιστοιχία με τη σωστή απάντηση',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Επιλέξτε τουλάχιστον μία απάντηση που μετρά ως σωστή.',
+  'Vragen': 'Ερωτήσεις',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'απαντήσεις, όλες εμφανίζονται με τυχαία σειρά',
+  'fout': 'λάθος',
+  'goed': 'σωστό',
+  'goed vanaf': 'σωστό από',
+  'links en rechts wisselen per ronde':
+      'αριστερά και δεξιά εναλλάσσονται σε κάθε γύρο',
+  'overeenkomst': 'αντιστοιχία',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       'Αυτό το κείμενο περιέχει κεφάλαια. Ο διαχωρισμός δίνει',
   'dia\'s op.': 'διαφάνειες.',

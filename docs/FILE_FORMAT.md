@@ -203,7 +203,7 @@ over the file. See §6.6 for why that changed.)
 | `tool` | string | One **per line, repeated**, as `name@version \| url \| description` (e.g. `Burp Suite@2026.4 \| https://portswigger.net \| Web proxy`). The tools used during the test — MIAUW EIS 4.8.2 (.1 description, .2 version, .3 public reference). A different list from `standards`: these are the tester's tools, not the standards tested against. Only the name is required; the rest may be filled in later. |
 | `tlp` | enum | Traffic Light Protocol level (§3.1). Written only when not `none`. |
 | `ocideck_target_seconds` | int | Target duration for the presenter countdown, in seconds. Written only when `> 0`. |
-| `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. |
+| `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. Overruled by `ocideck_play_only`: a play-only deck never shows the summary, whatever this key says. |
 | `ocideck_play_only` | `true`/absent | Play-only lock. When `true`, the deck opens locked: no editor, toolbar, menus, or export — only the first slide with a play button, presented full screen. Closing the deck restores normal editing. Default (unlocked) stays out of the file; only `true` is written. Removing this key unlocks the deck. |
 | `ocideck_style_profile` · `ocideck_miauw_waivers` · `ocideck_miauw_confirmations` · `ocideck_finalized` · `ocideck_seal_hash` · `ocideck_seal_algo` · `ocideck_seal_at` · `ocideck_seal_tsr` · `ocideck_sig_name` · `ocideck_sig_role` · `ocideck_sig_cert` · `ocideck_sig_date` · `ocideck_sig_statement` · `ocideck_sig_typed` · `ocideck_sig_image` | *retired* | **No longer written** as of 0.1.0 (§3.6). Still read, so an older file opens correctly; removed from the file on the next save. The seal and signature blocks now live in `<name>.seal.json` (§6.6). |
 
@@ -951,12 +951,13 @@ is present. The block is the round-trip source of truth.
 ````markdown
 ```question
 {
-  "kind": "multipleChoice",      // multipleChoice | trueFalse | multipleCorrect | ordering
+  "kind": "multipleChoice",      // see the six kinds below
   "prompt": "What is the capital of the Netherlands?",
-  "optionCount": 4,              // total options shown (random pick)
+  "optionCount": 4,              // multipleChoice + ordering only
   "timeLimitSeconds": 0,         // 0 = no limit
   "onWrong": "retry",            // retry | lockAndContinue
   "statementIsTrue": true,       // trueFalse only
+  "similarityThreshold": 0.85,   // openText only
   "answers": [
     { "text": "Amsterdam", "correct": true },
     { "text": "Rotterdam", "correct": false }
@@ -967,26 +968,53 @@ is present. The block is the round-trip source of truth.
 
 Fields:
 
-- `kind` — `multipleChoice` (one correct + a random pick of wrong ones; pick one),
-  `trueFalse` (the prompt is a statement; pick true/false), `multipleCorrect`
-  (several may be correct; pick all), or `ordering` (put the options in the
-  right order). Defaults to `multipleChoice`.
+- `kind` — one of six values, defaulting to `multipleChoice`:
+  - `multipleChoice` — one correct answer plus a random pick of wrong ones; pick one.
+  - `trueFalse` — the prompt is a statement; pick true/false.
+  - `multipleCorrect` — several may be correct; pick all. **Every** filled-in
+    answer is shown, in random order (*corrected 2026-07-21: this used to be a
+    random subset, and this section described it as one*).
+  - `ordering` — put the options in the right order.
+  - `imagePair` — two pictures side by side, pick the right one. Which picture
+    lands left and which right is redrawn every round.
+  - `openText` — the viewer types the answer; it counts as right when it is
+    close enough to one of the answers marked `correct`.
 - `prompt` — the question, or the statement for `trueFalse`.
-- `answers` — the full pool; each has `text` and `correct`. Ignored for
-  `trueFalse`. The presentation draws a random subset from it. For `ordering`
-  the **list order is the correct order** and the `correct` flags are ignored;
-  the drawn subset keeps its relative order as the right answer and is shown
-  shuffled.
-- `optionCount` — how many options are shown (2–8, default 4). Not used by
-  `trueFalse`.
+- `answers` — the full pool; each has `text`, `correct` and optionally `image`.
+  Ignored for `trueFalse`. For `multipleChoice` and `ordering` the presentation
+  draws a random subset of `optionCount` from it; `multipleCorrect` shows every
+  filled-in answer, shuffled. For `ordering` the **list order is the correct
+  order** and the `correct` flags are ignored; the drawn subset keeps its relative
+  order as the right answer and is shown shuffled. For `imagePair` each round
+  draws **one** `correct: true` and **one** `correct: false` answer and shuffles
+  the pair, so the editor's two slots are the common case but a longer pool in the
+  file gives a fresh pair every round. For `openText` the entries with
+  `correct: true` are the accepted answers and the rest are ignored.
+- `answers[].image` — a deck-relative image path, for `imagePair`: there the
+  picture *is* the answer and `text` is only its caption. **Written only when it
+  has a value**, so a text-only question keeps the two-key answer objects it
+  always had. An `imagePair` question counts an answer as filled in when it has an
+  image, not when it has text; every other kind still goes by `text`.
+- `optionCount` — how many options are shown (2–8, default 4). Only used by
+  `multipleChoice` and `ordering`; the other kinds show every filled-in answer or
+  no option list at all. Always written.
 - `timeLimitSeconds` — optional countdown; running out counts as wrong.
 - `onWrong` — `retry` (cannot continue; a fresh set is drawn on the next click) or
   `lockAndContinue` (reveal the answer, lock the slide, allow advancing).
-- `statementIsTrue` — for `trueFalse`, whether the statement is true.
+- `statementIsTrue` — for `trueFalse`, whether the statement is true. Written for
+  that kind only.
+- `similarityThreshold` — for `openText`, how much a typed answer must resemble an
+  accepted one (Jaro-Winkler over the normalised strings, `0.5`–`1.0`, default
+  `0.85`). Written for that kind only; a value outside the range is clamped when
+  the block is read.
 
-> The live answer state (which options were drawn, what the viewer picked,
-> correct/wrong) is **session-only** and never written to the file. A static
-> export renders the question without interactivity.
+> The live answer state (which options were drawn, what the viewer picked, what
+> was typed, correct/wrong) is **session-only** and never written to the file. A
+> static export renders the question without interactivity; in the HTML export an
+> `imagePair` question emits its two pictures as ordinary Markdown images after
+> the question card (so their paths resolve like any other deck image) and an
+> `openText` question emits no options at all, because its accepted answers are
+> the answer key.
 
 **Timeline** (`timeline`) — a normal Markdown list, optionally preceded by a
 `# title`. Each list item is one event in the form

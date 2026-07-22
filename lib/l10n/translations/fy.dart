@@ -735,6 +735,44 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Jouw antwoord': 'Dyn antwurd',
+  'nodig': 'nedich',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'By in skoattele deck ferskynt it oersjoch nea; dizze skeakel docht dan neat.',
+  'De twee afbeeldingen': 'De twa ôfbyldings',
+  'Goed gerekende antwoorden': 'Antwurden dy\'t goed rekkene wurde',
+  'Afbeelding 1': 'Ofbylding 1',
+  'Afbeelding 2': 'Ofbylding 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Allinne in letterlik gelyk antwurd telt.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'De sjogger typt it antwurd. Elk antwurd dat er hjir oanfinkt wurdt, telt as goed; haadletters en ekstra spaasjes meitsje neat út.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'De sjogger wiist de goede ôfbylding oan. By it presintearjen wikselje lofts/rjochts elke ronde, dus neam se net "lofter" en "rjochter".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'In tikflater telt noch as goed; in oar wurd net.',
+  'Getypt antwoord': 'Typt antwurd',
+  'Goed gerekend antwoord:': 'Antwurd dat goed rekkene wurdt:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Kies twa ôfbyldings en markearje de goede.',
+  'Nog geen goed antwoord opgegeven.': 'Noch gjin goed antwurd opjûn.',
+  'Overeenkomst': 'Oerienkomst',
+  'Tik de juiste afbeelding aan': 'Tik de goede ôfbylding oan',
+  'Twee afbeeldingen': 'Twa ôfbyldings',
+  'Typ je antwoord': 'Typ dyn antwurd',
+  'Typ je antwoord en bevestig': 'Typ dyn antwurd en befêstigje',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Fereaske oerienkomst mei it goede antwurd',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Finkje op syn minst ien antwurd oan dat goed rekkene wurdt.',
+  'Vragen': 'Fragen',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'antwurden, allegear toand yn willekeurige folchoarder',
+  'fout': 'ferkeard',
+  'goed': 'goed',
+  'goed vanaf': 'goed fanôf',
+  'links en rechts wisselen per ronde': 'lofts en rjochts wikselje elke ronde',
+  'overeenkomst': 'oerienkomst',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       'Dizze tekst befettet haadstikken. Opknippen leveret',
   'dia\'s op.': 'slides op.',

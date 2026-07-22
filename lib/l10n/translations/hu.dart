@@ -1781,6 +1781,45 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Jouw antwoord': 'A te válaszod',
+  'nodig': 'szükséges',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Zárolt bemutatónál az áttekintés soha nem jelenik meg; ez a kapcsoló ilyenkor nem csinál semmit.',
+  'De twee afbeeldingen': 'A két kép',
+  'Goed gerekende antwoorden': 'Helyesnek számító válaszok',
+  'Afbeelding 1': '1. kép',
+  'Afbeelding 2': '2. kép',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Csak a szó szerint egyező válasz számít.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'A néző begépeli a választ. Minden itt bejelölt válasz helyesnek számít; a nagybetűk és a fölösleges szóközök nem számítanak.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'A néző rámutat a helyes képre. Bemutatáskor a bal és a jobb minden körben helyet cserél, ezért ne nevezd őket "balnak" és "jobbnak".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Az elgépelés még helyesnek számít; egy másik szó nem.',
+  'Getypt antwoord': 'Beírt válasz',
+  'Goed gerekend antwoord:': 'Helyesnek számító válasz:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Válassz két képet, és jelöld meg a helyeset.',
+  'Nog geen goed antwoord opgegeven.': 'Még nincs megadva helyes válasz.',
+  'Overeenkomst': 'Egyezés',
+  'Tik de juiste afbeelding aan': 'Koppints a helyes képre',
+  'Twee afbeeldingen': 'Két kép',
+  'Typ je antwoord': 'Írd be a válaszod',
+  'Typ je antwoord en bevestig': 'Írd be a válaszod, és erősítsd meg',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Elvárt egyezés a helyes válasszal',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Jelölj meg legalább egy helyesnek számító választ.',
+  'Vragen': 'Kérdések',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'válasz, mind véletlenszerű sorrendben megjelenítve',
+  'fout': 'hibás',
+  'goed': 'helyes',
+  'goed vanaf': 'helyes',
+  'links en rechts wisselen per ronde':
+      'a bal és a jobb minden körben helyet cserél',
+  'overeenkomst': 'egyezéstől',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       'Ez a szöveg fejezeteket tartalmaz. A felosztás',
   'dia\'s op.': 'diát eredményez.',

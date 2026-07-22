@@ -256,6 +256,30 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   melding bij een te grote maplijst noemt nu overal het aantal.
 
 ### Fixed
+- **Een vraag met meerdere juiste antwoorden toont voortaan álle antwoorden.**
+  De opdracht luidt "vink alle juiste aan", maar de dia trok er eerst een
+  willekeurige greep uit — zoveel als u bij *aantal getoonde opties* had staan.
+  Dat is een onmogelijke opdracht: u kunt niet weten of er twee of vijf juiste
+  tussen zitten, en een antwoord dat in de vorige ronde goed was ontbrak in de
+  volgende. Alle ingevulde antwoorden staan nu op het scherm; alleen de
+  volgorde is nog willekeurig, zodat een tweede ronde niet na te spelen is.
+
+  Daarmee geldt de teller *aantal getoonde opties* alleen nog voor
+  **meerkeuze** en **volgorde** — de twee soorten die werkelijk uit een pool
+  trekken. Bij de andere soorten verdwijnt die teller uit de editor in plaats
+  van er te blijven staan zonder iets te doen. De regel in de editor onder een
+  vraag zegt nu per soort wat er bij het presenteren gebeurt.
+- **Een deck dat op 'alleen afspelen' staat toont nooit meer het
+  tijdenoverzicht.** Deelde u een vergrendeld deck uit, dan kreeg degene die het
+  afspeelde na afloop uw meetscherm te zien — totaaltijd, tijd per dia — omdat
+  de schakelaar *tijdenoverzicht tonen* standaard aan staat en met het bestand
+  meereisde. Een vergrendeld deck is bedoeld om áf te spelen; wie dat doet hoort
+  achteraf geen rapport over zichzelf te krijgen. De uitzondering zit nu in het
+  presentatiescherm zelf, dus ook een deck dat langs een andere weg wordt
+  afgespeeld valt eronder. Zet u *alleen afspelen* aan onder
+  *Presentatie-eigenschappen*, dan valt de schakelaar *tijden-overzicht tonen*
+  daar meteen zichtbaar stil, met de reden eronder; uw bewaarde keuze blijft
+  staan, zodat ontgrendelen haar teruggeeft.
 - **Een afbeelding in de lopende tekst telt nu overal mee.** Stond een afbeelding
   in een afbeeldingsveld, dan wist OciDeck ervan. Stond hij als `![…](…)` in de
   tekst van een dia, dan keek de ene plek na de andere eraan voorbij, elke keer
@@ -645,6 +669,59 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   rij, dus ze kunnen nooit over elkaar heen vallen.
 
 ### Added
+- **Twee nieuwe vraagsoorten: een beeldpaar en een getypt antwoord.** De
+  vraagdia kende vier soorten, en die vroegen alle vier om een keuze uit een
+  rijtje tekst.
+
+  **Twee afbeeldingen** legt twee beelden naast elkaar en laat de kijker de
+  juiste aanwijzen — "welke van deze twee schermen is de phishingpagina". U
+  kiest in de editor twee afbeeldingen, geeft ze elk een bijschrift en zet met
+  één knop vast welke de juiste is. Bij het presenteren wisselen links en rechts
+  per ronde, dus noem ze in uw bijschrift niet "de linker" en "de rechter". Zet
+  u er met de hand meer paren in het bestand, dan komt er elke ronde één juiste
+  en één foute uit die verzameling. Ontbreekt een van de beelden, dan meldt de
+  bestandscontrole dat — een lege tegel waar een antwoord hoort merkt u anders
+  pas als u in de zaal staat. In een HTML-export komen de twee beelden gewoon
+  als afbeeldingen achter de vraag te staan, zonder dat erbij staat welke de
+  goede is.
+
+  **Getypt antwoord** laat de kijker het antwoord intypen in plaats van
+  aanwijzen. U vinkt aan welke antwoorden goed gerekend worden — meer dan één
+  mag — en schuift met een regelaar in hoeverre het getypte antwoord daarop moet
+  lijken: standaard 85 %, wat een tikfout doorlaat maar een ander woord niet.
+  Hoofdletters, spaties vooraan en achteraan en dubbele spaties worden
+  weggepoetst voordat er vergeleken wordt; leestekens blijven staan, omdat ze
+  soms bij het antwoord horen — een losse punt te veel haalt u zelden onder de
+  drempel. Typen gaat op uw eigen scherm en het beamervenster toont mee wat
+  er staat. Zolang er getypt wordt gaan de toetsen naar het invoerveld en niet
+  naar de sneltoetsen — anders sprong een `3` in het antwoord naar dia 3 —
+  behalve `Enter` (bevestigen), `PgUp`/`PgDn` (bladeren, zodat een
+  presentatieklikker blijft werken), `Esc` (presentatie afsluiten) en
+  `Ctrl/Cmd+W`. Vóór het antwoorden is er op geen van beide schermen iets van de
+  oplossing te zien — maar dat is enscenering, geen geheimhouding: het
+  beamervenster krijgt het hele deck, dus een vraagdia is niet de plek om iets
+  te verbergen voor wie bij die machine kan.
+
+  Zodra het antwoord binnen is, komt er in plaats van het invoerveld een
+  **correctie**: *Jouw antwoord* en *Het juiste antwoord* onder elkaar, met het
+  verschil aangewezen. Wat er te veel stond is rood en doorgestreept, wat er
+  miste groen en onderstreept — de doorstreping en de onderstreping staan er
+  náást de kleur, zodat de aanwijzing ook leesbaar blijft voor wie rood en groen
+  slecht uit elkaar houdt. Eronder staat het percentage naast de drempel die u
+  koos ("Overeenkomst: 62% · nodig: 85%"), want een kaal getal is nog geen
+  oordeel. De vergelijking is net zo soepel als het goedrekenen zelf —
+  hoofdletters en dubbele spaties tellen niet mee — dus er wordt nooit een
+  verschil aangewezen dat niet meetelde, en bij een letterlijk goed antwoord
+  blijft de vergelijking helemaal weg. Heeft u meerdere antwoorden goed
+  gerekend, dan wordt er gecorrigeerd tegen het antwoord dat het dichtst bij het
+  getypte lag, niet tegen het eerste in uw lijst.
+- **Het tijdenoverzicht na een oefenronde toont nu ook de vragen.** Onder de
+  tijd per dia staat elke beantwoorde vraag, met de tijd van díe poging en of
+  het antwoord goed was. Elke poging apart en niet opgeteld: bij *opnieuw
+  proberen* mag een vraag zo vaak beantwoord worden als nodig, en drie pogingen
+  in vijf seconden is een ander verhaal dan één poging van twee minuten. Een
+  vraag die u overslaat zonder te antwoorden telt niet mee. De knop *Kopieer*
+  neemt het vragenblok mee naar het klembord.
 - **Een afbeelding midden in een tekstdia.** Zet u op een dia met vrije tekst een
   `![beschrijving](images/foto.png)` op een eigen regel, dan tekent OciDeck die
   afbeelding voortaan op die plek in de tekst. Tot nu toe bleef daar de kale

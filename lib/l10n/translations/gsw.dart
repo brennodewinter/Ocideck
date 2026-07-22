@@ -1781,6 +1781,44 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Jouw antwoord': 'Dini Antwort',
+  'nodig': 'nötig',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Bi ere verrieglete Präsentation erschiint de Überblick nie; de Schalter macht denn nüt.',
+  'De twee afbeeldingen': 'Die zwei Bilder',
+  'Goed gerekende antwoorden': 'Als richtig gwertete Antworte',
+  'Afbeelding 1': 'Bild 1',
+  'Afbeelding 2': 'Bild 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Nume e wörtlich gliichi Antwort zellt.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'De Zueschauer tippt d Antwort. Jedi Antwort, wo du da aachrüzisch, zellt als richtig; Gross- und Chliischribig und zuesätzlichi Läerzeiche spiled kei Rolle.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'De Zueschauer zeigt uf s richtige Bild. Bim Präsentiere wächsled links/rächts pro Rundi, drum benenn si nöd als "links" und "rächts".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'E Tippfähler zellt no als richtig, es anders Wort nöd.',
+  'Getypt antwoord': 'Tippti Antwort',
+  'Goed gerekend antwoord:': 'Als richtig gwerteti Antwort:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Wähl zwei Bilder us und markier s richtige.',
+  'Nog geen goed antwoord opgegeven.': 'No kei richtigi Antwort aagee.',
+  'Overeenkomst': 'Übereinstimmig',
+  'Tik de juiste afbeelding aan': 'Tippe uf s richtige Bild',
+  'Twee afbeeldingen': 'Zwei Bilder',
+  'Typ je antwoord': 'Tipp dini Antwort',
+  'Typ je antwoord en bevestig': 'Tipp dini Antwort und bestätig',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Erforderlichi Übereinstimmig mit de richtige Antwort',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Chrüz mindeschtens ei als richtig gwerteti Antwort aa.',
+  'Vragen': 'Frage',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'Antworte, alli i zuefälliger Reiefolg zeigt',
+  'fout': 'falsch',
+  'goed': 'richtig',
+  'goed vanaf': 'richtig ab',
+  'links en rechts wisselen per ronde': 'links und rächts wächsled pro Rundi',
+  'overeenkomst': 'Übereinstimmig',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       'Dä Text hät Kapitel. S Uufteile git',
   'dia\'s op.': 'Slides.',

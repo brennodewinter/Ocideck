@@ -916,6 +916,44 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Jouw antwoord': 'Your answer',
+  'nodig': 'required',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'With a locked deck the overview never appears; this switch then does nothing.',
+  'De twee afbeeldingen': 'The two images',
+  'Goed gerekende antwoorden': 'Answers counted as correct',
+  'Afbeelding 1': 'Image 1',
+  'Afbeelding 2': 'Image 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Only a literally identical answer counts.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'The viewer types the answer. Every answer you tick here counts as correct; capitals and extra spaces make no difference.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'The viewer points out the correct image. When presenting, left/right swap each round, so do not refer to them as "left" and "right".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'A typo still counts as correct; a different word does not.',
+  'Getypt antwoord': 'Typed answer',
+  'Goed gerekend antwoord:': 'Answer counted as correct:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Choose two images and mark the correct one.',
+  'Nog geen goed antwoord opgegeven.': 'No correct answer given yet.',
+  'Overeenkomst': 'Match',
+  'Tik de juiste afbeelding aan': 'Tap the correct image',
+  'Twee afbeeldingen': 'Two images',
+  'Typ je antwoord': 'Type your answer',
+  'Typ je antwoord en bevestig': 'Type your answer and confirm',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Required match with the correct answer',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Tick at least one answer that counts as correct.',
+  'Vragen': 'Questions',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'answers, all shown in random order',
+  'fout': 'incorrect',
+  'goed': 'correct',
+  'goed vanaf': 'correct from',
+  'links en rechts wisselen per ronde': 'left and right swap each round',
+  'overeenkomst': 'match',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       'This text contains chapters. Splitting it produces',
   'dia\'s op.': 'slides.',

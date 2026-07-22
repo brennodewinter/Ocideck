@@ -41,6 +41,28 @@ class _RehearsalSummaryDialog extends StatelessWidget {
     return title.isEmpty ? '${t.index + 1}.' : '${t.index + 1}. $title';
   }
 
+  /// Het label van een vraagpoging: de slidetitel met daarachter het
+  /// hoeveelste antwoord op díe vraag het was.
+  String _questionLabel(QuestionAttempt a, int attemptNumber) {
+    final slide = slides.firstWhere(
+      (s) => s.id == a.slideId,
+      orElse: () => slides.isNotEmpty ? slides.first : (throw StateError('')),
+    );
+    final title = slide.title.trim();
+    final head = title.isEmpty ? '${a.index + 1}.' : '${a.index + 1}. $title';
+    return attemptNumber > 1 ? '$head  ($attemptNumber)' : head;
+  }
+
+  /// De pogingen met per stuk hun volgnummer binnen dezelfde vraag, zodat een
+  /// tweede en derde poging als zodanig te herkennen zijn.
+  List<(QuestionAttempt, int)> get _numberedAttempts {
+    final seen = <String, int>{};
+    return [
+      for (final a in run.questionAttempts)
+        (a, seen[a.slideId] = (seen[a.slideId] ?? 0) + 1),
+    ];
+  }
+
   Future<void> _copy(BuildContext context) async {
     final l10n = context.l10n;
     final buf = StringBuffer()
@@ -52,12 +74,68 @@ class _RehearsalSummaryDialog extends StatelessWidget {
     for (final t in run.perSlide) {
       buf.writeln('${_label(t)}\t${_fmt(t.spent)}');
     }
+    final attempts = _numberedAttempts;
+    if (attempts.isNotEmpty) {
+      buf.writeln('');
+      buf.writeln(l10n.d('Vragen'));
+      for (final (a, n) in attempts) {
+        final verdict = a.correct ? l10n.d('goed') : l10n.d('fout');
+        buf.writeln('${_questionLabel(a, n)}\t${_fmt(a.spent)}\t$verdict');
+      }
+    }
     await Clipboard.setData(ClipboardData(text: buf.toString()));
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(l10n.d('Tijden gekopieerd naar klembord.'))),
       );
     }
+  }
+
+  /// Eén regel: omschrijving links, tijd rechts.
+  Widget _row(String label, String time, {Widget? leading}) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 3),
+    child: Row(
+      children: [
+        if (leading != null) ...[leading, const SizedBox(width: 6)],
+        Expanded(
+          child: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis),
+        ),
+        const SizedBox(width: 12),
+        Text(
+          time,
+          style: const TextStyle(fontFeatures: [FontFeature.tabularFigures()]),
+        ),
+      ],
+    ),
+  );
+
+  /// Het vragenblok onder het slide-overzicht. Leeg wanneer er geen vraag
+  /// beantwoord is — dan hoort er ook geen kopje te staan.
+  List<Widget> _questionSection(BuildContext context) {
+    final attempts = _numberedAttempts;
+    if (attempts.isEmpty) return const [];
+    final l10n = context.l10n;
+    return [
+      const Divider(height: 24),
+      Padding(
+        padding: const EdgeInsets.only(bottom: 4),
+        child: Text(
+          l10n.d('Vragen'),
+          style: const TextStyle(fontWeight: FontWeight.w600),
+        ),
+      ),
+      for (final (a, n) in attempts)
+        _row(
+          _questionLabel(a, n),
+          _fmt(a.spent),
+          leading: Icon(
+            a.correct ? Icons.check_circle_outline : Icons.cancel_outlined,
+            size: 16,
+            color: a.correct ? Colors.green.shade700 : Colors.red.shade700,
+            semanticLabel: a.correct ? l10n.d('goed') : l10n.d('fout'),
+          ),
+        ),
+    ];
   }
 
   @override
@@ -140,36 +218,22 @@ class _RehearsalSummaryDialog extends StatelessWidget {
             ],
             const Divider(height: 24),
             Flexible(
-              child: run.perSlide.isEmpty
-                  ? Text(l10n.d('Geen slides gemeten.'))
-                  : ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: run.perSlide.length,
-                      itemBuilder: (_, i) {
-                        final t = run.perSlide[i];
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 3),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  _label(t),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-                              Text(
-                                _fmt(t.spent),
-                                style: const TextStyle(
-                                  fontFeatures: [FontFeature.tabularFigures()],
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (run.perSlide.isEmpty)
+                      Text(l10n.d('Geen slides gemeten.'))
+                    else
+                      for (final t in run.perSlide)
+                        _row(_label(t), _fmt(t.spent)),
+                    // De vragen staan onder het slide-overzicht: elke keer dat
+                    // een vraag beantwoord is, met de tijd van díe poging.
+                    ..._questionSection(context),
+                  ],
+                ),
+              ),
             ),
           ],
         ),

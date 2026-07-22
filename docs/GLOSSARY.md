@@ -16,6 +16,10 @@ profile, and a TLP classification. Immutable model (`lib/models/deck.dart`).
 **Slide** — one immutable, strongly-typed slide. Its `SlideType` (24 values)
 selects the layout: `title`, `section`, `bullets`, `twoBullets`, `bulletsImage`,
 `twoImages`, `image`, `video`, `quote`, `table`, `freeMarkdown`, `code`, `chart`,
+`cockpit`, `question`, `timeline`, `scorecard`, and the pentest layouts (`assets`,
+`discoveries`, `finding`, `findingsSummary`, `checklist`, `scopeMatrix`,
+`signOff`). *Corrected 2026-07-21: this said 21 and left out `scorecard`,
+`assets` and `discoveries`.*
 `cockpit`, `question`, `timeline`, `scorecard`, and the seven
 information-security layouts that stay hidden until that module is enabled
 (`assets`, `discoveries`, `finding`, `findingsSummary`, `checklist`,
@@ -37,6 +41,20 @@ glance.
 
 **Presenter mode** — the dual-screen presentation view: presenter notes, timer,
 and controls on one screen; the full slide on the other (desktop).
+
+**Question kind** — which of the six shapes a `question` slide takes:
+multiple-choice, true/false, multiple-correct, ordering, image-pair (two pictures,
+pick one) or open-text (the viewer types). Stored as `kind` in the slide's fenced
+`question` block.
+
+**Jaro-Winkler** — the string-similarity measure (`lib/utils/jaro_winkler.dart`)
+behind the open-text question kind: it scores how close a typed answer is to an
+accepted one, so a typo is not counted wrong while a different word still is. The
+author sets the threshold per question.
+
+**Rehearsal run** — one measured pass through a deck in the presenter: total time
+against an optional target, time per slide, and each answered question attempt.
+Session-only; nothing is written to disk or into the `.md`.
 
 ## Files & storage
 

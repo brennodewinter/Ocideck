@@ -1780,6 +1780,44 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Jouw antwoord': 'Tvoje odpověď',
+  'nodig': 'potřeba',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'U zamknuté prezentace se přehled nikdy nezobrazí; tento přepínač pak nic nedělá.',
+  'De twee afbeeldingen': 'Dva obrázky',
+  'Goed gerekende antwoorden': 'Odpovědi uznávané za správné',
+  'Afbeelding 1': 'Obrázek 1',
+  'Afbeelding 2': 'Obrázek 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Počítá se jen doslova shodná odpověď.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Divák odpověď píše. Každá zde zaškrtnutá odpověď se počítá jako správná; velká písmena a přebytečné mezery nehrají roli.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Divák ukáže správný obrázek. Při prezentaci se levý a pravý v každém kole prohodí, takže je neoznačuj jako "levý" a "pravý".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Překlep se ještě počítá jako správný; jiné slovo ne.',
+  'Getypt antwoord': 'Psaná odpověď',
+  'Goed gerekend antwoord:': 'Odpověď uznávaná za správnou:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Vyber dva obrázky a označ ten správný.',
+  'Nog geen goed antwoord opgegeven.': 'Zatím nebyla zadána správná odpověď.',
+  'Overeenkomst': 'Shoda',
+  'Tik de juiste afbeelding aan': 'Klepni na správný obrázek',
+  'Twee afbeeldingen': 'Dva obrázky',
+  'Typ je antwoord': 'Napiš svou odpověď',
+  'Typ je antwoord en bevestig': 'Napiš svou odpověď a potvrď',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Požadovaná shoda se správnou odpovědí',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Zaškrtni alespoň jednu odpověď uznávanou za správnou.',
+  'Vragen': 'Otázky',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'odpovědí, všechny zobrazeny v náhodném pořadí',
+  'fout': 'špatně',
+  'goed': 'správně',
+  'goed vanaf': 'správně od',
+  'links en rechts wisselen per ronde': 'levý a pravý se v každém kole prohodí',
+  'overeenkomst': 'shody',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       'Tento text obsahuje kapitoly. Počet snímků po rozdělení:',
   'dia\'s op.': '(jeden na kapitolu).',

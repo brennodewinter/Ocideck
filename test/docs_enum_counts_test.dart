@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
+import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/export_readiness.dart';
 
@@ -36,6 +37,33 @@ void main() {
           reason: '${type.name} ontbreekt in API_DOCUMENTATION.md',
         );
       }
+    });
+
+    // Dezelfde bewaking voor de vraag-enums. Ze zijn met twee soorten tegelijk
+    // gegroeid; de telling in GLOSSARY liep om precies deze reden achter en
+    // niets merkte het.
+    test('de vraag-enums tellen en noemen kloppen', () {
+      final doc = read('docs/API_DOCUMENTATION.md');
+      void checkEnum(String label, List<Enum> values) {
+        final match = RegExp('`$label` \\((\\d+) values\\)').firstMatch(doc);
+        expect(match, isNotNull, reason: 'de $label-telling staat er niet');
+        expect(
+          int.parse(match!.group(1)!),
+          values.length,
+          reason: 'werk de $label-telling in API_DOCUMENTATION.md bij',
+        );
+        for (final value in values) {
+          expect(
+            doc,
+            contains(value.name),
+            reason: '$label.${value.name} ontbreekt in API_DOCUMENTATION.md',
+          );
+        }
+      }
+
+      checkEnum('QuestionKind', QuestionKind.values);
+      checkEnum('QuestionOnWrong', QuestionOnWrong.values);
+      checkEnum('QuestionResult', QuestionResult.values);
     });
 
     // Dezelfde vorm, dezelfde reden: de exportstatus kreeg er op 2026-07-22 een

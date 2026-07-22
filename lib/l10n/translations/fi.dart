@@ -1777,6 +1777,45 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Jouw antwoord': 'Vastauksesi',
+  'nodig': 'vaaditaan',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Lukitussa esityksessä katsaus ei koskaan näy; tämä valitsin ei silloin tee mitään.',
+  'De twee afbeeldingen': 'Kaksi kuvaa',
+  'Goed gerekende antwoorden': 'Oikeaksi laskettavat vastaukset',
+  'Afbeelding 1': 'Kuva 1',
+  'Afbeelding 2': 'Kuva 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Vain sanatarkasti sama vastaus kelpaa.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Katsoja kirjoittaa vastauksen. Jokainen tässä valittu vastaus lasketaan oikeaksi; isot kirjaimet ja ylimääräiset välilyönnit eivät vaikuta.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Katsoja osoittaa oikean kuvan. Esitettäessä vasen ja oikea vaihtavat paikkaa joka kierroksella, joten älä kutsu niitä "vasemmaksi" ja "oikeaksi".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Kirjoitusvirhe lasketaan vielä oikeaksi; toinen sana ei.',
+  'Getypt antwoord': 'Kirjoitettu vastaus',
+  'Goed gerekend antwoord:': 'Oikeaksi laskettava vastaus:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Valitse kaksi kuvaa ja merkitse oikea.',
+  'Nog geen goed antwoord opgegeven.': 'Oikeaa vastausta ei ole vielä annettu.',
+  'Overeenkomst': 'Vastaavuus',
+  'Tik de juiste afbeelding aan': 'Napauta oikeaa kuvaa',
+  'Twee afbeeldingen': 'Kaksi kuvaa',
+  'Typ je antwoord': 'Kirjoita vastauksesi',
+  'Typ je antwoord en bevestig': 'Kirjoita vastauksesi ja vahvista',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Vaadittu vastaavuus oikean vastauksen kanssa',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Valitse vähintään yksi oikeaksi laskettava vastaus.',
+  'Vragen': 'Kysymykset',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'vastausta, kaikki näytetään satunnaisessa järjestyksessä',
+  'fout': 'väärin',
+  'goed': 'oikein',
+  'goed vanaf': 'oikein alkaen',
+  'links en rechts wisselen per ronde':
+      'vasen ja oikea vaihtavat paikkaa joka kierroksella',
+  'overeenkomst': 'vastaavuudesta',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       'Tässä tekstissä on lukuja. Jakaminen tuottaa',
   'dia\'s op.': 'diaa.',

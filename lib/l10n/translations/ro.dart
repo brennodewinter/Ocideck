@@ -1795,6 +1795,46 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Jouw antwoord': 'Răspunsul tău',
+  'nodig': 'necesar',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'La o prezentare blocată, prezentarea generală nu apare niciodată; acest comutator nu face atunci nimic.',
+  'De twee afbeeldingen': 'Cele două imagini',
+  'Goed gerekende antwoorden': 'Răspunsuri considerate corecte',
+  'Afbeelding 1': 'Imaginea 1',
+  'Afbeelding 2': 'Imaginea 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Contează doar un răspuns identic cuvânt cu cuvânt.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Spectatorul tastează răspunsul. Fiecare răspuns bifat aici este considerat corect; majusculele și spațiile în plus nu contează.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Spectatorul indică imaginea corectă. La prezentare, stânga și dreapta se schimbă la fiecare rundă, așa că nu le numi "stânga" și "dreapta".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'O greșeală de tastare este încă socotită corectă; alt cuvânt nu.',
+  'Getypt antwoord': 'Răspuns tastat',
+  'Goed gerekend antwoord:': 'Răspuns considerat corect:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Alege două imagini și marchează imaginea corectă.',
+  'Nog geen goed antwoord opgegeven.':
+      'Încă nu a fost indicat niciun răspuns corect.',
+  'Overeenkomst': 'Potrivire',
+  'Tik de juiste afbeelding aan': 'Atinge imaginea corectă',
+  'Twee afbeeldingen': 'Două imagini',
+  'Typ je antwoord': 'Scrie răspunsul tău',
+  'Typ je antwoord en bevestig': 'Scrie răspunsul tău și confirmă',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Potrivirea necesară cu răspunsul corect',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Bifează cel puțin un răspuns considerat corect.',
+  'Vragen': 'Întrebări',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'răspunsuri, toate afișate în ordine aleatorie',
+  'fout': 'greșit',
+  'goed': 'corect',
+  'goed vanaf': 'corect de la',
+  'links en rechts wisselen per ronde':
+      'stânga și dreapta se schimbă la fiecare rundă',
+  'overeenkomst': 'potrivire',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       'Acest text conține capitole. Împărțirea produce',
   'dia\'s op.': 'slide-uri.',

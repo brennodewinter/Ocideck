@@ -2759,6 +2759,44 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Jouw antwoord': 'Yanıtınız',
+  'nodig': 'gereken',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Kilitli bir sunumda özet hiçbir zaman görünmez; bu anahtar o durumda hiçbir şey yapmaz.',
+  'De twee afbeeldingen': 'İki görsel',
+  'Goed gerekende antwoorden': 'Doğru sayılan yanıtlar',
+  'Afbeelding 1': 'Görsel 1',
+  'Afbeelding 2': 'Görsel 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Yalnızca birebir aynı yanıt sayılır.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'İzleyici yanıtı yazar. Burada işaretlediğiniz her yanıt doğru sayılır; büyük harfler ve fazladan boşluklar fark etmez.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'İzleyici doğru görseli işaret eder. Sunum sırasında sol/sağ her turda yer değiştirir, bu yüzden onları "soldaki" ve "sağdaki" diye adlandırmayın.',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Yazım hatası hâlâ doğru sayılır; başka bir kelime sayılmaz.',
+  'Getypt antwoord': 'Yazılan yanıt',
+  'Goed gerekend antwoord:': 'Doğru sayılan yanıt:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'İki görsel seçin ve doğru olanı işaretleyin.',
+  'Nog geen goed antwoord opgegeven.': 'Henüz doğru yanıt girilmedi.',
+  'Overeenkomst': 'Benzerlik',
+  'Tik de juiste afbeelding aan': 'Doğru görsele dokunun',
+  'Twee afbeeldingen': 'İki görsel',
+  'Typ je antwoord': 'Yanıtınızı yazın',
+  'Typ je antwoord en bevestig': 'Yanıtınızı yazıp onaylayın',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Doğru yanıtla gereken benzerlik',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Doğru sayılan en az bir yanıt işaretleyin.',
+  'Vragen': 'Sorular',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'yanıt, hepsi rastgele sırada gösterilir',
+  'fout': 'yanlış',
+  'goed': 'doğru',
+  'goed vanaf': 'doğru',
+  'links en rechts wisselen per ronde': 'sol ve sağ her turda yer değiştirir',
+  'overeenkomst': 'benzerlikten itibaren',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       'Bu metin bölümler içeriyor. Bölme işlemi',
   'dia\'s op.': 'slayt oluşturur.',

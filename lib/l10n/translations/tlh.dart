@@ -1752,6 +1752,42 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Jouw antwoord': 'janglIj',
+  'nodig': 'poQlu\'',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'nob ngaQmoHlu\'pu\'chugh, not nargh Hoch cha\'nav; vaj pagh ta\' pel vam.',
+  'De twee afbeeldingen': 'cha\' mIlloghmey',
+  'Goed gerekende antwoorden': 'jangmey lugh',
+  'Afbeelding 1': 'mIllogh wa\'',
+  'Afbeelding 2': 'mIllogh cha\'',
+  'Alleen een letterlijk gelijk antwoord telt.': 'jang rap neH lugh.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'jang ghItlh bejwI\'. naDev DawIvbogh Hoch jang lugh; ghItlh tIn chuvmey je luqelbe\'lu\'.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'mIllogh lugh \'ang bejwI\'. cha\'taHvIS, Hoch tlhoqDaq poS nIH je luchoHlu\', vaj "poS" "nIH" je tIpongQo\'.',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'ghItlh Qagh mach lugh; \'ach mu\' pIm lughbe\'.',
+  'Getypt antwoord': 'jang ghItlhlu\'bogh',
+  'Goed gerekend antwoord:': 'jang lugh:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'cha\' mIlloghmey yIwIv \'ej lughbogh yIper.',
+  'Nog geen goed antwoord opgegeven.': 'jang lugh qonlu\'be\'taH.',
+  'Overeenkomst': 'rapghach',
+  'Tik de juiste afbeelding aan': 'mIllogh lugh yIHot',
+  'Twee afbeeldingen': 'cha\' mIllogh',
+  'Typ je antwoord': 'janglIj yIghItlh',
+  'Typ je antwoord en bevestig': 'janglIj yIghItlh \'ej toblu\'moH',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'jang lugh rapghach poQlu\'bogh',
+  'Vink minstens één goed gerekend antwoord aan.': 'wa\' jang lugh yIwIv.',
+  'Vragen': 'ghelmey',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'jangmey, Hoch teblu\'be\' cha\'lu\'',
+  'fout': 'Qagh',
+  'goed': 'lugh',
+  'goed vanaf': 'lugh',
+  'links en rechts wisselen per ronde': 'Hoch tlhoqDaq poS nIH je luchoHlu\'',
+  'overeenkomst': 'rapghach',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       '\'ay\'mey ngaS ghItlh vam. wavlu\'chugh, chen',
   'dia\'s op.': 'cha\'nob.',

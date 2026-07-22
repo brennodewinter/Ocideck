@@ -1813,6 +1813,45 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Jouw antwoord': 'Do fhreagra',
+  'nodig': 'riachtanach',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Le láithreoireacht ghlasáilte ní fheictear an forbhreathnú riamh; ní dhéanann an lasc seo aon rud ansin.',
+  'De twee afbeeldingen': 'An dá íomhá',
+  'Goed gerekende antwoorden': 'Freagraí a áirítear mar cheart',
+  'Afbeelding 1': 'Íomhá 1',
+  'Afbeelding 2': 'Íomhá 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Ní áirítear ach freagra atá díreach mar an gcéanna.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Clóscríobhann an breathnóir an freagra. Áirítear gach freagra a thiceálann tú anseo mar cheann ceart; is cuma faoi cheannlitreacha ná faoi spásanna breise.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Roghnaíonn an breathnóir an íomhá cheart. Le linn an chur i láthair malartaítear clé/deas gach babhta, mar sin ná tabhair "clé" agus "deas" orthu.',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Áirítear clóearráid mar cheann ceart fós; ní áirítear focal eile.',
+  'Getypt antwoord': 'Freagra clóscríofa',
+  'Goed gerekend antwoord:': 'Freagra a áirítear mar cheann ceart:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Roghnaigh dhá íomhá agus marcáil an ceann ceart.',
+  'Nog geen goed antwoord opgegeven.': 'Níl freagra ceart tugtha go fóill.',
+  'Overeenkomst': 'Meaitseáil',
+  'Tik de juiste afbeelding aan': 'Tapáil an íomhá cheart',
+  'Twee afbeeldingen': 'Dhá íomhá',
+  'Typ je antwoord': 'Clóscríobh do fhreagra',
+  'Typ je antwoord en bevestig': 'Clóscríobh do fhreagra agus deimhnigh é',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Meaitseáil riachtanach leis an bhfreagra ceart',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Ticeáil freagra amháin ar a laghad a áirítear mar cheann ceart.',
+  'Vragen': 'Ceisteanna',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'freagra, iad go léir á dtaispeáint in ord randamach',
+  'fout': 'mícheart',
+  'goed': 'ceart',
+  'goed vanaf': 'ceart ó',
+  'links en rechts wisselen per ronde':
+      'malartaítear clé agus deas gach babhta',
+  'overeenkomst': 'meaitseáil',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       'Tá caibidlí sa téacs seo. Líon na sleamhnán tar éis roinnte:',
   'dia\'s op.': '(ceann in aghaidh gach caibidle).',

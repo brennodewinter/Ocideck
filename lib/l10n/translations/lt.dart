@@ -1785,6 +1785,45 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Jouw antwoord': 'Jūsų atsakymas',
+  'nodig': 'reikia',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Užrakintame pristatyme apžvalga niekada nepasirodo; šis jungiklis tada nieko nedaro.',
+  'De twee afbeeldingen': 'Abu paveikslėliai',
+  'Goed gerekende antwoorden': 'Teisingais laikomi atsakymai',
+  'Afbeelding 1': 'Paveikslėlis 1',
+  'Afbeelding 2': 'Paveikslėlis 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Įskaitomas tik pažodžiui toks pat atsakymas.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Žiūrovas įveda atsakymą. Kiekvienas čia pažymėtas atsakymas laikomas teisingu; didžiosios raidės ir pertekliniai tarpai nesvarbūs.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Žiūrovas parodo teisingą paveikslėlį. Pristatant kairė ir dešinė kiekviename rate sukeičiamos, todėl nevadink jų "kairiuoju" ir "dešiniuoju".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Rašybos klaida dar laikoma teisinga; kitas žodis – ne.',
+  'Getypt antwoord': 'Įrašomas atsakymas',
+  'Goed gerekend antwoord:': 'Teisingu laikomas atsakymas:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Pasirinkite du paveikslėlius ir pažymėkite teisingą.',
+  'Nog geen goed antwoord opgegeven.': 'Teisingas atsakymas dar nenurodytas.',
+  'Overeenkomst': 'Atitikimas',
+  'Tik de juiste afbeelding aan': 'Bakstelėkite teisingą paveikslėlį',
+  'Twee afbeeldingen': 'Du paveikslėliai',
+  'Typ je antwoord': 'Įrašykite savo atsakymą',
+  'Typ je antwoord en bevestig': 'Įrašykite savo atsakymą ir patvirtinkite',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Reikalaujamas atitikimas teisingam atsakymui',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Pažymėkite bent vieną teisingu laikomą atsakymą.',
+  'Vragen': 'Klausimai',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'atsakymai, visi rodomi atsitiktine tvarka',
+  'fout': 'neteisingai',
+  'goed': 'teisingai',
+  'goed vanaf': 'teisingai nuo',
+  'links en rechts wisselen per ronde':
+      'kairė ir dešinė kiekviename rate sukeičiamos',
+  'overeenkomst': 'atitikimo',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       'Šiame tekste yra skyrių. Skaidrių skaičius po padalijimo:',
   'dia\'s op.': '(po vieną kiekvienam skyriui).',

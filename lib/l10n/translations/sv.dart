@@ -1776,6 +1776,45 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Jouw antwoord': 'Ditt svar',
+  'nodig': 'krävs',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Med en låst presentation visas översikten aldrig; det här reglaget gör då ingenting.',
+  'De twee afbeeldingen': 'De två bilderna',
+  'Goed gerekende antwoorden': 'Svar som räknas som rätt',
+  'Afbeelding 1': 'Bild 1',
+  'Afbeelding 2': 'Bild 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Bara ett ordagrant identiskt svar räknas.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Åskådaren skriver svaret. Varje svar du kryssar i här räknas som rätt; versaler och extra mellanslag spelar ingen roll.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Åskådaren pekar ut rätt bild. Vid presentation byter vänster och höger plats varje runda, så kalla dem inte "vänster" och "höger".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Ett skrivfel räknas fortfarande som rätt; ett annat ord gör det inte.',
+  'Getypt antwoord': 'Skrivet svar',
+  'Goed gerekend antwoord:': 'Svar som räknas som rätt:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Välj två bilder och markera den rätta.',
+  'Nog geen goed antwoord opgegeven.': 'Inget rätt svar har angetts ännu.',
+  'Overeenkomst': 'Överensstämmelse',
+  'Tik de juiste afbeelding aan': 'Tryck på rätt bild',
+  'Twee afbeeldingen': 'Två bilder',
+  'Typ je antwoord': 'Skriv ditt svar',
+  'Typ je antwoord en bevestig': 'Skriv ditt svar och bekräfta',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Krävd överensstämmelse med rätt svar',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Kryssa i minst ett svar som räknas som rätt.',
+  'Vragen': 'Frågor',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'svar, alla visas i slumpmässig ordning',
+  'fout': 'fel',
+  'goed': 'rätt',
+  'goed vanaf': 'rätt från',
+  'links en rechts wisselen per ronde':
+      'vänster och höger byter plats varje runda',
+  'overeenkomst': 'överensstämmelse',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       'Den här texten innehåller kapitel. Uppdelningen ger',
   'dia\'s op.': 'bilder.',

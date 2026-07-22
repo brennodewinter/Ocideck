@@ -282,6 +282,102 @@ void main() {
     );
   });
 
+  // ── De twee soorten zonder antwoordlijst ─────────────────────────────────
+
+  testWidgets(
+    'kiezen voor twee afbeeldingen maakt twee plekken en één juiste',
+    (tester) async {
+      var updated = _questionSlide(QuestionSpec.defaultMultipleChoice());
+
+      await _pump(tester, _host(updated, (s) => updated = s));
+
+      await tester.tap(find.byType(DropdownButtonFormField<QuestionKind>));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Twee afbeeldingen').last);
+      await tester.pumpAndSettle();
+
+      final spec = QuestionSpec.parse(updated.customMarkdown);
+      expect(spec.kind, QuestionKind.imagePair);
+      expect(spec.answers.length, greaterThanOrEqualTo(questionImagePairCount));
+      // Precies één juiste, anders valt er niets aan te wijzen.
+      expect(spec.answers.where((a) => a.correct).length, 1);
+      expect(find.text('Afbeelding 1'), findsWidgets);
+      expect(find.text('Afbeelding 2'), findsWidgets);
+      // Geen getrokken opties, dus ook geen teller ervoor.
+      expect(find.byTooltip('Optie toevoegen'), findsNothing);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets('de juiste kant omzetten verplaatst het vinkje', (tester) async {
+    var updated = _questionSlide(
+      const QuestionSpec(
+        kind: QuestionKind.imagePair,
+        answers: [
+          QuestionAnswer(image: 'a.png', correct: true),
+          QuestionAnswer(image: 'b.png'),
+        ],
+      ),
+    );
+
+    await _pump(tester, _host(updated, (s) => updated = s));
+
+    await tester.tap(find.text('Afbeelding 2').last);
+    await tester.pumpAndSettle();
+
+    final spec = QuestionSpec.parse(updated.customMarkdown);
+    expect(spec.answers[0].correct, isFalse);
+    expect(spec.answers[1].correct, isTrue);
+  });
+
+  testWidgets('de overeenkomstdrempel is te verschuiven', (tester) async {
+    var updated = _questionSlide(
+      const QuestionSpec(
+        kind: QuestionKind.openText,
+        prompt: 'Waar hoort een wachtwoord?',
+        answers: [QuestionAnswer(text: 'in de kluis', correct: true)],
+        similarityThreshold: 0.9,
+      ),
+    );
+
+    await _pump(tester, _host(updated, (s) => updated = s));
+
+    expect(find.text('90%'), findsOneWidget);
+    expect(
+      find.text('Vereiste overeenkomst met het juiste antwoord'),
+      findsOne,
+    );
+
+    // Naar het uiterste linkerpunt slepen zet de drempel op het minimum.
+    final slider = find.byType(Slider);
+    final box = tester.getRect(slider);
+    await tester.dragFrom(box.center, Offset(-box.width, 0));
+    await tester.pumpAndSettle();
+
+    expect(
+      QuestionSpec.parse(updated.customMarkdown).similarityThreshold,
+      questionMinSimilarity,
+    );
+  });
+
+  testWidgets('zonder aangevinkt antwoord waarschuwt de getypte vraag', (
+    tester,
+  ) async {
+    var updated = _questionSlide(
+      const QuestionSpec(
+        kind: QuestionKind.openText,
+        answers: [QuestionAnswer(text: 'iets')],
+      ),
+    );
+
+    await _pump(tester, _host(updated, (s) => updated = s));
+
+    expect(
+      find.text('Vink minstens één goed gerekend antwoord aan.'),
+      findsOneWidget,
+    );
+  });
+
   testWidgets('editing the prompt flows into the spec', (tester) async {
     var updated = _questionSlide(
       const QuestionSpec(

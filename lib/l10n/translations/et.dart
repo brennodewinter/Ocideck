@@ -1768,6 +1768,45 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Jouw antwoord': 'Sinu vastus',
+  'nodig': 'vajalik',
+  'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
+      'Lukustatud esitluses ülevaadet kunagi ei kuvata; see lüliti ei tee siis midagi.',
+  'De twee afbeeldingen': 'Kaks pilti',
+  'Goed gerekende antwoorden': 'Õigeks loetavad vastused',
+  'Afbeelding 1': 'Pilt 1',
+  'Afbeelding 2': 'Pilt 2',
+  'Alleen een letterlijk gelijk antwoord telt.':
+      'Arvesse läheb ainult sõna-sõnalt sama vastus.',
+  'De kijker typt het antwoord. Elk antwoord dat je hier aanvinkt telt als goed; hoofdletters en extra spaties maken niet uit.':
+      'Vaataja trükib vastuse. Iga siin märgitud vastus loetakse õigeks; suurtähed ja lisatühikud ei loe.',
+  'De kijker wijst de juiste afbeelding aan. Bij presenteren wisselt links/rechts per ronde, dus benoem ze niet als "linker" en "rechter".':
+      'Vaataja osutab õigele pildile. Esitlemisel vahetavad vasak ja parem igas voorus kohti, seega ära nimeta neid "vasakuks" ja "paremaks".',
+  'Een tikfout telt nog als goed; een ander woord niet.':
+      'Näpuviga läheb veel õigeks; teine sõna mitte.',
+  'Getypt antwoord': 'Kirjutatud vastus',
+  'Goed gerekend antwoord:': 'Õigeks loetav vastus:',
+  'Kies twee afbeeldingen en markeer de juiste.':
+      'Vali kaks pilti ja märgi õige.',
+  'Nog geen goed antwoord opgegeven.': 'Õiget vastust pole veel antud.',
+  'Overeenkomst': 'Vastavus',
+  'Tik de juiste afbeelding aan': 'Puuduta õiget pilti',
+  'Twee afbeeldingen': 'Kaks pilti',
+  'Typ je antwoord': 'Kirjuta oma vastus',
+  'Typ je antwoord en bevestig': 'Kirjuta oma vastus ja kinnita',
+  'Vereiste overeenkomst met het juiste antwoord':
+      'Nõutav vastavus õige vastusega',
+  'Vink minstens één goed gerekend antwoord aan.':
+      'Märgi vähemalt üks õigeks loetav vastus.',
+  'Vragen': 'Küsimused',
+  'antwoorden, alle getoond in willekeurige volgorde':
+      'vastust, kõik näidatakse juhuslikus järjekorras',
+  'fout': 'vale',
+  'goed': 'õige',
+  'goed vanaf': 'õige alates',
+  'links en rechts wisselen per ronde':
+      'vasak ja parem vahetavad igas voorus kohti',
+  'overeenkomst': 'vastavusest',
   'Deze tekst bevat hoofdstukken. Opknippen levert':
       'See tekst sisaldab peatükke. Tükeldamine annab',
   'dia\'s op.': 'slaidi.',

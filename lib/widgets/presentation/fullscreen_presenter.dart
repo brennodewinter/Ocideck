@@ -30,6 +30,7 @@ import '../../services/slide_layout_metrics.dart';
 import '../../services/web_asset_store.dart';
 import '../../utils/bundled_asset.dart';
 import '../../utils/image_limits.dart';
+import '../../utils/jaro_winkler.dart';
 import '../../utils/log.dart';
 import '../../utils/page_scoped_notes.dart';
 import '../../utils/project_path.dart';
@@ -55,6 +56,7 @@ part 'parts/presenter_notes.dart';
 part 'parts/presenter_overlays.dart';
 part 'parts/presenter_content.dart';
 part 'parts/presenter_views.dart';
+part 'parts/presenter_support.dart';
 
 /// Guards teardown of the secondary audience window so native close is only
 /// invoked once (double-close on Linux can crash the embedder).
@@ -89,31 +91,6 @@ enum _Blank { none, black, white }
 /// onderdelen die over `part`-bestanden zijn verdeeld erbij kunnen.
 const _questionTickMs = 100;
 
-/// Cijfer (gewoon of numpad) → karakter, of null bij andere toetsen.
-/// Top-level zodat de toets-afhandeling in een `part`-bestand erbij kan.
-final Map<LogicalKeyboardKey, String> _digits = {
-  LogicalKeyboardKey.digit0: '0',
-  LogicalKeyboardKey.digit1: '1',
-  LogicalKeyboardKey.digit2: '2',
-  LogicalKeyboardKey.digit3: '3',
-  LogicalKeyboardKey.digit4: '4',
-  LogicalKeyboardKey.digit5: '5',
-  LogicalKeyboardKey.digit6: '6',
-  LogicalKeyboardKey.digit7: '7',
-  LogicalKeyboardKey.digit8: '8',
-  LogicalKeyboardKey.digit9: '9',
-  LogicalKeyboardKey.numpad0: '0',
-  LogicalKeyboardKey.numpad1: '1',
-  LogicalKeyboardKey.numpad2: '2',
-  LogicalKeyboardKey.numpad3: '3',
-  LogicalKeyboardKey.numpad4: '4',
-  LogicalKeyboardKey.numpad5: '5',
-  LogicalKeyboardKey.numpad6: '6',
-  LogicalKeyboardKey.numpad7: '7',
-  LogicalKeyboardKey.numpad8: '8',
-  LogicalKeyboardKey.numpad9: '9',
-};
-
 class FullscreenPresenter extends StatefulWidget {
   final List<Slide> slides;
   final String? projectPath;
@@ -141,6 +118,12 @@ class FullscreenPresenter extends StatefulWidget {
   /// tijd wordt altijd gemeten; dit schakelt enkel het eindscherm. Komt uit de
   /// instelling `showRehearsalSummary` (standaard aan).
   final bool showRehearsalSummary;
+
+  /// Of het open deck vergrendeld is op 'alleen afspelen' ([Deck.playOnly]).
+  /// Dan verschijnt het tijdenoverzicht nooit: een vergrendeld deck is bedoeld
+  /// om áf te spelen, en de meetgegevens van wie het afspeelt gaan de maker van
+  /// het deck niets aan.
+  final bool playOnly;
 
   /// When set, this presenter drives a separate audience (beamer) window: the
   /// laptop shows the presenter view, the slide goes to [audience]. Null
@@ -172,6 +155,7 @@ class FullscreenPresenter extends StatefulWidget {
     this.allowRemoteMedia = false,
     this.targetDuration,
     this.showRehearsalSummary = true,
+    this.playOnly = false,
     this.audience,
     this.initialAnnotations = const {},
     this.onAnnotationsChanged,
@@ -196,6 +180,7 @@ class FullscreenPresenter extends StatefulWidget {
     bool allowRemoteMedia = false,
     Duration? targetDuration,
     bool showRehearsalSummary = true,
+    bool playOnly = false,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -241,6 +226,7 @@ class FullscreenPresenter extends StatefulWidget {
         allowRemoteMedia: allowRemoteMedia,
         targetDuration: targetDuration,
         showRehearsalSummary: showRehearsalSummary,
+        playOnly: playOnly,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
@@ -262,6 +248,7 @@ class FullscreenPresenter extends StatefulWidget {
         allowRemoteMedia: allowRemoteMedia,
         targetDuration: targetDuration,
         showRehearsalSummary: showRehearsalSummary,
+        playOnly: playOnly,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
@@ -285,6 +272,7 @@ class FullscreenPresenter extends StatefulWidget {
     bool allowRemoteMedia = false,
     Duration? targetDuration,
     bool showRehearsalSummary = true,
+    bool playOnly = false,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -316,6 +304,7 @@ class FullscreenPresenter extends StatefulWidget {
               allowRemoteMedia: allowRemoteMedia,
               targetDuration: targetDuration,
               showRehearsalSummary: showRehearsalSummary,
+              playOnly: playOnly,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
               onSlideChanged: onSlideChanged,
@@ -351,6 +340,7 @@ class FullscreenPresenter extends StatefulWidget {
     bool allowRemoteMedia = false,
     Duration? targetDuration,
     bool showRehearsalSummary = true,
+    bool playOnly = false,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -423,6 +413,7 @@ class FullscreenPresenter extends StatefulWidget {
           showClassificationWatermark: showClassificationWatermark,
           allowRemoteMedia: allowRemoteMedia,
           showRehearsalSummary: showRehearsalSummary,
+          playOnly: playOnly,
           annotations: annotations,
           onAnnotationsChanged: onAnnotationsChanged,
           onSlideChanged: onSlideChanged,
@@ -453,6 +444,7 @@ class FullscreenPresenter extends StatefulWidget {
               showClassificationWatermark: showClassificationWatermark,
               allowRemoteMedia: allowRemoteMedia,
               showRehearsalSummary: showRehearsalSummary,
+              playOnly: playOnly,
               audience: audienceHandle,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
@@ -493,37 +485,6 @@ bool autoAdvanceWaitsForMedia(Slide slide) {
       slide.videoAutoplay;
   final autoplayAudio = slide.audioPath.isNotEmpty && slide.audioAutoplay;
   return autoplayVideo || autoplayAudio;
-}
-
-Future<bool> _wakeLockEnabled() async {
-  try {
-    return await WakelockPlus.enabled;
-  } catch (e) {
-    logWarning('fullscreen_presenter._wakeLockEnabled: query failed', e);
-    return false;
-  }
-}
-
-Future<void> _enableWakeLock() async {
-  try {
-    await WakelockPlus.enable();
-  } catch (e) {
-    logWarning('fullscreen_presenter._enableWakeLock: enable failed', e);
-    // Best-effort: unsupported platforms should not interrupt presenting.
-  }
-}
-
-Future<void> _restoreWakeLock(bool enabledBeforePresentation) async {
-  try {
-    if (enabledBeforePresentation) {
-      await WakelockPlus.enable();
-    } else {
-      await WakelockPlus.disable();
-    }
-  } catch (e) {
-    logWarning('fullscreen_presenter._restoreWakeLock: restore failed', e);
-    // Best-effort cleanup.
-  }
 }
 
 class _FullscreenPresenterState extends State<FullscreenPresenter> {
@@ -849,6 +810,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// Toon na afloop de oefenrun-samenvatting wanneer de deck-schakelaar aan
   /// staat. Sessie-only: niets wordt opgeslagen.
   Future<void> _maybeShowRehearsalSummary() async {
+    // Een vergrendeld deck ('alleen afspelen') toont het overzicht nooit. Dat
+    // is geen instelling die de afspeler kan aanzetten: het deck is bedoeld om
+    // af te spelen, en wie het afspeelt hoort achteraf geen meetrapport over
+    // zichzelf te krijgen. Dus vóór de schakelaar, niet erin verweven.
+    if (widget.playOnly) return;
     // Tijd wordt altijd gemeten; deze schakelaar bepaalt enkel of het
     // eindscherm verschijnt (uit = stille modus, bv. bij een echte presentatie).
     // Staat de schakelaar aan, dan verschijnt het altijd — ook een korte run
@@ -947,52 +913,4 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   }
 
   // ── Rasteroverzicht (snel naar een slide springen) ───────────────────────
-}
-
-// ── Kleine helpers ───────────────────────────────────────────────────────────
-
-class _SectionLabel extends StatelessWidget {
-  final String text;
-  const _SectionLabel(this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: AppTheme.gray500,
-        fontSize: 10,
-        fontWeight: FontWeight.w700,
-        letterSpacing: 1.2,
-      ),
-    );
-  }
-}
-
-class _NavButton extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback? onTap;
-  const _NavButton({required this.icon, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    final enabled = onTap != null;
-    return Material(
-      color: enabled ? PresenterPalette.surface : PresenterPalette.bg,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(6),
-        child: SizedBox(
-          width: 44,
-          height: 36,
-          child: Icon(
-            icon,
-            color: enabled ? Colors.white70 : Colors.white12,
-            size: 24,
-          ),
-        ),
-      ),
-    );
-  }
 }

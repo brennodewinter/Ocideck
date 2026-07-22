@@ -68,6 +68,13 @@ open presentation grey out rather than disappearing, so the list a user learns
 stays the same list. Windows and Linux get their menu from the desktop
 environment; the browser build has none.
 
+**Markings that do not rest on colour alone.** Where the app points at part of a
+text, it pairs the colour with a shape. The correction after a typed question
+answer strikes through what was there too much and underlines what was missing,
+so the two lines still read apart for anyone who tells red and green apart
+poorly. On an image-pair question the two pictures carry an **A**/**B** badge
+that becomes a ✓ or ✗, rather than only a green or red border.
+
 **Contrast checking of the deck you are making.** The slide-quality panel checks
 body text, titles, table text and headers, code colours and the accent colour
 against their backgrounds at WCAG 2.1 AA, and flags what fails. This helps the

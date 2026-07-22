@@ -12,6 +12,16 @@ typedef _OptionRow = ({
   String? trailing,
 });
 
+/// Hoe een optie eruitziet in een bepaalde staat. Gedeeld door de tekst- en de
+/// beeldtegel, zodat "goed" op beide precies dezelfde kleur is.
+typedef _VisualColors = ({
+  Color border,
+  Color fill,
+  Color fg,
+  IconData? icon,
+  double opacity,
+});
+
 /// Renders a question slide. In the editor (when [view] is null) it shows the
 /// authoring view: the prompt plus every answer with the correct ones marked,
 /// and a hint summarising how it will be presented. During a presentation
@@ -28,6 +38,10 @@ class _QuestionPreview extends StatelessWidget {
   final ValueChanged<int>? onAnswerSelected;
   final VoidCallback? onAnswerSubmit;
 
+  /// Null → het invoerveld van een getypt antwoord spiegelt alleen mee; zie
+  /// [SlidePreviewWidget.onAnswerTextChanged].
+  final ValueChanged<String>? onAnswerTextChanged;
+
   const _QuestionPreview({
     required this.slide,
     required this.w,
@@ -38,6 +52,7 @@ class _QuestionPreview extends StatelessWidget {
     required this.view,
     required this.onAnswerSelected,
     required this.onAnswerSubmit,
+    this.onAnswerTextChanged,
   });
 
   bool get _interactive =>
@@ -217,6 +232,15 @@ class _QuestionPreview extends StatelessWidget {
   }
 
   Widget _content(BuildContext context, QuestionSpec spec) {
+    // Twee soorten leggen hun antwoorden niet als rijtje neer: het beeldpaar
+    // (naast elkaar) en het getypte antwoord (een invoerveld). Zie
+    // `question_preview_answers.dart`.
+    if (isImageChoice(spec)) return imageChoiceContent(context, spec);
+    if (isOpenText(spec)) return openTextContent(context, spec);
+    return _optionListContent(context, spec);
+  }
+
+  Widget _optionListContent(BuildContext context, QuestionSpec spec) {
     final accent = AppTheme.parseHexColor(profile.accentColor);
     final textColor = AppTheme.parseHexColor(profile.textColor);
 
@@ -387,6 +411,64 @@ class _QuestionPreview extends StatelessWidget {
     }
   }
 
+  /// De kleuren en het pictogram bij een optiestaat.
+  _VisualColors _visualColors(_OptionVisual visual) {
+    const green = AppTheme.success600;
+    const red = AppTheme.danger800;
+    final accent = AppTheme.parseHexColor(profile.accentColor);
+    final textColor = AppTheme.parseHexColor(profile.textColor);
+    switch (visual) {
+      case _OptionVisual.neutral:
+        return (
+          border: textColor.withValues(alpha: 0.25),
+          fill: textColor.withValues(alpha: 0.04),
+          fg: textColor,
+          icon: null,
+          opacity: 1,
+        );
+      case _OptionVisual.selected:
+        return (
+          border: accent,
+          fill: accent.withValues(alpha: 0.16),
+          fg: textColor,
+          icon: null,
+          opacity: 1,
+        );
+      case _OptionVisual.correct:
+        return (
+          border: green,
+          fill: green.withValues(alpha: 0.22),
+          fg: textColor,
+          icon: Icons.check,
+          opacity: 1,
+        );
+      case _OptionVisual.wrong:
+        return (
+          border: red,
+          fill: red.withValues(alpha: 0.22),
+          fg: textColor,
+          icon: Icons.close,
+          opacity: 1,
+        );
+      case _OptionVisual.dim:
+        return (
+          border: textColor.withValues(alpha: 0.15),
+          fill: textColor.withValues(alpha: 0.02),
+          fg: textColor,
+          icon: null,
+          opacity: 0.55,
+        );
+      case _OptionVisual.authorCorrect:
+        return (
+          border: green.withValues(alpha: 0.7),
+          fill: green.withValues(alpha: 0.14),
+          fg: textColor,
+          icon: Icons.check,
+          opacity: 1,
+        );
+    }
+  }
+
   _OptionVisual _presentVisual(int i) {
     final v = view!;
     if (!v.revealed) {
@@ -406,12 +488,18 @@ class _QuestionPreview extends StatelessWidget {
     final textColor = AppTheme.parseHexColor(profile.textColor);
     final canSubmit =
         onAnswerSubmit != null &&
-        (view!.ordering ? view!.orderComplete : view!.hasSelection);
+        (view!.openText
+            ? view!.typedAnswer.trim().isNotEmpty
+            : view!.ordering
+            ? view!.orderComplete
+            : view!.hasSelection);
     return Row(
       children: [
         Expanded(
           child: Text(
-            view!.ordering
+            view!.openText
+                ? l10n.d('Typ je antwoord en bevestig')
+                : view!.ordering
                 ? l10n.d('Tik de antwoorden aan in de juiste volgorde')
                 : l10n.d('Selecteer alle juiste antwoorden'),
             style: TextStyle(
@@ -463,41 +551,13 @@ class _QuestionPreview extends StatelessWidget {
     String? badge,
     String? trailing,
   }) {
-    const green = AppTheme.success600;
-    const red = AppTheme.danger800;
+    final colors = _visualColors(visual);
     final accent = AppTheme.parseHexColor(profile.accentColor);
-    final textColor = AppTheme.parseHexColor(profile.textColor);
-
-    Color border;
-    Color fill;
-    Color fg = textColor;
-    IconData? icon;
-    double opacity = 1;
-    switch (visual) {
-      case _OptionVisual.neutral:
-        border = textColor.withValues(alpha: 0.25);
-        fill = textColor.withValues(alpha: 0.04);
-      case _OptionVisual.selected:
-        border = accent;
-        fill = accent.withValues(alpha: 0.16);
-      case _OptionVisual.correct:
-        border = green;
-        fill = green.withValues(alpha: 0.22);
-        icon = Icons.check;
-        fg = textColor;
-      case _OptionVisual.wrong:
-        border = red;
-        fill = red.withValues(alpha: 0.22);
-        icon = Icons.close;
-      case _OptionVisual.dim:
-        border = textColor.withValues(alpha: 0.15);
-        fill = textColor.withValues(alpha: 0.02);
-        opacity = 0.55;
-      case _OptionVisual.authorCorrect:
-        border = green.withValues(alpha: 0.7);
-        fill = green.withValues(alpha: 0.14);
-        icon = Icons.check;
-    }
+    final border = colors.border;
+    final fill = colors.fill;
+    final fg = colors.fg;
+    final icon = colors.icon;
+    final opacity = colors.opacity;
 
     final tile = Opacity(
       opacity: opacity,
@@ -689,13 +749,33 @@ class _QuestionPreview extends StatelessWidget {
     );
   }
 
+  /// Wat er bij het presenteren van deze soort willekeurig gebeurt. Null wanneer
+  /// er niets te trekken valt — bij Juist/Onjuist staan de twee opties vast, en
+  /// "4 van 0 opties" was daar een zin die nergens op sloeg.
+  String? _authorDrawHint(AppLocalizations l10n, QuestionSpec spec) {
+    final filled = spec.filledAnswers.length;
+    switch (spec.kind) {
+      case QuestionKind.trueFalse:
+        return null;
+      case QuestionKind.multipleCorrect:
+        return '$filled ${l10n.d('antwoorden, alle getoond in willekeurige volgorde')}';
+      case QuestionKind.imagePair:
+        return l10n.d('links en rechts wisselen per ronde');
+      case QuestionKind.openText:
+        return '${l10n.d('goed vanaf')} ${(spec.similarityThreshold * 100).round()}% ${l10n.d('overeenkomst')}';
+      case QuestionKind.multipleChoice:
+      case QuestionKind.ordering:
+        return '${spec.optionCount} ${l10n.d('van')} $filled ${l10n.d('opties worden willekeurig getoond')}';
+    }
+  }
+
   Widget _authorHint(BuildContext context, QuestionSpec spec, double scale) {
     final l10n = context.l10n;
     final textColor = AppTheme.parseHexColor(
       profile.textColor,
     ).withValues(alpha: 0.6);
     final parts = <String>[
-      '${spec.optionCount} ${l10n.d('van')} ${spec.answers.where((a) => a.text.trim().isNotEmpty).length} ${l10n.d('opties worden willekeurig getoond')}',
+      ?_authorDrawHint(l10n, spec),
       if (spec.timeLimitSeconds > 0)
         '${spec.timeLimitSeconds}s ${l10n.d('antwoordtijd')}',
       spec.onWrong == QuestionOnWrong.retry

@@ -737,6 +737,38 @@ void main() {
       );
     });
 
+    // Bij een beeldparen-vraag is de afbeelding het antwoord zelf. Ontbreekt
+    // ze, dan staat er in de zaal een lege tegel waar een antwoord hoort.
+    test('detects a missing answer image on an image-pair question', () {
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.question).copyWith(
+            customMarkdown: const QuestionSpec(
+              kind: QuestionKind.imagePair,
+              prompt: 'Welke is echt?',
+              answers: [
+                QuestionAnswer(
+                  image: '/elders/bestaat-niet.png',
+                  correct: true,
+                ),
+                QuestionAnswer(image: '/elders/ook-niet.png'),
+              ],
+            ).toBlock(),
+          ),
+        ],
+      );
+
+      expect(
+        analyzer
+            .analyze(deck)
+            .issues
+            .where((i) => i.kind == SlideQualityIssueKind.missingMediaFile)
+            .length,
+        2,
+      );
+    });
+
     // Juist een deck dat nog niet is opgeslagen heeft de grootste kans op een
     // kapotte verwijzing — daar hangt de slide nog aan een pad elders op de
     // schijf. Tot voor kort zweeg de controle precies daar.

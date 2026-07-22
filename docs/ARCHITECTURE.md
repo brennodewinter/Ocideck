@@ -152,6 +152,7 @@ widget tree, and acyclic between layers. They held on discipline alone until
   few types reuse `customMarkdown` for their payload: free-Markdown (raw),
   `code` (the source), `chart` (the JSON spec), `cockpit` (the JSON spec of
   its instrument meters), and `question` (the JSON quiz spec — kind, prompt,
+  answers, option count, time limit, and the match threshold for a typed answer).
   answers, option count, time limit).
 - A couple of `Slide` fields exist **only for rendering** and never reach a saved
   file: `mediaRedacted`, set by the privacy projection because an emptied image
@@ -178,12 +179,27 @@ widget tree, and acyclic between layers. They held on discipline alone until
   (who uses this file, and repoint them), which existed twice with the same blind
   spot.
 - **Question slides** are interactive. The authored `QuestionSpec` round-trips in
-  `customMarkdown`; the live per-presentation state (`QuestionView` — the random
-  options drawn, the pick, correct/wrong, timer) is **session-only** and never
-  serialized. During presentation the presenter window is the single source of
-  truth: the audience window forwards clicks (`answerSelected` / `answerSubmit`)
-  and the presenter pushes the resulting `QuestionView` back over the window
-  channel, the same pattern as the checklist/table sync.
+  `customMarkdown`; the live per-presentation state (`QuestionView` — the options
+  drawn, the pick or the typed text, correct/wrong, timer) is **session-only** and
+  never serialized. During presentation the presenter window is the single source
+  of truth: the audience window forwards clicks (`answerSelected` /
+  `answerSubmit`) and the presenter pushes the resulting `QuestionView` back over
+  the window channel, the same pattern as the checklist/table sync.
+
+  Two consequences of that split are load-bearing rather than incidental. First,
+  the `QuestionView` is a **render state**, so whatever it holds is on screen: an
+  `openText` round therefore carries no `expectedAnswer` until the reveal, and the
+  presenter fills it in at the moment it resolves the answer. This is not a
+  confidentiality boundary — `buildBeamerMarkdown` hands the audience window the
+  whole deck markdown, `question` block and `correct` flags and all, so the answer
+  key is already over there. It is a display rule: the view decides what is
+  painted, and painting the answer before it is given would spoil the question.
+  (*Corrected 2026-07-21: this paragraph claimed the answer key does not travel to
+  the beamer window. It does.*) Second, typing must not be possible in two places
+  at once, so the audience window passes no `onAnswerTextChanged` and its input
+  field mirrors read-only; `presenter_keys.dart` hands the keyboard to the field
+  while such a round is open, keeping only `Enter`, `PageUp`/`PageDown`, `Esc` and
+  `Ctrl/Cmd+W` as shortcuts.
 - **Timeline slides** keep their events in the normal `bullets` field as
   `marker :: title :: description` list items (no `customMarkdown`), so the `.md`
   stays a readable Markdown list. The layout (`TimelineLayout`) and animation
@@ -377,10 +393,20 @@ audience window, thumbnails, and export dialog.
 - **Rehearsal timing** lives in `services/rehearsal_controller.dart` — a plain,
   unit-testable controller (injectable clock) that the presenter feeds via a
   cheap, idempotent `observe(id, index)` on every build, so it captures every
-  navigation path. It measures only: elapsed, remaining against a target, and
-  per-slide time — no pacing logic. State is **session-only** (no prefs, no `.md`);
-  `_exit` shows a summary (`rehearsal_summary.dart`) and discards it. The default
-  target lives in `Deck.presentationTargetSeconds` (front matter: `ocideck_target_seconds`).
+  navigation path. It measures only: elapsed, remaining against a target,
+  per-slide time, and — through the explicit `startQuestion`/`finishQuestion`
+  pair, which the question logic calls — the duration and verdict of each
+  *answered* question attempt. No pacing logic. State is **session-only** (no
+  prefs, no `.md`); `_exit` shows a summary (`rehearsal_summary.dart`) and
+  discards it. The default target lives in `Deck.presentationTargetSeconds`
+  (front matter: `ocideck_target_seconds`).
+
+  Whether that summary appears at all is decided in `FullscreenPresenter`, not at
+  the call site: a `playOnly` deck is refused before the `showRehearsalSummary`
+  switch is even consulted. Putting the gate in the widget means every route into
+  the presenter is covered by it, which is the point — the switch travels in the
+  recipient's copy of the file, so a caller-side check would only cover the
+  callers we happened to think of.
 
 ### Dual-screen mode
 

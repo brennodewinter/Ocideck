@@ -624,6 +624,19 @@ class SlideQualityAnalyzer {
           field: 'imagePath',
           label: 'Afbeelding',
         );
+        // Bij een beeldparen-vraag zíjn de antwoorden afbeeldingen. Ontbreekt
+        // er een, dan staat er tijdens het presenteren een lege tegel waar een
+        // antwoord hoort — en dat merk je pas in de zaal.
+        final spec = QuestionSpec.parse(slide.customMarkdown);
+        if (spec.kind == QuestionKind.imagePair) {
+          for (var i = 0; i < spec.answers.length; i++) {
+            missingFile(
+              path: spec.answers[i].image,
+              field: 'customMarkdown',
+              label: 'Afbeelding ${i + 1}',
+            );
+          }
+        }
       case SlideType.bullets:
       case SlideType.twoBullets:
       case SlideType.table:

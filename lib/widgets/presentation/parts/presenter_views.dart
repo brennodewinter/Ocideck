@@ -65,6 +65,9 @@ extension _PresenterViews on _FullscreenPresenterState {
                   questionView: _currentQuestionView,
                   onAnswerSelected: (i) => _onAnswerSelected(i),
                   onAnswerSubmit: () => _onAnswerSubmit(),
+                  // Typen gebeurt op het presentatorscherm; het beamervenster
+                  // spiegelt alleen mee (zie [SlidePreviewWidget.onAnswerTextChanged]).
+                  onAnswerTextChanged: _onAnswerTextChanged,
                   tableEditMode:
                       _tableEditMode && slide.type == SlideType.table,
                   tableEditRow: _tableEditRow,

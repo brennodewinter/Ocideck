@@ -464,6 +464,14 @@ class MarpHtmlService {
     multiLine: true,
   );
 
+  /// Maak een bijschrift veilig als alt-tekst in Markdown: de haken zouden de
+  /// afbeeldingsverwijzing anders vroegtijdig afsluiten.
+  static String _markdownAltText(String raw) => raw
+      .replaceAll('[', '(')
+      .replaceAll(']', ')')
+      .replaceAll('\n', ' ')
+      .trim();
+
   /// Vervangt een ```question-blok door de vraag met zijn antwoordopties.
   ///
   /// Zonder deze stap viel het blok terug op de gewone codeweergave van marked,
@@ -482,12 +490,20 @@ class MarpHtmlService {
       if (spec.prompt.trim().isNotEmpty) {
         b.write('<p class="question-prompt">${_htmlText(spec.prompt)}</p>');
       }
-      final options = spec.kind == QuestionKind.trueFalse
-          ? const ['Waar', 'Niet waar']
-          : [
-              for (final a in spec.answers)
-                if (a.text.trim().isNotEmpty) a.text,
-            ];
+      final options = switch (spec.kind) {
+        QuestionKind.trueFalse => const ['Waar', 'Niet waar'],
+        // Een getypt antwoord heeft geen opties om te tonen — en de goed
+        // gerekende antwoorden zijn hier juist de antwoordsleutel. Die horen
+        // niet in een document dat rondgestuurd wordt.
+        QuestionKind.openText => const <String>[],
+        // Bij een beeldparen-vraag zíjn de antwoorden de afbeeldingen; de
+        // tekst is hooguit bijschrift en zonder het beeld betekenisloos.
+        QuestionKind.imagePair => const <String>[],
+        _ => [
+          for (final a in spec.answers)
+            if (a.text.trim().isNotEmpty) a.text,
+        ],
+      };
       if (options.isNotEmpty) {
         b.write('<ul class="question-options">');
         for (final o in options) {
@@ -496,6 +512,18 @@ class MarpHtmlService {
         b.write('</ul>');
       }
       b.write('</div>\n');
+      // Bij een beeldparen-vraag zijn de twee afbeeldingen de opties. Ze gaan
+      // er als gewone Markdown achteraan en niet als HTML in de kaart: zo
+      // worden hun paden precies zo opgelost als elke andere afbeelding in het
+      // deck, zonder een tweede route die apart bijgehouden moet worden.
+      if (spec.kind == QuestionKind.imagePair) {
+        final images = [
+          for (final a in spec.answers)
+            if (a.image.trim().isNotEmpty)
+              '![${_markdownAltText(a.text)}](${a.image})',
+        ];
+        if (images.isNotEmpty) b.write('\n${images.join(' ')}\n');
+      }
       return b.toString();
     });
   }
