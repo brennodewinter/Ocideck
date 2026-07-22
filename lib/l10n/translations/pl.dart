@@ -1788,6 +1788,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Ten dokument istnieje tylko w języku angielskim.',
   'Alleen een titelpagina.': 'Tylko strona tytułowa.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ten slajd jest pusty: nie pokazuje nic na ekranie ani w eksporcie.',

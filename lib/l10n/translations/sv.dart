@@ -1775,6 +1775,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Det här dokumentet finns bara på engelska.',
   'Alleen een titelpagina.': 'Endast en titelsida.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Den här bilden är tom: den visar ingenting på skärmen eller i exporten.',

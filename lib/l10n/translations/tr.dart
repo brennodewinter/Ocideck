@@ -2755,6 +2755,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Bu belge yalnızca İngilizce olarak mevcut.',
   'Alleen een titelpagina.': 'Yalnızca bir başlık sayfası.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Bu slayt boş: ekranda da dışa aktarmada da hiçbir şey göstermiyor.',

@@ -1811,6 +1811,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Níl an cháipéis seo ar fáil ach i mBéarla.',
   'Alleen een titelpagina.': 'Leathanach teidil amháin.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Tá an sleamhnán seo folamh: ní thaispeánann sé aon rud ar an scáileán ná san easpórtáil.',

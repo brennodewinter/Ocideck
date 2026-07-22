@@ -1775,6 +1775,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Šis dokuments ir pieejams tikai angļu valodā.',
   'Alleen een titelpagina.': 'Tikai titullapa.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Šis slaids ir tukšs: tas neko nerāda ne ekrānā, ne eksportā.',

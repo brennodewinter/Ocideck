@@ -157,9 +157,9 @@ void main() {
   group('DocumentReaderScreen', () {
     setUp(() => SharedPreferences.setMockInitialValues({}));
 
-    Widget wrap(Widget home) => ProviderScope(
+    Widget wrap(Widget home, {String locale = 'nl'}) => ProviderScope(
       child: MaterialApp(
-        locale: const Locale('nl'),
+        locale: Locale(locale),
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
@@ -255,15 +255,75 @@ void main() {
       await tester.pumpAndSettle();
       expect(scale(), closeTo(1.0, 1e-9));
     });
+
+    // #626: alle 24 gebundelde documenten bestaan alleen in het Engels, terwijl
+    // hun titels in 32 talen staan. Wie de app op Pools zet, ziet een Poolse
+    // titel en krijgt Engels — en de app wekte die verwachting zelf.
+    group('de melding dat een document alleen in het Engels bestaat', () {
+      Future<void> open(
+        WidgetTester tester, {
+        required bool isBaseVersion,
+        String locale = 'nl',
+      }) async {
+        await tester.pumpWidget(
+          wrap(
+            DocumentReaderScreen(
+              title: 'Gids',
+              assetBase: 'x',
+              service: _FakeDocs(
+                '# Titel\n\nTekst.\n',
+                isBaseVersion: isBaseVersion,
+              ),
+            ),
+            locale: locale,
+          ),
+        );
+        await tester.pumpAndSettle();
+      }
+
+      // Op de melding zélf toetsen kan niet: in het Duits geeft `d()` de Duitse
+      // zin terug, en die hier herhalen zou de vertaling toetsen in plaats van
+      // het gedrag. Het icoon is wat de melding uniek maakt.
+      Finder melding() => find.byIcon(Icons.translate);
+
+      testWidgets('staat er bij een niet-vertaald document', (tester) async {
+        await open(tester, isBaseVersion: true, locale: 'de');
+        expect(melding(), findsOneWidget);
+      });
+
+      testWidgets('staat er niet zodra er een vertaling ligt', (tester) async {
+        // Zet iemand later `USER_GUIDE.de.md` ernaast, dan moet de melding
+        // vanzelf verdwijnen — anders vertelt hij een onwaarheid en is hij
+        // erger dan geen melding.
+        await open(tester, isBaseVersion: false, locale: 'de');
+        expect(melding(), findsNothing);
+      });
+
+      testWidgets('staat er niet in het Nederlands', (tester) async {
+        // De basisversie ís de Nederlandse bron; er valt niets te melden.
+        await open(tester, isBaseVersion: true);
+        expect(melding(), findsNothing);
+      });
+    });
   });
 }
 
 /// A stand-in documentation service that returns fixed markdown without any
 /// asset IO, so reader tests stay deterministic.
 class _FakeDocs implements DocumentationService {
-  const _FakeDocs(this.markdown);
+  const _FakeDocs(this.markdown, {this.isBaseVersion = true});
   final String markdown;
+
+  /// Of dit "de Engelse basisversie" is. Standaard waar, want dat is wat elk
+  /// van de 24 gebundelde documenten vandaag is (#626).
+  final bool isBaseVersion;
 
   @override
   Future<String> load(String baseAsset, String languageCode) async => markdown;
+
+  @override
+  Future<({String text, bool isBaseVersion})> loadDetailed(
+    String baseAsset,
+    String languageCode,
+  ) async => (text: markdown, isBaseVersion: isBaseVersion);
 }

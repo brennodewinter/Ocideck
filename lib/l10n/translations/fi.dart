@@ -1776,6 +1776,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Tämä asiakirja on olemassa vain englanniksi.',
   'Alleen een titelpagina.': 'Vain otsikkosivu.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Tämä dia on tyhjä: se ei näytä mitään näytöllä eikä viennissä.',

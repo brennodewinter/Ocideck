@@ -730,6 +730,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Dit document bestaat alleen in het Engels.':
+      'Questo documento esiste solo in inglese.',
   'Alleen een titelpagina.': 'Solo una pagina del titolo.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Questa diapositiva è vuota: non mostra nulla sullo schermo né nell\'esportazione.',

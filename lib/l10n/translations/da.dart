@@ -1775,6 +1775,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Dette dokument findes kun på engelsk.',
   'Alleen een titelpagina.': 'Kun en titelside.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Denne slide er tom: den viser ingenting på skærmen eller i eksporten.',

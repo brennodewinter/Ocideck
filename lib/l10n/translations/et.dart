@@ -1767,6 +1767,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'See dokument on olemas ainult inglise keeles.',
   'Alleen een titelpagina.': 'Ainult tiitelleht.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'See slaid on tühi: see ei näita midagi ekraanil ega ekspordis.',

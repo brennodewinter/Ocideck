@@ -735,6 +735,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Dit document bestaat alleen in het Engels.':
+      'Dit dokumint bestiet allinnich yn it Ingelsk.',
   'Alleen een titelpagina.': 'Allinnich in titelside.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Dizze slide is leech: hy lit neat sjen op it skerm en yn de eksport.',

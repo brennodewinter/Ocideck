@@ -734,6 +734,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Dit document bestaat alleen in het Engels.':
+      'E dokumento aki ta eksistí solamente na ingles.',
   'Alleen een titelpagina.': 'Solamente un página di título.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'E slide aki ta bashí: e no ta mustra nada riba pantaya ni den e eksport.',

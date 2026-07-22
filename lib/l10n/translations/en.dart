@@ -916,6 +916,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Dit document bestaat alleen in het Engels.':
+      'This document is available in English only.',
   'Alleen een titelpagina.': 'Just a title page.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'This slide is empty: it shows nothing on screen or in the export.',

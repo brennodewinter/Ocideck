@@ -1793,6 +1793,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Acest document există doar în engleză.',
   'Alleen een titelpagina.': 'Doar o pagină de titlu.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Acest slide este gol: nu afișează nimic pe ecran și nici în export.',

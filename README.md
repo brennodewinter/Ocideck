@@ -204,10 +204,20 @@ Estonian, Latvian, Lithuanian, Maltese, Irish, Ukrainian, Turkish, Indonesian,
 Frisian, Swiss German, Latin, Papiamento, and Klingon. That is roughly 71,500
 translations, and they were produced during AI-assisted development — 289 of the
 314 commits touching `lib/l10n/translations/` carry an AI co-author trailer.
-**No native speaker has reviewed them word by word.** A test fails the build if
-a string is missing in any language, which catches absence, not quality.
-Corrections for a single language are among the most useful contributions this
-project can receive.
+**No native speaker has reviewed them word by word.** Two tests fail the build:
+one if a string is missing in any language, and one — since #677 — if a
+"translation" is still the English sentence. Together they catch absence and the
+most visible form of neglect, not quality. Corrections for a single language are
+among the most useful contributions this project can receive.
+
+**The 32 languages are the interface. The documentation is English.** All 24
+bundled documents — user guide, privacy, security, the lot — exist only in
+English, and the reader says so above any document you open in another language.
+The machinery for a translation is already there: drop `docs/USER_GUIDE.de.md`
+beside the original and the app picks it up. *(Written down 2026-07-22, #626: a
+translated title on an untranslated document raises an expectation the project
+does not meet, and that asymmetry is sharper than plainly having no
+documentation in your language.)*
 
 ## License
 

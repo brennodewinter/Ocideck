@@ -1792,6 +1792,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Hoc documentum Anglice tantum exstat.',
   'Alleen een titelpagina.': 'Solum pagina tituli.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Hoc folium vacuum est: nihil ostendit nec in tabula nec in exportatione.',

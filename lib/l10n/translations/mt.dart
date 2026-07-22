@@ -1798,6 +1798,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Dan id-dokument jeżisti bl-Ingliż biss.',
   'Alleen een titelpagina.': 'Paġna tat-titlu biss.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Din is-slide hija vojta: ma turi xejn fuq l-iskrin u lanqas fl-esportazzjoni.',

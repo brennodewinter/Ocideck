@@ -17,10 +17,23 @@ class DocumentationService {
   /// Loads [baseAsset] (e.g. `docs/USER_GUIDE.md` or `LICENSE.md`), preferring a
   /// `.<languageCode>.md` sibling when it is bundled. `nl` and unknown codes use
   /// the base document.
-  Future<String> load(String baseAsset, String languageCode) async {
+  Future<String> load(String baseAsset, String languageCode) async =>
+      (await loadDetailed(baseAsset, languageCode)).text;
+
+  /// Hetzelfde, plus of dit de basisversie is in plaats van een vertaling.
+  ///
+  /// De lezer heeft dat nodig om het te kúnnen zeggen. Alle 24 gebundelde
+  /// documenten bestaan alleen in het Engels, terwijl hun titels in 32 talen
+  /// staan — dus wie de app op Pools zet, ziet een Poolse titel en krijgt
+  /// Engels. De machinerie voor een `.pl.md` ernaast is er al; wat ontbrak was
+  /// dat het scherm er iets over zei (#626).
+  Future<({String text, bool isBaseVersion})> loadDetailed(
+    String baseAsset,
+    String languageCode,
+  ) async {
     final key = await _resolveKey(baseAsset, languageCode);
     final raw = await rootBundle.loadString(key);
-    return _stripLeadingComment(raw);
+    return (text: _stripLeadingComment(raw), isBaseVersion: key == baseAsset);
   }
 
   /// Picks the localized variant key when it exists in the asset manifest,

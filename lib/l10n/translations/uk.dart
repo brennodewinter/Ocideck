@@ -1793,6 +1793,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Dit document bestaat alleen in het Engels.':
+      'Цей документ існує лише англійською.',
   'Alleen een titelpagina.': 'Лише титульна сторінка.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Цей слайд порожній: він нічого не показує ні на екрані, ні в експорті.',
