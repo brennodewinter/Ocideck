@@ -21,11 +21,20 @@ licence, the **European Union Public Licence v. 1.2 (EUPL-1.2)** — see
 
 ## Prerequisites
 
-- **Flutter 3.44.6** (stable), using the `dart` bundled with it. Building
-  tolerates 3.44+, but `make format-check` does not: `dart format` reflows
-  whitespace between releases, so an unpinned toolchain fails the gate on files
-  it never touched. [`docs/BUILD.md`](docs/BUILD.md) is the authority on this and
-  explains the difference; `.tool-versions` is the pin itself.
+- **Flutter 3.44.x** (stable), using the `dart` bundled with it.
+  `.tool-versions` pins `3.44.6-stable`; that is what the maintainer's machine is
+  meant to run, and matching it exactly is the surest way to avoid the one
+  symptom this pin exists for. That symptom is narrow and recognisable:
+  `dart format` reflows whitespace between releases, so `make format-check` can
+  fail on files you never touched. If it does, your formatter differs — that is
+  the whole story, and it is not a reason to reinstall your toolchain before you
+  have hit it. [`docs/BUILD.md`](docs/BUILD.md) explains the difference.
+
+  *Relaxed 2026-07-22 (#598): this read "3.44.6 exactly", which is a stricter
+  prerequisite than the maintainer himself meets — the machine that runs the
+  gates is on 3.44.2 (see [`docs/CHECKS.md`](docs/CHECKS.md)). Sending a
+  newcomer off to reinstall a toolchain for a problem they have not hit, on the
+  authority of a rule nobody follows, is the wrong first impression.*
 - A desktop target enabled: **macOS**, **Windows**, or **Linux**.
 - `make` (the `Makefile` is the entry point for all quality checks).
 
