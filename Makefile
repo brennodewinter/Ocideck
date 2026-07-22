@@ -690,11 +690,13 @@ build-web: deps-verify-offline sbom-verify
 	@echo "Covers: self-hosted CanvasKit (no third-party CDN) and a CSP-safe loader."
 	@echo "Output: build/web — serve behind the CSP declared in web/index.html."
 	flutter build web --release --no-web-resources-cdn --csp
-	@# Ship the SBOM alongside the product so the CRA artefact travels with the
-	@# distributed bundle (served under /sbom/ from the same origin): both
-	@# machine-readable formats and the human-readable Markdown view.
-	mkdir -p build/web/sbom
-	cp sbom/ocideck.cdx.json sbom/ocideck.spdx.json sbom/ocideck.sbom.md build/web/sbom/
+	@# Ship the artefacts that must travel with a downloaded bundle: the licence
+	@# and third-party notices (without them the bundle is not redistributable),
+	@# and the SBOM (the CRA inventory belongs to the exact build you hand out,
+	@# served under /sbom/ from the same origin). The step ends by writing
+	@# SHA256SUMS over the finished bundle, so it must stay the LAST thing that
+	@# touches file contents here.
+	dart run tool/pack_web_release.dart
 	@# Flutter kopieert assets mét hun bronpermissies. Een bestand dat lokaal
 	@# 600 staat wordt dan op de webserver onleesbaar (stil 403 → "onzichtbaar"
 	@# logo). Normaliseer daarom de hele bundel naar world-readable.
@@ -710,6 +712,12 @@ check-web: build-web
 	@echo "Covers: build/web CSP strictness, self-hosted CanvasKit, bundled font."
 	@echo "Failure means: the web bundle lost a hardening invariant — see the list."
 	dart run tool/check_web_hardening.dart
+	@echo "== OciDeck check: release artefacts =="
+	@echo "Command: dart run tool/pack_web_release.dart --check"
+	@echo "Covers: LICENSE, THIRD_PARTY_NOTICES and the SBOM travel with the bundle,"
+	@echo "        and SHA256SUMS describes exactly the files that are there."
+	@echo "Failure means: something was added, changed or lost after packing."
+	dart run tool/pack_web_release.dart --check
 
 # Native desktop release builds. Each target only works on its own OS — Flutter
 # cannot cross-compile a desktop bundle (a macOS .app needs macOS, a Windows
