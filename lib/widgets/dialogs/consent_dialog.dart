@@ -87,54 +87,68 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
       ),
       content: SizedBox(
         width: 640,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const PrivacyStatementContent(),
-              const SizedBox(height: 18),
-              // Explicit, blocking consent: the accept button stays disabled
-              // until the box is ticked.
-              InkWell(
-                borderRadius: BorderRadius.circular(8),
-                onTap: () => setState(() => _agreed = !_agreed),
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(6, 4, 12, 4),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.primaryContainer.withValues(
-                      alpha: 0.2,
-                    ),
-                    border: Border.all(
-                      color: theme.colorScheme.primary.withValues(alpha: 0.3),
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Checkbox(
-                        value: _agreed,
-                        onChanged: (v) => setState(() => _agreed = v ?? false),
-                        visualDensity: VisualDensity.compact,
-                      ),
-                      Expanded(
-                        child: Text(
-                          l10n.d(
-                            'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.',
-                          ),
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+        // Kolom, niet één scrollbare lap: het vinkje hoort búiten de scroll.
+        //
+        // Het stond eronder, na de hele privacyverklaring — vijf schermen naar
+        // beneden. Wie de app voor het eerst opende zag dus een grijze
+        // "Akkoord gaan" zonder te kunnen zien waarom, en moest gaan zoeken.
+        // Een uitleg naast de knop zou dat verzachten; het vinkje ernaast zetten
+        // haalt de vraag weg. De tekst blijft scrollbaar — die hoort ook
+        // gelezen te worden — maar de handeling staat waar de knop staat.
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [PrivacyStatementContent()],
                 ),
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 18),
+            // Explicit, blocking consent: the accept button stays disabled
+            // until the box is ticked.
+            InkWell(
+              borderRadius: BorderRadius.circular(8),
+              onTap: () => setState(() => _agreed = !_agreed),
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(6, 4, 12, 4),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.primaryContainer.withValues(
+                    alpha: 0.2,
+                  ),
+                  border: Border.all(
+                    color: theme.colorScheme.primary.withValues(alpha: 0.3),
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Checkbox(
+                      value: _agreed,
+                      onChanged: (v) => setState(() => _agreed = v ?? false),
+                      visualDensity: VisualDensity.compact,
+                    ),
+                    Expanded(
+                      child: Text(
+                        l10n.d(
+                          'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.',
+                        ),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
       actionsAlignment: MainAxisAlignment.end,

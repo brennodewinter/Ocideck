@@ -1,6 +1,5 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide_quality.dart';
@@ -141,6 +140,9 @@ class ExportDialog extends StatefulWidget {
 class _ExportDialogState extends State<ExportDialog> {
   bool _loading = false;
   String? _result;
+
+  /// Alleen het pad, los van de melding eromheen — dat is wat je wilt plakken.
+  String? _outputPath;
   bool _success = false;
   String _phase = '';
   int _done = 0;
@@ -417,6 +419,7 @@ class _ExportDialogState extends State<ExportDialog> {
     setState(() {
       _loading = false;
       _success = r.success;
+      _outputPath = r.success ? r.outputPath : null;
       _result = r.success
           ? '${l10n.t('exportedTo')}\n${r.outputPath}'
           : r.error;
@@ -464,7 +467,10 @@ class _ExportDialogState extends State<ExportDialog> {
           ),
         if (_result != null && _success)
           TextButton(
-            onPressed: () => setState(() => _result = null),
+            onPressed: () => setState(() {
+              _result = null;
+              _outputPath = null;
+            }),
             child: Text(l10n.t('exportAgain')),
           ),
         TextButton(
@@ -519,7 +525,11 @@ class _ExportDialogState extends State<ExportDialog> {
             size: 36,
           ),
           const SizedBox(height: 12),
-          Text(
+          // Selecteerbaar, want dit is meestal een pad. Het stond in een gewone
+          // Text: je zag waar je bestand terechtkwam en kon er niets mee — niet
+          // klikken, niet kopiëren, dus overtypen (#646). Een pad is precies het
+          // soort tekst dat je ergens anders nodig hebt.
+          SelectableText(
             _result!,
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -527,6 +537,25 @@ class _ExportDialogState extends State<ExportDialog> {
               color: _success ? AppTheme.success800 : Colors.red[800],
             ),
           ),
+          if (_success && _outputPath != null) ...[
+            const SizedBox(height: 8),
+            TextButton.icon(
+              onPressed: () async {
+                // Messenger vóór de await vastpakken: erna is deze context
+                // misschien weg, en dan is de melding een crash in plaats van
+                // een bevestiging.
+                final messenger = ScaffoldMessenger.of(context);
+                final bevestiging = l10n.d('Gekopieerd');
+                await Clipboard.setData(ClipboardData(text: _outputPath!));
+                if (!mounted) return;
+                messenger.showSnackBar(SnackBar(content: Text(bevestiging)));
+              },
+              icon: const Icon(Icons.copy, size: 16),
+              // Het pad alleen, niet de hele melding eromheen: wie kopieert
+              // wil het in een terminal of een bestandsvenster plakken.
+              label: Text(l10n.d('Kopiëren')),
+            ),
+          ],
         ],
       );
     }

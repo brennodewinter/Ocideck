@@ -97,6 +97,47 @@ void main() {
       expect(acceptButton(tester).onPressed, isNotNull);
     });
 
+    testWidgets('het vinkje staat meteen in beeld, zonder scrollen', (
+      tester,
+    ) async {
+      // #646: het vinkje stond onder de hele privacyverklaring — vijf schermen
+      // naar beneden. Wie de app voor het eerst opende zag een grijze knop
+      // "Akkoord gaan" en kon niet zien waarom, laat staan wat eraan te doen.
+      //
+      // Let op de test hierboven: die moet `ensureVisible` doen om bij het
+      // vinkje te komen. Dat is precies de handeling die de gebruiker ook moest
+      // verrichten, en de reden dat de bestaande tests dit gebrek niet lieten
+      // zien. Hier gebeurt dat bewust níét.
+      await pumpDialog(tester);
+
+      await tester.tap(find.byType(Checkbox));
+      await tester.pumpAndSettle();
+
+      expect(
+        acceptButton(tester).onPressed,
+        isNotNull,
+        reason: 'het vinkje was niet aan te tikken zonder eerst te scrollen',
+      );
+    });
+
+    testWidgets('en het staat naast de knop, niet in de scrollende tekst', (
+      tester,
+    ) async {
+      // De structurele kant: de verklaring hoort scrollbaar te blijven — die
+      // moet gelezen kunnen worden — maar de hándeling hoort daarbuiten, bij de
+      // knop die hij vrijgeeft.
+      await pumpDialog(tester);
+
+      expect(
+        find.descendant(
+          of: find.byType(SingleChildScrollView),
+          matching: find.byType(Checkbox),
+        ),
+        findsNothing,
+      );
+      expect(find.byType(SingleChildScrollView), findsWidgets);
+    });
+
     testWidgets('accepting records consent', (tester) async {
       final container = await pumpDialog(tester);
       expect(container.read(consentProvider).hasAccepted, isFalse);

@@ -109,6 +109,34 @@ read a book to find out.
   `TLP:RED` die stilletjes niets doet is erger dan geen classificatie.
 
 ### Fixed
+- **Het toestemmingsscherm liet u zoeken naar het vinkje.** "Akkoord gaan" stond
+  grijs, en het vakje dat die knop vrijgeeft stond ónder de hele
+  privacyverklaring — vijf schermen naar beneden. U zag dus een geblokkeerde
+  knop zonder te kunnen zien waarom.
+
+  Het vinkje staat nu naast de knop, buiten de scroll. De verklaring blijft
+  scrollbaar, want die hoort gelezen te worden; de hándeling hoort waar de knop
+  is. Een uitleg naast de knop zou de vraag verzacht hebben; het vinkje ernaast
+  zetten haalt hem weg.
+
+- **Het pad na een export was niet te kopiëren.** U zag waar uw bestand
+  terechtkwam en kon er niets mee — niet klikken, niet selecteren, dus
+  overtypen. Nu is het selecteerbaar, met een knop die alleen het pad kopieert
+  (niet de melding eromheen, want u wilt het in een terminal of een
+  bestandsvenster plakken).
+
+- **De app noemde de verkeerde uitgever.** Het macOS-menu las "About ocideck" —
+  met kleine letter, omdat de productnaam zo in de buildconfiguratie stond — en
+  het informatievenster schreef het copyright toe aan een bedrijf in plaats van
+  aan de stichting. Op Windows stond dat als "com.dewinter" in de
+  bestandseigenschappen. Alle drie rechtgezet naar Stichting LibreKAT.
+
+  De bundle-identifiers blijven staan zoals ze zijn. Die zijn de identiteit van
+  de app voor het besturingssysteem: wijzigen betekent dat macOS dit als een
+  ándere applicatie ziet, met eigen voorkeuren en een eigen keychain — en dan
+  lijkt elk opgeslagen wachtwoord verdwenen. Dat is een migratie, geen opruiming.
+
+### Fixed
 - **"Kon dit bestand niet openen." zei niet wát er mis was — terwijl de app het
   wist.** Vier verschillende dingen kregen dezelfde zin: het bestand bestaat niet
   meer, het is te groot, het is geen tekst, of de markdown is afgebroken. Voor
