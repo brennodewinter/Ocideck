@@ -359,6 +359,21 @@ List<String> _fixedDelayInRunAsync() {
   return hits;
 }
 
+/// Onderdrukte SAST-bevindingen in `lib/`. RATCHET: mag krimpen, niet groeien.
+///
+/// Eén `// nosemgrep:` is een afweging; tien is een gewoonte, en dan zegt een
+/// groene `make sast` niets meer. De enige vandaag staat op de `chmod` in
+/// `disk_traces.dart` (zie #521): de regel bewaakt netwerkverkeer buiten
+/// NetGuard om, en `chmod` is niet netwerkvaardig.
+///
+/// Dit telt bewust in `check_conventions` en niet in semgrep zelf: `make sast`
+/// draait niet in `make check` (het vraagt een externe binary), dus een
+/// onderdrukking zou anders alleen zichtbaar zijn voor wie semgrep toevallig
+/// geïnstalleerd heeft.
+const int nosemgrepBaseline = 1;
+
+final _nosemgrep = RegExp(r'//\s*nosemgrep\b');
+
 /// Typen die in zo'n parameterlijst een lek zouden betekenen.
 final _rawDeckParam = RegExp(r'\b(Deck|List<Slide>)\b\s+\w+');
 
@@ -564,6 +579,27 @@ void main() {
       'en haal de markeringen weg. Let op dat `git add -A` na het opschonen '
       'van één bestand de andere ongemoeid instageert:\n'
       '    ${conflictHits.join('\n    ')}',
+    );
+  }
+
+  final nosemgrepHits = <String>[];
+  for (final file in Directory('lib').listSync(recursive: true)) {
+    if (file is! File || !file.path.endsWith('.dart')) continue;
+    final lines = file.readAsLinesSync();
+    for (var i = 0; i < lines.length; i++) {
+      if (_nosemgrep.hasMatch(lines[i])) {
+        nosemgrepHits.add('${file.path}:${i + 1}');
+      }
+    }
+  }
+  if (nosemgrepHits.length > nosemgrepBaseline) {
+    failures.add(
+      'Er staan nu ${nosemgrepHits.length} onderdrukte SAST-bevindingen in '
+      'lib/ (basislijn $nosemgrepBaseline). Eén is een afweging, tien is een '
+      'gewoonte — en dan zegt een groene `make sast` niets meer. Los de '
+      'bevinding op, of verhoog deze basislijn bewust en zet de reden bij de '
+      'regel:\n'
+      '    ${nosemgrepHits.join('\n    ')}',
     );
   }
 

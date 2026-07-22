@@ -232,6 +232,15 @@ also declares them, but see the [CI note](#continuous-integration).)
     fails with a readable message. Line comments are stripped before matching,
     so the helper's own documentation — which spells the anti-pattern out to
     explain it — does not trip the gate.
+  - **suppressed SAST findings ratchet** — `// nosemgrep:` comments in `lib/`
+    may shrink but never grow (`nosemgrepBaseline`, currently **1**). One
+    suppression is a judgement; ten is a habit, and then a green `make sast`
+    means nothing. The count lives here rather than in semgrep itself because
+    `make sast` needs an external binary and is not part of `make check`, so a
+    suppression would otherwise only be visible to whoever happens to have
+    semgrep installed. The single entry today is the `chmod` in
+    `lib/services/disk_traces.dart`: the rule guards network traffic that
+    NetGuard cannot see, and `chmod` is not network-capable.
   - **privacy projection boundary** — every surface that hands slide content to
     a recipient (`SlideRasterizer.rasterize`, `FullscreenPresenter.present`,
     `ExportDialog.show`) must take an `AudienceDeck` and must not accept a raw
