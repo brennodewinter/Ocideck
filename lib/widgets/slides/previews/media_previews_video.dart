@@ -304,8 +304,8 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
             }
             final u = request.url;
             final allowed = origin == 'youtube'
-                ? _youTubePlayerNavigationAllowed(u)
-                : (u.contains('vimeo.com') || u.contains('vimeocdn.com'));
+                ? youTubePlayerNavigationAllowed(u)
+                : vimeoPlayerNavigationAllowed(u);
             return allowed
                 ? NavigationDecision.navigate
                 : NavigationDecision.prevent;
@@ -515,13 +515,32 @@ const String kYouTubeEmbedOrigin = 'https://www.youtube-nocookie.com';
 /// Let op de vorm: dit toetst de hóst, niet "komt deze tekenreeks ergens voor".
 /// Met een `contains` zou `https://youtube.com.kwaadaardig.example/` erdoor
 /// glippen.
-bool _youTubePlayerNavigationAllowed(String url) {
+@visibleForTesting
+bool youTubePlayerNavigationAllowed(String url) {
   final host = Uri.tryParse(url)?.host.toLowerCase();
   if (host == null || host.isEmpty) return false;
   const players = {
     'youtube-nocookie.com', // de speler zelf
     'ytimg.com', // miniaturen en speler-assets
     'googlevideo.com', // de videostroom
+  };
+  return players.any((d) => host == d || host.endsWith('.$d'));
+}
+
+/// Dezelfde toets voor Vimeo, en om dezelfde reden.
+///
+/// Hier stond een `contains('vimeo.com')`, terwijl het commentaar bij de
+/// YouTube-variant hierboven precies uitlegt waarom dat niet deugt:
+/// `https://vimeo.com.kwaadaardig.example/` bevat de tekenreeks en zou dus
+/// navigeren. De redenering was gemaakt en op één van de twee takken toegepast.
+@visibleForTesting
+bool vimeoPlayerNavigationAllowed(String url) {
+  final host = Uri.tryParse(url)?.host.toLowerCase();
+  if (host == null || host.isEmpty) return false;
+  const players = {
+    'player.vimeo.com', // de speler zelf
+    'vimeo.com', // de embed-pagina
+    'vimeocdn.com', // miniaturen, speler-assets en de videostroom
   };
   return players.any((d) => host == d || host.endsWith('.$d'));
 }
