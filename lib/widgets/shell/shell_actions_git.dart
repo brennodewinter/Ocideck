@@ -51,8 +51,10 @@ Future<bool> _confirmGitOmissions(BuildContext context, Deck deck) async {
   final lines = <String>[
     if (missing.annotatedSlides > 0)
       '${l10n.d('Tekeningen op slides')}: ${missing.annotatedSlides} ${l10n.d('slides')}',
-    if (missing.noteSlides > 0)
-      '${l10n.d('Gebruikersnotities')}: ${missing.noteSlides} ${l10n.d('slides')}',
+    // De regel over gebruikersnotities stond hier tot #541; die reizen nu mee,
+    // dus hij is weg. Een waarschuwing die meer opsomt dan er misgaat, leert de
+    // lezer hem in zijn geheel weg te klikken — en dan verdwijnt ook de regel
+    // over het zegel uit beeld.
     if (missing.sealed) l10n.d('Zegel en handtekening'),
   ];
   final choice = await showDialog<bool>(

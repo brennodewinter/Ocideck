@@ -4,6 +4,7 @@ import 'package:path/path.dart' as p;
 
 import '../../utils/log.dart';
 import 'deck_mirror.dart';
+import 'deck_repo_serializer.dart';
 import 'draft_store.dart';
 import 'git_forge.dart';
 import 'outbox.dart';
@@ -195,10 +196,24 @@ class SyncEngine {
         );
       }
 
-      final deletes = [
-        for (final path in remote.keys)
-          if (!deckLocal.containsKey(path)) path,
-      ];
+      // Wat er in de repo staat maar niet in de werkkopie, is weggehaald: een
+      // dia die verdween neemt zo ook haar bestanden mee. Met één uitzondering,
+      // en die is niet willekeurig — het notitiebestand is het enige bestand
+      // hier dat van iemand ánders kan zijn. Kon deze build het niet lezen
+      // (conflictmarkeringen uit een merge buiten OciDeck, of een sidecar van
+      // een nieuwere versie), dan draagt het deck geen notities om een reden die
+      // niets zegt over wat er in de repo hoort te staan — en "ontbreekt lokaal"
+      // is dan geen opdracht om andermans werk te wissen.
+      final deletes = <String>[];
+      for (final path in remote.keys) {
+        if (deckLocal.containsKey(path)) continue;
+        if (p.posix.basename(path) == userNotesRepoFileName &&
+            await repoUserNotesState(path, (String q) async => remote[q]) !=
+                RepoSidecarState.ours) {
+          continue;
+        }
+        deletes.add(path);
+      }
       final result = await forge.commitFiles(
         branch: commit.branch,
         message: commit.message,

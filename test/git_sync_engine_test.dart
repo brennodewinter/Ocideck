@@ -463,6 +463,52 @@ void main() {
       );
     });
 
+    group('een notitiebestand dat deze build niet las, blijft staan', () {
+      // De uitzondering op de regel hierboven, en de enige. Dit is het enige
+      // bestand in de deckmap dat van iemand ánders kan zijn: kon deze build
+      // het niet lezen, dan zegt "het deck draagt geen notities" niets over wat
+      // er in de repo hoort te staan. Scenario: iemand voegde de takken samen
+      // in de webinterface van de forge, jij werkte offline verder, en je
+      // eerstvolgende sync zou beide kanten wissen.
+      const notesPath = 'decks/kwartaalcijfers/deck.user-notes.json';
+
+      Future<bool> survivesWith(String inhoud) async {
+        repo.files[notesPath] = _b(inhoud);
+        await mirror.writeDeck('decks/kwartaalcijfers', {
+          'decks/kwartaalcijfers/deck.md': _b('# Zonder notities'),
+        });
+        await outbox.enqueue(
+          const PendingCommit(
+            deckDir: 'decks/kwartaalcijfers',
+            branch: 'main',
+            message: 'onze wijziging',
+            baseSha: 'commit-main',
+          ),
+        );
+        await engineWith(FakeForge(repo)).flushDeck('decks/kwartaalcijfers');
+        return repo.files.containsKey(notesPath);
+      }
+
+      test('conflictmarkeringen uit een merge buiten OciDeck', () async {
+        expect(
+          await survivesWith(
+            '<<<<<<< HEAD\n{"version":2}\n=======\n{}\n>>>>>>> hen\n',
+          ),
+          isTrue,
+        );
+      });
+
+      test('een sidecar van een nieuwere build', () async {
+        expect(await survivesWith('{"version":99,"slides":[]}'), isTrue);
+      });
+
+      test('maar een leesbaar bestand wordt wél opgeruimd', () async {
+        // De tegenproef: zonder deze zou de groep ook slagen als er nooit iets
+        // verwijderd werd.
+        expect(await survivesWith('{"version":2,"slides":[]}'), isFalse);
+      });
+    });
+
     test(
       'decks are independent: one failure does not block the other',
       () async {

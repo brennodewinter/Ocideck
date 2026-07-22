@@ -215,4 +215,105 @@ void main() {
       expect(result.merged.tlp, TlpLevel.amber);
     });
   });
+
+  group('de notities overleven de merge', () {
+    // Sinds #541 staan de notities in de repo, en dan wordt dit verlies
+    // duurzaam en gedeeld. `merged` erfde `userNotes` letterlijk van ónze kant
+    // — gesleuteld op de id's van ónze parse, terwijl de samengevoegde dia's
+    // grotendeels uit de basis en van de ander komen. Die id's worden bij elke
+    // parse opnieuw uitgedeeld, dus geen enkele sleutel wees nog een dia aan;
+    // de schrijfkant zag een deck zónder notities en verwíjderde het bestand.
+    //
+    // Elke toets hieronder kijkt daarom op de sleutels van de úítkomst, nooit
+    // op die van de invoer: precies het verschil dat de fout was.
+
+    /// Twee decks met dezelfde inhoud maar verse id's, zoals twee parses van
+    /// hetzelfde bestand ze opleveren.
+    Deck parsedCopy(List<Slide> slides, {Map<int, String> notes = const {}}) {
+      final fresh = [
+        for (final s in slides)
+          Slide.create(s.type).copyWith(title: s.title, bullets: s.bullets),
+      ];
+      return Deck(
+        title: 'Kwartaal',
+        slides: fresh,
+        userNotes: {for (final e in notes.entries) fresh[e.key].id: e.value},
+      );
+    }
+
+    String? noteOn(Deck deck, String title) {
+      final slide = deck.slides.firstWhere((s) => s.title == title);
+      return deck.userNotes[slide.id];
+    }
+
+    test('twee auteurs, verschillende dia\'s: beide notities blijven', () {
+      // Het gewoonste geval dat er is, en precies het geval dat alles wiste.
+      final result = mergeDeckVersions(
+        parsedCopy([one, two, three]),
+        parsedCopy([one, two, three], notes: {1: 'van ons, bij Twee'}),
+        parsedCopy([one, two, three], notes: {2: 'van hen, bij Drie'}),
+      );
+
+      expect(noteOn(result.merged, 'Twee'), 'van ons, bij Twee');
+      expect(noteOn(result.merged, 'Drie'), 'van hen, bij Drie');
+    });
+
+    test('dezelfde dia: onze tekst wint, zoals de rest van de merge', () {
+      final result = mergeDeckVersions(
+        parsedCopy([one, two]),
+        parsedCopy([one, two], notes: {1: 'onze lezing'}),
+        parsedCopy([one, two], notes: {1: 'hun lezing'}),
+      );
+
+      expect(noteOn(result.merged, 'Twee'), 'onze lezing');
+    });
+
+    test('alleen de ander schreef iets: dat blijft ook staan', () {
+      final result = mergeDeckVersions(
+        parsedCopy([one, two]),
+        parsedCopy([one, two]),
+        parsedCopy([one, two], notes: {0: 'alleen van hen'}),
+      );
+
+      expect(noteOn(result.merged, 'Eén'), 'alleen van hen');
+    });
+
+    test('een notitie op een dia die niemand hield, verdwijnt mee', () {
+      // Geen verlies om over te klagen: de dia is weg, dus de notitie erbij
+      // heeft niets meer om aan te hangen. Wel bewaken dat er geen weesnotitie
+      // achterblijft die de volgende merge weer laat opduiken.
+      final result = mergeDeckVersions(
+        parsedCopy([one, two]),
+        parsedCopy([one], notes: {0: 'bij Eén'}),
+        parsedCopy([one]),
+      );
+
+      expect(result.merged.userNotes.values, ['bij Eén']);
+      expect(result.merged.userNotes.keys, [result.merged.slides.single.id]);
+    });
+
+    test('geen notities aan beide kanten blijft leeg', () {
+      final result = mergeDeckVersions(
+        parsedCopy([one, two]),
+        parsedCopy([one, two]),
+        parsedCopy([one, two]),
+      );
+
+      expect(result.merged.userNotes, isEmpty);
+    });
+
+    test('elke sleutel wijst een dia in de uitkomst aan', () {
+      // De eigenschap waar het werkelijk om gaat: een sleutel die niets
+      // aanwijst is onzichtbaar in de app en fataal bij het opslaan.
+      final result = mergeDeckVersions(
+        parsedCopy([one, two, three]),
+        parsedCopy([one, two, three], notes: {0: 'a', 1: 'b'}),
+        parsedCopy([one, two, three], notes: {2: 'c'}),
+      );
+
+      final ids = {for (final s in result.merged.slides) s.id};
+      expect(result.merged.userNotes.keys, everyElement(isIn(ids)));
+      expect(result.merged.userNotes, hasLength(3));
+    });
+  });
 }

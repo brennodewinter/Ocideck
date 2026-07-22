@@ -1,6 +1,7 @@
 import '../../models/deck.dart';
 import '../../models/slide.dart';
 import '../slide_dedup_service.dart';
+import '../user_notes_codec.dart';
 import 'version_diff.dart';
 
 /// Hoe veel twee slides op elkaar moeten lijken om ze bij een merge als *dezelfde*
@@ -188,9 +189,46 @@ DeckMergeResult mergeDeckVersions(
   // TLP-verhoging weggooien, en dat is precies het soort fail-open dat de rest
   // van dit pad juist dichttimmert (§9.4).
   final tlp = effectiveTlp(deckTlp: ours.tlp, slideTlp: theirs.tlp);
-  return DeckMergeResult(ours.copyWith(slides: out, tlp: tlp), [
-    for (final c in conflicts) c._at(landedAt[c.baseIndex]),
-  ]);
+  return DeckMergeResult(
+    ours.copyWith(
+      slides: out,
+      tlp: tlp,
+      userNotes: _mergedUserNotes(ours, theirs, out),
+    ),
+    [for (final c in conflicts) c._at(landedAt[c.baseIndex])],
+  );
+}
+
+/// De notities van beide kanten, opnieuw verankerd aan de samengevoegde dia's.
+///
+/// Zonder dit zou `ours.userNotes` letterlijk meekomen — gesleuteld op de id's
+/// van *onze* parse, terwijl [out] grotendeels uit dia's van de basis en van de
+/// ander bestaat. Die id's worden bij élke parse opnieuw uitgedeeld, dus geen
+/// enkele sleutel zou nog een dia aanwijzen. De schrijfkant ziet dan een deck
+/// zonder notities, en verwijdert het notitiebestand uit de repo: het meest
+/// gewone geval — twee mensen die op verschillende dia's een notitie typen —
+/// zou beider werk wissen. Zelfde patroon en zelfde reden als bij het
+/// omschakelen naar markdown-modus (`deck_provider_markdown.dart`).
+///
+/// De ander eerst, wijzelf erover: bij dezelfde dia wint onze tekst, gelijk aan
+/// hoe de rest van deze merge onze kant laat voorgaan. Verschillende dia's
+/// raken elkaar niet, en dat is de belofte van D7.
+Map<String, String> _mergedUserNotes(Deck ours, Deck theirs, List<Slide> out) {
+  final merged = <String, String>{
+    ..._reanchored(theirs, out),
+    ..._reanchored(ours, out),
+  };
+  return merged;
+}
+
+/// [deck]'s notities, gesleuteld op de id's van [out] in plaats van die van
+/// [deck] — via de codec, die op de vingerafdruk van een dia verankert en niet
+/// op haar id.
+Map<String, String> _reanchored(Deck deck, List<Slide> out) {
+  if (deck.userNotes.isEmpty) return const {};
+  final encoded = UserNotesCodec.encode(deck.slides, deck.userNotes);
+  if (encoded == null) return const {};
+  return UserNotesCodec.decode(encoded, out);
 }
 
 /// De wijziging per base-slide, op index van de voorouder.

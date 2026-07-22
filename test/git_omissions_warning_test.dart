@@ -1,12 +1,19 @@
 // De git-opslag laat werk achter, en dat moet de gebruiker vóór de commit horen.
 //
-// `deck.md`, de assetpool (afbeeldingen én media) en de grafiekdata gaan mee;
-// de tekenlaag (`.ink.json`) en de gebruikersnotities (`.user-notes.json`) niet
-// — `services/git/` schrijft die sidecars nergens. Op schijf reizen ze wél mee,
-// dus wie van een bestand naar git verhuist raakt ze kwijt zonder dat er iets
-// misgaat waar de app op kan wijzen. Ze alsnog meenemen is een grotere ingreep;
-// de waarschuwing kan niet wachten, en hoort vóór de commit — daarna is de
-// keuze al gemaakt.
+// `deck.md`, de assetpool (afbeeldingen én media), de grafiekdata en sinds #541
+// de gebruikersnotities gaan mee; de tekenlaag (`.ink.json`) en het zegel
+// (`.seal.json`) niet — `services/git/` schrijft die sidecars nergens. Op schijf
+// reizen ze wél mee, dus wie van een bestand naar git verhuist raakt ze kwijt
+// zonder dat er iets misgaat waar de app op kan wijzen. De waarschuwing hoort
+// vóór de commit — daarna is de keuze al gemaakt.
+//
+// **Deze test bewaakt vooral het krimpen.** Bij elke laag die alsnog gaat
+// reizen, moet de melding exact die regel verliezen en de andere houden. Een
+// waarschuwing die meer opsomt dan er misgaat, leert de lezer hem in zijn
+// geheel weg te klikken — en dan is ook de regel over het zegel weg. Daarom
+// staat hieronder niet alleen wat er nog gemeld wordt, maar per verhuisde laag
+// een toets dat er niets meer over gemeld wordt: media sinds #515, notities
+// sinds #541.
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -42,8 +49,17 @@ void main() {
   Slide plain(String title) =>
       Slide.create(SlideType.title).copyWith(title: title);
 
+  List<InkStroke> streek() => const [
+    InkStroke(
+      tool: InkTool.pen,
+      color: 0xFFEF4444,
+      width: 0.004,
+      points: [Offset(0.1, 0.2)],
+    ),
+  ];
+
   group('gitDeckOmissions', () {
-    test('telt video, audio, tekeningen en notities apart', () {
+    test('telt de tekenlaag, en negeert wat wél meereist', () {
       final a = plain('Een');
       final b = Slide.create(
         SlideType.freeMarkdown,
@@ -54,36 +70,36 @@ void main() {
       final deck = Deck(
         title: 'R',
         slides: [a, b, c],
-        annotations: {
-          a.id: const [
-            InkStroke(
-              tool: InkTool.pen,
-              color: 0xFFEF4444,
-              width: 0.004,
-              points: [Offset(0.1, 0.2)],
-            ),
-          ],
-        },
+        annotations: {a.id: streek()},
         userNotes: {a.id: 'Niet vergeten te noemen'},
       );
 
       final missing = gitDeckOmissions(deck);
-      // Video en audio staan hier bewust NIET meer: die reizen sinds #515 mee
-      // door de assetpool. Een waarschuwing die onwaar is, leert de gebruiker
-      // de hele melding weg te klikken.
+      // Video en audio tellen niet mee sinds #515, de notities niet sinds #541:
+      // die reizen alle drie mee. Wat overblijft is de tekenlaag. Een
+      // waarschuwing die onwaar is, leert de gebruiker de hele melding weg te
+      // klikken.
       expect(missing.annotatedSlides, 1);
-      expect(missing.noteSlides, 1);
       expect(missing.isNotEmpty, isTrue);
     });
 
-    test('een leeg notitieveld of een lege tekenlaag telt niet mee', () {
+    test('een deck met alléén notities meldt niets meer', () {
+      // De kern van #541. Vóór die wijziging was dit een waarschuwing; nu reist
+      // de notitie mee en is er niets te melden. Wordt dit weer rood, dan is de
+      // schrijfkant stukgegaan zonder dat een gebruiker het te horen krijgt.
       final a = plain('Een');
       final deck = Deck(
         title: 'R',
         slides: [a],
-        annotations: {a.id: const []},
-        userNotes: {a.id: '   '},
+        userNotes: {a.id: 'Niet vergeten te noemen'},
       );
+
+      expect(gitDeckOmissions(deck).isEmpty, isTrue);
+    });
+
+    test('een lege tekenlaag telt niet mee', () {
+      final a = plain('Een');
+      final deck = Deck(title: 'R', slides: [a], annotations: {a.id: const []});
       // Een waarschuwing die ook afgaat als er niets aan de hand is, leert de
       // gebruiker hem weg te klikken.
       expect(gitDeckOmissions(deck).isEmpty, isTrue);
@@ -120,19 +136,15 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  Deck deckWithNotes() {
+  Deck deckWithInk() {
     final a = plain('Test');
-    return Deck(
-      title: 'Test',
-      slides: [a],
-      userNotes: {a.id: 'Deze zin hoort erbij'},
-    );
+    return Deck(title: 'Test', slides: [a], annotations: {a.id: streek()});
   }
 
   testWidgets('opslaan naar git waarschuwt eerst over wat achterblijft', (
     tester,
   ) async {
-    await pumpWithDeck(tester, deckWithNotes());
+    await pumpWithDeck(tester, deckWithInk());
     await tapSaveTo(tester);
 
     expect(find.text('Niet alles gaat mee naar git'), findsOneWidget);
@@ -141,7 +153,7 @@ void main() {
     expect(
       find.descendant(
         of: find.byType(AlertDialog),
-        matching: find.textContaining('Gebruikersnotities'),
+        matching: find.textContaining('Tekeningen op slides'),
       ),
       findsOneWidget,
     );
@@ -149,8 +161,30 @@ void main() {
     expect(find.text('Deknaam'), findsNothing);
   });
 
+  testWidgets('een deck met alléén notities gaat rechtstreeks door', (
+    tester,
+  ) async {
+    // De gebruikerskant van #541: waar dit vroeger een blokkerende vraag gaf,
+    // reizen de notities nu mee en is er niets te vragen. Zou de melding
+    // terugkomen, dan staat hier een tussenscherm dat de gebruiker niet meer
+    // kan plaatsen — en dat is precies hoe een waarschuwing zijn gezag verliest.
+    final a = plain('Test');
+    await pumpWithDeck(
+      tester,
+      Deck(
+        title: 'Test',
+        slides: [a],
+        userNotes: {a.id: 'Deze zin hoort erbij'},
+      ),
+    );
+    await tapSaveTo(tester);
+
+    expect(find.text('Niet alles gaat mee naar git'), findsNothing);
+    expect(find.text('Deknaam'), findsOneWidget);
+  });
+
   testWidgets('annuleren stopt het opslaan', (tester) async {
-    await pumpWithDeck(tester, deckWithNotes());
+    await pumpWithDeck(tester, deckWithInk());
     await tapSaveTo(tester);
     await tester.tap(find.text('Annuleren'));
     await tester.pumpAndSettle();
@@ -162,7 +196,7 @@ void main() {
   testWidgets('doorgaan brengt de gebruiker bij het opslaandialoog', (
     tester,
   ) async {
-    await pumpWithDeck(tester, deckWithNotes());
+    await pumpWithDeck(tester, deckWithInk());
     await tapSaveTo(tester);
     await tester.tap(find.text('Toch opslaan'));
     await tester.pumpAndSettle();

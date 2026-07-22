@@ -71,16 +71,16 @@ extension TabsNotifierGit on TabsNotifier {
       AssetPool(forge: forge, branch: branch),
       sourceName: label,
     );
-    final charts = await withRepoChartData(
+    final sidecars = await withRepoSidecars(
       withAssets,
       deckDir: deckDir,
       read: (path) => forge.readBlob(branch, path),
     );
-    final deck = charts.deck;
+    final deck = sidecars.deck;
     if (!mounted) return OpenResult.unreadable;
-    if (charts.missing.isNotEmpty) {
+    if (sidecars.missingChartData.isNotEmpty) {
       _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
-        charts.missing,
+        sidecars.missingChartData,
       );
     }
 
@@ -171,14 +171,14 @@ extension TabsNotifierGit on TabsNotifier {
       AssetPool(forge: forge, branch: tag),
       sourceName: label,
     );
-    // Ook een uitgebrachte versie moet zijn cijfers meekrijgen: zonder dit
-    // vergelijk je straks twee versies waarvan de grafieken allebei leeg zijn.
-    final charts = await withRepoChartData(
+    // Ook een uitgebrachte versie draagt dezelfde lagen: anders vergelijk je
+    // straks twee versies met lege grafieken en elke notitie als "toegevoegd".
+    final sidecars = await withRepoSidecars(
       withAssets,
       deckDir: deckDir,
       read: (path) => forge.readBlob(tag, path),
     );
-    return (deck: charts.deck, failure: OpenResult.opened, label: label);
+    return (deck: sidecars.deck, failure: OpenResult.opened, label: label);
   }
 
   /// Haal de `repo:`-afbeeldingen van [deck] uit de pool en geef het deck terug
@@ -338,6 +338,7 @@ extension TabsNotifierGit on TabsNotifier {
       resolveBytes: (path) async => WebAssetStore.isMemPath(path)
           ? WebAssetStore.bytesFor(path)
           : image.readSlideImageBytes(path, projectPath: deck.projectPath),
+      read: (path) => forge.readBlob(branch, path),
     );
   }
 
@@ -471,7 +472,7 @@ extension TabsNotifierGit on TabsNotifier {
         branch: workBranch,
         message: message,
         upserts: files.upserts,
-        deletes: const [],
+        deletes: files.deletes,
         baseSha: baseSha,
       );
       tab?.gitOrigin = GitOrigin(
@@ -633,12 +634,13 @@ extension TabsNotifierGit on TabsNotifier {
                 path,
                 projectPath: merge.merged.projectPath,
               ),
+        read: (path) => forge.readBlob(branch, path),
       );
       final result = await forge.commitFiles(
         branch: branch,
         message: message,
         upserts: mergedFiles.upserts,
-        deletes: const [],
+        deletes: mergedFiles.deletes,
         baseSha: head,
       );
       if (!mounted) {
@@ -694,19 +696,7 @@ extension TabsNotifierGit on TabsNotifier {
     required List<String> warnings,
     String? forkFrom,
   }) async {
-    final deckFiles = <String, Uint8List>{
-      p.posix.join(deckDir, deckRepoFileName): Uint8List.fromList(
-        utf8.encode(_md.generateDeck(deck)),
-      ),
-      // De databestanden moeten mee de werkkopie in, niet alleen deck.md: de
-      // markdown draagt straks alleen nog de verwijzing, en bij het legen van
-      // de wachtrij wordt het deck hiervandaan opnieuw gelezen. Zonder deze
-      // bestanden zou daar een grafiek zonder cijfers uit komen.
-      for (final entry in chartDataFilesOf(deck).entries)
-        ?repoChartDataPath(deckDir, entry.key): Uint8List.fromList(
-          utf8.encode(entry.value),
-        ),
-    };
+    final deckFiles = mirrorDeckFiles(deck, deckDir: deckDir, md: _md);
     try {
       await mirror.writeDeck(deckDir, deckFiles);
     } on DraftStoreUnsupported catch (e) {
@@ -746,10 +736,10 @@ extension TabsNotifierGit on TabsNotifier {
     final deck = _md.parseDeck(utf8.decode(raw));
     if (deck == null) return stored;
 
-    // deck.md draagt alleen de verwijzing naar de grafiekdata, dus die eerst
-    // terughalen uit de werkkopie. Zonder dit ziet buildDeckRepoFiles een deck
-    // zonder cijfers en laat het de databestanden uit de commit weg.
-    final charts = await withRepoChartData(
+    // deck.md draagt alleen de verwijzingen, dus de lagen eerst terughalen uit
+    // de werkkopie: wat hier niet aan het deck hangt schrijft buildDeckRepoFiles
+    // niet terug, en wachtend werk zou dat verliezen net als het landt.
+    final sidecars = await withRepoSidecars(
       deck,
       deckDir: commit.deckDir,
       read: (path) async => stored[path],
@@ -757,10 +747,11 @@ extension TabsNotifierGit on TabsNotifier {
 
     final image = ImageService();
     final files = await buildDeckRepoFiles(
-      charts.deck,
+      sidecars.deck,
       md: _md,
       pool: AssetPool(forge: forge, branch: commit.branch),
       deckDir: commit.deckDir,
+      read: (path) async => stored[path],
       resolveBytes: (path) async => WebAssetStore.isMemPath(path)
           ? WebAssetStore.bytesFor(path)
           : image.readSlideImageBytes(path, projectPath: deck.projectPath),

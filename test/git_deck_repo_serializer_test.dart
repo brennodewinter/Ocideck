@@ -12,6 +12,7 @@ import 'package:ocideck/services/git/asset_pool.dart';
 import 'package:ocideck/services/git/deck_repo_serializer.dart';
 import 'package:ocideck/services/git/repo_asset_resolver.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/user_notes_codec.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 
 import 'git_forge_fake.dart';
@@ -443,6 +444,397 @@ void main() {
       ).firstMatch(markdown)!.group(1)!;
       expect(WebAssetStore.isMemPath(mem), isTrue);
       expect(WebAssetStore.bytesFor(mem), bytes);
+    });
+  });
+
+  group('notities', () {
+    const notesPath = '$deckDir/deck.user-notes.json';
+
+    /// Bouwt met een lezer die [inRepo] naspeelt — wat er nú in de deckmap
+    /// ligt. Dat is wat bepaalt of het notitiebestand weg mág.
+    Future<RepoDeckFiles> build(
+      Deck deck, {
+      Map<String, Uint8List> inRepo = const {},
+    }) async => buildDeckRepoFiles(
+      deck,
+      md: md,
+      pool: poolFor(FakeRepo(branches: {'main': 'c0'}, files: {})),
+      deckDir: deckDir,
+      resolveBytes: resolverFrom({}),
+      read: (path) async => inRepo[path],
+    );
+
+    Uint8List bytesOf(String s) => Uint8List.fromList(utf8.encode(s));
+
+    /// Een geldig notitiebestand zoals wíj het schrijven.
+    Uint8List onzeNotities() {
+      final slide = Slide.create(SlideType.title).copyWith(title: 'Eén');
+      return bytesOf(
+        UserNotesCodec.encode([slide], {slide.id: 'iets'}, forTextMerge: true)!,
+      );
+    }
+
+    /// Het deck zoals het uit de repo terugkomt: `deck.md` opnieuw geparsed
+    /// (de dia-id's zijn dan andere), en daarna de notities eraan gehangen.
+    /// Dat is de volgorde die de app ook aanhoudt.
+    Future<Deck> reopen(RepoDeckFiles out) async {
+      final parsed = md.parseDeck(
+        utf8.decode(out.upserts['$deckDir/deck.md']!),
+      )!;
+      final terug = await withRepoUserNotes(
+        parsed,
+        deckDir: deckDir,
+        read: (path) async => out.upserts[path],
+      );
+      return terug.deck;
+    }
+
+    /// Een deck zonder enige notitie — de andere kant van elke toets hieronder.
+    Deck deckZonderNotities() =>
+        deckWith([Slide.create(SlideType.title).copyWith(title: 'Eén')]);
+
+    Deck deckWithNote(String note, {String title = 'Eén'}) {
+      final slide = Slide.create(SlideType.title).copyWith(title: title);
+      return Deck(
+        title: 'Kwartaal',
+        slides: [slide],
+        userNotes: {slide.id: note},
+      );
+    }
+
+    test('krijgen een eigen bestand naast deck.md, niet in de pool', () async {
+      final out = await build(deckWithNote('Noem het budget'));
+
+      // Een stabiel pad onder de deckmap. In de content-geadresseerde pool zou
+      // elk getypt teken een nieuw bestand minten en het vorige laten
+      // wegkwijnen — dat levert precies geen leesbare diff op.
+      expect(out.upserts.containsKey(notesPath), isTrue);
+      expect(out.upserts.keys.where((k) => k.startsWith('assets/')), isEmpty);
+      expect(utf8.decode(out.upserts[notesPath]!), contains('Noem het budget'));
+    });
+
+    test('komen er bij het openen weer aan, op de juiste dia', () async {
+      final out = await build(deckWithNote('Noem het budget'));
+      final deck = await reopen(out);
+
+      // Niet op id vergeleken: die worden bij elk parsen opnieuw uitgedeeld.
+      // Dát is precies waarom de codec op vingerafdruk werkt.
+      expect(deck.userNotes.values.single, 'Noem het budget');
+      expect(deck.userNotes.keys.single, deck.slides.single.id);
+    });
+
+    test('de tweede dia krijgt zijn eigen notitie terug', () async {
+      final a = Slide.create(SlideType.title).copyWith(title: 'Eén');
+      final b = Slide.create(SlideType.title).copyWith(title: 'Twee');
+      final out = await build(
+        Deck(
+          title: 'Kwartaal',
+          slides: [a, b],
+          userNotes: {a.id: 'bij één', b.id: 'bij twee'},
+        ),
+      );
+      final deck = await reopen(out);
+
+      expect(deck.userNotes[deck.slides[0].id], 'bij één');
+      expect(deck.userNotes[deck.slides[1].id], 'bij twee');
+    });
+
+    test('staan per regel in het bestand, zodat git ze kan mergen', () async {
+      // Dit is de toets achter D7. Die zegt dat dit bestand door git's gewone
+      // tekst-merge gaat en dat twee auteurs op verschillende dia's schoon
+      // samenvoegen. Op één regel — wat jsonEncode oplevert en wat de sidecar
+      // op schijf is — botst élke wijziging met élke andere en klopt die
+      // belofte niet.
+      final a = Slide.create(SlideType.title).copyWith(title: 'Eén');
+      final b = Slide.create(SlideType.title).copyWith(title: 'Twee');
+      final out = await build(
+        Deck(
+          title: 'Kwartaal',
+          slides: [a, b],
+          userNotes: {a.id: 'bij één', b.id: 'bij twee'},
+        ),
+      );
+
+      final regels = const LineSplitter().convert(
+        utf8.decode(out.upserts[notesPath]!),
+      );
+      expect(regels.length, greaterThan(4));
+      // De twee notities staan niet op dezelfde regel; anders zou een wijziging
+      // aan de ene de andere raken.
+      final eerste = regels.indexWhere((r) => r.contains('bij één'));
+      final tweede = regels.indexWhere((r) => r.contains('bij twee'));
+      expect(eerste, isNot(-1));
+      expect(tweede, isNot(eerste));
+    });
+
+    test('een deck zonder notities schrijft geen bestand', () async {
+      final out = await build(deckZonderNotities());
+
+      expect(out.upserts.containsKey(notesPath), isFalse);
+    });
+
+    test('de laatste notitie wissen haalt het bestand wég', () async {
+      // Zonder dit zou de commit het oude bestand laten staan en hing de
+      // notitie er bij de volgende open gewoon weer aan. Een wissing die
+      // terugkomt is erger dan een die niet werkt: de gebruiker dacht dat het
+      // weg was.
+      final out = await build(
+        deckZonderNotities(),
+        inRepo: {notesPath: onzeNotities()},
+      );
+
+      expect(out.deletes, contains(notesPath));
+      expect(out.upserts.containsKey(notesPath), isFalse);
+    });
+
+    test('een deck mét notities verwijdert het bestand niet', () async {
+      final out = await build(deckWithNote('blijft staan'));
+
+      expect(out.deletes, isEmpty);
+    });
+
+    test('een lege notitie telt als geen notitie', () async {
+      final out = await build(
+        deckWithNote('   '),
+        inRepo: {notesPath: onzeNotities()},
+      );
+
+      expect(out.upserts.containsKey(notesPath), isFalse);
+      expect(out.deletes, contains(notesPath));
+    });
+
+    group('een bestand dat we niet konden lezen blijft staan', () {
+      // De asymmetrie: ten onrechte laten staan kost een verweesd bestand dat
+      // vanzelf overschreven wordt. Ten onrechte verwijderen kost werk van een
+      // mede-auteur, en die merkt het pas als hij het zoekt.
+      Future<List<String>> deletesMet(Uint8List? inhoud) async {
+        final out = await build(
+          deckZonderNotities(),
+          inRepo: {notesPath: ?inhoud},
+        );
+        return out.deletes;
+      }
+
+      test('conflictmarkeringen uit een merge buiten OciDeck', () async {
+        // Het meest waarschijnlijke geval: iemand voegde de takken samen in de
+        // webinterface van de forge. Markeringen zijn geen geldige JSON.
+        expect(
+          await deletesMet(
+            bytesOf('<<<<<<< HEAD\n{"version":2}\n=======\n{}\n>>>>>>> x\n'),
+          ),
+          isEmpty,
+        );
+      });
+
+      test('een sidecar van een nieuwere build', () async {
+        // Die leest deze build bewust niet; hem daarna wissen zou weggooien wat
+        // we juist met rust lieten.
+        expect(
+          await deletesMet(bytesOf('{"version":99,"slides":[]}')),
+          isEmpty,
+        );
+      });
+
+      test('geen geldige UTF-8', () async {
+        expect(await deletesMet(Uint8List.fromList([0xff, 0xfe])), isEmpty);
+      });
+
+      test('boven de bytegrens', () async {
+        expect(await deletesMet(Uint8List(maxRepoUserNotesBytes + 1)), isEmpty);
+      });
+
+      test('een leesfout', () async {
+        final out = await buildDeckRepoFiles(
+          deckZonderNotities(),
+          md: md,
+          pool: poolFor(FakeRepo(branches: {'main': 'c0'}, files: {})),
+          deckDir: deckDir,
+          resolveBytes: resolverFrom({}),
+          read: (_) async => throw StateError('netwerk weg'),
+        );
+        expect(out.deletes, isEmpty);
+      });
+
+      test('zonder lezer wordt er nooit verwijderd', () async {
+        // Niet weten is geen reden om te wissen. De native paden geven geen
+        // lezer mee.
+        final out = await buildDeckRepoFiles(
+          deckZonderNotities(),
+          md: md,
+          pool: poolFor(FakeRepo(branches: {'main': 'c0'}, files: {})),
+          deckDir: deckDir,
+          resolveBytes: resolverFrom({}),
+        );
+        expect(out.deletes, isEmpty);
+      });
+
+      test('maar een leesbaar bestand mag wél weg', () async {
+        // De tegenproef: zonder deze zou de hele groep hierboven ook slagen als
+        // er nooit iets verwijderd werd.
+        expect(await deletesMet(onzeNotities()), contains(notesPath));
+      });
+    });
+
+    group('en wordt ook niet overschreven', () {
+      // De spiegel van de groep hierboven, en de nare helft: overschrijven is
+      // net zo goed half inlezen als verwijderen dat is, maar het resultaat
+      // ziet er daarna gezónd uit. Niemand gaat dan in de historie zoeken.
+      //
+      // Op schijf staat `_sidecarUntouchable` daarom vóór de vertakking en dekt
+      // hij beide richtingen; hier moest dat nog gelijkgetrokken.
+      Future<RepoDeckFiles> schrijfMet(Uint8List inhoud) =>
+          build(deckWithNote('mijn ene notitie'), inRepo: {notesPath: inhoud});
+
+      test('een sidecar van een nieuwere build blijft ongemoeid', () async {
+        // Het scenario: een collega op een nieuwere build schreef version 3.
+        // Jij ziet terecht geen notities, typt er één, slaat op — en zonder
+        // deze poort ging jouw ene v2-notitie over hun hele bestand heen.
+        final out = await schrijfMet(
+          Uint8List.fromList(utf8.encode('{"version":99,"slides":[]}')),
+        );
+
+        expect(out.upserts.containsKey(notesPath), isFalse);
+        expect(out.deletes, isEmpty);
+      });
+
+      test('conflictmarkeringen blijven staan voor een mens', () async {
+        final out = await schrijfMet(
+          Uint8List.fromList(
+            utf8.encode('<<<<<<< HEAD\n{"version":2}\n=======\n{}\n>>>>>>> x'),
+          ),
+        );
+
+        expect(out.upserts.containsKey(notesPath), isFalse);
+        expect(out.deletes, isEmpty);
+      });
+
+      test('maar over ons eigen bestand schrijven mag gewoon', () async {
+        // Tegenproef: anders zou deze groep ook slagen als er nooit meer iets
+        // geschreven werd, en dan reisde er niets.
+        final out = await schrijfMet(onzeNotities());
+
+        expect(out.upserts.containsKey(notesPath), isTrue);
+        expect(
+          utf8.decode(out.upserts[notesPath]!),
+          contains('mijn ene notitie'),
+        );
+      });
+
+      test('en zonder lezer ook — anders reist er op native niets', () async {
+        // Het native pad geeft geen lezer mee. Niet weten mag daar het
+        // schrijven niet blokkeren; het blokkeert alleen het verwijderen.
+        final out = await buildDeckRepoFiles(
+          deckWithNote('op native'),
+          md: md,
+          pool: poolFor(FakeRepo(branches: {'main': 'c0'}, files: {})),
+          deckDir: deckDir,
+          resolveBytes: resolverFrom({}),
+        );
+
+        expect(out.upserts.containsKey(notesPath), isTrue);
+      });
+    });
+
+    group('de werkkopie voor de wachtrij', () {
+      // mirrorDeckFiles bepaalt wat er offline wordt weggeschreven, en dat is
+      // scherper dan het lijkt: SyncEngine leidt zijn `deletes` af uit wat er
+      // in de repo staat maar hier NIET. Een laag die hier ontbreekt wordt bij
+      // het legen van de wachtrij dus van de tak verwijderd — een vergissing
+      // die als "opgeslagen, gaat mee zodra je weer verbinding hebt" oogt.
+      test('de notities gaan mee, naast deck.md', () {
+        final files = mirrorDeckFiles(
+          deckWithNote('bij Eén'),
+          deckDir: deckDir,
+          md: md,
+        );
+
+        expect(files.keys, contains('$deckDir/deck.md'));
+        expect(files.keys, contains(notesPath));
+        expect(utf8.decode(files[notesPath]!), contains('bij Eén'));
+      });
+
+      test('zonder notities staat het bestand er niet in', () {
+        // En dát is dan de bedoelde verwijdering: je wíste je laatste notitie.
+        final files = mirrorDeckFiles(
+          deckZonderNotities(),
+          deckDir: deckDir,
+          md: md,
+        );
+
+        expect(files.keys, isNot(contains(notesPath)));
+      });
+
+      test('ook hier per regel, zodat de merge later klopt', () {
+        final a = Slide.create(SlideType.title).copyWith(title: 'Eén');
+        final b = Slide.create(SlideType.title).copyWith(title: 'Twee');
+        final files = mirrorDeckFiles(
+          Deck(
+            title: 'Kwartaal',
+            slides: [a, b],
+            userNotes: {a.id: 'bij één', b.id: 'bij twee'},
+          ),
+          deckDir: deckDir,
+          md: md,
+        );
+
+        final regels = const LineSplitter().convert(
+          utf8.decode(files[notesPath]!),
+        );
+        expect(regels.length, greaterThan(4));
+      });
+    });
+
+    group('een bestand dat niet deugt laat het deck gewoon openen', () {
+      Future<Deck> openMet(Uint8List? bytes) async {
+        final slide = Slide.create(SlideType.title).copyWith(title: 'Eén');
+        final terug = await withRepoUserNotes(
+          Deck(title: 'Kwartaal', slides: [slide]),
+          deckDir: deckDir,
+          read: (path) async => path == notesPath ? bytes : null,
+        );
+        return terug.deck;
+      }
+
+      test('geen bestand', () async {
+        expect((await openMet(null)).userNotes, isEmpty);
+      });
+
+      test('leeg bestand', () async {
+        expect((await openMet(Uint8List(0))).userNotes, isEmpty);
+      });
+
+      test('geen geldige JSON', () async {
+        final deck = await openMet(
+          Uint8List.fromList(utf8.encode('dit is geen json')),
+        );
+        expect(deck.userNotes, isEmpty);
+      });
+
+      test('geen geldige UTF-8', () async {
+        expect(
+          (await openMet(Uint8List.fromList([0xff, 0xfe]))).userNotes,
+          isEmpty,
+        );
+      });
+
+      test('boven de bytegrens wordt niet ingelezen', () async {
+        // Het bestand komt van buiten en jsonDecode legt er nog een kopie
+        // bovenop. Een repo waarin dit tientallen megabytes is, is geen deck
+        // met veel notities maar iets anders.
+        final groot = Uint8List(maxRepoUserNotesBytes + 1);
+        expect((await openMet(groot)).userNotes, isEmpty);
+      });
+
+      test('een leesfout is geen mislukte open', () async {
+        final slide = Slide.create(SlideType.title).copyWith(title: 'Eén');
+        final terug = await withRepoUserNotes(
+          Deck(title: 'Kwartaal', slides: [slide]),
+          deckDir: deckDir,
+          read: (_) async => throw StateError('netwerk weg'),
+        );
+        expect(terug.deck.userNotes, isEmpty);
+        expect(terug.onleesbaar, isTrue);
+      });
     });
   });
 }

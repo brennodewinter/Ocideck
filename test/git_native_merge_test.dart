@@ -1,6 +1,7 @@
 @TestOn('vm')
 library;
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,7 +10,9 @@ import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/services/git/git_cli_io.dart';
 import 'package:ocideck/services/git/native_git_mirror_api.dart';
 import 'package:ocideck/services/git/native_git_mirror_io.dart';
+import 'package:ocideck/services/annotation_codec.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/user_notes_codec.dart';
 import 'package:ocideck/services/recovery_service.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -122,10 +125,13 @@ void main() {
   }
 
   /// Iemand anders pusht een eigen wijziging naar de werkbranch.
-  Future<void> theyPush(String markdown) async {
+  Future<void> theyPush(String markdown, {String? notesJson}) async {
     final other = '${temp.path}/other${DateTime(2026).microsecond}';
     await _rawGit(['clone', '--branch', work, bare, other], temp.path);
     File('$other/$deckDir/deck.md').writeAsStringSync(markdown);
+    if (notesJson != null) {
+      File('$other/$deckDir/deck.user-notes.json').writeAsStringSync(notesJson);
+    }
     await _rawGit(['add', '-A'], other);
     await _rawGit(['commit', '-m', 'hun wijziging'], other);
     await _rawGit(['push', 'origin', work], other);
@@ -298,6 +304,104 @@ void main() {
       File('$verify/$deckDir/deck.md').readAsStringSync(),
       contains('beta VAN HEN'),
     );
+  });
+
+  // De notities staan in een eigen bestand naast deck.md. Het native pad kreeg
+  // van `mergeRemote` alleen de deck.md-bytes van de drie kanten, dus alle drie
+  // de decks leken notitieloos — en omdat de deckmap wordt vervángen door wat de
+  // resolver teruggeeft, verdween het bestand uit de merge-commit. Op precies
+  // het pad dat de app kiest zodra git geïnstalleerd is, en bij het gewoonste
+  // scenario dat er is.
+  group('notities overleven de native merge', () {
+    /// Een notitiebestand zoals OciDeck het schrijft: verankerd op de
+    /// vingerafdruk van een dia, niet op haar id.
+    String notesFor({required int index, required String text}) => jsonEncode({
+      'version': UserNotesCodec.version,
+      'slides': [
+        {
+          'index': index,
+          'fp': AnnotationCodec.fingerprint(
+            MarkdownService()
+                .parseDeck(
+                  _deck(alfa: 'alfa origineel', beta: 'beta origineel'),
+                )!
+                .slides[index],
+          ),
+          'text': text,
+        },
+      ],
+    });
+
+    test('van beide kanten, op verschillende dia\'s', () async {
+      final (container, tabs) = build();
+      await openOnWorkBranch(container, tabs);
+
+      // Zij: notitie bij Alfa, gepusht. Wij: notitie bij Beta, in de editor.
+      await theyPush(
+        _deck(alfa: 'alfa origineel', beta: 'beta origineel'),
+        notesJson: notesFor(index: 0, text: 'van hen bij alfa'),
+      );
+      final tab = container.read(tabsProvider).current!;
+      final deck = tab.deckNotifier.currentState.deck!;
+      tab.deckNotifier.loadDeck(
+        deck.copyWith(userNotes: {deck.slides[1].id: 'van ons bij beta'}),
+      );
+
+      await tabs.saveToGitNative(
+        mirror,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'onze notitie',
+        now: DateTime(2026, 7, 18),
+      );
+
+      final verify = '${temp.path}/verify-notities';
+      await _rawGit(['clone', '--branch', work, bare, verify], temp.path);
+      final notes = File('$verify/$deckDir/deck.user-notes.json');
+      expect(
+        notes.existsSync(),
+        isTrue,
+        reason: 'het bestand mag niet uit de merge-commit verdwijnen',
+      );
+      final inhoud = notes.readAsStringSync();
+      expect(inhoud, contains('van ons bij beta'), reason: 'ons werk');
+      expect(inhoud, contains('van hen bij alfa'), reason: 'hun werk');
+    });
+
+    test('ook als alleen de ander er een had', () async {
+      // Wij typten geen notitie, alleen tekst. Zonder het hydrateren van hún
+      // kant zou onze opslag hun notitie wegpoetsen zonder dat er ooit een
+      // conflict was — de stilste vorm van verlies die er is.
+      //
+      // Zij laten Alfa met rust: een notitie hangt aan de dia zoals die was,
+      // dus wie zijn eigen dia herschrijft laat zijn eigen notitie los. Dat is
+      // de codecregel en niet iets wat deze merge repareert; zie GIT_STORAGE
+      // §9.7.
+      final (container, tabs) = build();
+      await openOnWorkBranch(container, tabs);
+
+      await theyPush(
+        _deck(alfa: 'alfa origineel', beta: 'beta origineel'),
+        notesJson: notesFor(index: 0, text: 'alleen van hen'),
+      );
+      editBeta(container, 'beta VAN ONS');
+
+      await tabs.saveToGitNative(
+        mirror,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'onze wijziging',
+        now: DateTime(2026, 7, 18),
+      );
+
+      final verify = '${temp.path}/verify-notities2';
+      await _rawGit(['clone', '--branch', work, bare, verify], temp.path);
+      final notes = File('$verify/$deckDir/deck.user-notes.json');
+      expect(notes.existsSync(), isTrue);
+      expect(notes.readAsStringSync(), contains('alleen van hen'));
+    });
   });
 
   test('de merge laat een geldig deck achter, geen conflictmarkers', () async {

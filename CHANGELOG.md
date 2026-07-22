@@ -114,6 +114,38 @@ read a book to find out.
   bundel kan vervangen, kan de lijst vervangen. De controle die wél iets zegt
   is de sha256 van `SHA256SUMS` zelf vergelijken met de waarde uit de
   aankondiging — één regel, via een ander kanaal dan de download.
+- **Uw notities reizen mee naar git.** Wie zijn presentaties in een repository
+  bewaarde, raakte bij het verhuizen van een map naar git stilletjes zijn
+  notities kwijt: `services/git/` schreef die sidecar nergens. Er stond wel een
+  waarschuwing vóór de commit, maar een waarschuwing is geen oplossing.
+
+  De notities staan nu als `deck.user-notes.json` naast `deck.md`, op een vast
+  pad — niet in de op inhoud geadresseerde pool, want daar zou elk getypt teken
+  een nieuw bestand minten en het vorige laten wegkwijnen, en dan is er geen
+  wijziging meer te lézen. Bij het openen hangen ze weer aan de juiste dia,
+  herkend aan de vingerafdruk van die dia en niet aan haar id — dat id wordt bij
+  elk inlezen opnieuw uitgedeeld.
+
+  **Twee auteurs op verschillende dia's houden allebei hun notities.** Dat was
+  altijd al de bedoeling (ontwerpbesluit D7: dit bestand gaat door git's gewone
+  tekst-merge), maar het zou niet gewérkt hebben: JSON komt standaard op één
+  regel uit, en op één regel botst élke wijziging met élke andere. De kopie die
+  naar de repo gaat wordt daarom ingesprongen geschreven, één veld per regel.
+  Het bestand naast uw deck op schijf — dat niemand ooit samenvoegt — blijft
+  compact.
+
+  Uw láátste notitie wissen haalt het bestand nu wég uit de repo. Bleef het
+  staan, dan hing die notitie er bij de volgende keer openen gewoon weer aan, en
+  een wissing die terugkomt is erger dan een die niet werkt.
+
+  De waarschuwing vóór de commit is meteen ingekrompen: de regel over notities
+  is eruit, en die over de tekeningen en het zegel staat er nog. Een melding die
+  meer opsomt dan er werkelijk misgaat, leert de lezer hem in zijn geheel weg te
+  klikken — en dan verdwijnt ook de regel over het zegel uit beeld.
+
+  Nog niet mee: de tekenlaag en het zegel. Die wachten niet op werk maar op een
+  besluit — respectievelijk over streekidentiteit in het annotatieformaat, en
+  over wat een zegel betekent op een tak die herschreven kan worden.
 
 ### Changed
 - **0.1.0 wordt een webbundel, en verder niets.** Ondertekening en notarisatie
