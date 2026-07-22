@@ -156,6 +156,12 @@ when the count is zero, which is the state a reviewed deck is in — the marker
 exists to be cleared. The three constants are untranslated on purpose: they are
 read by tools, not by people.
 
+`metadata` is an optional parameter, so `export` does not trust it for this one
+value: whenever `audience` is present it recounts with
+`withAiMarkingFrom(AudienceDeck)`. A caller that passes a bundle but no metadata
+therefore still declares, and a caller that hand-builds metadata can neither
+suppress the declaration nor keep it on a deck that has been reviewed.
+
 ### Privacy Projection API
 `lib/services/privacy/privacy_projection.dart` — applies redaction and audience
 scoping. The entry points are **static**:
