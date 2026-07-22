@@ -21,8 +21,8 @@ extension _QuestionPreviewAnswers on _QuestionPreview {
   /// elkaar: de vraag is "welke van deze twee", en dat lees je alleen af als ze
   /// naast elkaar staan.
   Widget imageChoiceContent(BuildContext context, QuestionSpec spec) {
-    final textColor = _hexColor(profile.textColor);
-    final accent = _hexColor(profile.accentColor);
+    final textColor = AppTheme.parseHexColor(profile.textColor);
+    final accent = AppTheme.parseHexColor(profile.accentColor);
     final prompt = spec.prompt.isEmpty ? '—' : spec.prompt;
     final tiles = _imageTiles(context, spec);
 
@@ -101,7 +101,7 @@ extension _QuestionPreviewAnswers on _QuestionPreview {
       style: TextStyle(
         fontFamily: font,
         fontSize: w * 0.026,
-        color: _hexColor(profile.textColor).withValues(alpha: 0.6),
+        color: AppTheme.parseHexColor(profile.textColor).withValues(alpha: 0.6),
       ),
       textAlign: TextAlign.center,
     ),
@@ -161,7 +161,7 @@ extension _QuestionPreviewAnswers on _QuestionPreview {
                 style: TextStyle(
                   fontFamily: font,
                   fontSize: w * 0.024,
-                  color: _hexColor(profile.textColor),
+                  color: AppTheme.parseHexColor(profile.textColor),
                 ),
               ),
             ],
@@ -205,7 +205,7 @@ extension _QuestionPreviewAnswers on _QuestionPreview {
     style: TextStyle(
       fontFamily: font,
       fontSize: w * 0.024,
-      color: _hexColor(profile.textColor).withValues(alpha: 0.7),
+      color: AppTheme.parseHexColor(profile.textColor).withValues(alpha: 0.7),
     ),
   );
 
@@ -216,8 +216,8 @@ extension _QuestionPreviewAnswers on _QuestionPreview {
   /// [QuestionView] draagt het juiste antwoord pas mee ná het onthullen.
   Widget openTextContent(BuildContext context, QuestionSpec spec) {
     final l10n = context.l10n;
-    final textColor = _hexColor(profile.textColor);
-    final accent = _hexColor(profile.accentColor);
+    final textColor = AppTheme.parseHexColor(profile.textColor);
+    final accent = AppTheme.parseHexColor(profile.accentColor);
     final prompt = spec.prompt.isEmpty ? '—' : spec.prompt;
     final v = view;
 
@@ -292,7 +292,9 @@ extension _QuestionPreviewAnswers on _QuestionPreview {
         style: TextStyle(
           fontFamily: font,
           fontSize: w * 0.024,
-          color: _hexColor(profile.textColor).withValues(alpha: 0.6),
+          color: AppTheme.parseHexColor(
+            profile.textColor,
+          ).withValues(alpha: 0.6),
         ),
       ),
       SizedBox(height: w * 0.012),
@@ -363,7 +365,9 @@ extension _QuestionPreviewAnswers on _QuestionPreview {
         style: TextStyle(
           fontFamily: font,
           fontSize: w * 0.022,
-          color: _hexColor(profile.textColor).withValues(alpha: 0.6),
+          color: AppTheme.parseHexColor(
+            profile.textColor,
+          ).withValues(alpha: 0.6),
         ),
       ),
     ];
@@ -381,7 +385,7 @@ extension _QuestionPreviewAnswers on _QuestionPreview {
     required Color markedColor,
     required TextDecoration decoration,
   }) {
-    final textColor = _hexColor(profile.textColor);
+    final textColor = AppTheme.parseHexColor(profile.textColor);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

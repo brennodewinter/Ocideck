@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/recovery_service.dart';
@@ -61,6 +62,41 @@ void main() {
       async.elapse(const Duration(seconds: 2));
       expect(recovery.saved, isNotEmpty);
       expect(recovery.saved.last.markdown, contains('D'));
+    });
+  });
+
+  test('autosave carries the annotation layer into the snapshot', () {
+    fakeAsync((async) {
+      final recovery = _RecordingRecovery();
+      final tabs = _tabs(recovery);
+      addTearDown(tabs.dispose);
+
+      final deck = _deck();
+      final notifier = tabs.state.current!.deckNotifier..loadDeck(deck);
+      // Tekenen is de énige wijziging: het deck wordt er vuil van, dus dit
+      // tabblad hoort in de herstelkopie te belanden — mét de streek.
+      notifier.setAnnotations({
+        deck.slides.first.id: const [
+          InkStroke(
+            tool: InkTool.pen,
+            color: 0xFFEF4444,
+            width: 0.004,
+            points: [Offset(0.1, 0.2), Offset(0.3, 0.4)],
+          ),
+        ],
+      });
+
+      async.elapse(const Duration(seconds: 30));
+      expect(recovery.saved, isNotEmpty);
+      expect(recovery.saved.last.annotations, isNotNull);
+
+      // En terug: herstellen levert de tekening op, niet alleen de tekst.
+      final restored = _tabs(_RecordingRecovery());
+      addTearDown(restored.dispose);
+      expect(restored.restoreRecovered([recovery.saved.last]), 0);
+      final back = restored.state.current!.deckNotifier.currentState.deck!;
+      expect(back.annotations.values.expand((s) => s), hasLength(1));
+      expect(back.annotations.values.first.single.points, hasLength(2));
     });
   });
 

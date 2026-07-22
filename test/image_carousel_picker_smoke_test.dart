@@ -9,6 +9,8 @@ import 'package:ocideck/services/caption_service.dart';
 import 'package:ocideck/services/description_service.dart';
 import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
 
+import 'support/pump_until.dart';
+
 /// Smoke test for the image carousel picker — the file has no other coverage,
 /// so this pins down that the dialog still scans, renders its grid and reacts
 /// to the view toggle and search, before the file is split into part
@@ -64,10 +66,10 @@ void main() {
   Future<void> pumpPicker(WidgetTester tester) async {
     await tester.binding.setSurfaceSize(const Size(1400, 900));
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    // _loadImages is kicked off in initState and scans the directory with real
-    // file I/O. Pumping the first frame *inside* runAsync runs that scan in the
-    // real async zone so it can actually complete (otherwise it stalls on the
-    // loading spinner forever).
+    // _loadImages wordt in initState gestart en loopt met echte bestand-I/O
+    // over de map. Dat werk komt alleen vooruit in de echte async-zone, dus de
+    // eerste frame gaat binnen runAsync — anders blijft de dialoog eeuwig op
+    // zijn laadindicator staan.
     await tester.runAsync(() async {
       await tester.pumpWidget(
         ProviderScope(
@@ -80,10 +82,14 @@ void main() {
           ),
         ),
       );
-      await Future<void>.delayed(const Duration(milliseconds: 300));
     });
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 200));
+    // Wachten tot de scan klaar ís: de dialoog haalt zijn laadindicator weg.
+    // Hier stond 300 ms plus twee pumps — een gok op hoe traag de schijf is.
+    await pumpUntil(
+      tester,
+      () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
+      reason: 'de mapscan van de afbeeldingkiezer bleef laden',
+    );
     clearLayoutNoise(tester);
   }
 

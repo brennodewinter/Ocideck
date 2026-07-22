@@ -6,6 +6,7 @@ import '../../services/description_service.dart';
 import '../../models/asset_origin.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
+import '../../services/image_usage.dart';
 import '../../state/deck_provider.dart';
 import '../../state/tabs_provider.dart';
 import 'alt_text_field.dart';
@@ -451,7 +452,7 @@ class ImagePickerBar extends ConsumerWidget {
       if (deck == null) continue;
       final projectPath = deck.projectPath ?? '';
 
-      String resolve(String candidate) => p.normalize(
+      String? resolve(String candidate) => p.normalize(
         p.isAbsolute(candidate) ? candidate : p.join(projectPath, candidate),
       );
       // Blijf relatief opslaan als de slide dat al deed en het nieuwe pad
@@ -465,14 +466,12 @@ class ImagePickerBar extends ConsumerWidget {
 
       for (var i = 0; i < deck.slides.length; i++) {
         final slide = deck.slides[i];
-        var updated = slide;
-        if (slide.imagePath.isNotEmpty && resolve(slide.imagePath) == target) {
-          updated = updated.copyWith(imagePath: replacement(slide.imagePath));
-        }
-        if (slide.imagePath2.isNotEmpty &&
-            resolve(slide.imagePath2) == target) {
-          updated = updated.copyWith(imagePath2: replacement(slide.imagePath2));
-        }
+        final updated = slideWithImageReplaced(
+          slide,
+          target,
+          resolve,
+          replacement,
+        );
         if (!identical(updated, slide)) notifier.updateSlide(i, updated);
       }
     }
@@ -486,20 +485,14 @@ class ImagePickerBar extends ConsumerWidget {
     for (final tab in ref.read(tabsProvider).tabs) {
       final deck = tab.deckNotifier.currentState.deck;
       if (deck == null) continue;
-      for (var i = 0; i < deck.slides.length; i++) {
-        final slide = deck.slides[i];
-        for (final candidate in [slide.imagePath, slide.imagePath2]) {
-          if (candidate.isEmpty) continue;
-          final resolved = p.normalize(
-            p.isAbsolute(candidate)
-                ? candidate
-                : p.join(deck.projectPath ?? '', candidate),
-          );
-          if (resolved == target) {
-            usages.add('${tab.label} · slide ${i + 1}');
-            break;
-          }
-        }
+      String? resolve(String candidate) => p.normalize(
+        p.isAbsolute(candidate)
+            ? candidate
+            : p.join(deck.projectPath ?? '', candidate),
+      );
+
+      for (final i in slideIndexesUsingImage(deck, target, resolve)) {
+        usages.add('${tab.label} · slide ${i + 1}');
       }
     }
     return usages;

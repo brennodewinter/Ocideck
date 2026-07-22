@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 
 /// Parses a hex colour string (`#RRGGBB` or `RRGGBB`). Returns `null` when
 /// invalid so callers can skip the pair instead of throwing.
-Color? parseHexColor(String? value) {
+///
+/// Dit is bewust de *strenge* variant: alleen zes tekens, altijd dekkend, en
+/// `null` bij twijfel. Wie een kleur nodig heeft die er altijd is, neemt
+/// `AppTheme.parseHexColor` — die valt terug in plaats van te weigeren. Het
+/// naamsverschil (`tryParse…` versus `parse…`) volgt de Dart-afspraak en is
+/// het enige waaraan je de twee contracten uit elkaar houdt.
+Color? tryParseHexColor(String? value) {
   if (value == null || value.trim().isEmpty) return null;
   var hex = value.trim();
   if (!hex.startsWith('#')) hex = '#$hex';
@@ -24,8 +30,8 @@ double contrastRatio(Color foreground, Color background) {
 /// Returns the contrast ratio for a hex pair, or `null` when either colour is
 /// invalid.
 double? hexContrastRatio(String foreground, String background) {
-  final fg = parseHexColor(foreground);
-  final bg = parseHexColor(background);
+  final fg = tryParseHexColor(foreground);
+  final bg = tryParseHexColor(background);
   if (fg == null || bg == null) return null;
   return contrastRatio(fg, bg);
 }
@@ -54,8 +60,8 @@ double? blendedHexContrastRatio(
   String background, {
   required double foregroundAlpha,
 }) {
-  final fg = parseHexColor(foreground);
-  final bg = parseHexColor(background);
+  final fg = tryParseHexColor(foreground);
+  final bg = tryParseHexColor(background);
   if (fg == null || bg == null) return null;
   final blended = Color.alphaBlend(
     fg.withValues(alpha: foregroundAlpha.clamp(0.0, 1.0)),

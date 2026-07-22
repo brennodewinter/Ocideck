@@ -62,7 +62,6 @@ class _DeckStatusBar extends StatelessWidget {
     final l10n = context.l10n;
     final skipped = deck.slides.where((s) => s.skipped).length;
     final fileStatus = deckFileStatusLabel(deckState, l10n);
-    final saveLabel = deckState.isDirty ? l10n.t('unsaved') : l10n.t('saved');
     final exportLabel = exportDirectory == null
         ? l10n.t('exportNextToDeck')
         : '${l10n.t('exportFolder')}: ${p.basename(exportDirectory!)}';
@@ -86,19 +85,7 @@ class _DeckStatusBar extends StatelessWidget {
             Expanded(
               child: Row(
                 children: [
-                  _StatusAction(
-                    icon: deckState.isDirty
-                        ? Icons.radio_button_checked
-                        : Icons.check_circle_outline,
-                    label: saveLabel,
-                    tooltip: deckState.isDirty
-                        ? l10n.t('unsavedChanges')
-                        : l10n.t('noUnsavedChanges'),
-                    color: deckState.isDirty
-                        ? AppTheme.amber600
-                        : AppTheme.success700,
-                    onTap: () => onSave(),
-                  ),
+                  _SaveStatusAction(deckState: deckState, onSave: onSave),
                   const _StatusDivider(),
                   Flexible(
                     child: _StatusItem(
@@ -176,8 +163,23 @@ class _DeckStatusBar extends StatelessWidget {
 
   /// Documentintegriteit-badge (§8 A1): toont of het verzegelde deck intact is
   /// of ná afronden is gewijzigd. Alleen zichtbaar wanneer het deck verzegeld is.
+  ///
+  /// De derde stand is de eerlijke: vlak na het afronden bestaat het bestand
+  /// nog niet waar het zegel over gaat, dus valt er niets na te rekenen. Groen
+  /// tonen zou dan een controle voorspiegelen die niemand heeft uitgevoerd, en
+  /// rood zou een manipulatie melden die er niet is.
   Widget _integrityBadge(AppLocalizations l10n, Deck deck) {
     final status = deckIntegrityStatus(deck);
+    if (status == IntegrityStatus.notVerifiable) {
+      return _StatusItem(
+        icon: Icons.gpp_maybe_outlined,
+        label: l10n.d('Zegel nog niet vastgelegd'),
+        tooltip: l10n.d(
+          'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.',
+        ),
+        color: AppTheme.slate600,
+      );
+    }
     final intact = status == IntegrityStatus.intact;
     return _StatusItem(
       icon: intact ? Icons.verified_user : Icons.gpp_bad,
@@ -241,6 +243,18 @@ class _ExportReadinessChip extends StatelessWidget {
         Icons.task_alt,
         green,
         l10n.t('exportReady'),
+      ),
+      // Bewust grijs en niet groen: groen is een uitspraak over wat er gevonden
+      // is, en er is niet gekeken. Ook bewust niet amber — de gebruiker heeft de
+      // controle zelf uitgezet, dus dit is geen alarm maar het intrekken van een
+      // belofte.
+      ExportReadinessStatus.readyPrivacyUnchecked => (
+        l10n.d('Klaar — privacy niet gecontroleerd'),
+        Icons.task_alt,
+        AppTheme.slate600,
+        l10n.d(
+          'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.',
+        ),
       ),
       ExportReadinessStatus.qualityWarnings => (
         '$issueCount ${l10n.d('kwaliteitswaarschuwing(en)')}',
@@ -436,6 +450,92 @@ class _RemoteOriginBadge extends StatelessWidget {
     return PrivacyBadge(
       tooltip: remoteOriginTooltip(url, l10n),
       label: l10n.d('Extern'),
+    );
+  }
+}
+
+/// Waar het opslaan dat nu loopt naartoe schrijft, in leesbare vorm.
+///
+/// Publiek en puur zodat de bewoording los van de widget te toetsen is. Elke
+/// bestemming een eigen zin, want de wachttijd verschilt met een ordegrootte en
+/// de gebruiker mag weten of het aan zijn schijf of aan zijn verbinding ligt.
+String saveProgressLabel(AppLocalizations l10n, SaveTarget target) {
+  return switch (target) {
+    SaveTarget.local => l10n.d('Opslaan…'),
+    SaveTarget.webdav => l10n.d('Uploaden naar WebDAV…'),
+    SaveTarget.s3 => l10n.d('Uploaden naar S3…'),
+    SaveTarget.git => l10n.d('Vastleggen in git…'),
+  };
+}
+
+/// De opslagchip links in de balk: normaal "Opgeslagen"/"Niet opgeslagen", en
+/// tijdens een opslag een draaiende melding met de bestemming erbij.
+///
+/// Die tweede stand bestond niet. Een opslag naar WebDAV, S3 of git kan
+/// tientallen seconden duren — één upload per mediabestand, of vier tot zeven
+/// round-trips voor een commit — en het scherm veranderde in die tijd niets. Op
+/// een trage verbinding is dat niet te onderscheiden van een vastgelopen app.
+/// De chip is bovendien de knop zélf, dus zolang hij draait is meteen zichtbaar
+/// waaróm een tweede klik niets doet.
+class _SaveStatusAction extends ConsumerWidget {
+  final DeckState deckState;
+  final Future<void> Function() onSave;
+
+  const _SaveStatusAction({required this.deckState, required this.onSave});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final target = ref.watch(saveProgressProvider);
+    if (target == null) {
+      return _StatusAction(
+        icon: deckState.isDirty
+            ? Icons.radio_button_checked
+            : Icons.check_circle_outline,
+        label: deckState.isDirty ? l10n.t('unsaved') : l10n.t('saved'),
+        tooltip: deckState.isDirty
+            ? l10n.t('unsavedChanges')
+            : l10n.t('noUnsavedChanges'),
+        color: deckState.isDirty ? AppTheme.amber600 : AppTheme.success700,
+        onTap: () => onSave(),
+      );
+    }
+    final label = saveProgressLabel(l10n, target);
+    return Tooltip(
+      message: l10n.d(
+        'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.',
+      ),
+      // Een schermlezer krijgt de melding zonder dat de focus verspringt: dit
+      // is een mededeling over wat er gebeurt, geen plek om naartoe te gaan.
+      child: Semantics(
+        liveRegion: true,
+        label: label,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: 11,
+                height: 11,
+                child: CircularProgressIndicator(
+                  strokeWidth: 1.6,
+                  color: AppTheme.amber600,
+                ),
+              ),
+              const SizedBox(width: 5),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 11,
+                  color: AppTheme.amber600,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

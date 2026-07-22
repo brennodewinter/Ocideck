@@ -15,6 +15,10 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 const unchangedInEnglish = {
   'OciDeck',
   'Stichting LibreKAT',
+  // 'slides' is in het Engels hetzelfde woord als in het Nederlands. Het staat
+  // hier omdat het óók een `t()`-sleutel is: `add_l10n` keek bestandsbreed en
+  // sloeg de `d()`-variant daardoor in alle 31 talen over.
+  'slides',
   'GitHub',
   'GitLab',
   'TLP',
@@ -88,6 +92,12 @@ const unchangedInEnglish = {
   // The scorecard's "was 375" line. Dutch and English happen to spell it
   // the same; it is genuinely translated everywhere else.
   'was',
+  // Het Help-menu in de macOS-menubalk. Nederlands en Engels schrijven dit
+  // menu identiek, dus valt de Engelse vertaling samen met de bronstring.
+  // Alleen hier: de overige dertig talen dragen hun eigen woord — Duits
+  // 'Hilfe', Frans 'Aide', Tsjechisch 'Nápověda', Klingon 'QaH' — en die
+  // dekking blijft door `unchangedInAllLanguages` bewust ongemoeid.
+  'Help',
   // Toetskappen en de minuut-afkorting: het Nederlandse toetsenbord draagt de
   // Engelse opschriften, dus de bronstring ís al Engels. Elders wel echt
   // vertaald — Frans zet 'échap' en 'Entrée', Spaans 'Intro', Italiaans

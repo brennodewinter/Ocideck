@@ -1,3 +1,23 @@
+// ── THIRD-PARTY CONTENT — NOT EUPL-1.2 ──────────────────────────────────────
+//
+// The test index in this library (see the `wstg_catalog_data.dart` part)
+// reproduces the 97 verbatim test ids, titles and categories of the **OWASP Web
+// Security Testing Guide v4.2**, © the OWASP Foundation and its contributors,
+// licensed under CC-BY-SA-4.0.
+//
+//   Licence: https://creativecommons.org/licenses/by-sa/4.0/
+//   Source:  https://owasp.org/www-project-web-security-testing-guide/
+//
+// **Share-alike travels with this dataset.** Anyone redistributing it — as part
+// of OciDeck or lifted out of it — does so under CC-BY-SA-4.0 with this
+// attribution. It does not reach the surrounding EUPL-1.2 code: OciDeck bundles
+// this material as a *Collection* in the licence's own sense.
+//
+// This header exists because without it the file reads as ours. The reasoning
+// lives in docs/LICENSE_COMPLIANCE.md, § "OWASP WSTG, MASTG and MASWE"; the
+// obligation lives here, where someone copying the file will see it.
+// ────────────────────────────────────────────────────────────────────────────
+
 import '../models/wstg_test.dart';
 
 part 'wstg_catalog_data.dart';

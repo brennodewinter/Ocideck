@@ -1758,8 +1758,6 @@ const _dutchSourceSv = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Slutför och försegla',
   'Verzegelen': 'Försegla',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Slutför den här presentationen och beräkna ett SHA-512-sigill över innehållet. Filen låses sedan och kan inte längre redigeras; senare ändringar blir synliga. Detta kan inte ångras i appen.',
   'Handtekening (optioneel)': 'Signatur (valfritt)',
   'Naam': 'Namn',
   'Rol of functie': 'Roll eller funktion',
@@ -1817,6 +1815,98 @@ const _dutchSourceAddSv = <String, String>{
   'links en rechts wisselen per ronde':
       'vänster och höger byter plats varje runda',
   'overeenkomst': 'överensstämmelse',
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Den här texten innehåller kapitel. Uppdelningen ger',
+  'dia\'s op.': 'bilder.',
+  'Splits op hoofdstukken': 'Dela upp efter kapitel',
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Den här presentationen innehåller AI-text som du inte har granskat än. Du kan exportera ändå; filen anger det själv och får "-ai-concept" i namnet.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Utkast: innehåller AI-text som ingen har granskat än',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Slutför den här presentationen och fastställ ett SHA-512-sigill över den sparade filen. Den låses sedan och kan inte längre redigeras; varje senare ändring blir synlig. Den som tar emot rapporten kontrollerar själv sigillet med sha512sum. Detta kan inte ångras i appen.',
+  'Zegel en handtekening': 'Sigill och signatur',
+  'Zegel nog niet vastgelegd': 'Sigill ännu inte fastställt',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Det finns ännu ingen sparad fil att kontrollera sigillet mot. Spara decket.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Utelämnande är på: det som kontrollen bedömer som en personuppgift svärtas, och alla bilder, all video och allt ljud på den här bilden följer inte med till skärmen eller exporten. Din markdown-fil behåller allt.',
+  'Bestand': 'Arkiv',
+  'Venster': 'Fönster',
+  'Help': 'Hjälp',
+  'Alles selecteren': 'Markera allt',
+  'Plakken': 'Klistra in',
+  'Opnieuw': 'Gör om',
+  'Eigenschappen': 'Egenskaper',
+  'Opdrachten…': 'Kommandon…',
+  'Opslaan…': 'Sparar…',
+  'Uploaden naar WebDAV…': 'Laddar upp till WebDAV…',
+  'Uploaden naar S3…': 'Laddar upp till S3…',
+  'Vastleggen in git…': 'Committar till git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Sparar. Att spara igen gör ingenting förrän det här är klart.',
+  'Klaar — privacy niet gecontroleerd': 'Klar — integritet inte kontrollerad',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Ingen sökning har gjorts efter personuppgifter, känsliga uppgifter och hemligheter: integritetskontrollen är avstängd under Säkerhet.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Presentationer som förblir vanliga Markdown-filer: läsbara, sökbara och går att öppna med vilken editor som helst.',
+  'sjablonen om mee te beginnen, of leeg': 'mallar att börja med, eller tom',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'En malls exempelbilder är på nederländska. Namn och beskrivning följer ditt eget språk; innehållet anpassar du efter att du har skapat den.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Utelämnande är på: hittade uppgifter svärtas och alla bilder, all video och allt ljud på den här bilden följer inte med till skärmen eller exporten. Din markdown-fil behåller allt.',
+  'Mijn tekst': 'Min text',
+  'Wat zij zien': 'Vad de ser',
+  'Presentatiegegevens': 'Presentationsuppgifter',
+  'Open presentatiegegevens': 'Öppna presentationsuppgifter',
+  'Motivering van een uitsluiting': 'Motivering av ett undantag',
+  'Motivering van een bevestiging': 'Motivering av en bekräftelse',
+  'Tabel koprij, kolom {kolom}': 'Tabell rubrikrad, kolumn {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabell rad {rij}, kolumn {kolom}',
+  'Via deze website ophalen?': 'Hämta via den här webbplatsen?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Servern för den här presentationen lät inte webbläsaren läsa filen direkt. OciDeck kan skicka adressen vidare till den webbplats som OciDeck självt kommer från, och den hämtar filen. Därmed ser den webbplatsen hela adressen — finns det en nyckel eller kod i länken ser webbplatsen även den.',
+  'In de browser kan dit niet worden bewaard':
+      'Det här kan inte sparas i webbläsaren',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'En webbläsare har ingen nyckelring som en dator har: det OciDeck skulle spara här kan vilket skript som helst på den här sidan läsa. Använd skrivbordsversionen — där hamnar hemligheten faktiskt i operativsystemets nyckelring.',
+  'Licenties van derden': 'Tredjepartslicenser',
+  'Alle licentieteksten tonen': 'Visa alla licenstexter',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck självt ges ut under EUPL-1.2. Dessutom paketerar det programvara från tredje part: Dart- och Flutter-paketen, två medföljande insticksmoduler, fyra teckensnittsfamiljer, ansiktsmodellen för integritetskontrollen och den JavaScript som följer med en HTML-export. Var och en behåller sin egen licens.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Den här filen innehåller programvara från tredje part och ibland ett teckensnitt. Nedan finns de fullständiga licenstexterna som hör till; skicka med dem när du för filen vidare.',
+  'Sporen op dit apparaat': 'Spår på den här enheten',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Förutom dina inställningar sparar OciDeck också en lista över senaste filer och, vid en krasch, en återställningsfil med hela innehållet i din presentation. Inget av det lämnar den här enheten, men det ligger här — i klartext, skyddat av ditt konto i det här operativsystemet och inte mer än så.',
+  'Recent geopende presentaties': 'Senast öppnade presentationer',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Listan sparar hela sökvägen och klassificeringen för varje presentation som har varit öppen — tillsammans en uppgift om vad du arbetar med och för vem.',
+  'Recente lijst wissen': 'Radera listan över senaste filer',
+  'De recente lijst was al leeg.': 'Listan över senaste filer var redan tom.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'post(er) raderade från listan över senaste filer.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Återställningsfiler innehåller hela innehållet i dina presentationer i klartext. De rensas automatiskt efter 7 dagar, och direkt vid en normal avslutning.',
+  'Alles terugzetten': 'Återställ allt',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Raderar alla inställningar, listan över senaste filer, återställningsfilerna, git-arbetskopiorna och lösenorden i din nyckelring. Dina presentationer blir kvar: de är dina, inte OciDecks.',
+  'Zet alles terug naar de begintoestand': 'Återställ allt till ursprungsläget',
+  'Alles terugzetten naar de begintoestand?':
+      'Återställa allt till ursprungsläget?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Dina inställningar, listan över senaste filer, återställningsfilerna, git-arbetskopiorna och de sparade lösenorden raderas. Det går inte att ångra. Dina presentationer blir kvar.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'ändring(ar) har ännu inte skickats till en git-server och finns bara på den här enheten. De försvinner också.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Allt har återställts till ursprungsläget.',
+  'Terugzetten is niet gelukt.': 'Återställningen misslyckades.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Det finns arbete som inte har skickats',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Den här git-anslutningen har ändringar som ännu inte har skickats till servern. Tar du bort anslutningen försvinner även arbetskopian på den här enheten — och då finns arbetet ingenstans.',
+  'Verbinding behouden': 'Behåll anslutningen',
+  'Toch verwijderen': 'Ta bort ändå',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',
@@ -1875,6 +1965,33 @@ const _dutchSourceAddSv = <String, String>{
       'räknar upp vad som har utelämnats, utan värdena själva. Den här filen får följa med rapporten.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'innehåller nycklarna som varje maskat värde kan räknas tillbaka med. Skicka inte med den här filen: då är maskningen upphävd. Förvara den vid källan.',
+  'slides': 'bilder',
+  'Achtergehouden': 'Undanhållen',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Undanhållen: klassificerad strängare än presentationen',
+  '1 slide achtergehouden door haar TLP': '1 bild undanhållen av sin TLP',
+  'slides achtergehouden door hun TLP': 'bilder undanhållna av sin TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'De här bilderna följer inte med vid presentation, export eller i paketet. Höj presentationens TLP-nivå under Presentationsinfo för att få med dem.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alla bilder är undanhållna av sin TLP-klassificering, så det finns inget att visa.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alla bilder är undanhållna av sin TLP-klassificering, så det finns inget att exportera.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alla bilder är överhoppade eller undanhållna av sin TLP-klassificering, så det finns inget att visa.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alla bilder är överhoppade eller undanhållna av sin TLP-klassificering, så det finns inget att exportera.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Diagramsiffrorna sparades inte — de finns bara kvar i det här fönstret:',
+  'Niet alles gaat mee naar git': 'Allt följer inte med till git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'De här delarna hamnar inte i commiten och finns sedan inte i repositoryt:',
+  'Tekeningen op slides': 'Teckningar på bilder',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'De blir kvar i det här fönstret. Spara även presentationen som fil eller som ett .ocideck-paket för att behålla dem.',
+  'Toch opslaan': 'Spara ändå',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'I webbläsaren finns ingen kraschåterställning: stänger du den här fliken är osparat arbete borta. Spara din presentation själv.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Den lokala CVE-databasen (du startar hämtningen själv): OciDeck hämtar massdata via api.github.com och den utgåvefil som adressen pekar på.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import '../../models/git_settings.dart';
-import '../file_service.dart';
+import 'forge_http.dart';
 import 'git_forge.dart';
 import 'git_transport.dart';
 import 'git_transport_factory.dart';
@@ -21,28 +21,37 @@ import 'git_transport_factory.dart';
 /// - **De API-host verschilt van de web-host.** Voor github.com is dat
 ///   `api.github.com`; voor een eigen Enterprise-server is het `/api/v3` op
 ///   dezelfde host.
-class GitHubForge implements GitForge {
+class GitHubForge with ForgeHttp implements GitForge {
   GitHubForge({
     required this.config,
     required this.token,
     GitTransport? transport,
-  }) : _transport = transport ?? createGitTransport(config);
+  }) : transport = transport ?? createGitTransport(config);
 
+  @override
   final GitRepoConfig config;
 
   /// Het personal access token, uit de keychain gehaald door de aanroeper.
   /// Leeg is toegestaan: een publieke repo lezen mag zonder.
   final String token;
 
-  final GitTransport _transport;
+  @override
+  final GitTransport transport;
 
-  static const int maxBlobBytes = FileService.maxPackageBytes;
-  static const int maxListingBytes = 16 * 1024 * 1024;
-  static const int maxListingEntries = 5000;
+  static const int maxBlobBytes = kForgeMaxBlobBytes;
+  static const int maxListingBytes = kForgeMaxListingBytes;
+  static const int maxListingEntries = kForgeMaxListingEntries;
+
+  @override
+  String get forgeName => 'GitHub';
+
+  @override
+  bool get treats409AsEmptyRepo => true;
 
   /// GitHub wil `Bearer`, waar Gitea `token` wil. De API-versie staat er vast
   /// bij: zonder pin verandert het antwoord onder je handen bij een upgrade.
-  Map<String, String> get _headers => {
+  @override
+  Map<String, String> get headers => {
     'Accept': 'application/vnd.github+json',
     'X-GitHub-Api-Version': '2022-11-28',
     if (token.trim().isNotEmpty) 'Authorization': 'Bearer ${token.trim()}',
@@ -50,7 +59,8 @@ class GitHubForge implements GitForge {
 
   /// De API zit op een ándere host dan de repo-URL: `api.github.com` voor
   /// github.com, `/api/v3` op de eigen host voor Enterprise.
-  Uri _apiUri(List<String> segments, {Map<String, String>? query}) {
+  @override
+  Uri apiUri(List<String> segments, {Map<String, String>? query}) {
     final origin = config.origin;
     if (origin == null) {
       throw const GitForgeException(
@@ -83,7 +93,7 @@ class GitHubForge implements GitForge {
     String path, {
     bool recursive = false,
   }) async {
-    _requireRef(ref);
+    requireRef(ref);
     if (path.isNotEmpty && !GitRepoLayout.isSafeRepoPath(path)) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -92,13 +102,10 @@ class GitHubForge implements GitForge {
     }
     // De tree-API geeft de hele boom in één keer; filteren op prefix is
     // goedkoper dan per map een listing ophalen.
-    final response = await _transport.get(
-      _apiUri(['git', 'trees', ref], query: {'recursive': '1'}),
-      headers: _headers,
-      maxBytes: maxListingBytes,
+    final json = await getJson(
+      ['git', 'trees', ref],
+      query: {'recursive': '1'},
     );
-    _checkStatus(response.status);
-    final json = _decodeJson(response.bytes);
     if (json is! Map || json['tree'] is! List) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -106,7 +113,7 @@ class GitHubForge implements GitForge {
       );
     }
     final tree = json['tree'] as List;
-    _requireEntryCount(tree.length);
+    requireEntryCount(tree.length);
 
     final prefix = path.isEmpty ? '' : '$path/';
     final out = <RepoEntry>[];
@@ -141,7 +148,7 @@ class GitHubForge implements GitForge {
 
   @override
   Future<Uint8List> readBlob(String ref, String path) async {
-    _requireRef(ref);
+    requireRef(ref);
     if (!GitRepoLayout.isSafeRepoPath(path)) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -149,24 +156,18 @@ class GitHubForge implements GitForge {
       );
     }
     // `Accept: raw` levert de bytes zelf in plaats van base64-in-JSON.
-    final response = await _transport.get(
-      _apiUri(['contents', path], query: {'ref': ref}),
-      headers: {..._headers, 'Accept': 'application/vnd.github.raw'},
+    final response = await transport.get(
+      apiUri(['contents', path], query: {'ref': ref}),
+      headers: {...headers, 'Accept': 'application/vnd.github.raw'},
       maxBytes: maxBlobBytes,
     );
-    _checkStatus(response.status);
+    checkStatus(response.status);
     return response.bytes;
   }
 
   @override
   Future<RepoProbe> probe() async {
-    final response = await _transport.get(
-      _apiUri(const []),
-      headers: _headers,
-      maxBytes: maxListingBytes,
-    );
-    _checkStatus(response.status);
-    final json = _decodeJson(response.bytes);
+    final json = await getJson(const []);
     if (json is! Map) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -191,14 +192,8 @@ class GitHubForge implements GitForge {
 
   @override
   Future<String> headSha(String branch) async {
-    _requireRef(branch);
-    final response = await _transport.get(
-      _apiUri(['branches', branch]),
-      headers: _headers,
-      maxBytes: maxListingBytes,
-    );
-    _checkStatus(response.status);
-    final json = _decodeJson(response.bytes);
+    requireRef(branch);
+    final json = await getJson(['branches', branch]);
     final commit = json is Map ? json['commit'] : null;
     final sha = commit is Map ? commit['sha'] : null;
     if (sha is! String || sha.trim().isEmpty) {
@@ -220,8 +215,8 @@ class GitHubForge implements GitForge {
     required List<String> deletes,
     required String baseSha,
   }) async {
-    _requireRef(branch);
-    _requireRef(baseSha);
+    requireRef(branch);
+    requireRef(baseSha);
     if (upserts.isEmpty && deletes.isEmpty) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -244,7 +239,7 @@ class GitHubForge implements GitForge {
     //     tree krijgen ze een pad.
     final entries = <Map<String, Object?>>[];
     for (final entry in upserts.entries) {
-      final blob = await _post(
+      final blob = await post(
         ['git', 'blobs'],
         {'content': base64Encode(entry.value), 'encoding': 'base64'},
       );
@@ -287,7 +282,7 @@ class GitHubForge implements GitForge {
     }
 
     // 3 — de nieuwe boom, en 4 — de commit eronder.
-    final tree = await _post(
+    final tree = await post(
       ['git', 'trees'],
       {'base_tree': baseTree, 'tree': entries},
     );
@@ -298,7 +293,7 @@ class GitHubForge implements GitForge {
         'Tree aangemaakt maar zonder sha',
       );
     }
-    final commit = await _post(
+    final commit = await post(
       ['git', 'commits'],
       {
         'message': message,
@@ -317,12 +312,10 @@ class GitHubForge implements GitForge {
     // 5 — de branch verzetten. Zónder force, want dát is de concurrency-guard:
     // is er ondertussen op de branch gecommit, dan is onze commit (met de oude
     // basis als ouder) geen fast-forward meer en weigert GitHub met een 422.
-    final response = await _transport.send(
+    final response = await sendJson(
       'PATCH',
-      _apiUri(['git', 'refs', 'heads', branch]),
-      headers: {..._headers, 'Content-Type': 'application/json'},
-      body: utf8.encode(jsonEncode({'sha': commitSha, 'force': false})),
-      maxBytes: maxListingBytes,
+      ['git', 'refs', 'heads', branch],
+      {'sha': commitSha, 'force': false},
     );
     // 422 = geen fast-forward: precies het geval dat we willen betrappen.
     if (response.status == 422 || response.status == 409) {
@@ -333,7 +326,7 @@ class GitHubForge implements GitForge {
             'opende. Haal de nieuwste versie op voordat je opnieuw opslaat.',
       );
     }
-    _checkStatus(response.status);
+    checkStatus(response.status);
     return CommitResult(commitSha);
   }
 
@@ -341,24 +334,24 @@ class GitHubForge implements GitForge {
 
   @override
   Future<List<BranchRef>> listBranches() async {
-    final json = await _getJson(['branches'], query: {'per_page': '100'});
+    final json = await getJson(['branches'], query: {'per_page': '100'});
     if (json is! List) {
       throw const GitForgeException(
         GitForgeError.malformed,
         'Onverwacht antwoord op een branch-listing',
       );
     }
-    _requireEntryCount(json.length);
+    requireEntryCount(json.length);
     return [for (final raw in json) ?_branchRef(raw)];
   }
 
   @override
   Future<BranchRef> createBranch(String name, {required String fromRef}) async {
-    _requireRef(name);
-    _requireRef(fromRef);
+    requireRef(name);
+    requireRef(fromRef);
     // GitHub wil een sha, geen naam: eerst oplossen.
     final sha = await _resolveToSha(fromRef);
-    final json = await _post(
+    final json = await post(
       ['git', 'refs'],
       {'ref': 'refs/heads/${name.trim()}', 'sha': sha},
     );
@@ -375,14 +368,14 @@ class GitHubForge implements GitForge {
 
   @override
   Future<List<TagRef>> listTags() async {
-    final json = await _getJson(['tags'], query: {'per_page': '100'});
+    final json = await getJson(['tags'], query: {'per_page': '100'});
     if (json is! List) {
       throw const GitForgeException(
         GitForgeError.malformed,
         'Onverwacht antwoord op een tag-listing',
       );
     }
-    _requireEntryCount(json.length);
+    requireEntryCount(json.length);
     return [for (final raw in json) ?_tagRef(raw)];
   }
 
@@ -392,12 +385,12 @@ class GitHubForge implements GitForge {
     required String target,
     required String message,
   }) async {
-    _requireRef(name);
-    _requireRef(target);
+    requireRef(name);
+    requireRef(target);
     final sha = await _resolveToSha(target);
     // Een geannoteerde tag is bij GitHub twee stappen: het tag-object, en dan
     // de ref die ernaar wijst.
-    final tag = await _post(
+    final tag = await post(
       ['git', 'tags'],
       {'tag': name.trim(), 'message': message, 'object': sha, 'type': 'commit'},
     );
@@ -408,7 +401,7 @@ class GitHubForge implements GitForge {
         'Tag gemaakt maar zonder sha',
       );
     }
-    await _post(
+    await post(
       ['git', 'refs'],
       {'ref': 'refs/tags/${name.trim()}', 'sha': tagSha},
     );
@@ -423,9 +416,9 @@ class GitHubForge implements GitForge {
     required String title,
     String body = '',
   }) async {
-    _requireRef(head);
-    _requireRef(base);
-    final json = await _post(
+    requireRef(head);
+    requireRef(base);
+    final json = await post(
       ['pulls'],
       {'head': head, 'base': base, 'title': title, 'body': body},
     );
@@ -456,16 +449,14 @@ class GitHubForge implements GitForge {
     // gesloten en is dat een omweg.
     String? head;
     if (deleteBranch) {
-      final pr = _pullRef(await _getJson(['pulls', '$number']));
+      final pr = _pullRef(await getJson(['pulls', '$number']));
       head = pr?.head.isEmpty ?? true ? null : pr!.head;
     }
 
-    final response = await _transport.send(
+    final response = await sendJson(
       'PUT',
-      _apiUri(['pulls', '$number', 'merge']),
-      headers: {..._headers, 'Content-Type': 'application/json'},
-      body: utf8.encode(jsonEncode({'merge_method': method.name})),
-      maxBytes: maxListingBytes,
+      ['pulls', '$number', 'merge'],
+      {'merge_method': method.name},
     );
     // 405 = niet mergebaar (reviews, checks), 409 = de kop is verzet.
     if (response.status == 405 || response.status == 409) {
@@ -475,16 +466,16 @@ class GitHubForge implements GitForge {
         'conflicten op de forge.',
       );
     }
-    _checkStatus(response.status);
+    checkStatus(response.status);
 
     if (head != null) {
       // Best-effort: de merge is al geland, en een blijvende branch is hinder,
       // geen verlies.
       try {
-        await _transport.send(
+        await transport.send(
           'DELETE',
-          _apiUri(['git', 'refs', 'heads', head]),
-          headers: _headers,
+          apiUri(['git', 'refs', 'heads', head]),
+          headers: headers,
           body: const [],
           maxBytes: maxListingBytes,
         );
@@ -502,9 +493,9 @@ class GitHubForge implements GitForge {
 
   @override
   Future<PullRequestRef?> pullRequestForBranch(String head) async {
-    _requireRef(head);
+    requireRef(head);
     // GitHub filtert op `owner:branch`; dat scheelt de hele lijst doorlopen.
-    final json = await _getJson(
+    final json = await getJson(
       ['pulls'],
       query: {'state': 'open', 'head': '${config.owner}:${head.trim()}'},
     );
@@ -514,7 +505,7 @@ class GitHubForge implements GitForge {
         'Onverwacht antwoord op een pull-request-listing',
       );
     }
-    _requireEntryCount(json.length);
+    requireEntryCount(json.length);
     for (final raw in json) {
       final pr = _pullRef(raw);
       if (pr != null && pr.head == head.trim()) return pr;
@@ -526,7 +517,7 @@ class GitHubForge implements GitForge {
 
   /// De boom van een commit — de basis waarop [commitFiles] voortbouwt.
   Future<String> _treeShaOf(String commitSha) async {
-    final json = await _getJson(['git', 'commits', commitSha]);
+    final json = await getJson(['git', 'commits', commitSha]);
     final tree = json is Map ? json['tree'] : null;
     final sha = tree is Map ? tree['sha'] : null;
     if (sha is! String) {
@@ -545,34 +536,6 @@ class GitHubForge implements GitForge {
     final r = ref.trim();
     if (RegExp(r'^[0-9a-f]{7,40}$').hasMatch(r)) return r;
     return headSha(r);
-  }
-
-  Future<Object?> _getJson(
-    List<String> segments, {
-    Map<String, String>? query,
-  }) async {
-    final response = await _transport.get(
-      _apiUri(segments, query: query),
-      headers: _headers,
-      maxBytes: maxListingBytes,
-    );
-    _checkStatus(response.status);
-    return _decodeJson(response.bytes);
-  }
-
-  Future<Object?> _post(
-    List<String> segments,
-    Map<String, Object?> body,
-  ) async {
-    final response = await _transport.send(
-      'POST',
-      _apiUri(segments),
-      headers: {..._headers, 'Content-Type': 'application/json'},
-      body: utf8.encode(jsonEncode(body)),
-      maxBytes: maxListingBytes,
-    );
-    _checkStatus(response.status);
-    return _decodeJson(response.bytes);
   }
 
   BranchRef? _branchRef(Object? raw) {
@@ -609,79 +572,6 @@ class GitHubForge implements GitForge {
     );
   }
 
-  void _requireEntryCount(int count) {
-    if (count > maxListingEntries) {
-      throw const GitForgeException(
-        GitForgeError.tooLarge,
-        'Te veel bestanden in één listing',
-      );
-    }
-  }
-
-  void _checkStatus(int status) {
-    if (status >= 200 && status < 300) return;
-    if (status == 401) {
-      throw GitForgeException(
-        GitForgeError.auth,
-        'Aanmelden bij GitHub mislukt ($status). Controleer je token en of het '
-        'toegang heeft tot ${config.slug}.',
-      );
-    }
-    if (status == 403) {
-      throw const GitForgeException(
-        GitForgeError.forbidden,
-        'Token geldig, maar zonder rechten hiervoor (403).',
-      );
-    }
-    if (status == 404) {
-      // Ook bij een repo die het token niet mag zien: GitHub verraadt liever
-      // niet dát hij bestaat. De melding mag dat niet als zekerheid brengen.
-      throw const GitForgeException(
-        GitForgeError.notFound,
-        'Niet gevonden — of je token heeft er geen toegang toe.',
-      );
-    }
-    if (status == 409) {
-      throw const GitForgeException(
-        GitForgeError.notFound,
-        'Repository is leeg.',
-      );
-    }
-    if (status >= 500) {
-      throw GitForgeException(GitForgeError.server, 'Serverfout ($status)');
-    }
-    throw GitForgeException(GitForgeError.server, 'Onverwachte status $status');
-  }
-
-  Object? _decodeJson(Uint8List bytes) {
-    if (bytes.isEmpty) return null;
-    try {
-      return jsonDecode(utf8.decode(bytes));
-    } catch (e) {
-      throw const GitForgeException(
-        GitForgeError.malformed,
-        'Antwoord van GitHub is geen geldige JSON',
-      );
-    }
-  }
-
-  void _requireRef(String ref) {
-    final r = ref.trim();
-    if (r.isEmpty ||
-        r.length > 255 ||
-        r.startsWith('-') ||
-        r.contains('..') ||
-        r.contains('?') ||
-        r.contains('#') ||
-        r.contains('&') ||
-        r.codeUnits.any((c) => c < 0x20 || c == 0x7f)) {
-      throw const GitForgeException(
-        GitForgeError.malformed,
-        'Ongeldige branch-, tag- of commitnaam',
-      );
-    }
-  }
-
   @override
-  void close() => _transport.close();
+  void close() => transport.close();
 }

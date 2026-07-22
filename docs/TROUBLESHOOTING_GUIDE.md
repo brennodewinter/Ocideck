@@ -1,5 +1,7 @@
 # OciDeck — Troubleshooting Guide
 
+> **Status:** procedure, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This document provides solutions for common issues and problems users may encounter while using OciDeck.
 
 ## Overview
@@ -26,8 +28,11 @@ This guide addresses frequently encountered problems, their causes, and step-by-
    - Verify slide separators are correctly formatted (`---` on their own line)
 
 3. **Recovery Options**:
-   - Use crash recovery snapshots (automatically generated)
-   - Restore from Git repository if available
+   - Use crash recovery snapshots (automatically generated — desktop only; the
+     browser build writes none, because it has no folder to write them to)
+   - Restore from Git repository if available — but note that a commit carries
+     the markdown, the pooled images and the chart data, not video, audio, the
+     drawings on your slides or the user notes
    - Try opening backup copies
 
 ### Export Problems
@@ -36,8 +41,17 @@ This guide addresses frequently encountered problems, their causes, and step-by-
 - Exports fail or produce corrupted files  
 - Missing content in exported documents
 - Error messages during export process
+- **The export sits still and renders nothing at all**
 
 **Solutions**:
+0. **Keep the window visible while exporting** (if nothing renders at all):
+   PDF and PPTX are produced by letting the real slide preview paint and
+   capturing the result, so the export needs the app to actually draw frames.
+   Minimise the window, put another window over it, or switch to a different
+   Space, and macOS stops delivering frames — the export then has nothing to
+   capture. It now gives up after 20 seconds with an explicit message instead
+   of waiting forever, but the fix is simply to leave the window in front.
+   HTML export is unaffected: it does not rasterize.
 1. **Check Classification Settings**:
    - Verify TLP levels aren't blocking exports
    - Confirm privacy disposition settings allow the export  
@@ -282,23 +296,18 @@ repository is the documentation. Security issues follow a different route; see
    - Address issues before they become critical problems
    - Optimize presentation content proactively  
 
-## When to Seek Professional Help
+## If this guide does not solve it
 
-### Escalation Path
+There is one channel: an issue in the Forgejo tracker. Include what you tried
+from this guide, the exact steps that reproduce the problem, your operating
+system, and the commit you built from — the app displays no version number, so
+the commit is the only way to say which OciDeck you are running. A security
+problem is the exception and goes to the address in
+[`../SECURITY.md`](../SECURITY.md) instead of a public issue.
 
-1. **Simple Issues**:
-   - Try troubleshooting steps in this guide first
-   - Check documentation and FAQs for known solutions  
-
-2. **Complex Problems**:  
-   - If issues persist after standard troubleshooting
-   - For systematic or recurring problems across multiple files/instances
-   - When performance degradation indicates deeper system issues
-
-3. **Reporting Bugs**:
-   - Submit detailed bug reports with reproduction steps
-   - Include relevant logs and environment information  
-   - Follow project contribution guidelines for issue tracking
-
-This guide should help you resolve the most common problems. For anything that
-persists, open an issue in the Forgejo tracker with the details listed above.
+*(Corrected 2026-07-22: this section was headed "When to Seek Professional Help"
+and set out a three-tier escalation path — simple issues, complex problems,
+reporting bugs — as if there were support tiers behind it. There are none. No
+support contract, no paid tier, no second line: the tracker and the security
+address are all there is. The section was of the same generated kind as the
+guides removed on 2026-07-19, so it is replaced by what actually exists.)*

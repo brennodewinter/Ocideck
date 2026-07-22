@@ -20,6 +20,11 @@ class FinalizeSealResult {
 /// "Afronden & verzegelen": explains the one-way finalise + SHA-512 seal and
 /// optionally collects a visual signature. Deliberately does NOT offer an
 /// unfinalise — finalising is one-way in the UI.
+///
+/// De uitleg noemt met opzet het commando waarmee de ontvanger het zegel
+/// narekent. Dit is het moment waarop de gebruiker beslist iets als bewijsstuk
+/// de deur uit te doen, en dan hoort hij te weten wat de ander ermee kan — een
+/// controle die alleen in OciDeck werkt, is voor een ontvanger geen controle.
 class FinalizeSealDialog extends StatefulWidget {
   /// Pre-fills the signature fields (e.g. from the deck's existing
   /// [DocumentSignature] authored on a sign-off slide). Null = start blank.
@@ -159,7 +164,7 @@ class _FinalizeSealDialogState extends State<FinalizeSealDialog> {
         children: [
           Text(
             l10n.d(
-              'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.',
+              'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.',
             ),
             style: const TextStyle(fontSize: 13),
           ),

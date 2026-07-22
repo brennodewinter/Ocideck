@@ -44,7 +44,7 @@ class _PlayOnlyScreen extends ConsumerWidget {
                         if (firstSlide != null)
                           _firstSlideHero(deck, firstSlide, slides.length, ref)
                         else
-                          _emptyHero(l10n, palette),
+                          _emptyHero(l10n, palette, deck),
                         const SizedBox(height: 28),
                         if (deck.title.trim().isNotEmpty) ...[
                           Text(
@@ -172,7 +172,7 @@ class _PlayOnlyScreen extends ConsumerWidget {
     );
   }
 
-  Widget _emptyHero(AppLocalizations l10n, AppPalette palette) {
+  Widget _emptyHero(AppLocalizations l10n, AppPalette palette, Deck deck) {
     return AspectRatio(
       aspectRatio: 16 / 9,
       child: DecoratedBox(
@@ -182,7 +182,7 @@ class _PlayOnlyScreen extends ConsumerWidget {
         ),
         child: Center(
           child: Text(
-            l10n.d('Alle slides zijn overgeslagen — niets om te tonen.'),
+            emptyAudienceReason(l10n, deck, forExport: false),
             textAlign: TextAlign.center,
             style: TextStyle(color: palette.mutedText),
           ),

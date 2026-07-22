@@ -1760,8 +1760,6 @@ const _dutchSourceFi = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Viimeistele ja sinetöi',
   'Verzegelen': 'Sinetöi',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Viimeistele tämä esitys ja laske sisällöstä SHA-512-sinetti. Tämän jälkeen tiedosto lukitaan eikä sitä voi enää muokata; myöhemmät muutokset tulevat näkyviin. Tätä ei voi kumota sovelluksessa.',
   'Handtekening (optioneel)': 'Allekirjoitus (valinnainen)',
   'Naam': 'Nimi',
   'Rol of functie': 'Rooli tai tehtävä',
@@ -1818,6 +1816,99 @@ const _dutchSourceAddFi = <String, String>{
   'links en rechts wisselen per ronde':
       'vasen ja oikea vaihtavat paikkaa joka kierroksella',
   'overeenkomst': 'vastaavuudesta',
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Tässä tekstissä on lukuja. Jakaminen tuottaa',
+  'dia\'s op.': 'diaa.',
+  'Splits op hoofdstukken': 'Jaa luvuittain',
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Tässä deckissä on tekoälytekstiä, jota et ole vielä tarkistanut. Vienti onnistuu silti; tiedosto kertoo siitä itse ja saa nimeensä "-ai-concept".',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Luonnos: sisältää tekoälytekstiä, jota kukaan ei ole vielä tarkistanut',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Viimeistele tämä esitys ja kirjaa SHA-512-sinetti tallennetusta tiedostosta. Tämän jälkeen se lukitaan eikä sitä voi enää muokata; jokainen myöhempi muutos tulee näkyviin. Raportin vastaanottaja tarkistaa sinetin itse sha512sum-komennolla. Tätä ei voi kumota sovelluksessa.',
+  'Zegel en handtekening': 'Sinetti ja allekirjoitus',
+  'Zegel nog niet vastgelegd': 'Sinettiä ei ole vielä kirjattu',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Tallennettua tiedostoa, jota vasten sinetin voisi tarkistaa, ei vielä ole. Tallenna diasarja.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Poisjättö on käytössä: se, minkä tarkistus katsoo henkilötiedoksi, mustataan, eivätkä tämän dian kuvat, video ja ääni mene näytölle tai vientiin. Markdown-tiedostosi säilyttää kaiken.',
+  'Bestand': 'Arkisto',
+  'Venster': 'Ikkuna',
+  'Help': 'Ohje',
+  'Alles selecteren': 'Valitse kaikki',
+  'Plakken': 'Liitä',
+  'Opnieuw': 'Tee uudelleen',
+  'Eigenschappen': 'Ominaisuudet',
+  'Opdrachten…': 'Komennot…',
+  'Opslaan…': 'Tallennetaan…',
+  'Uploaden naar WebDAV…': 'Lähetetään WebDAV-palvelimeen…',
+  'Uploaden naar S3…': 'Lähetetään S3-palveluun…',
+  'Vastleggen in git…': 'Kirjataan gitiin…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Tallennetaan. Uudelleen tallentaminen ei tee mitään, ennen kuin tämä on valmis.',
+  'Klaar — privacy niet gecontroleerd': 'Valmis — yksityisyyttä ei tarkistettu',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Henkilötietoja, erityisiä tietoryhmiä ja salaisuuksia ei ole tarkistettu: yksityisyystarkistus on pois päältä kohdassa Turvallisuus.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Esitykset, jotka pysyvät tavallisina Markdown-tiedostoina: luettavia, haettavia ja avattavissa millä tahansa editorilla.',
+  'sjablonen om mee te beginnen, of leeg': 'mallia aloittamiseen, tai tyhjä',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Mallin esimerkkidiat ovat hollanniksi. Nimi ja kuvaus noudattavat omaa kieltäsi; sisällön muokkaat luonnin jälkeen.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Poisjättö on käytössä: löytyneet tiedot mustataan, eivätkä tämän dian kuvat, video ja ääni mene näytölle tai vientiin. Markdown-tiedostosi säilyttää kaiken.',
+  'Mijn tekst': 'Oma teksti',
+  'Wat zij zien': 'Mitä he näkevät',
+  'Presentatiegegevens': 'Esityksen tiedot',
+  'Open presentatiegegevens': 'Avaa esityksen tiedot',
+  'Motivering van een uitsluiting': 'Poikkeuksen perustelu',
+  'Motivering van een bevestiging': 'Vahvistuksen perustelu',
+  'Tabel koprij, kolom {kolom}': 'Taulukko otsikkorivi, sarake {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Taulukko rivi {rij}, sarake {kolom}',
+  'Via deze website ophalen?': 'Haetaanko tämän sivuston kautta?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Tämän esityksen palvelin ei antanut selaimen lukea tiedostoa suoraan. OciDeck voi välittää osoitteen sille sivustolle, jolta OciDeck itse on peräisin, ja se hakee tiedoston. Silloin tuo sivusto näkee koko osoitteen — jos linkissä on avain tai koodi, sivusto näkee myös sen.',
+  'In de browser kan dit niet worden bewaard':
+      'Tätä ei voi tallentaa selaimessa',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Selaimessa ei ole avainnippua kuten tietokoneessa: sen, minkä OciDeck tallentaisi tähän, voi lukea mikä tahansa tämän sivun skripti. Käytä työpöytäversiota — siellä salaisuus menee oikeasti käyttöjärjestelmän avainnippuun.',
+  'Licenties van derden': 'Kolmansien osapuolten lisenssit',
+  'Alle licentieteksten tonen': 'Näytä kaikki lisenssitekstit',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck itse julkaistaan EUPL-1.2-lisenssillä. Lisäksi se niputtaa kolmansien osapuolten ohjelmistoja: Dart- ja Flutter-paketit, kaksi mukana toimitettua liitännäistä, neljä kirjasinperhettä, yksityisyystarkistuksen kasvomallin ja JavaScriptin, joka kulkee HTML-viennin mukana. Kukin säilyttää oman lisenssinsä.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Tämä tiedosto sisältää kolmansien osapuolten ohjelmistoja ja toisinaan kirjasimen. Alla ovat niihin kuuluvat täydet lisenssitekstit; välitä ne tiedoston mukana.',
+  'Sporen op dit apparaat': 'Jäljet tällä laitteella',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Asetustesi lisäksi OciDeck säilyttää myös viimeisimpien tiedostojen luettelon ja kaatumisen sattuessa palautustiedoston, jossa on esityksesi koko sisältö. Mikään siitä ei poistu tältä laitteelta, mutta täällä se on — selkokielisenä tekstinä, suojattuna käyttäjätililläsi tässä käyttöjärjestelmässä eikä muulla.',
+  'Recent geopende presentaties': 'Viimeksi avatut esitykset',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Luettelo säilyttää jokaisen avatun esityksen koko polun ja luokituksen — yhdessä tiedon siitä, mitä työstät ja kenelle.',
+  'Recente lijst wissen': 'Pyyhi viimeisimpien luettelo',
+  'De recente lijst was al leeg.':
+      'Viimeisimpien tiedostojen luettelo oli jo tyhjä.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'merkintää pyyhitty viimeisimpien tiedostojen luettelosta.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Palautustiedostot sisältävät esitystesi koko sisällön selkokielisenä tekstinä. Ne siivotaan automaattisesti 7 päivän jälkeen, ja siistin lopetuksen yhteydessä heti.',
+  'Alles terugzetten': 'Palauta kaikki',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Pyyhkii kaikki asetukset, viimeisimpien tiedostojen luettelon, palautustiedostot, gitin työkopiot ja salasanat avainnipustasi. Esityksesi jäävät: ne ovat sinun, eivät OciDeckin.',
+  'Zet alles terug naar de begintoestand': 'Palauta kaikki alkutilaan',
+  'Alles terugzetten naar de begintoestand?':
+      'Palautetaanko kaikki alkutilaan?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Asetuksesi, viimeisimpien tiedostojen luettelo, palautustiedostot, gitin työkopiot ja tallennetut salasanat pyyhitään. Tätä ei voi perua. Esityksesi jäävät.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'muutosta ei ole vielä lähetetty git-palvelimelle, ja ne ovat vain tällä laitteella. Nekin katoavat.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Kaikki on palautettu alkutilaan.',
+  'Terugzetten is niet gelukt.': 'Palautus ei onnistunut.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Lähettämätöntä työtä on vielä odottamassa',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Tässä git-yhteydessä on muutoksia, joita ei ole vielä lähetetty palvelimelle. Jos poistat yhteyden, myös työkopio tältä laitteelta katoaa — eikä tätä työtä ole enää missään.',
+  'Verbinding behouden': 'Säilytä yhteys',
+  'Toch verwijderen': 'Poista silti',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',
@@ -1877,6 +1968,33 @@ const _dutchSourceAddFi = <String, String>{
       'luettelee, mitä on jätetty pois, ilman itse arvoja. Tämän tiedoston saa lähettää raportin mukana.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'sisältää avaimet, joilla jokainen peitetty arvo voidaan laskea takaisin. Älä lähetä tätä tiedostoa mukana: silloin peittäminen kumoutuu. Säilytä se lähteen luona.',
+  'slides': 'diaa',
+  'Achtergehouden': 'Pidätetty',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Pidätetty: luokiteltu tiukemmin kuin esitys',
+  '1 slide achtergehouden door haar TLP': '1 dia pidätetty sen TLP:n vuoksi',
+  'slides achtergehouden door hun TLP': 'diaa pidätetty niiden TLP:n vuoksi',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Nämä diat jäävät pois esitettäessä, vietäessä ja paketista. Nosta esityksen TLP-tasoa kohdassa Esityksen tiedot, jotta ne tulevat mukaan.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Kaikki diat on pidätetty niiden TLP-luokituksen vuoksi, joten näytettävää ei ole.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Kaikki diat on pidätetty niiden TLP-luokituksen vuoksi, joten vietävää ei ole.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Kaikki diat on ohitettu tai pidätetty niiden TLP-luokituksen vuoksi, joten näytettävää ei ole.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Kaikki diat on ohitettu tai pidätetty niiden TLP-luokituksen vuoksi, joten vietävää ei ole.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Kaavion lukuja ei tallennettu — ne ovat enää vain tässä ikkunassa:',
+  'Niet alles gaat mee naar git': 'Kaikki ei mene gitiin',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Nämä osat eivät päädy committiin eivätkä ole sen jälkeen repositoriossa:',
+  'Tekeningen op slides': 'Piirrokset dioilla',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Ne jäävät tähän ikkunaan. Tallenna esitys myös tiedostona tai .ocideck-pakettina, jotta ne säilyvät.',
+  'Toch opslaan': 'Tallenna silti',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Selaimessa ei ole kaatumispalautusta: jos suljet tämän välilehden, tallentamaton työ katoaa. Tallenna esityksesi itse.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Paikallinen CVE-tietokanta (käynnistät latauksen itse): OciDeck hakee joukkotiedot osoitteen api.github.com kautta ja sen julkaisutiedoston, johon osoite viittaa.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

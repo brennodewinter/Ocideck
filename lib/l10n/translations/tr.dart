@@ -900,8 +900,6 @@ const _dutchSourceTr = {
       'İndirilenler klasörünüze indirme olarak kaydedildi.',
   'Afronden & verzegelen': 'Sonlandır & mühürle',
   'Verzegelen': 'Mühürle',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Bu sunumu sonlandırın ve içeriği üzerinde bir SHA-512 mührü hesaplayın. Ardından dosya kilitlenir ve artık düzenlenemez; sonraki değişiklikler görünür hale gelir. Bu işlem uygulamada geri alınamaz.',
   'Handtekening (optioneel)': 'İmza (isteğe bağlı)',
   'Naam': 'Ad',
   'Rol of functie': 'Rol veya görev',
@@ -2799,6 +2797,96 @@ const _dutchSourceAddTr = <String, String>{
   'goed vanaf': 'doğru',
   'links en rechts wisselen per ronde': 'sol ve sağ her turda yer değiştirir',
   'overeenkomst': 'benzerlikten itibaren',
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Bu metin bölümler içeriyor. Bölme işlemi',
+  'dia\'s op.': 'slayt oluşturur.',
+  'Splits op hoofdstukken': 'Bölümlere göre ayır',
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Bu sunumda henüz gözden geçirmediğiniz AI metni var. Yine de dışa aktarabilirsiniz; dosya bunu kendisi belirtir ve adına "-ai-concept" eklenir.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Taslak: kimsenin henüz gözden geçirmediği AI metni içeriyor',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Bu sunumu sonlandırın ve kaydedilen dosya üzerinde bir SHA-512 mührü sabitleyin. Ardından dosya kilitlenir ve artık düzenlenemez; sonraki her değişiklik görünür hale gelir. Raporu alan kişi mührü sha512sum ile kendisi doğrular. Bu işlem uygulamada geri alınamaz.',
+  'Zegel en handtekening': 'Mühür ve imza',
+  'Zegel nog niet vastgelegd': 'Mühür henüz kaydedilmedi',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Mührün karşılaştırılacağı kayıtlı bir dosya henüz yok. Sunumu kaydedin.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Çıkarma açık: denetimin kişisel veri saydığı şeyler karartılır ve bu slayttaki tüm görseller, video ve ses ekrana ya da dışa aktarmaya gitmez. Markdown dosyanız her şeyi saklar.',
+  'Bestand': 'Dosya',
+  'Venster': 'Pencere',
+  'Help': 'Yardım',
+  'Alles selecteren': 'Tümünü seç',
+  'Plakken': 'Yapıştır',
+  'Opnieuw': 'Yinele',
+  'Eigenschappen': 'Özellikler',
+  'Opdrachten…': 'Komutlar…',
+  'Opslaan…': 'Kaydediliyor…',
+  'Uploaden naar WebDAV…': 'WebDAV\'a yükleniyor…',
+  'Uploaden naar S3…': 'S3\'e yükleniyor…',
+  'Vastleggen in git…': 'git\'e işleniyor…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Kaydediliyor. Bu bitene kadar tekrar kaydetmek bir şey yapmaz.',
+  'Klaar — privacy niet gecontroleerd': 'Hazır — gizlilik denetlenmedi',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Kişisel veriler, özel nitelikli veriler ve sırlar için denetim yapılmadı: gizlilik denetimi Güvenlik altında kapalı.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Düz Markdown dosyası olarak kalan sunumlar: okunabilir, aranabilir ve her düzenleyiciyle açılabilir.',
+  'sjablonen om mee te beginnen, of leeg': 'şablonla başlayın ya da boş',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Bir şablonun örnek slaytları Felemenkçedir. Ad ve açıklama kendi dilinizi izler; içeriği oluşturduktan sonra kendiniz düzenlersiniz.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Çıkarma açık: bulunan veriler karartılır ve bu slayttaki tüm görseller, video ve ses ekrana ya da dışa aktarmaya gitmez. Markdown dosyanız her şeyi saklar.',
+  'Mijn tekst': 'Kendi metnim',
+  'Wat zij zien': 'Onların gördüğü',
+  'Presentatiegegevens': 'Sunum bilgileri',
+  'Open presentatiegegevens': 'Sunum bilgilerini aç',
+  'Motivering van een uitsluiting': 'Bir istisnanın gerekçesi',
+  'Motivering van een bevestiging': 'Bir doğrulamanın gerekçesi',
+  'Tabel koprij, kolom {kolom}': 'Tablo başlık satırı, sütun {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tablo satır {rij}, sütun {kolom}',
+  'Via deze website ophalen?': 'Bu site üzerinden alınsın mı?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Bu sunumun sunucusu, tarayıcının dosyayı doğrudan okumasına izin vermedi. OciDeck adresi, kendisinin geldiği siteye iletebilir ve dosyayı o site alır. Böylece o site adresin tamamını görür — bağlantıda bir anahtar veya kod varsa o site onu da görür.',
+  'In de browser kan dit niet worden bewaard': 'Tarayıcıda bu kaydedilemez',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Tarayıcının bir bilgisayardaki gibi anahtar zinciri yoktur: OciDeck\'in buraya kaydedeceği şeyi bu sayfadaki herhangi bir betik okuyabilir. Masaüstü sürümünü kullanın — orada sır gerçekten işletim sisteminin anahtar zincirine gider.',
+  'Licenties van derden': 'Üçüncü taraf lisansları',
+  'Alle licentieteksten tonen': 'Tüm lisans metinlerini göster',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck\'in kendisi EUPL-1.2 ile lisanslıdır. Bunun yanında üçüncü taraf yazılımları da paketler: Dart ve Flutter paketleri, birlikte gelen iki eklenti, dört yazı tipi ailesi, gizlilik denetiminin yüz modeli ve HTML dışa aktarımıyla birlikte giden JavaScript. Her biri kendi lisansını korur.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Bu dosya üçüncü taraf yazılımı ve bazen bir yazı tipi içerir. Bunlara ait tam lisans metinleri aşağıdadır; bu dosyayı iletirken onları da birlikte iletin.',
+  'Sporen op dit apparaat': 'Bu cihazdaki izler',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'OciDeck, ayarlarınızın yanı sıra bir son kullanılanlar listesi de tutar ve bir çökme olursa sunumunuzun tüm içeriğini barındıran bir kurtarma dosyası bırakır. Bunların hiçbiri bu cihazdan çıkmaz, ama burada durur — düz metin olarak, yalnızca bu işletim sistemindeki hesabınızla korunarak.',
+  'Recent geopende presentaties': 'Son açılan sunumlar',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Liste, açılmış olan her sunumun tam yolunu ve sınıflandırmasını saklar — birlikte, neyin üzerinde ve kimin için çalıştığınıza dair bir bilgi.',
+  'Recente lijst wissen': 'Son kullanılanlar listesini sil',
+  'De recente lijst was al leeg.': 'Son kullanılanlar listesi zaten boştu.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'kayıt son kullanılanlar listesinden silindi.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Çökme kurtarma dosyaları, sunumlarınızın tüm içeriğini düz metin olarak barındırır. 7 gün sonra otomatik olarak temizlenir, düzgün bir kapanışta ise hemen.',
+  'Alles terugzetten': 'Her şeyi sıfırla',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Tüm ayarları, son kullanılanlar listesini, kurtarma dosyalarını, git çalışma kopyalarını ve anahtar zincirinizdeki parolaları siler. Sunumlarınız kalır: onlar sizindir, OciDeck\'in değil.',
+  'Zet alles terug naar de begintoestand': 'Her şeyi ilk hâline sıfırla',
+  'Alles terugzetten naar de begintoestand?':
+      'Her şey ilk hâline sıfırlansın mı?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Ayarlarınız, son kullanılanlar listesi, kurtarma dosyaları, git çalışma kopyaları ve kayıtlı parolalar silinecek. Bu geri alınamaz. Sunumlarınız kalır.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'değişiklik henüz bir git sunucusuna gönderilmedi ve yalnızca bu cihazda var. Onlar da gider.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Her şey ilk hâline sıfırlandı.',
+  'Terugzetten is niet gelukt.': 'Sıfırlama başarısız oldu.',
+  'Er wacht nog werk dat niet verstuurd is': 'Gönderilmemiş iş bekliyor',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Bu git bağlantısında sunucuya henüz gönderilmemiş değişiklikler var. Bağlantıyı kaldırırsanız bu cihazdaki çalışma kopyası da gider — ve bu iş hiçbir yerde kalmaz.',
+  'Verbinding behouden': 'Bağlantıyı koru',
+  'Toch verwijderen': 'Yine de kaldır',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Tamam',
@@ -2857,6 +2945,34 @@ const _dutchSourceAddTr = <String, String>{
       'değerlerin kendisi olmadan nelerin çıkarıldığını listeler. Bu dosya raporla birlikte gönderilebilir.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'redakte edilmiş her değerin geri hesaplanmasını sağlayan anahtarları içerir. Bu dosyayı birlikte göndermeyin: redaksiyon böylece geçersiz olur. Onu kaynağın yanında saklayın.',
+  'slides': 'slayt',
+  'Achtergehouden': 'Alıkonuldu',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Alıkonuldu: sunumdan daha katı sınıflandırılmış',
+  '1 slide achtergehouden door haar TLP':
+      '1 slayt TLP\'si nedeniyle alıkonuldu',
+  'slides achtergehouden door hun TLP': 'slayt TLP\'si nedeniyle alıkonuldu',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Bu slaytlar sunumda, dışa aktarımda ve pakette yer almaz. Bunları da dahil etmek için Sunum bilgisi bölümünde sunumun TLP düzeyini yükseltin.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Tüm slaytlar TLP sınıflandırmaları nedeniyle alıkonuldu — gösterilecek bir şey yok.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Tüm slaytlar TLP sınıflandırmaları nedeniyle alıkonuldu — dışa aktarılacak bir şey yok.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Tüm slaytlar atlandı ya da TLP sınıflandırmaları nedeniyle alıkonuldu — gösterilecek bir şey yok.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Tüm slaytlar atlandı ya da TLP sınıflandırmaları nedeniyle alıkonuldu — dışa aktarılacak bir şey yok.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Grafik sayıları kaydedilmedi — artık yalnızca bu pencerede duruyorlar:',
+  'Niet alles gaat mee naar git': 'Her şey git\'e gitmiyor',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Bu bölümler commit\'e girmez ve sonrasında repository\'de bulunmaz:',
+  'Tekeningen op slides': 'Slaytlardaki çizimler',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Bu pencerede kalırlar. Onları saklamak için sunumu ayrıca dosya olarak veya .ocideck paketi olarak kaydedin.',
+  'Toch opslaan': 'Yine de kaydet',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Tarayıcıda çökme kurtarma yoktur: bu sekmeyi kapatırsanız kaydedilmemiş çalışma kaybolur. Sunumunuzu kendiniz kaydedin.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Yerel CVE veri tabanı (indirmeyi siz başlatırsınız): OciDeck toplu verileri api.github.com üzerinden ve o adresin işaret ettiği sürüm dosyasından alır.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

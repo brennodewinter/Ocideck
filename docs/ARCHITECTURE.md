@@ -1,5 +1,7 @@
 # OciDeck — Architecture
 
+> **Status:** current-state description of the system and its layering · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 A high-level map of how OciDeck is put together, for contributors. For how files
 are stored on disk, see [`FILE_FORMAT.md`](FILE_FORMAT.md). For a one-line
 description of the files under `lib/`, see [`SOURCE_MAP.md`](SOURCE_MAP.md).
@@ -96,14 +98,28 @@ a connection that arrives at all can only have come from the pin.
 ```
 lib/
   models/     # Deck, Slide, Settings/ThemeProfile, Chart, Annotation
-  services/   # markdown, markdown_validator, file, export,
-              # classification_policy, classification_enforcement_policy,
-              # export_metadata, image, caption,
-              # description, image_dedup (md5 duplicates),
+  services/   # mostly loose files, one subject each: markdown,
+              # markdown_validator, file, export, classification_policy,
+              # classification_enforcement_policy, export_metadata, image,
+              # caption, description, image_dedup (md5 duplicates),
               # image_reference (.md rewrites), recovery, rasterizer,
               # marp_html, annotation_codec, rehearsal_controller,
-              # webdav (Nextcloud source), s3/ (bucket source),
-              # git/ (forge source), secret_store (keychain)
+              # webdav (Nextcloud source), secret_store (keychain)
+              #
+              # …plus the subdirectories that are a subject of their own:
+              #   privacy/             detect, weigh, redact, gate the export
+              #   git/                 forge source (docs/design/GIT_STORAGE.md)
+              #   s3/                  bucket source (SigV4 + pinned client)
+              #   cve/                 the offline CVE corpus
+              #   cvss/                the CVSS v4.0 scoring engine
+              #   finding_templates/   template content, one file per language
+              #   presentation_search/ the network sources 'Slide zoeken' scans
+              #   info_safety/         what reference data is locally present
+              #   parts/               `part of` spillover, not a cluster
+              #
+              # Each of those (except parts/) carries a header comment naming
+              # what belongs in it and what does not; SOURCE_MAP.md lists which
+              # file holds it.
   state/      # Riverpod providers (top-level + parts/): deck, editor,
               # settings, tabs, clipboard, webdav, s3, git, consent, privacy,
               # info_safety, local_cve, deck_quality, …
@@ -114,16 +130,54 @@ lib/
   utils/      # small shared helpers (clipboard table parsing, URL launching)
 ```
 
+The direction of traffic between those layers is enforced, not just intended: a
+`check_conventions` guard (`layerRules`) fails the build when `models/` imports
+`state/` or `widgets/`, when `services/` imports `state/`, or when `state/`
+imports `widgets/`. All three are a hard zero. A separate ratchet
+(`serviceUiImportBaseline`, now 4) counts UI imports inside `services/`; the
+remaining four are in `slide_rasterizer`, which paints real widgets into an
+image and therefore has the widget tree as its subject.
+
+Together those keep the core headless: runnable and testable without pumping a
+widget tree, and acyclic between layers. They held on discipline alone until
+2026-07-22, which is exactly the kind of invariant a reviewer eventually misses.
+
 ## Data model
 
 - **`Deck`** holds metadata, a list of **`Slide`**s, the active **`ThemeProfile`**,
-  the deck-wide TLP level, and an in-memory **annotation layer** (`Map<slideId,
-  List<InkStroke>>`) that is *never* serialized into the Markdown.
+  the deck-wide TLP level, and an **annotation layer** (`Map<slideId,
+  List<InkStroke>>`) that is *never* serialized into the Markdown — it goes to
+  its own sidecar on save, and into the autosave snapshot in between.
 - **`Slide`** is a single immutable value with a `SlideType` and typed fields. A
   few types reuse `customMarkdown` for their payload: free-Markdown (raw),
   `code` (the source), `chart` (the JSON spec), `cockpit` (the JSON spec of
   its instrument meters), and `question` (the JSON quiz spec — kind, prompt,
   answers, option count, time limit, and the match threshold for a typed answer).
+  answers, option count, time limit).
+- A couple of `Slide` fields exist **only for rendering** and never reach a saved
+  file: `mediaRedacted`, set by the privacy projection because an emptied image
+  path alone cannot tell the renderer whether a photo was removed or never chosen,
+  and `renderPage`, set by `expandRichTextForRender` to say which page of a
+  paginated rich-text body this copy draws. `renderPage` is not serialized at all;
+  `mediaRedacted` is written as `<!-- ocideck_media_redacted -->` under `forExport`
+  only, so the HTML export can draw the black block the rasterized exports draw
+  themselves. Neither is carried over by `Slide.duplicate`.
+- **"Which images does this slide use" has one definition**,
+  `services/slide_image_refs.dart` (added 2026-07-22), and it is not
+  `imagePath` + `imagePath2`: a rich-text body may carry `![…](…)` of its own
+  (FILE_FORMAT § *Rich text*), and those are slide images too. `slideImageRefs` /
+  `slideImagePaths` read the set; `rewriteSlideImagePaths` /
+  `rewriteInlineImagePaths` rewrite it — a caller that can enumerate must be able
+  to rewrite, or it leaves an inline path pointing nowhere. A dozen or so files
+  had spelled the field pair out by hand, and each one that missed the body
+  failed in its own direction: the privacy projection let a redacted slide keep
+  its picture, the git pool wrote a path into `deck.md` that only the author's
+  machine could resolve, the web `mem:` sweep freed bytes still being drawn, the
+  save and package paths shipped a deck with a hole in it, and the library's
+  "0 slides use this" invited a deletion.
+  `services/image_usage.dart` sits on top of it for the library's two questions
+  (who uses this file, and repoint them), which existed twice with the same blind
+  spot.
 - **Question slides** are interactive. The authored `QuestionSpec` round-trips in
   `customMarkdown`; the live per-presentation state (`QuestionView` — the options
   drawn, the pick or the typed text, correct/wrong, timer) is **session-only** and
@@ -214,8 +268,16 @@ the key thing to understand before touching rendering:
    also seeks to the segment start and stops at the segment end (the per-slide
    trim window that powers "cut a video across slides"). YouTube/Vimeo play in a
    second on-screen WebView (`_VideoEmbedPreview`, the same pattern as the
-   Mermaid host) wired to the provider's iframe API for end-detection and
-   playhead reporting; remote rendering is gated by the **Online media** setting.
+   Mermaid host); remote rendering is gated by the **Online media** setting. Both
+   embeds are a bare iframe on the URL `VideoSource.embedUri` builds. End
+   detection and playhead reporting come from the provider: Vimeo through its
+   `player.js` API, YouTube through the player's own `postMessage` channel
+   (`enablejsapi=1`) with **no** script fetched from YouTube — that script came
+   from `www.youtube.com` and put the player itself on that origin, which is the
+   one the `youtube-nocookie.com` variant exists to avoid (*corrected
+   2026-07-22*). `_youTubePlayerNavigationAllowed` matches on host, not
+   substring, and refuses `www.youtube.com` so the player's "Watch on YouTube"
+   link cannot navigate the slide there.
 2. **HTML export** — `services/marp_html_service.dart` produces a single `.html`
    that renders in a browser using inlined JavaScript (marked, highlight.js,
    mermaid, MathJax), inlined CSS and an inlined font. Charts are pre-rendered to
@@ -226,6 +288,37 @@ the key thing to understand before touching rendering:
 
 Both worlds converge at one chokepoint: `services/export_service.dart`
 (`ExportService.export()`) is the only place that writes an export.
+
+### Render-time pagination
+
+What an export enumerates is not the deck's slide list.
+`_MainLayoutState._expandForExport` (`widgets/app_shell_main_layout.dart`) runs
+`expandFindingsForRender` (`services/finding_pagination.dart`) and then
+`expandRichTextForRender` (`services/rich_text_layout.dart`) over the chosen
+slides, and that expanded list is the deck the privacy projection is taken of —
+so it is what the rasterizer walks and what the export's markdown is generated
+from. Both transforms are pure and leave the deck itself alone.
+
+The reason is the same in both cases: a finding whose prose overflows, and a
+rich-text body longer than one slide, are *edited* as one slide but must be
+*rendered* as several at full size. The editor preview and the presenter page
+through those pages themselves; a surface that enumerates slides cannot, and
+until 2026-07-22 the export therefore rendered the first page of a paginated
+rich-text slide and left the rest out of the file.
+
+Two consequences worth knowing:
+
+- The footer's page number is the slide's **position in the expanded list**
+  (`SlideRasterizer` hands `SlidePreviewWidget` `i + 1` and `slides.length`), so
+  continuation pages are counted like any other slide.
+- Each rich-text page copy keeps the *whole* body and the original slide id, and
+  carries only `renderPage`. The page split and the shared font scale are
+  properties of the body as a whole — one page's markdown in isolation would be
+  scaled on its own and the text would jump from page to page. Presenting expands
+  findings only (`widgets/shell/shell_actions.dart`), because the presenter pages
+  through a rich-text slide itself; `SlidePreviewWidget._effectivePage` lets a set
+  `renderPage` win over the page a surface paged to, and the two never occur
+  together.
 
 ### Classification enforcement
 
@@ -252,6 +345,18 @@ control visibility via `slideVisibleAtTlp`).
 metadata and passed into PDF (`pw.Document` title/author/subject/keywords/creator/producer),
 PPTX core properties, and HTML `<meta>` tags. HTML also gets a fixed
 `.tlp-export-banner` when classified.
+
+The same object carries the **unreviewed-AI declaration**, counted from
+`Slide.aiAssistedFields` (`unreviewedAiSlideCount`). It rides the existing
+channels rather than adding a new one: the keyword `kAiDraftKeyword` joins
+`exportKeywords()`, `kAiDraftSubjectNote` is appended to `subject()` behind the
+TLP prefix, `htmlAiMarking` emits `<meta name="ai-generated">` beside
+`ai-generated-slides`, `MarpHtmlService._aiBanner` renders an
+`.ai-export-banner` (offset below the TLP banner when there is one, at the top
+when there is not), and `fileSuffix` puts `-ai-concept` in the filename that
+`ExportService.export` composes. Every one of them is empty when the count is
+zero, so a reviewed deck exports exactly as before. The count is taken from the
+**projected** deck the export dialog holds, so the redacted copy declares it too.
 
 ### Visual TLP marking
 
@@ -330,7 +435,16 @@ To keep the `.md` pure Marp, five kinds of data live beside it (see
 - **User notes** — `<name>.user-notes.json` (`services/user_notes_codec.dart`).
   In the visual editor, slides with user notes are marked on thumbnails in the
   slide list (`widgets/slides/slide_thumbnail.dart`).
-- **Linked chart data** — `data/*.csv` (the living source for a chart).
+- **Linked chart data** — `data/*.json` for anything new, `data/*.csv` for a deck
+  that already links one (the living source for a chart).
+
+The last two carry a consequence worth stating where the layers are listed: a
+commit to a git repository takes `deck.md`, the pooled images and the chart data
+— and **not** the ink or the user-notes sidecar, since nothing in `services/git/`
+writes them. `gitDeckOmissions` counts what stays behind and the save path asks
+before committing (`design/GIT_STORAGE.md` §9.1). The ink and the notes *are*
+carried in an autosave snapshot, because both live outside the markdown and
+drawing alone already makes a deck dirty.
 
 ## Git storage (`services/git/`)
 
@@ -366,6 +480,17 @@ surface takes a raw `Deck`/`List<Slide>`, so redaction cannot be bypassed by
 forgetting a call. `forExternalProcessing(...)` is the stricter variant for
 hand-off outside the app.
 
+The boundary is about what *leaves*, so the author's own editor sits on the
+source side: the preview, the thumbnails and the slide list render the raw deck,
+because a screen that blacks out your own sentence leaves you nothing to correct.
+`services/privacy/privacy_preview.dart` is the one deliberate crossing back —
+`audiencePreviewSlide` runs a *single* slide through `forAudience` and hands the
+projected `Slide` to the preview, on request, so the author can look at the
+recipient's version. It projects one slide rather than the deck because the
+projection scans, and rescanning a deck on every keystroke in the editor beside
+it would make the preview unusable; the scanner escalates within a slide, so the
+result for that slide is the same either way.
+
 The type says a deck went through the boundary; it does not say the boundary
 looked at every field. That second half is a list written by hand in three
 places — the scanner's fragments, the projection, and the redaction manifest —
@@ -385,15 +510,21 @@ cloud rules, fail-closed on web); `utils/zip_encryption.dart` backs encrypted
 Two upstream plugins are forked into `third_party/` and wired via `pubspec.yaml`
 (path dependency / `dependency_overrides`):
 
-- **`desktop_multi_window`** (MixinNetwork) — vendored fork with
+- **`desktop_multi_window`** (MixinNetwork, **Apache-2.0**) — vendored fork with
   `window_setFrame`, `window_coverScreen` (borderless fill of a chosen screen),
   and `window_close` on **macOS, Windows, and Linux**. macOS additionally tracks
   the mouse for non-key windows so chart hover works on the beamer.
-- **`screen_retriever_macos`** (leanflutter) — a packaging fix for recent
-  Xcode/CocoaPods.
+- **`screen_retriever_macos`** (leanflutter, MIT) — a Swift Package Manager
+  layout added for recent Xcode/CocoaPods; no upstream file edited.
 
-If you bump either upstream, re-apply the local changes (they're small and
-documented in the diff) and re-test the dual-screen presenter.
+Each fork carries a `MODIFICATIONS.md` naming the upstream commit it descends
+from and every local change, and — for the Apache-2.0 one — each changed file
+opens with the §4(b) notice that licence requires. The SBOM records the same
+commit plus a SHA-256 tree hash of the directory.
+
+If you bump either upstream, re-apply the local changes, update
+`MODIFICATIONS.md` and `_forkOrigins` in `tool/sbom_build.dart`, run `make sbom`,
+and re-test the dual-screen presenter.
 
 ## Information-security module (optional, off by default)
 
@@ -415,17 +546,26 @@ the existing rails rather than adding a parallel stack:
   compliance-analyzer derivations, and the audit-dossier index builder
   (`services/audit_dossier.dart`).
 - **Document integrity** — `services/document_integrity.dart` seals a finalised
-  deck with a SHA-512 hash over the canonicalised content (front matter
-  `ocideck_finalized` / `ocideck_seal_*`), re-verified on open. An optional **RFC
-  3161** timestamp (`services/rfc3161_timestamp.dart`, with a hand-rolled ASN.1
-  DER codec in `utils/asn1_der.dart` — no new dependency) anchors that hash in
-  time; OciDeck only produces and verifies, never contacts a TSA itself.
+  deck with a SHA-512 hash over the **bytes of the `.md`**, recorded beside the
+  file in `<name>.seal.json` (`services/seal_codec.dart`) together with the
+  visible signature. Because the seal sits outside the file it covers, a
+  recipient recomputes it with `sha512sum` — no OciDeck, no specification to
+  replay. Re-verified on open by comparing that value with the hash of the bytes
+  just read. An optional **RFC 3161** token
+  (`services/rfc3161_timestamp.dart`, with a hand-rolled ASN.1 DER codec in
+  `utils/asn1_der.dart` — no new dependency) binds the hash to a claimed time;
+  OciDeck compares the token's imprint and nothing else — no CMS signature, no
+  certificate chain — and never contacts a TSA itself.
 - **Audit dossier** — `parts/file_service_dossier.dart` reuses the AES-256
   package builder to bundle the sealed report, its evidence and the hash tables
   into one encrypted `.ocideck` archive plus an `AUDIT_DOSSIER.md` index.
 - **Optional AI** — a shared, off-by-default backend (`services/ai_*`) drafts
   finding text and image alt-text behind the outbound-privacy consent; drafts are
-  marked `ocideck_ai_assisted` and block sealing until a human reviews them.
+  marked `ocideck_ai_assisted` and block sealing until a human reviews them. The
+  marker also survives the file boundary: while it is present, every PDF, PPTX
+  and HTML export declares it in its document properties and its filename (see
+  § Classification enforcement). Export itself is not blocked — sealing is a statement,
+  sending a draft to a reviewer is the normal way to get it cleared.
 
 ## Localization
 

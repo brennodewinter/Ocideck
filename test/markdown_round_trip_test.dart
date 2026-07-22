@@ -9,10 +9,12 @@ import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/scorecard_spec.dart';
 import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/seal_record.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/timeline.dart';
 import 'package:ocideck/services/cvss/cvss4.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/seal_codec.dart';
 
 /// Serialize a single slide to markdown and parse it straight back.
 Slide _roundTrip(Slide slide) {
@@ -507,23 +509,21 @@ void main() {
       expect(deck.miauwWaivers, {'1.3': 'reden'});
     });
 
-    test(
-      'the RFC3161 timestamp token round-trips through the front matter',
-      () {
-        final service = MarkdownService();
-        const token = 'MIAFAKEtoken-base64url_';
-        final markdown = service.generateDeck(
-          Deck(
-            title: 'Pentest',
-            sealHash: 'abc123',
-            sealTimestampToken: token,
-            slides: [Slide.create(SlideType.title)],
-          ),
-        );
-        expect(markdown, contains('ocideck_seal_tsr: $token'));
-        expect(service.parseDeck(markdown)!.sealTimestampToken, token);
-      },
-    );
+    test('een oude seal_tsr wordt nog gelezen, nooit meer geschreven', () {
+      // Het token is base64-DER: ondoorzichtig, en het gaat over het document
+      // in plaats van erin. Het opwaardeerpad is hetzelfde als bij de MIAUW-
+      // sleutels — lezen kan nog, schrijven niet meer.
+      final service = MarkdownService();
+      const token = 'MIAFAKEtoken-base64url_';
+      const oud =
+          '---\n'
+          'marp: true\n'
+          'ocideck_seal_tsr: $token\n'
+          '---\n\n# T\n';
+      final deck = service.parseDeck(oud)!;
+      expect(deck.sealTimestampToken, token);
+      expect(service.generateDeck(deck), isNot(contains('ocideck_seal_tsr')));
+    });
 
     test('a deck without a timestamp writes no seal_tsr key', () {
       final markdown = MarkdownService().generateDeck(
@@ -590,6 +590,65 @@ void main() {
       expect(markdown, contains('ocideck_list_style: richText'));
       expect(markdown, contains('images/portret.png'));
       expect(markdown, contains('Dit is **vet** tekst'));
+    });
+
+    test('an image inside the text survives next to the side image', () {
+      // De zij-afbeelding staat in `<div class="split-image">`; een `![…]` in de
+      // tekst hoort daar niets mee te maken. Vroeger gold "de eerste `![…]` op
+      // een split-slide is de zij-afbeelding", en dan werd de afbeelding in de
+      // lopende tekst opgeslokt en verdween hij uit de body.
+      const body =
+          'Kijk naar deze grafiek:\n\n'
+          '![De omzet per kwartaal](images/grafiek.png)\n\n'
+          'En dat verklaart het verschil.';
+      final out = _roundTrip(
+        Slide.create(SlideType.bulletsImage).copyWith(
+          listStyle: ListStyle.richText,
+          customMarkdown: body,
+          imagePath: 'images/portret.png',
+        ),
+      );
+      expect(out.customMarkdown, body);
+      expect(
+        out.imagePath,
+        'images/portret.png',
+        reason: 'de zij-afbeelding blijft de zij-afbeelding',
+      );
+    });
+
+    test('the side image survives every combination of title and body', () {
+      // De lege body is het randgeval: de kopfase van de parser slikt elke
+      // `<div`-regel, en zonder body is die fase n\u00f3g actief wanneer
+      // `<div class="split-image">` langskomt. De zij-afbeelding viel dan in de
+      // body-tak en was na opslaan-en-heropenen weg.
+      for (final title in ['', 'Titel']) {
+        for (final body in ['', 'Tekst.']) {
+          final out = _roundTrip(
+            Slide.create(SlideType.bulletsImage).copyWith(
+              listStyle: ListStyle.richText,
+              title: title,
+              customMarkdown: body,
+              imagePath: 'images/photo.png',
+            ),
+          );
+          final where = 'titel=<$title> body=<$body>';
+          expect(out.imagePath, 'images/photo.png', reason: where);
+          expect(out.customMarkdown, body, reason: where);
+          expect(out.title, title, reason: where);
+        }
+      }
+    });
+
+    test('a text image alone does not become the side image', () {
+      const body =
+          'Een dia zonder zij-afbeelding:\n\n![Alt](images/in-tekst.png)';
+      final out = _roundTrip(
+        Slide.create(
+          SlideType.bulletsImage,
+        ).copyWith(listStyle: ListStyle.richText, customMarkdown: body),
+      );
+      expect(out.customMarkdown, body);
+      expect(out.imagePath, isEmpty);
     });
 
     test('twoImages slide keeps both images, split and captions', () {
@@ -1250,15 +1309,10 @@ void main() {
       expect(roundTrip(true)!.playOnly, isTrue);
     });
 
-    test('finalise flag and SHA-512 seal round-trip (default stays clean)', () {
+    test('het zegelblok verlaat de front matter en komt niet terug', () {
       final service = MarkdownService();
-      // Default (not finalised) writes none of the integrity keys.
-      final plain = service.generateDeck(
-        Deck(title: 'Demo', slides: [Slide.create(SlideType.title)]),
-      );
-      expect(plain.contains('ocideck_finalized'), isFalse);
-      expect(plain.contains('ocideck_seal_'), isFalse);
-
+      // Een deck dat er alles in heeft staan schrijft er niets van weg: het
+      // zegel woont sinds 0.1.0 in `<naam>.seal.json`.
       final sealed = Deck(
         title: 'Demo',
         finalized: true,
@@ -1268,44 +1322,66 @@ void main() {
         slides: [Slide.create(SlideType.title).copyWith(title: 'Een')],
       );
       final md = service.generateDeck(sealed);
-      expect(md.contains('ocideck_finalized: true'), isTrue);
-      expect(md.contains('ocideck_seal_hash: abc123'), isTrue);
-      expect(md.contains('ocideck_seal_algo: sha-512'), isTrue);
-      expect(md.contains('ocideck_seal_at:'), isTrue);
+      expect(md, isNot(contains('ocideck_finalized')));
+      expect(md, isNot(contains('ocideck_seal_')));
+    });
 
-      final back = service.parseDeck(md)!;
+    test('een oud zegelblok wordt nog gelezen en bij opslaan opgeruimd', () {
+      final service = MarkdownService();
+      const oud =
+          '---\n'
+          'marp: true\n'
+          'ocideck_finalized: true\n'
+          'ocideck_seal_hash: abc123\n'
+          'ocideck_seal_algo: sha-512\n'
+          'ocideck_seal_at: 2026-07-10T12:00:00.000Z\n'
+          '---\n\n# Een\n';
+      final back = service.parseDeck(oud)!;
       expect(back.finalized, isTrue);
       expect(back.sealHash, 'abc123');
       expect(back.sealAlgo, 'sha-512');
       expect(back.sealAt, '2026-07-10T12:00:00.000Z');
+      // En de vorm die erbij hoort: een zegel uit de front matter gaat over de
+      // gecanonicaliseerde inhoud, niet over de bestandsbytes.
+      expect(back.sealForm, SealForm.canonical);
+      expect(service.generateDeck(back), isNot(contains('ocideck_seal_')));
     });
 
-    test('visual signature round-trips and is absent by default', () {
-      final service = MarkdownService();
-      final plain = service.generateDeck(
-        Deck(title: 'Demo', slides: [Slide.create(SlideType.title)]),
-      );
-      expect(plain.contains('ocideck_sig_'), isFalse);
-
-      final signed = Deck(
-        title: 'Demo',
-        signature: const DocumentSignature(
+    test(
+      'het handtekeningblok verlaat de front matter, maar blijft leesbaar',
+      () {
+        final service = MarkdownService();
+        const sig = DocumentSignature(
           name: 'Jan Jansen',
           role: 'Onderzoeker',
           date: '2026-07-10',
           statement: 'Naar waarheid opgesteld.',
           typedSignature: 'J. Jansen',
-        ),
-        slides: [Slide.create(SlideType.title)],
-      );
-      final back = service.parseDeck(service.generateDeck(signed))!;
-      final sig = back.signature!;
-      expect(sig.name, 'Jan Jansen');
-      expect(sig.role, 'Onderzoeker');
-      expect(sig.date, '2026-07-10');
-      expect(sig.statement, 'Naar waarheid opgesteld.');
-      expect(sig.typedSignature, 'J. Jansen');
-    });
+        );
+        final signed = Deck(
+          title: 'Demo',
+          signature: sig,
+          slides: [Slide.create(SlideType.title)],
+        );
+        expect(service.generateDeck(signed), isNot(contains('ocideck_sig_')));
+
+        const oud =
+            '---\n'
+            'marp: true\n'
+            'ocideck_sig_name: Jan Jansen\n'
+            'ocideck_sig_role: Onderzoeker\n'
+            'ocideck_sig_date: 2026-07-10\n'
+            'ocideck_sig_statement: "Naar waarheid opgesteld."\n'
+            'ocideck_sig_typed: J. Jansen\n'
+            '---\n\n# Demo\n';
+        final back = service.parseDeck(oud)!.signature!;
+        expect(back.name, 'Jan Jansen');
+        expect(back.role, 'Onderzoeker');
+        expect(back.date, '2026-07-10');
+        expect(back.statement, 'Naar waarheid opgesteld.');
+        expect(back.typedSignature, 'J. Jansen');
+      },
+    );
 
     test('timeline slide keeps title, events, layout and animation', () {
       final out = _roundTrip(
@@ -1752,30 +1828,30 @@ void main() {
       },
     );
 
-    test(
-      'the deck signature certification round-trips in the front matter',
-      () {
-        const sig = DocumentSignature(
-          name: 'Jan Jansen',
-          role: 'Onderzoeker',
-          certification: 'OSCP',
-          statement: 'Naar waarheid opgesteld.',
-          typedSignature: 'J. Jansen',
-        );
-        final service = MarkdownService();
-        final markdown = service.generateDeck(
-          Deck(
-            title: 'Demo',
-            signature: sig,
-            slides: [Slide.create(SlideType.signOff)],
-          ),
-        );
-        expect(markdown, contains('ocideck_sig_cert: OSCP'));
-        final out = service.parseDeck(markdown)!;
-        expect(out.signature?.certification, 'OSCP');
-        expect(out.signature?.name, 'Jan Jansen');
-      },
-    );
+    test('de certificering van de ondertekenaar overleeft de sidecar', () {
+      const sig = DocumentSignature(
+        name: 'Jan Jansen',
+        role: 'Onderzoeker',
+        certification: 'OSCP',
+        statement: 'Naar waarheid opgesteld.',
+        typedSignature: 'J. Jansen',
+      );
+      final deck = Deck(
+        title: 'Demo',
+        signature: sig,
+        slides: [Slide.create(SlideType.signOff)],
+      );
+      // Niet meer in de markdown; wél in het zegelbestand ernaast.
+      final markdown = MarkdownService().generateDeck(deck);
+      expect(markdown, isNot(contains('ocideck_sig_cert')));
+
+      final json = SealCodec.encode(SealRecord.of(deck))!;
+      final out = SealCodec.decode(
+        json,
+      )!.applyTo(deck.copyWith(clearSignature: true));
+      expect(out.signature?.certification, 'OSCP');
+      expect(out.signature?.name, 'Jan Jansen');
+    });
   });
 
   group('scorecard slide round-trip', () {

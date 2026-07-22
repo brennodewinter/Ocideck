@@ -17,10 +17,31 @@ import '../utils/bundled_asset.dart';
 import '../utils/image_limits.dart';
 import '../utils/project_path.dart';
 import 'finding_context_score.dart';
+import 'slide_image_refs.dart';
 import 'slide_layout_metrics.dart';
 import '../widgets/document_signature_view.dart'
     show decodeEmbeddedSignatureImage;
 import '../widgets/slides/slide_preview.dart';
+
+/// De export kon geen frame krijgen om de dia in te tekenen.
+///
+/// Rasteren gebeurt door de échte voorvertoning te laten tekenen en het
+/// resultaat vast te leggen. Dat kan alleen als de engine frames aflevert, en
+/// dat doet ze niet wanneer het venster niet zichtbaar is — geminimaliseerd,
+/// achter een ander venster, of op een andere Space. Voorheen bleef de export
+/// daar oneindig in hangen zonder één teken van leven.
+class SlideRasterizerNoFrameException implements Exception {
+  const SlideRasterizerNoFrameException(this.waited);
+
+  /// Hoe lang er tevergeefs op een frame is gewacht.
+  final Duration waited;
+
+  @override
+  String toString() =>
+      'SlideRasterizerNoFrameException: geen frame na ${waited.inSeconds}s. '
+      'Rasteren vereist een zichtbaar venster; houd het tijdens de export op '
+      'de voorgrond.';
+}
 
 /// Renders the exact on-screen slide previews to PNG images so exports look
 /// identical to what the user sees (WYSIWYG).
@@ -33,6 +54,33 @@ class SlideRasterizer {
   /// [logicalSize] * [pixelRatio]; because the preview is fully proportional
   /// the logical size only affects sampling quality.
   static const Size logicalSize = Size(1280, 720);
+
+  /// Hoe lang op één frame gewacht wordt voor de export opgeeft.
+  ///
+  /// Ruim genoeg voor een trage debug-build met zware dia's, kort genoeg dat
+  /// niemand naar een bevroren balk zit te kijken zonder te weten waarom.
+  static const Duration frameTimeout = Duration(seconds: 20);
+
+  /// Wacht op een getekend frame — met een grens.
+  ///
+  /// Twee dingen die [WidgetsBinding.endOfFrame] alléén niet geeft:
+  ///
+  /// 1. **Een frame wordt afgedwongen.** `endOfFrame` lost pas op als er een
+  ///    frame ís; het plant er zelf geen. Zonder `scheduleFrame` hangt het
+  ///    wachten af van of iets ánders toevallig om een frame vroeg.
+  /// 2. **Het wachten eindigt.** Levert de engine niets — venster onzichtbaar,
+  ///    door het besturingssysteem afgeknepen — dan komt `endOfFrame` nooit
+  ///    terug. Oneindig wachten zonder terugkoppeling is de slechtste
+  ///    faalvorm die er is: de gebruiker ziet een export die niets doet en
+  ///    niets zegt. Liever een nette fout die vertelt wat eraan scheelt.
+  static Future<void> _awaitFrame(Duration timeout) async {
+    WidgetsBinding.instance.scheduleFrame();
+    try {
+      await WidgetsBinding.instance.endOfFrame.timeout(timeout);
+    } on TimeoutException {
+      throw SlideRasterizerNoFrameException(timeout);
+    }
+  }
 
   /// Render [audience] to PNG bytes at [targetWidth] x (targetWidth * 9/16).
   ///
@@ -51,6 +99,9 @@ class SlideRasterizer {
     // Polled tussen slides: true = stoppen. De aanroeper krijgt dan een
     // onvolledige lijst terug en hoort die weg te gooien.
     bool Function()? isCancelled,
+    // Injecteerbaar zodat de blokkade-weg toetsbaar is: met de echte 20s zou
+    // elke test die hem raakt twintig seconden stilstaan.
+    Duration frameTimeout = SlideRasterizer.frameTimeout,
   }) async {
     final slides = audience.slides;
     if (slides.isEmpty) return const [];
@@ -86,12 +137,15 @@ class SlideRasterizer {
     final logo = isBundledAssetPath(rawLogo)
         ? rawLogo
         : resolveTrustedAssetPath(rawLogo, projectPath);
+    // Élke afbeelding van de dia wordt voorgeladen, ook een `![…](…)` in de
+    // vrije tekst: zonder precache is de afbeelding nog niet gedecodeerd op het
+    // moment dat het beeldje wordt vastgelegd, en belandt er een leeg vak in de
+    // PDF of PPTX.
     final allPaths = <String>{
       ?logo,
-      for (final slide in slides) ...[
-        ?_resolveOrMem(slide.imagePath, projectPath),
-        ?_resolveOrMem(slide.imagePath2, projectPath),
-      ],
+      for (final slide in slides)
+        for (final path in slideImagePaths(slide))
+          ?_resolveOrMem(path, projectPath),
     };
 
     final repaintKey = GlobalKey();
@@ -122,10 +176,14 @@ class SlideRasterizer {
     final results = <Uint8List>[];
     try {
       overlay.insert(entry);
-      await WidgetsBinding.instance.endOfFrame;
+      // De eerste melding staat vóór het eerste wachten, en dat is opzet.
+      // Stond hij erna, dan zag de gebruiker bij een blokkade hier helemaal
+      // niets: geen fase, geen teller, geen fout — alleen een export die stil
+      // bleef staan. Nu is minstens zichtbaar dát er begonnen is.
+      onStage?.call('precache', 0, allPaths.length);
+      await _awaitFrame(frameTimeout);
       if (!context.mounted) return results;
 
-      onStage?.call('precache', 0, allPaths.length);
       await _precachePathsBatched(
         context,
         allPaths,
@@ -166,7 +224,7 @@ class SlideRasterizer {
         if (!context.mounted) break;
 
         onStage?.call('render', i, slides.length);
-        final png = await _capture(repaintKey, pixelRatio);
+        final png = await _capture(repaintKey, pixelRatio, frameTimeout);
         results.add(png);
 
         onStage?.call('done', i + 1, slides.length);
@@ -180,8 +238,12 @@ class SlideRasterizer {
     return results;
   }
 
-  static Future<Uint8List> _capture(GlobalKey key, double pixelRatio) async {
-    await WidgetsBinding.instance.endOfFrame;
+  static Future<Uint8List> _capture(
+    GlobalKey key,
+    double pixelRatio,
+    Duration frameTimeout,
+  ) async {
+    await _awaitFrame(frameTimeout);
     RenderRepaintBoundary? boundary;
     for (var attempt = 0; attempt < 12; attempt++) {
       final obj = key.currentContext?.findRenderObject();

@@ -311,7 +311,7 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: _parseColor(value),
+        color: AppTheme.parseHexColor(value),
         shape: BoxShape.circle,
         border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
@@ -320,26 +320,28 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
 
   Widget _appearancePreview() {
     final profile = _appearanceProfile;
-    final foreground = _parseColor(profile.textColor);
+    final foreground = AppTheme.parseHexColor(profile.textColor);
     return Container(
       height: 112,
       decoration: BoxDecoration(
-        color: _parseColor(profile.backgroundColor),
+        color: AppTheme.parseHexColor(profile.backgroundColor),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: _parseColor(profile.panelColor)),
+        border: Border.all(color: AppTheme.parseHexColor(profile.panelColor)),
       ),
       child: Column(
         children: [
           Container(
             height: 30,
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            color: _parseColor(profile.primaryColor),
+            color: AppTheme.parseHexColor(profile.primaryColor),
             child: Row(
               children: [
                 Text(
                   context.l10n.d('OciDeck'),
                   style: TextStyle(
-                    color: _contrastColor(_parseColor(profile.primaryColor)),
+                    color: _contrastColor(
+                      AppTheme.parseHexColor(profile.primaryColor),
+                    ),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -353,18 +355,18 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
                 children: [
                   Container(
                     width: 52,
-                    color: _parseColor(profile.panelColor),
+                    color: AppTheme.parseHexColor(profile.panelColor),
                     alignment: Alignment.center,
                     child: Icon(
                       Icons.slideshow_outlined,
-                      color: _parseColor(profile.panelTextColor),
+                      color: AppTheme.parseHexColor(profile.panelTextColor),
                     ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.all(8),
-                      color: _parseColor(profile.surfaceColor),
+                      color: AppTheme.parseHexColor(profile.surfaceColor),
                       child: Row(
                         children: [
                           Expanded(
@@ -375,9 +377,11 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
                           ),
                           FilledButton(
                             style: FilledButton.styleFrom(
-                              backgroundColor: _parseColor(profile.accentColor),
+                              backgroundColor: AppTheme.parseHexColor(
+                                profile.accentColor,
+                              ),
                               foregroundColor: _contrastColor(
-                                _parseColor(profile.accentColor),
+                                AppTheme.parseHexColor(profile.accentColor),
                               ),
                             ),
                             onPressed: () {},

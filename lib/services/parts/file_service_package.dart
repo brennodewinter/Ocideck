@@ -177,15 +177,25 @@ extension FileServicePackage on FileService {
     }
 
     final reaching = _packSlides(deck);
-    final slides = [
-      for (final s in reaching)
-        s.copyWith(
-          imagePath: await addAsset(s.imagePath, 'images') ?? s.imagePath,
-          imagePath2: await addAsset(s.imagePath2, 'images') ?? s.imagePath2,
+    final slides = <Slide>[];
+    for (final s in reaching) {
+      // Élke afbeelding gaat het archief in, ook een `![…](…)` in de vrije
+      // tekst. Een pakket is bedoeld om weg te geven: wat er niet in zit, ziet
+      // de ontvanger niet. Inpakken is asynchroon en herschrijven niet, dus
+      // eerst elk pad naar zijn plek in het archief, dan de dia in haar geheel.
+      final packed = <String, String>{};
+      for (final path in slideImagePaths(s).toSet()) {
+        final rel = await addAsset(path, 'images');
+        if (rel != null) packed[path] = rel;
+      }
+      final withImages = rewriteSlideImagePaths(s, (path) => packed[path]);
+      slides.add(
+        withImages.copyWith(
           videoPath: await addAsset(s.videoPath, 'media') ?? s.videoPath,
           audioPath: await addAsset(s.audioPath, 'media') ?? s.audioPath,
         ),
-    ];
+      );
+    }
 
     // Chart slides link their data through a path inside the JSON block; write
     // that data as its own member under data/ and point the path at it.
@@ -256,6 +266,7 @@ extension FileServicePackage on FileService {
       '$base.miauw.json',
       MiauwCodec.encode(packDeck.miauwWaivers, packDeck.miauwConfirmations),
     );
+    member('$base.seal.json', SealCodec.encode(SealRecord.of(packDeck)));
   }
 
   /// Voeg een méégebundelde asset (asset:-pad, bv. het logo van een ingebouwd

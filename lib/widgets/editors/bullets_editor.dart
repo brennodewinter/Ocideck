@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../models/slide_quality.dart';
+import '../../services/rich_text_chapters.dart';
 import '../../state/editor_provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/markdown_paste_cleanup.dart';
@@ -17,6 +18,10 @@ import '../../theme/app_theme.dart';
 class BulletsEditor extends ConsumerStatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
+
+  /// Knipt de vrije tekst op zijn `#`-koppen in losse dia's. Null wanneer er
+  /// niets te knippen valt; de editor biedt het dan niet aan.
+  final VoidCallback? onSplitChapters;
 
   /// Whether the preceding slide renders a numbered list — only then is the
   /// "continue numbering from the previous slide" option offered.
@@ -32,6 +37,7 @@ class BulletsEditor extends ConsumerStatefulWidget {
     super.key,
     required this.slide,
     required this.onUpdate,
+    this.onSplitChapters,
     this.previousSlideIsNumbered = false,
     this.canContinueSplit = false,
     this.nestedInScrollView = false,
@@ -417,6 +423,7 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
         if (_listStyle == ListStyle.richText) ...[
           const SizedBox(height: 16),
           const SectionLabel('Tekst'),
+          if (widget.onSplitChapters != null) _chapterSplitHint(l10n),
           SizedBox(
             height: 320,
             child: MarkdownNotesEditor.legacy(
@@ -461,6 +468,43 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
           ),
         ],
       ],
+    );
+  }
+
+  /// Het aanbod om de tekst op zijn `#`-koppen in losse dia's te knippen.
+  ///
+  /// Aangeboden en niet automatisch: knippen tijdens het typen zou de dia onder
+  /// je handen uiteen laten vallen op het moment dat je `# ` intikt. Het aanbod
+  /// staat bóven het tekstvak, want daar kijk je na het plakken van een document
+  /// als eerste — en het verdwijnt vanzelf zodra er niets meer te knippen valt.
+  Widget _chapterSplitHint(AppLocalizations l10n) {
+    final chapters = richTextChapterCount(widget.slide);
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppTheme.accent.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: AppTheme.accent.withValues(alpha: 0.25)),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.splitscreen, size: 16, color: AppTheme.accent),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              '${l10n.d('Deze tekst bevat hoofdstukken. Opknippen levert')}'
+              ' $chapters ${l10n.d('dia\'s op.')}',
+              style: const TextStyle(fontSize: 12.5),
+            ),
+          ),
+          const SizedBox(width: 8),
+          TextButton(
+            onPressed: widget.onSplitChapters,
+            child: Text(l10n.d('Splits op hoofdstukken')),
+          ),
+        ],
+      ),
     );
   }
 

@@ -393,48 +393,6 @@ bool isValidAuAbn(String raw) {
 
 // ── India ────────────────────────────────────────────────────────────────────
 
-/// De Verhoeff-tabellen: vermenigvuldiging, permutatie en inverse.
-///
-/// Verhoeff is géén Luhn, en dat verschil doet er hier toe. Luhn mist een
-/// omwisseling van twee gelijke cijfers en een deel van de naburige
-/// verwisselingen; Verhoeff vangt álle enkelvoudige fouten en álle omwisselingen
-/// van buren. Voor een nummer dat een miljard mensen identificeert is dat het
-/// verschil tussen een controle en een formaliteit.
-const _verhoeffD = [
-  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 0, 6, 7, 8, 9, 5],
-  [2, 3, 4, 0, 1, 7, 8, 9, 5, 6],
-  [3, 4, 0, 1, 2, 8, 9, 5, 6, 7],
-  [4, 0, 1, 2, 3, 9, 5, 6, 7, 8],
-  [5, 9, 8, 7, 6, 0, 4, 3, 2, 1],
-  [6, 5, 9, 8, 7, 1, 0, 4, 3, 2],
-  [7, 6, 5, 9, 8, 2, 1, 0, 4, 3],
-  [8, 7, 6, 5, 9, 3, 2, 1, 0, 4],
-  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
-];
-
-const _verhoeffP = [
-  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 5, 7, 6, 2, 8, 3, 0, 9, 4],
-  [5, 8, 0, 3, 7, 9, 6, 1, 4, 2],
-  [8, 9, 1, 6, 0, 4, 3, 5, 2, 7],
-  [9, 4, 5, 3, 1, 2, 6, 8, 7, 0],
-  [4, 2, 8, 6, 5, 7, 3, 9, 0, 1],
-  [2, 7, 9, 3, 8, 0, 6, 4, 1, 5],
-  [7, 0, 4, 6, 9, 1, 3, 2, 5, 8],
-];
-
-/// De Verhoeff-controle over een cijferreeks.
-bool passesVerhoeff(String digits) {
-  var c = 0;
-  for (var i = 0; i < digits.length; i++) {
-    final code = digits.codeUnitAt(digits.length - 1 - i);
-    if (code < 0x30 || code > 0x39) return false;
-    c = _verhoeffD[c][_verhoeffP[i % 8][code - 0x30]];
-  }
-  return c == 0;
-}
-
 /// Aadhaar: twaalf cijfers met een Verhoeff-controle.
 ///
 /// Begint nooit met 0 of 1 — die reeksen zijn gereserveerd. Twaalf cijfers plus

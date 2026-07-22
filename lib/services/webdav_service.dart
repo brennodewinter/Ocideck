@@ -9,6 +9,7 @@ import '../models/webdav_settings.dart';
 import '../utils/log.dart';
 import '../utils/net_guard.dart';
 import 'file_service.dart';
+import 'net/transport_failure.dart';
 
 /// Eén item in een WebDAV-maplisting.
 class WebdavEntry {
@@ -126,6 +127,30 @@ class WebdavException implements Exception {
 /// opnieuw probeert, maar een uitkomst waar de aanroeper een keuze over moet
 /// voorleggen. Als foutsoort zou hij bovendien opduiken in switches van
 /// bewerkingen waar hij niet kán ontstaan, zoals de verbindingstest.
+///
+/// Overwogen en niet gedaan (externe audit U-02, juli 2026): de drie opslagen
+/// samen laten vallen op één `StorageConflictException` met een `source`-veld,
+/// zodat een aanroeper op één type kan vangen. Die aanroeper bestaat niet, en
+/// er is geen zicht op dat hij komt:
+///
+/// - Geen enkele plek vangt er twee. Dit type wordt gevangen in
+///   `widgets/shell/shell_actions.dart`, `S3ConflictException` in
+///   `shell_actions_s3.dart`, en `GitConflictException` in
+///   `state/tabs_provider_git.dart` en `services/git/sync_engine.dart`. Elk in
+///   een pad dat sowieso al voor één backend geschreven is: een andere
+///   dienstaanroep, een ander standaardpad, een andere melding.
+/// - "Conflict" betekent per backend iets anders. Bij WebDAV en S3 is het een
+///   vraag aan de gebruiker (overschrijven of onder een andere naam); bij git
+///   bereikt het de shell niet eens als fout, maar wordt het een poging tot
+///   driewegs-merge en pas daarna een uitkomst.
+/// - De inhoud verschilt echt: een ETag hier, een `baseSha` en werkbranch
+///   daar. Eén type zou dat allebei moeten dragen, en dat is precies de brede
+///   basisklasse die `models/storage_origin.dart` om dezelfde reden afwijst.
+///
+/// Wat de audit terecht zag is dat de twee *afhandelingen* in `shell_actions`
+/// en `shell_actions_s3` sterk op elkaar lijken. Dat is echter duplicatie van
+/// de opslaglus eromheen, niet van het uitzonderingstype; een gedeeld type
+/// haalt daar niets van weg.
 class WebdavConflictException implements Exception {
   /// De versie waarop ons werk gebaseerd was, dus wat we de server vroegen te
   /// bevestigen. Voor de melding en om te kunnen zien wat er misging.
@@ -180,16 +205,23 @@ class WebdavService {
       throw WebdavException(WebdavError.config, 'Ongeldige server-URL');
     }
     // Basic-auth stuurt de Nextcloud-credentials in (base64) mee bij élke
-    // request. Over plain http gaan die in leesbare vorm over de lijn, dus
-    // eisen we https — tenzij de gebruiker de server bewust als vertrouwd
-    // intern (LAN) heeft gemarkeerd, waar een box zonder TLS gangbaar is.
+    // request — een herbruikbaar geheim, geen handtekening per verzoek. Over
+    // plain http gaan die in leesbare vorm over de lijn.
+    //
+    // Corrected 2026-07-22: hier stond "tenzij de gebruiker de server als
+    // vertrouwd intern heeft gemarkeerd". Die vink zegt iets over de host, niet
+    // over de lijn ernaartoe, en het wachtwoord blijft werken lang nadat wie
+    // dan ook het van dat LAN-segment heeft geplukt. Zie
+    // [NetGuard.maySendReusableSecret].
     final scheme = server.origin?.scheme.toLowerCase();
-    if (scheme != 'https' && !(scheme == 'http' && server.trustedInternal)) {
+    if (!NetGuard.maySendReusableSecret(scheme, host: host)) {
       throw WebdavException(
         WebdavError.config,
         scheme == 'http'
-            ? 'Gebruik https of markeer de server als vertrouwd intern; '
-                  'anders gaat je wachtwoord onversleuteld over het netwerk.'
+            ? 'WebDAV vereist https: je wachtwoord gaat bij élk verzoek mee, '
+                  'dus het zou onversleuteld over het netwerk gaan. Vertrouwd '
+                  'intern verandert daar niets aan — die instelling gaat over '
+                  'de server, niet over de verbinding ernaartoe.'
             : 'Alleen https-servers worden ondersteund.',
       );
     }
@@ -261,33 +293,32 @@ class WebdavService {
   /// verbinding werden zo één zin, en de enige plek waar het verschil nog
   /// stond was het logboek — waar de gebruiker niet kijkt. De informatie was
   /// er al; ze werd één laag te vroeg weggegooid.
+  /// Welke soort het is, deelt [classifyTransportFailure] in — dat is voor elke
+  /// opslag hetzelfde. Wat de gebruiker te horen krijgt is dat niet: die zin
+  /// noemt de WebDAV-server, en blijft daarom hier staan.
   static Never _asFailure(String where, Object e, String fallback) {
-    // TlsException dekt zowel HandshakeException als CertificateException.
-    if (e is TlsException) {
-      logWarning('WebdavService.$where: TLS geweigerd', e);
-      throw WebdavException(WebdavError.tls, 'Certificaat niet vertrouwd');
-    }
-    if (e is SocketException) {
-      logWarning('WebdavService.$where: socket onbereikbaar', e);
-      throw WebdavException(
+    final kind = classifyTransportFailure(e);
+    logTransportFailure('WebdavService.$where', kind, e);
+    throw switch (kind) {
+      TransportFailure.tls => WebdavException(
+        WebdavError.tls,
+        'Certificaat niet vertrouwd',
+      ),
+      TransportFailure.unreachable => WebdavException(
         WebdavError.network,
         'Server niet bereikbaar',
         transient: true,
-      );
-    }
-    // Een verbinding die halverwege wegviel meldt Dart als HttpException
-    // ("Connection closed before full header was received"), niet als
-    // SocketException. Dat is juist het geval waarvoor opnieuw proberen bestaat.
-    if (e is HttpException) {
-      logWarning('WebdavService.$where: verbinding afgebroken', e);
-      throw WebdavException(
+      ),
+      TransportFailure.interrupted => WebdavException(
         WebdavError.network,
         'Verbinding afgebroken',
         transient: true,
-      );
-    }
-    logError('WebdavService.$where: mislukt', e);
-    throw WebdavException(WebdavError.network, fallback);
+      ),
+      TransportFailure.unknown => WebdavException(
+        WebdavError.network,
+        fallback,
+      ),
+    };
   }
 
   /// Voer een *leesactie* uit en probeer hem één keer opnieuw wanneer de

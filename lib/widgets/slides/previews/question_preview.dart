@@ -108,7 +108,7 @@ class _QuestionPreview extends StatelessWidget {
     }
 
     return Container(
-      color: _hexColor(profile.slideBackgroundColor),
+      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
       child: Stack(
         children: [
           Positioned.fill(child: content),
@@ -241,8 +241,8 @@ class _QuestionPreview extends StatelessWidget {
   }
 
   Widget _optionListContent(BuildContext context, QuestionSpec spec) {
-    final accent = _hexColor(profile.accentColor);
-    final textColor = _hexColor(profile.textColor);
+    final accent = AppTheme.parseHexColor(profile.accentColor);
+    final textColor = AppTheme.parseHexColor(profile.textColor);
 
     final options = _collectOptions(context, spec);
     final prompt = spec.prompt.isEmpty ? '—' : spec.prompt;
@@ -415,8 +415,8 @@ class _QuestionPreview extends StatelessWidget {
   _VisualColors _visualColors(_OptionVisual visual) {
     const green = AppTheme.success600;
     const red = AppTheme.danger800;
-    final accent = _hexColor(profile.accentColor);
-    final textColor = _hexColor(profile.textColor);
+    final accent = AppTheme.parseHexColor(profile.accentColor);
+    final textColor = AppTheme.parseHexColor(profile.textColor);
     switch (visual) {
       case _OptionVisual.neutral:
         return (
@@ -484,8 +484,8 @@ class _QuestionPreview extends StatelessWidget {
   /// plek hebben.
   Widget _submitRow(BuildContext context, double scale) {
     final l10n = context.l10n;
-    final accent = _hexColor(profile.accentColor);
-    final textColor = _hexColor(profile.textColor);
+    final accent = AppTheme.parseHexColor(profile.accentColor);
+    final textColor = AppTheme.parseHexColor(profile.textColor);
     final canSubmit =
         onAnswerSubmit != null &&
         (view!.openText
@@ -552,7 +552,7 @@ class _QuestionPreview extends StatelessWidget {
     String? trailing,
   }) {
     final colors = _visualColors(visual);
-    final accent = _hexColor(profile.accentColor);
+    final accent = AppTheme.parseHexColor(profile.accentColor);
     final border = colors.border;
     final fill = colors.fill;
     final fg = colors.fg;
@@ -670,7 +670,9 @@ class _QuestionPreview extends StatelessWidget {
             alignment: Alignment.centerLeft,
             widthFactor: fraction,
             child: Container(
-              color: low ? AppTheme.danger800 : _hexColor(profile.accentColor),
+              color: low
+                  ? AppTheme.danger800
+                  : AppTheme.parseHexColor(profile.accentColor),
             ),
           ),
         ],
@@ -723,7 +725,9 @@ class _QuestionPreview extends StatelessWidget {
           Icon(
             Icons.replay,
             size: w * 0.026 * scale,
-            color: _hexColor(profile.textColor).withValues(alpha: 0.7),
+            color: AppTheme.parseHexColor(
+              profile.textColor,
+            ).withValues(alpha: 0.7),
           ),
           SizedBox(width: w * 0.008 * scale),
           Flexible(
@@ -732,7 +736,9 @@ class _QuestionPreview extends StatelessWidget {
               style: TextStyle(
                 fontFamily: font,
                 fontSize: w * 0.024 * scale,
-                color: _hexColor(profile.textColor).withValues(alpha: 0.7),
+                color: AppTheme.parseHexColor(
+                  profile.textColor,
+                ).withValues(alpha: 0.7),
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -765,7 +771,9 @@ class _QuestionPreview extends StatelessWidget {
 
   Widget _authorHint(BuildContext context, QuestionSpec spec, double scale) {
     final l10n = context.l10n;
-    final textColor = _hexColor(profile.textColor).withValues(alpha: 0.6);
+    final textColor = AppTheme.parseHexColor(
+      profile.textColor,
+    ).withValues(alpha: 0.6);
     final parts = <String>[
       ?_authorDrawHint(l10n, spec),
       if (spec.timeLimitSeconds > 0)

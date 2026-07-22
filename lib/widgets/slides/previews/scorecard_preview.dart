@@ -54,13 +54,13 @@ class _ScorecardPreview extends StatelessWidget {
     final hPad = w * 0.045;
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final spec = ScorecardSpec.fromSlide(slide.title, slide.tableRows);
-    final text = _hexColor(profile.textColor);
-    final accent = _hexColor(profile.accentColor);
+    final text = AppTheme.parseHexColor(profile.textColor);
+    final accent = AppTheme.parseHexColor(profile.accentColor);
     final entries = spec.entries.where((e) => !e.isBlank).toList();
     final layout = _ScorecardLayout.of(entries.length);
 
     return Container(
-      color: _hexColor(profile.slideBackgroundColor),
+      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
       child: SizedBox.expand(
         child: FittedBox(
           fit: BoxFit.scaleDown,

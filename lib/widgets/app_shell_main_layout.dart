@@ -19,6 +19,46 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 
   double _slideRailWidth = _defaultSlideRailWidth;
 
+  /// De menubalk-doorgeefluik, in [initState] opgehaald zodat [dispose] hem nog
+  /// kan leegmaken — `ref` mag daar niet meer.
+  StateController<ShellDeckCommands?>? _commands;
+
+  @override
+  void initState() {
+    super.initState();
+    _commands = ref.read(shellDeckCommandsProvider.notifier);
+  }
+
+  /// Voor welk tabblad er als laatste is gepubliceerd. Wisselt de gebruiker van
+  /// tabblad, dan moet de menubalk opnieuw gevuld worden, ook als de aan/uit-
+  /// standen toevallig gelijk zijn.
+  DeckNotifier? _publishedFor;
+
+  /// Wat deze werkruimte als laatste publiceerde, zodat [dispose] alleen zijn
+  /// eigen bijdrage opruimt.
+  ShellDeckCommands? _published;
+
+  @override
+  void dispose() {
+    // Deze werkruimte gaat dicht: haal de handelingen weg, zodat het menu niets
+    // meer aanbiedt dat nergens meer op slaat. Alleen als er sindsdien geen
+    // ander tabblad heeft gepubliceerd — die is dan de nieuwe eigenaar. De
+    // notifier komt uit [initState]: `ref` is in dispose niet meer bruikbaar.
+    final commands = _commands;
+    final mine = _published;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // `mounted`: bij het afsluiten van de app is de container al opgeruimd
+      // voordat deze callback aan de beurt is.
+      if (commands != null &&
+          commands.mounted &&
+          mine != null &&
+          identical(commands.state, mine)) {
+        commands.state = null;
+      }
+    });
+    super.dispose();
+  }
+
   // Laatst berekende exportstatus, zodat het commandopalet (geopend via een
   // sneltoets/menu, buiten build) de export-gate kan respecteren zonder een
   // provider te watchen in een callback.
@@ -51,6 +91,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       l10n,
     );
     _canExport = canExport;
+    _publishMenuCommands(deckState, canExport);
 
     return Focus(
       canRequestFocus: false,
@@ -271,6 +312,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       privacyDecision: PrivacyExportPolicy(
         gate: settings.privacyExportGate,
       ).evaluate(ref.watch(privacyExportSummaryProvider)),
+      privacyChecksEnabled: settings.privacyChecksEnabled,
     );
     return (readiness: readiness, quality: quality);
   }
@@ -304,6 +346,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.',
       ),
       ExportReadinessStatus.ready => l10n.t('exportReady'),
+      ExportReadinessStatus.readyPrivacyUnchecked => l10n.d(
+        'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.',
+      ),
     };
     return (canExport: readiness.canOpenExport, exportTooltip: exportTooltip);
   }
@@ -403,11 +448,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           onPressed: _toggleMarkdownMode,
         ),
       ),
+      // Uitgeschakeld zolang er een opslag loopt: de knop deed er tot nu toe
+      // niets aan af dat een tweede poging stil werd genegeerd, en zag er dus
+      // uit alsof er niets gebeurde.
       Tooltip(
         message: l10n.t('saveShortcut'),
         child: IconButton(
           icon: const Icon(Icons.save_outlined, size: 18),
-          onPressed: _saveDeck,
+          onPressed: ref.watch(saveProgressProvider) == null ? _saveDeck : null,
         ),
       ),
       const _ActionsDivider(),
@@ -662,6 +710,22 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 
   void _presentDeck() => presentDeck(context, ref);
 
+  /// Wat de export daadwerkelijk opsomt: dezelfde slides, maar met alles wat op
+  /// het scherm één slide is en op papier meerdere pagina's, uitgeklapt.
+  ///
+  /// Een overlopende bevinding wordt zo geëxporteerd als een paar dia's op ware
+  /// grootte in plaats van één ineengekrompen dia. Voor een lange vrije-
+  /// tekstslide gold hetzelfde probleem omgekeerd: de editor en de presentator
+  /// bladeren door zijn pagina's, maar de export somt op — hij rasterde pagina 1
+  /// en de rest verdween geruisloos uit het bestand. Beide uitklappen laten het
+  /// deck zelf ongemoeid, en omdat de voettekst zijn nummer uit de positie in
+  /// deze lijst haalt, telt hij de pagina's nu vanzelf mee.
+  static List<Slide> _expandForExport(List<Slide> slides, Deck deck) =>
+      expandRichTextForRender(
+        expandFindingsForRender(slides),
+        deck.themeProfile,
+      );
+
   Future<void> _exportDeck() async {
     final deckState = ref.read(deckProvider);
     final deck = deckState.deck!;
@@ -670,9 +734,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     if (slides.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            l10n.d('Alle slides zijn overgeslagen — niets om te exporteren.'),
-          ),
+          content: Text(emptyAudienceReason(l10n, deck, forExport: true)),
         ),
       );
       return;
@@ -714,13 +776,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           ? slides
           : slides.where((s) => !s.isDetail).toList();
 
-      // Render-time pagination: an overflowing finding is exported as several
-      // full-size slides instead of one shrunken one. The deck itself is
-      // unchanged — this only affects what the export enumerates.
       // De projectiegrens. Vanaf hier raakt geen enkel exportpad de bron nog
       // aan: de rasterizer, de markdown voor de HTML-export, de PPTX-notities
       // en de documentmetadata worden allemaal uit dit ene object afgeleid.
-      final source = deck.copyWith(slides: expandFindingsForRender(chosen));
+      final source = deck.copyWith(slides: _expandForExport(chosen, deck));
       final audience = PrivacyProjection.forAudience(
         source,
         disabledRules: disabledRules,
@@ -795,6 +854,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       privacyPolicy: PrivacyExportPolicy(
         gate: ref.read(settingsProvider).privacyExportGate,
       ),
+      privacyChecksEnabled: ref.read(settingsProvider).privacyChecksEnabled,
       // Noteer een geslaagde export bij het recente bestand, zodat de
       // welkomstlijst "laatst geëxporteerd als …" kan tonen. Alleen zinvol
       // met een echt bestandspad (op web is een deck een download).
@@ -877,43 +937,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     );
   }
 
-  Future<void> _openProperties() async {
-    final deckNotifier = ref.read(deckProvider.notifier);
-    final deck = ref.read(deckProvider).deck!;
-    final info = await PresentationInfoDialog.show(context, deck);
-    if (info == null) return;
-    deckNotifier.updateInfo(
-      title: info.title,
-      author: info.author,
-      organization: info.organization,
-      version: info.version,
-      date: info.date,
-      description: info.description,
-      keywords: info.keywords,
-      language: info.language,
-      standardsUsed: info.standardsUsed,
-      toolsUsed: info.toolsUsed,
-      presentationTargetSeconds: info.presentationTargetSeconds,
-      showRehearsalSummary: info.showRehearsalSummary,
-      playOnly: info.playOnly,
-    );
-    // Een hier gekozen stijlprofiel geldt app-breed (profielen zijn globaal)
-    // en wordt meteen op het open deck toegepast.
-    final profileName = info.styleProfileName;
-    final settings = ref.read(settingsProvider);
-    if (profileName != null &&
-        profileName != ref.read(deckProvider).deck?.themeProfile.name) {
-      final profile = settings.themeProfiles
-          .where((p) => p.name == profileName)
-          .firstOrNull;
-      if (profile != null) {
-        await ref
-            .read(settingsProvider.notifier)
-            .selectThemeProfile(profileName);
-        deckNotifier.updateThemeProfile(profile);
-      }
-    }
-  }
+  Future<void> _openProperties() => editPresentationInfo(context, ref);
 
   Future<void> _importPackage() async {
     // Web: hetzelfde bytes-pad als "Openen..." — de picker levert inhoud en

@@ -1,5 +1,7 @@
 # OciDeck — Frequently Asked Questions
 
+> **Status:** current-state answers; where one conflicts with the code, the code wins · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This document answers common questions about OciDeck's features, usage, and functionality.
 
 ## General Usage
@@ -220,14 +222,25 @@ Troubleshooting steps:
 3. Export your work immediately if possible
 4. Report issues through official channels with error details
 
+In the browser there are no recovery snapshots — the app has nowhere to write
+them — so step 2 does not apply there and unsaved work is gone. The app says so
+at your first edit, and the browser asks before you close a tab that still holds
+unsaved work. Save early if you work in a browser tab.
+
 ## Configuration and Settings
 
 ### How does Git integration work?
 OciDeck supports Git repository storage:
-- Configure in Settings → Git Repository
+- Configure it as a connection under *Settings → Storage*, alongside folders,
+  WebDAV and S3 *(corrected 21-07-2026; there is no separate "Git Repository"
+  tab — storage is one list)*
 - Save decks to remote repositories via REST API or native Git
 - Supports both public and private repositories  
 - Provides version history access
+- Note what a commit carries: the markdown, the pooled images and the linked
+  chart data. Video, audio, the drawings on your slides and the user notes do
+  **not** travel this way; OciDeck counts them and asks before it commits. Save
+  to a folder or an `.ocideck` package if you need those to come along.
 
 ### What are the WebDAV settings for?
 
@@ -274,7 +287,17 @@ protected with a password. It was listed here as planned long after it landed;
 corrected 2026-07-18.
 
 ### Are there mobile plans?
-While OciDeck is primarily designed as a desktop application, the team continues to evaluate mobile platform support based on community feedback and requirements.
+Nothing is planned. The supported targets are macOS, Windows, Linux and the
+browser: those are the ones with `make build-*` recipes, the ones the CI
+workflow names, and the ones anything is tested on. The repository does contain
+`android/` and `ios/` folders, but only because `flutter create` writes them —
+no build target points at them, no test runs there, and the desktop file model
+(sibling asset folders next to the opened `.md`) does not fit a mobile sandbox.
+
+*(Corrected 2026-07-22: this answer said "the team continues to evaluate mobile
+platform support based on community feedback and requirements". Neither the team
+nor the feedback process it describes exists — twelve lines further down, this
+same file says there is no discussion forum, mailing list or chat channel.)*
 
 ## Contributing and Community
 

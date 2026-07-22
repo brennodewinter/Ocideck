@@ -919,6 +919,88 @@ void main() {
       );
     });
 
+    // Een afbeelding in de vrije tekst kan net zo goed ontbreken als eentje in
+    // een afbeeldingsveld; de melding wijst met `customMarkdown` de plek aan.
+    test('detects a missing image referenced from the free text', () async {
+      final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
+      addTearDown(() => dir.delete(recursive: true));
+
+      final deck = Deck(
+        title: 'Demo',
+        projectPath: dir.path,
+        slides: [
+          Slide.create(SlideType.freeMarkdown).copyWith(
+            title: 'Verhaal',
+            customMarkdown: 'Zie ![de foto](images/weg.png) hierboven.',
+          ),
+        ],
+      );
+
+      final issue = analyzer
+          .analyze(deck)
+          .issues
+          .firstWhere((i) => i.kind == SlideQualityIssueKind.missingMediaFile);
+      expect(issue.field, 'customMarkdown');
+      expect(issue.args['path'], 'images/weg.png');
+    });
+
+    test(
+      'reports a free-text image that lies outside the presentation',
+      () async {
+        final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
+        addTearDown(() => dir.delete(recursive: true));
+
+        final deck = Deck(
+          title: 'Demo',
+          projectPath: dir.path,
+          slides: [
+            Slide.create(SlideType.freeMarkdown).copyWith(
+              title: 'Verhaal',
+              customMarkdown: 'Zie ![de foto](/elders/foto.png) hierboven.',
+            ),
+          ],
+        );
+
+        expect(
+          analyzer
+              .analyze(deck)
+              .issues
+              .any((i) => i.kind == SlideQualityIssueKind.externalMediaFile),
+          isTrue,
+        );
+      },
+    );
+
+    test('stays quiet about a free-text image that is really there', () async {
+      final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
+      addTearDown(() => dir.delete(recursive: true));
+      Directory('${dir.path}/images').createSync();
+      File('${dir.path}/images/er.png').writeAsStringSync('x');
+
+      final deck = Deck(
+        title: 'Demo',
+        projectPath: dir.path,
+        slides: [
+          Slide.create(SlideType.freeMarkdown).copyWith(
+            title: 'Verhaal',
+            customMarkdown: 'Zie ![de foto](images/er.png) hierboven.',
+          ),
+        ],
+      );
+
+      expect(
+        analyzer
+            .analyze(deck)
+            .issues
+            .where(
+              (i) =>
+                  i.kind == SlideQualityIssueKind.missingMediaFile ||
+                  i.kind == SlideQualityIssueKind.externalMediaFile,
+            ),
+        isEmpty,
+      );
+    });
+
     test('detects low checklist contrast as deck-wide issue', () {
       final deck = Deck(
         title: 'Demo',

@@ -304,4 +304,67 @@ void main() {
       );
     });
   });
+
+  group('expandRichTextForRender', () {
+    const profile = ThemeProfile();
+
+    /// Een vrije-tekstslide met [paras] alinea's — genoeg om te pagineren.
+    Slide richSlide(int paras) => Slide.create(SlideType.bullets).copyWith(
+      title: 'Titel',
+      listStyle: ListStyle.richText,
+      customMarkdown: List.generate(
+        paras,
+        (i) => 'Alinea $i met wat tekst om hoogte op te bouwen.',
+      ).join('\n\n'),
+    );
+
+    test('makes one slide per page, numbered from zero', () {
+      final slide = richSlide(40);
+      final pages = richTextPageCountForSlide(slide: slide, profile: profile);
+      expect(pages, greaterThan(1), reason: 'testopzet: moet pagineren');
+
+      final expanded = expandRichTextForRender([slide], profile);
+      expect(expanded, hasLength(pages));
+      expect(
+        [for (final s in expanded) s.renderPage],
+        [for (var i = 0; i < pages; i++) i],
+      );
+    });
+
+    test('every page keeps the whole body and the slide id', () {
+      // De gedeelde lettergrootte is een eigenschap van de héle body: geef je
+      // een renderer één pagina los, dan schaalt die pagina op zichzelf en
+      // verspringt de tekstgrootte van pagina tot pagina.
+      final slide = richSlide(40);
+      final expanded = expandRichTextForRender([slide], profile);
+      for (final page in expanded) {
+        expect(page.customMarkdown, slide.customMarkdown);
+        expect(page.id, slide.id);
+      }
+    });
+
+    test('leaves a slide that fits on one page untouched', () {
+      final slide = richSlide(1);
+      expect(richTextPageCountForSlide(slide: slide, profile: profile), 1);
+      expect(expandRichTextForRender([slide], profile), [slide]);
+    });
+
+    test('leaves slides of other types alone', () {
+      final table = Slide.create(SlideType.table);
+      final bullets = Slide.create(
+        SlideType.bullets,
+      ).copyWith(bullets: const ['een', 'twee']);
+      expect(expandRichTextForRender([table, bullets], profile), [
+        table,
+        bullets,
+      ]);
+    });
+
+    test('does not expand a freeMarkdown slide', () {
+      // Zijn preview kent geen paginabegrip en rendert altijd de hele body;
+      // uitklappen zou identieke kopieën opleveren in plaats van pagina's.
+      final slide = richSlide(40).copyWith(type: SlideType.freeMarkdown);
+      expect(expandRichTextForRender([slide], profile), [slide]);
+    });
+  });
 }

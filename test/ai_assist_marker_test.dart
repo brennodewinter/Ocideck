@@ -1,11 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/document_integrity.dart';
+import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/state/deck_provider.dart';
 
 DeckNotifier _notifier() {
@@ -81,6 +84,45 @@ void main() {
     });
   });
 
+  group('de markering overleeft de privacyprojectie', () {
+    // Het exportdialoog bouwt zijn metadata uit het *geprojecteerde* deck, niet
+    // uit de bron — dat is de projectiegrens en die hoort te blijven staan. De
+    // keerzijde: raakt de AI-markering onderweg zoek, dan verliest juist de
+    // geredigeerde export (het exemplaar dat de wijdste kring bereikt) zijn
+    // melding, en niets zou daarover klagen.
+    Deck bron() => _deckWith([
+      Slide.create(SlideType.title),
+      Slide.create(SlideType.bullets).copyWith(
+        bullets: const ['Bel 06-12345678 voor details'],
+        aiAssistedFields: const ['description'],
+        privacy: PrivacyDisposition.redact,
+      ),
+    ]);
+
+    test('het volledige profiel houdt de melding vast', () {
+      final audience = PrivacyProjection.forAudience(bron());
+      final meta = ExportDocumentMetadata.fromDeck(audience);
+      expect(meta.hasUnreviewedAi, isTrue);
+    });
+
+    test('het geredigeerde profiel houdt de melding óók vast', () {
+      final audience = PrivacyProjection.forAudience(
+        bron(),
+        profile: PrivacyExportProfile.redacted,
+      );
+      expect(audience.hasRedactions, isTrue);
+      final meta = ExportDocumentMetadata.fromDeck(audience);
+      expect(
+        meta.hasUnreviewedAi,
+        isTrue,
+        reason:
+            'Redigeren haalt persoonsgegevens weg, niet de herkomst van de '
+            'tekst. Dit exemplaar gaat naar de bredere kring; juist daar moet '
+            'de melding mee.',
+      );
+    });
+  });
+
   group('finalizeAndSeal gate', () {
     test('refuses to seal while an AI marker is unreviewed', () {
       final n = _notifier();
@@ -103,7 +145,7 @@ void main() {
       expect(n.slidesBlockingSeal, isEmpty);
       n.finalizeAndSeal();
       expect(n.state.deck!.finalized, isTrue);
-      expect(n.state.deck!.sealHash, isNotEmpty);
+      expect(n.state.deck!.sealAt, isNotEmpty);
     });
   });
 }

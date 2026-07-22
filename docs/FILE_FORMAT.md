@@ -1,5 +1,7 @@
 # OciDeck — File Format
 
+> **Status:** specification of the on-disk format — the stable contract · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 OciDeck stores presentations as **standard [Marp](https://marp.app/) Markdown**
 (`.md`). There is no custom binary format: a saved presentation can be processed
 directly with the Marp CLI or the VS Code Marp extension. OciDeck-specific
@@ -28,6 +30,7 @@ my_presentation/
 ├── My_presentation.ink.json        # annotation-layer sidecar (see §6.2)
 ├── My_presentation.user-notes.json # user-notes sidecar (see §6.3)
 ├── My_presentation.miauw.json      # MIAUW-disposition sidecar (see §6.5)
+├── My_presentation.seal.json       # seal + signature sidecar (see §6.6)
 ├── images/                         # copied images
 │   ├── photo.png
 │   └── .ocideck_captions.json      # caption sidecar (see §6.1)
@@ -78,8 +81,9 @@ presentations.
 > part of the Marp Markdown (so the `.md` stays clean and exchangeable): the
 > annotation layer (`<name>.ink.json`, §6.2), user notes
 > (`<name>.user-notes.json`, §6.3), captions (`.ocideck_captions.json`, §6.1),
-> linked chart data (`data/*.json`, `data/*.csv`, §6.4) and the MIAUW
-> disposition (`<name>.miauw.json`, §6.5).
+> linked chart data (`data/*.json`, `data/*.csv`, §6.4), the MIAUW
+> disposition (`<name>.miauw.json`, §6.5) and the document seal plus visible
+> signature (`<name>.seal.json`, §6.6).
 
 > **No base64 in the `.md`.** As of 0.1.0 nothing OciDeck writes into a
 > presentation file is opaque. Whatever is unreadable to a human, or is *about*
@@ -169,11 +173,17 @@ keys it *does* recognise still mean what they meant. Renaming or repurposing a
 key would break every older build silently, which is the worst way to break
 something.
 
-The version is deliberately **not** part of the sealed content hash (§3
-`ocideck_seal_hash`): it describes the file's encoding, not its content. Were it
-inside the hash, a sealed deck would report tampering the moment a newer build
-wrote it out again — for instance while building a package — without a letter of
-content having changed.
+**The version line is inside the seal, because the seal is over the file.**
+Since 0.1.0 the seal hashes the `.md`'s bytes (§6.6), and `ocideck_format` is
+one of those bytes. A build that writes a higher version therefore changes the
+file and breaks the seal. That is strict on purpose and it is the honest
+answer — the file *did* change — but it only bites if something rewrites a
+sealed deck, and OciDeck does not: a finalised deck is read-only, so nothing in
+the app produces a save. A future format upgrade must skip sealed decks, or
+accept that it re-issues them; silently rewriting one and calling the result
+intact is the thing this design refuses to do. (Before 0.1.0 the version was
+excluded from the hash, because the hash was over a canonicalisation instead of
+over the file. See §6.6 for why that changed.)
 
 | Key | Type | Meaning |
 | --- | --- | --- |
@@ -195,11 +205,7 @@ content having changed.
 | `ocideck_target_seconds` | int | Target duration for the presenter countdown, in seconds. Written only when `> 0`. |
 | `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. Overruled by `ocideck_play_only`: a play-only deck never shows the summary, whatever this key says. |
 | `ocideck_play_only` | `true`/absent | Play-only lock. When `true`, the deck opens locked: no editor, toolbar, menus, or export — only the first slide with a play button, presented full screen. Closing the deck restores normal editing. Default (unlocked) stays out of the file; only `true` is written. Removing this key unlocks the deck. |
-| `ocideck_style_profile` · `ocideck_miauw_waivers` · `ocideck_miauw_confirmations` | *retired* | **No longer written** as of 0.1.0 (§3.6). Still read, so an older file opens correctly; removed from the file on the next save. |
-| `ocideck_seal_tsr` | base64url | RFC 3161 timestamp token (`.tsr`) over `ocideck_seal_hash` (PENTEST_MIAUW §8-A2). Written only when present; excluded from the sealed content hash. Checked when the timestamp dialog is open and when an audit dossier is built — **not** on opening the deck — and the check is an imprint comparison only, not a CMS-signature or certificate validation (*corrected 2026-07-21: this cell said "Verified in-app on open"*). See [USER_GUIDE.md](USER_GUIDE.md#timestamp-rfc-3161). |
-| `ocideck_finalized` | `true`/absent | Document integrity (§8 A1): the deck is finalised and read-only. Written only when `true`. |
-| `ocideck_seal_hash` · `ocideck_seal_algo` · `ocideck_seal_at` | string | The content seal: a SHA-512 hash over the canonical content (styling and the seal fields themselves excluded), the algorithm (`sha-512`), and the ISO-8601 UTC timestamp. Recomputed on open → *intact* / *changed after finalising*. |
-| `ocideck_sig_name` · `ocideck_sig_role` · `ocideck_sig_cert` · `ocideck_sig_date` · `ocideck_sig_statement` · `ocideck_sig_typed` · `ocideck_sig_image` | string | The deck-level **visual signature** rendered by the `signOff` slide (§5): signer name, role, certification, date, attested statement, typed signature, and an optional embedded (`data:`) signature image — a **hand-drawn signature** (drawn on the pad in the sign-off editor / seal dialog) is stored here as a self-contained base64 PNG. Written before the seal fields, so the signature is covered by the hash. Each key is written only when non-empty. |
+| `ocideck_style_profile` · `ocideck_miauw_waivers` · `ocideck_miauw_confirmations` · `ocideck_finalized` · `ocideck_seal_hash` · `ocideck_seal_algo` · `ocideck_seal_at` · `ocideck_seal_tsr` · `ocideck_sig_name` · `ocideck_sig_role` · `ocideck_sig_cert` · `ocideck_sig_date` · `ocideck_sig_statement` · `ocideck_sig_typed` · `ocideck_sig_image` | *retired* | **No longer written** as of 0.1.0 (§3.6). Still read, so an older file opens correctly; removed from the file on the next save. The seal and signature blocks now live in `<name>.seal.json` (§6.6). |
 
 Metadata fields are written only when they are not empty. Text is written as a
 YAML scalar and quoted only when needed (empty value, leading/trailing
@@ -219,16 +225,32 @@ notes.
 
 ### 3.6 Retired keys — what moved out of the front matter, and where it went
 
-Three keys carried base64 in the front matter until 0.1.0. None of them do any
-more. They are still **read**, so an existing file opens exactly as before, and
-they are **removed from the file on the next save** — the deck is written back
-in the new shape without the author doing anything.
+Fifteen keys left the front matter in 0.1.0. None of them are written any more.
+They are still **read**, so an existing file opens exactly as before, and they
+are **removed from the file on the next save** — the deck is written back in the
+new shape without the author doing anything.
 
 | Retired key | Where it lives now |
 | --- | --- |
 | `ocideck_style_profile` | Never on disk to begin with; only in the transient beamer stream. Now travels beside that markdown as plain JSON (§3.2). |
 | `ocideck_miauw_waivers` | `<name>.miauw.json`, key `waivers` (§6.5). |
 | `ocideck_miauw_confirmations` | `<name>.miauw.json`, key `confirmations` (§6.5). |
+| `ocideck_finalized` · `ocideck_seal_hash` · `ocideck_seal_algo` · `ocideck_seal_at` · `ocideck_seal_tsr` | `<name>.seal.json` (§6.6). |
+| `ocideck_sig_name` · `ocideck_sig_role` · `ocideck_sig_cert` · `ocideck_sig_date` · `ocideck_sig_statement` · `ocideck_sig_typed` · `ocideck_sig_image` | `<name>.seal.json`, key `signature` (§6.6). |
+
+Two of these carried base64 (`ocideck_seal_tsr` is a DER timestamp token,
+`ocideck_sig_image` a PNG), which is reason enough on its own. But the seal
+block had a second, larger reason to move: as long as the seal lived *inside*
+the file, the hash could not be a hash *of* the file. Moving it out is what made
+the integrity check reproducible by a third party — see §6.6.
+
+**Migrating a sealed deck.** A deck sealed before 0.1.0 opens normally, its seal
+still verifies, and its seal block moves into `<name>.seal.json` on the first
+save. What does **not** happen is a recomputation: the sidecar records the old
+hash together with `"form": "canonical-v1"`, and OciDeck keeps verifying it the
+old way. Re-issuing that hash would invalidate any RFC 3161 token the report
+carries — the token timestamps that exact value — and a real notarisation is
+worth more than the convenience of one uniform format.
 
 The removal is what makes this a migration rather than a rename. In
 `front_matter_merge.dart` these keys did not simply disappear from the owned
@@ -599,6 +621,55 @@ rendering/exports it draws as an accent-coloured label above a thin rule:
 - Borrel
 ```
 
+**Rich text** (`<!-- ocideck_list_style: richText -->`) — a bullets or
+bullets-with-image slide whose body is free Markdown instead of a list. After the
+heading lines the comment is written, then a blank line, then the body as it was
+typed:
+```markdown
+# Heading
+<!-- ocideck_list_style: richText -->
+
+A paragraph, **bold**, a `- list` if you want one, all of it ordinary Markdown.
+```
+
+**An `![alt](path)` alone on a line in such a body is an image**, drawn in the
+flow of the text rather than left as literal Markdown (since 2026-07-22). It is
+written and read back verbatim — there is no OciDeck marker around it — so this
+costs the format nothing; what changed is that OciDeck now looks at it. Two
+reading rules:
+
+- The image must be the **whole line**. A `![…](…)` inside a paragraph stays part
+  of that paragraph's text, so a sentence is never broken in half.
+- `w:` and `h:` **inside the alt text** set its size, following Marp's own
+  convention: `![Login screen w:600 h:400](images/login.png)`. They count against
+  a slide 1280 wide — Marp's measure, and the width the HTML export uses — not
+  against OciDeck's internal 960 layout unit, so the same directive means the
+  same thing in the app and in the export. Without `w:` the image spans the text
+  column; without `h:` it gets a fixed box of `kMarkdownImageDefaultHeightFraction`
+  (a quarter) of the reference width, and is scaled to fit inside it. A value that
+  is not a positive finite number is ignored rather than honoured. To any other
+  Markdown reader the whole of `Login screen w:600 h:400` is just alt text.
+
+The box is derived from the Markdown alone and never from the image file:
+pagination is synchronous and cannot wait for a decode, so the height a line
+reserves must be readable off the text. `lib/services/markdown_body_blocks.dart`
+holds both the parse and the box, and the paginator and the renderer call the
+same function — the reserved and the drawn height cannot drift apart.
+
+An empty path (`![alt]()`) is deliberately kept as an image block: that is what
+the privacy projection leaves behind when it removes the picture of a redacted
+slide, and keeping the block keeps the layout from shifting.
+
+**The page split of such a body is not in the file.** Text that would have to
+shrink below the readable floor to fit one slide is broken into pages while
+rendering, worked out from the theme (the font, and the reserve a logo or footer
+claims) at the reference 16:9 geometry — `lib/services/rich_text_layout.dart`. The
+same file can therefore be one page under one theme and three under another, and
+there is no page marker to hand-edit. `Slide.renderPage`, which says which page a
+rendered copy draws, exists only for surfaces that enumerate slides instead of
+paging through them (the export; see ARCHITECTURE § *Render-time pagination*). It
+is never written and never read: a slide that came from a file always has it at 0.
+
 **Two bullet columns** (`two-bullets`) — **the visible HTML is the content.**
 Until 0.1.0 both columns were also stored as base64 in four comments above the
 grid, and those comments won; the `<ul><li>` below them was decoration. Worse:
@@ -678,6 +749,17 @@ save the comments are gone.
 
 </div>
 ```
+
+**The `split-image` div decides which image is the side image.** On a slide whose
+body is rich text (§ *Rich text*), only a `![…](…)` **inside** that div becomes
+`imagePath`; one in the `split-text` half is an image in the running text and
+stays in the body. The rule used to be "the first `![…]` on a split slide is the
+side image"; since a body may hold pictures of its own (2026-07-22) that rule
+would swallow one the author put in the text. Leaning on the scaffolding is safe
+here because this branch only runs for a
+body carrying `<!-- ocideck_list_style: richText -->`, a marker only OciDeck
+writes — so the div is there too; a hand-written Marp split slide has no rich-text
+body and is read down the bullet path.
 
 **Two images** (no class) — as left/right backgrounds:
 ```markdown
@@ -1206,9 +1288,8 @@ mirrors the `Finding` column of that test's row in the scope object's checklist.
 
 **Sign-off** (`sign-off`) — the report's truthful-reporting attestation (MIAUW
 1.6). The slide itself carries **no body of its own** — only an optional heading;
-the attestation is the **deck-level visual signature** (`ocideck_sig_*`) and the
-document seal (`ocideck_finalized` / `ocideck_seal_*`), both in the front matter
-(§3) and covered by the seal:
+the attestation is the **deck-level visual signature** and the document seal,
+which live together in `<name>.seal.json` beside the file (§6.6):
 
 ```markdown
 <!-- _class: sign-off -->
@@ -1219,7 +1300,9 @@ The editor authors the deck signature (statement, rapporteur name/role,
 certification, typed signature) and offers **Afronden & verzegelen**; the preview
 renders the signature plus the seal status. Because the signature is deck-level,
 one report has one signer, and the sign-off page round-trips as just its class
-token and heading — the signer's details live once in the front matter.
+token and heading — the signer's details live once, in the seal sidecar. The
+HTML export therefore gets them handed to it rather than reading them back out
+of the front matter, which is where they used to be.
 
 Rules:
 
@@ -1372,6 +1455,16 @@ read it while still saving over it deletes all of it — the deck would hold no
 strokes in memory, and the save would take that as "there is nothing here".
 A missing `version` is version 1.
 
+The same payload rides along in an **autosave/recovery snapshot**, since drawing
+marks a deck as changed and the strokes are not in the markdown: without it a
+deck that had only been drawn on came back after a crash with the drawings gone.
+A snapshot that carries an unreadable ink payload still restores the text.
+
+**A commit to a git repository does not carry this sidecar** — nothing in
+`services/git/` writes it — so drawings do not travel that way. Saving to a
+folder or into a package does take them along. OciDeck says so before the commit
+is made rather than after; see `design/GIT_STORAGE.md` §9.1.
+
 ### 6.3 User Notes (`<name>.user-notes.json`)
 
 Personal notes for the recipient or learner while following a presentation. They
@@ -1396,6 +1489,10 @@ not stored; when there are no notes, the sidecar file is deleted or not written.
   ]
 }
 ```
+
+Like the annotation layer, user notes ride along in an autosave/recovery snapshot
+and are **not** carried by a commit to a git repository; the warning before the
+commit counts them separately (`design/GIT_STORAGE.md` §9.1).
 
 ### 6.4 Chart Data (`data/*.json`, `data/*.csv`)
 
@@ -1534,11 +1631,25 @@ like an inline one and writes the file back on save; the file can equally be
 edited outside the app. To keep those from fighting, a save only rewrites a data
 file whose values actually changed in the app: an untouched chart leaves its
 file completely alone, so an edit made elsewhere while the deck was open
-survives. If both changed, the app wins; the clash is recorded in the log, but
-is not currently surfaced in the interface on the save path the way a problem
-found while *opening* is.
+survives.
 
-Two shapes fall outside that comparison. A chart that arrives with inline data
+If **both** sides changed, neither wins: the file on disk is left as it became
+outside the app, and the save reports the clash. Until 21-07-2026 the app
+overwrote it and only wrote a line to the log — a lost update, which is exactly
+the failure this comparison exists to prevent. Nothing in the editor is lost by
+refusing; the numbers are simply not on disk yet, and the user can save elsewhere
+or reopen the deck. The recorded baseline is deliberately *not* advanced on a
+refusal, so the next save meets the same clash instead of silently resolving it.
+
+**A data file that cannot be written at all** — a `source` outside the project
+folder, a full disk, missing permissions — is reported the same way, and it
+matters more than it looks: the conversion described under *Automatic* has just
+taken the values out of the `.md`, so at that point they exist only in memory.
+Both cases come back from `saveDeckDetailed`/`saveDeckAsDetailed` as
+`chartWarnings` and are shown as an error, mirroring the warning the *open* path
+already gave. *(Before 21-07-2026 the save path only logged this.)*
+
+Two shapes fall outside that baseline comparison. A chart that arrives with inline data
 *and* a `source` is not hydrated from the file — the block already has values —
 so there is nothing to compare against and its file is overwritten on save. And
 a chart whose rows are all deleted stops counting as having data at all, so its
@@ -1580,6 +1691,171 @@ the deck, and it rides in the autosave/recovery snapshot. A web download of a
 bare `.md` (§1) does not carry it, exactly as it does not carry annotations or
 user notes; export the deck as a package to take everything.
 
+---
+
+### 6.6 Document Seal and Signature (`<name>.seal.json`)
+
+Everything that is *about* the report rather than part of it: the read-only
+lock, the seal, an optional RFC 3161 timestamp token, and the visible signature
+of whoever attested to it. Until 0.1.0 all of this sat in the front matter
+(§3.6).
+
+```json
+{
+  "version": 1,
+  "finalized": true,
+  "hash": "76f87f10…5c8936f",
+  "algo": "sha-512",
+  "form": "file-bytes-v1",
+  "at": "2026-07-22T09:12:33.000Z",
+  "timestamp_token": "MIIF…",
+  "signature": {
+    "name": "Jan Jansen",
+    "role": "Onderzoeker",
+    "certification": "OSCP",
+    "date": "2026-07-10",
+    "statement": "Naar waarheid opgesteld.",
+    "typed": "J. Jansen",
+    "image": "data:image/png;base64,…"
+  }
+}
+```
+
+The file is written when there is something to record and deleted when there is
+not. Same `version` rule as §6.2. It travels with the deck the way the other
+sidecars do: as a member of the `.ocideck` package (§7), into the bin, and in
+the autosave/recovery snapshot. A web download of a bare `.md` (§1) does not
+carry it.
+
+**Seal and signature share one file on purpose.** They are one act — *I attest
+to this, and this is the fixing of what I attested to* — and a recipient needs
+them together: a signature with no seal has nothing to anchor it, and a seal
+with no signer does not say who stands behind it. Two files would mainly mean
+one of them can go missing.
+
+#### How to verify the seal yourself
+
+For `"form": "file-bytes-v1"` the hash is a plain SHA-512 over the **bytes of
+the `.md` file**. No canonicalisation, no line-ending conversion, no field
+selection, no BOM handling, no OciDeck:
+
+```console
+$ sha512sum rapport.md
+76f87f10…5c8936f  rapport.md
+```
+
+Compare that to `hash` in `rapport.seal.json`. Equal means the report is
+byte-for-byte what was sealed; different means it changed. `shasum -a 512`,
+`openssl dgst -sha512`, `certutil -hashfile … SHA512` and any other SHA-512
+implementation give the same answer, because there is nothing to reproduce
+beyond the hash function itself.
+
+That absence of steps is the design. Every normalisation step would be a step
+the recipient has to replay, and therefore a step where an honest file can be
+declared tampered with. There are none.
+
+**Test vector.** This is the smallest deck OciDeck writes — a single title
+slide, no metadata beyond the title. `test/document_integrity_test.dart` asserts
+both halves, so if this ever stops being true the build fails.
+
+`rapport.md` (118 bytes, LF line endings, no trailing whitespace, final blank
+line included):
+
+```markdown
+---
+marp: true
+ocideck_format: 1
+theme: ocideck
+paginate: true
+title: Rapport
+---
+
+<!-- _class: title -->
+
+# Rapport
+
+```
+
+SHA-512:
+
+```
+76f87f10084f69911d3742e2e64eb9b9f2ac99d90686e1f24e3c6c3d14e34ed7
+d637fefa0252f49ece0e3fb9bbccd0803877c9d050ab87a616ae4af9d5c8936f
+```
+
+(one line in the file; wrapped here for width).
+
+#### What the seal does and does not prove
+
+- It proves the `.md` is unchanged since sealing — **tamper-evidence**, relative
+  to a hash you obtained by another route (the audit dossier, an email, the
+  timestamp token). It is not tamper-*proof*: there is no signing key, so anyone
+  who edits the `.md` can also rewrite the sidecar. That was equally true when
+  the seal lived in the front matter.
+- It covers the `.md` only. Images, chart data files, annotations and notes are
+  separate files and are not in the hash. Evidence images have their own hash
+  table in the audit dossier (PENTEST_MIAUW §10.11).
+- It no longer covers the visible signature, which moved out of the `.md` in the
+  same step. The signature now sits next to the hash in this file rather than
+  under it. That is a real narrowing of the seal's reach: what the hash proves
+  is that the *report* is unchanged, and the attestation beside it is worth
+  what the channel that delivered it is worth.
+- Any change to the `.md` breaks it, including one that changes no content —
+  converting line endings, adding a trailing newline, or a future OciDeck
+  writing a higher `ocideck_format` (§3.0). **A sealed deck is frozen**, and
+  OciDeck enforces that by making a finalised deck read-only, so it never
+  rewrites one on its own.
+- **Your own front-matter lines are inside the hash again**, and this reverses a
+  deliberate exemption made a day earlier. When the seal still lived in the
+  front matter it skipped the lines OciDeck does not own — your `style:` block,
+  your comments, a hand-placed `header:` — because editing your own CSS in a
+  sealed deck raised a tamper alarm that was simply wrong (*fixed 2026-07-21*).
+
+  A hash over the file cannot make that exemption: the recipient runs
+  `sha512sum` over the whole file, so any line the app excluded would make the
+  app's verdict disagree with theirs — and a verdict only OciDeck can reproduce
+  is the thing this change exists to eliminate. The exemption is not lost so
+  much as made unnecessary: a finalised deck is read-only, so there is no way to
+  adjust your CSS inside a sealed report and be surprised afterwards. Edit it
+  outside the app and you no longer hold the sealed artefact — which is the
+  literal truth, and now the recipient sees exactly what you see.
+
+For `"form": "canonical-v1"` — only ever produced before 0.1.0 — the hash is
+over OciDeck's own serialiser output instead, and **cannot** be recomputed
+outside the application. Such a seal is kept as it is rather than converted; see
+§3.6.
+
+#### The RFC 3161 timestamp
+
+`timestamp_token` is a base64url DER token from an external TSA (obtained
+out-of-band; OciDeck makes no network connection). OciDeck checks **one** thing
+about it: that its message imprint equals `hash` — does this token belong to
+this document?
+
+It does **not** verify the token's CMS signature and does **not** validate the
+TSA's certificate chain or its timestamping EKU. So `genTime` is a *claim made
+by the token*, not an established fact: whoever holds the deck can mint a token
+with an arbitrary time and a matching imprint. The interface says so and shows
+no "verified" badge, and the audit dossier repeats it. For non-repudiable time
+anchoring, verify the token against the TSA; OciDeck stores it unaltered so that
+stays possible.
+
+The exported `.tsq` **does** carry a random RFC 3161 nonce, and §2.4.2 obliges
+the TSA to echo it back in the token. That echo is what binds one request to one
+token — without it, any valid token for the same imprint is interchangeable with
+any other, and re-submitting an old one goes unnoticed. Anyone holding both
+files can check the echo (`openssl ts -reply -in … -text`, or
+`timeStampEchoesNonce`).
+
+**OciDeck cannot check it on import**, because it does not keep the nonce: the
+request travels to the TSA outside the app, and after a restart the other half
+is gone. A token whose imprint matches is therefore accepted whatever its nonce
+says. The original reason for not storing it — that an extra front-matter key
+would clash with the ongoing move of the seal into a sidecar — no longer holds:
+that move is done, and this file is exactly where such a nonce belongs (it is
+opaque, and it is *about* the document rather than part of it). What remains is
+the decision to build it.
+
 ## 7. Portable Package (`.ocideck`)
 
 `Export package` writes one **zip file** (extension `.ocideck`; `.zip` is also
@@ -1593,6 +1869,7 @@ yet.
 ├── <title>.ink.json          # annotation layer (if present, §6.2)
 ├── <title>.user-notes.json   # user notes (if present, §6.3)
 ├── <title>.miauw.json        # MIAUW disposition (if present, §6.5)
+├── <title>.seal.json         # seal + signature (if present, §6.6)
 ├── images/...                # all used images
 ├── data/...                  # linked chart data files (§6.4)
 ├── media/...                 # used video/audio
@@ -1632,6 +1909,24 @@ When exporting a package you may protect it with a password. Encryption is
   export dialog therefore shows an entropy-based strength meter and offers a
   generator (32 or 256 random characters); with a long or generated password the
   weak KDF is irrelevant.
+- **Keep the password to ASCII if you type it yourself.** *(Added 2026-07-22;
+  this was documented nowhere.)* The ZIP-AES key derivation takes the password's
+  bytes as `Uint8List.fromList(password.codeUnits)` — it truncates every UTF-16
+  code unit to its low 8 bits. For plain ASCII that is exact and nothing is lost.
+  For anything above U+00FF it is not: Cyrillic, Greek, Hebrew, Arabic, CJK and
+  emoji characters are silently folded onto whichever byte their low half
+  happens to be, and different characters collapse onto the same byte. Two
+  consequences, both quiet. You lose entropy you thought you had — a
+  twelve-character Cyrillic passphrase is not worth what its length suggests —
+  and the derived key depends on a truncation rule that other tools need not
+  share, so 7-Zip or WinZip may refuse a password OciDeck accepted, or the
+  reverse. Nothing warns you; the package simply will not open.
+
+  This is a property of the format's key derivation as implemented, not of
+  OciDeck's own code, and it cannot be fixed from here without producing
+  packages other tools cannot read. **A generated password is unaffected**:
+  `passwordAlphabet` is printable ASCII by construction, so the generator route
+  never meets this at all.
 - **Caveat.** Because file names stay visible and the KDF is weak, ZIP-AES suits
   "keep casual readers out". For strong confidentiality of sensitive material,
   wrap the package in a container with a modern KDF and hidden names (age, GPG,
@@ -1655,7 +1950,7 @@ for presenter notes):
 | `<!-- ocideck_image_alt: text -->` | Per-usage WCAG alt-text (accessibility description) for the slide's image. Preferred over the visible caption as the screen-reader label. Written only when set; `-->` inside is escaped like presenter notes. |
 | `<!-- ocideck_image_alt2: text -->` | Same, for the **second** image of a two-images slide. |
 | `<!-- ocideck_finding_id: F-03 -->` · `<!-- ocideck_finding_role: header\|detail\|evidence -->` | Finding-group link: ties a header card to its detail/evidence slides (§5). Written on any slide with a non-empty finding id. |
-| `<!-- ocideck_ai_assisted: field1, field2 -->` | The slide's fields whose text was drafted by AI and not yet human-reviewed. While any slide carries this marker the deck **cannot be finalised/sealed** (the EIS 1.6 attestation must cover human-verified text). Written only when non-empty; AI drafting sets it and clears it on review. |
+| `<!-- ocideck_ai_assisted: field1, field2 -->` | The slide's fields whose text was drafted by AI and not yet human-reviewed. While any slide carries this marker the deck **cannot be finalised/sealed** (the EIS 1.6 attestation must cover human-verified text), and any PDF/PPTX/HTML export declares it in its document properties, its filename, and — in HTML — a banner (§11). Written only when non-empty; AI drafting sets it and clears it on review. |
 | `<!-- advance: N.N -->` | Auto-advance after N.N seconds (0 = off). |
 | `<!-- ocideck_detail -->` | Verdiepingsslide: valt weg in de beknopte export, blijft in de volledige. Alleen geschreven als de vlag aanstaat. |
 | `<!-- skip -->` | Skip slide during both presenting and export. |
@@ -1783,23 +2078,40 @@ Implementation: `lib/services/markdown_validator.dart`; tests:
 ## 11. Export Metadata (Not in `.md`)
 
 For PDF, PPTX, and HTML export, OciDeck writes **document properties** derived
-from front matter (`author`, `organization`, `description`, `keywords`, `tlp`,
-title). This metadata is **not** stored in the `.md` file and does not change the
-round-trip format; it is set only during export (`ExportDocumentMetadata` in
-`lib/services/export_metadata.dart`).
+from the deck — mostly from front matter (`author`, `organization`,
+`description`, `keywords`, `tlp`, title), plus one property counted over the
+slides (§8, the unreviewed-AI markers). This metadata is **not** stored in the
+`.md` file and does not change the round-trip format; it is set only during
+export (`ExportDocumentMetadata` in `lib/services/export_metadata.dart`).
 
-| Source (front matter) | PDF / PPTX | HTML |
+| Source | PDF / PPTX | HTML |
 | --- | --- | --- |
 | Title | `Title` | `<title>` |
 | `author`, otherwise `organization` | `Author` / `dc:creator` | `<meta name="author">` |
 | OciDeck (fixed) | `Creator` | `<meta name="generator">` |
 | OciDeck + version (fixed) | `Producer` / `Application` / `lastModifiedBy` | — |
 | `description` | — | `<meta name="description">` |
-| `keywords` + TLP + `OciDeck` | `Keywords` | `<meta name="keywords">` |
+| `keywords` + TLP + AI marking + `OciDeck` | `Keywords` / `cp:keywords` | `<meta name="keywords">` |
 | `tlp` (when not `none`) | `Subject`: `TLP:... — title` | `<meta name="classification">`, `<meta name="tlp">`, fixed `.tlp-export-banner` at the top |
+| any slide carrying `<!-- ocideck_ai_assisted: … -->` (§8) | `Subject` gains ` — contains AI-drafted text that no human has checked`; `Keywords` gains `AI-generated (unreviewed)` | `<meta name="ai-generated">`, `<meta name="ai-generated-slides">` (the count), fixed `.ai-export-banner` — at `top:2.4em` under the TLP banner, at `top:0` when there is none |
+
+The AI keyword and Subject note are fixed English strings, like `Creator` and the
+TLP labels: they are read by tools, and a value that varied with the interface
+language would not be findable. The `.ai-export-banner` is a sentence for a
+reader and is written in Dutch, as is the rest of the text the HTML export
+generates itself.
+
+The AI marking also reaches the **filename**: the export is written as
+`…-ai-concept.<ext>`, after the redaction-profile suffix (`-geredigeerd`) and the
+depth suffix (`-beknopt`). All of it is absent once every AI-drafted field has
+been reviewed and the markers are gone from the `.md`. *(Added 22-07-2026; before
+that the marker existed in the `.md` and blocked sealing, but nothing about it
+survived into an exported file.)*
 
 Visual TLP marking (banner, badge, optional watermark) is **rasterized** into
-PDF/PPTX slides and is separate from these document properties. See
+PDF/PPTX slides and is separate from these document properties. There is no
+equivalent rasterized AI marking: the PDF and PPTX carry the declaration in the
+document properties and the filename only. See
 [`USER_GUIDE.md`](USER_GUIDE.md) (§ Traffic Light Protocol, § Exporting) and
 [`ARCHITECTURE.md`](ARCHITECTURE.md) (§ Classification enforcement).
 
@@ -1831,7 +2143,7 @@ two Dutch names that look alike while needing opposite handling.
   "derived_from": "9f1c…",
   "algorithm": "sha-256(salt || value)",
   "redactions": [
-    { "id": "a3f1", "commitment": "a3f1…", "rule": "nl.bsn", "slide": 4, "field": "bullets" },
+    { "id": "a3f1e2b7", "commitment": "a3f1e2b7…", "rule": "nl.bsn", "slide": 4, "field": "bullets" },
     { "id": "77bd", "commitment": "77bd…", "rule": "contact.email", "slide": -1, "field": "author" }
   ]
 }
@@ -1840,12 +2152,19 @@ two Dutch names that look alike while needing opposite handling.
 - `notice` is the one-line statement of what the file is and whether it may be
   sent on. It is there because a filename does not survive being renamed, zipped
   or forwarded, and the keys file is the one you must not attach.
-- `derived_from` is the seal hash (§ Document seal) of the source deck, empty
+- `derived_from` is the seal hash (§6.6) of the source deck, empty
   when the deck is not sealed. It pins provenance; it does **not** put the
   manifest under the seal, which is impossible — the manifest is made at export,
   after the seal, with fresh random salts.
-- `id` is the first four hex characters of the commitment: enough to name one
-  redaction in a conversation ("I dispute a3f1"), too little to reveal anything.
+- `id` is a prefix of the commitment — at least **eight** hex characters, and
+  longer whenever eight would not tell two entries in the same manifest apart.
+  Enough to name one redaction in a conversation ("I dispute a3f1e2b7"), too
+  little to reveal anything. Every entry in one manifest uses the same length,
+  the way git abbreviates its hashes. *(Corrected 2026-07-22: this was four
+  characters — 16 bits, so by the birthday bound a document with ~300 redactions
+  had an even chance of two entries sharing an id, and a dispute then pointed at
+  both.)* Older manifests keep their shorter ids; nothing verifies against the
+  id, only against the full `commitment`.
 - `commitment` is `SHA-256(salt ‖ value)` in hex. The values themselves are never
   in either file.
 - `salt` appears only in the keys file. Without it a commitment over a short,
@@ -1866,3 +2185,69 @@ entry — before 2026-07-21 they did, which sent recipients looking for blocks
 that were not there. See [`design/OCIWACHT.md`](design/OCIWACHT.md) §6.6 for the
 reasoning and [`USER_GUIDE.md`](USER_GUIDE.md) (*The two manifest files*) for
 what to do with them.
+
+---
+
+## 13. Accepted Files and Their Limits
+
+*Added 2026-07-22.* Every number here was already enforced by the code and stated
+somewhere — scattered across §7, `SECURITY.md` under *Untrusted deck handling*,
+and the constants themselves. What was missing was the one place a reader can
+check "will OciDeck take this file, and how big may it be" without reading three
+documents. The constant name is given for each so a changed limit can be found
+rather than guessed.
+
+Every limit is a **refusal**, not a truncation: a file over its cap is rejected
+whole, with a reason, and nothing partial is ever read into a deck.
+
+### Files you open or import
+
+| What | Accepted as | Cap | Constant |
+|---|---|---:|---|
+| Deck | `.md` | 32 MiB | `FileService.maxDeckMarkdownBytes` |
+| Package | `.ocideck` (`.zip` also accepted on import) | 512 MiB, 10 000 entries, path ≤ 512 chars | `maxPackageBytes`, `maxPackageEntries`, `maxZipEntryPathLength` |
+| Package, **unpacked** | — | 512 MiB total across all entries | same `maxPackageBytes`, applied to the running total |
+| Style profile | `.ocideckstyle` | 16 MiB | `maxStyleProfileBytes` |
+| Logo embedded in a style profile | PNG/JPEG/GIF/BMP/WebP by magic bytes | 8 MiB | `maxStyleProfileLogoBytes` |
+
+The unpacked cap deserves its own row because it is the one a crafted archive
+attacks. A zip bomb understates its declared size, so the declared figure is only
+a cheap early reject; the real guard inflates each entry into a capped stream
+that aborts mid-decompression the moment the running total would exceed the
+budget. An encrypted package is the exception — WinZip-AES members must be
+decrypted whole before they can be measured, so there the guard falls back to the
+declared size plus the running total. That is accepted deliberately: the user
+encrypted and unlocked that package themselves.
+
+### Assets you add to a deck
+
+| What | Accepted as | Cap | Constant |
+|---|---|---:|---|
+| Image (picked or pasted) | PNG, JPEG, GIF, BMP, WebP — validated by **magic bytes**, not by the file extension | 64 MiB | `ImageService.maxImageBytes` |
+| Video / audio | Size-checked only; no magic-byte validation | 1 GiB | `ImageService.maxMediaBytes` |
+| Image offered to the face scan | As above | 24 MiB | `kFaceScanMaxBytes` |
+
+Every image is additionally decoded with its dimensions capped
+(`cappedFileImage` / `kMaxImageDecodeDimension`), so a small file that declares
+enormous dimensions cannot exhaust memory on display or export.
+
+### Files that arrive over the network
+
+| Route | What it accepts | Cap | Constant |
+|---|---|---:|---|
+| URL import | Sniffs the bytes: zip magic `PK\x03\x04` → package, otherwise plain Markdown | 512 MiB on the download (checked on `Content-Length` **and** while streaming), then the `.md` or package cap above | `maxPackageBytes`, then `maxDeckMarkdownBytes` |
+| WebDAV / Nextcloud | Deck or package, through the same gate as a local import | 512 MiB per file; PROPFIND listing capped at 16 MiB and by entry count | `WebdavService.maxDownloadBytes`, `maxListingBytes` |
+| S3 | As WebDAV | 512 MiB per object; listing capped at 16 MiB across **all** pages together | `S3Service.maxDownloadBytes`, `maxListingBytes` |
+| Git (REST) | Deck files from a forge | Listing responses capped at 16 MiB per forge adapter | `maxListingBytes` in `gitea_forge.dart`, `github_forge.dart`, `gitlab_forge.dart` |
+| Git (native subprocess) | As above | Subprocess output capped at 8 MiB | `_maxOutputBytes` in `git_cli_io.dart` |
+| AI backend response | JSON from an OpenAI-compatible `/v1` endpoint | 8 MiB | `AiClientService.maxResponseBytes` |
+| CVE lookup | JSON | 2 MiB | `_maxBytes` in `cve_transport_io.dart` |
+
+Note what the first row means in practice: extension does not decide anything on
+the URL route. A file served as `deck.md` that begins with zip magic is treated
+as a package, and one served as `deck.ocideck` that does not is treated as
+Markdown. The bytes decide, which is the safer way round — but it is worth
+knowing if you are the one serving the file.
+
+A deck arriving by any of these routes passes the same `MarkdownSafetyScanner`
+gate as a local one; none of them is a shortcut past it.

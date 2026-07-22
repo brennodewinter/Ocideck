@@ -1,5 +1,7 @@
 # OciDeck — User Guide
 
+> **Status:** current-state user manual · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 OciDeck builds [Marp](https://marp.app/) presentations through a structured,
 slide-by-slide editor. You compose typed slides, preview them live, present them
 (on one or two screens), and export to Markdown, PDF, PPTX, or a single offline
@@ -12,6 +14,15 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
   **tabs**. Opening a deck that is already open just jumps to its existing tab —
   the same file is never loaded into two tabs at once, so you can't accidentally
   edit two out-of-sync copies.
+- **The welcome screen** answers the question you have before you have any of the
+  others. Under the logo, one line says what OciDeck makes (presentations that
+  stay ordinary Markdown files); under *New presentation*, how many templates are
+  waiting behind that button — counted from the catalogue itself, so it cannot
+  drift, and leaving out the security-module template until that module is
+  enabled. A **User guide** button beside *Settings* opens this document in the
+  built-in reader. It used to live three clicks deep under *Settings →
+  Documentation*, which is exactly where someone who knows nothing yet does not
+  look.
 - **Start from a template**: the new-presentation dialog offers a searchable
   catalogue of starting points — from an empty deck to shift briefings, security
   and privacy work decks, crisis and flight-prep sessions, and **conversation-
@@ -23,6 +34,14 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
   high-stakes, emotional ones weave in the *Crucial Conversations* method; each
   comes with fill-in preparation tables and a progress checklist. Everything is
   placeholder text you overwrite with your own content.
+
+  **The example slides in a template are Dutch**, and outside Dutch the picker
+  says so above the list. A template's name and description follow your interface
+  language; its slide content does not. That is a decision, not an oversight:
+  template content becomes *your* content the moment the deck is created, and
+  translating it would make what a document says depend on the menu language it
+  happened to be created in — two people picking the same template would get
+  files they could not compare.
 - **Opened from a URL**: a deck fetched from a web address (the URL import, or a
   `?deck=…` share link on the web build) shows an **“Extern”** privacy badge in
   the status bar. Opening such a link made your device contact that server;
@@ -31,18 +50,52 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
 - **Save**: `Ctrl/Cmd + S`. Saving lays out a tidy project folder next to your
   `.md` (`images/`, `data/`, `logos/`, `themes/`) and copies assets in. See
   [`FILE_FORMAT.md`](FILE_FORMAT.md).
+- **While a save is running** the save chip on the left of the status bar turns
+  into a spinner that names the destination — *Saving…*, *Uploading to WebDAV…*,
+  *Uploading to S3…*, *Committing to git…* — and the save button in the toolbar
+  is switched off until it finishes. A save to a server is one upload per media
+  file, and a git commit is several round trips; on a slow line that used to be
+  indistinguishable from a hung app, so people clicked again, and again. The
+  destination is named because it tells you whether to blame your disk or your
+  connection.
 - **Crash recovery**: unsaved work is snapshotted automatically and offered back
-  after an unexpected exit.
+  after an unexpected exit. The snapshot carries the deck text, your user notes
+  and the drawing layer, so a deck you only drew on comes back with the drawings
+  on it. **In the browser there is no crash recovery at all** — no folder to
+  write a snapshot to — and the app says so once, as soon as you make your first
+  edit. While unsaved work is open the browser also asks for confirmation before
+  the tab closes; the wording of that question is the browser's own and cannot be
+  set by the app. On desktop the window asks the same thing itself.
+- **Traces on this device**: *Settings → Beveiliging → Sporen op dit apparaat* shows what OciDeck keeps locally and lets you remove it: the recent list (which stores the full path and the TLP classification of every deck you opened), the crash-recovery snapshots, and a full reset that also clears the git working copies and the passwords in your keychain. Your presentations are never touched. Removing a git connection now takes its working copy with it — unless commits are still waiting to be pushed, in which case OciDeck names them and asks first.
 
 ## Command palette
 
 Press `Ctrl/Cmd + K` for a searchable list of the common actions — present,
-export, save, add a chart, find & replace, the image library, toggle
-markdown/visual mode, full-deck preview, new tab, open, package/URL import,
-settings, and setting each TLP level. Start typing to filter (accents and case
-don't matter), use `↑`/`↓` to move, `Enter` to run, and `Esc` to close. Actions
-that aren't available yet (for example export before you've saved) stay visible
-but greyed out. The palette is also in the `⋮` menu.
+export, save, **undo** and **redo**, **find**, add a chart, find & replace, the
+image library, toggle markdown/visual mode, full-deck preview, new tab, open,
+package/URL import, **presentation properties**, settings, **this user guide**,
+**the shortcut sheet**, and setting each TLP level. Start typing to filter
+(accents and case don't matter), use `↑`/`↓` to move, `Enter` to run, and `Esc`
+to close. Actions that aren't available yet (for example export before you've
+saved, or undo with nothing to undo) stay visible but greyed out. The palette is
+also in the `⋮` menu.
+
+Undo and redo were the notable absentees: they existed as two small toolbar icons
+and nowhere else, while the palette is the place where a function gets found in
+this app.
+
+## The menu bar (macOS)
+
+On macOS the app has a real menu bar — **OciDeck, File, Edit, Presentation,
+Window, Help** — with the same actions the toolbar and the palette offer, plus
+cut/copy/paste/select-all and the standard window items. It exists because on
+macOS the menu bar is where you find out what a program can do without already
+knowing where to look. Items that need an open presentation stay visible and grey
+out instead of disappearing.
+
+Windows and Linux take their window menu from the desktop environment and the
+browser build has none, so this bar is macOS-only. The full list of menus and
+their keys is in [SHORTCUTS.md](SHORTCUTS.md).
 
 ## Storage
 
@@ -185,12 +238,24 @@ saved version stays retrievable, which a plain folder cannot give you.
   trusted.
 - **Save** with the ordinary save button, or *Save to…* to publish somewhere
   else: the deck is written back as one
-  commit — the markdown and its images, which go into the shared pool exactly as
-  opening reads them. A deck you opened from git offers its own name and updates
+  commit — the markdown, its images, which go into the shared pool exactly as
+  opening reads them, and the linked chart data files. A deck you opened from git offers its own name and updates
   in place; a new deck is published by choosing a name (it becomes
   `decks/<name>`). If someone moved the branch since you opened it, the save is
-  refused so you do not overwrite their work — reload and save again. Video and
-  audio are not written yet; you are told when a deck has them.
+  refused so you do not overwrite their work — reload and save again.
+- **Not everything travels to git, and you are asked first.** A commit carries
+  `deck.md`, the images in the shared pool, and the linked chart data files.
+  Video and audio are not written yet, and neither are the two sidecars: the
+  drawings made on your slides (`.ink.json`) and the user notes
+  (`.user-notes.json`). Saving to a folder or to an `.ocideck` package does take
+  all of those along, so moving a deck from disk into a repository is where they
+  would be lost. Before the commit is made, a dialog therefore counts per kind
+  what stays behind and lets you cancel or go ahead; empty notes and slides with
+  no strokes are not counted, so it stays quiet when there is nothing to lose.
+  Going ahead does not delete anything — the layers stay in this window, and a
+  save to a file or a package still keeps them. *(Until 21-07-2026 the only word
+  about this came after the commit had been made, and only about video and
+  audio; that line after the fact is still there.)*
 - **Lose your connection while saving** and the deck's text is kept locally and
   queued instead of failing — you see "saved, syncs when you're back online".
   The queue survives closing the app; it empties on your next successful save
@@ -371,7 +436,10 @@ dashboard of aviation-style instrument gauges),
 dated events), **scorecard** (a few headline figures, each beside the figure from
 the previous report), and
 **free Markdown**. Each card in the chooser shows a miniature
-wireframe of the layout, and the dialog works entirely with the keyboard
+wireframe of the layout, and **below the grid stands the explanation of whatever
+the mouse or the keyboard focus is pointing at** — so you choose on a sentence
+rather than on a wireframe and a single word. The same sentence is what a screen
+reader announces on the card itself. The dialog works entirely with the keyboard
 (`Tab`/`Enter` to choose, `Esc` to cancel). Each type has a dedicated editor on
 the left and a live preview on the right. You can change an existing slide's type
 at any time from the **TYPE** control in the editor header: it opens the same
@@ -381,8 +449,9 @@ types. (Both pickers are category-filtered: the seven Informatieveiligheid types
 and sign-off — appear only once the security module is enabled; see the
 pentest-reporting section below.)
 
-Not sure what a slide type is for? Click the small **"What can I do here?"**
-button at the top of the editor for a one-line hint about the selected type (for
+Not sure what a slide type is for? The chooser already tells you before you pick
+(above), and afterwards the small **"What can I do here?"**
+button at the top of the editor repeats the hint for the selected type (for
 example, how to import CSV data into a chart, how to trim a video, or how to
 paste a table from a spreadsheet). The info icon next to a slide's **TLP** picker
 explains that slides classified above the deck's level are left out when you
@@ -406,6 +475,81 @@ reorder. The list style picker switches the whole list between plain **bullets**
 **numbered**, a **checklist** (tick-boxes with an optional progress bar), and
 **rich text** (a free-Markdown body). Plain bullets can use a dot or a cat-paw
 marker.
+
+**A rich-text body that does not fit runs on to a next page.** The text is first
+scaled to fill the slide; only when it would have to shrink past the readable
+floor is it broken into pages. All pages share one font size — the size of the
+fullest page — so paging through does not make the letters jump, and the title
+and subheading appear on the first page only. The split is worked out while
+rendering, from the theme (the font, and the room a logo or footer claims) at the
+fixed 16:9 slide size, so nothing about it is stored in the `.md`: change the
+theme and the same text may need one page more or fewer.
+
+Which page you are looking at is shown in the program's own chrome, never on the
+slide: the preview header reads `7 / 24 · Pagina 2 / 3`, the presenter's control
+bar shows the same beside the slide number, and both the preview's arrow keys and
+the presenter's next/previous step through the pages before moving on to the next
+slide. *Until 2026-07-22 a `1 / 3` badge was drawn in the top-right corner of the
+slide itself. It counted from one again on every slide while the audience was
+looking at slide 7 of 24, and it has been removed.*
+
+In the **PDF and PPTX** export each page is written as a full-size slide of its
+own, so a footer with page numbers counts the continuation pages along with
+everything else. *Corrected 2026-07-22: before that, the export rendered the
+first page of such a slide and left the rest out of the file without saying so.*
+Presenting is unaffected — there the pages remain pages of one slide. The **HTML**
+export writes such a slide **once**, with the whole body in it: the page split is
+a property of OciDeck's own rendering and there is nothing about it in the
+Markdown to reproduce.
+
+**A picture inside the text.** Put an image on a line of its own in a rich-text
+body and it is drawn there, in the flow of the text:
+
+```markdown
+What we found on the third day:
+
+![The login screen, with the error message in red](images/login.png)
+
+The message names a user account that does not exist.
+```
+
+Size it the way Marp does, with `w:` and `h:` in the square brackets —
+`![Login screen w:600 h:400](images/login.png)`. Those numbers count in Marp's
+own measure, where a slide is 1280 wide, so the same `w:600` means the same
+thing in the app and in the HTML export. Leave `w:` out and the picture uses the
+full width of the text column; leave `h:` out and it gets a fixed box a quarter
+of the slide width high. That box is deliberately worked out from the Markdown
+and not from the picture: the page split has to know how much room the image
+takes before any file has been read, and a box that changed once the picture
+arrived would make the text jump. Inside the box the picture is scaled to fit —
+never cropped, never stretched — so `h:` is how you make it taller or shorter.
+Everything else between the brackets is ordinary alt text, which is also what
+other Markdown readers make of the `w:`/`h:` part.
+
+Only an image that sits alone on its line is drawn this way; one in the middle
+of a sentence stays text, so a sentence is never broken in half by a picture.
+The image travels with the deck like any other (see *Images and media travel
+with the presentation*), and on a slide set to **redact** it is removed along
+with the slide's other media.
+
+**Splitting a pasted document into chapters.** Paste a long document into a
+rich-text body and its `#` headings end up in the middle of one slide. In Marp a
+`#` *is* a slide's title, so such a heading looks like a title without being one,
+and you cannot move, skip or present that chapter on its own.
+
+A line above the text box therefore says how many slides splitting would produce,
+with a **Splits op hoofdstukken** (Split by chapters) button. Each chapter becomes
+its own slide with the heading as its title; a `##` directly under such a heading
+becomes that slide's subheading. Whatever came before the first chapter stays on
+the slide you were already on, with its existing title. It is one edit, so one
+undo puts everything back.
+
+It only happens when you ask. A deck that has headings in a body today opens
+unchanged tomorrow — restructuring while reading the file would quietly change
+what you wrote. A `##` stays a heading *inside* the slide, and a `#` inside a
+fenced code block is source code and does not split. The button is not offered on
+a bullets-with-image slide: where that picture should go is a choice only you can
+make.
 
 **Group headings ("tussenkoppen").** To split one slide's bullets into visually
 separated groups — an agenda's *morning* and *afternoon*, pros versus cons —
@@ -525,7 +669,18 @@ The available types:
   a spreadsheet or by hand, and the app picks it up next time the deck opens.
   The two do not fight: saving only rewrites a data file whose numbers you
   actually changed in the app, so an edit you made elsewhere while the deck was
-  open is still there afterwards.
+  open is still there afterwards. And if you changed the numbers on *both* sides,
+  the file is left as it became outside the app and you are told about the clash
+  — your grid still holds what you typed, it is just not on disk yet, so you can
+  save elsewhere or reopen the deck and decide.
+
+  If a data file cannot be written at all — the `source` points outside the
+  project folder, the disk is full, the permissions are not there — you get an
+  error naming the charts it happened to. That is not a detail: the numbers have
+  just been taken out of the `.md`, so at that moment they exist only in this
+  window. Save somewhere the file can be written, or use **Ontkoppelen** to drop
+  the reference — the next save then gives the chart a fresh file inside the
+  project folder.
 
   New data files are written as JSON. A deck that already uses a `.csv` keeps
   using CSV, so anything else pointing at that file keeps working. Colours,
@@ -882,6 +1037,16 @@ private, the link is invalid, or there is no connection to the source. While a
 valid embed is still loading you see a small spinner, so a slow load is no longer
 mistaken for a broken one.
 
+A **YouTube** embed is played on `youtube-nocookie.com`, and only there: the
+player frame fetches no script from `youtube.com`, and the "Watch on YouTube"
+logo inside the player is refused rather than followed, so a stray click during
+a presentation cannot replace your slide with YouTube's own watch page. That
+does not make the embed invisible — YouTube still sees that the video is being
+requested, and the picture still comes from its media servers. See
+[PRIVACY.md](PRIVACY.md#what-leaves-your-device--and-only-when-you-ask). *(This
+was corrected on 22-07-2026; before that the player loaded a script from
+`youtube.com` and ended up running there.)*
+
 The same Security tab has **CVE opzoeken (online)** for the finding editor's
 **Zoek CVE…** action — also off by default, and additionally gated on your
 consent. When on, you can set the **CVE mirror** base URL (default
@@ -968,6 +1133,16 @@ If the presentation has not been saved yet there is no such folder, so the copy
 goes to a temporary staging area with the same layout; saving moves it to its
 final place. Either way the file is safe from the moment you insert it: moving or
 renaming the original afterwards no longer breaks the slide.
+
+A picture you typed into a rich-text body yourself — `![…](…)`, see *Bullets and
+lists* — counts as one of the slide's images everywhere this guide mentions them:
+it is copied into the presentation folder on save, packed into a `.ocideck`
+package, pooled into a git repository's shared assets, pre-loaded for PDF/PPTX
+export, reported by the quality panel when it is missing or lies outside the
+presentation, counted as a use by the image library, repointed when duplicates are
+cleaned up, and made absolute when you take the slide over from another deck.
+*Added 2026-07-22: until then all of those looked only at the image fields, so an
+image that existed solely in the text was skipped by each of them.*
 
 Next to the file path in the editor a **badge** tells you what will happen when
 you pass the presentation on. It stays quiet for material that simply travels
@@ -1056,6 +1231,23 @@ under *Presentation properties*). Each slide can *also* carry its own level
 **stricter** than the level chosen for the deck are **withheld** — so the same
 deck can be shown safely to audiences with different clearances. Order, least to
 most restrictive: none < CLEAR < GREEN < AMBER < AMBER+STRICT < RED.
+
+**A withheld slide is marked while you edit**, because the consequence is
+invisible otherwise: it is simply not there when you present, export or package.
+In the slide rail such a slide is dimmed like a skipped one and carries its own
+**Achtergehouden** flag, in its own colour, with a tooltip naming the level that
+holds it back. Above the list a bar counts how many there are. Skipping and
+withholding are deliberately kept apart, even though both end in the slide not
+being shown: skipping is a choice you made per slide, withholding follows from a
+classification you may never have set — both levels default to *none*, so a
+single AMBER slide drops out of a deck whose own level was never chosen. There is
+no button on the bar: raising the deck's level is a classification decision, and
+it belongs with the TLP chip, not in a tidy-up action in a sidebar.
+
+When *nothing* is left to show or export, the message names the actual cause —
+skipped, withheld, or both. It used to say "all slides are skipped" in every
+case, which pointed at *Alles tonen* on the skip bar — a button that changes
+nothing about a classification. *(Corrected 21-07-2026.)*
 
 Classifying a deck is **optional** by default. An organisation can tighten that
 with the **classification enforcement** settings under *Settings → General →
@@ -1456,12 +1648,33 @@ Under **Slide settings** (the gear in the editor header), each slide offers:
 | **Only report** | Findings stay in the quality panel; nothing shows on the slide. |
 | **Accept** | The data belongs here. The notice disappears. Nothing changes on the slide. |
 | **Accept + warn** | The data stays, and the slide gets a **PERSONAL DATA** badge — the PrivacyKat shield mark next to the TLP marking, travelling into the PDF, the PPTX and the HTML. Whoever receives the deck knows what they have. |
-| **Leave out of display and export** | The data found is redacted everywhere: screen, presentation, audience window, PDF, PPTX, HTML, speaker notes, document metadata. Your Markdown keeps the original text. |
+| **Leave out of display and export** | The data found is redacted in the presentation, the audience window, PDF, PPTX, HTML, the speaker notes and the document metadata. Your Markdown keeps the original text. The editor preview keeps showing *your* text so you can still edit it — see below for the switch that shows the other version. |
 
 The same four values exist deck-wide (`privacy:` in the front matter). A slide
 **overrides** the deck — unlike TLP, where the stricter level wins. A deck set to
 *accept* (the whole briefing is known) with one slide set to *leave out* (this one
 detail is for nobody) has to just work, and the author of that slide knows best.
+
+### Seeing it before you send it
+
+A slide set to *leave out* now says so above the preview, and the notice states
+both halves of what will happen: the data found is blacked out, **and all of that
+slide's pictures, video and audio drop out** — the second is the more expensive
+surprise, because a slide that is suddenly empty in the export looks like a
+mistake rather than a decision. Your Markdown file keeps everything.
+
+Beside the notice sits a **What they see / My text** switch. It runs the slide you
+are looking at through the same projection the presentation and the export use,
+so you can check the result before the file exists rather than after. It is **off
+by default**, it appears only on slides where there is something to check, and it
+is meant as a check rather than a working mode: an author who cannot see his own
+sentence cannot correct it. The editor fields beside the preview always show your
+own text.
+
+This closes a gap that was easy to miss. Until now the label promised redaction,
+the screen changed nothing, and the first honest answer came out of the PDF — at
+which point the file had already been written.
+*(Added 2026-07-22.)*
 
 ### Before you export
 
@@ -1523,6 +1736,17 @@ The privacy check can be switched off under *Settings → Security*. That switch
 off **warnings** — it does not switch off redaction. A deck that says *leave out*
 keeps leaving data out, even for someone who never wants to see a notice.
 Otherwise you could silence the messages and leak your briefing without noticing.
+
+**And with the check off, the export verdict stops being green.** The status-bar
+chip reads *Ready — privacy not checked*, in grey, and the export dialog's banner
+says the same in words: nothing was looked at for personal data, special-category
+data or secrets, and the switch is under *Settings → Security*. Nothing is
+blocked — you turned the check off yourself, so this is not an alarm — but the
+reassurance is withdrawn. With the check off the scanner returns an empty result,
+and from the outside "we found nothing" and "we did not look" are the same empty
+result; a green *Ready to export* on top of that is a promise nobody made. Grey
+rather than amber for the same reason the panel already says which checks ran
+when the bar is green.
 
 ### Accepting is not consent for an AI backend
 
@@ -1588,7 +1812,7 @@ into the same folder as the export (on the web, into the same download folder):
 
 | File | What is in it | Does it go with the report? |
 | --- | --- | --- |
-| `<name>-redactions.json` | One entry per redaction: a short id (`a3f1`), the rule that found it, the slide and field, and a cryptographic commitment. **No values, no keys.** | **Yes.** It is what lets a recipient say "I dispute redaction a3f1" and lets you prove what it hid — without opening any of the others. |
+| `<name>-redactions.json` | One entry per redaction: a short id (`a3f1e2b7`), the rule that found it, the slide and field, and a cryptographic commitment. **No values, no keys.** | **Yes.** It is what lets a recipient say "I dispute redaction a3f1e2b7" and lets you prove what it hid — without opening any of the others. |
 | `<name>-redaction-keys.json` | The same entries **plus the salts**. | **No. Never.** |
 
 The salts are the whole security of this scheme. A commitment is a SHA-256 over
@@ -1621,8 +1845,16 @@ leaves it out of everything it shows and exports.
 The suspect, [[Jan de Vries]], was arrested at [[Kalverstraat 12]].
 ```
 
-On the slide, in the presentation, in the audience window, in the PDF, the PPTX
-and the HTML you get `████████`. Anywhere.
+In the presentation, in the audience window, in the PDF, the PPTX and the HTML
+you get `████████`. Anywhere a reader other than you can end up.
+
+**Your own editor preview is the exception, and deliberately so.** It shows the
+text as you typed it, brackets and all, because a preview that blacks out your
+own sentence leaves you nothing to edit. On a slide set to *leave out* you can
+switch the preview to the recipient's version — see *Seeing it before you send
+it* above. *Corrected 2026-07-22: this paragraph opened with "On the slide", which
+read as though the editor blacked things out too; the thumbnails and the slide
+list also show your own text.*
 
 ### It is left out, not covered up
 
@@ -1903,6 +2135,60 @@ HTML exports also show a fixed top banner with the TLP label when classified.
 These properties are for discovery and handling downstream — they do not replace
 the visible banner, badge, and optional watermark on the slides themselves.
 
+**Unreviewed AI text is declared in the file.** When any slide still carries an
+AI-drafted field you have not pressed **Nagekeken** on (see *AI drafting for
+finding text* below), the export says so — in more than one place, because no
+single one reaches every reader:
+
+| Where | What it looks like |
+| --- | --- |
+| PDF **Keywords** / PPTX `cp:keywords` | `AI-generated (unreviewed)`, alongside the deck's own keywords and the TLP entries |
+| PDF **Subject** / PPTX `dc:subject` | appended after the title: `TLP:GREEN — My deck — contains AI-drafted text that no human has checked` |
+| HTML `<head>` | `<meta name="ai-generated">` with that same marking, plus `<meta name="ai-generated-slides">` with the number of slides it applies to |
+| HTML page | a fixed banner at the top, directly under the TLP banner when the deck is classified and in its place when it is not |
+| Filename | `-ai-concept` before the extension, after `-geredigeerd` and `-beknopt` |
+
+The keyword and the Subject note are deliberately **not** translated: they are
+fields a tool reads, not sentences on screen, and a value that changes with the
+interface language cannot be searched for. The banner in the HTML is a sentence,
+and like the rest of the text the HTML export generates itself (the redacted-media
+box, the sign-off page) it is written in Dutch regardless of your interface
+language.
+
+There is no banner on the PDF or PPTX slides. A slide-level stamp would have to
+be repeated on every page of a printed hand-out, where it competes with your
+content; the document properties and the filename carry it instead.
+
+Only the HTML gets a visible banner, for the mirror-image reason: it is read on
+a screen, where a bar at the top is already how this deck says something about
+the whole document.
+
+**Exporting is not blocked by this.** *Afronden & verzegelen* stays blocked
+until every AI-drafted field is reviewed — sealing is a statement about the
+content. Exporting is not: the normal way to get something reviewed is to send
+it to someone. The export dialog shows a line about it *before* you pick a
+format, so the changed filename is not a surprise afterwards.
+
+The **redacted** export keeps the marking too. Redaction removes personal data,
+not the provenance of the text — and that copy is the one that reaches the
+widest circle.
+
+Press **Nagekeken** on the last field and the export declares nothing: no
+keyword, no banner, no suffix. That is not an omission; it is what the review
+button is for.
+
+**Third-party notices in an HTML export.** An HTML export is a single file that
+carries five JavaScript libraries and, when your theme uses the bundled EB
+Garamond, the font itself. Forwarding that file makes *you* the distributing
+party, so the notices travel inside it: every inlined library opens with a
+licence line, and the very bottom of the file holds a collapsed **Licenties van
+derden** block with the full licence texts. It is collapsed by default and is
+not printed, so it never shows up on a slide. Leave it in place when you pass
+the file on — that is what lets you pass it on.
+
+The same texts, plus the licence of every package OciDeck is built from, are in
+the app under **Settings → Over OciDeck → Alle licentieteksten tonen**.
+
 **Slide quality at export.** When the deck has open quality issues, the export
 dialog shows a summary banner with a link to the full issue list. Depending on
 your settings (see *Slide quality* below), export may ask for
@@ -1967,6 +2253,20 @@ issues** or only **Errors**, **Warnings**, or **Tips**. Click a slide-specific
 issue to jump to that slide and focus the relevant editor field; click a **theme
 (entire presentation)** issue to open *Settings → Presentation style → Colours* with the matching
 colour field scrolled into view and highlighted.
+
+Not every deck-wide finding is about the theme, and the panel no longer pretends
+it is. A privacy finding on a **front-matter field** — author, organisation,
+description, keywords, version, date, the standards and tools used, or a MIAUW
+motivation — is headed *Presentation info*, and its button says **Open
+presentation info** and opens that window. It used to be labelled as a theme
+issue and sent you into the colour pickers to look for a field that is not there.
+*(Corrected 2026-07-22.)*
+
+Findings inside a **table** now say where they sit: *Table row 4, column 2*, or
+*Table header row, column 2* for the top row, counted the way you count them on
+the slide. They used to read *Table 14* — the scanner's running cell number,
+which appears nowhere on the slide and cannot be converted back without knowing
+the table's width.
 
 Issues also appear as badges on slide thumbnails, as a blue badge when a slide
 has **user notes**, and as inline hints on relevant editor fields (for example
@@ -2295,8 +2595,45 @@ else.
   The signature can be **typed** or **drawn**: click **Handtekening tekenen (Draw
   signature)** — in the sign-off editor or the seal dialog — to sign on a pad with
   the mouse, trackpad, touch or stylus. A drawn signature is stored as an embedded
-  image inside the report (so it travels with the `.md` and is covered by the
-  seal) and takes precedence over the typed name wherever the sign-off is shown.
+  image beside the report, in the seal file, and takes precedence over the typed
+  name wherever the sign-off is shown.
+
+#### What sealing does, and how the recipient checks it
+
+Sealing does two things: it locks the report — a finalised deck is read-only, so
+nothing in OciDeck edits or rewrites it again — and it records a **SHA-512 hash
+of the report file** in `<naam>.seal.json` next to it, together with the
+signature and the seal time.
+
+The hash is over the **bytes of the `.md`**, with no processing of any kind in
+between. That makes the check something anyone can do, with no OciDeck and no
+specification to follow:
+
+```console
+$ sha512sum rapport.md
+76f87f10…5c8936f  rapport.md
+```
+
+Compare that with `hash` in `rapport.seal.json`. Equal means the report is
+exactly what was sealed. (`shasum -a 512` on macOS, `certutil -hashfile rapport.md
+SHA512` on Windows, and `openssl dgst -sha512` all give the same answer.) The
+same recipe is printed inside the audit dossier, so a recipient does not need
+this guide either.
+
+The trade-off is strictness: **any** change to the file breaks the seal, even
+one that changes nothing you would call content — converting line endings, for
+instance. That is the point of *frozen*. It also means the two files belong
+together: send `rapport.md` and `rapport.seal.json` (or export a package, which
+puts both inside).
+
+Until you save, the status bar shows **Zegel nog niet vastgelegd**: the hash is
+of a file, and the file does not exist yet. Save once, and the badge turns into
+**Integriteit intact**.
+
+Sealing is **tamper-evidence, not tamper-proof.** There is no signing key, so
+someone who alters the report can also rewrite the seal file. What the seal buys
+you is that alteration cannot happen *unnoticed* by anyone holding the hash from
+another route — the audit dossier, an email, a timestamp token.
 
 ### The finding wizard
 
@@ -2346,6 +2683,11 @@ id the model emits that is not already in your facts is stripped out
 **Nagekeken** on each one, so the truthful-reporting signature always covers
 human-verified text. Off by default; desktop only.
 
+The badge does not stop at the app. Export a deck that still holds an unreviewed
+AI-drafted field and the PDF, PPTX or HTML says so in its document properties,
+the HTML shows a banner, and the filename gets `-ai-concept` — see *Export
+metadata* under *Exporting*. Reviewing the last field removes all of it.
+
 ### MIAUW compliance overview
 
 The **MIAUW-compliance** command (command palette) opens a gap-analysis panel that
@@ -2385,7 +2727,7 @@ small dialog that lets you:
   hand to OpenKAT or any RFC 3161 timestamp authority (TSA) out-of-band.
 - **Import the token (`.tsr`)** — the token the TSA returns. OciDeck compares its
   message imprint with the current seal hash and, when the two match, stores it
-  in the deck (`ocideck_seal_tsr`) and shows the timestamp.
+  beside the deck in `<name>.seal.json` and shows the timestamp.
 
 This keeps OciDeck a *producer of hashes* — it never has to contact the TSA itself.
 
@@ -2393,13 +2735,20 @@ This keeps OciDeck a *producer of hashes* — it never has to contact the TSA it
 you lean on a timestamp in a report (*corrected 2026-07-21; this passage used to
 say the token "is verified again every time the deck opens"*):
 
-- It is an **imprint comparison**, not a signature check. `timeStampMatchesHash`
-  parses the token far enough to read the hashed value and the generation time
-  and compares that value with the seal hash. It does not validate the TSA's CMS
-  signature, its certificate, or the chain behind it. A token whose imprint
-  matches will therefore be accepted even if it was never signed by anyone you
-  trust. Establishing *who* issued it is out-of-band work, with the TSA's own
-  tooling.
+- It is an **imprint comparison**, not a signature check — the function is even
+  called `timeStampImprintMatchesHash`. It parses the token far enough to read
+  the hashed value and the generation time and compares that value with the seal
+  hash. It does not validate the TSA's CMS signature, its certificate, or the
+  chain behind it. A token whose imprint matches will therefore be accepted even
+  if it was never signed by anyone you trust, and its time is a claim rather
+  than a checked fact. Establishing *who* issued it, and when, is out-of-band
+  work with the TSA's own tooling.
+- The request you export **does** carry a random nonce that the timestamp
+  service has to repeat in the token, which is what ties the token you get back
+  to the request you sent. OciDeck cannot check that on import — it does not
+  keep your request, so after a restart the other half is gone — but you can,
+  with both files in hand: `openssl ts -reply -in token.tsr -text` shows the
+  nonce it echoed.
 - It runs **when you look**, not on open. The comparison happens in the timestamp
   dialog (and again when an audit dossier is built). Opening a deck stores and
   displays the token without re-checking it, so no "does not match" warning
@@ -2547,9 +2896,9 @@ are not switched off somewhere — there is no setting to find.
 | Local project folders and sidecar files | Absent. Opening and saving go through the browser, and your deck lives in the tab. |
 | WebDAV / Nextcloud as a deck source | Absent. |
 | An S3 bucket as a deck source | Absent. |
-| A git repository as a deck source | Absent — it needs the real `git` program. |
+| A git repository as a deck source | **Works**, over the forge's REST interface — see *Git repository* above; opening, saving, review, merging and versions are all there. What is absent is the local clone, which needs the real `git` program: no durable offline commit history, and no `git grep` to speed up cross-deck search. *(Corrected 21-07-2026; this row said "absent", which contradicted the git section of this same guide.)* |
 | The second-screen presenter view | Absent — it needs a real second window. |
-| **Recovery after a crash** | Absent. Nothing is autosaved, so a browser crash loses unsaved work. |
+| **Recovery after a crash** | Absent. There is no folder to write a snapshot to, so nothing is autosaved and a browser crash loses unsaved work. The app says this once, at your first edit, and the browser asks for confirmation before you close a tab that holds unsaved work. |
 | **The image half of the privacy check** | Absent. See below. |
 | The offline CVE database | Absent — and so is the online lookup, which is desktop-only (SSRF-safe subprocess). The **Zoek CVE…** button reports "niet beschikbaar in de webversie". |
 | Image caption sidecars | Absent — they are files beside the image. |

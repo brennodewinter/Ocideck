@@ -7,6 +7,8 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/document_signature.dart';
+import 'package:ocideck/models/seal_record.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/document_integrity.dart';
 import 'package:ocideck/services/file_service.dart';
@@ -138,6 +140,50 @@ void main() {
     expect(slides, hasLength(2));
     expect(slides[1].title, slides[0].title);
     expect(slides[1].id, isNot(originalId));
+  });
+
+  test('splitIntoChapters knips op koppen en is met één keer ongedaan terug', () {
+    final n = _notifier()..newDeck('D');
+    n.addSlide(SlideType.bullets, afterIndex: 0);
+    n.updateSlide(
+      1,
+      n.state.deck!.slides[1].copyWith(
+        listStyle: ListStyle.richText,
+        title: 'Bestaande titel',
+        customMarkdown: 'Inleiding.\n\n# Eerste\n\nA.\n\n# Tweede\n\nB.',
+      ),
+    );
+    final before = n.state.deck!.slides.length;
+
+    n.splitIntoChapters(1);
+
+    final after = n.state.deck!.slides;
+    expect(after, hasLength(before + 2));
+    expect(after[1].title, 'Bestaande titel');
+    expect(after[2].title, 'Eerste');
+    expect(after[3].title, 'Tweede');
+
+    // Eén mutatie, dus één keer ongedaan maken. Dat is de voorwaarde om dit als
+    // knop aan te durven bieden: wie het per ongeluk aanklikt op een lang
+    // document is niet twintig dia's aan het terugvoegen.
+    n.undo();
+    expect(n.state.deck!.slides, hasLength(before));
+    expect(n.state.deck!.slides[1].customMarkdown, contains('# Eerste'));
+  });
+
+  test('splitIntoChapters doet niets als er geen koppen staan', () {
+    final n = _notifier()..newDeck('D');
+    n.addSlide(SlideType.bullets, afterIndex: 0);
+    n.updateSlide(
+      1,
+      n.state.deck!.slides[1].copyWith(
+        listStyle: ListStyle.richText,
+        customMarkdown: 'Gewoon wat tekst zonder koppen.',
+      ),
+    );
+    final before = n.state.deck!.slides.length;
+    n.splitIntoChapters(1);
+    expect(n.state.deck!.slides, hasLength(before));
   });
 
   test('splitSlide spreads a full slide over enough pages that none stays full', () {
@@ -884,6 +930,29 @@ void main() {
     expect(strokes.first.color, 0xFF112233);
   });
 
+  test('applyMarkdown preserves the signature across a toggle', () {
+    // De handtekening staat sinds 0.1.0 niet meer in de markdown. Zonder dat de
+    // toggle haar apart meeneemt, was ze na één keer schakelen naar de
+    // markdown-weergave weg — en had de eerstvolgende opslag het zegelbestand
+    // met haar erin opgeruimd.
+    final n = _notifier();
+    n.loadDeck(
+      Deck(
+        title: 'Rapport',
+        slides: [Slide.create(SlideType.signOff)],
+        signature: const DocumentSignature(
+          name: 'Jan Jansen',
+          role: 'Onderzoeker',
+        ),
+      ),
+    );
+    final md = n.generateMarkdown();
+    expect(md, isNot(contains('ocideck_sig_')));
+    expect(n.applyMarkdown(md), isTrue);
+    expect(n.state.deck!.signature?.name, 'Jan Jansen');
+    expect(n.state.deck!.signature?.role, 'Onderzoeker');
+  });
+
   test('generateMarkdown inlines linked chart data for the editor', () {
     final n = _notifier();
     const chartBlock =
@@ -929,9 +998,13 @@ void main() {
       final deck = n.state.deck!;
       expect(deck.finalized, isTrue);
       expect(deck.sealAlgo, 'sha-512');
-      expect(deck.sealHash.length, 128);
+      expect(deck.sealForm, SealForm.fileBytes);
       expect(deck.sealAt, isNotEmpty);
-      expect(n.integrityStatus, IntegrityStatus.intact);
+      // De hash gaat over de bytes van de `.md`, en die bestaan pas na het
+      // opslaan. Tot dan is er niets om tegen na te rekenen — dat is eerlijker
+      // dan een groen vinkje voor een controle die niemand deed.
+      expect(deck.sealHash, isEmpty);
+      expect(n.integrityStatus, IntegrityStatus.notVerifiable);
     });
 
     test('a finalised deck is read-only: content edits are refused', () {
@@ -951,7 +1024,6 @@ void main() {
       expect(n.state.deck!.slides, hasLength(2));
       expect(n.state.deck!.author, isEmpty);
       expect(n.generateMarkdown(), before);
-      expect(n.integrityStatus, IntegrityStatus.intact);
     });
 
     test('finalizeAndSeal clears history so finalising cannot be undone', () {
@@ -966,9 +1038,9 @@ void main() {
     test('finalizeAndSeal is a no-op on an already finalised deck', () {
       final n = _notifier()..newDeck('Rapport');
       n.finalizeAndSeal();
-      final hash = n.state.deck!.sealHash;
+      final at = n.state.deck!.sealAt;
       n.finalizeAndSeal();
-      expect(n.state.deck!.sealHash, hash);
+      expect(n.state.deck!.sealAt, at);
     });
   });
 

@@ -1,5 +1,7 @@
 # OciDeck — API Documentation
 
+> **Status:** current-state reference for internal APIs · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This document describes the key internal APIs and interfaces in the OciDeck
 codebase. OciDeck is not a library with a published public API; the surfaces
 below are the seams a contributor works with when extending the app. Signatures
@@ -24,13 +26,39 @@ providers.
 - `Map<String, String> userNotes` and per-slide ink `annotations`
 - `int presentationTargetSeconds` (presentation timing target)
 
+The audience gates are top-level functions in the same file, not methods:
+
+```dart
+bool slideVisibleAtTlp(Slide slide, TlpLevel presentationTlp);
+bool slideWithheldByTlp(Slide slide, TlpLevel presentationTlp); // its negation
+int  withheldSlideCount(Deck deck);                            // for the editor
+bool slideReachesAudience(Slide slide, {
+  required TlpLevel presentationTlp,
+  required bool includeDetail,
+}); // skipped ∧ TLP ∧ detail — the one place the three gates meet
+TlpLevel effectiveTlp({required TlpLevel deckTlp, required TlpLevel slideTlp});
+TlpLevel deckReleaseTlp(Deck deck); // strictest level anywhere in the deck
+```
+
+`slideWithheldByTlp` exists beside `Slide.skipped` deliberately: both end in the
+slide not reaching the audience, but a skip is an authoring choice and a
+withholding is a policy consequence, so the UI has to be able to say which.
+
 ### Slide Model
 `lib/models/slide.dart` — `Slide` is an immutable value object (all fields
 `final`, `const` constructor). It is **not** a generic property bag: besides
-`id` and `SlideType type`, it carries ~50 strongly-typed, type-specific fields
-(`title`, `subtitle`, `bullets`, `tableRows`, `imagePath`, `quote`, `findingId`,
-`tlp`, per-slide style overrides such as `titleTextColorOverride`, …). A field is
-only meaningful for the slide types that use it.
+`id` and `SlideType type`, it carries close to sixty strongly-typed,
+type-specific fields (`title`, `subtitle`, `bullets`, `tableRows`, `imagePath`,
+`quote`, `findingId`, `tlp`, per-slide style overrides such as
+`titleTextColorOverride`, …). A field is only meaningful for the slide types that
+use it. *Corrected 2026-07-22: this said "~50"; the constructor takes 60
+parameters, `id` and `type` included.*
+
+Two of those fields exist **only while rendering** and never reach a saved file:
+`mediaRedacted`, set by the privacy projection, and `renderPage` (added
+2026-07-22), set by `expandRichTextForRender` to say which page of a paginated
+rich-text body a copy draws. Neither is read back by the parser and neither is
+carried over by `Slide.duplicate`; see ARCHITECTURE § *Render-time pagination*.
 
 `SlideType` (24 values): `title, section, bullets, twoBullets, bulletsImage,
 twoImages, image, video, quote, table, freeMarkdown, code, chart, cockpit,
@@ -72,6 +100,14 @@ Two classes, deliberately separate:
 `RehearsalRun` (`lib/models/rehearsal.dart`) carries a `List<QuestionAttempt>`
 alongside its per-slide timings: one entry per *answered* attempt, with the
 slide id, index, duration and whether it was right.
+Per-type *pure data* lives in one place: the `slideTypeMeta` registry beside the
+enum (`label`, `marpClass`, `splitWithImage`, `isHeading`, `category`,
+`bulletColumns`, `backedByTable`), read through the `SlideTypeExtension`
+getters. A guard test (`test/slide_type_meta_test.dart`) fails when a type is
+missing an entry, and checks `backedByTable` against a real
+serialize-then-parse round trip so the flag cannot drift from behaviour. UI
+behaviour stays in the widget layer's registries (`slideEditorBuilders`,
+`slideTypeIcons`) — the model layer imports no Flutter.
 
 ### ThemeProfile Model
 `lib/models/settings.dart` — visual styling: colors, fonts (`fontFamily`,
@@ -97,10 +133,44 @@ String generateDeck(Deck deck, {
 Deck? parseDeck(String markdown, {String? filePath});
 ```
 
+`generateDeck` drops every slide whose `renderPage > 0` (2026-07-22). Those are
+render copies of one paginated rich-text body: each carries the whole body and
+differs only in a field that is not serialized, so writing them out repeats the
+same slide. Passing an `expandRichTextForRender` result to `generateDeck` is
+therefore always a caller mistake, and the filter sits in the service rather than
+at the call site.
+
 Structural pre-flight validation is a separate class; `validate` is an instance
 method, `MarkdownValidationResult validate(String markdown)`, in
 `lib/services/markdown_validator.dart`, which returns a `MarkdownValidationResult`
 (`lib/models/markdown_validation.dart`).
+
+### FileService (deck read/write)
+`lib/services/file_service.dart` — opening and saving a deck as a project folder.
+Each direction comes in a plain form and a `…Detailed` form; the detailed one
+also reports the chart data files it could not handle, and the plain one is a
+wrapper for callers with nothing to report:
+
+```dart
+Future<Deck?> openDeck(String filePath, {String? content});
+Future<({Deck? deck, OpenFailure? failure, List<String> warnings})>
+    openDeckDetailed(String filePath, {String? content});
+
+Future<Deck> saveDeck(Deck deck, String filePath);
+Future<({Deck deck, List<String> chartWarnings})>
+    saveDeckDetailed(Deck deck, String filePath);
+
+Future<String?> saveDeckAs(Deck deck, {String? initialDirectory});
+Future<({String? path, List<String> chartWarnings})>
+    saveDeckAsDetailed(Deck deck, {String? initialDirectory});
+```
+
+The two warning lists are not the same problem. On open, an unreadable data file
+means a chart draws empty. On save, writing the deck has just moved the numbers
+out of the markdown, so a data file that could not be written means they exist
+nowhere but the open window — which is why `whileSaving` rides along on
+`ChartDataWarning` and the shell shows an error rather than a note. `path` is
+null when the user dismissed the file picker.
 
 ### ExportService
 `lib/services/export_service.dart` — export to PDF, PPTX, and HTML:
@@ -110,11 +180,44 @@ method, `MarkdownValidationResult validate(String markdown)`, in
 Future<ExportResult> export(
   String deckPath,
   ExportFormat format,
-  List<Uint8List> images, { /* … */ });
+  List<Uint8List> images, {
+  ExportBundle? audience, /* … */ });
 ```
 
-Export metadata is built from the deck via the factory
-`ExportDocumentMetadata.fromDeck(Deck deck)` (`lib/services/export_metadata.dart`).
+The HTML markdown and the PPTX speaker notes come from `audience`, never from
+loose strings: an `ExportBundle` cannot be built without an `AudienceDeck`, and
+that type can only be produced by `PrivacyProjection`. `export` is listed in the
+`audienceBoundary` guard (`tool/check_conventions.dart`), so the build fails if
+that parameter is ever replaced by a raw `Deck` or `List<Slide>`.
+
+Export metadata is built from the projected deck via the factory
+`ExportDocumentMetadata.fromDeck(AudienceDeck audience)`
+(`lib/services/export_metadata.dart`) — the six fields it copies (title, author,
+organization, description, keywords, TLP) land readable in PDF info and PPTX
+docProps, so taking a raw `Deck` there would make "forgot to project" a silent
+leak.
+
+That same factory counts one value over the projected slides rather than copying
+it, because it is a fact about the deck and not something an author fills in:
+
+```dart
+final int unreviewedAiSlideCount; // slidesWithUnreviewedAiMarkers(deck).length
+bool    get hasUnreviewedAi;      // count > 0
+String? get htmlAiMarking;        // kAiDraftKeyword, or null — mirrors htmlClassification
+String  get fileSuffix;           // kAiDraftFileSuffix ('-ai-concept'), or ''
+```
+
+`subject()` and `exportKeywords()` fold the same state in (`kAiDraftSubjectNote`
+after the title, `kAiDraftKeyword` among the keywords). All of them are inert
+when the count is zero, which is the state a reviewed deck is in — the marker
+exists to be cleared. The three constants are untranslated on purpose: they are
+read by tools, not by people.
+
+`metadata` is an optional parameter, so `export` does not trust it for this one
+value: whenever `audience` is present it recounts with
+`withAiMarkingFrom(AudienceDeck)`. A caller that passes a bundle but no metadata
+therefore still declares, and a caller that hand-builds metadata can neither
+suppress the declaration nor keep it on a deck that has been reviewed.
 
 ### Privacy Projection API
 `lib/services/privacy/privacy_projection.dart` — applies redaction and audience
@@ -137,6 +240,18 @@ Export-time gating (does this audience deck satisfy the export policy?) lives in
 `PrivacyDisposition` (`{ warn, accept, shield, redact }`) is defined in
 `lib/models/privacy_disposition.dart`.
 
+`lib/services/privacy/privacy_preview.dart` is the author-facing detour: the same
+projection over a single slide, so the editor preview can show what the recipient
+gets without rescanning the deck on every keystroke.
+
+```dart
+Slide audiencePreviewSlide(Deck deck, Slide slide, {
+  Set<String> disabledRules,
+  OwnIdentity ownIdentity,
+});
+bool slideIsRedacted(Deck deck, Slide slide); // effective disposition == redact
+```
+
 ### Git Integration API
 `lib/services/git/git_forge.dart` — `GitForge` is the abstract forge adapter.
 There are three REST implementations: `GiteaForge` (Forgejo and Gitea),
@@ -147,6 +262,12 @@ Future<List<RepoEntry>> listTree(String ref, String path, {bool recursive});
 Future<Uint8List> readBlob(String ref, String path);
 Future<String> headSha(String branch);
 ```
+
+The three REST adapters share their HTTP plumbing through the `ForgeHttp` mixin
+(`lib/services/git/forge_http.dart`): request/JSON handling, the status-to-
+`GitForgeException` translation and the ref check. It is deliberately not a new
+layer — `GitForge` stays the contract — and each adapter still supplies its own
+URL shape, auth header, error-message name and 409 meaning.
 
 Alongside the REST path, a native-git path (`NativeGitMirror`,
 `lib/services/git/native_git_mirror_api.dart`) makes real local commits and
@@ -165,6 +286,10 @@ void newDeck(/* … */);
 Future<bool> save({String? initialDirectory}); // false if the user cancels
 void undo();
 void redo();
+
+// Callbacks, because this notifier has no Ref and TabsNotifier does.
+void Function()? onSweepWebAssets;
+void Function(List<String> sources)? onChartDataWarnings;
 ```
 
 ### SettingsProvider
@@ -233,6 +358,29 @@ Key methods: `pickImage` / `pickImageDetailed` (→ `ImageImportOutcome`),
 `pasteImage` / `pasteImageDetailed`, `readSlideImageBytes`, `copyImagesToProject`,
 `copyMediaToProject`.
 
+### Slide image references
+`lib/services/slide_image_refs.dart` — the single answer to "which images does
+this slide use". Do **not** read `imagePath`/`imagePath2` directly: a rich-text
+body may hold `![…](…)` of its own, and those are slide images as well.
+
+```dart
+// Every reference, in reading order: the fields first, then the body.
+// SlideImageSlot is { image, image2, inline }; empty paths are dropped.
+List<SlideImageRef> slideImageRefs(Slide slide);
+Iterable<String> slideImagePaths(Slide slide);
+
+// The counterpart: rewrite the same set. `null` (or the same path) keeps it.
+Slide rewriteSlideImagePaths(Slide slide, String? Function(String path) map);
+String rewriteInlineImagePaths(String markdown, String? Function(String) map);
+List<String> inlineImagePaths(String markdown);
+```
+
+`lib/services/image_usage.dart` builds the library's two questions on top of it:
+`slideIndexesUsingImage(deck, target, resolve)` and
+`slideWithImageReplaced(slide, target, resolve, replacement)`, where
+`ImagePathResolver resolve` is what differs per call site (with or without the
+containment guard) rather than what the questions themselves mean.
+
 ### WebAssetStore
 `lib/services/web_asset_store.dart` — in-memory image store for the web build,
 keyed under a `mem:` path scheme. Static `put(bytes, {name})`, `bytesFor`,
@@ -246,15 +394,61 @@ it via `FileService.fetchUrlBytes(String url, {int maxBytes, …})`
 (`lib/services/parts/file_service_net.dart`), which falls back to the proxy on
 web; the git web transport uses the same endpoint.
 
+## Export readiness
+`lib/services/export_readiness.dart` — one pure function folds the four gates
+into the single status the status-bar chip and the export dialog both render:
+
+```dart
+ExportReadiness evaluateExportReadiness({
+  required bool needsSave,
+  required ExportDecision classificationDecision,
+  required QualityExportDecision qualityDecision,
+  PrivacyExportDecision privacyDecision,
+  bool privacyChecksEnabled,   // the setting, not the outcome
+});
+```
+
+`ExportReadinessStatus` (8 values): `ready, readyPrivacyUnchecked,
+qualityWarnings, privacyWarnings, needsSave, blockedByClassification,
+blockedByPrivacy, blockedByQuality`. Only `needsSave` makes
+`ExportReadiness.canOpenExport` false. `readyPrivacyUnchecked` exists because a
+disabled privacy check yields an empty scan result, which is indistinguishable
+from a clean one: callers must pass `privacyChecksEnabled` so "we found nothing"
+is not rendered on top of "we did not look".
+
 ## Extending OciDeck
 
 ### Adding a slide type
 1. Add a value to the `SlideType` enum in `lib/models/slide.dart` (append, so the
    stored token stays stable) and any type-specific fields on `Slide`.
-2. Add its editor widget and its preview rendering in `lib/widgets/slides/`.
-3. Add serialization/parsing in the markdown services
-   (`markdown_service_serialize.dart` / `markdown_service_parse.dart`).
-4. Cover the round-trip in `test/markdown_round_trip_test.dart`.
+2. Add its `slideTypeMeta` entry in the same file — including `bulletColumns`
+   when it shows flowing bullet text and `backedByTable` when its content lives
+   in `Slide.tableRows`. These two drive the split action, the bullet splitter
+   and the table side of the Markdown round trip; getting them right here means
+   there is nothing to register in `markdown_service_parse.dart`.
+3. Add its editor widget (`slideEditorBuilders`) and its preview rendering in
+   `lib/widgets/slides/`.
+4. Add serialization in `markdown_service.dart`.
+5. Cover the round-trip in `test/markdown_round_trip_test.dart`.
+
+Adding a value makes the analyzer reject eleven non-exhaustive switches across
+eight files; those remaining spots are genuinely per-type (renderer, wireframe,
+help text, writer, fit-scale geometry, contrast pairs) and are deliberately not
+tabulated.
+
+### Adding an item to the macOS menu bar
+`lib/widgets/shell/app_menu_bar.dart` — `buildAppMenus(l10n, actions, deck)` is a
+pure function returning `List<PlatformMenuItem>`, so `test/app_menu_bar_test.dart`
+can assert labels, shortcuts and enablement without opening a window.
+
+An action that needs no open presentation goes on `AppMenuActions`, which
+`AppShell` fills directly. An action that lives inside the per-tab editor layer
+goes on `AppDeckMenuActions`, and the workspace publishes it through
+`ShellDeckCommands` / `shellDeckCommandsProvider`
+(`lib/widgets/shell/shell_deck_commands.dart`); a `null` provider value means "no
+deck open", which greys the items rather than removing them. Only the visible tab
+publishes, and only when an enablement flag changes — `sameEnablement` keeps the
+menu from being rewritten to the platform on every frame.
 
 ## Testing APIs
 
@@ -271,7 +465,12 @@ than a formal mock framework — see the `dev_dependencies` in `pubspec.yaml`.
 
 ## Compatibility
 
-OciDeck is pre-release (currently 0.2.0) and has no formal versioning scheme yet.
-These interfaces are internal and change freely between builds; the `.md`/Marp
-on-disk format is the stable contract and is documented in
-[`docs/FILE_FORMAT.md`](FILE_FORMAT.md).
+OciDeck has never tagged a release and has no versioning scheme, so there is no
+version these interfaces are stable *against* — see
+[MIGRATION_GUIDE.md](MIGRATION_GUIDE.md). They are internal and change freely
+between commits; the `.md`/Marp on-disk format is the stable contract and is
+documented in [`docs/FILE_FORMAT.md`](FILE_FORMAT.md).
+
+*(Corrected 2026-07-22: this read "pre-release (currently 0.2.0)", which reads as
+a version claim. `0.2.0+1` is a string in `pubspec.yaml`; no tag carries it and
+the app never shows it.)*

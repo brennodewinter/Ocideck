@@ -11,6 +11,17 @@ import 'package:ocideck/services/privacy/redaction_manifest_service.dart';
 
 // Het redactiemanifest: hoe een derde partij een geredigeerd rapport controleert
 // zonder dat het zegel breekt.
+/// Een deck dat is afgerond én opgeslagen: pas dan bestaat de zegelhash, want
+/// die gaat over de bytes van de `.md`.
+Deck _verzegeldEnOpgeslagen(Deck deck) {
+  final md = MarkdownService();
+  final afgerond = DocumentIntegrity(md).seal(deck);
+  return DocumentIntegrity.recordWrittenBytes(
+    afgerond,
+    md.generateDeck(afgerond),
+  );
+}
+
 void main() {
   final service = RedactionManifestService();
 
@@ -31,6 +42,56 @@ void main() {
       manifest.entries.map((e) => e.rule),
       containsAll(<String>['nl.bsn', 'contact.email']),
     );
+  });
+
+  group('het id wijst precies één redactie aan', () {
+    test('is een prefix van het commitment, minstens acht tekens', () {
+      final manifest = service.build(redactedDeck());
+      for (final e in manifest.entries) {
+        expect(e.id.length, greaterThanOrEqualTo(kRedactionIdMinChars));
+        expect(e.commitment, startsWith(e.id));
+      }
+    });
+
+    test('alle ids in één manifest zijn verschillend', () {
+      final manifest = service.build(redactedDeck());
+      expect(
+        manifest.entries.map((e) => e.id).toSet(),
+        hasLength(manifest.entries.length),
+      );
+    });
+
+    test('bij een botsing groeit de lengte tot ze wél onderscheiden', () {
+      // Het verjaardagsprobleem is de reden dat vier tekens niet volstonden:
+      // 65.536 mogelijkheden geven bij ~300 redacties al een kans van één op
+      // twee op twee gelijke ids, en dan wijst "ik betwist a3f1" naar twee
+      // dingen tegelijk. Hier geplant in plaats van afgewacht.
+      expect(
+        RedactionManifestService.shortUniqueIdLength(const [
+          'aaaaaaaabbbb',
+          'aaaaaaaacccc',
+        ]),
+        9,
+        reason: 'acht tekens botsen hier, negen niet',
+      );
+      // Verschillen ze al eerder, dan blijft het bij de ondergrens.
+      expect(
+        RedactionManifestService.shortUniqueIdLength(const [
+          'aaaaaaaa1111',
+          'bbbbbbbb2222',
+        ]),
+        kRedactionIdMinChars,
+      );
+      // Eén entry heeft niets om mee te botsen; een leeg manifest evenmin.
+      expect(
+        RedactionManifestService.shortUniqueIdLength(const ['abcdef0123']),
+        kRedactionIdMinChars,
+      );
+      expect(
+        RedactionManifestService.shortUniqueIdLength(const []),
+        kRedactionIdMinChars,
+      );
+    });
   });
 
   test('een slide die niet op redact staat levert geen entries op', () {
@@ -148,7 +209,7 @@ void main() {
       // "GEMANIPULEERD" concluderen — en een vals alarm op een echt rapport is
       // erger dan geen integriteitscontrole hebben.
       final integrity = DocumentIntegrity(MarkdownService());
-      final sealed = integrity.seal(redactedDeck());
+      final sealed = _verzegeldEnOpgeslagen(redactedDeck());
       final manifest = service.build(sealed);
 
       expect(integrity.verify(sealed), IntegrityStatus.intact);
@@ -164,8 +225,8 @@ void main() {
 
     test('een manifest dat bij een andere bron hoort, is wél verdacht', () {
       final integrity = DocumentIntegrity(MarkdownService());
-      final sealed = integrity.seal(redactedDeck());
-      final andereBron = integrity.seal(redactedDeck(bsn: '100000009'));
+      final sealed = _verzegeldEnOpgeslagen(redactedDeck());
+      final andereBron = _verzegeldEnOpgeslagen(redactedDeck(bsn: '100000009'));
       final manifest = service.build(sealed);
 
       expect(
@@ -179,8 +240,7 @@ void main() {
     });
 
     test('het manifest pint de herkomst vast op de zegelhash', () {
-      final integrity = DocumentIntegrity(MarkdownService());
-      final sealed = integrity.seal(redactedDeck());
+      final sealed = _verzegeldEnOpgeslagen(redactedDeck());
       expect(service.build(sealed).derivedFrom, sealed.sealHash);
     });
   });

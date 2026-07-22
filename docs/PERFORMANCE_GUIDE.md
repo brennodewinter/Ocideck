@@ -1,5 +1,7 @@
 # OciDeck — Performance Guide
 
+> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This document describes OciDeck's performance characteristics using the **actual
 limits and sizes enforced in the codebase** (with `file:line` citations), plus a
 few measured figures. Where a number is a hard cap in code, it is authoritative;
@@ -47,8 +49,15 @@ optimisation.
 - PDF/PPTX exports rasterize each slide to a PNG at a default **1920 × 1080**
   (16:9) target (`lib/services/slide_rasterizer.dart`, `logicalSize` and `targetWidth`); rasterization cost
   scales with slide count and per-slide complexity.
+- The slide count it scales with is the **expanded** one: an overflowing finding
+  and a rich-text body longer than one slide each become several full-size slides
+  before rasterization (ARCHITECTURE § *Render-time pagination*), so a deck with
+  long prose costs more images than it has slides in the editor.
 - HTML export pre-renders charts to inline SVG in Dart and inlines the vendored
-  JS/CSS, producing a self-contained file (see measured bundle sizes below).
+  JS/CSS (see measured bundle sizes below). Slide images are the exception — they
+  stay relative `<img src>` references and are not inlined. *Corrected 2026-07-22:
+  this called the result "a self-contained file", the same overstatement corrected
+  in ARCHITECTURE and USER_GUIDE on 2026-07-21.*
 
 ## Network limits
 
@@ -86,8 +95,23 @@ project folders reasonably shallow.
 
 - Autosave ticks every **25 s** (`lib/state/tabs_provider.dart`, `_autosaveInterval`), writing an
   atomic snapshot so a crash never truncates the open file.
+- A snapshot holds the deck markdown plus the two layers that are not in it: the
+  user notes and the ink annotations. Three encodes per dirty tab per tick, and
+  only for tabs whose deck actually changed since the last one.
 - Recovery snapshots are retained for **7 days** by default
-  (`lib/services/recovery_service.dart:134`), then pruned.
+  (`RecoveryService.defaultMaxAge`, `lib/services/recovery_service.dart`), then
+  pruned. *(The line number that stood here, `:134`, had drifted; a constant name
+  survives an edit above it. Corrected 21-07-2026.)*
+- **On web none of this runs.** The timer is only started where local project
+  folders exist, and `RecoveryService.available` is false anyway — no
+  application-support directory to write to, so every snapshot call would be a
+  no-op. Ticking there would serialise a deck every 25 s for nothing. Because the
+  absence is silent otherwise, the shell says so once at the first edit
+  (`RecoveryService.available`, not a second `kIsWeb` test). The browser build
+  instead registers a
+  `beforeunload` guard while work is unsaved (`lib/platform/unsaved_work_guard_web.dart`),
+  and only while it is unsaved, so a clean tab can still enter the back/forward
+  cache.
 
 ## Development ratchets (keep the codebase fast to work in)
 

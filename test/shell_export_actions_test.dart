@@ -116,16 +116,35 @@ void main() {
       while (DateTime.now().isBefore(deadline)) {
         if (until()) {
           reached = true;
-          return;
+          break;
         }
         await tester.pump();
         await Future<void>.delayed(const Duration(milliseconds: 5));
       }
-      reached = until();
+      reached = reached || until();
+
+      // Staart. De voorwaarde is bereikt, maar dat wil niet zeggen dat de app
+      // klaar is: tussen "het bestand staat op schijf" en "de melding staat op
+      // het scherm" zit nog de rest van de future die de export afrondt. Buiten
+      // [WidgetTester.runAsync] kan die niet meer vorderen — `pumpAndSettle`
+      // hieronder laat geen echte async-voortgang toe — dus die frames moeten
+      // hier vallen, binnen de runAsync-zone.
+      //
+      // Een vaste staart is geen garantie; wie een waarneembare uitkomst kan
+      // afwachten, hoort die in [until] te zetten (zie [confirmExport]). Dit is
+      // het vangnet voor het geval dat niet kan.
+      for (var i = 0; i < 20; i++) {
+        await tester.pump();
+        await Future<void>.delayed(const Duration(milliseconds: 5));
+      }
     });
     await tester.pumpAndSettle();
     return reached;
   }
+
+  /// Staat er een melding op het scherm? Dat is het moment waarop de export
+  /// werkelijk klaar is — niet het moment waarop het bestand verschijnt.
+  bool snackBarShown() => find.byType(SnackBar).evaluate().isNotEmpty;
 
   /// Pompt de app, laadt [deck] en opent het opdrachtenpalet.
   Future<void> openPalette(WidgetTester tester, {Deck? deck}) async {
@@ -207,14 +226,32 @@ void main() {
   );
 
   /// Bevestigt de export en wacht tot [until] waar is.
+  /// Bevestigt het exportvenster en wacht tot de export *af* is.
+  ///
+  /// Af betekent twee dingen tegelijk: het bestand staat op schijf én de app
+  /// heeft het gemeld. Alleen op het bestand wachten is een race — het
+  /// verschijnt zodra de laatste byte geschreven is, terwijl het frame met de
+  /// melding pas daarna wordt gebouwd. Op een rustige machine valt dat samen;
+  /// onder een volle `make check` niet, en dan viel de test om terwijl de
+  /// export gewoon gelukt was.
+  /// Zet [expectsMessage] op `false` waar het pad bewust zwijgt — afbreken is
+  /// geen fout en levert dus geen melding op.
   Future<void> confirmExport(
     WidgetTester tester,
     bool Function() until, {
     required String reason,
+    bool expectsMessage = true,
   }) async {
     await tester.tap(find.widgetWithText(ElevatedButton, 'Exporteren'));
     await tester.pumpAndSettle();
-    expect(await settleAsync(tester, until), isTrue, reason: reason);
+    expect(
+      await settleAsync(
+        tester,
+        () => until() && (!expectsMessage || snackBarShown()),
+      ),
+      isTrue,
+      reason: reason,
+    );
   }
 
   testWidgets('de pakketexport schrijft een echt .ocideck en meldt waarheen', (
@@ -290,6 +327,9 @@ void main() {
       tester,
       () => asked.isNotEmpty,
       reason: 'er is niet eens naar een bestemming gevraagd',
+      // Afbreken schrijft niets en meldt dus ook niets; wachten op een melding
+      // die per ontwerp niet komt, zou hier eeuwig duren.
+      expectsMessage: false,
     );
 
     expect(tmp.listSync(), isEmpty, reason: 'er mag niets geschreven zijn');

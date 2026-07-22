@@ -142,5 +142,51 @@ void main() {
       );
       expect(deckCarriesMemoryAssets(deck), isTrue);
     });
+
+    test('een mem:-afbeelding in de vrije tekst telt net zo goed mee', () {
+      final mem = WebAssetStore.put(Uint8List(4), name: 'foto.png');
+      final deck = deckWith(
+        Slide.create(
+          SlideType.freeMarkdown,
+        ).copyWith(customMarkdown: 'Kijk:\n\n![foto]($mem)\n'),
+      );
+      expect(deckCarriesMemoryAssets(deck), isTrue);
+    });
+  });
+
+  group('deckMemoryAssetPaths', () {
+    tearDown(WebAssetStore.clear);
+
+    // De sweep gooit weg wat híer niet in staat, dus een gemist pad is
+    // dataverlies en geen schoonheidsfoutje.
+    test('verzamelt ook de afbeeldingen uit de vrije tekst', () {
+      final veld = WebAssetStore.put(Uint8List(4), name: 'veld.png');
+      final tekst = WebAssetStore.put(Uint8List(4), name: 'tekst.png');
+      final deck = Deck(
+        title: 'D',
+        slides: [
+          Slide.create(SlideType.image).copyWith(
+            imagePath: veld,
+            customMarkdown: 'Zie ![in de tekst]($tekst) hierboven.',
+          ),
+        ],
+      );
+
+      expect(deckMemoryAssetPaths(deck), {veld, tekst});
+    });
+
+    test('addSlideMemoryAssetPaths ziet een dia op het klembord net zo', () {
+      final mem = WebAssetStore.put(Uint8List(4), name: 'plak.png');
+      final into = <String>{};
+
+      addSlideMemoryAssetPaths(
+        Slide.create(
+          SlideType.freeMarkdown,
+        ).copyWith(customMarkdown: '![x]($mem)'),
+        into,
+      );
+
+      expect(into, {mem});
+    });
   });
 }

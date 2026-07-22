@@ -1735,8 +1735,6 @@ const _dutchSourceTlh = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'rInmoH & SoQmoH',
   'Verzegelen': 'SoQmoH',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'cha\'nob rInmoH \'ej De\' SHA-512 HablI\' chenmoH. ngugh teywI\' SoQlu\' \'ej choHlaHbe\'lu\'. choHmey veb \'anglu\'. naDev DaW\' laHbe\'.',
   'Handtekening (optioneel)': 'ghItlh pong (DIch)',
   'Naam': 'pong',
   'Rol of functie': 'Qu\' pagh patlh',
@@ -1790,6 +1788,96 @@ const _dutchSourceAddTlh = <String, String>{
   'goed vanaf': 'lugh',
   'links en rechts wisselen per ronde': 'Hoch tlhoqDaq poS nIH je luchoHlu\'',
   'overeenkomst': 'rapghach',
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      '\'ay\'mey ngaS ghItlh vam. wavlu\'chugh, chen',
+  'dia\'s op.': 'cha\'nob.',
+  'Splits op hoofdstukken': '\'ay\'meyDaq yIwav',
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'deckvamDaq AI-ghItlh tu\'lu\'; DanuDpu\'be\'. ngeHlu\'laH; teywI\' pongDaq "-ai-concept" chelu\'.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'nab: AI-ghItlh tu\'lu\'. not nuDlu\'pu\'.',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'cha\'nob rInmoH \'ej teywI\' choqlu\'bogh SHA-512 HablI\' qonlu\'. ngugh SoQlu\' \'ej choHlaHbe\'lu\'. Hoch choHmey veb \'anglu\'. sha512sum lo\'taHvIS, HablI\' tob ja\'ghach Hevbogh nuv. naDev DaW\' laHbe\'.',
+  'Zegel en handtekening': 'SoQmoHwI\' ghItlh pong je',
+  'Zegel nog niet vastgelegd': 'DaH SoQmoHmeH HablI\' qonlu\'be\'',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'teywI\' choqlu\'bogh tu\'lu\'be\', vaj SoQ toblaHbe\'lu\'. cha\'nob yIchoq.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'chIllu\': nuv De\' \'oH \'e\' wuqbogh ninSar qIjlu\', \'ej cha\'nobvam mIlloghmey, HaSta, wab je cha\'be\'lu\' \'ej ngeHbe\'lu\'. markdown ghItlhlIj Hoch polta\'.',
+  'Bestand': 'ghItlh',
+  'Venster': 'Qorwagh',
+  'Help': 'QaH',
+  'Alles selecteren': 'Hoch yIwIv',
+  'Plakken': 'yIlan',
+  'Opnieuw': 'yIruchqa\'',
+  'Eigenschappen': 'Seghmey',
+  'Opdrachten…': 'ra\'mey…',
+  'Opslaan…': 'polIu\'…',
+  'Uploaden naar WebDAV…': 'WebDAV-Daq ngeHlu\'…',
+  'Uploaden naar S3…': 'S3-Daq ngeHlu\'…',
+  'Vastleggen in git…': 'git-Daq qonlu\'…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'polIu\'. rInpa\', polqa\'meH ra\' lI\'be\'.',
+  'Klaar — privacy niet gecontroleerd': 'rInpu\' — pegh ninSarlu\'be\'',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'nuv De\', De\' pIn\'a\', pegh je nejlu\'be\'. Hubqu\'Daq pegh ninSar chu\'Ha\'lu\'pu\'.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Markdown ghItlhmey neH rurtaH \'echletHommey: laDlaH, nejlaH, \'ej Hoch choHwI\' lo\'laH.',
+  'sjablonen om mee te beginnen, of leeg': 'taghmeH ghItlh\'a\'mey, pagh chIm',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'ghItlh\'a\' cha\'nobmey: Nederland Hol lu\'. per QIn je: Hol lIj lu\'. chenpu\'DI\', qech yIchoH.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'chIllu\': De\' tu\'lu\'bogh qIjlu\' \'ej cha\'nobvam mIlloghmey, HaSta, wab je cha\'be\'lu\' \'ej ngeHbe\'lu\'. markdown ghItlhlIj Hoch polta\'.',
+  'Mijn tekst': 'mu\'wIj',
+  'Wat zij zien': 'bejwI\' legh',
+  'Presentatiegegevens': '\'echletHommey De\'',
+  'Open presentatiegegevens': '\'echletHommey De\' yIpoSmoH',
+  'Motivering van een uitsluiting': 'chIlmeH meq',
+  'Motivering van een bevestiging': 'chIDmeH meq',
+  'Tabel koprij, kolom {kolom}': 'romuS nach ret, \'och {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'romuS ret {rij}, \'och {kolom}',
+  'Via deze website ophalen?': 'Suqlu\'meH website vam lo\'lu\'\'a\'?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'De\' nIH laD browser \'e\' chaw\'be\' cha\'nob vam Server. OciDeck ghoSpu\'bogh websiteDaq Daq ngeHlaH OciDeck, vaj De\' Suq websitevetlh. Daq naQ legh websitevetlh — rarDaq ngaQHa\'moHwI\' ghap ngoq tu\'lu\'chugh, \'oH je legh websitevetlh.',
+  'In de browser kan dit niet worden bewaard': 'browserDaq vam pollaHbe\'lu\'',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'browserDaq ngaQHa\'moHwI\' ngaSwI\' tu\'lu\'be\'; De\'wI\'Daq tu\'lu\'. naDev pegh pol OciDeck, \'ach laDlaH Hoch script vam. desktop version yIlo\' — pa\' operating system ngaQHa\'moHwI\' ngaSwI\'Daq pegh pollu\'.',
+  'Licenties van derden': 'latlhpu\' chuvmey chut',
+  'Alle licentieteksten tonen': 'Hoch chut ghItlh \'ang',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'EUPL-1.2 bIng OciDeck. latlhpu\' De\'wI\' De\' je qengmeH: Dart Flutter je ngaq, cha\' plugin, loS ghItlh qorDu\', qab De\'wI\' \'ej JavaScript, HTML lupoQmeH. Hoch chut Dajmey polbe\'chugh, chut chaj polta\'.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'naDev latlhpu\' De\'wI\' De\' \'ej rut ghItlh qorDu\' tu\'lu\'. bIng chut ghItlhmey naQ tu\'lu\'; De\' DangeHDI\', chut ghItlhmey je yIngeH.',
+  'Sporen op dit apparaat': 'jan vamDaq ratlhbogh Dochmey',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'cherlu\'bogh polbe\' neH OciDeck: teHwI\'mey chu\' tetlh je pol, \'ej Qaghpu\'DI\' De\'wI\', \'anghomlIj Hoch ngaSbogh qa\'meH teHwI\' pol. pagh mej jan vamvo\', \'ach naDev ratlh — ghItlh nIt, pat vamDaq per\'onlIj neH Hub, latlh pagh.',
+  'Recent geopende presentaties': 'poSlu\'pu\'bogh \'anghommey chu\'',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'poSlu\'pu\'bogh \'anghom Hoch He naQ Segh je pol tetlh — vaj nuq DavangtaH \'ej \'Iv DavangmoH, \'e\' \'ang.',
+  'Recente lijst wissen': 'teHwI\'mey chu\' tetlh teq',
+  'De recente lijst was al leeg.': 'chIm teHwI\'mey chu\' tetlh.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'teHwI\'mey chu\' tetlhvo\' teqlu\'ta\'.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'qa\'meH teHwI\'mey Hoch \'anghom ngaS, ghItlh nIt. 7 jaj tlhoch Say\'moHlu\', \'ej QaQ mevlu\'DI\' SIbI\' Say\'moHlu\'.',
+  'Alles terugzetten': 'Hoch cheghmoH',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Hoch cherlu\'bogh, teHwI\'mey chu\' tetlh, qa\'meH teHwI\'mey, git vumwI\' velmey, ghewmey velDaq per\'onmey je Qaw\'. ratlh \'anghomlIjmey: SoHvaD chaH, OciDeckvaD chaHbe\'.',
+  'Zet alles terug naar de begintoestand': 'taghDotlhDaq Hoch yIcheghmoH',
+  'Alles terugzetten naar de begintoestand?':
+      'taghDotlhDaq Hoch cheghmoH\'a\'?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'cherlu\'bogh, teHwI\'mey chu\' tetlh, qa\'meH teHwI\'mey, git vumwI\' velmey, per\'onmey polbogh je Qaw\'lu\'. cheghmoHqa\'laHbe\'lu\'. ratlh \'anghomlIjmey.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'choHmey git ServerDaq ngeHlu\'pu\'be\' \'ej jan vamDaq neH tu\'lu\'. bIH je Haw\'lu\'.',
+  'Alles is teruggezet naar de begintoestand.':
+      'taghDotlhDaq Hoch cheghmoHlu\'ta\'.',
+  'Terugzetten is niet gelukt.': 'cheghmoHmeH Qu\' Qapbe\'.',
+  'Er wacht nog werk dat niet verstuurd is': 'ngeHlu\'pu\'be\'bogh Qu\' loS',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'choHmey ngeHlu\'pu\'be\'bogh ghaj git rar vam. rar Dateqchugh, jan vamDaq vumwI\' vel je Haw\' — \'ej Daq\'a\'Daq Qu\'vam tu\'lu\'be\'.',
+  'Verbinding behouden': 'rar pol',
+  'Toch verwijderen': 'vaj rar teq',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'lu\'',
@@ -1847,6 +1935,33 @@ const _dutchSourceAddTlh = <String, String>{
       'So\'lu\'bogh Dochmey tetlh ghaj, \'ach De\' ngaSbe\'. ghItlh tlhej ngeHlu\'laH teywI\'vam.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'So\'lu\'bogh Hoch De\' ngaQHa\'moHmeH ngaQHa\'moHwI\'mey ngaS. teywI\'vam yIngeHQo\': vaj So\'ta\'ghach chIlHa\'lu\'. mung retlhDaq yIpol.',
+  'slides': '\'anghommey',
+  'Achtergehouden': '\'angbe\'lu\'',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      '\'angbe\'lu\': \'echletHom patlh jen law\' cha\'nob patlh jen puS',
+  '1 slide achtergehouden door haar TLP': '1 slide \'angbe\'lu\' TLPmo\'',
+  'slides achtergehouden door hun TLP': 'slidemey \'angbe\'lu\' TLPmo\'',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'presentDI\', boSDI\' je ngaSwI\'Daq slidemeyvam tlhapbe\'lu\'. chaH tlhapmeH Presentatie-info-Daq cha\'nob TLP patlh yIghurmoH.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Hoch slidemey \'angbe\'lu\' TLP tlheghmo\' — \'oH cha\'meH pagh tu\'lu\'be\'.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Hoch slidemey \'angbe\'lu\' TLP tlheghmo\' — \'oH weHmeH pagh tu\'lu\'be\'.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Hoch slidemey juSlu\' pagh \'angbe\'lu\' TLP tlheghmo\' — \'oH cha\'meH pagh tu\'lu\'be\'.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Hoch slidemey juSlu\' pagh \'angbe\'lu\' TLP tlheghmo\' — \'oH weHmeH pagh tu\'lu\'be\'.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'ta\'nom mI\'mey polbe\'lu\' — Qorwaghvam neH tu\'lu\':',
+  'Niet alles gaat mee naar git': 'git-Daq Hoch ghoSbe\'',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'commit-Daq \'ay\'meyvam ghoSbe\' \'ej repository-Daq tu\'lu\'be\':',
+  'Tekeningen op slides': '\'anghommeyDaq ghItlhmey',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'QorwaghvamDaq ratlhtaH. chaH polmeH De\'Daq ghap .ocideck ngaSwI\'Daq cha\'nob yIpol.',
+  'Toch opslaan': 'pol \'e\' yIruch',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'browserDaq Qagh vangHa\'ghach tu\'lu\'be\': \'echletvam DaSoQmoHchugh, polbe\'lu\'bogh Qu\' natlh. cha\'nob yIpol.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  CVE qawHaq Sumbogh (SoH DaHoSmoH download): api.github.com lo\'taHvIS De\' law\' Sam OciDeck \'ej Daqvetlh \'angbogh release De\'wI\' nav Sam.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

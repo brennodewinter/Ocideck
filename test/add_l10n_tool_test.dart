@@ -115,4 +115,43 @@ void main() {
     expect(overlayAnchor('tr'), 'const _dutchSourceAddTr = ');
     expect(overlayAnchor('gsw'), 'const _dutchSourceAddGsw = ');
   });
+
+  group('dutchSourceRegion', () {
+    // Regressie: de dubbeltest van het gereedschap keek het HELE bestand door.
+    // De `t()`-map `_strings<Lang>` staat daar ook in en heeft een eigen
+    // sleutelruimte — `t('slides')` en `d('slides')` zijn twee verschillende
+    // dingen. Een bronstring die toevallig zo heet als een bestaande t()-sleutel
+    // werd daardoor in alle 31 talen overgeslagen, en `make l10n-check` bleef
+    // rood zonder dat `make add-l10n` er nog iets aan kon doen.
+    const source =
+        'const _stringsTr = {\n'
+        "  'slides': 'slayt',\n"
+        '};\n\n'
+        'const _dutchSourceTr = {\n'
+        "  'Opslaan': 'Kaydet',\n"
+        '};\n\n'
+        'const _dutchSourceAddTr = <String, String>{\n'
+        "  'Toch opslaan': 'Yine de kaydet',\n"
+        '};\n';
+
+    test('laat de t()-map buiten beeld', () {
+      expect(dutchSourceRegion(source, 'tr'), isNot(contains('_stringsTr')));
+    });
+
+    test('houdt beide Nederlandse bronmappen binnen beeld', () {
+      final region = dutchSourceRegion(source, 'tr');
+      expect(region, contains("'Opslaan':"));
+      expect(region, contains("'Toch opslaan':"));
+    });
+
+    test('een t()-sleutel telt niet als bestaande bronvertaling', () {
+      expect(dutchSourceRegion(source, 'tr'), isNot(contains("'slides':")));
+    });
+
+    test('zonder bronmap valt het terug op het hele bestand', () {
+      // Liever te veel overslaan dan een dubbele sleutel schrijven.
+      const zonder = "const _stringsTr = {\n  'slides': 'slayt',\n};\n";
+      expect(dutchSourceRegion(zonder, 'tr'), zonder);
+    });
+  });
 }

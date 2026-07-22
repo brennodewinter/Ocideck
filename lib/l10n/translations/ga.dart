@@ -1795,8 +1795,6 @@ const _dutchSourceGa = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Cuir i gcrích agus séalaigh',
   'Verzegelen': 'Séalaigh',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Cuir an cur i láthair seo i gcrích agus ríomh séala SHA-512 ar a bhfuil ann. Ansin cuirtear an comhad faoi ghlas agus ní féidir é a chur in eagar a thuilleadh; feictear athruithe níos déanaí. Ní féidir é seo a chealú san aip.',
   'Handtekening (optioneel)': 'Síniú (roghnach)',
   'Naam': 'Ainm',
   'Rol of functie': 'Ról nó feidhm',
@@ -1854,6 +1852,100 @@ const _dutchSourceAddGa = <String, String>{
   'links en rechts wisselen per ronde':
       'malartaítear clé agus deas gach babhta',
   'overeenkomst': 'meaitseáil',
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Tá caibidlí sa téacs seo. Líon na sleamhnán tar éis roinnte:',
+  'dia\'s op.': '(ceann in aghaidh gach caibidle).',
+  'Splits op hoofdstukken': 'Roinn de réir caibidlí',
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Tá téacs IS sa deic seo nár sheiceáil tú fós. Is féidir easpórtáil mar sin féin; luann an comhad féin é agus faigheann sé "-ai-concept" ina ainm.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Dréacht: tá téacs IS anseo nár sheiceáil duine ar bith fós',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Cuir an cur i láthair seo i gcrích agus taifead séala SHA-512 ar an gcomhad sábháilte. Ansin cuirtear faoi ghlas é agus ní féidir é a chur in eagar a thuilleadh; feictear gach athrú a dhéantar ina dhiaidh sin. Déanann an té a fhaigheann an tuairisc an séala a sheiceáil é féin le sha512sum. Ní féidir é seo a chealú san aip.',
+  'Zegel en handtekening': 'Séala agus síniú',
+  'Zegel nog niet vastgelegd': 'Séala gan taifeadadh fós',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Níl comhad sábháilte ann fós chun an séala a sheiceáil ina choinne. Sábháil an deic.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Tá an fágáil ar lár ann: cuirtear dubh ar cibé rud a mheasann an tseiceáil a bheith ina shonra pearsanta, agus ní théann na híomhánna, an físeán ná an fhuaim ar fad ón sleamhnán seo chuig an scáileán ná chuig an easpórtáil. Coinníonn do chomhad markdown gach rud.',
+  'Bestand': 'Comhad',
+  'Venster': 'Fuinneog',
+  'Help': 'Cabhair',
+  'Alles selecteren': 'Roghnaigh gach rud',
+  'Plakken': 'Greamaigh',
+  'Opnieuw': 'Athdhéan',
+  'Eigenschappen': 'Airíonna',
+  'Opdrachten…': 'Orduithe…',
+  'Opslaan…': 'Á shábháil…',
+  'Uploaden naar WebDAV…': 'Á uaslódáil chuig WebDAV…',
+  'Uploaden naar S3…': 'Á uaslódáil chuig S3…',
+  'Vastleggen in git…': 'Á thiomnú chuig git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Á shábháil. Ní dhéanann sábháil arís aon rud go dtí go mbeidh sé seo críochnaithe.',
+  'Klaar — privacy niet gecontroleerd':
+      'Réidh — níor seiceáladh an príobháideachas',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Ní dhearnadh seiceáil ar shonraí pearsanta, ar shonraí catagóire speisialta ná ar rúin: tá an tseiceáil príobháideachais múchta faoi Slándáil.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Láithreoireachtaí a fhanann ina ngnáthchomhaid Markdown: inléite, inchuardaithe agus infhoscailte le heagarthóir ar bith.',
+  'sjablonen om mee te beginnen, of leeg': 'teimpléad le tosú leo, nó folamh',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Tá sleamhnáin shamplacha teimpléid san Ollainnis. Leanann an t-ainm agus an cur síos do theanga féin; cuireann tú an t-ábhar in oiriúint tar éis é a chruthú.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Tá an fágáil ar lár ann: cuirtear dubh ar na sonraí a aimsíodh agus ní théann na híomhánna, an físeán ná an fhuaim ar fad ón sleamhnán seo chuig an scáileán ná chuig an easpórtáil. Coinníonn do chomhad markdown gach rud.',
+  'Mijn tekst': 'Mo théacs',
+  'Wat zij zien': 'A bhfeiceann siad',
+  'Presentatiegegevens': 'Sonraí na láithreoireachta',
+  'Open presentatiegegevens': 'Oscail sonraí na láithreoireachta',
+  'Motivering van een uitsluiting': 'Réasúnú le haghaidh eisceachta',
+  'Motivering van een bevestiging': 'Réasúnú le haghaidh dearbhaithe',
+  'Tabel koprij, kolom {kolom}': 'Tábla ró ceanntáisc, colún {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tábla ró {rij}, colún {kolom}',
+  'Via deze website ophalen?': 'Faigh tríd an suíomh seo?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Níor lig freastalaí na láithreoireachta seo don bhrabhsálaí an comhad a léamh go díreach. Is féidir le OciDeck an seoladh a chur ar aghaidh chuig an suíomh as a dtagann OciDeck féin, agus faigheann an suíomh sin é. Mar sin feiceann an suíomh sin an seoladh iomlán — má tá eochair nó cód sa nasc, feiceann an suíomh sin iad sin freisin.',
+  'In de browser kan dit niet worden bewaard':
+      'Ní féidir é seo a shábháil sa bhrabhsálaí',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Níl eochairslabhra ag brabhsálaí mar atá ag ríomhaire: rud ar bith a shábhálfadh OciDeck anseo, is féidir le haon script ar an leathanach seo é a léamh. Bain úsáid as an leagan deisce — ann téann an rún isteach in eochairslabhra an chórais oibriúcháin i ndáiríre.',
+  'Licenties van derden': 'Ceadúnais tríú páirtí',
+  'Alle licentieteksten tonen': 'Taispeáin gach téacs ceadúnais',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Tá OciDeck féin faoi cheadúnas EUPL-1.2. Ina theannta sin cuachann sé bogearraí tríú páirtí: na pacáistí Dart agus Flutter, dhá bhreiseán atá san áireamh, ceithre theaghlach cló, an tsamhail aghaidhe don seiceáil príobháideachais agus an JavaScript a thaistealaíonn le heaspórtáil HTML. Coinníonn gach ceann acu a cheadúnas féin.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Tá bogearraí tríú páirtí sa chomhad seo, agus cló uaireanta. Tá téacsanna iomlána na gceadúnas a bhaineann leo thíos; seol ar aghaidh iad nuair a chuireann tú an comhad seo ar aghaidh.',
+  'Sporen op dit apparaat': 'Rianta ar an ngléas seo',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Chomh maith le do shocruithe, coinníonn OciDeck liosta de na comhaid le déanaí agus, i gcás tuairte, comhad athshlánaithe ina bhfuil ábhar iomlán do chur i láthair. Ní fhágann aon chuid de sin an gléas seo, ach tá sé anseo — i ngnáth-théacs, gan de chosaint air ach do chuntas ar an gcóras oibriúcháin seo.',
+  'Recent geopende presentaties': 'Cur i láthair a osclaíodh le déanaí',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Coinníonn an liosta an chonair iomlán agus aicmiú gach cur i láthair a bhí oscailte — le chéile, eolas faoin rud a bhfuil tú ag obair air agus do cé.',
+  'Recente lijst wissen': 'Scrios liosta na gcomhad le déanaí',
+  'De recente lijst was al leeg.':
+      'Bhí liosta na gcomhad le déanaí folamh cheana.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'iontráil(eacha) scriosta ó liosta na gcomhad le déanaí.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Bíonn ábhar iomlán do chur i láthair i ngnáth-théacs sna comhaid athshlánaithe. Glantar go huathoibríoch iad tar éis 7 lá, agus láithreach nuair a dhúntar an feidhmchlár mar is ceart.',
+  'Alles terugzetten': 'Athshocraigh gach rud',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Scriosann sé gach socrú, liosta na gcomhad le déanaí, na comhaid athshlánaithe, na cóipeanna oibre git agus na pasfhocail in eochairslabhra do chórais. Fanann do chuid cur i láthair: is leatsa iad, ní le OciDeck.',
+  'Zet alles terug naar de begintoestand':
+      'Cuir gach rud ar ais chuig an mbunstaid',
+  'Alles terugzetten naar de begintoestand?':
+      'Gach rud a chur ar ais chuig an mbunstaid?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Scriosfar do shocruithe, liosta na gcomhad le déanaí, na comhaid athshlánaithe, na cóipeanna oibre git agus na pasfhocail shábháilte. Ní féidir é seo a chur ar ceal. Fanann do chuid cur i láthair.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'athrú/athruithe nár seoladh chuig freastalaí git fós agus nach bhfuil ann ach ar an ngléas seo. Imeoidh siad sin freisin.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Tá gach rud curtha ar ais chuig an mbunstaid.',
+  'Terugzetten is niet gelukt.': 'Theip ar an athshocrú.',
+  'Er wacht nog werk dat niet verstuurd is': 'Tá obair gan seoladh fós ann',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Tá athruithe sa nasc git seo nár seoladh chuig an bhfreastalaí fós. Má bhaineann tú an nasc, imíonn an chóip oibre ar an ngléas seo freisin — agus ní bheidh an obair seo ann in aon áit a thuilleadh.',
+  'Verbinding behouden': 'Coinnigh an nasc',
+  'Toch verwijderen': 'Bain mar sin féin',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Ceart go leor',
@@ -1912,6 +2004,33 @@ const _dutchSourceAddGa = <String, String>{
       'liostaíonn sé a bhfuil fágtha ar lár, gan na luachanna féin. Is féidir an comhad seo a chur leis an tuairisc.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'tá na heochracha ann lenar féidir gach luach folaithe a ríomh ar ais. Ná seol an comhad seo leis: cuirtear an folú ar ceal ansin. Coinnigh in aice leis an bhfoinse é.',
+  'slides': 'sleamhnáin',
+  'Achtergehouden': 'Coinnithe siar',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Coinnithe siar: aicmithe níos déine ná an cur i láthair',
+  '1 slide achtergehouden door haar TLP': '1 sleamhnán coinnithe siar ag a TLP',
+  'slides achtergehouden door hun TLP': 'sleamhnáin coinnithe siar ag a TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Fágtar na sleamhnáin seo ar lár agus tú ag cur i láthair, ag easpórtáil nó sa phacáiste. Ardaigh leibhéal TLP an chur i láthair in Eolas an chur i láthair chun iad a chur san áireamh.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Coinnítear gach sleamhnán siar de bharr a n-aicmithe TLP — níl aon rud le taispeáint.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Coinnítear gach sleamhnán siar de bharr a n-aicmithe TLP — níl aon rud le heaspórtáil.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Ligeadh thar bráid gach sleamhnán nó coinníodh siar é de bharr a aicmithe TLP — níl aon rud le taispeáint.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Ligeadh thar bráid gach sleamhnán nó coinníodh siar é de bharr a aicmithe TLP — níl aon rud le heaspórtáil.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Níor sábháladh figiúirí na gcairteacha — níl siad ann a thuilleadh ach san fhuinneog seo:',
+  'Niet alles gaat mee naar git': 'Ní théann gach rud go git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Ní théann na codanna seo isteach sa commit agus ní bheidh siad sa stór:',
+  'Tekeningen op slides': 'Líníochtaí ar sleamhnáin',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Fanann siad san fhuinneog seo. Sábháil an cur i láthair mar chomhad nó mar phacáiste .ocideck freisin chun iad a choinneáil.',
+  'Toch opslaan': 'Sábháil mar sin féin',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Sa bhrabhsálaí níl aon aisghabháil tar éis tuairte: má dhúnann tú an cluaisín seo, imíonn obair nár sábháladh. Sábháil do chur i láthair tú féin.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  An bunachar sonraí CVE áitiúil (tusa a chuireann an íoslódáil ar bun): faigheann OciDeck na sonraí ollmhóra trí api.github.com agus an comhad eisiúna a bhfuil an seoladh sin ag díriú air.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

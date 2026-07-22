@@ -35,6 +35,7 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
         shortcut: 'Ctrl/Cmd+S',
         onInvoke: _saveDeck,
       ),
+      ..._editCommands(l10n, deckNotifier),
       PaletteCommand(
         label: l10n.d('Nieuwe grafiek'),
         icon: Icons.insert_chart_outlined,
@@ -58,6 +59,7 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
         enabled: deckNotifier.aiGeneratedAltTextCount > 0,
         onInvoke: () => clearAiAltTexts(),
       ),
+      ..._helpCommands(l10n),
       ..._infoSafetyCommands(l10n, deck, deckNotifier),
       PaletteCommand(
         label: l10n.t('imageLibrary'),
@@ -118,6 +120,73 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
     ];
     CommandPalette.show(context, commands);
   }
+
+  /// De handelingen die het vaakst gezocht worden en tot nu toe alleen als
+  /// icoontje in de werkbalk bestonden, plus de twee gebundelde documenten.
+  ///
+  /// Het palet is in deze app de plek waar een functie gevonden wordt; ongedaan
+  /// maken en opnieuw hoorden er als eerste in.
+  List<PaletteCommand> _editCommands(
+    AppLocalizations l10n,
+    DeckNotifier deckNotifier,
+  ) => [
+    // Ongedaan maken en opnieuw ontbraken hier, terwijl ze alleen als twee
+    // kleine icoontjes in de werkbalk bestonden. Het palet is in deze app de
+    // plek waar een functie gevonden wordt; de twee handelingen die iemand het
+    // vaakst zoekt, hoorden er als eerste in.
+    PaletteCommand(
+      label: l10n.d('Ongedaan maken'),
+      icon: Icons.undo,
+      shortcut: 'Ctrl/Cmd+Z',
+      keywords: const ['undo', 'terug'],
+      enabled: deckNotifier.currentState.canUndo,
+      onInvoke: () => _undo(deckNotifier),
+    ),
+    PaletteCommand(
+      label: l10n.d('Opnieuw'),
+      icon: Icons.redo,
+      shortcut: 'Ctrl/Cmd+Shift+Z',
+      keywords: const ['redo', 'opnieuw'],
+      enabled: deckNotifier.currentState.canRedo,
+      onInvoke: () => _redo(deckNotifier),
+    ),
+    PaletteCommand(
+      label: l10n.d('Zoeken'),
+      icon: Icons.search,
+      shortcut: 'Ctrl/Cmd+F',
+      onInvoke: _openFind,
+    ),
+    PaletteCommand(
+      label: l10n.d('Eigenschappen'),
+      icon: Icons.info_outline,
+      keywords: const ['auteur', 'organisatie', 'metadata'],
+      onInvoke: _openProperties,
+    ),
+  ];
+
+  /// De gebundelde documentatie, zonder internet te hoeven raadplegen.
+  List<PaletteCommand> _helpCommands(AppLocalizations l10n) => [
+    PaletteCommand(
+      label: l10n.d('Gebruikershandleiding'),
+      icon: Icons.menu_book_outlined,
+      keywords: const ['help', 'handleiding', 'documentatie'],
+      onInvoke: () => DocumentReaderScreen.open(
+        context,
+        title: l10n.d('Gebruikershandleiding'),
+        assetBase: 'docs/USER_GUIDE.md',
+      ),
+    ),
+    PaletteCommand(
+      label: l10n.d('Sneltoetsen'),
+      icon: Icons.keyboard_outlined,
+      keywords: const ['shortcuts', 'toetsen'],
+      onInvoke: () => DocumentReaderScreen.open(
+        context,
+        title: l10n.d('Sneltoetsen'),
+        assetBase: 'docs/SHORTCUTS.md',
+      ),
+    ),
+  ];
 
   /// The security-module command-palette actions. Gated on the reveal flag:
   /// when the module is off they are **omitted entirely** (not shown greyed-out),

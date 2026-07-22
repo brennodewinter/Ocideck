@@ -54,6 +54,28 @@ void main() {
     expect(all.single.userNotes, notesJson);
   });
 
+  test('save round-trips the seal payload in a snapshot', () async {
+    // Juist ná het verzegelen is het deck vuil en nog niet opgeslagen — precies
+    // het venster waarin de autosave toeslaat. Zonder dit veld zou herstel de
+    // zojuist gezette handtekening laten vallen: het zegelblok staat sinds
+    // 0.1.0 niet meer in de markdown.
+    const sealJson =
+        '{"version":1,"finalized":true,"at":"2026-07-10T12:00:00.000Z",'
+        '"signature":{"name":"Jan Jansen"}}';
+    await service.save(
+      RecoverySnapshot(
+        id: 'seal',
+        savedAt: DateTime(2026, 7, 10),
+        filePath: '/tmp/deck.md',
+        label: 'Verzegeld',
+        markdown: '# Deck\n',
+        seal: sealJson,
+      ),
+    );
+    final all = await service.loadAll();
+    expect(all.single.seal, sealJson);
+  });
+
   test('loadAll returns newest first', () async {
     await service.save(
       RecoverySnapshot(
@@ -190,4 +212,39 @@ void main() {
     final all = await service.loadAll();
     expect(all.map((s) => s.id), ['goed']);
   });
+
+  test(
+    'pruneIfDue ruimt op tijdens het draaien, hoogstens één keer per uur',
+    () async {
+      await service.save(snap('vers'));
+      final stale = File('${tempDir.path}/oud.json')
+        ..writeAsStringSync(
+          '{"id":"oud","savedAt":"2026-01-01T00:00:00.000",'
+          '"filePath":null,"label":"Oud","markdown":"# Klantgegevens"}',
+        )
+        ..setLastModifiedSync(
+          DateTime.now().subtract(const Duration(days: 30)),
+        );
+
+      await service.pruneIfDue();
+
+      expect(
+        stale.existsSync(),
+        isFalse,
+        reason:
+            'een bewaartermijn die pas bij de volgende start geldt, is geen '
+            'bewaartermijn',
+      );
+      expect(File('${tempDir.path}/vers.json').existsSync(), isTrue);
+
+      // Tweede aanroep binnen het uur doet niets — de tik komt elke 25 seconden.
+      final second = File('${tempDir.path}/nog_ouder.json')
+        ..writeAsStringSync('{}')
+        ..setLastModifiedSync(
+          DateTime.now().subtract(const Duration(days: 30)),
+        );
+      await service.pruneIfDue();
+      expect(second.existsSync(), isTrue);
+    },
+  );
 }

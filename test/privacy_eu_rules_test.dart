@@ -38,6 +38,9 @@ void main() {
       'ro.cnp': '1800510123458',
       'fi.hetu': '131052-308T',
       'ee.isikukood': '37205030203',
+      'is.kennitala': '290200-7170',
+      'lv.pk': '110481-12348',
+      'lu.matricule': '1977063000135',
     };
 
     cases.forEach((rule, value) {
@@ -59,6 +62,44 @@ void main() {
     test('NHS-nummer vuurt alleen mét contextwoord', () {
       expect(rulesIn('943 476 7016'), isNot(contains('uk.nhs')));
       expect(rulesIn('NHS 943 476 7016'), contains('uk.nhs'));
+    });
+
+    test('de PEID vuurt alleen mét contextwoord', () {
+      // Vier tot twaalf kale cijfers: zonder de poort zou dit élk getal op elke
+      // slide melden.
+      expect(rulesIn('bedrag 2637 euro'), isNot(contains('li.peid')));
+      expect(rulesIn('PEID 2637'), contains('li.peid'));
+    });
+
+    test('een Zwitsers AHV-nummer levert geen tweede melding op', () {
+      // "AHV-Nummer" staat bewust niet bij de contextwoorden van Liechtenstein:
+      // dat woord is net zo goed Zwitsers, en daar doet `ch.ahv` het werk mét
+      // een echte checksum.
+      final regels = rulesIn('AHV-Nummer 756.1234.5678.97');
+      expect(regels, contains('ch.ahv'));
+      expect(regels, isNot(contains('li.peid')));
+    });
+
+    test('het Maltese ID-nummer vuurt alleen mét contextwoord', () {
+      // Zeven cijfers plus een van acht letters is geen bewijs: `0384219M` is
+      // net zo goed een artikelcode.
+      expect(rulesIn('code 0384219M'), isNot(contains('mt.id')));
+      expect(rulesIn('identity card 0384219M'), contains('mt.id'));
+    });
+
+    test('"valid card" is geen contextwoord voor Malta', () {
+      // Contextwoorden worden als deelstring gezocht, dus `id card` zou
+      // aanslaan op "valid card". Daarom staat het er niet bij.
+      expect(rulesIn('a valid card 0384219M'), isNot(contains('mt.id')));
+    });
+
+    test('de Cypriotische TIC komt niet boven "waarschijnlijk"', () {
+      // Een mod-26 over acht cijfers is te zwak voor `zeker`, en dezelfde code
+      // hoort bij een mens óf bij een bedrijf. Twee redenen, dezelfde uitkomst.
+      final finding = scan(
+        'fiscale code 10259033P',
+      ).findings.firstWhere((f) => f.ruleId == 'cy.tic');
+      expect(finding.confidence, PrivacyConfidence.likely);
     });
 
     test('NINO heeft geen checksum en komt niet boven "waarschijnlijk"', () {

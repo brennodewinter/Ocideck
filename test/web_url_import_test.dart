@@ -13,8 +13,14 @@ import 'package:ocideck/state/tabs_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const _goodDeck = '---\nmarp: true\ntitle: Webdeck\n---\n\n# Hallo web\n';
+
 const _scriptDeck =
     '---\nmarp: true\ntitle: X\n---\n\n# Hi\n\n<script>steal()</script>\n';
+
+/// De gebruiker zegt ja tegen de terugval op het fetch-hulppunt. Expliciet in
+/// elke test die de terugval wil zien lopen: zonder toestemming loopt hij niet,
+/// en dat is precies de bedoeling.
+Future<bool> _consent({required String host}) async => true;
 
 /// Een [http.Client] die na [close] geen request meer toestaat — zo valt de
 /// owned-close-race (finally sluit de client vóór de fetch af is) hard om in
@@ -123,6 +129,7 @@ void main() {
         target,
         client: client,
         viaProxyFallback: true,
+        onConfirmProxy: _consent,
       );
       expect(bytes, isNotNull);
       expect(utf8.decode(bytes!), _goodDeck);
@@ -146,6 +153,7 @@ void main() {
         target,
         client: client,
         viaProxyFallback: true,
+        onConfirmProxy: _consent,
         closeInjectedClient: true,
       );
       expect(bytes, isNotNull);
@@ -166,6 +174,7 @@ void main() {
         'https://example.org/deck.md',
         client: client,
         viaProxyFallback: true,
+        onConfirmProxy: _consent,
       );
       expect(bytes, isNotNull);
       expect(proxyCalls, 0);
@@ -181,6 +190,86 @@ void main() {
         await fileService().fetchUrlBytes('geen url', client: client),
         isNull,
       );
+    });
+
+    // Het hulppunt haalt server-zijdig op en krijgt daarmee de hele URL in
+    // handen. Dat is een andere partij dan degene die de gebruiker aanwees, en
+    // de URL kan zélf het geheim zijn. Vroeger ging hij er automatisch en
+    // zonder melding heen.
+    group('de terugval vraagt het eerst', () {
+      /// Direct fetchen faalt (zoals bij een bron zonder CORS-headers); elke
+      /// aanroep van het hulppunt wordt geteld.
+      (MockClient, List<Uri>) proxyCounting() {
+        final seen = <Uri>[];
+        final client = MockClient((req) async {
+          if (!req.url.path.endsWith('fetch-proxy')) {
+            throw http.ClientException('CORS-weigering');
+          }
+          seen.add(req.url);
+          return http.Response(_goodDeck, 200);
+        });
+        return (client, seen);
+      }
+
+      test('zonder bevestiger gaat er niets naar het hulppunt', () async {
+        final (client, seen) = proxyCounting();
+        final bytes = await fileService().fetchUrlBytes(
+          'https://elders.example/deck.md',
+          client: client,
+          viaProxyFallback: true,
+        );
+        expect(bytes, isNull);
+        expect(seen, isEmpty, reason: 'geen toestemming is geen toestemming');
+      });
+
+      test('een "nee" van de gebruiker houdt de URL binnen', () async {
+        final (client, seen) = proxyCounting();
+        final bytes = await fileService().fetchUrlBytes(
+          'https://elders.example/deck.md',
+          client: client,
+          viaProxyFallback: true,
+          onConfirmProxy: ({required String host}) async => false,
+        );
+        expect(bytes, isNull);
+        expect(seen, isEmpty);
+      });
+
+      test('de vraag noemt de bronhost, niet de hele URL', () async {
+        final (client, _) = proxyCounting();
+        String? asked;
+        await fileService().fetchUrlBytes(
+          'https://elders.example/geheim/deck.md?sleutel=abc',
+          client: client,
+          viaProxyFallback: true,
+          onConfirmProxy: ({required String host}) async {
+            asked = host;
+            return false;
+          },
+        );
+        expect(asked, 'elders.example');
+      });
+
+      test('een URL mét inloggegevens wordt niet eens gevraagd', () async {
+        // Hetzelfde slot dat GitWebTransport op zijn token zet: het hulppunt
+        // zou `gebruiker:wachtwoord` in handen krijgen en namens de gebruiker
+        // doorsturen. Dat staat vast — hier valt niets aan te bevestigen.
+        final (client, seen) = proxyCounting();
+        var asked = 0;
+        const user = 'bram';
+        const pw = 'hunter2';
+        final bytes = await fileService().fetchUrlBytes(
+          'https://$user:$pw@elders.example/deck.md',
+          client: client,
+          viaProxyFallback: true,
+          onConfirmProxy: ({required String host}) async {
+            asked++;
+            return true;
+          },
+        );
+        expect(bytes, isNull);
+        expect(seen, isEmpty);
+        expect(asked, 0, reason: 'dit is geen keuze van de gebruiker');
+      });
     });
   });
 

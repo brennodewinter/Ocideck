@@ -7,6 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/markdown_validation.dart';
+import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/slide_quality.dart';
 import 'package:ocideck/models/redaction_manifest.dart';
 import 'package:ocideck/services/classification_enforcement_policy.dart';
@@ -16,6 +17,8 @@ import 'package:ocideck/services/quality_export_policy.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:path/path.dart' as p;
 import 'package:xml/xml.dart';
+
+import 'support/export_bundle_fixture.dart';
 
 Uint8List _png() {
   final image = img.Image(width: 320, height: 180);
@@ -284,6 +287,139 @@ void main() {
     expect(text, contains('OciDeck'));
   });
 
+  // ── AI-markering overleeft de export (AI-verordening art. 50) ─────────────
+  // De markering leefde alleen binnen de app: hij blokkeerde het verzegelen en
+  // was zichtbaar in de editor, maar wie het bestand kreeg zag niets. Deze drie
+  // tests zijn de bestandsgrens.
+  const aiMeta = ExportDocumentMetadata(
+    title: 'Conceptrapport',
+    unreviewedAiSlideCount: 2,
+  );
+
+  test(
+    'PDF declares the unreviewed AI text in its document properties',
+    () async {
+      final r = await service.export(deckPath(), ExportFormat.pdf, [
+        _png(),
+      ], metadata: aiMeta);
+      expect(r.success, isTrue, reason: r.error);
+      final bytes = await File(r.outputPath!).readAsBytes();
+      final text = String.fromCharCodes(bytes);
+      // De Info-dict ontkomt de haakjes van de markering (dat is
+      // PDF-tekenreekssyntaxis), dus toetsen we de ontkomen vorm.
+      expect(text, contains('/Keywords'));
+      expect(text, contains(r'AI-generated \(unreviewed\)'));
+      // Het Subject draagt een em-streepje en gaat daardoor als UTF-16BE de
+      // dict in: elk teken krijgt een nulbyte ernaast. Die wegstrepen maakt de
+      // zin weer leesbaar zonder de rest van het bestand te ontleden.
+      final zonderNullen = String.fromCharCodes(bytes.where((b) => b != 0));
+      expect(zonderNullen, contains(kAiDraftSubjectNote));
+    },
+  );
+
+  test('PPTX core properties carry the same marking', () async {
+    final r = await service.export(deckPath(), ExportFormat.pptx, [
+      _png(),
+    ], metadata: aiMeta);
+    expect(r.success, isTrue, reason: r.error);
+    final archive = ZipDecoder().decodeBytes(
+      await File(r.outputPath!).readAsBytes(),
+    );
+    final core = utf8.decode(
+      archive.files.firstWhere((f) => f.name == 'docProps/core.xml').content
+          as List<int>,
+    );
+    expect(core, contains(kAiDraftKeyword));
+    expect(core, contains(kAiDraftSubjectNote));
+  });
+
+  test(
+    'the file name marks a draft, and stops doing so once reviewed',
+    () async {
+      final draft = await service.export(deckPath(), ExportFormat.pdf, [
+        _png(),
+      ], metadata: aiMeta);
+      expect(draft.success, isTrue, reason: draft.error);
+      expect(p.basename(draft.outputPath!), contains(kAiDraftFileSuffix));
+      expect(
+        p.basename(draft.outputPath!),
+        endsWith('$kAiDraftFileSuffix.pdf'),
+      );
+
+      // Nagekeken: het achtervoegsel hoort dan wég te zijn. Anders draagt elk
+      // afgerond rapport voorgoed het stempel "concept" en betekent het niets.
+      final reviewed = await service.export(
+        deckPath(),
+        ExportFormat.pdf,
+        [_png()],
+        metadata: const ExportDocumentMetadata(title: 'Conceptrapport'),
+      );
+      expect(reviewed.success, isTrue, reason: reviewed.error);
+      expect(
+        p.basename(reviewed.outputPath!),
+        isNot(contains(kAiDraftFileSuffix)),
+      );
+    },
+  );
+
+  test(
+    'de markering wordt uit de bundel geteld, niet uit wat de aanroeper meegaf',
+    () async {
+      // De poort waar élk formaat langskomt telt zelf. Dat is het verschil
+      // tussen een melding die kan ontbreken en een die dat niet kan: `metadata`
+      // is optioneel én door de aanroeper samen te stellen, dus zou de melding
+      // dáár vandaan komen, dan volstond "vergeten" om ongecontroleerde
+      // AI-tekst zwijgend te laten vertrekken.
+      final bundel = bundleFor(
+        Deck(
+          title: 'Conceptrapport',
+          slides: [
+            Slide.create(SlideType.title),
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(aiAssistedFields: const ['description']),
+          ],
+        ),
+      );
+
+      // Metadata die de markering níét noemt — het geval "vergeten".
+      final r = await service.export(
+        deckPath(),
+        ExportFormat.pdf,
+        [_png()],
+        audience: bundel,
+        metadata: const ExportDocumentMetadata(title: 'Conceptrapport'),
+      );
+      expect(r.success, isTrue, reason: r.error);
+      expect(p.basename(r.outputPath!), contains(kAiDraftFileSuffix));
+      final text = String.fromCharCodes(
+        await File(r.outputPath!).readAsBytes(),
+      );
+      expect(text, contains(r'AI-generated \(unreviewed\)'));
+    },
+  );
+
+  test(
+    'een nagekeken bundel laat de melding weg, ook als metadata hem noemt',
+    () async {
+      // De andere kant op, en even belangrijk: geteld is geteld. Zou de aanroeper
+      // de melding erin kunnen houden, dan draagt een afgerond rapport voorgoed
+      // het stempel "concept" en betekent het niets meer.
+      final bundel = bundleFor(
+        Deck(title: 'Rapport', slides: [Slide.create(SlideType.title)]),
+      );
+      final r = await service.export(
+        deckPath(),
+        ExportFormat.pdf,
+        [_png()],
+        audience: bundel,
+        metadata: aiMeta,
+      );
+      expect(r.success, isTrue, reason: r.error);
+      expect(p.basename(r.outputPath!), isNot(contains(kAiDraftFileSuffix)));
+    },
+  );
+
   test('exports a valid PPTX zip with the expected parts', () async {
     final images = [_png(), _png()];
     final r = await service.export(deckPath(), ExportFormat.pptx, images);
@@ -371,7 +507,7 @@ void main() {
       deckPath(),
       ExportFormat.pptx,
       [_png(), _png()],
-      notes: ['', 'Vergeet de cijfers niet <3 & co'],
+      audience: bundleWithNotes(const ['', 'Vergeet de cijfers niet <3 & co']),
     );
     expect(r.success, isTrue, reason: r.error);
 
@@ -492,7 +628,10 @@ void main() {
       deckPath(),
       ExportFormat.html,
       const [], // HTML needs no rasterized slides
-      markdown: '# Titel\n\n---\n\n# Tweede',
+      audience: bundleFor(
+        const Deck(title: 'Titel'),
+        markdown: '# Titel\n\n---\n\n# Tweede',
+      ),
     );
 
     expect(r.success, isTrue, reason: r.error);

@@ -39,6 +39,49 @@ void main() {
       );
     });
 
+    test('een lijstwaarde onder een eigen sleutel gaat mee met die sleutel', () {
+      // De lijst-tak van de vervolgregeltoets (`- ` op kolom 0) is de enige die
+      // hier iets doet: zonder hem valt `- OWASP WSTG@4.2` door naar "onbekende
+      // regel, laten staan" en blijft het wees-lijstitem onder de nieuwe
+      // scalaire waarde hangen — kapotte YAML in andermans bestand.
+      expect(
+        mergeFrontMatter(
+          original: const [
+            'marp: true',
+            'standards:',
+            '- OWASP WSTG@4.2',
+            '- OWASP MASTG@2.0',
+          ],
+          generated: const ['marp: true', 'standards: OWASP WSTG@4.2'],
+        ),
+        ['marp: true', 'standards: OWASP WSTG@4.2'],
+      );
+    });
+
+    test('een lijstwaarde onder een vreemde sleutel blijft ongemoeid', () {
+      // De andere helft van diezelfde tak. Zonder deze assertie zou "gooi alle
+      // lijstitems weg" ook groen zijn, en dat vernielt de kop van de gebruiker.
+      expect(
+        mergeFrontMatter(
+          original: const [
+            'marp: true',
+            'authors:',
+            '- Jan Jansen',
+            '-',
+            '  affiliatie: LibreKAT',
+          ],
+          generated: const ['marp: true'],
+        ),
+        [
+          'marp: true',
+          'authors:',
+          '- Jan Jansen',
+          '-',
+          '  affiliatie: LibreKAT',
+        ],
+      );
+    });
+
     test('een eigen sleutel wordt op zijn eigen plek vervangen', () {
       expect(
         mergeFrontMatter(

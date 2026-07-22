@@ -38,6 +38,7 @@ import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/finding_context_score.dart';
+import '../../services/markdown_body_blocks.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/rich_text_layout.dart';
 // De split-run-metingen zijn services (headless rekenwerk), maar hun natuurlijke
@@ -51,6 +52,7 @@ import '../../utils/bundled_asset.dart';
 import '../../utils/image_focal.dart';
 import '../../utils/jaro_winkler.dart';
 import '../../utils/image_limits.dart';
+import '../../utils/media_fetch.dart';
 import '../../utils/table_dates.dart';
 import '../../utils/text_diff.dart';
 import '../../utils/log.dart';
@@ -61,11 +63,13 @@ import '../../utils/project_path.dart';
 import '../../utils/title_contrast.dart' show kTitleOverlayAlpha;
 import '../document_signature_view.dart' show decodeEmbeddedSignatureImage;
 import '../privacy_badge.dart' show privacyKatSvg;
+import '../../utils/inline_markdown.dart';
 import 'inline_markdown.dart';
 import 'image_zoom_dialog.dart';
 
 // Slide preview widgets, split into part files by slide type for
 // navigability. These parts share this library's imports and private scope.
+part 'previews/preview_scaffold.dart';
 part 'previews/text_previews.dart';
 part 'previews/bullets_previews.dart';
 part 'previews/bullets_image_preview.dart';
@@ -187,15 +191,6 @@ Widget _md(
     overflow: overflow,
     softWrap: softWrap,
   );
-}
-
-Color _hexColor(String hex) {
-  final cleaned = hex.replaceFirst('#', '');
-  final value = int.tryParse(
-    cleaned.length == 6 ? 'FF$cleaned' : cleaned,
-    radix: 16,
-  );
-  return Color(value ?? 0xFFFFFFFF);
 }
 
 EdgeInsets _logoSafeInsets(double w, ThemeProfile profile) {
@@ -325,6 +320,10 @@ class SlidePreviewWidget extends StatelessWidget {
 
   /// Pagina binnen een rich-text slide (0-gebaseerd). Alleen relevant bij
   /// [ListStyle.richText] wanneer de tekst over meerdere schermen loopt.
+  ///
+  /// Voor oppervlakken die zélf door de pagina's bladeren (het editorpaneel, de
+  /// presentator). Een oppervlak dat slides opsomt in plaats van doorbladert —
+  /// de export — krijgt de pagina mee op de slide zelf; zie [_effectivePage].
   final int richTextPage;
 
   /// Toont vorige/volgende-knoppen op rich-text slides met meerdere pagina's.
@@ -462,7 +461,7 @@ class SlidePreviewWidget extends StatelessWidget {
             textDirection: TextDirection.ltr,
             child: DefaultTextStyle(
               style: TextStyle(
-                color: _hexColor(themeProfile.textColor),
+                color: AppTheme.parseHexColor(themeProfile.textColor),
                 decoration: TextDecoration.none,
                 fontWeight: FontWeight.normal,
                 fontStyle: FontStyle.normal,
@@ -480,6 +479,13 @@ class SlidePreviewWidget extends StatelessWidget {
       ),
     );
   }
+
+  /// De pagina die deze render toont: de vaste pagina van een uitgeklapte
+  /// render-kopie ([Slide.renderPage]) gaat vóór, anders de pagina waar het
+  /// oppervlak zelf naartoe gebladerd heeft. De twee sluiten elkaar uit — een
+  /// uitgeklapte kopie komt alleen voor waar niemand bladert.
+  int get _effectivePage =>
+      slide.renderPage > 0 ? slide.renderPage : richTextPage;
 
   Widget _buildSlide() {
     final markingTlp = effectiveTlp(deckTlp: tlp, slideTlp: slide.tlp);
@@ -617,11 +623,10 @@ class SlidePreviewWidget extends StatelessWidget {
         return _BulletsPreview(
           slide: slide,
           w: w,
+          projectPath: projectPath,
           font: fontFamily,
           profile: themeProfile,
-          richTextPage: richTextPage,
-          showRichTextPageControls: showRichTextPageControls,
-          onRichTextPageChanged: onRichTextPageChanged,
+          richTextPage: _effectivePage,
           numberStart: numberStart,
           fitScaleOverride: fitScaleOverride,
         );
@@ -640,9 +645,7 @@ class SlidePreviewWidget extends StatelessWidget {
           projectPath: projectPath,
           font: fontFamily,
           profile: themeProfile,
-          richTextPage: richTextPage,
-          showRichTextPageControls: showRichTextPageControls,
-          onRichTextPageChanged: onRichTextPageChanged,
+          richTextPage: _effectivePage,
           numberStart: numberStart,
           fitScaleOverride: fitScaleOverride,
         );
@@ -883,8 +886,24 @@ double _contentLeftInset(Slide slide, double w) {
       return w * 0.06;
     case SlideType.quote:
       return w * 0.08;
-    default:
-      // Beeld/video: geen tekstmarge om mee uit te lijnen.
+    // De rest deelt de standaardmarge — beeld en video hebben geen tekst om
+    // mee uit te lijnen, de overige typen tekenen hun eigen padding. Bewust
+    // uitgeschreven en niet als `default:`: die zet het compiler-vangnet uit,
+    // en dan krijgt slidetype #25 stilzwijgend deze waarde toegewezen terwijl
+    // zijn footer scheef onder de inhoud komt te staan.
+    case SlideType.title ||
+        SlideType.section ||
+        SlideType.twoImages ||
+        SlideType.image ||
+        SlideType.video ||
+        SlideType.scorecard ||
+        SlideType.assets ||
+        SlideType.discoveries ||
+        SlideType.finding ||
+        SlideType.findingsSummary ||
+        SlideType.checklist ||
+        SlideType.scopeMatrix ||
+        SlideType.signOff:
       return w * 0.04;
   }
 }

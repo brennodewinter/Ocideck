@@ -492,3 +492,47 @@ int richTextPageCountForSlide({
     splitWithImage: splitWithImage,
   ).pageCount;
 }
+
+/// Expand a deck's slides for surfaces that *enumerate* slides instead of
+/// paging through them: every page of a paginated rich-text body becomes its
+/// own full-size slide, tagged with [Slide.renderPage].
+///
+/// The counterpart of `expandFindingsForRender`, and needed for the same
+/// reason. The editor preview and the presenter both let you step through the
+/// pages of one slide, so they see the whole body and pass a page index. The
+/// export does not: it rasterised each slide once and page 2 and beyond were
+/// simply never drawn. The deck itself is untouched — this only changes what a
+/// render enumerates.
+///
+/// Counting happens at [kReferenceSlideWidth], the same geometry the rasteriser
+/// lays out at, so the export splits exactly where the preview does.
+List<Slide> expandRichTextForRender(List<Slide> slides, ThemeProfile profile) {
+  final out = <Slide>[];
+  for (final slide in slides) {
+    // Alleen de twee typen die een pagina ook echt tonen. [slideUsesRichText]
+    // rekent `freeMarkdown` mee, maar diens preview kent geen paginabegrip en
+    // rendert altijd de hele body; uitklappen zou daar identieke kopieën
+    // opleveren in plaats van vervolgpagina's.
+    if (slide.type != SlideType.bullets &&
+        slide.type != SlideType.bulletsImage) {
+      out.add(slide);
+      continue;
+    }
+    final pages = richTextPageCountForSlide(
+      slide: slide,
+      profile: profile,
+      splitWithImage: slide.type.splitWithImage,
+    );
+    if (pages <= 1) {
+      out.add(slide);
+      continue;
+    }
+    for (var page = 0; page < pages; page++) {
+      // Every copy keeps the whole body and the same id — the id is how a live
+      // edit during a presentation finds its way back to the deck slide, and
+      // splitting the markdown here would break the shared font scale.
+      out.add(page == 0 ? slide : slide.copyWith(renderPage: page));
+    }
+  }
+  return out;
+}

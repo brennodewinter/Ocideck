@@ -1761,8 +1761,6 @@ const _dutchSourceSl = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Zaključi in zapečati',
   'Verzegelen': 'Zapečati',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Zaključite to predstavitev in izračunajte pečat SHA-512 nad njeno vsebino. Datoteka je nato zaklenjena in je ni več mogoče urejati; poznejše spremembe postanejo vidne. Tega v aplikaciji ni mogoče razveljaviti.',
   'Handtekening (optioneel)': 'Podpis (izbirno)',
   'Naam': 'Ime',
   'Rol of functie': 'Vloga ali funkcija',
@@ -1820,6 +1818,98 @@ const _dutchSourceAddSl = <String, String>{
   'links en rechts wisselen per ronde':
       'levo in desno se v vsakem krogu zamenjata',
   'overeenkomst': 'ujemanja',
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'To besedilo vsebuje poglavja. Število prosojnic po razdelitvi:',
+  'dia\'s op.': '(po ena na poglavje).',
+  'Splits op hoofdstukken': 'Razdeli po poglavjih',
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'V tem kompletu je besedilo UI, ki ga še nisi pregledal. Izvoz je vseeno mogoč; datoteka to sama navede in dobi "-ai-concept" v imenu.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Osnutek: vsebuje besedilo UI, ki ga še nihče ni pregledal',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Zaključite to predstavitev in zabeležite pečat SHA-512 nad shranjeno datoteko. Ta je nato zaklenjena in je ni več mogoče urejati; vsaka poznejša sprememba postane vidna. Kdor prejme poročilo, pečat sam preveri s sha512sum. Tega v aplikaciji ni mogoče razveljaviti.',
+  'Zegel en handtekening': 'Pečat in podpis',
+  'Zegel nog niet vastgelegd': 'Pečat še ni zabeležen',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Shranjene datoteke, ob kateri bi bilo mogoče preveriti pečat, še ni. Shranite predstavitev.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Izpuščanje je vklopljeno: kar preverjanje označi za osebni podatek, je počrnjeno, vse slike, video in zvok tega diapozitiva pa ne gredo na zaslon ali v izvoz. Tvoja datoteka markdown ohrani vse.',
+  'Bestand': 'Datoteka',
+  'Venster': 'Okno',
+  'Help': 'Pomoč',
+  'Alles selecteren': 'Izberi vse',
+  'Plakken': 'Prilepi',
+  'Opnieuw': 'Ponovi',
+  'Eigenschappen': 'Lastnosti',
+  'Opdrachten…': 'Ukazi…',
+  'Opslaan…': 'Shranjevanje…',
+  'Uploaden naar WebDAV…': 'Nalaganje v WebDAV…',
+  'Uploaden naar S3…': 'Nalaganje v S3…',
+  'Vastleggen in git…': 'Potrjevanje v git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Poteka shranjevanje. Ponovno shranjevanje ne naredi ničesar, dokler to ni končano.',
+  'Klaar — privacy niet gecontroleerd':
+      'Pripravljeno — zasebnost ni preverjena',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Osebnih podatkov, posebnih vrst podatkov in skrivnosti nismo preverili: preverjanje zasebnosti je izklopljeno pod Varnost.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Predstavitve, ki ostanejo navadne datoteke Markdown: berljive, po njih je mogoče iskati in odpreti jih je mogoče s katerim koli urejevalnikom.',
+  'sjablonen om mee te beginnen, of leeg': 'predlog za začetek ali prazna',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Vzorčni diapozitivi predloge so v nizozemščini. Ime in opis sledita tvojemu jeziku; vsebino prilagodiš po ustvarjanju.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Izpuščanje je vklopljeno: najdeni podatki so počrnjeni, vse slike, video in zvok tega diapozitiva pa ne gredo na zaslon ali v izvoz. Tvoja datoteka markdown ohrani vse.',
+  'Mijn tekst': 'Moje besedilo',
+  'Wat zij zien': 'Kar vidijo oni',
+  'Presentatiegegevens': 'Podatki predstavitve',
+  'Open presentatiegegevens': 'Odpri podatke predstavitve',
+  'Motivering van een uitsluiting': 'Utemeljitev izjeme',
+  'Motivering van een bevestiging': 'Utemeljitev potrditve',
+  'Tabel koprij, kolom {kolom}': 'Tabela glava, stolpec {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabela vrstica {rij}, stolpec {kolom}',
+  'Via deze website ophalen?': 'Pridobitev prek tega spletnega mesta?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Strežnik te predstavitve brskalniku ni dovolil neposredno prebrati datoteke. OciDeck lahko naslov posreduje spletnemu mestu, s katerega prihaja sam OciDeck, in to ga bo pridobilo. Tako to spletno mesto vidi celoten naslov — če je v povezavi ključ ali koda, to spletno mesto vidi tudi tega.',
+  'In de browser kan dit niet worden bewaard':
+      'V brskalniku tega ni mogoče shraniti',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Brskalnik nima zbirke ključev, kakršno ima računalnik: kar bi OciDeck shranil sem, lahko prebere katera koli skripta na tej strani. Uporabite namizno različico — tam skrivnost res pristane v zbirki ključev operacijskega sistema.',
+  'Licenties van derden': 'Licence tretjih oseb',
+  'Alle licentieteksten tonen': 'Pokaži vsa besedila licenc',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Sam OciDeck je izdan pod EUPL-1.2. Poleg tega vključuje programsko opremo tretjih oseb: paketa Dart in Flutter, dva priložena vtičnika, štiri družine pisav, model obraza za preverjanje zasebnosti in JavaScript, ki potuje z izvozom v HTML. Vsak od njih obdrži svojo licenco.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Ta datoteka vsebuje programsko opremo tretjih oseb in včasih tudi pisavo. Spodaj so celotna besedila pripadajočih licenc; posreduj jih skupaj z datoteko.',
+  'Sporen op dit apparaat': 'Sledi na tej napravi',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Poleg vaših nastavitev OciDeck hrani tudi seznam nedavnih datotek in ob sesutju obnovitveno datoteko s celotno vsebino vaše predstavitve. Nič od tega ne zapusti te naprave, a je tu — v navadnem besedilu, zaščiteno z vašim računom v tem operacijskem sistemu in z nič več.',
+  'Recent geopende presentaties': 'Nedavno odprte predstavitve',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Seznam hrani celotno pot in klasifikacijo vsake predstavitve, ki je bila odprta — skupaj je to podatek o tem, na čem delate in za koga.',
+  'Recente lijst wissen': 'Izbriši seznam nedavnih datotek',
+  'De recente lijst was al leeg.': 'Seznam nedavnih datotek je bil že prazen.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'vnosov izbrisanih s seznama nedavnih datotek.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Obnovitvene datoteke vsebujejo celotno vsebino vaših predstavitev v navadnem besedilu. Samodejno se počistijo po 7 dneh, ob urejenem izhodu pa takoj.',
+  'Alles terugzetten': 'Ponastavi vse',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Izbriše vse nastavitve, seznam nedavnih datotek, obnovitvene datoteke, delovne kopije git in gesla v vaši zbirki ključev. Vaše predstavitve ostanejo: so vaše, ne OciDeckove.',
+  'Zet alles terug naar de begintoestand': 'Ponastavi vse na začetno stanje',
+  'Alles terugzetten naar de begintoestand?':
+      'Ponastavim vse na začetno stanje?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Izbrisane bodo vaše nastavitve, seznam nedavnih datotek, obnovitvene datoteke, delovne kopije git in shranjena gesla. Tega ni mogoče razveljaviti. Vaše predstavitve ostanejo.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'sprememb še ni bilo poslanih na strežnik git in obstajajo samo na tej napravi. Tudi te bodo izginile.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Vse je ponastavljeno na začetno stanje.',
+  'Terugzetten is niet gelukt.': 'Ponastavitev ni uspela.',
+  'Er wacht nog werk dat niet verstuurd is': 'Čaka še neposlano delo',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Ta povezava git ima spremembe, ki še niso bile poslane na strežnik. Če povezavo odstranite, izgine tudi delovna kopija na tej napravi — in tega dela ne bo nikjer več.',
+  'Verbinding behouden': 'Ohrani povezavo',
+  'Toch verwijderen': 'Vseeno odstrani',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'V redu',
@@ -1878,6 +1968,35 @@ const _dutchSourceAddSl = <String, String>{
       'našteva, kaj je bilo izpuščeno, brez samih vrednosti. Ta datoteka lahko gre skupaj s poročilom.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'vsebuje ključe, s katerimi je mogoče vsako prekrito vrednost izračunati nazaj. Te datoteke ne pošiljajte zraven: s tem je prekrivanje razveljavljeno. Hranite jo pri viru.',
+  'slides': 'prosojnice',
+  'Achtergehouden': 'Zadržano',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Zadržano: klasificirano strožje kot predstavitev',
+  '1 slide achtergehouden door haar TLP':
+      '1 diapozitiv zadržan zaradi svojega TLP',
+  'slides achtergehouden door hun TLP':
+      'diapozitivov zadržanih zaradi njihovega TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Te prosojnice ne gredo zraven pri predstavljanju, izvozu ali v paketu. Zvišajte raven TLP predstavitve v Informacijah o predstavitvi, da jih vključite.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Vsi diapozitivi so zadržani zaradi svoje klasifikacije TLP — ni kaj prikazati.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Vsi diapozitivi so zadržani zaradi svoje klasifikacije TLP — ni kaj izvoziti.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Vsi diapozitivi so preskočeni ali zadržani zaradi svoje klasifikacije TLP — ni kaj prikazati.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Vsi diapozitivi so preskočeni ali zadržani zaradi svoje klasifikacije TLP — ni kaj izvoziti.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Številke grafikonov niso bile shranjene — obstajajo samo še v tem oknu:',
+  'Niet alles gaat mee naar git': 'V git ne gre vse',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Ti deli ne pridejo v commit in jih pozneje ne bo v repozitoriju:',
+  'Tekeningen op slides': 'Risbe na prosojnicah',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Ostanejo v tem oknu. Predstavitev shranite tudi kot datoteko ali kot paket .ocideck, da jih obdržite.',
+  'Toch opslaan': 'Vseeno shrani',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'V brskalniku ni obnovitve po sesutju: če zaprete ta zavihek, je neshranjeno delo izgubljeno. Predstavitev shranite sami.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Lokalna zbirka podatkov CVE (prenos zaženete sami): OciDeck pridobi množične podatke prek api.github.com in datoteke izdaje, na katero kaže ta naslov.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

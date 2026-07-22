@@ -113,6 +113,55 @@ void main() {}
     },
   );
 
+  test('build() shows and stamps the unreviewed-AI marking', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    final html = await service.build(
+      '# Slide\n',
+      metadata: const ExportDocumentMetadata(
+        title: 'Rapport',
+        unreviewedAiSlideCount: 2,
+      ),
+      fallbackTitle: 'deck',
+    );
+
+    // Machineleesbaar (art. 50 lid 2) …
+    expect(html, contains('name="ai-generated" content="$kAiDraftKeyword"'));
+    expect(html, contains('name="ai-generated-slides" content="2"'));
+    // … én leesbaar voor wie het document opent. Metadata alleen is onzichtbaar
+    // voor de lezer, en die is degene die het moet weten.
+    expect(html, contains('class="ai-export-banner"'));
+    expect(html, contains('AI-tekst'));
+    // Zonder TLP-balk staat hij bovenaan; is die er wel, dan eronder.
+    expect(html, contains('style="top:0"'));
+  });
+
+  test('build() stacks the AI banner under the TLP banner', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    final html = await service.build(
+      '# Slide\n',
+      metadata: const ExportDocumentMetadata(
+        tlp: TlpLevel.red,
+        unreviewedAiSlideCount: 1,
+      ),
+      fallbackTitle: 'deck',
+    );
+    expect(html, contains('class="tlp-export-banner">TLP:RED</div>'));
+    expect(html, contains('class="ai-export-banner" style="top:2.4em"'));
+  });
+
+  test('build() says nothing about AI once the text is reviewed', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    final html = await service.build(
+      '# Slide\n',
+      metadata: const ExportDocumentMetadata(title: 'Rapport'),
+      fallbackTitle: 'deck',
+    );
+    // De CSS-regel staat er altijd; het gáát om de div die hem gebruikt.
+    expect(html, isNot(contains('<div class="ai-export-banner"')));
+    expect(html, isNot(contains('name="ai-generated"')));
+    expect(html, isNot(contains(kAiDraftKeyword)));
+  });
+
   test('build() neutralises a closing-script breakout in content', () async {
     final service = MarpHtmlService(loadAsset: _diskLoader);
     final html = await service.build('# X\n\nfoo </script> bar');

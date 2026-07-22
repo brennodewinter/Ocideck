@@ -320,16 +320,20 @@ Future<bool> _saveToNextcloud(
     final ext = choice!.format == DeckSaveFormat.ocideck ? '.ocideck' : '.md';
     final targetPath = '${choice.base}$ext';
     try {
-      await ref
-          .read(tabsProvider.notifier)
-          .saveToWebdav(
-            tab,
-            service,
-            connectionId: connection.id,
-            format: choice.format,
-            targetPath: targetPath,
-            overwrite: overwrite,
-          );
+      await withSaveProgress(
+        ref,
+        SaveTarget.webdav,
+        () => ref
+            .read(tabsProvider.notifier)
+            .saveToWebdav(
+              tab,
+              service,
+              connectionId: connection.id,
+              format: choice!.format,
+              targetPath: targetPath,
+              overwrite: overwrite,
+            ),
+      );
       // Het opslaan is geslaagd; alleen de melding kan niet meer getoond worden.
       if (!context.mounted) return true;
       messenger.showSnackBar(
@@ -643,17 +647,16 @@ List<String> _imageUsages(WidgetRef ref, String absolutePath) {
   for (final tab in ref.read(tabsProvider).tabs) {
     final deck = tab.deckNotifier.currentState.deck;
     if (deck == null) continue;
-    for (var i = 0; i < deck.slides.length; i++) {
-      final slide = deck.slides[i];
-      for (final candidate in [slide.imagePath, slide.imagePath2]) {
-        if (candidate.isEmpty) continue;
-        final resolved = resolveSlideAssetPath(candidate, deck.projectPath);
-        if (resolved == null) continue;
-        if (p.normalize(resolved) == target) {
-          usages.add('${tab.label} · slide ${i + 1}');
-          break;
-        }
-      }
+    // De insluitingswacht doet hier het oplossen: een pad dat buiten de
+    // presentatie zou wijzen levert geen treffer op in plaats van er een te
+    // verzinnen.
+    String? resolve(String candidate) {
+      final resolved = resolveSlideAssetPath(candidate, deck.projectPath);
+      return resolved == null ? null : p.normalize(resolved);
+    }
+
+    for (final i in slideIndexesUsingImage(deck, target, resolve)) {
+      usages.add('${tab.label} · slide ${i + 1}');
     }
   }
   return usages;
@@ -674,8 +677,11 @@ Future<void> _replaceImageUsages(
     if (deck == null) continue;
     final projectPath = deck.projectPath ?? '';
 
-    String resolve(String candidate) =>
-        resolveSlideAssetPath(candidate, deck.projectPath) ?? '';
+    String? resolve(String candidate) {
+      final resolved = resolveSlideAssetPath(candidate, deck.projectPath);
+      return resolved == null ? null : p.normalize(resolved);
+    }
+
     // Blijf relatief opslaan als de slide dat al deed en het nieuwe pad
     // binnen het project ligt; anders absoluut.
     String replacement(String candidate) {
@@ -687,13 +693,12 @@ Future<void> _replaceImageUsages(
 
     for (var i = 0; i < deck.slides.length; i++) {
       final slide = deck.slides[i];
-      var updated = slide;
-      if (slide.imagePath.isNotEmpty && resolve(slide.imagePath) == target) {
-        updated = updated.copyWith(imagePath: replacement(slide.imagePath));
-      }
-      if (slide.imagePath2.isNotEmpty && resolve(slide.imagePath2) == target) {
-        updated = updated.copyWith(imagePath2: replacement(slide.imagePath2));
-      }
+      final updated = slideWithImageReplaced(
+        slide,
+        target,
+        resolve,
+        replacement,
+      );
       if (!identical(updated, slide)) notifier.updateSlide(i, updated);
     }
   }
@@ -725,6 +730,43 @@ List<Slide> _slidesForPresentationOrExport(
     );
   }
   return slides;
+}
+
+/// Waarom er geen enkele dia overblijft, in de woorden van de échte oorzaak.
+///
+/// Er stond hier één zin — "Alle slides zijn overgeslagen" — en die wees naar de
+/// verkeerde knop zodra de oorzaak TLP was: een dia met een strengere
+/// classificatie dan de presentatie valt óók weg, maar heeft niets met overslaan
+/// te maken en is met "Alles tonen" niet terug te krijgen. De twee blijven hier
+/// dus uit elkaar, ook wanneer ze samen optreden.
+String emptyAudienceReason(
+  AppLocalizations l10n,
+  Deck deck, {
+  required bool forExport,
+}) {
+  final skipped = deck.slides.any((s) => s.skipped);
+  final withheld = deck.slides.any((s) => slideWithheldByTlp(s, deck.tlp));
+  if (withheld && skipped) {
+    return forExport
+        ? l10n.d(
+            'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.',
+          )
+        : l10n.d(
+            'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.',
+          );
+  }
+  if (withheld) {
+    return forExport
+        ? l10n.d(
+            'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.',
+          )
+        : l10n.d(
+            'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.',
+          );
+  }
+  return forExport
+      ? l10n.d('Alle slides zijn overgeslagen — niets om te exporteren.')
+      : l10n.d('Alle slides zijn overgeslagen — niets om te tonen.');
 }
 
 /// Toont de "niet-opgeslagen wijzigingen"-dialoog en geeft de keuze terug.
@@ -834,9 +876,7 @@ void presentDeck(
   if (slides.isEmpty) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-          l10n.d('Alle slides zijn overgeslagen — niets om te tonen.'),
-        ),
+        content: Text(emptyAudienceReason(l10n, deck, forExport: false)),
       ),
     );
     return;

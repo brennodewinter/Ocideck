@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'dart:typed_data';
 import 'dart:ui' show Locale;
 
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../l10n/app_localizations.dart';
@@ -13,12 +14,36 @@ import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/timeline.dart';
 import '../utils/log.dart';
+import '../models/document_signature.dart';
+import 'bundled_licenses.dart';
 import 'export_metadata.dart';
 
 part 'parts/marp_html_service_cockpit.dart';
 part 'parts/marp_html_service_charts.dart';
 part 'parts/marp_html_service_charts_radial.dart';
 part 'parts/marp_html_service_charts_bullet.dart';
+
+/// The third-party notices for one HTML export: a licence banner per inlined
+/// script (keyed by npm package name) and the collapsible block that carries the
+/// full licence texts.
+///
+/// Both halves exist because an export makes the *user* the distributing party.
+/// MathJax and Mermaid ship minified without any banner at all, so an export
+/// used to hand someone 5 MB of third-party code with no way to tell what it
+/// was or under what terms — a duty the recipient cannot discharge because we
+/// removed the evidence of it.
+class ExportNotices {
+  const ExportNotices({required this.banners, required this.html});
+
+  /// npm package name → the `/*! @license … */` comment prepended to its
+  /// `<script>`, or an empty string for a bundle we have no entry for.
+  final Map<String, String> banners;
+
+  /// The `<details>` block appended to `<body>`, with every full licence text.
+  final String html;
+
+  String bannerFor(String npm) => banners[npm] ?? '';
+}
 
 /// Builds a single, self-contained HTML file from a deck's Marp Markdown.
 ///
@@ -94,6 +119,13 @@ class MarpHtmlService {
       theme == null ? Future.value(_baseCss) : _themedCss(theme),
     ]);
 
+    // Wie een export doorstuurt, verspreidt vijf JavaScript-bundels en — als het
+    // gebundelde lettertype is ingesloten — ook een font. Dat mag alleen mét de
+    // kennisgevingen erbij, dus die reizen mee in het bestand zelf.
+    final notices = await thirdPartyNotices(
+      embedsFont: css.contains('data:font/ttf;base64,'),
+    );
+
     // Per-export CSP nonce. Every executable <script> we emit carries it; the
     // CSP then allows only nonce'd scripts, so an injected inline <script> that
     // somehow survives DOMPurify can't execute when the file is opened. The
@@ -104,7 +136,14 @@ class MarpHtmlService {
       List<int>.generate(16, (_) => rng.nextInt(256)),
     );
 
-    final signature = signatureFields(deckMarkdown);
+    // De ondertekening komt van het deck mee (het zegelblok staat sinds 0.1.0
+    // niet meer in de front matter). Een `.md` van vóór die verhuizing draagt
+    // hem nog wél in de kop, en die blijft leesbaar: [signatureFields] is het
+    // terugvalpad, niet de hoofdroute.
+    final docMeta = metadata ?? const ExportDocumentMetadata();
+    final signature = docMeta.signature != null
+        ? signatureFieldsOf(docMeta.signature!, sealedAt: docMeta.sealedAt)
+        : signatureFields(deckMarkdown);
     final sections = StringBuffer();
     for (final slide in marpSlides(deckMarkdown)) {
       final renderedBlocks = renderCockpitBlocks(
@@ -129,15 +168,24 @@ class MarpHtmlService {
         ..write('</script></section>');
     }
 
-    String inline(String code) =>
-        '<script nonce="$nonce">${_guardScript(code)}</script>';
+    // Elke ingesloten bundel krijgt een licentiebanner, ook als de geminificeerde
+    // upstream-build er geen heeft. marked, highlight.js en DOMPurify dragen er
+    // zelf een; MathJax en Mermaid niet, en zonder banner kan de ontvanger van
+    // een export niet zien wat hij doorstuurt. [notices] draagt de volledige
+    // teksten; deze regel wijst erheen.
+    String inline(String code, [String? npm]) {
+      final head = npm == null ? '' : notices.bannerFor(npm);
+      return '<script nonce="$nonce">$head${_guardScript(code)}</script>';
+    }
 
-    final meta = metadata ?? const ExportDocumentMetadata();
+    final meta = docMeta;
     final title = _htmlAttr(meta.displayTitle(fallbackTitle));
     final headMeta = _htmlHeadMeta(meta, fallbackTitle: fallbackTitle);
-    final banner = meta.htmlClassification == null
-        ? ''
-        : '<div class="tlp-export-banner">${_htmlAttr(meta.htmlClassification!)}</div>';
+    final banner =
+        (meta.htmlClassification == null
+            ? ''
+            : '<div class="tlp-export-banner">${_htmlAttr(meta.htmlClassification!)}</div>') +
+        _aiBanner(meta);
 
     return '<!doctype html>\n'
         '<html lang="nl"><head><meta charset="utf-8">'
@@ -154,26 +202,120 @@ class MarpHtmlService {
         // 'none' (a planted <form action="https://…"> on submit). MathJax is
         // tex-svg (no web fonts) and the bundled theme/highlight CSS carry no
         // url()/@font-face, so these limits never bite a legitimate export.
+        //
+        // style-src 'unsafe-inline' sluit het laatste gat: zónder die richtlijn
+        // valt stijl helemaal buiten de CSP, en kon een `@import url(https://…)`
+        // in een `<style>`-blok alsnog naar buiten bellen — precies wat de rest
+        // van deze regel belooft te verhinderen. 'unsafe-inline' klinkt ruimer
+        // dan het is: het staat inline stijl toe (die er al was, want er stond
+        // niets) maar géén enkele externe herkomst, dus het import-verzoek
+        // wordt geweigerd. Een nonce zou strenger zijn, maar breekt de stijl
+        // die MathJax en mermaid tijdens het renderen zelf injecteren.
         '<meta http-equiv="Content-Security-Policy" '
         'content="script-src \'nonce-$nonce\'; object-src \'none\'; '
         'base-uri \'none\'; frame-src \'none\'; form-action \'none\'; '
         'img-src \'self\' data: blob: file:; '
         'media-src \'self\' data: blob: file:; font-src \'self\' data:; '
+        'style-src \'unsafe-inline\'; '
         'connect-src \'none\'">'
         '<title>$title</title>'
         '$headMeta'
         '<style>$css\n$hljsCss</style>'
         '<script nonce="$nonce">$_mathjaxConfig</script>'
-        '${inline(marked)}'
-        '${inline(purify)}'
-        '${inline(hljs)}'
-        '${inline(mathjax)}'
-        '${inline(mermaid)}'
+        '${inline(marked, 'marked')}'
+        '${inline(purify, 'dompurify')}'
+        '${inline(hljs, 'highlight.js')}'
+        '${inline(mathjax, 'mathjax')}'
+        '${inline(mermaid, 'mermaid')}'
         '</head><body>'
         '$banner'
         '$sections'
         '${inline(_renderScript)}'
+        '${notices.html}'
         '</body></html>';
+  }
+
+  /// Collects the third-party notices for one export: the per-script licence
+  /// banners and the collapsible block carrying the full licence texts.
+  ///
+  /// Versions and source URLs come from `assets/web_export/MANIFEST.json`, the
+  /// same pinned inventory `make deps-check` verifies, so a bundle upgrade
+  /// updates the notice with it instead of leaving a stale version behind.
+  /// [embedsFont] adds the EB Garamond notice, which only applies when the deck
+  /// theme actually inlines the font (OFL-1.1 §2 — the licence must accompany
+  /// the font, and in a base64 `@font-face` the font is right there).
+  ///
+  /// An unreadable manifest or licence asset degrades to *no* notices with a
+  /// warning in the log, the same way a missing font asset falls back to the CSS
+  /// stack: a broken asset must not cost the user their export. That silence is
+  /// covered by `marp_html_service_licenses_test.dart`, which builds against the
+  /// real assets and fails if a bundle reaches the export without its notice.
+  @visibleForTesting
+  Future<ExportNotices> thirdPartyNotices({required bool embedsFont}) async {
+    final banners = <String, String>{};
+    final texts = <(String, String)>[];
+    try {
+      final manifest =
+          jsonDecode(await loadAsset('$_assetDir/MANIFEST.json'))
+              as Map<String, dynamic>;
+      final bundles = (manifest['bundles'] as List)
+          .cast<Map<String, dynamic>>();
+
+      for (final b in bundles) {
+        final npm = b['npm'] as String?;
+        if (npm == null) continue; // hash-pinned CSS, covered by highlight.js
+        final entry = BundledLicenses.forNpm(npm);
+        if (entry == null) continue;
+        final version = b['version'] as String? ?? '';
+        final label = '${entry.component} $version';
+        banners[npm] =
+            '/*! @license $label — ${entry.license}. '
+            'Full licence text: see "Licenties van derden" at the end of this '
+            'file, or ${entry.source} */\n';
+        texts.add((label, await loadAsset(entry.licenseAsset)));
+      }
+
+      if (embedsFont) {
+        final font = BundledLicenses.all.firstWhere(
+          (e) => e.component.startsWith('EB Garamond'),
+        );
+        texts.add((font.component, await loadAsset(font.licenseAsset)));
+      }
+    } catch (e) {
+      logWarning('MarpHtmlService.thirdPartyNotices: load notice assets', e);
+      return const ExportNotices(banners: {}, html: '');
+    }
+
+    return ExportNotices(banners: banners, html: _noticesHtml(texts));
+  }
+
+  /// The collapsible notice block appended to every export.
+  ///
+  /// A `<details>` rather than an HTML comment for two reasons: a comment may
+  /// not contain `--`, which the OFL text does three times, and a notice nobody
+  /// can read is not much of a notice. It is collapsed by default and hidden in
+  /// print, so a deck still prints as a deck.
+  static String _noticesHtml(List<(String, String)> texts) {
+    if (texts.isEmpty) return '';
+    const l10n = AppLocalizations(Locale('nl'));
+    final body = StringBuffer();
+    for (final (label, text) in texts) {
+      body
+        ..write('<h3>${_htmlText(label)}</h3>')
+        ..write('<pre>${_htmlText(text.trimRight())}</pre>');
+    }
+    return '<style>'
+        '.ocideck-licenses{max-width:1280px;margin:24px auto 48px;padding:0 24px;'
+        'color:#c8c8c8;font:12px/1.5 -apple-system,"Segoe UI",Roboto,sans-serif}'
+        '.ocideck-licenses h3{font-size:12px;margin:14px 0 4px}'
+        '.ocideck-licenses pre{white-space:pre-wrap;font-size:11px}'
+        '@media print{.ocideck-licenses{display:none}}'
+        '</style>'
+        '<details class="ocideck-licenses">'
+        '<summary>${_htmlText(l10n.d('Licenties van derden'))}</summary>'
+        '<p>${_htmlText(l10n.d('Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.'))}</p>'
+        '$body'
+        '</details>';
   }
 
   /// Split Marp Markdown into per-slide Markdown chunks: drop the leading YAML
@@ -471,12 +613,39 @@ class MarpHtmlService {
     r'<!--\s*_class:\s*sign-off\s*-->',
   );
 
+  /// De velden die [renderSignOffBlock] verwacht, uit een [DocumentSignature].
+  ///
+  /// De sleutelnamen zijn die van de oude front matter. Dat is geen nostalgie
+  /// maar het punt: zo blijven de nieuwe route (het deck levert de
+  /// handtekening) en het terugvalpad ([signatureFields], een `.md` van vóór
+  /// 0.1.0) door dezelfde renderer lopen, en kan de akkoordpagina er niet op
+  /// twee manieren uit gaan zien.
+  static Map<String, String> signatureFieldsOf(
+    DocumentSignature sig, {
+    String sealedAt = '',
+  }) {
+    final out = <String, String>{};
+    void put(String key, String value) {
+      if (value.trim().isNotEmpty) out[key] = value.trim();
+    }
+
+    put('ocideck_sig_name', sig.name);
+    put('ocideck_sig_role', sig.role);
+    put('ocideck_sig_cert', sig.certification);
+    put('ocideck_sig_date', sig.date);
+    put('ocideck_sig_statement', sig.statement);
+    put('ocideck_sig_typed', sig.typedSignature);
+    put('ocideck_seal_at', sealedAt);
+    return out;
+  }
+
   /// Leest de `ocideck_sig_*`- en `ocideck_seal_at`-regels uit de voorpagina
   /// van [deckMarkdown].
   ///
-  /// De ondertekening staat op dekniveau, niet op de dia — zie
-  /// `_writeSignOffSlide`. De export krijgt alleen de markdown mee, dus wordt
-  /// hij hier teruggelezen uit de front matter.
+  /// Alleen nog het terugvalpad voor een `.md` van vóór 0.1.0, toen die regels
+  /// daar stonden. Een deck dat door OciDeck komt levert zijn handtekening via
+  /// [ExportDocumentMetadata]; deze route bestaat voor markdown die van elders
+  /// komt en de oude kop nog draagt.
   static Map<String, String> signatureFields(String deckMarkdown) {
     final text = deckMarkdown.replaceAll('\r\n', '\n');
     if (!text.startsWith('---\n')) return const {};
@@ -694,6 +863,7 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 .slide .signoff-seal{font-size:18px;color:#64748b;letter-spacing:.03em;margin-top:.7em}
 .slide .media-redacted{display:flex;align-items:center;justify-content:center;min-height:200px;margin:.6em 0;background:#000;color:#fff;font-size:20px;letter-spacing:.05em;border-radius:4px;text-align:center;padding:24px}
 .tlp-export-banner{position:fixed;top:0;left:0;right:0;background:#000;color:#ffc000;text-align:center;font:700 14px/2.4 monospace;z-index:9999;letter-spacing:.06em}
+.ai-export-banner{position:fixed;left:0;right:0;background:#3a2c00;color:#ffd75e;text-align:center;font:600 13px/2.4 system-ui,sans-serif;z-index:9998}
 @media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}}
 ''';
 
@@ -702,6 +872,32 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
         .replaceAll('&', '&amp;')
         .replaceAll('"', '&quot;')
         .replaceAll('<', '&lt;');
+  }
+
+  /// De zichtbare AI-melding boven aan de HTML-export, of leeg wanneer er niets
+  /// te melden valt.
+  ///
+  /// Dit is de enige uitvoer waarin de melding te *zien* is in plaats van
+  /// alleen in de documenteigenschappen te staan, en dat is geen toeval: HTML
+  /// wordt op een scherm gelezen, waar een balk bovenaan de bestaande manier is
+  /// om de lezer iets over het hele document te vertellen (de TLP-balk zit er
+  /// al). Op een geprint vel zou dezelfde balk de dia's verdringen.
+  ///
+  /// De balk staat onder de TLP-balk wanneer die er is: welk stuk je voor je
+  /// hebt gaat vóór hoe zeker het is.
+  static String _aiBanner(ExportDocumentMetadata meta) {
+    if (!meta.hasUnreviewedAi) return '';
+    const l10n = AppLocalizations(Locale('nl'));
+    // Eén zin, geen telling: het aantal dia's staat in de meta-tag, waar een
+    // gereedschap het uitleest. Voor de lezer verandert er niets aan de
+    // strekking of het er één of zeven zijn — en een telling in de zin kost in
+    // 31 talen een meervoudsregeling die niets toevoegt.
+    final text = l10n.d(
+      'Concept: hier staat AI-tekst die nog niemand heeft nagekeken',
+    );
+    final top = meta.htmlClassification == null ? '0' : '2.4em';
+    return '<div class="ai-export-banner" style="top:$top">'
+        '${_htmlText(text)}</div>';
   }
 
   static String _htmlHeadMeta(
@@ -722,6 +918,13 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
     if (classification != null) {
       tag('classification', classification);
       tag('tlp', meta.tlp.key);
+    }
+    // AI-verordening art. 50: de markering moet machineleesbaar zijn. Een
+    // `<meta>` is dat; de balk hierboven is voor de lezer.
+    final aiMarking = meta.htmlAiMarking;
+    if (aiMarking != null) {
+      tag('ai-generated', aiMarking);
+      tag('ai-generated-slides', '${meta.unreviewedAiSlideCount}');
     }
     tag('generator', meta.producer);
     return buf.toString();
