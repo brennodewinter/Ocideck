@@ -143,7 +143,30 @@ bool canSplitSlide(Slide slide) {
       return slide.bullets.length >= 2;
     case SlideType.twoBullets:
       return slide.bullets.length >= 2 || slide.bullets2.length >= 2;
-    default:
+    // Uitgeschreven in plaats van een `default:`, zodat de compiler een nieuw
+    // slidetype hier aanwijst. Anders zou een type dat wél bullets draagt
+    // stilzwijgend 'niet splitsbaar' heten en de actie in de UI ontbreken.
+    case SlideType.title ||
+        SlideType.section ||
+        SlideType.twoImages ||
+        SlideType.image ||
+        SlideType.video ||
+        SlideType.quote ||
+        SlideType.table ||
+        SlideType.freeMarkdown ||
+        SlideType.code ||
+        SlideType.chart ||
+        SlideType.cockpit ||
+        SlideType.question ||
+        SlideType.timeline ||
+        SlideType.scorecard ||
+        SlideType.assets ||
+        SlideType.discoveries ||
+        SlideType.finding ||
+        SlideType.findingsSummary ||
+        SlideType.checklist ||
+        SlideType.scopeMatrix ||
+        SlideType.signOff:
       return false;
   }
 }

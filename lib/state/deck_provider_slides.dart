@@ -170,7 +170,29 @@ extension DeckNotifierSlides on DeckNotifier {
         return build(
           splitTwoColumnsIntoPages(slide.bullets, slide.bullets2, perColumn),
         );
-      default:
+      // Uitgeschreven: met een `default:` valt een nieuw bullet-dragend type hier
+      // stil terug op 'niet op te knippen', zonder dat iets dat meldt.
+      case SlideType.title ||
+          SlideType.section ||
+          SlideType.twoImages ||
+          SlideType.image ||
+          SlideType.video ||
+          SlideType.quote ||
+          SlideType.table ||
+          SlideType.freeMarkdown ||
+          SlideType.code ||
+          SlideType.chart ||
+          SlideType.cockpit ||
+          SlideType.question ||
+          SlideType.timeline ||
+          SlideType.scorecard ||
+          SlideType.assets ||
+          SlideType.discoveries ||
+          SlideType.finding ||
+          SlideType.findingsSummary ||
+          SlideType.checklist ||
+          SlideType.scopeMatrix ||
+          SlideType.signOff:
         return null;
     }
   }
