@@ -240,7 +240,7 @@ deliberately manual).
 - `atomic_file.dart` — Atomic writes (temp file + rename) to prevent data loss on crash.
 - `bullet_fixes.dart` — The deterministic one-click fixes behind the text-density quality reports: `splitSentenceBullets` cuts a multi-sentence bullet into one bullet per sentence (and copies the line as it was into the speaker notes, because the connection between those sentences lived in the full sentence), `trimBulletExplanations` moves the explanation behind a *label : explanation* bullet off the slide. Each has a `can…` twin so the panel offers an action only when it does something — and, for the sentence split, only while the result stays inside the readability threshold, since splitting adds bullets.
 - `bundled_asset.dart` — `asset:`-schema voor méégebundelde logo's van ingebouwde stijlprofielen.
-- `color_contrast.dart` — WCAG 2.1 contrast-ratio calculation and hex colour parsing.
+- `color_contrast.dart` — WCAG 2.1 contrast-ratio calculation, plus `tryParseHexColor`: the *strict* hex reader (six digits, always opaque, `null` when the input does not qualify) so a quality check can skip a pair instead of judging a colour it invented. The lenient counterpart, which always returns a colour, is `AppTheme.parseHexColor`.
 - `number_convention.dart` — Works out whether a file writes `1.234,56` or `1,234.56`, from evidence across all its values rather than per cell (`scanDecimalConvention`), and reads a value under a settled convention (`parseNumberUnder`). Deduces or refuses: what no value settles comes back as `undecided` for the chart import to ask about, never guessed from locale.
 - `csv.dart` — RFC 4180 quoting for the two readers of CSV *files*, in two framings: `parseCsvRows` reads a whole document (a quoted field may hold a line break — MITRE's CWE export needs that) and `parseCsvLine` reads one already-split line, so a stray quote stops there instead of swallowing the file. Used by `models/chart.dart` and `tool/build_cwe_catalog.dart`. Also the scan behind `table_clipboard.dart` (spreadsheet paste). A fourth hand-rolled quote scanner fails `check_conventions.dart` — three had accumulated unnoticed before this was one file.
 - `deck_markdown_dashes.dart` — Escapes standalone dash lines so the deck parser can't misread them.
@@ -286,7 +286,7 @@ deliberately manual).
 
 ## `lib/theme/`
 
-- `app_theme.dart` — Material 3 theme builder with brand colours and appearance profiles.
+- `app_theme.dart` — Material 3 theme builder with brand colours and appearance profiles. Also home to `AppTheme.parseHexColor`, the single hex→`Color` reader for everything that renders a stored theme colour (previews, presenter, dialogs): it accepts `#RRGGBB`, `RRGGBB` or `AARRGGBB` and falls back rather than failing. Four private copies of that logic had accumulated elsewhere before this became one function.
 
 ## `lib/l10n/` — localization
 
