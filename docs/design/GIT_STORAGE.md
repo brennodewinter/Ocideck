@@ -1103,8 +1103,14 @@ New:
   `_api`/`_factory`/`_stub` ernaast voor de voorwaardelijke import.
 - `lib/services/git/draft_store.dart` — the text draft + outbox (Phase 2), met
   `_factory`/`_io`/`_web` ernaast.
-- `lib/services/git/git_cli.dart` — **the only** `Process.run` site; §10.2 lives
-  here.
+- `lib/services/git/git_cli.dart` — de interface; de subprocesstart zelf staat
+  in `git_cli_io.dart` (`Process.start`, niet `run`), en §10.2 beschrijft die.
+  *(Gecorrigeerd 2026-07-22: hier stond dat dit "the only `Process.run` site"
+  was. Drie dingen klopten er niet — dit bestand start geen proces, het is
+  `Process.start`, en er is een tweede site: de `chmod 700` in
+  `lib/services/disk_traces.dart`. Die staat met reden apart en wordt sinds
+  #516 door `network_sink_guard_test` geteld, want een subproces is een
+  netwerkuitgang die NetGuard niet ziet.)*
 - `lib/services/git/git_cli_web.dart` — web stub, wired by conditional import
   exactly as `lib/platform/native_window.dart` does it.
 - `lib/services/git/sync_engine.dart`, `lib/services/git/asset_pool.dart`.

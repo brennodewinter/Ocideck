@@ -6,40 +6,65 @@ part of 'deck_provider.dart';
 extension DeckNotifierMiauw on DeckNotifier {
   /// Exclude EIS [eisId] from the compliance overview with a mandatory [reason].
   /// An empty reason is ignored — a waiver must always be justified.
-  void setMiauwWaiver(String eisId, String reason) {
-    final deck = currentState.deck;
-    if (deck == null || reason.trim().isEmpty) return;
-    final waivers = Map<String, String>.from(deck.miauwWaivers)
-      ..[eisId] = reason.trim();
-    _mutate(deck.copyWith(miauwWaivers: waivers));
-  }
+  void setMiauwWaiver(String eisId, String reason) =>
+      _setMiauwEntry(this, _MiauwMap.waivers, eisId, reason);
 
   /// Lift the exclusion on EIS [eisId], returning it to its automatic/manual
   /// status.
-  void removeMiauwWaiver(String eisId) {
-    final deck = currentState.deck;
-    if (deck == null || !deck.miauwWaivers.containsKey(eisId)) return;
-    final waivers = Map<String, String>.from(deck.miauwWaivers)..remove(eisId);
-    _mutate(deck.copyWith(miauwWaivers: waivers));
-  }
+  void removeMiauwWaiver(String eisId) =>
+      _setMiauwEntry(this, _MiauwMap.waivers, eisId, null);
 
   /// Manually confirm EIS [eisId] with a mandatory [note] (the human
   /// attestation). An empty note is ignored — a confirmation must be justified,
   /// just like a waiver. The requirement then reads as voldaan (handmatig).
-  void setMiauwConfirmation(String eisId, String note) {
-    final deck = currentState.deck;
-    if (deck == null || note.trim().isEmpty) return;
-    final confirmations = Map<String, String>.from(deck.miauwConfirmations)
-      ..[eisId] = note.trim();
-    _mutate(deck.copyWith(miauwConfirmations: confirmations));
-  }
+  void setMiauwConfirmation(String eisId, String note) =>
+      _setMiauwEntry(this, _MiauwMap.confirmations, eisId, note);
 
   /// Withdraw the manual confirmation on EIS [eisId], returning it to open.
-  void removeMiauwConfirmation(String eisId) {
-    final deck = currentState.deck;
-    if (deck == null || !deck.miauwConfirmations.containsKey(eisId)) return;
-    final confirmations = Map<String, String>.from(deck.miauwConfirmations)
-      ..remove(eisId);
-    _mutate(deck.copyWith(miauwConfirmations: confirmations));
+  void removeMiauwConfirmation(String eisId) =>
+      _setMiauwEntry(this, _MiauwMap.confirmations, eisId, null);
+}
+
+/// Welke van de twee MIAUW-mappen op het deck geraakt wordt.
+enum _MiauwMap { waivers, confirmations }
+
+/// Zet [eisId] op [value] in de gekozen MIAUW-map, of haalt hem eruit wanneer
+/// [value] null is.
+///
+/// Top-level en geen methode: het raakt geen enkel veld van [DeckNotifier], en
+/// die klasse zit tegen zijn plafond (#630). De vier publieke methodes hierboven
+/// deden alle vier hetzelfde — map kopiëren, één sleutel wijzigen, vastleggen —
+/// en dat vier keer uitschrijven was de reden dat dit bestand zo groot was.
+///
+/// **Een lege waarde telt als afwezig.** Een uitsluiting of een handmatige
+/// bevestiging zonder motivering hoort niet vastgelegd te worden: het verschil
+/// tussen "hier is over nagedacht" en "hier is op geklikt" is precies wat een
+/// auditor uit dit veld wil lezen.
+void _setMiauwEntry(
+  DeckNotifier n,
+  _MiauwMap which,
+  String eisId,
+  String? value,
+) {
+  final deck = n.currentState.deck;
+  if (deck == null) return;
+  final trimmed = value?.trim();
+  if (value != null && (trimmed == null || trimmed.isEmpty)) return;
+
+  final source = which == _MiauwMap.waivers
+      ? deck.miauwWaivers
+      : deck.miauwConfirmations;
+  if (trimmed == null && !source.containsKey(eisId)) return;
+
+  final updated = Map<String, String>.from(source);
+  if (trimmed == null) {
+    updated.remove(eisId);
+  } else {
+    updated[eisId] = trimmed;
   }
+  n._mutate(
+    which == _MiauwMap.waivers
+        ? deck.copyWith(miauwWaivers: updated)
+        : deck.copyWith(miauwConfirmations: updated),
+  );
 }

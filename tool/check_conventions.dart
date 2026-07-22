@@ -154,7 +154,7 @@ const Map<String, int> classSizeBaseline = {
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
   'lib/widgets/app_shell.dart#_MainLayoutState': 1510,
   'lib/state/settings_provider.dart#SettingsNotifier': 1331,
-  'lib/state/deck_provider.dart#DeckNotifier': 1305,
+  'lib/state/deck_provider.dart#DeckNotifier': 1256,
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1214,
   'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1123,
   'lib/widgets/editors/chart_editor.dart#_ChartEditorState': 1062,
