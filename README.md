@@ -87,8 +87,10 @@ full reference — every check, what it covers, and how it is enforced — see
 [`docs/CHECKS.md`](docs/CHECKS.md).
 
 OciDeck ships a machine-readable **Software Bill of Materials** (CycloneDX 1.6 +
-SPDX 2.3) covering every component, as required by the EU Cyber Resilience Act —
-see [`docs/SBOM.md`](docs/SBOM.md).
+SPDX 2.3) covering every component, as described in the EU Cyber Resilience Act.
+We are not a manufacturer under that regulation and are not obliged to; we do it
+because it is part of building software properly — see
+[`docs/SBOM.md`](docs/SBOM.md).
 
 ## Project layout
 

@@ -40,6 +40,13 @@ Part II, §1** requires manufacturers of products with digital elements to:
 OciDeck goes beyond the "top-level" minimum and lists **all** components, direct
 **and** transitive. See [the CRA mapping](#cra-mapping) below.
 
+That paragraph describes an obligation on *manufacturers*. Stichting LibreKAT is
+not one: OciDeck is an open-source project, made freely available and not offered
+as a service, so the Regulation's obligations do not attach. We build the SBOM
+anyway, because an inventory of what you ship is part of building software
+properly — and because a reader deserves to be able to check. The reasoning is
+recorded in `assurance/CRA-2024-2847-positie.md`.
+
 ## What it covers
 
 The inventory is assembled from files under version control, so it can never

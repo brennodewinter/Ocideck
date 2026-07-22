@@ -72,8 +72,9 @@ The web build is designed to pull **zero third-party origins** at runtime.
 - **SBOM (EU CRA).** `tool/generate_sbom.dart` emits a Software Bill of Materials
   in CycloneDX 1.6 and SPDX 2.3 (plus a human-readable Markdown view) covering
   all direct/transitive Dart packages, the vendored JS/CSS, plugin forks,
-  bundled fonts, and pinned SDKs — the artefact required by the EU Cyber
-  Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1). `make sbom-verify`
+  bundled fonts, and pinned SDKs — the artefact described in the EU Cyber
+  Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1), which we follow as a
+  guideline rather than as an obligation. `make sbom-verify`
   is a staleness gate: it fails if dependencies changed without regenerating the
   SBOM, so the CRA artefact can never silently drift.
 - **License compliance.** `tool/check_licenses.dart` (`make licenses`) fails if

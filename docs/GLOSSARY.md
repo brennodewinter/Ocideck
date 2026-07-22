@@ -135,10 +135,12 @@ internal server bypass the private-range block (and use plain `http`). Never
 applies to deck-supplied URLs.
 
 **SBOM** — Software Bill of Materials (CycloneDX + SPDX), the dependency inventory
-required by the EU CRA. See [SBOM.md](SBOM.md).
+as described in the EU CRA — followed voluntarily, not as an obligation. See
+[SBOM.md](SBOM.md).
 
-**CRA** — the EU **Cyber Resilience Act** (Reg. (EU) 2024/2847), which the SBOM
-tooling targets.
+**CRA** — the EU **Cyber Resilience Act** (Reg. (EU) 2024/2847). Used here as a
+guideline for what good practice looks like, not as a compliance claim; see
+`assurance/CRA-2024-2847-positie.md`.
 
 ## Pentest module (MIAUW)
 
