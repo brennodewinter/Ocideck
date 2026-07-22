@@ -736,6 +736,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Konsepto: aki tin teksto di IA ku ainda no a ser revisá',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

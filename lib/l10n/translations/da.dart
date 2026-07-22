@@ -1778,6 +1778,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Udkast: indeholder AI-tekst, som ingen har gennemgået endnu',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

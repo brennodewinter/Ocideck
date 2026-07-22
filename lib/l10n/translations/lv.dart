@@ -1778,6 +1778,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Melnraksts: satur MI tekstu, ko vēl neviens nav pārbaudījis',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Labi',

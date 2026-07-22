@@ -736,6 +736,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Brouillon : contient du texte IA que personne n\'a encore vérifié',
   'esc': 'échap',
   'Enter': 'Entrée',
   'OK': 'OK',

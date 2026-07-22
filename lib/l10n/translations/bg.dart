@@ -1802,6 +1802,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Чернова: съдържа AI текст, който още никой не е прегледал',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Добре',

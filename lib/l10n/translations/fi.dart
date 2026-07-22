@@ -1779,6 +1779,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Luonnos: sisältää tekoälytekstiä, jota kukaan ei ole vielä tarkistanut',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

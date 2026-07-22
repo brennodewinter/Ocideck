@@ -1770,6 +1770,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Mustand: sisaldab AI teksti, mida keegi pole veel üle vaadanud',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

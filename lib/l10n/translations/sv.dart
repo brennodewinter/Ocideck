@@ -1778,6 +1778,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Utkast: innehåller AI-text som ingen har granskat än',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -1807,6 +1807,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Προσχέδιο: περιέχει κείμενο AI που δεν έχει ελέγξει ακόμη κανείς',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Εντάξει',

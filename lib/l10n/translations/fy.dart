@@ -737,6 +737,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Konsept: hjir stiet AI-tekst dy\'t noch nimmen neisjoen hat',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -1787,6 +1787,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Juodraštis: čia yra DI tekstas, kurio dar niekas neperžiūrėjo',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Gerai',

@@ -1797,6 +1797,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Чернетка: містить текст ШІ, який ще ніхто не перевірив',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Гаразд',

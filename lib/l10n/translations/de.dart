@@ -736,6 +736,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Entwurf: enthält KI-Text, den noch niemand geprüft hat',
   'esc': 'Esc',
   'Enter': 'Enter',
   'OK': 'OK',

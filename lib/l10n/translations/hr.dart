@@ -1786,6 +1786,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Nacrt: sadrži AI tekst koji još nitko nije pregledao',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'U redu',

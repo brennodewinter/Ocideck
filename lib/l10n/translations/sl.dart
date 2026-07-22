@@ -1781,6 +1781,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Osnutek: vsebuje besedilo UI, ki ga še nihče ni pregledal',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'V redu',

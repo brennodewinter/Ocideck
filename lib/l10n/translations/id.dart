@@ -1779,6 +1779,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Draf: berisi teks AI yang belum ditinjau siapa pun',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

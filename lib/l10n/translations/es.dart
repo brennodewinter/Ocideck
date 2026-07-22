@@ -733,6 +733,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Borrador: contiene texto de IA que nadie ha revisado todavía',
   'esc': 'esc',
   'Enter': 'Intro',
   'OK': 'OK',

@@ -732,6 +732,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Bozza: contiene testo IA che nessuno ha ancora verificato',
   'esc': 'esc',
   'Enter': 'Invio',
   'OK': 'OK',

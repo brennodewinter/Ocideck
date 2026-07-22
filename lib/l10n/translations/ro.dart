@@ -1797,6 +1797,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Schiță: conține text IA pe care nimeni nu l-a verificat încă',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

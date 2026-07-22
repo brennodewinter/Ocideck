@@ -1783,6 +1783,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Vázlat: AI-szöveget tartalmaz, amelyet még senki nem ellenőrzött',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

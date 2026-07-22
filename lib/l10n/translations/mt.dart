@@ -1801,6 +1801,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Abbozz: hawn test IA li għadu ma ġiex rivedut minn ħadd',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

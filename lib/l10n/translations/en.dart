@@ -918,6 +918,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Draft: contains AI text that no one has reviewed yet',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -1795,6 +1795,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Adumbratio: hic est textus IA quem nemo adhuc recognovit',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Bene',

@@ -1791,6 +1791,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Szkic: zawiera tekst AI, którego nikt jeszcze nie sprawdził',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -1786,6 +1786,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Koncept: obsahuje AI text, ktorý zatiaľ nikto neskontroloval',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

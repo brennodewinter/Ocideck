@@ -1815,6 +1815,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Dréacht: tá téacs IS anseo nár sheiceáil duine ar bith fós',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Ceart go leor',

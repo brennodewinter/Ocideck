@@ -1754,6 +1754,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'nab: AI-ghItlh tu\'lu\'. not nuDlu\'pu\'.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'lu\'',

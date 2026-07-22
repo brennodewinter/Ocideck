@@ -1783,6 +1783,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Entwurf: da staht KI-Text, wo no niemert prüeft hät',
   'esc': 'Esc',
   'Enter': 'Enter',
   'OK': 'OK',
