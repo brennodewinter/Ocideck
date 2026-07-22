@@ -6,8 +6,8 @@
 //
 // ── Waarom dit hier staat en niet in docs/ ──────────────────────────────────
 //
-// OciDeck houdt de reactietermijnen van de Cyberweerbaarheidsverordening
-// vrijwillig aan. Dat is een keuze over gedrag, geen productbelofte. Het
+// OciDeck legt zichzelf termijnen op voor het afhandelen van
+// beveiligingsmeldingen. Dat is een keuze over gedrag, geen productbelofte. Het
 // verschil is niet cosmetisch:
 //
 //   Een norm die je MEET kun je missen, onderzoeken en bijstellen. Hij dient
@@ -39,6 +39,20 @@
 // kan beroepen. Wie deze grens weer wil verleggen, verplaatst geen bestand maar
 // neemt een besluit.
 //
+// ── Dit meet géén CRA-conformiteit ─────────────────────────────────────────
+//
+// De termijnen hieronder zijn van onszelf. Ze zijn NIET de meldtermijnen van de
+// Cyberweerbaarheidsverordening en meten die ook niet. De CRA ((EU) 2024/2847,
+// art. 14) verplicht — vanaf 11-09-2026 — bij een actief misbruikte
+// kwetsbaarheid tot een vroegtijdige waarschuwing aan CSIRT en ENISA binnen 24
+// uur, een melding binnen 72 uur en een eindverslag binnen 14 dagen. Andere
+// klok, andere ontvangers, andere aanleiding; daarvan staat hier niets.
+//
+// Dat onderscheid staat er omdat de verwarring duurder is dan de belofte die
+// dit bestand vermijdt: "wij houden de CRA-termijnen aan" is in een vragenlijst
+// een conformiteitsclaim, en die zou hier op een meting rusten die de 24 uur
+// nergens kent.
+//
 // ── Wat het meet ───────────────────────────────────────────────────────────
 //
 // Uit gegevens die er al zijn. Een handgeschreven lijst veroudert en niemand
@@ -53,6 +67,32 @@
 //   oplossing      — melding → sluiting, alleen voor een BEVESTIGDE melding.
 //                    Ruis hoeft niet opgelost te worden.
 //
+// ── Waar de meting van afhangt ─────────────────────────────────────────────
+//
+// SECURITY.md stuurt melders naar security@librekat.nl, niet naar een issue.
+// Dit gereedschap leest de forge. Die twee sluiten alleen op elkaar aan als
+// een binnengekomen melding ook een volgissue krijgt met een van de labels
+// hieronder — de melding zelf hoort daar níét in, alleen het spoor: wanneer
+// binnengekomen, wanneer beantwoord, wanneer geoordeeld, wanneer gesloten.
+//
+// Gebeurt dat niet, dan meet dit instrument nul terwijl er een melding in een
+// postvak ligt. Dat is de gevaarlijkste uitkomst die het kent: rust die geen
+// rust is. Vandaar dat het bij nul metingen uitdrukkelijk zegt dat er niets
+// gemeten is en niet dat alles goed gaat — maar die zin vervangt de
+// aantekening niet. Het aanmaken van dat volgissue is de handeling waar deze
+// hele meting op rust.
+//
+// Daaruit volgt nog een val. Een issue dat drie weken ná de e-mail wordt
+// aangemaakt, begint op `created_at` op dag 0, en dan meldt dit gereedschap
+// "gehaald" over een termijn die al verlopen was. Daarom mag het volgissue de
+// werkelijke binnenkomst vastleggen met één regel in de tekst:
+//
+//   Binnengekomen: 2026-07-01
+//
+// Staat die er, en ligt hij vóór het aanmaken, dan telt hij als startmoment.
+// Alleen die datum wordt uit de tekst gelezen — de melding zelf blijft ongezien
+// en komt nergens in de uitvoer.
+//
 // ── Nul metingen ───────────────────────────────────────────────────────────
 //
 // Er is nog geen release en dus geen melding. Dat is de reden om dit nú te
@@ -63,12 +103,14 @@
 //
 // ── Hoe je het merkt zonder erop te letten ─────────────────────────────────
 //
-// De poort draait mee in `make check-full`, dus vóór elke release komt een
-// overschrijding onder ogen. Dat is niet genoeg: een termijn verloopt tussen
-// releases door. Daarvoor is `--quiet` er — dan zwijgt dit gereedschap zolang
-// alles binnen de norm valt en schrijft het alleen bij een dreiging of een
-// overschrijding. Zet het daarmee in cron (of launchd) en je hoort er niets
-// van tot er iets te horen valt:
+// Een termijn verloopt op een willekeurige dinsdag, niet op het moment dat jij
+// toevallig een poort draait. Een doel dat je zelf moet aanroepen is dus het
+// minimum en niet de bewaking.
+//
+// De bewaking is `--quiet`: dan zwijgt dit gereedschap zolang alles binnen de
+// norm valt en schrijft het alleen bij een dreiging of een overschrijding. Zet
+// het daarmee in cron (of launchd) en je hoort er niets van tot er iets te
+// horen valt — geen dagelijks bericht dat je went af te vinken:
 //
 //   0 8 * * 1-5  cd /pad/naar/ocideck && dart run tool/check_service_norms.dart --quiet --advisory
 //
@@ -502,6 +544,23 @@ Set<String> _labelnamen(Object? labels) => {
         (label['name']! as String).toLowerCase(),
 };
 
+/// De regel waarmee een volgissue vastlegt wanneer de melding werkelijk
+/// binnenkwam — meldingen arriveren per e-mail, het issue komt later.
+final _binnengekomenRegel = RegExp(
+  r'^[ \t]*Binnengekomen:[ \t]*(\d{4}-\d{2}-\d{2})[ \t]*$',
+  multiLine: true,
+);
+
+/// De aangetekende binnenkomst uit de tekst van een volgissue, of null.
+///
+/// Dit is het enige dat uit die tekst gelezen wordt. De melding zelf blijft
+/// ongelezen en komt nergens in de uitvoer; zie de kop van dit bestand.
+DateTime? binnengekomenUit(Object? tekst) {
+  if (tekst is! String) return null;
+  final treffer = _binnengekomenRegel.firstMatch(tekst);
+  return treffer == null ? null : DateTime.tryParse(treffer.group(1)!);
+}
+
 DateTime? _tijd(Object? waarde) {
   if (waarde is! String || waarde.isEmpty) return null;
   final moment = DateTime.tryParse(waarde);
@@ -518,8 +577,15 @@ Melding? meldingUit(Map<String, Object?> issue, List<Object?> tijdlijn) {
   final labels = _labelnamen(issue['labels']);
   if (labels.intersection(meldingLabels).isEmpty) return null;
   final nummer = issue['number'];
-  final gemeld = _tijd(issue['created_at']);
-  if (nummer is! int || gemeld == null) return null;
+  final aangemaakt = _tijd(issue['created_at']);
+  if (nummer is! int || aangemaakt == null) return null;
+  // Een aangetekende binnenkomst telt alleen als hij vóór het issue ligt: het
+  // gaat om de tijd die de melding in het postvak lag, niet om het oprekken
+  // van een termijn met een datum in de toekomst.
+  final binnen = binnengekomenUit(issue['body']);
+  final gemeld = (binnen != null && binnen.isBefore(aangemaakt))
+      ? binnen
+      : aangemaakt;
 
   final melder = (issue['user'] as Map?)?['login'];
   DateTime? eersteReactie;
@@ -626,6 +692,11 @@ List<String> _nulMeting() => [
   '    toestand vóór de eerste melding. Het instrument staat klaar; de norm is',
   '    nog niet op de proef gesteld. Zodra er wél metingen zijn, is dit de plek',
   '    waar de getallen worden bijgesteld.',
+  '',
+  '    Let op: meldingen komen per e-mail binnen (zie SECURITY.md) en niet als',
+  '    issue. Nul betekent hier dus "geen volgissue", niet "geen melding".',
+  '    Ligt er een melding in het postvak zonder volgissue, dan meet dit',
+  '    gereedschap rust die er niet is.',
 ];
 
 /// De regels die dit gereedschap schrijft. Leeg betekent: niets te zeggen.

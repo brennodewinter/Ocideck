@@ -258,11 +258,13 @@ void main() {
       String gemeld = '2026-07-01T09:00:00Z',
       String? gesloten,
       String? uiterlijk,
+      String? tekst,
     }) => {
       'number': nummer,
       'created_at': gemeld,
       'closed_at': gesloten,
       'due_date': uiterlijk,
+      'body': tekst,
       'user': {'login': melder},
       'labels': [
         for (final naam in labels) {'name': naam},
@@ -371,6 +373,51 @@ void main() {
       expect(melding.oordeelOp, isNull);
     });
 
+    test('een aangetekende binnenkomst wint van het aanmaakmoment', () {
+      // Meldingen komen per e-mail; het volgissue komt later. Zonder deze regel
+      // begint de klok pas bij het issue en meldt het gereedschap "gehaald"
+      // over een termijn die al verlopen was.
+      final melding = meldingUit(
+        issue(
+          nummer: 30,
+          gemeld: '2026-07-22T09:00:00Z',
+          tekst:
+              'Spoor van een melding per e-mail.\n'
+              'Binnengekomen: 2026-07-01\n',
+        ),
+        const [],
+      )!;
+      expect(melding.gemeld, DateTime.parse('2026-07-01'));
+      // En dan is de eerste-reactienorm allang verlopen.
+      expect(
+        beoordeel(
+          norm: serviceNormen.first,
+          melding: melding,
+          nu: DateTime(2026, 7, 22),
+        ).stand,
+        Stand.overschreden,
+      );
+    });
+
+    test('een binnenkomst ná het issue rekt niets op', () {
+      final melding = meldingUit(
+        issue(
+          nummer: 31,
+          gemeld: '2026-07-01T09:00:00Z',
+          tekst: 'Binnengekomen: 2026-08-01\n',
+        ),
+        const [],
+      )!;
+      expect(melding.gemeld, DateTime.parse('2026-07-01T09:00:00Z'));
+    });
+
+    test('zonder die regel blijft het aanmaakmoment gelden', () {
+      expect(binnengekomenUit(null), isNull);
+      expect(binnengekomenUit('geen datum hier'), isNull);
+      // Halverwege een zin telt niet: het moet een eigen regel zijn.
+      expect(binnengekomenUit('ooit Binnengekomen: 2026-07-01 ofzo'), isNull);
+    });
+
     test('een leeg tijdstip is geen datum', () {
       // Forgejo schrijft een niet-gezette datum als het jaar 1.
       final melding = meldingUit(
@@ -391,6 +438,9 @@ void main() {
       final tekst = regels.join('\n');
       expect(tekst, contains('Er is niets gemeten'));
       expect(tekst, contains('geen bewijs dat de normen gehaald worden'));
+      // Meldingen komen per e-mail binnen; nul issues is niet nul meldingen.
+      // Zonder dit voorbehoud leest een lege uitkomst als "alles rustig".
+      expect(tekst, contains('rust die er niet is'));
       // De normen staan er wél, met het voorbehoud erbij.
       expect(tekst, contains('geen toezegging aan derden'));
       expect(exitCodeVoor(meetAlles(const [], nu)), 0);

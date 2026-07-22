@@ -381,10 +381,20 @@ check-actions:
 # geoordeeld en opgelost wordt. Meet uit de tijdstempels die de meldingen in de
 # forge toch al dragen — een handgeschreven lijst veroudert en niemand vult hem.
 #
-# Bewust GEEN onderdeel van `make check`: dat moet offline en zonder sleutel
-# kunnen draaien. Wel van `check-full`, zodat een verlopen termijn vóór een
-# release onder ogen komt. Voor de tijd daartussen is de --quiet-variant er; zie
-# de kop van tool/check_service_norms.dart.
+# Bewust in GEEN enkele verzameldoel opgenomen, ook niet in `check-full`. Twee
+# redenen, en de tweede is de zwaarste:
+#
+#   1. Dit doel heeft een persoonlijke leessleutel voor de forge nodig. Een
+#      medewerker zonder sleutel zou exit 2 krijgen — "kon niet meten" — en dat
+#      leest als een defect in zijn wijziging terwijl het er geen is.
+#   2. Zodra het in `check-full` hangt, moet docs/CHECKS.md het noemen, want die
+#      beschrijft wat dat doel dekt. En dan staat "reactietermijnen" tóch in een
+#      document dat als asset met de app meereist. Precies de sluiproute die
+#      deze hele opzet vermijdt.
+#
+# De bewaking loopt daarom niet via een verzameldoel maar via de
+# --quiet-variant in cron: die zwijgt tot er iets te melden valt. Zie de kop van
+# tool/check_service_norms.dart.
 #
 # De normen zelf staan in dat bestand en nergens anders. Ze zijn intern:
 # alarmdrempels waarop dit project zichzelf wekt, geen toezegging aan derden.
@@ -699,6 +709,6 @@ check: format-check analyze check-conventions check-method-length check-dead-cod
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
-check-full: check check-secrets sast licenses sbom-verify deps-check check-web deps-outdated servicenormen
+check-full: check check-secrets sast licenses sbom-verify deps-check check-web deps-outdated
 	@echo "== OciDeck extended check complete =="
-	@echo "Validated: required quality gate, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, dependency freshness, and the internal service norms."
+	@echo "Validated: required quality gate, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, and dependency freshness."
