@@ -32,7 +32,7 @@ class _ScopeMatrixPreview extends StatelessWidget {
     final pad = w * 0.07; // vertical margin
     final hPad = w * 0.045; // narrower side margin — use the width (feedback)
     final spec = ScopeMatrixSpec.fromSlide(slide.title, slide.tableRows);
-    final accent = _hexColor(profile.accentColor);
+    final accent = AppTheme.parseHexColor(profile.accentColor);
 
     return _PreviewScaffold(
       width: w,

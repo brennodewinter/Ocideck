@@ -144,8 +144,9 @@ class AppLocalizations {
     'ro': '🇷🇴',
     'sl': '🇸🇮',
     'sk': '🇸🇰',
-    // Klingon has no country flag; a bundled Klingon-Empire emblem is used
-    // instead (see languageFlag()). This emoji is only a text fallback.
+    // Klingon has no country flag. The picker shows a neutral `tlh` letter
+    // badge instead (see languageFlag()); this emoji is only a text fallback
+    // for places that render a flag as plain text.
     'tlh': '🖖',
     'tr': '🇹🇷',
   };

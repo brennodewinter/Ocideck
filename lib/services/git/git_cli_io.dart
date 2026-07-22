@@ -5,6 +5,7 @@ import 'dart:typed_data' show BytesBuilder;
 
 import 'package:flutter/foundation.dart' show visibleForTesting;
 
+import '../../utils/log.dart';
 import 'git_cli.dart';
 
 /// De echte uitvoerder: één subproces, gestart en afgeschermd. Vervangbaar in
@@ -91,12 +92,25 @@ class NativeGitCli implements GitCli {
       // Gebruikersdata is een operand, nooit een optie (§10.2): een waarde die
       // met `-` begint zou als vlag gelezen kunnen worden. Weiger vóór het
       // starten, zodat een repo geen `--upload-pack=…` kan smokkelen.
+      //
+      // Leg een weigering ook vast. Dit is geen bedieningsfout maar een poging:
+      // gewone operanden beginnen niet met een streepje en dragen geen NUL.
+      // `NetGuard` logt zijn weigeringen wel, en zonder spoor is achteraf niet
+      // na te gaan dat deze poort iets heeft tegengehouden. De operand zelf
+      // gaat niet mee de log in - die komt uit een repo.
       if (operand.startsWith('-')) {
+        logWarning(
+          'GitCliIo.run: operand geweigerd - begint met een streepje '
+          '(zou als optie gelezen kunnen worden)',
+        );
         throw GitCliException(
           'Operand mag niet met een streepje beginnen: $operand',
         );
       }
       if (operand.contains('\u0000') || operand.contains('\n')) {
+        logWarning(
+          'GitCliIo.run: operand geweigerd - bevat een NUL of een regeleinde',
+        );
         throw const GitCliException('Operand bevat een ongeldig teken');
       }
     }

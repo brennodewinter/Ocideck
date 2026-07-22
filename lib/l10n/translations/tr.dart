@@ -2761,6 +2761,12 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Licenties van derden': 'Üçüncü taraf lisansları',
+  'Alle licentieteksten tonen': 'Tüm lisans metinlerini göster',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck\'in kendisi EUPL-1.2 ile lisanslıdır. Bunun yanında üçüncü taraf yazılımları da paketler: Dart ve Flutter paketleri, birlikte gelen iki eklenti, dört yazı tipi ailesi, gizlilik denetiminin yüz modeli ve HTML dışa aktarımıyla birlikte giden JavaScript. Her biri kendi lisansını korur.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Bu dosya üçüncü taraf yazılımı ve bazen bir yazı tipi içerir. Bunlara ait tam lisans metinleri aşağıdadır; bu dosyayı iletirken onları da birlikte iletin.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Tamam',

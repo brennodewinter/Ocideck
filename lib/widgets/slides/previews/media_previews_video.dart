@@ -127,7 +127,7 @@ class _VideoPreviewState extends State<_VideoPreview>
         if (_hovering) setState(() => _hovering = false);
       },
       child: Container(
-        color: _hexColor(widget.profile.slideBackgroundColor),
+        color: AppTheme.parseHexColor(widget.profile.slideBackgroundColor),
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -158,12 +158,12 @@ class _VideoPreviewState extends State<_VideoPreview>
                   _applyFont(
                     widget.font,
                     TextStyle(
-                      color: _hexColor(widget.profile.textColor),
+                      color: AppTheme.parseHexColor(widget.profile.textColor),
                       fontSize: widget.w * 0.038,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  linkColor: _hexColor(widget.profile.accentColor),
+                  linkColor: AppTheme.parseHexColor(widget.profile.accentColor),
                 ),
               ),
             Positioned(
@@ -484,12 +484,12 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
                   _applyFont(
                     widget.font,
                     TextStyle(
-                      color: _hexColor(widget.profile.textColor),
+                      color: AppTheme.parseHexColor(widget.profile.textColor),
                       fontSize: widget.w * 0.038,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  linkColor: _hexColor(widget.profile.accentColor),
+                  linkColor: AppTheme.parseHexColor(widget.profile.accentColor),
                 ),
               ),
             ),

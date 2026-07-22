@@ -49,7 +49,7 @@ class _HexColorDialogState extends State<_HexColorDialog> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: _parseHexColor(normalized ?? '#FFFFFF'),
+                  color: AppTheme.parseHexColor(normalized ?? '#FFFFFF'),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: AppTheme.slate300),
                 ),

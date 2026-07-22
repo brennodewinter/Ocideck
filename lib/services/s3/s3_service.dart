@@ -1,3 +1,19 @@
+// ── lib/services/s3/ ─────────────────────────────────────────────────────────
+// S3 en S3-compatible opslag als deckbron, in twee bewust gescheiden helften:
+// s3_sigv4.dart ondertekent en raakt het netwerk niet (daardoor toetsbaar tegen
+// vaste vectoren), dit bestand doet het verkeer over een gepinde,
+// redirect-vrije `HttpClient`. Dat is geen willekeurige knip: een AWS-SDK zou
+// zijn eigen HTTP-stack meebrengen en om `NetGuard` heen verbinden, en dan is
+// er van de socketpinning die elke andere netwerkbron toepast niets over.
+//
+// Wat hier níét thuishoort: de bucketconfiguratie (lib/models/s3_settings.dart),
+// de bedrading naar tabbladen en instellingen (lib/state/s3_provider.dart,
+// tabs_provider_s3.dart) en het aftasten van een bucket voor 'Slide zoeken'
+// (../presentation_search/), dat deze dienst alleen gebruikt. WebDAV is de
+// zusterbron en ligt met opzet één map hoger, als los bestand: hij deelt de
+// vorm, niet de ondertekening. Bestand voor bestand: docs/SOURCE_MAP.md.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -9,6 +25,7 @@ import '../../models/s3_settings.dart';
 import '../../utils/log.dart';
 import '../../utils/net_guard.dart';
 import '../file_service.dart';
+import '../net/transport_failure.dart';
 import 's3_sigv4.dart';
 
 /// Eén item in een S3-listing.
@@ -256,36 +273,32 @@ class S3Service {
     }
   }
 
-  /// Listing van [remotePath] (relatief aan de wortelprefix), met een delimiter
-  /// zodat onderliggende prefixen als mappen terugkomen in plaats van als één
-  /// platte sleutellijst.
   /// Vertaal een gevangen laag-niveau fout naar een [S3Exception] die weet of
-  /// hij het opnieuw proberen waard is. Spiegelt `WebdavService._asFailure`.
+  /// hij het opnieuw proberen waard is.
+  ///
+  /// De soortindeling deelt hij met elke andere opslag
+  /// ([classifyTransportFailure]); de zin die de gebruiker leest noemt het
+  /// S3-endpoint en blijft daarom hier.
   static Never _asFailure(String where, Object e, String fallback) {
-    // TlsException dekt zowel HandshakeException als CertificateException.
-    if (e is TlsException) {
-      logWarning('S3Service.$where: TLS geweigerd', e);
-      throw S3Exception(S3Error.tls, 'Certificaat niet vertrouwd');
-    }
-    if (e is SocketException) {
-      logWarning('S3Service.$where: endpoint onbereikbaar', e);
-      throw S3Exception(
+    final kind = classifyTransportFailure(e);
+    logTransportFailure('S3Service.$where', kind, e);
+    throw switch (kind) {
+      TransportFailure.tls => S3Exception(
+        S3Error.tls,
+        'Certificaat niet vertrouwd',
+      ),
+      TransportFailure.unreachable => S3Exception(
         S3Error.network,
         'Endpoint niet bereikbaar',
         transient: true,
-      );
-    }
-    // Een verbinding die halverwege wegviel meldt Dart als HttpException.
-    if (e is HttpException) {
-      logWarning('S3Service.$where: verbinding afgebroken', e);
-      throw S3Exception(
+      ),
+      TransportFailure.interrupted => S3Exception(
         S3Error.network,
         'Verbinding afgebroken',
         transient: true,
-      );
-    }
-    logError('S3Service.$where: mislukt', e);
-    throw S3Exception(S3Error.network, fallback);
+      ),
+      TransportFailure.unknown => S3Exception(S3Error.network, fallback),
+    };
   }
 
   /// Voer een *leesactie* uit en probeer hem één keer opnieuw wanneer de
@@ -305,6 +318,9 @@ class S3Service {
     }
   }
 
+  /// Listing van [remotePath] (relatief aan de wortelprefix), met een delimiter
+  /// zodat onderliggende prefixen als mappen terugkomen in plaats van als één
+  /// platte sleutellijst.
   Future<List<S3Entry>> list(String remotePath) =>
       _retryRead('list', () => _listOnce(remotePath));
 

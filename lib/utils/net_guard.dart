@@ -273,10 +273,18 @@ class NetGuard {
   /// `VideoPlayerController`, which otherwise resolve and connect with no host
   /// check of their own.
   ///
-  /// NOTE: those higher-level APIs re-resolve the host at fetch time, so this
-  /// does not pin the socket; a DNS rebind in the window between this check and
-  /// the fetch stays possible. It closes the static-internal and
-  /// resolves-to-internal cases, which are the realistic deck-driven attacks.
+  /// NOTE: this check does not pin the socket, so on its own it leaves a
+  /// DNS-rebind window between check and fetch. For **images** that window is
+  /// closed elsewhere: `guardedNetworkImage` (utils/media_fetch_io.dart) fetches
+  /// the bytes itself over a socket pinned by [connectPinned], so there is no
+  /// second name lookup at all — this call stays as the UI gate that decides
+  /// whether to show a "blocked" placeholder instead of an error.
+  ///
+  /// For **video** the window remains: `VideoPlayerController.networkUrl` hands
+  /// the URL to a platform player that opens its own connection, and there is no
+  /// byte-level seam to pin. The residual risk is an internal GET whose response
+  /// never reaches the app — no credentials travel, and the static-internal and
+  /// resolves-to-internal cases are closed here.
   static Future<bool> isAllowedMediaUrlResolved(String url) {
     if (!isAllowedMediaUrl(url)) return Future.value(false);
     final host = Uri.parse(url.trim()).host;

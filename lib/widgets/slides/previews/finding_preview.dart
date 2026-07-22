@@ -152,7 +152,7 @@ class _FindingPreview extends StatelessWidget {
       redFrom: 7,
       value: cvss.score,
     );
-    final textColor = _hexColor(profile.textColor);
+    final textColor = AppTheme.parseHexColor(profile.textColor);
     return Padding(
       padding: EdgeInsets.only(left: w * 0.02),
       child: SizedBox(
@@ -161,8 +161,8 @@ class _FindingPreview extends StatelessWidget {
         child: _CockpitInstrument(
           meter: meter,
           progress: 1,
-          accent: _hexColor(profile.accentColor),
-          surface: _hexColor(profile.slideBackgroundColor),
+          accent: AppTheme.parseHexColor(profile.accentColor),
+          surface: AppTheme.parseHexColor(profile.slideBackgroundColor),
           textColor: textColor,
           mutedColor: textColor.withValues(alpha: 0.62),
           good: AppTheme.success700,

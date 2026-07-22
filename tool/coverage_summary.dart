@@ -37,6 +37,13 @@ import 'dart:io';
 ///
 /// A file that is merely *untested* does not belong here: write the test.
 const Set<String> uncoveredBaseline = {
+  // NO EXECUTABLE LINES: `media_fetch.dart` is een kale export-facade — één
+  // conditional export en verder niets. PLATFORM: `media_fetch_web.dart` is de
+  // web-helft daarvan; daar opent de browser de verbinding en valt er niets te
+  // pinnen. De io-helft, waar de SSRF-poort zit, wordt wél getest
+  // (media_fetch_test.dart).
+  'lib/utils/media_fetch.dart',
+  'lib/utils/media_fetch_web.dart',
   // NO EXECUTABLE LINES: `StorageOrigin` is een abstract interface met twee
   // getters en verder niets — het contract dat WebdavOrigin, S3Origin en
   // GitOrigin delen. De implementaties worden wél getest
@@ -195,9 +202,18 @@ const int perFileFloorPercent = 20;
 ///
 /// Where it must go: 0. Every step down is one file that went from decoration
 /// to something a test can hold accountable. It started at 39 on 2026-07-21
-/// (22 of those files ran not a single line); what is left is mostly the
-/// app-shell command layer and a handful of dialogs.
-const int filesBelowFloorBudget = 21;
+/// (22 of those files ran not a single line). On 2026-07-22 the shell command
+/// layer came down: `ai_actions`, `shell_actions_git_assets`,
+/// `shell_actions_s3`, `shell_actions` and `shell_actions_connections` went
+/// from decoration to tested, and only two files still run not a single line.
+/// What is left is mostly the git dialogs and a handful of platform halves.
+///
+/// 15 and not 14: the shell work brought the count to 14, and rebasing onto a
+/// main that had moved on by 76 commits added `widgets/mermaid_render_host.dart`
+/// (31 lines, 12.9%). That is a shared WebView host — the kind of component a
+/// headless test cannot drive — so it is counted rather than papered over. The
+/// step in this change is still 21 -> 15.
+const int filesBelowFloorBudget = 15;
 
 /// Slack on the downward ratchet. Coverage of a file that sits near the floor
 /// can wobble by one when an optional dependency (the native OpenCV library

@@ -455,4 +455,21 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     section: null,
     keywords: ['iban', 'bank', 'rekening', 'doneren', 'donatie', 'steunen'],
   ),
+  SettingsSearchEntry(
+    tab: SettingsSection.about,
+    label: 'Licenties van derden',
+    section: null,
+    keywords: [
+      'licentie',
+      'licenties',
+      'license',
+      'eupl',
+      'opensource',
+      'derden',
+      'attributie',
+      'ofl',
+      'lettertype',
+      'copyright',
+    ],
+  ),
 ];
