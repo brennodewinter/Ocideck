@@ -88,3 +88,23 @@ Run it yourself with `make licenses` (or `dart run tool/check_licenses.dart`).
 The policy, method, and latest result are documented in
 [`docs/LICENSE_COMPLIANCE.md`](docs/LICENSE_COMPLIANCE.md).
 
+## Trademarks
+
+OciDeck names other people's products where naming them is the only way to say
+what it does — the file format it writes, the server it can talk to. That is
+*nominative* use: it identifies the other product, it does not claim it. The
+owners are named here because using a mark without acknowledging the owner is
+the part that turns a low risk into a complaint.
+
+| Name | Owner | How OciDeck uses it |
+| --- | --- | --- |
+| **Marp** | [Marp Team](https://marp.app/) (MIT-licensed project) | OciDeck reads and writes Marp-compatible Markdown and ships a CSS theme for it. Not affiliated with, endorsed by, or a product of the Marp Team. |
+| **Nextcloud** | Nextcloud GmbH — "Nextcloud" is a registered trademark | OciDeck saves and opens decks over WebDAV, with a Nextcloud preset because Nextcloud puts its DAV root in a fixed place. Not affiliated with, endorsed by, or a product of Nextcloud GmbH. |
+| **YouTube** | Google LLC | A video slide may point at a YouTube URL; OciDeck embeds the player. Not affiliated with, endorsed by, or a product of Google LLC. |
+| **Vimeo** | Vimeo.com, Inc. | A video slide may point at a Vimeo URL; OciDeck embeds the player. Not affiliated with, endorsed by, or a product of Vimeo.com, Inc. |
+
+Other names that appear in the interface or the documentation — operating
+systems, browsers, standards bodies, the reference catalogues listed in
+[`docs/LICENSE_COMPLIANCE.md`](docs/LICENSE_COMPLIANCE.md) — belong to their
+respective owners and are likewise used only to identify the thing they name.
+
