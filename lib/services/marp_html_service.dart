@@ -224,34 +224,46 @@ class MarpHtmlService {
   /// [embedsFont] adds the EB Garamond notice, which only applies when the deck
   /// theme actually inlines the font (OFL-1.1 §2 — the licence must accompany
   /// the font, and in a base64 `@font-face` the font is right there).
+  ///
+  /// An unreadable manifest or licence asset degrades to *no* notices with a
+  /// warning in the log, the same way a missing font asset falls back to the CSS
+  /// stack: a broken asset must not cost the user their export. That silence is
+  /// covered by `marp_html_service_licenses_test.dart`, which builds against the
+  /// real assets and fails if a bundle reaches the export without its notice.
   @visibleForTesting
   Future<ExportNotices> thirdPartyNotices({required bool embedsFont}) async {
-    final manifest =
-        jsonDecode(await loadAsset('$_assetDir/MANIFEST.json'))
-            as Map<String, dynamic>;
-    final bundles = (manifest['bundles'] as List).cast<Map<String, dynamic>>();
-
     final banners = <String, String>{};
     final texts = <(String, String)>[];
-    for (final b in bundles) {
-      final npm = b['npm'] as String?;
-      if (npm == null) continue; // hash-pinned CSS, covered by highlight.js
-      final entry = BundledLicenses.forNpm(npm);
-      if (entry == null) continue;
-      final version = b['version'] as String? ?? '';
-      final label = '${entry.component} $version';
-      banners[npm] =
-          '/*! @license $label — ${entry.license}. '
-          'Full licence text: see "Licenties van derden" at the end of this '
-          'file, or ${entry.source} */\n';
-      texts.add((label, await loadAsset(entry.licenseAsset)));
-    }
+    try {
+      final manifest =
+          jsonDecode(await loadAsset('$_assetDir/MANIFEST.json'))
+              as Map<String, dynamic>;
+      final bundles = (manifest['bundles'] as List)
+          .cast<Map<String, dynamic>>();
 
-    if (embedsFont) {
-      final font = BundledLicenses.all.firstWhere(
-        (e) => e.component.startsWith('EB Garamond'),
-      );
-      texts.add((font.component, await loadAsset(font.licenseAsset)));
+      for (final b in bundles) {
+        final npm = b['npm'] as String?;
+        if (npm == null) continue; // hash-pinned CSS, covered by highlight.js
+        final entry = BundledLicenses.forNpm(npm);
+        if (entry == null) continue;
+        final version = b['version'] as String? ?? '';
+        final label = '${entry.component} $version';
+        banners[npm] =
+            '/*! @license $label — ${entry.license}. '
+            'Full licence text: see "Licenties van derden" at the end of this '
+            'file, or ${entry.source} */\n';
+        texts.add((label, await loadAsset(entry.licenseAsset)));
+      }
+
+      if (embedsFont) {
+        final font = BundledLicenses.all.firstWhere(
+          (e) => e.component.startsWith('EB Garamond'),
+        );
+        texts.add((font.component, await loadAsset(font.licenseAsset)));
+      }
+    } catch (e) {
+      logWarning('MarpHtmlService.thirdPartyNotices: load notice assets', e);
+      return const ExportNotices(banners: {}, html: '');
     }
 
     return ExportNotices(banners: banners, html: _noticesHtml(texts));
