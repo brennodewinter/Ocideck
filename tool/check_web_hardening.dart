@@ -109,6 +109,14 @@ void main() {
         );
       }
     }
+    // Referrer-Policy is the one companion header that a <meta> tag really does
+    // enforce, so it ships in the bundle rather than depending on the host. It
+    // pairs with connect-src's https:: a URL-import would otherwise hand the
+    // deck's own URL to the host being fetched.
+    require(
+      _extractReferrerPolicy(html) == 'no-referrer',
+      'index.html must carry <meta name="referrer" content="no-referrer">.',
+    );
   }
 
   // ── CanvasKit is self-hosted, not pulled from the gstatic CDN ───────────────
@@ -196,6 +204,15 @@ bool _eq(List<String>? tokens, List<String> expected) {
 String? _extractCsp(String html) {
   final match = RegExp(
     r'<meta\s+http-equiv="Content-Security-Policy"\s+content="([^"]*)"',
+    caseSensitive: false,
+  ).firstMatch(html);
+  return match?.group(1);
+}
+
+/// Returns the `content="..."` of the referrer meta tag, or null when absent.
+String? _extractReferrerPolicy(String html) {
+  final match = RegExp(
+    r'<meta\s+name="referrer"\s+content="([^"]*)"',
     caseSensitive: false,
   ).firstMatch(html);
   return match?.group(1);

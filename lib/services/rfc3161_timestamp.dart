@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 
 import '../utils/asn1_der.dart';
@@ -46,11 +47,30 @@ const _oidTstInfo = [
   0x04,
 ];
 
+/// Hoeveel bytes de nonce in een `TimeStampReq` telt. Acht is wat RFC 3161
+/// §2.4.1 als "large random number" in de praktijk betekent; meer levert niets
+/// op omdat de nonce alleen dít verzoek aan dít antwoord hoeft te binden.
+const int kTimeStampNonceBytes = 8;
+
 /// Build an RFC 3161 `TimeStampReq` (`.tsq`) for [hash] under [algorithm]. The
 /// request asks the TSA to return its certificate (`certReq = TRUE`).
+///
+/// [nonce] wordt meegestuurd wanneer gegeven. RFC 3161 §2.4.2 verplicht de TSA
+/// dezelfde waarde in het antwoord te herhalen, en dát is waar de nonce voor
+/// dient: hij bindt één verzoek aan één token. Zonder nonce is elk geldig token
+/// voor dezelfde imprint inwisselbaar voor elk ander — er valt dan niet vast te
+/// stellen dát dit token het antwoord op dít verzoek is.
+///
+/// De echo is met [timeStampEchoesNonce] te controleren door wie beide helften
+/// heeft. OciDeck zelf kan dat (nog) niet bij het importeren: het verzoek gaat
+/// buiten de app om naar een TSA en het deck bewaart de nonce niet, dus na een
+/// herstart is de andere helft weg. Dat is een bewuste grens en geen omissie —
+/// een sleutel erbij in de front matter zou botsen met de lopende verhuizing
+/// van het zegel naar een sidecar.
 Uint8List buildTimeStampRequest(
   Uint8List hash, {
   Rfc3161HashAlgorithm algorithm = Rfc3161HashAlgorithm.sha512,
+  Uint8List? nonce,
 }) {
   final tsq = derSequence([
     derInteger(1), // version v1
@@ -59,9 +79,23 @@ Uint8List buildTimeStampRequest(
       derSequence([derOid(algorithm.oidBody), derNull()]), // hashAlgorithm
       derOctetString(hash), // hashedMessage
     ]),
+    // Volgorde volgens RFC 3161: de optionele nonce staat vóór certReq.
+    if (nonce != null) derPositiveInteger(nonce),
     derBoolean(true), // certReq
   ]);
   return Uint8List.fromList(tsq);
+}
+
+/// Een verse nonce uit [Random.secure].
+///
+/// Nadrukkelijk de veilige generator: een voorspelbare nonce is geen nonce. Wie
+/// de volgende waarde kan raden, kan vooraf een token laten maken dat straks
+/// als antwoord op een nog te stellen vraag doorgaat.
+Uint8List newTimeStampNonce() {
+  final random = Random.secure();
+  return Uint8List.fromList([
+    for (var i = 0; i < kTimeStampNonceBytes; i++) random.nextInt(256),
+  ]);
 }
 
 /// Decode a hex digest — the deck's `sealHash` as it is stored — to its bytes.
@@ -102,13 +136,18 @@ bool _isHexPair(String hex, int at) {
 /// The length check is the point: a request that announces SHA-512 and encloses
 /// 32 octets is malformed, and the failure would surface at the TSA — out of
 /// band, days later, to a user who no longer has the deck in front of them.
+///
+/// [nonce] gaat mee wanneer gegeven. Deze functie maakt er zelf géén: de
+/// willekeur hoort aan de rand, zodat wat hier gebeurt een zuivere, herhaalbaar
+/// te toetsen omzetting blijft.
 Uint8List? buildTimeStampRequestForSealHash(
   String sealHashHex, {
   Rfc3161HashAlgorithm algorithm = Rfc3161HashAlgorithm.sha512,
+  Uint8List? nonce,
 }) {
   final hash = decodeHashHex(sealHashHex);
   if (hash == null || hash.length != algorithm.digestBytes) return null;
-  return buildTimeStampRequest(hash, algorithm: algorithm);
+  return buildTimeStampRequest(hash, algorithm: algorithm, nonce: nonce);
 }
 
 /// The data extracted from a timestamp token that OciDeck can verify offline.
@@ -116,6 +155,7 @@ class TimeStampToken {
   const TimeStampToken({
     required this.messageImprintHex,
     required this.genTime,
+    this.nonceHex,
   });
 
   /// The hex of the hash the TSA timestamped (the token's message imprint).
@@ -123,6 +163,11 @@ class TimeStampToken {
 
   /// The TSA's asserted time (`genTime`), in UTC.
   final DateTime genTime;
+
+  /// De nonce die de TSA terugkaatste, of null wanneer het token er geen draagt
+  /// (de nonce is optioneel in TSTInfo, en een TSA die er geen kreeg zet er ook
+  /// geen).
+  final String? nonceHex;
 }
 
 /// Parse a timestamp token (`.tsr` / TimeStampResp or a bare TimeStampToken):
@@ -174,7 +219,57 @@ TimeStampToken? parseTimeStampToken(Uint8List token) {
   }
 
   if (hex == null || genTime == null) return null;
-  return TimeStampToken(messageImprintHex: hex, genTime: genTime);
+  return TimeStampToken(
+    messageImprintHex: hex,
+    genTime: genTime,
+    nonceHex: _nonceOf(tstInfo),
+  );
+}
+
+/// De nonce uit een TSTInfo: de eerste INTEGER ná de `genTime`.
+///
+/// Bewust op de kinderen van TSTInfo zelf en niet op de platte lijst. Er staan
+/// namelijk meer INTEGERs in een token — `version` en `serialNumber` staan er
+/// vóór, en een optionele `accuracy` draagt er zelf ook een paar, maar die
+/// zitten een niveau dieper. Op de platte lijst zou de eerste treffer na
+/// `genTime` dus de secondenwaarde van `accuracy` kunnen zijn, en dan wordt een
+/// echo-controle een vergelijking met een willekeurig ander getal.
+String? _nonceOf(Asn1Node tstInfo) {
+  var seenGenTime = false;
+  for (final child in tstInfo.children) {
+    if (child.tag == 0x18) {
+      seenGenTime = true;
+      continue;
+    }
+    if (seenGenTime && child.tag == 0x02) return _hex(child.content);
+  }
+  return null;
+}
+
+/// Of [token] de [nonce] terugkaatst die in het bijbehorende verzoek stond.
+///
+/// Dit is wat een nonce doet: hij bindt één token aan één verzoek. Een token
+/// dat de imprint deelt maar een andere (of geen) nonce draagt, is het antwoord
+/// op een ándere vraag — mogelijk een oudere, opnieuw ingediende. Een
+/// imprint-vergelijking alleen ziet dat verschil niet.
+///
+/// Merk op: dit vergt beide helften. Wie alleen het token heeft — en dat is
+/// OciDeck na een herstart, want het deck bewaart het verzoek niet — kan hier
+/// niets mee. Zie [buildTimeStampRequest].
+bool timeStampEchoesNonce(Uint8List token, Uint8List nonce) {
+  final parsed = parseTimeStampToken(token);
+  if (parsed?.nonceHex == null) return false;
+  // Leidende nulbytes tellen niet mee: DER schrijft de kortste vorm, dus een
+  // nonce die met 0x00 begint komt korter terug dan hij de deur uit ging.
+  String trim(String hex) {
+    var i = 0;
+    while (i + 2 < hex.length && hex.startsWith('00', i)) {
+      i += 2;
+    }
+    return hex.substring(i);
+  }
+
+  return trim(parsed!.nonceHex!) == trim(_hex(nonce));
 }
 
 /// Whether [token] is a valid timestamp for [sealHashHex] (case-insensitive):

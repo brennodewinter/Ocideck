@@ -68,7 +68,7 @@ class _BulletsImagePreview extends StatelessWidget {
     );
 
     return Container(
-      color: _hexColor(profile.slideBackgroundColor),
+      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
       child: Stack(
         children: [
           Positioned(
@@ -241,7 +241,7 @@ class _BulletsImagePreview extends StatelessWidget {
     );
 
     return Container(
-      color: _hexColor(profile.slideBackgroundColor),
+      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
       child: Stack(
         children: [
           Positioned(
@@ -343,10 +343,10 @@ class _BulletsImagePreview extends StatelessWidget {
                 TextStyle(
                   fontSize: titleSize * scale,
                   fontWeight: FontWeight.bold,
-                  color: _hexColor(profile.textColor),
+                  color: AppTheme.parseHexColor(profile.textColor),
                 ),
               ),
-              linkColor: _hexColor(profile.accentColor),
+              linkColor: AppTheme.parseHexColor(profile.accentColor),
             ),
           if (hasTitle && bullets.isNotEmpty) SizedBox(height: spacing * scale),
           if (slide.listStyle == ListStyle.checklist &&

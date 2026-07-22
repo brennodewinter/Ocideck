@@ -9,13 +9,16 @@ import '../models/privacy_disposition.dart';
 import '../models/privacy_finding.dart';
 import '../models/settings.dart';
 import '../models/storage_connection.dart';
+import '../services/disk_traces.dart';
 import '../services/privacy/privacy_regions.dart';
+import '../services/recovery_service.dart';
 import '../services/secret_store.dart';
 import '../utils/log.dart';
 
 part 'parts/settings_provider_connections.dart';
 part 'parts/settings_provider_git.dart';
 part 'parts/settings_provider_privacy.dart';
+part 'parts/settings_provider_traces.dart';
 
 class SettingsNotifier extends StateNotifier<AppSettings> {
   /// De huidige instellingen, leesbaar en schrijfbaar vanuit een `part`.
@@ -25,13 +28,19 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   AppSettings get currentState => state;
   set currentState(AppSettings value) => state = value;
 
-  SettingsNotifier({SecretStore? secretStore})
+  SettingsNotifier({SecretStore? secretStore, DiskTraces? diskTraces})
     : _secrets = secretStore ?? SecretStore(),
+      _diskTraces = diskTraces ?? DiskTraces(),
       super(const AppSettings()) {
     _load();
   }
 
   final SecretStore _secrets;
+
+  /// De opruimer voor wat een verbinding op schijf achterlaat. Injecteerbaar,
+  /// zodat een test in een tijdelijke map kan kijken in plaats van in de echte
+  /// app-supportmap van de gebruiker die de test draait.
+  final DiskTraces _diskTraces;
 
   /// Broadcast: één event (een oplopend volgnummer) per mislukte prefs-schrijf,
   /// zie [_persist]. De app-shell luistert hierop en toont een niet-blokkerende
@@ -132,6 +141,10 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
         logWarning('SettingsNotifier: ongeldige aiSettings-prefs', e);
       }
     }
+    // Het laden is asynchroon; een scope die in die tussentijd verdwijnt — een
+    // venster dat sluit, een test die afloopt — mag geen "gebruikt na dispose"
+    // opleveren. Er valt dan ook niets meer bij te werken.
+    if (!mounted) return;
     state = AppSettings(
       languageCode: prefs.getString('languageCode') ?? 'nl',
       connections: _loadConnections(prefs),
@@ -184,7 +197,11 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       privacyExportGate: PrivacyExportGateX.fromKey(
         prefs.getString('privacyExportGate'),
       ),
-      privacyOwnIdentity: prefs.getString('privacyOwnIdentity') ?? '',
+      // De echte plek is de sleutelbos; dit is de nog niet gemigreerde
+      // waarde, die meteen beschikbaar is. Zie [adoptPrivacyOwnIdentity],
+      // dat de sleutelbos náást het laden raadpleegt.
+      privacyOwnIdentity:
+          prefs.getString(SettingsPrivacy.legacyOwnIdentityKey) ?? '',
       uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
       docReaderTextScale: (prefs.getDouble('docReaderTextScale') ?? 1.0).clamp(
         0.8,
@@ -203,6 +220,15 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           prefs.getString('cveApiBaseUrl') ?? AppSettings.defaultCveApiBaseUrl,
       aiSettings: ai,
     );
+    _persistedLogoPaths = _referencedLogoPaths;
+    // Niet awaiten: de sleutelbos mag de instellingen niet ophouden.
+    unawaited(adoptPrivacyOwnIdentity(prefs));
+    // De opstartveger voor verweesde stijl-logo's hoort hier en niet in de
+    // shell: hij vergelijkt tegen de profielenlijst, en die is pas op dit punt
+    // geladen. Een veger die eerder draait ziet de ingebouwde profielen, houdt
+    // elk geïmporteerd logo voor verweesd, en gooit er een weg dat gewoon in
+    // gebruik is.
+    unawaited(pruneOrphanStyleLogos());
   }
 
   /// Persisteer een prefs-mutatie. Vangt schrijffouten af en logt ze, zodat een
@@ -437,130 +463,6 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       'setCveApiBaseUrl',
       (prefs) => prefs.setString('cveApiBaseUrl', value),
     );
-  }
-
-  /// Recente lijst: de nieuwe JSON-opslag ('recentFilesV2') wint; de oude
-  /// paden-lijst ('recentFiles') wordt eenmalig als metadata-loze entries
-  /// gemigreerd en daarna alleen nog overschreven bij het wegschrijven.
-  List<RecentFile> _loadRecentFiles(SharedPreferences prefs) {
-    final v2 = RecentFile.decodeList(prefs.getString('recentFilesV2'));
-    if (v2.isNotEmpty) return v2;
-    return RecentFile.fromLegacyPaths(prefs.getStringList('recentFiles') ?? []);
-  }
-
-  Future<void> _persistRecentFiles(List<RecentFile> files) async {
-    // Herkomsten volgen de lijst: wat eruit rolt, raakt ook zijn bron kwijt.
-    // Een pad dat opnieuw wordt geopend behoudt zijn herkomst — remote
-    // opgehaald blijft remote, ook wanneer de lokale kopie later via
-    // "Openen…" of de recente lijst wordt geopend.
-    final paths = {for (final f in files) f.path};
-    final origins = {
-      for (final e in state.recentFileOrigins.entries)
-        if (paths.contains(e.key)) e.key: e.value,
-    };
-    state = state.copyWith(recentFiles: files, recentFileOrigins: origins);
-    await _persist('_persistRecentFiles', (prefs) async {
-      await prefs.setString('recentFilesV2', RecentFile.encodeList(files));
-      await prefs.setString('recentFileOrigins', jsonEncode(origins));
-    });
-  }
-
-  /// Zet [path] bovenaan de recente lijst en ververs de metadata die bij het
-  /// openen bekend is. Eerder geregistreerde export-info blijft bewaard.
-  Future<void> addRecentFile(
-    String path, {
-    int? slideCount,
-    TlpLevel? tlp,
-  }) async {
-    final existing = state.recentFiles.where((f) => f.path == path).firstOrNull;
-    final entry = (existing ?? RecentFile(path: path)).copyWith(
-      openedAt: DateTime.now(),
-      slideCount: slideCount,
-      tlp: tlp,
-    );
-    final updated = [
-      entry,
-      ...state.recentFiles.where((f) => f.path != path),
-    ].take(10).toList();
-    await _persistRecentFiles(updated);
-  }
-
-  /// Onthoud dat [path] zojuist als [formatLabel] ("PDF", "PPTX", "HTML") is
-  /// geëxporteerd, zodat de recente lijst dat kan tonen. Alleen bestanden die
-  /// al in de lijst staan worden bijgewerkt — exporteren maakt een bestand
-  /// niet "recent geopend".
-  Future<void> recordRecentFileExport(String path, String formatLabel) async {
-    if (!state.recentFiles.any((f) => f.path == path)) return;
-    final updated = [
-      for (final f in state.recentFiles)
-        f.path == path
-            ? f.copyWith(
-                lastExportFormat: formatLabel,
-                lastExportAt: DateTime.now(),
-              )
-            : f,
-    ];
-    await _persistRecentFiles(updated);
-  }
-
-  /// Haal een pad uit de recente lijst (bijv. omdat het bestand naar de
-  /// prullenbak is verplaatst); de herkomst gaat mee.
-  Future<void> removeRecentFile(String path) async {
-    if (!state.recentFiles.any((f) => f.path == path)) return;
-    await _persistRecentFiles(
-      state.recentFiles.where((f) => f.path != path).toList(),
-    );
-  }
-
-  /// Leg vast waar een recent bestand vandaan is gehaald (Nextcloud-server of
-  /// import-URL). Aan te roepen ná [addRecentFile]; alleen paden die in de
-  /// recente lijst staan krijgen een herkomst, zodat de map niet meegroeit
-  /// met verdwenen vermeldingen.
-  Future<void> setRecentFileOrigin(String path, String origin) async {
-    if (!state.recentFiles.any((f) => f.path == path)) return;
-    final origins = {...state.recentFileOrigins, path: scrubbedOrigin(origin)};
-    state = state.copyWith(recentFileOrigins: origins);
-    await _persist(
-      'setRecentFileOrigin',
-      (prefs) => prefs.setString('recentFileOrigins', jsonEncode(origins)),
-    );
-  }
-
-  /// Haal de inloggegevens uit een herkomst-URL vóórdat die bewaard wordt.
-  ///
-  /// De herkomst is niets dan een label onder de wolk-badge in de recente
-  /// lijst, maar hij gaat wél onversleuteld naar het prefs-domein — en een
-  /// import-URL kan het `gebruiker:wachtwoord@`-deel dragen dat een URL vóór
-  /// de host toestaat (het `userInfo`-veld). Dan staat er
-  /// een wachtwoord in gewone instellingen, precies wat `SecretStore` bestaat
-  /// om te voorkomen. Het gebruikersdeel wordt vervangen door `***`, zodat de
-  /// gebruiker nog steeds ziet dát er inloggegevens in de link zaten. ASCII, en
-  /// geen `…`: `Uri.replace` procent-codeert dat tot `%E2%80%A6`, wat er in de
-  /// lijst uitziet als rommel in plaats van als een weggelaten geheim.
-  ///
-  /// Alleen dit, en niet de query: een sleutel in de query is niet als zodanig
-  /// herkenbaar, en de hele query weglaten maakt van twee verschillende
-  /// herkomsten één regel. Wat er wél tegen helpt, is dat de terugval op het
-  /// fetch-hulppunt zo'n URL niet meer doorstuurt.
-  ///
-  /// Geen URL (de WebDAV- en S3-herkomsten zijn `server · pad`) blijft heel.
-  @visibleForTesting
-  static String scrubbedOrigin(String origin) {
-    final uri = Uri.tryParse(origin.trim());
-    if (uri == null || !uri.hasAuthority || uri.userInfo.isEmpty) return origin;
-    return uri.replace(userInfo: '***').toString();
-  }
-
-  static Map<String, String> _decodeRecentFileOrigins(String? raw) {
-    if (raw == null || raw.isEmpty) return const {};
-    try {
-      final decoded = jsonDecode(raw);
-      if (decoded is! Map) return const {};
-      return decoded.map((k, v) => MapEntry(k.toString(), v.toString()));
-    } catch (e) {
-      logWarning('SettingsNotifier: recentFileOrigins decode failed', e);
-      return const {};
-    }
   }
 
   Future<void> setLanguageCode(String code) async {
@@ -894,6 +796,15 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     });
   }
 
+  /// De logo's zoals ze in de laatst weggeschreven profielenlijst stonden.
+  ///
+  /// Een eigen veld en niet "de staat van vóór het opslaan": de aanroepers
+  /// werken de staat bij en persisteren daarná, dus op het moment dat
+  /// [_saveProfiles] draait is het verschil al vervlogen. Een extensie in een
+  /// `part` kan geen veld dragen, dus dit blijft hier; het gedrag eromheen staat
+  /// in `parts/settings_provider_traces.dart`.
+  Set<String> _persistedLogoPaths = const {};
+
   Future<void> _saveProfiles() async {
     state = state.copyWith(themeProfiles: _uniqueProfiles(state.themeProfiles));
     await _persist('_saveProfiles', (prefs) async {
@@ -910,6 +821,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
         jsonEncode(state.themeProfile.toJson()),
       );
     });
+    await _sweepDroppedLogos();
   }
 
   List<ThemeProfile> _uniqueProfiles(List<ThemeProfile> profiles) {

@@ -1,5 +1,7 @@
 # OciDeck — Privacy & Data Handling
 
+> **Status:** current-state description of what stays local and what leaves · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 A plain-language guide to what happens to your data in OciDeck: what stays on your
 device, what leaves it and only when you ask, and the controls you have. For the
 technical mechanisms behind these guarantees, see
@@ -24,12 +26,28 @@ machine (desktop) or in your browser tab (web). This includes:
 - Imported images and media (kept in the project folder).
 - Your settings and theme profiles.
 - Autosave/recovery snapshots — written to a per-user application-support folder,
-  kept for 7 days, then removed. They are not encrypted; they rely on your
-  operating-system account protections, just like your other files. A snapshot
-  holds the deck text, your user notes and the drawings made on the slides, so
-  everything you would want back after a crash is in there — including the parts
-  that live beside the `.md` rather than in it. In the browser no snapshot is
-  written at all, because there is no such folder.
+  removed the moment the deck is saved or the app is closed normally, and pruned
+  after 7 days otherwise. The 7-day clock is checked while the app runs as well
+  as at startup, so a machine that stays on for weeks does not keep a snapshot
+  from an old crash. They are not encrypted; they rely on your operating-system
+  account protections, just like your other files — and on Linux, where the
+  application-support and temporary folders would otherwise be created readable
+  by other local accounts, OciDeck restricts them to your own account at startup.
+  A snapshot holds the deck text, your user notes and the drawings made on the
+  slides, so everything you would want back after a crash is in there —
+  including the parts that live beside the `.md` rather than in it. In the
+  browser no snapshot is written at all, because there is no such folder.
+  Settings → Security has a button that wipes them immediately.
+
+  *Why not encrypt them?* A snapshot almost always holds a deck that also exists
+  as an ordinary `.md` in your own project folder — unencrypted, on the same
+  disk, with the same permissions. Encrypting the snapshot while the original
+  sits unencrypted beside it would only protect the deck you have never saved,
+  which is also the shortest-lived case. It would cost a full cryptography
+  library in the dependency tree, and it would make recovery fail silently on a
+  machine where the key is gone (a restore, a new laptop) — exactly when you
+  need it. Bounding how long the plaintext exists, and making sure your account
+  is really the only one that can read it, buys more here.
 - **Unpushed git work in the browser.** With a git repository connected, the web
   build keeps your not-yet-pushed deck text, notes and annotations in the
   browser's own key/value storage, so a reload does not throw the work away.
@@ -60,16 +78,36 @@ machine (desktop) or in your browser tab (web). This includes:
   the ordinary settings file. If a repository's contents are sensitive, that
   sensitivity is on this disk too, not only on the server.
 
-  **Removing the connection does not remove the clone.** Deleting a git
-  connection in Settings takes the connection out of the settings file and
-  nothing else: the clone under `git_clone/<connection>/`, the draft store under
-  `git_mirror/<connection>/` and the queued commits under the `git_outbox::`
-  keys all stay where they are. The keychain secret stays too — deliberately,
-  because it belongs to the account rather than to this one connection. If you
-  need that content gone, delete those folders yourself. *Corrected 2026-07-21:
-  this paragraph used to say the working copy "stays until you remove the
-  connection", which reads as a promise that removing it cleans up. It does
-  not.*
+  **Removing the connection removes the clone.** Deleting a git connection in
+  Settings also deletes the clone under `git_clone/<connection>/`, the draft
+  store under `git_mirror/<connection>/` and the queued commits under the
+  `git_outbox::` keys. The keychain secret stays — deliberately, because it
+  belongs to the account rather than to this one connection, and a second
+  connection to the same server still needs it.
+
+  With one exception, and it is the important one: if that connection still has
+  commits that were never pushed, they exist nowhere else. OciDeck will not throw
+  them away without asking. It shows you which deck, which branch and which
+  commit message is at stake; if you decline, the connection stays and so does
+  the working copy. *Corrected 2026-07-22: until this release, removing a
+  connection left all of the above on disk. The paragraph said so, but the
+  behaviour was wrong, not the wording.*
+
+- **Style-profile logos.** Importing a `.ocideckstyle` copies its logo into
+  `style_logos/` in the application-support folder — often a client's corporate
+  logo. Deleting the profile now deletes the logo with it, and orphans left by
+  earlier versions are swept at startup.
+
+- **Everything at once.** Settings → Security has *Reset everything to its
+  initial state*: all settings, the recent list, the recovery snapshots, every
+  git working copy and the passwords in your keychain. Your presentations are
+  not touched — those are yours, not OciDeck's. If unpushed commits are waiting,
+  the confirmation says how many before you go ahead.
+
+- **The recent list.** OciDeck remembers the full path, the slide count and the
+  TLP classification of the last ten decks you opened. Together that is a
+  statement about what you are working on and for whom, so Settings → Security
+  can clear the whole list in one action.
 
 There is **no analytics, tracking, or usage reporting of any kind.**
 
@@ -161,6 +199,15 @@ access token, and any AI API key) are stored in the operating-system keychain
 (macOS Keychain, Windows Credential Manager, or the platform-appropriate secure
 store) — never in a plain config file. Server URLs and usernames are ordinary
 settings.
+
+**Your own identity** — the name, e-mail address, phone number or domain you
+enter under *Settings → Security → Your own details*, so the privacy scanner
+stops flagging you as a finding — lives in the keychain too. It is not a
+password, but it is the one setting that holds personal data about a real
+person, and a tool that checks other people's decks for exactly that should not
+keep its own copy in a plain settings file. Existing installations move the
+value over on first start. *Corrected 2026-07-22: it used to sit in plain
+preferences.*
 
 Three boundaries of that sentence are worth naming, because "in the keychain" is
 easy to over-read:

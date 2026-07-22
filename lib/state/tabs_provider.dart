@@ -210,6 +210,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// Bewaar elk niet-opgeslagen tabblad naar zijn herstelbestand.
   void _autosaveTick() {
     if (!mounted) return;
+    // Dezelfde tik ruimt verlopen herstelbestanden op. Anders gold de
+    // houdbaarheid van zeven dagen alleen bij het opstarten, en hield een
+    // machine die aan blijft staan de klaartekst van een oude crash vast.
+    // Zelf-beperkend op een uur; zie [RecoveryService.pruneIfDue].
+    unawaited(_recovery.pruneIfDue());
     for (final tab in state.tabs) {
       // Zie TabInfo.label: een tab kan kortstondig een al-gedisposede
       // notifier dragen; die heeft niets meer te autosaven.
@@ -626,6 +631,21 @@ class TabsNotifier extends StateNotifier<TabsState> {
   }) {
     final findings = MarkdownSafetyScanner.scan(raw);
     if (findings.isNotEmpty) {
+      // Ook vastleggen, niet alleen tonen. De twee andere poorten op deze
+      // scanner (`FileService.openDeck` en `openDeckFromContent`) loggen hun
+      // weigering wél; deze deed dat niet, terwijl het juist de weg is waarlangs
+      // een deck van buiten binnenkomt. Een alarm dat de gebruiker wegklikt,
+      // laat niets na — en "dit deck tripte de poort" is precies wat je
+      // achteraf wilt kunnen navertellen bij een gereedschap dat verzegelde
+      // rapporten uitgeeft. Alleen de telling — net als de twee zusterpoorten
+      // in `FileService`. De bevinding zelf draagt deckinhoud, en zelfs de
+      // soorten opsommen zou een waardenlijst in de log zetten; welke regel
+      // aansloeg leest de gebruiker in zijn eigen bestand.
+      logWarning(
+        'TabsProvider: geopend deck geweigerd — uitvoerbare inhoud '
+        '(${findings.length} bevinding(en))',
+        sourceName,
+      );
       if (mounted) {
         _ref.read(importSecurityAlarmProvider.notifier).state =
             ImportSecurityAlarm(path: sourceName, findings: findings);

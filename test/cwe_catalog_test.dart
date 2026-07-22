@@ -129,11 +129,23 @@ void main() {
       expect(sql.recommendation.trim(), isNotEmpty);
     });
 
+    test('the committed offline asset carries MITRE\'s attribution', () {
+      // 969 MITRE names and descriptions used to ship as a bare JSON array:
+      // nothing in the file said whose content it was, while MITRE's Terms of
+      // Use require attribution. The header now travels with the rows, so
+      // copying the asset cannot separate the two.
+      final raw = File('assets/cwe/cwe_full.json').readAsStringSync();
+      final doc = jsonDecode(raw) as Map<String, dynamic>;
+      expect(doc['attribution'], contains('MITRE'));
+      expect(doc['licence'], 'MITRE Terms of Use');
+      expect(doc['sourceUrl'], contains('cwe.mitre.org'));
+    });
+
     test('the committed offline asset is valid and holds the full list', () {
       // Read the asset from disk (rootBundle asset loading hangs in the test
       // harness); this validates the file the app bundles at runtime.
       final raw = File('assets/cwe/cwe_full.json').readAsStringSync();
-      final list = (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
+      final list = cweEntriesFromAsset(jsonDecode(raw));
       expect(list.length, greaterThan(900));
       final ids = list.map((m) => (m['id'] as num).toInt()).toSet();
       expect(ids, contains(125)); // a non-floor weakness (Out-of-bounds Read)

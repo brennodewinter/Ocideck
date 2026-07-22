@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import '../models/storage_connection.dart';
 import '../utils/log.dart';
 
 /// Of dit platform een sleutelbos heeft waar een geheim werkelijk veilig in kan.
@@ -232,6 +233,77 @@ class SecretStore {
     } catch (e) {
       // Wissen mag nooit fataal zijn: log en ga door.
       logWarning('SecretStore.deleteGitToken: keychain delete failed', e);
+    }
+  }
+
+  /// Keychain-sleutel voor "je eigen gegevens" van de privacycontrole.
+  ///
+  /// Eén entry, want het gaat over de gebruiker van deze installatie en niet
+  /// over een server. Geen wachtwoord, maar wel het enige veld in de
+  /// instellingen dat naam, e-mailadres en telefoonnummer van een natuurlijke
+  /// persoon bevat — en dat hoort niet in het onversleutelde prefs-domein te
+  /// staan in een app die er zelf op controleert.
+  static const privacyOwnIdentityKey = 'privacy_own_identity';
+
+  /// Schrijf "je eigen gegevens" weg; leeg wist de entry. `false` bij een
+  /// mislukte schrijf, zodat de aanroeper de prefs-migratie kan uitstellen in
+  /// plaats van de gegevens kwijt te raken.
+  Future<bool> writePrivacyOwnIdentity(String value) async {
+    try {
+      if (value.trim().isEmpty) {
+        await _storage.delete(key: privacyOwnIdentityKey);
+      } else {
+        await _storage.write(key: privacyOwnIdentityKey, value: value);
+      }
+      return true;
+    } catch (e) {
+      logError('SecretStore.writePrivacyOwnIdentity: keychain write failed', e);
+      return false;
+    }
+  }
+
+  Future<String?> readPrivacyOwnIdentity() async {
+    try {
+      return await _storage.read(key: privacyOwnIdentityKey);
+    } catch (e) {
+      logError('SecretStore.readPrivacyOwnIdentity: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deletePrivacyOwnIdentity() async {
+    try {
+      await _storage.delete(key: privacyOwnIdentityKey);
+    } catch (e) {
+      logWarning(
+        'SecretStore.deletePrivacyOwnIdentity: keychain delete failed',
+        e,
+      );
+    }
+  }
+
+  /// Wis het geheim dat bij elk van [connections] hoort.
+  ///
+  /// Voor het terugzetten naar de begintoestand. Bewust gekeyd op de
+  /// verbindingen die er op dát moment zijn, en niet op "alles in de sleutelbos
+  /// met ons voorvoegsel": een sleutelbos is van de gebruiker, en een lijst
+  /// waarvan wij denken dat hij van ons is, is precies de lijst waarmee je per
+  /// ongeluk het wachtwoord van iets anders wist.
+  ///
+  /// Best effort per entry: een sleutelbos die weigert mag het terugzetten niet
+  /// laten stranden.
+  Future<void> deleteSecretsOf(Iterable<StorageConnection> connections) async {
+    for (final connection in connections) {
+      switch (connection) {
+        case WebdavConnection(:final server):
+          await deleteWebdavPassword(server.baseUrl, server.username);
+        case S3Connection(:final bucket):
+          await deleteS3SecretKey(bucket.endpoint, bucket.accessKeyId);
+        case GitConnection(:final repo):
+          await deleteGitToken(repo.baseUrl, repo.owner);
+        case LocalConnection():
+          break; // een map heeft geen geheim
+      }
     }
   }
 }

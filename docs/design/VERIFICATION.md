@@ -1,11 +1,19 @@
 # OciDeck — Wat nog tegen de werkelijkheid moet
 
-> **Status: een werklijst, geen ontwerp.** Dit document verzamelt wat er is
-> gebouwd en zijn eigen tests haalt, maar nog nooit een echte server, een tweede
-> besturingssysteem of een echt rapport heeft gezien.
+> **Status:** openstaande werklijst — geen verificatierapport · **Status laatst herzien:** 22-07-2026 · **Uitgever:** Stichting LibreKAT
+
+> **Een openstaande werklijst — géén verificatierapport en géén
+> ontwerp.** De bestandsnaam zegt `VERIFICATION`, maar hier staat niets wat is
+> vastgesteld: dit verzamelt wat er is gebouwd en zijn eigen tests haalt, maar
+> nog nooit een echte server, een tweede besturingssysteem of een echt rapport
+> heeft gezien. Wie een uitslag zoekt, vindt die in
+> [`CHECKS.md`](../CHECKS.md) onder *Latest result*, niet hier.
 >
 > Het bestaat omdat die schuld verspreid raakte over fasenotities en PR-teksten.
-> Een schuld die niemand opschrijft, betaalt niemand. Bijgewerkt 18-07-2026.
+> Een schuld die niemand opschrijft, betaalt niemand.
+>
+> **Laatst tegen de code getoetst: 22-07-2026.** Punt 9d is toen rechtgezet;
+> de punten 1 tot en met 8 en 10 staan onveranderd open. Zie de notitie bij 9d.
 
 ## Hoe je dit leest
 
@@ -216,10 +224,20 @@ technisch rapport gebeurt en beoordeel of dat draaglijk is.
 Controleer dat de *grenzen* worden gecommuniceerd in plaats van stil te blijven.
 Niet gedetecteerd, bij besluit: tekst in afbeeldingen (geen OCR), de inhoud van
 gelinkte bestanden, vrije tekst zonder trefwoord, en namen zonder context.
-Evenmin: politieke opvattingen, etnische afkomst en seksuele geaardheid — die
-wachten op een per-regel-schakelaar, omdat ze zonder die schakelaar een
-onverdedigbare hoeveelheid valse meldingen geven (zie
-`privacy_special_rules.dart`).
+
+Politieke opvattingen, etnische afkomst en seksuele geaardheid zijn er wél, maar
+staan **standaard uit**: `defaultDisabledPrivacyRules` in
+`lib/models/privacy_finding.dart` bevat `special.politics`, `special.ethnicity`
+en `special.sexlife`, en **Instellingen → Beveiliging** zet ze per regel aan
+(`settings_dialog_security.dart`, opgeslagen als `privacyDisabledRules`). Wat er
+te toetsen valt is dus verschoven: niet of ze bestaan, maar of aanzetten op echt
+materiaal een draaglijk aantal valse meldingen oplevert — en of een gebruiker
+die ze uit laat staan ergens kán lezen dat ze uit staan.
+
+*(Gecorrigeerd 22-07-2026: deze alinea zei dat die drie categorieën "wachten op
+een per-regel-schakelaar" en verwees naar `privacy_special_rules.dart`. Die
+schakelaar bestaat inmiddels, en de lijst met standaard uitgezette regels staat
+in `privacy_finding.dart`, niet in het genoemde bestand.)*
 
 **Wat als bewijs telt.** Dat een gebruiker die deze controle vertrouwt, ergens
 kan lezen wat hij *niet* dekt. Een privacycontrole die zwijgt over haar eigen

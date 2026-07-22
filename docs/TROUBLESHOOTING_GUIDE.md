@@ -1,5 +1,7 @@
 # OciDeck — Troubleshooting Guide
 
+> **Status:** procedure, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This document provides solutions for common issues and problems users may encounter while using OciDeck.
 
 ## Overview
@@ -294,23 +296,18 @@ repository is the documentation. Security issues follow a different route; see
    - Address issues before they become critical problems
    - Optimize presentation content proactively  
 
-## When to Seek Professional Help
+## If this guide does not solve it
 
-### Escalation Path
+There is one channel: an issue in the Forgejo tracker. Include what you tried
+from this guide, the exact steps that reproduce the problem, your operating
+system, and the commit you built from — the app displays no version number, so
+the commit is the only way to say which OciDeck you are running. A security
+problem is the exception and goes to the address in
+[`../SECURITY.md`](../SECURITY.md) instead of a public issue.
 
-1. **Simple Issues**:
-   - Try troubleshooting steps in this guide first
-   - Check documentation and FAQs for known solutions  
-
-2. **Complex Problems**:  
-   - If issues persist after standard troubleshooting
-   - For systematic or recurring problems across multiple files/instances
-   - When performance degradation indicates deeper system issues
-
-3. **Reporting Bugs**:
-   - Submit detailed bug reports with reproduction steps
-   - Include relevant logs and environment information  
-   - Follow project contribution guidelines for issue tracking
-
-This guide should help you resolve the most common problems. For anything that
-persists, open an issue in the Forgejo tracker with the details listed above.
+*(Corrected 2026-07-22: this section was headed "When to Seek Professional Help"
+and set out a three-tier escalation path — simple issues, complex problems,
+reporting bugs — as if there were support tiers behind it. There are none. No
+support contract, no paid tier, no second line: the tracker and the security
+address are all there is. The section was of the same generated kind as the
+guides removed on 2026-07-19, so it is replaced by what actually exists.)*

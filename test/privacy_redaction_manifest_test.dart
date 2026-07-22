@@ -33,6 +33,56 @@ void main() {
     );
   });
 
+  group('het id wijst precies één redactie aan', () {
+    test('is een prefix van het commitment, minstens acht tekens', () {
+      final manifest = service.build(redactedDeck());
+      for (final e in manifest.entries) {
+        expect(e.id.length, greaterThanOrEqualTo(kRedactionIdMinChars));
+        expect(e.commitment, startsWith(e.id));
+      }
+    });
+
+    test('alle ids in één manifest zijn verschillend', () {
+      final manifest = service.build(redactedDeck());
+      expect(
+        manifest.entries.map((e) => e.id).toSet(),
+        hasLength(manifest.entries.length),
+      );
+    });
+
+    test('bij een botsing groeit de lengte tot ze wél onderscheiden', () {
+      // Het verjaardagsprobleem is de reden dat vier tekens niet volstonden:
+      // 65.536 mogelijkheden geven bij ~300 redacties al een kans van één op
+      // twee op twee gelijke ids, en dan wijst "ik betwist a3f1" naar twee
+      // dingen tegelijk. Hier geplant in plaats van afgewacht.
+      expect(
+        RedactionManifestService.shortUniqueIdLength(const [
+          'aaaaaaaabbbb',
+          'aaaaaaaacccc',
+        ]),
+        9,
+        reason: 'acht tekens botsen hier, negen niet',
+      );
+      // Verschillen ze al eerder, dan blijft het bij de ondergrens.
+      expect(
+        RedactionManifestService.shortUniqueIdLength(const [
+          'aaaaaaaa1111',
+          'bbbbbbbb2222',
+        ]),
+        kRedactionIdMinChars,
+      );
+      // Eén entry heeft niets om mee te botsen; een leeg manifest evenmin.
+      expect(
+        RedactionManifestService.shortUniqueIdLength(const ['abcdef0123']),
+        kRedactionIdMinChars,
+      );
+      expect(
+        RedactionManifestService.shortUniqueIdLength(const []),
+        kRedactionIdMinChars,
+      );
+    });
+  });
+
   test('een slide die niet op redact staat levert geen entries op', () {
     final deck = Deck(
       title: 'D',

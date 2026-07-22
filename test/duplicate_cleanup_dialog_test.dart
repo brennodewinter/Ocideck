@@ -8,6 +8,8 @@ import 'package:ocideck/widgets/dialogs/duplicate_cleanup_dialog.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'support/pump_until.dart';
+
 void main() {
   setUp(() {
     SharedPreferences.setMockInitialValues({});
@@ -41,32 +43,42 @@ void main() {
         ),
       ),
     );
-    // Echte bestand-I/O (stat, verplaatsen) komt onder FakeAsync alleen
-    // klaar binnen runAsync; daarna gewone pumps voor de frames.
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 50)),
+    // Echte bestand-I/O (stat, verplaatsen) komt onder FakeAsync alleen klaar
+    // binnen runAsync. Wachten tot de rijen er zíjn — dat is waarneembaar, in
+    // tegenstelling tot de 50 ms die hier stond.
+    final buttons = find.byIcon(Icons.delete_outline);
+    await pumpUntil(
+      tester,
+      () => buttons.evaluate().length == 2,
+      reason: 'de twee kopieën verschenen niet als rijen',
     );
-    await tester.pump();
 
     // Twee rijen met elk een prullenbakknop, beide actief.
-    final buttons = find.byIcon(Icons.delete_outline);
     expect(buttons, findsNWidgets(2));
 
     await tester.tap(buttons.last);
-    await tester.pump();
-    for (var i = 0; i < 10 && b.existsSync(); i++) {
-      await tester.runAsync(
-        () => Future<void>.delayed(const Duration(milliseconds: 100)),
-      );
-      await tester.pump();
-    }
-    // Nog één echt-async venster zodat de setState-continuatie na de
-    // geslaagde verplaatsing ook verwerkt is.
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 100)),
+    // Twee dingen om op te wachten, en ze zijn niet hetzelfde: eerst is het
+    // bestand van schijf, dáárna verwerkt de setState-continuatie dat in de
+    // boom. Alleen op het bestand wachten liet de rij nog actief staan; vandaar
+    // dat hier eerder een extra venster van 100 ms plus een pump van 300 ms
+    // achteraan stond. Beide voorwaarden expliciet is korter én zeker.
+    await pumpUntil(
+      tester,
+      () => !b.existsSync(),
+      reason: 'de kopie werd nooit naar de prullenbak verplaatst',
     );
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 300));
+    await pumpUntil(
+      tester,
+      () {
+        if (buttons.evaluate().length != 1) return false;
+        final row = find
+            .ancestor(of: buttons, matching: find.byType(IconButton))
+            .evaluate();
+        return row.length == 1 &&
+            (row.single.widget as IconButton).onPressed == null;
+      },
+      reason: 'de laatste kopie werd niet beschermd nadat de andere weg was',
+    );
 
     // De tweede kopie is verplaatst; het origineel staat er nog.
     expect(b.existsSync(), isFalse);
