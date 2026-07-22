@@ -19,6 +19,10 @@ const unchangedInEnglish = {
   // hier omdat het óók een `t()`-sleutel is: `add_l10n` keek bestandsbreed en
   // sloeg de `d()`-variant daardoor in alle 31 talen over.
   'slides',
+  // Net als 'slides': in het Engels hetzelfde woord. Kwam pas boven toen het
+  // woord in de kwaliteitsmelding door `d()` ging in plaats van hardgecodeerd
+  // in de zin te staan (#677) — de andere 31 talen vertalen het wél.
+  'bullets',
   'GitHub',
   'GitLab',
   'TLP',
