@@ -216,42 +216,6 @@ extension TabsNotifierGit on TabsNotifier {
   /// verloren werk: bij een netwerkfout gaat de tekst naar de werkkopie en komt
   /// het deck in de wachtrij, die bij de volgende synchronisatie leegloopt (P2,
   /// §8.5). Zonder die twee is het pad online-only.
-  /// De commit waar deze opslag tegenaan botst — de kern van de guard.
-  ///
-  /// Midden in een ronde is dat de gelezen basis. Bij een verse ronde takken we
-  /// de werkbranch net af, en dan ís zijn kop onze basis. Bestaat die branch al
-  /// — de werkbranchnaam draagt alleen een datum, dus een tweede ronde op
-  /// dezelfde dag of een collega die eerder was — dan nemen we zijn kop juist
-  /// **niet** over: de guard zou dan per definitie tevreden zijn en we schreven
-  /// weg wat daar staat. De gelezen basis is dan de gemeenschappelijke
-  /// voorouder, zodat het botst en de driewegs-merge zijn werk kan doen.
-  ///
-  /// Is er geen gelezen basis én bestaat de branch al, dan valt er niets te
-  /// botsen en niets samen te voegen; `baseSha` is dan null en [blocked] legt
-  /// uit waarom de opslag niet doorgaat.
-  Future<({String? baseSha, String? blocked})> _roundBaseSha(
-    GitForge forge, {
-    required bool midRound,
-    required String roundBase,
-    required String workBranch,
-    required String branch,
-  }) async {
-    if (midRound) return (baseSha: roundBase, blocked: null);
-    final branches = await forge.listBranches();
-    if (branches.every((b) => b.name != workBranch)) {
-      final created = await forge.createBranch(workBranch, fromRef: branch);
-      return (baseSha: created.sha, blocked: null);
-    }
-    if (roundBase.isNotEmpty) return (baseSha: roundBase, blocked: null);
-    return (
-      baseSha: null,
-      blocked:
-          'Er staat al een concept van vandaag op $workBranch, en dit deck '
-          'komt daar niet uit voort. Open dat concept eerst, of geef dit deck '
-          'een andere naam.',
-    );
-  }
-
   /// De bestanden die deze opslag naar de repo schrijft.
   ///
   /// Gaat het netwerk op: `AssetPool.existing` vraagt de forge welke blobs er al
@@ -391,7 +355,7 @@ extension TabsNotifierGit on TabsNotifier {
     }
 
     try {
-      final resolved = await _roundBaseSha(
+      final resolved = await roundBaseSha(
         forge,
         midRound: midRound,
         roundBase: round.baseSha,
@@ -504,54 +468,55 @@ extension TabsNotifierGit on TabsNotifier {
     required List<String> warnings,
     String connectionId = '',
   }) async {
-    // Zonder gemeenschappelijke voorouder valt er niets driewegs te doen.
-    if (baseSha.isEmpty) {
-      return GitSaveResult(
-        status: GitSaveStatus.conflict,
-        message: fallback,
-        warnings: warnings,
-      );
-    }
     try {
-      final base = await readVersionDeck(
+      final outcome = await mergeIntoRemote(
         forge,
-        config: config,
         deckDir: deckDir,
-        tag: baseSha,
+        branch: branch,
+        baseSha: baseSha,
+        ours: ours,
+        message: message,
+        md: _md,
+        // Hun helper, niet nog een zesde kopie van dezelfde regel.
+        resolveBytesFor: (merged) => _repoAssetBytes(merged.projectPath),
+        readDeckAt: (ref) async => (await readVersionDeck(
+          forge,
+          config: config,
+          deckDir: deckDir,
+          tag: ref,
+        )).deck,
       );
-      final theirs = await readVersionDeck(
-        forge,
-        config: config,
-        deckDir: deckDir,
-        tag: branch,
-      );
-      if (base.deck == null || theirs.deck == null) {
+      final merge = outcome.merge;
+      if (merge == null) {
+        // Geen voorouder, of een kant die niet door de poort kwam.
         return GitSaveResult(
           status: GitSaveStatus.conflict,
           message: fallback,
           warnings: warnings,
         );
       }
-
-      final merge = mergeDeckVersions(base.deck!, ours, theirs.deck!);
-      final head = await forge.headSha(branch);
       if (!mounted) {
         return GitSaveResult(status: GitSaveStatus.failed, warnings: warnings);
       }
 
-      // Het samengevoegde deck ín het tabblad, met hún kop als nieuwe basis.
+      final landedSha = outcome.sha;
+      // Het samengevoegde deck ín het tabblad, met hún kop als nieuwe basis —
+      // ook bij botsingen. De gebruiker kijkt vanaf nu naar een deck dat tegen
+      // die kop is samengevoegd; bleef de oude basis staan, dan botste zijn
+      // volgende opslag tegen een voorouder die hij allang voorbij is.
       tab?.deckNotifier.loadDeck(merge.merged);
       tab?.gitOrigin = GitOrigin(
         config: config,
         branch: branch,
         deckDir: deckDir,
-        baseSha: head,
+        baseSha: landedSha ?? outcome.head ?? baseSha,
         connectionId: connectionId,
       );
       refreshTabs();
 
-      if (!merge.isClean) {
-        // Kiezen is aan de gebruiker; opslaan gebeurt daarna gewoon opnieuw.
+      if (landedSha == null) {
+        // Botsingen die de gebruiker moet beslechten; opslaan gebeurt daarna
+        // gewoon opnieuw.
         return GitSaveResult(
           status: GitSaveStatus.conflict,
           conflicts: merge.conflicts,
@@ -559,38 +524,11 @@ extension TabsNotifierGit on TabsNotifier {
         );
       }
 
-      // Schoon samengevoegd: doorgaan met opslaan, en achteraf melden wat er van
-      // de ander bij kwam.
-      final mergedFiles = await buildDeckRepoFiles(
-        merge.merged,
-        md: _md,
-        pool: AssetPool(forge: forge, branch: branch),
-        deckDir: deckDir,
-        resolveBytes: _repoAssetBytes(merge.merged.projectPath),
-        read: (path) => forge.readBlob(branch, path),
-      );
-      final result = await forge.commitFiles(
-        branch: branch,
-        message: message,
-        upserts: mergedFiles.upserts,
-        deletes: mergedFiles.deletes,
-        baseSha: head,
-      );
-      if (!mounted) {
-        return GitSaveResult(status: GitSaveStatus.failed, warnings: warnings);
-      }
-      tab?.gitOrigin = GitOrigin(
-        config: config,
-        branch: branch,
-        deckDir: deckDir,
-        baseSha: result.sha,
-        connectionId: connectionId,
-      );
-      refreshTabs();
+      // Schoon samengevoegd én geland; melden wat er van de ander bij kwam.
       return GitSaveResult(
         status: GitSaveStatus.merged,
-        sha: result.sha,
-        warnings: [...warnings, ...mergedFiles.warnings],
+        sha: landedSha,
+        warnings: [...warnings, ...outcome.warnings],
       );
     } on GitConflictException {
       // De branch bewoog opnieuw terwijl we aan het samenvoegen waren.

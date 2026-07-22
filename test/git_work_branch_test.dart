@@ -3,6 +3,8 @@ import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/services/git/git_forge.dart';
 import 'package:ocideck/services/git/work_branch.dart';
 
+import 'git_forge_fake.dart';
+
 /// Ontwerpbesluit D3: bewerken gebeurt op een werkbranch, nooit rechtstreeks op
 /// de standaardbranch. Deze keuze zat tot #518 in de state-laag, waar hij alleen
 /// via een opslag met een forge eromheen te bereiken was — vandaar dat er geen
@@ -141,5 +143,71 @@ void main() {
         ),
       );
     });
+  });
+
+  group('de basis waar de guard tegenaan botst', () {
+    const werk = 'decks/kwartaalcijfers/2026-07-22';
+
+    Future<RoundBase> basis({
+      required bool midRound,
+      String roundBase = 'sha-gelezen',
+      Map<String, String> branches = const {'main': 'sha-main'},
+    }) => roundBaseSha(
+      FakeForge(FakeRepo(branches: {...branches}, files: {})),
+      midRound: midRound,
+      roundBase: roundBase,
+      workBranch: werk,
+      branch: 'main',
+    );
+
+    test('midden in een ronde is de gelezen basis de voorouder', () async {
+      final uit = await basis(midRound: true);
+
+      expect(uit.baseSha, 'sha-gelezen');
+      expect(uit.blocked, isNull);
+    });
+
+    test('een verse ronde takt af, en de nieuwe kop is de basis', () async {
+      // Net afgetakt: dan ís de kop van de werkbranch onze basis, want er kan
+      // per definitie niets tussen zitten.
+      final uit = await basis(midRound: false);
+
+      expect(uit.baseSha, 'sha-main');
+      expect(uit.blocked, isNull);
+    });
+
+    test('bestaat de branch al, dan telt zijn kop juist NIET', () async {
+      // Dit is de kern. De werkbranchnaam draagt alleen een datum, dus die van
+      // vandaag kan al bestaan — een tweede ronde, of een collega die eerder
+      // was. Zijn kop overnemen zou de guard per definitie tevreden maken en
+      // we schreven weg wat daar staat. De gelezen basis blijft de voorouder,
+      // zodat het botst en de driewegs-merge zijn werk kan doen.
+      final uit = await basis(
+        midRound: false,
+        branches: {'main': 'sha-main', werk: 'sha-van-iemand-anders'},
+      );
+
+      expect(uit.baseSha, 'sha-gelezen');
+      expect(uit.baseSha, isNot('sha-van-iemand-anders'));
+      expect(uit.blocked, isNull);
+    });
+
+    test(
+      'geen basis én de branch bestaat al: geblokkeerd, met uitleg',
+      () async {
+        // Er valt niets te botsen en niets samen te voegen. Doorschrijven zou
+        // andermans concept overschrijven, dus de opslag gaat niet door — en de
+        // gebruiker hoort waarom, in gewone taal.
+        final uit = await basis(
+          midRound: false,
+          roundBase: '',
+          branches: {'main': 'sha-main', werk: 'sha-van-iemand-anders'},
+        );
+
+        expect(uit.baseSha, isNull);
+        expect(uit.blocked, contains('concept van vandaag'));
+        expect(uit.blocked, contains(werk));
+      },
+    );
   });
 }
