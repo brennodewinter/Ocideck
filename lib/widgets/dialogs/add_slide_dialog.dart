@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
+import '../editors/slide_type_help.dart';
 
 /// A picker tab: one [SlideCategory] to filter by, or `null` for "all types".
 class _PickerTab {
@@ -74,6 +75,15 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
   /// The active category filter, or `null` for the "all types" tab. Only
   /// meaningful when the tab bar is shown (i.e. ≥2 categories carry types).
   SlideCategory? _activeCategory;
+
+  /// Het type waarvan de uitleg onder het rooster staat: dat wat de muis of de
+  /// toetsenbordfocus aanwijst.
+  ///
+  /// Blijft staan als de muis het kaartje verlaat. Leegmaken zou de uitleg
+  /// laten knipperen bij elke beweging over het rooster, en de dialoog laten
+  /// springen — terwijl de vraag "wat is dit?" juist beantwoord blijft moeten
+  /// worden tot je iets anders aanwijst.
+  SlideType? _highlighted;
 
   @override
   void initState() {
@@ -199,6 +209,10 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
                 _buildSearchRow(l10n),
                 const SizedBox(height: 12),
                 Flexible(child: _buildGrid(context, l10n, types)),
+                if (types.isNotEmpty) ...[
+                  const SizedBox(height: 10),
+                  _buildHelpStrip(context, l10n, types),
+                ],
               ],
             ),
           ),
@@ -293,10 +307,73 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
             _TypeCard(
               type: types[i],
               label: l10n.d(types[i].label),
+              help: slideTypeHelpText(l10n, types[i]),
               autofocus: i == 0,
               onTap: () => Navigator.pop(context, types[i]),
+              onHighlight: () => _highlight(types[i]),
             ),
         ],
+      ),
+    );
+  }
+
+  void _highlight(SlideType type) {
+    if (_highlighted == type) return;
+    setState(() => _highlighted = type);
+  }
+
+  /// De uitleg bij het aangewezen slidetype, onder het rooster.
+  ///
+  /// Deze tekst bestond al — volledig, in 32 talen — maar verscheen pas ná het
+  /// invoegen, achter een dichtgeklapte "Wat kan ik hier?". Wie moest kiezen,
+  /// koos dus op een draadframe en een woord. Nu staat het antwoord waar de
+  /// vraag gesteld wordt.
+  ///
+  /// De hoogte is begrensd in regelhoogtes, niet in pixels: bij 200%
+  /// interfacetekst groeit het vak mee, en een uitzonderlijk lange vertaling
+  /// scrolt binnen het vak in plaats van de dialoog te laten springen.
+  Widget _buildHelpStrip(
+    BuildContext context,
+    AppLocalizations l10n,
+    List<SlideType> types,
+  ) {
+    // Bij het openen wijst niets aan; het eerste kaartje heeft de focus, dus
+    // dat is ook wat de uitleg toont.
+    final shown = types.contains(_highlighted) ? _highlighted! : types.first;
+    final line = MediaQuery.textScalerOf(context).scale(12.5) * 1.45;
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: AppTheme.teal.withValues(alpha: 0.08),
+        border: Border.all(color: AppTheme.teal.withValues(alpha: 0.25)),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(minHeight: line * 3, maxHeight: line * 5),
+        child: SingleChildScrollView(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(
+                Icons.lightbulb_outline,
+                size: 15,
+                color: AppTheme.teal,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  slideTypeHelpText(l10n, shown),
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    height: 1.45,
+                    color: AppTheme.slate700,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -305,13 +382,25 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
 class _TypeCard extends StatelessWidget {
   final SlideType type;
   final String label;
+
+  /// De uitleg bij dit type. Gaat als schermlezer-hint mee op het kaartje zelf,
+  /// zodat wie niet kijkt hem hoort op het moment van kiezen — niet pas in het
+  /// vak eronder, dat een schermlezer nooit passeert.
+  final String help;
+
   final VoidCallback onTap;
   final bool autofocus;
+
+  /// Aangewezen door muis of toetsenbordfocus: het vak onder het rooster toont
+  /// dan de uitleg van dit type.
+  final VoidCallback onHighlight;
 
   const _TypeCard({
     required this.type,
     required this.label,
+    required this.help,
     required this.onTap,
+    required this.onHighlight,
     this.autofocus = false,
   });
 
@@ -319,9 +408,16 @@ class _TypeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
+      hint: help,
       child: InkWell(
         onTap: onTap,
         autofocus: autofocus,
+        onHover: (hovering) {
+          if (hovering) onHighlight();
+        },
+        onFocusChange: (focused) {
+          if (focused) onHighlight();
+        },
         borderRadius: BorderRadius.circular(8),
         focusColor: AppTheme.accent.withValues(alpha: 0.14),
         hoverColor: AppTheme.accent.withValues(alpha: 0.06),
