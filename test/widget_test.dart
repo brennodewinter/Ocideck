@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/app.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
@@ -26,6 +27,37 @@ void main() {
     await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
     await tester.pumpAndSettle();
     expect(find.byIcon(Icons.settings_outlined), findsOneWidget);
+  });
+
+  testWidgets('het openscherm zegt wat dit is en waar de handleiding staat', (
+    tester,
+  ) async {
+    // Het scherm was logo plus knoppen: wie hier voor het eerst kwam, kreeg
+    // vier handelingen en geen antwoord op de enige vraag die hij had. De
+    // handleiding zat drie klikken diep in de instellingen.
+    await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+    await tester.pumpAndSettle();
+    expect(
+      find.textContaining('gewone Markdown-bestanden blijven'),
+      findsOneWidget,
+    );
+    expect(find.text('Gebruikershandleiding'), findsOneWidget);
+  });
+
+  testWidgets('het openscherm noemt hoeveel sjablonen er klaarstaan', (
+    tester,
+  ) async {
+    // De sjablonen zijn het beste dat een nieuwkomer kan overkomen en zaten
+    // ongenoemd achter "Nieuwe presentatie". Het getal komt uit de catalogus,
+    // niet uit een hardgecodeerde tekst die veroudert.
+    await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+    await tester.pumpAndSettle();
+    // Zonder de informatieveiligheidsmodule telt het MIAUW-sjabloon niet mee.
+    final expected = deckTemplates.where((t) => !t.requiresInfoSafety).length;
+    expect(
+      find.textContaining('$expected sjablonen om mee te beginnen'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('recent list marks remote-fetched files with a cloud badge', (

@@ -106,6 +106,64 @@ final List<NationalIdentifierRule> euIdentifierRules = [
     validate: isValidBalticPersonalCode,
   ),
   NationalIdentifierRule(
+    id: 'li.peid',
+    country: 'LI',
+    pattern: RegExp(r'(?<!\d)\d{4,12}(?!\d)'),
+    validate: isValidLiPeid,
+    // Alleen Liechtensteinse termen. "AHV-Nummer" zou hier aanslaan op elk
+    // Zwitsers nummer op de slide, en dat is `ch.ahv` — mét checksum.
+    contextWords: ['peid', 'personenidentifikationsnummer'],
+    // Cijfers en verder niets: geen checksum, geen datum, geen prefix. Zelfs
+    // mét contextwoord is dit het zwakste bewijs in de hele tabel.
+    confidence: PrivacyConfidence.possible,
+  ),
+  NationalIdentifierRule(
+    id: 'mt.id',
+    country: 'MT',
+    pattern: RegExp(r'\b\d{7}[A-Z]\b'),
+    validate: isValidMtIdCard,
+    // Géén checksum — de letter codeert geboortestreek en -eeuw, niet een
+    // controle. Acht van de 26 letters toestaan achter zeven cijfers is te ruim
+    // om alleen op af te gaan, dus de contextpoort draagt alles.
+    //
+    // `id card` staat er bewust níét bij: contextwoorden worden als
+    // deelstring gezocht, en "valid card" bevat "id card".
+    contextWords: [
+      'identity card',
+      'identiteitskaart',
+      'karta tal-identità',
+      'id-kaart',
+      'maltese id',
+    ],
+    confidence: PrivacyConfidence.likely,
+  ),
+  NationalIdentifierRule(
+    id: 'cy.tic',
+    country: 'CY',
+    pattern: RegExp(r'\b\d{8}[A-Z]\b'),
+    validate: isValidCyTic,
+    // Een mod-26 over acht cijfers is de zwakste checksum in deze tabel: één op
+    // de 26 willekeurige `12345678X`-reeksen komt erdoor. Dat is te weinig voor
+    // `zeker`, en er komt een tweede reden bij — dezelfde code identificeert
+    // een mens én een bedrijf, dus zelfs een terechte treffer is niet altijd
+    // een persoonsgegeven.
+    confidence: PrivacyConfidence.likely,
+  ),
+  NationalIdentifierRule(
+    id: 'lu.matricule',
+    country: 'LU',
+    // Wordt vrijwel altijd aan één stuk geschreven; spaties per groep komen op
+    // formulieren voor.
+    pattern: RegExp(r'(?<!\d)\d{4}[ ]?\d{2}[ ]?\d{2}[ ]?\d{5}(?!\d)'),
+    validate: isValidLuMatricule,
+  ),
+  NationalIdentifierRule(
+    id: 'lv.pk',
+    country: 'LV',
+    pattern: RegExp(r'(?<!\d)\d{6}-?\d{5}(?!\d)'),
+    validate: isValidLvPersonasKods,
+  ),
+  NationalIdentifierRule(
     id: 'uk.nhs',
     country: 'GB',
     pattern: RegExp(r'(?<!\d)\d{3}[\s-]?\d{3}[\s-]?\d{4}(?!\d)'),
@@ -184,6 +242,13 @@ final List<NationalIdentifierRule> euIdentifierRules = [
     country: 'NO',
     pattern: RegExp(r'(?<!\d)\d{6}[ ]?\d{5}(?!\d)'),
     validate: isValidNoFodselsnummer,
+  ),
+  NationalIdentifierRule(
+    id: 'is.kennitala',
+    country: 'IS',
+    // Meestal met een streepje na de zesde positie, soms zonder.
+    pattern: RegExp(r'(?<!\d)\d{6}[-\s]?\d{4}(?!\d)'),
+    validate: isValidIsKennitala,
   ),
   NationalIdentifierRule(
     id: 'si.emso',

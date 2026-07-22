@@ -1,3 +1,28 @@
+// ── lib/services/git/ ────────────────────────────────────────────────────────
+// Decks bewaren in een git-repository. Ontwerp: docs/design/GIT_STORAGE.md.
+//
+// Het cluster valt in vier lagen uiteen, en de grens tussen de eerste twee is
+// de reden dat dit bestand bestaat:
+//
+//   forge      — git_forge.dart is het provider-onafhankelijke contract; de
+//                drie adapters (gitea/github/gitlab) zijn de énige plek waar
+//                kennis van een specifieke aanbieder mag staan;
+//   transport  — de HTTP-laag eronder (git_transport*.dart), die géén
+//                providerkennis draagt, en git_cli*.dart, de enige plek in de
+//                boom die een proces mag starten;
+//   werkkopie  — de duurzame offline helft: deck_mirror, draft_store, outbox,
+//                sync_engine en de native partiële kloon;
+//   inhoud     — wat een deck ís in een repo: asset_pool en
+//                deck_repo_serializer/repo_asset_resolver (heen en terug
+//                tussen `mem:` en `repo:`), deck_merge, version_diff,
+//                deck_search.
+//
+// Wat hier níét thuishoort: de dialogen en knoppen (lib/widgets/shell/
+// shell_actions_git*.dart), de tabbladbedrading (lib/state/tabs_provider_git*)
+// en de configuratie zelf (lib/models/git_settings.dart). Bestand voor
+// bestand: docs/SOURCE_MAP.md § `lib/services/git/`.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import 'dart:typed_data';
 
 import '../../models/git_settings.dart';

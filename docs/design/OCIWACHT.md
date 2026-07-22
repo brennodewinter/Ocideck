@@ -1,5 +1,7 @@
 # OciDeck — OciWacht (ontwerp)
 
+> **Status:** ontwerp; deels geleverd — de tabel hieronder zegt per onderdeel wat · **Status laatst herzien:** 22-07-2026 · **Uitgever:** Stichting LibreKAT
+
 Detectie van privacygevoelige informatie in slides, met per-slide afhandeling:
 accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in export.
 
@@ -231,10 +233,14 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `ro.cnp` | CNP | sleutel `279146358279`, mod 11 | zeker | ◐ |
 | `si.emso` | EMŠO | mod 11 | zeker | ◐ |
 | `ee.isikukood` | Estse isikukood — en het Litouwse asmens kodas, dat dezelfde vorm en dezelfde dubbele mod-11 heeft; één regel dekt beide (`sharedRegionRules`) | mod-11 dubbele pas | zeker | ◐ |
-| `lv.pk` | Letse personas kods | mod-11 | zeker | — |
+| `lv.pk` | Letse personas kods | mod-11 met de gewichten 1-6-3-7-9-10-5-8-4-2 — **niet** het Estse schema. Oud formaat met `ddmmjj` + eeuwcijfer; nieuw formaat sinds 1-7-2017 begint met `32` en draagt geen datum | zeker | ◐ |
+| `is.kennitala` | IJslandse kennitala | mod-11 met de gewichten 3-2-7-6-5-4-3-2, eeuwcijfer 9 of 0. Een bedrijfskennitala (dag +40) valt bewust af | zeker | ◐ |
 | `at.svnr` | Sozialversicherungsnummer | gewichten 3-7-9-5-8-4-2-1-6, mod 11 | zeker | ◐ |
 | `ch.ahv` | AHV-Nummer | `756.xxxx.xxxx.xx`, EAN-13-controlecijfer | zeker | ◐ |
-| `mt.id` / `cy.id` / `lu.matricule` | Maltese/Cypriotische/Luxemburgse ID | formaat + context | mogelijk | — |
+| `lu.matricule` | Luxemburgs matricule | `AAAAMMJJXXXC1C2`: C1 = Luhn over de eerste elf cijfers, C2 = Verhoeff over diezélfde elf | zeker | ◐ |
+| `cy.tic` | Cypriotische fiscale identificatiecode (TIC / ΑΦΜ) | 8 cijfers + controleletter, mod-26 met een omzettabel voor de oneven posities. Nooit `zeker`: de code hoort bij een mens óf bij een bedrijf, en mod-26 is de zwakste checksum in deze tabel | waarschijnlijk | ◐ |
+| `mt.id` | Maltees identiteitskaartnummer | géén checksum — 7 cijfers + een letter uit `{A,B,G,H,L,M,P,Z}` die geboortestreek en -eeuw codeert. **Contextwoord verplicht** | waarschijnlijk | ◐ |
+| `li.peid` | Liechtensteinse Personenidentifikationsnummer | géén checksum, géén datum, géén prefix: 4 tot 12 kale cijfers. **Contextwoord verplicht** (`peid`), en nooit boven `mogelijk`. De AHV-Versichertennummer heeft dezelfde vorm en valt bewust buiten — zie de toelichting bij de functie | mogelijk | ◐ |
 | `uk.nino` | National Insurance Number | formaat `QQ123456A` + uitgesloten prefixen (BG, GB, NK, KN, TN, NT, ZZ), geen D/F/I/Q/U/V als eerste letter, geen O als tweede | waarschijnlijk | ◐ |
 | `uk.nhs` | NHS-nummer | mod-11 (gewichten 10…2), rest 10 = ongeldig | zeker | ◐ |
 | `us.ssn` | Social Security Number | géén checksum. Area ≠ 000/666/900-999, groep ≠ 00, serie ≠ 0000. **Contextwoord verplicht** (`ssn`, `social security`), anders veel te veel FP's op datums en ordernummers | waarschijnlijk | ◐ |
@@ -254,8 +260,10 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 > `lv.pk`, `mt.id`, `cy.id` en `lu.matricule` was dat niet zo; die id's komen in
 > `lib/` niet voor. Ze staan er nog als voornemen, nu met een streepje. Vier van
 > de vijf betroffen landen waarvoor géén andere regel bestond, en dat is precies
-> de reden dat CY, LU, LV en MT (met IS en LI) uit `defaultPrivacyRegions` zijn
-> gehaald — zie de noot bij §7.
+> de reden dat CY, LU, LV en MT (met IS en LI) uit `defaultPrivacyRegions` waren
+> gehaald — zie de noot bij §7. *Bijgewerkt 2026-07-22: alle vier hebben nu een
+> regel en staan er weer in; `cy.id` is daarbij `cy.tic` geworden. Alleen
+> `de.svnr` staat nog als voornemen.*
 >
 > Twee rijen zijn de andere kant op gecorrigeerd. `sk.rodne_cislo` en `lt.ak`
 > stonden er als eigen id naast hun buur; dat zijn ze niet en zullen ze niet
@@ -968,7 +976,7 @@ gemarkeerd. Elk kanaal krijgt een eigen test.
 
 | Kanaal | Code | Behandeling |
 | --- | --- | --- |
-| Preview / thumbnail / slidelijst | `slide_preview.dart`, `slide_thumbnail.dart` | **Nog bron** — zie de noot onder deze tabel |
+| Preview / thumbnail / slidelijst | `slide_preview.dart`, `slide_thumbnail.dart`, `preview_panel.dart` | **Bron**, met één schakelaar naar de projectie — zie de noot onder deze tabel |
 | Volledig scherm + **publieksvenster** | `fullscreen_presenter.dart`, `audience_window.dart` | AudienceDeck |
 | PDF | `export_service.dart:238-255` — puur raster (`pw.Image`), **geen tekstlaag** ✓ | AudienceDeck (pixels) |
 | PPTX-slides | `slide_rasterizer.dart` → PNG in de zip | AudienceDeck (pixels) |
@@ -986,16 +994,30 @@ gemarkeerd. Elk kanaal krijgt een eigen test.
 | Opslaan / WebDAV / Nextcloud | `file_service.dart`, `webdav_service.dart` | **Bron-kanaal** — de `.md` blijft integraal, dat was de eis |
 | Logging | `lib/utils/log.dart` | Veldinhoud wordt nooit gelogd; bevindingen loggen alleen regel-id + slide-index, nooit de waarde. Bewaakt door `log_no_content_test.dart` — zie de noot onder deze tabel |
 
-> **De editor-preview is nog geen ontvangend oppervlak** (*gecorrigeerd
-> 2026-07-21*). De eerste rij zei "AudienceDeck", en §6 staat in de statustabel
-> bovenaan als *geleverd*, wat samen leest als: de preview toont geredigeerde
-> tekst. Dat doet ze niet. `preview_panel.dart` leest `deckProvider` rechtstreeks
-> en geeft het rauwe deck door; de slidelijst en de miniaturen ook. De projectie
-> wordt wél toegepast waar een ander dan de auteur meekijkt: presenteren en het
-> publieksvenster (`shell_actions.dart`), elke export (`app_shell_main_layout.dart`),
-> het klembord van de slidelijst en het auditdossier. De grens klopt dus voor
-> iedereen behalve de auteur aan zijn eigen scherm — wat verdedigbaar is, maar
-> niet is wat hier stond.
+> **De editor-preview is geen ontvangend oppervlak, maar kan de projectie wél
+> tonen** (*gecorrigeerd 2026-07-21, bijgewerkt 2026-07-22*). De eerste rij zei
+> ooit "AudienceDeck", en §6 staat in de statustabel bovenaan als *geleverd*, wat
+> samen las als: de preview toont geredigeerde tekst. Dat deed ze niet.
+> `preview_panel.dart` leest `deckProvider` rechtstreeks en geeft het rauwe deck
+> door; de slidelijst en de miniaturen ook. De projectie wordt wél toegepast waar
+> een ander dan de auteur meekijkt: presenteren en het publieksvenster
+> (`shell_actions.dart`), elke export (`app_shell_main_layout.dart`), het
+> klembord van de slidelijst en het auditdossier.
+>
+> Sinds 2026-07-22 is de bron niet meer het énige dat de preview kan tonen. Staat
+> een dia op `redact`, dan verschijnt er een melding boven de preview met een
+> schakelaar *Wat zij zien / Mijn tekst*; aan toont de preview die ene dia door
+> `audiencePreviewSlide` (`privacy/privacy_preview.dart`), wat dezelfde
+> `PrivacyProjection.forAudience` is met een deck van één dia. Standaard uit, want
+> de auteur moet zijn eigen tekst kunnen bewerken. Op één dia en niet op het hele
+> deck omdat de projectie zelf scant: het deck herprojecteren bij elke
+> toetsaanslag in de editor ernaast maakt de preview onbruikbaar traag, en voor
+> wat er te zien valt maakt het niets uit — de scanner escaleert binnen een dia,
+> en de deckvelden staan er niet op.
+>
+> **De miniaturen en de slidelijst blijven bron**, zonder schakelaar. De grens
+> klopt dus nog steeds voor iedereen behalve de auteur aan zijn eigen scherm; hij
+> kan er nu alleen zelf doorheen kijken.
 
 > **De logregel was er één keer doorheen geglipt** (*hersteld 2026-07-21*). De
 > laatste rij belooft dat veldinhoud nooit gelogd wordt, en de kop van `log.dart`
@@ -1149,8 +1171,8 @@ parameter te veranderen, bewaakt niets.
 Redactie botst frontaal op het bestaande integriteitsmechanisme, en dat moet opgelost worden
 vóórdat we een regel code schrijven.
 
-**Het probleem.** `document_integrity.dart` legt een SHA-512-zegel over de gecanoniseerde
-markdown (`Deck.sealHash`, `IntegrityStatus.intact` / `.changed`), en `audit_dossier.dart`
+**Het probleem.** `document_integrity.dart` legt een SHA-512-zegel over het rapportbestand
+(`Deck.sealHash`, `IntegrityStatus.intact` / `.changed`), en `audit_dossier.dart`
 reist mee in het auditpakket "zodat een auditor die alleen het pakket heeft, kan zien wat er
 geleverd is en hoe het te verifiëren". Een geredigeerd exportartefact heeft per definitie een
 andere inhoud dan de bron. De auditor rekent de hash na, krijgt een mismatch en concludeert:
@@ -1159,7 +1181,11 @@ integriteitscontrole hebben — het maakt het mechanisme onbetrouwbaar precies o
 het ertoe doet.
 
 **De oplossing.** Het zegel blijft over de **bron**; dat is de identiteit van het rapport, niet
-van één rendering. Elk afgeleid artefact draagt een *bewijsbare relatie* tot dat zegel mee, in
+van één rendering. (*Bijgewerkt 22-07-2026: het zegel ging destijds over de gecanoniseerde
+markdown en gaat nu over de bytes van de `.md` — zie FILE_FORMAT §6.6. Voor de redenering
+hieronder maakt dat niets uit en het maakt haar zelfs sterker: de auditor die een geredigeerd
+artefact narekent, krijgt nu met `sha512sum` een mismatch te zien in plaats van via OciDeck,
+dus het valse alarm is beter bereikbaar en het manifest des te nodiger.*) Elk afgeleid artefact draagt een *bewijsbare relatie* tot dat zegel mee, in
 plaats van te doen alsof het de bron ís.
 
 Per redactie gaat er een **commitment** mee:
@@ -1178,8 +1204,8 @@ Het geredigeerde artefact bevat:
 
 - de blokken zelf: acht keer U+2588, ongeacht de lengte van het origineel (§6.3);
 - een **redactiemanifest**: per redactie `id`, `commitment`, `rule`, `slide`, `field` — en een
-  stabiele referentie in dat `id` (`a3f1`), zodat een verificateur kan zeggen "ik betwist
-  redactie a3f1" (staande praktijk in juridische redactie);
+  stabiele referentie in dat `id` (`a3f1e2b7`), zodat een verificateur kan zeggen "ik betwist
+  redactie a3f1e2b7" (staande praktijk in juridische redactie);
 - de hash van de gezegelde bron (`derived_from`), zodat de herkomst vaststaat.
 
 De salts en de klaartekst zitten **alleen** in de volledige versie.
@@ -1337,6 +1363,42 @@ Zwitserse gegevens routinematig. Wie het smaller wil, zet pakketten uit.
 > niet: zou `cy` daar ontbreken, dan leest een toekomstige `cy.id` als een regel
 > zónder land, en die draait dan altijd — buiten elk pakket om, ook bij wie Cyprus
 > bewust heeft uitgezet.
+
+> **En de zes zijn terug, nu mét regel** (*2026-07-22*). CY, LU, LV, MT, IS en
+> LI staan weer in `defaultPrivacyRegions`, want er is nu voor elk van de zes een
+> regel. Daarmee dekken de Europese pakketten alle 27 lidstaten plus IJsland,
+> Liechtenstein, Noorwegen, Zwitserland en het VK.
+>
+> Vier ervan dragen een echte checksum en mogen dus standaard aan: de IJslandse
+> kennitala (mod-11), de Letse personas kods (mod-11, een ánder schema dan het
+> Estse), het Luxemburgse matricule (Luhn én Verhoeff, allebei over dezelfde
+> elf cijfers) en de Cypriotische TIC (mod-26-controleletter).
+>
+> Twee hebben er geen die zich laat staven, en dat is expliciet opgeschreven in
+> plaats van weggemoffeld. Het Maltese identiteitskaartnummer heeft een letter
+> die geboortestreek en -eeuw codeert en verder niets controleert; de
+> Liechtensteinse PEID is vier tot twaalf kale cijfers. Allebei
+> contextpoort-gebonden, allebei nooit boven `waarschijnlijk` respectievelijk
+> `mogelijk`.
+>
+> Drie dingen die de catalogus verkeerd voorspelde:
+>
+> * **`cy.id` bestaat niet en komt er niet.** Het Cypriotische
+>   identiteitskaartnummer is een doorlopend volgnummer zonder controle. De regel
+>   heet `cy.tic` en dekt de fiscale identificatiecode, die wél een
+>   controleletter heeft. Nooit `zeker`: dezelfde code hoort bij een mens óf bij
+>   een bedrijf.
+> * **Letland deelt niets met Estland.** De verleiding was groot — elf cijfers,
+>   mod-11, buurland — maar `isValidBalticPersonalCode` keurt vier op de vijf
+>   Letse nummers af. Twee tests leggen dat verschil vast.
+> * **`lu.matricule` is geen "formaat + context"-regel.** Twee onafhankelijke
+>   controlecijfers over dezelfde elf cijfers is de sterkste controle in de hele
+>   tabel.
+>
+> Wat er bewust níét in zit: de Liechtensteinse AHV-Versichertennummer. Die heeft
+> dezelfde vorm en evenmin een controlecijfer, maar het enige contextwoord dat
+> hem zou aanwijzen — "AHV-Nummer" — is net zo goed Zwitsers, en daar doet
+> `ch.ahv` het werk mét checksum.
 
 **`privacyOwnIdentity` bewaart zelf persoonsgegevens.** De lijst met de eigen naam, het eigen
 e-mailadres en telefoonnummer komt in de lokale voorkeuren te staan. Dat is nieuw op dit

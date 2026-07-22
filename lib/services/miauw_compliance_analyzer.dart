@@ -3,6 +3,7 @@ import '../models/eis_entry.dart';
 import '../models/finding_spec.dart';
 import '../models/miauw_compliance.dart';
 import '../models/slide.dart';
+import 'document_integrity.dart';
 import 'miauw_eis_catalog.dart';
 
 /// Reads the bundled [MiauwEisCatalog] and produces, per requirement, a
@@ -86,7 +87,12 @@ class MiauwComplianceAnalyzer {
 
   bool _check(EisCheck check, Deck deck, List<FindingSpec> findings) {
     return switch (check) {
-      EisCheck.sealed => deck.finalized && deck.sealHash.trim().isNotEmpty,
+      // Niet "er stáát een hash" maar "de hash klopt". Dat verschil is het hele
+      // punt van de eis: een gemanipuleerd rapport draagt zijn oude hash gewoon
+      // mee, en meldde zichzelf daarmee als in orde in het nalevingsoverzicht
+      // dat een auditor leest. De controle die daarvoor bestaat werd nergens
+      // aangeroepen.
+      EisCheck.sealed => deckIntegrityStatus(deck) == IntegrityStatus.intact,
       EisCheck.reportVersion => deck.version.trim().isNotEmpty,
       EisCheck.reportLanguage => deck.language.trim().isNotEmpty,
       EisCheck.signOff =>

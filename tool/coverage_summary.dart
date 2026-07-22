@@ -37,6 +37,13 @@ import 'dart:io';
 ///
 /// A file that is merely *untested* does not belong here: write the test.
 const Set<String> uncoveredBaseline = {
+  // NO EXECUTABLE LINES: `media_fetch.dart` is een kale export-facade — één
+  // conditional export en verder niets. PLATFORM: `media_fetch_web.dart` is de
+  // web-helft daarvan; daar opent de browser de verbinding en valt er niets te
+  // pinnen. De io-helft, waar de SSRF-poort zit, wordt wél getest
+  // (media_fetch_test.dart).
+  'lib/utils/media_fetch.dart',
+  'lib/utils/media_fetch_web.dart',
   // NO EXECUTABLE LINES: `StorageOrigin` is een abstract interface met twee
   // getters en verder niets — het contract dat WebdavOrigin, S3Origin en
   // GitOrigin delen. De implementaties worden wél getest
@@ -106,6 +113,11 @@ const Set<String> uncoveredBaseline = {
   'lib/services/cve/local_cve_database_web.dart',
   'lib/utils/file_download.dart',
   'lib/utils/file_download_web.dart',
+  // PLATFORM: de webhelft van de rem op het sluiten van een tabblad. Dit is
+  // `dart:js_interop`-code (`beforeunload`); de VM-runner kan haar niet laden.
+  // De gevel én de io-helft worden wél uitgevoerd — zie
+  // test/web_no_recovery_notice_test.dart.
+  'lib/platform/unsaved_work_guard_web.dart',
   // NO EXECUTABLE LINES: const data table (345 lines, zero statements).
   'lib/services/cvss/cvss4_lookup.dart',
   // NO EXECUTABLE LINES: const data tables — the finding templates, one file
@@ -173,32 +185,18 @@ const Set<String> uncoveredBaseline = {
 /// Why 20 and not 80: at 20% a file has at least one line in five that some
 /// test really runs — enough that a behaviour change somewhere in it stands a
 /// chance of turning a test red. Below that the file is decoration in the
-/// report. The number is deliberately reachable today so that the *budget*
-/// below is the thing that squeezes; raise it once the budget is near zero.
+/// report.
+///
+/// Er is geen budget meer. Tot 2026-07-22 stond hier een `filesBelowFloorBudget`
+/// dat mocht meetellen hoeveel bestanden onder de vloer zaten: 39 bij de start,
+/// daarna 21, en nu nul. Een getal dat nul is, kan iemand ophogen; een poort die
+/// bij élk bestand hard faalt, kan dat niet. Wat hieronder zakt is dus geen
+/// getal om bij te stellen maar een test om te schrijven.
+///
+/// Zit een bestand hier echt niet zinnig te dekken, dan hoort het niet in een
+/// budget maar in [uncoveredBaseline] hierboven — en dat is een lijst met een
+/// reden per regel, geen teller.
 const int perFileFloorPercent = 20;
-
-/// How many lib/ files may sit below [perFileFloorPercent]. RATCHET: may
-/// shrink, never grow — and it must track reality, so the check also fails when
-/// the budget is left standing well above the true count (see [_staleSlack]).
-///
-/// This is a number and not a list of blessed files on purpose. A list grows
-/// quietly: every new untested file gets one more line and nobody notices. A
-/// budget cannot absorb anything — a new untested file pushes the count over
-/// and the gate goes red, and the only way to make it green is to write a test
-/// or to visibly, deliberately edit this number upwards in a commit somebody
-/// has to justify.
-///
-/// Where it must go: 0. Every step down is one file that went from decoration
-/// to something a test can hold accountable. It started at 39 on 2026-07-21
-/// (22 of those files ran not a single line); what is left is mostly the
-/// app-shell command layer and a handful of dialogs.
-const int filesBelowFloorBudget = 21;
-
-/// Slack on the downward ratchet. Coverage of a file that sits near the floor
-/// can wobble by one when an optional dependency (the native OpenCV library
-/// behind DARTCV_LIB_PATH) is absent, so demanding an exact match would make
-/// the gate depend on the machine. More than this and the budget is stale.
-const int _staleSlack = 2;
 
 /// Translation data carries no logic; it is gated by the l10n tests instead.
 bool _isTranslationData(String path) => path.contains('lib/l10n/translations/');
@@ -323,9 +321,9 @@ List<_FileCoverage> _perFile(File report) {
   return result;
 }
 
-/// Fails when more lib/ files sit below [perFileFloorPercent] than
-/// [filesBelowFloorBudget] allows, and equally when the budget has been left
-/// standing above the truth. Returns true when the tree is clean.
+/// Faalt zodra één lib/-bestand onder [perFileFloorPercent] zakt. Geen budget,
+/// geen marge: elk bestand hieronder is er een waar een gedragswijziging geen
+/// enkele test rood maakt. Geeft true wanneer de boom schoon is.
 bool _checkPerFileFloor(File report) {
   final below =
       _perFile(report)
@@ -339,29 +337,19 @@ bool _checkPerFileFloor(File report) {
 
   final dead = below.where((f) => f.hit == 0).length;
   stdout.writeln(
-    'Per-file floor: ${below.length}/$filesBelowFloorBudget file(s) below '
-    '$perFileFloorPercent% executed lines ($dead of them at zero).',
+    'Per-file floor: ${below.length} file(s) below $perFileFloorPercent% '
+    'executed lines ($dead of them at zero); budget is 0.',
   );
 
-  if (below.length > filesBelowFloorBudget) {
+  if (below.isNotEmpty) {
     stderr.writeln(
       '${below.length} lib/ file(s) run less than $perFileFloorPercent% of '
-      'their lines, but only $filesBelowFloorBudget are budgeted. A test that '
-      'imports a file without running it keeps the file in the denominator and '
-      'the average hides it — that is what this floor is for. Write a test for '
-      'one of these, or (deliberately, and with a reason in the commit) raise '
-      'filesBelowFloorBudget in tool/coverage_summary.dart:\n'
+      'their lines, and er is geen budget meer. Een test die een bestand wél '
+      'importeert maar niet uitvoert, houdt het in de noemer terwijl het '
+      'gemiddelde het verbergt — daar is deze vloer voor. Schrijf een test, of '
+      'zet het bestand met een reden in uncoveredBaseline wanneer het een '
+      'platformhelft is of geen uitvoerbare regels heeft:\n'
       '${below.map(_describe).join('\n')}',
-    );
-    return false;
-  }
-
-  if (below.length < filesBelowFloorBudget - _staleSlack) {
-    stderr.writeln(
-      'Only ${below.length} lib/ file(s) are below $perFileFloorPercent%, but '
-      'filesBelowFloorBudget still says $filesBelowFloorBudget. A ratchet that '
-      'lags reality gives back the ground you just won: set '
-      'filesBelowFloorBudget in tool/coverage_summary.dart to ${below.length}.',
     );
     return false;
   }

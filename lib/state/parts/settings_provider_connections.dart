@@ -26,9 +26,23 @@ const _migratedLibraryName = 'Mijn presentaties';
 /// juiste bovenaan te zetten, zonder configuratie weg te gooien.
 extension SettingsNotifierConnections on SettingsNotifier {
   /// Schrijf de volledige lijst weg. Alle andere mutaties lopen hierlangs, zodat
-  /// er precies één plek is die persisteert en één plek die de legacy-sleutels
-  /// opruimt.
-  Future<void> setConnections(List<StorageConnection> connections) async {
+  /// er precies één plek is die persisteert, één plek die de legacy-sleutels
+  /// opruimt en één plek die de sporen op schijf achter een verdwenen
+  /// verbinding aan opruimt.
+  ///
+  /// [discardPendingWorkFor] bevat de id's van verbindingen waarvoor de
+  /// gebruiker uitdrukkelijk heeft bevestigd dat wachtend, nog niet gepusht werk
+  /// weg mag. Staat een verbinding daar niet in en wacht er nog werk, dan blijft
+  /// haar werkkopie staan — liever een spoor dat de gebruiker zelf kan wissen
+  /// dan werk dat stil verdwijnt.
+  Future<void> setConnections(
+    List<StorageConnection> connections, {
+    Set<String> discardPendingWorkFor = const {},
+  }) async {
+    final gone = [
+      for (final c in currentState.connections)
+        if (!connections.any((n) => n.id == c.id)) c,
+    ];
     currentState = currentState.copyWith(connections: connections);
     await _persist('setConnections', (prefs) async {
       await prefs.setString(
@@ -43,6 +57,12 @@ extension SettingsNotifierConnections on SettingsNotifier {
       await prefs.remove('webdavServer');
       await prefs.remove('gitRepo');
     });
+    for (final connection in gone) {
+      await _diskTraces.removeTracesOf(
+        connection,
+        discardPendingWork: discardPendingWorkFor.contains(connection.id),
+      );
+    }
   }
 
   /// Voeg een verbinding achteraan toe.
@@ -63,10 +83,15 @@ extension SettingsNotifierConnections on SettingsNotifier {
   /// Verwijder de verbinding met [id]. Het bijbehorende geheim blijft in de
   /// keychain staan: dat hoort bij het account, niet bij deze verbinding, en
   /// een tweede verbinding naar dezelfde server kan het nog nodig hebben.
-  Future<void> removeConnection(String id) => setConnections([
-    for (final c in currentState.connections)
-      if (c.id != id) c,
-  ]);
+  ///
+  /// De werkkopie op schijf gaat wél mee — zie [setConnections]. Zet
+  /// [discardPendingWork] alleen wanneer de gebruiker heeft bevestigd dat
+  /// wachtend werk verloren mag gaan.
+  Future<void> removeConnection(String id, {bool discardPendingWork = false}) =>
+      setConnections([
+        for (final c in currentState.connections)
+          if (c.id != id) c,
+      ], discardPendingWorkFor: discardPendingWork ? {id} : const {});
 
   /// Verplaats de verbinding van [oldIndex] naar [newIndex] — de sleepactie uit
   /// de instellingen. Buiten bereik of geen verplaatsing: no-op.

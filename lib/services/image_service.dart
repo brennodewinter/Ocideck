@@ -37,8 +37,9 @@ class ImageService {
 
   String _d(String text) => AppLocalizations.sourceFor(_languageCode(), text);
 
-  /// Per-asset import caps. Images are validated by magic bytes (not just the
-  /// picker's extension filter); video/audio are size-capped only.
+  /// Per-asset import caps. Images and media are both validated by magic bytes
+  /// (not just the picker's extension filter) on top of these caps — see
+  /// [imageMimeFromBytes] and [mediaMimeFromBytes].
   static const maxImageBytes = 64 * 1024 * 1024; // 64 MiB
   static const maxMediaBytes = 1024 * 1024 * 1024; // 1 GiB
 
@@ -97,6 +98,61 @@ class ImageService {
     return null;
   }
 
+  /// The MIME type behind [b]'s audio/video **container** signature, or null
+  /// when the bytes match none of them.
+  ///
+  /// Images have been signature-checked since the beginning; video and audio
+  /// were only ever size-capped, so an arbitrary file renamed to `.mp4` was
+  /// accepted into the project and later handed to the platform media stack.
+  /// A container check is the same guarantee images already had. (Added
+  /// 2026-07-22.)
+  ///
+  /// This identifies the *container*, not the codec inside it — that is all a
+  /// magic-byte check can honestly claim, and it is what keeps a non-media file
+  /// out. Decoding stays the platform's job.
+  static String? mediaMimeFromBytes(List<int> b) {
+    if (b.length < 4) return null;
+    // ISO-BMFF (MP4/MOV/M4A/M4V): a box length, then "ftyp" at offset 4.
+    if (b.length >= 12 &&
+        b[4] == 0x66 &&
+        b[5] == 0x74 &&
+        b[6] == 0x79 &&
+        b[7] == 0x70) {
+      return 'video/mp4';
+    }
+    // Matroska / WebM (EBML header).
+    if (b[0] == 0x1A && b[1] == 0x45 && b[2] == 0xDF && b[3] == 0xA3) {
+      return 'video/webm';
+    }
+    // Ogg / Opus / Vorbis: "OggS".
+    if (b[0] == 0x4F && b[1] == 0x67 && b[2] == 0x67 && b[3] == 0x53) {
+      return 'audio/ogg';
+    }
+    // FLAC: "fLaC".
+    if (b[0] == 0x66 && b[1] == 0x4C && b[2] == 0x61 && b[3] == 0x43) {
+      return 'audio/flac';
+    }
+    // MP3: an ID3 tag, or a bare frame sync (11 set bits).
+    if (b[0] == 0x49 && b[1] == 0x44 && b[2] == 0x33) return 'audio/mpeg';
+    if (b[0] == 0xFF && (b[1] & 0xE0) == 0xE0) return 'audio/mpeg';
+    // RIFF containers: "RIFF" ....  then the form type at offset 8.
+    if (b.length >= 12 &&
+        b[0] == 0x52 &&
+        b[1] == 0x49 &&
+        b[2] == 0x46 &&
+        b[3] == 0x46) {
+      // "WAVE"
+      if (b[8] == 0x57 && b[9] == 0x41 && b[10] == 0x56 && b[11] == 0x45) {
+        return 'audio/wav';
+      }
+      // "AVI "
+      if (b[8] == 0x41 && b[9] == 0x56 && b[10] == 0x49) {
+        return 'video/x-msvideo';
+      }
+    }
+    return null;
+  }
+
   /// The file extension for a MIME type from [imageMimeFromBytes]. Falls back
   /// to `png` so a materialized file always carries a usable extension.
   static String extensionForImageMime(String mime) => switch (mime) {
@@ -106,6 +162,37 @@ class ImageService {
     'image/webp' => 'webp',
     _ => 'png',
   };
+
+  /// Size cap **and** container signature — the two checks an imported media
+  /// file has to pass. [what] names the caller for the log line only.
+  Future<bool> _isAcceptableMedia(String path, String what) async {
+    if (!await _isWithinMediaCap(path)) {
+      logWarning('ImageService.$what: rejected (exceeds size cap)');
+      return false;
+    }
+    try {
+      final handle = await File(path).open();
+      try {
+        final head = await handle.read(16);
+        if (mediaMimeFromBytes(head) == null) {
+          // Geen bestandsnaam in de log: die is door de gebruiker gekozen en
+          // kan een persoonsnaam dragen.
+          logWarning(
+            'ImageService.$what: geweigerd — de inhoud is geen bekende '
+            'audio- of videocontainer',
+          );
+          return false;
+        }
+      } finally {
+        await handle.close();
+      }
+    } catch (e) {
+      // Fail-closed: onleesbaar is niet aantoonbaar in orde.
+      logWarning('ImageService.$what: media signature check failed', e);
+      return false;
+    }
+    return true;
+  }
 
   Future<bool> _isWithinMediaCap(String path) async {
     try {
@@ -181,10 +268,7 @@ class ImageService {
     );
     final path = result?.files.single.path;
     if (path == null) return null;
-    if (!await _isWithinMediaCap(path)) {
-      logWarning('ImageService.pickVideo: rejected (exceeds size cap)');
-      return null;
-    }
+    if (!await _isAcceptableMedia(path, 'pickVideo')) return null;
     return _importIntoProject(path, projectPath, subdir: 'media');
   }
 
@@ -195,10 +279,7 @@ class ImageService {
     );
     final path = result?.files.single.path;
     if (path == null) return null;
-    if (!await _isWithinMediaCap(path)) {
-      logWarning('ImageService.pickAudio: rejected (exceeds size cap)');
-      return null;
-    }
+    if (!await _isAcceptableMedia(path, 'pickAudio')) return null;
     return _importIntoProject(path, projectPath, subdir: 'media');
   }
 

@@ -1,4 +1,4 @@
-.PHONY: refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code check-hardcoded-text coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code check-hardcoded-text coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -33,7 +33,7 @@ endif
 help:
 	@echo "OciDeck quality targets:"
 	@echo "  make check           Format check + static analysis + full Flutter test suite + coverage floor."
-	@echo "  make check-full      make check + dependency outdated report."
+	@echo "  make check-full      make check + secrets + SAST + licences, SBOM, deps, web hardening."
 	@echo "  make coverage        Test suite with coverage: enforce the floor AND that every lib/ file is in some test."
 	@echo "  make mutate          Mutation check for dead/untested branch operands (manual; FILE/TESTS overridable)."
 	@echo "  make mutate-parsers  Mutation sweep over all markdown parsers/serializers (manual, slow)."
@@ -46,8 +46,12 @@ help:
 	@echo "  make test-presenter  Fullscreen presenter interaction tests."
 	@echo "  make deps-outdated   Advisory dependency freshness report."
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
+	@echo "  make dast            Advisory ZAP baseline over a served build (DAST_URL=… for a real host)."
+	@echo "  make sast            Semgrep over shipped Dart with the rules in semgrep/ (needs semgrep)."
+	@echo "  make check-secrets   Sweep working tree and history for committed secrets (needs gitleaks + trufflehog)."
 	@echo "  make trivy           Advisory supply-chain scan: Dart-dep CVEs + committed secrets (needs trivy)."
 	@echo "  make check-actions   Advisory: exact-pinned CI Actions vs their latest release."
+	@echo "  make servicenormen   Interne reactietermijnen op beveiligingsmeldingen (--quiet voor cron)."
 	@echo "  make licenses        Verify all dependencies use open-source licences."
 	@echo "  make sbom            Generate the SBOM (CycloneDX + SPDX) in sbom/."
 	@echo "  make sbom-verify     Fail if the committed SBOM is stale (CRA staleness gate)."
@@ -139,12 +143,12 @@ coverage:
 # average says how much of lib/ runs; it says nothing about *where*. A file that
 # a test imports but never calls sits at 0% inside an 80% average and no gate
 # above notices — twenty-two files were in exactly that state. This one looks at
-# the worst case per file and budgets how many may be there.
+# the worst case per file, en er is geen budget meer: één zo'n bestand is rood.
 coverage-per-file:
 	@echo "== OciDeck check: per-file coverage floor =="
 	@echo "Command: dart run tool/coverage_summary.dart --per-file-floor"
 	@echo "Covers: how many lib/ files run less than a fifth of their own lines — the worst case per file, which the overall average cannot show."
-	@echo "Failure means: more files sit below the floor than the budget allows (write a test for one of the files listed), or the budget is stale after an improvement (lower it to the number printed)."
+	@echo "Failure means: minstens één lib/-bestand draait minder dan een vijfde van zijn eigen regels — schrijf er een test voor (of zet het met reden in uncoveredBaseline als het een platformhelft is)."
 	dart run tool/coverage_summary.dart --per-file-floor
 
 # Slide-renderer visual-regression goldens (test/golden/). Pixel- and
@@ -252,6 +256,92 @@ deps-outdated:
 	@echo "Failure means: inspect network/tooling first; outdated packages are not necessarily regressions."
 	flutter pub outdated
 
+# Secrets sweep with two independent scanners. Both are wired into `check-full`
+# but deliberately NOT into `check`: they need external binaries, and a missing
+# tool should not redden the everyday gate. The PR procedure requires this
+# target — see docs/CHECKS.md.
+#
+# Two scanners rather than one because they disagree in useful ways: gitleaks
+# matches entropy and rule patterns, trufflehog carries per-provider detectors.
+# Both are pointed at the working tree AND at history — a secret that was
+# committed and then removed is still a leak.
+#
+# --no-verification is not optional here. Trufflehog otherwise sends candidate
+# secrets to the issuing service to see whether they are live. That is outbound
+# traffic carrying credentials to third parties, from a project whose whole
+# premise is that nothing leaves the machine unasked. Verify by hand if ever
+# needed, deliberately, on a single finding.
+# Static analysis with Semgrep over the shipped Dart, using rules committed in
+# semgrep/. Deliberately NOT `--config auto`: that fetches rules over the network
+# at scan time and phones home with metrics. Local rules keep the gate offline
+# and reproducible, which is the same reason `deps-verify-offline` exists.
+#
+# The ruleset does not repeat what tool/check_conventions.dart already does with
+# real AST knowledge. Semgrep earns its place because it parses: a grep for
+# `badCertificateCallback` returns three doc-comment hits in lib/, Semgrep
+# returns none and would flag only a real assignment.
+sast:
+	@echo "== OciDeck check: SAST (Semgrep) =="
+	@echo "Command: semgrep scan --config semgrep/ocideck.yaml --metrics=off --error"
+	@echo "Covers: shipped Dart in lib/, plus tool/ and test/ where the rule applies."
+	@echo "Failure means: a rule matched. Read it — every rule here is scoped to be quiet."
+	@command -v semgrep >/dev/null 2>&1 || { echo "semgrep not found — install it (macOS: brew install semgrep)"; exit 2; }
+	semgrep scan --config semgrep/ocideck.yaml --metrics=off --error lib/ tool/ test/
+
+check-secrets:
+	@echo "== OciDeck check: committed secrets =="
+	@echo "Command: gitleaks (dir + git) and trufflehog (filesystem + git)"
+	@echo "Covers: credential-shaped strings in the working tree and in all history."
+	@echo "Failure means: a scanner found something outside the allowlist, or a tool is missing."
+	@echo "        Triage by hand; see .gitleaks.toml for what is excluded and why."
+	@command -v gitleaks >/dev/null 2>&1 || { echo "gitleaks not found — install it (macOS: brew install gitleaks)"; exit 2; }
+	@command -v trufflehog >/dev/null 2>&1 || { echo "trufflehog not found — install it (macOS: brew install trufflehog)"; exit 2; }
+	gitleaks dir . --redact --config .gitleaks.toml
+	gitleaks git . --redact --config .gitleaks.toml
+	trufflehog filesystem . --no-verification --no-update --exclude-paths .trufflehogignore --fail
+	trufflehog git file://. --no-verification --no-update --exclude-paths .trufflehogignore --fail
+
+# Advisory DAST: an OWASP ZAP baseline (passive) scan against a served build.
+#
+# ADVISORY, and not wired into any aggregate target. Be honest about what this
+# can and cannot see:
+#   - The CSP is already pinned exactly by `make check-web`, from the meta tag
+#     in the built index.html. ZAP does not improve on that.
+#   - ZAP's spider cannot traverse the UI: CanvasKit paints into a canvas, so
+#     there are no links or forms to follow. Only the initial load is observed.
+#   - Against the default local server, findings about response headers are
+#     mostly about *that server*. zap/baseline.conf silences exactly those and
+#     nothing else.
+# Its real value arrives when DAST_URL points at a genuinely deployed instance:
+# then the response headers are the host's, and they are the thing under test.
+#
+# Override the target: `make dast DAST_URL=https://example.org/ocideck/`.
+# Without it, the local bundle is built, served on DAST_PORT, and torn down.
+DAST_PORT ?= 8091
+DAST_URL ?=
+dast:
+	@echo "== OciDeck advisory check: DAST (OWASP ZAP baseline) =="
+	@echo "Command: zap-baseline.py against $(if $(DAST_URL),$(DAST_URL),a local server on port $(DAST_PORT))"
+	@echo "Covers: passive checks over the initial load — headers, CSP delivery, cookies."
+	@echo "Failure means: ZAP or the container runtime is missing. Findings are advisory;"
+	@echo "        read them by hand. See zap/baseline.conf for what is silenced and why."
+	@command -v docker >/dev/null 2>&1 || { echo "docker not found — install a runtime (macOS: brew install colima docker && colima start)"; exit 2; }
+	@docker info >/dev/null 2>&1 || { echo "no container runtime reachable — start it (macOS: colima start)"; exit 2; }
+ifeq ($(strip $(DAST_URL)),)
+	$(MAKE) build-web
+	@echo "-- serving build/web on :$(DAST_PORT) for the duration of the scan --"
+	@cd build/web && python3 -m http.server $(DAST_PORT) >/dev/null 2>&1 & echo $$! > /tmp/ocideck-dast.pid
+	@sleep 2
+	-docker run --rm --add-host=host.docker.internal:host-gateway \
+	  -v "$(PWD)/zap:/zap/wrk/conf:ro" zaproxy/zap-stable \
+	  zap-baseline.py -t http://host.docker.internal:$(DAST_PORT) -c conf/baseline.conf -I
+	@kill $$(cat /tmp/ocideck-dast.pid) 2>/dev/null || true; rm -f /tmp/ocideck-dast.pid
+	@echo "-- local server stopped --"
+else
+	-docker run --rm -v "$(PWD)/zap:/zap/wrk/conf:ro" zaproxy/zap-stable \
+	  zap-baseline.py -t "$(DAST_URL)" -c conf/baseline.conf -I
+endif
+
 # Advisory supply-chain scan with Trivy (github.com/aquasecurity/trivy). Scans
 # the resolved Dart packages (pubspec.lock) for known CVEs and sweeps the repo
 # for committed secrets — see trivy.yaml for the enabled scanners and rationale.
@@ -266,11 +356,14 @@ trivy:
 	@echo "Failure means: trivy is missing or the scan errored — reported"
 	@echo "        vulnerabilities/secrets are advisory; triage them by hand."
 	@command -v trivy >/dev/null 2>&1 || { echo "trivy not found — install it (macOS: brew install trivy; docs: https://trivy.dev/latest/getting-started/installation/)"; exit 2; }
-	@# Trivy pulls its public vuln DB from an OCI registry and would otherwise
-	@# read ~/.docker/config.json; a stale credsStore (e.g. docker-credential-
-	@# desktop missing from PATH) then aborts the DB download. The DB needs no
-	@# auth, so point DOCKER_CONFIG at an empty dir to bypass the cred helper.
-	DOCKER_CONFIG=$$(mktemp -d) trivy fs --config trivy.yaml .
+	@# This used to run with DOCKER_CONFIG pointed at an empty temp dir, to dodge a
+	@# stale `credsStore: desktop` left behind by an uninstalled Docker Desktop.
+	@# That workaround became the bug: ~/.docker/config.json also holds
+	@# `currentContext`, so blanking the config drops the container context and
+	@# docker falls back to /var/run/docker.sock — which does not exist under
+	@# colima. Fix the cause instead: remove the dangling credsStore key. With
+	@# empty `auths` no credential helper is needed for public registries.
+	trivy fs --config trivy.yaml .
 
 # Advisory freshness monitor for the third-party CI Actions we pin to an EXACT
 # version. Reads .github/pinned-actions.json and asks each Action's release API
@@ -283,6 +376,40 @@ check-actions:
 	@echo "Covers: every exact-pinned Action in .github/pinned-actions.json vs its latest release."
 	@echo "Failure means: a pinned Action is behind (bump it + the manifest) or the release API was unreachable."
 	dart run tool/check_pinned_actions.dart
+
+# Interne servicenormen rond beveiligingsmeldingen: hoe snel er gereageerd,
+# geoordeeld en opgelost wordt. Meet uit de tijdstempels die de meldingen in de
+# forge toch al dragen — een handgeschreven lijst veroudert en niemand vult hem.
+#
+# Bewust in GEEN enkele verzameldoel opgenomen, ook niet in `check-full`. Twee
+# redenen, en de tweede is de zwaarste:
+#
+#   1. Dit doel heeft een persoonlijke leessleutel voor de forge nodig. Een
+#      medewerker zonder sleutel zou exit 2 krijgen — "kon niet meten" — en dat
+#      leest als een defect in zijn wijziging terwijl het er geen is.
+#   2. Zodra het in `check-full` hangt, moet docs/CHECKS.md het noemen, want die
+#      beschrijft wat dat doel dekt. En dan staat "reactietermijnen" tóch in een
+#      document dat als asset met de app meereist. Precies de sluiproute die
+#      deze hele opzet vermijdt.
+#
+# De bewaking loopt daarom niet via een verzameldoel maar via de
+# --quiet-variant in cron: die zwijgt tot er iets te melden valt. Zie de kop van
+# tool/check_service_norms.dart.
+#
+# De normen zelf staan in dat bestand en nergens anders. Ze zijn intern:
+# alarmdrempels waarop dit project zichzelf wekt, geen toezegging aan derden.
+# Daarom staan ze niet in docs/ (dat reist als asset mee in de app) en niet in
+# SECURITY.md. Zie de kop van het gereedschap voor de redenering.
+servicenormen:
+	@echo "== OciDeck check: servicenormen (intern) =="
+	@echo "Command: dart run tool/check_service_norms.dart"
+	@echo "Covers: eerste reactie, oordeel echt-of-ruis en oplostermijn over de"
+	@echo "        meldingen met een beveiligingslabel in de forge."
+	@echo "Failure means: een interne alarmdrempel is overschreden — kijk of de"
+	@echo "        praktijk of de norm moet veranderen. Exit 2 betekent iets"
+	@echo "        anders: er kón niet gemeten worden (geen leessleutel, geen"
+	@echo "        netwerk). Dat is geen normoverschrijding maar wél een defect."
+	dart run tool/check_service_norms.dart
 
 # Security gate for the vendored JS bundles inlined into the HTML export.
 # Verifies each file still matches assets/web_export/MANIFEST.json (sha256) and
@@ -582,6 +709,6 @@ check: format-check analyze check-conventions check-method-length check-dead-cod
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
-check-full: check licenses sbom-verify deps-check check-web deps-outdated
+check-full: check check-secrets sast licenses sbom-verify deps-check check-web deps-outdated
 	@echo "== OciDeck extended check complete =="
 	@echo "Validated: required quality gate, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, and dependency freshness."

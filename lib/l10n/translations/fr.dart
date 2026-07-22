@@ -717,8 +717,6 @@ const _dutchSourceFr = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Finaliser et sceller',
   'Verzegelen': 'Sceller',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Finalisez cette présentation et calculez un sceau SHA-512 sur son contenu. Le fichier est alors verrouillé et ne peut plus être modifié ; les modifications ultérieures deviennent visibles. Cette action est irréversible dans l\'application.',
   'Handtekening (optioneel)': 'Signature (facultative)',
   'Naam': 'Nom',
   'Rol of functie': 'Rôle ou fonction',
@@ -740,6 +738,95 @@ const _dutchSourceAddFr = {
       'Ce texte contient des chapitres. Le découpage donne',
   'dia\'s op.': 'diapositives.',
   'Splits op hoofdstukken': 'Découper par chapitres',
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Ce deck contient du texte IA que tu n\'as pas encore vérifié. L\'export reste possible : le fichier le signale lui-même et reçoit "-ai-concept" dans son nom.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Brouillon : contient du texte IA que personne n\'a encore vérifié',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalisez cette présentation et apposez un sceau SHA-512 sur le fichier enregistré. Il est alors verrouillé et ne peut plus être modifié ; toute modification ultérieure devient visible. Celui qui reçoit le rapport recalcule lui-même le sceau avec sha512sum. Cette action est irréversible dans l\'application.',
+  'Zegel en handtekening': 'Sceau et signature',
+  'Zegel nog niet vastgelegd': 'Sceau pas encore enregistré',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Il n\'existe pas encore de fichier enregistré permettant de recalculer le sceau. Enregistrez le deck.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'L\'omission est activée : ce que le contrôle qualifie de donnée personnelle est caviardé, et toutes les images, vidéos et pistes audio de cette diapositive ne partent ni à l\'écran ni à l\'export. Votre fichier markdown conserve tout.',
+  'Bestand': 'Fichier',
+  'Venster': 'Fenêtre',
+  'Help': 'Aide',
+  'Alles selecteren': 'Tout sélectionner',
+  'Plakken': 'Coller',
+  'Opnieuw': 'Rétablir',
+  'Eigenschappen': 'Propriétés',
+  'Opdrachten…': 'Commandes…',
+  'Opslaan…': 'Enregistrement…',
+  'Uploaden naar WebDAV…': 'Envoi vers WebDAV…',
+  'Uploaden naar S3…': 'Envoi vers S3…',
+  'Vastleggen in git…': 'Commit dans git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Enregistrement en cours. Enregistrer à nouveau ne fait rien tant que ce n\'est pas terminé.',
+  'Klaar — privacy niet gecontroleerd': 'Prêt — confidentialité non vérifiée',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Aucune recherche de données personnelles, de données sensibles et de secrets n\'a été effectuée : le contrôle de confidentialité est désactivé dans Sécurité.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Des présentations qui restent de simples fichiers Markdown : lisibles, consultables et ouvrables avec n\'importe quel éditeur.',
+  'sjablonen om mee te beginnen, of leeg': 'modèles pour commencer, ou vierge',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Les diapositives d\'exemple d\'un modèle sont en néerlandais. Le nom et la description suivent votre propre langue ; le contenu, vous l\'adaptez après la création.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'L\'omission est activée : les données trouvées sont caviardées et toutes les images, vidéos et pistes audio de cette diapositive ne partent ni à l\'écran ni à l\'export. Votre fichier markdown conserve tout.',
+  'Mijn tekst': 'Mon texte',
+  'Wat zij zien': 'Ce qu\'ils voient',
+  'Presentatiegegevens': 'Informations de la présentation',
+  'Open presentatiegegevens': 'Ouvrir les informations de la présentation',
+  'Motivering van een uitsluiting': 'Justification d\'une exclusion',
+  'Motivering van een bevestiging': 'Justification d\'une confirmation',
+  'Tabel koprij, kolom {kolom}': 'Tableau ligne d\'en-tête, colonne {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tableau ligne {rij}, colonne {kolom}',
+  'Via deze website ophalen?': 'Récupérer via ce site ?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Le serveur de cette présentation n\'a pas laissé le navigateur lire le fichier directement. OciDeck peut transmettre l\'adresse au site d\'où provient OciDeck lui-même, et c\'est ce site qui la récupère. Ce site voit ainsi l\'adresse complète — si le lien contient une clé ou un code, ce site les voit aussi.',
+  'In de browser kan dit niet worden bewaard':
+      'Impossible d\'enregistrer ceci dans le navigateur',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Un navigateur n\'a pas de trousseau comme en a un ordinateur : ce qu\'OciDeck enregistrerait ici, n\'importe quel script de cette page peut le lire. Utilisez la version bureau — là, le secret va bien dans le trousseau du système d\'exploitation.',
+  'Licenties van derden': 'Licences de tiers',
+  'Alle licentieteksten tonen': 'Afficher tous les textes de licence',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck lui-même est publié sous EUPL-1.2. Il regroupe en outre des logiciels tiers : les paquets Dart et Flutter, deux extensions intégrées, quatre familles de polices, le modèle de visage du contrôle de confidentialité et le JavaScript qui accompagne une exportation HTML. Chacun conserve sa propre licence.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Ce fichier contient des logiciels tiers et parfois une police. Les textes complets des licences correspondantes figurent ci-dessous ; transmettez-les avec le fichier.',
+  'Sporen op dit apparaat': 'Traces sur cet appareil',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Outre vos paramètres, OciDeck conserve aussi une liste des fichiers récents et, en cas de plantage, un fichier de récupération contenant l\'intégralité de votre présentation. Rien de tout cela ne quitte cet appareil, mais tout y reste — en texte brut, protégé par votre compte sur ce système d\'exploitation et rien de plus.',
+  'Recent geopende presentaties': 'Présentations ouvertes récemment',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'La liste conserve le chemin complet et la classification de chaque présentation qui a été ouverte — ensemble, une information sur ce sur quoi vous travaillez et pour qui.',
+  'Recente lijst wissen': 'Effacer la liste des fichiers récents',
+  'De recente lijst was al leeg.':
+      'La liste des fichiers récents était déjà vide.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'entrée(s) effacée(s) de la liste des fichiers récents.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Les fichiers de récupération contiennent l\'intégralité de vos présentations en texte brut. Ils sont nettoyés automatiquement après 7 jours, et immédiatement lors d\'une fermeture propre.',
+  'Alles terugzetten': 'Tout réinitialiser',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Efface tous les paramètres, la liste des fichiers récents, les fichiers de récupération, les copies de travail git et les mots de passe de votre trousseau. Vos présentations restent : elles sont à vous, pas à OciDeck.',
+  'Zet alles terug naar de begintoestand': 'Tout remettre à l\'état initial',
+  'Alles terugzetten naar de begintoestand?':
+      'Tout remettre à l\'état initial ?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Vos paramètres, la liste des fichiers récents, les fichiers de récupération, les copies de travail git et les mots de passe enregistrés seront effacés. Cette action est irréversible. Vos présentations restent.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'modification(s) n\'ont pas encore été envoyées à un serveur git et n\'existent que sur cet appareil. Elles disparaissent aussi.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Tout a été remis à l\'état initial.',
+  'Terugzetten is niet gelukt.': 'La réinitialisation a échoué.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Du travail non envoyé est en attente',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Cette connexion git contient des modifications qui n\'ont pas encore été envoyées au serveur. Si vous supprimez la connexion, la copie de travail sur cet appareil disparaît aussi — et ce travail n\'existe plus nulle part.',
+  'Verbinding behouden': 'Conserver la connexion',
+  'Toch verwijderen': 'Supprimer quand même',
   'esc': 'échap',
   'Enter': 'Entrée',
   'OK': 'OK',
@@ -810,6 +897,33 @@ const _dutchSourceAddFr = {
       'énumère ce qui a été omis, sans les valeurs elles-mêmes. Ce fichier peut accompagner le rapport.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'contient les clés permettant de recalculer chaque valeur caviardée. N\'envoyez pas ce fichier : le caviardage serait annulé. Conservez-le auprès de la source.',
+  'slides': 'diapositives',
+  'Achtergehouden': 'Retenue',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Retenue : classification plus stricte que celle de la présentation',
+  '1 slide achtergehouden door haar TLP': '1 diapositive retenue par son TLP',
+  'slides achtergehouden door hun TLP': 'diapositives retenues par leur TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Ces diapositives sont exclues lors de la présentation, de l\'exportation et du paquet. Augmentez le niveau TLP de la présentation dans Infos de présentation pour les inclure.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Toutes les diapositives sont retenues par leur classification TLP — rien à afficher.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Toutes les diapositives sont retenues par leur classification TLP — rien à exporter.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Toutes les diapositives sont ignorées ou retenues par leur classification TLP — rien à afficher.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Toutes les diapositives sont ignorées ou retenues par leur classification TLP — rien à exporter.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Les chiffres des graphiques n\'ont pas été enregistrés — ils n\'existent plus que dans cette fenêtre :',
+  'Niet alles gaat mee naar git': 'Tout ne part pas dans git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Ces éléments ne se retrouvent pas dans le commit et ne seront pas dans le dépôt :',
+  'Tekeningen op slides': 'Dessins sur les diapositives',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Ils restent dans cette fenêtre. Enregistrez aussi la présentation sous forme de fichier ou de paquet .ocideck pour les conserver.',
+  'Toch opslaan': 'Enregistrer quand même',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Dans le navigateur, il n\'y a pas de récupération après plantage : si vous fermez cet onglet, le travail non enregistré est perdu. Enregistrez vous-même votre présentation.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  La base de données CVE locale (c\'est vous qui lancez le téléchargement) : OciDeck récupère les données en masse via api.github.com et le fichier de publication vers lequel cette adresse pointe.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

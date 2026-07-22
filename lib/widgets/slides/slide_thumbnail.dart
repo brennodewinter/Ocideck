@@ -32,6 +32,13 @@ String _qualityBadgeTooltip(AppLocalizations l10n, SlideBadgeTone tone) =>
       _ => l10n.d('Kwaliteitsproblemen'),
     };
 
+/// Waarom deze dia het publiek niet haalt terwijl de auteur hem niet oversloeg.
+/// Noemt het niveau erbij: zonder dat cijfer weet je wel *dát* hij wegvalt maar
+/// niet welke knop je moet omzetten.
+String _withheldTooltip(AppLocalizations l10n, TlpLevel slideTlp) =>
+    '${l10n.d('Achtergehouden: strenger geclassificeerd dan de presentatie')} '
+    '(${slideTlp.label})';
+
 String _privacyBadgeTooltip(AppLocalizations l10n, SlideBadgeTone tone) =>
     switch (tone) {
       SlideBadgeTone.hint => l10n.d('Mogelijk persoonsgegevens'),
@@ -229,6 +236,11 @@ class SlideThumbnail extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final skipped = slide.skipped;
+    // Achtergehouden door TLP: dezelfde zichtbare behandeling als overslaan —
+    // gedimd, met een eigen badge — want het gevolg is hetzelfde (de dia haalt
+    // presentatie, export én pakket niet). Wel een eigen woord en een eigen
+    // kleur: de oorzaak is een andere en de uitweg dus ook.
+    final withheld = slideWithheldByTlp(slide, tlp);
     // Elke thumbnail bewaakt alléén zijn eigen selectiestatus. Zo rebuildt bij
     // een selectiewissel alleen de oude en de nieuwe kaart, niet de hele lijst.
     // (isSelected = onderdeel van de selectie; isPrimary = de actieve slide.)
@@ -246,14 +258,14 @@ class SlideThumbnail extends ConsumerWidget {
     // halve breedte heeft en een slide dus eerder vol oogt dan de algemene
     // bullettelling-drempel suggereert. De daadwerkelijke knip (op het optimum
     // dat past) gebeurt in DeckNotifier.splitSlide.
-    final canSplit = switch (slide.type) {
-      SlideType.bullets || SlideType.bulletsImage => slide.bullets.length >= 2,
-      SlideType.twoBullets =>
-        slide.bullets.length >= 2 || slide.bullets2.length >= 2,
-      _ => false,
-    };
+    // Dezelfde toets als de knop in het paneel: één [canSplitSlide], niet een
+    // eigen kopie met een `_ => false` die een nieuw bullettype hier stil
+    // onsplitsbaar zou maken.
+    final canSplit = canSplitSlide(slide);
     final borderColor = isSelected
         ? AppTheme.accent
+        : withheld
+        ? AppTheme.badgeErrorOverlay
         : skipped
         ? AppTheme.goldDark
         : AppTheme.darkSlate600;
@@ -268,6 +280,7 @@ class SlideThumbnail extends ConsumerWidget {
         '${l10n.d('Slide')} ${index + 1}/$slideCount: '
         '${title.isNotEmpty ? title : l10n.d(slide.type.label)}'
         '${skipped ? ' (${l10n.d('Overgeslagen')})' : ''}'
+        '${withheld ? ' (${_withheldTooltip(l10n, slide.tlp)})' : ''}'
         '${hasUserNotes ? ' (${l10n.d('Gebruikersnotities')})' : ''}'
         // Twee badges, dus twee mededelingen. Ze samenvatten als één
         // "Kwaliteitsprobleem" zou een schermlezergebruiker precies de vraag
@@ -296,6 +309,7 @@ class SlideThumbnail extends ConsumerWidget {
                 ref,
                 l10n,
                 skipped: skipped,
+                withheld: withheld,
                 showWatermark: showWatermark,
                 qualityTone: qualityTone,
                 privacyTone: privacyTone,
@@ -315,10 +329,40 @@ class SlideThumbnail extends ConsumerWidget {
     );
   }
 
+  /// Het vlaggetje linksboven op de mini-preview: icoon plus woord, want een
+  /// icoon alleen laat de gebruiker raden waaróm deze dia er straks niet is.
+  Widget _cornerBadge({
+    required Color color,
+    required IconData icon,
+    required String label,
+  }) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+    decoration: BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.circular(4),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 10, color: Colors.white),
+        const SizedBox(width: 3),
+        Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 8,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
+    ),
+  );
+
   Widget _miniPreview(
     WidgetRef ref,
     AppLocalizations l10n, {
     required bool skipped,
+    required bool withheld,
     required bool showWatermark,
     required SlideBadgeTone qualityTone,
     required SlideBadgeTone privacyTone,
@@ -335,7 +379,7 @@ class SlideThumbnail extends ConsumerWidget {
               // dure verf (thumbnail-raster); een RepaintBoundary isoleert hem
               // zodat een naburige kaart die verandert deze niet mee herverft.
               Opacity(
-                opacity: skipped ? 0.32 : 1,
+                opacity: skipped || withheld ? 0.32 : 1,
                 child: RepaintBoundary(
                   child: SlidePreviewWidget(
                     slide: slide,
@@ -359,38 +403,34 @@ class SlideThumbnail extends ConsumerWidget {
                   ),
                 ),
               ),
-              if (skipped)
+              // Onder elkaar en niet naast elkaar: een dia kán allebei zijn
+              // (overgeslagen én te streng geclassificeerd), en dan moeten de
+              // twee redenen los leesbaar blijven.
+              if (skipped || withheld)
                 Positioned(
                   top: 4,
                   left: 4,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 2,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppTheme.goldDarkOverlay,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.visibility_off_outlined,
-                          size: 10,
-                          color: Colors.white,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (skipped)
+                        _cornerBadge(
+                          color: AppTheme.goldDarkOverlay,
+                          icon: Icons.visibility_off_outlined,
+                          label: l10n.d('Overgeslagen'),
                         ),
-                        const SizedBox(width: 3),
-                        Text(
-                          l10n.d('Overgeslagen'),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 8,
-                            fontWeight: FontWeight.w600,
+                      if (skipped && withheld) const SizedBox(height: 3),
+                      if (withheld)
+                        Tooltip(
+                          message: _withheldTooltip(l10n, slide.tlp),
+                          child: _cornerBadge(
+                            color: AppTheme.badgeErrorOverlay,
+                            icon: Icons.lock_outline,
+                            label: l10n.d('Achtergehouden'),
                           ),
                         ),
-                      ],
-                    ),
+                    ],
                   ),
                 ),
               if (hasUserNotes)

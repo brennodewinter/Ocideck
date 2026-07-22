@@ -1,6 +1,8 @@
 # OciDeck — Optional AI Assistance (Design)
 
-> **Status: Phases 0–3 are built and shipped. Only Phase 4 (the MCP server
+> **Status:** design; phases 0–3 shipped, phase 4 unbuilt — not a current-state reference · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
+> **Phases 0–3 are built and shipped. Only Phase 4 (the MCP server
 > surface) is unbuilt.** This header said "design proposal — not yet
 > implemented" long after the code had overtaken it; corrected 2026-07-18.
 >
@@ -17,6 +19,15 @@
 > docs are [`ARCHITECTURE.md`](../ARCHITECTURE.md),
 > [`SOURCE_MAP.md`](../SOURCE_MAP.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md) and
 > [`USER_GUIDE.md`](../USER_GUIDE.md).
+>
+> **How far that distrust reaches, as of 2026-07-22.** What has been checked is
+> narrow and worth naming so the rest is not mistaken for checked: every file
+> named in the paragraph above exists at the path given, and `AiSettings.enabled`
+> is indeed a setting of its own that is off by default. That is all. The prose,
+> the data shapes and the guardrail descriptions in §§2–6 have still never been
+> compared to the code line by line. Read a claim here as a claim; if you check
+> one, either fix it or note that it held, with the date — an unchecked section
+> that quietly looks checked is worse than one that says so.
 >
 > It is written to be **picked up cold**: exact file paths, integration points,
 > data shapes, invariants and open questions are spelled out so a later
@@ -161,6 +172,12 @@ Note Ollama's OpenAI-compat layer is officially experimental.
 - **Draft-only + provenance.** Output lands in a suggestion surface with an
   `ocideck_ai_*` marker; a human accepts/edits it. Consumers may gate downstream
   actions on markers being cleared (the pentest seal does — §16 there).
+  Since 2026-07-22 the marker also leaves the app: while any slide still carries
+  one, every PDF/PPTX/HTML export declares it in its document properties and its
+  filename (`-ai-concept`), and the HTML adds a banner —
+  [`FILE_FORMAT.md`](../FILE_FORMAT.md) §11. Export is not blocked by it; the
+  seal still is. A reviewed deck declares nothing, which is the point of the
+  review step.
 - **Low temperature, output shaping** in the prompt (length caps, locale, format).
 - **Cache by input hash** to avoid recompute/cost.
 

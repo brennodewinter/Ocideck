@@ -6,6 +6,7 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
 import '../../l10n/slide_quality_navigation.dart';
 import '../../models/markdown_validation.dart';
+import '../../models/slide.dart';
 import '../../models/slide_quality.dart';
 import '../../services/privacy/privacy_lexicon_data.dart';
 import '../../state/deck_provider.dart';
@@ -217,6 +218,17 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
   List<SlideQualityAction> _actionsFor(SlideQualityIssue issue) =>
       buildSlideQualityActions(context: context, ref: ref, issue: issue);
 
+  /// De dia waar deze melding op zit, of null bij een deckbrede melding of een
+  /// index die niet (meer) bestaat. Alleen de plaatsaanduiding van een tabelcel
+  /// heeft hem nodig, en die mag nooit de reden zijn dat het paneel omvalt.
+  Slide? _slideFor(SlideQualityIssue issue) {
+    if (issue.isDeckWide) return null;
+    final slides = ref.read(deckProvider).deck?.slides;
+    if (slides == null) return null;
+    if (issue.slideIndex < 0 || issue.slideIndex >= slides.length) return null;
+    return slides[issue.slideIndex];
+  }
+
   List<SlideQualityIssue> _filteredIssues(SlideQualityResult result) {
     if (_severityFilter == null) return result.issues;
     return result.issues
@@ -308,9 +320,11 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                   final issue = visibleIssues[index];
                   return _QualityIssueTile(
                     issue: issue,
+                    slide: _slideFor(issue),
                     onTap: () => _handleIssueTap(issue),
                     actions: _actionsFor(issue),
-                    showThemeHint: issue.isDeckWide,
+                    showThemeHint:
+                        issue.isDeckWide && !issueBelongsToDeckInfo(issue),
                   );
                 },
               ),
@@ -507,6 +521,11 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
 
 class _QualityIssueTile extends StatelessWidget {
   final SlideQualityIssue issue;
+
+  /// De dia waar de melding op zit, voor zover die er is — nodig om een
+  /// tabelcel als rij en kolom te kunnen aanwijzen.
+  final Slide? slide;
+
   final VoidCallback? onTap;
 
   /// Assistent-acties die deze melding in één klik oplossen (splitsen,
@@ -516,6 +535,7 @@ class _QualityIssueTile extends StatelessWidget {
 
   const _QualityIssueTile({
     required this.issue,
+    this.slide,
     this.onTap,
     this.actions = const [],
     this.showThemeHint = false,
@@ -525,12 +545,17 @@ class _QualityIssueTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final color = slideQualitySeverityColor(issue.severity);
-    final location = issue.isDeckWide
+    // Deckbreed is niet vanzelf "thema": een privacybevinding op het auteurs- of
+    // trefwoordenveld staat in de front matter. "Thema (hele presentatie)" boven
+    // zo'n melding stuurt de blik naar de kleuren en dus naar de verkeerde plek.
+    final location = issueBelongsToDeckInfo(issue)
+        ? l10n.d('Presentatiegegevens')
+        : issue.isDeckWide
         ? l10n.d('Thema (hele presentatie)')
         : '${l10n.d('Slide')} ${issue.slideIndex + 1}';
     // Het veld erbij, als we het kennen. "Slide 5 · Privacy" zegt dát er iets
     // is; "Slide 5 · Privacy · Opsomming 3" zegt waar je moet kijken.
-    final field = slideQualityFieldLabel(l10n, issue);
+    final field = slideQualityFieldLabel(l10n, issue, slide: slide);
     final heading = [
       location,
       slideQualityCategoryLabel(l10n, issue.category),

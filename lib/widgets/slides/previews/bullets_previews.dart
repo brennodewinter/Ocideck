@@ -81,7 +81,7 @@ class _BulletsPreview extends StatelessWidget {
     );
 
     return _bulletsSlideShell(
-      background: _hexColor(profile.slideBackgroundColor),
+      background: AppTheme.parseHexColor(profile.slideBackgroundColor),
       padding: padding,
       buildContent: (contentW, availH) =>
           _bulletsContent(context, contentW, availH),
@@ -177,10 +177,10 @@ class _BulletsPreview extends StatelessWidget {
               TextStyle(
                 fontSize: titleSize * resolvedScale,
                 fontWeight: FontWeight.bold,
-                color: _hexColor(profile.textColor),
+                color: AppTheme.parseHexColor(profile.textColor),
               ),
             ),
-            linkColor: _hexColor(profile.accentColor),
+            linkColor: AppTheme.parseHexColor(profile.accentColor),
           ),
         if (hasSubtitle) ...[
           SizedBox(height: spacing * resolvedScale * 0.4),
@@ -192,10 +192,10 @@ class _BulletsPreview extends StatelessWidget {
               TextStyle(
                 fontSize: subtitleSize * resolvedScale,
                 fontWeight: FontWeight.w600,
-                color: _hexColor(profile.accentColor),
+                color: AppTheme.parseHexColor(profile.accentColor),
               ),
             ),
-            linkColor: _hexColor(profile.accentColor),
+            linkColor: AppTheme.parseHexColor(profile.accentColor),
           ),
         ],
         if ((hasTitle || hasSubtitle) && bullets.isNotEmpty)
@@ -251,7 +251,7 @@ class _BulletsPreview extends StatelessWidget {
     );
 
     return _bulletsSlideShell(
-      background: _hexColor(profile.slideBackgroundColor),
+      background: AppTheme.parseHexColor(profile.slideBackgroundColor),
       padding: padding,
       buildContent: (contentW, availH) => _richTextPaginatedContent(
         context: context,
@@ -335,10 +335,10 @@ Widget _richTextPaginatedContent({
                         TextStyle(
                           fontSize: titleSize * scale,
                           fontWeight: FontWeight.bold,
-                          color: _hexColor(profile.textColor),
+                          color: AppTheme.parseHexColor(profile.textColor),
                         ),
                       ),
-                      linkColor: _hexColor(profile.accentColor),
+                      linkColor: AppTheme.parseHexColor(profile.accentColor),
                     ),
                   if (showSubtitle) ...[
                     SizedBox(height: spacing * scale * 0.4),
@@ -350,10 +350,10 @@ Widget _richTextPaginatedContent({
                         TextStyle(
                           fontSize: subtitleSize * scale,
                           fontWeight: FontWeight.w600,
-                          color: _hexColor(profile.accentColor),
+                          color: AppTheme.parseHexColor(profile.accentColor),
                         ),
                       ),
-                      linkColor: _hexColor(profile.accentColor),
+                      linkColor: AppTheme.parseHexColor(profile.accentColor),
                     ),
                   ],
                   if ((showTitle || showSubtitle) && body.isNotEmpty)
@@ -442,10 +442,10 @@ class _TwoBulletsPreview extends StatelessWidget {
                         TextStyle(
                           fontSize: headingSize,
                           fontWeight: FontWeight.bold,
-                          color: _hexColor(profile.accentColor),
+                          color: AppTheme.parseHexColor(profile.accentColor),
                         ),
                       ),
-                      linkColor: _hexColor(profile.accentColor),
+                      linkColor: AppTheme.parseHexColor(profile.accentColor),
                     ),
             ),
             SizedBox(height: headingGap),
@@ -480,7 +480,7 @@ class _TwoBulletsPreview extends StatelessWidget {
       vPad: vPad,
     );
     return _bulletsSlideShell(
-      background: _hexColor(profile.slideBackgroundColor),
+      background: AppTheme.parseHexColor(profile.slideBackgroundColor),
       padding: padding,
       buildContent: (contentW, layoutH) =>
           _twoBulletsContent(context, contentW, layoutH),
@@ -554,10 +554,10 @@ class _TwoBulletsPreview extends StatelessWidget {
               TextStyle(
                 fontSize: titleSize,
                 fontWeight: FontWeight.bold,
-                color: _hexColor(profile.textColor),
+                color: AppTheme.parseHexColor(profile.textColor),
               ),
             ),
-            linkColor: _hexColor(profile.accentColor),
+            linkColor: AppTheme.parseHexColor(profile.accentColor),
           ),
         if (hasTitle) SizedBox(height: spacing),
         if (slide.listStyle == ListStyle.checklist &&

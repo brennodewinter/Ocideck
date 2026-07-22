@@ -82,9 +82,9 @@ class _CockpitPreviewState extends State<_CockpitPreview>
     final meters = spec.meters.isEmpty
         ? CockpitSpec.pentestPreset().meters
         : spec.meters.take(cockpitMaxMeters).toList();
-    final bg = _hexColor(widget.profile.slideBackgroundColor);
-    final accent = _hexColor(widget.profile.accentColor);
-    final textColor = _hexColor(widget.profile.textColor);
+    final bg = AppTheme.parseHexColor(widget.profile.slideBackgroundColor);
+    final accent = AppTheme.parseHexColor(widget.profile.accentColor);
+    final textColor = AppTheme.parseHexColor(widget.profile.textColor);
     final pad = widget.w * 0.04;
     final logoSafe = widget.slide.showLogo
         ? _logoSafeInsets(widget.w, widget.profile)
@@ -194,12 +194,12 @@ class _CockpitGrid extends StatelessWidget {
                   surface: surface,
                   textColor: textColor,
                   mutedColor: mutedColor,
-                  good: _hexColor(scheme.good),
-                  warning: _hexColor(scheme.warning),
-                  critical: _hexColor(scheme.critical),
-                  cold: _hexColor(scheme.cold),
-                  sky: _hexColor(scheme.sky),
-                  ground: _hexColor(scheme.ground),
+                  good: AppTheme.parseHexColor(scheme.good),
+                  warning: AppTheme.parseHexColor(scheme.warning),
+                  critical: AppTheme.parseHexColor(scheme.critical),
+                  cold: AppTheme.parseHexColor(scheme.cold),
+                  sky: AppTheme.parseHexColor(scheme.sky),
+                  ground: AppTheme.parseHexColor(scheme.ground),
                   font: font,
                 ),
               ),

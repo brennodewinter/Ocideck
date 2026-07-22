@@ -8,7 +8,7 @@ import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../models/timeline.dart';
 import '../../services/markdown_service.dart';
-import '../../services/mermaid_render_service.dart';
+import '../mermaid_render_host.dart';
 import '../../services/finding_context_score.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../utils/url_launcher_util.dart';

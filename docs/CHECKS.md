@@ -1,5 +1,7 @@
 # OciDeck — Checks & CI
 
+> **Status:** procedure, current, with a dated result under *Latest result* · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 Every automated check OciDeck runs, what it covers, what a failure means, and how
 to fix it. The **`Makefile` is the single entry point** and the **real gate**:
 `make check`, run by the committer before pushing, is what actually enforces
@@ -40,14 +42,20 @@ guards plus formatting), handy while iterating on translations.
 
 ## How intensively is it tested?
 
-To give a sense of scale (point-in-time figures — they only grow):
+To give a sense of scale. These are counts from one moment, and they only grow,
+so read the date with them:
 
-| Metric | Approx. |
+| Metric | Counted on 2026-07-22 |
 | --- | ---: |
-| Automated tests in the suite | **~4570** |
-| Test files under `test/` | **~435** |
-| Source files under `lib/` | ~564 excl. translations (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
-| Line coverage (enforced floor: 80%) | **≥ 80%** |
+| Automated tests in the suite | **4852** (excluding the `golden` tag) |
+| Test files under `test/` | **450** |
+| Source files under `lib/` | 574 excl. the 32 translation files (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
+| Line coverage (enforced floor: 80%) | **82.5%** — 42 798 of 51 862 lines, 508 instrumented files |
+
+*(Corrected 2026-07-22: this table said "~4570 / ~435 / ~564" and called them
+"point-in-time figures" without saying which point in time, so there was no way
+to tell how far they had drifted. They are now dated, and re-counting them is
+part of the procedure under [Latest result](#latest-result).)*
 
 Coverage is a floor **and** a census: `make coverage` also fails when a `lib/`
 file appears in no test at all. Such a file is not 0% — lcov never records it,
@@ -63,6 +71,37 @@ remote, the number you see locally is the number that gates the push.
 
 ---
 
+## Latest result
+
+The sections above and below describe the procedure; this one records what came
+out of it, the way [`LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md) records its
+own last run. A dated outcome next to a repeatable command is the difference
+between "we check this" and "we checked this".
+
+**Run on 2026-07-22**, on macOS (arm64), Flutter 3.44.6, at commit `b98ee072`:
+
+| Command | Outcome |
+| --- | --- |
+| `flutter test --test-randomize-ordering-seed random --exclude-tags golden` | pass — 4852 tests, 2 skipped |
+| `dart run tool/coverage_summary.dart --min=80 --require-instrumented` | pass — 82.5% (42 798/51 862 lines, 508 instrumented files); no `lib/` file outside the census |
+| `dart run tool/coverage_summary.dart --per-file-floor` | pass — 19 files below the per-file floor, 5 of them at zero, against a budget of 21 |
+| `dart run tool/check_licenses.dart` | pass — 187 packages, all recognised open-source ([`LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md)) |
+
+**What this run did not cover.** Only the four commands above were executed. The
+rest of `make check` — `format-check`, `analyze`, `check-conventions`,
+`check-method-length`, `check-dead-code`, `check-hardcoded-text` — and the
+`check-full` extras (`sbom-verify`, `deps-check`, `check-web`) were not run here,
+so this table says nothing about them. It is a snapshot, not a certificate: the
+only run that means anything for a given commit is the one you do yourself
+before pushing it.
+
+Two of these numbers are budgets rather than achievements. The per-file floor
+allows 21 files below it and 19 are there, so that gate is nearly full; the
+overall 82.5% sits above an 80% floor that is a ratchet, meant to be raised as
+coverage improves rather than treated as a target already met.
+
+---
+
 ## All checks at a glance
 
 | Check | Verifies | In `make check` | In `check-full` | In CI workflow † |
@@ -72,15 +111,19 @@ remote, the number you see locally is the number that gates the push.
 | [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering & file-size ratchets | ✅ | ✅ | ✅ |
 | [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ |
 | [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ |
+| [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
-| [`make coverage-per-file`](#make-coverage-per-file) | At most `filesBelowFloorBudget` `lib/` files run under 20% of their own lines | ✅ | ✅ | — |
+| [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 20% of its own lines | ✅ | ✅ | — |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
 | [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
 | [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ |
 | [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — |
 | [`make catalogs-outdated`](#make-catalogs-outdated-advisory) | Bundled reference data vs upstream (advisory, pre-release) | — | — | — |
+| [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | — |
+| [`make sast`](#make-sast) | Semgrep rules over shipped Dart (cert validation, subprocesses, weak randomness) | — | ✅ | — |
+| [`make dast`](#make-dast-advisory) | ZAP baseline over a served build (advisory) | — | — | — |
 | [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) |
 | [`make check-actions`](#make-check-actions-advisory) | Pinned CI Actions vs their latest release (advisory) | — | — | — |
 
@@ -213,6 +256,34 @@ also declares them, but see the [CI note](#continuous-integration).)
   rate: generated l10n, test-only use). Use `make fix` (`dart fix --apply`) to
   sweep the analyzer-visible kinds; `make analyze` then enforces the result.
 
+### `make check-hardcoded-text`
+- **Runs:** `dart run tool/check_hardcoded_text.dart` (`--list` prints the full
+  inventory per area, for clean-up batches)
+- **Covers:** the first half of the localisation promise — that every visible
+  string actually passes through `l10n.d('…')`. `test/app_localizations_test.dart`
+  guards the second half (every `d('…')` exists in all 32 languages), but nothing
+  guarded that a string reached `d()` at all. The gap sat in the indirect
+  hand-offs: `EditorField` calls `l10n.d(widget.label)`, so
+  `EditorField(label: 'Titel (H1)')` at the call site is invisible to a scanner
+  that only looks for `d('…')`.
+- **How it measures:** an AST dataflow, run backwards from two separate seed
+  sets — the parameters of `d()`/`t()`, and the raw Flutter sinks that put text
+  on screen unchanged (`Text`, `Tooltip`, `Semantics`, `InputDecoration`, …).
+  A parameter that is passed on to a known sink becomes a sink itself, which is
+  how `EditorField.label` is found without anyone listing it. A literal that
+  reaches only the first set is a **source key** (legitimate: it is a `d()`
+  argument, one call further along); one that reaches the second is a violation.
+  The *type* decides, not the parameter name — `title:` on a `MastgTest` is
+  reference data, not interface text.
+- **Not covered on purpose:** the deck templates. `_contentHomes` in the tool
+  lists the `lib/models/deck_template*.dart` files, because their strings are
+  deck *content*: they land in the author's saved file and get typed over.
+  Translating them would make a document's text depend on the menu language it
+  was created in. The new-presentation dialog says so to anyone not reading
+  Dutch rather than leaving it unexplained.
+- **Failure means:** route the string through `l10n.d('…')` — and remember the
+  translation gate then wants it in every language.
+
 ### `make test`
 - **Runs:** `flutter test --test-randomize-ordering-seed random --exclude-tags golden`
   — the full unit/widget suite under `test/`, in a randomised order so no test can
@@ -263,10 +334,9 @@ also declares them, but see the [CI note](#continuous-integration).)
   report `make coverage` just wrote — no second test run.
 - **Covers:** the worst case *per file* instead of the average: how many `lib/`
   files execute less than **20%** of their own lines.
-- **Failure means:** more files sit below that floor than
-  `filesBelowFloorBudget` allows (write a test for one of the files the run
-  lists), **or** the budget was left standing after an improvement (lower it to
-  the number the run prints).
+- **Failure means:** at least one file sits below that floor. Write a test for
+  it, or — only when it is a platform half or has no executable lines — put it
+  in `uncoveredBaseline` with a reason.
 - **Why it exists:** being in the denominator is not being executed. A test that
   imports a file without ever calling into it keeps that file in the report at
   0%, and an 80% average absorbs it without a ripple — on 2026-07-21 twenty-two
@@ -274,12 +344,14 @@ also declares them, but see the [CI note](#continuous-integration).)
   passed both gates above. Neither the floor nor `--require-instrumented` can
   see this: one looks at the mean, the other only at whether a file is mentioned
   anywhere.
-- **A budget, not an allow-list.** A list of blessed files grows quietly — one
-  more line per untested file and nobody notices. A number cannot absorb
-  anything: a new untested file pushes the count over the budget and the gate
-  goes red. It is a **ratchet in both directions** — it may only shrink, and it
-  fails when it lags reality by more than a file or two, so the win is locked in
-  rather than left as headroom for the next regression. Target: **0**.
+- **No budget, and no allow-list.** Until 2026-07-22 this gate carried a
+  `filesBelowFloorBudget` counting how many files were allowed below the floor:
+  39 at the start, then 21, then 0. A number that reads zero is a number
+  somebody can raise; a gate that fails on *every* file below the floor is not.
+  So the budget is gone: anything that drops below 20% is a test to write, not a
+  number to adjust. The only escape is `uncoveredBaseline`, and that is a list
+  with a reason per line — reserved for platform halves and files with no
+  executable lines at all.
 
 ---
 
@@ -347,7 +419,9 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Runs:** `make build-web` then `dart run tool/check_web_hardening.dart`.
 - **Covers:** that the built `build/web` keeps its hardening — a strict CSP in
   `index.html` (`script-src 'self' 'wasm-unsafe-eval'`, no `unsafe-inline`/
-  `unsafe-eval`, `connect-src 'self'`, `object-src 'none'`), CanvasKit
+  `unsafe-eval`, `connect-src 'self'`, `object-src 'none'`, `form-action
+  'none'` — that last one does *not* fall back to `default-src`, so it is
+  asserted separately), CanvasKit
   **self-hosted** (local wasm + the `useLocalCanvasKit` flag), and the UI font
   **bundled** — so the running app pulls zero third-party origins.
 - **Failure means:** a change weakened the CSP or re-introduced a CDN/font fetch;
@@ -359,6 +433,90 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Covers:** dependency freshness only. **Advisory** — it may need network
   access and an outdated package is not in itself a regression. Not part of the
   required gate.
+
+### `make sast`
+- **Runs:** `semgrep scan --config semgrep/ocideck.yaml --metrics=off --error`
+  over `lib/`, `tool/` and `test/`. Needs the `semgrep` binary
+  (`brew install semgrep`).
+- **Covers:** three invariants that the Dart-specific tools do not check —
+  certificate validation being overridden outside `net_guard.dart`, a subprocess
+  started outside the git layer (it escapes NetGuard), and a non-cryptographic
+  `Random()` bound to a name that says "secret".
+- **Rules are local and committed**, in [`semgrep/ocideck.yaml`](../semgrep/ocideck.yaml).
+  Deliberately not `--config auto`: that fetches rules over the network at scan
+  time and reports metrics. Local rules keep the gate offline and reproducible,
+  the same reason `deps-verify-offline` exists.
+- **Why Semgrep at all**, given `check_conventions.dart` already knows the AST:
+  because it parses, and grep does not. Writing these rules, a grep for
+  `badCertificateCallback` returned three hits in `lib/` — all three inside doc
+  comments explaining the pinning design. Semgrep returns none, and flags only a
+  real assignment. The ruleset is scoped to that difference and does not repeat
+  the existing gates.
+- **Failure means:** a rule matched. Read it before silencing it; each rule is
+  deliberately narrow (the randomness rule keys on the *variable name* so a
+  `Random()` for an animation stays quiet).
+- **Both directions are tested:** zero findings across 627 files on `main`, and
+  three findings on a file with planted violations — with the commented-out
+  equivalents correctly ignored.
+
+### `make check-secrets`
+- **Runs:** `gitleaks` over the working tree and over all history, then
+  `trufflehog` over both, with `--redact` / `--no-verification`. Needs both
+  binaries (`brew install gitleaks trufflehog`).
+- **Covers:** credential-shaped strings anywhere in the repository, including
+  commits that added a secret and later removed it. Two scanners rather than
+  one because they disagree usefully: gitleaks matches entropy and rule
+  patterns, trufflehog carries per-provider detectors.
+- **Failure means:** something outside the allowlist looks like a credential, or
+  a scanner binary is missing. Triage by hand — do not silence a finding without
+  reading it.
+- **Required before a PR.** Wired into `check-full`, deliberately **not** into
+  `check`: the everyday gate cannot assume external binaries are installed.
+- **Verification is off on purpose.** Trufflehog would otherwise send candidate
+  secrets to the issuing service to see whether they are live — outbound traffic
+  carrying credentials to third parties, which contradicts the project's own
+  premise. Verify a single finding by hand if it ever matters.
+- **What is excluded, and the price:** see [`.gitleaks.toml`](../.gitleaks.toml)
+  and [`.trufflehogignore`](../.trufflehogignore). Generated output (`build/`,
+  `.dart_tool/`) is skipped as noise. The OciWacht detection corpus —
+  `lib/services/privacy/privacy_digital_rules.dart` and the `test/privacy_*`
+  fixtures — is skipped because those files exist precisely to hold
+  credential-shaped values. The price is real and is stated in the config: a
+  genuine secret placed in one of those files would not be caught, and would not
+  stand out visually either.
+
+### `make dast` (advisory)
+- **Runs:** an OWASP ZAP **baseline** (passive) scan in a container against a
+  served build. Without arguments it runs `make build-web`, serves `build/web`
+  on `DAST_PORT` (default 8091), scans, and tears the server down. Point it at a
+  real instance with `make dast DAST_URL=https://…`.
+- **Needs** a container runtime. On macOS: `brew install colima docker && colima
+  start`. Docker Desktop also works but is proprietary; colima is the
+  open-source equivalent and is what this was built against. The ZAP Homebrew
+  cask is *not* an option — it fails the macOS Gatekeeper check and is scheduled
+  for removal.
+- **Advisory, in no aggregate target.** Findings are for a human to read.
+- **Be honest about what it can see.** The CSP is already pinned exactly by
+  [`make check-web`](#make-check-web) from the meta tag, so ZAP does not improve
+  on that. Its spider cannot traverse the UI — CanvasKit paints into a canvas,
+  so there are no links or forms to follow and only the initial load is
+  observed. Against the local server, most header findings are about *that
+  server*.
+- **What it silences, and nothing more:** [`zap/baseline.conf`](../zap/baseline.conf)
+  ignores exactly three rules, all pure artefacts of `python3 -m http.server`
+  (leaked `Server` version, its cache headers, and the "Modern Web Application"
+  observation). Everything a real host would have to answer for — CSP delivered
+  as a header, `Permissions-Policy`, `Cross-Origin-Embedder-Policy`,
+  anti-clickjacking, `X-Content-Type-Options` — stays visible on purpose, so the
+  list still says something the day this is published somewhere.
+- **Known noisy:** rule 10027 (*Information Disclosure — Suspicious Comments*)
+  fires on the vendored export libraries, not on our own `index.html`. It is
+  left visible rather than silenced, because silencing a rule nobody has read is
+  how a scanner stops being worth running.
+- **Its first run earned its keep:** it found that the CSP has no `form-action`
+  directive, which does *not* fall back to `default-src`. `frame-ancestors` is a
+  different matter — it is present but browsers ignore it in a `<meta>` tag, and
+  `web/index.html` already documents exactly that.
 
 ### `make trivy` (advisory)
 - **Runs:** `trivy fs --config trivy.yaml .` (needs the external
@@ -440,6 +598,13 @@ also declares them, but see the [CI note](#continuous-integration).)
     that put deck or file *contents* into a log message (a collection joined,
     taken from, or sliced into the text). It cannot judge a lone variable that
     happens to hold a cell value; it does catch the pattern that actually did it.
+  - `test/trademark_notices_test.dart` — every brand OciDeck carries as a
+    *feature* sits in an enum (`VideoSourceKind`, `WebdavServerKind`), so the
+    test holds those enums against the trademark table in
+    `THIRD_PARTY_NOTICES.md`: a new embed provider or WebDAV flavour fails here
+    before its brand name can reach the interface unattributed. It also requires
+    each branded row to disclaim affiliation, because naming only the owner
+    leaves the suggestion of a partnership standing.
 
 ### Targeted test groups
 

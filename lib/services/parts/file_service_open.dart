@@ -107,8 +107,32 @@ extension _FileServiceOpen on FileService {
     }
   }
 
+  /// Path of the seal sidecar next to a deck `<name>.md`.
+  String _sealSidecarPath(String mdPath) =>
+      p.setExtension(mdPath, '.seal.json');
+
+  /// Write the seal sidecar next to [filePath], or remove it when there is
+  /// nothing to record.
+  Future<void> _writeSealSidecar(Deck deck, String filePath) async {
+    final sidecar = File(_sealSidecarPath(filePath));
+    if (await _sidecarFromNewerBuild(sidecar, SealCodec.version)) {
+      logWarning(
+        'FileService._writeSealSidecar: seal sidecar is from a newer '
+        'OciDeck and was left untouched',
+        sidecar.path,
+      );
+      return;
+    }
+    final json = SealCodec.encode(SealRecord.of(deck));
+    if (json == null) {
+      if (await sidecar.exists()) await sidecar.delete();
+    } else {
+      await writeStringAtomic(sidecar, json);
+    }
+  }
+
   /// Legt de lagen die naast de markdown wonen terug op [deck]: de
-  /// inkt-annotaties, de gebruikersnotities en de MIAUW-dispositie.
+  /// inkt-annotaties, de gebruikersnotities, de MIAUW-dispositie en het zegel.
   ///
   /// Elke laag apart afgeschermd: een kapotte sidecar mag het openen van het
   /// deck nooit blokkeren — dat zou een tekening van vorige week een hele
@@ -155,6 +179,19 @@ extension _FileServiceOpen on FileService {
         }
       } catch (e) {
         logWarning('FileService.openDeck: MIAUW sidecar unreadable', e);
+      }
+    }
+    // Het zegel en de handtekening. Ligt er een sidecar, dan is die de
+    // waarheid; wat de parser nog uit de oude front matter haalde (met
+    // [SealForm.canonical]) is het opwaardeerpad voor een bestand dat er nog
+    // geen heeft.
+    final sealSidecar = File(_sealSidecarPath(filePath));
+    if (await sealSidecar.exists()) {
+      try {
+        final record = SealCodec.decode(await sealSidecar.readAsString());
+        if (record != null) hydrated = record.applyTo(hydrated);
+      } catch (e) {
+        logWarning('FileService.openDeck: seal sidecar unreadable', e);
       }
     }
     return hydrated;
@@ -348,8 +385,12 @@ extension _FileServiceOpen on FileService {
   /// alone. That is what keeps the spreadsheet workflow intact: edit the file
   /// while the deck is open, save the deck, and your edit is still there.
   ///
-  /// When both sides changed, the app wins — it holds what the user last saw
-  /// and edited — but the clash is reported rather than swallowed.
+  /// Veranderden beide kanten, dan wint niemand: het bestand blijft zoals het
+  /// buiten de app is geworden en de klacht komt terug als waarschuwing. De app
+  /// eroverheen laten schrijven was een verloren update — het werk van degene
+  /// die het bestand bijwerkte verdween dan zonder dat iemand het zag. Wat in de
+  /// editor staat is niet weg; het staat alleen nog niet op schijf, en de
+  /// gebruiker kan kiezen (elders opslaan, of het deck opnieuw openen).
   Future<List<String>> _writeChartData(
     Deck deck,
     String dir, {
@@ -377,7 +418,13 @@ extension _FileServiceOpen on FileService {
           final onDisk = spec
               .withData(await file.readAsString(), path: abs)
               .dataToJson();
-          if (onDisk != baseline) warnings.add(source); // ook extern gewijzigd
+          if (onDisk != baseline) {
+            // Ook extern gewijzigd: niet overschrijven. De baseline blijft
+            // staan, zodat een volgende opslag dezelfde botsing weer ziet in
+            // plaats van hem alsnog stil weg te drukken.
+            warnings.add(source);
+            continue;
+          }
         }
         await file.parent.create(recursive: true);
         await writeStringAtomic(file, _chartDataFor(spec, path: abs));

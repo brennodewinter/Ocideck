@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -75,6 +76,65 @@ void main() {
         reason: 'The WSTG attribution is missing "$required".',
       );
     }
+  });
+
+  group('the files say it themselves', () {
+    /// A file whose only licence statement lives in a document elsewhere reads
+    /// as ours. Someone copying `wstg_catalog.dart` into another EUPL project —
+    /// or an AI summarising the repo — sees a Dart file among other Dart files
+    /// and infers the repository licence. CC-BY-SA-4.0 and MITRE's terms both
+    /// want the attribution attached to the material, not filed next to it.
+    const heads = <String, List<String>>{
+      'lib/services/wstg_catalog.dart': [
+        'NOT EUPL-1.2',
+        'CC-BY-SA-4.0',
+        'OWASP Foundation',
+        'creativecommons.org/licenses/by-sa/4.0/',
+        'Share-alike',
+      ],
+      'lib/services/mastg_catalog.dart': [
+        'NOT EUPL-1.2',
+        'CC-BY-SA-4.0',
+        'OWASP Foundation',
+        'creativecommons.org/licenses/by-sa/4.0/',
+        'Share-alike',
+      ],
+      'lib/services/maswe_catalog.dart': [
+        'NOT EUPL-1.2',
+        'CC-BY-SA-4.0',
+        'OWASP Foundation',
+        'creativecommons.org/licenses/by-sa/4.0/',
+        'Share-alike',
+      ],
+      'lib/services/cwe_catalog.dart': [
+        'NOT EUPL-1.2',
+        'MITRE',
+        'cwe.mitre.org/about/termsofuse.html',
+      ],
+    };
+
+    for (final entry in heads.entries) {
+      test('${entry.key} carries its own licence header', () {
+        // Only the header: a mention further down the file is not a notice a
+        // reader meets first.
+        final head = File(entry.key).readAsLinesSync().take(30).join('\n');
+        for (final needle in entry.value) {
+          expect(
+            head.contains(needle),
+            isTrue,
+            reason: '${entry.key} no longer states "$needle" in its header.',
+          );
+        }
+      });
+    }
+
+    test('the bundled CWE asset carries the attribution with the data', () {
+      final doc =
+          jsonDecode(File('assets/cwe/cwe_full.json').readAsStringSync())
+              as Map<String, dynamic>;
+      expect(doc['attribution'], contains('MITRE'));
+      expect(doc['weaknesses'], isA<List<dynamic>>());
+    });
   });
 
   test('the superseded "no WSTG content is bundled" claim is gone', () {

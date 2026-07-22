@@ -221,13 +221,88 @@ void main() {
 
     final project = Directory(p.join(temp.path, 'project'));
     await project.create();
-    await service.saveDeck(
+    final written = await service.saveDeckDetailed(
       deckWith(chartSlide('../geheim.json', [1, 2])),
       p.join(project.path, 'deck.md'),
     );
 
     // Untouched: a deck must not be able to write outside its own folder.
     expect(await outside.readAsString(), '{"x":["geheim"],"series":[]}');
+    // En de gebruiker hoort het: de markdown draagt na deze opslag alleen nog
+    // de verwijzing, dus die cijfers staan nergens meer op schijf.
+    expect(written.chartWarnings, ['../geheim.json']);
+
+    // De cijfers staan nergens meer: het blok draagt alleen de verwijzing.
+    // Toets dat op de velden die de cijfers dragen, niet op "er komt nergens
+    // een 1 voor" — dat laatste stond hier eerder en viel om zodra de front
+    // matter een `ocideck_format: 1` kreeg. Zo'n toets slaagt bovendien ook
+    // als het hele grafiekblok zou verdwijnen, en bewijst dus te weinig.
+    final md = await File(p.join(project.path, 'deck.md')).readAsString();
+    expect(md, contains('"source": "../geheim.json"'));
+    expect(md, isNot(contains('"x"')));
+    expect(md, isNot(contains('"series"')));
+  });
+
+  test('een extern gewijzigd databestand wordt niet overschreven', () async {
+    final service = serviceOf();
+    await service.saveDeck(
+      deckWith(chartSlide('data/omzet.json', [120, 138])),
+      deckPath(),
+    );
+
+    final opened = await service.openDeck(deckPath());
+    // Beide kanten veranderen: de collega werkt het bestand bij in een
+    // spreadsheet, de gebruiker verzet dezelfde grafiek in de app.
+    final dataFile = File(p.join(temp.path, 'data', 'omzet.json'));
+    await dataFile.writeAsString(
+      '{"x":["Jan","Feb"],"series":[{"name":"Omzet","data":[7,8]}]}',
+    );
+    final edited = specOf(opened!).copyWith(
+      series: [
+        const ChartSeries(name: 'Omzet', data: [999, 138]),
+      ],
+    );
+    final written = await service.saveDeckDetailed(
+      opened.copyWith(
+        slides: [
+          opened.slides.single.copyWith(customMarkdown: edited.toBlock()),
+        ],
+      ),
+      deckPath(),
+    );
+
+    // Hun werk staat er nog: eroverheen schrijven zou een verloren update zijn.
+    expect(await dataFile.readAsString(), contains('[7,8]'));
+    // En het blijft niet stil — de botsing komt terug als waarschuwing.
+    expect(written.chartWarnings, ['data/omzet.json']);
+  });
+
+  test('een tweede opslag ziet dezelfde botsing opnieuw', () async {
+    final service = serviceOf();
+    await service.saveDeck(
+      deckWith(chartSlide('data/omzet.json', [120, 138])),
+      deckPath(),
+    );
+    final opened = await service.openDeck(deckPath());
+    final dataFile = File(p.join(temp.path, 'data', 'omzet.json'));
+    await dataFile.writeAsString(
+      '{"x":["Jan","Feb"],"series":[{"name":"Omzet","data":[7,8]}]}',
+    );
+    final edited = specOf(opened!).copyWith(
+      series: [
+        const ChartSeries(name: 'Omzet', data: [999, 138]),
+      ],
+    );
+    final deck = opened.copyWith(
+      slides: [opened.slides.single.copyWith(customMarkdown: edited.toBlock())],
+    );
+
+    await service.saveDeckDetailed(deck, deckPath());
+    // De basislijn mag niet meebewegen: anders zou de tweede opslag de botsing
+    // niet meer zien en het bestand alsnog stil overschrijven.
+    final second = await service.saveDeckDetailed(deck, deckPath());
+    expect(second.chartWarnings, ['data/omzet.json']);
+    expect(await dataFile.readAsString(), contains('[7,8]'));
   });
 
   test(

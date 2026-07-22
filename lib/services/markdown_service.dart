@@ -8,6 +8,7 @@ import '../models/privacy_disposition.dart';
 import '../models/quality_disposition.dart';
 import '../models/document_signature.dart';
 import '../models/finding_spec.dart';
+import '../models/seal_record.dart';
 import '../models/question.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
@@ -16,6 +17,7 @@ import '../models/timeline.dart';
 import '../models/video_source.dart';
 import 'front_matter_merge.dart';
 import 'miauw_codec.dart';
+import '../utils/content_hash.dart';
 import '../utils/deck_markdown_dashes.dart';
 import '../utils/log.dart';
 import '../utils/markdown_paste_cleanup.dart';
@@ -52,6 +54,7 @@ class MarkdownService {
     bool inlineChartData = false,
     bool forExport = false,
     bool includeFormatVersion = true,
+    bool legacySignatureLines = false,
   }) {
     final buf = StringBuffer();
     buf.writeln('---');
@@ -63,6 +66,7 @@ class MarkdownService {
       generated: _frontMatterLines(
         deck,
         includeFormatVersion: includeFormatVersion,
+        legacySignatureLines: legacySignatureLines,
       ),
     )) {
       buf.writeln(line);
@@ -104,6 +108,7 @@ class MarkdownService {
   List<String> _frontMatterLines(
     Deck deck, {
     required bool includeFormatVersion,
+    bool legacySignatureLines = false,
   }) {
     final out = <String>[];
     out.add('marp: true');
@@ -167,32 +172,23 @@ class MarkdownService {
     if (deck.playOnly) {
       out.add('ocideck_play_only: true');
     }
-    // Documentintegriteit (§8 A1). De handtekening is inhoud en valt daarom
-    // ónder het zegel; ze wordt vóór de zegelvelden geschreven zodat de
-    // canonicalisatie (die enkel de zegelvelden weglaat) haar meeneemt.
-    _addSignature(out, deck.signature);
-    if (deck.finalized) {
-      out.add('ocideck_finalized: true');
-    }
-    if (deck.sealHash.isNotEmpty) {
-      out.add('ocideck_seal_hash: ${_yamlScalar(deck.sealHash)}');
-      out.add('ocideck_seal_algo: ${_yamlScalar(deck.sealAlgo)}');
-      out.add('ocideck_seal_at: ${_yamlScalar(deck.sealAt)}');
-    }
-    if (deck.sealTimestampToken.isNotEmpty) {
-      out.add('ocideck_seal_tsr: ${deck.sealTimestampToken}');
-    }
-    // Het stijlprofiel en de MIAUW-dispositie stonden hier tot 0.1.0 als
-    // base64. Zie [kRetiredFrontMatterKeys]: wat ondoorzichtig is of over het
-    // document gaat in plaats van erin, hoort ernaast.
+    // Het stijlprofiel, de MIAUW-dispositie, het zegel en de handtekening
+    // stonden hier tot 0.1.0. Zie [kRetiredFrontMatterKeys]: wat ondoorzichtig
+    // is of over het document gaat in plaats van erin, hoort ernaast. Voor het
+    // zegel is dat bovendien de voorwaarde om de hash over de bestandsbytes te
+    // laten gaan — zie [DocumentIntegrity].
+    if (legacySignatureLines) _addLegacySignature(out, deck.signature);
     return out;
   }
 
-  /// Adds the (optional) visual signature as plain front-matter lines. Each
-  /// non-empty field rides along as its own `ocideck_sig_*` key so the block
-  /// stays human-readable and round-trips. Nothing is written for an absent or
-  /// empty signature, so the default document has no signature noise.
-  void _addSignature(List<String> out, DocumentSignature? sig) {
+  /// De `ocideck_sig_*`-regels zoals de generator ze tot 0.1.0 schreef.
+  ///
+  /// Nog uitsluitend in dienst van [canonicalContentForSeal]: een zegel van vóór
+  /// 0.1.0 dekte de zichtbare handtekening mee, dus zonder deze regels zou elk
+  /// bestaand verzegeld deck zich na de verhuizing als gemanipuleerd melden. Ze
+  /// komen daarom nooit in een bestand terecht — alleen in de tekst waarover een
+  /// oude hash opnieuw wordt uitgerekend.
+  void _addLegacySignature(List<String> out, DocumentSignature? sig) {
     if (sig == null || sig.isEmpty) return;
     void line(String key, String value) {
       if (value.isNotEmpty) out.add('$key: ${_yamlScalar(value)}');
@@ -207,44 +203,38 @@ class MarkdownService {
     line('ocideck_sig_image', sig.imagePath);
   }
 
-  /// The canonical content string the document seal (§8 A1) hashes over: the
-  /// deck's markdown with all integrity metadata (the finalise flag and the
-  /// `ocideck_seal_*` fields) stripped, so the hash never covers itself and
-  /// stays stable across sealing and re-opening. Styling is already excluded by
-  /// [generateDeck], so the seal is purely over content; the visible signature
-  /// is deliberately kept, so tampering with it is detectable.
+  /// De inhoudstekst waarover een zegel van vóór 0.1.0 werd gehasht: de
+  /// markdown van het deck zonder de zegelvelden, zonder de formaatversie en
+  /// zonder de front matter van de gebruiker.
   ///
-  /// De formaatversie (`ocideck_format`) valt er om dezelfde reden buiten: die
-  /// beschrijft de codering van het bestand, niet de inhoud. Zat ze er wél in,
-  /// dan zou een verzegeld deck breken zodra een nieuwere build het opnieuw
-  /// uitschrijft — bijvoorbeeld bij het bouwen van een pakket — terwijl er geen
-  /// letter inhoud veranderd is. Een vals manipulatie-alarm is duurder dan geen
-  /// alarm.
+  /// **Alleen nog om zo'n oud zegel te blijven controleren.** Nieuwe zegels gaan
+  /// over de bytes van de `.md` ([DocumentIntegrity]); dit is precies de vorm
+  /// die dat verving. Ze was nergens vastgelegd behalve in deze methode, dus
+  /// niemand buiten OciDeck kon haar narekenen, en elke wijziging aan de
+  /// serialisator zou "intact" stil in "gemanipuleerd" veranderen. Dat is dan
+  /// ook de reden dat deze code niet meer mag bewegen: hij is geen serialisatie
+  /// maar een archiefstuk.
   ///
-  /// Om diezelfde reden valt de front matter van de *gebruiker* er ook buiten.
-  /// Sinds de generator de kop chirurgisch bijwerkt in plaats van herbouwt,
-  /// blijven vreemde regels — een eigen `style: |`-blok, commentaar, een
-  /// handmatige `header:` — in het bestand staan. Dat is de bedoeling, maar het
-  /// zijn geen regels die OciDeck beheert: zou de hash ze dekken, dan sloeg het
-  /// alarm aan zodra iemand zijn eigen CSS bijstelt. Dat is precies het valse
-  /// alarm hierboven, en het botst met de belofte dat wat u zelf in de kop zet
-  /// van u blijft. Het zegel dekt dus wat OciDeck schrijft; de bewaring van uw
-  /// eigen regels wordt door de rondgangstest bewaakt, niet door de hash.
+  /// De zegelvelden zelf vallen erbuiten zodat de hash niet circulair is; de
+  /// formaatversie omdat die de codering beschrijft en niet de inhoud; en de
+  /// front matter van de gebruiker — een eigen `style: |`-blok, commentaar, een
+  /// handmatige `header:` — omdat een zegel dat op andermans regels afgaat, vals
+  /// alarm slaat zodra iemand zijn eigen CSS bijstelt.
+  ///
+  /// Die laatste uitzondering geldt alleen hier, in de oude vorm. Een hash over
+  /// het bestand kan geen regels overslaan zonder dat het oordeel van OciDeck
+  /// gaat afwijken van dat van de ontvanger, en juist dat verschil was de reden
+  /// om te verhuizen. Wat het valse alarm daar wegneemt is de bevriezing zelf:
+  /// een afgerond deck is alleen-lezen. Zie docs/FILE_FORMAT.md §6.6.
   String canonicalContentForSeal(Deck deck) {
     return generateDeck(
       includeFormatVersion: false,
-      deck.copyWith(
-        finalized: false,
-        sealHash: '',
-        sealAlgo: '',
-        sealAt: '',
-        // The RFC3161 token is added *after* sealing and timestamps the hash, so
-        // it must stay out of the content the hash covers (else it is circular).
-        sealTimestampToken: '',
-        // Leeg, zodat mergeFrontMatter niets te bewaren heeft en de generator
-        // alleen de eigen sleutels uitschrijft.
-        frontMatterSource: const [],
-      ),
+      // De zegelsleutels schrijft de generator niet meer, dus die vallen hier
+      // vanzelf buiten; de handtekening viel er destijds juist ónder en moet er
+      // dus bij. Leeggemaakte [frontMatterSource] zodat mergeFrontMatter niets
+      // te bewaren heeft.
+      legacySignatureLines: true,
+      deck.copyWith(frontMatterSource: const []),
     );
   }
 
@@ -573,7 +563,14 @@ class MarkdownService {
     // `\n---\n` slide separators, collapsing the whole deck into one block.
     final normalized = markdown.replaceAll('\r\n', '\n').replaceAll('\r', '\n');
     try {
-      return _doParse(normalized, filePath: filePath);
+      // De zegelhash gaat over de bytes zoals ze binnenkwamen, niet over de
+      // genormaliseerde tekst: een `.md` met CRLF is een ánder bestand, en het
+      // zegel hoort dat te zeggen in plaats van het weg te poetsen.
+      return _doParse(
+        normalized,
+        filePath: filePath,
+        fileHash: sha512HexOfText(markdown),
+      );
     } catch (e, s) {
       logError('MarkdownService.parseDeck: parse markdown', e, s);
       return null;

@@ -37,6 +37,66 @@ GitConnection? _originConnection(
   return connection;
 }
 
+/// Waarschuwt vóór de commit dat niet alles meereist, en vraagt of het door mag
+/// gaan. Geeft `true` bij "er valt niets te melden" of een bevestiging.
+///
+/// Bewust blokkerend en bewust vooraf. Achteraf melden dat de tekeningen niet
+/// mee zijn is geen melding maar een condoleance: de gebruiker denkt dan al dat
+/// zijn werk in de repo staat. Zelfde vorm als [_confirmWebAssetLoss], dat op
+/// web hetzelfde doet voor een kale `.md`-download.
+Future<bool> _confirmGitOmissions(BuildContext context, Deck deck) async {
+  final missing = gitDeckOmissions(deck);
+  if (missing.isEmpty) return true;
+  final l10n = context.l10n;
+  final lines = <String>[
+    if (missing.videoSlides > 0)
+      '${l10n.d('Video')}: ${missing.videoSlides} ${l10n.d('slides')}',
+    if (missing.audioSlides > 0)
+      '${l10n.d('Audio')}: ${missing.audioSlides} ${l10n.d('slides')}',
+    if (missing.annotatedSlides > 0)
+      '${l10n.d('Tekeningen op slides')}: ${missing.annotatedSlides} ${l10n.d('slides')}',
+    if (missing.noteSlides > 0)
+      '${l10n.d('Gebruikersnotities')}: ${missing.noteSlides} ${l10n.d('slides')}',
+    if (missing.sealed) l10n.d('Zegel en handtekening'),
+  ];
+  final choice = await showDialog<bool>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: Text(ctx.l10n.d('Niet alles gaat mee naar git')),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            ctx.l10n.d(
+              'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:',
+            ),
+          ),
+          const SizedBox(height: 8),
+          for (final line in lines) Text('• $line'),
+          const SizedBox(height: 8),
+          Text(
+            ctx.l10n.d(
+              'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.',
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, false),
+          child: Text(ctx.l10n.d('Annuleren')),
+        ),
+        ElevatedButton(
+          onPressed: () => Navigator.pop(ctx, true),
+          child: Text(ctx.l10n.d('Toch opslaan')),
+        ),
+      ],
+    ),
+  );
+  return choice == true;
+}
+
 Future<void> _saveToGit(
   BuildContext context,
   WidgetRef ref, {
@@ -45,6 +105,9 @@ Future<void> _saveToGit(
   final tab = ref.read(tabsProvider).current;
   final deck = tab?.deckNotifier.currentState.deck;
   if (tab == null || deck == null) return;
+  // Vóór alles: wat blijft er achter? Eerst laten kiezen, dan pas verbinden.
+  if (!await _confirmGitOmissions(context, deck)) return;
+  if (!context.mounted) return;
   // Kwam dit deck uit een repo die nog bestaat, dan gaat het daar zonder vragen
   // naartoe terug. Alleen een deck zonder herkomst laat kiezen — of een
   // expliciet gekozen doel, want dat is wat "Opslaan naar…" betekent.
@@ -83,25 +146,33 @@ Future<void> _saveToGit(
   final l10n = context.l10n;
   try {
     final notifier = ref.read(tabsProvider.notifier);
-    final result = native != null
-        ? await notifier.saveToGitNative(
-            native,
-            config: config,
-            deckDir: deckDir,
-            branch: config.defaultBranch,
-            message: choice.message,
-            connectionId: connection.id,
-          )
-        : await notifier.saveToGit(
-            forge,
-            config: config,
-            deckDir: deckDir,
-            branch: config.defaultBranch,
-            message: choice.message,
-            mirror: ref.read(draftMirrorProvider(connection.id)),
-            outbox: ref.read(outboxProvider(connection.id)),
-            connectionId: connection.id,
-          );
+    final gitConnection = connection;
+    // Pas hier de melding aan: alles hierboven is dialoog en keuze, en "bezig
+    // met opslaan" tonen terwijl de gebruiker nog een commitboodschap typt zou
+    // liegen over wat er gebeurt.
+    final result = await withSaveProgress(
+      ref,
+      SaveTarget.git,
+      () => native != null
+          ? notifier.saveToGitNative(
+              native,
+              config: config,
+              deckDir: deckDir,
+              branch: config.defaultBranch,
+              message: choice.message,
+              connectionId: gitConnection.id,
+            )
+          : notifier.saveToGit(
+              forge,
+              config: config,
+              deckDir: deckDir,
+              branch: config.defaultBranch,
+              message: choice.message,
+              mirror: ref.read(draftMirrorProvider(gitConnection.id)),
+              outbox: ref.read(outboxProvider(gitConnection.id)),
+              connectionId: gitConnection.id,
+            ),
+    );
     if (!context.mounted) return;
     switch (result.status) {
       case GitSaveStatus.committed:
@@ -688,7 +759,7 @@ Future<void> _showAssetUsage(BuildContext context, WidgetRef ref) async {
 
   await showDialog<void>(
     context: context,
-    builder: (_) => _AssetUsageDialog(snapshot: snapshot),
+    builder: (_) => AssetUsageDialog(snapshot: snapshot),
   );
 }
 

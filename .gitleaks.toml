@@ -1,0 +1,41 @@
+# Gitleaks-configuratie voor OciDeck.
+#
+# Zonder uitsluitingen levert een scan hier 74 bevindingen op waarvan er 74
+# verwacht zijn. Een controle die altijd roept, wordt na twee keer genegeerd —
+# dus staat hieronder wat er niét toe doet, en waarom.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Gegenereerde uitvoer en het detectiecorpus van OciWacht"
+
+paths = [
+  # ── Gegenereerde uitvoer ───────────────────────────────────────────────────
+  # Deze mappen staan in .gitignore en bevatten kopieën van de testfixtures
+  # hieronder. Ze zijn nooit gecommit; ze scannen kost een minuut en levert
+  # niets op. (Een scan over de hele boom raakte hierdoor 1,48 GB aan.)
+  '''^\.dart_tool/''',
+  '''^build/''',
+
+  # Lokale werkinstellingen, ook gitignored. Staan buiten de repo-inhoud.
+  '''^\.claude/''',
+
+  # ── Het detectiecorpus van OciWacht ────────────────────────────────────────
+  # Dit is de kern van de afweging. De privacyscanner moet geheimen kúnnen
+  # herkennen, en dat bewijs je alleen met strings die er echt uitzien. Deze
+  # bestanden bestaan dus per definitie om geheim-vormige waarden te bevatten;
+  # ze aanmerken als lek is dubbelop met hun bestaansreden.
+  #
+  # DE PRIJS, expliciet: een écht geheim dat per ongeluk in een van deze
+  # bestanden belandt, wordt door gitleaks niet opgemerkt. Het valt daar ook
+  # visueel niet op, want het staat tussen soortgenoten. Wie hier een fixture
+  # toevoegt, draagt die verantwoordelijkheid zelf.
+  #
+  # Vingerafdrukken per bevinding zouden strenger zijn, maar die bevatten het
+  # regelnummer: één regel erbij en de hele lijst staat scheef, waarna de poort
+  # rood staat zonder reden. Dat is hoe een controle wordt uitgezet.
+  '''^lib/services/privacy/privacy_digital_rules\.dart$''',
+  '''^test/privacy_[a-z_]+_test\.dart$''',
+  '''^test/native_git_mirror_test\.dart$''',
+]

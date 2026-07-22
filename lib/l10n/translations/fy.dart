@@ -718,8 +718,6 @@ const _dutchSourceFy = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Ôfslute & fersegelje',
   'Verzegelen': 'Fersegelje',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Slút dizze presintaasje ôf en berekkenje in SHA-512-segel oer de ynhâld. Dêrnei is it bestân ferskoattele en net mear te bewurkjen; lettere wizigingen wurde sichtber. Dit kin yn de app net ûngedien makke wurde.',
   'Handtekening (optioneel)': 'Hantekening (opsjoneel)',
   'Naam': 'Namme',
   'Rol of functie': 'Rol of funksje',
@@ -741,6 +739,97 @@ const _dutchSourceAddFy = {
       'Dizze tekst befettet haadstikken. Opknippen leveret',
   'dia\'s op.': 'slides op.',
   'Splits op hoofdstukken': 'Splits op haadstikken',
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Yn dit deck stiet AI-tekst dy\'tst noch net neisjoen hast. Eksportearje kin; it bestân meldt dat sels en krijt "-ai-concept" yn de namme.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Konsept: hjir stiet AI-tekst dy\'t noch nimmen neisjoen hat',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Slút dizze presintaasje ôf en lis in SHA-512-segel fêst oer it bewarre bestân. Dêrnei is it ferskoattele en net mear te bewurkjen; eltse lettere wiziging wurdt sichtber. Wa\'t it rapport krijt, rekkenet it segel sels nei mei sha512sum. Dit kin yn de app net ûngedien makke wurde.',
+  'Zegel en handtekening': 'Segel en hantekening',
+  'Zegel nog niet vastgelegd': 'Segel noch net fêstlein',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Der is noch gjin bewarre bestân dêr\'t it segel tsjin neirekkene wurde kin. Bewarje it deck.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Weilitte stiet oan: wat de kontrôle as persoansgegeven oanmerket wurdt swart makke, en álle ôfbyldings, fideo en audio fan dizze dia geane net mei nei it skerm of de eksport. Dyn markdown-bestân hâldt alles.',
+  'Bestand': 'Bestân',
+  'Venster': 'Finster',
+  'Help': 'Help',
+  'Alles selecteren': 'Alles selektearje',
+  'Plakken': 'Plakke',
+  'Opnieuw': 'Opnij',
+  'Eigenschappen': 'Eigenskippen',
+  'Opdrachten…': 'Opdrachten…',
+  'Opslaan…': 'Bewarje…',
+  'Uploaden naar WebDAV…': 'Oplade nei WebDAV…',
+  'Uploaden naar S3…': 'Oplade nei S3…',
+  'Vastleggen in git…': 'Fêstlizze yn git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Dwaande mei bewarjen. Nochris bewarje docht neat oant dit klear is.',
+  'Klaar — privacy niet gecontroleerd': 'Klear — privacy net kontrolearre',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Der is net socht nei persoansgegevens, bysûndere gegevens en geheimen: de privacykontrôle stiet út by Befeiliging.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Presintaasjes dy\'t gewoane Markdown-bestannen bliuwe: lêsber, trochsykber en te iepenjen mei elke editor.',
+  'sjablonen om mee te beginnen, of leeg':
+      'sjabloanen om mei te begjinnen, of leech',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'De foarbylddia\'s fan in sjabloan steane yn it Nederlânsk. Namme en omskriuwing folgje dyn eigen taal; de ynhâld kinst nei it oanmeitsjen oanpasse.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Weilitte stiet oan: fûne gegevens wurde swart makke en álle ôfbyldings, fideo en audio fan dizze dia geane net mei nei it skerm of de eksport. Dyn markdown-bestân hâldt alles.',
+  'Mijn tekst': 'Myn tekst',
+  'Wat zij zien': 'Wat sy sjogge',
+  'Presentatiegegevens': 'Presintaasjegegevens',
+  'Open presentatiegegevens': 'Presintaasjegegevens iepenje',
+  'Motivering van een uitsluiting': 'Motivearring fan in útslutering',
+  'Motivering van een bevestiging': 'Motivearring fan in befêstiging',
+  'Tabel koprij, kolom {kolom}': 'Tabel koprige, kolom {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabel rige {rij}, kolom {kolom}',
+  'Via deze website ophalen?': 'Fia dizze webside ophelje?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'De server fan dizze presintaasje liet de browser it bestân net streekrjocht lêze. OciDeck kin it adres trochjaan oan de webside dêr\'t OciDeck sels weikomt, en dy hellet it dan op. Dy webside sjocht dêrmei it folsleine adres — stiet der in kaai of koade yn de link, dan sjocht dy webside dy ek.',
+  'In de browser kan dit niet worden bewaard':
+      'Yn de browser kin dit net bewarre wurde',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'In browser hat gjin kaaibosk sa\'t in kompjûter dy hat: wat OciDeck hjir bewarje soe, kin elk skript op dizze side meilêze. Brûk de desktopferzje — dêr komt it geheim wol yn de kaaibosk fan it bestjoeringssysteem.',
+  'Licenties van derden': 'Lisinsjes fan tredden',
+  'Alle licentieteksten tonen': 'Alle lisinsjeteksten sjen litte',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck sels stiet ûnder de EUPL-1.2. Dêrneist bondelet it software fan tredden: de Dart- en Flutter-pakketten, twa meilevere plugins, fjouwer lettertypefamyljes, it gesichtsmodel foar de privacykontrôle en it JavaScript dat yn in HTML-eksport meireizget. Elk dêrfan hâldt syn eigen lisinsje.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Dit bestân befettet software fan tredden en soms in lettertype. Hjirûnder steane de folsleine lisinsjeteksten dy\'t dêrby hearre; stjoer se mei as jo dit bestân trochjouwe.',
+  'Sporen op dit apparaat': 'Spoaren op dit apparaat',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Neist jo ynstellingen bewarret OciDeck ek in list mei resinte bestannen en, by in crash, in werstelbestân mei de folsleine ynhâld fan jo presintaasje. Neat dêrfan ferlit dit apparaat, mar it stiet der wol — yn platte tekst, beskerme troch jo akkount op dit bestjoeringssysteem en net mear as dat.',
+  'Recent geopende presentaties': 'Koartlyn iepene presintaasjes',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'De list bewarret it folsleine paad en de klassifikaasje fan elke presintaasje dy\'t iepen west hat — mei-inoar in gegeven oer wêr\'t jo oan wurkje en foar wa.',
+  'Recente lijst wissen': 'Resinte list wiskje',
+  'De recente lijst was al leeg.':
+      'De list mei resinte bestannen wie al leech.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'fermelding(en) út de resinte list wiske.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Crash-werstelbestannen befetsje de folsleine ynhâld fan jo presintaasjes yn platte tekst. Se wurde nei 7 dagen automatysk oprêden, en by in kreas ôfsluten daliks.',
+  'Alles terugzetten': 'Alles weromsette',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Wisket elke ynstelling, de list mei resinte bestannen, de werstelbestannen, de git-wurkkopyen en de wachtwurden yn jo kaaibosk. Jo presintaasjes bliuwe stean: dy binne fan jo, net fan OciDeck.',
+  'Zet alles terug naar de begintoestand':
+      'Set alles werom nei de begjintastân',
+  'Alles terugzetten naar de begintoestand?':
+      'Alles weromsette nei de begjintastân?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Jo ynstellingen, de list mei resinte bestannen, de werstelbestannen, de git-wurkkopyen en de bewarre wachtwurden wurde wiske. Dit kin net ûngedien makke wurde. Jo presintaasjes bliuwe stean.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'wiziging(en) binne noch net nei in git-server stjoerd en besteane allinne op dit apparaat. Dy geane ek fuort.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Alles is weromset nei de begjintastân.',
+  'Terugzetten is niet gelukt.': 'It weromsetten is net slagge.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Der wachtet noch wurk dat net ferstjoerd is',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Dizze git-ferbining hat wizigingen dy\'t noch net nei de server stjoerd binne. Smite jo de ferbining fuort, dan giet ek de wurkkopy op dit apparaat wei — en bestiet dit wurk nearne mear.',
+  'Verbinding behouden': 'Ferbining hâlde',
+  'Toch verwijderen': 'Dochs fuortsmite',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',
@@ -812,6 +901,33 @@ const _dutchSourceAddFy = {
       'somt op wat weilitten is, sûnder de wearden sels. Dit bestân mei meistjoerd wurde mei it rapport.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'befettet de kaaien dêr\'t eltse redigearre wearde mei werom te rekkenjen is. Stjoer dit bestân net mei: dan is de redaksje ûngedien makke. Bewarje it by de boarne.',
+  'slides': 'slides',
+  'Achtergehouden': 'Efterhâlden',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Efterhâlden: strenger klassifisearre as de presintaasje',
+  '1 slide achtergehouden door haar TLP': '1 dia efterhâlden troch har TLP',
+  'slides achtergehouden door hun TLP': 'dia\'s efterhâlden troch harren TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Dizze slides geane net mei by it presintearjen, eksportearjen of yn it pakket. Ferheegje it TLP-nivo fan de presintaasje by Presintaasje-ynfo om se mei te nimmen.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alle dia\'s binne efterhâlden troch harren TLP-klassifikaasje — neat om sjen te litten.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alle dia\'s binne efterhâlden troch harren TLP-klassifikaasje — neat om te eksportearjen.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alle dia\'s binne oerslein of efterhâlden troch harren TLP-klassifikaasje — neat om sjen te litten.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alle dia\'s binne oerslein of efterhâlden troch harren TLP-klassifikaasje — neat om te eksportearjen.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Grafykgetallen binne net bewarre — se steane allinne noch yn dit finster:',
+  'Niet alles gaat mee naar git': 'Net alles giet mei nei git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Dizze ûnderdielen komme net yn de commit en steane aanst net yn de repository:',
+  'Tekeningen op slides': 'Tekeningen op dia\'s',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Se bliuwe yn dit finster stean. Bewarje de presintaasje ek as bestân of as .ocideck-pakket om se te hâlden.',
+  'Toch opslaan': 'Dochs bewarje',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Yn de browser is der gjin crashherstel: slutsto dit ljepblêd, dan is net-bewarre wurk fuort. Bewarje dyn presintaasje sels.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  De lokale CVE-databank (do starte de download sels): OciDeck hellet de bulkgegevens op fia api.github.com en it releasebestân dêr\'t dat adres nei wiist.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

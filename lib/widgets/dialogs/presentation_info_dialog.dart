@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../l10n/app_localizations.dart';
+import '../../state/deck_provider.dart';
 import '../../state/info_safety_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../models/used_tool.dart';
@@ -55,6 +56,51 @@ class PresentationInfo {
     this.playOnly = false,
     this.styleProfileName,
   });
+}
+
+/// Open de presentatiegegevens en verwerk wat de gebruiker invult.
+///
+/// Los van de shell, omdat er twee wegen naartoe lopen: het menu-item
+/// "Eigenschappen" en een privacybevinding op een frontmatter-veld (auteur,
+/// organisatie, trefwoorden). Die tweede weg zit in de kwaliteitsnavigatie en
+/// kan niet bij de private shell-methode; zonder deze functie zou hij de
+/// verwerking moeten overschrijven, en dan lopen twee kopieën uiteen.
+Future<void> editPresentationInfo(BuildContext context, WidgetRef ref) async {
+  final deckNotifier = ref.read(deckProvider.notifier);
+  final deck = ref.read(deckProvider).deck;
+  if (deck == null) return;
+  final info = await PresentationInfoDialog.show(context, deck);
+  if (info == null) return;
+  deckNotifier.updateInfo(
+    title: info.title,
+    author: info.author,
+    organization: info.organization,
+    version: info.version,
+    date: info.date,
+    description: info.description,
+    keywords: info.keywords,
+    language: info.language,
+    standardsUsed: info.standardsUsed,
+    toolsUsed: info.toolsUsed,
+    presentationTargetSeconds: info.presentationTargetSeconds,
+    showRehearsalSummary: info.showRehearsalSummary,
+    playOnly: info.playOnly,
+  );
+  // Een hier gekozen stijlprofiel geldt app-breed (profielen zijn globaal) en
+  // wordt meteen op het open deck toegepast.
+  final profileName = info.styleProfileName;
+  if (profileName == null ||
+      profileName == ref.read(deckProvider).deck?.themeProfile.name) {
+    return;
+  }
+  final profile = ref
+      .read(settingsProvider)
+      .themeProfiles
+      .where((p) => p.name == profileName)
+      .firstOrNull;
+  if (profile == null) return;
+  await ref.read(settingsProvider.notifier).selectThemeProfile(profileName);
+  deckNotifier.updateThemeProfile(profile);
 }
 
 /// Dialog to view and edit a presentation's general metadata (author, version,

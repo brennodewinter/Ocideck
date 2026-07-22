@@ -290,7 +290,12 @@ void main() {
     });
 
     test('probe() vindt echt git (≥ 2.19)', () async {
-      final version = await NativeGitCli().probe();
+      // Met een geïnjecteerde zandbak: de standaardmap komt uit path_provider,
+      // en dat is een platformkanaal dat op de kale Dart-VM van `flutter test`
+      // niet bestaat. In de app is die binding er altijd.
+      final sandbox = Directory.systemTemp.createTempSync('gitcli_probe');
+      addTearDown(() => sandbox.deleteSync(recursive: true));
+      final version = await NativeGitCli(sandboxDir: sandbox).probe();
       expect(version, isNotNull);
       expect(version! >= kMinGitVersion, isTrue);
     });
@@ -347,6 +352,84 @@ void main() {
 
     test('hoofdlettergebruik doet er niet toe', () {
       expect(isPushRejection('! [REJECTED] (NON-FAST-FORWARD)'), isTrue);
+    });
+  });
+
+  // De zandbak is óók `core.hooksPath`. Alles wat daar staat, kan git uitvoeren
+  // bij een clone of een commit. De map lag in de gedeelde tijdelijke ruimte
+  // onder een vaste naam en een bestaande map werd zonder meer overgenomen: op
+  // een gedeelde Linux-machine kon een andere gebruiker daar dus een hook
+  // neerleggen die bij het eerste gebruik afging.
+  group('de zandbak als hooks-map', () {
+    late Directory sandbox;
+    late _Recorder rec;
+
+    setUp(() {
+      sandbox = Directory.systemTemp.createTempSync('gitcli_hooks');
+      rec = _Recorder();
+    });
+    tearDown(() {
+      if (sandbox.existsSync()) sandbox.deleteSync(recursive: true);
+    });
+
+    test('een neergelegde hook is weg vóórdat git start', () async {
+      // Precies de aanval: iemand was er eerder dan wij.
+      final hook = File('${sandbox.path}/post-checkout')
+        ..writeAsStringSync('#!/bin/sh\ntouch /tmp/bezit\n');
+      expect(hook.existsSync(), isTrue);
+
+      final git = NativeGitCli(runner: rec.run, sandboxDir: sandbox);
+      await git.run(['status'], workingDirectory: sandbox.path);
+
+      expect(
+        hook.existsSync(),
+        isFalse,
+        reason: 'de hook stond er nog toen git werd gestart',
+      );
+      expect(rec.calls.single.args[1], 'core.hooksPath=${sandbox.path}');
+    });
+
+    test('ook een hele map met hooks wordt opgeruimd', () async {
+      Directory('${sandbox.path}/nested').createSync();
+      File(
+        '${sandbox.path}/nested/pre-commit',
+      ).writeAsStringSync('#!/bin/sh\n');
+
+      final git = NativeGitCli(runner: rec.run, sandboxDir: sandbox);
+      await git.run(['status'], workingDirectory: sandbox.path);
+
+      expect(sandbox.listSync(), isEmpty);
+    });
+
+    test('een zandbak die een koppeling is wordt geweigerd', () async {
+      // Hier valt niets veilig aan op te ruimen: opruimen zou het doelwit van
+      // de koppeling wissen. Dus niet starten.
+      final target = Directory.systemTemp.createTempSync('gitcli_target');
+      final linkPath = '${sandbox.path}/link';
+      Link(linkPath).createSync(target.path);
+      addTearDown(() => target.deleteSync(recursive: true));
+
+      final git = NativeGitCli(
+        runner: rec.run,
+        sandboxDir: Directory(linkPath),
+      );
+      await expectLater(
+        git.run(['status'], workingDirectory: sandbox.path),
+        throwsA(isA<GitCliException>()),
+      );
+      expect(rec.calls, isEmpty, reason: 'git mag niet gestart zijn');
+    });
+
+    test('HOME wijst naar diezelfde opgeschoonde map', () async {
+      File(
+        '${sandbox.path}/.gitconfig',
+      ).writeAsStringSync('[core]\n\tpager = /bin/sh -c "touch /tmp/bezit"\n');
+
+      final git = NativeGitCli(runner: rec.run, sandboxDir: sandbox);
+      await git.run(['status'], workingDirectory: sandbox.path);
+
+      expect(rec.calls.single.env?['HOME'], sandbox.path);
+      expect(File('${sandbox.path}/.gitconfig').existsSync(), isFalse);
     });
   });
 }

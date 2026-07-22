@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/mermaid_render_service.dart';
+import 'package:ocideck/widgets/mermaid_render_host.dart';
 
 /// Covers the parts of MermaidRenderService that DON'T need a live WebView / JS
 /// engine: the test-mode guards, the host-request notifier, the empty-source

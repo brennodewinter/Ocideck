@@ -50,7 +50,12 @@ class TrashService {
     if (ownFolder) return [dir];
 
     final targets = [mdPath];
-    for (final ext in const ['.ink.json', '.user-notes.json', '.miauw.json']) {
+    for (final ext in const [
+      '.ink.json',
+      '.user-notes.json',
+      '.miauw.json',
+      '.seal.json',
+    ]) {
       final sidecar = p.setExtension(mdPath, ext);
       if (File(sidecar).existsSync()) targets.add(sidecar);
     }

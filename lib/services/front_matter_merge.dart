@@ -76,18 +76,6 @@ const Set<String> kOwnedFrontMatterKeys = {
   'ocideck_target_seconds',
   'ocideck_show_rehearsal_summary',
   'ocideck_play_only',
-  'ocideck_sig_name',
-  'ocideck_sig_role',
-  'ocideck_sig_cert',
-  'ocideck_sig_date',
-  'ocideck_sig_statement',
-  'ocideck_sig_typed',
-  'ocideck_sig_image',
-  'ocideck_finalized',
-  'ocideck_seal_hash',
-  'ocideck_seal_algo',
-  'ocideck_seal_at',
-  'ocideck_seal_tsr',
 };
 
 /// Sleutels die OciDeck ooit schreef en nu niet meer, maar nog wél bezit.
@@ -98,14 +86,32 @@ const Set<String> kOwnedFrontMatterKeys = {
 /// dagen in het bestand blijven staan. Hier staan betekent: bij het opslaan
 /// gaat de regel eruit, en komt hij niet terug.
 ///
-/// Alle drie droegen base64. `ocideck_style_profile` reisde alleen mee in de
-/// vluchtige beamer-payload en gaat nu naast de markdown mee in dezelfde
-/// boodschap; de twee MIAUW-sleutels stonden wél op schijf en verhuizen naar de
-/// `.miauw.json`-sidecar. Zie docs/FILE_FORMAT.md.
+/// `ocideck_style_profile` reisde alleen mee in de vluchtige beamer-payload en
+/// gaat nu naast de markdown mee in dezelfde boodschap; de twee MIAUW-sleutels
+/// stonden wél op schijf en verhuizen naar de `.miauw.json`-sidecar.
+///
+/// Het zegel- en het handtekeningblok volgden in dezelfde beweging naar
+/// `.seal.json`: ze gaan over het document in plaats van dat ze het document
+/// zijn, twee van hun waarden waren ondoorzichtige base64 (`ocideck_seal_tsr`
+/// is een DER-token, `ocideck_sig_image` een PNG), en zolang het zegel ín het
+/// bestand stond kon de hash niet over het bestand gaan. Zie
+/// docs/FILE_FORMAT.md §3.6 en §6.6.
 const Set<String> kRetiredFrontMatterKeys = {
   'ocideck_style_profile',
   'ocideck_miauw_waivers',
   'ocideck_miauw_confirmations',
+  'ocideck_finalized',
+  'ocideck_seal_hash',
+  'ocideck_seal_algo',
+  'ocideck_seal_at',
+  'ocideck_seal_tsr',
+  'ocideck_sig_name',
+  'ocideck_sig_role',
+  'ocideck_sig_cert',
+  'ocideck_sig_date',
+  'ocideck_sig_statement',
+  'ocideck_sig_typed',
+  'ocideck_sig_image',
 };
 
 /// Of [key] van OciDeck is: geschreven óf opgeruimd. Dit is de toets die

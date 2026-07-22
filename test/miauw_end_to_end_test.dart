@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/seal_record.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/audit_dossier.dart';
 import 'package:ocideck/services/document_integrity.dart';
@@ -49,25 +50,33 @@ void main() {
 
     // 3 · Seal the finalised report.
     final integrity = DocumentIntegrity(md);
-    final sealed = integrity.seal(deck, at: DateTime.utc(2026, 7, 12, 10));
+    // De hash ontstaat bij het opslaan: hij gaat over de bytes van de `.md`,
+    // en die bestaan pas als het bestand geschreven is.
+    final afgerond = integrity.seal(deck, at: DateTime.utc(2026, 7, 12, 10));
+    final sealed = DocumentIntegrity.recordWrittenBytes(
+      afgerond,
+      md.generateDeck(afgerond),
+    );
     expect(sealed.finalized, isTrue);
     expect(sealed.sealHash, isNotEmpty);
     expect(sealed.sealAlgo, DocumentIntegrity.algorithm);
 
     // 4 · Verify integrity, including after a Markdown round-trip.
     expect(integrity.verify(sealed), IntegrityStatus.intact);
-    final reparsed = md.parseDeck(md.generateDeck(sealed))!;
+    final reparsed = SealRecord.of(
+      sealed,
+    ).applyTo(md.parseDeck(md.generateDeck(sealed))!);
     expect(integrity.verify(reparsed), IntegrityStatus.intact);
     expect(reparsed.slides.any((s) => s.type == SlideType.finding), isTrue);
 
-    // 5 · A post-seal edit must be detectable.
-    final tampered = sealed.copyWith(
-      slides: [
-        ...sealed.slides,
-        Slide.create(SlideType.bullets).copyWith(title: 'Sneaky'),
-      ],
+    // 5 · Een wijziging ná het verzegelen moet zichtbaar zijn. Die wijziging
+    // vindt buiten OciDeck plaats — in de app is een verzegeld deck
+    // alleen-lezen — dus de toets loopt over het bestand, niet over het
+    // deck-object in het geheugen.
+    final geknoeid = SealRecord.of(sealed).applyTo(
+      md.parseDeck(md.generateDeck(sealed).replaceFirst('# ', '# Sneaky '))!,
     );
-    expect(integrity.verify(tampered), IntegrityStatus.changed);
+    expect(integrity.verify(geknoeid), IntegrityStatus.changed);
 
     // 6 · Export the encrypted audit dossier; the seal facts travel inside it.
     final file = FileService(md, ImageService(), () => const ThemeProfile());

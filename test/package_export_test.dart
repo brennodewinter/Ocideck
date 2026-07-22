@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 
@@ -244,6 +245,109 @@ void main() {
 
       final mdPath = await file.importPackageBytes(bytes, out.path);
       expect(mdPath, isNotNull);
+    });
+
+    // WinZip-AES draagt per lid een HMAC. Klopt die niet, dan is er ná het
+    // versleutelen aan het pakket gezeten. Dat lid overslaan en de rest
+    // doorlaten leverde stil een pakket op waar precies het gewijzigde
+    // bestand uit verdwenen was — in een bewijsdossier de verkeerde kant op.
+    group('gemanipuleerd pakket', () {
+      /// Een versleuteld pakket met twee leden, zodat het wegvallen van één
+      /// lid ook werkelijk zichtbaar is: bij één lid is "alles weg" en
+      /// "stil ingekort" hetzelfde resultaat.
+      List<int> twoMemberPackage() {
+        final archive = Archive();
+        final md = utf8.encode('# Geheim\n\nregel\n');
+        final asset = List<int>.generate(400, (i) => (i * 7) % 251);
+        archive
+          ..addFile(ArchiveFile('deck.md', md.length, md))
+          ..addFile(ArchiveFile('images/a.bin', asset.length, asset));
+        return ZipEncoder(password: 'pw').encode(archive);
+      }
+
+      /// Eén byte omklappen in de versleutelde inhoud van het éérste lid.
+      ///
+      /// De plek wordt uit de local file header gelezen in plaats van geteld:
+      /// na de vaste 30 bytes volgen de bestandsnaam (lengte op 26) en het
+      /// extra veld (lengte op 28), en daarna begint de WinZip-AES-lading met
+      /// 16 bytes salt plus 2 bytes wachtwoordverificatie. Twintig bytes verder
+      /// zit dus cijfertekst — een wijziging die het wachtwoord ongemoeid laat
+      /// en precies de HMAC laat vallen.
+      Uint8List tamperFirstMember(List<int> bytes) {
+        final nameLength = bytes[26] | (bytes[27] << 8);
+        final extraLength = bytes[28] | (bytes[29] << 8);
+        final payload = 30 + nameLength + extraLength;
+        return Uint8List.fromList(bytes)..[payload + 20] ^= 0xFF;
+      }
+
+      test('een gewijzigd lid laat het hele pakket vallen', () {
+        final bytes = twoMemberPackage();
+        expect(
+          file.decodePackageEntries(bytes, password: 'pw')?.map((e) => e.name),
+          containsAll(<String>['deck.md', 'images/a.bin']),
+          reason: 'het ongeschonden pakket moet beide leden opleveren',
+        );
+
+        final entries = file.decodePackageEntries(
+          tamperFirstMember(bytes),
+          password: 'pw',
+        );
+        // De fail-open die hier zat gaf `[images/a.bin]` terug: het pakket
+        // kwam er compleet uitziend uit, mét het gewijzigde lid eruit gevallen.
+        expect(
+          entries,
+          isNull,
+          reason: entries == null
+              ? ''
+              : 'het pakket kwam er stil ingekort uit: '
+                    '${entries.map((e) => e.name).toList()}',
+        );
+      });
+
+      test('de import als geheel weigert een gemanipuleerd pakket', () async {
+        final tampered = tamperFirstMember(twoMemberPackage());
+        final out = Directory(p.join(tmp.path, 'out_tampered'))..createSync();
+
+        final outcome = await file.importPackageBytesDetailed(
+          tampered,
+          out.path,
+          onPassword: ({required bool retry}) async => 'pw',
+        );
+        expect(outcome.mdPath, isNull);
+      });
+
+      test('een aangetast pakket heet aangetast, en de vraag om het wachtwoord '
+          'wordt niet eindeloos herhaald', () async {
+        // Hier zat een echte vastloper. `canDecodePackage` faalt zowel bij een
+        // fout wachtwoord als bij een aangetast pakket — WinZip-AES controleert
+        // een MAC — en de lus vroeg daarom eindeloos om een nieuwe zin. Een
+        // aanroeper die (zoals hierboven) altijd dezelfde zin teruggeeft, liet
+        // de poort meer dan twintig minuten op één kern draaien.
+        final tampered = tamperFirstMember(twoMemberPackage());
+        final out = Directory(p.join(tmp.path, 'out_tampered_reason'))
+          ..createSync();
+
+        var gevraagd = 0;
+        final outcome = await file.importPackageBytesDetailed(
+          tampered,
+          out.path,
+          onPassword: ({required bool retry}) async {
+            gevraagd++;
+            return 'pw';
+          },
+        );
+
+        expect(
+          outcome.failure,
+          ImportFailure.corrupt,
+          reason: 'niet "verkeerd wachtwoord": de zin klopte, het pakket niet',
+        );
+        expect(
+          gevraagd,
+          lessThanOrEqualTo(2),
+          reason: 'dezelfde zin tweemaal aanbieden kan niet alsnog lukken',
+        );
+      });
     });
   });
 

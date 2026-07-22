@@ -172,9 +172,9 @@ class _ChartPreviewState extends State<_ChartPreview>
 
   Color _seriesColor(ChartSeries series, int i) {
     if (series.color == null && i == 0) {
-      return _hexColor(profile.accentColor);
+      return AppTheme.parseHexColor(profile.accentColor);
     }
-    return _hexColor(chartSeriesColor(series, i));
+    return AppTheme.parseHexColor(chartSeriesColor(series, i));
   }
 
   /// Text alternative for the chart (WCAG 1.1.1): chart type, title and the
@@ -223,7 +223,7 @@ class _ChartPreviewState extends State<_ChartPreview>
     final horizontalPad = w * 0.05;
     final verticalPad = w * 0.018;
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
-    final textColor = _hexColor(profile.textColor);
+    final textColor = AppTheme.parseHexColor(profile.textColor);
 
     return Semantics(
       image: true,
@@ -252,7 +252,7 @@ class _ChartPreviewState extends State<_ChartPreview>
     Color textColor,
   ) {
     return Container(
-      color: _hexColor(profile.slideBackgroundColor),
+      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
       child: Padding(
         padding: EdgeInsets.fromLTRB(
           horizontalPad,
@@ -276,10 +276,10 @@ class _ChartPreviewState extends State<_ChartPreview>
                     fontSize: w * 0.038,
                     height: 1.2,
                     fontWeight: FontWeight.bold,
-                    color: _hexColor(profile.textColor),
+                    color: AppTheme.parseHexColor(profile.textColor),
                   ),
                 ),
-                linkColor: _hexColor(profile.accentColor),
+                linkColor: AppTheme.parseHexColor(profile.accentColor),
               ),
               SizedBox(height: w * 0.012),
             ],
@@ -437,14 +437,14 @@ class _ChartPreviewState extends State<_ChartPreview>
                       padding: EdgeInsets.symmetric(horizontal: w * 0.008),
                       decoration: BoxDecoration(
                         color: _hovered == i
-                            ? _hexColor(
+                            ? AppTheme.parseHexColor(
                                 chartRowColor(spec, i),
                               ).withValues(alpha: 0.18)
                             : textColor.withValues(alpha: 0.045),
                         borderRadius: BorderRadius.circular(w),
                         border: Border.all(
                           color: _hovered == i
-                              ? _hexColor(chartRowColor(spec, i))
+                              ? AppTheme.parseHexColor(chartRowColor(spec, i))
                               : Colors.transparent,
                           width: w * 0.0015,
                         ),
@@ -455,7 +455,9 @@ class _ChartPreviewState extends State<_ChartPreview>
                             width: w * 0.012,
                             height: w * 0.012,
                             decoration: BoxDecoration(
-                              color: _hexColor(chartRowColor(spec, i)),
+                              color: AppTheme.parseHexColor(
+                                chartRowColor(spec, i),
+                              ),
                               shape: BoxShape.circle,
                             ),
                           ),

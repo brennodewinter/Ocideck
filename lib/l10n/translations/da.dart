@@ -1758,8 +1758,6 @@ const _dutchSourceDa = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Færdiggør & forsegl',
   'Verzegelen': 'Forsegl',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Færdiggør denne præsentation, og beregn et SHA-512-segl over indholdet. Derefter er filen låst og kan ikke længere redigeres; senere ændringer bliver synlige. Dette kan ikke fortrydes i appen.',
   'Handtekening (optioneel)': 'Underskrift (valgfri)',
   'Naam': 'Navn',
   'Rol of functie': 'Rolle eller funktion',
@@ -1782,6 +1780,97 @@ const _dutchSourceAddDa = <String, String>{
       'Denne tekst indeholder kapitler. Opdelingen giver',
   'dia\'s op.': 'slides.',
   'Splits op hoofdstukken': 'Opdel efter kapitler',
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Dette deck indeholder AI-tekst, du endnu ikke har gennemgået. Du kan godt eksportere; filen oplyser selv om det og får "-ai-concept" i navnet.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Udkast: indeholder AI-tekst, som ingen har gennemgået endnu',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Færdiggør denne præsentation, og fastlæg et SHA-512-segl over den gemte fil. Derefter er den låst og kan ikke længere redigeres; enhver senere ændring bliver synlig. Den, der modtager rapporten, efterregner selv seglet med sha512sum. Dette kan ikke fortrydes i appen.',
+  'Zegel en handtekening': 'Segl og underskrift',
+  'Zegel nog niet vastgelegd': 'Segl endnu ikke fastlagt',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Der er endnu ingen gemt fil at kontrollere seglet imod. Gem decket.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Udeladelse er slået til: det, som tjekket anser for en personoplysning, sværtes, og alle billeder, video og lyd på dette slide kommer ikke med på skærmen eller i eksporten. Din markdown-fil beholder alt.',
+  'Bestand': 'Arkiv',
+  'Venster': 'Vindue',
+  'Help': 'Hjælp',
+  'Alles selecteren': 'Vælg alle',
+  'Plakken': 'Sæt ind',
+  'Opnieuw': 'Gentag',
+  'Eigenschappen': 'Egenskaber',
+  'Opdrachten…': 'Kommandoer…',
+  'Opslaan…': 'Gemmer…',
+  'Uploaden naar WebDAV…': 'Uploader til WebDAV…',
+  'Uploaden naar S3…': 'Uploader til S3…',
+  'Vastleggen in git…': 'Committer til git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Gemmer. At gemme igen gør ingenting, før dette er færdigt.',
+  'Klaar — privacy niet gecontroleerd': 'Klar — privatliv ikke tjekket',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Der er ikke søgt efter personoplysninger, særlige kategorier af oplysninger og hemmeligheder: privatlivstjekket er slået fra under Sikkerhed.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Præsentationer, der forbliver almindelige Markdown-filer: læsbare, søgbare og kan åbnes med enhver editor.',
+  'sjablonen om mee te beginnen, of leeg':
+      'skabeloner at starte med, eller tom',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'En skabelons eksempeldias er på nederlandsk. Navn og beskrivelse følger dit eget sprog; indholdet tilpasser du efter oprettelsen.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Udeladelse er slået til: fundne data sværtes, og alle billeder, video og lyd på dette slide kommer ikke med på skærmen eller i eksporten. Din markdown-fil beholder alt.',
+  'Mijn tekst': 'Min tekst',
+  'Wat zij zien': 'Hvad de ser',
+  'Presentatiegegevens': 'Præsentationsoplysninger',
+  'Open presentatiegegevens': 'Åbn præsentationsoplysninger',
+  'Motivering van een uitsluiting': 'Begrundelse for en undtagelse',
+  'Motivering van een bevestiging': 'Begrundelse for en bekræftelse',
+  'Tabel koprij, kolom {kolom}': 'Tabel overskriftsrække, kolonne {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabel række {rij}, kolonne {kolom}',
+  'Via deze website ophalen?': 'Hent via dette websted?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Serveren for denne præsentation lod ikke browseren læse filen direkte. OciDeck kan give adressen videre til det websted, OciDeck selv kommer fra, og så henter det filen. Dermed ser det websted hele adressen — står der en nøgle eller en kode i linket, ser webstedet også den.',
+  'In de browser kan dit niet worden bewaard':
+      'Dette kan ikke gemmes i browseren',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'En browser har ingen nøglering, sådan som en computer har: det, OciDeck ville gemme her, kan ethvert script på denne side læse med. Brug desktopversionen — dér havner hemmeligheden faktisk i operativsystemets nøglering.',
+  'Licenties van derden': 'Tredjepartslicenser',
+  'Alle licentieteksten tonen': 'Vis alle licenstekster',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck selv er udgivet under EUPL-1.2. Derudover samler det tredjepartssoftware: Dart- og Flutter-pakkerne, to medfølgende plugins, fire skriftfamilier, ansigtsmodellen til privatlivskontrollen og den JavaScript, der følger med en HTML-eksport. Hver af dem beholder sin egen licens.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Denne fil indeholder tredjepartssoftware og undertiden en skrifttype. Nedenfor står de fulde licenstekster, der hører til; send dem med, når du videregiver filen.',
+  'Sporen op dit apparaat': 'Spor på denne enhed',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Ud over dine indstillinger gemmer OciDeck også en liste over seneste filer og, ved et nedbrud, en gendannelsesfil med hele indholdet af din præsentation. Intet af det forlader denne enhed, men det ligger her — i klartekst, beskyttet af din konto på dette styresystem og ikke mere end det.',
+  'Recent geopende presentaties': 'Senest åbnede præsentationer',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Listen gemmer den fulde sti og klassifikationen for hvert deck, der har været åbent — tilsammen en oplysning om, hvad du arbejder på, og for hvem.',
+  'Recente lijst wissen': 'Slet listen over seneste filer',
+  'De recente lijst was al leeg.':
+      'Listen over seneste filer var allerede tom.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'post(er) slettet fra listen over seneste filer.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Gendannelsesfiler indeholder hele indholdet af dine præsentationer i klartekst. De ryddes automatisk op efter 7 dage, og med det samme ved en pæn afslutning.',
+  'Alles terugzetten': 'Nulstil alt',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Sletter alle indstillinger, listen over seneste filer, gendannelsesfilerne, git-arbejdskopierne og adgangskoderne i din nøglering. Dine præsentationer bliver stående: de er dine, ikke OciDecks.',
+  'Zet alles terug naar de begintoestand':
+      'Sæt alt tilbage til udgangstilstanden',
+  'Alles terugzetten naar de begintoestand?':
+      'Sæt alt tilbage til udgangstilstanden?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Dine indstillinger, listen over seneste filer, gendannelsesfilerne, git-arbejdskopierne og de gemte adgangskoder bliver slettet. Det kan ikke fortrydes. Dine præsentationer bliver stående.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'ændring(er) er endnu ikke sendt til en git-server og findes kun på denne enhed. De forsvinder også.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Alt er sat tilbage til udgangstilstanden.',
+  'Terugzetten is niet gelukt.': 'Nulstillingen mislykkedes.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Der venter arbejde, som ikke er sendt',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Denne git-forbindelse har ændringer, som endnu ikke er sendt til serveren. Fjerner du forbindelsen, forsvinder arbejdskopien på denne enhed også — og så findes arbejdet ingen steder.',
+  'Verbinding behouden': 'Behold forbindelsen',
+  'Toch verwijderen': 'Fjern alligevel',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',
@@ -1840,6 +1929,33 @@ const _dutchSourceAddDa = <String, String>{
       'opregner, hvad der er udeladt, uden selve værdierne. Denne fil må følge med rapporten.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'indeholder de nøgler, som enhver bortredigeret værdi kan regnes tilbage med. Send ikke denne fil med: så er redigeringen ophævet. Opbevar den ved kilden.',
+  'slides': 'slides',
+  'Achtergehouden': 'Tilbageholdt',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Tilbageholdt: klassificeret strengere end præsentationen',
+  '1 slide achtergehouden door haar TLP': '1 slide tilbageholdt af sit TLP',
+  'slides achtergehouden door hun TLP': 'slides tilbageholdt af deres TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Disse slides kommer ikke med ved præsentation, eksport eller i pakken. Hæv præsentationens TLP-niveau under Præsentationsinfo for at få dem med.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alle slides er tilbageholdt af deres TLP-klassifikation, så der er intet at vise.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alle slides er tilbageholdt af deres TLP-klassifikation, så der er intet at eksportere.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alle slides er sprunget over eller tilbageholdt af deres TLP-klassifikation, så der er intet at vise.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alle slides er sprunget over eller tilbageholdt af deres TLP-klassifikation, så der er intet at eksportere.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Diagramtallene blev ikke gemt — de findes kun i dette vindue:',
+  'Niet alles gaat mee naar git': 'Ikke alt kommer med til git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Disse dele kommer ikke med i commit\'en og står bagefter ikke i repositoryet:',
+  'Tekeningen op slides': 'Tegninger på slides',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'De bliver i dette vindue. Gem også præsentationen som fil eller som .ocideck-pakke for at beholde dem.',
+  'Toch opslaan': 'Gem alligevel',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'I browseren findes der ingen nedbrudsgendannelse: lukker du denne fane, er ikke-gemt arbejde væk. Gem selv din præsentation.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Den lokale CVE-database (du starter selv downloaden): OciDeck henter massedataene via api.github.com og den udgivelsesfil, som den adresse peger på.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

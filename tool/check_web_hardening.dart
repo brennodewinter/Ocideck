@@ -72,6 +72,16 @@ void main() {
         _eq(directives['object-src'], ["'none'"]),
         "CSP should set object-src 'none'.",
       );
+      // form-action does NOT fall back to default-src, so leaving it out is not
+      // "covered by 'self'" — it leaves form submission unrestricted. The app
+      // paints into a canvas and submits no HTML forms, so 'none' costs nothing
+      // and closes the destination an injected <form> would otherwise reach.
+      // Found by the ZAP baseline (rule 10055), which is exactly the class of
+      // gap a directive-by-directive read of the policy tends to miss.
+      require(
+        _eq(directives['form-action'], ["'none'"]),
+        "CSP must set form-action 'none' (it does not fall back to default-src).",
+      );
       // default-src is the fallback for every unlisted fetch directive; keep it
       // first-party so a future directive removal can't silently open a hole.
       require(
@@ -99,6 +109,14 @@ void main() {
         );
       }
     }
+    // Referrer-Policy is the one companion header that a <meta> tag really does
+    // enforce, so it ships in the bundle rather than depending on the host. It
+    // pairs with connect-src's https:: a URL-import would otherwise hand the
+    // deck's own URL to the host being fetched.
+    require(
+      _extractReferrerPolicy(html) == 'no-referrer',
+      'index.html must carry <meta name="referrer" content="no-referrer">.',
+    );
   }
 
   // ── CanvasKit is self-hosted, not pulled from the gstatic CDN ───────────────
@@ -186,6 +204,15 @@ bool _eq(List<String>? tokens, List<String> expected) {
 String? _extractCsp(String html) {
   final match = RegExp(
     r'<meta\s+http-equiv="Content-Security-Policy"\s+content="([^"]*)"',
+    caseSensitive: false,
+  ).firstMatch(html);
+  return match?.group(1);
+}
+
+/// Returns the `content="..."` of the referrer meta tag, or null when absent.
+String? _extractReferrerPolicy(String html) {
+  final match = RegExp(
+    r'<meta\s+name="referrer"\s+content="([^"]*)"',
     caseSensitive: false,
   ).firstMatch(html);
   return match?.group(1);

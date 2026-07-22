@@ -1,5 +1,7 @@
 # OciDeck — Glossary
 
+> **Status:** reference, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 OciDeck-specific terms and the acronyms that recur in the codebase and docs. For
 where things live in `lib/`, see [SOURCE_MAP.md](SOURCE_MAP.md).
 
@@ -11,11 +13,17 @@ no application backend; all processing is local.
 **Deck** — a complete presentation: metadata, an ordered list of slides, a theme
 profile, and a TLP classification. Immutable model (`lib/models/deck.dart`).
 
-**Slide** — one immutable, strongly-typed slide. Its `SlideType` (21 values)
+**Slide** — one immutable, strongly-typed slide. Its `SlideType` (24 values)
 selects the layout: `title`, `section`, `bullets`, `twoBullets`, `bulletsImage`,
 `twoImages`, `image`, `video`, `quote`, `table`, `freeMarkdown`, `code`, `chart`,
-`cockpit`, `question`, `timeline`, and the pentest layouts (`finding`,
-`findingsSummary`, `checklist`, `scopeMatrix`, `signOff`).
+`cockpit`, `question`, `timeline`, `scorecard`, and the seven
+information-security layouts that stay hidden until that module is enabled
+(`assets`, `discoveries`, `finding`, `findingsSummary`, `checklist`,
+`scopeMatrix`, `signOff`). *(Corrected 2026-07-22: this said 21 and omitted
+`scorecard`, `assets` and `discoveries`. The same count in
+[API_DOCUMENTATION.md](API_DOCUMENTATION.md) was held against the enum by
+`test/docs_enum_counts_test.dart` and stayed right; this copy was not, and
+drifted. It is now covered by that test too.)*
 
 **Marp** — the open Markdown-for-presentations format OciDeck reads and writes.
 Decks stay close to plain Marp Markdown, so they interoperate with other Marp
@@ -48,14 +56,24 @@ applies the same SSRF rules as NetGuard. See [HOSTING.md](HOSTING.md).
 ## Privacy & classification
 
 **OciWacht** — OciDeck's built-in privacy scanner. It detects personal data
-(email, phone, IBAN, BSN and national IDs for 13 EU member states plus two UK
-ones, addresses, names, secrets) and
+(email, phone, IBAN, BSN and national identifiers covering all 27 EU member
+states — some through a shared rule, as Czechia and Slovakia and as Estonia and
+Lithuania each share a number format — plus Iceland, Liechtenstein, Norway,
+Switzerland and two UK numbers, addresses, names, secrets) and
 can flag or redact it. Name detection is deliberately not NER (see
-[design/OCIWACHT.md](design/OCIWACHT.md)).
+[design/OCIWACHT.md](design/OCIWACHT.md)). *Corrected 2026-07-22: this said 13
+member states, which was the state before the later European batches landed;
+[PRIVACY.md](PRIVACY.md) carries the same correction.*
 
 **TLP (Traffic Light Protocol)** — the sharing-classification scheme: `CLEAR`,
 `GREEN`, `AMBER`, `AMBER+STRICT`, `RED` (plus an unset `none`). OciDeck can
 enforce a release ceiling on export.
+
+**Withheld (achtergehouden)** — a slide whose own TLP level is stricter than the
+deck's, so it does not reach the audience when you present, export or package
+(`slideWithheldByTlp`). Not the same as **skipped**: skipping is a choice the
+author made on that slide, withholding follows from the classification. The
+editor marks the two differently for exactly that reason.
 
 **Disposition** — a per-slide privacy decision for a scanner finding
 (`warn`, `accept`, `shield`, `redact`).
@@ -77,8 +95,11 @@ travel with the report, and `<name>-redaction-keys.json`, which holds the salts
 and stays with the source — the separation between them is what keeps a
 commitment from being reversible. See FILE_FORMAT.md §12.
 
-**Document seal** — a SHA-512 hash over a deck's canonical content, stored in the
-front matter, giving tamper-evidence for finalised documents.
+**Document seal** — a SHA-512 hash over the **bytes of a deck's `.md` file**,
+recorded beside it in `<name>.seal.json` together with the visible signature.
+Gives tamper-evidence for finalised documents, and — because the seal sits
+outside the file it covers — lets a recipient recompute it with `sha512sum`
+alone. See FILE_FORMAT.md §6.6.
 
 ## Security mechanisms
 

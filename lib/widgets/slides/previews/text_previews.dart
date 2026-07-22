@@ -21,9 +21,9 @@ class _TitlePreview extends StatelessWidget {
   /// left-aligned. Font sizes are proportional to the slide width, so the same
   /// column works whether it floats over an image or sits in a solid band.
   Widget _lockupColumn(BuildContext context) {
-    final link = _hexColor(profile.accentColor);
-    final accent = _hexColor(profile.accentColor);
-    final titleColor = _hexColor(
+    final link = AppTheme.parseHexColor(profile.accentColor);
+    final accent = AppTheme.parseHexColor(profile.accentColor);
+    final titleColor = AppTheme.parseHexColor(
       slide.titleTextColorOverride.isNotEmpty
           ? slide.titleTextColorOverride
           : profile.titleTextColor,
@@ -101,7 +101,7 @@ class _TitlePreview extends StatelessWidget {
     final pad = w * 0.08;
     return Container(
       width: double.infinity,
-      color: _hexColor(profile.titleBackgroundColor),
+      color: AppTheme.parseHexColor(profile.titleBackgroundColor),
       padding: EdgeInsets.fromLTRB(pad, pad * 0.7, pad, pad * 0.7),
       child: _lockupColumn(context),
     );
@@ -114,7 +114,7 @@ class _TitlePreview extends StatelessWidget {
   /// flat-wash value `title_contrast.dart` assumes, so its contrast check
   /// remains a valid (slightly conservative) predictor of what is rendered.
   Widget _scrim() {
-    final scrim = _hexColor(profile.titleBackgroundColor);
+    final scrim = AppTheme.parseHexColor(profile.titleBackgroundColor);
     return DecoratedBox(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -137,7 +137,7 @@ class _TitlePreview extends StatelessWidget {
 
     if (!hasBg) {
       return Container(
-        color: _hexColor(profile.titleBackgroundColor),
+        color: AppTheme.parseHexColor(profile.titleBackgroundColor),
         child: SizedBox.expand(child: _lockup(context)),
       );
     }
@@ -147,7 +147,7 @@ class _TitlePreview extends StatelessWidget {
     // runs past the title's accent rule and no text crosses the picture.
     if (slide.imageSize != 0) {
       return Container(
-        color: _hexColor(profile.titleBackgroundColor),
+        color: AppTheme.parseHexColor(profile.titleBackgroundColor),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -160,7 +160,9 @@ class _TitlePreview extends StatelessWidget {
                     slide.imagePath,
                     projectPath,
                     slide.imageSize,
-                    bgColor: _hexColor(profile.titleBackgroundColor),
+                    bgColor: AppTheme.parseHexColor(
+                      profile.titleBackgroundColor,
+                    ),
                     alignment: focalAlignment(
                       slide.imageFocalX,
                       slide.imageFocalY,
@@ -185,7 +187,7 @@ class _TitlePreview extends StatelessWidget {
           slide.imagePath,
           projectPath,
           slide.imageSize,
-          bgColor: _hexColor(profile.titleBackgroundColor),
+          bgColor: AppTheme.parseHexColor(profile.titleBackgroundColor),
           alignment: focalAlignment(slide.imageFocalX, slide.imageFocalY),
         ),
         if (slide.titleImageOverlay) _scrim(),
@@ -211,7 +213,7 @@ class _SectionPreview extends StatelessWidget {
     required this.profile,
   });
 
-  Color get _titleColor => _hexColor(
+  Color get _titleColor => AppTheme.parseHexColor(
     slide.titleTextColorOverride.isNotEmpty
         ? slide.titleTextColorOverride
         : profile.titleTextColor,
@@ -239,7 +241,7 @@ class _SectionPreview extends StatelessWidget {
                 height: 1.2,
               ),
             ),
-            linkColor: _hexColor(profile.accentColor),
+            linkColor: AppTheme.parseHexColor(profile.accentColor),
           ),
         if (slide.subtitle.isNotEmpty) ...[
           SizedBox(height: w * 0.015),
@@ -253,7 +255,7 @@ class _SectionPreview extends StatelessWidget {
                 fontSize: w * 0.025,
               ),
             ),
-            linkColor: _hexColor(profile.accentColor),
+            linkColor: AppTheme.parseHexColor(profile.accentColor),
           ),
         ],
       ],
@@ -276,7 +278,7 @@ class _SectionPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pad = w * 0.08;
-    final sectionBg = _hexColor(profile.sectionBackgroundColor);
+    final sectionBg = AppTheme.parseHexColor(profile.sectionBackgroundColor);
     final hasBg = slide.imagePath.isNotEmpty;
 
     // Geen afbeelding: de vertrouwde effen tussentitel.
@@ -369,9 +371,13 @@ class _QuotePreview extends StatelessWidget {
   Widget build(BuildContext context) {
     final pad = w * 0.08;
     final hasBg = slide.imagePath.isNotEmpty;
-    final textColor = hasBg ? Colors.white : _hexColor(profile.textColor);
+    final textColor = hasBg
+        ? Colors.white
+        : AppTheme.parseHexColor(profile.textColor);
     final authorColor = hasBg ? Colors.white70 : Colors.grey[600]!;
-    final accentColor = hasBg ? Colors.white : _hexColor(profile.accentColor);
+    final accentColor = hasBg
+        ? Colors.white
+        : AppTheme.parseHexColor(profile.accentColor);
 
     final content = FittedBox(
       fit: BoxFit.scaleDown,
@@ -435,7 +441,7 @@ class _QuotePreview extends StatelessWidget {
 
     if (!hasBg) {
       return Container(
-        color: _hexColor(profile.slideBackgroundColor),
+        color: AppTheme.parseHexColor(profile.slideBackgroundColor),
         child: SizedBox.expand(child: content),
       );
     }
@@ -448,7 +454,7 @@ class _QuotePreview extends StatelessWidget {
           slide.imagePath,
           projectPath,
           slide.imageSize,
-          bgColor: _hexColor(profile.slideBackgroundColor),
+          bgColor: AppTheme.parseHexColor(profile.slideBackgroundColor),
         ),
         Container(color: Colors.black.withValues(alpha: 0.52)),
         content,
@@ -474,38 +480,20 @@ class _MarkdownPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pad = w * 0.07;
-    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
 
-    return Container(
-      color: Colors.white,
-      child: SizedBox.expand(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          alignment: Alignment.topLeft,
-          child: SizedBox(
-            width: w,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                pad,
-                pad + safe.top,
-                pad,
-                _logoAwareBottomPadding(pad, safe.bottom),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: _markdownBodyBlocks(
-                  context,
-                  markdown: slide.customMarkdown,
-                  w: w,
-                  font: font,
-                  profile: profile,
-                  headingColor: AppTheme.navy,
-                ),
-              ),
-            ),
-          ),
-        ),
+    return _PreviewScaffold(
+      width: w,
+      slide: slide,
+      profile: profile,
+      horizontalPadding: pad,
+      verticalPadding: pad,
+      children: _markdownBodyBlocks(
+        context,
+        markdown: slide.customMarkdown,
+        w: w,
+        font: font,
+        profile: profile,
+        headingColor: AppTheme.navy,
       ),
     );
   }
@@ -527,7 +515,7 @@ List<Widget> _markdownBodyBlocks(
   String? projectPath,
   double scale = 1.0,
 }) {
-  final link = _hexColor(profile.accentColor);
+  final link = AppTheme.parseHexColor(profile.accentColor);
   final bodySize = bodyFontSize > 0 ? bodyFontSize : w * 0.024;
   final lines = normalizeRichTextMarkdown(markdown).split('\n');
   final widgets = <Widget>[];
@@ -662,7 +650,7 @@ Widget _markdownTextLine(
   double? heading1Size,
   double? heading2Size,
 }) {
-  final textColor = headingColor ?? _hexColor(profile.textColor);
+  final textColor = headingColor ?? AppTheme.parseHexColor(profile.textColor);
   final bodyStyle = _applyFont(
     font,
     TextStyle(
@@ -694,7 +682,7 @@ Widget _markdownTextLine(
         TextStyle(
           fontSize: heading2Size ?? w * 0.03,
           fontWeight: FontWeight.w600,
-          color: headingColor ?? _hexColor(profile.accentColor),
+          color: headingColor ?? AppTheme.parseHexColor(profile.accentColor),
         ),
       ),
       linkColor: linkColor,

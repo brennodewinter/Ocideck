@@ -1763,8 +1763,6 @@ const _dutchSourceGsw = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Abschliesse & versiegle',
   'Verzegelen': 'Versiegle',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Schliess die Präsentation ab und rächne e SHA-512-Sigel über de Inhalt. Denn isch d Datei gsperrt und cha nüme bearbeitet werde; spöteri Änderige wärded sichtbar. Das cha i de App nöd rückgängig gmacht werde.',
   'Handtekening (optioneel)': 'Underschrift (optional)',
   'Naam': 'Name',
   'Rol of functie': 'Rolle oder Funktion',
@@ -1787,6 +1785,96 @@ const _dutchSourceAddGsw = <String, String>{
       'Dä Text hät Kapitel. S Uufteile git',
   'dia\'s op.': 'Slides.',
   'Splits op hoofdstukken': 'Nach Kapitel uufteile',
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'I dem Deck staht KI-Text, wo du no nöd prüeft häsch. Exportiere gaht trotzdem; d Datei seit das sälber und überchunnt "-ai-concept" im Name.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Entwurf: da staht KI-Text, wo no niemert prüeft hät',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Schliess die Präsentation ab und halt es SHA-512-Sigel über di gspeicherti Datei fest. Denn isch si gsperrt und cha nüme bearbeitet werde; jedi spöteri Änderig wird sichtbar. Wer de Bricht überchunnt, rächnet s Sigel sälber mit sha512sum na. Das cha i de App nöd rückgängig gmacht werde.',
+  'Zegel en handtekening': 'Sigel und Underschrift',
+  'Zegel nog niet vastgelegd': 'Sigel no nöd festghalte',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Es git no kei gspeicherti Datei, wo mer s Sigel chönnt nachrächne. Speichere s Deck.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'S Weglah isch aa: was d Prüefig als persönlichs Datum iistueft, wird gschwärzt, und alli Bilder, Video und Audio vo dere Folie chömed nid uf de Bildschirm oder in Export. Dis Markdown-File behaltet alles.',
+  'Bestand': 'Datei',
+  'Venster': 'Fänschter',
+  'Help': 'Hilf',
+  'Alles selecteren': 'Alles uuswähle',
+  'Plakken': 'Iifüege',
+  'Opnieuw': 'Wiederhole',
+  'Eigenschappen': 'Eigeschafte',
+  'Opdrachten…': 'Befähl…',
+  'Opslaan…': 'Am Speichere…',
+  'Uploaden naar WebDAV…': 'Am Uelade uf WebDAV…',
+  'Uploaden naar S3…': 'Am Uelade uf S3…',
+  'Vastleggen in git…': 'Am Commite i git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Wird grad gspeicheret. Nomol speichere macht nüt, bis das fertig isch.',
+  'Klaar — privacy niet gecontroleerd': 'Parat — Dateschutz nid prüeft',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Es isch nid nach persönliche Date, bsundere Date und Gheimnis gsuecht worde: d Dateschutzprüefig isch under Sicherheit usgschalte.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Presentatione, wo eifachi Markdown-Dateie bliibed: läsbar, durchsuechbar und mit jedem Editor z öffne.',
+  'sjablonen om mee te beginnen, of leeg': 'Vorlage zum Aafange, oder leer',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'D Bispilfolie vo ere Vorlag sind uf Niderländisch. Name und Beschriibig folged dinere eigete Sprooch; de Inhalt passisch nach em Aalege aa.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'S Weglah isch aa: gfundeni Date werded gschwärzt und alli Bilder, Video und Audio vo dere Folie chömed nid uf de Bildschirm oder in Export. Dis Markdown-File behaltet alles.',
+  'Mijn tekst': 'Min Täxt',
+  'Wat zij zien': 'Was si gsehnd',
+  'Presentatiegegevens': 'Presentationsdate',
+  'Open presentatiegegevens': 'Presentationsdate uufmache',
+  'Motivering van een uitsluiting': 'Begründig vo ere Uusnahm',
+  'Motivering van een bevestiging': 'Begründig vo ere Bestätigung',
+  'Tabel koprij, kolom {kolom}': 'Tabälle Chopfzile, Spalte {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabälle Zile {rij}, Spalte {kolom}',
+  'Via deze website ophalen?': 'Über die Website abhole?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'De Server vo dere Präsentation het de Browser d Datei nöd direkt läse la. OciDeck cha d Adrässe a die Website wytergäh, wo s OciDeck sälber härchunt, und die holt si denn ab. Damit gseht die Website di ganzi Adrässe — staht im Link en Schlüssel oder Code, gseht die Website dä au.',
+  'In de browser kan dit niet worden bewaard':
+      'Im Browser cha das nöd gspycheret wärde',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'E Browser het kein Schlüsselbund, wie ne Computer ein het: Was OciDeck da spychere wür, cha jedes Skript uf dere Syte mitläse. Nimm d Desktop-Version — dört chunnt s Gheimnis würklich i de Schlüsselbund vom Betriebssystem.',
+  'Licenties van derden': 'Lizänze vo Dritte',
+  'Alle licentieteksten tonen': 'Alli Lizänztäxt zeige',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck sälber schtoht under de EUPL-1.2. Zuesätzlich bündlet\'s Software vo Dritte: d Dart- und Flutter-Päckli, zwe mitgliferti Plugins, vier Schriftfamilie, s Gsichtsmodäll für d Privatschprüefig und s JavaScript, wo bimene HTML-Export mitgoht. Jedes dervo bhaltet sini eigeni Lizänz.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Die Datei enthaltet Software vo Dritte und mängisch au e Schrift. Unte schtönd di vollschtändige Lizänztäxt derzue; gib si mit, wänn du die Datei witergisch.',
+  'Sporen op dit apparaat': 'Spure uf däm Grät',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Näbe dine Iischtellige spycheret OciDeck au e Lischte vo de letschte Dateie und, bi eme Abschturz, e Wiederherstelligs-Datei mit em ganze Inhalt vo dinere Präsentation. Nüt devo verlaht das Grät, aber es lyt do — im Klartext, gschützt vo dim Konto uf däm Betriebssystem und vo nüt meh.',
+  'Recent geopende presentaties': 'Zletscht gööffneti Präsentatione',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'D Lischte spycheret dr ganz Pfad und d Klassifizierig vo jedere Präsentation, wo offe gsi isch — zäme e Uussag drüber, a was du schaffsch und für wän.',
+  'Recente lijst wissen': 'Lischte vo de letschte Dateie lösche',
+  'De recente lijst was al leeg.':
+      'D Lischte vo de letschte Dateie isch scho leer gsi.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'Iiträg us de Lischte vo de letschte Dateie glöscht.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Absturz-Wiederherstelligs-Dateie enthalte dr ganz Inhalt vo dine Präsentatione im Klartext. Si wärde nach 7 Täg automatisch ufgruumt, und bin ere suubere Beändigung sofort.',
+  'Alles terugzetten': 'Alles zrugsetze',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Löscht jedi Iischtellig, d Lischte vo de letschte Dateie, d Wiederherstelligs-Dateie, d Git-Arbetskopie und d Passwörter i dim Schlüsselbund. Dini Präsentatione blibe: die ghööre dir, nid OciDeck.',
+  'Zet alles terug naar de begintoestand':
+      'Alles uf de Aafangszuestand zrugsetze',
+  'Alles terugzetten naar de begintoestand?':
+      'Alles uf de Aafangszuestand zrugsetze?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Dini Iischtellige, d Lischte vo de letschte Dateie, d Wiederherstelligs-Dateie, d Git-Arbetskopie und d gspycherete Passwörter wärde glöscht. Das cha me nid rückgängig mache. Dini Präsentatione blibe.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'Änderige sind no nid an e Git-Server gschickt worde und git\'s nume uf däm Grät. Die verschwinde au.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Alles isch uf de Aafangszuestand zrugggsetzt worde.',
+  'Terugzetten is niet gelukt.': 'S Zrugsetze het nid klappt.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Es wartet no Arbet, wo nid gschickt worde isch',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Die Git-Verbindig het Änderige, wo no nid a dr Server gschickt worde sind. Wenn du d Verbindig entfernsch, verschwindet au d Arbetskopie uf däm Grät — und die Arbet git\'s denn niene meh.',
+  'Verbinding behouden': 'Verbindig bhalte',
+  'Toch verwijderen': 'Trotzdem entferne',
   'esc': 'Esc',
   'Enter': 'Enter',
   'OK': 'OK',
@@ -1844,6 +1932,33 @@ const _dutchSourceAddGsw = <String, String>{
       'listet uf, was weggloh worde isch, ohni d Wärt sälber. Die Datei tarf mit em Bricht mit.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'enthaltet d Schlüssel, wo mer dermit jede gschwärzti Wärt zrugg cha rächne. Schick die Datei nöd mit: susch isch d Schwärzig ufghobe. Bhalt sie bi de Quelle.',
+  'slides': 'Slides',
+  'Achtergehouden': 'Zrugghalte',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Zrugghalte: strenger klassifiziert als d Präsentation',
+  '1 slide achtergehouden door haar TLP': '1 Slide wäg sim TLP zrugghalte',
+  'slides achtergehouden door hun TLP': 'Slides wäg ihrem TLP zrugghalte',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Die Slides chömed bim Präsentiere, Exportiere und im Paket nöd mit. Erhöh under Präsentationsinfo s TLP-Niveau vo de Präsentation, zum si mitznäh.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alli Slides sind wäg ihrer TLP-Klassifizierig zrugghalte, drum git\'s nüt zum zeige.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alli Slides sind wäg ihrer TLP-Klassifizierig zrugghalte, drum git\'s nüt zum exportiere.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alli Slides sind übersprunge oder wäg ihrer TLP-Klassifizierig zrugghalte, drum git\'s nüt zum zeige.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alli Slides sind übersprunge oder wäg ihrer TLP-Klassifizierig zrugghalte, drum git\'s nüt zum exportiere.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'D Diagrammzahle sind nöd gspeicheret worde — sie stönd nu no i dem Fänschter:',
+  'Niet alles gaat mee naar git': 'Nöd alles gaht mit uf git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Die Teil chömed nöd i de Commit und stönd nachher nöd im Repository:',
+  'Tekeningen op slides': 'Zeichnige uf Slides',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Sie bliibed i dem Fänschter. Speicher d Präsentation au als Datei oder als .ocideck-Paket, zum si z\'behalte.',
+  'Toch opslaan': 'Trotzdem speichere',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Im Browser git\'s kei Absturz-Wiederherstellig: wänn du das Tab zuemachsch, isch nöd gspeicherti Arbet ewäg. Speicher dini Präsentation sälber.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  D lokal CVE-Datebank (de Download startisch du sälber): OciDeck holt d Massedate über api.github.com und d Release-Datei, wo die Adrässe druf zeigt.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

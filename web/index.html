@@ -40,6 +40,11 @@
     - child-src/frame-src allow blob:/data: for the offscreen Mermaid render
       WebView (an iframe on web).
     - base-uri is 'self' (NOT 'none') because Flutter relies on <base href>.
+    - form-action is 'none': the app renders into a canvas and submits no HTML
+      forms, so nothing legitimate needs it. It is spelled out rather than left
+      out because form-action does NOT fall back to default-src — omitting it
+      leaves form submission unrestricted even with default-src 'self'. Unlike
+      frame-ancestors, this one IS enforced from a <meta> tag.
     - frame-ancestors is present below but a <meta>-delivered CSP CANNOT enforce
       it — browsers ignore frame-ancestors (and sandbox/report-*) outside an
       HTTP header. It is kept here only as documentation of intent. To actually
@@ -48,7 +53,22 @@
       embedding this bundle inside Nextcloud, set frame-ancestors to the host
       origin in that header.
   -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https:; worker-src 'self' blob:; child-src 'self' blob: data:; frame-src 'self' blob: data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https:; worker-src 'self' blob:; child-src 'self' blob: data:; frame-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'">
+
+  <!--
+    Referrer-Policy, delivered from the document itself.
+
+    Unlike frame-ancestors, `no-referrer` IS honoured from a <meta> tag, so this
+    one does not depend on the static host cooperating — it ships inside the
+    bundle. It matters because connect-src permits `https:`: a URL-import
+    fetches a host the user pasted, and without this the deck's own URL would
+    travel to that host in the Referer header. The path of a deck link can
+    itself be the sensitive part.
+
+    Kept as a companion header in docs/HOSTING.md too; the header wins where
+    both are present, and they say the same thing.
+  -->
+  <meta name="referrer" content="no-referrer">
 
   <meta name="description" content="Feline and human friendly presentations">
 

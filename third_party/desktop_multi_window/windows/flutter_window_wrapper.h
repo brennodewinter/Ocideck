@@ -1,3 +1,9 @@
+// NOTICE: This file was modified by the OciDeck project.
+// Original: desktop_multi_window (c) 2021 Mixin, Apache License 2.0 (see
+// ../LICENSE), commit 58a5868d1cb9031defa5db5868d6aaea0486d24a.
+// Change: implemented window_close, window_setFrame and window_coverScreen on Win32.
+// Modification notice per Apache-2.0 section 4(b); see ../MODIFICATIONS.md.
+
 #ifndef DESKTOP_MULTI_WINDOW_WINDOWS_FLUTTER_WINDOW_WRAPPER_H_
 #define DESKTOP_MULTI_WINDOW_WINDOWS_FLUTTER_WINDOW_WRAPPER_H_
 

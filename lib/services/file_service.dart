@@ -15,6 +15,7 @@ import '../models/deck.dart';
 import '../l10n/app_localizations.dart';
 import '../models/settings.dart';
 import '../models/chart.dart';
+import '../models/seal_record.dart';
 import '../models/slide.dart';
 import '../utils/atomic_file.dart';
 import '../utils/bundled_asset.dart';
@@ -24,6 +25,8 @@ import '../utils/net_guard.dart';
 import '../utils/project_path.dart';
 import '../utils/zip_encryption.dart';
 import 'annotation_codec.dart';
+import 'document_integrity.dart';
+import 'seal_codec.dart';
 import 'miauw_codec.dart';
 import 'sidecar_format.dart';
 import 'user_notes_codec.dart';
@@ -186,6 +189,15 @@ enum ImportFailure {
 /// De service kent geen UI; de shell levert een concrete implementatie aan.
 typedef PackagePasswordResolver =
     Future<String?> Function({required bool retry});
+
+/// Vraagt of de web-import mag terugvallen op het same-origin fetch-hulppunt.
+///
+/// Die terugval stuurt de hele URL naar de origin die de app serveert — een
+/// partij die de gebruiker niet zelf heeft aangewezen, en de URL kan een
+/// deelsleutel bevatten. Daarom een vraag en geen automatisme. [host] is de
+/// bronhost, zodat de vraag concreet kan zijn. De service kent geen UI; de
+/// shell levert de implementatie. Geen implementatie = geen toestemming.
+typedef ProxyFallbackConfirm = Future<bool> Function({required String host});
 
 /// Uitkomst van een import: het pad naar de hoofd-markdown bij succes, anders
 /// een [failure] met de reden.
@@ -697,7 +709,15 @@ class FileService {
     return (deck: hydrated, failure: null, warnings: chartWarnings);
   }
 
-  Future<String?> saveDeckAs(Deck deck, {String? initialDirectory}) async {
+  /// Als [saveDeckAs], maar mét de grafiekdata-waarschuwingen.
+  ///
+  /// Zie [saveDeckDetailed]: een grafiek waarvan het databestand niet geschreven
+  /// kon worden, houdt zijn cijfers nergens meer, dus dat moet de gebruiker
+  /// horen. `path` is null wanneer de gebruiker het venster wegklikte.
+  Future<({String? path, List<String> chartWarnings})> saveDeckAsDetailed(
+    Deck deck, {
+    String? initialDirectory,
+  }) async {
     final safeName = deck.title
         .replaceAll(RegExp(r'[^\w\s-]'), '')
         .replaceAll(' ', '_');
@@ -706,15 +726,30 @@ class FileService {
       fileName: '$safeName.md',
       initialDirectory: initialDirectory,
     );
-    if (result == null) return null;
+    if (result == null) return (path: null, chartWarnings: const <String>[]);
     final path = result.endsWith('.md') ? result : '$result.md';
-    await _writeProject(deck, path);
-    return path;
+    final written = await _writeProject(deck, path);
+    return (path: path, chartWarnings: written.chartWarnings);
   }
 
-  Future<Deck> saveDeck(Deck deck, String filePath) async {
-    return _writeProject(deck, filePath);
-  }
+  Future<String?> saveDeckAs(Deck deck, {String? initialDirectory}) async =>
+      (await saveDeckAsDetailed(deck, initialDirectory: initialDirectory)).path;
+
+  /// Sla op én vertel welke grafieken hun cijfers niet kwijt konden.
+  ///
+  /// Het opslaan haalt de cijfers uit de markdown en zet ze in `data/`; mislukt
+  /// dat tweede deel — pad buiten de projectmap, schijf vol, geen rechten, of
+  /// het bestand is ondertussen buiten de app gewijzigd — dan bestaan die
+  /// cijfers alleen nog in dit venster. De aanroeper hoort dat te melden;
+  /// zwijgen zou een geslaagde opslag voorspiegelen. Spiegelbeeld van
+  /// [openDeckDetailed], dat hetzelfde doet voor het lezen.
+  Future<({Deck deck, List<String> chartWarnings})> saveDeckDetailed(
+    Deck deck,
+    String filePath,
+  ) => _writeProject(deck, filePath);
+
+  Future<Deck> saveDeck(Deck deck, String filePath) async =>
+      (await _writeProject(deck, filePath)).deck;
 
   // ── Draagbaar pakket ── zie parts/file_service_package.dart voor de
   // pakket-bouw (exportPackage/buildPackageBytes/buildPackageMembers).
@@ -798,12 +833,21 @@ class FileService {
         try {
           raw = f.content;
         } catch (e) {
-          logWarning(
-            'FileService.decodePackageEntries: unreadable encrypted entry '
-            'skipped (${f.name})',
+          // **Fail-closed.** WinZip-AES toetst per lid een HMAC; `archive`
+          // gooit hier ("macs don't match") zodra die niet klopt. Dat is geen
+          // leesfout maar een bewijs van wijziging ná het versleutelen.
+          //
+          // Dit lid overslaan en doorgaan leverde stil een pakket op waar één
+          // bestand uit verdwenen was — precies het lid dat een aanvaller
+          // eruit wilde hebben. Wie een pakket versleutelt, doet dat om te
+          // kunnen vertrouwen wat eruit komt; dan is een half pakket zonder
+          // melding de verkeerde uitkomst. Het hele pakket wordt geweigerd.
+          logError(
+            'FileService.decodePackageEntries: encrypted entry failed its '
+            'integrity check, refusing the package (${f.name})',
             e,
           );
-          continue;
+          return null;
         }
         if (extracted + raw.length > maxBytes) {
           logWarning(

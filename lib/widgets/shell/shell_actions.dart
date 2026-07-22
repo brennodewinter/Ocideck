@@ -320,16 +320,20 @@ Future<bool> _saveToNextcloud(
     final ext = choice!.format == DeckSaveFormat.ocideck ? '.ocideck' : '.md';
     final targetPath = '${choice.base}$ext';
     try {
-      await ref
-          .read(tabsProvider.notifier)
-          .saveToWebdav(
-            tab,
-            service,
-            connectionId: connection.id,
-            format: choice.format,
-            targetPath: targetPath,
-            overwrite: overwrite,
-          );
+      await withSaveProgress(
+        ref,
+        SaveTarget.webdav,
+        () => ref
+            .read(tabsProvider.notifier)
+            .saveToWebdav(
+              tab,
+              service,
+              connectionId: connection.id,
+              format: choice!.format,
+              targetPath: targetPath,
+              overwrite: overwrite,
+            ),
+      );
       // Het opslaan is geslaagd; alleen de melding kan niet meer getoond worden.
       if (!context.mounted) return true;
       messenger.showSnackBar(
@@ -728,6 +732,43 @@ List<Slide> _slidesForPresentationOrExport(
   return slides;
 }
 
+/// Waarom er geen enkele dia overblijft, in de woorden van de échte oorzaak.
+///
+/// Er stond hier één zin — "Alle slides zijn overgeslagen" — en die wees naar de
+/// verkeerde knop zodra de oorzaak TLP was: een dia met een strengere
+/// classificatie dan de presentatie valt óók weg, maar heeft niets met overslaan
+/// te maken en is met "Alles tonen" niet terug te krijgen. De twee blijven hier
+/// dus uit elkaar, ook wanneer ze samen optreden.
+String emptyAudienceReason(
+  AppLocalizations l10n,
+  Deck deck, {
+  required bool forExport,
+}) {
+  final skipped = deck.slides.any((s) => s.skipped);
+  final withheld = deck.slides.any((s) => slideWithheldByTlp(s, deck.tlp));
+  if (withheld && skipped) {
+    return forExport
+        ? l10n.d(
+            'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.',
+          )
+        : l10n.d(
+            'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.',
+          );
+  }
+  if (withheld) {
+    return forExport
+        ? l10n.d(
+            'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.',
+          )
+        : l10n.d(
+            'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.',
+          );
+  }
+  return forExport
+      ? l10n.d('Alle slides zijn overgeslagen — niets om te exporteren.')
+      : l10n.d('Alle slides zijn overgeslagen — niets om te tonen.');
+}
+
 /// Toont de "niet-opgeslagen wijzigingen"-dialoog en geeft de keuze terug.
 /// Top-level zodat zowel de tabbalk als het 'alleen afspelen'-scherm hetzelfde
 /// dialoog gebruiken.
@@ -835,9 +876,7 @@ void presentDeck(
   if (slides.isEmpty) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-          l10n.d('Alle slides zijn overgeslagen — niets om te tonen.'),
-        ),
+        content: Text(emptyAudienceReason(l10n, deck, forExport: false)),
       ),
     );
     return;

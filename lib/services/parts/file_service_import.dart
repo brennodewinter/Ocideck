@@ -72,6 +72,21 @@ extension FileServiceImport on FileService {
       if (onPassword == null) {
         return const ImportOutcome.failed(ImportFailure.needsPassword);
       }
+      // Vragen tot het lukt, maar nooit tweemaal om dezelfde zin.
+      //
+      // `canDecodePackage` faalt om twee heel verschillende redenen: een fout
+      // wachtwoord, of een pakket waarvan de inhoud is aangetast — WinZip-AES
+      // controleert een MAC, en die klopt niet meer na één omgeklapte byte.
+      // Van buitenaf zien die twee er hetzelfde uit, dus werd een gemanipuleerd
+      // pakket eindeloos als "verkeerd wachtwoord" gepresenteerd. Levert de
+      // aanroeper dezelfde zin nóg eens, dan kán het niet meer aan het
+      // wachtwoord liggen: dan is het pakket stuk, en dat hoort de gebruiker te
+      // horen in plaats van een derde wachtwoordvenster.
+      //
+      // Dit was geen theoretisch geval: een niet-interactieve aanroeper die
+      // altijd dezelfde zin teruggeeft — zoals de toets die precies dit gedrag
+      // vastlegt — liet de lus voor onbepaalde tijd op één kern draaien.
+      final geprobeerd = <String>{};
       var retry = false;
       while (true) {
         final pw = await onPassword(retry: retry);
@@ -81,6 +96,13 @@ extension FileServiceImport on FileService {
         if (canDecodePackage(zipBytes, pw)) {
           password = pw;
           break;
+        }
+        if (!geprobeerd.add(pw)) {
+          logWarning(
+            'FileService.importPackageBytes: dezelfde zin faalde tweemaal — '
+            'het pakket is vermoedelijk aangetast, niet het wachtwoord fout',
+          );
+          return const ImportOutcome.failed(ImportFailure.corrupt);
         }
         retry = true;
       }

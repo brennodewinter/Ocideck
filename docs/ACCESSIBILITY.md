@@ -1,5 +1,7 @@
 # OciDeck — Accessibility
 
+> **Status:** current-state description of what is and is not accessible · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 What OciDeck does for accessibility, and — the longer half of this document —
 what it does not do. Both halves are here on purpose. A tool that only lists its
 accessibility features leaves the reader to discover the gaps at the worst
@@ -20,8 +22,11 @@ The documentation reader has its own **A− / A+** control on top of that, becau
 reading a guide and operating an editor want different sizes.
 
 **Screen-reader labels where the interface is not text.** Slide thumbnails carry
-a composed label ("Slide 3/12: <title>", plus skipped state and whether the slide
-has notes) rather than being announced as an unnamed image. Charts expose their
+a composed label ("Slide 3/12: <title>", plus skipped state, whether the slide is
+withheld by its TLP classification and at which level, and whether it has notes)
+rather than being announced as an unnamed image. Both reasons a slide will not
+reach the audience are spoken, and spoken separately, because the dimming and the
+two coloured flags that carry the same message on screen are of no use here. Charts expose their
 data as a text alternative (`_semanticsLabel` in `chart_preview.dart`), so a
 chart is readable and not merely present. Icon-only buttons carry a name.
 
@@ -43,8 +48,25 @@ following a presentation is told which slide is up.
 
 **Keyboard operation of the parts that are easy to miss.** The panel divider
 between the slide list and the editor takes focus with `Tab` and resizes with
-`←`/`→`. The add-slide dialog is fully keyboard-operable. General navigation and
-the shortcuts are in [SHORTCUTS.md](SHORTCUTS.md).
+`←`/`→`. The add-slide dialog is fully keyboard-operable, and tabbing between the
+type cards also drives the explanation below the grid, so the keyboard reaches
+the same information the mouse does. General navigation and the shortcuts are in
+[SHORTCUTS.md](SHORTCUTS.md).
+
+**Explanations attached to the control, not only beside it.** Each card in the
+add-slide dialog carries its type's explanation as a screen-reader hint, because
+the strip below the grid is a separate widget that a reader walking the cards
+never passes. The same reasoning puts the save-progress message on the status-bar
+chip as a live region: it is a statement about what is happening, so it is
+announced without moving the focus to it.
+
+**A menu bar on macOS.** `PlatformMenuBar` gives the system menu bar the app's
+actions — file, edit (including cut/copy/paste), presentation, window and help.
+A menu bar is a surface that can be walked end to end to find out what a program
+can do, instead of hunting a toolbar for icons. Items that need an
+open presentation grey out rather than disappearing, so the list a user learns
+stays the same list. Windows and Linux get their menu from the desktop
+environment; the browser build has none.
 
 **Contrast checking of the deck you are making.** The slide-quality panel checks
 body text, titles, table text and headers, code colours and the accent colour

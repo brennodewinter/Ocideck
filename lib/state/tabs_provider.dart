@@ -12,6 +12,7 @@ import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/deck_template.dart';
 import '../models/settings.dart';
+import '../models/seal_record.dart';
 import '../models/slide.dart';
 import '../models/storage_origin.dart';
 import '../services/annotation_codec.dart';
@@ -35,6 +36,7 @@ import '../services/markdown_safety.dart';
 import '../services/markdown_service.dart';
 import '../services/recovery_service.dart';
 import '../services/miauw_codec.dart';
+import '../services/seal_codec.dart';
 import '../services/user_notes_codec.dart';
 import '../services/web_asset_store.dart';
 import '../services/s3/s3_service.dart';
@@ -46,6 +48,8 @@ import 'editor_provider.dart';
 import 'settings_provider.dart';
 import 'slide_clipboard_provider.dart';
 
+part 'tabs_provider_import_types.dart';
+part 'tabs_provider_import.dart';
 part 'tabs_provider_tab_info.dart';
 part 'tabs_provider_package.dart';
 part 'tabs_provider_s3.dart';
@@ -54,36 +58,6 @@ part 'tabs_provider_git_native.dart';
 part 'tabs_provider_git_review.dart';
 
 const _uuid = Uuid();
-
-/// How a single open/import attempt ended. Used by the import flows to decide
-/// whether to clean up downloaded/extracted files and what to report.
-enum OpenResult {
-  /// The deck was opened in a tab.
-  opened,
-
-  /// The file could not be read or parsed (missing, over-size, corrupt).
-  unreadable,
-
-  /// The file is not a Marp/OciDeck presentation — readable, but not a deck.
-  /// Kept distinct from [unreadable] so the UI can say so specifically.
-  notAPresentation,
-
-  /// The file was refused because it contains executable content; the security
-  /// alarm has been raised via [importSecurityAlarmProvider].
-  blocked,
-
-  /// The package is encrypted and the user cancelled the password prompt (or no
-  /// resolver was available). Handled silently — no error is surfaced.
-  passwordCancelled,
-}
-
-/// A blocked import surfaced to the UI: the offending file plus what was found.
-/// The shell listens on [importSecurityAlarmProvider] and shows the alarm.
-class ImportSecurityAlarm {
-  final String path;
-  final List<MarkdownSafetyFinding> findings;
-  const ImportSecurityAlarm({required this.path, required this.findings});
-}
 
 // ── Tabs notifier ─────────────────────────────────────────────────────────────
 
@@ -147,6 +121,12 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// versleutelde pakketten met [ImportFailure.needsPassword].
   PackagePasswordResolver? packagePasswordResolver;
 
+  /// UI-callback die vraagt of de web-import mag terugvallen op het
+  /// same-origin fetch-hulppunt. Geregistreerd door de shell. Zonder
+  /// registratie is er geen toestemming en vervalt de terugval — dat is de
+  /// bedoeling: die terugval geeft de volledige URL aan een derde partij.
+  ProxyFallbackConfirm? proxyFallbackConfirm;
+
   /// Hoe vaak niet-opgeslagen tabbladen naar een herstelbestand worden bewaard.
   static const _autosaveInterval = Duration(seconds: 25);
 
@@ -203,6 +183,15 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // nergens meer — in geen enkel tabblad, ongedaan-stapel of klembord —
     // gebruikt worden. Op desktop is de store leeg, dus dit is er een no-op.
     deckNotifier.onSweepWebAssets = sweepWebAssets;
+    // Een opslag die de grafiekcijfers niet kwijt kon, mag niet als geslaagd
+    // voorbijgaan: dezelfde melding als bij het openen, met een eigen tekst.
+    deckNotifier.onChartDataWarnings = (sources) {
+      if (!mounted) return;
+      _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
+        sources,
+        whileSaving: true,
+      );
+    };
     final tab = TabInfo(
       id: id,
       recoveryId: key,
@@ -224,6 +213,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// Bewaar elk niet-opgeslagen tabblad naar zijn herstelbestand.
   void _autosaveTick() {
     if (!mounted) return;
+    // Dezelfde tik ruimt verlopen herstelbestanden op. Anders gold de
+    // houdbaarheid van zeven dagen alleen bij het opstarten, en hield een
+    // machine die aan blijft staan de klaartekst van een oude crash vast.
+    // Zelf-beperkend op een uur; zie [RecoveryService.pruneIfDue].
+    unawaited(_recovery.pruneIfDue());
     for (final tab in state.tabs) {
       // Zie TabInfo.label: een tab kan kortstondig een al-gedisposede
       // notifier dragen; die heeft niets meer te autosaven.
@@ -244,6 +238,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
               deck.miauwWaivers,
               deck.miauwConfirmations,
             ),
+            seal: SealCodec.encode(SealRecord.of(deck)),
+            // Tekeningen staan niet in de markdown (eigen sidecar), en tekenen
+            // maakt het deck wél vuil. Zonder deze regel kwam een herstelde
+            // presentatie stil zonder annotaties terug.
+            annotations: AnnotationCodec.encode(deck.slides, deck.annotations),
           ),
         );
         _lastAutosavedDeck[tab.id] = deck;
@@ -259,8 +258,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final restored = <TabInfo>[];
     var unreadable = 0;
     for (final snap in snapshots) {
-      var deck = _md.parseDeck(snap.markdown, filePath: snap.filePath);
-      if (deck == null) {
+      final parsed = _md.parseDeck(snap.markdown, filePath: snap.filePath);
+      if (parsed == null) {
         // Niet weggooien. `parseDeck` vangt zijn eigen fouten af juist omdát hij
         // in de praktijk struikelt, en een crash ín de parser is een van de
         // waarschijnlijkere redenen dat deze momentopname er überhaupt ligt.
@@ -270,6 +269,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
         logWarning('restoreRecovered: momentopname onleesbaar', snap.filePath);
         continue;
       }
+      var deck = parsed;
       if (snap.userNotes != null && snap.userNotes!.isNotEmpty) {
         final notes = UserNotesCodec.decode(snap.userNotes!, deck.slides);
         if (notes.isNotEmpty) {
@@ -283,6 +283,21 @@ class TabsNotifier extends StateNotifier<TabsState> {
             miauwWaivers: d.waivers,
             miauwConfirmations: d.confirmations,
           );
+        }
+      }
+      if (snap.seal != null && snap.seal!.isNotEmpty) {
+        final record = SealCodec.decode(snap.seal!);
+        if (record != null) deck = record.applyTo(deck);
+      }
+      final ink = snap.annotations;
+      if (ink != null && ink.isNotEmpty) {
+        try {
+          final strokes = AnnotationCodec.decode(ink, deck.slides);
+          if (strokes.isNotEmpty) deck = deck.copyWith(annotations: strokes);
+        } catch (e) {
+          // Een kapotte tekenlaag mag het herstel van de tekst nooit blokkeren;
+          // hetzelfde als bij een onleesbare sidecar op schijf.
+          logWarning('restoreRecovered: annotaties onleesbaar', e);
         }
       }
       // Hergebruik de sleutel van de momentopname. Het bestand dat er al ligt ís
@@ -624,6 +639,21 @@ class TabsNotifier extends StateNotifier<TabsState> {
   }) {
     final findings = MarkdownSafetyScanner.scan(raw);
     if (findings.isNotEmpty) {
+      // Ook vastleggen, niet alleen tonen. De twee andere poorten op deze
+      // scanner (`FileService.openDeck` en `openDeckFromContent`) loggen hun
+      // weigering wél; deze deed dat niet, terwijl het juist de weg is waarlangs
+      // een deck van buiten binnenkomt. Een alarm dat de gebruiker wegklikt,
+      // laat niets na — en "dit deck tripte de poort" is precies wat je
+      // achteraf wilt kunnen navertellen bij een gereedschap dat verzegelde
+      // rapporten uitgeeft. Alleen de telling — net als de twee zusterpoorten
+      // in `FileService`. De bevinding zelf draagt deckinhoud, en zelfs de
+      // soorten opsommen zou een waardenlijst in de log zetten; welke regel
+      // aansloeg leest de gebruiker in zijn eigen bestand.
+      logWarning(
+        'TabsProvider: geopend deck geweigerd — uitvoerbare inhoud '
+        '(${findings.length} bevinding(en))',
+        sourceName,
+      );
       if (mounted) {
         _ref.read(importSecurityAlarmProvider.notifier).state =
             ImportSecurityAlarm(path: sourceName, findings: findings);
@@ -646,226 +676,6 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// Remove the unique folder an import extracted/downloaded into when the deck
   /// was not opened (blocked or unreadable). Only ever deletes folders the
   /// import itself just created — never a folder the user opened in place.
-  Future<void> _discardImportArtifacts(String mdPath) async {
-    try {
-      final dir = Directory(p.dirname(mdPath));
-      if (await dir.exists()) await dir.delete(recursive: true);
-    } catch (e) {
-      logWarning('TabsNotifier._discardImportArtifacts: cleanup failed', e);
-    }
-  }
-
-  /// Map waarin geïmporteerde pakketten worden uitgepakt.
-  Future<String> _importDestDir(String? homeDir) async {
-    if (homeDir != null && homeDir.trim().isNotEmpty) return homeDir;
-    return (await getApplicationDocumentsDirectory()).path;
-  }
-
-  /// Importeer een `.ocideck`-pakket (zip) en open het in een tab.
-  ///
-  /// Retourneert `null` wanneer het pakket is opgehaald én verwerkt — ook als
-  /// de veiligheidscontrole de inhoud blokkeert (dan toont de shell het alarm).
-  /// Anders de reden waarom het pakket niet kon worden gelezen/uitgepakt.
-  Future<ImportFailure?> importPackageFile(
-    String zipPath, {
-    String? homeDir,
-  }) async {
-    final dest = await _importDestDir(homeDir);
-    final file = File(zipPath);
-    if (await file.length() > FileService.maxPackageBytes) {
-      return ImportFailure.tooLarge;
-    }
-    final bytes = await file.readAsBytes();
-    final outcome = await _file.importPackageBytesDetailed(
-      bytes,
-      dest,
-      onPassword: packagePasswordResolver,
-    );
-    final mdPath = outcome.mdPath;
-    // Afbreken van de wachtwoordvraag is geen fout: geen melding tonen.
-    if (outcome.failure == ImportFailure.encryptedCancelled) return null;
-    if (mdPath == null) return outcome.failure;
-    final result = await _openImported(mdPath);
-    return _importHandled(result) ? null : ImportFailure.unsupported;
-  }
-
-  /// Haal een presentatie op via een URL (pakket of platte markdown) en open
-  /// het in een tab. Zie [importPackageFile] voor de betekenis van de retour.
-  Future<ImportFailure?> importFromUrl(String url, {String? homeDir}) async {
-    final dest = await _importDestDir(homeDir);
-    final outcome = await _file.importFromUrlDetailed(
-      url,
-      dest,
-      onPassword: packagePasswordResolver,
-    );
-    final mdPath = outcome.mdPath;
-    if (outcome.failure == ImportFailure.encryptedCancelled) return null;
-    if (mdPath == null) return outcome.failure;
-    final result = await _openImported(mdPath);
-    if (result == OpenResult.opened && mounted) {
-      // Herkomst voor de wolk-badge in recente presentaties.
-      await _settings.setRecentFileOrigin(mdPath, url);
-    }
-    return _importHandled(result) ? null : ImportFailure.unsupported;
-  }
-
-  /// Web-variant van [importFromUrl]: haalt de presentatie in de browser op
-  /// (CORS en de pagina-CSP bewaken het verkeer) en opent haar volledig in
-  /// het geheugen — een `.ocideck`/zip-pakket wordt daarbij in het geheugen
-  /// uitgepakt, met dezelfde omvangslimiet als de desktop-import.
-  Future<OpenResult> importFromUrlWeb(String url) async {
-    final bytes = await _file.fetchUrlBytes(
-      url,
-      maxBytes: FileService.maxPackageBytes,
-    );
-    if (bytes == null || !mounted) return OpenResult.unreadable;
-    // Zelfde kern als de web-picker en drag-drop: [openDeckFromBytes]. De URL
-    // reist mee als [remoteOrigin] zodat de statusbalk de privacy-badge toont:
-    // deze presentatie is van buiten het apparaat opgehaald.
-    return openDeckFromBytes(bytes, url, remoteOrigin: url);
-  }
-
-  /// Gedeelde staart van elke import-flow (pakket/URL/WebDAV): open het
-  /// geïmporteerde bestand en ruim de import-artefacten op wanneer dat niet
-  /// lukte.
-  Future<OpenResult> _openImported(String mdPath) async {
-    final result = await openFileByPath(mdPath);
-    if (result != OpenResult.opened) await _discardImportArtifacts(mdPath);
-    return result;
-  }
-
-  /// "Verwerkt" betekent voor de bool-imports: geopend, óf geblokkeerd door de
-  /// security-gate (de shell toont dan het alarm) — niet-leesbaar is `false`.
-  static bool _importHandled(OpenResult result) =>
-      result == OpenResult.opened || result == OpenResult.blocked;
-
-  /// Download [entry] van de WebDAV-bron, haal het door de bestaande
-  /// security-gate en open het in een tab. Het tabblad onthoudt zijn herkomst
-  /// zodat "Opslaan naar Nextcloud" terug kan schrijven. Een netwerk-/auth-fout
-  /// wordt als [WebdavException] doorgegeven aan de aanroeper.
-  Future<OpenResult> openFromWebdav(
-    WebdavService service,
-    WebdavEntry entry, {
-    String connectionId = '',
-    String? homeDir,
-  }) async {
-    final dest = await _importDestDir(homeDir);
-    final maxBytes = entry.isMarkdown
-        ? FileService.maxDeckMarkdownBytes
-        : FileService.maxPackageBytes;
-    final downloaded = await service.download(
-      entry.relativePath,
-      maxBytes: maxBytes,
-    );
-    final bytes = downloaded.bytes;
-    if (!mounted) return OpenResult.unreadable;
-    final String? mdPath;
-    if (entry.isMarkdown) {
-      mdPath = await _file.importMarkdownBytes(bytes, dest, entry.name);
-    } else {
-      final outcome = await _file.importPackageBytesDetailed(
-        bytes,
-        dest,
-        onPassword: packagePasswordResolver,
-      );
-      if (outcome.failure == ImportFailure.encryptedCancelled) {
-        return OpenResult.passwordCancelled;
-      }
-      mdPath = outcome.mdPath;
-    }
-    if (mdPath == null) return OpenResult.unreadable;
-    final result = await _openImported(mdPath);
-    if (result != OpenResult.opened) return result;
-    // De zojuist geopende deck zit in het huidige tabblad (zie openFileByPath).
-    state.current?.webdavOrigin = WebdavOrigin(
-      connectionId: connectionId,
-      baseUrl: service.server.baseUrl,
-      username: service.server.username,
-      remotePath: entry.relativePath,
-      // De versie die we nét ophaalden; hierop toetst een latere opslag.
-      etag: downloaded.etag,
-    );
-    // Herkomst voor de wolk-badge in recente presentaties.
-    await _settings.setRecentFileOrigin(
-      mdPath,
-      '${service.server.baseUrl} · ${entry.relativePath}',
-    );
-    if (mounted) state = state.copyWith(tabs: List.from(state.tabs));
-    return OpenResult.opened;
-  }
-
-  /// Schrijf het deck van [tab] terug naar de WebDAV-bron op [targetPath]
-  /// (relatief aan de wortelmap). Bij [DeckSaveFormat.ocideck] gaat er één
-  /// pakketbestand omhoog; bij [DeckSaveFormat.flat] worden de pakket-leden
-  /// (`.md` + assetmappen) los geüpload in dezelfde map. Werkt de herkomst van
-  /// het tabblad bij. Gooit [WebdavException] bij een netwerk-/auth-fout.
-  Future<void> saveToWebdav(
-    TabInfo tab,
-    WebdavService service, {
-    required DeckSaveFormat format,
-    required String targetPath,
-    String connectionId = '',
-    bool overwrite = false,
-  }) async {
-    final deck = tab.deckNotifier.currentState.deck;
-    if (deck == null) return;
-    // Alleen terugschrijven naar precies het bestand dat we ophaalden valt te
-    // bewaken; voor elk ander doelpad hebben we geen versie om tegen te
-    // toetsen, en koos de gebruiker het pad zelf.
-    final origin = tab.webdavOrigin;
-    final guard =
-        (!overwrite &&
-            origin != null &&
-            origin.matchesServer(service.server) &&
-            origin.remotePath == targetPath)
-        ? origin.etag
-        : null;
-    String? savedEtag;
-    if (format == DeckSaveFormat.ocideck) {
-      final bytes = await _file.buildPackageBytes(deck);
-      savedEtag = await service.upload(targetPath, bytes, ifMatch: guard);
-    } else {
-      final members = await _file.buildPackageMembers(deck);
-      final dir = p.posix.dirname(targetPath);
-      final mdBase = p.posix.basename(targetPath);
-      // Het markdownbestand eerst; zie [saveToS3] voor waarom die volgorde telt.
-      final ordered = [
-        ...members.entries.where(_isRootMd),
-        ...members.entries.where((e) => !_isRootMd(e)),
-      ];
-      for (final entry in ordered) {
-        // Het pakket-markdownbestand heet naar de deck-titel; geef het op de
-        // server de naam die de gebruiker koos. Assets behouden hun submap.
-        final isRootMd = _isRootMd(entry);
-        final remote = isRootMd
-            ? p.posix.join(dir, mdBase)
-            : p.posix.join(dir, entry.key);
-        // Alleen het markdownbestand ís het deck; de assets ernaast hebben we
-        // nooit opgehaald, dus daar valt niets te toetsen.
-        final etag = await service.upload(
-          remote,
-          entry.value,
-          ifMatch: isRootMd ? guard : null,
-        );
-        if (isRootMd) savedEtag = etag;
-      }
-    }
-    tab.webdavOrigin = WebdavOrigin(
-      // Een leeg id bij opslaan zou de herkomst van een geopend deck wissen;
-      // val dan terug op wat er al stond.
-      connectionId: connectionId.isEmpty
-          ? (tab.webdavOrigin?.connectionId ?? '')
-          : connectionId,
-      baseUrl: service.server.baseUrl,
-      username: service.server.username,
-      remotePath: targetPath,
-      // Vanaf nu is dít de versie waarop we verder werken. Gaf de server er
-      // geen, dan blijft het `null` en is de volgende opslag onbewaakt — dat
-      // is zichtbaar zo, en niet een gok die stil de guard uitzet.
-      etag: savedEtag,
-    );
-    if (mounted) state = state.copyWith(tabs: List.from(state.tabs));
-  }
 
   void selectTab(int index) {
     if (index >= 0 && index < state.tabs.length) {
@@ -952,20 +762,28 @@ final securityModulePromptProvider = StateProvider<SecurityModulePrompt?>(
   (ref) => null,
 );
 
-/// Grafieken waarvan het gekoppelde databestand niet gelezen kon worden bij het
-/// openen: ontbrekend, onleesbaar, of buiten de projectmap.
+/// Grafieken waarvan het gekoppelde databestand niet gelezen of niet geschreven
+/// kon worden: ontbrekend, onleesbaar, buiten de projectmap, of intussen buiten
+/// de app gewijzigd.
 ///
-/// Zo'n grafiek tekent leeg, en dat ziet er precies uit als een grafiek zonder
-/// cijfers — het probleem is dus onzichtbaar tenzij we het zeggen. Zelfde
+/// Bij het openen tekent zo'n grafiek leeg, en dat ziet er precies uit als een
+/// grafiek zonder cijfers. Bij het opslaan is het erger: de markdown draagt dan
+/// alleen nog de verwijzing, dus de cijfers staan enkel nog in dit venster. In
+/// beide gevallen is het probleem onzichtbaar tenzij we het zeggen. Zelfde
 /// eenmalige signaalvorm als [securityModulePromptProvider]: de state-laag zet
-/// hem bij het openen, de shell toont hem en wist hem.
+/// hem, de shell toont hem en wist hem.
 class ChartDataWarning {
-  /// De `source`-paden die niet gelezen konden worden.
+  /// De `source`-paden die het niet haalden.
   final List<String> sources;
+
+  /// Of dit een opslag betrof. De twee gevallen vragen een andere tekst — bij
+  /// lezen blijft de grafiek leeg, bij schrijven zijn de cijfers nergens
+  /// vastgelegd — en dat verschil bepaalt wat de gebruiker moet doen.
+  final bool whileSaving;
 
   /// Niet-const, net als [SecurityModulePrompt]: twee identieke const-instanties
   /// zouden bij een tweede open als "geen wijziging" worden weggeslikt.
-  ChartDataWarning(this.sources);
+  ChartDataWarning(this.sources, {this.whileSaving = false});
 }
 
 final chartDataWarningProvider = StateProvider<ChartDataWarning?>(

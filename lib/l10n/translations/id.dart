@@ -1760,8 +1760,6 @@ const _dutchSourceId = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Finalisasi & segel',
   'Verzegelen': 'Segel',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Finalisasi presentasi ini dan hitung segel SHA-512 atas kontennya. Setelah itu berkas dikunci dan tidak dapat diedit lagi; perubahan berikutnya menjadi terlihat. Ini tidak dapat dibatalkan di aplikasi.',
   'Handtekening (optioneel)': 'Tanda tangan (opsional)',
   'Naam': 'Nama',
   'Rol of functie': 'Peran atau jabatan',
@@ -1783,6 +1781,95 @@ const _dutchSourceAddId = <String, String>{
       'Teks ini berisi bab. Pemisahan menghasilkan',
   'dia\'s op.': 'slide.',
   'Splits op hoofdstukken': 'Pisahkan per bab',
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Dek ini berisi teks AI yang belum Anda tinjau. Ekspor tetap bisa; berkas itu sendiri menyebutkannya dan mendapat "-ai-concept" pada namanya.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Draf: berisi teks AI yang belum ditinjau siapa pun',
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalisasi presentasi ini dan tetapkan segel SHA-512 atas berkas yang disimpan. Setelah itu berkas dikunci dan tidak dapat diedit lagi; setiap perubahan berikutnya menjadi terlihat. Penerima laporan memeriksa sendiri segel itu dengan sha512sum. Ini tidak dapat dibatalkan di aplikasi.',
+  'Zegel en handtekening': 'Segel dan tanda tangan',
+  'Zegel nog niet vastgelegd': 'Segel belum dicatat',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Belum ada berkas tersimpan untuk memeriksa segel. Simpan deck.',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Penyembunyian aktif: apa yang ditandai pemeriksaan sebagai data pribadi dihitamkan, dan semua gambar, video, dan audio pada slide ini tidak ikut ke layar atau ekspor. Berkas markdown Anda menyimpan semuanya.',
+  'Bestand': 'Berkas',
+  'Venster': 'Jendela',
+  'Help': 'Bantuan',
+  'Alles selecteren': 'Pilih semua',
+  'Plakken': 'Tempel',
+  'Opnieuw': 'Ulangi',
+  'Eigenschappen': 'Properti',
+  'Opdrachten…': 'Perintah…',
+  'Opslaan…': 'Menyimpan…',
+  'Uploaden naar WebDAV…': 'Mengunggah ke WebDAV…',
+  'Uploaden naar S3…': 'Mengunggah ke S3…',
+  'Vastleggen in git…': 'Menyimpan ke git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Sedang menyimpan. Menyimpan lagi tidak melakukan apa pun sampai ini selesai.',
+  'Klaar — privacy niet gecontroleerd': 'Siap — privasi tidak diperiksa',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Tidak ada pemeriksaan untuk data pribadi, data khusus, dan rahasia: pemeriksaan privasi dimatikan di Keamanan.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Presentasi yang tetap berupa berkas Markdown biasa: dapat dibaca, dicari, dan dibuka dengan editor apa pun.',
+  'sjablonen om mee te beginnen, of leeg': 'templat untuk memulai, atau kosong',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Slide contoh dari sebuah templat berbahasa Belanda. Nama dan deskripsi mengikuti bahasa Anda sendiri; isinya Anda sesuaikan setelah dibuat.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Penyembunyian aktif: data yang ditemukan dihitamkan dan semua gambar, video, dan audio pada slide ini tidak ikut ke layar atau ekspor. Berkas markdown Anda menyimpan semuanya.',
+  'Mijn tekst': 'Teks saya',
+  'Wat zij zien': 'Yang mereka lihat',
+  'Presentatiegegevens': 'Data presentasi',
+  'Open presentatiegegevens': 'Buka data presentasi',
+  'Motivering van een uitsluiting': 'Alasan pengecualian',
+  'Motivering van een bevestiging': 'Alasan konfirmasi',
+  'Tabel koprij, kolom {kolom}': 'Tabel baris header, kolom {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Tabel baris {rij}, kolom {kolom}',
+  'Via deze website ophalen?': 'Ambil lewat situs ini?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Server presentasi ini tidak mengizinkan peramban membaca berkasnya secara langsung. OciDeck dapat meneruskan alamatnya ke situs web asal OciDeck sendiri, dan situs itulah yang mengambilnya. Dengan begitu situs tersebut melihat alamat lengkapnya — jika ada kunci atau kode di dalam tautan, situs itu juga melihatnya.',
+  'In de browser kan dit niet worden bewaard':
+      'Di peramban ini tidak dapat disimpan',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Peramban tidak punya gantungan kunci seperti komputer: apa pun yang akan disimpan OciDeck di sini bisa dibaca oleh skrip mana pun di halaman ini. Gunakan versi desktop — di sana rahasianya memang masuk ke gantungan kunci sistem operasi.',
+  'Licenties van derden': 'Lisensi pihak ketiga',
+  'Alle licentieteksten tonen': 'Tampilkan semua teks lisensi',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck sendiri berlisensi EUPL-1.2. Selain itu ia menyertakan perangkat lunak pihak ketiga: paket Dart dan Flutter, dua plugin bawaan, empat keluarga fon, model wajah untuk pemeriksaan privasi, dan JavaScript yang ikut serta dalam ekspor HTML. Masing-masing mempertahankan lisensinya sendiri.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Berkas ini memuat perangkat lunak pihak ketiga dan kadang sebuah fon. Teks lisensi lengkap yang menyertainya ada di bawah; sertakan saat Anda meneruskan berkas ini.',
+  'Sporen op dit apparaat': 'Jejak di perangkat ini',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Selain pengaturan Anda, OciDeck juga menyimpan daftar terbaru dan, jika terjadi crash, sebuah file pemulihan berisi seluruh isi presentasi Anda. Tidak satu pun dari itu meninggalkan perangkat ini, tetapi semuanya ada di sini — dalam teks biasa, dilindungi oleh akun Anda pada sistem operasi ini dan tidak lebih dari itu.',
+  'Recent geopende presentaties': 'Presentasi yang baru dibuka',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Daftar ini menyimpan jalur lengkap dan klasifikasi setiap presentasi yang pernah dibuka — bersama-sama, keterangan tentang apa yang sedang Anda kerjakan dan untuk siapa.',
+  'Recente lijst wissen': 'Hapus daftar terbaru',
+  'De recente lijst was al leeg.': 'Daftar terbaru sudah kosong.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'entri dihapus dari daftar terbaru.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'File pemulihan berisi seluruh isi presentasi Anda dalam teks biasa. Dibersihkan otomatis setelah 7 hari, dan segera saat aplikasi ditutup dengan rapi.',
+  'Alles terugzetten': 'Setel ulang semuanya',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Menghapus setiap pengaturan, daftar terbaru, file pemulihan, salinan kerja git dan kata sandi di gantungan kunci Anda. Presentasi Anda tetap ada: itu milik Anda, bukan milik OciDeck.',
+  'Zet alles terug naar de begintoestand':
+      'Kembalikan semuanya ke keadaan awal',
+  'Alles terugzetten naar de begintoestand?':
+      'Kembalikan semuanya ke keadaan awal?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Pengaturan Anda, daftar terbaru, file pemulihan, salinan kerja git dan kata sandi yang tersimpan akan dihapus. Ini tidak dapat dibatalkan. Presentasi Anda tetap ada.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'perubahan belum dikirim ke server git dan hanya ada di perangkat ini. Itu pun ikut hilang.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Semuanya telah dikembalikan ke keadaan awal.',
+  'Terugzetten is niet gelukt.': 'Penyetelan ulang tidak berhasil.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Masih ada pekerjaan yang belum terkirim',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Koneksi git ini memiliki perubahan yang belum dikirim ke server. Jika Anda menghapus koneksinya, salinan kerja di perangkat ini ikut hilang — dan pekerjaan ini tidak ada lagi di mana pun.',
+  'Verbinding behouden': 'Pertahankan koneksi',
+  'Toch verwijderen': 'Tetap hapus',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',
@@ -1841,6 +1928,33 @@ const _dutchSourceAddId = <String, String>{
       'mencantumkan apa saja yang dihilangkan, tanpa nilainya sendiri. Berkas ini boleh disertakan bersama laporan.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'berisi kunci yang membuat setiap nilai yang diredaksi dapat dihitung kembali. Jangan sertakan berkas ini: redaksi menjadi batal. Simpan berkas ini bersama sumbernya.',
+  'slides': 'slide',
+  'Achtergehouden': 'Ditahan',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Ditahan: diklasifikasikan lebih ketat daripada presentasi',
+  '1 slide achtergehouden door haar TLP': '1 slide ditahan oleh TLP-nya',
+  'slides achtergehouden door hun TLP': 'slide ditahan oleh TLP-nya',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Slide ini tidak ikut saat presentasi, ekspor, atau dalam paket. Naikkan tingkat TLP presentasi di Info presentasi agar ikut disertakan.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Semua slide ditahan oleh klasifikasi TLP-nya, jadi tidak ada yang ditampilkan.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Semua slide ditahan oleh klasifikasi TLP-nya, jadi tidak ada yang diekspor.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Semua slide dilewati atau ditahan oleh klasifikasi TLP-nya, jadi tidak ada yang ditampilkan.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Semua slide dilewati atau ditahan oleh klasifikasi TLP-nya, jadi tidak ada yang diekspor.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Angka bagan tidak tersimpan — sekarang hanya ada di jendela ini:',
+  'Niet alles gaat mee naar git': 'Tidak semuanya ikut ke git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Bagian-bagian ini tidak masuk ke dalam commit dan nanti tidak ada di repositori:',
+  'Tekeningen op slides': 'Coretan pada slide',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Semuanya tetap ada di jendela ini. Simpan juga presentasi sebagai berkas atau sebagai paket .ocideck agar tersimpan.',
+  'Toch opslaan': 'Tetap simpan',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Di peramban tidak ada pemulihan setelah crash: jika kamu menutup tab ini, pekerjaan yang belum tersimpan akan hilang. Simpan sendiri presentasimu.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Basis data CVE lokal (Anda sendiri yang memulai unduhan): OciDeck mengambil data massal melalui api.github.com dan berkas rilis yang ditunjuk alamat itu.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

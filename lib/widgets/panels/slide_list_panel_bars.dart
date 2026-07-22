@@ -61,6 +61,57 @@ class _SkipBanner extends StatelessWidget {
   }
 }
 
+/// Balk voor dia's die worden achtergehouden omdat hun TLP-classificatie
+/// strenger is dan die van de presentatie.
+///
+/// Bewust een eigen balk naast [_SkipBanner] en niet dezelfde teller: dit is
+/// geen keuze die de auteur per dia maakte, maar een gevolg van het
+/// classificatiebeleid — beide standaardwaarden zijn `TlpLevel.none`, dus één
+/// dia op AMBER verdwijnt uit een deck waarvan het deckniveau nooit is gezet.
+/// Er zit geen knop op: het deckniveau verhogen is een classificatiebeslissing
+/// die in Presentatie-info hoort, niet een opruimhandeling in een zijbalk.
+class _WithheldBanner extends StatelessWidget {
+  final int count;
+
+  const _WithheldBanner({required this.count});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Tooltip(
+      message: l10n.d(
+        'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.',
+      ),
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(8, 5, 8, 5),
+        decoration: BoxDecoration(
+          color: AppTheme.badgeErrorOverlay.withValues(alpha: 0.2),
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(color: AppTheme.badgeErrorOverlay),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.lock_outline, size: 13, color: Colors.white),
+            const SizedBox(width: 6),
+            Expanded(
+              child: Text(
+                count == 1
+                    ? l10n.d('1 slide achtergehouden door haar TLP')
+                    : '$count ${l10n.d('slides achtergehouden door hun TLP')}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 // ── Bulk-actiebalk (meervoudige selectie) ─────────────────────────────────────
 
 class _BulkActionBar extends StatelessWidget {
