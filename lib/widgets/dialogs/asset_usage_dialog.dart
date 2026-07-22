@@ -1,22 +1,28 @@
-// Part of the app_shell library — see ../app_shell.dart.
-// Het overzicht van de gedeelde afbeeldingenpool (§9.3): wie gebruikt wat, en
-// wat lijkt nergens meer gebruikt. Eigen bestand omdat de git-dialogen anders
-// over de regelratchet gaan; de handler staat in shell_actions_git.dart.
-part of '../app_shell.dart';
+import 'package:flutter/material.dart';
 
-/// Toont de pool met per afbeelding wie hem aanhaalt.
+import '../../l10n/app_localizations.dart';
+import '../../models/git_settings.dart';
+import '../../services/git/asset_index.dart';
+import '../../theme/app_theme.dart';
+
+/// Toont de gedeelde afbeeldingenpool (§9.3) met per afbeelding wie hem
+/// aanhaalt.
 ///
 /// De opruim-kandidaten staan er apart onder, maar alleen als de ronde compleet
 /// wás. Kon één deck of één uitgebrachte versie niet gelezen worden, dan is
 /// "niemand gebruikt dit" een onbewezen bewering en toont het scherm dát — geen
 /// lijst. Weggooien is onomkeerbaar (P2), dus dit scherm mag nooit een kandidaat
 /// noemen die het niet kan hardmaken.
-class _AssetUsageDialog extends StatelessWidget {
+///
+/// Een eigen dialoogbestand en geen `part` van de app-shell: het scherm hoeft
+/// alleen een [AssetIndexSnapshot] te krijgen, en zo is die regel ook los te
+/// beproeven — als deel van de shell-bibliotheek was hij dat niet.
+class AssetUsageDialog extends StatelessWidget {
   final AssetIndexSnapshot snapshot;
-  const _AssetUsageDialog({required this.snapshot});
+  const AssetUsageDialog({super.key, required this.snapshot});
 
   /// De hash ingekort tot iets wat een mens kan vergelijken.
-  static String _shortRef(String reference) {
+  static String shortRef(String reference) {
     final path = GitRepoLayout.assetPathOf(reference) ?? reference;
     final name = path.split('/').last;
     return name.length > 14 ? '${name.substring(0, 10)}…${_ext(name)}' : name;
@@ -27,7 +33,7 @@ class _AssetUsageDialog extends StatelessWidget {
     return dot < 0 ? '' : name.substring(dot);
   }
 
-  static String _size(int? bytes) {
+  static String formatSize(int? bytes) {
     if (bytes == null || bytes <= 0) return '';
     if (bytes < 1024) return '$bytes B';
     if (bytes < 1024 * 1024) return '${(bytes / 1024).round()} kB';
@@ -99,7 +105,7 @@ class _AssetUsageDialog extends StatelessWidget {
       dense: true,
       leading: Icon(Icons.image_outlined, size: 18, color: colour),
       title: Text(
-        _shortRef(asset.reference),
+        shortRef(asset.reference),
         style: const TextStyle(fontSize: 13, fontFamily: 'monospace'),
       ),
       subtitle: Text(
@@ -109,7 +115,7 @@ class _AssetUsageDialog extends StatelessWidget {
         style: TextStyle(fontSize: 11, color: colour),
       ),
       trailing: Text(
-        _size(asset.size),
+        formatSize(asset.size),
         style: TextStyle(fontSize: 11, color: AppTheme.slate400),
       ),
     );

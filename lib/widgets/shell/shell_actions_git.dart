@@ -750,7 +750,7 @@ Future<void> _showAssetUsage(BuildContext context, WidgetRef ref) async {
 
   await showDialog<void>(
     context: context,
-    builder: (_) => _AssetUsageDialog(snapshot: snapshot),
+    builder: (_) => AssetUsageDialog(snapshot: snapshot),
   );
 }
 
