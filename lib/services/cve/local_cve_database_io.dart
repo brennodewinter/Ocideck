@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:path_provider/path_provider.dart';
 
 import '../../models/local_cve_record.dart';
@@ -80,6 +81,15 @@ class GithubBulkTransport implements CveBulkTransport {
   static const _userAgent = 'OciDeck';
   static const _maxRedirects = 5;
 
+  /// Bovengrens voor wat er binnengehaald wordt.
+  ///
+  /// De lus schreef door zolang de andere kant bleef sturen: `Content-Length`
+  /// werd alleen aan de voortgangsbalk gegeven, niet aan een grens. Een
+  /// omgeleide of vervangen asset kon zo een schijf volschrijven bij iemand die
+  /// alleen op "binnenhalen" drukte. Dezelfde grens als voor het uitgepakte
+  /// archief — de buitenste zip bevat de binnenste, dus hoger hoeft niet.
+  static const _maxDownloadBytes = CveBulkIngest.defaultMaxInnerArchiveBytes;
+
   /// Eén request, met de host opgelost en de socket erop vastgezet. Volgt geen
   /// redirects: dat doet [_follow], zodat elke hop opnieuw gekeurd wordt.
   Future<HttpClientResponse> _get(HttpClient client, Uri url) async {
@@ -151,6 +161,48 @@ class GithubBulkTransport implements CveBulkTransport {
     }
   }
 
+  /// Schrijft [chunks] naar [sink] en houdt [maxBytes] aan, met [total] als de
+  /// aangekondigde omvang (`Content-Length`, of ≤ 0 als die ontbreekt).
+  ///
+  /// Los van [download] omdat de grens anders onbereikbaar is voor een test:
+  /// [download] pint de socket vast via [NetGuard], en die weigert loopback —
+  /// een testserver op deze machine is dus per ontwerp niet te benaderen. De
+  /// grens is precies het stuk dat wél te toetsen valt, dus staat het apart.
+  @visibleForTesting
+  static Future<void> streamCapped(
+    Stream<List<int>> chunks,
+    IOSink sink, {
+    required int total,
+    required void Function(int received, int total) onProgress,
+    required bool Function() isCancelled,
+    int maxBytes = _maxDownloadBytes,
+  }) async {
+    if (total > maxBytes) {
+      throw CveIngestException(
+        CveIngestFailure.invalidArchive,
+        'het archief kondigt $total bytes aan',
+      );
+    }
+    var received = 0;
+    await for (final chunk in chunks) {
+      if (isCancelled()) {
+        throw const CveIngestException(CveIngestFailure.cancelled);
+      }
+      received += chunk.length;
+      // Ná het optellen, vóór het schrijven: een `Content-Length` die liegt of
+      // ontbreekt is precies het geval waarvoor deze grens er is, en dan mag de
+      // brok die eroverheen gaat niet meer op schijf landen.
+      if (received > maxBytes) {
+        throw const CveIngestException(
+          CveIngestFailure.invalidArchive,
+          'het archief groeide voorbij de grens tijdens het binnenhalen',
+        );
+      }
+      sink.add(chunk);
+      onProgress(received, total > 0 ? total : 0);
+    }
+  }
+
   @override
   Future<void> download(
     Uri url,
@@ -170,18 +222,14 @@ class GithubBulkTransport implements CveBulkTransport {
         );
       }
 
-      final total = response.contentLength;
-      var received = 0;
       sink = destination.openWrite();
-
-      await for (final chunk in response.timeout(_chunkTimeout)) {
-        if (isCancelled()) {
-          throw const CveIngestException(CveIngestFailure.cancelled);
-        }
-        sink.add(chunk);
-        received += chunk.length;
-        onProgress(received, total > 0 ? total : 0);
-      }
+      await streamCapped(
+        response.timeout(_chunkTimeout),
+        sink,
+        total: response.contentLength,
+        onProgress: onProgress,
+        isCancelled: isCancelled,
+      );
       await sink.flush();
     } on SocketException catch (e) {
       throw CveIngestException(CveIngestFailure.networkFailed, e.message);
