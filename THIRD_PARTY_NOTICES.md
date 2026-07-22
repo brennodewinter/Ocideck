@@ -7,6 +7,13 @@ builds on, and bundles, third-party components that remain under their own
 licences. This file lists them; each component's full licence text is available
 from its project or package page.
 
+> **The bundled JavaScript is unmodified upstream.** Every vendored bundle is
+> the build its publisher shipped, byte for byte — verify it yourself with
+> `dart run tool/check_bundled_js.dart --verify-upstream`, or one bundle at a
+> time with `curl -sL <source> | shasum -a 256` against `sha256` in
+> `assets/web_export/MANIFEST.json`. See
+> [`docs/SBOM.md`](docs/SBOM.md#proving-the-bundled-javascript-is-unmodified).
+
 > For the authoritative, version-pinned, **machine-readable** inventory of every
 > component (with SHA-256 hashes and purls) — the artefact the EU Cyber
 > Resilience Act requires — see the Software Bill of Materials in
