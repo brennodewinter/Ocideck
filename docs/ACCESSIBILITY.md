@@ -105,6 +105,36 @@ either). PPTX speaker notes are real text and do travel.
 and headings, which is already a great deal more than the bitmap formats, but
 nobody has checked its colour contrast, focus order or landmark structure.
 
+**The app's own colours do not all meet the bar it applies to your slides.**
+*(Added 2026-07-22, #606.)* OciDeck measures the contrast of your deck against
+WCAG AA and reports what falls short — and its own interface did not hold to
+that everywhere. Measured against the surface each mode actually paints on
+(`AppTheme.paper`, white or `#181B21`), and counting only tokens the interface
+uses as *text*:
+
+- **dark mode: 17 tokens below 4.5:1.** The worst are the red used for a
+  critical finding, a checklist anomaly and an unreachable scope object
+  (`#B91C1C`, 2.67:1), the neutral grey for "no severity" (`#475569`, 2.28:1),
+  and the green for a tested item (`#15803D`, 3.44:1);
+- **light mode: 2 tokens below 4.5:1** — the orange and amber of the high and
+  medium severity bands (`#EA580C` 3.6:1, `#D97706` 3.3:1). The issue that
+  raised this measured dark mode only and treated light as fine; it is not.
+
+The exact list lives in `test/app_theme_contrast_test.dart` as a ratchet, so the
+number is in the repository rather than in a reviewer's notebook, and it can
+only go down: the test fails both when a new token drops below the bar and when
+one that has been fixed is left in the baseline.
+
+Three call sites are corrected — the seal indicator in the status bar, the
+asset-overview warning, and the error colour in the quality panel now use the
+mode-aware `dangerFg`/`successFg` instead of the fixed `danger700`/`success700`.
+The rest is not done. It is not a matter of flipping the tokens: the fixed ones
+are fixed **on purpose**, because a finding must render identically in the
+preview and in a headless export isolate, and a colour that moves with the app's
+appearance would break that. So each of the roughly two hundred uses has to be
+read as either slide content (leave it) or interface chrome (make it
+mode-aware), and that audit is still open.
+
 **A few blocking messages are still built in Dutch.** *(Rewritten 2026-07-22.)*
 This entry used to say that roughly fifty editor labels showed their Dutch
 source text. That is no longer true: those labels are translated, the gate now

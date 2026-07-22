@@ -193,7 +193,9 @@ class _DeckStatusBar extends StatelessWidget {
           : l10n.d(
               'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.',
             ),
-      color: intact ? AppTheme.success700 : AppTheme.danger700,
+      // De mode-afhankelijke varianten: dit is chrome-tekst op `paper`, en
+      // #15803D/#B91C1C halen daar in donkere modus 3,4:1 en 2,7:1 (#606).
+      color: intact ? AppTheme.successFg : AppTheme.dangerFg,
     );
   }
 }
