@@ -1,8 +1,8 @@
 // De git-opslag laat werk achter, en dat moet de gebruiker vóór de commit horen.
 //
-// `deck.md`, de afbeeldingenpool en de grafiekdata gaan mee; video, audio, de
-// tekenlaag (`.ink.json`) en de gebruikersnotities (`.user-notes.json`) niet —
-// `services/git/` schrijft die sidecars nergens. Op schijf reizen ze wél mee,
+// `deck.md`, de assetpool (afbeeldingen én media) en de grafiekdata gaan mee;
+// de tekenlaag (`.ink.json`) en de gebruikersnotities (`.user-notes.json`) niet
+// — `services/git/` schrijft die sidecars nergens. Op schijf reizen ze wél mee,
 // dus wie van een bestand naar git verhuist raakt ze kwijt zonder dat er iets
 // misgaat waar de app op kan wijzen. Ze alsnog meenemen is een grotere ingreep;
 // de waarschuwing kan niet wachten, en hoort vóór de commit — daarna is de
@@ -68,8 +68,9 @@ void main() {
       );
 
       final missing = gitDeckOmissions(deck);
-      expect(missing.videoSlides, 1);
-      expect(missing.audioSlides, 1);
+      // Video en audio staan hier bewust NIET meer: die reizen sinds #515 mee
+      // door de assetpool. Een waarschuwing die onwaar is, leert de gebruiker
+      // de hele melding weg te klikken.
       expect(missing.annotatedSlides, 1);
       expect(missing.noteSlides, 1);
       expect(missing.isNotEmpty, isTrue);

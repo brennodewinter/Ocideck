@@ -4,6 +4,8 @@ import '../../models/deck.dart';
 import '../../models/git_settings.dart';
 import '../../models/slide.dart';
 import '../../utils/log.dart';
+import '../../platform/platform_features.dart';
+import '../asset_staging.dart';
 import '../image_service.dart';
 import '../slide_image_refs.dart';
 import '../web_asset_store.dart';
@@ -28,6 +30,51 @@ Future<Deck> resolveRepoAssetsToMem(
   required String sourceName,
 }) async {
   final memFor = <String, String>{};
+
+  /// Media komt niet terug zoals een afbeelding. [WebAssetStore] is een map in
+  /// het geheugen — prima voor een plaatje, verkeerd voor de gigabyte die
+  /// [ImageService.maxMediaBytes] toestaat. Op een platform met een
+  /// bestandssysteem gaat media daarom naar de staging-map en speelt de speler
+  /// hem van schijf, net als bij een deck uit een gewone map (D12).
+  Future<String?> mediaPath(String reference) async {
+    if (!GitRepoLayout.isRepoAsset(reference)) return null;
+    final cached = memFor[reference];
+    if (cached != null) return cached;
+    try {
+      final bytes = await pool.resolve(reference);
+      // Een forge is onvertrouwd (P5), net als bij een afbeelding: de bytes
+      // moeten als bekende container snuiven en binnen de mediagrens blijven.
+      if (bytes.isEmpty ||
+          bytes.length > ImageService.maxMediaBytes ||
+          ImageService.mediaMimeFromBytes(bytes.take(16).toList()) == null) {
+        logWarning(
+          'resolveRepoAssetsToMem: media geweigerd ($sourceName) — geen '
+          'bekende container of buiten de grens',
+        );
+        return null;
+      }
+      final path = GitRepoLayout.assetPathOf(reference);
+      final name = path == null ? 'media' : p.posix.basename(path);
+      // De naam in de staging-map is de assetverwijzing zelf, en die is de
+      // hash van de inhoud: twee dia's met dezelfde film delen één bestand, en
+      // een tweede keer openen overschrijft hetzelfde pad in plaats van te
+      // stapelen.
+      final staged = supportsLocalProjectFolders
+          ? await AssetStaging.stageBytes(
+              bytes,
+              subdir: 'repo-media',
+              filename: name,
+            )
+          : WebAssetStore.put(bytes, name: name);
+      if (staged == null) return null;
+      memFor[reference] = staged;
+      return staged;
+    } on GitForgeException catch (e) {
+      logWarning('resolveRepoAssetsToMem: media onbereikbaar ($sourceName)', e);
+      return null;
+    }
+  }
+
   Future<String?> memPath(String reference) async {
     if (!GitRepoLayout.isRepoAsset(reference)) return null;
     final cached = memFor[reference];
@@ -65,7 +112,12 @@ Future<Deck> resolveRepoAssetsToMem(
       final mem = await memPath(reference);
       if (mem != null) resolved[reference] = mem;
     }
-    slides.add(rewriteSlideImagePaths(slide, (path) => resolved[path]));
+    var next = rewriteSlideImagePaths(slide, (path) => resolved[path]);
+    final video = await mediaPath(slide.videoPath);
+    final audio = await mediaPath(slide.audioPath);
+    if (video != null) next = next.copyWith(videoPath: video);
+    if (audio != null) next = next.copyWith(audioPath: audio);
+    slides.add(next);
   }
   return memFor.isEmpty ? deck : deck.copyWith(slides: slides);
 }
