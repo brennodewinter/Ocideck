@@ -1776,6 +1776,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Dette deck indeholder AI-tekst, du endnu ikke har gennemgået. Du kan godt eksportere; filen oplyser selv om det og får "-ai-concept" i navnet.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Udkast: indeholder AI-tekst, som ingen har gennemgået endnu',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Færdiggør denne præsentation, og fastlæg et SHA-512-segl over den gemte fil. Derefter er den låst og kan ikke længere redigeres; enhver senere ændring bliver synlig. Den, der modtager rapporten, efterregner selv seglet med sha512sum. Dette kan ikke fortrydes i appen.',
   'Zegel en handtekening': 'Segl og underskrift',

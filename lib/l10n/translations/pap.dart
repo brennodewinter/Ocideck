@@ -734,6 +734,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Den e deck aki tin teksto di IA ku bo no a revisá ainda. Bo por eksportá tòg; e file mes ta bisa esei i ta haña "-ai-concept" den su nòmber.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Konsepto: aki tin teksto di IA ku ainda no a ser revisá',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Finalisá e presentashon aki i registrá un seyo SHA-512 riba e archivo wardá. Despues e ta será i no por wòrdu editá mas; kada kambio posterior ta bira visibel. Ken ta risibí e rapòrt ta kontrolá e seyo su mes ku sha512sum. Esaki no por wòrdu deshasí den e app.',
   'Zegel en handtekening': 'Seyo i firma',

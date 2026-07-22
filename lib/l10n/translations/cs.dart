@@ -1780,6 +1780,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'V tomto decku je AI text, který jsi zatím nezkontroloval. Export je přesto možný; soubor to sám uvádí a dostane v názvu "-ai-concept".',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Koncept: obsahuje AI text, který zatím nikdo nezkontroloval',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Dokončete tuto prezentaci a zaznamenejte pečeť SHA-512 nad uloženým souborem. Ten se poté uzamkne a nelze jej dále upravovat; každá pozdější změna se stane viditelnou. Kdo zprávu obdrží, ověří si pečeť sám pomocí sha512sum. Tuto akci nelze v aplikaci vrátit zpět.',
   'Zegel en handtekening': 'Pečeť a podpis',

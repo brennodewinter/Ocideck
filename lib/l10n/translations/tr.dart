@@ -2759,6 +2759,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Bu sunumda henüz gözden geçirmediğiniz AI metni var. Yine de dışa aktarabilirsiniz; dosya bunu kendisi belirtir ve adına "-ai-concept" eklenir.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Taslak: kimsenin henüz gözden geçirmediği AI metni içeriyor',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Bu sunumu sonlandırın ve kaydedilen dosya üzerinde bir SHA-512 mührü sabitleyin. Ardından dosya kilitlenir ve artık düzenlenemez; sonraki her değişiklik görünür hale gelir. Raporu alan kişi mührü sha512sum ile kendisi doğrular. Bu işlem uygulamada geri alınamaz.',
   'Zegel en handtekening': 'Mühür ve imza',

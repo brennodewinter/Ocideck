@@ -1776,6 +1776,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Šajā deksā ir MI teksts, ko vēl neesi pārbaudījis. Eksportēt tomēr var; fails pats to norāda un nosaukumā parādās "-ai-concept".',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Melnraksts: satur MI tekstu, ko vēl neviens nav pārbaudījis',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Pabeidziet šo prezentāciju un fiksējiet SHA-512 zīmogu saglabātajam failam. Pēc tam tas tiek bloķēts, un to vairs nevar rediģēt; katra vēlākā izmaiņa kļūst redzama. Tas, kurš saņem ziņojumu, pats pārrēķina zīmogu ar sha512sum. To lietotnē nevar atsaukt.',
   'Zegel en handtekening': 'Zīmogs un paraksts',

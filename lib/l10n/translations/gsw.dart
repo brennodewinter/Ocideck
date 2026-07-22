@@ -1781,6 +1781,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'I dem Deck staht KI-Text, wo du no nöd prüeft häsch. Exportiere gaht trotzdem; d Datei seit das sälber und überchunnt "-ai-concept" im Name.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Entwurf: da staht KI-Text, wo no niemert prüeft hät',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Schliess die Präsentation ab und halt es SHA-512-Sigel über di gspeicherti Datei fest. Denn isch si gsperrt und cha nüme bearbeitet werde; jedi spöteri Änderig wird sichtbar. Wer de Bricht überchunnt, rächnet s Sigel sälber mit sha512sum na. Das cha i de App nöd rückgängig gmacht werde.',
   'Zegel en handtekening': 'Sigel und Underschrift',

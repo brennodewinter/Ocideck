@@ -1805,6 +1805,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Αυτό το deck περιέχει κείμενο AI που δεν έχεις ελέγξει ακόμη. Η εξαγωγή επιτρέπεται· το αρχείο το αναφέρει από μόνο του και παίρνει «-ai-concept» στο όνομα.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Προσχέδιο: περιέχει κείμενο AI που δεν έχει ελέγξει ακόμη κανείς',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Οριστικοποιήστε αυτήν την παρουσίαση και καταγράψτε μια σφραγίδα SHA-512 για το αποθηκευμένο αρχείο. Στη συνέχεια κλειδώνεται και δεν μπορεί πλέον να επεξεργαστεί· κάθε μεταγενέστερη αλλαγή γίνεται ορατή. Όποιος λάβει την αναφορά ελέγχει ο ίδιος τη σφραγίδα με sha512sum. Αυτό δεν μπορεί να αναιρεθεί στην εφαρμογή.',
   'Zegel en handtekening': 'Σφραγίδα και υπογραφή',

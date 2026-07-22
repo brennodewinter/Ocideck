@@ -1777,6 +1777,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Tässä deckissä on tekoälytekstiä, jota et ole vielä tarkistanut. Vienti onnistuu silti; tiedosto kertoo siitä itse ja saa nimeensä "-ai-concept".',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Luonnos: sisältää tekoälytekstiä, jota kukaan ei ole vielä tarkistanut',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Viimeistele tämä esitys ja kirjaa SHA-512-sinetti tallennetusta tiedostosta. Tämän jälkeen se lukitaan eikä sitä voi enää muokata; jokainen myöhempi muutos tulee näkyviin. Raportin vastaanottaja tarkistaa sinetin itse sha512sum-komennolla. Tätä ei voi kumota sovelluksessa.',
   'Zegel en handtekening': 'Sinetti ja allekirjoitus',

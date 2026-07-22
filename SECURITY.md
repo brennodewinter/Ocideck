@@ -357,7 +357,12 @@ OciDeck constrains what an opened deck can do:
   pinning the socket to the validated address. Remote images keep the decode-dimension
   cap (`cappedNetworkImage`); magic-byte validation does not apply to live
   streams (no pre-fetched bytes), a deliberate trade-off. The embed WebView
-  restricts navigation to the player origins and refuses auth prompts/pop-ups.
+  restricts navigation to the player origins and refuses auth prompts/pop-ups;
+  since 2026-07-22 that check matches on the parsed **host** rather than on a
+  substring of the URL, and the YouTube list is `youtube-nocookie.com`,
+  `ytimg.com` and `googlevideo.com` — `www.youtube.com` is refused, so the
+  player's own "Watch on YouTube" link cannot navigate the frame onto the
+  tracking origin.
 
 Known residual hardening: the render-path symlink cache is keyed by path for the
 session, so a symlink swapped *after* its first render isn't re-checked (a

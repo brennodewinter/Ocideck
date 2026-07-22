@@ -1800,6 +1800,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'В този дек има AI текст, който още не си прегледал. Експортът е възможен; файлът сам съобщава това и получава „-ai-concept“ в името.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Чернова: съдържа AI текст, който още никой не е прегледал',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Финализирайте тази презентация и запишете SHA-512 печат върху запазения файл. След това той се заключва и вече не може да се редактира; всяка по-късна промяна става видима. Който получи доклада, сам преизчислява печата със sha512sum. Това не може да бъде отменено в приложението.',
   'Zegel en handtekening': 'Печат и подпис',

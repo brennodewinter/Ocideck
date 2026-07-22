@@ -1777,6 +1777,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Dek ini berisi teks AI yang belum Anda tinjau. Ekspor tetap bisa; berkas itu sendiri menyebutkannya dan mendapat "-ai-concept" pada namanya.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Draf: berisi teks AI yang belum ditinjau siapa pun',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Finalisasi presentasi ini dan tetapkan segel SHA-512 atas berkas yang disimpan. Setelah itu berkas dikunci dan tidak dapat diedit lagi; setiap perubahan berikutnya menjadi terlihat. Penerima laporan memeriksa sendiri segel itu dengan sha512sum. Ini tidak dapat dibatalkan di aplikasi.',
   'Zegel en handtekening': 'Segel dan tanda tangan',

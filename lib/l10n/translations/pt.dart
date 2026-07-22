@@ -1807,6 +1807,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Este deck contém texto de IA que ainda não reviste. Podes exportar à mesma; o ficheiro indica-o por si e fica com "-ai-concept" no nome.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Rascunho: contém texto de IA que ainda ninguém reviu',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Finalize esta apresentação e fixe um selo SHA-512 sobre o ficheiro guardado. Depois disso fica bloqueado e não pode mais ser editado; qualquer alteração posterior torna-se visível. Quem recebe o relatório verifica o selo por si próprio com sha512sum. Isto não pode ser desfeito na aplicação.',
   'Zegel en handtekening': 'Selo e assinatura',

@@ -1795,6 +1795,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'У цій презентації є текст ШІ, який ти ще не перевірив. Експортувати можна; файл сам про це повідомляє й отримує «-ai-concept» у назві.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Чернетка: містить текст ШІ, який ще ніхто не перевірив',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Завершіть цю презентацію та зафіксуйте печатку SHA-512 для збереженого файлу. Після цього його буде заблоковано, і його більше не можна буде редагувати; кожна подальша зміна стане помітною. Той, хто отримає звіт, сам перевірить печатку за допомогою sha512sum. Цю дію не можна скасувати в застосунку.',
   'Zegel en handtekening': 'Печатка та підпис',

@@ -1,5 +1,6 @@
 import '../models/deck.dart';
 import '../models/document_signature.dart';
+import 'document_integrity.dart';
 import 'privacy/privacy_projection.dart';
 
 /// Application name embedded in PDF Creator / XMP CreatorTool.
@@ -7,6 +8,29 @@ const kOciDeckCreator = 'OciDeck';
 
 /// Producer string embedded in PDF/PPTX metadata.
 const kOciDeckProducer = 'OciDeck 0.2.0';
+
+/// De machineleesbare markering voor inhoud die een AI heeft opgesteld en die
+/// nog geen mens heeft nagekeken.
+///
+/// Bewust niet vertaald, net als [kOciDeckCreator] en de TLP-labels: dit is een
+/// veld dat een gereedschap uitleest, geen zin die iemand op het scherm leest.
+/// Vertalen zou de markering per taal een andere waarde geven en daarmee
+/// onvindbaar maken voor precies degene die ernaar zoekt.
+const kAiDraftKeyword = 'AI-generated (unreviewed)';
+
+/// Dezelfde markering, maar dan als zin — voor de velden die een mens leest
+/// (PDF/PPTX Subject, de eigenschappenkaart van een lezer).
+const kAiDraftSubjectNote =
+    'contains AI-drafted text that no human has checked';
+
+/// Het achtervoegsel in de bestandsnaam van een export met ongecontroleerde
+/// AI-tekst.
+///
+/// Om dezelfde reden als `PrivacyExportProfile.fileSuffix`: de duurste fout is
+/// hier niet de export zelf maar de verwisseling — een concept dat als afgerond
+/// rapport verder reist. Dat moet je aan de naam kunnen zien, zonder het bestand
+/// te openen en zonder het te hoeven onthouden.
+const kAiDraftFileSuffix = '-ai-concept';
 
 /// Document metadata stamped into PDF, PPTX and HTML exports.
 class ExportDocumentMetadata {
@@ -27,6 +51,16 @@ class ExportDocumentMetadata {
   final DocumentSignature? signature;
   final String sealedAt;
 
+  /// Hoeveel dia's een AI-opgesteld veld dragen dat nog niet is nagekeken
+  /// (`Slide.aiAssistedFields`, AI_ASSIST §16.3).
+  ///
+  /// Nul is het normale geval, en het blijft nul zodra de reviewpoort haar werk
+  /// heeft gedaan: de markering is er om te verdwijnen. Een export van
+  /// nagekeken inhoud meldt dus niets — dat is geen omissie maar precies waar
+  /// de menselijke controle voor staat (AI-verordening art. 50, de uitzondering
+  /// voor inhoud waar een mens redactionele verantwoordelijkheid voor neemt).
+  final int unreviewedAiSlideCount;
+
   const ExportDocumentMetadata({
     this.title = '',
     this.author = '',
@@ -36,6 +70,7 @@ class ExportDocumentMetadata {
     this.tlp = TlpLevel.none,
     this.signature,
     this.sealedAt = '',
+    this.unreviewedAiSlideCount = 0,
   });
 
   /// De documentmetadata van een geprojecteerd deck.
@@ -57,6 +92,10 @@ class ExportDocumentMetadata {
   /// toen als `ocideck_sig_*` mee in de front matter van dezelfde geprojecteerde
   /// markdown — maar daar was het een bijverschijnsel en hier is het een keuze,
   /// en een keuze hoort opgeschreven te staan.
+  /// [unreviewedAiSlideCount] hoort niet in dat rijtje. Het is geen veld dat de
+  /// auteur invult maar een feit dat híér uit het deck wordt geteld, en dat is
+  /// het verschil dat telt: een melding die je moet dóórgeven, kun je vergeten
+  /// door te geven. Dezelfde redenering als hierboven, één laag dieper.
   factory ExportDocumentMetadata.fromDeck(AudienceDeck audience) {
     final deck = audience.deck;
     return ExportDocumentMetadata(
@@ -68,18 +107,54 @@ class ExportDocumentMetadata {
       tlp: deck.tlp,
       signature: deck.signature,
       sealedAt: deck.finalized ? deck.sealAt : '',
+      unreviewedAiSlideCount: slidesWithUnreviewedAiMarkers(deck).length,
     );
   }
+
+  /// Of deze export ongecontroleerde AI-tekst bevat en dat dus moet melden.
+  bool get hasUnreviewedAi => unreviewedAiSlideCount > 0;
+
+  /// Dezelfde metadata, met de AI-markering opnieuw geteld uit [audience].
+  ///
+  /// Bedoeld voor het exportchokepoint, en daar is een reden voor. `metadata`
+  /// is optioneel: een aanroeper die wél een `audience` meegeeft maar géén
+  /// metadata, kreeg een terugvalexemplaar zonder markering — en dan gaat er
+  /// ongecontroleerde AI-tekst de deur uit die zichzelf niet meldt. Erger nog:
+  /// een aanroeper die zélf een `ExportDocumentMetadata` samenstelt, kon de
+  /// telling op nul laten staan en zo de melding wegnemen zonder dat iets klaagt.
+  ///
+  /// Dit is precies waarom de andere velden hier al niet meer los reizen. De
+  /// zes auteursvelden zijn keuzes van de auteur; het aantal dia's met
+  /// ongecontroleerde AI-tekst is dat niet — dat is een feit over het deck.
+  /// Feiten hoor je te tellen op de plek waar je ze kunt tellen, en dat is de
+  /// ene poort waar PDF, PPTX en HTML alledrie langs komen.
+  ExportDocumentMetadata withAiMarkingFrom(AudienceDeck audience) =>
+      ExportDocumentMetadata(
+        title: title,
+        author: author,
+        organization: organization,
+        description: description,
+        keywords: keywords,
+        tlp: tlp,
+        unreviewedAiSlideCount: slidesWithUnreviewedAiMarkers(
+          audience.deck,
+        ).length,
+      );
 
   /// Fallback title when [title] is empty.
   String displayTitle(String fallback) =>
       title.trim().isNotEmpty ? title.trim() : fallback;
 
-  /// PDF/PPTX Subject — classificatie vooraan wanneer gezet.
+  /// PDF/PPTX Subject — classificatie vooraan wanneer gezet, de AI-melding
+  /// achteraan wanneer er ongecontroleerde AI-tekst in zit.
+  ///
+  /// De volgorde is niet willekeurig. TLP bepaalt of de ontvanger dit stuk
+  /// überhaupt mag doorgeven en staat daarom vooraan; de AI-melding zegt iets
+  /// over de betrouwbaarheid van de inhoud en hoort bij de inhoud.
   String subject(String fallbackTitle) {
     final name = displayTitle(fallbackTitle);
-    if (tlp == TlpLevel.none) return name;
-    return '${tlp.label} — $name';
+    final head = tlp == TlpLevel.none ? name : '${tlp.label} — $name';
+    return hasUnreviewedAi ? '$head — $kAiDraftSubjectNote' : head;
   }
 
   /// Comma-separated keywords for PDF Info dict and PPTX core props.
@@ -90,9 +165,14 @@ class ExportDocumentMetadata {
     if (tlp != TlpLevel.none) {
       parts.addAll(['TLP', tlp.label, tlp.key]);
     }
+    if (hasUnreviewedAi) parts.add(kAiDraftKeyword);
     parts.add('OciDeck');
     return parts.join(', ');
   }
+
+  /// Het achtervoegsel dat de bestandsnaam van deze export moet dragen — leeg
+  /// zodra de AI-tekst is nagekeken.
+  String get fileSuffix => hasUnreviewedAi ? kAiDraftFileSuffix : '';
 
   /// dc:creator / PDF Author — auteur, anders organisatie.
   String get documentAuthor {
@@ -110,4 +190,8 @@ class ExportDocumentMetadata {
       description.trim().isNotEmpty ? description.trim() : null;
 
   String? get htmlClassification => tlp == TlpLevel.none ? null : tlp.label;
+
+  /// De waarde van de `ai-generated`-meta in de HTML-export, of `null` wanneer
+  /// er niets te melden valt. De tegenhanger van [htmlClassification].
+  String? get htmlAiMarking => hasUnreviewedAi ? kAiDraftKeyword : null;
 }

@@ -66,6 +66,35 @@ void main() {
     });
   });
 
+  group('GLOSSARY telt de slidetypes goed', () {
+    // De woordenlijst schrijft dezelfde telling en opsomming uit als
+    // API_DOCUMENTATION, maar werd door niets bewaakt. Ze bleef daardoor op 21
+    // staan terwijl er 24 types waren — `scorecard`, `assets` en `discoveries`
+    // ontbraken. Precies de stille verrotting waar dit bestand voor bestaat,
+    // dus nu hangt de tweede plek aan dezelfde bron als de eerste.
+    test('het aantal SlideType-waarden klopt', () {
+      final doc = read('docs/GLOSSARY.md');
+      final match = RegExp(r'`SlideType` \((\d+) values\)').firstMatch(doc);
+      expect(match, isNotNull, reason: 'de SlideType-telling staat er niet');
+      expect(
+        int.parse(match!.group(1)!),
+        SlideType.values.length,
+        reason: 'werk de telling in GLOSSARY.md bij',
+      );
+    });
+
+    test('elk SlideType wordt bij naam genoemd', () {
+      final doc = read('docs/GLOSSARY.md');
+      for (final type in SlideType.values) {
+        expect(
+          doc,
+          contains('`${type.name}`'),
+          reason: '${type.name} ontbreekt in GLOSSARY.md',
+        );
+      }
+    });
+  });
+
   test('FILE_FORMAT noemt het class-token van elk slidetype', () {
     final doc = read('docs/FILE_FORMAT.md');
     for (final entry in slideTypeMeta.entries) {

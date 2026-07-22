@@ -1799,6 +1799,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Dan id-deck fih test IA li għadek ma rrevedejtx. Xorta tista\' tesporta; il-fajl jgħid dan hu stess u jieħu "-ai-concept" f\'ismu.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Abbozz: hawn test IA li għadu ma ġiex rivedut minn ħadd',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Iffinalizza din il-preżentazzjoni u rreġistra siġill SHA-512 fuq il-fajl issejvjat. Wara, dan jiġi msakkar u ma jistax jiġi editjat aktar; kull bidla ta\' wara ssir viżibbli. Min jirċievi r-rapport jiċċekkja s-siġill hu stess b\'sha512sum. Dan ma jistax jiġi żvolut fl-app.',
   'Zegel en handtekening': 'Siġill u firma',

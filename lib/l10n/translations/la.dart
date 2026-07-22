@@ -1793,6 +1793,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'In hoc acervo est textus IA quem nondum recognovisti. Exportare licet: plica ipsa id nuntiat et "-ai-concept" in nomine accipit.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Adumbratio: hic est textus IA quem nemo adhuc recognovit',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Hanc praesentationem perfice et sigillum SHA-512 super tabellam servatam consigna. Deinde obserata est nec amplius mutari potest; omnis mutatio posterior conspicua fit. Qui relationem accipit, sigillum ipse per sha512sum recomputat. Hoc in applicatione revocari non potest.',
   'Zegel en handtekening': 'Sigillum et subscriptio',

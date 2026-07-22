@@ -181,9 +181,11 @@ class MarpHtmlService {
     final meta = docMeta;
     final title = _htmlAttr(meta.displayTitle(fallbackTitle));
     final headMeta = _htmlHeadMeta(meta, fallbackTitle: fallbackTitle);
-    final banner = meta.htmlClassification == null
-        ? ''
-        : '<div class="tlp-export-banner">${_htmlAttr(meta.htmlClassification!)}</div>';
+    final banner =
+        (meta.htmlClassification == null
+            ? ''
+            : '<div class="tlp-export-banner">${_htmlAttr(meta.htmlClassification!)}</div>') +
+        _aiBanner(meta);
 
     return '<!doctype html>\n'
         '<html lang="nl"><head><meta charset="utf-8">'
@@ -833,6 +835,7 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 .slide .signoff-seal{font-size:18px;color:#64748b;letter-spacing:.03em;margin-top:.7em}
 .slide .media-redacted{display:flex;align-items:center;justify-content:center;min-height:200px;margin:.6em 0;background:#000;color:#fff;font-size:20px;letter-spacing:.05em;border-radius:4px;text-align:center;padding:24px}
 .tlp-export-banner{position:fixed;top:0;left:0;right:0;background:#000;color:#ffc000;text-align:center;font:700 14px/2.4 monospace;z-index:9999;letter-spacing:.06em}
+.ai-export-banner{position:fixed;left:0;right:0;background:#3a2c00;color:#ffd75e;text-align:center;font:600 13px/2.4 system-ui,sans-serif;z-index:9998}
 @media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}}
 ''';
 
@@ -841,6 +844,32 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
         .replaceAll('&', '&amp;')
         .replaceAll('"', '&quot;')
         .replaceAll('<', '&lt;');
+  }
+
+  /// De zichtbare AI-melding boven aan de HTML-export, of leeg wanneer er niets
+  /// te melden valt.
+  ///
+  /// Dit is de enige uitvoer waarin de melding te *zien* is in plaats van
+  /// alleen in de documenteigenschappen te staan, en dat is geen toeval: HTML
+  /// wordt op een scherm gelezen, waar een balk bovenaan de bestaande manier is
+  /// om de lezer iets over het hele document te vertellen (de TLP-balk zit er
+  /// al). Op een geprint vel zou dezelfde balk de dia's verdringen.
+  ///
+  /// De balk staat onder de TLP-balk wanneer die er is: welk stuk je voor je
+  /// hebt gaat vóór hoe zeker het is.
+  static String _aiBanner(ExportDocumentMetadata meta) {
+    if (!meta.hasUnreviewedAi) return '';
+    const l10n = AppLocalizations(Locale('nl'));
+    // Eén zin, geen telling: het aantal dia's staat in de meta-tag, waar een
+    // gereedschap het uitleest. Voor de lezer verandert er niets aan de
+    // strekking of het er één of zeven zijn — en een telling in de zin kost in
+    // 31 talen een meervoudsregeling die niets toevoegt.
+    final text = l10n.d(
+      'Concept: hier staat AI-tekst die nog niemand heeft nagekeken',
+    );
+    final top = meta.htmlClassification == null ? '0' : '2.4em';
+    return '<div class="ai-export-banner" style="top:$top">'
+        '${_htmlText(text)}</div>';
   }
 
   static String _htmlHeadMeta(
@@ -861,6 +890,13 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
     if (classification != null) {
       tag('classification', classification);
       tag('tlp', meta.tlp.key);
+    }
+    // AI-verordening art. 50: de markering moet machineleesbaar zijn. Een
+    // `<meta>` is dat; de balk hierboven is voor de lezer.
+    final aiMarking = meta.htmlAiMarking;
+    if (aiMarking != null) {
+      tag('ai-generated', aiMarking);
+      tag('ai-generated-slides', '${meta.unreviewedAiSlideCount}');
     }
     tag('generator', meta.producer);
     return buf.toString();

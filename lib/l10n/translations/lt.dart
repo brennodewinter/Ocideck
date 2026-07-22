@@ -1785,6 +1785,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Šiame rinkinyje yra DI tekstas, kurio dar neperžiūrėjai. Eksportuoti vis tiek galima; failas pats tai nurodo, o pavadinime atsiranda „-ai-concept“.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Juodraštis: čia yra DI tekstas, kurio dar niekas neperžiūrėjo',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Užbaikite šią prezentaciją ir užfiksuokite įrašyto failo SHA-512 antspaudą. Tada jis užrakinamas ir jo nebegalima redaguoti; kiekvienas vėlesnis pakeitimas tampa matomas. Ataskaitą gavęs asmuo antspaudą patikrina pats su sha512sum. Programoje to atšaukti negalima.',
   'Zegel en handtekening': 'Antspaudas ir parašas',

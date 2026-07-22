@@ -1752,6 +1752,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'deckvamDaq AI-ghItlh tu\'lu\'; DanuDpu\'be\'. ngeHlu\'laH; teywI\' pongDaq "-ai-concept" chelu\'.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'nab: AI-ghItlh tu\'lu\'. not nuDlu\'pu\'.',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'cha\'nob rInmoH \'ej teywI\' choqlu\'bogh SHA-512 HablI\' qonlu\'. ngugh SoQlu\' \'ej choHlaHbe\'lu\'. Hoch choHmey veb \'anglu\'. sha512sum lo\'taHvIS, HablI\' tob ja\'ghach Hevbogh nuv. naDev DaW\' laHbe\'.',
   'Zegel en handtekening': 'SoQmoHwI\' ghItlh pong je',

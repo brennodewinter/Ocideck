@@ -730,6 +730,10 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Questo deck contiene testo IA che non hai ancora verificato. Puoi esportare lo stesso; il file lo segnala da sé e riceve "-ai-concept" nel nome.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Bozza: contiene testo IA che nessuno ha ancora verificato',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Finalizza questa presentazione e registra un sigillo SHA-512 sul file salvato. Da quel momento è bloccato e non può più essere modificato; ogni modifica successiva diventa visibile. Chi riceve il rapporto verifica il sigillo da sé con sha512sum. Questa operazione non può essere annullata nell\'app.',
   'Zegel en handtekening': 'Sigillo e firma',

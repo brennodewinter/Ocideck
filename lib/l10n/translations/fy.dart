@@ -735,6 +735,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Yn dit deck stiet AI-tekst dy\'tst noch net neisjoen hast. Eksportearje kin; it bestân meldt dat sels en krijt "-ai-concept" yn de namme.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Konsept: hjir stiet AI-tekst dy\'t noch nimmen neisjoen hat',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Slút dizze presintaasje ôf en lis in SHA-512-segel fêst oer it bewarre bestân. Dêrnei is it ferskoattele en net mear te bewurkjen; eltse lettere wiziging wurdt sichtber. Wa\'t it rapport krijt, rekkenet it segel sels nei mei sha512sum. Dit kin yn de app net ûngedien makke wurde.',
   'Zegel en handtekening': 'Segel en hantekening',

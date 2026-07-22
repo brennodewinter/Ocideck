@@ -1862,7 +1862,7 @@ for presenter notes):
 | `<!-- ocideck_image_alt: text -->` | Per-usage WCAG alt-text (accessibility description) for the slide's image. Preferred over the visible caption as the screen-reader label. Written only when set; `-->` inside is escaped like presenter notes. |
 | `<!-- ocideck_image_alt2: text -->` | Same, for the **second** image of a two-images slide. |
 | `<!-- ocideck_finding_id: F-03 -->` · `<!-- ocideck_finding_role: header\|detail\|evidence -->` | Finding-group link: ties a header card to its detail/evidence slides (§5). Written on any slide with a non-empty finding id. |
-| `<!-- ocideck_ai_assisted: field1, field2 -->` | The slide's fields whose text was drafted by AI and not yet human-reviewed. While any slide carries this marker the deck **cannot be finalised/sealed** (the EIS 1.6 attestation must cover human-verified text). Written only when non-empty; AI drafting sets it and clears it on review. |
+| `<!-- ocideck_ai_assisted: field1, field2 -->` | The slide's fields whose text was drafted by AI and not yet human-reviewed. While any slide carries this marker the deck **cannot be finalised/sealed** (the EIS 1.6 attestation must cover human-verified text), and any PDF/PPTX/HTML export declares it in its document properties, its filename, and — in HTML — a banner (§11). Written only when non-empty; AI drafting sets it and clears it on review. |
 | `<!-- advance: N.N -->` | Auto-advance after N.N seconds (0 = off). |
 | `<!-- ocideck_detail -->` | Verdiepingsslide: valt weg in de beknopte export, blijft in de volledige. Alleen geschreven als de vlag aanstaat. |
 | `<!-- skip -->` | Skip slide during both presenting and export. |
@@ -1990,23 +1990,40 @@ Implementation: `lib/services/markdown_validator.dart`; tests:
 ## 11. Export Metadata (Not in `.md`)
 
 For PDF, PPTX, and HTML export, OciDeck writes **document properties** derived
-from front matter (`author`, `organization`, `description`, `keywords`, `tlp`,
-title). This metadata is **not** stored in the `.md` file and does not change the
-round-trip format; it is set only during export (`ExportDocumentMetadata` in
-`lib/services/export_metadata.dart`).
+from the deck — mostly from front matter (`author`, `organization`,
+`description`, `keywords`, `tlp`, title), plus one property counted over the
+slides (§8, the unreviewed-AI markers). This metadata is **not** stored in the
+`.md` file and does not change the round-trip format; it is set only during
+export (`ExportDocumentMetadata` in `lib/services/export_metadata.dart`).
 
-| Source (front matter) | PDF / PPTX | HTML |
+| Source | PDF / PPTX | HTML |
 | --- | --- | --- |
 | Title | `Title` | `<title>` |
 | `author`, otherwise `organization` | `Author` / `dc:creator` | `<meta name="author">` |
 | OciDeck (fixed) | `Creator` | `<meta name="generator">` |
 | OciDeck + version (fixed) | `Producer` / `Application` / `lastModifiedBy` | — |
 | `description` | — | `<meta name="description">` |
-| `keywords` + TLP + `OciDeck` | `Keywords` | `<meta name="keywords">` |
+| `keywords` + TLP + AI marking + `OciDeck` | `Keywords` / `cp:keywords` | `<meta name="keywords">` |
 | `tlp` (when not `none`) | `Subject`: `TLP:... — title` | `<meta name="classification">`, `<meta name="tlp">`, fixed `.tlp-export-banner` at the top |
+| any slide carrying `<!-- ocideck_ai_assisted: … -->` (§8) | `Subject` gains ` — contains AI-drafted text that no human has checked`; `Keywords` gains `AI-generated (unreviewed)` | `<meta name="ai-generated">`, `<meta name="ai-generated-slides">` (the count), fixed `.ai-export-banner` — at `top:2.4em` under the TLP banner, at `top:0` when there is none |
+
+The AI keyword and Subject note are fixed English strings, like `Creator` and the
+TLP labels: they are read by tools, and a value that varied with the interface
+language would not be findable. The `.ai-export-banner` is a sentence for a
+reader and is written in Dutch, as is the rest of the text the HTML export
+generates itself.
+
+The AI marking also reaches the **filename**: the export is written as
+`…-ai-concept.<ext>`, after the redaction-profile suffix (`-geredigeerd`) and the
+depth suffix (`-beknopt`). All of it is absent once every AI-drafted field has
+been reviewed and the markers are gone from the `.md`. *(Added 22-07-2026; before
+that the marker existed in the `.md` and blocked sealing, but nothing about it
+survived into an exported file.)*
 
 Visual TLP marking (banner, badge, optional watermark) is **rasterized** into
-PDF/PPTX slides and is separate from these document properties. See
+PDF/PPTX slides and is separate from these document properties. There is no
+equivalent rasterized AI marking: the PDF and PPTX carry the declaration in the
+document properties and the filename only. See
 [`USER_GUIDE.md`](USER_GUIDE.md) (§ Traffic Light Protocol, § Exporting) and
 [`ARCHITECTURE.md`](ARCHITECTURE.md) (§ Classification enforcement).
 

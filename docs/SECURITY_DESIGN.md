@@ -236,6 +236,16 @@ subsystem, so it has a dedicated gate.
 - A stricter privacy projection, `PrivacyProjection.forExternalProcessing`
   (which ignores per-slide disposition and redacts everything the scanner finds),
   exists in the privacy layer as a reusable primitive for external hand-off.
+- **The draft marking survives the file boundary.** An AI-drafted field is
+  marked on the slide (`Slide.aiAssistedFields`, `<!-- ocideck_ai_assisted -->`)
+  and blocks sealing until a human clears it. `ExportDocumentMetadata` counts
+  those markers and declares them in every PDF, PPTX and HTML export — in the
+  document properties, in the filename (`-ai-concept`), and as a banner in the
+  HTML. Export itself is *not* blocked: sealing is an attestation, sending a
+  draft to a reviewer is not, and a blocked export pushes people to screenshots.
+  The declaration also survives the privacy projection, so the **redacted**
+  copy — the one with the widest distribution — keeps it
+  (`test/ai_assist_marker_test.dart`).
 
 ## 8. Privacy protection (OciWacht)
 

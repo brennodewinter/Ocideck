@@ -1768,6 +1768,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Selles esitluses on AI tekst, mida sa pole veel üle vaadanud. Eksportida saab siiski; fail teatab sellest ise ja saab nimesse "-ai-concept".',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Mustand: sisaldab AI teksti, mida keegi pole veel üle vaadanud',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Vormista see esitlus ja fikseeri salvestatud faili SHA-512 pitser. Seejärel on see lukustatud ega ole enam muudetav; iga hilisem muudatus muutub nähtavaks. Aruande saaja kontrollib pitserit ise käsuga sha512sum. Seda ei saa rakenduses tagasi võtta.',
   'Zegel en handtekening': 'Pitser ja allkiri',

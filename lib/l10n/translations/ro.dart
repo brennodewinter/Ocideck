@@ -1795,6 +1795,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Acest deck conține text IA pe care nu l-ai verificat încă. Exportul este totuși posibil; fișierul semnalează el însuși acest lucru și primește "-ai-concept" în nume.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Schiță: conține text IA pe care nimeni nu l-a verificat încă',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Finalizați această prezentare și consemnați un sigiliu SHA-512 asupra fișierului salvat. Acesta este apoi blocat și nu mai poate fi editat; orice modificare ulterioară devine vizibilă. Cine primește raportul verifică singur sigiliul cu sha512sum. Această acțiune nu poate fi anulată în aplicație.',
   'Zegel en handtekening': 'Sigiliu și semnătură',

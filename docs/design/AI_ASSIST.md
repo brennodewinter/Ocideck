@@ -172,6 +172,12 @@ Note Ollama's OpenAI-compat layer is officially experimental.
 - **Draft-only + provenance.** Output lands in a suggestion surface with an
   `ocideck_ai_*` marker; a human accepts/edits it. Consumers may gate downstream
   actions on markers being cleared (the pentest seal does — §16 there).
+  Since 2026-07-22 the marker also leaves the app: while any slide still carries
+  one, every PDF/PPTX/HTML export declares it in its document properties and its
+  filename (`-ai-concept`), and the HTML adds a banner —
+  [`FILE_FORMAT.md`](../FILE_FORMAT.md) §11. Export is not blocked by it; the
+  seal still is. A reviewed deck declares nothing, which is the point of the
+  review step.
 - **Low temperature, output shaping** in the prompt (length caps, locale, format).
 - **Cache by input hash** to avoid recompute/cost.
 

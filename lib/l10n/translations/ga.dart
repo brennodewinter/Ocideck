@@ -1813,6 +1813,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Er staat AI-tekst in dit deck die je nog niet hebt nagekeken. Exporteren kan; het bestand meldt dat dan zelf en krijgt "-ai-concept" in de naam.':
+      'Tá téacs IS sa deic seo nár sheiceáil tú fós. Is féidir easpórtáil mar sin féin; luann an comhad féin é agus faigheann sé "-ai-concept" ina ainm.',
+  'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
+      'Dréacht: tá téacs IS anseo nár sheiceáil duine ar bith fós',
   'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
       'Cuir an cur i láthair seo i gcrích agus taifead séala SHA-512 ar an gcomhad sábháilte. Ansin cuirtear faoi ghlas é agus ní féidir é a chur in eagar a thuilleadh; feictear gach athrú a dhéantar ina dhiaidh sin. Déanann an té a fhaigheann an tuairisc an séala a sheiceáil é féin le sha512sum. Ní féidir é seo a chealú san aip.',
   'Zegel en handtekening': 'Séala agus síniú',

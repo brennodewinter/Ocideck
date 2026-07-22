@@ -182,8 +182,16 @@ class ExportService {
       return ExportResult.fail('Geen slides om te exporteren.');
     }
     final fallbackTitle = p.basenameWithoutExtension(deckPath);
-    final docMeta =
+    final given =
         metadata ?? ExportDocumentMetadata(title: fallbackTitle, tlp: tlp);
+    // De AI-markering wordt hier gételd, niet aangenomen. `metadata` is
+    // optioneel en door de aanroeper samen te stellen; zou de melding daaruit
+    // moeten komen, dan is "vergeten door te geven" genoeg om ongecontroleerde
+    // AI-tekst zwijgend de deur uit te laten gaan. Het geprojecteerde deck
+    // weet het zelf, en dit is de ene poort waar elk formaat langskomt.
+    final docMeta = audience == null
+        ? given
+        : given.withAiMarkingFrom(audience.audience);
     final compactSuffix = compress && format == ExportFormat.pdf
         ? '-compact'
         : '';
@@ -191,10 +199,14 @@ class ExportService {
         ? outputDirectory
         : p.dirname(deckPath);
     final prefix = '${natoDtg(DateTime.now())} ';
+    // `docMeta.fileSuffix` is leeg zodra de AI-tekst is nagekeken, dus een
+    // afgerond rapport heet zoals het altijd heette. Alleen een export mét
+    // ongecontroleerde AI-tekst draagt het concept-achtervoegsel — daar is de
+    // naam de enige plek die de ontvanger ziet zónder het bestand te openen.
     final fileName =
         '$prefix${p.basenameWithoutExtension(deckPath)}'
         '${privacyProfile.fileSuffix}${includeDetail ? '' : '-beknopt'}'
-        '$compactSuffix${format.extension}';
+        '${docMeta.fileSuffix}$compactSuffix${format.extension}';
     final outputPath = p.join(dir, fileName);
     try {
       final Uint8List bytes;
