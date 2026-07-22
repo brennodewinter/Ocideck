@@ -74,7 +74,7 @@ remote, the number you see locally is the number that gates the push.
 | [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
-| [`make coverage-per-file`](#make-coverage-per-file) | At most `filesBelowFloorBudget` `lib/` files run under 20% of their own lines | ✅ | ✅ | — |
+| [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 20% of its own lines | ✅ | ✅ | — |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
 | [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
@@ -266,10 +266,9 @@ also declares them, but see the [CI note](#continuous-integration).)
   report `make coverage` just wrote — no second test run.
 - **Covers:** the worst case *per file* instead of the average: how many `lib/`
   files execute less than **20%** of their own lines.
-- **Failure means:** more files sit below that floor than
-  `filesBelowFloorBudget` allows (write a test for one of the files the run
-  lists), **or** the budget was left standing after an improvement (lower it to
-  the number the run prints).
+- **Failure means:** at least one file sits below that floor. Write a test for
+  it, or — only when it is a platform half or has no executable lines — put it
+  in `uncoveredBaseline` with a reason.
 - **Why it exists:** being in the denominator is not being executed. A test that
   imports a file without ever calling into it keeps that file in the report at
   0%, and an 80% average absorbs it without a ripple — on 2026-07-21 twenty-two
@@ -277,12 +276,14 @@ also declares them, but see the [CI note](#continuous-integration).)
   passed both gates above. Neither the floor nor `--require-instrumented` can
   see this: one looks at the mean, the other only at whether a file is mentioned
   anywhere.
-- **A budget, not an allow-list.** A list of blessed files grows quietly — one
-  more line per untested file and nobody notices. A number cannot absorb
-  anything: a new untested file pushes the count over the budget and the gate
-  goes red. It is a **ratchet in both directions** — it may only shrink, and it
-  fails when it lags reality by more than a file or two, so the win is locked in
-  rather than left as headroom for the next regression. Target: **0**.
+- **No budget, and no allow-list.** Until 2026-07-22 this gate carried a
+  `filesBelowFloorBudget` counting how many files were allowed below the floor:
+  39 at the start, then 21, then 0. A number that reads zero is a number
+  somebody can raise; a gate that fails on *every* file below the floor is not.
+  So the budget is gone: anything that drops below 20% is a test to write, not a
+  number to adjust. The only escape is `uncoveredBaseline`, and that is a list
+  with a reason per line — reserved for platform halves and files with no
+  executable lines at all.
 
 ---
 
