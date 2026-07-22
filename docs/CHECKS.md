@@ -85,8 +85,33 @@ out of it, the way [`LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md) records its
 own last run. A dated outcome next to a repeatable command is the difference
 between "we check this" and "we checked this".
 
-**Run on 2026-07-22**, on macOS (arm64), Flutter 3.44.2, at commit `299fb65a`
-(branch `feat/meetinstrumenten`):
+**Run on 2026-07-22**, on macOS (arm64), at commit `299fb65a`
+(branch `feat/meetinstrumenten`), on this exact toolchain:
+
+```
+Flutter 3.44.2 • channel [user-branch] • unknown source
+Tools • Dart 3.12.2
+```
+
+**That is not the pinned toolchain, and it matters more than one digit
+suggests.** `.tool-versions` pins `flutter 3.44.6-stable`, and README, `BUILD.md`
+and the CI workflow all name 3.44.6. The machine where this table was produced
+runs **3.44.2**, from `[user-branch]` — an unofficial channel — with its binaries
+under a third version number again (`/opt/homebrew/Caskroom/flutter/3.29.0/`).
+Because there is no CI runner, this machine is the only place `make check` has
+ever run, so every green gate this project rests on was produced there. A
+formatter or analyzer change between two releases means "the gate is green"
+proves something slightly other than what the documentation promises. Recorded
+here rather than quietly corrected, because the reader deserves to know which of
+the two numbers actually ran. See issue #598; the fix is to install the pinned
+version and re-run this table.
+
+**The whole gate takes about three minutes.** Measured 2026-07-22 on the machine
+above: the test suite (5 768 tests, 2 skipped) finishes in 2:04, and the checks
+around it — format, analyze, conventions, method length, dead code, hardcoded
+text, and two coverage passes — bring it to roughly three. Worth stating,
+because "5 700 tests plus a coverage floor plus eight ratchets" reads like half
+an hour, and a contributor who assumes that never runs it.
 
 | Command | Outcome |
 | --- | --- |
