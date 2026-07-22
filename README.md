@@ -238,12 +238,15 @@ maintained* in [`docs/README.md`](docs/README.md).
   loading a player script. Since that date the YouTube embed loads none, and it
   never touches `youtube.com`.
 - **2026-07-21, translations.** The localisation line said "every interface
-  string is translated in all of them, enforced by tests". The gate scans
-  literal `d('…')` calls: about fifty field labels and hints in the slide
-  editors are localised indirectly, are never seen by the gate, and still show
-  their Dutch source text. A handful of blocking messages
-  (classification-policy refusals, the export-failure text) are rendered in
-  Dutch regardless of the language setting.
+  string is translated in all of them, enforced by tests", which was then untrue
+  for about fifty editor labels reaching the layer indirectly.
+  *(Superseded 2026-07-22: those fifty are done. `check_hardcoded_text` now
+  fails on **every** violation with no ceiling, and the 244 keys that travel
+  indirectly are checked for translation coverage in
+  `test/app_localizations_test.dart`. What remains is narrower and structural:
+  a handful of **interpolated** Dutch strings built in services — a
+  classification refusal names the level in the message — cannot be keyed on a
+  literal and so cannot be looked up at all. Tracked in #576.)*
 - **2026-07-22, feature list.** The features section was 24 bullets of up to
   1,300 characters each, and gave the optional MIAUW module the same weight as
   the editor itself. It is now eight lines plus a modules section, with the

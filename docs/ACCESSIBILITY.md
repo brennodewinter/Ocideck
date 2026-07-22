@@ -105,13 +105,19 @@ either). PPTX speaker notes are real text and do travel.
 and headings, which is already a great deal more than the bitmap formats, but
 nobody has checked its colour contrast, focus order or landmark structure.
 
-**Roughly fifty editor labels are not translated.** Field labels and hints in the
-slide editors reach the localisation layer indirectly, so the translation gate
-never sees them and they display their Dutch source text whatever language you
-selected — 'Titel (H1)' and 'Aanbeveling' among them. For a user who does not
-read Dutch this is an accessibility problem and not only a cosmetic one. A few
-blocking messages (classification-policy refusals, the export-failure text) are
-built in Dutch for the same reason.
+**A few blocking messages are still built in Dutch.** *(Rewritten 2026-07-22.)*
+This entry used to say that roughly fifty editor labels showed their Dutch
+source text. That is no longer true: those labels are translated, the gate now
+fails on every violation rather than counting down to a ceiling, and the keys
+that reach the layer indirectly are checked for coverage in every language.
+
+What is left is narrower and structural. The translation layer is keyed on
+literal Dutch source text, so a string that *interpolates* a value has no
+literal to key on and cannot be looked up at all. A classification refusal names
+the level in its own sentence, so it reaches you in Dutch whatever language you
+chose. For someone who does not read Dutch that is an accessibility problem and
+not a cosmetic one, and it is worst where it hurts most: these are the messages
+that stop you from doing something. Tracked in #576.
 
 **Left-to-right only, and that governs your content too.** No
 direction-sensitive layout primitive is in use anywhere — `EdgeInsetsDirectional`,
