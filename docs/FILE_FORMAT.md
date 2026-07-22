@@ -1634,6 +1634,24 @@ When exporting a package you may protect it with a password. Encryption is
   export dialog therefore shows an entropy-based strength meter and offers a
   generator (32 or 256 random characters); with a long or generated password the
   weak KDF is irrelevant.
+- **Keep the password to ASCII if you type it yourself.** *(Added 2026-07-22;
+  this was documented nowhere.)* The ZIP-AES key derivation takes the password's
+  bytes as `Uint8List.fromList(password.codeUnits)` — it truncates every UTF-16
+  code unit to its low 8 bits. For plain ASCII that is exact and nothing is lost.
+  For anything above U+00FF it is not: Cyrillic, Greek, Hebrew, Arabic, CJK and
+  emoji characters are silently folded onto whichever byte their low half
+  happens to be, and different characters collapse onto the same byte. Two
+  consequences, both quiet. You lose entropy you thought you had — a
+  twelve-character Cyrillic passphrase is not worth what its length suggests —
+  and the derived key depends on a truncation rule that other tools need not
+  share, so 7-Zip or WinZip may refuse a password OciDeck accepted, or the
+  reverse. Nothing warns you; the package simply will not open.
+
+  This is a property of the format's key derivation as implemented, not of
+  OciDeck's own code, and it cannot be fixed from here without producing
+  packages other tools cannot read. **A generated password is unaffected**:
+  `passwordAlphabet` is printable ASCII by construction, so the generator route
+  never meets this at all.
 - **Caveat.** Because file names stay visible and the KDF is weak, ZIP-AES suits
   "keep casual readers out". For strong confidentiality of sensitive material,
   wrap the package in a container with a modern KDF and hidden names (age, GPG,
@@ -1875,3 +1893,69 @@ entry — before 2026-07-21 they did, which sent recipients looking for blocks
 that were not there. See [`design/OCIWACHT.md`](design/OCIWACHT.md) §6.6 for the
 reasoning and [`USER_GUIDE.md`](USER_GUIDE.md) (*The two manifest files*) for
 what to do with them.
+
+---
+
+## 13. Accepted Files and Their Limits
+
+*Added 2026-07-22.* Every number here was already enforced by the code and stated
+somewhere — scattered across §7, `SECURITY.md` under *Untrusted deck handling*,
+and the constants themselves. What was missing was the one place a reader can
+check "will OciDeck take this file, and how big may it be" without reading three
+documents. The constant name is given for each so a changed limit can be found
+rather than guessed.
+
+Every limit is a **refusal**, not a truncation: a file over its cap is rejected
+whole, with a reason, and nothing partial is ever read into a deck.
+
+### Files you open or import
+
+| What | Accepted as | Cap | Constant |
+|---|---|---:|---|
+| Deck | `.md` | 32 MiB | `FileService.maxDeckMarkdownBytes` |
+| Package | `.ocideck` (`.zip` also accepted on import) | 512 MiB, 10 000 entries, path ≤ 512 chars | `maxPackageBytes`, `maxPackageEntries`, `maxZipEntryPathLength` |
+| Package, **unpacked** | — | 512 MiB total across all entries | same `maxPackageBytes`, applied to the running total |
+| Style profile | `.ocideckstyle` | 16 MiB | `maxStyleProfileBytes` |
+| Logo embedded in a style profile | PNG/JPEG/GIF/BMP/WebP by magic bytes | 8 MiB | `maxStyleProfileLogoBytes` |
+
+The unpacked cap deserves its own row because it is the one a crafted archive
+attacks. A zip bomb understates its declared size, so the declared figure is only
+a cheap early reject; the real guard inflates each entry into a capped stream
+that aborts mid-decompression the moment the running total would exceed the
+budget. An encrypted package is the exception — WinZip-AES members must be
+decrypted whole before they can be measured, so there the guard falls back to the
+declared size plus the running total. That is accepted deliberately: the user
+encrypted and unlocked that package themselves.
+
+### Assets you add to a deck
+
+| What | Accepted as | Cap | Constant |
+|---|---|---:|---|
+| Image (picked or pasted) | PNG, JPEG, GIF, BMP, WebP — validated by **magic bytes**, not by the file extension | 64 MiB | `ImageService.maxImageBytes` |
+| Video / audio | Size-checked only; no magic-byte validation | 1 GiB | `ImageService.maxMediaBytes` |
+| Image offered to the face scan | As above | 24 MiB | `kFaceScanMaxBytes` |
+
+Every image is additionally decoded with its dimensions capped
+(`cappedFileImage` / `kMaxImageDecodeDimension`), so a small file that declares
+enormous dimensions cannot exhaust memory on display or export.
+
+### Files that arrive over the network
+
+| Route | What it accepts | Cap | Constant |
+|---|---|---:|---|
+| URL import | Sniffs the bytes: zip magic `PK\x03\x04` → package, otherwise plain Markdown | 512 MiB on the download (checked on `Content-Length` **and** while streaming), then the `.md` or package cap above | `maxPackageBytes`, then `maxDeckMarkdownBytes` |
+| WebDAV / Nextcloud | Deck or package, through the same gate as a local import | 512 MiB per file; PROPFIND listing capped at 16 MiB and by entry count | `WebdavService.maxDownloadBytes`, `maxListingBytes` |
+| S3 | As WebDAV | 512 MiB per object; listing capped at 16 MiB across **all** pages together | `S3Service.maxDownloadBytes`, `maxListingBytes` |
+| Git (REST) | Deck files from a forge | Listing responses capped at 16 MiB per forge adapter | `maxListingBytes` in `gitea_forge.dart`, `github_forge.dart`, `gitlab_forge.dart` |
+| Git (native subprocess) | As above | Subprocess output capped at 8 MiB | `_maxOutputBytes` in `git_cli_io.dart` |
+| AI backend response | JSON from an OpenAI-compatible `/v1` endpoint | 8 MiB | `AiClientService.maxResponseBytes` |
+| CVE lookup | JSON | 2 MiB | `_maxBytes` in `cve_transport_io.dart` |
+
+Note what the first row means in practice: extension does not decide anything on
+the URL route. A file served as `deck.md` that begins with zip magic is treated
+as a package, and one served as `deck.ocideck` that does not is treated as
+Markdown. The bytes decide, which is the safer way round — but it is worth
+knowing if you are the one serving the file.
+
+A deck arriving by any of these routes passes the same `MarkdownSafetyScanner`
+gate as a local one; none of them is a shortcut past it.
