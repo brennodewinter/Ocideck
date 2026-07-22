@@ -134,58 +134,6 @@ class ExportService {
       ? null
       : [for (final s in audience.audience.slides) s.notes];
 
-  /// De drie poorten die élke export moet passeren, of `null` als hij door mag.
-  ///
-  /// Ze staan hier bij elkaar omdat ze één ding zijn: het chokepoint waar
-  /// PDF, PPTX en HTML alledrie doorheen gaan. De handhaving hoort niet in de
-  /// UI-laag — een gate die alleen in een dialoog leeft, is er geen — en door
-  /// ze samen te nemen kan geen exportpad er per ongeluk eentje overslaan.
-  ///
-  /// Fail-closed: bij een weigering wordt er niets gebouwd en niets
-  /// weggeschreven.
-  ExportResult? _refuseByPolicy({
-    required TlpLevel tlp,
-    required ClassificationEnforcementPolicy enforcementPolicy,
-    required PrivacyExportPolicy privacyPolicy,
-    required PrivacyExportSummary privacySummary,
-    required bool privacyAcknowledged,
-    required SlideQualityResult? qualityResult,
-    required QualityExportPolicy qualityPolicy,
-    required bool qualityAcknowledged,
-  }) {
-    final decision = enforcementPolicy.evaluate(tlp);
-    if (!decision.allowed) {
-      return ExportResult.fail(decision.reason!);
-    }
-
-    // De harde blokkade telt ook zonder de UI: bevestigen mag een zachte
-    // bevinding wegnemen, een harde nooit.
-    final privacyDecision = privacyPolicy.evaluate(privacySummary);
-    if (!privacyDecision.allowed &&
-        (privacyDecision.hardBlocked || !privacyAcknowledged)) {
-      const l10n = AppLocalizations(Locale('nl'));
-      return ExportResult.fail(
-        privacyDecision.hardBlocked
-            ? l10n.d(
-                'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.',
-              )
-            : l10n.d('Export afgebroken vanwege privacybevindingen.'),
-      );
-    }
-
-    final quality = qualityResult ?? const SlideQualityResult([]);
-    final qualityDecision = qualityPolicy.evaluate(
-      quality,
-      acknowledged: qualityAcknowledged,
-    );
-    if (!qualityDecision.allowed) {
-      final l10n = AppLocalizations(const Locale('nl'));
-      return ExportResult.fail(formatQualityExportReason(l10n, quality));
-    }
-
-    return null;
-  }
-
   Future<ExportResult> export(
     String deckPath,
     ExportFormat format,
@@ -214,7 +162,7 @@ class ExportService {
     /// altijd al heette.
     bool includeDetail = true,
   }) async {
-    final refusal = _refuseByPolicy(
+    final refusal = _gateOrRefuse(
       tlp: tlp,
       enforcementPolicy: enforcementPolicy,
       privacyPolicy: privacyPolicy,
@@ -225,7 +173,6 @@ class ExportService {
       qualityAcknowledged: qualityAcknowledged,
     );
     if (refusal != null) return refusal;
-
     final markdown = audience?.markdown;
     if (format == ExportFormat.html) {
       if (markdown == null || markdown.trim().isEmpty) {
@@ -330,6 +277,61 @@ class ExportService {
   /// Zware bouwstappen draaien op desktop in een eigen isolate zodat de UI
   /// responsief blijft; op web bestaan isolates niet en draait dezelfde stap
   /// op de main thread — de export duurt daar merkbaar, maar werkt.
+  /// De drie fail-closed poorten waar élke export doorheen moet: classificatie,
+  /// privacy en kwaliteit. Geeft de weigering terug, of `null` als er niets in
+  /// de weg staat.
+  ///
+  /// Ze staan hier bij elkaar en niet in de UI-laag, want dit is het enige
+  /// chokepoint waar alle formaten (PDF/PPTX/HTML) langskomen — een poort die
+  /// alleen in een dialoog leeft, is er geen. Bij een weigering wordt er niets
+  /// gebouwd en niets weggeschreven.
+  ExportResult? _gateOrRefuse({
+    required TlpLevel tlp,
+    required ClassificationEnforcementPolicy enforcementPolicy,
+    required PrivacyExportPolicy privacyPolicy,
+    required PrivacyExportSummary privacySummary,
+    required bool privacyAcknowledged,
+    required SlideQualityResult? qualityResult,
+    required QualityExportPolicy qualityPolicy,
+    required bool qualityAcknowledged,
+  }) {
+    final decision = enforcementPolicy.evaluate(tlp);
+    if (!decision.allowed) {
+      // Vastleggen dát de poort dichtging. Dit is de enige plek waar te zien is
+      // dat een uitgave op de classificatie is tegengehouden. Alleen het
+      // niveau — de reden is een gebruikersmelding en de deckinhoud hoort niet
+      // in een log.
+      logWarning(
+        'ExportService: export geweigerd op classificatie (TLP: ${tlp.name})',
+      );
+      return ExportResult.fail(decision.reason!);
+    }
+
+    final privacyDecision = privacyPolicy.evaluate(privacySummary);
+    if (!privacyDecision.allowed &&
+        (privacyDecision.hardBlocked || !privacyAcknowledged)) {
+      const l10n = AppLocalizations(Locale('nl'));
+      return ExportResult.fail(
+        privacyDecision.hardBlocked
+            ? l10n.d(
+                'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.',
+              )
+            : l10n.d('Export afgebroken vanwege privacybevindingen.'),
+      );
+    }
+
+    final quality = qualityResult ?? const SlideQualityResult([]);
+    final qualityDecision = qualityPolicy.evaluate(
+      quality,
+      acknowledged: qualityAcknowledged,
+    );
+    if (!qualityDecision.allowed) {
+      final l10n = AppLocalizations(const Locale('nl'));
+      return ExportResult.fail(formatQualityExportReason(l10n, quality));
+    }
+    return null;
+  }
+
   static Future<R> _offload<R>(FutureOr<R> Function() body) {
     if (kIsWeb) return Future.sync(body);
     return Isolate.run(body);

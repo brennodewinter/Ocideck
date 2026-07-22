@@ -1,5 +1,7 @@
 # OciDeck
 
+> **Status:** current-state project overview · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 A desktop application for building [Marp](https://marp.app/) presentations through a structured, slide-by-slide editor — no raw Markdown wrangling required. Compose decks from typed slide templates (title, bullets, quotes, tables, images, video, audio, source code, charts, cockpit dashboards, interactive quiz questions), preview them live, present them fullscreen — even across two screens — and export to Marp Markdown, PDF, PPTX, and offline HTML.
 
 And because a deck is something you hand to other people, OciDeck also reads it back to you before you do: it flags the personal data it can recognise, and — if you ask it to — removes that data from everything you show and export, while your Markdown keeps the original.

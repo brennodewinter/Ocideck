@@ -1801,6 +1801,83 @@ const _dutchSourceAddUk = <String, String>{
       'У цій презентації є текст ШІ, який ти ще не перевірив. Експортувати можна; файл сам про це повідомляє й отримує «-ai-concept» у назві.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Чернетка: містить текст ШІ, який ще ніхто не перевірив',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Приховування ввімкнено: те, що перевірка визначає як персональні дані, зачорнюється, а всі зображення, відео та звук цього слайда не потрапляють ані на екран, ані в експорт. Ваш markdown-файл зберігає все.',
+  'Bestand': 'Файл',
+  'Venster': 'Вікно',
+  'Help': 'Довідка',
+  'Alles selecteren': 'Вибрати все',
+  'Plakken': 'Вставити',
+  'Opnieuw': 'Повторити',
+  'Eigenschappen': 'Властивості',
+  'Opdrachten…': 'Команди…',
+  'Opslaan…': 'Збереження…',
+  'Uploaden naar WebDAV…': 'Вивантаження до WebDAV…',
+  'Uploaden naar S3…': 'Вивантаження до S3…',
+  'Vastleggen in git…': 'Фіксація в git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Триває збереження. Повторне збереження нічого не дасть, доки це не завершиться.',
+  'Klaar — privacy niet gecontroleerd': 'Готово — приватність не перевірено',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Персональні дані, особливі категорії даних і секрети не перевірялися: перевірку приватності вимкнено в розділі Безпека.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Презентації, що лишаються звичайними файлами Markdown: читабельні, придатні для пошуку й такі, що відкриваються будь-яким редактором.',
+  'sjablonen om mee te beginnen, of leeg': 'шаблонів для початку або порожня',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Приклади слайдів у шаблоні — нідерландською. Назва й опис відповідають вашій мові; вміст ви зміните після створення.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Приховування ввімкнено: знайдені дані зачорнюються, а всі зображення, відео та звук цього слайда не потрапляють ані на екран, ані в експорт. Ваш markdown-файл зберігає все.',
+  'Mijn tekst': 'Мій текст',
+  'Wat zij zien': 'Що бачать вони',
+  'Presentatiegegevens': 'Дані презентації',
+  'Open presentatiegegevens': 'Відкрити дані презентації',
+  'Motivering van een uitsluiting': 'Обґрунтування виключення',
+  'Motivering van een bevestiging': 'Обґрунтування підтвердження',
+  'Tabel koprij, kolom {kolom}': 'Таблиця, рядок заголовка, колонка {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Таблиця, рядок {rij}, колонка {kolom}',
+  'Via deze website ophalen?': 'Отримати через цей сайт?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Сервер цієї презентації не дозволив браузеру прочитати файл напряму. OciDeck може передати адресу сайту, з якого походить сам OciDeck, і той її отримає. Тоді цей сайт бачить повну адресу — якщо в посиланні є ключ або код, цей сайт бачить і його.',
+  'In de browser kan dit niet worden bewaard':
+      'У браузері це не можна зберегти',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Браузер не має сховища ключів, як його має комп\'ютер: те, що OciDeck тут зберіг би, може прочитати будь-який скрипт на цій сторінці. Скористайтеся десктопною версією — там секрет справді потрапляє у сховище ключів операційної системи.',
+  'Licenties van derden': 'Ліцензії третіх сторін',
+  'Alle licentieteksten tonen': 'Показати всі тексти ліцензій',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Сам OciDeck поширюється за ліцензією EUPL-1.2. Крім того, він містить програмне забезпечення третіх сторін: пакунки Dart і Flutter, два вбудовані плагіни, чотири родини шрифтів, модель обличчя для перевірки приватності та JavaScript, який подорожує разом з експортом у HTML. Кожен зберігає власну ліцензію.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Цей файл містить програмне забезпечення третіх сторін, а іноді й шрифт. Нижче наведено повні тексти відповідних ліцензій; передавайте їх разом із файлом.',
+  'Sporen op dit apparaat': 'Сліди на цьому пристрої',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Окрім налаштувань, OciDeck зберігає ще й список останніх файлів, а після збою — файл відновлення з усім вмістом вашої презентації. Ніщо з цього не залишає цей пристрій, але воно тут лежить — відкритим текстом, захищене вашим обліковим записом у цій операційній системі й нічим більше.',
+  'Recent geopende presentaties': 'Нещодавно відкриті презентації',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Список зберігає повний шлях і класифікацію кожної презентації, що була відкрита, — разом це відомості про те, над чим ви працюєте і для кого.',
+  'Recente lijst wissen': 'Стерти список останніх файлів',
+  'De recente lijst was al leeg.': 'Список останніх файлів уже був порожній.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'запис(ів) стерто зі списку останніх файлів.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Файли відновлення містять увесь вміст ваших презентацій у відкритому тексті. Вони автоматично очищуються через 7 днів, а за коректного завершення роботи — одразу.',
+  'Alles terugzetten': 'Скинути все',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Стирає всі налаштування, список останніх файлів, файли відновлення, робочі копії git і паролі у вашому сховищі ключів. Ваші презентації залишаються: вони ваші, а не OciDeck.',
+  'Zet alles terug naar de begintoestand': 'Повернути все до початкового стану',
+  'Alles terugzetten naar de begintoestand?':
+      'Повернути все до початкового стану?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Ваші налаштування, список останніх файлів, файли відновлення, робочі копії git і збережені паролі буде стерто. Це неможливо скасувати. Ваші презентації залишаються.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'змін(и) ще не надіслано на git-сервер, вони існують лише на цьому пристрої. Вони теж зникнуть.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Усе повернуто до початкового стану.',
+  'Terugzetten is niet gelukt.': 'Скинути не вдалося.',
+  'Er wacht nog werk dat niet verstuurd is': 'Є ще невідправлена робота',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'У цьому git-з\'єднанні є зміни, які ще не надіслані на сервер. Якщо ви видалите з\'єднання, зникне й робоча копія на цьому пристрої — і ця робота більше ніде не існуватиме.',
+  'Verbinding behouden': 'Зберегти з\'єднання',
+  'Toch verwijderen': 'Усе одно видалити',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Гаразд',

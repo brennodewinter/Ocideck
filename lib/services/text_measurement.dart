@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
-import '../widgets/slides/inline_markdown.dart';
+import '../utils/inline_markdown.dart';
 
 /// Meet met dezelfde inline-spans als de render: vet/cursief/code lopen breder
 /// dan kale tekst op normaal gewicht, dus een platte meting onderschat het
@@ -11,7 +11,7 @@ TextSpan _measurementSpan(String text, TextStyle style) {
   if (!hasInlineMarkdown(text)) return TextSpan(text: text, style: style);
   return TextSpan(
     style: style,
-    children: buildInlineSpans(text, baseStyle: style, linkColor: Colors.black),
+    children: buildInlineSpans(text, baseStyle: style),
   );
 }
 

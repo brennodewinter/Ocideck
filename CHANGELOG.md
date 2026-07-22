@@ -10,6 +10,82 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Changed
+- **Een uitgezette privacycontrole levert geen groen oordeel meer op.** Zette u
+  de controle uit bij *Instellingen → Beveiliging*, dan meldde de statusbalk
+  daarna gewoon een groen "Klaar voor export". Dat was de gevaarlijkste stand van
+  allemaal: met de controle uit levert de scanner een lege uitslag, en van
+  buitenaf is "wij hebben niets gevonden" dan niet te onderscheiden van "wij
+  hebben niet gekeken". U deelde op een geruststelling die niemand had gegeven.
+
+  Het oordeel is nu grijs en zegt wat er niet is nagekeken — persoonsgegevens,
+  bijzondere gegevens en geheimen — met de plek erbij waar u de controle weer
+  aanzet. Het exportvenster zegt hetzelfde in woorden. Er wordt niets
+  geblokkeerd: u hebt die controle zelf uitgezet, dus dit is geen alarm maar het
+  intrekken van een belofte. Grijs en niet oranje, om precies die reden.
+- **De sjabloonkiezer zegt buiten het Nederlands dat de voorbeelddia's
+  Nederlands zijn.** De naam en de omschrijving van een sjabloon volgen uw eigen
+  taal; de dia's erin niet. Wie in het Turks een sjabloon koos, kreeg een
+  Nederlands deck zonder dat iets dat had aangekondigd.
+
+  Dat blijft zo, en dat is een keuze. Sjablooninhoud is *deck*-inhoud: ze belandt
+  in uw opgeslagen bestand en is vanaf dat moment van u. Zou ze meevertalen, dan
+  hing de inhoud van een document af van de menutaal waarin het toevallig is
+  aangemaakt, en kregen twee mensen die hetzelfde sjabloon kiezen bestanden die
+  ze niet kunnen vergelijken. Eerlijk zijn kost één regel tekst; het alternatief
+  kost tienduizenden regels die niemand onderhoudt.
+- **Twee stille valkuilen bij een nieuw slidetype weggenomen.** Welke slidetypes
+  hun inhoud als tabel bewaren, stond op twee plekken met de hand bijgehouden:
+  in de parser én in de serialisatie. Wie een nieuw tabeltype in de parser
+  vergat, kreeg geen foutmelding — het deck opende, de dia stond er, en de rijen
+  waren na herladen leeg. Datzelfde gold voor "kan deze bulletslide in tweeën?",
+  dat op drie plekken apart was uitgeschreven; de kopie in de slidestrook viel
+  bij een onbekend type stil terug op "nee", zodat de knip in het paneel wel
+  verscheen en op de kaart niet.
+
+  Beide feiten staan nu één keer opgeschreven, naast de opsomming van
+  slidetypes zelf, en een toets vergelijkt ze met wat het opslaan-en-teruglezen
+  werkelijk doet. Voor u verandert er niets aan wat u ziet; het scheelt bij het
+  toevoegen van een slidetype twee bestanden waar het stil mis kon gaan.
+- **Een afbeelding van internet wordt nu opgehaald over een vastgezette
+  verbinding.** Staat er een `http(s)`-afbeelding op een dia, dan controleerde
+  OciDeck eerst of die host niet naar binnen wees — maar liet het ophalen daarna
+  aan Flutter over, en dat zoekt de naam nóg een keer op. Wie het domeinnaamsysteem
+  in handen heeft, kon in dat korte venster van een publiek adres naar een intern
+  adres omschakelen. OciDeck haalt de bytes nu zelf op, over een verbinding die
+  vastzit op het gekeurde adres; er is dus geen tweede opzoeking meer.
+
+  Bijkomstig: bewegende afbeeldingen (GIF, geanimeerde WebP) van internet bewegen
+  nu ook, net als die uit een map. Ze toonden eerder alleen het eerste beeldje.
+
+  Voor **video** blijft dat venster bestaan — de videospeler van het besturingssysteem
+  opent zijn eigen verbinding en er is geen plek om die vast te zetten. Wat daar
+  overblijft is een verzoek naar binnen waarvan het antwoord de app nooit bereikt.
+- **Het kenmerk van een redactie is langer geworden.** In het bestand met
+  redacties naast een geredigeerd rapport draagt elke redactie een kort kenmerk,
+  zodat een lezer kan zeggen: "ik betwist redactie a3f1e2b7". Dat kenmerk was
+  vier tekens lang, en dat is te kort: bij ongeveer driehonderd redacties in één
+  rapport is de kans al één op twee dat er twee hetzelfde heten — en dan wijst
+  een betwisting naar twee dingen tegelijk. Voortaan zijn het er minstens acht,
+  en meer zodra dat nodig is om ze uit elkaar te houden. Bestaande bestanden
+  blijven gewoon leesbaar; het bewijs zat altijd al in de volledige waarde
+  ernaast, niet in het kenmerk.
+- **De hostinggids stelt nu voorwaarden in plaats van aanbevelingen.** Wie de
+  webversie publiek zet, vindt in `docs/HOSTING.md` een blok release-voorwaarden:
+  de beveiligingsheaders als échte HTTP-header, en — als u het optionele
+  fetch-hulppunt inzet — binden op `127.0.0.1`, een origin-lijst plus
+  authenticatie zodra het verder reikt dan strikt same-origin, en verlaagde
+  plafonds wanneer u het bewust als open fetcher draait.
+
+  Aanleiding is dat de standaardcontrole van dat hulppunt (`Sec-Fetch-Site:
+  same-origin`) wel elke andere *website* buiten de deur houdt, maar geen `curl`.
+  Dat is met een header niet op te lossen en stond al eerlijk in de code; het
+  stond alleen nergens waar een beheerder erlangs moet. De SSRF-grens zelf
+  verandert niet — interne adressen bleven en blijven onbereikbaar.
+
+  In de instellingentabel van `server/fetch-proxy/README.md` stond bovendien dat
+  een lege `OCIDECK_PROXY_ALLOWED_ORIGINS` "geen check" betekende. Dat was het
+  omgekeerde van wat de code doet: leeg betekent juist de striktste stand.
+  Rechtgezet, samen met drie instellingen die er helemaal niet in stonden.
 - **Het tijdstempelverzoek draagt nu een nonce.** Vraagt u een RFC 3161-stempel
   aan, dan zit er voortaan een willekeurig getal in het `.tsq`-bestand dat de
   tijdstempeldienst in het token moet herhalen. Daarmee is aan te tonen dát het
@@ -20,6 +96,46 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   OciDeck kan die controle bij het inlezen niet zelf doen — het bestand bewaart
   uw verzoek niet, dus na een herstart is de andere helft weg. Wie beide
   bestanden heeft, kan het wél nakijken (`openssl ts -reply -in … -text`).
+- **Zet u versleuteling aan bij een pakket, dan staat er meteen een sterk
+  wachtwoord klaar.** Het veld was leeg, en dan verzint een mens iets dat hij
+  kan onthouden. Juist bij dit bestandsformaat is dat de zwakke plek: de manier
+  waarop het wachtwoord tot een sleutel wordt omgerekend ligt vast in de
+  zip-standaard en is niet te versterken zonder dat andere programma's uw
+  pakket niet meer kunnen openen. De sterkte van het wachtwoord is dus wat
+  telt. Het staat zichtbaar in beeld zodat u het kunt overnemen, en u kunt er
+  altijd uw eigen zin voor in de plaats zetten.
+- **OciDeck laat minder op uw schijf achter, en u kunt de rest zelf wissen.**
+
+  Een git-verbinding verwijderen haalde alleen het regeltje uit uw instellingen
+  weg. De volledige inhoud van die repository — inclusief de historie — bleef in
+  een verborgen map staan, samen met de commitboodschappen die u had getypt. Bij
+  een repository met klantgegevens betekende dat: de verbinding is weg, de
+  gegevens niet. Die werkkopie gaat nu mee. Wacht er nog werk dat niet naar de
+  server is gestuurd, dan gooit OciDeck dat nooit stilzwijgend weg: u ziet welk
+  deck, welke tak en welke boodschap het betreft, en u kiest zelf. Zegt u nee,
+  dan blijft de verbinding gewoon staan.
+
+  Ook nieuw in *Instellingen → Beveiliging*, onder **Sporen op dit apparaat**:
+  de recente lijst in één keer wissen — die bewaart het volledige pad én de
+  classificatie van elk deck dat open is geweest — en *alles terugzetten naar de
+  begintoestand*, dat ook de herstelbestanden, de git-werkkopieën en de
+  wachtwoorden in uw sleutelbos opruimt. Uw presentaties blijven staan: die zijn
+  van u.
+
+  Verder ruimt OciDeck nu op wat het zelf liet slingeren: het logo van een
+  stijlprofiel dat u verwijdert, en de tijdelijke map waarin `git` draait.
+
+  Uw eigen gegevens uit de privacycontrole — naam, e-mailadres, telefoonnummer —
+  stonden in klaartekst bij de instellingen. Die verhuizen bij de eerste start
+  naar de sleutelbos van uw besturingssysteem, waar de wachtwoorden ook staan.
+
+  Herstelbestanden worden niet versleuteld, en dat blijft zo; `SECURITY.md` legt
+  uit waarom opruimen hier meer oplevert. Wél gelden de zeven dagen nu ook
+  terwijl de app draait — voorheen werd er alleen bij het opstarten opgeruimd,
+  dus op een machine die aan blijft staan bleef een oud herstelbestand liggen.
+  En op Linux zet OciDeck zijn eigen mappen bij de start op "alleen voor u",
+  zodat andere accounts op dezelfde computer niet meelezen.
+
 - **Geen base64 meer in uw presentatiebestand.** De belofte van OciDeck is dat u
   met alleen een teksteditor en Marp verder kunt. Op zeven plekken klopte dat
   niet: daar stond een blok onleesbare tekens waar uw inhoud in verstopt zat.
@@ -126,6 +242,39 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   en de beelden komen nog steeds van zijn eigen mediaservers. `PRIVACY.md` is
   daarop bijgewerkt.
 
+- **Een bevinding in een tabel zegt nu in welke cel hij zit.** Er stond "Tabel
+  14". Dat is het volgnummer dat de scanner intern gebruikt — een getal dat
+  nergens op uw dia staat en dat u zonder de breedte van de tabel niet eens kunt
+  terugrekenen. Een plaatsaanduiding die zelf een raadsel is, helpt niemand. Er
+  staat nu "Tabel rij 4, kolom 2", geteld zoals u ze op de dia telt; de koprij
+  heet "Tabel koprij", want die heeft op het scherm ook geen nummer.
+- **Een bevinding op een presentatiegegeven stuurt u niet langer naar de
+  kleurinstellingen.** Een bevinding die over de hele presentatie gaat, was ooit
+  vanzelf een themakwestie: alleen de contrastcontroles meldden zich op dat
+  niveau. Sinds de privacycontrole ook de kop van het bestand leest, klopt dat
+  niet meer — een e-mailadres in het auteursveld gaat over de hele presentatie en
+  heeft niets met kleur te maken.
+
+  Zo'n melding opende toch de kleurinstellingen, zocht daar een veld dat niet
+  bestaat, markeerde dus niets, en liet u achter tussen de kleurkiezers. Ze heet
+  nu *Presentatiegegevens*, de knop zegt "Open presentatiegegevens", en dat is
+  ook wat er opengaat. Het geldt voor alle velden uit de kop: auteur,
+  organisatie, beschrijving, trefwoorden, versie, datum, gebruikte standaarden en
+  hulpmiddelen, en de twee MIAUW-motiveringen. Zes daarvan hadden bovendien
+  helemaal geen plaatsaanduiding in het paneel — een bevinding op het versieveld
+  kwam binnen als "Presentatiegegevens · Privacy", en verder zoeken maar. Ze
+  worden nu bij naam genoemd.
+- **Video en audio worden nu ook op hun inhoud gecontroleerd.** Van een
+  afbeelding werd altijd al nagegaan of het écht een afbeelding was; bij video
+  en audio werd alleen naar de omvang gekeken. Een willekeurig bestand met de
+  naam `.mp4` kwam zo uw presentatie in. Nu wordt de soort aan de inhoud
+  herkend, net als bij afbeeldingen.
+- **Weigeringen laten voortaan een spoor na.** Werd een deck tegengehouden
+  omdat er uitvoerbare inhoud in zat, of een export omdat de rubricering het
+  niet toeliet, dan zag u dat wel maar bleef er niets van bewaard. Voor een
+  gereedschap dat verzegelde rapporten uitgeeft is juist dát het feit dat u
+  achteraf wilt kunnen navertellen. Er komt geen inhoud van uw presentatie in
+  te staan — alleen wat voor soort weigering het was.
 - **Een export die niets doet, blijft niet meer eeuwig niets doen.** De PDF- en
   PPTX-export maakt zijn afbeeldingen door de échte dia te laten tekenen en het
   resultaat vast te leggen. Daarvoor moet het venster beelden produceren — en
@@ -142,6 +291,29 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   exporteren gewoon op de voorgrond staan. De HTML-export heeft hier geen last
   van; die tekent geen dia's.
 
+- **Uw wachtwoord en uw git-token gaan niet meer onversleuteld over het
+  netwerk.** Had u een opslagserver als "vertrouwd intern" gemarkeerd — bedoeld
+  voor een eigen doos op uw eigen netwerk — dan stond OciDeck een gewone
+  `http`-verbinding toe. Bij WebDAV en git ging uw inloggegeven daar bij élk
+  verzoek in leesbare vorm overheen.
+
+  Die vink gaat over de sérver, niet over de weg ernaartoe. Dat verschil is bij
+  de inhoud van een presentatie te overzien — u kiest zelf of u dat over uw LAN
+  wilt sturen — maar bij een wachtwoord of token niet: wie het één keer
+  onderschept, houdt het, en het blijft werken lang nadat die persoon weg is.
+
+  Voor zo'n verbinding is `https` nu vereist. Wat blijft werken: een openbare
+  bron zonder inloggegeven, en S3/MinIO (dat ondertekent elk verzoek apart, dus
+  er gaat geen herbruikbaar geheim over de lijn). Draait de server op deze
+  computer zelf, dan verandert er ook niets — dat verkeer verlaat de machine
+  niet.
+
+  Merkt u dit? Dan werd uw wachtwoord tot nu toe leesbaar verstuurd. Zet de
+  server op https, of gebruik hem zonder inloggegeven.
+- **Een presentatie kan niet meer naar willekeurige poorten verbinden.** Haalde
+  een dia een afbeelding of video van een adres op, dan werd wel gecontroleerd
+  wélke computer dat was, maar niet op welke poort. De webversie deed dat al
+  wel. Beide kanten hanteren nu dezelfde lijst.
 - **De webversie zegt nu ook waar een formulier níet heen mag.** De
   beveiligingsregels van de webbundel bepalen per soort verkeer waar de pagina
   iets vandaan mag halen. Voor het versturen van een formulier stond dat er niet
@@ -173,6 +345,34 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   zitten. En de losse ophaaldienst zet zijn "niet zelf raden wat voor bestand
   dit is"-kop voortaan óók op een weigering, niet alleen als het lukt.
 
+- **De licenties, kennisgevingen en SBOM kloppen weer.** Een reeks dingen die
+  stil fout stonden, en die u pas merkt als u OciDeck of een export van OciDeck
+  aan iemand anders doorgeeft.
+
+  De gevendorde plugin `desktop_multi_window` stond overal als MIT genoteerd,
+  maar is Apache-2.0. Dat is nu rechtgezet in de SBOM en de kennisgevingen, de
+  zes bestanden die wij in die fork wijzigden dragen de wijzigingsnotitie die
+  Apache-2.0 vraagt, en beide forks hebben een `MODIFICATIONS.md` met de
+  herkomstcommit erbij. In de SBOM dragen ze nu ook een hash — daarvoor waren
+  zij de enige twee onderdelen zonder.
+
+  Twaalf afhankelijkheden die u wél meekrijgt, stonden niet in
+  `THIRD_PARTY_NOTICES.md`. Ze staan er nu allemaal in, met hun licentie, en een
+  test houdt die lijst voortaan bij de tijd.
+
+  Belangrijker voor u: de licentieteksten reisden niet mee. De vier
+  OFL-bestanden van de lettertypen zaten in geen enkele build, en er was geen
+  plek in de app om een licentie te lezen. Onder **Instellingen → Over OciDeck**
+  staat nu **Alle licentieteksten tonen**, met alles erin — pakketten,
+  lettertypen, het gezichtsmodel en de JavaScript uit de HTML-export. Diezelfde
+  export draagt voortaan zelf een blok met de volledige licentieteksten en per
+  ingesloten bibliotheek een licentieregel; bij het doorsturen van een export
+  bent u de verspreidende partij, en die kunt u nu ook zijn.
+
+  Tot slot: het Klingon-vlaggetje in de taalkiezer was het embleem van het
+  Klingon-rijk — een beeldmerk van iemand anders dat in elke uitgeleverde
+  versie meereisde. Het is vervangen door een nuchter `tlh`-plaatje. De taal
+  blijft gewoon.
 - **Uw eigen regels in de kop breken het zegel niet meer.** Sinds OciDeck de
   front matter bijwerkt in plaats van herbouwt, blijft wat u er zelf in zet
   netjes staan — een eigen `style:`-blok, een commentaarregel, een handmatige
@@ -373,6 +573,67 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   embed-aanbieder en elke WebDAV-smaak zit in een opsomming in de code, dus een
   nieuwe merknaam valt op vóórdat hij ongenoemd in de interface belandt.
 
+- **Op macOS heeft OciDeck nu een menubalk.** Bestand, Bewerken, Presentatie,
+  Venster en Help, met de handelingen die u tot nu toe alleen vond als u wist
+  waar u moest kijken: in een `⋮`-menu, in de statusbalk, of achter een sneltoets
+  die nergens stond. Op een Mac is de menubalk de plek waar u ontdekt wát een
+  programma kan.
+
+  Er komen maar twee sneltoetsen bij (`Cmd + ,` voor de instellingen en
+  `Cmd + N` voor een nieuw tabblad); de rest bestond al en wordt er alleen
+  zichtbaar. Knippen, kopiëren, plakken en alles selecteren staan er ook in —
+  deze balk vervangt het standaardmenu van macOS, en dat mag u geen
+  tekstbewerking kosten. Een handeling waarvoor geen presentatie open staat,
+  blijft staan maar grijs: een menu-item dat komt en gaat, leert niemand wat de
+  app kan.
+
+  Windows en Linux krijgen hun venstermenu van het bureaublad zelf en de
+  webversie heeft er geen, dus daar verandert er niets.
+- **Ongedaan maken, opnieuw, zoeken, de eigenschappen, deze handleiding en het
+  sneltoetsenoverzicht staan nu ook in het opdrachtenpalet** (`Ctrl/Cmd + K`).
+  Ongedaan maken en opnieuw bestonden alleen als twee kleine icoontjes in de
+  werkbalk, terwijl het palet in deze app de plek is waar een functie gevonden
+  wordt. Wat er niet in staat, bestaat voor de meeste mensen niet.
+- **Het openscherm zegt eindelijk waar u bent.** Er stonden een logo en vier
+  knoppen, en geen antwoord op de enige vraag die iemand daar heeft. Onder het
+  logo staat nu één regel over wat OciDeck maakt, onder *Nieuwe presentatie*
+  hoeveel sjablonen er achter die knop klaarstaan — geteld uit de catalogus
+  zelf, dus dat aantal kan niet verouderen — en naast *Instellingen* een knop
+  **Gebruikershandleiding**. Die stond tot nu toe drie klikken diep onder
+  *Instellingen → Documentatie*, precies waar iemand die nog niets weet niet
+  gaat kijken.
+- **Bij het kiezen van een slidetype staat de uitleg er nu bij.** Onder het
+  rooster verschijnt de toelichting van het type dat uw muis of uw
+  toetsenbordfocus aanwijst. Die tekst bestond al — volledig, in alle talen —
+  maar verscheen pas ná het invoegen, achter een dichtgeklapte "Wat kan ik
+  hier?". Wie moest kiezen, koos dus op een tekening en één woord. Dezelfde zin
+  gaat mee als schermlezer-tekst op het kaartje zelf, zodat wie niet kijkt hem
+  hoort op het moment dat de keuze valt.
+- **U kunt nu zien wat de ontvanger krijgt, vóórdat u iets verstuurt.** Staat een
+  dia op *weglaten uit tonen en exporteren*, dan verschijnt boven de
+  voorvertoning een melding die zegt wat er gebeurt — de gevonden gegevens worden
+  zwart gemaakt, én álle afbeeldingen, video en audio van die dia gaan niet mee.
+  Dat tweede stond nergens, en het is de duurste verrassing van de twee: een dia
+  die in de export ineens leeg is, ziet eruit als een fout in plaats van als uw
+  besluit.
+
+  Naast die melding staat een schakelaar **Wat zij zien / Mijn tekst**. Aan toont
+  hij die ene dia door dezelfde bewerking waar presenteren en exporteren doorheen
+  gaan. Tot nu toe beloofde het label in de editor dat er iets zou worden
+  weggelaten, veranderde het scherm niets, en gaf pas de PDF antwoord — en dan is
+  het bestand er al.
+
+  De schakelaar staat standaard uit en dat is de hele opzet: u moet uw eigen
+  tekst kunnen zien om hem te kunnen wijzigen. Uw markdown-bestand houdt hoe dan
+  ook alles.
+- **Opslaan laat zien dat het bezig is.** In de statusbalk draait tijdens een
+  opslag een melding met de bestemming erbij — *Opslaan…*, *Uploaden naar
+  WebDAV…*, *Uploaden naar S3…*, *Vastleggen in git…* — en de opslagknop in de
+  werkbalk staat zolang uit. Een opslag naar een server is één upload per
+  mediabestand en een git-commit zijn meerdere heen-en-weertjes; op een trage
+  verbinding was dat niet te onderscheiden van een vastgelopen programma, en dus
+  klikte u nog eens, en nog eens. De bestemming staat erbij omdat die zegt of het
+  aan uw schijf of aan uw verbinding ligt.
 - **Een scan die de webversie aanvalt zoals een buitenstaander dat zou doen**
   (`make dast`, met OWASP ZAP). Waar de andere controles de broncode lezen,
   bekijkt deze wat er werkelijk over de lijn gaat wanneer de pagina wordt

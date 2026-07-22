@@ -9,8 +9,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app.dart';
 import 'platform/launch_files.dart';
 import 'platform/native_window.dart';
+import 'services/bundled_licenses.dart';
 import 'services/privacy/privacy_bulk_lexicon.dart';
 import 'services/asset_staging.dart';
+import 'services/disk_traces.dart';
 import 'utils/log.dart';
 import 'widgets/presentation/audience_window.dart';
 
@@ -22,6 +24,12 @@ void main(List<String> args) {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
     _installErrorHandlers();
+
+    // De fonts, het gezichtsmodel en de gebundelde JavaScript zijn geen
+    // Dart-pakketten, dus Flutter's eigen NOTICES-asset kent ze niet. Ze hier
+    // aanmelden zorgt dat de licentiepagina ze wél toont — OFL-1.1 §2 laat een
+    // lettertype alleen meereizen mét zijn licentie.
+    BundledLicenses.register();
 
     if (!kIsWeb && args.isNotEmpty && args.first == 'multi_window') {
       final raw = args.length >= 3 ? args[2] : '';
@@ -44,6 +52,15 @@ void main(List<String> args) {
     // Oude sessiemappen opruimen mag de start niet ophouden — het is
     // huishouding, geen voorwaarde om te kunnen werken.
     unawaited(AssetStaging.pruneStale());
+    // De zandbak waarin `git` draait (lege HOME, geen hooks van de gebruiker)
+    // bleef na afloop staan met wat git er zelf in achterliet. Bij het opstarten
+    // draait er zeker geen `git` van ons; dat is het veilige moment.
+    unawaited(DiskTraces().clearGitSandbox());
+    // Op Linux worden onze mappen met de gewone umask aangemaakt en kan elke
+    // andere lokale gebruiker meelezen. `docs/PRIVACY.md` belooft dat de
+    // herstelbestanden op de accountbescherming van het OS leunen; dit maakt
+    // die belofte daar waar.
+    unawaited(DiskTraces().restrictToOwner());
 
     // Het gebundelde gezondheidslexicon vóór de eerste frame, en bewust met
     // `await`. De privacyscan is synchroon en memoiseert per slide; zou dit

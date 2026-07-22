@@ -1,4 +1,6 @@
-# Licentienavraag voor drie lexiconbronnen
+# OciDeck — Licentienavraag voor drie lexiconbronnen
+
+> **Status:** dossier; drie navragen die openstaan · **Status laatst herzien:** 22-07-2026 · **Uitgever:** Stichting LibreKAT
 
 Drie bronnen zouden het art. 9-lexicon van OciDeck fors verrijken, en van geen
 van drieën is de licentie rond genoeg om te bundelen. Dit document bevat per

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/editor_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
@@ -46,6 +48,32 @@ void main() {
     of: find.byWidgetPredicate((w) => w is PopupMenuItem),
     matching: find.byIcon(icon),
   );
+
+  /// Het commando met dit label, uit het palet zoals de shell het opbouwt.
+  ///
+  /// Leest de commandolijst in plaats van erin te scrollen of te typen. De
+  /// lijst bouwt alleen wat zichtbaar is — een commando verderop bestaat nog
+  /// niet in de boom — en `find.byType(TextField).first` (waarmee deze tests
+  /// eerder filterden) pakt het zoekveld van de slidelijst eronder, zodat er
+  /// niets gefilterd werd. Dat viel alleen niet op zolang het gezochte
+  /// commando toevallig nog boven de vouw stond.
+  Future<PaletteCommand> paletteCommand(
+    WidgetTester tester,
+    String label,
+  ) async {
+    final palette = tester.widget<CommandPalette>(find.byType(CommandPalette));
+    final command = palette.commands.firstWhere(
+      (c) => c.label == label,
+      orElse: () =>
+          throw StateError('commando "$label" staat niet in het palet'),
+    );
+    // Eerst sluiten, dan uitvoeren — dat is ook de volgorde die het palet zelf
+    // aanhoudt, en een handeling uitvoeren terwijl de dialoog open blijft laat
+    // het scherm in een stand achter die in werkelijkheid niet bestaat.
+    await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+    await tester.pumpAndSettle();
+    return command;
+  }
 
   // Pumps the whole app, opens a deck in the current tab, and returns that tab
   // so tests can assert on its (tab-scoped) deck/editor notifiers directly.
@@ -122,11 +150,35 @@ void main() {
     await tester.pumpAndSettle();
 
     // The Informatieveiligheid module is off by default, so its commands are
-    // omitted entirely — not shown as dead greyed-out entries. Filtering for
-    // one therefore yields nothing.
-    await tester.enterText(find.byType(TextField).first, 'MIAUW');
+    // omitted entirely — not shown as dead greyed-out entries.
+    final palette = tester.widget<CommandPalette>(find.byType(CommandPalette));
+    expect(
+      palette.commands.map((c) => c.label),
+      isNot(contains('MIAUW-compliance')),
+    );
+  });
+
+  testWidgets('ongedaan maken staat in het palet en werkt', (tester) async {
+    // Undo en redo bestonden alleen als twee kleine icoontjes in de werkbalk en
+    // ontbraken in het palet — de plek waar in deze app een functie gevonden
+    // wordt.
+    final tab = await pumpShell(tester);
+    final before = tab.deckNotifier.currentState.deck!.slides.length;
+    tab.deckNotifier.addSlide(SlideType.bullets);
     await tester.pumpAndSettle();
-    expect(find.text('MIAUW-compliance'), findsNothing);
+    expect(tab.deckNotifier.currentState.deck!.slides.length, before + 1);
+
+    await tester.tap(appBarIcon(Icons.more_vert));
+    await tester.pumpAndSettle();
+    await tester.tap(menuItemIcon(Icons.keyboard_command_key));
+    await tester.pumpAndSettle();
+
+    final undo = await paletteCommand(tester, 'Ongedaan maken');
+    expect(undo.enabled, isTrue);
+    undo.onInvoke();
+    await tester.pumpAndSettle();
+
+    expect(tab.deckNotifier.currentState.deck!.slides.length, before);
   });
 
   testWidgets('running "Nieuwe grafiek" from the palette adds a chart slide', (
@@ -140,10 +192,7 @@ void main() {
     await tester.tap(menuItemIcon(Icons.keyboard_command_key));
     await tester.pumpAndSettle();
 
-    // Filter to the chart command and invoke it.
-    await tester.enterText(find.byType(TextField).first, 'grafiek');
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Nieuwe grafiek'));
+    (await paletteCommand(tester, 'Nieuwe grafiek')).onInvoke();
     await tester.pumpAndSettle();
 
     final slides = tab.deckNotifier.currentState.deck!.slides;

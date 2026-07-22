@@ -1787,6 +1787,84 @@ const _dutchSourceAddHu = <String, String>{
       'Ebben a deckben AI-szöveg van, amelyet még nem ellenőriztél. Az exportálás így is lehetséges; a fájl maga jelzi ezt, és a neve "-ai-concept" toldalékot kap.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Vázlat: AI-szöveget tartalmaz, amelyet még senki nem ellenőrzött',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'A kihagyás be van kapcsolva: amit az ellenőrzés személyes adatnak minősít, azt kitakarjuk, és ennek a diának egyetlen képe, videója és hangja sem kerül a képernyőre vagy az exportba. A markdown-fájlod mindent megőriz.',
+  'Bestand': 'Fájl',
+  'Venster': 'Ablak',
+  'Help': 'Súgó',
+  'Alles selecteren': 'Az összes kijelölése',
+  'Plakken': 'Beillesztés',
+  'Opnieuw': 'Újra',
+  'Eigenschappen': 'Tulajdonságok',
+  'Opdrachten…': 'Parancsok…',
+  'Opslaan…': 'Mentés…',
+  'Uploaden naar WebDAV…': 'Feltöltés a WebDAV-ra…',
+  'Uploaden naar S3…': 'Feltöltés az S3-ra…',
+  'Vastleggen in git…': 'Rögzítés a gitben…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Mentés folyamatban. Az ismételt mentés nem csinál semmit, amíg ez be nem fejeződik.',
+  'Klaar — privacy niet gecontroleerd':
+      'Kész — az adatvédelem nincs ellenőrizve',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Nem történt ellenőrzés személyes adatokra, különleges adatokra és titkokra: az adatvédelmi ellenőrzés ki van kapcsolva a Biztonság alatt.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Prezentációk, amelyek egyszerű Markdown-fájlok maradnak: olvashatók, kereshetők és bármilyen szerkesztővel megnyithatók.',
+  'sjablonen om mee te beginnen, of leeg': 'sablon a kezdéshez, vagy üres',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'A sablon példadiái hollandul vannak. A név és a leírás a saját nyelvedet követi; a tartalmat a létrehozás után igazítod hozzá.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'A kihagyás be van kapcsolva: a megtalált adatokat kitakarjuk, és ennek a diának egyetlen képe, videója és hangja sem kerül a képernyőre vagy az exportba. A markdown-fájlod mindent megőriz.',
+  'Mijn tekst': 'Saját szöveg',
+  'Wat zij zien': 'Amit ők látnak',
+  'Presentatiegegevens': 'Prezentációs adatok',
+  'Open presentatiegegevens': 'Prezentációs adatok megnyitása',
+  'Motivering van een uitsluiting': 'Kivétel indoklása',
+  'Motivering van een bevestiging': 'Megerősítés indoklása',
+  'Tabel koprij, kolom {kolom}': 'Táblázat fejlécsor, {kolom}. oszlop',
+  'Tabel rij {rij}, kolom {kolom}': 'Táblázat {rij}. sor, {kolom}. oszlop',
+  'Via deze website ophalen?': 'Lekérés ezen a webhelyen keresztül?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Ennek a prezentációnak a kiszolgálója nem engedte, hogy a böngésző közvetlenül olvassa a fájlt. Az OciDeck továbbadhatja a címet annak a webhelynek, ahonnan maga az OciDeck származik, és az lekéri a fájlt. Így az a webhely látja a teljes címet — ha kulcs vagy kód van a hivatkozásban, azt is látja.',
+  'In de browser kan dit niet worden bewaard': 'A böngészőben ez nem menthető',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'A böngészőnek nincs kulcstartója, mint a számítógépnek: amit az OciDeck itt eltárolna, azt az oldal bármelyik szkriptje elolvashatja. Használd az asztali verziót — ott a titok tényleg az operációs rendszer kulcstartójába kerül.',
+  'Licenties van derden': 'Harmadik felek licencei',
+  'Alle licentieteksten tonen': 'Az összes licencszöveg megjelenítése',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Maga az OciDeck az EUPL-1.2 licenc alatt áll. Ezen felül harmadik felek szoftvereit is tartalmazza: a Dart- és Flutter-csomagokat, két mellékelt bővítményt, négy betűtípuscsaládot, az adatvédelmi ellenőrzés arcmodelljét és azt a JavaScriptet, amely egy HTML-exporttal együtt utazik. Mindegyik megtartja a saját licencét.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Ez a fájl harmadik felek szoftverét és olykor egy betűtípust tartalmaz. Alább a hozzájuk tartozó teljes licencszövegek olvashatók; add tovább őket a fájllal együtt.',
+  'Sporen op dit apparaat': 'Nyomok ezen az eszközön',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'A beállításaid mellett az OciDeck a legutóbbi fájlok listáját is megőrzi, összeomlás esetén pedig egy helyreállítási fájlt a prezentációd teljes tartalmával. Semmi ebből nem hagyja el ezt az eszközt, de itt van — egyszerű szövegként, csak az operációs rendszerbeli fiókod védi, más nem.',
+  'Recent geopende presentaties': 'Legutóbb megnyitott prezentációk',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'A lista megőrzi minden megnyitott prezentáció teljes elérési útját és besorolását — együtt ez adat arról, hogy min dolgozol és kinek.',
+  'Recente lijst wissen': 'Legutóbbi fájlok listájának törlése',
+  'De recente lijst was al leeg.': 'A legutóbbi fájlok listája már üres volt.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'bejegyzés törölve a legutóbbi fájlok listájából.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'A helyreállítási fájlok a prezentációid teljes tartalmát tartalmazzák egyszerű szövegként. 7 nap után automatikusan törlődnek, rendes kilépéskor pedig azonnal.',
+  'Alles terugzetten': 'Minden visszaállítása',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Törli az összes beállítást, a legutóbbi fájlok listáját, a helyreállítási fájlokat, a git-munkamásolatokat és a kulcstartódban lévő jelszavakat. A prezentációid megmaradnak: azok a tieid, nem az OciDecké.',
+  'Zet alles terug naar de begintoestand':
+      'Minden visszaállítása a kiindulási állapotra',
+  'Alles terugzetten naar de begintoestand?':
+      'Visszaállítasz mindent a kiindulási állapotra?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Törlődnek a beállításaid, a legutóbbi fájlok listája, a helyreállítási fájlok, a git-munkamásolatok és a mentett jelszavak. Ez nem vonható vissza. A prezentációid megmaradnak.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'módosítás még nem került fel git-kiszolgálóra, és csak ezen az eszközön létezik. Azok is eltűnnek.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Minden visszaállt a kiindulási állapotra.',
+  'Terugzetten is niet gelukt.': 'A visszaállítás nem sikerült.',
+  'Er wacht nog werk dat niet verstuurd is': 'Még van el nem küldött munka',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Ennek a git-kapcsolatnak vannak olyan módosításai, amelyek még nem kerültek fel a kiszolgálóra. Ha eltávolítod a kapcsolatot, az eszközön lévő munkamásolat is eltűnik — és ez a munka sehol sem lesz meg többé.',
+  'Verbinding behouden': 'Kapcsolat megtartása',
+  'Toch verwijderen': 'Eltávolítás mégis',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

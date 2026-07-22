@@ -1,5 +1,7 @@
 # OciDeck — Glossary
 
+> **Status:** reference, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 OciDeck-specific terms and the acronyms that recur in the codebase and docs. For
 where things live in `lib/`, see [SOURCE_MAP.md](SOURCE_MAP.md).
 
@@ -54,10 +56,14 @@ applies the same SSRF rules as NetGuard. See [HOSTING.md](HOSTING.md).
 ## Privacy & classification
 
 **OciWacht** — OciDeck's built-in privacy scanner. It detects personal data
-(email, phone, IBAN, BSN and national IDs for 13 EU member states plus two UK
-ones, addresses, names, secrets) and
+(email, phone, IBAN, BSN and national identifiers covering all 27 EU member
+states — some through a shared rule, as Czechia and Slovakia and as Estonia and
+Lithuania each share a number format — plus Iceland, Liechtenstein, Norway,
+Switzerland and two UK numbers, addresses, names, secrets) and
 can flag or redact it. Name detection is deliberately not NER (see
-[design/OCIWACHT.md](design/OCIWACHT.md)).
+[design/OCIWACHT.md](design/OCIWACHT.md)). *Corrected 2026-07-22: this said 13
+member states, which was the state before the later European batches landed;
+[PRIVACY.md](PRIVACY.md) carries the same correction.*
 
 **TLP (Traffic Light Protocol)** — the sharing-classification scheme: `CLEAR`,
 `GREEN`, `AMBER`, `AMBER+STRICT`, `RED` (plus an unset `none`). OciDeck can

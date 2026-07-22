@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/editor_provider.dart';
@@ -248,5 +249,63 @@ void main() {
     await tester.pump();
     expect(container.read(previewCollapsedProvider), isFalse);
     expect(tester.takeException(), isNull);
+  });
+
+  group('redactie is zichtbaar vóór verzending', () {
+    // Het label in de editor belooft "weglaten uit tonen en exporteren", maar
+    // het scherm deed niets: de preview toonde het rauwe deck en de projectie
+    // draaide alleen bij presenteren en exporteren. Pas de PDF gaf antwoord.
+    ProviderContainer redactedDeck() {
+      final container = _deckWith([
+        Slide.create(SlideType.bulletsImage).copyWith(
+          title: 'Contact',
+          bullets: const ['Mail: jan.jansen@voorbeeld.nl'],
+          imagePath: 'images/team.png',
+          privacy: PrivacyDisposition.redact,
+        ),
+      ]);
+      container.read(editorProvider.notifier).select(1);
+      return container;
+    }
+
+    testWidgets('een gewone dia krijgt geen melding', (tester) async {
+      // Een balk die er altijd staat, wordt niet meer gelezen.
+      final container = _deckWith([Slide.create(SlideType.bullets)]);
+      addTearDown(container.dispose);
+      await _pumpPanel(tester, container);
+      expect(find.textContaining('Weglaten staat aan'), findsNothing);
+    });
+
+    testWidgets('een weggelaten dia meldt het, inclusief de media', (
+      tester,
+    ) async {
+      final container = redactedDeck();
+      addTearDown(container.dispose);
+      await _pumpPanel(tester, container);
+      expect(find.textContaining('Weglaten staat aan'), findsOneWidget);
+      // Dat álle media verdwijnt stond nergens, en het is de duurste
+      // verrassing: een dia die in de export ineens leeg is.
+      expect(
+        find.textContaining('afbeeldingen, video en audio'),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('de schakelaar toont wat de ontvanger krijgt', (tester) async {
+      final container = redactedDeck();
+      addTearDown(container.dispose);
+      await _pumpPanel(tester, container);
+
+      // Standaard de eigen tekst: anders valt er niets meer te bewerken.
+      expect(find.text('Wat zij zien'), findsOneWidget);
+      expect(container.read(audiencePreviewProvider), isFalse);
+
+      await tester.tap(find.text('Wat zij zien'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+
+      expect(container.read(audiencePreviewProvider), isTrue);
+      expect(find.text('Mijn tekst'), findsOneWidget);
+    });
   });
 }

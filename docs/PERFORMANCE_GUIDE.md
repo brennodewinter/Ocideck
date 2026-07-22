@@ -1,5 +1,7 @@
 # OciDeck — Performance Guide
 
+> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This document describes OciDeck's performance characteristics using the **actual
 limits and sizes enforced in the codebase** (with `file:line` citations), plus a
 few measured figures. Where a number is a hard cap in code, it is authoritative;
@@ -110,11 +112,7 @@ project folders reasonably shallow.
 |---|---|---|
 | Max file length | **1000 lines** | `tool/check_conventions.dart`, `maxFileLines` |
 | Max method/function length | **150 lines** | `tool/check_method_length.dart:26` |
-<<<<<<< HEAD
 | Coverage floor | **80 %** line coverage | `Makefile`, the `coverage` target |
-=======
-| Coverage floor | **79 %** line coverage | `Makefile`, the `coverage` target |
->>>>>>> 26b3fa16 (docs: breng de gidsen in overeenstemming met de vijf gedichte paden)
 
 ## Measured figures
 

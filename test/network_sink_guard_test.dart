@@ -78,6 +78,8 @@ void main() {
     // net_guard.dart staat wél op de allowlist hierboven maar construeert zelf
     // geen client — het levert de `connectionFactory` die de andere gebruiken.
     'lib/utils/net_guard.dart': 0,
+    // De gepinde fetch achter guardedNetworkImage.
+    'lib/utils/media_fetch_io.dart': 1,
     'lib/services/parts/file_service_import.dart': 1,
     'lib/services/webdav_service.dart': 1,
     'lib/services/s3/s3_service.dart': 1,
@@ -93,7 +95,11 @@ void main() {
     scan(
       sink: RegExp(r'NetworkImage\(|\.networkUrl\(|Image\.network\('),
       allowedFiles: {
-        'lib/utils/image_limits.dart', // cappedNetworkImage wrapper
+        // guardedNetworkImage: haalt de bytes zélf op over een gepinde socket
+        // (safeResolve + connectPinned), zodat NetworkImage de hostnaam niet
+        // een tweede keer opzoekt. De web-tak laat het aan de browser + CSP.
+        'lib/utils/media_fetch_io.dart',
+        'lib/utils/media_fetch_web.dart',
         'lib/widgets/slides/previews/media_previews.dart', // gated callers
         // media_previews.dart was split for size; its gated image sink now
         // lives in this part of the same slide_preview library.
@@ -111,6 +117,10 @@ void main() {
       sink: RegExp(r'HttpClient\('),
       allowedFiles: {
         'lib/utils/net_guard.dart',
+        // guardedNetworkImage: haalt de bytes van een remote dia-afbeelding
+        // zélf op — safeResolve + connectPinned + geen redirects + bytecap —
+        // in plaats van NetworkImage de hostnaam nóg eens te laten opzoeken.
+        'lib/utils/media_fetch_io.dart',
         // importFromUrl: safeResolve + pin (import-part van file_service).
         'lib/services/parts/file_service_import.dart',
         'lib/services/webdav_service.dart', // safeResolveTrusted + pin

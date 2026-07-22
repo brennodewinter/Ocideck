@@ -1,3 +1,18 @@
+// ── lib/services/presentation_search/ ────────────────────────────────────────
+// De bronnen die 'Slide zoeken' aftast als ze niet op schijf staan. Eén
+// contract ([PresentationSource]) met twee implementaties: git via de forge, en
+// bestandsopslag (WebDAV of S3) via [RemoteFileClient] — een eigen, smalle
+// listing zodat het loopwerk over een mappenboom maar één keer bestaat en niet
+// per protocol wordt overgeschreven.
+//
+// Wat hier hoort is dus: een nieuwe soort bron, of het aftasten zelf. Wat hier
+// níét hoort: het protocol (dat is ../s3/ en ../webdav_service.dart, die dit
+// cluster alleen gebruikt), de lokale schijfscan (../file_service.dart), welke
+// bronnen er aan staan (lib/state/presentation_sources.dart) en het venster dat
+// de treffers toont (lib/widgets/dialogs/slide_finder_dialog.dart). Bestand
+// voor bestand: docs/SOURCE_MAP.md.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import '../file_service.dart' show ScannedPresentation;
 
 /// Eén doorzoekbare bron van presentaties voor 'Slide zoeken'.

@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/l10n/slide_quality_localization.dart';
 import 'package:ocideck/models/markdown_validation.dart';
+import 'package:ocideck/l10n/slide_quality_navigation.dart';
+import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/slide_quality.dart';
 
 /// Covers the slide-quality issue → localized message mapping
@@ -481,6 +483,84 @@ void main() {
           ),
           endsWith(' 4'),
         );
+      });
+    });
+
+    test('wijst een tabelcel aan met rij en kolom, niet met een celnummer', () {
+      // De scanner bewaart één doorlopende index; getoond als volgnummer werd
+      // dat "Tabel 14" — een getal dat nergens op de slide staat.
+      const slide = Slide(
+        id: 't1',
+        type: SlideType.table,
+        tableRows: [
+          ['Naam', 'E-mail', 'Rol'],
+          ['a', 'b', 'c'],
+          ['d', 'e', 'f'],
+          ['g', 'h', 'i'],
+          ['j', 'k', 'l'],
+        ],
+      );
+      // index 13 = rij 4 (0-gebaseerd), kolom 1 bij drie kolommen.
+      final label = slideQualityFieldLabel(
+        l10n,
+        withField(
+          'tableRows',
+          span: const SlideQualitySpan(start: 0, end: 3, fragmentIndex: 13),
+        ),
+        slide: slide,
+      );
+      expect(label, isNot(contains('14')));
+      expect(label, contains('5'));
+      expect(label, contains('2'));
+    });
+
+    test('de koprij krijgt geen rijnummer', () {
+      const slide = Slide(
+        id: 't2',
+        type: SlideType.table,
+        tableRows: [
+          ['Naam', 'E-mail'],
+          ['a', 'b'],
+        ],
+      );
+      final label = slideQualityFieldLabel(
+        l10n,
+        withField(
+          'tableRows',
+          span: const SlideQualitySpan(start: 0, end: 3, fragmentIndex: 1),
+        ),
+        slide: slide,
+      );
+      expect(label, contains('2'));
+      expect(label, isNot(contains('1,')));
+    });
+
+    test('zonder de dia liever geen aanduiding dan een verkeerde', () {
+      // Geen tabelbreedte, dus geen rij en kolom te berekenen. Dan mag er geen
+      // getal staan dat de gebruiker toch niet kan plaatsen.
+      inBothLanguages(() {
+        final label = slideQualityFieldLabel(
+          l10n,
+          withField(
+            'tableRows',
+            span: const SlideQualitySpan(start: 0, end: 3, fragmentIndex: 13),
+          ),
+        );
+        expect(label, isNotNull);
+        expect(label, isNot(contains('14')));
+      });
+    });
+
+    test('elk deckbreed frontmatter-veld heeft een leesbaar label', () {
+      // Zonder label komt de melding zonder plaatsaanduiding in het paneel.
+      inBothLanguages(() {
+        for (final field in kDeckInfoFields) {
+          expect(
+            slideQualityFieldLabel(l10n, withField(field)),
+            isNotNull,
+            reason: 'veld $field heeft geen label',
+          );
+        }
       });
     });
 

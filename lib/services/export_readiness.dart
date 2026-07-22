@@ -11,6 +11,11 @@ enum ExportReadinessStatus {
   /// Alle gates staan open; exporteren kan direct.
   ready,
 
+  /// Alle gates staan open, maar de privacycontrole stond uit — er is dus niet
+  /// naar persoonsgegevens gekeken. Exporteren kan direct; alleen de
+  /// geruststelling ontbreekt.
+  readyPrivacyUnchecked,
+
   /// Er zijn kwaliteitswaarschuwingen; exporteren kan, na bevestiging.
   qualityWarnings,
 
@@ -74,11 +79,19 @@ class ExportReadiness {
 ///
 /// Privacy gaat vóór kwaliteit als beide iets te melden hebben: een IBAN die de
 /// deur uit gaat is van een andere orde dan een bullet te veel.
+///
+/// [privacyChecksEnabled] is de instelling, niet de uitslag. Staat de controle
+/// uit, dan levert de scanner een lege uitslag en zijn "niets gevonden" en "niet
+/// gekeken" van buitenaf niet meer te onderscheiden — waarna de balk een groen
+/// "Klaar voor export" toonde op grond van een controle die nooit gedraaid heeft.
+/// Dat is de gevaarlijkste stand van alle: de gebruiker deelt op een
+/// geruststelling die niemand heeft gegeven.
 ExportReadiness evaluateExportReadiness({
   required bool needsSave,
   required ExportDecision classificationDecision,
   required QualityExportDecision qualityDecision,
   PrivacyExportDecision privacyDecision = const PrivacyExportDecision.allow(),
+  bool privacyChecksEnabled = true,
 }) {
   if (needsSave) {
     return const ExportReadiness(ExportReadinessStatus.needsSave);
@@ -115,5 +128,9 @@ ExportReadiness evaluateExportReadiness({
       warningCount: qualityDecision.warningCount,
     );
   }
-  return const ExportReadiness(ExportReadinessStatus.ready);
+  return ExportReadiness(
+    privacyChecksEnabled
+        ? ExportReadinessStatus.ready
+        : ExportReadinessStatus.readyPrivacyUnchecked,
+  );
 }

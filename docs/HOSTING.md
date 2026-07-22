@@ -1,5 +1,7 @@
 # OciDeck — Hosting & Deployment Guide
 
+> **Status:** procedure, current — for whoever serves the web build · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 How to build and serve the OciDeck **web** build safely. The desktop apps are
 built as native binaries and need no hosting; this guide is about the web
 bundle. For build internals see [BUILD.md](BUILD.md); for the security rationale
@@ -76,6 +78,8 @@ Recommended companion headers: `Referrer-Policy: no-referrer`,
 `X-Frame-Options` to match `frame-ancestors`. The bundle itself already carries
 `<meta name="referrer" content="no-referrer">` — unlike `frame-ancestors`, that
 one *is* honoured from a meta tag — so the header only reinforces what ships.
+For a publicly reachable deployment these stop being recommendations — see
+§4b.2 and the release conditions in the checklist.
 
 ### `Strict-Transport-Security`
 
@@ -106,14 +110,67 @@ that fetches server-side and returns the bytes.
 
 - It is **optional** — without it, only CORS-friendly sources import on web.
 - It enforces the **same SSRF rules as NetGuard** (rejects internal/private/
-  metadata targets, pins the resolved address, blocks redirects, caps bytes), so
-  it can't be turned into an internal-network scanner.
-- It is stateless: it forwards bytes and stores nothing.
+  metadata targets, pins the resolved address, blocks redirects, caps bytes, and
+  only allows ports 80/443/8080/8443), so it can't be turned into an
+  internal-network scanner or a port scanner.
+- It is stateless: it forwards bytes and stores nothing, and it keeps the target
+  URL out of its log lines.
 - Setup and configuration: see
   [`server/fetch-proxy/README.md`](../server/fetch-proxy/README.md).
 
 Deploy it on the same origin as the app (e.g. reverse-proxy `/fetch-proxy` to it)
 so the app's `connect-src 'self'` covers it.
+
+### 4a. What the proxy does *not* protect against
+
+Out of the box the proxy serves only requests carrying
+`Sec-Fetch-Site: same-origin`. That is a real barrier against *pages*: the header
+is on the forbidden-header list, so no cross-site page can set it, and no site
+other than yours can make a browser send it. It is **not** a barrier against
+anything that isn't a browser. A `curl -H "Sec-Fetch-Site: same-origin"` passes
+it without effort, and there is no header that proves a request came from a real
+browser — so this cannot be fixed inside the proxy. The module documents this
+itself, in the comment above `_origin_allowed` in
+[`server/fetch-proxy/ocideck_fetch_proxy.py`](../server/fetch-proxy/ocideck_fetch_proxy.py).
+
+The consequence is narrow but real: an unconfigured, publicly reachable proxy is
+an open fetch relay for third parties. What bounds the damage is the SSRF rule
+set above, and that set always applies — internal targets stay unreachable
+whatever the caller does. What is *not* bounded is that strangers can pull
+public URLs through your server, in your name and from your IP address.
+
+That is a deployment property, not a defect, which is why the conditions below
+are stated as requirements rather than as advice.
+
+### 4b. Requirements before you expose a deployment publicly
+
+These three are conditions, not recommendations. If you cannot meet them, do not
+deploy the proxy — the web build works without it (§5).
+
+1. **Never reachable from the internet without either an origin allowlist or
+   authentication.** The proxy binds to `127.0.0.1:8123` by default
+   (`OCIDECK_PROXY_BIND`/`OCIDECK_PROXY_PORT`); leave it there and let the
+   reverse proxy be the only way in. If the proxy sits strictly same-origin
+   behind the app and is not otherwise routable, that is enough on its own.
+   Anything beyond that needs `OCIDECK_PROXY_ALLOWED_ORIGINS` set to your app's
+   origin **and** authentication in front of `/fetch-proxy` on the reverse proxy.
+   The proxy itself has no authentication and no rate limiting of its own — it
+   caps concurrency, not callers.
+2. **The HTTP security headers are set on the static host.** `X-Frame-Options:
+   DENY`, the CSP as a real response header rather than only the `<meta>` tag
+   (§3), `X-Content-Type-Options: nosniff` and `Referrer-Policy: no-referrer`.
+   §3 lists the last two as companions for the ordinary case; for a public
+   deployment treat all four as required. The header snippets per web server are
+   in [BUILD.md](BUILD.md).
+3. **`OCIDECK_PROXY_ALLOW_ANY=1` only behind authentication and rate limiting.**
+   That variable turns the origin check off entirely and makes the endpoint an
+   open — SSRF-bounded, public-hosts-only — fetcher for anyone who finds it. If
+   you run it that way, also lower the two ceilings from their defaults:
+   `OCIDECK_PROXY_MAX_BYTES` (default 536870912, i.e. 512 MiB per request) and
+   `OCIDECK_PROXY_MAX_INFLIGHT` (default 8 concurrent requests; further requests
+   get a 503). Without authentication, rate limiting and lowered ceilings, an
+   open proxy is an anonymisation relay running in the operator's name — the
+   process says as much in a warning on startup.
 
 ## 5. Web build limitations to communicate
 
@@ -170,15 +227,32 @@ the CRA inventory that matches the exact build you shipped. See [SBOM.md](SBOM.m
 
 ## Checklist
 
+Everything under "Release conditions" is a condition for a publicly reachable
+deployment: not met means not deployed. The rest is the ordinary hygiene of
+serving a static bundle.
+
+**Release conditions (public deployment)**
+
+- [ ] CSP sent as an HTTP header — not only via `<meta>` — with `frame-ancestors`
+      set for your embedding needs (§3)
+- [ ] `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff` and
+      `Referrer-Policy: no-referrer` set on the app's HTML (§3, [BUILD.md](BUILD.md))
+- [ ] `Strict-Transport-Security` sent on every response (§3)
+- [ ] If the fetch-proxy is deployed: it is bound to `127.0.0.1` and reachable
+      only through the reverse proxy (§4b.1)
+- [ ] If the fetch-proxy is reachable beyond a strictly same-origin path:
+      `OCIDECK_PROXY_ALLOWED_ORIGINS` set **and** authentication in front of
+      `/fetch-proxy` — its own origin check is a header heuristic that any
+      non-browser client can send (§4a, §4b.1)
+- [ ] If `OCIDECK_PROXY_ALLOW_ANY=1`: authentication and rate limiting in front
+      of it, and `OCIDECK_PROXY_MAX_BYTES`/`OCIDECK_PROXY_MAX_INFLIGHT` lowered
+      from their defaults (§4b.3)
+
+**Ordinary deployment steps**
+
 - [ ] `make build-web` succeeds and `make check-web` passes
 - [ ] Served over HTTPS from a static host
-- [ ] CSP sent as an HTTP header, with `frame-ancestors` set for your embedding needs
-- [ ] `Referrer-Policy`, `X-Content-Type-Options` headers set
-- [ ] `Strict-Transport-Security` sent on every response (§3)
 - [ ] fetch-proxy deployed on the same origin **only if** web URL import is needed
-- [ ] fetch-proxy put behind authentication at the reverse proxy — its own origin
-      check is a header heuristic that any non-browser client can send, so an
-      unauthenticated deployment is an open fetch relay to public hosts
 - [ ] `/sbom/` reachable
 - [ ] Users told what the web build cannot do (§5) — the missing image privacy
       check in particular, if they present photographs of people

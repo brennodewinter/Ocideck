@@ -62,10 +62,26 @@ const String kRedactionManifestNotice =
     'This file lists what was redacted in the accompanying document, without '
     'the values. It carries no salts and reverses nothing.';
 
+/// Hoeveel hex-tekens een commitment telt (SHA-256).
+const int kCommitmentHexChars = 64;
+
+/// De ondergrens voor de lengte van een redactie-id.
+///
+/// Acht hex-tekens is 32 bits: bij duizend redacties in één document is de kans
+/// op een botsing ruwweg één op tienduizend, en botst het toch, dan groeit de
+/// lengte vanzelf (zie `RedactionManifestService.shortUniqueIdLength`). Hier
+/// stonden er vier — 16 bits — en dan is bij ~300 redacties de kans op twee
+/// gelijke ids al één op twee.
+const int kRedactionIdMinChars = 8;
+
 /// Eén redactie, met een bewijsbare verwijzing naar wat er verborgen werd.
 class RedactionEntry {
-  /// Korte, stabiele referentie (`a3f1`). Zodat een verificateur kan zeggen: "ik
-  /// betwist redactie a3f1". Staande praktijk in juridische redactie.
+  /// Korte, stabiele referentie (`a3f1e2b7`). Zodat een verificateur kan zeggen:
+  /// "ik betwist redactie a3f1e2b7". Staande praktijk in juridische redactie.
+  ///
+  /// Een prefix van [commitment], lang genoeg om binnen dit manifest precies
+  /// één entry aan te wijzen. Het bewijs is het commitment zelf; dit is de
+  /// handgreep.
   final String id;
 
   /// SHA-256(salt ‖ waarde), hex.

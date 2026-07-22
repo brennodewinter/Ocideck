@@ -182,4 +182,66 @@ void main() {
       expect(ImageService.looksLikeImage(const [0x00, 0x01]), isFalse);
     });
   });
+
+  group('mediaMimeFromBytes', () {
+    // Video en audio waren tot 2026-07-22 alleen op grootte begrensd, dus een
+    // willekeurig bestand hernoemd naar .mp4 kwam het project in en ging daarna
+    // naar de mediastack van het platform. Dit geeft ze dezelfde waarborg die
+    // afbeeldingen al hadden.
+    test('herkent de containers die er echt toe doen', () {
+      expect(
+        ImageService.mediaMimeFromBytes(const [
+          0, 0, 0, 0x20, // boxlengte
+          0x66, 0x74, 0x79, 0x70, // "ftyp"
+          0x69, 0x73, 0x6F, 0x6D, // "isom"
+        ]),
+        'video/mp4',
+      );
+      expect(
+        ImageService.mediaMimeFromBytes(const [0x1A, 0x45, 0xDF, 0xA3]),
+        'video/webm',
+      );
+      expect(ImageService.mediaMimeFromBytes('OggS'.codeUnits), 'audio/ogg');
+      expect(ImageService.mediaMimeFromBytes('fLaC'.codeUnits), 'audio/flac');
+      expect(
+        ImageService.mediaMimeFromBytes('ID3\u0004'.codeUnits),
+        'audio/mpeg',
+      );
+      expect(
+        ImageService.mediaMimeFromBytes(const [0xFF, 0xFB, 0x90, 0x00]),
+        'audio/mpeg',
+      );
+      expect(
+        ImageService.mediaMimeFromBytes(const [
+          0x52, 0x49, 0x46, 0x46, 0, 0, 0, 0, // RIFF
+          0x57, 0x41, 0x56, 0x45, // WAVE
+        ]),
+        'audio/wav',
+      );
+    });
+
+    test('weigert wat geen mediacontainer is', () {
+      expect(
+        ImageService.mediaMimeFromBytes('<?php evil();'.codeUnits),
+        isNull,
+      );
+      expect(ImageService.mediaMimeFromBytes('# markdown'.codeUnits), isNull);
+      expect(
+        ImageService.mediaMimeFromBytes('MZ\u0090\u0000'.codeUnits),
+        isNull,
+      );
+      expect(ImageService.mediaMimeFromBytes(const [0x00, 0x01]), isNull);
+    });
+
+    test('een RIFF die geen WAVE of AVI is telt niet mee — WebP is een '
+        'afbeelding, geen media', () {
+      expect(
+        ImageService.mediaMimeFromBytes(const [
+          0x52, 0x49, 0x46, 0x46, 0, 0, 0, 0, // RIFF
+          0x57, 0x45, 0x42, 0x50, // WEBP
+        ]),
+        isNull,
+      );
+    });
+  });
 }

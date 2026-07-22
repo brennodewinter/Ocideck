@@ -1811,6 +1811,85 @@ const _dutchSourceAddEl = <String, String>{
       'Αυτό το deck περιέχει κείμενο AI που δεν έχεις ελέγξει ακόμη. Η εξαγωγή επιτρέπεται· το αρχείο το αναφέρει από μόνο του και παίρνει «-ai-concept» στο όνομα.',
   'Concept: hier staat AI-tekst die nog niemand heeft nagekeken':
       'Προσχέδιο: περιέχει κείμενο AI που δεν έχει ελέγξει ακόμη κανείς',
+  'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Η παράλειψη είναι ενεργή: ό,τι χαρακτηρίζει ο έλεγχος ως προσωπικό δεδομένο μαυρίζεται, και όλες οι εικόνες, τα βίντεο και ο ήχος αυτής της διαφάνειας δεν πηγαίνουν στην οθόνη ούτε στην εξαγωγή. Το αρχείο markdown σας τα κρατά όλα.',
+  'Bestand': 'Αρχείο',
+  'Venster': 'Παράθυρο',
+  'Help': 'Βοήθεια',
+  'Alles selecteren': 'Επιλογή όλων',
+  'Plakken': 'Επικόλληση',
+  'Opnieuw': 'Επανάληψη',
+  'Eigenschappen': 'Ιδιότητες',
+  'Opdrachten…': 'Εντολές…',
+  'Opslaan…': 'Αποθήκευση…',
+  'Uploaden naar WebDAV…': 'Μεταφόρτωση στο WebDAV…',
+  'Uploaden naar S3…': 'Μεταφόρτωση στο S3…',
+  'Vastleggen in git…': 'Υποβολή στο git…',
+  'Bezig met opslaan. Nog een keer opslaan doet niets tot dit klaar is.':
+      'Γίνεται αποθήκευση. Η εκ νέου αποθήκευση δεν κάνει τίποτα μέχρι να ολοκληρωθεί.',
+  'Klaar — privacy niet gecontroleerd': 'Έτοιμο — το απόρρητο δεν ελέγχθηκε',
+  'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.':
+      'Δεν έγινε έλεγχος για προσωπικά δεδομένα, ειδικές κατηγορίες δεδομένων και μυστικά: ο έλεγχος απορρήτου είναι απενεργοποιημένος στην Ασφάλεια.',
+  'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
+      'Παρουσιάσεις που παραμένουν απλά αρχεία Markdown: αναγνώσιμες, με δυνατότητα αναζήτησης και ανοίγουν με οποιονδήποτε επεξεργαστή.',
+  'sjablonen om mee te beginnen, of leeg': 'πρότυπα για να ξεκινήσετε, ή κενή',
+  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Οι διαφάνειες παραδείγματος ενός προτύπου είναι στα ολλανδικά. Το όνομα και η περιγραφή ακολουθούν τη δική σας γλώσσα· το περιεχόμενο το προσαρμόζετε μετά τη δημιουργία.',
+  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
+      'Η παράλειψη είναι ενεργή: τα δεδομένα που βρέθηκαν μαυρίζονται και όλες οι εικόνες, τα βίντεο και ο ήχος αυτής της διαφάνειας δεν πηγαίνουν στην οθόνη ούτε στην εξαγωγή. Το αρχείο markdown σας τα κρατά όλα.',
+  'Mijn tekst': 'Το κείμενό μου',
+  'Wat zij zien': 'Τι βλέπουν',
+  'Presentatiegegevens': 'Στοιχεία παρουσίασης',
+  'Open presentatiegegevens': 'Άνοιγμα στοιχείων παρουσίασης',
+  'Motivering van een uitsluiting': 'Αιτιολόγηση εξαίρεσης',
+  'Motivering van een bevestiging': 'Αιτιολόγηση επιβεβαίωσης',
+  'Tabel koprij, kolom {kolom}': 'Πίνακας γραμμή κεφαλίδας, στήλη {kolom}',
+  'Tabel rij {rij}, kolom {kolom}': 'Πίνακας γραμμή {rij}, στήλη {kolom}',
+  'Via deze website ophalen?': 'Λήψη μέσω αυτού του ιστότοπου;',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Ο διακομιστής αυτής της παρουσίασης δεν επέτρεψε στο πρόγραμμα περιήγησης να διαβάσει το αρχείο απευθείας. Το OciDeck μπορεί να προωθήσει τη διεύθυνση στον ιστότοπο από τον οποίο προέρχεται το ίδιο το OciDeck, και εκείνος το ανακτά. Έτσι ο ιστότοπος αυτός βλέπει ολόκληρη τη διεύθυνση — αν στον σύνδεσμο υπάρχει κλειδί ή κωδικός, τα βλέπει κι αυτά.',
+  'In de browser kan dit niet worden bewaard':
+      'Στο πρόγραμμα περιήγησης αυτό δεν μπορεί να αποθηκευτεί',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Ένα πρόγραμμα περιήγησης δεν έχει κλειδοθήκη όπως έχει ένας υπολογιστής: ό,τι θα αποθήκευε εδώ το OciDeck μπορεί να το διαβάσει οποιοδήποτε script αυτής της σελίδας. Χρησιμοποιήστε την έκδοση για υπολογιστή — εκεί το μυστικό μπαίνει όντως στην κλειδοθήκη του λειτουργικού συστήματος.',
+  'Licenties van derden': 'Άδειες τρίτων',
+  'Alle licentieteksten tonen': 'Εμφάνιση όλων των κειμένων αδειών',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'Το ίδιο το OciDeck διατίθεται υπό την EUPL-1.2. Επιπλέον ενσωματώνει λογισμικό τρίτων: τα πακέτα Dart και Flutter, δύο ενσωματωμένα πρόσθετα, τέσσερις οικογένειες γραμματοσειρών, το μοντέλο προσώπου για τον έλεγχο ιδιωτικότητας και τη JavaScript που ταξιδεύει μαζί με μια εξαγωγή HTML. Καθένα διατηρεί τη δική του άδεια.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Αυτό το αρχείο περιέχει λογισμικό τρίτων και ενίοτε μια γραμματοσειρά. Παρακάτω βρίσκονται τα πλήρη κείμενα των σχετικών αδειών· διαβιβάστε τα μαζί με το αρχείο.',
+  'Sporen op dit apparaat': 'Ίχνη σε αυτή τη συσκευή',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Εκτός από τις ρυθμίσεις σας, το OciDeck κρατά και μια λίστα πρόσφατων και, σε περίπτωση κατάρρευσης, ένα αρχείο ανάκτησης με το πλήρες περιεχόμενο της παρουσίασής σας. Τίποτα από αυτά δεν φεύγει από αυτή τη συσκευή, αλλά βρίσκεται εδώ — σε απλό κείμενο, προστατευμένο από τον λογαριασμό σας σε αυτό το λειτουργικό σύστημα και από τίποτα παραπάνω.',
+  'Recent geopende presentaties': 'Παρουσιάσεις που άνοιξαν πρόσφατα',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Η λίστα κρατά την πλήρη διαδρομή και την ταξινόμηση κάθε παρουσίασης που έχει ανοιχτεί — μαζί, ένα στοιχείο για το τι δουλεύετε και για ποιον.',
+  'Recente lijst wissen': 'Σβήσιμο λίστας πρόσφατων',
+  'De recente lijst was al leeg.': 'Η λίστα πρόσφατων ήταν ήδη άδεια.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'καταχωρίσεις σβήστηκαν από τη λίστα πρόσφατων.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Τα αρχεία ανάκτησης περιέχουν το πλήρες περιεχόμενο των παρουσιάσεών σας σε απλό κείμενο. Καθαρίζονται αυτόματα μετά από 7 ημέρες, και αμέσως όταν η εφαρμογή κλείνει κανονικά.',
+  'Alles terugzetten': 'Επαναφορά όλων',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Σβήνει κάθε ρύθμιση, τη λίστα πρόσφατων, τα αρχεία ανάκτησης, τα αντίγραφα εργασίας git και τους κωδικούς στην κλειδοθήκη σας. Οι παρουσιάσεις σας παραμένουν: είναι δικές σας, όχι του OciDeck.',
+  'Zet alles terug naar de begintoestand':
+      'Επαναφορά όλων στην αρχική κατάσταση',
+  'Alles terugzetten naar de begintoestand?':
+      'Επαναφορά όλων στην αρχική κατάσταση;',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Θα σβηστούν οι ρυθμίσεις σας, η λίστα πρόσφατων, τα αρχεία ανάκτησης, τα αντίγραφα εργασίας git και οι αποθηκευμένοι κωδικοί. Αυτό δεν αναιρείται. Οι παρουσιάσεις σας παραμένουν.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'αλλαγή/αλλαγές δεν έχουν σταλεί ακόμη σε διακομιστή git και υπάρχουν μόνο σε αυτή τη συσκευή. Θα φύγουν και αυτές.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Όλα επαναφέρθηκαν στην αρχική κατάσταση.',
+  'Terugzetten is niet gelukt.': 'Η επαναφορά δεν πέτυχε.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Υπάρχει ακόμη εργασία που δεν έχει σταλεί',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Αυτή η σύνδεση git έχει αλλαγές που δεν έχουν σταλεί ακόμη στον διακομιστή. Αν καταργήσετε τη σύνδεση, φεύγει και το αντίγραφο εργασίας σε αυτή τη συσκευή — και αυτή η δουλειά δεν θα υπάρχει πια πουθενά.',
+  'Verbinding behouden': 'Διατήρηση σύνδεσης',
+  'Toch verwijderen': 'Κατάργηση ούτως ή άλλως',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Εντάξει',

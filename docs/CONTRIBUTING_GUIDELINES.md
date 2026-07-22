@@ -1,6 +1,17 @@
 # OciDeck — Contributing Guidelines
 
+> **Status:** procedure, current — the process half of contributing · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 Welcome to the OciDeck project! We appreciate your interest in contributing. This document outlines how to contribute effectively to the project.
+
+> **There are two contributing documents, and this is the process one.** This
+> file covers issue reporting, review, branch naming, the (absent) release
+> process and the Code of Conduct, and ships inside the app as a readable
+> document. Its companion, [`../CONTRIBUTING.md`](../CONTRIBUTING.md) in the
+> repository root, covers the commands: the quality gate, each `make` target,
+> and the localisation tooling. It is not bundled with the app. Neither replaces
+> the other. *(Noted 2026-07-22: the two had grown apart without either
+> mentioning that the other existed.)*
 
 ## How to Contribute
 
@@ -52,7 +63,9 @@ All code changes should include:
 
 ### Prerequisites
 
-- Flutter 3.44.6 (stable) / Dart 3.12.2
+- Flutter 3.44.6 (stable), with its bundled Dart 3.12.2 — see
+  [BUILD.md](BUILD.md), which is the authority on the toolchain pin and on why
+  `make format-check` needs the exact version while building does not
 - macOS, Windows, or Linux desktop toolchain for your target platform  
 - For web development: `make build-web` is available with hardened CSP
 
