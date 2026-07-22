@@ -24,6 +24,7 @@ import '../services/git/deck_mirror.dart';
 import '../services/git/draft_store.dart';
 import '../services/git/deck_merge.dart';
 import '../services/git/deck_repo_serializer.dart';
+import '../services/git/work_branch.dart';
 import '../services/git/git_forge.dart';
 import '../services/git/native_git_mirror_api.dart';
 import '../services/git/outbox.dart';
