@@ -5,10 +5,22 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = ocideck
+//
+// Capitalised as the product is written everywhere else. It was `ocideck`, which
+// is why the macOS application menu read "About ocideck" and "Quit ocideck"
+// while the rest of the menu bar was properly cased (#646).
+PRODUCT_NAME = OciDeck
 
-// The application's bundle identifier
+// The application's bundle identifier.
+//
+// Deliberately NOT renamed to the foundation's domain. A bundle identifier is
+// the app's identity to the operating system: change it and macOS treats this
+// as a different application — separate preferences, and separate keychain
+// entries, so every stored password would look gone. That is a migration, not
+// a tidy-up. The copyright below is what people actually read.
 PRODUCT_BUNDLE_IDENTIFIER = com.dewinter.ocideck
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2026 De Winter Information Solutions. All rights reserved.
+// Shown in the macOS "About" panel. The publisher is the foundation, not a
+// company — corrected 2026-07-22 (#646); see COMPLIANCE.md for who holds what.
+PRODUCT_COPYRIGHT = Copyright © 2026 Stichting LibreKAT. Licensed under the EUPL-1.2.
