@@ -412,7 +412,10 @@ also declares them, but see the [CI note](#continuous-integration).)
   `sbom/ocideck.cdx.json` (CycloneDX 1.6) and `sbom/ocideck.spdx.json`
   (SPDX 2.3) from the files that are already the source of truth. `make
   sbom-verify` regenerates in memory and fails if the committed SBOM drifted
-  (volatile timestamp/serial fields are normalised out first).
+  (volatile timestamp/serial fields are normalised out first). The suite also
+  fails if a component ends up in no dependency relation at all, or if a
+  resolved Dart package carries no supplier — the two gaps that made the
+  document look complete while it was not.
 - **Failure means:** dependencies changed but the SBOM wasn't regenerated —
   run `make sbom` and commit the result. See [`SBOM.md`](SBOM.md) for the
   format, the covered components, and the CRA mapping.

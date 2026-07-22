@@ -317,6 +317,32 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   Flatpak-app-id die `com.example` als uitgever noemt is niet verdedigbaar.
   Beide dragen nu `com.dewinter.ocideck`, dezelfde identiteit die macOS al
   gebruikt.
+- **De onderdelenlijst zei wél wat erin zit, maar niet hoe het samenhangt.**
+  OciDeck levert een machineleesbare inventaris mee van elk onderdeel dat het
+  meedraagt (de SBOM). Daarin stond tot nu toe alleen wat OciDeck zélf
+  binnenhaalt: 46 verbanden over 200 onderdelen, en 153 onderdelen die in geen
+  enkel verband voorkwamen. Wie wil weten of een gemelde kwetsbaarheid in een
+  diepgelegen bibliotheek hem raakt, kan met zo'n lijst niets — hij ziet dat het
+  onderdeel meereist, maar niet waaróm.
+
+  Nu draagt elk onderdeel zijn eigen afhankelijkheden: 661 verbanden, en niets
+  hangt er nog los bij. Daarnaast staat er per onderdeel bij wie het levert
+  (een minimumeis uit de gangbare SBOM-richtlijnen, die ontbrak). Die naam wordt
+  afgeleid uit wat het onderdeel zelf verklaart en nergens verzonnen: voor de
+  zes ingesloten JavaScript-bibliotheken kennen we alleen het bezorgadres en
+  niet de leverancier, en dan blijft het veld leeg in plaats van gevuld met een
+  gok.
+- **Een controle die alleen groen kón zijn.** OciDeck houdt bij of de
+  meegeleverde referentiestandaarden nog overeenkomen met hun bron. Voor MIAUW
+  meldde die controle jarenlang "actueel" zonder dat ooit te hebben kunnen
+  vaststellen: aan onze kant stond de dag waarop wij het schema overnamen, aan
+  de bronkant de datum van de bron zelf. Twee verschillende dingen naast elkaar
+  gelegd, met een vergelijking die daardoor nooit kon afgaan.
+
+  De controle kijkt nu naar het bronbestand zelf, vergelijkt het met de datum
+  die de bron draagt, en slaat aan bij élke afwijking — ook als de bron ouder
+  lijkt dan wat wij noteren, want dan klopt onze eigen boekhouding niet. Dat een
+  poort ook rood kán staan wordt voortaan getoetst, in beide richtingen.
 - **Uitgezette landenpakketten werden toch weggelakt.** Zet u een land uit in de
   privacy-instellingen, dan meldt OciWacht die nummers niet meer — maar de
   voorvertoning, de export en het beamerscherm lakten ze nog wél weg. U kreeg

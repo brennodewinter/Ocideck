@@ -77,9 +77,14 @@ const referenceStandards = <ReferenceStandard>[
     url: 'https://github.com/brennodewinter/Informatiebeveiligingsonderzoek',
     bundled: 'Het volledige EIS-schema (88 toetsbare eisen).',
     licence: 'EUPL-1.2',
-    // Op datum, niet op tag: de methodologie tagt releases met namen.
-    probe: UpstreamProbe.githubReleaseDate,
+    // Op de commitdatum van het werkboek zelf, niet op de release en niet op de
+    // repo als geheel. De methodologie tagt releases met namen ("Otis"), dus een
+    // tagvergelijking gaat niet op; de repo krijgt daarnaast commits die het
+    // schema niet raken. Wat wij bundelen is dit ene bestand, dus dat is wat de
+    // poort in de gaten houdt.
+    probe: UpstreamProbe.githubCommitDate,
     probeTarget: 'brennodewinter/Informatiebeveiligingsonderzoek',
+    probePath: 'NL-Schema_Miauw_1_00.xlsx',
   ),
   ReferenceStandard(
     id: 'orphanet',
@@ -116,8 +121,18 @@ const referenceStandards = <ReferenceStandard>[
 const cweBundledVersion = '4.20';
 
 /// Het MIAUW-schema dat `miauw_eis_catalog.dart` weerspiegelt. De methodologie
-/// voert geen releasenummers, dus we noteren de datum van de overgenomen versie.
-const miauwBundledVersion = '2026-07-16';
+/// voert geen releasenummers, dus we noteren een datum — en dat is de datum die
+/// **de bron** draagt: de laatste wijziging van het werkboek
+/// `NL-Schema_Miauw_1_00.xlsx` upstream.
+///
+/// Hier stond tot 22-07-2026 `2026-07-16`, de dag waarop wij het schema
+/// overnamen. Dat leest als hetzelfde soort feit maar is het niet, en het brak
+/// de poort: een overnamedatum ligt altijd ná de bronwijziging, dus de
+/// vergelijking "is upstream nieuwer?" kon voor MIAUW nooit waar worden. De
+/// verouderingscontrole meldde jarenlang "actueel" zonder ooit iets te kunnen
+/// zeggen. Bundel je een nieuwe snapshot, zet hier dan de commitdatum van het
+/// werkboek — niet de dag waarop je het deed.
+const miauwBundledVersion = '2024-12-06';
 
 /// De Orphanet-uitgave die `assets/privacy/health_lexicon.json` weerspiegelt.
 /// Orphanet voert geen versienummers maar datumt elke uitgave.

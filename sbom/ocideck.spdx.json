@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.2.0+1",
-  "documentNamespace": "https://ocideck.app/spdx/2833013b-9163-5f72-8b7c-1a2946ee81d1",
+  "documentNamespace": "https://ocideck.app/spdx/a01d2512-a4f5-5134-8328-29e257d4d3b2",
   "creationInfo": {
-    "created": "2026-07-22T09:04:23.436749Z",
+    "created": "2026-07-22T11:45:30.375904Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -16,6 +16,7 @@
       "SPDXID": "SPDXRef-0-ocideck",
       "name": "ocideck",
       "versionInfo": "0.2.0+1",
+      "supplier": "Organization: Stichting LibreKAT",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "EUPL-1.2",
@@ -33,6 +34,7 @@
       "SPDXID": "SPDXRef-1--fe-analyzer-shared",
       "name": "_fe_analyzer_shared",
       "versionInfo": "99.0.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/_fe_analyzer_shared/versions/99.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -55,6 +57,7 @@
       "SPDXID": "SPDXRef-2-analyzer",
       "name": "analyzer",
       "versionInfo": "12.1.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/analyzer/versions/12.1.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -77,6 +80,7 @@
       "SPDXID": "SPDXRef-3-archive",
       "name": "archive",
       "versionInfo": "4.0.9",
+      "supplier": "Organization: brendan-duncan",
       "downloadLocation": "https://pub.dev/packages/archive/versions/4.0.9",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -99,6 +103,7 @@
       "SPDXID": "SPDXRef-4-args",
       "name": "args",
       "versionInfo": "2.7.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/args/versions/2.7.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -121,6 +126,7 @@
       "SPDXID": "SPDXRef-5-async",
       "name": "async",
       "versionInfo": "2.13.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/async/versions/2.13.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -143,6 +149,7 @@
       "SPDXID": "SPDXRef-6-barcode",
       "name": "barcode",
       "versionInfo": "2.2.9",
+      "supplier": "Organization: DavBfr",
       "downloadLocation": "https://pub.dev/packages/barcode/versions/2.2.9",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
@@ -165,6 +172,7 @@
       "SPDXID": "SPDXRef-7-bidi",
       "name": "bidi",
       "versionInfo": "2.0.13",
+      "supplier": "Organization: xclud",
       "downloadLocation": "https://pub.dev/packages/bidi/versions/2.0.13",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -187,6 +195,7 @@
       "SPDXID": "SPDXRef-8-boolean-selector",
       "name": "boolean_selector",
       "versionInfo": "2.1.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/boolean_selector/versions/2.1.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -209,6 +218,7 @@
       "SPDXID": "SPDXRef-9-characters",
       "name": "characters",
       "versionInfo": "1.4.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/characters/versions/1.4.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -231,6 +241,7 @@
       "SPDXID": "SPDXRef-10-charcode",
       "name": "charcode",
       "versionInfo": "1.4.0",
+      "supplier": "Organization: lrhn",
       "downloadLocation": "https://pub.dev/packages/charcode/versions/1.4.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -253,6 +264,7 @@
       "SPDXID": "SPDXRef-11-cli-config",
       "name": "cli_config",
       "versionInfo": "0.2.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/cli_config/versions/0.2.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -275,6 +287,7 @@
       "SPDXID": "SPDXRef-12-clock",
       "name": "clock",
       "versionInfo": "1.1.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/clock/versions/1.1.2",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
@@ -297,6 +310,7 @@
       "SPDXID": "SPDXRef-13-code-assets",
       "name": "code_assets",
       "versionInfo": "1.2.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/code_assets/versions/1.2.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -319,6 +333,7 @@
       "SPDXID": "SPDXRef-14-collection",
       "name": "collection",
       "versionInfo": "1.19.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/collection/versions/1.19.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -341,6 +356,7 @@
       "SPDXID": "SPDXRef-15-convert",
       "name": "convert",
       "versionInfo": "3.1.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/convert/versions/3.1.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -363,6 +379,7 @@
       "SPDXID": "SPDXRef-16-coverage",
       "name": "coverage",
       "versionInfo": "1.15.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/coverage/versions/1.15.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -385,6 +402,7 @@
       "SPDXID": "SPDXRef-17-cross-file",
       "name": "cross_file",
       "versionInfo": "0.3.5+4",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/cross_file/versions/0.3.5+4",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -407,6 +425,7 @@
       "SPDXID": "SPDXRef-18-crypto",
       "name": "crypto",
       "versionInfo": "3.0.7",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/crypto/versions/3.0.7",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -429,6 +448,7 @@
       "SPDXID": "SPDXRef-19-csslib",
       "name": "csslib",
       "versionInfo": "1.0.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/csslib/versions/1.0.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -451,6 +471,7 @@
       "SPDXID": "SPDXRef-20-cupertino-icons",
       "name": "cupertino_icons",
       "versionInfo": "1.0.9",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/cupertino_icons/versions/1.0.9",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -473,6 +494,7 @@
       "SPDXID": "SPDXRef-21-dart-quill-delta",
       "name": "dart_quill_delta",
       "versionInfo": "10.8.3",
+      "supplier": "Organization: FlutterQuill",
       "downloadLocation": "https://pub.dev/packages/dart_quill_delta/versions/10.8.3",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -495,6 +517,7 @@
       "SPDXID": "SPDXRef-22-dartcv4",
       "name": "dartcv4",
       "versionInfo": "1.1.8",
+      "supplier": "Organization: rainyl",
       "downloadLocation": "https://pub.dev/packages/dartcv4/versions/1.1.8",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
@@ -517,6 +540,7 @@
       "SPDXID": "SPDXRef-23-dbus",
       "name": "dbus",
       "versionInfo": "0.7.13",
+      "supplier": "Organization: canonical",
       "downloadLocation": "https://pub.dev/packages/dbus/versions/0.7.13",
       "filesAnalyzed": false,
       "licenseConcluded": "MPL-2.0",
@@ -539,6 +563,7 @@
       "SPDXID": "SPDXRef-24-desktop-drop",
       "name": "desktop_drop",
       "versionInfo": "0.7.1",
+      "supplier": "Organization: MixinNetwork",
       "downloadLocation": "https://pub.dev/packages/desktop_drop/versions/0.7.1",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
@@ -561,6 +586,7 @@
       "SPDXID": "SPDXRef-25-diff-match-patch",
       "name": "diff_match_patch",
       "versionInfo": "0.4.1",
+      "supplier": "Organization: jheyne",
       "downloadLocation": "https://pub.dev/packages/diff_match_patch/versions/0.4.1",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
@@ -583,6 +609,7 @@
       "SPDXID": "SPDXRef-26-equatable",
       "name": "equatable",
       "versionInfo": "2.1.0",
+      "supplier": "Organization: felangel",
       "downloadLocation": "https://pub.dev/packages/equatable/versions/2.1.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -605,6 +632,7 @@
       "SPDXID": "SPDXRef-27-fake-async",
       "name": "fake_async",
       "versionInfo": "1.3.3",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/fake_async/versions/1.3.3",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
@@ -627,6 +655,7 @@
       "SPDXID": "SPDXRef-28-ffi",
       "name": "ffi",
       "versionInfo": "2.2.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/ffi/versions/2.2.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -649,6 +678,7 @@
       "SPDXID": "SPDXRef-29-file",
       "name": "file",
       "versionInfo": "7.0.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/file/versions/7.0.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -671,6 +701,7 @@
       "SPDXID": "SPDXRef-30-file-picker",
       "name": "file_picker",
       "versionInfo": "11.0.2",
+      "supplier": "Organization: miguelpruivo",
       "downloadLocation": "https://pub.dev/packages/file_picker/versions/11.0.2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -693,6 +724,7 @@
       "SPDXID": "SPDXRef-31-file-selector-platform-interface",
       "name": "file_selector_platform_interface",
       "versionInfo": "2.7.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/file_selector_platform_interface/versions/2.7.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -715,6 +747,7 @@
       "SPDXID": "SPDXRef-32-file-selector-windows",
       "name": "file_selector_windows",
       "versionInfo": "0.9.3+5",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/file_selector_windows/versions/0.9.3+5",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -737,6 +770,7 @@
       "SPDXID": "SPDXRef-33-fixnum",
       "name": "fixnum",
       "versionInfo": "1.1.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/fixnum/versions/1.1.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -759,6 +793,7 @@
       "SPDXID": "SPDXRef-34-fl-chart",
       "name": "fl_chart",
       "versionInfo": "1.2.0",
+      "supplier": "Organization: imaNNeo",
       "downloadLocation": "https://pub.dev/packages/fl_chart/versions/1.2.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -781,6 +816,7 @@
       "SPDXID": "SPDXRef-35-flutter",
       "name": "flutter",
       "versionInfo": "0.0.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -791,6 +827,7 @@
       "SPDXID": "SPDXRef-36-flutter-colorpicker",
       "name": "flutter_colorpicker",
       "versionInfo": "1.1.0",
+      "supplier": "Organization: mchome",
       "downloadLocation": "https://pub.dev/packages/flutter_colorpicker/versions/1.1.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -813,6 +850,7 @@
       "SPDXID": "SPDXRef-37-flutter-highlight",
       "name": "flutter_highlight",
       "versionInfo": "0.7.0",
+      "supplier": "Organization: git-touch",
       "downloadLocation": "https://pub.dev/packages/flutter_highlight/versions/0.7.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -835,6 +873,7 @@
       "SPDXID": "SPDXRef-38-flutter-keyboard-visibility-linux",
       "name": "flutter_keyboard_visibility_linux",
       "versionInfo": "1.0.0",
+      "supplier": "Organization: MisterJimson",
       "downloadLocation": "https://pub.dev/packages/flutter_keyboard_visibility_linux/versions/1.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -857,6 +896,7 @@
       "SPDXID": "SPDXRef-39-flutter-keyboard-visibility-macos",
       "name": "flutter_keyboard_visibility_macos",
       "versionInfo": "1.0.0",
+      "supplier": "Organization: MisterJimson",
       "downloadLocation": "https://pub.dev/packages/flutter_keyboard_visibility_macos/versions/1.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -879,6 +919,7 @@
       "SPDXID": "SPDXRef-40-flutter-keyboard-visibility-platform-interface",
       "name": "flutter_keyboard_visibility_platform_interface",
       "versionInfo": "2.0.0",
+      "supplier": "Organization: MisterJimson",
       "downloadLocation": "https://pub.dev/packages/flutter_keyboard_visibility_platform_interface/versions/2.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -901,6 +942,7 @@
       "SPDXID": "SPDXRef-41-flutter-keyboard-visibility-temp-fork",
       "name": "flutter_keyboard_visibility_temp_fork",
       "versionInfo": "0.1.5",
+      "supplier": "Organization: EchoEllet",
       "downloadLocation": "https://pub.dev/packages/flutter_keyboard_visibility_temp_fork/versions/0.1.5",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -923,6 +965,7 @@
       "SPDXID": "SPDXRef-42-flutter-keyboard-visibility-windows",
       "name": "flutter_keyboard_visibility_windows",
       "versionInfo": "1.0.0",
+      "supplier": "Organization: MisterJimson",
       "downloadLocation": "https://pub.dev/packages/flutter_keyboard_visibility_windows/versions/1.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -945,6 +988,7 @@
       "SPDXID": "SPDXRef-43-flutter-lints",
       "name": "flutter_lints",
       "versionInfo": "6.0.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/flutter_lints/versions/6.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -967,6 +1011,7 @@
       "SPDXID": "SPDXRef-44-flutter-localizations",
       "name": "flutter_localizations",
       "versionInfo": "0.0.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -977,6 +1022,7 @@
       "SPDXID": "SPDXRef-45-flutter-math-fork",
       "name": "flutter_math_fork",
       "versionInfo": "0.7.4",
+      "supplier": "Organization: simpleclub",
       "downloadLocation": "https://pub.dev/packages/flutter_math_fork/versions/0.7.4",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
@@ -999,6 +1045,7 @@
       "SPDXID": "SPDXRef-46-flutter-plugin-android-lifecycle",
       "name": "flutter_plugin_android_lifecycle",
       "versionInfo": "2.0.35",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/flutter_plugin_android_lifecycle/versions/2.0.35",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1021,6 +1068,7 @@
       "SPDXID": "SPDXRef-47-flutter-quill",
       "name": "flutter_quill",
       "versionInfo": "11.5.1",
+      "supplier": "Organization: singerdmx",
       "downloadLocation": "https://pub.dev/packages/flutter_quill/versions/11.5.1",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -1043,6 +1091,7 @@
       "SPDXID": "SPDXRef-48-flutter-quill-delta-from-html",
       "name": "flutter_quill_delta_from_html",
       "versionInfo": "1.5.3",
+      "supplier": "Organization: CatHood0",
       "downloadLocation": "https://pub.dev/packages/flutter_quill_delta_from_html/versions/1.5.3",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -1065,6 +1114,7 @@
       "SPDXID": "SPDXRef-49-flutter-riverpod",
       "name": "flutter_riverpod",
       "versionInfo": "3.3.2",
+      "supplier": "Organization: rrousselGit",
       "downloadLocation": "https://pub.dev/packages/flutter_riverpod/versions/3.3.2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -1087,6 +1137,7 @@
       "SPDXID": "SPDXRef-50-flutter-secure-storage",
       "name": "flutter_secure_storage",
       "versionInfo": "10.3.1",
+      "supplier": "Organization: mogol",
       "downloadLocation": "https://pub.dev/packages/flutter_secure_storage/versions/10.3.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1109,6 +1160,7 @@
       "SPDXID": "SPDXRef-51-flutter-secure-storage-darwin",
       "name": "flutter_secure_storage_darwin",
       "versionInfo": "0.3.2",
+      "supplier": "Organization: juliansteenbakker",
       "downloadLocation": "https://pub.dev/packages/flutter_secure_storage_darwin/versions/0.3.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1131,6 +1183,7 @@
       "SPDXID": "SPDXRef-52-flutter-secure-storage-linux",
       "name": "flutter_secure_storage_linux",
       "versionInfo": "3.0.1",
+      "supplier": "Organization: mogol",
       "downloadLocation": "https://pub.dev/packages/flutter_secure_storage_linux/versions/3.0.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1153,6 +1206,7 @@
       "SPDXID": "SPDXRef-53-flutter-secure-storage-platform-interface",
       "name": "flutter_secure_storage_platform_interface",
       "versionInfo": "2.0.1",
+      "supplier": "Organization: mogol",
       "downloadLocation": "https://pub.dev/packages/flutter_secure_storage_platform_interface/versions/2.0.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1175,6 +1229,7 @@
       "SPDXID": "SPDXRef-54-flutter-secure-storage-web",
       "name": "flutter_secure_storage_web",
       "versionInfo": "2.1.1",
+      "supplier": "Organization: mogol",
       "downloadLocation": "https://pub.dev/packages/flutter_secure_storage_web/versions/2.1.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1197,6 +1252,7 @@
       "SPDXID": "SPDXRef-55-flutter-secure-storage-windows",
       "name": "flutter_secure_storage_windows",
       "versionInfo": "4.1.0",
+      "supplier": "Organization: mogol",
       "downloadLocation": "https://pub.dev/packages/flutter_secure_storage_windows/versions/4.1.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1219,6 +1275,7 @@
       "SPDXID": "SPDXRef-56-flutter-svg",
       "name": "flutter_svg",
       "versionInfo": "2.3.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/flutter_svg/versions/2.3.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -1241,6 +1298,7 @@
       "SPDXID": "SPDXRef-57-flutter-test",
       "name": "flutter_test",
       "versionInfo": "0.0.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1251,6 +1309,7 @@
       "SPDXID": "SPDXRef-58-flutter-web-plugins",
       "name": "flutter_web_plugins",
       "versionInfo": "0.0.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1261,6 +1320,7 @@
       "SPDXID": "SPDXRef-59-frontend-server-client",
       "name": "frontend_server_client",
       "versionInfo": "4.0.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/frontend_server_client/versions/4.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1283,6 +1343,7 @@
       "SPDXID": "SPDXRef-60-glob",
       "name": "glob",
       "versionInfo": "2.1.3",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/glob/versions/2.1.3",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1305,6 +1366,7 @@
       "SPDXID": "SPDXRef-61-highlight",
       "name": "highlight",
       "versionInfo": "0.7.0",
+      "supplier": "Organization: pd4d10",
       "downloadLocation": "https://pub.dev/packages/highlight/versions/0.7.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -1327,6 +1389,7 @@
       "SPDXID": "SPDXRef-62-hooks",
       "name": "hooks",
       "versionInfo": "2.0.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/hooks/versions/2.0.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1349,6 +1412,7 @@
       "SPDXID": "SPDXRef-63-html",
       "name": "html",
       "versionInfo": "0.15.6",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/html/versions/0.15.6",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -1371,6 +1435,7 @@
       "SPDXID": "SPDXRef-64-http",
       "name": "http",
       "versionInfo": "1.6.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/http/versions/1.6.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1393,6 +1458,7 @@
       "SPDXID": "SPDXRef-65-http-multi-server",
       "name": "http_multi_server",
       "versionInfo": "3.2.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/http_multi_server/versions/3.2.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1415,6 +1481,7 @@
       "SPDXID": "SPDXRef-66-http-parser",
       "name": "http_parser",
       "versionInfo": "4.1.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/http_parser/versions/4.1.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1437,6 +1504,7 @@
       "SPDXID": "SPDXRef-67-image",
       "name": "image",
       "versionInfo": "4.9.1",
+      "supplier": "Organization: brendan-duncan",
       "downloadLocation": "https://pub.dev/packages/image/versions/4.9.1",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -1459,6 +1527,7 @@
       "SPDXID": "SPDXRef-68-intl",
       "name": "intl",
       "versionInfo": "0.20.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/intl/versions/0.20.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1481,6 +1550,7 @@
       "SPDXID": "SPDXRef-69-io",
       "name": "io",
       "versionInfo": "1.0.5",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/io/versions/1.0.5",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1503,6 +1573,7 @@
       "SPDXID": "SPDXRef-70-jni",
       "name": "jni",
       "versionInfo": "1.0.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/jni/versions/1.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1525,6 +1596,7 @@
       "SPDXID": "SPDXRef-71-jni-flutter",
       "name": "jni_flutter",
       "versionInfo": "1.0.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/jni_flutter/versions/1.0.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1547,6 +1619,7 @@
       "SPDXID": "SPDXRef-72-json-annotation",
       "name": "json_annotation",
       "versionInfo": "4.12.0",
+      "supplier": "Organization: google",
       "downloadLocation": "https://pub.dev/packages/json_annotation/versions/4.12.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1569,6 +1642,7 @@
       "SPDXID": "SPDXRef-73-leak-tracker",
       "name": "leak_tracker",
       "versionInfo": "11.0.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/leak_tracker/versions/11.0.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1591,6 +1665,7 @@
       "SPDXID": "SPDXRef-74-leak-tracker-flutter-testing",
       "name": "leak_tracker_flutter_testing",
       "versionInfo": "3.0.10",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/leak_tracker_flutter_testing/versions/3.0.10",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1613,6 +1688,7 @@
       "SPDXID": "SPDXRef-75-leak-tracker-testing",
       "name": "leak_tracker_testing",
       "versionInfo": "3.0.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/leak_tracker_testing/versions/3.0.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1635,6 +1711,7 @@
       "SPDXID": "SPDXRef-76-lints",
       "name": "lints",
       "versionInfo": "6.1.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/lints/versions/6.1.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1657,6 +1734,7 @@
       "SPDXID": "SPDXRef-77-logging",
       "name": "logging",
       "versionInfo": "1.3.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/logging/versions/1.3.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1679,6 +1757,7 @@
       "SPDXID": "SPDXRef-78-markdown",
       "name": "markdown",
       "versionInfo": "7.3.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/markdown/versions/7.3.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1701,6 +1780,7 @@
       "SPDXID": "SPDXRef-79-markdown-quill",
       "name": "markdown_quill",
       "versionInfo": "4.3.0",
+      "supplier": "Organization: TarekkMA",
       "downloadLocation": "https://pub.dev/packages/markdown_quill/versions/4.3.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -1723,6 +1803,7 @@
       "SPDXID": "SPDXRef-80-matcher",
       "name": "matcher",
       "versionInfo": "0.12.19",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/matcher/versions/0.12.19",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1745,6 +1826,7 @@
       "SPDXID": "SPDXRef-81-material-color-utilities",
       "name": "material_color_utilities",
       "versionInfo": "0.13.0",
+      "supplier": "Organization: material-foundation",
       "downloadLocation": "https://pub.dev/packages/material_color_utilities/versions/0.13.0",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
@@ -1767,6 +1849,7 @@
       "SPDXID": "SPDXRef-82-meta",
       "name": "meta",
       "versionInfo": "1.18.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/meta/versions/1.18.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1789,6 +1872,7 @@
       "SPDXID": "SPDXRef-83-mime",
       "name": "mime",
       "versionInfo": "2.0.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/mime/versions/2.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1811,6 +1895,7 @@
       "SPDXID": "SPDXRef-84-nested",
       "name": "nested",
       "versionInfo": "1.0.0",
+      "supplier": "Organization: rrousselGit",
       "downloadLocation": "https://pub.dev/packages/nested/versions/1.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -1833,6 +1918,7 @@
       "SPDXID": "SPDXRef-85-node-preamble",
       "name": "node_preamble",
       "versionInfo": "2.0.2",
+      "supplier": "Organization: mbullington",
       "downloadLocation": "https://pub.dev/packages/node_preamble/versions/2.0.2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -1855,6 +1941,7 @@
       "SPDXID": "SPDXRef-86-objective-c",
       "name": "objective_c",
       "versionInfo": "9.4.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/objective_c/versions/9.4.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1877,6 +1964,7 @@
       "SPDXID": "SPDXRef-87-opencv-core",
       "name": "opencv_core",
       "versionInfo": "1.4.5",
+      "supplier": "Organization: rainyl",
       "downloadLocation": "https://pub.dev/packages/opencv_core/versions/1.4.5",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
@@ -1899,6 +1987,7 @@
       "SPDXID": "SPDXRef-88-package-config",
       "name": "package_config",
       "versionInfo": "2.2.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/package_config/versions/2.2.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1921,6 +2010,7 @@
       "SPDXID": "SPDXRef-89-package-info-plus",
       "name": "package_info_plus",
       "versionInfo": "9.0.1",
+      "supplier": "Organization: fluttercommunity",
       "downloadLocation": "https://pub.dev/packages/package_info_plus/versions/9.0.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1943,6 +2033,7 @@
       "SPDXID": "SPDXRef-90-package-info-plus-platform-interface",
       "name": "package_info_plus_platform_interface",
       "versionInfo": "3.2.1",
+      "supplier": "Organization: fluttercommunity",
       "downloadLocation": "https://pub.dev/packages/package_info_plus_platform_interface/versions/3.2.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -1965,6 +2056,7 @@
       "SPDXID": "SPDXRef-91-pasteboard",
       "name": "pasteboard",
       "versionInfo": "0.5.0",
+      "supplier": "Organization: MixinNetwork",
       "downloadLocation": "https://pub.dev/packages/pasteboard/versions/0.5.0",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
@@ -1987,6 +2079,7 @@
       "SPDXID": "SPDXRef-92-path",
       "name": "path",
       "versionInfo": "1.9.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/path/versions/1.9.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2009,6 +2102,7 @@
       "SPDXID": "SPDXRef-93-path-parsing",
       "name": "path_parsing",
       "versionInfo": "1.1.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/path_parsing/versions/1.1.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2031,6 +2125,7 @@
       "SPDXID": "SPDXRef-94-path-provider",
       "name": "path_provider",
       "versionInfo": "2.1.6",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/path_provider/versions/2.1.6",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2053,6 +2148,7 @@
       "SPDXID": "SPDXRef-95-path-provider-android",
       "name": "path_provider_android",
       "versionInfo": "2.3.1",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/path_provider_android/versions/2.3.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2075,6 +2171,7 @@
       "SPDXID": "SPDXRef-96-path-provider-foundation",
       "name": "path_provider_foundation",
       "versionInfo": "2.6.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/path_provider_foundation/versions/2.6.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2097,6 +2194,7 @@
       "SPDXID": "SPDXRef-97-path-provider-linux",
       "name": "path_provider_linux",
       "versionInfo": "2.2.2",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/path_provider_linux/versions/2.2.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2119,6 +2217,7 @@
       "SPDXID": "SPDXRef-98-path-provider-platform-interface",
       "name": "path_provider_platform_interface",
       "versionInfo": "2.1.3",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/path_provider_platform_interface/versions/2.1.3",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2141,6 +2240,7 @@
       "SPDXID": "SPDXRef-99-path-provider-windows",
       "name": "path_provider_windows",
       "versionInfo": "2.3.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/path_provider_windows/versions/2.3.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2163,6 +2263,7 @@
       "SPDXID": "SPDXRef-100-pdf",
       "name": "pdf",
       "versionInfo": "3.13.0",
+      "supplier": "Organization: DavBfr",
       "downloadLocation": "https://pub.dev/packages/pdf/versions/3.13.0",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
@@ -2185,6 +2286,7 @@
       "SPDXID": "SPDXRef-101-petitparser",
       "name": "petitparser",
       "versionInfo": "7.0.2",
+      "supplier": "Organization: petitparser",
       "downloadLocation": "https://pub.dev/packages/petitparser/versions/7.0.2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2207,6 +2309,7 @@
       "SPDXID": "SPDXRef-102-platform",
       "name": "platform",
       "versionInfo": "3.1.6",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/platform/versions/3.1.6",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2229,6 +2332,7 @@
       "SPDXID": "SPDXRef-103-plugin-platform-interface",
       "name": "plugin_platform_interface",
       "versionInfo": "2.1.8",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/plugin_platform_interface/versions/2.1.8",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2251,6 +2355,7 @@
       "SPDXID": "SPDXRef-104-pool",
       "name": "pool",
       "versionInfo": "1.5.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/pool/versions/1.5.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2273,6 +2378,7 @@
       "SPDXID": "SPDXRef-105-posix",
       "name": "posix",
       "versionInfo": "6.5.0",
+      "supplier": "Organization: onepub-dev",
       "downloadLocation": "https://pub.dev/packages/posix/versions/6.5.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2295,6 +2401,7 @@
       "SPDXID": "SPDXRef-106-provider",
       "name": "provider",
       "versionInfo": "6.1.5+1",
+      "supplier": "Organization: rrousselGit",
       "downloadLocation": "https://pub.dev/packages/provider/versions/6.1.5+1",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2317,6 +2424,7 @@
       "SPDXID": "SPDXRef-107-pub-semver",
       "name": "pub_semver",
       "versionInfo": "2.2.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/pub_semver/versions/2.2.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2339,6 +2447,7 @@
       "SPDXID": "SPDXRef-108-qr",
       "name": "qr",
       "versionInfo": "3.0.2",
+      "supplier": "Organization: kevmoo",
       "downloadLocation": "https://pub.dev/packages/qr/versions/3.0.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2361,6 +2470,7 @@
       "SPDXID": "SPDXRef-109-quill-native-bridge",
       "name": "quill_native_bridge",
       "versionInfo": "11.1.0",
+      "supplier": "Organization: FlutterQuill",
       "downloadLocation": "https://pub.dev/packages/quill_native_bridge/versions/11.1.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2383,6 +2493,7 @@
       "SPDXID": "SPDXRef-110-quill-native-bridge-android",
       "name": "quill_native_bridge_android",
       "versionInfo": "0.0.1+2",
+      "supplier": "Organization: FlutterQuill",
       "downloadLocation": "https://pub.dev/packages/quill_native_bridge_android/versions/0.0.1+2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2405,6 +2516,7 @@
       "SPDXID": "SPDXRef-111-quill-native-bridge-ios",
       "name": "quill_native_bridge_ios",
       "versionInfo": "0.0.1",
+      "supplier": "Organization: FlutterQuill",
       "downloadLocation": "https://pub.dev/packages/quill_native_bridge_ios/versions/0.0.1",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2427,6 +2539,7 @@
       "SPDXID": "SPDXRef-112-quill-native-bridge-macos",
       "name": "quill_native_bridge_macos",
       "versionInfo": "0.0.1",
+      "supplier": "Organization: FlutterQuill",
       "downloadLocation": "https://pub.dev/packages/quill_native_bridge_macos/versions/0.0.1",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2449,6 +2562,7 @@
       "SPDXID": "SPDXRef-113-quill-native-bridge-platform-interface",
       "name": "quill_native_bridge_platform_interface",
       "versionInfo": "0.0.2+1",
+      "supplier": "Organization: FlutterQuill",
       "downloadLocation": "https://pub.dev/packages/quill_native_bridge_platform_interface/versions/0.0.2+1",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2471,6 +2585,7 @@
       "SPDXID": "SPDXRef-114-quill-native-bridge-web",
       "name": "quill_native_bridge_web",
       "versionInfo": "0.0.2",
+      "supplier": "Organization: FlutterQuill",
       "downloadLocation": "https://pub.dev/packages/quill_native_bridge_web/versions/0.0.2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2493,6 +2608,7 @@
       "SPDXID": "SPDXRef-115-quill-native-bridge-windows",
       "name": "quill_native_bridge_windows",
       "versionInfo": "0.0.2",
+      "supplier": "Organization: FlutterQuill",
       "downloadLocation": "https://pub.dev/packages/quill_native_bridge_windows/versions/0.0.2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2515,6 +2631,7 @@
       "SPDXID": "SPDXRef-116-quiver",
       "name": "quiver",
       "versionInfo": "3.2.2",
+      "supplier": "Organization: google",
       "downloadLocation": "https://pub.dev/packages/quiver/versions/3.2.2",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
@@ -2537,6 +2654,7 @@
       "SPDXID": "SPDXRef-117-record-use",
       "name": "record_use",
       "versionInfo": "0.6.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/record_use/versions/0.6.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2559,6 +2677,7 @@
       "SPDXID": "SPDXRef-118-riverpod",
       "name": "riverpod",
       "versionInfo": "3.3.2",
+      "supplier": "Organization: rrousselGit",
       "downloadLocation": "https://pub.dev/packages/riverpod/versions/3.3.2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2581,6 +2700,7 @@
       "SPDXID": "SPDXRef-119-screen-retriever",
       "name": "screen_retriever",
       "versionInfo": "0.2.2",
+      "supplier": "Organization: leanflutter",
       "downloadLocation": "https://pub.dev/packages/screen_retriever/versions/0.2.2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2603,6 +2723,7 @@
       "SPDXID": "SPDXRef-120-screen-retriever-linux",
       "name": "screen_retriever_linux",
       "versionInfo": "0.2.2",
+      "supplier": "Organization: leanflutter",
       "downloadLocation": "https://pub.dev/packages/screen_retriever_linux/versions/0.2.2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2625,6 +2746,7 @@
       "SPDXID": "SPDXRef-121-screen-retriever-platform-interface",
       "name": "screen_retriever_platform_interface",
       "versionInfo": "0.2.2",
+      "supplier": "Organization: leanflutter",
       "downloadLocation": "https://pub.dev/packages/screen_retriever_platform_interface/versions/0.2.2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2647,6 +2769,7 @@
       "SPDXID": "SPDXRef-122-screen-retriever-windows",
       "name": "screen_retriever_windows",
       "versionInfo": "0.2.2",
+      "supplier": "Organization: leanflutter",
       "downloadLocation": "https://pub.dev/packages/screen_retriever_windows/versions/0.2.2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -2669,6 +2792,7 @@
       "SPDXID": "SPDXRef-123-shared-preferences",
       "name": "shared_preferences",
       "versionInfo": "2.5.5",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/shared_preferences/versions/2.5.5",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2691,6 +2815,7 @@
       "SPDXID": "SPDXRef-124-shared-preferences-android",
       "name": "shared_preferences_android",
       "versionInfo": "2.4.26",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/shared_preferences_android/versions/2.4.26",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2713,6 +2838,7 @@
       "SPDXID": "SPDXRef-125-shared-preferences-foundation",
       "name": "shared_preferences_foundation",
       "versionInfo": "2.5.6",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/shared_preferences_foundation/versions/2.5.6",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2735,6 +2861,7 @@
       "SPDXID": "SPDXRef-126-shared-preferences-linux",
       "name": "shared_preferences_linux",
       "versionInfo": "2.4.1",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/shared_preferences_linux/versions/2.4.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2757,6 +2884,7 @@
       "SPDXID": "SPDXRef-127-shared-preferences-platform-interface",
       "name": "shared_preferences_platform_interface",
       "versionInfo": "2.4.2",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/shared_preferences_platform_interface/versions/2.4.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2779,6 +2907,7 @@
       "SPDXID": "SPDXRef-128-shared-preferences-web",
       "name": "shared_preferences_web",
       "versionInfo": "2.4.3",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/shared_preferences_web/versions/2.4.3",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2801,6 +2930,7 @@
       "SPDXID": "SPDXRef-129-shared-preferences-windows",
       "name": "shared_preferences_windows",
       "versionInfo": "2.4.1",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/shared_preferences_windows/versions/2.4.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2823,6 +2953,7 @@
       "SPDXID": "SPDXRef-130-shelf",
       "name": "shelf",
       "versionInfo": "1.4.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/shelf/versions/1.4.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2845,6 +2976,7 @@
       "SPDXID": "SPDXRef-131-shelf-packages-handler",
       "name": "shelf_packages_handler",
       "versionInfo": "3.0.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/shelf_packages_handler/versions/3.0.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2867,6 +2999,7 @@
       "SPDXID": "SPDXRef-132-shelf-static",
       "name": "shelf_static",
       "versionInfo": "1.1.3",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/shelf_static/versions/1.1.3",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2889,6 +3022,7 @@
       "SPDXID": "SPDXRef-133-shelf-web-socket",
       "name": "shelf_web_socket",
       "versionInfo": "3.0.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/shelf_web_socket/versions/3.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2911,6 +3045,7 @@
       "SPDXID": "SPDXRef-134-sky-engine",
       "name": "sky_engine",
       "versionInfo": "0.0.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "BSL-1.0",
@@ -2921,6 +3056,7 @@
       "SPDXID": "SPDXRef-135-source-map-stack-trace",
       "name": "source_map_stack_trace",
       "versionInfo": "2.1.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/source_map_stack_trace/versions/2.1.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2943,6 +3079,7 @@
       "SPDXID": "SPDXRef-136-source-maps",
       "name": "source_maps",
       "versionInfo": "0.10.13",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/source_maps/versions/0.10.13",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2965,6 +3102,7 @@
       "SPDXID": "SPDXRef-137-source-span",
       "name": "source_span",
       "versionInfo": "1.10.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/source_span/versions/1.10.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -2987,6 +3125,7 @@
       "SPDXID": "SPDXRef-138-stack-trace",
       "name": "stack_trace",
       "versionInfo": "1.12.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/stack_trace/versions/1.12.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3009,6 +3148,7 @@
       "SPDXID": "SPDXRef-139-state-notifier",
       "name": "state_notifier",
       "versionInfo": "1.0.0",
+      "supplier": "Organization: rrousselGit",
       "downloadLocation": "https://pub.dev/packages/state_notifier/versions/1.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -3031,6 +3171,7 @@
       "SPDXID": "SPDXRef-140-stream-channel",
       "name": "stream_channel",
       "versionInfo": "2.1.4",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/stream_channel/versions/2.1.4",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3053,6 +3194,7 @@
       "SPDXID": "SPDXRef-141-string-scanner",
       "name": "string_scanner",
       "versionInfo": "1.4.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/string_scanner/versions/1.4.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3075,6 +3217,7 @@
       "SPDXID": "SPDXRef-142-term-glyph",
       "name": "term_glyph",
       "versionInfo": "1.2.2",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/term_glyph/versions/1.2.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3097,6 +3240,7 @@
       "SPDXID": "SPDXRef-143-test",
       "name": "test",
       "versionInfo": "1.31.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/test/versions/1.31.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3119,6 +3263,7 @@
       "SPDXID": "SPDXRef-144-test-api",
       "name": "test_api",
       "versionInfo": "0.7.11",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/test_api/versions/0.7.11",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3141,6 +3286,7 @@
       "SPDXID": "SPDXRef-145-test-core",
       "name": "test_core",
       "versionInfo": "0.6.17",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/test_core/versions/0.6.17",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3163,6 +3309,7 @@
       "SPDXID": "SPDXRef-146-tuple",
       "name": "tuple",
       "versionInfo": "2.0.2",
+      "supplier": "Organization: google",
       "downloadLocation": "https://pub.dev/packages/tuple/versions/2.0.2",
       "filesAnalyzed": false,
       "licenseConcluded": "NOASSERTION",
@@ -3185,6 +3332,7 @@
       "SPDXID": "SPDXRef-147-typed-data",
       "name": "typed_data",
       "versionInfo": "1.4.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/typed_data/versions/1.4.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3207,6 +3355,7 @@
       "SPDXID": "SPDXRef-148-universal-platform",
       "name": "universal_platform",
       "versionInfo": "1.1.0",
+      "supplier": "Organization: gskinnerTeam",
       "downloadLocation": "https://pub.dev/packages/universal_platform/versions/1.1.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -3229,6 +3378,7 @@
       "SPDXID": "SPDXRef-149-url-launcher",
       "name": "url_launcher",
       "versionInfo": "6.3.2",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/url_launcher/versions/6.3.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3251,6 +3401,7 @@
       "SPDXID": "SPDXRef-150-url-launcher-android",
       "name": "url_launcher_android",
       "versionInfo": "6.3.32",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/url_launcher_android/versions/6.3.32",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3273,6 +3424,7 @@
       "SPDXID": "SPDXRef-151-url-launcher-ios",
       "name": "url_launcher_ios",
       "versionInfo": "6.4.1",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/url_launcher_ios/versions/6.4.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3295,6 +3447,7 @@
       "SPDXID": "SPDXRef-152-url-launcher-linux",
       "name": "url_launcher_linux",
       "versionInfo": "3.2.2",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/url_launcher_linux/versions/3.2.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3317,6 +3470,7 @@
       "SPDXID": "SPDXRef-153-url-launcher-macos",
       "name": "url_launcher_macos",
       "versionInfo": "3.2.5",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/url_launcher_macos/versions/3.2.5",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3339,6 +3493,7 @@
       "SPDXID": "SPDXRef-154-url-launcher-platform-interface",
       "name": "url_launcher_platform_interface",
       "versionInfo": "2.3.2",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/url_launcher_platform_interface/versions/2.3.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3361,6 +3516,7 @@
       "SPDXID": "SPDXRef-155-url-launcher-web",
       "name": "url_launcher_web",
       "versionInfo": "2.4.3",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/url_launcher_web/versions/2.4.3",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3383,6 +3539,7 @@
       "SPDXID": "SPDXRef-156-url-launcher-windows",
       "name": "url_launcher_windows",
       "versionInfo": "3.1.5",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/url_launcher_windows/versions/3.1.5",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3405,6 +3562,7 @@
       "SPDXID": "SPDXRef-157-uuid",
       "name": "uuid",
       "versionInfo": "4.5.3",
+      "supplier": "Organization: Daegalus",
       "downloadLocation": "https://pub.dev/packages/uuid/versions/4.5.3",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -3427,6 +3585,7 @@
       "SPDXID": "SPDXRef-158-vector-graphics",
       "name": "vector_graphics",
       "versionInfo": "1.2.2",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/vector_graphics/versions/1.2.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3449,6 +3608,7 @@
       "SPDXID": "SPDXRef-159-vector-graphics-codec",
       "name": "vector_graphics_codec",
       "versionInfo": "1.1.13",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/vector_graphics_codec/versions/1.1.13",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3471,6 +3631,7 @@
       "SPDXID": "SPDXRef-160-vector-graphics-compiler",
       "name": "vector_graphics_compiler",
       "versionInfo": "1.2.6",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/vector_graphics_compiler/versions/1.2.6",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3493,6 +3654,7 @@
       "SPDXID": "SPDXRef-161-vector-math",
       "name": "vector_math",
       "versionInfo": "2.2.0",
+      "supplier": "Organization: google",
       "downloadLocation": "https://pub.dev/packages/vector_math/versions/2.2.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3515,6 +3677,7 @@
       "SPDXID": "SPDXRef-162-video-player",
       "name": "video_player",
       "versionInfo": "2.12.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/video_player/versions/2.12.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3537,6 +3700,7 @@
       "SPDXID": "SPDXRef-163-video-player-android",
       "name": "video_player_android",
       "versionInfo": "2.11.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/video_player_android/versions/2.11.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3559,6 +3723,7 @@
       "SPDXID": "SPDXRef-164-video-player-avfoundation",
       "name": "video_player_avfoundation",
       "versionInfo": "2.11.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/video_player_avfoundation/versions/2.11.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3581,6 +3746,7 @@
       "SPDXID": "SPDXRef-165-video-player-platform-interface",
       "name": "video_player_platform_interface",
       "versionInfo": "6.9.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/video_player_platform_interface/versions/6.9.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3603,6 +3769,7 @@
       "SPDXID": "SPDXRef-166-video-player-web",
       "name": "video_player_web",
       "versionInfo": "2.4.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/video_player_web/versions/2.4.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3625,6 +3792,7 @@
       "SPDXID": "SPDXRef-167-vm-service",
       "name": "vm_service",
       "versionInfo": "15.2.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/vm_service/versions/15.2.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3647,6 +3815,7 @@
       "SPDXID": "SPDXRef-168-wakelock-plus",
       "name": "wakelock_plus",
       "versionInfo": "1.5.2",
+      "supplier": "Organization: fluttercommunity",
       "downloadLocation": "https://pub.dev/packages/wakelock_plus/versions/1.5.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3669,6 +3838,7 @@
       "SPDXID": "SPDXRef-169-wakelock-plus-platform-interface",
       "name": "wakelock_plus_platform_interface",
       "versionInfo": "1.5.1",
+      "supplier": "Organization: fluttercommunity",
       "downloadLocation": "https://pub.dev/packages/wakelock_plus_platform_interface/versions/1.5.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3691,6 +3861,7 @@
       "SPDXID": "SPDXRef-170-watcher",
       "name": "watcher",
       "versionInfo": "1.2.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/watcher/versions/1.2.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3713,6 +3884,7 @@
       "SPDXID": "SPDXRef-171-web",
       "name": "web",
       "versionInfo": "1.1.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/web/versions/1.1.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3735,6 +3907,7 @@
       "SPDXID": "SPDXRef-172-web-socket",
       "name": "web_socket",
       "versionInfo": "1.0.1",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/web_socket/versions/1.0.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3757,6 +3930,7 @@
       "SPDXID": "SPDXRef-173-web-socket-channel",
       "name": "web_socket_channel",
       "versionInfo": "3.0.3",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/web_socket_channel/versions/3.0.3",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3779,6 +3953,7 @@
       "SPDXID": "SPDXRef-174-webkit-inspection-protocol",
       "name": "webkit_inspection_protocol",
       "versionInfo": "1.2.1",
+      "supplier": "Organization: google",
       "downloadLocation": "https://pub.dev/packages/webkit_inspection_protocol/versions/1.2.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3801,6 +3976,7 @@
       "SPDXID": "SPDXRef-175-webview-flutter",
       "name": "webview_flutter",
       "versionInfo": "4.14.1",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/webview_flutter/versions/4.14.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3823,6 +3999,7 @@
       "SPDXID": "SPDXRef-176-webview-flutter-android",
       "name": "webview_flutter_android",
       "versionInfo": "4.13.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/webview_flutter_android/versions/4.13.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3845,6 +4022,7 @@
       "SPDXID": "SPDXRef-177-webview-flutter-platform-interface",
       "name": "webview_flutter_platform_interface",
       "versionInfo": "2.15.1",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/webview_flutter_platform_interface/versions/2.15.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3867,6 +4045,7 @@
       "SPDXID": "SPDXRef-178-webview-flutter-web",
       "name": "webview_flutter_web",
       "versionInfo": "0.2.3+4",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/webview_flutter_web/versions/0.2.3+4",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3889,6 +4068,7 @@
       "SPDXID": "SPDXRef-179-webview-flutter-wkwebview",
       "name": "webview_flutter_wkwebview",
       "versionInfo": "3.26.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/webview_flutter_wkwebview/versions/3.26.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3911,6 +4091,7 @@
       "SPDXID": "SPDXRef-180-win32",
       "name": "win32",
       "versionInfo": "5.15.0",
+      "supplier": "Organization: halildurmus",
       "downloadLocation": "https://pub.dev/packages/win32/versions/5.15.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3933,6 +4114,7 @@
       "SPDXID": "SPDXRef-181-window-manager",
       "name": "window_manager",
       "versionInfo": "0.5.2",
+      "supplier": "Organization: leanflutter",
       "downloadLocation": "https://pub.dev/packages/window_manager/versions/0.5.2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -3955,6 +4137,7 @@
       "SPDXID": "SPDXRef-182-xdg-directories",
       "name": "xdg_directories",
       "versionInfo": "1.1.0",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://pub.dev/packages/xdg_directories/versions/1.1.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -3977,6 +4160,7 @@
       "SPDXID": "SPDXRef-183-xml",
       "name": "xml",
       "versionInfo": "7.0.1",
+      "supplier": "Organization: renggli",
       "downloadLocation": "https://pub.dev/packages/xml/versions/7.0.1",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -3999,6 +4183,7 @@
       "SPDXID": "SPDXRef-184-yaml",
       "name": "yaml",
       "versionInfo": "3.1.3",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://pub.dev/packages/yaml/versions/3.1.3",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -4036,6 +4221,7 @@
     {
       "SPDXID": "SPDXRef-186-EB-Garamond",
       "name": "EB Garamond",
+      "supplier": "Organization: The EB Garamond Project Authors",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "OFL-1.1",
@@ -4058,6 +4244,7 @@
     {
       "SPDXID": "SPDXRef-187-EB-Garamond",
       "name": "EB Garamond",
+      "supplier": "Organization: The EB Garamond Project Authors",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "OFL-1.1",
@@ -4080,6 +4267,7 @@
     {
       "SPDXID": "SPDXRef-188-Inter",
       "name": "Inter",
+      "supplier": "Organization: The Inter Project Authors",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "OFL-1.1",
@@ -4102,6 +4290,7 @@
     {
       "SPDXID": "SPDXRef-189-Lora",
       "name": "Lora",
+      "supplier": "Organization: The Lora Project Authors",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "OFL-1.1",
@@ -4124,6 +4313,7 @@
     {
       "SPDXID": "SPDXRef-190-Roboto",
       "name": "Roboto",
+      "supplier": "Organization: The Roboto Project Authors",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "OFL-1.1",
@@ -4262,6 +4452,7 @@
       "SPDXID": "SPDXRef-196-dart",
       "name": "dart",
       "versionInfo": "^3.12.0",
+      "supplier": "Organization: dart-lang",
       "downloadLocation": "https://dart.dev",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -4272,6 +4463,7 @@
       "SPDXID": "SPDXRef-197-flutter",
       "name": "flutter",
       "versionInfo": "3.44.6",
+      "supplier": "Organization: flutter",
       "downloadLocation": "https://flutter.dev",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
@@ -4282,6 +4474,7 @@
       "SPDXID": "SPDXRef-198-desktop-multi-window",
       "name": "desktop_multi_window",
       "versionInfo": "0.3.0",
+      "supplier": "Organization: MixinNetwork",
       "downloadLocation": "https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
@@ -4299,6 +4492,7 @@
       "SPDXID": "SPDXRef-199-screen-retriever-macos",
       "name": "screen_retriever_macos",
       "versionInfo": "0.2.0",
+      "supplier": "Organization: leanflutter",
       "downloadLocation": "https://github.com/leanflutter/screen_retriever/tree/ed1e52204d75b69330fb4b0e0b8d4d57e3c53833/packages/screen_retriever_macos",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
@@ -4318,6 +4512,71 @@
       "spdxElementId": "SPDXRef-DOCUMENT",
       "relationshipType": "DESCRIBES",
       "relatedSpdxElement": "SPDXRef-0-ocideck"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-185-highlight.css"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-186-EB-Garamond"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-187-EB-Garamond"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-188-Inter"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-189-Lora"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-190-Roboto"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-198-desktop-multi-window"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-199-screen-retriever-macos"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-191-dompurify"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-192-highlight.js"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-193-marked"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-194-mathjax"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-195-mermaid"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -4367,22 +4626,12 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-35-flutter"
-    },
-    {
-      "spdxElementId": "SPDXRef-0-ocideck",
-      "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-37-flutter-highlight"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-43-flutter-lints"
-    },
-    {
-      "spdxElementId": "SPDXRef-0-ocideck",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-44-flutter-localizations"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -4408,11 +4657,6 @@
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-56-flutter-svg"
-    },
-    {
-      "spdxElementId": "SPDXRef-0-ocideck",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-57-flutter-test"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -4542,12 +4786,3037 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-198-desktop-multi-window"
+      "relatedSpdxElement": "SPDXRef-196-dart"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-197-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-44-flutter-localizations"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-57-flutter-test"
+    },
+    {
+      "spdxElementId": "SPDXRef-1--fe-analyzer-shared",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-1--fe-analyzer-shared",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-137-source-span"
+    },
+    {
+      "spdxElementId": "SPDXRef-2-analyzer",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-1--fe-analyzer-shared"
+    },
+    {
+      "spdxElementId": "SPDXRef-2-analyzer",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-2-analyzer",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-15-convert"
+    },
+    {
+      "spdxElementId": "SPDXRef-2-analyzer",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-18-crypto"
+    },
+    {
+      "spdxElementId": "SPDXRef-2-analyzer",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-60-glob"
+    },
+    {
+      "spdxElementId": "SPDXRef-2-analyzer",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-2-analyzer",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-88-package-config"
+    },
+    {
+      "spdxElementId": "SPDXRef-2-analyzer",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-2-analyzer",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-107-pub-semver"
+    },
+    {
+      "spdxElementId": "SPDXRef-2-analyzer",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-137-source-span"
+    },
+    {
+      "spdxElementId": "SPDXRef-2-analyzer",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-170-watcher"
+    },
+    {
+      "spdxElementId": "SPDXRef-2-analyzer",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-184-yaml"
+    },
+    {
+      "spdxElementId": "SPDXRef-3-archive",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-3-archive",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-105-posix"
+    },
+    {
+      "spdxElementId": "SPDXRef-5-async",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-5-async",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-6-barcode",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-6-barcode",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-108-qr"
+    },
+    {
+      "spdxElementId": "SPDXRef-8-boolean-selector",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-137-source-span"
+    },
+    {
+      "spdxElementId": "SPDXRef-8-boolean-selector",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-141-string-scanner"
+    },
+    {
+      "spdxElementId": "SPDXRef-11-cli-config",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-4-args"
+    },
+    {
+      "spdxElementId": "SPDXRef-11-cli-config",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-184-yaml"
+    },
+    {
+      "spdxElementId": "SPDXRef-13-code-assets",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-13-code-assets",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-62-hooks"
+    },
+    {
+      "spdxElementId": "SPDXRef-15-convert",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-147-typed-data"
+    },
+    {
+      "spdxElementId": "SPDXRef-16-coverage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-4-args"
+    },
+    {
+      "spdxElementId": "SPDXRef-16-coverage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-11-cli-config"
+    },
+    {
+      "spdxElementId": "SPDXRef-16-coverage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-60-glob"
+    },
+    {
+      "spdxElementId": "SPDXRef-16-coverage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-77-logging"
+    },
+    {
+      "spdxElementId": "SPDXRef-16-coverage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-16-coverage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-88-package-config"
+    },
+    {
+      "spdxElementId": "SPDXRef-16-coverage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-16-coverage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-136-source-maps"
+    },
+    {
+      "spdxElementId": "SPDXRef-16-coverage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-138-stack-trace"
+    },
+    {
+      "spdxElementId": "SPDXRef-16-coverage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-167-vm-service"
+    },
+    {
+      "spdxElementId": "SPDXRef-16-coverage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-184-yaml"
+    },
+    {
+      "spdxElementId": "SPDXRef-17-cross-file",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-17-cross-file",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-18-crypto",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-147-typed-data"
+    },
+    {
+      "spdxElementId": "SPDXRef-19-csslib",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-137-source-span"
+    },
+    {
+      "spdxElementId": "SPDXRef-21-dart-quill-delta",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-21-dart-quill-delta",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-25-diff-match-patch"
+    },
+    {
+      "spdxElementId": "SPDXRef-21-dart-quill-delta",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-116-quiver"
+    },
+    {
+      "spdxElementId": "SPDXRef-22-dartcv4",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-28-ffi"
+    },
+    {
+      "spdxElementId": "SPDXRef-22-dartcv4",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-184-yaml"
+    },
+    {
+      "spdxElementId": "SPDXRef-23-dbus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-4-args"
+    },
+    {
+      "spdxElementId": "SPDXRef-23-dbus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-28-ffi"
+    },
+    {
+      "spdxElementId": "SPDXRef-23-dbus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-23-dbus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-183-xml"
+    },
+    {
+      "spdxElementId": "SPDXRef-24-desktop-drop",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-17-cross-file"
+    },
+    {
+      "spdxElementId": "SPDXRef-24-desktop-drop",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-148-universal-platform"
+    },
+    {
+      "spdxElementId": "SPDXRef-24-desktop-drop",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-24-desktop-drop",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-24-desktop-drop",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-58-flutter-web-plugins"
+    },
+    {
+      "spdxElementId": "SPDXRef-26-equatable",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-26-equatable",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-27-fake-async",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-12-clock"
+    },
+    {
+      "spdxElementId": "SPDXRef-27-fake-async",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-29-file",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-29-file",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-30-file-picker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-17-cross-file"
+    },
+    {
+      "spdxElementId": "SPDXRef-30-file-picker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-23-dbus"
+    },
+    {
+      "spdxElementId": "SPDXRef-30-file-picker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-28-ffi"
+    },
+    {
+      "spdxElementId": "SPDXRef-30-file-picker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-46-flutter-plugin-android-lifecycle"
+    },
+    {
+      "spdxElementId": "SPDXRef-30-file-picker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-30-file-picker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-30-file-picker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-30-file-picker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-180-win32"
+    },
+    {
+      "spdxElementId": "SPDXRef-30-file-picker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-30-file-picker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-58-flutter-web-plugins"
+    },
+    {
+      "spdxElementId": "SPDXRef-31-file-selector-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-17-cross-file"
+    },
+    {
+      "spdxElementId": "SPDXRef-31-file-selector-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-64-http"
+    },
+    {
+      "spdxElementId": "SPDXRef-31-file-selector-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-31-file-selector-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-32-file-selector-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-17-cross-file"
+    },
+    {
+      "spdxElementId": "SPDXRef-32-file-selector-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-31-file-selector-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-32-file-selector-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-34-fl-chart",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-26-equatable"
+    },
+    {
+      "spdxElementId": "SPDXRef-34-fl-chart",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-161-vector-math"
+    },
+    {
+      "spdxElementId": "SPDXRef-34-fl-chart",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-35-flutter",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-9-characters"
+    },
+    {
+      "spdxElementId": "SPDXRef-35-flutter",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-35-flutter",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-81-material-color-utilities"
+    },
+    {
+      "spdxElementId": "SPDXRef-35-flutter",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-35-flutter",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-161-vector-math"
+    },
+    {
+      "spdxElementId": "SPDXRef-35-flutter",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-134-sky-engine"
+    },
+    {
+      "spdxElementId": "SPDXRef-36-flutter-colorpicker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-37-flutter-highlight",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-61-highlight"
+    },
+    {
+      "spdxElementId": "SPDXRef-37-flutter-highlight",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-38-flutter-keyboard-visibility-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-40-flutter-keyboard-visibility-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-38-flutter-keyboard-visibility-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-39-flutter-keyboard-visibility-macos",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-40-flutter-keyboard-visibility-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-39-flutter-keyboard-visibility-macos",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-40-flutter-keyboard-visibility-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-40-flutter-keyboard-visibility-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-40-flutter-keyboard-visibility-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-41-flutter-keyboard-visibility-temp-fork",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-38-flutter-keyboard-visibility-linux"
+    },
+    {
+      "spdxElementId": "SPDXRef-41-flutter-keyboard-visibility-temp-fork",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-39-flutter-keyboard-visibility-macos"
+    },
+    {
+      "spdxElementId": "SPDXRef-41-flutter-keyboard-visibility-temp-fork",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-40-flutter-keyboard-visibility-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-41-flutter-keyboard-visibility-temp-fork",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-42-flutter-keyboard-visibility-windows"
+    },
+    {
+      "spdxElementId": "SPDXRef-41-flutter-keyboard-visibility-temp-fork",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-41-flutter-keyboard-visibility-temp-fork",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-41-flutter-keyboard-visibility-temp-fork",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-41-flutter-keyboard-visibility-temp-fork",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-58-flutter-web-plugins"
+    },
+    {
+      "spdxElementId": "SPDXRef-42-flutter-keyboard-visibility-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-40-flutter-keyboard-visibility-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-42-flutter-keyboard-visibility-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-43-flutter-lints",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-76-lints"
+    },
+    {
+      "spdxElementId": "SPDXRef-44-flutter-localizations",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-68-intl"
+    },
+    {
+      "spdxElementId": "SPDXRef-44-flutter-localizations",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-44-flutter-localizations",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-45-flutter-math-fork",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-45-flutter-math-fork",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-56-flutter-svg"
+    },
+    {
+      "spdxElementId": "SPDXRef-45-flutter-math-fork",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-45-flutter-math-fork",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-106-provider"
+    },
+    {
+      "spdxElementId": "SPDXRef-45-flutter-math-fork",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-146-tuple"
+    },
+    {
+      "spdxElementId": "SPDXRef-45-flutter-math-fork",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-46-flutter-plugin-android-lifecycle",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-10-charcode"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-21-dart-quill-delta"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-36-flutter-colorpicker"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-41-flutter-keyboard-visibility-temp-fork"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-48-flutter-quill-delta-from-html"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-63-html"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-68-intl"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-78-markdown"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-109-quill-native-bridge"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-116-quiver"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-149-url-launcher"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-47-flutter-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-44-flutter-localizations"
+    },
+    {
+      "spdxElementId": "SPDXRef-48-flutter-quill-delta-from-html",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-21-dart-quill-delta"
+    },
+    {
+      "spdxElementId": "SPDXRef-48-flutter-quill-delta-from-html",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-63-html"
+    },
+    {
+      "spdxElementId": "SPDXRef-49-flutter-riverpod",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-49-flutter-riverpod",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-49-flutter-riverpod",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-118-riverpod"
+    },
+    {
+      "spdxElementId": "SPDXRef-49-flutter-riverpod",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-139-state-notifier"
+    },
+    {
+      "spdxElementId": "SPDXRef-49-flutter-riverpod",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-49-flutter-riverpod",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-57-flutter-test"
+    },
+    {
+      "spdxElementId": "SPDXRef-50-flutter-secure-storage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-51-flutter-secure-storage-darwin"
+    },
+    {
+      "spdxElementId": "SPDXRef-50-flutter-secure-storage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-52-flutter-secure-storage-linux"
+    },
+    {
+      "spdxElementId": "SPDXRef-50-flutter-secure-storage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-53-flutter-secure-storage-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-50-flutter-secure-storage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-54-flutter-secure-storage-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-50-flutter-secure-storage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-55-flutter-secure-storage-windows"
+    },
+    {
+      "spdxElementId": "SPDXRef-50-flutter-secure-storage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-50-flutter-secure-storage",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-51-flutter-secure-storage-darwin",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-51-flutter-secure-storage-darwin",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-52-flutter-secure-storage-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-53-flutter-secure-storage-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-52-flutter-secure-storage-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-53-flutter-secure-storage-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-53-flutter-secure-storage-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-54-flutter-secure-storage-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-53-flutter-secure-storage-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-54-flutter-secure-storage-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-54-flutter-secure-storage-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-54-flutter-secure-storage-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-58-flutter-web-plugins"
+    },
+    {
+      "spdxElementId": "SPDXRef-55-flutter-secure-storage-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-28-ffi"
+    },
+    {
+      "spdxElementId": "SPDXRef-55-flutter-secure-storage-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-53-flutter-secure-storage-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-55-flutter-secure-storage-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-55-flutter-secure-storage-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-94-path-provider"
+    },
+    {
+      "spdxElementId": "SPDXRef-55-flutter-secure-storage-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-180-win32"
+    },
+    {
+      "spdxElementId": "SPDXRef-55-flutter-secure-storage-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-56-flutter-svg",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-64-http"
+    },
+    {
+      "spdxElementId": "SPDXRef-56-flutter-svg",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-158-vector-graphics"
+    },
+    {
+      "spdxElementId": "SPDXRef-56-flutter-svg",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-159-vector-graphics-codec"
+    },
+    {
+      "spdxElementId": "SPDXRef-56-flutter-svg",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-160-vector-graphics-compiler"
+    },
+    {
+      "spdxElementId": "SPDXRef-56-flutter-svg",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-57-flutter-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-12-clock"
+    },
+    {
+      "spdxElementId": "SPDXRef-57-flutter-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-57-flutter-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-27-fake-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-57-flutter-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-74-leak-tracker-flutter-testing"
+    },
+    {
+      "spdxElementId": "SPDXRef-57-flutter-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-80-matcher"
+    },
+    {
+      "spdxElementId": "SPDXRef-57-flutter-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-57-flutter-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-57-flutter-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-138-stack-trace"
+    },
+    {
+      "spdxElementId": "SPDXRef-57-flutter-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-140-stream-channel"
+    },
+    {
+      "spdxElementId": "SPDXRef-57-flutter-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-144-test-api"
+    },
+    {
+      "spdxElementId": "SPDXRef-57-flutter-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-161-vector-math"
+    },
+    {
+      "spdxElementId": "SPDXRef-57-flutter-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-58-flutter-web-plugins",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-59-frontend-server-client",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-5-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-59-frontend-server-client",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-60-glob",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-5-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-60-glob",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-60-glob",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-29-file"
+    },
+    {
+      "spdxElementId": "SPDXRef-60-glob",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-60-glob",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-141-string-scanner"
+    },
+    {
+      "spdxElementId": "SPDXRef-61-highlight",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-62-hooks",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-62-hooks",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-18-crypto"
+    },
+    {
+      "spdxElementId": "SPDXRef-62-hooks",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-77-logging"
+    },
+    {
+      "spdxElementId": "SPDXRef-62-hooks",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-62-hooks",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-107-pub-semver"
+    },
+    {
+      "spdxElementId": "SPDXRef-62-hooks",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-117-record-use"
+    },
+    {
+      "spdxElementId": "SPDXRef-62-hooks",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-184-yaml"
+    },
+    {
+      "spdxElementId": "SPDXRef-63-html",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-19-csslib"
+    },
+    {
+      "spdxElementId": "SPDXRef-63-html",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-137-source-span"
+    },
+    {
+      "spdxElementId": "SPDXRef-64-http",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-5-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-64-http",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-66-http-parser"
+    },
+    {
+      "spdxElementId": "SPDXRef-64-http",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-64-http",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-65-http-multi-server",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-5-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-66-http-parser",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-66-http-parser",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-137-source-span"
+    },
+    {
+      "spdxElementId": "SPDXRef-66-http-parser",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-141-string-scanner"
+    },
+    {
+      "spdxElementId": "SPDXRef-66-http-parser",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-147-typed-data"
+    },
+    {
+      "spdxElementId": "SPDXRef-67-image",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-3-archive"
+    },
+    {
+      "spdxElementId": "SPDXRef-67-image",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-183-xml"
+    },
+    {
+      "spdxElementId": "SPDXRef-68-intl",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-12-clock"
+    },
+    {
+      "spdxElementId": "SPDXRef-68-intl",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-68-intl",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-69-io",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-69-io",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-69-io",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-141-string-scanner"
+    },
+    {
+      "spdxElementId": "SPDXRef-70-jni",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-4-args"
+    },
+    {
+      "spdxElementId": "SPDXRef-70-jni",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-70-jni",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-28-ffi"
+    },
+    {
+      "spdxElementId": "SPDXRef-70-jni",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-70-jni",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-88-package-config"
+    },
+    {
+      "spdxElementId": "SPDXRef-70-jni",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-70-jni",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-71-jni-flutter",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-70-jni"
+    },
+    {
+      "spdxElementId": "SPDXRef-71-jni-flutter",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-72-json-annotation",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-73-leak-tracker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-12-clock"
+    },
+    {
+      "spdxElementId": "SPDXRef-73-leak-tracker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-73-leak-tracker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-73-leak-tracker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-73-leak-tracker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-167-vm-service"
+    },
+    {
+      "spdxElementId": "SPDXRef-74-leak-tracker-flutter-testing",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-73-leak-tracker"
+    },
+    {
+      "spdxElementId": "SPDXRef-74-leak-tracker-flutter-testing",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-75-leak-tracker-testing"
+    },
+    {
+      "spdxElementId": "SPDXRef-74-leak-tracker-flutter-testing",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-80-matcher"
+    },
+    {
+      "spdxElementId": "SPDXRef-74-leak-tracker-flutter-testing",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-74-leak-tracker-flutter-testing",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-75-leak-tracker-testing",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-73-leak-tracker"
+    },
+    {
+      "spdxElementId": "SPDXRef-75-leak-tracker-testing",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-80-matcher"
+    },
+    {
+      "spdxElementId": "SPDXRef-75-leak-tracker-testing",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-78-markdown",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-4-args"
+    },
+    {
+      "spdxElementId": "SPDXRef-78-markdown",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-79-markdown-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-10-charcode"
+    },
+    {
+      "spdxElementId": "SPDXRef-79-markdown-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-79-markdown-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-47-flutter-quill"
+    },
+    {
+      "spdxElementId": "SPDXRef-79-markdown-quill",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-78-markdown"
+    },
+    {
+      "spdxElementId": "SPDXRef-80-matcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-5-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-80-matcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-80-matcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-138-stack-trace"
+    },
+    {
+      "spdxElementId": "SPDXRef-80-matcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-142-term-glyph"
+    },
+    {
+      "spdxElementId": "SPDXRef-80-matcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-144-test-api"
+    },
+    {
+      "spdxElementId": "SPDXRef-81-material-color-utilities",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-84-nested",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-86-objective-c",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-13-code-assets"
+    },
+    {
+      "spdxElementId": "SPDXRef-86-objective-c",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-86-objective-c",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-28-ffi"
+    },
+    {
+      "spdxElementId": "SPDXRef-86-objective-c",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-62-hooks"
+    },
+    {
+      "spdxElementId": "SPDXRef-86-objective-c",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-77-logging"
+    },
+    {
+      "spdxElementId": "SPDXRef-86-objective-c",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-86-objective-c",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-107-pub-semver"
+    },
+    {
+      "spdxElementId": "SPDXRef-87-opencv-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-22-dartcv4"
+    },
+    {
+      "spdxElementId": "SPDXRef-87-opencv-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-88-package-config",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-89-package-info-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-12-clock"
+    },
+    {
+      "spdxElementId": "SPDXRef-89-package-info-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-28-ffi"
+    },
+    {
+      "spdxElementId": "SPDXRef-89-package-info-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-64-http"
+    },
+    {
+      "spdxElementId": "SPDXRef-89-package-info-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-89-package-info-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-90-package-info-plus-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-89-package-info-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-89-package-info-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-89-package-info-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-180-win32"
+    },
+    {
+      "spdxElementId": "SPDXRef-89-package-info-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-89-package-info-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-58-flutter-web-plugins"
+    },
+    {
+      "spdxElementId": "SPDXRef-90-package-info-plus-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-90-package-info-plus-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-90-package-info-plus-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-91-pasteboard",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-91-pasteboard",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-157-uuid"
+    },
+    {
+      "spdxElementId": "SPDXRef-91-pasteboard",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-91-pasteboard",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-91-pasteboard",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-58-flutter-web-plugins"
+    },
+    {
+      "spdxElementId": "SPDXRef-93-path-parsing",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-93-path-parsing",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-161-vector-math"
+    },
+    {
+      "spdxElementId": "SPDXRef-94-path-provider",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-95-path-provider-android"
+    },
+    {
+      "spdxElementId": "SPDXRef-94-path-provider",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-96-path-provider-foundation"
+    },
+    {
+      "spdxElementId": "SPDXRef-94-path-provider",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-97-path-provider-linux"
+    },
+    {
+      "spdxElementId": "SPDXRef-94-path-provider",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-98-path-provider-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-94-path-provider",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-99-path-provider-windows"
+    },
+    {
+      "spdxElementId": "SPDXRef-94-path-provider",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-95-path-provider-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-70-jni"
+    },
+    {
+      "spdxElementId": "SPDXRef-95-path-provider-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-71-jni-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-95-path-provider-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-98-path-provider-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-95-path-provider-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-96-path-provider-foundation",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-28-ffi"
+    },
+    {
+      "spdxElementId": "SPDXRef-96-path-provider-foundation",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-86-objective-c"
+    },
+    {
+      "spdxElementId": "SPDXRef-96-path-provider-foundation",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-98-path-provider-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-96-path-provider-foundation",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-97-path-provider-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-28-ffi"
+    },
+    {
+      "spdxElementId": "SPDXRef-97-path-provider-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-97-path-provider-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-98-path-provider-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-97-path-provider-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-182-xdg-directories"
+    },
+    {
+      "spdxElementId": "SPDXRef-97-path-provider-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-98-path-provider-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-102-platform"
+    },
+    {
+      "spdxElementId": "SPDXRef-98-path-provider-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-98-path-provider-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-99-path-provider-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-28-ffi"
+    },
+    {
+      "spdxElementId": "SPDXRef-99-path-provider-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-99-path-provider-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-98-path-provider-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-99-path-provider-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-100-pdf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-3-archive"
+    },
+    {
+      "spdxElementId": "SPDXRef-100-pdf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-6-barcode"
+    },
+    {
+      "spdxElementId": "SPDXRef-100-pdf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-7-bidi"
+    },
+    {
+      "spdxElementId": "SPDXRef-100-pdf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-18-crypto"
+    },
+    {
+      "spdxElementId": "SPDXRef-100-pdf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-67-image"
+    },
+    {
+      "spdxElementId": "SPDXRef-100-pdf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-100-pdf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-93-path-parsing"
+    },
+    {
+      "spdxElementId": "SPDXRef-100-pdf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-161-vector-math"
+    },
+    {
+      "spdxElementId": "SPDXRef-100-pdf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-183-xml"
+    },
+    {
+      "spdxElementId": "SPDXRef-101-petitparser",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-101-petitparser",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-103-plugin-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-104-pool",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-5-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-104-pool",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-138-stack-trace"
+    },
+    {
+      "spdxElementId": "SPDXRef-105-posix",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-28-ffi"
+    },
+    {
+      "spdxElementId": "SPDXRef-105-posix",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-105-posix",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-106-provider",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-106-provider",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-84-nested"
+    },
+    {
+      "spdxElementId": "SPDXRef-106-provider",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-107-pub-semver",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-108-qr",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-109-quill-native-bridge",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-110-quill-native-bridge-android"
+    },
+    {
+      "spdxElementId": "SPDXRef-109-quill-native-bridge",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-111-quill-native-bridge-ios"
+    },
+    {
+      "spdxElementId": "SPDXRef-109-quill-native-bridge",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-112-quill-native-bridge-macos"
+    },
+    {
+      "spdxElementId": "SPDXRef-109-quill-native-bridge",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-113-quill-native-bridge-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-109-quill-native-bridge",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-114-quill-native-bridge-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-109-quill-native-bridge",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-115-quill-native-bridge-windows"
+    },
+    {
+      "spdxElementId": "SPDXRef-109-quill-native-bridge",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-110-quill-native-bridge-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-113-quill-native-bridge-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-110-quill-native-bridge-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-111-quill-native-bridge-ios",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-113-quill-native-bridge-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-111-quill-native-bridge-ios",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-112-quill-native-bridge-macos",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-113-quill-native-bridge-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-112-quill-native-bridge-macos",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-113-quill-native-bridge-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-113-quill-native-bridge-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-114-quill-native-bridge-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-113-quill-native-bridge-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-114-quill-native-bridge-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-114-quill-native-bridge-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-114-quill-native-bridge-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-58-flutter-web-plugins"
+    },
+    {
+      "spdxElementId": "SPDXRef-115-quill-native-bridge-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-28-ffi"
+    },
+    {
+      "spdxElementId": "SPDXRef-115-quill-native-bridge-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-31-file-selector-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-115-quill-native-bridge-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-32-file-selector-windows"
+    },
+    {
+      "spdxElementId": "SPDXRef-115-quill-native-bridge-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-113-quill-native-bridge-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-115-quill-native-bridge-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-180-win32"
+    },
+    {
+      "spdxElementId": "SPDXRef-115-quill-native-bridge-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-116-quiver",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-80-matcher"
+    },
+    {
+      "spdxElementId": "SPDXRef-117-record-use",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-117-record-use",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-117-record-use",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-107-pub-semver"
+    },
+    {
+      "spdxElementId": "SPDXRef-118-riverpod",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-5-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-118-riverpod",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-12-clock"
+    },
+    {
+      "spdxElementId": "SPDXRef-118-riverpod",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-118-riverpod",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-118-riverpod",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-138-stack-trace"
+    },
+    {
+      "spdxElementId": "SPDXRef-118-riverpod",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-139-state-notifier"
+    },
+    {
+      "spdxElementId": "SPDXRef-118-riverpod",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-143-test"
+    },
+    {
+      "spdxElementId": "SPDXRef-118-riverpod",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-157-uuid"
+    },
+    {
+      "spdxElementId": "SPDXRef-119-screen-retriever",
+      "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-199-screen-retriever-macos"
+    },
+    {
+      "spdxElementId": "SPDXRef-119-screen-retriever",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-120-screen-retriever-linux"
+    },
+    {
+      "spdxElementId": "SPDXRef-119-screen-retriever",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-121-screen-retriever-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-119-screen-retriever",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-122-screen-retriever-windows"
+    },
+    {
+      "spdxElementId": "SPDXRef-119-screen-retriever",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-120-screen-retriever-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-121-screen-retriever-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-120-screen-retriever-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-121-screen-retriever-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-72-json-annotation"
+    },
+    {
+      "spdxElementId": "SPDXRef-121-screen-retriever-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-121-screen-retriever-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-122-screen-retriever-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-121-screen-retriever-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-122-screen-retriever-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-123-shared-preferences",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-124-shared-preferences-android"
+    },
+    {
+      "spdxElementId": "SPDXRef-123-shared-preferences",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-125-shared-preferences-foundation"
+    },
+    {
+      "spdxElementId": "SPDXRef-123-shared-preferences",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-126-shared-preferences-linux"
+    },
+    {
+      "spdxElementId": "SPDXRef-123-shared-preferences",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-127-shared-preferences-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-123-shared-preferences",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-128-shared-preferences-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-123-shared-preferences",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-129-shared-preferences-windows"
+    },
+    {
+      "spdxElementId": "SPDXRef-123-shared-preferences",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-124-shared-preferences-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-124-shared-preferences-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-127-shared-preferences-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-124-shared-preferences-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-125-shared-preferences-foundation",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-127-shared-preferences-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-125-shared-preferences-foundation",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-126-shared-preferences-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-29-file"
+    },
+    {
+      "spdxElementId": "SPDXRef-126-shared-preferences-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-126-shared-preferences-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-97-path-provider-linux"
+    },
+    {
+      "spdxElementId": "SPDXRef-126-shared-preferences-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-98-path-provider-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-126-shared-preferences-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-127-shared-preferences-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-126-shared-preferences-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-127-shared-preferences-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-127-shared-preferences-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-128-shared-preferences-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-127-shared-preferences-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-128-shared-preferences-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-128-shared-preferences-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-128-shared-preferences-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-58-flutter-web-plugins"
+    },
+    {
+      "spdxElementId": "SPDXRef-129-shared-preferences-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-29-file"
+    },
+    {
+      "spdxElementId": "SPDXRef-129-shared-preferences-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-129-shared-preferences-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-98-path-provider-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-129-shared-preferences-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-99-path-provider-windows"
+    },
+    {
+      "spdxElementId": "SPDXRef-129-shared-preferences-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-127-shared-preferences-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-129-shared-preferences-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-130-shelf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-5-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-130-shelf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-130-shelf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-66-http-parser"
+    },
+    {
+      "spdxElementId": "SPDXRef-130-shelf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-130-shelf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-138-stack-trace"
+    },
+    {
+      "spdxElementId": "SPDXRef-130-shelf",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-140-stream-channel"
+    },
+    {
+      "spdxElementId": "SPDXRef-131-shelf-packages-handler",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-131-shelf-packages-handler",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-130-shelf"
+    },
+    {
+      "spdxElementId": "SPDXRef-131-shelf-packages-handler",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-132-shelf-static"
+    },
+    {
+      "spdxElementId": "SPDXRef-132-shelf-static",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-15-convert"
+    },
+    {
+      "spdxElementId": "SPDXRef-132-shelf-static",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-66-http-parser"
+    },
+    {
+      "spdxElementId": "SPDXRef-132-shelf-static",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-83-mime"
+    },
+    {
+      "spdxElementId": "SPDXRef-132-shelf-static",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-132-shelf-static",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-130-shelf"
+    },
+    {
+      "spdxElementId": "SPDXRef-133-shelf-web-socket",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-130-shelf"
+    },
+    {
+      "spdxElementId": "SPDXRef-133-shelf-web-socket",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-140-stream-channel"
+    },
+    {
+      "spdxElementId": "SPDXRef-133-shelf-web-socket",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-173-web-socket-channel"
+    },
+    {
+      "spdxElementId": "SPDXRef-135-source-map-stack-trace",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-135-source-map-stack-trace",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-136-source-maps"
+    },
+    {
+      "spdxElementId": "SPDXRef-135-source-map-stack-trace",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-138-stack-trace"
+    },
+    {
+      "spdxElementId": "SPDXRef-136-source-maps",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-137-source-span"
+    },
+    {
+      "spdxElementId": "SPDXRef-137-source-span",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-137-source-span",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-137-source-span",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-142-term-glyph"
+    },
+    {
+      "spdxElementId": "SPDXRef-138-stack-trace",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-139-state-notifier",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-140-stream-channel",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-5-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-141-string-scanner",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-137-source-span"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-2-analyzer"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-5-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-8-boolean-selector"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-16-coverage"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-65-http-multi-server"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-69-io"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-80-matcher"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-85-node-preamble"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-88-package-config"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-104-pool"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-130-shelf"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-131-shelf-packages-handler"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-132-shelf-static"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-133-shelf-web-socket"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-137-source-span"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-138-stack-trace"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-140-stream-channel"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-144-test-api"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-145-test-core"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-147-typed-data"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-173-web-socket-channel"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-174-webkit-inspection-protocol"
+    },
+    {
+      "spdxElementId": "SPDXRef-143-test",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-184-yaml"
+    },
+    {
+      "spdxElementId": "SPDXRef-144-test-api",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-5-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-144-test-api",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-8-boolean-selector"
+    },
+    {
+      "spdxElementId": "SPDXRef-144-test-api",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-144-test-api",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-144-test-api",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-137-source-span"
+    },
+    {
+      "spdxElementId": "SPDXRef-144-test-api",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-138-stack-trace"
+    },
+    {
+      "spdxElementId": "SPDXRef-144-test-api",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-140-stream-channel"
+    },
+    {
+      "spdxElementId": "SPDXRef-144-test-api",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-141-string-scanner"
+    },
+    {
+      "spdxElementId": "SPDXRef-144-test-api",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-142-term-glyph"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-2-analyzer"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-4-args"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-5-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-8-boolean-selector"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-16-coverage"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-59-frontend-server-client"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-60-glob"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-69-io"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-88-package-config"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-104-pool"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-135-source-map-stack-trace"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-136-source-maps"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-137-source-span"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-138-stack-trace"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-140-stream-channel"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-144-test-api"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-167-vm-service"
+    },
+    {
+      "spdxElementId": "SPDXRef-145-test-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-184-yaml"
+    },
+    {
+      "spdxElementId": "SPDXRef-147-typed-data",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-149-url-launcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-150-url-launcher-android"
+    },
+    {
+      "spdxElementId": "SPDXRef-149-url-launcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-151-url-launcher-ios"
+    },
+    {
+      "spdxElementId": "SPDXRef-149-url-launcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-152-url-launcher-linux"
+    },
+    {
+      "spdxElementId": "SPDXRef-149-url-launcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-153-url-launcher-macos"
+    },
+    {
+      "spdxElementId": "SPDXRef-149-url-launcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-154-url-launcher-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-149-url-launcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-155-url-launcher-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-149-url-launcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-156-url-launcher-windows"
+    },
+    {
+      "spdxElementId": "SPDXRef-149-url-launcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-150-url-launcher-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-150-url-launcher-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-154-url-launcher-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-150-url-launcher-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-151-url-launcher-ios",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-154-url-launcher-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-151-url-launcher-ios",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-152-url-launcher-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-154-url-launcher-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-152-url-launcher-linux",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-153-url-launcher-macos",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-154-url-launcher-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-153-url-launcher-macos",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-154-url-launcher-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-154-url-launcher-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-155-url-launcher-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-154-url-launcher-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-155-url-launcher-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-155-url-launcher-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-155-url-launcher-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-58-flutter-web-plugins"
+    },
+    {
+      "spdxElementId": "SPDXRef-156-url-launcher-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-154-url-launcher-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-156-url-launcher-windows",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-157-uuid",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-18-crypto"
+    },
+    {
+      "spdxElementId": "SPDXRef-157-uuid",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-33-fixnum"
+    },
+    {
+      "spdxElementId": "SPDXRef-158-vector-graphics",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-64-http"
+    },
+    {
+      "spdxElementId": "SPDXRef-158-vector-graphics",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-159-vector-graphics-codec"
+    },
+    {
+      "spdxElementId": "SPDXRef-158-vector-graphics",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-160-vector-graphics-compiler",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-4-args"
+    },
+    {
+      "spdxElementId": "SPDXRef-160-vector-graphics-compiler",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-160-vector-graphics-compiler",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-160-vector-graphics-compiler",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-93-path-parsing"
+    },
+    {
+      "spdxElementId": "SPDXRef-160-vector-graphics-compiler",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-159-vector-graphics-codec"
+    },
+    {
+      "spdxElementId": "SPDXRef-160-vector-graphics-compiler",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-183-xml"
+    },
+    {
+      "spdxElementId": "SPDXRef-162-video-player",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-162-video-player",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-63-html"
+    },
+    {
+      "spdxElementId": "SPDXRef-162-video-player",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-163-video-player-android"
+    },
+    {
+      "spdxElementId": "SPDXRef-162-video-player",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-164-video-player-avfoundation"
+    },
+    {
+      "spdxElementId": "SPDXRef-162-video-player",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-165-video-player-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-162-video-player",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-166-video-player-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-162-video-player",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-163-video-player-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-163-video-player-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-165-video-player-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-163-video-player-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-164-video-player-avfoundation",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-164-video-player-avfoundation",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-165-video-player-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-164-video-player-avfoundation",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-165-video-player-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-165-video-player-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-166-video-player-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-165-video-player-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-166-video-player-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-166-video-player-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-166-video-player-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-58-flutter-web-plugins"
+    },
+    {
+      "spdxElementId": "SPDXRef-168-wakelock-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-23-dbus"
+    },
+    {
+      "spdxElementId": "SPDXRef-168-wakelock-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-168-wakelock-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-89-package-info-plus"
+    },
+    {
+      "spdxElementId": "SPDXRef-168-wakelock-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-169-wakelock-plus-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-168-wakelock-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-168-wakelock-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-180-win32"
+    },
+    {
+      "spdxElementId": "SPDXRef-168-wakelock-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-168-wakelock-plus",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-58-flutter-web-plugins"
+    },
+    {
+      "spdxElementId": "SPDXRef-169-wakelock-plus-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-169-wakelock-plus-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-169-wakelock-plus-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-170-watcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-5-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-170-watcher",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-172-web-socket",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-173-web-socket-channel",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-5-async"
+    },
+    {
+      "spdxElementId": "SPDXRef-173-web-socket-channel",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-18-crypto"
+    },
+    {
+      "spdxElementId": "SPDXRef-173-web-socket-channel",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-140-stream-channel"
+    },
+    {
+      "spdxElementId": "SPDXRef-173-web-socket-channel",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-173-web-socket-channel",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-172-web-socket"
+    },
+    {
+      "spdxElementId": "SPDXRef-174-webkit-inspection-protocol",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-77-logging"
+    },
+    {
+      "spdxElementId": "SPDXRef-175-webview-flutter",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-176-webview-flutter-android"
+    },
+    {
+      "spdxElementId": "SPDXRef-175-webview-flutter",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-177-webview-flutter-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-175-webview-flutter",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-179-webview-flutter-wkwebview"
+    },
+    {
+      "spdxElementId": "SPDXRef-175-webview-flutter",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-176-webview-flutter-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-176-webview-flutter-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-177-webview-flutter-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-176-webview-flutter-android",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-177-webview-flutter-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-177-webview-flutter-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-103-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-177-webview-flutter-platform-interface",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-178-webview-flutter-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-171-web"
+    },
+    {
+      "spdxElementId": "SPDXRef-178-webview-flutter-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-177-webview-flutter-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-178-webview-flutter-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-178-webview-flutter-web",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-58-flutter-web-plugins"
+    },
+    {
+      "spdxElementId": "SPDXRef-179-webview-flutter-wkwebview",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-179-webview-flutter-wkwebview",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-179-webview-flutter-wkwebview",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-177-webview-flutter-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-179-webview-flutter-wkwebview",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-180-win32",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-28-ffi"
+    },
+    {
+      "spdxElementId": "SPDXRef-181-window-manager",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-181-window-manager",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-119-screen-retriever"
+    },
+    {
+      "spdxElementId": "SPDXRef-181-window-manager",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-182-xdg-directories",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-182-xdg-directories",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-92-path"
+    },
+    {
+      "spdxElementId": "SPDXRef-183-xml",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-183-xml",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-82-meta"
+    },
+    {
+      "spdxElementId": "SPDXRef-183-xml",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-101-petitparser"
+    },
+    {
+      "spdxElementId": "SPDXRef-184-yaml",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-14-collection"
+    },
+    {
+      "spdxElementId": "SPDXRef-184-yaml",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-137-source-span"
+    },
+    {
+      "spdxElementId": "SPDXRef-184-yaml",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-141-string-scanner"
+    },
+    {
+      "spdxElementId": "SPDXRef-198-desktop-multi-window",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
+    },
+    {
+      "spdxElementId": "SPDXRef-199-screen-retriever-macos",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-121-screen-retriever-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-199-screen-retriever-macos",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-35-flutter"
     }
   ]
 }

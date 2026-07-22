@@ -17,8 +17,8 @@ Two industry-standard formats are produced from one generator:
 | [`sbom/ocideck.sbom.md`](../sbom/ocideck.sbom.md) | **Markdown** | human-readable view |
 
 The Markdown file is a scan-friendly rendering of the same inventory — a licence
-summary plus a grouped table of every component with its version and licence —
-for anyone browsing the repository. The two JSON files are authoritative and
+summary plus a grouped table of every component with its version, licence and
+supplier — for anyone browsing the repository. The two JSON files are authoritative and
 carry the SHA-256 hashes and purls; all three are generated together and kept in
 sync by the same gate.
 
@@ -54,11 +54,61 @@ disagree with what is actually built (see [`tool/sbom_build.dart`](../tool/sbom_
 
 | Group | Source of truth | Per-component data |
 | --- | --- | --- |
-| **Dart/Flutter packages** (direct + transitive) | `pubspec.lock` | version, `pkg:pub` purl, archive SHA-256, hosted URL, dependency scope, licence |
+| **Dart/Flutter packages** (direct + transitive) | `pubspec.lock` + each package's own `pubspec.yaml` | version, `pkg:pub` purl, archive SHA-256, hosted URL, dependency scope, licence, supplier, **its own dependencies** |
 | **Vendored JS/CSS export bundles** | `assets/web_export/MANIFEST.json` | version, `pkg:npm` purl, SHA-256, source URL, licence |
-| **Vendored plugin forks** | `pubspec.lock` (`third_party/`) | version, upstream VCS URL **pinned to the exact commit**, upstream revision, SHA-256 **tree hash** of the vendored directory, licence |
-| **Bundled fonts** | `pubspec.yaml` (`flutter.fonts`) | file SHA-256, licence (OFL-1.1) |
-| **Build SDKs** | `.tool-versions`, `pubspec.yaml` | Flutter version, Dart SDK constraint |
+| **Vendored plugin forks** | `pubspec.lock` (`third_party/`) | version, upstream VCS URL **pinned to the exact commit**, upstream revision, SHA-256 **tree hash** of the vendored directory, licence, supplier |
+| **Bundled fonts** | `pubspec.yaml` (`flutter.fonts`) + the OFL texts in `assets/fonts/` | file SHA-256, licence (OFL-1.1), supplier |
+| **Build SDKs** | `.tool-versions`, `pubspec.yaml` | Flutter version, Dart SDK constraint, supplier |
+
+### The dependency graph
+
+The document carries the **whole** graph, not just the application's own row:
+every package declares the dependencies *it* pulls in, read from its own
+`pubspec.yaml` in the resolved package root and narrowed to the versions pub
+actually resolved. That is one CycloneDX `dependencies` entry per component and
+the matching SPDX `DEPENDS_ON` relations.
+
+> Until 2026-07-22 the graph was one layer deep: a single entry for the root, 46
+> edges over 200 components, and **153 components in no relation at all**.
+> `pubspec.lock` is a flat list — it says what is in the build, not who pulled it
+> in — so a graph built from it alone cannot answer the question that gets asked
+> the morning a CVE lands on a transitive parser: *what reaches this, and can I
+> drop it?* It is now 661 edges and nothing is unreferenced;
+> `test/sbom_test.dart` fails if a component appears in no relation.
+
+A component whose own manifest we cannot read gets **no `dependencies` entry at
+all** rather than an empty one. CycloneDX reads an absent entry as "unknown" and
+an empty `dependsOn` as "checked, none" — writing the second where we mean the
+first would be the same silent over-claim as a one-layer graph, only quieter.
+
+### Supplier (NTIA minimum element)
+
+Each component names the entity that supplies it, **derived and never invented**:
+
+- a package's declared `repository:` (else `homepage:`) on a forge yields the
+  account it is published under — `https://github.com/dart-lang/tools` →
+  `dart-lang`; any other URL yields its host — `https://flutter.dev` →
+  `flutter.dev`;
+- a package with `source: sdk` is supplied by the SDK it ships inside, which is
+  what `pubspec.lock` states about it (`flutter_test`, `sky_engine`, … →
+  `flutter`);
+- a vendored fork takes its upstream project's account;
+- a bundled font takes the copyright holder its OFL text names, plus that text's
+  own project URL;
+- OciDeck itself is `Stichting LibreKAT`.
+
+A **registry or CDN URL yields nothing**: `cdn.jsdelivr.net` delivers DOMPurify,
+it does not supply it, and naming it would be worse than an empty field. That is
+the one remaining gap — the six vendored JS/CSS bundles carry no supplier,
+because the only URL we hold for them locally is the CDN they were fetched from.
+Everything else (194 of 200 components) names one. There is no table of "who
+really maintains what" in the generator; such a table ages badly and reads as a
+fact once it is in an SBOM.
+
+SPDX carries the name (`Organization: dart-lang`); CycloneDX carries the name
+**and** the URL it was derived from, so the derivation is checkable. Whether a
+forge account belongs to a company or to one person is not determinable offline,
+so all of them are emitted as `Organization:`.
 
 Licences are classified with the exact same logic as the compliance gate
 (`tool/license_detect.dart`, shared with `tool/check_licenses.dart`), so the
@@ -124,8 +174,8 @@ The SBOM travels with the product, not just the repository:
 
 | CRA requirement (Annex I, Part II) | Where OciDeck satisfies it |
 | --- | --- |
-| §1 — SBOM in a commonly used, machine-readable format, covering ≥ top-level deps | `sbom/ocideck.cdx.json` (CycloneDX 1.6) + `sbom/ocideck.spdx.json` (SPDX 2.3), covering **all** components — see above |
-| §1 — identify and document components | Generated from `pubspec.lock` / `MANIFEST.json` / `pubspec.yaml`; completeness enforced by `test/sbom_test.dart` |
+| §1 — SBOM in a commonly used, machine-readable format, covering ≥ top-level deps | `sbom/ocideck.cdx.json` (CycloneDX 1.6) + `sbom/ocideck.spdx.json` (SPDX 2.3), covering **all** components **and the relations between them** — see above |
+| §1 — identify and document components | Generated from `pubspec.lock` / `MANIFEST.json` / `pubspec.yaml`; completeness, graph reachability and supplier presence enforced by `test/sbom_test.dart` |
 | §2 — address and remediate vulnerabilities without delay | `make deps-check` queries [OSV](https://osv.dev) for the vendored JS bundles; the CycloneDX SBOM feeds external scanners (Dependency-Track / osv-scanner) for the Dart/Flutter graph |
 | Keeping the documentation up to date | `make sbom-verify` staleness gate in the test suite (`make check`); reproducible resolution via the committed `pubspec.lock` (`--enforce-lockfile` is declared in the CI workflow, which is not currently running) |
 

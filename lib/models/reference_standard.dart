@@ -16,16 +16,6 @@ enum UpstreamProbe {
   /// vergelijkt de release-tag met [ReferenceStandard.bundledVersion].
   githubReleases,
 
-  /// Idem, maar vergelijkt de **publicatiedatum** van de laatste release met een
-  /// gebundelde versie die zelf een datum is (`JJJJ-MM-DD`).
-  ///
-  /// Bestaat omdat niet elke bron versienummers voert: de MIAUW-methodologie
-  /// tagt releases met namen ("Otis"), en die naast een datum leggen levert
-  /// eeuwig "verouderd" op. Een poort die altijd afgaat, leert mensen wegkijken
-  /// — dan is hij schadelijker dan geen poort. Datums zijn bovendien wél
-  /// ordenbaar, dus hier kan "nieuwer dan wat wij hebben" echt worden vastgesteld.
-  githubReleaseDate,
-
   /// De `JDBOR`-datum in de kop van een Orphanet-productbestand.
   ///
   /// Orphanet voert geen versienummers maar datumt elke uitgave in de wortel van
@@ -34,12 +24,20 @@ enum UpstreamProbe {
   /// eerste regel.
   orphanetDate,
 
-  /// De datum van de laatste commit op de standaardbranch.
+  /// De datum van de laatste commit op de standaardbranch, eventueel versmald
+  /// tot het bestand in [ReferenceStandard.probePath].
   ///
   /// Voor bronnen die géén releases en géén tags voeren — MASWE is er zo een.
-  /// Daar is "welke versie" geen zinnige vraag en is de dag van overname het
-  /// enige eerlijke antwoord. Een verzonnen versienummer zou hier een precisie
-  /// suggereren die de bron niet biedt.
+  /// Daar is "welke versie" geen zinnige vraag en is de commitdatum van de bron
+  /// het enige eerlijke antwoord. Een verzonnen versienummer zou hier een
+  /// precisie suggereren die de bron niet biedt.
+  ///
+  /// **De gebundelde versie is dan de datum die de bron draagt, niet de dag
+  /// waarop wij hem overnamen.** Dat verschil klinkt pietluttig en was het
+  /// niet: MIAUW stond op zijn overnamedatum (2026-07-16) terwijl de bron
+  /// 2024-12-06 meldde, en omdat een overnamedatum per definitie ná de
+  /// bronwijziging ligt, kon die poort nooit rood worden. Twee klokken naast
+  /// elkaar leggen is geen vergelijking.
   githubCommitDate,
 
   /// MITRE's CWE REST API (`cwe-api.mitre.org`), die naast de versie ook de
@@ -92,8 +90,19 @@ class ReferenceStandard {
 
   final UpstreamProbe probe;
 
-  /// Waar [probe] naar kijkt, bv. `OWASP/wstg`. Leeg bij [UpstreamProbe.manual].
+  /// Waar [probe] naar kijkt, bv. `OWASP/wstg`.
   final String probeTarget;
+
+  /// Het bestand *binnen* [probeTarget] waar het gebundelde materiaal uit komt,
+  /// of leeg wanneer de hele bron het signaal is.
+  ///
+  /// Bestaat omdat een repo méér bevat dan wat wij overnemen. MIAUW's schema
+  /// komt uit één werkboek in de methodologie-repo, en die repo krijgt ook
+  /// commits die het schema niet raken. Repobreed kijken zou rood worden om een
+  /// README-typefout; naar de releases kijken zou groen blijven bij een
+  /// werkboekwijziging zonder release. Allebei leren ze mensen wegkijken — en
+  /// dan is de poort weg terwijl hij er nog staat.
+  final String probePath;
 
   /// Of een nieuwere upstreamversie de **poort** mag laten falen.
   ///
@@ -119,6 +128,7 @@ class ReferenceStandard {
     required this.licence,
     required this.probe,
     this.probeTarget = '',
+    this.probePath = '',
     this.advisory = false,
   });
 
