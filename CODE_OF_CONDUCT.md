@@ -145,6 +145,23 @@ reported to the community leaders responsible for enforcement by e-mail to
 investigated promptly and fairly. Community leaders are obligated to respect the
 privacy and security of the reporter of any incident.
 
+**One mailbox, two purposes — worth knowing before you write.** That address is
+also the vulnerability-reporting address in [`SECURITY.md`](SECURITY.md), whose
+scope note is about vulnerabilities in the application. It is the project's only
+published mailbox, so a conduct report arrives in the same place as a security
+report and is read by the same maintainers. There is no separate ombuds address,
+no ticket system, and no third party in between. If your complaint is *about* one
+of the people who read that mailbox, say so in a first message without the
+details and ask for it to be routed to the board of **Stichting LibreKAT**, the
+foundation that holds the copyright and under whose wing the project runs
+([librekat.nl](https://librekat.nl/en/over/)) — the same escape hatch
+`SECURITY.md` offers for a report you cannot send as ordinary e-mail.
+
+*(Added 2026-07-22: the address was given here without saying that it is shared,
+and `SECURITY.md`'s scope sentence admits only vulnerabilities, so a reader could
+reasonably conclude a conduct complaint had nowhere to go. It does; it goes here,
+and this paragraph now says what happens to it.)*
+
 ## Attribution
 
 This Code of Conduct is adapted from the [Contributor Covenant][homepage],

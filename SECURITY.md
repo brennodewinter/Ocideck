@@ -5,6 +5,11 @@ This policy covers vulnerabilities in **OciDeck itself** (the application). It d
 disclosed — that is arranged per engagement with the client (scope, reporting
 channel, and disclosure terms), not dictated by this tool.
 
+The mailbox below is the project's only published address, so it also receives
+Code-of-Conduct reports, which follow [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
+rather than this policy. *(Noted 2026-07-22: the scope sentence above admits only
+vulnerabilities, which made the shared use of the address look like a mistake.)*
+
 ## Reporting a vulnerability
 
 **Please do not report security vulnerabilities through public issues, pull
