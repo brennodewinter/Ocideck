@@ -4,8 +4,14 @@ OciDeck is a privacy-first Marp presentation builder for desktop and web, with n
 application backend — everything runs locally. This folder holds the project
 documentation. Start here and jump to what you need.
 
-> **Status:** pre-release (currently 0.2.0). There is no formal versioning or
-> release scheme yet.
+> **Status:** unreleased. No release has ever been tagged. `pubspec.yaml` says
+> `0.2.0+1`, but that string is not a version anyone can act on: no tag carries
+> it, the app never shows it, and every user runs whatever commit they built
+> from. See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) and
+> [`../SECURITY.md`](../SECURITY.md) under *Supported versions*.
+>
+> *(Corrected 2026-07-22: this line read "pre-release (currently 0.2.0)", which
+> reads as a version claim and contradicted both documents named above.)*
 
 ## For users
 
@@ -45,15 +51,27 @@ documentation. Start here and jump to what you need.
 
 ## Design notes (`design/`)
 
-Design proposals and rationale — historical/forward-looking, **not** current-state
-references (where they disagree with the code, the code wins):
-[COLLABORATION](design/COLLABORATION.md) ·
-[GIT_STORAGE](design/GIT_STORAGE.md) ·
-[PENTEST_MIAUW](design/PENTEST_MIAUW.md) ·
-[AI_ASSIST](design/AI_ASSIST.md) ·
-[OCIWACHT](design/OCIWACHT.md) ·
-[AGENTIC_BUILD_PLAN](design/AGENTIC_BUILD_PLAN.md) ·
-[PROCESS_IMPROVEMENT](design/PROCESS_IMPROVEMENT.md).
+Design proposals, rationale and open work — historical or forward-looking, **not**
+current-state references. Where one disagrees with the code, the code wins. Each
+of these carries its own status banner saying how far it has been overtaken;
+read that banner first. All nine ship with the app.
+
+| Document | What it is |
+|---|---|
+| [COLLABORATION.md](design/COLLABORATION.md) | Design proposal, unbuilt: real-time collaboration, presenting and calls. |
+| [GIT_STORAGE.md](design/GIT_STORAGE.md) | Design of the git storage plane; phases 0–6 have landed, what remains is verification. |
+| [PENTEST_MIAUW.md](design/PENTEST_MIAUW.md) | The original design for the MIAUW pentest module, which ships. Parts are contradicted by the code. |
+| [AI_ASSIST.md](design/AI_ASSIST.md) | The optional AI assistance design; phases 0–3 are built, phase 4 (MCP) is not. |
+| [OCIWACHT.md](design/OCIWACHT.md) | The privacy scanner design, with a per-section delivered/open table at the top. |
+| [AGENTIC_BUILD_PLAN.md](design/AGENTIC_BUILD_PLAN.md) | Historical: the agentic build plan for the pentest/AI work. Executed; kept as a worked example, not a queue. |
+| [PROCESS_IMPROVEMENT.md](design/PROCESS_IMPROVEMENT.md) | Design proposal, unbuilt: a Lean Six Sigma authoring module. Despite the name it is a product design, not a report about our process. |
+| [VERIFICATION.md](design/VERIFICATION.md) | A worklist, in Dutch: what has been built and passes its own tests but has never met a real server, a second operating system or a real report. |
+| [LEXICON_LICENTIENAVRAAG.md](design/LEXICON_LICENTIENAVRAAG.md) | A licensing dossier, in Dutch: three lexicon sources that would enrich the privacy check, and why none of them can be bundled yet. |
+
+*(Corrected 2026-07-22: this list named seven of the nine documents in
+`design/`; `VERIFICATION.md` and `LEXICON_LICENTIENAVRAAG.md` were missing while
+both are bundled as assets in `pubspec.yaml` and readable in the app. No test
+compares the two lists, so nothing caught it.)*
 
 ## New here?
 
