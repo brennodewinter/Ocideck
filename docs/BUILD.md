@@ -85,13 +85,21 @@ the browser file picker on web.
 ### What travels with the bundle
 
 A bundle you hand to someone else is not just the app. `make build-web` finishes
-by running `tool/pack_web_release.dart`, which puts three things in `build/web/`:
+by running `tool/pack_web_release.dart`, which puts four things in `build/web/`:
 
 | Artefact | Why it must travel |
 | --- | --- |
 | `LICENSE.md` | Without its licence terms the bundle is not redistributable. This is the condition under which the dependencies themselves travel, not a courtesy. |
+| `SOURCE.md` | `main.dart.js` is compiled; this says where the source is. EUPL-1.2 article 5 asks for the source or an indication of it when the Work is distributed **or communicated**, and article 1 counts hosting as communicating. Without it the licence grants a right to study and adapt that the recipient cannot exercise. |
 | `THIRD_PARTY_NOTICES.md` | The attribution those dependencies require. See [LICENSE_COMPLIANCE.md](LICENSE_COMPLIANCE.md). |
 | `sbom/` (CycloneDX, SPDX, Markdown) | The CRA inventory belongs to the exact build you hand out, not to the repository it came from. Served under `/sbom/`. See [SBOM.md](SBOM.md). |
+
+It also **removes** `.last_build_id`, which Flutter leaves behind. That file is
+an md5 over, among other things, the absolute path of the output directory on
+the machine that built it, so two people building identical source get different
+values. Sealed into `SHA256SUMS` it would guarantee that anyone who builds their
+own copy can never reproduce a published digest — for a reason that has nothing
+to do with the code.
 
 The step ends by writing `SHA256SUMS` over the finished bundle, so it must stay
 the last thing that touches file contents. It prints the sha256 of `SHA256SUMS`
@@ -108,27 +116,45 @@ cd ocideck-web && sha256sum -c SHA256SUMS        # GNU coreutils
 ```
 
 Every line must say `OK`. A `FAILED` line names the file that differs; a
-`No such file` line names one that is missing. To check that nothing was *added*
-as well, and that the licence and SBOM are present:
+`No such file` line names one that is missing.
+
+That catches files that changed or went missing, but not a file that was
+*added* — `SHA256SUMS` says nothing about a path it never mentions. Comparing
+the path column against what is actually on disk closes that, again with
+ordinary tools:
 
 ```sh
-dart run tool/pack_web_release.dart --check      # from a checkout, over build/web
+diff <(cut -c 67- SHA256SUMS | sort) \
+     <(find . -type f | sed 's|^\./||' | grep -v '^SHA256SUMS$' | sort)
 ```
 
-**What this proves, and what it does not.** It shows your copy is complete and
-undamaged and that it matches a value published elsewhere. It is **not a
-signature**: whoever can replace the bundle can replace `SHA256SUMS` with it. So
-the check that carries weight is comparing the sha256 of `SHA256SUMS` itself
-against the value in the release announcement — one 64-character value, obtained
-over a different channel than the download:
+From a checkout, with the bundle in `build/web`, one command does both that and
+the presence of the licence, source indication and SBOM:
+
+```sh
+dart run tool/pack_web_release.dart --check
+```
+
+**What this proves, and what it does not.** It lets you check that your copy is
+complete and undamaged. On its own the list proves nothing — it only says
+something once you set it against a value from another channel. It is **not a
+signature**: whoever can replace the bundle can replace `SHA256SUMS` with it.
+
+So compare the sha256 of `SHA256SUMS` itself against the value published in the
+release announcement — one 64-character value, read over a channel other than
+the one you downloaded from:
 
 ```sh
 shasum -a 256 SHA256SUMS
 ```
 
-Signed artefacts (Authenticode, notarisation, a detached signature) are a
-desktop-release concern and are not part of the web-only 0.1.0. See
-[KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md).
+That catches a damaged download, a modified mirror, and a third party rehosting
+a changed bundle. It does **not** catch a compromise of our own publishing
+chain: whoever can change both the download and the announcement changes both,
+and you would see them agree. Only a signature or a reproducible build helps
+there, and OciDeck has neither today. Signed artefacts (Authenticode,
+notarisation, a detached signature) are a desktop-release concern and are not
+part of the web-only 0.1.0. See [KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md).
 
 ### Response headers the host must add
 

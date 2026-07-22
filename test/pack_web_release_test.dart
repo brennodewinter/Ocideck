@@ -30,6 +30,8 @@ void main() {
     File('${bundel.path}/index.html').writeAsStringSync('<html></html>');
     Directory('${bundel.path}/canvaskit').createSync();
     File('${bundel.path}/canvaskit/canvaskit.wasm').writeAsBytesSync([0, 1, 2]);
+    // Wat Flutter achterlaat en er niet hoort; zie [nietUitleveren].
+    File('${bundel.path}/.last_build_id').writeAsStringSync('fb2348c4');
   });
 
   tearDown(() => tijdelijk.deleteSync(recursive: true));
@@ -91,6 +93,28 @@ void main() {
         '${bundel.path}/$checksumBestand',
       ).readAsLinesSync().first;
       expect(regel, matches(RegExp(r'^[0-9a-f]{64} {2}\S')));
+    });
+
+    test('.last_build_id gaat de bundel uit en komt niet in de lijst', () {
+      // De inhoud is een md5 over onder meer het absolute pad van de uitvoermap
+      // op de bouwmachine. Verzegeld meegeven zou betekenen dat wie zelf bouwt
+      // — precies wat KNOWN_LIMITATIONS aanraadt — de gepubliceerde digest
+      // gegarandeerd niet kan reproduceren, bij byte-identieke bron.
+      pak(bundel, wortel);
+
+      expect(File('${bundel.path}/.last_build_id').existsSync(), isFalse);
+      expect(
+        File('${bundel.path}/$checksumBestand').readAsStringSync(),
+        isNot(contains('.last_build_id')),
+      );
+    });
+
+    test('de bundel is daarna schoon volgens de eigen controle', () {
+      // De uitsluiting mag geen gat in de controle slaan: een verwijderd
+      // bestand dat nog in de lijst stond zou hier als klacht opduiken.
+      pak(bundel, wortel);
+
+      expect(controleer(bundel), isEmpty);
     });
   });
 
@@ -181,11 +205,30 @@ void main() {
       expect(doel, contains('tool/pack_web_release.dart'));
     });
 
-    test('de uitleg belooft geen handtekening', () {
-      // De zin uit checksumUitleg belandt in de documentatie. Overschrijft
-      // iemand hem met iets stelligers, dan is dat hier een rood kruis en geen
-      // ontdekking achteraf.
+    test('de uitleg belooft geen handtekening, en niets uit zichzelf', () {
+      // De zin uit checksumUitleg belandt in documentatie en in
+      // release-aankondigingen. Overschrijft iemand hem met iets stelligers,
+      // dan is dat hier een rood kruis en geen ontdekking achteraf.
       expect(checksumUitleg, contains('geen handtekening'));
+      // Óók de bescheidenheid staat onder bewaking, niet alleen het woord
+      // "handtekening": een lijst die naast de bundel ligt toont uit zichzelf
+      // niets — dat wordt het pas als een mens hem tegen een ander kanaal legt.
+      expect(checksumUitleg, contains('Op zichzelf'));
+      expect(checksumUitleg, contains('ander kanaal'));
+    });
+
+    test('SOURCE.md wijst naar de repo waar de bron werkelijk staat', () {
+      // EUPL-1.2 artikel 5 vraagt bij het communiceren van het Werk om de bron
+      // of een aanwijzing ernaartoe, en de bundel is gecompileerd. Een
+      // SOURCE.md die de repo niet noemt haalt dat niet.
+      final bron = File('SOURCE.md').readAsStringSync();
+      final readme = File('README.md').readAsStringSync();
+
+      expect(releaseArtefacten.keys, contains('SOURCE.md'));
+      expect(bron, contains('pawprint.vigilis.online/LibreKAT/Ocideck'));
+      // Dezelfde URL als de README noemt; twee adressen die uiteenlopen is
+      // precies hoe een verwijzing stilletjes dood raakt.
+      expect(readme, contains('pawprint.vigilis.online/LibreKAT/Ocideck'));
     });
   });
 }

@@ -27,13 +27,32 @@ import 'package:crypto/crypto.dart';
 /// maar de voorwaarde waaronder de afhankelijkheden zelf meereizen. De SBOM
 /// omdat de CRA-inventaris bij de exacte build hoort die je uitlevert, niet bij
 /// de repo waar hij toevallig uit kwam.
+///
+/// `SOURCE.md` staat er niet voor de vorm: `main.dart.js` is gecompileerd, en
+/// EUPL-1.2 artikel 5 vraagt bij het distribueren *of communiceren* van het
+/// Werk om de broncode of een aanwijzing waar die te vinden is. Een gehoste
+/// bundel ís communicatie. Zonder dat bestand krijgt de ontvanger onleesbare
+/// JavaScript met een licentie eronder die zegt dat hij het mag bestuderen en
+/// aanpassen, en geen manier om dat te doen.
 const Map<String, String> releaseArtefacten = {
   'LICENSE.md': 'LICENSE.md',
   'THIRD_PARTY_NOTICES.md': 'THIRD_PARTY_NOTICES.md',
+  'SOURCE.md': 'SOURCE.md',
   'sbom/ocideck.cdx.json': 'sbom/ocideck.cdx.json',
   'sbom/ocideck.spdx.json': 'sbom/ocideck.spdx.json',
   'sbom/ocideck.sbom.md': 'sbom/ocideck.sbom.md',
 };
+
+/// Bestanden die Flutter in `build/web` achterlaat maar die er niet horen.
+///
+/// `.last_build_id` is een intern markeringsbestand van het buildsysteem. De
+/// inhoud is een md5 over onder meer het **absolute pad** van de uitvoermap op
+/// de bouwmachine, dus twee mensen die dezelfde bron bouwen krijgen
+/// gegarandeerd verschillende waarden. Zou het meegaan in [checksumBestand],
+/// dan kan iemand die zelf bouwt — precies wat KNOWN_LIMITATIONS aanraadt —
+/// de gepubliceerde digest nóóit reproduceren, om een reden die niets met de
+/// code te maken heeft. De ontvanger heeft er bovendien niets aan.
+const List<String> nietUitleveren = ['.last_build_id'];
 
 /// De naam van de checksumlijst in de bundel.
 ///
@@ -45,12 +64,18 @@ const String checksumBestand = 'SHA256SUMS';
 
 /// Wat de checksumlijst wél en niet zegt. Staat hier omdat de zin die dit
 /// verkeerd samenvat in documentatie belandt en dan een belofte wordt.
+///
+/// Let op het verschil tussen *tonen* en *laten nakijken*. Een eerdere versie
+/// zei dat de lijst toont dat de bundel overeenkomt met een elders gepubliceerde
+/// waarde. Dat toont hij niet — dat is iets wat de lezer moet dóén, en op
+/// zichzelf zegt de lijst niet meer dan dat hij met zichzelf klopt. In een
+/// aankondiging overgenomen leest die eerste formulering als "de bundel draagt
+/// het bewijs bij zich", en dat is een sterkere claim dan waar is.
 const String checksumUitleg =
-    'SHA256SUMS toont dat je bundel volledig en onbeschadigd is en dat hij '
-    'overeenkomt met een waarde die elders is gepubliceerd. Het is geen '
-    'handtekening: wie de bundel kan vervangen, kan de lijst vervangen. '
-    'Vergelijk daarom de sha256 van SHA256SUMS zelf met de waarde uit de '
-    'release-aankondiging.';
+    'SHA256SUMS laat je nakijken of je bundel volledig en onbeschadigd is. Op '
+    'zichzelf bewijst de lijst niets: pas als je hem afzet tegen een waarde uit '
+    'een ander kanaal zegt hij iets. Het is geen handtekening — wie de bundel '
+    'kan vervangen, kan de lijst vervangen.';
 
 Future<void> main(List<String> args) async {
   final bundel = Directory('build/web');
@@ -92,8 +117,8 @@ Future<void> main(List<String> args) async {
   stdout.writeln('Neem die waarde op in de release-aankondiging.');
 }
 
-/// Kopieert [releaseArtefacten] uit [wortel] naar [bundel] en schrijft daarna
-/// [checksumBestand].
+/// Ruimt [releaseArtefacten] in [bundel] op, verwijdert [nietUitleveren] en
+/// schrijft daarna [checksumBestand].
 ///
 /// Geeft de bronpaden terug die niet bestonden; is die lijst leeg, dan is de
 /// bundel compleet. Een ontbrekende bron is een fout en geen waarschuwing —
@@ -111,6 +136,11 @@ List<String> pak(Directory bundel, Directory wortel) {
     bestand.copySync(uit.path);
   }
   if (ontbreekt.isNotEmpty) return ontbreekt;
+
+  for (final pad in nietUitleveren) {
+    final bestand = File('${bundel.path}/$pad');
+    if (bestand.existsSync()) bestand.deleteSync();
+  }
 
   File(
     '${bundel.path}/$checksumBestand',
@@ -196,8 +226,13 @@ List<String> controleer(Directory bundel) {
 }
 
 /// Elk bestand in [bundel], als pad relatief aan de bundel, gesorteerd —
-/// behalve de checksumlijst zelf. Sorteren maakt de lijst reproduceerbaar:
-/// twee builds van dezelfde bron horen byte voor byte dezelfde lijst te geven.
+/// behalve de checksumlijst zelf.
+///
+/// Sorteren maakt de **volgorde** bepaald, zodat twee lijsten over dezelfde
+/// bestanden regel voor regel te vergelijken zijn. Of twee builds van dezelfde
+/// bron byte voor byte hetzelfde opleveren is een andere vraag —
+/// reproduceerbaarheid — en die is hier niet getoetst en wordt hier niet
+/// beweerd.
 List<String> bundelBestanden(Directory bundel) {
   final voorvoegsel = '${bundel.path}/';
   final paden = <String>[];

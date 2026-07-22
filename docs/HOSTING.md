@@ -250,13 +250,14 @@ to give them the desktop build.
 
 ## 6. Compliance artefacts
 
-Four things are served from the bundle itself, and all four should stay
+Five things are served from the bundle itself, and all five should stay
 reachable:
 
 | Path | What it is for |
 | --- | --- |
 | `/sbom/` (`ocideck.cdx.json`, `ocideck.spdx.json`, `ocideck.sbom.md`) | The CRA inventory matching the exact build you shipped. → [SBOM.md](SBOM.md) |
 | `/LICENSE.md` | The terms under which you may serve it, and the recipient may pass it on. |
+| `/SOURCE.md` | Where the source of this compiled bundle lives. **Hosting counts as communicating the Work under EUPL-1.2 article 1, so article 5's source indication applies to you, not only to us.** If you serve a modified bundle, point it at your source. |
 | `/THIRD_PARTY_NOTICES.md` | The attribution the dependencies require. → [LICENSE_COMPLIANCE.md](LICENSE_COMPLIANCE.md) |
 | `/SHA256SUMS` | Lets someone confirm their copy of the bundle is complete and undamaged. |
 
