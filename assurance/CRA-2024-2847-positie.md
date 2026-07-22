@@ -55,14 +55,30 @@ naleving maar over of het werk goed genoeg is.
    oordeel 10, oplossing 90). Voor gewone issues meet niets iets. Een issue die
    maanden stil ligt is geen beveiligingsprobleem maar wel een kwaliteitssignaal,
    en het is precies wat een buitenstaander als eerste ziet.
+   *Uitgevoerd (#537):* `tool/check_issue_turnaround.dart` (`make doorlooptijd`)
+   meet leeftijd, tijd tot eerste reactie, het aantal open issues zonder énige
+   reactie, en stilstand op `triage`. Adviserend, en dat is er de standaard:
+   voor gewone issues is bewust géén termijn afgesproken — eerst een basislijn,
+   dan pas het gesprek over een norm.
 2. **Kwaliteitsslagen — is het goed genoeg.** De poorten meten of iets *werkt*.
    Ze meten niet of de dekking op de juiste plekken zit, of een test werkelijk
    iets bewijst, of de basislijnen krimpen in plaats van stil te blijven staan.
    Er zijn er nu zeven of acht; niets laat zien of ze de goede kant op bewegen.
+   *Deels uitgevoerd (#538):* `tool/check_ratchet_trend.dart` (`make ratchets`)
+   zet elke basislijn naast haar waarde op een ijkpunt, noemt de langst staande
+   basislijnregels en splitst de dekking uit per map. Adviserend, om dezelfde
+   reden: stilstand tot een rode bouw maken straft een rustige maand. Wat
+   hiermee níét beantwoord is, blijft staan: of een test werkelijk iets bewijst
+   (`make mutate`) en het maandelijkse beeld op de wiki.
 3. **Documentatie — voldoende en duidelijk.** `docs_registration_test` bewaakt
    dát een document bereikbaar is, niet dát het klopt of te volgen valt. De
    d7b609bf-episode (gegenereerde gidsen die niets beschreven) laat zien dat dat
    verschil echt is.
+   *Deels uitgevoerd (#539):* `test/docs_claims_match_code_test.dart` houdt de
+   mechanische helft tegen de code aan — de ratchetwaarden in `CHECKS.md`, de
+   dekkingsvloeren en de taaltellingen. De menselijke helft (valt het te volgen)
+   is bewust niet geautomatiseerd: een test die doet alsof, verplaatst het
+   probleem alleen.
 
 Elk van de drie krijgt een eigen issue; de uitwerking hoort daar, niet hier.
 

@@ -47,15 +47,22 @@ so read the date with them:
 
 | Metric | Counted on 2026-07-22 |
 | --- | ---: |
-| Automated tests in the suite | **4852** (excluding the `golden` tag) |
-| Test files under `test/` | **450** |
-| Source files under `lib/` | 574 excl. the 32 translation files (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
-| Line coverage (enforced floor: 80%) | **82.5%** — 42 798 of 51 862 lines, 508 instrumented files |
+| Automated tests in the suite | **5587** (excluding the `golden` tag) |
+| Test files under `test/` | **512** |
+| Source files under `lib/` | 613 excl. the 32 translation files (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
+| Line coverage (enforced floor: 80%) | **86.2%** — 46 761 of 54 264 lines, 545 instrumented files |
 
 *(Corrected 2026-07-22: this table said "~4570 / ~435 / ~564" and called them
 "point-in-time figures" without saying which point in time, so there was no way
 to tell how far they had drifted. They are now dated, and re-counting them is
 part of the procedure under [Latest result](#latest-result).)*
+
+*(Re-counted 2026-07-22, later the same day: the figures above were from an
+earlier commit and already read 4852 / 450 / 574 / 82.5%. These counts are
+deliberately **not** guarded by a test the way the constants further down are —
+they are a snapshot of one moment, and a gate over them would redden the build
+on every new test file. The date is the guard: read it, and re-count rather than
+believe.)*
 
 Coverage is a floor **and** a census: `make coverage` also fails when a `lib/`
 file appears in no test at all. Such a file is not 0% — lcov never records it,
@@ -78,27 +85,33 @@ out of it, the way [`LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md) records its
 own last run. A dated outcome next to a repeatable command is the difference
 between "we check this" and "we checked this".
 
-**Run on 2026-07-22**, on macOS (arm64), Flutter 3.44.6, at commit `b98ee072`:
+**Run on 2026-07-22**, on macOS (arm64), Flutter 3.44.2, at commit `299fb65a`
+(branch `feat/meetinstrumenten`):
 
 | Command | Outcome |
 | --- | --- |
-| `flutter test --test-randomize-ordering-seed random --exclude-tags golden` | pass — 4852 tests, 2 skipped |
-| `dart run tool/coverage_summary.dart --min=80 --require-instrumented` | pass — 82.5% (42 798/51 862 lines, 508 instrumented files); no `lib/` file outside the census |
-| `dart run tool/coverage_summary.dart --per-file-floor` | pass — 19 files below the per-file floor, 5 of them at zero, against a budget of 21 |
+| `make check` (the whole gate) | pass — exit 0 |
+| `flutter test --test-randomize-ordering-seed random --exclude-tags golden` | pass — 5587 tests, 2 skipped |
+| `dart run tool/coverage_summary.dart --min=80 --require-instrumented` | pass — 86.2% (46 761/54 264 lines, 545 instrumented files); no `lib/` file outside the census |
+| `dart run tool/coverage_summary.dart --per-file-floor` | pass — 0 files below the per-file floor |
 | `dart run tool/check_licenses.dart` | pass — 187 packages, all recognised open-source ([`LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md)) |
 
-**What this run did not cover.** Only the four commands above were executed. The
-rest of `make check` — `format-check`, `analyze`, `check-conventions`,
-`check-method-length`, `check-dead-code`, `check-hardcoded-text` — and the
-`check-full` extras (`sbom-verify`, `deps-check`, `check-web`) were not run here,
-so this table says nothing about them. It is a snapshot, not a certificate: the
-only run that means anything for a given commit is the one you do yourself
-before pushing it.
+**What this run did not cover.** `make check` ran in full, so `format-check`,
+`analyze`, `check-conventions`, `check-method-length`, `check-dead-code` and
+`check-hardcoded-text` are included above; `check_licenses` was run separately in
+the same working copy. The `check-full` extras (`sbom-verify`, `deps-check`,
+`check-web`) and the advisory scans (`sast`, `dast`, `trivy`, `check-secrets`)
+were **not** run here, so this table says nothing about them. It is a snapshot,
+not a certificate: the only run that means anything for a given commit is the one
+you do yourself before pushing it.
 
-Two of these numbers are budgets rather than achievements. The per-file floor
-allows 21 files below it and 19 are there, so that gate is nearly full; the
-overall 82.5% sits above an 80% floor that is a ratchet, meant to be raised as
-coverage improves rather than treated as a target already met.
+One of these numbers is a floor rather than an achievement: 86.2% sits above an
+80% floor that is a ratchet, meant to be raised as coverage improves rather than
+treated as a target already met. The per-file floor no longer carries a budget —
+until 2026-07-22 this table read "19 files below the floor, against a budget of
+21", and that budget was removed the same day (see
+[`make coverage-per-file`](#make-coverage-per-file)). Zero below the floor is
+now the only passing state.
 
 ---
 
@@ -180,8 +193,9 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Covers:** these project conventions in `lib/`:
   - **no `print()`** (diagnostics go through the logger in `lib/utils/log.dart`);
   - **no bare `catch (_)`** (silently swallowing errors) — a **ratchet**: a
-    baseline count that may shrink but never grow, currently **0**, so every
-    swallow routes a named error through `logError`/`logWarning`;
+    baseline count that may shrink but never grow (`catchUnderscoreBaseline`,
+    currently **0**), so every swallow routes a named error through
+    `logError`/`logWarning`;
   - **raw-colour ratchet** — literal `Color(0x…)` outside
     `lib/theme/app_theme.dart` may shrink but never grow (`rawColorBaseline`);
   - **no raw control bytes** in any `lib/`, `test/` or `tool/` source. A
@@ -199,7 +213,8 @@ also declares them, but see the [CI note](#continuous-integration).)
     carry no widget tree.
     Prefer a semantic `AppTheme` token so a palette change — and a future dark
     mode — touches one place instead of dozens;
-  - **file-size ratchet** — no file may exceed **1000** lines, except the
+  - **file-size ratchet** — no file may exceed the line ceiling
+    (`maxFileLines`, currently **1000**), except the
     files listed in `fileSizeBaseline` whose ceiling is their size at ratchet
     time. A ceiling may shrink (split the file) but never grow, so large files
     trend smaller instead of creeping bigger. `lib/l10n/translations/*` is
@@ -289,7 +304,8 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Runs:** `dart run tool/check_method_length.dart`
 - **Covers:** a **per-method/function-length ratchet** — the per-declaration
   sibling of the file-size ratchet. No method, top-level function or constructor
-  body may exceed **150** lines (signature through closing brace, excluding the
+  body may run longer than `maxMethodLines`
+  (currently **150**) lines (signature through closing brace, excluding the
   doc comment), except the declarations listed in `methodLengthBaseline` whose
   ceiling is their length at ratchet time. A ceiling may shrink (split the
   method) but never grow.
@@ -377,8 +393,8 @@ also declares them, but see the [CI note](#continuous-integration).)
   then `dart run tool/coverage_summary.dart --min=80 --require-instrumented`.
 - **Covers:** two things. (1) Line coverage across every `lib/` file a test
   imports. (2) That there **is** such a test for every `lib/` file.
-- **Failure means:** coverage dropped below the floor (currently **80%**), **or**
-  a `lib/` file is in no test at all.
+- **Failure means:** coverage dropped below the floor (`--min` in the Makefile
+  recipe, currently **80%**), **or** a `lib/` file is in no test at all.
 - **Why (2) exists:** lcov only records files a test imported, so a file no test
   touches is not 0% — it is absent from the denominator altogether. Add a
   brand-new, wholly untested file and the percentage does not move a hair: the
@@ -398,7 +414,8 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Runs:** `dart run tool/coverage_summary.dart --per-file-floor`, over the
   report `make coverage` just wrote — no second test run.
 - **Covers:** the worst case *per file* instead of the average: how many `lib/`
-  files execute less than **20%** of their own lines.
+  files execute less than `perFileFloorPercent` (currently **20%**) of their own
+  lines.
 - **Failure means:** at least one file sits below that floor. Write a test for
   it, or — only when it is a platform half or has no executable lines — put it
   in `uncoveredBaseline` with a reason.
