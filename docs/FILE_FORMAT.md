@@ -1717,6 +1717,20 @@ d637fefa0252f49ece0e3fb9bbccd0803877c9d050ab87a616ae4af9d5c8936f
   writing a higher `ocideck_format` (§3.0). **A sealed deck is frozen**, and
   OciDeck enforces that by making a finalised deck read-only, so it never
   rewrites one on its own.
+- **Your own front-matter lines are inside the hash again**, and this reverses a
+  deliberate exemption made a day earlier. When the seal still lived in the
+  front matter it skipped the lines OciDeck does not own — your `style:` block,
+  your comments, a hand-placed `header:` — because editing your own CSS in a
+  sealed deck raised a tamper alarm that was simply wrong (*fixed 2026-07-21*).
+
+  A hash over the file cannot make that exemption: the recipient runs
+  `sha512sum` over the whole file, so any line the app excluded would make the
+  app's verdict disagree with theirs — and a verdict only OciDeck can reproduce
+  is the thing this change exists to eliminate. The exemption is not lost so
+  much as made unnecessary: a finalised deck is read-only, so there is no way to
+  adjust your CSS inside a sealed report and be surprised afterwards. Edit it
+  outside the app and you no longer hold the sealed artefact — which is the
+  literal truth, and now the recipient sees exactly what you see.
 
 For `"form": "canonical-v1"` — only ever produced before 0.1.0 — the hash is
 over OciDeck's own serialiser output instead, and **cannot** be recomputed

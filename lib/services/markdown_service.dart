@@ -209,6 +209,12 @@ class MarkdownService {
   /// front matter van de gebruiker — een eigen `style: |`-blok, commentaar, een
   /// handmatige `header:` — omdat een zegel dat op andermans regels afgaat, vals
   /// alarm slaat zodra iemand zijn eigen CSS bijstelt.
+  ///
+  /// Die laatste uitzondering geldt alleen hier, in de oude vorm. Een hash over
+  /// het bestand kan geen regels overslaan zonder dat het oordeel van OciDeck
+  /// gaat afwijken van dat van de ontvanger, en juist dat verschil was de reden
+  /// om te verhuizen. Wat het valse alarm daar wegneemt is de bevriezing zelf:
+  /// een afgerond deck is alleen-lezen. Zie docs/FILE_FORMAT.md §6.6.
   String canonicalContentForSeal(Deck deck) {
     return generateDeck(
       includeFormatVersion: false,

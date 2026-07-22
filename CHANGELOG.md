@@ -200,6 +200,17 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   knoeien daarmee zichtbaar blijft. Dezelfde afweging als bij de formaatversie:
   een vals alarm is duurder dan geen alarm.
 
+  *Bijgesteld een dag later, toen het zegel over het bestand ging in plaats van
+  erin (zie hierboven).* Beide helften van deze alinea zijn daarmee achterhaald.
+  Een hash over het bestand kan geen regels overslaan — de ontvanger draait
+  `sha512sum` over het hele bestand, en een oordeel dat alleen OciDeck kan
+  navertellen was nu juist wat we kwijt wilden. Uw eigen regels vallen er dus
+  weer onder, en uw ondertekening er juist niet meer (die staat nu naast het
+  zegel in plaats van eronder). Wat het valse alarm wegneemt is niet langer een
+  uitzondering maar de bevriezing zelf: een afgerond rapport is alleen-lezen,
+  dus u kunt uw CSS er niet meer in bijstellen en er achteraf door verrast
+  worden.
+
 - **De documentatie noemt de juiste dekkingsvloer.** Vijf plaatsen in `docs/`
   hielden vol dat de afgedwongen dekking 78 % was — één zei 79 % — terwijl de
   Makefile al op `--min=80` staat. Wie de documentatie geloofde, dacht ruimte te
