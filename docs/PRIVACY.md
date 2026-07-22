@@ -411,6 +411,72 @@ server, the privacy terms of *those* services apply to what you store there.
 Because OciDeck is open source (EUPL-1.2), you can verify every claim in this
 document against the code.
 
+### Who is controller, and who is not
+
+Most of this document is about *your* data. But a deck routinely holds data
+about **other people**: a pentest report names the employee who clicked, a
+screenshot carries a colleague's mailbox, a finding carries the account it was
+found on. Under the GDPR someone answers for that data, and it is worth writing
+down who — because the promise this tool makes rests on that division, and it
+has so far been stated nowhere.
+
+- **You are the controller for what is in your deck — unless your assignment
+  makes you something else.** Normally you chose to put those people's data in
+  it, for your purpose, and you decide who receives it. But if you test on a
+  client's instructions, and it was the client who decided this data would be
+  processed at all, you may be that client's **processor** instead, or the two
+  of you joint controllers under art. 26. Which of the three it is follows from
+  the assignment, not from this tool. It matters here for one concrete reason:
+  a processor may not engage another processor without the controller's prior
+  authorisation (art. 28(2)). If that is your position, the third bullet is
+  something you clear with your client *before* you switch it on — arranging it
+  yourself is not enough. And if you use OciDeck as an employee, "you" in this
+  section is your employer (art. 29).
+- **Stichting LibreKAT is not a processor for it, and offers no processing
+  agreement.** Not as a refusal, but because there is nothing to cover: the
+  publisher receives no deck. OciDeck runs on your device, and every storage
+  location in the table above is a server *you* pointed it at. If a client's
+  procurement asks you for an art. 28 agreement with the publisher of your
+  editing tool, the accurate answer is that no processing takes place that such
+  an agreement could describe — the same answer you would give for the text
+  editor you write in. One path sits outside this bullet and is named below: the
+  CVE lookup does reach a server the publisher runs.
+- **The parties you switch on are yours to arrange.** An AI endpoint, an S3
+  bucket, a WebDAV server or a git forge does receive your content, and if that
+  content holds personal data, that party processes it on your behalf. The
+  art. 28 agreement is between you and them — unless the server is your own, in
+  which case there is no second party and nothing to agree. If that party sits
+  outside the EEA, art. 28 is only half of it: a transfer also needs a basis
+  under Chapter V, such as standard contractual clauses or an adequacy decision.
+  Each of these is off until you configure it, and each is named in the table
+  above precisely so you can see what you have to arrange before you turn it on.
+
+One thing does not fit this division, and it should not be smoothed over: the
+**CVE lookup**. Its first stop is a mirror the publisher runs itself
+(`cveapi.librekat.nl`), so a search term you send there is a search term the
+publisher receives — and for that one path Stichting LibreKAT is not your
+processor but a controller in its own right, for the request it receives. What
+that mirror records, and for how long, has not been published. Until it is,
+treat a search term you send there as disclosed, and assume nothing about how
+long it is kept.
+
+Two limits on the mitigations, because the setting reads more reassuring than it
+is. **Emptying the mirror field does not point the lookup at nothing** — it
+restores the publisher's address. The switch that sends nothing is the CVE
+lookup itself, and it is off until you turn it on. **Repointing at your own
+mirror does not close the path either:** when a lookup yields nothing, ENISA's
+EU Vulnerability Database and MITRE are contacted next, and those two addresses
+are compiled in rather than configurable. The one arrangement in which a search
+term never leaves your machine is the **local CVE database**: with it installed,
+the online cascade is not used at all — not even when the local search finds
+nothing.
+
+*Added 2026-07-22. This section did not exist. The document treated the reader
+solely as a data subject — "your files are yours" — and never as the controller
+they are the moment a deck holds someone else's name. For a tool that is
+marketed for penetration-test reports, that was the most predictable gap a
+reader with GDPR knowledge would find.*
+
 ## See also
 
 - [SECURITY_DESIGN.md](SECURITY_DESIGN.md) — the mechanisms behind these guarantees
