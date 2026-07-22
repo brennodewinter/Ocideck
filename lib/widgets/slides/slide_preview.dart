@@ -59,6 +59,7 @@ import '../../utils/project_path.dart';
 import '../../utils/title_contrast.dart' show kTitleOverlayAlpha;
 import '../document_signature_view.dart' show decodeEmbeddedSignatureImage;
 import '../privacy_badge.dart' show privacyKatSvg;
+import '../../utils/inline_markdown.dart';
 import 'inline_markdown.dart';
 import 'image_zoom_dialog.dart';
 

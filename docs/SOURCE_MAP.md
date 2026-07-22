@@ -118,7 +118,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `markdown_service_finding.dart` — Parses/serializes the `finding` slide group's id/role markers and header spec.
 - `markdown_validator.dart` — Line-anchored structural pre-flight against the parser's expectations.
 - `marp_html_service.dart` — Builds the self-contained, sanitised HTML export with embedded assets.
-- `mermaid_render_service.dart` — Renders Mermaid diagrams to cached inline SVG via a shared WebView.
+- `mermaid_render_service.dart` — Renders Mermaid diagrams to cached inline SVG via a shared WebView. Headless: the WebView host itself is a widget and lives in `lib/widgets/mermaid_render_host.dart`.
 - `miauw_compliance_analyzer.dart` — Scores each MIAUW EIS (Voldaan/Openstaand/Uitgesloten) from deck content + waivers.
 - `miauw_eis_catalog.dart` — The bundled offline MIAUW EIS catalog (`MiauwEisCatalog`): all 88 testable EIS, parsed from the authoritative MIAUW workbook.
 - `open_file_channel.dart` — Receives file-open paths from macOS for `.md` files.
@@ -246,6 +246,7 @@ deliberately manual).
 - `image_focal.dart` — Maps a normalized image crop focal point (0..1) to the `Alignment` used to reposition a cropped/cover image.
 - `image_limits.dart` — Caps decoded image dimensions to prevent OOM; the `CappedImage` provider only downscales over-cap images so within-cap animated GIFs/WebP decode natively and keep animating.
 - `image_luminance.dart` — Computes average image colour, cached by mtime/size.
+- `inline_markdown.dart` — The widget-free half of the inline markdown: `parseInlineRuns`/`stripInlineMarkdown`/`inlineRunStyle`/`buildInlineSpans`. Text and its styling, not a widget tree, so the headless services (`text_measurement`, `slide_quality_analyzer`) can measure and analyse exactly what the render will show without importing the UI layer.
 - `log.dart` — Fail-soft logging to DevTools without exposing sensitive data (`logError`/`logWarning`). The rule is that a message carries an operation description and the caught error, never deck or file *contents*; `test/log_no_content_test.dart` scans `lib/` for the shapes that break it (a collection joined, taken from or sliced into a message), which is how a chart warning holding real cell values was found.
 - `lru_cache.dart` — Fixed-capacity LRU cache backed by `LinkedHashMap`.
 - `markdown_paste_cleanup.dart` — Cleans pasted website markdown and normalizes rich-text quirks.
@@ -303,6 +304,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 
 - `app_shell.dart` — Main application shell: layout, file IO, and dialog coordination. Also the listeners for the one-shot signals: `_listenChartDataWarning` (two texts, since a data file that could not be *read* leaves a chart empty while one that could not be *written* leaves the numbers only in this window — the second is shown as an error) and `_listenUnsavedWork`, which passes the dirty state to `setUnsavedWorkGuard` and, where `RecoveryService.available` is false, says once that a crash recovers nothing here. That notice waits for the first edit rather than firing at startup: a warning about losing work when there is no work yet reads as noise.
 - `markdown_notes_editor.dart` — Barrel re-export of the markdown notes editor.
+- `mermaid_render_host.dart` — `MermaidRenderHostLayer`/`MermaidRenderHost`: the offstage WebView that `MermaidRenderService` renders its diagrams in, mounted only after the first diagram is requested.
 - `asset_origin_badge.dart` — `AssetOriginBadge`: makes visible what happens to a slide's media once the presentation is passed on. Says what the origin *means* rather than where the file sits, with the consequence and the way out in the tooltip. Deliberately confined to the editor — the rendered slide is also what the audience and the export see, and a work instruction does not belong there.
 - `privacy_badge.dart` — `PrivacyBadge`, the bare `PrivacyKatMark`, and the `privacyKatSvg` mark: the non-blocking marker (with an explanation on hover) for a spot where personal data is pointed at or something leaves the device. Used by the status bar's remote-origin badge, the export-readiness chip's privacy warnings, and the Security tab's online-CVE switch.
 - `privacy_statement_content.dart` — Privacy/license content shared by the consent and settings dialogs.
@@ -466,7 +468,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 
 - `image_crop_dialog.dart` — Interactive crop/reposition dialog: drag to set the focal point (and zoom for full-slide/title images), WYSIWYG in the slot's aspect ratio.
 - `image_zoom_dialog.dart` — Full-screen pan/zoom image viewer.
-- `inline_markdown.dart` — Lightweight inline-markdown parser (bold/italic/code/links).
+- `inline_markdown.dart` — `InlineMarkdownText`: renders inline markdown with tappable links (and disposes their recognizers). The parsing and styling live in `lib/utils/inline_markdown.dart`.
 - `mermaid_diagram.dart` — Renders Mermaid definitions to inline SVG in previews.
 - `slide_preview.dart` — Central preview library coordinating all slide-type renderers + shared helpers. `sharedSplitFitScale`/`splitRunMemberScale` compute the one font size a split run renders at; the quality analyzer calls the same functions, so a reported size is the size actually rendered.
 - `slide_thumbnail.dart` — Thumbnail with slide preview, metadata, and action buttons. Carries the two finding badges (quality left, privacy right): click to read, double-click to accept or undo. Top-left it flags the two ways a slide can fail to reach the audience: *Overgeslagen* and *Achtergehouden* (`slideWithheldByTlp`), each dimming the preview, each in its own colour, stacked rather than side by side because a slide can be both — and the withheld one names its level in a tooltip, since knowing *that* it drops out does not tell you which control to change. Both states also go into the semantics label, so a screen-reader user hears them.
