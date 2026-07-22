@@ -780,12 +780,8 @@ extension _SettingsColors on _SettingsDialogState {
     });
   }
 
-  Future<String?> _pickHexColor(String initial) {
-    return showDialog<String>(
-      context: context,
-      builder: (context) => _HexColorDialog(initial: initial),
-    );
-  }
+  Future<String?> _pickHexColor(String initial) =>
+      HexColorDialog.show(context, initial);
 
   Widget _colorSwatch(
     String color, {

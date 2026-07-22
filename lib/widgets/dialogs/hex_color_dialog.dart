@@ -1,19 +1,49 @@
-// Part of the settings_dialog library — see ../settings_dialog.dart.
-// Split out for navigability (the custom hex-colour picker dialog); all
-// imports live in the main library file. Same library, same members, no
-// behaviour change.
-part of '../settings_dialog.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class _HexColorDialog extends StatefulWidget {
+import '../../l10n/app_localizations.dart';
+import '../../theme/app_theme.dart';
+import '../../utils/color_contrast.dart';
+
+/// Een eigen kleur intikken als hexwaarde, met een voorbeeldvlak dat meeloopt
+/// met wat er staat.
+///
+/// Een eigen dialoogbestand en geen `part` van het instellingenvenster: de
+/// normalisatie hieronder is het enige dat tussen "wat de gebruiker tikt" en
+/// "welke kleur het thema krijgt" zit, en als deel van die bibliotheek was daar
+/// van buiten geen woord over te zeggen. Zelfde reden als bij
+/// `GitSearchDialog`.
+class HexColorDialog extends StatefulWidget {
+  /// De kleur waarmee het veld begint, als hexwaarde.
   final String initial;
 
-  const _HexColorDialog({required this.initial});
+  const HexColorDialog({super.key, required this.initial});
+
+  /// Toont het venster en geeft de genormaliseerde kleur terug (`#RRGGBB`,
+  /// hoofdletters), of `null` bij annuleren.
+  static Future<String?> show(BuildContext context, String initial) =>
+      showDialog<String>(
+        context: context,
+        builder: (_) => HexColorDialog(initial: initial),
+      );
+
+  /// De ingetikte waarde als `#RRGGBB` in hoofdletters, of `null` wanneer het
+  /// geen volledige hexkleur is.
+  ///
+  /// Publiek omdat dit de hele regel is: het hekje mag weg, spaties en
+  /// kleine letters mogen, maar een halve kleur (`#33FF`) is geen kleur en
+  /// hoort het thema niet te bereiken.
+  static String? normalize(String raw) {
+    final up = raw.trim().toUpperCase();
+    final hex = up.startsWith('#') ? up : '#$up';
+    return RegExp(r'^#[0-9A-F]{6}$').hasMatch(hex) ? hex : null;
+  }
 
   @override
-  State<_HexColorDialog> createState() => _HexColorDialogState();
+  State<HexColorDialog> createState() => _HexColorDialogState();
 }
 
-class _HexColorDialogState extends State<_HexColorDialog> {
+class _HexColorDialogState extends State<HexColorDialog> {
   late final TextEditingController _controller;
 
   @override
@@ -28,16 +58,10 @@ class _HexColorDialogState extends State<_HexColorDialog> {
     super.dispose();
   }
 
-  String? _normalize(String raw) {
-    final up = raw.trim().toUpperCase();
-    final hex = up.startsWith('#') ? up : '#$up';
-    return RegExp(r'^#[0-9A-F]{6}$').hasMatch(hex) ? hex : null;
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final normalized = _normalize(_controller.text);
+    final normalized = HexColorDialog.normalize(_controller.text);
     return AlertDialog(
       title: Text(l10n.d('Eigen kleur (hex)')),
       content: Column(
@@ -49,7 +73,9 @@ class _HexColorDialogState extends State<_HexColorDialog> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: _parseHexColor(normalized ?? '#FFFFFF'),
+                  // Onleesbaar getikte tekst laat het vlak wit, zodat het
+                  // voorbeeld nooit een kleur toont die niet gekozen kan worden.
+                  color: parseHexColor(normalized) ?? const Color(0xFFFFFFFF),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: AppTheme.slate300),
                 ),
@@ -71,7 +97,7 @@ class _HexColorDialogState extends State<_HexColorDialog> {
                   ],
                   onChanged: (_) => setState(() {}),
                   onSubmitted: (_) {
-                    final ok = _normalize(_controller.text);
+                    final ok = HexColorDialog.normalize(_controller.text);
                     if (ok != null) Navigator.pop(context, ok);
                   },
                 ),

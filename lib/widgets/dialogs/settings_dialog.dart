@@ -50,6 +50,7 @@ import '../privacy_badge.dart';
 import '../privacy_statement_content.dart';
 import '../reader/documentation_search_tab.dart';
 import '../slides/image_zoom_dialog.dart';
+import 'hex_color_dialog.dart';
 
 part 'parts/settings_dialog_sections.dart';
 part 'parts/settings_dialog_secret.dart';
@@ -75,7 +76,6 @@ part 'parts/settings_dialog_modules.dart';
 part 'parts/settings_dialog_checklists.dart';
 part 'parts/settings_dialog_about.dart';
 part 'parts/settings_dialog_standards.dart';
-part 'parts/settings_dialog_hex_color.dart';
 part 'parts/settings_dialog_search.dart';
 part 'parts/settings_dialog_search_index.dart';
 part 'parts/settings_dialog_cve_local.dart';
