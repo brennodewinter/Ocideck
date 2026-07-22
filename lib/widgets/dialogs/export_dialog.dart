@@ -15,6 +15,7 @@ import '../../services/slide_rasterizer.dart';
 import '../../l10n/app_localizations.dart';
 import '../editors/advanced_section.dart';
 import '../../l10n/slide_quality_localization.dart';
+import '../../utils/log.dart';
 import 'slide_quality_details_dialog.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/export_block_localization.dart';
@@ -313,6 +314,39 @@ class _ExportDialogState extends State<ExportDialog> {
 
   Future<void> _export(ExportFormat format, {bool compress = false}) async {
     final l10n = context.l10n;
+
+    // Alles wat volgt kan gooien — een frame-timeout in de rasterizer, een
+    // schrijffout, een fout in de PPTX/PDF-assemblage. Zonder deze omhulling
+    // vloog zo'n uitzondering ongevangen naar buiten en werd de spinner nooit
+    // uitgezet: het dialoog bleef eeuwig op "…samenstellen…" staan, zonder
+    // melding, op 0% CPU. Dat is precies wat een gebruiker als "hij hangt"
+    // ervaart. Een fout hoort een fout te tónen, niet te bevriezen.
+    try {
+      await _runExport(format, compress: compress, l10n: l10n);
+    } catch (e, s) {
+      logError(
+        'ExportDialog._export: export mislukte met een uitzondering',
+        e,
+        s,
+      );
+      if (!mounted) return;
+      setState(() {
+        _loading = false;
+        _success = false;
+        _outputPath = null;
+        // De uitzondering erbij, want "de export is mislukt" alleen laat de
+        // gebruiker met niets achter; een pad of een reden is het verschil
+        // tussen opnieuw proberen en vastlopen.
+        _result = '${l10n.d('De export is mislukt.')}\n$e';
+      });
+    }
+  }
+
+  Future<void> _runExport(
+    ExportFormat format, {
+    required bool compress,
+    required AppLocalizations l10n,
+  }) async {
     final needsRaster = format != ExportFormat.html;
 
     // Show progress immediately so the dialog does not look idle while the

@@ -1798,6 +1798,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De export is mislukt.': 'Експортът се провали.',
   'Teams-gastclient (ontwerp)': 'Клиент за гости на Teams (дизайн)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: колко широко може да се споделя този материал?',

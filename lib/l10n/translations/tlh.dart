@@ -1751,6 +1751,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'De export is mislukt.': 'luj ngeH.',
   'Teams-gastclient (ontwerp)': 'Teams meb jan (nab)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: De\'vam luHevlaH nuv \'ar?',

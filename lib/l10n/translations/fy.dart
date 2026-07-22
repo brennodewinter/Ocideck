@@ -735,6 +735,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De export is mislukt.': 'De eksport is mislearre.',
   'Teams-gastclient (ontwerp)': 'Teams-gastclient (ûntwerp)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: hoe breed mei dit materiaal dield wurde?',

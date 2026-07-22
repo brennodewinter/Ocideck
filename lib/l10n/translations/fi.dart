@@ -1776,6 +1776,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De export is mislukt.': 'Vienti epäonnistui.',
   'Teams-gastclient (ontwerp)': 'Teams-vierasohjelma (suunnitelma)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kuinka laajasti tätä aineistoa saa jakaa?',
