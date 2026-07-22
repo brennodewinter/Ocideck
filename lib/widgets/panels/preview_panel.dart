@@ -170,18 +170,28 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
     final previewPage = richTextPage.clamp(0, pageCount - 1);
     final sourceSlide = isPagedFinding ? findingPageSlides[previewPage] : slide;
     // De publieksweergave: dezelfde projectie die presenteren en exporteren
-    // gebruiken, maar op één dia — zie [audiencePreviewSlide] voor waarom niet
-    // op het hele deck.
+    // gebruiken, maar op één dia — zie [audiencePreviewOf] voor waarom niet op
+    // het hele deck.
     final redacted = slideIsRedacted(deck, slide);
     final showAudience = redacted && ref.watch(audiencePreviewProvider);
-    final canvasSlide = showAudience
-        ? audiencePreviewSlide(
+    final audience = showAudience
+        ? audiencePreviewOf(
             deck,
             sourceSlide,
             disabledRules: settings.privacyDisabledRules,
             ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
           )
-        : sourceSlide;
+        : null;
+    final canvasSlide = audience?.slides.first ?? sourceSlide;
+    // De organisatienaam in de voettekst is net zo goed tekst die de zaal leest,
+    // en de projectie redigeert hem (privacy_projection.dart) — het
+    // presenteerscherm haalt hem al uit het geprojecteerde deck. Alleen dát veld
+    // wordt overgenomen: de rest van [deck] draagt de structuur (alle dia's, voor
+    // de nummering en de gedeelde krimpfactor), en die zit niet in een
+    // projectie van één dia.
+    final canvasDeck = audience == null
+        ? deck
+        : deck.copyWith(organization: audience.deck.organization);
 
     return Focus(
       focusNode: _focusNode,
@@ -209,7 +219,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
 
               // ── Slide canvas ─────────────────────────────────────────────────
               _slideCanvas(
-                deck,
+                canvasDeck,
                 settings,
                 canvasSlide,
                 idx,
@@ -342,6 +352,11 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
   /// De schakelaar ernaast is de controle. Uit toont hij de eigen tekst (anders
   /// valt er niets meer te bewerken), aan toont hij precies wat de ontvanger
   /// krijgt.
+  ///
+  /// "Wat de controle als persoonsgegeven aanmerkt" en niet "gevonden gegevens":
+  /// een aanwijzing zonder persoon eromheen wordt wél gemeld maar niet gelakt
+  /// (zie `PrivacyFinding.isRedactable`). De ruimere belofte zou de gebruiker
+  /// laten denken dat het woord "diagnose" uit zijn export verdwijnt.
   Widget _redactionNotice(AppLocalizations l10n, bool showAudience) {
     return Container(
       width: double.infinity,
@@ -359,7 +374,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
           Expanded(
             child: Text(
               l10n.d(
-                'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.',
+                'Weglaten staat aan: wat de controle als persoonsgegeven aanmerkt wordt zwart gemaakt, en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.',
               ),
               style: TextStyle(
                 fontSize: 11,

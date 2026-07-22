@@ -153,6 +153,9 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
   Widget _templateLanguageNotice(BuildContext context, AppLocalizations l10n) {
     if (l10n.languageCode == 'nl') return const SizedBox.shrink();
     return Padding(
+      // Sleutel zodat een test op de aanwezigheid kan toetsen zonder de tekst in
+      // 32 talen te hoeven kennen.
+      key: const ValueKey('templateLanguageNotice'),
       padding: const EdgeInsets.only(top: 4),
       child: Text(
         l10n.d(

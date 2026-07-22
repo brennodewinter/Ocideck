@@ -22,18 +22,22 @@ import 'privacy_projection.dart';
 /// [deck] gaat mee omdat de effectieve stand van de dia van het deck erft
 /// ([effectivePrivacyDisposition]) en het thema en de projectmap uit het deck
 /// komen. De bron blijft onaangeroerd; deze functie geeft een kopie.
-Slide audiencePreviewSlide(
+///
+/// Geeft het hele [AudienceDeck] terug en niet alleen de dia, omdat ook de
+/// deckvelden die op het doek belanden geprojecteerd horen te zijn — de
+/// organisatienaam in de voettekst is net zo goed tekst die de zaal leest, en
+/// het presenteerscherm haalt hem al uit het geprojecteerde deck.
+AudienceDeck audiencePreviewOf(
   Deck deck,
   Slide slide, {
   Set<String> disabledRules = const {},
   OwnIdentity ownIdentity = OwnIdentity.empty,
 }) {
-  final projected = PrivacyProjection.forAudience(
+  return PrivacyProjection.forAudience(
     deck.copyWith(slides: [slide]),
     disabledRules: disabledRules,
     ownIdentity: ownIdentity,
   );
-  return projected.slides.first;
 }
 
 /// Of deze dia bij tonen en exporteren wordt weggelakt.

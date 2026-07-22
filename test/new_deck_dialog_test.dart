@@ -256,20 +256,17 @@ void main() {
     // maar dan moet de kiezer het zeggen in plaats van het te laten ontdekken.
     tearDown(() => AppLocalizations.setActiveLanguageCode('nl'));
 
+    // Op de sleutel en niet op de tekst: de melding bestaat in 32 talen, en de
+    // vertaling opzoeken zou de test laten meebewegen met wat hij bewaakt.
+    final notice = find.byKey(const ValueKey('templateLanguageNotice'));
+
     testWidgets('wordt gemeld zodra de interface niet Nederlands is', (
       tester,
     ) async {
       AppLocalizations.setActiveLanguageCode('tr');
       final harness = _Harness();
       await harness.open(tester);
-      expect(
-        find.textContaining(
-          AppLocalizations(
-            const Locale('tr'),
-          ).d("De voorbeelddia's van een sjabloon staan in het Nederlands."),
-        ),
-        findsOneWidget,
-      );
+      expect(notice, findsOneWidget);
     });
 
     testWidgets('zwijgt in het Nederlands', (tester) async {
@@ -277,10 +274,7 @@ void main() {
       AppLocalizations.setActiveLanguageCode('nl');
       final harness = _Harness();
       await harness.open(tester);
-      expect(
-        find.textContaining("De voorbeelddia's van een sjabloon"),
-        findsNothing,
-      );
+      expect(notice, findsNothing);
     });
   });
 }
