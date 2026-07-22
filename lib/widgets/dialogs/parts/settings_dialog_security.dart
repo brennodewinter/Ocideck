@@ -276,7 +276,12 @@ extension _SettingsSecurity on _SettingsDialogState {
         ),
       ),
     );
-    if (done && mounted) Navigator.pop(context);
+    if (!done || !mounted) return;
+    // Niet "geannuleerd": het venster sluit omdat alles wat erin stond zojuist
+    // is gewist. Zonder deze vlag schrijft `_restoreLanguageIfDiscarded` de taal
+    // van vóór het openen terug en is de begintoestand meteen weer bezoedeld.
+    _saved = true;
+    Navigator.pop(context);
   }
 
   Future<bool> _confirmReset(AppLocalizations l10n, int pending) async {
