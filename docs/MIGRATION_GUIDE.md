@@ -82,3 +82,7 @@ the time the breaking change lands, not reconstructed later.
 
 Bugs and questions go to the project's issue tracker (Forgejo). There is no
 community forum, no support channel, and no mailing list.
+
+There *is* a releases feed on the forge to subscribe to — empty until the first
+release, which is exactly what this document is waiting for too. `SECURITY.md`
+names it and says what it carries. Corrected 2026-07-22.

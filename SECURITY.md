@@ -471,6 +471,43 @@ whether a fix has landed since — for that, the commit is still what matters.
 Fixes land on the default development branch, which is what everyone runs. Once
 releases are tagged, fixes will target the latest release plus that branch.
 
+## End of life and what "supported" means
+
+*Added 2026-07-22.* Nothing in this repository said anything about the other end
+of a project's life, and that is the first thing an outsider checks. A quiet
+month should not have to be read as a signal.
+
+**What is supported, today.** The default development branch, and nothing else.
+There are no releases, so a support table with versions and dates would be
+theatre. A fix lands on that branch and nowhere else, and that is the whole
+policy — see [Supported versions](#supported-versions).
+
+**What discontinuation would look like.** If this project stops, it will be said
+plainly rather than left to be inferred:
+
+- a notice at the top of [`README.md`](README.md) and of this file;
+- an entry in [`CHANGELOG.md`](CHANGELOG.md);
+- the issue tracker set to read-only rather than left open to collect reports
+  nobody will read.
+
+**Notice.** At least **three months** between that notice and the point where
+vulnerability reports stop being answered. That is chosen to be a period one
+maintainer can actually honour — a longer promise made by a project with a bus
+factor of one (see [`CONTRIBUTING.md`](CONTRIBUTING.md)) would be a promise about
+someone's future circumstances, and this file does not make those.
+
+**What happens to reports after that.** They stop being answered, and the
+[Reporting a vulnerability](#reporting-a-vulnerability) section will say so. An
+unmaintained project that still accepts vulnerability reports is worse than one
+that says it does not: it absorbs a finder's effort and returns nothing, and it
+leaves users believing someone is watching.
+
+**Archiving, not deletion.** The source stays available under its licence, and
+anyone may fork it and continue. That is the real continuity guarantee here, and
+it is stronger than any support window this project could credibly offer — it
+does not depend on us still being here. It is the same reasoning that keeps every
+deck in plain Markdown: your work should be able to outlive the tool.
+
 ## How a fix reaches you
 
 Stated plainly, because the honest answer is thinner than most projects' and a
@@ -494,6 +531,36 @@ increasing detail:
 - **This file**, for anything about a bundled component that is deferred rather
   than fixed — see [Vendored bundle
   currency](#vendored-bundle-currency).
+
+### Subscribing, rather than remembering to look
+
+*Added 2026-07-22.* All three of the above are pull: you have to think of it. For
+a fixed vulnerability that is the wrong way round, so here is what can be
+followed, stated with its limits (verified against the forge on 2026-07-22).
+
+| Feed | URL | What it carries today |
+|---|---|---|
+| **Releases** | `https://pawprint.vigilis.online/LibreKAT/Ocideck/releases.rss` | Nothing. It serves, and it is empty, because there are no releases yet |
+| **Tags** | `https://pawprint.vigilis.online/LibreKAT/Ocideck/tags.rss` | One entry, `archive/git-mirror`, which is an archived branch and not a version |
+| **Repository activity** | `https://pawprint.vigilis.online/LibreKAT/Ocideck.rss` | Everything — pushes, comments, branch deletions. Real, and mostly noise |
+
+**The releases feed is the one to subscribe to**, precisely because it is empty:
+the day it carries an item, that item is a release, and a security fix will be in
+its notes. Subscribing to an empty feed costs nothing and is the only way to be
+told rather than to have to ask. Until then the activity feed is what exists, and
+it will not distinguish a security fix from a branch deletion — which is why it
+is listed here as available rather than recommended.
+
+There is deliberately **no mailing list**. A subscriber list is personal data we
+would then hold, protect and eventually have to delete; a feed is a file on a
+server that nobody has to register for. Given what this project promises about
+data, that asymmetry decides it.
+
+**A security fix is marked in the changelog.** From 2026-07-22, an entry in
+[`CHANGELOG.md`](CHANGELOG.md) that closes a vulnerability opens with
+**`Security:`** so it is recognisable as one at a glance, in the file and in any
+feed item that quotes it. A feed only helps if the item in it can be told apart
+from the rest.
 
 If you reported something, you also get told directly: the correspondent named
 under [What happens to your report](#what-happens-to-your-report-on-our-side)
