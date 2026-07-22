@@ -471,6 +471,14 @@ whether a fix has landed since — for that, the commit is still what matters.
 Fixes land on the default development branch, which is what everyone runs. Once
 releases are tagged, fixes will target the latest release plus that branch.
 
+## The same facts, machine-readable
+
+*Added 2026-07-22.* [`security-insights.yml`](security-insights.yml) carries the
+contact, the policy links, the licence and the tooling in the OpenSSF Security
+Insights format (v2.2.0), so a downstream user's tooling can read them instead of
+someone reading this file and re-typing them. A test fails if the two disagree
+about the reporting address or the licence.
+
 ## End of life and what "supported" means
 
 *Added 2026-07-22.* Nothing in this repository said anything about the other end

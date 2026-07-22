@@ -1,0 +1,151 @@
+# OpenSSF Security Insights — the machine-readable half of what SECURITY.md,
+# CONTRIBUTING.md and COMPLIANCE.md say in prose.
+#
+# Why this file exists: every field here is a question a downstream user would
+# otherwise have to send by e-mail. It removes work rather than adding it.
+#
+# Why it is guarded: a metadata file that drifts from SECURITY.md is worse than
+# none, because this is the copy a machine reads and nobody proof-reads.
+# `test/security_insights_test.dart` fails when the two disagree.
+#
+# Spec: https://github.com/ossf/security-insights-spec (v2.2.0). Note the file
+# name — it is `security-insights.yml`, not the `SECURITY-INSIGHTS.yml` of
+# earlier drafts.
+
+header:
+  schema-version: 2.2.0
+  last-updated: '2026-07-22'
+  last-reviewed: '2026-07-22'
+  url: https://pawprint.vigilis.online/LibreKAT/Ocideck/raw/branch/main/security-insights.yml
+  comment: |
+    Single-repository project: the project and repository sections below both
+    describe OciDeck.
+
+project:
+  name: OciDeck
+  homepage: https://pawprint.vigilis.online/LibreKAT/Ocideck
+  # No `steward:` field, and that omission is deliberate rather than an
+  # oversight. The schema defines it by reference to CRA Article 3, and whether
+  # Stichting LibreKAT is an open-source software steward for this project is
+  # genuinely unsettled — the reasoning, and why it cannot be closed today, is in
+  # assurance/CRA-2024-2847-positie.md. Filling the field in would claim the
+  # label; leaving it out claims nothing, which is the accurate position.
+  administrators:
+    - name: Brenno de Winter
+      affiliation: Stichting LibreKAT
+      primary: true
+  documentation:
+    quickstart-guide: https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/README.md
+    detailed-guide: https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/docs/USER_GUIDE.md
+    support-policy: https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/SECURITY.md
+  repositories:
+    - name: Ocideck
+      url: https://pawprint.vigilis.online/LibreKAT/Ocideck
+      comment: |
+        The only repository. There is no separate website, plugin or SDK repo.
+  vulnerability-reporting:
+    reports-accepted: true
+    bug-bounty-available: false
+    contact:
+      name: Stichting LibreKAT security contact
+      email: security@librekat.nl
+      primary: true
+    policy: https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/SECURITY.md
+    comment: |
+      Report privately by e-mail; do not open a public issue. Internally the
+      project measures itself against a first response within 5 working days, an
+      assessment within 10, and a fix within 90 calendar days
+      (tool/check_service_norms.dart measures this against the tracker). Those
+      are the terms we hold ourselves to, not a service level offered to a
+      reporter — SECURITY.md deliberately promises an acknowledgement "as
+      quickly as we reasonably can".
+
+repository:
+  url: https://pawprint.vigilis.online/LibreKAT/Ocideck
+  status: active
+  bug-fixes-only: false
+  accepts-change-request: true
+  # No bots, no Dependabot, no CI runner on the forge. An automated change
+  # request would land unreviewed by anything, since `make check` runs on the
+  # maintainer's machine and not on the forge.
+  accepts-automated-change-request: false
+  no-third-party-packages: false
+  core-team:
+    - name: Brenno de Winter
+      affiliation: Stichting LibreKAT
+      primary: true
+  documentation:
+    contributing-guide: https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/CONTRIBUTING.md
+    review-policy: https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/CONTRIBUTING.md
+    security-policy: https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/SECURITY.md
+    dependency-management-policy: https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/docs/LICENSE_COMPLIANCE.md
+  license:
+    url: https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/LICENSE.md
+    expression: EUPL-1.2
+  release:
+    changelog: https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/CHANGELOG.md
+    automated-pipeline: false
+    comment: |
+      There are no releases yet: no tags, no built artefacts, no distribution
+      points. Users build from source (docs/BUILD.md) and pin a commit — the
+      commit hash is the only version identifier that exists. `distribution-
+      points` and `attestations` are omitted for that reason rather than
+      forgotten; see COMPLIANCE.md rows BR.02-04.
+  security:
+    assessments:
+      self:
+        evidence: https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/COMPLIANCE.md
+        date: '2026-07-22'
+        comment: |
+          A voluntary security attestation against the ORC WG light-weight
+          checklist, self-assessed. Three of its rows are deliberately not
+          ticked (one maintainer, self-merge, no releases). Not audited by
+          anyone; see also assurance/ for the ASVS and CRA working documents.
+    champions:
+      - name: Brenno de Winter
+        email: security@librekat.nl
+        primary: true
+    tools:
+      - name: Semgrep
+        type: SAST
+        rulesets:
+          - custom
+        integration:
+          adhoc: true
+          ci: false
+          release: false
+        comment: |
+          Local rules only (semgrep/ocideck.yaml), never `--config auto`, which
+          would fetch rules over the network during a scan and send metrics.
+          Run via `make sast`.
+      - name: gitleaks
+        type: secret-scanning
+        integration:
+          adhoc: true
+          ci: false
+          release: false
+        comment: Run via `make check-secrets`, over the working tree and history.
+      - name: TruffleHog
+        type: secret-scanning
+        integration:
+          adhoc: true
+          ci: false
+          release: false
+        comment: |
+          Run via `make check-secrets` with `--no-verification`, so candidate
+          keys are never sent to the issuing service.
+      - name: OSV
+        type: SCA
+        integration:
+          adhoc: true
+          ci: false
+          release: false
+        comment: |
+          `make deps-check` scans the vendored export JavaScript. The Dart
+          package graph is scanned only advisorily (`make trivy`), because pub
+          advisory coverage is sparse.
+    comment: |
+      Every tool above runs on the maintainer's machine, never on the forge:
+      there is no CI runner. `.github/workflows/ci.yml` declares a pipeline that
+      does not execute. What actually gates a change is `make check` before the
+      merge — see docs/CHECKS.md.
