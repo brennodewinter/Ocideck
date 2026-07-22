@@ -1,4 +1,4 @@
-.PHONY: dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code check-hardcoded-text coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code check-hardcoded-text coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help servicenormen doorlooptijd
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -52,6 +52,7 @@ help:
 	@echo "  make trivy           Advisory supply-chain scan: Dart-dep CVEs + committed secrets (needs trivy)."
 	@echo "  make check-actions   Advisory: exact-pinned CI Actions vs their latest release."
 	@echo "  make servicenormen   Interne reactietermijnen op beveiligingsmeldingen (--quiet voor cron)."
+	@echo "  make doorlooptijd    Doorlooptijd van gewone issues (adviserend; --quiet voor cron)."
 	@echo "  make licenses        Verify all dependencies use open-source licences."
 	@echo "  make sbom            Generate the SBOM (CycloneDX + SPDX) in sbom/."
 	@echo "  make sbom-verify     Fail if the committed SBOM is stale (CRA staleness gate)."
@@ -410,6 +411,28 @@ servicenormen:
 	@echo "        anders: er kón niet gemeten worden (geen leessleutel, geen"
 	@echo "        netwerk). Dat is geen normoverschrijding maar wél een defect."
 	dart run tool/check_service_norms.dart
+
+# Doorlooptijd van de GEWONE tracker: leeftijd, tijd tot eerste reactie, hoeveel
+# er open staan zonder enig antwoord, en triage-issues die nooit verder kwamen.
+#
+# Adviserend, en dat is hier de standaard en niet een vlag. Voor gewone issues
+# bestaat geen afgesproken termijn — bewust niet, want een zelf opgelegde
+# deadline die je op een rustige week mist, maakt van een leermoment een
+# verwijt. Er valt dus niets te falen; `--strict` bestaat voor wie er later wél
+# een norm bij afspreekt.
+#
+# Om dezelfde reden als servicenormen hierboven staat dit in geen enkel
+# verzameldoel: het heeft een persoonlijke leessleutel nodig, en exit 2 ("kon
+# niet meten") zou bij een medewerker zonder sleutel als defect lezen.
+doorlooptijd:
+	@echo "== OciDeck meting: doorlooptijd gewone issues (adviserend) =="
+	@echo "Command: dart run tool/check_issue_turnaround.dart"
+	@echo "Covers: leeftijd per open issue, tijd tot eerste reactie, issues"
+	@echo "        zonder enige reactie, en stilstand op het label triage."
+	@echo "Failure means: niets — dit meet en oordeelt niet. Exit 2 betekent wel"
+	@echo "        iets: er kón niet gemeten worden (geen leessleutel, geen"
+	@echo "        netwerk). Dat is geen signaal maar een defect."
+	dart run tool/check_issue_turnaround.dart
 
 # Security gate for the vendored JS bundles inlined into the HTML export.
 # Verifies each file still matches assets/web_export/MANIFEST.json (sha256) and

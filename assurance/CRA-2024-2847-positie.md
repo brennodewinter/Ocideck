@@ -55,6 +55,11 @@ naleving maar over of het werk goed genoeg is.
    oordeel 10, oplossing 90). Voor gewone issues meet niets iets. Een issue die
    maanden stil ligt is geen beveiligingsprobleem maar wel een kwaliteitssignaal,
    en het is precies wat een buitenstaander als eerste ziet.
+   *Uitgevoerd (#537):* `tool/check_issue_turnaround.dart` (`make doorlooptijd`)
+   meet leeftijd, tijd tot eerste reactie, het aantal open issues zonder énige
+   reactie, en stilstand op `triage`. Adviserend, en dat is er de standaard:
+   voor gewone issues is bewust géén termijn afgesproken — eerst een basislijn,
+   dan pas het gesprek over een norm.
 2. **Kwaliteitsslagen — is het goed genoeg.** De poorten meten of iets *werkt*.
    Ze meten niet of de dekking op de juiste plekken zit, of een test werkelijk
    iets bewijst, of de basislijnen krimpen in plaats van stil te blijven staan.
