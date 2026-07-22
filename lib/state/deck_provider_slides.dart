@@ -151,9 +151,12 @@ extension DeckNotifierSlides on DeckNotifier {
           continuesSplit: i == 0 ? slide.continuesSplit : true,
         ),
     ];
-    switch (slide.type) {
-      case SlideType.bullets:
-      case SlideType.bulletsImage:
+    // Het aantal bulletkolommen komt uit de registry naast de enum, zodat deze
+    // knip en [canSplitSlide] niet elk hun eigen typelijst bijhouden.
+    switch (slide.type.bulletColumns) {
+      case BulletColumns.none:
+        return null;
+      case BulletColumns.one:
         if (slide.bullets.length < 2) return null;
         // Checklists houden hun ruimere optimum aan (consistent met de
         // waarschuwingsdrempel), zodat een lijst van 12 niet onnodig krimpt.
@@ -164,14 +167,12 @@ extension DeckNotifierSlides on DeckNotifier {
           for (final p in splitBulletsIntoPages(slide.bullets, size))
             (p, const <String>[]),
         ]);
-      case SlideType.twoBullets:
+      case BulletColumns.two:
         if (slide.bullets.length < 2 && slide.bullets2.length < 2) return null;
         const perColumn = kTwoColumnBulletWarningCount ~/ 2;
         return build(
           splitTwoColumnsIntoPages(slide.bullets, slide.bullets2, perColumn),
         );
-      default:
-        return null;
     }
   }
 

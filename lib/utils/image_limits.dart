@@ -122,23 +122,6 @@ ImageProvider cappedFileImage(File file) =>
 ImageProvider cappedMemoryImage(Uint8List bytes) =>
     CappedImage(bytes, () async => bytes);
 
-/// A [NetworkImage] whose decode is capped to [kMaxImageDecodeDimension], the
-/// network twin of [cappedFileImage]. Used for deck-supplied `http(s)` image
-/// URLs so a remote (untrusted) image can't exhaust memory on decode. The
-/// caller is responsible for the remote-media gate and SSRF host check before
-/// constructing this; the cap is the decode-bomb defence only.
-///
-/// Remote images use [ResizeImage] (first frame only for animated sources): the
-/// SSRF/remote-media gate governs them and re-fetching bytes for a custom
-/// animated decode isn't worth the extra network surface.
-ImageProvider cappedNetworkImage(String url) => ResizeImage(
-  NetworkImage(url),
-  width: kMaxImageDecodeDimension,
-  height: kMaxImageDecodeDimension,
-  policy: ResizeImagePolicy.fit,
-  allowUpscaling: false,
-);
-
 /// An [AssetImage] whose decode is capped to [kMaxImageDecodeDimension] —
 /// voor `asset:`-paden (méégebundelde logo's van ingebouwde stijlprofielen).
 /// Gebundelde assets zijn vertrouwd en statisch, dus [ResizeImage] volstaat;

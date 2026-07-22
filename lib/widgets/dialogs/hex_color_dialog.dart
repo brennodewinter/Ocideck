@@ -72,10 +72,9 @@ class _HexColorDialogState extends State<HexColorDialog> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  // Onleesbaar getikte tekst laat het vlak wit (de terugval van
-                  // [AppTheme.parseHex]), zodat het voorbeeld nooit een kleur
-                  // toont die niet gekozen kan worden.
-                  color: AppTheme.parseHex(normalized ?? ''),
+                  // Onleesbaar getikte tekst laat het vlak wit, zodat het voorbeeld
+                  // nooit een kleur toont die niet gekozen kan worden.
+                  color: AppTheme.parseHexColor(normalized ?? '#FFFFFF'),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: AppTheme.slate300),
                 ),

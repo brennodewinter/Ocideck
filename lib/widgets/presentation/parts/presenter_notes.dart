@@ -99,9 +99,9 @@ extension _PresenterNotes on _FullscreenPresenterState {
     final slide = _currentSlide;
     final pageCount = _richTextPageCountFor(slide);
     final showPageLabel = pageCount > 1;
-    final bg = _hexColor(profile.slideBackgroundColor);
-    final fg = _hexColor(profile.textColor);
-    final accent = _hexColor(profile.accentColor);
+    final bg = AppTheme.parseHexColor(profile.slideBackgroundColor);
+    final fg = AppTheme.parseHexColor(profile.textColor);
+    final accent = AppTheme.parseHexColor(profile.accentColor);
     return Positioned(
       top: 24,
       right: 24,

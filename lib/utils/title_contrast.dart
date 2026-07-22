@@ -54,7 +54,7 @@ Color _effectiveTextColor(ThemeProfile theme, Slide slide) {
   final hex = slide.titleTextColorOverride.isNotEmpty
       ? slide.titleTextColorOverride
       : theme.titleTextColor;
-  return parseHexColor(hex) ?? Colors.white;
+  return tryParseHexColor(hex) ?? Colors.white;
 }
 
 Color _background(
@@ -70,7 +70,7 @@ Color _background(
   final washHex = slide.type == SlideType.section
       ? theme.sectionBackgroundColor
       : theme.titleBackgroundColor;
-  final wash = parseHexColor(washHex) ?? AppTheme.navy;
+  final wash = tryParseHexColor(washHex) ?? AppTheme.navy;
   return Color.alphaBlend(wash.withValues(alpha: kTitleOverlayAlpha), avgImage);
 }
 

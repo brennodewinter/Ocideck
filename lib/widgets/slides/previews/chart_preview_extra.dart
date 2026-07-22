@@ -567,7 +567,9 @@ extension _ChartPreviewExtra on _ChartPreviewState {
                           radius: w * 0.006,
                           color: lineColor,
                           strokeWidth: w * 0.0025,
-                          strokeColor: _hexColor(profile.slideBackgroundColor),
+                          strokeColor: AppTheme.parseHexColor(
+                            profile.slideBackgroundColor,
+                          ),
                         ),
                   ),
                 ),
@@ -882,11 +884,11 @@ extension _ChartPreviewExtra on _ChartPreviewState {
         : ((v - low) / (high - low)).clamp(0.0, 1.0);
     final fillHex = heatmapColorAt(ramp, norm);
     final color = present
-        ? _hexColor(fillHex)
+        ? AppTheme.parseHexColor(fillHex)
         : textColor.withValues(alpha: 0.04);
     // The cell colour is fixed (not the theme), so the label colour is too:
     // white on the hot/dark cells, dark ink on the pale ones.
-    final onColor = _hexColor(heatmapInk(fillHex));
+    final onColor = AppTheme.parseHexColor(heatmapInk(fillHex));
     return Padding(
       padding: EdgeInsets.all(w * 0.0025),
       child: Opacity(
@@ -946,7 +948,9 @@ extension _ChartPreviewExtra on _ChartPreviewState {
                     height: w * 0.012,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [for (final s in ramp) _hexColor(s)],
+                        colors: [
+                          for (final s in ramp) AppTheme.parseHexColor(s),
+                        ],
                       ),
                       borderRadius: BorderRadius.circular(w * 0.008),
                     ),

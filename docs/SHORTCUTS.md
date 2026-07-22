@@ -1,5 +1,7 @@
 # OciDeck — Keyboard shortcuts
 
+> **Status:** reference, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 `Ctrl` is shown for Windows/Linux; use `Cmd` (⌘) on macOS.
 
 ## Editor (app-wide)

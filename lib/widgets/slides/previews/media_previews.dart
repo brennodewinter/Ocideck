@@ -281,7 +281,7 @@ class _TwoImagesPreview extends StatelessWidget {
     final titleSize = w * 0.032;
 
     return Container(
-      color: _hexColor(profile.slideBackgroundColor),
+      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -398,7 +398,7 @@ class _ImagePreview extends StatelessWidget {
           slide.imagePath,
           projectPath,
           slide.imageSize,
-          bgColor: _hexColor(profile.slideBackgroundColor),
+          bgColor: AppTheme.parseHexColor(profile.slideBackgroundColor),
           // A focal point (crop) decides which part of the picture stays in
           // view. Without one, keep the old default: when zoomed out, anchor to
           // the top so the bottom title banner sits in the freed-up space.

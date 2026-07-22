@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import '../../models/git_settings.dart';
-import '../file_service.dart';
+import 'forge_http.dart';
 import 'git_forge.dart';
 import 'git_transport.dart';
 import 'git_transport_factory.dart';
@@ -26,28 +26,39 @@ import 'git_transport_factory.dart';
 ///   dan weigert hij.
 /// - **Een pull request heet een merge request**, en wordt niet op zijn nummer
 ///   maar op zijn `iid` (per project oplopend) aangesproken.
-class GitLabForge implements GitForge, CodeSearchCapable {
+class GitLabForge with ForgeHttp implements GitForge, CodeSearchCapable {
   GitLabForge({
     required this.config,
     required this.token,
     GitTransport? transport,
-  }) : _transport = transport ?? createGitTransport(config);
+  }) : transport = transport ?? createGitTransport(config);
 
+  @override
   final GitRepoConfig config;
 
   /// Het personal access token, uit de keychain gehaald door de aanroeper.
   /// Leeg is toegestaan: een publieke repo lezen mag zonder.
   final String token;
 
-  final GitTransport _transport;
+  @override
+  final GitTransport transport;
 
-  static const int maxBlobBytes = FileService.maxPackageBytes;
-  static const int maxListingBytes = 16 * 1024 * 1024;
-  static const int maxListingEntries = 5000;
+  static const int maxBlobBytes = kForgeMaxBlobBytes;
+  static const int maxListingBytes = kForgeMaxListingBytes;
+  static const int maxListingEntries = kForgeMaxListingEntries;
+
+  @override
+  String get forgeName => 'GitLab';
+
+  /// Anders dan bij GitHub en Gitea: GitLab gebruikt 409 voor een botsing, niet
+  /// voor een lege repository. Die meldt hij met `empty_repo` in [probe].
+  @override
+  bool get treats409AsEmptyRepo => false;
 
   /// GitLab wil `PRIVATE-TOKEN`, waar Gitea `Authorization: token` wil en
   /// GitHub `Bearer`.
-  Map<String, String> get _headers => {
+  @override
+  Map<String, String> get headers => {
     'Accept': 'application/json',
     if (token.trim().isNotEmpty) 'PRIVATE-TOKEN': token.trim(),
   };
@@ -57,7 +68,8 @@ class GitLabForge implements GitForge, CodeSearchCapable {
   String get _projectId =>
       Uri.encodeComponent('${config.owner}/${config.repo}');
 
-  Uri _apiUri(List<String> segments, {Map<String, String>? query}) {
+  @override
+  Uri apiUri(List<String> segments, {Map<String, String>? query}) {
     final origin = config.origin;
     if (origin == null) {
       throw const GitForgeException(
@@ -86,8 +98,8 @@ class GitLabForge implements GitForge, CodeSearchCapable {
     // komt er een leeg antwoord terug — dat vangen we hieronder af.
     final GitResponse response;
     try {
-      response = await _transport.get(
-        _apiUri(
+      response = await transport.get(
+        apiUri(
           ['search'],
           query: {
             'scope': 'blobs',
@@ -96,14 +108,14 @@ class GitLabForge implements GitForge, CodeSearchCapable {
             'per_page': '100',
           },
         ),
-        headers: _headers,
+        headers: headers,
         maxBytes: maxListingBytes,
       );
     } on GitForgeException {
       return null;
     }
     if (response.status != 200) return null;
-    final json = _decodeJson(response.bytes);
+    final json = decodeJson(response.bytes);
     if (json is! List) return null;
     final dirs = <String>{};
     for (final raw in json) {
@@ -126,14 +138,14 @@ class GitLabForge implements GitForge, CodeSearchCapable {
     String path, {
     bool recursive = false,
   }) async {
-    _requireRef(ref);
+    requireRef(ref);
     if (path.isNotEmpty && !GitRepoLayout.isSafeRepoPath(path)) {
       throw const GitForgeException(
         GitForgeError.malformed,
         'Onveilig pad opgevraagd',
       );
     }
-    final json = await _getJson(
+    final json = await getJson(
       ['repository', 'tree'],
       query: {
         'ref': ref,
@@ -148,7 +160,7 @@ class GitLabForge implements GitForge, CodeSearchCapable {
         'Onverwacht antwoord op een tree-listing',
       );
     }
-    _requireEntryCount(json.length);
+    requireEntryCount(json.length);
     final out = <RepoEntry>[];
     for (final raw in json) {
       if (raw is! Map) continue;
@@ -172,7 +184,7 @@ class GitLabForge implements GitForge, CodeSearchCapable {
 
   @override
   Future<Uint8List> readBlob(String ref, String path) async {
-    _requireRef(ref);
+    requireRef(ref);
     if (!GitRepoLayout.isSafeRepoPath(path)) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -180,12 +192,12 @@ class GitLabForge implements GitForge, CodeSearchCapable {
       );
     }
     // `files/<pad>/raw` levert de bytes zelf; het pad is één geëncodeerd segment.
-    final response = await _transport.get(
-      _apiUri(['repository', 'files', path, 'raw'], query: {'ref': ref}),
-      headers: _headers,
+    final response = await transport.get(
+      apiUri(['repository', 'files', path, 'raw'], query: {'ref': ref}),
+      headers: headers,
       maxBytes: maxBlobBytes,
     );
-    _checkStatus(response.status);
+    checkStatus(response.status);
     return response.bytes;
   }
 
@@ -212,13 +224,13 @@ class GitLabForge implements GitForge, CodeSearchCapable {
     // Niet via [_apiUri]: die plakt er een schuine streep achter wanneer er
     // geen segmenten zijn, en juist op het project zelf is dat een pad dat
     // niet elke GitLab-opstelling accepteert.
-    final response = await _transport.get(
+    final response = await transport.get(
       origin.replace(path: '/api/v4/projects/$_projectId'),
-      headers: _headers,
+      headers: headers,
       maxBytes: maxListingBytes,
     );
-    _checkStatus(response.status);
-    final json = _decodeJson(response.bytes);
+    checkStatus(response.status);
+    final json = decodeJson(response.bytes);
     if (json is! Map) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -246,8 +258,8 @@ class GitLabForge implements GitForge, CodeSearchCapable {
 
   @override
   Future<String> headSha(String branch) async {
-    _requireRef(branch);
-    final json = await _getJson(['repository', 'branches', branch]);
+    requireRef(branch);
+    final json = await getJson(['repository', 'branches', branch]);
     final commit = json is Map ? json['commit'] : null;
     final sha = commit is Map ? commit['id'] : null;
     if (sha is! String || sha.trim().isEmpty) {
@@ -269,8 +281,8 @@ class GitLabForge implements GitForge, CodeSearchCapable {
     required List<String> deletes,
     required String baseSha,
   }) async {
-    _requireRef(branch);
-    _requireRef(baseSha);
+    requireRef(branch);
+    requireRef(baseSha);
     if (upserts.isEmpty && deletes.isEmpty) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -312,23 +324,19 @@ class GitLabForge implements GitForge, CodeSearchCapable {
       );
     }
 
-    final response = await _transport.send(
+    final response = await sendJson(
       'POST',
-      _apiUri(['repository', 'commits']),
-      headers: {..._headers, 'Content-Type': 'application/json'},
-      body: utf8.encode(
-        jsonEncode({
-          'branch': branch,
-          'commit_message': message,
-          // Dít is de concurrency-guard: commit je op een basis die niet meer de
-          // kop van de branch is, dan weigert GitLab in plaats van eroverheen te
-          // schrijven.
-          'start_sha': baseSha,
-          'start_branch': branch,
-          'actions': actions,
-        }),
-      ),
-      maxBytes: maxListingBytes,
+      ['repository', 'commits'],
+      {
+        'branch': branch,
+        'commit_message': message,
+        // Dít is de concurrency-guard: commit je op een basis die niet meer de
+        // kop van de branch is, dan weigert GitLab in plaats van eroverheen te
+        // schrijven.
+        'start_sha': baseSha,
+        'start_branch': branch,
+        'actions': actions,
+      },
     );
     // 400 met een "changed since" / 409: iemand anders was ons voor.
     if (response.status == 409 || response.status == 400) {
@@ -339,9 +347,9 @@ class GitLabForge implements GitForge, CodeSearchCapable {
             'opende. Haal de nieuwste versie op voordat je opnieuw opslaat.',
       );
     }
-    _checkStatus(response.status);
+    checkStatus(response.status);
 
-    final json = _decodeJson(response.bytes);
+    final json = decodeJson(response.bytes);
     final sha = json is Map ? json['id'] : null;
     if (sha is! String || sha.trim().isEmpty) {
       throw const GitForgeException(
@@ -356,7 +364,7 @@ class GitLabForge implements GitForge, CodeSearchCapable {
 
   @override
   Future<List<BranchRef>> listBranches() async {
-    final json = await _getJson(
+    final json = await getJson(
       ['repository', 'branches'],
       query: {'per_page': '100'},
     );
@@ -366,15 +374,15 @@ class GitLabForge implements GitForge, CodeSearchCapable {
         'Onverwacht antwoord op een branch-listing',
       );
     }
-    _requireEntryCount(json.length);
+    requireEntryCount(json.length);
     return [for (final raw in json) ?_branchRef(raw)];
   }
 
   @override
   Future<BranchRef> createBranch(String name, {required String fromRef}) async {
-    _requireRef(name);
-    _requireRef(fromRef);
-    final json = await _post(
+    requireRef(name);
+    requireRef(fromRef);
+    final json = await post(
       ['repository', 'branches'],
       {'branch': name.trim(), 'ref': fromRef},
     );
@@ -390,7 +398,7 @@ class GitLabForge implements GitForge, CodeSearchCapable {
 
   @override
   Future<List<TagRef>> listTags() async {
-    final json = await _getJson(
+    final json = await getJson(
       ['repository', 'tags'],
       query: {'per_page': '100'},
     );
@@ -400,7 +408,7 @@ class GitLabForge implements GitForge, CodeSearchCapable {
         'Onverwacht antwoord op een tag-listing',
       );
     }
-    _requireEntryCount(json.length);
+    requireEntryCount(json.length);
     return [for (final raw in json) ?_tagRef(raw)];
   }
 
@@ -410,9 +418,9 @@ class GitLabForge implements GitForge, CodeSearchCapable {
     required String target,
     required String message,
   }) async {
-    _requireRef(name);
-    _requireRef(target);
-    final json = await _post(
+    requireRef(name);
+    requireRef(target);
+    final json = await post(
       ['repository', 'tags'],
       {'tag_name': name.trim(), 'ref': target, 'message': message},
     );
@@ -433,9 +441,9 @@ class GitLabForge implements GitForge, CodeSearchCapable {
     required String title,
     String body = '',
   }) async {
-    _requireRef(head);
-    _requireRef(base);
-    final json = await _post(
+    requireRef(head);
+    requireRef(base);
+    final json = await post(
       ['merge_requests'],
       {
         'source_branch': head,
@@ -466,19 +474,15 @@ class GitLabForge implements GitForge, CodeSearchCapable {
         'Ongeldig merge-request-nummer',
       );
     }
-    final response = await _transport.send(
+    final response = await sendJson(
       'PUT',
-      _apiUri(['merge_requests', '$number', 'merge']),
-      headers: {..._headers, 'Content-Type': 'application/json'},
-      body: utf8.encode(
-        jsonEncode({
-          // GitLab kent squash als vlag, niet als merge-methode; rebase is
-          // een aparte endpoint. Voor onze doeleinden is de gewone merge genoeg.
-          if (method == PullRequestMergeMethod.squash) 'squash': true,
-          'should_remove_source_branch': deleteBranch,
-        }),
-      ),
-      maxBytes: maxListingBytes,
+      ['merge_requests', '$number', 'merge'],
+      {
+        // GitLab kent squash als vlag, niet als merge-methode; rebase is een
+        // aparte endpoint. Voor onze doeleinden is de gewone merge genoeg.
+        if (method == PullRequestMergeMethod.squash) 'squash': true,
+        'should_remove_source_branch': deleteBranch,
+      },
     );
     // 405 = niet mergebaar (openstaande discussies, pipelines), 409 = verzet.
     if (response.status == 405 || response.status == 409) {
@@ -488,7 +492,7 @@ class GitLabForge implements GitForge, CodeSearchCapable {
         'conflicten op de forge.',
       );
     }
-    _checkStatus(response.status);
+    checkStatus(response.status);
     return PullRequestRef(
       number: number,
       url: '',
@@ -499,8 +503,8 @@ class GitLabForge implements GitForge, CodeSearchCapable {
 
   @override
   Future<PullRequestRef?> pullRequestForBranch(String head) async {
-    _requireRef(head);
-    final json = await _getJson(
+    requireRef(head);
+    final json = await getJson(
       ['merge_requests'],
       query: {
         'state': 'opened',
@@ -514,7 +518,7 @@ class GitLabForge implements GitForge, CodeSearchCapable {
         'Onverwacht antwoord op een merge-request-listing',
       );
     }
-    _requireEntryCount(json.length);
+    requireEntryCount(json.length);
     for (final raw in json) {
       final pr = _pullRef(raw);
       if (pr != null && pr.head == head.trim()) return pr;
@@ -523,34 +527,6 @@ class GitLabForge implements GitForge, CodeSearchCapable {
   }
 
   // ── Gedeeld ─────────────────────────────────────────────────────────────────
-
-  Future<Object?> _getJson(
-    List<String> segments, {
-    Map<String, String>? query,
-  }) async {
-    final response = await _transport.get(
-      _apiUri(segments, query: query),
-      headers: _headers,
-      maxBytes: maxListingBytes,
-    );
-    _checkStatus(response.status);
-    return _decodeJson(response.bytes);
-  }
-
-  Future<Object?> _post(
-    List<String> segments,
-    Map<String, Object?> body,
-  ) async {
-    final response = await _transport.send(
-      'POST',
-      _apiUri(segments),
-      headers: {..._headers, 'Content-Type': 'application/json'},
-      body: utf8.encode(jsonEncode(body)),
-      maxBytes: maxListingBytes,
-    );
-    _checkStatus(response.status);
-    return _decodeJson(response.bytes);
-  }
 
   BranchRef? _branchRef(Object? raw) {
     if (raw is! Map) return null;
@@ -591,73 +567,6 @@ class GitLabForge implements GitForge, CodeSearchCapable {
     );
   }
 
-  void _requireEntryCount(int count) {
-    if (count > maxListingEntries) {
-      throw const GitForgeException(
-        GitForgeError.tooLarge,
-        'Te veel bestanden in één listing',
-      );
-    }
-  }
-
-  void _checkStatus(int status) {
-    if (status >= 200 && status < 300) return;
-    if (status == 401) {
-      throw GitForgeException(
-        GitForgeError.auth,
-        'Aanmelden bij GitLab mislukt ($status). Controleer je token en of het '
-        'toegang heeft tot ${config.slug}.',
-      );
-    }
-    if (status == 403) {
-      throw const GitForgeException(
-        GitForgeError.forbidden,
-        'Token geldig, maar zonder rechten hiervoor (403).',
-      );
-    }
-    if (status == 404) {
-      // Ook wanneer het token het project niet mag zien: GitLab verraadt liever
-      // niet dát het bestaat. De melding mag dat niet als zekerheid brengen.
-      throw const GitForgeException(
-        GitForgeError.notFound,
-        'Niet gevonden — of je token heeft er geen toegang toe.',
-      );
-    }
-    if (status >= 500) {
-      throw GitForgeException(GitForgeError.server, 'Serverfout ($status)');
-    }
-    throw GitForgeException(GitForgeError.server, 'Onverwachte status $status');
-  }
-
-  Object? _decodeJson(Uint8List bytes) {
-    if (bytes.isEmpty) return null;
-    try {
-      return jsonDecode(utf8.decode(bytes));
-    } catch (e) {
-      throw const GitForgeException(
-        GitForgeError.malformed,
-        'Antwoord van GitLab is geen geldige JSON',
-      );
-    }
-  }
-
-  void _requireRef(String ref) {
-    final r = ref.trim();
-    if (r.isEmpty ||
-        r.length > 255 ||
-        r.startsWith('-') ||
-        r.contains('..') ||
-        r.contains('?') ||
-        r.contains('#') ||
-        r.contains('&') ||
-        r.codeUnits.any((c) => c < 0x20 || c == 0x7f)) {
-      throw const GitForgeException(
-        GitForgeError.malformed,
-        'Ongeldige branch-, tag- of commitnaam',
-      );
-    }
-  }
-
   @override
-  void close() => _transport.close();
+  void close() => transport.close();
 }

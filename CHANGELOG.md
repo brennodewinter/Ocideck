@@ -10,6 +10,77 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Changed
+- **Twee stille valkuilen bij een nieuw slidetype weggenomen.** Welke slidetypes
+  hun inhoud als tabel bewaren, stond op twee plekken met de hand bijgehouden:
+  in de parser én in de serialisatie. Wie een nieuw tabeltype in de parser
+  vergat, kreeg geen foutmelding — het deck opende, de dia stond er, en de rijen
+  waren na herladen leeg. Datzelfde gold voor "kan deze bulletslide in tweeën?",
+  dat op drie plekken apart was uitgeschreven; de kopie in de slidestrook viel
+  bij een onbekend type stil terug op "nee", zodat de knip in het paneel wel
+  verscheen en op de kaart niet.
+
+  Beide feiten staan nu één keer opgeschreven, naast de opsomming van
+  slidetypes zelf, en een toets vergelijkt ze met wat het opslaan-en-teruglezen
+  werkelijk doet. Voor u verandert er niets aan wat u ziet; het scheelt bij het
+  toevoegen van een slidetype twee bestanden waar het stil mis kon gaan.
+- **Een afbeelding van internet wordt nu opgehaald over een vastgezette
+  verbinding.** Staat er een `http(s)`-afbeelding op een dia, dan controleerde
+  OciDeck eerst of die host niet naar binnen wees — maar liet het ophalen daarna
+  aan Flutter over, en dat zoekt de naam nóg een keer op. Wie het domeinnaamsysteem
+  in handen heeft, kon in dat korte venster van een publiek adres naar een intern
+  adres omschakelen. OciDeck haalt de bytes nu zelf op, over een verbinding die
+  vastzit op het gekeurde adres; er is dus geen tweede opzoeking meer.
+
+  Bijkomstig: bewegende afbeeldingen (GIF, geanimeerde WebP) van internet bewegen
+  nu ook, net als die uit een map. Ze toonden eerder alleen het eerste beeldje.
+
+  Voor **video** blijft dat venster bestaan — de videospeler van het besturingssysteem
+  opent zijn eigen verbinding en er is geen plek om die vast te zetten. Wat daar
+  overblijft is een verzoek naar binnen waarvan het antwoord de app nooit bereikt.
+- **Het kenmerk van een redactie is langer geworden.** In het bestand met
+  redacties naast een geredigeerd rapport draagt elke redactie een kort kenmerk,
+  zodat een lezer kan zeggen: "ik betwist redactie a3f1e2b7". Dat kenmerk was
+  vier tekens lang, en dat is te kort: bij ongeveer driehonderd redacties in één
+  rapport is de kans al één op twee dat er twee hetzelfde heten — en dan wijst
+  een betwisting naar twee dingen tegelijk. Voortaan zijn het er minstens acht,
+  en meer zodra dat nodig is om ze uit elkaar te houden. Bestaande bestanden
+  blijven gewoon leesbaar; het bewijs zat altijd al in de volledige waarde
+  ernaast, niet in het kenmerk.
+- **De hostinggids stelt nu voorwaarden in plaats van aanbevelingen.** Wie de
+  webversie publiek zet, vindt in `docs/HOSTING.md` een blok release-voorwaarden:
+  de beveiligingsheaders als échte HTTP-header, en — als u het optionele
+  fetch-hulppunt inzet — binden op `127.0.0.1`, een origin-lijst plus
+  authenticatie zodra het verder reikt dan strikt same-origin, en verlaagde
+  plafonds wanneer u het bewust als open fetcher draait.
+
+  Aanleiding is dat de standaardcontrole van dat hulppunt (`Sec-Fetch-Site:
+  same-origin`) wel elke andere *website* buiten de deur houdt, maar geen `curl`.
+  Dat is met een header niet op te lossen en stond al eerlijk in de code; het
+  stond alleen nergens waar een beheerder erlangs moet. De SSRF-grens zelf
+  verandert niet — interne adressen bleven en blijven onbereikbaar.
+
+  In de instellingentabel van `server/fetch-proxy/README.md` stond bovendien dat
+  een lege `OCIDECK_PROXY_ALLOWED_ORIGINS` "geen check" betekende. Dat was het
+  omgekeerde van wat de code doet: leeg betekent juist de striktste stand.
+  Rechtgezet, samen met drie instellingen die er helemaal niet in stonden.
+- **Het tijdstempelverzoek draagt nu een nonce.** Vraagt u een RFC 3161-stempel
+  aan, dan zit er voortaan een willekeurig getal in het `.tsq`-bestand dat de
+  tijdstempeldienst in het token moet herhalen. Daarmee is aan te tonen dát het
+  token dat u terugkrijgt het antwoord op úw verzoek is, en niet een ouder token
+  voor dezelfde hash dat iemand opnieuw indient. Zonder dat getal was er niets
+  om die twee aan elkaar te knopen.
+
+  OciDeck kan die controle bij het inlezen niet zelf doen — het bestand bewaart
+  uw verzoek niet, dus na een herstart is de andere helft weg. Wie beide
+  bestanden heeft, kan het wél nakijken (`openssl ts -reply -in … -text`).
+- **Zet u versleuteling aan bij een pakket, dan staat er meteen een sterk
+  wachtwoord klaar.** Het veld was leeg, en dan verzint een mens iets dat hij
+  kan onthouden. Juist bij dit bestandsformaat is dat de zwakke plek: de manier
+  waarop het wachtwoord tot een sleutel wordt omgerekend ligt vast in de
+  zip-standaard en is niet te versterken zonder dat andere programma's uw
+  pakket niet meer kunnen openen. De sterkte van het wachtwoord is dus wat
+  telt. Het staat zichtbaar in beeld zodat u het kunt overnemen, en u kunt er
+  altijd uw eigen zin voor in de plaats zetten.
 - **Geen base64 meer in uw presentatiebestand.** De belofte van OciDeck is dat u
   met alleen een teksteditor en Marp verder kunt. Op zeven plekken klopte dat
   niet: daar stond een blok onleesbare tekens waar uw inhoud in verstopt zat.
@@ -78,6 +149,12 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   geen alt-tekst en geen structuur — ook niet de alt-tekst die u in de editor
   invulde. Moet de ontvanger kunnen lézen in plaats van kijken, lever dan de
   markdown of de HTML.
+- **De drie git-koppelingen praten voortaan via dezelfde plumbing.** GitHub,
+  GitLab en Forgejo/Gitea hadden elk hun eigen — nagenoeg woordelijk gelijke —
+  afhandeling van verzoeken, foutstatussen en antwoorden. Dat is samengetrokken,
+  zodat een verscherping niet meer op één plek landt en op de andere twee
+  achterblijft. Voor u verandert er niets aan wat de koppelingen doen; alleen de
+  melding bij een te grote maplijst noemt nu overal het aantal.
 
 ### Fixed
 - **Een presentatie die naar een submap gaat, komt daar ook onder die naam
@@ -88,6 +165,17 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   van te maken. Beide kanten normaliseerden dat weg, dus er raakte niets kwijt —
   maar wat over de lijn gaat, hoort te staan zoals u het koos.
 
+- **Video en audio worden nu ook op hun inhoud gecontroleerd.** Van een
+  afbeelding werd altijd al nagegaan of het écht een afbeelding was; bij video
+  en audio werd alleen naar de omvang gekeken. Een willekeurig bestand met de
+  naam `.mp4` kwam zo uw presentatie in. Nu wordt de soort aan de inhoud
+  herkend, net als bij afbeeldingen.
+- **Weigeringen laten voortaan een spoor na.** Werd een deck tegengehouden
+  omdat er uitvoerbare inhoud in zat, of een export omdat de rubricering het
+  niet toeliet, dan zag u dat wel maar bleef er niets van bewaard. Voor een
+  gereedschap dat verzegelde rapporten uitgeeft is juist dát het feit dat u
+  achteraf wilt kunnen navertellen. Er komt geen inhoud van uw presentatie in
+  te staan — alleen wat voor soort weigering het was.
 - **Een export die niets doet, blijft niet meer eeuwig niets doen.** De PDF- en
   PPTX-export maakt zijn afbeeldingen door de échte dia te laten tekenen en het
   resultaat vast te leggen. Daarvoor moet het venster beelden produceren — en
@@ -104,6 +192,29 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   exporteren gewoon op de voorgrond staan. De HTML-export heeft hier geen last
   van; die tekent geen dia's.
 
+- **Uw wachtwoord en uw git-token gaan niet meer onversleuteld over het
+  netwerk.** Had u een opslagserver als "vertrouwd intern" gemarkeerd — bedoeld
+  voor een eigen doos op uw eigen netwerk — dan stond OciDeck een gewone
+  `http`-verbinding toe. Bij WebDAV en git ging uw inloggegeven daar bij élk
+  verzoek in leesbare vorm overheen.
+
+  Die vink gaat over de sérver, niet over de weg ernaartoe. Dat verschil is bij
+  de inhoud van een presentatie te overzien — u kiest zelf of u dat over uw LAN
+  wilt sturen — maar bij een wachtwoord of token niet: wie het één keer
+  onderschept, houdt het, en het blijft werken lang nadat die persoon weg is.
+
+  Voor zo'n verbinding is `https` nu vereist. Wat blijft werken: een openbare
+  bron zonder inloggegeven, en S3/MinIO (dat ondertekent elk verzoek apart, dus
+  er gaat geen herbruikbaar geheim over de lijn). Draait de server op deze
+  computer zelf, dan verandert er ook niets — dat verkeer verlaat de machine
+  niet.
+
+  Merkt u dit? Dan werd uw wachtwoord tot nu toe leesbaar verstuurd. Zet de
+  server op https, of gebruik hem zonder inloggegeven.
+- **Een presentatie kan niet meer naar willekeurige poorten verbinden.** Haalde
+  een dia een afbeelding of video van een adres op, dan werd wel gecontroleerd
+  wélke computer dat was, maar niet op welke poort. De webversie deed dat al
+  wel. Beide kanten hanteren nu dezelfde lijst.
 - **De webversie zegt nu ook waar een formulier níet heen mag.** De
   beveiligingsregels van de webbundel bepalen per soort verkeer waar de pagina
   iets vandaan mag halen. Voor het versturen van een formulier stond dat er niet
@@ -117,6 +228,23 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   Gevonden door de nieuwe scan van de webversie, de eerste keer dat die liep.
   De controle op de webbundel bewaakt het voortaan, en die controle is ook
   omgekeerd getoetst: haal je de regel weg, dan valt hij echt om.
+- **De webversie verklapt niet meer aan welke presentatie u werkt.** Haalt u een
+  deck op via een link, dan vertelde uw browser aan die server standaard van
+  welke pagina u kwam — inclusief het volledige adres van uw eigen presentatie.
+  Bij een deck-link is juist dat adres vaak het gevoelige deel: wie hem heeft,
+  heeft het deck.
+
+  De bundel zegt nu zelf dat er niets meegestuurd mag worden. Dat werkt zonder
+  dat uw beheerder er iets voor hoeft te doen — anders dan de meeste van deze
+  regels, die alleen gelden als de server ze meestuurt. De controle op de
+  webbundel bewaakt het.
+
+  Voor beheerders staat er in de uitrolgids nu ook bij dat de server
+  `Strict-Transport-Security` hoort mee te sturen; dat ontbrak. Zonder die kop
+  gaat het állereerste verzoek naar uw server nog over een onbeveiligde
+  verbinding, en dat is precies het moment waarop iemand ertussen kan gaan
+  zitten. En de losse ophaaldienst zet zijn "niet zelf raden wat voor bestand
+  dit is"-kop voortaan óók op een weigering, niet alleen als het lukt.
 
 - **Uw eigen regels in de kop breken het zegel niet meer.** Sinds OciDeck de
   front matter bijwerkt in plaats van herbouwt, blijft wat u er zelf in zet

@@ -49,7 +49,7 @@ import '../services/privacy/redaction_manifest_service.dart';
 import '../services/web_asset_store.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
-import '../services/mermaid_render_service.dart';
+import 'mermaid_render_host.dart';
 import '../models/git_settings.dart';
 import '../services/git/asset_index.dart';
 import '../services/git/deck_merge.dart';

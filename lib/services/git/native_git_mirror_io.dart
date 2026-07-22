@@ -123,11 +123,10 @@ class _NativeGitMirror implements NativeGitMirror {
     // netwerkverkeer te gaan, niet over een pad op deze schijf. (Het is ook wat
     // de tests als origin gebruiken.)
     if (scheme == 'file') return _config0;
-    // Verder dezelfde eis als bij WebDAV en S3: https, tenzij de gebruiker de
-    // server bewust als vertrouwd intern heeft gemarkeerd. Al het overige —
-    // `git://` (onversleuteld), `ssh://`, wat dan ook — gaat er niet in: de app
-    // ondersteunt het niet, en een schema dat hier stilletjes doorglipt is
-    // precies hoe dit gat is ontstaan.
+    // Verder: https, tenzij de gebruiker de server bewust als vertrouwd intern
+    // heeft gemarkeerd. Al het overige — `git://` (onversleuteld), `ssh://`,
+    // wat dan ook — gaat er niet in: de app ondersteunt het niet, en een schema
+    // dat hier stilletjes doorglipt is precies hoe dit gat is ontstaan.
     if (scheme != 'https' && !(scheme == 'http' && _config.trustedInternal)) {
       throw GitForgeException(
         GitForgeError.config,
@@ -135,6 +134,23 @@ class _NativeGitMirror implements NativeGitMirror {
             ? 'Gebruik https of markeer de server als vertrouwd intern; anders '
                   'gaan je presentaties onversleuteld over het netwerk.'
             : 'Alleen https-servers worden ondersteund.',
+      );
+    }
+    // Maar een tóken gaat nooit over platte tekst, ook niet naar een vertrouwde
+    // interne host: `_hardenedEnv` hangt er een `Authorization: Basic` aan, en
+    // dat is een herbruikbaar geheim dat blijft werken nadat iemand het van de
+    // lijn heeft geplukt. Zonder token — een openbare spiegel — blijft plain
+    // http op een vertrouwd LAN gewoon werken; daar valt niets te stelen wat de
+    // verbinding overleeft. (Toegevoegd 2026-07-22; zie
+    // [NetGuard.maySendReusableSecret].)
+    if (_token.trim().isNotEmpty &&
+        !NetGuard.maySendReusableSecret(scheme, host: base.host)) {
+      throw const GitForgeException(
+        GitForgeError.config,
+        'Een git-server met een token vereist https: het token gaat bij élk '
+        'verzoek mee, dus het zou onversleuteld over het netwerk gaan. '
+        'Vertrouwd intern verandert daar niets aan — die instelling gaat over '
+        'de server, niet over de verbinding ernaartoe.',
       );
     }
     if (base.host.isEmpty) {

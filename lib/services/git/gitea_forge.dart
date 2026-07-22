@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import '../../models/git_settings.dart';
-import '../file_service.dart';
+import 'forge_http.dart';
 import 'git_forge.dart';
 import 'git_transport.dart';
 import 'git_transport_factory.dart';
@@ -13,40 +13,44 @@ import 'git_transport_factory.dart';
 /// Alleen het read-only oppervlak van Fase 0. De adapter is de enige plek waar
 /// Gitea-specifieke kennis mag zitten (P6): de URL-vormen, de auth-header en de
 /// JSON-vormen. Naar boven komt alleen [GitForge] met [GitForgeException].
-class GiteaForge implements GitForge {
+class GiteaForge with ForgeHttp implements GitForge {
   GiteaForge({
     required this.config,
     required this.token,
     GitTransport? transport,
-  }) : _transport = transport ?? createGitTransport(config);
+  }) : transport = transport ?? createGitTransport(config);
 
+  @override
   final GitRepoConfig config;
 
   /// Het personal access token, uit de keychain gehaald door de aanroeper.
   /// Leeg is toegestaan: een publieke repo lezen mag zonder.
   final String token;
 
-  final GitTransport _transport;
+  @override
+  final GitTransport transport;
 
-  /// Een blob mag zo groot zijn als een pakket: assets zijn hier de grote
-  /// jongens, en de limiet verwijst naar de bron zodat de twee niet kunnen
-  /// divergeren.
-  static const int maxBlobBytes = FileService.maxPackageBytes;
+  static const int maxBlobBytes = kForgeMaxBlobBytes;
+  static const int maxListingBytes = kForgeMaxListingBytes;
+  static const int maxListingEntries = kForgeMaxListingEntries;
 
-  /// Cap op een listing-respons, zodat een vijandige forge het geheugen niet kan
-  /// laten vollopen.
-  static const int maxListingBytes = 16 * 1024 * 1024;
+  /// Bewust niet "Gitea": deze ene adapter bedient ook Forgejo, en wie Forgejo
+  /// draait moet niet lezen dat het aanmelden bij Gitea mislukte.
+  @override
+  String get forgeName => 'de forge';
 
-  /// Maximaal aantal entries dat we uit één listing accepteren.
-  static const int maxListingEntries = 5000;
+  @override
+  bool get treats409AsEmptyRepo => true;
 
   /// Gitea/Forgejo verwacht `Authorization: token <PAT>` — niet `Bearer`.
-  Map<String, String> get _headers => {
+  @override
+  Map<String, String> get headers => {
     'Accept': 'application/json',
     if (token.trim().isNotEmpty) 'Authorization': 'token ${token.trim()}',
   };
 
-  Uri _apiUri(List<String> segments, {Map<String, String>? query}) {
+  @override
+  Uri apiUri(List<String> segments, {Map<String, String>? query}) {
     final origin = config.origin;
     if (origin == null) {
       throw const GitForgeException(
@@ -67,63 +71,9 @@ class GiteaForge implements GitForge {
     );
   }
 
-  /// Vertaal een HTTP-status naar een [GitForgeException]. Alleen 2xx gaat door.
-  void _checkStatus(int status) {
-    if (status >= 200 && status < 300) return;
-    if (status == 401) {
-      throw GitForgeException(
-        GitForgeError.auth,
-        'Aanmelden bij de forge mislukt ($status). Controleer je token en of '
-        'het toegang heeft tot ${config.slug}.',
-      );
-    }
-    if (status == 403) {
-      throw const GitForgeException(
-        GitForgeError.forbidden,
-        'Token geldig, maar zonder rechten hiervoor (403).',
-      );
-    }
-    if (status == 404) {
-      // Een forge geeft ook 404 wanneer het token de repo niet mag zien: hij
-      // verraadt liever niet dát hij bestaat. De melding mag dat niet als
-      // zekerheid presenteren.
-      throw const GitForgeException(
-        GitForgeError.notFound,
-        'Niet gevonden — of je token heeft er geen toegang toe.',
-      );
-    }
-    if (status == 409) {
-      throw const GitForgeException(
-        GitForgeError.notFound,
-        'Repository is leeg.',
-      );
-    }
-    if (status >= 500) {
-      throw GitForgeException(GitForgeError.server, 'Serverfout ($status)');
-    }
-    throw GitForgeException(GitForgeError.server, 'Onverwachte status $status');
-  }
-
-  Object? _decodeJson(Uint8List bytes) {
-    try {
-      return jsonDecode(utf8.decode(bytes));
-    } catch (e) {
-      throw const GitForgeException(
-        GitForgeError.malformed,
-        'Antwoord van de forge is geen geldige JSON',
-      );
-    }
-  }
-
   @override
   Future<RepoProbe> probe() async {
-    final response = await _transport.get(
-      _apiUri(const []),
-      headers: _headers,
-      maxBytes: maxListingBytes,
-    );
-    _checkStatus(response.status);
-    final json = _decodeJson(response.bytes);
+    final json = await getJson(const []);
     if (json is! Map) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -147,14 +97,8 @@ class GiteaForge implements GitForge {
 
   @override
   Future<String> headSha(String branch) async {
-    _requireRef(branch);
-    final response = await _transport.get(
-      _apiUri(['branches', branch]),
-      headers: _headers,
-      maxBytes: maxListingBytes,
-    );
-    _checkStatus(response.status);
-    final json = _decodeJson(response.bytes);
+    requireRef(branch);
+    final json = await getJson(['branches', branch]);
     if (json is! Map) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -178,7 +122,7 @@ class GiteaForge implements GitForge {
     String path, {
     bool recursive = false,
   }) async {
-    _requireRef(ref);
+    requireRef(ref);
     if (path.isNotEmpty && !GitRepoLayout.isSafeRepoPath(path)) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -190,23 +134,17 @@ class GiteaForge implements GitForge {
 
   /// Niet-recursief: `/contents/{path}` geeft één mapniveau.
   Future<List<RepoEntry>> _listContents(String ref, String path) async {
-    final response = await _transport.get(
-      _apiUri(
-        ['contents', ...path.split('/').where((s) => s.isNotEmpty)],
-        query: {'ref': ref},
-      ),
-      headers: _headers,
-      maxBytes: maxListingBytes,
+    final json = await getJson(
+      ['contents', ...path.split('/').where((s) => s.isNotEmpty)],
+      query: {'ref': ref},
     );
-    _checkStatus(response.status);
-    final json = _decodeJson(response.bytes);
     if (json is! List) {
       throw const GitForgeException(
         GitForgeError.malformed,
         'Onverwacht antwoord op een maplisting',
       );
     }
-    _requireEntryCount(json.length);
+    requireEntryCount(json.length);
     final entries = <RepoEntry>[];
     for (final raw in json) {
       final entry = _contentsEntry(raw);
@@ -217,13 +155,10 @@ class GiteaForge implements GitForge {
 
   /// Recursief: `/git/trees/{ref}?recursive=1` geeft de hele boom in één keer.
   Future<List<RepoEntry>> _listRecursive(String ref, String path) async {
-    final response = await _transport.get(
-      _apiUri(['git', 'trees', ref], query: {'recursive': '1'}),
-      headers: _headers,
-      maxBytes: maxListingBytes,
+    final json = await getJson(
+      ['git', 'trees', ref],
+      query: {'recursive': '1'},
     );
-    _checkStatus(response.status);
-    final json = _decodeJson(response.bytes);
     if (json is! Map) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -246,7 +181,7 @@ class GiteaForge implements GitForge {
         'Tree-antwoord zonder entries',
       );
     }
-    _requireEntryCount(tree.length);
+    requireEntryCount(tree.length);
     final prefix = path.isEmpty
         ? ''
         : '${path.replaceAll(RegExp(r'/+$'), '')}/';
@@ -257,15 +192,6 @@ class GiteaForge implements GitForge {
       if (prefix.isEmpty || entry.path.startsWith(prefix)) entries.add(entry);
     }
     return entries;
-  }
-
-  void _requireEntryCount(int count) {
-    if (count > maxListingEntries) {
-      throw GitForgeException(
-        GitForgeError.tooLarge,
-        'Te veel entries in één listing ($count)',
-      );
-    }
   }
 
   /// Eén entry uit `/contents`. Geeft null wanneer de entry onbruikbaar is —
@@ -311,7 +237,7 @@ class GiteaForge implements GitForge {
 
   @override
   Future<Uint8List> readBlob(String ref, String path) async {
-    _requireRef(ref);
+    requireRef(ref);
     if (!GitRepoLayout.isSafeRepoPath(path)) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -320,8 +246,8 @@ class GiteaForge implements GitForge {
     }
     // `/raw` geeft de bytes zoals ze zijn. De `/contents`-variant zou base64 in
     // JSON geven: een derde groter, en voor een video onzinnig.
-    final response = await _transport.get(
-      _apiUri(
+    final response = await transport.get(
+      apiUri(
         ['raw', ...path.split('/').where((s) => s.isNotEmpty)],
         query: {'ref': ref},
       ),
@@ -330,7 +256,7 @@ class GiteaForge implements GitForge {
       },
       maxBytes: maxBlobBytes,
     );
-    _checkStatus(response.status);
+    checkStatus(response.status);
     return response.bytes;
   }
 
@@ -342,8 +268,8 @@ class GiteaForge implements GitForge {
     required List<String> deletes,
     required String baseSha,
   }) async {
-    _requireRef(branch);
-    _requireRef(baseSha);
+    requireRef(branch);
+    requireRef(baseSha);
     if (upserts.isEmpty && deletes.isEmpty) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -386,25 +312,21 @@ class GiteaForge implements GitForge {
       );
     }
 
-    final response = await _transport.send(
+    final response = await sendJson(
       'POST',
-      _apiUri(['contents']),
-      headers: {..._headers, 'Content-Type': 'application/json'},
-      body: utf8.encode(
-        jsonEncode({
-          'branch': branch,
-          'message': message,
-          'files': files,
-          // Dít is de concurrency-guard: Gitea weigert wanneer de branch niet
-          // meer op deze commit staat, in plaats van er overheen te schrijven.
-          'last_commit_id': baseSha,
-        }),
-      ),
-      maxBytes: maxListingBytes,
+      ['contents'],
+      {
+        'branch': branch,
+        'message': message,
+        'files': files,
+        // Dít is de concurrency-guard: Gitea weigert wanneer de branch niet meer
+        // op deze commit staat, in plaats van er overheen te schrijven.
+        'last_commit_id': baseSha,
+      },
     );
     _checkCommitStatus(response.status, baseSha);
 
-    final json = _decodeJson(response.bytes);
+    final json = decodeJson(response.bytes);
     final commit = json is Map ? json['commit'] : null;
     final sha = commit is Map ? commit['sha'] : null;
     if (sha is! String || sha.trim().isEmpty) {
@@ -437,45 +359,34 @@ class GiteaForge implements GitForge {
             'opende. Haal de nieuwste versie op voordat je opnieuw opslaat.',
       );
     }
-    _checkStatus(status);
+    checkStatus(status);
   }
 
   // ── Releases (Fase 4) ───────────────────────────────────────────────────────
 
   @override
   Future<List<BranchRef>> listBranches() async {
-    final response = await _transport.get(
-      _apiUri(['branches'], query: {'limit': '50'}),
-      headers: _headers,
-      maxBytes: maxListingBytes,
-    );
-    _checkStatus(response.status);
-    final json = _decodeJson(response.bytes);
+    final json = await getJson(['branches'], query: {'limit': '50'});
     if (json is! List) {
       throw const GitForgeException(
         GitForgeError.malformed,
         'Onverwacht antwoord op een branch-listing',
       );
     }
-    _requireEntryCount(json.length);
+    requireEntryCount(json.length);
     return [for (final raw in json) ?_branchRef(raw)];
   }
 
   @override
   Future<BranchRef> createBranch(String name, {required String fromRef}) async {
-    _requireRef(name);
-    _requireRef(fromRef);
-    final response = await _transport.send(
-      'POST',
-      _apiUri(['branches']),
-      headers: {..._headers, 'Content-Type': 'application/json'},
-      body: utf8.encode(
-        jsonEncode({'new_branch_name': name, 'old_ref_name': fromRef}),
+    requireRef(name);
+    requireRef(fromRef);
+    final branch = _branchRef(
+      await post(
+        ['branches'],
+        {'new_branch_name': name, 'old_ref_name': fromRef},
       ),
-      maxBytes: maxListingBytes,
     );
-    _checkStatus(response.status);
-    final branch = _branchRef(_decodeJson(response.bytes));
     if (branch == null) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -487,20 +398,14 @@ class GiteaForge implements GitForge {
 
   @override
   Future<List<TagRef>> listTags() async {
-    final response = await _transport.get(
-      _apiUri(['tags'], query: {'limit': '50'}),
-      headers: _headers,
-      maxBytes: maxListingBytes,
-    );
-    _checkStatus(response.status);
-    final json = _decodeJson(response.bytes);
+    final json = await getJson(['tags'], query: {'limit': '50'});
     if (json is! List) {
       throw const GitForgeException(
         GitForgeError.malformed,
         'Onverwacht antwoord op een tag-listing',
       );
     }
-    _requireEntryCount(json.length);
+    requireEntryCount(json.length);
     return [for (final raw in json) ?_tagRef(raw)];
   }
 
@@ -510,19 +415,14 @@ class GiteaForge implements GitForge {
     required String target,
     required String message,
   }) async {
-    _requireRef(name);
-    _requireRef(target);
-    final response = await _transport.send(
-      'POST',
-      _apiUri(['tags']),
-      headers: {..._headers, 'Content-Type': 'application/json'},
-      body: utf8.encode(
-        jsonEncode({'tag_name': name, 'target': target, 'message': message}),
+    requireRef(name);
+    requireRef(target);
+    final tag = _tagRef(
+      await post(
+        ['tags'],
+        {'tag_name': name, 'target': target, 'message': message},
       ),
-      maxBytes: maxListingBytes,
     );
-    _checkStatus(response.status);
-    final tag = _tagRef(_decodeJson(response.bytes));
     if (tag == null) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -539,19 +439,14 @@ class GiteaForge implements GitForge {
     required String title,
     String body = '',
   }) async {
-    _requireRef(head);
-    _requireRef(base);
-    final response = await _transport.send(
-      'POST',
-      _apiUri(['pulls']),
-      headers: {..._headers, 'Content-Type': 'application/json'},
-      body: utf8.encode(
-        jsonEncode({'head': head, 'base': base, 'title': title, 'body': body}),
+    requireRef(head);
+    requireRef(base);
+    final pr = _pullRef(
+      await post(
+        ['pulls'],
+        {'head': head, 'base': base, 'title': title, 'body': body},
       ),
-      maxBytes: maxListingBytes,
     );
-    _checkStatus(response.status);
-    final pr = _pullRef(_decodeJson(response.bytes));
     if (pr == null) {
       throw const GitForgeException(
         GitForgeError.malformed,
@@ -573,17 +468,10 @@ class GiteaForge implements GitForge {
         'Ongeldig pull-request-nummer',
       );
     }
-    final response = await _transport.send(
+    final response = await sendJson(
       'POST',
-      _apiUri(['pulls', '$number', 'merge']),
-      headers: {..._headers, 'Content-Type': 'application/json'},
-      body: utf8.encode(
-        jsonEncode({
-          'Do': method.name,
-          if (deleteBranch) 'delete_branch_after_merge': true,
-        }),
-      ),
-      maxBytes: maxListingBytes,
+      ['pulls', '$number', 'merge'],
+      {'Do': method.name, if (deleteBranch) 'delete_branch_after_merge': true},
     );
     // Gitea meldt "kan nog niet mergen" (open reviews, conflicten) als 405.
     if (response.status == 405) {
@@ -593,7 +481,7 @@ class GiteaForge implements GitForge {
         'conflicten op de forge.',
       );
     }
-    _checkStatus(response.status);
+    checkStatus(response.status);
     // Een geslaagde merge geeft een lege body; het nummer kennen we al.
     return PullRequestRef(
       number: number,
@@ -605,21 +493,18 @@ class GiteaForge implements GitForge {
 
   @override
   Future<PullRequestRef?> pullRequestForBranch(String head) async {
-    _requireRef(head);
-    final response = await _transport.get(
-      _apiUri(['pulls'], query: {'state': 'open', 'limit': '50'}),
-      headers: _headers,
-      maxBytes: maxListingBytes,
+    requireRef(head);
+    final json = await getJson(
+      ['pulls'],
+      query: {'state': 'open', 'limit': '50'},
     );
-    _checkStatus(response.status);
-    final json = _decodeJson(response.bytes);
     if (json is! List) {
       throw const GitForgeException(
         GitForgeError.malformed,
         'Onverwacht antwoord op een pull-request-listing',
       );
     }
-    _requireEntryCount(json.length);
+    requireEntryCount(json.length);
     for (final raw in json) {
       final pr = _pullRef(raw);
       if (pr != null && pr.head == head.trim()) return pr;
@@ -661,26 +546,6 @@ class GiteaForge implements GitForge {
     );
   }
 
-  /// Een ref komt soms uit door de gebruiker of de forge geleverde data. Hij
-  /// belandt in een URL-pad, dus weigeren we alles wat daar een betekenis heeft
-  /// of wat git zelf niet als refnaam accepteert.
-  void _requireRef(String ref) {
-    final r = ref.trim();
-    if (r.isEmpty ||
-        r.length > 255 ||
-        r.startsWith('-') ||
-        r.contains('..') ||
-        r.contains('?') ||
-        r.contains('#') ||
-        r.contains('&') ||
-        r.codeUnits.any((c) => c < 0x20 || c == 0x7f)) {
-      throw const GitForgeException(
-        GitForgeError.malformed,
-        'Ongeldige branch-, tag- of commitnaam',
-      );
-    }
-  }
-
   @override
-  void close() => _transport.close();
+  void close() => transport.close();
 }
