@@ -149,6 +149,13 @@ Targeted test groups for focused work:
     When you edit a comment, follow the language of the block you are editing.
   - This says nothing about *identifiers*, which are English throughout, or
     about user-visible text, which has its own rule (see localization above).
+    *(True since 2026-07-22, #636. `SlideCategory` carried Dutch values —
+    `algemeen` and `informatieveiligheid` — forty lines below `SlideType` in
+    `lib/models/slide.dart`, the first file anyone opens to understand the data
+    model. It was the one place this sentence was demonstrably untrue, which
+    cost the rest of an otherwise accurate paragraph its authority. Renaming was
+    safe because the enum is never serialised; after publication it would have
+    been a breaking change for everyone with a branch open.)*
 - **Tests**: add or update tests for behaviour you change — especially the
   Markdown round-trip and any file-format change.
 - **File format**: if you change how anything is stored, update

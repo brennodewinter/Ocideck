@@ -39,7 +39,7 @@ class _EditorToolbar extends StatelessWidget {
   Future<void> _pickType(BuildContext context) async {
     final reveal =
         revealInfoSafety ||
-        slide.type.category == SlideCategory.informatieveiligheid;
+        slide.type.category == SlideCategory.informationSecurity;
     final picked = await AddSlideDialog.show(context, revealInfoSafety: reveal);
     if (picked != null && picked != slide.type) onTypeChanged(picked);
   }

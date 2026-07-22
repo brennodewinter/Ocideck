@@ -111,7 +111,7 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
   Iterable<SlideType> _availableTypes() => slideTypeMeta.keys.where(
     (t) =>
         widget.revealInfoSafety ||
-        t.category != SlideCategory.informatieveiligheid,
+        t.category != SlideCategory.informationSecurity,
   );
 
   /// Available types in curated order, with any uncurated type appended in enum
@@ -147,9 +147,9 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
 
   String _categoryLabel(AppLocalizations l10n, SlideCategory category) {
     switch (category) {
-      case SlideCategory.algemeen:
+      case SlideCategory.general:
         return l10n.d('Algemeen');
-      case SlideCategory.informatieveiligheid:
+      case SlideCategory.informationSecurity:
         return l10n.d('Informatieveiligheid');
     }
   }

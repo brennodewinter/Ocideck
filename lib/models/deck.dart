@@ -460,12 +460,12 @@ class Deck {
 
   /// Index of the first Informatieveiligheid slide (assets, finding,
   /// findingsSummary, checklist, scopeMatrix, signOff — see
-  /// [SlideCategory.informatieveiligheid]),
+  /// [SlideCategory.informationSecurity]),
   /// or -1 when there is none. The discovery prompt carries this index so the
   /// user can jump straight to the slide the message is about and check for
   /// themselves before deciding to switch the module on.
   int get firstSecuritySlideIndex => slides.indexWhere(
-    (s) => s.type.category == SlideCategory.informatieveiligheid,
+    (s) => s.type.category == SlideCategory.informationSecurity,
   );
 
   /// True when this deck carries any Informatieveiligheid slide type. Drives the
