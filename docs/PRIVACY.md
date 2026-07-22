@@ -48,6 +48,21 @@ machine (desktop) or in your browser tab (web). This includes:
   machine where the key is gone (a restore, a new laptop) — exactly when you
   need it. Bounding how long the plaintext exists, and making sure your account
   is really the only one that can read it, buys more here.
+- **Unpushed git work in the browser.** With a git repository connected, the web
+  build keeps your not-yet-pushed deck text, notes and annotations in the
+  browser's own key/value storage, so a reload does not throw the work away.
+  That is ordinary browser storage for the origin serving OciDeck, not a
+  protected store: anything with access to that browser profile can read it.
+  It holds your own document, never a password or token — those are refused
+  outright in the browser (see *Secrets are stored in your OS keychain*). The
+  entry is removed as soon as the work is confirmed on the forge, so what stays
+  behind is only what has not been pushed yet. Two deliberate exceptions, both
+  on the side of not losing your work: if the push fails, conflicts, or you are
+  offline, the entry stays; and if you saved again while the push was running,
+  the newer version stays too, because that version has not landed. On the
+  desktop the equivalent is a real git clone in a per-user application-support
+  folder — that one keeps its files, because it is what the editor reads the
+  deck from and it carries the history.
 - **Staged media.** A deck you have not saved yet has no project folder to keep
   its images in, so an image you insert is copied into a per-session folder under
   your operating system's temporary directory. That is what keeps the picture
@@ -194,7 +209,7 @@ keep its own copy in a plain settings file. Existing installations move the
 value over on first start. *Corrected 2026-07-22: it used to sit in plain
 preferences.*
 
-Two boundaries of that sentence are worth naming, because "in the keychain" is
+Three boundaries of that sentence are worth naming, because "in the keychain" is
 easy to over-read:
 
 - For S3 it is the **secret** access key that is protected. The **access key ID**
@@ -207,6 +222,19 @@ easy to over-read:
   kept out of the command line, out of the remote URL and out of `.git/config`,
   and the subprocess runs with a stripped environment — but for the life of that
   process the token exists outside the keychain.
+- **In the browser there is no keychain, so the web build stores no secrets at
+  all.** A browser has nowhere to put a secret that other scripts on the same
+  page cannot reach: anything the app "encrypted" into browser storage would
+  have to keep its key in that same storage, which protects nothing. Rather than
+  make a promise the platform cannot keep, the web build refuses — the password,
+  token and key fields are disabled there and say why on the spot. Sources that
+  need no secret (a public URL, a local file) keep working. To use
+  Nextcloud/WebDAV, S3, a git forge or an AI key, use the desktop build, where
+  the sentence above holds.
+
+*Corrected 2026-07-22: the web build previously wrote these secrets into browser
+storage next to the key that encrypted them, which this section did not say and
+which the sentence above did not describe. It now stores nothing.*
 
 ### The AI assistant is off by default and fail-closed
 

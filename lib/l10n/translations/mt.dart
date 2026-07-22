@@ -1801,6 +1801,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Via deze website ophalen?': 'Iġib permezz ta\' dan is-sit?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Is-server ta\' din il-preżentazzjoni ma ħalliex lill-brawżer jaqra l-fajl direttament. OciDeck jista\' jgħaddi l-indirizz lis-sit li minnu ġej OciDeck stess, u dak is-sit iġibu. B\'hekk dak is-sit jara l-indirizz sħiħ — jekk fil-link hemm ċavetta jew kodiċi, dak is-sit jarahom ukoll.',
+  'In de browser kan dit niet worden bewaard':
+      'Fil-browser dan ma jistax jiġi salvat',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Browser m\'għandux ċurkett taċ-ċwievet bħalma għandu kompjuter: dak li OciDeck jissejvja hawn jista\' jaqrah kwalunkwe skript f\'din il-paġna. Uża l-verżjoni tad-desktop — hemmhekk is-sigriet tabilħaqq imur fiċ-ċurkett taċ-ċwievet tas-sistema operattiva.',
   'Licenties van derden': 'Liċenzji ta\' partijiet terzi',
   'Alle licentieteksten tonen': 'Uri t-testi kollha tal-liċenzji',
   'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':

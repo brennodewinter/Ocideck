@@ -1783,6 +1783,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Via deze website ophalen?': 'Über die Website abhole?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'De Server vo dere Präsentation het de Browser d Datei nöd direkt läse la. OciDeck cha d Adrässe a die Website wytergäh, wo s OciDeck sälber härchunt, und die holt si denn ab. Damit gseht die Website di ganzi Adrässe — staht im Link en Schlüssel oder Code, gseht die Website dä au.',
+  'In de browser kan dit niet worden bewaard':
+      'Im Browser cha das nöd gspycheret wärde',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'E Browser het kein Schlüsselbund, wie ne Computer ein het: Was OciDeck da spychere wür, cha jedes Skript uf dere Syte mitläse. Nimm d Desktop-Version — dört chunnt s Gheimnis würklich i de Schlüsselbund vom Betriebssystem.',
   'Licenties van derden': 'Lizänze vo Dritte',
   'Alle licentieteksten tonen': 'Alli Lizänztäxt zeige',
   'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':

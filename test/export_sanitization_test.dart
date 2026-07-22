@@ -47,11 +47,20 @@ Normal text.
     expect(csp, contains("media-src 'self' data: blob: file:"));
     expect(csp, contains("font-src 'self' data:"));
     expect(csp, contains("form-action 'none'"));
+    // Stijl valt óók onder de CSP. Zonder style-src is er geen enkele grens aan
+    // stylesheets, en belt een `@import url(https://…)` in een <style>-blok
+    // gewoon naar buiten. 'unsafe-inline' laat inline stijl staan — die was er
+    // al — maar noemt geen enkele externe herkomst, dus het import-verzoek valt.
+    expect(csp, contains("style-src 'unsafe-inline'"));
     // None of these may quietly widen to a remote origin.
     expect(csp, isNot(contains('https:')));
-    expect(csp, isNot(contains("'unsafe-inline'")));
     expect(csp, isNot(contains("'unsafe-eval'")));
     expect(csp, isNot(contains("script-src 'self'")));
+    // Alleen stijl mag inline; script blijft strikt op de nonce.
+    expect(
+      RegExp(r"script-src [^;]*").firstMatch(csp)!.group(0),
+      isNot(contains("'unsafe-inline'")),
+    );
 
     // The executable scripts carry that exact nonce.
     final nonce = RegExp(

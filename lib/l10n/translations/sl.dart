@@ -1781,6 +1781,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Via deze website ophalen?': 'Pridobitev prek tega spletnega mesta?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Strežnik te predstavitve brskalniku ni dovolil neposredno prebrati datoteke. OciDeck lahko naslov posreduje spletnemu mestu, s katerega prihaja sam OciDeck, in to ga bo pridobilo. Tako to spletno mesto vidi celoten naslov — če je v povezavi ključ ali koda, to spletno mesto vidi tudi tega.',
+  'In de browser kan dit niet worden bewaard':
+      'V brskalniku tega ni mogoče shraniti',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Brskalnik nima zbirke ključev, kakršno ima računalnik: kar bi OciDeck shranil sem, lahko prebere katera koli skripta na tej strani. Uporabite namizno različico — tam skrivnost res pristane v zbirki ključev operacijskega sistema.',
   'Licenties van derden': 'Licence tretjih oseb',
   'Alle licentieteksten tonen': 'Pokaži vsa besedila licenc',
   'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':

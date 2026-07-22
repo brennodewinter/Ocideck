@@ -21,6 +21,7 @@ import '../../services/ai_security_gate.dart';
 import '../../services/disk_traces.dart';
 import '../../services/file_service.dart';
 import '../../services/git/outbox.dart';
+import '../../services/secret_store.dart';
 import '../../services/recovery_service.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/git/git_forge.dart';

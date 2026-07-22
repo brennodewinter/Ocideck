@@ -122,7 +122,10 @@ extension SettingsTraces on SettingsNotifier {
   /// met verdwenen vermeldingen.
   Future<void> setRecentFileOrigin(String path, String origin) async {
     if (!currentState.recentFiles.any((f) => f.path == path)) return;
-    final origins = {...currentState.recentFileOrigins, path: origin};
+    final origins = {
+      ...currentState.recentFileOrigins,
+      path: SettingsNotifier.scrubbedOrigin(origin),
+    };
     currentState = currentState.copyWith(recentFileOrigins: origins);
     await _persist(
       'setRecentFileOrigin',

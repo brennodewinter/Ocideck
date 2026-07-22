@@ -187,6 +187,7 @@ class SyncEngine {
       // plaats van op sha lost dat op zonder ergens een vlag te hoeven bewaren.
       if (_sameTree(deckLocal, remote)) {
         await outbox.remove(commit.deckDir);
+        await _releaseLandedWork(commit.deckDir, stored);
         return SyncOutcome(
           deckDir: commit.deckDir,
           status: SyncStatus.alreadyLanded,
@@ -206,6 +207,7 @@ class SyncEngine {
         baseSha: baseSha,
       );
       await outbox.remove(commit.deckDir);
+      await _releaseLandedWork(commit.deckDir, stored);
       return SyncOutcome(
         deckDir: commit.deckDir,
         status: SyncStatus.committed,
@@ -241,6 +243,37 @@ class SyncEngine {
       out[entry.path] = await forge.readBlob(branch, entry.path);
     }
     return out;
+  }
+
+  /// Gooi de werkkopie weg nu dit deck bevestigd op de forge staat.
+  ///
+  /// Alleen ná een bevestigde landing — beide aanroepplekken staan achter
+  /// `outbox.remove`, dus achter het punt waar de motor heeft vastgesteld dat
+  /// het werk er is. Bij een conflict, een netwerkfout of een afwijzing komt de
+  /// motor hier niet, en blijft alles staan.
+  ///
+  /// **En alleen als er sindsdien niets bij is gekomen.** Tussen het lezen van
+  /// [flushed] en dit moment kan de gebruiker opnieuw hebben opgeslagen; dan
+  /// draagt de werkkopie nieuw werk dat níét geland is en dat een nieuwe
+  /// wachtende commit heeft gekregen. Dat weggooien zou precies het dataverlies
+  /// zijn dat de wachtrij hoort te voorkomen. Bij het minste verschil laten we
+  /// het staan — een kopie te veel is hier altijd goedkoper dan een kopie te
+  /// weinig.
+  ///
+  /// Een fout tijdens het opruimen is geen mislukte synchronisatie: het werk
+  /// staat op de forge. Loggen en doorgaan.
+  Future<void> _releaseLandedWork(
+    String deckDir,
+    Map<String, Uint8List> flushed,
+  ) async {
+    if (!mirror.discardsLandedWork) return;
+    try {
+      final current = await mirror.readDeck(deckDir);
+      if (current.isEmpty || !_sameTree(current, flushed)) return;
+      await mirror.discardDeck(deckDir);
+    } catch (e) {
+      logWarning('SyncEngine: werkkopie opruimen na landing mislukt', e);
+    }
   }
 
   static bool _sameTree(Map<String, Uint8List> a, Map<String, Uint8List> b) {

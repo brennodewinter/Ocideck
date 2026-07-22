@@ -1815,6 +1815,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Via deze website ophalen?': 'Faigh tríd an suíomh seo?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Níor lig freastalaí na láithreoireachta seo don bhrabhsálaí an comhad a léamh go díreach. Is féidir le OciDeck an seoladh a chur ar aghaidh chuig an suíomh as a dtagann OciDeck féin, agus faigheann an suíomh sin é. Mar sin feiceann an suíomh sin an seoladh iomlán — má tá eochair nó cód sa nasc, feiceann an suíomh sin iad sin freisin.',
+  'In de browser kan dit niet worden bewaard':
+      'Ní féidir é seo a shábháil sa bhrabhsálaí',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'Níl eochairslabhra ag brabhsálaí mar atá ag ríomhaire: rud ar bith a shábhálfadh OciDeck anseo, is féidir le haon script ar an leathanach seo é a léamh. Bain úsáid as an leagan deisce — ann téann an rún isteach in eochairslabhra an chórais oibriúcháin i ndáiríre.',
   'Licenties van derden': 'Ceadúnais tríú páirtí',
   'Alle licentieteksten tonen': 'Taispeáin gach téacs ceadúnais',
   'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':

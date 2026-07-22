@@ -1754,6 +1754,12 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Via deze website ophalen?': 'Suqlu\'meH website vam lo\'lu\'\'a\'?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'De\' nIH laD browser \'e\' chaw\'be\' cha\'nob vam Server. OciDeck ghoSpu\'bogh websiteDaq Daq ngeHlaH OciDeck, vaj De\' Suq websitevetlh. Daq naQ legh websitevetlh — rarDaq ngaQHa\'moHwI\' ghap ngoq tu\'lu\'chugh, \'oH je legh websitevetlh.',
+  'In de browser kan dit niet worden bewaard': 'browserDaq vam pollaHbe\'lu\'',
+  'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
+      'browserDaq ngaQHa\'moHwI\' ngaSwI\' tu\'lu\'be\'; De\'wI\'Daq tu\'lu\'. naDev pegh pol OciDeck, \'ach laDlaH Hoch script vam. desktop version yIlo\' — pa\' operating system ngaQHa\'moHwI\' ngaSwI\'Daq pegh pollu\'.',
   'Licenties van derden': 'latlhpu\' chuvmey chut',
   'Alle licentieteksten tonen': 'Hoch chut ghItlh \'ang',
   'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
