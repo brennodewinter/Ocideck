@@ -239,6 +239,41 @@ Iterable<String> _controlBytesIn(File file) sync* {
   }
 }
 
+/// Achtergebleven conflictmarkeringen in [file].
+///
+/// Alleen `<<<<<<< ` en `>>>>>>> ` tellen, niet `=======`: dat laatste is in
+/// Markdown een geldige onderstreping van een kop (setext-H1), en een poort die
+/// daarop afgaat, roept wolf over gewone tekst.
+///
+/// Waarom dit een poort is en geen afspraak: het is precies één keer misgegaan,
+/// en meteen twee bestanden tegelijk. Bij het oplossen van een rebase werden de
+/// markeringen uit één bestand gehaald, waarna `git add -A` de twee andere
+/// mét markeringen instageerde. Dat viel niemand op, want `docs/` compileert
+/// niet — het reist alleen mee als asset en verschijnt in de ingebouwde lezer.
+Iterable<String> _conflictMarkersIn(File file) sync* {
+  final lines = file.readAsLinesSync();
+  for (var i = 0; i < lines.length; i++) {
+    final l = lines[i];
+    if (l.startsWith('<<<<<<< ') || l.startsWith('>>>>>>> ')) {
+      yield '${file.path}:${i + 1}: ${l.length > 60 ? '${l.substring(0, 60)}…' : l}';
+    }
+  }
+}
+
+/// De tekstbestanden waarin een achtergebleven markering schade doet: alles wat
+/// meereist met de app of wat een bijdrager leest.
+Iterable<File> _textFilesToScan() sync* {
+  for (final entity in Directory('docs').listSync(recursive: true)) {
+    if (entity is File && entity.path.endsWith('.md')) yield entity;
+  }
+  for (final entity in Directory('.').listSync()) {
+    if (entity is File && entity.path.endsWith('.md')) yield entity;
+  }
+  for (final dir in ['lib', 'test', 'tool']) {
+    yield* _dartFiles(Directory(dir));
+  }
+}
+
 void main() {
   final printHits = <String>[];
   final debugPrintHits = <String>[];
@@ -306,7 +341,22 @@ void main() {
     }
   }
 
+  final conflictHits = <String>[];
+  for (final file in _textFilesToScan()) {
+    conflictHits.addAll(_conflictMarkersIn(file));
+  }
+
   final failures = <String>[];
+
+  if (conflictHits.isNotEmpty) {
+    failures.add(
+      'Found ${conflictHits.length} leftover merge-conflict marker(s). Een '
+      'half opgeloste samenvoeging is ingecheckt: los het conflict alsnog op '
+      'en haal de markeringen weg. Let op dat `git add -A` na het opschonen '
+      'van één bestand de andere ongemoeid instageert:\n'
+      '    ${conflictHits.join('\n    ')}',
+    );
+  }
 
   final boundaryHits = _audienceBoundaryViolations();
   if (boundaryHits.isNotEmpty) {
