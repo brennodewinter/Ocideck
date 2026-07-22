@@ -557,4 +557,35 @@ void main() {
       138,
     ]);
   });
+
+  // Grafiekdata reist naast het deck mee — uit een pakket, een repo of iemands
+  // map — en werd bij het openen onbegrensd ingelezen, met een tweede kopie
+  // bovenop zodra de CSV geparseerd werd. Het openen heeft geen interface om af
+  // te breken, dus dat is precies het moment waarop je het niet wilt.
+  test('een grafiekbestand boven de grens tekent leeg en meldt zich', () async {
+    final service = serviceOf();
+    await service.saveDeck(
+      deckWith(chartSlide('data/omzet.json', [120, 138])),
+      deckPath(),
+    );
+
+    // Blaas het databestand op tot over de grens. Nog steeds geldige JSON: het
+    // gaat om de omvang, niet om corruptie — anders zou een parseerfout de
+    // test groen houden om de verkeerde reden.
+    // De grens wordt getoetst vóór het parsen, dus de inhoud doet er niet toe —
+    // alleen de omvang. Geldige JSON zou hier suggereren dat de vorm meetelt.
+    final dataFile = File(p.join(temp.path, 'data', 'omzet.json'));
+    await dataFile.writeAsString('x' * (FileService.maxChartDataBytes + 1024));
+    expect(await dataFile.length(), greaterThan(FileService.maxChartDataBytes));
+
+    final opened = await service.openDeckDetailed(deckPath());
+    expect(opened.deck, isNotNull, reason: 'het deck opent gewoon');
+    expect(
+      opened.warnings,
+      contains('data/omzet.json'),
+      reason:
+          'stil overslaan leest als "deze grafiek heeft geen cijfers"; de '
+          'gebruiker moet horen welk bestand geweigerd is',
+    );
+  });
 }
