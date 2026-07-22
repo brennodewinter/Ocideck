@@ -391,6 +391,80 @@ extension _PresenterOverlays on _FullscreenPresenterState {
     );
   }
 
+  /// De bedieningsbalk van de publieksweergave: waar ben ik, hoe kom ik
+  /// verder, en hoe kom ik eruit.
+  ///
+  /// Alleen op muisbeweging, en na drie seconden weer weg. Permanente knoppen
+  /// op een projectiebeeld zijn erger dan geen knoppen: ze staan straks op
+  /// iedere foto van de zaal. Maar hélemaal niets is wat #607 opleverde — een
+  /// eerste presentatie waarin iemand moest raden hoe hij eruit kwam.
+  ///
+  /// De sluitknop noemt Escape in zijn tooltip, want dat is de sneltoets die
+  /// nergens stond en die je de tweede keer gebruikt in plaats van de muis.
+  Widget _buildAudienceControls(int total) {
+    final l10n = context.l10n;
+    return Positioned(
+      left: 0,
+      right: 0,
+      bottom: 24,
+      child: IgnorePointer(
+        ignoring: !_audienceControls,
+        child: AnimatedOpacity(
+          opacity: _audienceControls ? 1 : 0,
+          duration: const Duration(milliseconds: 200),
+          child: Center(
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.66),
+                borderRadius: BorderRadius.circular(28),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      tooltip: l10n.d('Vorige'),
+                      onPressed: _index > 0 ? _prev : null,
+                      icon: const Icon(Icons.chevron_left),
+                      color: Colors.white,
+                      disabledColor: Colors.white24,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 6),
+                      child: Text(
+                        '${l10n.d('Slide')} ${_index + 1} / $total',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      tooltip: l10n.d('Volgende'),
+                      onPressed: _index < total - 1 ? _next : null,
+                      icon: const Icon(Icons.chevron_right),
+                      color: Colors.white,
+                      disabledColor: Colors.white24,
+                    ),
+                    const SizedBox(width: 4),
+                    IconButton(
+                      tooltip: l10n.d('Afsluiten (Escape)'),
+                      onPressed: _exit,
+                      icon: const Icon(Icons.close),
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildGridOverlay() {
     final l10n = context.l10n;
     final total = widget.slides.length;

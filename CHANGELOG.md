@@ -114,6 +114,17 @@ read a book to find out.
   fout kwam die data eerder tevoorschijn.
 
 ### Fixed
+- **De publieksweergave had geen enkele bediening.** Volledig scherm, geen
+  dianummer, geen pijlen, geen sluitknop, en nergens stond dat Esc werkt. Wie
+  voor het eerst presenteerde moest raden hoe hij eruit kwam — voor een zaal, op
+  het moment van de grootste spanning. Dat is precies waar mensen teruggaan naar
+  Keynote.
+
+  Beweeg de muis en er verschijnt drie seconden een smalle balk onderin: waar je
+  bent (`Slide 3 / 18`), een pijl elke kant op, en een sluitknop die Escape bij
+  naam noemt. Daarna verdwijnt hij vanzelf. Verborgen tenzij je hem zoekt is
+  hier geen zuinigheid maar het punt: een projectiebeeld hoort geen permanente
+  knoppen te dragen, want die staan straks op elke foto van de zaal.
 - **Het instellingenvenster brak bij 200% tekstgrootte — de instelling die het
   zelf aanbiedt.** Wie de tekstschaling opendraaide (uitdrukkelijk als
   toegankelijkheidsinstelling, WCAG 1.4.4) kreeg een zijbalk met "Einste…",

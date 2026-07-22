@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
@@ -1008,5 +1009,112 @@ void main() {
     expect(slides.first.notes, 'Mijn spiekbriefje');
 
     await tester.pumpWidget(const SizedBox());
+  });
+
+  // #607: de publieksweergave had géén bediening — geen dianummer, geen
+  // pijlen, geen sluitknop, en nergens stond dat Esc werkt. Wie voor het eerst
+  // presenteert moest raden hoe hij eruit kwam, voor een zaal.
+  group('bedieningsbalk in publieksweergave', () {
+    Finder positie() => find.textContaining(RegExp(r'1 / 2'));
+
+    testWidgets('staat er niet zolang de muis stilstaat', (tester) async {
+      await tester.pumpWidget(
+        _host([
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Een', bullets: ['a']),
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Twee', bullets: ['b']),
+        ]),
+      );
+      await tester.pump();
+
+      // Aanwezig maar volledig doorzichtig: een projectiebeeld hoort geen
+      // permanente knoppen te dragen — die staan straks op de foto van de zaal.
+      final opacity = tester.widget<AnimatedOpacity>(
+        find.ancestor(
+          of: find.byIcon(Icons.chevron_right),
+          matching: find.byType(AnimatedOpacity),
+        ),
+      );
+      expect(opacity.opacity, 0);
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('verschijnt bij muisbeweging en verdwijnt weer', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _host([
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Een', bullets: ['a']),
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Twee', bullets: ['b']),
+        ]),
+      );
+      await tester.pump();
+
+      final pointer = TestPointer(1, PointerDeviceKind.mouse);
+      await tester.sendEventToBinding(
+        pointer.hover(tester.getCenter(find.byType(FullscreenPresenter))),
+      );
+      await tester.pump();
+
+      expect(positie(), findsOneWidget, reason: 'waar ben ik in het deck');
+      expect(
+        find.byIcon(Icons.close),
+        findsWidgets,
+        reason: 'hoe kom ik eruit',
+      );
+      final zichtbaar = tester.widget<AnimatedOpacity>(
+        find.ancestor(
+          of: find.byIcon(Icons.chevron_right),
+          matching: find.byType(AnimatedOpacity),
+        ),
+      );
+      expect(zichtbaar.opacity, 1);
+
+      // En weer weg, zodat de balk niet de rest van de presentatie blijft staan.
+      await tester.pump(const Duration(seconds: 4));
+      final verborgen = tester.widget<AnimatedOpacity>(
+        find.ancestor(
+          of: find.byIcon(Icons.chevron_right),
+          matching: find.byType(AnimatedOpacity),
+        ),
+      );
+      expect(verborgen.opacity, 0);
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('de pijl brengt je naar de volgende dia', (tester) async {
+      await tester.pumpWidget(
+        _host([
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Een', bullets: ['a']),
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Twee', bullets: ['b']),
+        ]),
+      );
+      await tester.pump();
+
+      final pointer = TestPointer(1, PointerDeviceKind.mouse);
+      await tester.sendEventToBinding(
+        pointer.hover(tester.getCenter(find.byType(FullscreenPresenter))),
+      );
+      await tester.pump();
+
+      await tester.tap(find.byIcon(Icons.chevron_right));
+      await tester.pump();
+      expect(find.textContaining(RegExp(r'2 / 2')), findsOneWidget);
+
+      await tester.pumpWidget(const SizedBox());
+    });
   });
 }
