@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../models/storage_connection.dart';
 import '../utils/log.dart';
+import 'asset_staging.dart';
 import 'git/outbox.dart';
 
 /// Wat er van OciDeck op déze schijf achterblijft, en hoe je het weghaalt.
@@ -222,6 +223,44 @@ class DiskTraces {
     final temp = await _temp();
     if (temp == null) return false;
     return _deleteDir(Directory(p.join(temp.path, gitSandboxDirName)));
+  }
+
+  /// Zet de mappen waar OciDeck schrijft op "alleen de eigenaar".
+  ///
+  /// `docs/PRIVACY.md` zegt over de herstelbestanden dat ze niet versleuteld
+  /// zijn en leunen op de accountbescherming van het besturingssysteem. Op macOS
+  /// klopt dat vanzelf — `~/Library` staat op 0700 en `$TMPDIR` is per gebruiker.
+  /// Op Linux niet: `getApplicationSupportDirectory()` en de stagingmap in `/tmp`
+  /// worden met de gewone umask aangemaakt, en dan kan elke andere lokale
+  /// gebruiker de deckinhoud en de foto's van een niet-opgeslagen presentatie
+  /// gewoon lezen. Dan is de tekst in de documentatie onwaar, en dát is het
+  /// probleem — niet dat er geen versleuteling is.
+  ///
+  /// Dart kent geen `chmod`, dus dit gaat via één vast subproces, met een argv
+  /// zonder schil en zonder invoer van buiten: het pad komt van `path_provider`.
+  /// Alleen op Linux, want alleen daar levert het iets op. Best effort en
+  /// unawaited: een systeem zonder `chmod` mag de start niet tegenhouden.
+  Future<int> restrictToOwner() async {
+    if (kIsWeb || !Platform.isLinux) return 0;
+    final temp = await _temp();
+    final dirs = <Directory?>[
+      await _support(),
+      // Nooit de tijdelijke map zelf — dat is `/tmp`, en die is van iedereen.
+      // Alleen onze eigen submap eronder, waar de media van een nog niet
+      // opgeslagen presentatie in staan.
+      if (temp != null) Directory(p.join(temp.path, AssetStaging.rootDirName)),
+    ];
+    var hardened = 0;
+    for (final dir in dirs) {
+      if (dir == null || !await dir.exists()) continue;
+      try {
+        final result = await Process.run('chmod', ['700', dir.path]);
+        if (result.exitCode == 0) hardened++;
+      } catch (e) {
+        logWarning('DiskTraces: map niet op eigenaar-alleen gezet', e);
+      }
+    }
+    return hardened;
   }
 
   /// Hoeveel nog niet gepushte commits er in totaal wachten, over alle repo's —

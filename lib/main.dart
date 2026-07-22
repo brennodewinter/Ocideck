@@ -56,6 +56,11 @@ void main(List<String> args) {
     // bleef na afloop staan met wat git er zelf in achterliet. Bij het opstarten
     // draait er zeker geen `git` van ons; dat is het veilige moment.
     unawaited(DiskTraces().clearGitSandbox());
+    // Op Linux worden onze mappen met de gewone umask aangemaakt en kan elke
+    // andere lokale gebruiker meelezen. `docs/PRIVACY.md` belooft dat de
+    // herstelbestanden op de accountbescherming van het OS leunen; dit maakt
+    // die belofte daar waar.
+    unawaited(DiskTraces().restrictToOwner());
 
     // Het gebundelde gezondheidslexicon vóór de eerste frame, en bewust met
     // `await`. De privacyscan is synchroon en memoiseert per slide; zou dit
