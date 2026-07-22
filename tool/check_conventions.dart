@@ -307,8 +307,6 @@ const Map<String, String> filePickerPathBaseline = {
       'regels 518 en 957 — pickMarkdownFile en pickPackageFile lezen .path; '
       'voor het openen bestaat er een bytes-variant naast, voor pakketten '
       'niet. Zie #526',
-  'lib/widgets/dialogs/parts/image_carousel_picker_actions.dart':
-      'regel 613 — pickFiles die .path leest, aanroepers ongepoort. Zie #526',
 };
 
 /// Leest een `pickFiles(`-aanroep uit en zegt of hij een pad oplevert dat op
