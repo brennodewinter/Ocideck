@@ -35,7 +35,7 @@ distrust the rows that are true.
 | | |
 |---|---|
 | Name | Stichting LibreKAT |
-| Registered address | *see the foundation's own registration; not reproduced here* |
+| Registered address | *to be filled in by the foundation* — see [#644](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/644) |
 | Website | <https://librekat.nl> |
 
 The foundation publishes OciDeck and holds the copyright. It does not sell it,
