@@ -121,11 +121,16 @@ abstract class NativeGitMirror implements DeckMirror {
   /// van slides waar het thuishoort en weet dit bestand niets van decks.
   ///
   /// Naast die drie bytes krijgt [resolve] een [MergeSideReader], want een deck
-  /// is meer dan zijn `deck.md`: de notities staan in een eigen bestand naast
-  /// de markdown, en zonder een manier om díé per kant te lezen zou de
-  /// aanroeper drie decks samenvoegen die alle drie leeg lijken — en het
-  /// resultaat overschrijft dan de deckmap. Wat de aanroeper niét teruggeeft,
-  /// bestaat na afloop niet meer.
+  /// is meer dan zijn `deck.md`: de notities en de grafiekdata staan in eigen
+  /// bestanden naast de markdown, en zonder een manier om díé per kant te lezen
+  /// zou de aanroeper drie decks samenvoegen die alle drie leeg lijken.
+  ///
+  /// **`files` wordt geschreven, `deletes` wordt verwijderd, en de rest van de
+  /// deckmap blijft staan.** Dat was ooit andersom: de map werd leeggemaakt en
+  /// opnieuw gevuld, zodat elk bestand waar de resolver geen weet van had
+  /// verdween — `data/*.json` bij élke merge, ook een geslaagde. De resolver
+  /// kent de deckmap niet, alleen de drie `deck.md`'s, dus die volledigheid was
+  /// niet waar te maken. Verwijderen gebeurt daarom alleen op verzoek (#670).
   ///
   /// `clean: false` betekent dat de aanroeper er niet uitkwam: de merge-commit
   /// wordt dan wél lokaal gemaakt — anders blijft de branch uiteenlopen en botst
@@ -135,7 +140,10 @@ abstract class NativeGitMirror implements DeckMirror {
     required String deckDir,
     required String deckFile,
     required String message,
-    required Future<({Map<String, Uint8List> files, bool clean})> Function(
+    required Future<
+      ({Map<String, Uint8List> files, List<String> deletes, bool clean})
+    >
+    Function(
       Uint8List? base,
       Uint8List? ours,
       Uint8List? theirs,

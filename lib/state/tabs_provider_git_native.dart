@@ -62,9 +62,27 @@ extension TabsNotifierGitNative on TabsNotifier {
       AssetPool(forge: forge, branch: branch),
       sourceName: label,
     );
+    // Een deckmap is meer dan `deck.md`: de cijfers van een gekoppelde grafiek
+    // en de notities staan in eigen bestanden ernaast. Zonder ze hier terug te
+    // hangen opent er een deck dat ze niet kent — en omdat elke schrijfweg de
+    // deckmap vervángt door wat de app samenstelt, ruimt de eerstvolgende
+    // opslag ze op. Geen botsing, geen melding, en het deck ziet er heel uit:
+    // de verwijzing staat er nog, alleen de cijfers zijn weg (#670).
+    //
+    // `readDeck` gaf ze hierboven al mee, dus dit kost geen tweede leesronde.
+    final sidecars = await withRepoSidecars(
+      deck,
+      deckDir: deckDir,
+      read: (path) async => files[path],
+    );
     if (!mounted) return OpenResult.unreadable;
+    if (sidecars.missingChartData.isNotEmpty) {
+      _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
+        sidecars.missingChartData,
+      );
+    }
 
-    _placeDeckInTab(deck, remoteOrigin: label);
+    _placeDeckInTab(sidecars.deck, remoteOrigin: label);
     currentState.current?.gitOrigin = GitOrigin(
       config: config,
       branch: branch,
@@ -240,7 +258,16 @@ extension TabsNotifierGitNative on TabsNotifier {
         );
         mergedDeck = outcome.merge?.merged;
         conflicts = outcome.merge?.conflicts ?? const [];
-        return (files: outcome.files, clean: outcome.clean);
+        if (outcome.missingChartData.isNotEmpty) {
+          _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
+            outcome.missingChartData,
+          );
+        }
+        return (
+          files: outcome.files,
+          deletes: outcome.deletes,
+          clean: outcome.clean,
+        );
       },
     );
 
