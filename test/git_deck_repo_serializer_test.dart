@@ -445,4 +445,189 @@ void main() {
       expect(WebAssetStore.bytesFor(mem), bytes);
     });
   });
+
+  group('notities', () {
+    const notesPath = '$deckDir/deck.user-notes.json';
+
+    Future<RepoDeckFiles> build(Deck deck) async => buildDeckRepoFiles(
+      deck,
+      md: md,
+      pool: poolFor(FakeRepo(branches: {'main': 'c0'}, files: {})),
+      deckDir: deckDir,
+      resolveBytes: resolverFrom({}),
+    );
+
+    /// Het deck zoals het uit de repo terugkomt: `deck.md` opnieuw geparsed
+    /// (de dia-id's zijn dan andere), en daarna de notities eraan gehangen.
+    /// Dat is de volgorde die de app ook aanhoudt.
+    Future<Deck> reopen(RepoDeckFiles out) async {
+      final parsed = md.parseDeck(
+        utf8.decode(out.upserts['$deckDir/deck.md']!),
+      )!;
+      return withRepoUserNotes(
+        parsed,
+        deckDir: deckDir,
+        read: (path) async => out.upserts[path],
+      );
+    }
+
+    /// Een deck zonder enige notitie — de andere kant van elke toets hieronder.
+    Deck deckZonderNotities() =>
+        deckWith([Slide.create(SlideType.title).copyWith(title: 'Eén')]);
+
+    Deck deckWithNote(String note, {String title = 'Eén'}) {
+      final slide = Slide.create(SlideType.title).copyWith(title: title);
+      return Deck(
+        title: 'Kwartaal',
+        slides: [slide],
+        userNotes: {slide.id: note},
+      );
+    }
+
+    test('krijgen een eigen bestand naast deck.md, niet in de pool', () async {
+      final out = await build(deckWithNote('Noem het budget'));
+
+      // Een stabiel pad onder de deckmap. In de content-geadresseerde pool zou
+      // elk getypt teken een nieuw bestand minten en het vorige laten
+      // wegkwijnen — dat levert precies geen leesbare diff op.
+      expect(out.upserts.containsKey(notesPath), isTrue);
+      expect(out.upserts.keys.where((k) => k.startsWith('assets/')), isEmpty);
+      expect(utf8.decode(out.upserts[notesPath]!), contains('Noem het budget'));
+    });
+
+    test('komen er bij het openen weer aan, op de juiste dia', () async {
+      final out = await build(deckWithNote('Noem het budget'));
+      final deck = await reopen(out);
+
+      // Niet op id vergeleken: die worden bij elk parsen opnieuw uitgedeeld.
+      // Dát is precies waarom de codec op vingerafdruk werkt.
+      expect(deck.userNotes.values.single, 'Noem het budget');
+      expect(deck.userNotes.keys.single, deck.slides.single.id);
+    });
+
+    test('de tweede dia krijgt zijn eigen notitie terug', () async {
+      final a = Slide.create(SlideType.title).copyWith(title: 'Eén');
+      final b = Slide.create(SlideType.title).copyWith(title: 'Twee');
+      final out = await build(
+        Deck(
+          title: 'Kwartaal',
+          slides: [a, b],
+          userNotes: {a.id: 'bij één', b.id: 'bij twee'},
+        ),
+      );
+      final deck = await reopen(out);
+
+      expect(deck.userNotes[deck.slides[0].id], 'bij één');
+      expect(deck.userNotes[deck.slides[1].id], 'bij twee');
+    });
+
+    test('staan per regel in het bestand, zodat git ze kan mergen', () async {
+      // Dit is de toets achter D7. Die zegt dat dit bestand door git's gewone
+      // tekst-merge gaat en dat twee auteurs op verschillende dia's schoon
+      // samenvoegen. Op één regel — wat jsonEncode oplevert en wat de sidecar
+      // op schijf is — botst élke wijziging met élke andere en klopt die
+      // belofte niet.
+      final a = Slide.create(SlideType.title).copyWith(title: 'Eén');
+      final b = Slide.create(SlideType.title).copyWith(title: 'Twee');
+      final out = await build(
+        Deck(
+          title: 'Kwartaal',
+          slides: [a, b],
+          userNotes: {a.id: 'bij één', b.id: 'bij twee'},
+        ),
+      );
+
+      final regels = const LineSplitter().convert(
+        utf8.decode(out.upserts[notesPath]!),
+      );
+      expect(regels.length, greaterThan(4));
+      // De twee notities staan niet op dezelfde regel; anders zou een wijziging
+      // aan de ene de andere raken.
+      final eerste = regels.indexWhere((r) => r.contains('bij één'));
+      final tweede = regels.indexWhere((r) => r.contains('bij twee'));
+      expect(eerste, isNot(-1));
+      expect(tweede, isNot(eerste));
+    });
+
+    test('een deck zonder notities schrijft geen bestand', () async {
+      final out = await build(deckZonderNotities());
+
+      expect(out.upserts.containsKey(notesPath), isFalse);
+    });
+
+    test('de laatste notitie wissen haalt het bestand wég', () async {
+      // Zonder dit zou de commit het oude bestand laten staan en hing de
+      // notitie er bij de volgende open gewoon weer aan. Een wissing die
+      // terugkomt is erger dan een die niet werkt: de gebruiker dacht dat het
+      // weg was.
+      final out = await build(deckZonderNotities());
+
+      expect(out.deletes, contains(notesPath));
+      expect(out.upserts.containsKey(notesPath), isFalse);
+    });
+
+    test('een deck mét notities verwijdert het bestand niet', () async {
+      final out = await build(deckWithNote('blijft staan'));
+
+      expect(out.deletes, isEmpty);
+    });
+
+    test('een lege notitie telt als geen notitie', () async {
+      final out = await build(deckWithNote('   '));
+
+      expect(out.upserts.containsKey(notesPath), isFalse);
+      expect(out.deletes, contains(notesPath));
+    });
+
+    group('een bestand dat niet deugt laat het deck gewoon openen', () {
+      Future<Deck> openMet(Uint8List? bytes) async {
+        final slide = Slide.create(SlideType.title).copyWith(title: 'Eén');
+        return withRepoUserNotes(
+          Deck(title: 'Kwartaal', slides: [slide]),
+          deckDir: deckDir,
+          read: (path) async => path == notesPath ? bytes : null,
+        );
+      }
+
+      test('geen bestand', () async {
+        expect((await openMet(null)).userNotes, isEmpty);
+      });
+
+      test('leeg bestand', () async {
+        expect((await openMet(Uint8List(0))).userNotes, isEmpty);
+      });
+
+      test('geen geldige JSON', () async {
+        final deck = await openMet(
+          Uint8List.fromList(utf8.encode('dit is geen json')),
+        );
+        expect(deck.userNotes, isEmpty);
+      });
+
+      test('geen geldige UTF-8', () async {
+        expect(
+          (await openMet(Uint8List.fromList([0xff, 0xfe]))).userNotes,
+          isEmpty,
+        );
+      });
+
+      test('boven de bytegrens wordt niet ingelezen', () async {
+        // Het bestand komt van buiten en jsonDecode legt er nog een kopie
+        // bovenop. Een repo waarin dit tientallen megabytes is, is geen deck
+        // met veel notities maar iets anders.
+        final groot = Uint8List(maxRepoUserNotesBytes + 1);
+        expect((await openMet(groot)).userNotes, isEmpty);
+      });
+
+      test('een leesfout is geen mislukte open', () async {
+        final slide = Slide.create(SlideType.title).copyWith(title: 'Eén');
+        final deck = await withRepoUserNotes(
+          Deck(title: 'Kwartaal', slides: [slide]),
+          deckDir: deckDir,
+          read: (_) async => throw StateError('netwerk weg'),
+        );
+        expect(deck.userNotes, isEmpty);
+      });
+    });
+  });
 }
