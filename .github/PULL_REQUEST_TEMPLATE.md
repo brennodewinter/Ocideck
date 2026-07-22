@@ -10,6 +10,8 @@
 
 ## Checklist
 
+- [ ] Every commit is **signed off** (`git commit -s`) per the
+      [DCO](../dco.txt), with my real name and a reachable email.
 - [ ] `make check` passes (format-check, analyze, full test suite).
 - [ ] Added/updated tests for the behaviour I changed. **If this fixes a bug,
       the test is on the reported behaviour and was red once against the

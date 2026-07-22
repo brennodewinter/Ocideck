@@ -19,6 +19,27 @@ By contributing you agree that your contributions are licensed under the project
 licence, the **European Union Public Licence v. 1.2 (EUPL-1.2)** — see
 [`LICENSE.md`](LICENSE.md).
 
+**Sign off every commit.** This project uses the
+[Developer Certificate of Origin](dco.txt): a short, standard statement that you
+wrote the change, or have the right to submit it, under the project licence. You
+certify it per commit by adding a `Signed-off-by` line, which `git` writes for
+you:
+
+```bash
+git commit -s
+```
+
+The line must carry your real name and an email you can be reached at
+(`Signed-off-by: Jane Doe <jane@example.org>`). That is the whole ceremony —
+no separate agreement to sign, no account, no CLA. Missing the sign-off is the
+one thing that will hold a pull request even when the code is fine; `git commit
+--amend -s` or `git rebase --signoff` fixes a branch after the fact.
+
+*(Adopted 2026-07-23, #594. A sentence in a document was the weakest contributor
+agreement the open-source world recognises and left no per-commit record; the
+DCO is the lightest thing that fixes both, and it is what `AUTHORS.md` now
+relies on when it says contributors keep copyright in their own work.)*
+
 ## Prerequisites
 
 - **Flutter 3.44.x** (stable), using the `dart` bundled with it.
