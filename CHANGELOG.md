@@ -80,6 +80,14 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   markdown of de HTML.
 
 ### Fixed
+- **Een presentatie die naar een submap gaat, komt daar ook onder die naam
+  aan.** Sloeg u een deck op naar S3 of WebDAV op een pad zónder map ervoor,
+  dan ging het object met een `./` ervoor de lijn over: de sleutel waar
+  daadwerkelijk naartoe werd geschreven was anders gespeld dan de herkomst die
+  het tabblad bewaarde, en op WebDAV probeerde de client er ook nog een map `.`
+  van te maken. Beide kanten normaliseerden dat weg, dus er raakte niets kwijt —
+  maar wat over de lijn gaat, hoort te staan zoals u het koos.
+
 - **Een export die niets doet, blijft niet meer eeuwig niets doen.** De PDF- en
   PPTX-export maakt zijn afbeeldingen door de échte dia te laten tekenen en het
   resultaat vast te leggen. Daarvoor moet het venster beelden produceren — en
