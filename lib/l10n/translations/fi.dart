@@ -1785,6 +1785,38 @@ const _dutchSourceAddFi = <String, String>{
       'OciDeck itse julkaistaan EUPL-1.2-lisenssillä. Lisäksi se niputtaa kolmansien osapuolten ohjelmistoja: Dart- ja Flutter-paketit, kaksi mukana toimitettua liitännäistä, neljä kirjasinperhettä, yksityisyystarkistuksen kasvomallin ja JavaScriptin, joka kulkee HTML-viennin mukana. Kukin säilyttää oman lisenssinsä.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Tämä tiedosto sisältää kolmansien osapuolten ohjelmistoja ja toisinaan kirjasimen. Alla ovat niihin kuuluvat täydet lisenssitekstit; välitä ne tiedoston mukana.',
+  'Sporen op dit apparaat': 'Jäljet tällä laitteella',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Asetustesi lisäksi OciDeck säilyttää myös viimeisimpien tiedostojen luettelon ja kaatumisen sattuessa palautustiedoston, jossa on esityksesi koko sisältö. Mikään siitä ei poistu tältä laitteelta, mutta täällä se on — selkokielisenä tekstinä, suojattuna käyttäjätililläsi tässä käyttöjärjestelmässä eikä muulla.',
+  'Recent geopende presentaties': 'Viimeksi avatut esitykset',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Luettelo säilyttää jokaisen avatun esityksen koko polun ja luokituksen — yhdessä tiedon siitä, mitä työstät ja kenelle.',
+  'Recente lijst wissen': 'Pyyhi viimeisimpien luettelo',
+  'De recente lijst was al leeg.':
+      'Viimeisimpien tiedostojen luettelo oli jo tyhjä.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'merkintää pyyhitty viimeisimpien tiedostojen luettelosta.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Palautustiedostot sisältävät esitystesi koko sisällön selkokielisenä tekstinä. Ne siivotaan automaattisesti 7 päivän jälkeen, ja siistin lopetuksen yhteydessä heti.',
+  'Alles terugzetten': 'Palauta kaikki',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Pyyhkii kaikki asetukset, viimeisimpien tiedostojen luettelon, palautustiedostot, gitin työkopiot ja salasanat avainnipustasi. Esityksesi jäävät: ne ovat sinun, eivät OciDeckin.',
+  'Zet alles terug naar de begintoestand': 'Palauta kaikki alkutilaan',
+  'Alles terugzetten naar de begintoestand?':
+      'Palautetaanko kaikki alkutilaan?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Asetuksesi, viimeisimpien tiedostojen luettelo, palautustiedostot, gitin työkopiot ja tallennetut salasanat pyyhitään. Tätä ei voi perua. Esityksesi jäävät.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'muutosta ei ole vielä lähetetty git-palvelimelle, ja ne ovat vain tällä laitteella. Nekin katoavat.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Kaikki on palautettu alkutilaan.',
+  'Terugzetten is niet gelukt.': 'Palautus ei onnistunut.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Lähettämätöntä työtä on vielä odottamassa',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Tässä git-yhteydessä on muutoksia, joita ei ole vielä lähetetty palvelimelle. Jos poistat yhteyden, myös työkopio tältä laitteelta katoaa — eikä tätä työtä ole enää missään.',
+  'Verbinding behouden': 'Säilytä yhteys',
+  'Toch verwijderen': 'Poista silti',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

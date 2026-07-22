@@ -81,6 +81,38 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   pakket niet meer kunnen openen. De sterkte van het wachtwoord is dus wat
   telt. Het staat zichtbaar in beeld zodat u het kunt overnemen, en u kunt er
   altijd uw eigen zin voor in de plaats zetten.
+- **OciDeck laat minder op uw schijf achter, en u kunt de rest zelf wissen.**
+
+  Een git-verbinding verwijderen haalde alleen het regeltje uit uw instellingen
+  weg. De volledige inhoud van die repository — inclusief de historie — bleef in
+  een verborgen map staan, samen met de commitboodschappen die u had getypt. Bij
+  een repository met klantgegevens betekende dat: de verbinding is weg, de
+  gegevens niet. Die werkkopie gaat nu mee. Wacht er nog werk dat niet naar de
+  server is gestuurd, dan gooit OciDeck dat nooit stilzwijgend weg: u ziet welk
+  deck, welke tak en welke boodschap het betreft, en u kiest zelf. Zegt u nee,
+  dan blijft de verbinding gewoon staan.
+
+  Ook nieuw in *Instellingen → Beveiliging*, onder **Sporen op dit apparaat**:
+  de recente lijst in één keer wissen — die bewaart het volledige pad én de
+  classificatie van elk deck dat open is geweest — en *alles terugzetten naar de
+  begintoestand*, dat ook de herstelbestanden, de git-werkkopieën en de
+  wachtwoorden in uw sleutelbos opruimt. Uw presentaties blijven staan: die zijn
+  van u.
+
+  Verder ruimt OciDeck nu op wat het zelf liet slingeren: het logo van een
+  stijlprofiel dat u verwijdert, en de tijdelijke map waarin `git` draait.
+
+  Uw eigen gegevens uit de privacycontrole — naam, e-mailadres, telefoonnummer —
+  stonden in klaartekst bij de instellingen. Die verhuizen bij de eerste start
+  naar de sleutelbos van uw besturingssysteem, waar de wachtwoorden ook staan.
+
+  Herstelbestanden worden niet versleuteld, en dat blijft zo; `SECURITY.md` legt
+  uit waarom opruimen hier meer oplevert. Wél gelden de zeven dagen nu ook
+  terwijl de app draait — voorheen werd er alleen bij het opstarten opgeruimd,
+  dus op een machine die aan blijft staan bleef een oud herstelbestand liggen.
+  En op Linux zet OciDeck zijn eigen mappen bij de start op "alleen voor u",
+  zodat andere accounts op dezelfde computer niet meelezen.
+
 - **Geen base64 meer in uw presentatiebestand.** De belofte van OciDeck is dat u
   met alleen een teksteditor en Marp verder kunt. Op zeven plekken klopte dat
   niet: daar stond een blok onleesbare tekens waar uw inhoud in verstopt zat.

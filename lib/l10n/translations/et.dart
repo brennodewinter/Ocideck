@@ -1776,6 +1776,36 @@ const _dutchSourceAddEt = <String, String>{
       'OciDeck ise on litsentsitud EUPL-1.2 alusel. Lisaks koondab see kolmandate osapoolte tarkvara: Darti ja Flutteri paketid, kaks kaasasolevat pistikprogrammi, neli kirjaperekonda, privaatsuskontrolli näomudeli ja JavaScripti, mis reisib kaasa HTML-ekspordiga. Igaüks neist säilitab oma litsentsi.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'See fail sisaldab kolmandate osapoolte tarkvara ja mõnikord ka kirjatüüpi. Allpool on nende juurde kuuluvad täielikud litsentsitekstid; anna need edasi koos failiga.',
+  'Sporen op dit apparaat': 'Jäljed selles seadmes',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Lisaks sinu seadetele hoiab OciDeck ka hiljutiste failide loendit ja krahhi korral taastefaili sinu esitluse kogu sisuga. Miski sellest ei lahku sellest seadmest, aga siin see on — lihttekstina, kaitstuna sinu kontoga selles operatsioonisüsteemis ja mitte enamaga.',
+  'Recent geopende presentaties': 'Hiljuti avatud esitlused',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'Loend hoiab iga avatud esitluse täisteed ja klassifikatsiooni — koos on see teave selle kohta, mille kallal sa töötad ja kelle jaoks.',
+  'Recente lijst wissen': 'Kustuta hiljutiste failide loend',
+  'De recente lijst was al leeg.': 'Hiljutiste failide loend oli juba tühi.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'kirjet kustutatud hiljutiste failide loendist.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Taastefailid sisaldavad sinu esitluste kogu sisu lihttekstina. Need koristatakse automaatselt 7 päeva pärast ja korraliku sulgemise korral kohe.',
+  'Alles terugzetten': 'Lähtesta kõik',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Kustutab kõik seaded, hiljutiste failide loendi, taastefailid, giti töökoopiad ja paroolid sinu võtmehoidlas. Sinu esitlused jäävad alles: need on sinu omad, mitte OciDecki omad.',
+  'Zet alles terug naar de begintoestand': 'Lähtesta kõik algolekusse',
+  'Alles terugzetten naar de begintoestand?':
+      'Kas lähtestada kõik algolekusse?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Sinu seaded, hiljutiste failide loend, taastefailid, giti töökoopiad ja salvestatud paroolid kustutatakse. Seda ei saa tagasi võtta. Sinu esitlused jäävad alles.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'muudatust pole veel git-serverisse saadetud ja need on ainult selles seadmes. Ka need kaovad.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Kõik on lähtestatud algolekusse.',
+  'Terugzetten is niet gelukt.': 'Lähtestamine ebaõnnestus.',
+  'Er wacht nog werk dat niet verstuurd is': 'Ootel on saatmata töö',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Sellel git-ühendusel on muudatusi, mida pole veel serverisse saadetud. Kui ühenduse eemaldad, kaob ka töökoopia sellest seadmest — ja seda tööd pole enam kusagil.',
+  'Verbinding behouden': 'Säilita ühendus',
+  'Toch verwijderen': 'Eemalda siiski',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

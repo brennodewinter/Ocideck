@@ -742,6 +742,39 @@ const _dutchSourceAddPap = {
       'OciDeck mes ta bou di EUPL-1.2. Ademas e ta inkluí software di terseronan: e paketenan di Dart i Flutter, dos plugin inkorporá, kuater famia di lèter, e modelo di kara pa e kontrol di privasidat i e JavaScript ku ta bai huntu den un eksportashon HTML. Kada un ta warda su mes lisensia.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'E archivo aki tin software di terseronan i tin biaha un tipo di lèter. Abou ta e tekstonan kompleto di lisensia ku ta pertenesé na nan; manda nan huntu ora bo pasa e archivo aki.',
+  'Sporen op dit apparaat': 'Rastronan riba e aparato aki',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Banda di bo konfigurashonnan, OciDeck ta warda tambe un lista di archivonan resien i, ora un crash sosodé, un archivo di rekuperashon ku henter e kontenido di bo presentashon. Nada di esei no ta sali for di e aparato aki, ma e ta einan — den teksto simpel, protehá pa bo kuenta riba e sistema operativo aki i nada mas.',
+  'Recent geopende presentaties': 'Presentashonnan habrí resientemente',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'E lista ta warda e kaminda kompleto i e klasifikashon di kada presentashon ku tabata habrí — huntu un dato tokante kiko bo ta traha riba dje i pa ken.',
+  'Recente lijst wissen': 'Wisa e lista di archivonan resien',
+  'De recente lijst was al leeg.':
+      'E lista di archivonan resien tabata bashí kaba.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'entrada(nan) kitá for di e lista di archivonan resien.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Archivonan di rekuperashon ta kontené henter e kontenido di bo presentashonnan den teksto simpel. Nan ta ser limpiá outomátikamente despues di 7 dia, i mesora ora e programa sera bon.',
+  'Alles terugzetten': 'Poni tur kos bèk',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Ta wisa tur konfigurashon, e lista di archivonan resien, e archivonan di rekuperashon, e kopianan di trabou di git i e kontraseñanan den bo yaberu. Bo presentashonnan ta keda: nan ta di bo, no di OciDeck.',
+  'Zet alles terug naar de begintoestand':
+      'Poni tur kos bèk na e estado inisial',
+  'Alles terugzetten naar de begintoestand?':
+      'Poni tur kos bèk na e estado inisial?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'Bo konfigurashonnan, e lista di archivonan resien, e archivonan di rekuperashon, e kopianan di trabou di git i e kontraseñanan wardá lo wòrdu wisá. Esaki no por wòrdu deshasí. Bo presentashonnan ta keda.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'kambio(nan) ainda no a wòrdu mandá pa un servidó git i ta eksistí solamente riba e aparato aki. Esakinan tambe ta bai.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Tur kos a wòrdu poní bèk na e estado inisial.',
+  'Terugzetten is niet gelukt.': 'E reset no a lukra.',
+  'Er wacht nog werk dat niet verstuurd is':
+      'Tin trabou ku ainda no a wòrdu mandá',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'E konekshon git aki tin kambionan ku ainda no a wòrdu mandá pa e servidó. Si bo kita e konekshon, e kopia di trabou riba e aparato aki ta bai tambe — i e trabou aki lo no eksistí niun kaminda mas.',
+  'Verbinding behouden': 'Wanta e konekshon',
+  'Toch verwijderen': 'Kita tòg',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -1815,6 +1815,36 @@ const _dutchSourceAddPt = <String, String>{
       'O próprio OciDeck é licenciado sob a EUPL-1.2. Além disso, agrega software de terceiros: os pacotes Dart e Flutter, dois plugins incorporados, quatro famílias de tipos de letra, o modelo de rosto do controlo de privacidade e o JavaScript que viaja numa exportação HTML. Cada um mantém a sua própria licença.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Este ficheiro contém software de terceiros e por vezes um tipo de letra. Abaixo estão os textos completos das licenças correspondentes; envie-os juntamente com o ficheiro.',
+  'Sporen op dit apparaat': 'Vestígios neste dispositivo',
+  'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
+      'Além das suas definições, o OciDeck guarda também uma lista de ficheiros recentes e, em caso de falha, um ficheiro de recuperação com todo o conteúdo da sua apresentação. Nada disso sai deste dispositivo, mas está cá — em texto simples, protegido pela sua conta neste sistema operativo e por nada mais.',
+  'Recent geopende presentaties': 'Apresentações abertas recentemente',
+  'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
+      'A lista guarda o caminho completo e a classificação de cada apresentação que esteve aberta — em conjunto, um dado sobre aquilo em que trabalha e para quem.',
+  'Recente lijst wissen': 'Apagar a lista de ficheiros recentes',
+  'De recente lijst was al leeg.':
+      'A lista de ficheiros recentes já estava vazia.',
+  'vermelding(en) uit de recente lijst gewist.':
+      'entrada(s) apagada(s) da lista de ficheiros recentes.',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
+      'Os ficheiros de recuperação contêm todo o conteúdo das suas apresentações em texto simples. São limpos automaticamente após 7 dias e, quando o programa fecha corretamente, de imediato.',
+  'Alles terugzetten': 'Repor tudo',
+  'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
+      'Apaga todas as definições, a lista de ficheiros recentes, os ficheiros de recuperação, as cópias de trabalho git e as palavras-passe no seu porta-chaves. As suas apresentações ficam: são suas, não do OciDeck.',
+  'Zet alles terug naar de begintoestand': 'Repor tudo ao estado inicial',
+  'Alles terugzetten naar de begintoestand?': 'Repor tudo ao estado inicial?',
+  'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
+      'As suas definições, a lista de ficheiros recentes, os ficheiros de recuperação, as cópias de trabalho git e as palavras-passe guardadas serão apagadas. Isto não pode ser anulado. As suas apresentações ficam.',
+  'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
+      'alteração(ões) ainda não foram enviadas para um servidor git e só existem neste dispositivo. Também essas desaparecem.',
+  'Alles is teruggezet naar de begintoestand.':
+      'Tudo foi reposto ao estado inicial.',
+  'Terugzetten is niet gelukt.': 'A reposição não foi bem-sucedida.',
+  'Er wacht nog werk dat niet verstuurd is': 'Há trabalho por enviar',
+  'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
+      'Esta ligação git tem alterações que ainda não foram enviadas para o servidor. Se remover a ligação, desaparece também a cópia de trabalho neste dispositivo — e este trabalho deixa de existir em qualquer lado.',
+  'Verbinding behouden': 'Manter a ligação',
+  'Toch verwijderen': 'Remover mesmo assim',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -204,6 +204,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// Bewaar elk niet-opgeslagen tabblad naar zijn herstelbestand.
   void _autosaveTick() {
     if (!mounted) return;
+    // Dezelfde tik ruimt verlopen herstelbestanden op. Anders gold de
+    // houdbaarheid van zeven dagen alleen bij het opstarten, en hield een
+    // machine die aan blijft staan de klaartekst van een oude crash vast.
+    // Zelf-beperkend op een uur; zie [RecoveryService.pruneIfDue].
+    unawaited(_recovery.pruneIfDue());
     for (final tab in state.tabs) {
       // Zie TabInfo.label: een tab kan kortstondig een al-gedisposede
       // notifier dragen; die heeft niets meer te autosaven.
