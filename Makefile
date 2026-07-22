@@ -671,10 +671,10 @@ add-l10n:
 # dart-format-clean (the exact failures that used to slip through by hand).
 l10n-check:
 	@echo "== OciDeck check: l10n =="
-	@echo "Covers: duplicate keys, per-language d()/t() coverage, and l10n formatting."
-	@echo "Failure means: run 'make add-l10n' / 'dart format lib/l10n', or fill the gap."
+	@echo "Covers: duplicate keys, per-language d()/t() coverage, untranslated English, and l10n formatting."
+	@echo "Failure means: run 'make add-l10n' / 'dart format lib/l10n', fill the gap, or translate a string that is still English."
 	dart format --output=none --set-exit-if-changed lib/l10n
-	flutter test test/l10n_duplicate_keys_test.dart test/app_localizations_test.dart
+	flutter test test/l10n_duplicate_keys_test.dart test/app_localizations_test.dart test/l10n_untranslated_test.dart
 
 # Build the hardened web bundle. Two flags do the security work:
 #   --no-web-resources-cdn  Self-host CanvasKit instead of fetching it from the
