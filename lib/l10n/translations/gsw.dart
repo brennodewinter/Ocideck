@@ -1791,7 +1791,7 @@ const _dutchSourceAddGsw = <String, String>{
       'Die Datei enthaltet Software vo Dritte und mängisch au e Schrift. Unte schtönd di vollschtändige Lizänztäxt derzue; gib si mit, wänn du die Datei witergisch.',
   'Sporen op dit apparaat': 'Spure uf däm Grät',
   'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
-      'Näbe dine Iischtellige spycheret OciDeck au e Lischte vo de letschte Dateie und, bin ere Abschturz, e Wiederherstelligs-Datei mit em ganze Inhalt vo dinere Präsentation. Nüt devo verlaht das Grät, aber es lyt do — im Klartext, gschützt vo dim Konto uf däm Betriebssystem und vo nüt meh.',
+      'Näbe dine Iischtellige spycheret OciDeck au e Lischte vo de letschte Dateie und, bi eme Abschturz, e Wiederherstelligs-Datei mit em ganze Inhalt vo dinere Präsentation. Nüt devo verlaht das Grät, aber es lyt do — im Klartext, gschützt vo dim Konto uf däm Betriebssystem und vo nüt meh.',
   'Recent geopende presentaties': 'Zletscht gööffneti Präsentatione',
   'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
       'D Lischte spycheret dr ganz Pfad und d Klassifizierig vo jedere Präsentation, wo offe gsi isch — zäme e Uussag drüber, a was du schaffsch und für wän.',

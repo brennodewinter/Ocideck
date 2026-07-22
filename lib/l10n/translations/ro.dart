@@ -1805,24 +1805,24 @@ const _dutchSourceAddRo = <String, String>{
       'Acest fișier conține software terț și uneori un font. Mai jos se află textele complete ale licențelor aferente; transmite-le împreună cu fișierul.',
   'Sporen op dit apparaat': 'Urme pe acest dispozitiv',
   'OciDeck bewaart naast je instellingen ook een recente lijst en, bij een crash, een herstelbestand met de volledige inhoud van je presentatie. Niets daarvan verlaat dit apparaat, maar het staat er wel — in platte tekst, beschermd door je account op dit besturingssysteem en niet meer dan dat.':
-      'Pe lângă setările dumneavoastră, OciDeck păstrează și o listă a fișierelor recente, iar la o blocare, un fișier de recuperare cu întregul conținut al prezentării. Nimic din toate acestea nu părăsește dispozitivul, dar se află aici — în text simplu, protejat de contul dumneavoastră din acest sistem de operare și de nimic mai mult.',
+      'Pe lângă setările tale, OciDeck păstrează și o listă a fișierelor recente, iar la o blocare, un fișier de recuperare cu întregul conținut al prezentării tale. Nimic din toate acestea nu părăsește dispozitivul, dar se află aici — în text simplu, protejat de contul tău din acest sistem de operare și de nimic mai mult.',
   'Recent geopende presentaties': 'Prezentări deschise recent',
   'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
-      'Lista păstrează calea completă și clasificarea fiecărei prezentări care a fost deschisă — împreună, o informație despre la ce lucrați și pentru cine.',
+      'Lista păstrează calea completă și clasificarea fiecărei prezentări care a fost deschisă — împreună, o informație despre la ce lucrezi și pentru cine.',
   'Recente lijst wissen': 'Șterge lista fișierelor recente',
   'De recente lijst was al leeg.': 'Lista fișierelor recente era deja goală.',
   'vermelding(en) uit de recente lijst gewist.':
       'intrare/intrări șterse din lista fișierelor recente.',
   'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd, en bij een nette afsluiting meteen.':
-      'Fișierele de recuperare conțin întregul conținut al prezentărilor în text simplu. Sunt curățate automat după 7 zile, iar la o închidere corectă, imediat.',
+      'Fișierele de recuperare conțin întregul conținut al prezentărilor tale în text simplu. Sunt curățate automat după 7 zile, iar la o închidere corectă, imediat.',
   'Alles terugzetten': 'Resetează tot',
   'Wist elke instelling, de recente lijst, de herstelbestanden, de git-werkkopieën en de wachtwoorden in je sleutelbos. Je presentaties blijven staan: die zijn van jou, niet van OciDeck.':
-      'Șterge toate setările, lista fișierelor recente, fișierele de recuperare, copiile de lucru git și parolele din inelul de chei. Prezentările rămân: sunt ale dumneavoastră, nu ale OciDeck.',
+      'Șterge toate setările, lista fișierelor recente, fișierele de recuperare, copiile de lucru git și parolele din inelul tău de chei. Prezentările tale rămân: sunt ale tale, nu ale OciDeck.',
   'Zet alles terug naar de begintoestand': 'Resetează tot la starea inițială',
   'Alles terugzetten naar de begintoestand?':
       'Resetezi tot la starea inițială?',
   'Je instellingen, de recente lijst, de herstelbestanden, de git-werkkopieën en de opgeslagen wachtwoorden worden gewist. Dit kan niet ongedaan worden gemaakt. Je presentaties blijven staan.':
-      'Vor fi șterse setările dumneavoastră, lista fișierelor recente, fișierele de recuperare, copiile de lucru git și parolele salvate. Această acțiune nu poate fi anulată. Prezentările rămân.',
+      'Vor fi șterse setările tale, lista fișierelor recente, fișierele de recuperare, copiile de lucru git și parolele salvate. Această acțiune nu poate fi anulată. Prezentările tale rămân.',
   'wijziging(en) zijn nog niet naar een git-server gestuurd en bestaan alleen op dit apparaat. Ook die gaan weg.':
       'modificare/modificări nu au fost încă trimise pe un server git și există doar pe acest dispozitiv. Și acelea dispar.',
   'Alles is teruggezet naar de begintoestand.':
@@ -1830,7 +1830,7 @@ const _dutchSourceAddRo = <String, String>{
   'Terugzetten is niet gelukt.': 'Resetarea nu a reușit.',
   'Er wacht nog werk dat niet verstuurd is': 'Mai există lucru netrimis',
   'Deze git-verbinding heeft wijzigingen die nog niet naar de server zijn gestuurd. Verwijder je de verbinding, dan gaat ook de werkkopie op dit apparaat weg — en bestaat dit werk nergens meer.':
-      'Această conexiune git are modificări care încă nu au fost trimise pe server. Dacă eliminați conexiunea, dispare și copia de lucru de pe acest dispozitiv — iar munca aceasta nu va mai exista nicăieri.',
+      'Această conexiune git are modificări care încă nu au fost trimise pe server. Dacă elimini conexiunea, dispare și copia de lucru de pe acest dispozitiv — iar munca aceasta nu va mai exista nicăieri.',
   'Verbinding behouden': 'Păstrează conexiunea',
   'Toch verwijderen': 'Elimină oricum',
   'esc': 'esc',

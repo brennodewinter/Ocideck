@@ -1798,7 +1798,7 @@ const _dutchSourceAddLt = <String, String>{
       'Be jūsų nustatymų, OciDeck saugo ir paskutinių failų sąrašą, o strigties atveju – atkūrimo failą su visu jūsų pristatymo turiniu. Niekas iš to neišeina iš šio įrenginio, bet čia guli – paprastu tekstu, apsaugotas jūsų paskyra šioje operacinėje sistemoje ir niekuo daugiau.',
   'Recent geopende presentaties': 'Neseniai atverti pristatymai',
   'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
-      'Sąraše saugomas visas kelias ir kiekvieno atverto pristatymo klasifikacija – kartu tai duomenys apie tai, ką dirbate ir kam.',
+      'Sąraše saugomas visas kelias ir kiekvieno atverto pristatymo klasifikacija – kartu tai duomenys apie tai, ties kuo dirbate ir kam.',
   'Recente lijst wissen': 'Ištrinti paskutinių failų sąrašą',
   'De recente lijst was al leeg.': 'Paskutinių failų sąrašas jau buvo tuščias.',
   'vermelding(en) uit de recente lijst gewist.':

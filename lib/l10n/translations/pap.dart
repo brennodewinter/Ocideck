@@ -747,7 +747,7 @@ const _dutchSourceAddPap = {
       'Banda di bo konfigurashonnan, OciDeck ta warda tambe un lista di archivonan resien i, ora un crash sosodé, un archivo di rekuperashon ku henter e kontenido di bo presentashon. Nada di esei no ta sali for di e aparato aki, ma e ta einan — den teksto simpel, protehá pa bo kuenta riba e sistema operativo aki i nada mas.',
   'Recent geopende presentaties': 'Presentashonnan habrí resientemente',
   'De lijst bewaart het volledige pad en de classificatie van elk deck dat open is geweest — samen een gegeven over waar je aan werkt en voor wie.':
-      'E lista ta warda e kaminda kompleto i e klasifikashon di kada presentashon ku a ta habrí — huntu un dato tokante kiko bo ta traha riba dje i pa ken.',
+      'E lista ta warda e kaminda kompleto i e klasifikashon di kada presentashon ku tabata habrí — huntu un dato tokante kiko bo ta traha riba dje i pa ken.',
   'Recente lijst wissen': 'Wisa e lista di archivonan resien',
   'De recente lijst was al leeg.':
       'E lista di archivonan resien tabata bashí kaba.',
