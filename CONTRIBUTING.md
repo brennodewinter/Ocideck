@@ -184,12 +184,20 @@ single risk in this project — larger than anything a scanner has reported.
   it at **seven files**, the Markdown parsers and serialisers. There are 309
   such predicates across 96 files in `lib/`. There is no condition, boundary-value
   or return-value mutant. It is manual and not part of `make check`. Last run
-  2026-07-22: 26 mutants, **one survivor**
-  (`markdown_service_finding.dart`, the `ocideck_checklist_scope:` predicate),
-  which halted the sweep before the remaining five files ran. *(Added
+  2026-07-22: **51 mutants across all seven files, no survivors.** *(Added
   2026-07-22: this line called mutation testing a "gate" without qualification,
   which invites the reader to upgrade the 86.2% line coverage into evidence of
   assertion strength that one operator over seven files does not provide.)*
+
+  *Corrected 2026-07-22 (#660): the previous run reported 26 mutants and one
+  survivor. Both numbers were an artefact. The sweep ran one `make` line per
+  file and therefore stopped at the first failure, so five of the seven files
+  never ran — "26 mutants" was a count of the part that got as far as running.
+  The survivor itself was not dead code either: the `ocideck_checklist_scope:`
+  predicate is covered, by `test/checklist_spec_test.dart`, which was not in
+  the list of tests that sweep re-ran. The target now runs all seven and fails
+  at the end, so the number is the whole picture rather than the prefix before
+  the first problem.*
 - Everything lands through a pull request with a written description, so the
   reasoning is reviewable after the fact even when nobody reviewed it before.
 

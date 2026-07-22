@@ -193,14 +193,23 @@ mutate:
 mutate-parsers:
 	@echo "== OciDeck check: mutation sweep over the parsers =="
 	@echo "Command: tool/mutation_check.dart over parse/serialize/body-blocks/inline/validator."
-	@echo "Failure means: a predicate survived — it is dead or untested; review it."
-	dart run tool/mutation_check.dart lib/services/markdown_service_parse.dart test/markdown_round_trip_test.dart test/markdown_service_test.dart
-	dart run tool/mutation_check.dart lib/services/markdown_service_finding.dart test/markdown_round_trip_test.dart test/markdown_service_test.dart
-	dart run tool/mutation_check.dart lib/models/finding_template.dart test/finding_template_test.dart
-	dart run tool/mutation_check.dart lib/services/markdown_service_serialize.dart test/markdown_round_trip_test.dart test/markdown_service_test.dart
-	dart run tool/mutation_check.dart lib/services/markdown_body_blocks.dart test/markdown_body_blocks_test.dart test/rich_text_layout_test.dart
-	dart run tool/mutation_check.dart lib/widgets/slides/inline_markdown.dart test/inline_markdown_test.dart
-	dart run tool/mutation_check.dart lib/services/markdown_validator.dart test/markdown_validator_test.dart
+	@echo "Failure means: een predicaat overleefde — het is dood of onbeproefd; beoordeel het."
+	@# Alle zeven draaien en pas aan het eind falen. Eén regel per doel liet make
+	@# stoppen bij de eerste overlever, waarna de resterende bestanden nooit aan
+	@# bod kwamen — en dan lijkt "één overlever" het hele beeld terwijl je de rest
+	@# niet gezien hebt (#660). Een sweep die zijn eigen uitkomst afkapt is een
+	@# sweep waarvan je de uitslag niet kunt geloven.
+	@fails=0; \
+	run() { dart run tool/mutation_check.dart "$$@" || fails=$$((fails+1)); }; \
+	run lib/services/markdown_service_parse.dart test/markdown_round_trip_test.dart test/markdown_service_test.dart; \
+	run lib/services/markdown_service_finding.dart test/markdown_round_trip_test.dart test/markdown_service_test.dart test/checklist_spec_test.dart; \
+	run lib/models/finding_template.dart test/finding_template_test.dart; \
+	run lib/services/markdown_service_serialize.dart test/markdown_round_trip_test.dart test/markdown_service_test.dart; \
+	run lib/services/markdown_body_blocks.dart test/markdown_body_blocks_test.dart test/rich_text_layout_test.dart; \
+	run lib/widgets/slides/inline_markdown.dart test/inline_markdown_test.dart; \
+	run lib/services/markdown_validator.dart test/markdown_validator_test.dart; \
+	if [ $$fails -gt 0 ]; then echo "== $$fails van 7 doelen had overlevers =="; exit 1; fi; \
+	echo "== mutatiesweep: alle 7 doelen schoon =="
 
 # Contract tests for persistence and parsing.
 test-contracts:
