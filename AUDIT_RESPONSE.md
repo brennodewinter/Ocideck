@@ -1,5 +1,7 @@
 # Audit response
 
+> **Status:** report; the response to one external audit, with measurements re-taken on 2026-07-21 · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 A response to an external code audit of OciDeck, point by point. Each item is
 weighed against what the codebase actually does, with the measurement that
 supports the verdict. Where the audit found something real, the fix and its

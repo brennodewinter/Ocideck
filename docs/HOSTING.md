@@ -1,5 +1,7 @@
 # OciDeck — Hosting & Deployment Guide
 
+> **Status:** procedure, current — for whoever serves the web build · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 How to build and serve the OciDeck **web** build safely. The desktop apps are
 built as native binaries and need no hosting; this guide is about the web
 bundle. For build internals see [BUILD.md](BUILD.md); for the security rationale
