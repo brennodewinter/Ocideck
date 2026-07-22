@@ -10,6 +10,19 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Changed
+- **Twee stille valkuilen bij een nieuw slidetype weggenomen.** Welke slidetypes
+  hun inhoud als tabel bewaren, stond op twee plekken met de hand bijgehouden:
+  in de parser én in de serialisatie. Wie een nieuw tabeltype in de parser
+  vergat, kreeg geen foutmelding — het deck opende, de dia stond er, en de rijen
+  waren na herladen leeg. Datzelfde gold voor "kan deze bulletslide in tweeën?",
+  dat op drie plekken apart was uitgeschreven; de kopie in de slidestrook viel
+  bij een onbekend type stil terug op "nee", zodat de knip in het paneel wel
+  verscheen en op de kaart niet.
+
+  Beide feiten staan nu één keer opgeschreven, naast de opsomming van
+  slidetypes zelf, en een toets vergelijkt ze met wat het opslaan-en-teruglezen
+  werkelijk doet. Voor u verandert er niets aan wat u ziet; het scheelt bij het
+  toevoegen van een slidetype twee bestanden waar het stil mis kon gaan.
 - **Een afbeelding van internet wordt nu opgehaald over een vastgezette
   verbinding.** Staat er een `http(s)`-afbeelding op een dia, dan controleerde
   OciDeck eerst of die host niet naar binnen wees — maar liet het ophalen daarna
