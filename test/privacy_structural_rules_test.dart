@@ -55,6 +55,38 @@ void main() {
       }
     });
 
+    test('het eigen stagingpad van OciDeck is geen bevinding', () {
+      // De allereerste privacymelding die een nieuwe gebruiker ooit zag, en hij
+      // was vals: dia toevoegen, plaatje kiezen, "Kwaliteit" indrukken. Het pad
+      // heeft hij niet getypt — wij maakten het toen hij de afbeelding koos —
+      // en het advies ("zet er dubbele blokhaken omheen") kán niet op een
+      // afbeeldingspad (#608).
+      for (final pad in [
+        '/Users/jan.jansen/Library/Caches/com.dewinter.ocideck/ocideck_staging/deck_1/images/foto.png',
+        '/home/mvanleeuwen/.local/share/ocideck_staging/deck_2/images/a.png',
+        r'C:\Users\P.deVries\AppData\Local\ocideck_staging\deck_3\images\b.png',
+        '/Users/jan.jansen/Library/Application Support/git_mirror/repo',
+        '/Users/jan.jansen/Library/Caches/ocideck_git_sandbox/x',
+      ]) {
+        expect(rulesIn(pad), isEmpty, reason: pad);
+      }
+    });
+
+    test('een eigen map van de gebruiker die er op lijkt, wél', () {
+      // De uitzondering moet smal zijn. Een map die de gebruiker zelf zo noemt,
+      // of onze mapnaam diep in zijn eigen boom, is gewoon zijn pad — en zijn
+      // accountnaam staat er dan nog steeds in.
+      expect(
+        rulesIn('/Users/jan.jansen/werk/ocideck_staging_backup/foto.png'),
+        contains('struct.user_path'),
+      );
+      expect(
+        rulesIn('/Users/jan.jansen/a/b/c/d/e/f/ocideck_staging/foto.png'),
+        contains('struct.user_path'),
+        reason: 'alleen als naaste map, niet ergens diep in de boom',
+      );
+    });
+
     test('een pad in een afbeeldingsverwijzing wordt óók gezien', () {
       // Dit is waar het in de praktijk gebeurt: je sleept een screenshot in het
       // deck en het pad reist mee in de markdown, en dus in de HTML-export.
