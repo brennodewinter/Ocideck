@@ -9,11 +9,21 @@
 // tekstlaag onder een zwarte rechthoek, geen leesbare notitie in de PPTX-zip, en
 // niets in de semantics-tree van een schermlezer.
 //
-// De grens wordt afgedwongen door het typesysteem: AudienceDeck heeft een
-// private constructor en is alleen in deze library te maken. Een ontvangend
-// oppervlak dat een AudienceDeck eist, kan de ongeredigeerde bron dus niet eens
-// ontvangen — ook niet als een toekomstig exportformaat het zou proberen. Zie
-// docs/design/OCIWACHT.md §6.
+// De grens rust op twee dingen, en het onderscheid is de moeite waard.
+//
+// Het typesysteem doet de helft: AudienceDeck heeft een private constructor en
+// is alleen in deze library te maken. Een ontvangend oppervlak dat een
+// AudienceDeck eist, kán de ongeredigeerde bron dus niet ontvangen — ook niet
+// als een toekomstig exportformaat het zou proberen.
+//
+// Wat de compiler NIET weet is wélke functies dat type horen te eisen. Daar zit
+// een nieuw uitvoerkanaal dat niemand als zodanig herkende, en dat is de
+// werkelijke faalvorm. Die helft doet `tool/check_audience_boundary.dart`: die
+// vindt kandidaten zelf en weigert te slagen tot elk kanaal geclassificeerd is.
+// Zijn kop noemt ook zijn blinde vlek — een oppervlak dat het schrijven twee
+// lagen verderop uitbesteedt, wordt niet gezien.
+//
+// Zie docs/design/OCIWACHT.md §6.
 //
 // De bron blijft ongemoeid: wat de gebruiker opslaat is en blijft de
 // oorspronkelijke markdown. Redactie geldt voor wat je *toont en exporteert*.
