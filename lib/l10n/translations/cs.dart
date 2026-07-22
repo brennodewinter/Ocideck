@@ -1779,6 +1779,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'De export is mislukt.': 'Export se nezdařil.',
   'Teams-gastclient (ontwerp)': 'Klient Teams pro hosty (návrh)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: jak široce se tento materiál smí sdílet?',

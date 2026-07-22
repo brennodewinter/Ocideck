@@ -1803,6 +1803,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De export is mislukt.': 'Η εξαγωγή απέτυχε.',
   'Teams-gastclient (ontwerp)':
       'Πρόγραμμα-πελάτης επισκέπτη Teams (σχεδιασμός)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':

@@ -1792,6 +1792,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De export is mislukt.': 'Exportatio defecit.',
   'Teams-gastclient (ontwerp)': 'Cliens hospes Teams (consilium)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: quam late haec materia communicari licet?',

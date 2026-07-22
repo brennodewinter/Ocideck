@@ -123,6 +123,15 @@ read a book to find out.
   `TLP:RED` die stilletjes niets doet is erger dan geen classificatie.
 
 ### Fixed
+- **Een mislukte export liet het venster eeuwig hangen.** Ging er iets mis
+  tijdens het exporteren — een render die vastliep, een schrijffout — dan bleef
+  het exportvenster op "…samenstellen…" staan, zonder melding, op 0% processor.
+  Niet traag: vast. De oorzaak was dat de exportfunctie geen enkele
+  foutafhandeling had, dus een uitzondering vloog eruit en de regel die de
+  molen stopzet werd nooit bereikt. Nu wordt de fout gevangen, gelogd, en als
+  melding getoond — met de technische reden erbij, want "de export is mislukt"
+  alleen laat je met niets achter. (Gevonden uit een "hij hangt gewoon"-melding.)
+
 - **Het toestemmingsscherm liet u zoeken naar het vinkje.** "Akkoord gaan" stond
   grijs, en het vakje dat die knop vrijgeeft stond ónder de hele
   privacyverklaring — vijf schermen naar beneden. U zag dus een geblokkeerde

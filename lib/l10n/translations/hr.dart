@@ -1782,6 +1782,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'De export is mislukt.': 'Izvoz nije uspio.',
   'Teams-gastclient (ontwerp)': 'Teams klijent za goste (dizajn)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: koliko se široko ovaj materijal smije dijeliti?',

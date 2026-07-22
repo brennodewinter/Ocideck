@@ -916,6 +916,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'De export is mislukt.': 'The export failed.',
   'Teams-gastclient (ontwerp)': 'Teams guest client (design)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: how widely may this material be shared?',

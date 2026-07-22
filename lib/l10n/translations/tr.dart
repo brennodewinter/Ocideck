@@ -2755,6 +2755,7 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'De export is mislukt.': 'Dışa aktarma başarısız oldu.',
   'Teams-gastclient (ontwerp)': 'Teams konuk istemcisi (tasarım)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: bu materyal ne kadar geniş paylaşılabilir?',
