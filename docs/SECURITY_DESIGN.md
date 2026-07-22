@@ -3,8 +3,9 @@
 This document describes the security design principles and the concrete
 mechanisms that enforce them. Where a mechanism is implemented, the source is
 cited so the claim can be checked against the code — the code is the source of
-truth. OciDeck is pre-release (currently 0.2.0); details may change, but the
-invariants below are enforced by the local `make check` / `make check-full`
+truth. OciDeck has never tagged a release, so there is no version to which this
+description is fixed — it describes the default branch, and details may change;
+but the invariants below are enforced by the local `make check` / `make check-full`
 gate, not just documented. (The CI workflows are written but no runner executes
 them — the repository lives on a Forgejo instance without one, so the local gate
 is the real one.)
@@ -26,8 +27,12 @@ each path is individually gated.
    treated as untrusted and validated before use.
 3. **No egress without consent.** Nothing leaves the machine unless the user
    initiates it; outbound AI in particular is fail-closed (see §7).
-4. **Enforced, not just documented.** Security invariants are backed by CI gates
-   (§10), a compile-time privacy boundary (§8), and tests.
+4. **Enforced, not just documented.** Security invariants are backed by the local
+   `make check` / `make check-full` gates (§2), a compile-time privacy boundary
+   (§8), and tests. *(Corrected 2026-07-22: this read "backed by CI gates (§10)".
+   §10 is the trusted-internal opt-in and describes no gate, and the CI workflows
+   are declared but never executed — the gate is the local one, as the paragraph
+   above this list already said.)*
 
 ## 1. Web build hardening
 
@@ -349,6 +354,106 @@ data local:
   re-pins the socket on every redirect hop (max 5, https-only). Live CVE lookups
   use the 2 MiB-capped `PinnedCveTransport`.
 
+## 12. Cryptography in one table
+
+*Added 2026-07-22.* Every algorithm below was already documented somewhere — in
+[`FILE_FORMAT.md`](FILE_FORMAT.md) §7.1, in §9 and §10 above, or only in a source
+comment. Spread out like that, the two questions a reviewer actually asks ("what
+is used where" and "what does it not protect") could not be answered without
+reading four files. This table is the single answer; each row cites where it
+lives so it stays checkable.
+
+| Algorithm | Size | Where | What it protects | What it does **not** protect | Rotation |
+| --- | --- | --- | --- | --- | --- |
+| **AES-256**, WinZip AE-1 | 256-bit key | `.ocideck` package export/import (`ZipEncoder(password:)`, `lib/utils/zip_encryption.dart`) | The **contents** of every file in the package | **File names and structure** — the central directory is not encrypted, so a chart's data file still names its chart. Nor does it authenticate the archive as a whole | Re-export with a new passphrase; there is no re-key of an existing package |
+| **PBKDF2-HMAC-SHA1** | 1000 iterations | Key derivation for the above, inside `package:archive` | Turns a passphrase into the AES key | Nothing, on its own. 1000 iterations is low by any modern standard, and it is **fixed by the WinZip AES specification** — not reachable from OciDeck at any price. A short passphrase is the weak link, which is why the export dialog shows an entropy meter and offers a generator | n/a |
+| **HMAC-SHA1, truncated to 80 bits** | 10 bytes | The AE-1 authentication tag, verified on decrypt | That the ciphertext was not altered | 80 bits is the format's choice, not ours; it is an integrity tag, not a document signature | n/a |
+| **SHA-512** | 512-bit | The document seal (`lib/services/document_integrity.dart`), and the imprint in an RFC 3161 request (`rfc3161_timestamp.dart`) | **Tamper-evidence**: a sealed deck that changed reports `changed` | Tamper-*proofing*. Anyone who edits the deck can recompute the seal — it proves change, not authorship. See §9 | Recomputed on every finalise |
+| **SHA-256** | 256-bit | Certificate pinning (`NetGuard.pinnedCertCheck`, over the certificate's DER form); git asset-pool filenames (`asset_pool.dart`); evidence hashes; the SBOM's component hashes | That you are talking to the machine you confirmed, and that two files are the same file | A pin means "trust this certificate **as well**", not "only this one" — see §10. A renewed certificate looks exactly like an attacker from here, which is why re-confirmation is a human step | The user re-confirms the fingerprint when the server's certificate changes |
+| **SHA-256, salted commitment** | 128-bit salt per redaction | Redaction manifest (`privacy/redaction_manifest_service.dart`): `sha256(salt ‖ 0x00 ‖ value)` | Lets an author prove afterwards what a single redaction hid, **without** revealing the others (selective disclosure) | It is a commitment, not encryption. The salt is what stops a nine-digit value being brute-forced back in seconds, so the copy that travels with a redacted export carries **no** salts (`RedactionManifest.withoutSalts`) | A new salt per redaction, per build of the manifest |
+| **SHA-1** | 160-bit | Evidence hashing, **alongside** SHA-256 (`evidence_hash_service.dart`) | Nothing that SHA-256 does not already do | It is present because the **MIAUW methodology prescribes SHA-1** in its evidence tables, and a report that omits it does not meet the method. It is never used alone and never used for a security decision | n/a |
+| **MD5** | 128-bit | Duplicate-image detection (`image_dedup_service.dart`) | Nothing — this is **not a cryptographic use.** It groups byte-identical images in one session so the UI can offer to deduplicate them | Everything. The comparison is ephemeral, never written to a durable name, and an attacker who collides it achieves nothing but a wrong grouping in their own deck. Recorded as decision D1 in [`design/GIT_STORAGE.md`](design/GIT_STORAGE.md) §14 | n/a |
+| **CSPRNG** (`Random.secure`) | 128-bit nonce; 128-bit salt; 32/256-char passphrase | The per-export CSP nonce (`marp_html_service.dart`), redaction salts, the passphrase generator (`utils/password_generator.dart`) | The nonce is what makes the HTML export's CSP meaningful: only scripts we emitted carry it, so injected inline script cannot execute | A nonce is per export, not per session — two exports of the same deck differ here, which is intended | New value per export / per redaction / per generated passphrase |
+
+**A generated passphrase is ASCII, and that is not an accident.**
+`passwordAlphabet` in `utils/password_generator.dart` is printable ASCII without
+quotes, backslash or space. Section 7.1 of [`FILE_FORMAT.md`](FILE_FORMAT.md)
+explains why a hand-typed non-ASCII passphrase is a problem for the ZIP format
+itself; a generated one never runs into it.
+
+### `DocumentSignature` contains no cryptography
+
+Worth its own heading, because the class name sends every reader down the wrong
+path. `DocumentSignature` (`lib/models/document_signature.dart`) is a **visual
+sign-off block**: a name, a role, a certification, a date, a statement, a typed
+name, and optionally a path to an image of a handwritten signature. That is all
+of it. There is no key, no certificate, no signing operation, and nothing in it
+can be verified by anyone.
+
+What it *does* have is a relationship with the seal: when a deck is finalised,
+the signature block is folded into the SHA-512 seal over the canonical content
+(§9), so altering the signed statement afterwards makes the seal report
+`changed`. That is tamper-evidence over the block, which is a genuinely useful
+property and a different one from a digital signature. Nobody can tell from the
+document *who* sealed it.
+
+If a report needs a signature in the legal sense, it needs something this project
+does not implement, and the RFC 3161 timestamp support is not it either — that
+proves *when* a hash existed, and only as far as the token's message imprint,
+since the TSA's own CMS signature is deliberately not verified (§9).
+
+## 13. Key management
+
+*Added 2026-07-22.* Four kinds of secret exist. None of them is a key OciDeck
+generates and keeps for itself; every one is either the user's, or the operating
+system's, or thrown away after a single use.
+
+| Secret | Held by | Reachable by | If it is compromised |
+| --- | --- | --- | --- |
+| **Package passphrase** | Nobody but the user. It is never stored, never cached, and never written to preferences or the keychain — it exists in memory for the duration of one export or one open | The user, and whoever they give the package to | Every copy of that package that was ever handed out is readable. There is no revocation and no re-key: re-export with a new passphrase and treat the old package as public |
+| **Storage credentials** — WebDAV/Nextcloud app password, S3 **secret** access key, git personal-access token, AI API key | The OS keychain, via `SecretStore` (`flutter_secure_storage`), keyed per server plus identity: `webdav_pw::…`, `s3_secret::…`, `git_pat::…`, `ai_api_key::…` | The app, and anything else running as that OS user with keychain access | Revoke it at the server, not here. Removing the connection in OciDeck rewrites preferences and **does not** delete the git working copy, mirror or outbox — see `SECURITY.md`, *Crash-recovery snapshots*. The git token additionally leaves the keychain for the lifetime of each `git` subprocess (§10) |
+| **Pinned certificate fingerprint** (SHA-256) | Preferences, in the clear — `pinnedCertSha256` on `S3Settings` / `WebdavSettings` | Anyone who can read the preferences file | It is not a secret; publishing it costs nothing. The risk runs the other way: an attacker who can *write* preferences can pin their own certificate, so the integrity of that file is what matters, not its confidentiality |
+| **Per-export CSP nonce and per-redaction salt** | Nowhere. Generated, used once, discarded — except that redaction salts are kept in the author's own manifest so a redaction can be proved later | The author, and the export they produced | A leaked salt lets someone brute-force that one redacted value. That is why the manifest that travels with a redacted export is the salt-free one |
+
+Two things this table deliberately does not claim. The keychain is as strong as
+the OS account it lives in: an attacker who is already that user does not need to
+break it. And the S3 **access key ID** is stored in preferences in the clear —
+it is an identifier, not a password, but it names the account to anyone who reads
+that file.
+
+## 14. What is logged
+
+*Added 2026-07-22.* A short section because there is little to describe, which is
+itself the point.
+
+**Where it goes.** Everything routes through `logError` / `logWarning` in
+`lib/utils/log.dart`, which calls `dart:developer`'s logging stream. That stream
+is read by DevTools and the VM service. It is **not stdout**, so a release build
+prints nothing, and there is **no log file**: OciDeck writes no log to disk, ships
+no log rotation, and has nothing to configure. Attach a debugger and you see the
+records; do not, and they go nowhere. A `check_conventions` ratchet forbids raw
+`print()` anywhere in `lib/`, so this is the only route.
+
+**What is in a record.** An operation description (`'openDeck: read annotation
+sidecar'`), a severity — 900 for a handled fallback, 1000 for an unexpected
+failure, mirroring `package:logging` — and the caught error object. Deck content
+is **not** logged, by rule and by mechanism. The rule is the doc comment on that
+file: pass an operation description and the error, never file or deck contents.
+The mechanism is `_safeError`, and it exists because the rule alone was not
+enough: `FormatException.toString()` embeds a slice of the text it failed to
+parse, and `jsonDecode` sets that text to exactly what was being parsed — so a
+malformed slide field wrote the slide's content, special-category personal data
+included, into the log while every call site was obeying the rule. `_safeError`
+reduces a `FormatException` to its message and offset and drops the rest.
+
+**Retention and access.** None and none, respectively: there is nothing to
+retain, so there is no retention period, no purge, and no access control to
+describe. The one exception is not a log at all — crash-recovery snapshots, which
+*do* hold full deck content in plaintext under app-support and are pruned after
+seven days. They are documented in `SECURITY.md` under *Crash-recovery
+snapshots*, and they are the thing to look at when the question is really "what
+of my deck is on this disk".
+
 ## Standards this design draws on
 
 Read as influences on the design, not as a conformance statement — this section
@@ -380,16 +485,27 @@ defaults" was the wrong summary. *Corrected 2026-07-21.*
 **Assumptions.** The user's machine is trusted (not malware-compromised);
 networks are usable but not trusted; files from third parties are untrusted.
 
-**Primary vectors & mitigations.**
-- *Malicious deck / asset:* structural validation (§6), asset-path containment
-  (§4), HTML-export sanitization (§5), magic-byte image checks (§6).
-- *Network / SSRF:* NetGuard classification, resolve-then-pin, no-redirect,
-  byte caps (§3); trusted-internal is opt-in only (§10).
-- *Data exfiltration via AI:* fail-closed egress gate, dual cloud consent,
-  web block (§7).
-- *Tampering with a finalised report:* SHA-512 document seal (§9).
-- *Supply-chain drift:* hashed+CVE-checked bundles, SBOM staleness gate, license
-  and pinned-action gates (§2).
+**Primary vectors, mitigations and what is left.** The table gained its last two
+columns on 2026-07-22. Before that it listed risks and controls but no residual
+and no owner, which reads as if every risk were closed — and none of these is.
+The date in the last column is when the residual was accepted in the form stated
+here; a residual with no date is one nobody has looked at, and there should not
+be any.
+
+| Risk | Mitigation | Residual risk | Accepted on |
+| --- | --- | --- | --- |
+| **Malicious deck or asset** | Structural validation (§6), asset-path containment (§4), HTML-export sanitization (§5), magic-byte image checks (§6), bounded image decoding | The render-path symlink cache is keyed by path for the session, so a symlink swapped *after* its first render is not re-checked — a narrow TOCTOU on an already-open deck (also stated in `SECURITY.md`) | 2026-07-22 |
+| **Network / SSRF** | NetGuard classification, resolve-then-pin, no redirect following, byte caps (§3); trusted-internal is opt-in (§10) | Live media rendering (`NetworkImage`, the video controller, the embed WebView) does its own DNS and cannot be socket-pinned, and a positive host resolution is cached for the session. This is why online media is **off by default** and scoped to sessions the user enables (§7 of `SECURITY.md`) | 2026-07-22 |
+| **Data exfiltration via AI** | Fail-closed egress gate, dual consent for a cloud backend, blocked on web (§7) | The gate governs what OciDeck sends. What the configured backend then does with it is outside this design entirely — a self-hosted model and a cloud API get the same bytes and offer different guarantees, and only the user knows which they configured | 2026-07-22 |
+| **Tampering with a finalised report** | SHA-512 seal over canonical content, with the sign-off block folded in (§9, §12) | Tamper-**evidence**, not tamper-proofing: anyone who edits the deck can recompute the seal. It shows *that* something changed, never *who* sealed it. An RFC 3161 token adds *when*, and only as far as the message imprint — the TSA's own signature is not verified | 2026-07-22 |
+| **Supply-chain drift** | Hashed and OSV-checked export bundles, SBOM staleness gate, licence and pinned-action gates (§2) | The Dart package graph is scanned only advisorily (`make trivy` never fails, by configuration), because pub advisory coverage is sparse. Two bundled components carry named, deferred items — mermaid 10.9.6 and MathJax 3.2.2 — recorded in `SECURITY.md` | 2026-07-22 |
+| **Deck content at rest on the machine** | Recovery snapshots are pruned after 7 days; the app-support directory carries OS user permissions | Snapshots and git working copies are **unencrypted**, and a git clone additionally keeps full history with no expiry. Removing the connection does not remove them. Encrypting snapshots at rest is a known, unimplemented improvement | 2026-07-22 |
+| **A compromised or hostile operating-system account** | Out of scope, by the assumption above | Everything. The keychain, the snapshots, the working copies and the preferences all trust the OS account. On macOS the App Sandbox is deliberately **off**, so there is no OS-level process isolation either (`SECURITY.md`, *Platform sandboxing*) | 2026-07-22 |
+
+Every row's mitigation cites a section that names the code; every residual is
+stated somewhere else in this repository too, and the wording here is meant to
+match it. Where this table and the section it points at disagree, the section is
+the more detailed one and wins.
 
 ## Roadmap
 
