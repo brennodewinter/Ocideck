@@ -1833,7 +1833,7 @@ two Dutch names that look alike while needing opposite handling.
   "derived_from": "9f1c…",
   "algorithm": "sha-256(salt || value)",
   "redactions": [
-    { "id": "a3f1", "commitment": "a3f1…", "rule": "nl.bsn", "slide": 4, "field": "bullets" },
+    { "id": "a3f1e2b7", "commitment": "a3f1e2b7…", "rule": "nl.bsn", "slide": 4, "field": "bullets" },
     { "id": "77bd", "commitment": "77bd…", "rule": "contact.email", "slide": -1, "field": "author" }
   ]
 }
@@ -1846,8 +1846,15 @@ two Dutch names that look alike while needing opposite handling.
   when the deck is not sealed. It pins provenance; it does **not** put the
   manifest under the seal, which is impossible — the manifest is made at export,
   after the seal, with fresh random salts.
-- `id` is the first four hex characters of the commitment: enough to name one
-  redaction in a conversation ("I dispute a3f1"), too little to reveal anything.
+- `id` is a prefix of the commitment — at least **eight** hex characters, and
+  longer whenever eight would not tell two entries in the same manifest apart.
+  Enough to name one redaction in a conversation ("I dispute a3f1e2b7"), too
+  little to reveal anything. Every entry in one manifest uses the same length,
+  the way git abbreviates its hashes. *(Corrected 2026-07-22: this was four
+  characters — 16 bits, so by the birthday bound a document with ~300 redactions
+  had an even chance of two entries sharing an id, and a dispute then pointed at
+  both.)* Older manifests keep their shorter ids; nothing verifies against the
+  id, only against the full `commitment`.
 - `commitment` is `SHA-256(salt ‖ value)` in hex. The values themselves are never
   in either file.
 - `salt` appears only in the keys file. Without it a commitment over a short,
