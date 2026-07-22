@@ -1,5 +1,7 @@
 # OciDeck — Development Setup Guide
 
+> **Status:** procedure, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This document provides detailed instructions for setting up a development environment for OciDeck.
 
 ## Overview

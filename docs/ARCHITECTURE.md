@@ -1,5 +1,7 @@
 # OciDeck — Architecture
 
+> **Status:** current-state description of the system and its layering · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 A high-level map of how OciDeck is put together, for contributors. For how files
 are stored on disk, see [`FILE_FORMAT.md`](FILE_FORMAT.md). For a one-line
 description of the files under `lib/`, see [`SOURCE_MAP.md`](SOURCE_MAP.md).

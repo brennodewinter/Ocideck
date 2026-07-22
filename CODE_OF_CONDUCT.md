@@ -1,5 +1,7 @@
 # Contributor Covenant Code of Conduct
 
+> **Status:** policy, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 ## Our Pledge
 
 We as members, contributors, and leaders pledge to make participation in our

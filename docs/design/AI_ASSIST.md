@@ -1,6 +1,8 @@
 # OciDeck — Optional AI Assistance (Design)
 
-> **Status: Phases 0–3 are built and shipped. Only Phase 4 (the MCP server
+> **Status:** design; phases 0–3 shipped, phase 4 unbuilt — not a current-state reference · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
+> **Phases 0–3 are built and shipped. Only Phase 4 (the MCP server
 > surface) is unbuilt.** This header said "design proposal — not yet
 > implemented" long after the code had overtaken it; corrected 2026-07-18.
 >

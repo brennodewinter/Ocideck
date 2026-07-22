@@ -1,5 +1,7 @@
 # OciDeck — Open-Source Licence Compliance
 
+> **Status:** policy, with a dated result under *Latest result* · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 OciDeck is released under the **EUPL-1.2** (see [`../LICENSE.md`](../LICENSE.md)).
 This document records the policy that the project only includes open-source
 software, how that is verified, and the result of the latest check.

@@ -1,5 +1,7 @@
 # OciDeck — Security Design
 
+> **Status:** current-state description of the security design and its mechanisms · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This document describes the security design principles and the concrete
 mechanisms that enforce them. Where a mechanism is implemented, the source is
 cited so the claim can be checked against the code — the code is the source of

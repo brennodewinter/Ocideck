@@ -1,5 +1,7 @@
 # OciDeck — Build & Release
 
+> **Status:** procedure, current — and the authority on the toolchain pin · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 How to build OciDeck from source and produce distributable apps.
 
 ## Prerequisites

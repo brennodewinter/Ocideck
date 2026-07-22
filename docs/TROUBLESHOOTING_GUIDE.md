@@ -1,5 +1,7 @@
 # OciDeck — Troubleshooting Guide
 
+> **Status:** procedure, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This document provides solutions for common issues and problems users may encounter while using OciDeck.
 
 ## Overview

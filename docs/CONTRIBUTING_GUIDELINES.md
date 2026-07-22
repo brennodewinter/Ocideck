@@ -1,5 +1,7 @@
 # OciDeck — Contributing Guidelines
 
+> **Status:** procedure, current — the process half of contributing · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 Welcome to the OciDeck project! We appreciate your interest in contributing. This document outlines how to contribute effectively to the project.
 
 > **There are two contributing documents, and this is the process one.** This

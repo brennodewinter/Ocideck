@@ -1,5 +1,7 @@
 # OciDeck — File Format
 
+> **Status:** specification of the on-disk format — the stable contract · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 OciDeck stores presentations as **standard [Marp](https://marp.app/) Markdown**
 (`.md`). There is no custom binary format: a saved presentation can be processed
 directly with the Marp CLI or the VS Code Marp extension. OciDeck-specific

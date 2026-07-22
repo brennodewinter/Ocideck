@@ -1,5 +1,7 @@
 # OciDeck — Source Map
 
+> **Status:** current-state index of `lib/` · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 A one-line index of the Dart files under `lib/`, grouped by directory. It aims at
 the files worth naming; large uniform families (the 31 per-language translation
 files, the 32 per-language finding-template tables, the `settings_dialog_*` parts)

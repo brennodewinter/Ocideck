@@ -1,6 +1,8 @@
 # OciDeck — Agentic Build Plan for the Pentest / AI Feature Set (Design)
 
-> **Status: HISTORICAL — this plan has been executed. Do not run it.**
+> **Status:** historical — executed, and shortened on 2026-07-22 to what is still useful · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
+> **HISTORICAL — this plan has been executed. Do not run it.**
 > It said "nothing implemented yet" long after the work it plans had shipped;
 > corrected 2026-07-18.
 >

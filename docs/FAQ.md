@@ -1,5 +1,7 @@
 # OciDeck — Frequently Asked Questions
 
+> **Status:** current-state answers; where one conflicts with the code, the code wins · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This document answers common questions about OciDeck's features, usage, and functionality.
 
 ## General Usage

@@ -1,4 +1,6 @@
-# OciDeck Documentation
+# OciDeck — Documentation
+
+> **Status:** index of this folder, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
 
 OciDeck is a privacy-first Marp presentation builder for desktop and web, with no
 application backend — everything runs locally. This folder holds the project
@@ -81,6 +83,80 @@ compares the two lists, so nothing caught it.)*
 - **I need to assess its security/privacy** → [SECURITY_DESIGN.md](SECURITY_DESIGN.md) and [PRIVACY.md](PRIVACY.md).
 - **I depend on assistive technology** → [ACCESSIBILITY.md](ACCESSIBILITY.md).
 - **I hit a term I don't know** → [GLOSSARY.md](GLOSSARY.md).
+
+## How these documents are maintained
+
+*Added 2026-07-22.* These rules were all being followed somewhere and written
+down nowhere, which is why only a minority of the files followed them. They are
+here now so a new document can be got right the first time.
+
+**The code wins.** Every document in this folder describes software that changes
+faster than prose. Where a document and the code disagree, the code is right and
+the document is a defect. A claim you cannot check against the code does not
+belong in a document — the set of guides removed on 2026-07-19 was convincing,
+readable and described nothing that existed, and that is the failure mode this
+rule exists to prevent.
+
+**The title.** One `# OciDeck — <Name>` heading, first line, nothing above it.
+
+**The masthead.** Directly under the title, one blockquote line:
+
+```
+> **Status:** … · **Status last reviewed:** YYYY-MM-DD · **Published by:** Stichting LibreKAT
+```
+
+Read that date narrowly: it says when someone last decided what *kind* of
+document this is and whether that description still holds — a design proposal, a
+current-state description, a procedure, a report, an executed plan. It is
+deliberately **not** a claim that every sentence was re-verified on that date. A
+document that has been checked line by line says so in its own words, as
+`design/PENTEST_MIAUW.md` and `design/AI_ASSIST.md` do for the parts of them that
+have been.
+
+The publisher is **Stichting LibreKAT**, which holds the copyright. There is a
+security contact; it is in [`../SECURITY.md`](../SECURITY.md) and it is
+deliberately not repeated in this folder — see *Examples* below.
+
+**Corrections carry a date, in the text.** When you fix a claim that was wrong,
+say so where it was wrong rather than only in the commit message:
+
+```
+*(Corrected 2026-07-22: this said X. It says Y because …)*
+```
+
+A reader who remembers the old wording needs to know it changed and why; a
+reviewer needs to see that someone looked. Together these notes are this
+folder's change history, so leave the old ones standing.
+
+**Refer to symbols, not line numbers.** Cite `maxPackageBytes` or
+`resolveSlideAssetPath`, never "line 412" — the name survives a refactor and the
+number does not.
+
+**A number needs a date or it needs to go.** Any count that grows with the
+codebase — tests, source files, packages, catalogue entries — is a measurement.
+Give it the day it was measured, as [CHECKS.md](CHECKS.md) and
+[LICENSE_COMPLIANCE.md](LICENSE_COMPLIANCE.md) do, or leave it out. An undated
+number is one nobody can tell has gone stale.
+
+**Registering a new document.** A new `docs/*.md` has to be known in three
+places, or `test/docs_registration_test.dart` fails `make check`:
+
+1. the asset list in `pubspec.yaml`;
+2. a reader tile in `lib/widgets/dialogs/parts/settings_dialog_docs.dart`;
+3. a title translated into **every** supported language.
+
+That third one is real work, so think twice before adding a file: in most cases
+the material belongs in a document that already exists. A `NAME.<lang>.md`
+translation of an existing document is the exception — it is picked up
+automatically and must *not* get its own asset line or tile.
+
+**Examples must be unmistakably invented.** These documents ship inside the app,
+and the privacy scanner reads the whole folder as one document. A single
+real-looking value — a national identity number, an IBAN, a working e-mail
+address, a plausible phone number — escalates every special-category finding in
+that file, including in text that has been there for years. Use values that are
+obviously fictional, and keep working contact addresses in the root documents,
+which are not bundled.
 
 ## Licence
 

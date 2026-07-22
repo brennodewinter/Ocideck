@@ -1,5 +1,7 @@
 # OciDeck — API Documentation
 
+> **Status:** current-state reference for internal APIs · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This document describes the key internal APIs and interfaces in the OciDeck
 codebase. OciDeck is not a library with a published public API; the surfaces
 below are the seams a contributor works with when extending the app. Signatures

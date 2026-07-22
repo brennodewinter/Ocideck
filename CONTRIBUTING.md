@@ -1,5 +1,7 @@
 # Contributing to OciDeck
 
+> **Status:** procedure, current — the practical half of contributing · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 Thanks for your interest in improving OciDeck! This document explains how to set
 up the project, the quality bar, and how to propose changes.
 

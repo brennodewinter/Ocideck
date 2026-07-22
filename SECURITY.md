@@ -1,5 +1,7 @@
 # Security Policy
 
+> **Status:** policy, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 This policy covers vulnerabilities in **OciDeck itself** (the application). It does
 **not** govern how findings from a penetration test authored *with* OciDeck are
 disclosed — that is arranged per engagement with the client (scope, reporting
