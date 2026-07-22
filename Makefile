@@ -1,4 +1,4 @@
-.PHONY: dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code check-hardcoded-text coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help servicenormen doorlooptijd ratchets
+.PHONY: dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help servicenormen doorlooptijd ratchets
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -58,6 +58,7 @@ help:
 	@echo "  make sbom            Generate the SBOM (CycloneDX + SPDX) in sbom/."
 	@echo "  make sbom-verify     Fail if the committed SBOM is stale (CRA staleness gate)."
 	@echo "  make check-conventions  No print(); bare catch (_) & file-size ratchets."
+	@echo "  make check-audience-boundary  Every output channel classified: audience (needs AudienceDeck) or source."
 	@echo "  make check-method-length  Per-method length ratchet (AST-measured, max 150)."
 	@echo "  make check-dead-code Fail on orphaned lib/ files (unreachable from any entrypoint)."
 	@echo "  make check-hardcoded-text  Hard gate: no visible string in lib/ may bypass l10n.d()."
@@ -587,6 +588,18 @@ check-conventions:
 	@echo "        in tool/check_conventions.dart."
 	dart run tool/check_conventions.dart
 
+check-audience-boundary:
+	@echo "== OciDeck check: privacy projection boundary =="
+	@echo "Command: dart run tool/check_audience_boundary.dart"
+	@echo "Covers: every function that pairs slide content with an artefact"
+	@echo "        primitive (saveFile/clipboard/raster/atomic write) must be"
+	@echo "        classified: audience surface (needs AudienceDeck) or"
+	@echo "        source-fidelity (must NOT redact). AST-measured."
+	@echo "Failure means: a new output channel is unclassified, a registered"
+	@echo "        audience surface accepts a raw Deck, or a registration went"
+	@echo "        stale. Adjust _registry in tool/check_audience_boundary.dart."
+	dart run tool/check_audience_boundary.dart
+
 check-method-length:
 	@echo "== OciDeck check: method length =="
 	@echo "Command: dart run tool/check_method_length.dart"
@@ -747,9 +760,9 @@ build-release:
 # nothing ran them — and the GitHub workflow that did cannot fire on a Forgejo
 # remote without a runner. `make check` is the real gate; it should contain the
 # gates.
-check: format-check analyze check-conventions check-method-length check-dead-code check-hardcoded-text coverage coverage-per-file
+check: format-check analyze check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text coverage coverage-per-file
 	@echo "== OciDeck check complete =="
-	@echo "Validated: formatting, static analysis, conventions, method length, dead-code, hardcoded visible text, the full Flutter test suite, the coverage floor, and the per-file coverage floor."
+	@echo "Validated: formatting, static analysis, conventions, the privacy projection boundary, method length, dead-code, hardcoded visible text, the full Flutter test suite, the coverage floor, and the per-file coverage floor."
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.

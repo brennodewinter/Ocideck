@@ -293,10 +293,17 @@ model.
   reconstruction) *before* the deck reaches any surface; manual `[[…]]` markers
   always redact.
 - **Type-enforced boundary.** Only `PrivacyProjection` can construct an
-  `AudienceDeck` (private constructor). A `check_conventions` gate
-  (`audienceBoundary`) fails the build if any receiving/export surface accepts a
-  raw `Deck`/`List<Slide>` instead of an `AudienceDeck` — the privacy boundary is
-  enforced at compile time, not by convention.
+  `AudienceDeck` (private constructor). `tool/check_audience_boundary.dart` fails the
+  build if a registered receiving surface accepts a raw `Deck`/`List<Slide>`
+  instead of an `AudienceDeck` — the privacy boundary is enforced at compile
+  time, not by convention. *(Widened 2026-07-22: the gate used to name four
+  entry points, so a fifth output channel was invisible to it. It now finds
+  candidates itself — any function that pairs slide content with an artefact
+  primitive — and refuses to pass until each one is classified as an audience
+  surface or as deliberately source-faithful. It does not decide which; a
+  `.ocideck` package must carry the source verbatim and a PDF must not, and no
+  static rule derives that difference. Forcing the question to be answered is
+  the guarantee.)*
 
 ## 9. Classification, integrity & secure storage
 

@@ -186,9 +186,9 @@ Future<ExportResult> export(
 
 The HTML markdown and the PPTX speaker notes come from `audience`, never from
 loose strings: an `ExportBundle` cannot be built without an `AudienceDeck`, and
-that type can only be produced by `PrivacyProjection`. `export` is listed in the
-`audienceBoundary` guard (`tool/check_conventions.dart`), so the build fails if
-that parameter is ever replaced by a raw `Deck` or `List<Slide>`.
+that type can only be produced by `PrivacyProjection`. `export` is registered as an audience
+surface in `tool/check_audience_boundary.dart`, so the build fails if that
+parameter is ever replaced by a raw `Deck` or `List<Slide>`.
 
 Export metadata is built from the projected deck via the factory
 `ExportDocumentMetadata.fromDeck(AudienceDeck audience)`

@@ -52,6 +52,9 @@ jobs:
       - name: Conventions (make check-conventions)
         run: make check-conventions
 
+      - name: Privacy projection boundary (make check-audience-boundary)
+        run: make check-audience-boundary
+
       - name: Method length (make check-method-length)
         run: make check-method-length
 

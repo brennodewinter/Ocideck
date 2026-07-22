@@ -215,35 +215,10 @@ bool _isPaletteHome(String path) {
 
 /// The atomic-write helpers themselves are the only place a plain write may
 /// live: everything else goes through them.
-/// De privacy-projectiegrens (docs/design/OCIWACHT.md §6).
-///
-/// Elk oppervlak dat slide-inhoud aan een ontvanger levert — een export, een
-/// raster, de presentatie — hoort een `AudienceDeck` te eisen en geen rauwe
-/// [Deck] of slidelijst. Dat type is alleen via `PrivacyProjection` te maken,
-/// dus zolang deze instappunten eraan vasthouden, kán er geen ongeredigeerde
-/// tekst uitlekken: de compiler weigert het.
-///
-/// Het risico is niet technisch maar menselijk. Iemand voegt over een half jaar
-/// een vierde exportformaat toe en geeft het een `Deck`, en dan is de garantie
-/// stilletjes weg. Een afspraak in een ontwerpdocument houdt geen data tegen;
-/// een compileerfout wel. Vandaar deze check.
-///
-/// Sleutel = bestand, waarde = de instappunten daarin die de grens bewaken.
-///
-/// Toegestane types: `AudienceDeck`, of `ExportBundle` (die er een bevat en niet
-/// zonder te maken is).
-/// De dekking was lang asymmetrisch: sterk bij de emit-widgets, dun bij de
-/// servicepoort eronder. `ExportService.export()` nam losse `String? markdown`
-/// en `List<String>? notes`, dus een nieuwe aanroeper kon daar ongeprojecteerde
-/// tekst binnendragen zonder dat het typesysteem hem tegenhield — precies het
-/// faalpad dat deze check elders juist afvangt. Sinds die twee parameters één
-/// `ExportBundle` zijn, hoort `export` hier thuis.
-const Map<String, List<String>> audienceBoundary = {
-  'lib/services/slide_rasterizer.dart': ['rasterize'],
-  'lib/services/export_service.dart': ['export'],
-  'lib/widgets/presentation/fullscreen_presenter.dart': ['present'],
-  'lib/widgets/dialogs/export_dialog.dart': ['show'],
-};
+/// De privacy-projectiegrens is verhuisd naar
+/// tool/check_audience_boundary.dart: die vindt de uitvoeroppervlakken zelf
+/// in plaats van vier namen te vertrouwen, en dwingt per oppervlak een
+/// geclassificeerde keuze af.
 
 // ── FilePicker: een pad uit de kiezer, zonder platformpoort ─────────────────
 //
@@ -631,60 +606,6 @@ String _libraryOf(String path, Map<String, List<String>> linesByPath) {
   return classSizesIn(linesByPath);
 }
 
-/// Typen die in zo'n parameterlijst een lek zouden betekenen.
-final _rawDeckParam = RegExp(r'\b(Deck|List<Slide>)\b\s+\w+');
-
-/// Leest de parameterlijst van `<name>(` af, met gebalanceerde haakjes.
-String? _paramListOf(String source, String name) {
-  final start = source.indexOf(RegExp('\\b$name\\s*\\('));
-  if (start < 0) return null;
-  final open = source.indexOf('(', start);
-  var depth = 0;
-  for (var i = open; i < source.length; i++) {
-    final c = source[i];
-    if (c == '(') depth++;
-    if (c == ')') {
-      depth--;
-      if (depth == 0) return source.substring(open + 1, i);
-    }
-  }
-  return null;
-}
-
-/// Bewaakt dat de instappunten in [audienceBoundary] een `AudienceDeck` eisen
-/// en geen rauwe [Deck] of slidelijst accepteren.
-List<String> _audienceBoundaryViolations() {
-  final hits = <String>[];
-  audienceBoundary.forEach((path, entryPoints) {
-    final file = File(path);
-    if (!file.existsSync()) {
-      hits.add('$path: bestaat niet meer — werk audienceBoundary bij');
-      return;
-    }
-    final source = file.readAsStringSync();
-    for (final entry in entryPoints) {
-      final params = _paramListOf(source, entry);
-      if (params == null) {
-        hits.add('$path: instappunt `$entry(` niet gevonden');
-        continue;
-      }
-      // `ExportBundle` telt ook: die is niet te maken zonder een AudienceDeck
-      // (zie zijn constructor), dus de grens houdt transitief stand. Het
-      // exportdialoog krijgt een fabriek die per doelgroepprofiel een bundel
-      // oplevert — de bron komt er nog steeds niet in.
-      if (!params.contains('AudienceDeck') &&
-          !params.contains('ExportBundle')) {
-        hits.add('$path: `$entry(` eist geen AudienceDeck of ExportBundle');
-      }
-      final raw = _rawDeckParam.firstMatch(params);
-      if (raw != null) {
-        hits.add('$path: `$entry(` accepteert nog `${raw.group(0)}`');
-      }
-    }
-  });
-  return hits;
-}
-
 bool _isAtomicFileLib(String path) =>
     path.replaceAll(r'\', '/') == 'lib/utils/atomic_file.dart';
 
@@ -906,16 +827,6 @@ void main() {
       'filePickerPathBaseline in tool/check_conventions.dart — die lijst mag '
       'alleen krimpen:\n'
       '    ${pickerHits.join('\n    ')}',
-    );
-  }
-
-  final boundaryHits = _audienceBoundaryViolations();
-  if (boundaryHits.isNotEmpty) {
-    failures.add(
-      'Privacy-projectiegrens doorbroken — een ontvangend oppervlak mag geen '
-      'rauw Deck/List<Slide> accepteren, alleen een AudienceDeck (die alleen '
-      'PrivacyProjection kan maken). Zie docs/design/OCIWACHT.md §6:\n'
-      '    ${boundaryHits.join('\n    ')}',
     );
   }
 
