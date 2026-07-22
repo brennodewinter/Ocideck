@@ -733,6 +733,14 @@ const _dutchSourceEs = {
 const _dutchSourceAddEs = {
   'Dit document bestaat alleen in het Engels.':
       'Este documento solo existe en inglés.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Este archivo ya no está en esta ubicación.',
+  'Dit bestand is te groot om te openen.':
+      'Este archivo es demasiado grande para abrirlo.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Esta presentación está dañada o se guardó a medias.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Este archivo no es texto legible. OciDeck abre Markdown.',
   'Alleen een titelpagina.': 'Solo una portada.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Esta diapositiva está vacía: no muestra nada en pantalla ni en la exportación.',

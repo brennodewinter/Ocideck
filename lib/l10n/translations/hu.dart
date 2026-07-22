@@ -1782,6 +1782,13 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Ez a dokumentum csak angolul érhető el.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Ez a fájl már nincs ezen a helyen.',
+  'Dit bestand is te groot om te openen.': 'Ez a fájl túl nagy a megnyitáshoz.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Ez a prezentáció sérült, vagy csak félig mentődött el.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Ez a fájl nem olvasható szöveg. Az OciDeck Markdownt nyit meg.',
   'Alleen een titelpagina.': 'Csak egy címoldal.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ez a dia üres: sem a képernyőn, sem az exportban nem jelenít meg semmit.',

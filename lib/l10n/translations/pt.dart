@@ -1807,6 +1807,14 @@ const _dutchSourcePt = {
 const _dutchSourceAddPt = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Este documento só existe em inglês.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Este ficheiro já não se encontra neste local.',
+  'Dit bestand is te groot om te openen.':
+      'Este ficheiro é demasiado grande para abrir.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Esta apresentação está danificada ou foi guardada apenas em parte.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Este ficheiro não é texto legível. O OciDeck abre Markdown.',
   'Alleen een titelpagina.': 'Apenas uma página de título.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Este slide está vazio: não mostra nada no ecrã nem na exportação.',

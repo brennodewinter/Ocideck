@@ -95,6 +95,30 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Fixed
+- **"Kon dit bestand niet openen." zei niet wát er mis was — terwijl de app het
+  wist.** Vier verschillende dingen kregen dezelfde zin: het bestand bestaat niet
+  meer, het is te groot, het is geen tekst, of de markdown is afgebroken. Voor
+  een product dat om Markdown draait is dat mager — u kon er niet uit opmaken of
+  u het verkeerde bestand koos, of dat er iets stuk was, of dat u er iets aan kon
+  doen.
+
+  Het venijn zat tussen de lagen. `FileService.openDeckDetailed` gaf de reden
+  allang terug (zes onderscheiden gevallen); de laag erboven gooide hem weg en
+  maakte er één "onleesbaar" van. Het antwoord lag twee lagen lager voor het
+  oprapen.
+
+  Nu ziet u wat er is: dat het bestand er niet meer staat, dat het te groot is,
+  dat het geen leesbare tekst is (mét de zin dat OciDeck Markdown opent), of dat
+  de presentatie beschadigd of half opgeslagen is. Waar de oorzaak écht onbekend
+  is — een afgebroken open — blijft de algemene zin staan: een reden verzinnen
+  bij een onbekende oorzaak stuurt u de verkeerde kant op.
+
+  **Nog niet: een regelnummer.** De parser geeft geen positie terug bij een
+  afgebroken bestand, dus "beschadigd of half opgeslagen" is zo precies als het
+  nu kan. Dat vraagt een parser die zijn positie meedraagt, en dat is een eigen
+  klus.
+
+### Fixed
 - **Een cockpit-dia toonde pentestmetrieken terwijl de module Informatieveiligheid
   uit stond.** Die module staat standaard uit en belooft dan verborgen te
   blijven. Toch kreeg wie een cockpit-dia toevoegde meters met "Overall risk",

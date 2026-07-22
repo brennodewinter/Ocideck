@@ -1777,6 +1777,13 @@ const _dutchSourceDa = {
 const _dutchSourceAddDa = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Dette dokument findes kun på engelsk.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Denne fil findes ikke længere på denne placering.',
+  'Dit bestand is te groot om te openen.': 'Denne fil er for stor til at åbne.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Denne præsentation er beskadiget eller kun halvt gemt.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Denne fil er ikke læsbar tekst. OciDeck åbner Markdown.',
   'Alleen een titelpagina.': 'Kun en titelside.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Denne slide er tom: den viser ingenting på skærmen eller i eksporten.',

@@ -1777,6 +1777,14 @@ const _dutchSourceSv = {
 const _dutchSourceAddSv = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Det här dokumentet finns bara på engelska.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Den här filen finns inte längre på den här platsen.',
+  'Dit bestand is te groot om te openen.':
+      'Den här filen är för stor för att öppna.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Den här presentationen är skadad eller bara till hälften sparad.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Den här filen är inte läsbar text. OciDeck öppnar Markdown.',
   'Alleen een titelpagina.': 'Endast en titelsida.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Den här bilden är tom: den visar ingenting på skärmen eller i exporten.',

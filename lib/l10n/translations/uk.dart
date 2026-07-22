@@ -1795,6 +1795,14 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Цей документ існує лише англійською.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Цього файлу вже немає за цим шляхом.',
+  'Dit bestand is te groot om te openen.':
+      'Цей файл завеликий, щоб його відкрити.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Ця презентація пошкоджена або збережена лише наполовину.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Цей файл не є читабельним текстом. OciDeck відкриває Markdown.',
   'Alleen een titelpagina.': 'Лише титульна сторінка.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Цей слайд порожній: він нічого не показує ні на екрані, ні в експорті.',

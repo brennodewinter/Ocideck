@@ -4,16 +4,22 @@ part of '../app_shell.dart';
 
 /// Surface a failed open as a snackbar. `blocked` shows the security alarm
 /// elsewhere and `opened` needs nothing, so both are silent here.
+///
+/// [reason] komt uit `openFailureProvider` en is er alleen wanneer het openpad
+/// de oorzaak wérkelijk vaststelde. Is hij er niet, dan blijft het bij de
+/// algemene melding — een reden verzinnen bij een onbekende oorzaak stuurt de
+/// gebruiker de verkeerde kant op, en dat is erger dan vaag zijn.
 void _reportOpenFailure(
   ScaffoldMessengerState messenger,
   AppLocalizations l10n,
-  OpenResult result,
-) {
+  OpenResult result, {
+  OpenFailure? reason,
+}) {
   final message = switch (result) {
     OpenResult.notAPresentation => l10n.d(
       'Dit is geen Marp/OciDeck-presentatie.',
     ),
-    OpenResult.unreadable => l10n.d('Kon dit bestand niet openen.'),
+    OpenResult.unreadable => _unreadableMessage(l10n, reason),
     OpenResult.opened ||
     OpenResult.blocked ||
     OpenResult.passwordCancelled => null,
@@ -22,6 +28,33 @@ void _reportOpenFailure(
     messenger.showSnackBar(SnackBar(content: Text(message)));
   }
 }
+
+/// Wat er misging, zo precies als het openpad het wist.
+///
+/// "Kon dit bestand niet openen." stond hier voor vier verschillende dingen,
+/// terwijl `FileService.openDeckDetailed` het antwoord al had. Voor een product
+/// dat om Markdown draait is dat te mager: de gebruiker weet dan niet of hij het
+/// verkeerde bestand koos, of dat er iets stuk is, of dat hij iets kán doen.
+String _unreadableMessage(
+  AppLocalizations l10n,
+  OpenFailure? reason,
+) => switch (reason) {
+  OpenFailure.notFound => l10n.d('Dit bestand bestaat niet meer op deze plek.'),
+  OpenFailure.tooLarge => l10n.d('Dit bestand is te groot om te openen.'),
+  OpenFailure.corrupt => l10n.d(
+    'Deze presentatie is beschadigd of half opgeslagen.',
+  ),
+  OpenFailure.unreadable => l10n.d(
+    'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.',
+  ),
+  // `unsafe` en `notPresentation` komen hier niet langs: die hebben hun
+  // eigen afhandeling (het veiligheidsalarm en OpenResult.notAPresentation).
+  // Null is het eerlijke geval — een afgebroken open, een tabblad dat
+  // verdween — en houdt de algemene zin.
+  OpenFailure.unsafe ||
+  OpenFailure.notPresentation ||
+  null => l10n.d('Kon dit bestand niet openen.'),
+};
 
 /// Exporteer het huidige deck als zelfstandig `.ocideck`-pakket. Toont eerst de
 /// [PackageEncryptDialog] zodat de gebruiker het pakket optioneel met een
@@ -46,8 +79,14 @@ Future<void> _openWithSearch(BuildContext context, WidgetRef ref) async {
       .read(tabsProvider.notifier)
       .openFileByPath(result.path, selectIndex: result.slideIndex);
   // A loose file browsed from disk that isn't a presentation (or is otherwise
-  // unreadable) is refused — tell the user instead of doing nothing silently.
-  _reportOpenFailure(messenger, l10n, openResult);
+  // unreadable) is refused — tell the user instead of doing nothing silently,
+  // en met de reden erbij als het openpad die kende.
+  _reportOpenFailure(
+    messenger,
+    l10n,
+    openResult,
+    reason: ref.read(openFailureProvider),
+  );
 }
 
 /// Open-pad voor web: de browser-picker levert de bestandsinhoud als bytes
@@ -64,7 +103,12 @@ Future<void> _openWithBytesPicker(BuildContext context, WidgetRef ref) async {
   final openResult = await ref
       .read(tabsProvider.notifier)
       .openDeckFromBytes(picked.bytes, picked.name);
-  _reportOpenFailure(messenger, l10n, openResult);
+  _reportOpenFailure(
+    messenger,
+    l10n,
+    openResult,
+    reason: ref.read(openFailureProvider),
+  );
 }
 
 /// Scan a fixed set of well-known folders for Marp presentations and open the

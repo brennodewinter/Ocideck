@@ -1785,6 +1785,14 @@ const _dutchSourceSk = {
 const _dutchSourceAddSk = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Tento dokument existuje iba v angličtine.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Tento súbor sa už na tomto mieste nenachádza.',
+  'Dit bestand is te groot om te openen.':
+      'Tento súbor je príliš veľký na otvorenie.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Táto prezentácia je poškodená alebo uložená len sčasti.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Tento súbor nie je čitateľný text. OciDeck otvára Markdown.',
   'Alleen een titelpagina.': 'Iba titulná strana.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Táto snímka je prázdna: nezobrazuje nič na obrazovke ani v exporte.',

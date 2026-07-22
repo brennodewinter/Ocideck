@@ -736,6 +736,14 @@ const _dutchSourceFr = {
 const _dutchSourceAddFr = {
   'Dit document bestaat alleen in het Engels.':
       'Ce document n\'existe qu\'en anglais.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Ce fichier ne se trouve plus à cet emplacement.',
+  'Dit bestand is te groot om te openen.':
+      'Ce fichier est trop volumineux pour être ouvert.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Cette présentation est endommagée ou n’a été enregistrée qu’à moitié.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Ce fichier n’est pas du texte lisible. OciDeck ouvre du Markdown.',
   'Alleen een titelpagina.': 'Uniquement une page de titre.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Cette diapositive est vide : elle n\'affiche rien à l\'écran ni dans l\'export.',

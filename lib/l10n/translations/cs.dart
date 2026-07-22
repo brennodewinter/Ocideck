@@ -1781,6 +1781,14 @@ const _dutchSourceCs = {
 const _dutchSourceAddCs = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Tento dokument existuje pouze v angličtině.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Tento soubor už na tomto místě není.',
+  'Dit bestand is te groot om te openen.':
+      'Tento soubor je příliš velký na otevření.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Tato prezentace je poškozená nebo uložená jen zpola.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Tento soubor není čitelný text. OciDeck otevírá Markdown.',
   'Alleen een titelpagina.': 'Pouze titulní strana.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Tento snímek je prázdný: nezobrazuje nic na obrazovce ani v exportu.',

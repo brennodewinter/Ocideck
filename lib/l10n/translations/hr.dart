@@ -1784,6 +1784,14 @@ const _dutchSourceHr = {
 const _dutchSourceAddHr = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Ovaj dokument postoji samo na engleskom.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Ova datoteka više se ne nalazi na ovoj lokaciji.',
+  'Dit bestand is te groot om te openen.':
+      'Ova datoteka prevelika je za otvaranje.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Ova prezentacija oštećena je ili je spremljena samo djelomično.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Ova datoteka nije čitljiv tekst. OciDeck otvara Markdown.',
   'Alleen een titelpagina.': 'Samo naslovna stranica.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ovaj slajd je prazan: ne prikazuje ništa na zaslonu ni u izvozu.',

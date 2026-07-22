@@ -17,6 +17,22 @@ This guide addresses frequently encountered problems, their causes, and step-by-
 - Blank screens or application crashes on file load  
 - "Invalid file format" warnings
 
+**Start with what the message says.** Since 2026-07-22 a refused open names its
+reason instead of always saying "Could not open this file", so the message
+usually points straight at the fix:
+
+| Message | What it means | What to do |
+| --- | --- | --- |
+| *This file no longer exists in this place* | The path is gone — moved, renamed or deleted | Find it, or remove it from the recent list |
+| *This file is too large to open* | Above the deck-size cap | Split the deck, or move bulky content to linked images |
+| *This file is not readable text. OciDeck opens Markdown.* | Not valid UTF-8, so a binary file | You probably picked the wrong file |
+| *This presentation is damaged or half-saved* | The markdown is there but truncated or unparseable | Try a crash-recovery snapshot or a backup; the steps below apply |
+| *This is not a Marp/OciDeck presentation* | Readable Markdown without the Marp front matter | See *File Format Validation* below |
+| *Could not open this file* | The cause could not be established | The generic case; work through the steps below |
+
+That last row is deliberate: where the app does not know the reason it does not
+invent one. A wrong explanation costs more time than none.
+
 **Solutions**:
 1. **Check File Integrity**:
    - Verify the .md file isn't corrupted (try opening in a text editor)
@@ -30,9 +46,11 @@ This guide addresses frequently encountered problems, their causes, and step-by-
 3. **Recovery Options**:
    - Use crash recovery snapshots (automatically generated — desktop only; the
      browser build writes none, because it has no folder to write them to)
-   - Restore from Git repository if available — but note that a commit carries
-     the markdown, the pooled images and the chart data, not video, audio, the
-     drawings on your slides or the user notes
+   - Restore from Git repository if available — a commit carries the markdown,
+     the pooled images **and media**, the chart data and your notes; what it
+     still leaves behind is the drawings on your slides and, on a sealed deck,
+     the seal. *(Corrected 2026-07-22: this said video, audio and the notes
+     stayed behind too, which stopped being true with #515 and #541.)*
    - Try opening backup copies
 
 ### Export Problems

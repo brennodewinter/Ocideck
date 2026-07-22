@@ -2757,6 +2757,13 @@ const _dutchSourceTr = {
 const _dutchSourceAddTr = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Bu belge yalnızca İngilizce olarak mevcut.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Bu dosya artık bu konumda değil.',
+  'Dit bestand is te groot om te openen.': 'Bu dosya açılamayacak kadar büyük.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Bu sunum bozuk ya da yalnızca yarısı kaydedilmiş.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Bu dosya okunabilir bir metin değil. OciDeck Markdown açar.',
   'Alleen een titelpagina.': 'Yalnızca bir başlık sayfası.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Bu slayt boş: ekranda da dışa aktarmada da hiçbir şey göstermiyor.',

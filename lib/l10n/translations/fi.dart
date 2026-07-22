@@ -1778,6 +1778,14 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'Dit document bestaat alleen in het Engels.':
       'Tämä asiakirja on olemassa vain englanniksi.',
+  'Dit bestand bestaat niet meer op deze plek.':
+      'Tätä tiedostoa ei enää ole tässä sijainnissa.',
+  'Dit bestand is te groot om te openen.':
+      'Tämä tiedosto on liian suuri avattavaksi.',
+  'Deze presentatie is beschadigd of half opgeslagen.':
+      'Tämä esitys on vaurioitunut tai tallentui vain osittain.',
+  'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
+      'Tämä tiedosto ei ole luettavaa tekstiä. OciDeck avaa Markdownia.',
   'Alleen een titelpagina.': 'Vain otsikkosivu.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Tämä dia on tyhjä: se ei näytä mitään näytöllä eikä viennissä.',
