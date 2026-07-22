@@ -30,6 +30,7 @@ import '../dialogs/maswe_picker.dart';
 import '../dialogs/finding_template_picker.dart';
 import '_editor_field.dart';
 import 'ai_suggest_field.dart';
+import '../../platform/platform_features.dart';
 
 /// Structured editor for a `finding` **header** slide (PENTEST_MIAUW §3.1). The
 /// fields map one-to-one onto [FindingSpec], which round-trips to plain,
@@ -502,11 +503,14 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
               icon: const Icon(Icons.add_photo_alternate_outlined, size: 16),
               label: Text(l10n.d('Screenshot toevoegen')),
             ),
-            OutlinedButton.icon(
-              onPressed: _addVideo,
-              icon: const Icon(Icons.video_call_outlined, size: 16),
-              label: Text(l10n.d('Video toevoegen')),
-            ),
+            // Op web is er geen projectmap om een video in te importeren,
+            // dus geen knop. Screenshots hebben er wél een pad (`mem:`).
+            if (supportsLocalProjectFolders)
+              OutlinedButton.icon(
+                onPressed: _addVideo,
+                icon: const Icon(Icons.video_call_outlined, size: 16),
+                label: Text(l10n.d('Video toevoegen')),
+              ),
           ],
         ),
         if (findingId.isEmpty) ...[

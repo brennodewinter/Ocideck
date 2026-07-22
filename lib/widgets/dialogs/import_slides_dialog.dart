@@ -10,6 +10,7 @@ import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/slide_preview.dart';
 import 'slide_diff_dialog.dart';
+import '../../platform/platform_features.dart';
 
 /// One place a slide was found while scanning: the deck plus the slide. Used to
 /// de-duplicate identical slides across decks and to label where they live.
@@ -96,6 +97,13 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
   }
 
   Future<void> _pickDirectory() async {
+    // Ook hier, niet alleen bij de aanroeper in slide_list_panel.dart: op web
+    // bestaat `getDirectoryPath` niet en geeft het stil null terug, en dan
+    // doet de knop niets zonder één woord uitleg (#150). De poort bij de
+    // aanroeper is vandaag correct, maar dit bestand kon dat niet zelf
+    // bewijzen — en een garantie die elders staat, verdwijnt bij de
+    // eerstvolgende nieuwe aanroeper.
+    if (!supportsLocalProjectFolders) return;
     final result = await FilePicker.getDirectoryPath(
       dialogTitle: context.l10n.d('Map met presentaties kiezen'),
       initialDirectory: _directory,

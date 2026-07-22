@@ -4,6 +4,7 @@ import '../../services/image_service.dart';
 import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
 import '../../theme/app_theme.dart';
+import '../../platform/platform_features.dart';
 
 class AudioAttachmentEditor extends StatelessWidget {
   final Slide slide;
@@ -59,11 +60,14 @@ class AudioAttachmentEditor extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            ElevatedButton.icon(
-              onPressed: _pickAudio,
-              icon: const Icon(Icons.audio_file_outlined, size: 16),
-              label: Text(l10n.d('Kiezen')),
-            ),
+            // Zie video_slide_editor.dart: op web is er geen projectmap om
+            // het bestand in te importeren, dus geen kiezer.
+            if (supportsLocalProjectFolders)
+              ElevatedButton.icon(
+                onPressed: _pickAudio,
+                icon: const Icon(Icons.audio_file_outlined, size: 16),
+                label: Text(l10n.d('Kiezen')),
+              ),
             if (slide.audioPath.isNotEmpty)
               IconButton(
                 onPressed: () => onUpdate(
