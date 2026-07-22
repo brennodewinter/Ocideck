@@ -159,8 +159,9 @@ class SlideQualityAnalyzer {
     _checkSlideContrast(slide, index, theme, issues);
     _checkTextDensity(slide, index, font, issues);
     _checkMissingMedia(slide, index, projectPath, issues);
-    // Hangt alleen van de slide-inhoud af, dus veilig per slide te cachen.
+    // Hangen alleen van de slide-inhoud af, dus veilig per slide te cachen.
     _checkQuestionAnswerable(slide, index, issues);
+    _checkEmptySlide(slide, index, issues);
     _slideIssuesCache[slide] = _SlideIssuesMemo(
       theme: theme,
       font: font,
@@ -662,6 +663,86 @@ class SlideQualityAnalyzer {
   // outside the project via absolute or `../` references.
   String? _resolveAssetPath(String path, String? projectPath) =>
       resolveSlideAssetPath(path, projectPath);
+
+  /// Waarschuw voor een dia die niets zou tonen.
+  ///
+  /// Dit is de algemene vorm van #583. Daar zag een scorecard er in de editor
+  /// ingevuld uit — elk veld droeg zijn placeholder als gewone zwarte tekst —
+  /// terwijl de dia wit rendeerde, de kwaliteitscontrole "geen problemen" zei
+  /// en de export een lege pagina schreef. Elk vangnet wees op hetzelfde
+  /// moment de verkeerde kant op, en de auteur stond ermee voor de zaal.
+  ///
+  /// De controle gaat daarom niet over dat ene type maar over de vorm: valt er
+  /// niets te tonen, dan hoort dat gezegd te worden. Een waarschuwing en geen
+  /// fout — een dia die je nog moet vullen is geen vergissing, en tijdens het
+  /// schrijven mag de melding meelopen zonder je tegen te houden.
+  void _checkEmptySlide(
+    Slide slide,
+    int index,
+    List<SlideQualityIssue> issues,
+  ) {
+    if (_hasVisibleContent(slide)) return;
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: SlideQualityIssueKind.emptySlide,
+        category: SlideQualityCategory.content,
+        severity: MarkdownValidationSeverity.warning,
+        field: 'title',
+      ),
+    );
+  }
+
+  /// Draagt [slide] iets dat de kijker te zien krijgt?
+  ///
+  /// Alleen wat de auteur zelf invulde telt. Vaste kopregels die de app zelf
+  /// aanmaakt (de kop van een checklist, van een scope-matrix) staan wél in
+  /// `tableRows` maar zijn niets van hem — een dia die alleen díé draagt is
+  /// precies de lege dia waar dit over gaat. Vandaar de vergelijking met een
+  /// vers aangemaakte dia van hetzelfde type: wat daar ook al in staat, is
+  /// geen inhoud.
+  ///
+  /// Dat maakt de regel bovendien zelfonderhoudend. Een nieuw slidetype dat
+  /// zijn eigen beginstand meebrengt, krijgt de juiste ondergrens zonder dat
+  /// iemand hier iets toevoegt — en dat is bij [SlideType] geen luxe: de
+  /// compiler wijst maar een handvol van de plekken aan die zo'n type raakt.
+  bool _hasVisibleContent(Slide slide) =>
+      _contentFingerprint(slide) !=
+      _contentFingerprint(_blankOfType(slide.type));
+
+  /// Alles wat een kijker van [slide] te zien kan krijgen, achter elkaar.
+  ///
+  /// Notities, thema-instellingen en de TLP-markering staan er bewust niet in:
+  /// een dia waarop alleen een sprekersnotitie staat, toont de zaal niets.
+  static String _contentFingerprint(Slide slide) {
+    final parts = <String>[
+      slide.title,
+      slide.subtitle,
+      ...slide.bullets,
+      ...slide.bullets2,
+      slide.columnTitle1,
+      slide.columnTitle2,
+      slide.quote,
+      slide.quoteAuthor,
+      slide.imagePath,
+      slide.imagePath2,
+      slide.imageCaption,
+      slide.imageCaption2,
+      slide.videoPath,
+      slide.audioPath,
+      slide.customMarkdown,
+      for (final row in slide.tableRows) ...row,
+    ];
+    return parts.map((p) => p.trim()).join(' ');
+  }
+
+  /// Een verse dia van [type], één keer per type aangemaakt.
+  ///
+  /// [Slide.create] genereert een id en is dus niet gratis; de analyse loopt
+  /// over elke dia bij elke bewerking.
+  static final Map<SlideType, Slide> _blanks = {};
+  static Slide _blankOfType(SlideType type) =>
+      _blanks[type] ??= Slide.create(type);
 
   /// Waarschuw voor vraagslides die tijdens het presenteren niet speelbaar
   /// zijn (geen geldige vraagspecificatie), vóórdat de presentator er live

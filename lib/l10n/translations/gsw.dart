@@ -1781,6 +1781,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Die Slide isch läär: si zeigt nüt uf em Bildschirm und nüt im Export.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Export gsperrt dur d Klassifizierigsrichtlinie: schtell es TLP-Niveau für die Präsentation i.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

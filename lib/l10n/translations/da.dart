@@ -1776,6 +1776,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Denne slide er tom: den viser ingenting på skærmen eller i eksporten.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Eksport blokeret af klassifikationspolitikken: angiv et TLP-niveau for denne præsentation.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

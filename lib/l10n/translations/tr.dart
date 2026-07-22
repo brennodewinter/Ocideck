@@ -2757,6 +2757,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Bu slayt boş: ekranda da dışa aktarmada da hiçbir şey göstermiyor.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Dışa aktarma sınıflandırma politikası tarafından engellendi: bu sunum için bir TLP düzeyi belirleyin.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

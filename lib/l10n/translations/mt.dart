@@ -1799,6 +1799,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Din is-slide hija vojta: ma turi xejn fuq l-iskrin u lanqas fl-esportazzjoni.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'L-esportazzjoni mblukkata mill-politika tal-klassifikazzjoni: issettja livell TLP għal din il-preżentazzjoni.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

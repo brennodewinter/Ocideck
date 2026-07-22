@@ -1780,6 +1780,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Tento snímek je prázdný: nezobrazuje nic na obrazovce ani v exportu.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Export zablokován zásadami klasifikace: nastavte úroveň TLP pro tuto prezentaci.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

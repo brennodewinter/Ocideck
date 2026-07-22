@@ -1813,6 +1813,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Tá an sleamhnán seo folamh: ní thaispeánann sé aon rud ar an scáileán ná san easpórtáil.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Easpórtáil bactha ag an mbeartas aicmithe: socraigh leibhéal TLP don láithreoireacht seo.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

@@ -916,6 +916,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'This slide is empty: it shows nothing on screen or in the export.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Export blocked by the classification policy: set a TLP level for this presentation.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':

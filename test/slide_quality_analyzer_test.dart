@@ -1076,6 +1076,73 @@ void main() {
     });
   });
 
+  // #583: een scorecard die je zojuist had toegevoegd zag er in de editor
+  // ingevuld uit, rendeerde wit, kwam als "geen problemen" door de
+  // kwaliteitscontrole en exporteerde een lege pagina. De controle gaat daarom
+  // niet over dat ene type maar over de vorm.
+  group('lege dia', () {
+    List<SlideQualityIssue> leegheidVan(Slide slide) => analyzer
+        .analyze(Deck(title: 'D', slides: [slide]))
+        .issues
+        .where((i) => i.kind == SlideQualityIssueKind.emptySlide)
+        .toList();
+
+    test('élk vers slidetype meldt zichzelf als leeg', () {
+      // Uitputtend over het enum in plaats van over een handvol types: een
+      // nieuw slidetype dat zijn beginstand meebrengt hoort hier vanzelf in te
+      // vallen, en als het dat niet doet wil ik dat hier zien en niet bij een
+      // gebruiker die voor de zaal staat.
+      for (final type in SlideType.values) {
+        expect(
+          leegheidVan(Slide.create(type)),
+          hasLength(1),
+          reason: 'een verse $type draagt niets van de auteur',
+        );
+      }
+    });
+
+    test('één ingevuld veld is genoeg om de melding te laten vallen', () {
+      expect(
+        leegheidVan(Slide.create(SlideType.section).copyWith(title: 'Deel 2')),
+        isEmpty,
+      );
+      expect(
+        leegheidVan(
+          Slide.create(SlideType.image).copyWith(imagePath: 'foto.png'),
+        ),
+        isEmpty,
+      );
+      expect(
+        leegheidVan(
+          Slide.create(
+            SlideType.scorecard,
+          ).copyWith(customMarkdown: '{"entries":[{"label":"Open"}]}'),
+        ),
+        isEmpty,
+      );
+    });
+
+    test('een sprekersnotitie is geen inhoud', () {
+      // De zaal ziet hem niet. Een dia met alleen een notitie is precies de
+      // lege dia waar dit over gaat, en zou anders stilzwijgend passeren.
+      expect(
+        leegheidVan(
+          Slide.create(SlideType.bullets).copyWith(notes: 'niet vergeten'),
+        ),
+        hasLength(1),
+      );
+    });
+
+    test('het is een waarschuwing, geen fout', () {
+      // Een dia die je nog moet vullen is geen vergissing: tijdens het
+      // schrijven mag de melding meelopen zonder de export te blokkeren.
+      expect(
+        leegheidVan(Slide.create(SlideType.scorecard)).single.severity,
+        MarkdownValidationSeverity.warning,
+      );
+    });
+  });
+
   group('memoizedFitScale (per-slide fit cache)', () {
     // Pins the Expando cache the analyzer uses to avoid re-measuring unchanged
     // slides on every deck edit. The behavioural contract — a hit skips

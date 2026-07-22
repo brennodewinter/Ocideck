@@ -1800,6 +1800,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Deze dia is leeg: hij toont niets op het scherm en in de export.':
+      'Този слайд е празен: не показва нищо на екрана, нито в експорта.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
       'Експортът е блокиран от политиката за класификация: задайте TLP ниво за тази презентация.',
   'Export geblokkeerd door classificatiebeleid: dit deck is {deck}, lager dan het vereiste minimum {limit}.':
