@@ -8,8 +8,6 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../../utils/log.dart';
-
-import '../../utils/log.dart';
 import 'git_cli.dart';
 
 /// De echte uitvoerder: één subproces, gestart en afgeschermd. Vervangbaar in
