@@ -173,6 +173,34 @@ void main() {
     expect(orphan.existsSync(), isFalse);
   });
 
+  test('het opruimen meldt hoeveel wachtrij-sleutels het wiste', () async {
+    await Outbox(scope: slug).enqueue(
+      const PendingCommit(
+        deckDir: 'decks/kwartaal',
+        branch: 'main',
+        message: 'weg',
+        baseSha: 'abc',
+      ),
+    );
+
+    final report = await traces.removeGitTraces(slug, discardPendingWork: true);
+
+    expect(report.removedOutboxKeys, 1);
+    expect(report.refused, isFalse);
+  });
+
+  test('een lege slug ruimt niets op', () async {
+    final report = await traces.removeGitTraces('');
+    expect(report.removedPaths, isEmpty);
+    expect(report.removedOutboxKeys, 0);
+  });
+
+  test('eigenaar-alleen doet niets buiten Linux', () async {
+    // De poort draait op macOS; daar is de map al per gebruiker afgeschermd en
+    // hoort er geen subproces te starten.
+    expect(await traces.restrictToOwner(), Platform.isLinux ? isNonZero : 0);
+  });
+
   test('de git-zandbak wordt opgeruimd', () async {
     final sandbox = Directory('${temp.path}/ocideck_git_sandbox')
       ..createSync(recursive: true);
