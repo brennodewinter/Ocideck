@@ -179,6 +179,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
             deck,
             sourceSlide,
             disabledRules: settings.privacyDisabledRules,
+            regions: settings.privacyRegions,
             ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
           )
         : null;

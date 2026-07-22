@@ -911,6 +911,7 @@ void presentDeck(
     audienceDeck: PrivacyProjection.forAudience(
       deck.copyWith(slides: renderSlides),
       disabledRules: settings.privacyDisabledRules,
+      regions: settings.privacyRegions,
       ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
     ),
     cockpitColorScheme: settings.cockpitColorScheme,

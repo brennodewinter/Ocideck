@@ -18,6 +18,7 @@ import '../../models/privacy_finding.dart';
 import '../../models/redaction_manifest.dart';
 import '../../models/slide.dart';
 import 'privacy_own_identity.dart';
+import 'privacy_regions.dart';
 import 'privacy_scanner.dart';
 
 /// Bouwt en verifieert redactiemanifesten.
@@ -28,6 +29,14 @@ class RedactionManifestService {
 
   /// Idem voor de eigen gegevens van de gebruiker.
   final OwnIdentity ownIdentity;
+
+  /// De landpakketten die aanstaan. Moet gelijk zijn aan wat
+  /// [PrivacyProjection.forAudience] krijgt: het manifest beschrijft wat de
+  /// projectie heeft weggelakt, dus een pakket dat hier wél en daar níet meetelt
+  /// levert een entry voor een blok dat in de export niet staat. De ontvanger
+  /// gaat dan zoeken naar een redactie die er niet is — precies het vertrouwen
+  /// dat dit manifest hoort te vestigen.
+  final Set<String> regions;
 
   /// Injecteerbaar voor de test; standaard een cryptografisch veilige bron.
   ///
@@ -40,6 +49,7 @@ class RedactionManifestService {
     Random? random,
     this.disabledRules = const {},
     this.ownIdentity = OwnIdentity.empty,
+    this.regions = defaultPrivacyRegions,
   }) : _random = random ?? Random.secure();
 
   /// Bouwt het manifest voor [deck]: één entry per redactie die de projectie op
@@ -130,6 +140,7 @@ class RedactionManifestService {
     final scan = PrivacyScanner(
       disabledRules: disabledRules,
       ownIdentity: ownIdentity,
+      regions: regions,
     ).scan(deck);
     final out = <({PrivacyFinding finding, String value})>[];
 

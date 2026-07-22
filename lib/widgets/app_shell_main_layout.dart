@@ -757,6 +757,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     if (!mounted) return;
     final privacySettings = ref.read(settingsProvider);
     final disabledRules = privacySettings.privacyDisabledRules;
+    final regions = privacySettings.privacyRegions;
     final ownIdentity = OwnIdentity.fromLines(
       privacySettings.privacyOwnIdentity,
     );
@@ -784,6 +785,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         source,
         disabledRules: disabledRules,
         ownIdentity: ownIdentity,
+        regions: regions,
         profile: profile,
       );
       return ExportBundle(
@@ -800,6 +802,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         manifest: RedactionManifestService(
           disabledRules: disabledRules,
           ownIdentity: ownIdentity,
+          regions: regions,
         ).build(source, profile: profile),
         // De gate telt op de ONGEFILTERDE scan: de provider onderdrukt bevindingen
         // op slides die de auteur al heeft afgehandeld — precies wat je in het
@@ -809,6 +812,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           PrivacyScanner(
             disabledRules: disabledRules,
             ownIdentity: ownIdentity,
+            regions: regions,
           ).scan(source),
         ),
       );
