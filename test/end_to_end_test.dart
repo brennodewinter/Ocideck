@@ -12,6 +12,8 @@ import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:path/path.dart' as p;
 
+import 'support/export_bundle_fixture.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -70,7 +72,7 @@ void main() {
       mdPath,
       ExportFormat.html,
       const <Uint8List>[],
-      markdown: md.generateDeck(notifier.state.deck!),
+      audience: bundleFor(notifier.state.deck!),
       outputDirectory: temp.path,
     );
 

@@ -452,7 +452,7 @@ class ThemeProfileSwatch extends StatelessWidget {
             height: 12,
             margin: const EdgeInsets.only(right: 2),
             decoration: BoxDecoration(
-              color: _parseHexColor(hex),
+              color: AppTheme.parseHexColor(hex),
               borderRadius: BorderRadius.circular(2),
               border: Border.all(color: Colors.black26, width: 0.5),
             ),
@@ -460,10 +460,4 @@ class ThemeProfileSwatch extends StatelessWidget {
       ],
     );
   }
-}
-
-Color _parseHexColor(String hex) {
-  final cleaned = hex.replaceFirst('#', '');
-  final value = int.tryParse(cleaned, radix: 16) ?? 0xFFFFFF;
-  return Color(0xFF000000 | value);
 }

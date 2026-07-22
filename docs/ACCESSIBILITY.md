@@ -1,5 +1,7 @@
 # OciDeck — Accessibility
 
+> **Status:** current-state description of what is and is not accessible · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 What OciDeck does for accessibility, and — the longer half of this document —
 what it does not do. Both halves are here on purpose. A tool that only lists its
 accessibility features leaves the reader to discover the gaps at the worst

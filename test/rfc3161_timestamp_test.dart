@@ -21,6 +21,81 @@ void main() {
       // certReq TRUE.
       expect(root.descendantsAndSelf.any((n) => n.tag == 0x01), isTrue);
     });
+
+    test('zonder nonce draagt het verzoek er ook geen', () {
+      // De versie-INTEGER is de enige die er dan in staat.
+      final root = parseDer(buildTimeStampRequest(hash))!;
+      expect(root.children.where((n) => n.tag == 0x02), hasLength(1));
+    });
+
+    test('een nonce belandt in het verzoek, vóór certReq', () {
+      final nonce = Uint8List.fromList([0x01, 0x23, 0x45, 0x67]);
+      final root = parseDer(buildTimeStampRequest(hash, nonce: nonce))!;
+      final tags = root.children.map((n) => n.tag).toList();
+      // version, messageImprint, nonce, certReq — de volgorde uit RFC 3161.
+      expect(tags, [0x02, 0x30, 0x02, 0x01]);
+      expect(hexOf(root.children[2].content), '01234567');
+    });
+
+    test('een nonce met de hoogste bit aan blijft positief', () {
+      // Zonder de leidende nulbyte leest DER 0x80… als een negatief getal, en
+      // dan kaatst de TSA iets anders terug dan wij verstuurden.
+      final root = parseDer(
+        buildTimeStampRequest(hash, nonce: Uint8List.fromList([0x80, 0x01])),
+      )!;
+      expect(root.children[2].content, [0x00, 0x80, 0x01]);
+    });
+
+    test('newTimeStampNonce levert geen twee dezelfde', () {
+      // Geen statistische toets — alleen de zekerheid dat er écht getrokken
+      // wordt en er geen constante is ingeslopen.
+      final trekkingen = {
+        for (var i = 0; i < 32; i++) hexOf(newTimeStampNonce()),
+      };
+      expect(trekkingen, hasLength(32));
+      expect(newTimeStampNonce(), hasLength(kTimeStampNonceBytes));
+    });
+  });
+
+  group('timeStampEchoesNonce', () {
+    final nonce = Uint8List.fromList([0xde, 0xad, 0xbe, 0xef]);
+
+    test('herkent het token dat het verzoek beantwoordt', () {
+      final token = fakeTimeStampToken(hash, '20260721120000Z', nonce: nonce);
+      expect(timeStampEchoesNonce(token, nonce), isTrue);
+    });
+
+    test('wijst een token met een ándere nonce af', () {
+      // Dit is het punt van de nonce: dit token deelt de imprint en zou een
+      // imprint-vergelijking dus glansrijk doorstaan, maar het is het antwoord
+      // op een ander verzoek — mogelijk een oud verzoek dat iemand opnieuw
+      // indient.
+      final token = fakeTimeStampToken(
+        hash,
+        '20260721120000Z',
+        nonce: const [0x00, 0x00, 0x00, 0x01],
+      );
+      expect(timeStampMatchesHash(token, hexOf(hash)), isTrue);
+      expect(timeStampEchoesNonce(token, nonce), isFalse);
+    });
+
+    test('een token zonder nonce kaatst niets terug', () {
+      final token = fakeTimeStampToken(hash, '20260721120000Z');
+      expect(parseTimeStampToken(token)!.nonceHex, isNull);
+      expect(timeStampEchoesNonce(token, nonce), isFalse);
+    });
+
+    test('leest de nonce en niet de accuracy die ervóór staat', () {
+      // TSTInfo draagt meer INTEGERs: version en serialNumber staan vóór
+      // genTime, en accuracy staat ertussenin met eigen INTEGERs. Wie de platte
+      // knopenlijst afloopt pakt de secondenwaarde uit accuracy (1) in plaats
+      // van de nonce, en vergelijkt dan met een willekeurig ander getal.
+      final token = fakeTimeStampToken(hash, '20260721120000Z', nonce: nonce);
+      // Mét de leidende nulbyte die DER eist omdat 0xde de hoogste bit aan
+      // heeft — vandaar dat de echo-controle die nul wegstreept vóór ze
+      // vergelijkt. Zou hier de accuracy gelezen zijn, dan stond er '01'.
+      expect(parseTimeStampToken(token)!.nonceHex, '00deadbeef');
+    });
   });
 
   group('decodeHashHex', () {

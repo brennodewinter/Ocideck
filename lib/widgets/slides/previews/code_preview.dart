@@ -48,8 +48,8 @@ class _CodePreview extends StatelessWidget {
     final lang = slide.codeLanguage.trim();
     final known = lang.isNotEmpty && allLanguages.containsKey(lang);
 
-    final codeBg = _hexColor(profile.codeBackgroundColor);
-    final codeFg = _hexColor(profile.codeTextColor);
+    final codeBg = AppTheme.parseHexColor(profile.codeBackgroundColor);
+    final codeFg = AppTheme.parseHexColor(profile.codeTextColor);
 
     // The chosen monospace family, always backed by a generic monospace fallback
     // so an uninstalled face still renders fixed-width.
@@ -89,7 +89,7 @@ class _CodePreview extends StatelessWidget {
         : Text(code, style: style);
 
     return Container(
-      color: _hexColor(profile.slideBackgroundColor),
+      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
       child: Padding(
         padding: EdgeInsets.fromLTRB(pad, topPad, pad, bottomPad),
         child: Column(
@@ -105,10 +105,10 @@ class _CodePreview extends StatelessWidget {
                   TextStyle(
                     fontSize: w * 0.042,
                     fontWeight: FontWeight.bold,
-                    color: _hexColor(profile.textColor),
+                    color: AppTheme.parseHexColor(profile.textColor),
                   ),
                 ),
-                linkColor: _hexColor(profile.accentColor),
+                linkColor: AppTheme.parseHexColor(profile.accentColor),
               ),
               SizedBox(height: pad * 0.35),
             ],

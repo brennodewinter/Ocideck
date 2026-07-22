@@ -388,9 +388,9 @@ class _ExportDialogState extends State<ExportDialog> {
       images,
       compress: compress,
       outputDirectory: widget.exportDirectory,
-      // Speaker notes travel 1:1 with the rendered slides (PPTX notes pane).
-      notes: [for (final s in _bundle.audience.slides) s.notes],
-      markdown: _bundle.markdown,
+      // De bundel draagt de markdown voor de HTML en de sprekersnotities voor
+      // het PPTX-notitiepaneel — beide uit hetzelfde geprojecteerde deck.
+      audience: _bundle,
       themeProfile: _bundle.audience.deck.themeProfile,
       cockpitColorScheme: widget.cockpitColorScheme,
       tlp: _bundle.audience.deck.tlp,
@@ -398,7 +398,7 @@ class _ExportDialogState extends State<ExportDialog> {
       qualityResult: widget.qualityResult,
       qualityPolicy: widget.qualityPolicy,
       qualityAcknowledged: true,
-      metadata: ExportDocumentMetadata.fromDeck(_bundle.audience.deck),
+      metadata: ExportDocumentMetadata.fromDeck(_bundle.audience),
       redactionManifest: _bundle.manifest,
       privacyProfile: _profile,
       includeDetail: _includeDetail,

@@ -839,7 +839,30 @@ class SlideTypePreviewPainter extends CustomPainter {
             ..style = PaintingStyle.stroke
             ..strokeWidth = 1.5,
         );
-      default:
+      // De niet-informatieveiligheidstypen tekenen hun wireframe in [paint]
+      // zelf en komen hier nooit. Toch uitgeschreven in plaats van een
+      // `default:`: alleen zo blijft de compiler meelezen. Wordt dit ooit een
+      // vijfde-plus-type, dan wijst hij de plek aan in plaats van er stil een
+      // lege thumbnail van te maken.
+      case SlideType.title ||
+          SlideType.section ||
+          SlideType.bullets ||
+          SlideType.twoBullets ||
+          SlideType.bulletsImage ||
+          SlideType.twoImages ||
+          SlideType.image ||
+          SlideType.video ||
+          SlideType.quote ||
+          SlideType.table ||
+          SlideType.freeMarkdown ||
+          SlideType.code ||
+          SlideType.chart ||
+          SlideType.cockpit ||
+          SlideType.question ||
+          SlideType.timeline ||
+          SlideType.scorecard ||
+          SlideType.assets ||
+          SlideType.discoveries:
         break;
     }
   }

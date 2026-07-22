@@ -1,5 +1,7 @@
 # OciDeck — Checks & CI
 
+> **Status:** procedure, current, with a dated result under *Latest result* · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+
 Every automated check OciDeck runs, what it covers, what a failure means, and how
 to fix it. The **`Makefile` is the single entry point** and the **real gate**:
 `make check`, run by the committer before pushing, is what actually enforces
@@ -40,14 +42,20 @@ guards plus formatting), handy while iterating on translations.
 
 ## How intensively is it tested?
 
-To give a sense of scale (point-in-time figures — they only grow):
+To give a sense of scale. These are counts from one moment, and they only grow,
+so read the date with them:
 
-| Metric | Approx. |
+| Metric | Counted on 2026-07-22 |
 | --- | ---: |
-| Automated tests in the suite | **~4570** |
-| Test files under `test/` | **~435** |
-| Source files under `lib/` | ~564 excl. translations (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
-| Line coverage (enforced floor: 80%) | **≥ 80%** |
+| Automated tests in the suite | **4852** (excluding the `golden` tag) |
+| Test files under `test/` | **450** |
+| Source files under `lib/` | 574 excl. the 32 translation files (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
+| Line coverage (enforced floor: 80%) | **82.5%** — 42 798 of 51 862 lines, 508 instrumented files |
+
+*(Corrected 2026-07-22: this table said "~4570 / ~435 / ~564" and called them
+"point-in-time figures" without saying which point in time, so there was no way
+to tell how far they had drifted. They are now dated, and re-counting them is
+part of the procedure under [Latest result](#latest-result).)*
 
 Coverage is a floor **and** a census: `make coverage` also fails when a `lib/`
 file appears in no test at all. Such a file is not 0% — lcov never records it,
@@ -60,6 +68,37 @@ panels, the live preview and the fullscreen presenter's keyboard handling) and
 service-level (export, file IO, sanitisation) layers, plus the enforced
 localization and security guards listed below. With no CI runner on the Forgejo
 remote, the number you see locally is the number that gates the push.
+
+---
+
+## Latest result
+
+The sections above and below describe the procedure; this one records what came
+out of it, the way [`LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md) records its
+own last run. A dated outcome next to a repeatable command is the difference
+between "we check this" and "we checked this".
+
+**Run on 2026-07-22**, on macOS (arm64), Flutter 3.44.6, at commit `b98ee072`:
+
+| Command | Outcome |
+| --- | --- |
+| `flutter test --test-randomize-ordering-seed random --exclude-tags golden` | pass — 4852 tests, 2 skipped |
+| `dart run tool/coverage_summary.dart --min=80 --require-instrumented` | pass — 82.5% (42 798/51 862 lines, 508 instrumented files); no `lib/` file outside the census |
+| `dart run tool/coverage_summary.dart --per-file-floor` | pass — 19 files below the per-file floor, 5 of them at zero, against a budget of 21 |
+| `dart run tool/check_licenses.dart` | pass — 187 packages, all recognised open-source ([`LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md)) |
+
+**What this run did not cover.** Only the four commands above were executed. The
+rest of `make check` — `format-check`, `analyze`, `check-conventions`,
+`check-method-length`, `check-dead-code`, `check-hardcoded-text` — and the
+`check-full` extras (`sbom-verify`, `deps-check`, `check-web`) were not run here,
+so this table says nothing about them. It is a snapshot, not a certificate: the
+only run that means anything for a given commit is the one you do yourself
+before pushing it.
+
+Two of these numbers are budgets rather than achievements. The per-file floor
+allows 21 files below it and 19 are there, so that gate is nearly full; the
+overall 82.5% sits above an 80% floor that is a ratchet, meant to be raised as
+coverage improves rather than treated as a target already met.
 
 ---
 

@@ -198,13 +198,4 @@ extension _PresenterInk on _FullscreenPresenterState {
       ),
     );
   }
-
-  Color _hexColor(String hex) {
-    final cleaned = hex.replaceFirst('#', '');
-    final value = int.tryParse(
-      cleaned.length == 6 ? 'FF$cleaned' : cleaned,
-      radix: 16,
-    );
-    return Color(value ?? 0xFFFFFFFF);
-  }
 }

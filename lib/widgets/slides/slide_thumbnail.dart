@@ -258,12 +258,10 @@ class SlideThumbnail extends ConsumerWidget {
     // halve breedte heeft en een slide dus eerder vol oogt dan de algemene
     // bullettelling-drempel suggereert. De daadwerkelijke knip (op het optimum
     // dat past) gebeurt in DeckNotifier.splitSlide.
-    final canSplit = switch (slide.type) {
-      SlideType.bullets || SlideType.bulletsImage => slide.bullets.length >= 2,
-      SlideType.twoBullets =>
-        slide.bullets.length >= 2 || slide.bullets2.length >= 2,
-      _ => false,
-    };
+    // Dezelfde toets als de knop in het paneel: één [canSplitSlide], niet een
+    // eigen kopie met een `_ => false` die een nieuw bullettype hier stil
+    // onsplitsbaar zou maken.
+    final canSplit = canSplitSlide(slide);
     final borderColor = isSelected
         ? AppTheme.accent
         : withheld

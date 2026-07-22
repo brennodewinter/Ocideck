@@ -34,7 +34,30 @@ List<String> deckStandardsUsed(Deck deck) {
         add(
           ChecklistSpec.fromSlide(slide.title, slide.tableRows).standardLabel,
         );
-      default:
+      // Uitgeschreven: een `default:` zou een nieuw type dat óók een norm draagt
+      // stilzwijgend uit de managementsamenvatting laten vallen.
+      case SlideType.title ||
+          SlideType.section ||
+          SlideType.bullets ||
+          SlideType.twoBullets ||
+          SlideType.bulletsImage ||
+          SlideType.twoImages ||
+          SlideType.image ||
+          SlideType.video ||
+          SlideType.quote ||
+          SlideType.table ||
+          SlideType.freeMarkdown ||
+          SlideType.code ||
+          SlideType.chart ||
+          SlideType.cockpit ||
+          SlideType.question ||
+          SlideType.timeline ||
+          SlideType.scorecard ||
+          SlideType.assets ||
+          SlideType.discoveries ||
+          SlideType.finding ||
+          SlideType.findingsSummary ||
+          SlideType.signOff:
         break;
     }
   }

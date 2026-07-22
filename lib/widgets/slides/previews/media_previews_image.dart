@@ -162,7 +162,7 @@ Widget _resolvedImage(
           return _remoteBlockedPlaceholder(context, imagePath);
         }
         return Image(
-          image: cappedNetworkImage(imagePath),
+          image: guardedNetworkImage(imagePath),
           fit: fit,
           alignment: alignment,
           width: double.infinity,
