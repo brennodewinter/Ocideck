@@ -24,6 +24,13 @@ import 'package:flutter_test/flutter_test.dart';
 /// apply the guard. A sink appearing in any *other* file fails this test —
 /// forcing a conscious decision to route it through NetGuard rather than
 /// silently reintroducing the hole.
+///
+/// Per-file granularity has one blind spot, and the last test here closes it:
+/// once a file is on the allowlist, a SECOND client inside that same file slips
+/// through unnoticed — including one nobody pinned. The allowlist proves "this
+/// file knows about the gate", not "every client in this file goes through it".
+/// So the number of `HttpClient(` constructions per allowlisted file is itself
+/// a ratchet; see [pinnedClientCount].
 void main() {
   Iterable<File> dartFiles() => Directory('lib')
       .listSync(recursive: true)
@@ -51,6 +58,36 @@ void main() {
     }
     expect(offenders, isEmpty, reason: '$guidance\n${offenders.join('\n')}');
   }
+
+  /// Hoeveel `HttpClient(`-constructies elk toegelaten bestand mag hebben.
+  ///
+  /// De allowlist hierboven werkt per BESTAND, en dat is precies zijn zwakke
+  /// plek: zodra `webdav_service.dart` erop staat, glipt een TWEEDE client in
+  /// datzelfde bestand er ongezien langs — ook een die niemand gepind heeft. De
+  /// allowlist bewijst dan nog steeds "dit bestand kent de poort", maar niet
+  /// meer "élke client in dit bestand gaat erdoor".
+  ///
+  /// Statisch bewijzen dát een instantie een `connectionFactory` krijgt lukt
+  /// niet: `local_cve_database_io.dart` construeert de client in `getJson` en
+  /// pint hem pas in `_get`, twee methodes verderop, en dat is legitiem. Wat wél
+  /// te bewijzen valt is dat het AANTAL niet stilletjes groeit. Een nieuwe
+  /// client in een bestaand bestand dwingt zo een bewuste bijstelling hier, met
+  /// de reden erbij — dezelfde ratchet-vorm die `check_conventions.dart` elders
+  /// gebruikt.
+  const pinnedClientCount = <String, int>{
+    // net_guard.dart staat wél op de allowlist hierboven maar construeert zelf
+    // geen client — het levert de `connectionFactory` die de andere gebruiken.
+    'lib/utils/net_guard.dart': 0,
+    'lib/services/parts/file_service_import.dart': 1,
+    'lib/services/webdav_service.dart': 1,
+    'lib/services/s3/s3_service.dart': 1,
+    'lib/services/ai_client_service.dart': 1,
+    'lib/services/cve_transport_io.dart': 1,
+    // Twee: `getJson` en `download` openen elk hun eigen client, en beide laten
+    // hem door `_get` pinnen — één keer per redirect-hop.
+    'lib/services/cve/local_cve_database_io.dart': 2,
+    'lib/services/git/git_transport_io.dart': 1,
+  };
 
   test('media fetch sinks stay behind the NetGuard resolve gate', () {
     scan(
@@ -102,6 +139,42 @@ void main() {
           'New raw HttpClient. Resolve the host through NetGuard.safeResolve '
           '(or safeResolveTrusted) and pin the socket to the returned address, '
           'then add the file to the allowlist:',
+    );
+  });
+
+  test('an allowlisted file does not quietly gain an extra HttpClient', () {
+    final sink = RegExp(r'HttpClient\(');
+    final actual = <String, int>{};
+    for (final file in dartFiles()) {
+      var count = 0;
+      for (final line in file.readAsLinesSync()) {
+        if (line.trimLeft().startsWith('//')) continue;
+        count += sink.allMatches(line).length;
+      }
+      if (count > 0) actual[rel(file)] = count;
+    }
+
+    // Alleen de toegelaten bestanden: een client in een ander bestand is al de
+    // vorige test, en die geeft een betere foutmelding.
+    final tracked = {
+      for (final e in actual.entries)
+        if (pinnedClientCount.containsKey(e.key)) e.key: e.value,
+    };
+    final expected = {
+      for (final e in pinnedClientCount.entries)
+        if (e.value > 0) e.key: e.value,
+    };
+
+    expect(
+      tracked,
+      expected,
+      reason:
+          'Het aantal HttpClient-constructies in een toegelaten bestand is '
+          'veranderd. De allowlist bewijst alleen dat het bestand de poort '
+          'kent, niet dat élke client erdoor gaat — dus moet een extra client '
+          'hier bewust bijgesteld worden, met de reden dat ook hij door '
+          'NetGuard.safeResolve(Trusted) + connectPinned gaat. Is er juist een '
+          'client verdwenen, verlaag het getal dan om de winst vast te zetten.',
     );
   });
 
