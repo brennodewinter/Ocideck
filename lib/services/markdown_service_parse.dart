@@ -50,20 +50,6 @@ SlideType? _declaredSlideType(Iterable<String> tokens) {
   return null;
 }
 
-/// Slide types whose body is stored as a Markdown table, so the parser keeps the
-/// decoded rows in [Slide.tableRows]: the `table` and `scorecard` types plus the
-/// security types that serialise as a table (`checklist` P1-CHK, `scopeMatrix`
-/// P1-SCOPE, `findingsSummary` P1-SUM).
-const _tableBackedTypes = {
-  SlideType.table,
-  SlideType.scorecard,
-  SlideType.assets,
-  SlideType.discoveries,
-  SlideType.checklist,
-  SlideType.scopeMatrix,
-  SlideType.findingsSummary,
-};
-
 /// Mutable accumulator for [_MarkdownParse._parseBodyLines]: the per-line
 /// handlers fill these fields as they walk a slide block's body.
 class _BodyParse {
@@ -433,7 +419,11 @@ extension _MarkdownParse on MarkdownService {
       tlp: d.tlp,
       privacy: d.privacy,
       quality: d.quality,
-      tableRows: _tableBackedTypes.contains(type) ? tableRows : const [],
+      // Welke types hun inhoud als tabel dragen staat in de registry naast de
+      // enum ([SlideTypeMeta.backedByTable]); de parser hield daar een tweede,
+      // handgeschreven lijst van bij. Zo'n type hier vergeten was stil verlies:
+      // het deck parseerde, de dia verscheen, en de rijen waren leeg.
+      tableRows: type.backedByTable ? tableRows : const [],
       tableEditable:
           type == SlideType.table && classTokens.contains('table-editable'),
       tableMarkOverdue:

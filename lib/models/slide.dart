@@ -144,12 +144,25 @@ class SlideTypeMeta {
   /// no per-entry change.
   final SlideCategory category;
 
+  /// Stores its content as a Markdown table in [Slide.tableRows], and therefore
+  /// round-trips through the shared table writer/reader.
+  ///
+  /// Dit was tot nu toe een handgeschreven verzameling in de parser
+  /// (`_tableBackedTypes`) naast een handgeschreven cases-groep in de
+  /// serialisatie. Twee lijsten van hetzelfde feit, in twee bestanden, geen van
+  /// beide door de compiler bewaakt — en de parserkant vergeten was de klassieke
+  /// stille val: het deck parseert, de dia verschijnt, en de rijen zijn na
+  /// herladen leeg. Als vlag hier staat het feit één keer, op de plek waar je
+  /// een nieuw type toch al aanmeldt, en bewaakt de registrytest hem.
+  final bool backedByTable;
+
   const SlideTypeMeta({
     required this.label,
     required this.marpClass,
     this.splitWithImage = false,
     this.isHeading = false,
     this.category = SlideCategory.algemeen,
+    this.backedByTable = false,
   });
 }
 
@@ -180,7 +193,11 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
   SlideType.image: SlideTypeMeta(label: 'Grote Afbeelding', marpClass: ''),
   SlideType.video: SlideTypeMeta(label: 'Video', marpClass: 'video'),
   SlideType.quote: SlideTypeMeta(label: 'Quote', marpClass: 'quote'),
-  SlideType.table: SlideTypeMeta(label: 'Tabel', marpClass: 'table'),
+  SlideType.table: SlideTypeMeta(
+    label: 'Tabel',
+    marpClass: 'table',
+    backedByTable: true,
+  ),
   SlideType.freeMarkdown: SlideTypeMeta(label: 'Vrije Markdown', marpClass: ''),
   SlideType.code: SlideTypeMeta(label: 'Broncode', marpClass: 'code'),
   SlideType.chart: SlideTypeMeta(label: 'Grafiek', marpClass: 'chart'),
@@ -190,6 +207,7 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
   SlideType.scorecard: SlideTypeMeta(
     label: 'Scorecard',
     marpClass: 'scorecard',
+    backedByTable: true,
   ),
   // Informatieveiligheid-module — categorie [SlideCategory.informatieveiligheid],
   // waardoor de kiezer automatisch een tabblad toont (P0-PICK). marpClass-tokens
@@ -198,11 +216,13 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     label: 'Aanvalsoppervlak',
     marpClass: 'assets',
     category: SlideCategory.informatieveiligheid,
+    backedByTable: true,
   ),
   SlideType.discoveries: SlideTypeMeta(
     label: 'Ontdekkingen',
     marpClass: 'discoveries',
     category: SlideCategory.informatieveiligheid,
+    backedByTable: true,
   ),
   SlideType.finding: SlideTypeMeta(
     label: 'Bevinding',
@@ -213,16 +233,19 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     label: 'Bevindingenoverzicht',
     marpClass: 'findings-summary',
     category: SlideCategory.informatieveiligheid,
+    backedByTable: true,
   ),
   SlideType.checklist: SlideTypeMeta(
     label: 'Uitvoering testen conform standaard',
     marpClass: 'checklist',
     category: SlideCategory.informatieveiligheid,
+    backedByTable: true,
   ),
   SlideType.scopeMatrix: SlideTypeMeta(
     label: 'Scope-matrix',
     marpClass: 'scope-matrix',
     category: SlideCategory.informatieveiligheid,
+    backedByTable: true,
   ),
   SlideType.signOff: SlideTypeMeta(
     label: 'Ondertekening',
@@ -258,6 +281,10 @@ extension SlideTypeExtension on SlideType {
   /// The picker category this type belongs to.
   SlideCategory get category => slideTypeMeta[this]!.category;
 
+  /// True when the type's content lives in [Slide.tableRows] and round-trips
+  /// through the shared table writer/reader. See [SlideTypeMeta.backedByTable].
+  bool get backedByTable => slideTypeMeta[this]!.backedByTable;
+
   /// Informatieveiligheid scaffold types (P1-S) whose body is still stored as
   /// free Markdown in [Slide.customMarkdown] and round-trips like a free-Markdown
   /// slide until each type's structured serialiser lands. `checklist` (P1-CHK),
@@ -265,11 +292,13 @@ extension SlideTypeExtension on SlideType {
   /// Markdown tables in [Slide.tableRows]; `signOff` (P1-SIGN) stores only an
   /// optional heading (its attestation is deck-level), so all four are excluded
   /// here. Only `finding` (P1-FIND) still uses the scaffold body.
+  ///
+  /// De drie afgestudeerde types worden aan [backedByTable] herkend in plaats
+  /// van bij naam: een nieuw tabelgedragen module-type is dan meteen goed
+  /// ingedeeld, in plaats van stil als scaffold-Markdown te worden gelezen.
   bool get usesScaffoldMarkdownBody =>
       category == SlideCategory.informatieveiligheid &&
-      this != SlideType.checklist &&
-      this != SlideType.scopeMatrix &&
-      this != SlideType.findingsSummary &&
+      !backedByTable &&
       this != SlideType.signOff;
 }
 

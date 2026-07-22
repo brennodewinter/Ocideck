@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/widgets/editors/slide_editor_registry.dart';
 import 'package:ocideck/widgets/panels/editor_panel.dart';
 
@@ -55,5 +57,49 @@ void main() {
       SlideType.title,
       SlideType.section,
     });
+    // backedByTable verving `_tableBackedTypes` in de parser naast de
+    // cases-groep in de serialisatie.
+    expect(SlideType.values.where((t) => t.backedByTable).toSet(), {
+      SlideType.table,
+      SlideType.scorecard,
+      SlideType.assets,
+      SlideType.discoveries,
+      SlideType.checklist,
+      SlideType.scopeMatrix,
+      SlideType.findingsSummary,
+    });
+  });
+
+  test('backedByTable beschrijft wat de rondgang werkelijk doet', () {
+    // De vlag is pas een bron van waarheid als hij niet van het gedrag kan
+    // afdrijven. Daarom niet de lijst met zichzelf vergelijken, maar per type
+    // echt schrijven en teruglezen: een tabelgedragen type moet zijn rijen
+    // terugkrijgen, en een type dat de vlag *niet* draagt juist niet. Precies
+    // de stille val die het vergeten van `_tableBackedTypes` opleverde.
+    const rows = [
+      ['Kop A', 'Kop B'],
+      ['een', 'twee'],
+    ];
+    final service = MarkdownService();
+    for (final type in SlideType.values) {
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(type).copyWith(title: 'Titel', tableRows: rows),
+          ],
+        ),
+      );
+      final parsed = service.parseDeck(markdown)?.slides.single;
+      expect(parsed, isNotNull, reason: 'parseDeck faalde voor $type');
+      expect(
+        parsed!.tableRows,
+        type.backedByTable ? rows : isEmpty,
+        reason:
+            'SlideType.$type draagt backedByTable=${type.backedByTable}, maar '
+            'de Markdown-rondgang gedraagt zich anders. Zet de vlag goed in '
+            'slideTypeMeta.',
+      );
+    }
   });
 }
