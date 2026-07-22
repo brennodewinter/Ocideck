@@ -2204,6 +2204,10 @@ the file on — that is what lets you pass it on.
 The same texts, plus the licence of every package OciDeck is built from, are in
 the app under **Settings → Over OciDeck → Alle licentieteksten tonen**.
 
+That same panel opens with the application **version**. Quote it if you ever
+report a security issue (see `SECURITY.md`) — it is the one place in the app
+where the number appears.
+
 **Slide quality at export.** When the deck has open quality issues, the export
 dialog shows a summary banner with a link to the full issue list. Depending on
 your settings (see *Slide quality* below), export may ask for
