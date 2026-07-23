@@ -10,6 +10,7 @@ import '../image_service.dart';
 import '../slide_image_refs.dart';
 import '../web_asset_store.dart';
 import 'asset_pool.dart';
+import 'deck_repo_serializer.dart';
 import 'git_forge.dart';
 
 /// Vervang in [deck] elke `repo:`-afbeeldingsverwijzing door een in-geheugen
@@ -120,4 +121,23 @@ Future<Deck> resolveRepoAssetsToMem(
     slides.add(next);
   }
   return memFor.isEmpty ? deck : deck.copyWith(slides: slides);
+}
+
+/// Waar de bytes van een afbeelding vandaan komen bij het schrijven naar een
+/// repo: uit de webstore als het een `mem:`-pad is, anders van schijf, relatief
+/// aan het project waar het deck bij hoort.
+///
+/// Stond vijf keer letterlijk uitgeschreven in de state-laag — één per
+/// schrijfpad. Vijf kopieën van dezelfde regel is er vier te veel: een zesde
+/// pad dat er één vergeet, schrijft een kapotte verwijzing zonder dat er iets
+/// misgaat waar de app op kan wijzen.
+///
+/// De tegenhanger van [resolveRepoAssetsToMem], en daarom hier: die leest een
+/// repo-asset terug naar het geheugen, deze levert de bytes die er naartoe
+/// gaan.
+AssetByteResolver repoAssetBytes(String? projectPath) {
+  final image = ImageService();
+  return (path) async => WebAssetStore.isMemPath(path)
+      ? WebAssetStore.bytesFor(path)
+      : image.readSlideImageBytes(path, projectPath: projectPath);
 }

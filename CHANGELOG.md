@@ -143,6 +143,28 @@ read a book to find out.
   groot vet label — haalt alles het. Er staat nu geen contrastschuld meer open,
   en dat is eerlijker dan een lijst die schuld opschrijft die er niet is.
 
+### Changed
+- **Het offline-parkeren van een git-opslag zit niet langer in de state-laag.**
+  `_queueGitSave` en `_poolPendingDeck` waren privémethoden op `TabsNotifier`,
+  en dat is niet waar ze horen: er komt geen tabblad, geen Riverpod en geen
+  huidige selectie aan te pas — alleen een werkkopie, een outbox en een forge.
+  Ze staan nu als `queueDeckSave` en `poolPendingDeck` in
+  `services/git/offline_queue.dart`, in één bestand, want daar staat hun
+  afspraak: wat het parkeren bewust ongepoold wegschrijft (`mem:`-verwijzingen,
+  omdat de blobs offline toch niet omhoog kunnen) is precies wat het poolen
+  vlak vóór de commit alsnog moet omzetten. Die afspraak stond nergens anders
+  opgeschreven.
+  Wat er wél toestandswerk aan was, is achtergebleven waar het hoort: de
+  wachtrijteller ongeldig maken zodat de badge meebeweegt, en de
+  waarschuwingen die bij dat ene opslagverzoek horen.
+  Dezelfde ronde verhuisde `repoAssetBytes` naar `repo_asset_resolver.dart`,
+  naast zijn spiegelbeeld: die functie leest een repo-asset terug naar het
+  geheugen, deze levert de bytes die er naartoe gaan.
+  `TabsNotifier` zakt van 2.251 naar 2.210 regels. Belangrijker dan dat getal:
+  beide functies zijn nu rechtstreeks te toetsen zonder een opslagronde van de
+  notifier, en die tests staan er — inclusief het geval dat een werkkopie het
+  deck weigert en er dus géén halve wachtrij mag achterblijven.
+
 ### Added
 - **De commentaartaalregel heeft een poort.** CONTRIBUTING zegt al een tijd
   "Nederlands of Engels, maar nooit allebei in één commentaarblok", en niets

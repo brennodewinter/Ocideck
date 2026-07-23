@@ -240,7 +240,7 @@ extension TabsNotifierGit on TabsNotifier {
       md: _md,
       pool: AssetPool(forge: forge, branch: branch),
       deckDir: deckDir,
-      resolveBytes: _repoAssetBytes(deck.projectPath),
+      resolveBytes: repoAssetBytes(deck.projectPath),
       read: (path) => forge.readBlob(branch, path),
     );
   }
@@ -478,7 +478,7 @@ extension TabsNotifierGit on TabsNotifier {
         message: message,
         md: _md,
         // Hun helper, niet nog een zesde kopie van dezelfde regel.
-        resolveBytesFor: (merged) => _repoAssetBytes(merged.projectPath),
+        resolveBytesFor: (merged) => repoAssetBytes(merged.projectPath),
         readDeckAt: (ref) async => (await readVersionDeck(
           forge,
           config: config,
@@ -547,15 +547,13 @@ extension TabsNotifierGit on TabsNotifier {
     }
   }
 
-  /// Parkeer een opslag in de wachtrij: de tekst gaat naar de werkkopie, de
-  /// intentie in de outbox.
+  /// Parkeer een opslag in de wachtrij en vertaal de uitkomst naar wat de
+  /// gebruiker te zien krijgt.
   ///
-  /// De werkkopie bewaart `deck.md` ongepoold — met `mem:`-verwijzingen, zoals
-  /// het deck nu in de editor staat. De afbeeldingen worden nog niet omgezet:
-  /// offline kunnen de blobs toch niet omhoog, en hun bytes staan nu nog in het
-  /// geheugen. Bij het synchroniseren pakt [flushGit] die op en poolt ze alsnog,
-  /// zodat de commit compleet landt (§8.3). De tab houdt zijn herkomst zoals hij
-  /// was: er is niets nieuws geland om de basis op te verzetten.
+  /// Het werk zelf — de tekst naar de werkkopie, de intentie naar de outbox —
+  /// staat in [queueDeckSave]. Hier blijft alleen wat werkelijk toestand is: de
+  /// wachtrijteller ongeldig maken zodat de badge meebeweegt, en de
+  /// waarschuwingen meegeven die bij dit ene opslagverzoek horen.
   Future<GitSaveResult> _queueGitSave(
     DeckMirror mirror,
     Outbox outbox, {
@@ -567,64 +565,25 @@ extension TabsNotifierGit on TabsNotifier {
     required List<String> warnings,
     String? forkFrom,
   }) async {
-    final deckFiles = mirrorDeckFiles(deck, deckDir: deckDir, md: _md);
-    try {
-      await mirror.writeDeck(deckDir, deckFiles);
-    } on DraftStoreUnsupported catch (e) {
-      // De webwerkkopie kan dit deck niet bergen (te groot of niet-tekst). De
-      // uitzondering is géén GitForgeException, dus zonder deze vangst liep hij
-      // ongevangen door: geen melding, en niets in de wachtrij, terwijl de
-      // desktop netjes "gaat mee zodra er weer verbinding is" toont. De
-      // uitzondering draagt al een gebruikersgerichte tekst; die tonen we.
-      logWarning('_queueGitSave: webwerkkopie weigert het deck', e);
-      return GitSaveResult(status: GitSaveStatus.failed, message: e.message);
-    }
-    await outbox.enqueue(
-      PendingCommit(
-        deckDir: deckDir,
-        branch: branch,
-        message: message,
-        baseSha: baseSha,
-        forkFrom: forkFrom,
-      ),
+    final result = await queueDeckSave(
+      mirror,
+      outbox,
+      deck: deck,
+      deckDir: deckDir,
+      branch: branch,
+      message: message,
+      baseSha: baseSha,
+      md: _md,
+      forkFrom: forkFrom,
     );
+    if (!result.queued) {
+      return GitSaveResult(
+        status: GitSaveStatus.failed,
+        message: result.refusal,
+      );
+    }
     _ref.invalidate(gitQueueCountProvider);
     return GitSaveResult(status: GitSaveStatus.queued, warnings: warnings);
-  }
-
-  /// Pool de afbeeldingen van een wachtend deck vlak vóór de commit: lees de
-  /// bewaarde `deck.md`, en zet zijn `mem:`-afbeeldingen om naar `repo:` met de
-  /// bijbehorende blobs (§8.3). Zo landt een offline gemaakte afbeelding alsnog,
-  /// zolang de bytes nog in het geheugen staan; een afbeelding die na een
-  /// herstart weg is houdt zijn verwijzing en toont een placeholder.
-  Future<Map<String, Uint8List>> _poolPendingDeck(
-    GitForge forge,
-    PendingCommit commit,
-    Map<String, Uint8List> stored,
-  ) async {
-    final raw = stored[p.posix.join(commit.deckDir, deckRepoFileName)];
-    if (raw == null) return stored;
-    final deck = _md.parseDeck(utf8.decode(raw));
-    if (deck == null) return stored;
-
-    // deck.md draagt alleen de verwijzingen, dus de lagen eerst terughalen uit
-    // de werkkopie: wat hier niet aan het deck hangt schrijft buildDeckRepoFiles
-    // niet terug, en wachtend werk zou dat verliezen net als het landt.
-    final sidecars = await withRepoSidecars(
-      deck,
-      deckDir: commit.deckDir,
-      read: (path) async => stored[path],
-    );
-
-    final files = await buildDeckRepoFiles(
-      sidecars.deck,
-      md: _md,
-      pool: AssetPool(forge: forge, branch: commit.branch),
-      deckDir: commit.deckDir,
-      read: (path) async => stored[path],
-      resolveBytes: _repoAssetBytes(deck.projectPath),
-    );
-    return files.upserts;
   }
 
   /// Loop de wachtrij leeg tegen de forge (§8.5) en werk de basis bij van elk
@@ -637,7 +596,7 @@ extension TabsNotifierGit on TabsNotifier {
   ) async {
     final outcomes = await engine.flush(
       prepare: (commit, stored) =>
-          _poolPendingDeck(engine.forge, commit, stored),
+          poolPendingDeck(engine.forge, commit, stored, md: _md),
     );
     var changed = false;
     for (final outcome in outcomes) {
@@ -703,21 +662,6 @@ class GitSaveResult {
     this.warnings = const [],
     this.conflicts = const [],
   });
-}
-
-/// Waar de bytes van een afbeelding vandaan komen bij het schrijven naar een
-/// repo: uit de webstore als het een `mem:`-pad is, anders van schijf, relatief
-/// aan het project waar het deck bij hoort.
-///
-/// Stond vijf keer letterlijk uitgeschreven in dit bestand en zijn buren — één
-/// per schrijfpad. Vijf kopieën van dezelfde regel is er vier te veel: een
-/// zesde pad dat er één vergeet, schrijft een kapotte verwijzing zonder dat er
-/// iets misgaat waar de app op kan wijzen.
-AssetByteResolver _repoAssetBytes(String? projectPath) {
-  final image = ImageService();
-  return (path) async => WebAssetStore.isMemPath(path)
-      ? WebAssetStore.bytesFor(path)
-      : image.readSlideImageBytes(path, projectPath: projectPath);
 }
 
 /// Meld de grafiekbronnen die niet te lezen waren.
