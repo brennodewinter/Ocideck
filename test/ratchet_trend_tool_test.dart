@@ -161,6 +161,9 @@ const int perFileFloorPercent = $bestandsvloer;
       int vloer = 80,
       int ongedekt = 1,
       int bestandsvloer = 20,
+      // Nul, zodat deze ratchet in de vergelijkingen hieronder meedoet als
+      // "al af" en de tellingen daar over hun eigen onderwerp blijven gaan.
+      int gemengd = 0,
     }) => {
       'tool/check_conventions.dart': conventies(
         katch: katch,
@@ -174,6 +177,8 @@ const int perFileFloorPercent = $bestandsvloer;
         ongedekt: ongedekt,
         bestandsvloer: bestandsvloer,
       ),
+      'tool/check_comment_language.dart':
+          'const int mixedCommentBaseline = $gemengd;',
       'Makefile': 'coverage_summary.dart --min=$vloer --require-instrumented',
     };
 

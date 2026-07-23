@@ -188,6 +188,13 @@ const List<Ratchet> ratchets = [
     wat: 'methodes met een eigen plafond boven de 150 regels',
   ),
   Ratchet(
+    naam: 'mixedCommentBaseline',
+    bestand: 'tool/check_comment_language.dart',
+    soort: RatchetSoort.getal,
+    richting: Richting.omlaag,
+    wat: 'commentaarblokken die halverwege van taal wisselen',
+  ),
+  Ratchet(
     naam: 'uncoveredBaseline',
     bestand: 'tool/coverage_summary.dart',
     soort: RatchetSoort.omvang,
