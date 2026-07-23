@@ -1766,6 +1766,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Leiud, mille oled üle vaadanud ja alles jätnud. Neist enam ei teatata, kuid skannimine leiab need endiselt ja neid ei loeta lahendatuks. Puuduta, et üks taastada.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Privaatsusleiu kõrvalejätmine (kavand)',
   'Een verzegeld deck gaat niet naar een werkbranch':

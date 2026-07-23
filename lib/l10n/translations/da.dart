@@ -1774,6 +1774,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Fund, du har vurderet og ladet stå. De rapporteres ikke længere, men scanningen finder dem stadig, og de tæller ikke som løst. Tryk for at gendanne et.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'At lægge et privatlivsfund til side (design)',
   'Een verzegeld deck gaat niet naar een werkbranch':

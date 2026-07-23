@@ -59,6 +59,8 @@ import 'settings/settings_section_title.dart';
 import 'settings/settings_text_field.dart';
 import 'settings/webdav_form.dart';
 import 'settings/webdav_panel.dart';
+import 'settings/set_aside_findings.dart';
+import 'settings/disabled_privacy_rules.dart';
 
 part 'parts/settings_dialog_sections.dart';
 part 'parts/settings_dialog_chrome.dart';

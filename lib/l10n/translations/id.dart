@@ -1775,6 +1775,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Temuan yang sudah kamu tinjau dan kamu biarkan. Temuan ini tidak dilaporkan lagi, tetapi pemindaian tetap menemukannya dan tidak dihitung sebagai selesai. Ketuk untuk memulihkan salah satunya.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Mengesampingkan temuan privasi (rancangan)',
   'Een verzegeld deck gaat niet naar een werkbranch':

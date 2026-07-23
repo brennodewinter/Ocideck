@@ -731,6 +731,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Hallazgos que has revisado y has dejado tal cual. Ya no se notifican, pero el escaneo los sigue encontrando y no cuentan como resueltos. Toca para restaurar uno.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Dejar de lado un hallazgo de privacidad (diseño)',
   'Een verzegeld deck gaat niet naar een werkbranch':

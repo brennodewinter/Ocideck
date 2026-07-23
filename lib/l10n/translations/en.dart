@@ -915,6 +915,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Findings you reviewed and left in place. They are no longer reported, but the scan still finds them and they do not count as resolved. Tap to restore one.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Setting a privacy finding aside (design)',
   'Een verzegeld deck gaat niet naar een werkbranch':

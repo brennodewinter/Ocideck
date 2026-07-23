@@ -1750,6 +1750,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'DanoHpu\'bogh \'ej Dateqbe\'pu\'bogh SamwI\'ghachmey. luja\'lu\'be\'taH, \'ach luSamtaH nejwI\', \'ej rInpu\'be\'. wa\' DatatlhmeH yI\'uy.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'pegh Sam lo\'laHbe\'ghach (nab)',
   'Een verzegeld deck gaat niet naar een werkbranch':

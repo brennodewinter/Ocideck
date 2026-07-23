@@ -1802,6 +1802,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Ευρήματα που έχεις εξετάσει και άφησες όπως είναι. Δεν αναφέρονται πλέον, αλλά η σάρωση συνεχίζει να τα βρίσκει και δεν μετρούν ως επιλυμένα. Πάτησε για να επαναφέρεις ένα.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Παραμερισμός ευρήματος ιδιωτικότητας (σχεδίαση)',
   'Een verzegeld deck gaat niet naar een werkbranch':

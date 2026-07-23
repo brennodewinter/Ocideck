@@ -734,6 +734,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Feststellungen, die Sie geprüft und stehen gelassen haben. Diese werden nicht mehr gemeldet, aber der Scan findet sie weiterhin, und sie gelten nicht als behoben. Zum Zurückholen antippen.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Einen Datenschutzbefund zurückstellen (Entwurf)',
   'Een verzegeld deck gaat niet naar een werkbranch':

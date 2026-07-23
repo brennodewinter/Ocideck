@@ -1797,6 +1797,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Констатации, които сте прегледали и сте оставили. Те вече не се съобщават, но сканирането продължава да ги открива и не се броят за отстранени. Докоснете, за да върнете една от тях.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Отлагане на констатация за поверителност (проект)',
   'Een verzegeld deck gaat niet naar een werkbranch':

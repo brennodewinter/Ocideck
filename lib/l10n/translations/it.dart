@@ -730,6 +730,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Rilievi che hai esaminato e lasciato al loro posto. Non vengono più segnalati, ma la scansione continua a trovarli e non contano come risolti. Tocca per ripristinarne uno.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Mettere da parte un rilievo sulla privacy (progetto)',
   'Een verzegeld deck gaat niet naar een werkbranch':
