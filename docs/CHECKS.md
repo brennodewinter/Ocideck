@@ -151,6 +151,7 @@ now the only passing state.
 | [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ |
 | [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ |
 | [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — |
+| [`make check-comment-language`](#make-check-comment-language) | No plain comment in `lib/` switches language halfway (`mixedCommentBaseline` ratchet) | ✅ | ✅ | — |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
 | [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 20% of its own lines | ✅ | ✅ | — |
@@ -385,6 +386,41 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Not covered:** unused *public symbols* inside a live file (high false-positive
   rate: generated l10n, test-only use). Use `make fix` (`dart fix --apply`) to
   sweep the analyzer-visible kinds; `make analyze` then enforces the result.
+
+### `make check-comment-language`
+- **Runs:** `dart run tool/check_comment_language.dart` (`--list` prints each
+  block with the words that were counted)
+- **Covers:** the CONTRIBUTING rule *"Dutch or English, but never both in one
+  comment"* — for plain `//` comments. A block that switches language halfway
+  does not read; the codebase being bilingual is a choice, finishing one thought
+  in two languages is not.
+- **How it measures:** comment tokens from the `analyzer` (not lines that look
+  like `//`), grouped into blocks — consecutive lines are one thought, a blank
+  line or a switch between `///` and `//` starts a new one. Inside a block,
+  backticked spans, quoted strings and URLs are dropped, and the rest is counted
+  against two vocabularies of function words that exist in one language only.
+  Words that exist in both (`in`, `is`, `of`, `over`, `we`, `was`, `die`, `van`,
+  `door`) are deliberately absent from both lists: one of those turns every
+  English block into a half hit. A block counts as mixed at **two distinct
+  markers of each** language — one English word in a Dutch block is nearly
+  always a quoted term, not a language switch.
+- **Not covered on purpose — dartdoc.** CONTRIBUTING also prescribes that new
+  public types in `lib/models/` and `lib/services/` carry *English* dartdoc,
+  while the reasoning below it stays in the working language. An English summary
+  line above a Dutch paragraph is therefore the prescribed form, not a
+  violation, and it is what 37 of the 47 raw hits were on 2026-07-23. A gate
+  that fines the contributor guide is a gate that gets switched off.
+- **Why this heuristic and not a language classifier.** CONTRIBUTING notes that
+  a language heuristic wrong 5% of the time is worse than no gate. That holds
+  for *classifying* ("is this block Dutch or English?"), where every block needs
+  an answer and every doubt counts. Mixing detection is the other question: it
+  stays silent unless there is hard evidence of both, so doubt produces silence
+  rather than a false alarm.
+- **`mixedCommentBaseline`, and those blocks are not being cleaned up.** CONTRIBUTING forbids
+  rewriting existing comments only to change their language — thousands of lines
+  of noise with somebody else's reasoning under your name in `git blame`. They
+  fall away as those blocks get edited for other reasons. Every one of them was
+  hand-checked when the ratchet was set, and every one is real.
 
 ### `make check-hardcoded-text`
 - **Runs:** `dart run tool/check_hardcoded_text.dart` (`--list` prints the full

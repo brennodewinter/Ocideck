@@ -114,7 +114,36 @@ read a book to find out.
   groot vet label — haalt alles het. Er staat nu geen contrastschuld meer open,
   en dat is eerlijker dan een lijst die schuld opschrijft die er niet is.
 
+### Added
+- **De commentaartaalregel heeft een poort.** CONTRIBUTING zegt al een tijd
+  "Nederlands of Engels, maar nooit allebei in één commentaarblok", en niets
+  mat dat — het was het enige van de vijf punten uit #518 waar helemaal nog
+  niets voor stond. `make check-comment-language` telt nu de blokken die
+  halverwege van taal wisselen; ratchet op tien, en die tien worden bewust niet
+  weggewerkt, want dezelfde gids verbiedt het herschrijven van commentaar
+  alléén om de taal te wijzigen. Ze zakken vanzelf als iemand er om een andere
+  reden aankomt.
+  **Dartdoc valt er met opzet buiten**, en dat is de kern van de afweging.
+  CONTRIBUTING schrijft óók voor dat publieke types in `lib/models` en
+  `lib/services` een Engelse dartdoc krijgen — de laag die `dart doc`, pub.dev
+  en de IDE tonen — met de redenering eronder in de werktaal. Een Engelse
+  samenvattingsregel boven een Nederlandse alinea is dus de voorgeschreven
+  vorm, en het waren 37 van de 47 ruwe treffers. Een poort die de bijdragersgids
+  beboet, wordt uitgezet.
+  De gids waarschuwde dat een taalheuristiek die 5% van de tijd fout zit
+  slechter is dan geen poort. Dat klopt voor *classificeren* — elk blok moet
+  dan een antwoord krijgen en elke twijfel telt mee. Mengdetectie is een andere
+  vraag: die zwijgt tenzij beide talen onmiskenbaar aanwezig zijn, dus twijfel
+  levert stilte op in plaats van een vals alarm. Alle tien de overgebleven
+  treffers zijn met de hand nagekeken en alle tien echt.
+
 ### Fixed
+- **De dartdoc van `parseDer` stond boven de verkeerde declaratie.** De drie
+  Engelse regels die `parseDer` beschrijven zaten vastgeplakt bovenop de
+  dartdoc van `_maxDerDepth`, zodat de constante een samenvatting droeg die
+  niet over haar ging en de functie er helemaal geen had. Gevonden door de
+  nieuwe commentaartaalpoort: het viel op als een blok dat halverwege van taal
+  wisselt, en dat was het ook — alleen zat de oorzaak een laag dieper.
 - **Een mislukte export zegt nu in welke stap hij omviel.** Er stond alleen de
   kale uitzondering — bij #714 letterlijk `Invalid argument(s): 1`, wat nergens
   heen wijst en niet eens verraadt of het renderen of het schrijven omviel.

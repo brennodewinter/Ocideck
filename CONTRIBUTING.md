@@ -165,8 +165,11 @@ Targeted test groups for focused work:
   Dart `part` files of roughly 3,000 lines each, and that was the whole barrier
   — it pushed away exactly the contribution this project needs most, native
   review of 31 languages, and toward more machine translation.)*
-- **Comment language: Dutch or English, but never both in one comment.** The
-  codebase is bilingual and stays that way. Measured over `lib/` (2026-07-22):
+- **Comment language: Dutch or English, but never both in one comment.**
+  *(Gated since 2026-07-23, #518: `make check-comment-language`, a ratchet
+  (`mixedCommentBaseline`). It covers plain `//` comments only — see below for
+  why dartdoc is out.)*
+  The codebase is bilingual and stays that way. Measured over `lib/` (2026-07-22):
   of the ~3,100 comment blocks of three lines or more, 71% are Dutch, 28% are
   English, and **1% mix the two inside a single block**. So the convention the
   code already follows is not "one language for the project" but "one language
@@ -188,6 +191,12 @@ Targeted test groups for focused work:
     for "API doc comments on a public type", which read as a rule the tree does
     not follow. No automated ceiling enforces the new rule yet — a language
     heuristic that is wrong 5% of the time is a worse gate than none.)*
+    *(2026-07-23, #518: that judgement stands for this clause and is why
+    `check-comment-language` skips dartdoc entirely. Measured over `lib/`, an
+    English summary line above Dutch reasoning is 37 of 47 raw hits — it is the
+    form this very clause asks for, so a gate that flagged it would be fining
+    the guide. The mixing rule above is a different question and is gated: it
+    only speaks when both languages are unmistakably present.)*
   - **Do not rewrite existing comments only to change their language.** That is
     thousands of lines of pure noise, it changes no behaviour, and it puts your
     name on every line of `git blame` for reasoning somebody else worked out.
