@@ -526,7 +526,7 @@ extension _SettingsStorageTab on _SettingsDialogState {
   ];
 
   /// De hostnaam uit een ingetypte URL, of `null` als er nog niets bruikbaars
-  /// staat. Vult een ontbrekend schema aan, want "cloud.voorbeeld.nl" zonder
+  /// staat. Vult een ontbrekend schema aan, want "cloud.librekat.nl" zonder
   /// `https://` is wat mensen intypen.
   String? _hostOf(String raw) {
     var url = raw.trim();

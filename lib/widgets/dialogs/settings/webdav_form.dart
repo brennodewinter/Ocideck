@@ -63,7 +63,7 @@ class WebdavForm {
   /// De server zoals hij nu in de velden staat.
   WebdavServer get server {
     var base = url.text.trim();
-    // "cloud.example.com" zonder schema is de meest gemaakte invoerfout;
+    // "cloud.librekat.nl" zonder schema is de meest gemaakte invoerfout;
     // vul https:// aan i.p.v. later op een ongeldige URL te stranden.
     if (base.isNotEmpty && !base.contains('://')) base = 'https://$base';
     return WebdavServer(

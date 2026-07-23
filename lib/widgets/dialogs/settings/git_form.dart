@@ -69,7 +69,7 @@ class GitForm {
   }
 
   /// De repo zoals hij nu in de velden staat. Vult een ontbrekend schema aan:
-  /// "git.example.org" zonder `https://` is de meest gemaakte invoerfout, en
+  /// "git.librekat.nl" zonder `https://` is de meest gemaakte invoerfout, en
   /// stranden op een onparseerbare URL is een slechter antwoord dan aanvullen.
   GitRepoConfig get config {
     var base = url.text.trim();

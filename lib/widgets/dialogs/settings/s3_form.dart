@@ -63,7 +63,7 @@ class S3Form {
   /// De bucketconfiguratie zoals hij nu in de velden staat.
   S3Bucket get config {
     var base = endpoint.text.trim();
-    // "minio.voorbeeld.nl" zonder schema is de meest gemaakte invoerfout; vul
+    // "minio.librekat.nl" zonder schema is de meest gemaakte invoerfout; vul
     // https:// aan in plaats van later op een ongeldige URL te stranden.
     if (base.isNotEmpty && !base.contains('://')) base = 'https://$base';
     final regionText = region.text.trim();
