@@ -81,6 +81,7 @@ import '../utils/project_path.dart';
 import '../utils/error_snackbar.dart';
 import '../utils/user_facing_error.dart';
 import '../theme/app_theme.dart';
+import '../theme/brand_logo.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/slide_quality_localization.dart';
 import 'dialogs/asset_usage_dialog.dart';
