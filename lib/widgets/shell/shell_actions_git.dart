@@ -58,7 +58,11 @@ Future<void> _reportGitSaveResult(
           content: Text(
             result.warnings.isEmpty
                 ? base
-                : '$base — ${l10n.d('video en audio gaan (nog) niet mee naar git')}',
+                // De warnings zijn verwijzingen die niet gepoold konden
+                // worden — onleesbaar, zonder bruikbare extensie of buiten
+                // het project. Media reist gewoon mee; dat "video en audio
+                // niet meegaan" stond hier tot 23-07-2026 en was achterhaald.
+                : '$base — ${l10n.d('niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)')}',
           ),
         ),
       );

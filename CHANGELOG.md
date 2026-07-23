@@ -87,7 +87,14 @@ that before deciding whether this alpha fits what you are doing.
 
 *Renamed 2026-07-22.* Everything below was under a single `## [Unreleased]`
 heading: 52,000 words in 455 entries, averaging 114 words each, with the
-`### Added` / `### Fixed` / `### Changed` subheadings repeating nine times over.
+`### Fixed
+- **De git-opslagmelding beloofde ten onrechte dat video en audio achterblijven.**
+  Media reist al mee sinds de git-opslagfasen; de waarschuwingen waarop de
+  melding afgaat betekenen "verwijzing niet leesbaar of buiten het project".
+  De snackbar zegt nu dat — in alle talen — en een regressietest bewaakt dat de
+  oude belofte niet via een l10n-merge terugkeert.
+
+### Added` / `### Fixed` / `### Changed` subheadings repeating nine times over.
 That is not a Keep a Changelog release section; it is a reverse-chronological
 development diary, and it is a good one — the entries explain *why*, which is
 rare. It stays, in full, under a heading that says what it is. The release
