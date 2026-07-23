@@ -330,13 +330,13 @@ out of the above; their icon sets still carry the old logo.
 
 ## CI
 
-> **Since 2026-07-23 the forge has an Actions runner, and one build runs in
-> CI:** `.forgejo/workflows/linux-build.yml` produces the Linux desktop bundle
-> as a run artifact on every push to `main`. The gate and the other release
-> bundles still do not run in CI (#741): `make check` (and `make check-full`),
-> run by the committer, is the enforced gate, and macOS/Windows/web bundles must
-> be built manually on their target OS. See
-> [CHECKS.md](CHECKS.md#continuous-integration).
+> **Since 2026-07-23 the forge has an Actions runner.** The quality gate
+> (`make check`) runs in CI on every pull request and push to `main`
+> (`.forgejo/workflows/ci.yml`, #751), and `.forgejo/workflows/linux-build.yml`
+> produces the Linux desktop bundle as a run artifact on every push to `main`.
+> `make check-full` and the macOS/Windows/web bundles remain local: run the
+> first before dependency or web-facing changes, and build the bundles on
+> their target OS. See [CHECKS.md](CHECKS.md#continuous-integration).
 
 `.github/workflows/ci.yml` *declares* the quality gate on Ubuntu for every push
 and pull request (plus `flutter test` on macOS and Windows). It does not build

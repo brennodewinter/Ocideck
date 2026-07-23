@@ -571,9 +571,14 @@ class _NativeGitMirror implements NativeGitMirror {
   /// (lokaal of op origin), maak hem anders af van [start]. De clone blíjft op de
   /// werkbranch achter — daar wordt verder aan gewerkt tot de ronde uitkomt.
   ///
-  /// Aanmaken en uitchecken zijn twee stappen (`git branch` dan `git checkout`),
+  /// Aanmaken en uitchecken zijn twee stappen (`git branch` dan `git switch`),
   /// niet `checkout -b`: de gehardde runner schuift de branchnaam als operand
   /// achter `--end-of-options`, en `-b` eist zijn naam er juist pal naast.
+  ///
+  /// `switch` en niet `checkout`: checkout op git ≤ 2.43 (Ubuntu 24.04 LTS)
+  /// kent `--end-of-options` niet en leest hem als pathspec — "pathspec did
+  /// not match any file(s)". `switch` neemt alleen een branch en verstaat de
+  /// markering wel; de CI-poort draait op 2.43 en bewaakt dit.
   Future<void> _ensureOnWorkBranch(String branch, String start) async {
     if (await _currentBranch() == branch) return;
     if (!await _refExists(branch)) {
@@ -582,7 +587,7 @@ class _NativeGitMirror implements NativeGitMirror {
           : start;
       await _run(['branch'], operands: [branch, from]);
     }
-    await _run(['checkout'], operands: [branch]);
+    await _run(['switch'], operands: [branch]);
   }
 
   /// De naam van de uitgecheckte branch (`main`, of een werkbranch).
@@ -721,13 +726,22 @@ class _NativeGitMirror implements NativeGitMirror {
     try {
       // `-I` slaat binaire bestanden over (de assets), `-l` geeft alleen de
       // padnamen, `-F` matcht de term als letterlijke tekst — nooit als regex
-      // uit gebruikersinvoer. De term en het `decks`-pad gaan als operand achter
-      // `--end-of-options`: git leest de eerste als patroon, de tweede als
-      // pathspec, en niets ervan kan als vlag worden gelezen (§10.2).
-      res = await _run(
-        ['grep', '-I', '-l', '-F', if (!caseSensitive) '-i'],
-        operands: [term, GitRepoLayout.decksRoot],
-      );
+      // uit gebruikersinvoer. De term is aan `-e` gebonden en het `decks`-pad
+      // staat achter `--`, dus geen van beide kan als vlag worden gelezen
+      // (§10.2). Niet via `--end-of-options`: git grep op ≤ 2.43 (Ubuntu
+      // 24.04 LTS) leest die markering zelf als patroon en de term als
+      // revisie — de CI-poort draait op 2.43 en bewaakt dit.
+      res = await _run([
+        'grep',
+        '-I',
+        '-l',
+        '-F',
+        if (!caseSensitive) '-i',
+        '-e',
+        term,
+        '--',
+        GitRepoLayout.decksRoot,
+      ]);
     } on GitCliException catch (e) {
       // Exitcode 1 = niets gevonden: een leeg, exhaustief antwoord — geen fout.
       if (e.exitCode == 1) return const [];

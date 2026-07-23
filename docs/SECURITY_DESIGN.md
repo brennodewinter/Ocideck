@@ -7,11 +7,11 @@ mechanisms that enforce them. Where a mechanism is implemented, the source is
 cited so the claim can be checked against the code — the code is the source of
 truth. OciDeck has never tagged a release, so there is no version to which this
 description is fixed — it describes the default branch, and details may change;
-but the invariants below are enforced by the local `make check` / `make check-full`
+but the invariants below are enforced by the `make check` / `make check-full`
 gate, not just documented. (Since 2026-07-23 the Forgejo instance has an Actions
-runner, but it only builds the Linux bundle — the gate workflows under
-`.github/` are reference definitions that do not execute there, so the local
-gate is the real one; #741.)
+runner, and since #751 it runs `make check` on every pull request and push to
+`main`; `make check-full` remains local. The workflows under `.github/` are
+reference definitions for a GitHub mirror and do not execute there.)
 
 ## Overview
 

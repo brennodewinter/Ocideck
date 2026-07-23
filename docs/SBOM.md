@@ -178,9 +178,9 @@ This runs:
   also asserts completeness — every `pubspec.lock` package and every manifest
   bundle appears — and format validity), so it is enforced by every `make check`;
 - as part of `make check-full`;
-- and is declared in the CI workflow (`.github/workflows/ci.yml`), which does not
-  run — the runner attached on 2026-07-23 only builds the Linux bundle; the gate
-  is not in CI (#741, see [CHECKS.md](CHECKS.md#continuous-integration)).
+- and in CI: `.forgejo/workflows/ci.yml` runs `make check` — which includes
+  the SBOM freshness test — on every pull request and push to `main` (#751,
+  see [CHECKS.md](CHECKS.md#continuous-integration)).
 
 So a dependency change that forgets to refresh the SBOM fails `make check`.
 

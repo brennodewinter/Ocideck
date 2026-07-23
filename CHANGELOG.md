@@ -147,6 +147,35 @@ read a book to find out.
   een tweede brontaal bijgekomen, geen vertaalmechanisme. Ontbreekt een
   document of is het onleesbaar, dan begint het nieuwe deck met een kale
   titeldia in plaats van een foutmelding. (#622)
+### Added
+- **De kwaliteitspoort draait nu ook in CI.** `.forgejo/workflows/ci.yml`
+  draait `make check` — dezelfde poort als lokaal, inclusief de
+  toolchaincontrole — per pull request en per push naar `main` (#741). De
+  toolchain in CI is de officiële Flutter-stable, met de versie gelezen uit
+  `.tool-versions` (een pin-bump heeft in de workflow dus geen tweede plek om
+  te vergeten) en sha256-geverifieerd tegen het officiële releasemanifest. Het
+  kant-en-klare cirruslabs-image is daarbij bewust uitgebannen, en ook uit de
+  Linux-build: het bleek Flutter 3.44.0 van kanaal `[user-branch]` uit
+  onbekende bron te bevatten — exact het patroon waarvoor `check-toolchain`
+  bestaat. Lokaal `make check` blijft de snelste route; CI is voortaan het
+  vangnet dat ook andermans bijdragen keurt. De dekkingsvloer per bestand ving
+  op Linux meteen een macOS-helft — het Finder-"Open met"-kanaal — waarvan de
+  kanaallogica nu los van de platformpoort staat en op elk platform onder test.
+
+### Fixed
+- **De native git-merge brak op git 2.43 — elke Ubuntu 24.04 LTS dus.** De
+  allereerste CI-run van de poort ving hem meteen: de gehardde git-runner
+  schuift operanden achter `--end-of-options`, maar `git checkout` op git
+  ≤ 2.43 kent die markering niet en leest hem als pathspec ("pathspec did not
+  match any file(s)"). Op de nieuwere git van de ontwikkelmachine viel dat
+  nooit op. De wissel naar een werkbranch loopt nu via `git switch`, dat
+  alleen een branch neemt en de markering wél verstaat. Ook `git grep` (de
+  versneller achter het doorzoeken van decks) bleek de markering op 2.43 als
+  patroon te lezen; daar is de term nu aan `-e` gebonden en staat het pad
+  achter `--` — dezelfde bescherming, in draagbare vorm. De overige
+  operand-subcommando's (`add`, `branch`, `merge-base`, `show`) zijn op 2.43
+  nagemeten en doen het goed. De poort draait voortaan zelf op git 2.43, dus
+  een terugval hierop wordt in CI rood.
 
 ### Removed
 - **Drie afbeeldingen uit de tijd vóór de OciDeck-huisstijl.**

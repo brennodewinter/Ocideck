@@ -1,0 +1,54 @@
+# De kwaliteitspoort van OciDeck, in CI (#741). Zelfde poort als lokaal:
+# `make check`. De Flutter-versie komt uit .tool-versions — de workflow leest
+# de pin, dus een pin-bump heeft hier geen tweede plek om te vergeten — en de
+# tarball is de officiële stable-release, sha256-geverifieerd tegen het
+# release-manifest. Een kant-en-klaar Flutter-image (cirruslabs) is bewust
+# vermeden: dat bleek kanaal "[user-branch]" uit onbekende bron te bevatten,
+# en check-toolchain (onderdeel van make check) keurt precies dat af.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  gate:
+    runs-on: docker
+    container:
+      image: ubuntu:24.04
+    steps:
+      # Vóór de checkout: actions/checkout is een node-actie, en dit kale
+      # image brengt geen node mee.
+      - name: Gereedschap installeren
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            nodejs make git curl ca-certificates xz-utils jq unzip
+
+      - uses: actions/checkout@v4
+
+      - name: Officiële Flutter volgens de pin
+        run: |
+          set -eu
+          VERSION="$(sed -n 's/^flutter \(.*\)-stable$/\1/p' .tool-versions)"
+          test -n "$VERSION"
+          ARCHIVE="flutter_linux_${VERSION}-stable.tar.xz"
+          BASE="https://storage.googleapis.com/flutter_infra_release/releases"
+          curl -fsSLo /tmp/releases.json "$BASE/releases_linux.json"
+          SHA=$(jq -r --arg v "$VERSION" \
+            '.releases[] | select(.channel=="stable" and .version==$v) | .sha256' \
+            /tmp/releases.json)
+          test -n "$SHA"
+          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/stable/linux/$ARCHIVE"
+          echo "$SHA  /tmp/$ARCHIVE" | sha256sum -c -
+          tar -xJf "/tmp/$ARCHIVE" -C /opt
+          rm "/tmp/$ARCHIVE"
+          git config --global --add safe.directory /opt/flutter
+          echo "/opt/flutter/bin" >> "$GITHUB_PATH"
+
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get
+
+      - name: De poort
+        run: make check
