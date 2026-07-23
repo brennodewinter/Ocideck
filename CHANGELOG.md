@@ -135,7 +135,9 @@ read a book to find out.
   Linux-build: het bleek Flutter 3.44.0 van kanaal `[user-branch]` uit
   onbekende bron te bevatten — exact het patroon waarvoor `check-toolchain`
   bestaat. Lokaal `make check` blijft de snelste route; CI is voortaan het
-  vangnet dat ook andermans bijdragen keurt.
+  vangnet dat ook andermans bijdragen keurt. De dekkingsvloer per bestand ving
+  op Linux meteen een macOS-helft — het Finder-"Open met"-kanaal — waarvan de
+  kanaallogica nu los van de platformpoort staat en op elk platform onder test.
 
 ### Fixed
 - **De native git-merge brak op git 2.43 — elke Ubuntu 24.04 LTS dus.** De

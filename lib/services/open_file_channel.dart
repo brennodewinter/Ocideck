@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 import 'package:flutter/services.dart';
 import '../utils/log.dart';
 
@@ -21,6 +21,15 @@ class OpenFileChannel {
   Future<void> start() async {
     // kIsWeb eerst: Platform.isMacOS is op web een dart:io-stub die gooit.
     if (kIsWeb || !Platform.isMacOS) return;
+    await activate();
+  }
+
+  /// De kanaalkant zonder de platformpoort: handler registreren en de
+  /// koude-startbestanden leegtrekken. Apart van [start], zodat de logica op
+  /// elk platform onder test staat — de poort hierboven bepaalt alleen wáár
+  /// hij echt aan gaat.
+  @visibleForTesting
+  Future<void> activate() async {
     _channel.setMethodCallHandler(_handle);
     try {
       final launch = await _channel.invokeMethod<List<dynamic>>(
