@@ -1401,6 +1401,49 @@ The editor exposes the cover case as an **"Afbeelding slidevullend"**
 (slide-filling) checkbox that sets `imageSize` to `0` (ticked) or `100`
 (unticked); the zoom control is hidden while it is ticked.
 
+### View limit (`ocideck_view_*`) — non-destructive display windows
+
+A data-driven slide (bullets, table, chart, and the table-backed specials) may
+carry an optional **view limit** (#672): show only part of the data without
+discarding any of it. A generator importing thousands of rows can make a
+readable slide while the full dataset stays in the file; opening, saving and
+reopening never drops hidden items. The limit is applied at render and export
+time only — preview, presenter, PDF, PPTX and HTML all show the same
+selection.
+
+Stored as plain, readable per-slide HTML comments; absent comments mean the
+existing behaviour (show everything):
+
+```markdown
+<!-- ocideck_view_limit: 8 -->
+<!-- ocideck_view_mode: top -->
+<!-- ocideck_view_key: 2 -->
+<!-- ocideck_view_remainder: other -->
+<!-- ocideck_view_show_count: true -->
+```
+
+- `limit` — maximum number of visible items; `0` or absent = show everything.
+- `mode` — `first` | `last` (source order) or `top` | `bottom` (by value).
+  Bullets support only `first`/`last`; a line/time-series chart uses `last`
+  rather than value-sorting, so chronology is never silently destroyed.
+- `key` — for tables the column index (or stable column name) to rank on; for
+  charts the series name. Not applicable to bullets.
+- `remainder` — `hide` (keep but do not show) or `other` (aggregate the hidden
+  values into one *Overig* bucket; only where values can honestly be summed —
+  bar/pie/donut-style charts and numeric table columns).
+- `show_count` — whether the slide renders an "N of total" indicator, in the
+  app language. The indicator is ordinary slide content, so it travels into
+  every export the same way the rest of the slide does.
+
+Ties are broken deterministically: value, then original source position, so a
+deck shows the same top-N on every reopen. The **saved** markdown always
+carries the full data plus these comments; only the **export** path writes the
+projected selection, and it strips the `ocideck_view_*` comments while doing
+so — an already-applied projection must not carry a live directive, or
+reopening the exported file would apply the limit a second time, over the
+baked-in caption and *Overig* row. A malformed comment (say, a key without a
+value) is ignored; it never makes the file unreadable.
+
 ---
 
 ## 6. Sidecars and Separate Data

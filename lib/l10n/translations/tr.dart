@@ -2753,6 +2753,29 @@ const _dutchSourceTr = {
 const _dutchSourceAddTr = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'bağlantılı dosyaların tümü eklenemedi (okunamıyor veya projenin dışında)',
+  'punten': 'madde',
+  'regels': 'satır',
+  'categorieën': 'kategori',
+  'In de data': 'Veride',
+  'getoond': 'gösterilen',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Sıralama sütununda sayı yok; en yüksek/en düşük ve birleştirme bu durumda anlamlı çalışmaz.',
+  'Weergave beperken': 'Görünümü sınırla',
+  'Beperk het aantal getoonde items': 'Gösterilen öğe sayısını sınırla',
+  'Maximaal aantal items': 'En fazla öğe sayısı',
+  'Welke items': 'Hangi öğeler',
+  'Laatste': 'Son',
+  'Hoogste': 'En yüksek',
+  'Laagste': 'En düşük',
+  'Sorteerkolom of reeks': 'Sıralama sütunu veya seri',
+  'Niet-getoonde items': 'Gösterilmeyen öğeler',
+  'Verbergen, wel bewaren': 'Gizle, ama sakla',
+  'Samenvoegen tot Overig': 'Diğer altında birleştir',
+  'Toon hoeveel items verborgen zijn': 'Kaç öğenin gizlendiğini göster',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Maddelerin, tablonun veya grafiğin yalnızca bir bölümünü göster. Özgün veriler dosyada saklı kalır.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Tablolar için: sıralanacak sütun dizini veya adı. Grafikler için: serinin adı.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Çevrimiçi depolama yalnızca masaüstü sürümünde kullanılabilir.',
   'Online opslag': 'Çevrimiçi depolama',

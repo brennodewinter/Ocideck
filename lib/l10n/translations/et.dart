@@ -1767,6 +1767,29 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'kõiki seotud faile ei õnnestunud kaasata (loetamatud või väljaspool projekti)',
+  'punten': 'punkti',
+  'regels': 'rida',
+  'categorieën': 'kategooriat',
+  'In de data': 'Andmetes',
+  'getoond': 'kuvatud',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Sortimisveerus pole arve; kõrgeimad/madalaimad ja ühendamine ei toimi siis mõistlikult.',
+  'Weergave beperken': 'Piira kuvamist',
+  'Beperk het aantal getoonde items': 'Piira kuvatavate üksuste arvu',
+  'Maximaal aantal items': 'Üksuste maksimaalne arv',
+  'Welke items': 'Millised üksused',
+  'Laatste': 'Viimased',
+  'Hoogste': 'Kõrgeimad',
+  'Laagste': 'Madalaimad',
+  'Sorteerkolom of reeks': 'Sortimisveerg või sari',
+  'Niet-getoonde items': 'Kuvamata üksused',
+  'Verbergen, wel bewaren': 'Peida, kuid säilita',
+  'Samenvoegen tot Overig': 'Ühenda kategooriasse Muu',
+  'Toon hoeveel items verborgen zijn': 'Näita, mitu üksust on peidetud',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Näita ainult osa täppidest, tabelist või graafikust. Algsed andmed jäävad faili alles.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Tabelite puhul: veeru indeks või nimi sortimiseks. Graafikute puhul: sarja nimi.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Võrgusalvestus on saadaval ainult lauaarvuti versioonis.',
   'Online opslag': 'Võrgusalvestus',

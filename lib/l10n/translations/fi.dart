@@ -1776,6 +1776,30 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'kaikkia linkitettyjä tiedostoja ei voitu sisällyttää (lukukelvottomia tai projektin ulkopuolella)',
+  'punten': 'luettelomerkkiä',
+  'regels': 'riviä',
+  'categorieën': 'kategoriaa',
+  'In de data': 'Datassa',
+  'getoond': 'näytetään',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Lajittelusarake ei sisällä numeroita; suurimmat/pienimmät ja yhdistäminen eivät silloin toimi mielekkäästi.',
+  'Weergave beperken': 'Rajoita näyttöä',
+  'Beperk het aantal getoonde items': 'Rajoita näytettävien kohteiden määrää',
+  'Maximaal aantal items': 'Kohteiden enimmäismäärä',
+  'Welke items': 'Mitkä kohteet',
+  'Laatste': 'Viimeiset',
+  'Hoogste': 'Suurimmat',
+  'Laagste': 'Pienimmät',
+  'Sorteerkolom of reeks': 'Lajittelusarake tai sarja',
+  'Niet-getoonde items': 'Kohteet, joita ei näytetä',
+  'Verbergen, wel bewaren': 'Piilota, mutta säilytä',
+  'Samenvoegen tot Overig': 'Yhdistä luokkaan Muu',
+  'Toon hoeveel items verborgen zijn':
+      'Näytä, kuinka monta kohdetta on piilotettu',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Näytä vain osa luettelomerkeistä, taulukosta tai kaaviosta. Alkuperäiset tiedot säilyvät tiedostossa.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Taulukoille: lajittelusarakkeen indeksi tai nimi. Kaavioille: sarjan nimi.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Verkkotallennus on saatavilla vain työpöytäversiossa.',
   'Online opslag': 'Verkkotallennus',

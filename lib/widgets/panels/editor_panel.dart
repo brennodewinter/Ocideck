@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../platform/platform_features.dart';
 import '../../models/deck.dart';
+import '../../models/display_window_spec.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/findings_summary_spec.dart';
 import '../../models/settings.dart';
@@ -14,6 +15,8 @@ import '../../services/slide_layout_metrics.dart';
 import '../../services/split_run.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
+import '../../models/chart.dart';
+import '../../services/display_window_service.dart';
 import '../../state/info_safety_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
@@ -29,6 +32,7 @@ import '../markdown_notes_editor.dart';
 
 part 'editor_panel_controls.dart';
 part 'editor_panel_slide_settings.dart';
+part 'editor_panel_view_limit.dart';
 part 'editor_panel_notes.dart';
 
 class EditorPanel extends ConsumerWidget {

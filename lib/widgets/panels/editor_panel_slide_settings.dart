@@ -347,6 +347,14 @@ List<Widget> slideSettingBadges(AppLocalizations l10n, Slide slide) {
       ),
     );
   }
+  if (slide.viewLimit?.isActive == true) {
+    badges.add(
+      _SettingBadge(
+        icon: Icons.filter_list_outlined,
+        label: l10n.d('Weergave beperken'),
+      ),
+    );
+  }
   return badges;
 }
 
@@ -688,6 +696,8 @@ class _SlideSettingsBody extends StatelessWidget {
           ),
         ],
       ),
+      if (_supportsViewLimit(slide.type))
+        _ViewLimitSetting(slide: slide, onUpdate: onUpdate),
     ];
   }
 }

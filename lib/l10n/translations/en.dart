@@ -916,6 +916,29 @@ const _dutchSourceEn = {
 const _dutchSourceAddEn = {
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'not every linked file could be included (unreadable or outside the project)',
+  'punten': 'bullets',
+  'regels': 'rows',
+  'categorieën': 'categories',
+  'In de data': 'In the data',
+  'getoond': 'shown',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'The sort column contains no numbers; highest/lowest and merging are then not meaningful.',
+  'Weergave beperken': 'Limit display',
+  'Beperk het aantal getoonde items': 'Limit the number of items shown',
+  'Maximaal aantal items': 'Maximum number of items',
+  'Welke items': 'Which items',
+  'Laatste': 'Last',
+  'Hoogste': 'Highest',
+  'Laagste': 'Lowest',
+  'Sorteerkolom of reeks': 'Sort column or series',
+  'Niet-getoonde items': 'Items not shown',
+  'Verbergen, wel bewaren': 'Hide, but keep',
+  'Samenvoegen tot Overig': 'Merge into Other',
+  'Toon hoeveel items verborgen zijn': 'Show how many items are hidden',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Show only part of the bullets, table, or chart. The original data stays stored in the file.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'For tables: the column index or name to sort by. For charts: the name of the series.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Online storage is only available in the desktop version.',
   'Online opslag': 'Online storage',

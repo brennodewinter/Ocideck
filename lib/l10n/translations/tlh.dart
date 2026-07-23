@@ -1751,6 +1751,29 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'Hoch rarpu\' De\' qenglaHbe\'lu\' (laDlu\'laHbe\' pagh project Hur)',
+  'punten': 'ghItlhmey',
+  'regels': 'retmey',
+  'categorieën': 'Seghmey',
+  'In de data': 'De\'Daq',
+  'getoond': 'cha\'lu\'',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'mI\'mey ngaSbe\' buv tut; vaj lI\'be\' jenqu\'/\'eSqu\' je tay\'moHghach.',
+  'Weergave beperken': 'cha\'ghach yIvuS',
+  'Beperk het aantal getoonde items': 'Doch cha\'lu\'bogh mI\' yIvuS',
+  'Maximaal aantal items': 'Doch mI\' \'aqroS',
+  'Welke items': 'Dochmey nuq',
+  'Laatste': 'Qav',
+  'Hoogste': 'jenqu\'',
+  'Laagste': '\'eSqu\'',
+  'Sorteerkolom of reeks': 'buv tut qoj mIr',
+  'Niet-getoonde items': 'Doch cha\'be\'lu\'bogh',
+  'Verbergen, wel bewaren': 'yISo\', \'ach yIpol',
+  'Samenvoegen tot Overig': 'latlhDaq tay\'moH',
+  'Toon hoeveel items verborgen zijn': 'Doch So\'lu\'bogh mI\' yIcha\'',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'ghItlh, romuS, De\'wI\'ghom je \'ay\' neH yIcha\'. De\' qonlu\'pu\'bogh poltaH ghItlh.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'romuSvaD: tut mI\' qoj pong buvmeH. De\'wI\'ghomvaD: mIr pong.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'desktop mIlloghDaq neH online waHtaHghach lo\'laH.',
   'Online opslag': 'online waHtaHghach',

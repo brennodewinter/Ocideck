@@ -1788,6 +1788,29 @@ const _dutchSourcePl = {
 const _dutchSourceAddPl = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'nie wszystkie powiązane pliki udało się dołączyć (nieczytelne lub poza projektem)',
+  'punten': 'punktorów',
+  'regels': 'wierszy',
+  'categorieën': 'kategorii',
+  'In de data': 'W danych',
+  'getoond': 'pokazane',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Kolumna sortowania nie zawiera liczb; najwyższe/najniższe i scalanie nie mają wtedy sensu.',
+  'Weergave beperken': 'Ogranicz widok',
+  'Beperk het aantal getoonde items': 'Ogranicz liczbę wyświetlanych elementów',
+  'Maximaal aantal items': 'Maksymalna liczba elementów',
+  'Welke items': 'Które elementy',
+  'Laatste': 'Ostatnie',
+  'Hoogste': 'Najwyższe',
+  'Laagste': 'Najniższe',
+  'Sorteerkolom of reeks': 'Kolumna sortowania lub seria',
+  'Niet-getoonde items': 'Elementy niewyświetlane',
+  'Verbergen, wel bewaren': 'Ukryj, ale zachowaj',
+  'Samenvoegen tot Overig': 'Scal w Inne',
+  'Toon hoeveel items verborgen zijn': 'Pokaż, ile elementów jest ukrytych',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Pokaż tylko część punktorów, tabeli lub wykresu. Oryginalne dane pozostają zapisane w pliku.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Dla tabel: indeks lub nazwa kolumny do sortowania. Dla wykresów: nazwa serii.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Przechowywanie online jest dostępne tylko w wersji na komputer.',
   'Online opslag': 'Przechowywanie online',

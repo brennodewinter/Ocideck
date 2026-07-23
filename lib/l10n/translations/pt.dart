@@ -1805,6 +1805,29 @@ const _dutchSourcePt = {
 const _dutchSourceAddPt = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'nem todos os ficheiros ligados puderam ser incluídos (ilegíveis ou fora do projeto)',
+  'punten': 'marcadores',
+  'regels': 'linhas',
+  'categorieën': 'categorias',
+  'In de data': 'Nos dados',
+  'getoond': 'exibidos',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'A coluna de ordenação não contém números; mais altos/mais baixos e o agrupamento deixam então de fazer sentido.',
+  'Weergave beperken': 'Limitar exibição',
+  'Beperk het aantal getoonde items': 'Limitar o número de itens exibidos',
+  'Maximaal aantal items': 'Número máximo de itens',
+  'Welke items': 'Quais itens',
+  'Laatste': 'Últimos',
+  'Hoogste': 'Mais altos',
+  'Laagste': 'Mais baixos',
+  'Sorteerkolom of reeks': 'Coluna de ordenação ou série',
+  'Niet-getoonde items': 'Itens não exibidos',
+  'Verbergen, wel bewaren': 'Ocultar, mas manter',
+  'Samenvoegen tot Overig': 'Agrupar em Outro',
+  'Toon hoeveel items verborgen zijn': 'Mostrar quantos itens estão ocultos',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Mostrar apenas parte dos marcadores, da tabela ou do gráfico. Os dados originais permanecem guardados no ficheiro.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Para tabelas: índice ou nome da coluna para ordenar. Para gráficos: nome da série.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'O armazenamento online só está disponível na versão para computador.',
   'Online opslag': 'Armazenamento online',

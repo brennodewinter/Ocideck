@@ -1798,6 +1798,29 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'mhux kull fajl marbut seta\' jiġi inkluż (ma jinqarax jew barra mill-proġett)',
+  'punten': 'punti',
+  'regels': 'ringieli',
+  'categorieën': 'kategoriji',
+  'In de data': 'Fid-data',
+  'getoond': 'murija',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Il-kolonna tal-issortjar ma fihiex numri; l-ogħla/l-inqas u l-għaqda ma jaħdmux tajjeb f\'dak il-każ.',
+  'Weergave beperken': 'Illimita l-wiri',
+  'Beperk het aantal getoonde items': 'Illimita n-numru ta\' elementi murija',
+  'Maximaal aantal items': 'Numru massimu ta\' elementi',
+  'Welke items': 'Liema elementi',
+  'Laatste': 'L-aħħar',
+  'Hoogste': 'L-ogħla',
+  'Laagste': 'L-inqas',
+  'Sorteerkolom of reeks': 'Kolonna tal-issortjar jew serje',
+  'Niet-getoonde items': 'Elementi mhux murija',
+  'Verbergen, wel bewaren': 'Aħbi, imma żomm',
+  'Samenvoegen tot Overig': 'Għaqqad f\'Ieħor',
+  'Toon hoeveel items verborgen zijn': 'Uri kemm-il element huwa moħbi',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Uri biss parti mill-bullets, mit-tabella jew mill-grafika. Id-data oriġinali tibqa\' maħżuna fil-fajl.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Għat-tabelli: l-indiċi jew l-isem tal-kolonna għall-issortjar. Għall-grafiki: l-isem tas-serje.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Il-ħażna online hija disponibbli biss fil-verżjoni desktop.',
   'Online opslag': 'Ħażna online',

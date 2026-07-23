@@ -1783,6 +1783,29 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'ne visus susietus failus pavyko įtraukti (neįskaitomi arba už projekto ribų)',
+  'punten': 'ženklų',
+  'regels': 'eilučių',
+  'categorieën': 'kategorijų',
+  'In de data': 'Duomenyse',
+  'getoond': 'rodoma',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Rikiavimo stulpelyje nėra skaičių; didžiausi/mažiausi ir sujungimas tada neturi prasmės.',
+  'Weergave beperken': 'Riboti rodymą',
+  'Beperk het aantal getoonde items': 'Riboti rodomų elementų skaičių',
+  'Maximaal aantal items': 'Didžiausias elementų skaičius',
+  'Welke items': 'Kurie elementai',
+  'Laatste': 'Paskutiniai',
+  'Hoogste': 'Didžiausi',
+  'Laagste': 'Mažiausi',
+  'Sorteerkolom of reeks': 'Rikiavimo stulpelis arba serija',
+  'Niet-getoonde items': 'Nerodomi elementai',
+  'Verbergen, wel bewaren': 'Slėpti, bet išsaugoti',
+  'Samenvoegen tot Overig': 'Sujungti į Kita',
+  'Toon hoeveel items verborgen zijn': 'Rodyti, kiek elementų paslėpta',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Rodyti tik dalį ženklų, lentelės ar diagramos. Pradiniai duomenys lieka išsaugoti faile.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Lentelėms: stulpelio indeksas arba pavadinimas rikiavimui. Diagramoms: serijos pavadinimas.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Internetinė saugykla pasiekiama tik darbalaukio versijoje.',
   'Online opslag': 'Internetinė saugykla',

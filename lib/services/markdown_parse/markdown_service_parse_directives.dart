@@ -30,6 +30,7 @@ typedef _BlockDirectives = ({
   String columnTitle1,
   String columnTitle2,
   int styleImageWidth,
+  DisplayWindowSpec? viewLimit,
 });
 
 /// Neemt [content] op in het notitieblok en haalt het uit de body.
@@ -103,6 +104,7 @@ extension _MarkdownParseDirectives on MarkdownService {
     // bulletsImage slides store their panel width in `<!-- _style:
     // --image-width: N%; -->`; capture it before the comment is stripped.
     int styleImageWidth = 0;
+    final viewComments = <String, String>{};
     final source = remaining;
     remaining = source.replaceAllMapped(_reHtmlComment, (m) {
       final raw = m.group(1)!;
@@ -170,6 +172,8 @@ extension _MarkdownParseDirectives on MarkdownService {
       } else if (content.startsWith('ocideck_bullet_marker:')) {
         bulletMarkerOverride =
             _bulletMarkerFrom(content.substring(22)) ?? bulletMarkerOverride;
+      } else if (content.startsWith('ocideck_view_')) {
+        _collectViewComment(viewComments, content);
       } else if (!content.startsWith('_')) {
         // Geen richtlijn die wij kennen: notitie of opmerking? Zie [_isTailNote].
         if (_isTailNote(source.substring(m.end))) {
@@ -205,6 +209,9 @@ extension _MarkdownParseDirectives on MarkdownService {
       columnTitle1: columnTitle1,
       columnTitle2: columnTitle2,
       styleImageWidth: styleImageWidth,
+      viewLimit: viewComments.isEmpty
+          ? null
+          : DisplayWindowSpec.fromComments(viewComments),
     );
   }
 
@@ -263,5 +270,20 @@ extension _MarkdownParseDirectives on MarkdownService {
     final name = raw.trim();
     final match = BulletMarker.values.where((m) => m.name == name);
     return match.isEmpty ? null : match.first;
+  }
+}
+
+/// Eén `ocideck_view_*`-commentaar in de verzamelmap, of niets.
+///
+/// Zonder dubbele punt is er geen waarde: overslaan, niet struikelen. Een
+/// optioneel, negeerbaar aanwijzinkje mag nooit het hele bestand gijzelen —
+/// een RangeError hier maakte parseDeck null en daarmee het deck onopenbaar
+/// (bewaker-bevinding op #672).
+void _collectViewComment(Map<String, String> viewComments, String content) {
+  final colon = content.indexOf(':');
+  if (colon > 0) {
+    viewComments[content.substring(0, colon).trim()] = content
+        .substring(colon + 1)
+        .trim();
   }
 }

@@ -1776,6 +1776,30 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'tidak semua berkas tertaut dapat disertakan (tidak terbaca atau di luar proyek)',
+  'punten': 'poin',
+  'regels': 'baris',
+  'categorieën': 'kategori',
+  'In de data': 'Dalam data',
+  'getoond': 'ditampilkan',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Kolom pengurutan tidak berisi angka; tertinggi/terendah dan penggabungan menjadi tidak berguna.',
+  'Weergave beperken': 'Batasi tampilan',
+  'Beperk het aantal getoonde items': 'Batasi jumlah item yang ditampilkan',
+  'Maximaal aantal items': 'Jumlah item maksimum',
+  'Welke items': 'Item yang mana',
+  'Laatste': 'Terakhir',
+  'Hoogste': 'Tertinggi',
+  'Laagste': 'Terendah',
+  'Sorteerkolom of reeks': 'Kolom pengurutan atau seri',
+  'Niet-getoonde items': 'Item yang tidak ditampilkan',
+  'Verbergen, wel bewaren': 'Sembunyikan, tetap simpan',
+  'Samenvoegen tot Overig': 'Gabungkan ke Lainnya',
+  'Toon hoeveel items verborgen zijn':
+      'Tampilkan berapa banyak item yang disembunyikan',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Tampilkan hanya sebagian bullet, tabel, atau bagan. Data asli tetap tersimpan dalam berkas.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Untuk tabel: indeks atau nama kolom untuk pengurutan. Untuk bagan: nama seri.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Penyimpanan online hanya tersedia di versi desktop.',
   'Online opslag': 'Penyimpanan online',

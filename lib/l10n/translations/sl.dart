@@ -1778,6 +1778,29 @@ const _dutchSourceSl = {
 const _dutchSourceAddSl = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'vseh povezanih datotek ni bilo mogoče vključiti (neberljive ali zunaj projekta)',
+  'punten': 'alinej',
+  'regels': 'vrstic',
+  'categorieën': 'kategorij',
+  'In de data': 'V podatkih',
+  'getoond': 'prikazano',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Stolpec razvrščanja ne vsebuje števil; najvišji/najnižji in združevanje takrat nimajo smisla.',
+  'Weergave beperken': 'Omeji prikaz',
+  'Beperk het aantal getoonde items': 'Omeji število prikazanih elementov',
+  'Maximaal aantal items': 'Največje število elementov',
+  'Welke items': 'Kateri elementi',
+  'Laatste': 'Zadnjih',
+  'Hoogste': 'Najvišjih',
+  'Laagste': 'Najnižjih',
+  'Sorteerkolom of reeks': 'Stolpec razvrščanja ali niz',
+  'Niet-getoonde items': 'Neprikazani elementi',
+  'Verbergen, wel bewaren': 'Skrij, a ohrani',
+  'Samenvoegen tot Overig': 'Združi v Drugo',
+  'Toon hoeveel items verborgen zijn': 'Pokaži, koliko elementov je skritih',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Prikaži samo del alinej, tabele ali grafa. Izvirni podatki ostanejo shranjeni v datoteki.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Za tabele: indeks ali ime stolpca za razvrščanje. Za grafe: ime niza.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Spletna shramba je na voljo samo v namizni različici.',
   'Online opslag': 'Spletna shramba',

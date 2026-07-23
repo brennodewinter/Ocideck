@@ -4,6 +4,7 @@ import 'checklist_spec.dart';
 import 'cockpit.dart';
 import 'deck.dart';
 import 'discoveries_spec.dart';
+import 'display_window_spec.dart';
 import 'privacy_disposition.dart';
 import 'quality_disposition.dart';
 import 'finding_spec.dart';
@@ -492,6 +493,11 @@ class Slide {
   /// months later would go on claiming everything is on schedule.
   final bool tableMarkOverdue;
 
+  /// Optional, non-destructive view limit for data-driven slides (bullets,
+  /// tables, charts). The underlying data stays intact; this only drives the
+  /// visible projection in renderers and exports.
+  final DisplayWindowSpec? viewLimit;
+
   /// Timeline slides only: how the events are arranged and animated. The events
   /// themselves are stored in [bullets] as `marker :: title :: description`
   /// strings; the layout/reveal options round-trip as `_class` tokens and the
@@ -604,6 +610,7 @@ class Slide {
     this.tableRows = const [],
     this.tableEditable = false,
     this.tableMarkOverdue = false,
+    this.viewLimit,
     this.isDetail = false,
     this.timelineLayout = TimelineLayout.auto,
     this.timelineReveal = TimelineReveal.onEnter,
@@ -719,6 +726,7 @@ class Slide {
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
       tableEditable: src.tableEditable,
       tableMarkOverdue: src.tableMarkOverdue,
+      viewLimit: src.viewLimit,
       isDetail: src.isDetail,
       timelineLayout: src.timelineLayout,
       timelineReveal: src.timelineReveal,
@@ -783,6 +791,8 @@ class Slide {
     List<List<String>>? tableRows,
     bool? tableEditable,
     bool? tableMarkOverdue,
+    DisplayWindowSpec? viewLimit,
+    bool clearViewLimit = false,
     bool? isDetail,
     TimelineLayout? timelineLayout,
     TimelineReveal? timelineReveal,
@@ -851,6 +861,7 @@ class Slide {
       tableRows: tableRows ?? this.tableRows,
       tableEditable: tableEditable ?? this.tableEditable,
       tableMarkOverdue: tableMarkOverdue ?? this.tableMarkOverdue,
+      viewLimit: clearViewLimit ? null : (viewLimit ?? this.viewLimit),
       isDetail: isDetail ?? this.isDetail,
       timelineLayout: timelineLayout ?? this.timelineLayout,
       timelineReveal: timelineReveal ?? this.timelineReveal,

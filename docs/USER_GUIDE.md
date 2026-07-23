@@ -1746,6 +1746,27 @@ The same four values exist deck-wide (`privacy:` in the front matter). A slide
 *accept* (the whole briefing is known) with one slide set to *leave out* (this one
 detail is for nobody) has to just work, and the author of that slide knows best.
 
+### Showing part of the data without losing any of it (view limits)
+
+A bullets, table or chart slide built from a large dataset — an import of
+thousands of rows, a year of measurements — cannot readably show everything,
+and until #672 the only way to a usable slide was deleting data. **Weergave
+beperken** in the slide settings is the non-destructive answer: pick a maximum
+number of visible items, choose *which* items (first or last in source order;
+highest or lowest by a chosen table column or chart series), and decide what
+happens to the rest — hidden but kept, or summed into one *Overig* bucket where
+that is honest (bar/pie-style charts, numeric columns). An optional "N of
+total" line tells the audience the slide is a selection; the same text feeds
+the accessibility label and every export.
+
+The limit is a *projection*: preview, presenter, PDF, PPTX and HTML all show
+the same selection, while the file keeps the full data — save, reopen, and
+everything is still there to edit. The editor says how much there is and how
+much is shown, warns when a sort column holds no numbers, and a time-series
+chart set to "highest" quietly ranks by *last* instead, because value-sorting
+a timeline would destroy its chronology. Equal values keep their source order,
+so a deck shows the same top-N on every reopen.
+
 ### Seeing it before you send it
 
 A slide set to *leave out* now says so above the preview, and the notice states

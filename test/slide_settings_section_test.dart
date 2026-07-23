@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/display_window_spec.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
@@ -244,6 +245,90 @@ void main() {
       await pump(tester);
       expect(find.text('TLP:AMBER'), findsNothing);
       expect(find.text(_l10n.d('Weggelaten')), findsNothing);
+    });
+  });
+
+  group('weergave beperken (#672)', () {
+    Slide bulletsSlide(Slide _) => Slide.create(
+      SlideType.bullets,
+    ).copyWith(title: 'Lijst', bullets: const ['a', 'b', 'c', 'd']);
+
+    Slide tableSlide(Slide _) => Slide.create(SlideType.table).copyWith(
+      title: 'Tabel',
+      tableRows: const [
+        ['Naam', 'Waarde'],
+        ['x', 'tekst'],
+        ['y', 'nog meer tekst'],
+      ],
+    );
+
+    Future<void> zetLimietAan(WidgetTester tester) async {
+      await expand(tester);
+      final schakel = find.text(_l10n.d('Beperk het aantal getoonde items'));
+      await tester.ensureVisible(schakel);
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.descendant(
+          of: find.ancestor(of: schakel, matching: find.byType(Row)),
+          matching: find.byType(Switch),
+        ),
+      );
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('aanzetten zet een limiet op de slide, met de tellerregel', (
+      tester,
+    ) async {
+      final container = await pump(tester, slide: bulletsSlide);
+      await zetLimietAan(tester);
+
+      final slide = container.read(deckProvider).deck!.slides.single;
+      expect(slide.viewLimit, isNotNull);
+      expect(slide.viewLimit!.isActive, isTrue);
+      // De tellerregel: hoeveel er in de data zit en hoeveel de dia toont —
+      // zodat de limiet nooit als verlies leest.
+      expect(find.textContaining(_l10n.d('In de data')), findsOneWidget);
+    });
+
+    testWidgets('een niet-numerieke sorteerkolom krijgt een waarschuwing', (
+      tester,
+    ) async {
+      final container = await pump(tester, slide: tableSlide);
+      await zetLimietAan(tester);
+
+      // Hoogste op kolom 1, en die kolom is tekst.
+      final notifier = container.read(deckProvider.notifier);
+      final slide = container.read(deckProvider).deck!.slides.single;
+      notifier.updateSlide(
+        0,
+        slide.copyWith(
+          viewLimit: const DisplayWindowSpec(
+            limit: 1,
+            mode: DisplayWindowMode.top,
+            key: '1',
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find.textContaining(
+          _l10n.d(
+            'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.',
+          ),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('een titeldia heeft de sectie niet', (tester) async {
+      await pump(tester);
+      await expand(tester);
+      expect(
+        find.text(_l10n.d('Beperk het aantal getoonde items')),
+        findsNothing,
+        reason: 'een dia zonder databron heeft niets te beperken',
+      );
     });
   });
 }

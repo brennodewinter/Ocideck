@@ -735,6 +735,31 @@ const _dutchSourceDe = {
 const _dutchSourceAddDe = {
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'nicht jede verknüpfte Datei konnte übernommen werden (unlesbar oder außerhalb des Projekts)',
+  'punten': 'Stichpunkten',
+  'regels': 'Zeilen',
+  'categorieën': 'Kategorien',
+  'In de data': 'In den Daten',
+  'getoond': 'angezeigt',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Die Sortierspalte enthält keine Zahlen; Höchste/Niedrigste und Zusammenfassen sind dann nicht sinnvoll.',
+  'Weergave beperken': 'Anzeige begrenzen',
+  'Beperk het aantal getoonde items':
+      'Anzahl der angezeigten Elemente begrenzen',
+  'Maximaal aantal items': 'Maximale Anzahl an Elementen',
+  'Welke items': 'Welche Elemente',
+  'Laatste': 'Letzte',
+  'Hoogste': 'Höchste',
+  'Laagste': 'Niedrigste',
+  'Sorteerkolom of reeks': 'Sortierspalte oder Reihe',
+  'Niet-getoonde items': 'Nicht angezeigte Elemente',
+  'Verbergen, wel bewaren': 'Ausblenden, aber behalten',
+  'Samenvoegen tot Overig': 'Zu Sonstige zusammenfassen',
+  'Toon hoeveel items verborgen zijn':
+      'Anzeigen, wie viele Elemente ausgeblendet sind',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Nur einen Teil der Stichpunkte, der Tabelle oder des Diagramms anzeigen. Die ursprünglichen Daten bleiben in der Datei erhalten.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Für Tabellen: Spaltenindex oder -name zum Sortieren. Für Diagramme: Name der Reihe.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Online-Speicher ist nur in der Desktop-Version verfügbar.',
   'Online opslag': 'Online-Speicher',

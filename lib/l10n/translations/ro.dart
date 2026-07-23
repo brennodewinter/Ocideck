@@ -1793,6 +1793,29 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'nu toate fișierele legate au putut fi incluse (ilizibile sau în afara proiectului)',
+  'punten': 'puncte',
+  'regels': 'rânduri',
+  'categorieën': 'categorii',
+  'In de data': 'În date',
+  'getoond': 'afișate',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Coloana de sortare nu conține numere; cele mai mari/cele mai mici și combinarea nu au atunci sens.',
+  'Weergave beperken': 'Limitează afișarea',
+  'Beperk het aantal getoonde items': 'Limitează numărul de elemente afișate',
+  'Maximaal aantal items': 'Număr maxim de elemente',
+  'Welke items': 'Care elemente',
+  'Laatste': 'Ultimele',
+  'Hoogste': 'Cele mai mari',
+  'Laagste': 'Cele mai mici',
+  'Sorteerkolom of reeks': 'Coloană de sortare sau serie',
+  'Niet-getoonde items': 'Elemente neafișate',
+  'Verbergen, wel bewaren': 'Ascunde, dar păstrează',
+  'Samenvoegen tot Overig': 'Combină în Altul',
+  'Toon hoeveel items verborgen zijn': 'Arată câte elemente sunt ascunse',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Afișează doar o parte din bullets, tabel sau grafic. Datele originale rămân păstrate în fișier.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Pentru tabele: indexul sau numele coloanei de sortare. Pentru grafice: numele seriei.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Stocarea online este disponibilă doar în versiunea desktop.',
   'Online opslag': 'Stocare online',
