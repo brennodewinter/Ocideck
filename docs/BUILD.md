@@ -298,10 +298,12 @@ does not currently run — see the [CI](#ci) note). Artifacts land under
 
 ## CI
 
-> **The CI workflows are defined but do not currently run.** The remote is a
-> Forgejo instance with no runner configured, so nothing fires on push or tag.
-> `make check` (and `make check-full`), run by the committer, is the enforced
-> gate; release bundles must be built manually on each target OS. See
+> **Since 2026-07-23 the forge has an Actions runner, and one build runs in
+> CI:** `.forgejo/workflows/linux-build.yml` produces the Linux desktop bundle
+> as a run artifact on every push to `main`. The gate and the other release
+> bundles still do not run in CI (#741): `make check` (and `make check-full`),
+> run by the committer, is the enforced gate, and macOS/Windows/web bundles must
+> be built manually on their target OS. See
 > [CHECKS.md](CHECKS.md#continuous-integration).
 
 `.github/workflows/ci.yml` *declares* the quality gate on Ubuntu for every push

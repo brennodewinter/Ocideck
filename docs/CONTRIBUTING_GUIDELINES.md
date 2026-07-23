@@ -44,7 +44,7 @@ When reporting bugs or requesting features:
 
 Our codebase follows strict conventions:
 - Dart formatting: `dart format` (enforced by `make format-check`, which you run
-  locally — the CI workflows are defined but no runner executes them)
+  locally — the CI runner only builds the Linux bundle; the gate is not in CI, #741)
 - No raw `print()` statements, use logging instead  
 - Strict type checking with `strict-casts`, `strict-raw-types`, `strict-inference`
 - Layering rules: models don't import UI layers

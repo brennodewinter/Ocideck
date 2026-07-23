@@ -108,6 +108,20 @@ read a book to find out.
   icoonbron is, zodat de volgende opruimronde hem niet meeneemt.
 
 ### Added
+- **De forge bouwt nu zelf de Linux-versie.** De server achter
+  pawprint.vigilis.online draait Linux, dus de vraag lag voor de hand — en sinds
+  vandaag heeft die server een geregistreerde Forgejo-Actions-runner
+  (docker-in-docker, jobs raken de host niet). `.forgejo/workflows/linux-build.yml`
+  bouwt bij elke push naar `main` de Linux-desktopbundel en bewaart die als
+  artifact bij de run. Het is een bouw, geen poort: `make check` blijft de
+  handhaving, en het porten van de poort naar de runner is #741. De docs die
+  tot vandaag terecht "no CI runner" zeiden (README, CHECKS, BUILD, SBOM,
+  SECURITY_DESIGN, CONTRIBUTING_GUIDELINES) zijn op de nieuwe werkelijkheid
+  gezet; de workflows onder `.github/` blijven referentiedefinities voor een
+  GitHub-spiegel, want Forgejo leest de eerste workflow-map die bestaat en
+  `.forgejo/` verdringt ze.
+
+### Added
 - **Het Vigilis-logo in "Over OciDeck", onder de uitgever.** Vigilis maakt het
   werk van Stichting LibreKAT mogelijk; het scherm noemde de stichting wel,
   maar niet wie dat draagt. Onder de uitgeverskaart staat nu een eigen blokje
