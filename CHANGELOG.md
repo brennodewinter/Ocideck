@@ -121,6 +121,12 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Added
+- **De README-galerij verrijkt: risicomatrix en cockpit-dashboard erbij, en
+  vollere beelden.** De demopresentatie achter de schermafdrukken was te kaal —
+  een grafiek zonder titel, veel leeg wit. De grafiek draagt nu zijn titel, de
+  slidestrook toont een voller deck, en twee beelden zijn toegevoegd die de
+  featurelijst al beloofde maar niemand zag: een heatmap als kans-impactmatrix
+  en een cockpit-slide met vier meters. Dezelfde serie staat op librekat.nl.
 - **Zes nieuwe schermafdrukken in de README.** De README toonde de
   pentestkant (editor met bevinding, privacypaneel, exportdialoog,
   presentatorweergave) maar liet de featurelijst verder onbewezen. Zes verse

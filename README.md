@@ -81,6 +81,10 @@ A few of those, seen rather than described:
 |---|---|
 | ![The chart editor: a grid of labels and numbers per series, with chart type, variants and CSV import above it — the slide draws itself from these values.](docs/images/chart-editor.png) | ![A bar chart slide with three series per quarter, drawn in the deck's style profile with its logo.](docs/images/chart-slide.png) |
 
+| A heatmap as a risk matrix | A cockpit dashboard |
+|---|---|
+| ![A heatmap chart used as a probability-times-impact risk matrix: five classes each way, cells coloured from pale yellow to deep red with a colour scale below.](docs/images/risk-matrix.png) | ![A cockpit slide with four meters: a speedometer, a thermometer, a voltmeter and a climb/descent indicator, each with green and red zones.](docs/images/cockpit-dashboard.png) |
+
 | A timeline from a plain Markdown list | A question slide, answered live |
 |---|---|
 | ![An animated timeline slide with four events from report to evaluation, each a labelled card on one line.](docs/images/timeline-slide.png) | ![A quiz slide with four answer options; the correct one is highlighted green after answering.](docs/images/quiz-slide.png) |
