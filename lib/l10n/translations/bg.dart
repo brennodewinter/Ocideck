@@ -1796,6 +1796,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Онлайн съхранението е налично само в настолната версия.',
+  'Online opslag': 'Онлайн съхранение',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Отваряй презентации от и записвай в WebDAV, S3 и git хранилища, с контрол на версиите и съвместна работа чрез forge. Част от тези пътища досега е изпробвана предимно срещу тестови среди; избери това съзнателно. Без модула всичко локално работи нормално: папки, файлове и пакети.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Вече има настроени онлайн връзки; те продължават да работят, както и чакащата работа в опашката. Изключено означава само: без добавяне на нови онлайн връзки.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Модулът AI помощ е изключен, затова тук нищо не се случва. Включете го в Разширения. Това, което сте настроили по-долу, се запазва.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

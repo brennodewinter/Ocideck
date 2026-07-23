@@ -32,6 +32,14 @@
 // A third module is where that stops paying: at three flags the search index
 // starts to lie by omission, and *that* is the moment to build the registry.
 // The note above stands; it just does not fire on this one.
+//
+// **The third module arrived, and the registry was built — deliberately light
+// (#570).** `module_registry.dart` is the one place that enumerates the
+// modules with their enabled/reveal gates; each module keeps its own state and
+// its own preference key (this one's legacy key included), because
+// parameterising three working-but-different patterns would break them to
+// unify them. The doc there carries the shared contract: reveal when the
+// content is already there.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

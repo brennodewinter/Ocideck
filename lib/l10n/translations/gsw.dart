@@ -1777,6 +1777,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Online-Spiicher isch nume i de Desktop-Version verfüegbar.',
+  'Online opslag': 'Online-Spiicher',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Präsentatione us WebDAV, S3 und git-Repositories öffne und dörthi spichere, mit Versionsverwaltig und Zämmearbet über e Forge. En Teil vo dene Wääg isch bis jetz vor allem gäge Testumgäbige usprobiert; wähl das bewusst. Ohni s Modul lauft lokal alles ganz normal: Ordner, Dateie und Paket.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Es sind scho Online-Verbindige iigrichtet; die laufe wyter, gnau wie wartendi Arbet i de Warteschlange. Us heisst nume: kei neui Online-Verbindige me dezuetue.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'S Modul KI-Unterstützig isch us, drum passiert da nüt. Schalt s bi de Erwyterige y. Was du unde ygstellt hesch, blybt erhalte.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

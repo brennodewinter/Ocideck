@@ -1773,6 +1773,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Onlinelagring är endast tillgänglig i skrivbordsversionen.',
+  'Online opslag': 'Onlinelagring',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Öppna presentationer från och spara till WebDAV, S3 och git-repositories, med versionshantering och samarbete via en forge. Hittills har en del av dessa vägar mest prövats mot testmiljöer; välj detta medvetet. Utan modulen fungerar allt lokalt som vanligt: mappar, filer och paket.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Det finns redan onlineanslutningar inställda; de fortsätter att fungera, liksom väntande arbete i kön. Av betyder bara: inga nya onlineanslutningar kan läggas till.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Modulen AI-assistans är avstängd, så här händer ingenting. Slå på den under Tillägg. Det du har ställt in nedan finns kvar.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

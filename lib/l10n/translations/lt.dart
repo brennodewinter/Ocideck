@@ -1781,6 +1781,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Internetinė saugykla pasiekiama tik darbalaukio versijoje.',
+  'Online opslag': 'Internetinė saugykla',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Atidaryk pristatymus iš WebDAV, S3 ir git saugyklų ir įrašyk į jas, su versijų valdymu ir bendradarbiavimu per forge. Dalis šių kelių iki šiol išbandyta daugiausia testinėse aplinkose; rinkis tai sąmoningai. Be modulio viskas lokaliai veikia įprastai: aplankai, failai ir paketai.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Interneto ryšiai jau nustatyti; jie veikia toliau, kaip ir eilėje laukiantis darbas. Išjungta reiškia tik: nepridėti naujų interneto ryšių.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Modulis DI pagalba išjungtas, todėl čia nieko nevyksta. Įjunkite jį skiltyje Plėtiniai. Tai, ką nustatėte žemiau, išlieka.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

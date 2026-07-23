@@ -176,6 +176,22 @@ read a book to find out.
   "Mogelijk gemaakt door" met het logo. Eén nieuwe interfacetekst, meteen in
   alle 31 talen.
 
+### Added
+- **Online opslag is een uitbreiding geworden: standaard uit, zodat de
+  interface stil begint (#570).** WebDAV, S3 en git staan nu als modulekaart op
+  *Instellingen → Uitbreidingen*, naast Informatieveiligheid en AI-assistentie.
+  Wie een presentatie komt maken ziet geen drie servertypes vóór de eerste dia
+  er staat — en omdat een deel van de remote-paden tot nu toe vooral
+  testomgevingen heeft gezien, hoort dat pad een bewuste keuze te zijn; de
+  kaart zegt dat eerlijk. Zonder de module biedt "Verbinding toevoegen" alleen
+  de lokale map; al het lokale werkt onveranderd. Wie al een online verbinding
+  had start met de module áán (standaard-uit is voor nieuwe installaties), en
+  uitzetten verbergt nooit bestaande verbindingen, het git-menu of wachtend
+  werk in de wachtrij — het stopt alleen het toevoegen van nieuwe online
+  verbindingen. Met de derde module is er nu ook een (bewust licht)
+  moduleregister: één plek die opsomt welke modules er zijn en wat hun poort
+  is, terwijl elke module zijn eigen state houdt.
+
 ### Changed
 - **Terzijdegelegde privacybevindingen reizen mee naar git (#651).** Een
   terzijdelegging is een reviewbesluit over het rapport — "deze naam mag hier

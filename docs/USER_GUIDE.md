@@ -144,6 +144,19 @@ list, mixed together — because the question you actually ask is "where does th
 work live?", not "which protocol is this?". Give each one a name (*Client A –
 Nextcloud*, *Private*) so you can tell them apart at a glance.
 
+**The online kinds are a module** (#570). WebDAV, S3 and git live behind the
+**Online opslag** card on *Settings → Uitbreidingen (Extensions)*, off by
+default, so someone who came to make slides is not offered three server types
+before the first slide exists — and because part of those paths has so far
+mostly been proven against test environments, choosing them should be a
+decision, not an accident; the card says so. With the module off, *Add
+connection* offers only local folders; everything local — files, folders,
+packages — works unchanged. If you already have an online connection
+configured, the module starts **on** (default-off is for new installations,
+not for a working setup), and switching it off never hides existing
+connections, the git menu, or queued offline work: it only stops *new* online
+connections from being added.
+
 The `…` menu follows the same idea: **one** *Open from…* and **one** *Save to…*,
 not a pair per protocol. Both start with the same question — which connection —
 and that question is skipped entirely when you have only one, so a single-server

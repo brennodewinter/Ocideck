@@ -1781,6 +1781,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Online úložisko je dostupné len v desktopovej verzii.',
+  'Online opslag': 'Online úložisko',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Otváraj prezentácie z WebDAV, S3 a git repozitárov a ukladaj ich tam, so správou verzií a spoluprácou cez forge. Časť týchto ciest bola zatiaľ vyskúšaná najmä proti testovacím prostrediam; zapni to vedome. Bez modulu všetko lokálne funguje normálne: priečinky, súbory a balíky.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Online pripojenia sú už nastavené; fungujú ďalej, rovnako ako čakajúca práca vo fronte. Vypnuté znamená len: nepridávať nové online pripojenia.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Modul Asistencia AI je vypnutý, takže sa tu nič nedeje. Zapnite ho v Rozšíreniach. Čo ste nastavili nižšie, zostáva zachované.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

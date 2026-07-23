@@ -21,9 +21,17 @@ extension _SettingsModules on _SettingsDialogState {
           style: TextStyle(fontSize: 12, color: AppTheme.slate600),
         ),
         const SizedBox(height: 16),
-        _informationSecurityCard(l10n, module),
-        const SizedBox(height: 12),
-        _aiAssistCard(l10n),
+        // De kaarten komen letterlijk uit het register (#570): de volgorde
+        // dáár is de volgorde hier, en een module zonder kaart valt om op de
+        // switch hieronder in plaats van stil te ontbreken.
+        for (final (index, entry) in moduleRegistry.indexed) ...[
+          if (index > 0) const SizedBox(height: 12),
+          switch (entry.id) {
+            ModuleId.infoSafety => _informationSecurityCard(l10n, module),
+            ModuleId.ai => _aiAssistCard(l10n),
+            ModuleId.onlineStorage => const OnlineStorageModuleCard(),
+          },
+        ],
       ],
     );
   }

@@ -22,7 +22,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// in de verkeerde volgorde terugkomt, schrijft je werk naar de verkeerde klant
 /// zonder ergens te klagen.
 void main() {
-  setUp(() => SharedPreferences.setMockInitialValues({}));
+  // De module Online opslag aan: deze suite toetst de online soorten zelf,
+  // niet de modulepoort — die heeft zijn eigen test (#570,
+  // online_storage_module_test.dart).
+  setUp(
+    () =>
+        SharedPreferences.setMockInitialValues({'onlineStorageEnabled': true}),
+  );
 
   // De sectiekop binnen een uitgeklapt paneel — het enige opschrift dat maar bij
   // één soort verbinding hoort. De hoofdletters komen van _sectionTitle.
@@ -34,6 +40,7 @@ void main() {
   /// staan.
   void seedConnections(List<Map<String, Object?>> connections) {
     SharedPreferences.setMockInitialValues({
+      'onlineStorageEnabled': true,
       'storageConnections': jsonEncode(connections),
     });
   }

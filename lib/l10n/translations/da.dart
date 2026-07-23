@@ -1773,6 +1773,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Onlinelagring er kun tilgængelig i desktopversionen.',
+  'Online opslag': 'Onlinelagring',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Åbn præsentationer fra og gem til WebDAV, S3 og git-repositories, med versionsstyring og samarbejde via en forge. En del af disse veje er indtil videre mest afprøvet mod testmiljøer; vælg det bevidst. Uden modulet virker alt lokalt helt som normalt: mapper, filer og pakker.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Der er allerede sat onlineforbindelser op; de bliver ved med at virke, ligesom ventende arbejde i køen. Fra betyder kun: ingen nye onlineforbindelser kan tilføjes.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Modulet AI-assistance er slået fra, så der sker ikke noget her. Slå det til under Udvidelser. Det, du har indstillet nedenfor, bliver stående.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

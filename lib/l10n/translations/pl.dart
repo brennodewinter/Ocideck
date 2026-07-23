@@ -1786,6 +1786,13 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Przechowywanie online jest dostępne tylko w wersji na komputer.',
+  'Online opslag': 'Przechowywanie online',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Otwieraj prezentacje z WebDAV, S3 i repozytoriów git oraz zapisuj je tam, z kontrolą wersji i współpracą przez forge. Część tych ścieżek była dotąd sprawdzana głównie w środowiskach testowych; włącz to świadomie. Bez modułu wszystko lokalnie działa normalnie: foldery, pliki i pakiety.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Połączenia online są już skonfigurowane; nadal działają, podobnie jak oczekująca praca w kolejce. Wyłączone znaczy tylko: nie można dodawać nowych połączeń online.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Moduł Wsparcie AI jest wyłączony, więc nic się tutaj nie dzieje. Włącz go w sekcji Rozszerzenia. Twoje ustawienia poniżej pozostają zachowane.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

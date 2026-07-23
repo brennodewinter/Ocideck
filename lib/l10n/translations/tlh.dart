@@ -1749,6 +1749,13 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'desktop mIlloghDaq neH online waHtaHghach lo\'laH.',
+  'Online opslag': 'online waHtaHghach',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'WebDAV, S3, git repositorymey je vo\' cha\'navmey DapoSmoHlaH \'ej pa\' DachoqlaH; version DIch je forge lo\'taHvIS boq. DaH He \'op: test Daqmey retlhDaq neH lunughel; \'e\' Dawuqchu\'nIS. ngoQ Hutlhlu\'chugh Hoch lokal QaptaH: ghewmey, ghItlhmey, ngaSwI\'mey je.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'online rarmey lucherlu\'pu\' rIntaH; QaptaH bIH, loStaHbogh Qu\' je. chImmoHlu\'chugh \'oS neH: online rarmey chu\' chellaHbe\'lu\'.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'chu\'be\' AI QaH module, vaj naDev qaSbe\' vay\'. chelwI\'meyDaq yIchu\'. bIngDaq Dacherpu\'bogh Dochmey ratlh.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

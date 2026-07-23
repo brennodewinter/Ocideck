@@ -1773,6 +1773,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Tiešsaistes krātuve ir pieejama tikai darbvirsmas versijā.',
+  'Online opslag': 'Tiešsaistes krātuve',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Atver prezentācijas no WebDAV, S3 un git repozitorijiem un saglabā tajos, ar versiju pārvaldību un sadarbību caur forge. Daļa šo ceļu līdz šim pārbaudīta galvenokārt pret testa vidēm; izvēlies to apzināti. Bez moduļa viss lokālais darbojas kā parasti: mapes, faili un paketes.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Tiešsaistes savienojumi jau ir iestatīti; tie turpina darboties, tāpat kā rindā gaidošais darbs. Izslēgts nozīmē tikai: nepievienot jaunus tiešsaistes savienojumus.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Modulis MI palīdzība ir izslēgts, tāpēc šeit nekas nenotiek. Ieslēdziet to sadaļā Paplašinājumi. Tas, ko esat iestatījis zemāk, saglabājas.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

@@ -733,6 +733,13 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Online-Speicher ist nur in der Desktop-Version verfügbar.',
+  'Online opslag': 'Online-Speicher',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Präsentationen aus WebDAV, S3 und git-Repositories öffnen und dorthin speichern, mit Versionsverwaltung und Zusammenarbeit über eine Forge. Ein Teil dieser Wege ist bislang vor allem gegen Testumgebungen erprobt; wähl das bewusst. Ohne das Modul funktioniert lokal alles ganz normal: Ordner, Dateien und Pakete.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Es sind bereits Online-Verbindungen eingerichtet; die funktionieren weiter, genau wie wartende Arbeit in der Warteschlange. Aus heißt nur: keine neuen Online-Verbindungen hinzufügen.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Das Modul KI-Unterstützung ist aus, hier passiert also nichts. Schalte es unter Erweiterungen ein. Was du unten eingestellt hast, bleibt erhalten.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
