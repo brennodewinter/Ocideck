@@ -62,17 +62,26 @@ class SettingsSecretField extends StatelessWidget {
   final String? hint;
   final IconData icon;
 
+  /// Overschrijft [platformCanStoreSecrets]. Alleen voor tests.
+  ///
+  /// `kIsWeb` is onder `flutter test` altijd onwaar, dus zonder deze haak zou
+  /// juist de tak die een geheim tégenhoudt nooit gedraaid worden — de tak
+  /// waar de weigering in zit. [SecretStore] draagt om dezelfde reden dezelfde
+  /// haak.
+  final bool? canStore;
+
   const SettingsSecretField(
     this.controller,
     this.label, {
     super.key,
     this.hint,
     this.icon = Icons.key_outlined,
+    this.canStore,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (platformCanStoreSecrets) {
+    if (canStore ?? platformCanStoreSecrets) {
       return SettingsTextField(
         controller,
         label,
