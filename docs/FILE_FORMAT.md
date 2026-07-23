@@ -2073,6 +2073,18 @@ id appears in both lists the **later `at` wins**. That gives one rule for every
 case: two reviewers setting aside different findings keep both; one setting aside
 what the other revoked resolves by clock, and re-revoking is always possible.
 
+**Diverging salts do not merge.** The salt is per deck, and two sides of the
+same deck are expected to carry the same one; when they do not, *ours* wins and
+the other side's lists are dropped entirely. That is deliberate, not an
+oversight: a commitment is `SHA-256(salt ‖ text)`, so entries under another
+salt can never match anything in this deck — carrying them along would be
+carrying judgements that can no longer be checked. The way to get there is for
+two reviewers to each set aside their *first* finding on copies that had no
+sidecar yet, minting two fresh salts; the failure direction is the safe one
+(the dropped side's findings become visible again and can be re-set-aside).
+A second implementation of this format should do the same rather than attempt
+a two-salt union.
+
 Since #651's git write path this is running behaviour, not only design: the
 sidecar is committed next to `deck.md` (indented, so line-based merges outside
 OciDeck stay readable), `mergeDeckVersions` applies exactly this union when two
