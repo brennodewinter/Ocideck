@@ -303,8 +303,17 @@ void main() {
       'copyImageBytesToClipboard succeeds when the channel accepts',
       () async {
         final ok = await service.copyImageBytesToClipboard(_pngBytes);
-        expect(ok, isTrue);
-        expect(calls.single.method, 'writeImage');
+        if (Platform.isLinux) {
+          // Op Linux schrijft de service via het eigen ocideck/clipboard-
+          // kanaal (#758, getest in linux_clipboard_write_test.dart). Dat is
+          // hier niet gemockt: eerlijk false, en het pasteboard-kanaal blijft
+          // onaangeraakt.
+          expect(ok, isFalse);
+          expect(calls, isEmpty);
+        } else {
+          expect(ok, isTrue);
+          expect(calls.single.method, 'writeImage');
+        }
       },
     );
 

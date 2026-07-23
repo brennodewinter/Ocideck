@@ -726,13 +726,22 @@ class _NativeGitMirror implements NativeGitMirror {
     try {
       // `-I` slaat binaire bestanden over (de assets), `-l` geeft alleen de
       // padnamen, `-F` matcht de term als letterlijke tekst — nooit als regex
-      // uit gebruikersinvoer. De term en het `decks`-pad gaan als operand achter
-      // `--end-of-options`: git leest de eerste als patroon, de tweede als
-      // pathspec, en niets ervan kan als vlag worden gelezen (§10.2).
-      res = await _run(
-        ['grep', '-I', '-l', '-F', if (!caseSensitive) '-i'],
-        operands: [term, GitRepoLayout.decksRoot],
-      );
+      // uit gebruikersinvoer. De term is aan `-e` gebonden en het `decks`-pad
+      // staat achter `--`, dus geen van beide kan als vlag worden gelezen
+      // (§10.2). Niet via `--end-of-options`: git grep op ≤ 2.43 (Ubuntu
+      // 24.04 LTS) leest die markering zelf als patroon en de term als
+      // revisie — de CI-poort draait op 2.43 en bewaakt dit.
+      res = await _run([
+        'grep',
+        '-I',
+        '-l',
+        '-F',
+        if (!caseSensitive) '-i',
+        '-e',
+        term,
+        '--',
+        GitRepoLayout.decksRoot,
+      ]);
     } on GitCliException catch (e) {
       // Exitcode 1 = niets gevonden: een leeg, exhaustief antwoord — geen fout.
       if (e.exitCode == 1) return const [];

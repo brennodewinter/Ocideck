@@ -144,7 +144,10 @@ read a book to find out.
   ≤ 2.43 kent die markering niet en leest hem als pathspec ("pathspec did not
   match any file(s)"). Op de nieuwere git van de ontwikkelmachine viel dat
   nooit op. De wissel naar een werkbranch loopt nu via `git switch`, dat
-  alleen een branch neemt en de markering wél verstaat; de andere
+  alleen een branch neemt en de markering wél verstaat. Ook `git grep` (de
+  versneller achter het doorzoeken van decks) bleek de markering op 2.43 als
+  patroon te lezen; daar is de term nu aan `-e` gebonden en staat het pad
+  achter `--` — dezelfde bescherming, in draagbare vorm. De overige
   operand-subcommando's (`add`, `branch`, `merge-base`, `show`) zijn op 2.43
   nagemeten en doen het goed. De poort draait voortaan zelf op git 2.43, dus
   een terugval hierop wordt in CI rood.
