@@ -1,13 +1,14 @@
 # OciDeck — Checks & CI
 
-> **Status:** procedure, current, with a dated result under *Latest result* · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** procedure, current, with a dated result under *Latest result* · **Status last reviewed:** 2026-07-23 · **Published by:** Stichting LibreKAT
 
 Every automated check OciDeck runs, what it covers, what a failure means, and how
 to fix it. The **`Makefile` is the single entry point** and the **real gate**:
 `make check`, run by the committer before pushing, is what actually enforces
-these checks. GitHub Actions workflows are defined under `.github/workflows/`,
-but the project's remote is a Forgejo instance with **no CI runner configured**,
-so they do not execute — see [Continuous integration](#continuous-integration).
+these checks. The Forgejo remote has an Actions runner since 2026-07-23, but it
+only runs `.forgejo/workflows/linux-build.yml` (the Linux desktop build on
+`main`); **the gate itself does not run in CI** (#741) — see
+[Continuous integration](#continuous-integration).
 Run `make help` for a one-line summary of every target.
 
 ## The one command
@@ -73,8 +74,8 @@ it (see [`make coverage`](#make-coverage)).
 span unit (model/parsing/state), widget (every slide editor, the dialogs, the
 panels, the live preview and the fullscreen presenter's keyboard handling) and
 service-level (export, file IO, sanitisation) layers, plus the enforced
-localization and security guards listed below. With no CI runner on the Forgejo
-remote, the number you see locally is the number that gates the push.
+localization and security guards listed below. The CI runner does not run the
+gate (#741), so the number you see locally is the number that gates the push.
 
 ---
 
@@ -95,8 +96,8 @@ Tools • Dart 3.12.2
 **This is the pinned toolchain, and that is new.** Until 2026-07-23 this section
 recorded `3.44.2 • [user-branch] • unknown source` — an unofficial build, with
 its binaries under a directory named for a third version again — against
-documents that all named a pinned release. Because there is no CI runner, that
-machine is the only place `make check` has ever run, so every green gate this
+documents that all named a pinned release. Because the gate does not run in CI,
+that machine is the only place `make check` has ever run, so every green gate this
 project rested on had been produced by a toolchain nobody else could reproduce.
 It is now the official stable SDK, hash-verified before unpacking; see
 [Toolchains of record](#toolchains-of-record) for how, and `make check-toolchain`
@@ -165,9 +166,11 @@ now the only passing state.
 | [`make check-actions`](#make-check-actions-advisory) | Pinned CI Actions vs their latest release (advisory) | — | — | — |
 
 † The **In CI workflow** column is what `.github/workflows/ci.yml` *declares* —
-not what runs. That workflow does not currently execute: the remote is Forgejo
-with no runner (see [Continuous integration](#continuous-integration)). Until a
-runner exists, only what the committer runs locally gates a push, and `make
+not what runs. That workflow does not execute: the runner attached on 2026-07-23
+only runs the Linux build, and Forgejo reads `.forgejo/workflows/` instead of
+`.github/workflows/` once the former exists (see
+[Continuous integration](#continuous-integration)). Until the gate itself is
+ported to CI (#741), only what the committer runs locally gates a push, and `make
 check` alone does **not** include `licenses`, `sbom-verify`, `deps-check` or
 `check-web` — those live in `check-full`. Run `make check-full` before a
 dependency or web-facing change.
@@ -886,12 +889,23 @@ For focused work, run only the relevant slice instead of the whole suite:
 
 ## Continuous integration
 
-> **These workflows are defined but do not currently run.** OciDeck's remote is a
-> Forgejo instance with no CI runner configured, so GitHub Actions never fires on
-> push or tag. The files are kept ready for a GitHub mirror or a future Forgejo
-> runner; until then, **`make check` (plus `make check-full` for the
+> **A runner exists since 2026-07-23, but the gate still does not run in CI.**
+> The Forgejo server has a registered Actions runner (docker-in-docker, on the
+> same machine that serves the repository). What it executes comes from
+> `.forgejo/workflows/` — Forgejo reads the first workflow directory that
+> exists, so that directory shadows `.github/workflows/`, whose files remain
+> reference definitions for a GitHub mirror. Until the gate is ported to the
+> runner (#741), **`make check` (plus `make check-full` for the
 > dependency/web checks), run by the committer before pushing, is the only
-> enforcement.** The sections below describe what the workflow files *declare*.
+> enforcement.** The sections below describe the one workflow that runs, then
+> what the GitHub files *declare*.
+
+### `.forgejo/workflows/linux-build.yml` — executed on every push to `main`
+- **build-linux** — runs on the `pawprint` runner in a
+  `ghcr.io/cirruslabs/flutter:stable` container: installs the GTK build
+  dependencies, `flutter pub get`, `flutter build linux --release`, and uploads
+  the bundle as the `ocideck-linux-x64` run artifact. This is a build, not a
+  gate: it proves the Linux target compiles and packages, nothing more.
 
 ### `.github/workflows/ci.yml` — declared for every push and pull request
 - **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get

@@ -179,8 +179,8 @@ This runs:
   bundle appears — and format validity), so it is enforced by every `make check`;
 - as part of `make check-full`;
 - and is declared in the CI workflow (`.github/workflows/ci.yml`), which does not
-  currently run — the remote is Forgejo with no runner (see
-  [CHECKS.md](CHECKS.md#continuous-integration)).
+  run — the runner attached on 2026-07-23 only builds the Linux bundle; the gate
+  is not in CI (#741, see [CHECKS.md](CHECKS.md#continuous-integration)).
 
 So a dependency change that forgets to refresh the SBOM fails `make check`.
 
@@ -230,7 +230,9 @@ want the answer for yourself.
   in the bundle.
 - **Releases** — `.github/workflows/release.yml` uploads them as the
   `ocideck-sbom` artifact and the web bundle carries its copy. That workflow has
-  never run: there is no CI runner (see [CHECKS.md](CHECKS.md)).
+  never run: it is a reference definition for a GitHub mirror, and the Forgejo
+  runner (attached 2026-07-23) executes `.forgejo/workflows/` instead (see
+  [CHECKS.md](CHECKS.md)).
 - **Desktop builds do not carry it *inside* the bundle.** `make build-macos`,
   `build-windows` and `build-linux` have no copy step, so hand `sbom/` over
   alongside the binary until the release process exists (#520). They do now run

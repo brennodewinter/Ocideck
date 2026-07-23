@@ -211,10 +211,13 @@ list is maintained in one place so it cannot go stale in two.
 | **Issues and pull requests** | [the tracker there](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues) — registration is open to anyone |
 | **Security reports** | `security@librekat.nl` — see [`SECURITY.md`](SECURITY.md) |
 
-The forge has **no CI runner**. Nothing runs automatically on a pull request, so
-`make check` is a gate you run yourself before pushing; see
-[`docs/CHECKS.md`](docs/CHECKS.md). The workflow files under `.github/` are
-reference definitions that no runner executes.
+The forge has an Actions runner (since 2026-07-23), but it only builds the
+Linux desktop bundle on pushes to `main` (`.forgejo/workflows/linux-build.yml`).
+Nothing gates a pull request automatically, so `make check` is a gate you run
+yourself before pushing; see [`docs/CHECKS.md`](docs/CHECKS.md). The workflow
+files under `.github/` are reference definitions for a GitHub mirror; Forgejo
+reads `.forgejo/workflows/` instead. Porting the gate itself to the runner is
+tracked in #741.
 
 ## Contributing
 

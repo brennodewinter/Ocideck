@@ -8,9 +8,10 @@ cited so the claim can be checked against the code — the code is the source of
 truth. OciDeck has never tagged a release, so there is no version to which this
 description is fixed — it describes the default branch, and details may change;
 but the invariants below are enforced by the local `make check` / `make check-full`
-gate, not just documented. (The CI workflows are written but no runner executes
-them — the repository lives on a Forgejo instance without one, so the local gate
-is the real one.)
+gate, not just documented. (Since 2026-07-23 the Forgejo instance has an Actions
+runner, but it only builds the Linux bundle — the gate workflows under
+`.github/` are reference definitions that do not execute there, so the local
+gate is the real one; #741.)
 
 ## Overview
 
@@ -91,7 +92,8 @@ The web build is designed to pull **zero third-party origins** at runtime.
   exact versions, while the `_comment` in that same file said the opposite.)* The workflows declare least-privilege
   (`permissions: contents: read`, `persist-credentials: false`) and a
   reproducible dependency set (`flutter pub get --enforce-lockfile`) — declared,
-  not currently executed, since no runner is attached.
+  not executed: the runner attached on 2026-07-23 runs `.forgejo/workflows/`,
+  which shadows these files.
 
 ## 3. Network security (NetGuard + pinned transports)
 

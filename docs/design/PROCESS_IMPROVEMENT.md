@@ -803,7 +803,8 @@ shape for this codebase, and *one order of magnitude* below option A's ~300k.
   into `_buildContent` fails the build.** Land each engine end-to-end, never
   half.
 - No new `pubspec.yaml` dependency without `make sbom` (§4 says: don't).
-- CI has no runner; **local `make check` is the real gate.**
+- CI does not run the gate (the runner attached 2026-07-23 only builds the
+  Linux bundle, #741); **local `make check` is the real gate.**
 
 ---
 
