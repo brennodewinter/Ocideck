@@ -115,6 +115,28 @@ read a book to find out.
   en dat is eerlijker dan een lijst die schuld opschrijft die er niet is.
 
 ### Changed
+- **De drie opslagpanelen die om een wachtwoord vragen staan niet langer in één
+  gedeelde privé-scope.** WebDAV, S3 en git waren `extension`-methoden op
+  `_SettingsDialogState`, samen met vijfentwintig andere onderwerpen in
+  `parts/`. Alles daar kan syntactisch bij álles: een wijziging aan het
+  CVE-paneel raakte technisch gesproken de S3-inloggegevens. Geen poort ziet dat
+  en de compiler geeft geen signaal — het is precies de koppeling die je pas
+  merkt als iemand anders in dit bestand komt, en "een instelling toevoegen" is
+  de klassieke eerste bijdrage.
+  Ze zijn nu gewone widgets in `lib/widgets/dialogs/settings/`, met een
+  expliciete API: het formulier dat ze bewerken, de weg naar de
+  certificaatbevestiging, en een melding terug wanneer de statusregel achter de
+  verbindingsnaam verouderd is. De vier formulierklassen (`WebdavForm`,
+  `S3Form`, `GitForm`, `AiForm`) en `KeychainSecret` verhuisden mee.
+  Daarmee is `_SettingsDialogState` van 7.295 naar 6.043 regels, en — dat is
+  waar het om ging — is elk van de drie panelen te tekenen en te toetsen zonder
+  de dialoog te openen. Die tests staan er, en ze bewaken het geval dat in alle
+  drie hetzelfde stil misgaat: een instelling wijzigen die de vorige
+  verbindingstest ongeldig maakt zonder de groene vink weg te halen. Dan meldt
+  het paneel "verbinding gelukt" over een verbinding die het niet geprobeerd
+  heeft.
+  Het AI-tabblad blijft voorlopig een extensie: dat is geen paneel in de
+  verbindingenlijst maar een tabblad met eigen init en opslag.
 - **Presenteren begint nu bij dia 1, niet bij de dia die je bewerkt.** Wie op
   dia 12 werkte en op afspelen drukte, viel met de zaal middenin de presentatie
   — een verrassing op precies het verkeerde moment. Wil je toch ergens anders

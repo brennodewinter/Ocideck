@@ -470,16 +470,22 @@ deliberately manual).
   (the git tab was once inserted at index 8 without renumbering the search index,
   so "checklist" jumped to Git-repository). Nothing addresses a tab by number any
   more.
-  The three network sources own their editing state instead of scattering it
-  over the dialog: `parts/settings_dialog_webdav_form.dart`,
-  `..._git_form.dart` and `..._ai_form.dart` each hold their controllers, their
-  init and their save. Deliberately no shared base class — they differ for real
-  (git has a forge/owner/repo, WebDAV a subfolder, AI a mode) and forcing one
-  type yields a base class with holes. Only the part that was literally
-  identical is shared: `parts/settings_dialog_secret.dart` (`KeychainSecret`),
-  which answers "must this secret be written?" — the two silent failures being a
-  save that lands before the async keychain read (blanks the secret) and an
-  identity change that leaves it under the old key.
+  The four network sources own their editing state instead of scattering it
+  over the dialog: `settings/webdav_form.dart`, `settings/s3_form.dart`,
+  `settings/git_form.dart` and `settings/ai_form.dart` each hold their
+  controllers, their init and their save. Deliberately no shared base class —
+  they differ for real (git has a forge/owner/repo, WebDAV a subfolder, S3 an
+  addressing style, AI a mode) and forcing one type yields a base class with
+  holes. Only the part that was literally identical is shared:
+  `settings/keychain_secret.dart` (`KeychainSecret`), which answers "must this
+  secret be written?" — the two silent failures being a save that lands before
+  the async keychain read (blanks the secret) and an identity change that leaves
+  it under the old key.
+  Those four live outside the `part` scope on purpose (#631). Everything under
+  `parts/` shares one private scope with `_SettingsDialogState`, so a change to
+  the CVE panel could syntactically reach the S3 credential fields; no gate sees
+  that and the compiler gives no signal. `lib/widgets/dialogs/settings/` is the
+  half that has been pulled out of it.
   The dialog's own shell — sidebar, nav items, branded footer, content header,
   footer bar — is `parts/settings_dialog_chrome.dart`. It is the one block that
   reads only the selected section and writes it back, touching none of the
@@ -489,17 +495,22 @@ deliberately manual).
   S3 buckets and git repositories mixed — plus the export folder. Order is not decoration:
   the topmost usable connection of a kind is that kind's default
   (`AppSettings.primaryOf`), so dragging is how the user says which server is
-  *the* server. Each row expands to that kind's own panel, which stayed where it
-  was: `parts/settings_dialog_webdav.dart` and `parts/settings_dialog_git.dart`,
-  now taking the form object of one connection (`_webdavPanel(form)` /
-  `_gitPanel(form)`) instead of reading the single global one. The git panel's
-  `_gitTokenScopeHelp` shows, under the token field and switching with the forge
-  dropdown, which token permissions each forge needs (Gitea/GitHub/GitLab differ,
-  and only GitLab's `read_api` unlocks its server-side search) — proactive, not
-  only after a failed connection test. The form objects
-  live per connection id in `_webdavForms`/`_gitForms`, because a
-  `TextEditingController` cannot sit in an immutable model. A fourth kind is a
-  value in `StorageConnectionKind` plus a branch in `_connectionPanel`.
+  *the* server. Each row expands to that kind's own panel:
+  `WebdavPanel`, `S3Panel` and `GitPanel` in `lib/widgets/dialogs/settings/`.
+  They are ordinary widgets with an explicit API — the form they edit, a
+  `ConfirmCertificate` callback, and an `onChanged` that tells the dialog the
+  connection row's status line is stale — so they can be built, and tested,
+  without opening the dialog. That typedef sits in
+  `settings/confirm_certificate.dart` rather than in a panel, because peeking at
+  a certificate leans on `dart:io` and a panel must not drag that into the web
+  bundle. The git panel's token-scope help shows, under the token field and
+  switching with the forge dropdown, which token permissions each forge needs
+  (Gitea/GitHub/GitLab differ, and only GitLab's `read_api` unlocks its
+  server-side search) — proactive, not only after a failed connection test. The
+  form objects live per connection id in `_webdavForms`/`_gitForms`/`_s3Forms`,
+  because a `TextEditingController` cannot sit in an immutable model. A fifth
+  kind is a value in `StorageConnectionKind` plus a branch in
+  `_connectionPanel`.
   Search over the settings lives in `parts/settings_dialog_search.dart`
   (`SettingsSearchEntry`, the search field, and the jump-and-flash), with the
   index of what is searchable in `parts/settings_dialog_search_index.dart`.
@@ -507,9 +518,26 @@ deliberately manual).
   a `.ocideckstyle` file is `parts/settings_dialog_profile.dart`; it mutates via
   `_adoptProfile` on the state class, since `setState` is protected and out of
   reach from an extension.
-  Anchors are free: every section heading goes through `_sectionTitle`, which
-  registers a `GlobalKey` under its own text, so a hit can scroll its section
-  into view without any of the tab bodies knowing about search.
+  Anchors are free: every section heading is a `SettingsSectionTitle`
+  (`settings/settings_section_title.dart`), which registers a `GlobalKey` under
+  its own text, so a hit can scroll its section into view without any of the tab
+  bodies knowing about search. It reads the key map and the highlighted section
+  from a `SettingsSectionAnchors` inherited widget rather than from the dialog
+  state — that is what lets a panel live outside the `part` scope. Shared input
+  fields are `settings/settings_text_field.dart`: `SettingsTextField`, and
+  `SettingsSecretField`, which refuses on web with the reason beside the field
+  because a browser has no keychain.
+- `settings/settings_section_title.dart` — `SettingsSectionTitle` plus the `SettingsSectionAnchors` inherited widget that carries the search anchors and the highlighted section, so a section heading needs no access to the dialog's state.
+- `settings/settings_text_field.dart` — `SettingsTextField` (the shared input row) and `SettingsSecretField`, which on web disables itself and says why beside the field: a browser has no keychain, so anything stored there is readable by any script on the page.
+- `settings/confirm_certificate.dart` — The `ConfirmCertificate` typedef the three network panels use to reach the trust dialog. Its own file because peeking at a certificate leans on `dart:io`, which a panel must not drag into the web bundle.
+- `settings/keychain_secret.dart` — `KeychainSecret`: the one piece of secret bookkeeping the four sources genuinely share — whether this secret must be written, given the async keychain read and a possibly changed identity.
+- `settings/webdav_form.dart` — Editing state of a WebDAV connection (controllers, test result, password), owned by the dialog and handed to `WebdavPanel`.
+- `settings/s3_form.dart` — Idem for an S3 bucket: endpoint, region, addressing style and the secret access key.
+- `settings/git_form.dart` — Idem for a git repository: forge, owner, repo, branch and the token.
+- `settings/ai_form.dart` — Idem for the AI backend: mode, base URL, model, the explicit cloud confirmation, and the API key.
+- `settings/webdav_panel.dart` — `WebdavPanel`: the WebDAV editing panel, including the offer to split a pasted Nextcloud DAV URL instead of silently dropping the subfolder it carries.
+- `settings/s3_panel.dart` — `S3Panel`: the S3 editing panel, including the addressing choice and the connection test.
+- `settings/git_panel.dart` — `GitPanel`: the git editing panel, the token-scope help per forge, and the native-git detection line.
 - `slide_finder_dialog.dart` — Stay-open searcher for gathering slides from many presentations.
 - `slide_quality_details_dialog.dart` — Issues grouped by severity with counts and navigation.
 - `storage_connection_picker.dart` — Asks which file connection an action works with, for WebDAV, S3 and git alike. Shows nothing at all when there is exactly one usable connection of that kind, so the single-server case keeps the flow it always had; the question only appears once it is a real question. Deck-bound actions never reach it — they follow the origin (see `AppSettings.gitConnectionFor`).
