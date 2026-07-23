@@ -94,6 +94,35 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Added
+- **De webdemo staat nu in de README — en de documentatie geeft eindelijk toe
+  dat de uitgever hem draait.** `ocideck.librekat.nl` bestond al maanden en
+  kwam nul keer in de README voor: de goedkoopste route naar "ik heb OciDeck
+  gezien" was Flutter installeren en zelf bouwen, en dat doet vrijwel niemand
+  in de anderhalve minuut die een nieuw project krijgt. Er staat nu één blok
+  onder de openingsalinea, met erbij wat de webbouw *niet* kan.
+
+  Het minder leuke deel eronder woog zwaarder. `COMPLIANCE.md` zei dat de
+  stichting OciDeck niet als dienst host en precies **één** server draait, en
+  `PRIVACY.md` zei hetzelfde over dezelfde ene server. Een gratis publieke
+  kopie op een eigen oorsprong ís hosten, dus die zin werd onwaar op het moment
+  dat de README hem zou aanprijzen — en het is precies de zin die een kritische
+  lezer als eerste natrekt. Dat is dezelfde fout als #579, één correctie
+  verderop: die had de absolute claim over "geen server" opgeruimd en de claim
+  over "niet hosten" laten staan. Beide documenten noemen de demo nu bij naam,
+  met wat de oorsprong ziet (het gewone toegangslogboek), met de fetch-proxy die
+  daar meedraait — een URL die je op de demo importeert wordt door de server van
+  de stichting opgehaald — en met de eerlijke mededeling dat de beheerder over
+  díé host nog niets heeft verklaard, waar hij dat over de CVE-mirror wel deed.
+
+  Twee poorten erbij, want dit soort schuld ontstaat stilletjes. De eerste
+  koppelt de README aan de twee documenten: prijst de README een host op
+  `librekat.nl` aan, dan moeten `COMPLIANCE.md` en `PRIVACY.md` die host noemen.
+  De tweede is breder — élke link naar een kop in élk Markdown-bestand van deze
+  repo moet bij een bestaande kop uitkomen. Die vond meteen twee dode
+  verwijzingen in de inhoudsopgave van de `USER_GUIDE`, allebei op een
+  gedachtestreepje dat in een ankernaam een extra streepje meetelt (#589).
+
 ### Fixed
 - **De interface hield zich niet aan de contrasteis die ze aan jouw dia's
   stelt.** OciDeck rekent na of jouw tekst leesbaar is en meldt wat zakt; in

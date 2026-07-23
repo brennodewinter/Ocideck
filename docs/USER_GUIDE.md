@@ -3021,6 +3021,14 @@ behind it. That version is not the desktop app on a web page: a browser has no
 filesystem, no subprocesses and no native libraries, so some things are simply
 not there. They are not switched off somewhere — there is no setting to find.
 
+You can try that version without installing anything: the publisher serves it at
+<https://ocideck.librekat.nl/>. Your deck still stays in your tab there, but the
+origin is the publisher's rather than yours, and *Import from URL* on that host
+is fetched by the publisher's server — see
+[the servers the publisher runs](PRIVACY.md#the-servers-the-publisher-runs)
+before you open a client's deck on it. Hosting the same bundle yourself is
+[HOSTING.md](HOSTING.md).
+
 | What | In the browser |
 |---|---|
 | Local project folders and sidecar files | Absent. Opening and saving go through the browser, and your deck lives in the tab. |
