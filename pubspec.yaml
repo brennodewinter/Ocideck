@@ -109,6 +109,12 @@ flutter:
     - assets/images/ocideck-logo-eu.png
     - assets/images/librekat-logo.png
     - assets/images/vigilis-logo.png
+    # Donkere-modus varianten van de drie merken: dezelfde tekening, echt
+    # transparante achtergrond, lichte inkt. Gekoppeld aan hun lichte tegenhanger
+    # in lib/theme/brand_logo.dart.
+    - assets/images/ocideck-logo-dark.png
+    - assets/images/librekat-logo-dark.png
+    - assets/images/vigilis-logo-dark.png
     - assets/images/de-winter-wittegeheel.png
     - assets/images/flag_fy.png
     - assets/images/cat-branie.jpg

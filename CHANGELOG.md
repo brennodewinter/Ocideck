@@ -102,6 +102,20 @@ read a book to find out.
   alle 31 talen.
 
 ### Fixed
+- **In donkere modus stond het logo als een groot wit vlak op het openscherm.**
+  De oorzaak zat niet in de weergave maar in de asset: `ocideck-logo.png` is
+  volledig ondoorzichtig — alle hoeken `#FFFFFF` bij alfa 255, bijna negentig
+  procent van het beeld wit — dus wat op een licht oppervlak onzichtbaar was,
+  werd op een donker oppervlak het enige wat je zag. Er zijn nu donkere
+  varianten van de drie merken (OciDeck, LibreKAT, Vigilis): dezelfde tekening,
+  écht transparante achtergrond, lichte inkt. `BrandLogo` in
+  `lib/theme/brand_logo.dart` koppelt elk paar en kiest per modus, zodat de
+  vierde aanroepplek het gratis goed krijgt. Tegelijk stonden de kaarten in
+  "Over OciDeck" hardgecodeerd op `Colors.white` in plaats van `AppTheme.paper`
+  — dat hield het paneel licht in donkere modus, en verborg dat de merken erop
+  donkere inkt waren. De regressietest kijkt in de pixels, niet in de code: een
+  widgettest had dit nooit gevangen, want elke aanroepplek deed precies wat er
+  stond. (#735)
 - **Drie documenten bleven op de oude Flutter-pin staan, buiten het bereik van
   de poort die daar juist voor is.** `check-toolchain` (#598/#721) legt de
   versie-eisen naast `.tool-versions`, maar kende zeven bestanden — en

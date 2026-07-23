@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../state/consent_provider.dart';
 import '../../state/settings_provider.dart';
+import '../../theme/brand_logo.dart';
 import '../language_flag.dart';
 import '../privacy_statement_content.dart';
 
@@ -37,7 +38,7 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
                 label: l10n.d('OciDeck'),
                 image: true,
                 child: Image.asset(
-                  'assets/images/ocideck-logo.png',
+                  BrandLogo.ociDeck.assetKey,
                   height: 40,
                   fit: BoxFit.contain,
                   filterQuality: FilterQuality.high,

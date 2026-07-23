@@ -32,7 +32,7 @@ Widget _publisherCardBody(
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.asset(
-              'assets/images/librekat-logo.png',
+              BrandLogo.libreKat.assetKey,
               width: 44,
               height: 44,
               fit: BoxFit.contain,
@@ -199,7 +199,7 @@ extension _SettingsAbout on _SettingsDialogState {
       _aboutHeading(Icons.handshake_outlined, l10n.d('Mogelijk gemaakt door')),
       _aboutCard(
         Image.asset(
-          'assets/images/vigilis-logo.png',
+          BrandLogo.vigilis.assetKey,
           height: 34,
           fit: BoxFit.contain,
           alignment: Alignment.centerLeft,
@@ -243,7 +243,7 @@ extension _SettingsAbout on _SettingsDialogState {
                   applicationIcon: Padding(
                     padding: const EdgeInsets.all(8),
                     child: Image.asset(
-                      'assets/images/ocideck-logo.png',
+                      BrandLogo.ociDeck.assetKey,
                       width: 48,
                       height: 48,
                       fit: BoxFit.contain,
@@ -429,11 +429,16 @@ extension _SettingsAbout on _SettingsDialogState {
     ),
   );
 
+  // `AppTheme.paper` and not `Colors.white`: these cards are chrome, not slide
+  // content, so they follow the appearance profile. Hardcoded white kept the
+  // whole pane bright in dark mode — and, being white, hid that the LibreKAT
+  // and Vigilis marks on it were dark ink that would vanish the moment it went
+  // dark (#735).
   Widget _aboutCard(Widget child) => Container(
     width: double.infinity,
     padding: const EdgeInsets.all(14),
     decoration: BoxDecoration(
-      color: Colors.white,
+      color: AppTheme.paper,
       border: Border.all(color: AppTheme.slate300),
       borderRadius: BorderRadius.circular(10),
     ),
@@ -492,7 +497,7 @@ extension _SettingsAbout on _SettingsDialogState {
   Widget _catCard(_CatMascot cat) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppTheme.paper,
         border: Border.all(color: AppTheme.slate300),
         borderRadius: BorderRadius.circular(10),
       ),

@@ -64,7 +64,7 @@ class _WelcomeScreen extends ConsumerWidget {
         label: l10n.d('OciDeck'),
         image: true,
         child: Image.asset(
-          'assets/images/ocideck-logo.png',
+          BrandLogo.ociDeck.assetKey,
           width: 200,
           fit: BoxFit.contain,
           filterQuality: FilterQuality.high,
