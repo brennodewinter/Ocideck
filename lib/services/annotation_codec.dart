@@ -52,10 +52,21 @@ class AnnotationCodec {
 
   /// Encode the id-keyed [annotations] for [slides] into a JSON string, or null
   /// when there is nothing to store.
+  ///
+  /// With [forTextMerge] the JSON is written indented — the same trade as
+  /// `UserNotesCodec.encode`: only the copy that goes into a repository pays
+  /// for it, and there it earns its keep. Ink is *not* merged by git's text
+  /// merge (the union with tombstones lives in `mergeDeckVersions`, D7), but a
+  /// clone made by another tool has no driver, and git then falls back to the
+  /// text merge — measured, not assumed: an undefined `merge=` attribute
+  /// text-merges like any other file. Indented, two sides that drew on
+  /// different slides still merge cleanly there; on one line every stroke is
+  /// the same line and nothing ever does.
   static String? encode(
     List<Slide> slides,
-    Map<String, List<InkStroke>> annotations,
-  ) {
+    Map<String, List<InkStroke>> annotations, {
+    bool forTextMerge = false,
+  }) {
     final entries = <Map<String, dynamic>>[];
     for (var i = 0; i < slides.length; i++) {
       final id = slides[i].id;
@@ -80,7 +91,10 @@ class AnnotationCodec {
       }
     }
     if (entries.isEmpty) return null;
-    return jsonEncode({'version': version, 'slides': entries});
+    final payload = {'version': version, 'slides': entries};
+    return forTextMerge
+        ? '${const JsonEncoder.withIndent('  ').convert(payload)}\n'
+        : jsonEncode(payload);
   }
 
   /// Decode [json] against the freshly parsed [slides], returning a map keyed by

@@ -177,6 +177,18 @@ read a book to find out.
   staat, en blijft ook met de module uit bestaan zolang er een backend
   geconfigureerd is — uitzetten mag bestaand werk niet onbereikbaar maken. Wie
   AI al aan had, merkt niets: dezelfde instelling, dezelfde plek op schijf.
+- **Tekeningen reizen nu mee naar git, en de waarschuwing die dat verlies
+  aankondigde is daarmee leeg — en weg (#541).** De tekenlaag gaat als
+  `deck.ink.json` naast `deck.md` de repository in, komt bij het openen op de
+  juiste dia terug, en overleeft de offline-wachtrij. Voegen twee mensen hun
+  werk samen, dan worden de streken van beide kanten verenigd — tekenen is geen
+  meningsverschil — en wint een gumbeurt het van een streek die de ander nog
+  had: precies waarvoor de grafsteen uit de vorige stap bestond, nu bewezen
+  tegen échte git. Daarmee reist álles mee (media, grafiekdata, notities,
+  tekeningen; een verzegeld deck wordt geweigerd in plaats van half
+  meegenomen), dus is het tussenscherm "Niet alles gaat mee naar git"
+  opgeheven: een waarschuwing zonder ware regels leert alleen wegklikken. Vijf
+  interfaceteksten × 31 talen mee opgeruimd.
 
 - **Een gewiste tekening blijft gewist, ook nadat twee mensen aan dezelfde
   presentatie hebben gewerkt.** Tekeningen gaan straks mee naar een

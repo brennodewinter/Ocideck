@@ -1041,13 +1041,6 @@ const _dutchSourceAddPap = {
       'Tur lámina ta pasá over of retené pa nan klasifikashon TLP — no tin nada pa eksportá.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'E sifranan di grafiko no a keda wardá — nan ta solamente den e bentana aki:',
-  'Niet alles gaat mee naar git': 'No tur kos ta bai ku git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'E partinan aki no ta yega den e commit i lo no ta den e repositorio:',
-  'Tekeningen op slides': 'Dibuhonan riba lámina',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Nan ta keda den e bentana aki. Warda e presentashon tambe komo archivo of komo paket .ocideck pa konservá nan.',
-  'Toch opslaan': 'Warda igualmente',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Den e browser no tin rekuperashon despues di un crash: si bo sera e tab aki, trabou no wardá ta pèrdí. Warda bo presentashon bo mes.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

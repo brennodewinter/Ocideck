@@ -154,57 +154,6 @@ Future<void> _explainSealRefusal(BuildContext context) async {
   );
 }
 
-Future<bool> _confirmGitOmissions(BuildContext context, Deck deck) async {
-  final missing = gitDeckOmissions(deck);
-  if (missing.isEmpty) return true;
-  final l10n = context.l10n;
-  final lines = <String>[
-    if (missing.annotatedSlides > 0)
-      '${l10n.d('Tekeningen op slides')}: ${missing.annotatedSlides} ${l10n.d('slides')}',
-    // De regels over gebruikersnotities (#541, deel 1) en over het zegel (#541,
-    // deel 3) stonden hier ook. De notities reizen nu mee; het zegel is een
-    // weigering geworden in plaats van een weglating. Een waarschuwing die meer
-    // opsomt dan er werkelijk misgaat, leert de lezer hem in zijn geheel weg te
-    // klikken — en dan is ook de regel die er wél toe doet weg.
-  ];
-  final choice = await showDialog<bool>(
-    context: context,
-    builder: (ctx) => AlertDialog(
-      title: Text(ctx.l10n.d('Niet alles gaat mee naar git')),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            ctx.l10n.d(
-              'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:',
-            ),
-          ),
-          const SizedBox(height: 8),
-          for (final line in lines) Text('• $line'),
-          const SizedBox(height: 8),
-          Text(
-            ctx.l10n.d(
-              'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.',
-            ),
-          ),
-        ],
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(ctx, false),
-          child: Text(ctx.l10n.d('Annuleren')),
-        ),
-        ElevatedButton(
-          onPressed: () => Navigator.pop(ctx, true),
-          child: Text(ctx.l10n.d('Toch opslaan')),
-        ),
-      ],
-    ),
-  );
-  return choice == true;
-}
-
 Future<void> _saveToGit(
   BuildContext context,
   WidgetRef ref, {
@@ -213,17 +162,17 @@ Future<void> _saveToGit(
   final tab = ref.read(tabsProvider).current;
   final deck = tab?.deckNotifier.currentState.deck;
   if (tab == null || deck == null) return;
-  // Vóór alles: wat blijft er achter? Eerst laten kiezen, dan pas verbinden.
-  // Eerst de weigering, dan pas de waarschuwing: een verzegeld deck komt
-  // helemaal niet in een commit, dus vragen wat er van meegaat is een vraag
-  // over iets dat niet gebeurt. Het opslagpad weigert ook zelf — dit is de
-  // uitleg op het moment dat de gebruiker erop klikt, niet de poort.
+  // Eerst de weigering: een verzegeld deck komt helemaal niet in een commit
+  // (D13). Het opslagpad weigert ook zelf — dit is de uitleg op het moment dat
+  // de gebruiker erop klikt, niet de poort.
+  //
+  // De "niet alles gaat mee"-waarschuwing die hier tussen stond is opgeheven:
+  // sinds #541 reizen media, grafiekdata, notities én tekeningen mee, en een
+  // dialoog zonder ware regels leert de gebruiker alleen wegklikken.
   if (gitRefusesSealedDeck(deck)) {
     await _explainSealRefusal(context);
     return;
   }
-  if (!await _confirmGitOmissions(context, deck)) return;
-  if (!context.mounted) return;
   // Kwam dit deck uit een repo die nog bestaat, dan gaat het daar zonder vragen
   // naartoe terug. Alleen een deck zonder herkomst laat kiezen — of een
   // expliciet gekozen doel, want dat is wat "Opslaan naar…" betekent.

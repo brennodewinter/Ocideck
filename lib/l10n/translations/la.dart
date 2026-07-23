@@ -2083,13 +2083,6 @@ const _dutchSourceAddLa = <String, String>{
       'Omnes paginae praetermittuntur aut classificatione TLP sua retinentur, itaque nihil est quod exportetur.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Numeri diagrammatis servati non sunt — in hac fenestra tantum manent:',
-  'Niet alles gaat mee naar git': 'Non omnia in git eunt',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Hae partes in commissum non veniunt neque postea in promptuario erunt:',
-  'Tekeningen op slides': 'Picturae in diapositivis',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'In hac fenestra manent. Praesentationem etiam ut tabellam vel ut fasciculum .ocideck serva ut retineantur.',
-  'Toch opslaan': 'Nihilominus servare',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'In navigatro nulla est recuperatio post ruinam: si hanc tabellam claudis, opus non servatum perit. Praesentationem tuam ipse serva.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

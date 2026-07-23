@@ -2098,13 +2098,6 @@ const _dutchSourceAddPt = <String, String>{
       'Todos os slides estão ignorados ou retidos pela sua classificação TLP — nada para exportar.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Os números dos gráficos não foram guardados — só existem nesta janela:',
-  'Niet alles gaat mee naar git': 'Nem tudo segue para o git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Estas partes não entram no commit e não estarão no repositório:',
-  'Tekeningen op slides': 'Desenhos nos slides',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Ficam nesta janela. Guarde a apresentação também como ficheiro ou como pacote .ocideck para os manter.',
-  'Toch opslaan': 'Guardar mesmo assim',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'No navegador não existe recuperação após falha: se fechar este separador, o trabalho não guardado desaparece. Guarde a sua apresentação por si.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

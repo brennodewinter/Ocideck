@@ -2089,13 +2089,6 @@ const _dutchSourceAddRo = <String, String>{
       'Toate slide-urile sunt omise sau reținute din cauza clasificării lor TLP — nimic de exportat.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Cifrele graficelor nu au fost salvate — există doar în această fereastră:',
-  'Niet alles gaat mee naar git': 'Nu tot ajunge în git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Aceste părți nu ajung în commit și nu vor fi în depozit:',
-  'Tekeningen op slides': 'Desene pe slide-uri',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Rămân în această fereastră. Salvați prezentarea și ca fișier sau ca pachet .ocideck pentru a le păstra.',
-  'Toch opslaan': 'Salvează oricum',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'În browser nu există recuperare după blocare: dacă închideți această filă, munca nesalvată se pierde. Salvați-vă singur prezentarea.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

@@ -2069,13 +2069,6 @@ const _dutchSourceAddFi = <String, String>{
       'Kaikki diat on ohitettu tai pidätetty niiden TLP-luokituksen vuoksi, joten vietävää ei ole.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Kaavion lukuja ei tallennettu — ne ovat enää vain tässä ikkunassa:',
-  'Niet alles gaat mee naar git': 'Kaikki ei mene gitiin',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Nämä osat eivät päädy committiin eivätkä ole sen jälkeen repositoriossa:',
-  'Tekeningen op slides': 'Piirrokset dioilla',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Ne jäävät tähän ikkunaan. Tallenna esitys myös tiedostona tai .ocideck-pakettina, jotta ne säilyvät.',
-  'Toch opslaan': 'Tallenna silti',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Selaimessa ei ole kaatumispalautusta: jos suljet tämän välilehden, tallentamaton työ katoaa. Tallenna esityksesi itse.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

@@ -2059,13 +2059,6 @@ const _dutchSourceAddEt = <String, String>{
       'Kõik slaidid on vahele jäetud või nende TLP-klassifikatsiooni tõttu kinni peetud — pole midagi eksportida.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Diagrammi arve ei salvestatud — need on alles ainult selles aknas:',
-  'Niet alles gaat mee naar git': 'Kõik ei lähe gitti kaasa',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Need osad ei jõua commit\'i ega ole hiljem hoidlas:',
-  'Tekeningen op slides': 'Joonistused slaididel',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Need jäävad sellesse aknasse. Salvesta esitlus ka failina või .ocideck-paketina, et need alles hoida.',
-  'Toch opslaan': 'Salvesta ikkagi',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Brauseris pole krahhitaastet: kui sulged selle vahekaardi, on salvestamata töö kadunud. Salvesta oma esitlus ise.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

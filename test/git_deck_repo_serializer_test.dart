@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/git_settings.dart';
@@ -11,6 +12,7 @@ import 'package:ocideck/services/git/asset_index.dart';
 import 'package:ocideck/services/git/asset_pool.dart';
 import 'package:ocideck/services/git/deck_repo_serializer.dart';
 import 'package:ocideck/services/git/repo_asset_resolver.dart';
+import 'package:ocideck/services/annotation_codec.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/user_notes_codec.dart';
 import 'package:ocideck/services/web_asset_store.dart';
@@ -835,6 +837,184 @@ void main() {
         expect(terug.deck.userNotes, isEmpty);
         expect(terug.onleesbaar, isTrue);
       });
+    });
+  });
+
+  group('tekeningen', () {
+    // De ink-sidecar volgt het spoor van de notities (#541 deel 2): een eigen
+    // bestand op een stabiel pad, dezelfde aanraak- en verwijderregels (de
+    // groepen hierboven bewijzen die machinerie al — gedeeld via
+    // `_repoSidecarState`), plus wat alleen voor ink geldt: de grafsteen moet
+    // het bestand ín, anders overleeft een wissing de reis niet.
+    const inkPath = '$deckDir/deck.ink.json';
+
+    InkStroke streek(String id, {bool erased = false}) => InkStroke(
+      tool: InkTool.pen,
+      color: 0xFFEF4444,
+      width: 0.004,
+      points: const [Offset(0.1, 0.2), Offset(0.3, 0.4)],
+      id: id,
+      erased: erased,
+    );
+
+    Future<RepoDeckFiles> build(
+      Deck deck, {
+      Map<String, Uint8List> inRepo = const {},
+    }) async => buildDeckRepoFiles(
+      deck,
+      md: md,
+      pool: poolFor(FakeRepo(branches: {'main': 'c0'}, files: {})),
+      deckDir: deckDir,
+      resolveBytes: resolverFrom({}),
+      read: (path) async => inRepo[path],
+    );
+
+    Deck deckMetInk(List<InkStroke> strokes, {String title = 'Eén'}) {
+      final slide = Slide.create(SlideType.title).copyWith(title: title);
+      return Deck(
+        title: 'Kwartaal',
+        slides: [slide],
+        annotations: {slide.id: strokes},
+      );
+    }
+
+    Deck deckZonderInk() =>
+        deckWith([Slide.create(SlideType.title).copyWith(title: 'Eén')]);
+
+    /// Een geldig inkbestand zoals wíj het schrijven.
+    Uint8List onzeInk() {
+      final slide = Slide.create(SlideType.title).copyWith(title: 'Eén');
+      return Uint8List.fromList(
+        utf8.encode(
+          AnnotationCodec.encode(
+            [slide],
+            {
+              slide.id: [streek('s1')],
+            },
+            forTextMerge: true,
+          )!,
+        ),
+      );
+    }
+
+    test('krijgen een eigen bestand naast deck.md, niet in de pool', () async {
+      final out = await build(deckMetInk([streek('s1')]));
+
+      expect(out.upserts.containsKey(inkPath), isTrue);
+      expect(utf8.decode(out.upserts[inkPath]!), contains('"s1"'));
+    });
+
+    test('komen er bij het openen weer aan, op de juiste dia', () async {
+      final out = await build(deckMetInk([streek('s1')]));
+      final parsed = md.parseDeck(
+        utf8.decode(out.upserts['$deckDir/deck.md']!),
+      )!;
+      final terug = await withRepoInk(
+        parsed,
+        deckDir: deckDir,
+        read: (path) async => out.upserts[path],
+      );
+
+      // Niet op id vergeleken: die worden bij elk parsen opnieuw uitgedeeld.
+      final deck = terug.deck;
+      expect(deck.annotations.keys.single, deck.slides.single.id);
+      expect(deck.annotations.values.single.single.id, 's1');
+    });
+
+    test(
+      'een grafsteen reist mee — anders overleeft wissen de reis niet',
+      () async {
+        // Een dia waarvan álle streken gewist zijn is niet "geen tekeningen":
+        // gooi de grafstenen weg en de andere kant van de eerstvolgende merge
+        // brengt de streek terug.
+        final out = await build(deckMetInk([streek('s1', erased: true)]));
+
+        expect(out.upserts.containsKey(inkPath), isTrue);
+        expect(utf8.decode(out.upserts[inkPath]!), contains('"erased"'));
+      },
+    );
+
+    test('per regel in het bestand, voor kloons zonder driver', () async {
+      // In de kloon van de app merged de resolver; een kloon van een ander
+      // werktuig valt terug op git's tekst-merge (gemeten: een onbekende
+      // driver tekst-merged gewoon). Op één regel botst dáár elke wijziging
+      // met elke andere.
+      final out = await build(deckMetInk([streek('s1'), streek('s2')]));
+
+      final regels = const LineSplitter().convert(
+        utf8.decode(out.upserts[inkPath]!),
+      );
+      expect(regels.length, greaterThan(4));
+    });
+
+    test('een deck zonder tekeningen schrijft geen bestand', () async {
+      final out = await build(deckZonderInk());
+
+      expect(out.upserts.containsKey(inkPath), isFalse);
+    });
+
+    test('de tekenlaag verdwenen: het bestand gaat wég', () async {
+      final out = await build(deckZonderInk(), inRepo: {inkPath: onzeInk()});
+
+      expect(out.deletes, contains(inkPath));
+    });
+
+    test('maar niet wanneer het bestand niet van ons is', () async {
+      // Zelfde asymmetrie als bij de notities: een sidecar van een nieuwere
+      // build met rust laten kost een verweesd bestand; hem wissen kost
+      // andermans werk.
+      final out = await build(
+        deckZonderInk(),
+        inRepo: {
+          inkPath: Uint8List.fromList(
+            utf8.encode('{"version":99,"slides":[]}'),
+          ),
+        },
+      );
+
+      expect(out.deletes, isEmpty);
+      expect(out.upserts.containsKey(inkPath), isFalse);
+    });
+
+    test('de werkkopie voor de wachtrij draagt de ink ook', () {
+      // Ontbreekt de laag in mirrorDeckFiles, dan leidt SyncEngine er een
+      // verwijdering uit af bij het legen van de wachtrij.
+      final files = mirrorDeckFiles(
+        deckMetInk([streek('s1')]),
+        deckDir: deckDir,
+        md: md,
+      );
+
+      expect(files.keys, contains(inkPath));
+      expect(utf8.decode(files[inkPath]!), contains('"s1"'));
+    });
+
+    test('een onleesbaar bestand laat het deck gewoon openen', () async {
+      final slide = Slide.create(SlideType.title).copyWith(title: 'Eén');
+      final terug = await withRepoInk(
+        Deck(title: 'Kwartaal', slides: [slide]),
+        deckDir: deckDir,
+        read: (path) async =>
+            Uint8List.fromList(utf8.encode('dit is geen json')),
+      );
+
+      expect(terug.deck.annotations, isEmpty);
+      expect(terug.onleesbaar, isTrue);
+    });
+
+    test('withRepoSidecars hangt alle drie de lagen aan', () async {
+      final out = await build(deckMetInk([streek('s1')]));
+      final parsed = md.parseDeck(
+        utf8.decode(out.upserts['$deckDir/deck.md']!),
+      )!;
+      final terug = await withRepoSidecars(
+        parsed,
+        deckDir: deckDir,
+        read: (path) async => out.upserts[path],
+      );
+
+      expect(terug.deck.annotations.values.single.single.id, 's1');
+      expect(terug.inkUnreadable, isFalse);
     });
   });
 }

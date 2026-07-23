@@ -677,6 +677,21 @@ does**.
 > work above; note that a seal has no merge semantics to design, because a
 > sealed deck is frozen and two versions of one seal is not a conflict but a
 > mistake.
+>
+> *Updated 23-07-2026 (#541, part 2): the **ink sidecar now travels**, and the
+> warning is gone.* `buildDeckRepoFiles` writes `<deckDir>/deck.ink.json` on the
+> same stable path as on disk, indented for line-based diffs, under the same
+> touch-and-delete rules as the notes (the state check is shared:
+> `repoInkState`/`repoUserNotesState` over one `_repoSidecarState`). A slide
+> whose strokes are all erased still writes a file — tombstones are content, not
+> absence (D7). `withRepoInk` re-attaches the strokes after the parse,
+> `withRepoSidecars` carries all three layers, and `mirrorDeckFiles` includes
+> ink so the offline queue does not turn the layer into a deletion. With media
+> (#540), chart data, notes, the seal refusal (D13) and now ink, the
+> "not everything travels to git" dialog had no true line left —
+> `gitDeckOmissions` and `_confirmGitOmissions` are deleted, and
+> `git_omissions_warning_test` now guards the *absence* of an intermediate
+> dialog instead of its shrinking.
 
 ### 9.2 Opening / loading
 
@@ -786,14 +801,17 @@ whose participants share a repo), but neither doc depends on the other landing.
 
 ### 9.7 Sidecar merge semantics
 
-> **Half built** (recorded 21-07-2026, updated 22-07-2026). The notes sidecar is
-> committed since #541 and takes git's ordinary text merge as decided below — for
-> which it had to be written one field per line; see D7. The ink sidecar is still
-> not committed (§9.1), so the union driver below describes a decision, not
-> running behaviour — and since 22-07-2026 that decision includes the tombstone,
-> which the annotation format has to carry before any of it can be built. The
-> seal is settled too, in the opposite direction: tag only, no merge semantics
-> (§14, D13).
+> **Built** (recorded 21-07-2026 as half built; completed 23-07-2026, #541).
+> The notes sidecar is committed and takes git's ordinary text merge as decided
+> below — for which it had to be written one field per line; see D7. The ink
+> sidecar is committed too, and its union-with-tombstones runs in
+> `mergeDeckVersions` (`_mergedAnnotations`), which serves both planes: the
+> REST resolver and the native `resolveRepoDeckMerge` overwrite whatever git's
+> tree merge left with the resolver's outcome. On the native plane the
+> `merge=ocideck-ink` driver exists in the deliberately minimal form that §10.2
+> allows — see the Phase 3 note below for what deviates from the sketch here
+> and why. The seal is settled in the opposite direction: tag only, no merge
+> semantics (§14, D13).
 
 "Sidecars merge poorly" flattened a distinction worth keeping: the two sidecars
 are not the same kind of file, and each has its own right answer (§14, D7).
@@ -1022,10 +1040,20 @@ Each phase is shippable and preserves the invariants.
 - `NativeGitMirror implements DeckMirror` — partial clone (D5), commit, fetch,
   push, merge, log, tag. Real offline history; real merges.
 - The ink-sidecar union merge driver + `.gitattributes` in the clone (§9.7).
-  **Not built** (recorded 21-07-2026): there is no `.gitattributes` and no
-  `merge=ocideck-ink` anywhere in `lib/`. It has nothing to act on yet either —
-  the commit set carries no sidecars at all (§9.1) — so this belongs with the
-  work that makes them travel, not with what Phase 3 delivered.
+  **Built 23-07-2026 (#541), with two deliberate deviations from this sketch.**
+  First: the binding lives in the clone's own `.git/info/attributes`, not in a
+  committed `.gitattributes` — measured, an *undefined* `merge=` attribute
+  falls back to the ordinary text merge, so committing the attribute buys a
+  clone without the driver nothing and costs every repo a file. Second: the
+  driver command is registered per merge invocation as a config override
+  (never `.git/config`, same rule as the token, §10.2) and is deliberately
+  `false` — always fail. Measured again: a registered failing driver leaves
+  the file untouched on *ours* and flags a conflict, no markers; the resolver
+  then writes the real union over it. The union itself is therefore the only
+  implementation (`_mergedAnnotations`), reproducible in-app as required —
+  a clone made by another tool has neither file nor driver, git text-merges
+  there, and the read side (`repoInkState`) treats a marker-ridden file as
+  untouchable instead of loading half of it.
 - **Prove OQ-10** (token delivery) on macOS, Windows and Linux before this phase
   is called done; §10.2 is provisional until then.
 - Verify: same `DeckMirror` contract tests pass against both implementations.
@@ -1303,8 +1331,15 @@ discussion still resolve.
   skips a marked stroke, so nothing changes on screen. A version-1 sidecar still
   reads — every stroke gets a fresh id — with one honest consequence recorded in
   the code: two copies of such a file get different ids and union into
-  double-drawn lines. Visible and repairable, unlike silently dropping one side.
-  The driver and the write path are still open.*
+  double-drawn lines. Visible and repairable, unlike silently dropping one side.*
+
+  *Driver and write path built later the same day (#541, part 2). The union
+  with tombstones lives in `mergeDeckVersions` and serves both planes; the
+  write path mirrors the notes (§9.1); the native driver is the minimal
+  fail-closed form described at Phase 3. Proven against real git in
+  `git_native_merge_test.dart`: two authors' strokes union, and an erased
+  stroke stays erased through a genuine merge — the exact case pure union got
+  wrong.*
 
   *The build order follows from that, and it matters: **first** the annotation
   format (stroke identity + tombstone, with a version bump and a read path for

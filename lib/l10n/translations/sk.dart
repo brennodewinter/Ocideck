@@ -2075,13 +2075,6 @@ const _dutchSourceAddSk = <String, String>{
       'Všetky snímky sú preskočené alebo zadržané kvôli svojej klasifikácii TLP — nie je čo exportovať.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Čísla grafov sa neuložili — existujú už len v tomto okne:',
-  'Niet alles gaat mee naar git': 'Do gitu nejde všetko',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Tieto časti sa nedostanú do commitu a v repozitári potom nebudú:',
-  'Tekeningen op slides': 'Kresby na snímkach',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Zostávajú v tomto okne. Uložte prezentáciu aj ako súbor alebo ako balík .ocideck, aby ste ich zachovali.',
-  'Toch opslaan': 'Uložiť aj tak',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'V prehliadači neexistuje obnova po páde: ak zavriete túto kartu, neuložená práca je preč. Uložte si prezentáciu sami.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

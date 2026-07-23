@@ -2093,13 +2093,6 @@ const _dutchSourceAddMt = <String, String>{
       'Is-slides kollha nqabżu jew huma miżmuma minħabba l-klassifikazzjoni TLP tagħhom — m\'hemm xejn x\'jiġi esportat.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Iċ-ċifri tal-graffs ma ġewx issalvati — jinsabu biss f\'din it-tieqa:',
-  'Niet alles gaat mee naar git': 'Mhux kollox imur f\'git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Dawn il-partijiet ma jispiċċawx fil-commit u wara mhux se jkunu fir-repożitorju:',
-  'Tekeningen op slides': 'Tpinġijiet fuq is-slides',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Jibqgħu f\'din it-tieqa. Issalva l-preżentazzjoni wkoll bħala fajl jew bħala pakkett .ocideck biex iżżommhom.',
-  'Toch opslaan': 'Issalva xorta',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Fil-browser m\'hemmx irkupru wara ħabta: jekk tagħlaq din it-tab, ix-xogħol mhux issalvat jintilef. Issalva l-preżentazzjoni tiegħek int stess.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

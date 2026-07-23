@@ -249,13 +249,47 @@ class _NativeGitMirror implements NativeGitMirror {
     List<String> operands = const [],
     Duration timeout = const Duration(seconds: 60),
     bool network = false,
+    List<GitConfigOverride> extraConfig = const [],
   }) async => _git.run(
     args,
     operands: operands,
     workingDirectory: _worktree.path,
-    config: network ? await _networkConfig() : _config0,
+    config: [...(network ? await _networkConfig() : _config0), ...extraConfig],
     timeout: timeout,
   );
+
+  /// De merge-driver voor de ink-sidecar (§9.7, D7), meegegeven aan precies de
+  /// merge-aanroep — nooit in `.git/config`, om dezelfde reden als de rest van
+  /// §10.2: configuratie hoort bij de aanroep die hem nodig heeft.
+  ///
+  /// De driver is `false`: altijd falen. Dat klinkt vreemd en is precies goed —
+  /// git laat het bestand dan ongemoeid op ónze kant staan (gemeten: geen
+  /// conflictmarkeringen) en meldt een conflict, waarna `resolveRepoDeckMerge`
+  /// er de echte unie-met-grafstenen overheen schrijft. Zonder driver zou git's
+  /// tekst-merge van twee JSON-kanten een bestand met markers maken dat geen
+  /// enkele build nog leest.
+  static const _inkMergeDriver = [
+    GitConfigOverride('merge.ocideck-ink.name', 'OciDeck ink-unie (in de app)'),
+    GitConfigOverride('merge.ocideck-ink.driver', 'false'),
+  ];
+
+  /// Bind `deck.ink.json` aan die driver, in de kloon zelf:
+  /// `.git/info/attributes` is clone-lokaal en reist niet mee. Een kloon van
+  /// een ander werktuig heeft dit bestand dus niet — daar valt git terug op de
+  /// tekst-merge, en het is de leeskant (`repoInkState`) die markers herkent en
+  /// het bestand dan niet aanraakt.
+  Future<void> _ensureInkMergeAttributes() async {
+    final attrs = File(p.join(_worktree.path, '.git', 'info', 'attributes'));
+    const line = 'deck.ink.json merge=ocideck-ink';
+    if (attrs.existsSync()) {
+      final txt = await attrs.readAsString();
+      if (txt.contains(line)) return;
+      await writeStringAtomic(attrs, '${txt.trimRight()}\n$line\n');
+    } else {
+      await attrs.parent.create(recursive: true);
+      await writeStringAtomic(attrs, '$line\n');
+    }
+  }
 
   // ── DeckMirror-contract (gedelegeerd) ──────────────────────────────────────
   @override
@@ -450,9 +484,16 @@ class _NativeGitMirror implements NativeGitMirror {
 
     // Laat git de rest van de boom samenvoegen — de pool-blobs zijn
     // inhoudsgeadresseerd en komen er dus gewoon bij. Dat `deck.md` daarbij
-    // botst is verwacht; die schrijven we er zo overheen.
+    // botst is verwacht; die schrijven we er zo overheen. De ink-sidecar krijgt
+    // zijn eigen driver mee zodat de tekst-merge er geen markers in achterlaat
+    // (§9.7): de unie komt uit de resolver, niet uit git.
+    await _ensureInkMergeAttributes();
     try {
-      await _run(['merge', '--no-commit', '--no-ff'], operands: [remote]);
+      await _run(
+        ['merge', '--no-commit', '--no-ff'],
+        operands: [remote],
+        extraConfig: _inkMergeDriver,
+      );
     } on GitCliException catch (e) {
       logWarning('mergeRemote: merge meldde botsingen (verwacht)', e);
     }

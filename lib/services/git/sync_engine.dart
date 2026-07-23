@@ -197,18 +197,24 @@ class SyncEngine {
       }
 
       // Wat er in de repo staat maar niet in de werkkopie, is weggehaald: een
-      // dia die verdween neemt zo ook haar bestanden mee. Met één uitzondering,
-      // en die is niet willekeurig — het notitiebestand is het enige bestand
-      // hier dat van iemand ánders kan zijn. Kon deze build het niet lezen
-      // (conflictmarkeringen uit een merge buiten OciDeck, of een sidecar van
-      // een nieuwere versie), dan draagt het deck geen notities om een reden die
-      // niets zegt over wat er in de repo hoort te staan — en "ontbreekt lokaal"
-      // is dan geen opdracht om andermans werk te wissen.
+      // dia die verdween neemt zo ook haar bestanden mee. Met twee
+      // uitzonderingen, en die zijn niet willekeurig — de notitie- en
+      // ink-sidecars zijn de bestanden hier die van iemand ánders kunnen zijn.
+      // Kon deze build ze niet lezen (conflictmarkeringen uit een merge buiten
+      // OciDeck, of een sidecar van een nieuwere versie), dan draagt het deck
+      // die laag niet om een reden die niets zegt over wat er in de repo hoort
+      // te staan — en "ontbreekt lokaal" is dan geen opdracht om andermans
+      // werk te wissen.
       final deletes = <String>[];
       for (final path in remote.keys) {
         if (deckLocal.containsKey(path)) continue;
         if (p.posix.basename(path) == userNotesRepoFileName &&
             await repoUserNotesState(path, (String q) async => remote[q]) !=
+                RepoSidecarState.ours) {
+          continue;
+        }
+        if (p.posix.basename(path) == inkRepoFileName &&
+            await repoInkState(path, (String q) async => remote[q]) !=
                 RepoSidecarState.ours) {
           continue;
         }

@@ -143,18 +143,9 @@ void main() {
     },
   );
 
-  test('een deck zonder media meldt niets over media', () {
-    final missing = gitDeckOmissions(deckMet());
-    expect(missing.isEmpty, isTrue);
-  });
-
-  test('een deck mét media meldt die niet langer als verlies', () {
-    // De waarschuwing bestond omdat media achterbleef. Nu ze meereist, mag ze
-    // er niet meer in staan — een waarschuwing die onwaar is, leert de
-    // gebruiker de hele melding weg te klikken.
-    final missing = gitDeckOmissions(
-      deckMet(video: '/media/intro.mp4', audio: '/media/stem.mp3'),
-    );
-    expect(missing.isEmpty, isTrue);
-  });
+  // De twee toetsen die hier bewaakten dat media niet meer als verlies werd
+  // gemeld, zijn met `gitDeckOmissions` zelf verdwenen (#541 deel 2): sinds ook
+  // de tekenlaag meereist bestaat de "niet alles gaat mee"-waarschuwing niet
+  // meer. Dat er géén tussenscherm komt, bewaakt git_omissions_warning_test nu
+  // op gebruikersniveau.
 }

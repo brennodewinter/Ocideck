@@ -2092,13 +2092,6 @@ const _dutchSourceAddBg = <String, String>{
       'Всички слайдове са пропуснати или задържани заради своята TLP класификация — няма какво да се експортира.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Числата на диаграмите не бяха запазени — те съществуват само в този прозорец:',
-  'Niet alles gaat mee naar git': 'Не всичко отива в git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Тези части не попадат в commit-а и после няма да ги има в хранилището:',
-  'Tekeningen op slides': 'Рисунки върху слайдове',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Те остават в този прозорец. Запазете презентацията и като файл или като пакет .ocideck, за да ги съхраните.',
-  'Toch opslaan': 'Все пак запази',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'В браузъра няма възстановяване след срив: затворите ли този раздел, незапазената работа изчезва. Запазете презентацията си сами.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

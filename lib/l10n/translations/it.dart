@@ -1041,13 +1041,6 @@ const _dutchSourceAddIt = {
       'Tutte le diapositive sono saltate o trattenute dalla loro classificazione TLP: non c\'è nulla da esportare.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'I numeri dei grafici non sono stati salvati: ora esistono solo in questa finestra:',
-  'Niet alles gaat mee naar git': 'Non tutto finisce in git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Queste parti non finiscono nel commit e non saranno nel repository:',
-  'Tekeningen op slides': 'Disegni sulle diapositive',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Restano in questa finestra. Salva la presentazione anche come file o come pacchetto .ocideck per conservarli.',
-  'Toch opslaan': 'Salva comunque',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Nel browser non esiste il ripristino dopo un arresto anomalo: se chiudi questa scheda, il lavoro non salvato va perso. Salva tu stesso la presentazione.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

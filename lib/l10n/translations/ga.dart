@@ -2106,13 +2106,6 @@ const _dutchSourceAddGa = <String, String>{
       'Ligeadh thar bráid gach sleamhnán nó coinníodh siar é de bharr a aicmithe TLP — níl aon rud le heaspórtáil.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Níor sábháladh figiúirí na gcairteacha — níl siad ann a thuilleadh ach san fhuinneog seo:',
-  'Niet alles gaat mee naar git': 'Ní théann gach rud go git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Ní théann na codanna seo isteach sa commit agus ní bheidh siad sa stór:',
-  'Tekeningen op slides': 'Líníochtaí ar sleamhnáin',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Fanann siad san fhuinneog seo. Sábháil an cur i láthair mar chomhad nó mar phacáiste .ocideck freisin chun iad a choinneáil.',
-  'Toch opslaan': 'Sábháil mar sin féin',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Sa bhrabhsálaí níl aon aisghabháil tar éis tuairte: má dhúnann tú an cluaisín seo, imíonn obair nár sábháladh. Sábháil do chur i láthair tú féin.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

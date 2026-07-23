@@ -2101,13 +2101,6 @@ const _dutchSourceAddEl = <String, String>{
       'Όλες οι διαφάνειες παραλείπονται ή παρακρατούνται λόγω της ταξινόμησης TLP τους, οπότε δεν υπάρχει τίποτα να εξαχθεί.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Οι αριθμοί των γραφημάτων δεν αποθηκεύτηκαν — υπάρχουν πλέον μόνο σε αυτό το παράθυρο:',
-  'Niet alles gaat mee naar git': 'Δεν πηγαίνουν όλα στο git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Αυτά τα μέρη δεν καταλήγουν στο commit και δεν θα βρίσκονται στο αποθετήριο:',
-  'Tekeningen op slides': 'Σχέδια σε διαφάνειες',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Παραμένουν σε αυτό το παράθυρο. Αποθηκεύστε την παρουσίαση και ως αρχείο ή ως πακέτο .ocideck για να τα διατηρήσετε.',
-  'Toch opslaan': 'Αποθήκευση ούτως ή άλλως',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Στο πρόγραμμα περιήγησης δεν υπάρχει ανάκτηση μετά από κατάρρευση: αν κλείσετε αυτήν την καρτέλα, η μη αποθηκευμένη εργασία χάνεται. Αποθηκεύστε μόνοι σας την παρουσίασή σας.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

@@ -2065,13 +2065,6 @@ const _dutchSourceAddLv = <String, String>{
       'Visi slaidi ir izlaisti vai aizturēti to TLP klasifikācijas dēļ — nav ko eksportēt.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Diagrammu skaitļi netika saglabāti — tie vairs pastāv tikai šajā logā:',
-  'Niet alles gaat mee naar git': 'Ne viss nonāk git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Šīs daļas nenonāk commit un vēlāk nebūs repozitorijā:',
-  'Tekeningen op slides': 'Zīmējumi uz slaidiem',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Tie paliek šajā logā. Saglabājiet prezentāciju arī kā failu vai kā .ocideck pakotni, lai tos saglabātu.',
-  'Toch opslaan': 'Tomēr saglabāt',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Pārlūkā nav atkopšanas pēc avārijas: aizverot šo cilni, nesaglabātais darbs pazūd. Saglabājiet prezentāciju paši.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

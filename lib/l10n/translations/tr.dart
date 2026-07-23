@@ -3043,13 +3043,6 @@ const _dutchSourceAddTr = <String, String>{
       'Tüm slaytlar atlandı ya da TLP sınıflandırmaları nedeniyle alıkonuldu — dışa aktarılacak bir şey yok.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Grafik sayıları kaydedilmedi — artık yalnızca bu pencerede duruyorlar:',
-  'Niet alles gaat mee naar git': 'Her şey git\'e gitmiyor',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Bu bölümler commit\'e girmez ve sonrasında repository\'de bulunmaz:',
-  'Tekeningen op slides': 'Slaytlardaki çizimler',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Bu pencerede kalırlar. Onları saklamak için sunumu ayrıca dosya olarak veya .ocideck paketi olarak kaydedin.',
-  'Toch opslaan': 'Yine de kaydet',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Tarayıcıda çökme kurtarma yoktur: bu sekmeyi kapatırsanız kaydedilmemiş çalışma kaybolur. Sunumunuzu kendiniz kaydedin.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

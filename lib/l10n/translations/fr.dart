@@ -1042,13 +1042,6 @@ const _dutchSourceAddFr = {
       'Toutes les diapositives sont ignorées ou retenues par leur classification TLP — rien à exporter.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Les chiffres des graphiques n\'ont pas été enregistrés — ils n\'existent plus que dans cette fenêtre :',
-  'Niet alles gaat mee naar git': 'Tout ne part pas dans git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Ces éléments ne se retrouvent pas dans le commit et ne seront pas dans le dépôt :',
-  'Tekeningen op slides': 'Dessins sur les diapositives',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Ils restent dans cette fenêtre. Enregistrez aussi la présentation sous forme de fichier ou de paquet .ocideck pour les conserver.',
-  'Toch opslaan': 'Enregistrer quand même',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Dans le navigateur, il n\'y a pas de récupération après plantage : si vous fermez cet onglet, le travail non enregistré est perdu. Enregistrez vous-même votre présentation.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

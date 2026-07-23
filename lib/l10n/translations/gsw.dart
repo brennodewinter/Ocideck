@@ -2070,13 +2070,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Alli Slides sind übersprunge oder wäg ihrer TLP-Klassifizierig zrugghalte, drum git\'s nüt zum exportiere.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'D Diagrammzahle sind nöd gspeicheret worde — sie stönd nu no i dem Fänschter:',
-  'Niet alles gaat mee naar git': 'Nöd alles gaht mit uf git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Die Teil chömed nöd i de Commit und stönd nachher nöd im Repository:',
-  'Tekeningen op slides': 'Zeichnige uf Slides',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Sie bliibed i dem Fänschter. Speicher d Präsentation au als Datei oder als .ocideck-Paket, zum si z\'behalte.',
-  'Toch opslaan': 'Trotzdem speichere',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Im Browser git\'s kei Absturz-Wiederherstellig: wänn du das Tab zuemachsch, isch nöd gspeicherti Arbet ewäg. Speicher dini Präsentation sälber.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
