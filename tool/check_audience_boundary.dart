@@ -105,6 +105,14 @@ const Map<String, Surface> _registry = {
     'woorden dat het deck 1-op-1 naar de `.md` gaat. Redigeren zou hier de '
     'uitgang blokkeren die het hele formaat rechtvaardigt.',
   ),
+  'lib/services/openkat/openkat_import_service.dart::_writeSidecars': Surface(
+    SurfaceKind.source,
+    'Schrijft het importmanifest en de per-organisatie-JSON naast het deck in '
+    'data/openkat/ — de eigen brondata van de gebruiker, op zijn eigen '
+    'machine, zodat de import controleerbaar en herhaalbaar is (#767). Er '
+    'vertrekt hier niets naar een ontvanger; wat wél de deur uit gaat loopt '
+    'via de export-oppervlakken hierboven, mét projectie.',
+  ),
   'lib/services/file/file_service_package.dart::downloadPackage': Surface(
     SurfaceKind.source,
     'Dezelfde bytes als exportPackage, via de bestandskiezer in plaats van een '

@@ -1773,6 +1773,16 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Importēt OpenKAT pārskatus…',
+  'Map met OpenKAT-rapportages kiezen': 'Izvēlēties mapi ar OpenKAT pārskatiem',
+  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT pārskati importēti.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'OpenKAT deks atjaunināts; manuālie slaidi ir saglabāti.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Šajā mapē nav atrasts neviens OpenKAT pārskats.',
+  'OpenKAT-import mislukt.': 'OpenKAT imports neizdevās.',
+  'rapportages': 'pārskati',
+  'overgeslagen': 'izlaisti',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'ne visus saistītos failus izdevās iekļaut (nenolasāmi vai ārpus projekta)',
   'punten': 'aizzīmēm',

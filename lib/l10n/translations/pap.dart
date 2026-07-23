@@ -733,6 +733,17 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'OpenKAT-rapportages importeren…': 'Importá rapòrtnan di OpenKAT…',
+  'Map met OpenKAT-rapportages kiezen':
+      'Skohe e folder ku rapòrtnan di OpenKAT',
+  'OpenKAT-rapportages geïmporteerd.': 'Rapòrtnan di OpenKAT importá.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'Deck di OpenKAT aktualisá; láminanan manual a keda konservá.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'No a haña ningun rapòrt di OpenKAT den e folder aki.',
+  'OpenKAT-import mislukt.': 'Importashon di OpenKAT a faya.',
+  'rapportages': 'rapòrt',
+  'overgeslagen': 'pasá over',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'no tur archivo konektá por a bai huntu (no por lesa nan òf nan ta pafó di e proyekto)',
   'punten': 'punto',

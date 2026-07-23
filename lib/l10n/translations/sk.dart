@@ -1781,6 +1781,16 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Importovať správy OpenKAT…',
+  'Map met OpenKAT-rapportages kiezen': 'Zvoliť priečinok so správami OpenKAT',
+  'OpenKAT-rapportages geïmporteerd.': 'Správy OpenKAT importované.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'Deck OpenKAT aktualizovaný; ručné snímky boli zachované.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'V tomto priečinku sa nenašli žiadne správy OpenKAT.',
+  'OpenKAT-import mislukt.': 'Import z OpenKAT sa nepodaril.',
+  'rapportages': 'správ',
+  'overgeslagen': 'preskočených',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'nie všetky prepojené súbory sa podarilo zahrnúť (nečitateľné alebo mimo projektu)',
   'punten': 'odrážok',

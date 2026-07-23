@@ -1778,6 +1778,17 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'OpenKAT-rapportages importeren…': 'OpenKAT-jelentések importálása…',
+  'Map met OpenKAT-rapportages kiezen':
+      'OpenKAT-jelentések mappájának kiválasztása',
+  'OpenKAT-rapportages geïmporteerd.': 'Az OpenKAT-jelentések importálva.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'Az OpenKAT-deck frissítve; a kézi diák megmaradtak.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Ebben a mappában nem találhatók OpenKAT-jelentések.',
+  'OpenKAT-import mislukt.': 'Az OpenKAT-importálás nem sikerült.',
+  'rapportages': 'jelentés',
+  'overgeslagen': 'kihagyva',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'nem minden csatolt fájlt sikerült bevenni (olvashatatlan vagy a projekten kívüli)',
   'punten': 'pont',

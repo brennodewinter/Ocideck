@@ -1749,6 +1749,17 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'OpenKAT-rapportages importeren…': 'OpenKAT ja\'ghachmey \'elmoH…',
+  'Map met OpenKAT-rapportages kiezen':
+      'OpenKAT ja\'ghachmey ngaSbogh Daq yIwIv',
+  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT ja\'ghachmey \'elmoHlu\'pu\'.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'OpenKAT deck choHlu\'pu\'; ghop slidemey pollu\'.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'DaqvamDaq OpenKAT ja\'ghachmey tu\'lu\'be\'.',
+  'OpenKAT-import mislukt.': 'OpenKAT \'elmoH luj.',
+  'rapportages': 'ja\'ghachmey',
+  'overgeslagen': 'juSlu\'',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'Hoch rarpu\' De\' qenglaHbe\'lu\' (laDlu\'laHbe\' pagh project Hur)',
   'punten': 'ghItlhmey',

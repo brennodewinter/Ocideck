@@ -1777,6 +1777,16 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Importovat zprávy OpenKAT…',
+  'Map met OpenKAT-rapportages kiezen': 'Zvolit složku se zprávami OpenKAT',
+  'OpenKAT-rapportages geïmporteerd.': 'Zprávy OpenKAT importovány.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'Deck OpenKAT aktualizován; ruční snímky byly zachovány.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'V této složce nebyly nalezeny žádné zprávy OpenKAT.',
+  'OpenKAT-import mislukt.': 'Import z OpenKAT se nezdařil.',
+  'rapportages': 'zpráv',
+  'overgeslagen': 'přeskočeno',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'ne všechny propojené soubory se podařilo zahrnout (nečitelné nebo mimo projekt)',
   'punten': 'odrážek',

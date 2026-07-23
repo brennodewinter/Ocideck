@@ -1777,6 +1777,16 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'OpenKAT-rapportages importeren…': 'OpenKAT-Bricht importiere…',
+  'Map met OpenKAT-rapportages kiezen': 'Ordner mit OpenKAT-Bricht wähle',
+  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-Bricht importiert.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'S OpenKAT-Deck isch aktualisiert; manuelli Slides sind erhalte blibe.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Kei OpenKAT-Bricht i dem Ordner gfunde.',
+  'OpenKAT-import mislukt.': 'OpenKAT-Import fehlgschlage.',
+  'rapportages': 'Bricht',
+  'overgeslagen': 'übersprunge',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'nöd alli verlinkte Dateie hend chöne mit (nöd läsbar oder usserhalb vom Projäkt)',
   'punten': 'Pünkt',

@@ -1746,6 +1746,20 @@ The same four values exist deck-wide (`privacy:` in the front matter). A slide
 *accept* (the whole briefing is known) with one slide set to *leave out* (this one
 detail is for nobody) has to just work, and the author of that slide knows best.
 
+### Importing OpenKAT reports (desktop)
+
+**… → OpenKAT-rapportages importeren…** takes a folder of JSON exports from
+[OpenKAT](https://openkat.nl) and builds one management deck from it — totals,
+trends and top findings per organisation, using the view limits below as
+defaults so an import of thousands of reports still yields readable slides
+while every underlying number stays in the deck — nothing is cut, only
+displayed selectively. Run the same action while an OpenKAT deck is open and it **updates** that
+deck: generated slides are refreshed, slides you added by hand are preserved.
+The import is honest about what it did — the message counts what was loaded
+and what was skipped (duplicates, unrecognised or invalid files, and files
+over the size cap; the folder comes from outside, so it is read within
+bounds). Desktop only: the import reads a folder from disk.
+
 ### Showing part of the data without losing any of it (view limits)
 
 A bullets, table or chart slide built from a large dataset — an import of

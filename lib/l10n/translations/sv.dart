@@ -1773,6 +1773,16 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Importera OpenKAT-rapporter…',
+  'Map met OpenKAT-rapportages kiezen': 'Välj mapp med OpenKAT-rapporter',
+  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-rapporter importerade.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'OpenKAT-decket uppdaterat; manuella bilder har behållits.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Inga OpenKAT-rapporter hittades i den här mappen.',
+  'OpenKAT-import mislukt.': 'OpenKAT-importen misslyckades.',
+  'rapportages': 'rapporter',
+  'overgeslagen': 'överhoppade',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'inte alla länkade filer kunde tas med (oläsliga eller utanför projektet)',
   'punten': 'punkter',

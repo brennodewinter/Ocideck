@@ -140,6 +140,9 @@ extension _MainLayoutMenu on _MainLayoutState {
         l10n.t('importPackage'),
       ),
       _menuItem('import_url', Icons.link, l10n.t('importUrl')),
+      // OpenKAT leest een map van schijf; op web weglaten, niet grijs maken.
+      if (supportsLocalProjectFolders)
+        _menuItem('import_openkat', Icons.radar_outlined, openKatLabel(l10n)),
       ..._gitMenuItems(l10n),
       const PopupMenuDivider(),
       // ── Bewerken in dit deck ──────────────────────────────────────

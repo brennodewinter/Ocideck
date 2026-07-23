@@ -2751,6 +2751,17 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'OpenKAT-rapportages importeren…': 'OpenKAT raporlarını içe aktar…',
+  'Map met OpenKAT-rapportages kiezen':
+      'OpenKAT raporlarının bulunduğu klasörü seç',
+  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT raporları içe aktarıldı.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'OpenKAT sunumu güncellendi; elle eklenen slaytlar korundu.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Bu klasörde OpenKAT raporu bulunamadı.',
+  'OpenKAT-import mislukt.': 'OpenKAT içe aktarımı başarısız oldu.',
+  'rapportages': 'rapor',
+  'overgeslagen': 'atlandı',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'bağlantılı dosyaların tümü eklenemedi (okunamıyor veya projenin dışında)',
   'punten': 'madde',
