@@ -1,5 +1,9 @@
 # Bouwt de Linux-desktopversie van OciDeck op de eigen Forgejo-runner (pawprint).
 # Draait bij elke push naar main en is handmatig te starten via workflow_dispatch.
+# De Flutter-toolchain is dezelfde als in ci.yml: de officiële stable-release
+# volgens de pin in .tool-versions, sha256-geverifieerd. (Eerder stond hier het
+# cirruslabs-image; dat bleek kanaal "[user-branch]" uit onbekende bron te
+# bevatten — niet de toolchain waarmee dit project wil bouwen.)
 name: linux-build
 
 on:
@@ -11,19 +15,38 @@ jobs:
   build-linux:
     runs-on: docker
     container:
-      image: ghcr.io/cirruslabs/flutter:stable
+      image: ubuntu:24.04
     steps:
       # Vóór de checkout: actions/checkout en upload-artifact zijn node-acties,
-      # en het Flutter-image brengt zelf geen node mee.
-      - name: Node en Linux-buildafhankelijkheden installeren
+      # en dit kale image brengt geen node mee.
+      - name: Gereedschap en Linux-buildafhankelijkheden installeren
         run: |
           apt-get update
           apt-get install -y --no-install-recommends \
-            nodejs \
+            nodejs make git curl ca-certificates xz-utils jq unzip zip \
             clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev \
             libsecret-1-dev
 
       - uses: actions/checkout@v4
+
+      - name: Officiële Flutter volgens de pin
+        run: |
+          set -eu
+          VERSION="$(sed -n 's/^flutter \(.*\)-stable$/\1/p' .tool-versions)"
+          test -n "$VERSION"
+          ARCHIVE="flutter_linux_${VERSION}-stable.tar.xz"
+          BASE="https://storage.googleapis.com/flutter_infra_release/releases"
+          curl -fsSLo /tmp/releases.json "$BASE/releases_linux.json"
+          SHA=$(jq -r --arg v "$VERSION" \
+            '.releases[] | select(.channel=="stable" and .version==$v) | .sha256' \
+            /tmp/releases.json)
+          test -n "$SHA"
+          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/stable/linux/$ARCHIVE"
+          echo "$SHA  /tmp/$ARCHIVE" | sha256sum -c -
+          tar -xJf "/tmp/$ARCHIVE" -C /opt
+          rm "/tmp/$ARCHIVE"
+          git config --global --add safe.directory /opt/flutter
+          echo "/opt/flutter/bin" >> "$GITHUB_PATH"
 
       - name: Afhankelijkheden ophalen
         run: flutter pub get
