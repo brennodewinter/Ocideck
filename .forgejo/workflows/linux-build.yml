@@ -1,0 +1,37 @@
+# Bouwt de Linux-desktopversie van OciDeck op de eigen Forgejo-runner (pawprint).
+# Draait bij elke push naar main en is handmatig te starten via workflow_dispatch.
+name: linux-build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-linux:
+    runs-on: docker
+    container:
+      image: ghcr.io/cirruslabs/flutter:stable
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Linux-buildafhankelijkheden installeren
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
+
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get
+
+      - name: Linux-release bouwen
+        run: flutter build linux --release
+
+      - name: Bundel inpakken
+        run: tar -C build/linux/x64/release/bundle -czf ocideck-linux-x64.tar.gz .
+
+      - name: Artifact bewaren
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocideck-linux-x64
+          path: ocideck-linux-x64.tar.gz
