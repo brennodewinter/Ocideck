@@ -280,17 +280,21 @@ saved version stays retrievable, which a plain folder cannot give you.
   in place; a new deck is published by choosing a name (it becomes
   `decks/<name>`). If someone moved the branch since you opened it, the save is
   refused so you do not overwrite their work — reload and save again.
-- **Everything travels to git.** A commit carries `deck.md`, the images **and**
-  the video and audio in the shared pool, the linked chart data files, your
-  notes, and — since 23-07-2026 (#541) — the drawings made on your slides
-  (`deck.ink.json`). The one exception is a sealed deck: its seal belongs to a
-  release tag, so a normal save to a work branch is refused outright with an
-  explanation, rather than committed with the seal silently dropped. *(There
-  used to be a blocking "not everything travels" dialog here that counted what
-  stayed behind. It shrank with every layer that learned to travel — media,
-  chart data, notes, the seal-refusal — and with the drawings on board it had
-  no true line left, so it is gone: a warning that lists more than actually
-  goes wrong is one people learn to dismiss whole.)*
+- **Every layer of an ordinary deck travels to git.** A commit carries
+  `deck.md`, the images **and** the video and audio in the shared pool, the
+  linked chart data files, your notes, and — since 23-07-2026 (#541) — the
+  drawings made on your slides (`deck.ink.json`). Two deliberate exceptions
+  remain. A sealed deck: its seal belongs to a release tag, so a normal save to
+  a work branch is refused outright with an explanation, rather than committed
+  with the seal silently dropped. And the MIAUW disposition sidecar
+  (`.miauw.json`, the waivers and confirmations of a pentest report) does not
+  travel yet — moving such a deck into a repository keeps the disposition on
+  this machine only; save to a folder or a package to carry it. *(There used to
+  be a blocking "not everything travels" dialog here that counted what stayed
+  behind. It shrank with every layer that learned to travel — media, chart
+  data, notes, the seal-refusal — and with the drawings on board it had no true
+  line left for an ordinary deck, so it is gone: a warning that lists more than
+  actually goes wrong is one people learn to dismiss whole.)*
 - **Your notes travel, and your co-authors' notes merge.** The notes live next to
   the deck in the repository as `deck.user-notes.json`, so two people writing
   notes on different slides both keep theirs when their work comes together. Two

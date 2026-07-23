@@ -180,8 +180,10 @@ Future<({Deck deck, List<String> missing})> withRepoChartData(
 /// plaats van een mislukte open — dezelfde ruil als op schijf en bij
 /// grafiekdata. Notities zijn een laag over het deck, niet het deck.
 ///
-/// **Maar dan mag de schrijfkant het bestand niet weggooien**, en dáárvoor is
-/// [RepoUserNotes.onleesbaar]. Op schijf is dat contract al dichtgezet
+/// **Maar dan mag de schrijfkant het bestand niet weggooien.** Die bescherming
+/// zit in [repoUserNotesState] (de schrijfkant vraagt zelf "mag ik hieraan
+/// komen?"); [RepoUserNotes.onleesbaar] is de leeskant van hetzelfde oordeel,
+/// voor een aanroeper die wil melden. Op schijf is dat contract al dichtgezet
 /// (`_sidecarUntouchable`, zie `sidecar_format.dart`: "half inlezen is het
 /// gevaarlijke geval"); hier weegt het zwaarder, want dit bestand is niet van
 /// jou alleen. Conflictmarkeringen uit een merge búiten OciDeck zijn geen
@@ -237,11 +239,12 @@ Future<RepoUserNotes> withRepoUserNotes(
 
 /// Hang de tekeningen uit `deck.ink.json` weer aan [deck] — hetzelfde contract
 /// als [withRepoUserNotes], inclusief de ruime onleesbaar-vlag: elk bestand dat
-/// er ligt maar geen streken opleverde telt als onleesbaar, zodat de
-/// schrijfkant het niet aanziet voor "geen tekeningen" en het verwijdert.
-/// Conflictmarkeringen uit een merge buiten OciDeck en een sidecar van een
-/// nieuwere build zijn precies de gevallen waarin dat andermans werk zou
-/// kosten.
+/// er ligt maar geen streken opleverde telt als onleesbaar. De vlag beschrijft
+/// de leeskant; de bescherming van de schrijfkant komt niet hiervandaan maar
+/// uit [repoInkState], dat conflictmarkeringen en een nieuwere versie als
+/// onaanraakbaar aanmerkt. Streken die nergens meer heranker­en (de dia is weg
+/// of herschreven) vallen wél weg — dat is het gedocumenteerde §6.2-gedrag,
+/// geen leesfout.
 typedef RepoInk = ({Deck deck, bool onleesbaar});
 
 Future<RepoInk> withRepoInk(

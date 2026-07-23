@@ -1453,14 +1453,17 @@ Marp `.md` is never touched by annotations.
 
 ```json
 {
-  "version": 1,
+  "version": 2,
   "slides": [
     {
       "index": 2,
       "fp": "a1b2c3d4",
       "strokes": [
-        { "tool": "pen", "color": 4294198070, "width": 0.004,
-          "points": [0.1, 0.2, 0.15, 0.22] }
+        { "id": "9f2c1a84-…", "tool": "pen", "color": 4294198070,
+          "width": 0.004, "points": [0.1, 0.2, 0.15, 0.22] },
+        { "id": "b7e03d51-…", "tool": "pen", "color": 4294198070,
+          "width": 0.004, "points": [0.4, 0.5, 0.45, 0.52],
+          "erased": true }
       ]
     }
   ]
@@ -1469,6 +1472,16 @@ Marp `.md` is never touched by annotations.
 
 `points` is a flat list `[x0, y0, x1, y1, ...]`; `color` is an ARGB int; `tool`
 is `pen` or `highlighter` (laser pointers are transient and are not stored).
+
+Since version 2 (#541) every stroke carries a stable **`id`**, and an erased
+stroke stays in the file marked **`"erased": true`** — a tombstone, not a
+deletion. Both exist for the merge: when two copies of a deck come together the
+stroke sets are **unioned by id** (two people drawing did not disagree), and a
+tombstone wins over the same stroke un-erased, so an erasure survives a merge
+with someone who still had the stroke. `erased` is only written when true. A
+version-1 file still reads — every stroke is dealt a fresh id — and a tool that
+writes this sidecar should write version 2 with ids, or its strokes will union
+into duplicates.
 
 `version` is a single increasing integer, and every sidecar in this chapter
 handles it the same way (`lib/services/sidecar_format.dart`): **a file declaring
@@ -1484,10 +1497,14 @@ marks a deck as changed and the strokes are not in the markdown: without it a
 deck that had only been drawn on came back after a crash with the drawings gone.
 A snapshot that carries an unreadable ink payload still restores the text.
 
-**A commit to a git repository does not carry this sidecar** — nothing in
-`services/git/` writes it — so drawings do not travel that way. Saving to a
-folder or into a package does take them along. OciDeck says so before the commit
-is made rather than after; see `design/GIT_STORAGE.md` §9.1.
+**A commit to a git repository carries this sidecar** (since #541, part 2): it
+is written as `deck.ink.json` next to `deck.md`, indented so line-based diffs
+and merges stay readable. Inside OciDeck a merge unions the stroke sets as
+described above; a clone made by another tool has no merge driver and falls
+back to git's ordinary text merge, which OciDeck's read side treats as
+untouchable when it left conflict markers behind — it will not load half a
+file, and it will not delete or overwrite what it could not read. See
+`design/GIT_STORAGE.md` §9.1 and §9.7.
 
 ### 6.3 User Notes (`<name>.user-notes.json`)
 
