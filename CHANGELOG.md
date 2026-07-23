@@ -94,6 +94,15 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Fixed
+- **Linux: afbeelding naar klembord kopiëren werkt nu echt (#758).** Het
+  pasteboard-pakket heeft geen Linux-schrijftak, dus `writeImage` was daar een
+  stille no-op: de knop meldde succes terwijl het klembord leeg bleef. Het
+  schrijven loopt op Linux nu via een eigen kanaal in de GTK-runner
+  (`gdk_pixbuf` decodeert, `gtk_clipboard_set_image` plaatst), en het oordeel
+  van de native kant — gelukt of niet — is wat de gebruiker te zien krijgt.
+  Lezen van het klembord werkte al en is ongemoeid.
+
 ### Changed
 - **Sjablooninhoud is voortaan een document per taal, geen code meer.** De
   voorbeelddia's van de 49 sjablonen leefden als Dart-bouwers in zeven

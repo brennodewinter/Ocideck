@@ -1,5 +1,7 @@
 #include "my_application.h"
 
+#include <string.h>
+
 #include <flutter_linux/flutter_linux.h>
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
@@ -11,6 +13,9 @@
 struct _MyApplication {
   GtkApplication parent_instance;
   char** dart_entrypoint_arguments;
+  // The clipboard write path: the pasteboard package has no Linux branch for
+  // writeImage, so the Dart side calls this channel instead (issue #758).
+  FlMethodChannel* clipboard_channel;
 };
 
 G_DEFINE_TYPE(MyApplication, my_application, GTK_TYPE_APPLICATION)
@@ -32,6 +37,49 @@ static void set_window_icon(GtkWindow* window) {
 // Called when first Flutter frame received.
 static void first_frame_cb(MyApplication* self, FlView* view) {
   gtk_widget_show(gtk_widget_get_toplevel(GTK_WIDGET(view)));
+}
+
+// Puts encoded image bytes (PNG/JPEG/…) on the GTK clipboard as a pixbuf.
+// Returns whether the bytes decoded to an image and were handed to GTK; a
+// false result is what the Dart side reports to the user as a failed copy.
+static gboolean write_image_to_clipboard(const uint8_t* bytes, size_t length) {
+  GdkPixbufLoader* loader = gdk_pixbuf_loader_new();
+  gboolean decoded = gdk_pixbuf_loader_write(loader, bytes, length, nullptr);
+  // Always close the loader: required before reading the pixbuf, and it
+  // releases the decoder state on the failure path too.
+  decoded = gdk_pixbuf_loader_close(loader, nullptr) && decoded;
+  GdkPixbuf* pixbuf =
+      decoded ? gdk_pixbuf_loader_get_pixbuf(loader) : nullptr;
+  if (pixbuf != nullptr) {
+    GtkClipboard* clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
+    gtk_clipboard_set_image(clipboard, pixbuf);
+    // Ask the clipboard manager (if any) to keep the content after exit.
+    gtk_clipboard_store(clipboard);
+  }
+  g_object_unref(loader);
+  return pixbuf != nullptr;
+}
+
+// Handles calls on the ocideck/clipboard channel (see ImageService in Dart).
+static void clipboard_method_call_cb(FlMethodChannel* channel,
+                                     FlMethodCall* method_call,
+                                     gpointer user_data) {
+  g_autoptr(FlMethodResponse) response = nullptr;
+  if (strcmp(fl_method_call_get_name(method_call), "writeImage") == 0) {
+    FlValue* args = fl_method_call_get_args(method_call);
+    if (args != nullptr && fl_value_get_type(args) == FL_VALUE_TYPE_UINT8_LIST) {
+      gboolean ok = write_image_to_clipboard(fl_value_get_uint8_list(args),
+                                             fl_value_get_length(args));
+      g_autoptr(FlValue) result = fl_value_new_bool(ok);
+      response = FL_METHOD_RESPONSE(fl_method_success_response_new(result));
+    } else {
+      response = FL_METHOD_RESPONSE(fl_method_error_response_new(
+          "bad-args", "writeImage expects a byte list", nullptr));
+    }
+  } else {
+    response = FL_METHOD_RESPONSE(fl_method_not_implemented_response_new());
+  }
+  fl_method_call_respond(method_call, response, nullptr);
 }
 
 // Implements GApplication::activate.
@@ -93,6 +141,15 @@ static void my_application_activate(GApplication* application) {
   desktop_multi_window_plugin_set_window_created_callback(
       [](FlPluginRegistry* registry) { fl_register_plugins(registry); });
 
+  // The channel lives on the struct so it survives this scope; disposed with
+  // the application.
+  g_autoptr(FlStandardMethodCodec) codec = fl_standard_method_codec_new();
+  self->clipboard_channel = fl_method_channel_new(
+      fl_engine_get_binary_messenger(fl_view_get_engine(view)),
+      "ocideck/clipboard", FL_METHOD_CODEC(codec));
+  fl_method_channel_set_method_call_handler(
+      self->clipboard_channel, clipboard_method_call_cb, self, nullptr);
+
   gtk_widget_grab_focus(GTK_WIDGET(view));
 }
 
@@ -139,6 +196,7 @@ static void my_application_shutdown(GApplication* application) {
 static void my_application_dispose(GObject* object) {
   MyApplication* self = MY_APPLICATION(object);
   g_clear_pointer(&self->dart_entrypoint_arguments, g_strfreev);
+  g_clear_object(&self->clipboard_channel);
   G_OBJECT_CLASS(my_application_parent_class)->dispose(object);
 }
 
