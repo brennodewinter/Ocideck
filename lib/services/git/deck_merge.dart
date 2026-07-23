@@ -2,6 +2,7 @@ import '../../models/annotation.dart';
 import '../../models/deck.dart';
 import '../../models/slide.dart';
 import '../annotation_codec.dart';
+import '../privacy/dismissal_codec.dart';
 import '../slide_dedup_service.dart';
 import '../user_notes_codec.dart';
 import 'version_diff.dart';
@@ -197,6 +198,18 @@ DeckMergeResult mergeDeckVersions(
       tlp: tlp,
       userNotes: _mergedUserNotes(ours, theirs, out),
       annotations: _mergedAnnotations(ours, theirs, out),
+      // De terzijdeleggingen: de unie op regel + commitment die de codec al
+      // besliste (latere `at` wint, grafstenen blijven). Zonder deze regel zou
+      // `copyWith` stil ónze kant houden en verdween het oordeel van de andere
+      // reviewer bij de eerstvolgende samenvoeging — precies het verlies
+      // waarvoor de grafstenen bestaan. Geen heranker-stap nodig: de identiteit
+      // is regel + commitment, geen dia-positie.
+      dismissals: switch ((ours.dismissals, theirs.dismissals)) {
+        (null, null) => null,
+        (final a?, null) => a,
+        (null, final b?) => b,
+        (final a?, final b?) => mergeDismissals(a, b),
+      },
     ),
     [for (final c in conflicts) c._at(landedAt[c.baseIndex])],
   );

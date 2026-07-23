@@ -282,8 +282,12 @@ saved version stays retrievable, which a plain folder cannot give you.
   refused so you do not overwrite their work — reload and save again.
 - **Every layer of an ordinary deck travels to git.** A commit carries
   `deck.md`, the images **and** the video and audio in the shared pool, the
-  linked chart data files, your notes, and — since 23-07-2026 (#541) — the
-  drawings made on your slides (`deck.ink.json`). Two deliberate exceptions
+  linked chart data files, your notes, the drawings made on your slides
+  (`deck.ink.json`, #541) and the set-aside privacy findings
+  (`deck.dismissals.json`, #651) — a set-aside is a review decision about the
+  report, so a second reviewer opening the deck from the repository does not
+  re-litigate what a colleague already judged; two reviewers' judgements merge
+  by union, latest change wins per finding. Two deliberate exceptions
   remain. A sealed deck: its seal belongs to a release tag, so a normal save to
   a work branch is refused outright with an explanation, rather than committed
   with the seal silently dropped. And the MIAUW disposition sidecar

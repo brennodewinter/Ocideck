@@ -14,6 +14,7 @@ import 'package:ocideck/services/git/deck_repo_serializer.dart';
 import 'package:ocideck/services/git/repo_asset_resolver.dart';
 import 'package:ocideck/services/annotation_codec.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/privacy/dismissal_codec.dart';
 import 'package:ocideck/services/user_notes_codec.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 
@@ -1015,6 +1016,154 @@ void main() {
 
       expect(terug.deck.annotations.values.single.single.id, 's1');
       expect(terug.inkUnreadable, isFalse);
+    });
+  });
+
+  group('terzijdeleggingen', () {
+    // #651, het laatste deel: een terzijdelegging is een reviewbesluit over
+    // het rapport en reist dus mee. Zelfde machinerie als de notities en de
+    // ink (_repoSidecarState/_writeRepoSidecar — daar al bewezen); hier de
+    // dismissals-eigen randen: grafstenen zijn inhoud, en het bestand draagt
+    // commitments, nooit de gevonden waarde.
+    const dPath = '$deckDir/deck.dismissals.json';
+
+    PrivacyDismissal oordeel(String rule, String commitment) =>
+        PrivacyDismissal(
+          ruleId: rule,
+          commitment: commitment,
+          at: DateTime.utc(2026, 7, 23, 10),
+        );
+
+    Future<RepoDeckFiles> build(
+      Deck deck, {
+      Map<String, Uint8List> inRepo = const {},
+    }) async => buildDeckRepoFiles(
+      deck,
+      md: md,
+      pool: poolFor(FakeRepo(branches: {'main': 'c0'}, files: {})),
+      deckDir: deckDir,
+      resolveBytes: resolverFrom({}),
+      read: (path) async => inRepo[path],
+    );
+
+    Deck deckMet(DeckDismissals? d) => Deck(
+      title: 'Kwartaal',
+      slides: [Slide.create(SlideType.title).copyWith(title: 'Eén')],
+      dismissals: d,
+    );
+
+    test('krijgen een eigen bestand naast deck.md, zonder de waarde', () async {
+      final c = commitmentFor('zout', 'Jan Jansen');
+      final out = await build(
+        deckMet(
+          DeckDismissals(salt: 'zout', dismissals: [oordeel('nl.naam', c)]),
+        ),
+      );
+
+      expect(out.upserts.containsKey(dPath), isTrue);
+      final inhoud = utf8.decode(out.upserts[dPath]!);
+      expect(inhoud, contains('nl.naam'));
+      expect(
+        inhoud,
+        isNot(contains('Jan Jansen')),
+        reason: 'de sidecar draagt een commitment, nooit de gevonden waarde',
+      );
+    });
+
+    test('komen er bij het openen weer aan, met werkend verbergen', () async {
+      final c = commitmentFor('zout', 'Jan Jansen');
+      final out = await build(
+        deckMet(
+          DeckDismissals(salt: 'zout', dismissals: [oordeel('nl.naam', c)]),
+        ),
+      );
+      final parsed = md.parseDeck(
+        utf8.decode(out.upserts['$deckDir/deck.md']!),
+      )!;
+      final terug = await withRepoDismissals(
+        parsed,
+        deckDir: deckDir,
+        read: (path) async => out.upserts[path],
+      );
+
+      expect(terug.deck.dismissals!.hides('nl.naam', 'Jan Jansen'), isTrue);
+      expect(terug.deck.dismissals!.salt, 'zout');
+    });
+
+    test('alleen grafstenen is nog steeds een bestand', () async {
+      // "Alles herroepen" ruimt de sidecar bewust niet op: weggooien laat de
+      // terzijdelegging bij de eerstvolgende samenvoeging terugkeren van de
+      // andere kant, en dan is de bevinding weer verborgen zonder keuze.
+      final out = await build(
+        deckMet(
+          DeckDismissals(
+            salt: 'zout',
+            revocations: [oordeel('nl.naam', 'cafe01')],
+          ),
+        ),
+      );
+
+      expect(out.upserts.containsKey(dPath), isTrue);
+      expect(utf8.decode(out.upserts[dPath]!), contains('revocations'));
+    });
+
+    test('zonder oordelen gaat een eigen bestand wél weg', () async {
+      final c = commitmentFor('zout', 'x');
+      final bestaand = DismissalCodec.encode(
+        DeckDismissals(salt: 'zout', dismissals: [oordeel('nl.naam', c)]),
+        forTextMerge: true,
+      )!;
+      final out = await build(
+        deckMet(null),
+        inRepo: {dPath: Uint8List.fromList(utf8.encode(bestaand))},
+      );
+
+      expect(out.deletes, contains(dPath));
+    });
+
+    test('maar niet wanneer het bestand niet van ons is', () async {
+      final out = await build(
+        deckMet(null),
+        inRepo: {
+          dPath: Uint8List.fromList(utf8.encode('{"version":99,"salt":"z"}')),
+        },
+      );
+
+      expect(out.deletes, isEmpty);
+      expect(out.upserts.containsKey(dPath), isFalse);
+    });
+
+    test('de werkkopie voor de wachtrij draagt ze ook', () {
+      final c = commitmentFor('zout', 'x');
+      final files = mirrorDeckFiles(
+        deckMet(
+          DeckDismissals(salt: 'zout', dismissals: [oordeel('nl.naam', c)]),
+        ),
+        deckDir: deckDir,
+        md: md,
+      );
+
+      expect(files.keys, contains(dPath));
+    });
+
+    test('withRepoSidecars hangt ook deze laag aan', () async {
+      final c = commitmentFor('zout', 'Jan Jansen');
+      final out = await build(
+        deckMet(
+          DeckDismissals(salt: 'zout', dismissals: [oordeel('nl.naam', c)]),
+        ),
+      );
+      final parsed = md.parseDeck(
+        utf8.decode(out.upserts['$deckDir/deck.md']!),
+      )!;
+      final terug = await withRepoSidecars(
+        parsed,
+        deckDir: deckDir,
+        read: (path) async => out.upserts[path],
+      );
+
+      expect(terug.deck.dismissals, isNotNull);
+      expect(terug.dismissalsUnreadable, isFalse);
     });
   });
 }

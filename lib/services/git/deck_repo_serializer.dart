@@ -10,6 +10,7 @@ import '../../models/chart.dart';
 import '../../utils/log.dart';
 import '../annotation_codec.dart';
 import '../markdown_service.dart';
+import '../privacy/dismissal_codec.dart';
 import '../sidecar_format.dart';
 import '../user_notes_codec.dart';
 import '../slide_image_refs.dart';
@@ -51,6 +52,21 @@ const String inkRepoFileName = 'deck.ink.json';
 /// die de tekenlaag op schijf ook al heeft (`FileService.maxDeckSidecarBytes`):
 /// streken zijn puntenlijsten en tellen op, anders dan notitietekst.
 const int maxRepoInkBytes = 16 * 1024 * 1024; // 16 MiB
+
+/// Naam van de terzijdeleggingen-sidecar binnen een deckmap (#651) — dezelfde
+/// achtervoegselvorm als op schijf (`<naam>.dismissals.json`), om dezelfde
+/// reden als bij de notities: wie een deck verhuist, herkent het bestand.
+///
+/// Dat deze sidecar überhaupt de repo in gaat is een besluit, geen gemak: een
+/// terzijdelegging is een reviewbesluit over het rapport, en een tweede
+/// reviewer moet niet opnieuw langs wat een collega al beoordeeld heeft
+/// (FILE_FORMAT §6.7). De inhoud is daarvoor gebouwd — regel-id plus salted
+/// commitment, nooit de gevonden waarde zelf.
+const String dismissalsRepoFileName = 'deck.dismissals.json';
+
+/// Bovengrens voor de terzijdeleggingen-sidecar: oordelen zijn tekstregels en
+/// tellen in kilobytes, net als de notities.
+const int maxRepoDismissalsBytes = 2 * 1024 * 1024; // 2 MiB
 
 /// Levert de bytes achter een afbeeldingsverwijzing, of null wanneer die niet te
 /// lezen is (web zonder mem:-treffer, een pad buiten het project, een leesfout).
@@ -284,6 +300,55 @@ Future<RepoInk> withRepoInk(
       : (deck: deck.copyWith(annotations: ink), onleesbaar: false);
 }
 
+/// Hang de terzijdeleggingen uit `deck.dismissals.json` weer aan [deck] —
+/// zelfde contract als de notities en de ink. Geen herankeren nodig: de
+/// identiteit is regel-id + commitment, niet een dia-positie, dus dit hoeft
+/// niet eens na het parsen — maar het reist met de andere lagen mee door
+/// [withRepoSidecars], zodat er één plek blijft waar een laag vergeten kan
+/// worden.
+typedef RepoDismissals = ({Deck deck, bool onleesbaar});
+
+Future<RepoDismissals> withRepoDismissals(
+  Deck deck, {
+  required String deckDir,
+  required RepoFileReader read,
+}) async {
+  Uint8List? bytes;
+  try {
+    bytes = await read(p.posix.join(deckDir, dismissalsRepoFileName));
+  } catch (e) {
+    logWarning('withRepoDismissals: terzijdeleggingenbestand onbereikbaar', e);
+    return (deck: deck, onleesbaar: true);
+  }
+  if (bytes == null || bytes.isEmpty) {
+    return (deck: deck, onleesbaar: false);
+  }
+  if (bytes.length > maxRepoDismissalsBytes) {
+    logWarning(
+      'withRepoDismissals: terzijdeleggingenbestand is ${bytes.length} bytes '
+      '(grens $maxRepoDismissalsBytes) — niet geladen',
+    );
+    return (deck: deck, onleesbaar: true);
+  }
+  final String json;
+  try {
+    json = utf8.decode(bytes);
+  } on FormatException catch (e) {
+    logWarning(
+      'withRepoDismissals: terzijdeleggingenbestand is geen geldige UTF-8',
+      e,
+    );
+    return (deck: deck, onleesbaar: true);
+  }
+  // Het zout uit het bestand wint; de fallback geldt alleen wanneer het
+  // bestand er geen draagt, en dan valt er ook niets te matchen — dezelfde
+  // redenering als bij het openen van schijf (file_service_open).
+  final d = DismissalCodec.decode(json, fallbackSalt: newDismissalSalt());
+  return d.isEmpty
+      ? (deck: deck, onleesbaar: true)
+      : (deck: deck.copyWith(dismissals: d), onleesbaar: false);
+}
+
 /// Alles wat naast `deck.md` in de deckmap ligt, terug aan [deck] gehangen —
 /// de omkering van [buildDeckRepoFiles] in één stap.
 ///
@@ -302,6 +367,7 @@ Future<
     List<String> missingChartData,
     bool userNotesUnreadable,
     bool inkUnreadable,
+    bool dismissalsUnreadable,
   })
 >
 withRepoSidecars(
@@ -316,11 +382,17 @@ withRepoSidecars(
     read: read,
   );
   final ink = await withRepoInk(notes.deck, deckDir: deckDir, read: read);
+  final dismissals = await withRepoDismissals(
+    ink.deck,
+    deckDir: deckDir,
+    read: read,
+  );
   return (
-    deck: ink.deck,
+    deck: dismissals.deck,
     missingChartData: charts.missing,
     userNotesUnreadable: notes.onleesbaar,
     inkUnreadable: ink.onleesbaar,
+    dismissalsUnreadable: dismissals.onleesbaar,
   );
 }
 
@@ -521,6 +593,20 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
     upserts: upserts,
     deletes: deletes,
   );
+  // De terzijdeleggingen gaan mee (#651): een reviewbesluit hoort bij het
+  // rapport, niet bij de machine waarop het genomen werd. Grafstenen zijn ook
+  // hier inhoud — "alles herroepen" schrijft een bestand met herroepingen, en
+  // pas een deck zonder enig oordeel levert null en dus een verwijdering.
+  await _writeRepoSidecar(
+    path: p.posix.join(deckDir, dismissalsRepoFileName),
+    state: (path) => repoDismissalsState(path, read),
+    encoded: switch (rewritten.dismissals) {
+      null => null,
+      final d => DismissalCodec.encode(d, forTextMerge: true),
+    },
+    upserts: upserts,
+    deletes: deletes,
+  );
 
   // Met een pool alleen de nog niet aanwezige blobs; zonder pool (native) alle.
   final already = pool == null
@@ -622,6 +708,19 @@ Future<RepoSidecarState> repoInkState(String path, RepoFileReader? read) =>
       wat: 'inkbestand',
     );
 
+/// De toestand van de terzijdeleggingen-sidecar op [path] — zelfde strenge
+/// regel; dit bestand draagt reviewbesluiten van mogelijk een ándere reviewer.
+Future<RepoSidecarState> repoDismissalsState(
+  String path,
+  RepoFileReader? read,
+) => _repoSidecarState(
+  path,
+  read,
+  maxBytes: maxRepoDismissalsBytes,
+  version: DismissalCodec.version,
+  wat: 'terzijdeleggingenbestand',
+);
+
 Future<RepoSidecarState> _repoSidecarState(
   String path,
   RepoFileReader? read, {
@@ -689,6 +788,10 @@ Map<String, Uint8List> mirrorDeckFiles(
     deck.annotations,
     forTextMerge: true,
   );
+  final dismissals = switch (deck.dismissals) {
+    null => null,
+    final d => DismissalCodec.encode(d, forTextMerge: true),
+  };
   return <String, Uint8List>{
     p.posix.join(deckDir, deckRepoFileName): Uint8List.fromList(
       utf8.encode(md.generateDeck(deck)),
@@ -705,6 +808,10 @@ Map<String, Uint8List> mirrorDeckFiles(
       null => null,
     },
     p.posix.join(deckDir, inkRepoFileName): ?switch (ink) {
+      final String json => Uint8List.fromList(utf8.encode(json)),
+      null => null,
+    },
+    p.posix.join(deckDir, dismissalsRepoFileName): ?switch (dismissals) {
       final String json => Uint8List.fromList(utf8.encode(json)),
       null => null,
     },
@@ -786,6 +893,10 @@ Future<RepoMergeOutcome> resolveRepoDeckMerge({
       p.posix.join(deckDir, inkRepoFileName): ?await read(
         MergeSide.ours,
         p.posix.join(deckDir, inkRepoFileName),
+      ),
+      p.posix.join(deckDir, dismissalsRepoFileName): ?await read(
+        MergeSide.ours,
+        p.posix.join(deckDir, dismissalsRepoFileName),
       ),
     };
     for (final path
