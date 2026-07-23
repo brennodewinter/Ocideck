@@ -455,7 +455,7 @@ also declares them, but see the [CI note](#continuous-integration).)
   toolchain is not written down, "make check passes" is not reproducible, which
   is what `COMPLIANCE.md` QA.04 promises and what #598 reported.
 - **Why it exists:** the drift was not noticed twice. The machine ran `3.44.2`
-  from an unofficial channel while three documents named `3.44.7`; that was
+  from an unofficial channel while three documents named `3.44.6`; that was
   corrected by hand, and within a day it had drifted back. Nothing was looking.
   The defect is not which number runs — it is that the difference could be
   invisible.
@@ -466,6 +466,18 @@ also declares them, but see the [CI note](#continuous-integration).)
   On top of that, once the toolchain is correct, it must also appear in
   [Toolchains of record](#toolchains-of-record), so a pin bump cannot leave this
   document behind.
+- **And every place that names the version must agree** (#721). Fifteen version
+  claims live across seven files — `.tool-versions`, `README.md`,
+  `CONTRIBUTING.md`, `BUILD.md`, this file, and both workflows. Raising the pin
+  in one and forgetting another is a silent failure: the documentation then
+  promises something the machine does not do, which is how #598 started.
+- **A bold version is a requirement; a code-quoted one is a quotation.** That
+  distinction is what lets these documents keep telling their own history —
+  "the machine ran 3.44.2 while three documents named `3.44.6`" must *not* move
+  with the pin, or it becomes untrue. The patterns therefore match the claim
+  form (`**Flutter X**`, `flutter-version: X`), never a bare number. A pattern
+  that stops matching anything fails the gate too: a check that finds nothing is
+  green for the wrong reason.
 - **Why exactly, and not "3.44.x":** `dart format` reflows whitespace between
   releases. A green `make format-check` on a neighbouring patch release proves
   something about a different formatter than the one CI runs, which is the one

@@ -178,6 +178,59 @@ void main() {
     });
   });
 
+  group('findVersionClaims + disagreeingClaims', () {
+    const yaml = r'flutter-version: (\d+\.\d+\.\d+)';
+    const bold = r'\*\*Flutter (\d+\.\d+\.\d+)\*\*';
+
+    test('vindt elke eis met bestand en regelnummer', () {
+      final c = findVersionClaims(
+        'ci.yml',
+        'jobs:\n  a:\n    flutter-version: 3.44.7\n  b:\n'
+            '    flutter-version: 3.44.6\n',
+        yaml,
+      );
+      expect(c, hasLength(2));
+      expect(c.first.line, 3);
+      expect(c.first.version, '3.44.7');
+      expect(c.last.line, 5);
+      expect(c.last.version, '3.44.6');
+    });
+
+    test('een historische zin met een geciteerde versie telt niet mee', () {
+      // Dit is de hele reden dat het patroon op vet zoekt en niet op een
+      // getal: deze zin hoort NIET mee te veranderen als de pin opschuift,
+      // want dan wordt hij onwaar.
+      final c = findVersionClaims(
+        'CHECKS.md',
+        'De machine draaide 3.44.2 terwijl drie documenten `3.44.6` noemden.\n'
+            'Gebruik **Flutter 3.44.7** (stable).\n',
+        bold,
+      );
+      expect(c, hasLength(1));
+      expect(c.single.version, '3.44.7');
+    });
+
+    test('meldt precies de plekken die achterlopen', () {
+      final c = [
+        const VersionClaim('README.md', 94, '3.44.6', '- Flutter **3.44.6**'),
+        const VersionClaim('ci.yml', 53, '3.44.7', 'flutter-version: 3.44.7'),
+      ];
+      final uit = disagreeingClaims(c, '3.44.7');
+      expect(uit, hasLength(1));
+      expect(uit.single.file, 'README.md');
+      expect(uit.single.line, 94);
+    });
+
+    test('alles eens levert niets op', () {
+      expect(
+        disagreeingClaims([
+          const VersionClaim('a', 1, '3.44.7', 'x'),
+        ], '3.44.7'),
+        isEmpty,
+      );
+    });
+  });
+
   group('de repository zelf', () {
     test('docs/CHECKS.md draagt de tabel waar de poort op leunt', () {
       final doc = File('docs/CHECKS.md').readAsStringSync();
@@ -193,6 +246,32 @@ void main() {
         isTrue,
         reason: 'geen enkele rij heeft de vorm `versie • kanaal • herkomst`',
       );
+    });
+
+    test('elk patroon vindt iets, en alles noemt dezelfde versie', () {
+      // Een poort die niets vindt is groen om de verkeerde reden. Deze toets
+      // valt zodra iemand een formulering herschrijft waardoor het patroon
+      // stil niets meer matcht (#721).
+      final pin = parsePin(File('.tool-versions').readAsStringSync())!;
+      for (final entry in versionClaimPatterns.entries) {
+        final f = File(entry.key);
+        expect(f.existsSync(), isTrue, reason: '${entry.key} bestaat niet');
+        final claims = findVersionClaims(
+          entry.key,
+          f.readAsStringSync(),
+          entry.value,
+        );
+        expect(
+          claims,
+          isNotEmpty,
+          reason: 'het patroon voor ${entry.key} vindt niets meer',
+        );
+        expect(
+          disagreeingClaims(claims, pin),
+          isEmpty,
+          reason: '${entry.key} noemt een andere versie dan de pin ($pin)',
+        );
+      }
     });
 
     test('.tool-versions pint een flutter-versie', () {

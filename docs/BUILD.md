@@ -12,7 +12,7 @@ How to build OciDeck from source and produce distributable apps.
 > than repeating a number; when one of them disagrees with this section, this
 > section wins, and when this section disagrees with `.tool-versions`, that file
 > wins. *(Noted 2026-07-22: those documents had drifted into two different
-> answers — "3.44+ / 3.12+" in one place and "3.44.7 / 3.12.2" in two others —
+> answers — "3.44+ / 3.12+" in one place and "3.44.6 / 3.12.2" in two others —
 > without either saying which one mattered and why.)*
 
 - **Flutter 3.44.7** (stable) — the exact version CI pins (see `.tool-versions`
