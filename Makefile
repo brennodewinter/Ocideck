@@ -685,7 +685,7 @@ check-toolchain:
 	@echo "        exact gelijk aan de pin in .tool-versions. Elk van de drie is"
 	@echo "        apart fataal; alle gebreken worden in één run gemeld. Daarna"
 	@echo "        moet de toolchain ook in docs/CHECKS.md staan, én moeten de"
-	@echo "        vijftien versie-eisen in zeven bestanden het eens zijn (#721)."
+	@echo "        negentien versie-eisen in tien bestanden het eens zijn (#721)."
 	@echo "Failure means: repareer de machine, niet de tool. Installeer de laatste"
 	@echo "        stable (sha256 toetsen vóór uitpakken) in ~/flutter en trek élke"
 	@echo "        pin mee. Wint ~/flutter niet: kijk naar de PATH-volgorde in"

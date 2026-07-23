@@ -94,6 +94,27 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Fixed
+- **Drie documenten bleven op de oude Flutter-pin staan, buiten het bereik van
+  de poort die daar juist voor is.** `check-toolchain` (#598/#721) legt de
+  versie-eisen naast `.tool-versions`, maar kende zeven bestanden — en
+  `CONTRIBUTING_GUIDELINES`, `DEVELOPMENT_SETUP_GUIDE` en
+  `TROUBLESHOOTING_GUIDE` zaten er niet bij. Die noemden dus nog 3.44.6 terwijl
+  de pin al op 3.44.7 stond, en niets zag het. Nu negentien eisen in tien
+  bestanden.
+
+  Waarom ze buiten beeld vielen is de moeite waard: de poort herkent een *eis*
+  aan zijn opmaak — vetgedrukt is een eis, `code-geciteerd` is geschiedenis —
+  en deze drie schreven het getal kaal op. Ze zijn in die vorm gezet in plaats
+  van dat er drie losse patronen bij kwamen; één regel die je kunt navertellen
+  is meer waard dan een uitzonderingenlijst.
+
+  Eén plek kon dat niet: het uitpakcommando in de opstelgids noemt
+  `flutter_macos_3.44.7-stable.tar.xz`, en een bestandsnaam in een codeblok laat
+  zich niet vetdrukken. Die krijgt een eigen helft in het patroon, want een
+  archiefnaam ís een eis — wie hem overtypt haalt die versie binnen, en dan wijst
+  de handleiding je naar de verkeerde download terwijl de zin erboven klopt.
+
 ### Added
 - **De webdemo staat nu in de README — en de documentatie geeft eindelijk toe
   dat de uitgever hem draait.** `ocideck.librekat.nl` bestond al maanden en

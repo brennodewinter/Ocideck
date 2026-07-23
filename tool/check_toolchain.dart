@@ -146,6 +146,15 @@ const versionClaimPatterns = <String, String>{
   'CONTRIBUTING.md': r'\*\*Flutter (\d+\.\d+\.\d+)\*\*',
   'docs/BUILD.md': r'\*\*Flutter (\d+\.\d+\.\d+)\*\*',
   'docs/CHECKS.md': r'\*\*Flutter (\d+\.\d+\.\d+)',
+  'docs/CONTRIBUTING_GUIDELINES.md': r'\*\*Flutter (\d+\.\d+\.\d+)\*\*',
+  'docs/TROUBLESHOOTING_GUIDE.md': r'\*\*Flutter (\d+\.\d+\.\d+)\*\*',
+  // Twee vormen in één document: de eis in proza, en de bestandsnaam in het
+  // uitpakcommando. Die tweede kan niet vetgedrukt — hij staat in een codeblok
+  // — maar een archiefnaam is net zo goed een eis: wie hem overtypt haalt die
+  // versie binnen. Zonder deze helft wijst de handleiding je naar de verkeerde
+  // download terwijl de zin erboven klopt.
+  'docs/DEVELOPMENT_SETUP_GUIDE.md':
+      r'(?:\*\*Flutter |flutter_macos_)(\d+\.\d+\.\d+)',
   '.github/workflows/ci.yml': r'flutter-version: (\d+\.\d+\.\d+)',
   '.github/workflows/release.yml': r'flutter-version: (\d+\.\d+\.\d+)',
 };
