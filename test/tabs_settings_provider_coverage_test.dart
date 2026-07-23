@@ -551,28 +551,38 @@ void main() {
     });
 
     test(
-      'selectAppAppearanceProfile switches valid, ignores unknown',
+      'setAppAppearanceProfiles switches valid, falls back on unknown',
       () async {
+        // Sinds #760 landt de selectie samen met de lijst; een onbekende naam
+        // valt terug op een thema dat bestaat in plaats van te blijven hangen.
         final n = await loaded();
-        await n.selectAppAppearanceProfile('Donker');
+        await n.setAppAppearanceProfiles(const [], selectedName: 'Donker');
         expect(n.state.selectedAppAppearanceProfileName, 'Donker');
 
-        await n.selectAppAppearanceProfile('Bestaat niet');
-        expect(n.state.selectedAppAppearanceProfileName, 'Donker');
+        await n.setAppAppearanceProfiles(
+          const [],
+          selectedName: 'Bestaat niet',
+        );
+        expect(
+          n.state.appAppearanceProfiles.map((p) => p.name),
+          contains(n.state.selectedAppAppearanceProfileName),
+        );
       },
     );
 
-    test('a custom app theme can be deleted, falling back to Europa', () async {
+    test('landing without a custom theme deletes it from disk too', () async {
       final n = await loaded();
-      final created = await n.createAppAppearanceProfile(
-        base: AppAppearanceProfile.europa,
+      final eigen = AppAppearanceProfile.europa.copyWith(
+        name: 'Eigen',
+        isBuiltIn: false,
       );
-      expect(n.state.selectedAppAppearanceProfileName, created.name);
+      await n.setAppAppearanceProfiles([eigen], selectedName: 'Eigen');
+      expect(n.state.selectedAppAppearanceProfileName, 'Eigen');
 
-      await n.deleteAppAppearanceProfile(created.name);
+      await n.setAppAppearanceProfiles(const [], selectedName: 'Europa');
       expect(
         n.state.appAppearanceProfiles.map((p) => p.name),
-        isNot(contains(created.name)),
+        isNot(contains('Eigen')),
       );
       expect(n.state.selectedAppAppearanceProfileName, 'Europa');
     });
