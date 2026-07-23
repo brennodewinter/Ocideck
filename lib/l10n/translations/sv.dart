@@ -487,7 +487,6 @@ const _dutchSourceSv = {
   'Twee Afbeeldingen': 'Två bilder',
   'Grote Afbeelding': 'Stor bild',
   'Video': 'Video',
-  'Quote': 'Citat',
   'Tabel': 'Tabell',
   'Vrije Markdown': 'Fri Markdown',
   'Overgeslagen': 'Överhoppad',

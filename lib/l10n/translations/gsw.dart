@@ -490,7 +490,6 @@ const _dutchSourceGsw = {
   'Twee Afbeeldingen': 'Zwei Bilder',
   'Grote Afbeelding': 'Grosses Bild',
   'Video': 'Video',
-  'Quote': 'Zitat',
   'Tabel': 'Tabälle',
   'Vrije Markdown': 'Freis Markdown',
   'Overgeslagen': 'Übersprunge',

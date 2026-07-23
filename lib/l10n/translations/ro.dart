@@ -489,7 +489,6 @@ const _dutchSourceRo = {
   'Twee Afbeeldingen': 'Două imagini',
   'Grote Afbeelding': 'Imagine mare',
   'Video': 'Video',
-  'Quote': 'Citat',
   'Tabel': 'Tabel',
   'Vrije Markdown': 'Markdown liber',
   'Overgeslagen': 'Omis',

@@ -495,7 +495,6 @@ const _dutchSourceGa = {
   'Twee Afbeeldingen': 'Dhá íomhá',
   'Grote Afbeelding': 'Íomhá mhór',
   'Video': 'Físeán',
-  'Quote': 'Athfhriotal',
   'Tabel': 'Tábla',
   'Vrije Markdown': 'Markdown saor',
   'Overgeslagen': 'Ligthe thar bráid',

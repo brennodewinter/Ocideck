@@ -216,7 +216,7 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
   SlideType.twoImages: SlideTypeMeta(label: 'Twee Afbeeldingen', marpClass: ''),
   SlideType.image: SlideTypeMeta(label: 'Grote Afbeelding', marpClass: ''),
   SlideType.video: SlideTypeMeta(label: 'Video', marpClass: 'video'),
-  SlideType.quote: SlideTypeMeta(label: 'Quote', marpClass: 'quote'),
+  SlideType.quote: SlideTypeMeta(label: 'Citaat', marpClass: 'quote'),
   SlideType.table: SlideTypeMeta(
     label: 'Tabel',
     marpClass: 'table',

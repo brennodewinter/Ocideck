@@ -477,7 +477,6 @@ const _dutchSourceTlh = {
   'Twee Afbeeldingen': 'cha\' mIllogh',
   'Grote Afbeelding': 'mIllogh tIn',
   'Video': 'HaSta',
-  'Quote': 'mu\'tlhegh',
   'Tabel': 'romuS',
   'Vrije Markdown': 'Markdown tlhab',
   'Overgeslagen': 'juHlu\'pu\'',

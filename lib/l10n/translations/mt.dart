@@ -491,7 +491,6 @@ const _dutchSourceMt = {
   'Twee Afbeeldingen': 'Żewġ immaġni',
   'Grote Afbeelding': 'Immaġni kbira',
   'Video': 'Vidjow',
-  'Quote': 'Kwotazzjoni',
   'Tabel': 'Tabella',
   'Vrije Markdown': 'Markdown liberu',
   'Overgeslagen': 'Maqbuż',

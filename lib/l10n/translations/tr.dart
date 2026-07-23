@@ -485,7 +485,6 @@ const _dutchSourceTr = {
   'Twee Afbeeldingen': 'İki görsel',
   'Grote Afbeelding': 'Büyük görsel',
   'Video': 'Video',
-  'Quote': 'Alıntı',
   'Tabel': 'Tablo',
   'Vrije Markdown': 'Serbest Markdown',
   'Overgeslagen': 'Atlandı',

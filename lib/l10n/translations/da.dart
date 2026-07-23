@@ -489,7 +489,6 @@ const _dutchSourceDa = {
   'Twee Afbeeldingen': 'To billeder',
   'Grote Afbeelding': 'Stort billede',
   'Video': 'Video',
-  'Quote': 'Citat',
   'Tabel': 'Tabel',
   'Vrije Markdown': 'Fri Markdown',
   'Overgeslagen': 'Sprunget over',

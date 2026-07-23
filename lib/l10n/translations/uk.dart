@@ -491,7 +491,6 @@ const _dutchSourceUk = {
   'Twee Afbeeldingen': 'Два зображення',
   'Grote Afbeelding': 'Велике зображення',
   'Video': 'Відео',
-  'Quote': 'Цитата',
   'Tabel': 'Таблиця',
   'Vrije Markdown': 'Вільний Markdown',
   'Overgeslagen': 'Пропущено',

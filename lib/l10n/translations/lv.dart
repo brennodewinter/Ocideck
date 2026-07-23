@@ -487,7 +487,6 @@ const _dutchSourceLv = {
   'Twee Afbeeldingen': 'Divi attēli',
   'Grote Afbeelding': 'Liels attēls',
   'Video': 'Video',
-  'Quote': 'Citāts',
   'Tabel': 'Tabula',
   'Vrije Markdown': 'Brīvs Markdown',
   'Overgeslagen': 'Izlaists',
