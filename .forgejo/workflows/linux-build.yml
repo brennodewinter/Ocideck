@@ -28,6 +28,14 @@ jobs:
       - name: Afhankelijkheden ophalen
         run: flutter pub get
 
+      # desktop_multi_window gebruikt GDK-aanroepen die op GTK 3.24+ als
+      # verouderd gelden; de plugin bouwt met -Werror en struikelt daarover.
+      # Verouderd is niet kapot — strip -Werror uit de plugin-CMakeLists.
+      - name: Werror-strip voor desktop_multi_window
+        run: |
+          PUB="${PUB_CACHE:-$HOME/.pub-cache}"
+          sed -i 's/-Werror//' "$PUB"/hosted/pub.dev/desktop_multi_window-*/linux/CMakeLists.txt
+
       - name: Linux-release bouwen
         run: flutter build linux --release
 
