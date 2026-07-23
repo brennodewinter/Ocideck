@@ -918,6 +918,7 @@ const _dutchSourceEn = {
 const _dutchSourceAddEn = {
   'presentaties': 'presentations',
   '/Presentaties': '/Presentations',
+  'Rapportagedistributie (ontwerp)': 'Report distribution (design)',
   'De export is mislukt.': 'The export failed.',
   'Presenteer vanaf hier': 'Present from here',
   'Teams-gastclient (ontwerp)': 'Teams guest client (design)',

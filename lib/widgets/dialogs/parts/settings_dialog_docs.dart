@@ -229,5 +229,10 @@ DocSection _designDocs(AppLocalizations l10n) => DocSection(
       title: l10n.d('Procesverbetering (ontwerp)'),
       assetBase: 'docs/design/PROCESS_IMPROVEMENT.md',
     ),
+    DocEntry(
+      icon: Icons.outgoing_mail,
+      title: l10n.d('Rapportagedistributie (ontwerp)'),
+      assetBase: 'docs/design/OPENKAT_DISTRIBUTIE.md',
+    ),
   ],
 );

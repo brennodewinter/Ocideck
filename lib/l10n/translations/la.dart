@@ -1794,6 +1794,7 @@ const _dutchSourceLa = {
 const _dutchSourceAddLa = <String, String>{
   'presentaties': 'praesentationes',
   '/Presentaties': '/Praesentationes',
+  'Rapportagedistributie (ontwerp)': 'Distributio relationum (designatio)',
   'De export is mislukt.': 'Exportatio defecit.',
   'Presenteer vanaf hier': 'Hinc praesentare',
   'Teams-gastclient (ontwerp)': 'Cliens hospes Teams (consilium)',

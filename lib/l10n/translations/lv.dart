@@ -1777,6 +1777,7 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'presentaties': 'prezentacijas',
   '/Presentaties': '/Prezentācijas',
+  'Rapportagedistributie (ontwerp)': 'Pārskatu izplatīšana (dizains)',
   'De export is mislukt.': 'Eksports neizdevās.',
   'Presenteer vanaf hier': 'Prezentēt no šejienes',
   'Teams-gastclient (ontwerp)': 'Teams viesu klients (dizains)',

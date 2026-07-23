@@ -1782,6 +1782,7 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'presentaties': 'prezentaciok',
   '/Presentaties': '/Prezentációk',
+  'Rapportagedistributie (ontwerp)': 'Beszámolók terjesztése (terv)',
   'De export is mislukt.': 'Az exportálás nem sikerült.',
   'Presenteer vanaf hier': 'Bemutatás innen',
   'Teams-gastclient (ontwerp)': 'Teams vendégkliens (terv)',

@@ -736,6 +736,7 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'presentaties': 'presentashonnan',
   '/Presentaties': '/Presentashonnan',
+  'Rapportagedistributie (ontwerp)': 'Distribushon di rapòrt (diseño)',
   'De export is mislukt.': 'E eksport a frakasá.',
   'Presenteer vanaf hier': 'Presentá for di aki',
   'Teams-gastclient (ontwerp)': 'Kliènt invitá di Teams (diseño)',
