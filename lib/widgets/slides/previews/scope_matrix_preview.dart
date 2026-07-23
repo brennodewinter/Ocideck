@@ -57,7 +57,7 @@ class _ScopeMatrixPreview extends StatelessWidget {
         _coverage(context, spec, accent),
         SizedBox(height: w * 0.03),
         _headerRow(context),
-        Divider(height: w * 0.02, color: AppTheme.slate300),
+        Divider(height: w * 0.02, color: AppTheme.slideRule),
         for (final row in spec.rows) _dataRow(context, row),
       ],
     );
@@ -84,7 +84,7 @@ class _ScopeMatrixPreview extends StatelessWidget {
           '${spec.testedCount}/${spec.total} ${context.l10n.d('gedekt')}',
           style: _applyFont(
             font,
-            TextStyle(fontSize: w * 0.022, color: AppTheme.slate600),
+            TextStyle(fontSize: w * 0.022, color: AppTheme.slideInkMuted),
           ),
         ),
       ],
@@ -98,7 +98,7 @@ class _ScopeMatrixPreview extends StatelessWidget {
       TextStyle(
         fontSize: w * 0.02,
         fontWeight: FontWeight.w700,
-        color: AppTheme.slate500,
+        color: AppTheme.slideInkSoft,
       ),
     );
     return Padding(
@@ -118,7 +118,7 @@ class _ScopeMatrixPreview extends StatelessWidget {
     final l10n = context.l10n;
     TextStyle style() => _applyFont(
       font,
-      TextStyle(fontSize: w * 0.022, color: AppTheme.slate700),
+      TextStyle(fontSize: w * 0.022, color: AppTheme.slideInk),
     );
     return Padding(
       padding: EdgeInsets.symmetric(vertical: w * 0.008),

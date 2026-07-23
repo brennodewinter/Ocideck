@@ -62,7 +62,7 @@ class _ChecklistPreview extends StatelessWidget {
             '${slide.checklistScope}',
             style: _applyFont(
               font,
-              TextStyle(fontSize: w * 0.024, color: AppTheme.slate600),
+              TextStyle(fontSize: w * 0.024, color: AppTheme.slideInkMuted),
             ),
           ),
         ],
@@ -97,7 +97,7 @@ class _ChecklistPreview extends StatelessWidget {
           '${spec.testedCount}/${spec.total} ${context.l10n.d('getoetst')}',
           style: _applyFont(
             font,
-            TextStyle(fontSize: w * 0.022, color: AppTheme.slate600),
+            TextStyle(fontSize: w * 0.022, color: AppTheme.slideInkMuted),
           ),
         ),
       ],
@@ -110,7 +110,7 @@ class _ChecklistPreview extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _headerRow(l10n),
-        Divider(height: w * 0.02, color: AppTheme.slate300),
+        Divider(height: w * 0.02, color: AppTheme.slideRule),
         for (final row in spec.rows) _dataRow(context, row),
       ],
     );
@@ -122,7 +122,7 @@ class _ChecklistPreview extends StatelessWidget {
       TextStyle(
         fontSize: w * 0.02,
         fontWeight: FontWeight.w700,
-        color: AppTheme.slate500,
+        color: AppTheme.slideInkSoft,
       ),
     );
     return Padding(
@@ -141,7 +141,7 @@ class _ChecklistPreview extends StatelessWidget {
   Widget _dataRow(BuildContext context, ChecklistRow row) {
     TextStyle style() => _applyFont(
       font,
-      TextStyle(fontSize: w * 0.022, color: AppTheme.slate700),
+      TextStyle(fontSize: w * 0.022, color: AppTheme.slideInk),
     );
     return Padding(
       padding: EdgeInsets.symmetric(vertical: w * 0.008),
@@ -157,7 +157,7 @@ class _ChecklistPreview extends StatelessWidget {
               row.findingId.isEmpty ? '—' : row.findingId,
               style: style().copyWith(
                 color: row.findingId.isEmpty
-                    ? AppTheme.slate500
+                    ? AppTheme.slideInkSoft
                     : AppTheme.parseHexColor(profile.accentColor),
               ),
             ),

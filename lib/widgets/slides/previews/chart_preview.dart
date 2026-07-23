@@ -736,12 +736,12 @@ class _ChartPreviewState extends State<_ChartPreview>
         Icon(
           Icons.bar_chart_outlined,
           size: w * 0.08,
-          color: AppTheme.slate400,
+          color: AppTheme.slideInkFaint,
         ),
         SizedBox(height: w * 0.01),
         Text(
           text,
-          style: TextStyle(color: AppTheme.slate400, fontSize: w * 0.02),
+          style: TextStyle(color: AppTheme.slideInkFaint, fontSize: w * 0.02),
         ),
       ],
     ),

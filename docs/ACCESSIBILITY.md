@@ -166,13 +166,35 @@ off, but because most of it was a category error and the rest is fixed. Saying
 that plainly matters more than the number: a baseline that records debt which
 does not exist makes the entries that do exist unbelievable.
 
-`test/app_theme_contrast_test.dart` now checks four things, and the last one is
-the one that keeps this from being a one-off: the mode-aware tokens meet 4.5:1
-in both modes; the slide text tokens meet 4.5:1 on white; the two accent tokens
-meet 3:1; and **no fixed brand or severity colour is used as a text colour
-anywhere outside slide-rendering code**. That last check reads the source, so
-the next `AppTheme.navy` in a dialog fails the build instead of quietly
-returning.
+**And the rule cuts the other way too, which the visual review caught.** The
+slide previews painted their greys with the *mode-aware* slate scale — on a
+canvas that stays white. In dark mode `slate700` came out at **1.3:1** and
+`slate500` at 2.1:1, so the text of a checklist, a scope matrix and a findings
+summary all but vanished. That is the plainest form of the thing this document
+is about: the app failing, on the user's own slides, the bar it applies to them.
+
+Worse than unreadable, it **diverged from the export**. The HTML export runs
+without a theme and always writes the light values; the export dialog promises
+that the export uses exactly what the editor shows. In dark mode that was
+untrue. Slide previews now use fixed ink (`slideInk`, `slideInkMuted`,
+`slideInkSoft`, …) — the same values, no longer moving.
+
+`test/app_theme_contrast_test.dart` now checks seven things, and the guards are
+what keep this from being a one-off: the mode-aware tokens meet 4.5:1 in both
+modes; the slide text tokens meet 4.5:1 on white; the two accent tokens meet
+3:1; the slide ink is identical in both modes; and two source checks reject
+**a fixed brand or severity colour used as text outside slide-rendering code**
+and **a mode-aware grey used inside a slide preview**. Those two read the
+source, so the next `AppTheme.navy` in a dialog — or `AppTheme.slate600` on a
+slide — fails the build instead of quietly returning.
+
+*Three smaller things the visual review turned up, now fixed: the export
+dialog had been migrated on its success branch but not its failure branch, so
+"the export failed" sat at 3.1:1 in dark mode while "exported to…" shone; the
+user-notes heading was a fixed blue that had become weaker (2.4:1) than its own
+subtitle beneath it; and `dangerFg`'s light value was pale enough that on the
+scorecard chip — which tints its own background — it dropped to 4.2:1, under
+AA, for the one colour that means alarm.*
 
 **A few blocking messages are still built in Dutch.** *(Rewritten 2026-07-22.)*
 This entry used to say that roughly fifty editor labels showed their Dutch

@@ -138,8 +138,12 @@ class AppTheme {
       _m(const Color(0xFFFEE2E2), const Color(0xFF2E1616));
   static Color get dangerBgSoft =>
       _m(const Color(0xFFFECACA), const Color(0xFF4A1E1E));
+  // De lichte kant is bewust de diepe rode en niet #D32F2F: dit token staat
+  // vaak op een tint van zichzelf (de scorecard-chip vult met 12%), en daar
+  // zakte de lichtere variant naar 4,2:1 — onder AA, terwijl het juist de
+  // alarmkleur is (#606).
   static Color get dangerFg =>
-      _m(const Color(0xFFD32F2F), const Color(0xFFF87171));
+      _m(const Color(0xFFB91C1C), const Color(0xFFF87171));
   static const danger500 = Color(0xFFEF4444);
   static const danger600 = Color(0xFFDC2626);
   static const danger700 = Color(0xFFB91C1C);
@@ -166,6 +170,30 @@ class AppTheme {
       _m(const Color(0xFF1C2B47), const Color(0xFFC7D2E4));
   static Color get tealFg =>
       _m(const Color(0xFF1F6B55), const Color(0xFF7FD8BE));
+
+  // ── Dia-inkt: de grijstinten zoals ze op een dia gelezen worden ───────────
+  //
+  // Een dia is een wit vlak, altijd, in beide app-thema's. De grijzen hierboven
+  // (`slate200`…`slate700`) volgen wél het thema, en dat is voor de interface
+  // precies goed — maar op een dia is het rampzalig: in donkere modus werd
+  // `slate700` op wit 1,3:1 en `slate500` 2,1:1, dus de tekst van een checklist,
+  // een scope-matrix en een bevindingenoverzicht verdween zo goed als helemaal
+  // (#606).
+  //
+  // Erger nog dan onleesbaar: het week af van de export. De HTML-export schrijft
+  // de lichte waarden, altijd, want die draait zonder thema. Het exportdialoog
+  // belooft "de export gebruikt exact de weergave uit de editor", en in donkere
+  // modus was dat onwaar.
+  //
+  // Dit zijn dus dezelfde waarden als de lichte kant van de slate-schaal, maar
+  // `const`: ze horen niet te bewegen. Zelfde regel als bij de ernstkleuren —
+  // wat op een dia landt, volgt het thema niet.
+  static const slideInk = Color(0xFF334155); // slate700-licht
+  static const slideInkMuted = Color(0xFF475569); // slate600-licht
+  static const slideInkSoft = Color(0xFF64748B); // slate500-licht
+  static const slideInkFaint = Color(0xFF94A3B8); // slate400-licht
+  static const slideRule = Color(0xFFCBD5E1); // slate300-licht
+  static const slideRuleSoft = Color(0xFFE2E8F0); // slate200-licht
 
   // ── Bevinding-ernst (FIRST CVSS-banden) ───────────────────────────────────
   // Deterministische const-tokens zodat een `finding` identiek rendert in de
@@ -215,8 +243,14 @@ class AppTheme {
   // De achtergrond en code-achtergrond delen [infoBg].
   static const userNotesBorder = Color(0xFFBFDBFE);
   static const userNotesBorderFocus = Color(0xFF93C5FD);
-  static const userNotesAccent = Color(0xFF1D4ED8);
-  static const userNotesText = Color(0xFF1E3A8A);
+  // Kop en tekst volgen het thema, net als de amber-tegenhanger `notesText` al
+  // deed. Ze stonden vast op de lichte blauwen: op het donkere paneel haalde de
+  // kop 2,4:1 en de tekst 1,7:1 — de kop was daarmee zwakker dan zijn eigen
+  // ondertitel eronder, een omgekeerde hiërarchie in zijn eigen blok (#606).
+  static Color get userNotesAccent =>
+      _m(const Color(0xFF1D4ED8), const Color(0xFF8AB4F8));
+  static Color get userNotesText =>
+      _m(const Color(0xFF1E3A8A), const Color(0xFFC7DBFB));
 
   // ── Donkere slate-ramp (thumbnails, dark editor-chrome, preview-panel) ─────
   static const darkSlate900 = Color(0xFF1B1E25);

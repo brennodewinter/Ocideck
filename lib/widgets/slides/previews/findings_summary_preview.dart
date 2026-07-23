@@ -53,7 +53,7 @@ class _FindingsSummaryPreview extends StatelessWidget {
           '${l10n.d('Totaal')}: ${spec.total}',
           style: _applyFont(
             font,
-            TextStyle(fontSize: w * 0.026, color: AppTheme.slate600),
+            TextStyle(fontSize: w * 0.026, color: AppTheme.slideInkMuted),
           ),
         ),
         SizedBox(height: w * 0.008),
@@ -143,7 +143,7 @@ class _FindingsSummaryPreview extends StatelessWidget {
                   font,
                   TextStyle(
                     fontSize: w * 0.022,
-                    color: AppTheme.slate700,
+                    color: AppTheme.slideInk,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

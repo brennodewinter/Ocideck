@@ -212,4 +212,69 @@ void main() {
           'een dia wordt:\n${overtreders.join('\n')}',
     );
   });
+
+  // ── De dia volgt het thema niet ────────────────────────────────────────────
+  //
+  // De diepste vorm van wat #606 aanwees, en de enige die de gebruiker in zijn
+  // éigen werk ziet: de previews schilderden hun grijstinten met de
+  // mode-afhankelijke slate-schaal, op een canvas dat wit blijft. In donkere
+  // modus werd `slate700` daarmee 1,3:1 — de tekst van een checklist, een
+  // scope-matrix en een bevindingenoverzicht verdween zo goed als helemaal.
+  //
+  // Erger dan onleesbaar: het week af van de export. De HTML-export draait
+  // zonder thema en schrijft altijd de lichte waarden, terwijl het
+  // exportdialoog belooft dat de export exact de weergave uit de editor
+  // gebruikt. In donkere modus was die belofte onwaar.
+  test('de dia-inkt is leesbaar op wit en beweegt niet met het thema', () {
+    const inkt = <String, Color>{
+      'slideInk': AppTheme.slideInk,
+      'slideInkMuted': AppTheme.slideInkMuted,
+      'slideInkSoft': AppTheme.slideInkSoft,
+    };
+    final tekort = <String, double>{};
+    inkt.forEach((naam, kleur) {
+      final ratio = contrastRatio(kleur, slideCanvas);
+      if (ratio < kWcagAaNormalText) tekort[naam] = ratio;
+    });
+    expect(tekort, isEmpty, reason: 'dia-tekst op een wit canvas: $tekort');
+
+    // En dit is de eigenlijke invariant: dezelfde waarde in beide modi.
+    AppTheme.isDark = true;
+    final donker = [AppTheme.slideInk, AppTheme.slideInkSoft];
+    AppTheme.isDark = false;
+    final licht = [AppTheme.slideInk, AppTheme.slideInkSoft];
+    expect(
+      donker,
+      licht,
+      reason:
+          'een dia is in beide thema\'s hetzelfde witte vlak; inkt die met de '
+          'app meebeweegt laat de preview van de export afwijken',
+    );
+  });
+
+  test('geen mode-afhankelijk grijs meer in de dia-previews', () {
+    // De bronwacht voor dezelfde regel. `lib/widgets/slides/previews/` rendert
+    // wat een dia wordt; de slate-schaal daar is per definitie fout, ook als
+    // hij vandaag toevallig leesbaar uitvalt.
+    final overtreders = <String>[];
+    for (final entity in Directory(
+      'lib/widgets/slides/previews',
+    ).listSync(recursive: true)) {
+      if (entity is! File || !entity.path.endsWith('.dart')) continue;
+      final regels = entity.readAsLinesSync();
+      for (var i = 0; i < regels.length; i++) {
+        if (RegExp(r'AppTheme\.(slate|gray)\d').hasMatch(regels[i])) {
+          overtreders.add('${entity.path}:${i + 1}');
+        }
+      }
+    }
+    expect(
+      overtreders,
+      isEmpty,
+      reason:
+          'gebruik op een dia de vaste inkt (slideInk, slideInkMuted, '
+          'slideInkSoft, slideInkFaint, slideRule, slideRuleSoft):\n'
+          '${overtreders.join('\n')}',
+    );
+  });
 }

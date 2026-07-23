@@ -711,18 +711,18 @@ Widget _videoEmbedErrorPlaceholder(
 ) {
   final content = videoEmbedErrorContent(context.l10n, error);
   return Container(
-    color: AppTheme.slate200,
+    color: AppTheme.slideRuleSoft,
     padding: const EdgeInsets.all(16),
     child: Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(content.icon, color: AppTheme.slate400, size: 32),
+          Icon(content.icon, color: AppTheme.slideInkFaint, size: 32),
           const SizedBox(height: 8),
           Text(
             content.title,
             style: TextStyle(
-              color: AppTheme.slate600,
+              color: AppTheme.slideInkMuted,
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),
@@ -731,13 +731,13 @@ Widget _videoEmbedErrorPlaceholder(
           const SizedBox(height: 4),
           Text(
             content.detail,
-            style: TextStyle(color: AppTheme.slate500, fontSize: 11),
+            style: TextStyle(color: AppTheme.slideInkSoft, fontSize: 11),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 4),
           Text(
             url,
-            style: TextStyle(color: AppTheme.slate400, fontSize: 10),
+            style: TextStyle(color: AppTheme.slideInkFaint, fontSize: 10),
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
