@@ -85,26 +85,22 @@ out of it, the way [`LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md) records its
 own last run. A dated outcome next to a repeatable command is the difference
 between "we check this" and "we checked this".
 
-**Run on 2026-07-22**, on macOS (arm64), at commit `299fb65a`
-(branch `feat/meetinstrumenten`), on this exact toolchain:
+**Run on 2026-07-23**, on macOS (arm64), on this exact toolchain:
 
 ```
-Flutter 3.44.2 • channel [user-branch] • unknown source
+Flutter 3.44.7 • channel stable • https://github.com/flutter/flutter.git
 Tools • Dart 3.12.2
 ```
 
-**That is not the pinned toolchain, and it matters more than one digit
-suggests.** `.tool-versions` pins `flutter 3.44.6-stable`, and README, `BUILD.md`
-and the CI workflow all name 3.44.6. The machine where this table was produced
-runs **3.44.2**, from `[user-branch]` — an unofficial channel — with its binaries
-under a third version number again (`/opt/homebrew/Caskroom/flutter/3.29.0/`).
-Because there is no CI runner, this machine is the only place `make check` has
-ever run, so every green gate this project rests on was produced there. A
-formatter or analyzer change between two releases means "the gate is green"
-proves something slightly other than what the documentation promises. Recorded
-here rather than quietly corrected, because the reader deserves to know which of
-the two numbers actually ran. See issue #598; the fix is to install the pinned
-version and re-run this table.
+**This is the pinned toolchain, and that is new.** Until 2026-07-23 this section
+recorded `3.44.2 • [user-branch] • unknown source` — an unofficial build, with
+its binaries under a directory named for a third version again — against
+documents that all named a pinned release. Because there is no CI runner, that
+machine is the only place `make check` has ever run, so every green gate this
+project rested on had been produced by a toolchain nobody else could reproduce.
+It is now the official stable SDK, hash-verified before unpacking; see
+[Toolchains of record](#toolchains-of-record) for how, and `make check-toolchain`
+for what now keeps this paragraph from going stale again (#598).
 
 **The whole gate takes about three minutes.** Measured 2026-07-22 on the machine
 above: the test suite (5 768 tests, 2 skipped) finishes in 2:04, and the checks
@@ -152,6 +148,7 @@ now the only passing state.
 | [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ |
 | [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — |
 | [`make check-comment-language`](#make-check-comment-language) | No plain comment in `lib/` switches language halfway (`mixedCommentBaseline` ratchet) | ✅ | ✅ | — |
+| [`make check-toolchain`](#make-check-toolchain) | The running Flutter is the pinned official stable, and is recorded here | ✅ | ✅ | — |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
 | [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 20% of its own lines | ✅ | ✅ | — |
@@ -202,7 +199,7 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Failure means:** at least one file is not formatted. Fix with `make format`
   (which rewrites files in place), then re-run.
 - **Note:** `dart format`'s output is tied to the Dart/Flutter version. The repo
-  is pinned to **Flutter 3.44.6** (see [Version pin](#version-pin)); a different
+  is pinned to **Flutter 3.44.7** (see [Version pin](#version-pin)); a different
   local version can report spurious drift. Match the pin before reformatting the
   whole tree.
 
@@ -449,6 +446,36 @@ also declares them, but see the [CI note](#continuous-integration).)
   Dutch rather than leaving it unexplained.
 - **Failure means:** route the string through `l10n.d('…')` — and remember the
   translation gate then wants it in every language.
+
+### `make check-toolchain`
+- **Runs:** `dart run tool/check_toolchain.dart`
+- **Covers:** that the Flutter actually executing the gate — version, channel
+  and repository — appears in [Toolchains of record](#toolchains-of-record).
+  Every green gate is a statement about the toolchain that produced it; if that
+  toolchain is not written down, "make check passes" is not reproducible, which
+  is what `COMPLIANCE.md` QA.04 promises and what #598 reported.
+- **Why it exists:** the drift was not noticed twice. The machine ran `3.44.2`
+  from an unofficial channel while three documents named `3.44.7`; that was
+  corrected by hand, and within a day it had drifted back. Nothing was looking.
+  The defect is not which number runs — it is that the difference could be
+  invisible.
+- **What it enforces**, each failing on its own: channel `stable`; repository
+  `https://github.com/flutter/flutter.git`; and the version *exactly* equal to
+  the pin in `.tool-versions`. All three problems are reported in one run —
+  whoever has to replace a toolchain wants the whole list, not one line per run.
+  On top of that, once the toolchain is correct, it must also appear in
+  [Toolchains of record](#toolchains-of-record), so a pin bump cannot leave this
+  document behind.
+- **Why exactly, and not "3.44.x":** `dart format` reflows whitespace between
+  releases. A green `make format-check` on a neighbouring patch release proves
+  something about a different formatter than the one CI runs, which is the one
+  symptom the pin exists for.
+- **Failure means:** fix the machine, not the tool. Install the latest stable
+  from the official archive (verify its SHA-256 against `releases_*.json` before
+  unpacking) into `~/flutter`, then move every pin with it. If `~/flutter`
+  already exists but does not win, check the `PATH` order in `~/.zshrc` — an
+  entry added *before* Homebrew's line loses to it, which is precisely how two
+  Flutters disagreed here unnoticed for weeks.
 
 ### `make test`
 - **Runs:** `flutter test --test-randomize-ordering-seed random --exclude-tags golden`
@@ -895,10 +922,56 @@ See [`BUILD.md`](BUILD.md) for the matching local `make build-*` targets.
 
 ## Version pin
 
-CI pins **Flutter 3.44.6 (stable)**, recorded in `.tool-versions` (asdf) and in
+CI pins **Flutter 3.44.7 (stable)**, recorded in `.tool-versions` (asdf) and in
 both `.github/workflows/*.yml`. The pin matters mainly for **`dart format`**: its
 line-wrapping output changes between releases, so an unpinned local toolchain — or
 a separately installed standalone Dart used instead of the Flutter-bundled one —
 can disagree with CI on formatting. Keep your local Flutter on the pinned version
 and use its bundled `dart` (or bump the pin in `.tool-versions` + both workflows
 and reformat the tree in one mechanical commit).
+
+### Toolchains of record
+
+A green gate is a statement about the toolchain that produced it. If that
+toolchain is not written down, "make check passes" is not reproducible — which
+is what [#598](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/598)
+reported and what `COMPLIANCE.md` QA.04 promises. So every toolchain the gate
+actually runs on is listed here, deviations included.
+
+| Where | `flutter --version` | Against the pin |
+| --- | --- | --- |
+| Maintainer machine (macOS arm64) | `3.44.7 • stable • https://github.com/flutter/flutter.git` | matches |
+| CI (GitHub Actions, all jobs) | `3.44.7 • stable • https://github.com/flutter/flutter.git` | matches |
+
+**The maintainer machine is the one that matters**, because there is no CI
+runner: it is the only place the gate has ever run.
+
+**Resolved 2026-07-23 (#598).** Until that day it reported
+`3.44.2 • [user-branch] • unknown source`, with binaries under
+`/opt/homebrew/Caskroom/flutter/3.29.0/` — a third version number again — while
+`.tool-versions`, README, `BUILD.md` and both workflows all named a pinned
+release. Every green gate this project rested on was produced by a build from an
+unofficial channel that nobody else could reproduce.
+
+It now runs the official stable SDK, installed from the release archive
+published by `storage.googleapis.com/flutter_infra_release` and verified against
+the SHA-256 in that channel's own release index before unpacking. The Homebrew
+cask that used to shadow it is still installed but no longer first on `PATH`:
+the line in `~/.zshrc` that adds `~/flutter/bin` now sits last, because a `PATH`
+entry added *before* Homebrew's is not a `PATH` entry that wins. That ordering
+was the whole reason two Flutters could disagree unnoticed.
+
+**The pin follows the latest stable, not the other way round.** LibreKAT
+publishes security tooling, so the toolchain tracks the current stable release
+rather than whichever version was pinned first. When a newer stable appears the
+pin moves up — `.tool-versions`, `README.md`, `BUILD.md`, `CONTRIBUTING.md` and
+both workflows — and the gate is re-run, because `dart format` reflows between
+releases and that reflow is the pin's only real symptom.
+
+**`make check-toolchain` keeps this honest.** It fails when the running
+toolchain is not in the table above, so the table cannot quietly fall out of
+step with reality again — which is exactly what happened twice before it
+existed. It deliberately does **not** demand equality with the pin: that would
+make the only development machine unable to run the gate at all, and a gate that
+blocks everything gets switched off rather than fixed. A deviation is printed
+loudly on every run instead.

@@ -91,7 +91,7 @@ so they cost the ordinary user nothing.
 
 ## Requirements
 
-- Flutter **3.44.6** (stable) — the pinned toolchain (see `.tool-versions`),
+- Flutter **3.44.7** (stable) — the pinned toolchain (see `.tool-versions`),
   bundling Dart 3.12.2. The `pubspec.yaml` Dart SDK constraint is `^3.12.0`;
   building tolerates Flutter 3.44+, but `make format-check` is version-sensitive
   (see [BUILD.md](docs/BUILD.md)).
