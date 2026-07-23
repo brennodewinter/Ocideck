@@ -1844,12 +1844,6 @@ const _dutchSourceAddSl = <String, String>{
       'Ugotovitve, ki so bile pregledane in puščene. Ne javljajo se več, vendar jih pregled še vedno najde in ne štejejo kot razrešene. Tapni za vrnitev ene.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Odlaganje ugotovitve o zasebnosti (zasnova)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Zapečatena predstavitev ne gre na delovno vejo',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Pečat je izjava o točno teh bajtih. Delovno vejo je mogoče prepisati, cherry-pickati in vsiliti, in pečat, ki vse to preživi, ne pove več ničesar.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Shranite to predstavitev kot datoteko ali kot paket .ocideck. Pečat sodi k oznaki izdaje, te poti pa še ni — do takrat je varen tukaj.',
   'Deze is beoordeeld en mag blijven': 'Pregledano, to lahko ostane',
   'Mogelijk gemaakt door': 'Omogočil',
   'De export is gestopt tijdens het voorbereiden.':

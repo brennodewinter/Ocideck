@@ -1872,12 +1872,6 @@ const _dutchSourceAddEl = <String, String>{
       'Ευρήματα που έχεις εξετάσει και άφησες όπως είναι. Δεν αναφέρονται πλέον, αλλά η σάρωση συνεχίζει να τα βρίσκει και δεν μετρούν ως επιλυμένα. Πάτησε για να επαναφέρεις ένα.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Παραμερισμός ευρήματος ιδιωτικότητας (σχεδίαση)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Μια σφραγισμένη παρουσίαση δεν πηγαίνει σε κλάδο εργασίας',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Μια σφραγίδα είναι δήλωση για ακριβώς αυτά τα byte. Ένας κλάδος εργασίας μπορεί να ξαναγραφτεί, να γίνει cherry-pick και force-push, και μια σφραγίδα που τα επιβιώνει όλα αυτά δεν λέει πια τίποτα.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Αποθηκεύστε αυτή την παρουσίαση ως αρχείο ή ως πακέτο .ocideck. Η σφραγίδα ανήκει σε ετικέτα έκδοσης, και αυτός ο δρόμος δεν υπάρχει ακόμη — μέχρι τότε εδώ είναι ασφαλής.',
   'Deze is beoordeeld en mag blijven': 'Ελεγμένο, αυτό μπορεί να μείνει',
   'Mogelijk gemaakt door': 'Έγινε δυνατό χάρη σε',
   'De export is gestopt tijdens het voorbereiden.':

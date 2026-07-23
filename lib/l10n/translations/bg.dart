@@ -1865,12 +1865,6 @@ const _dutchSourceAddBg = <String, String>{
       'Констатации, които сте прегледали и сте оставили. Те вече не се съобщават, но сканирането продължава да ги открива и не се броят за отстранени. Докоснете, за да върнете една от тях.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Отлагане на констатация за поверителност (проект)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Запечатана презентация не отива в работен клон',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Печатът е твърдение за точно тези байтове. Работният клон може да бъде пренаписан, cherry-pick-нат и изтласкан принудително, а печат, който преживее всичко това, вече не значи нищо.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Запазете тази презентация като файл или като пакет .ocideck. Печатът принадлежи на етикет за издание, а този път още го няма — дотогава тук е на сигурно място.',
   'Deze is beoordeeld en mag blijven': 'Прегледано, това може да остане',
   'Mogelijk gemaakt door': 'Стана възможно благодарение на',
   'De export is gestopt tijdens het voorbereiden.':

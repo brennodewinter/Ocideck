@@ -9,10 +9,12 @@ import 'dart:typed_data';
 import 'package:path/path.dart' as p;
 
 import '../../models/deck.dart';
+import '../../models/seal_record.dart';
 import '../../utils/log.dart';
 import '../annotation_codec.dart';
 import '../miauw_codec.dart';
 import '../privacy/dismissal_codec.dart';
+import '../seal_codec.dart';
 import '../sidecar_format.dart';
 import '../user_notes_codec.dart';
 
@@ -69,6 +71,22 @@ const String miauwRepoFileName = 'deck.miauw.json';
 /// Bovengrens voor de dispositie-sidecar: hooguit ~92 EIS-nummers met een
 /// motiveringsregel, dus kilobytes — zelfde maat als de terzijdeleggingen.
 const int maxRepoMiauwBytes = 2 * 1024 * 1024; // 2 MiB
+
+/// Naam van de zegel-sidecar binnen een deckmap (#541) — dezelfde
+/// achtervoegselvorm als op schijf (`<naam>.seal.json`).
+///
+/// Dat dit bestand meereist is een besluit, geen gemak (D13, herzien
+/// 23-07-2026): git is hier een bestandssysteem, geen enforcer. Wat een zegel
+/// betékent — afgekaart, niet meer te wijzigen — bewaakt de app zelf, door een
+/// verzegeld deck alleen-lezen te maken; de opslag bewaart alleen wat er is.
+/// Een verzegeld rapport dat zónder zijn zegel uit de repo terugkomt leest als
+/// een rapport dat nooit verzegeld is, en dat is het verlies dat dit bestand
+/// voorkomt.
+const String sealRepoFileName = 'deck.seal.json';
+
+/// Bovengrens voor de zegel-sidecar: een hash, wat metadata en een
+/// RFC 3161-token van enkele kilobytes — zelfde maat als de notities.
+const int maxRepoSealBytes = 2 * 1024 * 1024; // 2 MiB
 
 /// Levert de bytes achter een afbeeldingsverwijzing, of null wanneer die niet te
 /// lezen is (web zonder mem:-treffer, een pad buiten het project, een leesfout).
@@ -284,6 +302,55 @@ Future<RepoMiauw> withRepoMiauw(
       : (deck: deck.copyWith(miauw: d), onleesbaar: false);
 }
 
+/// Hang het zegel uit `deck.seal.json` weer aan [deck] — zelfde contract als
+/// de andere lagen. Geen heranker-stap: het zegel gaat over het document als
+/// geheel, niet over een dia.
+///
+/// De hash in het zegel gaat over de bytes van de `.md` zoals die verzegeld op
+/// schijf stond ([SealForm.fileBytes]), en dat zijn niet de bytes die de repo
+/// draagt — de serialisatie herschrijft afbeeldingspaden naar de pool. Een
+/// deck dat uit git opent draagt daarom wél zijn zegel maar geen
+/// [Deck.fileHash], en meldt zich als niet-narekenbaar in plaats van als
+/// gemanipuleerd — precies zoals een `.ocideck`-pakket dat al doet
+/// (`tabs_provider_package.dart`). Narekenen kan tegen het oorspronkelijke
+/// bestand, niet tegen de repo-kopie.
+typedef RepoSeal = ({Deck deck, bool onleesbaar});
+
+Future<RepoSeal> withRepoSeal(
+  Deck deck, {
+  required String deckDir,
+  required RepoFileReader read,
+}) async {
+  Uint8List? bytes;
+  try {
+    bytes = await read(p.posix.join(deckDir, sealRepoFileName));
+  } catch (e) {
+    logWarning('withRepoSeal: zegelbestand onbereikbaar', e);
+    return (deck: deck, onleesbaar: true);
+  }
+  if (bytes == null || bytes.isEmpty) {
+    return (deck: deck, onleesbaar: false);
+  }
+  if (bytes.length > maxRepoSealBytes) {
+    logWarning(
+      'withRepoSeal: zegelbestand is ${bytes.length} bytes '
+      '(grens $maxRepoSealBytes) — niet geladen',
+    );
+    return (deck: deck, onleesbaar: true);
+  }
+  final String json;
+  try {
+    json = utf8.decode(bytes);
+  } on FormatException catch (e) {
+    logWarning('withRepoSeal: zegelbestand is geen geldige UTF-8', e);
+    return (deck: deck, onleesbaar: true);
+  }
+  final record = SealCodec.decode(json);
+  return record == null
+      ? (deck: deck, onleesbaar: true)
+      : (deck: record.applyTo(deck), onleesbaar: false);
+}
+
 /// Schrijf (of verwijder) de sidecars van [deck] in de commitset — de ene
 /// aanroep die `buildDeckRepoFiles` doet, zodat een vierde laag maar op één
 /// plek vergeten kan worden.
@@ -339,6 +406,17 @@ Future<void> writeAllRepoSidecars(
     path: p.posix.join(deckDir, miauwRepoFileName),
     state: (path) => repoMiauwState(path, read),
     encoded: MiauwCodec.encodeDisposition(deck.miauw, forTextMerge: true),
+    upserts: upserts,
+    deletes: deletes,
+  );
+  // Compact en niet ingesprongen, en dat is geen slordigheid: de D7-reden voor
+  // inspringen — een tekst-merge die per entry werkt — bestaat hier niet. Een
+  // zegel wordt in één keer gezet en nooit samengevoegd; twee versies van één
+  // zegel zijn geen conflict maar een vergissing (§9.7).
+  await writeRepoSidecar(
+    path: p.posix.join(deckDir, sealRepoFileName),
+    state: (path) => repoSealState(path, read),
+    encoded: SealCodec.encode(SealRecord.of(deck)),
     upserts: upserts,
     deletes: deletes,
   );
@@ -450,6 +528,17 @@ Future<RepoSidecarState> repoMiauwState(String path, RepoFileReader? read) =>
       maxBytes: maxRepoMiauwBytes,
       version: MiauwCodec.version,
       wat: 'MIAUW-dispositiebestand',
+    );
+
+/// De toestand van de zegel-sidecar op [path] — zelfde strenge regel; dit
+/// bestand draagt de vaststelling van mogelijk een ándere ondertekenaar.
+Future<RepoSidecarState> repoSealState(String path, RepoFileReader? read) =>
+    _repoSidecarState(
+      path,
+      read,
+      maxBytes: maxRepoSealBytes,
+      version: SealCodec.version,
+      wat: 'zegelbestand',
     );
 
 Future<RepoSidecarState> _repoSidecarState(

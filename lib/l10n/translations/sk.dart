@@ -1849,12 +1849,6 @@ const _dutchSourceAddSk = <String, String>{
       'Zistenia, ktoré boli posúdené a ponechané. Už sa nehlásia, ale sken ich stále nachádza a nepočítajú sa ako vyriešené. Ťuknutím jedno vrátiš.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Odloženie zistenia o súkromí (návrh)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Zapečatená prezentácia nepatrí na pracovnú vetvu',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Pečať je výrok o presne týchto bajtoch. Pracovnú vetvu možno prepísať, cherry-picknúť a vynútene odoslať, a pečať, ktorá to prežije, už nehovorí nič.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Uložte túto prezentáciu ako súbor alebo ako balík .ocideck. Pečať patrí k značke vydania a tá cesta zatiaľ neexistuje — dovtedy je v bezpečí tu.',
   'Deze is beoordeeld en mag blijven': 'Skontrolované, toto môže zostať',
   'Mogelijk gemaakt door': 'Umožnené vďaka',
   'De export is gestopt tijdens het voorbereiden.':

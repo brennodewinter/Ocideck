@@ -804,12 +804,6 @@ const _dutchSourceAddFr = {
       'Constatations que tu as examinées et laissées en place. Elles ne sont plus signalées, mais le scan continue de les trouver et elles ne comptent pas comme résolues. Touche pour en rétablir une.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Mettre de côté un constat de confidentialité (conception)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Une présentation scellée ne va pas sur une branche de travail',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Un sceau est une affirmation sur exactement ces octets. Une branche de travail peut être réécrite, cherry-pickée et poussée en force, et un sceau qui survit à tout cela ne dit plus rien.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Enregistrez cette présentation comme fichier ou comme paquet .ocideck. Le sceau appartient à une étiquette de version, et ce chemin n\'existe pas encore : d\'ici là, c\'est ici qu\'il est en sécurité.',
   'Deze is beoordeeld en mag blijven': 'Vérifié, ce constat peut rester',
   'Mogelijk gemaakt door': 'Rendu possible par',
   'De export is gestopt tijdens het voorbereiden.':

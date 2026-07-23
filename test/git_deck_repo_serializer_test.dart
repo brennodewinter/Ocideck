@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/document_signature.dart';
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/git/asset_index.dart';
@@ -1314,6 +1315,115 @@ void main() {
 
       expect(terug.deck.miauwWaivers['1.3'], 'Oude reden');
       expect(terug.onleesbaar, isFalse);
+    });
+  });
+
+  group('zegel', () {
+    // #541, het sluitstuk: de weigering (D13) is ingetrokken — git is een
+    // bestandssysteem, geen enforcer — en het zegel reist als sidecar mee.
+    // Zelfde machinerie als de andere lagen; de zegel-eigen rand: de hash gaat
+    // over de bytes van de oorspronkelijke `.md` en is tegen de repo-kopie
+    // niet na te rekenen, dus het zegel is hier metadata die terug moet komen,
+    // geen controle die hier moet slagen.
+    const sPath = '$deckDir/deck.seal.json';
+
+    Future<RepoDeckFiles> build(
+      Deck deck, {
+      Map<String, Uint8List> inRepo = const {},
+    }) async => buildDeckRepoFiles(
+      deck,
+      md: md,
+      pool: poolFor(FakeRepo(branches: {'main': 'c0'}, files: {})),
+      deckDir: deckDir,
+      resolveBytes: resolverFrom({}),
+      read: (path) async => inRepo[path],
+    );
+
+    Deck verzegeld() => Deck(
+      title: 'Rapport',
+      slides: [Slide.create(SlideType.title).copyWith(title: 'Eén')],
+      finalized: true,
+      sealAlgo: 'sha-512',
+      sealHash: 'a' * 128,
+      sealAt: '2026-07-10T12:00:00.000Z',
+      signature: const DocumentSignature(name: 'B. de Winter'),
+    );
+
+    test('krijgt een eigen bestand naast deck.md', () async {
+      final out = await build(verzegeld());
+
+      expect(out.upserts.containsKey(sPath), isTrue);
+      final inhoud = utf8.decode(out.upserts[sPath]!);
+      expect(inhoud, contains('a' * 128));
+      expect(inhoud, contains('B. de Winter'));
+    });
+
+    test('komt er bij het openen weer aan', () async {
+      // Zonder dit leest een verzegeld rapport dat uit de repo terugkomt als
+      // een rapport dat nooit verzegeld is.
+      final out = await build(verzegeld());
+      final parsed = md.parseDeck(
+        utf8.decode(out.upserts['$deckDir/deck.md']!),
+      )!;
+      final terug = await withRepoSeal(
+        parsed,
+        deckDir: deckDir,
+        read: (path) async => out.upserts[path],
+      );
+
+      expect(terug.deck.finalized, isTrue);
+      expect(terug.deck.sealHash, 'a' * 128);
+      expect(terug.deck.signature?.name, 'B. de Winter');
+      expect(terug.onleesbaar, isFalse);
+    });
+
+    test('zonder zegel gaat een eigen bestand wél weg', () async {
+      const bestaand = '{"version":1,"finalized":true}';
+      final out = await build(
+        Deck(
+          title: 'Rapport',
+          slides: [Slide.create(SlideType.title).copyWith(title: 'Eén')],
+        ),
+        inRepo: {sPath: Uint8List.fromList(utf8.encode(bestaand))},
+      );
+
+      expect(out.deletes, contains(sPath));
+    });
+
+    test('maar niet wanneer het bestand niet van ons is', () async {
+      final out = await build(
+        Deck(
+          title: 'Rapport',
+          slides: [Slide.create(SlideType.title).copyWith(title: 'Eén')],
+        ),
+        inRepo: {sPath: Uint8List.fromList(utf8.encode('{"version":99}'))},
+      );
+
+      expect(out.deletes, isEmpty);
+      expect(out.upserts.containsKey(sPath), isFalse);
+    });
+
+    test('de werkkopie voor de wachtrij draagt hem ook', () {
+      // Wat hier ontbreekt wordt bij het legen van de wachtrij op de tak
+      // verwijderd — dezelfde valkuil als bij de notities en de ink.
+      final files = mirrorDeckFiles(verzegeld(), deckDir: deckDir, md: md);
+
+      expect(files.keys, contains(sPath));
+    });
+
+    test('withRepoSidecars hangt ook deze laag aan', () async {
+      final out = await build(verzegeld());
+      final parsed = md.parseDeck(
+        utf8.decode(out.upserts['$deckDir/deck.md']!),
+      )!;
+      final terug = await withRepoSidecars(
+        parsed,
+        deckDir: deckDir,
+        read: (path) async => out.upserts[path],
+      );
+
+      expect(terug.deck.finalized, isTrue);
+      expect(terug.sealUnreadable, isFalse);
     });
   });
 }

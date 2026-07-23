@@ -197,37 +197,13 @@ class SyncEngine {
       }
 
       // Wat er in de repo staat maar niet in de werkkopie, is weggehaald: een
-      // dia die verdween neemt zo ook haar bestanden mee. Met twee
-      // uitzonderingen, en die zijn niet willekeurig — de notitie- en
-      // ink-sidecars zijn de bestanden hier die van iemand ánders kunnen zijn.
-      // Kon deze build ze niet lezen (conflictmarkeringen uit een merge buiten
-      // OciDeck, of een sidecar van een nieuwere versie), dan draagt het deck
-      // die laag niet om een reden die niets zegt over wat er in de repo hoort
-      // te staan — en "ontbreekt lokaal" is dan geen opdracht om andermans
-      // werk te wissen.
+      // dia die verdween neemt zo ook haar bestanden mee. Met de sidecars als
+      // uitzondering — waarom die soms niet van ons zijn staat bij
+      // [_sidecarNietVanOns].
       final deletes = <String>[];
       for (final path in remote.keys) {
         if (deckLocal.containsKey(path)) continue;
-        if (p.posix.basename(path) == userNotesRepoFileName &&
-            await repoUserNotesState(path, (String q) async => remote[q]) !=
-                RepoSidecarState.ours) {
-          continue;
-        }
-        if (p.posix.basename(path) == inkRepoFileName &&
-            await repoInkState(path, (String q) async => remote[q]) !=
-                RepoSidecarState.ours) {
-          continue;
-        }
-        if (p.posix.basename(path) == dismissalsRepoFileName &&
-            await repoDismissalsState(path, (String q) async => remote[q]) !=
-                RepoSidecarState.ours) {
-          continue;
-        }
-        if (p.posix.basename(path) == miauwRepoFileName &&
-            await repoMiauwState(path, (String q) async => remote[q]) !=
-                RepoSidecarState.ours) {
-          continue;
-        }
+        if (await _sidecarNietVanOns(path, remote)) continue;
         deletes.add(path);
       }
       final result = await forge.commitFiles(
@@ -318,4 +294,32 @@ class SyncEngine {
     }
     return true;
   }
+}
+
+/// Of [path] een sidecar is die deze build niet als de zijne kan lezen — en
+/// dus niet verwijderd mag worden, ook al ontbreekt hij lokaal.
+///
+/// De sidecars zijn de bestanden in een deckmap die van iemand ánders kunnen
+/// zijn. Kon deze build ze niet lezen (conflictmarkeringen uit een merge
+/// buiten OciDeck, of een sidecar van een nieuwere versie), dan draagt het
+/// deck die laag niet om een reden die niets zegt over wat er in de repo
+/// hoort te staan — en "ontbreekt lokaal" is dan geen opdracht om andermans
+/// werk te wissen. Buiten [SyncEngine._flush] omdat die methode tegen zijn
+/// regelplafond zit; de regel is bovendien van de sidecar-laag, niet van de
+/// flush.
+Future<bool> _sidecarNietVanOns(
+  String path,
+  Map<String, Uint8List> remote,
+) async {
+  Future<Uint8List?> read(String q) async => remote[q];
+  final state = switch (p.posix.basename(path)) {
+    userNotesRepoFileName => repoUserNotesState(path, read),
+    inkRepoFileName => repoInkState(path, read),
+    dismissalsRepoFileName => repoDismissalsState(path, read),
+    miauwRepoFileName => repoMiauwState(path, read),
+    sealRepoFileName => repoSealState(path, read),
+    _ => null,
+  };
+  if (state == null) return false;
+  return await state != RepoSidecarState.ours;
 }

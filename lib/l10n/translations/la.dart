@@ -1860,12 +1860,6 @@ const _dutchSourceAddLa = <String, String>{
       'Inventa quae recensuisti et manere sivisti. Non amplius nuntiantur, sed scrutatio ea etiamnunc invenit neque pro solutis habentur. Tange ut unum restituas.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Inventum de privatis seponere (consilium)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Fasciculus obsignatus in ramum operis non transit',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Sigillum est enuntiatio de his ipsis octetis. Ramus operis rescribi, decerpi et vi impelli potest, et sigillum quod haec superest nihil amplius dicit.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Serva hunc fasciculum ut plicam vel ut sarcinam .ocideck. Sigillum ad titulum emissionis pertinet, quae via nondum est — usque tunc hic tutum manet.',
   'Deze is beoordeeld en mag blijven': 'Recognitum, hoc manere potest',
   'Mogelijk gemaakt door': 'Possibile factum ab',
   'De export is gestopt tijdens het voorbereiden.':

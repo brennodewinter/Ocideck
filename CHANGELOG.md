@@ -102,6 +102,21 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Added
+- **Het zegel reist mee naar een git-repository, en de weigering is
+  ingetrokken (#541, slotstuk).** Een verzegeld deck werd sinds de vorige
+  ronde geweigerd op een werkbranch — eerlijker dan het zegel stil laten
+  wegvallen, maar samen met een `tagRelease` die niets commit betekende het:
+  een verzegeld rapport kon helemáál niet meer naar een repository. Het
+  besluit van de beheerder sneed de knoop door: git is hier een
+  bestandssysteem, geen enforcer. Wat een zegel betékent — afgekaart, niet
+  meer te wijzigen — bewaakt de app zelf door zo'n deck alleen-lezen te
+  houden; de opslag bewaart wat er is. Het zegel en de handtekening gaan nu
+  als `deck.seal.json` naast `deck.md` mee, komen bij het openen terug, en
+  overleven een samenvoeging van welke kant ze ook komen. Eén eerlijke grens:
+  de zegelhash gaat over de bytes van de oorspronkelijke `.md`, en de
+  repo-kopie herschrijft afbeeldingspaden — een deck uit git meldt zijn zegel
+  dus als "hier niet na te rekenen" in plaats van vals alarm te slaan, precies
+  zoals een `.ocideck`-pakket dat al deed (GIT_STORAGE D13, FILE_FORMAT §6.6).
 - **De MIAUW-dispositie reist mee naar een git-repository (#756).** De waivers
   en handmatige bevestigingen van een pentestrapport (`<naam>.miauw.json`)
   waren de laatste laag die achterbleef: wie zo'n rapport naar een repository
@@ -136,6 +151,16 @@ read a book to find out.
   afkeuren valt hij netjes om.
 
 ### Fixed
+- **Sidecars werden op het REST-pad nooit geschreven naar een branch waar ze
+  nog niet stonden (#541, bijvangst).** `GitForge.readBlob` gooit een
+  notFound-fout bij een ontbrekend bestand, en de aanraakcontrole van de
+  sidecars las élke worp als "niet van ons, niet aanraken" — terecht bij een
+  netwerkhapering, fataal bij "bestaat nog niet": de eerste opslag van
+  notities, tekeningen, terzijdeleggingen of dispositie op een verse branch
+  schreef die laag stilletjes niet. `repoFileReaderFor` vertaalt notFound nu
+  naar null, zoals het `RepoFileReader`-contract altijd al beloofde; afwezig
+  en onbereikbaar zijn verschillende antwoorden. Een regressietest legt het
+  eerste-opslag-pad vast.
 - **Ook iOS en Android droegen nog de fotokat — en het handwerk eronder is nu
   een script.** De vorige ronde repareerde Linux en Windows; de twee mobiele
   sets (15 iOS-formaten, 5 Android-dichtheden) stonden nog op wat `20906ddb` er

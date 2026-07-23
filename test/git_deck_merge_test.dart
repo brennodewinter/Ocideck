@@ -651,4 +651,47 @@ void main() {
       expect(result.merged.dismissals, isNull);
     });
   });
+
+  group('het zegel overleeft de merge', () {
+    // #541: de merge bouwt op ónze kant, dus een deck dat alleen aan hún kant
+    // verzegeld of ondertekend was verloor zijn vaststelling stil — en een
+    // verzegeld rapport zonder zegel leest als een rapport dat nooit verzegeld
+    // is. Of de hash nog klopt met de samengevoegde inhoud is het werk van de
+    // integriteitscontrole bij het openen, niet van de merge.
+    Deck kaal() => deckOf([one, two]);
+
+    Deck verzegeld({String hash = 'a'}) => deckOf([one, two]).copyWith(
+      finalized: true,
+      sealAlgo: 'sha-512',
+      sealHash: hash * 128,
+      sealAt: '2026-07-10T12:00:00.000Z',
+    );
+
+    test('alleen hún kant droeg een zegel: het komt mee', () {
+      final result = mergeDeckVersions(kaal(), kaal(), verzegeld());
+
+      expect(result.merged.finalized, isTrue);
+      expect(result.merged.sealHash, 'a' * 128);
+    });
+
+    test('beide kanten droegen er een: de onze wint, deterministisch', () {
+      // Twee versies van één zegel is geen conflict maar een vergissing
+      // (§9.7); een vaste keuze houdt de vergissing zichtbaar in plaats van
+      // er een derde versie bij te verzinnen.
+      final result = mergeDeckVersions(
+        kaal(),
+        verzegeld(hash: 'b'),
+        verzegeld(hash: 'a'),
+      );
+
+      expect(result.merged.sealHash, 'b' * 128);
+    });
+
+    test('zonder zegel aan beide kanten blijft het onverzegeld', () {
+      final result = mergeDeckVersions(kaal(), kaal(), kaal());
+
+      expect(result.merged.finalized, isFalse);
+      expect(result.merged.sealHash, isEmpty);
+    });
+  });
 }

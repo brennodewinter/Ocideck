@@ -5,6 +5,7 @@ import 'package:path/path.dart' as p;
 
 import '../../models/deck.dart';
 import '../../models/git_settings.dart';
+import '../../models/seal_record.dart';
 import '../../models/slide.dart';
 import '../../models/chart.dart';
 import '../../utils/log.dart';
@@ -12,6 +13,7 @@ import '../annotation_codec.dart';
 import '../markdown_service.dart';
 import '../miauw_codec.dart';
 import '../privacy/dismissal_codec.dart';
+import '../seal_codec.dart';
 import '../user_notes_codec.dart';
 import '../slide_image_refs.dart';
 import '../web_asset_store.dart';
@@ -160,6 +162,7 @@ Future<
     bool inkUnreadable,
     bool dismissalsUnreadable,
     bool miauwUnreadable,
+    bool sealUnreadable,
   })
 >
 withRepoSidecars(
@@ -184,28 +187,43 @@ withRepoSidecars(
     deckDir: deckDir,
     read: read,
   );
+  final seal = await withRepoSeal(miauw.deck, deckDir: deckDir, read: read);
   return (
-    deck: miauw.deck,
+    deck: seal.deck,
     missingChartData: charts.missing,
     userNotesUnreadable: notes.onleesbaar,
     inkUnreadable: ink.onleesbaar,
     dismissalsUnreadable: dismissals.onleesbaar,
     miauwUnreadable: miauw.onleesbaar,
+    sealUnreadable: seal.onleesbaar,
   );
 }
 
-/// Of dit deck een zegel of handtekening draagt, en daarmee niet op een
-/// werkbranch thuishoort (D13).
+/// [RepoFileReader] over één ref van [forge], mét het contract dat de typedef
+/// belooft: **null als het er niet is**.
 ///
-/// Eén definitie, want twee lagen hangen eraan: het opslagpad weigert erop en
-/// de interface legt erop uit. Twee kopieën van deze regel zouden op termijn
-/// uiteenlopen, en dan weigert de ene wat de andere aankondigt.
-bool gitRefusesSealedDeck(Deck deck) =>
-    deck.finalized || (deck.signature?.isNotEmpty ?? false);
+/// `GitForge.readBlob` gooit bij een ontbrekend bestand ([GitForgeError
+/// .notFound]), en de sidecar-laag leest élke worp als "niet aanraken" —
+/// terecht bij een netwerkhapering, maar fataal bij "bestaat nog niet": dan
+/// werd geen enkele sidecar ooit geschreven op een branch waar hij nog niet
+/// stond, en reisde er op het REST-pad stilletjes niets (#541). Afwezig en
+/// onbereikbaar zijn verschillende antwoorden; alleen de eerste is hier null.
+RepoFileReader repoFileReaderFor(GitForge forge, String ref) => (path) async {
+  try {
+    return await forge.readBlob(ref, path);
+  } on GitForgeException catch (e) {
+    if (e.kind == GitForgeError.notFound) return null;
+    rethrow;
+  }
+};
 
-// De klasse `GitDeckOmissions` en de "niet alles gaat mee"-waarschuwing die
-// hier stonden zijn opgeheven (#541): met media (#540), grafiekdata, notities,
-// tekeningen en de zegelweigering (D13) was er geen ware regel meer over. De
+// De weigering `gitRefusesSealedDeck` die hier stond is ingetrokken (#541,
+// 23-07-2026): git is een bestandssysteem, geen enforcer. Het zegel reist nu
+// als sidecar mee (`deck.seal.json`, zie `deck_repo_sidecars.dart`); dat een
+// verzegeld deck afgekaart is, bewaakt de app zelf door het alleen-lezen te
+// maken. De klasse `GitDeckOmissions` en de "niet alles gaat mee"-waarschuwing
+// die hier stonden zijn eerder al opgeheven (#541): met media (#540),
+// grafiekdata, notities en tekeningen was er geen ware regel meer over. De
 // geschiedenis van dat krimpen staat in §9.1 — de waarschuwing verloor per
 // gelande laag precies zijn regel, tot hij leeg was.
 
@@ -219,10 +237,10 @@ class RepoDeckFiles {
   /// Paden voor `GitForge.commitFiles(deletes:)` — bestanden die er in de repo
   /// nog wél zijn maar in dit deck niet meer.
   ///
-  /// Vandaag alleen de notitie-sidecar. Zonder dit zou het wissen van je laatste
-  /// notitie niets doen: de commit laat het oude bestand staan, en bij de
-  /// volgende open hangt de notitie er weer aan. Een wissing die terugkomt is
-  /// erger dan een die niet werkt — de gebruiker denkt dat het weg is.
+  /// Vandaag de sidecars naast `deck.md`. Zonder dit zou het wissen van je
+  /// laatste notitie niets doen: de commit laat het oude bestand staan, en bij
+  /// de volgende open hangt de notitie er weer aan. Een wissing die terugkomt
+  /// is erger dan een die niet werkt — de gebruiker denkt dat het weg is.
   ///
   /// Een pad hier is een *belofte over deze deckmap*, geen vrije opdracht: de
   /// samensteller zet er alleen paden in die hij zelf ook kan schrijven.
@@ -360,10 +378,10 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
     upserts[path] = Uint8List.fromList(utf8.encode(entry.value));
   }
 
-  // De sidecars gaan mee (#541/#651): notities, tekeningen en
-  // terzijdeleggingen, elk op een stabiel pad naast deck.md. Waarom
-  // ingesprongen, wat de aanraakregels zijn en waarom grafstenen inhoud
-  // tellen staat bij [writeAllRepoSidecars].
+  // De sidecars gaan mee (#541/#651/#756): notities, tekeningen,
+  // terzijdeleggingen, de MIAUW-dispositie en het zegel, elk op een stabiel
+  // pad naast deck.md. Waarom ingesprongen, wat de aanraakregels zijn en
+  // waarom grafstenen inhoud tellen staat bij [writeAllRepoSidecars].
   await writeAllRepoSidecars(
     rewritten,
     deckDir: deckDir,
@@ -424,6 +442,7 @@ Map<String, Uint8List> mirrorDeckFiles(
     final d => DismissalCodec.encode(d, forTextMerge: true),
   };
   final miauw = MiauwCodec.encodeDisposition(deck.miauw, forTextMerge: true);
+  final seal = SealCodec.encode(SealRecord.of(deck));
   return <String, Uint8List>{
     p.posix.join(deckDir, deckRepoFileName): Uint8List.fromList(
       utf8.encode(md.generateDeck(deck)),
@@ -448,6 +467,10 @@ Map<String, Uint8List> mirrorDeckFiles(
       null => null,
     },
     p.posix.join(deckDir, miauwRepoFileName): ?switch (miauw) {
+      final String json => Uint8List.fromList(utf8.encode(json)),
+      null => null,
+    },
+    p.posix.join(deckDir, sealRepoFileName): ?switch (seal) {
       final String json => Uint8List.fromList(utf8.encode(json)),
       null => null,
     },
@@ -537,6 +560,10 @@ Future<RepoMergeOutcome> resolveRepoDeckMerge({
       p.posix.join(deckDir, miauwRepoFileName): ?await read(
         MergeSide.ours,
         p.posix.join(deckDir, miauwRepoFileName),
+      ),
+      p.posix.join(deckDir, sealRepoFileName): ?await read(
+        MergeSide.ours,
+        p.posix.join(deckDir, sealRepoFileName),
       ),
     };
     for (final path

@@ -170,74 +170,111 @@ void main() {
       Deck(title: title, slides: slides);
 
   group('saveToGit', () {
-    test(
-      'weigert een verzegeld deck en raakt de repo niet aan (D12)',
-      () async {
-        // De poort, niet de melding. De interface legt het ook uit, maar een
-        // weigering die alleen in een dialoog woont is te omzeilen door een
-        // andere knop te gebruiken — en dan valt het zegel alsnog stil weg,
-        // precies wat #541 deel 3 verving.
-        final (container, tabs) = build();
-        final repo = repoWith('# oud');
-        final forge = FakeForge(repo);
-        final branchesBefore = Map.of(repo.branches);
-        final filesBefore = Map.of(repo.files);
+    test('een verzegeld deck gaat mee, mét zijn zegel als sidecar', () async {
+      // De weigering (D13) is ingetrokken (#541, 23-07-2026): git is een
+      // bestandssysteem, geen enforcer. Wat een zegel betekent — afgekaart,
+      // niet meer te wijzigen — bewaakt de app door een verzegeld deck
+      // alleen-lezen te maken; de opslag bewaart wat er is. Zonder de sidecar
+      // leest een verzegeld rapport dat uit de repo terugkomt als een rapport
+      // dat nooit verzegeld is.
+      final (container, tabs) = build();
+      final repo = repoWith('# oud');
+      final forge = FakeForge(repo);
 
-        seedDeck(
-          container,
-          Deck(
-            title: 'Kwartaal',
-            slides: [Slide.create(SlideType.title).copyWith(title: 'Q3')],
-            finalized: true,
-            sealAlgo: 'sha-512',
-            sealHash: 'a' * 128,
-            sealAt: '2026-07-10T12:00:00.000Z',
-          ),
-        );
+      seedDeck(
+        container,
+        Deck(
+          title: 'Kwartaal',
+          slides: [Slide.create(SlideType.title).copyWith(title: 'Q3')],
+          finalized: true,
+          sealAlgo: 'sha-512',
+          sealHash: 'a' * 128,
+          sealAt: '2026-07-10T12:00:00.000Z',
+        ),
+      );
 
-        final result = await tabs.saveToGit(
-          forge,
-          config: config,
-          deckDir: deckDir,
-          branch: 'main',
-          message: 'wijziging',
-        );
+      final result = await tabs.saveToGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'wijziging',
+      );
 
-        expect(result.status, GitSaveStatus.sealed);
-        // Geen tak erbij, geen bestand gewijzigd: de weigering staat vóór élk
-        // schrijven, niet halverwege.
-        expect(repo.branches, branchesBefore);
-        expect(repo.files, filesBefore);
-      },
-    );
+      expect(result.status, GitSaveStatus.committed);
+      final seal = repo.files['$deckDir/deck.seal.json'];
+      expect(seal, isNotNull, reason: 'het zegel hoort naast deck.md te staan');
+      final decoded = jsonDecode(utf8.decode(seal!)) as Map<String, dynamic>;
+      expect(decoded['finalized'], isTrue);
+      expect(decoded['hash'], 'a' * 128);
+    });
 
-    test(
-      'een deck met alleen een handtekening telt ook als verzegeld',
-      () async {
-        // `finalized` en een handtekening zijn twee ingangen naar hetzelfde
-        // besluit; alleen de eerste bewaken laat de tweede stil doorlopen.
-        final (container, tabs) = build();
-        final forge = FakeForge(repoWith('# oud'));
-        seedDeck(
-          container,
-          Deck(
-            title: 'Kwartaal',
-            slides: [Slide.create(SlideType.title).copyWith(title: 'Q3')],
-            signature: const DocumentSignature(name: 'B. de Winter'),
-          ),
-        );
+    test('notities reizen mee, ook als het bestand er nog niet stond', () async {
+      // De regressie achter de zegel-sidecar (#541): `GitForge.readBlob` gooit
+      // notFound bij een ontbrekend bestand, en de aanraakcontrole las élke
+      // worp als "niet aanraken" — dus op een branch waar de sidecar nog niet
+      // stond werd hij ook nooit geschreven. Afwezig en onbereikbaar zijn
+      // verschillende antwoorden (repoFileReaderFor).
+      final (container, tabs) = build();
+      final repo = repoWith('# oud');
+      final forge = FakeForge(repo);
+      final slide = Slide.create(SlideType.title).copyWith(title: 'Q3');
+      seedDeck(
+        container,
+        Deck(
+          title: 'Kwartaal',
+          slides: [slide],
+          userNotes: {slide.id: 'Deze zin hoort erbij'},
+        ),
+      );
 
-        final result = await tabs.saveToGit(
-          forge,
-          config: config,
-          deckDir: deckDir,
-          branch: 'main',
-          message: 'wijziging',
-        );
+      final result = await tabs.saveToGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'wijziging',
+      );
 
-        expect(result.status, GitSaveStatus.sealed);
-      },
-    );
+      expect(result.status, GitSaveStatus.committed);
+      final notes = repo.files['$deckDir/deck.user-notes.json'];
+      expect(notes, isNotNull);
+      expect(utf8.decode(notes!), contains('Deze zin hoort erbij'));
+    });
+
+    test('een deck met alleen een handtekening reist ook mee', () async {
+      // `finalized` en een handtekening zijn twee ingangen naar dezelfde
+      // sidecar; alleen de eerste schrijven zou de tweede stil laten
+      // wegvallen.
+      final (container, tabs) = build();
+      final repo = repoWith('# oud');
+      final forge = FakeForge(repo);
+      seedDeck(
+        container,
+        Deck(
+          title: 'Kwartaal',
+          slides: [Slide.create(SlideType.title).copyWith(title: 'Q3')],
+          signature: const DocumentSignature(name: 'B. de Winter'),
+        ),
+      );
+
+      final result = await tabs.saveToGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'wijziging',
+      );
+
+      expect(result.status, GitSaveStatus.committed);
+      final seal = repo.files['$deckDir/deck.seal.json'];
+      expect(seal, isNotNull);
+      final decoded = jsonDecode(utf8.decode(seal!)) as Map<String, dynamic>;
+      expect(
+        (decoded['signature'] as Map<String, dynamic>)['name'],
+        'B. de Winter',
+      );
+    });
 
     test('landt op een werkbranch, niet rechtstreeks op main (D3)', () async {
       final (container, tabs) = build();

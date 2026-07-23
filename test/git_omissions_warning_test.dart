@@ -1,16 +1,15 @@
 // De "niet alles gaat mee naar git"-waarschuwing bestond zolang de git-opslag
 // werk achterliet, en kromp per gelande laag: media (#515/#540), grafiekdata,
-// notities (#541 deel 1), het zegel (D13: een weigering, geen weglating) en ten
-// slotte de tekenlaag (#541 deel 2). Daarmee was er geen ware regel meer over,
-// en een dialoog zonder ware regels leert de gebruiker alleen wegklikken — dus
-// is hij opgeheven.
+// notities (#541 deel 1) en ten slotte de tekenlaag (#541 deel 2). Daarmee was
+// er geen ware regel meer over, en een dialoog zonder ware regels leert de
+// gebruiker alleen wegklikken — dus is hij opgeheven. De zegelweigering die
+// daarna nog als tussenstop bestond is ingetrokken (#541, 23-07-2026): git is
+// een bestandssysteem, geen enforcer, en het zegel reist als sidecar mee.
 //
 // **Deze test bewaakt de afwezigheid.** Elke laag gaat rechtstreeks door naar
-// het opslaandialoog; komt de melding ooit terug, dan staat hier een
-// tussenscherm dat de gebruiker niet meer kan plaatsen, of is de schrijfkant
-// van een sidecar stukgegaan zonder dat iemand het hoort. De enige tussenstop
-// die blijft is de zegelweigering — en dat is een weigering, geen waarschuwing:
-// er is geen "Toch opslaan".
+// het opslaandialoog; komt er ooit weer een tussenscherm, dan staat hier iets
+// dat de gebruiker niet meer kan plaatsen, of is de schrijfkant van een
+// sidecar stukgegaan zonder dat iemand het hoort.
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -124,13 +123,11 @@ void main() {
     expect(find.text('Deknaam'), findsOneWidget);
   });
 
-  testWidgets('een verzegeld deck wordt geweigerd, niet gewaarschuwd', (
-    tester,
-  ) async {
-    // Sinds D13 gaat een verzegeld deck helemaal niet naar een werkbranch —
-    // die kan herschreven en geforceerd geduwd worden, en een zegel dat dat
-    // overleeft zegt niets meer. Een weigering die je kunt wegklikken is er
-    // geen, dus er is geen "Toch opslaan".
+  testWidgets('een verzegeld deck gaat rechtstreeks door', (tester) async {
+    // De weigering is ingetrokken (#541, 23-07-2026): git is een
+    // bestandssysteem, geen enforcer. Het zegel reist als `deck.seal.json`
+    // mee, dus er valt niets te weigeren en niets te waarschuwen — de
+    // naamvraag komt gewoon.
     await pumpWithDeck(
       tester,
       Deck(
@@ -146,37 +143,9 @@ void main() {
 
     expect(
       find.text('Een verzegeld deck gaat niet naar een werkbranch'),
-      findsOneWidget,
-    );
-    expect(find.text('Toch opslaan'), findsNothing);
-    // En het opslaan begint niet: de naamvraag komt er niet.
-    expect(find.text('Deknaam'), findsNothing);
-  });
-
-  testWidgets('een verzegeld deck mét tekeningen noemt alleen de weigering', (
-    tester,
-  ) async {
-    // Twee dialogen achter elkaar zou de weigering laten lezen als de tweede
-    // helft van een waarschuwing waar je doorheen kunt klikken.
-    final slide = plain('Test');
-    await pumpWithDeck(
-      tester,
-      Deck(
-        title: 'Test',
-        slides: [slide],
-        finalized: true,
-        sealAlgo: 'sha-512',
-        sealHash: 'a' * 128,
-        sealAt: '2026-07-10T12:00:00.000Z',
-        annotations: {slide.id: streek()},
-      ),
-    );
-    await tapSaveTo(tester);
-
-    expect(
-      find.text('Een verzegeld deck gaat niet naar een werkbranch'),
-      findsOneWidget,
+      findsNothing,
     );
     expect(find.text('Niet alles gaat mee naar git'), findsNothing);
+    expect(find.text('Deknaam'), findsOneWidget);
   });
 }
