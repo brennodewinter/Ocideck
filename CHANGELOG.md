@@ -102,6 +102,13 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Added
+- **Zes nieuwe schermafdrukken in de README.** De README toonde de
+  pentestkant (editor met bevinding, privacypaneel, exportdialoog,
+  presentatorweergave) maar liet de featurelijst verder onbewezen. Zes verse
+  beelden uit de draaiende app vullen dat aan: de grafiekeneditor naast de
+  slide die uit dat raster rendert, een tijdlijn uit een gewone
+  Markdown-lijst, een quizslide, een TLP:AMBER-watermerk en de donkere
+  interface. Dezelfde serie draagt ook de OciDeck-pagina's op librekat.nl.
 - **Het zegel reist mee naar een git-repository, en de weigering is
   ingetrokken (#541, slotstuk).** Een verzegeld deck werd sinds de vorige
   ronde geweigerd op een werkbranch — eerlijker dan het zegel stil laten

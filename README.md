@@ -69,13 +69,25 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 The full account of each — every slide type, every option, and the limits — is
 in the [User Guide](docs/USER_GUIDE.md).
 
-Three of those, seen rather than described:
+A few of those, seen rather than described:
 
 | Privacy scan (OciWacht) | Export for a recipient |
 |---|---|
 | ![The quality panel showing two privacy findings; the matched value is shown truncated — "IP-adres (1…0)", "telefoonnummer (+…8)" — never in full, the same way the app treats it everywhere.](docs/images/privacy-panel.png) | ![The export dialog with the audience choice: Full for the client or auditor, Redacted for a wider circle.](docs/images/export-dialog.png) |
 
 ![The presenter view: the current slide, the next one, your notes and a rehearsal clock — on the screen the audience never sees.](docs/images/presenter.png)
+
+| A chart is data, not a picture | The slide that grid renders |
+|---|---|
+| ![The chart editor: a grid of labels and numbers per series, with chart type, variants and CSV import above it — the slide draws itself from these values.](docs/images/chart-editor.png) | ![A bar chart slide with three series per quarter, drawn in the deck's style profile with its logo.](docs/images/chart-slide.png) |
+
+| A timeline from a plain Markdown list | A question slide, answered live |
+|---|---|
+| ![An animated timeline slide with four events from report to evaluation, each a labelled card on one line.](docs/images/timeline-slide.png) | ![A quiz slide with four answer options; the correct one is highlighted green after answering.](docs/images/quiz-slide.png) |
+
+| Classification that travels with the slide | The same editor, dark |
+|---|---|
+| ![A slide marked TLP:AMBER: a corner label and an organization watermark over the content, both rendered by the app rather than pasted on.](docs/images/tlp-watermark.png) | ![The editor in the dark interface profile, showing the same chart editor and slide strip.](docs/images/dark-interface.png) |
 
 *(These are the desktop build. The web build in your browser runs the same
 renderer; a few things are desktop-only — video, the CVE lookup, the local CVE
