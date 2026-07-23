@@ -1810,6 +1810,8 @@ const _dutchSourceAddPt = <String, String>{
       'Ajuda com textos alternativos, descrições e formulações. Ativar ainda não envia nada: isso só acontece depois de escolher um backend e, no caso de um serviço na nuvem, de confirmar expressamente. Com um backend local, nada sai do seu computador.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Escolha o backend na aba Assistência de IA. Enquanto nada estiver definido aí, nada acontece.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Os slides de exemplo de um modelo estão em inglês. O nome e a descrição seguem a sua própria língua; o conteúdo adapta-o depois de criar.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Constatações que analisaste e deixaste ficar. Já não são comunicadas, mas a análise continua a encontrá-las e não contam como resolvidas. Toca para repor uma.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1953,8 +1955,6 @@ const _dutchSourceAddPt = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Apresentações que continuam a ser simples ficheiros Markdown: legíveis, pesquisáveis e abertos com qualquer editor.',
   'sjablonen om mee te beginnen, of leeg': 'modelos para começar, ou em branco',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Os slides de exemplo de um modelo estão em neerlandês. O nome e a descrição seguem a sua própria língua; o conteúdo adapta-o depois de criar.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'A omissão está ativa: os dados encontrados são tapados a preto e todas as imagens, vídeos e áudio deste slide não seguem para o ecrã nem para a exportação. O seu ficheiro markdown mantém tudo.',
   'Mijn tekst': 'O meu texto',

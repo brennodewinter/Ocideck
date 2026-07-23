@@ -94,6 +94,28 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Changed
+- **Sjablooninhoud is voortaan een document per taal, geen code meer.** De
+  voorbeelddia's van de 49 sjablonen leefden als Dart-bouwers in zeven
+  bestanden onder `lib/models/`; ze staan nu als gewone Marp-documenten in
+  `assets/templates/` — `<id>.nl.md` naast `<id>.en.md`, geschreven door
+  dezelfde serialisatie die elk deck opslaat en gelezen door dezelfde parser
+  die elk deck opent (`TemplateContentService`). Een sjabloon is inhoud, geen
+  programma; nu staat dat ook zo in de repo, en elk document is meteen een
+  dekpunt voor de serialisatie. Het register — id, naam, omschrijving, icoon —
+  blijft in `deck_template.dart` en volgt gewoon uw interfacetaal.
+
+  Nederlands én Engels hebben daarmee eigen voorbeelddia's; elke andere
+  interfacetaal krijgt de Engelse variant. De melding boven de sjabloonkiezer
+  en op het startscherm zegt dat nu ook — de voorbeelddia's staan in het
+  *Engels* — en verschijnt alleen als uw taal niet Nederlands en niet Engels
+  is: wie zijn eigen taal krijgt, heeft er niets aan, en een melding die niets
+  toevoegt leert mensen meldingen overslaan. De regel zelf staat nog steeds:
+  sjablooninhoud is deck-inhoud en vertaalt niet mee met de menutaal; er is
+  een tweede brontaal bijgekomen, geen vertaalmechanisme. Ontbreekt een
+  document of is het onleesbaar, dan begint het nieuwe deck met een kale
+  titeldia in plaats van een foutmelding. (#622)
+
 ### Removed
 - **Drie afbeeldingen uit de tijd vóór de OciDeck-huisstijl.**
   `assets/images/logo.png` en `de-winter-wittegeheel.png` zijn twee

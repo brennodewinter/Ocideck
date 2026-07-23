@@ -737,6 +737,8 @@ const _dutchSourceAddEs = {
       'Ayuda con textos alternativos, descripciones y formulaciones. Activarlo aún no envía nada: eso solo ocurre después de que elijas tú mismo un backend y, con un servicio en la nube, lo confirmes expresamente. Con un backend local, nada sale de tu ordenador.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Elige el backend en la pestaña Asistencia de IA. Mientras allí no haya nada, no ocurre nada.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Las diapositivas de ejemplo de una plantilla están en inglés. El nombre y la descripción siguen tu propio idioma; el contenido lo adaptas después de crearla.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Hallazgos que has revisado y has dejado tal cual. Ya no se notifican, pero el escaneo los sigue encontrando y no cuentan como resueltos. Toca para restaurar uno.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -881,8 +883,6 @@ const _dutchSourceAddEs = {
       'Presentaciones que siguen siendo simples archivos Markdown: legibles, consultables y abribles con cualquier editor.',
   'sjablonen om mee te beginnen, of leeg':
       'plantillas para empezar, o en blanco',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Las diapositivas de ejemplo de una plantilla están en neerlandés. El nombre y la descripción siguen tu propio idioma; el contenido lo adaptas después de crearla.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'La omisión está activada: los datos encontrados se tachan y todas las imágenes, vídeos y audios de esta diapositiva no pasan a la pantalla ni a la exportación. Tu archivo markdown lo conserva todo.',
   'Mijn tekst': 'Mi texto',

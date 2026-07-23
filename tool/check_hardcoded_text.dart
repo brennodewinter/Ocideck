@@ -67,10 +67,9 @@
 //     de vertaalde tekst uit `userFacingError()` (lib/utils/user_facing_error.dart),
 //     die per fouttype een `d('…')` kiest. Zou een dialoog ooit `e.toString()`
 //     tonen, dan is dát de fout — niet de tekst van de uitzondering.
-//   * Deck-inhoud: `lib/models/deck_template*.dart` vult een NIEUWE presentatie
-//     met voorbeeldslides. Dat is documenttekst die de auteur meteen overtypt,
-//     geen interface, en vertalen zou de opgeslagen presentatie veranderen.
-//     Zie [_contentHomes].
+//   * Deck-inhoud: sjablooninhoud is sinds #622 een markdown-document per taal
+//     (assets/templates/<id>.nl.md naast <id>.en.md) en staat dus buiten lib/.
+//     Zie [_contentHomes] voor bestanden die om dezelfde reden zijn uitgezonderd.
 //   * Referentiedata: de MASTG/MASWE/WSTG/MIAUW-catalogi dragen de officiële
 //     Engelse titels van standaarden. Vertalen zou ze onvindbaar maken. Ze
 //     vallen vanzelf buiten de meting (geen put), en dat is de bedoeling.
@@ -134,21 +133,14 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/source/line_info.dart';
 
-/// Bestanden die deck-INHOUD dragen in plaats van interfacetekst: de sjablonen
-/// die een nieuwe presentatie met voorbeeldslides vullen. Die tekst is vanaf
-/// het eerste moment eigendom van de auteur — hij staat in het opgeslagen
-/// bestand en wordt overtypt. Vertalen zou de inhoud van een document
-/// veranderen afhankelijk van de menutaal, en dat is niet hetzelfde probleem.
-const Set<String> _contentHomes = {
-  'lib/models/deck_template.dart',
-  'lib/models/deck_template_briefings.dart',
-  'lib/models/deck_template_conversations.dart',
-  'lib/models/deck_template_general.dart',
-  'lib/models/deck_template_info_safety.dart',
-  'lib/models/deck_template_sessions.dart',
-  'lib/models/deck_template_work_a.dart',
-  'lib/models/deck_template_work_b.dart',
-};
+/// Bestanden die deck-INHOUD dragen in plaats van interfacetekst. Die tekst is
+/// vanaf het eerste moment eigendom van de auteur — hij staat in het opgeslagen
+/// bestand en wordt overtypt. Vertalen via l10n zou de inhoud van een document
+/// veranderen afhankelijk van de menutaal; daarom leeft sjablooninhoud als
+/// document per taal in assets/templates/ (#622). Het register zelf
+/// (deck_template.dart) draagt alleen l10n-bronstrings en valt gewoon onder de
+/// poort.
+const Set<String> _contentHomes = {};
 
 /// Flutter-constructors en hun parameters die tekst op het scherm zetten.
 ///

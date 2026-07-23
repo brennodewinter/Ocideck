@@ -1785,6 +1785,8 @@ const _dutchSourceAddHu = <String, String>{
       'Segítség alternatív szövegekhez, leírásokhoz és megfogalmazásokhoz. A bekapcsolás még semmit sem küld el: ez csak azután történik meg, hogy magad választottál háttérrendszert, és felhőszolgáltatás esetén kifejezetten megerősítetted. Helyi háttérrendszer esetén semmi sem hagyja el a számítógépedet.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Válaszd ki a háttérrendszert az MI-segítség lapon. Amíg ott nincs beállítva semmi, semmi sem történik.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'A sablon példadiái angolul vannak. A név és a leírás a saját nyelvedet követi; a tartalmat a létrehozás után igazítod hozzá.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Megállapítások, amelyeket megnéztél és meghagytál. Ezeket már nem jelzi, de a vizsgálat továbbra is megtalálja őket, és nem számítanak megoldottnak. Koppints az egyik visszaállításához.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1927,8 +1929,6 @@ const _dutchSourceAddHu = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentációk, amelyek egyszerű Markdown-fájlok maradnak: olvashatók, kereshetők és bármilyen szerkesztővel megnyithatók.',
   'sjablonen om mee te beginnen, of leeg': 'sablon a kezdéshez, vagy üres',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'A sablon példadiái hollandul vannak. A név és a leírás a saját nyelvedet követi; a tartalmat a létrehozás után igazítod hozzá.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'A kihagyás be van kapcsolva: a megtalált adatokat kitakarjuk, és ennek a diának egyetlen képe, videója és hangja sem kerül a képernyőre vagy az exportba. A markdown-fájlod mindent megőriz.',
   'Mijn tekst': 'Saját szöveg',

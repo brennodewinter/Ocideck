@@ -1787,6 +1787,8 @@ const _dutchSourceAddHr = <String, String>{
       'Pomoć pri alternativnim tekstovima, opisima i formulacijama. Uključivanje još ništa ne šalje: to se događa tek nakon što sami odaberete pozadinski sustav i, kod usluge u oblaku, izričito potvrdite. S lokalnim pozadinskim sustavom ništa ne napušta vaše računalo.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Odaberite pozadinski sustav na kartici AI pomoć. Dok tamo ništa nije postavljeno, ništa se ne događa.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Primjeri slajdova u predlošku su na engleskom. Naziv i opis prate tvoj jezik; sadržaj prilagođavaš nakon stvaranja.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Nalazi koji su pregledani i ostavljeni. Više se ne prijavljuju, ali skeniranje ih i dalje pronalazi i ne broje se kao riješeni. Dodirni za vraćanje jednoga.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1929,8 +1931,6 @@ const _dutchSourceAddHr = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentacije koje ostaju obične Markdown datoteke: čitljive, pretražive i otvorive bilo kojim uređivačem.',
   'sjablonen om mee te beginnen, of leeg': 'predložaka za početak ili prazna',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Primjeri slajdova u predlošku su na nizozemskom. Naziv i opis prate tvoj jezik; sadržaj prilagođavaš nakon stvaranja.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Izostavljanje je uključeno: pronađeni podaci se zacrnjuju i sve slike, videozapisi i zvuk s ovog slajda ne idu na zaslon ni u izvoz. Tvoja markdown datoteka zadržava sve.',
   'Mijn tekst': 'Moj tekst',

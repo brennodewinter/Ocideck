@@ -1803,6 +1803,8 @@ const _dutchSourceAddMt = <String, String>{
       'Għajnuna b\'testi alternattivi, deskrizzjonijiet u formulazzjonijiet. Meta tixgħlu xorta ma jintbagħat xejn: dan iseħħ biss wara li tagħżel backend int stess u, fil-każ ta\' servizz cloud, tikkonferma espliċitament. B\'backend lokali xejn ma joħroġ mill-kompjuter tiegħek.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Agħżel il-backend fit-tab Assistenza AI. Sakemm m\'hemm xejn hemmhekk, ma jiġri xejn.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Is-slides ta\' eżempju ta\' mudell huma bl-Ingliż. L-isem u d-deskrizzjoni jsegwu l-lingwa tiegħek; il-kontenut taddattah wara l-ħolqien.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Sejbiet li rrevedejt u ħallejt kif inhuma. Dawn ma jiġux irrapportati aktar, iżda l-iskennjar xorta jsibhom u ma jgħoddux bħala solvuti. Mess biex terġa\' ddaħħal waħda.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1944,8 +1946,6 @@ const _dutchSourceAddMt = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Preżentazzjonijiet li jibqgħu fajls Markdown sempliċi: jinqraw, jitfittxew u jinfetħu bi kwalunkwe editur.',
   'sjablonen om mee te beginnen, of leeg': 'mudelli biex tibda, jew vojta',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Is-slides ta\' eżempju ta\' mudell huma bl-Olandiż. L-isem u d-deskrizzjoni jsegwu l-lingwa tiegħek; il-kontenut taddattah wara l-ħolqien.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'It-tħassir huwa mixgħul: id-data misjuba tiġi mgħottija bl-iswed u l-immaġni, il-video u l-awdjo kollha ta\' din is-slide ma jmorrux fuq l-iskrin jew fl-esportazzjoni. Il-fajl markdown tiegħek iżomm kollox.',
   'Mijn tekst': 'It-test tiegħi',

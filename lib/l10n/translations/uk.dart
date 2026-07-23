@@ -1798,6 +1798,8 @@ const _dutchSourceAddUk = <String, String>{
       'Допомога з альтернативними текстами, описами та формулюваннями. Увімкнення поки нічого не надсилає: це станеться лише після того, як ви самі оберете бекенд і, у випадку хмарного сервісу, явно підтвердите. З локальним бекендом ніщо не покидає ваш комп\'ютер.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Оберіть бекенд на вкладці «Підтримка ШІ». Поки там нічого не вибрано, нічого не відбувається.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Приклади слайдів у шаблоні — англійською. Назва й опис відповідають вашій мові; вміст ви зміните після створення.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Виявлення, які ви переглянули й залишили. Про них більше не повідомляється, але сканування далі їх знаходить, і вони не вважаються усуненими. Торкніться, щоб повернути одне з них.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1939,8 +1941,6 @@ const _dutchSourceAddUk = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Презентації, що лишаються звичайними файлами Markdown: читабельні, придатні для пошуку й такі, що відкриваються будь-яким редактором.',
   'sjablonen om mee te beginnen, of leeg': 'шаблонів для початку або порожня',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Приклади слайдів у шаблоні — нідерландською. Назва й опис відповідають вашій мові; вміст ви зміните після створення.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Приховування ввімкнено: знайдені дані зачорнюються, а всі зображення, відео та звук цього слайда не потрапляють ані на екран, ані в експорт. Ваш markdown-файл зберігає все.',
   'Mijn tekst': 'Мій текст',

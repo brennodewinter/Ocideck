@@ -740,6 +740,8 @@ const _dutchSourceAddDe = {
       'Hilfe bei Alt-Texten, Beschreibungen und Formulierungen. Das Einschalten sendet noch nichts: Das geschieht erst, nachdem du selbst ein Backend gewählt und es bei einem Cloud-Dienst ausdrücklich bestätigt hast. Bei einem lokalen Backend verlässt nichts deinen Computer.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Wähle das Backend auf dem Tab KI-Unterstützung. Solange dort nichts steht, passiert nichts.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Die Beispielfolien einer Vorlage sind auf Englisch. Name und Beschreibung folgen deiner eigenen Sprache; den Inhalt passt du nach dem Erstellen an.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Feststellungen, die Sie geprüft und stehen gelassen haben. Diese werden nicht mehr gemeldet, aber der Scan findet sie weiterhin, und sie gelten nicht als behoben. Zum Zurückholen antippen.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -881,8 +883,6 @@ const _dutchSourceAddDe = {
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Präsentationen, die einfache Markdown-Dateien bleiben: lesbar, durchsuchbar und mit jedem Editor zu öffnen.',
   'sjablonen om mee te beginnen, of leeg': 'Vorlagen zum Starten, oder leer',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Die Beispielfolien einer Vorlage sind auf Niederländisch. Name und Beschreibung folgen deiner eigenen Sprache; den Inhalt passt du nach dem Erstellen an.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Weglassen ist an: gefundene Daten werden geschwärzt und alle Bilder, Videos und Audios dieser Folie gehen nicht auf den Bildschirm oder in den Export. Deine Markdown-Datei behält alles.',
   'Mijn tekst': 'Mein Text',

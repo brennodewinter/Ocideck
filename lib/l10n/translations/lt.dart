@@ -1788,6 +1788,8 @@ const _dutchSourceAddLt = <String, String>{
       'Pagalba dėl alternatyviųjų tekstų, aprašymų ir formuluočių. Įjungimas dar nieko nesiunčia: tai įvyksta tik tada, kai patys pasirenkate vidinę sistemą ir, debesijos paslaugos atveju, aiškiai patvirtinate. Naudojant vietinę vidinę sistemą niekas nepalieka jūsų kompiuterio.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Vidinę sistemą pasirinkite kortelėje DI pagalba. Kol ten nieko nenustatyta, niekas nevyksta.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Šablono pavyzdinės skaidrės yra anglų kalba. Pavadinimas ir aprašymas atitinka tavo kalbą; turinį pritaikai jį sukūręs.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Radiniai, kurie buvo įvertinti ir palikti. Apie juos nebepranešama, bet nuskaitymas juos vis tiek randa ir jie nelaikomi išspręstais. Bakstelėk, kad vieną grąžintum.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1929,8 +1931,6 @@ const _dutchSourceAddLt = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Pristatymai, kurie lieka paprasti Markdown failai: skaitomi, juose galima ieškoti ir atveriami bet kuria rengykle.',
   'sjablonen om mee te beginnen, of leeg': 'šablonų pradžiai arba tuščia',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Šablono pavyzdinės skaidrės yra olandų kalba. Pavadinimas ir aprašymas atitinka tavo kalbą; turinį pritaikai jį sukūręs.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Praleidimas įjungtas: rasti duomenys užjuodinami, o visi šios skaidrės vaizdai, vaizdo ir garso įrašai nepatenka nei į ekraną, nei į eksportą. Tavo markdown failas išsaugo viską.',
   'Mijn tekst': 'Mano tekstas',

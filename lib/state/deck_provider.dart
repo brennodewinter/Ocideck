@@ -4,7 +4,6 @@ import '../models/annotation.dart';
 import '../models/asset_origin.dart';
 import '../models/checklist_spec.dart';
 import '../models/deck.dart';
-import '../models/deck_template.dart';
 import '../models/document_signature.dart';
 import '../models/scope_matrix_spec.dart';
 import '../models/settings.dart';
@@ -249,21 +248,16 @@ class DeckNotifier extends StateNotifier<DeckState> {
     _lastCoalesceKey = null;
   }
 
-  /// Start a fresh deck. With a [template] the deck opens with that template's
-  /// example slides (the first is always a title slide carrying [title]);
-  /// without one it is the classic single title slide.
-  void newDeck(
-    String title, {
-    String theme = 'ocideck',
-    DeckTemplate? template,
-  }) {
+  /// Start a fresh deck. With [slides] the deck opens with those pre-built
+  /// slides (template content resolved by TemplateContentService, the first
+  /// always a title slide carrying [title]); without them it is the classic
+  /// single title slide.
+  void newDeck(String title, {String theme = 'ocideck', List<Slide>? slides}) {
     final deck = Deck(
       title: title,
       theme: theme,
       themeProfile: _file.currentThemeProfile,
-      slides:
-          template?.buildSlides(title) ??
-          [Slide.create(SlideType.title).copyWith(title: title)],
+      slides: slides ?? [Slide.create(SlideType.title).copyWith(title: title)],
     );
     _clearHistory();
     state = DeckState(deck: deck, isDirty: true);

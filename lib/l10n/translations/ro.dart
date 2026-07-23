@@ -1798,6 +1798,8 @@ const _dutchSourceAddRo = <String, String>{
       'Ajutor pentru texte alternative, descrieri și formulări. Activarea nu trimite încă nimic: asta se întâmplă abia după ce alegi tu însuți un backend și, în cazul unui serviciu cloud, confirmi explicit. Cu un backend local, nimic nu părăsește computerul tău.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Alege backend-ul în fila Asistență IA. Cât timp acolo nu este setat nimic, nu se întâmplă nimic.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Slide-urile de exemplu ale unui șablon sunt în engleză. Numele și descrierea urmează limba ta; conținutul îl adaptezi după creare.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Constatări pe care le-ai analizat și le-ai lăsat așa. Nu mai sunt raportate, dar scanarea continuă să le găsească și nu contează ca rezolvate. Atinge pentru a repune una.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1942,8 +1944,6 @@ const _dutchSourceAddRo = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentări care rămân simple fișiere Markdown: lizibile, în care se poate căuta și care se deschid cu orice editor.',
   'sjablonen om mee te beginnen, of leeg': 'șabloane pentru a începe sau goală',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Slide-urile de exemplu ale unui șablon sunt în neerlandeză. Numele și descrierea urmează limba ta; conținutul îl adaptezi după creare.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Omiterea este activă: datele găsite sunt înnegrite, iar toate imaginile, videoclipurile și sunetul acestui slide nu ajung pe ecran sau în export. Fișierul tău markdown păstrează tot.',
   'Mijn tekst': 'Textul meu',

@@ -105,15 +105,15 @@ class _WelcomeScreen extends ConsumerWidget {
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 240),
         // Dezelfde waarschuwing als in de nieuw-presentatie-dialoog, want dit
-        // is de plek waar de belofte gedáán wordt. Wie hier "48 sjablonen om
-        // mee te beginnen" leest en er een opent, kreeg Nederlands terug
-        // zonder dat er iets op wees (#622). Letterlijk dezelfde bronstring,
-        // dus geen tweede tekst om uit de pas te laten lopen.
-        child: Tooltip(
-          message: l10n.d(
-            "De voorbeelddia's van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.",
-          ),
-          child: Text(
+        // is de plek waar de belofte gedáán wordt (#622). Sjablooninhoud is
+        // een document per taal (nl en en); wie in een andere taal leest,
+        // krijgt de Engelse variant, en dat hoort hier te staan. Letterlijk
+        // dezelfde bronstring als in de dialoog, dus geen tweede tekst om uit
+        // de pas te laten lopen. In het Nederlands en het Engels is er niets
+        // te melden en komt er dus ook geen (leeg) zweefvenster.
+        child: _withTemplateLanguageTooltip(
+          l10n,
+          Text(
             '${_visibleTemplateCount(ref)} '
             '${l10n.d('sjablonen om mee te beginnen, of leeg')}',
             textAlign: TextAlign.center,
@@ -264,18 +264,8 @@ class _WelcomeScreen extends ConsumerWidget {
     return deckTemplates.where((t) => revealed || !t.requiresInfoSafety).length;
   }
 
-  Future<void> _newDeck(BuildContext context, WidgetRef ref) async {
-    final choice = await NewDeckDialog.show(context);
-    if (choice == null) return;
-    // Profielkeuze is globaal (het actieve profiel bepaalt de stijl van elk
-    // deck); eerst selecteren, dan aanmaken zodat het nieuwe deck hem erft.
-    await ref
-        .read(settingsProvider.notifier)
-        .selectThemeProfile(choice.profileName);
-    ref
-        .read(tabsProvider.notifier)
-        .newDeckInCurrentTab(choice.title, template: choice.template);
-  }
+  Future<void> _newDeck(BuildContext context, WidgetRef ref) =>
+      _createDeckFromDialog(context, ref, inNewTab: false);
 
   /// Open een recent bestand met dezelfde nette foutafhandeling als het
   /// openen-dialoog; een verdwenen bestand verdwijnt ook uit de lijst.
@@ -500,4 +490,16 @@ class _RecentBadge extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Alleen buiten nl/en zit er een melding op de sjabloonbelofte; in die twee
+/// talen komt de tekst kaal terug, zodat er geen leeg zweefvenster ontstaat.
+Widget _withTemplateLanguageTooltip(AppLocalizations l10n, Widget child) {
+  if (l10n.languageCode == 'nl' || l10n.languageCode == 'en') return child;
+  return Tooltip(
+    message: l10n.d(
+      "De voorbeelddia's van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.",
+    ),
+    child: child,
+  );
 }

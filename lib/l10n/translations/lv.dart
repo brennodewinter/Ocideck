@@ -1780,6 +1780,8 @@ const _dutchSourceAddLv = <String, String>{
       'Palīdzība ar alternatīvajiem tekstiem, aprakstiem un formulējumiem. Ieslēgšana vēl neko nenosūta: tas notiek tikai pēc tam, kad pats esat izvēlējies aizmugursistēmu un mākoņpakalpojuma gadījumā skaidri apstiprinājis. Ar lokālu aizmugursistēmu nekas neatstāj jūsu datoru.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Izvēlieties aizmugursistēmu cilnē MI palīdzība. Kamēr tur nekas nav iestatīts, nekas nenotiek.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Veidnes paraugslaidi ir angļu valodā. Nosaukums un apraksts seko tavai valodai; saturu pielāgo pēc izveides.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Konstatējumi, kas ir izvērtēti un atstāti. Par tiem vairs neziņo, taču skenēšana tos joprojām atrod, un tie netiek uzskatīti par novērstiem. Pieskaries, lai vienu atjaunotu.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1921,8 +1923,6 @@ const _dutchSourceAddLv = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentācijas, kas paliek parasti Markdown faili: lasāmi, meklējami un atverami jebkurā redaktorā.',
   'sjablonen om mee te beginnen, of leeg': 'veidnes, ar ko sākt, vai tukša',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Veidnes paraugslaidi ir nīderlandiešu valodā. Nosaukums un apraksts seko tavai valodai; saturu pielāgo pēc izveides.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Izlaišana ir ieslēgta: atrastie dati tiek nomelnoti un visi šī slaida attēli, video un audio nenonāk ne ekrānā, ne eksportā. Tavs markdown fails saglabā visu.',
   'Mijn tekst': 'Mans teksts',

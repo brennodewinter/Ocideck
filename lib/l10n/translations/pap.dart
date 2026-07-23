@@ -740,6 +740,8 @@ const _dutchSourceAddPap = {
       'Yudansa ku tekstonan alternativo, deskripshonnan i formulashonnan. Sende é no ta manda nada ainda: esei ta sosodé so despues ku bo mes a skohe un backend i, den kaso di un servisio di nubia, a konfirmá esplísitamente. Ku un backend lokal nada no ta sali for di bo komputer.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Skohe e backend riba e tab Asistensia di IA. Tanten ku no tin nada ei, nada no ta pasa.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'E dianan di ehèmpel di un plantia ta na ingles. Nòmber i deskripshon ta sigui bo mes idioma; e kontenido bo ta adaptá despues di krea e presentashon.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Konstatashonnan ku bo a evaluá i a laga keda. Nan no ta wòrdu reportá mas, pero e scan ta sigui haña nan i nan no ta konta komo resolvé. Toka pa pone un bèk.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -881,8 +883,6 @@ const _dutchSourceAddPap = {
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentashonnan ku ta keda simpel archivo Markdown: legibel, buskabel i bo por habri nan ku kualke editor.',
   'sjablonen om mee te beginnen, of leeg': 'plantia pa kuminsá kuné, òf bashí',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'E dianan di ehèmpel di un plantia ta na hulandes. Nòmber i deskripshon ta sigui bo mes idioma; e kontenido bo ta adaptá despues di krea e presentashon.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Laga afó ta prendí: datos hañá ta wòrdu tapá pretu i tur imagen, video i audio di e dia aki no ta bai na pantaya ni na eksportashon. Bo archivo markdown ta warda tur kos.',
   'Mijn tekst': 'Mi teksto',

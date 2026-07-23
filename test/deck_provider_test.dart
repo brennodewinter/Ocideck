@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/checklist_spec.dart';
 import 'package:ocideck/models/deck.dart';
-import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/document_signature.dart';
@@ -36,9 +35,13 @@ void main() {
     expect(n.state.isDirty, isTrue);
   });
 
-  test('newDeck with a template opens with its example slides', () {
+  test('newDeck with pre-built slides opens with those slides', () {
     final n = _notifier();
-    n.newDeck('Mijn briefing', template: deckTemplateById('briefing'));
+    final templateSlides = MarkdownService()
+        .parseDeck(File('assets/templates/briefing.nl.md').readAsStringSync())!
+        .slides;
+    templateSlides[0] = templateSlides[0].copyWith(title: 'Mijn briefing');
+    n.newDeck('Mijn briefing', slides: templateSlides);
     final slides = n.state.deck!.slides;
     expect(slides, hasLength(6));
     expect(slides.first.type, SlideType.title);

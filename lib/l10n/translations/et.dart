@@ -1772,6 +1772,8 @@ const _dutchSourceAddEt = <String, String>{
       'Abi alt-tekstide, kirjelduste ja sõnastuste juures. Sisselülitamine ei saada veel midagi: see juhtub alles pärast seda, kui olete ise taustsüsteemi valinud ja pilveteenuse puhul sõnaselgelt kinnitanud. Kohaliku taustsüsteemi puhul ei lahku midagi teie arvutist.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Valige taustsüsteem vahekaardil Tehisintellekti abi. Kuni seal pole midagi määratud, ei toimu midagi.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Malli näidisslaidid on inglise keeles. Nimi ja kirjeldus järgivad sinu enda keelt; sisu kohandad pärast loomist.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Leiud, mille oled üle vaadanud ja alles jätnud. Neist enam ei teatata, kuid skannimine leiab need endiselt ja neid ei loeta lahendatuks. Puuduta, et üks taastada.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1914,8 +1916,6 @@ const _dutchSourceAddEt = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Esitlused, mis jäävad tavalisteks Markdown-failideks: loetavad, otsitavad ja avatavad mis tahes redaktoriga.',
   'sjablonen om mee te beginnen, of leeg': 'malli alustamiseks või tühi',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Malli näidisslaidid on hollandi keeles. Nimi ja kirjeldus järgivad sinu enda keelt; sisu kohandad pärast loomist.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Väljajätmine on sees: leitud andmed muudetakse mustaks ning selle slaidi kõik pildid, video ja heli ei lähe ekraanile ega ekspordisse. Sinu markdown-fail säilitab kõik.',
   'Mijn tekst': 'Minu tekst',

@@ -1783,6 +1783,8 @@ const _dutchSourceAddSl = <String, String>{
       'Pomoč pri nadomestnih besedilih, opisih in formulacijah. Vklop še ničesar ne pošlje: to se zgodi šele, ko sami izberete zaledje in pri storitvi v oblaku izrecno potrdite. Pri lokalnem zaledju nič ne zapusti vašega računalnika.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Zaledje izberite na zavihku Pomoč UI. Dokler tam ni nič nastavljeno, se nič ne zgodi.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Vzorčni diapozitivi predloge so v angleščini. Ime in opis sledita tvojemu jeziku; vsebino prilagodiš po ustvarjanju.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Ugotovitve, ki so bile pregledane in puščene. Ne javljajo se več, vendar jih pregled še vedno najde in ne štejejo kot razrešene. Tapni za vrnitev ene.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1926,8 +1928,6 @@ const _dutchSourceAddSl = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Predstavitve, ki ostanejo navadne datoteke Markdown: berljive, po njih je mogoče iskati in odpreti jih je mogoče s katerim koli urejevalnikom.',
   'sjablonen om mee te beginnen, of leeg': 'predlog za začetek ali prazna',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Vzorčni diapozitivi predloge so v nizozemščini. Ime in opis sledita tvojemu jeziku; vsebino prilagodiš po ustvarjanju.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Izpuščanje je vklopljeno: najdeni podatki so počrnjeni, vse slike, video in zvok tega diapozitiva pa ne gredo na zaslon ali v izvoz. Tvoja datoteka markdown ohrani vse.',
   'Mijn tekst': 'Moje besedilo',

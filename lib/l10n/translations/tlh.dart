@@ -1756,6 +1756,8 @@ const _dutchSourceAddTlh = <String, String>{
       'alt-ghItlhmey, QIjmey, mu\'tlheghmey je QaH. chu\'lu\'DI\' pagh ngeHlu\': backend DawIvpu\'DI\' \'ej, cloud Qu\' Dalo\'chugh, DachIDchu\'pu\'DI\' neH qaS. backend naDev lo\'lu\'chugh, De\' ngeHbe\'lu\'.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'AI QaH \'echletDaq backend yIwIv. pa\' pagh tu\'lu\'taHvIS, qaSbe\' vay\'.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'ghItlh\'a\' cha\'nobmey: DIvI\' Hol lu\'. per QIn je: Hol lIj lu\'. chenpu\'DI\', qech yIchoH.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'DanoHpu\'bogh \'ej Dateqbe\'pu\'bogh SamwI\'ghachmey. luja\'lu\'be\'taH, \'ach luSamtaH nejwI\', \'ej rInpu\'be\'. wa\' DatatlhmeH yI\'uy.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1892,8 +1894,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Markdown ghItlhmey neH rurtaH \'echletHommey: laDlaH, nejlaH, \'ej Hoch choHwI\' lo\'laH.',
   'sjablonen om mee te beginnen, of leeg': 'taghmeH ghItlh\'a\'mey, pagh chIm',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'ghItlh\'a\' cha\'nobmey: Nederland Hol lu\'. per QIn je: Hol lIj lu\'. chenpu\'DI\', qech yIchoH.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'chIllu\': De\' tu\'lu\'bogh qIjlu\' \'ej cha\'nobvam mIlloghmey, HaSta, wab je cha\'be\'lu\' \'ej ngeHbe\'lu\'. markdown ghItlhlIj Hoch polta\'.',
   'Mijn tekst': 'mu\'wIj',

@@ -1816,6 +1816,8 @@ const _dutchSourceAddGa = <String, String>{
       'Cabhair le téacsanna malartacha, cur síos agus friotal. Ní sheolann é a chur ar siúl aon rud go fóill: ní tharlaíonn sé sin ach amháin tar éis duit inneall a roghnú tú féin agus, i gcás seirbhís néil, é a dheimhniú go sainráite. Le hinneall áitiúil ní fhágann aon rud do ríomhaire.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Roghnaigh an t-inneall ar an táb Cúnamh II. Fad is nach bhfuil aon rud socraithe ansin, ní tharlaíonn aon rud.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Tá sleamhnáin shamplacha teimpléid i mBéarla. Leanann an t-ainm agus an cur síos do theanga féin; cuireann tú an t-ábhar in oiriúint tar éis é a chruthú.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Fionnachtana a ndearna tú athbhreithniú orthu agus a d\'fhág tú mar atá. Ní thuairiscítear a thuilleadh iad, ach aimsíonn an scanadh fós iad agus ní áirítear réitithe iad. Tapáil chun ceann a chur ar ais.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1959,8 +1961,6 @@ const _dutchSourceAddGa = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Láithreoireachtaí a fhanann ina ngnáthchomhaid Markdown: inléite, inchuardaithe agus infhoscailte le heagarthóir ar bith.',
   'sjablonen om mee te beginnen, of leeg': 'teimpléad le tosú leo, nó folamh',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Tá sleamhnáin shamplacha teimpléid san Ollainnis. Leanann an t-ainm agus an cur síos do theanga féin; cuireann tú an t-ábhar in oiriúint tar éis é a chruthú.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Tá an fágáil ar lár ann: cuirtear dubh ar na sonraí a aimsíodh agus ní théann na híomhánna, an físeán ná an fhuaim ar fad ón sleamhnán seo chuig an scáileán ná chuig an easpórtáil. Coinníonn do chomhad markdown gach rud.',
   'Mijn tekst': 'Mo théacs',

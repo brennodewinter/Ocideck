@@ -252,15 +252,16 @@ void main() {
 
   group('taal van de sjablooninhoud', () {
     // Titel en omschrijving lopen door l10n.d(), de dia-inhoud niet: die is
-    // deck-inhoud en blijft Nederlands (zie _templateLanguageNotice). Dat mag,
-    // maar dan moet de kiezer het zeggen in plaats van het te laten ontdekken.
+    // een document per taal (nl en en, #622). Wie in een andere taal leest
+    // krijgt de Engelse variant, en dan moet de kiezer dat zeggen in plaats
+    // van het te laten ontdekken.
     tearDown(() => AppLocalizations.setActiveLanguageCode('nl'));
 
-    // Op de sleutel en niet op de tekst: de melding bestaat in 32 talen, en de
+    // Op de sleutel en niet op de tekst: de melding bestaat in 30 talen, en de
     // vertaling opzoeken zou de test laten meebewegen met wat hij bewaakt.
     final notice = find.byKey(const ValueKey('templateLanguageNotice'));
 
-    testWidgets('wordt gemeld zodra de interface niet Nederlands is', (
+    testWidgets('wordt gemeld zodra de inhoud niet in de eigen taal komt', (
       tester,
     ) async {
       AppLocalizations.setActiveLanguageCode('tr');
@@ -272,6 +273,14 @@ void main() {
     testWidgets('zwijgt in het Nederlands', (tester) async {
       // Een melding die niets toevoegt leert mensen meldingen overslaan.
       AppLocalizations.setActiveLanguageCode('nl');
+      final harness = _Harness();
+      await harness.open(tester);
+      expect(notice, findsNothing);
+    });
+
+    testWidgets('zwijgt in het Engels', (tester) async {
+      // Engels heeft zijn eigen inhoudsdocumenten; er valt niets te melden.
+      AppLocalizations.setActiveLanguageCode('en');
       final harness = _Harness();
       await harness.open(tester);
       expect(notice, findsNothing);

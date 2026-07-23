@@ -441,12 +441,15 @@ also declares them, but see the [CI note](#continuous-integration).)
   argument, one call further along); one that reaches the second is a violation.
   The *type* decides, not the parameter name — `title:` on a `MastgTest` is
   reference data, not interface text.
-- **Not covered on purpose:** the deck templates. `_contentHomes` in the tool
-  lists the `lib/models/deck_template*.dart` files, because their strings are
-  deck *content*: they land in the author's saved file and get typed over.
-  Translating them would make a document's text depend on the menu language it
-  was created in. The new-presentation dialog says so to anyone not reading
-  Dutch rather than leaving it unexplained.
+- **Not covered on purpose:** `_contentHomes` in the tool is the escape list
+  for files that carry deck *content* rather than interface text — strings that
+  land in the author's saved file and get typed over, where translating them
+  would make a document's text depend on the menu language it was created in.
+  It listed the `lib/models/deck_template*.dart` builder files until #622 moved
+  that content out of Dart entirely, into a Markdown document per language
+  under `assets/templates/`; the list is empty now, and the template register
+  that remains in `lib/` carries only l10n source strings and falls under the
+  gate like everything else. *(Corrected 2026-07-23.)*
 - **Failure means:** route the string through `l10n.d('…')` — and remember the
   translation gate then wants it in every language.
 

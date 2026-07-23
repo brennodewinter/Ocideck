@@ -1793,6 +1793,8 @@ const _dutchSourceAddPl = <String, String>{
       'Pomoc przy tekstach alternatywnych, opisach i sformułowaniach. Włączenie niczego jeszcze nie wysyła: dzieje się to dopiero po tym, jak samodzielnie wybierzesz backend i, w przypadku usługi chmurowej, wyraźnie to potwierdzisz. Przy lokalnym backendzie nic nie opuszcza Twojego komputera.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Wybierz backend na karcie Wsparcie AI. Dopóki nic tam nie ustawiono, nic się nie dzieje.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Przykładowe slajdy szablonu są po angielsku. Nazwa i opis podążają za Twoim językiem; treść dostosujesz po utworzeniu.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Ustalenia, które zostały sprawdzone i pozostawione. Nie są już zgłaszane, ale skan nadal je znajduje i nie liczą się jako rozwiązane. Dotknij, aby przywrócić jedno z nich.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1936,8 +1938,6 @@ const _dutchSourceAddPl = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentacje, które pozostają zwykłymi plikami Markdown: czytelne, przeszukiwalne i możliwe do otwarcia w dowolnym edytorze.',
   'sjablonen om mee te beginnen, of leeg': 'szablonów na początek albo pusta',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Przykładowe slajdy szablonu są po niderlandzku. Nazwa i opis podążają za Twoim językiem; treść dostosujesz po utworzeniu.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Pomijanie jest włączone: znalezione dane są zaczernione, a wszystkie obrazy, wideo i dźwięk z tego slajdu nie trafiają na ekran ani do eksportu. Twój plik markdown zachowuje wszystko.',
   'Mijn tekst': 'Mój tekst',

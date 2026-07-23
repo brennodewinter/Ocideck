@@ -1781,6 +1781,8 @@ const _dutchSourceAddFi = <String, String>{
       'Apua alt-teksteihin, kuvauksiin ja muotoiluihin. Päälle kytkeminen ei vielä lähetä mitään: se tapahtuu vasta, kun olet itse valinnut taustajärjestelmän ja pilvipalvelun tapauksessa nimenomaisesti vahvistanut. Paikallisen taustajärjestelmän kanssa mikään ei poistu tietokoneeltasi.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Valitse taustajärjestelmä Tekoälyavustus-välilehdellä. Niin kauan kuin siellä ei ole mitään, mitään ei tapahdu.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Mallin esimerkkidiat ovat englanniksi. Nimi ja kuvaus noudattavat omaa kieltäsi; sisällön muokkaat luonnin jälkeen.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Havainnot, jotka olet arvioinut ja jättänyt paikalleen. Niistä ei enää ilmoiteta, mutta skannaus löytää ne edelleen eikä niitä lasketa ratkaistuiksi. Napauta palauttaaksesi yhden.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1922,8 +1924,6 @@ const _dutchSourceAddFi = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Esitykset, jotka pysyvät tavallisina Markdown-tiedostoina: luettavia, haettavia ja avattavissa millä tahansa editorilla.',
   'sjablonen om mee te beginnen, of leeg': 'mallia aloittamiseen, tai tyhjä',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Mallin esimerkkidiat ovat hollanniksi. Nimi ja kuvaus noudattavat omaa kieltäsi; sisällön muokkaat luonnin jälkeen.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Poisjättö on käytössä: löytyneet tiedot mustataan, eivätkä tämän dian kuvat, video ja ääni mene näytölle tai vientiin. Markdown-tiedostosi säilyttää kaiken.',
   'Mijn tekst': 'Oma teksti',

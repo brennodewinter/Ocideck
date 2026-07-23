@@ -10,7 +10,6 @@ import 'package:uuid/uuid.dart';
 import '../models/asset_origin.dart';
 import '../models/chart.dart';
 import '../models/deck.dart';
-import '../models/deck_template.dart';
 import '../models/settings.dart';
 import '../models/seal_record.dart';
 import '../models/slide.dart';
@@ -346,18 +345,18 @@ class TabsNotifier extends StateNotifier<TabsState> {
     state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
   }
 
-  void newDeckInCurrentTab(String title, {DeckTemplate? template}) {
+  void newDeckInCurrentTab(String title, {List<Slide>? slides}) {
     final tab = state.current;
     if (tab == null) return;
-    tab.deckNotifier.newDeck(title, template: template);
+    tab.deckNotifier.newDeck(title, slides: slides);
     tab.editorNotifier.select(0);
     // Force rebuild by copying state (label may have changed)
     state = state.copyWith(tabs: List.from(state.tabs));
   }
 
-  void newDeckInNewTab(String title, {DeckTemplate? template}) {
+  void newDeckInNewTab(String title, {List<Slide>? slides}) {
     final tab = _createTab();
-    tab.deckNotifier.newDeck(title, template: template);
+    tab.deckNotifier.newDeck(title, slides: slides);
     tab.editorNotifier.select(0);
     final newTabs = [...state.tabs, tab];
     state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);

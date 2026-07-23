@@ -741,6 +741,8 @@ const _dutchSourceAddFy = {
       'Help by alt-teksten, beskriuwingen en formulearringen. Oansette ferstjoert noch neat: dat bart pas neidat do sels in backend keazen hast en, by in clouddienst, útdruklik befêstige hast. By in lokale backend ferlit neat dyn kompjûter.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Kies de backend op it ljepblêd AI-stipe. Salang\'t dêr neat stiet, bart der neat.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'De foarbylddia\'s fan in sjabloan steane yn it Ingelsk. Namme en omskriuwing folgje dyn eigen taal; de ynhâld kinst nei it oanmeitsjen oanpasse.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Befiningen dy\'t sto beoardield en stean litten hast. Dy wurde net mear meld, mar de scan fynt se noch altyd en se telle net as oplost. Tik om der ien werom te setten.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -882,8 +884,6 @@ const _dutchSourceAddFy = {
       'Presintaasjes dy\'t gewoane Markdown-bestannen bliuwe: lêsber, trochsykber en te iepenjen mei elke editor.',
   'sjablonen om mee te beginnen, of leeg':
       'sjabloanen om mei te begjinnen, of leech',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'De foarbylddia\'s fan in sjabloan steane yn it Nederlânsk. Namme en omskriuwing folgje dyn eigen taal; de ynhâld kinst nei it oanmeitsjen oanpasse.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Weilitte stiet oan: fûne gegevens wurde swart makke en álle ôfbyldings, fideo en audio fan dizze dia geane net mei nei it skerm of de eksport. Dyn markdown-bestân hâldt alles.',
   'Mijn tekst': 'Myn tekst',

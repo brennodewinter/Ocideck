@@ -2760,6 +2760,8 @@ const _dutchSourceAddTr = <String, String>{
       'Alternatif metinler, açıklamalar ve ifadeler için yardım. Açmak henüz hiçbir şey göndermez: bu ancak kendiniz bir arka uç seçtikten ve bir bulut hizmetinde açıkça onayladıktan sonra gerçekleşir. Yerel bir arka uçla hiçbir şey bilgisayarınızdan çıkmaz.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Arka ucu AI yardımı sekmesinde seçin. Orada bir şey seçili olmadığı sürece hiçbir şey olmaz.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Bir şablonun örnek slaytları İngilizcedir. Ad ve açıklama kendi dilinizi izler; içeriği oluşturduktan sonra kendiniz düzenlersiniz.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'İncelediğiniz ve olduğu gibi bıraktığınız bulgular. Bunlar artık bildirilmez, ancak tarama onları bulmaya devam eder ve çözülmüş sayılmaz. Birini geri getirmek için dokunun.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -2899,8 +2901,6 @@ const _dutchSourceAddTr = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Düz Markdown dosyası olarak kalan sunumlar: okunabilir, aranabilir ve her düzenleyiciyle açılabilir.',
   'sjablonen om mee te beginnen, of leeg': 'şablonla başlayın ya da boş',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Bir şablonun örnek slaytları Felemenkçedir. Ad ve açıklama kendi dilinizi izler; içeriği oluşturduktan sonra kendiniz düzenlersiniz.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Çıkarma açık: bulunan veriler karartılır ve bu slayttaki tüm görseller, video ve ses ekrana ya da dışa aktarmaya gitmez. Markdown dosyanız her şeyi saklar.',
   'Mijn tekst': 'Kendi metnim',

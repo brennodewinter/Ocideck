@@ -921,6 +921,8 @@ const _dutchSourceAddEn = {
       'Help with alt texts, descriptions and wording. Turning this on sends nothing yet: that only happens once you have chosen a backend yourself and, for a cloud service, explicitly confirmed. With a local backend, nothing leaves your computer.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Choose the backend on the AI assistance tab. As long as nothing is set there, nothing happens.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'A template\'s example slides are in English. The name and description follow your own language; you adapt the content after creating it.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Findings you reviewed and left in place. They are no longer reported, but the scan still finds them and they do not count as resolved. Tap to restore one.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1060,8 +1062,6 @@ const _dutchSourceAddEn = {
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentations that stay plain Markdown files: readable, searchable and openable with any editor.',
   'sjablonen om mee te beginnen, of leeg': 'templates to start with, or blank',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'A template\'s example slides are in Dutch. The name and description follow your own language; you adapt the content after creating it.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Redaction is on: data that was found is blacked out and all images, video and audio on this slide do not go to the screen or the export. Your markdown file keeps everything.',
   'Mijn tekst': 'My text',

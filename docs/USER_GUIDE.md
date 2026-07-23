@@ -65,13 +65,19 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
   comes with fill-in preparation tables and a progress checklist. Everything is
   placeholder text you overwrite with your own content.
 
-  **The example slides in a template are Dutch**, and outside Dutch the picker
-  says so above the list. A template's name and description follow your interface
-  language; its slide content does not. That is a decision, not an oversight:
-  template content becomes *your* content the moment the deck is created, and
-  translating it would make what a document says depend on the menu language it
-  happened to be created in — two people picking the same template would get
-  files they could not compare.
+  **The example slides in a template exist in Dutch and English.** A template's
+  content is a bundled Markdown document per language, read by the same parser
+  that opens any deck: with a Dutch interface you get the Dutch document, with
+  any other interface language the English one. When your interface language is
+  neither, the picker and the welcome screen say so above the list: the example
+  slides will be English, while the template's name and description still follow
+  your own language. That the slide content stops at two languages is a
+  decision, not an oversight: template content becomes *your* content the moment
+  the deck is created, so it exists as a document per language or not at all —
+  running it through the interface-translation layer would make what a document
+  says depend on the menu language it happened to be created in. *(Corrected
+  2026-07-23: until #622 the example slides existed only in Dutch, as code
+  rather than as documents.)*
 - **Opened from a URL**: a deck fetched from a web address (the URL import, or a
   `?deck=…` share link on the web build) shows an **“Extern”** privacy badge in
   the status bar. Opening such a link made your device contact that server;
