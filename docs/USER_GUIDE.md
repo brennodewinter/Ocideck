@@ -19,9 +19,9 @@
 - [Traffic Light Protocol (TLP)](#traffic-light-protocol-tlp)
 - [Privacy check](#privacy-check)
 - [What to do with a finding](#what-to-do-with-a-finding)
-- [Depth — a management version and a technical one](#depth-a-management-version-and-a-technical-one)
+- [Depth — a management version and a technical one](#depth--a-management-version-and-a-technical-one)
 - [Two versions from one source](#two-versions-from-one-source)
-- [Redaction — leaving data out](#redaction-leaving-data-out)
+- [Redaction — leaving data out](#redaction--leaving-data-out)
 - [Presenting](#presenting)
 - [Exporting](#exporting)
 - [Accessibility](#accessibility)
@@ -3016,10 +3016,10 @@ Implementation: `lib/services/markdown_validator.dart` (unit tests in
 
 ## What the browser version cannot do
 
-OciDeck also runs entirely inside a browser tab, with no server behind it. That
-version is not the desktop app on a web page: a browser has no filesystem, no
-subprocesses and no native libraries, so some things are simply not there. They
-are not switched off somewhere — there is no setting to find.
+OciDeck also runs entirely inside a browser tab, with no application backend
+behind it. That version is not the desktop app on a web page: a browser has no
+filesystem, no subprocesses and no native libraries, so some things are simply
+not there. They are not switched off somewhere — there is no setting to find.
 
 | What | In the browser |
 |---|---|
