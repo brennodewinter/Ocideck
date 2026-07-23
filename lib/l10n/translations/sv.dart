@@ -2066,13 +2066,6 @@ const _dutchSourceAddSv = <String, String>{
       'Alla bilder är överhoppade eller undanhållna av sin TLP-klassificering, så det finns inget att exportera.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Diagramsiffrorna sparades inte — de finns bara kvar i det här fönstret:',
-  'Niet alles gaat mee naar git': 'Allt följer inte med till git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'De här delarna hamnar inte i commiten och finns sedan inte i repositoryt:',
-  'Tekeningen op slides': 'Teckningar på bilder',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'De blir kvar i det här fönstret. Spara även presentationen som fil eller som ett .ocideck-paket för att behålla dem.',
-  'Toch opslaan': 'Spara ändå',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'I webbläsaren finns ingen kraschåterställning: stänger du den här fliken är osparat arbete borta. Spara din presentation själv.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

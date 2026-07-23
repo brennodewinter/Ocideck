@@ -2072,13 +2072,6 @@ const _dutchSourceAddHu = <String, String>{
       'Minden dia ki van hagyva vagy vissza van tartva a TLP-besorolása miatt – nincs mit exportálni.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'A diagramok számai nem lettek elmentve — már csak ebben az ablakban léteznek:',
-  'Niet alles gaat mee naar git': 'Nem minden kerül a gitbe',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Ezek a részek nem kerülnek bele a commitba, és később nem lesznek a tárolóban:',
-  'Tekeningen op slides': 'Rajzok a diákon',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Ebben az ablakban maradnak. Mentsd a prezentációt fájlként vagy .ocideck csomagként is, hogy megőrizd őket.',
-  'Toch opslaan': 'Mentés mindenképp',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'A böngészőben nincs összeomlás utáni helyreállítás: ha bezárod ezt a lapot, a nem mentett munka elvész. Mentsd el magad a prezentációdat.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

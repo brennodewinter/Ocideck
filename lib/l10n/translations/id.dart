@@ -2068,13 +2068,6 @@ const _dutchSourceAddId = <String, String>{
       'Semua slide dilewati atau ditahan oleh klasifikasi TLP-nya, jadi tidak ada yang diekspor.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Angka bagan tidak tersimpan — sekarang hanya ada di jendela ini:',
-  'Niet alles gaat mee naar git': 'Tidak semuanya ikut ke git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Bagian-bagian ini tidak masuk ke dalam commit dan nanti tidak ada di repositori:',
-  'Tekeningen op slides': 'Coretan pada slide',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Semuanya tetap ada di jendela ini. Simpan juga presentasi sebagai berkas atau sebagai paket .ocideck agar tersimpan.',
-  'Toch opslaan': 'Tetap simpan',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Di peramban tidak ada pemulihan setelah crash: jika kamu menutup tab ini, pekerjaan yang belum tersimpan akan hilang. Simpan sendiri presentasimu.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

@@ -1,5 +1,7 @@
+import '../../models/annotation.dart';
 import '../../models/deck.dart';
 import '../../models/slide.dart';
+import '../annotation_codec.dart';
 import '../slide_dedup_service.dart';
 import '../user_notes_codec.dart';
 import 'version_diff.dart';
@@ -194,6 +196,7 @@ DeckMergeResult mergeDeckVersions(
       slides: out,
       tlp: tlp,
       userNotes: _mergedUserNotes(ours, theirs, out),
+      annotations: _mergedAnnotations(ours, theirs, out),
     ),
     [for (final c in conflicts) c._at(landedAt[c.baseIndex])],
   );
@@ -219,6 +222,56 @@ Map<String, String> _mergedUserNotes(Deck ours, Deck theirs, List<Slide> out) {
     ..._reanchored(ours, out),
   };
   return merged;
+}
+
+/// De tekeningen van beide kanten, verenigd per streek — D7's union, mét de
+/// grafstenen die hem eerlijk houden.
+///
+/// Dezelfde heranker-stap als bij de notities, en om dezelfde reden: de
+/// streeksleutels wijzen naar dia-id's van de eigen parse, en [out] draagt
+/// andere. Daarna is de merge géén "onze kant wint" maar een **unie op
+/// streek-id**: twee mensen die op één dia tekenden waren het niet oneens, ze
+/// tekenden allebei. Onze streken houden hun volgorde, wat alleen de ander
+/// heeft komt erachteraan.
+///
+/// Eén regel beslist bij een dubbel id, en het is de regel waarvoor de
+/// grafsteen bestaat: **gewist wint van niet-gewist**, ongeacht de kant. Een
+/// wissing die een merge niet overleeft is erger dan een die niet werkt, want
+/// de gebruiker zág hem verdwijnen (D7). De grafsteen blijft dus ook in de
+/// uitkomst staan — weggooien zou hem bij de vólgende merge weer laten
+/// terugkeren van de kant die hem nog draagt.
+Map<String, List<InkStroke>> _mergedAnnotations(
+  Deck ours,
+  Deck theirs,
+  List<Slide> out,
+) {
+  final our = _reanchoredInk(ours, out);
+  final their = _reanchoredInk(theirs, out);
+  final merged = <String, List<InkStroke>>{};
+  for (final key in {...our.keys, ...their.keys}) {
+    final byId = <String, InkStroke>{};
+    final order = <String>[];
+    for (final stroke in [...?our[key], ...?their[key]]) {
+      final seen = byId[stroke.id];
+      if (seen == null) {
+        byId[stroke.id] = stroke;
+        order.add(stroke.id);
+      } else if (stroke.erased && !seen.erased) {
+        byId[stroke.id] = stroke;
+      }
+    }
+    merged[key] = [for (final id in order) byId[id]!];
+  }
+  return merged;
+}
+
+/// [deck]'s tekeningen, gesleuteld op de id's van [out] — via de codec, die op
+/// de vingerafdruk van een dia verankert en niet op haar id.
+Map<String, List<InkStroke>> _reanchoredInk(Deck deck, List<Slide> out) {
+  if (deck.annotations.isEmpty) return const {};
+  final encoded = AnnotationCodec.encode(deck.slides, deck.annotations);
+  if (encoded == null) return const {};
+  return AnnotationCodec.decode(encoded, out);
 }
 
 /// [deck]'s notities, gesleuteld op de id's van [out] in plaats van die van

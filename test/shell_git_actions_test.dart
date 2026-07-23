@@ -275,46 +275,18 @@ void main() {
       expect(find.textContaining('Opgeslagen in git:'), findsNothing);
     });
 
-    testWidgets('wat niet meereist wordt vóór de commit gemeld', (
+    testWidgets('ook met video en tekeningen komt er geen tussenvraag', (
       tester,
     ) async {
+      // Tot #541 deel 2 stond hier een blokkerende "Niet alles gaat mee naar
+      // git"-waarschuwing. Sinds media, grafiekdata, notities én de tekenlaag
+      // meereizen is er niets meer om te melden, en is de dialoog opgeheven —
+      // een waarschuwing zonder ware regels leert alleen wegklikken.
       await pumpShell(tester, d: deck(withVideo: true, withInk: true));
-      final voor = Map.of(repo.files);
-      await openMenu(tester);
-
-      await startChain(
-        tester,
-        menuItemIcon(Icons.cloud_upload_outlined),
-        () => find.text('Niet alles gaat mee naar git').evaluate().isNotEmpty,
-        reason: 'de waarschuwing vooraf bleef uit',
-      );
-
-      // Bij naam genoemd, niet als "sommige onderdelen".
-      expect(find.textContaining('Video'), findsWidgets);
-      expect(find.textContaining('Tekeningen op slides'), findsWidgets);
-
-      await tester.tap(find.widgetWithText(TextButton, 'Annuleren'));
-      await tester.pumpAndSettle();
-
-      expect(
-        repo.files.keys,
-        voor.keys,
-        reason: 'afbreken bij de waarschuwing mag niet alsnog committen',
-      );
-      expect(
-        find.text('Opslaan naar git'),
-        findsNothing,
-        reason: 'de vraag is vooraf, niet achteraf',
-      );
-    });
-
-    testWidgets('een deck zonder video of tekeningen vraagt niets vooraf', (
-      tester,
-    ) async {
-      await pumpShell(tester);
       await startSave(tester);
 
       expect(find.text('Niet alles gaat mee naar git'), findsNothing);
+      expect(find.text('Opslaan naar git'), findsOneWidget);
     });
   });
 

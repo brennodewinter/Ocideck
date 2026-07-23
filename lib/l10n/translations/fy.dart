@@ -1042,13 +1042,6 @@ const _dutchSourceAddFy = {
       'Alle dia\'s binne oerslein of efterhâlden troch harren TLP-klassifikaasje — neat om te eksportearjen.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Grafykgetallen binne net bewarre — se steane allinne noch yn dit finster:',
-  'Niet alles gaat mee naar git': 'Net alles giet mei nei git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Dizze ûnderdielen komme net yn de commit en steane aanst net yn de repository:',
-  'Tekeningen op slides': 'Tekeningen op dia\'s',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Se bliuwe yn dit finster stean. Bewarje de presintaasje ek as bestân of as .ocideck-pakket om se te hâlden.',
-  'Toch opslaan': 'Dochs bewarje',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Yn de browser is der gjin crashherstel: slutsto dit ljepblêd, dan is net-bewarre wurk fuort. Bewarje dyn presintaasje sels.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

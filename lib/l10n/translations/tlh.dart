@@ -2034,13 +2034,6 @@ const _dutchSourceAddTlh = <String, String>{
       'Hoch slidemey juSlu\' pagh \'angbe\'lu\' TLP tlheghmo\' — \'oH weHmeH pagh tu\'lu\'be\'.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'ta\'nom mI\'mey polbe\'lu\' — Qorwaghvam neH tu\'lu\':',
-  'Niet alles gaat mee naar git': 'git-Daq Hoch ghoSbe\'',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'commit-Daq \'ay\'meyvam ghoSbe\' \'ej repository-Daq tu\'lu\'be\':',
-  'Tekeningen op slides': '\'anghommeyDaq ghItlhmey',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'QorwaghvamDaq ratlhtaH. chaH polmeH De\'Daq ghap .ocideck ngaSwI\'Daq cha\'nob yIpol.',
-  'Toch opslaan': 'pol \'e\' yIruch',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'browserDaq Qagh vangHa\'ghach tu\'lu\'be\': \'echletvam DaSoQmoHchugh, polbe\'lu\'bogh Qu\' natlh. cha\'nob yIpol.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

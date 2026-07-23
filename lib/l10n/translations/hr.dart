@@ -2072,13 +2072,6 @@ const _dutchSourceAddHr = <String, String>{
       'Svi su slajdovi preskočeni ili zadržani zbog svoje TLP klasifikacije pa nema što izvesti.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Brojke grafikona nisu spremljene — postoje još samo u ovom prozoru:',
-  'Niet alles gaat mee naar git': 'Ne ide sve u git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Ovi dijelovi ne ulaze u commit i poslije ih neće biti u repozitoriju:',
-  'Tekeningen op slides': 'Crteži na slajdovima',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Ostaju u ovom prozoru. Spremite prezentaciju i kao datoteku ili kao .ocideck paket da biste ih sačuvali.',
-  'Toch opslaan': 'Ipak spremi',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'U pregledniku nema oporavka nakon rušenja: zatvorite li ovu karticu, nespremljeni rad nestaje. Sami spremite svoju prezentaciju.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

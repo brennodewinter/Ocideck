@@ -2069,13 +2069,6 @@ const _dutchSourceAddDa = <String, String>{
       'Alle slides er sprunget over eller tilbageholdt af deres TLP-klassifikation, så der er intet at eksportere.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Diagramtallene blev ikke gemt — de findes kun i dette vindue:',
-  'Niet alles gaat mee naar git': 'Ikke alt kommer med til git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Disse dele kommer ikke med i commit\'en og står bagefter ikke i repositoryet:',
-  'Tekeningen op slides': 'Tegninger på slides',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'De bliver i dette vindue. Gem også præsentationen som fil eller som .ocideck-pakke for at beholde dem.',
-  'Toch opslaan': 'Gem alligevel',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'I browseren findes der ingen nedbrudsgendannelse: lukker du denne fane, er ikke-gemt arbejde væk. Gem selv din præsentation.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

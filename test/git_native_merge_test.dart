@@ -6,7 +6,9 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/chart.dart';
+import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/git/git_cli_io.dart';
@@ -127,12 +129,19 @@ void main() {
   }
 
   /// Iemand anders pusht een eigen wijziging naar de werkbranch.
-  Future<void> theyPush(String markdown, {String? notesJson}) async {
+  Future<void> theyPush(
+    String markdown, {
+    String? notesJson,
+    String? inkJson,
+  }) async {
     final other = '${temp.path}/other${DateTime(2026).microsecond}';
     await _rawGit(['clone', '--branch', work, bare, other], temp.path);
     File('$other/$deckDir/deck.md').writeAsStringSync(markdown);
     if (notesJson != null) {
       File('$other/$deckDir/deck.user-notes.json').writeAsStringSync(notesJson);
+    }
+    if (inkJson != null) {
+      File('$other/$deckDir/deck.ink.json').writeAsStringSync(inkJson);
     }
     await _rawGit(['add', '-A'], other);
     await _rawGit(['commit', '-m', 'hun wijziging'], other);
@@ -401,6 +410,140 @@ void main() {
       final notes = File('$verify/$deckDir/deck.user-notes.json');
       expect(notes.existsSync(), isTrue);
       expect(notes.readAsStringSync(), contains('alleen van hen'));
+    });
+  });
+
+  group('de tekeningen overleven de native merge', () {
+    // D7 eind-tot-eind, tegen échte git: de driver-override houdt de
+    // tekst-merge van `deck.ink.json` af, en de resolver schrijft er de
+    // unie-met-grafstenen overheen. Wat de unie zelf beslist ligt vast in
+    // git_deck_merge_test.dart; hier gaat het om wat er werkelijk landt.
+
+    Deck seedDeck() => MarkdownService().parseDeck(
+      _deck(alfa: 'alfa origineel', beta: 'beta origineel'),
+    )!;
+
+    InkStroke stroke(String id, {bool erased = false}) => InkStroke(
+      tool: InkTool.pen,
+      color: 0xFFEF4444,
+      width: 0.004,
+      points: const [Offset(0.1, 0.2), Offset(0.3, 0.4)],
+      id: id,
+      erased: erased,
+    );
+
+    /// Een inkbestand zoals OciDeck het schrijft, verankerd op de
+    /// vingerafdrukken van het seed-deck.
+    String inkJson(Map<int, List<InkStroke>> byIndex) {
+      final d = seedDeck();
+      return AnnotationCodec.encode(d.slides, {
+        for (final e in byIndex.entries) d.slides[e.key].id: e.value,
+      })!;
+    }
+
+    /// Zet [json] als ink-sidecar op main én op de werkbranch, vóór de app
+    /// kloont — zo kennen de voorouder en beide kanten de streek.
+    Future<void> seedInk(String json) async {
+      final s = '${temp.path}/seed-ink';
+      await _rawGit(['clone', bare, s], temp.path);
+      for (final branch in ['main', work]) {
+        await _rawGit(['checkout', branch], s);
+        File('$s/$deckDir/deck.ink.json').writeAsStringSync(json);
+        await _rawGit(['add', '-A'], s);
+        await _rawGit(['commit', '-m', 'ink op $branch'], s);
+        await _rawGit(['push', 'origin', branch], s);
+      }
+    }
+
+    test('van beide kanten, op verschillende dia\'s: de unie landt', () async {
+      final (container, tabs) = build();
+      await openOnWorkBranch(container, tabs);
+
+      // Zij: een streek bij Alfa, gepusht. Wij: een streek bij Beta.
+      await theyPush(
+        _deck(alfa: 'alfa origineel', beta: 'beta origineel'),
+        inkJson: inkJson({
+          0: [stroke('van-hen')],
+        }),
+      );
+      final tab = container.read(tabsProvider).current!;
+      final deck = tab.deckNotifier.currentState.deck!;
+      tab.deckNotifier.loadDeck(
+        deck.copyWith(
+          annotations: {
+            deck.slides[1].id: [stroke('van-ons')],
+          },
+        ),
+      );
+
+      await tabs.saveToGitNative(
+        mirror,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'onze streek',
+        now: DateTime(2026, 7, 18),
+      );
+
+      final verify = '${temp.path}/verify-ink';
+      await _rawGit(['clone', '--branch', work, bare, verify], temp.path);
+      final ink = File('$verify/$deckDir/deck.ink.json');
+      expect(ink.existsSync(), isTrue);
+      final inhoud = ink.readAsStringSync();
+      expect(inhoud, contains('van-ons'), reason: 'ons werk');
+      expect(inhoud, contains('van-hen'), reason: 'hun werk');
+      expect(inhoud, isNot(contains('<<<<<<<')));
+    });
+
+    test('wij gumden, zij niet: de grafsteen wint en landt', () async {
+      // Dít is waarom pure vereniging fout was. De voorouder en beide kanten
+      // kennen s1; wij markeren hem gewist, de ander raakt alleen de tekst
+      // van Alfa aan. Zonder grafsteen bracht de unie de streek terug terwijl
+      // de gebruiker hem zág verdwijnen.
+      await seedInk(
+        inkJson({
+          1: [stroke('s1')],
+        }),
+      );
+      final (container, tabs) = build();
+      await openOnWorkBranch(container, tabs);
+
+      await theyPush(_deck(alfa: 'alfa VAN HEN', beta: 'beta origineel'));
+
+      final tab = container.read(tabsProvider).current!;
+      final deck = tab.deckNotifier.currentState.deck!;
+      final betaId = deck.slides[1].id;
+      final s1 = deck.annotations[betaId]!.single;
+      expect(s1.id, 's1', reason: 'de streek moet uit de kloon geladen zijn');
+      tab.deckNotifier.loadDeck(
+        deck.copyWith(
+          annotations: {
+            betaId: [s1.copyWith(erased: true)],
+          },
+        ),
+      );
+
+      await tabs.saveToGitNative(
+        mirror,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'gewist',
+        now: DateTime(2026, 7, 18),
+      );
+
+      final verify = '${temp.path}/verify-ink2';
+      await _rawGit(['clone', '--branch', work, bare, verify], temp.path);
+      final inhoud = File('$verify/$deckDir/deck.ink.json').readAsStringSync();
+      expect(inhoud, contains('"s1"'));
+      expect(
+        inhoud,
+        contains('"erased": true'),
+        reason:
+            'de grafsteen moet de merge overleven, anders komt de streek '
+            'bij de volgende unie terug',
+      );
+      expect(inhoud, isNot(contains('<<<<<<<')));
     });
   });
 

@@ -2073,13 +2073,6 @@ const _dutchSourceAddLt = <String, String>{
       'Visos skaidrės praleistos arba sulaikytos dėl jų TLP klasifikacijos — nėra ką eksportuoti.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'Diagramų skaičiai neįrašyti — jie liko tik šiame lange:',
-  'Niet alles gaat mee naar git': 'Ne viskas patenka į git',
-  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
-      'Šios dalys nepatenka į commit\'ą ir vėliau jų nebus saugykloje:',
-  'Tekeningen op slides': 'Piešiniai skaidrėse',
-  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
-      'Jie lieka šiame lange. Išsaugokite pristatymą ir kaip failą arba kaip .ocideck paketą, kad juos išlaikytumėte.',
-  'Toch opslaan': 'Vis tiek išsaugoti',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'Naršyklėje nėra atkūrimo po strigties: uždarius šį skirtuką, neįrašytas darbas dings. Išsaugokite pristatymą patys.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':

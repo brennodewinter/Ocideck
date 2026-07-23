@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/git/deck_merge.dart';
@@ -314,6 +315,169 @@ void main() {
       final ids = {for (final s in result.merged.slides) s.id};
       expect(result.merged.userNotes.keys, everyElement(isIn(ids)));
       expect(result.merged.userNotes, hasLength(3));
+    });
+  });
+
+  group('de tekeningen verenigen bij de merge', () {
+    // D7: twee mensen die op één dia tekenden waren het niet oneens — de merge
+    // is een **unie op streek-id**, met één uitzondering die de grafsteen is:
+    // gewist wint van niet-gewist, ongeacht de kant. Net als bij de notities
+    // kijkt elke toets op de sleutels van de uitkomst, nooit die van de invoer.
+
+    InkStroke streek(String id, {bool erased = false}) => InkStroke(
+      tool: InkTool.pen,
+      color: 0xFFEF4444,
+      width: 0.004,
+      points: const [Offset(0.1, 0.2), Offset(0.3, 0.4)],
+      id: id,
+      erased: erased,
+    );
+
+    Deck parsedCopy(
+      List<Slide> slides, {
+      Map<int, List<InkStroke>> ink = const {},
+    }) {
+      final fresh = [
+        for (final s in slides)
+          Slide.create(s.type).copyWith(title: s.title, bullets: s.bullets),
+      ];
+      return Deck(
+        title: 'Kwartaal',
+        slides: fresh,
+        annotations: {for (final e in ink.entries) fresh[e.key].id: e.value},
+      );
+    }
+
+    List<InkStroke> inkOn(Deck deck, String title) {
+      final slide = deck.slides.firstWhere((s) => s.title == title);
+      return deck.annotations[slide.id] ?? const [];
+    }
+
+    test('twee tekenaars, verschillende dia\'s: beide lagen blijven', () {
+      final result = mergeDeckVersions(
+        parsedCopy([one, two, three]),
+        parsedCopy(
+          [one, two, three],
+          ink: {
+            1: [streek('van-ons')],
+          },
+        ),
+        parsedCopy(
+          [one, two, three],
+          ink: {
+            2: [streek('van-hen')],
+          },
+        ),
+      );
+
+      expect(inkOn(result.merged, 'Twee').single.id, 'van-ons');
+      expect(inkOn(result.merged, 'Drie').single.id, 'van-hen');
+    });
+
+    test('dezelfde dia: unie, geen keuze en geen verlies', () {
+      // Dit is waar de notities "onze tekst wint" zeggen en de tekeningen
+      // uitdrukkelijk niet: beide streken horen erin.
+      final result = mergeDeckVersions(
+        parsedCopy([one, two]),
+        parsedCopy(
+          [one, two],
+          ink: {
+            1: [streek('gedeeld'), streek('ons')],
+          },
+        ),
+        parsedCopy(
+          [one, two],
+          ink: {
+            1: [streek('gedeeld'), streek('hen')],
+          },
+        ),
+      );
+
+      final ids = inkOn(result.merged, 'Twee').map((s) => s.id).toList();
+      expect(ids, ['gedeeld', 'ons', 'hen']);
+    });
+
+    test('een gewiste streek komt niet terug — de grafsteen wint', () {
+      // De reden dat pure vereniging fout was: wij gumden, de ander heeft de
+      // streek nog. De unie zou hem terugbrengen terwijl de gebruiker hem zág
+      // verdwijnen.
+      final result = mergeDeckVersions(
+        parsedCopy(
+          [one, two],
+          ink: {
+            1: [streek('s1')],
+          },
+        ),
+        parsedCopy(
+          [one, two],
+          ink: {
+            1: [streek('s1', erased: true)],
+          },
+        ),
+        parsedCopy(
+          [one, two],
+          ink: {
+            1: [streek('s1')],
+          },
+        ),
+      );
+
+      final strokes = inkOn(result.merged, 'Twee');
+      expect(strokes.single.id, 's1');
+      expect(
+        strokes.single.erased,
+        isTrue,
+        reason:
+            'de grafsteen moet ook de úítkomst in — weggooien laat de '
+            'streek bij de vólgende merge alsnog terugkeren',
+      );
+    });
+
+    test('andersom gumde de ander, en ook dan blijft het gewist', () {
+      final result = mergeDeckVersions(
+        parsedCopy(
+          [one, two],
+          ink: {
+            1: [streek('s1')],
+          },
+        ),
+        parsedCopy(
+          [one, two],
+          ink: {
+            1: [streek('s1')],
+          },
+        ),
+        parsedCopy(
+          [one, two],
+          ink: {
+            1: [streek('s1', erased: true)],
+          },
+        ),
+      );
+
+      expect(inkOn(result.merged, 'Twee').single.erased, isTrue);
+    });
+
+    test('elke sleutel wijst een dia in de uitkomst aan', () {
+      final result = mergeDeckVersions(
+        parsedCopy([one, two, three]),
+        parsedCopy(
+          [one, two, three],
+          ink: {
+            0: [streek('a')],
+          },
+        ),
+        parsedCopy(
+          [one, two, three],
+          ink: {
+            2: [streek('c')],
+          },
+        ),
+      );
+
+      final ids = {for (final s in result.merged.slides) s.id};
+      expect(result.merged.annotations.keys, everyElement(isIn(ids)));
+      expect(result.merged.annotations, hasLength(2));
     });
   });
 }
