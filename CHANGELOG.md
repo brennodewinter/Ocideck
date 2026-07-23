@@ -114,6 +114,23 @@ read a book to find out.
   groot vet label — haalt alles het. Er staat nu geen contrastschuld meer open,
   en dat is eerlijker dan een lijst die schuld opschrijft die er niet is.
 
+### Fixed
+- **Een mislukte export zegt nu in welke stap hij omviel.** Er stond alleen de
+  kale uitzondering — bij #714 letterlijk `Invalid argument(s): 1`, wat nergens
+  heen wijst en niet eens verraadt of het renderen of het schrijven omviel.
+  Alle drie de stappen gooien uit dezelfde `try`, dus dat verschil was voor
+  niemand te zien: niet voor de gebruiker en niet voor wie de melding leest.
+  De melding noemt nu de stap, wat je eraan kunt doen, en pas dáárna de
+  technische regel — die blijft staan, want hij is het enige waarmee een fout
+  te vinden is. Bij een gestrand render wijst hij ook de weg: de HTML-export
+  komt daar niet langs.
+  Een tweede poort erbij: elk diatype gaat nu door de héle PDF-keten — renderen,
+  opbouwen, wegschrijven. De bestaande exporttests voerden een zelfgemaakte PNG
+  in en konden dus niet zien wat één specifiek diatype aan beeldbytes oplevert.
+  Wat die poort níét bewaakt staat erbij: hij draait op 640 px en niet op de
+  1920 van een echte export, omdat het capturen op exportresolutie onder de
+  testbinding niet klaarkomt.
+
 ### Changed
 - **De drie opslagpanelen die om een wachtwoord vragen staan niet langer in één
   gedeelde privé-scope.** WebDAV, S3 en git waren `extension`-methoden op
