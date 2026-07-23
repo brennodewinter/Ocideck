@@ -168,6 +168,18 @@ read a book to find out.
   alle 31 talen.
 
 ### Changed
+- **Terzijdegelegde privacybevindingen reizen mee naar git (#651).** Een
+  terzijdelegging is een reviewbesluit over het rapport — "deze naam mag hier
+  staan" — en dat besluit hoort bij het deck, niet bij de machine waarop het
+  genomen werd. De sidecar gaat als `deck.dismissals.json` naast `deck.md` de
+  repository in (met commitments, nooit de gevonden waarde zelf), en komen twee
+  kopieën samen, dan worden de oordelen verenigd zoals het ontwerp al
+  vastlegde: per bevinding wint de laatste wijziging, en een ongedaan-making
+  overleeft de samenvoeging. Een tweede reviewer die het deck uit de repo
+  opent, hoeft dus niet opnieuw langs wat een collega al beoordeeld heeft.
+  Daarmee is het laatste deel van #651 af; alleen de MIAUW-dispositie reist nog
+  niet (#756).
+
 - **AI-assistentie is een uitbreiding geworden, geen vast tabblad (#731).** De
   aan/uit-schakelaar staat nu als modulekaart op *Instellingen → Uitbreidingen*,
   naast Informatieveiligheid — de plek die belooft: standaard uit, verborgen tot

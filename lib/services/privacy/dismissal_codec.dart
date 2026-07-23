@@ -158,17 +158,29 @@ class DismissalCodec {
   static const String revocationsKey = 'revocations';
 
   /// De JSON, of null wanneer er niets te bewaren valt — dan hoort er ook geen
-  /// sidecar te liggen.
-  static String? encode(DeckDismissals value) {
+  /// sidecar te liggen. Grafstenen tellen als inhoud: "alles herroepen" levert
+  /// dus géén null op, want de herroeping zelf moet de volgende samenvoeging
+  /// overleven.
+  ///
+  /// Met [forTextMerge] ingesprongen geschreven — dezelfde ruil als bij de
+  /// notities en de ink: alleen de kopie die een repository in gaat betaalt
+  /// ervoor, en dáár verdient hij zich terug. De echte merge is
+  /// [mergeDismissals] in de app; in een kloon van een ander werktuig valt git
+  /// terug op de tekst-merge, en op één regel botst daar élk oordeel met élk
+  /// ander.
+  static String? encode(DeckDismissals value, {bool forTextMerge = false}) {
     if (value.isEmpty) return null;
-    return jsonEncode({
+    final payload = {
       kSidecarVersionKey: version,
       saltKey: value.salt,
       if (value.dismissals.isNotEmpty)
         dismissalsKey: value.dismissals.map(_entry).toList(),
       if (value.revocations.isNotEmpty)
         revocationsKey: value.revocations.map(_entry).toList(),
-    });
+    };
+    return forTextMerge
+        ? '${const JsonEncoder.withIndent('  ').convert(payload)}\n'
+        : jsonEncode(payload);
   }
 
   static Map<String, Object?> _entry(PrivacyDismissal d) => {

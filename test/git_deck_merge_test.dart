@@ -3,6 +3,7 @@ import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/git/deck_merge.dart';
+import 'package:ocideck/services/privacy/dismissal_codec.dart';
 
 /// Driewegs-merge van één deck (§8.6). Wat OciDeck zelf mag beslissen beslist
 /// het; wat het niet mag beslissen komt als conflict terug. De harde eis eromheen
@@ -478,6 +479,95 @@ void main() {
       final ids = {for (final s in result.merged.slides) s.id};
       expect(result.merged.annotations.keys, everyElement(isIn(ids)));
       expect(result.merged.annotations, hasLength(2));
+    });
+  });
+
+  group('de terzijdeleggingen verenigen bij de merge', () {
+    // #651: een terzijdelegging is een reviewbesluit over het rapport, en een
+    // tweede reviewer moet niet opnieuw langs wat een collega al beoordeeld
+    // heeft. De unie zelf (regel + commitment, latere `at` wint, grafstenen)
+    // ligt vast in dismissal_codec; hier bewaken we dat de deck-merge hem ook
+    // écht gebruikt — `copyWith` zou anders stil ónze kant houden.
+
+    PrivacyDismissal oordeel(String rule, String commitment, {int uur = 10}) =>
+        PrivacyDismissal(
+          ruleId: rule,
+          commitment: commitment,
+          at: DateTime.utc(2026, 7, 23, uur),
+        );
+
+    Deck met({DeckDismissals? dismissals}) =>
+        Deck(title: 'Kwartaal', slides: [one], dismissals: dismissals);
+
+    test(
+      'twee reviewers, verschillende bevindingen: beide oordelen blijven',
+      () {
+        final result = mergeDeckVersions(
+          met(),
+          met(
+            dismissals: DeckDismissals(
+              salt: 'z',
+              dismissals: [oordeel('nl.bsn', 'aaa')],
+            ),
+          ),
+          met(
+            dismissals: DeckDismissals(
+              salt: 'z',
+              dismissals: [oordeel('nl.iban', 'bbb')],
+            ),
+          ),
+        );
+
+        expect(
+          result.merged.dismissals!.dismissals.map((d) => d.ruleId),
+          containsAll(['nl.bsn', 'nl.iban']),
+        );
+      },
+    );
+
+    test('alleen de ander oordeelde: dat oordeel blijft ook staan', () {
+      final theirs = DeckDismissals(
+        salt: 'z',
+        dismissals: [oordeel('nl.bsn', 'aaa')],
+      );
+      final result = mergeDeckVersions(met(), met(), met(dismissals: theirs));
+
+      expect(result.merged.dismissals!.dismissals, hasLength(1));
+    });
+
+    test('een latere herroeping wint van een eerdere terzijdelegging', () {
+      // De grafsteen is de helft die het makkelijkst sneuvelt: gooi hem weg en
+      // de terzijdelegging komt van de andere kant terug, en de bevinding is
+      // weer verborgen zonder dat iemand daarvoor koos.
+      final c = commitmentFor('z', 'Jan Jansen');
+      final result = mergeDeckVersions(
+        met(),
+        met(
+          dismissals: DeckDismissals(
+            salt: 'z',
+            revocations: [oordeel('nl.bsn', c, uur: 12)],
+          ),
+        ),
+        met(
+          dismissals: DeckDismissals(
+            salt: 'z',
+            dismissals: [oordeel('nl.bsn', c, uur: 10)],
+          ),
+        ),
+      );
+
+      final d = result.merged.dismissals!;
+      expect(d.revocations.map((r) => r.ruleId), contains('nl.bsn'));
+      expect(
+        d.hides('nl.bsn', 'Jan Jansen'),
+        isFalse,
+        reason: 'na de herroeping hoort de bevinding weer zichtbaar te zijn',
+      );
+    });
+
+    test('zonder oordelen aan beide kanten blijft het null', () {
+      final result = mergeDeckVersions(met(), met(), met());
+      expect(result.merged.dismissals, isNull);
     });
   });
 }

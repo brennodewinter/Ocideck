@@ -218,6 +218,11 @@ class SyncEngine {
                 RepoSidecarState.ours) {
           continue;
         }
+        if (p.posix.basename(path) == dismissalsRepoFileName &&
+            await repoDismissalsState(path, (String q) async => remote[q]) !=
+                RepoSidecarState.ours) {
+          continue;
+        }
         deletes.add(path);
       }
       final result = await forge.commitFiles(

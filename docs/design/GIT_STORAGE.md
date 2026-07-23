@@ -692,6 +692,18 @@ does**.
 > `gitDeckOmissions` and `_confirmGitOmissions` are deleted, and
 > `git_omissions_warning_test` now guards the *absence* of an intermediate
 > dialog instead of its shrinking.
+>
+> *Updated 23-07-2026 (#651): the **set-aside privacy findings travel too.**
+> `deck.dismissals.json` follows the same route (shared state check, indented
+> repo copy, delete only what we could have written, sync-engine exception),
+> and `mergeDeckVersions` applies the union the codec already decided —
+> rule + commitment, later `at` wins, tombstones survive (FILE_FORMAT §6.7).
+> No re-anchoring step: the identity is rule + commitment, not a slide
+> position. The rationale is the design's own: a set-aside is a review
+> decision about the report, and a second reviewer must not re-litigate what a
+> colleague already judged. The MIAUW disposition sidecar is now the only
+> layer that stays behind — #756 tracks it, and its merge semantics need a
+> decision here before code.*
 
 ### 9.2 Opening / loading
 

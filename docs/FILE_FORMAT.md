@@ -1926,13 +1926,15 @@ the decision to build it.
 
 ---
 
-### 6.7 Set-aside Privacy Findings (`<name>.dismissals.json`) — design, not yet built
+### 6.7 Set-aside Privacy Findings (`<name>.dismissals.json`)
 
-*Design for [#651](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/651),
-written before the build because it changes the file format and this project
-settles a format on paper first. Nothing reads or writes this file yet; the
-section says what will, and — more usefully — which of the obvious answers are
-wrong.*
+*Designed for [#651](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/651)
+before the build, because it changes the file format and this project settles a
+format on paper first. Built since: the codec and store, the set-aside action on
+the finding card, the undo list in Settings → Security, and — last — the git
+write path, so the sidecar travels with the deck into a repository
+(`deck.dismissals.json` next to `deck.md`, merged as described under *Merging*
+below).*
 
 Today a privacy finding offers one action: **never report this rule again**. That
 is a global switch for a local judgement. Someone who has looked at one hit and
@@ -2070,6 +2072,25 @@ Both lists are merged as a **union keyed by `rule` + `commitment`**, and where a
 id appears in both lists the **later `at` wins**. That gives one rule for every
 case: two reviewers setting aside different findings keep both; one setting aside
 what the other revoked resolves by clock, and re-revoking is always possible.
+
+**Diverging salts do not merge.** The salt is per deck, and two sides of the
+same deck are expected to carry the same one; when they do not, *ours* wins and
+the other side's lists are dropped entirely. That is deliberate, not an
+oversight: a commitment is `SHA-256(salt ‖ text)`, so entries under another
+salt can never match anything in this deck — carrying them along would be
+carrying judgements that can no longer be checked. The way to get there is for
+two reviewers to each set aside their *first* finding on copies that had no
+sidecar yet, minting two fresh salts; the failure direction is the safe one
+(the dropped side's findings become visible again and can be re-set-aside).
+A second implementation of this format should do the same rather than attempt
+a two-salt union.
+
+Since #651's git write path this is running behaviour, not only design: the
+sidecar is committed next to `deck.md` (indented, so line-based merges outside
+OciDeck stay readable), `mergeDeckVersions` applies exactly this union when two
+copies of a deck come together, and the repository read side refuses to load or
+overwrite a file it cannot read — conflict markers or a newer version leave the
+file untouched, the same rule every sidecar in this chapter follows.
 
 Timestamps are UTC, ISO 8601, millisecond precision — same as §6.6.
 

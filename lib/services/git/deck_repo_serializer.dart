@@ -10,12 +10,17 @@ import '../../models/chart.dart';
 import '../../utils/log.dart';
 import '../annotation_codec.dart';
 import '../markdown_service.dart';
-import '../sidecar_format.dart';
+import '../privacy/dismissal_codec.dart';
 import '../user_notes_codec.dart';
 import '../slide_image_refs.dart';
 import '../web_asset_store.dart';
 import 'asset_pool.dart';
 import 'deck_merge.dart';
+import 'deck_repo_sidecars.dart';
+
+// De sidecarlaag is afgesplitst (regelplafond) maar blijft hiervandaan
+// bereikbaar: elke bestaande importeur ziet dezelfde namen.
+export 'deck_repo_sidecars.dart';
 import 'git_forge.dart';
 import 'native_git_mirror_api.dart';
 
@@ -23,43 +28,6 @@ import 'native_git_mirror_api.dart';
 /// `TabsNotifierGit.deckFileName`; hier apart zodat de serializer los te testen
 /// is zonder de state-laag.
 const String deckRepoFileName = 'deck.md';
-
-/// Naam van de notitie-sidecar binnen een deckmap (§9.1).
-///
-/// Precies de naam die het deck op schijf ook draagt, zodat wie een deck van
-/// een map naar een repo verhuist hetzelfde bestand terugziet en niet hoeft te
-/// raden dat `deck.notes` en `<naam>.user-notes.json` hetzelfde zijn. Het
-/// ontwerp schetste `deck.notes`; dat was een schets, en de `.json` zegt elk
-/// ander werktuig wat het is.
-const String userNotesRepoFileName = 'deck.user-notes.json';
-
-/// Bovengrens voor de notitie-sidecar bij het teruglezen uit een repo.
-///
-/// Dezelfde herkomst als `FileService.maxDeckSidecarBytes`: het bestand komt
-/// van buiten en wordt door `jsonDecode` nog eens gekopieerd. Hier lager, want
-/// notities zijn tekst en tellen in kilobytes — de 16 MiB op schijf is er voor
-/// de inktlaag, die deze weg niet neemt. Een repo waarin dit bestand tientallen
-/// megabytes groot is, is geen deck met veel notities maar iets anders.
-const int maxRepoUserNotesBytes = 2 * 1024 * 1024; // 2 MiB
-
-/// Naam van de ink-sidecar binnen een deckmap (§9.7) — dezelfde naam als op
-/// schijf, om dezelfde reden als bij de notities: wie een deck van een map
-/// naar een repo verhuist, ziet hetzelfde bestand terug.
-const String inkRepoFileName = 'deck.ink.json';
-
-/// Bovengrens voor de ink-sidecar bij het teruglezen uit een repo — de grens
-/// die de tekenlaag op schijf ook al heeft (`FileService.maxDeckSidecarBytes`):
-/// streken zijn puntenlijsten en tellen op, anders dan notitietekst.
-const int maxRepoInkBytes = 16 * 1024 * 1024; // 16 MiB
-
-/// Levert de bytes achter een afbeeldingsverwijzing, of null wanneer die niet te
-/// lezen is (web zonder mem:-treffer, een pad buiten het project, een leesfout).
-/// In de app is dit `ImageService.readSlideImageBytes`; in tests een fake.
-typedef AssetByteResolver = Future<Uint8List?> Function(String path);
-
-/// Levert de bytes van één bestand ín de deckmap, of null als het er niet is.
-/// De forge leest het als blob, de werkkopie uit haar bestandenmap.
-typedef RepoFileReader = Future<Uint8List?> Function(String repoPath);
 
 /// Het repo-pad van een chart-`source`, of null wanneer die buiten de deckmap
 /// zou wijzen.
@@ -171,119 +139,6 @@ Future<({Deck deck, List<String> missing})> withRepoChartData(
   );
 }
 
-/// Hang de notities uit `deck.user-notes.json` weer aan [deck] — de omkering
-/// van wat [buildDeckRepoFiles] schrijft.
-///
-/// Geen bestand is de gewone toestand: een deck zonder notities heeft er geen,
-/// en een deck dat vóór deze functie bestond gedroeg zich zo. Een bestand dat
-/// er wél is maar niet te lezen valt, levert een deck zónder notities op in
-/// plaats van een mislukte open — dezelfde ruil als op schijf en bij
-/// grafiekdata. Notities zijn een laag over het deck, niet het deck.
-///
-/// **Maar dan mag de schrijfkant het bestand niet weggooien.** Die bescherming
-/// zit in [repoUserNotesState] (de schrijfkant vraagt zelf "mag ik hieraan
-/// komen?"); [RepoUserNotes.onleesbaar] is de leeskant van hetzelfde oordeel,
-/// voor een aanroeper die wil melden. Op schijf is dat contract al dichtgezet
-/// (`_sidecarUntouchable`, zie `sidecar_format.dart`: "half inlezen is het
-/// gevaarlijke geval"); hier weegt het zwaarder, want dit bestand is niet van
-/// jou alleen. Conflictmarkeringen uit een merge búiten OciDeck zijn geen
-/// geldige JSON, en een sidecar van een nieuwere build leest deze build
-/// bewust niet — in beide gevallen zou "ik zag geen notities, dus ik verwijder
-/// het bestand" andermans werk wissen bij je eerstvolgende opslag.
-///
-/// Daarom is de vlag ruim: elk bestand dat er ligt maar géén notities opleverde
-/// telt als onleesbaar. Dat kost hoogstens een verweesd bestand dat blijft
-/// staan; de andere kant kost werk dat niemand terug kan halen.
-///
-/// [UserNotesCodec.decode] hangt elke notitie terug aan de dia met dezelfde
-/// vingerafdruk, dus dit moet ná het parsen van `deck.md` gebeuren: de dia-id's
-/// zijn dan pas bekend.
-typedef RepoUserNotes = ({Deck deck, bool onleesbaar});
-
-Future<RepoUserNotes> withRepoUserNotes(
-  Deck deck, {
-  required String deckDir,
-  required RepoFileReader read,
-}) async {
-  Uint8List? bytes;
-  try {
-    bytes = await read(p.posix.join(deckDir, userNotesRepoFileName));
-  } catch (e) {
-    // Onbereikbaar is niet hetzelfde als afwezig: een netwerkhapering mag geen
-    // verwijdering worden.
-    logWarning('withRepoUserNotes: notitiebestand onbereikbaar', e);
-    return (deck: deck, onleesbaar: true);
-  }
-  if (bytes == null || bytes.isEmpty) {
-    return (deck: deck, onleesbaar: false);
-  }
-  if (bytes.length > maxRepoUserNotesBytes) {
-    logWarning(
-      'withRepoUserNotes: notitiebestand is ${bytes.length} bytes '
-      '(grens $maxRepoUserNotesBytes) — niet geladen',
-    );
-    return (deck: deck, onleesbaar: true);
-  }
-  final String json;
-  try {
-    json = utf8.decode(bytes);
-  } on FormatException catch (e) {
-    logWarning('withRepoUserNotes: notitiebestand is geen geldige UTF-8', e);
-    return (deck: deck, onleesbaar: true);
-  }
-  final notes = UserNotesCodec.decode(json, deck.slides);
-  return notes.isEmpty
-      ? (deck: deck, onleesbaar: true)
-      : (deck: deck.copyWith(userNotes: notes), onleesbaar: false);
-}
-
-/// Hang de tekeningen uit `deck.ink.json` weer aan [deck] — hetzelfde contract
-/// als [withRepoUserNotes], inclusief de ruime onleesbaar-vlag: elk bestand dat
-/// er ligt maar geen streken opleverde telt als onleesbaar. De vlag beschrijft
-/// de leeskant; de bescherming van de schrijfkant komt niet hiervandaan maar
-/// uit [repoInkState], dat conflictmarkeringen en een nieuwere versie als
-/// onaanraakbaar aanmerkt. Streken die nergens meer heranker­en (de dia is weg
-/// of herschreven) vallen wél weg — dat is het gedocumenteerde §6.2-gedrag,
-/// geen leesfout.
-typedef RepoInk = ({Deck deck, bool onleesbaar});
-
-Future<RepoInk> withRepoInk(
-  Deck deck, {
-  required String deckDir,
-  required RepoFileReader read,
-}) async {
-  Uint8List? bytes;
-  try {
-    bytes = await read(p.posix.join(deckDir, inkRepoFileName));
-  } catch (e) {
-    // Onbereikbaar is niet hetzelfde als afwezig: een netwerkhapering mag geen
-    // verwijdering worden.
-    logWarning('withRepoInk: inkbestand onbereikbaar', e);
-    return (deck: deck, onleesbaar: true);
-  }
-  if (bytes == null || bytes.isEmpty) {
-    return (deck: deck, onleesbaar: false);
-  }
-  if (bytes.length > maxRepoInkBytes) {
-    logWarning(
-      'withRepoInk: inkbestand is ${bytes.length} bytes '
-      '(grens $maxRepoInkBytes) — niet geladen',
-    );
-    return (deck: deck, onleesbaar: true);
-  }
-  final String json;
-  try {
-    json = utf8.decode(bytes);
-  } on FormatException catch (e) {
-    logWarning('withRepoInk: inkbestand is geen geldige UTF-8', e);
-    return (deck: deck, onleesbaar: true);
-  }
-  final ink = AnnotationCodec.decode(json, deck.slides);
-  return ink.isEmpty
-      ? (deck: deck, onleesbaar: true)
-      : (deck: deck.copyWith(annotations: ink), onleesbaar: false);
-}
-
 /// Alles wat naast `deck.md` in de deckmap ligt, terug aan [deck] gehangen —
 /// de omkering van [buildDeckRepoFiles] in één stap.
 ///
@@ -302,6 +157,7 @@ Future<
     List<String> missingChartData,
     bool userNotesUnreadable,
     bool inkUnreadable,
+    bool dismissalsUnreadable,
   })
 >
 withRepoSidecars(
@@ -316,11 +172,17 @@ withRepoSidecars(
     read: read,
   );
   final ink = await withRepoInk(notes.deck, deckDir: deckDir, read: read);
+  final dismissals = await withRepoDismissals(
+    ink.deck,
+    deckDir: deckDir,
+    read: read,
+  );
   return (
-    deck: ink.deck,
+    deck: dismissals.deck,
     missingChartData: charts.missing,
     userNotesUnreadable: notes.onleesbaar,
     inkUnreadable: ink.onleesbaar,
+    dismissalsUnreadable: dismissals.onleesbaar,
   );
 }
 
@@ -490,34 +352,14 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
     upserts[path] = Uint8List.fromList(utf8.encode(entry.value));
   }
 
-  // De notities en de tekeningen gaan mee (#541). Op een stabiel pad naast
-  // deck.md, om dezelfde reden als de grafiekdata: een poolpad ís de hash van
-  // de inhoud, dus elk getypt teken zou een nieuw bestand minten en het vorige
-  // laten wegkwijnen. Ingesprongen geschreven — geen opmaakvoorkeur maar de
-  // reden dat D7 klopt; zie [UserNotesCodec.encode]. Het aanraak- en
-  // verwijdercontract staat bij [_writeRepoSidecar]. Eén ink-eigen regel is
-  // geen detail: "geen streken" betekent daar zelden een leeg bestand, want
-  // een gewiste streek blijft als grafsteen in de encode staan (D7) — pas als
-  // een dia met ál haar streken verdwenen is levert de codec null.
-  await _writeRepoSidecar(
-    path: p.posix.join(deckDir, userNotesRepoFileName),
-    state: (path) => repoUserNotesState(path, read),
-    encoded: UserNotesCodec.encode(
-      rewritten.slides,
-      rewritten.userNotes,
-      forTextMerge: true,
-    ),
-    upserts: upserts,
-    deletes: deletes,
-  );
-  await _writeRepoSidecar(
-    path: p.posix.join(deckDir, inkRepoFileName),
-    state: (path) => repoInkState(path, read),
-    encoded: AnnotationCodec.encode(
-      rewritten.slides,
-      rewritten.annotations,
-      forTextMerge: true,
-    ),
+  // De sidecars gaan mee (#541/#651): notities, tekeningen en
+  // terzijdeleggingen, elk op een stabiel pad naast deck.md. Waarom
+  // ingesprongen, wat de aanraakregels zijn en waarom grafstenen inhoud
+  // tellen staat bij [writeAllRepoSidecars].
+  await writeAllRepoSidecars(
+    rewritten,
+    deckDir: deckDir,
+    read: read,
     upserts: upserts,
     deletes: deletes,
   );
@@ -537,126 +379,6 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
     warnings: warnings.toList(),
     deletes: deletes,
   );
-}
-
-/// Schrijf (of verwijder) één sidecar in de commitset, met de vaste volgorde:
-/// eérst de vraag "mag ik hier überhaupt aan komen?", dan pas wat erin moet —
-/// dezelfde volgorde als `_sidecarUntouchable` op schijf, en niet toevallig:
-/// overschrijven is net zo goed half inlezen als verwijderen dat is. Ligt er
-/// een bestand dat deze build niet las, dan zou een bestand met jouw ene entry
-/// er overheen gaan en de rest ongemerkt weg zijn — erger dan een
-/// verwijdering, want het resultaat ziet er gezond uit.
-///
-/// Verwijderen gebeurt alleen bij [RepoSidecarState.ours]: alleen weghalen wat
-/// we ook hadden kunnen schrijven, anders komt een gewiste entry bij de
-/// volgende open gewoon terug.
-Future<void> _writeRepoSidecar({
-  required String path,
-  required Future<RepoSidecarState> Function(String path) state,
-  required String? encoded,
-  required Map<String, Uint8List> upserts,
-  required List<String> deletes,
-}) async {
-  final s = await state(path);
-  if (s == RepoSidecarState.untouchable) return;
-  if (encoded != null) {
-    upserts[path] = Uint8List.fromList(utf8.encode(encoded));
-  } else if (s == RepoSidecarState.ours) {
-    deletes.add(path);
-  }
-}
-
-/// Wat er op een sidecarpad in de repo ligt, voor zover deze build ermee
-/// overweg kan.
-enum RepoSidecarState {
-  /// Er ligt niets, of we konden niet kijken. Schrijven mag; verwijderen niet —
-  /// er valt niets te verwijderen, en "ik weet het niet" is geen opdracht.
-  absent,
-
-  /// Een bestand van dit formaat, niet nieuwer dan deze build. Schrijven én
-  /// verwijderen mag: we hadden het zelf kunnen schrijven.
-  ours,
-
-  /// Er ligt iets dat deze build niet begrijpt — conflictmarkeringen uit een
-  /// merge buiten OciDeck, een hogere `version`, of iets wat geen sidecar is.
-  /// Niet aanraken, in geen van beide richtingen.
-  untouchable,
-}
-
-/// De toestand van het notitiebestand op [path], gelezen via [read].
-///
-/// De regel is opzettelijk streng, en de reden is asymmetrie. Ten onrechte met
-/// rust laten kost een verweesd bestand dat bij de volgende opslag vanzelf
-/// wordt bijgewerkt. Ten onrechte aanraken kost werk van iemand anders, en dat
-/// weet die pas als hij ernaar zoekt.
-///
-/// Bewust níét via [sidecarIsFromNewerBuild]: die beantwoordt de vraag "komt
-/// dit van later?" en zegt bij onleesbare JSON terecht nee. Hier is de vraag
-/// een andere — "mag ik hieraan komen?" — en daar is onleesbaar juist het
-/// sterkste nee dat er is. Dezelfde bytes, tegengesteld antwoord; vandaar dat
-/// het hier uitgeschreven staat in plaats van omgekeerd hergebruikt.
-///
-/// Zonder [read] is de uitkomst [RepoSidecarState.absent]: het native pad geeft
-/// geen lezer mee, en daar moeten de notities wél kunnen reizen. Dat verwijderen
-/// er dan nooit gebeurt, is de veilige helft van diezelfde onwetendheid.
-Future<RepoSidecarState> repoUserNotesState(
-  String path,
-  RepoFileReader? read,
-) => _repoSidecarState(
-  path,
-  read,
-  maxBytes: maxRepoUserNotesBytes,
-  version: UserNotesCodec.version,
-  wat: 'notitiebestand',
-);
-
-/// De toestand van de ink-sidecar op [path] — dezelfde strenge regel, en sinds
-/// FILE_FORMAT dit bestand als bewerkbaar documenteert geldt ook hier: wat een
-/// merge buiten OciDeck of een nieuwere build erin achterliet is niet van ons.
-Future<RepoSidecarState> repoInkState(String path, RepoFileReader? read) =>
-    _repoSidecarState(
-      path,
-      read,
-      maxBytes: maxRepoInkBytes,
-      version: AnnotationCodec.version,
-      wat: 'inkbestand',
-    );
-
-Future<RepoSidecarState> _repoSidecarState(
-  String path,
-  RepoFileReader? read, {
-  required int maxBytes,
-  required int version,
-  required String wat,
-}) async {
-  if (read == null) return RepoSidecarState.absent;
-  Uint8List? bytes;
-  try {
-    bytes = await read(path);
-  } catch (e) {
-    logWarning('repoSidecarState: $wat onbereikbaar, niet aanraken', e);
-    return RepoSidecarState.untouchable;
-  }
-  if (bytes == null || bytes.isEmpty) return RepoSidecarState.absent;
-  if (bytes.length > maxBytes) return RepoSidecarState.untouchable;
-  try {
-    final data = jsonDecode(utf8.decode(bytes));
-    // Geldige JSON is nog geen sidecar. `declaredSidecarVersion` valt bij alles
-    // wat geen map is terug op versie 1 — een top-level array zou dus van ons
-    // heten. Sinds FILE_FORMAT §6.3.1 uitnodigt dit bestand vanuit een ander
-    // werktuig te schrijven, is dat geen theorie meer.
-    if (data is! Map) return RepoSidecarState.untouchable;
-    return declaredSidecarVersion(data) <= version
-        ? RepoSidecarState.ours
-        : RepoSidecarState.untouchable;
-  } on FormatException catch (e) {
-    logWarning(
-      'repoSidecarState: $wat is geen leesbare JSON '
-      '(conflictmarkeringen?) — niet aanraken',
-      e,
-    );
-    return RepoSidecarState.untouchable;
-  }
 }
 
 /// De tekstbestanden van [deck] voor de lokale werkkopie ([DeckMirror]) —
@@ -689,6 +411,10 @@ Map<String, Uint8List> mirrorDeckFiles(
     deck.annotations,
     forTextMerge: true,
   );
+  final dismissals = switch (deck.dismissals) {
+    null => null,
+    final d => DismissalCodec.encode(d, forTextMerge: true),
+  };
   return <String, Uint8List>{
     p.posix.join(deckDir, deckRepoFileName): Uint8List.fromList(
       utf8.encode(md.generateDeck(deck)),
@@ -705,6 +431,10 @@ Map<String, Uint8List> mirrorDeckFiles(
       null => null,
     },
     p.posix.join(deckDir, inkRepoFileName): ?switch (ink) {
+      final String json => Uint8List.fromList(utf8.encode(json)),
+      null => null,
+    },
+    p.posix.join(deckDir, dismissalsRepoFileName): ?switch (dismissals) {
       final String json => Uint8List.fromList(utf8.encode(json)),
       null => null,
     },
@@ -786,6 +516,10 @@ Future<RepoMergeOutcome> resolveRepoDeckMerge({
       p.posix.join(deckDir, inkRepoFileName): ?await read(
         MergeSide.ours,
         p.posix.join(deckDir, inkRepoFileName),
+      ),
+      p.posix.join(deckDir, dismissalsRepoFileName): ?await read(
+        MergeSide.ours,
+        p.posix.join(deckDir, dismissalsRepoFileName),
       ),
     };
     for (final path
