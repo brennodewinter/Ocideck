@@ -95,6 +95,29 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Fixed
+- **Linux en Windows droegen nog het logo van vóór de rebrand.** Toen het merk
+  in juni van de fotokat naar de lijntekening ging (`da7b7c9e` → `dc62e03f` →
+  `c6ccd42c`), zijn alleen de macOS-set en de webiconen opnieuw gegenereerd.
+  `linux/runner/resources/app_icon.png` en `windows/runner/resources/app_icon.ico`
+  bleven staan op wat `20906ddb` er in juni had neergezet — en dat zijn allebei
+  ondersteunde bouwdoelen, dus wie `make build-linux` of `make build-windows`
+  draaide, kreeg een app met de oude huisstijl in de taakbalk. Beide zijn nu uit
+  `assets/images/ocideck-logo.png` gegenereerd met dezelfde behandeling die de
+  macOS-set kreeg: bijsnijden tot de tekening, schalen tot 87,7% van de
+  canvashoogte, centreren op wit. De `.ico` houdt al zijn zeven maten (16–256).
+
+  Ondoorzichtig wit, geen transparantie: het merk is donkere inkt, en op een
+  donkere taakbalk verdwijnt een transparante achtergrond — de spiegelklacht van
+  #735. De uitkomst is op de pixel na gelijk aan wat macOS al toonde.
+
+  Dat dit een maand kon blijven staan, is het eigenlijke gebrek: iconen zijn geen
+  Dart, staan niet in `pubspec.yaml` en worden door de runner via een pad
+  opgepikt, dus er was niets dat rood werd. `test/platform_icon_branding_test.dart`
+  vergelijkt nu de tékening — bijgesneden, platgeslagen tot een
+  grijswaarde-vingerafdruk — van elk bureaubladdoel met het merk, en toetst
+  daarnaast elk formaat op verzadigde kleur. Tegen de oude iconen wordt hij rood
+  (0,65 tegen een drempel van 0,20; 57% gekleurde pixels tegen 1%). Het recept
+  staat nu ook in `docs/BUILD.md`, want een generator is er niet.
 - **Linux: afbeelding naar klembord kopiëren werkt nu echt (#758).** Het
   pasteboard-pakket heeft geen Linux-schrijftak, dus `writeImage` was daar een
   stille no-op: de knop meldde succes terwijl het klembord leeg bleef. Het
