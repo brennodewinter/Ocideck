@@ -1774,6 +1774,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'tidak semua berkas tertaut dapat disertakan (tidak terbaca atau di luar proyek)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Penyimpanan online hanya tersedia di versi desktop.',
   'Online opslag': 'Penyimpanan online',
@@ -2725,8 +2727,6 @@ const _dutchSourceAddId = <String, String>{
   'Opgeslagen in git:': 'Disimpan ke git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Branch telah berpindah; muat ulang dek dan simpan lagi.',
-  'video en audio gaan (nog) niet mee naar git':
-      'video dan audio (belum) ikut ke git',
   'Bijgewerkt met OciDeck': 'Diperbarui dengan OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Siapkan repositori Git terlebih dahulu di Pengaturan → Repositori Git.',

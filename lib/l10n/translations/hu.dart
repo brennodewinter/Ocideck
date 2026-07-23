@@ -1778,6 +1778,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'nem minden csatolt fájlt sikerült bevenni (olvashatatlan vagy a projekten kívüli)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Az online tárolás csak az asztali verzióban érhető el.',
   'Online opslag': 'Online tárolás',
@@ -2732,8 +2734,6 @@ const _dutchSourceAddHu = <String, String>{
   'Opgeslagen in git:': 'Mentve gitbe:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Az ág elmozdult; töltsd újra a csomagot, és ments újra.',
-  'video en audio gaan (nog) niet mee naar git':
-      'a videó és a hang (még) nem kerül a gitbe',
   'Bijgewerkt met OciDeck': 'Frissítve az OciDeckkel',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Először állítson be egy Git-tárolót a Beállítások → Git-tároló alatt.',

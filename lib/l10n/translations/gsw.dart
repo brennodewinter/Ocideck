@@ -1777,6 +1777,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'nöd alli verlinkte Dateie hend chöne mit (nöd läsbar oder usserhalb vom Projäkt)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Online-Spiicher isch nume i de Desktop-Version verfüegbar.',
   'Online opslag': 'Online-Spiicher',
@@ -2729,8 +2731,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Opgeslagen in git:': 'In git gspicheret:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'De Branch isch verschobe; lad s Deck neu und spicher nomol.',
-  'video en audio gaan (nog) niet mee naar git':
-      'Video und Audio gönd (no) nöd mit i git',
   'Bijgewerkt met OciDeck': 'Mit OciDeck aktualisiert',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Richt zerscht es Git-Repository i under Iistellige → Git-Repository.',

@@ -1790,6 +1790,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'non omnis fasciculus nexus includi potuit (illegibilis aut extra proiectum)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Repositorium interretiale solum in versione desktop praesto est.',
   'Online opslag': 'Repositorium interretiale',
@@ -2737,8 +2739,6 @@ const _dutchSourceAddLa = <String, String>{
   'Opgeslagen in git:': 'In git servatum:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Ramus motus est; fasciculum recarga et iterum serva.',
-  'video en audio gaan (nog) niet mee naar git':
-      'video et audio (nondum) in git non eunt',
   'Bijgewerkt met OciDeck': 'Cum OciDeck renovatum',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Primum repositorium Git in Optiones → Repositorium Git constitue.',

@@ -1809,6 +1809,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'níorbh fhéidir gach comhad nasctha a chur san áireamh (doléite nó lasmuigh den tionscadal)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Níl stóráil ar líne ar fáil ach sa leagan deisce.',
   'Online opslag': 'Stóráil ar líne',
@@ -2770,8 +2772,6 @@ const _dutchSourceAddGa = <String, String>{
   'Opgeslagen in git:': 'Sábháilte chuig git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Bhog an bhrainse; athluchtaigh an deic agus sábháil arís.',
-  'video en audio gaan (nog) niet mee naar git':
-      'ní théann fís ná fuaim go git (go fóill)',
   'Bijgewerkt met OciDeck': 'Nuashonraithe le OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Socraigh stór Git ar dtús faoi Socruithe → Stór Git.',

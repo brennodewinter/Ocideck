@@ -1776,6 +1776,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'vseh povezanih datotek ni bilo mogoče vključiti (neberljive ali zunaj projekta)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Spletna shramba je na voljo samo v namizni različici.',
   'Online opslag': 'Spletna shramba',
@@ -2730,8 +2732,6 @@ const _dutchSourceAddSl = <String, String>{
   'Opgeslagen in git:': 'Shranjeno v git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Veja se je premaknila; znova naloži komplet in shrani znova.',
-  'video en audio gaan (nog) niet mee naar git':
-      'video in zvok (še) ne gresta v git',
   'Bijgewerkt met OciDeck': 'Posodobljeno z OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Najprej nastavite repozitorij Git v Nastavitve → Repozitorij Git.',

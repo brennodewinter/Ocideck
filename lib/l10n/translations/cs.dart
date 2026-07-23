@@ -1777,6 +1777,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'ne všechny propojené soubory se podařilo zahrnout (nečitelné nebo mimo projekt)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Online úložiště je dostupné pouze v desktopové verzi.',
   'Online opslag': 'Online úložiště',
@@ -2721,8 +2723,6 @@ const _dutchSourceAddCs = <String, String>{
   'Opgeslagen in git:': 'Uloženo do gitu:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Větev se posunula; načti sadu znovu a ulož znovu.',
-  'video en audio gaan (nog) niet mee naar git':
-      'video a audio (zatím) nejdou do gitu',
   'Bijgewerkt met OciDeck': 'Aktualizováno pomocí OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Nejprve nastavte repozitář Git v Nastavení → Repozitář Git.',

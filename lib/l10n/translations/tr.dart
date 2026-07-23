@@ -1551,8 +1551,6 @@ const _dutchSourceTr = {
   'Opgeslagen in git:': 'Git\'e kaydedildi:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Dal ilerlemiş; sunumu yeniden yükleyip tekrar kaydedin.',
-  'video en audio gaan (nog) niet mee naar git':
-      'video ve ses (henüz) git\'e gitmiyor',
   'Bijgewerkt met OciDeck': 'OciDeck ile güncellendi',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Önce Ayarlar → Git deposu bölümünde bir git deposu ayarlayın.',
@@ -2753,6 +2751,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'bağlantılı dosyaların tümü eklenemedi (okunamıyor veya projenin dışında)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Çevrimiçi depolama yalnızca masaüstü sürümünde kullanılabilir.',
   'Online opslag': 'Çevrimiçi depolama',

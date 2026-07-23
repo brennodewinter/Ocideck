@@ -1801,6 +1801,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'δεν ήταν δυνατή η συμπερίληψη όλων των συνδεδεμένων αρχείων (μη αναγνώσιμα ή εκτός του έργου)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Η διαδικτυακή αποθήκευση είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
   'Online opslag': 'Διαδικτυακή αποθήκευση',
@@ -2767,8 +2769,6 @@ const _dutchSourceAddEl = <String, String>{
   'Opgeslagen in git:': 'Αποθηκεύτηκε σε git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Ο κλάδος μετακινήθηκε· φόρτωσε ξανά το deck και αποθήκευσε πάλι.',
-  'video en audio gaan (nog) niet mee naar git':
-      'το βίντεο και ο ήχος (ακόμη) δεν πηγαίνουν στο git',
   'Bijgewerkt met OciDeck': 'Ενημερώθηκε με το OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Ρυθμίστε πρώτα ένα αποθετήριο Git στις Ρυθμίσεις → Αποθετήριο Git.',

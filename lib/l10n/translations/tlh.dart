@@ -1749,6 +1749,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'Hoch rarpu\' De\' qenglaHbe\'lu\' (laDlu\'laHbe\' pagh project Hur)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'desktop mIlloghDaq neH online waHtaHghach lo\'laH.',
   'Online opslag': 'online waHtaHghach',
@@ -2681,8 +2683,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Opgeslagen in git:': 'git-Daq Qaw\'ta\':',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'branch vIHpu\'; deck yISamqa\' \'ej yIQaw\'qa\'.',
-  'video en audio gaan (nog) niet mee naar git':
-      'HaSta\' \'ej wab git-Daq jaHbe\' (DaH)',
   'Bijgewerkt met OciDeck': 'OciDeck lo\'lu\'pu\'',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'wa\'DIch Git qawHaq yIcher: chuqmey → Git qawHaq.',

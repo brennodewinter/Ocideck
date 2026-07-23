@@ -1773,6 +1773,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'ikke alle tilknyttede filer kunne komme med (ulæselige eller uden for projektet)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Onlinelagring er kun tilgængelig i desktopversionen.',
   'Online opslag': 'Onlinelagring',
@@ -2726,8 +2728,6 @@ const _dutchSourceAddDa = <String, String>{
   'Opgeslagen in git:': 'Gemt til git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Grenen er flyttet; genindlæs decket og gem igen.',
-  'video en audio gaan (nog) niet mee naar git':
-      'video og lyd kommer (endnu) ikke med til git',
   'Bijgewerkt met OciDeck': 'Opdateret med OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Opsæt først et Git-repository under Indstillinger → Git-repository.',

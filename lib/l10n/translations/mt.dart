@@ -1796,6 +1796,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'mhux kull fajl marbut seta\' jiġi inkluż (ma jinqarax jew barra mill-proġett)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Il-ħażna online hija disponibbli biss fil-verżjoni desktop.',
   'Online opslag': 'Ħażna online',
@@ -2755,8 +2757,6 @@ const _dutchSourceAddMt = <String, String>{
   'Opgeslagen in git:': 'Maħżun f\'git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Il-branch iċċaqlaq; erġa\' għabbi d-deck u ħażen mill-ġdid.',
-  'video en audio gaan (nog) niet mee naar git':
-      'il-vidjow u l-awdjo (għadhom) ma jmorrux f\'git',
   'Bijgewerkt met OciDeck': 'Aġġornat b\'OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'L-ewwel issettja repożitorju Git taħt Issettjar → Repożitorju Git.',

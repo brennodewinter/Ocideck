@@ -1791,6 +1791,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'не всі повʼязані файли вдалося включити (нечитабельні або поза проєктом)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Онлайн-сховище доступне лише в настільній версії.',
   'Online opslag': 'Онлайн-сховище',
@@ -2742,8 +2744,6 @@ const _dutchSourceAddUk = <String, String>{
   'Opgeslagen in git:': 'Збережено в git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Гілку переміщено; перезавантажте колоду й збережіть знову.',
-  'video en audio gaan (nog) niet mee naar git':
-      'відео й аудіо (поки) не потрапляють у git',
   'Bijgewerkt met OciDeck': 'Оновлено за допомогою OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Спершу налаштуйте репозиторій Git у Налаштування → Репозиторій Git.',
