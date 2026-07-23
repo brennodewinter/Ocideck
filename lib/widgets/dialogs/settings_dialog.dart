@@ -50,9 +50,9 @@ import '../privacy_statement_content.dart';
 import '../reader/documentation_search_tab.dart';
 import '../slides/image_zoom_dialog.dart';
 import 'hex_color_dialog.dart';
+import 'settings/ai_form.dart';
 import 'settings/git_form.dart';
 import 'settings/git_panel.dart';
-import 'settings/keychain_secret.dart';
 import 'settings/s3_form.dart';
 import 'settings/s3_panel.dart';
 import 'settings/settings_section_title.dart';
@@ -61,7 +61,6 @@ import 'settings/webdav_form.dart';
 import 'settings/webdav_panel.dart';
 
 part 'parts/settings_dialog_sections.dart';
-part 'parts/settings_dialog_ai_form.dart';
 part 'parts/settings_dialog_chrome.dart';
 part 'parts/settings_dialog_general.dart';
 part 'parts/settings_dialog_storage.dart';
