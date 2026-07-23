@@ -275,7 +275,7 @@ class _UserNotesFieldState extends State<_UserNotesField> {
               Expanded(
                 child: Text(
                   l10n.d('Gebruikersnotities'),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: AppTheme.userNotesAccent,
@@ -286,7 +286,7 @@ class _UserNotesFieldState extends State<_UserNotesField> {
                 key: ValueKey('discard-user-notes-${widget.slide.id}'),
                 controller: _ctrl,
                 onDiscard: _discardNotes,
-                color: AppTheme.accent,
+                color: AppTheme.accentFg,
               ),
             ],
           ),
@@ -307,7 +307,7 @@ class _UserNotesFieldState extends State<_UserNotesField> {
                 ),
                 controller: _ctrl,
                 expand: true,
-                baseStyle: const TextStyle(
+                baseStyle: TextStyle(
                   fontSize: 12,
                   color: AppTheme.userNotesText,
                   height: 1.45,

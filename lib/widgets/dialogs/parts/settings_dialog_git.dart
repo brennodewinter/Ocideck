@@ -145,7 +145,7 @@ extension _SettingsGit on _SettingsDialogState {
     final (Color color, IconData icon) = form.testWarning
         ? (AppTheme.amber700, Icons.warning_amber_outlined)
         : form.testOk == true
-        ? (AppTheme.teal, Icons.check_circle)
+        ? (AppTheme.tealFg, Icons.check_circle)
         : (AppTheme.danger600, Icons.error_outline);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -353,7 +353,7 @@ extension _SettingsGit on _SettingsDialogState {
             )
           : (
               Icons.check_circle_outline,
-              AppTheme.accent,
+              AppTheme.accentFg,
               '${l10n.d('Native git gevonden:')} ${version.display} — '
                   '${l10n.d('echte offline-historie mogelijk')}',
             ),

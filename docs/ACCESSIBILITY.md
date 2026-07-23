@@ -122,58 +122,79 @@ either). PPTX speaker notes are real text and do travel.
 and headings, which is already a great deal more than the bitmap formats, but
 nobody has checked its colour contrast, focus order or landmark structure.
 
-**The app's own colours do not all meet the bar it applies to your slides.**
-*(Added 2026-07-22, #606.)* OciDeck measures the contrast of your deck against
-WCAG AA and reports what falls short — and its own interface did not hold to
-that everywhere. Measured against the surface each mode actually paints on
-(`AppTheme.paper`, white or `#181B21`), and counting only tokens the interface
-uses as *text*:
+**The app's own colours, and the bar it applies to your slides.** *(Audit
+completed 2026-07-23, #606; first measured 2026-07-22.)* OciDeck measures the
+contrast of your deck against WCAG AA and reports what falls short, so its own
+interface had better hold to that. It did not, and the fix turned out to be less
+about recolouring than about telling two things apart.
 
-- **dark mode: 14 tokens below 4.5:1.** The worst are the red used for a
-  critical finding, a checklist anomaly and an unreachable scope object
-  (`#B91C1C`, 2.67:1), the neutral grey for "no severity" (`#475569`, 2.28:1),
-  and the green for a tested item (`#15803D`, 3.44:1);
-- **light mode: 2 tokens below 4.5:1** — the orange and amber of the high and
-  medium severity bands (`#EA580C` 3.6:1, `#D97706` 3.3:1). The issue that
-  raised this measured dark mode only and treated light as fine; it is not.
+**The split is chrome versus content, not light versus dark.** Text you read *in
+the app* follows the app's appearance. Ink that lands *on a slide* does not — it
+cannot, because a slide has to render identically in the on-screen preview and
+in a headless export isolate where the appearance setting does not exist. A
+theme-following colour there would produce two different PDFs of one deck
+(PENTEST_MIAUW §11).
 
-*(Was 17 in dark mode. Three tokens left the list on 2026-07-23 — see below —
-and none of them by being recoloured.)*
+So each of the roughly two hundred uses was read as one or the other:
 
-The exact list lives in `test/app_theme_contrast_test.dart` as a ratchet, so the
-number is in the repository rather than in a reviewer's notebook, and it can
-only go down: the test fails both when a new token drops below the bar and when
-one that has been fixed is left in the baseline.
+- **Interface text and icons moved to mode-aware tokens.** `accent`
+  (`#2563EB`), `navy` (`#1C2B47`) and `teal` (`#2E7D64`), plus the red and green
+  of the severity and status palettes, were painting text in dialogs, editors,
+  panels and the shell — where on a dark surface the blue reaches 3.3:1 and the
+  navy all but disappears. They now use `accentFg`, `brandFg`, `tealFg`,
+  `dangerFg` and `successFg`, each of which meets 4.5:1 in the mode it paints.
+- **The fixed colours themselves did not change.** They still fill surfaces,
+  draw borders, paint gradients and render inside slides. The golden tests
+  confirm it: every slide renders byte-identically to before.
 
-### What the audit changed, and what it did not
+**And the measurement was wrong, which flattered nobody.** The first pass
+measured every fixed token against `AppTheme.paper` — the *interface* surface —
+and recorded seventeen dark-mode failures. But a finding's severity colour is
+read on a **slide**, which is white. Measured against the surface it is actually
+on, and at the bar that actually applies:
 
-**The brand colours no longer paint interface text.** `accent` (`#2563EB`),
-`navy` (`#1C2B47`) and `teal` (`#2E7D64`) were used as a text and icon colour in
-seventy places across dialogs, editors, panels and the shell. On a dark surface
-that is 3.3:1 for the blue, and the navy all but disappears. They now have
-mode-aware counterparts — `accentFg`, `brandFg`, `tealFg` — and the interface
-uses those.
+- fourteen tokens are slide **text** (checklist, scope and scorecard status
+  labels) — all clear 4.5:1 on white;
+- two are never text at all. `severityHigh` (`#EA580C`) and `severityMedium`
+  (`#D97706`) appear as a 6% tint behind a finding's header card, as the border
+  stripe beside it, and as the fill of a badge whose label is white, bold and
+  about 30px on a 1280-wide slide. For a graphical object (WCAG 1.4.11) and for
+  large text (1.4.3) the bar is 3:1, and they clear it at 3.6 and 3.2.
 
-**The brand colours themselves did not change**, and that is the point. They
-still fill surfaces, draw borders and paint gradients, and some of them render
-inside a slide. A slide has to look the same in the on-screen preview and in a
-headless export isolate, where the app's appearance setting does not exist; a
-colour that follows the theme would produce two different PDFs of one deck
-(PENTEST_MIAUW §11). So the split is not light-versus-dark but **chrome versus
-content**: text you read *in* the app follows the app, ink that lands *on a
-slide* does not. The golden tests confirm the second half — every slide renders
-byte-identically to before.
+So there is **no contrast baseline left** — not because the debt was written
+off, but because most of it was a category error and the rest is fixed. Saying
+that plainly matters more than the number: a baseline that records debt which
+does not exist makes the entries that do exist unbelievable.
 
-Three call sites were corrected earlier in the same way (the seal indicator in
-the status bar, the asset-overview warning, and the error colour in the quality
-panel, now on `dangerFg`/`successFg`).
+**And the rule cuts the other way too, which the visual review caught.** The
+slide previews painted their greys with the *mode-aware* slate scale — on a
+canvas that stays white. In dark mode `slate700` came out at **1.3:1** and
+`slate500` at 2.1:1, so the text of a checklist, a scope matrix and a findings
+summary all but vanished. That is the plainest form of the thing this document
+is about: the app failing, on the user's own slides, the bar it applies to them.
 
-**What is left.** The fourteen remaining dark-mode tokens are the severity,
-checklist and scope palettes. Those are the ones that genuinely render into
-slides, so recolouring them is not an option and neither is a mode-aware
-counterpart used everywhere. What they need is the same read, use by use — and
-where a use turns out to be chrome after all, a counterpart like the three
-above. That is what remains of #606.
+Worse than unreadable, it **diverged from the export**. The HTML export runs
+without a theme and always writes the light values; the export dialog promises
+that the export uses exactly what the editor shows. In dark mode that was
+untrue. Slide previews now use fixed ink (`slideInk`, `slideInkMuted`,
+`slideInkSoft`, …) — the same values, no longer moving.
+
+`test/app_theme_contrast_test.dart` now checks seven things, and the guards are
+what keep this from being a one-off: the mode-aware tokens meet 4.5:1 in both
+modes; the slide text tokens meet 4.5:1 on white; the two accent tokens meet
+3:1; the slide ink is identical in both modes; and two source checks reject
+**a fixed brand or severity colour used as text outside slide-rendering code**
+and **a mode-aware grey used inside a slide preview**. Those two read the
+source, so the next `AppTheme.navy` in a dialog — or `AppTheme.slate600` on a
+slide — fails the build instead of quietly returning.
+
+*Three smaller things the visual review turned up, now fixed: the export
+dialog had been migrated on its success branch but not its failure branch, so
+"the export failed" sat at 3.1:1 in dark mode while "exported to…" shone; the
+user-notes heading was a fixed blue that had become weaker (2.4:1) than its own
+subtitle beneath it; and `dangerFg`'s light value was pale enough that on the
+scorecard chip — which tints its own background — it dropped to 4.2:1, under
+AA, for the one colour that means alarm.*
 
 **A few blocking messages are still built in Dutch.** *(Rewritten 2026-07-22.)*
 This entry used to say that roughly fifty editor labels showed their Dutch

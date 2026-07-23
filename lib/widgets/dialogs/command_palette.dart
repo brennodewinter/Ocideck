@@ -235,7 +235,7 @@ class _CommandPaletteState extends State<CommandPalette> {
     final Color fg = !cmd.enabled
         ? AppTheme.slate400
         : selected
-        ? AppTheme.teal
+        ? AppTheme.tealFg
         : AppTheme.slate700;
     return InkWell(
       onTap: cmd.enabled ? () => _runCommand(cmd) : null,

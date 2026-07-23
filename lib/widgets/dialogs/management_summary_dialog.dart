@@ -65,7 +65,7 @@ class ManagementSummaryDialog extends StatelessWidget {
             Text(
               '${l10n.d('Opgelost na hertest')}: ${summary.resolvedCount}',
               style: TextStyle(
-                color: AppTheme.success700,
+                color: AppTheme.successFg,
                 fontWeight: FontWeight.w600,
               ),
             ),

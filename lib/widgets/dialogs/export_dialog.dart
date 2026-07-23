@@ -568,7 +568,7 @@ class _ExportDialogState extends State<ExportDialog> {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 13,
-              color: _success ? AppTheme.success800 : Colors.red[800],
+              color: _success ? AppTheme.successFg : AppTheme.dangerFg,
             ),
           ),
           if (_success && _outputPath != null) ...[
@@ -609,7 +609,7 @@ class _ExportDialogState extends State<ExportDialog> {
           Text(
             exportBlockMessage(context.l10n, decision) ?? '',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 13, color: Colors.red[800]),
+            style: TextStyle(fontSize: 13, color: AppTheme.dangerFg),
           ),
           const SizedBox(height: 10),
           // Wijs de weg naar de oplossing: het TLP-niveau zit op de
@@ -635,7 +635,7 @@ class _ExportDialogState extends State<ExportDialog> {
           Text(
             l10n.d('Export geblokkeerd vanwege ernstige kwaliteitsproblemen.'),
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 13, color: Colors.red[800]),
+            style: TextStyle(fontSize: 13, color: AppTheme.dangerFg),
           ),
           const SizedBox(height: 8),
           Text(

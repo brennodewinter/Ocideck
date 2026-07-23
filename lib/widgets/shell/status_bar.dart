@@ -229,9 +229,10 @@ class _ExportReadinessChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    const green = AppTheme.success700;
+    // Chrome, dus de mode-afhankelijke varianten (#606).
+    final green = AppTheme.successFg;
     const amber = AppTheme.amber600;
-    const red = AppTheme.danger700;
+    final red = AppTheme.dangerFg;
     final issueCount = readiness.errorCount + readiness.warningCount;
 
     final (
@@ -498,7 +499,7 @@ class _SaveStatusAction extends ConsumerWidget {
         tooltip: deckState.isDirty
             ? l10n.t('unsavedChanges')
             : l10n.t('noUnsavedChanges'),
-        color: deckState.isDirty ? AppTheme.amber600 : AppTheme.success700,
+        color: deckState.isDirty ? AppTheme.amber600 : AppTheme.successFg,
         onTap: () => onSave(),
       );
     }

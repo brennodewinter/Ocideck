@@ -417,8 +417,8 @@ class _ScorecardEditorState extends State<ScorecardEditor> {
     final delta = entry.delta;
     if (direction == null || delta == null) return const SizedBox.shrink();
     final color = switch (entry.sentiment) {
-      ScorecardSentiment.good => AppTheme.success700,
-      ScorecardSentiment.bad => AppTheme.danger700,
+      ScorecardSentiment.good => AppTheme.successFg,
+      ScorecardSentiment.bad => AppTheme.dangerFg,
       ScorecardSentiment.neutral => AppTheme.slate500,
     };
     final icon = switch (direction) {

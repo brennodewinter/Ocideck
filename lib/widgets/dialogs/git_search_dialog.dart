@@ -134,7 +134,7 @@ class _GitSearchDialogState extends State<GitSearchDialog> {
     if (_error != null) {
       return Text(
         _error!,
-        style: TextStyle(fontSize: 12, color: AppTheme.severityCritical),
+        style: TextStyle(fontSize: 12, color: AppTheme.dangerFg),
       );
     }
     final result = _result;

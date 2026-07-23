@@ -255,7 +255,7 @@ class _SignOffEditorState extends ConsumerState<SignOffEditor>
       ),
       child: Row(
         children: [
-          Icon(Icons.verified_user, size: 18, color: AppTheme.scopeTested),
+          Icon(Icons.verified_user, size: 18, color: AppTheme.successFg),
           const SizedBox(width: 10),
           Expanded(
             child: Text(

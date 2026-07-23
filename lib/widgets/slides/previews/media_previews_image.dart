@@ -268,18 +268,22 @@ Widget _captionOverlay(
 /// waar de media vandaan zou komen, plus een hint dat online media uit staat.
 Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
   return Container(
-    color: AppTheme.slate200,
+    color: AppTheme.slideRuleSoft,
     padding: const EdgeInsets.all(16),
     child: Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.cloud_off_outlined, color: AppTheme.slate400, size: 32),
+          Icon(
+            Icons.cloud_off_outlined,
+            color: AppTheme.slideInkFaint,
+            size: 32,
+          ),
           const SizedBox(height: 8),
           Text(
             context.l10n.d('Online media staat uit'),
             style: TextStyle(
-              color: AppTheme.slate500,
+              color: AppTheme.slideInkSoft,
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),
@@ -288,7 +292,7 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
           const SizedBox(height: 4),
           Text(
             url,
-            style: TextStyle(color: AppTheme.slate400, fontSize: 10),
+            style: TextStyle(color: AppTheme.slideInkFaint, fontSize: 10),
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -310,14 +314,17 @@ Widget _mediaPlaceholder(BuildContext context, IconData icon, String label) {
     return _redactedMediaPlaceholder(context);
   }
   return Container(
-    color: AppTheme.slate200,
+    color: AppTheme.slideRuleSoft,
     child: Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: AppTheme.slate400, size: 32),
+          Icon(icon, color: AppTheme.slideInkFaint, size: 32),
           const SizedBox(height: 6),
-          Text(label, style: TextStyle(color: AppTheme.slate400, fontSize: 12)),
+          Text(
+            label,
+            style: TextStyle(color: AppTheme.slideInkFaint, fontSize: 12),
+          ),
         ],
       ),
     ),
@@ -435,7 +442,7 @@ Widget _imagePlaceholder(BuildContext context, ImagePlaceholderReason reason) {
   };
 
   return ColoredBox(
-    color: AppTheme.slate200,
+    color: AppTheme.slideRuleSoft,
     child: LayoutBuilder(
       builder: (context, constraints) {
         final shortestSide = constraints.biggest.shortestSide;
@@ -443,7 +450,7 @@ Widget _imagePlaceholder(BuildContext context, ImagePlaceholderReason reason) {
           return Center(
             child: Icon(
               icon,
-              color: AppTheme.slate400,
+              color: AppTheme.slideInkFaint,
               size: shortestSide * 0.65,
             ),
           );
@@ -453,11 +460,11 @@ Widget _imagePlaceholder(BuildContext context, ImagePlaceholderReason reason) {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, color: AppTheme.slate400, size: 24),
+              Icon(icon, color: AppTheme.slideInkFaint, size: 24),
               const SizedBox(height: 4),
               Text(
                 label,
-                style: TextStyle(color: AppTheme.slate400, fontSize: 10),
+                style: TextStyle(color: AppTheme.slideInkFaint, fontSize: 10),
                 textAlign: TextAlign.center,
               ),
             ],

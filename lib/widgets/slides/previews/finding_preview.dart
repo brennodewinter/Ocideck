@@ -106,7 +106,7 @@ class _FindingPreview extends StatelessWidget {
                       Icon(
                         Icons.my_location,
                         size: w * 0.024,
-                        color: AppTheme.slate500,
+                        color: AppTheme.slideInkSoft,
                       ),
                       SizedBox(width: w * 0.01),
                       Flexible(
@@ -116,7 +116,7 @@ class _FindingPreview extends StatelessWidget {
                             font,
                             TextStyle(
                               fontSize: w * 0.024,
-                              color: AppTheme.slate700,
+                              color: AppTheme.slideInk,
                             ),
                           ),
                         ),
@@ -169,8 +169,8 @@ class _FindingPreview extends StatelessWidget {
           warning: AppTheme.amber500,
           critical: AppTheme.danger600,
           cold: AppTheme.success700,
-          sky: AppTheme.slate300,
-          ground: AppTheme.slate500,
+          sky: AppTheme.slideRule,
+          ground: AppTheme.slideInkSoft,
           font: font,
         ),
       ),
@@ -247,7 +247,7 @@ class _FindingPreview extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: w * 0.018, vertical: w * 0.006),
       decoration: BoxDecoration(
-        border: Border.all(color: AppTheme.slate300),
+        border: Border.all(color: AppTheme.slideRule),
         borderRadius: BorderRadius.circular(w * 0.008),
       ),
       child: Text(
@@ -257,7 +257,7 @@ class _FindingPreview extends StatelessWidget {
           TextStyle(
             fontSize: w * 0.022,
             fontWeight: FontWeight.w600,
-            color: AppTheme.slate600,
+            color: AppTheme.slideInkMuted,
           ),
         ),
       ),

@@ -27,7 +27,7 @@ class NotesModeToggle extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final fg = foregroundColor ?? AppTheme.slate500;
-    final accent = accentColor ?? AppTheme.accent;
+    final accent = accentColor ?? AppTheme.accentFg;
     final compact = style == NotesModeToggleStyle.compact;
     final fontSize = compact ? 11.0 : 12.0;
     final padding = compact

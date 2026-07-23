@@ -64,7 +64,7 @@ class _SignOffPreview extends StatelessWidget {
               TextStyle(
                 fontSize: w * 0.026,
                 fontStyle: FontStyle.italic,
-                color: AppTheme.slate500,
+                color: AppTheme.slideInkSoft,
               ),
             ),
           ),
@@ -107,7 +107,7 @@ class _SignOffPreview extends StatelessWidget {
               TextStyle(
                 fontSize: w * 0.026,
                 fontStyle: FontStyle.italic,
-                color: AppTheme.slate700,
+                color: AppTheme.slideInk,
               ),
             ),
           ),
@@ -124,7 +124,7 @@ class _SignOffPreview extends StatelessWidget {
         else
           ?markText,
         SizedBox(height: w * 0.008),
-        Container(width: w * 0.34, height: 1, color: AppTheme.slate300),
+        Container(width: w * 0.34, height: 1, color: AppTheme.slideRule),
         SizedBox(height: w * 0.008),
         if (metaParts.isNotEmpty)
           Text(
@@ -134,7 +134,7 @@ class _SignOffPreview extends StatelessWidget {
               TextStyle(
                 fontSize: w * 0.024,
                 fontWeight: FontWeight.w600,
-                color: AppTheme.slate700,
+                color: AppTheme.slideInk,
               ),
             ),
           ),
@@ -143,7 +143,7 @@ class _SignOffPreview extends StatelessWidget {
             sig.certification,
             style: _applyFont(
               font,
-              TextStyle(fontSize: w * 0.02, color: AppTheme.slate500),
+              TextStyle(fontSize: w * 0.02, color: AppTheme.slideInkSoft),
             ),
           ),
         if (sig.date.isNotEmpty)
@@ -151,7 +151,7 @@ class _SignOffPreview extends StatelessWidget {
             sig.date,
             style: _applyFont(
               font,
-              TextStyle(fontSize: w * 0.019, color: AppTheme.slate500),
+              TextStyle(fontSize: w * 0.019, color: AppTheme.slideInkSoft),
             ),
           ),
       ],
@@ -163,7 +163,7 @@ class _SignOffPreview extends StatelessWidget {
     final sealed = sealedAt.isNotEmpty;
     // The seal timestamp is ISO-8601 (UTC); show just the date part.
     final date = sealed ? sealedAt.split('T').first : '';
-    final color = sealed ? AppTheme.scopeTested : AppTheme.slate500;
+    final color = sealed ? AppTheme.scopeTested : AppTheme.slideInkSoft;
     final label = sealed
         ? '${l10n.d('Verzegeld op')} $date'
         : l10n.d('Nog niet verzegeld');

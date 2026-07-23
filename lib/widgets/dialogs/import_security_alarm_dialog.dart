@@ -12,7 +12,7 @@ import '../../theme/app_theme.dart';
 class ImportSecurityAlarmDialog {
   ImportSecurityAlarmDialog._();
 
-  static const _alarmRed = AppTheme.danger700;
+  static Color get _alarmRed => AppTheme.dangerFg;
   static Color get _alarmBg => AppTheme.dangerBg;
 
   static Future<void> show(BuildContext context, ImportSecurityAlarm alarm) {
@@ -25,19 +25,12 @@ class ImportSecurityAlarmDialog {
           icon: Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(color: _alarmBg, shape: BoxShape.circle),
-            child: const Icon(
-              Icons.gpp_bad_outlined,
-              color: _alarmRed,
-              size: 30,
-            ),
+            child: Icon(Icons.gpp_bad_outlined, color: _alarmRed, size: 30),
           ),
           title: Text(
             l10n.d('Onveilige presentatie geblokkeerd'),
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: _alarmRed,
-              fontWeight: FontWeight.w800,
-            ),
+            style: TextStyle(color: _alarmRed, fontWeight: FontWeight.w800),
           ),
           content: SizedBox(
             width: 520,
@@ -107,7 +100,7 @@ class _FindingRow extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.error_outline_rounded,
                 size: 15,
                 color: ImportSecurityAlarmDialog._alarmRed,

@@ -214,7 +214,7 @@ class _AssetOverviewEditorState extends State<AssetOverviewEditor> {
                 Icon(
                   Icons.warning_amber_rounded,
                   size: 14,
-                  color: AppTheme.danger700,
+                  color: AppTheme.dangerFg,
                 ),
                 const SizedBox(width: 6),
                 Expanded(

@@ -251,7 +251,7 @@ class _MiauwCompliancePanelState extends State<MiauwCompliancePanel> {
 
   (String, Color) _statusStyle(EisStatus status, AppLocalizations l10n) =>
       switch (status) {
-        EisStatus.voldaan => (l10n.d('Voldaan'), AppTheme.severityLow),
+        EisStatus.voldaan => (l10n.d('Voldaan'), AppTheme.successFg),
         EisStatus.open => (l10n.d('Openstaand'), AppTheme.amber700),
         EisStatus.uitgesloten => (
           l10n.d('Uitgesloten door klant'),

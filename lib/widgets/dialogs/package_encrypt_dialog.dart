@@ -293,8 +293,8 @@ class _StrengthMeter extends StatelessWidget {
     PasswordStrength.veryWeak => AppTheme.danger600,
     PasswordStrength.weak => AppTheme.danger600,
     PasswordStrength.fair => AppTheme.amber600,
-    PasswordStrength.strong => AppTheme.success700,
-    PasswordStrength.veryStrong => AppTheme.success700,
+    PasswordStrength.strong => AppTheme.successFg,
+    PasswordStrength.veryStrong => AppTheme.successFg,
   };
 
   String _labelFor(AppLocalizations l10n, PasswordStrength s) => switch (s) {
