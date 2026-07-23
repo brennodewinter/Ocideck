@@ -730,6 +730,13 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'El almacenamiento en línea solo está disponible en la versión de escritorio.',
+  'Online opslag': 'Almacenamiento en línea',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Abre presentaciones desde WebDAV, S3 y repositorios git y guárdalas allí, con control de versiones y colaboración a través de una forge. Hasta ahora, parte de estos caminos se ha probado sobre todo contra entornos de prueba; elígelo con conocimiento de causa. Sin el módulo, todo lo local funciona con normalidad: carpetas, archivos y paquetes.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Ya hay conexiones en línea configuradas; siguen funcionando, igual que el trabajo pendiente en la cola. Desactivado solo significa: no añadir nuevas conexiones en línea.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'El módulo Asistencia de IA está desactivado, así que aquí no ocurre nada. Actívalo en Extensiones. Lo que hayas configurado abajo se conserva.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

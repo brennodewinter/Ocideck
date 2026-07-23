@@ -1774,6 +1774,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Verkkotallennus on saatavilla vain työpöytäversiossa.',
+  'Online opslag': 'Verkkotallennus',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Avaa esityksiä WebDAV:sta, S3:sta ja git-arkistoista ja tallenna niihin, mukana versionhallinta ja yhteistyö forgen kautta. Osa näistä poluista on toistaiseksi kokeiltu lähinnä testiympäristöjä vasten; valitse tämä tietoisesti. Ilman moduulia kaikki paikallinen toimii normaalisti: kansiot, tiedostot ja paketit.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Verkkoyhteyksiä on jo määritetty; ne toimivat edelleen, samoin kuin jonossa odottava työ. Pois tarkoittaa vain: uusia verkkoyhteyksiä ei voi lisätä.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Tekoälyavustus-moduuli on pois päältä, joten täällä ei tapahdu mitään. Kytke se päälle Laajennuksissa. Alla tekemäsi asetukset säilyvät.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

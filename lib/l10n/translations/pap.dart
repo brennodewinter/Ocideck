@@ -733,6 +733,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Almasenamentu online ta disponibel solamente den e version di desktop.',
+  'Online opslag': 'Almasenamentu online',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Habri presentashonnan for di WebDAV, S3 i repositorionan di git i warda nan einan, ku kontrol di vershon i kolaborashon via un forge. Te awor un parti di e kamindanan aki a keda purbá prinsipalmente kontra ambientenan di tèst; skohe esaki konsientemente. Sin e módulo tur kos lokal ta funshoná normal: kartafolionan, archivonan i paketenan.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Ya tin konekshonnan online konfigurá; nan ta sigui funshoná, meskos ku trabou pendiente den e kola. Pagá ta nifiká solamente: no agregá konekshonnan online nobo.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'E módulo Asistensia di IA ta pagá, pues nada no ta pasa akí. Sende é bou di Ekstenshonnan. Loke bo a konfigurá akí bou ta keda.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

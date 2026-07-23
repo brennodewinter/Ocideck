@@ -1791,6 +1791,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Stocarea online este disponibilă doar în versiunea desktop.',
+  'Online opslag': 'Stocare online',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Deschide prezentări din WebDAV, S3 și depozite git și salvează-le acolo, cu control al versiunilor și colaborare printr-o forge. Până acum, o parte din aceste căi a fost încercată mai ales pe medii de test; alege asta în cunoștință de cauză. Fără modul, tot ce e local funcționează normal: foldere, fișiere și pachete.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Există deja conexiuni online configurate; ele continuă să funcționeze, la fel ca lucrul în așteptare din coadă. Oprit înseamnă doar: nu se mai adaugă conexiuni online noi.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Modulul Asistență IA este dezactivat, așa că aici nu se întâmplă nimic. Activează-l la Extensii. Ce ai setat mai jos rămâne neschimbat.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

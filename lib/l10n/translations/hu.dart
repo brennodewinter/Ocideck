@@ -1778,6 +1778,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Az online tárolás csak az asztali verzióban érhető el.',
+  'Online opslag': 'Online tárolás',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Prezentációk megnyitása WebDAV-ról, S3-ról és git-repozitóriumokból, és mentés oda, verziókezeléssel és forge-on át folyó együttműködéssel. Ezeknek az utaknak egy részét eddig főleg tesztkörnyezeteken próbálták ki; tudatosan kapcsold be. A modul nélkül minden helyi dolog rendesen működik: mappák, fájlok és csomagok.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Már vannak beállított online kapcsolatok; ezek tovább működnek, ahogy a sorban várakozó munka is. A kikapcsolás csak annyit jelent: nem adható hozzá új online kapcsolat.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Az MI-segítség modul ki van kapcsolva, így itt semmi sem történik. Kapcsold be a Bővítmények alatt. Amit lent beállítottál, megmarad.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

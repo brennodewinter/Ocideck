@@ -1801,6 +1801,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Η διαδικτυακή αποθήκευση είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
+  'Online opslag': 'Διαδικτυακή αποθήκευση',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Άνοιγμα παρουσιάσεων από και αποθήκευση σε WebDAV, S3 και αποθετήρια git, με έλεγχο εκδόσεων και συνεργασία μέσω forge. Ως τώρα ένα μέρος αυτών των διαδρομών έχει δοκιμαστεί κυρίως σε περιβάλλοντα δοκιμών· επίλεξέ το συνειδητά. Χωρίς τη μονάδα όλα τα τοπικά λειτουργούν κανονικά: φάκελοι, αρχεία και πακέτα.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Υπάρχουν ήδη ρυθμισμένες διαδικτυακές συνδέσεις· συνεχίζουν να λειτουργούν, όπως και η εκκρεμής εργασία στην ουρά αναμονής. Ανενεργό σημαίνει μόνο: δεν προστίθενται νέες διαδικτυακές συνδέσεις.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Η μονάδα Υποστήριξη AI είναι απενεργοποιημένη, οπότε εδώ δεν συμβαίνει τίποτα. Ενεργοποιήστε την στις Επεκτάσεις. Ό,τι έχετε ρυθμίσει παρακάτω παραμένει.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

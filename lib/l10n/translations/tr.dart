@@ -2753,6 +2753,13 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Çevrimiçi depolama yalnızca masaüstü sürümünde kullanılabilir.',
+  'Online opslag': 'Çevrimiçi depolama',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Sunumları WebDAV, S3 ve git repository\'lerinden açın ve oralara kaydedin; sürüm denetimi ve bir forge üzerinden iş birliğiyle. Bu yolların bir bölümü şimdiye dek çoğunlukla test ortamlarına karşı denendi; bunu bilinçli olarak seçin. Modül olmadan yerel her şey normal şekilde çalışır: klasörler, dosyalar ve paketler.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Zaten yapılandırılmış çevrimiçi bağlantılar var; bunlar, kuyrukta bekleyen işler gibi çalışmaya devam eder. Kapalı yalnızca şu anlama gelir: yeni çevrimiçi bağlantı eklenmez.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'AI yardımı modülü kapalı, bu yüzden burada hiçbir şey olmaz. Eklentiler bölümünden açın. Aşağıda ayarladıklarınız olduğu gibi kalır.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

@@ -1809,6 +1809,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Níl stóráil ar líne ar fáil ach sa leagan deisce.',
+  'Online opslag': 'Stóráil ar líne',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Oscail cur i láthair ó WebDAV, S3 agus stórais git agus sábháil chucu iad, le rialú leaganacha agus comhoibriú trí forge. Go dtí seo is in aghaidh timpeallachtaí tástála is mó a triaileadh cuid de na cosáin seo; roghnaigh é seo go comhfhiosach. Gan an modúl oibríonn gach rud áitiúil mar is gnách: fillteáin, comhaid agus pacáistí.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Tá naisc ar líne socraithe cheana féin; leanann siad ag obair, mar aon leis an obair atá ag fanacht sa scuaine. Ní chiallaíonn múchta ach: gan naisc nua ar líne a chur leis.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Tá an modúl Cúnamh II múchta, mar sin ní tharlaíonn aon rud anseo. Cuir ar siúl é faoi Breiseáin. Fanann a bhfuil socraithe agat thíos mar atá.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

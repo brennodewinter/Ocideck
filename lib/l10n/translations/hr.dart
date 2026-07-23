@@ -1780,6 +1780,13 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Mrežna pohrana dostupna je samo u verziji za računalo.',
+  'Online opslag': 'Mrežna pohrana',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Otvaraj prezentacije iz WebDAV-a, S3-a i git repozitorija te ih spremaj u njih, s kontrolom verzija i suradnjom putem forgea. Dio tih putova dosad je isproban uglavnom na testnim okruženjima; uključi to svjesno. Bez modula sve lokalno radi normalno: mape, datoteke i paketi.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Mrežne veze već su postavljene; one i dalje rade, kao i posao koji čeka u redu čekanja. Isključeno znači samo: bez dodavanja novih mrežnih veza.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Modul AI pomoć je isključen, pa se ovdje ništa ne događa. Uključite ga pod Proširenja. Ono što ste postavili u nastavku ostaje sačuvano.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

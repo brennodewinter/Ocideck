@@ -429,6 +429,15 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     section: 'Uitbreidingen',
     keywords: ['import', 'pakket', 'offline', 'gegevens'],
   ),
+  // Wie "webdav" of "git" zoekt terwijl de module uit staat, moet uitkomen
+  // waar hij hem aanzet — niet in een opslagtab die die soorten dan niet
+  // aanbiedt (#570).
+  SettingsSearchEntry(
+    tab: SettingsSection.modules,
+    label: 'Online opslag',
+    section: 'Uitbreidingen',
+    keywords: ['webdav', 's3', 'git', 'server', 'online', 'module', 'opslag'],
+  ),
 
   // ── Documentatie ──────────────────────────────────────────────────────────
   // Dit tabblad heeft een eigen zoekveld over de documentinhoud, dus we

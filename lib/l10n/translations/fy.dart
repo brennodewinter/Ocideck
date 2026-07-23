@@ -734,6 +734,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Online opslach is allinnich beskikber yn de desktopferzje.',
+  'Online opslag': 'Online opslach',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Presintaasjes iepenje út en opslaan nei WebDAV, S3 en git-repositories, mei ferzjebehear en gearwurking fia in forge. In part fan dizze paden is oant no ta benammen tsjin testomjouwingen beproefd; kies dit bewust. Sûnder de module wurket alles lokaal gewoan: mappen, bestannen en pakketten.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Der steane al online ferbiningen ynsteld; dy bliuwe wurkjen, krekt as wachtsjend wurk yn \'e wachtrige. Út betsjut allinne: gjin nije online ferbiningen tafoegje.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'De module AI-stipe stiet út, dus hjir bart neat. Set him oan by Utwreidingen. Wat do hjirûnder ynsteld hast, bliuwt stean.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

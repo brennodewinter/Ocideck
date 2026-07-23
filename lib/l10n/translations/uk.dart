@@ -1791,6 +1791,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Онлайн-сховище доступне лише в настільній версії.',
+  'Online opslag': 'Онлайн-сховище',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Відкривай презентації з WebDAV, S3 і репозиторіїв git та зберігай їх туди, з контролем версій і співпрацею через forge. Частину цих шляхів досі випробувано переважно на тестових середовищах; вмикай це свідомо. Без модуля все локальне працює як звичайно: теки, файли та пакети.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Онлайн-з\'єднання вже налаштовані; вони працюють далі, як і робота, що чекає в черзі. Вимкнено означає лише: не додавати нових онлайн-з\'єднань.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Модуль «Підтримка ШІ» вимкнено, тому тут нічого не відбувається. Увімкніть його в Розширеннях. Те, що ви налаштували нижче, зберігається.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

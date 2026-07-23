@@ -1790,6 +1790,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Repositorium interretiale solum in versione desktop praesto est.',
+  'Online opslag': 'Repositorium interretiale',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Exhibitiones ex WebDAV, S3 et promptuariis git aperire et eo servare, cum administratione versionum et cooperatione per forge. Pars harum viarum adhuc maxime contra ambitus probationis experta est; hoc consulto elige. Sine modulo omnia localia plane operantur: scrinia, fasciculi et sarcinae.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Coniunctiones interretiales iam constitutae sunt; eae operari pergunt, sicut opus exspectans in serie. Exstinctum solum significat: nullas novas coniunctiones interretiales addere.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Modulus Auxilii IA exstinctus est, itaque hic nihil fit. Eum apud Extensiones accende. Quae infra statuisti, manent.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

@@ -1796,6 +1796,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Il-ħażna online hija disponibbli biss fil-verżjoni desktop.',
+  'Online opslag': 'Ħażna online',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Iftaħ preżentazzjonijiet minn u issejvja lejn WebDAV, S3 u repożitorji git, b\'kontroll tal-verżjonijiet u kollaborazzjoni permezz ta\' forge. Parti minn dawn it-toroq s\'issa ġiet ippruvata l-aktar kontra ambjenti tat-test; agħżel dan konxjament. Mingħajr il-modulu kollox lokali jaħdem normali: folders, fajls u pakketti.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Diġà hemm konnessjonijiet online konfigurati; dawn jibqgħu jaħdmu, bħax-xogħol li qed jistenna fil-kju. Mitfi jfisser biss: ma jiżdiedux konnessjonijiet online ġodda.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Il-modulu Assistenza AI huwa mitfi, għalhekk hawnhekk ma jiġri xejn. Ixegħlu taħt Estensjonijiet. Dak li ssettjajt hawn taħt jibqa\' kif inhu.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':

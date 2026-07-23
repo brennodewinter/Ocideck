@@ -445,10 +445,19 @@ extension _SettingsStorageTab on _SettingsDialogState {
   /// De knop die een verbinding toevoegt. Eén knop met een menu in plaats van
   /// drie knoppen: welke soorten er zijn is een detail dat pas telt op het
   /// moment dat je er een kiest.
+  ///
+  /// De online soorten staan achter de module Online opslag (#570): weglaten,
+  /// niet grijs maken. Dit is bewust de énige plek waar die module poort — de
+  /// menu-items, dialogen en de outbox kijken allemaal naar bestáánde
+  /// verbindingen, en wie er een heeft valt onder tonen-zodra-inhoud
+  /// (`onlineStorageRevealProvider`), dus daar verandert uitzetten niets.
+  /// Zonder de mogelijkheid om online verbindingen toe te voegen valt de rest
+  /// vanzelf weg.
   Widget _addConnectionButton(AppLocalizations l10n) {
     final kinds = [
       if (supportsLocalProjectFolders) StorageConnectionKind.local,
-      if (supportsNetworkDeckSources) ...[
+      if (supportsNetworkDeckSources &&
+          ref.watch(onlineStorageRevealProvider)) ...[
         StorageConnectionKind.webdav,
         StorageConnectionKind.s3,
         StorageConnectionKind.git,

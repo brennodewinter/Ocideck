@@ -1774,6 +1774,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Online opslag is alleen beschikbaar in de desktopversie.':
+      'Penyimpanan online hanya tersedia di versi desktop.',
+  'Online opslag': 'Penyimpanan online',
+  'Presentaties openen uit en opslaan naar WebDAV, S3 en git-repository’s, met versiebeheer en samenwerken via een forge. Een deel van deze paden is tot nu toe vooral tegen testomgevingen beproefd; kies dit bewust. Zonder de module werkt alles lokaal gewoon: mappen, bestanden en pakketten.':
+      'Buka presentasi dari dan simpan ke WebDAV, S3, dan repositori git, dengan kontrol versi dan kolaborasi lewat forge. Sejauh ini sebagian jalur tersebut terutama diuji terhadap lingkungan pengujian; pilih ini secara sadar. Tanpa modul semuanya tetap berjalan normal secara lokal: folder, berkas, dan paket.',
+  'Er staan al online verbindingen ingesteld; die blijven werken, net als wachtend werk in de wachtrij. Uit betekent alleen: geen nieuwe online verbindingen toevoegen.':
+      'Koneksi online sudah dikonfigurasi; koneksi itu tetap berfungsi, begitu pula pekerjaan yang menunggu dalam antrean. Nonaktif hanya berarti: tidak menambahkan koneksi online baru.',
   'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
       'Modul Bantuan AI mati, jadi tidak ada yang terjadi di sini. Aktifkan di Ekstensi. Apa yang Anda atur di bawah tetap tersimpan.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
