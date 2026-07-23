@@ -265,6 +265,7 @@ class _WelcomeScreen extends ConsumerWidget {
   }
 
   Future<void> _newDeck(BuildContext context, WidgetRef ref) async {
+    final languageCode = context.l10n.languageCode;
     final choice = await NewDeckDialog.show(context);
     if (choice == null) return;
     // Profielkeuze is globaal (het actieve profiel bepaalt de stijl van elk
@@ -272,9 +273,14 @@ class _WelcomeScreen extends ConsumerWidget {
     await ref
         .read(settingsProvider.notifier)
         .selectThemeProfile(choice.profileName);
+    final slides = await TemplateContentService().loadSlides(
+      choice.template.id,
+      languageCode: languageCode,
+      deckTitle: choice.title,
+    );
     ref
         .read(tabsProvider.notifier)
-        .newDeckInCurrentTab(choice.title, template: choice.template);
+        .newDeckInCurrentTab(choice.title, slides: slides);
   }
 
   /// Open een recent bestand met dezelfde nette foutafhandeling als het

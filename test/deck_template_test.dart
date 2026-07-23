@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
@@ -26,6 +28,25 @@ const werkdeckIds = [
   'handover',
   'retrospective',
 ];
+
+/// Beide inhoudstalen van de sjabloondocumenten. Interfaceteksten gaan via
+/// l10n in alle talen; de inhoud is een bestand per taal (#622).
+const contentLanguages = ['nl', 'en'];
+
+final _deckCache = <String, Deck>{};
+
+/// The parsed template document for [id] in [language], read straight from
+/// `assets/templates/` — tests guard the shipped documents, not a builder.
+Deck deckOf(String id, {String language = 'nl'}) =>
+    _deckCache.putIfAbsent('$id.$language', () {
+      final file = File('assets/templates/$id.$language.md');
+      final deck = MarkdownService().parseDeck(file.readAsStringSync());
+      expect(deck, isNotNull, reason: file.path);
+      return deck!;
+    });
+
+List<Slide> slidesOf(String id, {String language = 'nl'}) =>
+    deckOf(id, language: language).slides;
 
 void main() {
   group('deckTemplates registry', () {
@@ -61,35 +82,59 @@ void main() {
     });
   });
 
-  group('template slide builders', () {
-    test(
-      'every template starts with a title slide carrying the deck title',
-      () {
-        for (final template in deckTemplates) {
-          final slides = template.buildSlides('Mijn presentatie');
-          expect(slides, isNotEmpty, reason: template.id);
-          expect(slides.first.type, SlideType.title, reason: template.id);
-          expect(slides.first.title, 'Mijn presentatie', reason: template.id);
-        }
-      },
-    );
-
-    test('every slide has unique ids and Dutch placeholder content', () {
+  group('template documents', () {
+    test('every template ships a document in every content language', () {
       for (final template in deckTemplates) {
-        final slides = template.buildSlides('Titel');
-        final ids = slides.map((s) => s.id).toSet();
-        expect(ids, hasLength(slides.length), reason: template.id);
+        for (final language in contentLanguages) {
+          final file = File('assets/templates/${template.id}.$language.md');
+          expect(file.existsSync(), isTrue, reason: file.path);
+        }
+      }
+    });
+
+    test('no stray documents without a registered template', () {
+      final known = deckTemplates.map((t) => t.id).toSet();
+      final files = Directory('assets/templates')
+          .listSync()
+          .whereType<File>()
+          .map((f) => f.uri.pathSegments.last)
+          .toList();
+      for (final name in files) {
+        final match = RegExp(r'^(.+)\.(nl|en)\.md$').firstMatch(name);
+        expect(match, isNotNull, reason: name);
+        expect(known, contains(match!.group(1)), reason: name);
+      }
+    });
+
+    test('every document parses, starts with a title slide, unique ids', () {
+      for (final template in deckTemplates) {
+        for (final language in contentLanguages) {
+          final slides = slidesOf(template.id, language: language);
+          final label = '${template.id}.$language';
+          expect(slides, isNotEmpty, reason: label);
+          expect(slides.first.type, SlideType.title, reason: label);
+          expect(slides.first.title, isNotEmpty, reason: label);
+          final ids = slides.map((s) => s.id).toSet();
+          expect(ids, hasLength(slides.length), reason: label);
+          expect(deckOf(template.id, language: language).language, language);
+        }
       }
     });
 
     test('table slides have a header row and consistent column counts', () {
       for (final template in deckTemplates) {
-        for (final slide in template.buildSlides('Titel')) {
-          if (slide.type != SlideType.table) continue;
-          expect(slide.tableRows.length, greaterThan(1), reason: template.id);
-          final columns = slide.tableRows.first.length;
-          for (final row in slide.tableRows) {
-            expect(row, hasLength(columns), reason: '${template.id}: $row');
+        for (final language in contentLanguages) {
+          for (final slide in slidesOf(template.id, language: language)) {
+            if (slide.tableRows.isEmpty) continue;
+            expect(
+              slide.tableRows.length,
+              greaterThan(1),
+              reason: template.id,
+            );
+            final columns = slide.tableRows.first.length;
+            for (final row in slide.tableRows) {
+              expect(row, hasLength(columns), reason: '${template.id}: $row');
+            }
           }
         }
       }
@@ -97,20 +142,64 @@ void main() {
 
     test('timeline slides carry parseable, non-empty events', () {
       for (final template in deckTemplates) {
-        for (final slide in template.buildSlides('Titel')) {
-          if (slide.type != SlideType.timeline) continue;
-          final events = parseTimelineEvents(slide.bullets);
-          expect(events.length, greaterThan(1), reason: template.id);
+        for (final language in contentLanguages) {
+          for (final slide in slidesOf(template.id, language: language)) {
+            if (slide.type != SlideType.timeline) continue;
+            final events = parseTimelineEvents(slide.bullets);
+            expect(events.length, greaterThan(1), reason: template.id);
+          }
         }
       }
     });
 
     test('question slides are presentable as authored', () {
       for (final template in deckTemplates) {
-        for (final slide in template.buildSlides('Titel')) {
-          if (slide.type != SlideType.question) continue;
-          final spec = QuestionSpec.parse(slide.customMarkdown);
-          expect(spec.isPresentable, isTrue, reason: template.id);
+        for (final language in contentLanguages) {
+          for (final slide in slidesOf(template.id, language: language)) {
+            if (slide.type != SlideType.question) continue;
+            final spec = QuestionSpec.parse(slide.customMarkdown);
+            expect(spec.isPresentable, isTrue, reason: template.id);
+          }
+        }
+      }
+    });
+  });
+
+  group('nl/en parity', () {
+    // De Engelse variant is een vertaling van het Nederlandse document, geen
+    // eigen sjabloon: zelfde slidetypes, zelfde invulbaarheid, zelfde maten.
+    test('both languages carry the same structure per template', () {
+      for (final template in deckTemplates) {
+        final nl = slidesOf(template.id);
+        final en = slidesOf(template.id, language: 'en');
+        final label = template.id;
+        expect(
+          en.map((s) => s.type).toList(),
+          nl.map((s) => s.type).toList(),
+          reason: label,
+        );
+        for (var i = 0; i < nl.length; i++) {
+          final where = '$label slide ${i + 1}';
+          expect(en[i].tableEditable, nl[i].tableEditable, reason: where);
+          expect(en[i].listStyle, nl[i].listStyle, reason: where);
+          expect(
+            en[i].showChecklistProgress,
+            nl[i].showChecklistProgress,
+            reason: where,
+          );
+          expect(en[i].bullets.length, nl[i].bullets.length, reason: where);
+          expect(
+            en[i].tableRows.length,
+            nl[i].tableRows.length,
+            reason: where,
+          );
+          if (nl[i].tableRows.isNotEmpty) {
+            expect(
+              en[i].tableRows.first.length,
+              nl[i].tableRows.first.length,
+              reason: where,
+            );
+          }
         }
       }
     });
@@ -118,7 +207,7 @@ void main() {
 
   group('expected slide types per template', () {
     List<SlideType> typesOf(String id) =>
-        deckTemplateById(id)!.buildSlides('T').map((s) => s.type).toList();
+        slidesOf(id).map((s) => s.type).toList();
 
     test('empty deck is a title page and nothing else', () {
       // Het was een titeldia plús een agenda met Nederlandse voorbeeldregels.
@@ -126,19 +215,25 @@ void main() {
       // maar dit is het lege deck: de standaardkeuze, niet als sjabloon
       // gepresenteerd, en dus onontkoombaar voor wie de app in het Engels
       // draait (#622).
-      expect(typesOf('empty'), [SlideType.title]);
+      for (final language in contentLanguages) {
+        expect(slidesOf('empty', language: language).map((s) => s.type), [
+          SlideType.title,
+        ]);
+      }
     });
 
     test('geen enkel sjabloon draagt de oude agenda-voorbeeldregels', () {
       // Een regressie hier is stil: het deck opent gewoon, alleen staat er
       // Nederlands in een Engelse app.
       for (final template in deckTemplates) {
-        for (final slide in template.buildSlides('T')) {
-          expect(
-            slide.bullets,
-            isNot(contains('Opening en aanleiding')),
-            reason: 'sjabloon ${template.id}',
-          );
+        for (final language in contentLanguages) {
+          for (final slide in slidesOf(template.id, language: language)) {
+            expect(
+              slide.bullets,
+              isNot(contains('Opening en aanleiding')),
+              reason: 'sjabloon ${template.id}',
+            );
+          }
         }
       }
     });
@@ -215,43 +310,43 @@ void main() {
     );
 
     test('report scorecard shows a rise, a fall and an unchanged figure', () {
-      final slide = deckTemplateById(
-        'report',
-      )!.buildSlides('T').firstWhere((s) => s.type == SlideType.scorecard);
-      final entries = ScorecardSpec.fromSlide(
-        slide.title,
-        slide.tableRows,
-      ).entries;
-      // The starting point teaches the type: all three outcomes are visible, so
-      // an author sees what the direction setting actually does.
-      expect(
-        entries.map((e) => e.direction),
-        containsAll([
-          ScorecardDirection.up,
-          ScorecardDirection.down,
-          ScorecardDirection.flat,
-        ]),
-      );
-      // And both verdicts, so the colouring is not a mystery either.
-      expect(
-        entries.map((e) => e.sentiment),
-        containsAll([ScorecardSentiment.good, ScorecardSentiment.bad]),
-      );
+      for (final language in contentLanguages) {
+        final slide = slidesOf(
+          'report',
+          language: language,
+        ).firstWhere((s) => s.type == SlideType.scorecard);
+        final entries = ScorecardSpec.fromSlide(
+          slide.title,
+          slide.tableRows,
+        ).entries;
+        // The starting point teaches the type: all three outcomes are visible,
+        // so an author sees what the direction setting actually does.
+        expect(
+          entries.map((e) => e.direction),
+          containsAll([
+            ScorecardDirection.up,
+            ScorecardDirection.down,
+            ScorecardDirection.flat,
+          ]),
+          reason: language,
+        );
+        // And both verdicts, so the colouring is not a mystery either.
+        expect(
+          entries.map((e) => e.sentiment),
+          containsAll([ScorecardSentiment.good, ScorecardSentiment.bad]),
+          reason: language,
+        );
+      }
     });
 
     test('report action table matches the editor preset columns', () {
-      final slide = deckTemplateById(
+      final slide = slidesOf(
         'report',
-      )!.buildSlides('T').firstWhere((s) => s.type == SlideType.table);
+      ).firstWhere((s) => s.type == SlideType.table);
       // The same columns the table editor's action-list preset lays down, so a
       // deck started from the template and one started from the preset read
       // alike.
-      expect(slide.tableRows.first, [
-        'Actie',
-        'Eigenaar',
-        'Deadline',
-        'Status',
-      ]);
+      expect(slide.tableRows.first, ['Actie', 'Eigenaar', 'Deadline', 'Status']);
       expect(slide.tableRows.length, greaterThan(1));
       // Deadlines are left for the meeting to settle; a template with baked-in
       // dates ages.
@@ -274,23 +369,24 @@ void main() {
     });
 
     test('interactive quiz covers all three authored question kinds', () {
-      final slides = deckTemplateById('quiz')!.buildSlides('T');
-      final kinds = slides
-          .where((s) => s.type == SlideType.question)
-          .map((s) => QuestionSpec.parse(s.customMarkdown).kind)
-          .toList();
-      expect(kinds, [
-        QuestionKind.multipleChoice,
-        QuestionKind.trueFalse,
-        QuestionKind.multipleCorrect,
-      ]);
+      for (final language in contentLanguages) {
+        final kinds = slidesOf('quiz', language: language)
+            .where((s) => s.type == SlideType.question)
+            .map((s) => QuestionSpec.parse(s.customMarkdown).kind)
+            .toList();
+        expect(kinds, [
+          QuestionKind.multipleChoice,
+          QuestionKind.trueFalse,
+          QuestionKind.multipleCorrect,
+        ], reason: language);
+      }
     });
   });
 
   group('werkdeck templates', () {
     test('every werkdeck yields at least eight slides and a table', () {
       for (final id in werkdeckIds) {
-        final slides = deckTemplateById(id)!.buildSlides('T');
+        final slides = slidesOf(id);
         expect(slides.length, greaterThanOrEqualTo(8), reason: id);
         expect(
           slides.any((s) => s.type == SlideType.table),
@@ -302,7 +398,7 @@ void main() {
 
     test('every werkdeck is live-invulbaar: editable table or checklist', () {
       for (final id in werkdeckIds) {
-        final slides = deckTemplateById(id)!.buildSlides('T');
+        final slides = slidesOf(id);
         final editable = slides.any(
           (s) => s.type == SlideType.table && s.tableEditable,
         );
@@ -324,7 +420,7 @@ void main() {
         'retrospective',
       ];
       for (final id in withProgressList) {
-        final slides = deckTemplateById(id)!.buildSlides('T');
+        final slides = slidesOf(id);
         expect(
           slides.any(
             (s) =>
@@ -338,7 +434,7 @@ void main() {
       for (final id in werkdeckIds.where(
         (id) => !withProgressList.contains(id),
       )) {
-        final slides = deckTemplateById(id)!.buildSlides('T');
+        final slides = slidesOf(id);
         expect(
           slides.any((s) => s.type == SlideType.table && s.tableEditable),
           isTrue,
@@ -349,16 +445,14 @@ void main() {
   });
 
   group('BOB-crisisrapportage', () {
-    List<Slide> slides() => deckTemplateById('bobCrisis')!.buildSlides('BOB');
-
     test('exists and starts with a title slide', () {
       expect(deckTemplateById('bobCrisis')!.title, 'BOB-crisisrapportage');
-      expect(slides().length, greaterThanOrEqualTo(12));
-      expect(slides().first.type, SlideType.title);
+      expect(slidesOf('bobCrisis').length, greaterThanOrEqualTo(12));
+      expect(slidesOf('bobCrisis').first.type, SlideType.title);
     });
 
     test('has the B/O/B section dividers', () {
-      final sections = slides()
+      final sections = slidesOf('bobCrisis')
           .where((s) => s.type == SlideType.section)
           .map((s) => s.title)
           .toList();
@@ -366,34 +460,41 @@ void main() {
     });
 
     test('work tables are live-editable', () {
-      final editableTables = slides().where(
-        (s) => s.type == SlideType.table && s.tableEditable,
-      );
+      final editableTables = slidesOf(
+        'bobCrisis',
+      ).where((s) => s.type == SlideType.table && s.tableEditable);
       expect(editableTables.length, greaterThanOrEqualTo(2));
     });
 
     test('the action list is a checklist with progress', () {
-      final actionList = slides().firstWhere((s) => s.title == 'Actielijst');
+      final actionList = slidesOf(
+        'bobCrisis',
+      ).firstWhere((s) => s.title == 'Actielijst');
       expect(actionList.listStyle, ListStyle.checklist);
       expect(actionList.showChecklistProgress, isTrue);
     });
   });
 
   group('PPL Vluchtvoorbereiding', () {
-    List<Slide> slides() =>
-        deckTemplateById('pplFlightPrep')!.buildSlides('Vlucht');
-
     test('exists, is large enough and starts with a title slide', () {
       expect(deckTemplateById('pplFlightPrep'), isNotNull);
-      expect(slides().length, greaterThanOrEqualTo(18));
-      expect(slides().first.type, SlideType.title);
+      expect(slidesOf('pplFlightPrep').length, greaterThanOrEqualTo(18));
+      expect(slidesOf('pplFlightPrep').first.type, SlideType.title);
     });
 
-    test('shows the mandatory-preparation warning visibly', () {
+    test('shows the mandatory-preparation warning visibly in both languages', () {
       expect(
-        slides().any(
+        slidesOf('pplFlightPrep').any(
           (s) => s.customMarkdown.contains(
             'vervangt geen verplichte vluchtvoorbereiding',
+          ),
+        ),
+        isTrue,
+      );
+      expect(
+        slidesOf('pplFlightPrep', language: 'en').any(
+          (s) => s.customMarkdown.toLowerCase().contains(
+            'does not replace mandatory flight preparation',
           ),
         ),
         isTrue,
@@ -401,22 +502,24 @@ void main() {
     });
 
     test('planning tables are live-editable', () {
-      final editableTables = slides().where(
-        (s) => s.type == SlideType.table && s.tableEditable,
-      );
+      final editableTables = slidesOf(
+        'pplFlightPrep',
+      ).where((s) => s.type == SlideType.table && s.tableEditable);
       expect(editableTables.length, greaterThanOrEqualTo(5));
     });
 
     test('has at least three checklists', () {
-      final checklists = slides().where(
-        (s) => s.listStyle == ListStyle.checklist,
-      );
+      final checklists = slidesOf(
+        'pplFlightPrep',
+      ).where((s) => s.listStyle == ListStyle.checklist);
       expect(checklists.length, greaterThanOrEqualTo(3));
     });
 
     test('go/no-go and final decision show checklist progress', () {
       for (final title in ['Go / No-Go Samenvatting', 'Laatste Besluit']) {
-        final slide = slides().firstWhere((s) => s.title == title);
+        final slide = slidesOf(
+          'pplFlightPrep',
+        ).firstWhere((s) => s.title == title);
         expect(slide.listStyle, ListStyle.checklist, reason: title);
         expect(slide.showChecklistProgress, isTrue, reason: title);
       }
@@ -458,7 +561,7 @@ void main() {
       'every conversation template is live-invulbaar with a progress list',
       () {
         for (final id in conversationIds) {
-          final slides = deckTemplateById(id)!.buildSlides('T');
+          final slides = slidesOf(id);
           expect(
             slides.any((s) => s.type == SlideType.table && s.tableEditable),
             isTrue,
@@ -478,9 +581,8 @@ void main() {
 
     test('crucial conversations carry the Crucial Conversations method', () {
       for (final id in crucialIds) {
-        final slides = deckTemplateById(id)!.buildSlides('T');
         expect(
-          slides.any(
+          slidesOf(id).any(
             (s) =>
                 s.type == SlideType.section &&
                 s.title == 'De aanpak: een cruciaal gesprek voeren',
@@ -493,9 +595,8 @@ void main() {
 
     test('scenario conversations do not force the crucial method section', () {
       for (final id in scenarioIds) {
-        final slides = deckTemplateById(id)!.buildSlides('T');
         expect(
-          slides.any((s) => s.type == SlideType.section),
+          slidesOf(id).any((s) => s.type == SlideType.section),
           isFalse,
           reason: id,
         );
@@ -504,18 +605,15 @@ void main() {
   });
 
   group('MIAUW-pentestrapport', () {
-    List<Slide> slides() =>
-        deckTemplateById('miauwReport')!.buildSlides('Pentestrapport');
-
     test('is registered as a module-only template', () {
       final template = deckTemplateById('miauwReport')!;
       expect(template.requiresInfoSafety, isTrue);
       expect(template.title, 'MIAUW-pentestrapport');
-      expect(slides().first.type, SlideType.title);
+      expect(slidesOf('miauwReport').first.type, SlideType.title);
     });
 
     test('has the four MIAUW report parts as section dividers', () {
-      final sections = slides()
+      final sections = slidesOf('miauwReport')
           .where((s) => s.type == SlideType.section)
           .map((s) => s.title)
           .toList();
@@ -527,39 +625,39 @@ void main() {
       ]);
     });
 
-    test('scaffolds every module-only slide type', () {
-      final types = slides().map((s) => s.type).toSet();
-      expect(
-        types,
-        containsAll([
-          SlideType.signOff,
-          SlideType.scopeMatrix,
-          SlideType.findingsSummary,
-          SlideType.finding,
-          SlideType.checklist,
-        ]),
-      );
+    test('scaffolds every module-only slide type in both languages', () {
+      for (final language in contentLanguages) {
+        final types = slidesOf(
+          'miauwReport',
+          language: language,
+        ).map((s) => s.type).toSet();
+        expect(
+          types,
+          containsAll([
+            SlideType.signOff,
+            SlideType.scopeMatrix,
+            SlideType.findingsSummary,
+            SlideType.finding,
+            SlideType.checklist,
+          ]),
+          reason: language,
+        );
+      }
     });
 
     test('the example finding is a numberable header with a full spec', () {
-      final finding = slides().singleWhere((s) => s.type == SlideType.finding);
-      // Recognised as a finding by the numbering/list services.
-      expect(finding.findingRole, FindingRole.header);
-      final spec = FindingSpec.parse(finding.customMarkdown);
-      expect(spec.heading, 'F-01 · Voorbeeldbevinding');
-      expect(spec.description, isNotEmpty);
-      expect(spec.recommendation, isNotEmpty);
-    });
-
-    test('survives serialize + parse keeping its module slide types', () {
-      final md = MarkdownService();
-      final deck = Deck(title: 'Pentestrapport', slides: slides());
-      final parsed = md.parseDeck(md.generateDeck(deck));
-      expect(parsed, isNotNull);
-      expect(
-        parsed!.slides.map((s) => s.type).toList(),
-        slides().map((s) => s.type).toList(),
-      );
+      for (final language in contentLanguages) {
+        final finding = slidesOf(
+          'miauwReport',
+          language: language,
+        ).singleWhere((s) => s.type == SlideType.finding);
+        // Recognised as a finding by the numbering/list services.
+        expect(finding.findingRole, FindingRole.header, reason: language);
+        final spec = FindingSpec.parse(finding.customMarkdown);
+        expect(spec.heading, contains('F-01'), reason: language);
+        expect(spec.description, isNotEmpty, reason: language);
+        expect(spec.recommendation, isNotEmpty, reason: language);
+      }
     });
   });
 
@@ -584,24 +682,35 @@ void main() {
       }
       expect(missing, isEmpty);
     });
+
+    test('document title slides match the l10n picker title per language', () {
+      // Wat de kiezer belooft is wat het document opent: de titeldia van
+      // <id>.en.md draagt dezelfde titel als de Engelse l10n van de kiezer.
+      for (final template in deckTemplates) {
+        expect(slidesOf(template.id).first.title, template.title);
+        expect(
+          slidesOf(template.id, language: 'en').first.title,
+          AppLocalizations.sourceFor('en', template.title),
+          reason: template.id,
+        );
+      }
+    });
   });
 
   group('round trip', () {
-    test('every template deck survives serialize + parse with its types', () {
+    test('every template document survives serialize + parse with its types', () {
       final md = MarkdownService();
       for (final template in deckTemplates) {
-        final deck = Deck(
-          title: 'Sjabloontest',
-          slides: template.buildSlides('Sjabloontest'),
-        );
-        final markdown = md.generateDeck(deck);
-        final parsed = md.parseDeck(markdown);
-        expect(parsed, isNotNull, reason: template.id);
-        expect(
-          parsed!.slides.map((s) => s.type).toList(),
-          deck.slides.map((s) => s.type).toList(),
-          reason: template.id,
-        );
+        for (final language in contentLanguages) {
+          final deck = deckOf(template.id, language: language);
+          final parsed = md.parseDeck(md.generateDeck(deck));
+          expect(parsed, isNotNull, reason: template.id);
+          expect(
+            parsed!.slides.map((s) => s.type).toList(),
+            deck.slides.map((s) => s.type).toList(),
+            reason: '${template.id}.$language',
+          );
+        }
       }
     });
   });

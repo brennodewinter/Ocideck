@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -23,15 +24,20 @@ void main() {
   test('author → renumber → seal → verify → export dossier', () async {
     final md = MarkdownService();
 
-    // 1 · Author a report from the MIAUW template.
-    final template = deckTemplateById('miauwReport')!;
+    // 1 · Author a report from the MIAUW template document, the same way
+    // deck creation does: parse the bundled markdown, title on the first slide.
+    expect(deckTemplateById('miauwReport'), isNotNull);
+    final templateSlides = md
+        .parseDeck(File('assets/templates/miauwReport.nl.md').readAsStringSync())!
+        .slides;
+    templateSlides[0] = templateSlides[0].copyWith(title: 'Acme Web Pentest');
     var deck = Deck(
       title: 'Acme Web Pentest',
       author: 'Jip Tester',
       organization: 'Acme BV',
       version: '1.0',
       date: '2026-07-12',
-      slides: template.buildSlides('Acme Web Pentest'),
+      slides: templateSlides,
     );
     expect(
       deck.slides.map((s) => s.type),

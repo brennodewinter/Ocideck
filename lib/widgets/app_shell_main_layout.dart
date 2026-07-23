@@ -835,14 +835,20 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   }
 
   Future<void> _newInTab() async {
+    final languageCode = context.l10n.languageCode;
     final choice = await NewDeckDialog.show(context);
     if (choice == null) return;
     await ref
         .read(settingsProvider.notifier)
         .selectThemeProfile(choice.profileName);
+    final slides = await TemplateContentService().loadSlides(
+      choice.template.id,
+      languageCode: languageCode,
+      deckTitle: choice.title,
+    );
     ref
         .read(tabsProvider.notifier)
-        .newDeckInNewTab(choice.title, template: choice.template);
+        .newDeckInNewTab(choice.title, slides: slides);
   }
 
   /// Documentintegriteit (§8 A1): toon de afrond-dialoog, verzegel het deck en

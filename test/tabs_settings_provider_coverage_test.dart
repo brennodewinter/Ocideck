@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/services/markdown_service.dart';
-import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/storage_connection.dart';
 import 'package:ocideck/models/slide.dart';
@@ -142,9 +141,15 @@ void main() {
       );
     });
 
-    test('newDeckInNewTab with a template opens its example slides', () {
+    test('newDeckInNewTab with pre-built slides opens those slides', () {
       final (container, tabs) = build();
-      tabs.newDeckInNewTab('Briefing', template: deckTemplateById('briefing'));
+      final templateSlides = MarkdownService()
+          .parseDeck(
+            File('assets/templates/briefing.nl.md').readAsStringSync(),
+          )!
+          .slides;
+      templateSlides[0] = templateSlides[0].copyWith(title: 'Briefing');
+      tabs.newDeckInNewTab('Briefing', slides: templateSlides);
       final deck = container
           .read(tabsProvider)
           .current!
