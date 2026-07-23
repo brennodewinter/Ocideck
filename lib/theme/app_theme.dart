@@ -7,18 +7,59 @@ class AppPalette extends ThemeExtension<AppPalette> {
   final Color panelText;
   final Color mutedText;
 
+  /// The ink for a link, a list marker or a small accent icon — anything that
+  /// must be *read* rather than merely seen.
+  ///
+  /// Not `colorScheme.primary`, which is where these used to come from. A
+  /// profile's primary colour is a brand colour, and a dark profile's brand
+  /// colour is dark: the built-in *Donker* profile puts `#111827` on a `#1E293B`
+  /// surface, which is 1.21:1 — gone (#744). In light mode primary *is* the
+  /// right ink (14:1), so this follows the same rule the outlined button
+  /// already used: the profile's text colour when dark, its primary when light.
+  ///
+  /// `secondary` was the obvious alternative and is wrong: in the *Europa*
+  /// profile the accent is EU yellow, which on that profile's white surface is
+  /// no better than the problem being fixed.
+  final Color accentInk;
+
   const AppPalette({
     required this.panel,
     required this.panelText,
     required this.mutedText,
+    required this.accentInk,
   });
 
+  /// The palette [theme] carries, or one derived from it.
+  ///
+  /// `theme.extension<AppPalette>()!` is what the app-owned widgets used, and it
+  /// is a trap outside the app: a bare `MaterialApp` in a test or a preview has
+  /// no extension, and the `!` turns a missing accent colour into a crash. The
+  /// derived fallback keeps the *rule* rather than the values — light ink on a
+  /// dark theme, the primary on a light one — so a widget lifted out of the app
+  /// still renders legibly instead of not at all.
+  static AppPalette of(ThemeData theme) =>
+      theme.extension<AppPalette>() ??
+      AppPalette(
+        panel: theme.colorScheme.surfaceContainerHighest,
+        panelText: theme.colorScheme.onSurface,
+        mutedText: theme.colorScheme.onSurfaceVariant,
+        accentInk: theme.brightness == Brightness.dark
+            ? theme.colorScheme.onSurface
+            : theme.colorScheme.primary,
+      );
+
   @override
-  AppPalette copyWith({Color? panel, Color? panelText, Color? mutedText}) {
+  AppPalette copyWith({
+    Color? panel,
+    Color? panelText,
+    Color? mutedText,
+    Color? accentInk,
+  }) {
     return AppPalette(
       panel: panel ?? this.panel,
       panelText: panelText ?? this.panelText,
       mutedText: mutedText ?? this.mutedText,
+      accentInk: accentInk ?? this.accentInk,
     );
   }
 
@@ -29,6 +70,7 @@ class AppPalette extends ThemeExtension<AppPalette> {
       panel: Color.lerp(panel, other.panel, t)!,
       panelText: Color.lerp(panelText, other.panelText, t)!,
       mutedText: Color.lerp(mutedText, other.mutedText, t)!,
+      accentInk: Color.lerp(accentInk, other.accentInk, t)!,
     );
   }
 }
@@ -451,8 +493,22 @@ class AppTheme {
           foregroundColor: profile.isDark ? text : primary,
         ),
       ),
+      // Dezelfde regel, en hij ontbrak hier. Material geeft een TextButton
+      // standaard [primary] als voorgrond, dus elke tekstknop en elke link in
+      // de app stond in donkere modus op 1,21:1 — terwijl de omlijnde knop
+      // ernaast, door de regel hierboven, gewoon leesbaar was (#744).
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: profile.isDark ? text : primary,
+        ),
+      ),
       extensions: [
-        AppPalette(panel: panel, panelText: panelText, mutedText: muted),
+        AppPalette(
+          panel: panel,
+          panelText: panelText,
+          mutedText: muted,
+          accentInk: profile.isDark ? text : primary,
+        ),
       ],
     );
   }

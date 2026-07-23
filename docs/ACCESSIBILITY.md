@@ -179,7 +179,7 @@ that the export uses exactly what the editor shows. In dark mode that was
 untrue. Slide previews now use fixed ink (`slideInk`, `slideInkMuted`,
 `slideInkSoft`, …) — the same values, no longer moving.
 
-`test/app_theme_contrast_test.dart` now checks seven things, and the guards are
+`test/app_theme_contrast_test.dart` now checks nine things, and the guards are
 what keep this from being a one-off: the mode-aware tokens meet 4.5:1 in both
 modes; the slide text tokens meet 4.5:1 on white; the two accent tokens meet
 3:1; the slide ink is identical in both modes; and two source checks reject
@@ -187,6 +187,34 @@ modes; the slide text tokens meet 4.5:1 on white; the two accent tokens meet
 and **a mode-aware grey used inside a slide preview**. Those two read the
 source, so the next `AppTheme.navy` in a dialog — or `AppTheme.slate600` on a
 slide — fails the build instead of quietly returning.
+
+**A whole class sat outside all of that, and it took a visual check of the
+consent screen to find it (#744).** Every check above measures a colour someone
+*chose*. Nothing measured the colours `ThemeData` hands out when nobody chooses
+— and Material gives a `TextButton` `colorScheme.primary` as its foreground. In
+the built-in *Donker* profile `primary` is the brand colour `#111827`, which on
+that profile's own `#1E293B` surface is **1.21:1**. Every text button and every
+link in the app, including the two routes to the licence text on the screen a
+first-time user has to get past, were effectively invisible.
+
+It was half-known: `app_theme.dart` already carried the note that "in donkere
+modus is primary donker (onleesbaar op donker)" — but only on
+`outlinedButtonTheme`. Two lines away, the text button had no theme at all. That
+is why, in *Over OciDeck*, the outlined "Alle licentieteksten tonen" read fine
+while the "Website van de stichting" link beside it did not.
+
+The fix is that same rule applied to `textButtonTheme`, plus an `accentInk` on
+`AppPalette` for the six places that took `colorScheme.primary` as ink directly
+(the documentation reader's links, markers and quote bar; the consent screen's
+section icons; the remote-file badge). `secondary` would have been the obvious
+choice and is wrong: in the *Europa* profile the accent is EU yellow, which on
+that profile's white surface is no better than the problem being fixed.
+
+The two new checks close the class, not just the case: for **every** built-in
+appearance profile, the resolved foreground of each button theme and of
+`accentInk` must clear 4.5:1 on that profile's own surface, and a source guard
+rejects `colorScheme.primary` used as a `color:`. The first one fails if a
+future button theme is left out entirely, which is what actually happened here.
 
 *Three smaller things the visual review turned up, now fixed: the export
 dialog had been migrated on its success branch but not its failure branch, so

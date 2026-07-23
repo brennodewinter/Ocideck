@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../theme/app_theme.dart';
 import '../slides/inline_markdown.dart';
 
 /// Renders a full Markdown document as widgets — headings, paragraphs, bullet
@@ -470,16 +471,16 @@ class _Theme {
         color: theme.colorScheme.onSurface,
       ),
       heading = theme.colorScheme.onSurface,
-      marker = theme.colorScheme.primary,
+      marker = AppPalette.of(theme).accentInk,
       // Dimmer than the ticked box: an empty box is the absence of a fact, and
       // should not pull the eye harder than the items that are done.
       checkboxEmpty = theme.colorScheme.onSurfaceVariant,
-      link = theme.colorScheme.primary,
+      link = AppPalette.of(theme).accentInk,
       border = theme.colorScheme.outlineVariant,
       quoteBg = theme.colorScheme.surfaceContainerHighest.withValues(
         alpha: 0.5,
       ),
-      quoteBar = theme.colorScheme.primary,
+      quoteBar = AppPalette.of(theme).accentInk,
       quoteText = theme.colorScheme.onSurfaceVariant,
       codeBg = theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
       codeText = theme.colorScheme.onSurface,

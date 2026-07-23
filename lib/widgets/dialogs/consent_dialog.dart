@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../state/consent_provider.dart';
 import '../../state/settings_provider.dart';
+import '../../theme/app_theme.dart';
 import '../../theme/brand_logo.dart';
 import '../language_flag.dart';
 import '../privacy_statement_content.dart';
@@ -122,7 +123,9 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
                     alpha: 0.2,
                   ),
                   border: Border.all(
-                    color: theme.colorScheme.primary.withValues(alpha: 0.3),
+                    color: AppPalette.of(
+                      theme,
+                    ).accentInk.withValues(alpha: 0.3),
                   ),
                   borderRadius: BorderRadius.circular(8),
                 ),

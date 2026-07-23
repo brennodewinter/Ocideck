@@ -128,6 +128,24 @@ read a book to find out.
   de nalevingsteller ziet het onveranderd. Beoordeeld en akkoord blijft iets
   anders dan opgelost.
 
+- **Tekstknoppen en links waren in donkere modus onleesbaar — 1,21:1.** Material
+  geeft een `TextButton` standaard `colorScheme.primary` als voorgrond, en in het
+  profiel *Donker* is `primary` de merkkleur `#111827`. Op het eigen oppervlak
+  `#1E293B` is dat 1,21:1: weg. Het trof elke tekstknop en elke link in de app,
+  waaronder de twee routes naar de licentietekst op het toestemmingsscherm — het
+  eerste scherm dat een nieuwe gebruiker moet passeren. Half bekend was het al:
+  `app_theme.dart` had de constatering staan, maar alleen op
+  `outlinedButtonTheme`, en dáárom was in "Over OciDeck" de omlijnde knop "Alle
+  licentieteksten tonen" wél leesbaar en de link ernaast niet. Nu dezelfde regel
+  op `textButtonTheme`, plus `AppPalette.accentInk` voor de zes plekken die
+  `colorScheme.primary` rechtstreeks als inkt namen (de links, opsommingstekens
+  en citaatbalk van de documentatielezer, de sectie-iconen van het
+  toestemmingsscherm, het wolkje bij een op afstand opgehaald bestand). Niet
+  `secondary`: in het profiel *Europa* is het accent EU-geel, en dat is op wit
+  net zo onleesbaar als het probleem zelf. De twee nieuwe toetsen sluiten de
+  klasse in plaats van het geval — ze meten wat `ThemeData` zélf uitdeelt, per
+  ingebouwd profiel, en vallen ook als een volgende knopstijl helemaal ontbreekt.
+  Dat is precies wat hier gebeurd was. (#744)
 - **In donkere modus stond het logo als een groot wit vlak op het openscherm.**
   De oorzaak zat niet in de weergave maar in de asset: `ocideck-logo.png` is
   volledig ondoorzichtig — alle hoeken `#FFFFFF` bij alfa 255, bijna negentig

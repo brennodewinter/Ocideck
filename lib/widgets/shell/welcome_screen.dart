@@ -394,7 +394,7 @@ class _RecentFileTile extends StatelessWidget {
                             child: Icon(
                               Icons.cloud_outlined,
                               size: 13,
-                              color: theme.colorScheme.primary,
+                              color: palette.accentInk,
                             ),
                           ),
                         ],

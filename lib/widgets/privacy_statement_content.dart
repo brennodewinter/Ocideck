@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:url_launcher/url_launcher.dart';
 import '../../l10n/app_localizations.dart';
+import '../theme/app_theme.dart';
 import 'reader/document_reader_screen.dart';
 
 /// Shared licence + privacy copy for the consent gate and the settings screen,
@@ -262,7 +263,7 @@ class PrivacyStatementContent extends StatelessWidget {
     padding: const EdgeInsets.only(bottom: 8),
     child: Row(
       children: [
-        Icon(icon, size: 18, color: theme.colorScheme.primary),
+        Icon(icon, size: 18, color: AppPalette.of(theme).accentInk),
         const SizedBox(width: 8),
         Expanded(
           child: Text(
