@@ -262,7 +262,11 @@ extension _SettingsStorageTab on _SettingsDialogState {
           _ => null,
         },
         GitConnection() => switch (_gitForms[connection.id]) {
-          final GitForm form => _gitPanel(form),
+          final GitForm form => GitPanel(
+            form: form,
+            confirmCertificate: _confirmCertificate,
+            onChanged: () => _rebuild(() {}),
+          ),
           _ => null,
         },
       };

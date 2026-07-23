@@ -1,11 +1,13 @@
-// Part of the settings_dialog library — see ../settings_dialog.dart.
-//
 // De invulstand van de git-bron. Spiegelt [WebdavForm], en net als daar zonder
 // gedeelde basisklasse: git bewaart een forge, een eigenaar en een repository
 // waar Nextcloud een submap heeft, en de sleutelhangersleutel is hier
 // URL|eigenaar in plaats van URL|gebruiker. Wat écht hetzelfde is — de vraag of
 // het geheim moet worden weggeschreven — zit in [KeychainSecret].
-part of '../settings_dialog.dart';
+import 'package:flutter/widgets.dart';
+
+import '../../../models/git_settings.dart';
+import '../../../state/settings_provider.dart';
+import 'keychain_secret.dart';
 
 /// Wat het git-paneel aan het bewerken is, tot Opslaan of Annuleren.
 class GitForm {
