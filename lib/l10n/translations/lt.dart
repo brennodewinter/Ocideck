@@ -1784,6 +1784,7 @@ const _dutchSourceLt = {
 
 const _dutchSourceAddLt = <String, String>{
   'De export is mislukt.': 'Eksportas nepavyko.',
+  'Presenteer vanaf hier': 'Pristatyti nuo čia',
   'Teams-gastclient (ontwerp)': 'Teams svečio klientas (projektas)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kaip plačiai galima dalytis šia medžiaga?',

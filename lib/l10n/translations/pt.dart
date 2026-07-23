@@ -1806,6 +1806,7 @@ const _dutchSourcePt = {
 
 const _dutchSourceAddPt = <String, String>{
   'De export is mislukt.': 'A exportação falhou.',
+  'Presenteer vanaf hier': 'Apresentar a partir daqui',
   'Teams-gastclient (ontwerp)': 'Cliente convidado do Teams (design)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: até que ponto este material pode ser partilhado?',

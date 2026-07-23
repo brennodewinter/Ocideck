@@ -1784,6 +1784,7 @@ const _dutchSourceSk = {
 
 const _dutchSourceAddSk = <String, String>{
   'De export is mislukt.': 'Export zlyhal.',
+  'Presenteer vanaf hier': 'Prezentovať odtiaľto',
   'Teams-gastclient (ontwerp)': 'Klient Teams pre hostí (návrh)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: ako široko sa tento materiál smie zdieľať?',

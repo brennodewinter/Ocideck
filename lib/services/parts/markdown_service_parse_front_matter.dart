@@ -30,7 +30,7 @@ class _FrontMatter {
   TlpLevel tlp = TlpLevel.none;
   PrivacyDisposition privacy = PrivacyDisposition.warn;
   int presentationTargetSeconds = 0;
-  bool showRehearsalSummary = true;
+  bool showRehearsalSummary = false;
   bool playOnly = false;
   bool finalized = false;
   String sealHash = '';
@@ -126,7 +126,7 @@ extension _MarkdownParseFrontMatter on MarkdownService {
             case 'ocideck_target_seconds':
               fm.presentationTargetSeconds = int.tryParse(value) ?? 0;
             case 'ocideck_show_rehearsal_summary':
-              fm.showRehearsalSummary = value != 'false';
+              fm.showRehearsalSummary = value == 'true';
             case 'ocideck_play_only':
               fm.playOnly = value == 'true';
             case 'ocideck_finalized':

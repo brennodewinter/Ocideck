@@ -47,7 +47,11 @@ class SlideListPanel extends ConsumerStatefulWidget {
   /// overlay bookkeeping ("_RenderLayoutBuilder was mutated…").
   final double? railWidth;
 
-  const SlideListPanel({super.key, this.railWidth});
+  const SlideListPanel({super.key, this.railWidth, this.onPresentFromHere});
+
+  /// Start de presentatie vanaf een gekozen dia (#607). De shell levert dit,
+  /// want `presentDeck` woont in de app_shell-library en niet hier.
+  final void Function(int index)? onPresentFromHere;
 
   @override
   ConsumerState<SlideListPanel> createState() => _SlideListPanelState();
@@ -539,47 +543,60 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       controller: _scrollController,
       padding: const EdgeInsets.symmetric(vertical: 4),
       itemCount: matches.length,
-      itemBuilder: (_, i) {
-        final index = matches[i];
-        final slide = deck.slides[index];
-        return SlideThumbnail(
-          key: _keyForSlide(slide),
-          slide: slide,
-          index: index,
-          hasUserNotes: slideHasUserNotes(deck.userNotes, slide.id),
-          projectPath: deck.projectPath,
-          themeProfile: deck.themeProfile,
-          slideCount: deck.slides.length,
-          tlp: deck.tlp,
-          organization: deck.organization,
-          fitScaleOverride: sharedSplitFitScale(
-            deck.slides,
-            index,
-            deck.themeProfile,
-            deck.themeProfile.fontFamily,
-          ),
-          numberStart: numberedListStartFor(deck.slides, index),
-          scopeCia: deckScopeCiaIndex(deck.slides),
-          reportLanguage: deck.language,
-          onTap: () => _onSlideTap(index),
-          onToggleSkip: () => notifier.toggleSkip(index),
-          onCopyImage: () => _copySlideAsImage(slide),
-          onDuplicate: () {
-            notifier.duplicateSlide(index);
-            editorNotifier.select(index + 1);
-          },
-          onSplit: () {
-            notifier.splitSlide(index);
-            editorNotifier.select(index + 1);
-          },
-          onDelete: () {
-            if (deck.slides.length <= 1) return;
-            notifier.removeSlide(index);
-            // Focus naar de slide bóven de verwijderde (of de eerste als de
-            // eerste is verwijderd), niet terug naar het begin.
-            editorNotifier.select((index - 1).clamp(0, deck.slides.length - 2));
-          },
-        );
+      itemBuilder: (_, i) =>
+          _slideThumbnail(deck, matches[i], notifier, editorNotifier),
+    );
+  }
+
+  /// Eén dia-thumbnail. Stond twee keer bijna woordelijk uitgeschreven — in de
+  /// gefilterde lijst en in de herschikbare hoofdlijst — die alleen in hun
+  /// omhulling verschilden. Twee kopieën van vijftig regels is er één te veel:
+  /// een callback die je aan de ene toevoegt (zoals "presenteer vanaf hier",
+  /// #607) vergeet je aan de andere.
+  Widget _slideThumbnail(
+    Deck deck,
+    int index,
+    DeckNotifier notifier,
+    EditorNotifier editorNotifier,
+  ) {
+    final slide = deck.slides[index];
+    return SlideThumbnail(
+      key: _keyForSlide(slide),
+      slide: slide,
+      index: index,
+      hasUserNotes: slideHasUserNotes(deck.userNotes, slide.id),
+      projectPath: deck.projectPath,
+      themeProfile: deck.themeProfile,
+      slideCount: deck.slides.length,
+      tlp: deck.tlp,
+      organization: deck.organization,
+      fitScaleOverride: sharedSplitFitScale(
+        deck.slides,
+        index,
+        deck.themeProfile,
+        deck.themeProfile.fontFamily,
+      ),
+      numberStart: numberedListStartFor(deck.slides, index),
+      scopeCia: deckScopeCiaIndex(deck.slides),
+      reportLanguage: deck.language,
+      onTap: () => _onSlideTap(index),
+      onPresentFromHere: widget.onPresentFromHere,
+      onToggleSkip: () => notifier.toggleSkip(index),
+      onCopyImage: () => _copySlideAsImage(slide),
+      onDuplicate: () {
+        notifier.duplicateSlide(index);
+        editorNotifier.select(index + 1);
+      },
+      onSplit: () {
+        notifier.splitSlide(index);
+        editorNotifier.select(index + 1);
+      },
+      onDelete: () {
+        if (deck.slides.length <= 1) return;
+        notifier.removeSlide(index);
+        // Focus naar de slide bóven de verwijderde (of de eerste als de eerste
+        // is verwijderd), niet terug naar het begin.
+        editorNotifier.select((index - 1).clamp(0, deck.slides.length - 2));
       },
     );
   }
@@ -638,47 +655,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       },
       proxyDecorator: (child, index, animation) =>
           Material(color: Colors.transparent, child: child),
-      itemBuilder: (_, i) {
-        final slide = deck.slides[i];
-        return SlideThumbnail(
-          key: _keyForSlide(slide),
-          slide: slide,
-          index: i,
-          hasUserNotes: slideHasUserNotes(deck.userNotes, slide.id),
-          projectPath: deck.projectPath,
-          themeProfile: deck.themeProfile,
-          slideCount: deck.slides.length,
-          tlp: deck.tlp,
-          organization: deck.organization,
-          fitScaleOverride: sharedSplitFitScale(
-            deck.slides,
-            i,
-            deck.themeProfile,
-            deck.themeProfile.fontFamily,
-          ),
-          numberStart: numberedListStartFor(deck.slides, i),
-          scopeCia: deckScopeCiaIndex(deck.slides),
-          reportLanguage: deck.language,
-          onTap: () => _onSlideTap(i),
-          onToggleSkip: () => notifier.toggleSkip(i),
-          onCopyImage: () => _copySlideAsImage(slide),
-          onDuplicate: () {
-            notifier.duplicateSlide(i);
-            editorNotifier.select(i + 1);
-          },
-          onSplit: () {
-            notifier.splitSlide(i);
-            editorNotifier.select(i + 1);
-          },
-          onDelete: () {
-            if (deck.slides.length <= 1) return;
-            notifier.removeSlide(i);
-            // Focus naar de slide bóven de verwijderde (of de eerste als de
-            // eerste is verwijderd), niet terug naar het begin.
-            editorNotifier.select((i - 1).clamp(0, deck.slides.length - 2));
-          },
-        );
-      },
+      itemBuilder: (_, i) => _slideThumbnail(deck, i, notifier, editorNotifier),
     );
   }
 

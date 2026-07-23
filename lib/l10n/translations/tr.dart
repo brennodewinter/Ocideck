@@ -2756,6 +2756,7 @@ const _dutchSourceTr = {
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
   'De export is mislukt.': 'Dışa aktarma başarısız oldu.',
+  'Presenteer vanaf hier': 'Buradan sun',
   'Teams-gastclient (ontwerp)': 'Teams konuk istemcisi (tasarım)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: bu materyal ne kadar geniş paylaşılabilir?',

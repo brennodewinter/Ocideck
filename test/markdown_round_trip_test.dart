@@ -1270,7 +1270,7 @@ void main() {
             ),
           ),
         );
-        // Default (true) is not written to the front matter, but still parses true.
+        // Default (false) is not written to the front matter; opt-in (true) is.
         final onMarkdown = service.generateDeck(
           Deck(title: 'Demo', slides: [Slide.create(SlideType.title)]),
         );

@@ -1799,6 +1799,7 @@ const _dutchSourceMt = {
 
 const _dutchSourceAddMt = <String, String>{
   'De export is mislukt.': 'L-esportazzjoni falliet.',
+  'Presenteer vanaf hier': 'Ippreżenta minn hawn',
   'Teams-gastclient (ontwerp)': 'Klijent mistieden ta\' Teams (disinn)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kemm wiesa\' jista\' jinqasam dan il-materjal?',

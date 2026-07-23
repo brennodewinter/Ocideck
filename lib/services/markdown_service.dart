@@ -182,8 +182,8 @@ class MarkdownService {
       out.add('ocideck_target_seconds: ${deck.presentationTargetSeconds}');
     }
     // Default (true) stays out of the front matter; only persist an opt-out.
-    if (!deck.showRehearsalSummary) {
-      out.add('ocideck_show_rehearsal_summary: false');
+    if (deck.showRehearsalSummary) {
+      out.add('ocideck_show_rehearsal_summary: true'); // #607: opt-in only
     }
     // 'Alleen afspelen'-vergrendeling: default (false) blijft uit de front
     // matter; enkel de opt-in wordt bewaard.

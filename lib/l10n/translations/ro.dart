@@ -1794,6 +1794,7 @@ const _dutchSourceRo = {
 
 const _dutchSourceAddRo = <String, String>{
   'De export is mislukt.': 'Exportul a eșuat.',
+  'Presenteer vanaf hier': 'Prezintă de aici',
   'Teams-gastclient (ontwerp)': 'Client Teams pentru invitați (design)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: cât de larg poate fi distribuit acest material?',

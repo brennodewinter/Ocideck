@@ -2000,7 +2000,12 @@ not mark is still found and still reported.
 
 ## Presenting
 
-Start the fullscreen presenter from the toolbar. See
+Start the fullscreen presenter from the toolbar. **It begins at the first
+slide**, not at the one you happen to be editing — so hitting play while working
+on slide 12 does not drop your audience into the middle. To start somewhere
+else on purpose, right-click a slide in the strip and choose **Present from
+here**. *(Changed 2026-07-23, #607: play used to start at the selected slide,
+which surprised anyone who pressed it mid-edit.)* See
 [`SHORTCUTS.md`](SHORTCUTS.md) for the full key list; highlights: arrows to move,
 `G` for the grid overview, `B`/`W` to blank, `P` for presenter view, `K` for the
 countdown, `R` to reset the timing, `H` for the in-app cheatsheet.
@@ -2058,11 +2063,15 @@ it live while presenting with **`K`** (type the minutes and seconds as `MMSS`,
 `Enter` to confirm, `0` to switch the countdown off). **`R`** resets the run —
 elapsed time and per-slide timings — while keeping the target.
 
-When you leave the presenter, a **summary** shows the total time against the
+When you leave the presenter, a **summary** can show the total time against the
 target and the time spent per slide, with a button to copy the times to the
-clipboard. It can be switched off per deck, for when you are presenting for real
-rather than rehearsing. This is **session-only**: nothing is
-written to disk or into the `.md` file.
+clipboard. It is **off by default** and turned on per deck under *Presentation
+properties → Show timing summary* — the summary is a rehearsal aid, and being
+handed a timing report the moment you finish in front of a room is the opposite
+of one. When on, it is still **session-only**: nothing is written to disk or into
+the `.md` file. *(Default flipped to off 2026-07-23, #607: it used to appear
+automatically, which read as the app grading your performance at the point of
+most stress.)*
 
 Under the per-slide list the summary also lists the **questions** you answered:
 one line per answered attempt, with the time that attempt took and whether it was

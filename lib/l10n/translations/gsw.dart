@@ -1780,6 +1780,7 @@ const _dutchSourceGsw = {
 
 const _dutchSourceAddGsw = <String, String>{
   'De export is mislukt.': 'De Export isch fehlgschlage.',
+  'Presenteer vanaf hier': 'Ab do präsentiere',
   'Teams-gastclient (ontwerp)': 'Teams-Gaschtclient (Entwurf)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: wie breit dörf das Material teilt werde?',

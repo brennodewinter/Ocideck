@@ -1768,6 +1768,7 @@ const _dutchSourceEt = {
 
 const _dutchSourceAddEt = <String, String>{
   'De export is mislukt.': 'Eksport ebaõnnestus.',
+  'Presenteer vanaf hier': 'Esita siit',
   'Teams-gastclient (ontwerp)': 'Teamsi külalisklient (kavand)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kui laialt tohib seda materjali jagada?',

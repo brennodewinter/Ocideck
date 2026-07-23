@@ -1779,6 +1779,7 @@ const _dutchSourceSl = {
 
 const _dutchSourceAddSl = <String, String>{
   'De export is mislukt.': 'Izvoz ni uspel.',
+  'Presenteer vanaf hier': 'Predstavi od tukaj',
   'Teams-gastclient (ontwerp)': 'Odjemalec Teams za goste (zasnova)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kako široko se sme to gradivo deliti?',

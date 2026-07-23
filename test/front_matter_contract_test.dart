@@ -328,7 +328,8 @@ style: |
           tlp: TlpLevel.amber,
           privacy: PrivacyDisposition.redact,
           presentationTargetSeconds: 600,
-          showRehearsalSummary: false,
+          showRehearsalSummary:
+              true, // #607: true is nu de niet-standaard, dus geschreven
           playOnly: true,
           finalized: true,
           sealHash: 'abc',
