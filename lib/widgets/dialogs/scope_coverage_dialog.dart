@@ -34,7 +34,7 @@ class ScopeCoverageDialog extends StatelessWidget {
                     Icon(
                       Icons.check_circle_outline,
                       size: 18,
-                      color: AppTheme.severityLow,
+                      color: AppTheme.successFg,
                     ),
                     const SizedBox(width: 8),
                     Expanded(child: Text(l10n.d('Geen dekkingsgaten'))),

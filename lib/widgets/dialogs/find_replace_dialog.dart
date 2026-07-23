@@ -159,9 +159,9 @@ class _FindReplaceDialogState extends State<FindReplaceDialog> {
             : _replaced == 1
             ? '1 ${l10n.d('vervangen')}'
             : '$_replaced ${l10n.d('vervangen')}',
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 12,
-          color: AppTheme.success700,
+          color: AppTheme.successFg,
           fontWeight: FontWeight.w600,
         ),
       );

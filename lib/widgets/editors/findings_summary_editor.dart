@@ -165,8 +165,8 @@ class _FindingsSummaryEditorState extends State<FindingsSummaryEditor>
         Container(
           width: 12,
           height: 12,
-          decoration: const BoxDecoration(
-            color: AppTheme.success700,
+          decoration: BoxDecoration(
+            color: AppTheme.successFg,
             shape: BoxShape.circle,
           ),
         ),

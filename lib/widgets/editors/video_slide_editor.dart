@@ -295,9 +295,9 @@ class _SourceKindChip extends StatelessWidget {
     // uit als een fout, náást een kwaliteitspaneel waar rood écht "fout"
     // betekent. Een online bron is een online bron — teal, net als de andere.
     final (label, color) = switch (source.kind) {
-      VideoSourceKind.youtube => ('YouTube', AppTheme.teal),
+      VideoSourceKind.youtube => ('YouTube', AppTheme.tealFg),
       VideoSourceKind.vimeo => ('Vimeo', AppTheme.cyan),
-      VideoSourceKind.remoteFile => (l10n.d('Online'), AppTheme.teal),
+      VideoSourceKind.remoteFile => (l10n.d('Online'), AppTheme.tealFg),
       VideoSourceKind.localFile => (
         l10n.d('Lokaal bestand'),
         AppTheme.slate500,

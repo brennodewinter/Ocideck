@@ -97,7 +97,7 @@ class AssetUsageDialog extends StatelessWidget {
       colour = AppTheme.amber600;
     } else {
       usage = l10n.d('nergens meer gevonden');
-      colour = AppTheme.severityCritical;
+      colour = AppTheme.dangerFg;
     }
 
     return ListTile(

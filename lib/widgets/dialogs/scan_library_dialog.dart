@@ -355,7 +355,7 @@ class _ThemeBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final isOci = hit.isOcideckTheme;
     final label = isOci ? 'OciDeck' : (hit.theme ?? l10n.d('Geen thema'));
-    final color = isOci ? AppTheme.accent : AppTheme.slate400;
+    final color = isOci ? AppTheme.accentFg : AppTheme.slate400;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
       decoration: BoxDecoration(

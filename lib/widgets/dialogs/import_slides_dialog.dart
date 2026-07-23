@@ -544,7 +544,7 @@ class _SlideCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
                     border: Border.all(
-                      color: selected ? AppTheme.accent : AppTheme.slate300,
+                      color: selected ? AppTheme.accentFg : AppTheme.slate300,
                       width: selected ? 2.5 : 1,
                     ),
                   ),
@@ -572,7 +572,7 @@ class _SlideCard extends StatelessWidget {
                       width: 22,
                       height: 22,
                       decoration: BoxDecoration(
-                        color: selected ? AppTheme.accent : Colors.black38,
+                        color: selected ? AppTheme.accentFg : Colors.black38,
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white, width: 1.5),
                       ),

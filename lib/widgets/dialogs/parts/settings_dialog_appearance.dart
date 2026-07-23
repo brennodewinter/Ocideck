@@ -469,7 +469,7 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
       decoration: BoxDecoration(
         color: AppTheme.accent.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(8),
-        border: Border(left: BorderSide(color: AppTheme.accent, width: 3)),
+        border: Border(left: BorderSide(color: AppTheme.accentFg, width: 3)),
       ),
       child: Row(
         children: [

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/theme/app_theme.dart';
@@ -17,20 +19,25 @@ import 'package:ocideck/utils/color_contrast.dart';
 /// nieuw geval erbij, én een geval dat gerepareerd is maar in de lijst blijft
 /// staan. Zo kan de lijst alleen maar korter worden.
 void main() {
-  /// Tokens die de app als **tekst** op [AppTheme.paper] zet, met de gemeten
-  /// verhouding in donkere modus.
+  /// De vaste tokens en de achtergrond waarop ze werkelijk gelezen worden:
+  /// **het diacanvas**, dat wit is.
   ///
-  /// Niet elk kleurtoken staat hier: een vulkleur of een randkleur hoeft de
-  /// tekstlat niet te halen. Wat hier staat is wat ergens als
-  /// `TextStyle(color: …)` of als icoonkleur op het papieren oppervlak terecht
-  /// komt.
-  /// `accent`, `navy` en `teal` stonden hier tot #606 ook in. Ze zijn er nu
-  /// uit, en niet omdat ze plotseling slagen: hun tékstgebruik in de interface
-  /// is verhuisd naar de mode-afhankelijke [modeAware]-tegenhangers hieronder.
-  /// Wat er van de merkkleuren overblijft zijn vlakken, randen en dia-inhoud —
-  /// en dia-inhoud rendert op de dia, niet op dit oppervlak, dus tegen `paper`
-  /// meten zou daar het verkeerde paar zijn.
-  const measured = <String, int>{
+  /// Tot #606 werden deze tegen [AppTheme.paper] gemeten — het oppervlak van de
+  /// interface. Dat was een categoriefout die de helft van de basislijn vulde:
+  /// een ernstkleur van een bevinding staat op een dia, niet op een dialoog, en
+  /// tegen een donker chrome-oppervlak meten zegt niets over waar hij gelezen
+  /// wordt. Ze zijn `const` met een reden — een dia moet in een headless
+  /// export-isolate identiek renderen aan de preview (PENTEST_MIAUW §11) — dus
+  /// mode-afhankelijk maken kón hier ook niet.
+  ///
+  /// De interface gebruikt ze sinds #606 niet meer als tekst; dat bewaakt
+  /// [_geenVasteKleurAlsChromeTekst] hieronder. Wat hier gemeten wordt is of ze
+  /// op hun eigen achtergrond deugen.
+  const slideCanvas = Color(0xFFFFFFFF);
+
+  /// Vaste tokens die als **gewone tekst** op een dia staan: statuslabels in een
+  /// checklist, een scope-matrix, een scorecard. Lat: 4,5:1 (WCAG 1.4.3).
+  const alsTekstOpDia = <String, int>{
     'severityCritical': 0xFFB91C1C,
     'danger700': 0xFFB91C1C,
     'checklistAnomaly': 0xFFB91C1C,
@@ -43,11 +50,23 @@ void main() {
     'severityNone': 0xFF475569,
     'checklistNotTested': 0xFF64748B,
     'scopeNotTested': 0xFF64748B,
-
-    'severityHigh': 0xFFEA580C,
-    'severityMedium': 0xFFD97706,
     'checklistNotTestable': 0xFFB45309,
     'scopeDeviation': 0xFFB45309,
+  };
+
+  /// De twee ernstbanden die **nooit** gewone tekst zijn. Ze verschijnen als een
+  /// tint van 6% achter de kopkaart, als randstreep ernaast, en als vulling van
+  /// een badge met wit vet label van ~30px op een dia van 1280 — dat laatste is
+  /// grote tekst.
+  ///
+  /// Voor alle drie geldt 3:1, niet 4,5:1: WCAG 1.4.11 voor grafische objecten
+  /// en 1.4.3 voor grote tekst. Ze stonden tot #606 in de basislijn als schuld,
+  /// gemeten tegen de lat voor bodytekst die op hen niet van toepassing is.
+  /// Dat was geen defect maar een verkeerd paar — en een basislijn die schuld
+  /// opschrijft die er niet is, maakt de rest van de lijst ongeloofwaardig.
+  const alsAccentOpDia = <String, int>{
+    'severityHigh': 0xFFEA580C,
+    'severityMedium': 0xFFD97706,
   };
 
   /// De mode-afhankelijke tegenhangers, gemeten in de modus die ze schilderen.
@@ -74,71 +93,39 @@ void main() {
     _ => throw ArgumentError(naam),
   };
 
-  /// De tokens die de AA-lat voor gewone tekst (4,5:1) niet halen, per modus.
-  /// Schuld, geen vrijstelling: elke regel is een plek waar de app zichzelf niet
-  /// houdt aan wat ze van jouw dia's eist.
-  ///
-  /// Dat de lichte modus óók twee regels heeft is niet wat #606 verwachtte —
-  /// dat issue mat alleen tegen de donkere achtergrond en noemde licht impliciet
-  /// in orde. Oranje op wit is dat niet: `severityHigh` (#EA580C) en
-  /// `severityMedium` (#D97706) halen 3,6:1 en 3,3:1. Ze staan hier omdat een
-  /// basislijn die alleen de helft opschrijft die je toevallig gemeten hebt,
-  /// erger is dan geen basislijn.
-  const baselineDark = <String>{
-    'severityCritical',
-    'danger700',
-    'checklistAnomaly',
-    'scopeUnreachable',
-    'severityLow',
-    'checklistTested',
-    'scopeTested',
-    'success700',
-    'success800',
-    'severityNone',
-    'checklistNotTested',
-    'scopeNotTested',
-    'checklistNotTestable',
-    'scopeDeviation',
-  };
-  const baselineLight = <String>{'severityHigh', 'severityMedium'};
-
-  Set<String> failingAt({required bool dark}) {
-    AppTheme.isDark = dark;
-    final paper = AppTheme.paper;
-    return {
-      for (final entry in measured.entries)
-        if (contrastRatio(Color(entry.value), paper) < kWcagAaNormalText)
-          entry.key,
-    };
-  }
-
   tearDown(() => AppTheme.isDark = false);
 
-  for (final (naam, dark, basislijn) in [
-    ('donker', true, baselineDark),
-    ('licht', false, baselineLight),
-  ]) {
-    test('$naam: geen contrastprobleem buiten de basislijn', () {
-      expect(
-        failingAt(dark: dark).difference(basislijn),
-        isEmpty,
-        reason:
-            'nieuw contrastprobleem in de ${naam}e modus; repareer het token '
-            'of verantwoord het bewust in de basislijn',
-      );
+  test('de vaste dia-tokens zijn leesbaar als tekst op het diacanvas', () {
+    // Hun eigen achtergrond, in beide modi dezelfde: een dia is een wit vlak.
+    final tekort = <String, double>{};
+    alsTekstOpDia.forEach((naam, waarde) {
+      final ratio = contrastRatio(Color(waarde), slideCanvas);
+      if (ratio < kWcagAaNormalText) tekort[naam] = ratio;
     });
+    expect(
+      tekort,
+      isEmpty,
+      reason:
+          'deze kleuren staan als tekst op een dia en horen daar 4,5:1 te '
+          'halen — mode-afhankelijk maken kan niet (export-isolate): $tekort',
+    );
+  });
 
-    test('$naam: een gerepareerd token verdwijnt ook uit de basislijn', () {
-      // De andere richting, en die is even belangrijk: een basislijn die blijft
-      // staan nadat het probleem weg is, is geen schuldadministratie meer maar
-      // een lijst die niemand nog gelooft.
-      expect(
-        basislijn.difference(failingAt(dark: dark)),
-        isEmpty,
-        reason: 'dit token haalt de lat inmiddels — haal het uit de basislijn',
-      );
+  test('de accent-only dia-tokens halen de lat voor grafische objecten', () {
+    // 3:1, want vulling, randstreep en groot vet badge-label — geen bodytekst.
+    final tekort = <String, double>{};
+    alsAccentOpDia.forEach((naam, waarde) {
+      final ratio = contrastRatio(Color(waarde), slideCanvas);
+      if (ratio < kWcagAaLargeText) tekort[naam] = ratio;
     });
-  }
+    expect(
+      tekort,
+      isEmpty,
+      reason:
+          'wordt dit token alsnog bodytekst, verhuis het dan naar '
+          'alsTekstOpDia — dan is 3:1 niet meer genoeg: $tekort',
+    );
+  });
 
   group('de mode-afhankelijke tekstkleuren halen de lat wél', () {
     // Daar zijn ze voor. Zonder deze toets kan iemand een Fg-token invoeren dat
@@ -162,5 +149,67 @@ void main() {
         );
       });
     }
+  });
+
+  // ── De bronwacht ──────────────────────────────────────────────────────────
+  //
+  // De rekensom hierboven bewaakt de kleuren; deze bewaakt waar ze landen. Dat
+  // is wat #606 werkelijk vroeg: elk van de ~200 gebruiken lezen als dia-inhoud
+  // (vast laten) of als chrome (mode-afhankelijk maken). Zonder deze wacht komt
+  // de volgende `AppTheme.navy` in een dialoog er ongemerkt weer in, en dan is
+  // de audit eenmalig geweest in plaats van vastgezet.
+  //
+  // Alleen `color:`-toekenningen tellen — dat is tekst of een icoon. Een
+  // vulling (`backgroundColor:`), een tint (`withValues(alpha:`), een
+  // gradiëntstop of een `Container(color:)` valt er bewust buiten: daar geldt
+  // de bodytekst-lat niet, en de merkkleur is daar juist gewenst.
+  test('geen vaste merk- of ernstkleur als tekstkleur in de chrome', () {
+    const vast = [
+      'accent', 'navy', 'teal', 'danger700', 'success700', 'success800',
+      'severityCritical', 'severityLow', 'scopeTested', //
+    ];
+    // Waar een dia gerenderd wordt. Daar hóórt de vaste kleur, want een export
+    // draait in een isolate zonder AppTheme.isDark (PENTEST_MIAUW §11).
+    bool rendertEenDia(String pad) =>
+        pad.contains('/slides/') ||
+        pad.contains('/marp_html_service') ||
+        pad.endsWith('finding_severity_palette.dart') ||
+        pad.endsWith('signature_draw_dialog.dart');
+
+    final overtreders = <String>[];
+    for (final entity in Directory('lib').listSync(recursive: true)) {
+      if (entity is! File || !entity.path.endsWith('.dart')) continue;
+      if (rendertEenDia(entity.path)) continue;
+      final regels = entity.readAsLinesSync();
+      for (var i = 0; i < regels.length; i++) {
+        final regel = regels[i];
+        if (regel.contains('withValues(') ||
+            regel.contains('backgroundColor')) {
+          continue;
+        }
+        // `color:` betekent tekst óf een vlak, en dat verschil staat een regel
+        // hoger: `Container(` en `BoxDecoration(` maken er een vulling van, en
+        // daar is de merkkleur juist goed — het label erop draagt het contrast.
+        final context = regels.sublist(i >= 2 ? i - 2 : 0, i).join(' ');
+        if (context.contains('BoxDecoration(') ||
+            context.contains('Container(') ||
+            context.contains('decoration:')) {
+          continue;
+        }
+        for (final token in vast) {
+          if (RegExp('color:\\s*AppTheme\\.$token\\b').hasMatch(regel)) {
+            overtreders.add('${entity.path}:${i + 1}  $token');
+          }
+        }
+      }
+    }
+    expect(
+      overtreders,
+      isEmpty,
+      reason:
+          'gebruik in de interface de mode-afhankelijke variant (accentFg, '
+          'brandFg, tealFg, dangerFg, successFg); de vaste kleur is voor wat '
+          'een dia wordt:\n${overtreders.join('\n')}',
+    );
   });
 }

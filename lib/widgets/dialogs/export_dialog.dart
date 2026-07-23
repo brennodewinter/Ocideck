@@ -568,7 +568,7 @@ class _ExportDialogState extends State<ExportDialog> {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 13,
-              color: _success ? AppTheme.success800 : Colors.red[800],
+              color: _success ? AppTheme.successFg : Colors.red[800],
             ),
           ),
           if (_success && _outputPath != null) ...[

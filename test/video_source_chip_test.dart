@@ -75,6 +75,8 @@ void main() {
     }
 
     // De laatst gepompte bron is de directe .mp4-URL → "Online".
-    expect(_chipColor(tester, 'Online'), AppTheme.teal);
+    // `tealFg` sinds #606: de chip staat in de editor, dus chrome — de vaste
+    // merkkleur was daar in donkere modus niet te lezen.
+    expect(_chipColor(tester, 'Online'), AppTheme.tealFg);
   });
 }

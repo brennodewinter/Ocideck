@@ -858,7 +858,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         decoration: highlighted
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppTheme.accent, width: 2),
+                border: Border.all(color: AppTheme.accentFg, width: 2),
                 color: AppTheme.accent.withValues(alpha: 0.06),
               )
             : null,

@@ -268,7 +268,7 @@ class SlideThumbnail extends ConsumerWidget {
     // onsplitsbaar zou maken.
     final canSplit = canSplitSlide(slide);
     final borderColor = isSelected
-        ? AppTheme.accent
+        ? AppTheme.accentFg
         : withheld
         ? AppTheme.badgeErrorOverlay
         : skipped

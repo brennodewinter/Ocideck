@@ -817,7 +817,7 @@ extension _SettingsColors on _SettingsDialogState {
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: selected ? AppTheme.accent : AppTheme.slate300,
+              color: selected ? AppTheme.accentFg : AppTheme.slate300,
               width: selected ? 2 : 1,
             ),
           ),

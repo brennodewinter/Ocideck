@@ -141,7 +141,7 @@ class _SlideDiffDialogState extends State<SlideDiffDialog> {
   }
 
   Widget _previewColumn(SlideDiffRef ref, {required bool accent}) {
-    final color = accent ? AppTheme.accent : AppTheme.slate400;
+    final color = accent ? AppTheme.accentFg : AppTheme.slate400;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -235,7 +235,7 @@ class _SlideDiffDialogState extends State<SlideDiffDialog> {
         borderRadius: BorderRadius.circular(5),
         border: Border(
           left: BorderSide(
-            color: accent ? AppTheme.accent : AppTheme.slate400,
+            color: accent ? AppTheme.accentFg : AppTheme.slate400,
             width: 2.5,
           ),
         ),

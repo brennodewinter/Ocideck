@@ -563,7 +563,7 @@ class _SlideHitCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
                     border: Border.all(
-                      color: added ? AppTheme.accent : AppTheme.slate300,
+                      color: added ? AppTheme.accentFg : AppTheme.slate300,
                       width: added ? 2 : 1,
                     ),
                   ),
@@ -626,7 +626,7 @@ class _SlideHitCard extends StatelessWidget {
                   label: Text(l10n.d('Toegevoegd')),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: AppTheme.accentFg,
-                    side: const BorderSide(color: AppTheme.accent),
+                    side: BorderSide(color: AppTheme.accentFg),
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     textStyle: const TextStyle(fontSize: 11),
                   ),

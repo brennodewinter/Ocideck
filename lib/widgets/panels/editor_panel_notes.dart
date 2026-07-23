@@ -286,7 +286,7 @@ class _UserNotesFieldState extends State<_UserNotesField> {
                 key: ValueKey('discard-user-notes-${widget.slide.id}'),
                 controller: _ctrl,
                 onDiscard: _discardNotes,
-                color: AppTheme.accent,
+                color: AppTheme.accentFg,
               ),
             ],
           ),

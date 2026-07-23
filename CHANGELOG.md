@@ -94,6 +94,26 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Fixed
+- **De interface hield zich niet aan de contrasteis die ze aan jouw dia's
+  stelt.** OciDeck rekent na of jouw tekst leesbaar is en meldt wat zakt; in
+  donkere modus verdween de eigen navy zo goed als helemaal en haalde het
+  accentblauw 3,3:1. Zevenendertig plekken — tekst en iconen in dialogen,
+  editors, panelen en de schil — gebruiken nu de mode-afhankelijke varianten.
+
+  De vaste kleuren zelf zijn níét veranderd, en dat is het punt. Wat op een dia
+  landt moet in de preview en in een headless export-isolate identiek renderen;
+  een kleur die met het thema meebeweegt zou twee verschillende PDF's van één
+  deck opleveren. De scheiding is dus niet licht-tegen-donker maar chrome tegen
+  inhoud, en alle 33 goldens bevestigen dat de dia's byte-identiek bleven.
+
+  Onderweg bleek de meting zelf scheef: de eerste ronde legde élk vast token
+  naast het interface-oppervlak en noteerde zeventien tekortkomingen. Maar een
+  ernstkleur wordt op een dia gelezen, en die is wit. Tegen de juiste
+  achtergrond en de juiste lat — 4,5:1 voor tekst, 3:1 voor een vlak of een
+  groot vet label — haalt alles het. Er staat nu geen contrastschuld meer open,
+  en dat is eerlijker dan een lijst die schuld opschrijft die er niet is.
+
 ### Changed
 - **Presenteren begint nu bij dia 1, niet bij de dia die je bewerkt.** Wie op
   dia 12 werkte en op afspelen drukte, viel met de zaal middenin de presentatie

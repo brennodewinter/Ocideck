@@ -496,7 +496,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(6),
-            borderSide: const BorderSide(color: AppTheme.accent),
+            borderSide: BorderSide(color: AppTheme.accentFg),
           ),
         ),
       ),

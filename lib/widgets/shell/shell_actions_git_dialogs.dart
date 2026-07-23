@@ -409,12 +409,12 @@ class _VersionDiffDialog extends StatelessWidget {
     final (icon, colour, kindLabel) = switch (change.kind) {
       SlideChangeKind.added => (
         Icons.add_circle_outline,
-        AppTheme.severityLow,
+        AppTheme.successFg,
         l10n.d('toegevoegd'),
       ),
       SlideChangeKind.removed => (
         Icons.remove_circle_outline,
-        AppTheme.severityCritical,
+        AppTheme.dangerFg,
         l10n.d('verwijderd'),
       ),
       SlideChangeKind.edited => (
