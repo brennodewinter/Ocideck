@@ -1795,6 +1795,20 @@ const _dutchSourceAddPl = <String, String>{
       'Wybierz backend na karcie Wsparcie AI. Dopóki nic tam nie ustawiono, nic się nie dzieje.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Przykładowe slajdy szablonu są po angielsku. Nazwa i opis podążają za Twoim językiem; treść dostosujesz po utworzeniu.',
+  'Meer': 'Więcej',
+  'Leesbaarheid van dit profiel': 'Czytelność tego profilu',
+  'Alle onderdelen halen de norm.': 'Wszystkie elementy spełniają normę.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Te proporcje dotyczą samej aplikacji, a nie twoich slajdów.',
+  'Tekst op kaarten en dialogen': 'Tekst na kartach i w oknach dialogowych',
+  'Tekst op de schermachtergrond': 'Tekst na tle ekranu',
+  'Tekst en pictogrammen in de zijbalk': 'Tekst i ikony na pasku bocznym',
+  'Titel in de bovenbalk': 'Tytuł na górnym pasku',
+  'Tekstknoppen en links': 'Przyciski tekstowe i odnośniki',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Pola wyboru, przełączniki i kursor tekstu',
+  'Het vinkje in een aangevinkt vakje': 'Znacznik w zaznaczonym polu',
+  'Label op de primaire knop': 'Etykieta na przycisku głównym',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Ustalenia, które zostały sprawdzone i pozostawione. Nie są już zgłaszane, ale skan nadal je znajduje i nie liczą się jako rozwiązane. Dotknij, aby przywrócić jedno z nich.',
   'Privacybevinding terzijde leggen (ontwerp)':

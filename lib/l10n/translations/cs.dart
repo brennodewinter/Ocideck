@@ -1786,6 +1786,20 @@ const _dutchSourceAddCs = <String, String>{
       'Backend zvolte na kartě Asistence AI. Dokud tam nic není nastaveno, nic se neděje.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Ukázkové snímky šablony jsou v angličtině. Název a popis se řídí tvým jazykem; obsah upravíš po vytvoření.',
+  'Meer': 'Více',
+  'Leesbaarheid van dit profiel': 'Čitelnost tohoto profilu',
+  'Alle onderdelen halen de norm.': 'Všechny části splňují normu.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Tyto poměry se týkají samotné aplikace, nikoli vašich snímků.',
+  'Tekst op kaarten en dialogen': 'Text na kartách a v dialozích',
+  'Tekst op de schermachtergrond': 'Text na pozadí obrazovky',
+  'Tekst en pictogrammen in de zijbalk': 'Text a ikony v postranním panelu',
+  'Titel in de bovenbalk': 'Nadpis v horním panelu',
+  'Tekstknoppen en links': 'Textová tlačítka a odkazy',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Zaškrtávací pole, přepínače a textový kurzor',
+  'Het vinkje in een aangevinkt vakje': 'Zaškrtnutí v zaškrtnutém poli',
+  'Label op de primaire knop': 'Popisek na hlavním tlačítku',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Zjištění, která byla posouzena a ponechána. Už se nehlásí, ale sken je stále nachází a nepočítají se jako vyřešená. Klepnutím jedno vrátíš.',
   'Privacybevinding terzijde leggen (ontwerp)':

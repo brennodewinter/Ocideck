@@ -1810,6 +1810,21 @@ const _dutchSourceAddEl = <String, String>{
       'Επιλέξτε το backend στην καρτέλα Υποστήριξη AI. Όσο δεν έχει οριστεί τίποτα εκεί, δεν συμβαίνει τίποτα.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Οι διαφάνειες παραδείγματος ενός προτύπου είναι στα αγγλικά. Το όνομα και η περιγραφή ακολουθούν τη δική σας γλώσσα· το περιεχόμενο το προσαρμόζετε μετά τη δημιουργία.',
+  'Meer': 'Περισσότερα',
+  'Leesbaarheid van dit profiel': 'Αναγνωσιμότητα αυτού του προφίλ',
+  'Alle onderdelen halen de norm.': 'Όλα τα στοιχεία πληρούν το πρότυπο.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Αυτές οι αναλογίες αφορούν την ίδια την εφαρμογή, όχι τις διαφάνειές σας.',
+  'Tekst op kaarten en dialogen': 'Κείμενο σε κάρτες και παράθυρα διαλόγου',
+  'Tekst op de schermachtergrond': 'Κείμενο στο φόντο της οθόνης',
+  'Tekst en pictogrammen in de zijbalk':
+      'Κείμενο και εικονίδια στην πλαϊνή μπάρα',
+  'Titel in de bovenbalk': 'Τίτλος στην επάνω μπάρα',
+  'Tekstknoppen en links': 'Κουμπιά κειμένου και σύνδεσμοι',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Πλαίσια ελέγχου, διακόπτες και δρομέας κειμένου',
+  'Het vinkje in een aangevinkt vakje': 'Το σημάδι σε ένα επιλεγμένο πλαίσιο',
+  'Label op de primaire knop': 'Ετικέτα στο κύριο κουμπί',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Ευρήματα που έχεις εξετάσει και άφησες όπως είναι. Δεν αναφέρονται πλέον, αλλά η σάρωση συνεχίζει να τα βρίσκει και δεν μετρούν ως επιλυμένα. Πάτησε για να επαναφέρεις ένα.',
   'Privacybevinding terzijde leggen (ontwerp)':

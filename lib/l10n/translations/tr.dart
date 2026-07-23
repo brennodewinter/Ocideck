@@ -2762,6 +2762,20 @@ const _dutchSourceAddTr = <String, String>{
       'Arka ucu AI yardımı sekmesinde seçin. Orada bir şey seçili olmadığı sürece hiçbir şey olmaz.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Bir şablonun örnek slaytları İngilizcedir. Ad ve açıklama kendi dilinizi izler; içeriği oluşturduktan sonra kendiniz düzenlersiniz.',
+  'Meer': 'Daha fazla',
+  'Leesbaarheid van dit profiel': 'Bu profilin okunabilirliği',
+  'Alle onderdelen halen de norm.': 'Tüm ögeler standardı karşılıyor.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Bu oranlar slaytlarınızla değil, uygulamanın kendisiyle ilgilidir.',
+  'Tekst op kaarten en dialogen': 'Kartlardaki ve iletişim kutularındaki metin',
+  'Tekst op de schermachtergrond': 'Ekran arka planındaki metin',
+  'Tekst en pictogrammen in de zijbalk': 'Kenar çubuğundaki metin ve simgeler',
+  'Titel in de bovenbalk': 'Üst çubuktaki başlık',
+  'Tekstknoppen en links': 'Metin düğmeleri ve bağlantılar',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Onay kutuları, anahtarlar ve metin imleci',
+  'Het vinkje in een aangevinkt vakje': 'İşaretli kutudaki onay imi',
+  'Label op de primaire knop': 'Birincil düğmedeki etiket',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'İncelediğiniz ve olduğu gibi bıraktığınız bulgular. Bunlar artık bildirilmez, ancak tarama onları bulmaya devam eder ve çözülmüş sayılmaz. Birini geri getirmek için dokunun.',
   'Privacybevinding terzijde leggen (ontwerp)':

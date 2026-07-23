@@ -923,6 +923,20 @@ const _dutchSourceAddEn = {
       'Choose the backend on the AI assistance tab. As long as nothing is set there, nothing happens.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'A template\'s example slides are in English. The name and description follow your own language; you adapt the content after creating it.',
+  'Meer': 'More',
+  'Leesbaarheid van dit profiel': 'Legibility of this profile',
+  'Alle onderdelen halen de norm.': 'Every part meets the standard.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'These ratios are about the app itself, not about your slides.',
+  'Tekst op kaarten en dialogen': 'Text on cards and dialogs',
+  'Tekst op de schermachtergrond': 'Text on the screen background',
+  'Tekst en pictogrammen in de zijbalk': 'Text and icons in the sidebar',
+  'Titel in de bovenbalk': 'Title in the top bar',
+  'Tekstknoppen en links': 'Text buttons and links',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Checkboxes, switches and the text cursor',
+  'Het vinkje in een aangevinkt vakje': 'The tick in a ticked box',
+  'Label op de primaire knop': 'Label on the primary button',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Findings you reviewed and left in place. They are no longer reported, but the scan still finds them and they do not count as resolved. Tap to restore one.',
   'Privacybevinding terzijde leggen (ontwerp)':

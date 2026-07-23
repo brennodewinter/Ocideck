@@ -1786,6 +1786,20 @@ const _dutchSourceAddGsw = <String, String>{
       'Wähl s Backend im Tab KI-Unterstützig. Solang det nüt staht, passiert nüt.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'D Bispilfolie vo ere Vorlag sind uf Änglisch. Name und Beschriibig folged dinere eigete Sprooch; de Inhalt passisch nach em Aalege aa.',
+  'Meer': 'Meh',
+  'Leesbaarheid van dit profiel': 'Läsbarkeit vo dem Profil',
+  'Alle onderdelen halen de norm.': 'Alli Teil erfülled d Norm.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Die Verhältnis gälted für d App sälber, nöd für Ihri Folie.',
+  'Tekst op kaarten en dialogen': 'Täxt uf Charte und Dialog',
+  'Tekst op de schermachtergrond': 'Täxt uf em Bildschirmhintergrund',
+  'Tekst en pictogrammen in de zijbalk': 'Täxt und Symbol i de Sitenläiste',
+  'Titel in de bovenbalk': 'Titel i de obere Läiste',
+  'Tekstknoppen en links': 'Täxtchnöpf und Links',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Chäschtli, Schalter und de Täxtcursor',
+  'Het vinkje in een aangevinkt vakje': 'S Häkli i mene aagchrüzte Chäschtli',
+  'Label op de primaire knop': 'Beschriftig uf em Hauptchnopf',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Befünd wo du aagluegt und stoh gloh häsch. Die wärded nüme gmäldet, aber de Scan findt si witerhin und si gälted nöd als glöst. Tipp zum eis zrugghole.',
   'Privacybevinding terzijde leggen (ontwerp)':

@@ -1783,6 +1783,21 @@ const _dutchSourceAddId = <String, String>{
       'Pilih backend di tab Bantuan AI. Selama belum ada yang diatur di sana, tidak ada yang terjadi.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Slide contoh dari sebuah templat berbahasa Inggris. Nama dan deskripsi mengikuti bahasa Anda sendiri; isinya Anda sesuaikan setelah dibuat.',
+  'Meer': 'Lainnya',
+  'Leesbaarheid van dit profiel': 'Keterbacaan profil ini',
+  'Alle onderdelen halen de norm.': 'Semua bagian memenuhi standar.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Rasio ini tentang aplikasinya sendiri, bukan tentang slide Anda.',
+  'Tekst op kaarten en dialogen': 'Teks pada kartu dan dialog',
+  'Tekst op de schermachtergrond': 'Teks pada latar belakang layar',
+  'Tekst en pictogrammen in de zijbalk': 'Teks dan ikon di bilah sisi',
+  'Titel in de bovenbalk': 'Judul di bilah atas',
+  'Tekstknoppen en links': 'Tombol teks dan tautan',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Kotak centang, sakelar dan kursor teks',
+  'Het vinkje in een aangevinkt vakje':
+      'Tanda centang dalam kotak yang dicentang',
+  'Label op de primaire knop': 'Label pada tombol utama',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Temuan yang sudah kamu tinjau dan kamu biarkan. Temuan ini tidak dilaporkan lagi, tetapi pemindaian tetap menemukannya dan tidak dihitung sebagai selesai. Ketuk untuk memulihkan salah satunya.',
   'Privacybevinding terzijde leggen (ontwerp)':

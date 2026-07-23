@@ -410,6 +410,17 @@ class AppTheme {
     Color accentColor,
   ) => profile.isDark ? accentColor : primary;
 
+  /// Zwart of wit op [fill] — welke van de twee er het best op leest.
+  ///
+  /// Puur een som over [fill] zelf. Hier stond een regel die óók naar de
+  /// helderheid van het thema keek (`brightness == light && luminance > 0.6 ?
+  /// zwart : wit`), en die dwong in donkere modus altijd wit af — ook op het
+  /// lichte accent `#60A5FA` van het profiel Donker. Dat is 2,54:1, en het is
+  /// het label van de opslaan-knop. Welk thema eromheen staat verandert niets
+  /// aan wat er óp een gevulde knop leesbaar is (#750).
+  static Color _labelOn(Color fill) =>
+      fill.computeLuminance() > 0.179 ? Colors.black : Colors.white;
+
   static ThemeData fromProfile(AppAppearanceProfile profile) {
     final primary = parseHexColor(profile.primaryColor, fallback: navy);
     final accentColor = parseHexColor(profile.accentColor, fallback: accent);
@@ -523,11 +534,7 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: accentColor,
-          foregroundColor:
-              scheme.brightness == Brightness.light &&
-                  accentColor.computeLuminance() > 0.6
-              ? Colors.black
-              : Colors.white,
+          foregroundColor: _labelOn(accentColor),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),

@@ -743,6 +743,20 @@ const _dutchSourceAddFy = {
       'Kies de backend op it ljepblêd AI-stipe. Salang\'t dêr neat stiet, bart der neat.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'De foarbylddia\'s fan in sjabloan steane yn it Ingelsk. Namme en omskriuwing folgje dyn eigen taal; de ynhâld kinst nei it oanmeitsjen oanpasse.',
+  'Meer': 'Mear',
+  'Leesbaarheid van dit profiel': 'Lêsberens fan dit profyl',
+  'Alle onderdelen halen de norm.': 'Alle ûnderdielen helje de noarm.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Dizze ferhâldings geane oer de app sels, net oer dyn slides.',
+  'Tekst op kaarten en dialogen': 'Tekst op kaarten en dialoochfinsters',
+  'Tekst op de schermachtergrond': 'Tekst op de skermeftergrûn',
+  'Tekst en pictogrammen in de zijbalk': 'Tekst en piktogrammen yn de sydbalke',
+  'Titel in de bovenbalk': 'Titel yn de boppebalke',
+  'Tekstknoppen en links': 'Tekstknoppen en keppelings',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Karfakjes, skeakelers en de tekstrinner',
+  'Het vinkje in een aangevinkt vakje': 'It flinkje yn in oanfinke fakje',
+  'Label op de primaire knop': 'Label op de primêre knop',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Befiningen dy\'t sto beoardield en stean litten hast. Dy wurde net mear meld, mar de scan fynt se noch altyd en se telle net as oplost. Tik om der ien werom te setten.',
   'Privacybevinding terzijde leggen (ontwerp)':

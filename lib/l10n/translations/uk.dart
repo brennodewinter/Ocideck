@@ -1800,6 +1800,20 @@ const _dutchSourceAddUk = <String, String>{
       'Оберіть бекенд на вкладці «Підтримка ШІ». Поки там нічого не вибрано, нічого не відбувається.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Приклади слайдів у шаблоні — англійською. Назва й опис відповідають вашій мові; вміст ви зміните після створення.',
+  'Meer': 'Більше',
+  'Leesbaarheid van dit profiel': 'Розбірливість цього профілю',
+  'Alle onderdelen halen de norm.': 'Усі елементи відповідають нормі.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Ці співвідношення стосуються самого застосунку, а не ваших слайдів.',
+  'Tekst op kaarten en dialogen': 'Текст на картках і в діалогах',
+  'Tekst op de schermachtergrond': 'Текст на тлі екрана',
+  'Tekst en pictogrammen in de zijbalk': 'Текст і піктограми на бічній панелі',
+  'Titel in de bovenbalk': 'Заголовок у верхній панелі',
+  'Tekstknoppen en links': 'Текстові кнопки та посилання',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Прапорці, перемикачі та текстовий курсор',
+  'Het vinkje in een aangevinkt vakje': 'Позначка в увімкненому прапорці',
+  'Label op de primaire knop': 'Напис на головній кнопці',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Виявлення, які ви переглянули й залишили. Про них більше не повідомляється, але сканування далі їх знаходить, і вони не вважаються усуненими. Торкніться, щоб повернути одне з них.',
   'Privacybevinding terzijde leggen (ontwerp)':

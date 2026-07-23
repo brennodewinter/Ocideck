@@ -138,7 +138,9 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
           ),
         ),
         const SizedBox(height: 8),
-        _appearancePreview(),
+        AppearancePreview(profile: _appearanceProfile),
+        const SizedBox(height: 12),
+        AppearanceLegibility(profile: _appearanceProfile),
       ],
     );
   }
@@ -316,92 +318,6 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
         border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
     );
-  }
-
-  Widget _appearancePreview() {
-    final profile = _appearanceProfile;
-    final foreground = AppTheme.parseHexColor(profile.textColor);
-    return Container(
-      height: 112,
-      decoration: BoxDecoration(
-        color: AppTheme.parseHexColor(profile.backgroundColor),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppTheme.parseHexColor(profile.panelColor)),
-      ),
-      child: Column(
-        children: [
-          Container(
-            height: 30,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            color: AppTheme.parseHexColor(profile.primaryColor),
-            child: Row(
-              children: [
-                Text(
-                  context.l10n.d('OciDeck'),
-                  style: TextStyle(
-                    color: _contrastColor(
-                      AppTheme.parseHexColor(profile.primaryColor),
-                    ),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  Container(
-                    width: 52,
-                    color: AppTheme.parseHexColor(profile.panelColor),
-                    alignment: Alignment.center,
-                    child: Icon(
-                      Icons.slideshow_outlined,
-                      color: AppTheme.parseHexColor(profile.panelTextColor),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      color: AppTheme.parseHexColor(profile.surfaceColor),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              context.l10n.d('Voorbeeldtekst'),
-                              style: TextStyle(color: foreground),
-                            ),
-                          ),
-                          FilledButton(
-                            style: FilledButton.styleFrom(
-                              backgroundColor: AppTheme.parseHexColor(
-                                profile.accentColor,
-                              ),
-                              foregroundColor: _contrastColor(
-                                AppTheme.parseHexColor(profile.accentColor),
-                              ),
-                            ),
-                            onPressed: () {},
-                            child: Text(context.l10n.d('Knop')),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Color _contrastColor(Color color) {
-    return color.computeLuminance() > 0.55 ? Colors.black : Colors.white;
   }
 
   /// Lettertype-keuze — hoort bij de stijl (themeProfile), niet bij de app.

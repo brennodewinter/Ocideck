@@ -1758,6 +1758,20 @@ const _dutchSourceAddTlh = <String, String>{
       'AI QaH \'echletDaq backend yIwIv. pa\' pagh tu\'lu\'taHvIS, qaSbe\' vay\'.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'ghItlh\'a\' cha\'nobmey: DIvI\' Hol lu\'. per QIn je: Hol lIj lu\'. chenpu\'DI\', qech yIchoH.',
+  'Meer': 'latlh',
+  'Leesbaarheid van dit profiel': 'vam Segh laDlaHghach',
+  'Alle onderdelen halen de norm.': 'Hoch Dochmey lugh.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'vam mI\'mey \'oH De\'wI\' \'e\' neH, nIteb HIvje\' rurbe\'.',
+  'Tekst op kaarten en dialogen': 'nav \'ej ja\'chuq ghItlh',
+  'Tekst op de schermachtergrond': 'jIH HaSta ghItlh',
+  'Tekst en pictogrammen in de zijbalk': '\'em SeHlaw ghItlh \'ej Degh',
+  'Titel in de bovenbalk': 'Dung SeHlaw pong',
+  'Tekstknoppen en links': 'ghItlh \'uy\'mey \'ej rar',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'wIv qegh, choHwI\' \'ej ghItlh naQ',
+  'Het vinkje in een aangevinkt vakje': 'wIvpu\'bogh qegh Degh',
+  'Label op de primaire knop': 'wa\'DIch \'uy\' per',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'DanoHpu\'bogh \'ej Dateqbe\'pu\'bogh SamwI\'ghachmey. luja\'lu\'be\'taH, \'ach luSamtaH nejwI\', \'ej rInpu\'be\'. wa\' DatatlhmeH yI\'uy.',
   'Privacybevinding terzijde leggen (ontwerp)':

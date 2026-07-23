@@ -739,6 +739,20 @@ const _dutchSourceAddEs = {
       'Elige el backend en la pestaña Asistencia de IA. Mientras allí no haya nada, no ocurre nada.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Las diapositivas de ejemplo de una plantilla están en inglés. El nombre y la descripción siguen tu propio idioma; el contenido lo adaptas después de crearla.',
+  'Meer': 'Más',
+  'Leesbaarheid van dit profiel': 'Legibilidad de este perfil',
+  'Alle onderdelen halen de norm.': 'Todos los elementos cumplen la norma.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Estas proporciones se refieren a la propia aplicación, no a tus diapositivas.',
+  'Tekst op kaarten en dialogen': 'Texto en tarjetas y diálogos',
+  'Tekst op de schermachtergrond': 'Texto sobre el fondo de pantalla',
+  'Tekst en pictogrammen in de zijbalk': 'Texto e iconos en la barra lateral',
+  'Titel in de bovenbalk': 'Título en la barra superior',
+  'Tekstknoppen en links': 'Botones de texto y enlaces',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Casillas, interruptores y cursor de texto',
+  'Het vinkje in een aangevinkt vakje': 'La marca en una casilla marcada',
+  'Label op de primaire knop': 'Etiqueta del botón principal',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Hallazgos que has revisado y has dejado tal cual. Ya no se notifican, pero el escaneo los sigue encontrando y no cuentan como resueltos. Toca para restaurar uno.',
   'Privacybevinding terzijde leggen (ontwerp)':

@@ -241,6 +241,44 @@ own fill, the caret clears 3:1 against the field, and the title bar must keep
 the profile's brand colour *with a legible title on it* — so a future light
 `primaryColor` fails the build rather than the eye.
 
+**All of that guards the three built-in profiles. The colour pickers do not
+build a fourth one.** *Settings → Appearance* lets anyone assemble a profile
+from eight free colours, so the same fault could be rebuilt by hand — a dark
+accent in a dark profile — with nothing to say so. The editor now measures it
+(#750): nine pairs under the preview, each with the ratio it reaches and the bar
+it had to clear, and the two colours that were compared. It warns rather than
+blocks; it is the user's own application, and the way back is one colour.
+Blocking belongs to export, where the result leaves the building.
+
+Two things about how it is built are the point rather than the detail.
+
+It measures **the theme the profile produces, not the eight fields**. Four of
+the nine pairs are not fields — the text-button foreground, the interactive
+colour, the tick on it and the primary button's label are derived in
+`AppTheme.fromProfile`. A checker that lines up the colour pickers would have
+declared the profile that caused #744 perfectly fine. And it is the *same*
+function the contrast test calls: two calculations answering one question drift,
+and then the test stops guarding what the screen promises.
+
+The **preview used to flatter**. It painted its own colours through a helper
+that picked black or white by luminance, while the real app uses
+`panelTextColor` for the bar title and a computed foreground for the button — so
+it showed a legible title bar over a profile that renders an illegible one. It
+now builds the real theme and renders inside it, and it shows a checkbox, a
+switch and a text button: the three roles that broke in #744 and that the old
+preview left out. A preview that shows the fault is worth more than a list of
+numbers underneath it, because it is the only thing anyone looks at before
+saving.
+
+*Running that measurement over the built-ins for the first time immediately
+turned up a ninth defect nobody had reported: the label on a filled button was
+chosen with `brightness == light && luminance > 0.6 ? black : white`, which
+forces white in dark mode — including on the dark profile's light `#60A5FA`
+accent, at 2.54:1. That is the Save button. The brightness of the surrounding
+theme has no bearing on what is readable on a button; only the button's own does.
+Black or white, whichever wins: 2.54 → 8.26:1, with both light profiles keeping
+the exact colour they had.*
+
 *Three smaller things the visual review turned up, now fixed: the export
 dialog had been migrated on its success branch but not its failure branch, so
 "the export failed" sat at 3.1:1 in dark mode while "exported to…" shone; the
