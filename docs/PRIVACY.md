@@ -16,7 +16,10 @@ technical mechanisms behind these guarantees, see
   lookups. It never sees a deck, it is off by default, and you can point the app
   somewhere else or use the offline database instead — but "no server" was an
   absolute claim and the exception belongs in the summary, not only in a table
-  170 lines down. See [The one server the publisher runs](#the-one-server-the-publisher-runs).)*
+  170 lines down. Extended 2026-07-23: there is a second one,
+  `ocideck.librekat.nl`, the public web demo — a copy of the app served by the
+  publisher, where your decks still stay in your tab but the origin is not
+  yours. See [The servers the publisher runs](#the-servers-the-publisher-runs).)*
 - **Almost everything that leaves your device is something you explicitly
   send** — by importing from a URL, saving to your own Nextcloud/git server, or
   turning on the AI assistant. Three paths are the exception, and two of them you
@@ -209,12 +212,16 @@ naming them is the only honest way to keep the sentence above true:
   That is not the same as "nothing is observed" — YouTube still sees the
   request, and the video bytes still come from its media hosts.
 
-### The one server the publisher runs
+### The servers the publisher runs
 
 Everything above goes to a service you chose, or to a video platform you
-embedded. One destination is different: **`cveapi.librekat.nl` is operated by
-Stichting LibreKAT**, the same foundation that publishes OciDeck. It is the
-default mirror for CVE lookups.
+embedded. Two destinations are different, and both are operated by **Stichting
+LibreKAT**, the same foundation that publishes OciDeck: `cveapi.librekat.nl`,
+the default mirror for CVE lookups, and `ocideck.librekat.nl`, the public web
+demo. The first you reach from your own copy of the app; the second *is* a copy
+of the app, served by the publisher.
+
+#### `cveapi.librekat.nl` — the CVE mirror
 
 **Why it deserves this much text.** What you look up is not neutral. Someone
 searching for a specific vulnerability is usually working on a specific system,
@@ -287,6 +294,49 @@ that shortened list rather than of the code.*
 on that origin too. The nocookie form was used everywhere else in the code. The
 embed now loads no script at all; the row was split so the two services are not
 described by one sentence that fits neither.*
+
+#### `ocideck.librekat.nl` — the public web demo
+
+The publisher serves a build of the web app at <https://ocideck.librekat.nl/>,
+so anyone can try OciDeck without installing anything. It is the ordinary web
+build ([what it does
+less](KNOWN_LIMITATIONS.md#the-web-build-does-less-than-the-desktop-build)), not
+a hosted edition with a backend: the editor, the privacy scan and every export
+run in your tab, and **no deck is uploaded to that origin**. What the origin
+does see is what any static web server sees — your IP address, a timestamp, and which files your browser
+fetched. That is a processing operation, and Stichting LibreKAT is the
+controller for it.
+
+One path on that origin is not merely static. The demo carries the
+[fetch-proxy](../server/fetch-proxy/README.md) that makes *Import from URL* work
+for sources that do not allow CORS. When you use that import on the demo, the
+publisher's server is what fetches the address you pasted — so it receives the
+URL, and the bytes at that URL pass through it on the way to your browser. It is
+same-origin and origin-checked (`/fetch-proxy` answers a request from anywhere
+else with *"dit adres is alleen voor de OciDeck-app zelf"*), and it applies the
+SSRF guard described in that README, but "your deck never touches the
+publisher's server" stops being true the moment you import one there. On a
+desktop build, or on a copy of the web build you host yourself, that path does
+not exist.
+
+**What the operator states.** Nothing yet. For the CVE mirror the operator
+stated retention and a privacy judgement on 2026-07-23; for this host no such
+statement has been made, and this repository does not invent one. What it can
+establish is above: static serving with the access log that implies, plus the
+proxy path when you import a URL. Until the operator says otherwise, assume the
+ordinary access log.
+
+**How to avoid it entirely.** Build the app yourself
+([BUILD.md](BUILD.md)) or host the same web bundle on your own origin — it is a
+static bundle, and the demo has no capability your own copy lacks. The demo is a
+convenience for looking, not the intended way to work on a real deck; a deck you
+would not open on someone else's computer is a deck to open in a build of your
+own.
+
+*Added 2026-07-23 (#589). The demo has existed for months, and this document —
+like `COMPLIANCE.md` — said the publisher runs exactly one server. Linking the
+demo from the README without writing this down first would have advertised a
+publisher-run instance the privacy document denied the existence of.*
 
 ### Secrets are stored in your OS keychain
 
@@ -484,14 +534,19 @@ behalf, so there is no OciDeck-held copy of your decks to request or erase —
 your files are yours, on your disk. When you use it with your own Nextcloud or
 git server, the privacy terms of *those* services apply to what you store there.
 
-**One exception, and it is the publisher's.** If you switched on the CVE lookup
-and left it pointed at the default mirror, then `cveapi.librekat.nl` received
-your search terms, and Stichting LibreKAT is controller for whatever that server
-kept. Rights of access and erasure under articles 15 and 17 apply there, to the
-foundation — see [The one server the publisher runs](#the-one-server-the-publisher-runs),
-including what that section can and cannot tell you. *(Added 2026-07-22: this
-paragraph said there was nothing to request or erase, full stop, which was true
-of your decks and untrue of that one service.)*
+**Two exceptions, and both are the publisher's.** If you switched on the CVE
+lookup and left it pointed at the default mirror, then `cveapi.librekat.nl`
+received your search terms. And if you used the public demo at
+`ocideck.librekat.nl`, that origin received the ordinary web-server record of
+your visit — plus, if you imported a deck from a URL there, the URL itself and
+the bytes behind it. For both, Stichting LibreKAT is controller for whatever
+those servers kept, and rights of access and erasure under articles 15 and 17
+apply there, to the foundation — see
+[The servers the publisher runs](#the-servers-the-publisher-runs), including
+what that section can and cannot tell you. *(Added 2026-07-22: this paragraph
+said there was nothing to request or erase, full stop, which was true of your
+decks and untrue of that one service. Extended 2026-07-23, #589, for the demo
+host.)*
 
 Because OciDeck is open source (EUPL-1.2), you can verify every claim in this
 document against the code.
@@ -524,8 +579,13 @@ has so far been stated nowhere.
   procurement asks you for an art. 28 agreement with the publisher of your
   editing tool, the accurate answer is that no processing takes place that such
   an agreement could describe — the same answer you would give for the text
-  editor you write in. One path sits outside this bullet and is named below: the
-  CVE lookup does reach a server the publisher runs.
+  editor you write in. Two paths sit outside this bullet and are named below:
+  the CVE lookup reaches a server the publisher runs, and on the **public demo**
+  the publisher is also the one serving the app and proxying a URL import. Both
+  make the foundation a controller in its own right rather than your processor
+  — but if you work on a client's deck, note that the demo is the publisher's
+  computer, not yours. That is a decision to make before you open the deck
+  there, not after.
 - **The parties you switch on are yours to arrange.** An AI endpoint, an S3
   bucket, a WebDAV server or a git forge does receive your content, and if that
   content holds personal data, that party processes it on your behalf. The
@@ -543,7 +603,7 @@ publisher receives — and for that one path Stichting LibreKAT is not your
 processor but a controller in its own right, for the request it receives. The
 operator keeps what that server receives only for as long as it needs to run the
 service (art. 5(1)(e); no fixed schedule is published), and judges the privacy
-impact minor — see [The one server the publisher runs](#the-one-server-the-publisher-runs)
+impact minor — see [The servers the publisher runs](#the-servers-the-publisher-runs)
 for the full statement. Either way, treat a search term you send there as
 disclosed.
 
