@@ -28,7 +28,9 @@ void main() {
     // deck creation does: parse the bundled markdown, title on the first slide.
     expect(deckTemplateById('miauwReport'), isNotNull);
     final templateSlides = md
-        .parseDeck(File('assets/templates/miauwReport.nl.md').readAsStringSync())!
+        .parseDeck(
+          File('assets/templates/miauwReport.nl.md').readAsStringSync(),
+        )!
         .slides;
     templateSlides[0] = templateSlides[0].copyWith(title: 'Acme Web Pentest');
     var deck = Deck(

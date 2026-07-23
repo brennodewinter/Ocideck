@@ -7,18 +7,21 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('TemplateContentService', () {
-    test('loads the Dutch document for nl and injects the deck title', () async {
-      final service = TemplateContentService();
-      final slides = await service.loadSlides(
-        'briefing',
-        languageCode: 'nl',
-        deckTitle: 'Mijn presentatie',
-      );
-      expect(slides.first.type, SlideType.title);
-      expect(slides.first.title, 'Mijn presentatie');
-      expect(slides.length, 6);
-      expect(slides[1].title, 'Situatie in het kort');
-    });
+    test(
+      'loads the Dutch document for nl and injects the deck title',
+      () async {
+        final service = TemplateContentService();
+        final slides = await service.loadSlides(
+          'briefing',
+          languageCode: 'nl',
+          deckTitle: 'Mijn presentatie',
+        );
+        expect(slides.first.type, SlideType.title);
+        expect(slides.first.title, 'Mijn presentatie');
+        expect(slides.length, 6);
+        expect(slides[1].title, 'Situatie in het kort');
+      },
+    );
 
     test('loads the English document for en', () async {
       final slides = await TemplateContentService().loadSlides(
@@ -66,9 +69,7 @@ void main() {
     });
 
     test('an unparseable document falls back to a bare title slide', () async {
-      final service = TemplateContentService(
-        loadAsset: (_) async => '',
-      );
+      final service = TemplateContentService(loadAsset: (_) async => '');
       final slides = await service.loadSlides(
         'briefing',
         languageCode: 'nl',

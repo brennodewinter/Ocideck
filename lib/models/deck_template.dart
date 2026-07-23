@@ -1,5 +1,3 @@
-
-
 /// A starting-point recipe for a new presentation: a title page plus a set of
 /// example slides the user overwrites with real content. Templates are pure
 /// data — [title] and [description] are Dutch source strings, localised via
@@ -387,4 +385,3 @@ DeckTemplate? deckTemplateById(String id) {
   }
   return null;
 }
-

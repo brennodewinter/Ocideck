@@ -126,11 +126,7 @@ void main() {
         for (final language in contentLanguages) {
           for (final slide in slidesOf(template.id, language: language)) {
             if (slide.tableRows.isEmpty) continue;
-            expect(
-              slide.tableRows.length,
-              greaterThan(1),
-              reason: template.id,
-            );
+            expect(slide.tableRows.length, greaterThan(1), reason: template.id);
             final columns = slide.tableRows.first.length;
             for (final row in slide.tableRows) {
               expect(row, hasLength(columns), reason: '${template.id}: $row');
@@ -188,11 +184,7 @@ void main() {
             reason: where,
           );
           expect(en[i].bullets.length, nl[i].bullets.length, reason: where);
-          expect(
-            en[i].tableRows.length,
-            nl[i].tableRows.length,
-            reason: where,
-          );
+          expect(en[i].tableRows.length, nl[i].tableRows.length, reason: where);
           if (nl[i].tableRows.isNotEmpty) {
             expect(
               en[i].tableRows.first.length,
@@ -346,7 +338,12 @@ void main() {
       // The same columns the table editor's action-list preset lays down, so a
       // deck started from the template and one started from the preset read
       // alike.
-      expect(slide.tableRows.first, ['Actie', 'Eigenaar', 'Deadline', 'Status']);
+      expect(slide.tableRows.first, [
+        'Actie',
+        'Eigenaar',
+        'Deadline',
+        'Status',
+      ]);
       expect(slide.tableRows.length, greaterThan(1));
       // Deadlines are left for the meeting to settle; a template with baked-in
       // dates ages.
@@ -452,10 +449,9 @@ void main() {
     });
 
     test('has the B/O/B section dividers', () {
-      final sections = slidesOf('bobCrisis')
-          .where((s) => s.type == SlideType.section)
-          .map((s) => s.title)
-          .toList();
+      final sections = slidesOf(
+        'bobCrisis',
+      ).where((s) => s.type == SlideType.section).map((s) => s.title).toList();
       expect(sections, ['Beeldvorming', 'Oordeelsvorming', 'Besluitvorming']);
     });
 
@@ -482,24 +478,27 @@ void main() {
       expect(slidesOf('pplFlightPrep').first.type, SlideType.title);
     });
 
-    test('shows the mandatory-preparation warning visibly in both languages', () {
-      expect(
-        slidesOf('pplFlightPrep').any(
-          (s) => s.customMarkdown.contains(
-            'vervangt geen verplichte vluchtvoorbereiding',
+    test(
+      'shows the mandatory-preparation warning visibly in both languages',
+      () {
+        expect(
+          slidesOf('pplFlightPrep').any(
+            (s) => s.customMarkdown.contains(
+              'vervangt geen verplichte vluchtvoorbereiding',
+            ),
           ),
-        ),
-        isTrue,
-      );
-      expect(
-        slidesOf('pplFlightPrep', language: 'en').any(
-          (s) => s.customMarkdown.toLowerCase().contains(
-            'does not replace mandatory flight preparation',
+          isTrue,
+        );
+        expect(
+          slidesOf('pplFlightPrep', language: 'en').any(
+            (s) => s.customMarkdown.toLowerCase().contains(
+              'does not replace mandatory flight preparation',
+            ),
           ),
-        ),
-        isTrue,
-      );
-    });
+          isTrue,
+        );
+      },
+    );
 
     test('planning tables are live-editable', () {
       final editableTables = slidesOf(
@@ -613,10 +612,9 @@ void main() {
     });
 
     test('has the four MIAUW report parts as section dividers', () {
-      final sections = slidesOf('miauwReport')
-          .where((s) => s.type == SlideType.section)
-          .map((s) => s.title)
-          .toList();
+      final sections = slidesOf(
+        'miauwReport',
+      ).where((s) => s.type == SlideType.section).map((s) => s.title).toList();
       expect(sections, [
         '1. Algemeen',
         '2. Plan van aanpak',
@@ -698,20 +696,23 @@ void main() {
   });
 
   group('round trip', () {
-    test('every template document survives serialize + parse with its types', () {
-      final md = MarkdownService();
-      for (final template in deckTemplates) {
-        for (final language in contentLanguages) {
-          final deck = deckOf(template.id, language: language);
-          final parsed = md.parseDeck(md.generateDeck(deck));
-          expect(parsed, isNotNull, reason: template.id);
-          expect(
-            parsed!.slides.map((s) => s.type).toList(),
-            deck.slides.map((s) => s.type).toList(),
-            reason: '${template.id}.$language',
-          );
+    test(
+      'every template document survives serialize + parse with its types',
+      () {
+        final md = MarkdownService();
+        for (final template in deckTemplates) {
+          for (final language in contentLanguages) {
+            final deck = deckOf(template.id, language: language);
+            final parsed = md.parseDeck(md.generateDeck(deck));
+            expect(parsed, isNotNull, reason: template.id);
+            expect(
+              parsed!.slides.map((s) => s.type).toList(),
+              deck.slides.map((s) => s.type).toList(),
+              reason: '${template.id}.$language',
+            );
+          }
         }
-      }
-    });
+      },
+    );
   });
 }
