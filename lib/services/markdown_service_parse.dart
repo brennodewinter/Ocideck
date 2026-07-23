@@ -161,8 +161,10 @@ extension _MarkdownParse on MarkdownService {
       sealTimestampToken: fm.sealTsr,
       signature: fm.signature.isEmpty ? null : fm.signature,
       fileHash: fileHash,
-      miauwWaivers: fm.legacyMiauwWaivers,
-      miauwConfirmations: fm.legacyMiauwConfirmations,
+      miauw: MiauwDisposition.fromTexts(
+        fm.legacyMiauwWaivers,
+        fm.legacyMiauwConfirmations,
+      ),
       frontMatterSource: fm.sourceLines,
       formatVersion: fm.formatVersion,
     );

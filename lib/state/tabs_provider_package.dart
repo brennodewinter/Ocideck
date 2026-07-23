@@ -158,10 +158,7 @@ extension _TabsPackageAssets on TabsNotifier {
       try {
         final d = MiauwCodec.decode(miauw);
         if (!d.isEmpty) {
-          result = result.copyWith(
-            miauwWaivers: d.waivers,
-            miauwConfirmations: d.confirmations,
-          );
+          result = result.copyWith(miauw: d);
         }
       } catch (e) {
         logWarning('TabsNotifier._attachPackageSidecars: MIAUW unreadable', e);

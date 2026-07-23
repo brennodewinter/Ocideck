@@ -72,8 +72,7 @@ extension DeckNotifierMarkdown on DeckNotifier {
       deck = SealRecord.of(current)
           .applyTo(deck)
           .copyWith(
-            miauwWaivers: current.miauwWaivers,
-            miauwConfirmations: current.miauwConfirmations,
+            miauw: current.miauw,
             fileHash: current.fileHash,
           );
     }

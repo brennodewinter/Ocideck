@@ -249,10 +249,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
             label: tab.label,
             markdown: tab.deckNotifier.generateMarkdown(),
             userNotes: UserNotesCodec.encode(deck.slides, deck.userNotes),
-            miauw: MiauwCodec.encode(
-              deck.miauwWaivers,
-              deck.miauwConfirmations,
-            ),
+            miauw: MiauwCodec.encodeDisposition(deck.miauw),
             seal: SealCodec.encode(SealRecord.of(deck)),
             // Tekeningen staan niet in de markdown (eigen sidecar), en tekenen
             // maakt het deck wél vuil. Zonder deze regel kwam een herstelde
@@ -294,10 +291,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       if (snap.miauw != null && snap.miauw!.isNotEmpty) {
         final d = MiauwCodec.decode(snap.miauw!);
         if (!d.isEmpty) {
-          deck = deck.copyWith(
-            miauwWaivers: d.waivers,
-            miauwConfirmations: d.confirmations,
-          );
+          deck = deck.copyWith(miauw: d);
         }
       }
       if (snap.seal != null && snap.seal!.isNotEmpty) {

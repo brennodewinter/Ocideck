@@ -6,6 +6,7 @@ import 'seal_record.dart';
 import 'slide.dart';
 import 'used_tool.dart';
 import 'settings.dart';
+import '../services/miauw_codec.dart';
 import '../services/privacy/dismissal_codec.dart';
 
 /// Traffic Light Protocol-classificatie (FIRST TLP 2.0) van een presentatie.
@@ -319,19 +320,20 @@ class Deck {
   /// zien, alleen het paneel filtert.
   final DeckDismissals? dismissals;
 
-  /// MIAUW-compliance-uitsluitingen (PENTEST_MIAUW §9), gekeyd op EIS-id
-  /// (bijv. `1.6`) met de verplichte reden als waarde. Een uitgesloten
-  /// requirement telt als "Uitgesloten door klant" in het compliance-overzicht.
-  /// Reist mee in de front matter als `ocideck_miauw_waivers` (base64url-JSON).
-  final Map<String, String> miauwWaivers;
+  /// De MIAUW-dispositie (PENTEST_MIAUW §9): uitsluitingen mét verplichte
+  /// reden en handmatige klantbevestigingen, gekeyd op EIS-id, plus de
+  /// grafstenen van ingetrokken besluiten. Opgeslagen in een sidecar
+  /// (`<naam>.miauw.json`, FILE_FORMAT §6.5) en sinds #756 reist die ook mee
+  /// naar een git-repository; de tijdstempels en grafstenen bestaan voor de
+  /// merge daar (GIT_STORAGE §9.7).
+  final MiauwDisposition miauw;
 
-  /// MIAUW-compliance handmatige bevestigingen (PENTEST_MIAUW §9), gekeyd op
-  /// EIS-id met de attestatie/onderbouwing als waarde. Een organisatorische
-  /// (handmatige) EIS die niet uit de deckinhoud af te leiden is, telt hiermee
-  /// als "Voldaan" — met de tag "Handmatig" zodat zichtbaar blijft dat het een
-  /// menselijke bevestiging is, geen contentcontrole. Reist mee in de front
-  /// matter als `ocideck_miauw_confirmations` (base64url-JSON).
-  final Map<String, String> miauwConfirmations;
+  /// De platte weergaven van [miauw] waar de leeslaag op leunt: EIS-id →
+  /// motivering. Een uitgesloten requirement telt als "Uitgesloten door
+  /// klant" in het compliance-overzicht; een handmatige bevestiging telt als
+  /// "Voldaan" met de tag "Handmatig".
+  Map<String, String> get miauwWaivers => miauw.waiverTexts;
+  Map<String, String> get miauwConfirmations => miauw.confirmationTexts;
 
   /// De front-matter-regels zoals ze in het geopende bestand stonden (zonder de
   /// `---`-hekken). Leeg voor een deck dat nog geen bestand heeft.
@@ -387,8 +389,7 @@ class Deck {
     this.annotations = const {},
     this.userNotes = const {},
     this.dismissals,
-    this.miauwWaivers = const {},
-    this.miauwConfirmations = const {},
+    this.miauw = const MiauwDisposition(),
     this.frontMatterSource = const [],
     this.formatVersion = kOldestFormatVersion,
   });
@@ -428,8 +429,7 @@ class Deck {
     Map<String, List<InkStroke>>? annotations,
     Map<String, String>? userNotes,
     DeckDismissals? dismissals,
-    Map<String, String>? miauwWaivers,
-    Map<String, String>? miauwConfirmations,
+    MiauwDisposition? miauw,
     List<String>? frontMatterSource,
     int? formatVersion,
   }) {
@@ -467,8 +467,7 @@ class Deck {
       annotations: annotations ?? this.annotations,
       userNotes: userNotes ?? this.userNotes,
       dismissals: dismissals ?? this.dismissals,
-      miauwWaivers: miauwWaivers ?? this.miauwWaivers,
-      miauwConfirmations: miauwConfirmations ?? this.miauwConfirmations,
+      miauw: miauw ?? this.miauw,
       frontMatterSource: frontMatterSource ?? this.frontMatterSource,
       formatVersion: formatVersion ?? this.formatVersion,
     );

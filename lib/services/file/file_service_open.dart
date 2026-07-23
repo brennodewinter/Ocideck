@@ -110,10 +110,7 @@ extension _FileServiceOpen on FileService {
             ? const MiauwDisposition()
             : MiauwCodec.decode(raw);
         if (!d.isEmpty) {
-          hydrated = hydrated.copyWith(
-            miauwWaivers: d.waivers,
-            miauwConfirmations: d.confirmations,
-          );
+          hydrated = hydrated.copyWith(miauw: d);
         }
       } catch (e) {
         logWarning('FileService.openDeck: MIAUW sidecar unreadable', e);
@@ -565,7 +562,7 @@ Future<void> _writeMiauwSidecar(Deck deck, String filePath) =>
       '.miauw.json',
       MiauwCodec.version,
       'MIAUW',
-      () => MiauwCodec.encode(deck.miauwWaivers, deck.miauwConfirmations),
+      () => MiauwCodec.encodeDisposition(deck.miauw),
     );
 
 /// Pad van de sidecar met terzijdegelegde privacybevindingen (§6.7, #651).

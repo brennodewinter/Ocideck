@@ -33,6 +33,7 @@ import '../../models/privacy_disposition.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
 import '../../models/used_tool.dart';
+import '../miauw_codec.dart';
 import '../slide_image_refs.dart';
 import 'privacy_own_identity.dart';
 import 'privacy_regions.dart';
@@ -280,18 +281,33 @@ class PrivacyProjection {
             description: deck.toolsUsed[i].description,
           ),
       ],
-      // De MIAUW-motiveringen reizen base64-gecodeerd mee in de front matter:
-      // onzichtbaar voor wie het bestand naleest, en dus ook voor elk vangnet
+      // De MIAUW-motiveringen staan in een sidecar naast de .md — buiten het
+      // zicht van wie alleen het bestand naleest, en dus ook van elk vangnet
       // dat op platte tekst zoekt. Juist daar staat het vaakst een naam
-      // ("uitgesloten op verzoek van …").
-      miauwWaivers: {
-        for (final e in deck.miauwWaivers.entries)
-          e.key: deckField('miauwWaivers', e.value, waiverIndex++),
-      },
-      miauwConfirmations: {
-        for (final e in deck.miauwConfirmations.entries)
-          e.key: deckField('miauwConfirmations', e.value, confirmationIndex++),
-      },
+      // ("uitgesloten op verzoek van …"). Tijd en grafstenen blijven staan:
+      // de projectie redigeert inhoud, geen besluitgeschiedenis.
+      miauw: MiauwDisposition(
+        waivers: {
+          for (final e in deck.miauw.waivers.entries)
+            e.key: MiauwEntry(
+              text: deckField('miauwWaivers', e.value.text, waiverIndex++),
+              at: e.value.at,
+            ),
+        },
+        confirmations: {
+          for (final e in deck.miauw.confirmations.entries)
+            e.key: MiauwEntry(
+              text: deckField(
+                'miauwConfirmations',
+                e.value.text,
+                confirmationIndex++,
+              ),
+              at: e.value.at,
+            ),
+        },
+        revokedWaivers: deck.miauw.revokedWaivers,
+        revokedConfirmations: deck.miauw.revokedConfirmations,
+      ),
     );
 
     return AudienceDeck._(projected, count, shielded);

@@ -264,7 +264,7 @@ extension FileServicePackage on FileService {
     );
     member(
       '$base.miauw.json',
-      MiauwCodec.encode(packDeck.miauwWaivers, packDeck.miauwConfirmations),
+      MiauwCodec.encodeDisposition(packDeck.miauw),
     );
     member('$base.seal.json', SealCodec.encode(SealRecord.of(packDeck)));
     final setAside = packDeck.dismissals;
