@@ -5,7 +5,7 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 
 /// Exercises the cockpit-instrument SVG renderer that backs the static HTML
-/// export (parts/marp_html_service_cockpit.dart). The public entry point is the
+/// export (marp_html/marp_html_service_cockpit.dart). The public entry point is the
 /// static [MarpHtmlService.renderCockpitBlocks], which parses a ```cockpit
 /// fenced JSON block and replaces it with an inline `<svg>` — reaching every
 /// private meter renderer without a WebView or any bundled asset.

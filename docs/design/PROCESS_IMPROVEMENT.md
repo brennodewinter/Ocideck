@@ -334,7 +334,7 @@ data (§4). A stored UCL is a lie waiting to happen when the CSV changes.
 The `source` → `data/*.csv` link is the existing "strip on save, hydrate on open"
 model and it is a perfect fit for LSS measurement data:
 `ChartSpec.toBlock(forStorage: true)` (`chart.dart:309`, `dropData` at `:323`) drops the cached values
-when a `source` is set, `_hydrateCharts` (`lib/services/parts/file_service_open.dart:56`)
+when a `source` is set, `_hydrateCharts` (`lib/services/file/file_service_open.dart:56`)
 re-reads them on open. **The CSV is the living truth; the deck holds no copy of
 the numbers.** No database — a folder of CSVs and a Markdown file.
 
@@ -519,7 +519,7 @@ fail *silently* and must be done by hand — see §18.
 There is **no shared scene model today**, and the cost is visible. `_maxY` is
 duplicated near-verbatim between the in-app painter
 (`lib/widgets/slides/previews/chart_preview.dart:517`) and the SVG serializer
-(`lib/services/parts/marp_html_service_charts.dart:149`) — same stacked sum, same
+(`lib/services/marp_html/marp_html_service_charts.dart:149`) — same stacked sum, same
 clamp, same `return m <= 0 ? 1 : m * 1.15;`. Both carry a parallel 13-branch
 `ChartType` switch. Nothing links them but two test suites.
 
@@ -545,7 +545,7 @@ lib/services/scene/scene.dart      # pure Dart. No Flutter.
   Scene`. Pure functions. Unit-testable with no widget test, no golden.
 - **Two thin, generic backends**, written **once** and shared by all four engines:
   - `lib/widgets/slides/previews/scene_painter.dart` — a `CustomPainter`
-  - `lib/services/parts/marp_html_service_scene.dart` — an SVG serializer
+  - `lib/services/marp_html/marp_html_service_scene.dart` — an SVG serializer
 - **Text measurement is injected** (`TextMeasurer`), so layout maths is
   identical in both worlds. The HTML export runs in-process, so it can use the
   same Flutter-backed measurer the painter uses — the existing
@@ -854,7 +854,7 @@ Compiler-enforced switches:
 6. `lib/services/markdown_service.dart:392` — serialize
 7. `lib/services/slide_quality_analyzer.dart:389` — alt-text
 8. `lib/services/slide_quality_analyzer.dart:538` — missing media
-9. `lib/services/parts/slide_quality_analyzer_density.dart:69` — density
+9. `lib/services/slide_quality/slide_quality_analyzer_density.dart:69` — density
 10. `lib/widgets/editors/slide_type_help.dart:16` — help text
 11. `lib/widgets/dialogs/add_slide_dialog.dart:388` — picker wireframe painter
 

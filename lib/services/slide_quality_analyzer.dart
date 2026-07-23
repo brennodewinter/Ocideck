@@ -19,7 +19,7 @@ import 'slide_image_refs.dart';
 import 'slide_layout_metrics.dart';
 import 'split_run.dart';
 
-part 'parts/slide_quality_analyzer_density.dart';
+part 'slide_quality/slide_quality_analyzer_density.dart';
 
 /// Waarschuw voor een dia die niets zou tonen.
 ///

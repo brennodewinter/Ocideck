@@ -72,8 +72,8 @@ timeouts live at the call sites:
 | Package (`.ocideck`/zip) | **512 MiB** | `file_service.dart`, `maxPackageBytes` |
 | Style profile / logo | **16 MiB / 8 MiB** | `file_service.dart`, `maxStyleProfileBytes` / `maxStyleProfileLogoBytes` |
 | CVE search fetch | **2 MiB** | `lib/services/cve_transport_io.dart:17` |
-| Default fetch timeout | **30 s** | `lib/services/parts/file_service_net.dart:63` |
-| Proxy/fallback timeout | **120 s** | `lib/services/parts/file_service_net.dart:49` |
+| Default fetch timeout | **30 s** | `lib/services/file/file_service_net.dart:63` |
+| Proxy/fallback timeout | **120 s** | `lib/services/file/file_service_net.dart:49` |
 
 ## Large presentations & directory scans
 

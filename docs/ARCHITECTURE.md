@@ -223,7 +223,7 @@ widget tree, and acyclic between layers. They held on discipline alone until
   `fromJson` pair: in `AppSettings` as the managed list of profiles (persisted to
   preferences), inlined in a deck's front matter (base64url), and — since it must
   also be shareable on its own — as a standalone `.ocideckstyle` file
-  (`parts/file_service_style_profile.dart`, FILE_FORMAT §3.3). `fromJson` is
+  (`file/file_service_style_profile.dart`, FILE_FORMAT §3.3). `fromJson` is
   deliberately the single hardened gate for all three: two of them are untrusted
   input, so validating at the model rather than per call site means a new carrier
   cannot forget to. The standalone file is the only carrier that embeds the logo
@@ -580,7 +580,7 @@ the existing rails rather than adding a parallel stack:
   `utils/asn1_der.dart` — no new dependency) binds the hash to a claimed time;
   OciDeck compares the token's imprint and nothing else — no CMS signature, no
   certificate chain — and never contacts a TSA itself.
-- **Audit dossier** — `parts/file_service_dossier.dart` reuses the AES-256
+- **Audit dossier** — `file/file_service_dossier.dart` reuses the AES-256
   package builder to bundle the sealed report, its evidence and the hash tables
   into one encrypted `.ocideck` archive plus an `AUDIT_DOSSIER.md` index.
 - **Optional AI** — a shared, off-by-default backend (`services/ai_*`) drafts

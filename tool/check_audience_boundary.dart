@@ -98,54 +98,54 @@ const Map<String, Surface> _registry = {
   // Deze stonden nergens geclassificeerd, en dat was de eigenlijke leemte. Het
   // is geen lek — het pakket hoort de bron te dragen — maar wie hierna een
   // export toevoegt, kon nergens zien aan welke kant hij stond.
-  'lib/services/parts/file_service_package.dart::exportPackage': Surface(
+  'lib/services/file/file_service_package.dart::exportPackage': Surface(
     SurfaceKind.source,
     'Een `.ocideck`-pakket is het project zelf: de `.md` plus de assets, zodat '
     'de gebruiker zijn werk kan meenemen. OCIWACHT §6.0 zegt met zoveel '
     'woorden dat het deck 1-op-1 naar de `.md` gaat. Redigeren zou hier de '
     'uitgang blokkeren die het hele formaat rechtvaardigt.',
   ),
-  'lib/services/parts/file_service_package.dart::downloadPackage': Surface(
+  'lib/services/file/file_service_package.dart::downloadPackage': Surface(
     SurfaceKind.source,
     'Dezelfde bytes als exportPackage, via de bestandskiezer in plaats van een '
     'pad.',
   ),
-  'lib/services/parts/file_service_dossier.dart::exportDossier': Surface(
+  'lib/services/file/file_service_dossier.dart::exportDossier': Surface(
     SurfaceKind.source,
     'Het auditdossier is het pakket plus een index en een eventueel gerenderd '
     'rapport, versleuteld. Het is bewijsmateriaal voor een auditor: '
     'volledigheid is de bedoeling, en een geredigeerd dossier bewijst '
     'niets. Het gerenderde rapport erin komt wél uit de projectie.',
   ),
-  'lib/services/parts/file_service_dossier.dart::downloadDossier': Surface(
+  'lib/services/file/file_service_dossier.dart::downloadDossier': Surface(
     SurfaceKind.source,
     'Dezelfde bytes als exportDossier, via de bestandskiezer.',
   ),
-  'lib/services/parts/file_service_open.dart::_writeSidecar': Surface(
+  'lib/services/file/file_service_open.dart::_writeSidecar': Surface(
     SurfaceKind.source,
     'De inkt-sidecar naast het deck van de gebruiker zelf.',
   ),
-  'lib/services/parts/file_service_open.dart::_writeUserNotesSidecar': Surface(
+  'lib/services/file/file_service_open.dart::_writeUserNotesSidecar': Surface(
     SurfaceKind.source,
     'De notitie-sidecar naast het deck van de gebruiker zelf.',
   ),
-  'lib/services/parts/file_service_open.dart::_writeMiauwSidecar': Surface(
+  'lib/services/file/file_service_open.dart::_writeMiauwSidecar': Surface(
     SurfaceKind.source,
     'De MIAUW-sidecar naast het deck van de gebruiker zelf.',
   ),
-  'lib/services/parts/file_service_open.dart::_writeSealSidecar': Surface(
+  'lib/services/file/file_service_open.dart::_writeSealSidecar': Surface(
     SurfaceKind.source,
     'De zegel-sidecar naast het deck van de gebruiker zelf.',
   ),
-  'lib/services/parts/file_service_open.dart::_writeChartData': Surface(
+  'lib/services/file/file_service_open.dart::_writeChartData': Surface(
     SurfaceKind.source,
     'Grafiekdata terug naar `data/*.json` in het project van de gebruiker.',
   ),
-  'lib/services/parts/file_service_open.dart::_copyChartData': Surface(
+  'lib/services/file/file_service_open.dart::_copyChartData': Surface(
     SurfaceKind.source,
     'Kopieert een grafiekdatabestand mee binnen het project.',
   ),
-  'lib/services/parts/file_service_project.dart::_writeProject': Surface(
+  'lib/services/file/file_service_project.dart::_writeProject': Surface(
     SurfaceKind.source,
     'Het projectbestand van de gebruiker zelf.',
   ),

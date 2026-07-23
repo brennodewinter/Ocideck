@@ -391,7 +391,7 @@ There is no `FetchProxyService` class. On the web, URL fetches that CORS would
 block are routed through a **server-side** `fetch-proxy?url=…` endpoint (see
 [`server/fetch-proxy/README.md`](../server/fetch-proxy/README.md)). Clients call
 it via `FileService.fetchUrlBytes(String url, {int maxBytes, …})`
-(`lib/services/parts/file_service_net.dart`), which falls back to the proxy on
+(`lib/services/file/file_service_net.dart`), which falls back to the proxy on
 web; the git web transport uses the same endpoint.
 
 ## Export readiness
