@@ -1751,6 +1751,12 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.': 'ngeH mev; ghuHmeH poHDaq.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'De\'wI\' teywI\' chenmoHlaHbe\' ghItlhlaHbe\' je. yIlegh: \'ar Sam\'a\' \'ej ghItlhlu\'laH\'a\' ngeHwI\' raQ.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      '\'ang nagh HaSta chenmoHlaHbe\'. wa\' nagh vI\'oy, De\'wI\' teywI\' Segh vI\'oybe\': HTML ngeH naDev jaHbe\' \'ej motlh Qapchu\'.',
+  'Technische melding:': 'QaQbe\'ghach De\':',
   'presentaties': 'presentationmey',
   '/Presentaties': '/presentationmey',
   'Rapportagedistributie (ontwerp)': 'ja\'ghach ngeHghach (nab)',

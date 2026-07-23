@@ -1803,6 +1803,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'Η εξαγωγή σταμάτησε κατά την προετοιμασία.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'Δεν ήταν δυνατή η δημιουργία ή η εγγραφή του αρχείου. Ελέγξτε αν υπάρχει χώρος στον δίσκο και αν ο φάκελος εξαγωγής είναι εγγράψιμος.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Η απόδοση των διαφανειών σε εικόνες απέτυχε. Οφείλεται σε μια διαφάνεια, όχι στη μορφή αρχείου: η εξαγωγή HTML δεν περνά από εδώ και σε αυτή την περίπτωση συνήθως λειτουργεί.',
+  'Technische melding:': 'Τεχνικό μήνυμα:',
   'presentaties': 'parousiaseis',
   '/Presentaties': '/Παρουσιάσεις',
   'Rapportagedistributie (ontwerp)': 'Διανομή αναφορών (σχεδίαση)',

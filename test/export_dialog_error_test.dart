@@ -116,5 +116,14 @@ void main() {
       reason:
           'de fout tijdens de export moet afgevangen worden, niet ontsnappen',
     );
+
+    // En de melding zegt in welke stap het misging, plus de ruwe uitzondering.
+    //
+    // Zonder die stap stond er alleen de uitzondering, en die kan even
+    // nietszeggend zijn als `Invalid argument(s): 1` — de melding uit #714, waar
+    // niemand uit kon opmaken dat het renderen was omgevallen en niet het
+    // schrijven. HTML rendert niet, dus dit pad hoort de schrijfstap te noemen.
+    expect(find.textContaining('opgebouwd of weggeschreven'), findsOneWidget);
+    expect(find.textContaining('schijf vol'), findsOneWidget);
   });
 }

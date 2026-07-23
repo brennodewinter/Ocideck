@@ -1776,6 +1776,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'Ekspor berhenti saat persiapan.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'Berkas tidak dapat dibuat atau ditulis. Periksa apakah ada ruang disk dan apakah folder ekspor dapat ditulisi.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Perenderan salindia menjadi gambar gagal. Ini karena salah satu salindia, bukan format berkas: ekspor HTML tidak melewati tahap ini dan biasanya tetap berhasil.',
+  'Technische melding:': 'Pesan teknis:',
   'presentaties': 'presentasi',
   '/Presentaties': '/Presentasi',
   'Rapportagedistributie (ontwerp)': 'Distribusi laporan (desain)',

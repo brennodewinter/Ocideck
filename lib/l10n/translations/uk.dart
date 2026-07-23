@@ -1793,6 +1793,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'Експорт зупинився під час підготовки.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'Не вдалося зібрати чи записати файл. Перевірте, чи є місце на диску та чи доступна тека експорту для запису.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Не вдалося відрендерити слайди в зображення. Причина — слайд, а не формат файлу: експорт у HTML сюди не заходить і в цьому випадку зазвичай працює.',
+  'Technische melding:': 'Технічне повідомлення:',
   'presentaties': 'prezentatsii',
   '/Presentaties': '/Презентації',
   'Rapportagedistributie (ontwerp)': 'Розповсюдження звітів (проєкт)',

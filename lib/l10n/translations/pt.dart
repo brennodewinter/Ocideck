@@ -1805,6 +1805,13 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'A exportação parou durante a preparação.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'Não foi possível criar nem gravar o ficheiro. Verifique se há espaço em disco e se a pasta de exportação permite escrita.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Falhou a composição dos diapositivos em imagens. A causa é um diapositivo, não o formato do ficheiro: a exportação HTML não passa por aqui e neste caso costuma funcionar.',
+  'Technische melding:': 'Mensagem técnica:',
   'presentaties': 'apresentacoes',
   '/Presentaties': '/Apresentações',
   'Rapportagedistributie (ontwerp)': 'Distribuição de relatórios (design)',

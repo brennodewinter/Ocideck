@@ -916,6 +916,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'De export is gestopt tijdens het voorbereiden.':
+      'The export stopped while preparing.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'The file could not be built or written. Check that there is disk space and that the export folder is writable.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Rendering the slides to images failed. This is down to a slide, not to the file format: the HTML export does not pass through here and usually still works in this case.',
+  'Technische melding:': 'Technical message:',
   'presentaties': 'presentations',
   '/Presentaties': '/Presentations',
   'Rapportagedistributie (ontwerp)': 'Report distribution (design)',

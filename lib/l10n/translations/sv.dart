@@ -1775,6 +1775,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'Exporten stoppade under förberedelsen.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'Filen kunde inte byggas eller skrivas. Kontrollera att det finns diskutrymme och att exportmappen är skrivbar.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Renderingen av bilderna till bild misslyckades. Det beror på en bild, inte på filformatet: HTML-exporten passerar inte här och fungerar oftast i det här fallet.',
+  'Technische melding:': 'Tekniskt meddelande:',
   'presentaties': 'presentationer',
   '/Presentaties': '/Presentationer',
   'Rapportagedistributie (ontwerp)': 'Rapportdistribution (design)',

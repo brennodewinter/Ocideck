@@ -1775,6 +1775,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'Eksporten stoppede under forberedelsen.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'Filen kunne ikke bygges eller skrives. Kontrollér, om der er diskplads, og om eksportmappen kan skrives til.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Gengivelsen af dias til billeder mislykkedes. Det skyldes et dias, ikke filformatet: HTML-eksporten kommer ikke forbi her og virker som regel i dette tilfælde.',
+  'Technische melding:': 'Teknisk meddelelse:',
   'presentaties': 'praesentationer',
   '/Presentaties': '/Præsentationer',
   'Rapportagedistributie (ontwerp)': 'Rapportdistribution (design)',

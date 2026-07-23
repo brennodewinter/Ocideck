@@ -1779,6 +1779,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'De Export isch bim Vorbereite abbroche.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'S Datei het nöd chöne ufboue oder gschribe werde. Lueg, öb s no Platz het und öb de Exportordner beschriibbar isch.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'S Rendere vo de Folie zu Bilder isch fählgschlage. Das lit a ere Folie, nöd am Dateiformat: de HTML-Export chunnt da nöd verbii und funktioniert i dem Fall meischtens.',
+  'Technische melding:': 'Technischi Möldig:',
   'presentaties': 'praesentatione',
   '/Presentaties': '/Präsentatione',
   'Rapportagedistributie (ontwerp)': 'Brichtverteilig (Design)',

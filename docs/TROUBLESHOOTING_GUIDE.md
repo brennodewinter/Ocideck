@@ -70,6 +70,14 @@ invent one. A wrong explanation costs more time than none.
    capture. It now gives up after 20 seconds with an explicit message instead
    of waiting forever, but the fix is simply to leave the window in front.
    HTML export is unaffected: it does not rasterize.
+0b. **Read which step failed.** A failed export now names the step it fell over
+   in — preparing, rendering the slides to images, or building and writing the
+   file — followed by the raw technical message. That distinction is the whole
+   diagnosis: only PDF and PPTX render, so a failure in the rendering step is
+   about a *slide*, and the HTML export of the same deck will usually still
+   work. A failure in the writing step is about disk space or a folder that is
+   not writable. Quote the technical line when reporting; it is the only part
+   that identifies the cause.
 1. **Check Classification Settings**:
    - Verify TLP levels aren't blocking exports
    - Confirm privacy disposition settings allow the export  

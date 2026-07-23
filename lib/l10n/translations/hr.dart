@@ -1782,6 +1782,13 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'Izvoz se zaustavio tijekom pripreme.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'Datoteku nije bilo moguće izgraditi ni zapisati. Provjerite ima li prostora na disku i može li se u mapu za izvoz pisati.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Iscrtavanje slajdova u sliku nije uspjelo. Uzrok je slajd, a ne format datoteke: izvoz u HTML ovuda ne prolazi i u ovom slučaju obično radi.',
+  'Technische melding:': 'Tehnička poruka:',
   'presentaties': 'prezentacije',
   '/Presentaties': '/Prezentacije',
   'Rapportagedistributie (ontwerp)': 'Distribucija izvještaja (dizajn)',
