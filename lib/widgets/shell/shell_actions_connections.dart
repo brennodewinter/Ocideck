@@ -74,6 +74,9 @@ void _webdavNotConfigured(BuildContext context) {
 /// systeem-opslaanvenster in de gekozen map. Bestaande decks slaan direct op.
 /// Op web (geen schrijfbaar bestandssysteem) is opslaan een download; dan geen
 /// dialoog. Geeft terug of er daadwerkelijk is opgeslagen.
+///
+/// Wanneer die dialoog wél verschijnt staat in [shouldAskDestination]; zonder
+/// ingerichte bibliotheek heeft hij niets te kiezen en wordt hij overgeslagen.
 Future<bool> saveDeckWithDestination(
   BuildContext context,
   WidgetRef ref,
@@ -103,8 +106,11 @@ Future<bool> saveDeckWithDestination(
   }
 
   final settings = ref.read(settingsProvider);
-  final isNewDeck = deckNotifier.currentState.filePath == null;
-  if (!isNewDeck || !supportsLocalProjectFolders) {
+  if (!shouldAskDestination(
+    isNewDeck: deckNotifier.currentState.filePath == null,
+    supportsFolders: supportsLocalProjectFolders,
+    hasLibraries: settings.libraries.isNotEmpty,
+  )) {
     return withSaveProgress(
       ref,
       SaveTarget.local,
@@ -276,3 +282,26 @@ Future<void> _saveToConnection(BuildContext context, WidgetRef ref) async {
       break; // Gefilterd in [_remoteConnections].
   }
 }
+
+/// Of de bestemmingsdialoog iets toe te voegen heeft vóór het systeemvenster.
+///
+/// Drie voorwaarden, en de derde is de reparatie uit #646. De dialoog laat je
+/// een bibliotheek kiezen en toont vooraf waar de presentatie, afbeeldingen en
+/// media terechtkomen — nuttig, zolang er iets te kiezen valt. Is er nog geen
+/// bibliotheek ingericht, dan toont hij een lege lijst met twee knoppen die
+/// allebei verderleiden ("Andere map…" en "Kies bestandsnaam…"), en dat is
+/// precies de "drie dialogen diep om een bestand op te slaan" uit de melding.
+///
+/// Dat trof iedereen, want bij een eerste start ís er geen bibliotheek. De
+/// dialoog is daarom niet weggehaald maar overgeslagen op het pad waar hij
+/// niets te bieden heeft.
+bool shouldAskDestination({
+  required bool isNewDeck,
+  required bool supportsFolders,
+  required bool hasLibraries,
+}) =>
+    // Een bestaand deck heeft al een plek; opslaan schrijft daarheen terug.
+    isNewDeck &&
+    // Op het web is opslaan een download: er valt geen map te kiezen.
+    supportsFolders &&
+    hasLibraries;
