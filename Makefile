@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help servicenormen doorlooptijd ratchets
+.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help servicenormen doorlooptijd ratchets
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -675,6 +675,22 @@ check-comment-language:
 	@echo "        Volledige lijst: dart run tool/check_comment_language.dart --list"
 	dart run tool/check_comment_language.dart
 
+# Elke groene poort is een uitspraak over de toolchain die hem draaide (#598).
+# Eén Flutter per machine, de laatste stable uit het officiële kanaal, en de pin
+# volgt die installatie — niet andersom.
+check-toolchain:
+	@echo "== OciDeck check: toolchain =="
+	@echo "Command: dart run tool/check_toolchain.dart"
+	@echo "Covers: kanaal stable, de officiële Flutter-repository, en de versie"
+	@echo "        exact gelijk aan de pin in .tool-versions. Elk van de drie is"
+	@echo "        apart fataal; alle gebreken worden in één run gemeld. Daarna"
+	@echo "        moet de toolchain ook in docs/CHECKS.md staan."
+	@echo "Failure means: repareer de machine, niet de tool. Installeer de laatste"
+	@echo "        stable (sha256 toetsen vóór uitpakken) in ~/flutter en trek élke"
+	@echo "        pin mee. Wint ~/flutter niet: kijk naar de PATH-volgorde in"
+	@echo "        ~/.zshrc — een regel vóór die van Homebrew verliest alsnog."
+	dart run tool/check_toolchain.dart
+
 # Add new d('…') source strings to every language's additions overlay from a
 # JSON spec (format documented in tool/add_l10n.dart). Inserts, dart-formats and
 # de-duplicates across all 30 language files in one step, and whitelists any
@@ -813,7 +829,7 @@ build-release:
 # nothing ran them — and the GitHub workflow that did cannot fire on a Forgejo
 # remote without a runner. `make check` is the real gate; it should contain the
 # gates.
-check: format-check analyze check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language coverage coverage-per-file
+check: format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language coverage coverage-per-file
 	@echo "== OciDeck check complete =="
 	@echo "Validated: formatting, static analysis, conventions, the privacy projection boundary, method length, dead-code, hardcoded visible text, comment language, the full Flutter test suite, the coverage floor, and the per-file coverage floor."
 

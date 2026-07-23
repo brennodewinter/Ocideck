@@ -42,20 +42,33 @@ relies on when it says contributors keep copyright in their own work.)*
 
 ## Prerequisites
 
-- **Flutter 3.44.x** (stable), using the `dart` bundled with it.
-  `.tool-versions` pins `3.44.6-stable`; that is what the maintainer's machine is
-  meant to run, and matching it exactly is the surest way to avoid the one
-  symptom this pin exists for. That symptom is narrow and recognisable:
-  `dart format` reflows whitespace between releases, so `make format-check` can
-  fail on files you never touched. If it does, your formatter differs — that is
-  the whole story, and it is not a reason to reinstall your toolchain before you
-  have hit it. [`docs/BUILD.md`](docs/BUILD.md) explains the difference.
+- **Flutter 3.44.7** (stable), from the official channel, using the `dart`
+  bundled with it. `.tool-versions` pins it, `make check-toolchain` enforces it,
+  and the rule is deliberately strict: the exact version, channel `stable`, and
+  the SDK's repository must be `https://github.com/flutter/flutter.git`.
 
-  *Relaxed 2026-07-22 (#598): this read "3.44.6 exactly", which is a stricter
-  prerequisite than the maintainer himself meets — the machine that runs the
-  gates is on 3.44.2 (see [`docs/CHECKS.md`](docs/CHECKS.md)). Sending a
-  newcomer off to reinstall a toolchain for a problem they have not hit, on the
-  authority of a rule nobody follows, is the wrong first impression.*
+  **One Flutter per machine, not one per project.** Install it in `~/flutter`
+  from the archive published by `storage.googleapis.com/flutter_infra_release`,
+  and verify the SHA-256 against that channel's own `releases_*.json` before
+  unpacking. Do not use the Homebrew cask: it reports a different version number
+  in `--version` than in its own install path, and if it sits earlier on `PATH`
+  it silently shadows the SDK you meant to use. That is not hypothetical — it is
+  what #598 turned out to be.
+
+  **The pin follows the latest stable, not the other way round.** When a newer
+  stable is released, the SDK is upgraded and then every pin moves with it:
+  `.tool-versions`, `README.md`, [`docs/BUILD.md`](docs/BUILD.md), this file,
+  and both workflow files. Then the gate is re-run, because `dart format`
+  reflows whitespace between releases — that reflow is the pin's one real
+  symptom, and it shows up as `make format-check` failing on files you never
+  touched.
+
+  *Tightened 2026-07-23 (#598). Between 22 and 23 July this read "3.44.x", on
+  the reasoning that demanding an exact version was stricter than the
+  maintainer's own machine met. That was solving the wrong problem: the answer
+  to a maintainer machine on an unreproducible build is to fix the machine, not
+  to relax the rule for everyone else. The machine now runs the pinned official
+  stable, so the rule can be what it should have been.*
 - A desktop target enabled: **macOS**, **Windows**, or **Linux**.
 - `make` (the `Makefile` is the entry point for all quality checks).
 
