@@ -315,7 +315,6 @@ const _dutchSourceIt = {
       'L\'assistenza IA è disponibile solo nella versione desktop.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'L\'assistenza IA è facoltativa e disattivata per impostazione predefinita. Non viene inviato nulla finché non la attivi e scegli tu stesso un backend. Questa funzione è disponibile solo nella versione desktop.',
-  'AI-assistentie inschakelen': 'Attiva l\'assistenza IA',
   'AI-backend': 'Backend IA',
   'Lokaal (op dit apparaat)': 'Locale (su questo dispositivo)',
   'Zelf gehost (eigen server)': 'Self-hosted (server personale)',

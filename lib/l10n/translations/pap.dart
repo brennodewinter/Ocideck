@@ -314,7 +314,6 @@ const _dutchSourcePap = {
       'Asistensia di IA ta disponibel solamente den e version di desktop.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'Asistensia di IA ta opcional i ta paga pa default. No ta wòrdu mandá nada te ora bo aktivá esaki i skohe un backend bo mes. E funshon aki ta funshoná solamente den e version di desktop.',
-  'AI-assistentie inschakelen': 'Aktivá asistensia di IA',
   'AI-backend': 'Backend di IA',
   'Lokaal (op dit apparaat)': 'Lokal (riba e aparato aki)',
   'Zelf gehost (eigen server)': 'Ospedá bo mes (bo mes server)',

@@ -315,7 +315,6 @@ const _dutchSourceHr = {
       'AI pomoć dostupna je samo u verziji za računalo.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'AI pomoć nije obavezna i prema zadanome je isključena. Ništa se ne šalje dok je ne uključite i sami ne odaberete pozadinski sustav. Ova značajka radi samo u verziji za računalo.',
-  'AI-assistentie inschakelen': 'Uključi AI pomoć',
   'AI-backend': 'AI pozadinski sustav',
   'Lokaal (op dit apparaat)': 'Lokalno (na ovom uređaju)',
   'Zelf gehost (eigen server)': 'Samostalno hostano (vlastiti poslužitelj)',

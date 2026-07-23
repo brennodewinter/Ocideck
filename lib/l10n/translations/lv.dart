@@ -313,7 +313,6 @@ const _dutchSourceLv = {
       'MI palīdzība ir pieejama tikai darbvirsmas versijā.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'MI palīdzība ir neobligāta un pēc noklusējuma izslēgta. Nekas netiek nosūtīts, kamēr to neieslēdzat un pats neizvēlaties aizmugursistēmu. Šī funkcija darbojas tikai darbvirsmas versijā.',
-  'AI-assistentie inschakelen': 'Ieslēgt MI palīdzību',
   'AI-backend': 'MI aizmugursistēma',
   'Lokaal (op dit apparaat)': 'Lokāli (šajā ierīcē)',
   'Zelf gehost (eigen server)': 'Pašmitināts (paša serveris)',

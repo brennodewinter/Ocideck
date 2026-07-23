@@ -319,7 +319,6 @@ const _dutchSourceFr = {
       'L\'assistance IA n\'est disponible que dans la version de bureau.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'L\'assistance IA est facultative et désactivée par défaut. Rien n\'est envoyé tant que vous ne l\'activez pas et ne choisissez pas vous-même un backend. Cette fonction ne fonctionne que dans la version de bureau.',
-  'AI-assistentie inschakelen': 'Activer l\'assistance IA',
   'AI-backend': 'Backend IA',
   'Lokaal (op dit apparaat)': 'Local (sur cet appareil)',
   'Zelf gehost (eigen server)': 'Auto-hébergé (votre propre serveur)',

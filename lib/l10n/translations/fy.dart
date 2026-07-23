@@ -313,7 +313,6 @@ const _dutchSourceFy = {
       'AI-stipe is allinnich beskikber yn de desktopferzje.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'AI-stipe is opsjoneel en stiet standert út. Der wurdt neat ferstjoerd oant do it ynskeakelest en sels in backend kiest. Dizze funksje wurket allinnich yn de desktopferzje.',
-  'AI-assistentie inschakelen': 'AI-stipe ynskeakelje',
   'AI-backend': 'AI-backend',
   'Lokaal (op dit apparaat)': 'Lokaal (op dit apparaat)',
   'Zelf gehost (eigen server)': 'Sels host (eigen server)',

@@ -315,7 +315,6 @@ const _dutchSourceBg = {
       'AI помощта е налична само в настолната версия.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'AI помощта е по избор и е изключена по подразбиране. Нищо не се изпраща, докато не я включите и сами не изберете бекенд. Тази функция работи само в настолната версия.',
-  'AI-assistentie inschakelen': 'Включване на AI помощта',
   'AI-backend': 'AI бекенд',
   'Lokaal (op dit apparaat)': 'Локално (на това устройство)',
   'Zelf gehost (eigen server)': 'Самостоятелно хостван (собствен сървър)',

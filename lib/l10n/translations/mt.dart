@@ -315,7 +315,6 @@ const _dutchSourceMt = {
       'L-assistenza AI hija disponibbli biss fil-verżjoni desktop.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'L-assistenza AI hija fakultattiva u mitfija b\'default. Xejn ma jintbagħat sakemm ma tattivahiex u tagħżel backend int stess. Din il-funzjoni taħdem biss fil-verżjoni desktop.',
-  'AI-assistentie inschakelen': 'Attiva l-assistenza AI',
   'AI-backend': 'Backend AI',
   'Lokaal (op dit apparaat)': 'Lokali (fuq dan l-apparat)',
   'Zelf gehost (eigen server)': 'Ospitat minnek (server tiegħek)',

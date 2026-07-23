@@ -317,7 +317,6 @@ const _dutchSourceEl = {
       'Η υποστήριξη AI είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'Η υποστήριξη AI είναι προαιρετική και απενεργοποιημένη από προεπιλογή. Δεν αποστέλλεται τίποτα μέχρι να την ενεργοποιήσετε και να επιλέξετε μόνοι σας ένα backend. Αυτή η λειτουργία λειτουργεί μόνο στην έκδοση για υπολογιστή.',
-  'AI-assistentie inschakelen': 'Ενεργοποίηση υποστήριξης AI',
   'AI-backend': 'Backend AI',
   'Lokaal (op dit apparaat)': 'Τοπικά (σε αυτή τη συσκευή)',
   'Zelf gehost (eigen server)': 'Αυτοφιλοξενούμενο (δικός σας διακομιστής)',

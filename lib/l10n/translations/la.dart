@@ -315,7 +315,6 @@ const _dutchSourceLa = {
       'Auxilium IA solum in versione desktop praesto est.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'Auxilium IA optionale est et per praedefinitum exstinctum. Nihil mittitur donec id actives et ipse backend eligas. Haec functio solum in versione desktop operatur.',
-  'AI-assistentie inschakelen': 'Auxilium IA activare',
   'AI-backend': 'Backend IA',
   'Lokaal (op dit apparaat)': 'Locale (in hoc instrumento)',
   'Zelf gehost (eigen server)': 'Per te hospitatum (proprius servius)',
