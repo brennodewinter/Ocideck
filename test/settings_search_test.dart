@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,16 +22,24 @@ void main() {
       ProviderScope(
         child: MaterialApp(
           home: Scaffold(
-            body: Builder(
-              builder: (context) => ElevatedButton(
-                onPressed: () => SettingsDialog.show(context),
-                child: const Text('open'),
-              ),
+            body: Consumer(
+              // Bewust een `watch`: het venster leest de instellingen één keer
+              // in `initState`, en die komen asynchroon uit de prefs. Zonder
+              // deze lezer staat de provider er nog niet als het venster
+              // opengaat, en zoekt de gebruiker door de standaardwaarden.
+              builder: (context, ref, _) {
+                ref.watch(settingsProvider);
+                return ElevatedButton(
+                  onPressed: () => SettingsDialog.show(context),
+                  child: const Text('open'),
+                );
+              },
             ),
           ),
         ),
       ),
     );
+    await tester.pumpAndSettle();
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
   }
@@ -337,5 +347,64 @@ void main() {
           'meer door _sectionTitle gerenderd, dus hun anker grijpt mis: '
           '${missing.join(', ')}',
     );
+  });
+
+  // ── AI-assistentie: de zoekingangen volgen het tabblad (#731) ──────────────
+  //
+  // Sinds AI een module is, bestaat zijn tabblad niet meer met verse
+  // voorkeuren. Een treffer die daarheen springt komt dan op niets uit —
+  // dezelfde fout die #648 voor Informatieveiligheid repareerde. De `aiOnly`-
+  // vlag op de ingangen is de reparatie; dit is wat haar bewaakt.
+
+  testWidgets(
+    'met de module uit vindt "ai" alleen de plek om hem aan te zetten',
+    (tester) async {
+      await openSettings(tester);
+      await search(tester, 'ai');
+
+      // Treffers herken je aan hun pijl; de labels staan óók in de
+      // mee-opgebouwde tabbladen, dus scopen we strak op de resultatenlijst.
+      final hits = find.ancestor(
+        of: find.byIcon(Icons.arrow_forward),
+        matching: find.byType(ListTile),
+      );
+
+      // Wat je wél vindt: de modulekaart. Zoeken naar een functie die de app
+      // heeft, mag nooit "geen instelling gevonden" opleveren.
+      expect(
+        find.descendant(of: hits, matching: find.text('AI-assistentie')),
+        findsOneWidget,
+      );
+      expect(find.text('Geen instelling gevonden'), findsNothing);
+
+      // Wat je niet vindt: de configuratie, want dat tabblad is er niet.
+      for (final label in const ['AI-backend', 'Modelnaam']) {
+        expect(
+          find.descendant(of: hits, matching: find.text(label)),
+          findsNothing,
+          reason: '"$label" springt naar een tabblad dat niet bestaat',
+        );
+      }
+    },
+  );
+
+  testWidgets('een ingestelde backend maakt de configuratie weer vindbaar', (
+    tester,
+  ) async {
+    // Spiegelt de zichtbaarheid van het tabblad zelf: tonen zodra de inhoud er
+    // is, ook met de schakelaar uit — anders is de sleutel niet meer op te
+    // ruimen én niet meer te vinden.
+    SharedPreferences.setMockInitialValues({
+      'aiSettings': jsonEncode(const {
+        'enabled': false,
+        'mode': 'local',
+        'baseUrl': 'http://127.0.0.1:11434/v1',
+      }),
+    });
+    await openSettings(tester);
+    await search(tester, 'backend');
+
+    expect(find.text('AI-backend'), findsWidgets);
+    expect(find.text('Geen instelling gevonden'), findsNothing);
   });
 }
