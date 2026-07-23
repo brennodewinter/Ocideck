@@ -13,7 +13,12 @@ import 'sidecar_format.dart';
 /// re-attach strokes to the matching slide (same fingerprint, preferring the
 /// same index), and silently drop strokes whose slide no longer exists.
 class AnnotationCodec {
-  static const int version = 1;
+  /// Versie 2 sinds #541: elke streek draagt een `id` en mag een `erased`-vlag
+  /// hebben (GIT_STORAGE D7). Een bestand van versie 1 leest gewoon door —
+  /// `InkStroke.fromJson` deelt een verse id uit en leest geen vlag — maar
+  /// andersom niet: een oudere build zou de grafstenen niet begrijpen en
+  /// gewiste streken weer tekenen. Vandaar de verhoging.
+  static const int version = 2;
 
   /// A stable hash of a slide's visual content (ignores notes/timing/tlp).
   static String fingerprint(Slide s) {

@@ -55,6 +55,7 @@ void main() {
       color: 0xFFEF4444,
       width: 0.004,
       points: [Offset(0.1, 0.2)],
+      id: 's1',
     ),
   ];
 

@@ -22,10 +22,17 @@ const _streek = InkStroke(
   color: 0xFFEF4444,
   width: 0.01,
   points: [Offset(0.1, 0.2), Offset(0.3, 0.4)],
+  id: 's1',
 );
 
 /// Een payload die zegt uit een nieuwere versie te komen, met inhoud die deze
 /// build op zichzelf best zou kunnen lezen — juist dát is de valkuil.
+/// Zet de versie van een sidecar op [versie].
+///
+/// Aanroepers geven `Codec.version + 1` mee en geen vast getal: dit toetst
+/// *een hogere versie dan deze build kent*, en een hard nummer wordt bij de
+/// eerstvolgende formaatwijziging stilletjes de huidige versie. Dat gebeurde
+/// bij de annotaties (#541, versie 2), en toen faalde deze toets terecht.
 String _uitDeToekomst(String json, int versie) {
   final data = Map<String, Object?>.from(jsonDecode(json) as Map);
   data['version'] = versie;
@@ -57,7 +64,10 @@ void main() {
       )!;
       expect(AnnotationCodec.decode(json, [slide]), isNotEmpty);
       expect(
-        AnnotationCodec.decode(_uitDeToekomst(json, 2), [slide]),
+        AnnotationCodec.decode(
+          _uitDeToekomst(json, AnnotationCodec.version + 1),
+          [slide],
+        ),
         isEmpty,
         reason: 'versie 2 is onbekend; dan liever niets dan half',
       );
@@ -69,7 +79,13 @@ void main() {
       expect(UserNotesCodec.decode(json, [slide]), isNotEmpty);
       // Versie 3 werd tot nu toe als 2 behandeld: wél lezen, en daarna
       // overschrijven met wat deze build ervan begreep.
-      expect(UserNotesCodec.decode(_uitDeToekomst(json, 3), [slide]), isEmpty);
+      expect(
+        UserNotesCodec.decode(
+          _uitDeToekomst(json, UserNotesCodec.version + 1),
+          [slide],
+        ),
+        isEmpty,
+      );
     });
   });
 

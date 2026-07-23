@@ -1298,6 +1298,14 @@ discussion still resolve.
   believed it was gone. "Never lose content" must not curdle into "nothing can
   be removed."*
 
+  *Format half built 23-07-2026 (#541). `InkStroke` gained `id` and `erased`;
+  the sidecar is version 2. Erasing marks rather than removes, and the painter
+  skips a marked stroke, so nothing changes on screen. A version-1 sidecar still
+  reads — every stroke gets a fresh id — with one honest consequence recorded in
+  the code: two copies of such a file get different ids and union into
+  double-drawn lines. Visible and repairable, unlike silently dropping one side.
+  The driver and the write path are still open.*
+
   *The build order follows from that, and it matters: **first** the annotation
   format (stroke identity + tombstone, with a version bump and a read path for
   older files), **then** the merge driver `merge=ocideck-ink`, **then** the

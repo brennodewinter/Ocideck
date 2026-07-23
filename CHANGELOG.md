@@ -128,6 +128,21 @@ read a book to find out.
   "Mogelijk gemaakt door" met het logo. Eén nieuwe interfacetekst, meteen in
   alle 31 talen.
 
+### Changed
+- **Een gewiste tekening blijft gewist, ook nadat twee mensen aan dezelfde
+  presentatie hebben gewerkt.** Tekeningen gaan straks mee naar een
+  git-repository, en dan worden de streken van beide kanten samengevoegd — twee
+  mensen die op één dia tekenen zijn het immers niet oneens. Wissen paste daar
+  niet in: gooide je een streek weg, dan had de ander hem nog, en kwam hij bij
+  het samenvoegen terug.
+
+  Een uitgegumde streek wordt daarom gemarkeerd in plaats van weggegooid. Op het
+  scherm verandert er niets — hij is en blijft weg — maar het samenvoegen weet
+  nu dat iemand hem bewust heeft verwijderd. Een verwijdering die terugkomt is
+  erger dan een die niet werkt, want je zag hem verdwijnen.
+
+  Presentaties met tekeningen van vóór deze versie openen gewoon.
+
 ### Fixed
 - **Een beoordeelde privacybevinding hield de export tegen zonder dat je kon
   zien waarover.** Wie een bevinding beoordeelde en liet staan, zag het
