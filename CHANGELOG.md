@@ -124,6 +124,24 @@ read a book to find out.
   gedachtestreepje dat in een ankernaam een extra streepje meetelt (#589).
 
 ### Fixed
+- **De toets die moest bewaken dat een typenaam niet middenin breekt, bewees
+  niets.** Hij eiste dat de berekende lettergrootte niet onder de ondergrens
+  zakte — maar die berekening stopt zelf bij die grens, dus de eis was altijd
+  waar. En een widgettest tekent in een testfont waarin elk teken even breed is
+  als hoog; daar zit de helft van de labels al op die ondergrens, dus ook een
+  scherpere eis had er niets kunnen onderscheiden. Hij keek bovendien alleen
+  naar de Nederlandse namen, terwijl de melding over een vertaling ging.
+
+  De toets laadt nu het gebundelde interfacefont en meet daarin, over alle
+  vierentwintig diatypen in alle eenendertig talen. Uitkomst: geen enkel label
+  breekt middenin een woord.
+
+  Daarbij kwam één label boven dat onnodig klein werd getekend. Het Zweedse
+  "Cockpit-instrumentpanel" telde als één onbreekbaar woord en duwde de kaart
+  naar de kleinste maat — terwijl er op het koppelteken gewoon een regel mag
+  breken, wat nu ook is nagemeten in plaats van aangenomen. Dat label staat
+  weer op de volle grootte.
+
 - **In het Duits heette het diatype "Quote" in plaats van "Zitat".** Eén label
   van de vierentwintig droeg een Engelse bronsleutel. Vijfentwintig talen
   hadden daar toevallig een vertaling voor, het Duits niet — en dan valt de
