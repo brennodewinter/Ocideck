@@ -94,6 +94,21 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Added
+- **De MIAUW-dispositie reist mee naar een git-repository (#756).** De waivers
+  en handmatige bevestigingen van een pentestrapport (`<naam>.miauw.json`)
+  waren de laatste laag die achterbleef: wie zo'n rapport naar een repository
+  verhuisde, hield de afspraken met de klant stil op de eigen machine, en een
+  tweede reviewer opende een gap-analyse zonder de besluiten die erbij horen.
+  De sidecar gaat nu als `deck.miauw.json` naast `deck.md` mee, met dezelfde
+  aanraak- en verwijderregels als de notities en de terzijdeleggingen. Twee
+  reviewers voegen samen als unie per EIS-nummer: het laatst genomen besluit
+  wint, en intrekken is zélf een besluit — het laat een grafsteen achter, zodat
+  een net ingetrokken waiver niet bij de eerstvolgende samenvoeging van de
+  andere kant terugkeert. Daarvoor draagt het sidecar-formaat voortaan een
+  tijdstempel per besluit (versie 2, FILE_FORMAT §6.5); een versie-1-bestand
+  blijft gewoon leesbaar, de app schrijft versie 2.
+
 ### Fixed
 - **Linux en Windows droegen nog het logo van vóór de rebrand.** Toen het merk
   in juni van de fotokat naar de lijntekening ging (`da7b7c9e` → `dc62e03f` →

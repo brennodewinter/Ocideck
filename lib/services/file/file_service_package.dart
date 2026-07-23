@@ -262,10 +262,7 @@ extension FileServicePackage on FileService {
       '$base.user-notes.json',
       UserNotesCodec.encode(packDeck.slides, packDeck.userNotes),
     );
-    member(
-      '$base.miauw.json',
-      MiauwCodec.encode(packDeck.miauwWaivers, packDeck.miauwConfirmations),
-    );
+    member('$base.miauw.json', MiauwCodec.encodeDisposition(packDeck.miauw));
     member('$base.seal.json', SealCodec.encode(SealRecord.of(packDeck)));
     final setAside = packDeck.dismissals;
     if (setAside != null) {

@@ -10,6 +10,7 @@ import '../../models/chart.dart';
 import '../../utils/log.dart';
 import '../annotation_codec.dart';
 import '../markdown_service.dart';
+import '../miauw_codec.dart';
 import '../privacy/dismissal_codec.dart';
 import '../user_notes_codec.dart';
 import '../slide_image_refs.dart';
@@ -158,6 +159,7 @@ Future<
     bool userNotesUnreadable,
     bool inkUnreadable,
     bool dismissalsUnreadable,
+    bool miauwUnreadable,
   })
 >
 withRepoSidecars(
@@ -177,12 +179,18 @@ withRepoSidecars(
     deckDir: deckDir,
     read: read,
   );
+  final miauw = await withRepoMiauw(
+    dismissals.deck,
+    deckDir: deckDir,
+    read: read,
+  );
   return (
-    deck: dismissals.deck,
+    deck: miauw.deck,
     missingChartData: charts.missing,
     userNotesUnreadable: notes.onleesbaar,
     inkUnreadable: ink.onleesbaar,
     dismissalsUnreadable: dismissals.onleesbaar,
+    miauwUnreadable: miauw.onleesbaar,
   );
 }
 
@@ -415,6 +423,7 @@ Map<String, Uint8List> mirrorDeckFiles(
     null => null,
     final d => DismissalCodec.encode(d, forTextMerge: true),
   };
+  final miauw = MiauwCodec.encodeDisposition(deck.miauw, forTextMerge: true);
   return <String, Uint8List>{
     p.posix.join(deckDir, deckRepoFileName): Uint8List.fromList(
       utf8.encode(md.generateDeck(deck)),
@@ -435,6 +444,10 @@ Map<String, Uint8List> mirrorDeckFiles(
       null => null,
     },
     p.posix.join(deckDir, dismissalsRepoFileName): ?switch (dismissals) {
+      final String json => Uint8List.fromList(utf8.encode(json)),
+      null => null,
+    },
+    p.posix.join(deckDir, miauwRepoFileName): ?switch (miauw) {
       final String json => Uint8List.fromList(utf8.encode(json)),
       null => null,
     },
@@ -520,6 +533,10 @@ Future<RepoMergeOutcome> resolveRepoDeckMerge({
       p.posix.join(deckDir, dismissalsRepoFileName): ?await read(
         MergeSide.ours,
         p.posix.join(deckDir, dismissalsRepoFileName),
+      ),
+      p.posix.join(deckDir, miauwRepoFileName): ?await read(
+        MergeSide.ours,
+        p.posix.join(deckDir, miauwRepoFileName),
       ),
     };
     for (final path

@@ -51,20 +51,21 @@ void _setMiauwEntry(
   final trimmed = value?.trim();
   if (value != null && (trimmed == null || trimmed.isEmpty)) return;
 
-  final source = which == _MiauwMap.waivers
-      ? deck.miauwWaivers
-      : deck.miauwConfirmations;
+  final isWaiver = which == _MiauwMap.waivers;
+  final source = isWaiver ? deck.miauwWaivers : deck.miauwConfirmations;
   if (trimmed == null && !source.containsKey(eisId)) return;
 
-  final updated = Map<String, String>.from(source);
-  if (trimmed == null) {
-    updated.remove(eisId);
-  } else {
-    updated[eisId] = trimmed;
-  }
+  // Het moment van dít besluit: de merge in een git-repository laat per
+  // EIS-id het laatste besluit winnen, en intrekken laat een grafsteen achter
+  // zodat het de samenvoeging overleeft (GIT_STORAGE §9.7).
   n._mutate(
-    which == _MiauwMap.waivers
-        ? deck.copyWith(miauwWaivers: updated)
-        : deck.copyWith(miauwConfirmations: updated),
+    deck.copyWith(
+      miauw: deck.miauw.withEntry(
+        isWaiver: isWaiver,
+        eisId: eisId,
+        text: trimmed,
+        at: DateTime.now().toUtc().toIso8601String(),
+      ),
+    ),
   );
 }

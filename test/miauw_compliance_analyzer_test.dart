@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/services/miauw_codec.dart';
 import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/miauw_compliance.dart';
 import 'package:ocideck/models/slide.dart';
@@ -110,7 +111,9 @@ void main() {
       final r = _analyzer.analyze(
         Deck(
           title: 'X',
-          miauwWaivers: const {'1.3': 'Klant vereist geen certificering'},
+          miauw: MiauwDisposition.fromTexts(const {
+            '1.3': 'Klant vereist geen certificering',
+          }, const {}),
         ),
       );
       final res = r.results.firstWhere((x) => x.entry.id == '1.3');
@@ -120,7 +123,10 @@ void main() {
 
     test('waiving a foundational EIS is surfaced but never blocks', () {
       final r = _analyzer.analyze(
-        Deck(title: 'X', miauwWaivers: const {'1.6': 'reden'}),
+        Deck(
+          title: 'X',
+          miauw: MiauwDisposition.fromTexts(const {'1.6': 'reden'}, const {}),
+        ),
       );
       expect(r.foundationalWaived.map((e) => e.entry.id), contains('1.6'));
     });
@@ -129,7 +135,9 @@ void main() {
       final r = _analyzer.analyze(
         Deck(
           title: 'X',
-          miauwConfirmations: const {'1.2': 'Intake gehouden op 2026-07-01'},
+          miauw: MiauwDisposition.fromTexts(const {}, const {
+            '1.2': 'Intake gehouden op 2026-07-01',
+          }),
         ),
       );
       final res = r.results.firstWhere((x) => x.entry.id == '1.2');
@@ -143,8 +151,10 @@ void main() {
       final r = _analyzer.analyze(
         Deck(
           title: 'X',
-          miauwConfirmations: const {'1.2': 'bevestigd'},
-          miauwWaivers: const {'1.2': 'toch uitgesloten'},
+          miauw: MiauwDisposition.fromTexts(
+            const {'1.2': 'toch uitgesloten'},
+            const {'1.2': 'bevestigd'},
+          ),
         ),
       );
       expect(_status(r, '1.2'), EisStatus.uitgesloten);

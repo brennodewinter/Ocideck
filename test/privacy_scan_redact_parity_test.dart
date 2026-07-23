@@ -42,8 +42,25 @@ final Map<String, Deck Function(Deck)> _deckVelden = {
   'date': (d) => d.copyWith(date: _waarde),
   'standardsUsed': (d) => d.copyWith(standardsUsed: [_waarde]),
   'toolsUsed': (d) => d.copyWith(toolsUsed: [UsedTool(name: _waarde)]),
-  'miauwWaivers': (d) => d.copyWith(miauwWaivers: {'1.6': _waarde}),
-  'miauwConfirmations': (d) => d.copyWith(miauwConfirmations: {'1.6': _waarde}),
+  // Additief op wat er al staat: de pariteitstest vult álle velden op één
+  // deck, en een copyWith die de hele dispositie vervangt zou het vorige veld
+  // stil wegvagen.
+  'miauwWaivers': (d) => d.copyWith(
+    miauw: d.miauw.withEntry(
+      isWaiver: true,
+      eisId: '1.6',
+      text: _waarde,
+      at: '',
+    ),
+  ),
+  'miauwConfirmations': (d) => d.copyWith(
+    miauw: d.miauw.withEntry(
+      isWaiver: false,
+      eisId: '1.6',
+      text: _waarde,
+      at: '',
+    ),
+  ),
 };
 
 /// Slidevelden: idem, per gescand slideveld.

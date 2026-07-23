@@ -2,6 +2,7 @@ import '../../models/annotation.dart';
 import '../../models/deck.dart';
 import '../../models/slide.dart';
 import '../annotation_codec.dart';
+import '../miauw_codec.dart';
 import '../privacy/dismissal_codec.dart';
 import '../slide_dedup_service.dart';
 import '../user_notes_codec.dart';
@@ -210,6 +211,12 @@ DeckMergeResult mergeDeckVersions(
         (null, final b?) => b,
         (final a?, final b?) => mergeDismissals(a, b),
       },
+      // De MIAUW-dispositie: unie per EIS-id, laatste besluit wint, grafsteen
+      // wint gelijkspel (GIT_STORAGE §9.7). Zelfde reden als hierboven:
+      // `copyWith` zou stil ónze kant houden en het besluit van de andere
+      // reviewer weggooien. Geen heranker-stap — de identiteit is het
+      // EIS-nummer, geen dia-positie.
+      miauw: mergeMiauw(ours.miauw, theirs.miauw),
     ),
     [for (final c in conflicts) c._at(landedAt[c.baseIndex])],
   );

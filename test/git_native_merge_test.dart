@@ -16,8 +16,10 @@ import 'package:ocideck/services/git/native_git_mirror_api.dart';
 import 'package:ocideck/services/git/native_git_mirror_io.dart';
 import 'package:ocideck/services/annotation_codec.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/miauw_codec.dart';
 import 'package:ocideck/services/user_notes_codec.dart';
 import 'package:ocideck/services/recovery_service.dart';
+import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -133,6 +135,7 @@ void main() {
     String markdown, {
     String? notesJson,
     String? inkJson,
+    String? miauwJson,
   }) async {
     final other = '${temp.path}/other${DateTime(2026).microsecond}';
     await _rawGit(['clone', '--branch', work, bare, other], temp.path);
@@ -142,6 +145,9 @@ void main() {
     }
     if (inkJson != null) {
       File('$other/$deckDir/deck.ink.json').writeAsStringSync(inkJson);
+    }
+    if (miauwJson != null) {
+      File('$other/$deckDir/deck.miauw.json').writeAsStringSync(miauwJson);
     }
     await _rawGit(['add', '-A'], other);
     await _rawGit(['commit', '-m', 'hun wijziging'], other);
@@ -570,6 +576,97 @@ void main() {
     expect(landed, isNot(contains('<<<<<<<')));
     expect(landed, isNot(contains('>>>>>>>')));
     expect(MarkdownService().parseDeck(landed), isNotNull);
+  });
+
+  // #756: de MIAUW-dispositie is de laatste laag die naar git meereist, en
+  // haar merge heeft één geval dat pure vereniging stukmaakt: een intrekking.
+  // Hier het bewijs tegen echte git dat de grafsteen de samenvoeging overleeft
+  // terwijl het nieuwe besluit van de ander gewoon meekomt.
+  group('de MIAUW-dispositie overleeft het native pad', () {
+    String dispositie(MiauwDisposition d) =>
+        MiauwCodec.encodeDisposition(d, forTextMerge: true)!;
+
+    Future<void> seedMiauw() async {
+      final her = '${temp.path}/herseed-miauw';
+      await _rawGit(['clone', bare, her], temp.path);
+      File('$her/$deckDir/deck.miauw.json').writeAsStringSync(
+        dispositie(
+          const MiauwDisposition(
+            waivers: {
+              '1.3': MiauwEntry(
+                text: 'Niet in scope',
+                at: '2026-07-20T10:00:00.000Z',
+              ),
+            },
+          ),
+        ),
+      );
+      await _rawGit(['add', '-A'], her);
+      await _rawGit(['commit', '-m', 'dispositie erbij'], her);
+      await _rawGit(['push', 'origin', 'main'], her);
+      await _rawGit(['push', 'origin', 'HEAD:$work'], her);
+    }
+
+    test('een intrekking overleeft, hun nieuwe besluit komt mee', () async {
+      await seedMiauw();
+      final (container, tabs) = build();
+      await openOnWorkBranch(container, tabs);
+
+      // Zij trekken niets in maar nemen een éigen besluit erbij.
+      await theyPush(
+        _deck(alfa: 'alfa VAN HEN', beta: 'beta origineel'),
+        miauwJson: dispositie(
+          const MiauwDisposition(
+            waivers: {
+              '1.3': MiauwEntry(
+                text: 'Niet in scope',
+                at: '2026-07-20T10:00:00.000Z',
+              ),
+              '2.2': MiauwEntry(
+                text: 'Door klant bevestigd buiten dit rapport',
+                at: '2026-07-21T09:00:00.000Z',
+              ),
+            },
+          ),
+        ),
+      );
+
+      // Wij trekken de waiver op 1.3 in — het besluit dat zonder grafsteen
+      // door hun kant heen zou worden teruggedraaid.
+      final tab = container.read(tabsProvider).current!;
+      expect(
+        tab.deckNotifier.currentState.deck!.miauwWaivers.containsKey('1.3'),
+        isTrue,
+        reason: 'het openen hoort de dispositie uit de repo mee te nemen',
+      );
+      tab.deckNotifier.removeMiauwWaiver('1.3');
+
+      await tabs.saveToGitNative(
+        mirror,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'waiver 1.3 ingetrokken',
+        now: DateTime(2026, 7, 23),
+      );
+
+      final verify = '${temp.path}/verify-miauw';
+      await _rawGit(['clone', '--branch', work, bare, verify], temp.path);
+      final geland = MiauwCodec.decode(
+        File('$verify/$deckDir/deck.miauw.json').readAsStringSync(),
+      );
+      expect(
+        geland.waiverTexts.containsKey('1.3'),
+        isFalse,
+        reason: 'de ingetrokken waiver mag niet herrijzen',
+      );
+      expect(geland.revokedWaivers.containsKey('1.3'), isTrue);
+      expect(
+        geland.waiverTexts['2.2'],
+        'Door klant bevestigd buiten dit rapport',
+        reason: 'het besluit van de andere reviewer reist gewoon mee',
+      );
+    });
   });
 
   // Een deckmap is meer dan `deck.md`: de cijfers van een gekoppelde grafiek

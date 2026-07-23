@@ -161,8 +161,7 @@ extension _MarkdownParse on MarkdownService {
       sealTimestampToken: fm.sealTsr,
       signature: fm.signature.isEmpty ? null : fm.signature,
       fileHash: fileHash,
-      miauwWaivers: fm.legacyMiauwWaivers,
-      miauwConfirmations: fm.legacyMiauwConfirmations,
+      miauw: _legacyMiauwDisposition(fm),
       frontMatterSource: fm.sourceLines,
       formatVersion: fm.formatVersion,
     );
@@ -847,3 +846,12 @@ extension _MarkdownParse on MarkdownService {
     return SlideType.bullets;
   }
 }
+
+/// De v1-front-matter-kaarten als ongedateerde dispositie: het opwaardeerpad
+/// voor een `.md` van vóór de sidecar. Top-level en geen methode: de klasse
+/// zit tegen haar plafond, en dit raakt geen enkele parserstaat.
+MiauwDisposition _legacyMiauwDisposition(_FrontMatter fm) =>
+    MiauwDisposition.fromTexts(
+      fm.legacyMiauwWaivers,
+      fm.legacyMiauwConfirmations,
+    );

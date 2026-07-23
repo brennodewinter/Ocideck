@@ -6,6 +6,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/used_tool.dart';
 import 'package:ocideck/services/front_matter_merge.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/miauw_codec.dart';
 import 'package:ocideck/services/markdown_validator.dart';
 
 /// Het formaatcontract van het `.md`-bestand, getoetst als contract en niet als
@@ -345,8 +346,10 @@ style: |
             typedSignature: 'A. Auteur',
             imagePath: 'images/sig.png',
           ),
-          miauwWaivers: const {'1.6': 'reden'},
-          miauwConfirmations: const {'2.3': 'bevestigd'},
+          miauw: MiauwDisposition.fromTexts(
+            const {'1.6': 'reden'},
+            const {'2.3': 'bevestigd'},
+          ),
         );
         final markdown = MarkdownService().generateDeck(deck);
         final geschreven = _frontMatter(
