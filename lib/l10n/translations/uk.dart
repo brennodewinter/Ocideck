@@ -1792,6 +1792,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Een verzegeld deck gaat niet naar een werkbranch':
+      'Запечатана презентація не потрапляє в робочу гілку',
+  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
+      'Печатка — це твердження саме про ці байти. Робочу гілку можна переписати, зробити cherry-pick і примусово надіслати, і печатка, яка це переживе, вже нічого не означає.',
+  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
+      'Збережіть цю презентацію як файл або як пакунок .ocideck. Печатка належить до теґу випуску, а цього шляху ще немає — доти вона в безпеці саме тут.',
   'De export is gestopt tijdens het voorbereiden.':
       'Експорт зупинився під час підготовки.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

@@ -1779,6 +1779,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Een verzegeld deck gaat niet naar een werkbranch':
+      'Lepecsételt prezentáció nem kerül munkaágra',
+  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
+      'A pecsét kijelentés pontosan ezekről a bájtokról. Egy munkaág átírható, cherry-pickelhető és kényszerrel feltolható, és az a pecsét, amely ezt túléli, már semmit sem mond.',
+  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
+      'Mentse ezt a prezentációt fájlként vagy .ocideck csomagként. A pecsét egy kiadási címkéhez tartozik, és az az út még nincs meg — addig itt van biztonságban.',
   'De export is gestopt tijdens het voorbereiden.':
       'Az exportálás az előkészítés közben leállt.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

@@ -255,14 +255,28 @@ withRepoSidecars(
   );
 }
 
+/// Of dit deck een zegel of handtekening draagt, en daarmee niet op een
+/// werkbranch thuishoort (D13).
+///
+/// Eén definitie, want twee lagen hangen eraan: het opslagpad weigert erop en
+/// de interface legt erop uit. Twee kopieën van deze regel zouden op termijn
+/// uiteenlopen, en dan weigert de ene wat de andere aankondigt.
+bool gitRefusesSealedDeck(Deck deck) =>
+    deck.finalized || (deck.signature?.isNotEmpty ?? false);
+
 /// Wat er van een deck níét meereist naar git (§9.1), geteld per soort.
 ///
 /// De git-opslag schrijft `deck.md`, de assetpool (afbeeldingen **en** media,
 /// zie D5/D12), de grafiekdata en — sinds #541 — de notities. Wat achterblijft
-/// zijn nog twee sidecars: `.ink.json` met de tekeningen en `.seal.json` met
-/// het zegel en de handtekening worden nergens in `services/git/` geschreven.
-/// Op schijf gaan die wél mee, dus wie van een bestand naar git verhuist raakt
-/// ze kwijt zonder dat er iets misgaat waar de app op kan wijzen.
+/// is nog één sidecar: `.ink.json` met de tekeningen wordt nergens in
+/// `services/git/` geschreven. Op schijf gaat die wél mee, dus wie van een
+/// bestand naar git verhuist raakt hem kwijt zonder dat er iets misgaat waar de
+/// app op kan wijzen.
+///
+/// Het zégel stond hier tot #541 ook in. Dat is geen weglating meer maar een
+/// weigering: een verzegeld deck gaat helemaal niet naar een werkbranch (D13,
+/// [gitRefusesSealedDeck]). Een waarschuwing over iets dat niet kan gebeuren
+/// is ruis.
 ///
 /// Dit meenemen is een grotere ingreep dan een waarschuwing; de waarschuwing kan
 /// niet wachten. De UI toont hem vóór de commit — daarna is de keuze al gemaakt.
@@ -276,18 +290,9 @@ class GitDeckOmissions {
   /// Dia's waarop getekend is; die tekenlaag gaat niet mee.
   final int annotatedSlides;
 
-  /// Of het deck een zegel of een handtekening draagt die niet meegaat.
-  ///
-  /// Zwaarder dan de tekenlaag, want hier verdwijnt niet alleen werk maar een
-  /// verklaring: een verzegeld rapport dat via git terugkomt, leest als een
-  /// rapport dat nooit verzegeld is. Sinds 0.1.0 staat het zegel naast de
-  /// markdown in plaats van erin, dus het reist niet meer vanzelf mee in
-  /// `deck.md` — precies de stilte waar deze waarschuwing voor bestaat.
-  final bool sealed;
+  const GitDeckOmissions({this.annotatedSlides = 0});
 
-  const GitDeckOmissions({this.annotatedSlides = 0, this.sealed = false});
-
-  bool get isEmpty => annotatedSlides == 0 && !sealed;
+  bool get isEmpty => annotatedSlides == 0;
 
   bool get isNotEmpty => !isEmpty;
 }
@@ -302,10 +307,7 @@ GitDeckOmissions gitDeckOmissions(Deck deck) {
   final ink = deck.annotations.entries
       .where((e) => ids.contains(e.key) && e.value.isNotEmpty)
       .length;
-  return GitDeckOmissions(
-    annotatedSlides: ink,
-    sealed: deck.finalized || (deck.signature?.isNotEmpty ?? false),
-  );
+  return GitDeckOmissions(annotatedSlides: ink);
 }
 
 /// De repo-bestandenset van één deck (§9.1): het tekstbestand plus de nieuwe

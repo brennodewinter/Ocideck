@@ -2754,6 +2754,12 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Een verzegeld deck gaat niet naar een werkbranch':
+      'Mühürlü bir sunum çalışma dalına gitmez',
+  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
+      'Mühür, tam olarak bu baytlar hakkında bir beyandır. Bir çalışma dalı yeniden yazılabilir, cherry-pick edilebilir ve zorla gönderilebilir; bunların hepsini atlatan bir mühür artık hiçbir şey söylemez.',
+  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
+      'Bu sunumu dosya olarak veya .ocideck paketi olarak kaydedin. Mühür bir sürüm etiketine aittir ve o yol henüz yok — o zamana kadar güvende olduğu yer burası.',
   'De export is gestopt tijdens het voorbereiden.':
       'Dışa aktarma hazırlık sırasında durdu.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

@@ -1778,6 +1778,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Een verzegeld deck gaat niet naar een werkbranch':
+      'Es versiglets Deck chunnt nöd uf en Arbetsbranch',
+  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
+      'Es Sigel isch e Uussag über gnau die Bytes. En Arbetsbranch cha neu gschriebe, gcherrypickt und forciert gstosse werde, und es Sigel wo das überläbt seit nüt meh.',
+  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
+      'Speicher das Deck als Datei oder als .ocideck-Paket. S Sigel ghört zu eme Release-Tag, und de Wäg gits no nöd — bis dahi isch es do sicher.',
   'De export is gestopt tijdens het voorbereiden.':
       'De Export isch bim Vorbereite abbroche.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

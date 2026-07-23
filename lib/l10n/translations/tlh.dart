@@ -1750,6 +1750,12 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Een verzegeld deck gaat niet naar een werkbranch':
+      '\'ang HutlhwI\' ram Sor DoQbe\'',
+  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
+      '\'ang HutlhwI\' \'oH De\' vam neH \'ang. ram Sor qonqa\'lu\'laH, wIvlu\'laH, HoS pushlu\'laH je; \'ej \'ang taHtaHbogh vay\' jatlhbe\' vay\'.',
+  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
+      'De\'wI\' teywI\' ghap .ocideck ngaSwI\' vaS. \'ang \'oH chu\'wI\' per; He vam pagh SIQ — vaj naDev QaD.',
   'De export is gestopt tijdens het voorbereiden.': 'ngeH mev; ghuHmeH poHDaq.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'De\'wI\' teywI\' chenmoHlaHbe\' ghItlhlaHbe\' je. yIlegh: \'ar Sam\'a\' \'ej ghItlhlu\'laH\'a\' ngeHwI\' raQ.',

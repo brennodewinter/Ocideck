@@ -1774,6 +1774,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Een verzegeld deck gaat niet naar een werkbranch':
+      'En förseglad presentation hamnar inte på en arbetsgren',
+  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
+      'Ett sigill är ett påstående om exakt dessa byte. En arbetsgren kan skrivas om, cherry-pickas och tvingas fram, och ett sigill som överlever allt det säger inte längre någonting.',
+  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
+      'Spara den här presentationen som fil eller som .ocideck-paket. Sigillet hör till en release-tagg, och den vägen finns inte ännu — till dess är det här den är trygg.',
   'De export is gestopt tijdens het voorbereiden.':
       'Exporten stoppade under förberedelsen.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

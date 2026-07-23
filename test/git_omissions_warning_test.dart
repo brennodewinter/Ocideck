@@ -214,12 +214,16 @@ void main() {
     expect(find.text('Deknaam'), findsOneWidget);
   });
 
-  testWidgets('een verzegeld deck waarschuwt dat het zegel niet meegaat', (
+  testWidgets('een verzegeld deck wordt geweigerd, niet gewaarschuwd', (
     tester,
   ) async {
-    // Sinds het zegel naast de markdown woont, reist het niet meer vanzelf mee
-    // in `deck.md`. Zonder deze melding kwam een verzegeld rapport via git
-    // terug als een rapport dat nooit verzegeld is — zonder dat iets dat zei.
+    // Tot #541 deel 3 stond het zegel in de waarschuwing: het deck ging mee en
+    // het zegel viel stil weg. Sinds D12 gaat een verzegeld deck helemaal niet
+    // naar een werkbranch — die kan herschreven en geforceerd geduwd worden, en
+    // een zegel dat dat overleeft zegt niets meer.
+    //
+    // De waarschuwing verliest dus exact die ene regel, en er komt géén
+    // "Toch opslaan": een weigering die je kunt wegklikken is er geen.
     await pumpWithDeck(
       tester,
       Deck(
@@ -233,7 +237,40 @@ void main() {
     );
     await tapSaveTo(tester);
 
-    expect(find.text('Niet alles gaat mee naar git'), findsOneWidget);
-    expect(find.text('• Zegel en handtekening'), findsOneWidget);
+    expect(
+      find.text('Een verzegeld deck gaat niet naar een werkbranch'),
+      findsOneWidget,
+    );
+    expect(find.text('Niet alles gaat mee naar git'), findsNothing);
+    expect(find.text('Toch opslaan'), findsNothing);
+    // En het opslaan begint niet: de naamvraag komt er niet.
+    expect(find.text('Deknaam'), findsNothing);
+  });
+
+  testWidgets('een verzegeld deck mét tekeningen noemt alleen de weigering', (
+    tester,
+  ) async {
+    // Twee dialogen achter elkaar zou de weigering laten lezen als de tweede
+    // helft van een waarschuwing waar je doorheen kunt klikken.
+    final slide = plain('Test');
+    await pumpWithDeck(
+      tester,
+      Deck(
+        title: 'Test',
+        slides: [slide],
+        finalized: true,
+        sealAlgo: 'sha-512',
+        sealHash: 'a' * 128,
+        sealAt: '2026-07-10T12:00:00.000Z',
+        annotations: {slide.id: streek()},
+      ),
+    );
+    await tapSaveTo(tester);
+
+    expect(
+      find.text('Een verzegeld deck gaat niet naar een werkbranch'),
+      findsOneWidget,
+    );
+    expect(find.text('Niet alles gaat mee naar git'), findsNothing);
   });
 }

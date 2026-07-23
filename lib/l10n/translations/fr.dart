@@ -734,6 +734,12 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Een verzegeld deck gaat niet naar een werkbranch':
+      'Une présentation scellée ne va pas sur une branche de travail',
+  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
+      'Un sceau est une affirmation sur exactement ces octets. Une branche de travail peut être réécrite, cherry-pickée et poussée en force, et un sceau qui survit à tout cela ne dit plus rien.',
+  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
+      'Enregistrez cette présentation comme fichier ou comme paquet .ocideck. Le sceau appartient à une étiquette de version, et ce chemin n\'existe pas encore : d\'ici là, c\'est ici qu\'il est en sécurité.',
   'De export is gestopt tijdens het voorbereiden.':
       'L\'export s\'est arrêté pendant la préparation.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
