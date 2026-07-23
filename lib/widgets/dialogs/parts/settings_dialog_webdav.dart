@@ -11,22 +11,13 @@ extension _SettingsWebdav on _SettingsDialogState {
     String? hint,
     bool obscure = false,
     IconData? icon,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: TextField(
-        controller: controller,
-        obscureText: obscure,
-        style: const TextStyle(fontSize: 13),
-        decoration: InputDecoration(
-          isDense: true,
-          labelText: label,
-          hintText: hint,
-          prefixIcon: icon == null ? null : Icon(icon, size: 18),
-        ),
-      ),
-    );
-  }
+  }) => SettingsTextField(
+    controller,
+    label,
+    hint: hint,
+    obscure: obscure,
+    icon: icon,
+  );
 
   /// De servertype-keuze. Alleen het padschema hangt eraan — het protocol
   /// eronder is in beide gevallen gewone WebDAV.

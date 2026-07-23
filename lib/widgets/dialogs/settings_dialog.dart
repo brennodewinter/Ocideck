@@ -22,7 +22,6 @@ import '../../services/disk_traces.dart';
 import '../../services/export_metadata.dart';
 import '../../services/file_service.dart';
 import '../../services/git/outbox.dart';
-import '../../services/secret_store.dart';
 import '../../services/recovery_service.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/git/git_forge.dart';
@@ -55,6 +54,8 @@ import '../privacy_statement_content.dart';
 import '../reader/documentation_search_tab.dart';
 import '../slides/image_zoom_dialog.dart';
 import 'hex_color_dialog.dart';
+import 'settings/settings_section_title.dart';
+import 'settings/settings_text_field.dart';
 
 part 'parts/settings_dialog_sections.dart';
 part 'parts/settings_dialog_secret.dart';
@@ -764,52 +765,61 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       onPopInvokedWithResult: (didPop, _) {
         if (didPop) _restoreLanguageIfDiscarded();
       },
-      child: Dialog(
-        clipBehavior: Clip.antiAlias,
-        backgroundColor: Colors.white,
-        insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 28),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        child: SizedBox(
-          width: dialogWidth,
-          height: dialogHeight,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _sidebar(l10n),
-              Expanded(
-                // Material (not ColoredBox) so ListTiles inside the tab bodies
-                // paint their ink/selected state onto this surface instead of a
-                // hidden ancestor behind an opaque box.
-                child: Material(
-                  color: AppTheme.slate50,
-                  child: Column(
-                    children: [
-                      _contentHeader(_selectedTab.label(l10n)),
-                      Expanded(
-                        // De zoekresultaten leggen zich óver de actieve tab; de
-                        // IndexedStack blijft eronder staan zodat zijn GlobalKeys
-                        // (de sectie-ankers) in de boom blijven en een treffer er
-                        // meteen naartoe kan scrollen.
-                        child: Stack(
-                          children: [
-                            IndexedStack(
-                              index: _selectedTab.index,
-                              sizing: StackFit.expand,
-                              children: bodies,
-                            ),
-                            if (_searchQuery.isNotEmpty)
-                              Positioned.fill(
-                                child: _settingsSearchResults(l10n),
+      child: SettingsSectionAnchors(
+        keys: _sectionKeys,
+        highlighted: _highlightedSection,
+        child: Dialog(
+          clipBehavior: Clip.antiAlias,
+          backgroundColor: Colors.white,
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 40,
+            vertical: 28,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: SizedBox(
+            width: dialogWidth,
+            height: dialogHeight,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _sidebar(l10n),
+                Expanded(
+                  // Material (not ColoredBox) so ListTiles inside the tab bodies
+                  // paint their ink/selected state onto this surface instead of a
+                  // hidden ancestor behind an opaque box.
+                  child: Material(
+                    color: AppTheme.slate50,
+                    child: Column(
+                      children: [
+                        _contentHeader(_selectedTab.label(l10n)),
+                        Expanded(
+                          // De zoekresultaten leggen zich óver de actieve tab; de
+                          // IndexedStack blijft eronder staan zodat zijn GlobalKeys
+                          // (de sectie-ankers) in de boom blijven en een treffer er
+                          // meteen naartoe kan scrollen.
+                          child: Stack(
+                            children: [
+                              IndexedStack(
+                                index: _selectedTab.index,
+                                sizing: StackFit.expand,
+                                children: bodies,
                               ),
-                          ],
+                              if (_searchQuery.isNotEmpty)
+                                Positioned.fill(
+                                  child: _settingsSearchResults(l10n),
+                                ),
+                            ],
+                          ),
                         ),
-                      ),
-                      _footerBar(l10n),
-                    ],
+                        _footerBar(l10n),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
