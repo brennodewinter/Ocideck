@@ -44,6 +44,12 @@ const Set<String> uncoveredBaseline = {
   // (media_fetch_test.dart).
   'lib/utils/media_fetch.dart',
   'lib/utils/media_fetch_web.dart',
+  // NO EXECUTABLE LINES: `confirm_certificate.dart` bevat één typedef en verder
+  // niets — de vorm waarin de drie netwerkpanelen de certificaatbevestiging
+  // aanroepen. Het staat apart omdat het ophalen van een certificaat op
+  // `dart:io` leunt en een paneel dat niet mee mag slepen naar de webbundel;
+  // lcov schrijft geen record voor een bestand zonder uitvoerbare regels.
+  'lib/widgets/dialogs/settings/confirm_certificate.dart',
   // NO EXECUTABLE LINES: `StorageOrigin` is een abstract interface met twee
   // getters en verder niets — het contract dat WebdavOrigin, S3Origin en
   // GitOrigin delen. De implementaties worden wél getest

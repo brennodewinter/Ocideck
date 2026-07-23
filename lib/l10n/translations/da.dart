@@ -1775,6 +1775,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'presentaties': 'praesentationer',
+  '/Presentaties': '/Præsentationer',
   'De export is mislukt.': 'Eksporten mislykkedes.',
   'Presenteer vanaf hier': 'Præsentér herfra',
   'Teams-gastclient (ontwerp)': 'Teams-gæsteklient (design)',

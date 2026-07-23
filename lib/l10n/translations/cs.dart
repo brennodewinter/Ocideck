@@ -1779,6 +1779,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'presentaties': 'prezentace',
+  '/Presentaties': '/Prezentace',
   'De export is mislukt.': 'Export se nezdařil.',
   'Presenteer vanaf hier': 'Prezentovat odsud',
   'Teams-gastclient (ontwerp)': 'Klient Teams pro hosty (návrh)',

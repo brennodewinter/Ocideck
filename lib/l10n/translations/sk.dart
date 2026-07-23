@@ -1783,6 +1783,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'presentaties': 'prezentacie',
+  '/Presentaties': '/Prezentácie',
   'De export is mislukt.': 'Export zlyhal.',
   'Presenteer vanaf hier': 'Prezentovať odtiaľto',
   'Teams-gastclient (ontwerp)': 'Klient Teams pre hostí (návrh)',

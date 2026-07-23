@@ -1798,6 +1798,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'presentaties': 'prezentazzjonijiet',
+  '/Presentaties': '/Preżentazzjonijiet',
   'De export is mislukt.': 'L-esportazzjoni falliet.',
   'Presenteer vanaf hier': 'Ippreżenta minn hawn',
   'Teams-gastclient (ontwerp)': 'Klijent mistieden ta\' Teams (disinn)',

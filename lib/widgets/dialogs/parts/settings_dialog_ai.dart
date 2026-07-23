@@ -143,13 +143,13 @@ extension _SettingsAi on _SettingsDialogState {
       SettingsTextField(
         _ai.baseUrl,
         l10n.d('Server-URL'),
-        hint: 'http://127.0.0.1:11434/v1',
+        hint: l10n.d('http://127.0.0.1:11434/v1'),
         icon: Icons.link,
       ),
       SettingsTextField(
         _ai.model,
         l10n.d('Modelnaam'),
-        hint: 'gemma3:4b',
+        hint: l10n.d('gemma3:4b'),
         icon: Icons.memory_outlined,
       ),
       if (isSelfHosted || isCloud)

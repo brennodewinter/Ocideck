@@ -116,7 +116,7 @@ class _S3PanelState extends State<S3Panel> {
         SettingsTextField(
           _form.endpoint,
           l10n.d('Endpoint'),
-          hint: 'https://s3.eu-central-1.amazonaws.com',
+          hint: l10n.d('https://s3.eu-central-1.amazonaws.com'),
           icon: Icons.link,
         ),
         SettingsTextField(
@@ -128,7 +128,7 @@ class _S3PanelState extends State<S3Panel> {
         SettingsTextField(
           _form.region,
           l10n.d('Regio'),
-          hint: 'eu-central-1',
+          hint: l10n.d('eu-central-1'),
           icon: Icons.public,
         ),
         SettingsTextField(
@@ -140,7 +140,7 @@ class _S3PanelState extends State<S3Panel> {
         SettingsTextField(
           _form.root,
           l10n.d('Prefix (optioneel)'),
-          hint: 'presentaties',
+          hint: l10n.d('presentaties'),
           icon: Icons.folder_outlined,
         ),
         SwitchListTile(

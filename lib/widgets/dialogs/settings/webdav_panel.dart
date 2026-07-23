@@ -109,8 +109,8 @@ class _WebdavPanelState extends State<WebdavPanel> {
           // Bij Nextcloud is het pad afgeleid en telt alleen de host; bij een
           // andere server valt er niets te raden en ís het pad de DAV-wortel.
           hint: isNextcloud
-              ? 'https://cloud.voorbeeld.nl'
-              : 'https://dav.voorbeeld.nl/dav/bestanden',
+              ? l10n.d('https://cloud.example.com')
+              : l10n.d('https://dav.example.com/dav/files'),
           icon: Icons.link,
         ),
         if (!isNextcloud)
@@ -139,7 +139,7 @@ class _WebdavPanelState extends State<WebdavPanel> {
         SettingsTextField(
           _form.root,
           l10n.d('Submap (optioneel)'),
-          hint: '/Presentaties',
+          hint: l10n.d('/Presentaties'),
           icon: Icons.folder_outlined,
         ),
         SwitchListTile(

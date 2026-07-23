@@ -1782,6 +1782,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'presentaties': 'prezentacije',
+  '/Presentaties': '/Prezentacije',
   'De export is mislukt.': 'Izvoz nije uspio.',
   'Presenteer vanaf hier': 'Prezentiraj odavde',
   'Teams-gastclient (ontwerp)': 'Teams klijent za goste (dizajn)',

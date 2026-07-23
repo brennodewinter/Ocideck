@@ -1767,6 +1767,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'presentaties': 'esitlused',
+  '/Presentaties': '/Esitlused',
   'De export is mislukt.': 'Eksport ebaõnnestus.',
   'Presenteer vanaf hier': 'Esita siit',
   'Teams-gastclient (ontwerp)': 'Teamsi külalisklient (kavand)',

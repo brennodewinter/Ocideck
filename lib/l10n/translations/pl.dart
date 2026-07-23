@@ -1788,6 +1788,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'presentaties': 'prezentacje',
+  '/Presentaties': '/Prezentacje',
   'De export is mislukt.': 'Eksport nie powiódł się.',
   'Presenteer vanaf hier': 'Prezentuj stąd',
   'Teams-gastclient (ontwerp)': 'Klient Teams dla gości (projekt)',

@@ -1793,6 +1793,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'presentaties': 'prezentatsii',
+  '/Presentaties': '/Презентації',
   'De export is mislukt.': 'Експорт не вдався.',
   'Presenteer vanaf hier': 'Презентувати звідси',
   'Teams-gastclient (ontwerp)': 'Гостьовий клієнт Teams (проєкт)',
