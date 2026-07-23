@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/services.dart' show MethodChannel;
 import 'package:pasteboard/pasteboard.dart';
 import 'package:path/path.dart' as p;
 import '../l10n/app_localizations.dart';
@@ -33,8 +34,18 @@ class ImageImportOutcome {
 class ImageService {
   final String Function() _languageCode;
 
-  ImageService({String Function()? languageCode})
-    : _languageCode = languageCode ?? (() => 'nl');
+  /// Injecteerbaar zodat de Linux-route onder `flutter test` (waar
+  /// `Platform.isLinux` altijd de testmachine volgt) tóch te bewijzen is.
+  final bool Function() _isLinux;
+
+  ImageService({String Function()? languageCode, bool Function()? isLinux})
+    : _languageCode = languageCode ?? (() => 'nl'),
+      _isLinux = isLinux ?? (() => isLinuxDesktop);
+
+  /// Het eigen klembordkanaal van de Linux-runner (my_application.cc).
+  /// Het pasteboard-pakket heeft geen Linux-schrijftak: `writeImage` is daar
+  /// een stille no-op, dus schrijven loopt op Linux via dit kanaal (#758).
+  static const _linuxClipboardChannel = MethodChannel('ocideck/clipboard');
 
   String _d(String text) => AppLocalizations.sourceFor(_languageCode(), text);
 
@@ -321,9 +332,19 @@ class ImageService {
 
   /// Schrijf afbeeldings[bytes] naar het systeemklembord. Geeft false terug
   /// bij een fout. Gebruikt voor zowel bestanden als een gerasteriseerde slide.
+  ///
+  /// Op Linux via het eigen runner-kanaal; de native kant meldt of de bytes
+  /// werkelijk als afbeelding op het klembord staan.
   Future<bool> copyImageBytesToClipboard(Uint8List bytes) async {
     try {
       if (bytes.isEmpty) return false;
+      if (_isLinux()) {
+        final ok = await _linuxClipboardChannel.invokeMethod<bool>(
+          'writeImage',
+          bytes,
+        );
+        return ok ?? false;
+      }
       await Pasteboard.writeImage(bytes);
       return true;
     } catch (e) {

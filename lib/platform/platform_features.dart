@@ -10,6 +10,10 @@ bool get isWebPlatform => kIsWeb;
 /// Desktop OS with native windowing (macOS, Windows, Linux).
 bool get isDesktopNative => impl.isDesktopNative;
 
+/// Linux-desktop, waar het klembord-schrijfpad via het eigen GTK-kanaal in
+/// de runner loopt in plaats van via het pasteboard-pakket (#758).
+bool get isLinuxDesktop => impl.isLinuxDesktop;
+
 /// Whether this platform *could* run a native `git` subprocess at all — the
 /// cheap, synchronous pre-check before the real runtime probe
 /// (`nativeGitVersionProvider`, which actually invokes `git`). False on web and
