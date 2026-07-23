@@ -312,6 +312,89 @@ void main() {
     }
   });
 
+  // ── Wat Material zélf schildert ───────────────────────────────────────────
+  //
+  // De groep hierboven gaat over tekst. Dit gaat over de onderdelen die geen
+  // tekst zijn maar wel een stand tonen: een aangevinkt vakje, een schakelaar,
+  // de cursor. Ze halen hun kleur uit `colorScheme.primary`, en dat was in het
+  // profiel Donker de bálkkleur `#111827` — waardoor het vinkje op zijn eigen
+  // vulling op 1,35:1 stond. Je kon niet zien of een vakje aan stond.
+  group('de interactie-onderdelen zijn te onderscheiden', () {
+    for (final profile in AppAppearanceProfile.builtIns) {
+      test(profile.name, () {
+        final theme = AppTheme.fromProfile(profile);
+        final scheme = theme.colorScheme;
+
+        // Een selectievakje of schakelaar is een grafisch onderdeel: WCAG
+        // 1.4.11 vraagt 3:1 tegen wat eromheen ligt.
+        expect(
+          contrastRatio(scheme.primary, scheme.surface),
+          greaterThanOrEqualTo(kWcagAaLargeText),
+          reason:
+              'de vulling van een aangevinkt vakje verdwijnt in het oppervlak '
+              '(${profile.name})',
+        );
+
+        // En het vinkje móet op die vulling te zien zijn — dat is de stand
+        // zelf, dus de gewone tekstlat.
+        expect(
+          contrastRatio(scheme.onPrimary, scheme.primary),
+          greaterThanOrEqualTo(kWcagAaNormalText),
+          reason:
+              'het vinkje is onzichtbaar op zijn eigen vulling '
+              '(${profile.name}) — dan toont een vakje zijn stand niet',
+        );
+
+        // De cursor tegen de vulling van het invoerveld. Zonder expliciete
+        // TextSelectionTheme pakt Flutter hier colorScheme.primary, en dat
+        // was precies het probleem.
+        final cursor = theme.textSelectionTheme.cursorColor;
+        expect(
+          cursor,
+          isNotNull,
+          reason:
+              'geen expliciete cursorkleur: Flutter valt dan terug op '
+              'colorScheme.primary',
+        );
+        final veldVulling =
+            theme.inputDecorationTheme.fillColor ?? scheme.surface;
+        expect(
+          contrastRatio(cursor!, veldVulling),
+          greaterThanOrEqualTo(kWcagAaLargeText),
+          reason:
+              'de tekstcursor is niet te zien in een invoerveld '
+              '(${profile.name})',
+        );
+      });
+    }
+  });
+
+  group('de bovenbalk houdt de merkkleur van het profiel', () {
+    // De keerzijde van de reparatie hierboven, en de reden dat die niet "geef
+    // het profiel gewoon een lichte primaryColor" was: `appBarTheme` schildert
+    // de bovenbalk met diezelfde waarde. Licht maken zou het contrastprobleem
+    // niet oplossen maar verplaatsen — naar een lichte balk in donkere modus.
+    // Deze toets houdt die uitweg dicht.
+    for (final profile in AppAppearanceProfile.builtIns) {
+      test(profile.name, () {
+        final theme = AppTheme.fromProfile(profile);
+        expect(
+          theme.appBarTheme.backgroundColor,
+          AppTheme.parseHexColor(profile.primaryColor),
+          reason: 'de bovenbalk hoort de merkkleur van het profiel te zijn',
+        );
+        expect(
+          contrastRatio(
+            theme.appBarTheme.foregroundColor!,
+            theme.appBarTheme.backgroundColor!,
+          ),
+          greaterThanOrEqualTo(kWcagAaNormalText),
+          reason: 'de titel in de bovenbalk leest niet (${profile.name})',
+        );
+      });
+    }
+  });
+
   test('geen colorScheme.primary als tekst- of icoonkleur', () {
     // De bronwacht erbij. Het thema repareren helpt niets als de volgende
     // widget `theme.colorScheme.primary` weer rechtstreeks als `color:` pakt —

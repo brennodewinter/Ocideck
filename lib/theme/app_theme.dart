@@ -380,6 +380,36 @@ class AppTheme {
     return value == null ? fallback : Color(value);
   }
 
+  /// De kleur waarmee Material zijn interactieve onderdelen schildert: de
+  /// vulling van een aangevinkt selectievakje, de duim van een schakelaar, de
+  /// tekstcursor, de focusring, de actieve schuifbalk.
+  ///
+  /// Dat is een ándere rol dan die van [primary] in een profiel, en daar zat de
+  /// fout (#744). `profile.primaryColor` is de **merk- en balkkleur** —
+  /// `appBarTheme` schildert de bovenbalk ermee — en die hoort in een donker
+  /// profiel juist donker te zijn (`#111827`). Material kreeg dezelfde waarde
+  /// als `ColorScheme.primary` en gebruikte hem dan als accent, wat in donkere
+  /// modus twee onmogelijkheden opleverde:
+  ///
+  ///   * `primary` op `surface` = 1,21:1 — de tekstcursor was weg;
+  ///   * `onPrimary` (`#122F60`) op `primary` = **1,35:1** — het vinkje in een
+  ///     aangevinkt vakje was onzichtbaar op zijn eigen vulling, dus het vakje
+  ///     toonde zijn stand niet.
+  ///
+  /// Het profiel simpelweg een lichte `primaryColor` geven repareert dat niet
+  /// maar verplaatst het: dan wordt de bovenbalk licht. De twee rollen moeten
+  /// uit elkaar, en het profiel heeft de tweede al — [accentColor], dat de
+  /// focusrand en de primaire knop ook al gebruiken.
+  ///
+  /// Alleen in donkere modus. In een licht profiel ís de merkkleur de goede
+  /// accentkleur (14,1:1 bij Basic), en omschakelen zou de lichte modus
+  /// onnodig verkleuren.
+  static Color _interactiveColor(
+    AppAppearanceProfile profile,
+    Color primary,
+    Color accentColor,
+  ) => profile.isDark ? accentColor : primary;
+
   static ThemeData fromProfile(AppAppearanceProfile profile) {
     final primary = parseHexColor(profile.primaryColor, fallback: navy);
     final accentColor = parseHexColor(profile.accentColor, fallback: accent);
@@ -399,10 +429,16 @@ class AppTheme {
     final panel = parseHexColor(profile.panelColor, fallback: panelBg);
     final panelText = parseHexColor(profile.panelTextColor, fallback: panelFg);
     final brightness = profile.isDark ? Brightness.dark : Brightness.light;
+
+    final interactive = _interactiveColor(profile, primary, accentColor);
+
     final scheme = ColorScheme.fromSeed(
+      // De kiem blijft de mérkkleur: die bepaalt de hele harmonie van het
+      // schema (containers, outlines, onPrimary). Alleen de rol `primary` komt
+      // er niet meer uit.
       seedColor: primary,
       brightness: brightness,
-      primary: primary,
+      primary: interactive,
       secondary: accentColor,
       surface: surfaceColor,
     );
@@ -441,6 +477,17 @@ class AppTheme {
         color: scheme.outlineVariant,
         thickness: 1,
         space: 1,
+      ),
+      // Er stond er geen, en zonder deze regel neemt Flutter
+      // `colorScheme.primary` voor de cursor. Dat is precies de kleur die
+      // hierboven de bálkkleur bleek te zijn: in donkere modus stond de cursor
+      // op 1,21:1 tegen de vulling van het veld — in een tekstverwerker weet je
+      // dan niet waar je typt. Nu expliciet, en aan dezelfde rol gekoppeld als
+      // de rest van de interactie.
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: interactive,
+        selectionColor: interactive.withValues(alpha: 0.35),
+        selectionHandleColor: interactive,
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,

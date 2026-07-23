@@ -157,6 +157,24 @@ read a book to find out.
   de nalevingsteller ziet het onveranderd. Beoordeeld en akkoord blijft iets
   anders dan opgelost.
 
+- **Je kon in donkere modus niet zien of een selectievakje aan stond, en niet
+  waar je cursor stond.** De tweede helft van #744, en erger dan de eerste. De
+  vulling van een aangevinkt vakje was `#111827` met een vinkje van `#122F60`
+  erop: **1,35:1** — het vinkje verdween in zijn eigen vulling, dus het vakje
+  toonde zijn stand niet. En omdat er geen `TextSelectionThemeData` was, nam
+  Flutter voor de tekstcursor `colorScheme.primary`: `#111827` op een invoerveld
+  van `#1E293B`, 1,21:1. In een tekstverwerker weet je dan niet waar je typt.
+  De oorzaak was dat `primary` twee onverenigbare rollen droeg: `appBarTheme`
+  schildert er de bovenbalk mee (en dáár hoort hij donker), terwijl Material hem
+  als accent voor interactieve onderdelen gebruikt (en dáár hoort hij licht).
+  Het profiel een lichte `primaryColor` geven lost dat niet op maar verplaatst
+  het — dan wordt de bovenbalk licht. De rollen zijn nu gescheiden:
+  `ColorScheme.primary` volgt in donkere modus het accent van het profiel
+  (`#60A5FA`, 5,75:1 op het oppervlak, vinkje op 5,16:1), de bovenbalk houdt de
+  merkkleur. Beide lichte profielen bewegen geen pixel. Drie toetsen erbij, elk
+  rood gezien — inclusief één die de verkeerde uitweg dichthoudt: een lichte
+  `primaryColor` laat de titel in de bovenbalk vallen. (#744)
+
 - **Tekstknoppen en links waren in donkere modus onleesbaar — 1,21:1.** Material
   geeft een `TextButton` standaard `colorScheme.primary` als voorgrond, en in het
   profiel *Donker* is `primary` de merkkleur `#111827`. Op het eigen oppervlak
