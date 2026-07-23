@@ -187,3 +187,31 @@ final _reIban = RegExp(r'\b[A-Z]{2}\d{2}(?:[ -]?[A-Z0-9]){10,30}\b');
 /// Negen losstaande cijfers. Bewust ruim: de 11-proef en de contextpoort doen
 /// het filterwerk, niet de regex.
 final _reNineDigits = RegExp(r'(?<!\d)\d{9}(?!\d)');
+
+/// Of deze bevinding door de auteur terzijde is gelegd — de vraag die zowel het
+/// paneel als de exportpoort stelt.
+///
+/// **Eén functie voor beide lezers, en dat is de les van #740.** Het filter zat
+/// eerst alleen in de paneelprovider. De exportpoort las diezelfde bevindingen
+/// langs een andere weg, wist van niets, en onderbrak de export op iets dat het
+/// paneel niet meer toonde: blokkeren zonder aanwijzing. Wie hier een derde
+/// lezer bijbouwt, gebruikt dit en formuleert het niet opnieuw.
+///
+/// Levert een predicaat op in plaats van een antwoord, zodat de aanroeper hem
+/// één keer maakt en over al zijn bevindingen haalt — de tekstopzoeking per
+/// bevinding is niet gratis.
+bool Function(PrivacyFinding) setAsidePredicate(
+  PrivacyScanner scanner,
+  Deck deck,
+) {
+  final setAside = deck.dismissals;
+  if (setAside == null || setAside.dismissals.isEmpty) {
+    return (_) => false;
+  }
+  return (finding) {
+    final text = matchedTextOf(scanner, deck, finding);
+    // Geen tekst meer op die plek: de dia is bewerkt sinds de scan. Dan liever
+    // melden dan onderdrukken.
+    return text != null && setAside.hides(finding.ruleId, text);
+  };
+}

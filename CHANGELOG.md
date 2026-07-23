@@ -115,6 +115,19 @@ read a book to find out.
   alle 31 talen.
 
 ### Fixed
+- **Een beoordeelde privacybevinding hield de export tegen zonder dat je kon
+  zien waarover.** Wie een bevinding beoordeelde en liet staan, zag het
+  kwaliteitspaneel stil worden — maar de export vroeg nog steeds om een
+  bevestiging. Op iets dat nergens meer te vinden was. Een onderbreking zonder
+  aanwijzing is precies het soort melding dat mensen leren wegklikken, en dat
+  ondermijnt de melding die er wél toe doet.
+
+  De export laat het nu door, want de poort houdt geen persoonsgegevens tegen
+  maar *onopgemerkte* persoonsgegevens — en beoordeeld is opgemerkt. Wat het
+  níet doet is het als opgelost tellen: het staat apart in de samenvatting, en
+  de nalevingsteller ziet het onveranderd. Beoordeeld en akkoord blijft iets
+  anders dan opgelost.
+
 - **In donkere modus stond het logo als een groot wit vlak op het openscherm.**
   De oorzaak zat niet in de weergave maar in de asset: `ocideck-logo.png` is
   volledig ondoorzichtig — alle hoeken `#FFFFFF` bij alfa 255, bijna negentig

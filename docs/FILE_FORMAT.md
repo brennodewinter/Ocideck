@@ -2020,6 +2020,27 @@ counting it. Only the panel filters. A dismissed finding is also not "resolved":
 the two must stay distinguishable, or the quality panel starts reporting a
 cleanliness the deck does not have.
 
+**The export gate is a second reader, and forgetting that was a bug (#740).**
+The first build filtered set-asides in the panel provider only. The gate read
+the same findings by another route, still counted them as unresolved, and
+interrupted the export over something the panel no longer showed — a block with
+no way to find what it was about, which is exactly the kind of prompt people
+learn to click away.
+
+The resolution is not "count it as resolved". The gate and the compliance
+counter answer different questions, and both answers are correct:
+
+| Asks | Set-aside counts as |
+| --- | --- |
+| Export gate: *did you look at this?* | looked at — it does not block |
+| MIAUW EIS 1.1: *how much is in this document?* | still there — it counts |
+
+So the gate lets it through, `PrivacyExportSummary.setAside` counts it
+separately (not folded into `accepted`, which is a whole-slide decision), and
+the export message names it. Both readers now share one predicate,
+`setAsidePredicate` in `privacy_scanner_dismissals.dart`: a third reader must
+use it rather than restate it.
+
 #### Undoing
 
 `revocations` exists because a set-aside you cannot find again is a deletion.
