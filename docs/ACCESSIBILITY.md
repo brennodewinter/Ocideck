@@ -179,7 +179,7 @@ that the export uses exactly what the editor shows. In dark mode that was
 untrue. Slide previews now use fixed ink (`slideInk`, `slideInkMuted`,
 `slideInkSoft`, …) — the same values, no longer moving.
 
-`test/app_theme_contrast_test.dart` now checks nine things, and the guards are
+`test/app_theme_contrast_test.dart` now checks twelve things, and the guards are
 what keep this from being a one-off: the mode-aware tokens meet 4.5:1 in both
 modes; the slide text tokens meet 4.5:1 on white; the two accent tokens meet
 3:1; the slide ink is identical in both modes; and two source checks reject
@@ -215,6 +215,31 @@ appearance profile, the resolved foreground of each button theme and of
 `accentInk` must clear 4.5:1 on that profile's own surface, and a source guard
 rejects `colorScheme.primary` used as a `color:`. The first one fails if a
 future button theme is left out entirely, which is what actually happened here.
+
+**Measuring that properly turned up something worse than the text.** Text at
+1.21:1 is unreadable; a control that cannot show its own state is unusable. The
+fill of a ticked checkbox was `primary` (`#111827`) with its tick drawn in
+`onPrimary` (`#122F60`) — **1.35:1 against its own fill**. In dark mode you
+could not tell a ticked box from an empty one. And with no
+`TextSelectionThemeData` anywhere, Flutter took `colorScheme.primary` for the
+text cursor: `#111827` on a `#1E293B` field. In an application whose purpose is
+writing, the caret was invisible.
+
+Both came from one overload. `primary` in an appearance profile is the **brand
+and title-bar colour** — `appBarTheme` paints the bar with it, and in a dark
+profile it *should* be dark. Material also treats `ColorScheme.primary` as the
+**accent for interactive components**, where in dark it must be light. One value
+cannot be both, and the obvious fix (give the dark profile a light
+`primaryColor`) does not resolve the conflict — it moves it, producing a light
+title bar. The roles are now separate: in dark mode `ColorScheme.primary` takes
+the profile's accent (`#60A5FA` — 5.75:1 on the surface, tick at 5.16:1) while
+the bar keeps the brand colour. Light profiles are byte-identical.
+
+Three more checks, one of them holding that wrong turn shut: a ticked control
+clears 3:1 against its surface (WCAG 1.4.11), its tick clears 4.5:1 against its
+own fill, the caret clears 3:1 against the field, and the title bar must keep
+the profile's brand colour *with a legible title on it* — so a future light
+`primaryColor` fails the build rather than the eye.
 
 *Three smaller things the visual review turned up, now fixed: the export
 dialog had been migrated on its success branch but not its failure branch, so
