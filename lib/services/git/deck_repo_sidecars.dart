@@ -11,6 +11,7 @@ import 'package:path/path.dart' as p;
 import '../../models/deck.dart';
 import '../../utils/log.dart';
 import '../annotation_codec.dart';
+import '../miauw_codec.dart';
 import '../privacy/dismissal_codec.dart';
 import '../sidecar_format.dart';
 import '../user_notes_codec.dart';
@@ -57,6 +58,17 @@ const String dismissalsRepoFileName = 'deck.dismissals.json';
 /// Bovengrens voor de terzijdeleggingen-sidecar: oordelen zijn tekstregels en
 /// tellen in kilobytes, net als de notities.
 const int maxRepoDismissalsBytes = 2 * 1024 * 1024; // 2 MiB
+
+/// Naam van de MIAUW-dispositie-sidecar binnen een deckmap (#756) — dezelfde
+/// achtervoegselvorm als op schijf (`<naam>.miauw.json`). Een waiver of
+/// bevestiging is een reviewbesluit over het rapport, net als een
+/// terzijdelegging, en reist dus mee; de merge-semantiek (unie per EIS-id,
+/// laatste besluit wint, grafstenen overleven) staat in GIT_STORAGE §9.7.
+const String miauwRepoFileName = 'deck.miauw.json';
+
+/// Bovengrens voor de dispositie-sidecar: hooguit ~92 EIS-nummers met een
+/// motiveringsregel, dus kilobytes — zelfde maat als de terzijdeleggingen.
+const int maxRepoMiauwBytes = 2 * 1024 * 1024; // 2 MiB
 
 /// Levert de bytes achter een afbeeldingsverwijzing, of null wanneer die niet te
 /// lezen is (web zonder mem:-treffer, een pad buiten het project, een leesfout).
@@ -229,7 +241,50 @@ Future<RepoDismissals> withRepoDismissals(
       : (deck: deck.copyWith(dismissals: d), onleesbaar: false);
 }
 
-/// Schrijf (of verwijder) de drie sidecars van [deck] in de commitset — de ene
+/// Hang de MIAUW-dispositie uit `deck.miauw.json` weer aan [deck] — zelfde
+/// contract als de andere lagen, en net als bij de terzijdeleggingen is er
+/// geen heranker-stap: de identiteit is het EIS-nummer, geen dia-positie.
+typedef RepoMiauw = ({Deck deck, bool onleesbaar});
+
+Future<RepoMiauw> withRepoMiauw(
+  Deck deck, {
+  required String deckDir,
+  required RepoFileReader read,
+}) async {
+  Uint8List? bytes;
+  try {
+    bytes = await read(p.posix.join(deckDir, miauwRepoFileName));
+  } catch (e) {
+    logWarning('withRepoMiauw: MIAUW-dispositiebestand onbereikbaar', e);
+    return (deck: deck, onleesbaar: true);
+  }
+  if (bytes == null || bytes.isEmpty) {
+    return (deck: deck, onleesbaar: false);
+  }
+  if (bytes.length > maxRepoMiauwBytes) {
+    logWarning(
+      'withRepoMiauw: MIAUW-dispositiebestand is ${bytes.length} bytes '
+      '(grens $maxRepoMiauwBytes) — niet geladen',
+    );
+    return (deck: deck, onleesbaar: true);
+  }
+  final String json;
+  try {
+    json = utf8.decode(bytes);
+  } on FormatException catch (e) {
+    logWarning(
+      'withRepoMiauw: MIAUW-dispositiebestand is geen geldige UTF-8',
+      e,
+    );
+    return (deck: deck, onleesbaar: true);
+  }
+  final d = MiauwCodec.decode(json);
+  return d.isEmpty
+      ? (deck: deck, onleesbaar: true)
+      : (deck: deck.copyWith(miauw: d), onleesbaar: false);
+}
+
+/// Schrijf (of verwijder) de sidecars van [deck] in de commitset — de ene
 /// aanroep die `buildDeckRepoFiles` doet, zodat een vierde laag maar op één
 /// plek vergeten kan worden.
 ///
@@ -277,6 +332,13 @@ Future<void> writeAllRepoSidecars(
       null => null,
       final d => DismissalCodec.encode(d, forTextMerge: true),
     },
+    upserts: upserts,
+    deletes: deletes,
+  );
+  await writeRepoSidecar(
+    path: p.posix.join(deckDir, miauwRepoFileName),
+    state: (path) => repoMiauwState(path, read),
+    encoded: MiauwCodec.encodeDisposition(deck.miauw, forTextMerge: true),
     upserts: upserts,
     deletes: deletes,
   );
@@ -377,6 +439,18 @@ Future<RepoSidecarState> repoDismissalsState(
   version: DismissalCodec.version,
   wat: 'terzijdeleggingenbestand',
 );
+
+/// De toestand van de MIAUW-dispositie-sidecar op [path] — zelfde strenge
+/// regel; ook dit bestand draagt reviewbesluiten van mogelijk een ándere
+/// reviewer.
+Future<RepoSidecarState> repoMiauwState(String path, RepoFileReader? read) =>
+    _repoSidecarState(
+      path,
+      read,
+      maxBytes: maxRepoMiauwBytes,
+      version: MiauwCodec.version,
+      wat: 'MIAUW-dispositiebestand',
+    );
 
 Future<RepoSidecarState> _repoSidecarState(
   String path,
