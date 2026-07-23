@@ -735,6 +735,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Befiningen dy\'t sto beoardield en stean litten hast. Dy wurde net mear meld, mar de scan fynt se noch altyd en se telle net as oplost. Tik om der ien werom te setten.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'In privacybefining oan \'e kant sette (ûntwerp)',
   'Een verzegeld deck gaat niet naar een werkbranch':

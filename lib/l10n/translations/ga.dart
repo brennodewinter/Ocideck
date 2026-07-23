@@ -1810,6 +1810,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Fionnachtana a ndearna tú athbhreithniú orthu agus a d\'fhág tú mar atá. Ní thuairiscítear a thuilleadh iad, ach aimsíonn an scanadh fós iad agus ní áirítear réitithe iad. Tapáil chun ceann a chur ar ais.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Fionnachtain phríobháideachais a chur i leataobh (dearadh)',
   'Een verzegeld deck gaat niet naar een werkbranch':

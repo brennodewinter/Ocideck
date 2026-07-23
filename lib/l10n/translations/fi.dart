@@ -1775,6 +1775,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Havainnot, jotka olet arvioinut ja jättänyt paikalleen. Niistä ei enää ilmoiteta, mutta skannaus löytää ne edelleen eikä niitä lasketa ratkaistuiksi. Napauta palauttaaksesi yhden.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Yksityisyyshavainnon sivuun siirtäminen (suunnitelma)',
   'Een verzegeld deck gaat niet naar een werkbranch':

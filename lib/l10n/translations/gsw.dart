@@ -1778,6 +1778,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Befünd wo du aagluegt und stoh gloh häsch. Die wärded nüme gmäldet, aber de Scan findt si witerhin und si gälted nöd als glöst. Tipp zum eis zrugghole.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'E Datenschutz-Befund zruggstelle (Entwurf)',
   'Een verzegeld deck gaat niet naar een werkbranch':

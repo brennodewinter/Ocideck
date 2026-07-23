@@ -734,6 +734,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Konstatashonnan ku bo a evaluá i a laga keda. Nan no ta wòrdu reportá mas, pero e scan ta sigui haña nan i nan no ta konta komo resolvé. Toka pa pone un bèk.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Pone un konstatashon di privasidat un banda (diseño)',
   'Een verzegeld deck gaat niet naar een werkbranch':

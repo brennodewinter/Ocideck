@@ -1774,6 +1774,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Konstatējumi, kas ir izvērtēti un atstāti. Par tiem vairs neziņo, taču skenēšana tos joprojām atrod, un tie netiek uzskatīti par novērstiem. Pieskaries, lai vienu atjaunotu.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Privātuma konstatējuma atlikšana (projekts)',
   'Een verzegeld deck gaat niet naar een werkbranch':

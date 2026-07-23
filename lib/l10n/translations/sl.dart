@@ -1777,6 +1777,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Ugotovitve, ki so bile pregledane in puščene. Ne javljajo se več, vendar jih pregled še vedno najde in ne štejejo kot razrešene. Tapni za vrnitev ene.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Odlaganje ugotovitve o zasebnosti (zasnova)',
   'Een verzegeld deck gaat niet naar een werkbranch':

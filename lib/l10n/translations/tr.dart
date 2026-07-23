@@ -2754,6 +2754,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'İncelediğiniz ve olduğu gibi bıraktığınız bulgular. Bunlar artık bildirilmez, ancak tarama onları bulmaya devam eder ve çözülmüş sayılmaz. Birini geri getirmek için dokunun.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Bir gizlilik bulgusunu bir kenara koyma (tasarım)',
   'Een verzegeld deck gaat niet naar een werkbranch':

@@ -1797,6 +1797,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Sejbiet li rrevedejt u ħallejt kif inhuma. Dawn ma jiġux irrapportati aktar, iżda l-iskennjar xorta jsibhom u ma jgħoddux bħala solvuti. Mess biex terġa\' ddaħħal waħda.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Tqegħid fil-ġenb ta\' sejba dwar il-privatezza (disinn)',
   'Een verzegeld deck gaat niet naar een werkbranch':

@@ -1779,6 +1779,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Megállapítások, amelyeket megnéztél és meghagytál. Ezeket már nem jelzi, de a vizsgálat továbbra is megtalálja őket, és nem számítanak megoldottnak. Koppints az egyik visszaállításához.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Adatvédelmi észrevétel félretétele (terv)',
   'Een verzegeld deck gaat niet naar een werkbranch':

@@ -1804,6 +1804,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Constatações que analisaste e deixaste ficar. Já não são comunicadas, mas a análise continua a encontrá-las e não contam como resolvidas. Toca para repor uma.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Pôr de lado um achado de privacidade (desenho)',
   'Een verzegeld deck gaat niet naar een werkbranch':

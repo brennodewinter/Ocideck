@@ -734,6 +734,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Constatations que tu as examinées et laissées en place. Elles ne sont plus signalées, mais le scan continue de les trouver et elles ne comptent pas comme résolues. Touche pour en rétablir une.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Mettre de côté un constat de confidentialité (conception)',
   'Een verzegeld deck gaat niet naar een werkbranch':

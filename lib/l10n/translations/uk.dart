@@ -1792,6 +1792,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Виявлення, які ви переглянули й залишили. Про них більше не повідомляється, але сканування далі їх знаходить, і вони не вважаються усуненими. Торкніться, щоб повернути одне з них.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Відкладення висновку щодо приватності (проєкт)',
   'Een verzegeld deck gaat niet naar een werkbranch':

@@ -1774,6 +1774,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Iakttagelser som du har bedömt och låtit stå kvar. De rapporteras inte längre, men skanningen hittar dem fortfarande och de räknas inte som åtgärdade. Tryck för att återställa en.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Att lägga ett integritetsfynd åt sidan (design)',
   'Een verzegeld deck gaat niet naar een werkbranch':

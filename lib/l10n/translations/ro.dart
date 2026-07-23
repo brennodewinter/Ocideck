@@ -1792,6 +1792,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Constatări pe care le-ai analizat și le-ai lăsat așa. Nu mai sunt raportate, dar scanarea continuă să le găsească și nu contează ca rezolvate. Atinge pentru a repune una.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Punerea deoparte a unei constatări de confidențialitate (proiect)',
   'Een verzegeld deck gaat niet naar een werkbranch':

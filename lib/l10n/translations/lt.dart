@@ -1782,6 +1782,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
+      'Radiniai, kurie buvo įvertinti ir palikti. Apie juos nebepranešama, bet nuskaitymas juos vis tiek randa ir jie nelaikomi išspręstais. Bakstelėk, kad vieną grąžintum.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Privatumo radinio atidėjimas (projektas)',
   'Een verzegeld deck gaat niet naar een werkbranch':
