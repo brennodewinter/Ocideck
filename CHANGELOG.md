@@ -94,6 +94,19 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Removed
+- **Drie afbeeldingen uit de tijd vóór de OciDeck-huisstijl.**
+  `assets/images/logo.png` en `de-winter-wittegeheel.png` zijn twee
+  byte-verschillende kopieën van hetzelfde "De Winter Information
+  Solutions"-logo; `logo-icon.png` is de oude fotokat die ooit als icoonbron
+  diende. Geen van drieën wordt nog geladen: de app-iconen (macOS AppIcon-set,
+  favicon, PWA) komen sinds `da7b7c9e`/`dc62e03f` uit `ocideck-logo.png`, en de
+  enige treffers op `logo.png` in `lib/` en `test/` gaan over
+  gebruikerslogo's met dezelfde naam. `de-winter-wittegeheel.png` stond wél in
+  `pubspec.yaml` en reisde dus mee in elke gebouwde bundel — 138 kB die niemand
+  opvroeg. Bij `ocideck-logo.png` staat nu een regel die zegt dát het de
+  icoonbron is, zodat de volgende opruimronde hem niet meeneemt.
+
 ### Added
 - **Het Vigilis-logo in "Over OciDeck", onder de uitgever.** Vigilis maakt het
   werk van Stichting LibreKAT mogelijk; het scherm noemde de stichting wel,

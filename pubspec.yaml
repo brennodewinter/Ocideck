@@ -105,6 +105,9 @@ flutter:
     # Apache-2.0 vragen de hele tekst bij herdistributie, en de gebruiker die
     # een HTML-export doorstuurt is de verspreidende partij.
     - assets/licenses/
+    # Ook het bronbestand van de app-iconen: de macOS AppIcon-set (16–1024) en
+    # het web-favicon/PWA-iconen worden hieruit gegenereerd. Niet weggooien
+    # omdat de code hem "maar" op twee plekken toont.
     - assets/images/ocideck-logo.png
     - assets/images/ocideck-logo-eu.png
     - assets/images/librekat-logo.png
@@ -115,7 +118,6 @@ flutter:
     - assets/images/ocideck-logo-dark.png
     - assets/images/librekat-logo-dark.png
     - assets/images/vigilis-logo-dark.png
-    - assets/images/de-winter-wittegeheel.png
     - assets/images/flag_fy.png
     - assets/images/cat-branie.jpg
     - assets/images/cat-keiko.jpg
