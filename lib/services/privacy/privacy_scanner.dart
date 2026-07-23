@@ -76,6 +76,45 @@ part 'privacy_scanner_fragments.dart';
 /// definitie nooit meetellen.
 typedef _Fragment = ({String field, int index, String text, String context});
 
+/// De tekst waar [finding] op sloeg, of null wanneer die niet meer bestaat.
+///
+/// Nodig om een bevinding terzijde te kunnen leggen (#651): de terzijdelegging
+/// bewaart `SHA-256(zout ‖ tekst)`, en die tekst staat nergens in de bevinding
+/// zelf. Met opzet niet — `PrivacyFinding.maskedSample` is gemaskeerd, en de
+/// brug naar het kwaliteitspaneel geeft de volledige waarde bewust nooit door.
+/// Een privacycontrole die de gevonden BSN's in haar eigen meldingen zet,
+/// heeft het probleem verplaatst in plaats van opgelost.
+///
+/// Daarom staat deze functie hier, in de scannerbibliotheek: de waarde wordt
+/// opgezocht, meteen tot een commitment verwerkt, en verlaat deze laag niet.
+///
+/// Null wanneer het fragment weg is of korter is geworden dan de opgeslagen
+/// positie — de dia is dan bewerkt sinds de scan, en de aanroeper hoort dat
+/// als "niets te doen" te behandelen in plaats van een willekeurig stuk tekst
+/// te nemen.
+String? matchedTextOf(
+  PrivacyScanner scanner,
+  Deck deck,
+  PrivacyFinding finding,
+) {
+  final fragments = finding.isDeckWide
+      ? scanner._deckFragments(deck)
+      : (finding.slideIndex >= 0 && finding.slideIndex < deck.slides.length
+            ? scanner._slideFragments(deck.slides[finding.slideIndex])
+            : const <_Fragment>[]);
+  for (final fragment in fragments) {
+    if (fragment.field != finding.field) continue;
+    if (fragment.index != finding.fragmentIndex) continue;
+    if (finding.start < 0 ||
+        finding.end > fragment.text.length ||
+        finding.start >= finding.end) {
+      return null;
+    }
+    return fragment.text.substring(finding.start, finding.end);
+  }
+  return null;
+}
+
 /// Hoe ver een contextwoord vóór een treffer mag staan om nog te tellen.
 ///
 /// Ruim genoeg voor "Het burgerservicenummer van betrokkene is 123456782", krap

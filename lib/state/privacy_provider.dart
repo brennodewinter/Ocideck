@@ -96,9 +96,26 @@ PrivacyScanResult computePrivacyScan(Ref ref) {
   //
   // Let op: dit onderdrukt de MELDING, niet de redactie. Die zit in
   // PrivacyProjection, die zijn eigen scan draait en deze instelling negeert.
+  // En bevindingen die de auteur bewust terzijde heeft gelegd (#651): één
+  // treffer bekeken en goed bevonden, in plaats van de hele regel uitzetten.
+  //
+  // Ook dit onderdrukt alleen de MELDING. `privacyRawScanProvider` blijft het
+  // volle aantal zien, en dat is wat de nalevingstelling van MIAUW EIS 1.1
+  // leest — een terzijdelegging is geen oplossing en mag daar niet als zodanig
+  // meetellen.
+  final setAside = deck.dismissals;
+  final scanner = ref.watch(privacyScannerProvider);
+  bool isSetAside(PrivacyFinding f) {
+    if (setAside == null || setAside.dismissals.isEmpty) return false;
+    final text = matchedTextOf(scanner, deck, f);
+    // Geen tekst meer op die plek: de dia is bewerkt sinds de scan. Dan liever
+    // melden dan onderdrukken.
+    return text != null && setAside.hides(f.ruleId, text);
+  }
+
   return PrivacyScanResult([
     for (final finding in scan.findings)
-      if (!_isResolved(deck, finding)) finding,
+      if (!_isResolved(deck, finding) && !isSetAside(finding)) finding,
   ]);
 }
 
