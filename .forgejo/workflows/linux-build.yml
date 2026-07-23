@@ -4,7 +4,7 @@ name: linux-build
 
 on:
   push:
-    branches: [main]
+    branches: [main, fix/linux-klembord-schrijfpad-758]  # tak-trigger tijdelijk, voor de proefbouw van het klembordkanaal
   workflow_dispatch:
 
 jobs:
