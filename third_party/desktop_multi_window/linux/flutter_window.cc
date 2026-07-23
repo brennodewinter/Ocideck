@@ -111,14 +111,23 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
     } else {
       GtkWindow* window = GTK_WINDOW(window_);
       GdkScreen* screen = gtk_window_get_screen(window);
+      GdkDisplay* display = gdk_screen_get_display(screen);
       GdkWindow* gdk_window = gtk_widget_get_window(window_);
-      const gint monitor_count = gdk_screen_get_n_monitors(screen);
-      gint current_monitor = gdk_window
-                                 ? gdk_screen_get_monitor_at_window(screen,
+      const gint monitor_count = gdk_display_get_n_monitors(display);
+      // gtk_window_fullscreen_on_monitor still takes an index, so map the
+      // GdkMonitor back to its position on the display.
+      GdkMonitor* current = gdk_window
+                                ? gdk_display_get_monitor_at_window(display,
                                                                     gdk_window)
-                                 : gdk_screen_get_primary_monitor(screen);
-      if (current_monitor < 0) {
-        current_monitor = 0;
+                                : gdk_display_get_primary_monitor(display);
+      gint current_monitor = 0;
+      if (current != nullptr) {
+        for (gint i = 0; i < monitor_count; ++i) {
+          if (gdk_display_get_monitor(display, i) == current) {
+            current_monitor = i;
+            break;
+          }
+        }
       }
 
       gint target_monitor = current_monitor;
@@ -132,7 +141,8 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
       }
 
       GdkRectangle bounds;
-      gdk_screen_get_monitor_geometry(screen, target_monitor, &bounds);
+      gdk_monitor_get_geometry(gdk_display_get_monitor(display, target_monitor),
+                               &bounds);
       gtk_window_unfullscreen(window);
       gtk_window_set_decorated(window, FALSE);
       gtk_window_move(window, bounds.x, bounds.y);
