@@ -20,6 +20,7 @@ import 'slide_quality_details_dialog.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/export_block_localization.dart';
 import 'export_failure_text.dart';
+import 'export_progress_text.dart';
 
 part 'parts/export_dialog_notices.dart';
 part 'parts/export_dialog_sections.dart';
@@ -402,7 +403,7 @@ class _ExportDialogState extends State<ExportDialog> {
             onStage: (phase, done, total) {
               if (!mounted) return;
               setState(() {
-                _phase = _stageText(phase, done, total);
+                _phase = exportProgressText(context.l10n, phase, done, total);
                 _done = done;
                 _total = total;
               });
@@ -464,38 +465,6 @@ class _ExportDialogState extends State<ExportDialog> {
           ? '${l10n.t('exportedTo')}\n${r.outputPath}'
           : r.error;
     });
-  }
-
-  String _stageText(String phase, int done, int total) {
-    final l10n = context.l10n;
-    // `clamp` gooit `ArgumentError(1)` zodra de bovengrens onder de ondergrens
-    // zakt — en dat is precies wat `total == 0` doet. Dát was #714: een deck
-    // zónder afbeeldingen meldt `precache` met `total: 0` (het aantal te laden
-    // afbeeldingen), en de gebruiker kreeg "Invalid argument(s): 1" te zien.
-    //
-    // Een pentestrapport is het schoolvoorbeeld: bevindingen, checklists en
-    // tabellen, geen enkele foto. HTML kwam er niet langs omdat die niet
-    // rastert — vandaar dat hetzelfde deck als HTML wél lukte.
-    //
-    // De ondergrens 1 blijft: een dia heet "1" en niet "0". Bij `total == 0` is
-    // er geen bovengrens om tegen te knippen, dus die vervalt.
-    final number = total < 1 ? done + 1 : (done + 1).clamp(1, total);
-    switch (phase) {
-      case 'precache':
-        return total == 0
-            ? l10n.d('Afbeeldingen laden…')
-            : '${l10n.d('Afbeeldingen laden…')} $done ${l10n.t('of')} $total';
-      case 'prepare':
-        return '${l10n.d('Slide')} $number ${l10n.d('voorbereiden…')}';
-      case 'render':
-        return '${l10n.d('Slide')} $number ${l10n.d('renderen…')}';
-      case 'done':
-        return done >= total
-            ? l10n.d('Slides gerenderd.')
-            : '${l10n.d('Slide')} $done ${l10n.d('gerenderd.')}';
-      default:
-        return l10n.t('renderingSlides');
-    }
   }
 
   @override
