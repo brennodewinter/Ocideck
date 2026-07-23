@@ -116,8 +116,18 @@ const double kTextDensityCriticalScale = 0.20;
 
 /// The largest auto-fit scale that keeps bullets at or under
 /// [kBulletMaxFontFraction], given the layout's own [layoutMax] growth bound.
+/// De bovengrens voor de bullet-schaal: nooit groter dan wat de layout toestaat,
+/// en nooit zo groot dat een bullet een te grote hap van de breedte neemt.
+///
+/// [bulletSize] nul is geen onzin-invoer maar het gewone gevolg van een
+/// nulbreedte — alle corpsgroottes zijn een fractie van `w`. Zonder deze guard
+/// levert `w / bulletSize` dan `0 / 0` = NaN, en die NaN reist door de
+/// fit-bisectie tot in een `TextStyle.fontSize`, waar hij afgaat als
+/// `fontSize >= 0 is not true` — een melding die nergens naar de deling wijst.
 double bulletScaleCap(double w, double bulletSize, double layoutMax) =>
-    math.min(layoutMax, kBulletMaxFontFraction * w / bulletSize);
+    bulletSize <= 0
+    ? layoutMax
+    : math.min(layoutMax, kBulletMaxFontFraction * w / bulletSize);
 
 String bulletListMarker(
   List<String> items,

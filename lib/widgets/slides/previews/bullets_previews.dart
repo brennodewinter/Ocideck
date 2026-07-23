@@ -15,8 +15,24 @@ Widget _bulletsSlideShell({
       builder: (context, constraints) {
         final outerW = constraints.maxWidth;
         final outerH = constraints.maxHeight;
-        final availW = (outerW - padding.horizontal).clamp(1.0, outerW);
-        final availH = (outerH - padding.vertical).clamp(1.0, outerH);
+        // `clamp` gooit `ArgumentError` zodra de bovengrens onder de ondergrens
+        // zakt, en die bovengrens is hier een layout-constraint: bij een
+        // breedte onder 1,0 viel deze regel om met `Invalid argument(s): 1.0`.
+        // Zelfde fout als #714, andere plek — daar was het `clamp(1, total)`
+        // met een teller die nul mocht zijn.
+        //
+        // Een nulbreedte is geen onzin-invoer: Flutter meet een widget vaker
+        // dan hij hem tekent, en een inklappend paneel of een rij zonder
+        // resterende ruimte levert er precies dat aan. Een preview hoort dan
+        // niets te tekenen, niet te ontploffen.
+        final availW = math.max(
+          1.0,
+          math.min(outerW, outerW - padding.horizontal),
+        );
+        final availH = math.max(
+          1.0,
+          math.min(outerH, outerH - padding.vertical),
+        );
         return ClipRect(
           child: SizedBox(
             width: outerW,
@@ -107,8 +123,13 @@ class _BulletsPreview extends StatelessWidget {
 
     final progressGap = w * 0.025;
     final progressW = w * 0.34;
+    // Zelfde valkuil als in [_bulletsSlideShell]: `contentW` is de bovengrens
+    // en kan onder `w * 0.12` zakken, en dan gooit `clamp`.
     final textAvailW = showProgress
-        ? (contentW - progressGap - progressW).clamp(w * 0.12, contentW)
+        ? math.max(
+            math.min(w * 0.12, contentW),
+            math.min(contentW, contentW - progressGap - progressW),
+          )
         : contentW;
     final scale = memoizedRenderLayout<double>(
       slide: slide,
@@ -637,7 +658,16 @@ class _TwoBulletsPreview extends StatelessWidget {
       availW: contentW,
       availH: layoutH,
       compute: () {
-        final columnW = ((contentW - columnGap) / 2).clamp(w * 0.12, w);
+        // `w * 0.12` is de ondergrens en `w` de bovengrens; die verhouding
+        // klopt altijd, maar bij `w == 0` vallen ze samen op nul en levert dit
+        // een breedte 0 op in plaats van een uitzondering. Ondergrens ten
+        // minste 1 zodat de meting hieronder een geldige breedte krijgt.
+        final columnW = math.max(
+          1.0,
+          ((contentW - columnGap) / 2)
+              .clamp(math.min(w * 0.12, w), w)
+              .toDouble(),
+        );
         var availH = layoutH;
         if (hasTitle) {
           availH -= measureTextHeight(
