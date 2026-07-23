@@ -1810,6 +1810,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Fionnachtain phríobháideachais a chur i leataobh (dearadh)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Ní théann taispeántas séalaithe ar bhrainse oibre',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

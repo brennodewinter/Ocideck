@@ -1778,6 +1778,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'E Datenschutz-Befund zruggstelle (Entwurf)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Es versiglets Deck chunnt nöd uf en Arbetsbranch',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

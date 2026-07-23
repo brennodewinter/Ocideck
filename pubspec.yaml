@@ -164,6 +164,7 @@ flutter:
     - docs/design/OCIWACHT.md
     - docs/design/PROCESS_IMPROVEMENT.md
     - docs/design/OPENKAT_DISTRIBUTIE.md
+    - docs/design/PRIVACY_DISMISSALS.md
   fonts:
     - family: EB Garamond
       fonts:

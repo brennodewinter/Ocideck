@@ -1787,6 +1787,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Odłożenie ustalenia dotyczącego prywatności (projekt)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Zapieczętowana prezentacja nie trafia na gałąź roboczą',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

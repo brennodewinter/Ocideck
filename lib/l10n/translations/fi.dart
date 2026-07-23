@@ -1775,6 +1775,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Yksityisyyshavainnon sivuun siirtäminen (suunnitelma)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Sinetöity esitys ei mene työhaaraan',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

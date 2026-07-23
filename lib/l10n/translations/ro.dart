@@ -1792,6 +1792,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Punerea deoparte a unei constatări de confidențialitate (proiect)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'O prezentare sigilată nu ajunge pe o ramură de lucru',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

@@ -731,6 +731,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Dejar de lado un hallazgo de privacidad (diseño)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Una presentación sellada no va a una rama de trabajo',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

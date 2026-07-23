@@ -730,6 +730,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Mettere da parte un rilievo sulla privacy (progetto)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Una presentazione sigillata non va su un ramo di lavoro',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

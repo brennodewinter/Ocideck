@@ -1779,6 +1779,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Adatvédelmi észrevétel félretétele (terv)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Lepecsételt prezentáció nem kerül munkaágra',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

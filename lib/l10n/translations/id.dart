@@ -1775,6 +1775,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Mengesampingkan temuan privasi (rancangan)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Presentasi tersegel tidak masuk ke cabang kerja',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

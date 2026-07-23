@@ -1777,6 +1777,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Odlaganje ugotovitve o zasebnosti (zasnova)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Zapečatena predstavitev ne gre na delovno vejo',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

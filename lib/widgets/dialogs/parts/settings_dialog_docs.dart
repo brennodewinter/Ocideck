@@ -234,5 +234,10 @@ DocSection _designDocs(AppLocalizations l10n) => DocSection(
       title: l10n.d('Rapportagedistributie (ontwerp)'),
       assetBase: 'docs/design/OPENKAT_DISTRIBUTIE.md',
     ),
+    DocEntry(
+      icon: Icons.notifications_paused_outlined,
+      title: l10n.d('Privacybevinding terzijde leggen (ontwerp)'),
+      assetBase: 'docs/design/PRIVACY_DISMISSALS.md',
+    ),
   ],
 );
