@@ -298,35 +298,42 @@ does not currently run — see the [CI](#ci) note). Artifacts land under
 
 ### App icons
 
-All four desktop/web targets derive their icon from one source,
-`assets/images/ocideck-logo.png`. There is no generator script — the sets are
-written out by hand with ImageMagick and committed. Write this down, because the
-last rebrand regenerated only macOS and web, and Linux and Windows kept shipping
-the previous logo for a month without anything turning red.
-
-The framing rule is: trim to the drawing, scale it to **87.7%** of the canvas
-height, centre it on white. Opaque white, not transparency — the mark is dark
-ink, and a transparent background makes it disappear on a dark taskbar.
+Six icon sets — macOS, Windows, Linux, web, iOS and Android — are cut from a
+single master by one script. Run it after any change to the mark:
 
 ```bash
-magick assets/images/ocideck-logo.png -alpha off -fuzz 8% -trim +repage -resize x449 -background white -gravity center -extent 512x512 -alpha off linux/runner/resources/app_icon.png
+./scripts/regenerate_icons.sh
 ```
 
-That produces the Linux icon; the Windows `.ico` carries seven sizes and comes
-from the same framed image:
+Then commit whatever it changed. It needs ImageMagick (`brew install
+imagemagick`) and nothing else, and it is safe to run at any time: re-running it
+without changing the master reproduces the committed macOS set byte for byte.
 
-```bash
-magick linux/runner/resources/app_icon.png -define icon:auto-resize=256,128,64,48,32,24,16 windows/runner/resources/app_icon.ico
-```
+**The master is `macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png`**,
+not `assets/images/ocideck-logo.png`. The latter is the logo shown *inside* the
+app: 512 px, with a wider margin. The master is 1024 px and carries roughly three
+times the edge detail, so every app-icon size is a reduction and never an
+enlargement — which is what keeps the 1024 icon Apple shows in the App Store
+sharp. If you replace the master, keep its framing: the drawing trimmed, scaled
+to **87.7%** of the canvas height, centred on opaque white. Opaque, not
+transparent: the mark is dark ink and vanishes on a dark taskbar without the
+white plate under it, and iOS rejects an icon with an alpha channel outright.
 
-The macOS set (`macos/Runner/Assets.xcassets/AppIcon.appiconset/`, 16–1024) and
-the web icons (`web/favicon.png`, `web/icons/`) follow the same rule at their own
-sizes. `test/platform_icon_branding_test.dart` holds every target against the
-source afterwards: it compares the drawing itself, so a target left behind at the
-next rebrand fails instead of shipping.
+The web icons are the one deliberate exception — they come from
+`assets/images/ocideck-logo.png` at its own wider margin, because a favicon sits
+in a tab strip rather than a dock. That is measured, not assumed; the script says
+so at the point where it does it.
 
-`ios/` and `android/` are not supported build targets and are deliberately left
-out of the above; their icon sets still carry the old logo.
+`test/platform_icon_branding_test.dart` holds every target against the mark
+afterwards. It compares the drawing itself — trimmed, flattened to a greyscale
+fingerprint — so a target left behind at the next rebrand fails instead of
+shipping, which is exactly what happened to Linux and Windows in June: the
+rebrand regenerated only macOS and web, and those two carried the previous logo
+for a month with nothing turning red.
+
+`ios/` and `android/` are not supported build targets — the Makefile has no
+target for them and the README does not list them. Their icon sets are kept in
+step anyway: a set nobody watches is how this went wrong the first time.
 
 ## CI
 
