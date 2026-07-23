@@ -124,6 +124,18 @@ read a book to find out.
   gedachtestreepje dat in een ankernaam een extra streepje meetelt (#589).
 
 ### Fixed
+- **Opslaan ging één dialoog te diep, precies op het pad waar iedereen
+  begint.** Een nieuwe presentatie opslaan liep langs een bestemmingsvenster
+  dat je een bibliotheek liet kiezen — maar bij een eerste start is er nog geen
+  bibliotheek. Wat je dan zag was een lege lijst met twee knoppen, "Andere
+  map…" en "Kies bestandsnaam…", die allebei naar hetzelfde systeemvenster
+  leidden. Drie dialogen diep om een bestand weg te schrijven.
+
+  Dat venster is niet weggehaald. Heb je wél bibliotheken ingericht, dan doet
+  het waar het voor bedoeld is: je kiest er één en ziet vooraf waar de
+  presentatie, de afbeeldingen en de media terechtkomen. Het wordt nu
+  overgeslagen op het ene pad waar het niets te bieden had.
+
 - **De interface hield zich niet aan de contrasteis die ze aan jouw dia's
   stelt.** OciDeck rekent na of jouw tekst leesbaar is en meldt wat zakt; in
   donkere modus verdween de eigen navy zo goed als helemaal en haalde het
