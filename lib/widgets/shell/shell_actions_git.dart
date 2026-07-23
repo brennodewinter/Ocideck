@@ -37,13 +37,6 @@ GitConnection? _originConnection(
   return connection;
 }
 
-/// Waarschuwt vóór de commit dat niet alles meereist, en vraagt of het door mag
-/// gaan. Geeft `true` bij "er valt niets te melden" of een bevestiging.
-///
-/// Bewust blokkerend en bewust vooraf. Achteraf melden dat de tekeningen niet
-/// mee zijn is geen melding maar een condoleance: de gebruiker denkt dan al dat
-/// zijn werk in de repo staat. Zelfde vorm als [_confirmWebAssetLoss], dat op
-/// web hetzelfde doet voor een kale `.md`-download.
 /// Vertelt de gebruiker hoe de opslag afliep.
 ///
 /// Los van [_saveToGit] omdat het een ander onderwerp is — dat bouwt de opslag

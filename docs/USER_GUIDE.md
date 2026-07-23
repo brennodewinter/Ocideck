@@ -296,17 +296,22 @@ saved version stays retrievable, which a plain folder cannot give you.
 - **Every layer of an ordinary deck travels to git.** A commit carries
   `deck.md`, the images **and** the video and audio in the shared pool, the
   linked chart data files, your notes, the drawings made on your slides
-  (`deck.ink.json`, #541) and the set-aside privacy findings
-  (`deck.dismissals.json`, #651) — a set-aside is a review decision about the
-  report, so a second reviewer opening the deck from the repository does not
-  re-litigate what a colleague already judged; two reviewers' judgements merge
-  by union, latest change wins per finding. Two deliberate exceptions
-  remain. A sealed deck: its seal belongs to a release tag, so a normal save to
-  a work branch is refused outright with an explanation, rather than committed
-  with the seal silently dropped. And the MIAUW disposition sidecar
-  (`.miauw.json`, the waivers and confirmations of a pentest report) does not
-  travel yet — moving such a deck into a repository keeps the disposition on
-  this machine only; save to a folder or a package to carry it. *(There used to
+  (`deck.ink.json`, #541), the set-aside privacy findings
+  (`deck.dismissals.json`, #651) and — for a pentest report — the MIAUW
+  disposition (`deck.miauw.json`, #756). A set-aside is a review decision about
+  the report, so a second reviewer opening the deck from the repository does
+  not re-litigate what a colleague already judged; two reviewers' judgements
+  merge by union, latest change wins per finding. The disposition follows the
+  same reasoning: waivers and confirmations merge by union per requirement, the
+  decision taken last wins, and withdrawing one is itself a decision that
+  survives the merge — a waiver a reviewer just revoked does not quietly come
+  back from the other side. One deliberate exception remains. A sealed deck:
+  its seal belongs to a release tag, so a normal save to a work branch is
+  refused outright with an explanation, rather than committed with the seal
+  silently dropped. *(Corrected 2026-07-23: the disposition used to be the
+  second exception — moving a pentest report into a repository silently kept
+  the client's waivers on this machine only, and a second reviewer opened a
+  gap analysis without the decisions that belong to it.)* *(There used to
   be a blocking "not everything travels" dialog here that counted what stayed
   behind. It shrank with every layer that learned to travel — media, chart
   data, notes, the seal-refusal — and with the drawings on board it had no true
@@ -2160,7 +2165,9 @@ rather than inside it: your drawings (`<name>.ink.json`), these user notes
 (`<name>.user-notes.json`), and — for a pentest report — the agreements with the
 client about which requirements apply (`<name>.miauw.json`). They travel with
 the deck: they move along when you delete it, they sit inside an exported
-`.ocideck` package, and they come back after a crash. The reason they are not in
+`.ocideck` package, they come back after a crash, and they follow the deck
+into a git repository — the last of the three learned that on 2026-07-23
+(#756). The reason they are not in
 the `.md` is the same for all three: that file should stay something you can
 open in a text editor and understand. A drawing is a list of coordinates, and an
 agreement with a client is about the document rather than part of it.
@@ -2857,7 +2864,12 @@ sections; is there a management summary, scope matrix, checklist, timeline and
 sign-off; is the deck sealed); organisational requirements are tagged *Handmatig*.
 **Every requirement is waivable** with a mandatory reason — it is a gap analysis,
 never a hard gate, that only *warns* when a foundational requirement (1.1, 1.6) is
-excluded. Waivers travel in the deck front matter.
+excluded. Waivers and manual confirmations live in the `<name>.miauw.json`
+sidecar next to the deck (see *Files beside your presentation*), and they travel
+with it — into a package, to the bin, and since 2026-07-23 also to a git
+repository (#756). *(Corrected 2026-07-23: this line said waivers travel in the
+deck front matter, which stopped being true when the sidecar replaced the
+base64 front-matter keys.)*
 
 ### Report automation
 

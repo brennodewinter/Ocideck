@@ -1038,9 +1038,13 @@ gemarkeerd. Elk kanaal krijgt een eigen test.
 > `miauwWaivers` en `miauwConfirmations`. Die werden wél gescand, dus de
 > exportpoort meldde een bevinding die de gebruiker met *redigeren* niet kón
 > oplossen: een doodlopende weg, en de waarde reisde alsnog mee. De twee
-> MIAUW-motiveringen wegen daarin het zwaarst — die gaan base64-gecodeerd de
-> front matter in, waar geen enkel vangnet dat op platte tekst zoekt ze leest, en
-> ze beginnen niet zelden met "op verzoek van".
+> MIAUW-motiveringen wegen daarin het zwaarst — die gingen destijds
+> base64-gecodeerd de front matter in, waar geen enkel vangnet dat op platte
+> tekst zoekt ze las, en ze beginnen niet zelden met "op verzoek van".
+> *(Aangetekend 2026-07-23: die motiveringen staan inmiddels leesbaar in de
+> sidecar `<naam>.miauw.json` — FILE_FORMAT §6.5 — maar het argument bleef
+> staan: ook een sidecar ontsnapt aan elk vangnet dat alleen de `.md` naleest,
+> dus de projectie redigeert ze nog steeds.)*
 >
 > Op de slidekant gold hetzelfde voor `checklistScope`, dat zichtbaar op de dia
 > staat en toch nooit werd weggelakt. `privacy_scan_redact_parity_test.dart` legt
