@@ -1790,6 +1790,7 @@ const _dutchSourceAddHr = <String, String>{
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Spremite ovu prezentaciju kao datoteku ili kao .ocideck paket. Pečat pripada oznaci izdanja, a taj put još ne postoji — do tada je ovdje siguran.',
   'Deze is beoordeeld en mag blijven': 'Pregledano, ovo može ostati',
+  'Mogelijk gemaakt door': 'Omogućeno zahvaljujući',
   'De export is gestopt tijdens het voorbereiden.':
       'Izvoz se zaustavio tijekom pripreme.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

@@ -13,6 +13,7 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'Vigilis',
   'http://127.0.0.1:11434/v1',
   'gemma3:4b',
   'https://git.librekat.nl',
@@ -133,6 +134,7 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'Vigilis',
   'http://127.0.0.1:11434/v1',
   'gemma3:4b',
   'https://git.librekat.nl',

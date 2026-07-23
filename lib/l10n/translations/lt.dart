@@ -1791,6 +1791,7 @@ const _dutchSourceAddLt = <String, String>{
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Įrašykite šią pateiktį kaip failą arba kaip .ocideck paketą. Antspaudas priklauso laidos žymai, o to kelio dar nėra — iki tol jis saugus čia.',
   'Deze is beoordeeld en mag blijven': 'Peržiūrėta, šis gali likti',
+  'Mogelijk gemaakt door': 'Galimybę suteikė',
   'De export is gestopt tijdens het voorbereiden.':
       'Eksportas sustojo ruošiantis.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

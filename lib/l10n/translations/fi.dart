@@ -1784,6 +1784,7 @@ const _dutchSourceAddFi = <String, String>{
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Tallenna tämä esitys tiedostona tai .ocideck-pakettina. Sinetti kuuluu julkaisutunnisteeseen, eikä sitä reittiä vielä ole — siihen asti se on turvassa täällä.',
   'Deze is beoordeeld en mag blijven': 'Tarkistettu, tämä saa jäädä',
+  'Mogelijk gemaakt door': 'Mahdollistanut',
   'De export is gestopt tijdens het voorbereiden.':
       'Vienti pysähtyi valmistelun aikana.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

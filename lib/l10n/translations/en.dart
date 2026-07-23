@@ -924,6 +924,7 @@ const _dutchSourceAddEn = {
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Save this deck as a file or as an .ocideck package. The seal belongs with a release tag, and that route does not exist yet — until then this is where it is safe.',
   'Deze is beoordeeld en mag blijven': 'Reviewed, this one can stay',
+  'Mogelijk gemaakt door': 'Made possible by',
   'De export is gestopt tijdens het voorbereiden.':
       'The export stopped while preparing.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

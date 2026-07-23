@@ -15,6 +15,77 @@ class _CatMascot {
   const _CatMascot(this.asset, this.name, this.description);
 }
 
+/// Body of the publisher card. Top-level rather than a member of the state
+/// extension: the text carries most of the lines, and the class-size ratchet
+/// counts every extension member against _SettingsDialogState's ceiling.
+/// [websiteLink] is passed in because the link builder lives on that state.
+Widget _publisherCardBody(
+  AppLocalizations l10n, {
+  required Widget websiteLink,
+}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset(
+              'assets/images/librekat-logo.png',
+              width: 44,
+              height: 44,
+              fit: BoxFit.contain,
+              filterQuality: FilterQuality.high,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              l10n.d(
+                'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.',
+              ),
+              style: _SettingsAbout._aboutBodyStyle,
+            ),
+          ),
+        ],
+      ),
+      const SizedBox(height: 12),
+      Text(
+        l10n.d(
+          'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.',
+        ),
+        style: _SettingsAbout._aboutBodyStyle,
+      ),
+      const SizedBox(height: 12),
+      Text(
+        l10n.d(
+          'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.',
+        ),
+        style: _SettingsAbout._aboutBodyStyle,
+      ),
+      const SizedBox(height: 12),
+      Text(
+        l10n.d(
+          'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.',
+        ),
+        style: _SettingsAbout._aboutBodyStyle,
+      ),
+      const SizedBox(height: 12),
+      Text(l10n.d('Bestuur'), style: _SettingsAbout._aboutLabelStyle),
+      const SizedBox(height: 4),
+      Text(
+        l10n.d(
+          'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).',
+        ),
+        style: _SettingsAbout._aboutBodyStyle,
+      ),
+      const SizedBox(height: 10),
+      Align(alignment: Alignment.centerLeft, child: websiteLink),
+    ],
+  );
+}
+
 extension _SettingsAbout on _SettingsDialogState {
   Widget _aboutTab() {
     final l10n = context.l10n;
@@ -49,79 +120,11 @@ extension _SettingsAbout on _SettingsDialogState {
         const SizedBox(height: 18),
 
         // ── Publisher: Stichting LibreKAT ────────────────────────────────────
-        _aboutHeading(
-          Icons.volunteer_activism_outlined,
-          l10n.d('Uitgever: Stichting LibreKAT'),
-        ),
-        _aboutCard(
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      'assets/images/librekat-logo.png',
-                      width: 44,
-                      height: 44,
-                      fit: BoxFit.contain,
-                      filterQuality: FilterQuality.high,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      l10n.d(
-                        'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.',
-                      ),
-                      style: _aboutBodyStyle,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Text(
-                l10n.d(
-                  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.',
-                ),
-                style: _aboutBodyStyle,
-              ),
-              const SizedBox(height: 12),
-              Text(
-                l10n.d(
-                  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.',
-                ),
-                style: _aboutBodyStyle,
-              ),
-              const SizedBox(height: 12),
-              Text(
-                l10n.d(
-                  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.',
-                ),
-                style: _aboutBodyStyle,
-              ),
-              const SizedBox(height: 12),
-              Text(l10n.d('Bestuur'), style: _aboutLabelStyle),
-              const SizedBox(height: 4),
-              Text(
-                l10n.d(
-                  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).',
-                ),
-                style: _aboutBodyStyle,
-              ),
-              const SizedBox(height: 10),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: _aboutLink(
-                  l10n.d('Website van de stichting'),
-                  'https://librekat.nl/',
-                ),
-              ),
-            ],
-          ),
-        ),
+        _aboutPublisher(l10n),
+        const SizedBox(height: 18),
+
+        // ── Made possible by: Vigilis ────────────────────────────────────────
+        _aboutMadePossibleBy(l10n),
         const SizedBox(height: 18),
 
         // ── Contact details ──────────────────────────────────────────────────
@@ -164,6 +167,48 @@ extension _SettingsAbout on _SettingsDialogState {
       ],
     );
   }
+
+  /// Publisher section: who Stichting LibreKAT is. The card body lives in the
+  /// top-level [_publisherCardBody] so the class ceiling in
+  /// tool/check_conventions.dart does not grow with prose.
+  Widget _aboutPublisher(AppLocalizations l10n) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      _aboutHeading(
+        Icons.volunteer_activism_outlined,
+        l10n.d('Uitgever: Stichting LibreKAT'),
+      ),
+      _aboutCard(
+        _publisherCardBody(
+          l10n,
+          websiteLink: _aboutLink(
+            l10n.d('Website van de stichting'),
+            'https://librekat.nl/',
+          ),
+        ),
+      ),
+    ],
+  );
+
+  /// The sponsor credit, as its own block under the publisher: the heading
+  /// carries the translated "made possible by" line, the card only the logo.
+  /// "Vigilis" is a proper noun and stays identical in every language.
+  Widget _aboutMadePossibleBy(AppLocalizations l10n) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      _aboutHeading(Icons.handshake_outlined, l10n.d('Mogelijk gemaakt door')),
+      _aboutCard(
+        Image.asset(
+          'assets/images/vigilis-logo.png',
+          height: 34,
+          fit: BoxFit.contain,
+          alignment: Alignment.centerLeft,
+          filterQuality: FilterQuality.high,
+          semanticLabel: l10n.d('Vigilis'),
+        ),
+      ),
+    ],
+  );
 
   /// Third-party licences: a link into Flutter's own licence page.
   ///
