@@ -16,9 +16,14 @@ import 'package:image/image.dart' as img;
 /// Geen enkele poort zag dat. Iconen zijn geen Dart, staan niet in
 /// `pubspec.yaml` en worden door de runner via een pad opgepikt — er is niets
 /// dat rood wordt als er een achterblijft. Daarom toetst dit bestand de
-/// *bestanden*: draagt elk bureaubladdoel dezelfde tekening als het merk. Dat
-/// is de vraag die bij de volgende rebrand opnieuw gesteld moet worden, en de
-/// enige die deze fout had gevangen.
+/// *bestanden*: draagt elk bouwdoel dezelfde tekening als het merk. Dat is de
+/// vraag die bij de volgende rebrand opnieuw gesteld moet worden, en de enige
+/// die deze fout had gevangen.
+///
+/// Sinds `scripts/regenerate_icons.sh` er is, lopen ook iOS en Android mee. Dat
+/// zijn geen ondersteunde bouwdoelen — de Makefile kent ze niet — maar hun
+/// icoonsets staan wél in de repo, en een set die niemand bewaakt is precies
+/// hoe Linux en Windows een maand achterliepen.
 void main() {
   img.Image lees(String pad) {
     final bestand = File(pad);
@@ -92,12 +97,42 @@ void main() {
     'Linux': 'linux/runner/resources/app_icon.png',
     'Windows': 'windows/runner/resources/app_icon.ico',
     'web': 'web/icons/Icon-512.png',
+    'iOS':
+        'ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png',
+    'Android': 'android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png',
   };
 
   /// De maten waarin de macOS-set is uitgeschreven.
   const macosMaten = [16, 32, 64, 128, 256, 512, 1024];
 
-  test('elk bureaubladdoel toont dezelfde tekening als het merk', () {
+  /// De volledige iOS-set, zoals `Contents.json` hem opvraagt.
+  const iosBestanden = [
+    'Icon-App-1024x1024@1x.png',
+    'Icon-App-20x20@1x.png',
+    'Icon-App-20x20@2x.png',
+    'Icon-App-20x20@3x.png',
+    'Icon-App-29x29@1x.png',
+    'Icon-App-29x29@2x.png',
+    'Icon-App-29x29@3x.png',
+    'Icon-App-40x40@1x.png',
+    'Icon-App-40x40@2x.png',
+    'Icon-App-40x40@3x.png',
+    'Icon-App-60x60@2x.png',
+    'Icon-App-60x60@3x.png',
+    'Icon-App-76x76@1x.png',
+    'Icon-App-76x76@2x.png',
+    'Icon-App-83.5x83.5@2x.png',
+  ];
+
+  const androidDichtheden = ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi', 'xxxhdpi'];
+
+  String iosPad(String bestand) =>
+      'ios/Runner/Assets.xcassets/AppIcon.appiconset/$bestand';
+
+  String androidPad(String dichtheid) =>
+      'android/app/src/main/res/mipmap-$dichtheid/ic_launcher.png';
+
+  test('elk bouwdoel toont dezelfde tekening als het merk', () {
     final merk = vingerafdruk(lees(merkpad));
     for (final MapEntry(key: doel, value: pad) in grootste.entries) {
       final beeld = lees(pad);
@@ -123,6 +158,8 @@ void main() {
         'macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_$n.png',
       'web/favicon.png',
       'web/icons/Icon-192.png',
+      ...iosBestanden.map(iosPad),
+      ...androidDichtheden.map(androidPad),
     ].where((pad) => File(pad).existsSync());
 
     for (final pad in paden) {
@@ -135,6 +172,60 @@ void main() {
               'huisstijl is neutrale inkt op wit',
         );
       }
+    }
+  });
+
+  test('geen enkel iOS-icoon draagt een alfakanaal', () {
+    // Geen smaakkwestie: Apple weigert een icoon met transparantie bij het
+    // inleveren. Deze toets stond ook groen tegen de oude set — hij vangt niet
+    // de rebrand maar de volgende bron: wie het icoon ooit uit een variant met
+    // een echt transparante achtergrond snijdt (die liggen ernaast, sinds
+    // #735), levert een set in die pas bij App Store Connect stukloopt.
+    for (final bestand in iosBestanden) {
+      expect(
+        lees(iosPad(bestand)).numChannels,
+        3,
+        reason: '$bestand heeft een alfakanaal; App Store Connect weigert dat',
+      );
+    }
+  });
+
+  test('de iOS- en Android-sets zijn compleet en op maat', () {
+    const iosMaten = {
+      'Icon-App-1024x1024@1x.png': 1024,
+      'Icon-App-20x20@1x.png': 20,
+      'Icon-App-20x20@2x.png': 40,
+      'Icon-App-20x20@3x.png': 60,
+      'Icon-App-29x29@1x.png': 29,
+      'Icon-App-29x29@2x.png': 58,
+      'Icon-App-29x29@3x.png': 87,
+      'Icon-App-40x40@1x.png': 40,
+      'Icon-App-40x40@2x.png': 80,
+      'Icon-App-40x40@3x.png': 120,
+      'Icon-App-60x60@2x.png': 120,
+      'Icon-App-60x60@3x.png': 180,
+      'Icon-App-76x76@1x.png': 76,
+      'Icon-App-76x76@2x.png': 152,
+      'Icon-App-83.5x83.5@2x.png': 167,
+    };
+    // De bestandsnaam noemt de púntmaat, niet de pixelmaat: een `@3x` van 20
+    // punt is 60 pixels. Wie dat verwart, levert een set in die Xcode zwijgend
+    // accepteert en die op het toestel verkeerd schaalt.
+    for (final MapEntry(key: bestand, value: maat) in iosMaten.entries) {
+      final beeld = lees(iosPad(bestand));
+      expect([beeld.width, beeld.height], [maat, maat], reason: bestand);
+    }
+
+    const androidMaten = {
+      'mdpi': 48,
+      'hdpi': 72,
+      'xhdpi': 96,
+      'xxhdpi': 144,
+      'xxxhdpi': 192,
+    };
+    for (final MapEntry(key: dichtheid, value: maat) in androidMaten.entries) {
+      final beeld = lees(androidPad(dichtheid));
+      expect([beeld.width, beeld.height], [maat, maat], reason: dichtheid);
     }
   });
 
