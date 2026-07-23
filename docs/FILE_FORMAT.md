@@ -1873,9 +1873,21 @@ of whoever attested to it. Until 0.1.0 all of this sat in the front matter
 
 The file is written when there is something to record and deleted when there is
 not. Same `version` rule as §6.2. It travels with the deck the way the other
-sidecars do: as a member of the `.ocideck` package (§7), into the bin, and in
-the autosave/recovery snapshot. A web download of a bare `.md` (§1) does not
-carry it.
+sidecars do: as a member of the `.ocideck` package (§7), into the bin, in
+the autosave/recovery snapshot, and — since #541 — in a commit to a git
+repository, as `deck.seal.json` next to `deck.md`. A web download of a bare
+`.md` (§1) does not carry it.
+
+**In a git repository the seal is metadata, not a verification that succeeds
+there.** The hash covers the bytes of the original `.md` (see below), and the
+repo copy of the deck rewrites asset references, so verifying against the repo
+copy would cry tamper on an honest file. A deck opened from git therefore
+reports its seal as present but not verifiable *here* — the same behaviour as
+an `.ocideck` package. Verify against the original `.md` file. The file is
+written compact (one line), unlike the other repo sidecars: a seal is set in
+one act and never merged, so there is no per-line diff to keep readable, and
+two versions of one seal is a mistake rather than a conflict (GIT_STORAGE
+§9.7, D13).
 
 **Seal and signature share one file on purpose.** They are one act — *I attest
 to this, and this is the fixing of what I attested to* — and a recipient needs

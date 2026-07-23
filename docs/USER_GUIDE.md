@@ -305,18 +305,21 @@ saved version stays retrievable, which a plain folder cannot give you.
   same reasoning: waivers and confirmations merge by union per requirement, the
   decision taken last wins, and withdrawing one is itself a decision that
   survives the merge — a waiver a reviewer just revoked does not quietly come
-  back from the other side. One deliberate exception remains. A sealed deck:
-  its seal belongs to a release tag, so a normal save to a work branch is
-  refused outright with an explanation, rather than committed with the seal
-  silently dropped. *(Corrected 2026-07-23: the disposition used to be the
-  second exception — moving a pentest report into a repository silently kept
-  the client's waivers on this machine only, and a second reviewer opened a
-  gap analysis without the decisions that belong to it.)* *(There used to
-  be a blocking "not everything travels" dialog here that counted what stayed
-  behind. It shrank with every layer that learned to travel — media, chart
-  data, notes, the seal-refusal — and with the drawings on board it had no true
-  line left for an ordinary deck, so it is gone: a warning that lists more than
-  actually goes wrong is one people learn to dismiss whole.)*
+  back from the other side. The seal and signature travel too
+  (`deck.seal.json`, #541): a sealed report that comes back from a repository
+  still reads as sealed. Git stores the seal; what the seal *means* — the
+  report is settled and read-only — the app itself guards. One honest note:
+  the seal's hash covers the original `.md` file, so a deck opened from git
+  shows its seal as "not verifiable here" rather than falsely intact —
+  verify against the original file, exactly as with an `.ocideck` package.
+  *(Corrected 2026-07-23: a sealed deck used to be refused on a work branch
+  outright — that left it no way into a repository at all, and the refusal is
+  withdrawn.)* *(There used to be a blocking "not everything travels" dialog
+  here that counted what stayed behind. It shrank with every layer that
+  learned to travel — media, chart data, notes — and with the drawings on
+  board it had no true line left for an ordinary deck, so it is gone: a
+  warning that lists more than actually goes wrong is one people learn to
+  dismiss whole.)*
 - **Your notes travel, and your co-authors' notes merge.** The notes live next to
   the deck in the repository as `deck.user-notes.json`, so two people writing
   notes on different slides both keep theirs when their work comes together. Two

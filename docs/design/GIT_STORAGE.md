@@ -705,8 +705,31 @@ does**.
 
 > *Updated 23-07-2026 (#756): the **MIAUW disposition travels too** —
 > `deck.miauw.json`, same route, union per EIS id with tombstones (decision in
-> §9.7; format change in FILE_FORMAT §6.5 v2). No layer of an ordinary deck
-> stays behind now; the seal remains tag-only by design (§14, D13).*
+> §9.7; format change in FILE_FORMAT §6.5 v2).*
+
+> *Updated 23-07-2026 (#541, closing): the **seal travels too**, and the
+> refusal is withdrawn. D13 as decided made a sealed deck tag-only and had
+> `saveToGit` refuse it on a work branch — which, combined with `tagRelease`
+> committing nothing, left a sealed deck no way into the repository at all.
+> The maintainer's ruling cut the knot: **git is a filesystem here, not an
+> enforcer.** What a seal means — settled, no longer editable — is the app's
+> to guard (a sealed deck is read-only in the editor), not the storage's.
+> So `deck.seal.json` now rides the same route as every other sidecar
+> (stable path, shared touch-and-delete rules, sync-engine exception,
+> `mirrorDeckFiles`), `withRepoSeal` re-attaches it on open, and a merge
+> keeps the seal from whichever side carries one (ours wins deterministically
+> if both do — two versions of one seal is a mistake, not a conflict, §9.7).
+> One honest limit: the seal hash covers the bytes of the *original* `.md`
+> ([SealForm.fileBytes]), and the repo copy rewrites asset paths, so a deck
+> opened from git reports its seal as not-verifiable-here rather than
+> intact — exactly as an `.ocideck` package already does. Verification runs
+> against the original file, not the repo copy. This fix also surfaced and
+> closed a wider defect: `readBlob` throws notFound for an absent file, the
+> sidecar touch-check read every throw as "do not touch", and so **no sidecar
+> was ever written on a branch where it did not already exist** on the REST
+> plane (`repoFileReaderFor` now maps notFound to null, as the
+> `RepoFileReader` contract always promised). No layer of a deck stays behind
+> now, sealed or not.*
 
 ### 9.2 Opening / loading
 
@@ -825,8 +848,9 @@ whose participants share a repo), but neither doc depends on the other landing.
 > tree merge left with the resolver's outcome. On the native plane the
 > `merge=ocideck-ink` driver exists in the deliberately minimal form that §10.2
 > allows — see the Phase 3 note below for what deviates from the sketch here
-> and why. The seal is settled in the opposite direction: tag only, no merge
-> semantics (§14, D13).
+> and why. The seal travels as a sidecar since 23-07-2026 and still needs no
+> merge *semantics*: the merge keeps the seal from whichever side carries one,
+> ours winning deterministically when both do (§14, D13).
 
 "Sidecars merge poorly" flattened a distinction worth keeping: the two sidecars
 are not the same kind of file, and each has its own right answer (§14, D7).
@@ -930,13 +954,16 @@ consequences must be respected rather than discovered later:
   the alternative is a conflict dialog for a one-line justification field;
   revisit if dispositions ever grow long-form prose.
 
-**And the seal does not belong in this section at all.** *(Decided 22-07-2026,
-#541 — see §14, D13.)* A sealed deck goes to a release **tag**, never to a work
-branch, so two versions of one seal cannot arise: that is a mistake, not a
-conflict. A normal save to a work branch refuses a sealed deck instead of
-warning about it afterwards. The asymmetry with ink is deliberate and worth
-holding on to — ink is work two people can both add to, a seal is a statement
-one person made about one exact set of bytes.
+**And the seal needs no merge semantics.** *(Decided 22-07-2026, revised
+23-07-2026, #541 — see §14, D13.)* The seal travels as an ordinary sidecar —
+git is a filesystem here, not an enforcer — but unlike ink there is nothing to
+*merge*: a seal is a statement one person made about one exact set of bytes,
+where ink is work two people can both add to. The merge therefore keeps the
+seal from whichever side carries one, and if both sides do, ours wins
+deterministically — two versions of one seal is a mistake, not a conflict, and
+a fixed choice keeps the mistake visible instead of inventing a third version.
+Whether the hash still matches the merged content is for the integrity check
+on open to say; that is its job, not the merge's.
 
 ---
 
@@ -1387,48 +1414,44 @@ discussion still resolve.
   older files), **then** the merge driver `merge=ocideck-ink`, **then** the
   write path. The driver must also be reproducible in-app, because a clone made
   by another tool does not have it.*
-- **D13 — A seal belongs on a tag, not on a branch.** *(Decided 22-07-2026,
-  #541. Numbered D12 until 23-07-2026, which "How media comes back" already
-  used; renumbered rather than left ambiguous, because both are cited from
-  elsewhere in this document and from the code.)* A sealed deck may travel to a release tag; it may not be committed to
-  a work branch.
+- **D13 — The seal travels; git is a filesystem, not an enforcer.** *(Decided
+  22-07-2026 as "a seal belongs on a tag, not on a branch"; **revised
+  23-07-2026 by the maintainer**, #541. Numbered D12 until 23-07-2026, which
+  "How media comes back" already used; renumbered rather than left ambiguous.)*
+  A sealed deck commits like any other deck, and `deck.seal.json` rides along
+  as an ordinary sidecar (§9.1).
 
-  That follows from what a seal means — *these* bytes, *this* artefact — and a
-  branch does not offer it: a branch can be rewritten, cherry-picked and
-  force-pushed, and a seal that survives all of that says nothing any more. A
-  tag is meant to be a snapshot and sits under ref protection (P8).
+  The original decision made a sealed deck tag-only and had a normal save
+  refuse it, on the argument that a branch can be rewritten, cherry-picked and
+  force-pushed, so a seal on a branch says nothing. The refusal was built —
+  and it exposed the dead end: `tagRelease` commits nothing, the only route to
+  the default branch is a merged work branch, and that route was now refused,
+  so a sealed deck could not reach the repository at all. Three ways to open
+  that up were written down here; the maintainer's ruling was none of them,
+  and simpler than all of them:
 
-  Two consequences for the build. The seal travels in the commit set of a
-  version release, and **a normal save to a work branch refuses a sealed deck,
-  with an explanation** — so today's after-the-fact warning becomes a refusal at
-  the point of decision.
+  > A seal means the report is settled and done — it can no longer be
+  > changed. But that is not the git system's problem to solve. **Git is a
+  > filesystem here, not an enforcer.**
 
-  **The refusal is live since #541** (`gitRefusesSealedDeck`, enforced in
-  `saveToGit` and explained in the interface). **The travelling half is not, and
-  cannot be built as written.** `tagRelease` tags the head of the default branch
-  and commits nothing, so at tag time there is no commit set to travel in. The
-  only routes to the default branch are a merged pull request from a work
-  branch — which this very decision now refuses for a sealed deck — and nothing
-  else. So a sealed deck currently has no way into the repository at all. That
-  is honest (it beats dropping the seal silently) but it is a dead end, and
-  which end to open is a decision, not a detail:
+  So the guarantees split cleanly. What a seal *means* is guarded where the
+  meaning lives: the app keeps a sealed deck read-only, and the integrity
+  check reports whether the bytes still match. What the storage does is store:
+  every layer travels, none is refused, and a sealed report that comes back
+  from a repo still reads as sealed — the silent-loss failure the refusal was
+  built against is closed by the sidecar instead.
 
-  1. sealing becomes an act of *releasing* — `tagRelease` commits the seal to
-     the default branch and then tags, so a seal is never on a branch as a
-     working state;
-  2. the sealing commit itself is allowed once on a work branch and travels
-     through the merge, and the refusal only covers *later* saves of an
-     already-sealed deck;
-  3. a sealed deck is never committed at all — the tag is the artefact and the
-     seal is recomputed from the tagged bytes on open.
-
-  Until that is settled the refusal points the user at a file or an `.ocideck`
-  package, and says so in as many words rather than promising a route that does
-  not exist. And a seal needs **no merge semantics at all**: two
-  versions of one seal is not a conflict but a mistake, and on a tag it cannot
-  arise. That is the opposite of the ink answer above, for a reason worth
-  keeping straight — ink is work that two people can both add to, a seal is a
-  statement one person made about one set of bytes.
+  Two working notes. **Verification runs against the original file, not the
+  repo copy**: the hash covers the bytes of the `.md` as sealed on disk
+  (`SealForm.fileBytes`), and the repo serialisation rewrites asset paths, so
+  a deck opened from git carries its seal but reports it as not verifiable
+  here — the same behaviour as an `.ocideck` package, and honest rather than
+  a false tamper alarm. And a seal still needs **no merge semantics**: the
+  merge keeps the seal from whichever side carries one (ours wins,
+  deterministically, if both do) — two versions of one seal is a mistake, not
+  a conflict, which is the opposite of the ink answer above and worth keeping
+  straight: ink is work two people can both add to, a seal is a statement one
+  person made about one set of bytes.
 - **D8 — Minimum git version.** Required, and enforced by the probe. Below it the
   native plane is refused **wholesale** and the repo falls back to REST — never
   feature-by-feature. `--filter=blob:none` (D5) puts the floor at **≥2.19**; pin
