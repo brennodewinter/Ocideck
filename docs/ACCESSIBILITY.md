@@ -279,6 +279,29 @@ theme has no bearing on what is readable on a button; only the button's own does
 Black or white, whichever wins: 2.54 → 8.26:1, with both light profiles keeping
 the exact colour they had.*
 
+**And the app has three dark palettes, not one.** The theme above is the big
+one; the image picker and full-screen presentation mode each carry their own,
+deliberately outside `AppTheme` because they are self-contained dark surfaces —
+which is also why the raw-colour ratchet exempts them. What nobody noticed is
+that the exemption put them outside every contrast measurement too: neither
+appeared in a single test file (#779).
+
+Measured, the presenter palette was fine — its ink clears 9.0:1 everywhere. The
+picker was not. `textDim` coloured **both** icons and text, and as text it
+cleared 4.5:1 on none of its own seven surfaces (3.31 on `surface2`, 4.24 on
+`bgDeepest`). Seven places were affected, and the ones that sting are the
+empty-state lines — *"Zet het filter uit om alles weer te zien"* and *"Gebruik
+Bladeren om afbeeldingen van elke locatie te kiezen"*. The sentence that tells a
+stuck user how to get unstuck was the least readable text in the dialog.
+
+The seven text uses now take `textMuted` (≥4.95:1 on every surface here), and
+the token that stays behind is called `iconDim`: as a graphical object it needs
+3:1 (WCAG 1.4.11) and clears it everywhere. Renaming rather than only
+documenting, because a `textDim` that may not colour text is a trap set for
+whoever reaches for it next. `test/standalone_palette_contrast_test.dart` holds
+both bars per surface, plus the white labels on the coloured fills — the same
+class as the Save button above, and previously unmeasured.
+
 *Three smaller things the visual review turned up, now fixed: the export
 dialog had been migrated on its success branch but not its failure branch, so
 "the export failed" sat at 3.1:1 in dark mode while "exported to…" shone; the

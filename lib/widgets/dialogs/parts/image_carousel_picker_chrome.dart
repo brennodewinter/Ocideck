@@ -89,7 +89,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
           IconButton(
             icon: const Icon(
               Icons.close,
-              color: ImagePickerPalette.textDim,
+              color: ImagePickerPalette.iconDim,
               size: 20,
             ),
             onPressed: () => _close(),
@@ -111,12 +111,12 @@ extension _CarouselChrome on _ImageCarouselPickerState {
         decoration: InputDecoration(
           hintText: l10n.d('Zoek op naam of beschrijving…'),
           hintStyle: const TextStyle(
-            color: ImagePickerPalette.textDim,
+            color: ImagePickerPalette.textMuted,
             fontSize: 13,
           ),
           prefixIcon: const Icon(
             Icons.search,
-            color: ImagePickerPalette.textDim,
+            color: ImagePickerPalette.iconDim,
             size: 18,
           ),
           suffixIcon: _query.isEmpty
@@ -125,7 +125,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
                   tooltip: l10n.d('Zoekopdracht wissen'),
                   icon: const Icon(
                     Icons.clear,
-                    color: ImagePickerPalette.textDim,
+                    color: ImagePickerPalette.iconDim,
                     size: 16,
                   ),
                   onPressed: () {
@@ -173,7 +173,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
           Text(
             _autoTagPhase ?? l10n.d('Afbeeldingen taggen…'),
             style: const TextStyle(
-              color: ImagePickerPalette.textDim,
+              color: ImagePickerPalette.textMuted,
               fontSize: 12,
             ),
           ),
@@ -183,7 +183,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
     return IconButton(
       icon: const Icon(
         Icons.auto_awesome_outlined,
-        color: ImagePickerPalette.textDim,
+        color: ImagePickerPalette.iconDim,
         size: 20,
       ),
       onPressed: _autoTagUntagged,
@@ -217,7 +217,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
             size: 17,
             color: _untaggedOnly
                 ? AppTheme.blue400
-                : ImagePickerPalette.textDim,
+                : ImagePickerPalette.iconDim,
           ),
         ),
       ),
@@ -245,7 +245,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
             child: Icon(
               icon,
               size: 17,
-              color: active ? AppTheme.blue400 : ImagePickerPalette.textDim,
+              color: active ? AppTheme.blue400 : ImagePickerPalette.iconDim,
             ),
           ),
         ),
@@ -302,7 +302,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
               Text(
                 l10n.d('Zet het filter uit om alles weer te zien.'),
                 style: const TextStyle(
-                  color: ImagePickerPalette.textDim,
+                  color: ImagePickerPalette.textMuted,
                   fontSize: 13,
                 ),
               ),
@@ -349,7 +349,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
                       'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.',
                     ),
               style: const TextStyle(
-                color: ImagePickerPalette.textDim,
+                color: ImagePickerPalette.textMuted,
                 fontSize: 13,
               ),
             ),
