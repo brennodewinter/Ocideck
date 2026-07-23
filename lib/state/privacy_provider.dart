@@ -103,15 +103,7 @@ PrivacyScanResult computePrivacyScan(Ref ref) {
   // volle aantal zien, en dat is wat de nalevingstelling van MIAUW EIS 1.1
   // leest — een terzijdelegging is geen oplossing en mag daar niet als zodanig
   // meetellen.
-  final setAside = deck.dismissals;
-  final scanner = ref.watch(privacyScannerProvider);
-  bool isSetAside(PrivacyFinding f) {
-    if (setAside == null || setAside.dismissals.isEmpty) return false;
-    final text = matchedTextOf(scanner, deck, f);
-    // Geen tekst meer op die plek: de dia is bewerkt sinds de scan. Dan liever
-    // melden dan onderdrukken.
-    return text != null && setAside.hides(f.ruleId, text);
-  }
+  final isSetAside = setAsidePredicate(ref.watch(privacyScannerProvider), deck);
 
   return PrivacyScanResult([
     for (final finding in scan.findings)
@@ -122,7 +114,13 @@ PrivacyScanResult computePrivacyScan(Ref ref) {
 PrivacyExportSummary computePrivacyExportSummary(Ref ref) {
   final deck = ref.watch(deckProvider.select((state) => state.deck));
   if (deck == null) return PrivacyExportSummary.empty;
-  return summarisePrivacyForExport(deck, ref.watch(privacyRawScanProvider));
+  // Hetzelfde predicaat als het paneel, en dat is de kern van #740: las de
+  // poort er zelf een, dan konden ze uit elkaar lopen — en dat deden ze.
+  return summarisePrivacyForExport(
+    deck,
+    ref.watch(privacyRawScanProvider),
+    isSetAside: setAsidePredicate(ref.watch(privacyScannerProvider), deck),
+  );
 }
 
 bool _isResolved(Deck deck, PrivacyFinding finding) {
