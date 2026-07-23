@@ -20,7 +20,8 @@ jobs:
           apt-get update
           apt-get install -y --no-install-recommends \
             nodejs \
-            clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
+            clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev \
+            libsecret-1-dev
 
       - uses: actions/checkout@v4
 
