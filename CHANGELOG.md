@@ -130,6 +130,23 @@ read a book to find out.
   icoonbron is, zodat de volgende opruimronde hem niet meeneemt.
 
 ### Added
+- **De profielbewerker zegt nu of je eigen app-thema leesbaar is — en het
+  voorbeeld liegt niet meer.** De reparaties uit #744 zetten toetsen op de drie
+  ingebouwde profielen; wie in *Uiterlijk → App-thema* zelf kleuren koos, kon
+  dezelfde fout terugbouwen zonder dat iets er iets over zei. Onder het
+  voorbeeld staat nu een leesbaarheidsmeting: negen paren, met de gemeten
+  verhouding en de lat ernaast, plus de twee kleurstippen die vergeleken zijn.
+  Waarschuwen, niet tegenhouden — het is je eigen app en de weg terug is één
+  kleur. Belangrijker nog is dat het **voorbeeld** eerlijk werd: dat schilderde
+  zijn eigen kleuren met een hulpje dat zwart of wit koos op luminantie, terwijl
+  de app `panelTextColor` en een berekende knopvoorgrond gebruikt — het toonde
+  dus een leesbare balk waar de app een onleesbare rendert. Het bouwt nu het
+  échte thema, en er staan een selectievakje, een schakelaar en een tekstknop
+  in: precies de onderdelen die in #744 stukgingen en die het oude voorbeeld
+  niet liet zien. De rekensom staat in `lib/theme/appearance_contrast.dart` en
+  wordt óók door de contrasttoets gebruikt; twee sommen over dezelfde vraag
+  lopen uit elkaar. (#750)
+
 - **De forge bouwt nu zelf de Linux-versie.** De server achter
   pawprint.vigilis.online draait Linux, dus de vraag lag voor de hand — en sinds
   vandaag heeft die server een geregistreerde Forgejo-Actions-runner
@@ -176,6 +193,15 @@ read a book to find out.
   Presentaties met tekeningen van vóór deze versie openen gewoon.
 
 ### Fixed
+- **Het label op de opslaan-knop stond in donkere modus op 2,54:1.** Gevonden
+  door de nieuwe leesbaarheidsmeting zelf, meteen bij de eerste run over de
+  ingebouwde profielen (#750). De voorgrond van een gevulde knop werd gekozen
+  met `brightness == light && luminance > 0.6 ? zwart : wit`, wat in donkere
+  modus altijd wit afdwong — ook op het lichte accent `#60A5FA` van het profiel
+  *Donker*. De helderheid van het thema doet er niet toe; alleen die van de knop
+  zelf. Nu zwart óf wit, net wat op die vulling het best leest: 2,54 → 8,26:1.
+  Beide lichte profielen houden exact de kleur die ze hadden. (#750)
+
 - **Een beoordeelde privacybevinding hield de export tegen zonder dat je kon
   zien waarover.** Wie een bevinding beoordeelde en liet staan, zag het
   kwaliteitspaneel stil worden — maar de export vroeg nog steeds om een

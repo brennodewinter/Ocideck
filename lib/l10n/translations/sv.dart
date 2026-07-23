@@ -1782,6 +1782,20 @@ const _dutchSourceAddSv = <String, String>{
       'Välj backend på fliken AI-assistans. Så länge inget är valt där händer ingenting.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'En malls exempelbilder är på engelska. Namn och beskrivning följer ditt eget språk; innehållet anpassar du efter att du har skapat den.',
+  'Meer': 'Mer',
+  'Leesbaarheid van dit profiel': 'Läsbarhet för den här profilen',
+  'Alle onderdelen halen de norm.': 'Alla delar uppfyller normen.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'De här förhållandena gäller appen själv, inte dina bilder.',
+  'Tekst op kaarten en dialogen': 'Text på kort och dialogrutor',
+  'Tekst op de schermachtergrond': 'Text på skärmbakgrunden',
+  'Tekst en pictogrammen in de zijbalk': 'Text och ikoner i sidofältet',
+  'Titel in de bovenbalk': 'Titel i det översta fältet',
+  'Tekstknoppen en links': 'Textknappar och länkar',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Kryssrutor, reglage och textmarkören',
+  'Het vinkje in een aangevinkt vakje': 'Bocken i en ikryssad ruta',
+  'Label op de primaire knop': 'Etiketten på primärknappen',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Iakttagelser som du har bedömt och låtit stå kvar. De rapporteras inte längre, men skanningen hittar dem fortfarande och de räknas inte som åtgärdade. Tryck för att återställa en.',
   'Privacybevinding terzijde leggen (ontwerp)':

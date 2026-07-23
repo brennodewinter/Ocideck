@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/theme/app_theme.dart';
+import 'package:ocideck/theme/appearance_contrast.dart';
 import 'package:ocideck/utils/color_contrast.dart';
 
 /// Het contrast van de **app zelf**, in beide modi.
@@ -255,126 +256,76 @@ void main() {
 
   // ── Wat ThemeData zélf uitdeelt ───────────────────────────────────────────
   //
-  // De toetsen hierboven meten losse tokens. Deze meet de kleuren die een
+  // De toetsen hierboven meten losse tokens. Deze meten de kleuren die een
   // widget krijgt zónder dat iemand er een token voor koos — en dat is het gat
   // waar #744 doorheen viel: Material geeft een TextButton standaard
-  // `colorScheme.primary` als voorgrond, en `primary` is in het profiel Donker
+  // `colorScheme.primary` als voorgrond, en `primary` was in het profiel Donker
   // de mérkkleur `#111827`. Op zijn eigen oppervlak `#1E293B` is dat 1,21:1.
   //
   // Niemand had een fout gemaakt; er was alleen nooit een `textButtonTheme`
   // geweest, terwijl de omlijnde knop ernaast de regel wél had. Precies zo'n
   // gat vindt geen tokenlijst, want er staat geen token in de code.
-  group('de knopvoorgronden uit het thema zijn leesbaar op hun oppervlak', () {
+  //
+  // De rékensom staat sinds #750 in `lib/theme/appearance_contrast.dart`, want
+  // de profielbewerker toont hem nu aan de gebruiker. Eén som: liep de toets
+  // naast wat het scherm meldt, dan bewaakt de eerste niet meer wat de tweede
+  // belooft.
+  group('elk ingebouwd profiel is in zijn geheel leesbaar', () {
     for (final profile in AppAppearanceProfile.builtIns) {
       test(profile.name, () {
-        final theme = AppTheme.fromProfile(profile);
-        final surface = theme.colorScheme.surface;
-
-        // Los de stijl op zoals Material dat doet: de voorgrond van een knop in
-        // rust. Een WidgetStateProperty, dus met een lege state bevragen.
-        Color? foreground(ButtonStyle? style) =>
-            style?.foregroundColor?.resolve(<WidgetState>{});
-
-        final tekort = <String, double>{};
-        for (final (naam, style) in [
-          ('TextButton', theme.textButtonTheme.style),
-          ('OutlinedButton', theme.outlinedButtonTheme.style),
-        ]) {
-          final fg = foreground(style);
-          expect(
-            fg,
-            isNotNull,
-            reason:
-                '$naam heeft geen expliciete voorgrond in het thema en valt '
-                'dus terug op colorScheme.primary — dat is de fout uit #744',
-          );
-          final ratio = contrastRatio(fg!, surface);
-          if (ratio < kWcagAaNormalText) tekort[naam] = ratio;
-        }
-
-        // De accent-inkt is dezelfde regel, voor wat géén knop is: links,
-        // opsommingstekens, kleine iconen in de documentatielezer en het
-        // toestemmingsscherm.
-        final accentInk = theme.extension<AppPalette>()!.accentInk;
-        final accentRatio = contrastRatio(accentInk, surface);
-        if (accentRatio < kWcagAaNormalText) {
-          tekort['AppPalette.accentInk'] = accentRatio;
-        }
-
+        final tekort = {
+          for (final f in appearanceContrastProblems(profile))
+            f.pair.name: f.ratio,
+        };
         expect(
           tekort,
           isEmpty,
           reason:
-              'in het profiel "${profile.name}" leest dit niet op het eigen '
-              'oppervlak: $tekort',
+              'in het profiel "${profile.name}" haalt dit de eigen norm niet: '
+              '$tekort',
         );
       });
     }
   });
 
-  // ── Wat Material zélf schildert ───────────────────────────────────────────
-  //
-  // De groep hierboven gaat over tekst. Dit gaat over de onderdelen die geen
-  // tekst zijn maar wel een stand tonen: een aangevinkt vakje, een schakelaar,
-  // de cursor. Ze halen hun kleur uit `colorScheme.primary`, en dat was in het
-  // profiel Donker de bálkkleur `#111827` — waardoor het vinkje op zijn eigen
-  // vulling op 1,35:1 stond. Je kon niet zien of een vakje aan stond.
-  group('de interactie-onderdelen zijn te onderscheiden', () {
+  group('de rollen die Material anders zelf invult, zijn expliciet gezet', () {
+    // De rekensom hierboven vindt een slechte kleur. Deze vindt een ontbrékende
+    // kleur — en dát was #744: er stond geen `textButtonTheme`, dus viel Flutter
+    // terug op `colorScheme.primary`. Een verhoudingstoets alleen zou de dag dat
+    // iemand zo'n thema weer weghaalt niet per se rood worden; deze wel.
     for (final profile in AppAppearanceProfile.builtIns) {
       test(profile.name, () {
         final theme = AppTheme.fromProfile(profile);
-        final scheme = theme.colorScheme;
-
-        // Een selectievakje of schakelaar is een grafisch onderdeel: WCAG
-        // 1.4.11 vraagt 3:1 tegen wat eromheen ligt.
+        for (final (naam, style) in [
+          ('TextButton', theme.textButtonTheme.style),
+          ('OutlinedButton', theme.outlinedButtonTheme.style),
+        ]) {
+          expect(
+            style?.foregroundColor?.resolve(<WidgetState>{}),
+            isNotNull,
+            reason:
+                '$naam heeft geen expliciete voorgrond in het thema en valt '
+                'dus terug op colorScheme.primary — dat is de fout uit #744',
+          );
+        }
         expect(
-          contrastRatio(scheme.primary, scheme.surface),
-          greaterThanOrEqualTo(kWcagAaLargeText),
-          reason:
-              'de vulling van een aangevinkt vakje verdwijnt in het oppervlak '
-              '(${profile.name})',
-        );
-
-        // En het vinkje móet op die vulling te zien zijn — dat is de stand
-        // zelf, dus de gewone tekstlat.
-        expect(
-          contrastRatio(scheme.onPrimary, scheme.primary),
-          greaterThanOrEqualTo(kWcagAaNormalText),
-          reason:
-              'het vinkje is onzichtbaar op zijn eigen vulling '
-              '(${profile.name}) — dan toont een vakje zijn stand niet',
-        );
-
-        // De cursor tegen de vulling van het invoerveld. Zonder expliciete
-        // TextSelectionTheme pakt Flutter hier colorScheme.primary, en dat
-        // was precies het probleem.
-        final cursor = theme.textSelectionTheme.cursorColor;
-        expect(
-          cursor,
+          theme.textSelectionTheme.cursorColor,
           isNotNull,
           reason:
               'geen expliciete cursorkleur: Flutter valt dan terug op '
               'colorScheme.primary',
-        );
-        final veldVulling =
-            theme.inputDecorationTheme.fillColor ?? scheme.surface;
-        expect(
-          contrastRatio(cursor!, veldVulling),
-          greaterThanOrEqualTo(kWcagAaLargeText),
-          reason:
-              'de tekstcursor is niet te zien in een invoerveld '
-              '(${profile.name})',
         );
       });
     }
   });
 
   group('de bovenbalk houdt de merkkleur van het profiel', () {
-    // De keerzijde van de reparatie hierboven, en de reden dat die niet "geef
-    // het profiel gewoon een lichte primaryColor" was: `appBarTheme` schildert
-    // de bovenbalk met diezelfde waarde. Licht maken zou het contrastprobleem
-    // niet oplossen maar verplaatsen — naar een lichte balk in donkere modus.
-    // Deze toets houdt die uitweg dicht.
+    // De keerzijde van de reparatie in #744, en de reden dat die niet "geef het
+    // profiel gewoon een lichte primaryColor" was: `appBarTheme` schildert de
+    // bovenbalk met diezelfde waarde. Licht maken zou het contrastprobleem niet
+    // oplossen maar verplaatsen — naar een lichte balk in donkere modus. Deze
+    // toets houdt die uitweg dicht; de leesbaarheid van de titel erop zit in de
+    // eerste groep (`appBarTitleOnBar`).
     for (final profile in AppAppearanceProfile.builtIns) {
       test(profile.name, () {
         final theme = AppTheme.fromProfile(profile);
@@ -382,14 +333,6 @@ void main() {
           theme.appBarTheme.backgroundColor,
           AppTheme.parseHexColor(profile.primaryColor),
           reason: 'de bovenbalk hoort de merkkleur van het profiel te zijn',
-        );
-        expect(
-          contrastRatio(
-            theme.appBarTheme.foregroundColor!,
-            theme.appBarTheme.backgroundColor!,
-          ),
-          greaterThanOrEqualTo(kWcagAaNormalText),
-          reason: 'de titel in de bovenbalk leest niet (${profile.name})',
         );
       });
     }

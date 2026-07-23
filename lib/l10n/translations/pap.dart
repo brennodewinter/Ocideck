@@ -742,6 +742,20 @@ const _dutchSourceAddPap = {
       'Skohe e backend riba e tab Asistensia di IA. Tanten ku no tin nada ei, nada no ta pasa.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'E dianan di ehèmpel di un plantia ta na ingles. Nòmber i deskripshon ta sigui bo mes idioma; e kontenido bo ta adaptá despues di krea e presentashon.',
+  'Meer': 'Mas',
+  'Leesbaarheid van dit profiel': 'Legibilidat di e profil aki',
+  'Alle onderdelen halen de norm.': 'Tur e partinan ta cumpli cu e norma.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'E proporshonnan aki ta trata di e app mes, no di bo slidenan.',
+  'Tekst op kaarten en dialogen': 'Teksto riba karchi i dialogo',
+  'Tekst op de schermachtergrond': 'Teksto riba e fondo di pantaya',
+  'Tekst en pictogrammen in de zijbalk': 'Teksto i ikònnan den e bara lateral',
+  'Titel in de bovenbalk': 'Título den e bara ariba',
+  'Tekstknoppen en links': 'Boton di teksto i enlace',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Kaha di marka, switch i e kursor di teksto',
+  'Het vinkje in een aangevinkt vakje': 'E marka den un kaha markà',
+  'Label op de primaire knop': 'E lèter riba e boton prinsipal',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Konstatashonnan ku bo a evaluá i a laga keda. Nan no ta wòrdu reportá mas, pero e scan ta sigui haña nan i nan no ta konta komo resolvé. Toka pa pone un bèk.',
   'Privacybevinding terzijde leggen (ontwerp)':

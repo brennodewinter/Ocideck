@@ -1800,6 +1800,20 @@ const _dutchSourceAddRo = <String, String>{
       'Alege backend-ul în fila Asistență IA. Cât timp acolo nu este setat nimic, nu se întâmplă nimic.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Slide-urile de exemplu ale unui șablon sunt în engleză. Numele și descrierea urmează limba ta; conținutul îl adaptezi după creare.',
+  'Meer': 'Mai mult',
+  'Leesbaarheid van dit profiel': 'Lizibilitatea acestui profil',
+  'Alle onderdelen halen de norm.': 'Toate elementele respectă norma.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Aceste rapoarte privesc aplicația însăși, nu diapozitivele tale.',
+  'Tekst op kaarten en dialogen': 'Text pe carduri și dialoguri',
+  'Tekst op de schermachtergrond': 'Text pe fundalul ecranului',
+  'Tekst en pictogrammen in de zijbalk': 'Text și pictograme în bara laterală',
+  'Titel in de bovenbalk': 'Titlu în bara de sus',
+  'Tekstknoppen en links': 'Butoane text și legături',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Casete de bifare, comutatoare și cursorul de text',
+  'Het vinkje in een aangevinkt vakje': 'Bifa dintr-o casetă bifată',
+  'Label op de primaire knop': 'Eticheta de pe butonul principal',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Constatări pe care le-ai analizat și le-ai lăsat așa. Nu mai sunt raportate, dar scanarea continuă să le găsească și nu contează ca rezolvate. Atinge pentru a repune una.',
   'Privacybevinding terzijde leggen (ontwerp)':

@@ -1790,6 +1790,20 @@ const _dutchSourceAddSk = <String, String>{
       'Backend zvoľte na karte Asistencia AI. Kým tam nie je nič nastavené, nič sa nedeje.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Ukážkové snímky šablóny sú v angličtine. Názov a popis sa riadia tvojím jazykom; obsah upravíš po vytvorení.',
+  'Meer': 'Viac',
+  'Leesbaarheid van dit profiel': 'Čitateľnosť tohto profilu',
+  'Alle onderdelen halen de norm.': 'Všetky časti spĺňajú normu.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Tieto pomery sa týkajú samotnej aplikácie, nie vašich snímok.',
+  'Tekst op kaarten en dialogen': 'Text na kartách a v dialógoch',
+  'Tekst op de schermachtergrond': 'Text na pozadí obrazovky',
+  'Tekst en pictogrammen in de zijbalk': 'Text a ikony v bočnom paneli',
+  'Titel in de bovenbalk': 'Názov v hornom paneli',
+  'Tekstknoppen en links': 'Textové tlačidlá a odkazy',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Začiarkavacie polia, prepínače a textový kurzor',
+  'Het vinkje in een aangevinkt vakje': 'Začiarknutie v začiarknutom poli',
+  'Label op de primaire knop': 'Označenie na hlavnom tlačidle',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Zistenia, ktoré boli posúdené a ponechané. Už sa nehlásia, ale sken ich stále nachádza a nepočítajú sa ako vyriešené. Ťuknutím jedno vrátiš.',
   'Privacybevinding terzijde leggen (ontwerp)':

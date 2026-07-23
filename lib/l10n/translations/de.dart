@@ -742,6 +742,21 @@ const _dutchSourceAddDe = {
       'Wähle das Backend auf dem Tab KI-Unterstützung. Solange dort nichts steht, passiert nichts.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Die Beispielfolien einer Vorlage sind auf Englisch. Name und Beschreibung folgen deiner eigenen Sprache; den Inhalt passt du nach dem Erstellen an.',
+  'Meer': 'Mehr',
+  'Leesbaarheid van dit profiel': 'Lesbarkeit dieses Profils',
+  'Alle onderdelen halen de norm.': 'Alle Elemente erfüllen die Norm.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Diese Verhältnisse betreffen die App selbst, nicht Ihre Folien.',
+  'Tekst op kaarten en dialogen': 'Text auf Karten und Dialogen',
+  'Tekst op de schermachtergrond': 'Text auf dem Bildschirmhintergrund',
+  'Tekst en pictogrammen in de zijbalk': 'Text und Symbole in der Seitenleiste',
+  'Titel in de bovenbalk': 'Titel in der oberen Leiste',
+  'Tekstknoppen en links': 'Textschaltflächen und Links',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Kontrollkästchen, Schalter und Textcursor',
+  'Het vinkje in een aangevinkt vakje':
+      'Das Häkchen in einem angehakten Kästchen',
+  'Label op de primaire knop': 'Beschriftung der primären Schaltfläche',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Feststellungen, die Sie geprüft und stehen gelassen haben. Diese werden nicht mehr gemeldet, aber der Scan findet sie weiterhin, und sie gelten nicht als behoben. Zum Zurückholen antippen.',
   'Privacybevinding terzijde leggen (ontwerp)':

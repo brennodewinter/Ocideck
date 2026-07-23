@@ -742,6 +742,22 @@ const _dutchSourceAddFr = {
       'Choisissez le backend dans l\'onglet Assistance IA. Tant que rien n\'y est défini, rien ne se passe.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Les diapositives d\'exemple d\'un modèle sont en anglais. Le nom et la description suivent votre propre langue ; le contenu, vous l\'adaptez après la création.',
+  'Meer': 'Plus',
+  'Leesbaarheid van dit profiel': 'Lisibilité de ce profil',
+  'Alle onderdelen halen de norm.': 'Tous les éléments respectent la norme.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Ces rapports concernent l\'application elle-même, pas vos diapositives.',
+  'Tekst op kaarten en dialogen':
+      'Texte sur les cartes et les boîtes de dialogue',
+  'Tekst op de schermachtergrond': 'Texte sur le fond d\'écran',
+  'Tekst en pictogrammen in de zijbalk':
+      'Texte et icônes dans la barre latérale',
+  'Titel in de bovenbalk': 'Titre dans la barre supérieure',
+  'Tekstknoppen en links': 'Boutons texte et liens',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Cases à cocher, interrupteurs et curseur de texte',
+  'Het vinkje in een aangevinkt vakje': 'La coche dans une case cochée',
+  'Label op de primaire knop': 'Libellé du bouton principal',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Constatations que tu as examinées et laissées en place. Elles ne sont plus signalées, mais le scan continue de les trouver et elles ne comptent pas comme résolues. Touche pour en rétablir une.',
   'Privacybevinding terzijde leggen (ontwerp)':

@@ -1805,6 +1805,20 @@ const _dutchSourceAddBg = <String, String>{
       'Изберете бекенда в раздела AI помощ. Докато там няма нищо, нищо не се случва.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Примерните слайдове на шаблона са на английски. Името и описанието следват вашия език; съдържанието променяте след създаването.',
+  'Meer': 'Още',
+  'Leesbaarheid van dit profiel': 'Четимост на този профил',
+  'Alle onderdelen halen de norm.': 'Всички елементи отговарят на нормата.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Тези съотношения се отнасят до самото приложение, а не до вашите слайдове.',
+  'Tekst op kaarten en dialogen': 'Текст върху карти и диалози',
+  'Tekst op de schermachtergrond': 'Текст върху фона на екрана',
+  'Tekst en pictogrammen in de zijbalk': 'Текст и икони в страничната лента',
+  'Titel in de bovenbalk': 'Заглавие в горната лента',
+  'Tekstknoppen en links': 'Текстови бутони и връзки',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Отметки, превключватели и текстовият курсор',
+  'Het vinkje in een aangevinkt vakje': 'Отметката в поставена отметка',
+  'Label op de primaire knop': 'Надписът върху основния бутон',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Констатации, които сте прегледали и сте оставили. Те вече не се съобщават, но сканирането продължава да ги открива и не се броят за отстранени. Докоснете, за да върнете една от тях.',
   'Privacybevinding terzijde leggen (ontwerp)':

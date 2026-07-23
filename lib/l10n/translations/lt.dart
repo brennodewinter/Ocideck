@@ -1790,6 +1790,21 @@ const _dutchSourceAddLt = <String, String>{
       'Vidinę sistemą pasirinkite kortelėje DI pagalba. Kol ten nieko nenustatyta, niekas nevyksta.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Šablono pavyzdinės skaidrės yra anglų kalba. Pavadinimas ir aprašymas atitinka tavo kalbą; turinį pritaikai jį sukūręs.',
+  'Meer': 'Daugiau',
+  'Leesbaarheid van dit profiel': 'Šio profilio įskaitomumas',
+  'Alle onderdelen halen de norm.': 'Visos dalys atitinka normą.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Šie santykiai susiję su pačia programa, o ne su jūsų skaidrėmis.',
+  'Tekst op kaarten en dialogen': 'Tekstas kortelėse ir dialoguose',
+  'Tekst op de schermachtergrond': 'Tekstas ekrano fone',
+  'Tekst en pictogrammen in de zijbalk':
+      'Tekstas ir piktogramos šoninėje juostoje',
+  'Titel in de bovenbalk': 'Antraštė viršutinėje juostoje',
+  'Tekstknoppen en links': 'Teksto mygtukai ir nuorodos',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Žymimieji langeliai, jungikliai ir teksto žymeklis',
+  'Het vinkje in een aangevinkt vakje': 'Varnelė pažymėtame langelyje',
+  'Label op de primaire knop': 'Užrašas ant pagrindinio mygtuko',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Radiniai, kurie buvo įvertinti ir palikti. Apie juos nebepranešama, bet nuskaitymas juos vis tiek randa ir jie nelaikomi išspręstais. Bakstelėk, kad vieną grąžintum.',
   'Privacybevinding terzijde leggen (ontwerp)':

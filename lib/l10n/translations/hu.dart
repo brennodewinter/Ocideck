@@ -1787,6 +1787,20 @@ const _dutchSourceAddHu = <String, String>{
       'Válaszd ki a háttérrendszert az MI-segítség lapon. Amíg ott nincs beállítva semmi, semmi sem történik.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'A sablon példadiái angolul vannak. A név és a leírás a saját nyelvedet követi; a tartalmat a létrehozás után igazítod hozzá.',
+  'Meer': 'Több',
+  'Leesbaarheid van dit profiel': 'Ennek a profilnak az olvashatósága',
+  'Alle onderdelen halen de norm.': 'Minden elem megfelel a szabványnak.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Ezek az arányok magára az alkalmazásra vonatkoznak, nem a diáira.',
+  'Tekst op kaarten en dialogen': 'Szöveg kártyákon és párbeszédablakokban',
+  'Tekst op de schermachtergrond': 'Szöveg a képernyő hátterén',
+  'Tekst en pictogrammen in de zijbalk': 'Szöveg és ikonok az oldalsávban',
+  'Titel in de bovenbalk': 'Cím a felső sávban',
+  'Tekstknoppen en links': 'Szöveges gombok és hivatkozások',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Jelölőnégyzetek, kapcsolók és a szövegkurzor',
+  'Het vinkje in een aangevinkt vakje': 'A pipa a bejelölt négyzetben',
+  'Label op de primaire knop': 'Az elsődleges gomb felirata',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Megállapítások, amelyeket megnéztél és meghagytál. Ezeket már nem jelzi, de a vizsgálat továbbra is megtalálja őket, és nem számítanak megoldottnak. Koppints az egyik visszaállításához.',
   'Privacybevinding terzijde leggen (ontwerp)':

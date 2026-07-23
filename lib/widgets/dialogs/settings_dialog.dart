@@ -53,6 +53,7 @@ import '../slides/image_zoom_dialog.dart';
 import 'hex_color_dialog.dart';
 import 'settings/ai_form.dart';
 import 'settings/ai_module_card.dart';
+import 'settings/appearance_legibility.dart';
 import 'settings/git_form.dart';
 import 'settings/git_panel.dart';
 import 'settings/s3_form.dart';

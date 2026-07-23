@@ -738,6 +738,22 @@ const _dutchSourceAddIt = {
       'Scegli il backend nella scheda Assistenza IA. Finché lì non è impostato nulla, non succede nulla.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Le diapositive di esempio di un modello sono in inglese. Nome e descrizione seguono la tua lingua; il contenuto lo adatti dopo la creazione.',
+  'Meer': 'Altro',
+  'Leesbaarheid van dit profiel': 'Leggibilità di questo profilo',
+  'Alle onderdelen halen de norm.':
+      'Tutti gli elementi soddisfano lo standard.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Questi rapporti riguardano l\'app stessa, non le tue diapositive.',
+  'Tekst op kaarten en dialogen': 'Testo su schede e finestre di dialogo',
+  'Tekst op de schermachtergrond': 'Testo sullo sfondo dello schermo',
+  'Tekst en pictogrammen in de zijbalk': 'Testo e icone nella barra laterale',
+  'Titel in de bovenbalk': 'Titolo nella barra superiore',
+  'Tekstknoppen en links': 'Pulsanti di testo e collegamenti',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Caselle di spunta, interruttori e cursore di testo',
+  'Het vinkje in een aangevinkt vakje':
+      'Il segno di spunta in una casella selezionata',
+  'Label op de primaire knop': 'Etichetta sul pulsante principale',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Rilievi che hai esaminato e lasciato al loro posto. Non vengono più segnalati, ma la scansione continua a trovarli e non contano come risolti. Tocca per ripristinarne uno.',
   'Privacybevinding terzijde leggen (ontwerp)':

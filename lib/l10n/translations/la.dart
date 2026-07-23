@@ -1799,6 +1799,21 @@ const _dutchSourceAddLa = <String, String>{
       'Backend in tabula Auxilii IA elige. Dum ibi nihil positum est, nihil fit.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Laminae exempli exemplaris Anglice scriptae sunt. Nomen et descriptio linguam tuam sequuntur; contentum post creationem accommodas.',
+  'Meer': 'Plura',
+  'Leesbaarheid van dit profiel': 'Legibilitas huius formae',
+  'Alle onderdelen halen de norm.': 'Omnes partes normam implent.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Hae rationes ad ipsam applicationem pertinent, non ad tabulas tuas.',
+  'Tekst op kaarten en dialogen': 'Textus in schedulis et colloquiis',
+  'Tekst op de schermachtergrond': 'Textus in fundo scrinii',
+  'Tekst en pictogrammen in de zijbalk':
+      'Textus et imagines in tabula laterali',
+  'Titel in de bovenbalk': 'Titulus in tabula superiore',
+  'Tekstknoppen en links': 'Pulsatoria textus et nexus',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Quadrata electionis, commutatores et cursor textus',
+  'Het vinkje in een aangevinkt vakje': 'Signum in quadrato electo',
+  'Label op de primaire knop': 'Titulus in pulsatorio primario',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Inventa quae recensuisti et manere sivisti. Non amplius nuntiantur, sed scrutatio ea etiamnunc invenit neque pro solutis habentur. Tange ut unum restituas.',
   'Privacybevinding terzijde leggen (ontwerp)':

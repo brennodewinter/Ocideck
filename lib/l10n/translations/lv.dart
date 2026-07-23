@@ -1782,6 +1782,20 @@ const _dutchSourceAddLv = <String, String>{
       'Izvēlieties aizmugursistēmu cilnē MI palīdzība. Kamēr tur nekas nav iestatīts, nekas nenotiek.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Veidnes paraugslaidi ir angļu valodā. Nosaukums un apraksts seko tavai valodai; saturu pielāgo pēc izveides.',
+  'Meer': 'Vairāk',
+  'Leesbaarheid van dit profiel': 'Šī profila salasāmība',
+  'Alle onderdelen halen de norm.': 'Visas daļas atbilst normai.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Šīs attiecības attiecas uz pašu lietotni, nevis uz jūsu slaidiem.',
+  'Tekst op kaarten en dialogen': 'Teksts uz kartītēm un dialogos',
+  'Tekst op de schermachtergrond': 'Teksts uz ekrāna fona',
+  'Tekst en pictogrammen in de zijbalk': 'Teksts un ikonas sānjoslā',
+  'Titel in de bovenbalk': 'Virsraksts augšējā joslā',
+  'Tekstknoppen en links': 'Teksta pogas un saites',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Izvēles rūtiņas, slēdži un teksta kursors',
+  'Het vinkje in een aangevinkt vakje': 'Ķeksītis atzīmētā rūtiņā',
+  'Label op de primaire knop': 'Uzraksts uz galvenās pogas',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Konstatējumi, kas ir izvērtēti un atstāti. Par tiem vairs neziņo, taču skenēšana tos joprojām atrod, un tie netiek uzskatīti par novērstiem. Pieskaries, lai vienu atjaunotu.',
   'Privacybevinding terzijde leggen (ontwerp)':

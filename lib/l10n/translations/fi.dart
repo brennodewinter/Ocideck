@@ -1783,6 +1783,20 @@ const _dutchSourceAddFi = <String, String>{
       'Valitse taustajärjestelmä Tekoälyavustus-välilehdellä. Niin kauan kuin siellä ei ole mitään, mitään ei tapahdu.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Mallin esimerkkidiat ovat englanniksi. Nimi ja kuvaus noudattavat omaa kieltäsi; sisällön muokkaat luonnin jälkeen.',
+  'Meer': 'Lisää',
+  'Leesbaarheid van dit profiel': 'Tämän profiilin luettavuus',
+  'Alle onderdelen halen de norm.': 'Kaikki osat täyttävät vaatimuksen.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Nämä suhteet koskevat itse sovellusta, eivät diojasi.',
+  'Tekst op kaarten en dialogen': 'Teksti korteilla ja valintaikkunoissa',
+  'Tekst op de schermachtergrond': 'Teksti näytön taustalla',
+  'Tekst en pictogrammen in de zijbalk': 'Teksti ja kuvakkeet sivupalkissa',
+  'Titel in de bovenbalk': 'Otsikko yläpalkissa',
+  'Tekstknoppen en links': 'Tekstipainikkeet ja linkit',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Valintaruudut, kytkimet ja tekstikohdistin',
+  'Het vinkje in een aangevinkt vakje': 'Valintamerkki valitussa ruudussa',
+  'Label op de primaire knop': 'Ensisijaisen painikkeen teksti',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Havainnot, jotka olet arvioinut ja jättänyt paikalleen. Niistä ei enää ilmoiteta, mutta skannaus löytää ne edelleen eikä niitä lasketa ratkaistuiksi. Napauta palauttaaksesi yhden.',
   'Privacybevinding terzijde leggen (ontwerp)':

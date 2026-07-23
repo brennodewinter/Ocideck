@@ -1782,6 +1782,20 @@ const _dutchSourceAddDa = <String, String>{
       'Vælg backend på fanen AI-assistance. Så længe der ikke står noget der, sker der ikke noget.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'En skabelons eksempeldias er på engelsk. Navn og beskrivelse følger dit eget sprog; indholdet tilpasser du efter oprettelsen.',
+  'Meer': 'Mere',
+  'Leesbaarheid van dit profiel': 'Læsbarheden af denne profil',
+  'Alle onderdelen halen de norm.': 'Alle dele lever op til normen.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Disse forhold handler om selve appen, ikke om dine slides.',
+  'Tekst op kaarten en dialogen': 'Tekst på kort og dialoger',
+  'Tekst op de schermachtergrond': 'Tekst på skærmbaggrunden',
+  'Tekst en pictogrammen in de zijbalk': 'Tekst og ikoner i sidepanelet',
+  'Titel in de bovenbalk': 'Titel i topbjælken',
+  'Tekstknoppen en links': 'Tekstknapper og links',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Afkrydsningsfelter, kontakter og tekstmarkøren',
+  'Het vinkje in een aangevinkt vakje': 'Fluebenet i et markeret felt',
+  'Label op de primaire knop': 'Teksten på den primære knap',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Fund, du har vurderet og ladet stå. De rapporteres ikke længere, men scanningen finder dem stadig, og de tæller ikke som løst. Tryk for at gendanne et.',
   'Privacybevinding terzijde leggen (ontwerp)':

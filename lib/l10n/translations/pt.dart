@@ -1812,6 +1812,20 @@ const _dutchSourceAddPt = <String, String>{
       'Escolha o backend na aba Assistência de IA. Enquanto nada estiver definido aí, nada acontece.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Os slides de exemplo de um modelo estão em inglês. O nome e a descrição seguem a sua própria língua; o conteúdo adapta-o depois de criar.',
+  'Meer': 'Mais',
+  'Leesbaarheid van dit profiel': 'Legibilidade deste perfil',
+  'Alle onderdelen halen de norm.': 'Todos os elementos cumprem a norma.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Estas proporções dizem respeito à própria aplicação, não aos seus diapositivos.',
+  'Tekst op kaarten en dialogen': 'Texto em cartões e caixas de diálogo',
+  'Tekst op de schermachtergrond': 'Texto no fundo do ecrã',
+  'Tekst en pictogrammen in de zijbalk': 'Texto e ícones na barra lateral',
+  'Titel in de bovenbalk': 'Título na barra superior',
+  'Tekstknoppen en links': 'Botões de texto e ligações',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Caixas de seleção, interruptores e o cursor de texto',
+  'Het vinkje in een aangevinkt vakje': 'O visto numa caixa selecionada',
+  'Label op de primaire knop': 'Etiqueta no botão principal',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Constatações que analisaste e deixaste ficar. Já não são comunicadas, mas a análise continua a encontrá-las e não contam como resolvidas. Toca para repor uma.',
   'Privacybevinding terzijde leggen (ontwerp)':

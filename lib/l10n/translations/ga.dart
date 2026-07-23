@@ -1818,6 +1818,21 @@ const _dutchSourceAddGa = <String, String>{
       'Roghnaigh an t-inneall ar an táb Cúnamh II. Fad is nach bhfuil aon rud socraithe ansin, ní tharlaíonn aon rud.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Tá sleamhnáin shamplacha teimpléid i mBéarla. Leanann an t-ainm agus an cur síos do theanga féin; cuireann tú an t-ábhar in oiriúint tar éis é a chruthú.',
+  'Meer': 'Tuilleadh',
+  'Leesbaarheid van dit profiel': 'Inléiteacht na próifíle seo',
+  'Alle onderdelen halen de norm.': 'Comhlíonann gach cuid an caighdeán.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Baineann na cóimheasa seo leis an aip féin, ní le do shleamhnáin.',
+  'Tekst op kaarten en dialogen': 'Téacs ar chártaí agus ar dhialóga',
+  'Tekst op de schermachtergrond': 'Téacs ar chúlra an scáileáin',
+  'Tekst en pictogrammen in de zijbalk':
+      'Téacs agus deilbhíní sa bharra taoibh',
+  'Titel in de bovenbalk': 'Teideal sa bharra uachtarach',
+  'Tekstknoppen en links': 'Cnaipí téacs agus naisc',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Ticbhoscaí, lasca agus an cúrsóir téacs',
+  'Het vinkje in een aangevinkt vakje': 'An tic i mbosca ticeáilte',
+  'Label op de primaire knop': 'Lipéad ar an bpríomhchnaipe',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Fionnachtana a ndearna tú athbhreithniú orthu agus a d\'fhág tú mar atá. Ní thuairiscítear a thuilleadh iad, ach aimsíonn an scanadh fós iad agus ní áirítear réitithe iad. Tapáil chun ceann a chur ar ais.',
   'Privacybevinding terzijde leggen (ontwerp)':

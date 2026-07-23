@@ -1789,6 +1789,20 @@ const _dutchSourceAddHr = <String, String>{
       'Odaberite pozadinski sustav na kartici AI pomoć. Dok tamo ništa nije postavljeno, ništa se ne događa.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Primjeri slajdova u predlošku su na engleskom. Naziv i opis prate tvoj jezik; sadržaj prilagođavaš nakon stvaranja.',
+  'Meer': 'Više',
+  'Leesbaarheid van dit profiel': 'Čitljivost ovog profila',
+  'Alle onderdelen halen de norm.': 'Svi dijelovi zadovoljavaju normu.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Ovi se omjeri odnose na samu aplikaciju, a ne na vaše slajdove.',
+  'Tekst op kaarten en dialogen': 'Tekst na karticama i dijalozima',
+  'Tekst op de schermachtergrond': 'Tekst na pozadini zaslona',
+  'Tekst en pictogrammen in de zijbalk': 'Tekst i ikone u bočnoj traci',
+  'Titel in de bovenbalk': 'Naslov u gornjoj traci',
+  'Tekstknoppen en links': 'Tekstualni gumbi i poveznice',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Potvrdni okviri, prekidači i tekstni pokazivač',
+  'Het vinkje in een aangevinkt vakje': 'Kvačica u označenom okviru',
+  'Label op de primaire knop': 'Oznaka na glavnom gumbu',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Nalazi koji su pregledani i ostavljeni. Više se ne prijavljuju, ali skeniranje ih i dalje pronalazi i ne broje se kao riješeni. Dodirni za vraćanje jednoga.',
   'Privacybevinding terzijde leggen (ontwerp)':

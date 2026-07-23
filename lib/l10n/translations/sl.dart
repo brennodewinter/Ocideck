@@ -1785,6 +1785,20 @@ const _dutchSourceAddSl = <String, String>{
       'Zaledje izberite na zavihku Pomoč UI. Dokler tam ni nič nastavljeno, se nič ne zgodi.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Vzorčni diapozitivi predloge so v angleščini. Ime in opis sledita tvojemu jeziku; vsebino prilagodiš po ustvarjanju.',
+  'Meer': 'Več',
+  'Leesbaarheid van dit profiel': 'Berljivost tega profila',
+  'Alle onderdelen halen de norm.': 'Vsi deli izpolnjujejo normo.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Ta razmerja se nanašajo na aplikacijo samo, ne na vaše prosojnice.',
+  'Tekst op kaarten en dialogen': 'Besedilo na karticah in v pogovornih oknih',
+  'Tekst op de schermachtergrond': 'Besedilo na ozadju zaslona',
+  'Tekst en pictogrammen in de zijbalk': 'Besedilo in ikone v stranski vrstici',
+  'Titel in de bovenbalk': 'Naslov v zgornji vrstici',
+  'Tekstknoppen en links': 'Besedilni gumbi in povezave',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Potrditvena polja, stikala in besedilna kazalka',
+  'Het vinkje in een aangevinkt vakje': 'Kljukica v označenem polju',
+  'Label op de primaire knop': 'Oznaka na glavnem gumbu',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Ugotovitve, ki so bile pregledane in puščene. Ne javljajo se več, vendar jih pregled še vedno najde in ne štejejo kot razrešene. Tapni za vrnitev ene.',
   'Privacybevinding terzijde leggen (ontwerp)':

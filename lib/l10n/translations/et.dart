@@ -1774,6 +1774,20 @@ const _dutchSourceAddEt = <String, String>{
       'Valige taustsüsteem vahekaardil Tehisintellekti abi. Kuni seal pole midagi määratud, ei toimu midagi.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Malli näidisslaidid on inglise keeles. Nimi ja kirjeldus järgivad sinu enda keelt; sisu kohandad pärast loomist.',
+  'Meer': 'Rohkem',
+  'Leesbaarheid van dit profiel': 'Selle profiili loetavus',
+  'Alle onderdelen halen de norm.': 'Kõik osad vastavad nõudele.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Need suhted käivad rakenduse enda, mitte teie slaidide kohta.',
+  'Tekst op kaarten en dialogen': 'Tekst kaartidel ja dialoogides',
+  'Tekst op de schermachtergrond': 'Tekst ekraani taustal',
+  'Tekst en pictogrammen in de zijbalk': 'Tekst ja ikoonid külgribal',
+  'Titel in de bovenbalk': 'Pealkiri ülaribal',
+  'Tekstknoppen en links': 'Tekstinupud ja lingid',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Märkeruudud, lülitid ja tekstikursor',
+  'Het vinkje in een aangevinkt vakje': 'Linnuke märgitud ruudus',
+  'Label op de primaire knop': 'Põhinupu silt',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Leiud, mille oled üle vaadanud ja alles jätnud. Neist enam ei teatata, kuid skannimine leiab need endiselt ja neid ei loeta lahendatuks. Puuduta, et üks taastada.',
   'Privacybevinding terzijde leggen (ontwerp)':

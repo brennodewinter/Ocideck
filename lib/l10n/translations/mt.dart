@@ -1805,6 +1805,21 @@ const _dutchSourceAddMt = <String, String>{
       'Agħżel il-backend fit-tab Assistenza AI. Sakemm m\'hemm xejn hemmhekk, ma jiġri xejn.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Is-slides ta\' eżempju ta\' mudell huma bl-Ingliż. L-isem u d-deskrizzjoni jsegwu l-lingwa tiegħek; il-kontenut taddattah wara l-ħolqien.',
+  'Meer': 'Aktar',
+  'Leesbaarheid van dit profiel': 'Il-leġibbiltà ta\' dan il-profil',
+  'Alle onderdelen halen de norm.':
+      'Il-partijiet kollha jissodisfaw l-istandard.',
+  'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
+      'Dawn il-proporzjonijiet jirrigwardaw l-app innifisha, mhux is-slajds tiegħek.',
+  'Tekst op kaarten en dialogen': 'Test fuq karti u djalogi',
+  'Tekst op de schermachtergrond': 'Test fuq l-isfond tal-iskrin',
+  'Tekst en pictogrammen in de zijbalk': 'Test u ikoni fil-barra tal-ġenb',
+  'Titel in de bovenbalk': 'Titlu fil-barra ta\' fuq',
+  'Tekstknoppen en links': 'Buttuni ta\' test u links',
+  'Selectievakjes, schakelaars en de tekstcursor':
+      'Kaxxi ta\' għażla, swiċċijiet u l-kursur tat-test',
+  'Het vinkje in een aangevinkt vakje': 'It-tikka f\'kaxxa mmarkata',
+  'Label op de primaire knop': 'It-tikketta fuq il-buttuna primarja',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Sejbiet li rrevedejt u ħallejt kif inhuma. Dawn ma jiġux irrapportati aktar, iżda l-iskennjar xorta jsibhom u ma jgħoddux bħala solvuti. Mess biex terġa\' ddaħħal waħda.',
   'Privacybevinding terzijde leggen (ontwerp)':
