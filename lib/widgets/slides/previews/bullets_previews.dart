@@ -53,6 +53,22 @@ Widget _bulletsSlideShell({
   );
 }
 
+/// De breedte die de bullettekst overhoudt naast de voortgangsgrafiek.
+///
+/// Zelfde valkuil als in [_bulletsSlideShell]: hier was het
+/// `.clamp(w * 0.12, contentW)`, en `contentW` is de bovengrens. Zakt die onder
+/// de ondergrens, dan gooit `clamp` — dus wordt de ondergrens zelf eerst door de
+/// beschikbare ruimte begrensd.
+double _textWidthBesideProgress(
+  double contentW,
+  double w,
+  double progressGap,
+  double progressW,
+) => math.max(
+  math.min(w * 0.12, contentW),
+  math.min(contentW, contentW - progressGap - progressW),
+);
+
 class _BulletsPreview extends StatelessWidget {
   final Slide slide;
   final double w;
@@ -123,13 +139,8 @@ class _BulletsPreview extends StatelessWidget {
 
     final progressGap = w * 0.025;
     final progressW = w * 0.34;
-    // Zelfde valkuil als in [_bulletsSlideShell]: `contentW` is de bovengrens
-    // en kan onder `w * 0.12` zakken, en dan gooit `clamp`.
     final textAvailW = showProgress
-        ? math.max(
-            math.min(w * 0.12, contentW),
-            math.min(contentW, contentW - progressGap - progressW),
-          )
+        ? _textWidthBesideProgress(contentW, w, progressGap, progressW)
         : contentW;
     final scale = memoizedRenderLayout<double>(
       slide: slide,
