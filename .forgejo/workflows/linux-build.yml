@@ -34,8 +34,10 @@ jobs:
       - name: Bundel inpakken
         run: tar -C build/linux/x64/release/bundle -czf ocideck-linux-x64.tar.gz .
 
+      # v4 van deze actie weigert elke niet-GitHub-server ("GHES not
+      # supported"); v3 spreekt het artifact-API dat Forgejo implementeert.
       - name: Artifact bewaren
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: ocideck-linux-x64
           path: ocideck-linux-x64.tar.gz
