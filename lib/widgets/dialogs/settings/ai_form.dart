@@ -38,7 +38,6 @@ class AiForm {
     apiKey.rememberIdentity(ai.baseUrl);
   }
 
-  /// De instellingen zoals ze nu in de velden staan (zonder API-sleutel).
   /// Of er in dit formulier een backend staat, los van de schakelaar.
   ///
   /// Spiegelt [AiSettings.hasBackend], maar leest de velden zoals ze nú op het
@@ -47,6 +46,21 @@ class AiForm {
   bool get hasBackend =>
       mode != AiBackendMode.none && baseUrl.text.trim().isNotEmpty;
 
+  /// Of het tabblad AI-assistentie zichtbaar hoort te zijn (#731).
+  ///
+  /// Aan zodra de module aan staat, óf er al een backend ligt: de vaste regel
+  /// uit #648 — verbergen zolang er niets is, tónen zodra er wél iets is, want
+  /// een schakelaar die je eigen werk onbereikbaar maakt is erger dan een
+  /// tabblad te veel.
+  ///
+  /// Staat hier en niet drie keer los bij de aanroepers (zijbalk, zoekindex en
+  /// het tabblad zelf). Die drie moeten hetzelfde antwoord geven; als ze het
+  /// elk voor zich uitrekenen, verschuift er ooit één mee en de andere twee
+  /// niet — en dan is het tabblad zichtbaar terwijl zoeken zegt dat het er niet
+  /// is.
+  bool get revealsTab => enabled || hasBackend;
+
+  /// De instellingen zoals ze nu in de velden staan (zonder API-sleutel).
   AiSettings get settings {
     var url = baseUrl.text.trim();
     // Zonder schema is loopback de meest waarschijnlijke bedoeling; vul http://

@@ -109,7 +109,7 @@ extension _SettingsChrome on _SettingsDialogState {
                     // Uit het formulier en niet uit de opgeslagen instelling:
                     // zet je de module op Uitbreidingen aan, dan hoort het
                     // tabblad meteen te verschijnen en niet pas na Opslaan.
-                    aiRevealed: _ai.enabled || _ai.hasBackend,
+                    aiRevealed: _ai.revealsTab,
                   ))
                     _navItem(section, l10n),
                 ],

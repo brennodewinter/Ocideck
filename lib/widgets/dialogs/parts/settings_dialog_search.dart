@@ -144,7 +144,7 @@ extension _SettingsSearch on _SettingsDialogState {
     final revealed = ref.watch(infoSafetyRevealProvider);
     // Uit het formulier, net als de zijbalk: zet je de module aan en zoek je
     // meteen daarna, dan hoort de backend-instelling al vindbaar te zijn.
-    final aiRevealed = _ai.enabled || _ai.hasBackend;
+    final aiRevealed = _ai.revealsTab;
 
     final scored = <({int score, SettingsSearchEntry entry})>[];
     for (final entry in kSettingsSearchIndex) {
