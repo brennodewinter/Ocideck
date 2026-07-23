@@ -49,6 +49,7 @@ help:
 	@echo "  make dast            Advisory ZAP baseline over a served build (DAST_URL=… for a real host)."
 	@echo "  make sast            Semgrep over shipped Dart with the rules in semgrep/ (needs semgrep)."
 	@echo "  make check-secrets   Sweep working tree and history for committed secrets (needs gitleaks + trufflehog)."
+	@echo "  make shellcheck      ShellCheck over the committed shell scripts (needs shellcheck)."
 	@echo "  make trivy           Advisory supply-chain scan: Dart-dep CVEs + committed secrets (needs trivy)."
 	@echo "  make check-actions   Advisory: exact-pinned CI Actions vs their latest release."
 	@echo "  make servicenormen   Interne reactietermijnen op beveiligingsmeldingen (--quiet voor cron)."
@@ -301,6 +302,18 @@ sast:
 	@echo "Failure means: a rule matched. Read it — every rule here is scoped to be quiet."
 	@command -v semgrep >/dev/null 2>&1 || { echo "semgrep not found — install it (macOS: brew install semgrep)"; exit 2; }
 	semgrep scan --config semgrep/ocideck.yaml --metrics=off --error lib/ tool/ test/
+
+shellcheck:
+	@echo "== OciDeck check: shell scripts (ShellCheck) =="
+	@echo "Command: shellcheck scripts/*.sh"
+	@echo "Covers: every committed shell script — the release build and the icon generator."
+	@echo "Failure means: ShellCheck found a defect. Most of its findings are the"
+	@echo "        classics that only bite on the day it matters: an unquoted"
+	@echo "        variable that splits on a path with a space, a glob that"
+	@echo "        silently matches nothing, an exit code swallowed by a pipe."
+	@echo "        Dart has a compiler and an analyzer for this; shell has this."
+	@command -v shellcheck >/dev/null 2>&1 || { echo "shellcheck not found — install it (macOS: brew install shellcheck)"; exit 2; }
+	shellcheck scripts/*.sh
 
 check-secrets:
 	@echo "== OciDeck check: committed secrets =="
@@ -836,6 +849,6 @@ check: format-check analyze check-toolchain check-conventions check-audience-bou
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
-check-full: check check-secrets sast licenses sbom-verify deps-check check-web deps-outdated
+check-full: check check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated
 	@echo "== OciDeck extended check complete =="
-	@echo "Validated: required quality gate, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, and dependency freshness."
+	@echo "Validated: required quality gate, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, shell scripts, and dependency freshness."

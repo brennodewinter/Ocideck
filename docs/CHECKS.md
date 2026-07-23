@@ -124,8 +124,8 @@ an hour, and a contributor who assumes that never runs it.
 `analyze`, `check-conventions`, `check-method-length`, `check-dead-code` and
 `check-hardcoded-text` are included above; `check_licenses` was run separately in
 the same working copy. The `check-full` extras (`sbom-verify`, `deps-check`,
-`check-web`) and the advisory scans (`sast`, `dast`, `trivy`, `check-secrets`)
-were **not** run here, so this table says nothing about them. It is a snapshot,
+`check-web`) and the advisory scans (`sast`, `shellcheck`, `dast`, `trivy`,
+`check-secrets`) were **not** run here, so this table says nothing about them. It is a snapshot,
 not a certificate: the only run that means anything for a given commit is the one
 you do yourself before pushing it.
 
@@ -163,6 +163,7 @@ now the only passing state.
 | [`make catalogs-outdated`](#make-catalogs-outdated-advisory) | Bundled reference data vs upstream (advisory, pre-release) | — | — | — |
 | [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | ✅ |
 | [`make sast`](#make-sast) | Semgrep rules over shipped Dart (cert validation, subprocesses, weak randomness) | — | ✅ | ✅ |
+| [`make shellcheck`](#make-shellcheck) | ShellCheck over the committed shell scripts | — | ✅ | — |
 | [`make dast`](#make-dast-advisory) | ZAP baseline over a served build (advisory) | — | — | — |
 | [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) |
 | [`make check-actions`](#make-check-actions-advisory) | Pinned CI Actions vs their latest release (advisory) | — | — | — |
@@ -722,6 +723,32 @@ also declares them, but see the [CI note](#continuous-integration).)
   credential-shaped values. The price is real and is stated in the config: a
   genuine secret placed in one of those files would not be caught, and would not
   stand out visually either.
+
+### `make shellcheck`
+- **Runs:** `shellcheck scripts/*.sh` at the default severity, so nothing is
+  filtered out. Needs the `shellcheck` binary (`brew install shellcheck`).
+- **Covers:** every committed shell script — today
+  [`scripts/build_release.sh`](../scripts/build_release.sh) and
+  [`scripts/regenerate_icons.sh`](../scripts/regenerate_icons.sh). Both are
+  clean, which is why the gate could be added with no baseline and no
+  exemptions.
+- **Why it exists.** Dart in this repository passes a compiler, an analyzer at
+  `--fatal-infos`, and eight purpose-built gates. Shell passed nothing. That
+  asymmetry was fine while there was one script that only a release manager ran
+  by hand; it stopped being fine when a second script started producing
+  committed artefacts. ShellCheck catches the classics that only bite on the day
+  it matters: an unquoted variable that splits on a path with a space, a glob
+  that silently matches nothing, an exit code swallowed by a pipe.
+- **Failure means:** ShellCheck found a defect, or the binary is missing. Read
+  the finding; it links to a wiki page explaining the case.
+- **Wired into `check-full`, deliberately not into `check`** — same reason as
+  `sast` and `check-secrets`: the everyday gate cannot assume external binaries.
+- **Both directions are tested:** zero findings over both scripts, and a genuine
+  failure (exit non-zero, SC2086 reported) on a planted unquoted expansion. That
+  second half is not a formality. The first plant tried — a variable assigned a
+  literal path and then used unquoted — produced *no* finding, because
+  ShellCheck tracks the value and knows the expansion is safe. A gate proven only
+  against a plant it was never going to catch proves nothing.
 
 ### `make dast` (advisory)
 - **Runs:** an OWASP ZAP **baseline** (passive) scan in a container against a
