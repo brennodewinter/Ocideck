@@ -1797,6 +1797,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Il-modulu Assistenza AI huwa mitfi, għalhekk hawnhekk ma jiġri xejn. Ixegħlu taħt Estensjonijiet. Dak li ssettjajt hawn taħt jibqa\' kif inhu.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Għajnuna b\'testi alternattivi, deskrizzjonijiet u formulazzjonijiet. Meta tixgħlu xorta ma jintbagħat xejn: dan iseħħ biss wara li tagħżel backend int stess u, fil-każ ta\' servizz cloud, tikkonferma espliċitament. B\'backend lokali xejn ma joħroġ mill-kompjuter tiegħek.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Agħżel il-backend fit-tab Assistenza AI. Sakemm m\'hemm xejn hemmhekk, ma jiġri xejn.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Sejbiet li rrevedejt u ħallejt kif inhuma. Dawn ma jiġux irrapportati aktar, iżda l-iskennjar xorta jsibhom u ma jgħoddux bħala solvuti. Mess biex terġa\' ddaħħal waħda.',
   'Privacybevinding terzijde leggen (ontwerp)':

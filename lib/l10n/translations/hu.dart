@@ -1779,6 +1779,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Az MI-segítség modul ki van kapcsolva, így itt semmi sem történik. Kapcsold be a Bővítmények alatt. Amit lent beállítottál, megmarad.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Segítség alternatív szövegekhez, leírásokhoz és megfogalmazásokhoz. A bekapcsolás még semmit sem küld el: ez csak azután történik meg, hogy magad választottál háttérrendszert, és felhőszolgáltatás esetén kifejezetten megerősítetted. Helyi háttérrendszer esetén semmi sem hagyja el a számítógépedet.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Válaszd ki a háttérrendszert az MI-segítség lapon. Amíg ott nincs beállítva semmi, semmi sem történik.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Megállapítások, amelyeket megnéztél és meghagytál. Ezeket már nem jelzi, de a vizsgálat továbbra is megtalálja őket, és nem számítanak megoldottnak. Koppints az egyik visszaállításához.',
   'Privacybevinding terzijde leggen (ontwerp)':

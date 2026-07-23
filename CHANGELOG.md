@@ -129,6 +129,16 @@ read a book to find out.
   alle 31 talen.
 
 ### Changed
+- **AI-assistentie is een uitbreiding geworden, geen vast tabblad (#731).** De
+  aan/uit-schakelaar staat nu als modulekaart op *Instellingen → Uitbreidingen*,
+  naast Informatieveiligheid — de plek die belooft: standaard uit, verborgen tot
+  je het inschakelt. AI ís zo'n module: optioneel, met een netwerkuitgang die je
+  bewust aanzet, maar het stond als enige optionele functie permanent in de
+  zijbalk. Het eigen tabblad AI-assistentie verschijnt zodra de module aan
+  staat, en blijft ook met de module uit bestaan zolang er een backend
+  geconfigureerd is — uitzetten mag bestaand werk niet onbereikbaar maken. Wie
+  AI al aan had, merkt niets: dezelfde instelling, dezelfde plek op schijf.
+
 - **Een gewiste tekening blijft gewist, ook nadat twee mensen aan dezelfde
   presentatie hebben gewerkt.** Tekeningen gaan straks mee naar een
   git-repository, en dan worden de streken van beide kanten samengevoegd — twee

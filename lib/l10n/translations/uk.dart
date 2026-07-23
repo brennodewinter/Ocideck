@@ -1792,6 +1792,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Модуль «Підтримка ШІ» вимкнено, тому тут нічого не відбувається. Увімкніть його в Розширеннях. Те, що ви налаштували нижче, зберігається.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Допомога з альтернативними текстами, описами та формулюваннями. Увімкнення поки нічого не надсилає: це станеться лише після того, як ви самі оберете бекенд і, у випадку хмарного сервісу, явно підтвердите. З локальним бекендом ніщо не покидає ваш комп\'ютер.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Оберіть бекенд на вкладці «Підтримка ШІ». Поки там нічого не вибрано, нічого не відбувається.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Виявлення, які ви переглянули й залишили. Про них більше не повідомляється, але сканування далі їх знаходить, і вони не вважаються усуненими. Торкніться, щоб повернути одне з них.',
   'Privacybevinding terzijde leggen (ontwerp)':

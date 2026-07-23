@@ -1782,6 +1782,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Modulis DI pagalba išjungtas, todėl čia nieko nevyksta. Įjunkite jį skiltyje Plėtiniai. Tai, ką nustatėte žemiau, išlieka.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Pagalba dėl alternatyviųjų tekstų, aprašymų ir formuluočių. Įjungimas dar nieko nesiunčia: tai įvyksta tik tada, kai patys pasirenkate vidinę sistemą ir, debesijos paslaugos atveju, aiškiai patvirtinate. Naudojant vietinę vidinę sistemą niekas nepalieka jūsų kompiuterio.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Vidinę sistemą pasirinkite kortelėje DI pagalba. Kol ten nieko nenustatyta, niekas nevyksta.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Radiniai, kurie buvo įvertinti ir palikti. Apie juos nebepranešama, bet nuskaitymas juos vis tiek randa ir jie nelaikomi išspręstais. Bakstelėk, kad vieną grąžintum.',
   'Privacybevinding terzijde leggen (ontwerp)':

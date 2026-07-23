@@ -1774,6 +1774,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Modulis MI palīdzība ir izslēgts, tāpēc šeit nekas nenotiek. Ieslēdziet to sadaļā Paplašinājumi. Tas, ko esat iestatījis zemāk, saglabājas.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Palīdzība ar alternatīvajiem tekstiem, aprakstiem un formulējumiem. Ieslēgšana vēl neko nenosūta: tas notiek tikai pēc tam, kad pats esat izvēlējies aizmugursistēmu un mākoņpakalpojuma gadījumā skaidri apstiprinājis. Ar lokālu aizmugursistēmu nekas neatstāj jūsu datoru.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Izvēlieties aizmugursistēmu cilnē MI palīdzība. Kamēr tur nekas nav iestatīts, nekas nenotiek.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Konstatējumi, kas ir izvērtēti un atstāti. Par tiem vairs neziņo, taču skenēšana tos joprojām atrod, un tie netiek uzskatīti par novērstiem. Pieskaries, lai vienu atjaunotu.',
   'Privacybevinding terzijde leggen (ontwerp)':

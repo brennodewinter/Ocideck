@@ -1810,6 +1810,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Tá an modúl Cúnamh II múchta, mar sin ní tharlaíonn aon rud anseo. Cuir ar siúl é faoi Breiseáin. Fanann a bhfuil socraithe agat thíos mar atá.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Cabhair le téacsanna malartacha, cur síos agus friotal. Ní sheolann é a chur ar siúl aon rud go fóill: ní tharlaíonn sé sin ach amháin tar éis duit inneall a roghnú tú féin agus, i gcás seirbhís néil, é a dheimhniú go sainráite. Le hinneall áitiúil ní fhágann aon rud do ríomhaire.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Roghnaigh an t-inneall ar an táb Cúnamh II. Fad is nach bhfuil aon rud socraithe ansin, ní tharlaíonn aon rud.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Fionnachtana a ndearna tú athbhreithniú orthu agus a d\'fhág tú mar atá. Ní thuairiscítear a thuilleadh iad, ach aimsíonn an scanadh fós iad agus ní áirítear réitithe iad. Tapáil chun ceann a chur ar ais.',
   'Privacybevinding terzijde leggen (ontwerp)':

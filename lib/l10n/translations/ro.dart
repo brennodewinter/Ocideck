@@ -1792,6 +1792,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Modulul Asistență IA este dezactivat, așa că aici nu se întâmplă nimic. Activează-l la Extensii. Ce ai setat mai jos rămâne neschimbat.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Ajutor pentru texte alternative, descrieri și formulări. Activarea nu trimite încă nimic: asta se întâmplă abia după ce alegi tu însuți un backend și, în cazul unui serviciu cloud, confirmi explicit. Cu un backend local, nimic nu părăsește computerul tău.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Alege backend-ul în fila Asistență IA. Cât timp acolo nu este setat nimic, nu se întâmplă nimic.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Constatări pe care le-ai analizat și le-ai lăsat așa. Nu mai sunt raportate, dar scanarea continuă să le găsească și nu contează ca rezolvate. Atinge pentru a repune una.',
   'Privacybevinding terzijde leggen (ontwerp)':

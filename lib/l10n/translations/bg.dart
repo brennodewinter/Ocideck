@@ -1797,6 +1797,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Модулът AI помощ е изключен, затова тук нищо не се случва. Включете го в Разширения. Това, което сте настроили по-долу, се запазва.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Помощ при алтернативни текстове, описания и формулировки. Включването все още не изпраща нищо: това става едва след като сами изберете бекенд и, при облачна услуга, изрично потвърдите. При локален бекенд нищо не напуска компютъра ви.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Изберете бекенда в раздела AI помощ. Докато там няма нищо, нищо не се случва.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Констатации, които сте прегледали и сте оставили. Те вече не се съобщават, но сканирането продължава да ги открива и не се броят за отстранени. Докоснете, за да върнете една от тях.',
   'Privacybevinding terzijde leggen (ontwerp)':

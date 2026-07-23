@@ -1750,6 +1750,12 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'chu\'be\' AI QaH module, vaj naDev qaSbe\' vay\'. chelwI\'meyDaq yIchu\'. bIngDaq Dacherpu\'bogh Dochmey ratlh.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'alt-ghItlhmey, QIjmey, mu\'tlheghmey je QaH. chu\'lu\'DI\' pagh ngeHlu\': backend DawIvpu\'DI\' \'ej, cloud Qu\' Dalo\'chugh, DachIDchu\'pu\'DI\' neH qaS. backend naDev lo\'lu\'chugh, De\' ngeHbe\'lu\'.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'AI QaH \'echletDaq backend yIwIv. pa\' pagh tu\'lu\'taHvIS, qaSbe\' vay\'.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'DanoHpu\'bogh \'ej Dateqbe\'pu\'bogh SamwI\'ghachmey. luja\'lu\'be\'taH, \'ach luSamtaH nejwI\', \'ej rInpu\'be\'. wa\' DatatlhmeH yI\'uy.',
   'Privacybevinding terzijde leggen (ontwerp)':

@@ -1774,6 +1774,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Modulen AI-assistans är avstängd, så här händer ingenting. Slå på den under Tillägg. Det du har ställt in nedan finns kvar.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Hjälp med alt-texter, beskrivningar och formuleringar. Att slå på skickar ännu ingenting: det sker först när du själv har valt en backend och, vid en molntjänst, uttryckligen har bekräftat. Med en lokal backend lämnar ingenting din dator.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Välj backend på fliken AI-assistans. Så länge inget är valt där händer ingenting.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Iakttagelser som du har bedömt och låtit stå kvar. De rapporteras inte längre, men skanningen hittar dem fortfarande och de räknas inte som åtgärdade. Tryck för att återställa en.',
   'Privacybevinding terzijde leggen (ontwerp)':

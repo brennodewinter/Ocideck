@@ -74,9 +74,18 @@ class AiSettings {
   /// Alleen een suggestie in de UI; de gebruiker mag de poort aanpassen.
   static const String defaultLocalBaseUrl = 'http://127.0.0.1:11434/v1';
 
-  /// Of er een bruikbare backend is gekozen (los van of de gate hem toestaat).
-  bool get isConfigured =>
-      enabled && mode != AiBackendMode.none && baseUrl.trim().isNotEmpty;
+  /// Of er een bruikbare backend is ingevuld — **los van de schakelaar**.
+  ///
+  /// Het verschil met [isConfigured] doet ertoe sinds AI een module werd
+  /// (#731). Wie een backend en een sleutel heeft ingesteld en daarna de module
+  /// uitzet, moet die configuratie kunnen blijven zien en opruimen; anders
+  /// maakt de schakelaar bestaand werk onbereikbaar. Dat is de vaste regel uit
+  /// #648, en zij vraagt een toets die *niet* aan `enabled` hangt.
+  bool get hasBackend =>
+      mode != AiBackendMode.none && baseUrl.trim().isNotEmpty;
+
+  /// Of er een bruikbare backend is gekozen én de module aan staat.
+  bool get isConfigured => enabled && hasBackend;
 
   /// De host van [baseUrl], of leeg wanneer onparseerbaar.
   String get host => Uri.tryParse(baseUrl.trim())?.host ?? '';

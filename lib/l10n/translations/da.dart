@@ -1774,6 +1774,12 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Modulet AI-assistance er slået fra, så der sker ikke noget her. Slå det til under Udvidelser. Det, du har indstillet nedenfor, bliver stående.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Hjælp til alt-tekster, beskrivelser og formuleringer. At slå det til sender endnu ikke noget: det sker først, når du selv har valgt en backend og, ved en skytjeneste, udtrykkeligt har bekræftet. Med en lokal backend forlader intet din computer.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Vælg backend på fanen AI-assistance. Så længe der ikke står noget der, sker der ikke noget.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Fund, du har vurderet og ladet stå. De rapporteres ikke længere, men scanningen finder dem stadig, og de tæller ikke som løst. Tryk for at gendanne et.',
   'Privacybevinding terzijde leggen (ontwerp)':

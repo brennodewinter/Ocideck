@@ -915,6 +915,12 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'The AI assistance module is off, so nothing happens here. Turn it on under Extensions. What you have set below stays in place.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Help with alt texts, descriptions and wording. Turning this on sends nothing yet: that only happens once you have chosen a backend yourself and, for a cloud service, explicitly confirmed. With a local backend, nothing leaves your computer.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Choose the backend on the AI assistance tab. As long as nothing is set there, nothing happens.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Findings you reviewed and left in place. They are no longer reported, but the scan still finds them and they do not count as resolved. Tap to restore one.',
   'Privacybevinding terzijde leggen (ontwerp)':

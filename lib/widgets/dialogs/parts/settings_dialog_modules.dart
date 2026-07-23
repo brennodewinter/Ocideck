@@ -22,6 +22,8 @@ extension _SettingsModules on _SettingsDialogState {
         ),
         const SizedBox(height: 16),
         _informationSecurityCard(l10n, module),
+        const SizedBox(height: 12),
+        _aiAssistCard(l10n),
       ],
     );
   }
@@ -62,6 +64,20 @@ extension _SettingsModules on _SettingsDialogState {
             ),
         ],
       ),
+    );
+  }
+
+  /// De modulekaart voor AI-assistentie (#731) — [AiModuleCard], een losse
+  /// widget omdat de dialoogklasse tegen haar plafond zit. De callback raakt
+  /// het formulier en niet de voorkeuren; waarom staat op de widget zelf.
+  Widget _aiAssistCard(AppLocalizations l10n) {
+    return AiModuleCard(
+      enabled: _ai.enabled,
+      onChanged: (v) => _rebuild(() {
+        _ai.enabled = v;
+        _ai.testOk = null;
+        _ai.testMessage = null;
+      }),
     );
   }
 

@@ -60,21 +60,15 @@ extension _SettingsAi on _SettingsDialogState {
           ),
           style: const TextStyle(fontSize: 12, height: 1.4),
         ),
-        const SizedBox(height: 16),
-        SwitchListTile(
-          contentPadding: EdgeInsets.zero,
-          title: Text(
-            l10n.d('AI-assistentie inschakelen'),
-            style: const TextStyle(fontSize: 13),
-          ),
-          value: _ai.enabled,
-          onChanged: (value) => _rebuild(() {
-            _ai.enabled = value;
-            _ai.testOk = null;
-            _ai.testMessage = null;
-          }),
-        ),
-        if (_ai.enabled) ..._aiConfigSection(l10n),
+        // De aan/uit-schakelaar staat op Uitbreidingen, bij de modulekaart
+        // (#731). Twee knoppen die bijna hetzelfde zeggen is één te veel; wie
+        // hier komt, komt om te configureren.
+        //
+        // De configuratie blijft ook zichtbaar met de module uit, zolang er een
+        // backend staat: anders maakt de schakelaar bestaand werk onbereikbaar
+        // (#648). Zie [_aiModuleOffNotice] voor wat er dan boven staat.
+        if (!_ai.enabled) const AiModuleOffNotice(),
+        if (_ai.enabled || _ai.hasBackend) ..._aiConfigSection(l10n),
       ],
     );
   }

@@ -1781,6 +1781,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Modul AI pomoć je isključen, pa se ovdje ništa ne događa. Uključite ga pod Proširenja. Ono što ste postavili u nastavku ostaje sačuvano.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Pomoć pri alternativnim tekstovima, opisima i formulacijama. Uključivanje još ništa ne šalje: to se događa tek nakon što sami odaberete pozadinski sustav i, kod usluge u oblaku, izričito potvrdite. S lokalnim pozadinskim sustavom ništa ne napušta vaše računalo.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Odaberite pozadinski sustav na kartici AI pomoć. Dok tamo ništa nije postavljeno, ništa se ne događa.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Nalazi koji su pregledani i ostavljeni. Više se ne prijavljuju, ali skeniranje ih i dalje pronalazi i ne broje se kao riješeni. Dodirni za vraćanje jednoga.',
   'Privacybevinding terzijde leggen (ontwerp)':

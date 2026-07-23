@@ -52,6 +52,18 @@ class SettingsSearchEntry {
   /// hebben weggehaald (#648).
   final bool infoSafetyOnly;
 
+  /// Of deze ingang alleen bestaat wanneer de module AI-assistentie aan staat
+  /// (#731). Zelfde reden als [infoSafetyOnly]: een treffer die naar een
+  /// verborgen tabblad springt is erger dan geen treffer.
+  ///
+  /// Bewust een tweede vlag en geen moduleregister. `info_safety_provider.dart`
+  /// belooft dat register "wanneer er een tweede module komt"; die tweede is
+  /// dit niet in de zin die daar bedoeld wordt — AI draagt zijn eigen state
+  /// (`AiSettings`), er komt geen kopie van het reveal-patroon bij, en twee
+  /// vlaggen zijn goedkoper dan een register dat twee klanten bedient. Komt er
+  /// een derde, dan is dít de plek die het eerst pijn doet.
+  final bool aiOnly;
+
   const SettingsSearchEntry({
     required this.tab,
     this.label,
@@ -60,6 +72,7 @@ class SettingsSearchEntry {
     this.sectionKey,
     this.keywords = const [],
     this.infoSafetyOnly = false,
+    this.aiOnly = false,
   });
 
   String resolvedLabel(AppLocalizations l10n) =>
@@ -129,10 +142,14 @@ extension _SettingsSearch on _SettingsDialogState {
     // Wat niet getekend wordt, wordt niet gevonden. Een treffer die naar een
     // verborgen blok springt is verwarrender dan de instelling die er niet is.
     final revealed = ref.watch(infoSafetyRevealProvider);
+    // Uit het formulier, net als de zijbalk: zet je de module aan en zoek je
+    // meteen daarna, dan hoort de backend-instelling al vindbaar te zijn.
+    final aiRevealed = _ai.enabled || _ai.hasBackend;
 
     final scored = <({int score, SettingsSearchEntry entry})>[];
     for (final entry in kSettingsSearchIndex) {
       if (entry.infoSafetyOnly && !revealed) continue;
+      if (entry.aiOnly && !aiRevealed) continue;
       var best = -1;
       final haystack = [
         entry.resolvedLabel(l10n),

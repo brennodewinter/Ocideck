@@ -734,6 +734,12 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Das Modul KI-Unterstützung ist aus, hier passiert also nichts. Schalte es unter Erweiterungen ein. Was du unten eingestellt hast, bleibt erhalten.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Hilfe bei Alt-Texten, Beschreibungen und Formulierungen. Das Einschalten sendet noch nichts: Das geschieht erst, nachdem du selbst ein Backend gewählt und es bei einem Cloud-Dienst ausdrücklich bestätigt hast. Bei einem lokalen Backend verlässt nichts deinen Computer.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Wähle das Backend auf dem Tab KI-Unterstützung. Solange dort nichts steht, passiert nichts.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Feststellungen, die Sie geprüft und stehen gelassen haben. Diese werden nicht mehr gemeldet, aber der Scan findet sie weiterhin, und sie gelten nicht als behoben. Zum Zurückholen antippen.',
   'Privacybevinding terzijde leggen (ontwerp)':

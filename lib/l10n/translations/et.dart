@@ -1766,6 +1766,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Moodul Tehisintellekti abi on välja lülitatud, seega siin midagi ei toimu. Lülitage see sisse jaotises Laiendused. See, mille olete allpool seadistanud, jääb alles.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Abi alt-tekstide, kirjelduste ja sõnastuste juures. Sisselülitamine ei saada veel midagi: see juhtub alles pärast seda, kui olete ise taustsüsteemi valinud ja pilveteenuse puhul sõnaselgelt kinnitanud. Kohaliku taustsüsteemi puhul ei lahku midagi teie arvutist.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Valige taustsüsteem vahekaardil Tehisintellekti abi. Kuni seal pole midagi määratud, ei toimu midagi.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Leiud, mille oled üle vaadanud ja alles jätnud. Neist enam ei teatata, kuid skannimine leiab need endiselt ja neid ei loeta lahendatuks. Puuduta, et üks taastada.',
   'Privacybevinding terzijde leggen (ontwerp)':

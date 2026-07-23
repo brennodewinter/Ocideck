@@ -1778,6 +1778,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'S Modul KI-Unterstützig isch us, drum passiert da nüt. Schalt s bi de Erwyterige y. Was du unde ygstellt hesch, blybt erhalte.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Hilf bi Alt-Text, Beschrybige und Formulierige. S Yschalte schickt no nüt: das passiert erst, wänn du sälber es Backend gwählt hesch und bi eme Cloud-Dienscht usdrücklich bestätigt hesch. Bi eme lokale Backend verlaat nüt dyn Computer.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Wähl s Backend im Tab KI-Unterstützig. Solang det nüt staht, passiert nüt.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Befünd wo du aagluegt und stoh gloh häsch. Die wärded nüme gmäldet, aber de Scan findt si witerhin und si gälted nöd als glöst. Tipp zum eis zrugghole.',
   'Privacybevinding terzijde leggen (ontwerp)':

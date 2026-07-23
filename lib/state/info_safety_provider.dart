@@ -15,6 +15,23 @@
 // A second module needs a real registry (module id, parameterised keys,
 // per-module reveal) — build that when one actually arrives, rather than
 // budgeting to "reuse" this.
+//
+// **A second module arrived, and the registry was deliberately not built
+// (#731).** AI assistance moved to the Extensions tab as a module card beside
+// this one. It did not need any of the above: it already carries its own state
+// (`AiSettings.enabled`, persisted with the rest of the settings), so there is
+// no second copy of the enable → reveal pattern here — no second preference
+// key, no second reveal provider. The card writes the same form field the AI
+// tab used to write, which is also why its switch commits on Save rather than
+// immediately.
+//
+// What a registry would buy, measured against what it costs today: the two
+// modules share exactly two lines of behaviour — a tab that hides until you
+// switch it on, and a search entry that hides with it. Both are expressed as a
+// flag at the point of use (`SettingsSection.navItems`, `SettingsSearchEntry`).
+// A third module is where that stops paying: at three flags the search index
+// starts to lie by omission, and *that* is the moment to build the registry.
+// The note above stands; it just does not fire on this one.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

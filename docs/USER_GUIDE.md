@@ -2804,7 +2804,8 @@ findings-summary and management-summary counts use the context severity band.
 When the optional AI backend is on, the finding editor shows a **Tekst voorstellen
 (AI)** button under the *Beschrijving*, *Mogelijke impact* and *Aanbeveling*
 fields. It drafts that field with your configured AI backend — local, self-hosted
-or cloud, as set under *Settings → AI-assistentie* — grounded **only** on your own
+or cloud, as configured under *Settings → AI-assistentie* (the module itself is
+switched on under *Settings → Uitbreidingen (Extensions)*) — grounded **only** on your own
 facts for this finding (title, scope object, CVSS, CWE/CVE and the fields you have
 already filled) — and it is forbidden to invent identifiers: any CWE, CVE or CVSS
 id the model emits that is not already in your facts is stripped out

@@ -734,6 +734,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'E módulo Asistensia di IA ta pagá, pues nada no ta pasa akí. Sende é bou di Ekstenshonnan. Loke bo a konfigurá akí bou ta keda.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Yudansa ku tekstonan alternativo, deskripshonnan i formulashonnan. Sende é no ta manda nada ainda: esei ta sosodé so despues ku bo mes a skohe un backend i, den kaso di un servisio di nubia, a konfirmá esplísitamente. Ku un backend lokal nada no ta sali for di bo komputer.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Skohe e backend riba e tab Asistensia di IA. Tanten ku no tin nada ei, nada no ta pasa.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Konstatashonnan ku bo a evaluá i a laga keda. Nan no ta wòrdu reportá mas, pero e scan ta sigui haña nan i nan no ta konta komo resolvé. Toka pa pone un bèk.',
   'Privacybevinding terzijde leggen (ontwerp)':

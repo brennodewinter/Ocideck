@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/ai_settings.dart';
 import 'package:ocideck/state/settings_provider.dart';
+import 'package:ocideck/widgets/dialogs/settings/ai_module_card.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -37,6 +38,10 @@ void main() {
     clearLayoutNoise(tester);
   }
 
+  /// Opent het instellingenvenster op **Uitbreidingen**, want daar staat sinds
+  /// #731 de schakelaar. Het AI-tabblad bestaat pas zodra de module aan is of er
+  /// een backend staat, dus dit is de enige ingang die met verse voorkeuren
+  /// werkt.
   Future<void> openAiTab(
     WidgetTester tester, {
     Map<String, Object> prefs = const {},
@@ -58,7 +63,7 @@ void main() {
                 return ElevatedButton(
                   onPressed: () => SettingsDialog.show(
                     context,
-                    initialSection: SettingsSection.ai,
+                    initialSection: SettingsSection.modules,
                   ),
                   child: const Text('open'),
                 );
@@ -76,8 +81,26 @@ void main() {
     expect(find.byType(SettingsDialog), findsOneWidget);
   }
 
-  Finder aanZetten() =>
-      find.widgetWithText(SwitchListTile, 'AI-assistentie inschakelen');
+  Future<void> tapIn(WidgetTester tester, Finder target) async {
+    await tester.ensureVisible(target);
+    await settle(tester);
+    await tester.tap(target);
+    await settle(tester);
+  }
+
+  /// De moduleschakelaar op Uitbreidingen. Heette tot #731
+  /// "AI-assistentie inschakelen" en stond op het AI-tabblad zelf.
+  Finder aanZetten() => find.widgetWithText(SwitchListTile, 'AI-assistentie');
+
+  /// Het tabblad in de zijbalk. Bestaat alleen wanneer de module aan staat.
+  Finder aiTabblad() => find.byTooltip('AI-assistentie');
+
+  /// Zet de module aan en ga naar het AI-tabblad — de gewone route van een
+  /// gebruiker, en de opstelling waar de meeste toetsen hieronder vanuit gaan.
+  Future<void> moduleAanEnNaarTab(WidgetTester tester) async {
+    await tapIn(tester, aanZetten());
+    await tapIn(tester, aiTabblad());
+  }
 
   Finder cloudBevestiging() => find.widgetWithText(
     SwitchListTile,
@@ -85,13 +108,6 @@ void main() {
   );
 
   Finder veld(String label) => find.widgetWithText(TextField, label);
-
-  Future<void> tapIn(WidgetTester tester, Finder target) async {
-    await tester.ensureVisible(target);
-    await settle(tester);
-    await tester.tap(target);
-    await settle(tester);
-  }
 
   Future<void> kiesBackend(WidgetTester tester, String label) async {
     await tapIn(tester, find.byType(DropdownButtonFormField<AiBackendMode>));
@@ -102,26 +118,73 @@ void main() {
   bool switchAan(WidgetTester tester, Finder finder) =>
       tester.widget<SwitchListTile>(finder).value;
 
-  testWidgets('uit staat er niets ingesteld te worden', (tester) async {
+  testWidgets('uit is er geen tabblad en valt er niets in te stellen', (
+    tester,
+  ) async {
     await openAiTab(tester);
 
+    expect(find.byType(AiModuleCard), findsOneWidget);
     expect(switchAan(tester, aanZetten()), isFalse, reason: 'standaard uit');
+    // Sinds #731 verdwijnt het tabblad zelf, niet alleen zijn inhoud: AI is een
+    // module, en de zijbalk hoort niet te suggereren dat het een vaste functie
+    // is. Wie hem niet gebruikt — de meerderheid, gegeven standaard-uit — heeft
+    // er een tabblad minder.
+    expect(aiTabblad(), findsNothing);
     expect(
       find.byType(DropdownButtonFormField<AiBackendMode>),
       findsNothing,
       reason: 'zonder inschakelen valt er niets te kiezen',
     );
-    expect(
-      find.textContaining('Er wordt niets verstuurd totdat je dit inschakelt'),
-      findsOneWidget,
-    );
   });
+
+  testWidgets('aanzetten laat het tabblad verschijnen', (tester) async {
+    await openAiTab(tester);
+    expect(aiTabblad(), findsNothing);
+
+    await tapIn(tester, aanZetten());
+    expect(aiTabblad(), findsOneWidget);
+  });
+
+  testWidgets(
+    'een ingestelde backend houdt het tabblad, ook met de module uit',
+    (tester) async {
+      // De vaste regel uit #648: tonen zodra de inhoud er is. Zou het tabblad
+      // op alléén de schakelaar verdwijnen, dan maakt uitzetten de backend en
+      // de sleutel onbereikbaar — werk dat er al ligt, weg achter een knop.
+      await openAiTab(
+        tester,
+        prefs: {
+          'aiSettings': jsonEncode({
+            'enabled': false,
+            'mode': 'local',
+            'baseUrl': 'http://127.0.0.1:11434/v1',
+            'model': 'gemma3:4b',
+          }),
+        },
+      );
+
+      expect(switchAan(tester, aanZetten()), isFalse);
+      expect(aiTabblad(), findsOneWidget);
+
+      await tapIn(tester, aiTabblad());
+      expect(
+        find.textContaining('De module AI-assistentie staat uit'),
+        findsOneWidget,
+        reason: 'anders leest het tabblad als een werkende instelling',
+      );
+      expect(
+        find.byType(DropdownButtonFormField<AiBackendMode>),
+        findsOneWidget,
+        reason: 'de configuratie blijft bereikbaar om op te ruimen',
+      );
+    },
+  );
 
   testWidgets('inschakelen brengt de backendkeuze tevoorschijn', (
     tester,
   ) async {
     await openAiTab(tester);
-    await tapIn(tester, aanZetten());
+    await moduleAanEnNaarTab(tester);
 
     expect(find.byType(DropdownButtonFormField<AiBackendMode>), findsOneWidget);
     // "Geen" is de stand waarin er nog steeds niets te configureren valt.
@@ -132,7 +195,7 @@ void main() {
     tester,
   ) async {
     await openAiTab(tester);
-    await tapIn(tester, aanZetten());
+    await moduleAanEnNaarTab(tester);
     await kiesBackend(tester, 'Lokaal (op dit apparaat)');
 
     expect(
@@ -153,7 +216,7 @@ void main() {
     tester,
   ) async {
     await openAiTab(tester);
-    await tapIn(tester, aanZetten());
+    await moduleAanEnNaarTab(tester);
     await kiesBackend(tester, 'Zelf gehost (eigen server)');
 
     expect(veld('API-sleutel (optioneel)'), findsOneWidget);
@@ -173,7 +236,7 @@ void main() {
     tester,
   ) async {
     await openAiTab(tester);
-    await tapIn(tester, aanZetten());
+    await moduleAanEnNaarTab(tester);
     await kiesBackend(tester, 'Cloud (externe dienst)');
 
     expect(cloudBevestiging(), findsOneWidget);
@@ -192,7 +255,7 @@ void main() {
     tester,
   ) async {
     await openAiTab(tester);
-    await tapIn(tester, aanZetten());
+    await moduleAanEnNaarTab(tester);
     await kiesBackend(tester, 'Cloud (externe dienst)');
 
     await tester.enterText(veld('Server-URL'), 'https://dienst-a.example/v1');
@@ -253,6 +316,9 @@ void main() {
     );
 
     expect(switchAan(tester, aanZetten()), isTrue);
+    // De velden staan op het AI-tabblad; de dialoog opent sinds #731 op
+    // Uitbreidingen, dus daar eerst heen.
+    await tapIn(tester, aiTabblad());
     expect(
       tester.widget<TextField>(veld('Server-URL')).controller!.text,
       'https://eigen.server.intern/v1',
@@ -272,7 +338,7 @@ void main() {
 
   testWidgets('een verbindingstest meldt zijn uitslag', (tester) async {
     await openAiTab(tester);
-    await tapIn(tester, aanZetten());
+    await moduleAanEnNaarTab(tester);
     await kiesBackend(tester, 'Lokaal (op dit apparaat)');
 
     await tapIn(

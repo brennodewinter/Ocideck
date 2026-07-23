@@ -735,6 +735,12 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'De module AI-stipe stiet út, dus hjir bart neat. Set him oan by Utwreidingen. Wat do hjirûnder ynsteld hast, bliuwt stean.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Help by alt-teksten, beskriuwingen en formulearringen. Oansette ferstjoert noch neat: dat bart pas neidat do sels in backend keazen hast en, by in clouddienst, útdruklik befêstige hast. By in lokale backend ferlit neat dyn kompjûter.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Kies de backend op it ljepblêd AI-stipe. Salang\'t dêr neat stiet, bart der neat.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Befiningen dy\'t sto beoardield en stean litten hast. Dy wurde net mear meld, mar de scan fynt se noch altyd en se telle net as oplost. Tik om der ien werom te setten.',
   'Privacybevinding terzijde leggen (ontwerp)':

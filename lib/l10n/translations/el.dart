@@ -1802,6 +1802,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Η μονάδα Υποστήριξη AI είναι απενεργοποιημένη, οπότε εδώ δεν συμβαίνει τίποτα. Ενεργοποιήστε την στις Επεκτάσεις. Ό,τι έχετε ρυθμίσει παρακάτω παραμένει.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Βοήθεια με εναλλακτικά κείμενα, περιγραφές και διατυπώσεις. Η ενεργοποίηση δεν στέλνει ακόμη τίποτα: αυτό συμβαίνει μόνο αφού επιλέξετε οι ίδιοι ένα backend και, σε περίπτωση υπηρεσίας cloud, το επιβεβαιώσετε ρητά. Με ένα τοπικό backend τίποτα δεν φεύγει από τον υπολογιστή σας.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Επιλέξτε το backend στην καρτέλα Υποστήριξη AI. Όσο δεν έχει οριστεί τίποτα εκεί, δεν συμβαίνει τίποτα.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Ευρήματα που έχεις εξετάσει και άφησες όπως είναι. Δεν αναφέρονται πλέον, αλλά η σάρωση συνεχίζει να τα βρίσκει και δεν μετρούν ως επιλυμένα. Πάτησε για να επαναφέρεις ένα.',
   'Privacybevinding terzijde leggen (ontwerp)':

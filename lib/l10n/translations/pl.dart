@@ -1787,6 +1787,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Moduł Wsparcie AI jest wyłączony, więc nic się tutaj nie dzieje. Włącz go w sekcji Rozszerzenia. Twoje ustawienia poniżej pozostają zachowane.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Pomoc przy tekstach alternatywnych, opisach i sformułowaniach. Włączenie niczego jeszcze nie wysyła: dzieje się to dopiero po tym, jak samodzielnie wybierzesz backend i, w przypadku usługi chmurowej, wyraźnie to potwierdzisz. Przy lokalnym backendzie nic nie opuszcza Twojego komputera.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Wybierz backend na karcie Wsparcie AI. Dopóki nic tam nie ustawiono, nic się nie dzieje.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Ustalenia, które zostały sprawdzone i pozostawione. Nie są już zgłaszane, ale skan nadal je znajduje i nie liczą się jako rozwiązane. Dotknij, aby przywrócić jedno z nich.',
   'Privacybevinding terzijde leggen (ontwerp)':

@@ -1775,6 +1775,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Modul Bantuan AI mati, jadi tidak ada yang terjadi di sini. Aktifkan di Ekstensi. Apa yang Anda atur di bawah tetap tersimpan.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Bantuan untuk teks alternatif, deskripsi, dan rumusan kalimat. Mengaktifkannya belum mengirim apa pun: itu baru terjadi setelah Anda sendiri memilih backend dan, untuk layanan cloud, mengonfirmasi secara tegas. Dengan backend lokal, tidak ada yang keluar dari komputer Anda.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Pilih backend di tab Bantuan AI. Selama belum ada yang diatur di sana, tidak ada yang terjadi.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Temuan yang sudah kamu tinjau dan kamu biarkan. Temuan ini tidak dilaporkan lagi, tetapi pemindaian tetap menemukannya dan tidak dihitung sebagai selesai. Ketuk untuk memulihkan salah satunya.',
   'Privacybevinding terzijde leggen (ontwerp)':

@@ -1777,6 +1777,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Modul Pomoč UI je izklopljen, zato se tukaj nič ne zgodi. Vklopite ga pod Razširitve. Kar ste nastavili spodaj, ostane.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Pomoč pri nadomestnih besedilih, opisih in formulacijah. Vklop še ničesar ne pošlje: to se zgodi šele, ko sami izberete zaledje in pri storitvi v oblaku izrecno potrdite. Pri lokalnem zaledju nič ne zapusti vašega računalnika.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Zaledje izberite na zavihku Pomoč UI. Dokler tam ni nič nastavljeno, se nič ne zgodi.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Ugotovitve, ki so bile pregledane in puščene. Ne javljajo se več, vendar jih pregled še vedno najde in ne štejejo kot razrešene. Tapni za vrnitev ene.',
   'Privacybevinding terzijde leggen (ontwerp)':

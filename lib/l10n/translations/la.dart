@@ -1791,6 +1791,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Modulus Auxilii IA exstinctus est, itaque hic nihil fit. Eum apud Extensiones accende. Quae infra statuisti, manent.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Auxilium in textibus alternativis, descriptionibus et formulis. Accendere nihil adhuc mittit: id demum fit postquam ipse backend elegisti et, apud servitium nubis, expresse confirmavisti. Cum backend locali nihil computatrum tuum relinquit.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Backend in tabula Auxilii IA elige. Dum ibi nihil positum est, nihil fit.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Inventa quae recensuisti et manere sivisti. Non amplius nuntiantur, sed scrutatio ea etiamnunc invenit neque pro solutis habentur. Tange ut unum restituas.',
   'Privacybevinding terzijde leggen (ontwerp)':

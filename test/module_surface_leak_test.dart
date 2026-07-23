@@ -24,9 +24,11 @@ void main() {
   List<SettingsSection> nav({
     required bool revealed,
     required bool hasChecklists,
+    bool aiRevealed = false,
   }) => SettingsSection.navItems(
     infoSafetyRevealed: revealed,
     hasChecklists: hasChecklists,
+    aiRevealed: aiRevealed,
   );
 
   test('met de module uit staat de checklists-tab er niet', () {
@@ -84,6 +86,20 @@ void main() {
         );
       }
     }
+  });
+
+  test('het AI-tabblad volgt dezelfde regel als de checklists (#731)', () {
+    // `aiRevealed` is bij de aanroeper al `enabled || hasBackend`, dus de
+    // tonen-zodra-er-inhoud-is-helft zit in die vlag; hier bewaken we dat de
+    // lijst hem ook echt volgt.
+    expect(
+      nav(revealed: false, hasChecklists: false),
+      isNot(contains(SettingsSection.ai)),
+    );
+    expect(
+      nav(revealed: false, hasChecklists: false, aiRevealed: true),
+      contains(SettingsSection.ai),
+    );
   });
 
   test('een leeg sjabloon telt als aanwezig werk', () {

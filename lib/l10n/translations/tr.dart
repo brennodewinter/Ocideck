@@ -2754,6 +2754,12 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'AI yardımı modülü kapalı, bu yüzden burada hiçbir şey olmaz. Eklentiler bölümünden açın. Aşağıda ayarladıklarınız olduğu gibi kalır.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Alternatif metinler, açıklamalar ve ifadeler için yardım. Açmak henüz hiçbir şey göndermez: bu ancak kendiniz bir arka uç seçtikten ve bir bulut hizmetinde açıkça onayladıktan sonra gerçekleşir. Yerel bir arka uçla hiçbir şey bilgisayarınızdan çıkmaz.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Arka ucu AI yardımı sekmesinde seçin. Orada bir şey seçili olmadığı sürece hiçbir şey olmaz.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'İncelediğiniz ve olduğu gibi bıraktığınız bulgular. Bunlar artık bildirilmez, ancak tarama onları bulmaya devam eder ve çözülmüş sayılmaz. Birini geri getirmek için dokunun.',
   'Privacybevinding terzijde leggen (ontwerp)':

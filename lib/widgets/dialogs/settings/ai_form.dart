@@ -39,6 +39,14 @@ class AiForm {
   }
 
   /// De instellingen zoals ze nu in de velden staan (zonder API-sleutel).
+  /// Of er in dit formulier een backend staat, los van de schakelaar.
+  ///
+  /// Spiegelt [AiSettings.hasBackend], maar leest de velden zoals ze nú op het
+  /// scherm staan: het tabblad en de modulekaart horen meteen te reageren, niet
+  /// pas na Opslaan.
+  bool get hasBackend =>
+      mode != AiBackendMode.none && baseUrl.text.trim().isNotEmpty;
+
   AiSettings get settings {
     var url = baseUrl.text.trim();
     // Zonder schema is loopback de meest waarschijnlijke bedoeling; vul http://

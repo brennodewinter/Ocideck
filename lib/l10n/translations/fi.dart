@@ -1775,6 +1775,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De module AI-assistentie staat uit, dus hier gebeurt niets. Zet hem aan bij Uitbreidingen. Wat je hieronder hebt ingesteld blijft staan.':
+      'Tekoälyavustus-moduuli on pois päältä, joten täällä ei tapahdu mitään. Kytke se päälle Laajennuksissa. Alla tekemäsi asetukset säilyvät.',
+  'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
+      'Apua alt-teksteihin, kuvauksiin ja muotoiluihin. Päälle kytkeminen ei vielä lähetä mitään: se tapahtuu vasta, kun olet itse valinnut taustajärjestelmän ja pilvipalvelun tapauksessa nimenomaisesti vahvistanut. Paikallisen taustajärjestelmän kanssa mikään ei poistu tietokoneeltasi.',
+  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
+      'Valitse taustajärjestelmä Tekoälyavustus-välilehdellä. Niin kauan kuin siellä ei ole mitään, mitään ei tapahdu.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Havainnot, jotka olet arvioinut ja jättänyt paikalleen. Niistä ei enää ilmoiteta, mutta skannaus löytää ne edelleen eikä niitä lasketa ratkaistuiksi. Napauta palauttaaksesi yhden.',
   'Privacybevinding terzijde leggen (ontwerp)':

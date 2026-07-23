@@ -298,25 +298,34 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
 
   // ── AI-assistentie (geen sectiekoppen op desktop) ─────────────────────────
+  //
+  // De schakelaar staat sinds #731 op Uitbreidingen, en deze ingang wijst
+  // daarheen. Bewust géén `aiOnly`: zoeken naar "ai" moet altijd íéts vinden,
+  // namelijk de plek waar je hem aanzet. Zou ook deze verborgen zijn, dan gaf
+  // de app "geen instelling gevonden" op een functie die ze wél heeft.
   SettingsSearchEntry(
-    tab: SettingsSection.ai,
-    label: 'AI-assistentie inschakelen',
-    keywords: ['ai', 'assistent', 'llm', 'model'],
+    tab: SettingsSection.modules,
+    label: 'AI-assistentie',
+    section: 'Uitbreidingen',
+    keywords: ['ai', 'assistent', 'llm', 'model', 'inschakelen', 'module'],
   ),
   SettingsSearchEntry(
     tab: SettingsSection.ai,
     label: 'AI-backend',
     keywords: ['ai', 'backend', 'ollama', 'cloud', 'server'],
+    aiOnly: true,
   ),
   SettingsSearchEntry(
     tab: SettingsSection.ai,
     label: 'Modelnaam',
     keywords: ['ai', 'model'],
+    aiOnly: true,
   ),
   SettingsSearchEntry(
     tab: SettingsSection.ai,
     label: 'API-sleutel (optioneel)',
     keywords: ['ai', 'api', 'sleutel', 'key', 'token'],
+    aiOnly: true,
   ),
 
   // ── Opslag ────────────────────────────────────────────────────────────────

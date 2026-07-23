@@ -118,10 +118,14 @@ second is optional):
 ## 3. The optional AI capability
 
 ### 3.1 Settings toggle & backend config
-A settings section "AI-assistentie", **off by default**. When on, it exposes a
-backend choice and per-consumer switches. Backend fields: mode
+A module card "AI-assistentie" on the **Uitbreidingen** (Extensions) tab,
+**off by default** — since #731 the on/off switch lives there, beside the
+information-security module, and the dedicated AI-assistentie tab only appears
+once the module is on (or a backend is already configured: switching the module
+off must never make existing configuration unreachable). The tab itself holds
+the backend choice and per-consumer switches. Backend fields: mode
 (`none | local | self-hosted | cloud`), base URL, model name, and a "test
-connection" action. Default mode is **none** even when the toggle is on — nothing
+connection" action. Default mode is **none** even when the module is on — nothing
 fires until the user acts on a specific field.
 
 ### 3.2 Three-tier backend — a *provider-agnostic* client

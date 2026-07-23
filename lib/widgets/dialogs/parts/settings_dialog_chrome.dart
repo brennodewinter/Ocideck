@@ -106,6 +106,10 @@ extension _SettingsChrome on _SettingsDialogState {
                         .watch(settingsProvider)
                         .customChecklists
                         .isNotEmpty,
+                    // Uit het formulier en niet uit de opgeslagen instelling:
+                    // zet je de module op Uitbreidingen aan, dan hoort het
+                    // tabblad meteen te verschijnen en niet pas na Opslaan.
+                    aiRevealed: _ai.enabled || _ai.hasBackend,
                   ))
                     _navItem(section, l10n),
                 ],

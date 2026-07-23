@@ -71,14 +71,20 @@ enum SettingsSection {
   /// inhoud er is.** Wie sjablonen heeft gemaakt en daarna de module uitzet,
   /// ziet ze nog steeds staan en kan ze weghalen. Dezelfde truc als bij de
   /// MIAUW-velden in `presentation_info_dialog.dart`.
+  /// [aiRevealed] is dezelfde afweging voor AI-assistentie (#731): die is een
+  /// module geworden en woont onder Uitbreidingen. Wie hem uit laat, ziet er
+  /// niets van — behalve wanneer er al een backend is ingevuld, want ook daar
+  /// geldt "tonen zodra de inhoud er is".
   static List<SettingsSection> navItems({
     required bool infoSafetyRevealed,
     required bool hasChecklists,
+    required bool aiRevealed,
   }) => values.where((s) {
     if (s == SettingsSection.about) return false;
     if (s == SettingsSection.checklists) {
       return infoSafetyRevealed || hasChecklists;
     }
+    if (s == SettingsSection.ai) return aiRevealed;
     return true;
   }).toList();
 }
