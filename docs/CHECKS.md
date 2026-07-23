@@ -5,9 +5,9 @@
 Every automated check OciDeck runs, what it covers, what a failure means, and how
 to fix it. The **`Makefile` is the single entry point** and the **real gate**:
 `make check`, run by the committer before pushing, is what actually enforces
-these checks. The Forgejo remote has an Actions runner since 2026-07-23, but it
-only runs `.forgejo/workflows/linux-build.yml` (the Linux desktop build on
-`main`); **the gate itself does not run in CI** (#741) — see
+these checks. The Forgejo remote has an Actions runner since 2026-07-23, and
+`.forgejo/workflows/ci.yml` runs this same `make check` on every pull request
+and every push to `main` (#741/#751) — see
 [Continuous integration](#continuous-integration).
 Run `make help` for a one-line summary of every target.
 
@@ -74,8 +74,9 @@ it (see [`make coverage`](#make-coverage)).
 span unit (model/parsing/state), widget (every slide editor, the dialogs, the
 panels, the live preview and the fullscreen presenter's keyboard handling) and
 service-level (export, file IO, sanitisation) layers, plus the enforced
-localization and security guards listed below. The CI runner does not run the
-gate (#741), so the number you see locally is the number that gates the push.
+localization and security guards listed below. Since #751 the CI runner runs
+the same gate on every pull request, so a local run and the PR check answer
+the same question.
 
 ---
 
@@ -96,8 +97,9 @@ Tools • Dart 3.12.2
 **This is the pinned toolchain, and that is new.** Until 2026-07-23 this section
 recorded `3.44.2 • [user-branch] • unknown source` — an unofficial build, with
 its binaries under a directory named for a third version again — against
-documents that all named a pinned release. Because the gate does not run in CI,
-that machine is the only place `make check` has ever run, so every green gate this
+documents that all named a pinned release. Because the gate did not run in CI
+until 2026-07-23 (#751), that machine was the only place `make check` had ever
+run, so every green gate this
 project rested on had been produced by a toolchain nobody else could reproduce.
 It is now the official stable SDK, hash-verified before unpacking; see
 [Toolchains of record](#toolchains-of-record) for how, and `make check-toolchain`
@@ -166,11 +168,11 @@ now the only passing state.
 | [`make check-actions`](#make-check-actions-advisory) | Pinned CI Actions vs their latest release (advisory) | — | — | — |
 
 † The **In CI workflow** column is what `.github/workflows/ci.yml` *declares* —
-not what runs. That workflow does not execute: the runner attached on 2026-07-23
-only runs the Linux build, and Forgejo reads `.forgejo/workflows/` instead of
-`.github/workflows/` once the former exists (see
-[Continuous integration](#continuous-integration)). Until the gate itself is
-ported to CI (#741), only what the committer runs locally gates a push, and `make
+not what runs. That workflow does not execute: Forgejo reads
+`.forgejo/workflows/` instead of `.github/workflows/` once the former exists
+(see [Continuous integration](#continuous-integration)). What *does* run in CI
+since #751 is `make check` itself, on every pull request and push to `main`.
+Note that `make
 check` alone does **not** include `licenses`, `sbom-verify`, `deps-check` or
 `check-web` — those live in `check-full`. Run `make check-full` before a
 dependency or web-facing change.
@@ -892,23 +894,32 @@ For focused work, run only the relevant slice instead of the whole suite:
 
 ## Continuous integration
 
-> **A runner exists since 2026-07-23, but the gate still does not run in CI.**
-> The Forgejo server has a registered Actions runner (docker-in-docker, on the
+> **A runner exists since 2026-07-23, and since #751 it runs the gate.** The
+> Forgejo server has a registered Actions runner (docker-in-docker, on the
 > same machine that serves the repository). What it executes comes from
 > `.forgejo/workflows/` — Forgejo reads the first workflow directory that
 > exists, so that directory shadows `.github/workflows/`, whose files remain
-> reference definitions for a GitHub mirror. Until the gate is ported to the
-> runner (#741), **`make check` (plus `make check-full` for the
-> dependency/web checks), run by the committer before pushing, is the only
-> enforcement.** The sections below describe the one workflow that runs, then
-> what the GitHub files *declare*.
+> reference definitions for a GitHub mirror. `make check-full` (the
+> dependency/web checks) still runs only locally; run it before a dependency
+> or web-facing change. The sections below describe the two workflows that
+> run, then what the GitHub files *declare*.
+
+### `.forgejo/workflows/ci.yml` — the gate, on every pull request and push to `main`
+- **gate** — a bare `ubuntu:24.04` container in which the workflow installs
+  the **official** Flutter stable release: the version is *read from
+  `.tool-versions`* (so a pin bump has no second place to forget) and the
+  tarball is sha256-verified against the official release manifest. Then
+  `flutter pub get` and `make check` — the same gate a committer runs
+  locally, including `check-toolchain`, which is why a prebuilt third-party
+  Flutter image was rejected: the cirruslabs image shipped channel
+  `[user-branch]` from an unknown source, exactly what that check exists to
+  catch.
 
 ### `.forgejo/workflows/linux-build.yml` — executed on every push to `main`
-- **build-linux** — runs on the `pawprint` runner in a
-  `ghcr.io/cirruslabs/flutter:stable` container: installs the GTK build
-  dependencies, `flutter pub get`, `flutter build linux --release`, and uploads
-  the bundle as the `ocideck-linux-x64` run artifact. This is a build, not a
-  gate: it proves the Linux target compiles and packages, nothing more.
+- **build-linux** — same official pinned toolchain as the gate, plus the GTK
+  build dependencies; `flutter build linux --release`, and uploads the bundle
+  as the `ocideck-linux-x64` run artifact. This is a build, not a gate: it
+  proves the Linux target compiles and packages, nothing more.
 
 ### `.github/workflows/ci.yml` — declared for every push and pull request
 - **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get

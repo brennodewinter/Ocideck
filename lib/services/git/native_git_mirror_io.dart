@@ -571,9 +571,14 @@ class _NativeGitMirror implements NativeGitMirror {
   /// (lokaal of op origin), maak hem anders af van [start]. De clone blíjft op de
   /// werkbranch achter — daar wordt verder aan gewerkt tot de ronde uitkomt.
   ///
-  /// Aanmaken en uitchecken zijn twee stappen (`git branch` dan `git checkout`),
+  /// Aanmaken en uitchecken zijn twee stappen (`git branch` dan `git switch`),
   /// niet `checkout -b`: de gehardde runner schuift de branchnaam als operand
   /// achter `--end-of-options`, en `-b` eist zijn naam er juist pal naast.
+  ///
+  /// `switch` en niet `checkout`: checkout op git ≤ 2.43 (Ubuntu 24.04 LTS)
+  /// kent `--end-of-options` niet en leest hem als pathspec — "pathspec did
+  /// not match any file(s)". `switch` neemt alleen een branch en verstaat de
+  /// markering wel; de CI-poort draait op 2.43 en bewaakt dit.
   Future<void> _ensureOnWorkBranch(String branch, String start) async {
     if (await _currentBranch() == branch) return;
     if (!await _refExists(branch)) {
@@ -582,7 +587,7 @@ class _NativeGitMirror implements NativeGitMirror {
           : start;
       await _run(['branch'], operands: [branch, from]);
     }
-    await _run(['checkout'], operands: [branch]);
+    await _run(['switch'], operands: [branch]);
   }
 
   /// De naam van de uitgecheckte branch (`main`, of een werkbranch).
