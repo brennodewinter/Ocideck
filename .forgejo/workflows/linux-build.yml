@@ -4,7 +4,7 @@ name: linux-build
 
 on:
   push:
-    branches: [main, feat/forgejo-linux-build]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
