@@ -244,7 +244,11 @@ extension _SettingsStorageTab on _SettingsDialogState {
       switch (connection) {
         LocalConnection() => null,
         WebdavConnection() => switch (_webdavForms[connection.id]) {
-          final WebdavForm form => _webdavPanel(form),
+          final WebdavForm form => WebdavPanel(
+            form: form,
+            confirmCertificate: _confirmCertificate,
+            onChanged: () => _rebuild(() {}),
+          ),
           _ => null,
         },
         S3Connection() => switch (_s3Forms[connection.id]) {

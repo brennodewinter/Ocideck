@@ -12,18 +12,10 @@ import '../../../models/s3_settings.dart';
 import '../../../services/s3/s3_service.dart';
 import '../../../theme/app_theme.dart';
 import '../../../utils/log.dart';
+import 'confirm_certificate.dart';
 import 's3_form.dart';
 import 'settings_section_title.dart';
 import 'settings_text_field.dart';
-
-/// Vraagt de gebruiker het certificaat van [origin] te bekijken en geeft de
-/// vingerafdruk terug als hij het vertrouwt, of `null`.
-typedef ConfirmCertificate =
-    Future<String?> Function({
-      required Uri origin,
-      required String host,
-      required bool allowPrivate,
-    });
 
 class S3Panel extends StatefulWidget {
   /// Wat het paneel bewerkt. Eigendom van het venster: het overleeft het

@@ -309,9 +309,11 @@ void main() {
         .map((f) => f.readAsStringSync())
         .join('\n');
 
-    // Een sectiekop komt op drie manieren binnen: rechtstreeks, als kale string,
-    // of via _presentationStyleDivider — die zijn titel doorgeeft aan
-    // _sectionTitle en dus hetzelfde anker registreert.
+    // Een sectiekop komt binnen via de widget [SettingsSectionTitle], via de
+    // helper `_sectionTitle` die daarnaar doorgeeft (de panelen die nog in de
+    // gedeelde part-scope leven), of via _presentationStyleDivider — die zijn
+    // titel doorgeeft en dus hetzelfde anker registreert. Alle drie registreren
+    // hetzelfde anker; het gaat erom dát de kop nog getekend wordt.
     final missing = <String>[];
     for (final entry in kSettingsSearchIndex) {
       final section = entry.section;
@@ -320,6 +322,8 @@ void main() {
       final rendered = [
         "_sectionTitle(l10n.d('$escaped')",
         "_sectionTitle('$escaped')",
+        "SettingsSectionTitle(l10n.d('$escaped')",
+        "SettingsSectionTitle('$escaped')",
         "_presentationStyleDivider(l10n.d('$escaped')",
       ];
       if (!rendered.any(sources.contains)) missing.add(section);

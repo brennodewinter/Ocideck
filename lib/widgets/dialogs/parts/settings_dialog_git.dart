@@ -50,25 +50,25 @@ extension _SettingsGit on _SettingsDialogState {
                 _rebuild(() => form.provider = v ?? GitProvider.gitea),
           ),
         ),
-        _webdavField(
+        SettingsTextField(
           form.url,
           l10n.d('Server-URL'),
           hint: 'https://git.example.org',
           icon: Icons.dns_outlined,
         ),
-        _webdavField(
+        SettingsTextField(
           form.owner,
           l10n.d('Eigenaar'),
           hint: 'librekat',
           icon: Icons.person_outline,
         ),
-        _webdavField(
+        SettingsTextField(
           form.repo,
           l10n.d('Repository'),
           hint: 'decks',
           icon: Icons.folder_outlined,
         ),
-        _webdavField(
+        SettingsTextField(
           form.branch,
           l10n.d('Branch (optioneel)'),
           hint: 'main',

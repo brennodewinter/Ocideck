@@ -140,13 +140,13 @@ extension _SettingsAi on _SettingsDialogState {
     final isSelfHosted = _ai.mode == AiBackendMode.selfHosted;
     final isCloud = _ai.mode == AiBackendMode.cloud;
     return [
-      _webdavField(
+      SettingsTextField(
         _ai.baseUrl,
         l10n.d('Server-URL'),
         hint: 'http://127.0.0.1:11434/v1',
         icon: Icons.link,
       ),
-      _webdavField(
+      SettingsTextField(
         _ai.model,
         l10n.d('Modelnaam'),
         hint: 'gemma3:4b',
