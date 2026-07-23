@@ -98,7 +98,7 @@ class _GitPanelState extends ConsumerState<GitPanel> {
         SettingsTextField(
           _form.url,
           l10n.d('Server-URL'),
-          hint: l10n.d('https://git.example.org'),
+          hint: l10n.d('https://git.librekat.nl'),
           icon: Icons.dns_outlined,
         ),
         SettingsTextField(

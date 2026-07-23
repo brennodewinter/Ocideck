@@ -109,8 +109,8 @@ class _WebdavPanelState extends State<WebdavPanel> {
           // Bij Nextcloud is het pad afgeleid en telt alleen de host; bij een
           // andere server valt er niets te raden en ís het pad de DAV-wortel.
           hint: isNextcloud
-              ? l10n.d('https://cloud.example.com')
-              : l10n.d('https://dav.example.com/dav/files'),
+              ? l10n.d('https://cloud.librekat.nl')
+              : l10n.d('https://dav.librekat.nl/dav/files'),
           icon: Icons.link,
         ),
         if (!isNextcloud)
