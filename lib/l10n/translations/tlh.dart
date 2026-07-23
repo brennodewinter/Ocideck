@@ -1759,6 +1759,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'De\'wI\' teywI\' ghap .ocideck ngaSwI\' vaS. \'ang \'oH chu\'wI\' per; He vam pagh SIQ — vaj naDev QaD.',
   'Deze is beoordeeld en mag blijven': 'wa\'vam vInoHpu\': taH net chaw\'',
+  'Mogelijk gemaakt door': 'qaSmoHta\'',
   'De export is gestopt tijdens het voorbereiden.': 'ngeH mev; ghuHmeH poHDaq.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'De\'wI\' teywI\' chenmoHlaHbe\' ghItlhlaHbe\' je. yIlegh: \'ar Sam\'a\' \'ej ghItlhlu\'laH\'a\' ngeHwI\' raQ.',

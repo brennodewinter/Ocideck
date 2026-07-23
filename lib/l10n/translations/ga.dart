@@ -1819,6 +1819,7 @@ const _dutchSourceAddGa = <String, String>{
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Sábháil an taispeántas seo mar chomhad nó mar phacáiste .ocideck. Baineann an séala le clib eisiúna, agus níl an bealach sin ann fós — go dtí sin is anseo atá sé slán.',
   'Deze is beoordeeld en mag blijven': 'Seiceáilte, féadann sé seo fanacht',
+  'Mogelijk gemaakt door': 'Arna chumasú ag',
   'De export is gestopt tijdens het voorbereiden.':
       'Stop an t-easpórtáil le linn an ullmhúcháin.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

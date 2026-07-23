@@ -743,6 +743,7 @@ const _dutchSourceAddFr = {
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Enregistrez cette présentation comme fichier ou comme paquet .ocideck. Le sceau appartient à une étiquette de version, et ce chemin n\'existe pas encore : d\'ici là, c\'est ici qu\'il est en sécurité.',
   'Deze is beoordeeld en mag blijven': 'Vérifié, ce constat peut rester',
+  'Mogelijk gemaakt door': 'Rendu possible par',
   'De export is gestopt tijdens het voorbereiden.':
       'L\'export s\'est arrêté pendant la préparation.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

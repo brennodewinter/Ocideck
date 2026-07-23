@@ -1775,6 +1775,7 @@ const _dutchSourceAddEt = <String, String>{
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Salvesta see esitlus failina või .ocideck-paketina. Pitser kuulub väljalasketähise juurde ja seda teed veel pole — seniks on ta siin turvaliselt.',
   'Deze is beoordeeld en mag blijven': 'Üle vaadatud, see võib jääda',
+  'Mogelijk gemaakt door': 'Võimalikuks teinud',
   'De export is gestopt tijdens het voorbereiden.':
       'Eksport peatus ettevalmistamise ajal.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

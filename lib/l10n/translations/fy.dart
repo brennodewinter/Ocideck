@@ -744,6 +744,7 @@ const _dutchSourceAddFy = {
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Bewarje dit deck as bestân of as .ocideck-pakket. It segel heart by in release-tag, en dy wei is der noch net — oant dan is dit it plak dêr\'t it feilich stiet.',
   'Deze is beoordeeld en mag blijven': 'Neisjoen, dizze mei bliuwe',
+  'Mogelijk gemaakt door': 'Mooglik makke troch',
   'De export is gestopt tijdens het voorbereiden.':
       'De eksport is stoppe by it tarieden.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
