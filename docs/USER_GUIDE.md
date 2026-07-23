@@ -19,9 +19,9 @@
 - [Traffic Light Protocol (TLP)](#traffic-light-protocol-tlp)
 - [Privacy check](#privacy-check)
 - [What to do with a finding](#what-to-do-with-a-finding)
-- [Depth — a management version and a technical one](#depth-a-management-version-and-a-technical-one)
+- [Depth — a management version and a technical one](#depth--a-management-version-and-a-technical-one)
 - [Two versions from one source](#two-versions-from-one-source)
-- [Redaction — leaving data out](#redaction-leaving-data-out)
+- [Redaction — leaving data out](#redaction--leaving-data-out)
 - [Presenting](#presenting)
 - [Exporting](#exporting)
 - [Accessibility](#accessibility)
@@ -3016,10 +3016,18 @@ Implementation: `lib/services/markdown_validator.dart` (unit tests in
 
 ## What the browser version cannot do
 
-OciDeck also runs entirely inside a browser tab, with no server behind it. That
-version is not the desktop app on a web page: a browser has no filesystem, no
-subprocesses and no native libraries, so some things are simply not there. They
-are not switched off somewhere — there is no setting to find.
+OciDeck also runs entirely inside a browser tab, with no application backend
+behind it. That version is not the desktop app on a web page: a browser has no
+filesystem, no subprocesses and no native libraries, so some things are simply
+not there. They are not switched off somewhere — there is no setting to find.
+
+You can try that version without installing anything: the publisher serves it at
+<https://ocideck.librekat.nl/>. Your deck still stays in your tab there, but the
+origin is the publisher's rather than yours, and *Import from URL* on that host
+is fetched by the publisher's server — see
+[the servers the publisher runs](PRIVACY.md#the-servers-the-publisher-runs)
+before you open a client's deck on it. Hosting the same bundle yourself is
+[HOSTING.md](HOSTING.md).
 
 | What | In the browser |
 |---|---|

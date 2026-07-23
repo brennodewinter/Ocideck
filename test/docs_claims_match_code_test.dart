@@ -349,4 +349,68 @@ void main() {
       expect(privacy, contains('Stichting LibreKAT'));
     });
   });
+
+  group('de webdemo die de uitgever zelf draait', () {
+    // #589: de README kreeg een link naar `ocideck.librekat.nl`, een gratis
+    // publieke kopie van de webbouw op een oorsprong van de stichting. Dat is
+    // hosten, en `COMPLIANCE.md` zei op dat moment nog dat de stichting
+    // OciDeck niet als dienst host en precies één server draait — de tweede
+    // absolute claim die bleef staan nadat #579 de eerste had opgeruimd.
+    //
+    // Wat hier bewaakt wordt is de kóppeling, en de README is de bron: zodra
+    // een document van de uitgever een host op `librekat.nl` naar buiten toe
+    // aanprijst, moeten de twee documenten die zeggen wat de stichting draait
+    // die host ook noemen. Haal de link weg en de eis vervalt vanzelf — dan is
+    // er ook niets meer aan te prijzen.
+    /// Hosts op `librekat.nl` die een tekst als adres noemt.
+    ///
+    /// Alleen echte hostnamen: een e-mailadres als `security@librekat.nl`
+    /// noemt geen server, en het `@` ervoor is precies wat dat onderscheidt.
+    Set<String> hostenIn(String tekst) => RegExp(
+      r'(?<![\w@.])([a-z0-9-]+\.librekat\.nl)',
+    ).allMatches(tekst).map((m) => m.group(1)!).toSet();
+
+    final hosts = hostenIn(lees('README.md'));
+
+    test('de meting onderscheidt een host van een e-mailadres', () {
+      // Zonder deze toets meet de rest niets: een regex die niets meer vangt
+      // zou de hele groep stilzwijgend groen maken. Bewust op een vaste zin en
+      // niet op de README zelf — verdwijnt de demolink ooit, dan hóórt de eis
+      // te vervallen en niet de poort om te vallen.
+      expect(
+        hostenIn('zie <https://demo.librekat.nl/> of mail a@librekat.nl'),
+        {'demo.librekat.nl'},
+      );
+    });
+
+    for (final bestand in const ['COMPLIANCE.md', 'docs/PRIVACY.md']) {
+      test('$bestand noemt elke aangeprezen host', () {
+        for (final host in hosts) {
+          expect(
+            lees(bestand),
+            contains(host),
+            reason:
+                'De README stuurt lezers naar $host. $bestand zegt wat de '
+                'stichting draait en waarvoor zij verwerkingsverantwoordelijke '
+                'is; een host die de README aanprijst en dit document niet '
+                'kent is de eerste zin die een kritische lezer natrekt.',
+          );
+        }
+      });
+    }
+
+    test('COMPLIANCE.md beweert niet meer dat de stichting niets host', () {
+      // Precies de zin die onwaar werd, buiten de correctienotities om — die
+      // citeren hem bewust.
+      final tekst = lees(
+        'COMPLIANCE.md',
+      ).replaceAll(RegExp(r'\*\(?Corrected.*?\)?\*', dotAll: true), '');
+
+      expect(
+        tekst,
+        isNot(contains('does not host OciDeck itself as a service')),
+      );
+      expect(tekst, isNot(contains('It does run **one** service')));
+    });
+  });
 }

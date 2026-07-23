@@ -15,6 +15,14 @@ wrangling required. Compose decks from typed slide templates, preview them live,
 present them fullscreen across two screens, and export to Marp Markdown, PDF,
 PPTX and offline HTML.
 
+> **Try it in your browser:** <https://ocideck.librekat.nl/> — the web build,
+> running entirely in your own tab; nothing you type or open is uploaded. It is
+> the smaller half of the two: no local video, no local CVE database, no WebDAV
+> browsing, and a URL import that a browser blocks on CORS grounds is retried
+> through a proxy on that host — which then sees the address you typed
+> ([the full list](docs/KNOWN_LIMITATIONS.md#the-web-build-does-less-than-the-desktop-build)).
+> For everything, build the desktop app — [BUILD.md](docs/BUILD.md).
+
 ![The OciDeck editor: the slide strip on the left, a per-type editor in the
 middle, and a thumbnail preview — here a penetration-test report deck with a
 finding slide open.](docs/images/editor.png)
@@ -42,7 +50,10 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 > them, with what each one sends, are listed in
 > [PRIVACY.md](docs/PRIVACY.md#what-leaves-your-device--and-only-when-you-ask);
 > the mechanics are in
-> [ARCHITECTURE.md](docs/ARCHITECTURE.md#runtime--network-model).
+> [ARCHITECTURE.md](docs/ARCHITECTURE.md#runtime--network-model). The demo above
+> is the one place where the *device* is a page the publisher serves: the work
+> still happens in your tab and no deck is uploaded, but the origin is ours —
+> [what that means](docs/PRIVACY.md#the-servers-the-publisher-runs).
 
 ## What it does
 

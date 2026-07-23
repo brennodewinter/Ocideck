@@ -46,21 +46,36 @@ change, a registration number identifies the legal person. Both addresses are as
 published by the foundation itself, on <https://librekat.nl/nl/contact/> and in
 the app under **Settings → About OciDeck**.
 
-The foundation publishes OciDeck and holds the copyright. It does not sell it,
-does not host OciDeck itself as a service, and does not monetise it in any form.
+The foundation publishes OciDeck and holds the copyright. It does not sell it
+and does not monetise it in any form. Nobody buys it, nobody subscribes, and
+there is no paid edition.
 
-It does run **one** service the application can talk to: `cveapi.librekat.nl`, a
-CVE mirror, off by default and repointable at any other mirror. That is not
-hosting OciDeck — no deck ever reaches it — but it is a processing operation by
-the foundation, with the foundation as controller, and it belongs in this
-paragraph rather than only in a table further away.
-[`docs/PRIVACY.md`](docs/PRIVACY.md#the-one-server-the-publisher-runs) says what
-the application sends, what this repository can establish, and — since the
-operator stated it (2026-07-23) — that the foundation keeps what the service
-receives only as long as it needs to run it (art. 5(1)(e), no fixed schedule)
-and judges the privacy impact minor. *(Corrected 2026-07-22, #579: "does not
-host it as a service" read as "runs no servers at all", and that was the
-sentence a critical reader would check first.)*
+It runs **two** servers, and both belong in this paragraph rather than only in a
+table further away:
+
+- `cveapi.librekat.nl`, a CVE mirror the application can talk to — off by
+  default and repointable at any other mirror. No deck ever reaches it.
+- `ocideck.librekat.nl`, a public build of the web app, free to use and
+  advertised in the README. Everything still runs in the visitor's browser and
+  no deck is uploaded, but the origin is the foundation's: it sees the requests
+  for the bundle, and it carries the same-origin fetch-proxy, so a URL a visitor
+  imports there is fetched by the foundation's server.
+
+Both are processing operations by the foundation, with the foundation as
+controller. [`docs/PRIVACY.md`](docs/PRIVACY.md#the-servers-the-publisher-runs)
+says per server what the application sends and what this repository can
+establish — and for the CVE mirror, since the operator stated it (2026-07-23),
+that the foundation keeps what the service receives only as long as it needs to
+run it (art. 5(1)(e), no fixed schedule) and judges the privacy impact minor. No
+such statement has been made for the demo host yet, and none is invented here.
+
+*(Corrected 2026-07-22, #579: "does not host it as a service" read as "runs no
+servers at all", and that was the sentence a critical reader would check first.
+Corrected again 2026-07-23, #589: the replacement said the foundation does not
+host OciDeck as a service and runs exactly one server, while the demo at
+`ocideck.librekat.nl` was already live. Hosting a free public copy is still
+hosting; the correction that fixed one absolute claim had left a second one
+standing.)*
 
 On the CRA's own vocabulary: the foundation is **not a manufacturer**, because
 the software is not made available on the market. Whether it is an *open-source
