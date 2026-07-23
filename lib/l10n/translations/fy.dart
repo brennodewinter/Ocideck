@@ -734,6 +734,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'net elk keppele bestân koe mei (net lêsber of bûten it projekt)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Online opslach is allinnich beskikber yn de desktopferzje.',
   'Online opslag': 'Online opslach',
@@ -1697,8 +1699,6 @@ const _dutchSourceAddFy = {
   'Opgeslagen in git:': 'Bewarre nei git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'De branch is ferpleatst; laad it deck opnij en bewarje wer.',
-  'video en audio gaan (nog) niet mee naar git':
-      'fideo en audio geane (noch) net mei nei git',
   'Bijgewerkt met OciDeck': 'Bywurke mei OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Stel earst in git-repository yn by Ynstellingen → Git-repository.',

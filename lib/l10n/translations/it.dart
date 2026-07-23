@@ -729,6 +729,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'non tutti i file collegati sono stati inclusi (illeggibili o fuori dal progetto)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'L\'archiviazione online è disponibile solo nella versione desktop.',
   'Online opslag': 'Archiviazione online',
@@ -1704,8 +1706,6 @@ const _dutchSourceAddIt = {
   'Opgeslagen in git:': 'Salvato su git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Il branch è stato spostato; ricarica il deck e salva di nuovo.',
-  'video en audio gaan (nog) niet mee naar git':
-      'video e audio non vanno (ancora) su git',
   'Bijgewerkt met OciDeck': 'Aggiornato con OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Configura prima un repository Git in Impostazioni → Repository Git.',

@@ -1774,6 +1774,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'kaikkia linkitettyjä tiedostoja ei voitu sisällyttää (lukukelvottomia tai projektin ulkopuolella)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Verkkotallennus on saatavilla vain työpöytäversiossa.',
   'Online opslag': 'Verkkotallennus',
@@ -2726,8 +2728,6 @@ const _dutchSourceAddFi = <String, String>{
   'Opgeslagen in git:': 'Tallennettu gitiin:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Haara siirtyi; lataa setti uudelleen ja tallenna uudestaan.',
-  'video en audio gaan (nog) niet mee naar git':
-      'video ja ääni eivät (vielä) mene gitiin',
   'Bijgewerkt met OciDeck': 'Päivitetty OciDeckillä',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Määritä ensin Git-tietovarasto kohdassa Asetukset → Git-tietovarasto.',

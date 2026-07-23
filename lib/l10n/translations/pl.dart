@@ -1786,6 +1786,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'nie wszystkie powiązane pliki udało się dołączyć (nieczytelne lub poza projektem)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Przechowywanie online jest dostępne tylko w wersji na komputer.',
   'Online opslag': 'Przechowywanie online',
@@ -2737,8 +2739,6 @@ const _dutchSourceAddPl = <String, String>{
   'Opgeslagen in git:': 'Zapisano do gita:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Gałąź się przesunęła; przeładuj zestaw i zapisz ponownie.',
-  'video en audio gaan (nog) niet mee naar git':
-      'wideo i audio (jeszcze) nie trafiają do gita',
   'Bijgewerkt met OciDeck': 'Zaktualizowano za pomocą OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Najpierw skonfiguruj repozytorium Git w Ustawienia → Repozytorium Git.',

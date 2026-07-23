@@ -1781,6 +1781,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'ne visus susietus failus pavyko įtraukti (neįskaitomi arba už projekto ribų)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Internetinė saugykla pasiekiama tik darbalaukio versijoje.',
   'Online opslag': 'Internetinė saugykla',
@@ -2735,8 +2737,6 @@ const _dutchSourceAddLt = <String, String>{
   'Opgeslagen in git:': 'Įrašyta į git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Šaka pasislinko; iš naujo įkelkite rinkinį ir įrašykite dar kartą.',
-  'video en audio gaan (nog) niet mee naar git':
-      'vaizdas ir garsas (kol kas) nepatenka į git',
   'Bijgewerkt met OciDeck': 'Atnaujinta su OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Pirmiausia nustatykite Git saugyklą skiltyje Nustatymai → Git saugykla.',

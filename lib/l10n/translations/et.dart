@@ -1765,6 +1765,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'kõiki seotud faile ei õnnestunud kaasata (loetamatud või väljaspool projekti)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Võrgusalvestus on saadaval ainult lauaarvuti versioonis.',
   'Online opslag': 'Võrgusalvestus',
@@ -2717,8 +2719,6 @@ const _dutchSourceAddEt = <String, String>{
   'Opgeslagen in git:': 'Salvestatud gitti:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Haru on liikunud; laadi deck uuesti ja salvesta uuesti.',
-  'video en audio gaan (nog) niet mee naar git':
-      'video ja heli (veel) gitti ei lähe',
   'Bijgewerkt met OciDeck': 'Uuendatud OciDeckiga',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Seadistage kõigepealt Giti hoidla jaotises Seaded → Giti hoidla.',

@@ -1780,6 +1780,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'nisu sve povezane datoteke mogle biti uključene (nečitljive ili izvan projekta)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Mrežna pohrana dostupna je samo u verziji za računalo.',
   'Online opslag': 'Mrežna pohrana',
@@ -2728,8 +2730,6 @@ const _dutchSourceAddHr = <String, String>{
   'Opgeslagen in git:': 'Spremljeno u git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Grana je pomaknuta; ponovno učitaj komplet i spremi opet.',
-  'video en audio gaan (nog) niet mee naar git':
-      'video i audio (još) ne idu u git',
   'Bijgewerkt met OciDeck': 'Ažurirano s OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Najprije postavite Git repozitorij u Postavke → Git repozitorij.',

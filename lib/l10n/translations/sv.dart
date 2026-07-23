@@ -1773,6 +1773,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'inte alla länkade filer kunde tas med (oläsliga eller utanför projektet)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Onlinelagring är endast tillgänglig i skrivbordsversionen.',
   'Online opslag': 'Onlinelagring',
@@ -2723,8 +2725,6 @@ const _dutchSourceAddSv = <String, String>{
   'Opgeslagen in git:': 'Sparat till git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Grenen har flyttats; ladda om decket och spara igen.',
-  'video en audio gaan (nog) niet mee naar git':
-      'video och ljud följer (ännu) inte med till git',
   'Bijgewerkt met OciDeck': 'Uppdaterad med OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Ställ först in ett Git-repository under Inställningar → Git-repository.',

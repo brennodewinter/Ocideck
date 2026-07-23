@@ -733,6 +733,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'no tur archivo konektá por a bai huntu (no por lesa nan òf nan ta pafó di e proyekto)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Almasenamentu online ta disponibel solamente den e version di desktop.',
   'Online opslag': 'Almasenamentu online',
@@ -1699,8 +1701,6 @@ const _dutchSourceAddPap = {
   'Opgeslagen in git:': 'Wardá na git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'E branch a move; recarga e deck i warda atrobe.',
-  'video en audio gaan (nog) niet mee naar git':
-      'video i audio no ta bai (ainda) na git',
   'Bijgewerkt met OciDeck': 'Aktualisá ku OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Konfigurá promé un repositorio Git na Konfigurashon → Repositorio Git.',

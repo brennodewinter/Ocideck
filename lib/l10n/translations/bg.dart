@@ -1796,6 +1796,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'не всички свързани файлове можаха да бъдат включени (нечетими или извън проекта)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Онлайн съхранението е налично само в настолната версия.',
   'Online opslag': 'Онлайн съхранение',
@@ -2752,8 +2754,6 @@ const _dutchSourceAddBg = <String, String>{
   'Opgeslagen in git:': 'Запазено в git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Клонът е преместен; презаредете тестето и запазете отново.',
-  'video en audio gaan (nog) niet mee naar git':
-      'видеото и аудиото (все още) не отиват в git',
   'Bijgewerkt met OciDeck': 'Обновено с OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Първо настройте Git хранилище в Настройки → Git хранилище.',

@@ -656,8 +656,10 @@ class GitSaveResult {
   /// Uitlegbare tekst bij [GitSaveStatus.conflict] en [GitSaveStatus.failed].
   final String? message;
 
-  /// Mediaverwijzingen die niet mee-gecommit zijn (video/audio, onleesbare
-  /// afbeeldingen). Het deck sloeg wel op; de UI meldt wat er niet meeging.
+  /// Verwijzingen die niet mee-gecommit zijn: onleesbaar, zonder bruikbare
+  /// extensie of buiten het project (zie `poolAsset` in
+  /// deck_repo_serializer.dart). Het deck sloeg wel op; de UI meldt dat niet
+  /// alles meekon. Media als soort reist gewoon mee.
   final List<String> warnings;
 
   /// Bij [GitSaveStatus.conflict]: de slides waar beide kanten iets anders mee

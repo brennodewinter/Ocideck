@@ -1773,6 +1773,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
+      'ne visus saistītos failus izdevās iekļaut (nenolasāmi vai ārpus projekta)',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Tiešsaistes krātuve ir pieejama tikai darbvirsmas versijā.',
   'Online opslag': 'Tiešsaistes krātuve',
@@ -2723,8 +2725,6 @@ const _dutchSourceAddLv = <String, String>{
   'Opgeslagen in git:': 'Saglabāts git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Zars ir pārvietots; pārlādē klāju un saglabā vēlreiz.',
-  'video en audio gaan (nog) niet mee naar git':
-      'video un audio (vēl) neietilpst git',
   'Bijgewerkt met OciDeck': 'Atjaunināts ar OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Vispirms iestatiet Git repozitoriju sadaļā Iestatījumi → Git repozitorijs.',
