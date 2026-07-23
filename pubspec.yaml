@@ -133,6 +133,9 @@ flutter:
     # tool/build_eurovoc_lexicon.dart en docs/LICENSE_COMPLIANCE.md.
     - assets/privacy/belief_lexicon.json
     - assets/web_export/
+    # Sjablooninhoud als document, één bestand per taal (<id>.nl.md naast
+    # <id>.en.md); interfaceteksten van de kiezer blijven via l10n gaan.
+    - assets/templates/
     # Full EUPL 1.2 licence text, shown verbatim in the consent screen.
     - LICENSE.md
     # User-facing documentation, shown in the in-app reader (Settings →
