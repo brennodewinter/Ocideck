@@ -207,6 +207,28 @@ read a book to find out.
   en dat is eerlijker dan een lijst die schuld opschrijft die er niet is.
 
 ### Changed
+- **Een verzegeld deck gaat niet meer naar git — het wordt geweigerd in plaats
+  van stil uitgekleed.** Tot nu toe ging zo'n deck gewoon mee en viel alleen het
+  zegel weg, met een waarschuwing achteraf. Een verzegeld rapport dat via git
+  terugkomt zónder zegel leest als een rapport dat nooit verzegeld is.
+  Een zegel is een uitspraak over precies díé bytes, en een werkbranch biedt dat
+  niet: die kan herschreven, gecherrypickt en geforceerd geduwd worden. Dus
+  weigeren op het moment dat de keuze er nog is (ontwerpbesluit D13).
+  De weigering staat in het opslagpad zelf en niet alleen in een dialoog — een
+  poort die je omzeilt door een andere knop te gebruiken is geen poort. De
+  interface legt hem uit, met één knop en zonder "toch opslaan".
+  De waarschuwing "niet alles gaat mee naar git" verliest daarmee exact die ene
+  regel en houdt de tekeningen. Dat is bewust: een waarschuwing die meer opsomt
+  dan er werkelijk misgaat, leert de lezer hem in zijn geheel weg te klikken.
+  **Wat dit niet oplost, en dat staat er nu ook zo bij:** een verzegeld deck kan
+  daarmee helemáál niet meer naar de repo, want de route via een release-tag
+  bestaat nog niet. `tagRelease` tagt de kop van de standaardbranch en commit
+  niets, dus er is op dat moment geen commitset om in mee te reizen. Welke kant
+  dat opgaat is een besluit, geen detail; de drie opties staan in
+  `GIT_STORAGE.md` bij D13. Tot dan wijst de weigering naar een bestand of een
+  `.ocideck`-pakket, en zegt er met zoveel woorden bij dat de tag-route er nog
+  niet is in plaats van hem te beloven.
+
 - **Het offline-parkeren van een git-opslag zit niet langer in de state-laag.**
   `_queueGitSave` en `_poolPendingDeck` waren privémethoden op `TabsNotifier`,
   en dat is niet waar ze horen: er komt geen tabblad, geen Riverpod en geen

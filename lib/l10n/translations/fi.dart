@@ -1775,6 +1775,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Een verzegeld deck gaat niet naar een werkbranch':
+      'Sinetöity esitys ei mene työhaaraan',
+  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
+      'Sinetti on väite juuri näistä tavuista. Työhaara voidaan kirjoittaa uudelleen, poimia cherry-pickillä ja työntää pakolla, eikä sinetti, joka selviää kaikesta siitä, kerro enää mitään.',
+  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
+      'Tallenna tämä esitys tiedostona tai .ocideck-pakettina. Sinetti kuuluu julkaisutunnisteeseen, eikä sitä reittiä vielä ole — siihen asti se on turvassa täällä.',
   'De export is gestopt tijdens het voorbereiden.':
       'Vienti pysähtyi valmistelun aikana.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

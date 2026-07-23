@@ -734,6 +734,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Een verzegeld deck gaat niet naar een werkbranch':
+      'Un presentashon seyá no ta bai riba un branch di trabou',
+  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
+      'Un seyo ta un deklarashon tokante presis e bytes aki. Un branch di trabou por wòrdu skirbí di nobo, cherry-pick i push forsá, i un seyo ku ta sobrebibí tur esei no ta bisa nada mas.',
+  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
+      'Warda e presentashon aki komo archivo òf komo pakete .ocideck. E seyo ta pertenesé na un tag di release, i e kaminda ei no ta eksistí ainda — te e ora ei, aki e ta seguro.',
   'De export is gestopt tijdens het voorbereiden.':
       'E eksportashon a stòp durante e preparashon.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

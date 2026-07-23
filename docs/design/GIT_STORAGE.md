@@ -793,7 +793,7 @@ whose participants share a repo), but neither doc depends on the other landing.
 > running behaviour — and since 22-07-2026 that decision includes the tombstone,
 > which the annotation format has to carry before any of it can be built. The
 > seal is settled too, in the opposite direction: tag only, no merge semantics
-> (§14, D12).
+> (§14, D13).
 
 "Sidecars merge poorly" flattened a distinction worth keeping: the two sidecars
 are not the same kind of file, and each has its own right answer (§14, D7).
@@ -872,7 +872,7 @@ consequences must be respected rather than discovered later:
   §14, D7 — format first, then the driver, then the write path.
 
 **And the seal does not belong in this section at all.** *(Decided 22-07-2026,
-#541 — see §14, D12.)* A sealed deck goes to a release **tag**, never to a work
+#541 — see §14, D13.)* A sealed deck goes to a release **tag**, never to a work
 branch, so two versions of one seal cannot arise: that is a mistake, not a
 conflict. A normal save to a work branch refuses a sealed deck instead of
 warning about it afterwards. The asymmetry with ink is deliberate and worth
@@ -1303,8 +1303,10 @@ discussion still resolve.
   older files), **then** the merge driver `merge=ocideck-ink`, **then** the
   write path. The driver must also be reproducible in-app, because a clone made
   by another tool does not have it.*
-- **D12 — A seal belongs on a tag, not on a branch.** *(Decided 22-07-2026,
-  #541.)* A sealed deck may travel to a release tag; it may not be committed to
+- **D13 — A seal belongs on a tag, not on a branch.** *(Decided 22-07-2026,
+  #541. Numbered D12 until 23-07-2026, which "How media comes back" already
+  used; renumbered rather than left ambiguous, because both are cited from
+  elsewhere in this document and from the code.)* A sealed deck may travel to a release tag; it may not be committed to
   a work branch.
 
   That follows from what a seal means — *these* bytes, *this* artefact — and a
@@ -1315,7 +1317,30 @@ discussion still resolve.
   Two consequences for the build. The seal travels in the commit set of a
   version release, and **a normal save to a work branch refuses a sealed deck,
   with an explanation** — so today's after-the-fact warning becomes a refusal at
-  the point of decision. And a seal needs **no merge semantics at all**: two
+  the point of decision.
+
+  **The refusal is live since #541** (`gitRefusesSealedDeck`, enforced in
+  `saveToGit` and explained in the interface). **The travelling half is not, and
+  cannot be built as written.** `tagRelease` tags the head of the default branch
+  and commits nothing, so at tag time there is no commit set to travel in. The
+  only routes to the default branch are a merged pull request from a work
+  branch — which this very decision now refuses for a sealed deck — and nothing
+  else. So a sealed deck currently has no way into the repository at all. That
+  is honest (it beats dropping the seal silently) but it is a dead end, and
+  which end to open is a decision, not a detail:
+
+  1. sealing becomes an act of *releasing* — `tagRelease` commits the seal to
+     the default branch and then tags, so a seal is never on a branch as a
+     working state;
+  2. the sealing commit itself is allowed once on a work branch and travels
+     through the merge, and the refusal only covers *later* saves of an
+     already-sealed deck;
+  3. a sealed deck is never committed at all — the tag is the artefact and the
+     seal is recomputed from the tagged bytes on open.
+
+  Until that is settled the refusal points the user at a file or an `.ocideck`
+  package, and says so in as many words rather than promising a route that does
+  not exist. And a seal needs **no merge semantics at all**: two
   versions of one seal is not a conflict but a mistake, and on a tag it cannot
   arise. That is the opposite of the ink answer above, for a reason worth
   keeping straight — ink is work that two people can both add to, a seal is a

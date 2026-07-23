@@ -1781,6 +1781,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Een verzegeld deck gaat niet naar een werkbranch':
+      'Zapečaćena prezentacija ne ide na radnu granu',
+  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
+      'Pečat je izjava o točno ovim bajtovima. Radna grana može se prepisati, cherry-pickati i prisilno gurnuti, a pečat koji sve to preživi više ništa ne govori.',
+  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
+      'Spremite ovu prezentaciju kao datoteku ili kao .ocideck paket. Pečat pripada oznaci izdanja, a taj put još ne postoji — do tada je ovdje siguran.',
   'De export is gestopt tijdens het voorbereiden.':
       'Izvoz se zaustavio tijekom pripreme.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

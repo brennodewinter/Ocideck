@@ -1775,6 +1775,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Een verzegeld deck gaat niet naar een werkbranch':
+      'Presentasi tersegel tidak masuk ke cabang kerja',
+  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
+      'Segel adalah pernyataan tentang persis byte ini. Cabang kerja dapat ditulis ulang, di-cherry-pick, dan di-force-push, dan segel yang bertahan dari semua itu tidak lagi berarti apa-apa.',
+  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
+      'Simpan presentasi ini sebagai berkas atau sebagai paket .ocideck. Segel termasuk pada tag rilis, dan jalur itu belum ada — sampai saat itu, di sinilah tempatnya aman.',
   'De export is gestopt tijdens het voorbereiden.':
       'Ekspor berhenti saat persiapan.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

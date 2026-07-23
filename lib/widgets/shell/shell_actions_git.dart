@@ -44,6 +44,116 @@ GitConnection? _originConnection(
 /// mee zijn is geen melding maar een condoleance: de gebruiker denkt dan al dat
 /// zijn werk in de repo staat. Zelfde vorm als [_confirmWebAssetLoss], dat op
 /// web hetzelfde doet voor een kale `.md`-download.
+/// Vertelt de gebruiker hoe de opslag afliep.
+///
+/// Los van [_saveToGit] omdat het een ander onderwerp is — dat bouwt de opslag
+/// op, dit legt de uitkomst uit — en omdat de methodelengteratchet er terecht
+/// over viel toen de weigering van #541 erbij kwam.
+Future<void> _reportGitSaveResult(
+  BuildContext context,
+  WidgetRef ref,
+  GitSaveResult result, {
+  required AppLocalizations l10n,
+  required ScaffoldMessengerState messenger,
+  required String deckDir,
+}) async {
+  switch (result.status) {
+    case GitSaveStatus.committed:
+      final base = '${l10n.d('Opgeslagen in git:')} $deckDir';
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            result.warnings.isEmpty
+                ? base
+                : '$base — ${l10n.d('video en audio gaan (nog) niet mee naar git')}',
+          ),
+        ),
+      );
+    case GitSaveStatus.queued:
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            l10n.d('Opgeslagen — gaat mee zodra er weer verbinding is.'),
+          ),
+        ),
+      );
+    case GitSaveStatus.merged:
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            l10n.d(
+              'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.',
+            ),
+          ),
+        ),
+      );
+    case GitSaveStatus.conflict:
+      // Samenvoegen lukte deels: het samengevoegde deck staat al in het
+      // tabblad met ónze kant voorop. Laat de gebruiker per slide kiezen.
+      if (result.conflicts.isNotEmpty && context.mounted) {
+        await _resolveMergeConflicts(context, ref, result.conflicts);
+      } else {
+        messenger.showSnackBar(
+          SnackBar(
+            content: Text(
+              l10n.d(
+                'De branch is verplaatst; herlaad het deck en sla opnieuw op.',
+              ),
+            ),
+          ),
+        );
+      }
+    case GitSaveStatus.sealed:
+      // Geen snackbar maar een dialoog: dit is een weigering met een reden,
+      // en een reden die wegglijdt is er geen. Zie D13.
+      await _explainSealRefusal(context);
+    case GitSaveStatus.failed:
+      showErrorSnackBar(
+        messenger,
+        l10n,
+        '${l10n.d('Opslaan mislukt:')} ${result.message ?? ''}',
+      );
+  }
+}
+
+/// Legt uit waarom een verzegeld deck niet naar een werkbranch gaat (D13).
+///
+/// Eén knop, geen "toch doen": de weigering ís het besluit. Wie hem kon
+/// wegklikken zou het zegel alsnog kwijtraken, en dat is precies wat deze
+/// weigering verving.
+Future<void> _explainSealRefusal(BuildContext context) async {
+  final l10n = context.l10n;
+  await showDialog<void>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: Text(l10n.d('Een verzegeld deck gaat niet naar een werkbranch')),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.d(
+              'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.',
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            l10n.d(
+              'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.',
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx),
+          child: Text(l10n.t('close')),
+        ),
+      ],
+    ),
+  );
+}
+
 Future<bool> _confirmGitOmissions(BuildContext context, Deck deck) async {
   final missing = gitDeckOmissions(deck);
   if (missing.isEmpty) return true;
@@ -51,11 +161,11 @@ Future<bool> _confirmGitOmissions(BuildContext context, Deck deck) async {
   final lines = <String>[
     if (missing.annotatedSlides > 0)
       '${l10n.d('Tekeningen op slides')}: ${missing.annotatedSlides} ${l10n.d('slides')}',
-    // De regel over gebruikersnotities stond hier tot #541; die reizen nu mee,
-    // dus hij is weg. Een waarschuwing die meer opsomt dan er misgaat, leert de
-    // lezer hem in zijn geheel weg te klikken — en dan verdwijnt ook de regel
-    // over het zegel uit beeld.
-    if (missing.sealed) l10n.d('Zegel en handtekening'),
+    // De regels over gebruikersnotities (#541, deel 1) en over het zegel (#541,
+    // deel 3) stonden hier ook. De notities reizen nu mee; het zegel is een
+    // weigering geworden in plaats van een weglating. Een waarschuwing die meer
+    // opsomt dan er werkelijk misgaat, leert de lezer hem in zijn geheel weg te
+    // klikken — en dan is ook de regel die er wél toe doet weg.
   ];
   final choice = await showDialog<bool>(
     context: context,
@@ -104,6 +214,14 @@ Future<void> _saveToGit(
   final deck = tab?.deckNotifier.currentState.deck;
   if (tab == null || deck == null) return;
   // Vóór alles: wat blijft er achter? Eerst laten kiezen, dan pas verbinden.
+  // Eerst de weigering, dan pas de waarschuwing: een verzegeld deck komt
+  // helemaal niet in een commit, dus vragen wat er van meegaat is een vraag
+  // over iets dat niet gebeurt. Het opslagpad weigert ook zelf — dit is de
+  // uitleg op het moment dat de gebruiker erop klikt, niet de poort.
+  if (gitRefusesSealedDeck(deck)) {
+    await _explainSealRefusal(context);
+    return;
+  }
   if (!await _confirmGitOmissions(context, deck)) return;
   if (!context.mounted) return;
   // Kwam dit deck uit een repo die nog bestaat, dan gaat het daar zonder vragen
@@ -172,59 +290,14 @@ Future<void> _saveToGit(
             ),
     );
     if (!context.mounted) return;
-    switch (result.status) {
-      case GitSaveStatus.committed:
-        final base = '${l10n.d('Opgeslagen in git:')} $deckDir';
-        messenger.showSnackBar(
-          SnackBar(
-            content: Text(
-              result.warnings.isEmpty
-                  ? base
-                  : '$base — ${l10n.d('video en audio gaan (nog) niet mee naar git')}',
-            ),
-          ),
-        );
-      case GitSaveStatus.queued:
-        messenger.showSnackBar(
-          SnackBar(
-            content: Text(
-              l10n.d('Opgeslagen — gaat mee zodra er weer verbinding is.'),
-            ),
-          ),
-        );
-      case GitSaveStatus.merged:
-        messenger.showSnackBar(
-          SnackBar(
-            content: Text(
-              l10n.d(
-                'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.',
-              ),
-            ),
-          ),
-        );
-      case GitSaveStatus.conflict:
-        // Samenvoegen lukte deels: het samengevoegde deck staat al in het
-        // tabblad met ónze kant voorop. Laat de gebruiker per slide kiezen.
-        if (result.conflicts.isNotEmpty && context.mounted) {
-          await _resolveMergeConflicts(context, ref, result.conflicts);
-        } else {
-          messenger.showSnackBar(
-            SnackBar(
-              content: Text(
-                l10n.d(
-                  'De branch is verplaatst; herlaad het deck en sla opnieuw op.',
-                ),
-              ),
-            ),
-          );
-        }
-      case GitSaveStatus.failed:
-        showErrorSnackBar(
-          messenger,
-          l10n,
-          '${l10n.d('Opslaan mislukt:')} ${result.message ?? ''}',
-        );
-    }
+    await _reportGitSaveResult(
+      context,
+      ref,
+      result,
+      l10n: l10n,
+      messenger: messenger,
+      deckDir: deckDir,
+    );
     // Een geslaagde opslag is een goed moment om te kijken of er nog iets in de
     // wachtrij stond van een eerdere offline-sessie: leeg die op de koop toe.
     if (result.status == GitSaveStatus.committed && context.mounted) {
@@ -336,6 +409,12 @@ Future<void> _flushGitQueue(
             'De branch is verzet; je commits staan lokaal klaar.',
           ),
           GitSaveStatus.failed => l10n.d('Synchroniseren mislukt.'),
+          // Kan hier niet ontstaan — een verzegeld deck komt de wachtrij niet
+          // in — maar de switch moet volledig zijn, en zwijgen zou erger zijn
+          // dan een zin die niemand leest.
+          GitSaveStatus.sealed => l10n.d(
+            'Een verzegeld deck gaat niet naar een werkbranch',
+          ),
         }),
       ),
     );

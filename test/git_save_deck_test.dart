@@ -7,6 +7,7 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/document_signature.dart';
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/git/asset_pool.dart';
@@ -169,6 +170,75 @@ void main() {
       Deck(title: title, slides: slides);
 
   group('saveToGit', () {
+    test(
+      'weigert een verzegeld deck en raakt de repo niet aan (D12)',
+      () async {
+        // De poort, niet de melding. De interface legt het ook uit, maar een
+        // weigering die alleen in een dialoog woont is te omzeilen door een
+        // andere knop te gebruiken — en dan valt het zegel alsnog stil weg,
+        // precies wat #541 deel 3 verving.
+        final (container, tabs) = build();
+        final repo = repoWith('# oud');
+        final forge = FakeForge(repo);
+        final branchesBefore = Map.of(repo.branches);
+        final filesBefore = Map.of(repo.files);
+
+        seedDeck(
+          container,
+          Deck(
+            title: 'Kwartaal',
+            slides: [Slide.create(SlideType.title).copyWith(title: 'Q3')],
+            finalized: true,
+            sealAlgo: 'sha-512',
+            sealHash: 'a' * 128,
+            sealAt: '2026-07-10T12:00:00.000Z',
+          ),
+        );
+
+        final result = await tabs.saveToGit(
+          forge,
+          config: config,
+          deckDir: deckDir,
+          branch: 'main',
+          message: 'wijziging',
+        );
+
+        expect(result.status, GitSaveStatus.sealed);
+        // Geen tak erbij, geen bestand gewijzigd: de weigering staat vóór élk
+        // schrijven, niet halverwege.
+        expect(repo.branches, branchesBefore);
+        expect(repo.files, filesBefore);
+      },
+    );
+
+    test(
+      'een deck met alleen een handtekening telt ook als verzegeld',
+      () async {
+        // `finalized` en een handtekening zijn twee ingangen naar hetzelfde
+        // besluit; alleen de eerste bewaken laat de tweede stil doorlopen.
+        final (container, tabs) = build();
+        final forge = FakeForge(repoWith('# oud'));
+        seedDeck(
+          container,
+          Deck(
+            title: 'Kwartaal',
+            slides: [Slide.create(SlideType.title).copyWith(title: 'Q3')],
+            signature: const DocumentSignature(name: 'B. de Winter'),
+          ),
+        );
+
+        final result = await tabs.saveToGit(
+          forge,
+          config: config,
+          deckDir: deckDir,
+          branch: 'main',
+          message: 'wijziging',
+        );
+
+        expect(result.status, GitSaveStatus.sealed);
+      },
+    );
+
     test('landt op een werkbranch, niet rechtstreeks op main (D3)', () async {
       final (container, tabs) = build();
       final repo = repoWith('# oud');

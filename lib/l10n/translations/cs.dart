@@ -1778,6 +1778,12 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Een verzegeld deck gaat niet naar een werkbranch':
+      'Zapečetěná prezentace nepatří na pracovní větev',
+  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
+      'Pečeť je výrok o přesně těchto bajtech. Pracovní větev lze přepsat, cherry-picknout a vynuceně odeslat, a pečeť, která to přežije, už neříká nic.',
+  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
+      'Uložte tuto prezentaci jako soubor nebo jako balíček .ocideck. Pečeť patří ke značce vydání a tato cesta zatím neexistuje — do té doby je v bezpečí tady.',
   'De export is gestopt tijdens het voorbereiden.':
       'Export se zastavil během přípravy.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
