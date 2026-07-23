@@ -1,5 +1,6 @@
 import '../../models/annotation.dart';
 import '../../models/deck.dart';
+import '../../models/seal_record.dart';
 import '../../models/slide.dart';
 import '../annotation_codec.dart';
 import '../miauw_codec.dart';
@@ -193,7 +194,7 @@ DeckMergeResult mergeDeckVersions(
   // TLP-verhoging weggooien, en dat is precies het soort fail-open dat de rest
   // van dit pad juist dichttimmert (§9.4).
   final tlp = effectiveTlp(deckTlp: ours.tlp, slideTlp: theirs.tlp);
-  return DeckMergeResult(
+  final result = DeckMergeResult(
     ours.copyWith(
       slides: out,
       tlp: tlp,
@@ -220,6 +221,28 @@ DeckMergeResult mergeDeckVersions(
     ),
     [for (final c in conflicts) c._at(landedAt[c.baseIndex])],
   );
+  return DeckMergeResult(
+    _withSurvivingSeal(result.merged, theirs),
+    result.conflicts,
+  );
+}
+
+/// Het zegel van de kant die er een draagt, op de samengevoegde uitkomst.
+///
+/// `copyWith` houdt stil ónze kant, dus een deck dat alleen aan hún kant
+/// verzegeld of ondertekend was verloor zijn vaststelling bij de merge — en
+/// een verzegeld rapport zonder zegel leest als een rapport dat nooit
+/// verzegeld is. Dragen beide kanten er een, dan wint de onze: twee versies
+/// van één zegel is geen conflict maar een vergissing (§9.7), en een
+/// deterministische keuze houdt de vergissing zichtbaar in plaats van er een
+/// derde versie bij te verzinnen. Of de hash nog klopt met de samengevoegde
+/// inhoud zegt de integriteitscontrole bij het openen — dat is haar werk, niet
+/// dat van de merge.
+Deck _withSurvivingSeal(Deck merged, Deck theirs) {
+  final theirSeal = SealRecord.of(theirs);
+  return SealRecord.of(merged).isEmpty && !theirSeal.isEmpty
+      ? theirSeal.applyTo(merged)
+      : merged;
 }
 
 /// De notities van beide kanten, opnieuw verankerd aan de samengevoegde dia's.

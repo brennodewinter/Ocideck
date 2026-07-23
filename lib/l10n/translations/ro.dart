@@ -1859,12 +1859,6 @@ const _dutchSourceAddRo = <String, String>{
       'Constatări pe care le-ai analizat și le-ai lăsat așa. Nu mai sunt raportate, dar scanarea continuă să le găsească și nu contează ca rezolvate. Atinge pentru a repune una.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Punerea deoparte a unei constatări de confidențialitate (proiect)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'O prezentare sigilată nu ajunge pe o ramură de lucru',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Un sigiliu este o afirmație despre exact acești octeți. O ramură de lucru poate fi rescrisă, preluată prin cherry-pick și trimisă forțat, iar un sigiliu care supraviețuiește la toate acestea nu mai spune nimic.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Salvați această prezentare ca fișier sau ca pachet .ocideck. Sigiliul aparține unei etichete de lansare, iar acel drum încă nu există — până atunci, aici este în siguranță.',
   'Deze is beoordeeld en mag blijven': 'Verificat, acesta poate rămâne',
   'Mogelijk gemaakt door': 'Făcut posibil de',
   'De export is gestopt tijdens het voorbereiden.':

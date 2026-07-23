@@ -1841,12 +1841,6 @@ const _dutchSourceAddSv = <String, String>{
       'Iakttagelser som du har bedömt och låtit stå kvar. De rapporteras inte längre, men skanningen hittar dem fortfarande och de räknas inte som åtgärdade. Tryck för att återställa en.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Att lägga ett integritetsfynd åt sidan (design)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'En förseglad presentation hamnar inte på en arbetsgren',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Ett sigill är ett påstående om exakt dessa byte. En arbetsgren kan skrivas om, cherry-pickas och tvingas fram, och ett sigill som överlever allt det säger inte längre någonting.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Spara den här presentationen som fil eller som .ocideck-paket. Sigillet hör till en release-tagg, och den vägen finns inte ännu — till dess är det här den är trygg.',
   'Deze is beoordeeld en mag blijven': 'Granskad, den här får stanna',
   'Mogelijk gemaakt door': 'Möjliggjort av',
   'De export is gestopt tijdens het voorbereiden.':

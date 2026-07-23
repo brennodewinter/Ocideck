@@ -1851,12 +1851,6 @@ const _dutchSourceAddLt = <String, String>{
       'Radiniai, kurie buvo įvertinti ir palikti. Apie juos nebepranešama, bet nuskaitymas juos vis tiek randa ir jie nelaikomi išspręstais. Bakstelėk, kad vieną grąžintum.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Privatumo radinio atidėjimas (projektas)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Užantspauduota pateiktis nekeliauja į darbo šaką',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Antspaudas yra teiginys būtent apie šiuos baitus. Darbo šaką galima perrašyti, cherry-pick ir priverstinai nusiųsti, o antspaudas, išgyvenęs visa tai, nebereiškia nieko.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Įrašykite šią pateiktį kaip failą arba kaip .ocideck paketą. Antspaudas priklauso laidos žymai, o to kelio dar nėra — iki tol jis saugus čia.',
   'Deze is beoordeeld en mag blijven': 'Peržiūrėta, šis gali likti',
   'Mogelijk gemaakt door': 'Galimybę suteikė',
   'De export is gestopt tijdens het voorbereiden.':

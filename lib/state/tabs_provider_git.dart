@@ -74,7 +74,7 @@ extension TabsNotifierGit on TabsNotifier {
     final sidecars = await withRepoSidecars(
       withAssets,
       deckDir: deckDir,
-      read: (path) => forge.readBlob(branch, path),
+      read: repoFileReaderFor(forge, branch),
     );
     final deck = sidecars.deck;
     if (!mounted) return OpenResult.unreadable;
@@ -172,7 +172,7 @@ extension TabsNotifierGit on TabsNotifier {
     final sidecars = await withRepoSidecars(
       withAssets,
       deckDir: deckDir,
-      read: (path) => forge.readBlob(tag, path),
+      read: repoFileReaderFor(forge, tag),
     );
     return (deck: sidecars.deck, failure: OpenResult.opened, label: label);
   }
@@ -241,7 +241,7 @@ extension TabsNotifierGit on TabsNotifier {
       pool: AssetPool(forge: forge, branch: branch),
       deckDir: deckDir,
       resolveBytes: repoAssetBytes(deck.projectPath),
-      read: (path) => forge.readBlob(branch, path),
+      read: repoFileReaderFor(forge, branch),
     );
   }
 
@@ -309,8 +309,8 @@ extension TabsNotifierGit on TabsNotifier {
     final deck = tab?.deckNotifier.currentState.deck;
     if (deck == null) return const GitSaveResult(status: GitSaveStatus.failed);
 
-    final sealRefusal = _refuseSealedDeck(deck);
-    if (sealRefusal != null) return sealRefusal;
+    // De zegelweigering die hier stond is ingetrokken (#541): git is een
+    // bestandssysteem, geen enforcer — het zegel reist als sidecar mee (D13).
 
     // Welke branch dit wordt, en of we ervan aftakken: zie [workBranchFor].
     final origin = tab?.gitOrigin;
@@ -637,14 +637,6 @@ enum GitSaveStatus {
 
   /// Auth of forge deed het niet — of er was geen deck om op te slaan.
   failed,
-
-  /// Het deck is verzegeld en hoort daarom niet op een werkbranch (D13).
-  ///
-  /// Geen mislukking maar een weigering: dit is het punt waarop de keuze nog te
-  /// maken is. Tot #541 ging zo'n deck gewoon mee en verdween alleen het zegel,
-  /// met een waarschuwing achteraf — en een verzegeld rapport dat via git
-  /// terugkomt zónder zegel leest als een rapport dat nooit verzegeld is.
-  sealed,
 }
 
 class GitSaveResult {
@@ -674,22 +666,6 @@ class GitSaveResult {
     this.conflicts = const [],
   });
 }
-
-/// Weiger een verzegeld deck op een werkbranch (D13), of `null` als er niets in
-/// de weg staat.
-///
-/// Een zegel is een uitspraak over precies díé bytes, en een tak biedt dat niet:
-/// die kan herschreven, gecherrypickt en geforceerd geduwd worden. Dus weigeren
-/// op het moment dat de keuze er nog is, in plaats van het zegel stil te laten
-/// vallen zoals tot #541 gebeurde.
-///
-/// In het opslagpad en niet alleen in de interface: dit is de enige plek waar
-/// élke aanroeper langskomt, en een poort die je omzeilt door een andere knop
-/// te gebruiken is geen poort. Bewust búiten [TabsNotifier], om dezelfde reden
-/// als [_reportMissingChartData] hieronder.
-GitSaveResult? _refuseSealedDeck(Deck deck) => gitRefusesSealedDeck(deck)
-    ? const GitSaveResult(status: GitSaveStatus.sealed)
-    : null;
 
 /// Meld de grafiekbronnen die niet te lezen waren.
 ///

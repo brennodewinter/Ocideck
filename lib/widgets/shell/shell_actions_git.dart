@@ -100,10 +100,6 @@ Future<void> _reportGitSaveResult(
           ),
         );
       }
-    case GitSaveStatus.sealed:
-      // Geen snackbar maar een dialoog: dit is een weigering met een reden,
-      // en een reden die wegglijdt is er geen. Zie D13.
-      await _explainSealRefusal(context);
     case GitSaveStatus.failed:
       showErrorSnackBar(
         messenger,
@@ -111,44 +107,6 @@ Future<void> _reportGitSaveResult(
         '${l10n.d('Opslaan mislukt:')} ${result.message ?? ''}',
       );
   }
-}
-
-/// Legt uit waarom een verzegeld deck niet naar een werkbranch gaat (D13).
-///
-/// Eén knop, geen "toch doen": de weigering ís het besluit. Wie hem kon
-/// wegklikken zou het zegel alsnog kwijtraken, en dat is precies wat deze
-/// weigering verving.
-Future<void> _explainSealRefusal(BuildContext context) async {
-  final l10n = context.l10n;
-  await showDialog<void>(
-    context: context,
-    builder: (ctx) => AlertDialog(
-      title: Text(l10n.d('Een verzegeld deck gaat niet naar een werkbranch')),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            l10n.d(
-              'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.',
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            l10n.d(
-              'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.',
-            ),
-          ),
-        ],
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(ctx),
-          child: Text(l10n.t('close')),
-        ),
-      ],
-    ),
-  );
 }
 
 Future<void> _saveToGit(
@@ -159,17 +117,10 @@ Future<void> _saveToGit(
   final tab = ref.read(tabsProvider).current;
   final deck = tab?.deckNotifier.currentState.deck;
   if (tab == null || deck == null) return;
-  // Eerst de weigering: een verzegeld deck komt helemaal niet in een commit
-  // (D13). Het opslagpad weigert ook zelf — dit is de uitleg op het moment dat
-  // de gebruiker erop klikt, niet de poort.
-  //
-  // De "niet alles gaat mee"-waarschuwing die hier tussen stond is opgeheven:
-  // sinds #541 reizen media, grafiekdata, notities én tekeningen mee, en een
-  // dialoog zonder ware regels leert de gebruiker alleen wegklikken.
-  if (gitRefusesSealedDeck(deck)) {
-    await _explainSealRefusal(context);
-    return;
-  }
+  // De "niet alles gaat mee"-waarschuwing en de zegelweigering die hier
+  // stonden zijn opgeheven (#541): álle lagen reizen mee, ook het zegel — git
+  // is een bestandssysteem, geen enforcer. Wat een zegel betekent bewaakt de
+  // app door een verzegeld deck alleen-lezen te maken.
   // Kwam dit deck uit een repo die nog bestaat, dan gaat het daar zonder vragen
   // naartoe terug. Alleen een deck zonder herkomst laat kiezen — of een
   // expliciet gekozen doel, want dat is wat "Opslaan naar…" betekent.
@@ -355,12 +306,6 @@ Future<void> _flushGitQueue(
             'De branch is verzet; je commits staan lokaal klaar.',
           ),
           GitSaveStatus.failed => l10n.d('Synchroniseren mislukt.'),
-          // Kan hier niet ontstaan — een verzegeld deck komt de wachtrij niet
-          // in — maar de switch moet volledig zijn, en zwijgen zou erger zijn
-          // dan een zin die niemand leest.
-          GitSaveStatus.sealed => l10n.d(
-            'Een verzegeld deck gaat niet naar een werkbranch',
-          ),
         }),
       ),
     );

@@ -1854,12 +1854,6 @@ const _dutchSourceAddPl = <String, String>{
       'Ustalenia, które zostały sprawdzone i pozostawione. Nie są już zgłaszane, ale skan nadal je znajduje i nie liczą się jako rozwiązane. Dotknij, aby przywrócić jedno z nich.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Odłożenie ustalenia dotyczącego prywatności (projekt)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Zapieczętowana prezentacja nie trafia na gałąź roboczą',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Pieczęć to stwierdzenie o dokładnie tych bajtach. Gałąź roboczą można przepisać, przenieść przez cherry-pick i wypchnąć siłą, a pieczęć, która to przetrwa, niczego już nie mówi.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Zapisz tę prezentację jako plik lub jako pakiet .ocideck. Pieczęć należy do tagu wydania, a tej drogi jeszcze nie ma — do tego czasu tutaj jest bezpieczna.',
   'Deze is beoordeeld en mag blijven': 'Sprawdzone, to może zostać',
   'Mogelijk gemaakt door': 'Umożliwione przez',
   'De export is gestopt tijdens het voorbereiden.':

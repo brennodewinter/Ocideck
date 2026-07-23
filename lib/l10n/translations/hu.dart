@@ -1848,12 +1848,6 @@ const _dutchSourceAddHu = <String, String>{
       'Megállapítások, amelyeket megnéztél és meghagytál. Ezeket már nem jelzi, de a vizsgálat továbbra is megtalálja őket, és nem számítanak megoldottnak. Koppints az egyik visszaállításához.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Adatvédelmi észrevétel félretétele (terv)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Lepecsételt prezentáció nem kerül munkaágra',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'A pecsét kijelentés pontosan ezekről a bájtokról. Egy munkaág átírható, cherry-pickelhető és kényszerrel feltolható, és az a pecsét, amely ezt túléli, már semmit sem mond.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Mentse ezt a prezentációt fájlként vagy .ocideck csomagként. A pecsét egy kiadási címkéhez tartozik, és az az út még nincs meg — addig itt van biztonságban.',
   'Deze is beoordeeld en mag blijven': 'Ellenőrizve, ez maradhat',
   'Mogelijk gemaakt door': 'Lehetővé tette',
   'De export is gestopt tijdens het voorbereiden.':

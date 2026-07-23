@@ -804,12 +804,6 @@ const _dutchSourceAddDe = {
       'Feststellungen, die Sie geprüft und stehen gelassen haben. Diese werden nicht mehr gemeldet, aber der Scan findet sie weiterhin, und sie gelten nicht als behoben. Zum Zurückholen antippen.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Einen Datenschutzbefund zurückstellen (Entwurf)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Ein versiegeltes Deck kommt nicht auf einen Arbeitsbranch',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Ein Siegel ist eine Aussage über genau diese Bytes. Ein Arbeitsbranch kann umgeschrieben, gecherrypickt und force-gepusht werden, und ein Siegel, das das übersteht, sagt nichts mehr aus.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Speichern Sie dieses Deck als Datei oder als .ocideck-Paket. Das Siegel gehört zu einem Release-Tag, und dieser Weg existiert noch nicht — bis dahin ist es hier sicher aufgehoben.',
   'Deze is beoordeeld en mag blijven': 'Geprüft, dieser Befund darf bleiben',
   'Mogelijk gemaakt door': 'Ermöglicht durch',
   'De export is gestopt tijdens het voorbereiden.':

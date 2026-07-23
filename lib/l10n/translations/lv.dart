@@ -1841,12 +1841,6 @@ const _dutchSourceAddLv = <String, String>{
       'Konstatējumi, kas ir izvērtēti un atstāti. Par tiem vairs neziņo, taču skenēšana tos joprojām atrod, un tie netiek uzskatīti par novērstiem. Pieskaries, lai vienu atjaunotu.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Privātuma konstatējuma atlikšana (projekts)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Aizzīmogota prezentācija neiet uz darba zaru',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Zīmogs ir apgalvojums tieši par šiem baitiem. Darba zaru var pārrakstīt, cherry-pick un piespiedu kārtā nosūtīt, un zīmogs, kas to visu pārdzīvo, vairs neko nesaka.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Saglabājiet šo prezentāciju kā failu vai kā .ocideck paku. Zīmogs pieder laidiena tagam, un šī ceļa vēl nav — līdz tam tas ir drošībā šeit.',
   'Deze is beoordeeld en mag blijven': 'Pārbaudīts, šis var palikt',
   'Mogelijk gemaakt door': 'Iespējams, pateicoties',
   'De export is gestopt tijdens het voorbereiden.':

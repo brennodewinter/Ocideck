@@ -982,12 +982,6 @@ const _dutchSourceAddEn = {
       'Findings you reviewed and left in place. They are no longer reported, but the scan still finds them and they do not count as resolved. Tap to restore one.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Setting a privacy finding aside (design)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'A sealed deck does not go to a work branch',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'A seal is a statement about exactly these bytes. A work branch can be rewritten, cherry-picked and force-pushed, and a seal that survives all of that no longer says anything.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Save this deck as a file or as an .ocideck package. The seal belongs with a release tag, and that route does not exist yet — until then this is where it is safe.',
   'Deze is beoordeeld en mag blijven': 'Reviewed, this one can stay',
   'Mogelijk gemaakt door': 'Made possible by',
   'De export is gestopt tijdens het voorbereiden.':

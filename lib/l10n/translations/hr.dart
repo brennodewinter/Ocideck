@@ -1848,12 +1848,6 @@ const _dutchSourceAddHr = <String, String>{
       'Nalazi koji su pregledani i ostavljeni. Više se ne prijavljuju, ali skeniranje ih i dalje pronalazi i ne broje se kao riješeni. Dodirni za vraćanje jednoga.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Odlaganje nalaza o privatnosti (nacrt)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Zapečaćena prezentacija ne ide na radnu granu',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Pečat je izjava o točno ovim bajtovima. Radna grana može se prepisati, cherry-pickati i prisilno gurnuti, a pečat koji sve to preživi više ništa ne govori.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Spremite ovu prezentaciju kao datoteku ili kao .ocideck paket. Pečat pripada oznaci izdanja, a taj put još ne postoji — do tada je ovdje siguran.',
   'Deze is beoordeeld en mag blijven': 'Pregledano, ovo može ostati',
   'Mogelijk gemaakt door': 'Omogućeno zahvaljujući',
   'De export is gestopt tijdens het voorbereiden.':

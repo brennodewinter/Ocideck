@@ -1867,12 +1867,6 @@ const _dutchSourceAddMt = <String, String>{
       'Sejbiet li rrevedejt u ħallejt kif inhuma. Dawn ma jiġux irrapportati aktar, iżda l-iskennjar xorta jsibhom u ma jgħoddux bħala solvuti. Mess biex terġa\' ddaħħal waħda.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Tqegħid fil-ġenb ta\' sejba dwar il-privatezza (disinn)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Preżentazzjoni ssiġillata ma tmurx fuq fergħa tax-xogħol',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Siġill huwa dikjarazzjoni dwar eżattament dawn il-bytes. Fergħa tax-xogħol tista\' tinkiteb mill-ġdid, issir cherry-pick u tiġi mbuttata bil-forza, u siġill li jgħix dan kollu ma jgħid xejn iżjed.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Issejvja din il-preżentazzjoni bħala fajl jew bħala pakkett .ocideck. Is-siġill jappartjeni għal tikketta ta\' rilaxx, u dik it-triq għadha ma teżistix — sa dakinhar hawn hu fis-sod.',
   'Deze is beoordeeld en mag blijven': 'Rivedut, dan jista\' jibqa\'',
   'Mogelijk gemaakt door': 'Sar possibbli minn',
   'De export is gestopt tijdens het voorbereiden.':

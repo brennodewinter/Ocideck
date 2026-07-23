@@ -1872,12 +1872,6 @@ const _dutchSourceAddPt = <String, String>{
       'Constatações que analisaste e deixaste ficar. Já não são comunicadas, mas a análise continua a encontrá-las e não contam como resolvidas. Toca para repor uma.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Pôr de lado um achado de privacidade (desenho)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Uma apresentação selada não vai para um ramo de trabalho',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Um selo é uma afirmação sobre exatamente estes bytes. Um ramo de trabalho pode ser reescrito, sujeito a cherry-pick e enviado à força, e um selo que sobrevive a tudo isso já não diz nada.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Guarde esta apresentação como ficheiro ou como pacote .ocideck. O selo pertence a uma etiqueta de lançamento, e esse caminho ainda não existe — até lá, é aqui que está seguro.',
   'Deze is beoordeeld en mag blijven': 'Revisto, este pode ficar',
   'Mogelijk gemaakt door': 'Possibilitado por',
   'De export is gestopt tijdens het voorbereiden.':

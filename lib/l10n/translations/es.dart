@@ -801,12 +801,6 @@ const _dutchSourceAddEs = {
       'Hallazgos que has revisado y has dejado tal cual. Ya no se notifican, pero el escaneo los sigue encontrando y no cuentan como resueltos. Toca para restaurar uno.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Dejar de lado un hallazgo de privacidad (diseño)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Una presentación sellada no va a una rama de trabajo',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Un sello es una afirmación sobre exactamente estos bytes. Una rama de trabajo puede reescribirse, aplicarse con cherry-pick y forzarse, y un sello que sobrevive a todo eso ya no dice nada.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Guarda esta presentación como archivo o como paquete .ocideck. El sello pertenece a una etiqueta de versión, y ese camino aún no existe: hasta entonces, aquí es donde está a salvo.',
   'Deze is beoordeeld en mag blijven': 'Revisado, este puede quedarse',
   'Mogelijk gemaakt door': 'Hecho posible por',
   'De export is gestopt tijdens het voorbereiden.':

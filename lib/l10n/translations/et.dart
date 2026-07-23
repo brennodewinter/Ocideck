@@ -1833,12 +1833,6 @@ const _dutchSourceAddEt = <String, String>{
       'Leiud, mille oled üle vaadanud ja alles jätnud. Neist enam ei teatata, kuid skannimine leiab need endiselt ja neid ei loeta lahendatuks. Puuduta, et üks taastada.',
   'Privacybevinding terzijde leggen (ontwerp)':
       'Privaatsusleiu kõrvalejätmine (kavand)',
-  'Een verzegeld deck gaat niet naar een werkbranch':
-      'Pitseeritud esitlus ei lähe tööharusse',
-  'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
-      'Pitser on väide täpselt nende baitide kohta. Tööharu saab ümber kirjutada, cherry-pick\'ida ja jõuga tõugata, ja pitser, mis selle kõik üle elab, ei ütle enam midagi.',
-  'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
-      'Salvesta see esitlus failina või .ocideck-paketina. Pitser kuulub väljalasketähise juurde ja seda teed veel pole — seniks on ta siin turvaliselt.',
   'Deze is beoordeeld en mag blijven': 'Üle vaadatud, see võib jääda',
   'Mogelijk gemaakt door': 'Võimalikuks teinud',
   'De export is gestopt tijdens het voorbereiden.':
