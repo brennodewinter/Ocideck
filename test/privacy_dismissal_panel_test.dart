@@ -1,8 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/privacy_finding.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/privacy/dismissal_codec.dart';
+import 'package:ocideck/services/privacy/privacy_scanner.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/privacy_provider.dart';
 import 'package:ocideck/state/settings_provider.dart';
@@ -108,6 +110,46 @@ void main() {
       ),
     );
     expect(c.read(privacyScanProvider).firedRules, contains('contact.email'));
+  });
+
+  test('een bevinding die nergens meer op wijst levert geen tekst op', () {
+    // De veilige faalrichting, en de enige die niet vanzelf goed gaat.
+    // `matchedTextOf` moet null geven zodra het fragment weg is of korter werd
+    // dan de opgeslagen positie — de dia is dan bewerkt sinds de scan. Zou het
+    // in plaats daarvan een willekeurig stuk tekst teruggeven, dan hasht dat
+    // ooit toevallig naar een terzijdelegging en verbergt de app iets wat
+    // niemand heeft bekeken.
+    //
+    // Rechtstreeks getoetst en niet via het paneel: dáár lopen de scan en het
+    // deck altijd gelijk op, dus deze tak komt er nooit langs en een toets erop
+    // zou niets kunnen bewijzen.
+    final deck = deckMetEmail();
+    const buitenBereik = PrivacyFinding(
+      ruleId: 'contact.email',
+      family: PrivacyFamily.identifier,
+      confidence: PrivacyConfidence.likely,
+      slideIndex: 0,
+      field: 'bullets',
+      fragmentIndex: 0,
+      start: 0,
+      end: 9999,
+      maskedSample: 'j…l',
+    );
+    const onbekendVeld = PrivacyFinding(
+      ruleId: 'contact.email',
+      family: PrivacyFamily.identifier,
+      confidence: PrivacyConfidence.likely,
+      slideIndex: 0,
+      field: 'bestaat-niet',
+      fragmentIndex: 0,
+      start: 0,
+      end: 3,
+      maskedSample: 'j…l',
+    );
+
+    final scanner = PrivacyScanner();
+    expect(matchedTextOf(scanner, deck, buitenBereik), isNull);
+    expect(matchedTextOf(scanner, deck, onbekendVeld), isNull);
   });
 
   test('een oordeel onder een ánder zout verbergt niets', () async {

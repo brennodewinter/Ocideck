@@ -1994,6 +1994,24 @@ here, so anyone with the file can test a guess. Against a holder of the deck
 that costs nothing, because they can read the slide. State it plainly rather
 than implying a protection that is not there.
 
+#### Two points settled on 23-07-2026 (#651)
+
+**A set-aside does not expire when the *rule* changes.** The commitment is over
+the matched text, not over the rule's version, so tightening a rule until it no
+longer fires simply means the set-aside is never consulted, and widening one so
+it matches a longer span means the commitment misses and the finding returns.
+Returning is the safe direction and it costs one click; the alternative —
+anchoring on a rule version so every catalogue refresh expires every set-aside —
+was considered and rejected. Somebody will propose it again; this is the answer.
+
+**Still open: what the export gate does with a set-aside.** "Hidden in the panel"
+and "not resolved" are settled above. Whether the *export* gate lets a deck
+through whose only outstanding findings are set aside is not, and it is a real
+fork: treat it as unresolved and an author faces a permanently blocked export
+whose only escape is the global rule switch — the very thing this feature
+replaces; treat it as resolved and the gate reports a cleanliness that the
+compliance count deliberately refuses to report. Decide before wiring the gate.
+
 #### The scan must keep finding it
 
 A set-aside **hides**, it does not unscan. `privacyRawScanProvider` keeps
