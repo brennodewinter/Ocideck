@@ -1798,6 +1798,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'L-esportazzjoni waqfet waqt it-tħejjija.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'Il-fajl ma setax jinbena jew jinkiteb. Iċċekkja li hemm spazju fuq id-diska u li l-folder tal-esportazzjoni jista\' jinkiteb.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Ir-rendering tal-islajds f\'immaġni falla. Dan ġej minn slajd, mhux mill-format tal-fajl: l-esportazzjoni HTML ma tgħaddix minn hawn u f\'dan il-każ ġeneralment taħdem.',
+  'Technische melding:': 'Messaġġ tekniku:',
   'presentaties': 'prezentazzjonijiet',
   '/Presentaties': '/Preżentazzjonijiet',
   'Rapportagedistributie (ontwerp)': 'Distribuzzjoni tar-rapporti (disinn)',

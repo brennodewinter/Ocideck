@@ -1767,6 +1767,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'Eksport peatus ettevalmistamise ajal.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'Faili ei õnnestunud koostada ega kirjutada. Kontrolli, kas kettal on ruumi ja kas ekspordikausta saab kirjutada.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Slaidide renderdamine piltideks ebaõnnestus. Põhjus on mõni slaid, mitte failivorming: HTML-eksport siit läbi ei käi ja töötab sel juhul tavaliselt.',
+  'Technische melding:': 'Tehniline teade:',
   'presentaties': 'esitlused',
   '/Presentaties': '/Esitlused',
   'Rapportagedistributie (ontwerp)': 'Aruannete levitamine (kavand)',

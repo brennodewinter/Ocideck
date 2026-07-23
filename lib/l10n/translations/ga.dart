@@ -1811,6 +1811,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'Stop an t-easpórtáil le linn an ullmhúcháin.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'Níorbh fhéidir an comhad a thógáil ná a scríobh. Deimhnigh go bhfuil spás diosca ann agus gur féidir scríobh chuig an bhfillteán easpórtála.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Theip ar rindreáil na sleamhnán ina n-íomhánna. Sleamhnán is cúis leis, ní hé formáid an chomhaid: ní théann an t-easpórtáil HTML an bealach seo agus oibríonn sé de ghnáth sa chás seo.',
+  'Technische melding:': 'Teachtaireacht theicniúil:',
   'presentaties': 'laithreoidi',
   '/Presentaties': '/Láithreoidí',
   'Rapportagedistributie (ontwerp)': 'Dáileadh tuairiscí (dearadh)',

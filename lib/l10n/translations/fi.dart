@@ -1776,6 +1776,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'Vienti pysähtyi valmistelun aikana.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'Tiedostoa ei voitu koota eikä kirjoittaa. Tarkista, että levytilaa on ja että vientikansioon voi kirjoittaa.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Diojen hahmontaminen kuviksi epäonnistui. Syy on jokin dia, ei tiedostomuoto: HTML-vienti ei kulje tästä ja toimii tässä tapauksessa yleensä.',
+  'Technische melding:': 'Tekninen viesti:',
   'presentaties': 'esitykset',
   '/Presentaties': '/Esitykset',
   'Rapportagedistributie (ontwerp)': 'Raporttien jakelu (suunnitelma)',

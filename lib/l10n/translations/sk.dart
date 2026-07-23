@@ -1783,6 +1783,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'Export sa zastavil počas prípravy.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'Súbor sa nepodarilo zostaviť ani zapísať. Skontrolujte, či je na disku miesto a či sa dá do priečinka pre export zapisovať.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Vykreslenie snímok do obrázkov zlyhalo. Príčinou je snímka, nie formát súboru: export do HTML tadiaľto neprechádza a v tomto prípade zvyčajne funguje.',
+  'Technische melding:': 'Technická správa:',
   'presentaties': 'prezentacie',
   '/Presentaties': '/Prezentácie',
   'Rapportagedistributie (ontwerp)': 'Distribúcia správ (návrh)',

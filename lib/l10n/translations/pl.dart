@@ -1788,6 +1788,13 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'Eksport zatrzymał się podczas przygotowania.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'Nie udało się zbudować ani zapisać pliku. Sprawdź, czy jest miejsce na dysku i czy folder eksportu jest zapisywalny.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Renderowanie slajdów do obrazów nie powiodło się. Przyczyną jest slajd, a nie format pliku: eksport HTML tędy nie przechodzi i w tym przypadku zwykle działa.',
+  'Technische melding:': 'Komunikat techniczny:',
   'presentaties': 'prezentacje',
   '/Presentaties': '/Prezentacje',
   'Rapportagedistributie (ontwerp)': 'Dystrybucja raportów (projekt)',

@@ -731,6 +731,13 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'De export is gestopt tijdens het voorbereiden.':
+      'La exportación se detuvo durante la preparación.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'No se pudo crear ni escribir el archivo. Comprueba que haya espacio en disco y que la carpeta de exportación permita escritura.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Falló la representación de las diapositivas como imágenes. Se debe a una diapositiva, no al formato de archivo: la exportación HTML no pasa por aquí y en este caso suele funcionar.',
+  'Technische melding:': 'Mensaje técnico:',
   'presentaties': 'presentaciones',
   '/Presentaties': '/Presentaciones',
   'Rapportagedistributie (ontwerp)': 'Distribución de informes (diseño)',

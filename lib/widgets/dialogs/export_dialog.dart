@@ -19,6 +19,7 @@ import '../../utils/log.dart';
 import 'slide_quality_details_dialog.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/export_block_localization.dart';
+import 'export_failure_text.dart';
 
 part 'parts/export_dialog_notices.dart';
 part 'parts/export_dialog_sections.dart';
@@ -141,6 +142,10 @@ class ExportDialog extends StatefulWidget {
 class _ExportDialogState extends State<ExportDialog> {
   bool _loading = false;
   String? _result;
+
+  /// De stap waar de export nu is; leest de `catch` uit om te zeggen wát er
+  /// misging in plaats van alleen dát er iets misging.
+  ExportStage _stage = ExportStage.preparing;
 
   /// Alleen het pad, los van de melding eromheen — dat is wat je wilt plakken.
   String? _outputPath;
@@ -321,11 +326,13 @@ class _ExportDialogState extends State<ExportDialog> {
     // uitgezet: het dialoog bleef eeuwig op "…samenstellen…" staan, zonder
     // melding, op 0% CPU. Dat is precies wat een gebruiker als "hij hangt"
     // ervaart. Een fout hoort een fout te tónen, niet te bevriezen.
+    _stage = ExportStage.preparing;
     try {
       await _runExport(format, compress: compress, l10n: l10n);
     } catch (e, s) {
       logError(
-        'ExportDialog._export: export mislukte met een uitzondering',
+        'ExportDialog._export: export mislukte met een uitzondering '
+        '(stap: ${_stage.name})',
         e,
         s,
       );
@@ -334,10 +341,7 @@ class _ExportDialogState extends State<ExportDialog> {
         _loading = false;
         _success = false;
         _outputPath = null;
-        // De uitzondering erbij, want "de export is mislukt" alleen laat de
-        // gebruiker met niets achter; een pad of een reden is het verschil
-        // tussen opnieuw proberen en vastlopen.
-        _result = '${l10n.d('De export is mislukt.')}\n$e';
+        _result = exportFailureText(l10n, _stage, e);
       });
     }
   }
@@ -384,6 +388,7 @@ class _ExportDialogState extends State<ExportDialog> {
     await Future<void>.delayed(Duration.zero);
     if (!mounted) return;
 
+    _stage = needsRaster ? ExportStage.rendering : ExportStage.writing;
     final images = needsRaster
         ? await SlideRasterizer.rasterize(
             context: context,
@@ -416,6 +421,7 @@ class _ExportDialogState extends State<ExportDialog> {
       });
       return;
     }
+    _stage = ExportStage.writing;
     setState(() {
       _phase = '${format.label} ${l10n.t('buildingExport')}';
       _done = needsRaster ? _bundle.audience.slides.length : 0;

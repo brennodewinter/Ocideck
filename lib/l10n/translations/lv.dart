@@ -1775,6 +1775,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'Eksports apstājās sagatavošanas laikā.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'Failu neizdevās izveidot vai ierakstīt. Pārbaudiet, vai diskā ir vieta un vai eksporta mapē var rakstīt.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'Neizdevās atveidot slaidus attēlos. Vaina ir slaidā, nevis faila formātā: HTML eksports šeit neiet cauri un šajā gadījumā parasti darbojas.',
+  'Technische melding:': 'Tehnisks ziņojums:',
   'presentaties': 'prezentacijas',
   '/Presentaties': '/Prezentācijas',
   'Rapportagedistributie (ontwerp)': 'Pārskatu izplatīšana (dizains)',

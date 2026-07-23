@@ -1780,6 +1780,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De export is gestopt tijdens het voorbereiden.':
+      'Az exportálás az előkészítés közben leállt.',
+  'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
+      'A fájlt nem sikerült felépíteni vagy kiírni. Ellenőrizze, van-e szabad lemezterület, és írható-e az exportmappa.',
+  'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
+      'A diák képpé alakítása nem sikerült. Ez egy dián múlik, nem a fájlformátumon: a HTML-exportálás nem halad át itt, és ilyenkor általában működik.',
+  'Technische melding:': 'Technikai üzenet:',
   'presentaties': 'prezentaciok',
   '/Presentaties': '/Prezentációk',
   'Rapportagedistributie (ontwerp)': 'Beszámolók terjesztése (terv)',
