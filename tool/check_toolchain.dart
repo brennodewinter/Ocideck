@@ -115,6 +115,62 @@ List<String> toolchainProblems(Toolchain running, String? pin) => [
 bool documentsToolchain(String doc, Toolchain running) =>
     doc.contains(running.line);
 
+/// Eén plek die een versie-eis uitspreekt.
+class VersionClaim {
+  final String file;
+  final int line;
+  final String version;
+  final String context;
+
+  const VersionClaim(this.file, this.line, this.version, this.context);
+}
+
+/// De bestanden die een versie-eis dragen, en de vorm waarin ze dat doen.
+///
+/// #721: dertien plekken noemen de Flutter-versie en niets bewaakte dat ze het
+/// eens waren. Een pin verhogen en er één vergeten is een stille fout — de
+/// documentatie belooft dan iets anders dan de machine doet, en dat is precies
+/// waar #598 op stukliep.
+///
+/// De patronen herkennen een **eis**, geen getal. Dat onderscheid is nodig
+/// omdat dezelfde documenten ook geschiedenis vertellen ("de machine draaide
+/// 3.44.2 terwijl drie documenten 3.44.6 noemden"), en die zinnen horen niet
+/// mee te veranderen als de pin opschuift — dan zouden ze onwaar worden.
+///
+/// De regel die dat scheidt is de opmaak, en hij is met opzet zo simpel: een
+/// **vetgedrukte** versie is een eis, een `code-geciteerde` is een citaat. In
+/// YAML is `flutter-version:` altijd een eis.
+const versionClaimPatterns = <String, String>{
+  '.tool-versions': r'^flutter (\d+\.\d+\.\d+)-stable',
+  'README.md': r'Flutter \*\*(\d+\.\d+\.\d+)\*\*',
+  'CONTRIBUTING.md': r'\*\*Flutter (\d+\.\d+\.\d+)\*\*',
+  'docs/BUILD.md': r'\*\*Flutter (\d+\.\d+\.\d+)\*\*',
+  'docs/CHECKS.md': r'\*\*Flutter (\d+\.\d+\.\d+)',
+  '.github/workflows/ci.yml': r'flutter-version: (\d+\.\d+\.\d+)',
+  '.github/workflows/release.yml': r'flutter-version: (\d+\.\d+\.\d+)',
+};
+
+/// Alle versie-eisen in [content] volgens [pattern].
+List<VersionClaim> findVersionClaims(
+  String file,
+  String content,
+  String pattern,
+) {
+  final re = RegExp(pattern, multiLine: true);
+  final lines = const LineSplitter().convert(content);
+  return [
+    for (var i = 0; i < lines.length; i++)
+      for (final m in re.allMatches(lines[i]))
+        VersionClaim(file, i + 1, m.group(1)!, lines[i].trim()),
+  ];
+}
+
+/// De eisen die niet met [pin] overeenkomen.
+List<VersionClaim> disagreeingClaims(List<VersionClaim> claims, String pin) => [
+  for (final c in claims)
+    if (c.version != pin) c,
+];
+
 void main(List<String> args) async {
   final checks = File('docs/CHECKS.md');
   final pins = File('.tool-versions');
@@ -193,8 +249,69 @@ void main(List<String> args) async {
     exit(1);
   }
 
+  // Derde toets: de dertien plekken die de versie noemen moeten het eens zijn
+  // (#721). Een pin verhogen en er één vergeten laat de documentatie iets
+  // anders beloven dan de machine doet.
+  final claims = <VersionClaim>[];
+  for (final entry in versionClaimPatterns.entries) {
+    final f = File(entry.key);
+    if (!f.existsSync()) {
+      stderr.writeln('check-toolchain FAILED:');
+      stderr.writeln(
+        '  ${entry.key} bestaat niet, maar staat wel in versionClaimPatterns.',
+      );
+      stderr.writeln(
+        '  Is het bestand verplaatst, verplaats dan ook de regel — anders '
+        'bewaakt de poort stilletjes niets meer.',
+      );
+      exit(1);
+    }
+    claims.addAll(
+      findVersionClaims(entry.key, f.readAsStringSync(), entry.value),
+    );
+  }
+  if (claims.length < versionClaimPatterns.length) {
+    stderr.writeln('check-toolchain FAILED:');
+    stderr.writeln(
+      '  Slechts ${claims.length} versie-eis(en) gevonden in '
+      '${versionClaimPatterns.length} bestanden — minstens één patroon vindt '
+      'niets meer.',
+    );
+    stderr.writeln(
+      '  Een poort die niets vindt is groen om de verkeerde reden. Kijk of de '
+      'formulering in dat bestand veranderd is en pas het patroon aan.',
+    );
+    exit(1);
+  }
+  final disagree = disagreeingClaims(claims, running.version);
+  if (disagree.isNotEmpty) {
+    stderr.writeln('check-toolchain FAILED:');
+    stderr.writeln(
+      '  De gepinde versie is ${running.version}, maar '
+      '${disagree.length} plek(ken) noemen iets anders:',
+    );
+    for (final c in disagree) {
+      stderr.writeln(
+        '  - ${c.file}:${c.line} zegt ${c.version} — ${c.context}',
+      );
+    }
+    stderr.writeln('');
+    stderr.writeln(
+      '  Herstel: zet ze allemaal op ${running.version}. Een pin die op de ene '
+      'plek opschuift en op de andere niet, laat de documentatie iets anders '
+      'beloven dan de machine doet (#721).',
+    );
+    stderr.writeln(
+      '  Let op: alleen een **vetgedrukte** versie is een eis. Een '
+      '`code-geciteerde` versie in een historische zin hoort niet mee te '
+      'veranderen — die zou er onwaar van worden.',
+    );
+    exit(1);
+  }
+
   stdout.writeln(
     'Toolchain OK: $running — officieel stable, gelijk aan de pin, vastgelegd '
-    'in docs/CHECKS.md',
+    'in docs/CHECKS.md, en ${claims.length} versie-eis(en) in '
+    '${versionClaimPatterns.length} bestanden zijn het eens',
   );
 }
