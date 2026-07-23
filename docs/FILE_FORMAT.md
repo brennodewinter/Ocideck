@@ -1907,6 +1907,151 @@ that move is done, and this file is exactly where such a nonce belongs (it is
 opaque, and it is *about* the document rather than part of it). What remains is
 the decision to build it.
 
+---
+
+### 6.7 Set-aside Privacy Findings (`<name>.dismissals.json`) — design, not yet built
+
+*Design for [#651](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/651),
+written before the build because it changes the file format and this project
+settles a format on paper first. Nothing reads or writes this file yet; the
+section says what will, and — more usefully — which of the obvious answers are
+wrong.*
+
+Today a privacy finding offers one action: **never report this rule again**. That
+is a global switch for a local judgement. Someone who has looked at one hit and
+decided it is fine — a colleague's name that belongs on the slide, an address
+that is the client's own — must choose between living with the warning forever
+and turning the rule off for every deck they will ever make. Turning a rule off
+is the loudest possible answer to the quietest possible problem, and it fails in
+the direction that matters: the next real hit of that class never appears.
+
+**Per deck, not per user.** A set-aside is a judgement about *this* document, so
+it belongs to the document. Move the deck to another machine or hand it to a
+second reviewer and the judgement travels with it; leave it in preferences and
+the second reviewer re-litigates every hit the first one already settled, while
+the first reviewer sees hits suppressed on *other* decks they never looked at.
+
+**In a sidecar, not in the `.md`.** Same boundary as the annotations, the notes
+and the seal: the markdown stays maximally interchangeable, and what is *about*
+the document sits beside it.
+
+```json
+{
+  "version": 1,
+  "salt": "9f8a3c2e1b7d4056",
+  "dismissals": [
+    {
+      "rule": "nl.name",
+      "commitment": "f1a2…b9c0",
+      "at": "2026-07-23T11:42:07.000Z",
+      "seen_at": { "slide": 4, "field": "bullets", "fragment": 2 }
+    }
+  ],
+  "revocations": [
+    { "rule": "fin.iban", "commitment": "77de…12ab", "at": "2026-07-23T12:03:00.000Z" }
+  ]
+}
+```
+
+#### What identifies a set-aside
+
+`rule` plus a **commitment over the matched text**: `SHA-256(salt ‖ text)`, hex.
+The salt is per deck and lives in this same file.
+
+**Not the position.** `PrivacyFinding` carries `slideIndex`, `field`,
+`fragmentIndex`, `start` and `end`, and every one of them moves when the author
+types a word above it. A set-aside keyed to a position would quietly expire on
+the next edit. `seen_at` is therefore written for the undo list to say *where you
+judged this*, and is explicitly **not** part of the identity: a reader that
+matches on it is wrong.
+
+Keying on the value instead means a name judged fine on slide 4 stays quiet if it
+also appears on slide 9. That is the intent, not a side effect — the judgement
+was about the name in this deck, not about one paragraph.
+
+#### Why a commitment, when the value is in the `.md` anyway
+
+The redaction manifest (§ `redaction_manifest.dart`) hides values because they
+have been *removed* from the artefact. Here they have not: anyone holding this
+sidecar holds the deck as well, so the commitment buys no confidentiality
+against them, and this section must not pretend otherwise.
+
+It earns its place for two other reasons, and they are the honest ones:
+
+1. **A privacy tool must not create a second copy of a personal datum.** The
+   `.md` is the document the author manages, backs up and eventually cleans.
+   This file is machinery. Writing `Jan Jansen` into it makes a second copy with
+   its own lifetime — one that follows the deck into git history, sync folders
+   and package exports, and that keeps the name **after the author has removed
+   it from the slide**. A value that outlives its own deletion is the failure
+   this project exists to prevent.
+2. **The salt stops cross-deck correlation.** Per deck, so the same name in two
+   decks yields two unrelated commitments. Nobody can line up a stack of
+   sidecars and see which decks mention the same person.
+
+The salt is *not* a secret and this file does not pretend it is: it sits right
+here, so anyone with the file can test a guess. Against a holder of the deck
+that costs nothing, because they can read the slide. State it plainly rather
+than implying a protection that is not there.
+
+#### The scan must keep finding it
+
+A set-aside **hides**, it does not unscan. `privacyRawScanProvider` keeps
+returning the full set, and the compliance count that MIAUW EIS 1.1 reads keeps
+counting it. Only the panel filters. A dismissed finding is also not "resolved":
+the two must stay distinguishable, or the quality panel starts reporting a
+cleanliness the deck does not have.
+
+#### Undoing
+
+`revocations` exists because a set-aside you cannot find again is a deletion.
+The panel gets a *set aside* list with an undo, and undoing writes a revocation
+rather than dropping the entry — which is what makes merging work.
+
+#### Merging (git, and the same deck edited twice)
+
+Both lists are merged as a **union keyed by `rule` + `commitment`**, and where an
+id appears in both lists the **later `at` wins**. That gives one rule for every
+case: two reviewers setting aside different findings keep both; one setting aside
+what the other revoked resolves by clock, and re-revoking is always possible.
+
+Timestamps are UTC, ISO 8601, millisecond precision — same as §6.6.
+
+Dropping the tombstones and merging only the set-asides would be simpler and
+wrong: a revocation would vanish on the next merge and the finding would stay
+hidden, which is the quiet failure direction. See `design/GIT_STORAGE.md` §D7
+for the same question on notes.
+
+#### Reading an older or newer file
+
+Same rule as every sidecar in this chapter (`lib/services/sidecar_format.dart`):
+a file declaring a higher `version` than this build understands is **not loaded
+and not overwritten**. A missing `version` is 1. A deck written before this
+section existed simply has no such file, which reads as "nothing set aside" —
+there is no migration, and the format version in the front matter does not move.
+
+#### Where it travels
+
+With the deck wherever the `.md` alone would not be enough: a member of the
+`.ocideck` package (§7), along to the bin, and in the autosave/recovery snapshot.
+A bare `.md` download on the web carries it no more than it carries annotations
+or notes.
+
+**Unlike the annotation layer, this one does belong in a git commit.** Ink is a
+personal mark on a copy; a set-aside is a review decision about the report, and a
+reviewer pulling the deck should not be shown findings a colleague has already
+judged. That is a deliberate difference from §6.2 and needs its write path in
+`services/git/`.
+
+#### Cost, before anyone starts
+
+Two new interface strings — which means 31 translations beside the Dutch
+source, 32 languages in all — one new sidecar reader/writer, a second
+action on the finding card plus the set-aside list, the git write path, and the
+merge. The scanner itself does not change.
+
+---
+
 ## 7. Portable Package (`.ocideck`)
 
 `Export package` writes one **zip file** (extension `.ocideck`; `.zip` is also
