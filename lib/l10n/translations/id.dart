@@ -1776,6 +1776,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'presentaties': 'presentasi',
+  '/Presentaties': '/Presentasi',
   'De export is mislukt.': 'Ekspor gagal.',
   'Presenteer vanaf hier': 'Presentasikan dari sini',
   'Teams-gastclient (ontwerp)': 'Klien tamu Teams (desain)',

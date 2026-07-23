@@ -140,20 +140,23 @@ extension _SettingsAi on _SettingsDialogState {
     final isSelfHosted = _ai.mode == AiBackendMode.selfHosted;
     final isCloud = _ai.mode == AiBackendMode.cloud;
     return [
-      _webdavField(
+      SettingsTextField(
         _ai.baseUrl,
         l10n.d('Server-URL'),
-        hint: 'http://127.0.0.1:11434/v1',
+        hint: l10n.d('http://127.0.0.1:11434/v1'),
         icon: Icons.link,
       ),
-      _webdavField(
+      SettingsTextField(
         _ai.model,
         l10n.d('Modelnaam'),
-        hint: 'gemma3:4b',
+        hint: l10n.d('gemma3:4b'),
         icon: Icons.memory_outlined,
       ),
       if (isSelfHosted || isCloud)
-        _secretField(_ai.apiKey.field, l10n.d('API-sleutel (optioneel)')),
+        SettingsSecretField(
+          _ai.apiKey.field,
+          l10n.d('API-sleutel (optioneel)'),
+        ),
       if (isSelfHosted) _aiTrustedSwitch(l10n),
       if (isCloud) ..._aiCloudConfirm(l10n),
       const SizedBox(height: 12),

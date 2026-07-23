@@ -22,21 +22,16 @@ import '../../services/disk_traces.dart';
 import '../../services/export_metadata.dart';
 import '../../services/file_service.dart';
 import '../../services/git/outbox.dart';
-import '../../services/secret_store.dart';
 import '../../services/recovery_service.dart';
 import '../../services/classification_enforcement_policy.dart';
-import '../../services/git/git_forge.dart';
 import '../../utils/net_guard.dart';
 import 'certificate_trust_dialog.dart';
-import '../../services/s3/s3_service.dart';
-import '../../services/webdav_service.dart';
 import '../../models/local_cve_status.dart';
 import '../../services/cve/local_cve_database.dart';
 import '../../services/info_safety/info_safety_reference_inventory.dart';
 import '../../state/local_cve_provider.dart';
 import '../../services/slide_quality_analyzer.dart';
 import '../../state/deck_provider.dart';
-import '../../state/git_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../state/consent_provider.dart';
@@ -55,13 +50,17 @@ import '../privacy_statement_content.dart';
 import '../reader/documentation_search_tab.dart';
 import '../slides/image_zoom_dialog.dart';
 import 'hex_color_dialog.dart';
+import 'settings/ai_form.dart';
+import 'settings/git_form.dart';
+import 'settings/git_panel.dart';
+import 'settings/s3_form.dart';
+import 'settings/s3_panel.dart';
+import 'settings/settings_section_title.dart';
+import 'settings/settings_text_field.dart';
+import 'settings/webdav_form.dart';
+import 'settings/webdav_panel.dart';
 
 part 'parts/settings_dialog_sections.dart';
-part 'parts/settings_dialog_secret.dart';
-part 'parts/settings_dialog_webdav_form.dart';
-part 'parts/settings_dialog_git_form.dart';
-part 'parts/settings_dialog_s3_form.dart';
-part 'parts/settings_dialog_ai_form.dart';
 part 'parts/settings_dialog_chrome.dart';
 part 'parts/settings_dialog_general.dart';
 part 'parts/settings_dialog_storage.dart';
@@ -69,9 +68,6 @@ part 'parts/settings_dialog_presentation.dart';
 part 'parts/settings_dialog_appearance.dart';
 part 'parts/settings_dialog_colors.dart';
 part 'parts/settings_dialog_profile.dart';
-part 'parts/settings_dialog_webdav.dart';
-part 'parts/settings_dialog_git.dart';
-part 'parts/settings_dialog_s3.dart';
 part 'parts/settings_dialog_privacy.dart';
 part 'parts/settings_dialog_security.dart';
 part 'parts/settings_dialog_ai.dart';
@@ -764,52 +760,61 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       onPopInvokedWithResult: (didPop, _) {
         if (didPop) _restoreLanguageIfDiscarded();
       },
-      child: Dialog(
-        clipBehavior: Clip.antiAlias,
-        backgroundColor: Colors.white,
-        insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 28),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        child: SizedBox(
-          width: dialogWidth,
-          height: dialogHeight,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _sidebar(l10n),
-              Expanded(
-                // Material (not ColoredBox) so ListTiles inside the tab bodies
-                // paint their ink/selected state onto this surface instead of a
-                // hidden ancestor behind an opaque box.
-                child: Material(
-                  color: AppTheme.slate50,
-                  child: Column(
-                    children: [
-                      _contentHeader(_selectedTab.label(l10n)),
-                      Expanded(
-                        // De zoekresultaten leggen zich óver de actieve tab; de
-                        // IndexedStack blijft eronder staan zodat zijn GlobalKeys
-                        // (de sectie-ankers) in de boom blijven en een treffer er
-                        // meteen naartoe kan scrollen.
-                        child: Stack(
-                          children: [
-                            IndexedStack(
-                              index: _selectedTab.index,
-                              sizing: StackFit.expand,
-                              children: bodies,
-                            ),
-                            if (_searchQuery.isNotEmpty)
-                              Positioned.fill(
-                                child: _settingsSearchResults(l10n),
+      child: SettingsSectionAnchors(
+        keys: _sectionKeys,
+        highlighted: _highlightedSection,
+        child: Dialog(
+          clipBehavior: Clip.antiAlias,
+          backgroundColor: Colors.white,
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 40,
+            vertical: 28,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: SizedBox(
+            width: dialogWidth,
+            height: dialogHeight,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _sidebar(l10n),
+                Expanded(
+                  // Material (not ColoredBox) so ListTiles inside the tab bodies
+                  // paint their ink/selected state onto this surface instead of a
+                  // hidden ancestor behind an opaque box.
+                  child: Material(
+                    color: AppTheme.slate50,
+                    child: Column(
+                      children: [
+                        _contentHeader(_selectedTab.label(l10n)),
+                        Expanded(
+                          // De zoekresultaten leggen zich óver de actieve tab; de
+                          // IndexedStack blijft eronder staan zodat zijn GlobalKeys
+                          // (de sectie-ankers) in de boom blijven en een treffer er
+                          // meteen naartoe kan scrollen.
+                          child: Stack(
+                            children: [
+                              IndexedStack(
+                                index: _selectedTab.index,
+                                sizing: StackFit.expand,
+                                children: bodies,
                               ),
-                          ],
+                              if (_searchQuery.isNotEmpty)
+                                Positioned.fill(
+                                  child: _settingsSearchResults(l10n),
+                                ),
+                            ],
+                          ),
                         ),
-                      ),
-                      _footerBar(l10n),
-                    ],
+                        _footerBar(l10n),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

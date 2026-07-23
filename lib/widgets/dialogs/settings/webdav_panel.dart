@@ -1,41 +1,59 @@
-// Part of the settings_dialog library — see ../settings_dialog.dart.
-// Split out for navigability (WebDAV tab); all imports live in the main
-// library file. Instance methods relocate verbatim into an extension on
-// _SettingsDialogState — same library, same members, no behaviour change.
-part of '../settings_dialog.dart';
+// Het WebDAV-paneel van het instellingenvenster.
+//
+// Stond tot #631 als `extension _SettingsWebdav on _SettingsDialogState` in de
+// gedeelde `part`-scope, waar het bij élk veld van de andere parts kon —
+// inclusief de inloggegevens van de andere bronnen. Nu een gewone widget met
+// dezelfde expliciete API als [S3Panel].
+import 'package:flutter/material.dart';
 
-extension _SettingsWebdav on _SettingsDialogState {
-  Widget _webdavField(
-    TextEditingController controller,
-    String label, {
-    String? hint,
-    bool obscure = false,
-    IconData? icon,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: TextField(
-        controller: controller,
-        obscureText: obscure,
-        style: const TextStyle(fontSize: 13),
-        decoration: InputDecoration(
-          isDense: true,
-          labelText: label,
-          hintText: hint,
-          prefixIcon: icon == null ? null : Icon(icon, size: 18),
-        ),
-      ),
-    );
+import '../../../l10n/app_localizations.dart';
+import '../../../models/webdav_settings.dart';
+import '../../../services/webdav_service.dart';
+import '../../../theme/app_theme.dart';
+import '../../../utils/log.dart';
+import 'confirm_certificate.dart';
+import 'settings_section_title.dart';
+import 'settings_text_field.dart';
+import 'webdav_form.dart';
+
+class WebdavPanel extends StatefulWidget {
+  /// Wat het paneel bewerkt. Eigendom van het venster, zodat een half ingetypte
+  /// server het dichtklappen van dit paneel overleeft.
+  final WebdavForm form;
+
+  final ConfirmCertificate confirmCertificate;
+
+  /// Meldt dat er aan [form] iets veranderde: de regel achter de
+  /// verbindingsnaam toont de uitslag van de verbindingstest en staat buiten
+  /// dit paneel.
+  final VoidCallback onChanged;
+
+  const WebdavPanel({
+    super.key,
+    required this.form,
+    required this.confirmCertificate,
+    required this.onChanged,
+  });
+
+  @override
+  State<WebdavPanel> createState() => _WebdavPanelState();
+}
+
+class _WebdavPanelState extends State<WebdavPanel> {
+  WebdavForm get _form => widget.form;
+
+  void _update(VoidCallback fn) {
+    setState(fn);
+    widget.onChanged();
   }
 
   /// De servertype-keuze. Alleen het padschema hangt eraan — het protocol
   /// eronder is in beide gevallen gewone WebDAV.
-  Widget _webdavKindField(WebdavForm form) {
-    final l10n = context.l10n;
+  Widget _kindField(AppLocalizations l10n) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: DropdownButtonFormField<WebdavServerKind>(
-        initialValue: form.kind,
+        initialValue: _form.kind,
         isDense: true,
         style: const TextStyle(fontSize: 13),
         decoration: InputDecoration(
@@ -55,26 +73,26 @@ extension _SettingsWebdav on _SettingsDialogState {
         ],
         onChanged: (value) {
           if (value == null) return;
-          _rebuild(() {
-            form.kind = value;
+          _update(() {
+            _form.kind = value;
             // De URL betekent per type iets anders (origin versus DAV-wortel),
             // dus een eerdere uitslag zegt niets meer over deze instelling.
-            form.testOk = null;
-            form.testMessage = null;
+            _form.testOk = null;
+            _form.testMessage = null;
           });
         },
       ),
     );
   }
 
-  Widget _webdavPanel(WebdavForm form) {
+  @override
+  Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final testMsg = form.testMessage;
-    final isNextcloud = form.kind == WebdavServerKind.nextcloud;
+    final isNextcloud = _form.kind == WebdavServerKind.nextcloud;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionTitle(l10n.d('WebDAV-bron')),
+        SettingsSectionTitle(l10n.d('WebDAV-bron')),
         Padding(
           padding: const EdgeInsets.only(bottom: 14),
           child: Text(
@@ -84,15 +102,15 @@ extension _SettingsWebdav on _SettingsDialogState {
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
-        _webdavKindField(form),
-        _webdavField(
-          form.url,
+        _kindField(l10n),
+        SettingsTextField(
+          _form.url,
           l10n.d('Server-URL'),
           // Bij Nextcloud is het pad afgeleid en telt alleen de host; bij een
           // andere server valt er niets te raden en ís het pad de DAV-wortel.
           hint: isNextcloud
-              ? 'https://cloud.voorbeeld.nl'
-              : 'https://dav.voorbeeld.nl/dav/bestanden',
+              ? l10n.d('https://cloud.example.com')
+              : l10n.d('https://dav.example.com/dav/files'),
           icon: Icons.link,
         ),
         if (!isNextcloud)
@@ -103,14 +121,14 @@ extension _SettingsWebdav on _SettingsDialogState {
               style: TextStyle(fontSize: 11, color: AppTheme.slate400),
             ),
           ),
-        if (isNextcloud) _pastedDavUrlHint(l10n, form),
-        _webdavField(
-          form.user,
+        if (isNextcloud) _pastedDavUrlHint(l10n),
+        SettingsTextField(
+          _form.user,
           l10n.d('Gebruikersnaam'),
           icon: Icons.person_outline,
         ),
-        _secretField(
-          form.password.field,
+        SettingsSecretField(
+          _form.password.field,
           // Het app-wachtwoord is een Nextcloud-voorziening; bij een andere
           // server zou die tip de gebruiker naar een niet-bestaand scherm sturen.
           isNextcloud ? l10n.d('App-wachtwoord') : l10n.d('Wachtwoord'),
@@ -118,10 +136,10 @@ extension _SettingsWebdav on _SettingsDialogState {
               ? l10n.d('Maak hiervoor een app-wachtwoord aan in Nextcloud')
               : null,
         ),
-        _webdavField(
-          form.root,
+        SettingsTextField(
+          _form.root,
           l10n.d('Submap (optioneel)'),
-          hint: '/Presentaties',
+          hint: l10n.d('/Presentaties'),
           icon: Icons.folder_outlined,
         ),
         SwitchListTile(
@@ -136,14 +154,14 @@ extension _SettingsWebdav on _SettingsDialogState {
             ),
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
-          value: form.trusted,
-          onChanged: (value) => _rebuild(() {
-            form.trusted = value;
-            form.testOk = null;
-            form.testMessage = null;
+          value: _form.trusted,
+          onChanged: (value) => _update(() {
+            _form.trusted = value;
+            _form.testOk = null;
+            _form.testMessage = null;
           }),
         ),
-        _webdavTestSection(l10n, form, testMsg),
+        _testSection(l10n),
         const SizedBox(height: 8),
         Text(
           l10n.d('Wijzigingen worden bewaard wanneer je op Opslaan klikt.'),
@@ -164,14 +182,14 @@ extension _SettingsWebdav on _SettingsDialogState {
   ///
   /// Bewust met een knop en niet automatisch: dit herschrijft wat de gebruiker
   /// zojuist plakte, en dat hoort zijn keuze te blijven.
-  Widget _pastedDavUrlHint(AppLocalizations l10n, WebdavForm form) {
+  Widget _pastedDavUrlHint(AppLocalizations l10n) {
     return ListenableBuilder(
-      listenable: form.url,
+      listenable: _form.url,
       builder: (context, _) {
-        final parsed = WebdavServer.readPastedDavUrl(form.url.text);
+        final parsed = WebdavServer.readPastedDavUrl(_form.url.text);
         // Niets te melden zodra het veld alleen nog de origin bevat — zo
         // verdwijnt de hint vanzelf nadat je hem hebt gevolgd.
-        if (parsed == null || form.url.text.trim() == parsed.baseUrl) {
+        if (parsed == null || _form.url.text.trim() == parsed.baseUrl) {
           return const SizedBox.shrink();
         }
         return Padding(
@@ -191,7 +209,7 @@ extension _SettingsWebdav on _SettingsDialogState {
               ),
               const SizedBox(width: 8),
               TextButton(
-                onPressed: () => _applyPastedDavUrl(form, parsed),
+                onPressed: () => _applyPastedDavUrl(parsed),
                 child: Text(l10n.d('Overnemen')),
               ),
             ],
@@ -206,28 +224,25 @@ extension _SettingsWebdav on _SettingsDialogState {
   /// Vult alleen wat leeg is: had de gebruiker de gebruikersnaam of submap al
   /// ingetypt, dan wint wat hij zelf koos. De server-URL wordt wél altijd
   /// opgeschoond — dat is de hele reden dat deze knop er staat.
-  void _applyPastedDavUrl(WebdavForm form, PastedDavUrl parsed) {
-    _rebuild(() {
-      form.url.text = parsed.baseUrl;
-      if (parsed.username.isNotEmpty && form.user.text.trim().isEmpty) {
-        form.user.text = parsed.username;
+  void _applyPastedDavUrl(PastedDavUrl parsed) {
+    _update(() {
+      _form.url.text = parsed.baseUrl;
+      if (parsed.username.isNotEmpty && _form.user.text.trim().isEmpty) {
+        _form.user.text = parsed.username;
       }
-      if (parsed.rootPath.isNotEmpty && form.root.text.trim().isEmpty) {
-        form.root.text = parsed.rootPath;
+      if (parsed.rootPath.isNotEmpty && _form.root.text.trim().isEmpty) {
+        _form.root.text = parsed.rootPath;
       }
       // De server verandert hiermee, dus een eerdere uitslag zegt niets meer.
-      form.testOk = null;
-      form.testMessage = null;
+      _form.testOk = null;
+      _form.testMessage = null;
     });
   }
 
   /// De verbindingstest: de knop, de uitslag, en — als het op het certificaat
   /// strandde — de weg om dat te bekijken.
-  Widget _webdavTestSection(
-    AppLocalizations l10n,
-    WebdavForm form,
-    String? testMsg,
-  ) {
+  Widget _testSection(AppLocalizations l10n) {
+    final testMsg = _form.testMessage;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -235,10 +250,8 @@ extension _SettingsWebdav on _SettingsDialogState {
         Row(
           children: [
             ElevatedButton.icon(
-              onPressed: form.testing
-                  ? null
-                  : () => _testWebdavConnection(form),
-              icon: form.testing
+              onPressed: _form.testing ? null : _testConnection,
+              icon: _form.testing
                   ? const SizedBox(
                       width: 16,
                       height: 16,
@@ -248,7 +261,7 @@ extension _SettingsWebdav on _SettingsDialogState {
               label: Text(l10n.d('Verbinding testen')),
             ),
             const SizedBox(width: 12),
-            if (form.testOk == true)
+            if (_form.testOk == true)
               Row(
                 children: [
                   Icon(Icons.check_circle, color: AppTheme.tealFg, size: 18),
@@ -261,19 +274,19 @@ extension _SettingsWebdav on _SettingsDialogState {
               ),
           ],
         ),
-        if (form.testCertRejected)
+        if (_form.testCertRejected)
           Padding(
             padding: const EdgeInsets.only(top: 6),
             child: Align(
               alignment: Alignment.centerLeft,
               child: TextButton.icon(
-                onPressed: () => _trustCertificate(form),
+                onPressed: _trustCertificate,
                 icon: const Icon(Icons.verified_user_outlined, size: 16),
                 label: Text(l10n.d('Certificaat bekijken')),
               ),
             ),
           ),
-        if (form.testOk == false && testMsg != null)
+        if (_form.testOk == false && testMsg != null)
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Row(
@@ -301,42 +314,42 @@ extension _SettingsWebdav on _SettingsDialogState {
     );
   }
 
-  Future<void> _testWebdavConnection(WebdavForm form) async {
+  Future<void> _testConnection() async {
     final l10n = context.l10n;
-    final server = form.server;
+    final server = _form.server;
     if (!server.isConfigured) {
-      _rebuild(() {
-        form.testOk = false;
-        form.testMessage = l10n.d('Vul server-URL en gebruikersnaam in');
+      _update(() {
+        _form.testOk = false;
+        _form.testMessage = l10n.d('Vul server-URL en gebruikersnaam in');
       });
       return;
     }
-    _rebuild(() {
-      form.testing = true;
-      form.testOk = null;
-      form.testMessage = null;
+    _update(() {
+      _form.testing = true;
+      _form.testOk = null;
+      _form.testMessage = null;
     });
     final service = WebdavService(
       server: server,
-      password: form.password.field.text,
+      password: _form.password.field.text,
     );
     String? error;
     var certRejected = false;
     try {
       await service.probe();
     } on WebdavException catch (e) {
-      error = _webdavErrorText(l10n, e.kind);
+      error = _errorText(l10n, e.kind);
       certRejected = e.kind == WebdavError.tls;
     } catch (e, st) {
       logError('SettingsDialog: WebDAV-verbindingstest', e, st);
       error = l10n.d('Verbinding mislukt');
     }
     if (!mounted) return;
-    _rebuild(() {
-      form.testing = false;
-      form.testOk = error == null;
-      form.testMessage = error;
-      form.testCertRejected = certRejected;
+    _update(() {
+      _form.testing = false;
+      _form.testOk = error == null;
+      _form.testMessage = error;
+      _form.testCertRejected = certRejected;
     });
   }
 
@@ -346,28 +359,28 @@ extension _SettingsWebdav on _SettingsDialogState {
   /// Bewust een aparte handeling na een mislukte test, en geen automatische
   /// vraag: vertrouwen is een besluit, en een dialoog die ongevraagd opduikt
   /// midden in het invullen wordt weggeklikt in plaats van gelezen.
-  Future<void> _trustCertificate(WebdavForm form) async {
-    final server = form.server;
+  Future<void> _trustCertificate() async {
+    final server = _form.server;
     final origin = server.origin;
     if (origin == null) return;
-    final fingerprint = await _confirmCertificate(
+    final fingerprint = await widget.confirmCertificate(
       origin: origin,
       host: server.host,
       allowPrivate: server.trustedInternal,
     );
     if (fingerprint == null || !mounted) return;
-    _rebuild(() {
-      form.pinnedCertSha256 = fingerprint;
-      form.testCertRejected = false;
-      form.testOk = null;
-      form.testMessage = null;
+    _update(() {
+      _form.pinnedCertSha256 = fingerprint;
+      _form.testCertRejected = false;
+      _form.testOk = null;
+      _form.testMessage = null;
     });
     // Meteen opnieuw proberen: de gebruiker wil weten of het hiermee lukt,
     // niet nóg een knop indrukken.
-    await _testWebdavConnection(form);
+    await _testConnection();
   }
 
-  String _webdavErrorText(AppLocalizations l10n, WebdavError kind) {
+  String _errorText(AppLocalizations l10n, WebdavError kind) {
     switch (kind) {
       case WebdavError.auth:
         return l10n.d(

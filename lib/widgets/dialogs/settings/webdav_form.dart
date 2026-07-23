@@ -1,5 +1,3 @@
-// Part of the settings_dialog library — see ../settings_dialog.dart.
-//
 // De invulstand van de Nextcloud-bron: de velden, de uitslag van de
 // verbindingstest en het wachtwoord. Hiervóór lagen die dertien velden los in
 // _SettingsDialogState, tussen de drieënzestig van alle andere onderwerpen —
@@ -11,7 +9,11 @@
 // git een forge en een eigenaar), en dat in één type persen levert een
 // basisklasse op met gaten. Alleen de sleutelhanger-boekhouding is gedeeld —
 // zie [KeychainSecret], want dáár is een fout duur.
-part of '../settings_dialog.dart';
+import 'package:flutter/widgets.dart';
+
+import '../../../models/webdav_settings.dart';
+import '../../../state/settings_provider.dart';
+import 'keychain_secret.dart';
 
 /// Wat het Nextcloud-paneel aan het bewerken is, tot Opslaan of Annuleren.
 class WebdavForm {

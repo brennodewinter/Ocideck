@@ -734,6 +734,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'presentaties': 'praesentationen',
+  '/Presentaties': '/Präsentationen',
   'De export is mislukt.': 'Der Export ist fehlgeschlagen.',
   'Presenteer vanaf hier': 'Ab hier präsentieren',
   'Teams-gastclient (ontwerp)': 'Teams-Gastclient (Entwurf)',

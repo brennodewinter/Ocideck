@@ -1,16 +1,61 @@
-// Part of the settings_dialog library — see ../settings_dialog.dart.
-// Split out for navigability (git-tab); all imports live in the main library
-// file. Mirrors settings_dialog_webdav.dart: the git source is the WebDAV
-// source with versioning added, so it is configured the same way.
-part of '../settings_dialog.dart';
+// Het git-paneel van het instellingenvenster.
+//
+// Stond tot #631 als `extension _SettingsGit on _SettingsDialogState` in de
+// gedeelde `part`-scope. Nu een gewone widget met dezelfde expliciete API als
+// [S3Panel] en [WebdavPanel]; het is een ConsumerStatefulWidget omdat het de
+// detectie van native git leest.
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-extension _SettingsGit on _SettingsDialogState {
-  Widget _gitPanel(GitForm form) {
+import '../../../l10n/app_localizations.dart';
+import '../../../models/git_settings.dart';
+import '../../../services/git/git_forge.dart';
+import '../../../state/git_provider.dart';
+import '../../../theme/app_theme.dart';
+import '../../../utils/log.dart';
+import 'confirm_certificate.dart';
+import 'git_form.dart';
+import 'settings_section_title.dart';
+import 'settings_text_field.dart';
+
+class GitPanel extends ConsumerStatefulWidget {
+  /// Wat het paneel bewerkt. Eigendom van het venster, zodat een half ingevulde
+  /// repo het dichtklappen van dit paneel overleeft.
+  final GitForm form;
+
+  final ConfirmCertificate confirmCertificate;
+
+  /// Meldt dat er aan [form] iets veranderde: de regel achter de
+  /// verbindingsnaam toont de uitslag van de verbindingstest en staat buiten
+  /// dit paneel.
+  final VoidCallback onChanged;
+
+  const GitPanel({
+    super.key,
+    required this.form,
+    required this.confirmCertificate,
+    required this.onChanged,
+  });
+
+  @override
+  ConsumerState<GitPanel> createState() => _GitPanelState();
+}
+
+class _GitPanelState extends ConsumerState<GitPanel> {
+  GitForm get _form => widget.form;
+
+  void _update(VoidCallback fn) {
+    setState(fn);
+    widget.onChanged();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionTitle(l10n.d('Git-repository')),
+        SettingsSectionTitle(l10n.d('Git-repository')),
         Padding(
           padding: const EdgeInsets.only(bottom: 14),
           child: Text(
@@ -25,7 +70,7 @@ extension _SettingsGit on _SettingsDialogState {
         Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: DropdownButtonFormField<GitProvider>(
-            initialValue: form.provider,
+            initialValue: _form.provider,
             decoration: InputDecoration(
               labelText: l10n.d('Soort forge'),
               prefixIcon: const Icon(Icons.hub_outlined, size: 18),
@@ -47,42 +92,42 @@ extension _SettingsGit on _SettingsDialogState {
               ),
             ],
             onChanged: (v) =>
-                _rebuild(() => form.provider = v ?? GitProvider.gitea),
+                _update(() => _form.provider = v ?? GitProvider.gitea),
           ),
         ),
-        _webdavField(
-          form.url,
+        SettingsTextField(
+          _form.url,
           l10n.d('Server-URL'),
-          hint: 'https://git.example.org',
+          hint: l10n.d('https://git.example.org'),
           icon: Icons.dns_outlined,
         ),
-        _webdavField(
-          form.owner,
+        SettingsTextField(
+          _form.owner,
           l10n.d('Eigenaar'),
-          hint: 'librekat',
+          hint: l10n.d('librekat'),
           icon: Icons.person_outline,
         ),
-        _webdavField(
-          form.repo,
+        SettingsTextField(
+          _form.repo,
           l10n.d('Repository'),
-          hint: 'decks',
+          hint: l10n.d('decks'),
           icon: Icons.folder_outlined,
         ),
-        _webdavField(
-          form.branch,
+        SettingsTextField(
+          _form.branch,
           l10n.d('Branch (optioneel)'),
-          hint: 'main',
+          hint: l10n.d('main'),
           icon: Icons.account_tree_outlined,
         ),
-        _secretField(form.token.field, l10n.d('Personal access token')),
-        _gitTokenScopeHelp(l10n, form.provider),
+        SettingsSecretField(_form.token.field, l10n.d('Personal access token')),
+        _tokenScopeHelp(l10n, _form.provider),
         CheckboxListTile(
-          value: form.trusted,
-          onChanged: (v) => _rebuild(() {
-            form.trusted = v ?? false;
+          value: _form.trusted,
+          onChanged: (v) => _update(() {
+            _form.trusted = v ?? false;
             // De vlag bepaalt of de host überhaupt gebeld mag worden, dus een
             // eerdere uitslag zegt niets meer.
-            form.clearTestResult();
+            _form.clearTestResult();
           }),
           contentPadding: EdgeInsets.zero,
           controlAffinity: ListTileControlAffinity.leading,
@@ -99,7 +144,7 @@ extension _SettingsGit on _SettingsDialogState {
           ),
         ),
         const SizedBox(height: 12),
-        _gitTestRow(l10n, form),
+        _testRow(l10n),
         _nativeGitStatus(l10n),
       ],
     );
@@ -109,7 +154,7 @@ extension _SettingsGit on _SettingsDialogState {
   /// scope verschilt per forge. Proactief onder het tokenveld, niet pas nadat een
   /// verbindingstest faalt: je hoeft het niet eerst mis te hebben om te weten wat
   /// je moet aanvinken. Wijzigt mee met de gekozen soort forge.
-  Widget _gitTokenScopeHelp(AppLocalizations l10n, GitProvider provider) {
+  Widget _tokenScopeHelp(AppLocalizations l10n, GitProvider provider) {
     final text = switch (provider) {
       GitProvider.gitea => l10n.d(
         'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.',
@@ -140,19 +185,19 @@ extension _SettingsGit on _SettingsDialogState {
   }
 
   /// De verbindingstest: de knop, de uitslag en wat de forge onderweg vertelde.
-  Widget _gitTestRow(AppLocalizations l10n, GitForm form) {
-    final message = form.testMessage;
-    final (Color color, IconData icon) = form.testWarning
+  Widget _testRow(AppLocalizations l10n) {
+    final message = _form.testMessage;
+    final (Color color, IconData icon) = _form.testWarning
         ? (AppTheme.amber700, Icons.warning_amber_outlined)
-        : form.testOk == true
+        : _form.testOk == true
         ? (AppTheme.tealFg, Icons.check_circle)
         : (AppTheme.danger600, Icons.error_outline);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ElevatedButton.icon(
-          onPressed: form.testing ? null : () => _testGitConnection(form),
-          icon: form.testing
+          onPressed: _form.testing ? null : _testConnection,
+          icon: _form.testing
               ? const SizedBox(
                   width: 16,
                   height: 16,
@@ -161,16 +206,16 @@ extension _SettingsGit on _SettingsDialogState {
               : const Icon(Icons.wifi_tethering, size: 16),
           label: Text(l10n.d('Verbinding testen')),
         ),
-        if (form.testCertRejected)
+        if (_form.testCertRejected)
           Padding(
             padding: const EdgeInsets.only(top: 6),
             child: TextButton.icon(
-              onPressed: () => _trustGitCertificate(form),
+              onPressed: _trustCertificate,
               icon: const Icon(Icons.verified_user_outlined, size: 16),
               label: Text(l10n.d('Certificaat bekijken')),
             ),
           ),
-        if (form.testOk != null && message != null)
+        if (_form.testOk != null && message != null)
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Row(
@@ -197,29 +242,29 @@ extension _SettingsGit on _SettingsDialogState {
   /// Alles kan kloppen en de eerste opslag alsnog stranden omdat de branch
   /// anders heet of het token alleen mag lezen — dus melden we wat de forge
   /// onderweg zei, en nemen we de standaardbranch meteen over.
-  Future<void> _testGitConnection(GitForm form) async {
+  Future<void> _testConnection() async {
     final l10n = context.l10n;
-    final config = form.config;
+    final config = _form.config;
     if (!config.isConfigured) {
-      _rebuild(() {
-        form.testOk = false;
-        form.testWarning = false;
-        form.testMessage = l10n.d('Vul server-URL, eigenaar en repository in');
+      _update(() {
+        _form.testOk = false;
+        _form.testWarning = false;
+        _form.testMessage = l10n.d('Vul server-URL, eigenaar en repository in');
       });
       return;
     }
-    _rebuild(() {
-      form.testing = true;
-      form.clearTestResult();
+    _update(() {
+      _form.testing = true;
+      _form.clearTestResult();
     });
-    final forge = createGitForge(config: config, token: form.token.field.text);
+    final forge = createGitForge(config: config, token: _form.token.field.text);
     RepoProbe? probe;
     String? error;
     var certRejected = false;
     try {
       probe = await forge.probe();
     } on GitForgeException catch (e) {
-      error = _gitErrorText(l10n, e);
+      error = _errorText(l10n, e);
       certRejected = e.kind == GitForgeError.tls;
     } catch (e, st) {
       logError('SettingsDialog: git-verbindingstest', e, st);
@@ -228,46 +273,42 @@ extension _SettingsGit on _SettingsDialogState {
       forge.close();
     }
     if (!mounted) return;
-    _rebuild(() {
-      form.testing = false;
-      form.testOk = error == null;
-      form.testWarning = probe?.canPush == false;
-      form.testMessage = error ?? _gitProbeSummary(l10n, form, probe!);
-      form.testCertRejected = certRejected;
+    _update(() {
+      _form.testing = false;
+      _form.testOk = error == null;
+      _form.testWarning = probe?.canPush == false;
+      _form.testMessage = error ?? _probeSummary(l10n, probe!);
+      _form.testCertRejected = certRejected;
     });
   }
 
   /// Laat het certificaat zien en pin het als de gebruiker het vertrouwt.
-  Future<void> _trustGitCertificate(GitForm form) async {
-    final config = form.config;
+  Future<void> _trustCertificate() async {
+    final config = _form.config;
     final origin = config.origin;
     if (origin == null) return;
-    final fingerprint = await _confirmCertificate(
+    final fingerprint = await widget.confirmCertificate(
       origin: origin,
       host: config.host,
       allowPrivate: config.trustedInternal,
     );
     if (fingerprint == null || !mounted) return;
-    _rebuild(() {
-      form.pinnedCertSha256 = fingerprint;
-      form.clearTestResult();
+    _update(() {
+      _form.pinnedCertSha256 = fingerprint;
+      _form.clearTestResult();
     });
-    await _testGitConnection(form);
+    await _testConnection();
   }
 
   /// Vat samen wat de test opleverde, en neem de standaardbranch over.
-  String _gitProbeSummary(
-    AppLocalizations l10n,
-    GitForm form,
-    RepoProbe probe,
-  ) {
+  String _probeSummary(AppLocalizations l10n, RepoProbe probe) {
     final parts = <String>[l10n.d('Verbinding gelukt')];
-    final chosen = form.branch.text.trim();
+    final chosen = _form.branch.text.trim();
     if (chosen.isEmpty) {
       // Nog niets ingevuld: neem over wat de forge zegt. Dit is het gangbare
       // geval, en het is de enige manier waarop een repo op `master` werkt
       // zonder dat de gebruiker dat hoeft te weten.
-      form.branch.text = probe.defaultBranch;
+      _form.branch.text = probe.defaultBranch;
       parts.add(
         '${l10n.d('de standaardbranch heet')} "${probe.defaultBranch}" — '
         '${l10n.d('die wordt voortaan gebruikt')}',
@@ -291,7 +332,7 @@ extension _SettingsGit on _SettingsDialogState {
     return '${parts.join(' — ')}.';
   }
 
-  String _gitErrorText(AppLocalizations l10n, GitForgeException e) {
+  String _errorText(AppLocalizations l10n, GitForgeException e) {
     return switch (e.kind) {
       GitForgeError.auth => l10n.d(
         'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.',

@@ -1776,6 +1776,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'presentaties': 'esitykset',
+  '/Presentaties': '/Esitykset',
   'De export is mislukt.': 'Vienti epäonnistui.',
   'Presenteer vanaf hier': 'Esitä tästä',
   'Teams-gastclient (ontwerp)': 'Teams-vierasohjelma (suunnitelma)',

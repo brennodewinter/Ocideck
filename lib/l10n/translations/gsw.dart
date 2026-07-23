@@ -1779,6 +1779,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'presentaties': 'praesentatione',
+  '/Presentaties': '/Präsentatione',
   'De export is mislukt.': 'De Export isch fehlgschlage.',
   'Presenteer vanaf hier': 'Ab do präsentiere',
   'Teams-gastclient (ontwerp)': 'Teams-Gaschtclient (Entwurf)',

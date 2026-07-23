@@ -73,36 +73,10 @@ class SettingsSearchEntry {
 }
 
 extension _SettingsSearch on _SettingsDialogState {
-  /// De sectiekop. Registreert zijn eigen anker en licht op wanneer een
-  /// zoekresultaat hiernaartoe sprong.
-  Widget _sectionTitle(String text) {
-    final highlighted = _highlightedSection == text;
-    return KeyedSubtree(
-      key: _sectionKeys.putIfAbsent(text, GlobalKey.new),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: highlighted
-            ? const EdgeInsets.fromLTRB(8, 6, 8, 8)
-            : const EdgeInsets.only(bottom: 8),
-        decoration: highlighted
-            ? BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppTheme.accentFg, width: 2),
-                color: AppTheme.accent.withValues(alpha: 0.06),
-              )
-            : null,
-        child: Text(
-          text.toUpperCase(),
-          style: TextStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.w700,
-            color: AppTheme.slate500,
-            letterSpacing: 1.2,
-          ),
-        ),
-      ),
-    );
-  }
+  /// De sectiekop. Het anker en het oplichten zitten in
+  /// [SettingsSectionTitle]; die haalt beide uit [SettingsSectionAnchors],
+  /// zodat een paneel er geen toegang tot de venstertoestand voor nodig heeft.
+  Widget _sectionTitle(String text) => SettingsSectionTitle(text);
 
   Widget _settingsSearchField() {
     final l10n = context.l10n;

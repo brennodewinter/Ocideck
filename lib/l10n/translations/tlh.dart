@@ -1751,6 +1751,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'presentaties': 'presentationmey',
+  '/Presentaties': '/presentationmey',
   'De export is mislukt.': 'luj ngeH.',
   'Presenteer vanaf hier': 'naDevvo\' yIjatlh',
   'Teams-gastclient (ontwerp)': 'Teams meb jan (nab)',

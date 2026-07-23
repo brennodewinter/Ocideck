@@ -1,12 +1,14 @@
-// Part of the settings_dialog library — see ../settings_dialog.dart.
-//
 // De invulstand van een S3-bron. Volgt bewust dezelfde vorm als WebdavForm en
 // GitForm — velden, uitslag van de verbindingstest, geheim — zonder gedeelde
 // basisklasse, om dezelfde reden als daar: wat ze bewaren verschilt reëel (hier
 // een endpoint, een regio en een adresseringsstijl) en dat in één type persen
 // levert een basisklasse met gaten op. Alleen de sleutelhanger-boekhouding is
 // gedeeld, via [KeychainSecret], want dáár is een fout duur.
-part of '../settings_dialog.dart';
+import 'package:flutter/widgets.dart';
+
+import '../../../models/s3_settings.dart';
+import '../../../state/settings_provider.dart';
+import 'keychain_secret.dart';
 
 /// Wat het S3-paneel aan het bewerken is, tot Opslaan of Annuleren.
 class S3Form {

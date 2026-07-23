@@ -1,18 +1,63 @@
-// Part of the settings_dialog library — see ../settings_dialog.dart.
-// Split out for navigability (S3-paneel); all imports live in the main library
-// file. Instance methods live in an extension on _SettingsDialogState — same
-// library, same members.
-part of '../settings_dialog.dart';
+// Het S3-paneel van het instellingenvenster.
+//
+// Stond tot #631 als `extension _SettingsS3 on _SettingsDialogState` in de
+// gedeelde `part`-scope, waar het bij élk veld van de zesentwintig andere parts
+// kon — inclusief de inloggegevens van de andere bronnen. Het is nu een gewone
+// widget met een expliciete API: het formulier dat het bewerkt, de weg naar de
+// certificaatbevestiging, en een melding terug wanneer er iets veranderde.
+import 'package:flutter/material.dart';
 
-extension _SettingsS3 on _SettingsDialogState {
+import '../../../l10n/app_localizations.dart';
+import '../../../models/s3_settings.dart';
+import '../../../services/s3/s3_service.dart';
+import '../../../theme/app_theme.dart';
+import '../../../utils/log.dart';
+import 'confirm_certificate.dart';
+import 's3_form.dart';
+import 'settings_section_title.dart';
+import 'settings_text_field.dart';
+
+class S3Panel extends StatefulWidget {
+  /// Wat het paneel bewerkt. Eigendom van het venster: het overleeft het
+  /// dichtklappen van dit paneel, zodat een half ingetypt endpoint niet
+  /// verdwijnt.
+  final S3Form form;
+
+  final ConfirmCertificate confirmCertificate;
+
+  /// Meldt dat er aan [form] iets veranderde. Nodig omdat het venster erbuiten
+  /// meekijkt: de regel achter de verbindingsnaam toont de uitslag van de
+  /// verbindingstest.
+  final VoidCallback onChanged;
+
+  const S3Panel({
+    super.key,
+    required this.form,
+    required this.confirmCertificate,
+    required this.onChanged,
+  });
+
+  @override
+  State<S3Panel> createState() => _S3PanelState();
+}
+
+class _S3PanelState extends State<S3Panel> {
+  S3Form get _form => widget.form;
+
+  /// Wijzig het formulier en laat zowel dit paneel als het venster erbuiten
+  /// bijtekenen.
+  void _update(VoidCallback fn) {
+    setState(fn);
+    widget.onChanged();
+  }
+
   /// De adresseringskeuze. Alleen waar de bucketnaam in de URL landt hangt
   /// hieraan; het protocol eronder is in beide gevallen hetzelfde.
-  Widget _s3AddressingField(S3Form form) {
-    final l10n = context.l10n;
+  Widget _addressingField(AppLocalizations l10n) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: DropdownButtonFormField<S3AddressingStyle>(
-        initialValue: form.addressingStyle,
+        initialValue: _form.addressingStyle,
         isDense: true,
         // De twee keuzes dragen allebei hun dienstnaam mee ("(AWS S3)",
         // "(MinIO en andere)") en zijn daarmee breder dan het paneel. Zonder
@@ -37,28 +82,28 @@ extension _SettingsS3 on _SettingsDialogState {
         ],
         onChanged: (value) {
           if (value == null) return;
-          _rebuild(() {
-            form.addressingStyle = value;
+          _update(() {
+            _form.addressingStyle = value;
             // De vorige uitslag ging over een andere URL-vorm en zegt nu niets
             // meer.
-            form.testOk = null;
-            form.testMessage = null;
+            _form.testOk = null;
+            _form.testMessage = null;
           });
         },
       ),
     );
   }
 
-  Widget _s3Panel(S3Form form) {
+  @override
+  Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final testMsg = form.testMessage;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Kop plus toelichting, net als bij de andere netwerkbronnen. De kop is
         // ook het anker waar een zoektreffer naartoe springt — zie
         // [StorageConnectionKindUi.sectionSource].
-        _sectionTitle(l10n.d('S3-bucket')),
+        SettingsSectionTitle(l10n.d('S3-bucket')),
         Padding(
           padding: const EdgeInsets.only(bottom: 14),
           child: Text(
@@ -68,34 +113,34 @@ extension _SettingsS3 on _SettingsDialogState {
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
-        _webdavField(
-          form.endpoint,
+        SettingsTextField(
+          _form.endpoint,
           l10n.d('Endpoint'),
-          hint: 'https://s3.eu-central-1.amazonaws.com',
+          hint: l10n.d('https://s3.eu-central-1.amazonaws.com'),
           icon: Icons.link,
         ),
-        _webdavField(
-          form.bucket,
+        SettingsTextField(
+          _form.bucket,
           l10n.d('Bucket'),
           icon: Icons.inventory_2_outlined,
         ),
-        _s3AddressingField(form),
-        _webdavField(
-          form.region,
+        _addressingField(l10n),
+        SettingsTextField(
+          _form.region,
           l10n.d('Regio'),
-          hint: 'eu-central-1',
+          hint: l10n.d('eu-central-1'),
           icon: Icons.public,
         ),
-        _webdavField(
-          form.accessKeyId,
+        SettingsTextField(
+          _form.accessKeyId,
           l10n.d('Access key ID'),
           icon: Icons.badge_outlined,
         ),
-        _secretField(form.secret.field, l10n.d('Secret access key')),
-        _webdavField(
-          form.root,
+        SettingsSecretField(_form.secret.field, l10n.d('Secret access key')),
+        SettingsTextField(
+          _form.root,
           l10n.d('Prefix (optioneel)'),
-          hint: 'presentaties',
+          hint: l10n.d('presentaties'),
           icon: Icons.folder_outlined,
         ),
         SwitchListTile(
@@ -110,19 +155,36 @@ extension _SettingsS3 on _SettingsDialogState {
             ),
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
-          value: form.trusted,
-          onChanged: (value) => _rebuild(() {
-            form.trusted = value;
-            form.testOk = null;
-            form.testMessage = null;
+          value: _form.trusted,
+          onChanged: (value) => _update(() {
+            _form.trusted = value;
+            _form.testOk = null;
+            _form.testMessage = null;
           }),
         ),
+        _testSection(l10n),
+        const SizedBox(height: 8),
+        Text(
+          l10n.d('Wijzigingen worden bewaard wanneer je op Opslaan klikt.'),
+          style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+        ),
+      ],
+    );
+  }
+
+  /// De verbindingstest: de knop, de uitslag, en — als het op het certificaat
+  /// strandde — de weg om dat te bekijken.
+  Widget _testSection(AppLocalizations l10n) {
+    final testMsg = _form.testMessage;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
         const SizedBox(height: 12),
         Row(
           children: [
             ElevatedButton.icon(
-              onPressed: form.testing ? null : () => _testS3Connection(form),
-              icon: form.testing
+              onPressed: _form.testing ? null : _testConnection,
+              icon: _form.testing
                   ? const SizedBox(
                       width: 16,
                       height: 16,
@@ -132,7 +194,7 @@ extension _SettingsS3 on _SettingsDialogState {
               label: Text(l10n.d('Verbinding testen')),
             ),
             const SizedBox(width: 12),
-            if (form.testOk == true)
+            if (_form.testOk == true)
               Row(
                 children: [
                   Icon(Icons.check_circle, color: AppTheme.tealFg, size: 18),
@@ -145,19 +207,19 @@ extension _SettingsS3 on _SettingsDialogState {
               ),
           ],
         ),
-        if (form.testCertRejected)
+        if (_form.testCertRejected)
           Padding(
             padding: const EdgeInsets.only(top: 6),
             child: Align(
               alignment: Alignment.centerLeft,
               child: TextButton.icon(
-                onPressed: () => _trustS3Certificate(form),
+                onPressed: _trustCertificate,
                 icon: const Icon(Icons.verified_user_outlined, size: 16),
                 label: Text(l10n.d('Certificaat bekijken')),
               ),
             ),
           ),
-        if (form.testOk == false && testMsg != null)
+        if (_form.testOk == false && testMsg != null)
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Row(
@@ -181,75 +243,70 @@ extension _SettingsS3 on _SettingsDialogState {
               ],
             ),
           ),
-        const SizedBox(height: 8),
-        Text(
-          l10n.d('Wijzigingen worden bewaard wanneer je op Opslaan klikt.'),
-          style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-        ),
       ],
     );
   }
 
-  Future<void> _testS3Connection(S3Form form) async {
+  Future<void> _testConnection() async {
     final l10n = context.l10n;
-    final config = form.config;
+    final config = _form.config;
     if (!config.isConfigured) {
-      _rebuild(() {
-        form.testOk = false;
-        form.testMessage = l10n.d('Vul endpoint, bucket en access key ID in');
+      _update(() {
+        _form.testOk = false;
+        _form.testMessage = l10n.d('Vul endpoint, bucket en access key ID in');
       });
       return;
     }
-    _rebuild(() {
-      form.testing = true;
-      form.testOk = null;
-      form.testMessage = null;
+    _update(() {
+      _form.testing = true;
+      _form.testOk = null;
+      _form.testMessage = null;
     });
     final service = S3Service(
       bucket: config,
-      secretAccessKey: form.secret.field.text,
+      secretAccessKey: _form.secret.field.text,
     );
     String? error;
     var certRejected = false;
     try {
       await service.probe();
     } on S3Exception catch (e) {
-      error = _s3ErrorText(l10n, e.kind);
+      error = _errorText(l10n, e.kind);
       certRejected = e.kind == S3Error.tls;
     } catch (e, st) {
       logError('SettingsDialog: S3-verbindingstest', e, st);
       error = l10n.d('Verbinding mislukt');
     }
     if (!mounted) return;
-    _rebuild(() {
-      form.testing = false;
-      form.testOk = error == null;
-      form.testMessage = error;
-      form.testCertRejected = certRejected;
+    _update(() {
+      _form.testing = false;
+      _form.testOk = error == null;
+      _form.testMessage = error;
+      _form.testCertRejected = certRejected;
     });
   }
 
   /// Laat het certificaat zien en pin het als de gebruiker het vertrouwt.
-  Future<void> _trustS3Certificate(S3Form form) async {
-    final config = form.config;
+  Future<void> _trustCertificate() async {
+    final config = _form.config;
     final origin = config.origin;
     if (origin == null) return;
-    final fingerprint = await _confirmCertificate(
+    final fingerprint = await widget.confirmCertificate(
       origin: origin,
       host: config.endpointHost,
       allowPrivate: config.trustedInternal,
     );
     if (fingerprint == null || !mounted) return;
-    _rebuild(() {
-      form.pinnedCertSha256 = fingerprint;
-      form.testCertRejected = false;
-      form.testOk = null;
-      form.testMessage = null;
+    _update(() {
+      _form.pinnedCertSha256 = fingerprint;
+      _form.testCertRejected = false;
+      _form.testOk = null;
+      _form.testMessage = null;
     });
-    await _testS3Connection(form);
+    await _testConnection();
   }
 
-  String _s3ErrorText(AppLocalizations l10n, S3Error kind) {
+  String _errorText(AppLocalizations l10n, S3Error kind) {
     switch (kind) {
       case S3Error.auth:
         return l10n.d(

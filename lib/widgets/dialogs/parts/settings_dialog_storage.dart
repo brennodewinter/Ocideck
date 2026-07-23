@@ -244,15 +244,29 @@ extension _SettingsStorageTab on _SettingsDialogState {
       switch (connection) {
         LocalConnection() => null,
         WebdavConnection() => switch (_webdavForms[connection.id]) {
-          final WebdavForm form => _webdavPanel(form),
+          final WebdavForm form => WebdavPanel(
+            form: form,
+            confirmCertificate: _confirmCertificate,
+            onChanged: () => _rebuild(() {}),
+          ),
           _ => null,
         },
         S3Connection() => switch (_s3Forms[connection.id]) {
-          final S3Form form => _s3Panel(form),
+          final S3Form form => S3Panel(
+            form: form,
+            confirmCertificate: _confirmCertificate,
+            // De regel achter de verbindingsnaam toont de uitslag van de
+            // verbindingstest, en die staat buiten het paneel.
+            onChanged: () => _rebuild(() {}),
+          ),
           _ => null,
         },
         GitConnection() => switch (_gitForms[connection.id]) {
-          final GitForm form => _gitPanel(form),
+          final GitForm form => GitPanel(
+            form: form,
+            confirmCertificate: _confirmCertificate,
+            onChanged: () => _rebuild(() {}),
+          ),
           _ => null,
         },
       };

@@ -1775,6 +1775,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'presentaties': 'presentationer',
+  '/Presentaties': '/Presentationer',
   'De export is mislukt.': 'Exporten misslyckades.',
   'Presenteer vanaf hier': 'Presentera härifrån',
   'Teams-gastclient (ontwerp)': 'Teams-gästklient (design)',

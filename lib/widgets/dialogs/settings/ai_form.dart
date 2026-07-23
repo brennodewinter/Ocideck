@@ -1,11 +1,13 @@
-// Part of the settings_dialog library — see ../settings_dialog.dart.
-//
 // De invulstand van de AI-backend. Derde bron met hetzelfde geheimpatroon, en
 // opnieuw met een eigen vorm: hier geen gebruiker of eigenaar maar een modus
 // (lokaal of cloud) en een uitdrukkelijke cloudbevestiging, en de
 // sleutelhangersleutel is de kale basis-URL. Zie [KeychainSecret] voor het deel
 // dat de drie wél delen.
-part of '../settings_dialog.dart';
+import 'package:flutter/widgets.dart';
+
+import '../../../models/ai_settings.dart';
+import '../../../state/settings_provider.dart';
+import 'keychain_secret.dart';
 
 /// Wat het AI-tabblad aan het bewerken is, tot Opslaan of Annuleren.
 class AiForm {
