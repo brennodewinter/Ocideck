@@ -14,6 +14,7 @@ import 'package:ocideck/services/git/deck_repo_serializer.dart';
 import 'package:ocideck/services/git/repo_asset_resolver.dart';
 import 'package:ocideck/services/annotation_codec.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/miauw_codec.dart';
 import 'package:ocideck/services/privacy/dismissal_codec.dart';
 import 'package:ocideck/services/user_notes_codec.dart';
 import 'package:ocideck/services/web_asset_store.dart';
@@ -1164,6 +1165,158 @@ void main() {
 
       expect(terug.deck.dismissals, isNotNull);
       expect(terug.dismissalsUnreadable, isFalse);
+    });
+  });
+
+  group('MIAUW-dispositie', () {
+    // #756, de laatste achterblijvende laag: een waiver of bevestiging is een
+    // reviewbesluit over het rapport en reist dus mee. Zelfde machinerie als
+    // de andere sidecars; hier de MIAUW-eigen randen: grafstenen zijn inhoud
+    // (een ingetrokken waiver mag niet herrijzen), en v1-bestanden blijven
+    // leesbaar maar de app schrijft v2.
+    const mPath = '$deckDir/deck.miauw.json';
+
+    MiauwEntry item(String text) =>
+        MiauwEntry(text: text, at: '2026-07-23T10:00:00.000Z');
+
+    Future<RepoDeckFiles> build(
+      Deck deck, {
+      Map<String, Uint8List> inRepo = const {},
+    }) async => buildDeckRepoFiles(
+      deck,
+      md: md,
+      pool: poolFor(FakeRepo(branches: {'main': 'c0'}, files: {})),
+      deckDir: deckDir,
+      resolveBytes: resolverFrom({}),
+      read: (path) async => inRepo[path],
+    );
+
+    Deck deckMet(MiauwDisposition m) => Deck(
+      title: 'Pentest',
+      slides: [Slide.create(SlideType.title).copyWith(title: 'Eén')],
+      miauw: m,
+    );
+
+    test('krijgt een eigen bestand naast deck.md', () async {
+      final out = await build(
+        deckMet(MiauwDisposition(waivers: {'1.3': item('Niet in scope')})),
+      );
+
+      expect(out.upserts.containsKey(mPath), isTrue);
+      final inhoud = utf8.decode(out.upserts[mPath]!);
+      expect(inhoud, contains('1.3'));
+      expect(inhoud, contains('Niet in scope'));
+    });
+
+    test('komt er bij het openen weer aan', () async {
+      final out = await build(
+        deckMet(
+          MiauwDisposition(
+            waivers: {'1.3': item('Niet in scope')},
+            confirmations: {'2.1': item('Intake gehouden')},
+          ),
+        ),
+      );
+      final parsed = md.parseDeck(
+        utf8.decode(out.upserts['$deckDir/deck.md']!),
+      )!;
+      final terug = await withRepoMiauw(
+        parsed,
+        deckDir: deckDir,
+        read: (path) async => out.upserts[path],
+      );
+
+      expect(terug.deck.miauwWaivers['1.3'], 'Niet in scope');
+      expect(terug.deck.miauwConfirmations['2.1'], 'Intake gehouden');
+      expect(terug.onleesbaar, isFalse);
+    });
+
+    test('alleen grafstenen is nog steeds een bestand', () async {
+      // "Waiver ingetrokken" ruimt de sidecar bewust niet op: zonder de
+      // grafsteen keert de uitsluiting bij de eerstvolgende samenvoeging
+      // terug van de andere kant, en dan is een eis weer weggewuifd zonder
+      // dat iemand dat besloot.
+      final out = await build(
+        deckMet(
+          const MiauwDisposition(
+            revokedWaivers: {'1.6': '2026-07-23T11:00:00.000Z'},
+          ),
+        ),
+      );
+
+      expect(out.upserts.containsKey(mPath), isTrue);
+      expect(utf8.decode(out.upserts[mPath]!), contains('revoked'));
+    });
+
+    test('zonder dispositie gaat een eigen bestand wél weg', () async {
+      final bestaand = MiauwCodec.encodeDisposition(
+        MiauwDisposition(waivers: {'1.3': item('x')}),
+      )!;
+      final out = await build(
+        deckMet(const MiauwDisposition()),
+        inRepo: {mPath: Uint8List.fromList(utf8.encode(bestaand))},
+      );
+
+      expect(out.deletes, contains(mPath));
+    });
+
+    test('maar niet wanneer het bestand niet van ons is', () async {
+      final out = await build(
+        deckMet(const MiauwDisposition()),
+        inRepo: {
+          mPath: Uint8List.fromList(utf8.encode('{"version":99}')),
+        },
+      );
+
+      expect(out.deletes, isEmpty);
+      expect(out.upserts.containsKey(mPath), isFalse);
+    });
+
+    test('de werkkopie voor de wachtrij draagt hem ook', () {
+      // Wat hier ontbreekt wordt bij het legen van de wachtrij op de tak
+      // verwijderd — dezelfde valkuil als bij de notities en de ink.
+      final files = mirrorDeckFiles(
+        deckMet(MiauwDisposition(waivers: {'1.3': item('x')})),
+        deckDir: deckDir,
+        md: md,
+      );
+
+      expect(files.keys, contains(mPath));
+    });
+
+    test('withRepoSidecars hangt ook deze laag aan', () async {
+      final out = await build(
+        deckMet(MiauwDisposition(waivers: {'1.3': item('Niet in scope')})),
+      );
+      final parsed = md.parseDeck(
+        utf8.decode(out.upserts['$deckDir/deck.md']!),
+      )!;
+      final terug = await withRepoSidecars(
+        parsed,
+        deckDir: deckDir,
+        read: (path) async => out.upserts[path],
+      );
+
+      expect(terug.deck.miauwWaivers['1.3'], 'Niet in scope');
+      expect(terug.miauwUnreadable, isFalse);
+    });
+
+    test('een v1-bestand in de repo blijft leesbaar', () async {
+      const v1 = '{"version":1,"waivers":{"1.3":"Oude reden"}}';
+      final parsed = Deck(
+        title: 'Pentest',
+        slides: [Slide.create(SlideType.title).copyWith(title: 'Eén')],
+      );
+      final terug = await withRepoMiauw(
+        parsed,
+        deckDir: deckDir,
+        read: (path) async => path == mPath
+            ? Uint8List.fromList(utf8.encode(v1))
+            : null,
+      );
+
+      expect(terug.deck.miauwWaivers['1.3'], 'Oude reden');
+      expect(terug.onleesbaar, isFalse);
     });
   });
 }

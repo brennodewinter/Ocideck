@@ -14,6 +14,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/timeline.dart';
 import 'package:ocideck/services/cvss/cvss4.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/miauw_codec.dart';
 import 'package:ocideck/services/seal_codec.dart';
 
 import 'slide_fixtures.dart';
@@ -491,8 +492,7 @@ void main() {
       final markdown = MarkdownService().generateDeck(
         Deck(
           title: 'Pentest',
-          miauwWaivers: const {'1.3': 'Certificering niet vereist door klant'},
-          miauwConfirmations: const {'2.1': 'Intake gehouden op 2026-07-01'},
+          miauw: MiauwDisposition.fromTexts(const {'1.3': 'Certificering niet vereist door klant'}, const {'2.1': 'Intake gehouden op 2026-07-01'}),
           slides: [Slide.create(SlideType.title)],
         ),
       );

@@ -3,6 +3,7 @@ import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/git/deck_merge.dart';
+import 'package:ocideck/services/miauw_codec.dart';
 import 'package:ocideck/services/privacy/dismissal_codec.dart';
 
 /// Driewegs-merge van één deck (§8.6). Wat OciDeck zelf mag beslissen beslist
@@ -479,6 +480,89 @@ void main() {
       final ids = {for (final s in result.merged.slides) s.id};
       expect(result.merged.annotations.keys, everyElement(isIn(ids)));
       expect(result.merged.annotations, hasLength(2));
+    });
+  });
+
+
+  group('de MIAUW-dispositie verenigen bij de merge', () {
+    // #756: een waiver of bevestiging is een reviewbesluit over het rapport,
+    // net als een terzijdelegging. De unie (per EIS-id, laatste `at` wint,
+    // grafstenen overleven, grafsteen wint gelijkspel) ligt vast in
+    // GIT_STORAGE §9.7 en in mergeMiauw; hier bewaken we dat de deck-merge
+    // hem ook echt gebruikt — `copyWith` zou anders stil ónze kant houden.
+
+    MiauwEntry om(String text, {int uur = 10}) => MiauwEntry(
+      text: text,
+      at: '2026-07-23T${uur.toString().padLeft(2, '0')}:00:00.000Z',
+    );
+    String tijd(int uur) =>
+        '2026-07-23T${uur.toString().padLeft(2, '0')}:00:00.000Z';
+
+    Deck met(MiauwDisposition m) =>
+        Deck(title: 'Pentest', slides: [one], miauw: m);
+    final basis = Deck(title: 'Pentest', slides: [one]);
+
+    test('twee reviewers, verschillende eisen: beide besluiten blijven', () {
+      final result = mergeDeckVersions(
+        basis,
+        met(MiauwDisposition(waivers: {'1.3': om('scope')})),
+        met(MiauwDisposition(confirmations: {'2.1': om('intake')})),
+      );
+      expect(result.merged.miauwWaivers['1.3'], 'scope');
+      expect(result.merged.miauwConfirmations['2.1'], 'intake');
+    });
+
+    test('zelfde eis, allebei gezet: het laatste besluit wint', () {
+      final result = mergeDeckVersions(
+        basis,
+        met(MiauwDisposition(waivers: {'1.3': om('oud', uur: 9)})),
+        met(MiauwDisposition(waivers: {'1.3': om('nieuw', uur: 11)})),
+      );
+      expect(result.merged.miauwWaivers['1.3'], 'nieuw');
+    });
+
+    test('intrekken op de ene kant overleeft de zet van de andere kant', () {
+      // De reden dat v2 grafstenen heeft: zonder zou de unie een ingetrokken
+      // waiver stil laten herrijzen, en dan is een eis weer weggewuifd zonder
+      // dat iemand dat besloot.
+      final result = mergeDeckVersions(
+        basis,
+        met(
+          MiauwDisposition(revokedWaivers: {'1.3': tijd(12)}),
+        ),
+        met(MiauwDisposition(waivers: {'1.3': om('scope', uur: 10)})),
+      );
+      expect(result.merged.miauwWaivers.containsKey('1.3'), isFalse);
+      expect(result.merged.miauw.revokedWaivers.containsKey('1.3'), isTrue);
+    });
+
+    test('opnieuw zetten ná het intrekken wint weer', () {
+      final result = mergeDeckVersions(
+        basis,
+        met(MiauwDisposition(revokedWaivers: {'1.3': tijd(12)})),
+        met(MiauwDisposition(waivers: {'1.3': om('opnieuw', uur: 14)})),
+      );
+      expect(result.merged.miauwWaivers['1.3'], 'opnieuw');
+      expect(result.merged.miauw.revokedWaivers.containsKey('1.3'), isFalse);
+    });
+
+    test('gelijkspel tussen zetten en intrekken: de grafsteen wint', () {
+      // De strikte lezing is de veilige: geen waiver zonder staand besluit.
+      final result = mergeDeckVersions(
+        basis,
+        met(MiauwDisposition(revokedWaivers: {'1.3': tijd(12)})),
+        met(MiauwDisposition(waivers: {'1.3': om('scope', uur: 12)})),
+      );
+      expect(result.merged.miauwWaivers.containsKey('1.3'), isFalse);
+    });
+
+    test('een v1-besluit (zonder tijd) verliest van elk v2-besluit', () {
+      final result = mergeDeckVersions(
+        basis,
+        met(MiauwDisposition(waivers: {'1.3': const MiauwEntry(text: 'v1')})),
+        met(MiauwDisposition(revokedWaivers: {'1.3': tijd(9)})),
+      );
+      expect(result.merged.miauwWaivers.containsKey('1.3'), isFalse);
     });
   });
 

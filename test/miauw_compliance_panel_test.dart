@@ -11,6 +11,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/miauw_codec.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/widgets/dialogs/miauw_compliance_panel.dart';
 
@@ -28,8 +29,7 @@ Deck _deck({
 }) => Deck(
   title: 'Demo',
   slides: [Slide.create(SlideType.title).copyWith(title: 'Welkom')],
-  miauwWaivers: waivers,
-  miauwConfirmations: confirmations,
+  miauw: MiauwDisposition.fromTexts(waivers, confirmations),
 );
 
 const _localizations = [

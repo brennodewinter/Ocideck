@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/services/miauw_codec.dart';
 import 'package:ocideck/models/privacy_finding.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/used_tool.dart';
@@ -58,7 +59,11 @@ void main() {
       // wie het bestand naleest, dus juist hier telt de scanner.
       expect(
         findsEmail(
-          Deck(title: 'D', miauwWaivers: {'1.6': email}, slides: [plain()]),
+          Deck(
+            title: 'D',
+            miauw: MiauwDisposition.fromTexts({'1.6': email}, const {}),
+            slides: [plain()],
+          ),
         ),
         isTrue,
       );
@@ -66,7 +71,7 @@ void main() {
         findsEmail(
           Deck(
             title: 'D',
-            miauwConfirmations: {'1.6': email},
+            miauw: MiauwDisposition.fromTexts(const {}, {'1.6': email}),
             slides: [plain()],
           ),
         ),

@@ -32,8 +32,7 @@ FileService _dienst() =>
 Deck _deck() => Deck(
   title: 'Pentest',
   slides: [Slide.create(SlideType.title).copyWith(title: 'Pentest')],
-  miauwWaivers: _uitsluitingen,
-  miauwConfirmations: _bevestigingen,
+  miauw: MiauwDisposition.fromTexts(_uitsluitingen, _bevestigingen),
 );
 
 void main() {
@@ -41,20 +40,21 @@ void main() {
 
   group('de codec', () {
     test('schrijft niets als er geen dispositie is', () {
-      expect(MiauwCodec.encode(const {}, const {}), isNull);
+      expect(MiauwCodec.encodeDisposition(const MiauwDisposition()), isNull);
     });
 
     test('rondgang: uitsluitingen en bevestigingen komen heel terug', () {
-      final json = MiauwCodec.encode(_uitsluitingen, _bevestigingen)!;
+      final json = MiauwCodec.encodeDisposition(
+        MiauwDisposition.fromTexts(_uitsluitingen, _bevestigingen),
+      )!;
       final terug = MiauwCodec.decode(json);
-      expect(terug.waivers, _uitsluitingen);
-      expect(terug.confirmations, _bevestigingen);
+      expect(terug.waiverTexts, _uitsluitingen);
+      expect(terug.confirmationTexts, _bevestigingen);
     });
 
     test('een nieuwere versie wordt niet half gelezen', () {
-      final json = MiauwCodec.encode(
-        _uitsluitingen,
-        _bevestigingen,
+      final json = MiauwCodec.encodeDisposition(
+        MiauwDisposition.fromTexts(_uitsluitingen, _bevestigingen),
       )!.replaceAll('"version":${MiauwCodec.version}', '"version":99');
       final terug = MiauwCodec.decode(json);
       expect(terug.waivers, isEmpty);
@@ -97,7 +97,7 @@ void main() {
       expect(await sidecar.exists(), isTrue);
 
       await dienst.saveDeck(
-        _deck().copyWith(miauwWaivers: const {}, miauwConfirmations: const {}),
+        _deck().copyWith(miauw: const MiauwDisposition()),
         pad,
       );
       expect(await sidecar.exists(), isFalse);
