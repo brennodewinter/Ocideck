@@ -1782,6 +1782,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Odloženie zistenia o súkromí (návrh)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Zapečatená prezentácia nepatrí na pracovnú vetvu',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

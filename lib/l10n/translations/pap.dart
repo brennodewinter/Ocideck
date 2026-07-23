@@ -734,6 +734,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Pone un konstatashon di privasidat un banda (diseño)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Un presentashon seyá no ta bai riba un branch di trabou',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

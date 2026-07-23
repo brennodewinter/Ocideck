@@ -1766,6 +1766,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Privaatsusleiu kõrvalejätmine (kavand)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Pitseeritud esitlus ei lähe tööharusse',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

@@ -1750,6 +1750,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'pegh Sam lo\'laHbe\'ghach (nab)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       '\'ang HutlhwI\' ram Sor DoQbe\'',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

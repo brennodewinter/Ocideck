@@ -1797,6 +1797,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Отлагане на констатация за поверителност (проект)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Запечатана презентация не отива в работен клон',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

@@ -1802,6 +1802,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Παραμερισμός ευρήματος ιδιωτικότητας (σχεδίαση)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Μια σφραγισμένη παρουσίαση δεν πηγαίνει σε κλάδο εργασίας',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

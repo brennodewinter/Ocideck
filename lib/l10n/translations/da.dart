@@ -1774,6 +1774,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'At lægge et privatlivsfund til side (design)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Et forseglet deck kommer ikke på en arbejdsgren',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

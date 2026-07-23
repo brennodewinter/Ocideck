@@ -734,6 +734,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Einen Datenschutzbefund zurückstellen (Entwurf)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Ein versiegeltes Deck kommt nicht auf einen Arbeitsbranch',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

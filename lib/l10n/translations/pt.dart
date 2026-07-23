@@ -1804,6 +1804,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Pôr de lado um achado de privacidade (desenho)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Uma apresentação selada não vai para um ramo de trabalho',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

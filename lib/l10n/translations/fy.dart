@@ -735,6 +735,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'In privacybefining oan \'e kant sette (ûntwerp)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'In fersegele deck giet net nei in wurkbranch',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

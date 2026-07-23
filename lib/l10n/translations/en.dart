@@ -915,6 +915,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Setting a privacy finding aside (design)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'A sealed deck does not go to a work branch',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

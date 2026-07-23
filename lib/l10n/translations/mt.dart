@@ -1797,6 +1797,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Tqegħid fil-ġenb ta\' sejba dwar il-privatezza (disinn)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Preżentazzjoni ssiġillata ma tmurx fuq fergħa tax-xogħol',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':

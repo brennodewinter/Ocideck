@@ -2754,6 +2754,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Privacybevinding terzijde leggen (ontwerp)':
+      'Bir gizlilik bulgusunu bir kenara koyma (tasarım)',
   'Een verzegeld deck gaat niet naar een werkbranch':
       'Mühürlü bir sunum çalışma dalına gitmez',
   'Een zegel is een uitspraak over precies deze bytes. Een werkbranch kan herschreven, gecherrypickt en geforceerd geduwd worden, en een zegel dat dat overleeft zegt niets meer.':
