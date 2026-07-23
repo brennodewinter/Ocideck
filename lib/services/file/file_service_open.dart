@@ -58,82 +58,6 @@ extension _FileServiceOpen on FileService {
     return norm.substring(end + 5).trim().isEmpty;
   }
 
-  /// Path of the annotation sidecar next to a deck `<name>.md` → `<name>.ink.json`.
-  String _sidecarPath(String mdPath) => p.setExtension(mdPath, '.ink.json');
-
-  /// Write the annotation sidecar next to [filePath], or remove it when empty.
-  Future<void> _writeSidecar(Deck deck, String filePath) async {
-    final sidecar = File(_sidecarPath(filePath));
-    if (await _sidecarUntouchable(sidecar, AnnotationCodec.version, 'ink')) {
-      return;
-    }
-    final json = AnnotationCodec.encode(deck.slides, deck.annotations);
-    if (json == null) {
-      if (await sidecar.exists()) await sidecar.delete();
-    } else {
-      await writeStringAtomic(sidecar, json);
-    }
-  }
-
-  /// Path of the user-notes sidecar next to a deck `<name>.md`.
-  String _userNotesSidecarPath(String mdPath) =>
-      p.setExtension(mdPath, '.user-notes.json');
-
-  /// Write the user-notes sidecar next to [filePath], or remove it when empty.
-  Future<void> _writeUserNotesSidecar(Deck deck, String filePath) async {
-    final sidecar = File(_userNotesSidecarPath(filePath));
-    if (await _sidecarUntouchable(
-      sidecar,
-      UserNotesCodec.version,
-      'user-notes',
-    )) {
-      return;
-    }
-    final json = UserNotesCodec.encode(deck.slides, deck.userNotes);
-    if (json == null) {
-      if (await sidecar.exists()) await sidecar.delete();
-    } else {
-      await writeStringAtomic(sidecar, json);
-    }
-  }
-
-  /// Path of the MIAUW-disposition sidecar next to a deck `<name>.md`.
-  String _miauwSidecarPath(String mdPath) =>
-      p.setExtension(mdPath, '.miauw.json');
-
-  /// Write the MIAUW sidecar next to [filePath], or remove it when empty.
-  Future<void> _writeMiauwSidecar(Deck deck, String filePath) async {
-    final sidecar = File(_miauwSidecarPath(filePath));
-    if (await _sidecarUntouchable(sidecar, MiauwCodec.version, 'MIAUW')) {
-      return;
-    }
-    final json = MiauwCodec.encode(deck.miauwWaivers, deck.miauwConfirmations);
-    if (json == null) {
-      if (await sidecar.exists()) await sidecar.delete();
-    } else {
-      await writeStringAtomic(sidecar, json);
-    }
-  }
-
-  /// Path of the seal sidecar next to a deck `<name>.md`.
-  String _sealSidecarPath(String mdPath) =>
-      p.setExtension(mdPath, '.seal.json');
-
-  /// Write the seal sidecar next to [filePath], or remove it when there is
-  /// nothing to record.
-  Future<void> _writeSealSidecar(Deck deck, String filePath) async {
-    final sidecar = File(_sealSidecarPath(filePath));
-    if (await _sidecarUntouchable(sidecar, SealCodec.version, 'seal')) {
-      return;
-    }
-    final json = SealCodec.encode(SealRecord.of(deck));
-    if (json == null) {
-      if (await sidecar.exists()) await sidecar.delete();
-    } else {
-      await writeStringAtomic(sidecar, json);
-    }
-  }
-
   /// Legt de lagen die naast de markdown wonen terug op [deck]: de
   /// inkt-annotaties, de gebruikersnotities, de MIAUW-dispositie en het zegel.
   ///
@@ -193,6 +117,30 @@ extension _FileServiceOpen on FileService {
         }
       } catch (e) {
         logWarning('FileService.openDeck: MIAUW sidecar unreadable', e);
+      }
+    }
+    // De terzijdegelegde privacybevindingen (#651). Ligt er geen sidecar, dan
+    // is er niets terzijdegelegd — er is geen oude vorm om van op te waarderen,
+    // want dit formaat begon hier.
+    final dismissalsSidecar = File(_dismissalsSidecarPath(filePath));
+    if (await dismissalsSidecar.exists()) {
+      try {
+        final raw = await _readSidecarCapped(
+          dismissalsSidecar,
+          'dismissals',
+          skipped,
+        );
+        if (raw != null) {
+          // Het zout uit het bestand wint; dit geldt alleen wanneer het bestand
+          // er geen draagt, en dan valt er ook niets te matchen.
+          final d = DismissalCodec.decode(
+            raw,
+            fallbackSalt: newDismissalSalt(),
+          );
+          if (!d.isEmpty) hydrated = hydrated.copyWith(dismissals: d);
+        }
+      } catch (e) {
+        logWarning('FileService.openDeck: dismissals sidecar unreadable', e);
       }
     }
     // Het zegel en de handtekening. Ligt er een sidecar, dan is die de
@@ -548,6 +496,105 @@ Future<String?> _readSidecarCapped(
   }
   return sidecar.readAsString();
 }
+
+// ── De sidecars naast een `<naam>.md` ────────────────────────────────────────
+//
+// Vijf bestanden, één vorm: bepaal het pad, laat een sidecar van een nieuwere
+// build met rust, en schrijf of verwijder. Dat stond vijf keer uitgeschreven —
+// twintig regels boilerplate per sidecar, met de kans om er bij de zesde één
+// stap van te vergeten. De stap die je niet mag vergeten is de middelste: half
+// inlezen en terugschrijven wist wat deze build niet begreep.
+//
+// Top-level en niet in `FileService`: geen van deze functies raakt een veld van
+// die klasse aan. Ze stonden daar alleen omdat ze bij het opslaan horen.
+
+/// Schrijft de sidecar met achtervoegsel [extension] naast [mdPath], of
+/// verwijdert hem wanneer [encode] niets oplevert — dan hoort er ook geen
+/// bestand te liggen.
+///
+/// Draagt het bestand op schijf een hogere versie dan [supportedVersion], dan
+/// gebeurt er niets: niet lezen én niet overschrijven (`sidecar_format.dart`).
+Future<void> _writeSidecarNextTo(
+  String mdPath,
+  String extension,
+  int supportedVersion,
+  String label,
+  String? Function() encode,
+) async {
+  final sidecar = File(p.setExtension(mdPath, extension));
+  if (await _sidecarUntouchable(sidecar, supportedVersion, label)) return;
+  final json = encode();
+  if (json == null) {
+    if (await sidecar.exists()) await sidecar.delete();
+  } else {
+    await writeStringAtomic(sidecar, json);
+  }
+}
+
+/// Pad van de annotatie-sidecar naast een deck `<naam>.md`.
+String _sidecarPath(String mdPath) => p.setExtension(mdPath, '.ink.json');
+
+Future<void> _writeSidecar(Deck deck, String filePath) => _writeSidecarNextTo(
+  filePath,
+  '.ink.json',
+  AnnotationCodec.version,
+  'ink',
+  () => AnnotationCodec.encode(deck.slides, deck.annotations),
+);
+
+/// Pad van de gebruikersnotities-sidecar.
+String _userNotesSidecarPath(String mdPath) =>
+    p.setExtension(mdPath, '.user-notes.json');
+
+Future<void> _writeUserNotesSidecar(Deck deck, String filePath) =>
+    _writeSidecarNextTo(
+      filePath,
+      '.user-notes.json',
+      UserNotesCodec.version,
+      'user-notes',
+      () => UserNotesCodec.encode(deck.slides, deck.userNotes),
+    );
+
+/// Pad van de MIAUW-dispositie-sidecar.
+String _miauwSidecarPath(String mdPath) =>
+    p.setExtension(mdPath, '.miauw.json');
+
+Future<void> _writeMiauwSidecar(Deck deck, String filePath) =>
+    _writeSidecarNextTo(
+      filePath,
+      '.miauw.json',
+      MiauwCodec.version,
+      'MIAUW',
+      () => MiauwCodec.encode(deck.miauwWaivers, deck.miauwConfirmations),
+    );
+
+/// Pad van de sidecar met terzijdegelegde privacybevindingen (§6.7, #651).
+String _dismissalsSidecarPath(String mdPath) =>
+    p.setExtension(mdPath, '.dismissals.json');
+
+Future<void> _writeDismissalsSidecar(Deck deck, String filePath) =>
+    _writeSidecarNextTo(
+      filePath,
+      '.dismissals.json',
+      DismissalCodec.version,
+      'dismissals',
+      () {
+        final value = deck.dismissals;
+        return value == null ? null : DismissalCodec.encode(value);
+      },
+    );
+
+/// Pad van de zegel-sidecar.
+String _sealSidecarPath(String mdPath) => p.setExtension(mdPath, '.seal.json');
+
+Future<void> _writeSealSidecar(Deck deck, String filePath) =>
+    _writeSidecarNextTo(
+      filePath,
+      '.seal.json',
+      SealCodec.version,
+      'seal',
+      () => SealCodec.encode(SealRecord.of(deck)),
+    );
 
 /// Of de sidecar op [sidecar] bij het opslaan met rust gelaten moet worden,
 /// inclusief het niet-verwijderen. [laag] noemt de laag in de logregel.

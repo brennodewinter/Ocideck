@@ -29,6 +29,7 @@ import 'annotation_codec.dart';
 import 'document_integrity.dart';
 import 'seal_codec.dart';
 import 'miauw_codec.dart';
+import 'privacy/dismissal_codec.dart';
 import 'sidecar_format.dart';
 import 'user_notes_codec.dart';
 import 'caption_service.dart';

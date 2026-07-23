@@ -70,6 +70,7 @@ extension _FileServiceProject on FileService {
     await _writeUserNotesSidecar(updatedDeck, filePath);
     await _writeMiauwSidecar(updatedDeck, filePath);
     await _writeSealSidecar(updatedDeck, filePath);
+    await _writeDismissalsSidecar(updatedDeck, filePath);
     return (deck: updatedDeck, chartWarnings: chartWarnings);
   }
 

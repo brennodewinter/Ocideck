@@ -55,6 +55,7 @@ class TrashService {
       '.user-notes.json',
       '.miauw.json',
       '.seal.json',
+      '.dismissals.json',
     ]) {
       final sidecar = p.setExtension(mdPath, ext);
       if (File(sidecar).existsSync()) targets.add(sidecar);
