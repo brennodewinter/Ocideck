@@ -1792,6 +1792,29 @@ const _dutchSourceLa = {
 const _dutchSourceAddLa = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'non omnis fasciculus nexus includi potuit (illegibilis aut extra proiectum)',
+  'punten': 'punctis',
+  'regels': 'ordinibus',
+  'categorieën': 'generibus',
+  'In de data': 'In datis',
+  'getoond': 'monstratae',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Columna ordinandi numeros non continet; maxima/minima et coniungere tum non prosunt.',
+  'Weergave beperken': 'Ostensionem finire',
+  'Beperk het aantal getoonde items': 'Numerum rerum monstratarum finire',
+  'Maximaal aantal items': 'Numerus maximus rerum',
+  'Welke items': 'Quae res',
+  'Laatste': 'Ultima',
+  'Hoogste': 'Maxima',
+  'Laagste': 'Minima',
+  'Sorteerkolom of reeks': 'Columna ordinandi aut series',
+  'Niet-getoonde items': 'Res non monstratae',
+  'Verbergen, wel bewaren': 'Celare, sed servare',
+  'Samenvoegen tot Overig': 'In Aliud coniungere',
+  'Toon hoeveel items verborgen zijn': 'Monstrare quot res celatae sint',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Partem tantum notarum, tabulae aut diagrammatis monstrare. Data pristina in plica servata manent.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Pro tabulis: index aut nomen columnae ordinandae. Pro diagrammatis: nomen seriei.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Repositorium interretiale solum in versione desktop praesto est.',
   'Online opslag': 'Repositorium interretiale',

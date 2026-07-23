@@ -446,6 +446,7 @@ extension _MarkdownParse on MarkdownService {
           type == SlideType.table && classTokens.contains('table-editable'),
       tableMarkOverdue:
           type == SlideType.table && classTokens.contains('table-overdue'),
+      viewLimit: d.viewLimit,
       timelineLayout: type == SlideType.timeline
           ? timelineLayoutFromTokens(classTokens)
           : TimelineLayout.auto,

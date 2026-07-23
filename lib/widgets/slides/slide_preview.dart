@@ -38,6 +38,7 @@ import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/finding_context_score.dart';
+import '../../services/display_window_service.dart';
 import '../../services/markdown_body_blocks.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/rich_text_layout.dart';
@@ -502,7 +503,7 @@ class SlidePreviewWidget extends StatelessWidget {
                 allowRemoteMedia: allowRemoteMedia,
                 mediaRedacted: slide.mediaRedacted,
                 decodeMaxEdge: decodeMaxEdge,
-                child: _buildSlide(),
+                child: _buildSlide(slide.projectionWithViewLimit()),
               ),
             ),
           ),
@@ -518,7 +519,7 @@ class SlidePreviewWidget extends StatelessWidget {
   int get _effectivePage =>
       slide.renderPage > 0 ? slide.renderPage : richTextPage;
 
-  Widget _buildSlide() {
+  Widget _buildSlide(Slide slide) {
     final markingTlp = effectiveTlp(deckTlp: tlp, slideTlp: slide.tlp);
     return LayoutBuilder(
       builder: (_, constraints) {
@@ -541,7 +542,7 @@ class SlidePreviewWidget extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                _buildContent(w),
+                _buildContent(slide, w),
                 // Decoratieve overlays (watermerk, footer, TLP, logo)
                 // mogen geen muis/tikken afvangen: anders blokkeren ze de hover
                 // van de media-knoppen eronder en het tikken om door te
@@ -632,7 +633,7 @@ class SlidePreviewWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildContent(double w) {
+  Widget _buildContent(Slide slide, double w) {
     switch (slide.type) {
       case SlideType.title:
         return _TitlePreview(
@@ -697,7 +698,7 @@ class SlidePreviewWidget extends StatelessWidget {
           profile: themeProfile,
         );
       case SlideType.video:
-        return _videoPreview(w);
+        return _videoPreview(slide, w);
       case SlideType.quote:
         return _QuotePreview(
           slide: slide,
@@ -769,13 +770,13 @@ class SlidePreviewWidget extends StatelessWidget {
       case SlideType.scorecard:
       case SlideType.assets:
       case SlideType.discoveries:
-        return _reportingPreview(slide.type, w);
+        return _reportingPreview(slide, slide.type, w);
       case SlideType.checklist:
       case SlideType.finding:
       case SlideType.findingsSummary:
       case SlideType.scopeMatrix:
       case SlideType.signOff:
-        return _securityPreview(w);
+        return _securityPreview(slide, w);
     }
   }
 
@@ -783,7 +784,11 @@ class SlidePreviewWidget extends StatelessWidget {
   /// `discoveries`). Split out of [_buildContent] for the length ratchet, the
   /// same reason [_securityPreview] exists — and so a further reporting type
   /// costs the dispatch switch nothing.
-  Widget _reportingPreview(SlideType type, double w) => switch (type) {
+  Widget _reportingPreview(
+    Slide slide,
+    SlideType type,
+    double w,
+  ) => switch (type) {
     SlideType.scorecard => _ScorecardPreview(
       slide: slide,
       w: w,
@@ -817,7 +822,7 @@ class SlidePreviewWidget extends StatelessWidget {
   /// was dus onbereikbaar geworden: dertig regels die niemand ooit zag en die
   /// geen test rood kon krijgen. De default blijft alleen staan om de switch
   /// totaal te houden, net als in [_reportingPreview].
-  Widget _securityPreview(double w) => switch (slide.type) {
+  Widget _securityPreview(Slide slide, double w) => switch (slide.type) {
     SlideType.finding => _FindingPreview(
       slide: slide,
       w: w,
@@ -857,7 +862,7 @@ class SlidePreviewWidget extends StatelessWidget {
     _ => const SizedBox.shrink(),
   };
 
-  Widget _videoPreview(double w) {
+  Widget _videoPreview(Slide slide, double w) {
     final source = VideoSource.parse(slide.videoPath);
     if (source.isEmbed) {
       return _VideoEmbedPreview(

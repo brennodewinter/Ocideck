@@ -1775,6 +1775,29 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'ne visus saistītos failus izdevās iekļaut (nenolasāmi vai ārpus projekta)',
+  'punten': 'aizzīmēm',
+  'regels': 'rindām',
+  'categorieën': 'kategorijām',
+  'In de data': 'Datos',
+  'getoond': 'rādīti',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Kārtošanas kolonnā nav skaitļu; augstākās/zemākās un apvienošana tad nav jēgpilnas.',
+  'Weergave beperken': 'Ierobežot attēlojumu',
+  'Beperk het aantal getoonde items': 'Ierobežot rādīto vienumu skaitu',
+  'Maximaal aantal items': 'Maksimālais vienumu skaits',
+  'Welke items': 'Kuri vienumi',
+  'Laatste': 'Pēdējās',
+  'Hoogste': 'Augstākās',
+  'Laagste': 'Zemākās',
+  'Sorteerkolom of reeks': 'Kārtošanas kolonna vai sērija',
+  'Niet-getoonde items': 'Nerādītie vienumi',
+  'Verbergen, wel bewaren': 'Paslēpt, bet saglabāt',
+  'Samenvoegen tot Overig': 'Apvienot kategorijā Cits',
+  'Toon hoeveel items verborgen zijn': 'Rādīt, cik vienumu ir paslēpti',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Rādīt tikai daļu no aizzīmēm, tabulas vai diagrammas. Sākotnējie dati paliek saglabāti failā.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Tabulām: kolonnas indekss vai nosaukums kārtošanai. Diagrammām: sērijas nosaukums.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Tiešsaistes krātuve ir pieejama tikai darbvirsmas versijā.',
   'Online opslag': 'Tiešsaistes krātuve',

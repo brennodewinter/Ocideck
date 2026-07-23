@@ -1793,6 +1793,30 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'не всі повʼязані файли вдалося включити (нечитабельні або поза проєктом)',
+  'punten': 'пунктів',
+  'regels': 'рядків',
+  'categorieën': 'категорій',
+  'In de data': 'У даних',
+  'getoond': 'показано',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Стовпець сортування не містить чисел; найвищі/найнижчі та об\'єднання тоді не мають сенсу.',
+  'Weergave beperken': 'Обмежити відображення',
+  'Beperk het aantal getoonde items': 'Обмежити кількість показаних елементів',
+  'Maximaal aantal items': 'Максимальна кількість елементів',
+  'Welke items': 'Які елементи',
+  'Laatste': 'Останні',
+  'Hoogste': 'Найвищі',
+  'Laagste': 'Найнижчі',
+  'Sorteerkolom of reeks': 'Стовпець сортування або ряд',
+  'Niet-getoonde items': 'Непоказані елементи',
+  'Verbergen, wel bewaren': 'Приховати, але зберегти',
+  'Samenvoegen tot Overig': 'Об\'єднати в Інше',
+  'Toon hoeveel items verborgen zijn':
+      'Показувати, скільки елементів приховано',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Показувати лише частину пунктів, таблиці або діаграми. Початкові дані залишаються збереженими у файлі.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Для таблиць: індекс або назва стовпця для сортування. Для діаграм: назва ряду.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Онлайн-сховище доступне лише в настільній версії.',
   'Online opslag': 'Онлайн-сховище',

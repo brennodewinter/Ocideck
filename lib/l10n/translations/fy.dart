@@ -736,6 +736,29 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'net elk keppele bestân koe mei (net lêsber of bûten it projekt)',
+  'punten': 'punten',
+  'regels': 'rigen',
+  'categorieën': 'kategoryen',
+  'In de data': 'Yn de data',
+  'getoond': 'toand',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'De sortearkolom befettet gjin getallen; heechste/leechste en gearfoegjen wurkje dan net sinfol.',
+  'Weergave beperken': 'Werjefte beheine',
+  'Beperk het aantal getoonde items': 'It tal toande items beheine',
+  'Maximaal aantal items': 'Maksimaal tal items',
+  'Welke items': 'Hokker items',
+  'Laatste': 'Lêste',
+  'Hoogste': 'Heechste',
+  'Laagste': 'Leechste',
+  'Sorteerkolom of reeks': 'Sortearkolom of rige',
+  'Niet-getoonde items': 'Net-toande items',
+  'Verbergen, wel bewaren': 'Ferbergje, wol bewarje',
+  'Samenvoegen tot Overig': 'Gearfoegje ta Oars',
+  'Toon hoeveel items verborgen zijn': 'Toan hoefolle items ferburgen binne',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Toan mar in part fan de bullets, tabel of grafyk. De oarspronklike data bliuwt yn it bestân bewarre.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Foar tabellen: kolomyndeks of namme om op te sortearjen. Foar grafiken: namme fan de rige.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Online opslach is allinnich beskikber yn de desktopferzje.',
   'Online opslag': 'Online opslach',

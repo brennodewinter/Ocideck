@@ -731,6 +731,29 @@ const _dutchSourceIt = {
 const _dutchSourceAddIt = {
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'non tutti i file collegati sono stati inclusi (illeggibili o fuori dal progetto)',
+  'punten': 'punti elenco',
+  'regels': 'righe',
+  'categorieën': 'categorie',
+  'In de data': 'Nei dati',
+  'getoond': 'mostrati',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'La colonna di ordinamento non contiene numeri; più alti/più bassi e l\'unione non hanno quindi senso.',
+  'Weergave beperken': 'Limita visualizzazione',
+  'Beperk het aantal getoonde items': 'Limita il numero di elementi mostrati',
+  'Maximaal aantal items': 'Numero massimo di elementi',
+  'Welke items': 'Quali elementi',
+  'Laatste': 'Ultimi',
+  'Hoogste': 'Più alti',
+  'Laagste': 'Più bassi',
+  'Sorteerkolom of reeks': 'Colonna di ordinamento o serie',
+  'Niet-getoonde items': 'Elementi non mostrati',
+  'Verbergen, wel bewaren': 'Nascondi, ma conserva',
+  'Samenvoegen tot Overig': 'Unisci in Altro',
+  'Toon hoeveel items verborgen zijn': 'Mostra quanti elementi sono nascosti',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Mostra solo una parte dei punti, della tabella o del grafico. I dati originali restano salvati nel file.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Per le tabelle: indice o nome della colonna per l\'ordinamento. Per i grafici: nome della serie.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'L\'archiviazione online è disponibile solo nella versione desktop.',
   'Online opslag': 'Archiviazione online',

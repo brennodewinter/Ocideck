@@ -1803,6 +1803,31 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'δεν ήταν δυνατή η συμπερίληψη όλων των συνδεδεμένων αρχείων (μη αναγνώσιμα ή εκτός του έργου)',
+  'punten': 'κουκκίδες',
+  'regels': 'σειρές',
+  'categorieën': 'κατηγορίες',
+  'In de data': 'Στα δεδομένα',
+  'getoond': 'εμφανίζονται',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Η στήλη ταξινόμησης δεν περιέχει αριθμούς· τα υψηλότερα/χαμηλότερα και η συγχώνευση δεν έχουν τότε νόημα.',
+  'Weergave beperken': 'Περιορισμός εμφάνισης',
+  'Beperk het aantal getoonde items':
+      'Περιορισμός του αριθμού των εμφανιζόμενων στοιχείων',
+  'Maximaal aantal items': 'Μέγιστος αριθμός στοιχείων',
+  'Welke items': 'Ποια στοιχεία',
+  'Laatste': 'Τελευταία',
+  'Hoogste': 'Υψηλότερα',
+  'Laagste': 'Χαμηλότερα',
+  'Sorteerkolom of reeks': 'Στήλη ταξινόμησης ή σειρά',
+  'Niet-getoonde items': 'Μη εμφανιζόμενα στοιχεία',
+  'Verbergen, wel bewaren': 'Απόκρυψη, αλλά διατήρηση',
+  'Samenvoegen tot Overig': 'Συγχώνευση σε Άλλο',
+  'Toon hoeveel items verborgen zijn':
+      'Εμφάνιση του πλήθους των κρυφών στοιχείων',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Εμφάνιση μόνο ενός μέρους των κουκκίδων, του πίνακα ή του γραφήματος. Τα αρχικά δεδομένα παραμένουν αποθηκευμένα στο αρχείο.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Για πίνακες: δείκτης ή όνομα στήλης για ταξινόμηση. Για γραφήματα: όνομα της σειράς.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Η διαδικτυακή αποθήκευση είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
   'Online opslag': 'Διαδικτυακή αποθήκευση',

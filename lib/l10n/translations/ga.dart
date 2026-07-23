@@ -1811,6 +1811,30 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'níorbh fhéidir gach comhad nasctha a chur san áireamh (doléite nó lasmuigh den tionscadal)',
+  'punten': 'urchar',
+  'regels': 'ró',
+  'categorieën': 'catagóir',
+  'In de data': 'Sna sonraí',
+  'getoond': 'ar taispeáint',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Níl uimhreacha sa cholún sórtála; ní fiú is airde/is ísle ná an cumasc a úsáid mar sin.',
+  'Weergave beperken': 'Teorannaigh an taispeáint',
+  'Beperk het aantal getoonde items':
+      'Teorannaigh líon na míreanna a thaispeántar',
+  'Maximaal aantal items': 'Uaslíon míreanna',
+  'Welke items': 'Cé na míreanna',
+  'Laatste': 'Deireanach',
+  'Hoogste': 'Is airde',
+  'Laagste': 'Is ísle',
+  'Sorteerkolom of reeks': 'Colún sórtála nó sraith',
+  'Niet-getoonde items': 'Míreanna nach dtaispeántar',
+  'Verbergen, wel bewaren': 'Folaigh, ach coinnigh',
+  'Samenvoegen tot Overig': 'Cumaisc isteach in Eile',
+  'Toon hoeveel items verborgen zijn': 'Taispeáin cé mhéad mír atá folaithe',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Ná taispeáin ach cuid de na hurchair, den tábla nó den chairt. Fanann na sonraí bunaidh sábháilte sa chomhad.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Do tháblaí: innéacs nó ainm an cholúin le sórtáil. Do chairteacha: ainm na sraithe.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Níl stóráil ar líne ar fáil ach sa leagan deisce.',
   'Online opslag': 'Stóráil ar líne',

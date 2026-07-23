@@ -732,6 +732,31 @@ const _dutchSourceEs = {
 const _dutchSourceAddEs = {
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'no se pudieron incluir todos los archivos vinculados (ilegibles o fuera del proyecto)',
+  'punten': 'viñetas',
+  'regels': 'filas',
+  'categorieën': 'categorías',
+  'In de data': 'En los datos',
+  'getoond': 'mostrados',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'La columna de ordenación no contiene números; más altos/más bajos y la combinación no tienen sentido entonces.',
+  'Weergave beperken': 'Limitar visualización',
+  'Beperk het aantal getoonde items':
+      'Limitar el número de elementos mostrados',
+  'Maximaal aantal items': 'Número máximo de elementos',
+  'Welke items': 'Qué elementos',
+  'Laatste': 'Últimos',
+  'Hoogste': 'Más altos',
+  'Laagste': 'Más bajos',
+  'Sorteerkolom of reeks': 'Columna de ordenación o serie',
+  'Niet-getoonde items': 'Elementos no mostrados',
+  'Verbergen, wel bewaren': 'Ocultar, pero conservar',
+  'Samenvoegen tot Overig': 'Combinar en Otro',
+  'Toon hoeveel items verborgen zijn':
+      'Mostrar cuántos elementos están ocultos',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Mostrar solo una parte de las viñetas, la tabla o el gráfico. Los datos originales se conservan en el archivo.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Para tablas: índice o nombre de la columna por la que ordenar. Para gráficos: nombre de la serie.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'El almacenamiento en línea solo está disponible en la versión de escritorio.',
   'Online opslag': 'Almacenamiento en línea',

@@ -1779,6 +1779,30 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'nöd alli verlinkte Dateie hend chöne mit (nöd läsbar oder usserhalb vom Projäkt)',
+  'punten': 'Pünkt',
+  'regels': 'Zile',
+  'categorieën': 'Kategorie',
+  'In de data': 'I de Date',
+  'getoond': 'aazeigt',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'D\'Sortier-Spalte enthaltet kei Zahle; Höchschti/Tüfschti und s\'Zämefasse sind denn nöd sinnvoll.',
+  'Weergave beperken': 'Aazeig begränze',
+  'Beperk het aantal getoonde items':
+      'D\'Aazahl vo de aazeigte Elemänt begränze',
+  'Maximaal aantal items': 'Maximali Aazahl Elemänt',
+  'Welke items': 'Weli Elemänt',
+  'Laatste': 'Letschti',
+  'Hoogste': 'Höchschti',
+  'Laagste': 'Tüfschti',
+  'Sorteerkolom of reeks': 'Sortier-Spalte oder Reihe',
+  'Niet-getoonde items': 'Nöd aazeigti Elemänt',
+  'Verbergen, wel bewaren': 'Uusblände, aber bhalte',
+  'Samenvoegen tot Overig': 'Zu Anders zämefasse',
+  'Toon hoeveel items verborgen zijn': 'Zeige, wie vil Elemänt versteckt sind',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Zeig nume en Teil vo de Bullets, de Tabälle oder em Diagramm. D\'Original-Date blibed i de Datei erhalte.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Für Tabälle: Spalte-Index oder -Name zum Sortiere. Für Diagramm: Name vo de Reihe.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Online-Spiicher isch nume i de Desktop-Version verfüegbar.',
   'Online opslag': 'Online-Spiicher',

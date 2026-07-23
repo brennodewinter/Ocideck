@@ -1779,6 +1779,29 @@ const _dutchSourceCs = {
 const _dutchSourceAddCs = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'ne všechny propojené soubory se podařilo zahrnout (nečitelné nebo mimo projekt)',
+  'punten': 'odrážek',
+  'regels': 'řádků',
+  'categorieën': 'kategorií',
+  'In de data': 'V datech',
+  'getoond': 'zobrazeno',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Sloupec řazení neobsahuje čísla; nejvyšší/nejnižší a sloučení pak nedávají smysl.',
+  'Weergave beperken': 'Omezit zobrazení',
+  'Beperk het aantal getoonde items': 'Omezit počet zobrazených položek',
+  'Maximaal aantal items': 'Maximální počet položek',
+  'Welke items': 'Které položky',
+  'Laatste': 'Poslední',
+  'Hoogste': 'Nejvyšší',
+  'Laagste': 'Nejnižší',
+  'Sorteerkolom of reeks': 'Sloupec řazení nebo řada',
+  'Niet-getoonde items': 'Nezobrazené položky',
+  'Verbergen, wel bewaren': 'Skrýt, ale zachovat',
+  'Samenvoegen tot Overig': 'Sloučit do Ostatní',
+  'Toon hoeveel items verborgen zijn': 'Zobrazit, kolik položek je skryto',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Zobrazit jen část odrážek, tabulky nebo grafu. Původní data zůstávají v souboru zachována.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Pro tabulky: index nebo název sloupce pro řazení. Pro grafy: název řady.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Online úložiště je dostupné pouze v desktopové verzi.',
   'Online opslag': 'Online úložiště',

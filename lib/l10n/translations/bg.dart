@@ -1798,6 +1798,30 @@ const _dutchSourceBg = {
 const _dutchSourceAddBg = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'не всички свързани файлове можаха да бъдат включени (нечетими или извън проекта)',
+  'punten': 'точки',
+  'regels': 'реда',
+  'categorieën': 'категории',
+  'In de data': 'В данните',
+  'getoond': 'показани',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Колоната за сортиране не съдържа числа; най-високи/най-ниски и обединяването тогава нямат смисъл.',
+  'Weergave beperken': 'Ограничаване на показването',
+  'Beperk het aantal getoonde items':
+      'Ограничаване на броя на показаните елементи',
+  'Maximaal aantal items': 'Максимален брой елементи',
+  'Welke items': 'Кои елементи',
+  'Laatste': 'Последни',
+  'Hoogste': 'Най-високи',
+  'Laagste': 'Най-ниски',
+  'Sorteerkolom of reeks': 'Колона за сортиране или серия',
+  'Niet-getoonde items': 'Непоказани елементи',
+  'Verbergen, wel bewaren': 'Скриване, но запазване',
+  'Samenvoegen tot Overig': 'Обединяване в Друго',
+  'Toon hoeveel items verborgen zijn': 'Показване колко елемента са скрити',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Показване само на част от водещите символи, таблицата или диаграмата. Първоначалните данни остават запазени във файла.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'За таблици: индекс или име на колоната за сортиране. За диаграми: име на серията.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Онлайн съхранението е налично само в настолната версия.',
   'Online opslag': 'Онлайн съхранение',

@@ -1775,6 +1775,29 @@ const _dutchSourceSv = {
 const _dutchSourceAddSv = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'inte alla länkade filer kunde tas med (oläsliga eller utanför projektet)',
+  'punten': 'punkter',
+  'regels': 'rader',
+  'categorieën': 'kategorier',
+  'In de data': 'I data',
+  'getoond': 'visas',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Sorteringskolumnen innehåller inga tal; högsta/lägsta och sammanslagning är då inte meningsfulla.',
+  'Weergave beperken': 'Begränsa visning',
+  'Beperk het aantal getoonde items': 'Begränsa antalet visade objekt',
+  'Maximaal aantal items': 'Maximalt antal objekt',
+  'Welke items': 'Vilka objekt',
+  'Laatste': 'Sista',
+  'Hoogste': 'Högsta',
+  'Laagste': 'Lägsta',
+  'Sorteerkolom of reeks': 'Sorteringskolumn eller serie',
+  'Niet-getoonde items': 'Objekt som inte visas',
+  'Verbergen, wel bewaren': 'Dölj, men behåll',
+  'Samenvoegen tot Overig': 'Slå ihop till Övrigt',
+  'Toon hoeveel items verborgen zijn': 'Visa hur många objekt som är dolda',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Visa bara en del av punkterna, tabellen eller diagrammet. Originaldata finns kvar i filen.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'För tabeller: kolumnindex eller kolumnnamn att sortera efter. För diagram: seriens namn.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Onlinelagring är endast tillgänglig i skrivbordsversionen.',
   'Online opslag': 'Onlinelagring',

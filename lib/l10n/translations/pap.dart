@@ -735,6 +735,29 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'no tur archivo konektá por a bai huntu (no por lesa nan òf nan ta pafó di e proyekto)',
+  'punten': 'punto',
+  'regels': 'fila',
+  'categorieën': 'kategoria',
+  'In de data': 'Den e data',
+  'getoond': 'mustrá',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'E kolumna di ordenashon no tin number; mas haltu/mas abou i kombiná no ta traha bon e ora ei.',
+  'Weergave beperken': 'Limitá bista',
+  'Beperk het aantal getoonde items': 'Limitá e kantidat di item mustrá',
+  'Maximaal aantal items': 'Kantidat máksimo di item',
+  'Welke items': 'Kua item',
+  'Laatste': 'Último',
+  'Hoogste': 'Mas haltu',
+  'Laagste': 'Mas abou',
+  'Sorteerkolom of reeks': 'Kolumna di ordenashon òf seri',
+  'Niet-getoonde items': 'Item no mustrá',
+  'Verbergen, wel bewaren': 'Skonde, pero wardá',
+  'Samenvoegen tot Overig': 'Kombiná den Otro',
+  'Toon hoeveel items verborgen zijn': 'Mustra kuantu item ta skondí',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Mustra solamente un parti di e bullets, tabel òf gráfiko. E data original ta keda wardá den e archivo.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Pa tabel: index òf nòmber di kolumna pa ordená. Pa gráfiko: nòmber di e seri.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Almasenamentu online ta disponibel solamente den e version di desktop.',
   'Online opslag': 'Almasenamentu online',

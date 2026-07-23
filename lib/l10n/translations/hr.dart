@@ -1782,6 +1782,29 @@ const _dutchSourceHr = {
 const _dutchSourceAddHr = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'nisu sve povezane datoteke mogle biti uključene (nečitljive ili izvan projekta)',
+  'punten': 'natuknica',
+  'regels': 'redaka',
+  'categorieën': 'kategorija',
+  'In de data': 'U podacima',
+  'getoond': 'prikazano',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Stupac sortiranja ne sadrži brojeve; najviši/najniži i spajanje tada nemaju smisla.',
+  'Weergave beperken': 'Ograniči prikaz',
+  'Beperk het aantal getoonde items': 'Ograniči broj prikazanih stavki',
+  'Maximaal aantal items': 'Najveći broj stavki',
+  'Welke items': 'Koje stavke',
+  'Laatste': 'Posljednjih',
+  'Hoogste': 'Najviših',
+  'Laagste': 'Najnižih',
+  'Sorteerkolom of reeks': 'Stupac sortiranja ili niz',
+  'Niet-getoonde items': 'Neprikazane stavke',
+  'Verbergen, wel bewaren': 'Sakrij, ali zadrži',
+  'Samenvoegen tot Overig': 'Spoji u Ostalo',
+  'Toon hoeveel items verborgen zijn': 'Prikaži koliko je stavki skriveno',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Prikaži samo dio natuknica, tablice ili grafikona. Izvorni podaci ostaju pohranjeni u datoteci.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Za tablice: indeks ili naziv stupca za sortiranje. Za grafikone: naziv niza.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Mrežna pohrana dostupna je samo u verziji za računalo.',
   'Online opslag': 'Mrežna pohrana',

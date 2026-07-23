@@ -1780,6 +1780,30 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'nem minden csatolt fájlt sikerült bevenni (olvashatatlan vagy a projekten kívüli)',
+  'punten': 'pont',
+  'regels': 'sor',
+  'categorieën': 'kategória',
+  'In de data': 'Az adatokban',
+  'getoond': 'megjelenítve',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'A rendezési oszlop nem tartalmaz számokat; a legmagasabb/legalacsonyabb és az összevonás így nem értelmezhető.',
+  'Weergave beperken': 'Megjelenítés korlátozása',
+  'Beperk het aantal getoonde items':
+      'A megjelenített elemek számának korlátozása',
+  'Maximaal aantal items': 'Elemek maximális száma',
+  'Welke items': 'Mely elemek',
+  'Laatste': 'Utolsó',
+  'Hoogste': 'Legmagasabb',
+  'Laagste': 'Legalacsonyabb',
+  'Sorteerkolom of reeks': 'Rendezési oszlop vagy sorozat',
+  'Niet-getoonde items': 'Nem megjelenített elemek',
+  'Verbergen, wel bewaren': 'Elrejtés, de megőrzés',
+  'Samenvoegen tot Overig': 'Összevonás az Egyéb kategóriába',
+  'Toon hoeveel items verborgen zijn': 'Mutassa, hány elem van elrejtve',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Csak a felsorolás, a táblázat vagy a diagram egy részének megjelenítése. Az eredeti adatok a fájlban megőrződnek.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Táblázatoknál: a rendezéshez használt oszlop indexe vagy neve. Diagramoknál: a sorozat neve.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Az online tárolás csak az asztali verzióban érhető el.',
   'Online opslag': 'Online tárolás',

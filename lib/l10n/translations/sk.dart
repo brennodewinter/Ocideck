@@ -1783,6 +1783,29 @@ const _dutchSourceSk = {
 const _dutchSourceAddSk = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'nie všetky prepojené súbory sa podarilo zahrnúť (nečitateľné alebo mimo projektu)',
+  'punten': 'odrážok',
+  'regels': 'riadkov',
+  'categorieën': 'kategórií',
+  'In de data': 'V údajoch',
+  'getoond': 'zobrazené',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Stĺpec zoradenia neobsahuje čísla; najvyššie/najnižšie a zlúčenie potom nedávajú zmysel.',
+  'Weergave beperken': 'Obmedziť zobrazenie',
+  'Beperk het aantal getoonde items': 'Obmedziť počet zobrazených položiek',
+  'Maximaal aantal items': 'Maximálny počet položiek',
+  'Welke items': 'Ktoré položky',
+  'Laatste': 'Posledných',
+  'Hoogste': 'Najvyšších',
+  'Laagste': 'Najnižších',
+  'Sorteerkolom of reeks': 'Stĺpec zoradenia alebo rad',
+  'Niet-getoonde items': 'Nezobrazené položky',
+  'Verbergen, wel bewaren': 'Skryť, ale ponechať',
+  'Samenvoegen tot Overig': 'Zlúčiť do Ostatné',
+  'Toon hoeveel items verborgen zijn': 'Zobraziť, koľko položiek je skrytých',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Zobraziť len časť odrážok, tabuľky alebo grafu. Pôvodné údaje zostávajú v súbore zachované.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Pre tabuľky: index alebo názov stĺpca na zoradenie. Pre grafy: názov radu.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Online úložisko je dostupné len v desktopovej verzii.',
   'Online opslag': 'Online úložisko',

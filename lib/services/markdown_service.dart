@@ -6,6 +6,8 @@ import '../models/cockpit.dart';
 import '../models/deck.dart';
 import '../models/privacy_disposition.dart';
 import '../models/quality_disposition.dart';
+import '../models/display_window_spec.dart';
+import '../services/display_window_service.dart';
 import '../models/document_signature.dart';
 import '../models/finding_spec.dart';
 import '../models/seal_record.dart';
@@ -368,6 +370,28 @@ class MarkdownService {
     bool inlineChartData = false,
     bool forExport = false,
   }) {
+    // De export krijgt de projectie, en dan zónder het directief: een
+    // al-toegepaste limiet die als ocideck_view_* blijft meereizen vuurt bij
+    // de ontvanger opnieuw — over het ingebakken bijschrift en de Overig-rij
+    // heen, die dan als data meedingen (bewaker-bevinding #672). Het
+    // geëxporteerde .md is wat de ontvanger ziet, zonder verborgen hendel.
+    final activeSlide = forExport
+        ? slide.projectionWithViewLimit().copyWith(clearViewLimit: true)
+        : slide;
+    return _generateSlideImpl(
+      activeSlide,
+      themeProfile: themeProfile,
+      inlineChartData: inlineChartData,
+      forExport: forExport,
+    );
+  }
+
+  String _generateSlideImpl(
+    Slide slide, {
+    ThemeProfile? themeProfile,
+    bool inlineChartData = false,
+    bool forExport = false,
+  }) {
     final buf = StringBuffer();
     final cssClass = slide.cssClass.isNotEmpty
         ? slide.cssClass
@@ -474,58 +498,6 @@ class MarkdownService {
 
     buf.writeln();
     return buf.toString();
-  }
-
-  /// De directive-commentaren bovenaan een slide, plus de scheidingsregel erna.
-  void _writeSlideDirectives(
-    StringBuffer buf,
-    Slide slide,
-    List<String> classes,
-    bool forExport,
-  ) {
-    if (classes.isNotEmpty) {
-      buf.writeln('<!-- _class: ${classes.join(' ')} -->');
-    }
-    // Finding-group linkage (PENTEST_MIAUW §3.1): a shared id + role tie a
-    // header card to its detail/evidence slides. Written for any slide that
-    // joins a group — a `finding` header, but also a `bullets` detail or an
-    // `image` evidence slide — so the whole group round-trips as a unit. Role is
-    // only meaningful alongside an id, so both ride together.
-    if (slide.findingId.isNotEmpty) {
-      buf.writeln('<!-- ocideck_finding_id: ${slide.findingId} -->');
-      buf.writeln('<!-- ocideck_finding_role: ${slide.findingRole.name} -->');
-    }
-    // AI-assist markers (AI_ASSIST §16.3): the fields whose text was drafted by
-    // AI and not yet reviewed. Persisted so the seal gate survives a save/open.
-    if (slide.aiAssistedFields.isNotEmpty) {
-      buf.writeln(
-        '<!-- ocideck_ai_assisted: ${slide.aiAssistedFields.join(', ')} -->',
-      );
-    }
-    // Checklist↔scope-object link (feedback #8): the scope object this checklist
-    // covers, so it round-trips as a unit with the scope matrix.
-    if (slide.type == SlideType.checklist && slide.checklistScope.isNotEmpty) {
-      buf.writeln('<!-- ocideck_checklist_scope: ${slide.checklistScope} -->');
-    }
-    // Media-redactiemarkering, alleen voor de export. Op een geprojecteerde slide
-    // (privacy) is [Slide.mediaRedacted] gezet en het beeldpad leeggehaald; de
-    // widget-exports (PDF/PPTX) tekenen dan een zwart vlak, maar de HTML-export
-    // werkt op deze markdown en zag alleen een lege plek — de tekst liet wél
-    // zwarte blokken zien, het beeld verdween spoorloos. De marker geeft de
-    // HTML-renderer iets om dat vlak alsnog te tekenen. Nooit in een bewaard
-    // bestand: [mediaRedacted] bestaat alleen in de projectie, en de poort staat
-    // óók op [forExport].
-    final mediaRedactedMarker = forExport && slide.mediaRedacted;
-    if (mediaRedactedMarker) {
-      buf.writeln('<!-- ocideck_media_redacted -->');
-    }
-    if (classes.isNotEmpty ||
-        slide.findingId.isNotEmpty ||
-        slide.aiAssistedFields.isNotEmpty ||
-        slide.checklistScope.isNotEmpty ||
-        mediaRedactedMarker) {
-      buf.writeln();
-    }
   }
 
   // ── Parsing ─────────────────────────────────────────────────────────────────
@@ -645,5 +617,66 @@ class MarkdownService {
       }
     }
     return (marp: marp, theme: theme, title: title);
+  }
+}
+
+/// De directive-commentaren bovenaan een slide, plus de scheidingsregel erna.
+///
+/// Top-level en niet op [MarkdownService]: hij raakt geen instantiestaat, en
+/// de klasse zit tegen haar plafond (#672 duwde eroverheen).
+void _writeSlideDirectives(
+  StringBuffer buf,
+  Slide slide,
+  List<String> classes,
+  bool forExport,
+) {
+  if (classes.isNotEmpty) {
+    buf.writeln('<!-- _class: ${classes.join(' ')} -->');
+  }
+  // Finding-group linkage (PENTEST_MIAUW §3.1): a shared id + role tie a
+  // header card to its detail/evidence slides. Written for any slide that
+  // joins a group — a `finding` header, but also a `bullets` detail or an
+  // `image` evidence slide — so the whole group round-trips as a unit. Role is
+  // only meaningful alongside an id, so both ride together.
+  if (slide.findingId.isNotEmpty) {
+    buf.writeln('<!-- ocideck_finding_id: ${slide.findingId} -->');
+    buf.writeln('<!-- ocideck_finding_role: ${slide.findingRole.name} -->');
+  }
+  // AI-assist markers (AI_ASSIST §16.3): the fields whose text was drafted by
+  // AI and not yet reviewed. Persisted so the seal gate survives a save/open.
+  if (slide.aiAssistedFields.isNotEmpty) {
+    buf.writeln(
+      '<!-- ocideck_ai_assisted: ${slide.aiAssistedFields.join(', ')} -->',
+    );
+  }
+  // Checklist↔scope-object link (feedback #8): the scope object this checklist
+  // covers, so it round-trips as a unit with the scope matrix.
+  if (slide.type == SlideType.checklist && slide.checklistScope.isNotEmpty) {
+    buf.writeln('<!-- ocideck_checklist_scope: ${slide.checklistScope} -->');
+  }
+  // Non-destructive view limit for data-driven slides.
+  final viewComments = slide.viewLimit?.toComments() ?? const {};
+  for (final entry in viewComments.entries) {
+    buf.writeln('<!-- ${entry.key}: ${entry.value} -->');
+  }
+  // Media-redactiemarkering, alleen voor de export. Op een geprojecteerde slide
+  // (privacy) is [Slide.mediaRedacted] gezet en het beeldpad leeggehaald; de
+  // widget-exports (PDF/PPTX) tekenen dan een zwart vlak, maar de HTML-export
+  // werkt op deze markdown en zag alleen een lege plek — de tekst liet wél
+  // zwarte blokken zien, het beeld verdween spoorloos. De marker geeft de
+  // HTML-renderer iets om dat vlak alsnog te tekenen. Nooit in een bewaard
+  // bestand: [mediaRedacted] bestaat alleen in de projectie, en de poort staat
+  // óók op [forExport].
+  final mediaRedactedMarker = forExport && slide.mediaRedacted;
+  if (mediaRedactedMarker) {
+    buf.writeln('<!-- ocideck_media_redacted -->');
+  }
+  if (classes.isNotEmpty ||
+      slide.findingId.isNotEmpty ||
+      slide.aiAssistedFields.isNotEmpty ||
+      slide.checklistScope.isNotEmpty ||
+      viewComments.isNotEmpty ||
+      mediaRedactedMarker) {
+    buf.writeln();
   }
 }

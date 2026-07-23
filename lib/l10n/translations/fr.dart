@@ -735,6 +735,29 @@ const _dutchSourceFr = {
 const _dutchSourceAddFr = {
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'tous les fichiers liés n\'ont pas pu être inclus (illisibles ou hors du projet)',
+  'punten': 'puces',
+  'regels': 'lignes',
+  'categorieën': 'catégories',
+  'In de data': 'Dans les données',
+  'getoond': 'affichés',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'La colonne de tri ne contient pas de nombres ; les plus élevés/les plus faibles et le regroupement n\'ont alors pas de sens.',
+  'Weergave beperken': 'Limiter l\'affichage',
+  'Beperk het aantal getoonde items': 'Limiter le nombre d\'éléments affichés',
+  'Maximaal aantal items': 'Nombre maximal d\'éléments',
+  'Welke items': 'Quels éléments',
+  'Laatste': 'Derniers',
+  'Hoogste': 'Les plus élevés',
+  'Laagste': 'Les plus faibles',
+  'Sorteerkolom of reeks': 'Colonne de tri ou série',
+  'Niet-getoonde items': 'Éléments non affichés',
+  'Verbergen, wel bewaren': 'Masquer, mais conserver',
+  'Samenvoegen tot Overig': 'Regrouper dans Autre',
+  'Toon hoeveel items verborgen zijn': 'Afficher le nombre d\'éléments masqués',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'N\'afficher qu\'une partie des puces, du tableau ou du graphique. Les données d\'origine restent conservées dans le fichier.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'Pour les tableaux : index ou nom de la colonne de tri. Pour les graphiques : nom de la série.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Le stockage en ligne n\'est disponible que dans la version de bureau.',
   'Online opslag': 'Stockage en ligne',

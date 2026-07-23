@@ -251,6 +251,25 @@ read a book to find out.
   alle 31 talen.
 
 ### Added
+- **Een dia kan een deel van zijn data tonen zonder iets weg te gooien
+  (#672).** Bullets, tabellen en grafieken uit een grote dataset — een import
+  van duizenden regels, een jaar aan metingen — waren alleen leesbaar te
+  krijgen door data te verwijderen. Onder *Weergave beperken* in de
+  dia-instellingen kies je nu een maximum, wélke items (eerste/laatste in
+  bronvolgorde, hoogste/laagste op een kolom of reeks) en wat er met de rest
+  gebeurt: verborgen maar bewaard, of opgeteld tot één "Overig". De limiet is
+  een projectie — voorbeeld, presentator, PDF, PPTX en HTML tonen dezelfde
+  selectie, en het bestand houdt álles: opslaan en heropenen verliest nooit
+  verborgen items. De keuzes die pijn hadden kunnen doen zijn dichtgezet: een
+  tijdreeks op "hoogste" sorteert stilzwijgend op *laatste* (chronologie gaat
+  vóór), gelijke waarden houden hun bronvolgorde (zelfde top-N bij elk
+  heropenen), en de editor toont hoeveel er is en waarschuwt bij een
+  sorteerkolom zonder getallen. Opgeslagen als leesbare
+  `ocideck_view_*`-aanwijzingen per dia; een deck zonder die aanwijzingen
+  gedraagt zich exact als voorheen. *(Adoptie van gestrand sessiewerk; de
+  bijbehorende OpenKAT-importlaag staat geparkeerd op een wip-tak — zie
+  #767.)*
+
 - **Online opslag is een uitbreiding geworden: standaard uit, zodat de
   interface stil begint (#570).** WebDAV, S3 en git staan nu als modulekaart op
   *Instellingen → Uitbreidingen*, naast Informatieveiligheid en AI-assistentie.

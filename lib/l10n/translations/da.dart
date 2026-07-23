@@ -1775,6 +1775,30 @@ const _dutchSourceDa = {
 const _dutchSourceAddDa = <String, String>{
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'ikke alle tilknyttede filer kunne komme med (ulæselige eller uden for projektet)',
+  'punten': 'punkter',
+  'regels': 'rækker',
+  'categorieën': 'kategorier',
+  'In de data': 'I dataene',
+  'getoond': 'vist',
+  'De sorteerkolom bevat geen getallen; hoogste/laagste en samenvoegen werken dan niet zinvol.':
+      'Sorteringskolonnen indeholder ingen tal; højeste/laveste og sammenlægning giver så ikke mening.',
+  'Weergave beperken': 'Begræns visning',
+  'Beperk het aantal getoonde items': 'Begræns antallet af viste elementer',
+  'Maximaal aantal items': 'Maksimalt antal elementer',
+  'Welke items': 'Hvilke elementer',
+  'Laatste': 'Sidste',
+  'Hoogste': 'Højeste',
+  'Laagste': 'Laveste',
+  'Sorteerkolom of reeks': 'Sorteringskolonne eller serie',
+  'Niet-getoonde items': 'Ikke-viste elementer',
+  'Verbergen, wel bewaren': 'Skjul, men behold',
+  'Samenvoegen tot Overig': 'Slå sammen til Andet',
+  'Toon hoeveel items verborgen zijn':
+      'Vis, hvor mange elementer der er skjult',
+  'Toon alleen een deel van de bullets, tabel of grafiek. De oorspronkelijke data blijft in het bestand bewaard.':
+      'Vis kun en del af bullets, tabellen eller diagrammet. De oprindelige data forbliver gemt i filen.',
+  'Voor tabellen: kolomindex of naam om op te sorteren. Voor grafieken: naam van de reeks.':
+      'For tabeller: kolonneindeks eller -navn at sortere efter. For diagrammer: seriens navn.',
   'Online opslag is alleen beschikbaar in de desktopversie.':
       'Onlinelagring er kun tilgængelig i desktopversionen.',
   'Online opslag': 'Onlinelagring',
