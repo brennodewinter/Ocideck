@@ -2762,6 +2762,7 @@ const _dutchSourceAddTr = <String, String>{
       'Mühür, tam olarak bu baytlar hakkında bir beyandır. Bir çalışma dalı yeniden yazılabilir, cherry-pick edilebilir ve zorla gönderilebilir; bunların hepsini atlatan bir mühür artık hiçbir şey söylemez.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Bu sunumu dosya olarak veya .ocideck paketi olarak kaydedin. Mühür bir sürüm etiketine aittir ve o yol henüz yok — o zamana kadar güvende olduğu yer burası.',
+  'Deze is beoordeeld en mag blijven': 'Gözden geçirildi, bu kalabilir',
   'De export is gestopt tijdens het voorbereiden.':
       'Dışa aktarma hazırlık sırasında durdu.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

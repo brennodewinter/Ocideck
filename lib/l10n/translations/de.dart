@@ -742,6 +742,7 @@ const _dutchSourceAddDe = {
       'Ein Siegel ist eine Aussage über genau diese Bytes. Ein Arbeitsbranch kann umgeschrieben, gecherrypickt und force-gepusht werden, und ein Siegel, das das übersteht, sagt nichts mehr aus.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Speichern Sie dieses Deck als Datei oder als .ocideck-Paket. Das Siegel gehört zu einem Release-Tag, und dieser Weg existiert noch nicht — bis dahin ist es hier sicher aufgehoben.',
+  'Deze is beoordeeld en mag blijven': 'Geprüft, dieser Befund darf bleiben',
   'De export is gestopt tijdens het voorbereiden.':
       'Der Export wurde während der Vorbereitung abgebrochen.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

@@ -1805,6 +1805,7 @@ const _dutchSourceAddBg = <String, String>{
       'Печатът е твърдение за точно тези байтове. Работният клон може да бъде пренаписан, cherry-pick-нат и изтласкан принудително, а печат, който преживее всичко това, вече не значи нищо.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Запазете тази презентация като файл или като пакет .ocideck. Печатът принадлежи на етикет за издание, а този път още го няма — дотогава тук е на сигурно място.',
+  'Deze is beoordeeld en mag blijven': 'Прегледано, това може да остане',
   'De export is gestopt tijdens het voorbereiden.':
       'Експортът спря по време на подготовката.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

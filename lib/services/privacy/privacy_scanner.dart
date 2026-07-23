@@ -40,6 +40,7 @@ import '../../models/deck.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/privacy_lexicon.dart';
 import '../../models/slide.dart';
+import 'dismissal_codec.dart';
 import 'privacy_allowlist.dart';
 import 'privacy_bulk_rules.dart';
 import 'privacy_card_rules.dart';
@@ -64,6 +65,7 @@ import 'privacy_secret_rules.dart';
 
 part 'privacy_scanner_detectors.dart';
 part 'privacy_scanner_fragments.dart';
+part 'privacy_scanner_dismissals.dart';
 
 /// Eén tekstfragment van een slide, met de veldnaam waar het uit komt.
 /// Eén doorzoekbaar tekstveld.
@@ -75,91 +77,6 @@ part 'privacy_scanner_fragments.dart';
 /// poort keek alleen binnen het fragment zelf, dus die kolomkop kon per
 /// definitie nooit meetellen.
 typedef _Fragment = ({String field, int index, String text, String context});
-
-/// De tekst waar [finding] op sloeg, of null wanneer die niet meer bestaat.
-///
-/// Nodig om een bevinding terzijde te kunnen leggen (#651): de terzijdelegging
-/// bewaart `SHA-256(zout ‖ tekst)`, en die tekst staat nergens in de bevinding
-/// zelf. Met opzet niet — `PrivacyFinding.maskedSample` is gemaskeerd, en de
-/// brug naar het kwaliteitspaneel geeft de volledige waarde bewust nooit door.
-/// Een privacycontrole die de gevonden BSN's in haar eigen meldingen zet,
-/// heeft het probleem verplaatst in plaats van opgelost.
-///
-/// Daarom staat deze functie hier, in de scannerbibliotheek: de waarde wordt
-/// opgezocht, meteen tot een commitment verwerkt, en verlaat deze laag niet.
-///
-/// Null wanneer het fragment weg is of korter is geworden dan de opgeslagen
-/// positie — de dia is dan bewerkt sinds de scan, en de aanroeper hoort dat
-/// als "niets te doen" te behandelen in plaats van een willekeurig stuk tekst
-/// te nemen.
-String? matchedTextOf(
-  PrivacyScanner scanner,
-  Deck deck,
-  PrivacyFinding finding,
-) {
-  final fragments = finding.isDeckWide
-      ? scanner._deckFragments(deck)
-      : (finding.slideIndex >= 0 && finding.slideIndex < deck.slides.length
-            ? scanner._slideFragments(deck.slides[finding.slideIndex])
-            : const <_Fragment>[]);
-  for (final fragment in fragments) {
-    if (fragment.field != finding.field) continue;
-    if (fragment.index != finding.fragmentIndex) continue;
-    if (finding.start < 0 ||
-        finding.end > fragment.text.length ||
-        finding.start >= finding.end) {
-      return null;
-    }
-    return fragment.text.substring(finding.start, finding.end);
-  }
-  return null;
-}
-
-/// Hoe ver een contextwoord vóór een treffer mag staan om nog te tellen.
-///
-/// Ruim genoeg voor "Het burgerservicenummer van betrokkene is 123456782", krap
-/// genoeg dat een woord elders in de zin niet meetelt.
-const int kContextWindow = 40;
-
-/// Het gewicht waarmee een term uit de gebundelde bronnen meedoet.
-///
-/// Maximaal, want zo'n term ís het gegeven waar een signaalwoord alleen naar
-/// wijst: `taaislijmziekte` tegenover `diagnose`, `katholicisme` tegenover
-/// `geloofsovertuiging`. Zie `privacy_bulk_lexicon.dart` voor de metingen die
-/// dat rechtvaardigen.
-const int _kBulkTermWeight = 5;
-
-/// Contextwoorden die van een 11-proef-treffer een echte BSN-melding maken.
-/// Zonder een van deze blijft de treffer informatief — zie [_scanBsn].
-const List<String> bsnContextWords = [
-  'bsn',
-  'burgerservicenummer',
-  'burgerservice',
-  'sofinummer',
-  'sofi-nummer',
-  'sofinr',
-];
-
-final _reEmail = RegExp(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}");
-
-/// De handmatige redactiemarkering in de bron: `[[tekst]]`.
-///
-/// Detectie is per definitie best-effort — wat de scanner niet ziet, redigeert
-/// hij niet. Deze markering geeft de auteur het laatste woord, onafhankelijk van
-/// welke detectieregel wel of niet vuurt. Geen geneste blokhaken, zodat een
-/// gewone markdown-link (`[tekst](url)`) er niet in loopt.
-///
-/// Staat hier en niet in `privacy_projection.dart`, omdat die de scanner al
-/// importeert en de omgekeerde richting een cyclus zou zijn.
-final RegExp kManualRedaction = RegExp(r'\[\[([^\[\]]*)\]\]');
-
-/// Een IBAN staat vaak met spaties in een tekst. We accepteren die en
-/// normaliseren pas in de validatie.
-final _reIban = RegExp(r'\b[A-Z]{2}\d{2}(?:[ -]?[A-Z0-9]){10,30}\b');
-
-/// Negen losstaande cijfers. Bewust ruim: de 11-proef en de contextpoort doen
-/// het filterwerk, niet de regex.
-final _reNineDigits = RegExp(r'(?<!\d)\d{9}(?!\d)');
 
 /// Leest een deck na op privacygevoelige gegevens.
 class PrivacyScanner {

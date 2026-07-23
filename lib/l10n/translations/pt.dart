@@ -1812,6 +1812,7 @@ const _dutchSourceAddPt = <String, String>{
       'Um selo é uma afirmação sobre exatamente estes bytes. Um ramo de trabalho pode ser reescrito, sujeito a cherry-pick e enviado à força, e um selo que sobrevive a tudo isso já não diz nada.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Guarde esta apresentação como ficheiro ou como pacote .ocideck. O selo pertence a uma etiqueta de lançamento, e esse caminho ainda não existe — até lá, é aqui que está seguro.',
+  'Deze is beoordeeld en mag blijven': 'Revisto, este pode ficar',
   'De export is gestopt tijdens het voorbereiden.':
       'A exportação parou durante a preparação.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

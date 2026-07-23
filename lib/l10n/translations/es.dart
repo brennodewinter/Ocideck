@@ -739,6 +739,7 @@ const _dutchSourceAddEs = {
       'Un sello es una afirmación sobre exactamente estos bytes. Una rama de trabajo puede reescribirse, aplicarse con cherry-pick y forzarse, y un sello que sobrevive a todo eso ya no dice nada.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Guarda esta presentación como archivo o como paquete .ocideck. El sello pertenece a una etiqueta de versión, y ese camino aún no existe: hasta entonces, aquí es donde está a salvo.',
+  'Deze is beoordeeld en mag blijven': 'Revisado, este puede quedarse',
   'De export is gestopt tijdens het voorbereiden.':
       'La exportación se detuvo durante la preparación.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

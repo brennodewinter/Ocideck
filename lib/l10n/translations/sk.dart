@@ -1790,6 +1790,7 @@ const _dutchSourceAddSk = <String, String>{
       'Pečať je výrok o presne týchto bajtoch. Pracovnú vetvu možno prepísať, cherry-picknúť a vynútene odoslať, a pečať, ktorá to prežije, už nehovorí nič.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Uložte túto prezentáciu ako súbor alebo ako balík .ocideck. Pečať patrí k značke vydania a tá cesta zatiaľ neexistuje — dovtedy je v bezpečí tu.',
+  'Deze is beoordeeld en mag blijven': 'Skontrolované, toto môže zostať',
   'De export is gestopt tijdens het voorbereiden.':
       'Export sa zastavil počas prípravy.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

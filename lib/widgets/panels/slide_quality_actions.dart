@@ -3,12 +3,87 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_navigation.dart';
+import '../../models/deck.dart';
+import '../../models/privacy_finding.dart';
+import '../../services/privacy/privacy_scanner.dart';
+import '../../state/privacy_provider.dart';
 import '../../models/slide_quality.dart';
 import '../../state/deck_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../utils/bullet_fixes.dart';
 import '../../utils/title_contrast.dart';
+
+/// De ontsnappingskleppen bij een privacymelding, van klein naar groot.
+///
+/// Wie één regel te luid vindt moet chirurgisch kunnen ingrijpen — anders is
+/// "de hele controle uitzetten" de enige uitweg, en dat is in de praktijk
+/// onomkeerbaar: wie hem eenmaal uit heeft, zet hem niet meer aan.
+///
+/// De volgorde is de boodschap. Déze treffer beoordeeld en goed bevonden ("die
+/// naam hóórt hier") is bijna altijd wat iemand bedoelt; de hele regel
+/// uitzetten is het zware middel en staat daarom als tweede (#651).
+List<SlideQualityAction> _privacyActions(
+  AppLocalizations l10n,
+  WidgetRef ref,
+  Deck? deck,
+  SlideQualityIssue issue,
+) {
+  final rule = issue.args['rule'];
+  if (issue.category != SlideQualityCategory.privacy || rule == null) {
+    return const [];
+  }
+  final span = issue.span;
+  return [
+    if (deck != null && span != null)
+      SlideQualityAction(
+        label: l10n.d('Deze is beoordeeld en mag blijven'),
+        icon: Icons.done_outline,
+        run: () => _setAside(ref, deck, issue, span),
+      ),
+    SlideQualityAction(
+      label: l10n.d('Deze regel nooit meer melden'),
+      icon: Icons.notifications_off_outlined,
+      run: () => ref
+          .read(settingsProvider.notifier)
+          .setPrivacyRuleEnabled(rule, false),
+    ),
+  ];
+}
+
+/// Leg deze ene bevinding terzijde: beoordeeld en goed bevonden (#651).
+///
+/// De gevonden waarde komt hier niet langs. Het paneel kent alleen de
+/// coördinaten — de brug geeft de volledige waarde bewust nooit door — dus
+/// wordt de bevinding eerst in de ruwe scan opgezocht en gaat de rest in de
+/// privacylaag, waar de tekst wordt opgehaald en meteen tot een commitment
+/// verwerkt.
+///
+/// Vindt hij niets, dan gebeurt er niets: de dia is dan bewerkt sinds de scan,
+/// en dan is er niets te beoordelen.
+void _setAside(
+  WidgetRef ref,
+  Deck deck,
+  SlideQualityIssue issue,
+  SlideQualitySpan span,
+) {
+  final finding = findingForIssue(
+    ref.read(privacyRawScanProvider).findings,
+    issue.isDeckWide ? kDeckWidePrivacyIndex : issue.slideIndex,
+    issue.field ?? '',
+    span.fragmentIndex,
+    span.start,
+    span.end,
+  );
+  if (finding == null) return;
+  final updated = withFindingSetAside(
+    ref.read(privacyScannerProvider),
+    deck,
+    finding,
+    DateTime.now(),
+  );
+  if (updated != null) ref.read(deckProvider.notifier).setDismissals(updated);
+}
 
 /// Eén concrete vervolgactie bij een kwaliteitsmelding: het "doen"-knopje
 /// naast de melding, zodat de assistent niet alleen signaleert maar ook
@@ -77,18 +152,7 @@ List<SlideQualityAction> buildSlideQualityActions({
   // kunnen ingrijpen — anders is "de hele controle uitzetten" de enige uitweg, en
   // dat is in de praktijk onomkeerbaar: wie hem eenmaal uit heeft, zet hem niet
   // meer aan.
-  final rule = issue.args['rule'];
-  if (issue.category == SlideQualityCategory.privacy && rule != null) {
-    actions.add(
-      SlideQualityAction(
-        label: l10n.d('Deze regel nooit meer melden'),
-        icon: Icons.notifications_off_outlined,
-        run: () => ref
-            .read(settingsProvider.notifier)
-            .setPrivacyRuleEnabled(rule, false),
-      ),
-    );
-  }
+  actions.addAll(_privacyActions(l10n, ref, deck, issue));
 
   if (issue.isDeckWide) {
     return [...actions, _deckWideAction(l10n, issue, navigate)];

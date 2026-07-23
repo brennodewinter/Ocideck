@@ -742,6 +742,7 @@ const _dutchSourceAddPap = {
       'Un seyo ta un deklarashon tokante presis e bytes aki. Un branch di trabou por wòrdu skirbí di nobo, cherry-pick i push forsá, i un seyo ku ta sobrebibí tur esei no ta bisa nada mas.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Warda e presentashon aki komo archivo òf komo pakete .ocideck. E seyo ta pertenesé na un tag di release, i e kaminda ei no ta eksistí ainda — te e ora ei, aki e ta seguro.',
+  'Deze is beoordeeld en mag blijven': 'Revisá, esaki por keda',
   'De export is gestopt tijdens het voorbereiden.':
       'E eksportashon a stòp durante e preparashon.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

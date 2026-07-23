@@ -154,7 +154,14 @@ const Map<String, int> classSizeBaseline = {
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
   'lib/widgets/app_shell.dart#_MainLayoutState': 1449,
   'lib/state/settings_provider.dart#SettingsNotifier': 1331,
-  'lib/state/deck_provider.dart#DeckNotifier': 1256,
+  // Bewust verhoogd van 1256 naar 1261 (#651): `setDismissals` is een nieuwe
+  // openbare mogelijkheid, geen drift. In dezelfde wijziging ging er 24 regels
+  // uit — de vier identieke regels die annotaties, notities en terzijdeleggingen
+  // deelden staan nu één keer in `_updateSidecarLayer`, en het opschonen en
+  // zetten van een notitie is top-level geworden. Wat overblijft raakt allemaal
+  // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
+  // bouwen die groter is dan de functie die hem vraagt.
+  'lib/state/deck_provider.dart#DeckNotifier': 1261,
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1214,
   'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1102,
   'lib/widgets/editors/chart_editor.dart#_ChartEditorState': 1062,

@@ -1782,6 +1782,7 @@ const _dutchSourceAddDa = <String, String>{
       'Et segl er et udsagn om præcis disse bytes. En arbejdsgren kan omskrives, cherry-pickes og force-pushes, og et segl, der overlever alt det, siger ikke længere noget.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Gem dette deck som fil eller som .ocideck-pakke. Seglet hører til et release-tag, og den vej findes endnu ikke — indtil da er det her, det står sikkert.',
+  'Deze is beoordeeld en mag blijven': 'Gennemgået, denne må blive',
   'De export is gestopt tijdens het voorbereiden.':
       'Eksporten stoppede under forberedelsen.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

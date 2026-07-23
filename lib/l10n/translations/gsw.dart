@@ -1786,6 +1786,7 @@ const _dutchSourceAddGsw = <String, String>{
       'Es Sigel isch e Uussag über gnau die Bytes. En Arbetsbranch cha neu gschriebe, gcherrypickt und forciert gstosse werde, und es Sigel wo das überläbt seit nüt meh.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Speicher das Deck als Datei oder als .ocideck-Paket. S Sigel ghört zu eme Release-Tag, und de Wäg gits no nöd — bis dahi isch es do sicher.',
+  'Deze is beoordeeld en mag blijven': 'Prüeft, das da cha bliibe',
   'De export is gestopt tijdens het voorbereiden.':
       'De Export isch bim Vorbereite abbroche.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
