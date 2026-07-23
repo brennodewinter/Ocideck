@@ -13,6 +13,7 @@ void main() {
         color: 0xFF22C55E,
         width: 0.022,
         points: [Offset(0.1, 0.2), Offset(0.3, 0.45)],
+        id: 's1',
       );
       final back = InkStroke.fromJson(stroke.toJson());
       expect(back.tool, InkTool.highlighter);
@@ -30,6 +31,7 @@ void main() {
       color: 0xFFEF4444,
       width: 0.004,
       points: [Offset(0.1, 0.1), Offset(0.2, 0.2)],
+      id: 's2',
     );
 
     test('encodes nothing when there are no strokes', () {

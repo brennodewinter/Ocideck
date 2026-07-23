@@ -96,6 +96,11 @@ class AnnotationLayerState extends State<AnnotationLayer> {
       color: widget.color,
       width: widget.width,
       points: List<Offset>.from(_active),
+      // Een voorbeeldstreek voor de beamer, die nooit wordt opgeslagen. Hij
+      // krijgt tóch een id, want hij is verder in niets anders dan de streek
+      // die er zo meteen van gemaakt wordt — en een tweede vorm zonder id zou
+      // precies het gat zijn waar de merge over struikelt.
+      id: newStrokeId(),
     );
   }
 
@@ -117,6 +122,7 @@ class AnnotationLayerState extends State<AnnotationLayer> {
       color: widget.color,
       width: widget.width,
       points: List<Offset>.from(_active),
+      id: newStrokeId(),
     );
     final next = [...widget.strokes, stroke];
     setState(() => _active = const []);
@@ -125,15 +131,29 @@ class AnnotationLayerState extends State<AnnotationLayer> {
     widget.onActiveStrokeChanged?.call(null);
   }
 
+  /// Wissen zet een grafsteen; het gooit de streek niet weg.
+  ///
+  /// Weggooien is wat je verwacht en het is fout zodra het bestand gemerged
+  /// wordt: de andere kant heeft de streek nog, de unie brengt hem terug, en de
+  /// gebruiker zag hem verdwijnen. Een verwijdering die terugkomt is erger dan
+  /// een die niet werkt (GIT_STORAGE D7, #541).
+  ///
+  /// De tekenaar slaat gewiste streken over, dus op het scherm verandert er
+  /// niets aan wat je verwacht.
   void _eraseAt(Offset norm) {
     const threshold = 0.025;
-    final kept = [
+    var touched = false;
+    final next = [
       for (final s in widget.strokes)
-        if (!s.points.any((p) => (p - norm).distance < threshold)) s,
+        if (!s.erased && s.points.any((p) => (p - norm).distance < threshold))
+          (() {
+            touched = true;
+            return s.copyWith(erased: true);
+          })()
+        else
+          s,
     ];
-    if (kept.length != widget.strokes.length) {
-      widget.onStrokesChanged?.call(kept);
-    }
+    if (touched) widget.onStrokesChanged?.call(next);
   }
 
   void _down(Offset local) {
@@ -244,6 +264,9 @@ class _InkPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (final s in strokes) {
+      // Een gewiste streek blijft in het bestand staan als grafsteen, maar
+      // hoort niet op het scherm.
+      if (s.erased) continue;
       _drawStroke(canvas, size, s.points, s.tool, s.color, s.width);
     }
     if (active.length >= 2 &&
