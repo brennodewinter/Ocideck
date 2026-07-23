@@ -1743,15 +1743,54 @@ file in an editor, and *about* the document rather than part of it — the same
 argument that already put annotations and user notes beside the file.
 
 Keyed by EIS id; a key is written only when its map is non-empty, and the file
-is deleted when both are. Same `version` rule as §6.2.
+is deleted when everything is. Same `version` rule as §6.2.
 
 ```json
 {
-  "version": 1,
-  "waivers": { "1.3": "Certification not required by the client" },
-  "confirmations": { "2.1": "Intake held on 2026-07-01" }
+  "version": 2,
+  "waivers": {
+    "1.3": { "text": "Certification not required by the client",
+             "at": "2026-07-23T16:41:00.000Z" }
+  },
+  "confirmations": {
+    "2.1": { "text": "Intake held on 2026-07-01",
+             "at": "2026-07-23T16:42:30.000Z" }
+  },
+  "revoked": {
+    "waivers": { "1.6": "2026-07-23T17:02:11.000Z" },
+    "confirmations": {}
+  }
 }
 ```
+
+Version 2 *(2026-07-23, #756)* adds two things version 1 lacked, both needed
+the moment the file travels to a git repository (§9.7 of GIT_STORAGE) where two
+reviewers can edit it independently:
+
+- **A timestamp per entry** (`at`, ISO-8601 UTC): the merge keeps, per EIS id,
+  the decision taken last.
+- **Tombstones** (`revoked`): withdrawing a waiver or confirmation is itself a
+  review decision and must survive a merge. Without it, a plain union would
+  silently resurrect an exclusion a reviewer had just undone — for a waiver
+  that is a security-relevant wrong answer. A tombstone records *when* the
+  entry was withdrawn; on a timestamp tie the tombstone wins, because the
+  strict reading (no waiver without a standing decision) is the safe one.
+
+**Tombstones count as content**: a disposition holding only `revoked` entries
+still writes a file — "withdraw everything" must not delete the sidecar, or
+the withdrawn waiver returns from the other side at the next merge, which is
+the exact failure version 2 exists to prevent. The copy that lives in a git
+repository is written indented, one field per line, so git's own text merge
+can work line-wise (the same deal as the notes and the set-asides). And the
+entries deliberately carry **no author**: this file rides along in git
+history, packages, the bin and autosave — a name in it would be a second copy
+of personal data with its own lifetime. The audit trail lives where it
+belongs: git commits carry authorship once the deck lives in a repository,
+and the attested artefact is the seal with its signer (§6.6).
+
+Version 1 files (plain `{ "id": "text" }` maps, no `revoked`) are still read;
+their entries carry no timestamp and are treated as older than any version-2
+decision. The app writes version 2.
 
 The sidecar travels with the deck wherever the `.md` alone would not be enough:
 it is a member of the `.ocideck` package (§7), it moves along to the bin with

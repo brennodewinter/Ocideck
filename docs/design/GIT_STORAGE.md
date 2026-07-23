@@ -701,9 +701,12 @@ does**.
 > No re-anchoring step: the identity is rule + commitment, not a slide
 > position. The rationale is the design's own: a set-aside is a review
 > decision about the report, and a second reviewer must not re-litigate what a
-> colleague already judged. The MIAUW disposition sidecar is now the only
-> layer that stays behind — #756 tracks it, and its merge semantics need a
-> decision here before code.*
+> colleague already judged.*
+
+> *Updated 23-07-2026 (#756): the **MIAUW disposition travels too** —
+> `deck.miauw.json`, same route, union per EIS id with tombstones (decision in
+> §9.7; format change in FILE_FORMAT §6.5 v2). No layer of an ordinary deck
+> stays behind now; the seal remains tag-only by design (§14, D13).*
 
 ### 9.2 Opening / loading
 
@@ -900,6 +903,32 @@ consequences must be respected rather than discovered later:
   can be removed". So the annotation format gains a stable per-stroke identity
   **and** an erased marker, and the union honours the marker. Build order in
   §14, D7 — format first, then the driver, then the write path.
+
+- **`deck.miauw.json` — dispositions are review decisions.** *(Decided
+  23-07-2026, #756.)* Waivers and confirmations are the same species as the
+  set-aside privacy findings: a reviewer's judgement **about** the report,
+  keyed by a stable identity (the EIS id) rather than a slide position — so
+  there is no re-anchoring step, and the merge is the union the dismissals
+  already use: **per EIS id the decision taken last wins** (`at`, ISO-8601
+  UTC), and **withdrawals are tombstones** that survive the merge. Version 1
+  of the sidecar carried neither timestamps nor tombstones, so a plain union
+  would have resurrected a withdrawn waiver — for a security exclusion that is
+  the wrong side to err on. Hence FILE_FORMAT §6.5 version 2, format first,
+  then the write path (the D7 order). Two deliberate asymmetries with ink: on
+  a timestamp tie the **tombstone** wins (the strict reading is the safe one —
+  ink's "erased wins" made the same call), and there is **no native merge
+  driver** for this file. The dismissals set that precedent: git's text merge
+  may leave conflict markers, the read side then classifies the file as
+  untouchable (shared `_repoSidecarState` rules), and `resolveRepoDeckMerge`
+  re-applies the real union in-app. One driver binding (ink) is a measured
+  necessity; a second one would be surface without need. One loss is accepted
+  **knowingly**: when two reviewers each rephrase the mandatory reason of the
+  *same* EIS id, the clock decides and the other phrasing is gone without a
+  prompt. A rephrase is a new decision about the same identity — unlike the
+  dismissals (whose identity includes the commitment, so prose cannot collide)
+  and unlike chart data (where both-sides-changed refuses). Accepted because
+  the alternative is a conflict dialog for a one-line justification field;
+  revisit if dispositions ever grow long-form prose.
 
 **And the seal does not belong in this section at all.** *(Decided 22-07-2026,
 #541 — see §14, D13.)* A sealed deck goes to a release **tag**, never to a work
