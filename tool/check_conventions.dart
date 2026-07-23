@@ -144,21 +144,21 @@ const int maxClassLines = 1000;
 const Map<String, int> classSizeBaseline = {
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState': 6043,
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3419,
-  'lib/services/file_service.dart#FileService': 2864,
+      3412,
+  'lib/services/file_service.dart#FileService': 2817,
   'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 2667,
   'lib/state/tabs_provider.dart#TabsNotifier': 2210,
   'lib/services/markdown_service.dart#MarkdownService': 2322,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2160,
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
-  'lib/widgets/app_shell.dart#_MainLayoutState': 1457,
+  'lib/widgets/app_shell.dart#_MainLayoutState': 1449,
   'lib/state/settings_provider.dart#SettingsNotifier': 1331,
   'lib/state/deck_provider.dart#DeckNotifier': 1256,
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1214,
   'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1102,
   'lib/widgets/editors/chart_editor.dart#_ChartEditorState': 1062,
-  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1050,
+  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1023,
 };
 
 final _print = RegExp(r'(?<![\w.])print\(');

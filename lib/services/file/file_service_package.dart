@@ -267,6 +267,10 @@ extension FileServicePackage on FileService {
       MiauwCodec.encode(packDeck.miauwWaivers, packDeck.miauwConfirmations),
     );
     member('$base.seal.json', SealCodec.encode(SealRecord.of(packDeck)));
+    final setAside = packDeck.dismissals;
+    if (setAside != null) {
+      member('$base.dismissals.json', DismissalCodec.encode(setAside));
+    }
   }
 
   /// Voeg een méégebundelde asset (asset:-pad, bv. het logo van een ingebouwd

@@ -6,6 +6,7 @@ import 'seal_record.dart';
 import 'slide.dart';
 import 'used_tool.dart';
 import 'settings.dart';
+import '../services/privacy/dismissal_codec.dart';
 
 /// Traffic Light Protocol-classificatie (FIRST TLP 2.0) van een presentatie.
 ///
@@ -306,6 +307,18 @@ class Deck {
   /// van de Marp-markdown — opgeslagen in een aparte sidecar.
   final Map<String, String> userNotes;
 
+  /// Privacybevindingen die de auteur bewust terzijde heeft gelegd (#651).
+  ///
+  /// Een oordeel over dít deck — "die naam hóórt hier" — en dus geen
+  /// gebruikersvoorkeur: het reist met het document mee naar een tweede
+  /// reviewer. Opgeslagen in een sidecar (`<naam>.dismissals.json`,
+  /// FILE_FORMAT §6.7), niet in de `.md`, en het bewaart geen waarden maar
+  /// commitments — zie `dismissal_codec.dart` voor waarom.
+  ///
+  /// Verbergen is geen wegscannen: de ongefilterde scan blijft het volle aantal
+  /// zien, alleen het paneel filtert.
+  final DeckDismissals? dismissals;
+
   /// MIAUW-compliance-uitsluitingen (PENTEST_MIAUW §9), gekeyd op EIS-id
   /// (bijv. `1.6`) met de verplichte reden als waarde. Een uitgesloten
   /// requirement telt als "Uitgesloten door klant" in het compliance-overzicht.
@@ -373,6 +386,7 @@ class Deck {
     this.signature,
     this.annotations = const {},
     this.userNotes = const {},
+    this.dismissals,
     this.miauwWaivers = const {},
     this.miauwConfirmations = const {},
     this.frontMatterSource = const [],
@@ -413,6 +427,7 @@ class Deck {
     bool clearSignature = false,
     Map<String, List<InkStroke>>? annotations,
     Map<String, String>? userNotes,
+    DeckDismissals? dismissals,
     Map<String, String>? miauwWaivers,
     Map<String, String>? miauwConfirmations,
     List<String>? frontMatterSource,
@@ -451,6 +466,7 @@ class Deck {
       signature: clearSignature ? null : (signature ?? this.signature),
       annotations: annotations ?? this.annotations,
       userNotes: userNotes ?? this.userNotes,
+      dismissals: dismissals ?? this.dismissals,
       miauwWaivers: miauwWaivers ?? this.miauwWaivers,
       miauwConfirmations: miauwConfirmations ?? this.miauwConfirmations,
       frontMatterSource: frontMatterSource ?? this.frontMatterSource,
