@@ -128,6 +128,19 @@ read a book to find out.
   slide die uit dat raster rendert, een tijdlijn uit een gewone
   Markdown-lijst, een quizslide, een TLP:AMBER-watermerk en de donkere
   interface. Dezelfde serie draagt ook de OciDeck-pagina's op librekat.nl.
+- **De macOS-bundel komt nu ook uit CI — van een echte Mac.** Naast de
+  Linux-build bouwt `.forgejo/workflows/macos-build.yml` bij elke push naar
+  `main` de macOS-app als artifact. Niet op de server: Apple licenseert macOS
+  uitsluitend voor Apple-hardware, dus die job draait in host-modus op een
+  aangemelde Mac-runner (`mac-brenno`) met de gepinde toolchain die
+  `check-toolchain` daar al bewaakt. Staat de Mac uit, dan wacht de run; een
+  nieuwe push vervangt een wachtende run. De runner is uit de officiële
+  v12.13.2-bron gebouwd (er zijn geen darwin-binaries) en start mee via een
+  LaunchAgent. Windows blijft een handbuild — daarvoor is er geen machine, en
+  de `.github`-referentieworkflows dekken het af zodra er een GitHub-spiegel
+  komt.
+
+### Added
 - **Het zegel reist mee naar een git-repository, en de weigering is
   ingetrokken (#541, slotstuk).** Een verzegeld deck werd sinds de vorige
   ronde geweigerd op een werkbranch — eerlijker dan het zegel stil laten

@@ -1,0 +1,43 @@
+# Bouwt de macOS-desktopversie op de Mac-runner (mac-brenno, label macos,
+# host-modus — Apple staat macOS alleen op Apple-hardware toe, dus deze build
+# draait niet op de pawprint-server maar op een aangemelde Mac). Staat die Mac
+# uit, dan wacht de run tot hij er weer is; een nieuwe push naar main vervangt
+# een wachtende run gewoon.
+#
+# Host-modus betekent: de job draait direct op de Mac, met de toolchain die
+# daar staat — dezelfde gepinde officiële Flutter die check-toolchain lokaal
+# al bewaakt. Er wordt hier dus bewust níets geïnstalleerd.
+name: macos-build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-macos:
+    runs-on: macos
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get
+
+      - name: macOS-release bouwen
+        run: flutter build macos --release
+
+      - name: Bundel inpakken
+        # ditto bewaart symlinks en resource forks — een .app die door een
+        # gewone zip gaat, start niet meer.
+        run: |
+          APP=$(ls -d build/macos/Build/Products/Release/*.app | head -1)
+          test -n "$APP"
+          ditto -c -k --keepParent "$APP" ocideck-macos.zip
+
+      # v4 van deze actie weigert elke niet-GitHub-server ("GHES not
+      # supported"); v3 spreekt het artifact-API dat Forgejo implementeert.
+      - name: Artifact bewaren
+        uses: actions/upload-artifact@v3
+        with:
+          name: ocideck-macos
+          path: ocideck-macos.zip
