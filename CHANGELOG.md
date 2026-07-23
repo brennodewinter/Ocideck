@@ -115,6 +115,25 @@ read a book to find out.
   andere kant terugkeert. Daarvoor draagt het sidecar-formaat voortaan een
   tijdstempel per besluit (versie 2, FILE_FORMAT §6.5); een versie-1-bestand
   blijft gewoon leesbaar, de app schrijft versie 2.
+- **`make shellcheck`: de shellscripts stonden buiten elke poort.** Dart in deze
+  repo komt langs een compiler, een analyzer op `--fatal-infos` en acht
+  eigengebouwde poorten. Shell kwam nergens langs. Dat was te verdedigen zolang
+  er één script was dat alleen een releasebeheerder met de hand draaide; met een
+  tweede script dat gecommitte artefacten produceert is het dat niet meer.
+  ShellCheck vangt de klassiekers die pas bijten op de dag dat het uitkomt: een
+  onaangehaalde variabele die splitst op een pad met een spatie, een glob die
+  stil niets vindt, een exitcode die in een pijp verdwijnt. Beide scripts waren
+  al schoon, dus de poort kon erin zonder basislijn en zonder uitzonderingen.
+  Hij zit in `check-full`, bewust niet in `check` — dezelfde reden als bij
+  `sast` en `check-secrets`: de dagelijkse poort mag geen externe binaries
+  veronderstellen.
+
+  In twee richtingen getoetst, en dat leverde meteen zijn eigen les op. De
+  eerste geplante fout — een variabele met een letterlijk pad, daarna
+  onaangehaald gebruikt — gaf géén bevinding: ShellCheck volgt de waarde en weet
+  dan dat het veilig is. Een poort die alleen is beproefd tegen een fout die hij
+  toch nooit zou vangen, bewijst niets. Met een expansie die hij wél kan
+  afkeuren valt hij netjes om.
 
 ### Fixed
 - **Ook iOS en Android droegen nog de fotokat — en het handwerk eronder is nu
