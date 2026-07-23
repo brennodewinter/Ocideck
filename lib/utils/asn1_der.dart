@@ -97,9 +97,6 @@ class Asn1Node {
   }
 }
 
-/// Parse the single top-level DER value in [data]. Constructed nodes are parsed
-/// recursively; primitive nodes keep their raw [Asn1Node.content]. Returns null
-/// when [data] is not well-formed DER.
 /// Hoeveel niveaus diep een DER-boom mag zijn.
 ///
 /// Een RFC 3161-token heeft er een handvol. De grens staat er niet voor die,
@@ -111,6 +108,9 @@ class Asn1Node {
 /// dat iemand je stuurt liet de app elke keer opnieuw omvallen.
 const int _maxDerDepth = 64;
 
+/// Parse the single top-level DER value in [data]. Constructed nodes are parsed
+/// recursively; primitive nodes keep their raw [Asn1Node.content]. Returns null
+/// when [data] is not well-formed DER.
 Asn1Node? parseDer(Uint8List data) {
   try {
     final (node, _) = _readNode(data, 0, 0);
