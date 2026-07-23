@@ -63,7 +63,7 @@ All code changes should include:
 
 ### Prerequisites
 
-- Flutter 3.44.6 (stable), with its bundled Dart 3.12.2 — see
+- **Flutter 3.44.7** (stable), with its bundled Dart 3.12.2 — see
   [BUILD.md](BUILD.md), which is the authority on the toolchain pin and on why
   `make format-check` needs the exact version while building does not
 - macOS, Windows, or Linux desktop toolchain for your target platform  
