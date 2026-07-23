@@ -109,14 +109,11 @@ class _WelcomeScreen extends ConsumerWidget {
         // een document per taal (nl en en); wie in een andere taal leest,
         // krijgt de Engelse variant, en dat hoort hier te staan. Letterlijk
         // dezelfde bronstring als in de dialoog, dus geen tweede tekst om uit
-        // de pas te laten lopen; in het Nederlands en het Engels zwijgt hij.
-        child: Tooltip(
-          message: l10n.languageCode == 'nl' || l10n.languageCode == 'en'
-              ? ''
-              : l10n.d(
-                  "De voorbeelddia's van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.",
-                ),
-          child: Text(
+        // de pas te laten lopen. In het Nederlands en het Engels is er niets
+        // te melden en komt er dus ook geen (leeg) zweefvenster.
+        child: _withTemplateLanguageTooltip(
+          l10n,
+          Text(
             '${_visibleTemplateCount(ref)} '
             '${l10n.d('sjablonen om mee te beginnen, of leeg')}',
             textAlign: TextAlign.center,
@@ -493,4 +490,16 @@ class _RecentBadge extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Alleen buiten nl/en zit er een melding op de sjabloonbelofte; in die twee
+/// talen komt de tekst kaal terug, zodat er geen leeg zweefvenster ontstaat.
+Widget _withTemplateLanguageTooltip(AppLocalizations l10n, Widget child) {
+  if (l10n.languageCode == 'nl' || l10n.languageCode == 'en') return child;
+  return Tooltip(
+    message: l10n.d(
+      "De voorbeelddia's van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.",
+    ),
+    child: child,
+  );
 }
