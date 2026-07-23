@@ -1780,6 +1780,8 @@ const _dutchSourceAddDa = <String, String>{
       'Hjælp til alt-tekster, beskrivelser og formuleringer. At slå det til sender endnu ikke noget: det sker først, når du selv har valgt en backend og, ved en skytjeneste, udtrykkeligt har bekræftet. Med en lokal backend forlader intet din computer.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Vælg backend på fanen AI-assistance. Så længe der ikke står noget der, sker der ikke noget.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'En skabelons eksempeldias er på engelsk. Navn og beskrivelse følger dit eget sprog; indholdet tilpasser du efter oprettelsen.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Fund, du har vurderet og ladet stå. De rapporteres ikke længere, men scanningen finder dem stadig, og de tæller ikke som løst. Tryk for at gendanne et.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1922,8 +1924,6 @@ const _dutchSourceAddDa = <String, String>{
       'Præsentationer, der forbliver almindelige Markdown-filer: læsbare, søgbare og kan åbnes med enhver editor.',
   'sjablonen om mee te beginnen, of leeg':
       'skabeloner at starte med, eller tom',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'En skabelons eksempeldias er på nederlandsk. Navn og beskrivelse følger dit eget sprog; indholdet tilpasser du efter oprettelsen.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Udeladelse er slået til: fundne data sværtes, og alle billeder, video og lyd på dette slide kommer ikke med på skærmen eller i eksporten. Din markdown-fil beholder alt.',
   'Mijn tekst': 'Min tekst',

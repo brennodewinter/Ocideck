@@ -1780,6 +1780,8 @@ const _dutchSourceAddSv = <String, String>{
       'Hjälp med alt-texter, beskrivningar och formuleringar. Att slå på skickar ännu ingenting: det sker först när du själv har valt en backend och, vid en molntjänst, uttryckligen har bekräftat. Med en lokal backend lämnar ingenting din dator.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Välj backend på fliken AI-assistans. Så länge inget är valt där händer ingenting.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'En malls exempelbilder är på engelska. Namn och beskrivning följer ditt eget språk; innehållet anpassar du efter att du har skapat den.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Iakttagelser som du har bedömt och låtit stå kvar. De rapporteras inte längre, men skanningen hittar dem fortfarande och de räknas inte som åtgärdade. Tryck för att återställa en.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1921,8 +1923,6 @@ const _dutchSourceAddSv = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentationer som förblir vanliga Markdown-filer: läsbara, sökbara och går att öppna med vilken editor som helst.',
   'sjablonen om mee te beginnen, of leeg': 'mallar att börja med, eller tom',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'En malls exempelbilder är på nederländska. Namn och beskrivning följer ditt eget språk; innehållet anpassar du efter att du har skapat den.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Utelämnande är på: hittade uppgifter svärtas och alla bilder, all video och allt ljud på den här bilden följer inte med till skärmen eller exporten. Din markdown-fil behåller allt.',
   'Mijn tekst': 'Min text',

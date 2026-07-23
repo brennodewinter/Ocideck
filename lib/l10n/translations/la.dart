@@ -1797,6 +1797,8 @@ const _dutchSourceAddLa = <String, String>{
       'Auxilium in textibus alternativis, descriptionibus et formulis. Accendere nihil adhuc mittit: id demum fit postquam ipse backend elegisti et, apud servitium nubis, expresse confirmavisti. Cum backend locali nihil computatrum tuum relinquit.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Backend in tabula Auxilii IA elige. Dum ibi nihil positum est, nihil fit.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Laminae exempli exemplaris Anglice scriptae sunt. Nomen et descriptio linguam tuam sequuntur; contentum post creationem accommodas.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Inventa quae recensuisti et manere sivisti. Non amplius nuntiantur, sed scrutatio ea etiamnunc invenit neque pro solutis habentur. Tange ut unum restituas.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1938,8 +1940,6 @@ const _dutchSourceAddLa = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Praesentationes quae simplices fasciculi Markdown manent: legibiles, investigabiles et quovis editore aperiendae.',
   'sjablonen om mee te beginnen, of leeg': 'exempla ad incipiendum, vel vacuum',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Laminae exempli exemplaris Batavice scriptae sunt. Nomen et descriptio linguam tuam sequuntur; contentum post creationem accommodas.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Omissio activa est: data inventa denigrantur et omnes imagines, pelliculae et soni huius laminae neque ad scrinium neque ad exportationem eunt. Fasciculus tuus markdown omnia servat.',
   'Mijn tekst': 'Textus meus',

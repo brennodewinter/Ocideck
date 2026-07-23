@@ -1781,6 +1781,8 @@ const _dutchSourceAddId = <String, String>{
       'Bantuan untuk teks alternatif, deskripsi, dan rumusan kalimat. Mengaktifkannya belum mengirim apa pun: itu baru terjadi setelah Anda sendiri memilih backend dan, untuk layanan cloud, mengonfirmasi secara tegas. Dengan backend lokal, tidak ada yang keluar dari komputer Anda.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Pilih backend di tab Bantuan AI. Selama belum ada yang diatur di sana, tidak ada yang terjadi.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Slide contoh dari sebuah templat berbahasa Inggris. Nama dan deskripsi mengikuti bahasa Anda sendiri; isinya Anda sesuaikan setelah dibuat.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Temuan yang sudah kamu tinjau dan kamu biarkan. Temuan ini tidak dilaporkan lagi, tetapi pemindaian tetap menemukannya dan tidak dihitung sebagai selesai. Ketuk untuk memulihkan salah satunya.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1921,8 +1923,6 @@ const _dutchSourceAddId = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentasi yang tetap berupa berkas Markdown biasa: dapat dibaca, dicari, dan dibuka dengan editor apa pun.',
   'sjablonen om mee te beginnen, of leeg': 'templat untuk memulai, atau kosong',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Slide contoh dari sebuah templat berbahasa Belanda. Nama dan deskripsi mengikuti bahasa Anda sendiri; isinya Anda sesuaikan setelah dibuat.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Penyembunyian aktif: data yang ditemukan dihitamkan dan semua gambar, video, dan audio pada slide ini tidak ikut ke layar atau ekspor. Berkas markdown Anda menyimpan semuanya.',
   'Mijn tekst': 'Teks saya',

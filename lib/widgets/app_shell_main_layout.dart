@@ -834,22 +834,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     );
   }
 
-  Future<void> _newInTab() async {
-    final languageCode = context.l10n.languageCode;
-    final choice = await NewDeckDialog.show(context);
-    if (choice == null) return;
-    await ref
-        .read(settingsProvider.notifier)
-        .selectThemeProfile(choice.profileName);
-    final slides = await TemplateContentService().loadSlides(
-      choice.template.id,
-      languageCode: languageCode,
-      deckTitle: choice.title,
-    );
-    ref
-        .read(tabsProvider.notifier)
-        .newDeckInNewTab(choice.title, slides: slides);
-  }
+  Future<void> _newInTab() =>
+      _createDeckFromDialog(context, ref, inNewTab: true);
 
   /// Documentintegriteit (§8 A1): toon de afrond-dialoog, verzegel het deck en
   /// sla het meteen op zodat het zegel op schijf staat.
@@ -931,3 +917,35 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 }
 
 // ── AppBar helpers ────────────────────────────────────────────────────────────
+
+/// Gedeeld door het startscherm en het tabbladmenu: kiezer tonen, profiel
+/// zetten, het sjabloondocument voor de interfacetaal laden en het deck openen.
+///
+/// Top-level en niet op de State: beide aanroepplekken doen exact hetzelfde,
+/// en de klasse zit tegen haar plafond.
+Future<void> _createDeckFromDialog(
+  BuildContext context,
+  WidgetRef ref, {
+  required bool inNewTab,
+}) async {
+  // Vóór de dialoog vastpakken: na een await mag de context niet meer mee.
+  final languageCode = context.l10n.languageCode;
+  final choice = await NewDeckDialog.show(context);
+  if (choice == null) return;
+  // Profielkeuze is globaal (het actieve profiel bepaalt de stijl van elk
+  // deck); eerst selecteren, dan aanmaken zodat het nieuwe deck hem erft.
+  await ref
+      .read(settingsProvider.notifier)
+      .selectThemeProfile(choice.profileName);
+  final slides = await TemplateContentService().loadSlides(
+    choice.template.id,
+    languageCode: languageCode,
+    deckTitle: choice.title,
+  );
+  final tabs = ref.read(tabsProvider.notifier);
+  if (inNewTab) {
+    tabs.newDeckInNewTab(choice.title, slides: slides);
+  } else {
+    tabs.newDeckInCurrentTab(choice.title, slides: slides);
+  }
+}

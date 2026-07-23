@@ -1803,6 +1803,8 @@ const _dutchSourceAddBg = <String, String>{
       'Помощ при алтернативни текстове, описания и формулировки. Включването все още не изпраща нищо: това става едва след като сами изберете бекенд и, при облачна услуга, изрично потвърдите. При локален бекенд нищо не напуска компютъра ви.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Изберете бекенда в раздела AI помощ. Докато там няма нищо, нищо не се случва.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Примерните слайдове на шаблона са на английски. Името и описанието следват вашия език; съдържанието променяте след създаването.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Констатации, които сте прегледали и сте оставили. Те вече не се съобщават, но сканирането продължава да ги открива и не се броят за отстранени. Докоснете, за да върнете една от тях.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1945,8 +1947,6 @@ const _dutchSourceAddBg = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Презентации, които остават обикновени файлове Markdown: четими, с възможност за търсене и отваряеми с всеки редактор.',
   'sjablonen om mee te beginnen, of leeg': 'шаблона за начало или празна',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Примерните слайдове на шаблона са на нидерландски. Името и описанието следват вашия език; съдържанието променяте след създаването.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Пропускането е включено: намерените данни се зачерняват и всички изображения, видео и звук от този слайд не отиват на екрана или в експорта. Вашият markdown файл запазва всичко.',
   'Mijn tekst': 'Моят текст',

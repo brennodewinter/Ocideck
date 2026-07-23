@@ -736,6 +736,8 @@ const _dutchSourceAddIt = {
       'Aiuto per testi alternativi, descrizioni e formulazioni. Attivarlo non invia ancora nulla: succede solo dopo che hai scelto tu stesso un backend e, per un servizio cloud, hai confermato esplicitamente. Con un backend locale nulla lascia il tuo computer.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Scegli il backend nella scheda Assistenza IA. Finché lì non è impostato nulla, non succede nulla.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Le diapositive di esempio di un modello sono in inglese. Nome e descrizione seguono la tua lingua; il contenuto lo adatti dopo la creazione.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Rilievi che hai esaminato e lasciato al loro posto. Non vengono più segnalati, ma la scansione continua a trovarli e non contano come risolti. Tocca per ripristinarne uno.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -879,8 +881,6 @@ const _dutchSourceAddIt = {
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentazioni che restano semplici file Markdown: leggibili, ricercabili e apribili con qualsiasi editor.',
   'sjablonen om mee te beginnen, of leeg': 'modelli per iniziare, oppure vuoto',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Le diapositive di esempio di un modello sono in olandese. Nome e descrizione seguono la tua lingua; il contenuto lo adatti dopo la creazione.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'L\'omissione è attiva: i dati trovati vengono oscurati e tutte le immagini, i video e l\'audio di questa diapositiva non arrivano allo schermo né all\'esportazione. Il tuo file markdown conserva tutto.',
   'Mijn tekst': 'Il mio testo',

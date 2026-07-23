@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart' show FlutterError;
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../models/slide.dart';
+import '../utils/log.dart';
 import 'markdown_service.dart';
 
 /// Loads the example content of a deck template from its bundled document.
@@ -32,7 +34,12 @@ class TemplateContentService {
     String markdown;
     try {
       markdown = await _loadAsset('assets/templates/$templateId.$language.md');
-    } catch (_) {
+    } on Exception catch (e) {
+      logError('template_content_service.loadSlides', e);
+      return [bareTitle];
+    } on FlutterError catch (e) {
+      // rootBundle meldt een ontbrekend asset als FlutterError, geen Exception.
+      logError('template_content_service.loadSlides', e);
       return [bareTitle];
     }
     final deck = MarkdownService().parseDeck(markdown);

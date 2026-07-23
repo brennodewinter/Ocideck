@@ -1784,6 +1784,8 @@ const _dutchSourceAddCs = <String, String>{
       'Pomoc s alternativními texty, popisy a formulacemi. Zapnutí zatím nic neodesílá: k tomu dojde až poté, co sami zvolíte backend a u cloudové služby to výslovně potvrdíte. S lokálním backendem nic neopustí váš počítač.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Backend zvolte na kartě Asistence AI. Dokud tam nic není nastaveno, nic se neděje.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Ukázkové snímky šablony jsou v angličtině. Název a popis se řídí tvým jazykem; obsah upravíš po vytvoření.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Zjištění, která byla posouzena a ponechána. Už se nehlásí, ale sken je stále nachází a nepočítají se jako vyřešená. Klepnutím jedno vrátíš.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1925,8 +1927,6 @@ const _dutchSourceAddCs = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentace, které zůstávají obyčejnými soubory Markdown: čitelné, prohledatelné a otevřitelné v jakémkoli editoru.',
   'sjablonen om mee te beginnen, of leeg': 'šablon pro začátek, nebo prázdná',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Ukázkové snímky šablony jsou v nizozemštině. Název a popis se řídí tvým jazykem; obsah upravíš po vytvoření.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Vynechání je zapnuté: nalezené údaje se začerní a všechny obrázky, video i zvuk tohoto snímku nejdou na obrazovku ani do exportu. Tvůj soubor markdown si vše ponechá.',
   'Mijn tekst': 'Můj text',

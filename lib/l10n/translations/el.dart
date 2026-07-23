@@ -1808,6 +1808,8 @@ const _dutchSourceAddEl = <String, String>{
       'Βοήθεια με εναλλακτικά κείμενα, περιγραφές και διατυπώσεις. Η ενεργοποίηση δεν στέλνει ακόμη τίποτα: αυτό συμβαίνει μόνο αφού επιλέξετε οι ίδιοι ένα backend και, σε περίπτωση υπηρεσίας cloud, το επιβεβαιώσετε ρητά. Με ένα τοπικό backend τίποτα δεν φεύγει από τον υπολογιστή σας.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Επιλέξτε το backend στην καρτέλα Υποστήριξη AI. Όσο δεν έχει οριστεί τίποτα εκεί, δεν συμβαίνει τίποτα.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Οι διαφάνειες παραδείγματος ενός προτύπου είναι στα αγγλικά. Το όνομα και η περιγραφή ακολουθούν τη δική σας γλώσσα· το περιεχόμενο το προσαρμόζετε μετά τη δημιουργία.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Ευρήματα που έχεις εξετάσει και άφησες όπως είναι. Δεν αναφέρονται πλέον, αλλά η σάρωση συνεχίζει να τα βρίσκει και δεν μετρούν ως επιλυμένα. Πάτησε για να επαναφέρεις ένα.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1952,8 +1954,6 @@ const _dutchSourceAddEl = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Παρουσιάσεις που παραμένουν απλά αρχεία Markdown: αναγνώσιμες, με δυνατότητα αναζήτησης και ανοίγουν με οποιονδήποτε επεξεργαστή.',
   'sjablonen om mee te beginnen, of leeg': 'πρότυπα για να ξεκινήσετε, ή κενή',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Οι διαφάνειες παραδείγματος ενός προτύπου είναι στα ολλανδικά. Το όνομα και η περιγραφή ακολουθούν τη δική σας γλώσσα· το περιεχόμενο το προσαρμόζετε μετά τη δημιουργία.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'Η παράλειψη είναι ενεργή: τα δεδομένα που βρέθηκαν μαυρίζονται και όλες οι εικόνες, τα βίντεο και ο ήχος αυτής της διαφάνειας δεν πηγαίνουν στην οθόνη ούτε στην εξαγωγή. Το αρχείο markdown σας τα κρατά όλα.',
   'Mijn tekst': 'Το κείμενό μου',

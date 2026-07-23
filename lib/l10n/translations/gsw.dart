@@ -1784,6 +1784,8 @@ const _dutchSourceAddGsw = <String, String>{
       'Hilf bi Alt-Text, Beschrybige und Formulierige. S Yschalte schickt no nüt: das passiert erst, wänn du sälber es Backend gwählt hesch und bi eme Cloud-Dienscht usdrücklich bestätigt hesch. Bi eme lokale Backend verlaat nüt dyn Computer.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Wähl s Backend im Tab KI-Unterstützig. Solang det nüt staht, passiert nüt.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'D Bispilfolie vo ere Vorlag sind uf Änglisch. Name und Beschriibig folged dinere eigete Sprooch; de Inhalt passisch nach em Aalege aa.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Befünd wo du aagluegt und stoh gloh häsch. Die wärded nüme gmäldet, aber de Scan findt si witerhin und si gälted nöd als glöst. Tipp zum eis zrugghole.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -1924,8 +1926,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentatione, wo eifachi Markdown-Dateie bliibed: läsbar, durchsuechbar und mit jedem Editor z öffne.',
   'sjablonen om mee te beginnen, of leeg': 'Vorlage zum Aafange, oder leer',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'D Bispilfolie vo ere Vorlag sind uf Niderländisch. Name und Beschriibig folged dinere eigete Sprooch; de Inhalt passisch nach em Aalege aa.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'S Weglah isch aa: gfundeni Date werded gschwärzt und alli Bilder, Video und Audio vo dere Folie chömed nid uf de Bildschirm oder in Export. Dis Markdown-File behaltet alles.',
   'Mijn tekst': 'Min Täxt',

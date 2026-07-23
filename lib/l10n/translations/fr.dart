@@ -740,6 +740,8 @@ const _dutchSourceAddFr = {
       'Aide pour les textes alternatifs, les descriptions et les formulations. L\'activer n\'envoie encore rien : cela ne se produit qu\'après que vous avez choisi vous-même un backend et, pour un service cloud, confirmé explicitement. Avec un backend local, rien ne quitte votre ordinateur.',
   'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
       'Choisissez le backend dans l\'onglet Assistance IA. Tant que rien n\'y est défini, rien ne se passe.',
+  'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
+      'Les diapositives d\'exemple d\'un modèle sont en anglais. Le nom et la description suivent votre propre langue ; le contenu, vous l\'adaptez après la création.',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Constatations que tu as examinées et laissées en place. Elles ne sont plus signalées, mais le scan continue de les trouver et elles ne comptent pas comme résolues. Touche pour en rétablir une.',
   'Privacybevinding terzijde leggen (ontwerp)':
@@ -882,8 +884,6 @@ const _dutchSourceAddFr = {
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Des présentations qui restent de simples fichiers Markdown : lisibles, consultables et ouvrables avec n\'importe quel éditeur.',
   'sjablonen om mee te beginnen, of leeg': 'modèles pour commencer, ou vierge',
-  'De voorbeelddia\'s van een sjabloon staan in het Nederlands. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
-      'Les diapositives d\'exemple d\'un modèle sont en néerlandais. Le nom et la description suivent votre propre langue ; le contenu, vous l\'adaptez après la création.',
   'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
       'L\'omission est activée : les données trouvées sont caviardées et toutes les images, vidéos et pistes audio de cette diapositive ne partent ni à l\'écran ni à l\'export. Votre fichier markdown conserve tout.',
   'Mijn tekst': 'Mon texte',
