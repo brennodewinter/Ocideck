@@ -88,6 +88,25 @@ that before deciding whether this alpha fits what you are doing.
 *Renamed 2026-07-22.* Everything below was under a single `## [Unreleased]`
 heading: 52,000 words in 455 entries, averaging 114 words each, with the
 `### Fixed
+- **Een presentatie zonder afbeeldingen liet de PDF-export omvallen (#714).** De
+  melding was `Invalid argument(s): 1`, en dat was letterlijker dan het leek:
+  `(done + 1).clamp(1, total)` in de voortgangsregel gooit `ArgumentError(1)`
+  zodra `total` onder de ondergrens zakt. De rasteraar meldt de precache-stap
+  met het aantal te laden afbeeldingen — nul, dus, voor een deck zonder ook maar
+  één foto.
+
+  Dat verklaart wat de melding zo raadselachtig maakte. Een pentestrapport is
+  het schoolvoorbeeld: bevindingen, checklists, scope-matrices, tabellen, geen
+  beeld. De HTML-export van hetzelfde deck lukte wél, want die rastert niet en
+  komt er nooit langs. En het lag aan geen enkel diatype, dus de videodia's
+  weghalen hielp niet.
+
+  Waarom geen enkele poort dit ving: álle exporttoetsen roepen `ExportService`
+  rechtstreeks aan en de rasteraar zónder voortgangs-callback, en dan draait de
+  functie nooit. De borging is daarom tweeledig — de exportknop wordt nu door de
+  héle dialoog heen getoetst (op het deck uit de melding, onbewerkt én
+  gecomprimeerd), en de voortgangsregel is losgetrokken uit het venster zodat
+  dezelfde grens ook in elf goedkope toetsen staat.
 - **De git-opslagmelding beloofde ten onrechte dat video en audio achterblijven.**
   Media reist al mee sinds de git-opslagfasen; de waarschuwingen waarop de
   melding afgaat betekenen "verwijzing niet leesbaar of buiten het project".

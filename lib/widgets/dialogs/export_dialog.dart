@@ -20,6 +20,7 @@ import 'slide_quality_details_dialog.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/export_block_localization.dart';
 import 'export_failure_text.dart';
+import 'export_progress_text.dart';
 
 part 'parts/export_dialog_notices.dart';
 part 'parts/export_dialog_sections.dart';
@@ -402,7 +403,7 @@ class _ExportDialogState extends State<ExportDialog> {
             onStage: (phase, done, total) {
               if (!mounted) return;
               setState(() {
-                _phase = _stageText(phase, done, total);
+                _phase = exportProgressText(context.l10n, phase, done, total);
                 _done = done;
                 _total = total;
               });
@@ -464,27 +465,6 @@ class _ExportDialogState extends State<ExportDialog> {
           ? '${l10n.t('exportedTo')}\n${r.outputPath}'
           : r.error;
     });
-  }
-
-  String _stageText(String phase, int done, int total) {
-    final l10n = context.l10n;
-    final number = (done + 1).clamp(1, total);
-    switch (phase) {
-      case 'precache':
-        return total == 0
-            ? l10n.d('Afbeeldingen laden…')
-            : '${l10n.d('Afbeeldingen laden…')} $done ${l10n.t('of')} $total';
-      case 'prepare':
-        return '${l10n.d('Slide')} $number ${l10n.d('voorbereiden…')}';
-      case 'render':
-        return '${l10n.d('Slide')} $number ${l10n.d('renderen…')}';
-      case 'done':
-        return done >= total
-            ? l10n.d('Slides gerenderd.')
-            : '${l10n.d('Slide')} $done ${l10n.d('gerenderd.')}';
-      default:
-        return l10n.t('renderingSlides');
-    }
   }
 
   @override
