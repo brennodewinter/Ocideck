@@ -1809,6 +1809,17 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Iompórtáil tuairiscí OpenKAT…',
+  'Map met OpenKAT-rapportages kiezen':
+      'Roghnaigh fillteán le tuairiscí OpenKAT',
+  'OpenKAT-rapportages geïmporteerd.': 'Tuairiscí OpenKAT iompórtáilte.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'Deck OpenKAT nuashonraithe; coinníodh na sleamhnáin láimhe.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Níor aimsíodh aon tuairiscí OpenKAT san fhillteán seo.',
+  'OpenKAT-import mislukt.': 'Theip ar an iompórtáil OpenKAT.',
+  'rapportages': 'tuairiscí',
+  'overgeslagen': 'fágtha ar lár',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'níorbh fhéidir gach comhad nasctha a chur san áireamh (doléite nó lasmuigh den tionscadal)',
   'punten': 'urchar',

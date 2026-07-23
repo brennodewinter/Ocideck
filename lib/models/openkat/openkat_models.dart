@@ -20,12 +20,11 @@ class OpenKatOrganization {
     String? code,
     String? name,
     List<OpenKatSnapshot>? snapshots,
-  }) =>
-      OpenKatOrganization(
-        code: code ?? this.code,
-        name: name ?? this.name,
-        snapshots: snapshots ?? this.snapshots,
-      );
+  }) => OpenKatOrganization(
+    code: code ?? this.code,
+    name: name ?? this.name,
+    snapshots: snapshots ?? this.snapshots,
+  );
 }
 
 class OpenKatSnapshot {
@@ -57,16 +56,15 @@ class OpenKatSnapshot {
     List<OpenKatSystem>? systems,
     List<OpenKatFinding>? findings,
     Map<String, OpenKatControlScore>? controls,
-  }) =>
-      OpenKatSnapshot(
-        reportDate: reportDate ?? this.reportDate,
-        sourceFile: sourceFile ?? this.sourceFile,
-        sourceHash: sourceHash ?? this.sourceHash,
-        schema: clearSchema ? null : (schema ?? this.schema),
-        systems: systems ?? this.systems,
-        findings: findings ?? this.findings,
-        controls: controls ?? this.controls,
-      );
+  }) => OpenKatSnapshot(
+    reportDate: reportDate ?? this.reportDate,
+    sourceFile: sourceFile ?? this.sourceFile,
+    sourceHash: sourceHash ?? this.sourceHash,
+    schema: clearSchema ? null : (schema ?? this.schema),
+    systems: systems ?? this.systems,
+    findings: findings ?? this.findings,
+    controls: controls ?? this.controls,
+  );
 }
 
 class OpenKatSystem {
@@ -92,13 +90,12 @@ class OpenKatSystem {
     String? ip,
     bool clearIp = false,
     List<String>? oois,
-  }) =>
-      OpenKatSystem(
-        id: id ?? this.id,
-        hostname: clearHostname ? null : (hostname ?? this.hostname),
-        ip: clearIp ? null : (ip ?? this.ip),
-        oois: oois ?? this.oois,
-      );
+  }) => OpenKatSystem(
+    id: id ?? this.id,
+    hostname: clearHostname ? null : (hostname ?? this.hostname),
+    ip: clearIp ? null : (ip ?? this.ip),
+    oois: oois ?? this.oois,
+  );
 }
 
 class OpenKatFinding {
@@ -141,22 +138,21 @@ class OpenKatFinding {
     String? impact,
     bool clearImpact = false,
     List<String>? sourceReports,
-  }) =>
-      OpenKatFinding(
-        id: id ?? this.id,
-        findingTypeId: findingTypeId ?? this.findingTypeId,
-        findingTypeName: clearFindingTypeName
-            ? null
-            : (findingTypeName ?? this.findingTypeName),
-        severity: severity ?? this.severity,
-        systemId: clearSystemId ? null : (systemId ?? this.systemId),
-        openedAt: clearOpenedAt ? null : (openedAt ?? this.openedAt),
-        recommendation: clearRecommendation
-            ? null
-            : (recommendation ?? this.recommendation),
-        impact: clearImpact ? null : (impact ?? this.impact),
-        sourceReports: sourceReports ?? this.sourceReports,
-      );
+  }) => OpenKatFinding(
+    id: id ?? this.id,
+    findingTypeId: findingTypeId ?? this.findingTypeId,
+    findingTypeName: clearFindingTypeName
+        ? null
+        : (findingTypeName ?? this.findingTypeName),
+    severity: severity ?? this.severity,
+    systemId: clearSystemId ? null : (systemId ?? this.systemId),
+    openedAt: clearOpenedAt ? null : (openedAt ?? this.openedAt),
+    recommendation: clearRecommendation
+        ? null
+        : (recommendation ?? this.recommendation),
+    impact: clearImpact ? null : (impact ?? this.impact),
+    sourceReports: sourceReports ?? this.sourceReports,
+  );
 }
 
 class OpenKatControlScore {
@@ -164,11 +160,7 @@ class OpenKatControlScore {
   final int? compliant;
   final int? total;
 
-  const OpenKatControlScore({
-    required this.name,
-    this.compliant,
-    this.total,
-  });
+  const OpenKatControlScore({required this.name, this.compliant, this.total});
 
   double? get ratio {
     final t = total;

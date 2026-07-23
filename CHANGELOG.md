@@ -251,6 +251,19 @@ read a book to find out.
   alle 31 talen.
 
 ### Added
+- **OpenKAT-rapportages importeren (#767).** Onder *… → OpenKAT-rapportages
+  importeren…* kiest u een map met JSON-exports van OpenKAT; OciDeck bouwt er
+  één managementoverzicht van — totalen, trends en topbevindingen per
+  organisatie — met de nieuwe weergavelimieten als standaard, zodat ook een
+  import van duizenden rapportages leesbare dia's oplevert terwijl álle data
+  in het deck bewaard blijft: niets wordt weggegooid, er wordt alleen
+  selectief getoond. Dezelfde actie op een
+  geopend OpenKAT-deck werkt het bíj: de gegenereerde dia's worden vernieuwd,
+  handmatige dia's blijven staan. Het manifest telt eerlijk mee wat er
+  geladen en overgeslagen is (dubbel, onherkend, kapot of boven de
+  bestandsgrens — de map komt van buiten en wordt begrensd gelezen). Alleen
+  op desktop: de import leest een map van schijf.
+
 - **Een dia kan een deel van zijn data tonen zonder iets weg te gooien
   (#672).** Bullets, tabellen en grafieken uit een grote dataset — een import
   van duizenden regels, een jaar aan metingen — waren alleen leesbaar te

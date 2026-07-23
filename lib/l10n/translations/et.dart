@@ -1765,6 +1765,16 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Impordi OpenKAT-i aruanded…',
+  'Map met OpenKAT-rapportages kiezen': 'Vali OpenKAT-i aruannete kaust',
+  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-i aruanded imporditud.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'OpenKAT-i deck uuendatud; käsitsi lisatud slaidid on alles.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Sellest kaustast ei leitud ühtegi OpenKAT-i aruannet.',
+  'OpenKAT-import mislukt.': 'OpenKAT-i import ebaõnnestus.',
+  'rapportages': 'aruannet',
+  'overgeslagen': 'vahele jäetud',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'kõiki seotud faile ei õnnestunud kaasata (loetamatud või väljaspool projekti)',
   'punten': 'punkti',

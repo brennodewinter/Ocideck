@@ -37,6 +37,13 @@ import 'dart:io';
 ///
 /// A file that is merely *untested* does not belong here: write the test.
 const Set<String> uncoveredBaseline = {
+  // NO EXECUTABLE LINES: `openkat_import_action.dart` is een kale
+  // export-facade (één conditional export, patroon media_fetch). PLATFORM:
+  // `openkat_import_action_web.dart` is de lege webromp — het menu-item
+  // bestaat op web niet. De io-helft, waar het echte werk zit, wordt wél
+  // getest (openkat_import_action_test.dart).
+  'lib/widgets/shell/openkat_import_action.dart',
+  'lib/widgets/shell/openkat_import_action_web.dart',
   // NO EXECUTABLE LINES: `media_fetch.dart` is een kale export-facade — één
   // conditional export en verder niets. PLATFORM: `media_fetch_web.dart` is de
   // web-helft daarvan; daar opent de browser de verbinding en valt er niets te

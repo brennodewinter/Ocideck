@@ -1774,6 +1774,16 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Tuo OpenKAT-raportit…',
+  'Map met OpenKAT-rapportages kiezen': 'Valitse OpenKAT-raporttien kansio',
+  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-raportit tuotu.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'OpenKAT-deck päivitetty; manuaaliset diat on säilytetty.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Tästä kansiosta ei löytynyt OpenKAT-raportteja.',
+  'OpenKAT-import mislukt.': 'OpenKAT-tuonti epäonnistui.',
+  'rapportages': 'raporttia',
+  'overgeslagen': 'ohitettu',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'kaikkia linkitettyjä tiedostoja ei voitu sisällyttää (lukukelvottomia tai projektin ulkopuolella)',
   'punten': 'luettelomerkkiä',

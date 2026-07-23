@@ -51,7 +51,13 @@ class OpenKatNormalizer {
         byAnchor[anchor] = OpenKatSystem(
           id: anchor,
           hostname: _stringField(object, ['hostname', 'name']),
-          ip: _stringField(object, ['ip', 'address', 'ip_address', 'ipv4', 'ipv6']),
+          ip: _stringField(object, [
+            'ip',
+            'address',
+            'ip_address',
+            'ipv4',
+            'ipv6',
+          ]),
           oois: [ooi],
         );
       }
@@ -74,12 +80,11 @@ class OpenKatNormalizer {
     }
     if (lower.startsWith('url|') || lower.startsWith('httpresource|')) {
       final raw = ooi.split('|').skip(1).join('|');
-      try {
-        final uri = Uri.tryParse(raw);
-        return uri?.host ?? raw;
-      } catch (_) {
-        return raw;
-      }
+      // Uri.tryParse gooit niet — bij onzin komt er null en valt dit terug op
+      // de ruwe waarde. De try/bare-catch die hier stond ving dus niets.
+      final uri = Uri.tryParse(raw);
+      final host = uri?.host;
+      return (host == null || host.isEmpty) ? raw : host;
     }
     return _stringField(object, ['hostname', 'ip', 'address', 'name']) ?? ooi;
   }
@@ -92,27 +97,34 @@ class OpenKatNormalizer {
   }) {
     final out = <OpenKatFinding>[];
     for (final object in objects) {
-      final findingType = _mapField(object, ['finding_type', 'finding_type_id']);
-      final typeId = _stringField(findingType, ['id', 'key', 'code']) ??
+      final findingType = _mapField(object, [
+        'finding_type',
+        'finding_type_id',
+      ]);
+      final typeId =
+          _stringField(findingType, ['id', 'key', 'code']) ??
           _stringField(object, ['finding_type', 'finding_type_id', 'type']) ??
           'unknown';
-      final typeName = _stringField(findingType, ['name', 'title']) ??
+      final typeName =
+          _stringField(findingType, ['name', 'title']) ??
           _stringField(object, ['finding_type_name', 'title']);
-      final severity = _stringField(object, [
-        'severity',
-        'risk_level',
-        'level',
-      ])?.toLowerCase() ??
+      final severity =
+          _stringField(object, [
+            'severity',
+            'risk_level',
+            'level',
+          ])?.toLowerCase() ??
           'medium';
       final primaryKey = _stringField(object, ['primary_key', 'id', 'finding']);
-      final ooi = _stringField(object, [
-        'ooi',
-        'object',
-        'system',
-        'asset',
-        'hostname',
-        'ip',
-      ]) ??
+      final ooi =
+          _stringField(object, [
+            'ooi',
+            'object',
+            'system',
+            'asset',
+            'hostname',
+            'ip',
+          ]) ??
           '';
       final systemId = _resolveSystem(ooi, systems);
       final openedAt = _openedAt(object, sourceFile);
@@ -126,7 +138,8 @@ class OpenKatNormalizer {
 
       out.add(
         OpenKatFinding(
-          id: primaryKey ??
+          id:
+              primaryKey ??
               '$typeId|${systemId ?? ooi}|${_stringField(object, ['description']) ?? ''}',
           findingTypeId: typeId,
           findingTypeName: typeName,
@@ -151,7 +164,8 @@ class OpenKatNormalizer {
   }
 
   DateTime? _openedAt(Map<String, dynamic> object, String sourceFile) {
-    final raw = object['first_seen'] ?? object['opened_at'] ?? object['created_at'];
+    final raw =
+        object['first_seen'] ?? object['opened_at'] ?? object['created_at'];
     if (raw is String) return DateTime.tryParse(raw);
     return null;
   }
@@ -164,7 +178,10 @@ class OpenKatNormalizer {
         byId[finding.id] = finding;
       } else {
         byId[finding.id] = existing.copyWith(
-          sourceReports: {...existing.sourceReports, ...finding.sourceReports}.toList(),
+          sourceReports: {
+            ...existing.sourceReports,
+            ...finding.sourceReports,
+          }.toList(),
         );
       }
     }
@@ -174,10 +191,7 @@ class OpenKatNormalizer {
   Map<String, OpenKatControlScore> _normalizeControls(Map<String, int> scores) {
     return {
       for (final entry in scores.entries)
-        entry.key: OpenKatControlScore(
-          name: entry.key,
-          compliant: entry.value,
-        ),
+        entry.key: OpenKatControlScore(name: entry.key, compliant: entry.value),
     };
   }
 

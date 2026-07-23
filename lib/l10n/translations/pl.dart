@@ -1786,6 +1786,16 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Importuj raporty OpenKAT…',
+  'Map met OpenKAT-rapportages kiezen': 'Wybierz folder z raportami OpenKAT',
+  'OpenKAT-rapportages geïmporteerd.': 'Zaimportowano raporty OpenKAT.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'Zaktualizowano deck OpenKAT; ręczne slajdy zostały zachowane.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Nie znaleziono raportów OpenKAT w tym folderze.',
+  'OpenKAT-import mislukt.': 'Import z OpenKAT nie powiódł się.',
+  'rapportages': 'raportów',
+  'overgeslagen': 'pominięto',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'nie wszystkie powiązane pliki udało się dołączyć (nieczytelne lub poza projektem)',
   'punten': 'punktorów',

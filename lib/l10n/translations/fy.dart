@@ -734,6 +734,16 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'OpenKAT-rapportages importeren…': 'OpenKAT-rapportaazjes ymportearje…',
+  'Map met OpenKAT-rapportages kiezen': 'Map mei OpenKAT-rapportaazjes kieze',
+  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-rapportaazjes ymportearre.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'OpenKAT-deck bywurke; hânmjittige dia\'s binne behâlden.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Gjin OpenKAT-rapportaazjes fûn yn dizze map.',
+  'OpenKAT-import mislukt.': 'OpenKAT-ymport mislearre.',
+  'rapportages': 'rapportaazjes',
+  'overgeslagen': 'oerslein',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'net elk keppele bestân koe mei (net lêsber of bûten it projekt)',
   'punten': 'punten',

@@ -43,17 +43,50 @@ class OpenKatDeckGenerator {
   }
 
   /// Replaces OpenKAT-generated slides in [existing] while preserving manual
-  /// slides. Stable ids make this idempotent.
+  /// slides — **in place**, and with copy protection.
+  ///
+  /// De scheidslijn is de `ocideck_openkat_view`-markering, maar de markering
+  /// alléén is niet genoeg (bewaker-bevinding #767): `Slide.duplicate`
+  /// kopieert de notities mee, dus een gebruiker die een gegenereerde tabel
+  /// dupliceert om erop te annoteren draagt de markering óók. Daarom telt per
+  /// markering alleen de **eerste** dia als de gegenereerde: die wordt op zijn
+  /// plek vervangen (of vervalt als de verse generatie hem niet meer kent);
+  /// elke volgende met dezelfde markering is een kopie van de gebruiker en
+  /// blijft staan — net als elke dia zonder markering, op precies de plek waar
+  /// de gebruiker hem zette. Wat de verse generatie toevoegt en nog nergens
+  /// stond, komt achteraan.
   Deck update(Deck existing, List<OpenKatOrganization> organizations) {
     final fresh = generate(organizations, title: existing.title);
-    final manualSlides = existing.slides.where(_isManualSlide).toList();
-    final freshIds = fresh.slides.map((s) => s.id).toSet();
-    final keptManual = manualSlides.where((s) => !freshIds.contains(s.id)).toList();
-    return existing.copyWith(slides: [...fresh.slides, ...keptManual]);
+    final freshByView = <String, Slide>{
+      for (final s in fresh.slides) ?_viewIdOf(s): s,
+    };
+    final vervangen = <String>{};
+    final out = <Slide>[];
+    for (final slide in existing.slides) {
+      final view = _viewIdOf(slide);
+      if (view == null || vervangen.contains(view)) {
+        out.add(slide); // handmatig, of een kopie van de gebruiker
+        continue;
+      }
+      vervangen.add(view);
+      final replacement = freshByView.remove(view);
+      if (replacement != null) out.add(replacement);
+      // Geen vervanger: deze gegenereerde dia bestaat niet meer en vervalt.
+    }
+    // Nieuw in deze generatie, in generatievolgorde.
+    out.addAll(
+      fresh.slides.where((s) => freshByView.containsKey(_viewIdOf(s))),
+    );
+    return existing.copyWith(slides: out);
   }
 
-  bool _isManualSlide(Slide slide) =>
-      !slide.notes.contains('<!-- ocideck_openkat_view:');
+  /// De markering in de notities, of null voor een handmatige dia.
+  static final _viewMarker = RegExp(
+    r'<!--\s*ocideck_openkat_view:\s*([^\s>]+)\s*-->',
+  );
+
+  String? _viewIdOf(Slide slide) =>
+      _viewMarker.firstMatch(slide.notes)?.group(1);
 
   Slide _slide({
     required String id,
@@ -65,18 +98,17 @@ class OpenKatDeckGenerator {
     String customMarkdown = '',
     DisplayWindowSpec? viewLimit,
     String notes = '',
-  }) =>
-      Slide(
-        id: id,
-        type: type,
-        title: title,
-        subtitle: subtitle,
-        bullets: bullets,
-        tableRows: tableRows,
-        customMarkdown: customMarkdown,
-        viewLimit: viewLimit,
-        notes: notes,
-      );
+  }) => Slide(
+    id: id,
+    type: type,
+    title: title,
+    subtitle: subtitle,
+    bullets: bullets,
+    tableRows: tableRows,
+    customMarkdown: customMarkdown,
+    viewLimit: viewLimit,
+    notes: notes,
+  );
 
   Slide _titleSlide(String title, List<OpenKatOrganization> organizations) {
     final orgNames = organizations.map((o) => o.name).join(', ');
@@ -109,7 +141,7 @@ class OpenKatDeckGenerator {
   }
 
   Slide _topIssuesSlide(PortfolioAggregate portfolio) {
-    final issues = aggregator.topIssues(portfolio.organizations, limit: 5);
+    final issues = aggregator.topIssues(portfolio.organizations);
     final rows = <List<String>>[
       ['#', 'Finding', 'Ernst', 'Systemen', 'Orgs'],
       for (var i = 0; i < issues.length; i++)
@@ -126,13 +158,15 @@ class OpenKatDeckGenerator {
       type: SlideType.table,
       title: 'Top-5 issues',
       tableRows: rows,
-      viewLimit: const DisplayWindowSpec(limit: 5, mode: DisplayWindowMode.top, key: '0'),
+      // De aggregator sorteert al op zwaarte; 'first' toont die rangorde.
+      // ('top' op kolom 0 — het volgnummer — keerde de lijst juist om.)
+      viewLimit: const DisplayWindowSpec(limit: 5),
       notes: '<!-- ocideck_openkat_view: portfolio.top-issues -->',
     );
   }
 
   Slide _longestOpenSlide(PortfolioAggregate portfolio) {
-    final findings = aggregator.longestOpenFindings(portfolio.organizations, limit: 8);
+    final findings = aggregator.longestOpenFindings(portfolio.organizations);
     final rows = <List<String>>[
       ['#', 'System', 'Finding', 'Open sinds'],
       for (var i = 0; i < findings.length; i++)
@@ -151,24 +185,20 @@ class OpenKatDeckGenerator {
       type: SlideType.table,
       title: 'Langst openstaande findings',
       tableRows: rows,
-      viewLimit: const DisplayWindowSpec(
-        limit: 8,
-        mode: DisplayWindowMode.bottom,
-        key: '2',
-      ),
+      // Datumkolommen zijn geen getallen; de aggregator sorteert al op
+      // langst-open, dus 'first' bewaart precies die volgorde.
+      viewLimit: const DisplayWindowSpec(limit: 8),
       notes: '<!-- ocideck_openkat_view: portfolio.longest-open -->',
     );
   }
 
   Slide _trendSlide(PortfolioAggregate portfolio) {
-    final conclusion = aggregator.compare(portfolio.current, portfolio.previous);
+    final conclusion = aggregator.compare(
+      portfolio.current,
+      portfolio.previous,
+    );
     final previous = portfolio.previous;
-    final labels = <String>[
-      'Critical',
-      'High',
-      'Medium',
-      'Low',
-    ];
+    final labels = <String>['Critical', 'High', 'Medium', 'Low'];
     final currentSeries = <double>[
       portfolio.current.severityCounts['critical']!.toDouble(),
       portfolio.current.severityCounts['high']!.toDouble(),
@@ -208,8 +238,8 @@ class OpenKatDeckGenerator {
     final current = org.current;
     if (current == null) return const [];
     final agg = aggregator.aggregateSnapshot(current);
-    final systemStats = aggregator.systemsWithMostFindings(current, limit: 8);
-    final improved = aggregator.mostImprovedSystems(org, limit: 8);
+    final systemStats = aggregator.systemsWithMostFindings(current);
+    final improved = aggregator.mostImprovedSystems(org);
 
     return [
       _slide(
@@ -268,7 +298,11 @@ class OpenKatDeckGenerator {
                 improved[i].classification,
               ],
           ],
-          notes: '<!-- ocideck_openkat_view: org.${_safe(org.code)}.improved -->',
+          // Alles blijft in de data; de dia toont de kop van de rangorde die
+          // de aggregator al maakte.
+          viewLimit: const DisplayWindowSpec(limit: 8),
+          notes:
+              '<!-- ocideck_openkat_view: org.${_safe(org.code)}.improved -->',
         ),
     ];
   }

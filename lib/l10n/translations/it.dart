@@ -729,6 +729,16 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'OpenKAT-rapportages importeren…': 'Importa report OpenKAT…',
+  'Map met OpenKAT-rapportages kiezen': 'Scegli la cartella dei report OpenKAT',
+  'OpenKAT-rapportages geïmporteerd.': 'Report OpenKAT importati.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'Deck OpenKAT aggiornato; le diapositive manuali sono state mantenute.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Nessun report OpenKAT trovato in questa cartella.',
+  'OpenKAT-import mislukt.': 'Importazione OpenKAT non riuscita.',
+  'rapportages': 'report',
+  'overgeslagen': 'saltati',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'non tutti i file collegati sono stati inclusi (illeggibili o fuori dal progetto)',
   'punten': 'punti elenco',

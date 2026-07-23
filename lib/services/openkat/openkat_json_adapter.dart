@@ -176,7 +176,8 @@ class OpenKatPerAssetAdapter extends OpenKatJsonAdapter {
 
   @override
   DateTime? reportDate(Map<String, dynamic> json) {
-    final raw = json['observed_at'] ??
+    final raw =
+        json['observed_at'] ??
         json['created_at'] ??
         json['report_date'] ??
         json['valid_time'];

@@ -1790,6 +1790,17 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Relationes OpenKAT importare…',
+  'Map met OpenKAT-rapportages kiezen':
+      'Plicarium cum relationibus OpenKAT eligere',
+  'OpenKAT-rapportages geïmporteerd.': 'Relationes OpenKAT importatae.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'Fasciculus OpenKAT renovatus; scidae manu factae servatae sunt.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Nullae relationes OpenKAT in hoc plicario inventae.',
+  'OpenKAT-import mislukt.': 'Importatio OpenKAT defecit.',
+  'rapportages': 'relationes',
+  'overgeslagen': 'praetermissae',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'non omnis fasciculus nexus includi potuit (illegibilis aut extra proiectum)',
   'punten': 'punctis',

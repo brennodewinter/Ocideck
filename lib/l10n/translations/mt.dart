@@ -1796,6 +1796,18 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Importa rapporti ta\' OpenKAT…',
+  'Map met OpenKAT-rapportages kiezen':
+      'Agħżel folder b\'rapporti ta\' OpenKAT',
+  'OpenKAT-rapportages geïmporteerd.':
+      'Ir-rapporti ta\' OpenKAT ġew importati.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'Id-deck ta\' OpenKAT ġie aġġornat; is-slides manwali nżammu.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Ma nstab l-ebda rapport ta\' OpenKAT f\'dan il-folder.',
+  'OpenKAT-import mislukt.': 'L-importazzjoni minn OpenKAT falliet.',
+  'rapportages': 'rapporti',
+  'overgeslagen': 'maqbużin',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'mhux kull fajl marbut seta\' jiġi inkluż (ma jinqarax jew barra mill-proġett)',
   'punten': 'punti',

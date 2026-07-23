@@ -7,8 +7,14 @@ class OpenKatAggregator {
   PortfolioAggregate aggregatePortfolio(
     List<OpenKatOrganization> organizations,
   ) {
-    final current = organizations.map((o) => o.current).whereType<OpenKatSnapshot>().toList();
-    final previous = organizations.map((o) => o.previous).whereType<OpenKatSnapshot>().toList();
+    final current = organizations
+        .map((o) => o.current)
+        .whereType<OpenKatSnapshot>()
+        .toList();
+    final previous = organizations
+        .map((o) => o.previous)
+        .whereType<OpenKatSnapshot>()
+        .toList();
 
     return PortfolioAggregate(
       current: _aggregateSnapshots(current, prefix: 'current'),
@@ -46,9 +52,7 @@ class OpenKatAggregator {
         .whereType<String>()
         .toSet();
     final criticalHighSystems = findings
-        .where(
-          (f) => f.severity == 'critical' || f.severity == 'high',
-        )
+        .where((f) => f.severity == 'critical' || f.severity == 'high')
         .map((f) => f.systemId)
         .whereType<String>()
         .toSet();
@@ -108,13 +112,17 @@ class OpenKatAggregator {
     final worse = <bool>[];
     final better = <bool>[];
 
-    final criticalDelta = current.severityCounts['critical']! - previous.severityCounts['critical']!;
+    final criticalDelta =
+        current.severityCounts['critical']! -
+        previous.severityCounts['critical']!;
     _addDeltaLine(lines, 'kritieke findings', criticalDelta, worse, better);
 
-    final highDelta = current.severityCounts['high']! - previous.severityCounts['high']!;
+    final highDelta =
+        current.severityCounts['high']! - previous.severityCounts['high']!;
     _addDeltaLine(lines, 'hoge findings', highDelta, worse, better);
 
-    final mediumDelta = current.severityCounts['medium']! - previous.severityCounts['medium']!;
+    final mediumDelta =
+        current.severityCounts['medium']! - previous.severityCounts['medium']!;
     _addDeltaLine(lines, 'medium findings', mediumDelta, worse, better);
 
     final affectedDelta = current.affectedSystems - previous.affectedSystems;
@@ -144,15 +152,15 @@ class OpenKatAggregator {
       label = 'Gemengd';
     }
 
-    return TrendConclusion(
-      label: label,
-      lines: lines.take(3).toList(),
-    );
+    return TrendConclusion(label: label, lines: lines.take(3).toList());
   }
 
+  /// Alle issues gesorteerd; [limit] null betekent álles — de dia begrenst
+  /// zelf via zijn weergavelimiet (#672), zodat de data niet-destructief
+  /// bewaard blijft (bewaker-bevinding #767).
   List<OpenKatIssue> topIssues(
     List<OpenKatOrganization> organizations, {
-    int limit = 5,
+    int? limit,
   }) {
     final byType = <String, OpenKatIssue>{};
     for (final org in organizations) {
@@ -175,12 +183,12 @@ class OpenKatAggregator {
       }
     }
     final sorted = byType.values.toList()..sort(_issueComparator);
-    return sorted.take(limit).toList();
+    return limit == null ? sorted : sorted.take(limit).toList();
   }
 
   List<OpenKatFinding> longestOpenFindings(
     List<OpenKatOrganization> organizations, {
-    int limit = 8,
+    int? limit,
   }) {
     final open = <OpenKatFinding>[];
     for (final org in organizations) {
@@ -206,12 +214,12 @@ class OpenKatAggregator {
       if (cmp != 0) return cmp;
       return a.findingTypeId.compareTo(b.findingTypeId);
     });
-    return open.take(limit).toList();
+    return open.take(limit ?? 1 << 30).toList();
   }
 
   List<OpenKatSystemStats> systemsWithMostFindings(
     OpenKatSnapshot snapshot, {
-    int limit = 8,
+    int? limit,
   }) {
     final bySystem = <String, OpenKatSystemStats>{};
     for (final finding in snapshot.findings) {
@@ -223,12 +231,12 @@ class OpenKatAggregator {
       bySystem[id] = stats._addFinding(finding);
     }
     final sorted = bySystem.values.toList()..sort(_systemStatsComparator);
-    return sorted.take(limit).toList();
+    return sorted.take(limit ?? 1 << 30).toList();
   }
 
   List<OpenKatSystemChange> mostImprovedSystems(
     OpenKatOrganization organization, {
-    int limit = 8,
+    int? limit,
   }) {
     final current = organization.current;
     final previous = organization.previous;
@@ -237,12 +245,16 @@ class OpenKatAggregator {
     final currentStats = <String, OpenKatSystemStats>{};
     for (final f in current.findings) {
       final id = f.systemId ?? 'onbekend';
-      currentStats[id] = (currentStats[id] ?? OpenKatSystemStats(systemId: id))._addFinding(f);
+      currentStats[id] = (currentStats[id] ?? OpenKatSystemStats(systemId: id))
+          ._addFinding(f);
     }
     final previousStats = <String, OpenKatSystemStats>{};
     for (final f in previous.findings) {
       final id = f.systemId ?? 'onbekend';
-      previousStats[id] = (previousStats[id] ?? OpenKatSystemStats(systemId: id))._addFinding(f);
+      previousStats[id] =
+          (previousStats[id] ?? OpenKatSystemStats(systemId: id))._addFinding(
+            f,
+          );
     }
 
     final changes = <OpenKatSystemChange>[];
@@ -250,11 +262,13 @@ class OpenKatAggregator {
       final prev = previousStats[id];
       if (prev == null) continue;
       final cur = currentStats[id]!;
-      final improved = (cur.critical < prev.critical) ||
+      final improved =
+          (cur.critical < prev.critical) ||
           (cur.high < prev.high) ||
           (cur.medium < prev.medium) ||
           (cur.total < prev.total);
-      final regressed = (cur.critical > prev.critical) ||
+      final regressed =
+          (cur.critical > prev.critical) ||
           (cur.high > prev.high) ||
           (cur.medium > prev.medium);
       if (!improved) continue;
@@ -268,7 +282,7 @@ class OpenKatAggregator {
       );
     }
     changes.sort(_systemChangeComparator);
-    return changes.take(limit).toList();
+    return changes.take(limit ?? 1 << 30).toList();
   }
 
   // ── Internals ──────────────────────────────────────────────────────────────
@@ -293,7 +307,8 @@ class OpenKatAggregator {
   String _pct(double value) => '${(value * 100).round()}%';
 
   bool _isIpv4(String? value) =>
-      value != null && RegExp(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$').hasMatch(value);
+      value != null &&
+      RegExp(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$').hasMatch(value);
 
   bool _isIpv6(String? value) =>
       value != null && value.contains(':') && !value.contains('.');
@@ -314,7 +329,9 @@ class OpenKatAggregator {
   }
 
   int _issueComparator(OpenKatIssue a, OpenKatIssue b) {
-    var cmp = _severityRank(a.highestSeverity).compareTo(_severityRank(b.highestSeverity));
+    var cmp = _severityRank(
+      a.highestSeverity,
+    ).compareTo(_severityRank(b.highestSeverity));
     if (cmp != 0) return cmp;
     cmp = b.affectedSystems.compareTo(a.affectedSystems);
     if (cmp != 0) return cmp;
@@ -340,17 +357,21 @@ class OpenKatAggregator {
   }
 
   int _systemChangeComparator(OpenKatSystemChange a, OpenKatSystemChange b) {
-    var cmp = (b.oldStats.critical - b.newStats.critical)
-        .compareTo(a.oldStats.critical - a.newStats.critical);
+    var cmp = (b.oldStats.critical - b.newStats.critical).compareTo(
+      a.oldStats.critical - a.newStats.critical,
+    );
     if (cmp != 0) return cmp;
-    cmp = (b.oldStats.high - b.newStats.high)
-        .compareTo(a.oldStats.high - a.newStats.high);
+    cmp = (b.oldStats.high - b.newStats.high).compareTo(
+      a.oldStats.high - a.newStats.high,
+    );
     if (cmp != 0) return cmp;
-    cmp = (b.oldStats.medium - b.newStats.medium)
-        .compareTo(a.oldStats.medium - a.newStats.medium);
+    cmp = (b.oldStats.medium - b.newStats.medium).compareTo(
+      a.oldStats.medium - a.newStats.medium,
+    );
     if (cmp != 0) return cmp;
-    return (b.oldStats.total - b.newStats.total)
-        .compareTo(a.oldStats.total - a.newStats.total);
+    return (b.oldStats.total - b.newStats.total).compareTo(
+      a.oldStats.total - a.newStats.total,
+    );
   }
 }
 
@@ -419,7 +440,9 @@ class OpenKatIssue {
 
   int get affectedSystems => _affectedSystems.length;
   int get affectedOrganizations => _affectedOrganizations.length;
-  DateTime? get oldestOpening => _openings.isEmpty ? null : _openings.reduce((a, b) => a.isBefore(b) ? a : b);
+  DateTime? get oldestOpening => _openings.isEmpty
+      ? null
+      : _openings.reduce((a, b) => a.isBefore(b) ? a : b);
 
   OpenKatIssue _addFinding(
     OpenKatFinding finding, {
@@ -484,7 +507,8 @@ class OpenKatSystemStats {
     total++;
     findingTypes.add(finding.findingTypeId);
     if (finding.openedAt != null) {
-      oldestOpening = oldestOpening == null || finding.openedAt!.isBefore(oldestOpening!)
+      oldestOpening =
+          oldestOpening == null || finding.openedAt!.isBefore(oldestOpening!)
           ? finding.openedAt
           : oldestOpening;
     }

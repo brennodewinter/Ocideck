@@ -10,6 +10,10 @@ import 'openkat_json_adapter.dart';
 /// Scans a directory for OpenKAT JSON exports, builds a manifest and groups
 /// recognised files by organisation and report date.
 class OpenKatDirectoryScanner {
+  /// Bovengrens per rapportbestand. Zelfde orde als de sidecar-grenzen
+  /// elders: ruim voor élke echte OpenKAT-export, krap voor onzin.
+  static const int maxReportBytes = 16 * 1024 * 1024; // 16 MiB
+
   const OpenKatDirectoryScanner();
 
   Future<({OpenKatManifest manifest, List<OpenKatSnapshotGroup> groups})> scan(
@@ -39,11 +43,29 @@ class OpenKatDirectoryScanner {
     final byOrgDate = <String, List<OpenKatSnapshotCandidate>>{};
     final seenHashes = <String, OpenKatManifestEntry>{};
 
-    await for (final entity in dir.list(recursive: true)) {
+    // followLinks uit: een symlink in andermans exportmap mag de scan niet
+    // buiten de gekozen map laten lezen (bewaker-notitie #767).
+    await for (final entity in dir.list(recursive: true, followLinks: false)) {
       if (entity is! File) continue;
       if (!p.extension(entity.path).toLowerCase().endsWith('.json')) continue;
 
       final relative = p.relative(entity.path, from: directory);
+      // Invoerpoort (P5-lijn): de map komt van buiten, en jsonDecode kopieert
+      // alles nog eens. Een rapportage van tientallen megabytes is geen
+      // OpenKAT-export maar iets anders — begrenzen vóór het lezen, en het
+      // manifest zegt eerlijk wat er overgeslagen is.
+      final size = await entity.length();
+      if (size > OpenKatDirectoryScanner.maxReportBytes) {
+        entries.add(
+          OpenKatManifestEntry(
+            path: relative,
+            hash: '',
+            status:
+                'error: too large ($size bytes, max ${OpenKatDirectoryScanner.maxReportBytes})',
+          ),
+        );
+        continue;
+      }
       final bytes = await entity.readAsBytes();
       final hash = sha256.convert(bytes).toString();
 
@@ -91,7 +113,8 @@ class OpenKatDirectoryScanner {
 
       final code = adapter.organizationCode(json) ?? 'unknown';
       final name = adapter.organizationName(json) ?? code;
-      final date = adapter.reportDate(json) ??
+      final date =
+          adapter.reportDate(json) ??
           OpenKatJsonAdapter.dateFromFilename(p.basename(entity.path)) ??
           fallbackDate ??
           DateTime.now().toUtc();
@@ -121,6 +144,26 @@ class OpenKatDirectoryScanner {
       entries.add(seenHashes[hash]!);
     }
 
+    final groups = _buildGroups(byOrgDate, entries);
+
+    return (
+      manifest: OpenKatManifest(
+        parserVersion: '1.0.0',
+        importedAt: DateTime.now().toUtc(),
+        directory: directory,
+        entries: entries,
+      ),
+      groups: groups,
+    );
+  }
+
+  /// Eén groep per organisatie/datum; extra kandidaten worden als conflict in
+  /// het manifest gemeld en de eerste wint — deterministisch, want de sleutels
+  /// zijn gesorteerd.
+  List<OpenKatSnapshotGroup> _buildGroups(
+    Map<String, List<OpenKatSnapshotCandidate>> byOrgDate,
+    List<OpenKatManifestEntry> entries,
+  ) {
     final groups = <OpenKatSnapshotGroup>[];
     for (final key in byOrgDate.keys.toList()..sort()) {
       final candidates = byOrgDate[key]!;
@@ -145,16 +188,7 @@ class OpenKatDirectoryScanner {
         groups.add(OpenKatSnapshotGroup.fromCandidates(candidates));
       }
     }
-
-    return (
-      manifest: OpenKatManifest(
-        parserVersion: '1.0.0',
-        importedAt: DateTime.now().toUtc(),
-        directory: directory,
-        entries: entries,
-      ),
-      groups: groups,
-    );
+    return groups;
   }
 
   OpenKatJsonAdapter? _detectAdapter(Map<String, dynamic> json) {

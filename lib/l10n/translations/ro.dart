@@ -1791,6 +1791,16 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Importă rapoarte OpenKAT…',
+  'Map met OpenKAT-rapportages kiezen': 'Alege folderul cu rapoarte OpenKAT',
+  'OpenKAT-rapportages geïmporteerd.': 'Rapoartele OpenKAT au fost importate.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'Deck-ul OpenKAT a fost actualizat; slide-urile manuale au fost păstrate.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Nu s-au găsit rapoarte OpenKAT în acest folder.',
+  'OpenKAT-import mislukt.': 'Importul OpenKAT a eșuat.',
+  'rapportages': 'rapoarte',
+  'overgeslagen': 'omise',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'nu toate fișierele legate au putut fi incluse (ilizibile sau în afara proiectului)',
   'punten': 'puncte',

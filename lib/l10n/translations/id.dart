@@ -1774,6 +1774,16 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Impor laporan OpenKAT…',
+  'Map met OpenKAT-rapportages kiezen': 'Pilih folder berisi laporan OpenKAT',
+  'OpenKAT-rapportages geïmporteerd.': 'Laporan OpenKAT diimpor.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'Deck OpenKAT diperbarui; slide manual tetap dipertahankan.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Tidak ada laporan OpenKAT ditemukan di folder ini.',
+  'OpenKAT-import mislukt.': 'Impor OpenKAT gagal.',
+  'rapportages': 'laporan',
+  'overgeslagen': 'dilewati',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'tidak semua berkas tertaut dapat disertakan (tidak terbaca atau di luar proyek)',
   'punten': 'poin',

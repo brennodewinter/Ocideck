@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 
 import '../../models/deck.dart';
+import '../../utils/atomic_file.dart';
 import '../../models/openkat/openkat_models.dart';
 import 'openkat_aggregator.dart';
 import 'openkat_deck_generator.dart';
@@ -30,14 +31,19 @@ class OpenKatImportService {
   });
 
   /// Imports a directory into a fresh deck.
-  Future<({Deck deck, OpenKatManifest manifest, String sidecarDirectory})> importDirectory(
+  Future<({Deck deck, OpenKatManifest manifest, String sidecarDirectory})>
+  importDirectory(
     String directory, {
     String? outputPath,
     String title = 'OpenKAT managementoverzicht',
   }) async {
     final (:manifest, :groups) = await scanner.scan(directory);
     final organizations = _normalize(groups);
-    final deck = generator.generate(organizations, title: title, outputPath: outputPath);
+    final deck = generator.generate(
+      organizations,
+      title: title,
+      outputPath: outputPath,
+    );
     final sidecarDir = await _writeSidecars(
       deck: deck,
       manifest: manifest,
@@ -48,10 +54,8 @@ class OpenKatImportService {
   }
 
   /// Re-imports a directory and updates [existing], preserving manual slides.
-  Future<({Deck deck, OpenKatManifest manifest, String sidecarDirectory})> updateDeck(
-    Deck existing,
-    String directory,
-  ) async {
+  Future<({Deck deck, OpenKatManifest manifest, String sidecarDirectory})>
+  updateDeck(Deck existing, String directory) async {
     final (:manifest, :groups) = await scanner.scan(directory);
     final organizations = _normalize(groups);
     final deck = generator.update(existing, organizations);
@@ -102,14 +106,16 @@ class OpenKatImportService {
     await Directory(dataDir).create(recursive: true);
 
     final manifestFile = File(p.join(dataDir, 'manifest.json'));
-    await manifestFile.writeAsString(
+    await writeStringAtomic(
+      manifestFile,
       const JsonEncoder.withIndent('  ').convert(manifest.toJson()),
     );
 
     for (final org in organizations) {
       final safe = _safe(org.code);
       final orgFile = File(p.join(dataDir, '$safe.json'));
-      await orgFile.writeAsString(
+      await writeStringAtomic(
+        orgFile,
         const JsonEncoder.withIndent('  ').convert(_orgToJson(org)),
       );
     }
@@ -141,11 +147,14 @@ class OpenKatImportService {
               {
                 'id': f.id,
                 'findingTypeId': f.findingTypeId,
-                if (f.findingTypeName != null) 'findingTypeName': f.findingTypeName,
+                if (f.findingTypeName != null)
+                  'findingTypeName': f.findingTypeName,
                 'severity': f.severity,
                 if (f.systemId != null) 'systemId': f.systemId,
-                if (f.openedAt != null) 'openedAt': f.openedAt!.toIso8601String(),
-                if (f.recommendation != null) 'recommendation': f.recommendation,
+                if (f.openedAt != null)
+                  'openedAt': f.openedAt!.toIso8601String(),
+                if (f.recommendation != null)
+                  'recommendation': f.recommendation,
                 if (f.impact != null) 'impact': f.impact,
                 'sourceReports': f.sourceReports,
               },

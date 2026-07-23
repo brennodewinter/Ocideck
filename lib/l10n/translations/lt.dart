@@ -1781,6 +1781,17 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Importuoti OpenKAT ataskaitas…',
+  'Map met OpenKAT-rapportages kiezen':
+      'Pasirinkti aplanką su OpenKAT ataskaitomis',
+  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT ataskaitos importuotos.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'OpenKAT dekas atnaujintas; rankinės skaidrės išsaugotos.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Šiame aplanke OpenKAT ataskaitų nerasta.',
+  'OpenKAT-import mislukt.': 'OpenKAT importas nepavyko.',
+  'rapportages': 'ataskaitos',
+  'overgeslagen': 'praleistos',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'ne visus susietus failus pavyko įtraukti (neįskaitomi arba už projekto ribų)',
   'punten': 'ženklų',

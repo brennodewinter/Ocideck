@@ -1801,6 +1801,16 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Εισαγωγή αναφορών OpenKAT…',
+  'Map met OpenKAT-rapportages kiezen': 'Επιλογή φακέλου με αναφορές OpenKAT',
+  'OpenKAT-rapportages geïmporteerd.': 'Οι αναφορές OpenKAT εισήχθησαν.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'Το deck OpenKAT ενημερώθηκε· οι χειροκίνητες διαφάνειες διατηρήθηκαν.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Δεν βρέθηκαν αναφορές OpenKAT σε αυτόν τον φάκελο.',
+  'OpenKAT-import mislukt.': 'Η εισαγωγή OpenKAT απέτυχε.',
+  'rapportages': 'αναφορές',
+  'overgeslagen': 'παραλείφθηκαν',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'δεν ήταν δυνατή η συμπερίληψη όλων των συνδεδεμένων αρχείων (μη αναγνώσιμα ή εκτός του έργου)',
   'punten': 'κουκκίδες',

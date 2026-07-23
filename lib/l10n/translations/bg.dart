@@ -1796,6 +1796,16 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Импортиране на доклади от OpenKAT…',
+  'Map met OpenKAT-rapportages kiezen': 'Избор на папка с доклади от OpenKAT',
+  'OpenKAT-rapportages geïmporteerd.': 'Докладите от OpenKAT са импортирани.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'Тестето от OpenKAT е обновено; ръчните слайдове са запазени.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'Няма намерени доклади от OpenKAT в тази папка.',
+  'OpenKAT-import mislukt.': 'Импортирането от OpenKAT не успя.',
+  'rapportages': 'доклада',
+  'overgeslagen': 'пропуснати',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'не всички свързани файлове можаха да бъдат включени (нечетими или извън проекта)',
   'punten': 'точки',

@@ -1791,6 +1791,16 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'OpenKAT-rapportages importeren…': 'Імпортувати звіти OpenKAT…',
+  'Map met OpenKAT-rapportages kiezen': 'Вибрати теку зі звітами OpenKAT',
+  'OpenKAT-rapportages geïmporteerd.': 'Звіти OpenKAT імпортовано.',
+  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
+      'Колоду OpenKAT оновлено; ручні слайди збережено.',
+  'Geen OpenKAT-rapportages gevonden in deze map.':
+      'У цій теці не знайдено звітів OpenKAT.',
+  'OpenKAT-import mislukt.': 'Не вдалося імпортувати з OpenKAT.',
+  'rapportages': 'звітів',
+  'overgeslagen': 'пропущено',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
       'не всі повʼязані файли вдалося включити (нечитабельні або поза проєктом)',
   'punten': 'пунктів',
