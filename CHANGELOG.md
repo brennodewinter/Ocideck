@@ -94,6 +94,13 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Added
+- **Het Vigilis-logo in "Over OciDeck", onder de uitgever.** Vigilis maakt het
+  werk van Stichting LibreKAT mogelijk; het scherm noemde de stichting wel,
+  maar niet wie dat draagt. Onder de uitgeverskaart staat nu een eigen blokje
+  "Mogelijk gemaakt door" met het logo. Eén nieuwe interfacetekst, meteen in
+  alle 31 talen.
+
 ### Fixed
 - **Drie documenten bleven op de oude Flutter-pin staan, buiten het bereik van
   de poort die daar juist voor is.** `check-toolchain` (#598/#721) legt de
