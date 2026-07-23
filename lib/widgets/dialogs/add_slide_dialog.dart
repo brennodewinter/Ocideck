@@ -479,7 +479,20 @@ class FittedTypeLabel extends StatelessWidget {
   static TextStyle _styleAt(double fontSize) =>
       TextStyle(fontSize: fontSize, height: 1.15);
 
-  /// The width the longest single word needs, measured in [base] at
+  /// The pieces a label may be broken into without breaking *inside* a word.
+  ///
+  /// Whitespace, and after a hyphen — Flutter's line breaker treats a hyphen as
+  /// a break opportunity and keeps it on the first line, which was measured
+  /// rather than assumed: Swedish *Cockpit-instrumentpanel* renders as
+  /// "Cockpit-" / "instrumentpanel", two lines that both fit the card.
+  ///
+  /// Counting it as one unbreakable token made the card shrink to the 8pt floor
+  /// for a label that reads fine at 11. Measuring what the renderer will
+  /// actually do is the difference between a cautious layout and a small one.
+  static Iterable<String> _breakablePieces(String label) =>
+      label.split(RegExp(r'(?<=-)|\s+')).where((p) => p.isNotEmpty);
+
+  /// The width the longest unbreakable piece needs, measured in [base] at
   /// [fontSize].
   ///
   /// [base] must be the style the label is actually **rendered** in — the
@@ -493,9 +506,9 @@ class FittedTypeLabel extends StatelessWidget {
     TextDirection direction,
     TextStyle base,
   ) {
-    final longest = label
-        .split(RegExp(r'\s+'))
-        .fold<String>('', (a, b) => b.length > a.length ? b : a);
+    final longest = _breakablePieces(
+      label,
+    ).fold<String>('', (a, b) => b.length > a.length ? b : a);
     final painter = TextPainter(
       text: TextSpan(text: longest, style: base.merge(_styleAt(fontSize))),
       textDirection: direction,
