@@ -1800,6 +1800,7 @@ const _dutchSourceAddRo = <String, String>{
       'Un sigiliu este o afirmație despre exact acești octeți. O ramură de lucru poate fi rescrisă, preluată prin cherry-pick și trimisă forțat, iar un sigiliu care supraviețuiește la toate acestea nu mai spune nimic.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Salvați această prezentare ca fișier sau ca pachet .ocideck. Sigiliul aparține unei etichete de lansare, iar acel drum încă nu există — până atunci, aici este în siguranță.',
+  'Deze is beoordeeld en mag blijven': 'Verificat, acesta poate rămâne',
   'De export is gestopt tijdens het voorbereiden.':
       'Exportul s-a oprit în timpul pregătirii.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

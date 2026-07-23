@@ -1789,6 +1789,7 @@ const _dutchSourceAddHr = <String, String>{
       'Pečat je izjava o točno ovim bajtovima. Radna grana može se prepisati, cherry-pickati i prisilno gurnuti, a pečat koji sve to preživi više ništa ne govori.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Spremite ovu prezentaciju kao datoteku ili kao .ocideck paket. Pečat pripada oznaci izdanja, a taj put još ne postoji — do tada je ovdje siguran.',
+  'Deze is beoordeeld en mag blijven': 'Pregledano, ovo može ostati',
   'De export is gestopt tijdens het voorbereiden.':
       'Izvoz se zaustavio tijekom pripreme.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

@@ -1774,6 +1774,7 @@ const _dutchSourceAddEt = <String, String>{
       'Pitser on väide täpselt nende baitide kohta. Tööharu saab ümber kirjutada, cherry-pick\'ida ja jõuga tõugata, ja pitser, mis selle kõik üle elab, ei ütle enam midagi.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Salvesta see esitlus failina või .ocideck-paketina. Pitser kuulub väljalasketähise juurde ja seda teed veel pole — seniks on ta siin turvaliselt.',
+  'Deze is beoordeeld en mag blijven': 'Üle vaadatud, see võib jääda',
   'De export is gestopt tijdens het voorbereiden.':
       'Eksport peatus ettevalmistamise ajal.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

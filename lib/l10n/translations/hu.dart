@@ -1787,6 +1787,7 @@ const _dutchSourceAddHu = <String, String>{
       'A pecsét kijelentés pontosan ezekről a bájtokról. Egy munkaág átírható, cherry-pickelhető és kényszerrel feltolható, és az a pecsét, amely ezt túléli, már semmit sem mond.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Mentse ezt a prezentációt fájlként vagy .ocideck csomagként. A pecsét egy kiadási címkéhez tartozik, és az az út még nincs meg — addig itt van biztonságban.',
+  'Deze is beoordeeld en mag blijven': 'Ellenőrizve, ez maradhat',
   'De export is gestopt tijdens het voorbereiden.':
       'Az exportálás az előkészítés közben leállt.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

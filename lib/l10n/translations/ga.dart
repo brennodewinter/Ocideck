@@ -1818,6 +1818,7 @@ const _dutchSourceAddGa = <String, String>{
       'Is ráiteas é séala faoi na bearta seo go díreach. Is féidir brainse oibre a athscríobh, cherry-pick a dhéanamh air agus é a bhrú le fórsa, agus ní deir séala a mhaireann é sin ar fad aon rud a thuilleadh.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Sábháil an taispeántas seo mar chomhad nó mar phacáiste .ocideck. Baineann an séala le clib eisiúna, agus níl an bealach sin ann fós — go dtí sin is anseo atá sé slán.',
+  'Deze is beoordeeld en mag blijven': 'Seiceáilte, féadann sé seo fanacht',
   'De export is gestopt tijdens het voorbereiden.':
       'Stop an t-easpórtáil le linn an ullmhúcháin.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

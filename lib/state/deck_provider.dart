@@ -33,6 +33,7 @@ import '../platform/platform_features.dart';
 import '../utils/log.dart';
 import '../utils/page_scoped_notes.dart';
 import 'settings_provider.dart';
+import '../services/privacy/dismissal_codec.dart';
 
 part 'deck_provider_markdown.dart';
 part 'deck_provider_ai.dart';
@@ -611,29 +612,36 @@ class DeckNotifier extends StateNotifier<DeckState> {
     );
   }
 
-  /// Update the (separate) annotation layer. Kept out of the undo/redo history
-  /// and the content revision so drawing while presenting stays lightweight;
-  /// marks the deck dirty so the strokes get saved to the sidecar.
-  void setAnnotations(Map<String, List<InkStroke>> annotations) {
+  /// Werk een laag bij die naast de markdown leeft: annotaties, notities,
+  /// terzijdegelegde bevindingen.
+  ///
+  /// Alle drie buiten undo/redo — het zijn geen inhoudswijzigingen, en Ctrl+Z
+  /// hoort een typefout terug te draaien en niet een tekening of een oordeel.
+  /// Wel vuil markeren, anders wordt de sidecar nooit weggeschreven; juist dat
+  /// laatste is de stap die je bij een vierde laag zou vergeten.
+  void _updateSidecarLayer(Deck Function(Deck) apply) {
     final deck = state.deck;
     if (deck == null) return;
-    state = state.copyWith(deck: deck.copyWith(annotations: annotations));
+    state = state.copyWith(deck: apply(deck));
     if (!state.isDirty) state = state.copyWith(isDirty: true);
   }
 
+  /// Update the (separate) annotation layer. Kept out of the undo/redo history
+  /// and the content revision so drawing while presenting stays lightweight;
+  /// marks the deck dirty so the strokes get saved to the sidecar.
+  void setAnnotations(Map<String, List<InkStroke>> annotations) =>
+      _updateSidecarLayer((d) => d.copyWith(annotations: annotations));
+
+  /// Vervang de terzijdegelegde privacybevindingen (#651). Buiten undo/redo:
+  /// Ctrl+Z hoort een typefout terug te draaien, niet een privacy-oordeel —
+  /// daarvoor is de terzijdegelegd-lijst met haar eigen ongedaan-maken.
+  void setDismissals(DeckDismissals dismissals) =>
+      _updateSidecarLayer((d) => d.copyWith(dismissals: dismissals));
+
   /// Update the (separate) user-notes layer. Kept out of undo/redo history;
   /// marks the deck dirty so notes get saved to the sidecar.
-  void setUserNotes(Map<String, String> notes) {
-    final deck = state.deck;
-    if (deck == null) return;
-    final cleaned = <String, String>{};
-    for (final entry in notes.entries) {
-      final text = entry.value.trim();
-      if (text.isNotEmpty) cleaned[entry.key] = text;
-    }
-    state = state.copyWith(deck: deck.copyWith(userNotes: cleaned));
-    if (!state.isDirty) state = state.copyWith(isDirty: true);
-  }
+  void setUserNotes(Map<String, String> notes) =>
+      _updateSidecarLayer((d) => d.copyWith(userNotes: _nonEmptyNotes(notes)));
 
   void setUserNoteForSlide(
     String slideId,
@@ -643,17 +651,15 @@ class DeckNotifier extends StateNotifier<DeckState> {
   }) {
     final deck = state.deck;
     if (deck == null) return;
-    final next = Map<String, String>.from(deck.userNotes);
-    final trimmed = text.trim();
-    final key = userNoteStorageKey(slideId, pageIndex, multiPage: multiPage);
-    if (trimmed.isEmpty) {
-      next.remove(key);
-      if (multiPage && pageIndex == 0) next.remove(slideId);
-    } else {
-      next[key] = trimmed;
-      if (multiPage && pageIndex == 0) next.remove(slideId);
-    }
-    setUserNotes(next);
+    setUserNotes(
+      _withUserNote(
+        deck.userNotes,
+        slideId,
+        text,
+        pageIndex: pageIndex,
+        multiPage: multiPage,
+      ),
+    );
   }
 
   String? userNoteForSlide(
@@ -787,3 +793,42 @@ final deckProvider = StateNotifierProvider<DeckNotifier, DeckState>((ref) {
     ref.read(fileServiceProvider),
   );
 });
+
+/// De notities zonder lege waarden.
+///
+/// Een leeg gemaakte notitie hoort te verdwijnen en niet als lege string te
+/// blijven staan: dan schrijft de codec een sidecar voor niets, en telt "er
+/// zijn notities" iets mee dat de lezer niet ziet.
+Map<String, String> _nonEmptyNotes(Map<String, String> notes) {
+  final cleaned = <String, String>{};
+  for (final entry in notes.entries) {
+    final text = entry.value.trim();
+    if (text.isNotEmpty) cleaned[entry.key] = text;
+  }
+  return cleaned;
+}
+
+/// [notes] met de notitie van één dia gezet of gewist.
+///
+/// Een leeg gemaakte notitie verdwijnt in plaats van als lege string te blijven
+/// staan. Bij een meerpagina-dia gaat de oude sleutel zónder paginanummer óók
+/// weg: die is van vóór de paginering en zou anders als spooknotitie blijven
+/// bestaan naast de nieuwe.
+Map<String, String> _withUserNote(
+  Map<String, String> notes,
+  String slideId,
+  String text, {
+  required int pageIndex,
+  required bool multiPage,
+}) {
+  final next = Map<String, String>.from(notes);
+  final trimmed = text.trim();
+  final key = userNoteStorageKey(slideId, pageIndex, multiPage: multiPage);
+  if (trimmed.isEmpty) {
+    next.remove(key);
+  } else {
+    next[key] = trimmed;
+  }
+  if (multiPage && pageIndex == 0) next.remove(slideId);
+  return next;
+}

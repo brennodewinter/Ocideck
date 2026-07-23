@@ -1799,6 +1799,7 @@ const _dutchSourceAddLa = <String, String>{
       'Sigillum est enuntiatio de his ipsis octetis. Ramus operis rescribi, decerpi et vi impelli potest, et sigillum quod haec superest nihil amplius dicit.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Serva hunc fasciculum ut plicam vel ut sarcinam .ocideck. Sigillum ad titulum emissionis pertinet, quae via nondum est — usque tunc hic tutum manet.',
+  'Deze is beoordeeld en mag blijven': 'Recognitum, hoc manere potest',
   'De export is gestopt tijdens het voorbereiden.':
       'Exportatio in praeparatione destitit.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

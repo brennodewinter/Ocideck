@@ -1795,6 +1795,7 @@ const _dutchSourceAddPl = <String, String>{
       'Pieczęć to stwierdzenie o dokładnie tych bajtach. Gałąź roboczą można przepisać, przenieść przez cherry-pick i wypchnąć siłą, a pieczęć, która to przetrwa, niczego już nie mówi.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Zapisz tę prezentację jako plik lub jako pakiet .ocideck. Pieczęć należy do tagu wydania, a tej drogi jeszcze nie ma — do tego czasu tutaj jest bezpieczna.',
+  'Deze is beoordeeld en mag blijven': 'Sprawdzone, to może zostać',
   'De export is gestopt tijdens het voorbereiden.':
       'Eksport zatrzymał się podczas przygotowania.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

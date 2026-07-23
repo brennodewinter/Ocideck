@@ -738,6 +738,7 @@ const _dutchSourceAddIt = {
       'Un sigillo è un\'affermazione su esattamente questi byte. Un ramo di lavoro può essere riscritto, sottoposto a cherry-pick e forzato, e un sigillo che sopravvive a tutto ciò non dice più nulla.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Salva questa presentazione come file o come pacchetto .ocideck. Il sigillo appartiene a un tag di rilascio, e quella strada non esiste ancora: fino ad allora è qui che sta al sicuro.',
+  'Deze is beoordeeld en mag blijven': 'Verificato, questo può restare',
   'De export is gestopt tijdens het voorbereiden.':
       'L\'esportazione si è interrotta durante la preparazione.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':

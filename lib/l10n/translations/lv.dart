@@ -1782,6 +1782,7 @@ const _dutchSourceAddLv = <String, String>{
       'Zīmogs ir apgalvojums tieši par šiem baitiem. Darba zaru var pārrakstīt, cherry-pick un piespiedu kārtā nosūtīt, un zīmogs, kas to visu pārdzīvo, vairs neko nesaka.',
   'Bewaar dit deck als bestand of als .ocideck-pakket. Het zegel hoort bij een release-tag, en die weg is er nog niet — tot dan is dit de plek waar het veilig staat.':
       'Saglabājiet šo prezentāciju kā failu vai kā .ocideck paku. Zīmogs pieder laidiena tagam, un šī ceļa vēl nav — līdz tam tas ir drošībā šeit.',
+  'Deze is beoordeeld en mag blijven': 'Pārbaudīts, šis var palikt',
   'De export is gestopt tijdens het voorbereiden.':
       'Eksports apstājās sagatavošanas laikā.',
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
