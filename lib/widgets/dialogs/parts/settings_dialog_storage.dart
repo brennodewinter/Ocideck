@@ -248,7 +248,13 @@ extension _SettingsStorageTab on _SettingsDialogState {
           _ => null,
         },
         S3Connection() => switch (_s3Forms[connection.id]) {
-          final S3Form form => _s3Panel(form),
+          final S3Form form => S3Panel(
+            form: form,
+            confirmCertificate: _confirmCertificate,
+            // De regel achter de verbindingsnaam toont de uitslag van de
+            // verbindingstest, en die staat buiten het paneel.
+            onChanged: () => _rebuild(() {}),
+          ),
           _ => null,
         },
         GitConnection() => switch (_gitForms[connection.id]) {

@@ -153,7 +153,10 @@ extension _SettingsAi on _SettingsDialogState {
         icon: Icons.memory_outlined,
       ),
       if (isSelfHosted || isCloud)
-        _secretField(_ai.apiKey.field, l10n.d('API-sleutel (optioneel)')),
+        SettingsSecretField(
+          _ai.apiKey.field,
+          l10n.d('API-sleutel (optioneel)'),
+        ),
       if (isSelfHosted) _aiTrustedSwitch(l10n),
       if (isCloud) ..._aiCloudConfirm(l10n),
       const SizedBox(height: 12),

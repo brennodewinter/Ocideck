@@ -1,5 +1,3 @@
-// Part of the settings_dialog library — see ../settings_dialog.dart.
-//
 // Het geheim van een netwerkbron: het wachtwoord van Nextcloud, het token van
 // git, de API-sleutel van de AI-backend. Die staan niet bij de overige
 // instellingen maar versleuteld in de sleutelhanger (D2, §10.1), en dat maakt
@@ -16,12 +14,12 @@
 //     verhuizen, ook al is het geheim zelf onveranderd. Gebeurt dat niet, dan
 //     staat het onder de oude sleutel en werkt de verbinding niet meer.
 //
-// Beide worden hier afgehandeld, één keer. De drie bronnen houden verder hun
-// eigen vorm — git heeft een forge en een eigenaar, Nextcloud een submap, de
-// AI-backend een modus — en dat is met opzet niet in een gedeelde basisklasse
-// geperst. Alleen dit stukje boekhouding was letterlijk hetzelfde, en het is
-// net het stukje waar een fout duur is.
-part of '../settings_dialog.dart';
+// Beide worden hier afgehandeld, één keer. De vier bronnen houden verder hun
+// eigen vorm — git heeft een forge en een eigenaar, Nextcloud een submap, S3
+// een adresseringsstijl, de AI-backend een modus — en dat is met opzet niet in
+// een gedeelde basisklasse geperst. Alleen dit stukje boekhouding was letterlijk
+// hetzelfde, en het is net het stukje waar een fout duur is.
+import 'package:flutter/widgets.dart';
 
 /// Het invulveld van een geheim, plus wat nodig is om te weten of het écht
 /// moet worden weggeschreven.
@@ -58,16 +56,4 @@ class KeychainSecret {
       field.text != _loaded || identity != _initialIdentity;
 
   void dispose() => field.dispose();
-}
-
-extension _SettingsSecret on _SettingsDialogState {
-  /// Het invulveld van een geheim. De vorm en de weigering op web zitten in
-  /// [SettingsSecretField]; dit is de aanroep vanuit de panelen die nog in de
-  /// gedeelde scope leven.
-  Widget _secretField(
-    TextEditingController controller,
-    String label, {
-    String? hint,
-    IconData icon = Icons.key_outlined,
-  }) => SettingsSecretField(controller, label, hint: hint, icon: icon);
 }

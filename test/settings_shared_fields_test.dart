@@ -9,7 +9,9 @@ import 'package:ocideck/widgets/dialogs/settings/settings_text_field.dart';
 /// venster niet meer te kennen, en een test hoeft het venster niet te openen.
 void main() {
   Future<void> show(WidgetTester tester, Widget child) => tester.pumpWidget(
-    MaterialApp(home: Scaffold(body: SingleChildScrollView(child: child))),
+    MaterialApp(
+      home: Scaffold(body: SingleChildScrollView(child: child)),
+    ),
   );
 
   group('SettingsSectionTitle', () {
@@ -80,7 +82,10 @@ void main() {
 
       expect(find.text('Wachtwoord'), findsOneWidget);
       expect(find.text('app-wachtwoord'), findsOneWidget);
-      expect(tester.widget<TextField>(find.byType(TextField)).obscureText, true);
+      expect(
+        tester.widget<TextField>(find.byType(TextField)).obscureText,
+        true,
+      );
       expect(find.byIcon(Icons.key_outlined), findsOneWidget);
     });
   });

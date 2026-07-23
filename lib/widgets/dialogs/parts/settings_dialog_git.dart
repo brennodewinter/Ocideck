@@ -74,7 +74,7 @@ extension _SettingsGit on _SettingsDialogState {
           hint: 'main',
           icon: Icons.account_tree_outlined,
         ),
-        _secretField(form.token.field, l10n.d('Personal access token')),
+        SettingsSecretField(form.token.field, l10n.d('Personal access token')),
         _gitTokenScopeHelp(l10n, form.provider),
         CheckboxListTile(
           value: form.trusted,
