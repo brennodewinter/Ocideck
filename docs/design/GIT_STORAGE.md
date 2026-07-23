@@ -136,12 +136,12 @@ every building block exists:
 | Secret in OS keychain | WebDAV password store | `lib/services/secret_store.dart` |
 | Per-tab remote origin | `WebdavOrigin {baseUrl, username, remotePath, etag}` | `lib/models/webdav_settings.dart` |
 | Lost-update guard on write | `If-Match` on PUT -> `WebdavConflictException` | `lib/services/webdav_service.dart` |
-| Deck → `{path: bytes}` map | `buildPackageMembers(deck)` | `lib/services/parts/file_service_package.dart` |
+| Deck → `{path: bytes}` map | `buildPackageMembers(deck)` | `lib/services/file/file_service_package.dart` |
 | Content hashing of images | md5 worker in isolate | `lib/services/image_dedup_service.dart` |
-| Import safety gate (fail-closed) | `scanForUnsafeMarkdown` / `MarkdownSafetyScanner` | `lib/services/parts/file_service_import.dart`, `lib/services/markdown_safety.dart` |
+| Import safety gate (fail-closed) | `scanForUnsafeMarkdown` / `MarkdownSafetyScanner` | `lib/services/file/file_service_import.dart`, `lib/services/markdown_safety.dart` |
 | Open from bytes (web / remote) | `openDeckFromBytes` | `lib/state/tabs_provider.dart` |
 | Per-tab provider overrides | `ProviderScope` overrides per tab | `lib/widgets/app_shell.dart` |
-| Same-origin fetch-proxy (web CORS) | `/fetch-proxy?url=` | `lib/services/parts/file_service_net.dart` |
+| Same-origin fetch-proxy (web CORS) | `/fetch-proxy?url=` | `lib/services/file/file_service_net.dart` |
 | Classification/quality gate | policy evaluate, fail-closed | `lib/services/export_service.dart` |
 | **Platform capability with real stubs** | conditional import + `impl.*` getters | `lib/platform/platform_features.dart` |
 | **A network deck source that web deliberately does not get** | `supportsNetworkDeckSources == false` on web | `lib/platform/platform_features_web.dart` |
@@ -947,7 +947,7 @@ git_cli.dart`, and nothing else in the tree may spawn a process.
 - Web is the **REST data plane only** (§8.3). `supportsNativeGit` is `false`.
 - **CORS**: GitHub and GitLab APIs send CORS headers for token auth; a
   self-hosted Forgejo may not. Reuse/extend the existing same-origin
-  `/fetch-proxy` (`lib/services/parts/file_service_net.dart`) for those origins,
+  `/fetch-proxy` (`lib/services/file/file_service_net.dart`) for those origins,
   or document the required CORS configuration. (URL-import failures on web are
   usually CORS.)
 - **The proxy is for public repositories only — a request carrying a token never
@@ -1208,7 +1208,7 @@ document promises exact file paths, so a wrong one reads as a missing feature.)*
   tree/history/tags (mirrors `lib/state/webdav_provider.dart`).
 
 Touch points (integrate, don't fork):
-- `lib/services/parts/file_service_package.dart` — reuse `buildPackageMembers`;
+- `lib/services/file/file_service_package.dart` — reuse `buildPackageMembers`;
   add a re-path step to the §6 layout + `repo:` asset substitution.
 - `lib/services/markdown_service.dart` — `repo:` scheme round-trip.
 - `lib/utils/project_path.dart` — repo-root resolution for `repo:` (with guard).

@@ -26,16 +26,16 @@ import 'cvss/cvss4.dart';
 import 'export_metadata.dart';
 import 'markdown_table_codec.dart';
 
-part 'parts/marp_html_service_cockpit.dart';
-part 'parts/marp_html_service_charts.dart';
-part 'parts/marp_html_service_charts_radial.dart';
-part 'parts/marp_html_service_charts_bullet.dart';
-part 'parts/marp_html_service_reporting.dart';
-part 'parts/marp_html_service_reporting_miauw.dart';
-part 'parts/marp_html_service_css.dart';
-part 'parts/marp_html_service_render_script.dart';
-part 'parts/marp_html_service_images.dart';
-part 'parts/marp_html_service_markup.dart';
+part 'marp_html/marp_html_service_cockpit.dart';
+part 'marp_html/marp_html_service_charts.dart';
+part 'marp_html/marp_html_service_charts_radial.dart';
+part 'marp_html/marp_html_service_charts_bullet.dart';
+part 'marp_html/marp_html_service_reporting.dart';
+part 'marp_html/marp_html_service_reporting_miauw.dart';
+part 'marp_html/marp_html_service_css.dart';
+part 'marp_html/marp_html_service_render_script.dart';
+part 'marp_html/marp_html_service_images.dart';
+part 'marp_html/marp_html_service_markup.dart';
 
 /// Maakt van een afbeeldingsverwijzing uit een deck een `data:`-URI, of geeft
 /// null wanneer de afbeelding niet in te sluiten is (niet gevonden, buiten de

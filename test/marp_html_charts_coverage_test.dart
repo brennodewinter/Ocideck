@@ -3,7 +3,7 @@ import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 
-/// Coverage for `lib/services/parts/marp_html_service_charts.dart`.
+/// Coverage for `lib/services/marp_html/marp_html_service_charts.dart`.
 ///
 /// Every chart kind reaches the SVG renderer through the public static entry
 /// point [MarpHtmlService.renderChartBlocks], which parses a ```chart fenced

@@ -25,9 +25,9 @@ import '../utils/markdown_paste_cleanup.dart';
 
 part 'markdown_service_helpers.dart';
 part 'markdown_service_parse.dart';
-part 'parts/markdown_service_parse_directives.dart';
-part 'parts/markdown_service_parse_columns.dart';
-part 'parts/markdown_service_parse_front_matter.dart';
+part 'markdown_parse/markdown_service_parse_directives.dart';
+part 'markdown_parse/markdown_service_parse_columns.dart';
+part 'markdown_parse/markdown_service_parse_front_matter.dart';
 part 'markdown_service_finding.dart';
 part 'markdown_service_fenced.dart';
 part 'markdown_service_serialize.dart';

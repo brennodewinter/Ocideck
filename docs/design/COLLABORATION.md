@@ -302,7 +302,7 @@ joiners start from `snapshot + recent ops`.
 - **The file (durable):** on session end the owner calls the existing save path
   (`lib/services/file_service.dart` → `saveDeck()` at line 690, or
   `buildPackageBytes()` at line 53 in
-  `lib/services/parts/file_service_package.dart`) and distributes the final
+  `lib/services/file/file_service_package.dart`) and distributes the final
   version. A gone room / homeserver is never a lost deck.
 
 ### 6.5 Session lifecycle
@@ -742,7 +742,7 @@ confidential webinars possible on infrastructure OciDeck doesn't control.
 - **Provenance signing.** On session end the owner may sign the distributed final
   deck with the identity key — tie this to the existing classification gate
   (`lib/services/classification_enforcement_policy.dart`) and package encryption
-  (`lib/services/parts/file_service_package.dart`, AES-256 with password).
+  (`lib/services/file/file_service_package.dart`, AES-256 with password).
 
 ### 9.3 Honest constraints (must be designed for)
 
@@ -840,8 +840,8 @@ introduces an infrastructure dependency (an SFU, still not run by OciDeck).
 | Providers | `lib/state/deck_provider.dart`, `editor_provider.dart`, `deck_quality_provider.dart` | `deckProvider`, `editorProvider`, `deckQualityProvider` |
 | **Per-tab override site** | `lib/widgets/app_shell.dart` | `ProviderScope` overrides in the tab loop (~250–270) |
 | Tab context | `lib/state/tabs_provider.dart` | `TabInfo` (cf. `webdavOrigin`, line 44) |
-| File open/save | `lib/services/file_service.dart` (+ `parts/file_service_*.dart`) | `openDeckDetailed` (568), `saveDeck` (690) |
-| Package build/decode | `lib/services/parts/file_service_package.dart` | `buildPackageBytes` (53), `decodePackageEntries` (716) |
+| File open/save | `lib/services/file_service.dart` (+ `file/file_service_*.dart`) | `openDeckDetailed` (568), `saveDeck` (690) |
+| Package build/decode | `lib/services/file/file_service_package.dart` | `buildPackageBytes` (53), `decodePackageEntries` (716) |
 | Atomic writes | `lib/utils/atomic_file.dart` | `writeBytesAtomic` (23) |
 | BYO-server precedent | `lib/services/webdav_service.dart`, `lib/models/webdav_settings.dart` | `WebdavServer` (10), `trustedInternal`, `NetGuard` |
 | Secret storage | `lib/services/secret_store.dart` | `SecretStore` (13), keychain keys |

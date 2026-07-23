@@ -38,15 +38,15 @@ import 'markdown_service.dart';
 import 'slide_image_refs.dart';
 import 'web_asset_store.dart';
 
-part 'parts/file_service_net.dart';
-part 'parts/file_service_open.dart';
-part 'parts/file_service_package.dart';
-part 'parts/file_service_dossier.dart';
-part 'parts/file_service_project.dart';
-part 'parts/file_service_import.dart';
-part 'parts/file_service_import_dirs.dart';
-part 'parts/file_service_scan.dart';
-part 'parts/file_service_style_profile.dart';
+part 'file/file_service_net.dart';
+part 'file/file_service_open.dart';
+part 'file/file_service_package.dart';
+part 'file/file_service_dossier.dart';
+part 'file/file_service_project.dart';
+part 'file/file_service_import.dart';
+part 'file/file_service_import_dirs.dart';
+part 'file/file_service_scan.dart';
+part 'file/file_service_style_profile.dart';
 
 /// A presentation found on disk while scanning a directory.
 class ScannedPresentation {

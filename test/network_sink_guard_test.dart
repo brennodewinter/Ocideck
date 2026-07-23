@@ -91,7 +91,7 @@ void main() {
     'lib/utils/net_guard.dart': 0,
     // De gepinde fetch achter guardedNetworkImage.
     'lib/utils/media_fetch_io.dart': 1,
-    'lib/services/parts/file_service_import.dart': 1,
+    'lib/services/file/file_service_import.dart': 1,
     'lib/services/webdav_service.dart': 1,
     'lib/services/s3/s3_service.dart': 1,
     'lib/services/ai_client_service.dart': 1,
@@ -133,7 +133,7 @@ void main() {
         // in plaats van NetworkImage de hostnaam nóg eens te laten opzoeken.
         'lib/utils/media_fetch_io.dart',
         // importFromUrl: safeResolve + pin (import-part van file_service).
-        'lib/services/parts/file_service_import.dart',
+        'lib/services/file/file_service_import.dart',
         'lib/services/webdav_service.dart', // safeResolveTrusted + pin
         // S3: safeResolveTrusted met de trustedInternal-opt-in van de bucket +
         // socket-pin + geen redirects + caps. Gepind wordt op de host die we
@@ -331,7 +331,7 @@ void main() {
         // (`connect-src`) de gate. Lokaal begrenst dit bestand schema (http/s)
         // en omvang (harde bytecap). Op desktop loopt de import via het gepinde
         // importFromUrl, niet hierlangs.
-        'lib/services/parts/file_service_net.dart',
+        'lib/services/file/file_service_net.dart',
         // Git-forge (WEB-tak). Zelfde redenering als file_service_net.dart
         // hierboven: op web bestaat de dart:io-pinning van git_transport_io.dart
         // niet en kan ze er ook niet draaien — daar zijn de browser-sandbox en
