@@ -490,7 +490,6 @@ const _dutchSourceBg = {
   'Twee Afbeeldingen': 'Две изображения',
   'Grote Afbeelding': 'Голямо изображение',
   'Video': 'Видео',
-  'Quote': 'Цитат',
   'Tabel': 'Таблица',
   'Vrije Markdown': 'Свободен Markdown',
   'Overgeslagen': 'Пропуснат',

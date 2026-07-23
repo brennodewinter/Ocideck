@@ -490,7 +490,6 @@ const _dutchSourceCs = {
   'Twee Afbeeldingen': 'Dva obrázky',
   'Grote Afbeelding': 'Velký obrázek',
   'Video': 'Video',
-  'Quote': 'Citát',
   'Tabel': 'Tabulka',
   'Vrije Markdown': 'Volný Markdown',
   'Overgeslagen': 'Přeskočeno',

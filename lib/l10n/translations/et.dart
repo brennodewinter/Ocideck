@@ -485,7 +485,6 @@ const _dutchSourceEt = {
   'Twee Afbeeldingen': 'Kaks pilti',
   'Grote Afbeelding': 'Suur pilt',
   'Video': 'Video',
-  'Quote': 'Tsitaat',
   'Tabel': 'Tabel',
   'Vrije Markdown': 'Vaba Markdown',
   'Overgeslagen': 'Vahele jäetud',

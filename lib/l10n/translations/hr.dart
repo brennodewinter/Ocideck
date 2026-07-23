@@ -489,7 +489,6 @@ const _dutchSourceHr = {
   'Twee Afbeeldingen': 'Dvije slike',
   'Grote Afbeelding': 'Velika slika',
   'Video': 'Videozapis',
-  'Quote': 'Citat',
   'Tabel': 'Tablica',
   'Vrije Markdown': 'Slobodni Markdown',
   'Overgeslagen': 'Preskočeno',

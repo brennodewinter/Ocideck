@@ -488,7 +488,6 @@ const _dutchSourceLt = {
   'Twee Afbeeldingen': 'Du paveikslėliai',
   'Grote Afbeelding': 'Didelis paveikslėlis',
   'Video': 'Vaizdo įrašas',
-  'Quote': 'Citata',
   'Tabel': 'Lentelė',
   'Vrije Markdown': 'Laisvas Markdown',
   'Overgeslagen': 'Praleista',

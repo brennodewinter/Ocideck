@@ -494,7 +494,6 @@ const _dutchSourcePt = {
   'Twee Afbeeldingen': 'Duas imagens',
   'Grote Afbeelding': 'Imagem grande',
   'Video': 'Vídeo',
-  'Quote': 'Citação',
   'Tabel': 'Tabela',
   'Vrije Markdown': 'Markdown livre',
   'Overgeslagen': 'Ignorado',

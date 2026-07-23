@@ -489,7 +489,6 @@ const _dutchSourceHu = {
   'Twee Afbeeldingen': 'Két kép',
   'Grote Afbeelding': 'Nagy kép',
   'Video': 'Videó',
-  'Quote': 'Idézet',
   'Tabel': 'Táblázat',
   'Vrije Markdown': 'Szabad Markdown',
   'Overgeslagen': 'Kihagyva',

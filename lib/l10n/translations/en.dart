@@ -485,7 +485,6 @@ const _dutchSourceEn = {
   'Twee Afbeeldingen': 'Two images',
   'Grote Afbeelding': 'Large image',
   'Video': 'Video',
-  'Quote': 'Quote',
   'Tabel': 'Table',
   'Vrije Markdown': 'Free Markdown',
   'Overgeslagen': 'Skipped',

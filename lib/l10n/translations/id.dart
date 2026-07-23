@@ -487,7 +487,6 @@ const _dutchSourceId = {
   'Twee Afbeeldingen': 'Dua gambar',
   'Grote Afbeelding': 'Gambar besar',
   'Video': 'Video',
-  'Quote': 'Kutipan',
   'Tabel': 'Tabel',
   'Vrije Markdown': 'Markdown bebas',
   'Overgeslagen': 'Dilewati',

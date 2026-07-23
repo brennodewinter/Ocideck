@@ -489,7 +489,6 @@ const _dutchSourceSk = {
   'Twee Afbeeldingen': 'Dva obrázky',
   'Grote Afbeelding': 'Veľký obrázok',
   'Video': 'Video',
-  'Quote': 'Citát',
   'Tabel': 'Tabuľka',
   'Vrije Markdown': 'Voľný Markdown',
   'Overgeslagen': 'Preskočené',

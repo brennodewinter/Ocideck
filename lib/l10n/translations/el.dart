@@ -495,7 +495,6 @@ const _dutchSourceEl = {
   'Twee Afbeeldingen': 'Δύο εικόνες',
   'Grote Afbeelding': 'Μεγάλη εικόνα',
   'Video': 'Βίντεο',
-  'Quote': 'Παράθεση',
   'Tabel': 'Πίνακας',
   'Vrije Markdown': 'Ελεύθερο Markdown',
   'Overgeslagen': 'Παραλείπεται',

@@ -124,6 +124,18 @@ read a book to find out.
   gedachtestreepje dat in een ankernaam een extra streepje meetelt (#589).
 
 ### Fixed
+- **In het Duits heette het diatype "Quote" in plaats van "Zitat".** Eén label
+  van de vierentwintig droeg een Engelse bronsleutel. Vijfentwintig talen
+  hadden daar toevallig een vertaling voor, het Duits niet — en dan valt de
+  tekst terug op de bron, dus stond er "Quote" tussen "Abschnittsüberschrift"
+  en "Tabelle".
+
+  De sleutel is nu het Nederlandse "Citaat", dat zijn eenendertig vertalingen
+  al droeg. Er staat een test op de klasse in plaats van op dit ene geval: elk
+  diatype-label moet in elke taal een eigen vertaling hebben. De bestaande
+  vertaaldekking keek hier niet naar, want die bewaakt per sleutel — een
+  Engelse bronstring ziet er voor die controle uit als een geldige bron.
+
 - **Opslaan ging één dialoog te diep, precies op het pad waar iedereen
   begint.** Een nieuwe presentatie opslaan liep langs een bestemmingsvenster
   dat je een bibliotheek liet kiezen — maar bij een eerste start is er nog geen

@@ -488,7 +488,6 @@ const _dutchSourceFi = {
   'Twee Afbeeldingen': 'Kaksi kuvaa',
   'Grote Afbeelding': 'Suuri kuva',
   'Video': 'Video',
-  'Quote': 'Sitaatti',
   'Tabel': 'Taulukko',
   'Vrije Markdown': 'Vapaa Markdown',
   'Overgeslagen': 'Ohitettu',

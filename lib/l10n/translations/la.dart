@@ -489,7 +489,6 @@ const _dutchSourceLa = {
   'Twee Afbeeldingen': 'Duae imagines',
   'Grote Afbeelding': 'Imago magna',
   'Video': 'Video',
-  'Quote': 'Citatum',
   'Tabel': 'Tabula',
   'Vrije Markdown': 'Markdown liberum',
   'Overgeslagen': 'Praetermissum',
