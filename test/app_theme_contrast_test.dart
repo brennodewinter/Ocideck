@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/utils/color_contrast.dart';
 
@@ -249,6 +250,92 @@ void main() {
       reason:
           'een dia is in beide thema\'s hetzelfde witte vlak; inkt die met de '
           'app meebeweegt laat de preview van de export afwijken',
+    );
+  });
+
+  // ── Wat ThemeData zélf uitdeelt ───────────────────────────────────────────
+  //
+  // De toetsen hierboven meten losse tokens. Deze meet de kleuren die een
+  // widget krijgt zónder dat iemand er een token voor koos — en dat is het gat
+  // waar #744 doorheen viel: Material geeft een TextButton standaard
+  // `colorScheme.primary` als voorgrond, en `primary` is in het profiel Donker
+  // de mérkkleur `#111827`. Op zijn eigen oppervlak `#1E293B` is dat 1,21:1.
+  //
+  // Niemand had een fout gemaakt; er was alleen nooit een `textButtonTheme`
+  // geweest, terwijl de omlijnde knop ernaast de regel wél had. Precies zo'n
+  // gat vindt geen tokenlijst, want er staat geen token in de code.
+  group('de knopvoorgronden uit het thema zijn leesbaar op hun oppervlak', () {
+    for (final profile in AppAppearanceProfile.builtIns) {
+      test(profile.name, () {
+        final theme = AppTheme.fromProfile(profile);
+        final surface = theme.colorScheme.surface;
+
+        // Los de stijl op zoals Material dat doet: de voorgrond van een knop in
+        // rust. Een WidgetStateProperty, dus met een lege state bevragen.
+        Color? foreground(ButtonStyle? style) =>
+            style?.foregroundColor?.resolve(<WidgetState>{});
+
+        final tekort = <String, double>{};
+        for (final (naam, style) in [
+          ('TextButton', theme.textButtonTheme.style),
+          ('OutlinedButton', theme.outlinedButtonTheme.style),
+        ]) {
+          final fg = foreground(style);
+          expect(
+            fg,
+            isNotNull,
+            reason:
+                '$naam heeft geen expliciete voorgrond in het thema en valt '
+                'dus terug op colorScheme.primary — dat is de fout uit #744',
+          );
+          final ratio = contrastRatio(fg!, surface);
+          if (ratio < kWcagAaNormalText) tekort[naam] = ratio;
+        }
+
+        // De accent-inkt is dezelfde regel, voor wat géén knop is: links,
+        // opsommingstekens, kleine iconen in de documentatielezer en het
+        // toestemmingsscherm.
+        final accentInk = theme.extension<AppPalette>()!.accentInk;
+        final accentRatio = contrastRatio(accentInk, surface);
+        if (accentRatio < kWcagAaNormalText) {
+          tekort['AppPalette.accentInk'] = accentRatio;
+        }
+
+        expect(
+          tekort,
+          isEmpty,
+          reason:
+              'in het profiel "${profile.name}" leest dit niet op het eigen '
+              'oppervlak: $tekort',
+        );
+      });
+    }
+  });
+
+  test('geen colorScheme.primary als tekst- of icoonkleur', () {
+    // De bronwacht erbij. Het thema repareren helpt niets als de volgende
+    // widget `theme.colorScheme.primary` weer rechtstreeks als `color:` pakt —
+    // en dat deden er zes, waaronder de link in de documentatielezer.
+    // Een vulling of een rand mág de merkkleur zijn; hier gaat het om inkt.
+    final overtreders = <String>[];
+    for (final entity in Directory('lib').listSync(recursive: true)) {
+      if (entity is! File || !entity.path.endsWith('.dart')) continue;
+      final regels = entity.readAsLinesSync();
+      for (var i = 0; i < regels.length; i++) {
+        if (RegExp(
+          r'(color|link|marker|quoteBar)\s*[:=]\s*'
+          r'theme\.colorScheme\.primary\b',
+        ).hasMatch(regels[i])) {
+          overtreders.add('${entity.path}:${i + 1}');
+        }
+      }
+    }
+    expect(
+      overtreders,
+      isEmpty,
+      reason:
+          'gebruik AppPalette.accentInk — die volgt de modus, primary is in '
+          'een donker profiel de donkere merkkleur:\n${overtreders.join('\n')}',
     );
   });
 
