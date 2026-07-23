@@ -314,7 +314,6 @@ const _dutchSourceHu = {
       'Az MI-segítség csak az asztali verzióban érhető el.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'Az MI-segítség opcionális, és alapértelmezés szerint ki van kapcsolva. Semmi sem kerül elküldésre, amíg be nem kapcsolod, és magad ki nem választasz egy háttérrendszert. Ez a funkció csak az asztali verzióban működik.',
-  'AI-assistentie inschakelen': 'MI-segítség bekapcsolása',
   'AI-backend': 'MI-háttérrendszer',
   'Lokaal (op dit apparaat)': 'Helyi (ezen az eszközön)',
   'Zelf gehost (eigen server)': 'Saját üzemeltetésű (saját szerver)',

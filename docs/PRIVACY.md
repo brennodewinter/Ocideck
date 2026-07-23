@@ -384,8 +384,11 @@ which the sentence above did not describe. It now stores nothing.*
 
 ### The AI assistant is off by default and fail-closed
 
-The optional AI assistant does nothing until you enable it under
-**Settings → AI Assistant**. Then:
+The optional AI assistant does nothing until you switch on its module card under
+**Settings → Uitbreidingen (Extensions)**. Until you do, it has no tab of its own
+in the settings sidebar at all. Switching the module on reveals a
+**Settings → AI-assistentie** tab where you pick a backend — and even then
+nothing is sent, because the default backend is *none*. Then:
 
 - **Local model** — requests go only to a loopback address on your own machine;
   nothing leaves the device.

@@ -317,7 +317,6 @@ const _dutchSourceDe = {
       'KI-Unterstützung ist nur in der Desktop-Version verfügbar.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'KI-Unterstützung ist optional und standardmäßig deaktiviert. Es wird nichts gesendet, bis du sie aktivierst und selbst ein Backend auswählst. Diese Funktion ist nur in der Desktop-Version verfügbar.',
-  'AI-assistentie inschakelen': 'KI-Unterstützung aktivieren',
   'AI-backend': 'KI-Backend',
   'Lokaal (op dit apparaat)': 'Lokal (auf diesem Gerät)',
   'Zelf gehost (eigen server)': 'Selbst gehostet (eigener Server)',

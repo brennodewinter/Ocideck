@@ -68,7 +68,7 @@ extension _SettingsAi on _SettingsDialogState {
         // backend staat: anders maakt de schakelaar bestaand werk onbereikbaar
         // (#648). Zie [_aiModuleOffNotice] voor wat er dan boven staat.
         if (!_ai.enabled) const AiModuleOffNotice(),
-        if (_ai.enabled || _ai.hasBackend) ..._aiConfigSection(l10n),
+        if (_ai.revealsTab) ..._aiConfigSection(l10n),
       ],
     );
   }

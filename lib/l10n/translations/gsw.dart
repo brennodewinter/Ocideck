@@ -314,7 +314,6 @@ const _dutchSourceGsw = {
       'KI-Unterstützig isch nume i de Desktop-Version verfüegbar.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'KI-Unterstützig isch fakultativ und standardmässig us. Es wird nüt gschickt, bis du sie iischaltisch und sälber es Backend uswählsch. Die Funktion lauft nume i de Desktop-Version.',
-  'AI-assistentie inschakelen': 'KI-Unterstützig iischalte',
   'AI-backend': 'KI-Backend',
   'Lokaal (op dit apparaat)': 'Lokal (uf däm Grät)',
   'Zelf gehost (eigen server)': 'Sälber ghostet (eigene Server)',

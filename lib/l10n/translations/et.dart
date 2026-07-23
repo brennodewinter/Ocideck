@@ -311,7 +311,6 @@ const _dutchSourceEt = {
       'Tehisintellekti abi on saadaval ainult lauaarvuti versioonis.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'Tehisintellekti abi on valikuline ja vaikimisi välja lülitatud. Midagi ei saadeta enne, kui selle sisse lülitate ja ise taustsüsteemi valite. See funktsioon töötab ainult lauaarvuti versioonis.',
-  'AI-assistentie inschakelen': 'Lülita tehisintellekti abi sisse',
   'AI-backend': 'Tehisintellekti taustsüsteem',
   'Lokaal (op dit apparaat)': 'Kohalik (selles seadmes)',
   'Zelf gehost (eigen server)': 'Ise majutatud (oma server)',

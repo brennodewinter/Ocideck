@@ -102,6 +102,20 @@ void main() {
     );
   });
 
+  test('de twee modules staan los van elkaar (#731)', () {
+    // Ze delen sinds #731 het tabblad Uitbreidingen, en dat is precies waarom
+    // dit een eigen toets verdient: één `where` met twee vlaggen erin is een
+    // plek waar een verkeerde `||` beide kanten tegelijk opent. De toets
+    // hierboven zet ze nooit tegen elkaar in, dus die zou dat niet zien.
+    final infoAan = nav(revealed: true, hasChecklists: true, aiRevealed: false);
+    expect(infoAan, contains(SettingsSection.checklists));
+    expect(infoAan, isNot(contains(SettingsSection.ai)));
+
+    final aiAan = nav(revealed: false, hasChecklists: false, aiRevealed: true);
+    expect(aiAan, isNot(contains(SettingsSection.checklists)));
+    expect(aiAan, contains(SettingsSection.ai));
+  });
+
   test('een leeg sjabloon telt als aanwezig werk', () {
     // `isNotEmpty` op de lijst, niet op de inhoud van elk sjabloon: iemand die
     // een sjabloon heeft aangemaakt en nog niet gevuld, is het net zo goed

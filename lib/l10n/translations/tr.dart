@@ -313,7 +313,6 @@ const _dutchSourceTr = {
       'AI yardımı yalnızca masaüstü sürümünde kullanılabilir.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'AI yardımı isteğe bağlıdır ve varsayılan olarak kapalıdır. Siz bunu etkinleştirip kendiniz bir arka uç seçene kadar hiçbir şey gönderilmez. Bu özellik yalnızca masaüstü sürümünde çalışır.',
-  'AI-assistentie inschakelen': 'AI yardımını etkinleştir',
   'AI-backend': 'AI arka ucu',
   'Lokaal (op dit apparaat)': 'Yerel (bu cihazda)',
   'Zelf gehost (eigen server)': 'Kendi barındırdığınız (kendi sunucunuz)',

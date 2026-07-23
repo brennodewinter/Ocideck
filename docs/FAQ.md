@@ -143,7 +143,9 @@ OciDeck supports the following chart types:
 
 ### How does the AI assistant work?
 The optional AI assistance requires explicit user consent:
-1. Enabled in its own **Settings → AI Assistant** tab (off by default)
+1. Switched on as a module under **Settings → Uitbreidingen (Extensions)** (off
+   by default; with the module off there is no AI tab in the sidebar at all).
+   Switching it on reveals a **Settings → AI-assistentie** tab for the backend
 2. Requires configuration of a local model or an outbound endpoint; using a
    cloud/outbound endpoint additionally requires the general outbound-privacy
    consent under **Settings → License and Privacy**

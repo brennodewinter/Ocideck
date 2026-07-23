@@ -313,7 +313,6 @@ const _dutchSourceSl = {
       'Pomoč UI je na voljo samo v namizni različici.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'Pomoč UI je izbirna in privzeto izklopljena. Nič se ne pošlje, dokler je ne vklopite in sami ne izberete zaledja. Ta funkcija deluje samo v namizni različici.',
-  'AI-assistentie inschakelen': 'Vklopi pomoč UI',
   'AI-backend': 'Zaledje UI',
   'Lokaal (op dit apparaat)': 'Lokalno (na tej napravi)',
   'Zelf gehost (eigen server)': 'Lastno gostovanje (lasten strežnik)',

@@ -313,7 +313,6 @@ const _dutchSourceLt = {
       'DI pagalba pasiekiama tik darbalaukio versijoje.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'DI pagalba yra neprivaloma ir pagal numatytuosius nustatymus išjungta. Niekas nesiunčiama, kol jos neįjungsite ir patys nepasirinksite vidinės sistemos. Ši funkcija veikia tik darbalaukio versijoje.',
-  'AI-assistentie inschakelen': 'Įjungti DI pagalbą',
   'AI-backend': 'DI vidinė sistema',
   'Lokaal (op dit apparaat)': 'Vietinė (šiame įrenginyje)',
   'Zelf gehost (eigen server)': 'Savarankiškai talpinama (savas serveris)',

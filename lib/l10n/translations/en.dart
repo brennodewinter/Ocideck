@@ -312,7 +312,6 @@ const _dutchSourceEn = {
       'AI assistance is only available in the desktop version.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'AI assistance is optional and off by default. Nothing is sent until you enable it and choose a backend yourself. This feature only works in the desktop version.',
-  'AI-assistentie inschakelen': 'Enable AI assistance',
   'AI-backend': 'AI backend',
   'Lokaal (op dit apparaat)': 'Local (on this device)',
   'Zelf gehost (eigen server)': 'Self-hosted (your own server)',

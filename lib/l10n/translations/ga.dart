@@ -318,7 +318,6 @@ const _dutchSourceGa = {
       'Níl cúnamh II ar fáil ach sa leagan deisce.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'Tá cúnamh II roghnach agus múchta de réir réamhshocraithe. Ní sheoltar aon rud go dtí go gcumasaíonn tú é agus go roghnaíonn tú inneall féin. Ní oibríonn an ghné seo ach sa leagan deisce.',
-  'AI-assistentie inschakelen': 'Cumasaigh cúnamh II',
   'AI-backend': 'Inneall II',
   'Lokaal (op dit apparaat)': 'Áitiúil (ar an ngléas seo)',
   'Zelf gehost (eigen server)': 'Féinóstáilte (do fhreastalaí féin)',

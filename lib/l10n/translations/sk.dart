@@ -315,7 +315,6 @@ const _dutchSourceSk = {
       'Asistencia AI je dostupná len v desktopovej verzii.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'Asistencia AI je voliteľná a predvolene vypnutá. Nič sa neodosiela, kým ju nezapnete a sami nevyberiete backend. Táto funkcia funguje len v desktopovej verzii.',
-  'AI-assistentie inschakelen': 'Zapnúť asistenciu AI',
   'AI-backend': 'Backend AI',
   'Lokaal (op dit apparaat)': 'Lokálne (na tomto zariadení)',
   'Zelf gehost (eigen server)': 'Vlastný hosting (vlastný server)',

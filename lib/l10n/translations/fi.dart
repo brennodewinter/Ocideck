@@ -313,7 +313,6 @@ const _dutchSourceFi = {
       'Tekoälyavustus on saatavilla vain työpöytäversiossa.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'Tekoälyavustus on valinnainen ja oletuksena pois päältä. Mitään ei lähetetä, ennen kuin otat sen käyttöön ja valitset itse taustajärjestelmän. Tämä ominaisuus toimii vain työpöytäversiossa.',
-  'AI-assistentie inschakelen': 'Ota tekoälyavustus käyttöön',
   'AI-backend': 'Tekoälytaustajärjestelmä',
   'Lokaal (op dit apparaat)': 'Paikallinen (tällä laitteella)',
   'Zelf gehost (eigen server)': 'Itse isännöity (oma palvelin)',

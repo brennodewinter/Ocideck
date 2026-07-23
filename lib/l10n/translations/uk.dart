@@ -315,7 +315,6 @@ const _dutchSourceUk = {
       'Підтримка ШІ доступна лише в настільній версії.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'Підтримка ШІ є необов\'язковою і вимкнена за замовчуванням. Нічого не надсилається, доки ви не увімкнете її та не оберете бекенд самостійно. Ця функція працює лише в настільній версії.',
-  'AI-assistentie inschakelen': 'Увімкнути підтримку ШІ',
   'AI-backend': 'Бекенд ШІ',
   'Lokaal (op dit apparaat)': 'Локально (на цьому пристрої)',
   'Zelf gehost (eigen server)': 'Власний хостинг (власний сервер)',

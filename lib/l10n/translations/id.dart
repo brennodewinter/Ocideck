@@ -313,7 +313,6 @@ const _dutchSourceId = {
       'Bantuan AI hanya tersedia di versi desktop.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'Bantuan AI bersifat opsional dan mati secara bawaan. Tidak ada yang dikirim sampai Anda mengaktifkannya dan memilih backend sendiri. Fitur ini hanya berfungsi di versi desktop.',
-  'AI-assistentie inschakelen': 'Aktifkan bantuan AI',
   'AI-backend': 'Backend AI',
   'Lokaal (op dit apparaat)': 'Lokal (di perangkat ini)',
   'Zelf gehost (eigen server)': 'Hosting sendiri (server Anda sendiri)',

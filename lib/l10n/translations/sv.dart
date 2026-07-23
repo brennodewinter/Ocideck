@@ -312,7 +312,6 @@ const _dutchSourceSv = {
       'AI-assistans är endast tillgängligt i skrivbordsversionen.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'AI-assistans är valfritt och avstängt som standard. Ingenting skickas förrän du aktiverar det och själv väljer en backend. Den här funktionen fungerar endast i skrivbordsversionen.',
-  'AI-assistentie inschakelen': 'Aktivera AI-assistans',
   'AI-backend': 'AI-backend',
   'Lokaal (op dit apparaat)': 'Lokalt (på den här enheten)',
   'Zelf gehost (eigen server)': 'Självhostad (din egen server)',

@@ -315,7 +315,6 @@ const _dutchSourceRo = {
       'Asistența IA este disponibilă doar în versiunea desktop.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'Asistența IA este opțională și dezactivată implicit. Nu se trimite nimic până când nu o activezi și nu alegi singur un backend. Această funcție funcționează doar în versiunea desktop.',
-  'AI-assistentie inschakelen': 'Activează asistența IA',
   'AI-backend': 'Backend IA',
   'Lokaal (op dit apparaat)': 'Local (pe acest dispozitiv)',
   'Zelf gehost (eigen server)': 'Auto-găzduit (propriul server)',

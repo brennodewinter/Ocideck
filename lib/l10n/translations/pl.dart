@@ -317,7 +317,6 @@ const _dutchSourcePl = {
       'Wsparcie AI jest dostępne tylko w wersji na komputer.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'Wsparcie AI jest opcjonalne i domyślnie wyłączone. Nic nie jest wysyłane, dopóki go nie włączysz i samodzielnie nie wybierzesz backendu. Ta funkcja działa tylko w wersji na komputer.',
-  'AI-assistentie inschakelen': 'Włącz wsparcie AI',
   'AI-backend': 'Backend AI',
   'Lokaal (op dit apparaat)': 'Lokalnie (na tym urządzeniu)',
   'Zelf gehost (eigen server)': 'Własny hosting (własny serwer)',

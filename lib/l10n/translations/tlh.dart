@@ -306,7 +306,6 @@ const _dutchSourceTlh = {
       'desktop mIlloghDaq neH AI QaH lo\'laH.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'AI QaH DawIvlaH \'ach pab bejlu\'be\'. DaHoymoHpa\' \'ej backend DawIvpa\', pagh ngeHlu\'. desktop mIlloghDaq neH vum.',
-  'AI-assistentie inschakelen': 'AI QaH yIchu\'',
   'AI-backend': 'AI backend',
   'Lokaal (op dit apparaat)': 'naDev (jan vam)',
   'Zelf gehost (eigen server)': 'SoH DaQeHmoH (server vam)',
