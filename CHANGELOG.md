@@ -217,6 +217,20 @@ read a book to find out.
   Presentaties met tekeningen van vóór deze versie openen gewoon.
 
 ### Fixed
+- **Aanmaken en verwijderen van een app-thema luisteren nu naar Annuleren
+  (#760).** De + en de prullenbak naast de themakiezer schreven rechtstreeks
+  naar schijf, terwijl alles eronder pas bij Opslaan telt — één rij, twee
+  soorten gedrag, en een Annuleren-knop die maar de helft terugdraaide. De
+  prullenbak was bovendien in één klik definitief, en na verwijderen toonde
+  de dialoog "Basic" terwijl er "Europa" bewaard was: met Annuleren hield je
+  het één, met Opslaan kreeg je het ander, en geen van beide was waar je
+  vandaan kwam. Beide knoppen bewerken nu de werkkopie van het venster en
+  landen pas bij Opslaan — waarmee Annuleren álles terugdraait en verwijderen
+  vanzelf omkeerbaar is tot je opslaat. Verwijderen valt terug op het thema
+  dat actief was toen je het venster opende, niet op een hardgecodeerde naam.
+  Zes regressietests; de vier die de fout dragen zijn eerst rood gezien tegen
+  de oude code, de twee andere zijn de tegenproef.
+
 - **Het label op de opslaan-knop stond in donkere modus op 2,54:1.** Gevonden
   door de nieuwe leesbaarheidsmeting zelf, meteen bij de eerste run over de
   ingebouwde profielen (#750). De voorgrond van een gevulde knop werd gekozen

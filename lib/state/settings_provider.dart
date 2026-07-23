@@ -659,67 +659,44 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await _saveProfiles();
   }
 
-  Future<void> selectAppAppearanceProfile(String name) async {
-    if (!state.appAppearanceProfiles.any((profile) => profile.name == name)) {
-      return;
-    }
-    state = state.copyWith(selectedAppAppearanceProfileName: name);
-    await _persist(
-      'selectAppAppearanceProfile',
-      (prefs) => prefs.setString('selectedAppAppearanceProfileName', name),
-    );
-  }
-
-  Future<AppAppearanceProfile> createAppAppearanceProfile({
-    AppAppearanceProfile? base,
+  /// Vervangt de eigen app-thema's en de selectie in één keer — de landing
+  /// van het instellingenvenster bij Opslaan (#760).
+  ///
+  /// Tot #760 had elke knop in de themarij zijn eigen schrijfweg
+  /// (`create…`/`delete…`/`save…`/`select…`), en twee daarvan schreven
+  /// onmiddellijk — waarmee Annuleren maar de helft van het venster
+  /// terugdraaide en verwijderen zonder vraag definitief was. Nu bewerkt het
+  /// venster een werkkopie en landt die hier als geheel.
+  ///
+  /// De ingebouwde thema's komen uit de eigen staat, nooit uit [profiles]: wat
+  /// de aanroeper ook aanlevert, een ingebouwd thema is niet te wijzigen of te
+  /// verwijderen. Namen worden hier nog eens uniek gemaakt — de dialoog doet
+  /// dat ook, maar deze laag is de laatste voor de schijf. Een [selectedName]
+  /// die niet bestaat valt terug op het eerste thema, zodat de bewaarde
+  /// selectie altijd in de kiezer staat.
+  Future<void> setAppAppearanceProfiles(
+    List<AppAppearanceProfile> profiles, {
+    required String selectedName,
   }) async {
-    final source = base ?? state.appAppearanceProfile;
-    final created = source.copyWith(
-      name: _uniqueAppearanceName('Eigen thema'),
-      isBuiltIn: false,
-    );
-    state = state.copyWith(
-      appAppearanceProfiles: [...state.appAppearanceProfiles, created],
-      selectedAppAppearanceProfileName: created.name,
-    );
-    await _saveAppearanceProfiles();
-    return created;
-  }
-
-  Future<void> saveAppAppearanceProfile(
-    AppAppearanceProfile profile, {
-    required String previousName,
-  }) async {
-    final existing = state.appAppearanceProfiles.firstWhere(
-      (item) => item.name == previousName,
-      orElse: () => profile,
-    );
-    if (existing.isBuiltIn) return;
-    final name = _uniqueAppearanceName(profile.name, exceptName: previousName);
-    final saved = profile.copyWith(name: name, isBuiltIn: false);
-    final profiles = [
-      for (final item in state.appAppearanceProfiles)
-        if (item.name == previousName) saved else item,
-    ];
-    state = state.copyWith(
-      appAppearanceProfiles: profiles,
-      selectedAppAppearanceProfileName: name,
-    );
-    await _saveAppearanceProfiles();
-  }
-
-  Future<void> deleteAppAppearanceProfile(String name) async {
-    final profile = state.appAppearanceProfiles.firstWhere(
-      (item) => item.name == name,
-      orElse: () => AppAppearanceProfile.basic,
-    );
-    if (profile.isBuiltIn) return;
-    final profiles = state.appAppearanceProfiles
-        .where((item) => item.name != name)
+    final builtIns = state.appAppearanceProfiles
+        .where((profile) => profile.isBuiltIn)
         .toList();
+    final custom = <AppAppearanceProfile>[];
+    for (final profile in profiles) {
+      if (profile.isBuiltIn) continue;
+      final name = _uniqueAppearanceName(
+        profile.name,
+        profiles: [...builtIns, ...custom],
+      );
+      custom.add(profile.copyWith(name: name, isBuiltIn: false));
+    }
+    final all = [...builtIns, ...custom];
+    final selected = all.any((profile) => profile.name == selectedName)
+        ? selectedName
+        : all.first.name;
     state = state.copyWith(
-      appAppearanceProfiles: profiles,
-      selectedAppAppearanceProfileName: 'Europa',
+      appAppearanceProfiles: all,
+      selectedAppAppearanceProfileName: selected,
     );
     await _saveAppearanceProfiles();
   }

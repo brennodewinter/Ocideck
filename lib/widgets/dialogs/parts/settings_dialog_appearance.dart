@@ -7,7 +7,9 @@ part of '../settings_dialog.dart';
 extension _SettingsAppearanceTab on _SettingsDialogState {
   Widget _appearanceTab() {
     final l10n = context.l10n;
-    final profiles = ref.watch(settingsProvider).appAppearanceProfiles;
+    // De wérkkopie, niet de provider (#760): aanmaken en verwijderen landen
+    // pas bij Opslaan, dus tot dan is dit de lijst die de kiezer toont.
+    final profiles = _appearanceProfiles;
     final selectedName =
         profiles.any((profile) => profile.name == _originalAppearanceName)
         ? _originalAppearanceName
@@ -184,27 +186,29 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
             ],
             onChanged: (name) {
               if (name == null) return;
-              final profile = profiles.firstWhere((item) => item.name == name);
               _rebuild(() {
-                _appearanceProfile = profile;
-                _originalAppearanceName = profile.name;
-                _appearanceName.text = profile.name;
+                _syncAppearanceEdits();
+                _selectAppearanceLocal(
+                  _appearanceProfiles.firstWhere((item) => item.name == name),
+                );
               });
             },
           ),
         ),
         const SizedBox(width: 8),
+        // Beide knoppen bewerken de wérkkopie en raken de provider niet aan
+        // (#760): één rij, één soort gedrag, en Annuleren draait álles terug.
         IconButton(
           tooltip: l10n.d('Kopie maken en aanpassen'),
-          onPressed: () async {
-            final created = await ref
-                .read(settingsProvider.notifier)
-                .createAppAppearanceProfile(base: _appearanceProfile);
-            if (!mounted) return;
+          onPressed: () {
             _rebuild(() {
-              _appearanceProfile = created;
-              _originalAppearanceName = created.name;
-              _appearanceName.text = created.name;
+              _syncAppearanceEdits();
+              final created = _appearanceProfile.copyWith(
+                name: _uniqueLocalAppearanceName('Eigen thema'),
+                isBuiltIn: false,
+              );
+              _appearanceProfiles = [..._appearanceProfiles, created];
+              _selectAppearanceLocal(created);
             });
           },
           icon: const Icon(Icons.add, size: 18),
@@ -212,16 +216,21 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
         IconButton(
           tooltip: l10n.d('Thema verwijderen'),
           onPressed: editable
-              ? () async {
-                  await ref
-                      .read(settingsProvider.notifier)
-                      .deleteAppAppearanceProfile(_appearanceProfile.name);
-                  if (!mounted) return;
-                  const profile = AppAppearanceProfile.basic;
+              ? () {
                   _rebuild(() {
-                    _appearanceProfile = profile;
-                    _originalAppearanceName = profile.name;
-                    _appearanceName.text = profile.name;
+                    _appearanceProfiles = [
+                      for (final item in _appearanceProfiles)
+                        if (item.name != _originalAppearanceName) item,
+                    ];
+                    // Terug naar het thema van vóór de kopie; is dát het
+                    // verwijderde, dan het eerste uit de lijst — maar nooit
+                    // een naam die niet in de kiezer staat.
+                    _selectAppearanceLocal(
+                      _appearanceProfiles.firstWhere(
+                        (item) => item.name == _appearanceOpenName,
+                        orElse: () => _appearanceProfiles.first,
+                      ),
+                    );
                   });
                 }
               : null,
@@ -229,6 +238,47 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
         ),
       ],
     );
+  }
+
+  /// Zet de kiezer, het naamveld en de bewerkstatus op [profile] — de drie
+  /// horen altijd samen te bewegen.
+  void _selectAppearanceLocal(AppAppearanceProfile profile) {
+    _appearanceProfile = profile;
+    _originalAppearanceName = profile.name;
+    _appearanceName.text = profile.name;
+  }
+
+  /// Vouw de lopende bewerking (kleuren én naam) terug in de werkkopie, zodat
+  /// wisselen, kopiëren of opslaan geen wijzigingen laat vallen.
+  void _syncAppearanceEdits() {
+    if (_appearanceProfile.isBuiltIn) return;
+    final raw = _appearanceName.text.trim();
+    final name = _uniqueLocalAppearanceName(
+      raw.isEmpty ? 'Eigen thema' : raw,
+      exceptName: _originalAppearanceName,
+    );
+    final updated = _appearanceProfile.copyWith(name: name, isBuiltIn: false);
+    _appearanceProfiles = [
+      for (final item in _appearanceProfiles)
+        if (item.name == _originalAppearanceName) updated else item,
+    ];
+    _selectAppearanceLocal(updated);
+  }
+
+  /// Een naam die nog niet in de wérkkopie voorkomt — dezelfde regel die de
+  /// provider bij het landen nog eens afdwingt, maar dan tegen wat de
+  /// gebruiker nu op het scherm heeft.
+  String _uniqueLocalAppearanceName(String base, {String? exceptName}) {
+    final used = _appearanceProfiles
+        .map((item) => item.name)
+        .where((name) => name != exceptName)
+        .toSet();
+    if (!used.contains(base)) return base;
+    var index = 2;
+    while (used.contains('$base $index')) {
+      index++;
+    }
+    return '$base $index';
   }
 
   Widget _appearanceFontField(bool editable) {

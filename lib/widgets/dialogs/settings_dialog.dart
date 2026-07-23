@@ -147,6 +147,18 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late ThemeProfile _themeProfile;
   late AppAppearanceProfile _appearanceProfile;
   late String _originalAppearanceName;
+
+  /// De werkkopie van de app-themalijst (#760). Aanmaken en verwijderen
+  /// bewerken déze lijst en landen pas bij Opslaan — hetzelfde contract als de
+  /// acht kleurvelden en de opslagverbindingen (`_connections`), zodat
+  /// Annuleren het hele venster terugdraait en niet de helft.
+  late List<AppAppearanceProfile> _appearanceProfiles;
+
+  /// Het thema dat actief was toen het venster openging: de terugval wanneer
+  /// het geselecteerde thema verwijderd wordt. Wie een kopie van Donker
+  /// weggooit hoort weer in Donker te staan, niet in een hardgecodeerd licht
+  /// thema (#760, bevinding 3).
+  late String _appearanceOpenName;
   late TextEditingController _appearanceName;
 
   /// The cockpit colour scheme currently being edited, plus its saved name as a
@@ -244,6 +256,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _appearanceProfile = settings.appAppearanceProfile;
     _originalAppearanceName = _appearanceProfile.name;
     _appearanceName = TextEditingController(text: _appearanceProfile.name);
+    _appearanceProfiles = [...settings.appAppearanceProfiles];
+    _appearanceOpenName = _appearanceProfile.name;
     _cockpitScheme = settings.cockpitColorScheme;
     _originalCockpitName = _cockpitScheme.name;
     _cockpitName = TextEditingController(text: _cockpitScheme.name);
@@ -670,17 +684,13 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     );
     notifier.setExportDirectory(_exportDirectory);
     notifier.saveThemeProfile(profile, previousName: _originalName);
-    if (_appearanceProfile.isBuiltIn) {
-      notifier.selectAppAppearanceProfile(_appearanceProfile.name);
-    } else {
-      final appearanceName = _appearanceName.text.trim();
-      notifier.saveAppAppearanceProfile(
-        _appearanceProfile.copyWith(
-          name: appearanceName.isEmpty ? 'Eigen thema' : appearanceName,
-        ),
-        previousName: _originalAppearanceName,
-      );
-    }
+    // De hele werkkopie in één keer (#760): aangemaakte en verwijderde
+    // thema's landen hier, samen met de lopende bewerking en de selectie.
+    _syncAppearanceEdits();
+    notifier.setAppAppearanceProfiles(
+      _appearanceProfiles,
+      selectedName: _appearanceProfile.name,
+    );
     if (_cockpitScheme.isBuiltIn) {
       notifier.selectCockpitColorScheme(_cockpitScheme.name);
     } else {

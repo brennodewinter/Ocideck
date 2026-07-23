@@ -296,28 +296,47 @@ void main() {
     expect(notifier.state.selectedAppAppearanceProfileName, 'Europa');
   });
 
-  test('creates, edits and selects a custom app theme', () async {
+  test('landing a custom app theme selects and persists it', () async {
+    // Sinds #760 landt het instellingenvenster zijn hele werkkopie in één
+    // keer; de losse create/save/delete-wegen bestaan niet meer.
     final notifier = await _loadedNotifier();
-    final created = await notifier.createAppAppearanceProfile(
-      base: AppAppearanceProfile.europa,
+    final custom = AppAppearanceProfile.europa.copyWith(
+      name: 'Mijn Europa',
+      accentColor: '#FFE000',
+      isBuiltIn: false,
     );
 
-    await notifier.saveAppAppearanceProfile(
-      created.copyWith(name: 'Mijn Europa', accentColor: '#FFE000'),
-      previousName: created.name,
-    );
+    await notifier.setAppAppearanceProfiles([
+      ...notifier.state.appAppearanceProfiles,
+      custom,
+    ], selectedName: 'Mijn Europa');
 
     expect(notifier.state.selectedAppAppearanceProfileName, 'Mijn Europa');
     expect(notifier.state.appAppearanceProfile.accentColor, '#FFE000');
     expect(notifier.state.appAppearanceProfile.isBuiltIn, isFalse);
   });
 
-  test('built-in app themes cannot be deleted', () async {
+  test('built-in app themes survive whatever the caller lands', () async {
+    // Wat de werkkopie ook aanlevert — zonder ingebouwde thema's, of met een
+    // "aangepaste" kopie die zich ingebouwd noemt — de ingebouwde drie komen
+    // uit de eigen staat en blijven staan.
     final notifier = await _loadedNotifier();
-    await notifier.deleteAppAppearanceProfile('Europa');
+    await notifier.setAppAppearanceProfiles(const [], selectedName: 'Europa');
     expect(
       notifier.state.appAppearanceProfiles.map((profile) => profile.name),
-      contains('Europa'),
+      containsAll(['Basic', 'Europa', 'Donker']),
+    );
+  });
+
+  test('an unknown selection falls back to an existing theme', () async {
+    final notifier = await _loadedNotifier();
+    await notifier.setAppAppearanceProfiles(
+      const [],
+      selectedName: 'Bestaat niet',
+    );
+    expect(
+      notifier.state.appAppearanceProfiles.map((profile) => profile.name),
+      contains(notifier.state.selectedAppAppearanceProfileName),
     );
   });
 
@@ -742,13 +761,14 @@ void main() {
 
     test('saving a custom app theme persists its font', () async {
       final notifier = await _loadedNotifier();
-      final created = await notifier.createAppAppearanceProfile(
-        base: AppAppearanceProfile.basic,
-      );
-      await notifier.saveAppAppearanceProfile(
-        created.copyWith(name: 'Lettertype-thema', fontFamily: 'Lora'),
-        previousName: created.name,
-      );
+      await notifier.setAppAppearanceProfiles([
+        ...notifier.state.appAppearanceProfiles,
+        AppAppearanceProfile.basic.copyWith(
+          name: 'Lettertype-thema',
+          fontFamily: 'Lora',
+          isBuiltIn: false,
+        ),
+      ], selectedName: 'Lettertype-thema');
       expect(notifier.state.appAppearanceProfile.fontFamily, 'Lora');
     });
   });
