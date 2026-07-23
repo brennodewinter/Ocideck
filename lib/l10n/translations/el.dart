@@ -1805,6 +1805,7 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'presentaties': 'parousiaseis',
   '/Presentaties': '/Παρουσιάσεις',
+  'Rapportagedistributie (ontwerp)': 'Διανομή αναφορών (σχεδίαση)',
   'De export is mislukt.': 'Η εξαγωγή απέτυχε.',
   'Presenteer vanaf hier': 'Παρουσίαση από εδώ',
   'Teams-gastclient (ontwerp)':

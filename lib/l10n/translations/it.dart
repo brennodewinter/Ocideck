@@ -732,6 +732,7 @@ const _dutchSourceIt = {
 const _dutchSourceAddIt = {
   'presentaties': 'presentazioni',
   '/Presentaties': '/Presentazioni',
+  'Rapportagedistributie (ontwerp)': 'Distribuzione dei report (progetto)',
   'De export is mislukt.': 'L\'esportazione non è riuscita.',
   'Presenteer vanaf hier': 'Presenta da qui',
   'Teams-gastclient (ontwerp)': 'Client guest di Teams (progetto)',

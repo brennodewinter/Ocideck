@@ -1795,6 +1795,7 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'presentaties': 'prezentari',
   '/Presentaties': '/Prezentări',
+  'Rapportagedistributie (ontwerp)': 'Distribuirea rapoartelor (proiectare)',
   'De export is mislukt.': 'Exportul a eșuat.',
   'Presenteer vanaf hier': 'Prezintă de aici',
   'Teams-gastclient (ontwerp)': 'Client Teams pentru invitați (design)',

@@ -737,6 +737,7 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'presentaties': 'presintaasjes',
   '/Presentaties': '/Presintaasjes',
+  'Rapportagedistributie (ontwerp)': 'Rapportaazjedistribúsje (ûntwerp)',
   'De export is mislukt.': 'De eksport is mislearre.',
   'Presenteer vanaf hier': 'Presintearje fanôf hjir',
   'Teams-gastclient (ontwerp)': 'Teams-gastclient (ûntwerp)',

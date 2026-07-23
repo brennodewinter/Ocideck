@@ -1780,6 +1780,7 @@ const _dutchSourceSl = {
 const _dutchSourceAddSl = <String, String>{
   'presentaties': 'predstavitve',
   '/Presentaties': '/Predstavitve',
+  'Rapportagedistributie (ontwerp)': 'Distribucija poročil (zasnova)',
   'De export is mislukt.': 'Izvoz ni uspel.',
   'Presenteer vanaf hier': 'Predstavi od tukaj',
   'Teams-gastclient (ontwerp)': 'Odjemalec Teams za goste (zasnova)',

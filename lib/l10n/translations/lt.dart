@@ -1785,6 +1785,7 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'presentaties': 'prezentacijos',
   '/Presentaties': '/Prezentacijos',
+  'Rapportagedistributie (ontwerp)': 'Ataskaitų platinimas (projektas)',
   'De export is mislukt.': 'Eksportas nepavyko.',
   'Presenteer vanaf hier': 'Pristatyti nuo čia',
   'Teams-gastclient (ontwerp)': 'Teams svečio klientas (projektas)',

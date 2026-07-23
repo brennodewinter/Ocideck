@@ -1813,6 +1813,7 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'presentaties': 'laithreoidi',
   '/Presentaties': '/Láithreoidí',
+  'Rapportagedistributie (ontwerp)': 'Dáileadh tuairiscí (dearadh)',
   'De export is mislukt.': 'Theip ar an easpórtáil.',
   'Presenteer vanaf hier': 'Cuir i láthair ón áit seo',
   'Teams-gastclient (ontwerp)': 'Cliant aoi Teams (dearadh)',

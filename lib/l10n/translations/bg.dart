@@ -1800,6 +1800,7 @@ const _dutchSourceBg = {
 const _dutchSourceAddBg = <String, String>{
   'presentaties': 'prezentatsii',
   '/Presentaties': '/Презентации',
+  'Rapportagedistributie (ontwerp)': 'Разпространение на отчети (проект)',
   'De export is mislukt.': 'Експортът се провали.',
   'Presenteer vanaf hier': 'Презентиране оттук',
   'Teams-gastclient (ontwerp)': 'Клиент за гости на Teams (дизайн)',

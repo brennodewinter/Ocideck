@@ -2757,6 +2757,7 @@ const _dutchSourceTr = {
 const _dutchSourceAddTr = <String, String>{
   'presentaties': 'sunumlar',
   '/Presentaties': '/Sunumlar',
+  'Rapportagedistributie (ontwerp)': 'Rapor dağıtımı (tasarım)',
   'De export is mislukt.': 'Dışa aktarma başarısız oldu.',
   'Presenteer vanaf hier': 'Buradan sun',
   'Teams-gastclient (ontwerp)': 'Teams konuk istemcisi (tasarım)',
