@@ -66,16 +66,19 @@ void main() {
     ]);
   });
 
-  test('niet-strings worden eruit gefilterd, rommel geeft geen callback', () async {
-    final ofc = OpenFileChannel((paths) async => opened.add(paths));
-    await ofc.activate();
-    await hostCalls('openFiles', ['d.md', 42, null]);
-    await hostCalls('openFiles', 'geen lijst');
-    await hostCalls('ietsAnders', ['e.md']);
-    expect(opened, [
-      ['d.md'],
-    ]);
-  });
+  test(
+    'niet-strings worden eruit gefilterd, rommel geeft geen callback',
+    () async {
+      final ofc = OpenFileChannel((paths) async => opened.add(paths));
+      await ofc.activate();
+      await hostCalls('openFiles', ['d.md', 42, null]);
+      await hostCalls('openFiles', 'geen lijst');
+      await hostCalls('ietsAnders', ['e.md']);
+      expect(opened, [
+        ['d.md'],
+      ]);
+    },
+  );
 
   test('start doet buiten macOS niets, ook niet registreren', () async {
     final ofc = OpenFileChannel((paths) async => opened.add(paths));
