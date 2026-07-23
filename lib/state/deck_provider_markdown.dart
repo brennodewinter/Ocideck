@@ -71,10 +71,7 @@ extension DeckNotifierMarkdown on DeckNotifier {
     if (current != null) {
       deck = SealRecord.of(current)
           .applyTo(deck)
-          .copyWith(
-            miauw: current.miauw,
-            fileHash: current.fileHash,
-          );
+          .copyWith(miauw: current.miauw, fileHash: current.fileHash);
     }
     _mutate(deck); // discrete stap → ook ongedaan te maken
     return true;

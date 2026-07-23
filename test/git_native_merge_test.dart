@@ -578,7 +578,6 @@ void main() {
     expect(MarkdownService().parseDeck(landed), isNotNull);
   });
 
-
   // #756: de MIAUW-dispositie is de laatste laag die naar git meereist, en
   // haar merge heeft één geval dat pure vereniging stukmaakt: een intrekking.
   // Hier het bewijs tegen echte git dat de grafsteen de samenvoeging overleeft

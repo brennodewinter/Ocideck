@@ -1263,9 +1263,7 @@ void main() {
     test('maar niet wanneer het bestand niet van ons is', () async {
       final out = await build(
         deckMet(const MiauwDisposition()),
-        inRepo: {
-          mPath: Uint8List.fromList(utf8.encode('{"version":99}')),
-        },
+        inRepo: {mPath: Uint8List.fromList(utf8.encode('{"version":99}'))},
       );
 
       expect(out.deletes, isEmpty);
@@ -1310,9 +1308,8 @@ void main() {
       final terug = await withRepoMiauw(
         parsed,
         deckDir: deckDir,
-        read: (path) async => path == mPath
-            ? Uint8List.fromList(utf8.encode(v1))
-            : null,
+        read: (path) async =>
+            path == mPath ? Uint8List.fromList(utf8.encode(v1)) : null,
       );
 
       expect(terug.deck.miauwWaivers['1.3'], 'Oude reden');

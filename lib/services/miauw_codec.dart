@@ -52,8 +52,8 @@ class MiauwCodec {
   }) {
     if (d.isEmpty) return null;
     Map<String, Object> entryMap(Map<String, MiauwEntry> entries) => {
-      for (final e in (entries.entries.toList()
-        ..sort((a, b) => a.key.compareTo(b.key))))
+      for (final e
+          in (entries.entries.toList()..sort((a, b) => a.key.compareTo(b.key))))
         e.key: {textKey: e.value.text, atKey: e.value.at},
     };
     Map<String, String> sorted(Map<String, String> m) => {
@@ -66,8 +66,7 @@ class MiauwCodec {
         confirmationsKey: entryMap(d.confirmations),
       if (d.revokedWaivers.isNotEmpty || d.revokedConfirmations.isNotEmpty)
         revokedKey: {
-          if (d.revokedWaivers.isNotEmpty)
-            waiversKey: sorted(d.revokedWaivers),
+          if (d.revokedWaivers.isNotEmpty) waiversKey: sorted(d.revokedWaivers),
           if (d.revokedConfirmations.isNotEmpty)
             confirmationsKey: sorted(d.revokedConfirmations),
         },
@@ -137,7 +136,10 @@ class MiauwCodec {
     for (final e in raw.entries) {
       final value = e.value;
       out['${e.key}'] = value is Map
-          ? MiauwEntry(text: '${value[textKey] ?? ''}', at: '${value[atKey] ?? ''}')
+          ? MiauwEntry(
+              text: '${value[textKey] ?? ''}',
+              at: '${value[atKey] ?? ''}',
+            )
           : MiauwEntry(text: '$value');
     }
     return out;
@@ -207,7 +209,9 @@ class MiauwDisposition {
     Map<String, String> waivers,
     Map<String, String> confirmations,
   ) => MiauwDisposition(
-    waivers: {for (final e in waivers.entries) e.key: MiauwEntry(text: e.value)},
+    waivers: {
+      for (final e in waivers.entries) e.key: MiauwEntry(text: e.value),
+    },
     confirmations: {
       for (final e in confirmations.entries) e.key: MiauwEntry(text: e.value),
     },

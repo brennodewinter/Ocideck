@@ -483,7 +483,6 @@ void main() {
     });
   });
 
-
   group('de MIAUW-dispositie verenigen bij de merge', () {
     // #756: een waiver of bevestiging is een reviewbesluit over het rapport,
     // net als een terzijdelegging. De unie (per EIS-id, laatste `at` wint,
@@ -527,9 +526,7 @@ void main() {
       // dat iemand dat besloot.
       final result = mergeDeckVersions(
         basis,
-        met(
-          MiauwDisposition(revokedWaivers: {'1.3': tijd(12)}),
-        ),
+        met(MiauwDisposition(revokedWaivers: {'1.3': tijd(12)})),
         met(MiauwDisposition(waivers: {'1.3': om('scope', uur: 10)})),
       );
       expect(result.merged.miauwWaivers.containsKey('1.3'), isFalse);

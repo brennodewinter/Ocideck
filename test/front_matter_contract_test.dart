@@ -346,7 +346,10 @@ style: |
             typedSignature: 'A. Auteur',
             imagePath: 'images/sig.png',
           ),
-          miauw: MiauwDisposition.fromTexts(const {'1.6': 'reden'}, const {'2.3': 'bevestigd'}),
+          miauw: MiauwDisposition.fromTexts(
+            const {'1.6': 'reden'},
+            const {'2.3': 'bevestigd'},
+          ),
         );
         final markdown = MarkdownService().generateDeck(deck);
         final geschreven = _frontMatter(

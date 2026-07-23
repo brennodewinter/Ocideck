@@ -111,7 +111,9 @@ void main() {
       final r = _analyzer.analyze(
         Deck(
           title: 'X',
-          miauw: MiauwDisposition.fromTexts(const {'1.3': 'Klant vereist geen certificering'}, const {}),
+          miauw: MiauwDisposition.fromTexts(const {
+            '1.3': 'Klant vereist geen certificering',
+          }, const {}),
         ),
       );
       final res = r.results.firstWhere((x) => x.entry.id == '1.3');
@@ -133,7 +135,9 @@ void main() {
       final r = _analyzer.analyze(
         Deck(
           title: 'X',
-          miauw: MiauwDisposition.fromTexts(const {}, const {'1.2': 'Intake gehouden op 2026-07-01'}),
+          miauw: MiauwDisposition.fromTexts(const {}, const {
+            '1.2': 'Intake gehouden op 2026-07-01',
+          }),
         ),
       );
       final res = r.results.firstWhere((x) => x.entry.id == '1.2');

@@ -492,7 +492,10 @@ void main() {
       final markdown = MarkdownService().generateDeck(
         Deck(
           title: 'Pentest',
-          miauw: MiauwDisposition.fromTexts(const {'1.3': 'Certificering niet vereist door klant'}, const {'2.1': 'Intake gehouden op 2026-07-01'}),
+          miauw: MiauwDisposition.fromTexts(
+            const {'1.3': 'Certificering niet vereist door klant'},
+            const {'2.1': 'Intake gehouden op 2026-07-01'},
+          ),
           slides: [Slide.create(SlideType.title)],
         ),
       );
