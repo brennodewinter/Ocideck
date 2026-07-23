@@ -95,6 +95,37 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Fixed
+- **Ook iOS en Android droegen nog de fotokat — en het handwerk eronder is nu
+  een script.** De vorige ronde repareerde Linux en Windows; de twee mobiele
+  sets (15 iOS-formaten, 5 Android-dichtheden) stonden nog op wat `20906ddb` er
+  in juni had neergezet. Geen ondersteunde bouwdoelen, maar wel iconen die in de
+  repo staan, en een set die niemand bewaakt is precies hoe dit de eerste keer
+  misging.
+
+  Zes sets met de hand bijhouden is de fout die daarna nog een keer gemaakt
+  wordt, dus die zijn nu één `scripts/regenerate_icons.sh`. Twee dingen kwamen
+  bij het schrijven daarvan boven water. Ten eerste: de eigenlijke master is
+  niet `assets/images/ocideck-logo.png` maar de macOS-1024. Die draagt ruim drie
+  keer zoveel randdetail (randafwijking 0,22 tegen 0,08 na opschalen), en dat
+  telt precies daar waar het opvalt — het 1024-icoon dat Apple in de App Store
+  toont. Elk formaat is nu een verkleining, nooit een vergroting; Linux en
+  Windows zijn daarom opnieuw gesneden en zijn zichtbaar scherper dan gisteren.
+  Ten tweede: het script reproduceert de gecommitte macOS-set bit voor bit. Dat
+  is het bewijs dat dit hetzelfde recept is als waarmee die ooit gesneden is, en
+  niet een nieuw recept dat er toevallig op lijkt.
+
+  De webiconen blijven bewust een uitzondering: die komen uit het in-app-logo,
+  met zijn ruimere marge. Een favicon staat in een tabblad naast andere
+  favicons, niet in een dock. Nagemeten, niet aangenomen — het gecommitte
+  bestand komt op 0,3 tot 1,9% na uit dat recept.
+
+  De bewaking loopt nu over alle zes de doelen in plaats van vier, plus twee
+  toetsen die iOS eigen zijn: geen alfakanaal (App Store Connect weigert dat) en
+  elk bestand op de maat die `Contents.json` opvraagt — een `@3x` van 20 punt is
+  60 pixels, en wie dat verwart levert een set in die Xcode zwijgend accepteert.
+  Bij 20 pixels blijft de lijntekening flets; dat is de prijs van een fijn merk
+  en geldt op elk platform gelijk, inclusief de macOS-16 die er al maanden zo
+  uitziet.
 - **Linux en Windows droegen nog het logo van vóór de rebrand.** Toen het merk
   in juni van de fotokat naar de lijntekening ging (`da7b7c9e` → `dc62e03f` →
   `c6ccd42c`), zijn alleen de macOS-set en de webiconen opnieuw gegenereerd.
