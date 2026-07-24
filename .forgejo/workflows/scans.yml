@@ -42,7 +42,7 @@ jobs:
       # vandaag iets anders dan gisteren, zonder dat iemand iets wijzigde.
       GITLEAKS_VERSION: 8.30.1
       TRUFFLEHOG_VERSION: 3.95.9
-      SEMGREP_VERSION: 1.170.0
+      SEMGREP_VERSION: 1.171.0
     steps:
       # Vóór de checkout: actions/checkout is een node-actie, en dit kale image
       # brengt geen node mee.

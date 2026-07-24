@@ -38,7 +38,7 @@
     {
       "name": "semgrep",
       "env": "SEMGREP_VERSION",
-      "version": "1.170.0",
+      "version": "1.171.0",
       "workflows": [
         ".forgejo/workflows/scans.yml",
         ".github/workflows/ci.yml"

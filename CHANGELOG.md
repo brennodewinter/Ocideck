@@ -104,6 +104,50 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Added
+- **Er kijkt nu iets naar de gepinde CI-versies, en het manifest kan niet meer
+  stil verouderen.** Sinds #799/#800 staan gitleaks, trufflehog en semgrep op een
+  vaste versie. Goed — maar een pin zonder tegenhanger verouderd ongemerkt, en
+  voor déze drie is dat niet cosmetisch: een geheimenscanner die stilstaat
+  eindigt netjes op 0 terwijl hij de sleutelvormen mist die ná hem zijn bedacht.
+  Groen omdat hij niet wist waar hij naar moest kijken — dezelfde faalvorm als
+  een historie-scan op een ondiepe kloon.
+
+  Er bestond één monitor, `make check-actions`, en die keek uitsluitend naar
+  Actions met een exacte versie; precies één stond erin. Een versie in een
+  `run:`-blok viel erbuiten. Het manifest en het gereedschap heten daarom nu naar
+  wat ze werkelijk dekken — `.github/pinned-ci-versions.json`,
+  `tool/check_pinned_versions.dart`, `make check-pins` — met twee lijsten, omdat
+  een `uses:`-pin en een binary die een `run:`-blok binnenhaalt op dezelfde
+  manier verouderen en er niet op lijken. Twee bronnen ook: een GitHub-release
+  draagt `tag_name`, PyPI draagt `info.version`. Semgrep wordt bij PyPI opgehaald
+  en niet bij zijn GitHub-release, want de workflow installeert hem met `pip` —
+  "de laatste" moet betekenen: de laatste die díe weg kan bereiken.
+
+  De helft die geen netwerk nodig heeft is géén advies maar een poort.
+  `test/pinned_versions_manifest_test.dart` draait in de suite en houdt het
+  manifest tegen béide workflows: een versie die ergens anders is bijgewerkt dan
+  elders, twee workflows die het oneens zijn, een veld dat de monitor nodig heeft
+  en mist. En de richting waar geen mens aan denkt: elke `*_VERSION:`-pin die in
+  `.github/workflows/` of `.forgejo/workflows/` opduikt en niet in het manifest
+  staat, valt hier om. Zonder die laatste kon het manifest verouderen door
+  wegláting — een vierde scanner erbij, het manifest vergeten, en er kijkt weer
+  niemand. Drie mutaties gedraaid om te zien dat de test echt bijt: een
+  uiteengelopen versie, een niet-vermelde pin en een actie die van zijn
+  manifest-ingang afdwaalt; alle drie rood, daarna weer groen.
+
+  De monitor vond meteen iets, en dat is in dezelfde stap opgelost: **semgrep
+  stond op 1.170.0 terwijl 1.171.0 uit was.** Is er een hogere, dan gaat álles
+  mee — anders draai je nog steeds niet de laatste, en dan is de melding een
+  lijstje in plaats van een controle. "Alles" is hier drie bestanden (beide
+  workflows plus het manifest) én de installatie op de werkbank, want dat CI en
+  de werkbank niet uit elkaar lopen is het hele punt van deze pins.
+
+  Nagemeten ná de bump in plaats van aangenomen: `make sast` op 1.171.0 is schoon
+  over 709 bestanden met 3 regels, gelijk aan wat 1.170.0 gaf — de nieuwe versie
+  verandert hier dus niets aan wat "groen" betekent. `make check-pins` meldt nu
+  alle vier op hun laatste versie. (#802)
+
+### Added
 - **Presentaties uit PowerPoint, Keynote en Impress komen binnen als echt deck
   (#772).** Onder *… → Presentaties importeren…* wordt een `.pptx`, `.odp` of
   `.key` omgezet naar getypte OciDeck-dia's in gewone Marp-Markdown. Niet naar
@@ -196,44 +240,6 @@ read a book to find out.
   beschadigd archief levert de échte reden op in plaats van "geen dia's
   gevonden" — sinds `archive` 4 decodeert rommel namelijk naar een léég archief,
   wat van een lege presentatie niet te onderscheiden is.
-- **Er kijkt nu iets naar de gepinde CI-versies, en het manifest kan niet meer
-  stil verouderen.** Sinds #799/#800 staan gitleaks, trufflehog en semgrep op een
-  vaste versie. Goed — maar een pin zonder tegenhanger verouderd ongemerkt, en
-  voor déze drie is dat niet cosmetisch: een geheimenscanner die stilstaat
-  eindigt netjes op 0 terwijl hij de sleutelvormen mist die ná hem zijn bedacht.
-  Groen omdat hij niet wist waar hij naar moest kijken — dezelfde faalvorm als
-  een historie-scan op een ondiepe kloon.
-
-  Er bestond één monitor, `make check-actions`, en die keek uitsluitend naar
-  Actions met een exacte versie; precies één stond erin. Een versie in een
-  `run:`-blok viel erbuiten. Het manifest en het gereedschap heten daarom nu naar
-  wat ze werkelijk dekken — `.github/pinned-ci-versions.json`,
-  `tool/check_pinned_versions.dart`, `make check-pins` — met twee lijsten, omdat
-  een `uses:`-pin en een binary die een `run:`-blok binnenhaalt op dezelfde
-  manier verouderen en er niet op lijken. Twee bronnen ook: een GitHub-release
-  draagt `tag_name`, PyPI draagt `info.version`. Semgrep wordt bij PyPI opgehaald
-  en niet bij zijn GitHub-release, want de workflow installeert hem met `pip` —
-  "de laatste" moet betekenen: de laatste die díe weg kan bereiken.
-
-  De helft die geen netwerk nodig heeft is géén advies maar een poort.
-  `test/pinned_versions_manifest_test.dart` draait in de suite en houdt het
-  manifest tegen béide workflows: een versie die ergens anders is bijgewerkt dan
-  elders, twee workflows die het oneens zijn, een veld dat de monitor nodig heeft
-  en mist. En de richting waar geen mens aan denkt: elke `*_VERSION:`-pin die in
-  `.github/workflows/` of `.forgejo/workflows/` opduikt en niet in het manifest
-  staat, valt hier om. Zonder die laatste kon het manifest verouderen door
-  wegláting — een vierde scanner erbij, het manifest vergeten, en er kijkt weer
-  niemand. Drie mutaties gedraaid om te zien dat de test echt bijt: een
-  uiteengelopen versie, een niet-vermelde pin en een actie die van zijn
-  manifest-ingang afdwaalt; alle drie rood, daarna weer groen.
-
-  De monitor vond meteen iets: **semgrep 1.171.0 is uit, de pin staat op
-  1.170.0.** Bewust niet meegenomen. De lokaal geïnstalleerde semgrep is óók
-  1.170.0, en het hele punt van deze pins is dat CI en de werkbank niet uit
-  elkaar lopen; die bump hoort samen met de brew-installatie te gaan, na het
-  lezen van de changelog. Adviserend is niet hetzelfde als vrijblijvend, maar het
-  is ook niet "doe het even in dezelfde PR". (#802)
-
 ### Changed
 - **De scanners in de GitHub-definitie zijn gepind en geverifieerd; het
   installatiescript van een branch-tip is weg.** `.github/workflows/ci.yml`
