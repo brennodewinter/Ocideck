@@ -162,6 +162,31 @@ read a book to find out.
   dus `workflow_dispatch` in plaats van niets.
 
 ### Added
+- **De OpenKAT-import is te starten waar je hem zoekt: naast de rapportagemap
+  en op het openscherm.** Het invoerpunt zat alleen in het ⋮-menu. Wie in
+  *Integraties* net een map had aangewezen, moest daarna het venster sluiten en
+  dat menu-item opzoeken om te zien of het werkte — precies de stap waarop
+  iemand denkt dat er niets gebeurd is.
+
+  In *Integraties* staat nu **Nu importeren** onder de map: uitgeschakeld
+  zolang er geen map is (met de reden in de tooltip), en het verslag komt
+  eronder te staan — geladen, overgeslagen, en waar het overzicht gebleven is.
+  Niet als snackbar: achter een modale dialoog leest die niemand. Het venster
+  blijft ook bewust open staan, want zelf sluiten zou de nog niet opgeslagen
+  instellingen van de andere tabbladen weggooien.
+
+  Op het openscherm staat dezelfde ingang als in het menu, achter dezelfde
+  poort (desktop, en de module aan of er is al een map). Beginnen met een
+  OpenKAT-uitdraai is beginnen, net zo goed als beginnen met een sjabloon — en
+  juist wie hiermee werkt komt het vaakst op dít scherm terug om het overzicht
+  te verversen. Zonder ingestelde map vraagt de actie zelf om een map.
+
+  Daaronder: de import geeft zijn uitkomst nu terug in plaats van hem alleen
+  te melden, zodat een aanroeper met `announce: false` kan zwijgen en het zelf
+  vertelt. De zin bij een uitkomst staat in één functie buiten de
+  platformhelften — twee bijna gelijke teksten zijn precies hoe ze uit elkaar
+  gaan lopen.
+
 - **OpenKAT is een Uitbreiding geworden, met een vaste rapportagemap — en de
   import leest eindelijk het formaat dat OpenKAT werkelijk exporteert.** Twee
   dingen tegelijk, omdat het één zonder het ander niets oplevert.
