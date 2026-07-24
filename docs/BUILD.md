@@ -339,11 +339,15 @@ step anyway: a set nobody watches is how this went wrong the first time.
 
 > **Since 2026-07-23 the forge has an Actions runner.** The quality gate
 > (`make check`) runs in CI on every pull request and push to `main`
-> (`.forgejo/workflows/ci.yml`, #751), and `.forgejo/workflows/linux-build.yml`
-> produces the Linux desktop bundle as a run artifact on every push to `main`.
-> `make check-full` and the macOS/Windows/web bundles remain local: run the
-> first before dependency or web-facing changes, and build the bundles on
-> their target OS. See [CHECKS.md](CHECKS.md#continuous-integration).
+> (`.forgejo/workflows/ci.yml`, #751); `.forgejo/workflows/linux-build.yml`
+> produces the Linux desktop bundle on every push to `main`, and
+> `.forgejo/workflows/macos-build.yml` does the same for the macOS bundle on a
+> registered Mac runner (host mode — Apple licenses macOS for Apple hardware
+> only, so that job cannot run on the Linux server; when the Mac is offline
+> the run simply waits). `make check-full` and the Windows/web bundles remain
+> local: run the first before dependency or web-facing changes, and build
+> those bundles on their target OS. See
+> [CHECKS.md](CHECKS.md#continuous-integration).
 
 `.github/workflows/ci.yml` *declares* the quality gate on Ubuntu for every push
 and pull request (plus `flutter test` on macOS and Windows). It does not build

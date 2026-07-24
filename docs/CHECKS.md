@@ -948,6 +948,16 @@ For focused work, run only the relevant slice instead of the whole suite:
   as the `ocideck-linux-x64` run artifact. This is a build, not a gate: it
   proves the Linux target compiles and packages, nothing more.
 
+### `.forgejo/workflows/macos-build.yml` — executed on every push to `main`
+- **build-macos** — runs on a registered **Mac** runner (`runs-on: macos`,
+  host mode), not on the server: Apple licenses macOS for Apple hardware only,
+  so there is no macOS job the Linux server could legitimately run. The job
+  uses the Mac's own pinned toolchain (the one `check-toolchain` already
+  guards), builds `flutter build macos --release`, and uploads the `.app`
+  (zipped with `ditto`, which preserves what a plain zip destroys) as the
+  `ocideck-macos` run artifact. When no Mac runner is online the run waits;
+  a newer push replaces a waiting run.
+
 ### `.github/workflows/ci.yml` — declared for every push and pull request
 - **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get
   --enforce-lockfile`, then `make format-check`, `make analyze`,
