@@ -321,7 +321,11 @@ class _DocumentationSearchTabState extends State<DocumentationSearchTab> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Material(
-        color: Colors.white,
+        // `paper` en niet vast wit: de titel en het fragment zijn `slate700`/
+        // `slate500` — mode-afhankelijk, dus licht in donkere modus. Op een wit
+        // vlak stonden ze op 1,30 en 2,09:1, een wit blok met spooktekst in een
+        // verder donkere leesomgeving (#825). Op `paper` lezen ze 13,2 / 8,2:1.
+        color: AppTheme.paper,
         borderRadius: BorderRadius.circular(10),
         child: InkWell(
           borderRadius: BorderRadius.circular(10),
