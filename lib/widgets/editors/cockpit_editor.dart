@@ -271,7 +271,12 @@ class _MeterCard extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(color: AppTheme.slate300),
         borderRadius: BorderRadius.circular(8),
-        color: Colors.white,
+        // `paper` en niet vast wit: dit is editor-chrome (de meterkaart in het
+        // bewerkscherm), en de kop "Meter N" is `brandFg` — mode-afhankelijk.
+        // Op een wit vlak stond die in donkere modus op 1,53:1, en de hele kaart
+        // was een wit blok in een verder donkere interface (#825). Op `paper`
+        // (donker in donkere modus) leest de kop weer, 11,3:1.
+        color: AppTheme.paper,
       ),
       child: Padding(
         padding: const EdgeInsets.all(10),
