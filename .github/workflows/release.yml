@@ -144,7 +144,14 @@ jobs:
 
   windows:
     name: Build Windows
-    runs-on: windows-latest
+    # Bewust niet windows-latest: dartcv4 (de OpenCV-laag onder de
+    # privacyscanner) haalt een voorgebouwd OpenCV-Windows-pakket op waarvan
+    # de binaries niet samengaan met de nieuwste MSVC op dat image
+    # ("Found OpenCV Windows Pack but it has no binaries compatible with
+    # your configuration"). Op het 2022-image staat de MSVC waarvoor dat
+    # pakket gebouwd is. Los deze pin pas wanneer upstream dartcv een pakket
+    # voor nieuwere MSVC's uitbrengt.
+    runs-on: windows-2022
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -189,7 +196,10 @@ jobs:
       - name: Install Linux build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev
+          # libsecret-1-dev: flutter_secure_storage vraagt erom — dezelfde
+          # vondst als in .forgejo/workflows/linux-build.yml (#747).
+          sudo apt-get install -y clang cmake ninja-build pkg-config \
+            libgtk-3-dev libsecret-1-dev
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
