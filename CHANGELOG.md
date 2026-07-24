@@ -103,6 +103,43 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Fixed
+- **Sneltoetsen worden overal op dezelfde manier geschreven, en de vertaalpoort
+  kijkt niet langer langs een extension heen.** Er leefden twee patronen naast
+  elkaar (#803). Het commandopalet droeg losse literals (`shortcut: 'Ctrl/Cmd+S'`)
+  en het ⋮-menu een achtervoegsel buiten `d()` om, terwijl de vertaalbestanden de
+  sneltoets juist ÍN de vertaalde tekst hadden staan — `'undo': 'Rückgängig
+  (Strg/Cmd+Z)'`. Wie de app in het Duits gebruikte, zag daardoor twee spellingen
+  tegelijk: Strg in de werkbalk, Ctrl in het menu ernaast.
+
+  De vraag eronder was of een sneltoets tekst is of een identifier, en het
+  antwoord is: allebei, maar niet in hetzelfde stuk. De toets (`S`, `Z`, `F`)
+  hangt aan een `LogicalKeyboardKey` en verandert niet met de taal — wie die
+  vertaalt, beschrijft een toets die niet werkt. De modificatietoets verandert
+  wél, en de bestaande vertalingen deden dat al. Alleen dát deel loopt nu door
+  `d()`; `lib/utils/shortcut_label.dart` stelt de rest samen. Twee bronstrings in
+  plaats van één per sneltoets, dus de volgende sneltoets kost geen 31
+  vertalingen meer. De sleutels `undo`, `redo` en `saveShortcut` konden weg.
+
+  Twee dingen kwamen bovendrijven die niemand zocht. De poort
+  `check-hardcoded-text` bleek af te hangen van de VORM van de aanroeper: een
+  aanroep zonder doel binnen een `extension _X on _YState` — het patroon waarmee
+  deze repo grote widgets onder de bestandsgrens houdt — werd geknoopt aan de
+  naam van de extension, terwijl de declaratie onder de klasse staat. Dezelfde
+  helper naar top-level tillen liet dezelfde string wél opvallen. Dat is nu
+  gedicht, en het legde meteen negen onvertaalde regels in het Over-venster bloot
+  (adres, KvK, IBAN, BIC, bank). En de toetsenlegenda van de presenter beloofde
+  `Ctrl+N` en `Ctrl+W` terwijl beide bindings `control || meta` zijn: op een Mac
+  stond daar al het verkeerde.
+
+  Wat er níét in zit: de tweede ontsnappingsroute uit hetzelfde issue, de
+  veldsprong via `PaletteCommand.shortcut`. Die is langs dezelfde weg dichtbaar
+  en is gemeten — hij legt 23 échte overtredingen bloot, waaronder de
+  catalogusbeschrijvingen in `reference_standards.dart` die met een kale `Text()`
+  in 31 talen Nederlands blijven. Dat is eigen werk met een eigen afweging en
+  staat als apart issue; tot die tijd draagt een wacht in
+  `test/shortcut_label_test.dart` dat halve gat.
+
 ### Added
 - **Er kijkt nu iets naar de gepinde CI-versies, en het manifest kan niet meer
   stil verouderen.** Sinds #799/#800 staan gitleaks, trufflehog en semgrep op een
