@@ -136,8 +136,6 @@ read a book to find out.
   Onoplosbaar ook: de presets zijn `const` in lib/models, en een model importeert
   geen l10n. Een kleurcode is nu geen tekst meer, in dezelfde categorie als `•`
   en `%`. Een melding die niemand kán wegwerken is geen poort maar ruis.
-
-### Fixed
 - **Een omgevallen suite wijst niet langer naar een test die niets misdaan
   heeft.** `make check` viel op 24-07-2026 twee keer om met `Failed to load
   "test/<wisselend>_test.dart": type '_Map<String, dynamic>' is not a subtype of
