@@ -125,6 +125,33 @@ read a book to find out.
   De diavormen rijden op wat er al was; het bestandsformaat is niet geraakt.
 
 ### Fixed
+- **Vier slidetypes vielen om als hun preview op een ontaarde breedte werd
+  gemeten (#782).** Flutter meet een widget vaker dan hij hem tekent: een
+  inklappend paneel, een rij zonder resterende ruimte, een animatie die bij nul
+  begint. Alle drie leveren ze een breedte waarop niets valt op te maken — en
+  een preview hoort dan niets te tekenen, niet te ontploffen.
+
+  Drie oorzaken, in dezelfde familie als #714 en geen van drieën met een melding
+  die naar de dia wees. De checklist- en scopematrixpreview leidden de dikte van
+  hun voortgangsbalk van de breedte af, en `LinearProgressIndicator` eist er een
+  boven nul. De tijdlijn deelde door een maat die van de breedte is afgeleid —
+  op nul is dat Infinity of NaN, en het afronden daarvan gooit — en liet daarna
+  de clamp van de verbindingslijn kruisen op een kaart die smaller is dan haar
+  eigen marge. De cockpit trok de randdikte van de hoekstraal af, en die dikte
+  heeft een vaste pixel als vloer: op een korte meter werd het verschil negatief
+  en dat weigert `RRect`.
+
+  Elke maat kreeg de ondergrens die hij mist. Boven die grens verandert er niets
+  aan de maatvoering van een echte dia; eronder is een haarlijn, één verdieping
+  of een scherpe hoek de juiste uitkomst.
+
+  Een gebruikerspad hiernaartoe is niet aangetoond — het venster heeft een
+  ondergrens en de panelen hebben hun eigen vloer. Dit is hardening met een
+  reproductie. De regressietoets loopt daarom naast de vier oorzaken ook alle 24
+  slidetypes langs op vier ontaarde breedtes, en scheidt daarbij "past niet" van
+  "valt om": een overloop van een paar pixels is bij die breedtes de juiste
+  uitkomst en blijft toegestaan.
+
 - **De OpenKAT-import toonde systemen die geen systemen waren, en tellingen die
   elkaar tegenspraken.** Een uitdraai van drie organisaties meldde 295 findings
   boven een ernstverdeling die er 218 verklaarde, en 89 getroffen systemen bij
