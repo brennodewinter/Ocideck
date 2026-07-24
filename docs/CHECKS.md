@@ -947,13 +947,17 @@ also declares them, but see the [CI note](#continuous-integration).)
     the manifest does not list fails here. A pin nothing monitors ages silently
     (#802), and for a secret scanner that means green because it did not know
     what to look for.
-  - `test/suite_failure_hint_test.dart` — the hint described under
-    [When the gate fails on something that is not your
+  - `test/explain_suite_failure_test.dart` — the load-failure explanation
+    described under [When the gate fails on something that is not your
     change](#when-the-gate-fails-on-something-that-is-not-your-change) hangs off
     **every** `flutter test` line in the `Makefile`, and nothing but this test
-    notices a new line that skips it. It also holds the two properties that
-    would fail quietly and expensively: the `||` branch must still `exit 1` (or
-    a red suite turns green because printing the hint succeeded), and
+    notices a new line that skips it. Its first duty is the opposite of
+    reassurance: a file that fails to load because it does not compile must be
+    reported as a *real* failure, never filed under the known one — otherwise
+    the explanation sends someone away from a genuine bug while the tests in
+    that file quietly do not run. It also holds the two wiring properties that
+    would fail expensively and in silence: the `||` branch must still `exit 1`
+    (or a red suite turns green because printing the explanation succeeded), and
     `clean-test-cache` must not reach past `build/test_cache` (a `rm -rf build`
     takes the platform builds with it, and with them the native OpenCV library
     `DARTCV_LIB` points at — after which the face-detection tests skip
@@ -1009,8 +1013,8 @@ For focused work, run only the relevant slice instead of the whole suite:
   `flutter test` keeps an incremental kernel cache there
   (`build/test_cache/build/<hash>.cache.dill.track.dill`, around 120 MB on this
   project); this removes it, at the cost of one full recompile on the next
-  suite run. Reach for it when the suite fails on something that is not your
-  change — see [below](#when-the-gate-fails-on-something-that-is-not-your-change).
+  suite run. Reach for it when a `Failed to load` survives a re-run — see
+  [below](#when-the-gate-fails-on-something-that-is-not-your-change).
   Deliberately *not* `flutter clean`: the platform builds under `build/` are
   where `DARTCV_LIB` finds the native OpenCV library, and without it the face
   detection tests skip themselves and the suite goes green for the wrong reason.
@@ -1028,29 +1032,50 @@ Failed to load "test/<varies>_test.dart":
 type '_Map<String, dynamic>' is not a subtype of type 'List<dynamic>' in type cast
 ```
 
-This is a failure to **load** a test file, not a failure inside it. The tell is
-that the named test is green when you run it on its own.
+This is a failure to **load** a test file, not a failure inside it: the tests in
+that file never ran, and they are not in the pass count either. The tell is that
+the named test is green when you run it on its own.
 
-**What to do:**
+**What to do:** re-run. If it comes back, `make clean-test-cache && make check`
+— and then read the last paragraph of this section, because a persistent one
+would be new information.
 
-```sh
-make clean-test-cache && make check
+**Where it actually comes from.** The throwing line is known:
+
+```
+stream_channel/lib/src/multi_channel.dart:143
+    _inner!.stream.cast<List>().listen(...)
 ```
 
-Twice on 2026-07-24 that was the whole fix — same tree, no edit, green on the
-next run. Both incidents were in the `coverage` phase, on a cache carried over
-from earlier runs; four runs the same day that did not measure coverage stayed
-clean. Six runs is not a sample, and the correlation is recorded here as an
-observation, not a cause.
+`MultiChannel` multiplexes several logical channels over one connection, so
+every frame on that connection has to be a `[id, payload]` **list**. A bare
+`List` in a cast is `List<dynamic>` to the VM — which is why the message reads
+exactly like that, and why the stack is
+`CastStreamSubscription._onData` with nothing but `dart:async` frames above it.
+So a JSON **object** arrived on a wire that only carries frames. In `flutter
+test` that wire is the one between the tool and the test process
+(`_pipeHarnessToRemote`, `packages/flutter_tools/lib/src/test/flutter_platform.dart`),
+which is JSON over a WebSocket.
 
-**What is actually known about the cache.** `flutter test` writes it itself —
-nothing in this repository configures it. The filename is a hash of **only** the
+**So it has nothing to do with a damaged kernel cache.** That was the first
+suspect and it is wrong — see the ruled-out table below. What the two 2026-07-24
+incidents and the one reproduced while writing this have in common is *load*:
+all three were in the `coverage` phase, the heaviest and most concurrent one,
+and the reproduction happened while a second `flutter test` was running on the
+same machine. Three occurrences is not a sample either, so that is where the
+knowledge currently stops: the failing line is certain, the trigger is not.
+
+Clearing the cache "fixing" it is consistent with this — a full recompile
+changes the timing of the whole run — but so is simply running again.
+
+**What is known about the cache itself**, since it was the first suspect and
+someone will suspect it again: `flutter test` writes it, nothing in this
+repository configures it, and its filename is a hash of **only** the
 dart-defines and the extra front-end options
-(`getDefaultCachedKernelPath`, `packages/flutter_tools/lib/src/bundle.dart`);
-the Flutter version and the package resolution are *not* part of it, so the same
-cache file is reused across an SDK upgrade or a dependency change. That is a
-mechanism by which a stale cache can survive; it is not evidence that it caused
-the two incidents.
+(`getDefaultCachedKernelPath`, `packages/flutter_tools/lib/src/bundle.dart`).
+The Flutter version and the package resolution are *not* part of it, so the same
+cache file is reused across an SDK upgrade or a dependency change. Worth knowing;
+not the cause here.
 
 **What was ruled out.** Three ways of damaging the cache were tried against a
 real run of this suite, and `flutter test` shrugged off all three — it fell back
@@ -1066,22 +1091,17 @@ So the naive reading — "the file got corrupted" — does not hold. Whatever th
 is, it is not a broken cache file that the compiler chokes on. Nobody needs to
 repeat these three experiments.
 
-**If it happens again, keep the evidence before you clear the cache.** The cause
-is *not* diagnosed, and `make clean-test-cache` destroys the only copy of the
-state it happened in. Four things, in this order, and none of them takes a
+**If it happens again, keep the evidence.** The *trigger* is not diagnosed, and
+a re-run destroys the state it happened in. Three things, none of which takes a
 minute:
 
-1. the full run output, not the tail — the suite position and the surrounding
-   test names are half the signal;
-2. `cp -R build/test_cache /tmp/test_cache-<datum>` — the cache as it was;
-3. `flutter test <the named file> -v` on its own, with the cache still in place,
-   so the load path is visible for a case that is failing rather than for one
-   that is not;
-4. `git status` and `flutter --version --machine` — the tree and the toolchain,
-   because a package or SDK change is the one mechanism that is on the table
-   (see below) and it is invisible afterwards.
-
-Only then clear the cache and get on with your day.
+1. `cp build/test-report.json /tmp/report-<datum>.json` — the machine-readable
+   report of the failed run, which names the file and carries the stack;
+2. the full terminal output, not the tail — the suite position and the
+   surrounding test names are the load signal;
+3. what else was running. The one thread across all three known occurrences is a
+   busy machine, so `uptime` and whether a second `flutter test` was going are
+   worth more here than anything about the tree.
 
 **Upstream.** Two relevant reports, neither of them this bug:
 
@@ -1097,15 +1117,33 @@ Only then clear the cache and get on with your day.
   the only remedy is to clear it and that it is not obvious that this is what is
   needed. Different cache, same complaint as this section.
 
-**What prints this hint.** Every `flutter test` invocation in the `Makefile`
-ends with `$(ON_SUITE_FAILURE)`, which runs
-[`scripts/suite_failure_hint.sh`](../scripts/suite_failure_hint.sh) when the
-suite fails. It prints the pointer above *after* the Flutter output, and only
-when a carried-over kernel cache actually exists. It does not read, filter or
-suppress anything: the test output streams straight to your terminal untouched,
-and the exit code is still the suite's. `test/suite_failure_hint_test.dart`
-holds that shape — a new `flutter test` line that skips the hint fails the gate,
-and so does a `clean-test-cache` that reaches beyond `build/test_cache`.
+**You should not have to remember any of this.** Every `flutter test` in the
+`Makefile` carries two things: `$(SUITE_REPORT)`, which writes a machine-readable
+report to `build/test-report.json` **alongside** the normal terminal output, and
+`$(ON_SUITE_FAILURE)`, which on a red suite runs
+[`tool/explain_suite_failure.dart`](../tool/explain_suite_failure.dart) over that
+report. It names the files that failed to *load*, and says whether that is the
+known channel failure above or a genuine one.
+
+Three properties, in the order they matter:
+
+- **It cannot hide a real problem.** A file that does not compile is also a load
+  failure, and it is reported as a real one — with the sentence that otherwise
+  goes missing, that the tests in it did not run and are not in the count.
+  `test/explain_suite_failure_test.dart` asserts exactly that, for a missing
+  `main`, a compilation failure, and an unrelated type-cast error.
+- **It cannot swallow the result.** It reads a side channel; the terminal output
+  streams past untouched and the exit code is still the suite's.
+- **It stays quiet.** No load failure, no output — an ordinary red test gets no
+  extra paragraph.
+
+Why a report rather than filtering the output: piping `flutter test` costs it the
+single updating progress line and turns a run into thousands of lines. The gate
+would be worse to watch in exchange for a message you see twice a year.
+
+`test/explain_suite_failure_test.dart` also holds the wiring: a new `flutter
+test` line that skips either variable fails, and so does a `clean-test-cache`
+that reaches beyond `build/test_cache`.
 
 ---
 
