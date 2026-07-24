@@ -346,6 +346,27 @@ read a book to find out.
 
   Zichtbaar op een OpenKAT-managementoverzicht: vijf regels bevindingen naast
   vier smalle kolommen is precies de vorm waarin dit misgaat.
+`### Fixed
+- **De uitleg die je uit een lege lijst moet helpen, was de slechtst leesbare
+  tekst in het venster.** De afbeeldingkiezer heeft een eigen donker palet, en
+  daarin kleurde één token (`textDim`) zowel iconen als tekst. Als tekst haalde
+  het op géén van zijn zeven oppervlakken de 4,5:1 — 3,31 op `surface2`, 4,24 op
+  `bgDeepest`. Dat trof zeven plekken, waaronder de zoekhint en de twee
+  lege-toestandregels ("Zet het filter uit om alles weer te zien", "Gebruik
+  Bladeren om afbeeldingen van elke locatie te kiezen"). De zeven tekstgebruiken
+  nemen nu `textMuted` (overal ≥4,95:1); wat overblijft heet `iconDim`, want als
+  grafisch onderdeel is 3:1 de lat en die haalt hij wél. Hernoemd en niet alleen
+  beschreven: een `textDim` die geen tekst mag kleuren is een val voor de
+  volgende die hem pakt.
+
+  De oorzaak zat een laag hoger. Dit palet en dat van de presentatiemodus staan
+  bewust buiten `AppTheme` — het zijn eigen donkere oppervlakken — en daarom
+  zondert de rauwe-kleurratchet ze uit. Niemand had gezien dat die uitzondering
+  ze ook buiten élke contrastmeting hield: ze kwamen in geen enkel testbestand
+  voor. `test/standalone_palette_contrast_test.dart` dekt nu beide, per
+  oppervlak en per rol, plus de witte labels op de gekleurde vullingen — dezelfde
+  klasse als het knoplabel uit #750, en tot nu toe ongemeten. De presentatiemodus
+  bleek in orde (9,0–15,7:1), maar niets hield dat zo. (#779)
 
 - **Een presentatie zonder afbeeldingen liet de PDF-export omvallen (#714).** De
   melding was `Invalid argument(s): 1`, en dat was letterlijker dan het leek:

@@ -26,7 +26,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                       l10n.d('Selecteer een\nafbeelding'),
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        color: ImagePickerPalette.textDim,
+                        color: ImagePickerPalette.textMuted,
                         fontSize: 13,
                         height: 1.5,
                       ),
@@ -92,7 +92,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
             Text(
               _formatPath(_selected!),
               style: const TextStyle(
-                color: ImagePickerPalette.textDim,
+                color: ImagePickerPalette.textMuted,
                 fontSize: 10.5,
               ),
               maxLines: 3,
@@ -178,10 +178,10 @@ extension _CarouselPreview on _ImageCarouselPickerState {
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: const TextStyle(
-          color: ImagePickerPalette.textDim,
+          color: ImagePickerPalette.textMuted,
           fontSize: 12,
         ),
-        prefixIcon: Icon(icon, color: ImagePickerPalette.textDim, size: 16),
+        prefixIcon: Icon(icon, color: ImagePickerPalette.iconDim, size: 16),
         isDense: true,
         filled: true,
         fillColor: ImagePickerPalette.bg,
