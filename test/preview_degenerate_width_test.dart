@@ -31,13 +31,14 @@ void main() {
   /// meldt dat in debug. Wat hier bewaakt wordt is het verschil tussen "past
   /// niet" en "valt om" — een `ArgumentError` of een gefaalde assertie is het
   /// tweede, en dat is wat deze toets rood moet maken.
+  bool isHardFailure(Object? error) =>
+      error != null &&
+      !(error is FlutterError && '$error'.contains('overflowed by'));
+
   void expectNoHardFailure(Object? error, {required String what}) {
-    if (error == null) return;
-    final overflow =
-        error is FlutterError && '$error'.contains('overflowed by');
     expect(
-      overflow,
-      isTrue,
+      isHardFailure(error),
+      isFalse,
       reason: '$what viel om in plaats van simpelweg niet te passen: $error',
     );
   }
@@ -160,9 +161,7 @@ void main() {
           await renderAt(
             tester,
             width,
-            Slide.create(
-              SlideType.timeline,
-            ).copyWith(timelineLayout: layout),
+            Slide.create(SlideType.timeline).copyWith(timelineLayout: layout),
           ),
           what: 'tijdlijn ${layout.name} op $width',
         );
@@ -203,6 +202,30 @@ void main() {
       );
     });
   }
+
+  // Het vangnet onder de vier toetsen hierboven. Die noemen elk hun eigen
+  // oorzaak en zetten er de inhoud bij die hem uitlokt; deze doet het omgekeerde
+  // en loopt met de standaardinhoud van `Slide.create` alle types langs. Wat hij
+  // vangt is niet een oorzaak maar een verzuim: het volgende slidetype dat erbij
+  // komt en dezelfde deling of clamp opnieuw uitschrijft.
+  //
+  // Bewust één toets en geen 24, met alle omgevallen types in de melding: wie
+  // een type toevoegt wil weten wát er omvalt, niet 24 losse regels waarvan er
+  // één rood is.
+  testWidgets('geen enkel slidetype valt om op een ontaarde breedte', (
+    tester,
+  ) async {
+    final omgevallen = <String>[];
+    for (final type in SlideType.values) {
+      for (final width in const [0.0, 0.5, 1.0, 4.0]) {
+        final error = await renderAt(tester, width, Slide.create(type));
+        if (isHardFailure(error)) {
+          omgevallen.add('${type.name} op $width: $error');
+        }
+      }
+    }
+    expect(omgevallen, isEmpty, reason: omgevallen.join('\n'));
+  });
 
   testWidgets('op een gewone breedte verandert er niets', (tester) async {
     // Het vangnet onder de reparatie: de grenzen mogen alleen het ontaarde
