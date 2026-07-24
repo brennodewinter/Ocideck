@@ -334,6 +334,126 @@ void main() {
     });
   });
 
+  group('wat OpenKAT aanraadt', () {
+    test('de aanbeveling komt onder een tussenkop te staan', () {
+      final deck = generator.generate([_orgMetVerloop('a')]);
+      final slide = _view(deck, 'portfolio.recommendations');
+
+      expect(slide.bullets.first, startsWith(kGroupHeadingMarker));
+      expect(isGroupHeading(slide.bullets.first), isTrue);
+      expect(slide.bullets, contains('Zet de header aan.'));
+    });
+
+    test('zonder aanbevelingen is er geen dia', () {
+      final deck = generator.generate([
+        OpenKatOrganization(
+          code: 'a',
+          name: 'A',
+          snapshots: [
+            _snapshot(
+              date: DateTime.utc(2026, 6, 1),
+              findings: [_finding(id: 'f1', severity: 'high')],
+            ),
+          ],
+        ),
+      ]);
+      expect(_hasView(deck, 'portfolio.recommendations'), isFalse);
+    });
+  });
+
+  group('dekking per control', () {
+    test('het percentage komt uit de teller en de noemer', () {
+      final deck = generator.generate([
+        OpenKatOrganization(
+          code: 'a',
+          name: 'A',
+          snapshots: [
+            _snapshot(
+              date: DateTime.utc(2026, 6, 1),
+              findings: [_finding(id: 'f1', severity: 'high')],
+              controls: const {
+                'rpki': OpenKatControlScore(
+                  name: 'rpki',
+                  compliant: 1,
+                  total: 2,
+                ),
+              },
+            ),
+          ],
+        ),
+      ]);
+      final chart = ChartSpec.parse(
+        _view(deck, 'portfolio.controls').customMarkdown,
+      );
+
+      expect(chart.type, ChartType.horizontalBar);
+      expect(chart.x, ['rpki']);
+      expect(chart.series.first.data, [50]);
+      expect(
+        chart.bands,
+        isEmpty,
+        reason: 'welk percentage goed genoeg is staat niet in de meting',
+      );
+    });
+
+    test('zonder dekkingscijfers is er geen dia', () {
+      final deck = generator.generate([_orgMetVerloop('a')]);
+      expect(_hasView(deck, 'portfolio.controls'), isFalse);
+    });
+  });
+
+  group('de tabellen zeggen wat ze tonen', () {
+    test('langst openstaand telt de dagen tegen de rapportagedatum', () {
+      final deck = generator.generate([_orgMetVerloop('a')]);
+      final slide = _view(deck, 'portfolio.longest-open');
+
+      expect(slide.tableRows.first, [
+        '#',
+        'Systeem',
+        'Finding',
+        'Ernst',
+        'Open sinds',
+        'Dagen',
+      ]);
+      // Geopend 1 april, gemeten 1 juni: 61 dagen — en dat blijft 61, ook als
+      // dit deck over een half jaar opnieuw wordt geopend.
+      expect(slide.tableRows[1].last, '61');
+      expect(slide.tableRows[1][4], '2026-04-01');
+    });
+
+    test('de kolom "nieuw" verschijnt alleen met een vorige meting', () {
+      final metVorige = generator.generate([_orgMetVerloop('a')]);
+      expect(
+        _view(metVorige, 'portfolio.top-issues').tableRows.first,
+        contains('Nieuw'),
+      );
+
+      final eersteMeting = generator.generate([
+        OpenKatOrganization(
+          code: 'a',
+          name: 'A',
+          snapshots: [
+            _snapshot(
+              date: DateTime.utc(2026, 6, 1),
+              findings: [_finding(id: 'f1', severity: 'high')],
+            ),
+          ],
+        ),
+      ]);
+      expect(
+        _view(eersteMeting, 'portfolio.top-issues').tableRows.first,
+        isNot(contains('Nieuw')),
+      );
+    });
+
+    test('de titel noemt geen aantal dat de limiet tegenspreekt', () {
+      final deck = generator.generate([_orgMetVerloop('a')]);
+      final slide = _view(deck, 'portfolio.top-issues');
+      expect(slide.title, isNot(contains('5')));
+      expect(slide.viewLimit?.limit, 5);
+    });
+  });
+
   group('de herimport vindt de gegenereerde dia terug', () {
     test('een vervangen dia houdt zijn plek en zijn id', () {
       final eerste = generator.generate([_orgMetVerloop('a')]);

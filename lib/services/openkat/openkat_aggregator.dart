@@ -214,33 +214,37 @@ class OpenKatAggregator {
     return limit == null ? sorted : sorted.take(limit).toList();
   }
 
-  List<OpenKatFinding> longestOpenFindings(
+  /// De findings die het langst openstaan, oudste eerst.
+  ///
+  /// Elke finding komt terug mét de rapportagedatum van de meting waarin hij
+  /// staat, zodat "hoe lang staat dit al open" tegen dát moment te rekenen is
+  /// en niet tegen de klok van vandaag: een deck dat je over een maand opnieuw
+  /// opent moet dezelfde getallen tonen als toen het gemaakt werd.
+  List<OpenKatOpenFinding> longestOpenFindings(
     List<OpenKatOrganization> organizations, {
     int? limit,
   }) {
-    final open = <OpenKatFinding>[];
+    final open = <OpenKatOpenFinding>[];
     for (final org in organizations) {
       final current = org.current;
       if (current == null) continue;
-      open.addAll(
-        current.findings.where((f) => f.openedAt != null).toList()
-          ..sort((a, b) {
-            final ac = a.openedAt!;
-            final bc = b.openedAt!;
-            return ac.compareTo(bc);
-          }),
-      );
+      for (final finding in current.findings) {
+        if (finding.openedAt == null) continue;
+        open.add(
+          OpenKatOpenFinding(finding: finding, reportDate: current.reportDate),
+        );
+      }
     }
     open.sort((a, b) {
-      final ad = a.openedAt!;
-      final bd = b.openedAt!;
-      var cmp = ad.compareTo(bd);
+      var cmp = a.finding.openedAt!.compareTo(b.finding.openedAt!);
       if (cmp != 0) return cmp;
-      cmp = _severityRank(a.severity).compareTo(_severityRank(b.severity));
+      cmp = _severityRank(
+        a.finding.severity,
+      ).compareTo(_severityRank(b.finding.severity));
       if (cmp != 0) return cmp;
-      cmp = (a.systemId ?? '').compareTo(b.systemId ?? '');
+      cmp = (a.finding.systemId ?? '').compareTo(b.finding.systemId ?? '');
       if (cmp != 0) return cmp;
-      return a.findingTypeId.compareTo(b.findingTypeId);
+      return a.finding.findingTypeId.compareTo(b.finding.findingTypeId);
     });
     return open.take(limit ?? 1 << 30).toList();
   }
@@ -525,6 +529,24 @@ class OpenKatHistoryPoint {
 
   int get totalFindings =>
       severityCounts.values.fold(0, (sum, count) => sum + count);
+}
+
+/// Een openstaande finding met het meetmoment waartegen zijn leeftijd telt.
+class OpenKatOpenFinding {
+  final OpenKatFinding finding;
+  final DateTime reportDate;
+
+  const OpenKatOpenFinding({required this.finding, required this.reportDate});
+
+  /// Hoe lang de finding openstond op de rapportagedatum. Nooit negatief: een
+  /// bron die een openingsdatum ná het rapport meldt levert 0 op in plaats van
+  /// een getal dat niemand kan uitleggen.
+  int get daysOpen {
+    final opened = finding.openedAt;
+    if (opened == null) return 0;
+    final days = reportDate.difference(opened).inDays;
+    return days < 0 ? 0 : days;
+  }
 }
 
 /// Eén organisatie in de onderlinge vergelijking.

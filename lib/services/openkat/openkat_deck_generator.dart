@@ -38,7 +38,9 @@ class OpenKatDeckGenerator {
         _severityMatrixSlide(portfolio),
       ],
       _topIssuesSlide(portfolio),
+      ?_recommendationsSlide(portfolio),
       _longestOpenSlide(portfolio),
+      ?_controlsSlide(portfolio),
       for (final org in organizations) ..._organisationSlides(org),
     ];
 
@@ -293,21 +295,29 @@ class OpenKatDeckGenerator {
 
   Slide _topIssuesSlide(PortfolioAggregate portfolio) {
     final issues = aggregator.topIssues(portfolio.organizations);
+    // Hoeveel er sinds de vorige meting bijkwamen wordt al geteld, maar zonder
+    // vorige meting is die kolom overal nul en zegt hij niets.
+    final showNew = portfolio.organizations.any((o) => o.previous != null);
     final rows = <List<String>>[
-      ['#', 'Finding', 'Ernst', 'Systemen', 'Orgs'],
+      ['#', 'Finding', 'Ernst', 'Systemen', 'Orgs', if (showNew) 'Nieuw'],
       for (var i = 0; i < issues.length; i++)
         [
           '${i + 1}',
           issues[i].findingTypeName ?? issues[i].findingTypeId,
-          issues[i].highestSeverity,
+          _severityLabels[openKatSeverityBand(issues[i].highestSeverity)] ??
+              issues[i].highestSeverity,
           '${issues[i].affectedSystems}',
           '${issues[i].affectedOrganizations}',
+          if (showNew) '${issues[i].deltaSincePrevious}',
         ],
     ];
     return _slide(
       id: _id('openkat-portfolio-top-issues'),
       type: SlideType.table,
-      title: 'Top-5 issues',
+      // Geen "Top-5" in de titel: de weergavelimiet zegt zelf al "5 van 22", en
+      // een getal in de titel dat de limiet tegenspreekt is een fout die
+      // niemand meer ziet als de limiet ooit verandert.
+      title: 'Meest voorkomende issues',
       tableRows: rows,
       // De aggregator sorteert al op zwaarte; 'first' toont die rangorde.
       // ('top' op kolom 0 — het volgnummer — keerde de lijst juist om.)
@@ -319,16 +329,19 @@ class OpenKatDeckGenerator {
   Slide _longestOpenSlide(PortfolioAggregate portfolio) {
     final findings = aggregator.longestOpenFindings(portfolio.organizations);
     final rows = <List<String>>[
-      ['#', 'System', 'Finding', 'Open sinds'],
+      ['#', 'Systeem', 'Finding', 'Ernst', 'Open sinds', 'Dagen'],
       for (var i = 0; i < findings.length; i++)
         [
           '${i + 1}',
-          findings[i].systemId ?? '-',
-          findings[i].findingTypeName ?? findings[i].findingTypeId,
-          if (findings[i].openedAt != null)
-            _iso(findings[i].openedAt!)
-          else
-            '-',
+          findings[i].finding.systemId ?? '-',
+          findings[i].finding.findingTypeName ??
+              findings[i].finding.findingTypeId,
+          _severityLabels[openKatSeverityBand(findings[i].finding.severity)] ??
+              findings[i].finding.severity,
+          findings[i].finding.openedAt == null
+              ? '-'
+              : _iso(findings[i].finding.openedAt!),
+          '${findings[i].daysOpen}',
         ],
     ];
     return _slide(
@@ -371,6 +384,84 @@ class OpenKatDeckGenerator {
                     ))
               .toBlock(),
       notes: '<!-- ocideck_openkat_view: portfolio.trend -->',
+    );
+  }
+
+  /// Wat OpenKAT zelf aanraadt bij de zwaarste issues.
+  ///
+  /// De aanbeveling wordt al uit de bron gehaald en per findingtype bewaard —
+  /// hij haalde alleen nooit een dia. Hier komt hij als tussenkop (de finding)
+  /// met de tekst eronder, zodat één dia meerdere adviezen kan dragen zonder
+  /// dat ze in elkaar overlopen.
+  ///
+  /// Niets verzinnen: draagt geen enkel issue een aanbeveling, dan is er geen
+  /// dia. De tekst is die van OpenKAT, onbewerkt.
+  Slide? _recommendationsSlide(PortfolioAggregate portfolio) {
+    final withAdvice = aggregator
+        .topIssues(portfolio.organizations)
+        .where((i) => (i.recommendation ?? '').trim().isNotEmpty)
+        .take(_maxRecommendations)
+        .toList();
+    if (withAdvice.isEmpty) return null;
+
+    return _slide(
+      id: _id('openkat-portfolio-recommendations'),
+      type: SlideType.bullets,
+      title: 'Wat OpenKAT aanraadt',
+      bullets: [
+        for (final issue in withAdvice) ...[
+          '$kGroupHeadingMarker${issue.findingTypeName ?? issue.findingTypeId}',
+          issue.recommendation!.trim(),
+        ],
+      ],
+      notes: '<!-- ocideck_openkat_view: portfolio.recommendations -->',
+    );
+  }
+
+  /// De dekking per control, huidige meting naast de vorige.
+  ///
+  /// Liggende staven, want controlnamen zijn lang. Bewust zónder streefbanden:
+  /// welk percentage "goed genoeg" is staat niet in de meting, en die norm hier
+  /// invullen zou een oordeel zijn dat OpenKAT niet heeft geveld.
+  ///
+  /// Alleen als er dekkingscijfers mét noemer zijn — zonder noemer is er geen
+  /// percentage en valt er niets te tekenen.
+  Slide? _controlsSlide(PortfolioAggregate portfolio) {
+    final current = <String, double>{
+      for (final entry in portfolio.current.controls.entries)
+        if (entry.value.ratio != null)
+          entry.value.name: entry.value.ratio! * 100,
+    };
+    if (current.isEmpty) return null;
+
+    final previous = <String, double>{
+      for (final entry in (portfolio.previous?.controls ?? const {}).entries)
+        if (entry.value.ratio != null)
+          entry.value.name: entry.value.ratio! * 100,
+    };
+    final names = current.keys.toList()..sort();
+
+    return _slide(
+      id: _id('openkat-portfolio-controls'),
+      type: SlideType.chart,
+      title: 'Dekking per control',
+      customMarkdown: ChartSpec(
+        type: ChartType.horizontalBar,
+        title: 'Percentage conform',
+        x: names,
+        series: [
+          ChartSeries(
+            name: 'Huidig',
+            data: [for (final name in names) current[name] ?? 0],
+          ),
+          if (previous.isNotEmpty)
+            ChartSeries(
+              name: 'Vorige',
+              data: [for (final name in names) previous[name] ?? 0],
+            ),
+        ],
+      ).toBlock(),
+      notes: '<!-- ocideck_openkat_view: portfolio.controls -->',
     );
   }
 
@@ -496,6 +587,10 @@ String _isoDate(DateTime value) =>
     '${value.year.toString().padLeft(4, '0')}-'
     '${value.month.toString().padLeft(2, '0')}-'
     '${value.day.toString().padLeft(2, '0')}';
+
+/// Hoeveel aanbevelingen er op de adviesdia passen. Vijf tussenkoppen met elk
+/// een alinea vult een dia; meer wordt een lijst die niemand voorleest.
+const int _maxRecommendations = 5;
 
 /// Vaste kleuren per ernstband, zodat critical op élke dia dezelfde kleur
 /// heeft. Zonder deze afspraak deelt elke grafiek zijn kleuren uit op volgorde
