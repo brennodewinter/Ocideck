@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/checklist_spec.dart';
 import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/models/timeline.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
 /// Een dia-preview die op nulbreedte wordt gemeten, hoort niets te tekenen —
@@ -142,6 +143,31 @@ void main() {
       what: 'scopematrix op 0',
     );
   });
+
+  // Nul alleen was hier niet genoeg. De rail verdeelt zijn verdiepingen met een
+  // deling waarvan de deler van de breedte is afgeleid — die levert op nul
+  // Infinity of NaN en het afronden daarvan gooit — maar de clamp van de
+  // verbindingslijn viel pas ómhoog om, bij een kaart die smaller is dan haar
+  // eigen marge. Elke breedte in deze lijst ving iets wat de andere lieten
+  // staan, dus ze blijven alle vier staan.
+  for (final layout in TimelineLayout.values) {
+    for (final width in const [0.0, 0.5, 1.0, 4.0]) {
+      testWidgets('tijdlijn ${layout.name} overleeft breedte $width', (
+        tester,
+      ) async {
+        expectNoHardFailure(
+          await renderAt(
+            tester,
+            width,
+            Slide.create(
+              SlideType.timeline,
+            ).copyWith(timelineLayout: layout),
+          ),
+          what: 'tijdlijn ${layout.name} op $width',
+        );
+      });
+    }
+  }
 
   testWidgets('op een gewone breedte verandert er niets', (tester) async {
     // Het vangnet onder de reparatie: de grenzen mogen alleen het ontaarde

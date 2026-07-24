@@ -457,13 +457,25 @@ class _TimelineCanvas extends StatelessWidget {
     // Vertical room on the smaller side of the rail; reserve a little margin.
     final half = math.min(railY, ah - railY) - ah * 0.02;
     final nearGap = ah * 0.05;
+    // De twee verdiepingstellingen hieronder delen allebei door een maat die
+    // van de breedte is afgeleid, en een preview wordt vaker *gemeten* dan
+    // getekend: een inklappend paneel of een animatie die bij nul begint levert
+    // breedte nul, en dan zijn `minPitch` en `spacing` exact nul. `x / 0` is
+    // Infinity — of NaN als `x` ook nul is — en `.floor()`/`.ceil()` daarop
+    // gooit `Unsupported operation: Infinity or NaN toInt`, een melding die de
+    // tijdlijn niet noemt en de deling al helemaal niet. Bij die breedte valt
+    // er niets te verdelen, dus is één verdieping het antwoord (#782).
     final minPitch = w * 0.07;
-    final maxFloors = math.max(1, ((half - nearGap) / minPitch).floor());
+    final maxFloors = minPitch > 0
+        ? math.max(1, ((half - nearGap) / minPitch).floor())
+        : 1;
     // Decide floors from a comfortable base width: same-side cards sit 2·spacing
     // apart, and a floor holds them only if a card plus a clear gap (the 1.25
     // breathing factor) fits in that span; otherwise climb to another floor.
     final baseCardW = (spacing * 1.7).clamp(aw * 0.17, aw * 0.27).toDouble();
-    final widthFloors = math.max(1, (baseCardW * 1.25 / (2 * spacing)).ceil());
+    final widthFloors = spacing > 0
+        ? math.max(1, (baseCardW * 1.25 / (2 * spacing)).ceil())
+        : 1;
     // The first and last cards are clamped inward to stay on the slide, which
     // shoves them toward their nearest same-side neighbour. With a single floor
     // that neighbour is only 2·spacing away and they collide; a second floor
@@ -510,9 +522,19 @@ class _TimelineCanvas extends StatelessWidget {
           final nearY = above
               ? railY - nearGap - floor * pitch
               : railY + nearGap + floor * pitch;
-          final connX = x
-              .clamp(cardLeft + 10, cardLeft + cardW - 10)
-              .toDouble();
+          // De verbindingslijn zet zich tien pixels binnen de kaartrand, maar
+          // een kaart die smaller is dan twintig pixels heeft die ruimte niet:
+          // de bovengrens van de clamp zakt dan onder de ondergrens en dat is
+          // een `ArgumentError` — dezelfde foutklasse als #714. De marge is
+          // daarom hoogstens de halve kaart, en de bovengrens wordt tegen de
+          // ondergrens aan gehouden: bij zulke breedtes liggen ze rekenkundig
+          // op hetzelfde punt, maar `(cardLeft + cardW) - marge` en
+          // `cardLeft + marge` verschillen dan nog in de laatste bit, en dat is
+          // genoeg om ze te laten kruisen (#782).
+          final connInset = math.min(10.0, cardW / 2);
+          final connMin = cardLeft + connInset;
+          final connMax = math.max(connMin, cardLeft + cardW - connInset);
+          final connX = x.clamp(connMin, connMax).toDouble();
           return _TlNode(
             pos: Offset(x, railY),
             cardLeft: cardLeft,
