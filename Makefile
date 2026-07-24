@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release deploy-web check check-no-coverage check-full help servicenormen doorlooptijd ratchets
+.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release deploy-web check check-no-coverage check-full help servicenormen doorlooptijd ratchets
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -52,7 +52,7 @@ help:
 	@echo "  make check-secrets   Sweep working tree and history for committed secrets (needs gitleaks + trufflehog)."
 	@echo "  make shellcheck      ShellCheck over the committed shell scripts (needs shellcheck)."
 	@echo "  make trivy           Advisory supply-chain scan: Dart-dep CVEs + committed secrets (needs trivy)."
-	@echo "  make check-actions   Advisory: exact-pinned CI Actions vs their latest release."
+	@echo "  make check-pins      Advisory: exact-pinned CI versions (actions + scanners) vs their latest release."
 	@echo "  make servicenormen   Interne reactietermijnen op beveiligingsmeldingen (--quiet voor cron)."
 	@echo "  make doorlooptijd    Doorlooptijd van gewone issues (adviserend; --quiet voor cron)."
 	@echo "  make ratchets        Bewegen de basislijnen en de dekking de goede kant op (adviserend)."
@@ -394,17 +394,23 @@ trivy:
 	@# empty `auths` no credential helper is needed for public registries.
 	trivy fs --config trivy.yaml .
 
-# Advisory freshness monitor for the third-party CI Actions we pin to an EXACT
-# version. Reads .github/pinned-actions.json and asks each Action's release API
-# whether a newer version exists — the Action analogue of deps-check for the
-# vendored JS. Advisory (needs network, a bump is a prompt not a regression), so
-# NOT wired into check/check-full. `--offline` validates the manifest only.
-check-actions:
-	@echo "== OciDeck advisory check: pinned CI Actions =="
-	@echo "Command: dart run tool/check_pinned_actions.dart"
-	@echo "Covers: every exact-pinned Action in .github/pinned-actions.json vs its latest release."
-	@echo "Failure means: a pinned Action is behind (bump it + the manifest) or the release API was unreachable."
-	dart run tool/check_pinned_actions.dart
+# Advisory freshness monitor for the third-party CI versions we pin to an EXACT
+# value: both the `uses: …@vX.Y.Z` actions and the scanner binaries a `run:`
+# block downloads by version. Reads .github/pinned-ci-versions.json and asks
+# each upstream whether a newer version exists — the CI analogue of deps-check
+# for the vendored JS. Advisory (needs network, a bump is a prompt not a
+# regression), so NOT wired into check/check-full. `--offline` validates the
+# manifest only.
+#
+# That the manifest still MATCHES the workflows is a separate, offline question,
+# and it is a hard gate: test/pinned_versions_manifest_test.dart runs in the
+# suite and fails on a drifted or unlisted pin (#802).
+check-pins:
+	@echo "== OciDeck advisory check: pinned CI versions =="
+	@echo "Command: dart run tool/check_pinned_versions.dart"
+	@echo "Covers: every exact-pinned action and scanner in .github/pinned-ci-versions.json vs its latest release."
+	@echo "Failure means: a pin is behind (bump it in every workflow + the manifest) or an upstream API was unreachable."
+	dart run tool/check_pinned_versions.dart
 
 # Interne servicenormen rond beveiligingsmeldingen: hoe snel er gereageerd,
 # geoordeeld en opgelost wordt. Meet uit de tijdstempels die de meldingen in de
