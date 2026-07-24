@@ -58,8 +58,18 @@ class ImportDecisionDialog extends StatefulWidget {
 }
 
 class _ImportDecisionDialogState extends State<ImportDecisionDialog> {
+  /// Elke dia begint op best-effort — de veilige keuze, en precies wat de
+  /// uitleg erboven belooft.
+  ///
+  /// Hier stond eerst het "voorstel" uit `ProblemSlide`, dat bij een dia mét
+  /// afbeelding `imageOnly` was. Dat maakte de standaardhandeling destructief:
+  /// wie niets aanraakte en op Importeren drukte, verloor de tekst van juist
+  /// die dia's, terwijl de zin erboven het tegendeel beloofde. Een voorstel dat
+  /// tegelijk de standaard is, is geen voorstel maar een besluit dat voor je
+  /// genomen is.
   late final Map<int, SlideFailurePolicy> _choices = {
-    for (final p in widget.problems) p.sourceSlideNumber - 1: p.suggestedPolicy,
+    for (final p in widget.problems)
+      p.sourceSlideNumber - 1: SlideFailurePolicy.bestEffort,
   };
   bool _dontAskAgain = false;
 

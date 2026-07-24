@@ -656,8 +656,5 @@ class DeckBuilder {
           for (final i in realLoss) '${i.feature}: ${i.description}',
         ],
         hadImage: s.images.isNotEmpty,
-        suggestedPolicy: s.images.isNotEmpty
-            ? SlideFailurePolicy.imageOnly
-            : SlideFailurePolicy.bestEffort,
       );
 }

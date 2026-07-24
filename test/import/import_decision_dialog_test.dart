@@ -31,7 +31,6 @@ void main() {
       title: 'Kwartaalcijfers',
       issueDescriptions: ['Audio "intro.m4a": niet overgenomen'],
       hadImage: true,
-      suggestedPolicy: SlideFailurePolicy.imageOnly,
     ),
     ProblemSlide(
       sourceSlideNumber: 5,
@@ -92,12 +91,49 @@ void main() {
     expect(find.widgetWithText(ChoiceChip, 'Overslaan'), findsNWidgets(2));
   });
 
-  testWidgets('het voorstel staat voorgeselecteerd', (tester) async {
+  testWidgets('de standaardkeuze vernietigt niets', (tester) async {
+    // De uitleg belooft dat wat je niet aanraakt zo volledig mogelijk wordt
+    // overgenomen. Eerder stond hier het "voorstel" voorgeselecteerd, dat bij
+    // een dia mét afbeelding `imageOnly` was — wie niets aanraakte en op
+    // Importeren drukte, verloor juist de tekst van die dia.
     await show(tester);
-    final chip = tester.widget<ChoiceChip>(
+    final imageOnly = tester.widget<ChoiceChip>(
       find.widgetWithText(ChoiceChip, 'Alleen de afbeelding'),
     );
-    expect(chip.selected, isTrue);
+    expect(imageOnly.selected, isFalse);
+    for (final chip in tester.widgetList<ChoiceChip>(
+      find.widgetWithText(ChoiceChip, 'Zo volledig mogelijk'),
+    )) {
+      expect(chip.selected, isTrue);
+    }
+  });
+
+  testWidgets('niets aanraken levert overal best-effort op', (tester) async {
+    Map<int, SlideFailurePolicy>? captured;
+    await roomyWindow(tester);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Builder(
+            builder: (context) => ElevatedButton(
+              onPressed: () async {
+                captured = await ImportDecisionDialog.ask(context, problems);
+              },
+              child: const Text('start'),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('start'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(FilledButton, 'Importeren'));
+    await tester.pumpAndSettle();
+
+    expect(captured, {
+      2: SlideFailurePolicy.bestEffort,
+      4: SlideFailurePolicy.bestEffort,
+    });
   });
 
   testWidgets('afbreken breekt af — en levert géén standaardkeuze op', (

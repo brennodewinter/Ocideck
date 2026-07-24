@@ -65,6 +65,7 @@ void main() {
     ]);
     expect(found, hasLength(1));
     expect(found.single.sourceSlideNumber, 1);
+    expect(found.single.hadImage, isFalse);
   });
 
   test('zonder keuze blijft het best-effort: dia plus notitie', () {
