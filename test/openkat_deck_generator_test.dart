@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/openkat/openkat_models.dart';
 import 'package:ocideck/models/scorecard_spec.dart';
@@ -161,6 +162,116 @@ void main() {
       final slide = _view(deck, 'portfolio.orgs-compared');
       final spec = ScorecardSpec.fromSlide(slide.title, slide.tableRows);
       expect(spec.entries.length, scorecardMaxEntries);
+    });
+  });
+
+  group('het verloop over de tijd', () {
+    test('meerdere metingen worden een lijn door de tijd', () {
+      final deck = generator.generate([_orgMetVerloop('a')]);
+      final chart = ChartSpec.parse(
+        _view(deck, 'portfolio.trend').customMarkdown,
+      );
+
+      expect(chart.type, ChartType.line);
+      expect(chart.x, ['2026-05-01', '2026-06-01']);
+      final medium = chart.series.firstWhere((s) => s.name == 'Medium');
+      expect(medium.data, [0, 1]);
+    });
+
+    test('elke band houdt op elke dia dezelfde kleur', () {
+      final deck = generator.generate([_orgMetVerloop('a')]);
+      final chart = ChartSpec.parse(
+        _view(deck, 'portfolio.trend').customMarkdown,
+      );
+      final kleuren = {for (final s in chart.series) s.name: s.color};
+
+      expect(kleuren['Critical'], isNotNull);
+      expect(
+        kleuren.values.toSet().length,
+        kleuren.length,
+        reason: 'twee banden in dezelfde kleur maakt de grafiek onleesbaar',
+      );
+    });
+
+    test('één meting blijft een staafdiagram van de stand van nu', () {
+      final deck = generator.generate([
+        OpenKatOrganization(
+          code: 'a',
+          name: 'A',
+          snapshots: [
+            _snapshot(
+              date: DateTime.utc(2026, 6, 1),
+              findings: [_finding(id: 'f1', severity: 'high')],
+            ),
+          ],
+        ),
+      ]);
+      final chart = ChartSpec.parse(
+        _view(deck, 'portfolio.trend').customMarkdown,
+      );
+
+      expect(
+        chart.type,
+        ChartType.bar,
+        reason: 'een lijn van één punt is geen grafiek',
+      );
+      expect(chart.x, ['Critical', 'High', 'Medium', 'Low']);
+    });
+
+    test('de restband verschijnt alleen als er iets in valt', () {
+      final zonder = ChartSpec.parse(
+        _view(
+          generator.generate([_orgMetVerloop('a')]),
+          'portfolio.trend',
+        ).customMarkdown,
+      );
+      expect(zonder.series.map((s) => s.name), isNot(contains('Overig')));
+
+      final met = generator.generate([
+        OpenKatOrganization(
+          code: 'a',
+          name: 'A',
+          snapshots: [
+            _snapshot(
+              date: DateTime.utc(2026, 5, 1),
+              findings: [_finding(id: 'f1', severity: 'high')],
+            ),
+            _snapshot(
+              date: DateTime.utc(2026, 6, 1),
+              findings: [_finding(id: 'f2', severity: 'recommendation')],
+            ),
+          ],
+        ),
+      ]);
+      final chart = ChartSpec.parse(
+        _view(met, 'portfolio.trend').customMarkdown,
+      );
+      expect(chart.series.map((s) => s.name), contains('Overig'));
+    });
+
+    test('een organisatie met meer metingen krijgt haar eigen verloop', () {
+      final deck = generator.generate([_orgMetVerloop('a')]);
+      expect(_hasView(deck, 'org.a.history'), isTrue);
+      expect(
+        ChartSpec.parse(_view(deck, 'org.a.history').customMarkdown).type,
+        ChartType.line,
+      );
+    });
+
+    test('een organisatie met één meting krijgt er geen', () {
+      final deck = generator.generate([
+        OpenKatOrganization(
+          code: 'a',
+          name: 'A',
+          snapshots: [
+            _snapshot(
+              date: DateTime.utc(2026, 6, 1),
+              findings: [_finding(id: 'f1', severity: 'high')],
+            ),
+          ],
+        ),
+      ]);
+      expect(_hasView(deck, 'org.a.history'), isFalse);
     });
   });
 

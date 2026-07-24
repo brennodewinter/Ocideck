@@ -279,44 +279,33 @@ class OpenKatDeckGenerator {
     );
   }
 
+  /// Het verloop over álle meetmomenten, niet alleen de laatste twee.
+  ///
+  /// De momentopnames staan er al — ze werden alleen nooit getoond. Met twee of
+  /// meer meetpunten is dat een lijn door de tijd; met één meetpunt valt er
+  /// niets te verlopen en blijft het een staafdiagram van de stand van nu, want
+  /// een lijn van één punt is geen grafiek.
   Slide _trendSlide(PortfolioAggregate portfolio) {
     final conclusion = aggregator.compare(
       portfolio.current,
       portfolio.previous,
     );
-    final previous = portfolio.previous;
-    final labels = <String>['Critical', 'High', 'Medium', 'Low'];
-    final currentSeries = <double>[
-      portfolio.current.severityCounts['critical']!.toDouble(),
-      portfolio.current.severityCounts['high']!.toDouble(),
-      portfolio.current.severityCounts['medium']!.toDouble(),
-      portfolio.current.severityCounts['low']!.toDouble(),
-    ];
-    final previousSeries = previous == null
-        ? <double>[]
-        : <double>[
-            previous.severityCounts['critical']!.toDouble(),
-            previous.severityCounts['high']!.toDouble(),
-            previous.severityCounts['medium']!.toDouble(),
-            previous.severityCounts['low']!.toDouble(),
-          ];
-
-    final chart = ChartSpec(
-      type: ChartType.bar,
-      x: labels,
-      title: 'Trend: ${conclusion.label}',
-      series: [
-        ChartSeries(name: 'Huidig', data: currentSeries),
-        if (previousSeries.isNotEmpty)
-          ChartSeries(name: 'Vorige', data: previousSeries),
-      ],
-    );
-
+    final history = aggregator.history(portfolio.organizations);
     return _slide(
       id: _id('openkat-portfolio-trend'),
       type: SlideType.chart,
-      title: 'Trend',
-      customMarkdown: chart.toBlock(),
+      title: history.length > 1 ? 'Verloop over de tijd' : 'Stand van nu',
+      customMarkdown:
+          (history.length > 1
+                  ? _historyChart(
+                      history,
+                      title: 'Verloop: ${conclusion.label}',
+                    )
+                  : _distributionChart(
+                      portfolio.current.severityCounts,
+                      title: conclusion.label,
+                    ))
+              .toBlock(),
       notes: '<!-- ocideck_openkat_view: portfolio.trend -->',
     );
   }
@@ -331,6 +320,9 @@ class OpenKatDeckGenerator {
         : aggregator.aggregateSnapshot(previous);
     final systemStats = aggregator.systemsWithMostFindings(current);
     final improved = aggregator.mostImprovedSystems(org);
+    // Het verloop van déze organisatie op haar eigen meetmomenten: geen
+    // opvulling nodig, want er is er maar één die meet.
+    final orgHistory = aggregator.history([org]);
 
     return [
       _slide(
@@ -366,6 +358,18 @@ class OpenKatDeckGenerator {
         ],
         view: 'org.${_safe(org.code)}.summary',
       ),
+      if (orgHistory.length > 1)
+        _slide(
+          id: _id('openkat-org-${_safe(org.code)}-history'),
+          type: SlideType.chart,
+          title: '${org.name} — verloop',
+          customMarkdown: _historyChart(
+            orgHistory,
+            title: 'Findings per meting',
+          ).toBlock(),
+          notes:
+              '<!-- ocideck_openkat_view: org.${_safe(org.code)}.history -->',
+        ),
       _slide(
         id: _id('openkat-org-${_safe(org.code)}-systems'),
         type: SlideType.table,
@@ -428,6 +432,71 @@ String _isoDate(DateTime value) =>
     '${value.year.toString().padLeft(4, '0')}-'
     '${value.month.toString().padLeft(2, '0')}-'
     '${value.day.toString().padLeft(2, '0')}';
+
+/// Vaste kleuren per ernstband, zodat critical op élke dia dezelfde kleur
+/// heeft. Zonder deze afspraak deelt elke grafiek zijn kleuren uit op volgorde
+/// van reeks, en betekent dezelfde kleur op de volgende dia iets anders.
+///
+/// Aflopend van diep rood naar blauw: de volgorde is ook zonder kleur te zien,
+/// wat het voor een lezer die kleuren niet onderscheidt leesbaar houdt.
+const Map<String, String> _severityColors = {
+  'critical': '#B00020',
+  'high': '#EF4444',
+  'medium': '#F59E0B',
+  'low': '#2563EB',
+  openKatOtherSeverity: '#64748B',
+};
+
+/// Welke banden een grafiek toont: de vier vaste banden altijd (ook op nul, zo
+/// blijft de as tussen twee rapportages hetzelfde), de restband alleen als er
+/// iets in valt.
+List<String> _visibleBands(Iterable<Map<String, int>> counts) => [
+  ...openKatSeverityBands,
+  if (counts.any((c) => (c[openKatOtherSeverity] ?? 0) > 0))
+    openKatOtherSeverity,
+];
+
+/// Het verloop als lijngrafiek: één punt per meetmoment, één lijn per band.
+ChartSpec _historyChart(
+  List<OpenKatHistoryPoint> history, {
+  required String title,
+}) {
+  final bands = _visibleBands([for (final p in history) p.severityCounts]);
+  return ChartSpec(
+    type: ChartType.line,
+    title: title,
+    x: [for (final point in history) _isoDate(point.date)],
+    series: [
+      for (final band in bands)
+        ChartSeries(
+          name: _severityLabels[band] ?? band,
+          color: _severityColors[band],
+          data: [
+            for (final point in history)
+              (point.severityCounts[band] ?? 0).toDouble(),
+          ],
+        ),
+    ],
+  );
+}
+
+/// De stand van nu als staafdiagram — wat er te tonen valt zolang er maar één
+/// meting is.
+ChartSpec _distributionChart(Map<String, int> counts, {required String title}) {
+  final bands = _visibleBands([counts]);
+  return ChartSpec(
+    type: ChartType.bar,
+    title: title,
+    x: [for (final band in bands) _severityLabels[band] ?? band],
+    rowColors: [for (final band in bands) _severityColors[band]],
+    series: [
+      ChartSeries(
+        name: 'Findings',
+        data: [for (final band in bands) (counts[band] ?? 0).toDouble()],
+      ),
+    ],
+  );
+}
 
 /// De ernstbanden zoals ze op een dia komen te staan. De sleutels blijven de
 /// Engelse tokens van OpenKAT, want dát is wat er in de data staat.
