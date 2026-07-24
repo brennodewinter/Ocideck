@@ -367,12 +367,12 @@ class _CockpitInstrumentPainter extends CustomPainter {
     // Thin inner hairline for a machined "bezel" depth, derived from the slide
     // text colour so it works on any background.
     //
-    // De hoekstraal krijgt een ondergrens van nul: `RRect` eist dat, en de
-    // buitenstraal is van de metergrootte afgeleid terwijl de randdikte een
-    // vaste pixel als vloer heeft. Op een meter die korter is dan zo'n vijftien
-    // pixels — een preview die op nulbreedte wordt *gemeten*, of eenvoudigweg
-    // heel veel meters naast elkaar — wint die vloer en wordt het verschil
-    // negatief. Dan is een scherpe hoek de juiste uitkomst (#782).
+    // The corner radius is floored at zero, which `RRect` requires: the outer
+    // radius follows the meter's size while the border width has a fixed pixel
+    // as its floor, so on a meter shorter than some fifteen pixels — a preview
+    // being *measured* at zero width, or simply a great many meters side by
+    // side — that floor wins and the difference goes negative. A sharp corner
+    // is the right answer there (#782).
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         rect.deflate(borderW + 1.5),
