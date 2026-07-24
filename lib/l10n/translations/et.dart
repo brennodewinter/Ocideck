@@ -1765,6 +1765,37 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Presentaties importeren…': 'Impordi esitlusi…',
+  'Presentaties importeren': 'Impordi esitlusi',
+  'Presentatie importeren': 'Impordi esitlus',
+  'Presentatie kiezen': 'Vali esitlus',
+  'Importeren mislukt.': 'Import ebaõnnestus.',
+  'Presentatie geïmporteerd.': 'Esitlus imporditud.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Esitlus imporditud; kontrolli tähelepanu vajavaid kohti.',
+  'Presentaties geïmporteerd.': 'Esitlused imporditud.',
+  'Niet meer tonen': 'Ära näita uuesti',
+  'met verlies': 'kadudega',
+  'dia’s': 'slaidi',
+  'dia’s vragen aandacht': 'slaidi vajab tähelepanu',
+  'Doelmap': 'Sihtkaust',
+  'Nog geen doelmap gekozen': 'Sihtkausta pole veel valitud',
+  'Uit de rij halen': 'Eemalda järjekorrast',
+  'Stoppen': 'Peata',
+  'Bezig met importeren…': 'Importimine…',
+  'Resultaat': 'Tulemus',
+  'Opgeslagen in': 'Salvestatud kausta',
+  'geslaagd': 'õnnestus',
+  'mislukt': 'ebaõnnestus',
+  'niet meer aan de beurt gekomen': 'ei jõudnud järge ära oodata',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Import toimub parima võimaliku tulemuse nimel ja pole üks-ühele koopia: OciDeckil on lihtsam slaidimudel kui PowerPointil. See, mis ei mahu, satub märkusele „üle ei võetud“; kontrolli tulemust pärast.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Nipp: hoia imporditud esitlusi eraldi kaustas. Kvaliteet sõltub allikast ja nii jääb imporditud materjal sinu enda tööst eraldi.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Iga fail teisendatakse eraldi ja salvestatakse omaette esitlusena sihtkausta. Kui üks ebaõnnestub, läheb järjekord lihtsalt edasi.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Mitme esitluse korraga importimine kirjutab need failidena kausta; brauseriversioonis see ei õnnestu.',
   'Nu importeren': 'Impordi kohe',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Ülevaade on valmis uuel vahekaardil.',

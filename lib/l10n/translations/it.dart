@@ -729,6 +729,37 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Presentaties importeren…': 'Importa presentazioni…',
+  'Presentaties importeren': 'Importa presentazioni',
+  'Presentatie importeren': 'Importa presentazione',
+  'Presentatie kiezen': 'Scegli presentazione',
+  'Importeren mislukt.': 'Importazione non riuscita.',
+  'Presentatie geïmporteerd.': 'Presentazione importata.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Presentazione importata; controlla i punti di attenzione.',
+  'Presentaties geïmporteerd.': 'Presentazioni importate.',
+  'Niet meer tonen': 'Non mostrare più',
+  'met verlies': 'con perdite',
+  'dia’s': 'diapositive',
+  'dia’s vragen aandacht': 'diapositive richiedono attenzione',
+  'Doelmap': 'Cartella di destinazione',
+  'Nog geen doelmap gekozen': 'Nessuna cartella di destinazione scelta',
+  'Uit de rij halen': 'Togli dalla coda',
+  'Stoppen': 'Interrompi',
+  'Bezig met importeren…': 'Importazione in corso…',
+  'Resultaat': 'Risultato',
+  'Opgeslagen in': 'Salvato in',
+  'geslaagd': 'riuscite',
+  'mislukt': 'non riuscite',
+  'niet meer aan de beurt gekomen': 'non elaborate',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'L’importazione è best-effort e non una copia uno a uno: OciDeck ha un modello di diapositiva più semplice di PowerPoint. Ciò che non rientra finisce in una nota “non riportato”; controlla il risultato al termine.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Suggerimento: conserva le presentazioni importate in una cartella separata. La qualità varia in base alla fonte e così il materiale importato resta separato dal tuo lavoro.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Ogni file viene convertito separatamente e salvato come presentazione a sé nella cartella di destinazione. Se uno fallisce, la coda prosegue.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Importare più presentazioni insieme le scrive come file in una cartella; nella versione browser non è possibile.',
   'Nu importeren': 'Importa ora',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'La panoramica è pronta in una nuova scheda.',

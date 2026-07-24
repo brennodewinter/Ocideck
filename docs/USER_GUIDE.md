@@ -30,7 +30,7 @@
 - [What the browser version cannot do](#what-the-browser-version-cannot-do)
 - [Theming and language](#theming-and-language)
 
-*(Added 2026-07-22: this document is around 2,992 lines and had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not.)*
+*(Added 2026-07-22: this document is around 3,350 lines and had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not. Figure corrected 2026-07-24; it said 2,992, which was true when it was written.)*
 
 OciDeck builds [Marp](https://marp.app/) presentations through a structured,
 slide-by-slide editor. You compose typed slides, preview them live, present them
@@ -78,6 +78,11 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
   says depend on the menu language it happened to be created in. *(Corrected
   2026-07-23: until #622 the example slides existed only in Dutch, as code
   rather than as documents.)*
+- **Start from a presentation you already have**: a PowerPoint, Keynote or
+  Impress file can be converted into an editable OciDeck deck — see
+  [Importing presentations](#importing-presentations-powerpoint-keynote-impress)
+  for what does and does not survive that conversion. It lives behind the
+  optional *Importeren* module, so you will not see it until you switch that on.
 - **Opened from a URL**: a deck fetched from a web address (the URL import, or a
   `?deck=…` share link on the web build) shows an **“Extern”** privacy badge in
   the status bar. Opening such a link made your device contact that server;
@@ -1822,6 +1827,98 @@ modification date. Never from "now": re-importing the same folder must produce
 the same deck, or the trend line becomes a graph of how often you pressed
 Import.
 
+### Importing presentations (PowerPoint, Keynote, Impress)
+
+*(Added 2026-07-24.)*
+
+**… → Presentaties importeren…** turns a PowerPoint (`.pptx`), LibreOffice
+Impress (`.odp`) or Apple Keynote (`.key`) file into a real OciDeck deck: typed
+slides you can edit, in ordinary Marp Markdown, not a stack of pictures of
+somebody else's slides. It is the second source behind the same **Importeren**
+module as the OpenKAT import above, so the menu item appears once that module is
+switched on — or once an import source already has something set up, under the
+rule that turning a module off may never put existing work out of reach. Unlike
+the OpenKAT import it reads the bytes of the file you picked rather than a
+folder on disk, so this one exists in the browser version too.
+
+The format is decided by looking *inside* the file, not by the extension: a
+`.pptx` is recognised by the presentation part it always carries, an `.odp` by
+its declared media type, a `.key` by its `Index/` archives. A file that is not a
+readable archive is refused with the actual reason ("this file is not a valid
+zip archive", "damaged zip archive") instead of the far more confusing "no
+slides found". The deck title comes from the source's own document properties,
+falling back to the file name.
+
+**It is not a one-to-one copy, and it says so before it starts.** OciDeck's
+slide model is deliberately simpler than PowerPoint's — fixed layouts, one
+chart or one table per slide, no free positioning — so a conversion always
+loses something. A dialog says that up front, together with the advice to keep
+imported presentations in a folder of their own, and offers *Niet meer tonen*
+once you have read it. Telling someone afterwards what was lost is not the same
+promise as telling them beforehand.
+
+**What does not fit becomes a slide you can read.** After each source slide that
+lost something, the import inserts a free-Markdown note slide — *Niet
+overgenomen van slide 7* — naming every dropped feature and, where part of it
+was rescued, where that part went. Losses that belong to the document as a whole
+rather than to one slide get one such note at the end of the deck. Nothing
+disappears quietly: you read the note, decide what to do, and delete it. The
+message after the import counts how many slides carried real loss, so you know
+whether there is anything to look at at all.
+
+| Comes across | Left behind |
+| --- | --- |
+| Titles and subtitles; section slides. | Animations and slide transitions — OciDeck has neither. |
+| Bullet lists, including their nesting level. | Free positioning. Independently placed text boxes are merged in reading order, and the note slide says how many there were. |
+| Two text columns, recognised from how the text boxes sit side by side. | Merged table cells. GFM tables have no spans, so the cells are flattened and the merge is reported. |
+| One or two images per slide, with their captions. Identical images are stored once. | Audio. There is no audio slide type to put it on, so the file name ends up in the note. |
+| Tables, first row as the header. | A table *and* a chart on the same slide: one of the two per slide, and the note says which one was dropped. |
+| Charts — type, categories and numeric series. | The source's colours and fonts. An imported deck takes OciDeck's own styling. |
+| Video (PowerPoint and Keynote), quotes, and timelines where the bullets read as `marker :: event`. | |
+| Speaker notes, and hyperlinks — added as items of their own rather than woven back into the sentence they came from. A link with an executable scheme (`javascript:`, `data:`, `vbscript:`, `file:`) is neutralised instead of carried over. | |
+| Hidden slides, which stay hidden: they arrive as skipped slides rather than being dropped or silently shown. | |
+
+**Long lists and big tables are limited, not cut.** A source table of five
+hundred rows would make an unreadable slide, but throwing rows away to fix that
+is exactly what OciDeck does not do. Above eight bullets or twelve table rows
+the imported slide gets a [view limit](#showing-part-of-the-data-without-losing-any-of-it-view-limits):
+every item stays in the deck and only the *display* is bounded, with the "N of
+total" line telling the audience it is looking at a selection. The limit follows
+the source order rather than picking a top N — an importer has no grounds to
+decide which rows matter most — and you switch it off in the slide settings when
+you want everything shown.
+
+**Keynote is a special case.** A `.key` holds no XML at all; its content is
+compressed protocol-buffer data whose meaning lives in Apple's own application.
+OciDeck reconstructs what it can recognise, which in practice is the slide text,
+the slide order, notes, and — where the structures are recognisable — tables,
+charts and media. Where the object graph cannot be reconstructed at all, the
+import falls back to the preview image stored in the file plus a *Geredde tekst*
+slide of the text it could recover, which is noisy and labelled as such. Either
+way a document-wide note slide says which route was taken, so a thin Keynote
+import never looks like a complete one.
+
+**One file, or several.** Picking a single file opens the result as a new tab,
+unsaved: where an import belongs on disk is your call, not the app's. Picking
+more than one opens a queue instead, because ten tabs is not a result. In the
+queue you set the order (up, down, or take a file out again), point at one
+target folder, and watch the row run file by file. Each deck is saved there as
+its own `.md` with its own `images/` folder beside it, under a name that never
+overwrites anything — a second deck with the same title becomes `-2`. A file
+that fails does not stop the row; it is marked, named, and the next one starts.
+*Stoppen* takes effect between two files, never halfway through writing one.
+Afterwards the dialog counts what succeeded, what failed, how many slides need
+attention and how many never came up, and — most importantly — names the folder,
+because these decks do not open in tabs and without that path nobody knows where
+their work went. **The queue is desktop-only**: it writes each deck as a file
+into a folder you point at, and a browser has no folder to point at. The dialog
+says so instead of offering a button that cannot work.
+
+**Why a separate folder.** The advice appears twice, in the warning and again
+above the folder picker, and it is not filler. Conversion quality differs per
+source file and per format, so imported material needs checking in a way your
+own work does not. Keeping it apart means you always know which is which.
+
 ### Showing part of the data without losing any of it (view limits)
 
 A bullets, table or chart slide built from a large dataset — an import of
@@ -3183,6 +3280,9 @@ before you open a client's deck on it. Hosting the same bundle yourself is
 | The "missing media" warning | Absent — it looks on disk. |
 | Cloud AI | Blocked on purpose, not by the browser. |
 | Importing a deck from a URL | **Works**, through the same security gate as on desktop. |
+| Importing OpenKAT reports | Absent — it reads a folder from disk. |
+| Importing **one** PowerPoint, Keynote or Impress file | **Works**. The conversion runs on the bytes you picked and the result opens in a tab. |
+| Importing **several** presentations at once | Absent. The queue writes each converted deck as a file into a folder you choose, and the browser has no folder to choose. The dialog says so rather than offering a button that cannot work. |
 | Exporting, sealing, encrypted packages | **Works**, delivered as downloads. |
 
 **The privacy check is the one to be careful with.** It has two halves — it reads

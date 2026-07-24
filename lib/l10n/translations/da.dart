@@ -1773,6 +1773,37 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Presentaties importeren…': 'Importer præsentationer…',
+  'Presentaties importeren': 'Importer præsentationer',
+  'Presentatie importeren': 'Importer præsentation',
+  'Presentatie kiezen': 'Vælg præsentation',
+  'Importeren mislukt.': 'Importen mislykkedes.',
+  'Presentatie geïmporteerd.': 'Præsentation importeret.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Præsentation importeret; kontrollér opmærksomhedspunkterne.',
+  'Presentaties geïmporteerd.': 'Præsentationer importeret.',
+  'Niet meer tonen': 'Vis ikke igen',
+  'met verlies': 'med tab',
+  'dia’s': 'slides',
+  'dia’s vragen aandacht': 'slides kræver opmærksomhed',
+  'Doelmap': 'Målmappe',
+  'Nog geen doelmap gekozen': 'Ingen målmappe valgt endnu',
+  'Uit de rij halen': 'Fjern fra køen',
+  'Stoppen': 'Stop',
+  'Bezig met importeren…': 'Importerer…',
+  'Resultaat': 'Resultat',
+  'Opgeslagen in': 'Gemt i',
+  'geslaagd': 'lykkedes',
+  'mislukt': 'mislykkedes',
+  'niet meer aan de beurt gekomen': 'nåede ikke turen',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Import er best-effort og ikke en én-til-én-kopi: OciDeck har en enklere slidemodel end PowerPoint. Det, der ikke passer, havner på en note med “ikke overført”; kontrollér resultatet bagefter.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Tip: gem importerede præsentationer i en separat mappe. Kvaliteten varierer fra kilde til kilde, og på den måde holdes importeret materiale adskilt fra dit eget arbejde.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Hver fil konverteres separat og gemmes som sin egen præsentation i målmappen. Går én galt, fortsætter køen bare.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'At importere flere præsentationer på én gang skriver dem som filer til en mappe; det kan browserversionen ikke.',
   'Nu importeren': 'Importér nu',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Oversigten er klar i en ny fane.',

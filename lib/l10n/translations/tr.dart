@@ -2751,6 +2751,37 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Presentaties importeren…': 'Sunumları içe aktar…',
+  'Presentaties importeren': 'Sunumları içe aktar',
+  'Presentatie importeren': 'Sunumu içe aktar',
+  'Presentatie kiezen': 'Sunum seç',
+  'Importeren mislukt.': 'İçe aktarma başarısız.',
+  'Presentatie geïmporteerd.': 'Sunum içe aktarıldı.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Sunum içe aktarıldı; dikkat noktalarını kontrol edin.',
+  'Presentaties geïmporteerd.': 'Sunumlar içe aktarıldı.',
+  'Niet meer tonen': 'Bir daha gösterme',
+  'met verlies': 'kayıplı',
+  'dia’s': 'slayt',
+  'dia’s vragen aandacht': 'slayt dikkat istiyor',
+  'Doelmap': 'Hedef klasör',
+  'Nog geen doelmap gekozen': 'Henüz hedef klasör seçilmedi',
+  'Uit de rij halen': 'Sıradan çıkar',
+  'Stoppen': 'Durdur',
+  'Bezig met importeren…': 'İçe aktarılıyor…',
+  'Resultaat': 'Sonuç',
+  'Opgeslagen in': 'Şuraya kaydedildi',
+  'geslaagd': 'başarılı',
+  'mislukt': 'başarısız',
+  'niet meer aan de beurt gekomen': 'sırası gelmedi',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'İçe aktarma elden geldiğince yapılır, bire bir kopya değildir: OciDeck’in slayt modeli PowerPoint’inkinden daha basittir. Sığmayan her şey “aktarılmadı” notuna düşer; sonucu sonradan kontrol edin.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'İpucu: içe aktarılan sunumları ayrı bir klasörde tutun. Kalite kaynağa göre değişir, böylece içe aktarılan malzeme kendi çalışmanızdan ayrı kalır.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Her dosya ayrı ayrı dönüştürülür ve hedef klasöre kendi sunumu olarak kaydedilir. Biri hata verirse sıra yoluna devam eder.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Birden çok sunumu aynı anda içe aktarmak onları dosya olarak bir klasöre yazar; tarayıcı sürümünde bu mümkün değil.',
   'Nu importeren': 'Şimdi içe aktar',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Genel görünüm yeni bir sekmede hazır.',

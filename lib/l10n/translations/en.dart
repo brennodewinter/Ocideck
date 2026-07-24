@@ -914,6 +914,37 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Presentaties importeren…': 'Import presentations…',
+  'Presentaties importeren': 'Import presentations',
+  'Presentatie importeren': 'Import presentation',
+  'Presentatie kiezen': 'Choose presentation',
+  'Importeren mislukt.': 'Import failed.',
+  'Presentatie geïmporteerd.': 'Presentation imported.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Presentation imported; check the points that need attention.',
+  'Presentaties geïmporteerd.': 'Presentations imported.',
+  'Niet meer tonen': 'Do not show again',
+  'met verlies': 'with loss',
+  'dia’s': 'slides',
+  'dia’s vragen aandacht': 'slides need attention',
+  'Doelmap': 'Target folder',
+  'Nog geen doelmap gekozen': 'No target folder chosen yet',
+  'Uit de rij halen': 'Remove from queue',
+  'Stoppen': 'Stop',
+  'Bezig met importeren…': 'Importing…',
+  'Resultaat': 'Result',
+  'Opgeslagen in': 'Saved in',
+  'geslaagd': 'succeeded',
+  'mislukt': 'failed',
+  'niet meer aan de beurt gekomen': 'not reached',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Importing is best-effort and not a one-to-one copy: OciDeck has a simpler slide model than PowerPoint. Whatever does not fit ends up on a “not carried over” note; check the result afterwards.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Tip: keep imported presentations in a separate folder. Quality differs per source, and this keeps imported material separate from your own work.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Each file is converted separately and saved as its own presentation in the target folder. If one fails, the queue simply carries on.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Importing several presentations at once writes them as files to a folder; the browser version cannot do that.',
   'Nu importeren': 'Import now',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'The overview is ready in a new tab.',

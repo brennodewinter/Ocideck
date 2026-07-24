@@ -1803,6 +1803,37 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Presentaties importeren…': 'Importar apresentações…',
+  'Presentaties importeren': 'Importar apresentações',
+  'Presentatie importeren': 'Importar apresentação',
+  'Presentatie kiezen': 'Escolher apresentação',
+  'Importeren mislukt.': 'A importação falhou.',
+  'Presentatie geïmporteerd.': 'Apresentação importada.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Apresentação importada; verifique os pontos de atenção.',
+  'Presentaties geïmporteerd.': 'Apresentações importadas.',
+  'Niet meer tonen': 'Não mostrar novamente',
+  'met verlies': 'com perdas',
+  'dia’s': 'slides',
+  'dia’s vragen aandacht': 'slides precisam de atenção',
+  'Doelmap': 'Pasta de destino',
+  'Nog geen doelmap gekozen': 'Ainda não foi escolhida uma pasta de destino',
+  'Uit de rij halen': 'Retirar da fila',
+  'Stoppen': 'Parar',
+  'Bezig met importeren…': 'A importar…',
+  'Resultaat': 'Resultado',
+  'Opgeslagen in': 'Guardado em',
+  'geslaagd': 'com êxito',
+  'mislukt': 'falharam',
+  'niet meer aan de beurt gekomen': 'não chegaram à vez',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'A importação é feita da melhor forma possível e não é uma cópia um para um: o OciDeck tem um modelo de slide mais simples do que o PowerPoint. O que não couber acaba numa nota «não transposto»; verifique o resultado no fim.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Dica: guarde as apresentações importadas numa pasta separada. A qualidade varia consoante a origem e assim o material importado fica separado do seu próprio trabalho.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Cada ficheiro é convertido separadamente e guardado como apresentação própria na pasta de destino. Se um falhar, a fila continua na mesma.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Importar várias apresentações ao mesmo tempo escreve-as como ficheiros numa pasta; a versão de navegador não consegue fazê-lo.',
   'Nu importeren': 'Importar agora',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'A visão geral está pronta numa aba nova.',

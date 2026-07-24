@@ -321,42 +321,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     return (readiness: readiness, quality: quality);
   }
 
-  /// Of exporteren nu kan, plus de tooltip die uitlegt waarom (niet).
-  /// "Eerst opslaan" bestaat om exports naast het deck-bestand te leggen; op
-  /// web is er geen bestandssysteem en wordt de export een download, dus daar
-  /// kan elk geopend deck direct geëxporteerd worden.
-  ({bool canExport, String exportTooltip}) _exportGate(
-    DeckState deckState,
-    ExportReadiness readiness,
-    SlideQualityResult quality,
-    AppLocalizations l10n,
-  ) {
-    final exportTooltip = switch (readiness.status) {
-      ExportReadinessStatus.needsSave =>
-        deckState.filePath == null
-            ? l10n.t('exportNeedsSave')
-            : l10n.t('exportNeedsClean'),
-      ExportReadinessStatus.blockedByClassification =>
-        exportBlockMessage(l10n, readiness.classificationDecision) ?? '',
-      ExportReadinessStatus.blockedByQuality ||
-      ExportReadinessStatus.qualityWarnings => formatQualityExportReason(
-        l10n,
-        quality,
-      ),
-      ExportReadinessStatus.blockedByPrivacy => l10n.d(
-        'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.',
-      ),
-      ExportReadinessStatus.privacyWarnings => l10n.d(
-        'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.',
-      ),
-      ExportReadinessStatus.ready => l10n.t('exportReady'),
-      ExportReadinessStatus.readyPrivacyUnchecked => l10n.d(
-        'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.',
-      ),
-    };
-    return (canExport: readiness.canOpenExport, exportTooltip: exportTooltip);
-  }
-
   PreferredSizeWidget _appBar(
     Deck deck,
     DeckState deckState,
@@ -490,6 +454,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _importUrl();
             case 'import_openkat':
               importOpenKatReports(context, ref);
+            case 'import_presentation':
+              importPresentation(context, ref);
             case 'find':
               _openFindReplace();
             case 'clear_checklists':
@@ -916,6 +882,47 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       ),
     );
   }
+}
+
+/// Of exporteren nu kan, plus de tooltip die uitlegt waarom (niet).
+/// "Eerst opslaan" bestaat om exports naast het deck-bestand te leggen; op
+/// web is er geen bestandssysteem en wordt de export een download, dus daar
+/// kan elk geopend deck direct geëxporteerd worden.
+///
+/// Top-level en niet op de State: de functie leest niets van de State — alles
+/// wat ze nodig heeft komt als parameter binnen — en de klasse zit tegen haar
+/// plafond ([classSizeBaseline] in tool/check_conventions.dart). Zelfde
+/// afweging als `_createDeckFromDialog` hieronder.
+({bool canExport, String exportTooltip}) _exportGate(
+  DeckState deckState,
+  ExportReadiness readiness,
+  SlideQualityResult quality,
+  AppLocalizations l10n,
+) {
+  final exportTooltip = switch (readiness.status) {
+    ExportReadinessStatus.needsSave =>
+      deckState.filePath == null
+          ? l10n.t('exportNeedsSave')
+          : l10n.t('exportNeedsClean'),
+    ExportReadinessStatus.blockedByClassification =>
+      exportBlockMessage(l10n, readiness.classificationDecision) ?? '',
+    ExportReadinessStatus.blockedByQuality ||
+    ExportReadinessStatus.qualityWarnings => formatQualityExportReason(
+      l10n,
+      quality,
+    ),
+    ExportReadinessStatus.blockedByPrivacy => l10n.d(
+      'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.',
+    ),
+    ExportReadinessStatus.privacyWarnings => l10n.d(
+      'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.',
+    ),
+    ExportReadinessStatus.ready => l10n.t('exportReady'),
+    ExportReadinessStatus.readyPrivacyUnchecked => l10n.d(
+      'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.',
+    ),
+  };
+  return (canExport: readiness.canOpenExport, exportTooltip: exportTooltip);
 }
 
 // ── AppBar helpers ────────────────────────────────────────────────────────────

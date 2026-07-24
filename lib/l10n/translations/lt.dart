@@ -1781,6 +1781,37 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Presentaties importeren…': 'Importuoti prezentacijas…',
+  'Presentaties importeren': 'Importuoti prezentacijas',
+  'Presentatie importeren': 'Importuoti prezentaciją',
+  'Presentatie kiezen': 'Pasirinkti prezentaciją',
+  'Importeren mislukt.': 'Importuoti nepavyko.',
+  'Presentatie geïmporteerd.': 'Prezentacija importuota.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Prezentacija importuota; patikrinkite dėmesio vertus punktus.',
+  'Presentaties geïmporteerd.': 'Prezentacijos importuotos.',
+  'Niet meer tonen': 'Daugiau neberodyti',
+  'met verlies': 'su praradimais',
+  'dia’s': 'skaidrių',
+  'dia’s vragen aandacht': 'skaidrių reikalauja dėmesio',
+  'Doelmap': 'Paskirties aplankas',
+  'Nog geen doelmap gekozen': 'Paskirties aplankas dar nepasirinktas',
+  'Uit de rij halen': 'Pašalinti iš eilės',
+  'Stoppen': 'Stabdyti',
+  'Bezig met importeren…': 'Importuojama…',
+  'Resultaat': 'Rezultatas',
+  'Opgeslagen in': 'Įrašyta į',
+  'geslaagd': 'pavyko',
+  'mislukt': 'nepavyko',
+  'niet meer aan de beurt gekomen': 'neatėjo eilė',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Importas atliekamas kiek įmanoma geriau ir nėra kopija vienas prie vieno: OciDeck skaidrės modelis paprastesnis nei PowerPoint. Kas netelpa, patenka į pastabą „neperkelta“; po to patikrinkite rezultatą.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Patarimas: importuotas prezentacijas laikykite atskirame aplanke. Kokybė priklauso nuo šaltinio, todėl importuota medžiaga lieka atskirta nuo jūsų darbo.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Kiekvienas failas konvertuojamas atskirai ir įrašomas kaip atskira prezentacija paskirties aplanke. Jei vienas nepavyksta, eilė tiesiog tęsiasi.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Kelių prezentacijų importavimas iš karto įrašo jas kaip failus į aplanką; naršyklės versijoje tai neįmanoma.',
   'Nu importeren': 'Importuoti dabar',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Apžvalga paruošta naujoje kortelėje.',

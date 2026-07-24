@@ -1801,6 +1801,37 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Presentaties importeren…': 'Εισαγωγή παρουσιάσεων…',
+  'Presentaties importeren': 'Εισαγωγή παρουσιάσεων',
+  'Presentatie importeren': 'Εισαγωγή παρουσίασης',
+  'Presentatie kiezen': 'Επιλογή παρουσίασης',
+  'Importeren mislukt.': 'Η εισαγωγή απέτυχε.',
+  'Presentatie geïmporteerd.': 'Η παρουσίαση εισήχθη.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Η παρουσίαση εισήχθη· ελέγξτε τα σημεία προσοχής.',
+  'Presentaties geïmporteerd.': 'Οι παρουσιάσεις εισήχθησαν.',
+  'Niet meer tonen': 'Να μην εμφανιστεί ξανά',
+  'met verlies': 'με απώλειες',
+  'dia’s': 'διαφάνειες',
+  'dia’s vragen aandacht': 'διαφάνειες χρειάζονται προσοχή',
+  'Doelmap': 'Φάκελος προορισμού',
+  'Nog geen doelmap gekozen': 'Δεν έχει επιλεγεί φάκελος προορισμού',
+  'Uit de rij halen': 'Αφαίρεση από την ουρά',
+  'Stoppen': 'Διακοπή',
+  'Bezig met importeren…': 'Γίνεται εισαγωγή…',
+  'Resultaat': 'Αποτέλεσμα',
+  'Opgeslagen in': 'Αποθηκεύτηκε σε',
+  'geslaagd': 'επιτυχείς',
+  'mislukt': 'απέτυχαν',
+  'niet meer aan de beurt gekomen': 'δεν έφτασαν στη σειρά τους',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Η εισαγωγή γίνεται κατά το δυνατόν και δεν είναι αντίγραφο ένα προς ένα: το OciDeck έχει απλούστερο μοντέλο διαφάνειας από το PowerPoint. Ό,τι δεν χωράει καταλήγει σε σημείωση «δεν μεταφέρθηκε»· ελέγξτε το αποτέλεσμα στο τέλος.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Συμβουλή: κρατήστε τις παρουσιάσεις που εισάγετε σε ξεχωριστό φάκελο. Η ποιότητα διαφέρει ανά πηγή, κι έτσι το εισαγόμενο υλικό μένει χωριστά από τη δική σας δουλειά.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Κάθε αρχείο μετατρέπεται ξεχωριστά και αποθηκεύεται ως δική του παρουσίαση στον φάκελο προορισμού. Αν κάποιο αποτύχει, η ουρά συνεχίζει κανονικά.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Η ταυτόχρονη εισαγωγή πολλών παρουσιάσεων τις γράφει ως αρχεία σε έναν φάκελο· στην έκδοση για προγράμματα περιήγησης αυτό δεν γίνεται.',
   'Nu importeren': 'Εισαγωγή τώρα',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Η επισκόπηση είναι έτοιμη σε νέα καρτέλα.',

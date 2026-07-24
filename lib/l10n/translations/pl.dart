@@ -1786,6 +1786,37 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Presentaties importeren…': 'Importuj prezentacje…',
+  'Presentaties importeren': 'Importuj prezentacje',
+  'Presentatie importeren': 'Importuj prezentację',
+  'Presentatie kiezen': 'Wybierz prezentację',
+  'Importeren mislukt.': 'Import nie powiódł się.',
+  'Presentatie geïmporteerd.': 'Zaimportowano prezentację.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Zaimportowano prezentację; sprawdź punkty wymagające uwagi.',
+  'Presentaties geïmporteerd.': 'Zaimportowano prezentacje.',
+  'Niet meer tonen': 'Nie pokazuj ponownie',
+  'met verlies': 'ze stratami',
+  'dia’s': 'slajdów',
+  'dia’s vragen aandacht': 'slajdów wymaga uwagi',
+  'Doelmap': 'Folder docelowy',
+  'Nog geen doelmap gekozen': 'Nie wybrano jeszcze folderu docelowego',
+  'Uit de rij halen': 'Usuń z kolejki',
+  'Stoppen': 'Zatrzymaj',
+  'Bezig met importeren…': 'Importowanie…',
+  'Resultaat': 'Wynik',
+  'Opgeslagen in': 'Zapisano w',
+  'geslaagd': 'udanych',
+  'mislukt': 'nieudanych',
+  'niet meer aan de beurt gekomen': 'nieprzetworzonych',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Import jest wykonywany najlepiej, jak się da, i nie jest kopią jeden do jednego: OciDeck ma prostszy model slajdu niż PowerPoint. To, co się nie mieści, trafia na notatkę „nieprzeniesione”; sprawdź wynik po zakończeniu.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Wskazówka: przechowuj zaimportowane prezentacje w osobnym folderze. Jakość zależy od źródła, dzięki czemu zaimportowany materiał pozostaje oddzielony od Twojej własnej pracy.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Każdy plik jest konwertowany osobno i zapisywany jako odrębna prezentacja w folderze docelowym. Jeśli jeden się nie powiedzie, kolejka po prostu idzie dalej.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Import kilku prezentacji naraz zapisuje je jako pliki w folderze; w wersji przeglądarkowej nie jest to możliwe.',
   'Nu importeren': 'Importuj teraz',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Zestawienie czeka w nowej karcie.',

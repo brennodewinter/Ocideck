@@ -527,17 +527,46 @@ class ImageService {
     final updated = <Slide>[];
     for (final slide in slides) {
       var next = slide;
-      if (_shouldCopy(next.videoPath)) {
-        final copied = await _copyToDir(next.videoPath, mediaDir);
-        if (copied != null) next = next.copyWith(videoPath: copied);
-      }
-      if (_shouldCopy(next.audioPath)) {
-        final copied = await _copyToDir(next.audioPath, mediaDir);
-        if (copied != null) next = next.copyWith(audioPath: copied);
-      }
+      final video = await _mediaToProject(
+        next.videoPath,
+        mediaDir,
+        isAudio: false,
+      );
+      if (video != null) next = next.copyWith(videoPath: video);
+      final audio = await _mediaToProject(
+        next.audioPath,
+        mediaDir,
+        isAudio: true,
+      );
+      if (audio != null) next = next.copyWith(audioPath: audio);
       updated.add(next);
     }
     return updated;
+  }
+
+  /// Het projectrelatieve mediapad voor [path], of `null` als er niets te doen
+  /// is (leeg, al projectrelatief, of een URL die geen bestand is).
+  ///
+  /// Twee bronnen: een `mem:`-pad draagt zijn bytes mee (een geïmporteerde of
+  /// remote presentatie), een absoluut pad wijst naar schijf.
+  Future<String?> _mediaToProject(
+    String path,
+    Directory mediaDir, {
+    required bool isAudio,
+  }) async {
+    if (WebAssetStore.isMemPath(path)) {
+      return _materializeMemAsset(
+        path,
+        mediaDir,
+        subdir: 'media',
+        // Per soort, niet één terugval voor allebei: een audiobestand zonder
+        // extensie in de store zou anders als `.mp4` landen.
+        fallbackName: isAudio ? 'audio.m4a' : 'video.mp4',
+        fallbackExtension: isAudio ? '.m4a' : '.mp4',
+      );
+    }
+    if (!_shouldCopy(path)) return null;
+    return _copyToDir(path, mediaDir);
   }
 
   bool _shouldCopy(String path) {
@@ -573,24 +602,46 @@ class ImageService {
   ///
   /// Null (het pad blijft ongemoeid) als de bytes weg zijn — bijvoorbeeld na een
   /// paginaherlaad op web, waar de store leeg is.
-  Future<String?> _materializeMemImage(
+  Future<String?> _materializeMemImage(String memPath, Directory imagesDir) =>
+      _materializeMemAsset(
+        memPath,
+        imagesDir,
+        subdir: 'images',
+        fallbackName: 'afbeelding.png',
+        fallbackExtension: '.png',
+      );
+
+  /// Schrijf een in-geheugen `mem:`-asset als echt bestand in [destDir] en geef
+  /// het projectrelatieve pad terug.
+  ///
+  /// Gedeeld door beeld en media. Media had deze route niet, en dat was een
+  /// stil gat: een presentatie-import zet ingebedde video als `mem:`-pad neer,
+  /// maar `_shouldCopy` liet alleen absolute paden door — de bytes werden dus
+  /// nooit weggeschreven en het deck hield een verwijzing over naar een bestand
+  /// dat nooit heeft bestaan (#772).
+  Future<String?> _materializeMemAsset(
     String memPath,
-    Directory imagesDir,
-  ) async {
+    Directory destDir, {
+    required String subdir,
+    required String fallbackName,
+    required String fallbackExtension,
+  }) async {
     final bytes = WebAssetStore.bytesFor(memPath);
     if (bytes == null) return null;
-    final rawName = WebAssetStore.nameFor(memPath) ?? 'afbeelding.png';
+    final rawName = WebAssetStore.nameFor(memPath) ?? fallbackName;
     // Namen uit de store dragen doorgaans een extensie (git-assets heten
-    // `<sha256>.<ext>`); ontbreekt die, dan is `.png` een veilige terugval.
-    final filename = p.extension(rawName).isEmpty ? '$rawName.png' : rawName;
+    // `<sha256>.<ext>`); ontbreekt die, dan is de terugval veilig.
+    final filename = p.extension(rawName).isEmpty
+        ? '$rawName$fallbackExtension'
+        : rawName;
     final dest = await resolveAssetDestinationForBytes(
-      imagesDir,
+      destDir,
       filename,
       bytes,
     );
     if (dest == null) return null;
     if (!dest.alreadyPresent) await writeBytesAtomic(dest.file, bytes);
-    return 'images/${p.basename(dest.file.path)}';
+    return '$subdir/${p.basename(dest.file.path)}';
   }
 
   /// Kopieer [sourcePath] naar [destDir] en geef de projectrelatieve

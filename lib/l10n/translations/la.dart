@@ -1790,6 +1790,37 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Presentaties importeren…': 'Praesentationes importare…',
+  'Presentaties importeren': 'Praesentationes importare',
+  'Presentatie importeren': 'Praesentationem importare',
+  'Presentatie kiezen': 'Praesentationem eligere',
+  'Importeren mislukt.': 'Importatio defecit.',
+  'Presentatie geïmporteerd.': 'Praesentatio importata.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Praesentatio importata; puncta animadvertenda inspice.',
+  'Presentaties geïmporteerd.': 'Praesentationes importatae.',
+  'Niet meer tonen': 'Ne iterum monstretur',
+  'met verlies': 'cum damno',
+  'dia’s': 'scidae',
+  'dia’s vragen aandacht': 'scidae attentionem poscunt',
+  'Doelmap': 'Plica destinata',
+  'Nog geen doelmap gekozen': 'Nulla plica destinata electa',
+  'Uit de rij halen': 'Ex ordine tollere',
+  'Stoppen': 'Sistere',
+  'Bezig met importeren…': 'Importatio in cursu…',
+  'Resultaat': 'Effectus',
+  'Opgeslagen in': 'Servatum in',
+  'geslaagd': 'feliciter',
+  'mislukt': 'defecerunt',
+  'niet meer aan de beurt gekomen': 'non attactae',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Importatio pro viribus fit neque exemplar par pari est: OciDeck modellum scidarum simplicius quam PowerPoint habet. Quod non convenit, in scidam notae “non receptum” ponitur; effectum postea inspice.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Consilium: praesentationes importatas in plica separata serva. Qualitas pro fonte variat, et sic materia importata ab opere tuo proprio separata manet.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Quodque documentum seorsum convertitur et ut praesentatio propria in plica destinata servatur. Si unum deficit, ordo simpliciter pergit.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Plures praesentationes simul importare eas ut documenta in plicam scribit; in navigatro hoc fieri non potest.',
   'Nu importeren': 'Nunc importare',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Conspectus in nova tabula paratus est.',

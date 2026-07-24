@@ -1778,6 +1778,37 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Presentaties importeren…': 'Prezentációk importálása…',
+  'Presentaties importeren': 'Prezentációk importálása',
+  'Presentatie importeren': 'Prezentáció importálása',
+  'Presentatie kiezen': 'Prezentáció kiválasztása',
+  'Importeren mislukt.': 'Az importálás nem sikerült.',
+  'Presentatie geïmporteerd.': 'A prezentáció importálva.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'A prezentáció importálva; nézze át a figyelmet igénylő pontokat.',
+  'Presentaties geïmporteerd.': 'A prezentációk importálva.',
+  'Niet meer tonen': 'Ne jelenjen meg többé',
+  'met verlies': 'veszteséggel',
+  'dia’s': 'dia',
+  'dia’s vragen aandacht': 'dia figyelmet igényel',
+  'Doelmap': 'Célmappa',
+  'Nog geen doelmap gekozen': 'Még nincs kiválasztva célmappa',
+  'Uit de rij halen': 'Kivétel a sorból',
+  'Stoppen': 'Leállítás',
+  'Bezig met importeren…': 'Importálás folyamatban…',
+  'Resultaat': 'Eredmény',
+  'Opgeslagen in': 'Mentve ide',
+  'geslaagd': 'sikeres',
+  'mislukt': 'sikertelen',
+  'niet meer aan de beurt gekomen': 'nem került sorra',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Az importálás a lehető legjobb eredményre törekszik, és nem egy az egyben másolat: az OciDeck diamodellje egyszerűbb, mint a PowerPointé. Ami nem fér bele, „nem került át” jegyzetre kerül; utólag nézze át az eredményt.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Tipp: az importált prezentációkat tartsa külön mappában. A minőség forrásonként eltér, így az importált anyag elkülönül a saját munkájától.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Minden fájl külön alakul át, és önálló prezentációként kerül a célmappába. Ha egy hibára fut, a sor egyszerűen tovább megy.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Több prezentáció egyszerre történő importálása fájlként ír egy mappába; a böngészős változat erre nem képes.',
   'Nu importeren': 'Importálás most',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Az áttekintés készen áll egy új lapon.',

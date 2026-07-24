@@ -14,6 +14,9 @@
 >
 > **Laatst tegen de code getoetst: 22-07-2026.** Punt 9d is toen rechtgezet;
 > de punten 1 tot en met 8 en 10 staan onveranderd open. Zie de notitie bij 9d.
+> *(24-07-2026: punt 11 toegevoegd — de presentatie-import van #772 is nog
+> nooit langs een bestand geweest dat PowerPoint, Impress of Keynote zelf heeft
+> weggeschreven.)*
 
 ## Hoe je dit leest
 
@@ -248,6 +251,39 @@ blinde vlekken, wordt gelezen als een garantie.
 De huidige PDF-export versus echte PDF/A (ingesloten lettertypen + metadata).
 MIAUW EIS 1.1 raakt hieraan. Dit is nog geen werk maar een **beslissing**: hoe
 streng wil je zijn? Beantwoord dat voordat er iets aan gebouwd wordt.
+
+## 11. De presentatie-import tegen echte bestanden
+
+*(Toegevoegd 24-07-2026, bij #772.)*
+
+**Waarom het hier hoort.** De import van `.pptx`, `.odp` en `.key` is uitvoerig
+getest, maar uitsluitend tegen archieven die de tests zelf in elkaar zetten —
+`test/import/helpers/pptx_fixture.dart` en `key_fixtures.dart` schrijven de XML
+respectievelijk de IWA-records met de hand. Er is in deze repository geen enkel
+bestand dat door PowerPoint, Impress of Keynote zelf is weggeschreven. Dat is
+precies het soort schuld waar deze lijst voor bestaat: de suite is groen over
+een model van het formaat, niet over het formaat.
+
+De fout blijft bovendien meestal stil. Een bronbestand met een placeholder die
+net anders heet, een lijstniveau in een andere vorm of een tabel met een tweede
+tegel levert geen crash op maar een dunner deck — en de "niet
+overgenomen"-notitie noemt alleen wat de import zélf herkend heeft als verlies,
+niet wat hij nooit heeft gezien.
+
+**Wat je draait.** Maak in elk van de drie programma's een presentatie met de
+onderdelen die de import claimt over te nemen (titel- en sectiedia, geneste
+bullets, twee kolommen, één en twee afbeeldingen met bijschrift, een tabel, een
+grafiek, video, citaat, sprekersnotities, een hyperlink, een verborgen dia) en
+importeer die. Doe hetzelfde met een bestaand deck van dertig dia's of meer uit
+de echte praktijk, en met een `.key` uit een recente Keynote-versie — daar is
+het onderscheid tussen het objectgraaf-pad en de tekst-salvage het scherpst.
+
+**Wat als bewijs telt.** Per bestand: het aantal dia's klopt met de bron, de
+volgorde klopt, elke dia die inhoud verloor heeft een notitiedia die dat
+verlies benoemt, en er staat géén verlies dat *niet* benoemd is. Voor Keynote
+apart vastleggen welke route het werd (gereconstrueerd of salvage), want een
+`.key` die stilletjes op de voorbeeldafbeelding terugvalt ziet er in de melding
+uit als een geslaagde import.
 
 ---
 

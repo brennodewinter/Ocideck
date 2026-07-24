@@ -1777,6 +1777,37 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Presentaties importeren…': 'Importovat prezentace…',
+  'Presentaties importeren': 'Importovat prezentace',
+  'Presentatie importeren': 'Importovat prezentaci',
+  'Presentatie kiezen': 'Zvolit prezentaci',
+  'Importeren mislukt.': 'Import se nezdařil.',
+  'Presentatie geïmporteerd.': 'Prezentace importována.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Prezentace importována; zkontrolujte body k pozornosti.',
+  'Presentaties geïmporteerd.': 'Prezentace importovány.',
+  'Niet meer tonen': 'Příště nezobrazovat',
+  'met verlies': 'se ztrátou',
+  'dia’s': 'snímků',
+  'dia’s vragen aandacht': 'snímků vyžaduje pozornost',
+  'Doelmap': 'Cílová složka',
+  'Nog geen doelmap gekozen': 'Cílová složka zatím nezvolena',
+  'Uit de rij halen': 'Odebrat z fronty',
+  'Stoppen': 'Zastavit',
+  'Bezig met importeren…': 'Probíhá import…',
+  'Resultaat': 'Výsledek',
+  'Opgeslagen in': 'Uloženo v',
+  'geslaagd': 'úspěšně',
+  'mislukt': 'neúspěšně',
+  'niet meer aan de beurt gekomen': 'nedostalo se na ně',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Import je nejlepší možný a není kopií jedna ku jedné: OciDeck má jednodušší model snímku než PowerPoint. Co se nevejde, skončí na poznámce „nepřevzato“; výsledek si poté zkontrolujte.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Tip: importované prezentace ukládejte do samostatné složky. Kvalita se liší podle zdroje a importovaný materiál tak zůstane oddělený od vaší vlastní práce.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Každý soubor se převádí zvlášť a ukládá se jako samostatná prezentace do cílové složky. Když se jeden nezdaří, fronta prostě pokračuje.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Import více prezentací najednou je zapíše jako soubory do složky; ve verzi pro prohlížeč to nejde.',
   'Nu importeren': 'Importovat nyní',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Přehled je připraven na nové kartě.',

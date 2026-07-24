@@ -1809,6 +1809,37 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Presentaties importeren…': 'Iompórtáil láithreoireachtaí…',
+  'Presentaties importeren': 'Iompórtáil láithreoireachtaí',
+  'Presentatie importeren': 'Iompórtáil láithreoireacht',
+  'Presentatie kiezen': 'Roghnaigh láithreoireacht',
+  'Importeren mislukt.': 'Theip ar an iompórtáil.',
+  'Presentatie geïmporteerd.': 'Láithreoireacht iompórtáilte.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Láithreoireacht iompórtáilte; seiceáil na pointí aire.',
+  'Presentaties geïmporteerd.': 'Láithreoireachtaí iompórtáilte.',
+  'Niet meer tonen': 'Ná taispeáin arís',
+  'met verlies': 'le caillteanas',
+  'dia’s': 'sleamhnáin',
+  'dia’s vragen aandacht': 'sleamhnán a dteastaíonn aire uathu',
+  'Doelmap': 'Fillteán sprice',
+  'Nog geen doelmap gekozen': 'Níl fillteán sprice roghnaithe fós',
+  'Uit de rij halen': 'Bain as an scuaine',
+  'Stoppen': 'Stad',
+  'Bezig met importeren…': 'Á iompórtáil…',
+  'Resultaat': 'Toradh',
+  'Opgeslagen in': 'Sábháilte i',
+  'geslaagd': 'd\'éirigh leo',
+  'mislukt': 'theip orthu',
+  'niet meer aan de beurt gekomen': 'níor tháinig a seal',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Déantar an t-iompórtáil chomh maith agus is féidir agus ní cóip duine ar dhuine í: tá múnla sleamhnáin níos simplí ag OciDeck ná ag PowerPoint. Rud ar bith nach n-oireann, téann sé ar nóta “níor tugadh anall”; seiceáil an toradh ina dhiaidh.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Leid: coinnigh láithreoireachtaí iompórtáilte i bhfillteán ar leith. Athraíonn an cháilíocht ó fhoinse go foinse, agus fanann ábhar iompórtáilte scartha ó do chuid oibre féin.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Tiontaítear gach comhad ar leith agus sábháiltear é mar láithreoireacht dá chuid féin san fhillteán sprice. Má theipeann ar cheann, leanann an scuaine ar aghaidh.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Nuair a iompórtáiltear roinnt láithreoireachtaí ag an am céanna, scríobhtar mar chomhaid i bhfillteán iad; ní féidir leis an leagan brabhsálaí é sin a dhéanamh.',
   'Nu importeren': 'Iompórtáil anois',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Tá an forbhreathnú réidh i gcluaisín nua.',
