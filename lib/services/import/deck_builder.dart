@@ -71,18 +71,46 @@ class DeckBuilder {
     SourceDeck sourceDeck,
     List<ClassifiedSlide> classified, {
     required String title,
+    Map<int, SlideFailurePolicy> policies = const {},
   }) {
     final slides = <Slide>[];
     final problemSlides = <ProblemSlide>[];
 
     for (final c in classified) {
-      slides.add(_buildSlide(c));
-
       final issues = _conversionIssuesFor(c);
-      if (issues.isNotEmpty) {
-        slides.add(_noteSlide(c.source.index + 1, issues));
-      }
       final realLoss = issues.where((i) => !i.isSalvaged).toList();
+
+      // Het beleid geldt alleen voor een dia met écht verlies. Een dia die
+      // schoon converteert laat je met rust, ook als de gebruiker "overslaan"
+      // als algemene voorkeur koos — anders gooit één keuze zijn hele deck weg.
+      final policy = realLoss.isEmpty
+          ? SlideFailurePolicy.bestEffort
+          : (policies[c.source.index] ?? SlideFailurePolicy.bestEffort);
+      final effective =
+          policy == SlideFailurePolicy.imageOnly && c.source.images.isEmpty
+          // Een afbeeldingsdia zonder afbeelding is niets; dan is overslaan
+          // eerlijker dan een lege dia.
+          ? SlideFailurePolicy.skip
+          : policy;
+
+      switch (effective) {
+        case SlideFailurePolicy.bestEffort:
+          slides.add(_buildSlide(c));
+        case SlideFailurePolicy.imageOnly:
+          slides.add(_imageOnlySlide(c.source));
+        case SlideFailurePolicy.skip:
+          break;
+      }
+
+      if (issues.isNotEmpty) {
+        slides.add(
+          _noteSlide(
+            c.source.index + 1,
+            issues,
+            heading: _headingFor(effective, c.source.index + 1),
+          ),
+        );
+      }
       if (realLoss.isNotEmpty) {
         problemSlides.add(_problemSlide(c.source, realLoss));
       }
@@ -94,6 +122,45 @@ class DeckBuilder {
 
     final deck = Deck(title: title, author: sourceDeck.author, slides: slides);
     return BuiltDeck(deck: deck, problemSlides: problemSlides);
+  }
+
+  /// De probleemdia's van [classified], zónder een deck te bouwen.
+  ///
+  /// Het beslismoment valt tússen classificeren en bouwen: de gebruiker moet
+  /// kunnen kiezen wát er met een dia gebeurt vóórdat die dia er is. Dit is
+  /// dezelfde verliesberekening als [build] doet, maar zonder dia's te
+  /// construeren of afbeeldingen te materialiseren — vragen mag niet duurder
+  /// zijn dan doen.
+  List<ProblemSlide> analyse(List<ClassifiedSlide> classified) => [
+    for (final c in classified)
+      if (_conversionIssuesFor(c).where((i) => !i.isSalvaged).toList()
+          case final realLoss when realLoss.isNotEmpty)
+        _problemSlide(c.source, realLoss),
+  ];
+
+  /// De kop boven de notitiedia, die zegt wát er met de dia is gebeurd.
+  String? _headingFor(SlideFailurePolicy policy, int sourceNumber) =>
+      switch (policy) {
+        SlideFailurePolicy.bestEffort => null,
+        SlideFailurePolicy.skip => '# Dia $sourceNumber overgeslagen',
+        SlideFailurePolicy.imageOnly =>
+          '# Dia $sourceNumber: alleen de afbeelding overgenomen',
+      };
+
+  /// Alleen de afbeeldingen van [s], als afbeeldingsdia; de tekst vervalt.
+  Slide _imageOnlySlide(SourceSlide s) {
+    final base = Slide.create(
+      s.images.length >= 2 ? SlideType.twoImages : SlideType.image,
+    );
+    return base.copyWith(
+      title: s.title,
+      imagePath: _memPathFor(s.images.first),
+      imagePath2: s.images.length >= 2 ? _memPathFor(s.images[1]) : null,
+      imageCaption: _caption(s, 0),
+      imageCaption2: s.images.length >= 2 ? _caption(s, 1) : null,
+      notes: s.notes.trim().isNotEmpty ? s.notes.trim() : null,
+      skipped: s.isHidden ? true : null,
+    );
   }
 
   // ── Per-slide construction ─────────────────────────────────────────────────
@@ -565,10 +632,17 @@ class DeckBuilder {
         : 'niet overgenomen',
   );
 
-  Slide _noteSlide(int sourceNumber, List<ConversionIssue> issues) =>
-      Slide.create(SlideType.freeMarkdown).copyWith(
-        customMarkdown: UnconvertedTracker.buildNoteBody(sourceNumber, issues),
-      );
+  Slide _noteSlide(
+    int sourceNumber,
+    List<ConversionIssue> issues, {
+    String? heading,
+  }) => Slide.create(SlideType.freeMarkdown).copyWith(
+    customMarkdown: UnconvertedTracker.buildNoteBody(
+      sourceNumber,
+      issues,
+      heading: heading,
+    ),
+  );
 
   Slide _deckNoteSlide(List<ConversionIssue> issues) => Slide.create(
     SlideType.freeMarkdown,
@@ -583,7 +657,7 @@ class DeckBuilder {
         ],
         hadImage: s.images.isNotEmpty,
         suggestedPolicy: s.images.isNotEmpty
-            ? SlideFailurePolicy.rasterize
+            ? SlideFailurePolicy.imageOnly
             : SlideFailurePolicy.bestEffort,
       );
 }
