@@ -29,12 +29,16 @@ class OpenKatDeckGenerator {
     final portfolio = aggregator.aggregatePortfolio(organizations);
     final slides = <Slide>[
       _titleSlide(title, organizations),
+      if (portfolio.previous != null) _keyMessageSlide(portfolio),
       _portfolioSummarySlide(portfolio),
+      _trendSlide(portfolio),
       _portfolioSurfaceSlide(portfolio),
-      if (organizations.length > 1) _organizationsComparedSlide(portfolio),
+      if (organizations.length > 1) ...[
+        _organizationsComparedSlide(portfolio),
+        _severityMatrixSlide(portfolio),
+      ],
       _topIssuesSlide(portfolio),
       _longestOpenSlide(portfolio),
-      _trendSlide(portfolio),
       for (final org in organizations) ..._organisationSlides(org),
     ];
 
@@ -149,6 +153,66 @@ class OpenKatDeckGenerator {
       title: title,
       subtitle: 'Organisaties: $orgNames',
       notes: '<!-- ocideck_openkat_view: title -->',
+    );
+  }
+
+  /// Waar het rapport op neerkomt, in woorden.
+  ///
+  /// De aggregator maakt deze zinnen al ("42 meer medium findings") en trekt er
+  /// een conclusie uit; tot nu toe haalde alleen het label de dia, als
+  /// grafiektitel. Het zijn tellingen uit de meting zelf, geen bedachte
+  /// risicoscore — daarom mogen ze vooraan staan.
+  ///
+  /// Alleen bij een tweede meting: zonder vorige meting valt er niets te zeggen
+  /// over wat er veranderde, en een dia die dat alsnog probeert wordt een
+  /// omschrijving van de cijfers die er twee dia's verderop staan.
+  Slide _keyMessageSlide(PortfolioAggregate portfolio) {
+    final conclusion = aggregator.compare(
+      portfolio.current,
+      portfolio.previous,
+    );
+    return _slide(
+      id: _id('openkat-portfolio-key-message'),
+      type: SlideType.bullets,
+      title: 'Wat dit rapport zegt',
+      subtitle: 'Ten opzichte van de vorige meting: ${conclusion.label}',
+      bullets: conclusion.lines,
+      notes: '<!-- ocideck_openkat_view: portfolio.key-message -->',
+    );
+  }
+
+  /// De ernstverdeling per organisatie als warmtekaart.
+  ///
+  /// Waar de scorecard bij vijf regels ophoudt, schaalt dit door: één rij per
+  /// organisatie, één kolom per band, en de kleur zegt waar het zwaartepunt
+  /// ligt. Bij één organisatie is het hetzelfde plaatje als de verloopgrafiek
+  /// en blijft de dia weg.
+  Slide _severityMatrixSlide(PortfolioAggregate portfolio) {
+    final perOrg = <String, Map<String, int>>{
+      for (final org in portfolio.organizations)
+        if (org.current != null)
+          org.name: openKatSeverityCounts(org.current!.findings),
+    };
+    final bands = _visibleBands(perOrg.values);
+    return _slide(
+      id: _id('openkat-portfolio-severity-matrix'),
+      type: SlideType.chart,
+      title: 'Ernst per organisatie',
+      customMarkdown: ChartSpec(
+        type: ChartType.heatmap,
+        title: 'Findings per ernstband',
+        x: [for (final band in bands) _severityLabels[band] ?? band],
+        series: [
+          for (final entry in perOrg.entries)
+            ChartSeries(
+              name: entry.key,
+              data: [
+                for (final band in bands) (entry.value[band] ?? 0).toDouble(),
+              ],
+            ),
+        ],
+      ).toBlock(),
+      notes: '<!-- ocideck_openkat_view: portfolio.severity-matrix -->',
     );
   }
 

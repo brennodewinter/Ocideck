@@ -275,6 +275,65 @@ void main() {
     });
   });
 
+  group('wat het rapport zegt', () {
+    test('de conclusiezinnen halen de dia', () {
+      final deck = generator.generate([_orgMetVerloop('a')]);
+      final slide = _view(deck, 'portfolio.key-message');
+
+      expect(slide.subtitle, contains('Slechter'));
+      expect(slide.bullets, contains('1 meer medium findings'));
+    });
+
+    test('een eerste meting krijgt geen conclusie over verandering', () {
+      final deck = generator.generate([
+        OpenKatOrganization(
+          code: 'a',
+          name: 'A',
+          snapshots: [
+            _snapshot(
+              date: DateTime.utc(2026, 6, 1),
+              findings: [_finding(id: 'f1', severity: 'high')],
+            ),
+          ],
+        ),
+      ]);
+      expect(_hasView(deck, 'portfolio.key-message'), isFalse);
+    });
+  });
+
+  group('ernst per organisatie', () {
+    test('elke organisatie is een rij, elke band een kolom', () {
+      final deck = generator.generate([
+        _orgMetVerloop('a'),
+        _orgMetVerloop('b'),
+      ]);
+      final chart = ChartSpec.parse(
+        _view(deck, 'portfolio.severity-matrix').customMarkdown,
+      );
+
+      expect(chart.type, ChartType.heatmap);
+      expect(chart.series.map((s) => s.name), ['A', 'B']);
+      expect(chart.x, ['Critical', 'High', 'Medium', 'Low']);
+      expect(chart.series.first.data, [0, 1, 1, 0]);
+    });
+
+    test('bij één organisatie blijft de warmtekaart weg', () {
+      final deck = generator.generate([_orgMetVerloop('a')]);
+      expect(_hasView(deck, 'portfolio.severity-matrix'), isFalse);
+    });
+
+    test('acht organisaties passen er alle acht in', () {
+      // Waar de scorecard bij vijf ophoudt, moet dit doorschalen.
+      final deck = generator.generate([
+        for (var i = 0; i < 8; i++) _orgMetVerloop('org$i'),
+      ]);
+      final chart = ChartSpec.parse(
+        _view(deck, 'portfolio.severity-matrix').customMarkdown,
+      );
+      expect(chart.series.length, 8);
+    });
+  });
+
   group('de herimport vindt de gegenereerde dia terug', () {
     test('een vervangen dia houdt zijn plek en zijn id', () {
       final eerste = generator.generate([_orgMetVerloop('a')]);
