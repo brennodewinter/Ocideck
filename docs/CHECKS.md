@@ -1039,9 +1039,14 @@ For focused work, run only the relevant slice instead of the whole suite:
   shallow clone of that same repository exits 0 twice. And the three scanners
   are pinned in the workflow's `env` block with the download sha256-verified
   against the published manifest, because a scanner that updates itself quietly
-  changes what green means. The `test -n "$SHA"` in that verification is not
-  ceremony: `grep … | sha256sum -c -` passes *silently* on an empty match, so one
-  renamed release asset would remove the check without a single red tick.
+  changes what green means. The `test -n "$SHA"` in that verification earns its
+  line, though not for the reason first given here (#800): the claim that
+  `grep … | sha256sum -c -` passes *silently* on an empty match does not hold on
+  GNU coreutils — measured on 9.5, and the image runs 9.4 off the same codebase.
+  An empty match ends in "no properly formatted checksum lines found" and exit 1.
+  What the line buys is a readable failure: without it, a renamed release asset
+  surfaces as a complaint about `sha256sum`'s *input*, and the reader debugs the
+  verification instead of the asset name.
 - **Counter-tested, because a scan job that sees nothing looks exactly like a
   clean repository.** With a randomly generated AWS-shaped key pair planted in
   the working tree, `make check-secrets` exits non-zero and names the leak; with
@@ -1101,8 +1106,9 @@ For focused work, run only the relevant slice instead of the whole suite:
   turning the check into a complaint about `sha256sum`'s input. The checkout also
   gained `fetch-depth: 0`: two of the four passes in `make check-secrets` read
   *history*, and a one-commit clone lets them report green on almost nothing.
-  Both were already right in `.forgejo/workflows/scans.yml` (#799); only this
-  mirror definition lagged.
+  Both were already right in
+  [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request-and-push)
+  (#799); only this mirror definition lagged.
 - **Test matrix (macOS + Windows)** — runs `flutter test
   --test-randomize-ordering-seed random` on the other two desktop OSes to catch
   platform-specific (path, `Platform.isX`) regressions the Linux gate would miss.
