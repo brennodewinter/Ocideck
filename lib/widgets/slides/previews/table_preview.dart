@@ -242,7 +242,7 @@ class _TablePreview extends StatelessWidget {
     // text column sits away from it (bulletsImage), not for a full-width table.
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final titleSize = w * 0.038;
-    final rows = slide.tableRows.where((r) => r.isNotEmpty).toList();
+    final (rows, caption) = _rowsAndCaption(slide);
     final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
 
     final cellSize = _fitCellSize(
@@ -251,6 +251,7 @@ class _TablePreview extends StatelessWidget {
       pad: pad,
       safe: safe,
       titleSize: titleSize,
+      caption: caption,
     );
 
     final accent = AppTheme.parseHexColor(profile.accentColor);
@@ -344,7 +345,7 @@ class _TablePreview extends StatelessWidget {
       );
     }
 
-    final columnWidths = _columnWidths(rows, colCount);
+    final columnWidths = _columnWidths(rows, colCount, pad, cellSize);
 
     Widget tableWidget = Table(
       border: TableBorder.all(
@@ -371,6 +372,7 @@ class _TablePreview extends StatelessWidget {
       titleSize: titleSize,
       rows: rows,
       colCount: colCount,
+      caption: caption,
     );
   }
 
@@ -385,6 +387,7 @@ class _TablePreview extends StatelessWidget {
     required double pad,
     required EdgeInsets safe,
     required double titleSize,
+    required String caption,
   }) {
     final baseCell = tableCellFontSize(
       w,
@@ -407,7 +410,8 @@ class _TablePreview extends StatelessWidget {
         w * 9 / 16 -
         (pad + safe.top) -
         _logoAwareBottomPadding(pad, safe.bottom) -
-        titleBlock;
+        titleBlock -
+        _captionBlockHeight(caption, w, tableWidth, font, pad);
     return memoizedRenderLayout<double>(
       slide: slide,
       font: font,
@@ -452,17 +456,26 @@ class _TablePreview extends StatelessWidget {
     );
   }
 
-  /// Per-column flex weights proportional to each column's longest cell, so a
-  /// text-heavy column claims the room it needs (less wrapping → the table is
-  /// likelier to fit the 16:9 slide at full width instead of being scaled down
-  /// by the FittedBox). The upper clamp reins in paragraph-length outliers.
+  /// Vaste kolombreedtes uit [tableColumnWidths] — dezelfde geometrie waarmee
+  /// [tableBlockHeight] de hoogte meet. Niet `FlexColumnWidth` op tekenaantal:
+  /// dat kende een kolom minder ruimte toe dan haar eigen kop breed is, waarna
+  /// de kop letter voor letter afbrak en bij de smalste kolommen zelfs over de
+  /// tabellijnen heen viel.
   Map<int, TableColumnWidth> _columnWidths(
     List<List<String>> rows,
     int colCount,
+    double pad,
+    double cellSize,
   ) {
-    final weights = tableColumnFlexWeights(rows, colCount);
+    final widths = tableColumnWidths(
+      rows: rows,
+      colCount: colCount,
+      tableWidth: w - pad * 2,
+      cellSize: cellSize,
+      font: font,
+    );
     return <int, TableColumnWidth>{
-      for (var c = 0; c < colCount; c++) c: FlexColumnWidth(weights[c]),
+      for (var c = 0; c < colCount; c++) c: FixedColumnWidth(widths[c]),
     };
   }
 
@@ -477,6 +490,7 @@ class _TablePreview extends StatelessWidget {
     required double titleSize,
     required List<List<String>> rows,
     required int colCount,
+    required String caption,
   }) {
     return Container(
       color: AppTheme.parseHexColor(profile.slideBackgroundColor),
@@ -513,6 +527,24 @@ class _TablePreview extends StatelessWidget {
                   SizedBox(height: pad * 0.35),
                 ],
                 if (rows.isNotEmpty && colCount > 0) tableWidget,
+                if (caption.isNotEmpty) ...[
+                  SizedBox(height: pad * _kCaptionGapFactor),
+                  _md(
+                    context,
+                    caption,
+                    _applyFont(
+                      font,
+                      TextStyle(
+                        fontSize: w * _kCaptionSizeFactor,
+                        fontStyle: FontStyle.italic,
+                        color: AppTheme.parseHexColor(
+                          profile.textColor,
+                        ).withValues(alpha: 0.7),
+                      ),
+                    ),
+                    linkColor: AppTheme.parseHexColor(profile.accentColor),
+                  ),
+                ],
               ],
             ),
           ),
@@ -520,4 +552,36 @@ class _TablePreview extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Het bijschrift staat onder de tabel, niet erin: op één kolom breed leest het
+/// als data en verbreedt het die kolom tot een kwart slide.
+const double _kCaptionSizeFactor = 0.016;
+const double _kCaptionGapFactor = 0.22;
+
+/// Splitst de zichtbare rijen van het "N van totaal"-bijschrift dat een
+/// weergavelimiet achteraan de tabel hangt.
+(List<List<String>>, String) _rowsAndCaption(Slide slide) {
+  final rows = slide.tableRows.where((r) => r.isNotEmpty).toList();
+  final index = viewLimitCaptionRowIndex(slide, rows);
+  if (index == null) return (rows, '');
+  return (rows.sublist(0, index), rows[index].first.trim());
+}
+
+/// Hoogte die het bijschrift onder de tabel opeist, inclusief de tussenruimte.
+double _captionBlockHeight(
+  String caption,
+  double w,
+  double tableWidth,
+  String font,
+  double pad,
+) {
+  if (caption.isEmpty) return 0;
+  return measureTextHeight(
+        caption,
+        w * _kCaptionSizeFactor,
+        tableWidth,
+        fontFamily: font,
+      ) +
+      pad * _kCaptionGapFactor;
 }
