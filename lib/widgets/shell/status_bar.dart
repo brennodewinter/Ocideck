@@ -616,9 +616,21 @@ class _ActionsDivider extends StatelessWidget {
       width: 1,
       height: 20,
       margin: const EdgeInsets.symmetric(horizontal: 6),
-      color: Colors.white24,
+      // Meebewegen met de bovenbalk in plaats van "wit op 24%" aannemen: de
+      // hoofdkleur is een profielkeuze en kan licht zijn (#780).
+      color: _onAppBar(context).withValues(alpha: 0.24),
     );
   }
+}
+
+/// De voorgrondkleur van de bovenbalk waar deze knoppen in staan.
+///
+/// Hardgecodeerd wit was hier de aanname, en die klopt voor beide ingebouwde
+/// profielen (#003399 en #111827 zijn allebei donker). Ze klopt niet voor een
+/// eigen profiel met een lichte hoofdkleur — en profielen zijn te bewerken.
+Color _onAppBar(BuildContext context) {
+  final theme = Theme.of(context);
+  return theme.appBarTheme.foregroundColor ?? AppPalette.of(theme).panelText;
 }
 
 /// TLP-classificatie als altijd zichtbare, direct instelbare chip in de
@@ -640,9 +652,13 @@ class _TlpChip extends StatelessWidget {
     final l10n = context.l10n;
     final isSet = tlp != TlpLevel.none;
     final fg = Color(tlp.foreground);
+    // Niet ingesteld: de chip is doorzichtig, dus zijn tekst en rand staan
+    // rechtstreeks op de bovenbalk en horen diens voorgrondkleur te volgen.
+    // Ingesteld: de chip vult zichzelf zwart en draagt de officiële TLP-kleur.
+    final onBar = _onAppBar(context);
     final borderColor = warnUnset
         ? AppTheme.amber500
-        : (isSet ? fg.withValues(alpha: 0.7) : Colors.white24);
+        : (isSet ? fg.withValues(alpha: 0.7) : onBar.withValues(alpha: 0.24));
 
     final child = Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
@@ -656,13 +672,12 @@ class _TlpChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (!isSet)
-            const Icon(Icons.shield_outlined, size: 14, color: Colors.white70),
+          if (!isSet) Icon(Icons.shield_outlined, size: 14, color: onBar),
           if (!isSet) const SizedBox(width: 5),
           Text(
             isSet ? tlp.label : l10n.d('TLP'),
             style: TextStyle(
-              color: isSet ? fg : Colors.white70,
+              color: isSet ? fg : onBar,
               fontSize: 11.5,
               fontWeight: FontWeight.w700,
               fontFamily: 'monospace',
@@ -670,11 +685,7 @@ class _TlpChip extends StatelessWidget {
               letterSpacing: 0.3,
             ),
           ),
-          Icon(
-            Icons.arrow_drop_down,
-            size: 16,
-            color: isSet ? fg : Colors.white54,
-          ),
+          Icon(Icons.arrow_drop_down, size: 16, color: isSet ? fg : onBar),
         ],
       ),
     );

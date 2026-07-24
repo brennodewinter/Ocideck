@@ -188,7 +188,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                               child: LinearProgressIndicator(
                                 value: _progress,
                                 backgroundColor: Colors.white12,
-                                color: Colors.white54,
+                                color: PresenterPalette.textMuted,
                                 minHeight: 3,
                               ),
                             ),
@@ -249,7 +249,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                             child: Text(
                               l10n.d('Einde van de presentatie'),
                               style: const TextStyle(
-                                color: Colors.white38,
+                                color: PresenterPalette.textMuted,
                                 fontSize: 13,
                               ),
                             ),

@@ -62,7 +62,10 @@ extension _PresenterQuestions on _FullscreenPresenterState {
               const SizedBox(width: 7),
               Text(
                 context.l10n.d('Wacht op antwoord…'),
-                style: const TextStyle(color: Colors.white70, fontSize: 13),
+                style: const TextStyle(
+                  color: PresenterPalette.text,
+                  fontSize: 13,
+                ),
               ),
             ],
           ),

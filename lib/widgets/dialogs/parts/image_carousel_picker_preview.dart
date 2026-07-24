@@ -256,20 +256,22 @@ extension _CarouselPreview on _ImageCarouselPickerState {
             ),
           ),
           const SizedBox(width: 8),
-          // Hint — mag inkorten op smalle vensters zodat de Row niet overloopt.
-          Flexible(
+          // Hint — kort pas in als de ruimte er werkelijk niet is. Was
+          // `Flexible` + `Spacer`: elk flex 1, dus die deelden de vrije ruimte
+          // en de hint eindigde op "Dubbelklik s…" met 400px leegte ernaast.
+          // De kleur was `borderStrong`, een randkleur als tekst: 2,28:1 (#780).
+          Expanded(
             child: Text(
               l10n.d(
                 '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert',
               ),
               style: const TextStyle(
-                color: ImagePickerPalette.borderStrong,
+                color: ImagePickerPalette.textMuted,
                 fontSize: 11,
               ),
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          const Spacer(),
           // Annuleren
           TextButton(
             onPressed: () => _close(),

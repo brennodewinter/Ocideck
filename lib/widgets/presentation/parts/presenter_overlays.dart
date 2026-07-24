@@ -81,7 +81,10 @@ extension _PresenterOverlays on _FullscreenPresenterState {
           const SizedBox(width: 12),
           Text(
             context.l10n.d('Enter'),
-            style: const TextStyle(color: Colors.white38, fontSize: 13),
+            style: const TextStyle(
+              color: PresenterPalette.textMuted,
+              fontSize: 13,
+            ),
           ),
         ],
       ),
@@ -118,7 +121,10 @@ extension _PresenterOverlays on _FullscreenPresenterState {
           Text(
             '${context.l10n.d('Doeltijd')} · ${context.l10n.d('Enter')} · '
             '0 = ${context.l10n.d('uit')}',
-            style: const TextStyle(color: Colors.white38, fontSize: 13),
+            style: const TextStyle(
+              color: PresenterPalette.textMuted,
+              fontSize: 13,
+            ),
           ),
         ],
       ),
@@ -207,7 +213,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                     child: Text(
                       l10n.d('Klik of druk op H / Esc om te sluiten'),
                       style: const TextStyle(
-                        color: Colors.white30,
+                        color: PresenterPalette.textMuted,
                         fontSize: 12,
                       ),
                     ),
@@ -244,7 +250,10 @@ extension _PresenterOverlays on _FullscreenPresenterState {
       children: [
         Text(
           label,
-          style: const TextStyle(color: Colors.white38, fontSize: 10),
+          style: const TextStyle(
+            color: PresenterPalette.textMuted,
+            fontSize: 10,
+          ),
         ),
         const SizedBox(height: 2),
         Text(
@@ -285,14 +294,14 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                 tooltip: l10n.d('Doeltijd / aftellen (K)'),
                 onPressed: _beginTargetInput,
                 icon: const Icon(Icons.timer_outlined, size: 18),
-                color: Colors.white38,
+                color: PresenterPalette.textMuted,
                 visualDensity: VisualDensity.compact,
               ),
               IconButton(
                 tooltip: l10n.d('Tijd resetten (R)'),
                 onPressed: _resetTimer,
                 icon: const Icon(Icons.restart_alt, size: 18),
-                color: Colors.white38,
+                color: PresenterPalette.textMuted,
                 visualDensity: VisualDensity.compact,
               ),
               const SizedBox(width: 4),
@@ -313,7 +322,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                   overtime ? l10n.d('Over de tijd') : l10n.d('Resterend'),
                   remaining == null ? '–:––' : _fmtRemaining(remaining),
                   color: remaining == null
-                      ? Colors.white24
+                      ? PresenterPalette.textMuted
                       : (overtime
                             ? AppTheme.danger500
                             : PresenterPalette.laserGreen),
@@ -387,7 +396,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
             textAlign: TextAlign.right,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Colors.white24, fontSize: 11),
+            style: TextStyle(color: PresenterPalette.textMuted, fontSize: 11),
           ),
         ),
         const SizedBox(width: 12),
@@ -425,7 +434,10 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                   const SizedBox(width: 12),
                   Text(
                     '${l10n.d('pijltjes + Enter of klik om te springen')} · $total ${l10n.t('slides')}',
-                    style: const TextStyle(color: Colors.white38, fontSize: 12),
+                    style: const TextStyle(
+                      color: PresenterPalette.textMuted,
+                      fontSize: 12,
+                    ),
                   ),
                   const Spacer(),
                   IconButton(
@@ -551,7 +563,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                   style: TextStyle(
                     color: (isCursor || isCurrent)
                         ? Colors.white
-                        : Colors.white54,
+                        : PresenterPalette.textMuted,
                     fontSize: 12,
                     fontWeight: (isCursor || isCurrent)
                         ? FontWeight.w700
