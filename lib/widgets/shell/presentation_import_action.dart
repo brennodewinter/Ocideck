@@ -13,6 +13,7 @@ import '../../state/tabs_provider.dart';
 import '../../utils/error_snackbar.dart';
 import '../../utils/log.dart';
 import '../dialogs/import_presentation_warning_dialog.dart';
+import '../dialogs/import_decision_dialog.dart';
 import '../dialogs/presentation_import_queue_dialog.dart';
 
 /// Eén gekozen bestand: de bytes plus de naam waaronder het gekozen werd.
@@ -62,9 +63,12 @@ Future<void> importPresentation(
   }
   final chosen = picked.first;
 
-  PresentationImportResult result;
+  // Twee fasen, met de vraag ertussen: lezen en classificeren, dán pas
+  // beslissen wát er met de probleemdia's gebeurt, dán pas bouwen. Zo hoeft
+  // het bestand niet twee keer geparseerd te worden (#812).
+  PreparedImportResult prep;
   try {
-    result = await PresentationImportService().importBytes(
+    prep = await PresentationImportService().prepare(
       chosen.bytes,
       filename: chosen.name,
     );
@@ -77,22 +81,32 @@ Future<void> importPresentation(
   }
   if (!context.mounted) return;
 
-  final deck = result.deck;
-  if (deck == null) {
+  final prepared = prep.prepared;
+  if (prepared == null) {
     showErrorSnackBar(
       messenger,
       l10n,
-      result.failure?.message ?? l10n.d('Importeren mislukt.'),
+      prep.failure?.message ?? l10n.d('Importeren mislukt.'),
     );
     return;
   }
+
+  final decisions = await ImportDecisionDialog.ask(
+    context,
+    prepared.problemSlides,
+  );
+  // `null` betekent: de gebruiker breekt de hele import af.
+  if (decisions == null || !context.mounted) return;
+
+  final built = prepared.build(policies: decisions);
+  final deck = built.deck;
 
   final tabs = ref.read(tabsProvider.notifier);
   tabs.newEmptyTab();
   ref.read(tabsProvider).current!.deckNotifier.loadDeck(deck);
 
   final slides = deck.slides.length;
-  final issues = result.problemSlides.length;
+  final issues = built.problemSlides.length;
   messenger.showSnackBar(
     SnackBar(
       content: Text(
