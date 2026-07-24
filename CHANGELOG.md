@@ -94,7 +94,54 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Changed
+- **Het OpenKAT-managementoverzicht is een verhaal geworden in plaats van een
+  stapel tabellen.** De import gebruikte vier diavormen — titel, bullets, tabel
+  en één staafdiagram — terwijl het formaat scorecards, lijngrafieken en
+  warmtekaarten heeft. Erger: de aggregator rékende al dingen uit die nooit een
+  dia haalden. De conclusiezinnen ("42 meer medium findings") bestonden al en
+  werden weggegooid op het label na, dat als grafiektitel eindigde. De
+  aanbeveling per findingtype werd geparseerd en bewaard, en nergens getoond.
+  Het model bewaart de hele reeks momentopnames, maar de dia keek alleen naar
+  de laatste twee.
+
+  Wat er nu staat: de kerncijfers als scorecard, met elke waarde naast wat hij
+  was en het verschil in kleur (dat rekent het diatype zelf uit — geen
+  zelfgemaakt "+42" dat naast de getallen kan gaan staan); het verloop als lijn
+  door de tijd over álle meetmomenten, ook per organisatie; een warmtekaart met
+  een rij per organisatie waar de scorecard bij vijf regels ophoudt; de
+  conclusiezinnen vooraan als kernboodschap; de adviezen van OpenKAT onder
+  tussenkoppen; en de controls-dekking als liggende staven zodra er cijfers mét
+  noemer zijn.
+
+  Twee regels die het bij elkaar houden: elke ernstband heeft een vaste kleur,
+  zodat critical op elke dia dezelfde kleur heeft, en een dia die niets te
+  zeggen heeft komt er niet. Geen kernboodschap bij een eerste meting, geen
+  warmtekaart bij één organisatie, geen adviesdia als de bron geen advies geeft,
+  geen lijn van één punt. En niets erbij verzonnen: geen cockpitmeters met een
+  bedachte totaalscore, geen streefbanden onder de controls-grafiek — welk
+  percentage goed genoeg is staat niet in de meting.
+
+  De diavormen rijden op wat er al was; het bestandsformaat is niet geraakt.
+
 ### Fixed
+- **De OpenKAT-import toonde systemen die geen systemen waren, en tellingen die
+  elkaar tegenspraken.** Een uitdraai van drie organisaties meldde 295 findings
+  boven een ernstverdeling die er 218 verklaarde, en 89 getroffen systemen bij
+  45 systemen in totaal. In de tabellen stonden regels als
+  `internet|185.73.32.3|tcp|443|https|internet|underdark.nl`.
+
+  Twee oorzaken. De sleutelgrammatica telde op segmentpositie en kende maar vier
+  vormen, waardoor het netwerksegment bleef hangen, een `IPPort` letterlijk het
+  woord "internet" als systeem koos, en elk pad en elke HTTP-header van één
+  website als eigen systeem telde. Nu wordt op vórm gezocht — het laatste
+  segment dat als host leest — wat alle paden van een website samenvouwt en
+  bestand is tegen een samenstelling die de code nog niet kent.
+
+  Daarnaast kent OpenKAT meer ernstniveaus dan critical/high/medium/low. Die
+  vielen buiten elke uitsplitsing. Er is nu een restband die verschijnt zodra
+  hij gevuld is, en de kolommen van de systementabel tellen op tot het totaal.
+
 - **Een presentatie zonder afbeeldingen liet de PDF-export omvallen (#714).** De
   melding was `Invalid argument(s): 1`, en dat was letterlijker dan het leek:
   `(done + 1).clamp(1, total)` in de voortgangsregel gooit `ArgumentError(1)`

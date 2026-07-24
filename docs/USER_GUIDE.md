@@ -1771,12 +1771,38 @@ opening screen is where you land when no presentation is open, which is where
 you tend to be when you want yesterday's export turned into today's overview.
 
 **… → OpenKAT-rapportages importeren…** takes that folder of JSON exports from
-[OpenKAT](https://openkat.nl) and builds one management deck from it — totals,
-trends and top findings per organisation, using the view limits below as
-defaults so an import of thousands of reports still yields readable slides
-while every underlying number stays in the deck — nothing is cut, only
-displayed selectively. Run the same action while an OpenKAT deck is open and it **updates** that
-deck: generated slides are refreshed, slides you added by hand are preserved.
+[OpenKAT](https://openkat.nl) and builds one management deck from it, using the
+view limits below as defaults so an import of thousands of reports still yields
+readable slides while every underlying number stays in the deck — nothing is
+cut, only displayed selectively. Run the same action while an OpenKAT deck is
+open and it **updates** that deck: generated slides are refreshed, slides you
+added by hand are preserved.
+
+The deck leads with what changed and only then shows the detail:
+
+| Slide | What it says |
+| --- | --- |
+| Wat dit rapport zegt | The conclusion in words ("42 meer medium findings"), and better/worse/mixed. Only from the second measurement on — a first report has no change to report. |
+| Kerncijfers | A scorecard: each severity band and the number of affected systems, next to what it was, with the change coloured. |
+| Verloop over de tijd | A line per severity band across every measurement date. With a single measurement it stays a bar chart of the current distribution. |
+| Wat er in beeld is | The inventory — systems, hostnames, IPv4/IPv6, finding types. Kept apart from the figures that colour, because more systems in view is not bad news. |
+| Organisaties vergeleken | A scorecard of up to five organisations, biggest movers first. |
+| Ernst per organisatie | A heatmap, one row per organisation. This is where the full picture lives once there are more than five. |
+| Meest voorkomende issues | The finding types, worst first, with how many are new since the previous measurement. |
+| Wat OpenKAT aanraadt | The recommendation OpenKAT itself gives for the heaviest issues, under a heading each. |
+| Langst openstaande findings | Oldest first, with severity and days open — counted against the report date, not today's clock, so the deck still shows the same numbers in six months. |
+| Dekking per control | Percentage compliant per control, current next to previous. |
+
+Then, per organisation: a section slide, its own scorecard, its own trend line
+(from its second measurement on), the systems with the most findings, and the
+systems that improved.
+
+A slide with nothing to say is left out rather than shown empty: no heatmap for
+a single organisation, no recommendation slide when the source carries no
+recommendations, no trend line through a single point. And nothing is invented
+on top of the measurement — no made-up overall risk score, and no target bands
+under the controls chart, because which percentage counts as good enough is not
+something OpenKAT measured.
 The import is honest about what it did — the message counts what was loaded
 and what was skipped (duplicates, unrecognised or invalid files, and files
 over the size cap; the folder comes from outside, so it is read within
