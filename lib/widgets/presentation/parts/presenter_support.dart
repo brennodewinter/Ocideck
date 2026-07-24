@@ -98,7 +98,7 @@ class _NavButton extends StatelessWidget {
           height: 36,
           child: Icon(
             icon,
-            color: enabled ? Colors.white70 : Colors.white12,
+            color: enabled ? PresenterPalette.text : PresenterPalette.surface4,
             size: 24,
           ),
         ),

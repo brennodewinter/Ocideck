@@ -276,14 +276,14 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
         children: [
           Icon(
             Icons.cloud_off_outlined,
-            color: AppTheme.slideInkFaint,
+            color: AppTheme.slideInkSoft,
             size: 32,
           ),
           const SizedBox(height: 8),
           Text(
             context.l10n.d('Online media staat uit'),
             style: TextStyle(
-              color: AppTheme.slideInkSoft,
+              color: AppTheme.slideInkMuted,
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),
@@ -292,7 +292,7 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
           const SizedBox(height: 4),
           Text(
             url,
-            style: TextStyle(color: AppTheme.slideInkFaint, fontSize: 10),
+            style: TextStyle(color: AppTheme.slideInkMuted, fontSize: 10),
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -319,11 +319,11 @@ Widget _mediaPlaceholder(BuildContext context, IconData icon, String label) {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: AppTheme.slideInkFaint, size: 32),
+          Icon(icon, color: AppTheme.slideInkSoft, size: 32),
           const SizedBox(height: 6),
           Text(
             label,
-            style: TextStyle(color: AppTheme.slideInkFaint, fontSize: 12),
+            style: TextStyle(color: AppTheme.slideInkMuted, fontSize: 12),
           ),
         ],
       ),
@@ -441,6 +441,13 @@ Widget _imagePlaceholder(BuildContext context, ImagePlaceholderReason reason) {
     ),
   };
 
+  // De drie plaatshouders in dit bestand vullen zich met `slideRuleSoft` en
+  // zetten er tekst op. Die tekst stond op `slideInkFaint`: 4,4:1 op wit, maar
+  // **2,08:1** op deze eigen tint (#780) — en dit is geen decoratie. "Bestand
+  // niet gevonden", "Online media staat uit" en de URL erbij zijn het enige
+  // wat vertelt waaróm er een grijs vlak op de dia staat, en ze reizen mee de
+  // export in. Tekst dus op `slideInkMuted` (6,15:1), pictogram op
+  // `slideInkSoft` (3,86:1 — grafisch object, WCAG 1.4.11).
   return ColoredBox(
     color: AppTheme.slideRuleSoft,
     child: LayoutBuilder(
@@ -450,7 +457,7 @@ Widget _imagePlaceholder(BuildContext context, ImagePlaceholderReason reason) {
           return Center(
             child: Icon(
               icon,
-              color: AppTheme.slideInkFaint,
+              color: AppTheme.slideInkSoft,
               size: shortestSide * 0.65,
             ),
           );
@@ -460,11 +467,11 @@ Widget _imagePlaceholder(BuildContext context, ImagePlaceholderReason reason) {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, color: AppTheme.slideInkFaint, size: 24),
+              Icon(icon, color: AppTheme.slideInkSoft, size: 24),
               const SizedBox(height: 4),
               Text(
                 label,
-                style: TextStyle(color: AppTheme.slideInkFaint, fontSize: 10),
+                style: TextStyle(color: AppTheme.slideInkMuted, fontSize: 10),
                 textAlign: TextAlign.center,
               ),
             ],

@@ -150,7 +150,7 @@ extension _PresenterInk on _FullscreenPresenterState {
             context.l10n.d('Laser (X)'),
           ),
           const SizedBox(width: 8),
-          Container(width: 1, height: 22, color: Colors.white24),
+          Container(width: 1, height: 22, color: PresenterPalette.outline),
           const SizedBox(width: 8),
           for (final c in palette)
             GestureDetector(
@@ -163,14 +163,16 @@ extension _PresenterInk on _FullscreenPresenterState {
                   color: Color(c),
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: _inkColor == c ? Colors.white : Colors.white24,
+                    color: _inkColor == c
+                        ? Colors.white
+                        : PresenterPalette.outline,
                     width: _inkColor == c ? 2.5 : 1,
                   ),
                 ),
               ),
             ),
           const SizedBox(width: 8),
-          Container(width: 1, height: 22, color: Colors.white24),
+          Container(width: 1, height: 22, color: PresenterPalette.outline),
           IconButton(
             tooltip: context.l10n.d('Wis annotaties (C)'),
             onPressed: _clearCurrentInk,

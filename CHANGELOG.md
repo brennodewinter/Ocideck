@@ -104,6 +104,77 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Fixed
+- **De donkere modus als geheel bekeken: elf bevindingen (#780).** Op 23-07
+  rolden er vier defecten uit toevallig ergens kijken. Dit
+  was de rondgang die daarop hoorde te volgen — de app draaiend in het profiel
+  *Donker*, oppervlak voor oppervlak, met een gemeten verhouding per bevinding
+  in plaats van "ziet er donker uit".
+
+  De presentatiemodus leverde er tien: de sneltoetsbalk in presenter-view op
+  **2,15:1** (en dat is de énige uitleg die een presentator tijdens een
+  presentatie op het scherm heeft), de afsluitregel van de toetsenlegenda op
+  2,71:1, acht tekst- en icoonplekken tussen 3,43 en 3,60:1, en de ring om een
+  niet-gekozen inkkleur op 2,17:1 — waardoor de zwarte inkt geen keuze was maar
+  een gat, want de vulling zelf haalt 1,4:1 tegen die balk. De
+  afbeeldingskiezer leverde er drie, waaronder een sneltoetshint die een
+  *randkleur* als tekst gebruikte (2,28:1) én inkortte tot "Dubbelklik s…"
+  terwijl er 400px leegte naast stond. En de drie mediaplaatshouders op een dia
+  stonden op 2,08:1 — "Bestand niet gevonden" is het enige wat vertelt waarom
+  er een grijs vlak staat, en het reist mee de export in.
+
+  Wat de vondst zegt is belangrijker dan de kleuren: **de twee poorten die deze
+  klasse dekken, konden deze regels niet zien.** De ruwe-kleur-ratchet matcht
+  `Color(0x…)` en staat op nul; `Colors.white38` is dezelfde vrijheid met
+  dezelfde gevolgen en glipt erlangs — daar kwamen alle tien de presenter-
+  plekken vandaan. En `app_theme_contrast_test` meet wat `ThemeData` uitdeelt,
+  niet wélke twee tokens samen op het scherm landen: `slideInkFaint` haalt
+  4,4:1 op wit en 2,08:1 op de tint die de plaatshouder zelf aanmaakt.
+
+  Twee dingen zijn daarom niet gerepareerd maar opgeheven. `ImagePickerPalette
+  .textDim` is weg in plaats van opgehoogd, en het derde tekstniveau dat de
+  presenter met vier alpha's improviseerde is er niet gekomen: op die
+  oppervlakken is het tweede niveau al de dunste grijstint die 4,5:1 haalt, dus
+  een niveau daaronder kán geen tekst zijn — en zolang het bestaat, wordt het
+  gebruikt.
+
+  De kiezerhelft bleek onderweg parallel opgelost in #779, dat `textDim`
+  opsplitste in `iconDim` (3:1, iconen) en `textMuted` (4,5:1, tekst) — een
+  betere uitkomst dan het niveau schrappen, dus die is overgenomen. Wat er van
+  deze kant overbleef: de sneltoetshint die een *randkleur* als tekst gebruikte
+  en zijn inkorting. De toetsen zijn samengevoegd in
+  `standalone_palette_contrast_test` in plaats van er een tweede bestand naast
+  te zetten dat dezelfde twee paletten meet; daar zit nu ook de bronwacht op
+  een doorzichtige `Colors.white/black` in een `TextStyle` bij. Verder een
+  toets op het kwaliteitspaneel per staat in beide modi, en één op de
+  themawisseling. Niet nagelopen en dus nog open: het beamerscherm, de
+  git-panelen en de S3/WebDAV-bladeraars, de exportdialoog, het privacypaneel,
+  en 24 van de 26 slide-editors.
+- **Het kwaliteitspaneel bleef in de kleuren van het vorige thema staan
+  (#780).** Van *Donker* naar *Europa* wisselde alles wat via `ThemeData` gaat
+  netjes mee, maar het paneel bleef donkergroen op een lichte interface. Een
+  andere dia kiezen hielp niet, in- en uitklappen hielp niet; alleen een
+  herstart. `AppTheme.isDark` is een statische vlag en dus geen
+  `InheritedWidget`: élke widget die zich uit `AppTheme` kleurt en niet van
+  `Theme.of(context)` afhangt, houdt de vorige kleuren vast. Het paneel was de
+  zichtbare instantie, niet het probleem.
+
+  De boom een sleutel op de modus geven lost het in één klap op, en dat is
+  geprobeerd en teruggedraaid: de deck-providers hangen aan het tabblad, dus
+  die boom afbreken disposet `DeckNotifier` — en erger dan de crash is wat
+  eraan voorafgaat, namelijk het niet-opgeslagen deck van de gebruiker. De
+  toets eronder was groen; hij bewees dat een blad herkleurt, niet dat de app
+  het overleeft. Dat kwam pas draaiend eruit. `AppearanceScope` publiceert de
+  modus nu als `InheritedWidget`, en een oppervlak sluit erop aan met één
+  regel. Het kwaliteitspaneel en zijn chip hebben die regel; de klasse zelf
+  staat nog open in #814.
+- **Het lichte thema had hetzelfde probleem, en op één plek erger (#780).** De
+  drie regels per controle in het kwaliteitspaneel stonden op 100, 85 en 70
+  procent van dezelfde voorgrondkleur. In donkere modus zakt alleen de
+  foutstaat (3,68:1); in het lichte thema zakken **alle vier** de staten op 70%
+  naar 2,99–3,44:1, en de succesregel al op 85%. Uitgerekend in het paneel dat
+  de gebruiker over contrast vertelt. Dat de vier vondsten van 23-07
+  donker-specifiek leken, kwam doordat er in donkere modus gekeken werd. De
+  rangorde zit nu in gewicht en schuinte in plaats van in dekking.
 - **De vertaalpoort volgt nu ook een veldsprong, en dat bleek veertien
   onvertaalde regels in het instellingenvenster te verbergen.** De analyse volgde
   argumenten terug naar hun declaratie, maar verloor het spoor zodra een string

@@ -16,6 +16,7 @@ import '../../state/image_contrast_provider.dart';
 import '../../state/image_privacy_provider.dart';
 import '../../state/privacy_provider.dart';
 import '../../state/settings_provider.dart';
+import '../../theme/appearance_scope.dart';
 import '../privacy_badge.dart' show privacyKatSvg;
 import '../dialogs/slide_quality_details_dialog.dart';
 import 'slide_quality_actions.dart';
@@ -102,6 +103,9 @@ class SlideQualitySummaryChip extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    // Zie het paneel: deze chip kleurt zich uit dezelfde statische tokens en
+    // heeft dus dezelfde aansluiting op de modus nodig (#780).
+    AppearanceScope.modeOf(context);
     final result = combinedSlideQualityResult(ref);
     final (:bg, :fg) = slideQualityColors(result);
     // Alleen het woord "Kwaliteit" met de statuskleur; de telling zit in de
@@ -239,6 +243,12 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    // Sluit aan op de app-modus. Dit paneel kleurt zich uit `AppTheme`, en die
+    // tokens hangen aan een *statische* vlag: zonder deze regel herbouwt het
+    // niet als de gebruiker van thema wisselt, en bleef het donkergroen op een
+    // lichte interface staan tot een herstart (#780). De waarde wordt niet
+    // gebruikt — het gaat om de afhankelijkheid.
+    AppearanceScope.modeOf(context);
     final result = combinedSlideQualityResult(ref);
     final visibleIssues = _filteredIssues(result);
     final (:bg, :fg) = slideQualityColors(result);
@@ -427,19 +437,29 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                               color: iconColor,
                             ),
                           ),
+                          // Drie niveaus in dit blok, en ze zaten tot #780 in
+                          // de dekking: 100 / 85 / 70 procent van `iconColor`.
+                          // Dat las als "iets rustiger" maar is een kleur die
+                          // niemand heeft nagerekend — en die de tokentoets
+                          // niet ziet, want die meet het token en niet zijn
+                          // verzwakking. In donkere modus zakte de foutstaat
+                          // naar 3,68:1; in lichte modus zakten álle vier de
+                          // staten op 70% naar 2,99-3,44:1. Uitgerekend in het
+                          // paneel dat de gebruiker over contrast vertelt.
+                          //
+                          // De rangorde zit nu in het gewicht en de schuinte:
+                          // vet - normaal - cursief. Die is even leesbaar en
+                          // blijft op de gemeten verhouding van het paar staan.
                           Text(
                             check.detail,
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: iconColor.withValues(alpha: 0.85),
-                            ),
+                            style: TextStyle(fontSize: 10, color: iconColor),
                           ),
                           Text(
                             check.params,
                             style: TextStyle(
                               fontSize: 10,
                               fontStyle: FontStyle.italic,
-                              color: iconColor.withValues(alpha: 0.7),
+                              color: iconColor,
                             ),
                           ),
                         ],
@@ -637,7 +657,10 @@ class _QualityIssueTile extends StatelessWidget {
               Icon(
                 showThemeHint ? Icons.palette_outlined : Icons.arrow_forward,
                 size: 12,
-                color: color.withValues(alpha: 0.7),
+                // Om dezelfde reden als de regels hierboven niet op 70%: dit
+                // pijltje is de enige aanwijzing dát de kaart aanklikbaar is,
+                // en op 70% zat het in lichte modus op 3,35:1 (#780).
+                color: color,
               ),
           ],
         ),

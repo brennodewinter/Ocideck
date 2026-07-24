@@ -444,7 +444,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
           Text(
             '${pos + 1} / $total',
             style: const TextStyle(
-              color: ImagePickerPalette.textMuted,
+              color: _muted,
               fontSize: 12,
               fontWeight: FontWeight.w500,
               letterSpacing: 0.3,
