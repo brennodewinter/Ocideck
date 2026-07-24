@@ -731,6 +731,22 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'De checklist-yndeks: de stabile id, de kanonike titel en de kategory per test. De ynhâld fan de gids sels sit der net by.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'De test-yndeks fan v2.0.0: per test de stabile id, de kanonike titel, de MASVS-kategory en de MASWE-swakte. De ynlutsen v1-tests en de placeholders sitte der net yn; de ynhâld fan de gids likemin.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'De swakteslist (117): id, titel, MASVS-kategory, platfoarm en de CWE-keppeling. Trijekwart is by de boarne noch net útskreaun; dy steane der wól yn, markearre. Ynlutsen swakten net.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'De folsleine list (id, namme, beskriuwing) plus in eigen selektearre kearn mei ús remediaasje-notysjes.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'It folsleine EIS-skema (88 toetsbere easken).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Nammen fan oandwaningen yn njoggen talen as sûnenslexikon foar de privacykontrôle (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'In eigen Dart-ymplemintaasje fan de publike spesifikaasje, ynklusyf de MacroVector-tabel en de publisearre bânyndieling.',
+  'Specificatie van FIRST.Org — attributie':
+      'Spesifikaasje fan FIRST.Org — attribúsje',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Presintaasjes ymportearje…',

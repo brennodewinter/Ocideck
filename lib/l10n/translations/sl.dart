@@ -1773,6 +1773,22 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Kazalo kontrolnega seznama: za vsak test stabilni id, kanonični naslov in kategorija. Vsebina samega vodnika ni vključena.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Kazalo testov v2.0.0: za vsak test stabilni id, kanonični naslov, kategorija MASVS in šibkost MASWE. Umaknjeni testi v1 in ograde niso vključeni; prav tako ne vsebina vodnika.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Seznam šibkosti (117): id, naslov, kategorija MASVS, platforma in povezava CWE. Tri četrtine pri viru še niso izpisane; te so vključene, označene. Umaknjene šibkosti niso.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Celoten seznam (id, ime, opis) in lastno izbrano jedro z našimi opombami za odpravo.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Celotna shema EIS (88 preverljivih zahtev).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Imena bolezni v devetih jezikih kot zdravstveni leksikon za preverjanje zasebnosti (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Lastna implementacija javne specifikacije v Dartu, vključno s tabelo MacroVector in objavljenimi pasovi resnosti.',
+  'Specificatie van FIRST.Org — attributie':
+      'Specifikacija FIRST.Org — priznanje avtorstva',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Uvozi predstavitve…',

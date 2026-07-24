@@ -1793,6 +1793,22 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'L-indiċi tal-lista ta\' kontroll: għal kull test l-id stabbli, it-titlu kanoniku u l-kategorija. Il-kontenut tal-gwida nnifisha mhuwiex inkluż.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'L-indiċi tat-testijiet ta\' v2.0.0: għal kull test l-id stabbli, it-titlu kanoniku, il-kategorija MASVS u d-dgħufija MASWE. It-testijiet v1 irtirati u l-placeholders mhumiex inklużi; lanqas il-kontenut tal-gwida.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Il-lista tad-dgħufijiet (117): id, titlu, kategorija MASVS, pjattaforma u r-rabta CWE. Tliet kwarti għadhom mhux miktuba fis-sors; dawk huma inklużi, immarkati. Id-dgħufijiet irtirati le.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Il-lista sħiħa (id, isem, deskrizzjoni) flimkien ma\' qalba magħżula minna bin-noti tagħna għar-rimedju.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'L-iskema EIS sħiħa (88 rekwiżit li jistgħu jiġu ttestjati).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Ismijiet ta\' kundizzjonijiet f\'disa\' lingwi bħala lessiku tas-saħħa għall-kontroll tal-privatezza (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Implimentazzjoni tagħna f\'Dart tal-ispeċifikazzjoni pubblika, inkluża t-tabella MacroVector u l-faxex tas-severità ppubblikati.',
+  'Specificatie van FIRST.Org — attributie':
+      'Speċifikazzjoni ta\' FIRST.Org — attribuzzjoni',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Importa preżentazzjonijiet…',

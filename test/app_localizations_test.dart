@@ -13,6 +13,10 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'CC-BY-SA-4.0',
+  'CC-BY-4.0',
+  'EUPL-1.2',
+  'MITRE Terms of Use',
   'OpenKAT',
   'Vigilis',
   'http://127.0.0.1:11434/v1',
@@ -155,6 +159,10 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'CC-BY-SA-4.0',
+  'CC-BY-4.0',
+  'EUPL-1.2',
+  'MITRE Terms of Use',
   'OpenKAT',
   'Vigilis',
   'http://127.0.0.1:11434/v1',

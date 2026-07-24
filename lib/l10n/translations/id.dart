@@ -1771,6 +1771,21 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Indeks daftar periksa: id stabil, judul kanonik, dan kategori per pengujian. Isi panduan itu sendiri tidak disertakan.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Indeks pengujian v2.0.0: id stabil, judul kanonik, kategori MASVS, dan kelemahan MASWE per pengujian. Pengujian v1 yang ditarik dan placeholder tidak termasuk; begitu pula isi panduan.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Daftar kelemahan (117): id, judul, kategori MASVS, platform, dan tautan CWE. Tiga perempat belum ditulis lengkap di sumbernya; yang itu tetap disertakan, dengan penanda. Kelemahan yang ditarik tidak.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Daftar lengkap (id, nama, deskripsi) ditambah inti pilihan kami sendiri dengan catatan remediasi.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Skema EIS lengkap (88 persyaratan yang dapat diuji).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Nama kondisi medis dalam sembilan bahasa sebagai leksikon kesehatan untuk pemeriksaan privasi (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Implementasi Dart buatan sendiri atas spesifikasi publik, termasuk tabel MacroVector dan pita keparahan yang dipublikasikan.',
+  'Specificatie van FIRST.Org — attributie': 'Spesifikasi FIRST.Org — atribusi',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Impor presentasi…',

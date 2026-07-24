@@ -1800,6 +1800,22 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'O índice da lista de verificação: por teste, o id estável, o título canónico e a categoria. O conteúdo do próprio guia não está incluído.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'O índice de testes da v2.0.0: por teste, o id estável, o título canónico, a categoria MASVS e a fraqueza MASWE. Os testes v1 retirados e os marcadores de posição não estão incluídos; o conteúdo do guia também não.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'A lista de fraquezas (117): id, título, categoria MASVS, plataforma e a ligação CWE. Três quartos ainda não estão redigidos na fonte; esses estão incluídos, assinalados. As fraquezas retiradas não.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'A lista completa (id, nome, descrição) mais um núcleo próprio selecionado com as nossas notas de remediação.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'O esquema EIS completo (88 requisitos testáveis).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Nomes de patologias em nove idiomas como léxico de saúde para a verificação de privacidade (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Uma implementação própria em Dart da especificação pública, incluindo a tabela MacroVector e as faixas de gravidade publicadas.',
+  'Specificatie van FIRST.Org — attributie':
+      'Especificação da FIRST.Org — atribuição',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Importar apresentações…',

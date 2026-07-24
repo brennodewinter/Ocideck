@@ -1771,6 +1771,22 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Tarkistuslistan hakemisto: testikohtainen pysyvä tunnus, kanoninen otsikko ja luokka. Itse oppaan sisältö ei ole mukana.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Version v2.0.0 testihakemisto: testikohtainen pysyvä tunnus, kanoninen otsikko, MASVS-luokka ja MASWE-heikkous. Poistetut v1-testit ja paikkamerkit eivät ole mukana; ei myöskään oppaan sisältö.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Heikkouslista (117): tunnus, otsikko, MASVS-luokka, alusta ja CWE-kytkentä. Kolmea neljäsosaa ei ole lähteessä vielä kirjoitettu auki; ne ovat mukana, merkittyinä. Poistetut heikkoudet eivät.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Koko luettelo (tunnus, nimi, kuvaus) sekä oma valittu ydin korjausmuistiinpanoineen.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Täysi EIS-skeema (88 testattavaa vaatimusta).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Sairauksien nimet yhdeksällä kielellä terveyssanastona yksityisyystarkistusta varten (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Oma Dart-toteutus julkisesta määrittelystä, mukaan lukien MacroVector-taulukko ja julkaistut vakavuusluokat.',
+  'Specificatie van FIRST.Org — attributie':
+      'FIRST.Orgin määrittely — nimeäminen',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Tuo esityksiä…',

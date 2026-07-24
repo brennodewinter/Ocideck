@@ -911,6 +911,22 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'The checklist index: the stable id, canonical title and category per test. The guide\'s own content is not bundled.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'The v2.0.0 test index: the stable id, canonical title, MASVS category and MASWE weakness per test. Withdrawn v1 tests and placeholders are not included; neither is the guide\'s content.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'The weakness list (117): id, title, MASVS category, platform and the CWE link. Three quarters are not yet written up at the source; those are included, marked. Withdrawn weaknesses are not.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'The full list (id, name, description) plus our own curated core with remediation notes.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'The full EIS schema (88 testable requirements).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Condition names in nine languages as a health lexicon for the privacy check (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Our own Dart implementation of the public specification, including the MacroVector table and the published severity bands.',
+  'Specificatie van FIRST.Org — attributie':
+      'FIRST.Org specification — attribution',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Import presentations…',

@@ -1798,6 +1798,22 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Το ευρετήριο της λίστας ελέγχου: ανά δοκιμή το σταθερό αναγνωριστικό, ο κανονικός τίτλος και η κατηγορία. Το περιεχόμενο του ίδιου του οδηγού δεν περιλαμβάνεται.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Το ευρετήριο δοκιμών της v2.0.0: ανά δοκιμή το σταθερό αναγνωριστικό, ο κανονικός τίτλος, η κατηγορία MASVS και η αδυναμία MASWE. Οι αποσυρμένες δοκιμές v1 και τα σύμβολα κράτησης θέσης δεν περιλαμβάνονται· ούτε το περιεχόμενο του οδηγού.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Ο κατάλογος αδυναμιών (117): αναγνωριστικό, τίτλος, κατηγορία MASVS, πλατφόρμα και η σύνδεση με CWE. Τα τρία τέταρτα δεν έχουν ακόμη γραφτεί στην πηγή· αυτά περιλαμβάνονται, σημειωμένα. Οι αποσυρμένες αδυναμίες όχι.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Ο πλήρης κατάλογος (αναγνωριστικό, όνομα, περιγραφή) συν έναν δικό μας επιλεγμένο πυρήνα με τις σημειώσεις αποκατάστασης.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Το πλήρες σχήμα EIS (88 ελέγξιμες απαιτήσεις).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Ονόματα παθήσεων σε εννέα γλώσσες ως λεξικό υγείας για τον έλεγχο απορρήτου (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Δική μας υλοποίηση σε Dart της δημόσιας προδιαγραφής, μαζί με τον πίνακα MacroVector και τις δημοσιευμένες ζώνες σοβαρότητας.',
+  'Specificatie van FIRST.Org — attributie':
+      'Προδιαγραφή του FIRST.Org — αναφορά προέλευσης',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Εισαγωγή παρουσιάσεων…',

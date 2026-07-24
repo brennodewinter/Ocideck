@@ -1774,6 +1774,22 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'De Checklischte-Index: pro Test d stabili ID, de kanonisch Titel und d Kategorie. De Inhalt vom Leitfade sälber isch nöd derbi.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'De Test-Index vo v2.0.0: pro Test d stabili ID, de kanonisch Titel, d MASVS-Kategorie und d MASWE-Schwechi. Zrugzoge v1-Tests und Platzhalter sind nöd derbi; de Inhalt vom Leitfade au nöd.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'D Schwechine-Lischte (117): ID, Titel, MASVS-Kategorie, Plattform und de CWE-Verchnüpfig. Drüü Viertel sind a de Quelle no nöd usgschribe; die sind derbi, markiert. Zrugzogeni Schwechine nöd.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'D ganzi Lischte (ID, Name, Beschriibig) plus en eigne uusgwählte Chärn mit üsne Behebigs-Notize.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'S ganze EIS-Schema (88 prüefbari Aaforderige).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Chrankheitsname i nün Sprache als Gsundheitslexikon für d Datenschutzprüefig (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'En eigni Dart-Umsetzig vo de öffentliche Spezifikation, samt MacroVector-Tabälle und de veröffentlichte Schweregrad-Bänder.',
+  'Specificatie van FIRST.Org — attributie':
+      'Spezifikation vo FIRST.Org — Namensnennig',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Präsentatione importiere…',

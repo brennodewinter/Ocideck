@@ -727,6 +727,22 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'El índice de la lista de verificación: por prueba, el id estable, el título canónico y la categoría. El contenido de la guía no se incluye.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'El índice de pruebas de v2.0.0: por prueba, el id estable, el título canónico, la categoría MASVS y la debilidad MASWE. Las pruebas v1 retiradas y los marcadores no están; tampoco el contenido de la guía.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'La lista de debilidades (117): id, título, categoría MASVS, plataforma y el enlace CWE. Tres cuartas partes aún no están redactadas en la fuente; esas sí están, marcadas. Las debilidades retiradas no.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'La lista completa (id, nombre, descripción) más un núcleo propio seleccionado con nuestras notas de remediación.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'El esquema EIS completo (88 requisitos comprobables).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Nombres de afecciones en nueve idiomas como léxico de salud para la comprobación de privacidad (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Una implementación propia en Dart de la especificación pública, incluida la tabla MacroVector y las bandas de gravedad publicadas.',
+  'Specificatie van FIRST.Org — attributie':
+      'Especificación de FIRST.Org — atribución',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Mayús',
   'Presentaties importeren…': 'Importar presentaciones…',

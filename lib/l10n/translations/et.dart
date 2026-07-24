@@ -1762,6 +1762,22 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Kontrollnimekirja register: iga testi kohta püsiv id, kanooniline pealkiri ja kategooria. Juhendi enda sisu ei ole kaasas.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'v2.0.0 testiregister: iga testi kohta püsiv id, kanooniline pealkiri, MASVS-kategooria ja MASWE-nõrkus. Tagasi võetud v1-testid ja kohatäited ei ole kaasas; juhendi sisu samuti mitte.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Nõrkuste loend (117): id, pealkiri, MASVS-kategooria, platvorm ja CWE-seos. Kolm neljandikku ei ole allikas veel lahti kirjutatud; need on kaasas, märgistatuna. Tagasi võetud nõrkused ei ole.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Täisloend (id, nimi, kirjeldus) ning oma valitud tuumik koos meie parandusmärkustega.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Täielik EIS-skeem (88 testitavat nõuet).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Haiguste nimetused üheksas keeles tervise sõnastikuna privaatsuskontrolli jaoks (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Oma Dart-teostus avalikust spetsifikatsioonist, sealhulgas MacroVectori tabel ja avaldatud raskusastme vahemikud.',
+  'Specificatie van FIRST.Org — attributie':
+      'FIRST.Orgi spetsifikatsioon — viitamine',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Impordi esitlusi…',
