@@ -238,10 +238,9 @@ self-hosted CanvasKit, and bundled UI font before the macOS app is built.
 
 `make build-all` builds the web bundle plus whichever desktop target matches the
 host OS (web + macOS on a Mac, web + Linux on Linux). A desktop bundle cannot be
-cross-compiled, so a bundle for another OS must be built on that OS (the release
-workflow in `.github/workflows/release.yml` would do this across runners, but it
-does not currently run — see the [CI](#ci) note). Artifacts land under
-`build/<platform>/`.
+cross-compiled, so a bundle for another OS must be built on that OS — which is
+what the release workflow does across runners (see [Cutting a
+release](#cutting-a-release)). Artifacts land under `build/<platform>/`.
 
 ### macOS notes
 
@@ -383,9 +382,98 @@ and pull request (plus `flutter test` on macOS and Windows). It does not build
 native binaries; it validates formatting, static analysis, and the test suite
 (which are platform-independent).
 
-`.github/workflows/release.yml` *declares* the distributable-artifact build. On a
-version tag (`v*`) — or a manual run — it would build **web, macOS, Windows and
-Linux** on their matching runners and upload each as an artifact, so one tag
-produces all four. Both workflows pin **Flutter 3.44.7** (stable).
+`.github/workflows/release.yml` is the one file on the mirror that really runs:
+it builds the **Windows** artifact, which the forge has no machine for. Both
+workflows pin **Flutter 3.44.7** (stable), and `make check-toolchain` fails if
+either line drifts from `.tool-versions`.
 
 For the full check reference, see [`CHECKS.md`](CHECKS.md).
+
+## Cutting a release
+
+One tag produces everything. `git push origin v0.1.0` starts
+`.forgejo/workflows/release.yml`, and about half an hour later there is a
+release at
+<https://pawprint.vigilis.online/LibreKAT/Ocideck/releases> carrying the web
+bundle, the macOS app, the Linux bundle, the Windows app, both SBOM formats and
+a `SHA256SUMS` over all of them — and <https://ocideck.librekat.nl/> is serving
+that same web bundle.
+
+### What runs where, and why
+
+| Artifact | Built on | Why there |
+| --- | --- | --- |
+| Web bundle | forge, `docker` runner | `make check-web`: hardened build **and** its verification |
+| Linux x64 | forge, `docker` runner | native toolchain in the job container |
+| macOS | forge, `macos` runner | Apple licenses macOS for Apple hardware only |
+| Windows x64 | GitHub mirror | no Windows machine on the forge |
+| SBOM | forge, from the repo | committed and kept current by `make sbom-verify` |
+
+The Windows artifact travels back as a **public GitHub release asset**, not as a
+build artifact. A GitHub artifact needs a token even on a public repository and
+expires after ninety days; a release asset is a plain public URL that keeps
+working. That is why the forge needs no GitHub credentials to collect it — the
+`windows-ophalen` job simply waits (up to 45 minutes) for the file to appear and
+`curl`s it.
+
+### Before you tag
+
+1. `make check` and `make check-full` green on `main`.
+2. `make catalogs-outdated` — a release carries its bundled reference data for a
+   year, so this is the moment to notice upstream moved.
+3. `CHANGELOG.md`: turn the `## [0.1.0] — unreleased` heading into the version
+   and date you are about to cut.
+4. `pubspec.yaml`: `version:` matches the tag.
+
+Then:
+
+```bash
+git tag -a v0.1.0 -m "OciDeck 0.1.0" && git push origin v0.1.0
+```
+
+### Rehearsing it safely
+
+A tag with a hyphen in it (`v0.1.0-rc1` — a semver pre-release) runs the whole
+chain, publishes a release marked **prerelease**, and **skips the live
+deployment**. Use that to exercise the pipeline end to end without touching
+`ocideck.librekat.nl` or making the download button point at a rehearsal. Delete
+the tag and the release afterwards; the real tag then behaves normally.
+
+### After the first release is published
+
+Two things deliberately wait until a release actually exists, because both would
+otherwise point at an empty page:
+
+1. **README** — add a download line under *Getting started*; today that section
+   only tells you how to build from source, which was the only option.
+2. **librekat.nl** — the OciDeck page has a **Download** button prepared on
+   branch `feat/ocideck-download` in the website repository, pointing at the
+   releases page. Merge and run `./publiceersite` once the release is live.
+
+### The two secrets it needs
+
+Release publication itself needs nothing: Forgejo injects a per-run token that
+may create releases (verified — `POST /releases` returns 201). Should a future
+Forgejo version narrow that, set a repository secret `RELEASE_TOKEN` and the
+workflow prefers it.
+
+Putting the web build live **does** need credentials, and they are repository
+secrets on the forge — see
+[HOSTING.md](HOSTING.md#automatic-deployment-on-a-tag) for how to create them:
+
+- `DEPLOY_SSH_KEY` — private half of a deploy key for the static host;
+- `DEPLOY_KNOWN_HOSTS` — that host's public key, pinned in advance. The workflow
+  refuses to run `ssh-keyscan`: trusting whatever key answers is the assumption
+  a man-in-the-middle needs.
+
+Without them the `deploy-web` job fails with that message; the release still
+publishes, because the desktop downloads do not depend on the web host.
+
+### The artifacts are not signed
+
+There is no Apple Developer account and no code-signing certificate, so macOS
+reports the app as damaged and Windows shows a SmartScreen warning. The release
+notes (`.forgejo/release-body.md`) carry the per-platform instructions rather
+than leaving a user to work it out. `SHA256SUMS` proves you have the bytes that
+were published; it is not a signature and says nothing about who published them.
+Remove that section from the release notes only when signing actually exists.

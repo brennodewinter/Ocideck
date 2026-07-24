@@ -238,10 +238,15 @@ the only place the coverage floors run at all.** The one exception is
 every pull request and push — seconds rather than minutes, and for a credential
 the moment it is found is not interchangeable. The Linux gate
 (`.forgejo/workflows/linux-gate.yml`) and the desktop bundles
-(`linux-build.yml`, `macos-build.yml`) run on demand, or from a `v*` tag on the
-GitHub mirror. See [`docs/CHECKS.md`](docs/CHECKS.md). The
-workflow files under `.github/` are reference definitions for a GitHub mirror;
-Forgejo reads `.forgejo/workflows/` instead.
+(`linux-build.yml`, `macos-build.yml`) run on demand. See
+[`docs/CHECKS.md`](docs/CHECKS.md).
+
+A `v*` tag runs `.forgejo/workflows/release.yml`: web, macOS and Linux builds
+here, the Windows build on the GitHub mirror, and all of them published as one
+release with the SBOM and `SHA256SUMS` — see
+[`docs/BUILD.md`](docs/BUILD.md#cutting-a-release). Apart from that Windows lane,
+the workflow files under `.github/` are reference definitions; Forgejo reads
+`.forgejo/workflows/` instead.
 
 ## Contributing
 

@@ -1,0 +1,39 @@
+# Installeert de officiële Flutter-stable die dit project pint.
+#
+# Stond drie keer bijna-identiek in de workflows (ci, linux-build, en straks
+# release); bij de vierde kopie werd het tijd. De reden om het te bundelen is
+# niet netheid maar de sha256-regel: dit blok is de plek waar de herkomst van de
+# toolchain wordt vastgesteld, en een controle die je op drie plekken onderhoudt
+# is een controle die op één plek verwatert.
+#
+# Waarom niet een kant-en-klaar Flutter-image: cirruslabs bleek kanaal
+# "[user-branch]" uit onbekende bron te bevatten, en `make check-toolchain`
+# (onderdeel van `make check`) keurt precies dat af. Hier wordt de versie uit
+# .tool-versions gelezen en de tarball geverifieerd tegen het officiële
+# release-manifest, dus de pin heeft geen tweede plek om te vergeten.
+#
+# Vereist: een voorafgaande checkout, plus curl/jq/xz/tar/git in het image.
+name: Flutter volgens de pin
+description: Installeert de officiële Flutter-stable uit .tool-versions, sha256-geverifieerd.
+
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        set -eu
+        VERSION="$(sed -n 's/^flutter \(.*\)-stable$/\1/p' .tool-versions)"
+        test -n "$VERSION"
+        ARCHIVE="flutter_linux_${VERSION}-stable.tar.xz"
+        BASE="https://storage.googleapis.com/flutter_infra_release/releases"
+        curl -fsSLo /tmp/releases.json "$BASE/releases_linux.json"
+        SHA=$(jq -r --arg v "$VERSION" \
+          '.releases[] | select(.channel=="stable" and .version==$v) | .sha256' \
+          /tmp/releases.json)
+        test -n "$SHA"
+        curl -fsSLo "/tmp/$ARCHIVE" "$BASE/stable/linux/$ARCHIVE"
+        echo "$SHA  /tmp/$ARCHIVE" | sha256sum -c -
+        tar -xJf "/tmp/$ARCHIVE" -C /opt
+        rm "/tmp/$ARCHIVE"
+        git config --global --add safe.directory /opt/flutter
+        echo "/opt/flutter/bin" >> "$GITHUB_PATH"

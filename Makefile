@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-no-coverage check-full help servicenormen doorlooptijd ratchets
+.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release deploy-web check check-no-coverage check-full help servicenormen doorlooptijd ratchets
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -80,6 +80,7 @@ help:
 	@echo "  make build-linux     Build the Linux bundle (Linux only)."
 	@echo "  make build-all       Build web + this OS's native desktop target."
 	@echo "  make build-release   Build verified web + macOS release artifacts."
+	@echo "  make deploy-web      Put build/web live on the static host (atomic swap + verify)."
 
 # Install Flutter/Dart dependencies.
 setup:
@@ -829,6 +830,20 @@ build-all:
 	  *) echo "No native desktop build for '$$(uname -s)' here — run 'make build-windows' on Windows." ;; \
 	esac
 	@echo "== OciDeck build-all complete =="
+
+# Put the built web bundle live. Deliberately NOT depending on build-web: this
+# target should publish exactly the bundle you just verified, not silently
+# rebuild one behind your back. Build first, look at it, then deploy it.
+#
+# The same script runs in the release workflow, so a hand deploy and a tag
+# deploy are the same sequence — see scripts/deploy_web.sh for why the order
+# (verify → unpack beside → atomic swap → verify live → drop backup) matters.
+deploy-web:
+	@echo "== OciDeck deploy: hardened web bundle =="
+	@echo "Command: scripts/deploy_web.sh"
+	@echo "Covers: bundle verification, upload, atomic swap, live verification."
+	@echo "Target: \$$OCIDECK_DEPLOY_HOST:\$$OCIDECK_DEPLOY_ROOT (defaults: the public web demo)."
+	scripts/deploy_web.sh
 
 # Human release build for the two artifacts currently published by hand:
 # the hardened web bundle (with post-build hardening verification) and the

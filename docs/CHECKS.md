@@ -971,14 +971,17 @@ For focused work, run only the relevant slice instead of the whole suite:
 > same machine that serves the repository). What it executes comes from
 > `.forgejo/workflows/` — Forgejo reads the first workflow directory that
 > exists, so that directory shadows `.github/workflows/`, whose files remain
-> reference definitions for a GitHub mirror. Most of `make check-full` (the
-> dependency/web checks) still runs only locally; run it before a dependency
-> or web-facing change. Its two *security* scans are the exception since #778 —
+> reference definitions for a GitHub mirror — with one exception: since
+> 2026-07-24 `.github/workflows/release.yml` really runs there, because it
+> builds the Windows artifact the forge has no machine for. Most of
+> `make check-full` (the dependency/web checks) still runs only locally; run it
+> before a dependency or web-facing change. Its two *security* scans are the
+> exception since #778 —
 > see [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request-and-push).
 > Since #797 the release gate runs on a registered **Mac**
 > runner rather than on the server, and the Linux gate moved to an on-demand
 > workflow — see below for what that buys and what it costs. The sections below
-> describe the workflows that run, then what the GitHub files *declare*.
+> describe the workflows that run, then what the remaining GitHub file *declares*.
 
 ### `.forgejo/workflows/ci.yml` — the release gate, on a `v*` tag
 - **gate** — runs on the registered **Mac** runner (`runs-on: macos`, host
@@ -1087,6 +1090,35 @@ For focused work, run only the relevant slice instead of the whole suite:
   `ocideck-macos` run artifact. On demand for the same reason as the Linux
   build (#790). When no Mac runner is online the run waits.
 
+### `.forgejo/workflows/release.yml` — on a version tag (`v*`)
+One tag, one release. Not a gate: everything here assumes `make check` was
+already green on `main`.
+
+| Job | Runner | Result |
+| --- | --- | --- |
+| `web` | docker | `make check-web` — hardened bundle **and** its verification |
+| `deploy-web` | docker | that same artifact live on the static host, via `scripts/deploy_web.sh` |
+| `linux` | docker | `ocideck-linux-x64-<versie>.tar.gz` |
+| `macos` | macos | `ocideck-macos-<versie>.zip` (`ditto`, not a plain zip) |
+| `windows-ophalen` | docker | waits for the mirror's public release asset and `curl`s it |
+| `publiceren` | docker | a Forgejo release with all four, both SBOM formats and `SHA256SUMS` |
+
+`deploy-web` unpacks the *downloaded artifact* rather than rebuilding: what goes
+live is then byte-identical to what hangs off the release. It needs the
+`DEPLOY_SSH_KEY` and `DEPLOY_KNOWN_HOSTS` secrets ([HOSTING.md](HOSTING.md#automatic-deployment-on-a-tag));
+without them that job fails and the release still publishes.
+
+Publishing needs no secret: Forgejo injects a per-run token that may create
+releases. A `RELEASE_TOKEN` secret overrides it if that ever changes.
+
+### `.github/workflows/release.yml` — the Windows lane, on a version tag (`v*`)
+The only file on the mirror that executes. Builds `flutter build windows
+--release` on `windows-2022` (the newest image's MSVC is incompatible with
+dartcv4's prebuilt OpenCV pack) and publishes it as a **public GitHub release
+asset** — not a build artifact, which would need a token even on a public
+repository and would expire after ninety days. The forge picks that URL up with
+plain `curl`, so no GitHub credential is stored on the self-hosted runner.
+
 ### `.github/workflows/ci.yml` — declared for every push and pull request
 - **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get
   --enforce-lockfile`, then `make format-check`, `make analyze`,
@@ -1126,19 +1158,8 @@ For focused work, run only the relevant slice instead of the whole suite:
 CI does **not** build native binaries here; it validates formatting, analysis,
 tests, and the web bundle's hardening, which are platform-independent.
 
-### `.github/workflows/release.yml` — on a version tag (`v*`) or manual run
-Produces distributable artifacts. Desktop bundles cannot be cross-compiled, so
-each platform builds on its own runner:
-
-| Job | Runner | Output artifact |
-| --- | --- | --- |
-| SBOM | ubuntu | `ocideck-sbom` — the `sbom/` directory (runs `make sbom-verify` then `make sbom`) |
-| web | ubuntu | `ocideck-web` — hardened bundle (`--no-web-resources-cdn --csp`) |
-| macOS | macos | `ocideck-macos` — `build/macos/Build/Products/Release` |
-| Windows | windows | `ocideck-windows` — the runner `Release` folder |
-| Linux | ubuntu | `ocideck-linux` — the `bundle` folder |
-
-See [`BUILD.md`](BUILD.md) for the matching local `make build-*` targets.
+See [`BUILD.md`](BUILD.md) for the matching local `make build-*` targets, and
+[Cutting a release](BUILD.md#cutting-a-release) for the whole tag sequence.
 
 ---
 

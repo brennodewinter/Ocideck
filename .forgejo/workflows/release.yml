@@ -1,0 +1,406 @@
+# De release-keten van OciDeck: één tag, vier platformen en een live webversie.
+#
+# Draait op de forge (Pawprint) en dat is met opzet: de forge is de bron, en de
+# downloads horen te staan waar de broncode staat. Eén uitzondering — Windows.
+# Apple licenseert macOS alleen op Apple-hardware (vandaar de Mac-runner) en
+# voor Windows is er hier geen machine. Die build komt van de GitHub-spiegel en
+# wordt hier opgehaald en meeverpakt, zodat een bezoeker toch één vindplaats
+# heeft. Zie de job `windows-ophalen` voor waarom dat geen token vraagt.
+#
+# Wat er ontstaat bij `git push origin v0.1.0`:
+#
+#   web      → geharde bundel, plus de live deploy naar ocideck.librekat.nl
+#   linux    → x64-bundel als tar.gz
+#   macos    → .app als zip (op de Mac-runner)
+#   windows  → opgehaald van de spiegel
+#   publiceren → een Forgejo-release met alles eraan, plus SBOM en SHA256SUMS
+#
+# De artefacten zijn NIET ondertekend. Dat is een bewuste stand van zaken en
+# geen omissie: er is geen Apple Developer-account en geen codesigning-
+# certificaat. Gatekeeper en SmartScreen zullen dus klagen, en daarom staat de
+# openen-instructie in de releasetekst (.forgejo/release-body.md) in plaats van
+# dat een gebruiker hem zelf moet uitvogelen. Komt er ondertekening, dan
+# vervalt die tekst — niet eerder.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  # Handmatig starten kan, maar alleen op een tag-ref: een release die naar een
+  # branch wijst heeft geen betekenis, en de versienaam komt hier uit de ref.
+  workflow_dispatch:
+
+jobs:
+  web:
+    name: Web bouwen
+    runs-on: docker
+    container:
+      image: ubuntu:24.04
+    steps:
+      # Vóór de checkout: actions/checkout en upload-artifact zijn node-acties,
+      # en dit kale image brengt geen node mee.
+      - name: Gereedschap installeren
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            nodejs make git curl ca-certificates xz-utils jq unzip zip
+
+      - uses: actions/checkout@v4
+
+      - name: Alleen op een tag
+        run: |
+          test "${{ github.ref_type }}" = "tag" || {
+            echo "Deze workflow hoort op een tag te draaien, niet op '${{ github.ref_name }}'." >&2
+            echo "Start hem opnieuw met een tag-ref, of push een tag." >&2
+            exit 1
+          }
+
+      - uses: ./.forgejo/actions/flutter
+
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get
+
+      # Dezelfde poort die elke push krijgt, plus de hardingscontrole. Een tag
+      # mag geen artefact uitleveren dat langs de controles is geglipt: dit is
+      # het enige moment waarop de bundel de deur uit gaat.
+      - name: Bouwen en harding controleren
+        run: make check-web
+
+      - name: Bundel inpakken
+        run: |
+          VERSIE="${GITHUB_REF_NAME#v}"
+          tar -C build/web -czf "ocideck-web-$VERSIE.tar.gz" .
+          echo "VERSIE=$VERSIE" >> "$GITHUB_ENV"
+
+      # v4 van deze actie weigert elke niet-GitHub-server ("GHES not
+      # supported"); v3 spreekt het artifact-API dat Forgejo implementeert.
+      - name: Artifact bewaren
+        uses: actions/upload-artifact@v3
+        with:
+          name: ocideck-web
+          path: ocideck-web-${{ env.VERSIE }}.tar.gz
+
+  deploy-web:
+    name: Webversie live zetten
+    needs: web
+    # Alleen een échte versie gaat live. Een semver-voorloper (`v0.1.0-rc1`,
+    # alles met een streepje) bouwt en publiceert wél, maar laat
+    # ocideck.librekat.nl met rust — anders is er geen manier om deze hele
+    # keten één keer te oefenen zonder de publieke demo te raken.
+    if: ${{ !contains(github.ref_name, '-') }}
+    runs-on: docker
+    container:
+      image: ubuntu:24.04
+    steps:
+      - name: Gereedschap installeren
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            nodejs make git curl ca-certificates xz-utils jq openssh-client
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: ocideck-web
+
+      # Bewust de gedownloade bundel uitpakken in plaats van opnieuw te bouwen:
+      # dan deployt deze job precies het artefact dat straks ook als download
+      # aan de release hangt. Twee keer bouwen zou twee bundels opleveren die
+      # niemand meer naast elkaar legt.
+      - name: Bundel uitpakken op de plek waar het script hem verwacht
+        run: |
+          VERSIE="${GITHUB_REF_NAME#v}"
+          mkdir -p build/web
+          tar -C build/web -xzf "ocideck-web-$VERSIE.tar.gz"
+
+      # Voor `pack_web_release.dart --check`: die verifieert dat SHA256SUMS
+      # precies de bestanden beschrijft die er liggen — nu dus over de bundel
+      # zoals hij door de artifactopslag is gekomen, niet zoals hij is gebouwd.
+      - uses: ./.forgejo/actions/flutter
+
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get
+
+      - name: Sleutel klaarzetten
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          set -eu
+          if [ -z "${DEPLOY_SSH_KEY:-}" ]; then
+            echo "Secret DEPLOY_SSH_KEY ontbreekt — de webversie wordt NIET live gezet." >&2
+            echo "Zie docs/HOSTING.md voor het aanmaken en plaatsen van de deploysleutel." >&2
+            exit 1
+          fi
+          mkdir -p ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          # Geen ssh-keyscan: dat vertrouwt de sleutel die je op dat moment
+          # krijgt, en dat is precies de aanname die een man-in-the-middle
+          # nodig heeft. De hostsleutel hoort vooraf vast te liggen.
+          if [ -z "${DEPLOY_KNOWN_HOSTS:-}" ]; then
+            echo "Secret DEPLOY_KNOWN_HOSTS ontbreekt — zonder vastgelegde hostsleutel" >&2
+            echo "deployen we niet. Zie docs/HOSTING.md." >&2
+            exit 1
+          fi
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Live zetten
+        run: scripts/deploy_web.sh
+
+  linux:
+    name: Linux bouwen
+    runs-on: docker
+    container:
+      image: ubuntu:24.04
+    steps:
+      - name: Gereedschap en Linux-buildafhankelijkheden installeren
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            nodejs make git curl ca-certificates xz-utils jq unzip zip \
+            clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev \
+            libsecret-1-dev
+
+      - uses: actions/checkout@v4
+
+      - uses: ./.forgejo/actions/flutter
+
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get
+
+      - name: Linux-release bouwen
+        run: make build-linux
+
+      - name: Bundel inpakken
+        run: |
+          VERSIE="${GITHUB_REF_NAME#v}"
+          tar -C build/linux/x64/release/bundle -czf "ocideck-linux-x64-$VERSIE.tar.gz" .
+          echo "VERSIE=$VERSIE" >> "$GITHUB_ENV"
+
+      - name: Artifact bewaren
+        uses: actions/upload-artifact@v3
+        with:
+          name: ocideck-linux
+          path: ocideck-linux-x64-${{ env.VERSIE }}.tar.gz
+
+  macos:
+    name: macOS bouwen
+    # Host-modus op de aangemelde Mac (mac-brenno): de toolchain van die
+    # machine, die `make check-toolchain` daar al bewaakt. Staat de Mac uit,
+    # dan wacht deze job tot hij er weer is.
+    runs-on: macos
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get
+
+      - name: macOS-release bouwen
+        run: make build-macos
+
+      - name: Bundel inpakken
+        # ditto bewaart symlinks en resource forks — een .app die door een
+        # gewone zip gaat, start niet meer.
+        run: |
+          VERSIE="${GITHUB_REF_NAME#v}"
+          APP=$(ls -d build/macos/Build/Products/Release/*.app | head -1)
+          test -n "$APP"
+          ditto -c -k --keepParent "$APP" "ocideck-macos-$VERSIE.zip"
+          echo "VERSIE=$VERSIE" >> "$GITHUB_ENV"
+
+      - name: Artifact bewaren
+        uses: actions/upload-artifact@v3
+        with:
+          name: ocideck-macos
+          path: ocideck-macos-${{ env.VERSIE }}.zip
+
+  windows-ophalen:
+    name: Windows ophalen van de spiegel
+    runs-on: docker
+    container:
+      image: ubuntu:24.04
+    steps:
+      - name: Gereedschap installeren
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends nodejs curl ca-certificates jq
+
+      # Waarom een release-asset en niet het build-artifact van die run: een
+      # GitHub-*artifact* vraagt een token, óók bij een publieke repo, en
+      # verloopt na negentig dagen. Een release-*asset* van een publieke repo is
+      # een gewone publieke URL. Dat scheelt hier een geheim op de runner én
+      # betekent dat de Windows-download over drie jaar nog bestaat.
+      #
+      # De volgorde regelt zichzelf: de tag wordt naar de spiegel gepusht, daar
+      # start `.github/workflows/release.yml`, en zodra die klaar is staat het
+      # bestand er. Deze job wacht daarop, want een release die één platform
+      # mist is erger dan een release die een half uur later compleet is.
+      - name: Wachten op de Windows-build
+        run: |
+          set -u
+          TAG="${GITHUB_REF_NAME}"
+          VERSIE="${TAG#v}"
+          BESTAND="ocideck-windows-x64-$VERSIE.zip"
+          URL="https://github.com/brennodewinter/Ocideck/releases/download/$TAG/$BESTAND"
+          echo "Wachten op $URL"
+          # 45 minuten: een Windows-build op de spiegel duurt ongeveer twintig,
+          # plus de tijd die de push-mirror nodig heeft. Ruim, maar begrensd —
+          # eeuwig wachten laat een job een runner bezet houden.
+          for POGING in $(seq 1 45); do
+            if curl -fsSLo "$BESTAND" "$URL"; then
+              echo "Opgehaald na $POGING minuut/minuten: $(du -h "$BESTAND" | cut -f1)"
+              exit 0
+            fi
+            sleep 60
+          done
+          echo "Na 45 minuten stond $URL er nog niet." >&2
+          echo "Kijk op https://github.com/brennodewinter/Ocideck/actions of die build" >&2
+          echo "is gestruikeld. De release wordt hierdoor niet gepubliceerd — hertrigger" >&2
+          echo "deze workflow zodra het bestand er staat." >&2
+          exit 1
+
+      - name: Artifact bewaren
+        uses: actions/upload-artifact@v3
+        with:
+          name: ocideck-windows
+          path: ocideck-windows-x64-*.zip
+
+  publiceren:
+    name: Release publiceren
+    needs: [web, linux, macos, windows-ophalen]
+    runs-on: docker
+    container:
+      image: ubuntu:24.04
+    steps:
+      - name: Gereedschap installeren
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends nodejs git curl ca-certificates jq
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v3
+        with: { name: ocideck-web, path: assets }
+      - uses: actions/download-artifact@v3
+        with: { name: ocideck-linux, path: assets }
+      - uses: actions/download-artifact@v3
+        with: { name: ocideck-macos, path: assets }
+      - uses: actions/download-artifact@v3
+        with: { name: ocideck-windows, path: assets }
+
+      # De SBOM hoort bij de exacte build die je uitlevert (CRA, Verordening
+      # (EU) 2024/2847, bijlage I deel II §1). Hij staat gecommit in de repo en
+      # `make sbom-verify` bewaakt in elke `make check` dat hij niet verouderd
+      # is, dus hier volstaat meenemen — met de versie in de naam, zodat twee
+      # gedownloade SBOM's niet dezelfde naam dragen.
+      - name: SBOM meeverpakken
+        run: |
+          set -eu
+          VERSIE="${GITHUB_REF_NAME#v}"
+          cp sbom/ocideck.cdx.json  "assets/ocideck-$VERSIE.cdx.json"
+          cp sbom/ocideck.spdx.json "assets/ocideck-$VERSIE.spdx.json"
+
+      # Eén lijst over alles wat aan deze release hangt. Wat dit wel is: een
+      # controle dat je hebt wat er lag. Wat dit niet is: een handtekening —
+      # wie de lijst zelf niet vertrouwt, heeft er niets aan. Zolang er geen
+      # ondertekening is, zeggen we dat er ook zo bij.
+      - name: Checksums
+        run: |
+          set -eu
+          cd assets
+          # Naar een bestand buiten de map en dan pas naar binnen: `sha256sum
+          # ./* > SHA256SUMS` neemt bij een hérstart de lijst van de vorige
+          # poging in zichzelf mee, want die staat er dan al.
+          sha256sum ./* > /tmp/SHA256SUMS
+          mv /tmp/SHA256SUMS SHA256SUMS
+          cat SHA256SUMS
+
+      - name: Releasetekst opmaken
+        run: |
+          set -eu
+          VERSIE="${GITHUB_REF_NAME#v}"
+          sed -e "s/@VERSIE@/$VERSIE/g" -e "s/@TAG@/$GITHUB_REF_NAME/g" \
+            .forgejo/release-body.md > /tmp/body.md
+          cat /tmp/body.md
+
+      - name: Release aanmaken en bestanden eraan hangen
+        env:
+          # Het automatisch geïnjecteerde token van de run. Staat er een
+          # RELEASE_TOKEN als secret, dan wint die — nodig als het ingebouwde
+          # token in een toekomstige Forgejo-versie geen releases meer mag
+          # schrijven. Zie docs/BUILD.md.
+          RUN_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        run: |
+          set -eu
+          TOKEN="${RELEASE_TOKEN:-$RUN_TOKEN}"
+          API="${GITHUB_SERVER_URL}/api/v1/repos/${GITHUB_REPOSITORY}"
+
+          # Een streepje in de tag betekent semver-voorloper (`v0.1.0-rc1`), en
+          # die hoort als prerelease gemarkeerd te staan: Forgejo laat hem dan
+          # niet als "laatste release" gelden, dus wie de downloadknop volgt
+          # krijgt hem niet voorgeschoteld.
+          case "$GITHUB_REF_NAME" in
+            *-*) VOORLOPER=true ;;
+            *)   VOORLOPER=false ;;
+          esac
+          jq -n --arg tag "$GITHUB_REF_NAME" \
+                --arg name "OciDeck $GITHUB_REF_NAME" \
+                --rawfile body /tmp/body.md \
+                --argjson pre "$VOORLOPER" \
+                '{tag_name:$tag, name:$name, body:$body, draft:false, prerelease:$pre}' \
+            > /tmp/release.json
+
+          # Herstarten moet gewoon werken. De waarschijnlijkste reden om deze
+          # workflow opnieuw te draaien is dat de Windows-build op de spiegel te
+          # laat kwam; dan bestaat de release van de vorige poging al, en een
+          # tweede POST loopt stuk. Dus: bestaat hij, dan hergebruiken.
+          CODE=$(curl -s -o /tmp/created.json -w '%{http_code}' -X POST "$API/releases" \
+            -H "Authorization: token $TOKEN" -H "Content-Type: application/json" \
+            -d @/tmp/release.json)
+          if [ "$CODE" = "201" ]; then
+            ID=$(jq -r '.id' /tmp/created.json)
+            echo "Release $GITHUB_REF_NAME aangemaakt (id $ID)."
+          else
+            echo "POST /releases gaf HTTP $CODE — kijken of hij al bestaat."
+            BESTAAND=$(curl -s -o /tmp/bestaand.json -w '%{http_code}' \
+              -H "Authorization: token $TOKEN" "$API/releases/tags/$GITHUB_REF_NAME")
+            if [ "$BESTAAND" != "200" ]; then
+              echo "Release aanmaken gaf HTTP $CODE en hij bestaat ook niet:" >&2
+              cat /tmp/created.json >&2
+              exit 1
+            fi
+            ID=$(jq -r '.id' /tmp/bestaand.json)
+            echo "Bestaande release hergebruikt (id $ID)."
+          fi
+
+          # Bijlagen van een vorige poging eerst weg: Forgejo weigert een
+          # tweede bijlage met dezelfde naam niet, hij zet hem ernaast — en dan
+          # staan er twee bestanden waarvan niemand weet welke de goede is.
+          curl -s -H "Authorization: token $TOKEN" "$API/releases/$ID/assets" \
+            > /tmp/bijlagen.json
+          for BESTAND in assets/*; do
+            NAAM="$(basename "$BESTAND")"
+            OUD=$(jq -r --arg n "$NAAM" '.[] | select(.name==$n) | .id' /tmp/bijlagen.json)
+            if [ -n "$OUD" ]; then
+              curl -s -o /dev/null -X DELETE -H "Authorization: token $TOKEN" \
+                "$API/releases/$ID/assets/$OUD"
+              echo "  - $NAAM (oude versie verwijderd)"
+            fi
+            CODE=$(curl -s -o /tmp/asset.json -w '%{http_code}' -X POST \
+              "$API/releases/$ID/assets?name=$NAAM" \
+              -H "Authorization: token $TOKEN" \
+              -F "attachment=@$BESTAND")
+            if [ "$CODE" != "201" ]; then
+              echo "Bijlage $NAAM gaf HTTP $CODE:" >&2
+              cat /tmp/asset.json >&2
+              exit 1
+            fi
+            echo "  + $NAAM"
+          done
+
+          echo
+          echo "Klaar: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/tag/${GITHUB_REF_NAME}"

@@ -161,14 +161,20 @@ not tell whether a proposal gets an answer or disappears.)*
 
 ## Release Process
 
-**There is no release process yet, because there has been no release.** `git tag`
-is empty and the version sits at `0.1.0+1`. Changes are merged to `main` through
-pull requests and that is the whole of it; you run what you build.
+**Nothing has been released yet** — `git tag` carries no version and the version
+sits at `0.1.0+1`. Changes are merged to `main` through pull requests, and until
+a tag exists you run what you build.
 
-The release workflow in `.github/workflows/` is written but has never fired — it
-triggers on a `v*` tag. When the project does adopt a release scheme, this
-section and [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) are where it gets written
-down.
+The machinery for the first one is in place, though: pushing a `v*` tag runs
+`.forgejo/workflows/release.yml`, which builds the web, macOS and Linux
+artifacts on the forge, collects the Windows build from the GitHub mirror,
+publishes them as a Forgejo release with the SBOM and `SHA256SUMS`, and puts the
+web bundle live. The full sequence — including what to check before tagging —
+is [BUILD.md § Cutting a release](BUILD.md#cutting-a-release).
+
+Versioning follows [Semantic Versioning](https://semver.org/); what a version
+change means for existing decks belongs in
+[MIGRATION_GUIDE.md](MIGRATION_GUIDE.md).
 
 ## Code of Conduct
 
