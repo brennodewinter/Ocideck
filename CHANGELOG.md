@@ -136,6 +136,41 @@ read a book to find out.
   alleen in de historie vallen beide historie-scans alsnog om. (#778)
 
 ### Changed
+- **De scanners in de GitHub-definitie zijn gepind en geverifieerd; het
+  installatiescript van een branch-tip is weg.** `.github/workflows/ci.yml`
+  haalde gitleaks en trufflehog binnen door een script vanaf `master`/`main`
+  door `sh` te pijpen, en semgrep zonder versie. Twee dingen tegelijk mis:
+  willekeurige code van een bewegende aanwijzer, ongeverifieerd uitgevoerd, én
+  scanners die zichzelf bijwerken — waardoor "groen" stilletjes iets anders gaat
+  betekenen dan de week ervoor. Precies het anti-patroon dat #778 al benoemde,
+  in dezelfde alinea waar staat dat wie de binaries zelf trekt ze moet
+  verifiëren zoals de Flutter-stap dat doet.
+
+  Ze komen nu van een gepinde release, sha256-gecontroleerd tegen het
+  gepubliceerde manifest, in dezelfde vorm die de Flutter-tarball in
+  `linux-gate.yml` al had; semgrep gepind in een venv, omdat systeem-pip op
+  Ubuntu 24.04 afgeschermd is (PEP 668). Drie stappen in plaats van één, zodat de
+  log zegt wélke scanner niet binnenkwam. Bij dezelfde stappen bleek de checkout
+  één commit diep te zijn terwijl twee van de vier passes in `make check-secrets`
+  over de histórie gaan — `fetch-depth: 0` erbij, anders melden die groen op
+  bijna niets, en het geval waarvoor ze bestaan is nu juist het geheim dat drie
+  commits terug is toegevoegd en daarna "verwijderd".
+
+  **Dit bestand draait nergens**, en dat verandert hier niet: Forgejo leest
+  `.forgejo/workflows/` en dat schaduwt `.github/workflows/`. Er was dus ook geen
+  buildmachine die de ongepinde code uitvoerde, en er is geen run die de
+  wijziging bewijst — getoetst met een YAML-parse, shellcheck over de
+  run-blokken, en door de stappen naast `.forgejo/workflows/scans.yml` te leggen.
+  Het moest toch: dit is het bestand dat een bijdrager als eerste vindt (#592),
+  en op de dag dat de spiegel er komt draait het wél.
+
+  Eén ding is onderweg nagemeten en bleek niet te kloppen: dat
+  `sha256sum -c -` bij een lege treffer stil met exit 0 doorloopt. GNU coreutils
+  9.5 eindigt op 1, met "no properly formatted checksum lines found". De
+  `test -n "$SHA"` blijft staan om de faalreden leesbaar te houden — niet als
+  vangnet, want dat zit er al.
+
+### Changed
 - **Het OpenKAT-managementoverzicht is een verhaal geworden in plaats van een
   stapel tabellen.** De import gebruikte vier diavormen — titel, bullets, tabel
   en één staafdiagram — terwijl het formaat scorecards, lijngrafieken en

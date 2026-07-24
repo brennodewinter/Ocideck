@@ -1085,9 +1085,24 @@ For focused work, run only the relevant slice instead of the whole suite:
 ### `.github/workflows/ci.yml` — declared for every push and pull request
 - **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get
   --enforce-lockfile`, then `make format-check`, `make analyze`,
-  `make check-conventions`, `make check-method-length`, `make check-dead-code`,
+  `make check-conventions`, `make check-audience-boundary`,
+  `make check-method-length`, `make check-dead-code`,
+  [`make check-secrets`](#make-check-secrets), [`make sast`](#make-sast),
   `make coverage` (with the line-coverage floor), `make licenses`,
   `make sbom-verify`, and `make deps-check`. Uploads the coverage report.
+- **The three scanners are pinned, and the checkout is deep** (#800). Until
+  2026-07-24 this job installed gitleaks and trufflehog by piping an install
+  script fetched from a *branch tip* into `sh`, and semgrep with no version at
+  all — unverified code from a moving pointer, setting up tools that silently
+  redefined what green meant. They now come from a pinned release, sha256-checked
+  against the published manifest, in the same shape the Flutter tarball already
+  used in [`linux-gate.yml`](#forgejoworkflowslinux-gateyml--on-demand-workflow_dispatch)
+  — `test -n "$SHA"` included, so a renamed release asset fails loudly instead of
+  turning the check into a complaint about `sha256sum`'s input. The checkout also
+  gained `fetch-depth: 0`: two of the four passes in `make check-secrets` read
+  *history*, and a one-commit clone lets them report green on almost nothing.
+  Both were already right in `.forgejo/workflows/scans.yml` (#799); only this
+  mirror definition lagged.
 - **Test matrix (macOS + Windows)** — runs `flutter test
   --test-randomize-ordering-seed random` on the other two desktop OSes to catch
   platform-specific (path, `Platform.isX`) regressions the Linux gate would miss.
