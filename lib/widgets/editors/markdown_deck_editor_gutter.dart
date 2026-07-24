@@ -69,7 +69,7 @@ class _IssueHighlightPainter extends CustomPainter {
       final (band, accent) = switch (entry.value) {
         MarkdownValidationSeverity.error => (
           AppTheme.dangerBgSoft,
-          Colors.red.shade700,
+          AppTheme.dangerFg,
         ),
         MarkdownValidationSeverity.warning => (
           AppTheme.warningBgSoft,
@@ -190,7 +190,7 @@ class _LineNumberCell extends StatelessWidget {
             fontSize: 11,
             height: 1.5,
             color: severity == MarkdownValidationSeverity.error
-                ? Colors.red.shade700
+                ? AppTheme.dangerFg
                 : severity == MarkdownValidationSeverity.warning
                 ? AppTheme.warningFg
                 : AppTheme.slate400,

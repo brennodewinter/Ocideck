@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/rehearsal.dart';
 import '../../models/slide.dart';
+import '../../theme/app_theme.dart';
 
 /// Toon de samenvatting van een oefenrun (sessie-only). Beschrijvend: totale
 /// tijd, doeltijd en de tijd per slide — geen pacing-oordeel.
@@ -131,7 +132,7 @@ class _RehearsalSummaryDialog extends StatelessWidget {
           leading: Icon(
             a.correct ? Icons.check_circle_outline : Icons.cancel_outlined,
             size: 16,
-            color: a.correct ? Colors.green.shade700 : Colors.red.shade700,
+            color: a.correct ? AppTheme.successFg : AppTheme.dangerFg,
             semanticLabel: a.correct ? l10n.d('goed') : l10n.d('fout'),
           ),
         ),
@@ -207,8 +208,8 @@ class _RehearsalSummaryDialog extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: delta.isNegative
-                            ? Colors.green.shade700
-                            : Colors.red.shade700,
+                            ? AppTheme.successFg
+                            : AppTheme.dangerFg,
                         fontFeatures: const [FontFeature.tabularFigures()],
                       ),
                     ),

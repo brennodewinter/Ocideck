@@ -47,7 +47,7 @@ extension _SettingsPrivacy on _SettingsDialogState {
             icon: const Icon(Icons.undo, size: 16),
             label: Text(l10n.d('Toestemming intrekken')),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red[600],
+              backgroundColor: AppTheme.danger700,
               foregroundColor: Colors.white,
             ),
           ),
@@ -97,7 +97,9 @@ extension _SettingsPrivacy on _SettingsDialogState {
                 );
               }
             },
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red[600]),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppTheme.danger700,
+            ),
             child: Text(
               l10n.d('Intrekken'),
               style: const TextStyle(color: Colors.white),

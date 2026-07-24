@@ -163,7 +163,7 @@ extension _ExportDialogSections on _ExportDialogState {
         ? AppTheme.warningBgSoft
         : AppTheme.userNotesBorder;
     final iconColor = hasErrors
-        ? Colors.red.shade700
+        ? AppTheme.dangerFg
         : hasWarnings
         ? AppTheme.warningFg
         : AppTheme.slate600;

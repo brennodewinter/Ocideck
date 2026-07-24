@@ -541,7 +541,7 @@ class _ExportDialogState extends State<ExportDialog> {
         children: [
           Icon(
             _success ? Icons.check_circle : Icons.error_outline,
-            color: _success ? Colors.green : Colors.red,
+            color: _success ? AppTheme.successFg : AppTheme.dangerFg,
             size: 36,
           ),
           const SizedBox(height: 12),
@@ -590,7 +590,7 @@ class _ExportDialogState extends State<ExportDialog> {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.block, color: Colors.red, size: 36),
+          Icon(Icons.block, color: AppTheme.dangerFg, size: 36),
           const SizedBox(height: 12),
           Text(
             exportBlockMessage(context.l10n, decision) ?? '',
@@ -616,7 +616,7 @@ class _ExportDialogState extends State<ExportDialog> {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.block, color: Colors.red, size: 36),
+          Icon(Icons.block, color: AppTheme.dangerFg, size: 36),
           const SizedBox(height: 12),
           Text(
             l10n.d('Export geblokkeerd vanwege ernstige kwaliteitsproblemen.'),
