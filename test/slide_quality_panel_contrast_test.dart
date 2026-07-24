@@ -66,6 +66,25 @@ void main() {
   // Rangorde binnen dit paneel hoort in het gewicht en de schuinte te zitten —
   // vet, normaal, cursief — niet in de dekking. Dat is even leesbaar en het
   // blijft op de verhouding staan die hierboven is nagerekend.
+  // Het paneel kleurt zich uit `AppTheme`, en die tokens hangen aan een
+  // statische vlag die zijn verandering niet meldt. Zonder een aansluiting op
+  // de modus bleef het paneel donkergroen op een lichte interface staan tot een
+  // herstart (#780). `appearance_scope_test` bewaakt het mechanisme; dit
+  // bewaakt dat dít oppervlak erop aangesloten blijft — de twee plekken zijn
+  // allebei nodig, want het mechanisme werkt prima zonder gebruiker.
+  test('paneel en chip sluiten aan op de app-modus', () {
+    final bron = File(
+      'lib/widgets/panels/slide_quality_panel.dart',
+    ).readAsStringSync();
+    expect(
+      'AppearanceScope.modeOf('.allMatches(bron).length,
+      2,
+      reason:
+          'zowel SlideQualityPanel als SlideQualitySummaryChip hoort de modus '
+          'te lezen; zonder die regel herbouwen ze niet bij een themawissel',
+    );
+  });
+
   test('de voorgrond van het paneel wordt niet verzwakt met een alpha', () {
     final bron = File(
       'lib/widgets/panels/slide_quality_panel.dart',

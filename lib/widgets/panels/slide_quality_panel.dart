@@ -16,6 +16,7 @@ import '../../state/image_contrast_provider.dart';
 import '../../state/image_privacy_provider.dart';
 import '../../state/privacy_provider.dart';
 import '../../state/settings_provider.dart';
+import '../../theme/appearance_scope.dart';
 import '../privacy_badge.dart' show privacyKatSvg;
 import '../dialogs/slide_quality_details_dialog.dart';
 import 'slide_quality_actions.dart';
@@ -102,6 +103,9 @@ class SlideQualitySummaryChip extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    // Zie het paneel: deze chip kleurt zich uit dezelfde statische tokens en
+    // heeft dus dezelfde aansluiting op de modus nodig (#780).
+    AppearanceScope.modeOf(context);
     final result = combinedSlideQualityResult(ref);
     final (:bg, :fg) = slideQualityColors(result);
     // Alleen het woord "Kwaliteit" met de statuskleur; de telling zit in de
@@ -239,6 +243,12 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    // Sluit aan op de app-modus. Dit paneel kleurt zich uit `AppTheme`, en die
+    // tokens hangen aan een *statische* vlag: zonder deze regel herbouwt het
+    // niet als de gebruiker van thema wisselt, en bleef het donkergroen op een
+    // lichte interface staan tot een herstart (#780). De waarde wordt niet
+    // gebruikt — het gaat om de afhankelijkheid.
+    AppearanceScope.modeOf(context);
     final result = combinedSlideQualityResult(ref);
     final visibleIssues = _filteredIssues(result);
     final (:bg, :fg) = slideQualityColors(result);
