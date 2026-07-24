@@ -73,10 +73,19 @@ jobs:
       # Dat vangt een beschadigde of onderweg gewijzigde download; het is geen
       # bewijs over de uitgever, want het manifest komt van diezelfde uitgever.
       #
-      # De `test -n "$SHA"` is geen plichtpleging. `grep … | sha256sum -c -`
-      # ziet er degelijk uit en slaagt STIL met exit 0 zodra de grep niets
-      # vindt — één hernoemd release-asset en de verificatie is er niet meer,
-      # zonder een enkel rood vinkje. Hier gemeten voordat het erin ging.
+      # De `test -n "$SHA"` blijft staan, maar om een preciezere reden dan hier
+      # eerst stond. Die zin luidde dat `grep … | sha256sum -c -` STIL met exit 0
+      # slaagt zodra de grep niets vindt. Nagemeten op GNU coreutils 9.5 (dit
+      # image draait 9.4, dezelfde codebasis) klopt dat niet: bij een lege
+      # treffer meldt sha256sum "no properly formatted checksum lines found" en
+      # eindigt op 1 — via een grep zonder treffer én met een lege `$SHA` uit
+      # awk. Het vangnet zit er dus al. (#800)
+      #
+      # Wat de regel wél doet, is de faalreden leesbaar houden. Zonder hem
+      # struikelt de stap over de *invoer van sha256sum*, en wie dat leest gaat
+      # de verificatie debuggen terwijl er in werkelijkheid een release-asset
+      # hernoemd is. Eén regel om te voorkomen dat een correcte controle als een
+      # kapotte controle overkomt.
       - name: gitleaks volgens de pin
         run: |
           set -eu
