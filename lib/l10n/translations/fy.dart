@@ -731,6 +731,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
+      'Materiaal út oare systemen binnenhelje. Twa boarnen: presintaasjes út PowerPoint (.pptx), Keynote (.key) en Impress (.odp) wurde in bewurkber deck, en OpenKAT-rapportaazjes (in map mei JSON) wurde ien managementoersjoch. Wêr\'t de OpenKAT-map stiet, stelle jo yn ûnder Yntegraasjes.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
+      'Presintaasjes út PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhelje as bewurkber deck. It ynlêzen fan OpenKAT-rapportaazjemappen kin allinnich yn de desktopferzje.',
   'Alinea': 'Alinea',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Deck opbouwe…',
@@ -900,10 +904,6 @@ const _dutchSourceAddFy = {
   'Nu importeren': 'No ymportearje',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'It oersjoch stiet klear yn in nij ljepblêd.',
-  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
-      'Ymportearjen lêst bestannen fan skiif en is allinnich beskikber yn de desktopferzje.',
-  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
-      'Materiaal út oare systemen binnenhelje. Hjoed is dat OpenKAT: in map mei rapportaazjes (JSON) wurdt ien managementoersjoch — systemen, befinings per earnst, de langst iepensteande punten en de trend oer opienfolgjende mjittings. Wêr\'t de bestannen steane, stelle jo per systeem yn ûnder Yntegraasjes.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Lêst in map mei OpenKAT-rapportaazjes (JSON) en bout dêr ien managementoersjoch fan: systemen, befinings per earnst, de langst iepensteande punten en de trend oer opienfolgjende mjittings. Deselde aksje op in besteand OpenKAT-deck wurket it by en lit jo eigen dia\'s stean.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

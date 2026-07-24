@@ -1788,6 +1788,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
+      'Aducerea de material din alte sisteme. Două surse: prezentările din PowerPoint (.pptx), Keynote (.key) și Impress (.odp) devin un deck editabil, iar rapoartele OpenKAT (un folder cu JSON) devin o singură privire de ansamblu pentru conducere. Unde se află folderul OpenKAT se setează la Integrări.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
+      'Aducerea prezentărilor din PowerPoint (.pptx), Keynote (.key) și Impress (.odp) ca deck editabil. Citirea folderelor cu rapoarte OpenKAT este disponibilă doar în versiunea desktop.',
   'Alinea': 'Paragraf',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Se construiește prezentarea…',
@@ -1956,10 +1960,6 @@ const _dutchSourceAddRo = <String, String>{
   'Nu importeren': 'Importă acum',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Prezentarea generală este pregătită într-o filă nouă.',
-  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
-      'Importul citește fișiere de pe disc și este disponibil doar în versiunea desktop.',
-  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
-      'Aducerea de material din alte sisteme. Astăzi acesta este OpenKAT: un folder cu rapoarte (JSON) devine o singură privire de ansamblu pentru conducere — sisteme, constatări după gravitate, punctele deschise de cel mai mult timp și tendința pe măsurători succesive. Unde se află fișierele se setează pe sistem la Integrări.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Citește un folder cu rapoarte OpenKAT (JSON) și construiește din el o singură privire de ansamblu pentru conducere: sisteme, constatări după gravitate, punctele deschise de cel mai mult timp și tendința pe măsurători succesive. Aceeași acțiune pe o prezentare OpenKAT existentă o actualizează și lasă propriile dumneavoastră diapozitive la locul lor.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

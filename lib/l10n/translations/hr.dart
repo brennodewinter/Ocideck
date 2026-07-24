@@ -1777,6 +1777,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
+      'Unos materijala iz drugih sustava. Dva izvora: prezentacije iz PowerPoint (.pptx), Keynote (.key) i Impress (.odp) postaju uredljiv deck, a izvješća OpenKAT (mapa s JSON-om) postaju jedan upravljački pregled. Gdje se nalazi mapa OpenKAT postavlja se pod Integracije.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
+      'Unos prezentacija iz PowerPoint (.pptx), Keynote (.key) i Impress (.odp) kao uredljiv deck. Čitanje mapa s izvješćima OpenKAT dostupno je samo u stolnoj verziji.',
   'Alinea': 'Odlomak',
   'Audio "{bestand}"': 'Zvuk "{bestand}"',
   'Deck opbouwen…': 'Izrada prezentacije…',
@@ -1946,10 +1950,6 @@ const _dutchSourceAddHr = <String, String>{
   'Nu importeren': 'Uvezi sada',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Pregled je spreman u novoj kartici.',
-  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
-      'Uvoz čita datoteke s diska i dostupan je samo u stolnoj verziji.',
-  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
-      'Unos materijala iz drugih sustava. Danas je to OpenKAT: mapa s izvješćima (JSON) postaje jedan upravljački pregled — sustavi, nalazi po ozbiljnosti, najduže otvorene stavke i trend kroz uzastopna mjerenja. Gdje se datoteke nalaze postavlja se po sustavu pod Integracije.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Čita mapu s OpenKAT izvješćima (JSON) i iz nje gradi jedan upravljački pregled: sustave, nalaze po ozbiljnosti, najduže otvorene stavke i trend kroz uzastopna mjerenja. Ista radnja na postojećoj OpenKAT prezentaciji ažurira je i ostavlja vaše vlastite slajdove na mjestu.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

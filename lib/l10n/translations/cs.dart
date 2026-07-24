@@ -1774,6 +1774,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
+      'Vtažení materiálu z jiných systémů. Dva zdroje: prezentace z PowerPoint (.pptx), Keynote (.key) a Impress (.odp) se stanou upravitelným deckem a hlášení OpenKAT (složka s JSON) se stanou jedním manažerským přehledem. Kde je složka OpenKAT, se nastavuje v Integracích.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
+      'Vtažení prezentací z PowerPoint (.pptx), Keynote (.key) a Impress (.odp) jako upravitelný deck. Čtení složek s hlášeními OpenKAT je dostupné pouze v desktopové verzi.',
   'Alinea': 'Odstavec',
   'Audio "{bestand}"': 'Zvuk "{bestand}"',
   'Deck opbouwen…': 'Sestavování prezentace…',
@@ -1942,10 +1946,6 @@ const _dutchSourceAddCs = <String, String>{
   'Nu importeren': 'Importovat nyní',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Přehled je připraven na nové kartě.',
-  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
-      'Import čte soubory z disku a je dostupný pouze v desktopové verzi.',
-  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
-      'Vtažení materiálu z jiných systémů. Dnes je to OpenKAT: složka s hlášeními (JSON) se stane jedním manažerským přehledem — systémy, zjištění podle závažnosti, nejdéle otevřené body a vývoj napříč po sobě jdoucími měřeními. Kde soubory leží, nastavíte pro každý systém v Integracích.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Přečte složku s hlášeními OpenKAT (JSON) a sestaví z ní jeden manažerský přehled: systémy, zjištění podle závažnosti, nejdéle otevřené body a vývoj napříč po sobě jdoucími měřeními. Stejná akce na stávající prezentaci OpenKAT ji aktualizuje a vaše vlastní snímky ponechá na místě.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

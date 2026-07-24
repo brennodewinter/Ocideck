@@ -111,6 +111,9 @@ extension _SettingsChrome on _SettingsDialogState {
                     // tabblad meteen te verschijnen en niet pas na Opslaan.
                     aiRevealed: _ai.revealsTab,
                     importRevealed: ref.watch(importModuleRevealProvider),
+                    // Integraties is OpenKAT (desktop); op web reveal't de
+                    // module wél, maar zonder OpenKAT-tabblad.
+                    openKatAvailable: supportsLocalProjectFolders,
                   ))
                     _navItem(section, l10n),
                 ],

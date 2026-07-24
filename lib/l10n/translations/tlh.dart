@@ -1746,6 +1746,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
+      'latlh patmeyvo\' De\' qem. cha\' De\' Daq: PowerPoint (.pptx), Keynote (.key), Impress (.odp) je nge\'wI\'mey deck choH laH moj, \'ej OpenKAT ja\'chuqmey (JSON ngaSbogh ngaSwI\') wa\' che\'wI\' Sovmey moj. OpenKAT ngaSwI\' Daq muvmoHmeHDaq wIvlu\'.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
+      'PowerPoint (.pptx), Keynote (.key), Impress (.odp) je nge\'wI\'mey deck choH laH qem. OpenKAT ja\'chuqmey ngaSwI\'mey laDlaH De\'wI\' tIn neH.',
   'Alinea': 'mu\'tlhegh',
   'Audio "{bestand}"': 'wab "{bestand}"',
   'Deck opbouwen…': 'nav chenmoHtaH…',
@@ -1913,10 +1917,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Nu importeren': 'DaH yIkII\'',
   'Het overzicht staat klaar in een nieuw tabblad.':
       '\'echlet chu\'Daq Hoch poStaH.',
-  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
-      'nagh HeHDaq De\'mey laDlaH nge\'wI\'; De\'wI\' tIn neH lo\'lu\'laH.',
-  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
-      'latlh patmeyvo\' De\' qem. DaHjaj OpenKAT \'oH: ja\'chuqmey (JSON) ngaSbogh ngaSwI\' wa\' che\'wI\' Sovmey moj — pat, qay\'ghachmey \'ay\'mey, ram tIqqu\'bogh qay\'ghachmey, \'ej juHmey rap wanI\'mey. De\'mey Daq \'oH muvmoHmeHDaq pat Hoch wIvlu\'.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'OpenKAT ja\'chuqmey (JSON) ngaSbogh ngaSwI\' laD \'ej wa\' che\'wI\' Sovmey chenmoH: pat, qay\'ghachmey \'ay\'mey, ram tIqqu\'bogh qay\'ghachmey, \'ej juHmey rap wanI\'mey. OpenKAT De\'meywI\' tu\'lu\'bogh chu\'moH rap vang, \'ej De\'meylIj ratlhmoH.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

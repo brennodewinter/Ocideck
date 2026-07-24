@@ -64,6 +64,13 @@ class SettingsSearchEntry {
   /// een derde, dan is dít de plek die het eerst pijn doet.
   final bool aiOnly;
 
+  /// Of deze ingang bij het tabblad Integraties hoort. Dat tabblad is OpenKAT
+  /// en bestaat alleen op desktop met de module Importeren onthuld (zie
+  /// [SettingsSection.navItems]). Zelfde reden als [infoSafetyOnly]: een treffer
+  /// naar een tabblad dat er niet is, is erger dan geen treffer — en op web is
+  /// dat tabblad er nooit.
+  final bool integrationsOnly;
+
   const SettingsSearchEntry({
     required this.tab,
     this.label,
@@ -73,6 +80,7 @@ class SettingsSearchEntry {
     this.keywords = const [],
     this.infoSafetyOnly = false,
     this.aiOnly = false,
+    this.integrationsOnly = false,
   });
 
   String resolvedLabel(AppLocalizations l10n) =>
@@ -145,11 +153,17 @@ extension _SettingsSearch on _SettingsDialogState {
     // Uit het formulier, net als de zijbalk: zet je de module aan en zoek je
     // meteen daarna, dan hoort de backend-instelling al vindbaar te zijn.
     final aiRevealed = _ai.revealsTab;
+    // Integraties = OpenKAT, en dat tabblad bestaat alleen op desktop met de
+    // module Importeren onthuld (zie SettingsSection.navItems). Op web valt het
+    // altijd weg, ook al staat de module dan aan voor de presentatie-import.
+    final integrationsRevealed =
+        supportsLocalProjectFolders && ref.watch(importModuleRevealProvider);
 
     final scored = <({int score, SettingsSearchEntry entry})>[];
     for (final entry in kSettingsSearchIndex) {
       if (entry.infoSafetyOnly && !revealed) continue;
       if (entry.aiOnly && !aiRevealed) continue;
+      if (entry.integrationsOnly && !integrationsRevealed) continue;
       var best = -1;
       final haystack = [
         entry.resolvedLabel(l10n),

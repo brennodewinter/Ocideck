@@ -1774,6 +1774,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
+      'Material us andere Systeem inehole. Zwoo Quelle: Präsentatione us PowerPoint (.pptx), Keynote (.key) und Impress (.odp) werde zumene bearbeitbare Deck, und OpenKAT-Bricht (en Ornder mit JSON) werde ei Management-Übersicht. Wo de OpenKAT-Ornder isch, stellsch under Integratione ii.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
+      'Präsentatione us PowerPoint (.pptx), Keynote (.key) und Impress (.odp) as bearbeitbars Deck inehole. S Iiläse vo OpenKAT-Brichtordner gaht nume i de Desktop-Version.',
   'Alinea': 'Absatz',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Deck wird erstellt…',
@@ -1941,10 +1945,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Nu importeren': 'Jetz importiere',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'D’Übersicht isch parat imene nöie Tab.',
-  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
-      'De Import liist Datei vo de Platte und isch nume i de Desktop-Version verfüegbar.',
-  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
-      'Material us andere Systeem inehole. Hüt isch das OpenKAT: en Ornder mit Bricht (JSON) wird ei Management-Übersicht — Systeem, Befund noch Schweregrad, die am längschte offene Pünkt und de Verlauf über ufenandfolgendi Mässige. Wo d Datei sind, stellsch pro Systeem under Integratione ii.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Liist en Ornder mit OpenKAT-Bricht (JSON) und macht drus ei Management-Übersicht: Systeem, Befund noch Schweregrad, die am längschte offene Pünkt und de Verlauf über ufenandfolgendi Mässige. Die gliich Aktion uf ere bestehende OpenKAT-Presentation aktualisiert si und loot Dini eigene Folie stoh.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

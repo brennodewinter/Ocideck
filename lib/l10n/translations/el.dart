@@ -1798,6 +1798,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
+      'Εισαγωγή υλικού από άλλα συστήματα. Δύο πηγές: οι παρουσιάσεις από PowerPoint (.pptx), Keynote (.key) και Impress (.odp) γίνονται ένα επεξεργάσιμο deck και οι αναφορές OpenKAT (ένας φάκελος με JSON) γίνονται μία διοικητική επισκόπηση. Πού βρίσκεται ο φάκελος OpenKAT ορίζεται στις Ενσωματώσεις.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
+      'Εισαγωγή παρουσιάσεων από PowerPoint (.pptx), Keynote (.key) και Impress (.odp) ως επεξεργάσιμο deck. Η ανάγνωση φακέλων αναφορών OpenKAT είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
   'Alinea': 'Παράγραφος',
   'Audio "{bestand}"': 'Ήχος "{bestand}"',
   'Deck opbouwen…': 'Δημιουργία παρουσίασης…',
@@ -1968,10 +1972,6 @@ const _dutchSourceAddEl = <String, String>{
   'Nu importeren': 'Εισαγωγή τώρα',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Η επισκόπηση είναι έτοιμη σε νέα καρτέλα.',
-  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
-      'Η εισαγωγή διαβάζει αρχεία από τον δίσκο και είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
-  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
-      'Εισαγωγή υλικού από άλλα συστήματα. Σήμερα αυτό σημαίνει OpenKAT: ένας φάκελος με αναφορές (JSON) γίνεται μία διοικητική επισκόπηση — συστήματα, ευρήματα ανά σοβαρότητα, τα σημεία που παραμένουν ανοιχτά περισσότερο και η τάση σε διαδοχικές μετρήσεις. Πού βρίσκονται τα αρχεία ορίζεται ανά σύστημα στις Ενσωματώσεις.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Διαβάζει έναν φάκελο με αναφορές OpenKAT (JSON) και δημιουργεί από αυτόν μία διοικητική επισκόπηση: συστήματα, ευρήματα ανά σοβαρότητα, τα σημεία που παραμένουν ανοιχτά περισσότερο και την τάση σε διαδοχικές μετρήσεις. Η ίδια ενέργεια σε υπάρχουσα παρουσίαση OpenKAT την ενημερώνει και αφήνει τις δικές σας διαφάνειες στη θέση τους.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

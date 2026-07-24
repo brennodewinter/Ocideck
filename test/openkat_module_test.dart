@@ -102,13 +102,16 @@ void main() {
   });
 
   group('het tabblad Integraties', () {
-    List<SettingsSection> nav({required bool importRevealed}) =>
-        SettingsSection.navItems(
-          infoSafetyRevealed: false,
-          hasChecklists: false,
-          aiRevealed: false,
-          importRevealed: importRevealed,
-        );
+    List<SettingsSection> nav({
+      required bool importRevealed,
+      bool openKatAvailable = true,
+    }) => SettingsSection.navItems(
+      infoSafetyRevealed: false,
+      hasChecklists: false,
+      aiRevealed: false,
+      importRevealed: importRevealed,
+      openKatAvailable: openKatAvailable,
+    );
 
     test('met de module uit staat het tabblad er niet', () {
       // Zolang OpenKAT de enige integratie is, is een leeg tabblad
@@ -121,6 +124,16 @@ void main() {
 
     test('met de module aan staat het er wel', () {
       expect(nav(importRevealed: true), contains(SettingsSection.integrations));
+    });
+
+    test('op web valt het weg, ook met de module aan', () {
+      // Het tabblad ís OpenKAT, en dat leest een map van schijf — op web
+      // bestaat die bron niet. De module kan daar wél aan staan (voor de
+      // presentatie-import, die op bytes werkt), maar dan zonder Integraties.
+      expect(
+        nav(importRevealed: true, openKatAvailable: false),
+        isNot(contains(SettingsSection.integrations)),
+      );
     });
   });
 

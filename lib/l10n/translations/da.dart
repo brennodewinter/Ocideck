@@ -1770,6 +1770,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
+      'Hente materiale ind fra andre systemer. To kilder: præsentationer fra PowerPoint (.pptx), Keynote (.key) og Impress (.odp) bliver til et redigerbart deck, og OpenKAT-rapporter (en mappe med JSON) bliver til ét ledelsesoverblik. Hvor OpenKAT-mappen ligger, indstilles under Integrationer.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
+      'Præsentationer fra PowerPoint (.pptx), Keynote (.key) og Impress (.odp) hentes ind som et redigerbart deck. Indlæsning af OpenKAT-rapportmapper er kun mulig i skrivebordsversionen.',
   'Alinea': 'Afsnit',
   'Audio "{bestand}"': 'Lyd "{bestand}"',
   'Deck opbouwen…': 'Bygger deck…',
@@ -1939,10 +1943,6 @@ const _dutchSourceAddDa = <String, String>{
   'Nu importeren': 'Importér nu',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Oversigten er klar i en ny fane.',
-  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
-      'Import læser filer fra disken og er kun tilgængelig i skrivebordsversionen.',
-  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
-      'Hente materiale ind fra andre systemer. I dag er det OpenKAT: en mappe med rapporter (JSON) bliver til ét ledelsesoverblik — systemer, fund efter alvorlighed, de længst åbne punkter og udviklingen over på hinanden følgende målinger. Hvor filerne ligger, indstilles pr. system under Integrationer.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Læser en mappe med OpenKAT-rapporter (JSON) og bygger ét ledelsesoverblik ud fra den: systemer, fund efter alvorlighed, de længst åbne punkter og udviklingen over på hinanden følgende målinger. Samme handling på en eksisterende OpenKAT-præsentation opdaterer den og lader dine egne dias blive stående.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

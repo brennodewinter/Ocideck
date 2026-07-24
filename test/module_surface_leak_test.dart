@@ -26,11 +26,13 @@ void main() {
     required bool hasChecklists,
     bool aiRevealed = false,
     bool importRevealed = false,
+    bool openKatAvailable = true,
   }) => SettingsSection.navItems(
     infoSafetyRevealed: revealed,
     hasChecklists: hasChecklists,
     aiRevealed: aiRevealed,
     importRevealed: importRevealed,
+    openKatAvailable: openKatAvailable,
   );
 
   test('met de module uit staat de checklists-tab er niet', () {

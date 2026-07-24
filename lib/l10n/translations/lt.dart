@@ -1778,6 +1778,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
+      'Medžiagos įtraukimas iš kitų sistemų. Du šaltiniai: pristatymai iš PowerPoint (.pptx), Keynote (.key) ir Impress (.odp) tampa redaguojamu deku, o OpenKAT ataskaitos (aplankas su JSON) tampa viena vadovybės apžvalga. Kur yra OpenKAT aplankas, nustatoma skiltyje Integracijos.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
+      'Pristatymų įtraukimas iš PowerPoint (.pptx), Keynote (.key) ir Impress (.odp) kaip redaguojamas dekas. OpenKAT ataskaitų aplankų nuskaitymas galimas tik darbalaukio versijoje.',
   'Alinea': 'Pastraipa',
   'Audio "{bestand}"': 'Garsas "{bestand}"',
   'Deck opbouwen…': 'Kuriama prezentacija…',
@@ -1946,10 +1950,6 @@ const _dutchSourceAddLt = <String, String>{
   'Nu importeren': 'Importuoti dabar',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Apžvalga paruošta naujoje kortelėje.',
-  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
-      'Importas skaito rinkmenas iš disko ir veikia tik darbalaukio versijoje.',
-  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
-      'Medžiagos įtraukimas iš kitų sistemų. Šiandien tai „OpenKAT“: aplankas su ataskaitomis (JSON) tampa viena vadovybės apžvalga — sistemos, radiniai pagal pavojingumą, ilgiausiai neuždaryti punktai ir tendencija per iš eilės einančius matavimus. Kur rinkmenos yra, nustatoma kiekvienai sistemai skiltyje Integracijos.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Perskaito aplanką su „OpenKAT“ ataskaitomis (JSON) ir sukuria iš jų vieną vadovybės apžvalgą: sistemas, radinius pagal pavojingumą, ilgiausiai neuždarytus punktus ir tendenciją per iš eilės einančius matavimus. Tas pats veiksmas su esama „OpenKAT“ pateiktimi ją atnaujina ir palieka jūsų pačių skaidres vietoje.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

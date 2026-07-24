@@ -77,24 +77,29 @@ enum SettingsSection {
   /// module geworden en woont onder Uitbreidingen. Wie hem uit laat, ziet er
   /// niets van — behalve wanneer er al een backend is ingevuld, want ook daar
   /// geldt "tonen zodra de inhoud er is".
-  /// [importRevealed] is dezelfde afweging voor de module Importeren (#772):
-  /// Integraties bestaat alleen wanneer er iets te integreren valt. Het tabblad
-  /// staat of valt met die module — een leeg tabblad "Integraties" is geen
-  /// informatie maar ruis. Een tweede importeur meldt zich in
-  /// `importerContentProviders` en valt vanzelf onder dezelfde poort; hier
-  /// hoeft dan niets bij.
+  /// [importRevealed] is de module Importeren (#772), maar het tabblad
+  /// Integraties is enger dan de module: het tabblad ís OpenKAT, en OpenKAT
+  /// bestaat alleen waar de mapkiezer en schijftoegang bestaan — de desktop
+  /// ([openKatAvailable]). De tweede bron van de module, de presentatie-import,
+  /// werkt óók op web maar heeft niets in te stellen; hij hoort dus geen
+  /// Integraties-tabblad te openen. Een leeg tabblad "Integraties" is geen
+  /// informatie maar ruis. Krijgt een importeur later wél instellingen op web,
+  /// dan is dít de plek die het eerst pijn doet.
   static List<SettingsSection> navItems({
     required bool infoSafetyRevealed,
     required bool hasChecklists,
     required bool aiRevealed,
     required bool importRevealed,
+    required bool openKatAvailable,
   }) => values.where((s) {
     if (s == SettingsSection.about) return false;
     if (s == SettingsSection.checklists) {
       return infoSafetyRevealed || hasChecklists;
     }
     if (s == SettingsSection.ai) return aiRevealed;
-    if (s == SettingsSection.integrations) return importRevealed;
+    if (s == SettingsSection.integrations) {
+      return importRevealed && openKatAvailable;
+    }
     return true;
   }).toList();
 }

@@ -730,6 +730,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
+      'Trese material for di otro sistemanan. Dos fuente: presentashonnan for di PowerPoint (.pptx), Keynote (.key) i Impress (.odp) ta bira un deck editabel, i rapòrtnan OpenKAT (un karpeta ku JSON) ta bira un solo bista di gerensia. Unda e karpeta OpenKAT ta, bo ta konfigurá bou di Integrashonnan.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
+      'Trese presentashonnan for di PowerPoint (.pptx), Keynote (.key) i Impress (.odp) komo deck editabel. Lesa karpetanan di rapòrt OpenKAT ta posibel solamente den e vershon di desktop.',
   'Alinea': 'Paragraf',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Ta konstruí e deck…',
@@ -900,10 +904,6 @@ const _dutchSourceAddPap = {
   'Nu importeren': 'Importá awor',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'E resúmen ta kla den un tab nobo.',
-  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
-      'Importashon ta lesa dokumentonan for di disko i ta disponibel solamente den e vershon di desktop.',
-  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
-      'Trese material for di otro sistemanan. Awe ta OpenKAT: un karpeta ku rapòrtnan (JSON) ta bira un solo bista di gerensia — sistemanan, hayasgonan pa gravedat, e puntonan ku ta habrí mas largu i e tendensia riba midimentunan konsekutivo. Unda e dokumentonan ta, bo ta konfigurá pa sistema bou di Integrashonnan.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Ta lesa un karpeta ku rapòrtnan di OpenKAT (JSON) i ta traha un solo bista di gerensia: sistemanan, hayasgonan pa gravedat, e puntonan ku ta habrí mas largu i e tendensia riba midimentunan konsekutivo. E mesun akshon riba un presentashon OpenKAT eksistente ta aktualis\'é i ta laga bo mes slaidnan keda.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

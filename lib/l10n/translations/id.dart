@@ -1771,6 +1771,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
+      'Membawa masuk materi dari sistem lain. Dua sumber: presentasi dari PowerPoint (.pptx), Keynote (.key), dan Impress (.odp) menjadi deck yang dapat diedit, dan laporan OpenKAT (folder berisi JSON) menjadi satu ikhtisar manajemen. Lokasi folder OpenKAT diatur di Integrasi.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
+      'Membawa masuk presentasi dari PowerPoint (.pptx), Keynote (.key), dan Impress (.odp) sebagai deck yang dapat diedit. Membaca folder laporan OpenKAT hanya tersedia di versi desktop.',
   'Alinea': 'Paragraf',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Membangun deck…',
@@ -1939,10 +1943,6 @@ const _dutchSourceAddId = <String, String>{
   'Nu importeren': 'Impor sekarang',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Ikhtisar sudah siap di tab baru.',
-  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
-      'Impor membaca berkas dari disk dan hanya tersedia di versi desktop.',
-  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
-      'Membawa masuk materi dari sistem lain. Hari ini itu berarti OpenKAT: folder berisi laporan (JSON) menjadi satu ikhtisar manajemen — sistem, temuan menurut tingkat keparahan, butir yang paling lama terbuka, dan tren pada pengukuran berturut-turut. Lokasi berkas diatur per sistem di Integrasi.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Membaca folder berisi laporan OpenKAT (JSON) dan menyusun satu ikhtisar manajemen darinya: sistem, temuan menurut tingkat keparahan, butir yang paling lama terbuka, dan tren pada pengukuran berturut-turut. Tindakan yang sama pada dek OpenKAT yang ada akan memperbaruinya dan membiarkan salindia Anda sendiri tetap ada.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
