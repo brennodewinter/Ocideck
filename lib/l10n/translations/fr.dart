@@ -733,6 +733,37 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Presentaties importeren…': 'Importer des présentations…',
+  'Presentaties importeren': 'Importer des présentations',
+  'Presentatie importeren': 'Importer une présentation',
+  'Presentatie kiezen': 'Choisir une présentation',
+  'Importeren mislukt.': 'Échec de l’importation.',
+  'Presentatie geïmporteerd.': 'Présentation importée.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Présentation importée ; vérifiez les points d’attention.',
+  'Presentaties geïmporteerd.': 'Présentations importées.',
+  'Niet meer tonen': 'Ne plus afficher',
+  'met verlies': 'avec perte',
+  'dia’s': 'diapositives',
+  'dia’s vragen aandacht': 'diapositives demandent attention',
+  'Doelmap': 'Dossier de destination',
+  'Nog geen doelmap gekozen': 'Aucun dossier de destination choisi',
+  'Uit de rij halen': 'Retirer de la file',
+  'Stoppen': 'Arrêter',
+  'Bezig met importeren…': 'Importation en cours…',
+  'Resultaat': 'Résultat',
+  'Opgeslagen in': 'Enregistré dans',
+  'geslaagd': 'réussies',
+  'mislukt': 'échouées',
+  'niet meer aan de beurt gekomen': 'non traitées',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'L’importation se fait au mieux et n’est pas une copie à l’identique : OciDeck a un modèle de diapositive plus simple que PowerPoint. Ce qui ne rentre pas se retrouve sur une note « non repris » ; vérifiez le résultat ensuite.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Astuce : conservez les présentations importées dans un dossier distinct. La qualité varie selon la source, et le matériel importé reste ainsi séparé de votre propre travail.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Chaque fichier est converti séparément et enregistré comme présentation distincte dans le dossier de destination. Si l’un échoue, la file continue.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Importer plusieurs présentations à la fois les écrit sous forme de fichiers dans un dossier ; la version navigateur ne le permet pas.',
   'Nu importeren': 'Importer maintenant',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'La vue d’ensemble est prête dans un nouvel onglet.',

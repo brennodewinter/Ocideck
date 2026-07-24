@@ -1777,6 +1777,37 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Presentaties importeren…': 'Präsentatione importiere…',
+  'Presentaties importeren': 'Präsentatione importiere',
+  'Presentatie importeren': 'Präsentation importiere',
+  'Presentatie kiezen': 'Präsentation uswähle',
+  'Importeren mislukt.': 'Import isch fehlgschlage.',
+  'Presentatie geïmporteerd.': 'Präsentation importiert.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Präsentation importiert; lueg d Hiiwiis aa.',
+  'Presentaties geïmporteerd.': 'Präsentatione importiert.',
+  'Niet meer tonen': 'Nüme azeige',
+  'met verlies': 'mit Verlust',
+  'dia’s': 'Slides',
+  'dia’s vragen aandacht': 'Slides bruuche Uufmerksamkeit',
+  'Doelmap': 'Zielordner',
+  'Nog geen doelmap gekozen': 'No kein Zielordner gwählt',
+  'Uit de rij halen': 'Us de Warteschlange neh',
+  'Stoppen': 'Stoppe',
+  'Bezig met importeren…': 'Am Importiere…',
+  'Resultaat': 'Ergebnis',
+  'Opgeslagen in': 'Gspeicheret i',
+  'geslaagd': 'erfolgriich',
+  'mislukt': 'fehlgschlage',
+  'niet meer aan de beurt gekomen': 'nüme dra cho',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'De Import isch Best-Effort und kei Eis-zu-eis-Kopie: OciDeck het es eifachers Folie-Modäll als PowerPoint. Was nöd passt, chunnt uf e Notiz „nöd übernoh“; lueg s Ergebnis nachher aa.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Tipp: Bhalt importierti Präsentatione in eme eigene Ordner. D Qualität isch je nach Quelle andersch, und so bliibt importiert Material vo dinere eigene Arbet trennt.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Jedi Datei wird einzeln umgwandlet und as eigeni Präsentation im Zielordner gspeicheret. Wenn eini schief gaht, lauft d Warteschlange eifach witer.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Mehreri Präsentatione uf eimal importiere schriibt si as Dateie in en Ordner; i de Browser-Version gaht das nöd.',
   'Nu importeren': 'Jetz importiere',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'D’Übersicht isch parat imene nöie Tab.',

@@ -734,6 +734,37 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Presentaties importeren…': 'Presintaasjes ymportearje…',
+  'Presentaties importeren': 'Presintaasjes ymportearje',
+  'Presentatie importeren': 'Presintaasje ymportearje',
+  'Presentatie kiezen': 'Presintaasje kieze',
+  'Importeren mislukt.': 'Ymportearjen mislearre.',
+  'Presentatie geïmporteerd.': 'Presintaasje ymportearre.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Presintaasje ymportearre; kontrolearje de oandachtspunten.',
+  'Presentaties geïmporteerd.': 'Presintaasjes ymportearre.',
+  'Niet meer tonen': 'Net mear sjen litte',
+  'met verlies': 'mei ferlies',
+  'dia’s': 'dia\'s',
+  'dia’s vragen aandacht': 'dia\'s freegje omtinken',
+  'Doelmap': 'Doelmap',
+  'Nog geen doelmap gekozen': 'Noch gjin doelmap keazen',
+  'Uit de rij halen': 'Út de rige helje',
+  'Stoppen': 'Stopje',
+  'Bezig met importeren…': 'Dwaande mei ymportearjen…',
+  'Resultaat': 'Resultaat',
+  'Opgeslagen in': 'Bewarre yn',
+  'geslaagd': 'slagge',
+  'mislukt': 'mislearre',
+  'niet meer aan de beurt gekomen': 'net mear oan bar west',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Ymportearjen is best-effort en gjin ien-op-ien-kopy: OciDeck hat in ienfâldiger diamodel as PowerPoint. Wat net past, komt op in “net oernommen”-notysje te stean; kontrolearje it resultaat nei ôfrin.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Tip: bewarje ymportearre presintaasjes yn in aparte map. De kwaliteit ferskilt per boarne, en sa bliuwt ymportearre materiaal skieden fan jo eigen wurk.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Elk bestân wurdt apart omset en as eigen presintaasje yn de doelmap bewarre. Giet der ien mis, dan rint de rige gewoan troch.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Meardere presintaasjes tagelyk ymportearje skriuwt se as bestannen nei in map; yn de browserferzje kin dat net.',
   'Nu importeren': 'No ymportearje',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'It oersjoch stiet klear yn in nij ljepblêd.',

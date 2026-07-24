@@ -1776,6 +1776,37 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Presentaties importeren…': 'Uvozi predstavitve…',
+  'Presentaties importeren': 'Uvozi predstavitve',
+  'Presentatie importeren': 'Uvozi predstavitev',
+  'Presentatie kiezen': 'Izberi predstavitev',
+  'Importeren mislukt.': 'Uvoz ni uspel.',
+  'Presentatie geïmporteerd.': 'Predstavitev uvožena.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Predstavitev uvožena; preverite točke, ki potrebujejo pozornost.',
+  'Presentaties geïmporteerd.': 'Predstavitve uvožene.',
+  'Niet meer tonen': 'Ne prikazuj več',
+  'met verlies': 'z izgubo',
+  'dia’s': 'diapozitivov',
+  'dia’s vragen aandacht': 'diapozitivov potrebuje pozornost',
+  'Doelmap': 'Ciljna mapa',
+  'Nog geen doelmap gekozen': 'Ciljna mapa še ni izbrana',
+  'Uit de rij halen': 'Odstrani iz vrste',
+  'Stoppen': 'Ustavi',
+  'Bezig met importeren…': 'Uvažanje…',
+  'Resultaat': 'Rezultat',
+  'Opgeslagen in': 'Shranjeno v',
+  'geslaagd': 'uspešnih',
+  'mislukt': 'neuspešnih',
+  'niet meer aan de beurt gekomen': 'ni prišlo na vrsto',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Uvoz poteka po najboljših močeh in ni kopija ena proti ena: OciDeck ima preprostejši model diapozitiva kot PowerPoint. Kar ne gre noter, konča na zapisku »ni prevzeto«; rezultat po koncu preverite.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Nasvet: uvožene predstavitve hranite v ločeni mapi. Kakovost se razlikuje glede na vir, tako pa uvoženo gradivo ostane ločeno od vašega dela.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Vsaka datoteka se pretvori posebej in shrani kot lastna predstavitev v ciljni mapi. Če ena spodleti, se vrsta preprosto nadaljuje.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Uvoz več predstavitev hkrati jih zapiše kot datoteke v mapo; v brskalniški različici to ni mogoče.',
   'Nu importeren': 'Uvozi zdaj',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Pregled je pripravljen v novem zavihku.',

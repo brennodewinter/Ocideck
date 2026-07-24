@@ -1791,6 +1791,37 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Presentaties importeren…': 'Імпортувати презентації…',
+  'Presentaties importeren': 'Імпортувати презентації',
+  'Presentatie importeren': 'Імпортувати презентацію',
+  'Presentatie kiezen': 'Вибрати презентацію',
+  'Importeren mislukt.': 'Не вдалося імпортувати.',
+  'Presentatie geïmporteerd.': 'Презентацію імпортовано.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Презентацію імпортовано; перевірте зауваження.',
+  'Presentaties geïmporteerd.': 'Презентації імпортовано.',
+  'Niet meer tonen': 'Більше не показувати',
+  'met verlies': 'із втратами',
+  'dia’s': 'слайдів',
+  'dia’s vragen aandacht': 'слайдів потребують уваги',
+  'Doelmap': 'Цільова тека',
+  'Nog geen doelmap gekozen': 'Цільову теку ще не вибрано',
+  'Uit de rij halen': 'Прибрати з черги',
+  'Stoppen': 'Зупинити',
+  'Bezig met importeren…': 'Імпортування…',
+  'Resultaat': 'Результат',
+  'Opgeslagen in': 'Збережено в',
+  'geslaagd': 'успішно',
+  'mislukt': 'з помилкою',
+  'niet meer aan de beurt gekomen': 'не дійшла черга',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Імпорт виконується за можливістю і не є копією один в один: OciDeck має простішу модель слайда, ніж PowerPoint. Те, що не вміщується, потрапляє в нотатку «не перенесено»; перевірте результат після завершення.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Порада: зберігайте імпортовані презентації в окремій теці. Якість залежить від джерела, і так імпортований матеріал лишається відокремленим від вашої власної роботи.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Кожен файл перетворюється окремо і зберігається як власна презентація в цільовій теці. Якщо один не вдасться, черга просто продовжується.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Імпорт кількох презентацій одночасно записує їх файлами в теку; у браузерній версії це неможливо.',
   'Nu importeren': 'Імпортувати зараз',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Огляд готовий у новій вкладці.',

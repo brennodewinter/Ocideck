@@ -1796,6 +1796,38 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Presentaties importeren…': 'Importa preżentazzjonijiet…',
+  'Presentaties importeren': 'Importa preżentazzjonijiet',
+  'Presentatie importeren': 'Importa preżentazzjoni',
+  'Presentatie kiezen': 'Agħżel preżentazzjoni',
+  'Importeren mislukt.': 'L-importazzjoni falliet.',
+  'Presentatie geïmporteerd.': 'Il-preżentazzjoni ġiet importata.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Il-preżentazzjoni ġiet importata; iċċekkja l-punti li jeħtieġu attenzjoni.',
+  'Presentaties geïmporteerd.': 'Il-preżentazzjonijiet ġew importati.',
+  'Niet meer tonen': 'Turix aktar',
+  'met verlies': 'b\'telf',
+  'dia’s': 'slides',
+  'dia’s vragen aandacht': 'slides jeħtieġu attenzjoni',
+  'Doelmap': 'Folder ta\' destinazzjoni',
+  'Nog geen doelmap gekozen':
+      'Għadu ma ntgħażel l-ebda folder ta\' destinazzjoni',
+  'Uit de rij halen': 'Neħħi mill-kju',
+  'Stoppen': 'Waqqaf',
+  'Bezig met importeren…': 'Qed jiġi importat…',
+  'Resultaat': 'Riżultat',
+  'Opgeslagen in': 'Maħżun fi',
+  'geslaagd': 'irnexxew',
+  'mislukt': 'fallew',
+  'niet meer aan de beurt gekomen': 'ma waslux għal darbhom',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'L-importazzjoni ssir bl-aħjar mod possibbli u mhijiex kopja waħda għal waħda: OciDeck għandu mudell ta\' slide aktar sempliċi minn PowerPoint. Dak li ma jidħolx jispiċċa fuq nota “ma ġiex trasferit”; iċċekkja r-riżultat wara.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Parir: żomm il-preżentazzjonijiet importati f\'folder separat. Il-kwalità tvarja skont is-sors, u b\'hekk il-materjal importat jibqa\' separat mix-xogħol tiegħek stess.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Kull fajl jiġi kkonvertit separatament u jinħażen bħala preżentazzjoni għalih fil-folder ta\' destinazzjoni. Jekk wieħed ifalli, il-kju sempliċement ikompli.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'L-importazzjoni ta\' diversi preżentazzjonijiet f\'daqqa tiktibhom bħala fajls f\'folder; fil-verżjoni tal-browser dan mhuwiex possibbli.',
   'Nu importeren': 'Importa issa',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Il-ħarsa ġenerali hija lesta f’tab ġdid.',

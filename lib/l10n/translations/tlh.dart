@@ -1749,6 +1749,37 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Presentaties importeren…': 'presentationmey yIkII\'…',
+  'Presentaties importeren': 'presentationmey yIkII\'',
+  'Presentatie importeren': 'presentation yIkII\'',
+  'Presentatie kiezen': 'presentation yIwIv',
+  'Importeren mislukt.': 'kII\'laHbe\'.',
+  'Presentatie geïmporteerd.': 'presentation kII\'lu\'pu\'.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'presentation kII\'lu\'pu\'; buS\'a\'mey yInuD.',
+  'Presentaties geïmporteerd.': 'presentationmey kII\'lu\'pu\'.',
+  'Niet meer tonen': 'yIcha\'qa\'Qo\'',
+  'met verlies': 'chIllu\'pu\'',
+  'dia’s': 'slidemey',
+  'dia’s vragen aandacht': 'slidemey buSnISlu\'',
+  'Doelmap': 'ghoSmeH Daq',
+  'Nog geen doelmap gekozen': 'ghoSmeH Daq wIvlu\'be\'',
+  'Uit de rij halen': 'tlheghvo\' yIteq',
+  'Stoppen': 'yImev',
+  'Bezig met importeren…': 'kII\'taH…',
+  'Resultaat': 'wanI\'',
+  'Opgeslagen in': 'polmeH Daq',
+  'geslaagd': 'Qapla\'',
+  'mislukt': 'lujpu\'',
+  'niet meer aan de beurt gekomen': 'vangbe\'lu\'pu\'',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'kII\'ghach nID neH; wa\' \'ej wa\' velqa\' \'oHbe\'. OciDeck slide ngoq ngeD law\' PowerPoint slide ngoq ngeD puS. luchuqbe\'bogh Doch “tlhapbe\'lu\'” QInDaq lanlu\'; Qav De\' yInuD.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'qeS: kII\'lu\'pu\'bogh presentationmey Daq pIm yIpol. Segh pIm nIvghach, vaj kII\'lu\'pu\'bogh De\' Qu\'lIjvo\' pIm.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Hoch De\'mey pIm choHlu\' \'ej ghoSmeH DaqDaq presentation pIm pollu\'. wa\' luj chugh, tlhegh taH.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'wa\' poH presentationmey law\' kII\'lu\'chugh, DaqDaq De\'mey ghItlhlu\'; browser version vam ruchlaHbe\'.',
   'Nu importeren': 'DaH yIkII\'',
   'Het overzicht staat klaar in een nieuw tabblad.':
       '\'echlet chu\'Daq Hoch poStaH.',

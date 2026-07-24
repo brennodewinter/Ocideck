@@ -1774,6 +1774,37 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Presentaties importeren…': 'Impor presentasi…',
+  'Presentaties importeren': 'Impor presentasi',
+  'Presentatie importeren': 'Impor satu presentasi',
+  'Presentatie kiezen': 'Pilih presentasi',
+  'Importeren mislukt.': 'Impor gagal.',
+  'Presentatie geïmporteerd.': 'Presentasi diimpor.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Presentasi diimpor; periksa hal-hal yang perlu diperhatikan.',
+  'Presentaties geïmporteerd.': 'Semua presentasi diimpor.',
+  'Niet meer tonen': 'Jangan tampilkan lagi',
+  'met verlies': 'dengan kehilangan',
+  'dia’s': 'slide',
+  'dia’s vragen aandacht': 'slide perlu diperhatikan',
+  'Doelmap': 'Folder tujuan',
+  'Nog geen doelmap gekozen': 'Belum ada folder tujuan yang dipilih',
+  'Uit de rij halen': 'Keluarkan dari antrean',
+  'Stoppen': 'Berhenti',
+  'Bezig met importeren…': 'Sedang mengimpor…',
+  'Resultaat': 'Hasil',
+  'Opgeslagen in': 'Disimpan di',
+  'geslaagd': 'berhasil',
+  'mislukt': 'gagal',
+  'niet meer aan de beurt gekomen': 'tidak sempat diproses',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Impor bersifat sebaik mungkin dan bukan salinan satu-ke-satu: OciDeck memiliki model slide yang lebih sederhana daripada PowerPoint. Yang tidak muat akan masuk ke catatan “tidak disalin”; periksa hasilnya setelah selesai.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Tip: simpan presentasi hasil impor dalam folder terpisah. Kualitasnya berbeda-beda per sumber, sehingga materi hasil impor tetap terpisah dari karya Anda sendiri.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Setiap berkas dikonversi secara terpisah dan disimpan sebagai presentasi tersendiri di folder tujuan. Jika satu gagal, antrean tetap berjalan.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Mengimpor beberapa presentasi sekaligus menulisnya sebagai berkas ke sebuah folder; versi peramban tidak dapat melakukannya.',
   'Nu importeren': 'Impor sekarang',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Ikhtisar sudah siap di tab baru.',

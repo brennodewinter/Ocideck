@@ -1774,6 +1774,37 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Presentaties importeren…': 'Tuo esityksiä…',
+  'Presentaties importeren': 'Tuo esityksiä',
+  'Presentatie importeren': 'Tuo esitys',
+  'Presentatie kiezen': 'Valitse esitys',
+  'Importeren mislukt.': 'Tuonti epäonnistui.',
+  'Presentatie geïmporteerd.': 'Esitys tuotu.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Esitys tuotu; tarkista huomiokohdat.',
+  'Presentaties geïmporteerd.': 'Esitykset tuotu.',
+  'Niet meer tonen': 'Älä näytä uudelleen',
+  'met verlies': 'häviöllä',
+  'dia’s': 'diaa',
+  'dia’s vragen aandacht': 'diaa vaatii huomiota',
+  'Doelmap': 'Kohdekansio',
+  'Nog geen doelmap gekozen': 'Kohdekansiota ei ole vielä valittu',
+  'Uit de rij halen': 'Poista jonosta',
+  'Stoppen': 'Pysäytä',
+  'Bezig met importeren…': 'Tuodaan…',
+  'Resultaat': 'Tulos',
+  'Opgeslagen in': 'Tallennettu kansioon',
+  'geslaagd': 'onnistui',
+  'mislukt': 'epäonnistui',
+  'niet meer aan de beurt gekomen': 'ei ehtinyt vuoroon',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Tuonti tehdään parhaan mukaan eikä se ole yksi yhteen -kopio: OciDeckillä on yksinkertaisempi diamalli kuin PowerPointilla. Se mikä ei mahdu, päätyy ”ei siirretty” -muistiinpanoon; tarkista tulos jälkeenpäin.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Vinkki: säilytä tuodut esitykset omassa kansiossaan. Laatu vaihtelee lähteen mukaan, ja näin tuotu aineisto pysyy erillään omasta työstäsi.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Jokainen tiedosto muunnetaan erikseen ja tallennetaan omana esityksenään kohdekansioon. Jos yksi epäonnistuu, jono jatkuu silti.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Useamman esityksen tuonti kerralla kirjoittaa ne tiedostoina kansioon; selainversiossa se ei onnistu.',
   'Nu importeren': 'Tuo nyt',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Yhteenveto on valmiina uudessa välilehdessä.',

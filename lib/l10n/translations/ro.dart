@@ -1791,6 +1791,37 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Presentaties importeren…': 'Importă prezentări…',
+  'Presentaties importeren': 'Importă prezentări',
+  'Presentatie importeren': 'Importă prezentare',
+  'Presentatie kiezen': 'Alege prezentarea',
+  'Importeren mislukt.': 'Importul a eșuat.',
+  'Presentatie geïmporteerd.': 'Prezentare importată.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Prezentare importată; verifică punctele de atenție.',
+  'Presentaties geïmporteerd.': 'Prezentări importate.',
+  'Niet meer tonen': 'Nu mai afișa',
+  'met verlies': 'cu pierderi',
+  'dia’s': 'slide-uri',
+  'dia’s vragen aandacht': 'slide-uri necesită atenție',
+  'Doelmap': 'Folder de destinație',
+  'Nog geen doelmap gekozen': 'Niciun folder de destinație ales',
+  'Uit de rij halen': 'Scoate din coadă',
+  'Stoppen': 'Oprește',
+  'Bezig met importeren…': 'Se importă…',
+  'Resultaat': 'Rezultat',
+  'Opgeslagen in': 'Salvat în',
+  'geslaagd': 'reușite',
+  'mislukt': 'eșuate',
+  'niet meer aan de beurt gekomen': 'neajunse la rând',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Importul este best-effort și nu o copie unu la unu: OciDeck are un model de slide mai simplu decât PowerPoint. Ce nu încape ajunge pe o notă „nepreluat”; verifică rezultatul la final.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Sfat: păstrează prezentările importate într-un folder separat. Calitatea diferă de la sursă la sursă, iar astfel materialul importat rămâne separat de munca ta.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Fiecare fișier este convertit separat și salvat ca prezentare proprie în folderul de destinație. Dacă unul eșuează, coada continuă pur și simplu.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Importul mai multor prezentări deodată le scrie ca fișiere într-un folder; versiunea din browser nu poate face asta.',
   'Nu importeren': 'Importă acum',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Prezentarea generală este pregătită într-o filă nouă.',

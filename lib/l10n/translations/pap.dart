@@ -733,6 +733,37 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Presentaties importeren…': 'Importá presentashonnan…',
+  'Presentaties importeren': 'Importá presentashonnan',
+  'Presentatie importeren': 'Importá presentashon',
+  'Presentatie kiezen': 'Skohe presentashon',
+  'Importeren mislukt.': 'Importashon a faya.',
+  'Presentatie geïmporteerd.': 'Presentashon importá.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Presentashon importá; kontrolá e puntonan di atenshon.',
+  'Presentaties geïmporteerd.': 'Presentashonnan importá.',
+  'Niet meer tonen': 'No mustra mas',
+  'met verlies': 'ku pèrdida',
+  'dia’s': 'láminanan',
+  'dia’s vragen aandacht': 'láminanan ta pidi atenshon',
+  'Doelmap': 'Karpeta di destino',
+  'Nog geen doelmap gekozen': 'Ainda no a skohe karpeta di destino',
+  'Uit de rij halen': 'Kita for di e fila',
+  'Stoppen': 'Stòp',
+  'Bezig met importeren…': 'Ta importá…',
+  'Resultaat': 'Resultado',
+  'Opgeslagen in': 'Wardá den',
+  'geslaagd': 'a logra',
+  'mislukt': 'a faya',
+  'niet meer aan de beurt gekomen': 'no a yega na turno',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Importashon ta best-effort i no ta un kopia un-pa-un: OciDeck tin un modelo di lámina mas simpel ku PowerPoint. Loke no ta pas, ta bai riba un nota “no a wòrdu tumá over”; kontrolá e resultado despues.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Konseho: warda presentashonnan importá den un karpeta aparte. E kalidat ta varia pa fuente, i asina material importá ta keda separá for di bo mes trabou.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Kada archivo ta wòrdu konvertí apart i wardá komo su mes presentashon den e karpeta di destino. Si un faya, e fila ta sigui.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Importá vários presentashon na mes momento ta skirbi nan komo archivo den un karpeta; den e vershon di browser esaki no ta posibel.',
   'Nu importeren': 'Importá awor',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'E resúmen ta kla den un tab nobo.',

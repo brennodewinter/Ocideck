@@ -733,6 +733,37 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Presentaties importeren…': 'Präsentationen importieren…',
+  'Presentaties importeren': 'Präsentationen importieren',
+  'Presentatie importeren': 'Präsentation importieren',
+  'Presentatie kiezen': 'Präsentation wählen',
+  'Importeren mislukt.': 'Import fehlgeschlagen.',
+  'Presentatie geïmporteerd.': 'Präsentation importiert.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Präsentation importiert; prüfen Sie die Hinweise.',
+  'Presentaties geïmporteerd.': 'Präsentationen importiert.',
+  'Niet meer tonen': 'Nicht mehr anzeigen',
+  'met verlies': 'mit Verlust',
+  'dia’s': 'Folien',
+  'dia’s vragen aandacht': 'Folien brauchen Aufmerksamkeit',
+  'Doelmap': 'Zielordner',
+  'Nog geen doelmap gekozen': 'Noch kein Zielordner gewählt',
+  'Uit de rij halen': 'Aus der Warteschlange nehmen',
+  'Stoppen': 'Anhalten',
+  'Bezig met importeren…': 'Import läuft…',
+  'Resultaat': 'Ergebnis',
+  'Opgeslagen in': 'Gespeichert in',
+  'geslaagd': 'erfolgreich',
+  'mislukt': 'fehlgeschlagen',
+  'niet meer aan de beurt gekomen': 'nicht mehr an der Reihe',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Der Import ist Best-Effort und keine Eins-zu-eins-Kopie: OciDeck hat ein einfacheres Folienmodell als PowerPoint. Was nicht passt, landet auf einer Notiz „nicht übernommen“; prüfen Sie das Ergebnis danach.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Tipp: Bewahren Sie importierte Präsentationen in einem eigenen Ordner auf. Die Qualität hängt von der Quelle ab, und so bleibt importiertes Material von Ihrer eigenen Arbeit getrennt.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Jede Datei wird einzeln umgewandelt und als eigene Präsentation im Zielordner gespeichert. Geht eine schief, läuft die Warteschlange einfach weiter.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Mehrere Präsentationen auf einmal zu importieren schreibt sie als Dateien in einen Ordner; in der Browserversion geht das nicht.',
   'Nu importeren': 'Jetzt importieren',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Die Übersicht liegt in einem neuen Tab bereit.',

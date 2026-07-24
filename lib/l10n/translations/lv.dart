@@ -1773,6 +1773,37 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Presentaties importeren…': 'Importēt prezentācijas…',
+  'Presentaties importeren': 'Importēt prezentācijas',
+  'Presentatie importeren': 'Importēt prezentāciju',
+  'Presentatie kiezen': 'Izvēlēties prezentāciju',
+  'Importeren mislukt.': 'Imports neizdevās.',
+  'Presentatie geïmporteerd.': 'Prezentācija importēta.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Prezentācija importēta; pārbaudiet uzmanības punktus.',
+  'Presentaties geïmporteerd.': 'Prezentācijas importētas.',
+  'Niet meer tonen': 'Vairs nerādīt',
+  'met verlies': 'ar zudumiem',
+  'dia’s': 'slaidi',
+  'dia’s vragen aandacht': 'slaidiem vajadzīga uzmanība',
+  'Doelmap': 'Mērķa mape',
+  'Nog geen doelmap gekozen': 'Mērķa mape vēl nav izvēlēta',
+  'Uit de rij halen': 'Izņemt no rindas',
+  'Stoppen': 'Apturēt',
+  'Bezig met importeren…': 'Notiek imports…',
+  'Resultaat': 'Rezultāts',
+  'Opgeslagen in': 'Saglabāts mapē',
+  'geslaagd': 'izdevās',
+  'mislukt': 'neizdevās',
+  'niet meer aan de beurt gekomen': 'nepaguva',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Imports notiek pēc iespējas labāk un nav kopija viens pret vienu: OciDeck slaida modelis ir vienkāršāks nekā PowerPoint. Kas neietilpst, nonāk piezīmē “nav pārņemts”; pēc tam pārbaudiet rezultātu.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Padoms: glabājiet importētās prezentācijas atsevišķā mapē. Kvalitāte atšķiras atkarībā no avota, un tā importētais materiāls paliek nošķirts no jūsu darba.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Katrs fails tiek pārveidots atsevišķi un saglabāts kā sava prezentācija mērķa mapē. Ja kāds neizdodas, rinda vienkārši turpinās.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Vairāku prezentāciju importēšana vienlaikus tās ieraksta kā failus mapē; pārlūka versijā tas nav iespējams.',
   'Nu importeren': 'Importēt tagad',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Pārskats ir sagatavots jaunā cilnē.',

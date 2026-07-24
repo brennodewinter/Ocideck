@@ -1773,6 +1773,37 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Presentaties importeren…': 'Importera presentationer…',
+  'Presentaties importeren': 'Importera presentationer',
+  'Presentatie importeren': 'Importera presentation',
+  'Presentatie kiezen': 'Välj presentation',
+  'Importeren mislukt.': 'Importen misslyckades.',
+  'Presentatie geïmporteerd.': 'Presentationen importerad.',
+  'Presentatie geïmporteerd; controleer de aandachtspunten.':
+      'Presentationen importerad; kontrollera anmärkningarna.',
+  'Presentaties geïmporteerd.': 'Presentationerna importerade.',
+  'Niet meer tonen': 'Visa inte igen',
+  'met verlies': 'med förlust',
+  'dia’s': 'bilder',
+  'dia’s vragen aandacht': 'bilder behöver uppmärksamhet',
+  'Doelmap': 'Målmapp',
+  'Nog geen doelmap gekozen': 'Ingen målmapp vald ännu',
+  'Uit de rij halen': 'Ta bort ur kön',
+  'Stoppen': 'Stoppa',
+  'Bezig met importeren…': 'Importerar…',
+  'Resultaat': 'Resultat',
+  'Opgeslagen in': 'Sparat i',
+  'geslaagd': 'lyckades',
+  'mislukt': 'misslyckades',
+  'niet meer aan de beurt gekomen': 'kom inte i tur',
+  'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
+      'Importen görs så gott det går och är ingen ett-till-ett-kopia: OciDeck har en enklare bildmodell än PowerPoint. Det som inte får plats hamnar på en anteckning ”inte överfört”; kontrollera resultatet efteråt.',
+  'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
+      'Tips: spara importerade presentationer i en egen mapp. Kvaliteten varierar mellan källor, och så hålls importerat material skilt från ditt eget arbete.',
+  'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
+      'Varje fil konverteras separat och sparas som en egen presentation i målmappen. Om en går fel fortsätter kön ändå.',
+  'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
+      'Att importera flera presentationer samtidigt skriver dem som filer till en mapp; det går inte i webbläsarversionen.',
   'Nu importeren': 'Importera nu',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Översikten är klar i en ny flik.',
