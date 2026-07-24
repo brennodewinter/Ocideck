@@ -85,6 +85,57 @@ void main() {
       expect(result.hasIssues, isFalse);
     });
 
+    // De waarschuwing beweert dat de celtekst op het minimumformaat staat. Sinds
+    // de tabel zijn letter uit de beschikbare hoogte haalt, telt het aantal
+    // rijen en kolommen dat niet meer: achttien kolommen met losse tekens
+    // rendert ruim, en daar hoort geen waarschuwing bij.
+    test('a wide but short table is not called minimum-sized', () {
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.table).copyWith(
+            title: 'Matrix',
+            tableRows: [
+              [for (var c = 0; c < 18; c++) 'K$c'],
+              for (var r = 0; r < 5; r++) [for (var c = 0; c < 18; c++) 'x'],
+            ],
+          ),
+        ],
+      );
+
+      expect(
+        analyzer
+            .analyze(deck)
+            .issues
+            .where((i) => i.kind == SlideQualityIssueKind.tableDensityMinimum),
+        isEmpty,
+      );
+    });
+
+    test('a table too dense to render readably is still flagged', () {
+      final line = List.filled(12, 'lorem ipsum dolor sit amet').join(' ');
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.table).copyWith(
+            title: 'Alles',
+            tableRows: [
+              const ['Rol', 'Taken', 'Verantwoordelijkheden', 'Bevoegdheden'],
+              for (var r = 0; r < 14; r++) [line, line, line, line],
+            ],
+          ),
+        ],
+      );
+
+      expect(
+        analyzer
+            .analyze(deck)
+            .issues
+            .where((i) => i.kind == SlideQualityIssueKind.tableDensityMinimum),
+        isNotEmpty,
+      );
+    });
+
     test('does not report missing image captions as quality issues', () {
       final deck = Deck(
         title: 'Demo',
