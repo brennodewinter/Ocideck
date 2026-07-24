@@ -44,7 +44,16 @@ class MarkdownEditorTheme {
     fontSize: fontSize - 0.5,
   );
 
-  /// Light editor for the slide edit panel (speaker / user notes blocks).
+  /// Editor for the slide edit panel (speaker / user notes blocks).
+  ///
+  /// De achtergrond volgt het thema. Hij stond vast op `Colors.white`, en dat
+  /// was in donkere modus een wit vlak middenin een donkere interface: de
+  /// gebalkte werkbalk boven het notitieveld. De tekst en de iconen komen
+  /// mode-afhankelijk binnen (`notesText`/`userNotesText`, licht in donkere
+  /// modus), dus ze landden bijna onzichtbaar op dat witte vlak — de tekst op
+  /// 1,1:1, de iconen op 1,3:1 (#821). Met `paper` — dezelfde tint als de
+  /// `fillColor` van het veld eronder — leest de lichte tekst op ~15:1 en de
+  /// werkbalk hoort weer bij de rest.
   factory MarkdownEditorTheme.editorPanel({
     required Color text,
     required Color link,
@@ -54,7 +63,7 @@ class MarkdownEditorTheme {
     double fontSize = 12,
   }) {
     return MarkdownEditorTheme(
-      surface: Colors.white,
+      surface: AppTheme.paper,
       text: text,
       hint: text.withValues(alpha: 0.45),
       link: link,
