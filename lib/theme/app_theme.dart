@@ -139,13 +139,25 @@ class AppTheme {
   static Color get gray900 =>
       _m(const Color(0xFF111827), const Color(0xFFE8ECF3));
 
-  // GitHub-flavoured neutralen (mermaid/markdown-previews).
-  static Color get ghSurface =>
-      _m(const Color(0xFFF6F8FA), const Color(0xFF20242B));
-  static Color get ghBorder =>
-      _m(const Color(0xFFE1E4E8), const Color(0xFF2C313B));
-  static Color get ghInk =>
-      _m(const Color(0xFF24292E), const Color(0xFFDCE2EC));
+  // GitHub-flavoured neutralen voor codeblokken en mermaid-diagrammen op een
+  // dia. `const` en niet mode-afhankelijk: deze tinten worden uitsluitend op een
+  // dia gebruikt (een vast wit canvas), en de syntaxkleurstelling ernaast
+  // (`githubTheme`) is de vaste lichte. Waren ze getters, dan keerde de bak in
+  // donkere modus om terwijl de letters licht bleven — donkere tekst op een
+  // donkere bak, 1,23:1, en afwijkend van de HTML-export die altijd licht
+  // schrijft (#822). Ze zijn nergens buiten `lib/widgets/slides/` in gebruik.
+  static const ghSurface = Color(0xFFF6F8FA);
+  static const ghBorder = Color(0xFFE1E4E8);
+  static const ghInk = Color(0xFF24292E);
+
+  /// De vaste donkere bak achter een grafiek-tooltip op een dia. Wit leest erop.
+  ///
+  /// Was `ink` — mode-afhankelijk, en in donkere modus bijna-wit (`#E8ECF3`),
+  /// dus wit op wit (1,18:1) én afwijkend van de export (#822). Een tooltip
+  /// hoort bij de dia-inhoud, dus de kleur beweegt niet met het thema. De waarde
+  /// is de lichte kant van `ink`, zodat de tooltip er in de export precies zo
+  /// uitziet als hij altijd deed.
+  static const chartTooltipBg = Color(0xFF0F172A);
 
   /// Primaire inkt-kleur voor tekst (slate900-achtig; licht in donkere modus).
   static Color get ink => _m(const Color(0xFF0F172A), const Color(0xFFE8ECF3));

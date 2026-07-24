@@ -192,7 +192,12 @@ class _OciWachtOverlay extends StatelessWidget {
             Text(
               l10n.d('PERSOONSGEGEVENS'),
               style: TextStyle(
-                color: AppTheme.warningFg,
+                // Vaste merkgeel, niet `warningFg`. Dit label staat op een dia
+                // (zwart overlay), en `warningFg` is mode-afhankelijk: de export
+                // schreef de lichte kant (#92400E) op zwart — 2,96:1 — terwijl de
+                // donkere-modus-preview de amber toonde. Eén vaste kleur maakt
+                // preview en export gelijk; EU-geel op zwart is 13,9:1 (#822).
+                color: AppTheme.amberVivid,
                 fontSize: w * 0.013,
                 fontWeight: FontWeight.w700,
                 letterSpacing: w * 0.0008,

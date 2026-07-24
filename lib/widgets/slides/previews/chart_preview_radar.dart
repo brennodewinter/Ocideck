@@ -364,7 +364,7 @@ extension _ChartPreviewRadar on _ChartPreviewState {
               vertical: w * 0.006,
             ),
             decoration: BoxDecoration(
-              color: AppTheme.ink,
+              color: AppTheme.chartTooltipBg,
               borderRadius: BorderRadius.circular(w * 0.008),
               boxShadow: const [
                 BoxShadow(color: AppTheme.shadow20, blurRadius: 6),
