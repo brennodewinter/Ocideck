@@ -75,6 +75,14 @@ mean driving an external office suite, which the import deliberately does not
 do, so a slide whose meaning lived in its layout cannot be preserved as a
 picture of itself. *(Added 2026-07-24.)*
 
+The "not converted" note slides and the import's error messages are written in
+the user's own language and stored that way, since the note is content that
+lives in the file (#806). One thing stays untranslated on purpose: the per-slide
+progress line "Slide 3/10" shown while a file is being read. It is transient and
+almost entirely a number, and localising it would need a separate progress seam;
+the note content and the failure messages, which the user actually keeps or acts
+on, are localised like the rest of the interface. *(Added 2026-07-24.)*
+
 Separately: the importers have only ever been run against archives the test
 suite builds itself. No file written by PowerPoint, Impress or Keynote has been
 through them. → [USER_GUIDE.md](USER_GUIDE.md#importing-presentations-powerpoint-keynote-impress),

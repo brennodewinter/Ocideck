@@ -62,6 +62,21 @@ class BuiltDeck {
 /// materialises once — de-dup by content, but through the idiomatic filename,
 /// not a `<sha256>.<ext>` name.
 class DeckBuilder {
+  /// Bouwt een deck; [translate] vertaalt de notitietekst die in het document
+  /// van de gebruiker belandt.
+  ///
+  /// De naad zit op de bouwer en niet in elke methodesignatuur: de service
+  /// maakt één [DeckBuilder] met `l10n.d` erin, en alles wat een notitiedia
+  /// schrijft gebruikt dezelfde functie. Zonder een UI (een test, een
+  /// opdrachtregel) is het [identityTranslator] en blijft de tekst Nederlands.
+  /// De keuze om híer te vertalen en niet bij het tonen is bewust: de
+  /// notitiedia is inhoud die in het `.md` wordt opgeslagen (#806) — zie
+  /// [UnconvertedTracker].
+  DeckBuilder({this.translate = identityTranslator});
+
+  /// Vertaalt één Nederlandse bronstring; zie [ImportTextTranslator].
+  final ImportTextTranslator translate;
+
   /// `mem:` path per image content hash, so identical images share one entry.
   final Map<String, String> _memPathBySha = {};
 
@@ -139,13 +154,16 @@ class DeckBuilder {
   ];
 
   /// De kop boven de notitiedia, die zegt wát er met de dia is gebeurd.
-  String? _headingFor(SlideFailurePolicy policy, int sourceNumber) =>
-      switch (policy) {
-        SlideFailurePolicy.bestEffort => null,
-        SlideFailurePolicy.skip => '# Dia $sourceNumber overgeslagen',
-        SlideFailurePolicy.imageOnly =>
-          '# Dia $sourceNumber: alleen de afbeelding overgenomen',
-      };
+  String? _headingFor(
+    SlideFailurePolicy policy,
+    int sourceNumber,
+  ) => switch (policy) {
+    SlideFailurePolicy.bestEffort => null,
+    SlideFailurePolicy.skip =>
+      '# ${translate('Dia {n} overgeslagen').replaceAll('{n}', '$sourceNumber')}',
+    SlideFailurePolicy.imageOnly =>
+      '# ${translate('Dia {n}: alleen de afbeelding overgenomen').replaceAll('{n}', '$sourceNumber')}',
+  };
 
   /// Alleen de afbeeldingen van [s], als afbeeldingsdia; de tekst vervalt.
   Slide _imageOnlySlide(SourceSlide s) {
@@ -418,10 +436,10 @@ class DeckBuilder {
       if (_isUnsafeUrl(link.url))
         ConversionIssue(
           slideIndex: s.index,
-          feature: 'Koppeling “${link.text}”',
-          description:
-              'doel onschadelijk gemaakt; het wees naar ${link.url.trim()}',
+          feature: 'Koppeling “{tekst}”',
+          description: 'doel onschadelijk gemaakt; het wees naar {url}',
           salvagedAs: 'de tekst blijft staan, de verwijzing niet',
+          args: {'tekst': link.text, 'url': link.url.trim()},
         ),
   ];
 
@@ -513,7 +531,7 @@ class DeckBuilder {
   /// per-slide issues plus the builder's structural salvage losses (audio, a
   /// table beside a chart).
   List<ConversionIssue> _conversionIssuesFor(ClassifiedSlide c) => [
-    for (final text in c.issues) _issueFromString(c.source.index, text),
+    ...c.issues,
     ..._salvageIssues(c.source),
     ..._droppedContentIssues(c),
     ..._neutralisedLinkIssues(c.source),
@@ -546,10 +564,11 @@ class DeckBuilder {
       issues.add(
         ConversionIssue(
           slideIndex: s.index,
-          feature: paragraphs == 1 ? 'Alinea' : '$paragraphs alinea’s',
+          feature: paragraphs == 1 ? 'Alinea' : '{n} alinea’s',
           description:
-              'niet overgenomen (een ${c.type.name}-dia toont geen losse '
+              'niet overgenomen (een {type}-dia toont geen losse '
               'alineatekst)',
+          args: {'n': '$paragraphs', 'type': c.type.name},
         ),
       );
     }
@@ -567,10 +586,11 @@ class DeckBuilder {
       issues.add(
         ConversionIssue(
           slideIndex: s.index,
-          feature: '$bullets opsommingspunt${bullets == 1 ? '' : 'en'}',
+          feature: bullets == 1 ? '{n} opsommingspunt' : '{n} opsommingspunten',
           description:
-              'niet overgenomen (deze dia werd een ${c.type.name}, en die '
+              'niet overgenomen (deze dia werd een {type}, en die '
               'draagt geen opsomming)',
+          args: {'n': '$bullets', 'type': c.type.name},
         ),
       );
     }
@@ -588,10 +608,11 @@ class DeckBuilder {
       issues.add(
         ConversionIssue(
           slideIndex: s.index,
-          feature: '$extra afbeelding${extra == 1 ? '' : 'en'}',
+          feature: extra == 1 ? '{n} afbeelding' : '{n} afbeeldingen',
           description: shown == 0
-              ? 'niet overgenomen (deze dia werd een ${c.type.name})'
-              : 'niet overgenomen (een ${c.type.name}-dia toont er $shown)',
+              ? 'niet overgenomen (deze dia werd een {type})'
+              : 'niet overgenomen (een {type}-dia toont er {aantal})',
+          args: {'n': '$extra', 'type': c.type.name, 'aantal': '$shown'},
         ),
       );
     }
@@ -607,8 +628,9 @@ class DeckBuilder {
       issues.add(
         ConversionIssue(
           slideIndex: s.index,
-          feature: 'Audio "${s.audioFileName}"',
+          feature: 'Audio "{bestand}"',
           description: 'niet overgenomen (OciDeck heeft geen audio-slides)',
+          args: {'bestand': s.audioFileName!},
         ),
       );
     }
@@ -624,14 +646,6 @@ class DeckBuilder {
     return issues;
   }
 
-  ConversionIssue _issueFromString(int index, String text) => ConversionIssue(
-    slideIndex: index,
-    feature: text.split(' — ').first,
-    description: text.contains(' — ')
-        ? text.split(' — ').last
-        : 'niet overgenomen',
-  );
-
   Slide _noteSlide(
     int sourceNumber,
     List<ConversionIssue> issues, {
@@ -641,12 +655,17 @@ class DeckBuilder {
       sourceNumber,
       issues,
       heading: heading,
+      translate: translate,
     ),
   );
 
-  Slide _deckNoteSlide(List<ConversionIssue> issues) => Slide.create(
-    SlideType.freeMarkdown,
-  ).copyWith(customMarkdown: UnconvertedTracker.buildDeckNoteBody(issues));
+  Slide _deckNoteSlide(List<ConversionIssue> issues) =>
+      Slide.create(SlideType.freeMarkdown).copyWith(
+        customMarkdown: UnconvertedTracker.buildDeckNoteBody(
+          issues,
+          translate: translate,
+        ),
+      );
 
   ProblemSlide _problemSlide(SourceSlide s, List<ConversionIssue> realLoss) =>
       ProblemSlide(

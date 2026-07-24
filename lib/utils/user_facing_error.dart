@@ -4,6 +4,10 @@ import 'dart:io';
 import '../l10n/app_localizations.dart';
 import '../services/file_service.dart';
 import '../services/git/git_forge.dart';
+// Geprefixt: `file_service.dart` heeft óók een `ImportFailure` (de enum voor de
+// pakket-import), en dat is een ander type dan deze klasse voor de
+// presentatie-import.
+import '../services/import/importers/import_failure.dart' as pres;
 import '../services/s3/s3_service.dart';
 import '../services/webdav_service.dart';
 
@@ -36,6 +40,66 @@ String userFacingError(AppLocalizations l10n, Object error) {
   return l10n.d(
     'Er ging onverwacht iets mis. Kijk in het logboek voor details.',
   );
+}
+
+/// Begrijpelijke melding waarom een presentatie-import (pptx/odp/key) mislukte.
+///
+/// De servicelaag draagt een [ImportFailureReason] plus [ImportFailure.args];
+/// de tekst wordt hier gekozen en vertaald. De ruwe [ImportFailure.message] is
+/// een technische Nederlandse string die in het log hoort, niet op het scherm —
+/// zonder deze functie las een Franse gebruiker "dit bestand is geen herkende
+/// presentatie" in het Nederlands (#806). Zelfde afspraak als
+/// [webdavErrorMessage], [s3ErrorMessage] en [gitForgeErrorMessage].
+///
+/// De `{naam}`-plaatshouders worden ná het vertalen ingevuld, zodat elke taal
+/// zelf bepaalt waar de bestandsnaam en het formaat in de zin landen.
+String importFailureText(AppLocalizations l10n, pres.ImportFailure failure) {
+  String fill(String template) {
+    var out = template;
+    failure.args.forEach((k, v) => out = out.replaceAll('{$k}', v));
+    return out;
+  }
+
+  // Elke bronstring op één regel, niet met aangrenzende literals opgebroken:
+  // Dart voegt die vóór de aanroep samen, dus `l10n.d` krijgt de hele string —
+  // maar de vertaalpoort (`app_localizations_test`) leest per `.d(` maar één
+  // literal en zou anders alleen het eerste stuk bewaken. Eén regel houdt
+  // sleutel, runtime en poort gelijk.
+  return switch (failure.reason) {
+    pres.ImportFailureReason.tooLarge => fill(
+      l10n.d(
+        '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.',
+      ),
+    ),
+    pres.ImportFailureReason.notAPresentation => fill(
+      l10n.d(
+        '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).',
+      ),
+    ),
+    pres.ImportFailureReason.corrupt => fill(
+      l10n.d(
+        '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.',
+      ),
+    ),
+    pres.ImportFailureReason.formatNotSupported => fill(
+      l10n.d('Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).'),
+    ),
+    pres.ImportFailureReason.noSlides => fill(
+      l10n.d(
+        'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?',
+      ),
+    ),
+    pres.ImportFailureReason.unreadable => fill(
+      l10n.d('Kon {bestand} niet lezen als {formaat}-presentatie.'),
+    ),
+    // Geen bekende importreden. Draagt de fout een gevangen exception (een
+    // schrijffout uit de bulk-rij: volle schijf, geen rechten), benoem die dan
+    // netjes; anders een generieke melding.
+    pres.ImportFailureReason.other =>
+      failure.cause != null
+          ? userFacingError(l10n, failure.cause!)
+          : l10n.d('Importeren mislukt.'),
+  };
 }
 
 /// Begrijpelijke melding per import-weigerreden, zodat de gebruiker weet of

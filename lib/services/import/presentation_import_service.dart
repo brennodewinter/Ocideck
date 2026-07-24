@@ -144,11 +144,12 @@ class PresentationImportService {
   }) async {
     onProgress?.call(0.02, 'Formaat herkennen…');
     if (bytes.length > maxArchiveInputSize) {
+      final gib = maxArchiveInputSize ~/ (1024 * 1024 * 1024);
       return PreparedImportResult.failed(
         ImportFailure(
-          '$filename is groter dan '
-          '${maxArchiveInputSize ~/ (1024 * 1024 * 1024)} GiB en wordt niet '
-          'verwerkt.',
+          '$filename is groter dan $gib GiB en wordt niet verwerkt.',
+          reason: ImportFailureReason.tooLarge,
+          args: {'bestand': filename, 'limiet': '$gib GiB'},
         ),
       );
     }
@@ -160,20 +161,30 @@ class PresentationImportService {
     final validation = validateFormatFromBytes(bytes, basename: filename);
     if (!validation.isValid) {
       return PreparedImportResult.failed(
-        ImportFailure('$filename: ${validation.error}'),
+        ImportFailure(
+          '$filename: ${validation.error}',
+          reason: validation.reason ?? ImportFailureReason.notAPresentation,
+          args: {'bestand': filename},
+        ),
       );
     }
     final format = validation.format;
     final importer = _registry.importerFor(format);
     if (importer == null) {
       return PreparedImportResult.failed(
-        ImportFailure(
-          format == SourceFormat.unknown
-              ? '$filename: dit bestand is geen herkende presentatie '
-                    '(pptx/odp/key).'
-              : '$filename: het ${format.name}-formaat wordt nog niet '
-                    'ondersteund.',
-        ),
+        format == SourceFormat.unknown
+            ? ImportFailure(
+                '$filename: dit bestand is geen herkende presentatie '
+                '(pptx/odp/key).',
+                reason: ImportFailureReason.notAPresentation,
+                args: {'bestand': filename},
+              )
+            : ImportFailure(
+                '$filename: het ${format.name}-formaat wordt nog niet '
+                'ondersteund.',
+                reason: ImportFailureReason.formatNotSupported,
+                args: {'bestand': filename, 'formaat': format.name},
+              ),
       );
     }
 
@@ -185,7 +196,9 @@ class PresentationImportService {
     final SourceDeck sourceDeck;
     switch (imported) {
       case Err(:final f):
-        return PreparedImportResult.failed(f);
+        // De importer kent de bestandsnaam niet altijd; de service wel. Vul
+        // hem aan zodat de melding "Kon {bestand} niet lezen" compleet is.
+        return PreparedImportResult.failed(f.withArg('bestand', filename));
       case Ok(:final v):
         sourceDeck = v;
     }

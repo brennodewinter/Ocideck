@@ -6,6 +6,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/git/git_forge.dart';
+// Geprefixt: `file_service.dart` heeft óók een `ImportFailure` (de enum voor de
+// pakket-import); dit is de klasse voor de presentatie-import.
+import 'package:ocideck/services/import/importers/import_failure.dart' as pres;
 import 'package:ocideck/services/s3/s3_service.dart';
 import 'package:ocideck/services/webdav_service.dart';
 import 'package:ocideck/utils/user_facing_error.dart';
@@ -82,6 +85,72 @@ void main() {
           expect(msg, isNotEmpty, reason: '$failure should explain itself');
         }
       }
+    });
+  });
+
+  group('importFailureText (presentatie-import, #806)', () {
+    pres.ImportFailure failure(
+      pres.ImportFailureReason reason, {
+      Map<String, String> args = const {},
+      Object? cause,
+    }) => pres.ImportFailure('tech', reason: reason, args: args, cause: cause);
+
+    test('elke reden geeft een niet-lege melding', () {
+      for (final reason in pres.ImportFailureReason.values) {
+        expect(
+          importFailureText(l10n, failure(reason)),
+          isNotEmpty,
+          reason: '$reason hoort zichzelf uit te leggen',
+        );
+      }
+    });
+
+    test('de plaatshouders worden met de args ingevuld', () {
+      final text = importFailureText(
+        l10n,
+        failure(
+          pres.ImportFailureReason.noSlides,
+          args: {'bestand': 'werk.pptx', 'formaat': 'pptx'},
+        ),
+      );
+      expect(text, contains('werk.pptx'));
+      expect(text, contains('pptx'));
+      expect(text, isNot(contains('{bestand}')));
+      expect(text, isNot(contains('{formaat}')));
+    });
+
+    test('de ruwe technische message komt nooit op het scherm', () {
+      // `message` is voor het log; de gebruiker krijgt de vertaalde tekst.
+      final text = importFailureText(
+        l10n,
+        pres.ImportFailure(
+          'RUWE TECHNISCHE TEKST',
+          reason: pres.ImportFailureReason.corrupt,
+          args: const {'bestand': 'x.odp'},
+        ),
+      );
+      expect(text, isNot(contains('RUWE TECHNISCHE TEKST')));
+      expect(text, contains('x.odp'));
+    });
+
+    test('een other-fout met een exception valt terug op userFacingError', () {
+      // De bulk-rij verpakt een schrijffout als een `other`-fout met de
+      // exception in `cause`; die hoort netjes benoemd te worden, niet generiek.
+      final text = importFailureText(
+        l10n,
+        failure(
+          pres.ImportFailureReason.other,
+          cause: FileSystemException('', '', const OSError('', 28)),
+        ),
+      );
+      expect(text, 'De schijf is vol.');
+    });
+
+    test('een other-fout zonder cause is de generieke melding', () {
+      expect(
+        importFailureText(l10n, failure(pres.ImportFailureReason.other)),
+        'Importeren mislukt.',
+      );
     });
   });
 

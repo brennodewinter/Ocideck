@@ -150,6 +150,38 @@ read a book to find out.
   werkelijk importeert, en betekent dan altijd zo volledig mogelijk.
 
 ### Fixed
+- **De presentatie-import sprak Nederlands tegen iedereen, ongeacht de
+  ingestelde taal — en één deel daarvan bakte het blijvend in het bestand van de
+  gebruiker.** (#806) Twee gaten die de vertaalpoort niet zag, want beide reisden
+  als een kale bronstring door de servicelaag in plaats van als een letterlijke
+  `d('…')`.
+
+  *De foutmeldingen.* "dit bestand is geen herkende presentatie", "te groot",
+  "beschadigd" kwamen via `ImportFailure.message` rechtstreeks op het scherm. Nu
+  draagt `ImportFailure` een reden-code (`ImportFailureReason`) plus
+  `{bestand}`/`{formaat}`-argumenten; de UI kiest en vertaalt de tekst in
+  `importFailureText`, langs dezelfde weg als de WebDAV-, S3- en git-meldingen.
+  De ruwe technische tekst blijft bestaan voor het log. De bulk-rij verpakt een
+  schrijffout (volle schijf) als een `other`-fout met de exception erin, zodat
+  die alsnog netjes benoemd wordt.
+
+  *De notitiedia's.* Dit was het ergste, want blijvend: de "niet overgenomen"-dia
+  die de import na een verliesgevende conversie toevoegt, werd in het Nederlands
+  ín het `.md` van de gebruiker geschreven. Een Griekse gebruiker hield zo
+  permanent Nederlandse alinea's in zijn eigen bestand, die meereizen naar elk
+  ander Marp-gereedschap. `DeckBuilder` en `UnconvertedTracker` krijgen nu een
+  vertaalnaad die de UI met `l10n.d` vult; de notitie wordt op importmoment in de
+  taal van de gebruiker gezet en zó opgeslagen — wat klopt, want het is inhoud en
+  geen interface. De variabele delen (een bronnummer, een bestandsnaam, een
+  linktekst) gaan als `{naam}`-plaatshouder door de keten en worden ná het
+  vertalen ingevuld, zodat elke taal zelf bepaalt waar ze in de zin landen.
+
+  Een nieuwe poort (`test/import_note_l10n_test.dart`) haalt élke notitie- en
+  vaste voortgangstekst via de AST uit de servicelaag en eist alle 31
+  vertalingen — zo ontsnapt ook een toekomstige string niet meer onvertaald. In
+  totaal 69 notitie/voortgang-strings en 6 foutmeldingen door de 31-talen-keten.
+  Wat er (bewust) buiten valt: de per-dia voortgangsregel "Slide 3/10", vluchtig
+  en vrijwel geheel numeriek — die lokaliseren vraagt een aparte voortgangsnaad.
 - **Na een themawissel bleef de hele interface in de kleuren van het vorige
   thema staan — niet alleen het kwaliteitspaneel (#814).** #780 repareerde het
   paneel door het op de modus te laten aansluiten, en liet de klasse open: élk

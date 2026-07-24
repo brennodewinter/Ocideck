@@ -42,7 +42,11 @@ class PptxImporter extends Importer {
       final slideRefs = _orderedSlidePaths(ctx);
       if (slideRefs.isEmpty) {
         return const Err(
-          ImportFailure('Geen slides gevonden — is dit een geldig .pptx?'),
+          ImportFailure(
+            'Geen slides gevonden — is dit een geldig .pptx?',
+            reason: ImportFailureReason.noSlides,
+            args: {'formaat': 'pptx'},
+          ),
         );
       }
 
@@ -82,11 +86,20 @@ class PptxImporter extends Importer {
         ImportFailure(
           'Dit bestand is geen geldig .pptx (beschadigd zip-archief).',
           cause: e,
+          reason: ImportFailureReason.corrupt,
+          args: const {'formaat': 'pptx'},
         ),
       );
     } on Exception catch (e) {
       logError('PptxImporter failed for ${path ?? 'bestand'}', e);
-      return Err(ImportFailure('Kon het .pptx niet lezen.', cause: e));
+      return Err(
+        ImportFailure(
+          'Kon het .pptx niet lezen.',
+          cause: e,
+          reason: ImportFailureReason.unreadable,
+          args: const {'formaat': 'pptx'},
+        ),
+      );
     }
   }
 
