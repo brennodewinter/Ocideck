@@ -7,20 +7,76 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/openkat/openkat_import_service.dart';
 
+/// Een OpenKAT-organisatierapport in de vorm die de exportknop werkelijk
+/// oplevert: de envelop `{organization_code, organization_name,
+/// organization_tags, data}` met een vlakke samenvatting in `data`.
+///
+/// De aanroeper geeft bevindingen in korte vorm op; hier worden ze opgevouwen
+/// tot de `finding_types`/`occurrences`-paren van het echte formaat. Zo blijven
+/// de toetsen leesbaar zonder dat ze een verzonnen indeling toetsen.
 Map<String, dynamic> _sampleReport({
   required String organizationCode,
   required String organizationName,
-  required String reportDate,
   required List<Map<String, dynamic>> findings,
 }) => {
-  'organization': {'code': organizationCode, 'name': organizationName},
-  'report_date': reportDate,
-  'systems': [
-    {'ooi': 'ipaddressv4|1.2.3.4', 'hostname': 'host-a'},
-    {'ooi': 'hostname|example.com'},
-  ],
-  'findings': findings,
+  'organization_code': organizationCode,
+  'organization_name': organizationName,
+  'organization_tags': <String>[],
+  'data': {
+    'systems': {
+      'services': {
+        'IPAddressV4|internet|1.2.3.4': {
+          'hostnames': ['host-a'],
+          'services': <dynamic>[],
+        },
+        'Hostname|internet|example.com': {
+          'hostnames': ['example.com'],
+          'services': <dynamic>[],
+        },
+      },
+    },
+    'findings': {
+      'finding_types': [
+        for (final finding in findings)
+          {
+            'finding_type': {
+              'object_type': 'KATFindingType',
+              'primary_key':
+                  'KATFindingType|${(finding['finding_type'] as Map)['id']}',
+              'id': (finding['finding_type'] as Map)['id'],
+              'name': (finding['finding_type'] as Map)['name'],
+              'risk_severity': finding['severity'],
+            },
+            'occurrences': [
+              {
+                'finding': {
+                  'object_type': 'Finding',
+                  'primary_key': finding['primary_key'],
+                  'ooi': finding['ooi'],
+                },
+                if (finding['first_seen'] != null)
+                  'first_seen': finding['first_seen'],
+              },
+            ],
+          },
+      ],
+    },
+    'basic_security': {
+      'summary': {
+        'Web': {
+          'rpki': {'number_of_compliant': 1, 'total': 2},
+        },
+      },
+    },
+    'total_systems': 2,
+  },
 };
+
+/// De bestandsnaam waarmee OpenKAT exporteert: `<organisatie>_<stempel>.json`
+/// met veertien cijfers zonder scheidingstekens. Het organisatierapport draagt
+/// zelf geen datum, dus dít is waar de momentopnamedatum vandaan komt.
+String _reportFileName(String organizationCode, String stamp) =>
+    '${organizationCode}_$stamp.json';
 
 void main() {
   test('imports a directory with OpenKAT reports into a deck', () async {
@@ -29,7 +85,6 @@ void main() {
       final reportA = _sampleReport(
         organizationCode: 'org1',
         organizationName: 'Organisatie 1',
-        reportDate: '2024-06-01T00:00:00Z',
         findings: [
           {
             'finding_type': {'id': 'KAT-001', 'name': 'Open poort'},
@@ -50,7 +105,6 @@ void main() {
       final reportB = _sampleReport(
         organizationCode: 'org1',
         organizationName: 'Organisatie 1',
-        reportDate: '2024-07-01T00:00:00Z',
         findings: [
           {
             'finding_type': {'id': 'KAT-001', 'name': 'Open poort'},
@@ -62,10 +116,10 @@ void main() {
       );
 
       File(
-        p.join(tmp.path, 'june.json'),
+        p.join(tmp.path, _reportFileName('org1', '20240601000000')),
       ).writeAsStringSync(jsonEncode(reportA));
       File(
-        p.join(tmp.path, 'july.json'),
+        p.join(tmp.path, _reportFileName('org1', '20240701000000')),
       ).writeAsStringSync(jsonEncode(reportB));
 
       const service = OpenKatImportService();
@@ -101,7 +155,6 @@ void main() {
         final report = _sampleReport(
           organizationCode: 'org1',
           organizationName: 'Organisatie 1',
-          reportDate: '2024-08-01T00:00:00Z',
           findings: [
             {
               'finding_type': {'id': 'KAT-001', 'name': 'Open poort'},
@@ -113,7 +166,7 @@ void main() {
         );
 
         File(
-          p.join(tmp.path, 'aug.json'),
+          p.join(tmp.path, _reportFileName('org1', '20240801000000')),
         ).writeAsStringSync(jsonEncode(report));
 
         const service = OpenKatImportService();
@@ -139,12 +192,13 @@ void main() {
     vers() async {
       final tmp = Directory.systemTemp.createTempSync('ocikat-plek-');
       addTearDown(() => tmp.deleteSync(recursive: true));
-      File(p.join(tmp.path, 'a.json')).writeAsStringSync(
+      File(
+        p.join(tmp.path, _reportFileName('org1', '20240601000000')),
+      ).writeAsStringSync(
         jsonEncode(
           _sampleReport(
             organizationCode: 'org1',
             organizationName: 'Organisatie 1',
-            reportDate: '2024-06-01T00:00:00Z',
             findings: [
               {
                 'finding_type': {'id': 'KAT-001', 'name': 'Open poort'},
@@ -209,12 +263,13 @@ void main() {
         // weergavelimiet (#672) toont er vijf. Niets wordt weggegooid.
         final tmp = Directory.systemTemp.createTempSync('ocikat-vol-');
         addTearDown(() => tmp.deleteSync(recursive: true));
-        File(p.join(tmp.path, 'a.json')).writeAsStringSync(
+        File(
+          p.join(tmp.path, _reportFileName('org1', '20240601000000')),
+        ).writeAsStringSync(
           jsonEncode(
             _sampleReport(
               organizationCode: 'org1',
               organizationName: 'Organisatie 1',
-              reportDate: '2024-06-01T00:00:00Z',
               findings: [
                 for (var i = 1; i <= 6; i++)
                   {

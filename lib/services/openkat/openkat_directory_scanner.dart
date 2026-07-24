@@ -5,6 +5,7 @@ import 'package:crypto/crypto.dart';
 import 'package:path/path.dart' as p;
 
 import '../../models/openkat/openkat_models.dart';
+import 'openkat_export_adapters.dart';
 import 'openkat_json_adapter.dart';
 
 /// Scans a directory for OpenKAT JSON exports, builds a manifest and groups
@@ -113,11 +114,16 @@ class OpenKatDirectoryScanner {
 
       final code = adapter.organizationCode(json) ?? 'unknown';
       final name = adapter.organizationName(json) ?? code;
+      // De datum, in aflopende betrouwbaarheid. De laatste stap is bewust de
+      // wijzigingsdatum van het bestand en niet `DateTime.now()`: het
+      // organisatierapport van OpenKAT draagt zélf geen datum, en met "nu" gaf
+      // elke herimport van dezelfde map een nieuwe momentopname — de trendlijn
+      // werd dan een grafiek van het aantal keren dat je op Importeren drukte.
       final date =
           adapter.reportDate(json) ??
           OpenKatJsonAdapter.dateFromFilename(p.basename(entity.path)) ??
           fallbackDate ??
-          DateTime.now().toUtc();
+          (await entity.lastModified()).toUtc();
 
       final candidate = OpenKatSnapshotCandidate(
         path: relative,

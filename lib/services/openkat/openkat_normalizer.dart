@@ -23,7 +23,7 @@ class OpenKatNormalizer {
       adapter: adapter,
       sourceFile: group.candidate.path,
     );
-    final controls = _normalizeControls(adapter.controlScores(json));
+    final controls = adapter.controlScores(json);
 
     return OpenKatSnapshot(
       reportDate: group.reportDate,
@@ -186,13 +186,6 @@ class OpenKatNormalizer {
       }
     }
     return byId.values.toList();
-  }
-
-  Map<String, OpenKatControlScore> _normalizeControls(Map<String, int> scores) {
-    return {
-      for (final entry in scores.entries)
-        entry.key: OpenKatControlScore(name: entry.key, compliant: entry.value),
-    };
   }
 
   // ── Helpers ────────────────────────────────────────────────────────────────
