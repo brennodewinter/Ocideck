@@ -225,6 +225,18 @@ double _logoAwareBottomPadding(double defaultPad, double safeBottom) {
   return math.max(defaultPad, safeBottom);
 }
 
+/// De dikte van een voortgangsbalk in een preview, afgeleid van de breedte
+/// waarop de dia wordt opgemaakt.
+///
+/// Waarom niet gewoon `w * 0.014`: `LinearProgressIndicator` eist
+/// `minHeight > 0`, en een preview wordt vaker *gemeten* dan getekend — een
+/// inklappend paneel of een animatie die bij nul begint levert breedte nul, en
+/// dan is die afgeleide dikte exact nul. De assertie die dan afgaat noemt de
+/// dia niet en de breedte al helemaal niet. Een haarlijn is bij die breedte
+/// het juiste antwoord: te zien is er toch niets, want de balk is zelf nul
+/// breed, en de meting loopt door (#782).
+double _progressBarThickness(double w) => math.max(0.5, w * 0.014);
+
 /// Content-padding voor bulletslides: logo-safe bovenrand en de
 /// checklist/logo-bewuste onderrand uit [bulletsSlideBottomInset]. [safe]
 /// blijft bij de aanroeper (sommige previews hebben hem daarna nog nodig, en

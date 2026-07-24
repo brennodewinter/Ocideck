@@ -73,7 +73,7 @@ class _ScopeMatrixPreview extends StatelessWidget {
             borderRadius: BorderRadius.circular(w * 0.006),
             child: LinearProgressIndicator(
               value: fraction,
-              minHeight: w * 0.014,
+              minHeight: _progressBarThickness(w),
               backgroundColor: AppTheme.scopeNotTested.withValues(alpha: 0.2),
               valueColor: AlwaysStoppedAnimation(accent),
             ),

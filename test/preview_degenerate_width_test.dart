@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/checklist_spec.dart';
+import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
@@ -102,6 +104,42 @@ void main() {
     expectNoHardFailure(
       await renderAt(tester, 0, checklist),
       what: 'checklist met voortgang op 0',
+    );
+  });
+
+  testWidgets('een checklist-dia overleeft nulbreedte', (tester) async {
+    // De voortgangsbalk geeft `LinearProgressIndicator` een `minHeight` die van
+    // de breedte is afgeleid, en die eist er een boven nul.
+    final checklist = Slide.create(SlideType.checklist).copyWith(
+      title: 'Checklist',
+      tableRows: const ChecklistSpec(
+        standardLabel: 'Checklist',
+        rows: [
+          ChecklistRow(id: 'A-1', test: 'Een', status: ChecklistStatus.tested),
+          ChecklistRow(id: 'A-2', test: 'Twee'),
+        ],
+      ).toTableRows(),
+    );
+    expectNoHardFailure(
+      await renderAt(tester, 0, checklist),
+      what: 'checklist-dia op 0',
+    );
+  });
+
+  testWidgets('een scopematrix overleeft nulbreedte', (tester) async {
+    // Dezelfde voortgangsbalk, tweede vindplaats.
+    final scope = Slide.create(SlideType.scopeMatrix).copyWith(
+      title: 'Scope',
+      tableRows: const ScopeMatrixSpec(
+        title: 'Scope',
+        rows: [
+          ScopeRow(object: 'https://app.example', type: ScopeObjectType.web),
+        ],
+      ).toTableRows(),
+    );
+    expectNoHardFailure(
+      await renderAt(tester, 0, scope),
+      what: 'scopematrix op 0',
     );
   });
 
