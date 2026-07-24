@@ -213,4 +213,42 @@ Widget b() => EditorField(label: 'Sleutel');
     expect(rendered.substring(0, split), isNot(contains('"Sleutel"')));
     expect(rendered.substring(split), contains('"Sleutel"'));
   });
+
+  group('een aanroep binnen een extension hoort bij de klasse eronder', () {
+    // #803. Deze repo hakt grote widgets in `part of`-bestanden met elk een
+    // extension op dezelfde state-klasse, om onder de bestandsgrensratchet te
+    // blijven. De aanroep staat dan in `extension _Menu on _ShellState` terwijl
+    // de declaratie in `_ShellState` zelf zit, en die twee sleutels kwamen nooit
+    // bij elkaar. Gevolg: het achtervoegsel `(Ctrl/Cmd+K)` van het commandopalet
+    // stond onvertaald in het ⋮-menu zonder dat de poort iets zei — en dezelfde
+    // helper naar top-level tillen liet hem meteen wél opvallen. Dat de VORM van
+    // de aanroeper besliste of er gekeken werd, is precies wat een poort niet
+    // mag doen: dan groeit het patroon ongemerkt door.
+    void writeShell(String body) => write('shell.dart', '''
+class _ShellState extends State<Shell> {
+  Widget _menuItem(String label) => $body;
+}
+''');
+
+    test('een rauwe doorgifte is een overtreding', () {
+      writeShell('Text(label)');
+      write('menu.dart', '''
+extension _Menu on _ShellState {
+  Widget build() => _menuItem('Commandopalet  (Ctrl/Cmd+K)');
+}
+''');
+      expect(hardcoded(), contains('Commandopalet  (Ctrl/Cmd+K)'));
+    });
+
+    test('en een vertalende doorgifte levert een bronsleutel', () {
+      writeShell('Text(context.l10n.d(label))');
+      write('menu.dart', '''
+extension _Menu on _ShellState {
+  Widget build() => _menuItem('Commandopalet');
+}
+''');
+      expect(sourceKeys(), contains('Commandopalet'));
+      expect(hardcoded(), isEmpty);
+    });
+  });
 }

@@ -54,6 +54,19 @@ const unchangedInEnglish = {
   'CVE-2024-1234, CVE-2024-5678',
   'CWE-89 — Improper Neutralization of SQL',
   'IBAN',
+  // De registratie- en contactgegevens van de uitgever in het Over-venster. Een
+  // postadres, een rekeningnummer, een KvK-inschrijving en een domeinnaam zijn
+  // wat de uitgevende instantie ervan geregistreerd heeft; een vertaalde versie
+  // verwijst naar niets. Ze kwamen pas met #803 in beeld: tot dan keek de poort
+  // langs een aanroep binnen een extension heen.
+  'Weidemolen 12, 2211 PW Noordwijkerhout\nWilhelminaplein 12, 8911 BS Leeuwarden',
+  'stichting@librekat.nl',
+  'KvK',
+  'NL63 TRIO 0321 2051 89',
+  'BIC',
+  'TRIONL2U',
+  'Triodos N.V.',
+  'www.pilotinformatieautonomie.nl',
   'Server',
   'Deadline',
   'Access key ID',
@@ -175,6 +188,19 @@ const unchangedInAllLanguages = {
   'CVE-2024-1234, CVE-2024-5678',
   'CWE-89 — Improper Neutralization of SQL',
   'IBAN',
+  // De registratie- en contactgegevens van de uitgever in het Over-venster. Een
+  // postadres, een rekeningnummer, een KvK-inschrijving en een domeinnaam zijn
+  // wat de uitgevende instantie ervan geregistreerd heeft; een vertaalde versie
+  // verwijst naar niets. Ze kwamen pas met #803 in beeld: tot dan keek de poort
+  // langs een aanroep binnen een extension heen.
+  'Weidemolen 12, 2211 PW Noordwijkerhout\nWilhelminaplein 12, 8911 BS Leeuwarden',
+  'stichting@librekat.nl',
+  'KvK',
+  'NL63 TRIO 0321 2051 89',
+  'BIC',
+  'TRIONL2U',
+  'Triodos N.V.',
+  'www.pilotinformatieautonomie.nl',
   'Server',
   'Access key ID',
   'Bucket',

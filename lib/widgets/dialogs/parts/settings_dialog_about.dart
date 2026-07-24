@@ -86,6 +86,50 @@ Widget _publisherCardBody(
   );
 }
 
+/// Een label-waarderegel uit de contactkaart, eventueel als link.
+///
+/// Top-level en geen lid van de extension, om dezelfde reden als
+/// [_publisherCardBody]: de klasse-plafondratchet telt élk extension-lid mee bij
+/// _SettingsDialogState, en deze helper heeft niets van die state nodig.
+Widget _aboutKeyValue(String label, String value, {String? linkUrl}) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 8),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 92,
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: AppTheme.slate500,
+            ),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: linkUrl == null
+              ? SelectableText(value, style: _SettingsAbout._aboutBodyStyle)
+              : InkWell(
+                  onTap: () => openExternalUrl(linkUrl),
+                  child: Text(
+                    value,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      height: 1.45,
+                      color: AppTheme.blue500,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+        ),
+      ],
+    ),
+  );
+}
+
 extension _SettingsAbout on _SettingsDialogState {
   Widget _aboutTab() {
     final l10n = context.l10n;
@@ -143,21 +187,28 @@ extension _SettingsAbout on _SettingsDialogState {
               const SizedBox(height: 8),
               _aboutKeyValue(
                 l10n.d('Adressen'),
-                'Weidemolen 12, 2211 PW Noordwijkerhout\nWilhelminaplein 12, 8911 BS Leeuwarden',
+                l10n.d(
+                  'Weidemolen 12, 2211 PW Noordwijkerhout\nWilhelminaplein 12, 8911 BS Leeuwarden',
+                ),
               ),
               _aboutKeyValue(l10n.d('Telefoon'), '+31 85 333 2942'),
               _aboutKeyValue(
                 l10n.d('E-mail'),
-                'stichting@librekat.nl',
+                l10n.d('stichting@librekat.nl'),
                 linkUrl: 'stichting@librekat.nl',
               ),
-              _aboutKeyValue('KvK', '98657836'),
-              _aboutKeyValue('IBAN', 'NL63 TRIO 0321 2051 89'),
-              _aboutKeyValue('BIC', 'TRIONL2U'),
+              // De vier onderste regels zijn registratiegegevens: een
+              // kamer-van-koophandelnummer, een rekening en een bank. Ze lopen
+              // door d() omdat de poort dat van elke zichtbare string eist, en
+              // staan op unchangedInAllLanguages — vertalen zou ze onvindbaar
+              // maken bij de instantie die ze uitgaf.
+              _aboutKeyValue(l10n.d('KvK'), '98657836'),
+              _aboutKeyValue(l10n.d('IBAN'), l10n.d('NL63 TRIO 0321 2051 89')),
+              _aboutKeyValue(l10n.d('BIC'), l10n.d('TRIONL2U')),
               // Keyed, not d('Bank'): the source word "Bank" collides with the
               // cockpit artificial-horizon roll angle, which is translated as
               // aviation "bank" (Roulis/Rollen/…). This is the financial bank.
-              _aboutKeyValue(l10n.t('bankLabel'), 'Triodos N.V.'),
+              _aboutKeyValue(l10n.t('bankLabel'), l10n.d('Triodos N.V.')),
             ],
           ),
         ),
@@ -406,7 +457,7 @@ extension _SettingsAbout on _SettingsDialogState {
           style: _aboutBodyStyle,
         ),
         _aboutLink(
-          'www.pilotinformatieautonomie.nl',
+          l10n.d('www.pilotinformatieautonomie.nl'),
           'https://www.pilotinformatieautonomie.nl',
         ),
       ],
@@ -454,45 +505,6 @@ extension _SettingsAbout on _SettingsDialogState {
     icon: const Icon(Icons.open_in_new, size: 15),
     label: Text(label),
   );
-
-  Widget _aboutKeyValue(String label, String value, {String? linkUrl}) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 92,
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: AppTheme.slate500,
-              ),
-            ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: linkUrl == null
-                ? SelectableText(value, style: _aboutBodyStyle)
-                : InkWell(
-                    onTap: () => openExternalUrl(linkUrl),
-                    child: Text(
-                      value,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        height: 1.45,
-                        color: AppTheme.blue500,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ),
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _catCard(_CatMascot cat) {
     return Container(
