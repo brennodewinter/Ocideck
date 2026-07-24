@@ -121,6 +121,22 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Added
+- **Een GitHub-spiegel bouwt nu de Windows-artifacts.** De forge blijft de
+  plek voor ontwikkeling, issues en PR's; een automatische push-mirror houdt
+  github.com/brennodewinter/Ocideck bij, en dáár draaien de
+  `.github`-referentieworkflows nu echt — met gratis Windows-runners die de
+  forge zelf nooit kan bieden (en macOS als bonus-bouwlijn). De allereerste
+  échte run van `release.yml` ving meteen twee dingen: de Linux-job miste
+  `libsecret-1-dev` (dezelfde vondst als bij de eigen Linux-workflow, nu ook
+  hier gerepareerd) en de Windows-job strandt op `windows-latest` omdat het
+  voorgebouwde OpenCV-pakket van dartcv4 niet samengaat met de nieuwste MSVC —
+  de job is op het 2022-image gepind tot upstream bijtrekt. SBOM- en
+  web-jobs waren in één keer groen. GitHubs secret scanning sloeg aan op het
+  testkorpus van OciWachts geheimen-detector — vijf bewust echt-ogende maar
+  verzonnen sleutels; de alerts zijn als "used in tests" gesloten en
+  `.github/secret_scanning.yml` sluit dat ene testbestand voortaan uit.
+
+### Added
 - **De README-galerij verrijkt: risicomatrix en cockpit-dashboard erbij, en
   vollere beelden.** De demopresentatie achter de schermafdrukken was te kaal —
   een grafiek zonder titel, veel leeg wit. De grafiek draagt nu zijn titel, de
