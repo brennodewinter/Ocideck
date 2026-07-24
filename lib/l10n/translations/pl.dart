@@ -1786,6 +1786,22 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Odczytuje folder z raportami OpenKAT (JSON) i buduje z niego jeden przegląd zarządczy: systemy, ustalenia według wagi, najdłużej otwarte punkty oraz trend na kolejnych pomiarach. To samo działanie na istniejącej prezentacji OpenKAT aktualizuje ją i pozostawia Twoje własne slajdy na miejscu.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Import tylko odczytuje: nic w tym folderze nie jest zmieniane ani wysyłane. Pliki, które nie okazują się raportami OpenKAT, są pomijane i wymieniane w sprawozdaniu z importu.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Wskaż folder, w którym znajdują się Twoje raporty OpenKAT (JSON). Import odczytuje ten folder i buduje z niego jeden przegląd zarządczy; gdy folder jest tu ustawiony, nie musisz go wybierać za każdym razem.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'Import OpenKAT odczytuje folder z dysku i jest dostępny tylko w wersji desktopowej.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Nie wskazano jeszcze folderu raportów, więc import pyta o niego za każdym razem.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Folder raportów jest już ustawiony, więc punkt wejścia pozostaje dostępny i istniejącą prezentację OpenKAT nadal można aktualizować.',
+  'Integraties': 'Integracje',
+  'Naar Integraties': 'Przejdź do Integracji',
+  'Map kiezen…': 'Wybierz folder…',
+  'Map wissen': 'Wyczyść folder',
   'OpenKAT-rapportages importeren…': 'Importuj raporty OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Wybierz folder z raportami OpenKAT',
   'OpenKAT-rapportages geïmporteerd.': 'Zaimportowano raporty OpenKAT.',

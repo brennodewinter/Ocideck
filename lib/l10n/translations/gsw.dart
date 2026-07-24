@@ -1777,6 +1777,22 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Liist en Ornder mit OpenKAT-Bricht (JSON) und macht drus ei Management-Übersicht: Systeem, Befund noch Schweregrad, die am längschte offene Pünkt und de Verlauf über ufenandfolgendi Mässige. Die gliich Aktion uf ere bestehende OpenKAT-Presentation aktualisiert si und loot Dini eigene Folie stoh.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'De Import liist nume; i dem Ornder wird nüt gänderet oder verschickt. Datei, wo kei OpenKAT-Bricht sind, werde übergange und im Import-Protokoll gnennt.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Gib de Ornder aa, wo Dini OpenKAT-Bricht (JSON) drin sind. De Import liist de Ornder und macht drus ei Management-Übersicht; wenn de Ornder do iigstellt isch, muesch en nöd jedes Mal neu uuswähle.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'De OpenKAT-Import liist en Ornder vo de Platte und isch nume i de Desktop-Version verfüegbar.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Es isch no kein Bricht-Ornder feschtgleit; de Import fröget denn jedes Mal drum.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Es isch scho en Bricht-Ornder iigstellt; drum bliibt de Iistiegspunkt erreichbar, damit e bestehendi OpenKAT-Presentation wiiter aktualisiert werde cha.',
+  'Integraties': 'Integratione',
+  'Naar Integraties': 'Zu de Integratione',
+  'Map kiezen…': 'Ornder uuswähle…',
+  'Map wissen': 'Ornder lösche',
   'OpenKAT-rapportages importeren…': 'OpenKAT-Bricht importiere…',
   'Map met OpenKAT-rapportages kiezen': 'Ordner mit OpenKAT-Bricht wähle',
   'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-Bricht importiert.',

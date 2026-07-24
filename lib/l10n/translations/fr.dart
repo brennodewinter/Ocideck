@@ -733,6 +733,22 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Lit un dossier de rapports OpenKAT (JSON) et en construit une vue d\'ensemble unique pour la direction : systèmes, constats par gravité, points ouverts depuis le plus longtemps et évolution sur les mesures successives. La même action sur une présentation OpenKAT existante la met à jour et laisse vos propres diapositives en place.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'L\'import se contente de lire : rien n\'est modifié ni envoyé depuis ce dossier. Les fichiers qui ne sont pas des rapports OpenKAT sont ignorés et nommés dans le compte rendu d\'import.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Indiquez le dossier contenant vos rapports OpenKAT (JSON). L\'import lit ce dossier et en construit une vue d\'ensemble unique pour la direction ; une fois le dossier défini ici, vous n\'avez plus à le choisir à chaque fois.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'L\'import OpenKAT lit un dossier sur le disque et n\'est disponible que dans la version bureau.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Aucun dossier de rapports n\'est encore défini ; l\'import le demande donc à chaque fois.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Un dossier de rapports est déjà défini ; le point d\'entrée reste donc accessible et une présentation OpenKAT existante peut encore être mise à jour.',
+  'Integraties': 'Intégrations',
+  'Naar Integraties': 'Aller aux intégrations',
+  'Map kiezen…': 'Choisir un dossier…',
+  'Map wissen': 'Effacer le dossier',
   'OpenKAT-rapportages importeren…': 'Importer des rapports OpenKAT…',
   'Map met OpenKAT-rapportages kiezen':
       'Choisir le dossier des rapports OpenKAT',

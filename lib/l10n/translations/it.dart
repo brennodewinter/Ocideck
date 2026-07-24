@@ -729,6 +729,22 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Legge una cartella di rapporti OpenKAT (JSON) e ne ricava un unico quadro direzionale: sistemi, rilievi per gravità, i punti aperti da più tempo e l\'andamento su misurazioni successive. La stessa azione su una presentazione OpenKAT esistente la aggiorna e lascia al loro posto le tue diapositive.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'L\'importazione si limita a leggere: nulla in questa cartella viene modificato o inviato. I file che non risultano rapporti OpenKAT vengono saltati e indicati nel resoconto d\'importazione.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Indica la cartella che contiene i tuoi rapporti OpenKAT (JSON). L\'importazione legge quella cartella e ne ricava un unico quadro direzionale; impostando qui la cartella non dovrai sceglierla ogni volta.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'L\'importazione OpenKAT legge una cartella dal disco ed è disponibile solo nella versione desktop.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Non è ancora stata indicata una cartella dei rapporti, quindi l\'importazione la chiede ogni volta.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'È già impostata una cartella dei rapporti, quindi il punto di accesso resta disponibile e una presentazione OpenKAT esistente può ancora essere aggiornata.',
+  'Integraties': 'Integrazioni',
+  'Naar Integraties': 'Vai a Integrazioni',
+  'Map kiezen…': 'Scegli cartella…',
+  'Map wissen': 'Cancella cartella',
   'OpenKAT-rapportages importeren…': 'Importa report OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Scegli la cartella dei report OpenKAT',
   'OpenKAT-rapportages geïmporteerd.': 'Report OpenKAT importati.',

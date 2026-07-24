@@ -1796,6 +1796,22 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Jaqra folder b\'rapporti ta\' OpenKAT (JSON) u jibni minnu ħarsa ġenerali waħda għall-maniġment: sistemi, sejbiet skont il-gravità, il-punti li ilhom l-aktar miftuħa u x-xejra tul kejliet suċċessivi. L-istess azzjoni fuq preżentazzjoni OpenKAT eżistenti taġġornaha u tħalli l-islajds tiegħek stess f\'posthom.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'L-importazzjoni taqra biss; xejn f\'dan il-folder ma jinbidel jew jintbagħat. Fajls li ma jirriżultawx rapporti ta\' OpenKAT jinqabżu u jissemmew fir-rapport tal-importazzjoni.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Indika l-folder fejn jinsabu r-rapporti OpenKAT tiegħek (JSON). L-importazzjoni taqra dak il-folder u tibni minnu ħarsa ġenerali waħda għall-maniġment; jekk il-folder ikun issettjat hawn, ma jkollokx għalfejn tagħżlu kull darba.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'L-importazzjoni ta\' OpenKAT taqra folder mid-diska u hija disponibbli biss fil-verżjoni desktop.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Għadu ma ġiex indikat folder tar-rapporti, għalhekk l-importazzjoni titolbu kull darba.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Diġà hemm folder tar-rapporti mħaddem, għalhekk il-punt tad-dħul jibqa\' aċċessibbli u preżentazzjoni OpenKAT eżistenti tista\' tibqa\' tiġi aġġornata.',
+  'Integraties': 'Integrazzjonijiet',
+  'Naar Integraties': 'Mur għall-Integrazzjonijiet',
+  'Map kiezen…': 'Agħżel folder…',
+  'Map wissen': 'Neħħi l-folder',
   'OpenKAT-rapportages importeren…': 'Importa rapporti ta\' OpenKAT…',
   'Map met OpenKAT-rapportages kiezen':
       'Agħżel folder b\'rapporti ta\' OpenKAT',

@@ -2751,6 +2751,22 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'OpenKAT raporlarının (JSON) bulunduğu bir klasörü okur ve ondan tek bir yönetim özeti oluşturur: sistemler, önem derecesine göre bulgular, en uzun süredir açık olan maddeler ve ardışık ölçümlerdeki eğilim. Aynı işlem mevcut bir OpenKAT sunumunda onu günceller ve kendi slaytlarınızı yerinde bırakır.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'İçe aktarma yalnızca okur; bu klasörde hiçbir şey değiştirilmez veya gönderilmez. OpenKAT raporu olmadığı anlaşılan dosyalar atlanır ve içe aktarma raporunda belirtilir.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'OpenKAT raporlarınızın (JSON) bulunduğu klasörü gösterin. İçe aktarma bu klasörü okur ve ondan tek bir yönetim özeti oluşturur; klasör burada ayarlıysa her seferinde yeniden seçmeniz gerekmez.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'OpenKAT içe aktarma diskten bir klasör okur ve yalnızca masaüstü sürümünde kullanılabilir.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Henüz bir rapor klasörü belirlenmedi; bu yüzden içe aktarma her seferinde sorar.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Bir rapor klasörü zaten ayarlı; bu nedenle giriş noktası erişilebilir kalır ve mevcut bir OpenKAT sunumu güncellenmeye devam edebilir.',
+  'Integraties': 'Entegrasyonlar',
+  'Naar Integraties': 'Entegrasyonlara git',
+  'Map kiezen…': 'Klasör seç…',
+  'Map wissen': 'Klasörü temizle',
   'OpenKAT-rapportages importeren…': 'OpenKAT raporlarını içe aktar…',
   'Map met OpenKAT-rapportages kiezen':
       'OpenKAT raporlarının bulunduğu klasörü seç',

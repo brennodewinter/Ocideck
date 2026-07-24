@@ -914,6 +914,22 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Reads a folder of OpenKAT reports (JSON) and builds a single management overview from it: systems, findings by severity, the longest-open items and the trend across successive measurements. The same action on an existing OpenKAT deck updates it and leaves your own slides in place.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'The import only reads: nothing in this folder is changed or sent anywhere. Files that turn out not to be OpenKAT reports are skipped and named in the import log.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Point to the folder holding your OpenKAT reports (JSON). The import reads that folder and builds a single management overview from it; with the folder set here you do not have to choose it again every time.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'The OpenKAT import reads a folder from disk and is only available in the desktop version.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'No report folder has been set yet, so the import asks for one every time.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'A report folder is already set, so the entry point stays available and an existing OpenKAT deck can still be updated.',
+  'Integraties': 'Integrations',
+  'Naar Integraties': 'Go to Integrations',
+  'Map kiezen…': 'Choose folder…',
+  'Map wissen': 'Clear folder',
   'OpenKAT-rapportages importeren…': 'Import OpenKAT reports…',
   'Map met OpenKAT-rapportages kiezen': 'Choose folder with OpenKAT reports',
   'OpenKAT-rapportages geïmporteerd.': 'OpenKAT reports imported.',

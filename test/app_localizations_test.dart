@@ -13,6 +13,7 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'OpenKAT',
   'Vigilis',
   'http://127.0.0.1:11434/v1',
   'gemma3:4b',
@@ -134,6 +135,7 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'OpenKAT',
   'Vigilis',
   'http://127.0.0.1:11434/v1',
   'gemma3:4b',

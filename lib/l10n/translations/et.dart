@@ -1765,6 +1765,22 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Loeb OpenKAT-i aruannete kausta (JSON) ja koostab sellest ühe juhtimisülevaate: süsteemid, leiud raskusastme järgi, kõige kauem lahtised punktid ja suundumuse järjestikuste mõõtmiste lõikes. Sama toiming olemasoleval OpenKAT-esitlusel uuendab seda ja jätab teie enda slaidid alles.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Import ainult loeb; selles kaustas ei muudeta ega saadeta midagi. Failid, mis pole OpenKAT-i aruanded, jäetakse vahele ja nimetatakse impordiaruandes.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Osutage kaustale, kus asuvad teie OpenKAT-i aruanded (JSON). Import loeb selle kausta ja koostab sellest ühe juhtimisülevaate; kui kaust on siin määratud, ei pea seda iga kord uuesti valima.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'OpenKAT-i import loeb kausta kettalt ja on saadaval ainult lauaarvuti versioonis.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Aruannete kausta pole veel määratud, seega küsib import seda iga kord.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Aruannete kaust on juba määratud, seega jääb sisenemispunkt kättesaadavaks ja olemasolevat OpenKAT-esitlust saab endiselt uuendada.',
+  'Integraties': 'Integratsioonid',
+  'Naar Integraties': 'Integratsioonide juurde',
+  'Map kiezen…': 'Vali kaust…',
+  'Map wissen': 'Tühjenda kaust',
   'OpenKAT-rapportages importeren…': 'Impordi OpenKAT-i aruanded…',
   'Map met OpenKAT-rapportages kiezen': 'Vali OpenKAT-i aruannete kaust',
   'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-i aruanded imporditud.',

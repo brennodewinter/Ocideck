@@ -1803,6 +1803,22 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Lê uma pasta com relatórios OpenKAT (JSON) e constrói a partir dela uma única visão de gestão: sistemas, constatações por gravidade, os pontos há mais tempo em aberto e a evolução ao longo de medições sucessivas. A mesma ação numa apresentação OpenKAT existente atualiza-a e deixa os seus próprios diapositivos no lugar.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'A importação apenas lê; nada nesta pasta é alterado ou enviado. Os ficheiros que não sejam relatórios OpenKAT são ignorados e indicados no relatório de importação.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Indique a pasta onde estão os seus relatórios OpenKAT (JSON). A importação lê essa pasta e constrói a partir dela uma única visão de gestão; com a pasta definida aqui, não precisa de a escolher de cada vez.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'A importação do OpenKAT lê uma pasta do disco e só está disponível na versão para computador.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Ainda não foi indicada uma pasta de relatórios, por isso a importação pede-a sempre.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Já está definida uma pasta de relatórios, por isso o ponto de entrada continua acessível e uma apresentação OpenKAT existente ainda pode ser atualizada.',
+  'Integraties': 'Integrações',
+  'Naar Integraties': 'Ir para Integrações',
+  'Map kiezen…': 'Escolher pasta…',
+  'Map wissen': 'Limpar pasta',
   'OpenKAT-rapportages importeren…': 'Importar relatórios do OpenKAT…',
   'Map met OpenKAT-rapportages kiezen':
       'Escolher pasta com relatórios do OpenKAT',

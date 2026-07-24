@@ -1773,6 +1773,22 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Läser en mapp med OpenKAT-rapporter (JSON) och bygger en enda ledningsöversikt av den: system, fynd per allvarlighetsgrad, de längst öppna punkterna och trenden över på varandra följande mätningar. Samma åtgärd på en befintlig OpenKAT-presentation uppdaterar den och låter dina egna bilder stå kvar.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Importen läser bara; ingenting i den här mappen ändras eller skickas. Filer som visar sig inte vara OpenKAT-rapporter hoppas över och nämns i importrapporten.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Ange mappen där dina OpenKAT-rapporter (JSON) ligger. Importen läser den mappen och bygger en enda ledningsöversikt av den; är mappen inställd här behöver du inte välja den varje gång.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'OpenKAT-importen läser en mapp från disken och är bara tillgänglig i skrivbordsversionen.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Ingen rapportmapp är vald ännu, så importen frågar efter den varje gång.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'En rapportmapp är redan vald, så ingången förblir tillgänglig och en befintlig OpenKAT-presentation kan fortfarande uppdateras.',
+  'Integraties': 'Integrationer',
+  'Naar Integraties': 'Gå till Integrationer',
+  'Map kiezen…': 'Välj mapp…',
+  'Map wissen': 'Rensa mapp',
   'OpenKAT-rapportages importeren…': 'Importera OpenKAT-rapporter…',
   'Map met OpenKAT-rapportages kiezen': 'Välj mapp med OpenKAT-rapporter',
   'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-rapporter importerade.',

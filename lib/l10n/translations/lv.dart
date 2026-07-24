@@ -1773,6 +1773,22 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Nolasa mapi ar OpenKAT atskaitēm (JSON) un veido no tās vienu vadības pārskatu: sistēmas, atradumus pēc smaguma, visilgāk atvērtos punktus un tendenci vairākos secīgos mērījumos. Tā pati darbība esošā OpenKAT prezentācijā to atjaunina un atstāj jūsu pašu slaidus savā vietā.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Imports tikai nolasa; šajā mapē nekas netiek mainīts vai nosūtīts. Faili, kas nav OpenKAT atskaites, tiek izlaisti un nosaukti importa pārskatā.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Norādiet mapi, kurā atrodas jūsu OpenKAT atskaites (JSON). Imports nolasa šo mapi un veido no tās vienu vadības pārskatu; ja mape ir iestatīta šeit, tā nav jāizvēlas katru reizi.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'OpenKAT imports nolasa mapi no diska un ir pieejams tikai darbvirsmas versijā.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Atskaišu mape vēl nav norādīta, tāpēc imports to prasa katru reizi.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Atskaišu mape jau ir iestatīta, tāpēc ieejas punkts paliek pieejams un esošu OpenKAT prezentāciju joprojām var atjaunināt.',
+  'Integraties': 'Integrācijas',
+  'Naar Integraties': 'Uz Integrācijām',
+  'Map kiezen…': 'Izvēlēties mapi…',
+  'Map wissen': 'Notīrīt mapi',
   'OpenKAT-rapportages importeren…': 'Importēt OpenKAT pārskatus…',
   'Map met OpenKAT-rapportages kiezen': 'Izvēlēties mapi ar OpenKAT pārskatiem',
   'OpenKAT-rapportages geïmporteerd.': 'OpenKAT pārskati importēti.',
