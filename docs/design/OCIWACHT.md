@@ -93,6 +93,23 @@ De genomen beslissingen staan in §11; die zijn niet meer open.
 
 ## 2. Architectuur
 
+```mermaid
+flowchart TB
+    deck["deck-mutatie — elke toetsaanslag"]
+    deck --> scan["PrivacyScanner — eigen engine (géén SlideQualityAnalyzer)<br/>inline-detectors + allowlist + co-occurrence-escalatie<br/>Expando-memo per slide (scan-config zit in de sleutel)"]
+    scan --> findings["PrivacyFinding — familie · zekerheid · tekstbereik (start/end)"]
+
+    findings --> bridge["privacy_quality_bridge<br/>→ SlideQualityIssue (categorie privacy, 6 kinds)"]
+    bridge --> panel["het bestaande kwaliteitspaneel — waar de gebruiker al kijkt"]
+
+    findings --> proj{{"privacy_projection — de grens (§6)<br/>AudienceDeck · forAudience / forExternalProcessing"}}
+    findings --> gate{{"privacy_export_policy — de export-gate (§4.5)"}}
+```
+
+*De detectie is een eigen familie omdat redactie een tekstbereik nodig heeft en
+de regelset ~90 regels wordt; de bevindingen landen tóch in het bestaande
+kwaliteitspaneel via een adapter.*
+
 ### 2.1 Eigen engine, bestaande UI
 
 De detectie wordt een **eigen familie** (zoals `miauw_compliance_analyzer.dart` dat al is),
@@ -662,6 +679,19 @@ van het paneel zeggen dit expliciet:
 
 ## 4. Openbaarmaking: wat gebeurt er ná detectie
 
+```mermaid
+flowchart TB
+    finding["een bevinding op een slide krijgt een per-slide stand"]
+    finding --> states["warn (standaard) · accept · shield · evidence · redact<br/>bepaalt hóé de bevinding wordt behandeld en op welk niveau vrijgegeven"]
+    states --> export{{"bij export: doelgroepprofiel = een TLP-plafond<br/>de projectie (§6) redigeert alles bóven het plafond"}}
+    export -->|"full / TLP:RED — opdrachtgever, auditor onder NDA"| f1["niets geredigeerd — het verifieerbare exemplaar"]
+    export -->|"restricted / TLP:AMBER"| f2["persoonsgegevens geredigeerd, bevindingen leesbaar"]
+    export -->|"public / TLP:CLEAR"| f3["alles boven plafond weg; onredigeerbaar bewijs valt wég (fail-closed)"]
+```
+
+*Redactie hangt bewust aan de TLP-ladder die Ocideck al heeft, niet aan een
+tweede, concurrerende as.*
+
 ### 4.0 Redactie is een eigenschap van de uitvoer, niet van de slide
 
 De voor de hand liggende opzet — "zet deze slide op `redact`" — is te grof, en breekt op het
@@ -798,6 +828,24 @@ het TLP-filter of `skipped` toch al buiten de export vallen, tellen niet mee.
 ## 5. De vals-positieven-strategie
 
 Dit is waar de feature staat of valt. Zeven mechanismen, in volgorde van effect:
+
+```mermaid
+flowchart TB
+    cand["kandidaat-treffer<br/>(goedkope prefilter: cijfer? @ : /)"]
+    cand --> c1{"checksum geldig?<br/>11-proef · mod-97 · Luhn · ISO 7064"}
+    c1 -->|"nee"| info1["hoogstens 'mogelijk' — nooit 'zeker'"]
+    c1 -->|"ja, maar zwak (11-proef ~9% vals)"| c2{"contextwoord binnen 40 tekens<br/>of een veldlabel?"}
+    c2 -->|"nee"| info2["blijft 'info', niet 'warning'"]
+    c1 -->|"ja, sterk"| c3
+    c2 -->|"ja"| c3{"bekende nep-waarde?<br/>RFC 5737/3849 · testkaarten · test-BSN"}
+    c3 -->|"ja"| drop["genegeerd<br/>(demo kleurt niet rood op eigen voorbeelden)"]
+    c3 -->|"nee"| c4{"eigen identiteit?<br/>eigen naam / e-mail / telefoon / domein"}
+    c4 -->|"ja"| drop
+    c4 -->|"nee"| zeker["bevinding 'zeker' → paneel & export-gate"]
+```
+
+*Een kandidaat moet elke poort overleven om 'zeker' te worden — de omgekeerde
+volgorde van hoe de meeste ruis binnenkomt.*
 
 ### 5.1 Checksums boven regexes
 Elke regel die een checksum kán hebben, krijgt er één, en een regel zonder geldige checksum
@@ -1171,6 +1219,23 @@ check hoort in `tool/check_conventions.dart`, want een test die je kunt omzeilen
 parameter te veranderen, bewaakt niets.
 
 ### 6.6 Verifieerbare redactie: twee versies, één gezegelde bron
+
+```mermaid
+flowchart TB
+    src["gezegelde bron (.md)<br/>SHA-512-zegel over de bytes — document_integrity"]
+    src --> full["VOLLEDIGE versie<br/>klaartekst + salts + manifest (alleen hier)"]
+    src --> red["GEREDIGEERD artefact"]
+
+    red --> blocks["blokken: 8× U+2588, ongeacht de lengte van het origineel (§6.3)"]
+    red --> manifest["redactiemanifest — per redactie:<br/>id · commitment · rule · slide · field"]
+    red --> derived["derived_from = hash van de gezegelde bron (herkomst staat vast)"]
+
+    manifest --> commit["commitment = SHA-256(salt ‖ waarde)<br/>eigen willekeurige salt per redactie<br/>(kale hash → in seconden terug te rekenen → verboden)"]
+    manifest -.->|"auditor legt het naast het document"| dispute["'ik betwist redactie a3f1e2b7'<br/>— zonder de klaartekst te zien"]
+```
+
+*Het zegel blijft over de bron (de identiteit van het rapport), niet over één
+rendering; elk afgeleid artefact draagt een bewijsbare relatie tot dat zegel.*
 
 Redactie botst frontaal op het bestaande integriteitsmechanisme, en dat moet opgelost worden
 vóórdat we een regel code schrijven.
@@ -1946,6 +2011,16 @@ goedkoopste. De volgorde is daarom een ontwerpregel, geen implementatiedetail:
 
 Stap 3 mag stap 1 nooit ophouden. Het paneel toont de tekstbevindingen zodra ze er
 zijn en vult de beeldbevindingen bij zodra die binnen zijn.
+
+```mermaid
+flowchart LR
+    s1["1 · synchroon, microseconden<br/>checksums · regexes · contextpoorten<br/>(bij elke toetsaanslag)"]
+    s2["2 · synchroon, milliseconden<br/>trefwoordlexicons · co-occurrence-escalator"]
+    s3["3 · asynchroon, 10–100en ms<br/>beeldcontrole (YuNet, serieel, eigen schakelaar)"]
+    s1 --> s2 --> s3
+    s1 -.->|"tekstbevindingen meteen"| panel["kwaliteitspaneel"]
+    s3 -.->|"beeldbevindingen vullen bij zodra binnen"| panel
+```
 
 ### 13.5 De beeldcontrole
 
