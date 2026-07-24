@@ -11,6 +11,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/openkat/openkat_directory_scanner.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/shell/openkat_import_action.dart';
+import 'package:ocideck/widgets/shell/openkat_import_summary.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -186,6 +187,67 @@ void main() {
     // (runAsync) en houdt de wachtrij bezet, dus 'bijgewerkt' komt binnen de
     // testtijd niet aan de beurt. Het gedrag — zelfde tab, bijgewerkt deck —
     // staat hierboven; de meldingsoppervlakken toetsen de andere twee tests.
+  });
+
+  testWidgets('met announce uit meldt de actie niets en geeft ze de uitkomst', (
+    tester,
+  ) async {
+    // De route van het instellingenvenster: daar is een snackbar achter een
+    // modale dialoog geen melding, dus meldt het paneel zelf — en dan moet de
+    // actie de tellingen wél teruggeven.
+    final tmp = Directory.systemTemp.createTempSync('ocikat-stil-');
+    addTearDown(() => tmp.deleteSync(recursive: true));
+    File(
+      p.join(tmp.path, 'org1_20240601000000.json'),
+    ).writeAsStringSync(jsonEncode(rapport('org1')));
+    File(p.join(tmp.path, 'geen-rapport.json')).writeAsStringSync('{"a":1}');
+
+    final (container, ctx, ref) = await pump(tester);
+    final uitkomst = await tester.runAsync(
+      () => importOpenKatReports(
+        ctx,
+        ref,
+        directoryOverride: tmp.path,
+        announce: false,
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(uitkomst, isNotNull);
+    expect(uitkomst!.loaded, 1);
+    expect(uitkomst.skipped, 1, reason: 'het bestand dat geen rapport is');
+    expect(uitkomst.failed, isFalse);
+    expect(uitkomst.updatedDeck, isFalse);
+    expect(find.byType(SnackBar), findsNothing);
+    expect(
+      container.read(tabsProvider).current?.deckNotifier.currentState.deck,
+      isNotNull,
+      reason: 'zwijgen is niet hetzelfde als niets doen',
+    );
+  });
+
+  test('de melding zegt per uitkomst iets anders', () {
+    const l10n = AppLocalizations(Locale('nl'));
+    String zin(
+      ({int loaded, int skipped, bool updatedDeck, bool failed}) uitkomst,
+    ) => openKatImportSummary(l10n, uitkomst);
+
+    expect(
+      zin((loaded: 0, skipped: 0, updatedDeck: false, failed: true)),
+      contains('mislukt'),
+    );
+    expect(
+      zin((loaded: 0, skipped: 3, updatedDeck: false, failed: false)),
+      allOf(contains('Geen OpenKAT-rapportages'), contains('3')),
+    );
+    expect(
+      zin((loaded: 2, skipped: 1, updatedDeck: false, failed: false)),
+      allOf(contains('geïmporteerd'), contains('2'), contains('1')),
+    );
+    expect(
+      zin((loaded: 2, skipped: 0, updatedDeck: true, failed: false)),
+      contains('bijgewerkt'),
+    );
   });
 
   test(
