@@ -31,6 +31,22 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# **Waarom een superseded run mag worden afgebroken.** Twee merges naar main
+# binnen een paar minuten leverden op 24-07 een rode scan op die géén vondst
+# was: de lopende run werd opzij gezet door de volgende en meldde zich als
+# `failure`. Dat is de duurste faalvorm voor juist deze poort — een rood
+# beveiligingsvinkje dat niets betekent, leert je het volgende rode vinkje ook
+# weg te klikken.
+#
+# Afbreken kost hier niets, en dat is geen aanname over snelheid maar een
+# eigenschap van wat er gemeten wordt: `gitleaks git` en `trufflehog git`
+# scannen de héle historie, dus de latere run dekt onverkort alles wat de
+# afgebroken run zou hebben gezien. Bij een poort die alleen de wijziging bekijkt
+# zou dit fout zijn.
+concurrency:
+  group: scans-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   scans:
     runs-on: docker
