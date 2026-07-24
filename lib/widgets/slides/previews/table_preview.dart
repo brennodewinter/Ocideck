@@ -69,6 +69,7 @@ class _TableEditCell extends StatefulWidget {
   final int col;
   final double w;
   final double cellSize;
+  final double extraVPad;
   final String font;
   final Color accent;
   final Color textColor;
@@ -85,6 +86,7 @@ class _TableEditCell extends StatefulWidget {
     required this.col,
     required this.w,
     required this.cellSize,
+    required this.extraVPad,
     required this.font,
     required this.accent,
     required this.textColor,
@@ -140,8 +142,8 @@ class _TableEditCellState extends State<_TableEditCell> {
   @override
   Widget build(BuildContext context) {
     final padding = EdgeInsets.symmetric(
-      horizontal: widget.cellSize * 0.55,
-      vertical: widget.cellSize * 0.36,
+      horizontal: widget.cellSize * kTableCellHPadFactor,
+      vertical: widget.cellSize * kTableCellVPadFactor + widget.extraVPad,
     );
     final fieldStyle = _applyFont(
       widget.font,
@@ -245,7 +247,7 @@ class _TablePreview extends StatelessWidget {
     final (rows, caption) = _rowsAndCaption(slide);
     final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
 
-    final cellSize = _fitCellSize(
+    final fit = _fit(
       rows: rows,
       colCount: colCount,
       pad: pad,
@@ -253,6 +255,7 @@ class _TablePreview extends StatelessWidget {
       titleSize: titleSize,
       caption: caption,
     );
+    final cellSize = fit.cellSize;
 
     final accent = AppTheme.parseHexColor(profile.accentColor);
     final textColor = AppTheme.parseHexColor(profile.tableTextColor);
@@ -278,8 +281,8 @@ class _TablePreview extends StatelessWidget {
       required int col,
     }) {
       final padding = EdgeInsets.symmetric(
-        horizontal: cellSize * 0.55,
-        vertical: cellSize * 0.36,
+        horizontal: cellSize * kTableCellHPadFactor,
+        vertical: cellSize * kTableCellVPadFactor + fit.extraVPad,
       );
 
       if (!editing) {
@@ -316,6 +319,7 @@ class _TablePreview extends StatelessWidget {
         col: col,
         w: w,
         cellSize: cellSize,
+        extraVPad: fit.extraVPad,
         font: font,
         accent: accent,
         textColor: textColor,
@@ -376,12 +380,14 @@ class _TablePreview extends StatelessWidget {
     );
   }
 
-  /// The density-based size is an upper bound; a text-heavy table then shrinks
-  /// its font so it fits the slide height at full width, rather than letting
-  /// the FittedBox scale the whole table down (which also narrows it and
-  /// leaves the slide's right edge empty). availH mirrors _outerLayout's frame:
-  /// the 16:9 box minus the logo-safe top/bottom padding and the title block.
-  double _fitCellSize({
+  /// De tabel vult de hoogte die de dia haar laat: de letter groeit tot ze past
+  /// (of tot het leesbaarheidsplafond), en wat een korte tabel dan nog overhoudt
+  /// gaat naar de rijen zelf. Een tekstrijke tabel krimpt juist, zodat hij op
+  /// volle breedte past in plaats van door de FittedBox als geheel verkleind te
+  /// worden — dat maakt hem ook smaller en laat de rechterrand leeg. availH
+  /// spiegelt het kader van _outerLayout: de 16:9-doos min de logo-veilige
+  /// randen, het titelblok en het bijschrift.
+  ({double cellSize, double extraVPad}) _fit({
     required List<List<String>> rows,
     required int colCount,
     required double pad,
@@ -389,12 +395,6 @@ class _TablePreview extends StatelessWidget {
     required double titleSize,
     required String caption,
   }) {
-    final baseCell = tableCellFontSize(
-      w,
-      rowCount: rows.length,
-      colCount: colCount,
-    );
-    final minCell = tableCellFontMinimum(w);
     final tableWidth = w - pad * 2;
     final titleBlock = slide.title.isNotEmpty
         ? measureTextHeight(
@@ -412,19 +412,18 @@ class _TablePreview extends StatelessWidget {
         _logoAwareBottomPadding(pad, safe.bottom) -
         titleBlock -
         _captionBlockHeight(caption, w, tableWidth, font, pad);
-    return memoizedRenderLayout<double>(
+    return memoizedRenderLayout<({double cellSize, double extraVPad})>(
       slide: slide,
       font: font,
       width: w,
       availW: tableWidth,
       availH: availH,
-      compute: () => tableFitCellSize(
+      compute: () => tableFit(
         rows: rows,
         colCount: colCount,
+        slideWidth: w,
         tableWidth: tableWidth,
         availH: availH,
-        baseCellSize: baseCell,
-        minCellSize: minCell,
         font: font,
       ),
     );

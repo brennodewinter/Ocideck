@@ -107,6 +107,112 @@ void main() {
     });
   });
 
+  group('tableFit', () {
+    const slideWidth = 1280.0;
+    const availH = 440.0;
+
+    ({double cellSize, double extraVPad}) fitOf(
+      List<List<String>> rows,
+      int colCount,
+    ) => tableFit(
+      rows: rows,
+      colCount: colCount,
+      slideWidth: slideWidth,
+      tableWidth: _tableWidth,
+      availH: availH,
+      font: _font,
+    );
+
+    double heightOf(
+      List<List<String>> rows,
+      int colCount,
+      ({double cellSize, double extraVPad}) fit,
+    ) => tableBlockHeight(
+      rows: rows,
+      colCount: colCount,
+      tableWidth: _tableWidth,
+      cellSize: fit.cellSize,
+      font: _font,
+      extraVPad: fit.extraVPad,
+    );
+
+    // De klacht: een tabel van een handvol regels bleef als fragment bovenin de
+    // dia hangen terwijl de onderste helft leeg bleef.
+    test('a short table grows to fill the height it is given', () {
+      final rows = <List<String>>[
+        const ['Functie', 'Gratis', 'Pro'],
+        const ['Export', 'Nee', 'Ja'],
+        const ['Support', 'E-mail', '24/7'],
+      ];
+      final fit = fitOf(rows, 3);
+      expect(fit.cellSize, tableCellFontMaximum(slideWidth));
+      expect(fit.extraVPad, greaterThan(0));
+      expect(heightOf(rows, 3, fit), greaterThan(availH * 0.6));
+    });
+
+    test('the cell never grows past the readability ceiling', () {
+      final fit = fitOf(const [
+        ['A', 'B'],
+        ['1', '2'],
+      ], 2);
+      expect(fit.cellSize, lessThanOrEqualTo(tableCellFontMaximum(slideWidth)));
+    });
+
+    test('a text-heavy table shrinks its font to fit instead', () {
+      const line = 'lorem ipsum dolor';
+      final rows = <List<String>>[
+        const ['Rol', 'Taken', 'Verantwoordelijkheden', 'Bevoegdheden'],
+        for (var i = 0; i < 4; i++) const [line, line, line, line],
+      ];
+      final fit = fitOf(rows, 4);
+      expect(fit.cellSize, lessThan(tableCellFontMaximum(slideWidth)));
+      expect(heightOf(rows, 4, fit), lessThanOrEqualTo(availH));
+    });
+
+    // Past het bij de kleinste letter nóg niet, dan houdt het op: de FittedBox
+    // schaalt het geheel verder terug. Onleesbaar klein maken lost niets op.
+    test('an impossible table bottoms out at the minimum, never below', () {
+      final paragraph = List.filled(12, 'lorem ipsum dolor sit amet').join(' ');
+      final rows = <List<String>>[
+        const ['Rol', 'Taken', 'Verantwoordelijkheden', 'Bevoegdheden'],
+        for (var i = 0; i < 12; i++)
+          [paragraph, paragraph, paragraph, paragraph],
+      ];
+      final fit = fitOf(rows, 4);
+      expect(fit.cellSize, tableCellFontMinimum(slideWidth));
+      expect(fit.extraVPad, 0);
+    });
+
+    // Groeien mag de kolommen niet terugduwen tot hun eigen kop: dan is de
+    // ondergrens uit tableColumnWidths weer weg en breken de koppen alsnog.
+    test('growth stops before the column minimums eat the table width', () {
+      final rows = <List<String>>[
+        const [
+          'Bevinding',
+          'Ernst',
+          'Systemen',
+          'Organisaties',
+          'Sinds',
+          'Eigenaar',
+          'Status',
+          'Opmerking',
+        ],
+        for (var i = 0; i < 3; i++)
+          const ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'],
+      ];
+      final fit = fitOf(rows, 8);
+      expect(
+        tableColumnMinimumsWidth(
+          rows: rows,
+          colCount: 8,
+          cellSize: fit.cellSize,
+          font: _font,
+        ),
+        lessThan(_tableWidth),
+      );
+    });
+  });
+
   group('tableBlockHeight', () {
     test('grows with the number of rows', () {
       double heightOf(List<List<String>> rows) => tableBlockHeight(
