@@ -1770,6 +1770,17 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Wat doen we met deze dia’s?': 'Ko darīt ar šiem slaidiem?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Šos slaidus neizdevās pārveidot pilnībā. Izvēlies katram slaidam, kas jādara; tas, ko neaiztiec, tiks pārņemts pēc iespējas pilnīgāk, pievienojot piezīmi par to, kas trūkst.',
+  'Voor alle dia’s:': 'Visiem slaidiem:',
+  'Dia': 'Slaids',
+  'Zo volledig mogelijk': 'Pēc iespējas pilnīgāk',
+  'Alleen de afbeelding': 'Tikai attēls',
+  'Import afbreken': 'Atcelt importēšanu',
+  'Niet meer vragen': 'Vairs nejautāt',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Turpmāk visu pārņemt pēc iespējas pilnīgāk.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Kontrolsaraksta rādītājs: katram testam stabilais id, kanoniskais nosaukums un kategorija. Pašas rokasgrāmatas saturs nav iekļauts.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

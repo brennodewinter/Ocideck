@@ -2748,6 +2748,17 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Wat doen we met deze dia’s?': 'Bu slaytlarla ne yapalım?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Bu slaytlar tümüyle dönüştürülemedi. Her slayt için ne yapılacağını seçin; dokunmadıklarınız olabildiğince eksiksiz aktarılır ve eksik kalanlar için bir not eklenir.',
+  'Voor alle dia’s:': 'Tüm slaytlar için:',
+  'Dia': 'Slayt',
+  'Zo volledig mogelijk': 'Olabildiğince eksiksiz',
+  'Alleen de afbeelding': 'Yalnızca görsel',
+  'Import afbreken': 'İçe aktarmayı iptal et',
+  'Niet meer vragen': 'Bir daha sorma',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Bundan sonra her şey olabildiğince eksiksiz aktarılsın.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Kontrol listesi dizini: her test için kalıcı kimlik, kanonik başlık ve kategori. Kılavuzun kendi içeriği pakete dahil değil.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

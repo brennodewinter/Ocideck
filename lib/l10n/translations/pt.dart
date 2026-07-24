@@ -1800,6 +1800,17 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Wat doen we met deze dia’s?': 'O que fazer com estes slides?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Estes slides não puderam ser convertidos por completo. Escolha para cada slide o que deve acontecer; o que não alterar será importado da forma mais completa possível, com uma nota sobre o que falta.',
+  'Voor alle dia’s:': 'Para todos os slides:',
+  'Dia': 'Slide',
+  'Zo volledig mogelijk': 'O mais completo possível',
+  'Alleen de afbeelding': 'Apenas a imagem',
+  'Import afbreken': 'Cancelar importação',
+  'Niet meer vragen': 'Não perguntar novamente',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'A partir de agora, importar tudo da forma mais completa possível.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'O índice da lista de verificação: por teste, o id estável, o título canónico e a categoria. O conteúdo do próprio guia não está incluído.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

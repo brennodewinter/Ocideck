@@ -1806,6 +1806,17 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Wat doen we met deze dia’s?': 'Cad a dhéanfaimid leis na sleamhnáin seo?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Níorbh fhéidir na sleamhnáin seo a thiontú go hiomlán. Roghnaigh do gach sleamhnán cad ba cheart a dhéanamh; rud ar bith nach mbaineann tú leis, tógfar chomh hiomlán agus is féidir é, le nóta faoina bhfuil ar iarraidh.',
+  'Voor alle dia’s:': 'Do gach sleamhnán:',
+  'Dia': 'Sleamhnán',
+  'Zo volledig mogelijk': 'Chomh hiomlán agus is féidir',
+  'Alleen de afbeelding': 'An íomhá amháin',
+  'Import afbreken': 'Cealaigh an iompórtáil',
+  'Niet meer vragen': 'Ná fiafraigh arís',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'As seo amach, tógtar gach rud chomh hiomlán agus is féidir.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Innéacs an tseicliosta: in aghaidh gach tástála, an t-aitheantóir seasmhach, an teideal canónta agus an chatagóir. Níl ábhar an treoraí féin faoi iamh.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

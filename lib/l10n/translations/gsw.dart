@@ -1774,6 +1774,17 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Wat doen we met deze dia’s?': 'Was mache mir mit dene Slides?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Die Slides hät me nöd ganz chöne umwandle. Wähl pro Slide, was passiere söll; was du nöd aalangsch, wird so vollständig wie möglich übernoh, mit ere Notiz drzue, was fählt.',
+  'Voor alle dia’s:': 'Für alli Slides:',
+  'Dia': 'Slide',
+  'Zo volledig mogelijk': 'Möglichscht vollständig',
+  'Alleen de afbeelding': 'Nur s Bild',
+  'Import afbreken': 'Import abbräche',
+  'Niet meer vragen': 'Nöd meh frööge',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Ab jetzt alles so vollständig wie möglich übernäh.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'De Checklischte-Index: pro Test d stabili ID, de kanonisch Titel und d Kategorie. De Inhalt vom Leitfade sälber isch nöd derbi.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

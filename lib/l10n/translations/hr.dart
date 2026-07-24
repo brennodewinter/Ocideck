@@ -1777,6 +1777,17 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Wat doen we met deze dia’s?': 'Što učiniti s ovim slajdovima?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Ovi se slajdovi nisu mogli u cijelosti pretvoriti. Odaberi za svaki slajd što treba učiniti; ono što ne dirneš preuzet će se što je moguće potpunije, uz bilješku o tome što nedostaje.',
+  'Voor alle dia’s:': 'Za sve slajdove:',
+  'Dia': 'Slajd',
+  'Zo volledig mogelijk': 'Što potpunije',
+  'Alleen de afbeelding': 'Samo slika',
+  'Import afbreken': 'Odustani od uvoza',
+  'Niet meer vragen': 'Ne pitaj više',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Od sada preuzimaj sve što potpunije.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Indeks kontrolne liste: po testu stabilni id, kanonski naslov i kategorija. Sadržaj samog vodiča nije uključen.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

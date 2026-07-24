@@ -1771,6 +1771,17 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Wat doen we met deze dia’s?': 'Apa yang harus dilakukan dengan slide ini?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Slide ini tidak dapat dikonversi sepenuhnya. Pilih per slide apa yang harus terjadi; yang tidak Anda ubah akan diambil selengkap mungkin, disertai catatan tentang apa yang hilang.',
+  'Voor alle dia’s:': 'Untuk semua slide:',
+  'Dia': 'Slide',
+  'Zo volledig mogelijk': 'Selengkap mungkin',
+  'Alleen de afbeelding': 'Hanya gambar',
+  'Import afbreken': 'Batalkan impor',
+  'Niet meer vragen': 'Jangan tanya lagi',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Mulai sekarang, ambil semuanya selengkap mungkin.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Indeks daftar periksa: id stabil, judul kanonik, dan kategori per pengujian. Isi panduan itu sendiri tidak disertakan.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

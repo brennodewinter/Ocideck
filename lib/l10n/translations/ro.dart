@@ -1788,6 +1788,17 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Wat doen we met deze dia’s?': 'Ce facem cu aceste diapozitive?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Aceste diapozitive nu au putut fi convertite complet. Alege pentru fiecare diapozitiv ce trebuie să se întâmple; ceea ce nu modifici va fi preluat cât mai complet posibil, cu o notă despre ce lipsește.',
+  'Voor alle dia’s:': 'Pentru toate diapozitivele:',
+  'Dia': 'Diapozitiv',
+  'Zo volledig mogelijk': 'Cât mai complet',
+  'Alleen de afbeelding': 'Doar imaginea',
+  'Import afbreken': 'Anulează importul',
+  'Niet meer vragen': 'Nu mai întreba',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'De acum înainte, preia totul cât mai complet.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Indexul listei de verificare: per test, id-ul stabil, titlul canonic și categoria. Conținutul ghidului în sine nu este inclus.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

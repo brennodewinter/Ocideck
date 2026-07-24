@@ -730,6 +730,17 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Wat doen we met deze dia’s?': 'Kiko nos ta hasi ku e slidenan aki?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'E slidenan aki no por a wòrdu konvertí kompletamente. Skohe pa kada slide kiko mester pasa; loke bo no toka ta wòrdu tumá over mas kompleto posibel, ku un nota tokante loke ta falta.',
+  'Voor alle dia’s:': 'Pa tur slide:',
+  'Dia': 'Slide',
+  'Zo volledig mogelijk': 'Mas kompleto posibel',
+  'Alleen de afbeelding': 'Solo e imágen',
+  'Import afbreken': 'Kanselá importashon',
+  'Niet meer vragen': 'No puntra mas',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'For di awor, tuma tur kos over mas kompleto posibel.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'E indeks di checklist: pa kada test e id stabil, e título kanóniko i e kategoria. E kontenido di e guia mes no ta inkluí.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

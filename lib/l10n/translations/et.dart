@@ -1762,6 +1762,17 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Wat doen we met deze dia’s?': 'Mida teha nende slaididega?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Neid slaide ei õnnestunud täielikult teisendada. Vali iga slaidi jaoks, mida teha; see, mida sa ei muuda, võetakse üle võimalikult täielikult, koos märkusega puuduva kohta.',
+  'Voor alle dia’s:': 'Kõigile slaididele:',
+  'Dia': 'Slaid',
+  'Zo volledig mogelijk': 'Võimalikult täielikult',
+  'Alleen de afbeelding': 'Ainult pilt',
+  'Import afbreken': 'Tühista import',
+  'Niet meer vragen': 'Ära küsi uuesti',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Edaspidi võetakse kõik üle võimalikult täielikult.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Kontrollnimekirja register: iga testi kohta püsiv id, kanooniline pealkiri ja kategooria. Juhendi enda sisu ei ole kaasas.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

@@ -1775,6 +1775,17 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Wat doen we met deze dia’s?': 'Mi legyen ezekkel a diákkal?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Ezeket a diákat nem sikerült teljesen átalakítani. Válaszd ki diánként, mi történjen; amihez nem nyúlsz, a lehető legteljesebben kerül át, és megjegyzés kerül mellé a hiányzó részekről.',
+  'Voor alle dia’s:': 'Minden diára:',
+  'Dia': 'Dia',
+  'Zo volledig mogelijk': 'A lehető legteljesebben',
+  'Alleen de afbeelding': 'Csak a kép',
+  'Import afbreken': 'Importálás megszakítása',
+  'Niet meer vragen': 'Ne kérdezd többé',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Mostantól minden a lehető legteljesebben kerül át.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Az ellenőrzőlista indexe: tesztenként az állandó azonosító, a kanonikus cím és a kategória. Maga az útmutató tartalma nincs mellékelve.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

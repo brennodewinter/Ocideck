@@ -1778,6 +1778,17 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Wat doen we met deze dia’s?': 'Čo urobíme s týmito snímkami?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Tieto snímky sa nepodarilo previesť úplne. Zvoľ pri každej snímke, čo sa má stať; čo nezmeníš, prevezme sa čo najúplnejšie, s poznámkou o tom, čo chýba.',
+  'Voor alle dia’s:': 'Pre všetky snímky:',
+  'Dia': 'Snímka',
+  'Zo volledig mogelijk': 'Čo najúplnejšie',
+  'Alleen de afbeelding': 'Len obrázok',
+  'Import afbreken': 'Zrušiť import',
+  'Niet meer vragen': 'Už sa nepýtať',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Odteraz preberať všetko čo najúplnejšie.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Register kontrolného zoznamu: pri každom teste stabilné id, kanonický názov a kategória. Obsah samotnej príručky súčasťou nie je.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
