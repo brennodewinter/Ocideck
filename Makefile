@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release deploy-web check check-no-coverage check-full help servicenormen doorlooptijd ratchets
+.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release deploy-web check check-no-coverage check-full help servicenormen doorlooptijd ratchets clean-test-cache
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -29,6 +29,27 @@ DARTCV_LIB := $(firstword $(wildcard   build/macos/Build/Products/*/DartCvMacOS/
 ifneq ($(DARTCV_LIB),)
 export DARTCV_LIB_PATH := $(abspath $(DARTCV_LIB))
 endif
+
+# Náást de gewone uitvoer schrijft elke suiteaanroep een machineleesbaar
+# rapport. Dat is het zijkanaal waar de verklaring hieronder uit leest: de
+# terminaluitvoer blijft onaangeraakt — een pipe zou `flutter test` zijn
+# voortgangsregel kosten en er duizenden regels van maken — en een zijkanaal kan
+# per definitie geen echte fout wegpoetsen. Het bestand staat onder build/ en
+# gaat dus niet mee in de repository.
+TEST_REPORT := build/test-report.json
+SUITE_REPORT := --file-reporter json:$(TEST_REPORT)
+
+# Elke `flutter test`-aanroep in dit bestand sluit hiermee af, zonder
+# uitzondering. Valt de suite om, dan zegt tool/explain_suite_failure.dart welke
+# bestanden niet GELADEN konden worden — de fout die naar de verkeerde plek
+# wijst (#798) — en of dat de bekende kanaalstoring is of een echte laadfout.
+# Zwijgt wanneer er niets te verklaren valt.
+#
+# Als variabele en niet tien keer uitgeschreven, om dezelfde reden als
+# STATIC_GATES verderop: tien kopieën lopen uit elkaar, en dan hangt het van je
+# doel af of je de verklaring ziet. `test/explain_suite_failure_test.dart` staat
+# erop dat er geen aanroep buiten valt.
+ON_SUITE_FAILURE := || { dart run tool/explain_suite_failure.dart $(TEST_REPORT); exit 1; }
 
 help:
 	@echo "OciDeck quality targets:"
@@ -73,6 +94,7 @@ help:
 	@echo "  make refresh-lexicon  Regenerate the bundled health lexicon from Orphanet (read the term diff)."
 	@echo "  make l10n-check      Fast l10n gate: duplicate keys, per-language coverage, and formatting."
 	@echo "  make fix             Auto-apply 'dart fix' and reformat (local cleanup helper)."
+	@echo "  make clean-test-cache  Gooi alleen de kernelcache van 'flutter test' weg (bij een laadfout op een test die los groen is)."
 	@echo "  make build-web       Build the hardened web bundle (self-hosted CanvasKit + CSP-safe loader)."
 	@echo "  make check-web       Build the web bundle and assert its hardening (CSP, self-hosted, fonts)."
 	@echo "  make build-macos     Build the macOS .app (macOS only)."
@@ -121,6 +143,29 @@ analyze:
 	@echo "Failure means: inspect analyzer diagnostics above the final summary."
 	flutter analyze --fatal-infos
 
+# Gooit de incrementele kernelcache weg die `flutter test` zelf aanlegt, en
+# niets anders.
+#
+# **Waarom dit een doel is en geen zin in een reactie.** #798: twee keer op één
+# dag viel `make check` om op een `Failed to load` bij een test die los groen
+# was, en beide keren was het weg na precies dit — zonder verder een letter te
+# wijzigen. Het recept zat daarna in het hoofd van wie erbij was. Nu niet meer.
+#
+# **Waarom `build/test_cache` en niet `flutter clean`.** Onder `build/` staan ook
+# de platformbuilds, en daar hangt hierboven DARTCV_LIB aan: gooi je die weg,
+# dan slaan de gezichtsdetectietests zichzelf weer over en staat de suite groen
+# om de verkeerde reden. Dit doel raakt alleen de testcache.
+#
+# **Wat het kost.** De eerstvolgende suite compileert van nul. Daarom is dit een
+# doel dat je aanroept en geen stap die vóór elke draai meeloopt — dat laatste
+# lost hetzelfde op en betaalt die prijs elke keer.
+clean-test-cache:
+	@echo "== OciDeck clean: test cache =="
+	@echo "Command: rm -rf build/test_cache"
+	@echo "Covers: de incrementele kernelcache van 'flutter test' (build/test_cache/build/<hash>.cache.dill[.track.dill])."
+	@echo "Kosten: de eerstvolgende suite compileert weer van nul; de platformbuilds onder build/ blijven staan."
+	rm -rf build/test_cache
+
 # Run the full unit/widget test suite. Ordering is randomised so a test can't
 # silently depend on another test running first.
 test:
@@ -128,7 +173,7 @@ test:
 	@echo "Command: flutter test --test-randomize-ordering-seed random"
 	@echo "Covers: all unit/widget tests under test/, including markdown round-trip, preview, export, provider, footer, and presenter tests."
 	@echo "Failure means: inspect the named failing test file and test case in the Flutter output."
-	$(RAISE_FDS) flutter test --test-randomize-ordering-seed random --exclude-tags golden
+	$(RAISE_FDS) flutter test --test-randomize-ordering-seed random --exclude-tags golden $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Run the full test suite with coverage and summarise line coverage. The floor
 # guards against large regressions; raise it as coverage improves.
@@ -142,7 +187,7 @@ coverage:
 	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=80 --require-instrumented"
 	@echo "Covers: line coverage over lib/, plus: every lib/ file is in at least one test."
 	@echo "Failure means: coverage fell below the floor, or a lib/ file is in no test at all."
-	$(RAISE_FDS) flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden
+	$(RAISE_FDS) flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 	dart run tool/coverage_summary.dart --min=80 --require-instrumented
 
 # The per-file floor, over the report `coverage` just wrote (no second test run).
@@ -171,7 +216,7 @@ test-golden:
 	@echo "Covers: SlidePreviewWidget layout/structure/colour per slide type."
 	@echo "Failure means: a slide renders differently — inspect the *_testImage diff,"
 	@echo "        then re-run with UPDATE=1 if the change is intentional."
-	$(RAISE_FDS) flutter test --tags golden $(if $(UPDATE),--update-goldens,)
+	$(RAISE_FDS) flutter test --tags golden $(if $(UPDATE),--update-goldens,) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Mutation check for the "dead/untested boolean-operand" bug class that line
 # coverage and `dart analyze` both miss: an `||`/`&&` operand that can never be
@@ -222,7 +267,7 @@ test-contracts:
 	@echo "Command: flutter test test/markdown_round_trip_test.dart test/markdown_service_test.dart"
 	@echo "Covers: Markdown generation/parsing, save-load round-trips, slide field migration defaults, theme profile metadata."
 	@echo "Failure means: a UI/model field may not persist correctly, or old presentations may migrate incorrectly."
-	flutter test test/markdown_round_trip_test.dart test/markdown_service_test.dart
+	flutter test test/markdown_round_trip_test.dart test/markdown_service_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Visual/rendering-focused widget tests.
 test-preview:
@@ -230,7 +275,7 @@ test-preview:
 	@echo "Command: flutter test preview-related widget tests"
 	@echo "Covers: slide preview rendering, image panels, footer placement, TLP badge, inline markdown, text style regressions."
 	@echo "Failure means: inspect visual layout/rendering logic before changing export or slide-preview code."
-	flutter test test/bullets_image_preview_test.dart test/footer_preview_test.dart test/image_slides_preview_test.dart test/inline_markdown_test.dart test/slide_text_style_test.dart test/tlp_test.dart
+	flutter test test/bullets_image_preview_test.dart test/footer_preview_test.dart test/image_slides_preview_test.dart test/inline_markdown_test.dart test/slide_text_style_test.dart test/tlp_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Export and filesystem integration smoke tests.
 test-export:
@@ -238,7 +283,7 @@ test-export:
 	@echo "Command: flutter test test/export_service_test.dart test/file_service_test.dart"
 	@echo "Covers: PDF/PPTX export smoke tests and project file-save behavior, including copied logo assets."
 	@echo "Failure means: inspect export_service/file_service and generated artifact structure."
-	flutter test test/export_service_test.dart test/file_service_test.dart
+	flutter test test/export_service_test.dart test/file_service_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # State-management and recovery tests.
 test-state:
@@ -246,7 +291,7 @@ test-state:
 	@echo "Command: flutter test provider and recovery tests"
 	@echo "Covers: deck mutations, undo/redo, skip state, search/replace, settings profiles, recovery snapshots."
 	@echo "Failure means: inspect provider state transitions or recovery serialization."
-	flutter test test/deck_provider_test.dart test/settings_provider_test.dart test/recovery_service_test.dart
+	flutter test test/deck_provider_test.dart test/settings_provider_test.dart test/recovery_service_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Service-level tests.
 test-services:
@@ -254,7 +299,7 @@ test-services:
 	@echo "Command: flutter test service tests"
 	@echo "Covers: image path/copy behavior, captions, descriptions, and sidecar metadata services."
 	@echo "Failure means: inspect service path handling, sidecar reads/writes, or filesystem assumptions."
-	flutter test test/caption_service_test.dart test/description_service_test.dart test/image_service_test.dart
+	flutter test test/caption_service_test.dart test/description_service_test.dart test/image_service_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Presenter interaction tests.
 test-presenter:
@@ -262,7 +307,7 @@ test-presenter:
 	@echo "Command: flutter test test/fullscreen_presenter_test.dart"
 	@echo "Covers: fullscreen presenter navigation, presenter view, keyboard shortcuts, grid navigation."
 	@echo "Failure means: inspect fullscreen presenter keyboard/focus/navigation behavior."
-	flutter test test/fullscreen_presenter_test.dart
+	flutter test test/fullscreen_presenter_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Advisory dependency freshness report; not part of normal check because it can
 # depend on network availability and does not imply the current code is broken.
@@ -308,7 +353,7 @@ sast:
 shellcheck:
 	@echo "== OciDeck check: shell scripts (ShellCheck) =="
 	@echo "Command: shellcheck scripts/*.sh"
-	@echo "Covers: every committed shell script — the release build and the icon generator."
+	@echo "Covers: every committed shell script — the release build, the web deploy, and the icon generator."
 	@echo "Failure means: ShellCheck found a defect. Most of its findings are the"
 	@echo "        classics that only bite on the day it matters: an unquoted"
 	@echo "        variable that splits on a path with a space, a glob that"
@@ -748,7 +793,7 @@ l10n-check:
 	@echo "Covers: duplicate keys, per-language d()/t() coverage, untranslated English, and l10n formatting."
 	@echo "Failure means: run 'make add-l10n' / 'dart format lib/l10n', fill the gap, or translate a string that is still English."
 	dart format --output=none --set-exit-if-changed lib/l10n
-	flutter test test/l10n_duplicate_keys_test.dart test/app_localizations_test.dart test/l10n_untranslated_test.dart
+	flutter test test/l10n_duplicate_keys_test.dart test/app_localizations_test.dart test/l10n_untranslated_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Build the hardened web bundle. Two flags do the security work:
 #   --no-web-resources-cdn  Self-host CanvasKit instead of fetching it from the

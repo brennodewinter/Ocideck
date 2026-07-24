@@ -138,6 +138,48 @@ read a book to find out.
   en `%`. Een melding die niemand kán wegwerken is geen poort maar ruis.
 
 ### Fixed
+- **Een omgevallen suite wijst niet langer naar een test die niets misdaan
+  heeft.** `make check` viel op 24-07-2026 twee keer om met `Failed to load
+  "test/<wisselend>_test.dart": type '_Map<String, dynamic>' is not a subtype of
+  type 'List<dynamic>' in type cast` (#798). Het is een fout bij het *laden* van
+  een testbestand; de genoemde test was los gedraaid allebei de keren groen, en
+  allebei de keren was het weg na het opruimen van `build/test_cache` — dezelfde
+  boom, geen letter gewijzigd. De kostenpost is niet de storing maar de uren van
+  wie een gezonde test gaat debuggen.
+
+  **De cache was de verkeerde verdachte, en dat is tijdens dit werk gebleken.**
+  Drie manieren om hem te bederven zijn tegen een echte draai geprobeerd —
+  halveren, bytes omklappen, vervangen door een geldige dill uit een andere
+  bronboom — en `flutter test` ving alle drie op en werd groen. Daarna viel de
+  storing tijdens deze poort zélf, mét stack, en die wijst ergens anders heen:
+  `stream_channel/lib/src/multi_channel.dart:143`, waar de verbinding met
+  `stream.cast<List>()` gelezen wordt. Elk frame op die lijn hoort een
+  `[id, inhoud]`-lijst te zijn; er kwam een JSON-object langs. Een kale `List`
+  leest de VM voor als `List<dynamic>` — vandaar precies die melding, en vandaar
+  een stack met niets dan `dart:async` erboven. Het is dus de lijn tussen
+  `flutter test` en het testproces, niet de cache en niet die test.
+
+  Wat de drie bekende voorvallen gemeen hebben is belasting: alle drie in de
+  dekkingsfase, en de reproductie viel terwijl er een tweede `flutter test` op
+  dezelfde machine liep. Drie is geen steekproef, dus dat staat er als
+  waarneming. De gooiende regel staat vast, de aanleiding niet.
+
+  Wat er nu gebeurt: élke `flutter test` in de Makefile schrijft náást het
+  scherm een machineleesbaar rapport (`--file-reporter`), en bij een rode suite
+  leest `tool/explain_suite_failure.dart` dat en zegt wélke bestanden niet
+  GELADEN konden worden — plus of dat de bekende storing is of een echte
+  laadfout. Een zijkanaal, dus het kan per definitie niets wegpoetsen: de
+  uitvoer stroomt onveranderd door en de afloop blijft die van de suite. Een
+  pipe was geen optie, die kost `flutter test` zijn voortgangsregel.
+
+  Belangrijker dan de geruststelling is de andere kant: een bestand dat niet
+  compileert is óók een laadfout, en dat wordt juist als échte fout benoemd —
+  mét de zin die er anders bij inschiet, dat de tests erin niet gedraaid hebben
+  en niet meetellen. `test/explain_suite_failure_test.dart` toetst precies dat.
+  Verder is er `make clean-test-cache` (alleen `build/test_cache`, bewust niet
+  `flutter clean` — daaronder staan de platformbuilds waar `DARTCV_LIB` de
+  native OpenCV-bibliotheek vindt) als grover middel wanneer opnieuw draaien
+  niet helpt.
 - **Sneltoetsen worden overal op dezelfde manier geschreven, en de vertaalpoort
   kijkt niet langer langs een extension heen.** Er leefden twee patronen naast
   elkaar (#803). Het commandopalet droeg losse literals (`shortcut: 'Ctrl/Cmd+S'`)
