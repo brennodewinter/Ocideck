@@ -252,6 +252,34 @@ read a book to find out.
   de gebruiker over contrast vertelt. Dat de vier vondsten van 23-07
   donker-specifiek leken, kwam doordat er in donkere modus gekeken werd. De
   rangorde zit nu in gewicht en schuinte in plaats van in dekking.
+- **Het zwevende label van een invoerveld liep dwars door een kleurovergang, en
+  in donkere modus las dat als een afgesneden onderste letterhelft.** "Waarde",
+  "Eenheid", "Label", "Type" in de cockpit-editor; de hele lijst in Instellingen
+  → App-thema (#811). Geen afknipping: een zwevend label staat half boven de
+  bovenrand van het veld en half erin, en de gap van een `OutlineInputBorder`
+  onderbreekt alleen de *lijn*, niet het vlak. Het thema zette `filled: true`
+  met de oppervlaktekleur, dus er liep altijd een overgang door de letters — in
+  het lichte profiel #F4F7FC tegen #FFFFFF (onzichtbaar), in het donkere #0F172A
+  tegen #1E293B (een harde rand).
+
+  Nu geen vulling: het veld neemt over waar het op staat, en dan is er niets om
+  doorheen te lopen. Dat is ook wat Material 3 met een *outlined* tekstveld
+  bedoelt — de combinatie vulling + omranding was de afwijking, niet de norm.
+
+  De prijs is dat de rand het veld voortaan alleen moet dragen, en gemeten bleek
+  die dat niet te kunnen: `outlineVariant` haalde 1,58–1,92:1 tegen de
+  achtergrond eronder. Daarom mee omgezet naar `outline` — 4,18–5,61:1, en
+  daarmee over de 3:1 die WCAG 1.4.11 voor de grens van een bedieningselement
+  vraagt. Het veld is dus beter vindbaar dan vóór de reparatie, niet slechter.
+
+  De regressietest meet de oorzaak op pixels en niet op een themavlag: tegen de
+  oude code droeg 91,7% van het veldoppervlak een eigen vulling (12.573 van
+  13.708 pixels), nu 0%. De randmeting loopt over alle drie de ingebouwde
+  profielen. Beide zijn één keer rood gezien tegen de oude waarden.
+
+  De dertien plekken die zélf `filled: true` met een eigen kleur zetten (de
+  notitiebalk, de zoekbalk, de tabelkoppen) blijven zoals ze zijn: die kiezen
+  bewust een vlak, en geen van alle heeft een zwevend label.
 - **De vertaalpoort volgt nu ook een veldsprong, en dat bleek veertien
   onvertaalde regels in het instellingenvenster te verbergen.** De analyse volgde
   argumenten terug naar hun declaratie, maar verloor het spoor zodra een string
