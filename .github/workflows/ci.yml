@@ -48,6 +48,15 @@ jobs:
           # Don't leave the auth token in .git/config after checkout, where a
           # later step (or a compromised action) could reuse it.
           persist-credentials: false
+          # Zonder dit is de geheimenscan verderop theater. `actions/checkout`
+          # kloont standaard één commit diep, terwijl `make check-secrets` twee
+          # van zijn vier passes over de histórie doet (`gitleaks git .`,
+          # `trufflehog git file://.`). Op een ondiepe kloon kijken die naar
+          # bijna niets en melden groen — en het geval dat ze moeten vinden is
+          # nu juist het geheim dat drie commits terug is toegevoegd en daarna
+          # "verwijderd". Dezelfde reden als in .forgejo/workflows/scans.yml,
+          # waar dit wél al stond.
+          fetch-depth: 0
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
