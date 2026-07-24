@@ -5,6 +5,23 @@
 # release-manifest. Een kant-en-klaar Flutter-image (cirruslabs) is bewust
 # vermeden: dat bleek kanaal "[user-branch]" uit onbekende bron te bevatten,
 # en check-toolchain (onderdeel van make check) keurt precies dat af.
+#
+# **Waarom er sinds #790 gecachet wordt.** Een poortrun duurde 22 minuten,
+# waarvan een fors deel elke keer opnieuw dezelfde tarball ophaalde en met
+# `xz` uitpakte — werk dat per definitie hetzelfde resultaat geeft, want de
+# sleutel is de gepinde versie. De cache neemt die stap weg; hij vervangt géén
+# controle. `check-toolchain` draait binnen `make check` op de herstelde boom
+# en eist onverkort kanaal `stable`, de officiële herkomst en gelijkheid met
+# de pin. Een cache die iets anders bevat valt dus om op dezelfde poort die
+# destijds het cirruslabs-image afkeurde.
+#
+# De eerlijke grens daarbij: die cache wordt geschreven door onze eigen jobs op
+# onze eigen runner. Wie de runner beheert, beheert de cache — dat is dezelfde
+# vertrouwensgrens als de runner zelf, niet een nieuwe.
+#
+# De cachestappen staan op `continue-on-error`. Spreekt de forge de cache-API
+# van deze actie niet, dan verliezen we de versnelling en verder niets: de
+# installatiestap hieronder draait dan gewoon, en de poort blijft de poort.
 name: ci
 
 on:
@@ -28,11 +45,33 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: Officiële Flutter volgens de pin
+      # De pin is de cachesleutel, dus hij wordt één keer gelezen en daarna
+      # hergebruikt — niet twee keer met hetzelfde `sed`.
+      - name: Gepinde Flutter-versie lezen
+        id: pin
         run: |
           set -eu
           VERSION="$(sed -n 's/^flutter \(.*\)-stable$/\1/p' .tool-versions)"
           test -n "$VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      # Sleutel = de gepinde versie. Een pin-bump is dus automatisch een nieuwe
+      # cache; er is geen sleutel die stil bij een oude toolchain blijft staan.
+      # Deze cache draagt óók wat Flutter tijdens de run zelf binnenhaalt
+      # (bin/cache), want dat zit onder hetzelfde pad.
+      - name: Flutter uit de cache
+        id: flutter-cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: /opt/flutter
+          key: flutter-linux-${{ steps.pin.outputs.version }}-stable
+
+      - name: Officiële Flutter volgens de pin
+        if: steps.flutter-cache.outputs.cache-hit != 'true'
+        run: |
+          set -eu
+          VERSION="${{ steps.pin.outputs.version }}"
           ARCHIVE="flutter_linux_${VERSION}-stable.tar.xz"
           BASE="https://storage.googleapis.com/flutter_infra_release/releases"
           curl -fsSLo /tmp/releases.json "$BASE/releases_linux.json"
@@ -44,8 +83,26 @@ jobs:
           echo "$SHA  /tmp/$ARCHIVE" | sha256sum -c -
           tar -xJf "/tmp/$ARCHIVE" -C /opt
           rm "/tmp/$ARCHIVE"
+
+      # Apart van de installatie: dit moet óók gebeuren als de cache raak was.
+      - name: Flutter op het pad
+        run: |
+          set -eu
           git config --global --add safe.directory /opt/flutter
           echo "/opt/flutter/bin" >> "$GITHUB_PATH"
+
+      # De pakketten volgen `pubspec.lock` letterlijk; verandert er één
+      # afhankelijkheid, dan is dat een nieuwe sleutel. De terugvalsleutel
+      # levert dan nog steeds de vorige set, zodat pub alleen het verschil
+      # ophaalt in plaats van alles.
+      - name: Pub-pakketten uit de cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: ~/.pub-cache
+          key: pub-linux-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            pub-linux-
 
       - name: Afhankelijkheden ophalen
         run: flutter pub get

@@ -339,12 +339,21 @@ step anyway: a set nobody watches is how this went wrong the first time.
 
 > **Since 2026-07-23 the forge has an Actions runner.** The quality gate
 > (`make check`) runs in CI on every pull request and push to `main`
-> (`.forgejo/workflows/ci.yml`, #751); `.forgejo/workflows/linux-build.yml`
-> produces the Linux desktop bundle on every push to `main`, and
-> `.forgejo/workflows/macos-build.yml` does the same for the macOS bundle on a
-> registered Mac runner (host mode — Apple licenses macOS for Apple hardware
-> only, so that job cannot run on the Linux server; when the Mac is offline
-> the run simply waits). `make check-full` and the Windows/web bundles remain
+> (`.forgejo/workflows/ci.yml`, #751). The gate caches the pinned Flutter
+> toolchain and the pub packages (#790); that removes repeated download and
+> extraction work, not a check — `check-toolchain` still runs inside
+> `make check` on the restored tree and still demands channel `stable`, the
+> official origin, and equality with the pin.
+>
+> `.forgejo/workflows/linux-build.yml` and `.forgejo/workflows/macos-build.yml`
+> produce the Linux and macOS desktop bundles **on demand only**
+> (`workflow_dispatch`, since #790). They used to run on every push to `main`,
+> which cost 17.5 minutes of runner time per merge while `release.yml` on the
+> GitHub mirror already builds all three platforms on every `v*` tag. Building
+> the same thing twice buys no extra assurance: the gate is what stops a
+> regression, packaging afterwards is not. The macOS job runs on a registered
+> Mac runner (host mode — Apple licenses macOS for Apple hardware only, so that
+> job cannot run on the Linux server; when the Mac is offline the run waits). `make check-full` and the Windows/web bundles remain
 > local: run the first before dependency or web-facing changes, and build
 > those bundles on their target OS. See
 > [CHECKS.md](CHECKS.md#continuous-integration).

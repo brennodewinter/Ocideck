@@ -120,6 +120,33 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Changed
+- **De poort in CI duurde 22 minuten, en de helft daarvan was werk dat elke
+  keer hetzelfde antwoord gaf.** Elke run haalde de Flutter-tarball opnieuw op,
+  controleerde de sha256 en pakte hem uit met `xz`. Dat is nu gecachet op de
+  gepinde versie, net als de pub-pakketten (op `pubspec.lock`).
+
+  Wat daarbij expliciet níet is ingeleverd: `check-toolchain` draait binnen
+  `make check` op de herstelde boom en eist onverkort kanaal `stable`, de
+  officiële herkomst en gelijkheid met de pin — dezelfde poort die destijds het
+  cirruslabs-image afkeurde. De cache vervangt geen controle, hij vervangt een
+  download. De eerlijke grens erbij: die cache wordt geschreven door onze eigen
+  jobs op onze eigen runner, dus wie de runner beheert beheert de cache — dat
+  is dezelfde vertrouwensgrens als de runner zelf, niet een nieuwe. En beide
+  cachestappen staan op `continue-on-error`: spreekt de forge de cache-API
+  niet, dan verliezen we de versnelling en verder niets.
+
+- **De desktopbuilds op de forge draaien alleen nog op afroep.** Bij elke push
+  naar main bouwde de Linux-job 17,5 minuten runnertijd weg, terwijl
+  `release.yml` op de GitHub-spiegel bij elke `v*`-tag al Linux, macOS én
+  Windows bouwt. Twee keer hetzelfde bouwen levert geen extra zekerheid op —
+  de poort houdt een regressie tegen, het inpakken achteraf niet. Weggooien
+  was te ver: een bundel op afroep zonder een tag te hoeven zetten is wél wat
+  waard, dus `workflow_dispatch` in plaats van niets.
+
+  Voor de goede orde, want de aanname lag anders: op een **PR** draaide al
+  geen enkele build. Die 22 minuten waren voor honderd procent de poort.
+
 ### Added
 - **OpenKAT is een Uitbreiding geworden, met een vaste rapportagemap — en de
   import leest eindelijk het formaat dat OpenKAT werkelijk exporteert.** Twee

@@ -942,21 +942,25 @@ For focused work, run only the relevant slice instead of the whole suite:
   `[user-branch]` from an unknown source, exactly what that check exists to
   catch.
 
-### `.forgejo/workflows/linux-build.yml` — executed on every push to `main`
+### `.forgejo/workflows/linux-build.yml` — on demand (`workflow_dispatch`)
 - **build-linux** — same official pinned toolchain as the gate, plus the GTK
   build dependencies; `flutter build linux --release`, and uploads the bundle
   as the `ocideck-linux-x64` run artifact. This is a build, not a gate: it
-  proves the Linux target compiles and packages, nothing more.
+  proves the Linux target compiles and packages, nothing more — which is why
+  it stopped running on every push to `main` (#790). It cost 17.5 minutes of
+  runner time per merge, and `release.yml` on the GitHub mirror already builds
+  Linux, macOS and Windows on every `v*` tag. Start it by hand when you want a
+  bundle without cutting a tag.
 
-### `.forgejo/workflows/macos-build.yml` — executed on every push to `main`
+### `.forgejo/workflows/macos-build.yml` — on demand (`workflow_dispatch`)
 - **build-macos** — runs on a registered **Mac** runner (`runs-on: macos`,
   host mode), not on the server: Apple licenses macOS for Apple hardware only,
   so there is no macOS job the Linux server could legitimately run. The job
   uses the Mac's own pinned toolchain (the one `check-toolchain` already
   guards), builds `flutter build macos --release`, and uploads the `.app`
   (zipped with `ditto`, which preserves what a plain zip destroys) as the
-  `ocideck-macos` run artifact. When no Mac runner is online the run waits;
-  a newer push replaces a waiting run.
+  `ocideck-macos` run artifact. On demand for the same reason as the Linux
+  build (#790). When no Mac runner is online the run waits.
 
 ### `.github/workflows/ci.yml` — declared for every push and pull request
 - **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get
