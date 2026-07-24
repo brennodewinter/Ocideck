@@ -7,15 +7,12 @@ const _stringsPt = {
   'openEllipsis': 'Abrir…',
   'recentPresentations': 'Apresentações recentes',
   'newTab': 'Novo separador',
-  'undo': 'Anular (Ctrl/Cmd+Z)',
-  'redo': 'Refazer (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Biblioteca de imagens',
   'presentFullscreen':
       'Apresentar (ecrã inteiro) · P para vista do apresentador',
   'visualMode': 'Modo visual',
   'markdownMode': 'Modo Markdown',
   'save': 'Guardar',
-  'saveShortcut': 'Guardar (Ctrl/Cmd+S)',
   'more': 'Mais',
   'export': 'Exportar',
   'exportReady': 'Exportar (PDF/PPTX/HTML)',
@@ -1803,6 +1800,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Importar apresentações…',
   'Presentaties importeren': 'Importar apresentações',
   'Presentatie importeren': 'Importar apresentação',

@@ -2,6 +2,40 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../fullscreen_presenter.dart';
 
+/// De regels van het sneltoets-overzicht: links het toetsopschrift, rechts wat
+/// het doet.
+///
+/// Top-level en geen lid van de extension: het is enkel tekst, en de
+/// klasse-plafondratchet telt élk extension-lid mee bij
+/// _FullscreenPresenterState.
+List<(String, String)> _helpOverlayRows(AppLocalizations l10n) => [
+  (
+    '→ · ${l10n.d('spatie')} · ${l10n.d('klik')}',
+    l10n.d('Volgende slide of pagina'),
+  ),
+  ('←', l10n.d('Vorige slide of pagina')),
+  ('${l10n.d('cijfers')} + Enter', l10n.d('Naar slidenummer')),
+  ('Home · End', l10n.d('Eerste · laatste slide')),
+  ('G', l10n.d('Slide-overzicht (pijltjes + Enter)')),
+  ('P', l10n.d('Presenter view (notities, klok)')),
+  // De binding is `control || meta` (presenter_keys.dart), dus stond hier
+  // voor Mac-gebruikers het verkeerde: Cmd+N werkt ook. Nu uit dezelfde
+  // bron als elke andere sneltoets in de app (#803).
+  ('N · ${shortcutLabel(l10n, 'N')}', l10n.d('Mijn notities aan/uit')),
+  ('S', l10n.d('Scherm wisselen (meerdere schermen)')),
+  ('B · W', l10n.d('Zwart · wit scherm')),
+  ('D · T · Shift+E', l10n.d('Pen · markeerstift · gum')),
+  ('E', l10n.d('Tabel bewerken (op tabeldia)')),
+  ('X · C', l10n.d('Laser · annotaties wissen')),
+  ('K', l10n.d('Doeltijd / aftellen instellen (MMSS)')),
+  ('R', l10n.d('Tijd & oefenrun resetten')),
+  ('A', l10n.d('Automatische modus aan/uit')),
+  ('L', l10n.d('Herhalen (loop) aan/uit')),
+  ('M', l10n.d('Na media automatisch doorgaan')),
+  ('H', l10n.d('Deze legenda')),
+  ('Esc · ${shortcutLabel(l10n, 'W')}', l10n.d('Terug / afsluiten')),
+];
+
 extension _PresenterOverlays on _FullscreenPresenterState {
   String _fmtClock(DateTime t) {
     final h = t.hour.toString().padLeft(2, '0');
@@ -94,30 +128,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
   /// Sneltoets-overzicht (cheatsheet).
   Widget _buildHelpOverlay() {
     final l10n = context.l10n;
-    final rows = <(String, String)>[
-      (
-        '→ · ${l10n.d('spatie')} · ${l10n.d('klik')}',
-        l10n.d('Volgende slide of pagina'),
-      ),
-      ('←', l10n.d('Vorige slide of pagina')),
-      ('${l10n.d('cijfers')} + Enter', l10n.d('Naar slidenummer')),
-      ('Home · End', l10n.d('Eerste · laatste slide')),
-      ('G', l10n.d('Slide-overzicht (pijltjes + Enter)')),
-      ('P', l10n.d('Presenter view (notities, klok)')),
-      ('N · Ctrl+N', l10n.d('Mijn notities aan/uit')),
-      ('S', l10n.d('Scherm wisselen (meerdere schermen)')),
-      ('B · W', l10n.d('Zwart · wit scherm')),
-      ('D · T · Shift+E', l10n.d('Pen · markeerstift · gum')),
-      ('E', l10n.d('Tabel bewerken (op tabeldia)')),
-      ('X · C', l10n.d('Laser · annotaties wissen')),
-      ('K', l10n.d('Doeltijd / aftellen instellen (MMSS)')),
-      ('R', l10n.d('Tijd & oefenrun resetten')),
-      ('A', l10n.d('Automatische modus aan/uit')),
-      ('L', l10n.d('Herhalen (loop) aan/uit')),
-      ('M', l10n.d('Na media automatisch doorgaan')),
-      ('H', l10n.d('Deze legenda')),
-      ('Esc · Ctrl+W', l10n.d('Terug / afsluiten')),
-    ];
+    final rows = _helpOverlayRows(l10n);
     return GestureDetector(
       onTap: _toggleHelp,
       child: Container(

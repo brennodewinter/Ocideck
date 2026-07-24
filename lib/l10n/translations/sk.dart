@@ -7,15 +7,12 @@ const _stringsSk = {
   'openEllipsis': 'Otvoriť…',
   'recentPresentations': 'Nedávne prezentácie',
   'newTab': 'Nová karta',
-  'undo': 'Späť (Ctrl/Cmd+Z)',
-  'redo': 'Znovu (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Knižnica obrázkov',
   'presentFullscreen':
       'Prezentovať (celá obrazovka) · P pre zobrazenie prednášajúceho',
   'visualMode': 'Vizuálny režim',
   'markdownMode': 'Režim Markdown',
   'save': 'Uložiť',
-  'saveShortcut': 'Uložiť (Ctrl/Cmd+S)',
   'more': 'Viac',
   'export': 'Exportovať',
   'exportReady': 'Exportovať (PDF/PPTX/HTML)',
@@ -1781,6 +1778,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Importovať prezentácie…',
   'Presentaties importeren': 'Importovať prezentácie',
   'Presentatie importeren': 'Importovať prezentáciu',

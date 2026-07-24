@@ -7,14 +7,11 @@ const _stringsFy = {
   'openEllipsis': 'Iepenje…',
   'recentPresentations': 'Resinte presintaasjes',
   'newTab': 'Nij ljepblêd',
-  'undo': 'Ungedien meitsje (Ctrl/Cmd+Z)',
-  'redo': 'Opnij útfiere (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Ofbyldingsbibleteek',
   'presentFullscreen': 'Presintearje folslein skerm · P foar presenter view',
   'visualMode': 'Fisuele modus',
   'markdownMode': 'Markdown-modus',
   'save': 'Bewarje',
-  'saveShortcut': 'Bewarje (Ctrl/Cmd+S)',
   'more': 'Mear',
   'export': 'Eksportearje',
   'exportReady': 'Eksportearje (PDF/PPTX/HTML)',
@@ -734,6 +731,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Presintaasjes ymportearje…',
   'Presentaties importeren': 'Presintaasjes ymportearje',
   'Presentatie importeren': 'Presintaasje ymportearje',

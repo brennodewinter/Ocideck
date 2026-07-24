@@ -97,7 +97,20 @@
 //   * Cascades (`messenger..showSnackBar(…)`). De inhoud ervan bereikt de poort
 //     meestal alsnog via de `Text(…)` erbinnen.
 //   * Strings die via een lijst, een veld of een `Map` reizen waar geen
-//     [_mapValueSinks]-ingang voor is.
+//     [_mapValueSinks]-ingang voor is. De VELDSPRONG is de bekendste vorm:
+//     `_shortcutHint(cmd.shortcut!)` heeft zijn put binnen `_shortcutHint`, maar
+//     `cmd` is een lokale variabele zonder opgelost type, dus komt de analyse
+//     niet bij `PaletteCommand.shortcut` en blijft `shortcut: 'Ctrl/Cmd+S'` op de
+//     aanroepplaats onzichtbaar. Dichtbaar langs dezelfde weg als hierboven — één
+//     bezitter van de veldnaam is eenduidig — en gemeten tijdens #803: dat legt
+//     23 échte overtredingen bloot die er nu al staan (de catalogusbeschrijvingen
+//     in reference_standards.dart worden met een kale `Text()` gerenderd). Dat is
+//     eigen werk met een eigen afweging, dus staat het als apart issue.
+//
+// Wat de poort sinds #803 wél ziet: een aanroep zonder doel binnen een
+// `extension _X on _YState`. Zie [extensionOwner] — die vlek was de reden dat
+// het achtervoegsel `(Ctrl/Cmd+K)` van het commandopalet er maanden onvertaald
+// in stond, en dat de VORM van de aanroeper besliste of de poort keek.
 //
 // ── Er is geen plafond meer ──────────────────────────────────────────────────
 //
@@ -141,6 +154,25 @@ import 'package:analyzer/source/line_info.dart';
 /// (deck_template.dart) draagt alleen l10n-bronstrings en valt gewoon onder de
 /// poort.
 const Set<String> _contentHomes = {};
+
+/// De klasse waar een `extension _X on _YState { … }` bij hoort: `_YState`.
+///
+/// Deze repo hakt grote widgets in `part of`-bestanden met elk een extension op
+/// dezelfde state-klasse (`app_shell_menu.dart`, `command_palette_actions.dart`,
+/// de deck_provider-delen). Zonder deze stap zag de poort daar niets: een
+/// aanroep zonder doel (`_menuItem('find', icon, 'tekst')`) werd geknoopt aan
+/// `m|_MainLayoutMenu._menuItem` — de naam van de EXTENSION — terwijl de
+/// declaratie onder `m|_MainLayoutState._menuItem` staat. Twee sleutels die
+/// nooit bij elkaar kwamen, dus bleef de literal onzichtbaar (#803). Wie
+/// dezelfde functie naar top-level tilde, zag hem meteen wél; dat de poort van
+/// de VORM van de aanroeper afhing was precies het probleem.
+///
+/// `extension on int` en de naamloze variant leveren geen klassenaam op; die
+/// erven de omsluitende naam, net als voorheen.
+String? extensionOwner(ExtensionDeclaration node) {
+  final type = node.onClause?.extendedType;
+  return type is NamedType ? type.name.lexeme : null;
+}
 
 /// Flutter-constructors en hun parameters die tekst op het scherm zetten.
 ///
@@ -696,6 +728,16 @@ class _IndexVisitor extends RecursiveAstVisitor<void> {
     _class = previous;
   }
 
+  /// Een extension declareert methodes ván de klasse waarop hij staat, dus
+  /// horen ze onder die klasse in de index. Zie [extensionOwner].
+  @override
+  void visitExtensionDeclaration(ExtensionDeclaration node) {
+    final previous = _class;
+    _class = extensionOwner(node) ?? previous;
+    super.visitExtensionDeclaration(node);
+    _class = previous;
+  }
+
   @override
   void visitClassDeclaration(ClassDeclaration node) {
     final previous = _class;
@@ -819,6 +861,16 @@ class _UseVisitor extends RecursiveAstVisitor<void> {
     final previous = _class;
     _class = node.namePart.typeName.lexeme;
     super.visitClassDeclaration(node);
+    _class = previous;
+  }
+
+  /// Een aanroep zonder doel binnen een extension gaat naar de klasse waarop de
+  /// extension staat, niet naar de extension zelf. Zie [extensionOwner].
+  @override
+  void visitExtensionDeclaration(ExtensionDeclaration node) {
+    final previous = _class;
+    _class = extensionOwner(node) ?? previous;
+    super.visitExtensionDeclaration(node);
     _class = previous;
   }
 

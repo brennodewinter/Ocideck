@@ -7,14 +7,11 @@ const _stringsGa = {
   'openEllipsis': 'Oscail…',
   'recentPresentations': 'Láithreoireachtaí le déanaí',
   'newTab': 'Cluaisín nua',
-  'undo': 'Cealaigh (Ctrl/Cmd+Z)',
-  'redo': 'Athdhéan (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Leabharlann íomhánna',
   'presentFullscreen': 'Cuir i láthair (lánscáileán) · P don amharc láithreora',
   'visualMode': 'Mód amhairc',
   'markdownMode': 'Mód Markdown',
   'save': 'Sábháil',
-  'saveShortcut': 'Sábháil (Ctrl/Cmd+S)',
   'more': 'Tuilleadh',
   'export': 'Easpórtáil',
   'exportReady': 'Easpórtáil (PDF/PPTX/HTML)',
@@ -1809,6 +1806,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Iompórtáil láithreoireachtaí…',
   'Presentaties importeren': 'Iompórtáil láithreoireachtaí',
   'Presentatie importeren': 'Iompórtáil láithreoireacht',
