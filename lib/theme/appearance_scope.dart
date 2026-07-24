@@ -1,60 +1,104 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import '../models/settings.dart';
 import 'app_theme.dart';
 
-/// Zet [AppTheme.isDark] gelijk aan het gekozen profiel, en publiceert de modus
-/// als iets waar een widget *op kan aansluiten*.
+/// Zet [AppTheme.isDark] gelijk aan het gekozen profiel, en zorgt dat de hele
+/// interface daar ook werkelijk op herbouwt.
 ///
-/// [AppTheme.isDark] is een statische vlag. Dat is een bewuste keuze — een dia
-/// moet in een headless export-isolate identiek renderen aan de preview, en daar
-/// bestaat geen `BuildContext` (PENTEST_MIAUW §11) — maar een statische vlag is
-/// geen `InheritedWidget`: wie hem uitleest, krijgt geen melding als hij
-/// verandert. Het slidekwaliteitspaneel bleef daardoor donkergroen op een lichte
-/// interface staan tot een herstart (#780), en dat geldt voor élke widget die
-/// zich uit [AppTheme] kleurt zonder van `Theme.of(context)` af te hangen.
+/// Dat tweede is de reden dat dit bestaat. [AppTheme.isDark] is een *statische*
+/// vlag: de mode-afhankelijke tokens (`slate600`, `successBg`, `paper`, …) zijn
+/// getters die hem uitlezen. Dat is een bewuste keuze — een dia moet in een
+/// headless export-isolate identiek renderen aan de preview, en daar bestaat
+/// geen `BuildContext` (PENTEST_MIAUW §11). Maar een statische vlag is geen
+/// `InheritedWidget`: wie hem uitleest, krijgt geen melding als hij verandert.
 ///
-/// **De boom weggooien is hier geen oplossing.** Een `KeyedSubtree` met een
-/// sleutel op de modus doet precies wat je zou willen — alles bouwt opnieuw —
-/// en laat de app omvallen: de deck-providers hangen aan het tabblad, dus het
-/// afbreken van die boom disposet `DeckNotifier` terwijl er nog naar geluisterd
-/// wordt (`ProviderException: Tried to use DeckNotifier after dispose`). Erger
-/// dan de crash is wat eraan voorafgaat: dat is het niet-opgeslagen deck van de
-/// gebruiker. Geprobeerd en teruggedraaid in #780; niet nog eens proberen zonder
-/// de deckstaat éérst boven die grens te tillen.
+/// ## Waarom er dan tóch niets herbouwde
 ///
-/// Wat er nu staat is dus de bescheiden variant: de modus zit in een
-/// `InheritedWidget`, en een widget die zich uit [AppTheme] kleurt sluit erop
-/// aan met [AppearanceScope.modeOf]. Eén regel per oppervlak, en het is de enige
-/// vorm die Flutter kent om wél een melding te krijgen. Zie #814 voor het
-/// resterende deel: de oppervlakken die die regel nog niet hebben.
-class AppearanceScope extends InheritedWidget {
-  /// Of de app-chrome in donkere modus staat. Zelfde waarde als
-  /// [AppTheme.isDark]; het verschil is dat hierop aangesloten kan worden.
-  final bool isDark;
+/// De scope zelf herbouwt wel — zijn profiel verandert. Maar zijn kind is een
+/// `const` widget, en `Element.updateChild` slaat een herbouw over zodra het
+/// nieuwe widget identiek is aan het oude. Twee `const`-instanties van hetzelfde
+/// zíjn identiek. Daarmee stopt de herbouw bij de scope, en alles eronder blijft
+/// staan met de kleuren die het toen las: het slidekwaliteitspaneel bleef
+/// donkergroen op een lichte interface tot een herstart (#780). Dat gold voor
+/// élke widget die zich uit [AppTheme] kleurt en niet toevallig van
+/// `Theme.of(context)` afhangt — 776 gebruiksplekken in 139 bestanden (#814).
+///
+/// ## Waarom de boom márkeren en niet weggooien
+///
+/// De voor de hand liggende reparatie is een sleutel op de modus, zodat Flutter
+/// de element-boom weggooit en opnieuw opbouwt. Dat is geprobeerd in #780 en
+/// teruggedraaid: de deck-providers hangen aan het tabblad, dus dat afbreken
+/// disposet `DeckNotifier` terwijl er nog naar geluisterd wordt — en erger dan
+/// de crash is wat eraan voorafgaat, namelijk het niet-opgeslagen deck van de
+/// gebruiker.
+///
+/// Wat hier gebeurt houdt de elementen juist vást. Élk element onder deze scope
+/// wordt vuil gemarkeerd; Flutter draait dan hun `build` opnieuw, waarna elke
+/// [AppTheme]-getter de nieuwe kant leest. Geen enkele `State` wordt weggegooid,
+/// dus schuifposities, uitgeklapte panelen, tekstcursors én de deckstaat blijven
+/// staan.
+///
+/// De prijs is één volledige herbouw van de boom per moduswissel. Dat is een
+/// bewuste, zeldzame handeling, en de markering hangt dan ook aan de *modus* en
+/// niet aan het profiel: één kleur bijstellen in een eigen profiel loopt via
+/// `ThemeData` en propageert vanzelf.
+class AppearanceScope extends StatefulWidget {
+  final AppAppearanceProfile appearance;
+  final Widget child;
 
-  AppearanceScope({
+  const AppearanceScope({
     super.key,
-    required AppAppearanceProfile appearance,
-    required super.child,
-  }) : isDark = appearance.isDark {
-    // In de constructor en niet in `build`: deze widget wordt aangemaakt in de
-    // build van de app-root, dus de vlag staat goed vóór de eerste descendant
-    // bouwt — ook bij de allereerste frame.
-    AppTheme.isDark = isDark;
-  }
-
-  /// De huidige modus, mét een afhankelijkheid: de aanroeper herbouwt wanneer
-  /// de gebruiker van profiel wisselt. Dat is het hele punt — de waarde zelf
-  /// staat ook in [AppTheme.isDark].
-  ///
-  /// Buiten de app (een losse widget in een test, een export-isolate) is er geen
-  /// scope; dan valt dit terug op de statische vlag in plaats van te werpen.
-  static bool modeOf(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<AppearanceScope>()?.isDark ??
-      AppTheme.isDark;
+    required this.appearance,
+    required this.child,
+  });
 
   @override
-  bool updateShouldNotify(AppearanceScope oldWidget) =>
-      oldWidget.isDark != isDark;
+  State<AppearanceScope> createState() => _AppearanceScopeState();
+}
+
+class _AppearanceScopeState extends State<AppearanceScope> {
+  @override
+  void initState() {
+    super.initState();
+    // Vóór de eerste descendant bouwt, niet in `build`: die loopt ná de
+    // constructor maar de vlag moet er al staan als het eerste blad hem leest.
+    AppTheme.isDark = widget.appearance.isDark;
+  }
+
+  @override
+  void didUpdateWidget(covariant AppearanceScope oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final wasDark = oldWidget.appearance.isDark;
+    final isDark = widget.appearance.isDark;
+    AppTheme.isDark = isDark;
+    if (wasDark == isDark) return;
+    // Ná dit frame, niet erin: `markNeedsBuild` op een element dat in dit frame
+    // al gebouwd is, is een fout. Eén frame in de oude kleuren ziet niemand;
+    // een assertie-crash bij elke themawissel wel.
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (mounted) markAppearanceSubtreeDirty(context);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
+}
+
+/// Markeert élk element onder [context] als "moet opnieuw bouwen", zonder er een
+/// weg te gooien.
+///
+/// Losse functie omdat hij van buiten te toetsen moet zijn. Dat hij niets
+/// selecteert is geen luiheid: welke widget zich uit [AppTheme] kleurt valt van
+/// buitenaf niet te zien — dat is nu juist wat een statische vlag onzichtbaar
+/// maakt. Dus allemaal.
+@visibleForTesting
+void markAppearanceSubtreeDirty(BuildContext context) {
+  void mark(Element element) {
+    element.markNeedsBuild();
+    element.visitChildren(mark);
+  }
+
+  context.visitChildElements(mark);
 }

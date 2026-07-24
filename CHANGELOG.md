@@ -104,6 +104,37 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Fixed
+- **Na een themawissel bleef de hele interface in de kleuren van het vorige
+  thema staan — niet alleen het kwaliteitspaneel (#814).** #780 repareerde het
+  paneel door het op de modus te laten aansluiten, en liet de klasse open: élk
+  oppervlak dat zich uit `AppTheme` kleurt en niet toevallig van
+  `Theme.of(context)` afhangt had dezelfde regel nodig. Dat zijn **776
+  gebruiksplekken in 139 bestanden**, en een reparatie die uit 139 keer één
+  regel bestaat, is er een die de 140e vergeet.
+
+  De oorzaak lag een laag dieper dan gedacht. De scope herbouwde wél — zijn
+  profiel verandert — maar zijn kind is een `const` widget, en
+  `Element.updateChild` slaat een herbouw over zodra het nieuwe widget identiek
+  is aan het oude. Twee `const`-instanties van hetzelfde zíjn identiek. Daar
+  stopte het, en alles eronder hield de kleuren die het bij de vorige build had
+  gelezen.
+
+  `AppearanceScope` markeert nu bij een moduswissel élk element eronder als
+  "moet opnieuw bouwen", zonder er een weg te gooien. Geen enkele `State`
+  sneuvelt, dus schuifposities, tekstcursors, uitgeklapte panelen en de
+  deckstaat blijven staan — draaiend nagekeken in beide richtingen, met een
+  getypte tekst en een gescrolde slidestrook als bewijs. Dat is ook precies
+  waarom het márkeren is en geen sleutel op de modus: die versie is in #780
+  geprobeerd en teruggedraaid omdat ze `DeckNotifier` disposet en het
+  niet-opgeslagen deck van de gebruiker meeneemt.
+
+  De aansluitregel in het kwaliteitspaneel en de bronwacht die hem afdwong zijn
+  wéér weg. Een poort die een overbodige regel eist, is erger dan geen poort.
+
+  De toets eronder is opnieuw opgebouwd, want de vorige mat niets: twee keer
+  `pumpWidget` vervangt de wortel en herbouwt alles, waardoor het blad "vanzelf"
+  goed kleurt. De opstelling volgt nu de app — modus van bóven de `MaterialApp`,
+  blad eronder achter een `const` kind — en zonder de markering wordt hij rood.
 - **De donkere modus als geheel bekeken: elf bevindingen (#780).** Op 23-07
   rolden er vier defecten uit toevallig ergens kijken. Dit
   was de rondgang die daarop hoorde te volgen — de app draaiend in het profiel
