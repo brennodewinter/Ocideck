@@ -2,10 +2,12 @@
 #
 # Since 2026-07-23 the forge has a registered Actions runner, but Forgejo reads
 # the first workflow directory that exists — `.forgejo/workflows/` — and that
-# shadows this one. What actually runs there is `ci.yml` (the same `make check`
-# gate, per pull request and push to main; #751) and `linux-build.yml` (the
-# Linux desktop bundle on every push to main). This file remains a *reference
-# definition* kept ready for a GitHub mirror.
+# shadows this one. What actually runs there is `ci.yml` — `make
+# check-no-coverage` on a `v*` tag (#790, #796): the same gate with the whole
+# test suite, but without the coverage instrumentation, which was 74% of the
+# wall clock on that runner. `linux-build.yml` builds the Linux bundle on
+# demand. This file remains a *reference definition* kept ready for a GitHub
+# mirror.
 #
 # **The real gate is `make check`, run locally before every merge.** It takes
 # about three minutes (measured; see docs/CHECKS.md), so a contributor can run

@@ -121,5 +121,20 @@ jobs:
       - name: Afhankelijkheden ophalen
         run: flutter pub get
 
+      # `check-no-coverage` en niet `check`: de volledige suite draait onverkort,
+      # alleen zonder `--coverage`. Die instrumentatie houdt per test een
+      # VM-Service-verbinding open tot het eind van de run en was op deze runner
+      # 33 min 49 s van een gate van 46 minuten — veruit de fase die het slechtst
+      # parallelliseert op vier kernen.
+      #
+      # Die 74% is niet de winst: de suite moet nog steeds draaien. Lokaal
+      # nagemeten scheelt het weglaten van de instrumentatie 39% CPU, wat op
+      # vier kernen neerkomt op ~13 minuten van die 46. Reëel, geen factor.
+      #
+      # De dekkingsvloer en de per-bestandsvloer draaien hier dus níet meer. Dat
+      # is geen versoepeling maar een verplaatsing: ze zitten onverkort in
+      # `make check`, dat vóór main op de machine van de committer draait — zie
+      # CONTRIBUTING.md en docs/CHECKS.md. Wat deze poort op een tag beantwoordt
+      # is "draait alles nog, op andermans hardware", niet "hoeveel raakt het".
       - name: De poort
-        run: make check
+        run: make check-no-coverage
