@@ -143,8 +143,14 @@ extension _SettingsStorageTab on _SettingsDialogState {
       // schilderen hun inkt op de dichtstbijzijnde Material-voorouder. Zit daar
       // een gekleurde box tussen, dan verdwijnt de inkt erachter — Flutter
       // struikelt er terecht over.
+      //
+      // `paper` en niet vast wit: de icoon- en statuskleuren op deze kaart zijn
+      // mode-afhankelijk (`slate400`/`slate500`/`tealFg`), en op een wit vlak
+      // stonden die in donkere modus op 1,7 tot 3,0:1 (#821). Op `paper` (donker
+      // in donkere modus) leest de lichte inkt weer, en de SwitchListTile-inkt
+      // volgt vanzelf het thema van deze Material.
       child: Material(
-        color: Colors.white,
+        color: AppTheme.paper,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: expanded ? AppTheme.blue400 : AppTheme.iceBlue,
@@ -308,8 +314,11 @@ extension _SettingsStorageTab on _SettingsDialogState {
           fontSize: 11,
           color: !status.configured
               ? AppTheme.slate400
+              // `warningFg` en niet `amber700`: deze regel staat nu op `paper`,
+              // en de vaste amber haalde daar in donkere modus 3,43:1 (#821).
+              // De mode-afhankelijke variant leest in beide modi (11,96 / 7,09).
               : needsTest
-              ? AppTheme.amber700
+              ? AppTheme.warningFg
               : AppTheme.tealFg,
         ),
       );

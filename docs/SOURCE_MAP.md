@@ -702,7 +702,7 @@ deliberately manual).
 
 - `markdown_editor.dart` — Notes editor with side-by-side WYSIWYG and raw-markdown modes.
 - `markdown_editor_actions.dart` — Selection-wrapping and line-prefix helpers.
-- `markdown_editor_theme.dart` — Readable editor chrome independent of slide/panel colours.
+- `markdown_editor_theme.dart` — `MarkdownEditorTheme`: readable editor chrome (notes toolbar + field) independent of the surrounding slide/panel colours. The `editorPanel` factory's surface follows the theme (`AppTheme.paper`), not a hardcoded white — it was white, and since the text arrives mode-aware (light in dark mode) that made the notes field a white bar with near-invisible light text in dark mode: 1.1:1 for text, 1.4:1 for the toolbar icons (#821). The sister factory `presenterOverlay` already picked its surface by luminance; this one didn't. Measured by `test/markdown_editor_theme_contrast_test.dart`.
 - `markdown_editor_toolbar.dart` — Formatting toolbar for the markdown editor.
 - `notes_editor_mode.dart` — Enum: rendered vs raw editing surface.
 - `notes_mode_toggle.dart` — Toggle between visual and markdown editing.
