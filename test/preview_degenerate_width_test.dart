@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/checklist_spec.dart';
+import 'package:ocideck/models/cockpit.dart';
 import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/timeline.dart';
@@ -167,6 +168,40 @@ void main() {
         );
       });
     }
+  }
+
+  // De instrumentrand is één schilder die elk metertype doorloopt, en daar zat
+  // de fout: de hoekstraal is van de metergrootte afgeleid terwijl de randdikte
+  // een vaste pixel als vloer heeft, dus op een korte meter werd het verschil
+  // negatief en dat weigert `RRect`. Eén meter zou volstaan om dat te vangen;
+  // alle zeven staan er omdat de rand voor elk type opnieuw wordt getekend en
+  // een type dat straks zijn eigen rand meebrengt hier hoort af te gaan.
+  for (final type in CockpitMeterType.values) {
+    testWidgets('cockpitmeter ${type.name} overleeft nulbreedte', (
+      tester,
+    ) async {
+      final slide = Slide.create(SlideType.cockpit).copyWith(
+        customMarkdown: CockpitSpec(
+          meters: [CockpitMeterSpec(type: type)],
+        ).toBlock(),
+      );
+      expectNoHardFailure(
+        await renderAt(tester, 0, slide),
+        what: 'cockpitmeter ${type.name} op 0',
+      );
+    });
+  }
+
+  // De lege cockpit valt terug op de voorbeeldmeters en zet er vier naast
+  // elkaar; dat is het geval waarin één meter al kort wordt zonder dat de dia
+  // zelf ontaard is.
+  for (final width in const [0.0, 0.5, 1.0, 4.0]) {
+    testWidgets('een lege cockpit overleeft breedte $width', (tester) async {
+      expectNoHardFailure(
+        await renderAt(tester, width, Slide.create(SlideType.cockpit)),
+        what: 'lege cockpit op $width',
+      );
+    });
   }
 
   testWidgets('op een gewone breedte verandert er niets', (tester) async {
