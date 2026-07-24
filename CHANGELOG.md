@@ -927,10 +927,16 @@ read a book to find out.
   een niveau daaronder kán geen tekst zijn — en zolang het bestaat, wordt het
   gebruikt.
 
-  Drie nieuwe toetsen, elk één keer rood gezien: de paren van de twee
-  vast-donkere paletten plus een bronwacht op een doorzichtige `Colors.white/
-  black` in een `TextStyle`; het kwaliteitspaneel per staat in beide modi; en
-  de themawisseling. Niet nagelopen en dus nog open: het beamerscherm, de
+  De kiezerhelft bleek onderweg parallel opgelost in #779, dat `textDim`
+  opsplitste in `iconDim` (3:1, iconen) en `textMuted` (4,5:1, tekst) — een
+  betere uitkomst dan het niveau schrappen, dus die is overgenomen. Wat er van
+  deze kant overbleef: de sneltoetshint die een *randkleur* als tekst gebruikte
+  en zijn inkorting. De toetsen zijn samengevoegd in
+  `standalone_palette_contrast_test` in plaats van er een tweede bestand naast
+  te zetten dat dezelfde twee paletten meet; daar zit nu ook de bronwacht op
+  een doorzichtige `Colors.white/black` in een `TextStyle` bij. Verder een
+  toets op het kwaliteitspaneel per staat in beide modi, en één op de
+  themawisseling. Niet nagelopen en dus nog open: het beamerscherm, de
   git-panelen en de S3/WebDAV-bladeraars, de exportdialoog, het privacypaneel,
   en 24 van de 26 slide-editors.
 - **Het kwaliteitspaneel bleef in de kleuren van het vorige thema staan
@@ -940,9 +946,17 @@ read a book to find out.
   herstart. `AppTheme.isDark` is een statische vlag en dus geen
   `InheritedWidget`: élke widget die zich uit `AppTheme` kleurt en niet van
   `Theme.of(context)` afhangt, houdt de vorige kleuren vast. Het paneel was de
-  zichtbare instantie, niet het probleem. `AppearanceScope` geeft de boom nu
-  een sleutel op de modus — op de modus en niet op het profiel, zodat één kleur
-  bijstellen in een eigen profiel geen schuifposities kost.
+  zichtbare instantie, niet het probleem.
+
+  De boom een sleutel op de modus geven lost het in één klap op, en dat is
+  geprobeerd en teruggedraaid: de deck-providers hangen aan het tabblad, dus
+  die boom afbreken disposet `DeckNotifier` — en erger dan de crash is wat
+  eraan voorafgaat, namelijk het niet-opgeslagen deck van de gebruiker. De
+  toets eronder was groen; hij bewees dat een blad herkleurt, niet dat de app
+  het overleeft. Dat kwam pas draaiend eruit. `AppearanceScope` publiceert de
+  modus nu als `InheritedWidget`, en een oppervlak sluit erop aan met één
+  regel. Het kwaliteitspaneel en zijn chip hebben die regel; de klasse zelf
+  staat nog open in #814.
 - **Het lichte thema had hetzelfde probleem, en op één plek erger (#780).** De
   drie regels per controle in het kwaliteitspaneel stonden op 100, 85 en 70
   procent van dezelfde voorgrondkleur. In donkere modus zakt alleen de

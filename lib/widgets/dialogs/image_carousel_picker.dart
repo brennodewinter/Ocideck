@@ -29,10 +29,9 @@ part 'parts/image_carousel_picker_preview.dart';
 /// Het tweede tekstniveau van de kiezer, kort genoeg om in een `TextStyle` op
 /// één regel te passen.
 ///
-/// Er zat tot #780 nog een niveau onder (`textDim`), en dat was de fout: op de
-/// oppervlakken van dit palet haalde het 3,31 tot 4,24:1 op vijftien plekken.
-/// Het is opgeheven in plaats van opgehoogd — onder #8B949E ís hier geen
-/// tekstniveau. Gemeten in `test/fixed_dark_chrome_contrast_test.dart`.
+/// Het niveau eronder (`iconDim`, ooit `textDim`) mag geen tekst kleuren: als
+/// tekst haalt het op geen enkel oppervlak van dit palet de 4,5:1 (#779). Beide
+/// grenzen worden gemeten in `test/standalone_palette_contrast_test.dart`.
 const _muted = ImagePickerPalette.textMuted;
 
 /// Resultaat van de afbeeldingencarousel.

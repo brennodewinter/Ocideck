@@ -118,10 +118,42 @@ void main() {
   });
 
   group('presentatiemodus', () {
-    test('de tekstkleur haalt 4,5:1 op elk oppervlak', () {
+    test('de tekstkleuren halen 4,5:1 op elk oppervlak', () {
+      // `textMuted` kwam er in #780 bij. Tot dan improviseerde de presenter
+      // zijn tweede tekstniveau met `Colors.white24`, `white30` en `white38` op
+      // tien plekken — 2,06 tot 3,60:1, waaronder de sneltoetsbalk die de énige
+      // uitleg is die een presentator tijdens een presentatie op het scherm
+      // heeft. Dat ontsnapte aan élke poort: het is geen `Color(0x…)`, dus de
+      // ratchet ziet het niet, en aan `white38` valt op de aanroepplek niet af
+      // te lezen wat het wordt.
+      for (final (naam, ink) in [
+        ('text', PresenterPalette.text),
+        ('textMuted', PresenterPalette.textMuted),
+      ]) {
+        expect(
+          shortfall(ink, presenterSurfaces, kWcagAaNormalText),
+          isEmpty,
+          reason: '$naam is tekst en zakt hier onder de AA-lat',
+        );
+      }
+    });
+
+    test('de ring om een inkkleur is te onderscheiden op de annotatiebalk', () {
+      // De annotatiebalk vult zich met zwart op 82%, dus zijn achtergrond hangt
+      // af van de dia eronder — een witte dia is voor een lichte ring het
+      // krapste geval, en dat oppervlak staat in geen enkele lijst hierboven.
+      //
+      // Waarom dit een eigen toets verdient: de zwarte inkkleur haalt 1,4:1
+      // tegen die balk. Zonder een zichtbare ring is het geen keuze maar een
+      // gat in de rij. Tot #780 was die ring `Colors.white24` (2,17:1).
+      final balkOpWitteDia = Color.alphaBlend(
+        Colors.black.withValues(alpha: 0.82),
+        const Color(0xFFFFFFFF),
+      );
       expect(
-        shortfall(PresenterPalette.text, presenterSurfaces, kWcagAaNormalText),
-        isEmpty,
+        contrastRatio(PresenterPalette.outline, balkOpWitteDia),
+        greaterThanOrEqualTo(kWcagAaLargeText),
+        reason: 'de ring is een keuze-affordance (WCAG 1.4.11)',
       );
     });
 
@@ -169,6 +201,50 @@ void main() {
       isEmpty,
       reason:
           'iconDim haalt de tekstlat niet — gebruik textMuted:\n'
+          '${overtreders.join('\n')}',
+    );
+  });
+
+  // De tweede bronwacht, en de wijdere: hierboven gaat het over één token dat
+  // op de verkeerde soort plek staat, hier over kleuren die aan élke poort
+  // ontsnappen.
+  //
+  // `check_conventions` telt `Color(0x…)`-literals en staat op nul.
+  // `Colors.white38` is dezelfde vrijheid met dezelfde gevolgen en matcht die
+  // regex niet. Alle tien de presenter-plekken uit #780 kwamen daar vandaan —
+  // 2,06 tot 3,60:1, jarenlang, in de modus waarin de app het meest gebruikt
+  // wordt.
+  //
+  // De grens is bewust `TextStyle` en niet elke `color:`. Een vulling, een
+  // schaduw, een scheidingslijn of een scrim draagt geen letters; daar is een
+  // doorzichtig zwart juist het goede gereedschap, en de lat van 1.4.11 voor
+  // wat wél een affordance is staat per plek hierboven.
+  //
+  // En waarom élke alpha en niet alleen de lage: het bezwaar is niet dat 38
+  // toevallig te weinig is, maar dat je aan `Colors.white38` op de aanroepplek
+  // niet kunt zíen wat het wordt. Bij een token uit een palet kan dat wel —
+  // dat staat hierboven met zijn gemeten verhouding erbij.
+  test('geen doorzichtige Colors.white/black in een TextStyle', () {
+    final doorzichtig = RegExp(r'Colors\.(white|black)([0-9]+)\b');
+    final overtreders = <String>[];
+    for (final entity in Directory('lib').listSync(recursive: true)) {
+      if (entity is! File || !entity.path.endsWith('.dart')) continue;
+      final regels = entity.readAsLinesSync();
+      for (var i = 0; i < regels.length; i++) {
+        final match = doorzichtig.firstMatch(regels[i]);
+        if (match == null) continue;
+        final venster = regels.sublist(i >= 4 ? i - 4 : 0, i + 1).join(' ');
+        if (!venster.contains('TextStyle(')) continue;
+        overtreders.add('${entity.path}:${i + 1}  ${match[0]}');
+      }
+    }
+    expect(
+      overtreders,
+      isEmpty,
+      reason:
+          'Neem een token uit het palet van dat oppervlak (PresenterPalette / '
+          'ImagePickerPalette / AppTheme) en zet het paar in dit bestand, '
+          'zodat de verhouding gemeten wordt in plaats van geschat:\n'
           '${overtreders.join('\n')}',
     );
   });
