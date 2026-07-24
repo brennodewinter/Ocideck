@@ -1746,6 +1746,17 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Wat doen we met deze dia’s?': '\'anghommeyvam nuq wIta\'?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      '\'anghommeyvam naQ mughlu\'laHbe\'pu\'. Hoch \'anghomvaD nuq qaSnIS yIwIv; DaHotbe\'bogh \'anghommey naQ law\' chellu\', \'ej Hutlhbogh Dochmey qonlu\'.',
+  'Voor alle dia’s:': 'Hoch \'anghommeyvaD:',
+  'Dia': '\'anghom',
+  'Zo volledig mogelijk': 'Hoch yIchel',
+  'Alleen de afbeelding': 'mIllogh neH',
+  'Import afbreken': 'yIkII\'Qo\'',
+  'Niet meer vragen': 'reH yItlhobQo\'',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'DaHvo\' Hoch naQ chellu\'taH.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'chenmoHwI\' tetlh: Hoch waw\' luj pong nItebHa\', pong ngeb, je Segh. QaH nav nIvbogh ngoDmey tu\'lu\'be\'.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

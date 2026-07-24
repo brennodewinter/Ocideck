@@ -1793,6 +1793,17 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Wat doen we met deze dia’s?': 'X\'nagħmlu b\'dawn is-slides?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Dawn is-slides ma setgħux jiġu kkonvertiti kollha kemm huma. Agħżel għal kull slide x\'għandu jsir; dak li ma tmissx jittieħed b\'mod kemm jista\' jkun sħiħ, b\'nota dwar dak li hu nieqes.',
+  'Voor alle dia’s:': 'Għas-slides kollha:',
+  'Dia': 'Slide',
+  'Zo volledig mogelijk': 'Kemm jista\' jkun sħiħ',
+  'Alleen de afbeelding': 'L-immaġni biss',
+  'Import afbreken': 'Ikkanċella l-importazzjoni',
+  'Niet meer vragen': 'Terġax tistaqsi',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Minn issa \'l quddiem ħu kollox kemm jista\' jkun sħiħ.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'L-indiċi tal-lista ta\' kontroll: għal kull test l-id stabbli, it-titlu kanoniku u l-kategorija. Il-kontenut tal-gwida nnifisha mhuwiex inkluż.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

@@ -1788,6 +1788,17 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Wat doen we met deze dia’s?': 'Що зробити з цими слайдами?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Ці слайди не вдалося перетворити повністю. Оберіть для кожного слайда, що робити; те, чого ви не змінюєте, буде перенесено якомога повніше, з нотаткою про те, чого бракує.',
+  'Voor alle dia’s:': 'Для всіх слайдів:',
+  'Dia': 'Слайд',
+  'Zo volledig mogelijk': 'Якомога повніше',
+  'Alleen de afbeelding': 'Лише зображення',
+  'Import afbreken': 'Скасувати імпорт',
+  'Niet meer vragen': 'Більше не запитувати',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Відтепер переносити все якомога повніше.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Покажчик контрольного списку: для кожного тесту стабільний ідентифікатор, канонічна назва та категорія. Вміст самого посібника не входить.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

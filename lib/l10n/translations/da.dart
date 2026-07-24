@@ -1770,6 +1770,17 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Wat doen we met deze dia’s?': 'Hvad skal der ske med disse slides?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Disse slides kunne ikke konverteres helt. Vælg for hver slide, hvad der skal ske; det, du ikke rører, overtages så komplet som muligt med en note om, hvad der mangler.',
+  'Voor alle dia’s:': 'For alle slides:',
+  'Dia': 'Slide',
+  'Zo volledig mogelijk': 'Så komplet som muligt',
+  'Alleen de afbeelding': 'Kun billedet',
+  'Import afbreken': 'Annullér import',
+  'Niet meer vragen': 'Spørg ikke igen',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Fremover overtages alt så komplet som muligt.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Tjeklisteindekset: pr. test det stabile id, den kanoniske titel og kategorien. Selve vejledningens indhold er ikke med.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

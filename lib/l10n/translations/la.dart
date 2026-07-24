@@ -1787,6 +1787,17 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Wat doen we met deze dia’s?': 'Quid de his diapositivis faciemus?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Hae diapositivae plene converti non potuerunt. Elige pro singulis diapositivis quid fiat; quas non tetigeris, quam plenissime transferentur, addita nota de iis quae desunt.',
+  'Voor alle dia’s:': 'Pro omnibus diapositivis:',
+  'Dia': 'Diapositiva',
+  'Zo volledig mogelijk': 'Quam plenissime',
+  'Alleen de afbeelding': 'Sola imago',
+  'Import afbreken': 'Importationem abrogare',
+  'Niet meer vragen': 'Ne amplius roges',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Posthac omnia quam plenissime transferantur.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Index indicis probationum: pro singulis probationibus id stabile, titulus canonicus et genus. Ipsius ducis contenta non adiunguntur.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

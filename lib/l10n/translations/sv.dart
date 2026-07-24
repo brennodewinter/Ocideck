@@ -1770,6 +1770,17 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Wat doen we met deze dia’s?': 'Vad gör vi med de här bilderna?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'De här bilderna kunde inte konverteras helt. Välj för varje bild vad som ska hända; det du inte rör tas över så komplett som möjligt, med en notering om vad som saknas.',
+  'Voor alle dia’s:': 'För alla bilder:',
+  'Dia': 'Bild',
+  'Zo volledig mogelijk': 'Så komplett som möjligt',
+  'Alleen de afbeelding': 'Endast bilden',
+  'Import afbreken': 'Avbryt import',
+  'Niet meer vragen': 'Fråga inte igen',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Från och med nu tas allt över så komplett som möjligt.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Checklisteindexet: per test det stabila id:t, den kanoniska titeln och kategorin. Själva guidens innehåll ingår inte.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

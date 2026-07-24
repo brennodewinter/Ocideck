@@ -731,6 +731,17 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Wat doen we met deze dia’s?': 'Wat dogge we mei dizze slides?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Dizze slides koene net folslein omsetten wurde. Kies per slide wat der barre moat; wat jo net oanreitsje wurdt sa folslein mooglik oernommen, mei in notysje derby oer wat der ûntbrekt.',
+  'Voor alle dia’s:': 'Foar alle slides:',
+  'Dia': 'Slide',
+  'Zo volledig mogelijk': 'Sa folslein mooglik',
+  'Alleen de afbeelding': 'Allinnich de ôfbylding',
+  'Import afbreken': 'Ymport ôfbrekke',
+  'Niet meer vragen': 'Net mear freegje',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Tenei alles sa folslein mooglik oernimme.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'De checklist-yndeks: de stabile id, de kanonike titel en de kategory per test. De ynhâld fan de gids sels sit der net by.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

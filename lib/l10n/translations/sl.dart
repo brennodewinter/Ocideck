@@ -1773,6 +1773,17 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Wat doen we met deze dia’s?': 'Kaj naredimo s temi prosojnicami?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Teh prosojnic ni bilo mogoče v celoti pretvoriti. Za vsako prosojnico izberi, kaj naj se zgodi; česar se ne dotakneš, bo prevzeto čim popolneje, z opombo o tem, kaj manjka.',
+  'Voor alle dia’s:': 'Za vse prosojnice:',
+  'Dia': 'Prosojnica',
+  'Zo volledig mogelijk': 'Čim popolneje',
+  'Alleen de afbeelding': 'Samo slika',
+  'Import afbreken': 'Prekliči uvoz',
+  'Niet meer vragen': 'Ne sprašuj več',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Odslej prevzemi vse čim popolneje.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Kazalo kontrolnega seznama: za vsak test stabilni id, kanonični naslov in kategorija. Vsebina samega vodnika ni vključena.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

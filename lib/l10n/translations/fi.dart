@@ -1771,6 +1771,17 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Wat doen we met deze dia’s?': 'Mitä tehdään näille dioille?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Näitä dioja ei voitu muuntaa kokonaan. Valitse kullekin dialle, mitä tehdään; se mihin et koske siirretään mahdollisimman täydellisenä, ja mukaan tulee huomautus puuttuvista osista.',
+  'Voor alle dia’s:': 'Kaikille dioille:',
+  'Dia': 'Dia',
+  'Zo volledig mogelijk': 'Mahdollisimman täydellisenä',
+  'Alleen de afbeelding': 'Vain kuva',
+  'Import afbreken': 'Peruuta tuonti',
+  'Niet meer vragen': 'Älä kysy uudelleen',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Tästä lähtien kaikki siirretään mahdollisimman täydellisenä.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Tarkistuslistan hakemisto: testikohtainen pysyvä tunnus, kanoninen otsikko ja luokka. Itse oppaan sisältö ei ole mukana.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

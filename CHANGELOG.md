@@ -58,12 +58,14 @@ further down is the long one, entry by entry, in Dutch.
 - The optional import module (off by default): a folder of OpenKAT reports into
   one management overview, and PowerPoint (`.pptx`), Keynote (`.key`) and
   Impress (`.odp`) files into editable OciDeck decks. The conversion is
-  best-effort by design — whatever OciDeck's simpler slide model cannot hold
+  best-effort by default — whatever OciDeck's simpler slide model cannot hold
   becomes a readable "not carried over" note beside the slide it came from,
   never a silent omission — and large lists and tables keep every row while only
-  their display is bounded. Several files at once run as a queue into one
-  folder (desktop only); a single file opens in a tab, which works in the
-  browser too.
+  their display is bounded. For a single file you can decide per slide what a
+  half conversion should become: carried over as completely as possible, its
+  pictures only, or skipped with the note explaining why. Several files at once
+  run as a queue into one folder (desktop only) and never ask; a single file
+  opens in a tab, which works in the browser too.
 - An offline CVE database for local lookup, so a search term never leaves the
   device.
 - Markdown mode over the whole deck, with find & replace and a structural
@@ -102,6 +104,50 @@ development diary, and it is a good one — the entries explain *why*, which is
 rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
+
+### Added
+- **Bij een presentatie-import kiest de gebruiker nu zelf wat er met een half
+  geslaagde dia gebeurt.** `SlideFailurePolicy` bestond sinds #772 en werd ook
+  netjes gezet, maar door niemand gelezen: elke dia kreeg best-effort en de twee
+  andere waarden waren onbereikbaar (#812). Een enum die alleen geschreven wordt
+  is geen beleid maar een aankondiging.
+
+  De import valt daarom uiteen in twee stappen met de vraag ertussen: lezen en
+  classificeren (`PresentationImportService.prepare`, dat een `PreparedImport`
+  teruggeeft), dán de dialoog, dán pas bouwen. Zo hoeft een Keynote van vijftig
+  dia's niet twee keer geparseerd te worden om één vraag te kunnen stellen.
+  `importBytes` blijft bestaan als de rechte route voor wie niets te vragen
+  heeft.
+
+  Per probleemdia staan het bronnummer, de titel en de redenen op het scherm —
+  zonder te weten wát er misging is de keuze een gok — met drie mogelijkheden.
+  *Zo volledig mogelijk* is het oude gedrag en blijft de terugval: de dia komt
+  zo compleet mogelijk mee, met de "niet overgenomen"-notitie ernaast. *Alleen
+  de afbeelding* houdt het beeld en laat de tekst vallen. *Overslaan* maakt de
+  dia niet aan en laat alleen de notitie staan die zegt waarom — een dia
+  waarvan de vormgeving de boodschap droeg is beter overgeslagen dan half
+  overgenomen. De kop van de notitiedia volgt de keuze, zodat het deck zelf
+  vertelt wat er gebeurd is.
+
+  **`rasterize` heet nu `imageOnly`, en dat is geen cosmetiek maar eerlijkheid.**
+  De porteerbron riep LibreOffice aan om een brondia naar een bitmap te renderen;
+  dat gebeurt hier niet — geen subproces, geen externe afhankelijkheid (#772).
+  Wat die code feitelijk deed zodra er een afbeelding was, is precies wat deze
+  waarde doet: de afbeeldingen houden die al in het bestand zaten, de rest laten
+  vallen. Een naam die een rendering belooft die er niet is, is een belofte.
+  Daarom ook: de knop verschijnt alleen bij een dia die een afbeelding heeft, en
+  wie hem via "voor alle dia's" op een dia zonder afbeelding zet, krijgt
+  overslaan — een afbeeldingsdia zonder afbeelding is niets.
+
+  Drie grenzen die het bruikbaar houden. Het beleid raakt uitsluitend dia's met
+  écht verlies, dus een dia die schoon converteert blijft staan ook als
+  "overslaan voor alles" is gekozen; anders gooit één klik een heel deck weg.
+  Afbreken breekt de héle import af en levert geen deck op — een vraag die je
+  met "nee" kunt beantwoorden en dan toch het resultaat krijgt, is geen vraag.
+  En de bulk-wachtrij vraagt bewust niets en neemt alles zo volledig mogelijk
+  over: tien bestanden maal een vraag per dia is geen route. "Niet meer vragen"
+  slaat de vraag voortaan over, wordt alleen onthouden als je daarna ook
+  werkelijk importeert, en betekent dan altijd zo volledig mogelijk.
 
 ### Fixed
 - **De donkere modus als geheel bekeken: elf bevindingen (#780).** Op 23-07
@@ -354,6 +400,11 @@ read a book to find out.
   is, waar dat deel terechtkwam. Verlies dat bij het hele document hoort krijgt één
   zo'n notitie aan het eind. De melding na afloop telt hoeveel dia's echt verlies
   opliepen, zodat meteen duidelijk is of er iets na te kijken valt.
+
+  *(Bijgesteld 24-07-2026: dit gedrag is sinds #812 de standaard en de terugval,
+  niet het enige. Bij een import van één bestand kan de gebruiker per dia met
+  echt verlies kiezen voor alleen de afbeelding of voor overslaan; de
+  bulk-wachtrij vraagt niets en houdt precies wat hierboven staat.)*
 
   Overgenomen: titels en ondertitels, sectiedia's, bullets mét niveau, twee
   tekstkolommen, één of twee afbeeldingen met bijschrift (identieke

@@ -1778,6 +1778,17 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Wat doen we met deze dia’s?': 'Ką daryti su šiomis skaidrėmis?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Šių skaidrių nepavyko konvertuoti visiškai. Pasirink kiekvienai skaidrei, ką daryti; ko nepakeisi, bus perkelta kuo išsamiau, pridedant pastabą apie tai, ko trūksta.',
+  'Voor alle dia’s:': 'Visoms skaidrėms:',
+  'Dia': 'Skaidrė',
+  'Zo volledig mogelijk': 'Kuo išsamiau',
+  'Alleen de afbeelding': 'Tik paveikslėlis',
+  'Import afbreken': 'Atšaukti importavimą',
+  'Niet meer vragen': 'Daugiau nebeklausti',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Nuo šiol viską perkelti kuo išsamiau.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Kontrolinio sąrašo rodyklė: kiekvienam testui stabilus id, kanoninis pavadinimas ir kategorija. Paties vadovo turinys neįtrauktas.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

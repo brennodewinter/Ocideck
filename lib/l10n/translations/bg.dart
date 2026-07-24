@@ -1793,6 +1793,17 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Wat doen we met deze dia’s?': 'Какво да правим с тези слайдове?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Тези слайдове не можаха да бъдат преобразувани изцяло. Изберете за всеки слайд какво да се направи; това, което не промените, ще бъде пренесено възможно най-пълно, с бележка какво липсва.',
+  'Voor alle dia’s:': 'За всички слайдове:',
+  'Dia': 'Слайд',
+  'Zo volledig mogelijk': 'Възможно най-пълно',
+  'Alleen de afbeelding': 'Само изображението',
+  'Import afbreken': 'Отказ от импортирането',
+  'Niet meer vragen': 'Да не се пита повече',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Отсега всичко се пренася възможно най-пълно.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Индексът на контролния списък: за всеки тест стабилният идентификатор, каноничното заглавие и категорията. Съдържанието на самото ръководство не е включено.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

@@ -911,6 +911,17 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Wat doen we met deze dia’s?': 'What should we do with these slides?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'These slides could not be converted in full. Choose per slide what should happen; anything you leave untouched is carried over as completely as possible, with a note about what is missing.',
+  'Voor alle dia’s:': 'For all slides:',
+  'Dia': 'Slide',
+  'Zo volledig mogelijk': 'As complete as possible',
+  'Alleen de afbeelding': 'Image only',
+  'Import afbreken': 'Cancel import',
+  'Niet meer vragen': 'Don\'t ask again',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'From now on, carry everything over as completely as possible.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'The checklist index: the stable id, canonical title and category per test. The guide\'s own content is not bundled.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

@@ -730,6 +730,17 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Wat doen we met deze dia’s?': 'Que faire de ces diapositives ?',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Ces diapositives n\'ont pas pu être converties entièrement. Choisissez pour chaque diapositive ce qui doit se passer ; ce que vous ne touchez pas sera repris aussi complètement que possible, avec une note sur ce qui manque.',
+  'Voor alle dia’s:': 'Pour toutes les diapositives :',
+  'Dia': 'Diapositive',
+  'Zo volledig mogelijk': 'Le plus complet possible',
+  'Alleen de afbeelding': 'Image seule',
+  'Import afbreken': 'Annuler l\'importation',
+  'Niet meer vragen': 'Ne plus demander',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Désormais, tout reprendre aussi complètement que possible.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'L\'index de la liste de contrôle : par test, l\'identifiant stable, le titre canonique et la catégorie. Le contenu du guide lui-même n\'est pas inclus.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':

@@ -1798,6 +1798,17 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Wat doen we met deze dia’s?': 'Τι κάνουμε με αυτές τις διαφάνειες;',
+  'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
+      'Αυτές οι διαφάνειες δεν μπόρεσαν να μετατραπούν πλήρως. Επιλέξτε για κάθε διαφάνεια τι πρέπει να γίνει· ό,τι δεν αγγίξετε θα μεταφερθεί όσο το δυνατόν πληρέστερα, με μια σημείωση για όσα λείπουν.',
+  'Voor alle dia’s:': 'Για όλες τις διαφάνειες:',
+  'Dia': 'Διαφάνεια',
+  'Zo volledig mogelijk': 'Όσο το δυνατόν πληρέστερα',
+  'Alleen de afbeelding': 'Μόνο η εικόνα',
+  'Import afbreken': 'Ακύρωση εισαγωγής',
+  'Niet meer vragen': 'Να μην ερωτηθώ ξανά',
+  'Voortaan alles zo volledig mogelijk overnemen.':
+      'Από εδώ και στο εξής, μεταφορά όλων όσο το δυνατόν πληρέστερα.',
   'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
       'Το ευρετήριο της λίστας ελέγχου: ανά δοκιμή το σταθερό αναγνωριστικό, ο κανονικός τίτλος και η κατηγορία. Το περιεχόμενο του ίδιου του οδηγού δεν περιλαμβάνεται.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
