@@ -6,12 +6,15 @@
 #
 # Host-modus betekent: de job draait direct op de Mac, met de toolchain die
 # daar staat — dezelfde gepinde officiële Flutter die check-toolchain lokaal
-# al bewaakt. Er wordt hier dus bewust níets geïnstalleerd.
+# al bewaakt. Er wordt hier dus bewust níets geïnstalleerd, en er valt hier dus
+# ook niets te cachen.
 name: macos-build
 
+# Alleen handmatig sinds #790, om dezelfde reden als linux-build.yml: bij elke
+# `v*`-tag bouwt `release.yml` op de GitHub-spiegel deze app al. Dit blijft
+# bestaan voor een build op afroep zonder tag — en omdat deze Mac de enige
+# machine is die het mág (Apple staat macOS alleen op Apple-hardware toe).
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 jobs:

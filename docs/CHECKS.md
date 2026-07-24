@@ -6,9 +6,10 @@ Every automated check OciDeck runs, what it covers, what a failure means, and ho
 to fix it. The **`Makefile` is the single entry point** and the **real gate**:
 `make check`, run by the committer before pushing, is what actually enforces
 these checks. The Forgejo remote has an Actions runner since 2026-07-23, and
-`.forgejo/workflows/ci.yml` runs this same `make check` on every pull request
-and every push to `main` (#741/#751) — see
-[Continuous integration](#continuous-integration).
+`.forgejo/workflows/ci.yml` runs this same `make check` **on a `v*` tag** — not
+per pull request (#741/#751/#790). Read that literally: nothing between your
+`make check` and `main` runs this gate for you. CI is the release gate; you are
+the merge gate. See [Continuous integration](#continuous-integration).
 Run `make help` for a one-line summary of every target.
 
 ## The one command
@@ -74,9 +75,9 @@ it (see [`make coverage`](#make-coverage)).
 span unit (model/parsing/state), widget (every slide editor, the dialogs, the
 panels, the live preview and the fullscreen presenter's keyboard handling) and
 service-level (export, file IO, sanitisation) layers, plus the enforced
-localization and security guards listed below. Since #751 the CI runner runs
-the same gate on every pull request, so a local run and the PR check answer
-the same question.
+localization and security guards listed below. The CI runner runs the same gate, but on a `v*` tag rather
+than per pull request (#790), so your local run is the answer that matters
+before a merge — CI only confirms it again at release time.
 
 ---
 
@@ -172,7 +173,7 @@ now the only passing state.
 not what runs. That workflow does not execute: Forgejo reads
 `.forgejo/workflows/` instead of `.github/workflows/` once the former exists
 (see [Continuous integration](#continuous-integration)). What *does* run in CI
-since #751 is `make check` itself, on every pull request and push to `main`.
+is `make check` itself, on a `v*` tag (#790).
 Note that `make
 check` alone does **not** include `licenses`, `sbom-verify`, `deps-check` or
 `check-web` — those live in `check-full`. Run `make check-full` before a
@@ -931,7 +932,7 @@ For focused work, run only the relevant slice instead of the whole suite:
 > or web-facing change. The sections below describe the two workflows that
 > run, then what the GitHub files *declare*.
 
-### `.forgejo/workflows/ci.yml` — the gate, on every pull request and push to `main`
+### `.forgejo/workflows/ci.yml` — the release gate, on a `v*` tag
 - **gate** — a bare `ubuntu:24.04` container in which the workflow installs
   the **official** Flutter stable release: the version is *read from
   `.tool-versions`* (so a pin bump has no second place to forget) and the
@@ -942,21 +943,25 @@ For focused work, run only the relevant slice instead of the whole suite:
   `[user-branch]` from an unknown source, exactly what that check exists to
   catch.
 
-### `.forgejo/workflows/linux-build.yml` — executed on every push to `main`
+### `.forgejo/workflows/linux-build.yml` — on demand (`workflow_dispatch`)
 - **build-linux** — same official pinned toolchain as the gate, plus the GTK
   build dependencies; `flutter build linux --release`, and uploads the bundle
   as the `ocideck-linux-x64` run artifact. This is a build, not a gate: it
-  proves the Linux target compiles and packages, nothing more.
+  proves the Linux target compiles and packages, nothing more — which is why
+  it stopped running on every push to `main` (#790). It cost 17.5 minutes of
+  runner time per merge, and `release.yml` on the GitHub mirror already builds
+  Linux, macOS and Windows on every `v*` tag. Start it by hand when you want a
+  bundle without cutting a tag.
 
-### `.forgejo/workflows/macos-build.yml` — executed on every push to `main`
+### `.forgejo/workflows/macos-build.yml` — on demand (`workflow_dispatch`)
 - **build-macos** — runs on a registered **Mac** runner (`runs-on: macos`,
   host mode), not on the server: Apple licenses macOS for Apple hardware only,
   so there is no macOS job the Linux server could legitimately run. The job
   uses the Mac's own pinned toolchain (the one `check-toolchain` already
   guards), builds `flutter build macos --release`, and uploads the `.app`
   (zipped with `ditto`, which preserves what a plain zip destroys) as the
-  `ocideck-macos` run artifact. When no Mac runner is online the run waits;
-  a newer push replaces a waiting run.
+  `ocideck-macos` run artifact. On demand for the same reason as the Linux
+  build (#790). When no Mac runner is online the run waits.
 
 ### `.github/workflows/ci.yml` — declared for every push and pull request
 - **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get

@@ -228,11 +228,12 @@ list is maintained in one place so it cannot go stale in two.
 | **Security reports** | `security@librekat.nl` — see [`SECURITY.md`](SECURITY.md) |
 
 The forge has an Actions runner (since 2026-07-23). It runs the full quality
-gate (`make check`) on every pull request and every push to `main`
-(`.forgejo/workflows/ci.yml`), and builds the Linux desktop bundle as a run
-artifact on `main` (`.forgejo/workflows/linux-build.yml`). Run `make check`
-locally before pushing all the same — it is the same gate, and it answers in
-minutes instead of a CI round-trip; see [`docs/CHECKS.md`](docs/CHECKS.md). The
+gate (`make check`) on a `v*` tag (`.forgejo/workflows/ci.yml`) — not per pull
+request, because a run costs 22 minutes there against 2.5 minutes locally.
+**So run `make check` locally before you push: it is the only thing standing
+between a change and `main`.** Desktop bundles are built on demand
+(`.forgejo/workflows/linux-build.yml`, `macos-build.yml`) or from a `v*` tag on
+the GitHub mirror. See [`docs/CHECKS.md`](docs/CHECKS.md). The
 workflow files under `.github/` are reference definitions for a GitHub mirror;
 Forgejo reads `.forgejo/workflows/` instead.
 
