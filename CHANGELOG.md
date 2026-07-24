@@ -141,6 +141,28 @@ read a book to find out.
   Daarnaast kent OpenKAT meer ernstniveaus dan critical/high/medium/low. Die
   vielen buiten elke uitsplitsing. Er is nu een restband die verschijnt zodra
   hij gevuld is, en de kolommen van de systementabel tellen op tot het totaal.
+### Fixed
+- **Tabelkoppen liepen dwars over de tabellijnen heen.** Kolombreedtes werden
+  verdeeld op tekenaantal, zonder ondergrens. Een kop als "Systemen" telt vier
+  tekens minder dan "Finding" maar is breder, dus zo'n kolom kreeg minder ruimte
+  dan het woord nodig heeft: hij brak letter voor letter af tot een verticale
+  streep van één teken breed. En zakte de kolom onder haar eigen celmarge, dan
+  tekende de tekst buiten de cel — over de lijnen van de tabel heen.
+
+  Elke kolom krijgt nu eerst marge plus haar breedste ondeelbare kopwoord; pas
+  wat daarna overblijft wordt naar inhoud verdeeld. Meten en tekenen delen die
+  geometrie, dus de hoogtemeting blijft kloppen met wat er staat.
+
+  Datzelfde tekenaantal had een tweede slachtoffer: het "N van totaal"-bijschrift
+  dat een weergavelimiet achteraan de tabel hangt. Een Markdown-tabel kent geen
+  samengevoegde cellen, dus het bijschrift parkeerde in de eerste cel van een
+  verder lege slotrij — en telde daar mee als inhoud van kolom 0. Een kolom met
+  enkel rangnummers werd zo een kwart slide breed, terwijl het bijschrift zelf
+  in een doosje van één kolom stond te lezen als data. Het staat nu onder de
+  tabel, als losse regel, waar een bijschrift hoort.
+
+  Zichtbaar op een OpenKAT-managementoverzicht: vijf regels bevindingen naast
+  vier smalle kolommen is precies de vorm waarin dit misgaat.
 
 - **Een presentatie zonder afbeeldingen liet de PDF-export omvallen (#714).** De
   melding was `Invalid argument(s): 1`, en dat was letterlijker dan het leek:
