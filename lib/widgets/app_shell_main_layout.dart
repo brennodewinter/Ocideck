@@ -490,6 +490,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _importUrl();
             case 'import_openkat':
               importOpenKatReports(context, ref);
+            case 'import_presentation':
+              importPresentation(context, ref);
             case 'find':
               _openFindReplace();
             case 'clear_checklists':

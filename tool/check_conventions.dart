@@ -83,6 +83,7 @@ const int controlByteBaseline = 0;
 const Set<String> _quoteScannerHomes = {
   'lib/utils/csv.dart',
   'lib/services/markdown_service.dart',
+  'lib/services/import/utils/xml_utils.dart',
 };
 
 /// UI imports inside `lib/services/`. RATCHET: may shrink, never grow.

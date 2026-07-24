@@ -190,6 +190,20 @@ const Set<String> uncoveredBaseline = {
   // did it, which says the same thing without a statement to reach.
   'lib/theme/image_picker_palette.dart',
   'lib/theme/presenter_palette.dart',
+  // NO EXECUTABLE LINES: `Importer` is de abstracte klasse die één
+  // presentatieformaat moet invullen (#772) — drie leden zonder body en verder
+  // niets. De implementatie wordt wél uitgevoerd: `PptxImporter` loopt door
+  // test/import/pptx_importer_test.dart en test/import/
+  // presentation_import_service_test.dart.
+  'lib/services/import/importers/importer.dart',
+  // NO EXECUTABLE LINES: twee kale enum-declaraties van de import.
+  // `SourceFormat` zijn de herkende presentatieformaten, `SlideFailurePolicy`
+  // is wat er met een dia gebeurt die niet schoon converteert. Beide worden
+  // gelezen in test/import/format_detector_test.dart en
+  // test/import/deck_builder_test.dart, maar lcov schrijft geen record voor een
+  // bestand zonder uitvoerbare regels.
+  'lib/services/import/models/source_format.dart',
+  'lib/services/import/models/slide_failure_policy.dart',
 };
 
 /// The per-file coverage floor: a lib/ file below this fraction of executed

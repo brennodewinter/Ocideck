@@ -117,6 +117,7 @@ import 'dialogs/s3_browser_dialog.dart';
 import 'dialogs/webdav_browser_dialog.dart';
 import '../services/trash_service.dart';
 import 'shell/openkat_import_action.dart';
+import 'shell/presentation_import_action.dart';
 import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
 import 'panels/slide_list_panel.dart';
