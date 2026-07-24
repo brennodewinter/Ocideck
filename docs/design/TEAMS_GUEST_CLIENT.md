@@ -237,34 +237,28 @@ change that at any time.
 
 ## 5. System overview
 
-```text
-┌─────────────────────────────────────────────────────────────────────┐
-│                         OciDeck Web / PWA                           │
-│                                                                     │
-│  Flutter UI ── MeetingController ── MeetingClient contract          │
-│                                        │                            │
-│                              TeamsMeetingClientWeb                  │
-│                                        │ Dart/JS events             │
-│                              ocideck_call_bridge.ts                 │
-│                                        │                            │
-│                              ACS JavaScript Calling SDK             │
-└───────────────┬────────────────────────┴────────────────────────────┘
-                │ HTTPS token                     │ signalling/media
-                ▼                                 ▼
-┌───────────────────────────────┐      ┌──────────────────────────────┐
-│ OciDeck ACS token broker      │      │ Azure Communication Services │
-│ - anonymous session quota     │      │ + Microsoft Teams meeting    │
-│ - create ACS identity         │      │                              │
-│ - issue voip.join token       │      │ Audio/video never traverses  │
-│ - refresh/revoke/delete       │      │ the OciDeck broker.           │
-└───────────────┬───────────────┘      └──────────────────────────────┘
-                │ trusted ACS management call
-                ▼
-       Azure Communication Services Identity API
+```mermaid
+flowchart TB
+    subgraph app["OciDeck Web / PWA"]
+        ui["Flutter UI → MeetingController → MeetingClient contract"]
+        client["TeamsMeetingClientWeb"]
+        bridge["ocideck_call_bridge.ts"]
+        sdk["ACS JavaScript Calling SDK"]
+        ui -->|"Dart/JS events"| client --> bridge --> sdk
+    end
+
+    broker["OciDeck ACS token broker<br/>anonymous session quota · create ACS identity<br/>issue voip.join token · refresh / revoke / delete"]
+    acs[("Azure Communication Services<br/>+ Microsoft Teams meeting")]
+    idapi[("ACS Identity API")]
+
+    app -->|"HTTPS token"| broker
+    app -->|"signalling / media"| acs
+    broker -->|"trusted ACS management call"| idapi
 ```
 
-No Microsoft Graph dependency is needed because the user supplies the meeting
-link. Do not add Graph permissions to the MVP.
+*Audio/video never traverses the OciDeck broker; the broker only mints a
+least-privilege join credential. No Microsoft Graph dependency is needed because
+the user supplies the meeting link — do not add Graph permissions to the MVP.*
 
 ---
 
@@ -520,6 +514,33 @@ provider state is inspectable and may accidentally enter diagnostics. Hold
 credentials in private fields of the client/controller and erase references on
 leave.
 
+```mermaid
+stateDiagram-v2
+    [*] --> idle
+    idle --> validating: paste meeting link
+    validating --> permissionPrompt: link valid
+    permissionPrompt --> preview: camera/mic granted
+    preview --> provisioning: press Join
+    provisioning --> connecting: token issued
+    connecting --> lobby: SDK reports InLobby
+    connecting --> connected: admitted directly
+    lobby --> connected: organiser admits
+    connected --> reconnecting: transient drop
+    reconnecting --> connected: recovered
+    connected --> leaving: Leave
+    leaving --> ended
+    validating --> failed: invalid / unsupported
+    provisioning --> failed: broker unavailable / quota
+    connecting --> failed: anonymous join disabled / locked
+    lobby --> failed: lobby denied
+    ended --> [*]
+    failed --> [*]
+```
+
+*Every phase is an explicit `MeetingPhase`; failure is a typed state
+(`MeetingFailureKind`), never a raw exception. Credentials live in the client's
+private fields, never in inspectable provider state.*
+
 ### 8.2 Client contract
 
 ```dart
@@ -717,6 +738,23 @@ Every tile needs Flutter semantics independent of the embedded HTML view:
 ---
 
 ## 11. Token broker
+
+```mermaid
+sequenceDiagram
+    participant C as OciDeck client (browser — in memory only)
+    participant B as ACS token broker
+    participant A as ACS Identity API
+    C->>B: POST /v1/meeting-sessions (Origin-checked · quota · anti-abuse challenge)
+    B->>A: create pseudonymous ACS identity + issue voip.join (least-privilege)
+    A-->>B: identity + access token
+    B-->>C: sessionId · accessToken · expiresOn · refreshCapability (returned once)
+    Note over C,B: the broker NEVER receives: meeting link/ID/passcode · display name · deck · roster · media
+    C->>B: POST .../{sessionId}/tokens (Bearer refresh) — rotate + reissue
+    C->>B: DELETE .../{sessionId} — best-effort revoke (scheduled cleanup is authoritative)
+```
+
+*`voip.join` rather than `voip`, short expiry with rotation: an open-source
+client cannot keep a secret, so the broker constrains what a leaked token can do.*
 
 ### 11.1 API
 
