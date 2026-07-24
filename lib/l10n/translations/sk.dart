@@ -1778,6 +1778,111 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Alinea': 'Odsek',
+  'Audio "{bestand}"': 'Zvuk "{bestand}"',
+  'Deck opbouwen…': 'Zostavovanie prezentácie…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'Snímka obsahuje viacero zvukových klipov; OciDeck podporuje len jeden na snímku.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'Snímka obsahuje viacero grafov; OciDeck podporuje len jeden na snímku.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'Snímka obsahuje viacero tabuliek; OciDeck podporuje len jednu na snímku.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'Snímka obsahuje viacero videí; OciDeck podporuje len jedno na snímku.',
+  'Dia {n} overgeslagen': 'Snímka {n} preskočená',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Snímka {n}: prenesený len obrázok',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Netextový tvar, čiaru alebo iný objekt sa nepodarilo previesť.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Riadky päty nie sú v Markdowne podporované.',
+  'Formaat herkennen…': 'Rozpoznávanie formátu…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Zoskupené objekty boli rozdelené; zoskupenie a poradie v skupine sa stratia.',
+  'Groepering': 'Zoskupenie',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Stĺpce hlavičky nie sú v OciDecku podporované.',
+  'IWA-objecten inlezen…': 'Načítavanie objektov IWA…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'Štruktúra IWA čiastočne analyzovaná — vzhľad (motív, farby, pozície) sa nepreniesol; text, poradie snímok, poznámky a tam, kde boli štruktúry rozpoznané, tabuľky, grafy a médiá áno.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'Štruktúra IWA nebola úplne analyzovaná — formátovanie, tabuľky, grafy, médiá a poradie snímok sa nepreniesli',
+  'IWA-tekst salvage…': 'Záchrana textu IWA…',
+  'Keynote IWA-intern': 'Keynote IWA interný',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA interný (~{n} snímok)',
+  'Keynote tabel footer': 'Päta tabuľky Keynote',
+  'Keynote tabel header': 'Hlavička tabuľky Keynote',
+  'Keynote tabel headerkolommen': 'Stĺpce hlavičky tabuľky Keynote',
+  'Klaar.': 'Hotovo.',
+  'Koppeling “{tekst}”': 'Odkaz "{tekst}"',
+  'Meerdere audio': 'Viac zvukov',
+  'Meerdere grafieken': 'Viac grafov',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Viac riadkov hlavičky nie je v Markdowne podporovaných; ako hlavička tabuľky sa použije len prvý riadok.',
+  'Meerdere tabellen': 'Viac tabuliek',
+  'Meerdere video\'s': 'Viac videí',
+  'Metadata uitlezen…': 'Čítanie metadát…',
+  'Niet overgenomen van dit document': 'Neprenesené z tohto dokumentu',
+  'Niet overgenomen van slide {n}': 'Neprenesené zo snímky {n}',
+  'Ondersteund grafiektype': 'Podporovaný typ grafu',
+  'Samengevoegde cellen': 'Zlúčené bunky',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Zlúčené bunky tabuľky nie sú v GFM tabuľkách podporované; tabuľka bola sploštená.',
+  'Scatter x-as': 'Os x bodového grafu',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Bodový graf so samostatnými hodnotami x pre každý rad nie je možné plne zobraziť.',
+  'Slides classificeren…': 'Klasifikácia snímok…',
+  'Slides reconstrueren…': 'Rekonštrukcia snímok…',
+  'Tabel naast grafiek': 'Tabuľka vedľa grafu',
+  'Voorbeeldafbeelding zoeken…': 'Hľadanie ukážkového obrázka…',
+  'Vorm of object': 'Tvar alebo objekt',
+  'de tekst blijft staan, de verwijzing niet': 'text zostáva, odkaz nie',
+  'deels overgenomen': 'čiastočne prenesené',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'cieľ zneškodnený; odkazoval na {url}',
+  'eerste audio overgenomen': 'prenesené prvé audio',
+  'eerste grafiek overgenomen': 'prenesený prvý graf',
+  'eerste rij als header': 'prvý riadok ako hlavička',
+  'eerste tabel overgenomen': 'prenesená prvá tabuľka',
+  'eerste video overgenomen': 'prenesené prvé video',
+  'gedeelde x-as gebruikt': 'použitá spoločná os x',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'neprenesené (OciDeck nemá zvukové snímky)',
+  'niet overgenomen (deze dia werd een {type})':
+      'neprenesené (táto snímka sa stala typom {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'neprenesené (táto snímka sa stala typom {type}, ktorý neobsahuje odrážky)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'neprenesené (snímka typu {type} ich zobrazuje {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'neprenesené (snímka typu {type} nezobrazuje samostatný text odseku)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'neprenesené (jeden graf alebo tabuľka na snímku)',
+  'objecten apart overgenomen': 'objekty prenesené samostatne',
+  'samengevoegd in leesvolgorde': 'zlúčené v poradí čítania',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'text, poradie, poznámky a rozpoznané tabuľky, grafy a médiá',
+  '{n} afbeelding': '{n} obrázok',
+  '{n} afbeeldingen': '{n} obrázkov',
+  '{n} alinea’s': '{n} odsekov',
+  '{n} opsommingspunt': '{n} odrážka',
+  '{n} opsommingspunten': '{n} odrážok',
+  '{n} vrij geplaatste tekstvakken': '{n} voľne umiestnených textových polí',
+  'voorbeeldafbeelding en tekst': 'ukážkový obrázok a text',
+  'voorbeeldafbeelding': 'ukážkový obrázok',
+  'tekst': 'text',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} je väčší než limit {limiet} a nebude importovaný.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} nie je rozpoznaná prezentácia. OciDeck číta PowerPoint (.pptx), OpenDocument (.odp) a Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} sa zdá poškodený: archív nie je možné úplne rozbaliť.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'Formát {formaat} zatiaľ nie je podporovaný ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'V {bestand} sa nenašli žiadne snímky — je to platný súbor {formaat}?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      '{bestand} sa nepodarilo načítať ako prezentáciu {formaat}.',
   'Wat doen we met deze dia’s?': 'Čo urobíme s týmito snímkami?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Tieto snímky sa nepodarilo previesť úplne. Zvoľ pri každej snímke, čo sa má stať; čo nezmeníš, prevezme sa čo najúplnejšie, s poznámkou o tom, čo chýba.',

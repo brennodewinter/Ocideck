@@ -1798,6 +1798,113 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Alinea': 'Παράγραφος',
+  'Audio "{bestand}"': 'Ήχος "{bestand}"',
+  'Deck opbouwen…': 'Δημιουργία παρουσίασης…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'Η διαφάνεια περιέχει πολλά αποσπάσματα ήχου· το OciDeck υποστηρίζει μόνο ένα ανά διαφάνεια.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'Η διαφάνεια περιέχει πολλά γραφήματα· το OciDeck υποστηρίζει μόνο ένα ανά διαφάνεια.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'Η διαφάνεια περιέχει πολλούς πίνακες· το OciDeck υποστηρίζει μόνο έναν ανά διαφάνεια.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'Η διαφάνεια περιέχει πολλά βίντεο· το OciDeck υποστηρίζει μόνο ένα ανά διαφάνεια.',
+  'Dia {n} overgeslagen': 'Η διαφάνεια {n} παραλείφθηκε',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Διαφάνεια {n}: διατηρήθηκε μόνο η εικόνα',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Δεν ήταν δυνατή η μετατροπή ενός μη κειμενικού σχήματος, γραμμής ή άλλου αντικειμένου.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Οι γραμμές υποσέλιδου δεν υποστηρίζονται στο Markdown.',
+  'Formaat herkennen…': 'Αναγνώριση μορφής…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Τα ομαδοποιημένα αντικείμενα διαχωρίστηκαν· η ομαδοποίηση και η σειρά εντός της ομάδας χάνονται.',
+  'Groepering': 'Ομαδοποίηση',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Οι στήλες κεφαλίδας δεν υποστηρίζονται στο OciDeck.',
+  'IWA-objecten inlezen…': 'Ανάγνωση αντικειμένων IWA…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'Η δομή IWA αναλύθηκε εν μέρει — η μορφοποίηση (θέμα, χρώματα, θέσεις) δεν μεταφέρθηκε· το κείμενο, η σειρά των διαφανειών, οι σημειώσεις και, όπου αναγνωρίστηκαν οι δομές, οι πίνακες, τα γραφήματα και τα πολυμέσα μεταφέρθηκαν.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'Η δομή IWA δεν αναλύθηκε πλήρως — η μορφοποίηση, οι πίνακες, τα γραφήματα, τα πολυμέσα και η σειρά των διαφανειών δεν μεταφέρθηκαν',
+  'IWA-tekst salvage…': 'Ανάκτηση κειμένου IWA…',
+  'Keynote IWA-intern': 'Keynote IWA εσωτερικό',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA εσωτερικό (~{n} διαφάνειες)',
+  'Keynote tabel footer': 'Υποσέλιδο πίνακα Keynote',
+  'Keynote tabel header': 'Κεφαλίδα πίνακα Keynote',
+  'Keynote tabel headerkolommen': 'Στήλες κεφαλίδας πίνακα Keynote',
+  'Klaar.': 'Έτοιμο.',
+  'Koppeling “{tekst}”': 'Σύνδεσμος "{tekst}"',
+  'Meerdere audio': 'Πολλά αρχεία ήχου',
+  'Meerdere grafieken': 'Πολλά γραφήματα',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Οι πολλαπλές γραμμές κεφαλίδας δεν υποστηρίζονται στο Markdown· μόνο η πρώτη γραμμή χρησιμοποιείται ως κεφαλίδα πίνακα.',
+  'Meerdere tabellen': 'Πολλοί πίνακες',
+  'Meerdere video\'s': 'Πολλά βίντεο',
+  'Metadata uitlezen…': 'Ανάγνωση μεταδεδομένων…',
+  'Niet overgenomen van dit document': 'Δεν μεταφέρθηκε από αυτό το έγγραφο',
+  'Niet overgenomen van slide {n}': 'Δεν μεταφέρθηκε από τη διαφάνεια {n}',
+  'Ondersteund grafiektype': 'Υποστηριζόμενος τύπος γραφήματος',
+  'Samengevoegde cellen': 'Συγχωνευμένα κελιά',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Τα συγχωνευμένα κελιά πίνακα δεν υποστηρίζονται στους πίνακες GFM· ο πίνακας ισοπεδώθηκε.',
+  'Scatter x-as': 'Άξονας x διαγράμματος διασποράς',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Ένα διάγραμμα διασποράς με ξεχωριστές τιμές x ανά σειρά δεν μπορεί να εμφανιστεί πλήρως.',
+  'Slides classificeren…': 'Ταξινόμηση διαφανειών…',
+  'Slides reconstrueren…': 'Ανακατασκευή διαφανειών…',
+  'Tabel naast grafiek': 'Πίνακας δίπλα σε γράφημα',
+  'Voorbeeldafbeelding zoeken…': 'Αναζήτηση εικόνας προεπισκόπησης…',
+  'Vorm of object': 'Σχήμα ή αντικείμενο',
+  'de tekst blijft staan, de verwijzing niet':
+      'το κείμενο παραμένει, η αναφορά όχι',
+  'deels overgenomen': 'μεταφέρθηκε εν μέρει',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'ο στόχος εξουδετερώθηκε· έδειχνε στο {url}',
+  'eerste audio overgenomen': 'διατηρήθηκε ο πρώτος ήχος',
+  'eerste grafiek overgenomen': 'διατηρήθηκε το πρώτο γράφημα',
+  'eerste rij als header': 'πρώτη γραμμή ως κεφαλίδα',
+  'eerste tabel overgenomen': 'διατηρήθηκε ο πρώτος πίνακας',
+  'eerste video overgenomen': 'διατηρήθηκε το πρώτο βίντεο',
+  'gedeelde x-as gebruikt': 'χρησιμοποιήθηκε κοινός άξονας x',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'δεν μεταφέρθηκε (το OciDeck δεν έχει διαφάνειες ήχου)',
+  'niet overgenomen (deze dia werd een {type})':
+      'δεν μεταφέρθηκε (αυτή η διαφάνεια έγινε {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'δεν μεταφέρθηκε (αυτή η διαφάνεια έγινε {type}, που δεν περιέχει λίστα με κουκκίδες)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'δεν μεταφέρθηκε (μια διαφάνεια {type} εμφανίζει {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'δεν μεταφέρθηκε (μια διαφάνεια {type} δεν εμφανίζει ελεύθερο κείμενο παραγράφου)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'δεν μεταφέρθηκε (ένα γράφημα ή πίνακας ανά διαφάνεια)',
+  'objecten apart overgenomen': 'τα αντικείμενα μεταφέρθηκαν ξεχωριστά',
+  'samengevoegd in leesvolgorde': 'συγχωνεύτηκαν με σειρά ανάγνωσης',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'κείμενο, σειρά, σημειώσεις και αναγνωρισμένοι πίνακες, γραφήματα και πολυμέσα',
+  '{n} afbeelding': '{n} εικόνα',
+  '{n} afbeeldingen': '{n} εικόνες',
+  '{n} alinea’s': '{n} παράγραφοι',
+  '{n} opsommingspunt': '{n} κουκκίδα',
+  '{n} opsommingspunten': '{n} κουκκίδες',
+  '{n} vrij geplaatste tekstvakken':
+      '{n} ελεύθερα τοποθετημένα πλαίσια κειμένου',
+  'voorbeeldafbeelding en tekst': 'εικόνα προεπισκόπησης και κείμενο',
+  'voorbeeldafbeelding': 'εικόνα προεπισκόπησης',
+  'tekst': 'κείμενο',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      'Το {bestand} υπερβαίνει το όριο των {limiet} και δεν θα εισαχθεί.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      'Το {bestand} δεν είναι αναγνωρισμένη παρουσίαση. Το OciDeck διαβάζει PowerPoint (.pptx), OpenDocument (.odp) και Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      'Το {bestand} φαίνεται κατεστραμμένο: η αρχειοθήκη δεν μπορεί να εξαχθεί πλήρως.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'Η μορφή {formaat} δεν υποστηρίζεται ακόμη ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Δεν βρέθηκαν διαφάνειες στο {bestand} — είναι έγκυρο αρχείο {formaat};',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      'Δεν ήταν δυνατή η ανάγνωση του {bestand} ως παρουσίαση {formaat}.',
   'Wat doen we met deze dia’s?': 'Τι κάνουμε με αυτές τις διαφάνειες;',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Αυτές οι διαφάνειες δεν μπόρεσαν να μετατραπούν πλήρως. Επιλέξτε για κάθε διαφάνεια τι πρέπει να γίνει· ό,τι δεν αγγίξετε θα μεταφερθεί όσο το δυνατόν πληρέστερα, με μια σημείωση για όσα λείπουν.',

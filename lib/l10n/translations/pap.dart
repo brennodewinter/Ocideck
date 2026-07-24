@@ -730,6 +730,113 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Alinea': 'Paragraf',
+  'Audio "{bestand}"': 'Audio "{bestand}"',
+  'Deck opbouwen…': 'Ta konstruí e deck…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'E slide tin vários fragmento di audio; OciDeck ta soportá solamente ún pa slide.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'E slide tin vários gráfiko; OciDeck ta soportá solamente ún pa slide.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'E slide tin vários tabel; OciDeck ta soportá solamente ún pa slide.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'E slide tin vários vídeo; OciDeck ta soportá solamente ún pa slide.',
+  'Dia {n} overgeslagen': 'Slide {n} a keda saltá',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Slide {n}: solamente e imágen a keda importá',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Un forma, liña of otro opheto no-tekstual no por a wòrdu konvertí.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Filanan di pie di página no ta wòrdu soportá den Markdown.',
+  'Formaat herkennen…': 'Ta rekonosé e formato…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'E ophetonan gruped a keda separá; e agrupamento i òrden paden e grupo ta pèrdè.',
+  'Groepering': 'Agrupamento',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Kolumnanan di enkabesamento no ta wòrdu soportá den OciDeck.',
+  'IWA-objecten inlezen…': 'Ta lesa opheto IWA…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'Struktura IWA parsiá parsialmente — e diseño (tema, kolónan, posishonnan) no a keda importá; teksto, òrden di slide, nota i, kaminda e strukturanan a wòrdu rekonosí, tabel, gráfiko i media sí.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'Struktura IWA no parsiá kompletamente — formato, tabel, gráfiko, media i òrden di slide no importá',
+  'IWA-tekst salvage…': 'Ta reskatá teksto IWA…',
+  'Keynote IWA-intern': 'Keynote IWA interno',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA interno (~{n} slide)',
+  'Keynote tabel footer': 'Pie di tabel Keynote',
+  'Keynote tabel header': 'Enkabesamento di tabel Keynote',
+  'Keynote tabel headerkolommen':
+      'Kolumnanan di enkabesamento di tabel Keynote',
+  'Klaar.': 'Kla.',
+  'Koppeling “{tekst}”': 'Enlace "{tekst}"',
+  'Meerdere audio': 'Vários audio',
+  'Meerdere grafieken': 'Vários gráfiko',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Múltiple fila di enkabesamento no ta wòrdu soportá den Markdown; solamente e promé fila ta wòrdu usá komo enkabesamento di tabel.',
+  'Meerdere tabellen': 'Vários tabel',
+  'Meerdere video\'s': 'Vários vídeo',
+  'Metadata uitlezen…': 'Ta lesa metadata…',
+  'Niet overgenomen van dit document': 'No traspasá for di e dokumento aki',
+  'Niet overgenomen van slide {n}': 'No traspasá for di slide {n}',
+  'Ondersteund grafiektype': 'Tipo di gráfiko soportá',
+  'Samengevoegde cellen': 'Selda kombiná',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Selda kombiná di tabel no ta wòrdu soportá den tabel GFM; e tabel a keda platá.',
+  'Scatter x-as': 'Eje x di scatter',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Un gráfiko scatter ku balornan x separá pa serie no por wòrdu mustrá kompletamente.',
+  'Slides classificeren…': 'Ta klasifiká slide…',
+  'Slides reconstrueren…': 'Ta rekonstruí slide…',
+  'Tabel naast grafiek': 'Tabel banda di gráfiko',
+  'Voorbeeldafbeelding zoeken…': 'Ta buska imágen di preview…',
+  'Vorm of object': 'Forma of opheto',
+  'de tekst blijft staan, de verwijzing niet':
+      'e teksto ta keda, e referensia nò',
+  'deels overgenomen': 'parsialmente traspasá',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'destino neutralisá; e tabata apuntá na {url}',
+  'eerste audio overgenomen': 'promé audio traspasá',
+  'eerste grafiek overgenomen': 'promé gráfiko traspasá',
+  'eerste rij als header': 'promé fila komo enkabesamento',
+  'eerste tabel overgenomen': 'promé tabel traspasá',
+  'eerste video overgenomen': 'promé vídeo traspasá',
+  'gedeelde x-as gebruikt': 'eje x kompartí usá',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'no traspasá (OciDeck no tin slide di audio)',
+  'niet overgenomen (deze dia werd een {type})':
+      'no traspasá (e slide aki a bira un {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'no traspasá (e slide aki a bira un {type}, ku no ta karga lista di punto)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'no traspasá (un slide {type} ta mustra {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'no traspasá (un slide {type} no ta mustra teksto di paragraf suelto)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'no traspasá (ún gráfiko of tabel pa slide)',
+  'objecten apart overgenomen': 'opheto traspasá separadamente',
+  'samengevoegd in leesvolgorde': 'kombiná den òrden di lesamento',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'teksto, òrden, nota i tabel, gráfiko i media rekonosí',
+  '{n} afbeelding': '{n} imágen',
+  '{n} afbeeldingen': '{n} imágen',
+  '{n} alinea’s': '{n} paragraf',
+  '{n} opsommingspunt': '{n} punto di lista',
+  '{n} opsommingspunten': '{n} punto di lista',
+  '{n} vrij geplaatste tekstvakken': '{n} kaha di teksto pòr libremente',
+  'voorbeeldafbeelding en tekst': 'imágen di preview i teksto',
+  'voorbeeldafbeelding': 'imágen di preview',
+  'tekst': 'teksto',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} ta mas grandi ku e límite di {limiet} i lo no wòrdu importá.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} no ta un presentashon rekonosí. OciDeck ta lesa PowerPoint (.pptx), OpenDocument (.odp) i Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} ta parse dañá: no por saka e archivo kompletamente.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'E formato {formaat} ainda no ta wòrdu soportá ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'No a haña ningun slide den {bestand} — esaki ta un archivo {formaat} válido?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      'No por a lesa {bestand} komo presentashon {formaat}.',
   'Wat doen we met deze dia’s?': 'Kiko nos ta hasi ku e slidenan aki?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'E slidenan aki no por a wòrdu konvertí kompletamente. Skohe pa kada slide kiko mester pasa; loke bo no toka ta wòrdu tumá over mas kompleto posibel, ku un nota tokante loke ta falta.',

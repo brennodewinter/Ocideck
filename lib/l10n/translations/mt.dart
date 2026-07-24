@@ -1793,6 +1793,112 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Alinea': 'Paragrafu',
+  'Audio "{bestand}"': 'Awdjo "{bestand}"',
+  'Deck opbouwen…': 'Qed tinbena l-preżentazzjoni…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'Is-slide fih diversi biċċiet awdjo; OciDeck jappoġġa biss wieħed għal kull slide.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'Is-slide fih diversi graffs; OciDeck jappoġġa biss wieħed għal kull slide.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'Is-slide fih diversi tabelli; OciDeck jappoġġa biss waħda għal kull slide.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'Is-slide fih diversi vidjows; OciDeck jappoġġa biss wieħed għal kull slide.',
+  'Dia {n} overgeslagen': 'Slide {n} maqbuż',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Slide {n}: żammejt biss l-immaġni',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Forma, linja jew oġġett ieħor mhux testwali ma setax jiġi kkonvertit.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Ir-ringieli tal-footer mhumiex appoġġati f\'Markdown.',
+  'Formaat herkennen…': 'Qed jingħaraf il-format…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'L-oġġetti raggruppati ġew separati; ir-raggruppament u l-ordni fil-grupp jintilfu.',
+  'Groepering': 'Raggruppament',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Il-kolonni tal-intestatura mhumiex appoġġati f\'OciDeck.',
+  'IWA-objecten inlezen…': 'Qed jinqraw l-oġġetti IWA…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'L-istruttura IWA ġiet analizzata parzjalment — l-istil (tema, kuluri, pożizzjonijiet) ma ġiex trasferit; it-test, l-ordni tas-slides, in-noti u, fejn l-istrutturi ġew rikonoxxuti, it-tabelli, il-graffs u l-media iva.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'L-istruttura IWA ma ġietx analizzata bis-sħiħ — il-formattjar, it-tabelli, il-graffs, il-media u l-ordni tas-slides ma ġewx trasferiti',
+  'IWA-tekst salvage…': 'Qed jiġi salvat it-test IWA…',
+  'Keynote IWA-intern': 'Keynote IWA intern',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA intern (~{n} slides)',
+  'Keynote tabel footer': 'Footer tal-tabella Keynote',
+  'Keynote tabel header': 'Intestatura tal-tabella Keynote',
+  'Keynote tabel headerkolommen': 'Kolonni tal-intestatura tat-tabella Keynote',
+  'Klaar.': 'Lest.',
+  'Koppeling “{tekst}”': 'Ħolqa "{tekst}"',
+  'Meerdere audio': 'Diversi awdjo',
+  'Meerdere grafieken': 'Diversi graffs',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Ir-ringieli tal-intestatura multipli mhumiex appoġġati f\'Markdown; ir-ringiela tal-ewwel biss tintuża bħala intestatura tat-tabella.',
+  'Meerdere tabellen': 'Diversi tabelli',
+  'Meerdere video\'s': 'Diversi vidjows',
+  'Metadata uitlezen…': 'Qed jinqara l-metadata…',
+  'Niet overgenomen van dit document': 'Ma ġiex trasferit minn dan id-dokument',
+  'Niet overgenomen van slide {n}': 'Ma ġiex trasferit mis-slide {n}',
+  'Ondersteund grafiektype': 'Tip ta\' graff appoġġat',
+  'Samengevoegde cellen': 'Ċelloli magħquda',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Iċ-ċelloli magħquda tat-tabella mhumiex appoġġati fit-tabelli GFM; it-tabella ġiet ċċattjata.',
+  'Scatter x-as': 'Assi x tal-graff scatter',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Graff scatter b\'valuri x separati għal kull serje ma jistax jiġi muri kollu kemm hu.',
+  'Slides classificeren…': 'Qed jiġu kklassifikati s-slides…',
+  'Slides reconstrueren…': 'Qed jiġu rikostruwiti s-slides…',
+  'Tabel naast grafiek': 'Tabella ħdejn graff',
+  'Voorbeeldafbeelding zoeken…': 'Qed tinstab l-immaġni ta\' previżjoni…',
+  'Vorm of object': 'Forma jew oġġett',
+  'de tekst blijft staan, de verwijzing niet':
+      'it-test jibqa\', ir-referenza le',
+  'deels overgenomen': 'parzjalment trasferit',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'id-destinazzjoni ġiet newtralizzata; kienet tindika lejn {url}',
+  'eerste audio overgenomen': 'l-ewwel awdjo nżamm',
+  'eerste grafiek overgenomen': 'l-ewwel graff inżamm',
+  'eerste rij als header': 'l-ewwel ringiela bħala intestatura',
+  'eerste tabel overgenomen': 'l-ewwel tabella nżammet',
+  'eerste video overgenomen': 'l-ewwel vidjow nżamm',
+  'gedeelde x-as gebruikt': 'intużat assi x kondiviża',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'ma ġiex trasferit (OciDeck m\'għandux slides tal-awdjo)',
+  'niet overgenomen (deze dia werd een {type})':
+      'ma ġiex trasferit (dan is-slide sar {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'ma ġiex trasferit (dan is-slide sar {type}, li ma jġorrx lista bil-bulits)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'ma ġiex trasferit (slide {type} juri {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'ma ġiex trasferit (slide {type} ma jurix test ta\' paragrafu waħdu)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'ma ġiex trasferit (graff wieħed jew tabella waħda għal kull slide)',
+  'objecten apart overgenomen': 'l-oġġetti ġew trasferiti separatament',
+  'samengevoegd in leesvolgorde': 'magħquda skont l-ordni tal-qari',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'test, ordni, noti u tabelli, graffs u media rikonoxxuti',
+  '{n} afbeelding': '{n} immaġni',
+  '{n} afbeeldingen': '{n} immaġni',
+  '{n} alinea’s': '{n} paragrafi',
+  '{n} opsommingspunt': '{n} bullet',
+  '{n} opsommingspunten': '{n} bullets',
+  '{n} vrij geplaatste tekstvakken': '{n} kaxxi tat-test imqiegħda liberament',
+  'voorbeeldafbeelding en tekst': 'immaġni ta\' previżjoni u test',
+  'voorbeeldafbeelding': 'immaġni ta\' previżjoni',
+  'tekst': 'test',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} huwa akbar mil-limitu ta\' {limiet} u mhux se jiġi impurtat.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} mhuwiex preżentazzjoni rikonoxxuta. OciDeck jaqra PowerPoint (.pptx), OpenDocument (.odp) u Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} jidher li huwa bil-ħsara: l-arkivju ma jistax jiġi estratt kollu.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'Il-format {formaat} għadu mhux appoġġat ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Ma nstab l-ebda slide f\'{bestand} — dan huwa fajl {formaat} validu?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      '{bestand} ma setax jinqara bħala preżentazzjoni {formaat}.',
   'Wat doen we met deze dia’s?': 'X\'nagħmlu b\'dawn is-slides?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Dawn is-slides ma setgħux jiġu kkonvertiti kollha kemm huma. Agħżel għal kull slide x\'għandu jsir; dak li ma tmissx jittieħed b\'mod kemm jista\' jkun sħiħ, b\'nota dwar dak li hu nieqes.',

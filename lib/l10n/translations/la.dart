@@ -1787,6 +1787,110 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Alinea': 'Paragraphus',
+  'Audio "{bestand}"': 'Audio "{bestand}"',
+  'Deck opbouwen…': 'Fasciculum aedificare…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'Charta plures sonos continet; OciDeck unum tantum per chartam sustinet.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'Charta plura diagrammata continet; OciDeck unum tantum per chartam sustinet.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'Charta plures tabulas continet; OciDeck unam tantum per chartam sustinet.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'Charta plura visiva continet; OciDeck unum tantum per chartam sustinet.',
+  'Dia {n} overgeslagen': 'Charta {n} praeterita',
+  'Dia {n}: alleen de afbeelding overgenomen': 'Charta {n}: sola imago recepta',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Figura, linea aliudve obiectum non textuale converti non potuit.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Ordines calcis in Markdown non sustinentur.',
+  'Formaat herkennen…': 'Formam agnoscere…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Obiecta coniuncta dissoluta sunt; coniunctio ordoque intra gregem pereunt.',
+  'Groepering': 'Coniunctio',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Columnae capitis in OciDeck non sustinentur.',
+  'IWA-objecten inlezen…': 'Obiecta IWA legere…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'Structura IWA ex parte resoluta — species (thema, colores, positiones) non recepta est; textus, ordo chartarum, notae et, ubi structurae agnitae sunt, tabulae, diagrammata et instrumenta recepta sunt.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'Structura IWA non plene resoluta — forma, tabulae, diagrammata, instrumenta ordoque chartarum non recepta',
+  'IWA-tekst salvage…': 'Textum IWA servare…',
+  'Keynote IWA-intern': 'Keynote IWA internum',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA internum (~{n} chartae)',
+  'Keynote tabel footer': 'Calx tabulae Keynote',
+  'Keynote tabel header': 'Caput tabulae Keynote',
+  'Keynote tabel headerkolommen': 'Columnae capitis tabulae Keynote',
+  'Klaar.': 'Perfectum.',
+  'Koppeling “{tekst}”': 'Nexus "{tekst}"',
+  'Meerdere audio': 'Plures soni',
+  'Meerdere grafieken': 'Plura diagrammata',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Plures ordines capitis in Markdown non sustinentur; solus primus ordo pro capite tabulae adhibetur.',
+  'Meerdere tabellen': 'Plures tabulae',
+  'Meerdere video\'s': 'Plura visiva',
+  'Metadata uitlezen…': 'Metadata legere…',
+  'Niet overgenomen van dit document': 'Ex hoc documento non receptum',
+  'Niet overgenomen van slide {n}': 'Ex charta {n} non receptum',
+  'Ondersteund grafiektype': 'Genus diagrammatis sustentum',
+  'Samengevoegde cellen': 'Cellulae coniunctae',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Cellulae tabularum coniunctae in tabulis GFM non sustinentur; tabula complanata est.',
+  'Scatter x-as': 'Axis x dispersionis',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Diagramma dispersionis cum diversis valoribus x pro serie plene exhiberi non potest.',
+  'Slides classificeren…': 'Chartas classificare…',
+  'Slides reconstrueren…': 'Chartas restituere…',
+  'Tabel naast grafiek': 'Tabula iuxta diagramma',
+  'Voorbeeldafbeelding zoeken…': 'Imaginem praevisionis quaerere…',
+  'Vorm of object': 'Figura vel obiectum',
+  'de tekst blijft staan, de verwijzing niet': 'textus manet, nexus non',
+  'deels overgenomen': 'ex parte receptum',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'destinatio innocua reddita; ad {url} spectabat',
+  'eerste audio overgenomen': 'primus sonus receptus',
+  'eerste grafiek overgenomen': 'primum diagramma receptum',
+  'eerste rij als header': 'primus ordo pro capite',
+  'eerste tabel overgenomen': 'prima tabula recepta',
+  'eerste video overgenomen': 'primum visivum receptum',
+  'gedeelde x-as gebruikt': 'axis x communis adhibitus',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'non receptum (OciDeck chartas sonoras non habet)',
+  'niet overgenomen (deze dia werd een {type})':
+      'non receptum (haec charta {type} facta est)',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'non receptum (haec charta {type} facta est, quod enumerationem non fert)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'non receptum (charta {type} {aantal} ostendit)',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'non receptum (charta {type} textum paragraphi solutum non ostendit)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'non receptum (unum diagramma vel una tabula per chartam)',
+  'objecten apart overgenomen': 'obiecta separatim recepta',
+  'samengevoegd in leesvolgorde': 'in ordine legendi coniuncta',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'textus, ordo, notae et tabulae, diagrammata instrumentaque agnita',
+  '{n} afbeelding': '{n} imago',
+  '{n} afbeeldingen': '{n} imagines',
+  '{n} alinea’s': '{n} paragraphi',
+  '{n} opsommingspunt': '{n} punctum enumerationis',
+  '{n} opsommingspunten': '{n} puncta enumerationis',
+  '{n} vrij geplaatste tekstvakken': '{n} arcae textus libere positae',
+  'voorbeeldafbeelding en tekst': 'imago praevisionis et textus',
+  'voorbeeldafbeelding': 'imago praevisionis',
+  'tekst': 'textus',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} limitem {limiet} excedit neque importabitur.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} non est ostentatio agnita. OciDeck legit PowerPoint (.pptx), OpenDocument (.odp) et Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} corruptum videtur: archivum plene extrahi non potest.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'Forma {formaat} nondum sustinetur ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Nullae chartae in {bestand} inventae — estne hic valida tabella {formaat}?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      '{bestand} ut ostentatio {formaat} legi non potuit.',
   'Wat doen we met deze dia’s?': 'Quid de his diapositivis faciemus?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Hae diapositivae plene converti non potuerunt. Elige pro singulis diapositivis quid fiat; quas non tetigeris, quam plenissime transferentur, addita nota de iis quae desunt.',

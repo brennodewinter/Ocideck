@@ -1770,6 +1770,112 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Alinea': 'Afsnit',
+  'Audio "{bestand}"': 'Lyd "{bestand}"',
+  'Deck opbouwen…': 'Bygger deck…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'Diaset indeholder flere lydklip; OciDeck understøtter kun ét pr. dias.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'Diaset indeholder flere diagrammer; OciDeck understøtter kun ét pr. dias.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'Diaset indeholder flere tabeller; OciDeck understøtter kun én pr. dias.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'Diaset indeholder flere videoer; OciDeck understøtter kun én pr. dias.',
+  'Dia {n} overgeslagen': 'Dias {n} sprunget over',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Dias {n}: kun billedet blev overført',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'En ikke-tekstuel figur, linje eller andet objekt kunne ikke konverteres.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Sidefodsrækker understøttes ikke i Markdown.',
+  'Formaat herkennen…': 'Registrerer format…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Grupperede objekter er blevet opdelt; gruppering og rækkefølge i gruppen går tabt.',
+  'Groepering': 'Gruppering',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Overskriftskolonner understøttes ikke i OciDeck.',
+  'IWA-objecten inlezen…': 'Læser IWA-objekter…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'IWA-strukturen blev delvist fortolket — udformningen (tema, farver, positioner) blev ikke overført; tekst, diasrækkefølge, noter og, hvor strukturerne blev genkendt, tabeller, diagrammer og medier blev.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'IWA-strukturen blev ikke fuldt fortolket — formatering, tabeller, diagrammer, medier og diasrækkefølge blev ikke overført',
+  'IWA-tekst salvage…': 'Redder IWA-tekst…',
+  'Keynote IWA-intern': 'Keynote IWA-internt',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA-internt (~{n} dias)',
+  'Keynote tabel footer': 'Keynote-tabelsidefod',
+  'Keynote tabel header': 'Keynote-tabeloverskrift',
+  'Keynote tabel headerkolommen': 'Keynote-tabeloverskriftskolonner',
+  'Klaar.': 'Færdig.',
+  'Koppeling “{tekst}”': 'Link "{tekst}"',
+  'Meerdere audio': 'Flere lydfiler',
+  'Meerdere grafieken': 'Flere diagrammer',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Flere overskriftsrækker understøttes ikke i Markdown; kun den første række bruges som tabeloverskrift.',
+  'Meerdere tabellen': 'Flere tabeller',
+  'Meerdere video\'s': 'Flere videoer',
+  'Metadata uitlezen…': 'Læser metadata…',
+  'Niet overgenomen van dit document': 'Ikke overført fra dette dokument',
+  'Niet overgenomen van slide {n}': 'Ikke overført fra dias {n}',
+  'Ondersteund grafiektype': 'Understøttet diagramtype',
+  'Samengevoegde cellen': 'Flettede celler',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Flettede tabelceller understøttes ikke i GFM-tabeller; tabellen er blevet fladet ud.',
+  'Scatter x-as': 'Punktdiagrammets x-akse',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Et punktdiagram med separate x-værdier pr. serie kan ikke vises fuldt ud.',
+  'Slides classificeren…': 'Klassificerer dias…',
+  'Slides reconstrueren…': 'Rekonstruerer dias…',
+  'Tabel naast grafiek': 'Tabel ved siden af diagram',
+  'Voorbeeldafbeelding zoeken…': 'Søger efter forhåndsvisningsbillede…',
+  'Vorm of object': 'Figur eller objekt',
+  'de tekst blijft staan, de verwijzing niet':
+      'teksten bliver, henvisningen ikke',
+  'deels overgenomen': 'delvist overført',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'målet uskadeliggjort; det pegede på {url}',
+  'eerste audio overgenomen': 'første lyd overført',
+  'eerste grafiek overgenomen': 'første diagram overført',
+  'eerste rij als header': 'første række som overskrift',
+  'eerste tabel overgenomen': 'første tabel overført',
+  'eerste video overgenomen': 'første video overført',
+  'gedeelde x-as gebruikt': 'fælles x-akse brugt',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'ikke overført (OciDeck har ingen lyddias)',
+  'niet overgenomen (deze dia werd een {type})':
+      'ikke overført (dette dias blev til en {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'ikke overført (dette dias blev til en {type}, som ikke har en punktliste)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'ikke overført (et {type}-dias viser {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'ikke overført (et {type}-dias viser ikke løs afsnitstekst)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'ikke overført (ét diagram eller én tabel pr. dias)',
+  'objecten apart overgenomen': 'objekter overført enkeltvis',
+  'samengevoegd in leesvolgorde': 'sammenføjet i læserækkefølge',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'tekst, rækkefølge, noter og genkendte tabeller, diagrammer og medier',
+  '{n} afbeelding': '{n} billede',
+  '{n} afbeeldingen': '{n} billeder',
+  '{n} alinea’s': '{n} afsnit',
+  '{n} opsommingspunt': '{n} punkt',
+  '{n} opsommingspunten': '{n} punkter',
+  '{n} vrij geplaatste tekstvakken': '{n} frit placerede tekstfelter',
+  'voorbeeldafbeelding en tekst': 'forhåndsvisningsbillede og tekst',
+  'voorbeeldafbeelding': 'forhåndsvisningsbillede',
+  'tekst': 'tekst',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} er større end grænsen på {limiet} og importeres ikke.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} er ikke en genkendt præsentation. OciDeck læser PowerPoint (.pptx), OpenDocument (.odp) og Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} ser ud til at være beskadiget: arkivet kan ikke pakkes helt ud.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'Formatet {formaat} understøttes endnu ikke ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Ingen dias fundet i {bestand} — er dette en gyldig {formaat}-fil?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      '{bestand} kunne ikke læses som en {formaat}-præsentation.',
   'Wat doen we met deze dia’s?': 'Hvad skal der ske med disse slides?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Disse slides kunne ikke konverteres helt. Vælg for hver slide, hvad der skal ske; det, du ikke rører, overtages så komplet som muligt med en note om, hvad der mangler.',

@@ -730,6 +730,111 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Alinea': 'Paragraphe',
+  'Audio "{bestand}"': 'Audio "{bestand}"',
+  'Deck opbouwen…': 'Construction du deck…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'La diapositive contient plusieurs clips audio ; OciDeck n\'en prend en charge qu\'un seul par diapositive.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'La diapositive contient plusieurs graphiques ; OciDeck n\'en prend en charge qu\'un seul par diapositive.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'La diapositive contient plusieurs tableaux ; OciDeck n\'en prend en charge qu\'un seul par diapositive.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'La diapositive contient plusieurs vidéos ; OciDeck n\'en prend en charge qu\'une seule par diapositive.',
+  'Dia {n} overgeslagen': 'Diapositive {n} ignorée',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Diapositive {n} : seule l\'image a été conservée',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Une forme, une ligne ou un autre objet non textuel n\'a pas pu être converti.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Les lignes de pied de page ne sont pas prises en charge dans Markdown.',
+  'Formaat herkennen…': 'Détection du format…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Les objets groupés ont été dissociés ; le groupement et l\'ordre au sein du groupe sont perdus.',
+  'Groepering': 'Groupement',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Les colonnes d\'en-tête ne sont pas prises en charge dans OciDeck.',
+  'IWA-objecten inlezen…': 'Lecture des objets IWA…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'Structure IWA partiellement analysée — la mise en forme (thème, couleurs, positions) n\'a pas été reprise ; le texte, l\'ordre des diapositives, les notes et, là où les structures ont été reconnues, les tableaux, graphiques et médias l\'ont été.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'Structure IWA non entièrement analysée — mise en forme, tableaux, graphiques, médias et ordre des diapositives non repris',
+  'IWA-tekst salvage…': 'Récupération du texte IWA…',
+  'Keynote IWA-intern': 'Keynote IWA interne',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA interne (~{n} diapositives)',
+  'Keynote tabel footer': 'Pied de tableau Keynote',
+  'Keynote tabel header': 'En-tête de tableau Keynote',
+  'Keynote tabel headerkolommen': 'Colonnes d\'en-tête de tableau Keynote',
+  'Klaar.': 'Terminé.',
+  'Koppeling “{tekst}”': 'Lien "{tekst}"',
+  'Meerdere audio': 'Plusieurs audios',
+  'Meerdere grafieken': 'Plusieurs graphiques',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Les lignes d\'en-tête multiples ne sont pas prises en charge dans Markdown ; seule la première ligne est utilisée comme en-tête de tableau.',
+  'Meerdere tabellen': 'Plusieurs tableaux',
+  'Meerdere video\'s': 'Plusieurs vidéos',
+  'Metadata uitlezen…': 'Lecture des métadonnées…',
+  'Niet overgenomen van dit document': 'Non repris de ce document',
+  'Niet overgenomen van slide {n}': 'Non repris de la diapositive {n}',
+  'Ondersteund grafiektype': 'Type de graphique pris en charge',
+  'Samengevoegde cellen': 'Cellules fusionnées',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Les cellules de tableau fusionnées ne sont pas prises en charge dans les tableaux GFM ; le tableau a été aplati.',
+  'Scatter x-as': 'Axe x du nuage de points',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Un nuage de points avec des valeurs x distinctes par série ne peut pas être entièrement représenté.',
+  'Slides classificeren…': 'Classification des diapositives…',
+  'Slides reconstrueren…': 'Reconstruction des diapositives…',
+  'Tabel naast grafiek': 'Tableau à côté du graphique',
+  'Voorbeeldafbeelding zoeken…': 'Recherche de l\'image d\'aperçu…',
+  'Vorm of object': 'Forme ou objet',
+  'de tekst blijft staan, de verwijzing niet': 'le texte reste, pas le lien',
+  'deels overgenomen': 'partiellement repris',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'cible neutralisée ; elle pointait vers {url}',
+  'eerste audio overgenomen': 'premier audio conservé',
+  'eerste grafiek overgenomen': 'premier graphique conservé',
+  'eerste rij als header': 'première ligne comme en-tête',
+  'eerste tabel overgenomen': 'premier tableau conservé',
+  'eerste video overgenomen': 'première vidéo conservée',
+  'gedeelde x-as gebruikt': 'axe x partagé utilisé',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'non repris (OciDeck n\'a pas de diapositives audio)',
+  'niet overgenomen (deze dia werd een {type})':
+      'non repris (cette diapositive est devenue un {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'non repris (cette diapositive est devenue un {type}, qui ne contient pas de liste à puces)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'non repris (une diapositive {type} en affiche {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'non repris (une diapositive {type} n\'affiche pas de texte de paragraphe libre)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'non repris (un graphique ou un tableau par diapositive)',
+  'objecten apart overgenomen': 'objets repris séparément',
+  'samengevoegd in leesvolgorde': 'fusionnés dans l\'ordre de lecture',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'texte, ordre, notes et tableaux, graphiques et médias reconnus',
+  '{n} afbeelding': '{n} image',
+  '{n} afbeeldingen': '{n} images',
+  '{n} alinea’s': '{n} paragraphes',
+  '{n} opsommingspunt': '{n} puce',
+  '{n} opsommingspunten': '{n} puces',
+  '{n} vrij geplaatste tekstvakken': '{n} zones de texte placées librement',
+  'voorbeeldafbeelding en tekst': 'image d\'aperçu et texte',
+  'voorbeeldafbeelding': 'image d\'aperçu',
+  'tekst': 'texte',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} dépasse la limite de {limiet} et ne sera pas importé.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} n\'est pas une présentation reconnue. OciDeck lit PowerPoint (.pptx), OpenDocument (.odp) et Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} semble endommagé : l\'archive ne peut pas être entièrement extraite.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'Le format {formaat} n\'est pas encore pris en charge ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Aucune diapositive trouvée dans {bestand} — s\'agit-il d\'un fichier {formaat} valide ?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      'Impossible de lire {bestand} comme présentation {formaat}.',
   'Wat doen we met deze dia’s?': 'Que faire de ces diapositives ?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Ces diapositives n\'ont pas pu être converties entièrement. Choisissez pour chaque diapositive ce qui doit se passer ; ce que vous ne touchez pas sera repris aussi complètement que possible, avec une note sur ce qui manque.',

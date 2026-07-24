@@ -1773,6 +1773,111 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Alinea': 'Odstavek',
+  'Audio "{bestand}"': 'Zvok "{bestand}"',
+  'Deck opbouwen…': 'Sestavljanje predstavitve…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'Prosojnica vsebuje več zvočnih posnetkov; OciDeck podpira samo enega na prosojnico.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'Prosojnica vsebuje več grafikonov; OciDeck podpira samo enega na prosojnico.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'Prosojnica vsebuje več tabel; OciDeck podpira samo eno na prosojnico.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'Prosojnica vsebuje več videoposnetkov; OciDeck podpira samo enega na prosojnico.',
+  'Dia {n} overgeslagen': 'Prosojnica {n} preskočena',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Prosojnica {n}: prenesena je bila samo slika',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Netekstovne oblike, črte ali drugega predmeta ni bilo mogoče pretvoriti.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Vrstice noge v Markdownu niso podprte.',
+  'Formaat herkennen…': 'Prepoznavanje oblike…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Združeni predmeti so bili razdruženi; združevanje in vrstni red znotraj skupine se izgubita.',
+  'Groepering': 'Združevanje',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Stolpci glave v OciDecku niso podprti.',
+  'IWA-objecten inlezen…': 'Branje objektov IWA…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'Struktura IWA delno razčlenjena — oblikovanje (tema, barve, položaji) ni bilo preneseno; besedilo, vrstni red prosojnic, opombe ter, kjer so bile strukture prepoznane, tabele, grafikoni in mediji so bili.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'Struktura IWA ni bila v celoti razčlenjena — oblikovanje, tabele, grafikoni, mediji in vrstni red prosojnic niso bili preneseni',
+  'IWA-tekst salvage…': 'Reševanje besedila IWA…',
+  'Keynote IWA-intern': 'Keynote IWA notranji',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA notranji (~{n} prosojnic)',
+  'Keynote tabel footer': 'Noga tabele Keynote',
+  'Keynote tabel header': 'Glava tabele Keynote',
+  'Keynote tabel headerkolommen': 'Stolpci glave tabele Keynote',
+  'Klaar.': 'Končano.',
+  'Koppeling “{tekst}”': 'Povezava "{tekst}"',
+  'Meerdere audio': 'Več zvočnih posnetkov',
+  'Meerdere grafieken': 'Več grafikonov',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Več vrstic glave v Markdownu ni podprtih; kot glava tabele se uporabi samo prva vrstica.',
+  'Meerdere tabellen': 'Več tabel',
+  'Meerdere video\'s': 'Več videoposnetkov',
+  'Metadata uitlezen…': 'Branje metapodatkov…',
+  'Niet overgenomen van dit document': 'Ni preneseno iz tega dokumenta',
+  'Niet overgenomen van slide {n}': 'Ni preneseno s prosojnice {n}',
+  'Ondersteund grafiektype': 'Podprta vrsta grafikona',
+  'Samengevoegde cellen': 'Spojene celice',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Spojene celice tabele v tabelah GFM niso podprte; tabela je bila sploščena.',
+  'Scatter x-as': 'Os x razsevnega grafikona',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Razsevnega grafikona z ločenimi vrednostmi x za vsako serijo ni mogoče v celoti prikazati.',
+  'Slides classificeren…': 'Razvrščanje prosojnic…',
+  'Slides reconstrueren…': 'Obnavljanje prosojnic…',
+  'Tabel naast grafiek': 'Tabela ob grafikonu',
+  'Voorbeeldafbeelding zoeken…': 'Iskanje slike predogleda…',
+  'Vorm of object': 'Oblika ali predmet',
+  'de tekst blijft staan, de verwijzing niet': 'besedilo ostane, sklic ne',
+  'deels overgenomen': 'delno preneseno',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'cilj onemogočen; kazal je na {url}',
+  'eerste audio overgenomen': 'ohranjen prvi zvočni posnetek',
+  'eerste grafiek overgenomen': 'ohranjen prvi grafikon',
+  'eerste rij als header': 'prva vrstica kot glava',
+  'eerste tabel overgenomen': 'ohranjena prva tabela',
+  'eerste video overgenomen': 'ohranjen prvi videoposnetek',
+  'gedeelde x-as gebruikt': 'uporabljena skupna os x',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'ni preneseno (OciDeck nima zvočnih prosojnic)',
+  'niet overgenomen (deze dia werd een {type})':
+      'ni preneseno (ta prosojnica je postala {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'ni preneseno (ta prosojnica je postala {type}, ki ne nosi označenega seznama)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'ni preneseno (prosojnica {type} jih prikaže {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'ni preneseno (prosojnica {type} ne prikaže samostojnega besedila odstavka)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'ni preneseno (en grafikon ali tabela na prosojnico)',
+  'objecten apart overgenomen': 'predmeti preneseni ločeno',
+  'samengevoegd in leesvolgorde': 'združeno v vrstnem redu branja',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'besedilo, vrstni red, opombe ter prepoznane tabele, grafikoni in mediji',
+  '{n} afbeelding': '{n} slika',
+  '{n} afbeeldingen': '{n} slik',
+  '{n} alinea’s': '{n} odstavkov',
+  '{n} opsommingspunt': '{n} označba',
+  '{n} opsommingspunten': '{n} označb',
+  '{n} vrij geplaatste tekstvakken': '{n} prosto postavljenih besedilnih polj',
+  'voorbeeldafbeelding en tekst': 'slika predogleda in besedilo',
+  'voorbeeldafbeelding': 'slika predogleda',
+  'tekst': 'besedilo',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} presega omejitev {limiet} in ne bo uvožen.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} ni prepoznana predstavitev. OciDeck bere PowerPoint (.pptx), OpenDocument (.odp) in Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} je videti poškodovan: arhiva ni mogoče v celoti razširiti.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'Oblika {formaat} še ni podprta ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'V {bestand} ni bilo najdenih prosojnic — je to veljavna datoteka {formaat}?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      '{bestand} ni bilo mogoče prebrati kot predstavitev {formaat}.',
   'Wat doen we met deze dia’s?': 'Kaj naredimo s temi prosojnicami?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Teh prosojnic ni bilo mogoče v celoti pretvoriti. Za vsako prosojnico izberi, kaj naj se zgodi; česar se ne dotakneš, bo prevzeto čim popolneje, z opombo o tem, kaj manjka.',

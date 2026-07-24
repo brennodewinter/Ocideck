@@ -1788,6 +1788,112 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Alinea': 'Абзац',
+  'Audio "{bestand}"': 'Аудіо "{bestand}"',
+  'Deck opbouwen…': 'Побудова презентації…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'Слайд містить кілька аудіофрагментів; OciDeck підтримує лише один на слайд.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'Слайд містить кілька діаграм; OciDeck підтримує лише одну на слайд.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'Слайд містить кілька таблиць; OciDeck підтримує лише одну на слайд.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'Слайд містить кілька відео; OciDeck підтримує лише одне на слайд.',
+  'Dia {n} overgeslagen': 'Слайд {n} пропущено',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Слайд {n}: перенесено лише зображення',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Не вдалося перетворити нетекстову фігуру, лінію чи інший об\'єкт.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Рядки нижнього колонтитула не підтримуються в Markdown.',
+  'Formaat herkennen…': 'Розпізнавання формату…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Згруповані об\'єкти розгруповано; групування та порядок усередині групи втрачено.',
+  'Groepering': 'Групування',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Стовпці заголовка не підтримуються в OciDeck.',
+  'IWA-objecten inlezen…': 'Читання об\'єктів IWA…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'Структуру IWA частково розібрано — оформлення (тема, кольори, позиції) не перенесено; текст, порядок слайдів, нотатки та, де структури було розпізнано, таблиці, діаграми й медіа — перенесено.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'Структуру IWA розібрано не повністю — форматування, таблиці, діаграми, медіа та порядок слайдів не перенесено',
+  'IWA-tekst salvage…': 'Відновлення тексту IWA…',
+  'Keynote IWA-intern': 'Keynote IWA внутрішній',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA внутрішній (~{n} слайдів)',
+  'Keynote tabel footer': 'Нижній колонтитул таблиці Keynote',
+  'Keynote tabel header': 'Заголовок таблиці Keynote',
+  'Keynote tabel headerkolommen': 'Стовпці заголовка таблиці Keynote',
+  'Klaar.': 'Готово.',
+  'Koppeling “{tekst}”': 'Посилання "{tekst}"',
+  'Meerdere audio': 'Кілька аудіо',
+  'Meerdere grafieken': 'Кілька діаграм',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Кілька рядків заголовка не підтримуються в Markdown; як заголовок таблиці використовується лише перший рядок.',
+  'Meerdere tabellen': 'Кілька таблиць',
+  'Meerdere video\'s': 'Кілька відео',
+  'Metadata uitlezen…': 'Читання метаданих…',
+  'Niet overgenomen van dit document': 'Не перенесено з цього документа',
+  'Niet overgenomen van slide {n}': 'Не перенесено зі слайда {n}',
+  'Ondersteund grafiektype': 'Підтримуваний тип діаграми',
+  'Samengevoegde cellen': 'Об\'єднані клітинки',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Об\'єднані клітинки таблиці не підтримуються в таблицях GFM; таблицю зведено до плоскої.',
+  'Scatter x-as': 'Вісь x точкової діаграми',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Точкову діаграму з окремими значеннями x для кожної серії неможливо відобразити повністю.',
+  'Slides classificeren…': 'Класифікація слайдів…',
+  'Slides reconstrueren…': 'Реконструкція слайдів…',
+  'Tabel naast grafiek': 'Таблиця поряд із діаграмою',
+  'Voorbeeldafbeelding zoeken…': 'Пошук зображення для попереднього перегляду…',
+  'Vorm of object': 'Фігура або об\'єкт',
+  'de tekst blijft staan, de verwijzing niet':
+      'текст залишається, посилання ні',
+  'deels overgenomen': 'частково перенесено',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'ціль знешкоджено; вона вказувала на {url}',
+  'eerste audio overgenomen': 'збережено перше аудіо',
+  'eerste grafiek overgenomen': 'збережено першу діаграму',
+  'eerste rij als header': 'перший рядок як заголовок',
+  'eerste tabel overgenomen': 'збережено першу таблицю',
+  'eerste video overgenomen': 'збережено перше відео',
+  'gedeelde x-as gebruikt': 'використано спільну вісь x',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'не перенесено (OciDeck не має аудіослайдів)',
+  'niet overgenomen (deze dia werd een {type})':
+      'не перенесено (цей слайд став типом {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'не перенесено (цей слайд став типом {type}, який не містить маркованого списку)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'не перенесено (слайд типу {type} показує {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'не перенесено (слайд типу {type} не показує окремого тексту абзацу)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'не перенесено (одна діаграма або таблиця на слайд)',
+  'objecten apart overgenomen': 'об\'єкти перенесено окремо',
+  'samengevoegd in leesvolgorde': 'об\'єднано в порядку читання',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'текст, порядок, нотатки та розпізнані таблиці, діаграми й медіа',
+  '{n} afbeelding': '{n} зображення',
+  '{n} afbeeldingen': '{n} зображень',
+  '{n} alinea’s': '{n} абзаців',
+  '{n} opsommingspunt': '{n} маркер',
+  '{n} opsommingspunten': '{n} маркерів',
+  '{n} vrij geplaatste tekstvakken': '{n} довільно розміщених текстових полів',
+  'voorbeeldafbeelding en tekst': 'зображення попереднього перегляду та текст',
+  'voorbeeldafbeelding': 'зображення попереднього перегляду',
+  'tekst': 'текст',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} перевищує обмеження {limiet} і не буде імпортований.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} не є розпізнаною презентацією. OciDeck читає PowerPoint (.pptx), OpenDocument (.odp) і Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} здається пошкодженим: архів не можна повністю розпакувати.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'Формат {formaat} ще не підтримується ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'У {bestand} не знайдено слайдів — це дійсний файл {formaat}?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      'Не вдалося прочитати {bestand} як презентацію {formaat}.',
   'Wat doen we met deze dia’s?': 'Що зробити з цими слайдами?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Ці слайди не вдалося перетворити повністю. Оберіть для кожного слайда, що робити; те, чого ви не змінюєте, буде перенесено якомога повніше, з нотаткою про те, чого бракує.',

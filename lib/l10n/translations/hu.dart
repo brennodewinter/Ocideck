@@ -1775,6 +1775,111 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Alinea': 'Bekezdés',
+  'Audio "{bestand}"': 'Hang "{bestand}"',
+  'Deck opbouwen…': 'Prezentáció összeállítása…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'A dia több hangklipet tartalmaz; az OciDeck diánként csak egyet támogat.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'A dia több diagramot tartalmaz; az OciDeck diánként csak egyet támogat.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'A dia több táblázatot tartalmaz; az OciDeck diánként csak egyet támogat.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'A dia több videót tartalmaz; az OciDeck diánként csak egyet támogat.',
+  'Dia {n} overgeslagen': '{n}. dia kihagyva',
+  'Dia {n}: alleen de afbeelding overgenomen': '{n}. dia: csak a kép került át',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Egy nem szöveges alakzatot, vonalat vagy más objektumot nem sikerült átalakítani.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'A láblécsorok nem támogatottak Markdownban.',
+  'Formaat herkennen…': 'Formátum felismerése…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'A csoportosított objektumok szét lettek bontva; a csoportosítás és a csoporton belüli sorrend elveszik.',
+  'Groepering': 'Csoportosítás',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'A fejléc oszlopok nem támogatottak az OciDeckben.',
+  'IWA-objecten inlezen…': 'IWA-objektumok beolvasása…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'Az IWA-struktúra részben feldolgozva — a megjelenés (téma, színek, pozíciók) nem került át; a szöveg, a diák sorrendje, a jegyzetek és, ahol a struktúrákat felismerte, a táblázatok, diagramok és médiaelemek igen.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'Az IWA-struktúra nem lett teljesen feldolgozva — a formázás, a táblázatok, a diagramok, a médiaelemek és a diák sorrendje nem került át',
+  'IWA-tekst salvage…': 'IWA-szöveg mentése…',
+  'Keynote IWA-intern': 'Keynote IWA belső',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA belső (~{n} dia)',
+  'Keynote tabel footer': 'Keynote-táblázat lábléce',
+  'Keynote tabel header': 'Keynote-táblázat fejléce',
+  'Keynote tabel headerkolommen': 'Keynote-táblázat fejlécoszlopai',
+  'Klaar.': 'Kész.',
+  'Koppeling “{tekst}”': 'Hivatkozás "{tekst}"',
+  'Meerdere audio': 'Több hangfájl',
+  'Meerdere grafieken': 'Több diagram',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'A több fejlécsor nem támogatott Markdownban; csak az első sor lesz a táblázat fejléce.',
+  'Meerdere tabellen': 'Több táblázat',
+  'Meerdere video\'s': 'Több videó',
+  'Metadata uitlezen…': 'Metaadatok beolvasása…',
+  'Niet overgenomen van dit document': 'Nem került át ebből a dokumentumból',
+  'Niet overgenomen van slide {n}': 'Nem került át a(z) {n}. diáról',
+  'Ondersteund grafiektype': 'Támogatott diagramtípus',
+  'Samengevoegde cellen': 'Egyesített cellák',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Az egyesített táblázatcellák nem támogatottak a GFM-táblázatokban; a táblázat ki lett lapítva.',
+  'Scatter x-as': 'Pontdiagram x tengelye',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Az olyan pontdiagram, amelynek soronként külön x-értékei vannak, nem jeleníthető meg teljesen.',
+  'Slides classificeren…': 'Diák osztályozása…',
+  'Slides reconstrueren…': 'Diák rekonstruálása…',
+  'Tabel naast grafiek': 'Táblázat a diagram mellett',
+  'Voorbeeldafbeelding zoeken…': 'Előnézeti kép keresése…',
+  'Vorm of object': 'Alakzat vagy objektum',
+  'de tekst blijft staan, de verwijzing niet':
+      'a szöveg megmarad, a hivatkozás nem',
+  'deels overgenomen': 'részben átvéve',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'a cél ártalmatlanítva; ide mutatott: {url}',
+  'eerste audio overgenomen': 'az első hang átvéve',
+  'eerste grafiek overgenomen': 'az első diagram átvéve',
+  'eerste rij als header': 'az első sor fejlécként',
+  'eerste tabel overgenomen': 'az első táblázat átvéve',
+  'eerste video overgenomen': 'az első videó átvéve',
+  'gedeelde x-as gebruikt': 'közös x tengely használva',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'nem került át (az OciDecknek nincsenek hangdiái)',
+  'niet overgenomen (deze dia werd een {type})':
+      'nem került át (ez a dia {type} lett)',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'nem került át (ez a dia {type} lett, amely nem tartalmaz felsorolást)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'nem került át (egy {type} dia {aantal} elemet mutat)',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'nem került át (egy {type} dia nem jelenít meg különálló bekezdésszöveget)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'nem került át (diánként egy diagram vagy táblázat)',
+  'objecten apart overgenomen': 'az objektumok külön kerültek át',
+  'samengevoegd in leesvolgorde': 'olvasási sorrendben egyesítve',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'szöveg, sorrend, jegyzetek és a felismert táblázatok, diagramok és médiaelemek',
+  '{n} afbeelding': '{n} kép',
+  '{n} afbeeldingen': '{n} kép',
+  '{n} alinea’s': '{n} bekezdés',
+  '{n} opsommingspunt': '{n} felsoroláspont',
+  '{n} opsommingspunten': '{n} felsoroláspont',
+  '{n} vrij geplaatste tekstvakken': '{n} szabadon elhelyezett szövegdoboz',
+  'voorbeeldafbeelding en tekst': 'előnézeti kép és szöveg',
+  'voorbeeldafbeelding': 'előnézeti kép',
+  'tekst': 'szöveg',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      'A(z) {bestand} nagyobb a(z) {limiet} korlátnál, ezért nem lesz importálva.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      'A(z) {bestand} nem felismert bemutató. Az OciDeck a PowerPoint (.pptx), OpenDocument (.odp) és Keynote (.key) formátumokat olvassa.',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      'A(z) {bestand} sérültnek tűnik: az archívumot nem lehet teljesen kicsomagolni.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'A(z) {formaat} formátum még nem támogatott ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Nem található dia a(z) {bestand} fájlban — érvényes {formaat} fájl ez?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      'A(z) {bestand} nem olvasható {formaat} bemutatóként.',
   'Wat doen we met deze dia’s?': 'Mi legyen ezekkel a diákkal?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Ezeket a diákat nem sikerült teljesen átalakítani. Válaszd ki diánként, mi történjen; amihez nem nyúlsz, a lehető legteljesebben kerül át, és megjegyzés kerül mellé a hiányzó részekről.',

@@ -1778,6 +1778,111 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Alinea': 'Pastraipa',
+  'Audio "{bestand}"': 'Garsas "{bestand}"',
+  'Deck opbouwen…': 'Kuriama prezentacija…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'Skaidrėje yra keli garso įrašai; OciDeck palaiko tik vieną skaidrėje.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'Skaidrėje yra kelios diagramos; OciDeck palaiko tik vieną skaidrėje.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'Skaidrėje yra kelios lentelės; OciDeck palaiko tik vieną skaidrėje.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'Skaidrėje yra keli vaizdo įrašai; OciDeck palaiko tik vieną skaidrėje.',
+  'Dia {n} overgeslagen': 'Skaidrė {n} praleista',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Skaidrė {n}: perkeltas tik paveikslėlis',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Netekstinės figūros, linijos ar kito objekto nepavyko konvertuoti.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Poraštės eilutės Markdown nepalaikomos.',
+  'Formaat herkennen…': 'Nustatomas formatas…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Sugrupuoti objektai išgrupuoti; grupavimas ir tvarka grupėje prarandami.',
+  'Groepering': 'Grupavimas',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Antraštės stulpeliai OciDeck nepalaikomi.',
+  'IWA-objecten inlezen…': 'Skaitomi IWA objektai…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'IWA struktūra iš dalies išanalizuota — stilius (tema, spalvos, pozicijos) neperkeltas; tekstas, skaidrių tvarka, pastabos ir, kur struktūros buvo atpažintos, lentelės, diagramos ir medija — perkelti.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'IWA struktūra išanalizuota ne visa — formatavimas, lentelės, diagramos, medija ir skaidrių tvarka neperkelti',
+  'IWA-tekst salvage…': 'Gelbėjamas IWA tekstas…',
+  'Keynote IWA-intern': 'Keynote IWA vidinis',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA vidinis (~{n} skaidrių)',
+  'Keynote tabel footer': 'Keynote lentelės poraštė',
+  'Keynote tabel header': 'Keynote lentelės antraštė',
+  'Keynote tabel headerkolommen': 'Keynote lentelės antraštės stulpeliai',
+  'Klaar.': 'Atlikta.',
+  'Koppeling “{tekst}”': 'Nuoroda "{tekst}"',
+  'Meerdere audio': 'Keli garso įrašai',
+  'Meerdere grafieken': 'Kelios diagramos',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Kelios antraštės eilutės Markdown nepalaikomos; kaip lentelės antraštė naudojama tik pirmoji eilutė.',
+  'Meerdere tabellen': 'Kelios lentelės',
+  'Meerdere video\'s': 'Keli vaizdo įrašai',
+  'Metadata uitlezen…': 'Skaitomi metaduomenys…',
+  'Niet overgenomen van dit document': 'Neperkelta iš šio dokumento',
+  'Niet overgenomen van slide {n}': 'Neperkelta iš skaidrės {n}',
+  'Ondersteund grafiektype': 'Palaikomas diagramos tipas',
+  'Samengevoegde cellen': 'Sujungti langeliai',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Sujungti lentelės langeliai GFM lentelėse nepalaikomi; lentelė buvo suplokštinta.',
+  'Scatter x-as': 'Sklaidos diagramos x ašis',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Sklaidos diagramos su atskiromis x reikšmėmis kiekvienai serijai negalima pilnai pavaizduoti.',
+  'Slides classificeren…': 'Klasifikuojamos skaidrės…',
+  'Slides reconstrueren…': 'Atkuriamos skaidrės…',
+  'Tabel naast grafiek': 'Lentelė šalia diagramos',
+  'Voorbeeldafbeelding zoeken…': 'Ieškoma peržiūros paveikslėlio…',
+  'Vorm of object': 'Figūra arba objektas',
+  'de tekst blijft staan, de verwijzing niet': 'tekstas lieka, nuoroda ne',
+  'deels overgenomen': 'iš dalies perkelta',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'tikslas nukenksmintas; jis rodė į {url}',
+  'eerste audio overgenomen': 'perkeltas pirmas garso įrašas',
+  'eerste grafiek overgenomen': 'perkelta pirma diagrama',
+  'eerste rij als header': 'pirma eilutė kaip antraštė',
+  'eerste tabel overgenomen': 'perkelta pirma lentelė',
+  'eerste video overgenomen': 'perkeltas pirmas vaizdo įrašas',
+  'gedeelde x-as gebruikt': 'naudota bendra x ašis',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'neperkelta (OciDeck neturi garso skaidrių)',
+  'niet overgenomen (deze dia werd een {type})':
+      'neperkelta (ši skaidrė tapo {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'neperkelta (ši skaidrė tapo {type}, kuri neturi sąrašo su ženkleliais)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'neperkelta ({type} skaidrė rodo {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'neperkelta ({type} skaidrė nerodo atskiro pastraipos teksto)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'neperkelta (viena diagrama arba lentelė skaidrėje)',
+  'objecten apart overgenomen': 'objektai perkelti atskirai',
+  'samengevoegd in leesvolgorde': 'sujungta skaitymo tvarka',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'tekstas, tvarka, pastabos ir atpažintos lentelės, diagramos ir medija',
+  '{n} afbeelding': '{n} paveikslėlis',
+  '{n} afbeeldingen': '{n} paveikslėlių',
+  '{n} alinea’s': '{n} pastraipų',
+  '{n} opsommingspunt': '{n} sąrašo ženklelis',
+  '{n} opsommingspunten': '{n} sąrašo ženklelių',
+  '{n} vrij geplaatste tekstvakken': '{n} laisvai išdėstytų teksto laukų',
+  'voorbeeldafbeelding en tekst': 'peržiūros paveikslėlis ir tekstas',
+  'voorbeeldafbeelding': 'peržiūros paveikslėlis',
+  'tekst': 'tekstas',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} viršija {limiet} ribą ir nebus importuotas.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} nėra atpažinta prezentacija. OciDeck skaito PowerPoint (.pptx), OpenDocument (.odp) ir Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} atrodo sugadintas: archyvo nepavyksta iki galo išskleisti.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'Formatas {formaat} dar nepalaikomas ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Faile {bestand} nerasta skaidrių — ar tai tinkamas {formaat} failas?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      'Nepavyko nuskaityti {bestand} kaip {formaat} prezentacijos.',
   'Wat doen we met deze dia’s?': 'Ką daryti su šiomis skaidrėmis?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Šių skaidrių nepavyko konvertuoti visiškai. Pasirink kiekvienai skaidrei, ką daryti; ko nepakeisi, bus perkelta kuo išsamiau, pridedant pastabą apie tai, ko trūksta.',

@@ -1771,6 +1771,112 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Alinea': 'Paragraf',
+  'Audio "{bestand}"': 'Audio "{bestand}"',
+  'Deck opbouwen…': 'Membangun deck…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'Slide berisi beberapa klip audio; OciDeck hanya mendukung satu per slide.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'Slide berisi beberapa bagan; OciDeck hanya mendukung satu per slide.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'Slide berisi beberapa tabel; OciDeck hanya mendukung satu per slide.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'Slide berisi beberapa video; OciDeck hanya mendukung satu per slide.',
+  'Dia {n} overgeslagen': 'Slide {n} dilewati',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Slide {n}: hanya gambar yang disertakan',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Bentuk, garis, atau objek non-teks lain tidak dapat dikonversi.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Baris footer tidak didukung di Markdown.',
+  'Formaat herkennen…': 'Mengenali format…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Objek yang dikelompokkan telah dipisahkan; pengelompokan dan urutan di dalam grup hilang.',
+  'Groepering': 'Pengelompokan',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Kolom header tidak didukung di OciDeck.',
+  'IWA-objecten inlezen…': 'Membaca objek IWA…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'Struktur IWA sebagian diurai — gaya (tema, warna, posisi) tidak disertakan; teks, urutan slide, catatan, dan, jika strukturnya dikenali, tabel, bagan, dan media disertakan.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'Struktur IWA tidak diurai sepenuhnya — pemformatan, tabel, bagan, media, dan urutan slide tidak disertakan',
+  'IWA-tekst salvage…': 'Menyelamatkan teks IWA…',
+  'Keynote IWA-intern': 'IWA internal Keynote',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA internal (~{n} slide)',
+  'Keynote tabel footer': 'Footer tabel Keynote',
+  'Keynote tabel header': 'Header tabel Keynote',
+  'Keynote tabel headerkolommen': 'Kolom header tabel Keynote',
+  'Klaar.': 'Selesai.',
+  'Koppeling “{tekst}”': 'Tautan "{tekst}"',
+  'Meerdere audio': 'Beberapa audio',
+  'Meerdere grafieken': 'Beberapa bagan',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Beberapa baris header tidak didukung di Markdown; hanya baris pertama yang digunakan sebagai header tabel.',
+  'Meerdere tabellen': 'Beberapa tabel',
+  'Meerdere video\'s': 'Beberapa video',
+  'Metadata uitlezen…': 'Membaca metadata…',
+  'Niet overgenomen van dit document': 'Tidak disertakan dari dokumen ini',
+  'Niet overgenomen van slide {n}': 'Tidak disertakan dari slide {n}',
+  'Ondersteund grafiektype': 'Jenis bagan yang didukung',
+  'Samengevoegde cellen': 'Sel gabungan',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Sel tabel gabungan tidak didukung di tabel GFM; tabel telah diratakan.',
+  'Scatter x-as': 'Sumbu x scatter',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Bagan scatter dengan nilai x terpisah per seri tidak dapat ditampilkan sepenuhnya.',
+  'Slides classificeren…': 'Mengklasifikasikan slide…',
+  'Slides reconstrueren…': 'Merekonstruksi slide…',
+  'Tabel naast grafiek': 'Tabel di samping bagan',
+  'Voorbeeldafbeelding zoeken…': 'Mencari gambar pratinjau…',
+  'Vorm of object': 'Bentuk atau objek',
+  'de tekst blijft staan, de verwijzing niet':
+      'teksnya tetap, rujukannya tidak',
+  'deels overgenomen': 'sebagian disertakan',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'tujuan dinetralkan; tautan mengarah ke {url}',
+  'eerste audio overgenomen': 'audio pertama disertakan',
+  'eerste grafiek overgenomen': 'bagan pertama disertakan',
+  'eerste rij als header': 'baris pertama sebagai header',
+  'eerste tabel overgenomen': 'tabel pertama disertakan',
+  'eerste video overgenomen': 'video pertama disertakan',
+  'gedeelde x-as gebruikt': 'sumbu x bersama digunakan',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'tidak disertakan (OciDeck tidak memiliki slide audio)',
+  'niet overgenomen (deze dia werd een {type})':
+      'tidak disertakan (slide ini menjadi {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'tidak disertakan (slide ini menjadi {type}, yang tidak memuat daftar berpoin)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'tidak disertakan (slide {type} menampilkan {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'tidak disertakan (slide {type} tidak menampilkan teks paragraf lepas)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'tidak disertakan (satu bagan atau tabel per slide)',
+  'objecten apart overgenomen': 'objek disertakan secara terpisah',
+  'samengevoegd in leesvolgorde': 'digabungkan sesuai urutan baca',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'teks, urutan, catatan, dan tabel, bagan, serta media yang dikenali',
+  '{n} afbeelding': '{n} gambar',
+  '{n} afbeeldingen': '{n} gambar',
+  '{n} alinea’s': '{n} paragraf',
+  '{n} opsommingspunt': '{n} poin',
+  '{n} opsommingspunten': '{n} poin',
+  '{n} vrij geplaatste tekstvakken': '{n} kotak teks yang ditempatkan bebas',
+  'voorbeeldafbeelding en tekst': 'gambar pratinjau dan teks',
+  'voorbeeldafbeelding': 'gambar pratinjau',
+  'tekst': 'teks',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} lebih besar dari batas {limiet} dan tidak akan diimpor.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} bukan presentasi yang dikenali. OciDeck membaca PowerPoint (.pptx), OpenDocument (.odp), dan Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} tampaknya rusak: arsip tidak dapat diekstrak sepenuhnya.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'Format {formaat} belum didukung ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Tidak ada slide yang ditemukan di {bestand} — apakah ini file {formaat} yang valid?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      'Tidak dapat membaca {bestand} sebagai presentasi {formaat}.',
   'Wat doen we met deze dia’s?': 'Apa yang harus dilakukan dengan slide ini?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Slide ini tidak dapat dikonversi sepenuhnya. Pilih per slide apa yang harus terjadi; yang tidak Anda ubah akan diambil selengkap mungkin, disertai catatan tentang apa yang hilang.',
