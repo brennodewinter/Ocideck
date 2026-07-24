@@ -860,7 +860,7 @@ class _HoverPieChartState extends State<_HoverPieChart> {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: AppTheme.ink,
+                    color: AppTheme.chartTooltipBg,
                     borderRadius: BorderRadius.circular(8),
                     boxShadow: const [
                       BoxShadow(color: AppTheme.shadow20, blurRadius: 6),
