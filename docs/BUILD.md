@@ -337,18 +337,30 @@ step anyway: a set nobody watches is how this went wrong the first time.
 
 ## CI
 
-> **Since 2026-07-23 the forge has an Actions runner.** The quality gate
-> (`make check`) runs in CI **on a `v*` tag** (`.forgejo/workflows/ci.yml`,
-> #751/#790) — not per pull request. A gate run cost 22 minutes on that runner
-> against 2.5 minutes locally, and that wait per PR did not earn its keep next
-> to a `make check` every committer already runs before pushing. The honest
-> consequence: CI is no longer a merge gate but a **release** gate. If it fails
-> on a tag, the problem is already on `main`, and the assurance before `main`
-> is entirely the committer's local run. The gate caches the pinned Flutter
-> toolchain and the pub packages (#790); that removes repeated download and
-> extraction work, not a check — `check-toolchain` still runs inside
-> `make check` on the restored tree and still demands channel `stable`, the
-> official origin, and equality with the pin.
+> **Since 2026-07-23 the forge has an Actions runner.** The quality gate runs
+> **on a `v*` tag** (`.forgejo/workflows/ci.yml`, #751/#790) — not per pull
+> request. A gate run cost 22 minutes on the server's runner against 2.5 minutes
+> locally, and that wait per PR did not earn its keep next to a `make check`
+> every committer already runs before pushing. The honest consequence: CI is no
+> longer a merge gate but a **release** gate. If it fails on a tag, the problem
+> is already on `main`, and the assurance before `main` is entirely the
+> committer's local run.
+>
+> Two later changes shaped what that gate is. It runs `make check-no-coverage`
+> rather than `make check` (#796): the whole suite, without the coverage
+> instrumentation that cost ~39% CPU — so the coverage floors are enforced
+> locally and nowhere else. And since #797 it runs on the registered **Mac**
+> runner rather than in a container on the server, because the 46-vs-2.5-minute
+> gap was measured to be the machine (four cores of a 2018 Xeon against an M5
+> Max), not the steps. `check-toolchain` runs inside the gate either way and
+> still demands channel `stable`, the official origin, and equality with the
+> pin.
+>
+> What that costs: the suite no longer runs on Linux by default. The Linux gate
+> moved to `.forgejo/workflows/linux-gate.yml`, on demand — press it before a
+> release and when a change touches paths, subprocesses or `git` invocations.
+> The pinned-toolchain and pub caches live there, where an install actually
+> happens.
 >
 > `.forgejo/workflows/linux-build.yml` and `.forgejo/workflows/macos-build.yml`
 > produce the Linux and macOS desktop bundles **on demand only**

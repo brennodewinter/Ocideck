@@ -7,7 +7,8 @@ to fix it. The **`Makefile` is the single entry point** and the **real gate**:
 `make check`, run by the committer before pushing, is what actually enforces
 these checks. The Forgejo remote has an Actions runner since 2026-07-23, and
 `.forgejo/workflows/ci.yml` runs [`make check-no-coverage`](#make-check-no-coverage)
-**on a `v*` tag** — not per pull request (#741/#751/#790). That is `make check`
+**on a `v*` tag, on the Mac runner** — not per pull request
+(#741/#751/#790/#797). That is `make check`
 with the full test suite intact but without the coverage instrumentation —
 worth roughly 13 minutes off a 46-minute gate on that runner. Read this literally, twice over:
 nothing between your `make check` and `main` runs this gate for you, and the
@@ -177,7 +178,8 @@ now the only passing state.
 not what runs. That workflow does not execute: Forgejo reads
 `.forgejo/workflows/` instead of `.github/workflows/` once the former exists
 (see [Continuous integration](#continuous-integration)). What *does* run in CI
-is [`make check-no-coverage`](#make-check-no-coverage), on a `v*` tag (#790/#796).
+is [`make check-no-coverage`](#make-check-no-coverage) on the Mac runner, on a
+`v*` tag (#790/#796/#797).
 Note that `make
 check` alone does **not** include `licenses`, `sbom-verify`, `deps-check` or
 `check-web` — those live in `check-full`. Run `make check-full` before a
@@ -960,19 +962,46 @@ For focused work, run only the relevant slice instead of the whole suite:
 > exists, so that directory shadows `.github/workflows/`, whose files remain
 > reference definitions for a GitHub mirror. `make check-full` (the
 > dependency/web checks) still runs only locally; run it before a dependency
-> or web-facing change. The sections below describe the two workflows that
-> run, then what the GitHub files *declare*.
+> or web-facing change. Since #797 the release gate runs on a registered **Mac**
+> runner rather than on the server, and the Linux gate moved to an on-demand
+> workflow — see below for what that buys and what it costs. The sections below
+> describe the workflows that run, then what the GitHub files *declare*.
 
 ### `.forgejo/workflows/ci.yml` — the release gate, on a `v*` tag
-- **gate** — a bare `ubuntu:24.04` container in which the workflow installs
-  the **official** Flutter stable release: the version is *read from
-  `.tool-versions`* (so a pin bump has no second place to forget) and the
-  tarball is sha256-verified against the official release manifest. Then
-  `flutter pub get` and `make check` — the same gate a committer runs
-  locally, including `check-toolchain`, which is why a prebuilt third-party
-  Flutter image was rejected: the cirruslabs image shipped channel
-  `[user-branch]` from an unknown source, exactly what that check exists to
-  catch.
+- **gate** — runs on the registered **Mac** runner (`runs-on: macos`, host
+  mode) since #797: `flutter pub get`, then
+  [`make check-no-coverage`](#make-check-no-coverage). Host mode means the job
+  uses the machine's own pinned toolchain, so nothing is installed and nothing
+  is cached here; `check-toolchain` still runs inside the gate and still demands
+  channel `stable`, official provenance and equality with the pin — "it is my
+  own machine" is not a check.
+- **Why the Mac.** Measured (#796): the same gate took 46 minutes in a container
+  on the server against 2.5 minutes on the Mac. That factor is the machine, not
+  the steps — four physical cores of a 2018 Xeon D-2123IT, 3.8× slower per core
+  than an M5 Max. The toolchain cache, dropping coverage and lowering runner
+  capacity each took minutes off; this takes off an order of magnitude.
+- **What it costs, twice over.** First: the suite no longer runs on Linux
+  anywhere by default — and that is a real gap, because `git` 2.43 on Ubuntu
+  24.04 does not know `--end-of-options`, and no Mac will ever surface that. The
+  Linux gate is not deleted but moved to `linux-gate.yml`, on demand. Second:
+  the release gate now depends on one physical machine owned by one person. When
+  that Mac is off the run waits — the tag still lands, the gate arrives later.
+  Better than a gate nobody waits for, but this is not a server-class
+  arrangement and should not be read as one.
+
+### `.forgejo/workflows/linux-gate.yml` — on demand (`workflow_dispatch`)
+- **gate-linux** — the gate that `ci.yml` used to be: a bare `ubuntu:24.04`
+  container in which the workflow installs the **official** Flutter stable
+  release: the version is *read from `.tool-versions`* (so a pin bump has no
+  second place to forget) and the tarball is sha256-verified against the
+  official release manifest, with `actions/cache` over `/opt/flutter` and
+  `~/.pub-cache`. Then `flutter pub get` and `make check-no-coverage`. A
+  prebuilt third-party Flutter image was rejected here: the cirruslabs image
+  shipped channel `[user-branch]` from an unknown source, exactly what
+  `check-toolchain` exists to catch.
+- **When to press it:** before a release, and whenever a change touches paths,
+  subprocesses or `git` invocations. Nobody presses it automatically — that is
+  the deliberate trade for the release gate being fast, not an oversight.
 
 ### `.forgejo/workflows/linux-build.yml` — on demand (`workflow_dispatch`)
 - **build-linux** — same official pinned toolchain as the gate, plus the GTK
