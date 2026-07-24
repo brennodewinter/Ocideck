@@ -121,6 +121,46 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Added
+- **Eén tag levert nu vier platformen, een release en een live webversie.** Tot
+  nu toe bestond elk stuk los: de forge bouwde Linux en macOS per push naar
+  main, de spiegel bouwde Windows, en dat waren allemaal *run-artifacts* — die
+  verlopen na negentig dagen en vragen een login. Er was dus geen enkele URL
+  waar je iemand naartoe kon sturen. `.forgejo/workflows/release.yml` maakt er
+  één keten van: op een `v*`-tag ontstaat een Forgejo-release met de web-, macOS-
+  , Linux- en Windows-bundel, beide SBOM-formaten en één `SHA256SUMS` — en
+  `ocideck.librekat.nl` serveert daarna precies de bundel die aan die release
+  hangt.
+
+  Windows is de uitzondering en blijft dat: er staat geen Windows-machine bij de
+  forge. De spiegel publiceert die build als *release-asset* in plaats van als
+  artifact, want een asset van een publieke repo is een gewone publieke URL die
+  blijft bestaan — een artifact vraagt een token, óók bij een publieke repo, en
+  is na negentig dagen weg. Daardoor hoeft er geen GitHub-geheim op de eigen
+  runner te staan; de forge haalt het bestand met `curl` op en wacht er hoogstens
+  drie kwartier op.
+
+  Wat vooraf is getoetst in plaats van in een mislukte tagbuild ontdekt: dat het
+  automatisch geïnjecteerde Forgejo-token releases mág aanmaken (`POST
+  /releases` → 201), dat de runner github.com bereikt, en dat hij bij de
+  webserver kan. Drie onbekenden, één proefrun van een halve minuut.
+
+  De deploy is geen tweede implementatie: `scripts/deploy_web.sh` (ook met de
+  hand, via `make deploy-web`) verifieert de bundel, pakt hem *naast* de live map
+  uit, wisselt met één `mv`, haalt daarna `/index.html` en `/SHA256SUMS` weer
+  over HTTPS op om ze byte voor byte te vergelijken, en ruimt de backup pas op
+  als dát klopt. De job deployt bovendien het gedównloade artifact in plaats van
+  opnieuw te bouwen, zodat wat live staat identiek is aan wat je downloadt.
+
+  De artefacten zijn **niet ondertekend** — er is geen Apple Developer-account en
+  geen codesigning-certificaat. Dat staat niet weggemoffeld: de releasetekst
+  draagt per platform de openen-instructie, en zegt erbij dat `SHA256SUMS`
+  bewijst dát je de gepubliceerde bytes hebt en niets over wie ze publiceerde.
+
+  Het Flutter-installatieblok stond op het punt een vierde keer gekopieerd te
+  worden en is nu één composite action (`.forgejo/actions/flutter`). Niet uit
+  netheid: dat blok is de plek waar de herkomst van de toolchain wordt
+  vastgesteld, en een sha256-controle die je op vier plekken onderhoudt is er
+  een die op één plek verwatert.
 - **Een GitHub-spiegel bouwt nu de Windows-artifacts.** De forge blijft de
   plek voor ontwikkeling, issues en PR's; een automatische push-mirror houdt
   github.com/brennodewinter/Ocideck bij, en dáár draaien de

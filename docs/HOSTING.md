@@ -59,6 +59,69 @@ this bundle is large enough that the difference is the whole first impression.
 
 Serve over **HTTPS** in production.
 
+### Publishing an update: `make deploy-web`
+
+Copying a new bundle over a live directory means visitors briefly get a mixture
+of old and new files, and `main.dart.js` from one build with assets from another
+is a white screen. `scripts/deploy_web.sh` (via `make deploy-web`) avoids that:
+
+1. verifies the bundle — `SHA256SUMS` must describe exactly the files present,
+   so a half-finished build cannot leave;
+2. uploads a tarball and unpacks it **beside** the live directory;
+3. swaps the two directories with `mv`, which is atomic to the web server;
+4. fetches `/index.html` and `/SHA256SUMS` back over HTTPS and compares them
+   byte for byte with what was just deployed — a cache or CDN in between is
+   exactly the failure this catches;
+5. only then removes the backup it left behind, so a rollback stays one `mv`.
+
+```bash
+make build-web && make deploy-web
+```
+
+It targets the public web demo by default. Override with the environment:
+`OCIDECK_DEPLOY_HOST`, `OCIDECK_DEPLOY_ROOT`, `OCIDECK_DEPLOY_OWNER`,
+`OCIDECK_DEPLOY_URL`. `--dry-run` shows what it would do; `--keep-backup` keeps
+the previous version around.
+
+If step 4 fails, the script exits non-zero **and leaves the backup in place**.
+That is deliberate: an unverified deployment is the one you most want to be able
+to undo.
+
+### Automatic deployment on a tag
+
+`.forgejo/workflows/release.yml` runs the very same script, so a hand deployment
+and a tag deployment are the same sequence — see
+[BUILD.md](BUILD.md#cutting-a-release). It needs two repository secrets on the
+forge (Settings → Actions → Secrets):
+
+- **`DEPLOY_SSH_KEY`** — the private half of a key that may reach the host.
+  Generate a dedicated one; do not reuse a personal key:
+
+  ```bash
+  ssh-keygen -t ed25519 -f ~/.ssh/ocideck-deploy -C "ocideck-deploy" -N ""
+  ssh-copy-id -i ~/.ssh/ocideck-deploy.pub ubuntu@braniebananie.nl
+  ```
+
+  Paste the contents of `~/.ssh/ocideck-deploy` (the file **without** `.pub`)
+  into the secret.
+
+- **`DEPLOY_KNOWN_HOSTS`** — the host's public key, pinned ahead of time:
+
+  ```bash
+  ssh-keyscan -t ed25519 braniebananie.nl
+  ```
+
+  Run this from a machine you trust, look at it once, and paste the line.
+  The workflow will not run `ssh-keyscan` itself: trusting whatever key answers
+  at deploy time is precisely the assumption a man-in-the-middle needs.
+
+The account behind that key needs write access to the web root — on the
+reference deployment it is `ubuntu`, and the web root is owned by `brenno`, so
+the script uses `sudo` for the unpack and swap.
+
+Missing either secret fails the `deploy-web` job with that message. The release
+itself still publishes: the desktop downloads do not depend on the web host.
+
 ### Enable compression — this is not optional in practice
 
 Turn on brotli or gzip for `.js`, `.wasm`, `.json` and `.ttf`. Measured on this

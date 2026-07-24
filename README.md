@@ -232,9 +232,14 @@ gate (`make check`) on every pull request and every push to `main`
 (`.forgejo/workflows/ci.yml`), and builds the Linux desktop bundle as a run
 artifact on `main` (`.forgejo/workflows/linux-build.yml`). Run `make check`
 locally before pushing all the same — it is the same gate, and it answers in
-minutes instead of a CI round-trip; see [`docs/CHECKS.md`](docs/CHECKS.md). The
-workflow files under `.github/` are reference definitions for a GitHub mirror;
-Forgejo reads `.forgejo/workflows/` instead.
+minutes instead of a CI round-trip; see [`docs/CHECKS.md`](docs/CHECKS.md).
+
+A `v*` tag runs `.forgejo/workflows/release.yml`: web, macOS and Linux builds
+here, the Windows build on the GitHub mirror, and all of them published as one
+release with the SBOM and `SHA256SUMS` — see
+[`docs/BUILD.md`](docs/BUILD.md#cutting-a-release). Apart from that Windows lane,
+the workflow files under `.github/` are reference definitions; Forgejo reads
+`.forgejo/workflows/` instead.
 
 ## Contributing
 

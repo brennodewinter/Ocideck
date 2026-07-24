@@ -228,17 +228,23 @@ want the answer for yourself.
   the freshness gate (`sbom-verify`) first, so a stale inventory cannot be built
   against, but the files themselves travel in the release artefact rather than
   in the bundle.
-- **Releases** — `.github/workflows/release.yml` uploads them as the
-  `ocideck-sbom` artifact and the web bundle carries its copy. That workflow has
-  never run: it is a reference definition for a GitHub mirror, and the Forgejo
-  runner (attached 2026-07-23) executes `.forgejo/workflows/` instead (see
-  [CHECKS.md](CHECKS.md)).
+- **Releases** — `.forgejo/workflows/release.yml` attaches both formats to the
+  release itself, named after the version
+  (`ocideck-<versie>.cdx.json`, `ocideck-<versie>.spdx.json`), and the web
+  bundle carries its own copy under `/sbom/`. They are copied from the committed
+  `sbom/` directory, which `make sbom-verify` keeps current in every `make
+  check` — so the inventory attached to a tag is the inventory of that exact
+  source. *(Amended 2026-07-24: this said the release workflow had never run and
+  lived only on a GitHub mirror.)*
 - **Desktop builds do not carry it *inside* the bundle.** `make build-macos`,
-  `build-windows` and `build-linux` have no copy step, so hand `sbom/` over
-  alongside the binary until the release process exists (#520). They do now run
-  `sbom-verify` first, so at least a desktop bundle cannot be built against a
+  `build-windows` and `build-linux` have no copy step. For a released binary
+  that is covered — the SBOM hangs off the same release page as the download.
+  For a bundle you built by hand, hand `sbom/` over alongside it (#520). All
+  three run `sbom-verify` first, so a desktop bundle cannot be built against a
   stale inventory. *(Amended 2026-07-22: that prerequisite was added in the same
-  pass; before it, a hand-made desktop bundle could ship against a stale SBOM.)*
+  pass; before it, a hand-made desktop bundle could ship against a stale SBOM.
+  Amended 2026-07-24: released binaries now have the release page as the answer;
+  the gap is only in hand-made bundles.)*
 
 *(Corrected 2026-07-22: the summary at the top of this document said "shipped
 with every build", which was true only of the web build — and README calls

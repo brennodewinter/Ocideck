@@ -90,10 +90,13 @@ The web build is designed to pull **zero third-party origins** at runtime.
   this is drift *monitoring*, not the immutability a commit-SHA pin would give.
   *(Corrected 2026-07-22: this said all third-party Actions were pinned to
   exact versions, while the `_comment` in that same file said the opposite.)* The workflows declare least-privilege
-  (`permissions: contents: read`, `persist-credentials: false`) and a
-  reproducible dependency set (`flutter pub get --enforce-lockfile`) — declared,
-  not executed: the runner attached on 2026-07-23 runs `.forgejo/workflows/`,
-  which shadows these files.
+  (`persist-credentials: false`) and a reproducible dependency set (`flutter pub
+  get --enforce-lockfile`). Of these files only `release.yml` executes — the
+  Windows build lane on the mirror, which needs `permissions: contents: write`
+  to publish its release asset and reads nothing else; `ci.yml` is a reference
+  definition, because the runner attached on 2026-07-23 runs
+  `.forgejo/workflows/`, which shadows it. *(Amended 2026-07-24: before that
+  date none of these files executed.)*
 
 ## 3. Network security (NetGuard + pinned transports)
 
