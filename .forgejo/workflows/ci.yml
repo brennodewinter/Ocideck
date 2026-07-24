@@ -1,10 +1,7 @@
 # De kwaliteitspoort van OciDeck, in CI (#741). Zelfde poort als lokaal:
-# `make check`. De Flutter-versie komt uit .tool-versions — de workflow leest
-# de pin, dus een pin-bump heeft hier geen tweede plek om te vergeten — en de
-# tarball is de officiële stable-release, sha256-geverifieerd tegen het
-# release-manifest. Een kant-en-klaar Flutter-image (cirruslabs) is bewust
-# vermeden: dat bleek kanaal "[user-branch]" uit onbekende bron te bevatten,
-# en check-toolchain (onderdeel van make check) keurt precies dat af.
+# `make check`. De toolchain komt uit `.forgejo/actions/flutter`: de officiële
+# stable volgens de pin in .tool-versions, sha256-geverifieerd — daar staat ook
+# waarom er geen kant-en-klaar Flutter-image wordt gebruikt.
 name: ci
 
 on:
@@ -28,24 +25,7 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: Officiële Flutter volgens de pin
-        run: |
-          set -eu
-          VERSION="$(sed -n 's/^flutter \(.*\)-stable$/\1/p' .tool-versions)"
-          test -n "$VERSION"
-          ARCHIVE="flutter_linux_${VERSION}-stable.tar.xz"
-          BASE="https://storage.googleapis.com/flutter_infra_release/releases"
-          curl -fsSLo /tmp/releases.json "$BASE/releases_linux.json"
-          SHA=$(jq -r --arg v "$VERSION" \
-            '.releases[] | select(.channel=="stable" and .version==$v) | .sha256' \
-            /tmp/releases.json)
-          test -n "$SHA"
-          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/stable/linux/$ARCHIVE"
-          echo "$SHA  /tmp/$ARCHIVE" | sha256sum -c -
-          tar -xJf "/tmp/$ARCHIVE" -C /opt
-          rm "/tmp/$ARCHIVE"
-          git config --global --add safe.directory /opt/flutter
-          echo "/opt/flutter/bin" >> "$GITHUB_PATH"
+      - uses: ./.forgejo/actions/flutter
 
       - name: Afhankelijkheden ophalen
         run: flutter pub get
