@@ -196,6 +196,43 @@ read a book to find out.
   beschadigd archief levert de échte reden op in plaats van "geen dia's
   gevonden" — sinds `archive` 4 decodeert rommel namelijk naar een léég archief,
   wat van een lege presentatie niet te onderscheiden is.
+- **Er kijkt nu iets naar de gepinde CI-versies, en het manifest kan niet meer
+  stil verouderen.** Sinds #799/#800 staan gitleaks, trufflehog en semgrep op een
+  vaste versie. Goed — maar een pin zonder tegenhanger verouderd ongemerkt, en
+  voor déze drie is dat niet cosmetisch: een geheimenscanner die stilstaat
+  eindigt netjes op 0 terwijl hij de sleutelvormen mist die ná hem zijn bedacht.
+  Groen omdat hij niet wist waar hij naar moest kijken — dezelfde faalvorm als
+  een historie-scan op een ondiepe kloon.
+
+  Er bestond één monitor, `make check-actions`, en die keek uitsluitend naar
+  Actions met een exacte versie; precies één stond erin. Een versie in een
+  `run:`-blok viel erbuiten. Het manifest en het gereedschap heten daarom nu naar
+  wat ze werkelijk dekken — `.github/pinned-ci-versions.json`,
+  `tool/check_pinned_versions.dart`, `make check-pins` — met twee lijsten, omdat
+  een `uses:`-pin en een binary die een `run:`-blok binnenhaalt op dezelfde
+  manier verouderen en er niet op lijken. Twee bronnen ook: een GitHub-release
+  draagt `tag_name`, PyPI draagt `info.version`. Semgrep wordt bij PyPI opgehaald
+  en niet bij zijn GitHub-release, want de workflow installeert hem met `pip` —
+  "de laatste" moet betekenen: de laatste die díe weg kan bereiken.
+
+  De helft die geen netwerk nodig heeft is géén advies maar een poort.
+  `test/pinned_versions_manifest_test.dart` draait in de suite en houdt het
+  manifest tegen béide workflows: een versie die ergens anders is bijgewerkt dan
+  elders, twee workflows die het oneens zijn, een veld dat de monitor nodig heeft
+  en mist. En de richting waar geen mens aan denkt: elke `*_VERSION:`-pin die in
+  `.github/workflows/` of `.forgejo/workflows/` opduikt en niet in het manifest
+  staat, valt hier om. Zonder die laatste kon het manifest verouderen door
+  wegláting — een vierde scanner erbij, het manifest vergeten, en er kijkt weer
+  niemand. Drie mutaties gedraaid om te zien dat de test echt bijt: een
+  uiteengelopen versie, een niet-vermelde pin en een actie die van zijn
+  manifest-ingang afdwaalt; alle drie rood, daarna weer groen.
+
+  De monitor vond meteen iets: **semgrep 1.171.0 is uit, de pin staat op
+  1.170.0.** Bewust niet meegenomen. De lokaal geïnstalleerde semgrep is óók
+  1.170.0, en het hele punt van deze pins is dat CI en de werkbank niet uit
+  elkaar lopen; die bump hoort samen met de brew-installatie te gaan, na het
+  lezen van de changelog. Adviserend is niet hetzelfde als vrijblijvend, maar het
+  is ook niet "doe het even in dezelfde PR". (#802)
 
 ### Changed
 - **De scanners in de GitHub-definitie zijn gepind en geverifieerd; het
@@ -6005,7 +6042,10 @@ read a book to find out.
   that reads `.github/pinned-actions.json` and asks each exact-pinned third-party
   CI Action's release API whether a newer version exists, so a stale pin stands
   out (the Action analogue of `make deps-check`). Floating `@vN` Actions
-  auto-update and are not tracked. Documented in `docs/CHECKS.md`.
+  auto-update and are not tracked. Documented in `docs/CHECKS.md`. *(Op
+  24-07-2026 verbreed en hernoemd tot `make check-pins` /
+  `.github/pinned-ci-versions.json`, omdat de gepinde scannerbinaries er niet
+  onder vielen — zie de ingang bovenaan, #802.)*
 - **Contextual help in the editor** — a subtle "What can I do here?" button at
   the top of the slide editor expands a short, slide-type-specific hint (e.g.
   chart: CSV import; video: trimming/cut-at-playhead; table: paste from a
