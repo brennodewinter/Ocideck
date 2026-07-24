@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../platform/platform_features.dart';
 import '../../services/openkat/openkat_import_service.dart';
+import '../../state/openkat_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../utils/error_snackbar.dart';
@@ -22,8 +23,14 @@ import '../../utils/log.dart';
 /// werkelijk gebeurde: geladen, en overgeslagen (dubbel, onherkend, kapot of
 /// te groot) — een import die stil half slaagt is erger dan een die faalt.
 ///
-/// [directoryOverride] slaat de mapkiezer over; dat is de testroute — de
-/// statische FilePicker laat zich onder `flutter test` niet aansturen.
+/// De map komt uit Instellingen → Integraties wanneer die daar is aangewezen;
+/// pas zonder die instelling verschijnt de mapkiezer. Dat is het verschil dat
+/// deze actie bruikbaar maakt bij dagelijks gebruik: een OpenKAT-overzicht
+/// wordt telkens opnieuw bijgewerkt uit dezelfde exportmap, en elke keer
+/// dezelfde map aanwijzen is werk dat de app zelf kan onthouden.
+///
+/// [directoryOverride] slaat beide over; dat is de testroute — de statische
+/// FilePicker laat zich onder `flutter test` niet aansturen.
 Future<void> importOpenKatReports(
   BuildContext context,
   WidgetRef ref, {
@@ -36,6 +43,7 @@ Future<void> importOpenKatReports(
   final messenger = ScaffoldMessenger.of(context);
   final path =
       directoryOverride ??
+      ref.read(openKatDirectoryProvider) ??
       await FilePicker.getDirectoryPath(
         dialogTitle: l10n.d('Map met OpenKAT-rapportages kiezen'),
         initialDirectory: ref.read(settingsProvider).homeDirectory,

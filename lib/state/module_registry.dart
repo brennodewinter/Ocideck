@@ -19,11 +19,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'info_safety_provider.dart';
 import 'online_storage_provider.dart';
+import 'openkat_provider.dart';
 import 'settings_provider.dart';
 
 /// De optionele modules, in de volgorde waarin het Uitbreidingen-tabblad ze
 /// toont.
-enum ModuleId { infoSafety, ai, onlineStorage }
+enum ModuleId { infoSafety, ai, onlineStorage, openKat }
 
 /// Eén module in het register: wie hij is en waar zijn poorten staan.
 ///
@@ -87,5 +88,10 @@ final List<ModuleEntry> moduleRegistry = [
     id: ModuleId.onlineStorage,
     enabled: onlineStorageEnabledProvider,
     revealed: onlineStorageRevealProvider,
+  ),
+  ModuleEntry(
+    id: ModuleId.openKat,
+    enabled: openKatEnabledProvider,
+    revealed: openKatRevealProvider,
   ),
 ];

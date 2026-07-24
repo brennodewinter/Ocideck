@@ -29,6 +29,7 @@ enum SettingsSection {
   ai(Icons.smart_toy_outlined),
   checklists(Icons.checklist_outlined),
   modules(Icons.extension_outlined),
+  integrations(Icons.hub_outlined),
   documentation(Icons.menu_book_outlined),
   about(Icons.info_outline);
 
@@ -51,6 +52,7 @@ enum SettingsSection {
     SettingsSection.ai => l10n.d('AI-assistentie'),
     SettingsSection.checklists => l10n.d('Checklists'),
     SettingsSection.modules => l10n.d('Uitbreidingen'),
+    SettingsSection.integrations => l10n.d('Integraties'),
     SettingsSection.documentation => l10n.d('Documentatie'),
     SettingsSection.about => l10n.d('Over OciDeck'),
   };
@@ -75,16 +77,23 @@ enum SettingsSection {
   /// module geworden en woont onder Uitbreidingen. Wie hem uit laat, ziet er
   /// niets van — behalve wanneer er al een backend is ingevuld, want ook daar
   /// geldt "tonen zodra de inhoud er is".
+  /// [openKatRevealed] is dezelfde afweging voor de OpenKAT-module (#767):
+  /// Integraties bestaat alleen wanneer er iets te integreren valt. Zolang
+  /// OpenKAT de enige integratie is, staat of valt het tabblad met die module —
+  /// een leeg tabblad "Integraties" is geen informatie maar ruis. Komt er een
+  /// tweede integratie bij, dan wordt dit een `||` en niet een uitzondering.
   static List<SettingsSection> navItems({
     required bool infoSafetyRevealed,
     required bool hasChecklists,
     required bool aiRevealed,
+    required bool openKatRevealed,
   }) => values.where((s) {
     if (s == SettingsSection.about) return false;
     if (s == SettingsSection.checklists) {
       return infoSafetyRevealed || hasChecklists;
     }
     if (s == SettingsSection.ai) return aiRevealed;
+    if (s == SettingsSection.integrations) return openKatRevealed;
     return true;
   }).toList();
 }

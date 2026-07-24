@@ -30,6 +30,10 @@ extension _SettingsModules on _SettingsDialogState {
             ModuleId.infoSafety => _informationSecurityCard(l10n, module),
             ModuleId.ai => _aiAssistCard(l10n),
             ModuleId.onlineStorage => const OnlineStorageModuleCard(),
+            ModuleId.openKat => OpenKatModuleCard(
+              onOpenIntegrations: () =>
+                  _rebuild(() => _selectedTab = SettingsSection.integrations),
+            ),
           },
         ],
       ],

@@ -386,13 +386,13 @@ abstract final class OpenKatShapes {
         'name': type['name'] ?? id,
       },
       'severity': type['risk_severity']?.toString() ?? 'unknown',
-      ?'ooi': ooi,
-      ?'primary_key': primaryKey,
+      'ooi': ?ooi,
+      'primary_key': ?primaryKey,
       if (type['recommendation'] != null)
         'recommendation': type['recommendation'],
       if (type['impact'] != null) 'impact': type['impact'],
-      ?'description': description,
-      ?'first_seen': firstSeen,
+      'description': ?description,
+      'first_seen': ?firstSeen,
     };
   }
 }
