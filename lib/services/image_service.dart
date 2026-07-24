@@ -527,9 +527,17 @@ class ImageService {
     final updated = <Slide>[];
     for (final slide in slides) {
       var next = slide;
-      final video = await _mediaToProject(next.videoPath, mediaDir);
+      final video = await _mediaToProject(
+        next.videoPath,
+        mediaDir,
+        isAudio: false,
+      );
       if (video != null) next = next.copyWith(videoPath: video);
-      final audio = await _mediaToProject(next.audioPath, mediaDir);
+      final audio = await _mediaToProject(
+        next.audioPath,
+        mediaDir,
+        isAudio: true,
+      );
       if (audio != null) next = next.copyWith(audioPath: audio);
       updated.add(next);
     }
@@ -541,14 +549,20 @@ class ImageService {
   ///
   /// Twee bronnen: een `mem:`-pad draagt zijn bytes mee (een geïmporteerde of
   /// remote presentatie), een absoluut pad wijst naar schijf.
-  Future<String?> _mediaToProject(String path, Directory mediaDir) async {
+  Future<String?> _mediaToProject(
+    String path,
+    Directory mediaDir, {
+    required bool isAudio,
+  }) async {
     if (WebAssetStore.isMemPath(path)) {
       return _materializeMemAsset(
         path,
         mediaDir,
         subdir: 'media',
-        fallbackName: 'video.mp4',
-        fallbackExtension: '.mp4',
+        // Per soort, niet één terugval voor allebei: een audiobestand zonder
+        // extensie in de store zou anders als `.mp4` landen.
+        fallbackName: isAudio ? 'audio.m4a' : 'video.mp4',
+        fallbackExtension: isAudio ? '.m4a' : '.mp4',
       );
     }
     if (!_shouldCopy(path)) return null;
