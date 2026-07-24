@@ -154,6 +154,28 @@ canvas.
 **Net: 5 new `SlideType`s — the same order of magnitude as MIAUW's five — cover
 ~45 artefacts.**
 
+```mermaid
+flowchart TB
+    artefacts["~45 LSS artefacts — an unbounded, never-closing list<br/>SIPOC · FMEA · A3 · Ishikawa · VSM · control charts · Pareto · …"]
+    artefacts -->|"classify by HOW they render, not by name"| engines
+
+    subgraph engines["~5 rendering primitives (SlideTypes) — bounded; cost is linear in primitives, CONSTANT in artefacts"]
+        matrix["matrix — typed grid + derived columns"]
+        canvas["canvas — fixed regions of Markdown"]
+        tree["tree — hierarchy (fishbone = a layout, not a type)"]
+        flow["flow — directed steps (VSM / swimlane = layouts)"]
+        chart["chart (existing, extended) — data plot"]
+        gate["phaseGate — derived DMAIC/DMADV overview"]
+    end
+
+    tmpl[("a new artefact = a declarative TEMPLATE file<br/>Markdown + YAML front matter · NL+EN data, not d() strings<br/>add Kano later = drop in a file — zero Dart, zero rebuild")]
+    tmpl -->|"engine + data"| engines
+```
+
+*The MIAUW way (one SlideType per tool) costs ~300k lines for 45 artefacts;
+engines × templates costs ~5 slide types + ~10 chart types, and every further
+artefact is a file. Option C (free Markdown) stays the escape hatch.*
+
 ### The template is a Markdown file (the proven pattern)
 
 This is not a new invention; it already exists in the repo and works.
@@ -199,6 +221,16 @@ Consequences, all good:
   "second audience" is a template pack, not a fork.
 
 ---
+
+```mermaid
+flowchart LR
+    tfile["template file<br/>Markdown + YAML front matter<br/>id · engine · phase · columns/regions · guidance (nl/en)"]
+    tfile --> pick["user picks the template"]
+    pick --> slide["a slide of the template's engine type, pre-filled"]
+    slide --> edit["user fills it in"]
+    edit --> store["Markdown-close storage: body is readable Markdown<br/>only non-round-trippable bits in ocideck_* comments<br/>anything derivable (RPN · Cpk · limits) is never stored"]
+    store -.->|"export · edit · share · re-import (a pack, not a fork)"| tfile
+```
 
 ## 3. Storage — Markdown-close, per engine
 
