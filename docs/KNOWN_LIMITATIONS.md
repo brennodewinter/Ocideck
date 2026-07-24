@@ -53,6 +53,24 @@ recipient needs to *read* rather than *look*. No WCAG conformance is claimed,
 and nothing has been tested with a real screen reader. →
 [ACCESSIBILITY.md](ACCESSIBILITY.md)
 
+## Importing a presentation is a conversion, not a copy
+
+A PowerPoint, Keynote or Impress file can be imported, but OciDeck's slide model
+is deliberately simpler than the sources': fixed layouts, one chart or one table
+per slide, no free positioning. Animations, transitions, merged table cells,
+audio and the source's own colours and fonts do not come across, and free-placed
+text boxes are merged into reading order. What was dropped is written onto a
+note slide beside the slide it came from rather than left for you to discover,
+and no data is ever thinned out to make a slide fit — but you do have to check
+the result. Keynote is the weakest of the three: its content is a binary format
+whose meaning lives in Apple's application, so a `.key` that cannot be
+reconstructed falls back to its preview image plus salvaged text.
+
+Separately: the importers have only ever been run against archives the test
+suite builds itself. No file written by PowerPoint, Impress or Keynote has been
+through them. → [USER_GUIDE.md](USER_GUIDE.md#importing-presentations-powerpoint-keynote-impress),
+[design/VERIFICATION.md](design/VERIFICATION.md) item 11 *(added 2026-07-24)*
+
 ## Left-to-right only
 
 The interface and the slide canvas are left-to-right. None of the 32 interface

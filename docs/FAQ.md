@@ -99,6 +99,7 @@ OciDeck enforces strict export controls:
 - **Style Profiles**: .ocideckstyle for theme sharing  
 - **Images**: PNG, JPEG, GIF, BMP, WebP (validated by content/magic bytes, not by file extension)
 - **Video/Audio**: Various formats supported through underlying libraries
+- **Import only**: PowerPoint (.pptx), Apple Keynote (.key) and LibreOffice Impress (.odp), converted into ordinary OciDeck decks behind the optional import module. Read-only in one direction: OciDeck imports these, and exports PPTX, but it never writes .key or .odp. The conversion is best-effort — see [Importing presentations](USER_GUIDE.md#importing-presentations-powerpoint-keynote-impress) in the user guide for what does and does not survive it. *(Added 2026-07-24.)*
 
 ### How are assets managed in OciDeck?
 Assets are organized in project folders with dedicated subdirectories:

@@ -55,6 +55,15 @@ further down is the long one, entry by entry, in Dutch.
   timestamp, and an encrypted audit dossier.
 - The optional AI assistance (off by default): finding-text drafting and image
   alt-text, marked as AI-drafted and blocking a seal until a human reviews it.
+- The optional import module (off by default): a folder of OpenKAT reports into
+  one management overview, and PowerPoint (`.pptx`), Keynote (`.key`) and
+  Impress (`.odp`) files into editable OciDeck decks. The conversion is
+  best-effort by design — whatever OciDeck's simpler slide model cannot hold
+  becomes a readable "not carried over" note beside the slide it came from,
+  never a silent omission — and large lists and tables keep every row while only
+  their display is bounded. Several files at once run as a queue into one
+  folder (desktop only); a single file opens in a tab, which works in the
+  browser too.
 - An offline CVE database for local lookup, so a search term never leaves the
   device.
 - Markdown mode over the whole deck, with find & replace and a structural
@@ -93,6 +102,100 @@ development diary, and it is a good one — the entries explain *why*, which is
 rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
+
+### Added
+- **Presentaties uit PowerPoint, Keynote en Impress komen binnen als echt deck
+  (#772).** Onder *… → Presentaties importeren…* wordt een `.pptx`, `.odp` of
+  `.key` omgezet naar getypte OciDeck-dia's in gewone Marp-Markdown. Niet naar
+  plaatjes van andermans dia's: naar materiaal dat te bewerken, te doorzoeken en
+  te exporteren is als elk ander deck. Het is de tweede bron onder de module
+  **Importeren** die met de OpenKAT-koppeling meekwam (besluit B1), dus het
+  menu-item verschijnt zodra die module aan staat of er al importinhoud is. De
+  omzetting werkt op de bytes van het gekozen bestand en niet op een map, dus
+  anders dan de OpenKAT-import bestaat deze ook in de webversie.
+
+  **Bewust geen één-op-één-kopie, en dat staat vooraf op het scherm.** OciDecks
+  diamodel is eenvoudiger dan dat van PowerPoint — vaste indelingen, één
+  grafiek óf één tabel per dia, geen vrije positionering — dus er gáát iets
+  verloren. Een eenmalige waarschuwing zegt dat vóór de bestandskiezer, met de
+  raad geïmporteerd materiaal in een aparte map te bewaren, en is weg te
+  klikken met "niet meer tonen". Achteraf vertellen wat er weg is, is niet
+  dezelfde belofte als het vooraf zeggen.
+
+  Wat niet past verdwijnt niet stil maar wordt zichtbaar: ná elke brondia die
+  iets verloor staat een vrije-Markdown-notitiedia — *Niet overgenomen van slide
+  7* — die elk onderdeel benoemt dat is laten vallen en, waar er iets van gered
+  is, waar dat deel terechtkwam. Verlies dat bij het hele document hoort krijgt één
+  zo'n notitie aan het eind. De melding na afloop telt hoeveel dia's echt verlies
+  opliepen, zodat meteen duidelijk is of er iets na te kijken valt.
+
+  Overgenomen: titels en ondertitels, sectiedia's, bullets mét niveau, twee
+  tekstkolommen, één of twee afbeeldingen met bijschrift (identieke
+  afbeeldingen worden één keer opgeslagen), tabellen, grafieken (type,
+  categorieën en reeksen), video uit PowerPoint en Keynote, citaten, tijdlijnen
+  waarvan de bullets als `markering :: gebeurtenis` lezen, sprekersnotities en
+  hyperlinks. Verborgen dia's blijven verborgen — ze komen binnen als
+  overgeslagen dia, niet weggegooid en niet stilletjes zichtbaar. Niet
+  overgenomen: animaties en overgangen, vrije positionering (losse tekstvakken
+  worden in leesvolgorde samengevoegd, met het aantal in de notitie),
+  samengevoegde tabelcellen, audio, een tabel naast een grafiek, en de kleuren
+  en lettertypen van het bronthema — een geïmporteerd deck krijgt de opmaak van
+  OciDeck zelf.
+
+  **Grote lijsten en tabellen worden niet gesnoeid maar begrensd in weergave.**
+  Dit is de herijking op #672 en het duidelijkste verschil met de porteerbron:
+  daar moest data wég om een leesbare dia te maken. Boven acht bullets of twaalf
+  tabelrijen krijgt de dia een niet-destructieve weergavelimiet — alle rijen
+  blijven in het deck, alleen de vertoning is begrensd, met de "N van totaal"-
+  regel erbij en uit te zetten in de dia-instellingen. Bewust op bronvolgorde en
+  niet op een top-N: een importeur heeft geen grond om te bepalen welke rijen de
+  belangrijkste zijn.
+
+  **Eén bestand of een stapel.** Eén bestand opent als tab en is nog nergens
+  opgeslagen: waar een import op schijf hoort, kiest de gebruiker zelf. Meer dan één opent een
+  wachtrij, want tien tabbladen is geen resultaat maar een puinhoop. Daarin
+  wordt de volgorde gezet (omhoog, omlaag, eruit halen), één doelmap aangewezen
+  en per bestand de voortgang getoond. Elk deck landt daar als eigen `.md` met
+  zijn eigen `images/` ernaast, onder een naam die nooit iets overschrijft — een
+  tweede deck met dezelfde titel wordt `-2`. Eén mislukt bestand stopt de rij
+  niet; het wordt gemarkeerd en benoemd en de volgende begint. Stoppen kan
+  tussen twee bestanden, nooit halverwege een schrijfactie. Achteraf telt de
+  dialoog geslaagd, mislukt, dia's die aandacht vragen en niet meer aan de beurt
+  gekomen — en noemt de map, want deze decks openen niet in tabbladen en zonder
+  dat pad weet niemand waar zijn werk heen ging. De wachtrij is desktop-only en
+  zegt dat ook, in plaats van een knop te tonen die niets kan.
+
+  **Keynote is een geval apart.** Een `.key` bevat geen XML: de inhoud staat als
+  Snappy-gecomprimeerde protobuf onder `Index/`, en de betekenis van de
+  typenummers woont in Apples eigen programma en niet in het bestand. De import
+  herbouwt wat herkenbaar is aan de veldvorm — diatekst, diavolgorde, notities,
+  en waar de structuren herkend worden ook tabellen, grafieken en media. Lukt
+  het objectgraaf-pad helemaal niet, dan blijft de voorbeeldafbeelding uit het
+  bestand over plus een *Geredde tekst*-dia van wat er aan tekst uit te halen
+  viel: rommelig, en als zodanig benoemd. Welke route het werd staat in de
+  documentbrede notitiedia, zodat een dunne Keynote-import er nooit uitziet als
+  een volledige.
+
+  **De porteergrens.** Dit is de importlaag van Keiko, maar dan geland op
+  OciDecks eigen objectmodel: waar Keiko Marp-Markdown uitschreef, bouwt
+  `DeckBuilder` echte `Slide`-objecten en laat hij `MarkdownService`/
+  `FileService` het serialiseren. Alleen notitie- en salvage-dia's zijn nog
+  vrije tekst, want dat zijn ze werkelijk. Afbeeldingen reizen als bytes mee
+  (`mem:`-paden) en worden pas bij het opslaan in de `images/`-map van het deck
+  gematerialiseerd — dezelfde route die een deck uit de webversie al nam — zodat
+  deze hele laag vrij blijft van `dart:io` en dus ook in de browser draait.
+
+  Wat een vreemd bestand mag doen, is begrensd. Een invoer boven 2 GiB wordt
+  geweigerd; het zip-archief wordt tegen zip-bommen gecontroleerd op de
+  opgegeven uitgepakte maten vóórdat er iets wordt uitgepakt; een videobestand
+  uit de bron krijgt alleen een extensie uit een witte lijst, zodat een
+  `clip.command` niet als zodanig in de `media/`-map belandt; en een hyperlink
+  met een uitvoerbaar schema (`javascript:`, `data:`, `vbscript:`, `file:`)
+  wordt onschadelijk gemaakt in plaats van overgenomen. Het formaat wordt
+  bovendien aan de binnenkant vastgesteld en niet aan de extensie, en een
+  beschadigd archief levert de échte reden op in plaats van "geen dia's
+  gevonden" — sinds `archive` 4 decodeert rommel namelijk naar een léég archief,
+  wat van een lege presentatie niet te onderscheiden is.
 
 ### Changed
 - **De scanners in de GitHub-definitie zijn gepind en geverifieerd; het
