@@ -4,6 +4,7 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/cvss/cvss4.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/theme/finding_severity_palette.dart';
+import 'package:ocideck/utils/color_contrast.dart';
 
 void main() {
   group('FindingSeverityPalette', () {
@@ -98,5 +99,27 @@ void main() {
         }
       },
     );
+
+    // Het scorebadge in de bevindingeditor en de CVSS-bouwer vult zich met de
+    // ernstband en zet er een klein (12px) label op. Dat is gewone tekst, lat
+    // 4,5:1 — en op de lichte oranje/amber banden (High/Medium) haalde vast wit
+    // dat niet: 3,6 en 3,2:1 (#821). Het label kiest nu `AppTheme.labelOn`, en
+    // deze toets bewaakt dat die keuze op élke band de tekstlat haalt.
+    //
+    // Op een dia is hetzelfde label groot (3:1 volstaat) en blijft het wit; dat
+    // pad wordt in `app_theme_contrast_test` gemeten. Deze gaat over de editor.
+    test('labelOn haalt op elke ernstband de tekstlat (4,5:1)', () {
+      for (final s in Cvss4Severity.values) {
+        final fill = FindingSeverityPalette.of(s);
+        final ratio = contrastRatio(AppTheme.labelOn(fill), fill);
+        expect(
+          ratio,
+          greaterThanOrEqualTo(kWcagAaNormalText),
+          reason:
+              'het scorebadge-label op de ${s.name}-band haalt '
+              '${ratio.toStringAsFixed(2)}:1',
+        );
+      }
+    });
   });
 }

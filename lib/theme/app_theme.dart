@@ -418,7 +418,12 @@ class AppTheme {
   /// lichte accent `#60A5FA` van het profiel Donker. Dat is 2,54:1, en het is
   /// het label van de opslaan-knop. Welk thema eromheen staat verandert niets
   /// aan wat er óp een gevulde knop leesbaar is (#750).
-  static Color _labelOn(Color fill) =>
+  ///
+  /// Publiek sinds #821: een gevulde ernstbadge in de bevindingeditor koos
+  /// altijd wit, en op de lichte oranje/amber ernstbanden (High/Medium) is dat
+  /// bij een klein label 3,2 tot 3,6:1. Op een dia is datzelfde label groot
+  /// (3:1 volstaat); in de editor niet. Dezelfde som beslist het daar nu ook.
+  static Color labelOn(Color fill) =>
       fill.computeLuminance() > 0.179 ? Colors.black : Colors.white;
 
   static ThemeData fromProfile(AppAppearanceProfile profile) {
@@ -504,7 +509,7 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: accentColor,
-          foregroundColor: _labelOn(accentColor),
+          foregroundColor: labelOn(accentColor),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),

@@ -135,8 +135,10 @@ class _CvssBuilderState extends State<CvssBuilder> {
       ),
       child: Text(
         '$label ${cvss.score.toStringAsFixed(1)} · ${cvss.severity.label}',
-        style: const TextStyle(
-          color: Colors.white,
+        style: TextStyle(
+          // Zie de bevindingeditor: 12px-label op de lichte ernstbanden, wit
+          // zakte daar naar 3,2-3,6:1 (#821). `labelOn` kiest zwart waar nodig.
+          color: AppTheme.labelOn(color),
           fontSize: 12,
           fontWeight: FontWeight.w700,
         ),
