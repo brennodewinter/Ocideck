@@ -125,6 +125,29 @@ read a book to find out.
   De diavormen rijden op wat er al was; het bestandsformaat is niet geraakt.
 
 ### Changed
+- **De uitbrengpoort draait op de Mac-runner; de Linux-poort blijft op afroep.**
+  Nagemeten was de wachttijd niet de stappen maar de machine: dezelfde poort
+  deed 46 minuten in een container op de server tegen 2,5 minuut op de Mac —
+  vier fysieke kernen van een Xeon uit 2018 tegen een M5 Max. Toolchaincache,
+  dekking eruit en capaciteit omlaag haalden er samen een kwartier af; deze stap
+  haalt er een orde van grootte af.
+
+  Host-modus: de job draait direct op de Mac met de toolchain die daar staat, dus
+  er valt niets te installeren en niets te cachen. `check-toolchain` draait
+  onverkort mee en eist ook daar kanaal `stable`, officiële herkomst en
+  gelijkheid met de pin — "het is mijn eigen machine" is geen controle.
+
+  Dit kost twee dingen, en allebei staan ze in de workflow zelf. **De suite
+  draait nergens meer standaard op Linux.** Dat is een echt gat: `git` 2.43 op
+  Ubuntu 24.04 kent `--end-of-options` niet, en zulke verschillen vindt geen
+  enkele Mac. De Linux-poort is daarom niet weggegooid maar verhuisd naar
+  `linux-gate.yml`, op afroep — te draaien vóór een release en bij wijzigingen
+  aan paden, subprocessen of `git`-aanroepen. Wie hem nooit indrukt, draait hem
+  nooit; dat is de afweging, geen ongeluk. En **de uitbrengpoort hangt nu aan
+  één fysieke machine van één persoon.** Staat die Mac uit, dan wacht de run:
+  de tag landt wel, de poort komt later. Te verkiezen boven een poort die
+  niemand afwacht, maar geen serverklasse-opstelling.
+
 - **De uitbrengpoort in CI meet geen dekking meer, en de runner draait nog één
   taak tegelijk.** Een poortrun op de eigen runner duurde 46 minuten tegen 2,5
   lokaal. Nagemeten waar die tijd zat, en het antwoord was niet waar het eerst

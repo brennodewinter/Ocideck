@@ -227,13 +227,16 @@ list is maintained in one place so it cannot go stale in two.
 | **Issues and pull requests** | [the tracker there](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues) — registration is open to anyone |
 | **Security reports** | `security@librekat.nl` — see [`SECURITY.md`](SECURITY.md) |
 
-The forge has an Actions runner (since 2026-07-23). It runs the full quality
-gate (`make check`) on a `v*` tag (`.forgejo/workflows/ci.yml`) — not per pull
-request, because a run costs 22 minutes there against 2.5 minutes locally.
-**So run `make check` locally before you push: it is the only thing standing
-between a change and `main`.** Desktop bundles are built on demand
-(`.forgejo/workflows/linux-build.yml`, `macos-build.yml`) or from a `v*` tag on
-the GitHub mirror. See [`docs/CHECKS.md`](docs/CHECKS.md). The
+The forge has an Actions runner (since 2026-07-23). It runs the quality gate on
+a `v*` tag (`.forgejo/workflows/ci.yml`) — not per pull request, and on a Mac
+runner rather than the server, because the same gate took 46 minutes there
+against 2.5 minutes on the Mac. It runs `make check-no-coverage`: the whole test
+suite, without the coverage floors. **So run `make check` locally before you
+push: it is the only thing standing between a change and `main`, and the only
+place the coverage floors run at all.** The Linux gate
+(`.forgejo/workflows/linux-gate.yml`) and the desktop bundles
+(`linux-build.yml`, `macos-build.yml`) run on demand, or from a `v*` tag on the
+GitHub mirror. See [`docs/CHECKS.md`](docs/CHECKS.md). The
 workflow files under `.github/` are reference definitions for a GitHub mirror;
 Forgejo reads `.forgejo/workflows/` instead.
 
