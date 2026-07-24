@@ -180,7 +180,7 @@ now the only passing state.
 | [`make shellcheck`](#make-shellcheck) | ShellCheck over the committed shell scripts | — | ✅ | — |
 | [`make dast`](#make-dast-advisory) | ZAP baseline over a served build (advisory) | — | — | — |
 | [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) |
-| [`make check-actions`](#make-check-actions-advisory) | Pinned CI Actions vs their latest release (advisory) | — | — | — |
+| [`make check-pins`](#make-check-pins-advisory) | Exact-pinned CI versions — actions *and* scanner binaries — vs their latest release (advisory) | — | — | — |
 
 † The **In CI workflow** column is what `.github/workflows/ci.yml` *declares* —
 not what runs. That workflow does not execute: Forgejo reads
@@ -840,18 +840,41 @@ also declares them, but see the [CI note](#continuous-integration).)
   coverage is still thin, so a finding is a prompt to review rather than a build
   break. Container/IaC scanners are omitted — OciDeck ships no images or IaC.
 
-### `make check-actions` (advisory)
-- **Runs:** `dart run tool/check_pinned_actions.dart` (`--offline` validates the
+### `make check-pins` (advisory)
+- **Runs:** `dart run tool/check_pinned_versions.dart` (`--offline` validates the
   manifest without hitting the network).
-- **Covers:** every third-party CI Action pinned to an **exact** version in
-  [`.github/pinned-actions.json`](../.github/pinned-actions.json) (currently
-  `aquasecurity/trivy-action`). It queries each Action's release API and flags
-  any that have fallen behind, so a stale pin stands out — the Action analogue
-  of `make deps-check`. Actions on a floating major tag (`@v4`, `@v2`)
-  auto-update and are intentionally not tracked.
+- **Covers:** every third-party CI version pinned to an **exact** value in
+  [`.github/pinned-ci-versions.json`](../.github/pinned-ci-versions.json), in two
+  kinds that age identically while looking nothing alike in a workflow:
+  - **actions** — `uses: owner/repo@vX.Y.Z` (currently `aquasecurity/trivy-action`);
+  - **tools** — a scanner binary a `run:` block downloads by version
+    (`gitleaks`, `trufflehog`, `semgrep`), pinned since #799/#800.
+
+  It asks each upstream for its latest version and flags anything behind — the
+  CI analogue of `make deps-check`. Two sources, because the three scanners do
+  not ship the same way: a GitHub release carries `tag_name`, PyPI carries
+  `info.version`. Semgrep is read from PyPI and not from its GitHub release,
+  because the workflow installs it with `pip`; "latest" has to mean the latest
+  version that install path can actually reach. Actions on a floating major tag
+  (`@v4`, `@v2`) auto-update and are intentionally not tracked, and Flutter is
+  absent because its version already has one source (`.tool-versions`, guarded by
+  [`make check-toolchain`](#make-check-toolchain)).
+- **Why the scanners belong here** (#802): a pin without a freshness monitor rots
+  silently, and for a secret scanner that is not cosmetic. One that stands still
+  keeps exiting 0 while missing the credential shapes invented after it — green
+  because it did not know what to look for, the same failure mode as a history
+  scan on a shallow clone.
 - **Advisory** and not part of the gate (it needs network access and a bump is a
-  prompt, not a regression). When it reports a newer release, bump the `uses:`
-  in the workflow **and** the version in the manifest in the same commit.
+  prompt, not a regression). When it reports a newer release, bump the version in
+  **every** workflow that carries it *and* in the manifest, in the same commit.
+- **That the manifest still matches the workflows is a separate question, and it
+  *is* a hard gate.** `test/pinned_versions_manifest_test.dart` runs in the suite,
+  offline, and fails on a version that drifted between the manifest and a
+  workflow, on the two workflows disagreeing with each other, and — the one that
+  matters most — on any `*_VERSION:` pin appearing in `.github/workflows/` or
+  `.forgejo/workflows/` that the manifest does not list. Without that last check
+  the manifest could go stale by *omission*: add a fourth scanner, forget the
+  manifest, and nothing watches it.
 
 ---
 
@@ -915,6 +938,15 @@ also declares them, but see the [CI note](#continuous-integration).)
     before its brand name can reach the interface unattributed. It also requires
     each branded row to disclaim affiliation, because naming only the owner
     leaves the suggestion of a partnership standing.
+  - `test/pinned_versions_manifest_test.dart` — the three scanner versions are
+    written out in **two** workflow files, so a bump has three places to land and
+    two of them are easy to forget. This holds
+    [`.github/pinned-ci-versions.json`](../.github/pinned-ci-versions.json)
+    against both workflows in every direction, including the one that has no
+    author to remember it: any `*_VERSION:` pin in either workflow directory that
+    the manifest does not list fails here. A pin nothing monitors ages silently
+    (#802), and for a secret scanner that means green because it did not know
+    what to look for.
 
 ### Targeted test groups
 

@@ -1,0 +1,52 @@
+{
+  "_comment": "Inventory of every third-party CI version this repository writes out IN FULL somewhere in a workflow, rather than letting it float. Two kinds, because they age identically but are pinned in different syntax: `actions` are `uses: owner/repo@vX.Y.Z` lines, `tools` are binaries a `run:` block downloads by version. `make check-pins` (tool/check_pinned_versions.dart) reads this list and asks each upstream whether a newer version exists — advisory, the same monitor pattern as the vendored-JS MANIFEST.json + `make deps-check`. A pin without such a monitor rots silently, and for the scanners that is not cosmetic: one that stands still keeps reporting green while missing the key shapes invented after it (#802). THREE THINGS ARE DELIBERATELY ABSENT. (1) Actions pinned to a floating major tag (actions/checkout@v4, subosito/flutter-action@v2, lycheeverse/lychee-action@v2, actions/upload-artifact@v4) auto-update within their major, so there is nothing to go stale. (2) Flutter: the workflow reads its version from .tool-versions and `make check-toolchain` guards it, so it already has exactly one source. (3) semgrep's transitive dependencies: the version is pinned, the dependency tree is not — hash-pinning it would mean a requirements file with hundreds of hashes, which is a bigger promise than this repo keeps. Noted rather than left silent. THIS FILE LIVES UNDER .github/ FOR HISTORY, but it governs .forgejo/workflows/ just as much — and the file that keeps the two from drifting apart is test/pinned_versions_manifest_test.dart, which runs in `make check` and fails if a workflow gains a *_VERSION pin that is not listed here. When you bump anything below, change the workflow(s) AND the version here in the same commit; the test fails otherwise.",
+  "actions": [
+    {
+      "uses": "aquasecurity/trivy-action",
+      "version": "v0.36.0",
+      "workflows": [".github/workflows/ci.yml"],
+      "purpose": "Advisory supply-chain scan (Dart-dep CVEs + committed secrets); mirrors `make trivy`.",
+      "source": "github_release",
+      "api": "https://api.github.com/repos/aquasecurity/trivy-action/releases/latest"
+    }
+  ],
+  "tools": [
+    {
+      "name": "gitleaks",
+      "env": "GITLEAKS_VERSION",
+      "version": "8.30.1",
+      "workflows": [
+        ".forgejo/workflows/scans.yml",
+        ".github/workflows/ci.yml"
+      ],
+      "purpose": "Secret scanning over the working tree and over all history; half of `make check-secrets`.",
+      "source": "github_release",
+      "api": "https://api.github.com/repos/gitleaks/gitleaks/releases/latest"
+    },
+    {
+      "name": "trufflehog",
+      "env": "TRUFFLEHOG_VERSION",
+      "version": "3.95.9",
+      "workflows": [
+        ".forgejo/workflows/scans.yml",
+        ".github/workflows/ci.yml"
+      ],
+      "purpose": "Secret scanning with per-provider detectors; the other half of `make check-secrets`.",
+      "source": "github_release",
+      "api": "https://api.github.com/repos/trufflesecurity/trufflehog/releases/latest"
+    },
+    {
+      "name": "semgrep",
+      "env": "SEMGREP_VERSION",
+      "version": "1.171.0",
+      "workflows": [
+        ".forgejo/workflows/scans.yml",
+        ".github/workflows/ci.yml"
+      ],
+      "purpose": "SAST over lib/, tool/ and test/ with the local rules in semgrep/ocideck.yaml; `make sast`.",
+      "source": "pypi",
+      "api": "https://pypi.org/pypi/semgrep/json",
+      "source_note": "PyPI and not the GitHub release, because the workflow installs it with pip — 'latest' has to mean the latest version that install path can actually reach."
+    }
+  ]
+}

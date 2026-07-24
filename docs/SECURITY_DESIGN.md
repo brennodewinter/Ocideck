@@ -80,10 +80,18 @@ The web build is designed to pull **zero third-party origins** at runtime.
   SBOM, so the CRA artefact can never silently drift.
 - **License compliance.** `tool/check_licenses.dart` (`make licenses`) fails if
   any resolved package uses an unrecognised or non-open-source license.
-- **Pinned CI Actions.** One third-party CI Action is pinned to an exact
-  version and tracked in `.github/pinned-actions.json`
-  (`aquasecurity/trivy-action`); `tool/check_pinned_actions.dart` reports when
-  it falls behind upstream. The other four (`actions/checkout`,
+- **Pinned CI versions.** One third-party CI Action and the three security
+  scanners are pinned to an exact version and tracked in
+  `.github/pinned-ci-versions.json` (`aquasecurity/trivy-action`, plus
+  `gitleaks`, `trufflehog` and `semgrep`, which the workflows download by version
+  and verify by sha256 against the published manifest);
+  `tool/check_pinned_versions.dart` (`make check-pins`) reports when any of them
+  falls behind upstream, and `test/pinned_versions_manifest_test.dart` fails the
+  suite if the manifest and the workflows disagree or if a workflow carries a
+  pin the manifest never listed. *(Extended 2026-07-24, #802: the scanners were
+  pinned in #799/#800 but nothing watched them for staleness, and a secret
+  scanner that stands still reports green while missing credential shapes
+  invented after it.)* The other four Actions (`actions/checkout`,
   `subosito/flutter-action`, `lycheeverse/lychee-action`,
   `actions/upload-artifact`) follow their major tag deliberately, so they pick
   up fixes within that major without a commit here. Note that a tag is mutable:
