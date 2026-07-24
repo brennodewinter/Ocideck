@@ -1751,15 +1751,16 @@ detail is for nobody) has to just work, and the author of that slide knows best.
 
 ### Importing OpenKAT reports (desktop)
 
-OpenKAT is an optional module: **Instellingen → Uitbreidingen → OpenKAT**, off
-by default. Switching it on adds an **Integraties** tab where you point at the
-folder holding your OpenKAT exports, so the import does not ask for it every
-time. The import only reads that folder — nothing in it is changed or sent
-anywhere.
+Importing is an optional module: **Instellingen → Uitbreidingen → Importeren**,
+off by default. One switch covers every source OciDeck pulls material in from;
+today that is OpenKAT. Switching it on adds an **Integraties** tab with a
+section per system, where you point at the folder holding your OpenKAT exports
+so the import does not ask for it every time. The import only reads that folder
+— nothing in it is changed or sent anywhere.
 
 Switching the module off later does not take the entry point away as long as a
 report folder is set: an existing OpenKAT deck stays updatable. What goes away
-is the tab and the menu item for someone who never uses OpenKAT.
+is the tab and the menu item for someone who never imports anything.
 
 **… → OpenKAT-rapportages importeren…** takes that folder of JSON exports from
 [OpenKAT](https://openkat.nl) and builds one management deck from it — totals,

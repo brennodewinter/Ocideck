@@ -1773,6 +1773,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Imports nolasa failus no diska un ir pieejams tikai darbvirsmas versijā.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Materiāla ievilkšana no citām sistēmām. Šodien tas ir OpenKAT: mape ar atskaitēm (JSON) kļūst par vienu vadības pārskatu — sistēmas, atradumi pēc smaguma, visilgāk atvērtie punkti un tendence vairākos secīgos mērījumos. Kur faili atrodas, iestata katrai sistēmai sadaļā Integrācijas.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Nolasa mapi ar OpenKAT atskaitēm (JSON) un veido no tās vienu vadības pārskatu: sistēmas, atradumus pēc smaguma, visilgāk atvērtos punktus un tendenci vairākos secīgos mērījumos. Tā pati darbība esošā OpenKAT prezentācijā to atjaunina un atstāj jūsu pašu slaidus savā vietā.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

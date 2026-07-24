@@ -2751,6 +2751,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'İçe aktarma diskten dosya okur ve yalnızca masaüstü sürümünde kullanılabilir.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Başka sistemlerden malzeme içeri alma. Bugün bu OpenKAT demek: raporların (JSON) bulunduğu bir klasör tek bir yönetim özetine dönüşür — sistemler, önem derecesine göre bulgular, en uzun süredir açık olan maddeler ve ardışık ölçümlerdeki eğilim. Dosyaların nerede olduğu her sistem için Entegrasyonlar altında ayarlanır.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'OpenKAT raporlarının (JSON) bulunduğu bir klasörü okur ve ondan tek bir yönetim özeti oluşturur: sistemler, önem derecesine göre bulgular, en uzun süredir açık olan maddeler ve ardışık ölçümlerdeki eğilim. Aynı işlem mevcut bir OpenKAT sunumunda onu günceller ve kendi slaytlarınızı yerinde bırakır.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

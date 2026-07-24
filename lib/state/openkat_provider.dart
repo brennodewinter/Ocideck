@@ -1,79 +1,56 @@
-// State voor de module "OpenKAT" (#767, #772): rapportages uit OpenKAT inlezen
-// en er een managementoverzicht van maken, als uitbreiding, standaard uit.
+// De instellingen van de OpenKAT-importeur (#767, #772): de map waarin de
+// OpenKAT-exports staan.
 //
-// Waarom een module. OpenKAT is een specifiek product en een specifieke
-// werkwijze; wie een presentatie komt maken heeft er niets aan en hoort er dus
-// ook geen menu-item van te zien. Dat is dezelfde afweging als bij de drie
-// modules ervóór (#570, #648, #731) en dezelfde vaste regel geldt: **tonen
-// zodra de inhoud er is.** Uitzetten mag nooit werk onbereikbaar maken.
+// De schakelaar staat hier bewust níét. Die hoort bij de module "Importeren"
+// (`import_module_provider.dart`), die meer importeurs dan alleen OpenKAT dekt —
+// besluit B1 van #772. De scheiding loopt langs de vraag die de gebruiker
+// stelt: de schakelaar beantwoordt "hoort importeren bij mijn werk", dit
+// bestand beantwoordt "waar staan mijn OpenKAT-bestanden".
 //
-// Anders dan de drie modules ervóór draagt deze een instelling die geen
-// schakelaar is: de map waar de OpenKAT-exports staan. Die woont hier en niet
-// in `Settings`, om dezelfde reden als de andere modulesleutels — één
-// voorkeursleutel per module, geen geparametriseerd framework. Zie de doc-kop
-// van `module_registry.dart`.
+// [openKatHasContentProvider] is wat deze importeur in de reveal-lijst van de
+// module inbrengt: een aangewezen map is inhoud, en inhoud blijft bereikbaar
+// ook als de module uit gaat.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/log.dart';
 
-/// De voorkeursleutels. Hernoemen mag nooit: dan staat de module bij een
-/// bestaande installatie stil weer uit en is de aangewezen map weg.
-const _enabledKey = 'openkatModuleEnabled';
+/// De voorkeursleutel. Hernoemen mag nooit: dan is de aangewezen map weg.
 const _directoryKey = 'openkatReportDirectory';
 
 final openKatProvider = NotifierProvider<OpenKatNotifier, OpenKatState>(
   OpenKatNotifier.new,
 );
 
-/// Of de schakelaar aan staat.
-///
-/// Harde standaard uit, en bewust géén afgeleide van de inhoud zoals bij
-/// Online opslag: daar bestond de inhoud (verbindingen) al vóórdat de module
-/// er was, hier niet. Een nieuwe installatie start dus uit, punt.
-final openKatEnabledProvider = Provider<bool>((ref) {
-  return ref.watch(openKatProvider.select((s) => s.enabled));
-});
-
 /// De aangewezen map met OpenKAT-exports, of null wanneer er geen staat.
 final openKatDirectoryProvider = Provider<String?>((ref) {
   return ref.watch(openKatProvider.select((s) => s.reportDirectory));
 });
 
-/// De poort waar het menu-item op kijkt: aan, óf er is al een map aangewezen.
+/// Wat OpenKAT als "inhoud" inbrengt bij de module Importeren.
 ///
-/// De vaste regel van dit project. Wie de module uitzet nadat hij een map heeft
-/// aangewezen, houdt het invoerpunt — anders is een deck dat op herimport
-/// wacht opeens niet meer bij te werken, en is de enige weg terug het opnieuw
-/// aanwijzen van een map waarvan de app al wist waar hij stond.
-final openKatRevealProvider = Provider<bool>((ref) {
-  final state = ref.watch(openKatProvider);
-  return state.enabled || state.reportDirectory != null;
+/// Een aangewezen rapportagemap betekent dat iemand hier al mee werkt. Zonder
+/// deze provider zou de module uitzetten een bestaand OpenKAT-deck
+/// onbijwerkbaar maken, en zou de enige weg terug het opnieuw aanwijzen zijn
+/// van een map waarvan de app al wist waar hij stond.
+final openKatHasContentProvider = Provider<bool>((ref) {
+  return ref.watch(openKatDirectoryProvider) != null;
 });
 
 class OpenKatState {
-  /// Of de module aan staat. Standaard uit.
-  final bool enabled;
-
   /// De map met OpenKAT-exports; null zolang er geen gekozen is.
   final String? reportDirectory;
 
   /// Voorkeuren worden nog geladen bij de eerste opbouw.
   final bool loading;
 
-  const OpenKatState({
-    this.enabled = false,
-    this.reportDirectory,
-    this.loading = true,
-  });
+  const OpenKatState({this.reportDirectory, this.loading = true});
 
   OpenKatState copyWith({
-    bool? enabled,
     String? reportDirectory,
     bool clearReportDirectory = false,
     bool? loading,
   }) => OpenKatState(
-    enabled: enabled ?? this.enabled,
     reportDirectory: clearReportDirectory
         ? null
         : (reportDirectory ?? this.reportDirectory),
@@ -93,23 +70,17 @@ class OpenKatNotifier extends Notifier<OpenKatState> {
       final prefs = await SharedPreferences.getInstance();
       final directory = prefs.getString(_directoryKey);
       state = OpenKatState(
-        enabled: prefs.getBool(_enabledKey) ?? false,
         reportDirectory: (directory != null && directory.isNotEmpty)
             ? directory
             : null,
         loading: false,
       );
     } catch (e, s) {
-      // Onleesbare voorkeuren: de module blijft uit — de veilige kant — maar
-      // het laden stopt wél, anders blijft de kaart hangen.
-      logError('OpenKatNotifier._initialize: read module state', e, s);
+      // Onleesbare voorkeuren: geen map — de veilige kant — maar het laden
+      // stopt wél, anders blijft het tabblad hangen.
+      logError('OpenKatNotifier._initialize: read report directory', e, s);
       state = state.copyWith(loading: false);
     }
-  }
-
-  Future<void> setEnabled(bool value) async {
-    state = state.copyWith(enabled: value, loading: false);
-    await _write((prefs) => prefs.setBool(_enabledKey, value));
   }
 
   /// Wijst de map met OpenKAT-exports aan, of wist hem met null.
@@ -121,16 +92,13 @@ class OpenKatNotifier extends Notifier<OpenKatState> {
       clearReportDirectory: value == null,
       loading: false,
     );
-    await _write(
-      (prefs) => value == null
-          ? prefs.remove(_directoryKey)
-          : prefs.setString(_directoryKey, value),
-    );
-  }
-
-  Future<void> _write(Future<void> Function(SharedPreferences) apply) async {
     try {
-      await apply(await SharedPreferences.getInstance());
+      final prefs = await SharedPreferences.getInstance();
+      if (value == null) {
+        await prefs.remove(_directoryKey);
+      } else {
+        await prefs.setString(_directoryKey, value);
+      }
     } catch (e, s) {
       // De stand voor deze sessie staat al; alleen het bewaren ging mis.
       logError('OpenKatNotifier: prefs-schrijf mislukt', e, s);

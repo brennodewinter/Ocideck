@@ -153,11 +153,15 @@ read a book to find out.
     scheidingstekens, precies de vorm die de oude uitdrukking liet liggen),
     anders de wijzigingsdatum van het bestand.
 
-  En de plek waar het hoort. OpenKAT is een specifiek product en een specifieke
-  werkwijze; wie een presentatie komt maken heeft er niets aan en hoort er geen
-  menu-item van te zien. Het is daarom de vierde optionele module geworden,
-  standaard uit, met een nieuw tabblad **Integraties** waar één keer de
-  exportmap wordt aangewezen — een OpenKAT-overzicht wordt telkens opnieuw
+  En de plek waar het hoort. Wie een presentatie komt maken heeft niets aan een
+  koppeling met een scansysteem en hoort er geen menu-item van te zien. Het is
+  daarom de vierde optionele module geworden — **Importeren**, standaard uit,
+  één schakelaar voor élke bron waaruit OciDeck materiaal binnenhaalt (besluit
+  B1 van #772; presentatie-import komt er straks onder). Wat er als inhoud
+  telt staat in één lijst, `importerContentProviders`, zodat een tweede
+  importeur zich daar meldt en niet stil buiten de reveal-regel valt. Erbij
+  hoort een nieuw tabblad **Integraties** met een sectie per systeem — OpenKAT
+  voorop, mét zijn logo — waar één keer de exportmap wordt aangewezen — een OpenKAT-overzicht wordt telkens opnieuw
   bijgewerkt uit dezelfde map, en dat elke keer aanwijzen is werk dat de app
   zelf kan onthouden. De vaste regel van dit project geldt onverkort: staat er
   een map ingesteld, dan blijft het invoerpunt bereikbaar ook met de schakelaar

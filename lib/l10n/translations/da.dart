@@ -1773,6 +1773,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Import læser filer fra disken og er kun tilgængelig i skrivebordsversionen.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Hente materiale ind fra andre systemer. I dag er det OpenKAT: en mappe med rapporter (JSON) bliver til ét ledelsesoverblik — systemer, fund efter alvorlighed, de længst åbne punkter og udviklingen over på hinanden følgende målinger. Hvor filerne ligger, indstilles pr. system under Integrationer.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Læser en mappe med OpenKAT-rapporter (JSON) og bygger ét ledelsesoverblik ud fra den: systemer, fund efter alvorlighed, de længst åbne punkter og udviklingen over på hinanden følgende målinger. Samme handling på en eksisterende OpenKAT-præsentation opdaterer den og lader dine egne dias blive stående.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

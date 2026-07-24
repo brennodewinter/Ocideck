@@ -1749,6 +1749,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'nagh HeHDaq De\'mey laDlaH nge\'wI\'; De\'wI\' tIn neH lo\'lu\'laH.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'latlh patmeyvo\' De\' qem. DaHjaj OpenKAT \'oH: ja\'chuqmey (JSON) ngaSbogh ngaSwI\' wa\' che\'wI\' Sovmey moj — pat, qay\'ghachmey \'ay\'mey, ram tIqqu\'bogh qay\'ghachmey, \'ej juHmey rap wanI\'mey. De\'mey Daq \'oH muvmoHmeHDaq pat Hoch wIvlu\'.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'OpenKAT ja\'chuqmey (JSON) ngaSbogh ngaSwI\' laD \'ej wa\' che\'wI\' Sovmey chenmoH: pat, qay\'ghachmey \'ay\'mey, ram tIqqu\'bogh qay\'ghachmey, \'ej juHmey rap wanI\'mey. OpenKAT De\'meywI\' tu\'lu\'bogh chu\'moH rap vang, \'ej De\'meylIj ratlhmoH.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

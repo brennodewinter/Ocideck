@@ -34,20 +34,21 @@ class OpenKatIntegrationPanel extends ConsumerWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Hetzelfde beeld als bij de mascottes op Over OciDeck: dit is de
-            // kat van OpenKAT, en hij maakt in één oogopslag duidelijk over
-            // welk systeem deze sectie gaat.
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                'assets/images/cat-keiko.jpg',
-                width: 56,
-                height: 56,
-                fit: BoxFit.cover,
-                // Decoratief naast een kop die het al zegt; een tweede keer
-                // "OpenKAT" voorlezen helpt niemand.
-                excludeFromSemantics: true,
-              ),
+            // Keiko, het logo van OpenKAT: in één oogopslag duidelijk over welk
+            // systeem deze sectie gaat. Bewust het logo en niet de mascottefoto
+            // van Over OciDeck — dáár staan de katten van Brenno, hier staat het
+            // merk waar we aan koppelen.
+            //
+            // `contain` en niet `cover`: dit is lijnwerk met witruimte eromheen,
+            // en bijsnijden zou er oren af halen.
+            Image.asset(
+              'assets/images/openkat-logo.png',
+              width: 56,
+              height: 56,
+              fit: BoxFit.contain,
+              // Decoratief naast een kop die het al zegt; een tweede keer
+              // "OpenKAT" voorlezen helpt niemand.
+              excludeFromSemantics: true,
             ),
             const SizedBox(width: 12),
             Expanded(

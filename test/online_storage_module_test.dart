@@ -117,7 +117,7 @@ void main() {
         ModuleId.infoSafety,
         ModuleId.ai,
         ModuleId.onlineStorage,
-        ModuleId.openKat,
+        ModuleId.imports,
       ]);
     });
   });

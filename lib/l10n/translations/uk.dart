@@ -1791,6 +1791,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Імпорт читає файли з диска й доступний лише в настільній версії.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Втягування матеріалу з інших систем. Сьогодні це OpenKAT: тека зі звітами (JSON) стає єдиним управлінським оглядом — системи, знахідки за критичністю, найдовше відкриті пункти та динаміка за послідовними вимірюваннями. Розташування файлів задається для кожної системи в Інтеграціях.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Читає теку зі звітами OpenKAT (JSON) і будує з неї єдиний управлінський огляд: системи, знахідки за критичністю, найдовше відкриті пункти та динаміку за послідовними вимірюваннями. Та сама дія на наявній презентації OpenKAT оновлює її та лишає ваші власні слайди на місці.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

@@ -1801,6 +1801,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Η εισαγωγή διαβάζει αρχεία από τον δίσκο και είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Εισαγωγή υλικού από άλλα συστήματα. Σήμερα αυτό σημαίνει OpenKAT: ένας φάκελος με αναφορές (JSON) γίνεται μία διοικητική επισκόπηση — συστήματα, ευρήματα ανά σοβαρότητα, τα σημεία που παραμένουν ανοιχτά περισσότερο και η τάση σε διαδοχικές μετρήσεις. Πού βρίσκονται τα αρχεία ορίζεται ανά σύστημα στις Ενσωματώσεις.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Διαβάζει έναν φάκελο με αναφορές OpenKAT (JSON) και δημιουργεί από αυτόν μία διοικητική επισκόπηση: συστήματα, ευρήματα ανά σοβαρότητα, τα σημεία που παραμένουν ανοιχτά περισσότερο και την τάση σε διαδοχικές μετρήσεις. Η ίδια ενέργεια σε υπάρχουσα παρουσίαση OpenKAT την ενημερώνει και αφήνει τις δικές σας διαφάνειες στη θέση τους.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

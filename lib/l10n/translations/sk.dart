@@ -1781,6 +1781,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Import číta súbory z disku a je dostupný len v desktopovej verzii.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Vtiahnutie materiálu z iných systémov. Dnes je to OpenKAT: priečinok s hláseniami (JSON) sa stane jedným manažérskym prehľadom — systémy, zistenia podľa závažnosti, najdlhšie otvorené body a vývoj naprieč po sebe idúcimi meraniami. Kde súbory ležia, nastavíte pre každý systém v Integráciách.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Prečíta priečinok s hláseniami OpenKAT (JSON) a zostaví z neho jeden manažérsky prehľad: systémy, zistenia podľa závažnosti, najdlhšie otvorené body a vývoj naprieč po sebe idúcimi meraniami. Rovnaká akcia na existujúcej prezentácii OpenKAT ju aktualizuje a vaše vlastné snímky ponechá na mieste.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

@@ -733,6 +733,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Importashon ta lesa dokumentonan for di disko i ta disponibel solamente den e vershon di desktop.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Trese material for di otro sistemanan. Awe ta OpenKAT: un karpeta ku rapòrtnan (JSON) ta bira un solo bista di gerensia — sistemanan, hayasgonan pa gravedat, e puntonan ku ta habrí mas largu i e tendensia riba midimentunan konsekutivo. Unda e dokumentonan ta, bo ta konfigurá pa sistema bou di Integrashonnan.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Ta lesa un karpeta ku rapòrtnan di OpenKAT (JSON) i ta traha un solo bista di gerensia: sistemanan, hayasgonan pa gravedat, e puntonan ku ta habrí mas largu i e tendensia riba midimentunan konsekutivo. E mesun akshon riba un presentashon OpenKAT eksistente ta aktualis\'é i ta laga bo mes slaidnan keda.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

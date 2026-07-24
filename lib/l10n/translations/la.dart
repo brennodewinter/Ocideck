@@ -1790,6 +1790,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Importatio fasciculos e disco legit et in versione mensali tantum praesto est.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Materiam ex aliis systematibus inferre. Hodie id est OpenKAT: plica relationum (JSON) fit unus conspectus administrationis — systemata, inventa pro gravitate, res diutissime apertae et progressus per mensuras continuas. Ubi fasciculi sint, per systema sub Integrationibus constituis.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Plicam relationum OpenKAT (JSON) legit et unum conspectum administrationis inde struit: systemata, inventa pro gravitate, res diutissime apertas et progressum per mensuras continuas. Eadem actio in fasciculo OpenKAT exsistente eum renovat et tabellas tuas proprias relinquit.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

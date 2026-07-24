@@ -1774,6 +1774,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Tuonti lukee tiedostoja levyltä ja on käytettävissä vain työpöytäversiossa.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Aineiston tuominen muista järjestelmistä. Tänään se tarkoittaa OpenKATia: kansiollinen raportteja (JSON) muuttuu yhdeksi johdon yleiskatsaukseksi — järjestelmät, havainnot vakavuuden mukaan, pisimpään auki olleet kohdat ja kehitys peräkkäisissä mittauksissa. Missä tiedostot ovat, asetetaan järjestelmäkohtaisesti kohdassa Integraatiot.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Lukee kansiollisen OpenKAT-raportteja (JSON) ja rakentaa niistä yhden johdon yleiskatsauksen: järjestelmät, havainnot vakavuuden mukaan, pisimpään auki olleet kohdat ja kehityksen peräkkäisissä mittauksissa. Sama toiminto olemassa olevalle OpenKAT-esitykselle päivittää sen ja jättää omat diasi paikoilleen.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

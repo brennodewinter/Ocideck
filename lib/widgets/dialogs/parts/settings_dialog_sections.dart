@@ -77,23 +77,24 @@ enum SettingsSection {
   /// module geworden en woont onder Uitbreidingen. Wie hem uit laat, ziet er
   /// niets van — behalve wanneer er al een backend is ingevuld, want ook daar
   /// geldt "tonen zodra de inhoud er is".
-  /// [openKatRevealed] is dezelfde afweging voor de OpenKAT-module (#767):
-  /// Integraties bestaat alleen wanneer er iets te integreren valt. Zolang
-  /// OpenKAT de enige integratie is, staat of valt het tabblad met die module —
-  /// een leeg tabblad "Integraties" is geen informatie maar ruis. Komt er een
-  /// tweede integratie bij, dan wordt dit een `||` en niet een uitzondering.
+  /// [importRevealed] is dezelfde afweging voor de module Importeren (#772):
+  /// Integraties bestaat alleen wanneer er iets te integreren valt. Het tabblad
+  /// staat of valt met die module — een leeg tabblad "Integraties" is geen
+  /// informatie maar ruis. Een tweede importeur meldt zich in
+  /// `importerContentProviders` en valt vanzelf onder dezelfde poort; hier
+  /// hoeft dan niets bij.
   static List<SettingsSection> navItems({
     required bool infoSafetyRevealed,
     required bool hasChecklists,
     required bool aiRevealed,
-    required bool openKatRevealed,
+    required bool importRevealed,
   }) => values.where((s) {
     if (s == SettingsSection.about) return false;
     if (s == SettingsSection.checklists) {
       return infoSafetyRevealed || hasChecklists;
     }
     if (s == SettingsSection.ai) return aiRevealed;
-    if (s == SettingsSection.integrations) return openKatRevealed;
+    if (s == SettingsSection.integrations) return importRevealed;
     return true;
   }).toList();
 }

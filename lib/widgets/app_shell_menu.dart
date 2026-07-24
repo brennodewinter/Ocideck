@@ -141,9 +141,9 @@ extension _MainLayoutMenu on _MainLayoutState {
       ),
       _menuItem('import_url', Icons.link, l10n.t('importUrl')),
       // OpenKAT leest een map van schijf; op web weglaten, niet grijs maken.
-      // En het zit achter zijn module: `openKatRevealProvider` legt uit waarom
-      // dat de reveal is en niet de schakelaar.
-      if (supportsLocalProjectFolders && ref.watch(openKatRevealProvider))
+      // En het zit achter de module Importeren: `importModuleRevealProvider`
+      // legt uit waarom dat de reveal is en niet de schakelaar.
+      if (supportsLocalProjectFolders && ref.watch(importModuleRevealProvider))
         _menuItem('import_openkat', Icons.radar_outlined, openKatLabel(l10n)),
       ..._gitMenuItems(l10n),
       const PopupMenuDivider(),

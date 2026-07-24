@@ -441,18 +441,21 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   // Wie "openkat" zoekt terwijl de module uit staat, moet uitkomen waar hij
   // hem aanzet — precies zoals bij Online opslag hierboven. Deze ingang wijst
   // daarom naar Uitbreidingen en niet naar Integraties, want dat tabblad
-  // bestaat dan nog niet.
+  // bestaat dan nog niet. Het label is de moduletitel; de namen van de
+  // afzonderlijke importeurs staan in de zoektermen, zodat "openkat" hier
+  // uitkomt zonder dat de kaart per bron een eigen ingang nodig heeft.
   SettingsSearchEntry(
     tab: SettingsSection.modules,
-    label: 'OpenKAT',
+    label: 'Importeren',
     section: 'Uitbreidingen',
     keywords: [
       'openkat',
       'kat',
+      'import',
+      'importeren',
       'rapportage',
       'scan',
       'module',
-      'import',
       'integratie',
     ],
   ),

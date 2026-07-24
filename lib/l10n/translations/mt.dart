@@ -1796,6 +1796,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'L-importazzjoni taqra fajls mid-diska u hija disponibbli biss fil-verżjoni desktop.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Iddaħħal materjal minn sistemi oħra. Illum dan huwa OpenKAT: folder b\'rapporti (JSON) isir ħarsa ġenerali waħda għall-maniġment — sistemi, sejbiet skont il-gravità, il-punti li ilhom l-aktar miftuħa u x-xejra tul kejliet suċċessivi. Fejn jinsabu l-fajls tissettja għal kull sistema taħt Integrazzjonijiet.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Jaqra folder b\'rapporti ta\' OpenKAT (JSON) u jibni minnu ħarsa ġenerali waħda għall-maniġment: sistemi, sejbiet skont il-gravità, il-punti li ilhom l-aktar miftuħa u x-xejra tul kejliet suċċessivi. L-istess azzjoni fuq preżentazzjoni OpenKAT eżistenti taġġornaha u tħalli l-islajds tiegħek stess f\'posthom.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
