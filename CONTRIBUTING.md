@@ -84,8 +84,11 @@ flutter run -d macos  # or -d windows / -d linux
 
 ## The quality gate
 
-Run this before every push — it is the enforced quality gate (the remote is
-Forgejo with no CI runner, so nothing runs it for you):
+Run this before every push — it is the enforced quality gate, and it really is
+the only one. The Forgejo remote *has* an Actions runner, but since #790 it
+runs this same gate on a `v*` tag rather than per pull request: a CI run cost
+22 minutes there against 2.5 minutes here. So nothing runs it for you between
+your branch and `main`. If it fails at tag time, the problem already landed.
 
 ```sh
 make check            # format-check + analyze + conventions + full test suite + coverage floor

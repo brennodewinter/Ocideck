@@ -6,9 +6,10 @@ Every automated check OciDeck runs, what it covers, what a failure means, and ho
 to fix it. The **`Makefile` is the single entry point** and the **real gate**:
 `make check`, run by the committer before pushing, is what actually enforces
 these checks. The Forgejo remote has an Actions runner since 2026-07-23, and
-`.forgejo/workflows/ci.yml` runs this same `make check` on every pull request
-and every push to `main` (#741/#751) — see
-[Continuous integration](#continuous-integration).
+`.forgejo/workflows/ci.yml` runs this same `make check` **on a `v*` tag** — not
+per pull request (#741/#751/#790). Read that literally: nothing between your
+`make check` and `main` runs this gate for you. CI is the release gate; you are
+the merge gate. See [Continuous integration](#continuous-integration).
 Run `make help` for a one-line summary of every target.
 
 ## The one command
@@ -74,9 +75,9 @@ it (see [`make coverage`](#make-coverage)).
 span unit (model/parsing/state), widget (every slide editor, the dialogs, the
 panels, the live preview and the fullscreen presenter's keyboard handling) and
 service-level (export, file IO, sanitisation) layers, plus the enforced
-localization and security guards listed below. Since #751 the CI runner runs
-the same gate on every pull request, so a local run and the PR check answer
-the same question.
+localization and security guards listed below. The CI runner runs the same gate, but on a `v*` tag rather
+than per pull request (#790), so your local run is the answer that matters
+before a merge — CI only confirms it again at release time.
 
 ---
 
@@ -172,7 +173,7 @@ now the only passing state.
 not what runs. That workflow does not execute: Forgejo reads
 `.forgejo/workflows/` instead of `.github/workflows/` once the former exists
 (see [Continuous integration](#continuous-integration)). What *does* run in CI
-since #751 is `make check` itself, on every pull request and push to `main`.
+is `make check` itself, on a `v*` tag (#790).
 Note that `make
 check` alone does **not** include `licenses`, `sbom-verify`, `deps-check` or
 `check-web` — those live in `check-full`. Run `make check-full` before a
@@ -931,7 +932,7 @@ For focused work, run only the relevant slice instead of the whole suite:
 > or web-facing change. The sections below describe the two workflows that
 > run, then what the GitHub files *declare*.
 
-### `.forgejo/workflows/ci.yml` — the gate, on every pull request and push to `main`
+### `.forgejo/workflows/ci.yml` — the release gate, on a `v*` tag
 - **gate** — a bare `ubuntu:24.04` container in which the workflow installs
   the **official** Flutter stable release: the version is *read from
   `.tool-versions`* (so a pin bump has no second place to forget) and the

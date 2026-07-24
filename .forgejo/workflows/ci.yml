@@ -1,4 +1,4 @@
-# De kwaliteitspoort van OciDeck, in CI (#741). Zelfde poort als lokaal:
+# De uitbrengpoort van OciDeck, in CI (#741, #790). Zelfde poort als lokaal:
 # `make check`. De Flutter-versie komt uit .tool-versions — de workflow leest
 # de pin, dus een pin-bump heeft hier geen tweede plek om te vergeten — en de
 # tarball is de officiële stable-release, sha256-geverifieerd tegen het
@@ -6,13 +6,13 @@
 # vermeden: dat bleek kanaal "[user-branch]" uit onbekende bron te bevatten,
 # en check-toolchain (onderdeel van make check) keurt precies dat af.
 #
-# **Waarom er sinds #790 gecachet wordt.** Een poortrun duurde 22 minuten,
-# waarvan een fors deel elke keer opnieuw dezelfde tarball ophaalde en met
-# `xz` uitpakte — werk dat per definitie hetzelfde resultaat geeft, want de
-# sleutel is de gepinde versie. De cache neemt die stap weg; hij vervangt géén
-# controle. `check-toolchain` draait binnen `make check` op de herstelde boom
-# en eist onverkort kanaal `stable`, de officiële herkomst en gelijkheid met
-# de pin. Een cache die iets anders bevat valt dus om op dezelfde poort die
+# **Waarom er ook gecachet wordt.** Een fors deel van de runtijd ging elke keer
+# opnieuw op aan dezelfde tarball ophalen en met `xz` uitpakken — werk dat per
+# definitie hetzelfde resultaat geeft, want de sleutel is de gepinde versie. Nu
+# de poort zeldzamer draait is dat minder vaak winst, maar het blijft: de cache
+# neemt die stap weg en vervangt géén controle. `check-toolchain` draait binnen
+# `make check` op de herstelde boom en eist onverkort kanaal `stable`, de
+# officiële herkomst en gelijkheid met de pin. Een cache die iets anders bevat valt dus om op dezelfde poort die
 # destijds het cirruslabs-image afkeurde.
 #
 # De eerlijke grens daarbij: die cache wordt geschreven door onze eigen jobs op
@@ -24,10 +24,24 @@
 # installatiestap hieronder draait dan gewoon, en de poort blijft de poort.
 name: ci
 
+# **Draait op een tag, niet op elke PR (#790).** Een poortrun kostte 22 minuten
+# op deze runner tegen 2,5 minuut lokaal, en die wachttijd per PR woog niet op
+# tegen wat hij toevoegde: `make check` is dezelfde poort en draait hier al
+# vóór elke push.
+#
+# Wat dat betekent, hardop, want het is een echte verschuiving: CI is hiermee
+# géén samenvoegpoort meer maar een **uitbrengpoort**. Valt hij op een tag om,
+# dan staat het probleem al op main. De borging vóór main is vanaf nu volledig
+# `make check` op de machine van de committer — zie CONTRIBUTING.md en
+# docs/CHECKS.md, waar dat nu ook zo staat in plaats van te verwijzen naar een
+# CI die het wel opvangt.
+#
+# `workflow_dispatch` blijft, zodat een tak alsnog door de poort kan zonder een
+# tag te hoeven zetten.
 on:
-  pull_request:
   push:
-    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
 
 jobs:
   gate:

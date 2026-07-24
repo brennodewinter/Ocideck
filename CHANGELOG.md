@@ -121,31 +121,45 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Changed
-- **De poort in CI duurde 22 minuten, en de helft daarvan was werk dat elke
-  keer hetzelfde antwoord gaf.** Elke run haalde de Flutter-tarball opnieuw op,
-  controleerde de sha256 en pakte hem uit met `xz`. Dat is nu gecachet op de
-  gepinde versie, net als de pub-pakketten (op `pubspec.lock`).
+- **De poort in CI draait voortaan op een tag, niet op elke PR.** Een run kostte
+  22 minuten op de eigen runner tegen 2,5 minuut lokaal. Dat werkte niet: de
+  wachttijd per PR woog niet op tegen wat hij toevoegde, want `make check` is
+  dezelfde poort en draait al vóór elke push.
 
-  Wat daarbij expliciet níet is ingeleverd: `check-toolchain` draait binnen
-  `make check` op de herstelde boom en eist onverkort kanaal `stable`, de
-  officiële herkomst en gelijkheid met de pin — dezelfde poort die destijds het
-  cirruslabs-image afkeurde. De cache vervangt geen controle, hij vervangt een
-  download. De eerlijke grens erbij: die cache wordt geschreven door onze eigen
-  jobs op onze eigen runner, dus wie de runner beheert beheert de cache — dat
-  is dezelfde vertrouwensgrens als de runner zelf, niet een nieuwe. En beide
-  cachestappen staan op `continue-on-error`: spreekt de forge de cache-API
-  niet, dan verliezen we de versnelling en verder niets.
+  De verschuiving die daarbij hoort staat er hardop bij, in de workflow zelf en
+  in CONTRIBUTING, BUILD, CHECKS en de README: **CI is geen samenvoegpoort meer
+  maar een uitbrengpoort.** Valt hij op een tag om, dan staat het probleem al
+  op main, en de borging vóór main is volledig `make check` op de machine van
+  de committer. Die documenten beloofden tot nu toe het tegendeel ("on every
+  pull request"), en een belofte die niet meer waar is, is erger dan geen
+  belofte. `workflow_dispatch` blijft, zodat een tak alsnog door de poort kan
+  zonder een tag te hoeven zetten.
+
+  Voor de goede orde, want de aanname lag eerst anders: op een PR draaide al
+  géén enkele desktopbuild. Die 22 minuten waren voor honderd procent de poort.
+
+- **De toolchain en de pub-pakketten worden gecachet.** Elke run haalde dezelfde
+  Flutter-tarball opnieuw op, controleerde de sha256 en pakte hem uit met `xz` —
+  werk dat per definitie hetzelfde resultaat geeft, want de sleutel is de
+  gepinde versie. Nu de poort zeldzamer draait is dat minder vaak winst, maar de
+  stap is weg.
+
+  Wat níet is ingeleverd: `check-toolchain` draait binnen `make check` op de
+  herstelde boom en eist onverkort kanaal `stable`, de officiële herkomst en
+  gelijkheid met de pin — dezelfde poort die destijds het cirruslabs-image
+  afkeurde. De cache vervangt geen controle, hij vervangt een download. De
+  eerlijke grens erbij: die cache wordt geschreven door onze eigen jobs op onze
+  eigen runner, dus wie de runner beheert beheert de cache — dezelfde
+  vertrouwensgrens als de runner zelf, niet een nieuwe. Beide cachestappen staan
+  op `continue-on-error`.
 
 - **De desktopbuilds op de forge draaien alleen nog op afroep.** Bij elke push
   naar main bouwde de Linux-job 17,5 minuten runnertijd weg, terwijl
   `release.yml` op de GitHub-spiegel bij elke `v*`-tag al Linux, macOS én
-  Windows bouwt. Twee keer hetzelfde bouwen levert geen extra zekerheid op —
-  de poort houdt een regressie tegen, het inpakken achteraf niet. Weggooien
-  was te ver: een bundel op afroep zonder een tag te hoeven zetten is wél wat
-  waard, dus `workflow_dispatch` in plaats van niets.
-
-  Voor de goede orde, want de aanname lag anders: op een **PR** draaide al
-  geen enkele build. Die 22 minuten waren voor honderd procent de poort.
+  Windows bouwt. Twee keer hetzelfde bouwen levert geen extra zekerheid op — de
+  poort houdt een regressie tegen, het inpakken achteraf niet. Weggooien was te
+  ver: een bundel op afroep zonder een tag te hoeven zetten is wél wat waard,
+  dus `workflow_dispatch` in plaats van niets.
 
 ### Added
 - **OpenKAT is een Uitbreiding geworden, met een vaste rapportagemap — en de

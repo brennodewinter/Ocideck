@@ -338,8 +338,13 @@ step anyway: a set nobody watches is how this went wrong the first time.
 ## CI
 
 > **Since 2026-07-23 the forge has an Actions runner.** The quality gate
-> (`make check`) runs in CI on every pull request and push to `main`
-> (`.forgejo/workflows/ci.yml`, #751). The gate caches the pinned Flutter
+> (`make check`) runs in CI **on a `v*` tag** (`.forgejo/workflows/ci.yml`,
+> #751/#790) — not per pull request. A gate run cost 22 minutes on that runner
+> against 2.5 minutes locally, and that wait per PR did not earn its keep next
+> to a `make check` every committer already runs before pushing. The honest
+> consequence: CI is no longer a merge gate but a **release** gate. If it fails
+> on a tag, the problem is already on `main`, and the assurance before `main`
+> is entirely the committer's local run. The gate caches the pinned Flutter
 > toolchain and the pub packages (#790); that removes repeated download and
 > extraction work, not a check — `check-toolchain` still runs inside
 > `make check` on the restored tree and still demands channel `stable`, the
