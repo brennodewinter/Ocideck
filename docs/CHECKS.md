@@ -13,7 +13,14 @@ with the full test suite intact but without the coverage instrumentation —
 worth roughly 13 minutes off a 46-minute gate on that runner. Read this literally, twice over:
 nothing between your `make check` and `main` runs this gate for you, and the
 **coverage floors run nowhere but on your own machine**. CI is the release gate;
-you are the merge gate. See
+you are the merge gate.
+
+**One exception, and it is deliberate:** `.forgejo/workflows/scans.yml` runs the
+secret and SAST scans (`make check-secrets`, `make sast`) on **every pull request
+and every push to `main`** (#778). Those take 17 and 2 seconds, so the timing
+argument that moved the gate to a tag does not reach them — and for a secret the
+moment is not interchangeable. Found before the merge it is an edit; found after,
+it is in the history and revoking is the only real remedy. See
 [Continuous integration](#continuous-integration).
 Run `make help` for a one-line summary of every target.
 
@@ -179,7 +186,10 @@ not what runs. That workflow does not execute: Forgejo reads
 `.forgejo/workflows/` instead of `.github/workflows/` once the former exists
 (see [Continuous integration](#continuous-integration)). What *does* run in CI
 is [`make check-no-coverage`](#make-check-no-coverage) on the Mac runner, on a
-`v*` tag (#790/#796/#797).
+`v*` tag (#790/#796/#797), plus
+[`make check-secrets`](#make-check-secrets) and [`make sast`](#make-sast) on
+every pull request and push to `main` (#778) — those two are the only checks in
+this table that a forge actually runs before a merge.
 Note that `make
 check` alone does **not** include `licenses`, `sbom-verify`, `deps-check` or
 `check-web` — those live in `check-full`. Run `make check-full` before a
@@ -960,9 +970,11 @@ For focused work, run only the relevant slice instead of the whole suite:
 > same machine that serves the repository). What it executes comes from
 > `.forgejo/workflows/` — Forgejo reads the first workflow directory that
 > exists, so that directory shadows `.github/workflows/`, whose files remain
-> reference definitions for a GitHub mirror. `make check-full` (the
+> reference definitions for a GitHub mirror. Most of `make check-full` (the
 > dependency/web checks) still runs only locally; run it before a dependency
-> or web-facing change. Since #797 the release gate runs on a registered **Mac**
+> or web-facing change. Its two *security* scans are the exception since #778 —
+> see [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request-and-push).
+> Since #797 the release gate runs on a registered **Mac**
 > runner rather than on the server, and the Linux gate moved to an on-demand
 > workflow — see below for what that buys and what it costs. The sections below
 > describe the workflows that run, then what the GitHub files *declare*.
@@ -988,6 +1000,44 @@ For focused work, run only the relevant slice instead of the whole suite:
   that Mac is off the run waits — the tag still lands, the gate arrives later.
   Better than a gate nobody waits for, but this is not a server-class
   arrangement and should not be read as one.
+
+### `.forgejo/workflows/scans.yml` — secrets and SAST, per pull request and push
+- **scans** — a bare `ubuntu:24.04` container that installs three pinned
+  scanners and then runs [`make check-secrets`](#make-check-secrets) (gitleaks +
+  trufflehog, working tree *and* full history) and [`make sast`](#make-sast)
+  (semgrep, local rules only). The commands are the Makefile targets, not
+  re-typed copies of what they do — a contributor's local run and CI are then
+  the same run by construction.
+- **Why it is its own workflow rather than a second job in `ci.yml`.** `on:` is
+  per workflow, and `ci.yml` fires on a `v*` tag. A job there would first scan
+  once the secret was already on `main` with a tag around it.
+- **Why it may run per pull request when the gate no longer does.** The reason
+  for #790 was the clock — 22 minutes per pull request against a `make check`
+  that already ran before every push. These two take 17 and 2 seconds locally,
+  so that argument does not reach them, and for a secret the moment is not
+  interchangeable.
+- **Why on the Linux runner rather than the Mac.** The Mac has all three
+  scanners installed already, so nothing would need downloading. But since #797
+  that Mac is both the release gate and the committer's own working machine, and
+  this is the one workflow that fires on every pull request and push — it would
+  take cores from the machine currently running `make check`. The server has
+  been idle since that same move.
+- **Two things here are load-bearing and easy to lose.** It checks out with
+  `fetch-depth: 0`: `actions/checkout` clones one commit deep by default, and
+  both history passes then look at almost nothing and report green. Measured
+  rather than asserted — on a repository where a secret was committed and later
+  deleted, the full clone exits 1 (gitleaks) and 183 (trufflehog) while the
+  shallow clone of that same repository exits 0 twice. And the three scanners
+  are pinned in the workflow's `env` block with the download sha256-verified
+  against the published manifest, because a scanner that updates itself quietly
+  changes what green means. The `test -n "$SHA"` in that verification is not
+  ceremony: `grep … | sha256sum -c -` passes *silently* on an empty match, so one
+  renamed release asset would remove the check without a single red tick.
+- **Counter-tested, because a scan job that sees nothing looks exactly like a
+  clean repository.** With a randomly generated AWS-shaped key pair planted in
+  the working tree, `make check-secrets` exits non-zero and names the leak; with
+  the same pair only in history and the working tree clean, both history passes
+  still fail.
 
 ### `.forgejo/workflows/linux-gate.yml` — on demand (`workflow_dispatch`)
 - **gate-linux** — the gate that `ci.yml` used to be: a bare `ubuntu:24.04`
