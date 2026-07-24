@@ -48,6 +48,14 @@ class ManagementSummaryDialog extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: FindingSeverityPalette.of(band),
                         shape: BoxShape.circle,
+                        // De ernstkleuren zijn de vaste FIRST-banden (ze delen
+                        // hun kleur met de dia); op de donkere dialoog zakt de
+                        // rode stip naar 2,26:1 en verdwijnt bijna. Een
+                        // haarlijn houdt de stip als vórm zichtbaar in beide
+                        // modi. De ernst zelf staat als tekst ernaast (het label
+                        // hieronder), dus de kleur is bevestiging, niet de enige
+                        // drager — WCAG 1.4.1 (#821).
+                        border: Border.all(color: AppTheme.slate400, width: 1),
                       ),
                     ),
                     const SizedBox(width: 8),

@@ -905,8 +905,12 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
       ),
       child: Text(
         '$label ${cvss.score.toStringAsFixed(1)} · ${cvss.severity.label}',
-        style: const TextStyle(
-          color: Colors.white,
+        style: TextStyle(
+          // Niet vast wit: dit label is 12px (gewone tekst, lat 4,5:1), en op de
+          // lichte oranje/amber ernstbanden zakte wit naar 3,2-3,6:1 (#821). Op
+          // een dia is hetzelfde label groot en volstaat 3:1 — daar blijft het
+          // wit. `labelOn` kiest hier zwart waar dat beter leest.
+          color: AppTheme.labelOn(color),
           fontSize: 12,
           fontWeight: FontWeight.w700,
         ),
