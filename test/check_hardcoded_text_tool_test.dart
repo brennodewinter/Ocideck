@@ -167,6 +167,16 @@ const tests = [MastgTest(title: 'Testing Data Storage')];
     // tekst om te vertalen.
     expect(isVisibleText('  ·   × '), isFalse);
     expect(isVisibleText(' ÷ '), isFalse);
+    // Een kleurcode draagt letters (F, C) maar er valt niets aan te vertalen.
+    // Kwam boven toen de veldsprong dichtging: de kleurvelden van ThemeProfile
+    // worden als '$label  $value' getoond, dus de hexwaarden in de presets
+    // stonden ineens als overtreding in de lijst — onoplosbaar ook, want die
+    // presets zijn `const` in lib/models en een model importeert geen l10n.
+    expect(isVisibleText('#FFCC00'), isFalse);
+    expect(isVisibleText('#fff'), isFalse);
+    expect(isVisibleText('#0F172AFF'), isFalse);
+    // Maar niet alles met een hekje: dit is een zin.
+    expect(isVisibleText('#1 in de lijst'), isTrue);
     expect(isVisibleText('Opslaan'), isTrue);
     expect(isVisibleText(' min'), isTrue);
     // Maar een × tússen woorden mag de tekst niet onzichtbaar maken.
@@ -212,6 +222,49 @@ Widget b() => EditorField(label: 'Sleutel');
     expect(rendered.substring(0, split), contains('"Rauw"'));
     expect(rendered.substring(0, split), isNot(contains('"Sleutel"')));
     expect(rendered.substring(split), contains('"Sleutel"'));
+  });
+
+  group('een veldsprong naar een eenduidig veld wordt gevolgd', () {
+    // #809. De put ligt binnen de helper (`Text(text)`), maar het argument is
+    // een veld van een object waarvan het type niet is opgelost:
+    // `_shortcutHint(cmd.shortcut!)`. Zonder deze stap kwam de analyse nooit bij
+    // PaletteCommand.shortcut en bleef `shortcut: '…'` op de aanroepplaats
+    // onzichtbaar — de tweede ontsnappingsroute uit #803.
+    void writeCommand(String field) => write('command.dart', '''
+class PaletteCommand {
+  final String? $field;
+  const PaletteCommand({this.$field});
+}
+
+class _PaletteState extends State<Palette> {
+  Widget _hint(String text) => Text(text);
+  Widget build(BuildContext context) => _hint(cmd.$field!);
+}
+''');
+
+    test('de literal op de aanroepplaats wordt gemeld', () {
+      writeCommand('shortcut');
+      write(
+        'caller.dart',
+        "Widget a() => PaletteCommand(shortcut: 'Ctrl/Cmd+S');\n",
+      );
+      expect(hardcoded(), contains('Ctrl/Cmd+S'));
+    });
+
+    test('maar een veldnaam die meer klassen declareren blijft buiten beeld', () {
+      // De heuristiek is bewust streng: `name` en `title` declareren tientallen
+      // klassen, en die aan de verkeerde knopen kost iemand een halve dag
+      // zoeken naar een fout die er niet is.
+      writeCommand('label');
+      write('other.dart', '''
+class SomethingElse {
+  final String? label;
+  const SomethingElse({this.label});
+}
+''');
+      write('caller.dart', "Widget a() => PaletteCommand(label: 'Opslaan');\n");
+      expect(hardcoded(), isEmpty);
+    });
   });
 
   group('een aanroep binnen een extension hoort bij de klasse eronder', () {
