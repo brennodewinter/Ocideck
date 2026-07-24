@@ -6,6 +6,7 @@ import 'l10n/app_localizations.dart';
 import 'state/settings_provider.dart';
 import 'state/consent_provider.dart';
 import 'theme/app_theme.dart';
+import 'theme/appearance_scope.dart';
 import 'widgets/app_shell.dart';
 import 'widgets/dialogs/consent_dialog.dart';
 
@@ -24,8 +25,11 @@ class OciDeckApp extends ConsumerWidget {
       settingsProvider.select((s) => s.uiTextScale),
     );
     AppLocalizations.setActiveLanguageCode(languageCode);
-    // Laat de hardcoded chrome-tokens (AppTheme.slateX, surface, …) meeschakelen
-    // met het gekozen app-appearance-profiel, net als de Material-ThemeData.
+    // De hardcoded chrome-tokens (AppTheme.slateX, surface, …) schakelen mee met
+    // het profiel via [AppearanceScope] om `home:` heen — een toewijzing hier
+    // was niet genoeg, want een statische vlag meldt zijn verandering niet
+    // (#780). Vóór de MaterialApp gebeurt het niettemin ook: `AppTheme.fromProfile`
+    // hieronder leest dezelfde tokens en moet de juiste kant al zien.
     AppTheme.isDark = appearance.isDark;
     return MaterialApp(
       title: 'OciDeck',
@@ -54,7 +58,10 @@ class OciDeckApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
         FlutterQuillLocalizations.delegate,
       ],
-      home: const _ConsentGate(),
+      home: AppearanceScope(
+        appearance: appearance,
+        child: const _ConsentGate(),
+      ),
     );
   }
 }

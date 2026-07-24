@@ -427,19 +427,29 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                               color: iconColor,
                             ),
                           ),
+                          // Drie niveaus in dit blok, en ze zaten tot #780 in
+                          // de dekking: 100 / 85 / 70 procent van `iconColor`.
+                          // Dat las als "iets rustiger" maar is een kleur die
+                          // niemand heeft nagerekend — en die de tokentoets
+                          // niet ziet, want die meet het token en niet zijn
+                          // verzwakking. In donkere modus zakte de foutstaat
+                          // naar 3,68:1; in lichte modus zakten álle vier de
+                          // staten op 70% naar 2,99-3,44:1. Uitgerekend in het
+                          // paneel dat de gebruiker over contrast vertelt.
+                          //
+                          // De rangorde zit nu in het gewicht en de schuinte:
+                          // vet - normaal - cursief. Die is even leesbaar en
+                          // blijft op de gemeten verhouding van het paar staan.
                           Text(
                             check.detail,
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: iconColor.withValues(alpha: 0.85),
-                            ),
+                            style: TextStyle(fontSize: 10, color: iconColor),
                           ),
                           Text(
                             check.params,
                             style: TextStyle(
                               fontSize: 10,
                               fontStyle: FontStyle.italic,
-                              color: iconColor.withValues(alpha: 0.7),
+                              color: iconColor,
                             ),
                           ),
                         ],
@@ -637,7 +647,10 @@ class _QualityIssueTile extends StatelessWidget {
               Icon(
                 showThemeHint ? Icons.palette_outlined : Icons.arrow_forward,
                 size: 12,
-                color: color.withValues(alpha: 0.7),
+                // Om dezelfde reden als de regels hierboven niet op 70%: dit
+                // pijltje is de enige aanwijzing dát de kaart aanklikbaar is,
+                // en op 70% zat het in lichte modus op 3,35:1 (#780).
+                color: color,
               ),
           ],
         ),
