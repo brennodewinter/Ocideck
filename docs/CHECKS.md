@@ -17,7 +17,8 @@ you are the merge gate.
 
 **One exception, and it is deliberate:** `.forgejo/workflows/scans.yml` runs the
 secret and SAST scans (`make check-secrets`, `make sast`) on **every pull request
-and every push to `main`** (#778). Those take 17 and 2 seconds, so the timing
+and every push to `main`** (#778). Those take 17 and 2 seconds locally against
+the 22 minutes per pull request that moved the gate to a tag, so the timing
 argument that moved the gate to a tag does not reach them — and for a secret the
 moment is not interchangeable. Found before the merge it is an edit; found after,
 it is in the history and revoking is the only real remedy. See
@@ -1016,6 +1017,14 @@ For focused work, run only the relevant slice instead of the whole suite:
   that already ran before every push. These two take 17 and 2 seconds locally,
   so that argument does not reach them, and for a secret the moment is not
   interchangeable.
+- **What it actually costs in CI: about three minutes**, measured on the first
+  runs (#778). Read that against the 19 seconds above and the difference is the
+  point — nearly all of it is *installing* the scanners into a bare image, not
+  scanning. That is the lever if it ever needs to be faster: cache the two
+  binaries and the semgrep venv on the pinned versions, the way `linux-gate.yml`
+  already caches the toolchain. It is deliberately not done yet — three minutes
+  on a runner that has been idle since #797, for a job that blocks nothing, does
+  not yet justify a cache whose staleness is one more thing to reason about.
 - **Why on the Linux runner rather than the Mac.** The Mac has all three
   scanners installed already, so nothing would need downloading. But since #797
   that Mac is both the release gate and the committer's own working machine, and
