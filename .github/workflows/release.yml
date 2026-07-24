@@ -1,147 +1,37 @@
-# ⚠️  THIS FILE DOES NOT RUN ON THE FORGEJO REMOTE.
+# De Windows-bouwlijn. Draait op github.com, niet op de forge.
 #
-# Since 2026-07-23 the forge has a registered Actions runner, but Forgejo reads
-# the first workflow directory that exists — `.forgejo/workflows/` — and that
-# shadows this one. What actually runs there is `ci.yml` (the `make check`
-# gate; #751) and `linux-build.yml` (the Linux desktop bundle on every push to
-# main). This file remains a *reference definition*: it says what a release
-# build would be, kept ready for a GitHub mirror. Desktop bundles cannot be
-# cross-compiled, so a full release still needs per-OS builds this runner
-# cannot provide.
+# De forge (Pawprint) is de bron van dit project en bouwt web, Linux en macOS
+# zelf. Windows kan daar niet: er staat geen Windows-machine, en een
+# desktopbundel laat zich niet cross-compileren. Daarvoor is er een push-mirror
+# naar github.com/brennodewinter/Ocideck, en dit bestand is het enige dat daar
+# iets doet — één platform, verder niets.
 #
-# **The real gate is `make check`, run locally before every merge.** It takes
-# about three minutes (measured; see docs/CHECKS.md), so a contributor can run
-# the same thing this file describes. `make check-full` adds the slow scans.
+# Waarom hier een échte GitHub-*release* wordt gepubliceerd en niet alleen een
+# build-artifact: een artifact vraagt een token om te downloaden (óók bij een
+# publieke repo) en verloopt na negentig dagen. Een release-asset van een
+# publieke repo is een gewone publieke URL die blijft bestaan. Daardoor kan de
+# release-workflow op de forge dat bestand gewoon met `curl` ophalen, zonder dat
+# er een GitHub-token als geheim op de eigen runner hoeft te staan.
 #
-# Written here and not only in the docs because this is the file a contributor
-# finds first — seeing `.github/workflows/` reasonably suggests the project
-# lives on GitHub and that this exact CI will check their work. Both are false,
-# and discovering that after opening a pull request is a poor first experience
-# (#592).
+# De volledige release — álle platformen, de SBOM en SHA256SUMS — staat op de
+# forge: https://pawprint.vigilis.online/LibreKAT/Ocideck/releases
+#
+# Let op: Forgejo leest `.forgejo/workflows/` en negeert deze map volledig. Wat
+# er op de forge draait staat daar; wat hier staat draait alleen op de spiegel.
+name: Windows release build
 
-name: Release builds
-
-# Produces distributable artifacts for every supported target. Desktop bundles
-# cannot be cross-compiled, so each platform builds on its own runner. Triggered
-# by a version tag (e.g. v1.0.0) or manually from the Actions tab.
 on:
   push:
     tags: ["v*"]
   workflow_dispatch:
 
-# Least privilege: these jobs only read the repo and upload build artifacts
-# (via the separate Actions runtime token, not GITHUB_TOKEN), so read-only is
-# enough. Grant no more than that to the token a tag build runs with.
+# Least privilege, met één uitzondering: `contents: write` is nodig om de
+# release aan te maken en het bestand eraan te hangen. Verder leest deze
+# workflow alleen.
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  # Software Bill of Materials (CycloneDX 1.6 + SPDX 2.3). Uploaded as its own
-  # release artefact so the CRA (Reg. (EU) 2024/2847, Annex I Part II §1)
-  # bill-of-materials accompanies every release. The web bundle also ships a
-  # copy under /sbom/ (see `make build-web`).
-  sbom:
-    name: Generate SBOM
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: 3.44.7
-          cache: true
-
-      - name: Install dependencies
-        run: flutter pub get --enforce-lockfile
-
-      # Verify the committed SBOM is current, then emit it fresh for upload.
-      - name: Verify + generate SBOM (make sbom-verify + sbom)
-        run: |
-          make sbom-verify
-          make sbom
-
-      - name: Upload SBOM
-        uses: actions/upload-artifact@v4
-        with:
-          name: ocideck-sbom
-          path: sbom
-          if-no-files-found: error
-
-  # Hardened web bundle: self-hosted CanvasKit (no third-party CDN) + CSP-safe
-  # loader. Same flags as `make build-web`.
-  web:
-    name: Build web
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: 3.44.7
-          cache: true
-
-      - name: Install dependencies
-        # --enforce-lockfile fails if pubspec.lock drifted, so a release can't
-        # silently pull a different (unvetted) dependency set than CI vetted.
-        run: flutter pub get --enforce-lockfile
-
-      # Same security gates CI runs on every push — a tag must not ship an
-      # artifact that skipped them (pinned-bundle hash/OSV check, then the
-      # hardened build + CSP/self-hosted-CanvasKit assertion).
-      - name: Dependency CVE + bundle hash check (make deps-check)
-        run: make deps-check
-
-      - name: Build + verify web hardening (make check-web)
-        run: make check-web
-
-      - name: Upload web bundle
-        uses: actions/upload-artifact@v4
-        with:
-          name: ocideck-web
-          path: build/web
-          if-no-files-found: error
-
-  macos:
-    name: Build macOS
-    runs-on: macos-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: 3.44.7
-          cache: true
-
-      - name: Install dependencies
-        run: flutter pub get --enforce-lockfile
-
-      - name: Build macOS
-        run: |
-          flutter config --enable-macos-desktop
-          flutter build macos --release
-
-      - name: Upload macOS app
-        uses: actions/upload-artifact@v4
-        with:
-          name: ocideck-macos
-          path: build/macos/Build/Products/Release
-          if-no-files-found: error
-
   windows:
     name: Build Windows
     # Bewust niet windows-latest: dartcv4 (de OpenCV-laag onder de
@@ -162,63 +52,75 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          # Letterlijk, en dat is met opzet: `make check-toolchain` leest deze
+          # regel en faalt zodra hij afwijkt van de pin in .tool-versions (zie
+          # versionClaimPatterns in tool/check_toolchain.dart). Een tweede plek
+          # om te vergeten is dit dus niet — het is een tweede plek die bewaakt
+          # wordt.
           flutter-version: 3.44.7
           cache: true
 
       - name: Install dependencies
+        # --enforce-lockfile fails if pubspec.lock drifted, so a release can't
+        # silently pull a different (unvetted) dependency set than CI vetted.
         run: flutter pub get --enforce-lockfile
 
-      # `make` is not reliably present on the Windows runner, so call Flutter
-      # directly (same convention as ci.yml's test-matrix).
       - name: Build Windows
+        # `make` is not reliably present on the Windows runner, so call Flutter
+        # directly.
         run: |
           flutter config --enable-windows-desktop
           flutter build windows --release
 
-      - name: Upload Windows app
-        uses: actions/upload-artifact@v4
-        with:
-          name: ocideck-windows
-          path: build/windows/x64/runner/Release
-          if-no-files-found: error
-
-  linux:
-    name: Build Linux
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-
-      # Linux desktop build toolchain (GTK, clang, ninja) — not present on the
-      # runner by default.
-      - name: Install Linux build dependencies
+      # De bestandsnaam is een afspraak, geen smaak: de release-workflow op de
+      # forge haalt exact dit bestand op. Verander je hem hier, verander hem dan
+      # ook in .forgejo/workflows/release.yml (job `windows-ophalen`).
+      - name: Package
+        shell: bash
         run: |
-          sudo apt-get update
-          # libsecret-1-dev: flutter_secure_storage vraagt erom — dezelfde
-          # vondst als in .forgejo/workflows/linux-build.yml (#747).
-          sudo apt-get install -y clang cmake ninja-build pkg-config \
-            libgtk-3-dev libsecret-1-dev
+          set -eu
+          VERSIE="${GITHUB_REF_NAME#v}"
+          (cd build/windows/x64/runner/Release && \
+            7z a -tzip "$GITHUB_WORKSPACE/ocideck-windows-x64-$VERSIE.zip" ./*)
+          echo "VERSIE=$VERSIE" >> "$GITHUB_ENV"
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: 3.44.7
-          cache: true
-
-      - name: Install dependencies
-        run: flutter pub get --enforce-lockfile
-
-      - name: Build Linux
+      - name: Publish to the mirror's release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          flutter config --enable-linux-desktop
-          flutter build linux --release
+          set -eu
+          BESTAND="ocideck-windows-x64-$VERSIE.zip"
+          # Mét releasetekst en niet stilzwijgend: wie hier via een zoekmachine
+          # binnenkomt moet meteen zien dat dit één platform is en waar de rest
+          # staat. Bestaat de release al (hertrigger), dan het bestand alleen
+          # vervangen.
+          NOTES=$(cat <<EOF
+          Windows build lane for OciDeck $GITHUB_REF_NAME.
 
-      - name: Upload Linux bundle
-        uses: actions/upload-artifact@v4
-        with:
-          name: ocideck-linux
-          path: build/linux/x64/release/bundle
-          if-no-files-found: error
+          This mirror exists to build the Windows artifact; the project itself
+          lives at <https://pawprint.vigilis.online/LibreKAT/Ocideck>.
+
+          **The complete release** — macOS, Windows, Linux, the web bundle, the
+          SBOM and \`SHA256SUMS\` — is published there:
+          <https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/tag/$GITHUB_REF_NAME>
+
+          The binary is unsigned, so SmartScreen will warn: choose **More info**
+          → **Run anyway**. Verify your download against \`SHA256SUMS\` in the
+          release linked above.
+          EOF
+          )
+          # Een streepje = semver-voorloper (`v0.1.0-rc1`, waarmee de keten
+          # geoefend wordt); die hoort hier net zo goed als prerelease te staan
+          # als aan de forgekant.
+          case "$GITHUB_REF_NAME" in
+            *-*) VOORLOPER=(--prerelease) ;;
+            *)   VOORLOPER=() ;;
+          esac
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" "$BESTAND" --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" "$BESTAND" \
+              --title "OciDeck $GITHUB_REF_NAME (Windows build)" \
+              --notes "$NOTES" "${VOORLOPER[@]}"
+          fi
