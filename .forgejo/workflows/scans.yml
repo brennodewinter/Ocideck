@@ -1,0 +1,140 @@
+# De geheimen- en SAST-scan van OciDeck (#778). Zelfde doelen als lokaal:
+# `make check-secrets` (gitleaks + trufflehog) en `make sast` (semgrep).
+#
+# **Waarom dit een eigen workflow is en geen job in `ci.yml`.** Het issue vroeg
+# om een tweede job náást `gate`, en dat kan niet meer: `on:` geldt per
+# workflow, en `ci.yml` is sinds #790 de uitbrengpoort die alleen op een
+# `v*`-tag vuurt. Een job daarin zou pas scannen als het geheim al op main
+# staat en er een tag omheen zit — precies te laat. Een eigen bestand is de
+# enige manier om deze scans op een ander moment te laten draaien dan de poort.
+#
+# **Waarom dit wél per PR en per push mag, terwijl de poort dat niet meer doet.**
+# De reden voor #790 was de klok: een poortrun kostte 22 minuten en `make check`
+# draaide toch al vóór elke push. Die redenering gaat over de dúúr, niet over
+# het principe — en deze scans duren lokaal 17 en 2 seconden. Voor een geheim is
+# het moment bovendien niet inwisselbaar: gevonden vóór de merge is een
+# wijziging, gevonden erna staat het in de historie en is intrekken de enige
+# echte remedie.
+#
+# **Waarom op de Linux-runner en niet op de Mac.** De Mac heeft de drie
+# scanners staan, dus daar zou niets geïnstalleerd hoeven worden. Maar die Mac
+# is sinds #797 zowel de uitbrengpoort als de werkmachine van de committer, en
+# dit is de enige workflow die wél bij elke PR en elke push vuurt: dan vreet hij
+# kernen op de machine waar op dat moment `make check` draait. De server staat
+# sinds diezelfde verhuizing stil. Bijkomend voordeel: in een container bepaal
+# je zelf welke scannerversie erin zit, op een machine bepaalt Homebrew dat.
+name: scans
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  scans:
+    runs-on: docker
+    container:
+      image: ubuntu:24.04
+    env:
+      # De enige plek waar deze drie versies staan. Een scanner die zichzelf
+      # bijwerkt verandert stilletjes wat de poort betekent — dan is "groen"
+      # vandaag iets anders dan gisteren, zonder dat iemand iets wijzigde.
+      GITLEAKS_VERSION: 8.30.1
+      TRUFFLEHOG_VERSION: 3.95.9
+      SEMGREP_VERSION: 1.170.0
+    steps:
+      # Vóór de checkout: actions/checkout is een node-actie, en dit kale image
+      # brengt geen node mee.
+      - name: Gereedschap installeren
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            nodejs make git curl ca-certificates tar python3 python3-venv
+
+      - uses: actions/checkout@v4
+        with:
+          # ZONDER DIT IS DE HELE WORKFLOW THEATER. `actions/checkout` kloont
+          # standaard één commit diep, en `gitleaks git` en `trufflehog git`
+          # scannen de histórie: op een ondiepe kloon kijken ze naar bijna niets
+          # en melden groen. Een geheim dat drie commits terug is toegevoegd en
+          # daarna "verwijderd" staat er nog steeds — dat is nu juist het geval
+          # dat deze scan moet vinden.
+          fetch-depth: 0
+
+      # De repo is van een andere uid dan root; zonder dit weigert git elke
+      # bewerking en falen de historie-scans op iets dat niets met een geheim te
+      # maken heeft.
+      - name: De werkkopie vertrouwen
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      # Zelfde discipline als de Flutter-stap in `linux-gate.yml`: de release
+      # binnenhalen en de sha256 controleren tegen het gepubliceerde manifest.
+      # Dat vangt een beschadigde of onderweg gewijzigde download; het is geen
+      # bewijs over de uitgever, want het manifest komt van diezelfde uitgever.
+      #
+      # De `test -n "$SHA"` is geen plichtpleging. `grep … | sha256sum -c -`
+      # ziet er degelijk uit en slaagt STIL met exit 0 zodra de grep niets
+      # vindt — één hernoemd release-asset en de verificatie is er niet meer,
+      # zonder een enkel rood vinkje. Hier gemeten voordat het erin ging.
+      - name: gitleaks volgens de pin
+        run: |
+          set -eu
+          BASE="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}"
+          ARCHIVE="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
+          curl -fsSLo /tmp/gitleaks_checksums.txt \
+            "$BASE/gitleaks_${GITLEAKS_VERSION}_checksums.txt"
+          SHA=$(awk -v f="$ARCHIVE" '$2 == f { print $1 }' /tmp/gitleaks_checksums.txt)
+          test -n "$SHA"
+          echo "$SHA  /tmp/$ARCHIVE" | sha256sum -c -
+          tar -xzf "/tmp/$ARCHIVE" -C /usr/local/bin gitleaks
+          rm "/tmp/$ARCHIVE"
+          gitleaks version
+
+      - name: trufflehog volgens de pin
+        run: |
+          set -eu
+          BASE="https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}"
+          ARCHIVE="trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz"
+          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
+          curl -fsSLo /tmp/trufflehog_checksums.txt \
+            "$BASE/trufflehog_${TRUFFLEHOG_VERSION}_checksums.txt"
+          SHA=$(awk -v f="$ARCHIVE" '$2 == f { print $1 }' /tmp/trufflehog_checksums.txt)
+          test -n "$SHA"
+          echo "$SHA  /tmp/$ARCHIVE" | sha256sum -c -
+          tar -xzf "/tmp/$ARCHIVE" -C /usr/local/bin trufflehog
+          rm "/tmp/$ARCHIVE"
+          trufflehog --version
+
+      # Semgrep komt van PyPI en niet als losse tarball. Een venv omdat Ubuntu
+      # 24.04 systeem-pip afschermt (PEP 668). De versie is gepind; de
+      # transitieve afhankelijkheden zijn dat NIET — hash-pinnen zou een eigen
+      # requirements-bestand met honderden hashes vragen, en dat onderhouden is
+      # een grotere belofte dan hier waargemaakt wordt. Bewust genoteerd in
+      # plaats van stil gelaten.
+      - name: semgrep volgens de pin
+        run: |
+          set -eu
+          python3 -m venv /opt/semgrep-venv
+          /opt/semgrep-venv/bin/pip install --quiet --no-input \
+            "semgrep==${SEMGREP_VERSION}"
+          echo "/opt/semgrep-venv/bin" >> "$GITHUB_PATH"
+
+      # De commando's zelf staan bewust niet hier maar in de Makefile: `make
+      # check-secrets` en `make sast` zijn precies wat een bijdrager lokaal
+      # draait. Ze hier overtypen zou twee waarheden opleveren die uit elkaar
+      # gaan lopen.
+      #
+      # `--no-verification` zit in het doel zelf en moet daar blijven: zonder
+      # die vlag stuurt trufflehog kandidaat-sleutels naar de uitgevende dienst
+      # om te zien of ze leven. Dat is uitgaand verkeer met een mogelijk echt
+      # geheim erin, vanaf een buildmachine.
+      - name: Geheimen
+        run: make check-secrets
+
+      # `make sast` gebruikt de lokale regels uit semgrep/ocideck.yaml en
+      # `--metrics=off`. Nooit `--config auto`: dat haalt regels over het
+      # netwerk tijdens het scannen en stuurt telemetrie mee.
+      - name: SAST
+        run: make sast
