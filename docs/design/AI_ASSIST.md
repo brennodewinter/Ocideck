@@ -100,6 +100,22 @@ second is optional):
 
 ---
 
+```mermaid
+flowchart LR
+    subgraph dir1["Direction 1 — OciDeck calls a model (§3, build this first)"]
+        oci["OciDeck 'Suggest' actions"] --> client["provider-agnostic client<br/>OpenAI-compatible /v1/chat/completions"]
+        client --> model["any model — base URL + model name<br/>local or remote (Ollama · vLLM · cloud); no vendor baked in"]
+    end
+    subgraph dir2["Direction 2 — an external agent drives OciDeck (§10, optional, additive)"]
+        host["external MCP host (Claude Desktop · Cursor · an agent)"] --> mcp["OciDeck MCP server<br/>tools + resources — holds NO model"]
+        mcp --> ocideck["OciDeck"]
+    end
+```
+
+*The two directions are complementary: direction 1 is how OciDeck's own optional
+AI obtains a model; direction 2 is interop, where the AI lives entirely outside
+OciDeck and never supplies it a model.*
+
 ## 2. Principles
 
 | Principle | Consequence |
@@ -197,6 +213,19 @@ Note Ollama's OpenAI-compat layer is officially experimental.
   design first.
 
 ---
+
+```mermaid
+flowchart TB
+    build["AI request builder — grounded: only the user's own facts + local reference context<br/>untrusted input delimited as data · model has no tools · no ambient meeting context"]
+    build --> model["provider-agnostic model call<br/>low temperature · output shaping · cache by input hash"]
+    model --> draft["draft-only suggestion + ocideck_ai_* marker<br/>no fabricated CWE/CVE/CVSS ids (post-filter)"]
+    draft --> human{"human reviews (never silently overwritten)"}
+    human -->|"accept / edit"| cleared["marker cleared — a reviewed deck declares nothing"]
+    human -->|"left on a slide"| carries["marker travels the file boundary:<br/>every PDF/PPTX/HTML export declares it + '-ai-concept' filename + HTML banner<br/>export not blocked, but the pentest seal is"]
+```
+
+*Every output is a suggestion; egress to any off-device tier goes through the
+existing outbound-privacy consent + SSRF opt-in first.*
 
 ## 5. Consumer A — pentest report drafting
 
