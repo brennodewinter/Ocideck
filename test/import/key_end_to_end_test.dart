@@ -309,7 +309,13 @@ void main() {
       final built = deck.slides.first;
       expect(built.title, 'Video');
       expect(built.type, SlideType.video);
-      expect(built.videoPath, 'media/$fileName');
+      // De ingebedde film reist als `mem:`-pad mee, met zijn bytes in de
+      // store; bij opslaan materialiseert die in de `media/`-map van het deck.
+      // Eerder stond hier `media/clip.mp4` — een pad naar een bestand dat
+      // nooit is weggeschreven, terwijl de bytes verloren gingen (#772).
+      expect(WebAssetStore.isMemPath(built.videoPath), isTrue);
+      expect(WebAssetStore.bytesFor(built.videoPath), videoBytes);
+      expect(WebAssetStore.nameFor(built.videoPath), fileName);
       expect(_notes(deck).join(), contains('Niet overgenomen'));
     },
   );

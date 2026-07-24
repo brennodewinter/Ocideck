@@ -244,14 +244,21 @@ class KeyImporter extends Importer {
     required bool textSalvaged,
   }) {
     if (schemaBased) {
+      // Zeg wat er écht gebeurt. Deze tekst stond te beweren dat tabellen,
+      // grafieken en media niet overkwamen, terwijl de SlideReconstructor ze
+      // via de Table-/Chart-/MediaReconstructor wel degelijk invult. Een
+      // notitiedia die de gebruiker een verlies meldt dat er niet is, is
+      // erger dan geen notitie: hij laat hem zoeken naar iets wat er staat.
       return const ConversionIssue(
         slideIndex: -1,
         feature: 'Keynote IWA-intern',
         description:
-            'IWA-structuur gedeeltelijk geparseerd — opmaak, tabellen, '
-            'grafieken en media niet overgenomen; tekst, slide-volgorde en '
-            'notities wel gereconstrueerd',
-        salvagedAs: 'tekst, volgorde en notities per dia',
+            'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, '
+            'kleuren, posities) is niet overgenomen; tekst, slide-volgorde, '
+            'notities en, waar de structuren herkend werden, tabellen, '
+            'grafieken en media wel',
+        salvagedAs:
+            'tekst, volgorde, notities en herkende tabellen, grafieken en media',
       );
     }
     final salvagedBits = <String>[

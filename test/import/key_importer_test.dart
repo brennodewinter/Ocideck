@@ -65,7 +65,7 @@ void main() {
       expect(bullets, ['A', 'B']);
       expect(
         deck.issues.single.salvagedAs,
-        'tekst, volgorde en notities per dia',
+        'tekst, volgorde, notities en herkende tabellen, grafieken en media',
       );
     },
   );

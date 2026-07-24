@@ -1,3 +1,5 @@
+import 'package:crypto/crypto.dart' as crypto;
+
 import '../../models/chart.dart';
 import '../../models/deck.dart';
 import '../../models/display_window_spec.dart';
@@ -11,9 +13,11 @@ import 'models/source_chart.dart';
 import 'models/source_deck.dart';
 import 'models/source_image.dart';
 import 'models/source_slide.dart';
+import 'models/source_video.dart';
 import 'pipeline/problem_slide.dart';
 import 'pipeline/slide_classifier.dart';
 import 'pipeline/unconverted_tracker.dart';
+import 'utils/safe_extensions.dart';
 
 /// Hoeveel items een geïmporteerde dia standaard tóónt voordat de
 /// weergavelimiet ingrijpt. Ruim genoeg voor een gewone dia, krap genoeg om een
@@ -206,7 +210,28 @@ class DeckBuilder {
 
   Slide _video(Slide base, SourceSlide s) {
     final v = s.video;
-    return base.copyWith(title: s.title, videoPath: v?.ref ?? '');
+    return base.copyWith(title: s.title, videoPath: _videoPathFor(v));
+  }
+
+  /// Het pad voor [v], of leeg als er geen video is.
+  ///
+  /// Een URL-video (los bestand, YouTube, Vimeo) is zijn verwijzing. Een
+  /// ingebedde video draagt bytes, en die moeten dezelfde weg als een
+  /// afbeelding: een `mem:`-pad dat bij opslaan in de `media/`-map van het deck
+  /// terechtkomt. Zonder dat schreven we `media/clip.mp4` in het deck terwijl
+  /// er nooit een bestand van die naam is weggeschreven — een dood pad, en de
+  /// bron was na de import onherstelbaar weg.
+  String _videoPathFor(SourceVideo? v) {
+    if (v == null) return '';
+    final bytes = v.bytes;
+    if (bytes == null) return v.ref;
+    return _memPathBySha.putIfAbsent(
+      'video:${crypto.sha256.convert(bytes)}',
+      () => WebAssetStore.put(
+        bytes,
+        name: normalizeVideoFileName(v.ref.split(RegExp(r'[\\/]')).last),
+      ),
+    );
   }
 
   Slide _quote(Slide base, SourceSlide s) {
@@ -250,7 +275,7 @@ class DeckBuilder {
   Slide _timeline(Slide base, SourceSlide s) {
     final events = [
       for (final b in s.bodyBlocks)
-        if (b.kind == BodyBlockKind.bullet) _timelineEvent(b.text),
+        if (b.kind == BodyBlockKind.bullet) _timelineEvent(singleLine(b.text)),
     ];
     return base.copyWith(
       title: s.title,
@@ -270,11 +295,23 @@ class DeckBuilder {
   List<String> _bulletItems(SourceSlide s) {
     final items = [
       for (final b in s.bodyBlocks)
-        if (b.kind == BodyBlockKind.bullet) '${'\t' * b.level}${b.text}',
+        if (b.kind == BodyBlockKind.bullet)
+          '${'\t' * b.level}${singleLine(b.text)}',
       for (final link in _hyperlinkMarkdown(s)) link,
     ];
     return items.isEmpty ? const [''] : items;
   }
+
+  /// Eén opsommingspunt is één regel.
+  ///
+  /// PowerPoint schrijft een zachte regelafbreking (`<a:br/>`) binnen één
+  /// alinea; de importer maakt daar een `\n` van. Die ongewijzigd wegschrijven
+  /// brak de lijst: bij het teruglezen werd de vervolgregel de paragraaf van de
+  /// dia, en bij een tweede zo'n punt verdween hij helemaal — echte tekst weg,
+  /// zonder melding. Samenvoegen tot één regel verliest de *afbreking*, niet de
+  /// woorden; dat is de goede kant om op te vallen.
+  static String singleLine(String text) =>
+      text.replaceAll(RegExp(r'\s*[\r\n]+\s*'), ' ').trim();
 
   List<BodyBlock> _bulletBlocks(SourceSlide s) =>
       s.bodyBlocks.where((b) => b.kind == BodyBlockKind.bullet).toList();
@@ -285,16 +322,41 @@ class DeckBuilder {
     for (final link in s.hyperlinks) '[${link.text}](${_safeUrl(link.url)})',
   ];
 
-  String _safeUrl(String url) {
+  /// Schema's die een link in een geïmporteerd deck niet mag dragen.
+  static const _unsafeLinkSchemes = [
+    'javascript:',
+    'data:',
+    'vbscript:',
+    'file:',
+  ];
+
+  bool _isUnsafeUrl(String url) {
     final lower = url.trim().toLowerCase();
-    if (lower.startsWith('javascript:') ||
-        lower.startsWith('data:') ||
-        lower.startsWith('vbscript:') ||
-        lower.startsWith('file:')) {
-      return 'https://invalid';
-    }
-    return url.trim();
+    return _unsafeLinkSchemes.any(lower.startsWith);
   }
+
+  String _safeUrl(String url) =>
+      _isUnsafeUrl(url) ? 'https://invalid' : url.trim();
+
+  /// Links waarvan het doel is weggehaald, zodat de notitiedia ze kan noemen.
+  ///
+  /// Het schema neutraliseren is niet onderhandelbaar — een `javascript:`-link
+  /// uit een vreemd bestand hoort niet in het deck van de gebruiker. Maar het
+  /// doel spoorloos vervangen door `https://invalid` is dat wél: de linktekst
+  /// blijft staan, en de gebruiker kan niet eens zien wát er stond. Voor een
+  /// `file:`-verwijzing in een interne presentatie is dat gewone inhoud.
+  /// Daarom: neutraliseren én opschrijven.
+  List<ConversionIssue> _neutralisedLinkIssues(SourceSlide s) => [
+    for (final link in s.hyperlinks)
+      if (_isUnsafeUrl(link.url))
+        ConversionIssue(
+          slideIndex: s.index,
+          feature: 'Koppeling “${link.text}”',
+          description:
+              'doel onschadelijk gemaakt; het wees naar ${link.url.trim()}',
+          salvagedAs: 'de tekst blijft staan, de verwijzing niet',
+        ),
+  ];
 
   /// Split a two-column slide into left/right bullet lists. Prefers the raw
   /// positioned text boxes (clustered by x), falling back to halving the
@@ -306,11 +368,11 @@ class DeckBuilder {
       final left = <String>[];
       final right = <String>[];
       for (final p in s.positionedTexts) {
-        (p.left < median ? left : right).add(p.text);
+        (p.left < median ? left : right).add(singleLine(p.text));
       }
       return (left, right);
     }
-    final bullets = [for (final b in _bulletBlocks(s)) b.text];
+    final bullets = [for (final b in _bulletBlocks(s)) singleLine(b.text)];
     final mid = bullets.length ~/ 2;
     return (bullets.sublist(0, mid), bullets.sublist(mid));
   }
@@ -364,7 +426,9 @@ class DeckBuilder {
     final raw = img.name?.trim() ?? '';
     if (raw.isEmpty) return 'afbeelding.$ext';
     final base = raw.split(RegExp(r'[\\/]')).last;
-    return base.contains('.') ? base : '$base.$ext';
+    // Door de witte lijst: een bronarchief bepaalt zijn eigen bijlagenamen, en
+    // `rapport.pdf.command` hoort niet in de projectmap van de gebruiker.
+    return normalizeImageFileName(base, fallbackExtension: ext);
   }
 
   ChartType _chartType(SourceChartType t) => switch (t) {
@@ -384,7 +448,89 @@ class DeckBuilder {
   List<ConversionIssue> _conversionIssuesFor(ClassifiedSlide c) => [
     for (final text in c.issues) _issueFromString(c.source.index, text),
     ..._salvageIssues(c.source),
+    ..._droppedContentIssues(c),
+    ..._neutralisedLinkIssues(c.source),
   ];
+
+  /// Inhoud die de veldafbeelding van het gekozen dia-type laat vallen.
+  ///
+  /// Dit is de tweede helft van de belofte "niets verdwijnt stil". De
+  /// classifier meldt wat híj niet kwijt kan, maar daarna gooit de bouwer zélf
+  /// nog dingen weg — een inleidende alinea boven een bullet-lijst, de derde
+  /// afbeelding, bullets naast een tabel — en dat gebeurde zonder één woord.
+  /// Een gebruiker die zijn dia terugziet zonder die alinea heeft geen enkele
+  /// aanwijzing dat de import hem heeft laten vallen.
+  ///
+  /// De regel is: meld alleen wat dit type werkelijk niet leest. Verlies
+  /// mélden dat er niet is, is even schadelijk als het verzwijgen — dan gaat
+  /// de gebruiker zoeken naar iets wat gewoon op zijn dia staat.
+  List<ConversionIssue> _droppedContentIssues(ClassifiedSlide c) {
+    final s = c.source;
+    final issues = <ConversionIssue>[];
+
+    int countOf(BodyBlockKind kind) =>
+        s.bodyBlocks.where((b) => b.kind == kind).length;
+
+    // Alinea's. Alleen `section` (in de ondertitel) en `freeMarkdown` (in de
+    // body) nemen ze mee; `quote` leest uitsluitend het quote-blok.
+    const readsParagraphs = {SlideType.section, SlideType.freeMarkdown};
+    final paragraphs = countOf(BodyBlockKind.paragraph);
+    if (paragraphs > 0 && !readsParagraphs.contains(c.type)) {
+      issues.add(
+        ConversionIssue(
+          slideIndex: s.index,
+          feature: paragraphs == 1 ? 'Alinea' : '$paragraphs alinea’s',
+          description:
+              'niet overgenomen (een ${c.type.name}-dia toont geen losse '
+              'alineatekst)',
+        ),
+      );
+    }
+
+    // Bullets. Alles wat op een bullet-lijst uitkomt leest ze; de rest niet.
+    const readsBullets = {
+      SlideType.bullets,
+      SlideType.twoBullets,
+      SlideType.bulletsImage,
+      SlideType.timeline,
+      SlideType.freeMarkdown,
+    };
+    final bullets = countOf(BodyBlockKind.bullet);
+    if (bullets > 0 && !readsBullets.contains(c.type)) {
+      issues.add(
+        ConversionIssue(
+          slideIndex: s.index,
+          feature: '$bullets opsommingspunt${bullets == 1 ? '' : 'en'}',
+          description:
+              'niet overgenomen (deze dia werd een ${c.type.name}, en die '
+              'draagt geen opsomming)',
+        ),
+      );
+    }
+
+    // Afbeeldingen voorbij wat het type toont.
+    final shown = switch (c.type) {
+      SlideType.twoImages => 2,
+      SlideType.image || SlideType.bulletsImage || SlideType.title => 1,
+      // freeMarkdown lijkt alles te dragen, maar `_freeMarkdownBody` schrijft
+      // alleen tekst, koppen en links — geen afbeeldingen. Dus: nul.
+      _ => 0,
+    };
+    if (s.images.length > shown) {
+      final extra = s.images.length - shown;
+      issues.add(
+        ConversionIssue(
+          slideIndex: s.index,
+          feature: '$extra afbeelding${extra == 1 ? '' : 'en'}',
+          description: shown == 0
+              ? 'niet overgenomen (deze dia werd een ${c.type.name})'
+              : 'niet overgenomen (een ${c.type.name}-dia toont er $shown)',
+        ),
+      );
+    }
+
+    return issues;
+  }
 
   /// Losses that OciDeck's model cannot represent, so the note slide can name
   /// them. Ported from Keiko's pipeline salvage checks.
