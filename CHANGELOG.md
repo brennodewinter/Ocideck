@@ -87,7 +87,14 @@ that before deciding whether this alpha fits what you are doing.
 
 *Renamed 2026-07-22.* Everything below was under a single `## [Unreleased]`
 heading: 52,000 words in 455 entries, averaging 114 words each, with the
-`### Fixed
+`### Added` / `### Fixed` / `### Changed` subheadings repeating nine times over.
+That is not a Keep a Changelog release section; it is a reverse-chronological
+development diary, and it is a good one — the entries explain *why*, which is
+rare. It stays, in full, under a heading that says what it is. The release
+summary is above, so a reader looking for "what is in 0.1.0" no longer has to
+read a book to find out.
+
+### Fixed
 - **Een presentatie zonder afbeeldingen liet de PDF-export omvallen (#714).** De
   melding was `Invalid argument(s): 1`, en dat was letterlijker dan het leek:
   `(done + 1).clamp(1, total)` in de voortgangsregel gooit `ArgumentError(1)`
@@ -112,13 +119,6 @@ heading: 52,000 words in 455 entries, averaging 114 words each, with the
   melding afgaat betekenen "verwijzing niet leesbaar of buiten het project".
   De snackbar zegt nu dat — in alle talen — en een regressietest bewaakt dat de
   oude belofte niet via een l10n-merge terugkeert.
-
-### Added` / `### Fixed` / `### Changed` subheadings repeating nine times over.
-That is not a Keep a Changelog release section; it is a reverse-chronological
-development diary, and it is a good one — the entries explain *why*, which is
-rare. It stays, in full, under a heading that says what it is. The release
-summary is above, so a reader looking for "what is in 0.1.0" no longer has to
-read a book to find out.
 
 ### Changed
 - **De poort in CI draait voortaan op een tag, niet op elke PR.** Een run kostte
