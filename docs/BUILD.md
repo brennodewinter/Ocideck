@@ -343,8 +343,11 @@ step anyway: a set nobody watches is how this went wrong the first time.
 > locally, and that wait per PR did not earn its keep next to a `make check`
 > every committer already runs before pushing. The honest consequence: CI is no
 > longer a merge gate but a **release** gate. If it fails on a tag, the problem
-> is already on `main`, and the assurance before `main` is entirely the
-> committer's local run.
+> is already on `main`, and the assurance before `main` is — with one deliberate
+> exception — entirely the committer's local run. That exception is
+> `.forgejo/workflows/scans.yml` (#778): the secret and SAST scans do run on
+> every pull request and push, because they cost seconds rather than minutes and
+> because a credential found after the merge is in the history for good.
 >
 > Two later changes shaped what that gate is. It runs `make check-no-coverage`
 > rather than `make check` (#796): the whole suite, without the coverage

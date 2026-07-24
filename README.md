@@ -232,8 +232,11 @@ a `v*` tag (`.forgejo/workflows/ci.yml`) — not per pull request, and on a Mac
 runner rather than the server, because the same gate took 46 minutes there
 against 2.5 minutes on the Mac. It runs `make check-no-coverage`: the whole test
 suite, without the coverage floors. **So run `make check` locally before you
-push: it is the only thing standing between a change and `main`, and the only
-place the coverage floors run at all.** The Linux gate
+push: it is very nearly the only thing standing between a change and `main`, and
+the only place the coverage floors run at all.** The one exception is
+`.forgejo/workflows/scans.yml` (#778), which runs the secret and SAST scans on
+every pull request and push — seconds rather than minutes, and for a credential
+the moment it is found is not interchangeable. The Linux gate
 (`.forgejo/workflows/linux-gate.yml`) and the desktop bundles
 (`linux-build.yml`, `macos-build.yml`) run on demand, or from a `v*` tag on the
 GitHub mirror. See [`docs/CHECKS.md`](docs/CHECKS.md). The

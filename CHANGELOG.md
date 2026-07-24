@@ -94,6 +94,47 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Added
+- **De geheimen- en SAST-scan draaien nu automatisch, en wel vóór de merge.**
+  `check-secrets` (gitleaks + trufflehog, werkboom én volledige historie) en
+  `sast` (semgrep) zaten alleen in `check-full`, en dat draait nergens
+  automatisch — of er ooit gescand was, hing af van wie het lokaal toevallig
+  deed. Dit was een gat in de controle en geen bekend lek: beide draaiden
+  handmatig schoon op main.
+
+  De rechtvaardiging voor dat gat stond opgeschreven bij `nosemgrepBaseline`
+  ("het vraagt een externe binary") en ging over de machine van een bijdrager;
+  in een container bepaal je zelf wat erin zit, dus die verviel toen de runner
+  er kwam. Die notitie is meteen bijgewerkt naar het argument dat wél overeind
+  blijft: semgrep telt zijn eigen onderdrukkingen niet, dus de ratchet hoort in
+  de poort die bij élke `make check` draait.
+
+  Het staat in een eigen `scans.yml` en niet als tweede job in `ci.yml`, want
+  `on:` geldt per workflow en `ci.yml` vuurt sinds #790 op een `v*`-tag — een
+  job daar zou pas scannen als het geheim al op main stond mét een tag eromheen.
+  Deze vuurt daarom op elke PR en elke push naar main: de reden voor #790 was de
+  klok (22 minuten per PR), en deze twee doen 17 en 2 seconden. Voor een geheim
+  is het moment ook niet inwisselbaar — vóór de merge is het een wijziging, erna
+  staat het in de historie en is intrekken de enige echte remedie. Draait op de
+  Linux-runner en niet op de Mac: die is sinds #797 zowel de uitbrengpoort als
+  de werkmachine van de committer, en dit is de enige workflow die bij élke push
+  vuurt.
+
+  De commando's zijn de Makefile-doelen zelf, niet overgetypte regels, zodat
+  lokaal en CI niet uit elkaar gaan lopen. Twee dingen dragen het gewicht:
+  `fetch-depth: 0`, want `actions/checkout` kloont één commit diep en dan kijkt
+  een historie-scan naar bijna niets — gemeten in plaats van beweerd: op een
+  repo met een gecommit-en-daarna-verwijderd geheim geeft de volledige kloon
+  exit 1 (gitleaks) en 183 (trufflehog), en de ondiepe kloon van diezelfde repo
+  twee keer 0. En de drie scanners staan op een gepinde versie met een tegen het
+  manifest geverifieerde download; de `test -n` daarin is geen plichtpleging,
+  want `grep … | sha256sum -c -` slaagt stil bij een lege treffer.
+
+  Tegenproef gedraaid, want een scan die niets ziet lijkt precies op een schone
+  repo: met een willekeurig gegenereerd AWS-vormig sleutelpaar in de werkboom
+  valt `make check-secrets` om en noemt hij de vondst, en met datzelfde paar
+  alleen in de historie vallen beide historie-scans alsnog om. (#778)
+
 ### Changed
 - **Het OpenKAT-managementoverzicht is een verhaal geworden in plaats van een
   stapel tabellen.** De import gebruikte vier diavormen — titel, bullets, tabel

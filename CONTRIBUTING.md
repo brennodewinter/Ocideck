@@ -90,6 +90,12 @@ runs this same gate on a `v*` tag rather than per pull request: a CI run cost
 22 minutes there against 2.5 minutes here. So nothing runs it for you between
 your branch and `main`. If it fails at tag time, the problem already landed.
 
+One thing *does* run on every pull request, and only that one thing: the secret
+and SAST scans (`.forgejo/workflows/scans.yml`, #778). They take seconds rather
+than minutes, and for a credential the moment is not interchangeable — found
+before the merge it is an edit, found after it is in the history. That is an
+addition to your local run, not a replacement for it.
+
 ```sh
 make check            # format-check + analyze + conventions + full test suite + coverage floor
 ```
