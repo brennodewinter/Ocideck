@@ -500,37 +500,7 @@ class AppTheme {
         selectionColor: interactive.withValues(alpha: 0.35),
         selectionHandleColor: interactive,
       ),
-      inputDecorationTheme: InputDecorationTheme(
-        filled: true,
-        fillColor: surfaceColor,
-        // Een tip moet er als een tip uitzien. Zonder deze regel erft
-        // `hintText` de gewone tekstkleur, en dan is een leeg veld met een
-        // voorbeeldwaarde niet te onderscheiden van een ingevuld veld. Dat
-        // kostte een scorecard-dia: het formulier oogde gevuld, de dia
-        // renderde wit, en dat bleek pas op de beamer. Bewaakt door
-        // `test/input_hint_contrast_test.dart`.
-        //
-        // `muted` en niet `scheme.onSurfaceVariant`: die laatste ligt maar
-        // 0,04 luminantie van de gewone tekstkleur af — een verschil dat je
-        // met een kleurenkiezer ziet en met het oog niet.
-        hintStyle: TextStyle(color: muted),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 10,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
-          borderSide: BorderSide(color: scheme.outlineVariant),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
-          borderSide: BorderSide(color: scheme.outlineVariant),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
-          borderSide: BorderSide(color: accentColor, width: 1.5),
-        ),
-      ),
+      inputDecorationTheme: _inputDecorationTheme(scheme, muted, accentColor),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: accentColor,
@@ -568,4 +538,55 @@ class AppTheme {
   }
 
   static ThemeData get light => fromProfile(AppAppearanceProfile.basic);
+}
+
+/// Het uiterlijk van elk invoerveld in de app: een *outlined* tekstveld zoals
+/// Material 3 dat bedoelt — een rand, en geen vulling.
+///
+/// Los van [AppTheme.fromProfile] omdat het daar niet paste: die methode kwam
+/// er met dit blok erin over de 150 regels van `check_method_length`.
+InputDecorationTheme _inputDecorationTheme(
+  ColorScheme scheme,
+  Color muted,
+  Color accentColor,
+) {
+  // De rand doet hier al het werk, dus die moet het ook kunnen dragen:
+  // `outline` en niet `outlineVariant`. Die laatste haalde 1,58–1,92:1 tegen de
+  // achtergrond waar het veld op staat, `outline` haalt 4,18–5,61:1 — over de
+  // 3:1 die WCAG 1.4.11 voor de grens van een bedieningselement vraagt, en de
+  // rol die Material 3 hier zelf voorschrijft. Bewaakt door
+  // `test/input_field_border_test.dart`.
+  final rand = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(6),
+    borderSide: BorderSide(color: scheme.outline),
+  );
+
+  return InputDecorationTheme(
+    // Geen vulling. Een zwevend label staat half boven de bovenrand van het
+    // veld en half erin; met een vulling loopt er dus altijd een kleurovergang
+    // dwars door de letters, want de gap van een [OutlineInputBorder]
+    // onderbreekt alleen de lijn en niet het vlak. In het lichte profiel viel
+    // dat niet op (#F4F7FC tegen #FFFFFF), in het donkere las het als een
+    // afgesneden onderste letterhelft: #0F172A tegen #1E293B (#811). Zonder
+    // vulling neemt het veld over waar het op staat, en dan is er niets om
+    // doorheen te lopen.
+    filled: false,
+    // Een tip moet er als een tip uitzien. Zonder deze regel erft `hintText` de
+    // gewone tekstkleur, en dan is een leeg veld met een voorbeeldwaarde niet
+    // te onderscheiden van een ingevuld veld. Dat kostte een scorecard-dia: het
+    // formulier oogde gevuld, de dia renderde wit, en dat bleek pas op de
+    // beamer. Bewaakt door `test/input_hint_contrast_test.dart`.
+    //
+    // `muted` en niet `scheme.onSurfaceVariant`: die laatste ligt maar 0,04
+    // luminantie van de gewone tekstkleur af — een verschil dat je met een
+    // kleurenkiezer ziet en met het oog niet.
+    hintStyle: TextStyle(color: muted),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+    border: rand,
+    enabledBorder: rand,
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(6),
+      borderSide: BorderSide(color: accentColor, width: 1.5),
+    ),
+  );
 }
