@@ -15,6 +15,34 @@ description of the files under `lib/`, see [`SOURCE_MAP.md`](SOURCE_MAP.md).
 
 ## Runtime & network model
 
+```mermaid
+flowchart TB
+    subgraph proc["User's device — one process (native app, or the browser tab)"]
+        work["Editor · live preview · OciWacht scan<br/>PDF/PPTX/HTML export · CVSS/MIAUW engines"]
+        deck[("Deck content<br/>never sent to a server to be processed")]
+        work --- deck
+    end
+
+    guard{{"net_guard<br/>resolve · reject loopback / RFC1918 / link-local / CGNAT / ULA<br/>· pin socket to the validated address"}}
+
+    work -->|"every app HTTP socket"| guard
+    work -->|"git runs its own socket"| gexec["native git subprocess<br/>clone · fetch · push"]
+
+    guard --> proxy["fetch-proxy<br/>(the one optional server component;<br/>relays raw bytes, SSRF-guarded)"]
+    guard --> rest["Git — REST forge<br/>(+ same-origin assertion)"]
+    guard --> others["WebDAV · S3 (hand-signed SigV4)<br/>AI (opt-in) · CVE db · URL/media import"]
+
+    gexec -->|"guard imposed via git config, not intercepted:<br/>curlopt_resolve pin · followRedirects=false · https-only"| forge[("User's own forge")]
+
+    proxy --> net(("Wherever the user points<br/>— never the hosting origin as telemetry"))
+    others --> net
+    rest --> forge
+```
+
+*Read the hexagon as the single choke every app socket passes; the native git
+subprocess is the one path `net_guard` cannot hook, so the same outcome is
+imposed on `git` by configuration instead.*
+
 OciDeck is a **client-side app with no application backend**. On every platform —
 desktop and web alike — the editor, live preview, the on-device privacy scan
 (OciWacht), export to PDF/PPTX/HTML, and the CVSS/MIAUW engines run **in the
@@ -130,6 +158,33 @@ lib/
   utils/      # small shared helpers (clipboard table parsing, URL launching)
 ```
 
+```mermaid
+flowchart TD
+    widgets["widgets/<br/>app shell · panels · dialogs · per-type editors · slides · presenter"]
+    state["state/<br/>Riverpod providers"]
+    services["services/<br/>markdown · export · privacy · git · s3 · cve · cvss · …"]
+    models["models/<br/>Deck · Slide · ThemeProfile · Chart · Annotation"]
+    shared["platform/ · utils/ · theme/ · l10n/<br/>(shared, low-level — anything may use them)"]
+
+    widgets --> state
+    widgets --> services
+    widgets --> models
+    state --> services
+    state --> models
+    services --> models
+
+    widgets -.-> shared
+    state -.-> shared
+    services -.-> shared
+    models -.-> shared
+```
+
+*Arrows point the only direction an import may go. Every upward edge is a hard
+zero the build refuses (`models/`→`state/`|`widgets/`, `services/`→`state/`,
+`state/`→`widgets/`); the sole tolerated exception is the handful of
+`services/`→`widgets/` imports in `slide_rasterizer`, which paints real widgets
+into an image.*
+
 The direction of traffic between those layers is enforced, not just intended: a
 `check_conventions` guard (`layerRules`) fails the build when `models/` imports
 `state/` or `widgets/`, when `services/` imports `state/`, or when `state/`
@@ -143,6 +198,28 @@ widget tree, and acyclic between layers. They held on discipline alone until
 2026-07-22, which is exactly the kind of invariant a reviewer eventually misses.
 
 ## Data model
+
+```mermaid
+flowchart TD
+    deck["Deck<br/>metadata · TlpLevel tlp · presentationTargetSeconds"]
+    slide["Slide (immutable value)<br/>SlideType + typed fields<br/>a few types reuse customMarkdown:<br/>free-md · code · chart · cockpit · question"]
+    ink["Annotation layer<br/>map: slideId → list of ink strokes<br/>never serialized into the .md"]
+    theme["ThemeProfile<br/>one toJson/fromJson gate for all 3 carriers"]
+    renderonly["render-only, never saved:<br/>mediaRedacted · renderPage"]
+
+    deck -->|"1 → many, ordered"| slide
+    deck -->|"active"| theme
+    deck -->|"1 → 1"| ink
+    slide -.->|"set at render time"| renderonly
+
+    theme -->|"managed list"| set["AppSettings (preferences)"]
+    theme -->|"inlined base64url"| fm["deck front matter"]
+    theme -->|"standalone + logo bytes"| stylef[(".ocideckstyle file")]
+```
+
+*Slide ids are regenerated on every parse, so anything persisted that must
+survive a reload (annotations) re-anchors by slide order + a content
+fingerprint, not by id.*
 
 - **`Deck`** holds metadata, a list of **`Slide`**s, the active **`ThemeProfile`**,
   the deck-wide TLP level, and an **annotation layer** (`Map<slideId,
@@ -232,6 +309,18 @@ widget tree, and acyclic between layers. They held on discipline alone until
 
 ## Markdown round-trip
 
+```mermaid
+flowchart LR
+    editor["Editor<br/>(Deck in memory)"]
+    md["Marp .md<br/>front-matter keys + HTML comments Marp ignores"]
+
+    editor -->|"generateDeck / generateSlide"| md
+    md -->|"parseDeck / _parseBlock<br/>code / chart detected by _class"| editor
+
+    raw["raw Markdown pasted<br/>in the editor"] --> val{{"MarkdownValidator<br/>line-anchored errors / warnings"}}
+    val -->|"pre-flight before apply"| editor
+```
+
 `MarkdownService` is the contract:
 
 - `generateDeck` / `generateSlide` write Marp Markdown. OciDeck extras live in
@@ -250,6 +339,35 @@ This service is heavily covered by the round-trip tests — treat it as the
 source-of-truth for the file format and keep `FILE_FORMAT.md` in sync.
 
 ## The two rendering worlds
+
+```mermaid
+flowchart TB
+    deck["Deck"]
+
+    subgraph w1["World 1 — in-app: SlidePreviewWidget (Flutter widgets)"]
+        preview["SlidePreviewWidget<br/>mermaid → inline SVG · charts via fl_chart"]
+        live["editor preview · thumbnails · presenter<br/>(live surfaces, no file written)"]
+        raster["slide_rasterizer<br/>→ rasterized images"]
+        preview --> live
+        preview --> raster
+    end
+
+    subgraph w2["World 2 — HTML export: marp_html_service"]
+        html["single .html<br/>inlined JS/CSS/font · charts + reporting slides pre-rendered in Dart<br/>· images as data: URIs"]
+    end
+
+    deck --> preview
+    deck --> html
+
+    raster --> exp{{"export_service.export()<br/>the ONE place an export is written"}}
+    html --> exp
+    exp --> files[("PDF · PPTX · HTML · package")]
+```
+
+*The load-bearing consequence: anything that must appear in PDF/PPTX has to
+render in World 1's `SlidePreviewWidget`, because that is what the rasterizer
+walks. The two worlds are independent renderers that converge only at
+`export_service`.*
 
 Charts, diagrams, and slides are rendered in **two independent places**, which is
 the key thing to understand before touching rendering:
@@ -308,6 +426,19 @@ Both worlds converge at one chokepoint: `services/export_service.dart`
 
 ### Render-time pagination
 
+```mermaid
+flowchart LR
+    slides["the deck's slide list"]
+    slides --> a["expandFindingsForRender<br/>overflowing finding → several full-size pages"]
+    a --> b["expandRichTextForRender<br/>long rich-text body → several pages (renderPage set)"]
+    b --> expanded["expanded slide list"]
+    expanded --> proj["PrivacyProjection.forAudience"]
+    proj --> out["rasterizer walks this · export markdown generated from this"]
+```
+
+*Both transforms are pure and leave the deck itself alone — what the export
+enumerates is the expanded list, not the edited one.*
+
 What an export enumerates is not the deck's slide list.
 `_MainLayoutState._expandForExport` (`widgets/app_shell_main_layout.dart`) runs
 `expandFindingsForRender` (`services/finding_pagination.dart`) and then
@@ -338,6 +469,23 @@ Two consequences worth knowing:
   together.
 
 ### Classification enforcement
+
+```mermaid
+flowchart TB
+    req["export requested<br/>(any format: PDF · PPTX · HTML · package)"]
+    req --> pol{{"ClassificationEnforcementPolicy<br/>evaluated BEFORE any bytes are built"}}
+    pol --> c1{"release ceiling:<br/>deck TLP ≤ max?"}
+    c1 -->|no| block(["BLOCKED — fail-closed"])
+    c1 -->|yes| c2{"floor:<br/>deck TLP ≥ min?"}
+    c2 -->|no| block
+    c2 -->|yes| c3{"required:<br/>TLP present?"}
+    c3 -->|no| block
+    c3 -->|yes| ok["build format bytes → export_service writes the file"]
+```
+
+*Each of the three rules is optional (drawn here in the order they are checked
+when all are set). The gate lives inside `export_service.export()` before any
+bytes exist, so no format can slip past it.*
 
 Export blocking is decided by `ClassificationEnforcementPolicy`
 (`services/classification_enforcement_policy.dart`), evaluated inside
@@ -427,6 +575,19 @@ audience window, thumbnails, and export dialog.
 
 ### Dual-screen mode
 
+```mermaid
+flowchart LR
+    subgraph laptop["Laptop window"]
+        pv["presenter view<br/>notes · next slide · timers · pen/highlighter/eraser/laser"]
+    end
+    subgraph beamer["Audience window — borderless, fills the external screen"]
+        au["the slide<br/>media plays here only (no double audio)"]
+    end
+
+    pv <-->|"method channels: ocideck/presenter · ocideck/audience<br/>index · blank state · ink strokes · laser pointer"| au
+    fork["vendored desktop_multi_window fork<br/>(a real 2nd OS window; window_manager cannot)"] -.->|"enables"| beamer
+```
+
 When a second display is present (`shouldUseDualScreen` on macOS, Windows, or
 Linux), the presenter runs in two OS windows:
 
@@ -441,6 +602,30 @@ This needs a real second window, which `window_manager` (single-window) can't do
 hence the vendored multi-window fork below.
 
 ## Sidecars (separate layers)
+
+```mermaid
+flowchart TB
+    md["deck.md<br/>pure Marp — the single source of truth"]
+
+    subgraph committed["A git commit carries these along"]
+        imgs["images/ — pooled slide images (md5-deduped)"]
+        data["data/*.json · *.csv — linked chart data"]
+        unotes["deck.user-notes.json — user notes (stable path)"]
+    end
+
+    subgraph local["Stay local (ink + notes also ride the autosave snapshot)"]
+        ink["name.ink.json — ink annotations"]
+        cap["*.ocideck_captions.json · *.ocideck_descriptions.json"]
+        seal["name.seal.json — SHA-512 seal + signature (MIAUW)"]
+    end
+
+    md --> committed
+    md --> local
+```
+
+*The ink sidecar is the notable omission: nothing in `services/git/` writes it,
+so the save path asks before committing. See the paragraph below and
+`design/GIT_STORAGE.md` §9.1.*
 
 To keep the `.md` pure Marp, five kinds of data live beside it (see
 `FILE_FORMAT.md` §6):
@@ -471,6 +656,24 @@ deliberate, and `UserNotesCodec.encode(forTextMerge:)` is where it lives.
 
 ## Git storage (`services/git/`)
 
+```mermaid
+flowchart TB
+    editor["Editor"] --> mirror{{"DeckMirror — the seam<br/>(the editor always writes here)"}}
+
+    subgraph planes["Two planes behind one interface"]
+        rest["Forge REST plane (all platforms)<br/>GitForge adapters: gitea/forgejo · github · gitlab<br/>SSRF-pinned transport"]
+        native["Native git plane (desktop, when git is present)<br/>NativeGitMirror — real partial clone<br/>true local commits, offline-safe"]
+    end
+
+    mirror --> planes
+    mirror -->|"later, when reachable"| sync["SyncEngine + outbox.dart<br/>reconcile with the forge<br/>(deck_repo_serializer converts deck ↔ repo)"]
+    sync --> planes
+    planes --> forge[("User's own forge")]
+```
+
+*The seam is the point: losing the connection must never lose work, so edits
+land in the mirror first and the forge is reconciled afterwards.*
+
 A deck source that is "WebDAV with version history". Two planes sit behind one
 interface:
 
@@ -492,6 +695,31 @@ must never lose work. Deck↔repo conversion lives in `deck_repo_serializer.dart
 [`design/GIT_STORAGE.md`](design/GIT_STORAGE.md).
 
 ## The privacy projection boundary
+
+```mermaid
+flowchart TB
+    deck["raw Deck"]
+
+    subgraph author["Author side — renders the RAW deck"]
+        ap["editor preview · thumbnails · slide list<br/>(blacking out your own sentence leaves nothing to correct)"]
+    end
+    deck --> ap
+
+    deck --> proj{{"PrivacyProjection.forAudience(...)<br/>private constructor — the only way to get an AudienceDeck"}}
+    proj --> ad["AudienceDeck"]
+
+    subgraph emit["Every emitting surface accepts ONLY an AudienceDeck"]
+        raster["rasterizer"]
+        bundle["export bundle · dialog"]
+        pres["fullscreen presenter"]
+        clip["slide-list clipboard"]
+    end
+    ad --> emit
+
+    ap -.->|"one deliberate crossing back:<br/>audiencePreviewSlide projects ONE slide, on request"| proj
+
+    gate["tool/check_audience_boundary.dart<br/>fails the build if a receiving surface takes a raw Deck,<br/>or a new output channel appears unclassified"] -.->|"guards"| emit
+```
 
 `services/privacy/privacy_projection.dart` is a type-enforced chokepoint, not a
 convention. `PrivacyProjection.forAudience(...)` is the only way to obtain an
