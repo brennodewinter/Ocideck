@@ -1790,6 +1790,26 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Importatio fasciculos e disco legit et in versione mensali tantum praesto est.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Materiam ex aliis systematibus inferre. Hodie id est OpenKAT: plica relationum (JSON) fit unus conspectus administrationis — systemata, inventa pro gravitate, res diutissime apertae et progressus per mensuras continuas. Ubi fasciculi sint, per systema sub Integrationibus constituis.',
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Plicam relationum OpenKAT (JSON) legit et unum conspectum administrationis inde struit: systemata, inventa pro gravitate, res diutissime apertas et progressum per mensuras continuas. Eadem actio in fasciculo OpenKAT exsistente eum renovat et tabellas tuas proprias relinquit.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Importatio tantum legit; nihil in hac plica mutatur aut mittitur. Fasciculi qui relationes OpenKAT non sunt praetermittuntur et in tabula importationis nominantur.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Plicam designa in qua relationes OpenKAT tuae (JSON) sunt. Importatio hanc plicam legit et unum conspectum administrationis inde struit; plica hic constituta, eam singulis vicibus eligere non debes.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'Importatio OpenKAT plicam e disco legit et in versione mensali tantum praesto est.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Nulla plica relationum adhuc designata est; itaque importatio eam singulis vicibus poscit.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Plica relationum iam constituta est; itaque aditus pervius manet, ut fasciculus OpenKAT exsistens renovari possit.',
+  'Integraties': 'Integrationes',
+  'Naar Integraties': 'Ad Integrationes',
+  'Map kiezen…': 'Plicam elige…',
+  'Map wissen': 'Plicam dele',
   'OpenKAT-rapportages importeren…': 'Relationes OpenKAT importare…',
   'Map met OpenKAT-rapportages kiezen':
       'Plicarium cum relationibus OpenKAT eligere',

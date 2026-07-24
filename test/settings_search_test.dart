@@ -127,8 +127,13 @@ void main() {
     final src = File(
       'lib/widgets/dialogs/settings_dialog.dart',
     ).readAsStringSync();
+    // Een body is een `_xxx()`-bouwer in de part-scope óf een losse widget
+    // (`const OpenKatIntegrationPanel()`). Dat tweede bestaat sinds #631 de
+    // panelen uit de gedeelde part-scope trekt en de dialoogklasse tegen haar
+    // plafond zit; alleen `_`-bouwers herkennen zou zo'n tabblad stil buiten
+    // deze telling laten vallen.
     final matches = RegExp(
-      r'SettingsSection\.(\w+) => (_\w+)\(',
+      r'SettingsSection\.(\w+) => (?:const )?(_?\w+)\(',
     ).allMatches(src);
     final out = <String, String>{
       for (final m in matches) m.group(1)!: m.group(2)!,
@@ -254,9 +259,18 @@ void main() {
     for (final builder in ownerOf.keys) {
       for (final src in sources) {
         final start = RegExp('\\n  Widget $builder\\(').firstMatch(src);
-        if (start == null) continue;
-        final rest = src.substring(start.end);
-        final next = RegExp(r'\n  Widget _\w+\(').firstMatch(rest);
+        if (start != null) {
+          final rest = src.substring(start.end);
+          final next = RegExp(r'\n  Widget _\w+\(').firstMatch(rest);
+          spans[builder] = next == null ? rest : rest.substring(0, next.start);
+          break;
+        }
+        // Een losse widget als tabbladinhoud: zijn body loopt tot de volgende
+        // top-level klasse in hetzelfde bestand.
+        final widget = RegExp('\\nclass $builder extends').firstMatch(src);
+        if (widget == null) continue;
+        final rest = src.substring(widget.end);
+        final next = RegExp(r'\nclass \w+ extends').firstMatch(rest);
         spans[builder] = next == null ? rest : rest.substring(0, next.start);
         break;
       }
@@ -273,6 +287,11 @@ void main() {
             (b) =>
                 (spans[b] ?? '').contains("_sectionTitle(l10n.d('$escaped')") ||
                 (spans[b] ?? '').contains("_sectionTitle('$escaped')") ||
+                // Een losse widget roept SettingsSectionTitle rechtstreeks aan;
+                // `_sectionTitle` is de helper die daarnaar doorgeeft.
+                (spans[b] ?? '').contains(
+                  "SettingsSectionTitle(l10n.d('$escaped')",
+                ) ||
                 (spans[b] ?? '').contains(
                   "_presentationStyleDivider(l10n.d('$escaped')",
                 ),

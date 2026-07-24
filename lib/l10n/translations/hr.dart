@@ -1780,6 +1780,26 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Uvoz čita datoteke s diska i dostupan je samo u stolnoj verziji.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Unos materijala iz drugih sustava. Danas je to OpenKAT: mapa s izvješćima (JSON) postaje jedan upravljački pregled — sustavi, nalazi po ozbiljnosti, najduže otvorene stavke i trend kroz uzastopna mjerenja. Gdje se datoteke nalaze postavlja se po sustavu pod Integracije.',
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Čita mapu s OpenKAT izvješćima (JSON) i iz nje gradi jedan upravljački pregled: sustave, nalaze po ozbiljnosti, najduže otvorene stavke i trend kroz uzastopna mjerenja. Ista radnja na postojećoj OpenKAT prezentaciji ažurira je i ostavlja vaše vlastite slajdove na mjestu.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Uvoz samo čita; ništa se u ovoj mapi ne mijenja niti šalje. Datoteke koje nisu OpenKAT izvješća preskaču se i navode u izvješću o uvozu.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Odredite mapu u kojoj se nalaze vaša OpenKAT izvješća (JSON). Uvoz čita tu mapu i iz nje gradi jedan upravljački pregled; ako je mapa ovdje postavljena, ne morate je birati svaki put.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'OpenKAT uvoz čita mapu s diska i dostupan je samo u stolnoj verziji.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Mapa s izvješćima još nije određena, pa je uvoz traži svaki put.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Mapa s izvješćima već je postavljena, pa ulazna točka ostaje dostupna i postojeća OpenKAT prezentacija se i dalje može ažurirati.',
+  'Integraties': 'Integracije',
+  'Naar Integraties': 'Na Integracije',
+  'Map kiezen…': 'Odaberi mapu…',
+  'Map wissen': 'Obriši mapu',
   'OpenKAT-rapportages importeren…': 'Uvezi OpenKAT izvještaje…',
   'Map met OpenKAT-rapportages kiezen': 'Odaberi mapu s OpenKAT izvještajima',
   'OpenKAT-rapportages geïmporteerd.': 'OpenKAT izvještaji uvezeni.',

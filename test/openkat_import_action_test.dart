@@ -25,20 +25,44 @@ void main() {
     SharedPreferences.setMockInitialValues({'app_consent_accepted': true});
   });
 
-  Map<String, dynamic> rapport(String code, String datum) => {
-    'organization': {'code': code, 'name': 'Organisatie $code'},
-    'report_date': datum,
-    'systems': [
-      {'ooi': 'hostname|example.com'},
-    ],
-    'findings': [
-      {
-        'finding_type': {'id': 'KAT-001', 'name': 'Open poort'},
-        'severity': 'high',
-        'primary_key': 'f1',
-        'ooi': 'hostname|example.com',
+  /// Een OpenKAT-organisatierapport in de envelop die de exportknop werkelijk
+  /// oplevert. De datum zit in de bestandsnaam, niet in de inhoud — zo doet
+  /// OpenKAT dat ook.
+  Map<String, dynamic> rapport(String code) => {
+    'organization_code': code,
+    'organization_name': 'Organisatie $code',
+    'organization_tags': <String>[],
+    'data': {
+      'systems': {
+        'services': {
+          'Hostname|internet|example.com': {
+            'hostnames': ['example.com'],
+            'services': <dynamic>[],
+          },
+        },
       },
-    ],
+      'findings': {
+        'finding_types': [
+          {
+            'finding_type': {
+              'object_type': 'KATFindingType',
+              'id': 'KAT-001',
+              'name': 'Open poort',
+              'risk_severity': 'high',
+            },
+            'occurrences': [
+              {
+                'finding': {
+                  'primary_key': 'f1',
+                  'ooi': 'Hostname|internet|example.com',
+                },
+              },
+            ],
+          },
+        ],
+      },
+      'total_systems': 1,
+    },
   };
 
   Future<(ProviderContainer, BuildContext, WidgetRef)> pump(
@@ -75,8 +99,8 @@ void main() {
     final tmp = Directory.systemTemp.createTempSync('ocikat-actie-');
     addTearDown(() => tmp.deleteSync(recursive: true));
     File(
-      p.join(tmp.path, 'a.json'),
-    ).writeAsStringSync(jsonEncode(rapport('org1', '2024-06-01T00:00:00Z')));
+      p.join(tmp.path, 'org1_20240601000000.json'),
+    ).writeAsStringSync(jsonEncode(rapport('org1')));
 
     final (container, ctx, ref) = await pump(tester);
     // runAsync: de import doet echte bestands-I/O, en die futures komen onder
@@ -125,8 +149,8 @@ void main() {
     final tmp = Directory.systemTemp.createTempSync('ocikat-her-');
     addTearDown(() => tmp.deleteSync(recursive: true));
     File(
-      p.join(tmp.path, 'a.json'),
-    ).writeAsStringSync(jsonEncode(rapport('org1', '2024-06-01T00:00:00Z')));
+      p.join(tmp.path, 'org1_20240601000000.json'),
+    ).writeAsStringSync(jsonEncode(rapport('org1')));
 
     final (container, ctx, ref) = await pump(tester);
     await tester.runAsync(
@@ -143,8 +167,8 @@ void main() {
 
     // Tweede run met een extra maand: zelfde tab, bijgewerkt deck.
     File(
-      p.join(tmp.path, 'b.json'),
-    ).writeAsStringSync(jsonEncode(rapport('org1', '2024-07-01T00:00:00Z')));
+      p.join(tmp.path, 'org1_20240701000000.json'),
+    ).writeAsStringSync(jsonEncode(rapport('org1')));
     await tester.runAsync(
       () => importOpenKatReports(ctx, ref, directoryOverride: tmp.path),
     );

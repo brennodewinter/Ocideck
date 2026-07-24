@@ -1801,6 +1801,26 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Η εισαγωγή διαβάζει αρχεία από τον δίσκο και είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Εισαγωγή υλικού από άλλα συστήματα. Σήμερα αυτό σημαίνει OpenKAT: ένας φάκελος με αναφορές (JSON) γίνεται μία διοικητική επισκόπηση — συστήματα, ευρήματα ανά σοβαρότητα, τα σημεία που παραμένουν ανοιχτά περισσότερο και η τάση σε διαδοχικές μετρήσεις. Πού βρίσκονται τα αρχεία ορίζεται ανά σύστημα στις Ενσωματώσεις.',
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Διαβάζει έναν φάκελο με αναφορές OpenKAT (JSON) και δημιουργεί από αυτόν μία διοικητική επισκόπηση: συστήματα, ευρήματα ανά σοβαρότητα, τα σημεία που παραμένουν ανοιχτά περισσότερο και την τάση σε διαδοχικές μετρήσεις. Η ίδια ενέργεια σε υπάρχουσα παρουσίαση OpenKAT την ενημερώνει και αφήνει τις δικές σας διαφάνειες στη θέση τους.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Η εισαγωγή μόνο διαβάζει· τίποτα σε αυτόν τον φάκελο δεν αλλάζει ούτε αποστέλλεται. Τα αρχεία που δεν αποδεικνύονται αναφορές OpenKAT παραλείπονται και αναφέρονται στο αρχείο καταγραφής εισαγωγής.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Υποδείξτε τον φάκελο όπου βρίσκονται οι αναφορές OpenKAT (JSON). Η εισαγωγή διαβάζει αυτόν τον φάκελο και δημιουργεί από αυτόν μία διοικητική επισκόπηση· αν ο φάκελος οριστεί εδώ, δεν χρειάζεται να τον επιλέγετε κάθε φορά.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'Η εισαγωγή OpenKAT διαβάζει έναν φάκελο από τον δίσκο και είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Δεν έχει οριστεί ακόμη φάκελος αναφορών, οπότε η εισαγωγή τον ζητά κάθε φορά.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Έχει ήδη οριστεί φάκελος αναφορών, οπότε το σημείο εισόδου παραμένει προσβάσιμο και μια υπάρχουσα παρουσίαση OpenKAT μπορεί να ενημερώνεται.',
+  'Integraties': 'Ενσωματώσεις',
+  'Naar Integraties': 'Στις Ενσωματώσεις',
+  'Map kiezen…': 'Επιλογή φακέλου…',
+  'Map wissen': 'Εκκαθάριση φακέλου',
   'OpenKAT-rapportages importeren…': 'Εισαγωγή αναφορών OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Επιλογή φακέλου με αναφορές OpenKAT',
   'OpenKAT-rapportages geïmporteerd.': 'Οι αναφορές OpenKAT εισήχθησαν.',

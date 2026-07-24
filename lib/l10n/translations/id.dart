@@ -1774,6 +1774,26 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Impor membaca berkas dari disk dan hanya tersedia di versi desktop.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Membawa masuk materi dari sistem lain. Hari ini itu berarti OpenKAT: folder berisi laporan (JSON) menjadi satu ikhtisar manajemen — sistem, temuan menurut tingkat keparahan, butir yang paling lama terbuka, dan tren pada pengukuran berturut-turut. Lokasi berkas diatur per sistem di Integrasi.',
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Membaca folder berisi laporan OpenKAT (JSON) dan menyusun satu ikhtisar manajemen darinya: sistem, temuan menurut tingkat keparahan, butir yang paling lama terbuka, dan tren pada pengukuran berturut-turut. Tindakan yang sama pada dek OpenKAT yang ada akan memperbaruinya dan membiarkan salindia Anda sendiri tetap ada.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Impor hanya membaca; tidak ada yang diubah atau dikirim dari folder ini. Berkas yang ternyata bukan laporan OpenKAT dilewati dan disebutkan dalam catatan impor.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Tunjukkan folder tempat laporan OpenKAT Anda (JSON) berada. Impor membaca folder itu dan menyusun satu ikhtisar manajemen darinya; jika folder disetel di sini, Anda tidak perlu memilihnya setiap kali.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'Impor OpenKAT membaca folder dari disk dan hanya tersedia di versi desktop.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Belum ada folder laporan yang ditetapkan, sehingga impor menanyakannya setiap kali.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Folder laporan sudah ditetapkan, sehingga titik masuk tetap tersedia dan dek OpenKAT yang ada masih dapat diperbarui.',
+  'Integraties': 'Integrasi',
+  'Naar Integraties': 'Ke Integrasi',
+  'Map kiezen…': 'Pilih folder…',
+  'Map wissen': 'Hapus folder',
   'OpenKAT-rapportages importeren…': 'Impor laporan OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Pilih folder berisi laporan OpenKAT',
   'OpenKAT-rapportages geïmporteerd.': 'Laporan OpenKAT diimpor.',

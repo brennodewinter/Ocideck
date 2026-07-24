@@ -1791,6 +1791,26 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Імпорт читає файли з диска й доступний лише в настільній версії.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Втягування матеріалу з інших систем. Сьогодні це OpenKAT: тека зі звітами (JSON) стає єдиним управлінським оглядом — системи, знахідки за критичністю, найдовше відкриті пункти та динаміка за послідовними вимірюваннями. Розташування файлів задається для кожної системи в Інтеграціях.',
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Читає теку зі звітами OpenKAT (JSON) і будує з неї єдиний управлінський огляд: системи, знахідки за критичністю, найдовше відкриті пункти та динаміку за послідовними вимірюваннями. Та сама дія на наявній презентації OpenKAT оновлює її та лишає ваші власні слайди на місці.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Імпорт лише читає: у цій теці нічого не змінюється й нікуди не надсилається. Файли, які не є звітами OpenKAT, пропускаються та згадуються у звіті про імпорт.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Укажіть теку, у якій лежать ваші звіти OpenKAT (JSON). Імпорт читає цю теку й будує з неї єдиний управлінський огляд; коли теку вказано тут, не доведеться обирати її щоразу.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'Імпорт OpenKAT читає теку з диска й доступний лише в настільній версії.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Теку зі звітами ще не вказано, тож імпорт запитує її щоразу.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Теку зі звітами вже вказано, тож точка входу залишається доступною і наявну презентацію OpenKAT можна оновлювати далі.',
+  'Integraties': 'Інтеграції',
+  'Naar Integraties': 'До інтеграцій',
+  'Map kiezen…': 'Вибрати теку…',
+  'Map wissen': 'Очистити теку',
   'OpenKAT-rapportages importeren…': 'Імпортувати звіти OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Вибрати теку зі звітами OpenKAT',
   'OpenKAT-rapportages geïmporteerd.': 'Звіти OpenKAT імпортовано.',

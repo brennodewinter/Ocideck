@@ -1809,6 +1809,26 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Léann an t-iompórtáil comhaid ón diosca agus níl sé ar fáil ach sa leagan deisce.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Ábhar a thabhairt isteach ó chórais eile. Inniu is é sin OpenKAT: déantar forbhreathnú bainistíochta amháin as fillteán tuairiscí (JSON) — córais, torthaí de réir déine, na míreanna is faide ar oscailt agus an treocht thar thomhais i ndiaidh a chéile. Socraítear suíomh na gcomhad de réir córais faoi Chomhtháthuithe.',
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Léann sé fillteán de thuairiscí OpenKAT (JSON) agus tógann forbhreathnú bainistíochta amháin as: córais, torthaí de réir déine, na míreanna is faide ar oscailt agus an treocht thar thomhais i ndiaidh a chéile. Nuashonraíonn an gníomh céanna taispeántas OpenKAT atá ann cheana agus fágann sé do shleamhnáin féin mar atá.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Ní dhéanann an t-iompórtáil ach léamh; ní athraítear ná ní sheoltar aon rud san fhillteán seo. Déantar comhaid nach tuairiscí OpenKAT iad a scipeáil agus a ainmniú sa logáil iompórtála.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Sonraigh an fillteán ina bhfuil do thuairiscí OpenKAT (JSON). Léann an t-iompórtáil an fillteán sin agus tógann forbhreathnú bainistíochta amháin as; má tá an fillteán socraithe anseo, ní gá duit é a roghnú gach uair.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'Léann an t-iompórtáil OpenKAT fillteán ón diosca agus níl sé ar fáil ach sa leagan deisce.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Níl fillteán tuairiscí socraithe fós, mar sin iarrann an t-iompórtáil ceann gach uair.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Tá fillteán tuairiscí socraithe cheana, mar sin fanann an pointe iontrála inrochtana agus is féidir taispeántas OpenKAT atá ann a nuashonrú fós.',
+  'Integraties': 'Comhtháthuithe',
+  'Naar Integraties': 'Go dtí Comhtháthuithe',
+  'Map kiezen…': 'Roghnaigh fillteán…',
+  'Map wissen': 'Glan an fillteán',
   'OpenKAT-rapportages importeren…': 'Iompórtáil tuairiscí OpenKAT…',
   'Map met OpenKAT-rapportages kiezen':
       'Roghnaigh fillteán le tuairiscí OpenKAT',

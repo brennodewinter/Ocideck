@@ -1796,6 +1796,26 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Импортът чете файлове от диска и е достъпен само в настолната версия.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Внасяне на материал от други системи. Днес това е OpenKAT: папка с отчети (JSON) става един управленски преглед — системи, констатации по тежест, най-дълго отворените точки и тенденцията през последователни измервания. Къде са файловете се задава за всяка система в Интеграции.',
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Чете папка с отчети на OpenKAT (JSON) и изгражда от нея един управленски преглед: системи, констатации по тежест, най-дълго отворените точки и тенденцията през последователни измервания. Същото действие върху съществуваща презентация на OpenKAT я обновява и оставя вашите собствени слайдове на място.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Импортът само чете; в тази папка нищо не се променя и не се изпраща. Файловете, които не са отчети на OpenKAT, се пропускат и се посочват в отчета за импорта.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Посочете папката, в която са вашите отчети на OpenKAT (JSON). Импортът чете тази папка и изгражда от нея един управленски преглед; ако папката е зададена тук, не се налага да я избирате всеки път.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'Импортът от OpenKAT чете папка от диска и е достъпен само в настолната версия.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Все още не е посочена папка с отчети, затова импортът я пита всеки път.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Вече е зададена папка с отчети, затова входната точка остава достъпна и съществуваща презентация на OpenKAT може да се обновява.',
+  'Integraties': 'Интеграции',
+  'Naar Integraties': 'Към Интеграции',
+  'Map kiezen…': 'Избор на папка…',
+  'Map wissen': 'Изчистване на папката',
   'OpenKAT-rapportages importeren…': 'Импортиране на доклади от OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Избор на папка с доклади от OpenKAT',
   'OpenKAT-rapportages geïmporteerd.': 'Докладите от OpenKAT са импортирани.',

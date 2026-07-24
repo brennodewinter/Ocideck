@@ -1777,6 +1777,26 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Import čte soubory z disku a je dostupný pouze v desktopové verzi.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Vtažení materiálu z jiných systémů. Dnes je to OpenKAT: složka s hlášeními (JSON) se stane jedním manažerským přehledem — systémy, zjištění podle závažnosti, nejdéle otevřené body a vývoj napříč po sobě jdoucími měřeními. Kde soubory leží, nastavíte pro každý systém v Integracích.',
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Přečte složku s hlášeními OpenKAT (JSON) a sestaví z ní jeden manažerský přehled: systémy, zjištění podle závažnosti, nejdéle otevřené body a vývoj napříč po sobě jdoucími měřeními. Stejná akce na stávající prezentaci OpenKAT ji aktualizuje a vaše vlastní snímky ponechá na místě.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Import pouze čte; v této složce se nic nemění ani neodesílá. Soubory, které nejsou hlášeními OpenKAT, se přeskočí a uvedou v protokolu importu.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Určete složku, ve které jsou vaše hlášení OpenKAT (JSON). Import tuto složku přečte a sestaví z ní jeden manažerský přehled; je-li složka nastavena zde, nemusíte ji vybírat pokaždé.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'Import OpenKAT čte složku z disku a je dostupný pouze v desktopové verzi.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Složka s hlášeními zatím není určena, takže se na ni import ptá pokaždé.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Složka s hlášeními je již nastavena, takže vstupní bod zůstává dostupný a stávající prezentaci OpenKAT lze dál aktualizovat.',
+  'Integraties': 'Integrace',
+  'Naar Integraties': 'Přejít na Integrace',
+  'Map kiezen…': 'Vybrat složku…',
+  'Map wissen': 'Vymazat složku',
   'OpenKAT-rapportages importeren…': 'Importovat zprávy OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Zvolit složku se zprávami OpenKAT',
   'OpenKAT-rapportages geïmporteerd.': 'Zprávy OpenKAT importovány.',

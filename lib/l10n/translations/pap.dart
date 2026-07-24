@@ -733,6 +733,26 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Importashon ta lesa dokumentonan for di disko i ta disponibel solamente den e vershon di desktop.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Trese material for di otro sistemanan. Awe ta OpenKAT: un karpeta ku rapòrtnan (JSON) ta bira un solo bista di gerensia — sistemanan, hayasgonan pa gravedat, e puntonan ku ta habrí mas largu i e tendensia riba midimentunan konsekutivo. Unda e dokumentonan ta, bo ta konfigurá pa sistema bou di Integrashonnan.',
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Ta lesa un karpeta ku rapòrtnan di OpenKAT (JSON) i ta traha un solo bista di gerensia: sistemanan, hayasgonan pa gravedat, e puntonan ku ta habrí mas largu i e tendensia riba midimentunan konsekutivo. E mesun akshon riba un presentashon OpenKAT eksistente ta aktualis\'é i ta laga bo mes slaidnan keda.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'E importashon ta lesa so; nada den e karpeta aki ta wòrdu kambiá ni mandá. Dokumentonan ku no ta rapòrt di OpenKAT ta wòrdu saltá i menshoná den e rapòrt di importashon.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Indiká e karpeta kaminda bo rapòrtnan di OpenKAT (JSON) ta. E importashon ta lesa e karpeta ei i ta traha un solo bista di gerensia; ku e karpeta konfigurá aki, bo no tin ku skohé kada bes.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'E importashon di OpenKAT ta lesa un karpeta for di disko i ta disponibel solamente den e vershon di desktop.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Ainda no tin un karpeta di rapòrt indiká; p\'esei e importashon ta puntra p\'e kada bes.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Ya tin un karpeta di rapòrt konfigurá; p\'esei e punto di entrada ta keda alkansabel, di manera ku un presentashon OpenKAT eksistente por keda aktualisá.',
+  'Integraties': 'Integrashonnan',
+  'Naar Integraties': 'Bai na Integrashonnan',
+  'Map kiezen…': 'Skohe karpeta…',
+  'Map wissen': 'Kita karpeta',
   'OpenKAT-rapportages importeren…': 'Importá rapòrtnan di OpenKAT…',
   'Map met OpenKAT-rapportages kiezen':
       'Skohe e folder ku rapòrtnan di OpenKAT',
