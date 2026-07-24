@@ -6,6 +6,7 @@ import '../../models/chart.dart';
 import '../../models/deck.dart';
 import '../../models/display_window_spec.dart';
 import '../../models/openkat/openkat_models.dart';
+import '../../models/scorecard_spec.dart';
 import '../../models/slide.dart';
 import 'openkat_aggregator.dart';
 
@@ -29,6 +30,8 @@ class OpenKatDeckGenerator {
     final slides = <Slide>[
       _titleSlide(title, organizations),
       _portfolioSummarySlide(portfolio),
+      _portfolioSurfaceSlide(portfolio),
+      if (organizations.length > 1) _organizationsComparedSlide(portfolio),
       _topIssuesSlide(portfolio),
       _longestOpenSlide(portfolio),
       _trendSlide(portfolio),
@@ -110,6 +113,34 @@ class OpenKatDeckGenerator {
     notes: notes,
   );
 
+  /// Een scorecard-dia: titel plus de tabel waar het type op rijdt. Het aantal
+  /// regels wordt door [ScorecardSpec] zelf op vijf gehouden, op lezen én
+  /// schrijven, dus dat wordt hier niet nog eens overgedaan.
+  Slide _scorecardSlide({
+    required String id,
+    required String title,
+    required List<ScorecardEntry> entries,
+    required String view,
+  }) => _slide(
+    id: id,
+    type: SlideType.scorecard,
+    title: title,
+    tableRows: ScorecardSpec(title: title, entries: entries).toTableRows(),
+    notes: '<!-- ocideck_openkat_view: $view -->',
+  );
+
+  /// Eén ernstband als scorecardregel, met de stand van de vorige meting.
+  ScorecardEntry _severityEntry(
+    String band,
+    Map<String, int> current,
+    Map<String, int>? previous,
+  ) => ScorecardEntry(
+    label: _severityLabels[band] ?? band,
+    value: (current[band] ?? 0).toDouble(),
+    previous: previous == null ? null : (previous[band] ?? 0).toDouble(),
+    polarity: ScorecardPolarity.lowerBetter,
+  );
+
   Slide _titleSlide(String title, List<OpenKatOrganization> organizations) {
     final orgNames = organizations.map((o) => o.name).join(', ');
     return _slide(
@@ -121,22 +152,78 @@ class OpenKatDeckGenerator {
     );
   }
 
+  /// De kerncijfers als scorecard: elk getal naast wat het was.
+  ///
+  /// Een managementoverzicht gaat over wat er veranderde, en dat is precies wat
+  /// een rij losse bullets niet laat zien. De scorecard rekent het verschil zelf
+  /// uit en kleurt het — vandaar dat hier de vórige waarde wordt meegegeven en
+  /// geen zelfgemaakt "+42". Meer findings is slecht nieuws, dus staat alles op
+  /// [ScorecardPolarity.lowerBetter].
   Slide _portfolioSummarySlide(PortfolioAggregate portfolio) {
     final c = portfolio.current;
-    return _slide(
+    final p = portfolio.previous;
+    return _scorecardSlide(
       id: _id('openkat-portfolio-summary'),
+      title: 'Kerncijfers',
+      entries: [
+        for (final band in openKatSeverityBands)
+          _severityEntry(band, c.severityCounts, p?.severityCounts),
+        ScorecardEntry(
+          label: 'Getroffen systemen',
+          value: c.affectedSystems.toDouble(),
+          previous: p?.affectedSystems.toDouble(),
+          polarity: ScorecardPolarity.lowerBetter,
+        ),
+      ],
+      view: 'portfolio.summary',
+    );
+  }
+
+  /// Wat er in beeld is. Bewust los van de kerncijfers: dit zijn tellingen van
+  /// de inventarisatie, geen oordeel — meer systemen in beeld is goed nieuws
+  /// zolang je aan het inventariseren bent, en die dubbelzinnigheid hoort niet
+  /// tussen cijfers te staan die wél rood of groen kleuren.
+  Slide _portfolioSurfaceSlide(PortfolioAggregate portfolio) {
+    final c = portfolio.current;
+    return _slide(
+      id: _id('openkat-portfolio-surface'),
       type: SlideType.bullets,
-      title: 'Portfolio-samenvatting',
+      title: 'Wat er in beeld is',
       bullets: [
         '${c.totalSystems} systemen',
         '${c.hostnames} hostnames, ${c.ipv4} IPv4, ${c.ipv6} IPv6',
         '${c.totalFindings} findings in ${c.uniqueFindingTypes} types',
-        '${c.affectedSystems} getroffen systemen',
         '${c.criticalHighSystems} systemen met critical/high',
         _severityLine(c.severityCounts),
       ],
       viewLimit: const DisplayWindowSpec(),
-      notes: '<!-- ocideck_openkat_view: portfolio.summary -->',
+      notes: '<!-- ocideck_openkat_view: portfolio.surface -->',
+    );
+  }
+
+  /// De organisaties naast elkaar, grootste bewegers eerst.
+  ///
+  /// De scorecard toont er ten hoogste vijf (`scorecardMaxEntries`); bij meer
+  /// organisaties is de warmtekaart het volledige beeld. Dat is de reden dat
+  /// die dia er ook is.
+  Slide _organizationsComparedSlide(PortfolioAggregate portfolio) {
+    final comparison = aggregator.organizationComparison(
+      portfolio.organizations,
+    );
+    return _scorecardSlide(
+      id: _id('openkat-portfolio-orgs-compared'),
+      title: 'Organisaties vergeleken',
+      entries: [
+        for (final org in comparison)
+          ScorecardEntry(
+            label: org.name,
+            value: org.findings.toDouble(),
+            previous: org.previousFindings?.toDouble(),
+            unit: 'findings',
+            polarity: ScorecardPolarity.lowerBetter,
+          ),
+      ],
+      view: 'portfolio.orgs-compared',
     );
   }
 
@@ -238,6 +325,10 @@ class OpenKatDeckGenerator {
     final current = org.current;
     if (current == null) return const [];
     final agg = aggregator.aggregateSnapshot(current);
+    final previous = org.previous;
+    final previousAgg = previous == null
+        ? null
+        : aggregator.aggregateSnapshot(previous);
     final systemStats = aggregator.systemsWithMostFindings(current);
     final improved = aggregator.mostImprovedSystems(org);
 
@@ -248,16 +339,32 @@ class OpenKatDeckGenerator {
         title: org.name,
         notes: '<!-- ocideck_openkat_view: org.${_safe(org.code)}.section -->',
       ),
-      _slide(
+      _scorecardSlide(
         id: _id('openkat-org-${_safe(org.code)}-summary'),
-        type: SlideType.bullets,
-        title: '${org.name} — samenvatting',
-        bullets: [
-          '${agg.totalSystems} systemen',
-          '${agg.totalFindings} findings',
-          _severityLine(agg.severityCounts),
+        title: '${org.name} — kerncijfers',
+        entries: [
+          ScorecardEntry(
+            label: 'Systemen',
+            value: agg.totalSystems.toDouble(),
+            previous: previousAgg?.totalSystems.toDouble(),
+            // Meer systemen in beeld is geen slecht nieuws: het verschil wordt
+            // getoond, het oordeel blijft achterwege.
+            polarity: ScorecardPolarity.neutral,
+          ),
+          ScorecardEntry(
+            label: 'Findings',
+            value: agg.totalFindings.toDouble(),
+            previous: previousAgg?.totalFindings.toDouble(),
+            polarity: ScorecardPolarity.lowerBetter,
+          ),
+          for (final band in const ['critical', 'high', 'medium'])
+            _severityEntry(
+              band,
+              agg.severityCounts,
+              previousAgg?.severityCounts,
+            ),
         ],
-        notes: '<!-- ocideck_openkat_view: org.${_safe(org.code)}.summary -->',
+        view: 'org.${_safe(org.code)}.summary',
       ),
       _slide(
         id: _id('openkat-org-${_safe(org.code)}-systems'),
@@ -321,6 +428,16 @@ String _isoDate(DateTime value) =>
     '${value.year.toString().padLeft(4, '0')}-'
     '${value.month.toString().padLeft(2, '0')}-'
     '${value.day.toString().padLeft(2, '0')}';
+
+/// De ernstbanden zoals ze op een dia komen te staan. De sleutels blijven de
+/// Engelse tokens van OpenKAT, want dát is wat er in de data staat.
+const Map<String, String> _severityLabels = {
+  'critical': 'Critical',
+  'high': 'High',
+  'medium': 'Medium',
+  'low': 'Low',
+  openKatOtherSeverity: 'Overig',
+};
 
 /// De ernstverdeling op één regel. De restcategorie staat er alleen als hij
 /// gevuld is, maar dán ook altijd: een uitsplitsing die het totaal niet
