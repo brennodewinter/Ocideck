@@ -620,7 +620,7 @@ class SlideThumbnail extends ConsumerWidget {
                   value: 'delete',
                   child: Text(
                     l10n.d('Verwijderen'),
-                    style: const TextStyle(color: Colors.red),
+                    style: TextStyle(color: AppTheme.dangerFg),
                   ),
                 ),
               ],

@@ -377,10 +377,10 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                 ),
                 child: Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.warning_amber_outlined,
                       size: 14,
-                      color: Colors.red,
+                      color: AppTheme.dangerFg,
                     ),
                     const SizedBox(width: 6),
                     Expanded(
@@ -388,7 +388,10 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                         l10n.d(
                           'Markdown kon niet worden verwerkt. Controleer de syntax.',
                         ),
-                        style: const TextStyle(fontSize: 11, color: Colors.red),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: AppTheme.dangerFg,
+                        ),
                       ),
                     ),
                   ],
@@ -706,7 +709,7 @@ class _ValidationSummaryBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final color = result.isValid ? AppTheme.warningBg : AppTheme.dangerBg;
-    final iconColor = result.isValid ? AppTheme.warningFg : Colors.red.shade700;
+    final iconColor = result.isValid ? AppTheme.warningFg : AppTheme.dangerFg;
     final summary = result.hasIssues
         ? '${result.errorCount} ${l10n.d('fout(en),')} '
               '${result.warningCount} ${l10n.d('waarschuwing(en)')}'
@@ -803,7 +806,7 @@ class _IssueTile extends StatelessWidget {
             Icon(
               isError ? Icons.error_outline : Icons.info_outline,
               size: 14,
-              color: isError ? Colors.red.shade700 : AppTheme.warningFg,
+              color: isError ? AppTheme.dangerFg : AppTheme.warningFg,
             ),
             const SizedBox(width: 6),
             Expanded(
@@ -811,7 +814,7 @@ class _IssueTile extends StatelessWidget {
                 '${context.l10n.d('Regel')} ${issue.line}: ${issue.message}',
                 style: TextStyle(
                   fontSize: 11,
-                  color: isError ? Colors.red.shade700 : AppTheme.warningFg,
+                  color: isError ? AppTheme.dangerFg : AppTheme.warningFg,
                 ),
               ),
             ),

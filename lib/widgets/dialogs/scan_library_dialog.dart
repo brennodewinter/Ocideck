@@ -337,7 +337,7 @@ class _HitRow extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            Icon(Icons.north_east, size: 16, color: Colors.grey.shade500),
+            Icon(Icons.north_east, size: 16, color: AppTheme.slate500),
           ],
         ),
       ),

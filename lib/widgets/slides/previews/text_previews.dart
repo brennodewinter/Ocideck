@@ -745,7 +745,7 @@ Widget _markdownMathBlock(String tex, double w, String font) {
         style: TextStyle(
           fontFamily: 'monospace',
           fontSize: w * 0.022,
-          color: Colors.red,
+          color: AppTheme.danger700,
         ),
       ),
     ),

@@ -215,6 +215,73 @@ void main() {
     );
   });
 
+  // ── De derde ontsnappingsroute: Material's eigen kleuren ──────────────────
+  //
+  // Er zijn drie manieren om een kleur op te schrijven die niemand meet, en er
+  // stond pas een poort op twee ervan:
+  //
+  //   1. `Color(0xFF…)`      — `check_conventions`, basislijn nul.
+  //   2. `Colors.white38`    — `standalone_palette_contrast_test` (#780).
+  //   3. `Colors.red.shade700` — deze. Stond nergens op.
+  //
+  // De derde was in #821 goed voor vijftien plekken, en het patroon was
+  // eenduidig: bijna elke vindplaats was de *foutkant* van een ernst-switch
+  // waarvan de waarschuwingskant al lang een mode-afhankelijk token had. De
+  // tokenmigratie van #606 heeft die ene tak stelselmatig overgeslagen —
+  // `result.isValid ? AppTheme.warningFg : Colors.red.shade700` stond zo in vier
+  // bestanden. Gemeten haalde `red.shade700` op een donkere dialoog 2,94:1 en
+  // `green.shade700` 3,55:1; in lichte modus zakte `Colors.green` als icoon naar
+  // 2,78:1. Alle drie onder hun lat, jarenlang, in code die er verzorgd uitzag.
+  //
+  // Alleen tekst en iconen. Een vulling (`backgroundColor:`) mag: daar draagt
+  // het label het contrast, en dát meet je aan het label. De drie vullingen die
+  // na #821 nog een Material-kleur gebruiken halen hun lat ruim (4,98 tot
+  // 9,42:1); zodra er een onder zakt, is dat een meting en geen naamregel.
+  test('geen kale Material-kleur als tekst- of icoonkleur in lib/', () {
+    // `white`/`black` en hun alpha-varianten hebben hun eigen poort; hier gaat
+    // het om de benoemde kleuren (`red`, `green`, `grey`, `orangeAccent`, …).
+    final materialKleur = RegExp(
+      r'Colors\.(?!white|black|transparent)(\w+)(\.shade\d+|\[\d+\])?',
+    );
+    final overtreders = <String>[];
+
+    for (final entity in Directory('lib').listSync(recursive: true)) {
+      if (entity is! File || !entity.path.endsWith('.dart')) continue;
+      final regels = entity.readAsLinesSync();
+      for (var i = 0; i < regels.length; i++) {
+        final match = materialKleur.firstMatch(regels[i]);
+        if (match == null) continue;
+        // Een vulling draagt geen letters; het label erop wel, en dat staat in
+        // de tabellen hierboven.
+        if (regels[i].contains('backgroundColor:')) continue;
+        final venster = regels.sublist(i >= 4 ? i - 4 : 0, i + 1).join(' ');
+        final isTekstOfIcoon =
+            venster.contains('TextStyle(') ||
+            venster.contains('Icon(') ||
+            venster.contains('IconThemeData(') ||
+            venster.contains('foregroundColor:');
+        // `BoxDecoration`/`Container` is een vlak, ook als er `color:` staat.
+        final isVlak =
+            venster.contains('BoxDecoration(') ||
+            venster.contains('Container(');
+        if (!isTekstOfIcoon || isVlak) continue;
+        final pad = entity.path.replaceAll(r'\', '/');
+        overtreders.add('$pad:${i + 1}  ${match[0]}');
+      }
+    }
+
+    expect(
+      overtreders,
+      isEmpty,
+      reason:
+          'Een kale Material-kleur beweegt niet mee met de modus en staat in '
+          'geen enkele tabel, dus niemand rekent hem na. Neem een token: '
+          'AppTheme.dangerFg/successFg/warningFg voor chrome, of een vast '
+          'token (danger700, …) voor wat een dia wordt:\n'
+          '${overtreders.join('\n')}',
+    );
+  });
+
   // ── Dia-inkt op een eigen tint, niet op het witte canvas ──────────────────
   //
   // De tabellen bovenaan meten tegen wit, want dat is waar dia-inkt meestal
