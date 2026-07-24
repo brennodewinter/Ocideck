@@ -51,6 +51,20 @@ renderimplementatie, een uploaddienst, of een sleutel-in-de-link.
 
 ## 4. De dunne laag
 
+```mermaid
+flowchart TB
+    send["verzender kiest 'Versturen' + een doelgroepprofiel"]
+    send --> proj["1 · projecteren — bestaand AudienceDeck (redactie + projectiegrens werken vanzelf)"]
+    proj --> slim["2 · afslanken (nieuw) — ballast blijft achter<br/>ongebruikte assets · spreker-/gebruikersnotities · annotatielaag · datasets voorbij de weergavelimiet<br/>schakelaar 'Volledige gegevens meesturen' staat standaard UIT (gegevensminimalisatie wint)"]
+    slim --> enc["3 · versleutelen — bestaand dialoog + 'Genereer sterk wachtwoord' (WinZip-AES)"]
+    enc --> pkg[("één versleuteld .ocideck<br/>+ leesbare distribution.json marker (autopresent)")]
+    enc --> msg["4 · standaardbericht klaarzetten<br/>naar klembord of mailto: — OciDeck verstuurt zelf niets (geen netwerkuitgang)"]
+
+    pkg --> r1["ontvanger MÉT OciDeck: dubbelklikt · wachtwoord → direct in de presentatie"]
+    pkg --> r2["ontvanger ZONDER OciDeck: opent de web-installatie van de verzender<br/>sleept het bestand erin · wachtwoord → direct in de presentatie"]
+    key["het wachtwoord gaat via een ANDER kanaal (telefoon/chat), nooit in dezelfde mail"] -.-> msg
+```
+
 ### 4.1 De distributie-export ("Versturen")
 
 Eén actie die vier bestaande stappen bundelt en er één nieuwe aan toevoegt:
