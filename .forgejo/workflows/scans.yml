@@ -31,6 +31,22 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# **Waarom een superseded run mag worden afgebroken.** Twee merges naar main
+# binnen een paar minuten leverden op 24-07 een rode scan op die géén vondst
+# was: de lopende run werd opzij gezet door de volgende en meldde zich als
+# `failure`. Dat is de duurste faalvorm voor juist deze poort — een rood
+# beveiligingsvinkje dat niets betekent, leert je het volgende rode vinkje ook
+# weg te klikken.
+#
+# Afbreken kost hier niets, en dat is geen aanname over snelheid maar een
+# eigenschap van wat er gemeten wordt: `gitleaks git` en `trufflehog git`
+# scannen de héle historie, dus de latere run dekt onverkort alles wat de
+# afgebroken run zou hebben gezien. Bij een poort die alleen de wijziging bekijkt
+# zou dit fout zijn.
+concurrency:
+  group: scans-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   scans:
     runs-on: docker
@@ -86,13 +102,25 @@ jobs:
       # de verificatie debuggen terwijl er in werkelijkheid een release-asset
       # hernoemd is. Eén regel om te voorkomen dat een correcte controle als een
       # kapotte controle overkomt.
+      #
+      # **De `--retry` is er niet voor de netheid.** Deze poort haalt drie
+      # scanners van het net, bij élke PR en élke push, en dat is precies zo vaak
+      # een kans op een storing die niets met deze repo te maken heeft. Op
+      # 24-07 gebeurde dat twee keer op één middag: `curl: (22) … error: 504`,
+      # een halve seconde na de checkout, en de poort stond rood terwijl
+      # `check-secrets` en `sast` op datzelfde commit lokaal groen waren.
+      #
+      # Een rood beveiligingsvinkje dat geen vondst is, is duurder dan geen
+      # vinkje: het leert je het volgende rode vinkje ook weg te klikken. Curl
+      # herhaalt op 5xx met een oplopende wachttijd, en dat is de goedkoopste
+      # manier om de storing van de bevinding te scheiden.
       - name: gitleaks volgens de pin
         run: |
           set -eu
           BASE="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}"
           ARCHIVE="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
-          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
-          curl -fsSLo /tmp/gitleaks_checksums.txt \
+          curl -fsSL --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 -o "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
+          curl -fsSL --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 -o /tmp/gitleaks_checksums.txt \
             "$BASE/gitleaks_${GITLEAKS_VERSION}_checksums.txt"
           SHA=$(awk -v f="$ARCHIVE" '$2 == f { print $1 }' /tmp/gitleaks_checksums.txt)
           test -n "$SHA"
@@ -106,8 +134,8 @@ jobs:
           set -eu
           BASE="https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}"
           ARCHIVE="trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz"
-          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
-          curl -fsSLo /tmp/trufflehog_checksums.txt \
+          curl -fsSL --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 -o "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
+          curl -fsSL --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 -o /tmp/trufflehog_checksums.txt \
             "$BASE/trufflehog_${TRUFFLEHOG_VERSION}_checksums.txt"
           SHA=$(awk -v f="$ARCHIVE" '$2 == f { print $1 }' /tmp/trufflehog_checksums.txt)
           test -n "$SHA"
