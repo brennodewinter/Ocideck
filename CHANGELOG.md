@@ -121,6 +121,48 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Added
+- **OpenKAT is een Uitbreiding geworden, met een vaste rapportagemap — en de
+  import leest eindelijk het formaat dat OpenKAT werkelijk exporteert.** Twee
+  dingen tegelijk, omdat het één zonder het ander niets oplevert.
+
+  De importlaag was geschreven zonder een echte export bij de hand. Hij zocht
+  `systems` en `findings` náást elkaar op het hoogste niveau; zo ziet geen
+  enkele OpenKAT-export eruit. Getoetst tegen zes echte exports kwam er dus een
+  leeg deck uit: de bestanden werden wél "herkend", maar leverden nul systemen
+  en nul bevindingen. Elke export heeft één envelop —
+  `{organization_code, organization_name, organization_tags, data}` — en het
+  verschil zit uitsluitend in `data`: een vlakke samenvatting van de hele
+  organisatie, of een export gesleuteld op rapporttype en daarbinnen op object.
+  Beide worden nu gelezen.
+
+  Wat er onderweg aan het licht kwam, en waarom het meer was dan een
+  sleutelnaam:
+
+  - **De bevindingen zitten in de deelrapporten**, niet in `findings-report` —
+    die is in echte exports leeg. Vier van de zes bestanden hadden anders nul
+    bevindingen opgeleverd terwijl er 284 in zaten.
+  - **De noemer ging verloren.** De adapter gaf alleen het aantal conforme
+    systemen terug, waardoor `OpenKatControlScore.ratio` per definitie null was
+    en de aggregator geen enkele trend kón berekenen. OpenKAT levert de noemer
+    gewoon mee.
+  - **Herimport was niet reproduceerbaar.** Het organisatierapport draagt zelf
+    geen datum en viel terug op `DateTime.now()`; elke herimport gaf een nieuwe
+    momentopname, en de trendlijn werd een grafiek van het aantal keren dat je
+    op Importeren drukte. Nu: het stempel uit de export, anders dat uit de
+    bestandsnaam (`<organisatie>_20260319200604.json` — veertien cijfers zonder
+    scheidingstekens, precies de vorm die de oude uitdrukking liet liggen),
+    anders de wijzigingsdatum van het bestand.
+
+  En de plek waar het hoort. OpenKAT is een specifiek product en een specifieke
+  werkwijze; wie een presentatie komt maken heeft er niets aan en hoort er geen
+  menu-item van te zien. Het is daarom de vierde optionele module geworden,
+  standaard uit, met een nieuw tabblad **Integraties** waar één keer de
+  exportmap wordt aangewezen — een OpenKAT-overzicht wordt telkens opnieuw
+  bijgewerkt uit dezelfde map, en dat elke keer aanwijzen is werk dat de app
+  zelf kan onthouden. De vaste regel van dit project geldt onverkort: staat er
+  een map ingesteld, dan blijft het invoerpunt bereikbaar ook met de schakelaar
+  uit, zodat een bestaand OpenKAT-deck bij te werken blijft.
+
 - **Een GitHub-spiegel bouwt nu de Windows-artifacts.** De forge blijft de
   plek voor ontwikkeling, issues en PR's; een automatische push-mirror houdt
   github.com/brennodewinter/Ocideck bij, en dáár draaien de

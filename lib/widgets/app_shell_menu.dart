@@ -141,11 +141,8 @@ extension _MainLayoutMenu on _MainLayoutState {
       ),
       _menuItem('import_url', Icons.link, l10n.t('importUrl')),
       // OpenKAT leest een map van schijf; op web weglaten, niet grijs maken.
-      // En het zit achter zijn module (#767): wie geen OpenKAT gebruikt hoort
-      // er geen menu-item van te zien. `revealProvider` en niet `enabled`,
-      // want de vaste regel geldt ook hier — staat er een rapportagemap
-      // ingesteld, dan blijft het invoerpunt bereikbaar, ook met de module
-      // uit, zodat een bestaand OpenKAT-deck bij te werken blijft.
+      // En het zit achter zijn module: `openKatRevealProvider` legt uit waarom
+      // dat de reveal is en niet de schakelaar.
       if (supportsLocalProjectFolders && ref.watch(openKatRevealProvider))
         _menuItem('import_openkat', Icons.radar_outlined, openKatLabel(l10n)),
       ..._gitMenuItems(l10n),

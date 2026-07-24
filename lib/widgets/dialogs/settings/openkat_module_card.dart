@@ -62,7 +62,8 @@ class OpenKatModuleCard extends ConsumerWidget {
             ),
             secondary: const Icon(Icons.radar_outlined),
           ),
-          if (!web) _footer(context, l10n, enabled: enabled, directory: directory),
+          if (!web)
+            _footer(context, l10n, enabled: enabled, directory: directory),
         ],
       ),
     );

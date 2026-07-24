@@ -352,7 +352,8 @@ abstract final class OpenKatShapes {
   /// Het IP-adres uit een OOI-verwijzing, of null wanneer het er geen draagt.
   static String? ipFromOoi(String ooi) {
     final lower = ooi.toLowerCase();
-    if (!lower.startsWith('ipaddressv4|') && !lower.startsWith('ipaddressv6|')) {
+    if (!lower.startsWith('ipaddressv4|') &&
+        !lower.startsWith('ipaddressv6|')) {
       return null;
     }
     final parts = ooi.split('|');

@@ -1751,7 +1751,17 @@ detail is for nobody) has to just work, and the author of that slide knows best.
 
 ### Importing OpenKAT reports (desktop)
 
-**… → OpenKAT-rapportages importeren…** takes a folder of JSON exports from
+OpenKAT is an optional module: **Instellingen → Uitbreidingen → OpenKAT**, off
+by default. Switching it on adds an **Integraties** tab where you point at the
+folder holding your OpenKAT exports, so the import does not ask for it every
+time. The import only reads that folder — nothing in it is changed or sent
+anywhere.
+
+Switching the module off later does not take the entry point away as long as a
+report folder is set: an existing OpenKAT deck stays updatable. What goes away
+is the tab and the menu item for someone who never uses OpenKAT.
+
+**… → OpenKAT-rapportages importeren…** takes that folder of JSON exports from
 [OpenKAT](https://openkat.nl) and builds one management deck from it — totals,
 trends and top findings per organisation, using the view limits below as
 defaults so an import of thousands of reports still yields readable slides
@@ -1762,6 +1772,20 @@ The import is honest about what it did — the message counts what was loaded
 and what was skipped (duplicates, unrecognised or invalid files, and files
 over the size cap; the folder comes from outside, so it is read within
 bounds). Desktop only: the import reads a folder from disk.
+
+Two export shapes are recognised, both of which OpenKAT writes today: the
+**organisation report** (one flat summary of the whole organisation) and the
+**per-asset reports** export (keyed by report type and then by object). In the
+per-asset shape the findings live in the sub-reports — `findings-report` is
+normally empty — which is where they are read from. Files that are not OpenKAT
+reports are skipped and named in the import log rather than half-imported.
+
+The snapshot date comes from the export itself where it carries one
+(`created_at`), otherwise from the filename stamp OpenKAT uses
+(`<organisation>_20260319200604.json`), and otherwise from the file's
+modification date. Never from "now": re-importing the same folder must produce
+the same deck, or the trend line becomes a graph of how often you pressed
+Import.
 
 ### Showing part of the data without losing any of it (view limits)
 

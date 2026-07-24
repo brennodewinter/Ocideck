@@ -1,22 +1,36 @@
-// Part of the settings_dialog library — see ../settings_dialog.dart.
-//
-// Het tabblad Integraties: koppelingen met andere systemen, per systeem een
-// kop. OpenKAT staat voorop en is voorlopig de enige — de kop per systeem is
-// meteen het zoekanker, zodat een tweede integratie erbij zetten geen
-// herindeling vraagt.
-//
-// Het tabblad hangt aan de OpenKAT-module (`navItems`): zolang OpenKAT de
-// enige integratie is, is een leeg tabblad "Integraties" geen informatie maar
-// ruis.
-part of '../settings_dialog.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-extension _SettingsIntegrations on _SettingsDialogState {
-  Widget _integrationsTab() {
+import '../../../l10n/app_localizations.dart';
+import '../../../platform/platform_features.dart';
+import '../../../state/openkat_provider.dart';
+import '../../../state/settings_provider.dart';
+import '../../../theme/app_theme.dart';
+import 'settings_section_title.dart';
+
+/// Het tabblad Integraties: koppelingen met andere systemen, per systeem een
+/// kop. OpenKAT staat voorop en is voorlopig de enige — de kop per systeem is
+/// meteen het zoekanker, zodat een tweede integratie erbij zetten geen
+/// herindeling vraagt.
+///
+/// Het tabblad hangt aan de OpenKAT-module (`navItems`): zolang OpenKAT de
+/// enige integratie is, is een leeg tabblad "Integraties" geen informatie maar
+/// ruis.
+///
+/// Een losse widget en geen `part` van het instellingenvenster (#631): die
+/// klasse zit tegen haar plafond, en dit paneel heeft niets van haar nodig —
+/// het leest en schrijft alleen `openKatProvider`.
+class OpenKatIntegrationPanel extends ConsumerWidget {
+  const OpenKatIntegrationPanel({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionTitle(l10n.d('OpenKAT')),
+        SettingsSectionTitle(l10n.d('OpenKAT')),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -47,7 +61,7 @@ extension _SettingsIntegrations on _SettingsDialogState {
           ],
         ),
         const SizedBox(height: 16),
-        _openKatDirectoryField(l10n),
+        _DirectoryField(),
         const SizedBox(height: 10),
         Text(
           // Zeg wat er met de map gebeurt vóórdat iemand er een aanwijst. De
@@ -61,8 +75,12 @@ extension _SettingsIntegrations on _SettingsDialogState {
       ],
     );
   }
+}
 
-  Widget _openKatDirectoryField(AppLocalizations l10n) {
+class _DirectoryField extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final directory = ref.watch(openKatDirectoryProvider);
     return Row(
       children: [
@@ -78,7 +96,9 @@ extension _SettingsIntegrations on _SettingsDialogState {
               directory ?? l10n.d('Geen map gekozen'),
               style: TextStyle(
                 fontSize: 12,
-                color: directory == null ? AppTheme.slate500 : AppTheme.slate800,
+                color: directory == null
+                    ? AppTheme.slate500
+                    : AppTheme.slate800,
               ),
               overflow: TextOverflow.ellipsis,
             ),
@@ -86,7 +106,7 @@ extension _SettingsIntegrations on _SettingsDialogState {
         ),
         const SizedBox(width: 8),
         OutlinedButton.icon(
-          onPressed: _pickOpenKatDirectory,
+          onPressed: () => _pick(context, ref),
           icon: const Icon(Icons.folder_open_outlined, size: 16),
           label: Text(l10n.d('Map kiezen…')),
         ),
@@ -103,19 +123,18 @@ extension _SettingsIntegrations on _SettingsDialogState {
     );
   }
 
-  Future<void> _pickOpenKatDirectory() async {
+  Future<void> _pick(BuildContext context, WidgetRef ref) async {
     // Op web bestaat `getDirectoryPath` niet en geeft het stil null terug
     // (#150). De kaart op Uitbreidingen schakelt de module daar al uit, maar
     // een garantie die elders staat verdwijnt bij de eerstvolgende aanroeper.
     if (!supportsLocalProjectFolders) return;
-    final l10n = context.l10n;
     final result = await FilePicker.getDirectoryPath(
-      dialogTitle: l10n.d('Map met OpenKAT-rapportages kiezen'),
+      dialogTitle: context.l10n.d('Map met OpenKAT-rapportages kiezen'),
       initialDirectory:
           ref.read(openKatDirectoryProvider) ??
           ref.read(settingsProvider).homeDirectory,
     );
-    if (!mounted || result == null) return;
+    if (result == null) return;
     await ref.read(openKatProvider.notifier).setReportDirectory(result);
   }
 }
