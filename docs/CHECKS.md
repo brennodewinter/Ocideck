@@ -947,6 +947,17 @@ also declares them, but see the [CI note](#continuous-integration).)
     the manifest does not list fails here. A pin nothing monitors ages silently
     (#802), and for a secret scanner that means green because it did not know
     what to look for.
+  - `test/suite_failure_hint_test.dart` — the hint described under
+    [When the gate fails on something that is not your
+    change](#when-the-gate-fails-on-something-that-is-not-your-change) hangs off
+    **every** `flutter test` line in the `Makefile`, and nothing but this test
+    notices a new line that skips it. It also holds the two properties that
+    would fail quietly and expensively: the `||` branch must still `exit 1` (or
+    a red suite turns green because printing the hint succeeded), and
+    `clean-test-cache` must not reach past `build/test_cache` (a `rm -rf build`
+    takes the platform builds with it, and with them the native OpenCV library
+    `DARTCV_LIB` points at — after which the face-detection tests skip
+    themselves and the suite is green for the wrong reason).
 
 ### Targeted test groups
 
@@ -993,6 +1004,91 @@ For focused work, run only the relevant slice instead of the whole suite:
   excluded from `make check`, deliberately — a pixel comparison in the default
   gate would fail on any machine but this one — and they are still only as good
   as somebody typing `make test-golden`.*
+
+- **`make clean-test-cache`** — deletes `build/test_cache` and nothing else.
+  `flutter test` keeps an incremental kernel cache there
+  (`build/test_cache/build/<hash>.cache.dill.track.dill`, around 120 MB on this
+  project); this removes it, at the cost of one full recompile on the next
+  suite run. Reach for it when the suite fails on something that is not your
+  change — see [below](#when-the-gate-fails-on-something-that-is-not-your-change).
+  Deliberately *not* `flutter clean`: the platform builds under `build/` are
+  where `DARTCV_LIB` finds the native OpenCV library, and without it the face
+  detection tests skip themselves and the suite goes green for the wrong reason.
+
+---
+
+## When the gate fails on something that is not your change
+
+### `Failed to load "…_test.dart"` followed by a type-cast error
+
+**The signature** (#798) — the named test file differs from run to run:
+
+```
+Failed to load "test/<varies>_test.dart":
+type '_Map<String, dynamic>' is not a subtype of type 'List<dynamic>' in type cast
+```
+
+This is a failure to **load** a test file, not a failure inside it. The tell is
+that the named test is green when you run it on its own.
+
+**What to do:**
+
+```sh
+make clean-test-cache && make check
+```
+
+Twice on 2026-07-24 that was the whole fix — same tree, no edit, green on the
+next run. Both incidents were in the `coverage` phase, on a cache carried over
+from earlier runs; four runs the same day that did not measure coverage stayed
+clean. Six runs is not a sample, and the correlation is recorded here as an
+observation, not a cause.
+
+**What is actually known about the cache.** `flutter test` writes it itself —
+nothing in this repository configures it. The filename is a hash of **only** the
+dart-defines and the extra front-end options
+(`getDefaultCachedKernelPath`, `packages/flutter_tools/lib/src/bundle.dart`);
+the Flutter version and the package resolution are *not* part of it, so the same
+cache file is reused across an SDK upgrade or a dependency change. That is a
+mechanism by which a stale cache can survive; it is not evidence that it caused
+the two incidents.
+
+**What was ruled out.** Three ways of damaging the cache were tried against a
+real run of this suite, and `flutter test` shrugged off all three — it fell back
+to a full compile and passed:
+
+| Damage | Result |
+| --- | --- |
+| Truncated to half its length | green |
+| ~2,800 bytes flipped mid-file | green |
+| Replaced by a valid dill compiled from a different source tree | green |
+
+So the naive reading — "the file got corrupted" — does not hold. Whatever this
+is, it is not a broken cache file that the compiler chokes on. Nobody needs to
+repeat these three experiments.
+
+**Upstream.** Two relevant reports, neither of them this bug:
+
+- [flutter/flutter#49351](https://github.com/flutter/flutter/issues/49351) —
+  the same error *shape* (`'…' is not a subtype of type 'List<dynamic>' in type
+  cast`), also blamed on a carried-over `.dill.track.dill`. Closed in 2020: the
+  cause turned out to be a **package version difference** between two
+  environments, not a cache defect. Worth knowing because the cache was the red
+  herring there too.
+- [flutter/flutter#128563](https://github.com/flutter/flutter/issues/128563) —
+  **open**. `flutter test`'s sibling cache under `build/` is not invalidated when
+  Flutter changes the format it holds, and the report's own conclusion is that
+  the only remedy is to clear it and that it is not obvious that this is what is
+  needed. Different cache, same complaint as this section.
+
+**What prints this hint.** Every `flutter test` invocation in the `Makefile`
+ends with `$(ON_SUITE_FAILURE)`, which runs
+[`scripts/suite_failure_hint.sh`](../scripts/suite_failure_hint.sh) when the
+suite fails. It prints the pointer above *after* the Flutter output, and only
+when a carried-over kernel cache actually exists. It does not read, filter or
+suppress anything: the test output streams straight to your terminal untouched,
+and the exit code is still the suite's. `test/suite_failure_hint_test.dart`
+holds that shape — a new `flutter test` line that skips the hint fails the gate,
+and so does a `clean-test-cache` that reaches beyond `build/test_cache`.
 
 ---
 
