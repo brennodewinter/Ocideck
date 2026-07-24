@@ -1778,6 +1778,29 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Nu importeren': 'Importálás most',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'Az áttekintés készen áll egy új lapon.',
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Az import fájlokat olvas be a lemezről, és csak az asztali változatban érhető el.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Anyag behozatala más rendszerekből. Ma ez az OpenKAT: egy jelentéseket (JSON) tartalmazó mappából egyetlen vezetői áttekintés lesz — rendszerek, megállapítások súlyosság szerint, a legrégebben nyitott tételek és az egymást követő mérések trendje. Hogy hol vannak a fájlok, rendszerenként az Integrációk alatt állítható be.',
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Beolvas egy OpenKAT-jelentéseket (JSON) tartalmazó mappát, és egyetlen vezetői áttekintést épít belőle: rendszerek, megállapítások súlyosság szerint, a legrégebben nyitott tételek és az egymást követő mérések trendje. Ugyanez a művelet egy meglévő OpenKAT-bemutatón frissíti azt, és a saját diáit a helyükön hagyja.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Az import csak olvas; ebben a mappában semmi sem módosul és nem kerül elküldésre. A nem OpenKAT-jelentésnek bizonyuló fájlokat kihagyja, és megnevezi az importnaplóban.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Jelölje ki a mappát, amelyben az OpenKAT-jelentései (JSON) találhatók. Az import beolvassa azt a mappát, és egyetlen vezetői áttekintést épít belőle; ha a mappa itt be van állítva, nem kell minden alkalommal újra kiválasztania.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'Az OpenKAT-import egy mappát olvas be a lemezről, és csak az asztali változatban érhető el.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Még nincs kijelölve jelentésmappa, ezért az import minden alkalommal rákérdez.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Már be van állítva jelentésmappa, ezért a belépési pont elérhető marad, és a meglévő OpenKAT-bemutató továbbra is frissíthető.',
+  'Integraties': 'Integrációk',
+  'Naar Integraties': 'Ugrás az Integrációkhoz',
+  'Map kiezen…': 'Mappa választása…',
+  'Map wissen': 'Mappa törlése',
   'OpenKAT-rapportages importeren…': 'OpenKAT-jelentések importálása…',
   'Map met OpenKAT-rapportages kiezen':
       'OpenKAT-jelentések mappájának kiválasztása',

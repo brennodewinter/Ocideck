@@ -6,8 +6,22 @@ Every automated check OciDeck runs, what it covers, what a failure means, and ho
 to fix it. The **`Makefile` is the single entry point** and the **real gate**:
 `make check`, run by the committer before pushing, is what actually enforces
 these checks. The Forgejo remote has an Actions runner since 2026-07-23, and
-`.forgejo/workflows/ci.yml` runs this same `make check` on every pull request
-and every push to `main` (#741/#751) — see
+`.forgejo/workflows/ci.yml` runs [`make check-no-coverage`](#make-check-no-coverage)
+**on a `v*` tag, on the Mac runner** — not per pull request
+(#741/#751/#790/#797). That is `make check`
+with the full test suite intact but without the coverage instrumentation —
+worth roughly 13 minutes off a 46-minute gate on that runner. Read this literally, twice over:
+nothing between your `make check` and `main` runs this gate for you, and the
+**coverage floors run nowhere but on your own machine**. CI is the release gate;
+you are the merge gate.
+
+**One exception, and it is deliberate:** `.forgejo/workflows/scans.yml` runs the
+secret and SAST scans (`make check-secrets`, `make sast`) on **every pull request
+and every push to `main`** (#778). Those take 17 and 2 seconds locally against
+the 22 minutes per pull request that moved the gate to a tag, so the timing
+argument that moved the gate to a tag does not reach them — and for a secret the
+moment is not interchangeable. Found before the merge it is an edit; found after,
+it is in the history and revoking is the only real remedy. See
 [Continuous integration](#continuous-integration).
 Run `make help` for a one-line summary of every target.
 
@@ -74,9 +88,9 @@ it (see [`make coverage`](#make-coverage)).
 span unit (model/parsing/state), widget (every slide editor, the dialogs, the
 panels, the live preview and the fullscreen presenter's keyboard handling) and
 service-level (export, file IO, sanitisation) layers, plus the enforced
-localization and security guards listed below. Since #751 the CI runner runs
-the same gate on every pull request, so a local run and the PR check answer
-the same question.
+localization and security guards listed below. The CI runner runs the same gate, but on a `v*` tag rather
+than per pull request (#790), so your local run is the answer that matters
+before a merge — CI only confirms it again at release time.
 
 ---
 
@@ -172,7 +186,11 @@ now the only passing state.
 not what runs. That workflow does not execute: Forgejo reads
 `.forgejo/workflows/` instead of `.github/workflows/` once the former exists
 (see [Continuous integration](#continuous-integration)). What *does* run in CI
-since #751 is `make check` itself, on every pull request and push to `main`.
+is [`make check-no-coverage`](#make-check-no-coverage) on the Mac runner, on a
+`v*` tag (#790/#796/#797), plus
+[`make check-secrets`](#make-check-secrets) and [`make sast`](#make-sast) on
+every pull request and push to `main` (#778) — those two are the only checks in
+this table that a forge actually runs before a merge.
 Note that `make
 check` alone does **not** include `licenses`, `sbom-verify`, `deps-check` or
 `check-web` — those live in `check-full`. Run `make check-full` before a
@@ -568,6 +586,33 @@ also declares them, but see the [CI note](#continuous-integration).)
   with a reason per line — reserved for platform halves and files with no
   executable lines at all.
 
+### `make check-no-coverage`
+- **Runs:** every static gate that `make check` runs, then `make test` instead
+  of `make coverage` + `make coverage-per-file`. The full suite still runs, in
+  randomised order; only the instrumentation is gone.
+- **Covers:** exactly `make check` minus the two coverage floors.
+- **Where it is used:** `.forgejo/workflows/ci.yml`, on a `v*` tag. Nowhere
+  else — **do not use it in place of `make check` in your own working copy.**
+- **Why it exists:** `flutter test --coverage` keeps a VM-Service connection
+  open per test until the run ends, and that is both the slowest phase and the
+  one that parallelises worst. Measured on the runner (task 661): 33 min 49 s of
+  a 46-minute gate went to that single phase — on four cores of a 2018 Xeon. On
+  a developer machine the same difference is small enough not to notice, which
+  is exactly why it had to be measured on the runner rather than guessed at
+  here.
+- **How much it actually saves — less than that 74% suggests.** The suite still
+  has to run; only the instrumentation goes. Measured locally: `make test` is
+  112 s wall / 595 s CPU against `make coverage` at 147 s / 971 s — −24% wall,
+  −39% CPU. On four cores the run is CPU-bound, so the wall saving approaches
+  that −39%: an estimated 33 min 49 s → ~21 min, about **13 minutes off a
+  46-minute gate**. Real, but not a step change; the machine itself is the
+  factor of ten (see [Continuous integration](#continuous-integration)).
+- **What it gives up, stated plainly:** the coverage floor and the per-file
+  floor are not enforced in CI at all any more. They are unchanged and still
+  mandatory — in `make check`, on the committer's machine, before `main`. This
+  is a relocation, not a relaxation, and it only holds because the merge gate
+  was already local (see the top of this document).
+
 ---
 
 ## Security & licence compliance
@@ -928,37 +973,122 @@ For focused work, run only the relevant slice instead of the whole suite:
 > exists, so that directory shadows `.github/workflows/`, whose files remain
 > reference definitions for a GitHub mirror — with one exception: since
 > 2026-07-24 `.github/workflows/release.yml` really runs there, because it
-> builds the Windows artifact the forge has no machine for. `make check-full`
-> (the dependency/web checks) still runs only locally; run it before a
-> dependency or web-facing change. The sections below describe the workflows
-> that run, then what the remaining GitHub file *declares*.
+> builds the Windows artifact the forge has no machine for. Most of
+> `make check-full` (the dependency/web checks) still runs only locally; run it
+> before a dependency or web-facing change. Its two *security* scans are the
+> exception since #778 —
+> see [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request-and-push).
+> Since #797 the release gate runs on a registered **Mac**
+> runner rather than on the server, and the Linux gate moved to an on-demand
+> workflow — see below for what that buys and what it costs. The sections below
+> describe the workflows that run, then what the remaining GitHub file *declares*.
 
-### `.forgejo/workflows/ci.yml` — the gate, on every pull request and push to `main`
-- **gate** — a bare `ubuntu:24.04` container in which the workflow installs
-  the **official** Flutter stable release: the version is *read from
-  `.tool-versions`* (so a pin bump has no second place to forget) and the
-  tarball is sha256-verified against the official release manifest. Then
-  `flutter pub get` and `make check` — the same gate a committer runs
-  locally, including `check-toolchain`, which is why a prebuilt third-party
-  Flutter image was rejected: the cirruslabs image shipped channel
-  `[user-branch]` from an unknown source, exactly what that check exists to
-  catch.
+### `.forgejo/workflows/ci.yml` — the release gate, on a `v*` tag
+- **gate** — runs on the registered **Mac** runner (`runs-on: macos`, host
+  mode) since #797: `flutter pub get`, then
+  [`make check-no-coverage`](#make-check-no-coverage). Host mode means the job
+  uses the machine's own pinned toolchain, so nothing is installed and nothing
+  is cached here; `check-toolchain` still runs inside the gate and still demands
+  channel `stable`, official provenance and equality with the pin — "it is my
+  own machine" is not a check.
+- **Why the Mac.** Measured (#796): the same gate took 46 minutes in a container
+  on the server against 2.5 minutes on the Mac. That factor is the machine, not
+  the steps — four physical cores of a 2018 Xeon D-2123IT, 3.8× slower per core
+  than an M5 Max. The toolchain cache, dropping coverage and lowering runner
+  capacity each took minutes off; this takes off an order of magnitude.
+- **What it costs, twice over.** First: the suite no longer runs on Linux
+  anywhere by default — and that is a real gap, because `git` 2.43 on Ubuntu
+  24.04 does not know `--end-of-options`, and no Mac will ever surface that. The
+  Linux gate is not deleted but moved to `linux-gate.yml`, on demand. Second:
+  the release gate now depends on one physical machine owned by one person. When
+  that Mac is off the run waits — the tag still lands, the gate arrives later.
+  Better than a gate nobody waits for, but this is not a server-class
+  arrangement and should not be read as one.
 
-### `.forgejo/workflows/linux-build.yml` — executed on every push to `main`
+### `.forgejo/workflows/scans.yml` — secrets and SAST, per pull request and push
+- **scans** — a bare `ubuntu:24.04` container that installs three pinned
+  scanners and then runs [`make check-secrets`](#make-check-secrets) (gitleaks +
+  trufflehog, working tree *and* full history) and [`make sast`](#make-sast)
+  (semgrep, local rules only). The commands are the Makefile targets, not
+  re-typed copies of what they do — a contributor's local run and CI are then
+  the same run by construction.
+- **Why it is its own workflow rather than a second job in `ci.yml`.** `on:` is
+  per workflow, and `ci.yml` fires on a `v*` tag. A job there would first scan
+  once the secret was already on `main` with a tag around it.
+- **Why it may run per pull request when the gate no longer does.** The reason
+  for #790 was the clock — 22 minutes per pull request against a `make check`
+  that already ran before every push. These two take 17 and 2 seconds locally,
+  so that argument does not reach them, and for a secret the moment is not
+  interchangeable.
+- **What it actually costs in CI: about three minutes**, measured on the first
+  runs (#778). Read that against the 19 seconds above and the difference is the
+  point — nearly all of it is *installing* the scanners into a bare image, not
+  scanning. That is the lever if it ever needs to be faster: cache the two
+  binaries and the semgrep venv on the pinned versions, the way `linux-gate.yml`
+  already caches the toolchain. It is deliberately not done yet — three minutes
+  on a runner that has been idle since #797, for a job that blocks nothing, does
+  not yet justify a cache whose staleness is one more thing to reason about.
+- **Why on the Linux runner rather than the Mac.** The Mac has all three
+  scanners installed already, so nothing would need downloading. But since #797
+  that Mac is both the release gate and the committer's own working machine, and
+  this is the one workflow that fires on every pull request and push — it would
+  take cores from the machine currently running `make check`. The server has
+  been idle since that same move.
+- **Two things here are load-bearing and easy to lose.** It checks out with
+  `fetch-depth: 0`: `actions/checkout` clones one commit deep by default, and
+  both history passes then look at almost nothing and report green. Measured
+  rather than asserted — on a repository where a secret was committed and later
+  deleted, the full clone exits 1 (gitleaks) and 183 (trufflehog) while the
+  shallow clone of that same repository exits 0 twice. And the three scanners
+  are pinned in the workflow's `env` block with the download sha256-verified
+  against the published manifest, because a scanner that updates itself quietly
+  changes what green means. The `test -n "$SHA"` in that verification earns its
+  line, though not for the reason first given here (#800): the claim that
+  `grep … | sha256sum -c -` passes *silently* on an empty match does not hold on
+  GNU coreutils — measured on 9.5, and the image runs 9.4 off the same codebase.
+  An empty match ends in "no properly formatted checksum lines found" and exit 1.
+  What the line buys is a readable failure: without it, a renamed release asset
+  surfaces as a complaint about `sha256sum`'s *input*, and the reader debugs the
+  verification instead of the asset name.
+- **Counter-tested, because a scan job that sees nothing looks exactly like a
+  clean repository.** With a randomly generated AWS-shaped key pair planted in
+  the working tree, `make check-secrets` exits non-zero and names the leak; with
+  the same pair only in history and the working tree clean, both history passes
+  still fail.
+
+### `.forgejo/workflows/linux-gate.yml` — on demand (`workflow_dispatch`)
+- **gate-linux** — the gate that `ci.yml` used to be: a bare `ubuntu:24.04`
+  container in which the workflow installs the **official** Flutter stable
+  release: the version is *read from `.tool-versions`* (so a pin bump has no
+  second place to forget) and the tarball is sha256-verified against the
+  official release manifest, with `actions/cache` over `/opt/flutter` and
+  `~/.pub-cache`. Then `flutter pub get` and `make check-no-coverage`. A
+  prebuilt third-party Flutter image was rejected here: the cirruslabs image
+  shipped channel `[user-branch]` from an unknown source, exactly what
+  `check-toolchain` exists to catch.
+- **When to press it:** before a release, and whenever a change touches paths,
+  subprocesses or `git` invocations. Nobody presses it automatically — that is
+  the deliberate trade for the release gate being fast, not an oversight.
+
+### `.forgejo/workflows/linux-build.yml` — on demand (`workflow_dispatch`)
 - **build-linux** — same official pinned toolchain as the gate, plus the GTK
   build dependencies; `flutter build linux --release`, and uploads the bundle
   as the `ocideck-linux-x64` run artifact. This is a build, not a gate: it
-  proves the Linux target compiles and packages, nothing more.
+  proves the Linux target compiles and packages, nothing more — which is why
+  it stopped running on every push to `main` (#790). It cost 17.5 minutes of
+  runner time per merge, and `release.yml` on the GitHub mirror already builds
+  Linux, macOS and Windows on every `v*` tag. Start it by hand when you want a
+  bundle without cutting a tag.
 
-### `.forgejo/workflows/macos-build.yml` — executed on every push to `main`
+### `.forgejo/workflows/macos-build.yml` — on demand (`workflow_dispatch`)
 - **build-macos** — runs on a registered **Mac** runner (`runs-on: macos`,
   host mode), not on the server: Apple licenses macOS for Apple hardware only,
   so there is no macOS job the Linux server could legitimately run. The job
   uses the Mac's own pinned toolchain (the one `check-toolchain` already
   guards), builds `flutter build macos --release`, and uploads the `.app`
   (zipped with `ditto`, which preserves what a plain zip destroys) as the
-  `ocideck-macos` run artifact. When no Mac runner is online the run waits;
-  a newer push replaces a waiting run.
+  `ocideck-macos` run artifact. On demand for the same reason as the Linux
+  build (#790). When no Mac runner is online the run waits.
 
 ### `.forgejo/workflows/release.yml` — on a version tag (`v*`)
 One tag, one release. Not a gate: everything here assumes `make check` was
@@ -992,9 +1122,25 @@ plain `curl`, so no GitHub credential is stored on the self-hosted runner.
 ### `.github/workflows/ci.yml` — declared for every push and pull request
 - **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get
   --enforce-lockfile`, then `make format-check`, `make analyze`,
-  `make check-conventions`, `make check-method-length`, `make check-dead-code`,
+  `make check-conventions`, `make check-audience-boundary`,
+  `make check-method-length`, `make check-dead-code`,
+  [`make check-secrets`](#make-check-secrets), [`make sast`](#make-sast),
   `make coverage` (with the line-coverage floor), `make licenses`,
   `make sbom-verify`, and `make deps-check`. Uploads the coverage report.
+- **The three scanners are pinned, and the checkout is deep** (#800). Until
+  2026-07-24 this job installed gitleaks and trufflehog by piping an install
+  script fetched from a *branch tip* into `sh`, and semgrep with no version at
+  all — unverified code from a moving pointer, setting up tools that silently
+  redefined what green meant. They now come from a pinned release, sha256-checked
+  against the published manifest, in the same shape the Flutter tarball already
+  used in [`linux-gate.yml`](#forgejoworkflowslinux-gateyml--on-demand-workflow_dispatch)
+  — `test -n "$SHA"` included, so a renamed release asset fails loudly instead of
+  turning the check into a complaint about `sha256sum`'s input. The checkout also
+  gained `fetch-depth: 0`: two of the four passes in `make check-secrets` read
+  *history*, and a one-commit clone lets them report green on almost nothing.
+  Both were already right in
+  [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request-and-push)
+  (#799); only this mirror definition lagged.
 - **Test matrix (macOS + Windows)** — runs `flutter test
   --test-randomize-ordering-seed random` on the other two desktop OSes to catch
   platform-specific (path, `Platform.isX`) regressions the Linux gate would miss.

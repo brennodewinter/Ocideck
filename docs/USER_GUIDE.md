@@ -1751,17 +1751,76 @@ detail is for nobody) has to just work, and the author of that slide knows best.
 
 ### Importing OpenKAT reports (desktop)
 
-**… → OpenKAT-rapportages importeren…** takes a folder of JSON exports from
-[OpenKAT](https://openkat.nl) and builds one management deck from it — totals,
-trends and top findings per organisation, using the view limits below as
-defaults so an import of thousands of reports still yields readable slides
-while every underlying number stays in the deck — nothing is cut, only
-displayed selectively. Run the same action while an OpenKAT deck is open and it **updates** that
-deck: generated slides are refreshed, slides you added by hand are preserved.
+Importing is an optional module: **Instellingen → Uitbreidingen → Importeren**,
+off by default. One switch covers every source OciDeck pulls material in from;
+today that is OpenKAT. Switching it on adds an **Integraties** tab with a
+section per system, where you point at the folder holding your OpenKAT exports
+so the import does not ask for it every time. The import only reads that folder
+— nothing in it is changed or sent anywhere.
+
+Switching the module off later does not take the entry point away as long as a
+report folder is set: an existing OpenKAT deck stays updatable. What goes away
+is the tab and the menu item for someone who never imports anything.
+
+There are three ways to start an import, all doing the same thing: **Nu
+importeren** in the Integrations tab (right under the folder you just pointed
+at — it reports what it loaded and skipped on the spot, and the settings window
+stays open so nothing you were editing there is lost), the **OpenKAT-rapportages
+importeren…** button on the opening screen, and the menu item below. The
+opening screen is where you land when no presentation is open, which is where
+you tend to be when you want yesterday's export turned into today's overview.
+
+**… → OpenKAT-rapportages importeren…** takes that folder of JSON exports from
+[OpenKAT](https://openkat.nl) and builds one management deck from it, using the
+view limits below as defaults so an import of thousands of reports still yields
+readable slides while every underlying number stays in the deck — nothing is
+cut, only displayed selectively. Run the same action while an OpenKAT deck is
+open and it **updates** that deck: generated slides are refreshed, slides you
+added by hand are preserved.
+
+The deck leads with what changed and only then shows the detail:
+
+| Slide | What it says |
+| --- | --- |
+| Wat dit rapport zegt | The conclusion in words ("42 meer medium findings"), and better/worse/mixed. Only from the second measurement on — a first report has no change to report. |
+| Kerncijfers | A scorecard: each severity band and the number of affected systems, next to what it was, with the change coloured. |
+| Verloop over de tijd | A line per severity band across every measurement date. With a single measurement it stays a bar chart of the current distribution. |
+| Wat er in beeld is | The inventory — systems, hostnames, IPv4/IPv6, finding types. Kept apart from the figures that colour, because more systems in view is not bad news. |
+| Organisaties vergeleken | A scorecard of up to five organisations, biggest movers first. |
+| Ernst per organisatie | A heatmap, one row per organisation. This is where the full picture lives once there are more than five. |
+| Meest voorkomende issues | The finding types, worst first, with how many are new since the previous measurement. |
+| Wat OpenKAT aanraadt | The recommendation OpenKAT itself gives for the heaviest issues, under a heading each. |
+| Langst openstaande findings | Oldest first, with severity and days open — counted against the report date, not today's clock, so the deck still shows the same numbers in six months. |
+| Dekking per control | Percentage compliant per control, current next to previous. |
+
+Then, per organisation: a section slide, its own scorecard, its own trend line
+(from its second measurement on), the systems with the most findings, and the
+systems that improved.
+
+A slide with nothing to say is left out rather than shown empty: no heatmap for
+a single organisation, no recommendation slide when the source carries no
+recommendations, no trend line through a single point. And nothing is invented
+on top of the measurement — no made-up overall risk score, and no target bands
+under the controls chart, because which percentage counts as good enough is not
+something OpenKAT measured.
 The import is honest about what it did — the message counts what was loaded
 and what was skipped (duplicates, unrecognised or invalid files, and files
 over the size cap; the folder comes from outside, so it is read within
 bounds). Desktop only: the import reads a folder from disk.
+
+Two export shapes are recognised, both of which OpenKAT writes today: the
+**organisation report** (one flat summary of the whole organisation) and the
+**per-asset reports** export (keyed by report type and then by object). In the
+per-asset shape the findings live in the sub-reports — `findings-report` is
+normally empty — which is where they are read from. Files that are not OpenKAT
+reports are skipped and named in the import log rather than half-imported.
+
+The snapshot date comes from the export itself where it carries one
+(`created_at`), otherwise from the filename stamp OpenKAT uses
+(`<organisation>_20260319200604.json`), and otherwise from the file's
+modification date. Never from "now": re-importing the same folder must produce
+the same deck, or the trend line becomes a graph of how often you pressed
+Import.
 
 ### Showing part of the data without losing any of it (view limits)
 
@@ -1774,7 +1833,9 @@ highest or lowest by a chosen table column or chart series), and decide what
 happens to the rest — hidden but kept, or summed into one *Overig* bucket where
 that is honest (bar/pie-style charts, numeric columns). An optional "N of
 total" line tells the audience the slide is a selection; the same text feeds
-the accessibility label and every export.
+the accessibility label and every export. On a table it sits under the grid as
+a caption rather than in a cell of its own, so it neither reads as data nor
+pushes the columns out of proportion.
 
 The limit is a *projection*: preview, presenter, PDF, PPTX and HTML all show
 the same selection, while the file keeps the full data — save, reopen, and

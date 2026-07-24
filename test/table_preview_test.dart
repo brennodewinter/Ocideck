@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/display_window_spec.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/table_layout_metrics.dart';
+import 'package:ocideck/services/text_measurement.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
-Widget _host(List<List<String>> rows, {bool markOverdue = false}) {
+Widget _host(
+  List<List<String>> rows, {
+  bool markOverdue = false,
+  DisplayWindowSpec? viewLimit,
+}) {
   return MaterialApp(
     home: Scaffold(
       body: Center(
@@ -12,14 +19,37 @@ Widget _host(List<List<String>> rows, {bool markOverdue = false}) {
           width: 800,
           height: 450,
           child: SlidePreviewWidget(
-            slide: Slide.create(
-              SlideType.table,
-            ).copyWith(tableRows: rows, tableMarkOverdue: markOverdue),
+            slide: Slide.create(SlideType.table).copyWith(
+              tableRows: rows,
+              tableMarkOverdue: markOverdue,
+              viewLimit: viewLimit,
+            ),
           ),
         ),
       ),
     ),
   );
+}
+
+List<double> _columnWidths(WidgetTester tester) {
+  final table = tester.widget<Table>(find.byType(Table));
+  final widths = table.columnWidths!;
+  return [
+    for (var c = 0; c < widths.length; c++)
+      (widths[c]! as FixedColumnWidth).value,
+  ];
+}
+
+/// Alle tekst die de slide tekent, aaneengeregen.
+String _textOf(WidgetTester tester) {
+  final out = StringBuffer();
+  for (final rich in tester.widgetList<RichText>(find.byType(RichText))) {
+    rich.text.visitChildren((span) {
+      if (span is TextSpan) out.write(span.text ?? '');
+      return true;
+    });
+  }
+  return out.toString();
 }
 
 /// De kleuren waarin [text] ergens in de opgebouwde tekstspans getekend wordt.
@@ -49,15 +79,78 @@ void main() {
     );
     await tester.pump();
 
-    final table = tester.widget<Table>(find.byType(Table));
-    final widths = table.columnWidths!;
-    double flex(int c) => (widths[c]! as FlexColumnWidth).value;
+    final widths = _columnWidths(tester);
 
-    // The long "Omschrijving" column (index 1) earns more flex weight than the
-    // short ID (0) and OK (2) columns, so it wraps less and the table stays
-    // compact instead of being scaled down (which wastes the slide width).
-    expect(flex(1), greaterThan(flex(0)));
-    expect(flex(1), greaterThan(flex(2)));
+    // The long "Omschrijving" column (index 1) earns more room than the short
+    // ID (0) and OK (2) columns, so it wraps less and the table stays compact
+    // instead of being scaled down (which wastes the slide width).
+    expect(widths[1], greaterThan(widths[0]));
+    expect(widths[1], greaterThan(widths[2]));
+    expect(tester.takeException(), isNull);
+  });
+
+  // De bevinding: op tekenaantal verdeeld kreeg een korte kolom minder ruimte
+  // dan haar eigen kop breed is. De kop brak dan letter voor letter af en viel
+  // bij de smalste kolommen buiten de cel, dwars over de tabellijnen heen.
+  testWidgets('a short column is never narrower than its own header word', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _host(<List<String>>[
+        const ['#', 'Finding', 'Ernst', 'Systemen', 'Orgs'],
+        const ['1', 'SSL/TLS Certificate expired', 'critical', '6', '1'],
+        const ['2', 'Unencrypted website traffic', 'high', '31', '1'],
+      ]),
+    );
+    await tester.pump();
+
+    final widths = _columnWidths(tester);
+    final cellSize = tester
+        .widgetList<RichText>(find.byType(RichText))
+        .map((r) => r.text.style?.fontSize ?? 0)
+        .reduce((a, b) => a < b ? a : b);
+    for (final (c, header) in const [
+      'Finding',
+      'Ernst',
+      'Systemen',
+      'Orgs',
+    ].indexed) {
+      expect(
+        widths[c + 1],
+        greaterThanOrEqualTo(
+          measureTextWordWidth(header, cellSize, bold: true) +
+              cellSize * kTableCellHPadFactor * 2,
+        ),
+        reason: 'kolom "$header" is te smal voor haar eigen kop',
+      );
+    }
+    expect(tester.takeException(), isNull);
+  });
+
+  // Het "N van totaal"-bijschrift hoort onder de tabel, niet erin: als rij telde
+  // het mee als inhoud van de eerste kolom, die daardoor een kwart slide breed
+  // werd voor enkel rangnummers.
+  testWidgets('the view-limit caption sits below the table, not inside it', (
+    tester,
+  ) async {
+    final rows = <List<String>>[
+      const ['#', 'Omschrijving'],
+      for (var i = 1; i <= 12; i++) ['$i', 'Een omschrijving van regel $i'],
+    ];
+
+    await tester.pumpWidget(
+      _host(rows, viewLimit: const DisplayWindowSpec(limit: 3)),
+    );
+    await tester.pump();
+
+    final table = tester.widget<Table>(find.byType(Table));
+    expect(table.children, hasLength(4)); // kop + drie regels, geen bijschrift
+    expect(_textOf(tester), contains('van 12'), reason: 'bijschrift ontbreekt');
+    expect(
+      _columnWidths(tester)[0],
+      lessThan(_columnWidths(tester)[1]),
+      reason: 'de rangnummerkolom mag niet meegroeien met het bijschrift',
+    );
     expect(tester.takeException(), isNull);
   });
 

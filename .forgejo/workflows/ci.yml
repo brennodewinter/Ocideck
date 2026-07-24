@@ -1,34 +1,62 @@
-# De kwaliteitspoort van OciDeck, in CI (#741). Zelfde poort als lokaal:
-# `make check`. De toolchain komt uit `.forgejo/actions/flutter`: de officiële
-# stable volgens de pin in .tool-versions, sha256-geverifieerd — daar staat ook
-# waarom er geen kant-en-klaar Flutter-image wordt gebruikt.
+# De uitbrengpoort van OciDeck (#741, #790, #796, #797). Zelfde poort als
+# lokaal, minus de dekkingsmeting: `make check-no-coverage`.
+#
+# **Waarom deze op de Mac-runner draait.** Nagemeten (#796): dezelfde poort deed
+# 46 minuten in een container op de pawprint-server tegen 2,5 minuut op de Mac.
+# Die factor zit niet in de stappen maar in de machine — vier fysieke kernen van
+# een Xeon D-2123IT uit 2018, 3,8× trager per kern dan een M5 Max. Elke andere
+# knop (toolchaincache, dekking eruit, capaciteit omlaag) haalde er minuten af;
+# deze haalt er een orde van grootte af.
+#
+# **Host-modus.** De Mac-runner draait de job direct op de machine, met de
+# toolchain die daar staat — dezelfde gepinde officiële Flutter. Er wordt hier
+# dus niets geïnstalleerd, en er valt hier ook niets te cachen; de tarball, de
+# sha256-controle en de cachestappen die de containerpoort nodig heeft, staan
+# alleen daar (`linux-gate.yml`). `check-toolchain` draait onverkort mee binnen
+# `make check-no-coverage` en eist kanaal `stable`, officiële herkomst en
+# gelijkheid met de pin — ook hier, want "het is mijn eigen machine" is geen
+# controle.
+#
+# **Wat dit kost, hardop.** De suite draait hiermee nergens meer op Linux. Dat
+# is een echt gat: `git` 2.43 op Ubuntu 24.04 kent `--end-of-options` niet, en
+# zulke verschillen vindt geen enkele Mac. De Linux-poort is daarom niet
+# weggegooid maar verhuisd naar `linux-gate.yml`, op afroep — draai hem vóór een
+# release en bij wijzigingen aan paden, subprocessen of `git`-aanroepen. Wie hem
+# nooit indrukt, draait hem nooit; dat is de afweging, en ze staat ook in
+# docs/CHECKS.md.
+#
+# **En de tweede afhankelijkheid, ook hardop.** Deze poort hangt nu aan één
+# fysieke machine die van één persoon is. Staat de Mac uit, dan wacht de run tot
+# hij er weer is — de tag landt wel, de poort komt later. Dat is te verkiezen
+# boven een poort die niemand afwacht, maar het is geen serverklasse-opstelling
+# en moet niet als zodanig gelezen worden.
 name: ci
 
+# **Draait op een tag, niet op elke PR (#790).** CI is hiermee géén
+# samenvoegpoort maar een uitbrengpoort: valt hij op een tag om, dan staat het
+# probleem al op main. De borging vóór main is volledig `make check` op de
+# machine van de committer — zie CONTRIBUTING.md en docs/CHECKS.md.
+#
+# `workflow_dispatch` blijft, zodat een tak alsnog door de poort kan zonder een
+# tag te hoeven zetten.
 on:
-  pull_request:
   push:
-    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
 
 jobs:
   gate:
-    runs-on: docker
-    container:
-      image: ubuntu:24.04
+    runs-on: macos
     steps:
-      # Vóór de checkout: actions/checkout is een node-actie, en dit kale
-      # image brengt geen node mee.
-      - name: Gereedschap installeren
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends \
-            nodejs make git curl ca-certificates xz-utils jq unzip
-
       - uses: actions/checkout@v4
-
-      - uses: ./.forgejo/actions/flutter
 
       - name: Afhankelijkheden ophalen
         run: flutter pub get
 
+      # `check-no-coverage` en niet `check`: de volledige suite draait
+      # onverkort, alleen zonder `--coverage`. Die instrumentatie houdt per test
+      # een VM-Service-verbinding open tot het eind van de run en kost ~39% CPU
+      # (#796). De dekkingsvloer en de per-bestandsvloer draaien daarom in
+      # `make check`, op de machine van de committer, vóór main.
       - name: De poort
-        run: make check
+        run: make check-no-coverage

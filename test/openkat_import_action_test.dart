@@ -11,6 +11,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/openkat/openkat_directory_scanner.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/shell/openkat_import_action.dart';
+import 'package:ocideck/widgets/shell/openkat_import_summary.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,20 +26,44 @@ void main() {
     SharedPreferences.setMockInitialValues({'app_consent_accepted': true});
   });
 
-  Map<String, dynamic> rapport(String code, String datum) => {
-    'organization': {'code': code, 'name': 'Organisatie $code'},
-    'report_date': datum,
-    'systems': [
-      {'ooi': 'hostname|example.com'},
-    ],
-    'findings': [
-      {
-        'finding_type': {'id': 'KAT-001', 'name': 'Open poort'},
-        'severity': 'high',
-        'primary_key': 'f1',
-        'ooi': 'hostname|example.com',
+  /// Een OpenKAT-organisatierapport in de envelop die de exportknop werkelijk
+  /// oplevert. De datum zit in de bestandsnaam, niet in de inhoud — zo doet
+  /// OpenKAT dat ook.
+  Map<String, dynamic> rapport(String code) => {
+    'organization_code': code,
+    'organization_name': 'Organisatie $code',
+    'organization_tags': <String>[],
+    'data': {
+      'systems': {
+        'services': {
+          'Hostname|internet|example.com': {
+            'hostnames': ['example.com'],
+            'services': <dynamic>[],
+          },
+        },
       },
-    ],
+      'findings': {
+        'finding_types': [
+          {
+            'finding_type': {
+              'object_type': 'KATFindingType',
+              'id': 'KAT-001',
+              'name': 'Open poort',
+              'risk_severity': 'high',
+            },
+            'occurrences': [
+              {
+                'finding': {
+                  'primary_key': 'f1',
+                  'ooi': 'Hostname|internet|example.com',
+                },
+              },
+            ],
+          },
+        ],
+      },
+      'total_systems': 1,
+    },
   };
 
   Future<(ProviderContainer, BuildContext, WidgetRef)> pump(
@@ -75,8 +100,8 @@ void main() {
     final tmp = Directory.systemTemp.createTempSync('ocikat-actie-');
     addTearDown(() => tmp.deleteSync(recursive: true));
     File(
-      p.join(tmp.path, 'a.json'),
-    ).writeAsStringSync(jsonEncode(rapport('org1', '2024-06-01T00:00:00Z')));
+      p.join(tmp.path, 'org1_20240601000000.json'),
+    ).writeAsStringSync(jsonEncode(rapport('org1')));
 
     final (container, ctx, ref) = await pump(tester);
     // runAsync: de import doet echte bestands-I/O, en die futures komen onder
@@ -125,8 +150,8 @@ void main() {
     final tmp = Directory.systemTemp.createTempSync('ocikat-her-');
     addTearDown(() => tmp.deleteSync(recursive: true));
     File(
-      p.join(tmp.path, 'a.json'),
-    ).writeAsStringSync(jsonEncode(rapport('org1', '2024-06-01T00:00:00Z')));
+      p.join(tmp.path, 'org1_20240601000000.json'),
+    ).writeAsStringSync(jsonEncode(rapport('org1')));
 
     final (container, ctx, ref) = await pump(tester);
     await tester.runAsync(
@@ -143,8 +168,8 @@ void main() {
 
     // Tweede run met een extra maand: zelfde tab, bijgewerkt deck.
     File(
-      p.join(tmp.path, 'b.json'),
-    ).writeAsStringSync(jsonEncode(rapport('org1', '2024-07-01T00:00:00Z')));
+      p.join(tmp.path, 'org1_20240701000000.json'),
+    ).writeAsStringSync(jsonEncode(rapport('org1')));
     await tester.runAsync(
       () => importOpenKatReports(ctx, ref, directoryOverride: tmp.path),
     );
@@ -162,6 +187,67 @@ void main() {
     // (runAsync) en houdt de wachtrij bezet, dus 'bijgewerkt' komt binnen de
     // testtijd niet aan de beurt. Het gedrag — zelfde tab, bijgewerkt deck —
     // staat hierboven; de meldingsoppervlakken toetsen de andere twee tests.
+  });
+
+  testWidgets('met announce uit meldt de actie niets en geeft ze de uitkomst', (
+    tester,
+  ) async {
+    // De route van het instellingenvenster: daar is een snackbar achter een
+    // modale dialoog geen melding, dus meldt het paneel zelf — en dan moet de
+    // actie de tellingen wél teruggeven.
+    final tmp = Directory.systemTemp.createTempSync('ocikat-stil-');
+    addTearDown(() => tmp.deleteSync(recursive: true));
+    File(
+      p.join(tmp.path, 'org1_20240601000000.json'),
+    ).writeAsStringSync(jsonEncode(rapport('org1')));
+    File(p.join(tmp.path, 'geen-rapport.json')).writeAsStringSync('{"a":1}');
+
+    final (container, ctx, ref) = await pump(tester);
+    final uitkomst = await tester.runAsync(
+      () => importOpenKatReports(
+        ctx,
+        ref,
+        directoryOverride: tmp.path,
+        announce: false,
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(uitkomst, isNotNull);
+    expect(uitkomst!.loaded, 1);
+    expect(uitkomst.skipped, 1, reason: 'het bestand dat geen rapport is');
+    expect(uitkomst.failed, isFalse);
+    expect(uitkomst.updatedDeck, isFalse);
+    expect(find.byType(SnackBar), findsNothing);
+    expect(
+      container.read(tabsProvider).current?.deckNotifier.currentState.deck,
+      isNotNull,
+      reason: 'zwijgen is niet hetzelfde als niets doen',
+    );
+  });
+
+  test('de melding zegt per uitkomst iets anders', () {
+    const l10n = AppLocalizations(Locale('nl'));
+    String zin(
+      ({int loaded, int skipped, bool updatedDeck, bool failed}) uitkomst,
+    ) => openKatImportSummary(l10n, uitkomst);
+
+    expect(
+      zin((loaded: 0, skipped: 0, updatedDeck: false, failed: true)),
+      contains('mislukt'),
+    );
+    expect(
+      zin((loaded: 0, skipped: 3, updatedDeck: false, failed: false)),
+      allOf(contains('Geen OpenKAT-rapportages'), contains('3')),
+    );
+    expect(
+      zin((loaded: 2, skipped: 1, updatedDeck: false, failed: false)),
+      allOf(contains('geïmporteerd'), contains('2'), contains('1')),
+    );
+    expect(
+      zin((loaded: 2, skipped: 0, updatedDeck: true, failed: false)),
+      contains('bijgewerkt'),
+    );
   });
 
   test(

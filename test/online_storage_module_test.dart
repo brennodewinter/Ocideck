@@ -112,11 +112,12 @@ void main() {
       expect(prefs.getBool('onlineStorageEnabled'), isTrue);
     });
 
-    test('het register kent de drie modules, in kaartvolgorde', () {
+    test('het register kent de modules, in kaartvolgorde', () {
       expect(moduleRegistry.map((m) => m.id), [
         ModuleId.infoSafety,
         ModuleId.ai,
         ModuleId.onlineStorage,
+        ModuleId.imports,
       ]);
     });
   });
@@ -216,8 +217,8 @@ void main() {
       'het Uitbreidingen-tabblad toont elke module uit het register',
       (tester) async {
         await open(tester, section: SettingsSection.modules);
-        // Drie registermodules → drie kaarten (elk met één schakelaar). Een
-        // vierde module zonder kaart laat deze telling vallen.
+        // Eén kaart per registermodule, elk met één schakelaar. Een module
+        // zonder kaart laat deze telling vallen.
         expect(
           find.byType(SwitchListTile),
           findsNWidgets(moduleRegistry.length),

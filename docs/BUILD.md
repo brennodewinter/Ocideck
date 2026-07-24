@@ -336,14 +336,43 @@ step anyway: a set nobody watches is how this went wrong the first time.
 
 ## CI
 
-> **Since 2026-07-23 the forge has an Actions runner.** The quality gate
-> (`make check`) runs in CI on every pull request and push to `main`
-> (`.forgejo/workflows/ci.yml`, #751); `.forgejo/workflows/linux-build.yml`
-> produces the Linux desktop bundle on every push to `main`, and
-> `.forgejo/workflows/macos-build.yml` does the same for the macOS bundle on a
-> registered Mac runner (host mode — Apple licenses macOS for Apple hardware
-> only, so that job cannot run on the Linux server; when the Mac is offline
-> the run simply waits). `make check-full` and the Windows/web bundles remain
+> **Since 2026-07-23 the forge has an Actions runner.** The quality gate runs
+> **on a `v*` tag** (`.forgejo/workflows/ci.yml`, #751/#790) — not per pull
+> request. A gate run cost 22 minutes on the server's runner against 2.5 minutes
+> locally, and that wait per PR did not earn its keep next to a `make check`
+> every committer already runs before pushing. The honest consequence: CI is no
+> longer a merge gate but a **release** gate. If it fails on a tag, the problem
+> is already on `main`, and the assurance before `main` is — with one deliberate
+> exception — entirely the committer's local run. That exception is
+> `.forgejo/workflows/scans.yml` (#778): the secret and SAST scans do run on
+> every pull request and push, because they cost seconds rather than minutes and
+> because a credential found after the merge is in the history for good.
+>
+> Two later changes shaped what that gate is. It runs `make check-no-coverage`
+> rather than `make check` (#796): the whole suite, without the coverage
+> instrumentation that cost ~39% CPU — so the coverage floors are enforced
+> locally and nowhere else. And since #797 it runs on the registered **Mac**
+> runner rather than in a container on the server, because the 46-vs-2.5-minute
+> gap was measured to be the machine (four cores of a 2018 Xeon against an M5
+> Max), not the steps. `check-toolchain` runs inside the gate either way and
+> still demands channel `stable`, the official origin, and equality with the
+> pin.
+>
+> What that costs: the suite no longer runs on Linux by default. The Linux gate
+> moved to `.forgejo/workflows/linux-gate.yml`, on demand — press it before a
+> release and when a change touches paths, subprocesses or `git` invocations.
+> The pinned-toolchain and pub caches live there, where an install actually
+> happens.
+>
+> `.forgejo/workflows/linux-build.yml` and `.forgejo/workflows/macos-build.yml`
+> produce the Linux and macOS desktop bundles **on demand only**
+> (`workflow_dispatch`, since #790). They used to run on every push to `main`,
+> which cost 17.5 minutes of runner time per merge while `release.yml` on the
+> GitHub mirror already builds all three platforms on every `v*` tag. Building
+> the same thing twice buys no extra assurance: the gate is what stops a
+> regression, packaging afterwards is not. The macOS job runs on a registered
+> Mac runner (host mode — Apple licenses macOS for Apple hardware only, so that
+> job cannot run on the Linux server; when the Mac is offline the run waits). `make check-full` and the Windows/web bundles remain
 > local: run the first before dependency or web-facing changes, and build
 > those bundles on their target OS. See
 > [CHECKS.md](CHECKS.md#continuous-integration).

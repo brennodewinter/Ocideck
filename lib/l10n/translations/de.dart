@@ -733,6 +733,29 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Nu importeren': 'Jetzt importieren',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'Die Übersicht liegt in einem neuen Tab bereit.',
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Der Import liest Dateien von der Festplatte und ist nur in der Desktop-Version verfügbar.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Material aus anderen Systemen hereinholen. Heute ist das OpenKAT: Ein Ordner mit Berichten (JSON) wird zu einer Managementübersicht — Systeme, Feststellungen nach Schweregrad, die am längsten offenen Punkte und der Verlauf über aufeinanderfolgende Messungen. Wo die Dateien liegen, stellen Sie je System unter Integrationen ein.',
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Liest einen Ordner mit OpenKAT-Berichten (JSON) und baut daraus eine Managementübersicht: Systeme, Feststellungen nach Schweregrad, die am längsten offenen Punkte und der Verlauf über aufeinanderfolgende Messungen. Dieselbe Aktion auf einer vorhandenen OpenKAT-Präsentation aktualisiert sie und lässt Ihre eigenen Folien stehen.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Der Import liest nur; in diesem Ordner wird nichts geändert oder versendet. Dateien, die keine OpenKAT-Berichte sind, werden übersprungen und im Importprotokoll benannt.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Geben Sie den Ordner an, in dem Ihre OpenKAT-Berichte (JSON) liegen. Der Import liest diesen Ordner und baut daraus eine Managementübersicht; ist der Ordner hier festgelegt, müssen Sie ihn nicht jedes Mal neu wählen.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'Der OpenKAT-Import liest einen Ordner von der Festplatte und ist nur in der Desktop-Version verfügbar.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Es ist noch kein Berichtsordner festgelegt; der Import fragt dann jedes Mal danach.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Es ist bereits ein Berichtsordner festgelegt; der Einstiegspunkt bleibt daher erreichbar, sodass eine vorhandene OpenKAT-Präsentation weiter aktualisiert werden kann.',
+  'Integraties': 'Integrationen',
+  'Naar Integraties': 'Zu Integrationen',
+  'Map kiezen…': 'Ordner wählen…',
+  'Map wissen': 'Ordner löschen',
   'OpenKAT-rapportages importeren…': 'OpenKAT-Berichte importieren…',
   'Map met OpenKAT-rapportages kiezen': 'Ordner mit OpenKAT-Berichten wählen',
   'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-Berichte importiert.',

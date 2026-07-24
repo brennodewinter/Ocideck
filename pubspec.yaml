@@ -121,6 +121,8 @@ flutter:
     - assets/images/flag_fy.png
     - assets/images/cat-branie.jpg
     - assets/images/cat-keiko.jpg
+    # Het OpenKAT-logo (Keiko), voor de OpenKAT-sectie op Integraties.
+    - assets/images/openkat-logo.png
     - assets/images/cat-otis.jpg
     - assets/themes/ocideck.css
     # Full MITRE CWE weakness list (offline), merged over the curated floor in

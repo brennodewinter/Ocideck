@@ -1774,6 +1774,29 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Nu importeren': 'Tuo nyt',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'Yhteenveto on valmiina uudessa välilehdessä.',
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Tuonti lukee tiedostoja levyltä ja on käytettävissä vain työpöytäversiossa.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Aineiston tuominen muista järjestelmistä. Tänään se tarkoittaa OpenKATia: kansiollinen raportteja (JSON) muuttuu yhdeksi johdon yleiskatsaukseksi — järjestelmät, havainnot vakavuuden mukaan, pisimpään auki olleet kohdat ja kehitys peräkkäisissä mittauksissa. Missä tiedostot ovat, asetetaan järjestelmäkohtaisesti kohdassa Integraatiot.',
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Lukee kansiollisen OpenKAT-raportteja (JSON) ja rakentaa niistä yhden johdon yleiskatsauksen: järjestelmät, havainnot vakavuuden mukaan, pisimpään auki olleet kohdat ja kehityksen peräkkäisissä mittauksissa. Sama toiminto olemassa olevalle OpenKAT-esitykselle päivittää sen ja jättää omat diasi paikoilleen.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Tuonti vain lukee; tässä kansiossa ei muuteta eikä lähetetä mitään. Tiedostot, jotka eivät ole OpenKAT-raportteja, ohitetaan ja mainitaan tuontiraportissa.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Osoita kansio, jossa OpenKAT-raporttisi (JSON) ovat. Tuonti lukee sen kansion ja rakentaa siitä yhden johdon yleiskatsauksen; kun kansio on asetettu tähän, sitä ei tarvitse valita joka kerta.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'OpenKAT-tuonti lukee kansion levyltä ja on käytettävissä vain työpöytäversiossa.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Raporttikansiota ei ole vielä valittu, joten tuonti kysyy sitä joka kerta.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Raporttikansio on jo asetettu, joten aloituskohta pysyy käytettävissä ja olemassa olevaa OpenKAT-esitystä voi yhä päivittää.',
+  'Integraties': 'Integraatiot',
+  'Naar Integraties': 'Siirry Integraatioihin',
+  'Map kiezen…': 'Valitse kansio…',
+  'Map wissen': 'Tyhjennä kansio',
   'OpenKAT-rapportages importeren…': 'Tuo OpenKAT-raportit…',
   'Map met OpenKAT-rapportages kiezen': 'Valitse OpenKAT-raporttien kansio',
   'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-raportit tuotu.',

@@ -1,0 +1,136 @@
+# De poort op **Linux**, op afroep (#741, #790, #796, #797).
+#
+# **Waarom dit los staat van de tagpoort.** De uitbrengpoort is sinds #797 de
+# Mac-runner: die doet dezelfde `make check-no-coverage` in ongeveer drie
+# minuten waar deze container er dertig over deed — vier kernen van een Xeon uit
+# 2018 tegen een M5 Max. Wat je daarmee verliest is dat de suite nog ergens op
+# Linux draait, en dat is niet niks: `git` 2.43 op Ubuntu 24.04 kent
+# `--end-of-options` niet, en dat soort verschil vind je op geen enkele Mac.
+#
+# Daarom is deze poort niet weggegooid maar verplaatst naar `workflow_dispatch`:
+# één druk op de knop vóór een release, of wanneer een wijziging aan paden,
+# subprocessen of `git`-aanroepen komt. Wie hem nooit draait, draait hem nooit —
+# dat is een bewuste afweging en geen ongeluk, en ze staat ook in docs/CHECKS.md.
+#
+# **De toolchain.** De Flutter-versie komt uit .tool-versions — de workflow
+# leest de pin, dus een pin-bump heeft hier geen tweede plek om te vergeten — en
+# de tarball is de officiële stable-release, sha256-geverifieerd tegen het
+# release-manifest. Een kant-en-klaar Flutter-image (cirruslabs) is bewust
+# vermeden: dat bleek kanaal "[user-branch]" uit onbekende bron te bevatten, en
+# check-toolchain keurt precies dat af.
+#
+# **Waarom er gecachet wordt.** Een fors deel van de runtijd ging elke keer
+# opnieuw op aan dezelfde tarball ophalen en met `xz` uitpakken — werk dat per
+# definitie hetzelfde resultaat geeft, want de sleutel is de gepinde versie. De
+# cache neemt die stap weg en vervangt géén controle: `check-toolchain` draait
+# op de herstelde boom en eist onverkort kanaal `stable`, de officiële herkomst
+# en gelijkheid met de pin. Een cache die iets anders bevat valt dus om op
+# dezelfde poort die destijds het cirruslabs-image afkeurde.
+#
+# De eerlijke grens daarbij: die cache wordt geschreven door onze eigen jobs op
+# onze eigen runner. Wie de runner beheert, beheert de cache — dat is dezelfde
+# vertrouwensgrens als de runner zelf, niet een nieuwe.
+#
+# De cachestappen staan op `continue-on-error`. Spreekt de forge de cache-API
+# van deze actie niet, dan verliezen we de versnelling en verder niets: de
+# installatiestap draait dan gewoon, en de poort blijft de poort.
+name: linux-gate
+
+on:
+  workflow_dispatch:
+
+jobs:
+  gate-linux:
+    runs-on: docker
+    container:
+      image: ubuntu:24.04
+    steps:
+      # Vóór de checkout: actions/checkout is een node-actie, en dit kale
+      # image brengt geen node mee.
+      - name: Gereedschap installeren
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            nodejs make git curl ca-certificates xz-utils jq unzip
+
+      - uses: actions/checkout@v4
+
+      # De pin is de cachesleutel, dus hij wordt één keer gelezen en daarna
+      # hergebruikt — niet twee keer met hetzelfde `sed`.
+      - name: Gepinde Flutter-versie lezen
+        id: pin
+        run: |
+          set -eu
+          VERSION="$(sed -n 's/^flutter \(.*\)-stable$/\1/p' .tool-versions)"
+          test -n "$VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      # Sleutel = de gepinde versie. Een pin-bump is dus automatisch een nieuwe
+      # cache; er is geen sleutel die stil bij een oude toolchain blijft staan.
+      # Deze cache draagt óók wat Flutter tijdens de run zelf binnenhaalt
+      # (bin/cache), want dat zit onder hetzelfde pad.
+      - name: Flutter uit de cache
+        id: flutter-cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: /opt/flutter
+          key: flutter-linux-${{ steps.pin.outputs.version }}-stable
+
+      - name: Officiële Flutter volgens de pin
+        if: steps.flutter-cache.outputs.cache-hit != 'true'
+        run: |
+          set -eu
+          VERSION="${{ steps.pin.outputs.version }}"
+          ARCHIVE="flutter_linux_${VERSION}-stable.tar.xz"
+          BASE="https://storage.googleapis.com/flutter_infra_release/releases"
+          curl -fsSLo /tmp/releases.json "$BASE/releases_linux.json"
+          SHA=$(jq -r --arg v "$VERSION" \
+            '.releases[] | select(.channel=="stable" and .version==$v) | .sha256' \
+            /tmp/releases.json)
+          test -n "$SHA"
+          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/stable/linux/$ARCHIVE"
+          echo "$SHA  /tmp/$ARCHIVE" | sha256sum -c -
+          tar -xJf "/tmp/$ARCHIVE" -C /opt
+          rm "/tmp/$ARCHIVE"
+
+      # Apart van de installatie: dit moet óók gebeuren als de cache raak was.
+      - name: Flutter op het pad
+        run: |
+          set -eu
+          git config --global --add safe.directory /opt/flutter
+          echo "/opt/flutter/bin" >> "$GITHUB_PATH"
+
+      # De pakketten volgen `pubspec.lock` letterlijk; verandert er één
+      # afhankelijkheid, dan is dat een nieuwe sleutel. De terugvalsleutel
+      # levert dan nog steeds de vorige set, zodat pub alleen het verschil
+      # ophaalt in plaats van alles.
+      - name: Pub-pakketten uit de cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: ~/.pub-cache
+          key: pub-linux-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            pub-linux-
+
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get
+
+      # `check-no-coverage` en niet `check`: de volledige suite draait onverkort,
+      # alleen zonder `--coverage`. Die instrumentatie houdt per test een
+      # VM-Service-verbinding open tot het eind van de run en was op deze runner
+      # 33 min 49 s van een gate van 46 minuten — veruit de fase die het slechtst
+      # parallelliseert op vier kernen.
+      #
+      # Die 74% is niet de winst: de suite moet nog steeds draaien. Lokaal
+      # nagemeten scheelt het weglaten van de instrumentatie 39% CPU, wat op
+      # vier kernen neerkomt op ~13 minuten van die 46. Reëel, geen factor.
+      #
+      # De dekkingsvloer en de per-bestandsvloer draaien hier dus níet meer. Dat
+      # is geen versoepeling maar een verplaatsing: ze zitten onverkort in
+      # `make check`, dat vóór main op de machine van de committer draait — zie
+      # CONTRIBUTING.md en docs/CHECKS.md. Wat deze poort op een tag beantwoordt
+      # is "draait alles nog, op andermans hardware", niet "hoeveel raakt het".
+      - name: De poort
+        run: make check-no-coverage

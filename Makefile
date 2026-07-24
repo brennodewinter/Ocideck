@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release deploy-web check check-full help servicenormen doorlooptijd ratchets
+.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release deploy-web check check-no-coverage check-full help servicenormen doorlooptijd ratchets
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -34,6 +34,7 @@ help:
 	@echo "OciDeck quality targets:"
 	@echo "  make check           Format check + static analysis + full Flutter test suite + coverage floor."
 	@echo "  make check-full      make check + secrets + SAST + licences, SBOM, deps, web hardening."
+	@echo "  make check-no-coverage  make check zonder de dekkingsmeting (uitbrengpoort in CI; niet lokaal gebruiken)."
 	@echo "  make coverage        Test suite with coverage: enforce the floor AND that every lib/ file is in some test."
 	@echo "  make mutate          Mutation check for dead/untested branch operands (manual; FILE/TESTS overridable)."
 	@echo "  make mutate-parsers  Mutation sweep over all markdown parsers/serializers (manual, slow)."
@@ -858,9 +859,40 @@ build-release:
 # nothing ran them — and the GitHub workflow that did cannot fire on a Forgejo
 # remote without a runner. `make check` is the real gate; it should contain the
 # gates.
-check: format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language coverage coverage-per-file
+# De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
+# lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
+# toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
+STATIC_GATES := format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language
+
+check: $(STATIC_GATES) coverage coverage-per-file
 	@echo "== OciDeck check complete =="
 	@echo "Validated: formatting, static analysis, conventions, the privacy projection boundary, method length, dead-code, hardcoded visible text, comment language, the full Flutter test suite, the coverage floor, and the per-file coverage floor."
+
+# Dezelfde poort, maar met `test` in plaats van `coverage` — de volledige suite
+# draait onverkort, alleen ongeïnstrumenteerd.
+#
+# **Waarom dit doel bestaat.** `flutter test --coverage` houdt per test een
+# VM-Service-verbinding open tot het eind van de run, en dat is de duurste en
+# slechtst parallelliserende fase die we hebben. Nagemeten op de runner
+# (taak 661): van een gate van 46 minuten ging 33 min 49 s naar die ene fase.
+#
+# **Wat dit oplevert, en wat níet.** Die 74% is niet de winst — de suite moet
+# nog steeds draaien; alleen de instrumentatie gaat eraf. Lokaal nagemeten:
+# `make test` 112 s wandklok / 595 s CPU tegen `make coverage` 147 s / 971 s,
+# dus -24% wandklok en -39% CPU. Op vier kernen zit de run tegen zijn CPU aan
+# en nadert de wandklokwinst die -39%: geschat 33 min 49 s → ~21 min, oftewel
+# **~13 minuten van een gate van 46**. Reëel, maar geen factor.
+#
+# **Wat je hiermee inlevert, hardop:** de dekkingsvloer en de per-bestandsvloer
+# draaien hier niet. Die twee blijven bestaan en blijven verplicht — in
+# `make check`, op de machine van de committer, vóór main. Dit doel is bedoeld
+# voor de uitbrengpoort in CI, waar de suite een tweede keer draait op andermans
+# hardware en de vraag "draait alles nog" is, niet "hoeveel raakt het".
+# Gebruik het niet als vervanging van `make check` in je eigen werkkopie.
+check-no-coverage: $(STATIC_GATES) test
+	@echo "== OciDeck check (zonder dekkingsmeting) complete =="
+	@echo "Validated: formatting, static analysis, conventions, the privacy projection boundary, method length, dead-code, hardcoded visible text, comment language, and the full Flutter test suite."
+	@echo "NOT validated here: the coverage floor and the per-file coverage floor — those run in 'make check'."
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.

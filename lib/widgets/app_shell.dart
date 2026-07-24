@@ -71,6 +71,7 @@ import '../state/privacy_provider.dart';
 import '../state/provider_warmup.dart';
 import '../state/save_progress_provider.dart';
 import '../state/info_safety_provider.dart';
+import '../state/import_module_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
 import '../state/tabs_provider.dart';

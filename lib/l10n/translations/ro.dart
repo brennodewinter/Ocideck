@@ -1791,6 +1791,29 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Nu importeren': 'Importă acum',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'Prezentarea generală este pregătită într-o filă nouă.',
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Importul citește fișiere de pe disc și este disponibil doar în versiunea desktop.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Aducerea de material din alte sisteme. Astăzi acesta este OpenKAT: un folder cu rapoarte (JSON) devine o singură privire de ansamblu pentru conducere — sisteme, constatări după gravitate, punctele deschise de cel mai mult timp și tendința pe măsurători succesive. Unde se află fișierele se setează pe sistem la Integrări.',
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Citește un folder cu rapoarte OpenKAT (JSON) și construiește din el o singură privire de ansamblu pentru conducere: sisteme, constatări după gravitate, punctele deschise de cel mai mult timp și tendința pe măsurători succesive. Aceeași acțiune pe o prezentare OpenKAT existentă o actualizează și lasă propriile dumneavoastră diapozitive la locul lor.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Importul doar citește; nimic din acest folder nu este modificat sau trimis. Fișierele care nu se dovedesc a fi rapoarte OpenKAT sunt omise și menționate în raportul de import.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Indicați folderul în care se află rapoartele dumneavoastră OpenKAT (JSON). Importul citește acel folder și construiește din el o singură privire de ansamblu pentru conducere; dacă folderul este setat aici, nu trebuie să îl alegeți de fiecare dată.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      'Importul OpenKAT citește un folder de pe disc și este disponibil doar în versiunea desktop.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Încă nu a fost indicat un folder de rapoarte, așa că importul îl cere de fiecare dată.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Există deja un folder de rapoarte configurat, așa că punctul de intrare rămâne accesibil și o prezentare OpenKAT existentă poate fi actualizată în continuare.',
+  'Integraties': 'Integrări',
+  'Naar Integraties': 'Mergi la Integrări',
+  'Map kiezen…': 'Alege folderul…',
+  'Map wissen': 'Șterge folderul',
   'OpenKAT-rapportages importeren…': 'Importă rapoarte OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Alege folderul cu rapoarte OpenKAT',
   'OpenKAT-rapportages geïmporteerd.': 'Rapoartele OpenKAT au fost importate.',

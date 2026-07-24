@@ -178,9 +178,12 @@ This runs:
   also asserts completeness — every `pubspec.lock` package and every manifest
   bundle appears — and format validity), so it is enforced by every `make check`;
 - as part of `make check-full`;
-- and in CI: `.forgejo/workflows/ci.yml` runs `make check` — which includes
-  the SBOM freshness test — on every pull request and push to `main` (#751,
-  see [CHECKS.md](CHECKS.md#continuous-integration)).
+- and in CI: `.forgejo/workflows/ci.yml` runs `make check-no-coverage` on a
+  `v*` tag (#790/#796/#797) — the SBOM freshness test lives in the suite, so it
+  runs there too. Note the two shifts since #751: this is a release gate, not a
+  per-PR one, so the thing that actually stops a stale SBOM reaching `main` is
+  the committer's local `make check` (see
+  [CHECKS.md](CHECKS.md#continuous-integration)).
 
 So a dependency change that forgets to refresh the SBOM fails `make check`.
 

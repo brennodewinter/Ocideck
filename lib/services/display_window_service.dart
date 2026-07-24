@@ -380,6 +380,25 @@ class DisplayWindowService {
   }
 }
 
+/// De index van de "N van totaal"-regel die [SlideDisplayWindowX] achteraan de
+/// tabel hangt, of null als die er niet is.
+///
+/// Een Markdown-tabel kent geen samengevoegde cellen, dus het bijschrift parkeert
+/// in de eerste cel van een verder lege slotrij. Bij het tekenen moet het daar
+/// weer uit: bleef het staan, dan telde het als inhoud van die ene kolom — en
+/// werd de smalste kolom (meestal "#", met enkel rangnummers) een kwart slide
+/// breed, terwijl het bijschrift zelf in een doosje van één kolom stond te lezen
+/// als data.
+int? viewLimitCaptionRowIndex(Slide slide, List<List<String>> rows) {
+  final spec = slide.viewLimit;
+  if (spec == null || !spec.isActive || !spec.showCount) return null;
+  if (rows.length < 2) return null;
+  final last = rows.last;
+  if (last.isEmpty || last.first.trim().isEmpty) return null;
+  if (last.skip(1).any((cell) => cell.trim().isNotEmpty)) return null;
+  return rows.length - 1;
+}
+
 /// Applies the slide's [DisplayWindowSpec] without touching the stored slide.
 ///
 /// Callers get a new [Slide] whose `bullets`, `tableRows` or chart

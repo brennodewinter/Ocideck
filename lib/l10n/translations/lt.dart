@@ -1781,6 +1781,29 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Nu importeren': 'Importuoti dabar',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'Apžvalga paruošta naujoje kortelėje.',
+  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
+      'Importas skaito rinkmenas iš disko ir veikia tik darbalaukio versijoje.',
+  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
+      'Medžiagos įtraukimas iš kitų sistemų. Šiandien tai „OpenKAT“: aplankas su ataskaitomis (JSON) tampa viena vadovybės apžvalga — sistemos, radiniai pagal pavojingumą, ilgiausiai neuždaryti punktai ir tendencija per iš eilės einančius matavimus. Kur rinkmenos yra, nustatoma kiekvienai sistemai skiltyje Integracijos.',
+  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
+      'Perskaito aplanką su „OpenKAT“ ataskaitomis (JSON) ir sukuria iš jų vieną vadovybės apžvalgą: sistemas, radinius pagal pavojingumą, ilgiausiai neuždarytus punktus ir tendenciją per iš eilės einančius matavimus. Tas pats veiksmas su esama „OpenKAT“ pateiktimi ją atnaujina ir palieka jūsų pačių skaidres vietoje.',
+  'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
+      'Importas tik skaito; šiame aplanke niekas nekeičiama ir niekur nesiunčiama. Rinkmenos, kurios nėra „OpenKAT“ ataskaitos, praleidžiamos ir paminimos importo ataskaitoje.',
+  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
+      'Nurodykite aplanką, kuriame yra jūsų „OpenKAT“ ataskaitos (JSON). Importas perskaito tą aplanką ir sukuria iš jo vieną vadovybės apžvalgą; kai aplankas nustatytas čia, jo nereikia rinktis kaskart.',
+  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
+      '„OpenKAT“ importas skaito aplanką iš disko ir veikia tik darbalaukio versijoje.',
+  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
+      'Ataskaitų aplankas dar nenurodytas, todėl importas jo klausia kaskart.',
+  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Ataskaitų aplankas jau nustatytas, todėl įėjimo taškas lieka pasiekiamas ir esamą „OpenKAT“ pateiktį vis dar galima atnaujinti.',
+  'Integraties': 'Integracijos',
+  'Naar Integraties': 'Į Integracijas',
+  'Map kiezen…': 'Pasirinkti aplanką…',
+  'Map wissen': 'Išvalyti aplanką',
   'OpenKAT-rapportages importeren…': 'Importuoti OpenKAT ataskaitas…',
   'Map met OpenKAT-rapportages kiezen':
       'Pasirinkti aplanką su OpenKAT ataskaitomis',

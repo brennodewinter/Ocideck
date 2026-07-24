@@ -442,10 +442,18 @@ List<String> _fixedDelayInRunAsync() {
 /// `disk_traces.dart` (zie #521): de regel bewaakt netwerkverkeer buiten
 /// NetGuard om, en `chmod` is niet netwerkvaardig.
 ///
-/// Dit telt bewust in `check_conventions` en niet in semgrep zelf: `make sast`
-/// draait niet in `make check` (het vraagt een externe binary), dus een
-/// onderdrukking zou anders alleen zichtbaar zijn voor wie semgrep toevallig
-/// geïnstalleerd heeft.
+/// Dit telt bewust in `check_conventions` en niet in semgrep zelf. De reden
+/// dáárvoor is sinds #778 een andere dan er stond. Het argument was dat `make
+/// sast` nergens automatisch draaide, dus dat een onderdrukking alleen
+/// zichtbaar zou zijn voor wie semgrep toevallig geïnstalleerd had; dat is niet
+/// meer zo, want `scans.yml` draait semgrep bij elke PR en elke push.
+///
+/// Wat overblijft is het echte argument, en dat is sterker: semgrep telt zijn
+/// eigen onderdrukkingen niet. Een `// nosemgrep` maakt de bevinding weg én
+/// haalt hem uit het beeld — een repo die er twintig verzamelt heeft een
+/// groene `make sast` en geen enkel signaal daarover. Deze ratchet is het
+/// signaal, en hij hoort daarom in de poort die bij élke `make check` draait,
+/// niet in de scanner die hij bewaakt.
 const int nosemgrepBaseline = 1;
 
 final _nosemgrep = RegExp(r'//\s*nosemgrep\b');

@@ -4,6 +4,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/display_window_spec.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
@@ -113,6 +114,37 @@ void main() {
           ['Functie', 'Gratis', 'Pro'],
           ['Export', 'Nee', 'Ja'],
           ['Support', 'E-mail', '24/7'],
+        ],
+      ),
+    );
+  });
+
+  // De vorm waarin de kolomverdeling omviel: één brede tekstkolom naast vier
+  // korte, met koppen die langer zijn dan hun inhoud, plus het bijschrift van
+  // een weergavelimiet. Op tekenaantal verdeeld brak elke korte kop letter voor
+  // letter af en werd de rangnummerkolom een kwart slide breed.
+  testWidgets('table with narrow headers and a view limit', (tester) async {
+    await _match(
+      tester,
+      'table_narrow_headers',
+      Slide.create(SlideType.table).copyWith(
+        title: 'Top-5 issues',
+        viewLimit: const DisplayWindowSpec(limit: 5),
+        tableRows: const [
+          ['#', 'Finding', 'Ernst', 'Systemen', 'Orgs'],
+          ['1', 'SSL/TLS Certificate expired', 'critical', '6', '1'],
+          ['2', 'Unencrypted website traffic', 'high', '31', '1'],
+          ['3', 'Open database port(s) detected', 'high', '3', '1'],
+          ['4', 'Uncommon open port(s) detected', 'medium', '34', '1'],
+          [
+            '5',
+            'Missing Content Security Policy (CSP) header',
+            'medium',
+            '31',
+            '3',
+          ],
+          ['6', 'DNSSEC not enabled', 'medium', '16', '3'],
+          ['7', 'No DMARC records found', 'medium', '13', '2'],
         ],
       ),
     );

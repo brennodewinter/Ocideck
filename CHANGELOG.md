@@ -87,7 +87,266 @@ that before deciding whether this alpha fits what you are doing.
 
 *Renamed 2026-07-22.* Everything below was under a single `## [Unreleased]`
 heading: 52,000 words in 455 entries, averaging 114 words each, with the
-`### Fixed
+`### Added` / `### Fixed` / `### Changed` subheadings repeating nine times over.
+That is not a Keep a Changelog release section; it is a reverse-chronological
+development diary, and it is a good one — the entries explain *why*, which is
+rare. It stays, in full, under a heading that says what it is. The release
+summary is above, so a reader looking for "what is in 0.1.0" no longer has to
+read a book to find out.
+
+### Changed
+- **De scanners in de GitHub-definitie zijn gepind en geverifieerd; het
+  installatiescript van een branch-tip is weg.** `.github/workflows/ci.yml`
+  haalde gitleaks en trufflehog binnen door een script vanaf `master`/`main`
+  door `sh` te pijpen, en semgrep zonder versie. Twee dingen tegelijk mis:
+  willekeurige code van een bewegende aanwijzer, ongeverifieerd uitgevoerd, én
+  scanners die zichzelf bijwerken — waardoor "groen" stilletjes iets anders gaat
+  betekenen dan de week ervoor. Precies het anti-patroon dat #778 al benoemde,
+  in dezelfde alinea waar staat dat wie de binaries zelf trekt ze moet
+  verifiëren zoals de Flutter-stap dat doet.
+
+  Ze komen nu van een gepinde release, sha256-gecontroleerd tegen het
+  gepubliceerde manifest, in dezelfde vorm die de Flutter-tarball in
+  `linux-gate.yml` al had; semgrep gepind in een venv, omdat systeem-pip op
+  Ubuntu 24.04 afgeschermd is (PEP 668). Drie stappen in plaats van één, zodat de
+  log zegt wélke scanner niet binnenkwam. Bij dezelfde stappen bleek de checkout
+  één commit diep te zijn terwijl twee van de vier passes in `make check-secrets`
+  over de histórie gaan — `fetch-depth: 0` erbij, anders melden die groen op
+  bijna niets, en het geval waarvoor ze bestaan is nu juist het geheim dat drie
+  commits terug is toegevoegd en daarna "verwijderd".
+
+  **Dit bestand draait nergens**, en dat verandert hier niet: Forgejo leest
+  `.forgejo/workflows/` en dat schaduwt `.github/workflows/`. Er was dus ook geen
+  buildmachine die de ongepinde code uitvoerde, en er is geen run die de
+  wijziging bewijst — getoetst met een YAML-parse, shellcheck over de
+  run-blokken, en door de stappen naast `.forgejo/workflows/scans.yml` te leggen.
+  Het moest toch: dit is het bestand dat een bijdrager als eerste vindt (#592),
+  en op de dag dat de spiegel er komt draait het wél.
+
+  Eén ding is onderweg nagemeten en bleek niet te kloppen: dat
+  `sha256sum -c -` bij een lege treffer stil met exit 0 doorloopt. GNU coreutils
+  9.5 eindigt op 1, met "no properly formatted checksum lines found". De
+  `test -n "$SHA"` blijft staan om de faalreden leesbaar te houden — niet als
+  vangnet, want dat zit er al.
+
+### Added
+- **De geheimen- en SAST-scan draaien nu automatisch, en wel vóór de merge.**
+  `check-secrets` (gitleaks + trufflehog, werkboom én volledige historie) en
+  `sast` (semgrep) zaten alleen in `check-full`, en dat draait nergens
+  automatisch — of er ooit gescand was, hing af van wie het lokaal toevallig
+  deed. Dit was een gat in de controle en geen bekend lek: beide draaiden
+  handmatig schoon op main.
+
+  De rechtvaardiging voor dat gat stond opgeschreven bij `nosemgrepBaseline`
+  ("het vraagt een externe binary") en ging over de machine van een bijdrager;
+  in een container bepaal je zelf wat erin zit, dus die verviel toen de runner
+  er kwam. Die notitie is meteen bijgewerkt naar het argument dat wél overeind
+  blijft: semgrep telt zijn eigen onderdrukkingen niet, dus de ratchet hoort in
+  de poort die bij élke `make check` draait.
+
+  Het staat in een eigen `scans.yml` en niet als tweede job in `ci.yml`, want
+  `on:` geldt per workflow en `ci.yml` vuurt sinds #790 op een `v*`-tag — een
+  job daar zou pas scannen als het geheim al op main stond mét een tag eromheen.
+  Deze vuurt daarom op elke PR en elke push naar main: de reden voor #790 was de
+  klok (22 minuten per PR), en deze twee doen 17 en 2 seconden. Voor een geheim
+  is het moment ook niet inwisselbaar — vóór de merge is het een wijziging, erna
+  staat het in de historie en is intrekken de enige echte remedie. Draait op de
+  Linux-runner en niet op de Mac: die is sinds #797 zowel de uitbrengpoort als
+  de werkmachine van de committer, en dit is de enige workflow die bij élke push
+  vuurt.
+
+  De commando's zijn de Makefile-doelen zelf, niet overgetypte regels, zodat
+  lokaal en CI niet uit elkaar gaan lopen. Twee dingen dragen het gewicht:
+  `fetch-depth: 0`, want `actions/checkout` kloont één commit diep en dan kijkt
+  een historie-scan naar bijna niets — gemeten in plaats van beweerd: op een
+  repo met een gecommit-en-daarna-verwijderd geheim geeft de volledige kloon
+  exit 1 (gitleaks) en 183 (trufflehog), en de ondiepe kloon van diezelfde repo
+  twee keer 0. En de drie scanners staan op een gepinde versie met een tegen het
+  manifest geverifieerde download; de `test -n` daarin houdt de faalreden
+  leesbaar. *(Hier stond eerst dat `grep … | sha256sum -c -` stil slaagt bij een
+  lege treffer; dat is op 24-07-2026 nagemeten en klopt niet op GNU coreutils —
+  zie de ingang bovenaan, #800.)*
+
+  Tegenproef gedraaid, want een scan die niets ziet lijkt precies op een schone
+  repo: met een willekeurig gegenereerd AWS-vormig sleutelpaar in de werkboom
+  valt `make check-secrets` om en noemt hij de vondst, en met datzelfde paar
+  alleen in de historie vallen beide historie-scans alsnog om. (#778)
+
+### Changed
+- **Het OpenKAT-managementoverzicht is een verhaal geworden in plaats van een
+  stapel tabellen.** De import gebruikte vier diavormen — titel, bullets, tabel
+  en één staafdiagram — terwijl het formaat scorecards, lijngrafieken en
+  warmtekaarten heeft. Erger: de aggregator rékende al dingen uit die nooit een
+  dia haalden. De conclusiezinnen ("42 meer medium findings") bestonden al en
+  werden weggegooid op het label na, dat als grafiektitel eindigde. De
+  aanbeveling per findingtype werd geparseerd en bewaard, en nergens getoond.
+  Het model bewaart de hele reeks momentopnames, maar de dia keek alleen naar
+  de laatste twee.
+
+  Wat er nu staat: de kerncijfers als scorecard, met elke waarde naast wat hij
+  was en het verschil in kleur (dat rekent het diatype zelf uit — geen
+  zelfgemaakt "+42" dat naast de getallen kan gaan staan); het verloop als lijn
+  door de tijd over álle meetmomenten, ook per organisatie; een warmtekaart met
+  een rij per organisatie waar de scorecard bij vijf regels ophoudt; de
+  conclusiezinnen vooraan als kernboodschap; de adviezen van OpenKAT onder
+  tussenkoppen; en de controls-dekking als liggende staven zodra er cijfers mét
+  noemer zijn.
+
+  Twee regels die het bij elkaar houden: elke ernstband heeft een vaste kleur,
+  zodat critical op elke dia dezelfde kleur heeft, en een dia die niets te
+  zeggen heeft komt er niet. Geen kernboodschap bij een eerste meting, geen
+  warmtekaart bij één organisatie, geen adviesdia als de bron geen advies geeft,
+  geen lijn van één punt. En niets erbij verzonnen: geen cockpitmeters met een
+  bedachte totaalscore, geen streefbanden onder de controls-grafiek — welk
+  percentage goed genoeg is staat niet in de meting.
+
+  De diavormen rijden op wat er al was; het bestandsformaat is niet geraakt.
+
+### Changed
+- **De uitbrengpoort draait op de Mac-runner; de Linux-poort blijft op afroep.**
+  Nagemeten was de wachttijd niet de stappen maar de machine: dezelfde poort
+  deed 46 minuten in een container op de server tegen 2,5 minuut op de Mac —
+  vier fysieke kernen van een Xeon uit 2018 tegen een M5 Max. Toolchaincache,
+  dekking eruit en capaciteit omlaag haalden er samen een kwartier af; deze stap
+  haalt er een orde van grootte af.
+
+  Host-modus: de job draait direct op de Mac met de toolchain die daar staat, dus
+  er valt niets te installeren en niets te cachen. `check-toolchain` draait
+  onverkort mee en eist ook daar kanaal `stable`, officiële herkomst en
+  gelijkheid met de pin — "het is mijn eigen machine" is geen controle.
+
+  Dit kost twee dingen, en allebei staan ze in de workflow zelf. **De suite
+  draait nergens meer standaard op Linux.** Dat is een echt gat: `git` 2.43 op
+  Ubuntu 24.04 kent `--end-of-options` niet, en zulke verschillen vindt geen
+  enkele Mac. De Linux-poort is daarom niet weggegooid maar verhuisd naar
+  `linux-gate.yml`, op afroep — te draaien vóór een release en bij wijzigingen
+  aan paden, subprocessen of `git`-aanroepen. Wie hem nooit indrukt, draait hem
+  nooit; dat is de afweging, geen ongeluk. En **de uitbrengpoort hangt nu aan
+  één fysieke machine van één persoon.** Staat die Mac uit, dan wacht de run:
+  de tag landt wel, de poort komt later. Te verkiezen boven een poort die
+  niemand afwacht, maar geen serverklasse-opstelling.
+
+- **De uitbrengpoort in CI meet geen dekking meer, en de runner draait nog één
+  taak tegelijk.** Een poortrun op de eigen runner duurde 46 minuten tegen 2,5
+  lokaal. Nagemeten waar die tijd zat, en het antwoord was niet waar het eerst
+  gezocht werd.
+
+  De machine is de factor, niet de stappen: een Xeon D-2123IT uit 2018 met vier
+  fysieke kernen, 3,8× trager per kern dan de bouwmachine (0,95 s tegen 0,25 s
+  op dezelfde rekenproef) en drie keer minder kernen. Samen ≈ 11×, precies de
+  waargenomen factor. Schijf en opslagstuurprogramma zijn nagekeken en vrijuit:
+  `overlayfs`, ~106 MB/s sequentieel. Het werk is CPU-gebonden.
+
+  Van die 46 minuten ging **33 min 49 s naar één fase**: `flutter test
+  --coverage`. Die instrumentatie houdt per test een VM-Service-verbinding open
+  tot het eind van de run en parallelliseert daarmee het slechtst van alles wat
+  we draaien. De tagpoort draait daarom `make check-no-coverage` — dezelfde
+  poort, dezelfde volledige testsuite in willekeurige volgorde, alleen zonder
+  die instrumentatie. De statische poorten staan in één gedeelde lijst, zodat
+  een nieuwe poort niet aan één van de twee doelen kan ontbreken.
+
+  Wat dat kost, hardop: de dekkingsvloer en de per-bestandsvloer draaien in CI
+  niet meer. Ze zijn onveranderd en onverkort verplicht in `make check`, op de
+  machine van de committer, vóór main — een verplaatsing, geen versoepeling, en
+  ze houdt alleen omdat de samenvoegpoort daar toch al lag.
+
+  En eerlijk over de opbrengst: die 74% is niet de winst. De suite moet nog
+  steeds draaien. Lokaal gemeten scheelt het weglaten van de instrumentatie 24%
+  wandklok en 39% CPU (112 s / 595 s tegen 147 s / 971 s); op vier kernen zit de
+  run tegen zijn CPU aan, dus verwacht ~13 minuten van de 46. Daarnaast staat de
+  runnercapaciteit nu op 1: drie gates tegelijk op vier kernen was wat de
+  wachttijd verergerde én de bron van de flakes onder last.
+
+### Fixed
+- **Vier slidetypes vielen om als hun preview op een ontaarde breedte werd
+  gemeten (#782).** Flutter meet een widget vaker dan hij hem tekent: een
+  inklappend paneel, een rij zonder resterende ruimte, een animatie die bij nul
+  begint. Alle drie leveren ze een breedte waarop niets valt op te maken — en
+  een preview hoort dan niets te tekenen, niet te ontploffen.
+
+  Drie oorzaken, in dezelfde familie als #714 en geen van drieën met een melding
+  die naar de dia wees. De checklist- en scopematrixpreview leidden de dikte van
+  hun voortgangsbalk van de breedte af, en `LinearProgressIndicator` eist er een
+  boven nul. De tijdlijn deelde door een maat die van de breedte is afgeleid —
+  op nul is dat Infinity of NaN, en het afronden daarvan gooit — en liet daarna
+  de clamp van de verbindingslijn kruisen op een kaart die smaller is dan haar
+  eigen marge. De cockpit trok de randdikte van de hoekstraal af, en die dikte
+  heeft een vaste pixel als vloer: op een korte meter werd het verschil negatief
+  en dat weigert `RRect`.
+
+  Elke maat kreeg de ondergrens die hij mist. Boven die grens verandert er niets
+  aan de maatvoering van een echte dia; eronder is een haarlijn, één verdieping
+  of een scherpe hoek de juiste uitkomst.
+
+  Een gebruikerspad hiernaartoe is niet aangetoond — het venster heeft een
+  ondergrens en de panelen hebben hun eigen vloer. Dit is hardening met een
+  reproductie. De regressietoets loopt daarom naast de vier oorzaken ook alle 24
+  slidetypes langs op vier ontaarde breedtes, en scheidt daarbij "past niet" van
+  "valt om": een overloop van een paar pixels is bij die breedtes de juiste
+  uitkomst en blijft toegestaan.
+
+- **De OpenKAT-import toonde systemen die geen systemen waren, en tellingen die
+  elkaar tegenspraken.** Een uitdraai van drie organisaties meldde 295 findings
+  boven een ernstverdeling die er 218 verklaarde, en 89 getroffen systemen bij
+  45 systemen in totaal. In de tabellen stonden regels als
+  `internet|185.73.32.3|tcp|443|https|internet|underdark.nl`.
+
+  Twee oorzaken. De sleutelgrammatica telde op segmentpositie en kende maar vier
+  vormen, waardoor het netwerksegment bleef hangen, een `IPPort` letterlijk het
+  woord "internet" als systeem koos, en elk pad en elke HTTP-header van één
+  website als eigen systeem telde. Nu wordt op vórm gezocht — het laatste
+  segment dat als host leest — wat alle paden van een website samenvouwt en
+  bestand is tegen een samenstelling die de code nog niet kent.
+
+  Daarnaast kent OpenKAT meer ernstniveaus dan critical/high/medium/low. Die
+  vielen buiten elke uitsplitsing. Er is nu een restband die verschijnt zodra
+  hij gevuld is, en de kolommen van de systementabel tellen op tot het totaal.
+- **Een tabel vult nu ook de hoogte van de dia.** Een overzicht van vijf regels
+  bleef als strookje bovenin hangen met de onderste helft leeg: de celgrootte
+  kwam uit een dichtheidsformule met een plafond, en het inpassen kon alleen
+  krimpen, nooit groeien.
+
+  De letter groeit nu tot de tabel de beschikbare hoogte vult. Twee grenzen
+  houden dat eerlijk. Leesbaarheid: celtekst blijft bijtekst en wordt nooit
+  groter dan een opsommingsregel. En breedte: groeit de letter door, dan eisen
+  de kolommen samen meer minimumruimte dan de tabel breed is — precies de klem
+  waar de kolomondergrens hierboven voor bestaat — dus stopt de groei daarvóór.
+
+  Wat een korte tabel dan nog aan hoogte overhoudt, gaat naar de rijen zelf:
+  drie regels worden luchtige banden in plaats van een streepje met een gat
+  eronder. Begrensd op één em per zijde, zodat het luchtig blijft en niet
+  uitgerekt. Past het bij de kleinste letter nóg niet, dan houdt het op — dan
+  schaalt de dia als geheel terug, want onleesbaar klein maken lost niets op.
+
+  De kwaliteitscontrole moest mee. Die waarschuwde "celtekst staat op het
+  minimumformaat" op grond van een dichtheidsformule over rijen en kolommen, en
+  dat zei niets meer nu de tabel zijn letter uit de hoogte haalt: achttien
+  kolommen met losse tekens rendert ruim en kreeg toch de waarschuwing. Ze
+  draait nu dezelfde inpassing als de render, op een referentiedia.
+
+### Fixed
+- **Tabelkoppen liepen dwars over de tabellijnen heen.** Kolombreedtes werden
+  verdeeld op tekenaantal, zonder ondergrens. Een kop als "Systemen" telt vier
+  tekens minder dan "Finding" maar is breder, dus zo'n kolom kreeg minder ruimte
+  dan het woord nodig heeft: hij brak letter voor letter af tot een verticale
+  streep van één teken breed. En zakte de kolom onder haar eigen celmarge, dan
+  tekende de tekst buiten de cel — over de lijnen van de tabel heen.
+
+  Elke kolom krijgt nu eerst marge plus haar breedste ondeelbare kopwoord; pas
+  wat daarna overblijft wordt naar inhoud verdeeld. Meten en tekenen delen die
+  geometrie, dus de hoogtemeting blijft kloppen met wat er staat.
+
+  Datzelfde tekenaantal had een tweede slachtoffer: het "N van totaal"-bijschrift
+  dat een weergavelimiet achteraan de tabel hangt. Een Markdown-tabel kent geen
+  samengevoegde cellen, dus het bijschrift parkeerde in de eerste cel van een
+  verder lege slotrij — en telde daar mee als inhoud van kolom 0. Een kolom met
+  enkel rangnummers werd zo een kwart slide breed, terwijl het bijschrift zelf
+  in een doosje van één kolom stond te lezen als data. Het staat nu onder de
+  tabel, als losse regel, waar een bijschrift hoort.
+
+  Zichtbaar op een OpenKAT-managementoverzicht: vijf regels bevindingen naast
+  vier smalle kolommen is precies de vorm waarin dit misgaat.
+
 - **Een presentatie zonder afbeeldingen liet de PDF-export omvallen (#714).** De
   melding was `Invalid argument(s): 1`, en dat was letterlijker dan het leek:
   `(done + 1).clamp(1, total)` in de voortgangsregel gooit `ArgumentError(1)`
@@ -113,12 +372,46 @@ heading: 52,000 words in 455 entries, averaging 114 words each, with the
   De snackbar zegt nu dat — in alle talen — en een regressietest bewaakt dat de
   oude belofte niet via een l10n-merge terugkeert.
 
-### Added` / `### Fixed` / `### Changed` subheadings repeating nine times over.
-That is not a Keep a Changelog release section; it is a reverse-chronological
-development diary, and it is a good one — the entries explain *why*, which is
-rare. It stays, in full, under a heading that says what it is. The release
-summary is above, so a reader looking for "what is in 0.1.0" no longer has to
-read a book to find out.
+### Changed
+- **De poort in CI draait voortaan op een tag, niet op elke PR.** Een run kostte
+  22 minuten op de eigen runner tegen 2,5 minuut lokaal. Dat werkte niet: de
+  wachttijd per PR woog niet op tegen wat hij toevoegde, want `make check` is
+  dezelfde poort en draait al vóór elke push.
+
+  De verschuiving die daarbij hoort staat er hardop bij, in de workflow zelf en
+  in CONTRIBUTING, BUILD, CHECKS en de README: **CI is geen samenvoegpoort meer
+  maar een uitbrengpoort.** Valt hij op een tag om, dan staat het probleem al
+  op main, en de borging vóór main is volledig `make check` op de machine van
+  de committer. Die documenten beloofden tot nu toe het tegendeel ("on every
+  pull request"), en een belofte die niet meer waar is, is erger dan geen
+  belofte. `workflow_dispatch` blijft, zodat een tak alsnog door de poort kan
+  zonder een tag te hoeven zetten.
+
+  Voor de goede orde, want de aanname lag eerst anders: op een PR draaide al
+  géén enkele desktopbuild. Die 22 minuten waren voor honderd procent de poort.
+
+- **De toolchain en de pub-pakketten worden gecachet.** Elke run haalde dezelfde
+  Flutter-tarball opnieuw op, controleerde de sha256 en pakte hem uit met `xz` —
+  werk dat per definitie hetzelfde resultaat geeft, want de sleutel is de
+  gepinde versie. Nu de poort zeldzamer draait is dat minder vaak winst, maar de
+  stap is weg.
+
+  Wat níet is ingeleverd: `check-toolchain` draait binnen `make check` op de
+  herstelde boom en eist onverkort kanaal `stable`, de officiële herkomst en
+  gelijkheid met de pin — dezelfde poort die destijds het cirruslabs-image
+  afkeurde. De cache vervangt geen controle, hij vervangt een download. De
+  eerlijke grens erbij: die cache wordt geschreven door onze eigen jobs op onze
+  eigen runner, dus wie de runner beheert beheert de cache — dezelfde
+  vertrouwensgrens als de runner zelf, niet een nieuwe. Beide cachestappen staan
+  op `continue-on-error`.
+
+- **De desktopbuilds op de forge draaien alleen nog op afroep.** Bij elke push
+  naar main bouwde de Linux-job 17,5 minuten runnertijd weg, terwijl
+  `release.yml` op de GitHub-spiegel bij elke `v*`-tag al Linux, macOS én
+  Windows bouwt. Twee keer hetzelfde bouwen levert geen extra zekerheid op — de
+  poort houdt een regressie tegen, het inpakken achteraf niet. Weggooien was te
+  ver: een bundel op afroep zonder een tag te hoeven zetten is wél wat waard,
+  dus `workflow_dispatch` in plaats van niets.
 
 ### Added
 - **Eén tag levert nu vier platformen, een release en een live webversie.** Tot
@@ -161,6 +454,77 @@ read a book to find out.
   netheid: dat blok is de plek waar de herkomst van de toolchain wordt
   vastgesteld, en een sha256-controle die je op vier plekken onderhoudt is er
   een die op één plek verwatert.
+- **De OpenKAT-import is te starten waar je hem zoekt: naast de rapportagemap
+  en op het openscherm.** Het invoerpunt zat alleen in het ⋮-menu. Wie in
+  *Integraties* net een map had aangewezen, moest daarna het venster sluiten en
+  dat menu-item opzoeken om te zien of het werkte — precies de stap waarop
+  iemand denkt dat er niets gebeurd is.
+
+  In *Integraties* staat nu **Nu importeren** onder de map: uitgeschakeld
+  zolang er geen map is (met de reden in de tooltip), en het verslag komt
+  eronder te staan — geladen, overgeslagen, en waar het overzicht gebleven is.
+  Niet als snackbar: achter een modale dialoog leest die niemand. Het venster
+  blijft ook bewust open staan, want zelf sluiten zou de nog niet opgeslagen
+  instellingen van de andere tabbladen weggooien.
+
+  Op het openscherm staat dezelfde ingang als in het menu, achter dezelfde
+  poort (desktop, en de module aan of er is al een map). Beginnen met een
+  OpenKAT-uitdraai is beginnen, net zo goed als beginnen met een sjabloon — en
+  juist wie hiermee werkt komt het vaakst op dít scherm terug om het overzicht
+  te verversen. Zonder ingestelde map vraagt de actie zelf om een map.
+
+  Daaronder: de import geeft zijn uitkomst nu terug in plaats van hem alleen
+  te melden, zodat een aanroeper met `announce: false` kan zwijgen en het zelf
+  vertelt. De zin bij een uitkomst staat in één functie buiten de
+  platformhelften — twee bijna gelijke teksten zijn precies hoe ze uit elkaar
+  gaan lopen.
+
+- **OpenKAT is een Uitbreiding geworden, met een vaste rapportagemap — en de
+  import leest eindelijk het formaat dat OpenKAT werkelijk exporteert.** Twee
+  dingen tegelijk, omdat het één zonder het ander niets oplevert.
+
+  De importlaag was geschreven zonder een echte export bij de hand. Hij zocht
+  `systems` en `findings` náást elkaar op het hoogste niveau; zo ziet geen
+  enkele OpenKAT-export eruit. Getoetst tegen zes echte exports kwam er dus een
+  leeg deck uit: de bestanden werden wél "herkend", maar leverden nul systemen
+  en nul bevindingen. Elke export heeft één envelop —
+  `{organization_code, organization_name, organization_tags, data}` — en het
+  verschil zit uitsluitend in `data`: een vlakke samenvatting van de hele
+  organisatie, of een export gesleuteld op rapporttype en daarbinnen op object.
+  Beide worden nu gelezen.
+
+  Wat er onderweg aan het licht kwam, en waarom het meer was dan een
+  sleutelnaam:
+
+  - **De bevindingen zitten in de deelrapporten**, niet in `findings-report` —
+    die is in echte exports leeg. Vier van de zes bestanden hadden anders nul
+    bevindingen opgeleverd terwijl er 284 in zaten.
+  - **De noemer ging verloren.** De adapter gaf alleen het aantal conforme
+    systemen terug, waardoor `OpenKatControlScore.ratio` per definitie null was
+    en de aggregator geen enkele trend kón berekenen. OpenKAT levert de noemer
+    gewoon mee.
+  - **Herimport was niet reproduceerbaar.** Het organisatierapport draagt zelf
+    geen datum en viel terug op `DateTime.now()`; elke herimport gaf een nieuwe
+    momentopname, en de trendlijn werd een grafiek van het aantal keren dat je
+    op Importeren drukte. Nu: het stempel uit de export, anders dat uit de
+    bestandsnaam (`<organisatie>_20260319200604.json` — veertien cijfers zonder
+    scheidingstekens, precies de vorm die de oude uitdrukking liet liggen),
+    anders de wijzigingsdatum van het bestand.
+
+  En de plek waar het hoort. Wie een presentatie komt maken heeft niets aan een
+  koppeling met een scansysteem en hoort er geen menu-item van te zien. Het is
+  daarom de vierde optionele module geworden — **Importeren**, standaard uit,
+  één schakelaar voor élke bron waaruit OciDeck materiaal binnenhaalt (besluit
+  B1 van #772; presentatie-import komt er straks onder). Wat er als inhoud
+  telt staat in één lijst, `importerContentProviders`, zodat een tweede
+  importeur zich daar meldt en niet stil buiten de reveal-regel valt. Erbij
+  hoort een nieuw tabblad **Integraties** met een sectie per systeem — OpenKAT
+  voorop, mét zijn logo — waar één keer de exportmap wordt aangewezen — een OpenKAT-overzicht wordt telkens opnieuw
+  bijgewerkt uit dezelfde map, en dat elke keer aanwijzen is werk dat de app
+  zelf kan onthouden. De vaste regel van dit project geldt onverkort: staat er
+  een map ingesteld, dan blijft het invoerpunt bereikbaar ook met de schakelaar
+  uit, zodat een bestaand OpenKAT-deck bij te werken blijft.
+
 - **Een GitHub-spiegel bouwt nu de Windows-artifacts.** De forge blijft de
   plek voor ontwikkeling, issues en PR's; een automatische push-mirror houdt
   github.com/brennodewinter/Ocideck bij, en dáár draaien de

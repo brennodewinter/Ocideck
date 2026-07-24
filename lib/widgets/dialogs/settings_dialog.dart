@@ -38,6 +38,7 @@ import '../../state/consent_provider.dart';
 import '../../state/info_safety_provider.dart';
 import '../../state/module_registry.dart';
 import '../../state/online_storage_provider.dart';
+import '../../state/import_module_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/brand_logo.dart';
 import '../../utils/error_snackbar.dart';
@@ -56,6 +57,8 @@ import 'hex_color_dialog.dart';
 import 'settings/ai_form.dart';
 import 'settings/ai_module_card.dart';
 import 'settings/online_storage_module_card.dart';
+import 'settings/openkat_integration_panel.dart';
+import 'settings/import_module_card.dart';
 import 'settings/appearance_legibility.dart';
 import 'settings/git_form.dart';
 import 'settings/git_panel.dart';
@@ -767,6 +770,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           SettingsSection.ai => _aiTab(),
           SettingsSection.checklists => _checklistsTab(),
           SettingsSection.modules => _modulesTab(),
+          SettingsSection.integrations => const OpenKatIntegrationPanel(),
           SettingsSection.documentation => _documentationTab(),
           SettingsSection.about => _aboutTab(),
         }),

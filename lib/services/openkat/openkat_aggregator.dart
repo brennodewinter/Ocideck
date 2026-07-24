@@ -1,5 +1,41 @@
 import '../../models/openkat/openkat_models.dart';
 
+/// De ernstbanden die een managementrapportage uitsplit.
+const List<String> openKatSeverityBands = ['critical', 'high', 'medium', 'low'];
+
+/// Waar elk ander niveau in belandt — OpenKAT kent er meer dan deze vier
+/// (`recommendation`, `unknown`, en soms een leeg veld).
+///
+/// Zonder deze band verdween het verschil: een uitdraai met 295 findings toonde
+/// een uitsplitsing die er 218 verklaarde, en niets op de dia wees erop dat de
+/// overige 77 bestonden. Een uitsplitsing die het totaal niet verklaart maakt de
+/// hele rapportage ongeloofwaardig, dus telt alles mee — ook wat wij niet kennen.
+const String openKatOtherSeverity = 'other';
+
+/// De banden in weergavevolgorde, met de restcategorie achteraan.
+const List<String> openKatSeverityOrder = [
+  ...openKatSeverityBands,
+  openKatOtherSeverity,
+];
+
+/// De band waar [severity] onder valt; alles buiten [openKatSeverityBands]
+/// telt als [openKatOtherSeverity].
+String openKatSeverityBand(String severity) =>
+    openKatSeverityBands.contains(severity) ? severity : openKatOtherSeverity;
+
+/// Findings geteld per band, met elke band aanwezig (ook op nul) zodat een
+/// grafiekas en een tabelkolom niet per momentopname van vorm wisselen.
+Map<String, int> openKatSeverityCounts(Iterable<OpenKatFinding> findings) {
+  final counts = <String, int>{
+    for (final band in openKatSeverityOrder) band: 0,
+  };
+  for (final finding in findings) {
+    final band = openKatSeverityBand(finding.severity);
+    counts[band] = counts[band]! + 1;
+  }
+  return counts;
+}
+
 /// Aggregates OpenKAT snapshots into management metrics and ranked lists.
 class OpenKatAggregator {
   const OpenKatAggregator();
@@ -36,15 +72,7 @@ class OpenKatAggregator {
     final findings = snapshots.expand((s) => s.findings).toList();
     final systems = snapshots.expand((s) => s.systems).toSet().toList();
 
-    final severityCounts = <String, int>{
-      'critical': 0,
-      'high': 0,
-      'medium': 0,
-      'low': 0,
-    };
-    for (final f in findings) {
-      severityCounts[f.severity] = (severityCounts[f.severity] ?? 0) + 1;
-    }
+    final severityCounts = openKatSeverityCounts(findings);
 
     final findingTypes = findings.map((f) => f.findingTypeId).toSet();
     final affectedSystems = findings
@@ -186,33 +214,37 @@ class OpenKatAggregator {
     return limit == null ? sorted : sorted.take(limit).toList();
   }
 
-  List<OpenKatFinding> longestOpenFindings(
+  /// De findings die het langst openstaan, oudste eerst.
+  ///
+  /// Elke finding komt terug mét de rapportagedatum van de meting waarin hij
+  /// staat, zodat "hoe lang staat dit al open" tegen dát moment te rekenen is
+  /// en niet tegen de klok van vandaag: een deck dat je over een maand opnieuw
+  /// opent moet dezelfde getallen tonen als toen het gemaakt werd.
+  List<OpenKatOpenFinding> longestOpenFindings(
     List<OpenKatOrganization> organizations, {
     int? limit,
   }) {
-    final open = <OpenKatFinding>[];
+    final open = <OpenKatOpenFinding>[];
     for (final org in organizations) {
       final current = org.current;
       if (current == null) continue;
-      open.addAll(
-        current.findings.where((f) => f.openedAt != null).toList()
-          ..sort((a, b) {
-            final ac = a.openedAt!;
-            final bc = b.openedAt!;
-            return ac.compareTo(bc);
-          }),
-      );
+      for (final finding in current.findings) {
+        if (finding.openedAt == null) continue;
+        open.add(
+          OpenKatOpenFinding(finding: finding, reportDate: current.reportDate),
+        );
+      }
     }
     open.sort((a, b) {
-      final ad = a.openedAt!;
-      final bd = b.openedAt!;
-      var cmp = ad.compareTo(bd);
+      var cmp = a.finding.openedAt!.compareTo(b.finding.openedAt!);
       if (cmp != 0) return cmp;
-      cmp = _severityRank(a.severity).compareTo(_severityRank(b.severity));
+      cmp = _severityRank(
+        a.finding.severity,
+      ).compareTo(_severityRank(b.finding.severity));
       if (cmp != 0) return cmp;
-      cmp = (a.systemId ?? '').compareTo(b.systemId ?? '');
+      cmp = (a.finding.systemId ?? '').compareTo(b.finding.systemId ?? '');
       if (cmp != 0) return cmp;
-      return a.findingTypeId.compareTo(b.findingTypeId);
+      return a.finding.findingTypeId.compareTo(b.finding.findingTypeId);
     });
     return open.take(limit ?? 1 << 30).toList();
   }
@@ -232,6 +264,82 @@ class OpenKatAggregator {
     }
     final sorted = bySystem.values.toList()..sort(_systemStatsComparator);
     return sorted.take(limit ?? 1 << 30).toList();
+  }
+
+  /// De stand op elk moment waarop er gemeten is, oplopend in de tijd.
+  ///
+  /// Organisaties meten niet op dezelfde dag, dus telt op elke datum de
+  /// **laatst bekende** meting per organisatie mee. Wie op dat moment nog niet
+  /// gemeten had telt niet mee — nul invullen zou een daling tonen die niemand
+  /// heeft waargenomen, en dat is precies het soort verzonnen conclusie dat
+  /// deze import niet hoort te trekken.
+  ///
+  /// Het alternatief — alleen de datums waarop iederéén gemeten heeft — is
+  /// verworpen: dat laat de grafiek in de praktijk leeg.
+  List<OpenKatHistoryPoint> history(List<OpenKatOrganization> organizations) {
+    final dates = <DateTime>{
+      for (final org in organizations)
+        for (final snapshot in org.snapshots) snapshot.reportDate,
+    }.toList()..sort();
+
+    return [
+      for (final date in dates)
+        OpenKatHistoryPoint(
+          date: date,
+          severityCounts: openKatSeverityCounts([
+            for (final org in organizations)
+              ...?_latestUpTo(org, date)?.findings,
+          ]),
+        ),
+    ];
+  }
+
+  /// De organisaties naast elkaar: hoeveel findings nu, en hoeveel bij de
+  /// vorige meting. Grootste bewegers eerst, want dát is waar een
+  /// managementoverzicht over gaat; wie geen eerdere meting heeft draagt geen
+  /// verschil en sluit de rij.
+  List<OpenKatOrganizationComparison> organizationComparison(
+    List<OpenKatOrganization> organizations,
+  ) {
+    final out = <OpenKatOrganizationComparison>[];
+    for (final org in organizations) {
+      final current = org.current;
+      if (current == null) continue;
+      out.add(
+        OpenKatOrganizationComparison(
+          code: org.code,
+          name: org.name,
+          findings: current.findings.length,
+          previousFindings: org.previous?.findings.length,
+        ),
+      );
+    }
+    out.sort((a, b) {
+      var cmp = _movement(b).compareTo(_movement(a));
+      if (cmp != 0) return cmp;
+      cmp = b.findings.compareTo(a.findings);
+      if (cmp != 0) return cmp;
+      return a.name.compareTo(b.name);
+    });
+    return out;
+  }
+
+  /// Hoe hard een organisatie bewoog. Zonder eerdere meting is er geen
+  /// beweging te melden: −1 zet die achter een organisatie die aantoonbaar
+  /// stilstond, want "onbekend" is minder nieuws dan "gemeten en gelijk".
+  int _movement(OpenKatOrganizationComparison c) => c.delta?.abs() ?? -1;
+
+  /// De jongste momentopname van [org] op of vóór [date], of null als er toen
+  /// nog niet gemeten was.
+  OpenKatSnapshot? _latestUpTo(OpenKatOrganization org, DateTime date) {
+    OpenKatSnapshot? best;
+    for (final snapshot in org.snapshots) {
+      if (snapshot.reportDate.isAfter(date)) continue;
+      if (best == null || snapshot.reportDate.isAfter(best.reportDate)) {
+        best = snapshot;
+      }
+    }
+    return best;
   }
 
   List<OpenKatSystemChange> mostImprovedSystems(
@@ -403,6 +511,63 @@ class SnapshotAggregate {
   });
 
   int get totalFindings => findings.length;
+
+  /// Of er findings zijn met een niveau buiten [openKatSeverityBands]. Bepaalt
+  /// of de restkolom op een dia verschijnt: een kolom die overal nul is voegt
+  /// niets toe, maar zodra hij gevuld is moet hij er staan.
+  bool get hasOtherSeverities =>
+      (severityCounts[openKatOtherSeverity] ?? 0) > 0;
+}
+
+/// De stand op één meetmoment — wat [OpenKatAggregator.history] per datum
+/// oplevert.
+class OpenKatHistoryPoint {
+  final DateTime date;
+  final Map<String, int> severityCounts;
+
+  const OpenKatHistoryPoint({required this.date, required this.severityCounts});
+
+  int get totalFindings =>
+      severityCounts.values.fold(0, (sum, count) => sum + count);
+}
+
+/// Een openstaande finding met het meetmoment waartegen zijn leeftijd telt.
+class OpenKatOpenFinding {
+  final OpenKatFinding finding;
+  final DateTime reportDate;
+
+  const OpenKatOpenFinding({required this.finding, required this.reportDate});
+
+  /// Hoe lang de finding openstond op de rapportagedatum. Nooit negatief: een
+  /// bron die een openingsdatum ná het rapport meldt levert 0 op in plaats van
+  /// een getal dat niemand kan uitleggen.
+  int get daysOpen {
+    final opened = finding.openedAt;
+    if (opened == null) return 0;
+    final days = reportDate.difference(opened).inDays;
+    return days < 0 ? 0 : days;
+  }
+}
+
+/// Eén organisatie in de onderlinge vergelijking.
+class OpenKatOrganizationComparison {
+  final String code;
+  final String name;
+  final int findings;
+
+  /// De stand bij de vorige meting, of null als die er niet is — een eerste
+  /// meting, of een organisatie die net is toegevoegd.
+  final int? previousFindings;
+
+  const OpenKatOrganizationComparison({
+    required this.code,
+    required this.name,
+    required this.findings,
+    this.previousFindings,
+  });
+
+  int? get delta =>
+      previousFindings == null ? null : findings - previousFindings!;
 }
 
 class PortfolioAggregate {
@@ -430,7 +595,17 @@ class OpenKatIssue {
   final Set<String> _affectedSystems = <String>{};
   final Set<String> _affectedOrganizations = <String>{};
   final List<DateTime> _openings = <DateTime>[];
-  String highestSeverity = 'low';
+
+  /// De zwaarste band die onder dit issue is gezien, of null zolang er nog
+  /// niets is toegevoegd.
+  ///
+  /// Was een veld dat op `'low'` begon, en dat loog: een niveau dat wij niet
+  /// kennen haalt het nooit van low, dus verscheen een issue met louter
+  /// `recommendation`-findings in de tabel als Low — een ernst die in de meting
+  /// nergens staat. Ongezet beginnen en op **band** vergelijken laat de eerste
+  /// finding de waarde bepalen, wat hij ook is.
+  String? _highestSeverity;
+  String get highestSeverity => _highestSeverity ?? openKatOtherSeverity;
   int occurrenceCount = 0;
   int deltaSincePrevious = 0;
   String? recommendation;
@@ -453,8 +628,10 @@ class OpenKatIssue {
     _affectedSystems.add(finding.systemId ?? 'onbekend');
     _affectedOrganizations.add(organizationCode);
     if (finding.openedAt != null) _openings.add(finding.openedAt!);
-    if (_severityRank(finding.severity) < _severityRank(highestSeverity)) {
-      highestSeverity = finding.severity;
+    final band = openKatSeverityBand(finding.severity);
+    if (_highestSeverity == null ||
+        _severityRank(band) < _severityRank(_highestSeverity!)) {
+      _highestSeverity = band;
     }
     recommendation ??= finding.recommendation;
     impact ??= finding.impact;
@@ -487,6 +664,10 @@ class OpenKatSystemStats {
   int high = 0;
   int medium = 0;
   int low = 0;
+
+  /// Findings met een niveau buiten [openKatSeverityBands]; zonder deze teller
+  /// telde een rij niet op tot [total].
+  int other = 0;
   int total = 0;
   final Set<String> findingTypes = <String>{};
   DateTime? oldestOpening;
@@ -494,7 +675,7 @@ class OpenKatSystemStats {
   OpenKatSystemStats({required this.systemId});
 
   OpenKatSystemStats _addFinding(OpenKatFinding finding) {
-    switch (finding.severity) {
+    switch (openKatSeverityBand(finding.severity)) {
       case 'critical':
         critical++;
       case 'high':
@@ -503,6 +684,8 @@ class OpenKatSystemStats {
         medium++;
       case 'low':
         low++;
+      default:
+        other++;
     }
     total++;
     findingTypes.add(finding.findingTypeId);
