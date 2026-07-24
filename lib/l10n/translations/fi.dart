@@ -1774,6 +1774,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Nu importeren': 'Tuo nyt',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'Yhteenveto on valmiina uudessa välilehdessä.',
   'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
       'Tuonti lukee tiedostoja levyltä ja on käytettävissä vain työpöytäversiossa.',
   'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':

@@ -1780,6 +1780,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Nu importeren': 'Uvezi sada',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'Pregled je spreman u novoj kartici.',
   'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
       'Uvoz čita datoteke s diska i dostupan je samo u stolnoj verziji.',
   'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':

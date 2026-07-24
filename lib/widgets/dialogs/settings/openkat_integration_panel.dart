@@ -7,6 +7,8 @@ import '../../../platform/platform_features.dart';
 import '../../../state/openkat_provider.dart';
 import '../../../state/settings_provider.dart';
 import '../../../theme/app_theme.dart';
+import '../../shell/openkat_import_action.dart';
+import '../../shell/openkat_import_summary.dart';
 import 'settings_section_title.dart';
 
 /// Het tabblad Integraties: koppelingen met andere systemen, per systeem een
@@ -63,6 +65,8 @@ class OpenKatIntegrationPanel extends ConsumerWidget {
         ),
         const SizedBox(height: 16),
         _DirectoryField(),
+        const SizedBox(height: 12),
+        const _ImportNowRow(),
         const SizedBox(height: 10),
         Text(
           // Zeg wat er met de map gebeurt vóórdat iemand er een aanwijst. De
@@ -72,6 +76,118 @@ class OpenKatIntegrationPanel extends ConsumerWidget {
             'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.',
           ),
           style: TextStyle(fontSize: 11, color: AppTheme.slate500),
+        ),
+      ],
+    );
+  }
+}
+
+/// De knop die de import hier meteen uitvoert, met het verslag eronder.
+///
+/// Waarom hier een knop en niet alleen in het ⋮-menu: dit is de plek waar je
+/// de map aanwijst, en wie dat net gedaan heeft wil weten of het werkt. Zonder
+/// deze knop is de volgende stap "sluit dit venster en zoek het menu-item op",
+/// en dat is precies de stap waarop iemand denkt dat er niets gebeurd is.
+///
+/// Het venster blijft bewust open staan. Het sluit met Opslaan of Annuleren,
+/// en zelf sluiten zou de nog niet opgeslagen instellingen van de andere
+/// tabbladen weggooien — dus meldt dit paneel de uitkomst ter plekke in plaats
+/// van via een snackbar die achter de dialoog toch niet te lezen is.
+class _ImportNowRow extends ConsumerStatefulWidget {
+  const _ImportNowRow();
+
+  @override
+  ConsumerState<_ImportNowRow> createState() => _ImportNowRowState();
+}
+
+class _ImportNowRowState extends ConsumerState<_ImportNowRow> {
+  bool _running = false;
+  OpenKatImportOutcome? _outcome;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final directory = ref.watch(openKatDirectoryProvider);
+    final enabled = directory != null && !_running;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Tooltip(
+          // Een uitgeschakelde knop zegt zelf niet waaróm; zonder map is er
+          // niets te importeren.
+          message: directory == null ? l10n.d('Geen map gekozen') : '',
+          child: FilledButton.icon(
+            onPressed: enabled ? _import : null,
+            icon: _running
+                ? const SizedBox(
+                    width: 14,
+                    height: 14,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.play_arrow_outlined, size: 16),
+            label: Text(l10n.d('Nu importeren')),
+          ),
+        ),
+        if (_outcome != null) ...[
+          const SizedBox(height: 8),
+          _OutcomeText(outcome: _outcome!),
+        ],
+      ],
+    );
+  }
+
+  Future<void> _import() async {
+    setState(() {
+      _running = true;
+      // Het vorige verslag hoort weg vóór de nieuwe run: anders staat er
+      // tijdens het draaien een uitkomst die niet meer geldt.
+      _outcome = null;
+    });
+    final outcome = await importOpenKatReports(context, ref, announce: false);
+    if (!mounted) return;
+    setState(() {
+      _running = false;
+      _outcome = outcome;
+    });
+  }
+}
+
+/// Het verslag onder de knop: dezelfde zin als de melding uit het menu, plus
+/// de wegwijzer waar het resultaat gebleven is — vanuit een dialoog zie je de
+/// nieuwe tab er immers niet achter opengaan.
+class _OutcomeText extends StatelessWidget {
+  final OpenKatImportOutcome outcome;
+
+  const _OutcomeText({required this.outcome});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final bad = outcome.failed || outcome.loaded == 0;
+    final text = [
+      openKatImportSummary(l10n, outcome),
+      if (!bad && !outcome.updatedDeck)
+        l10n.d('Het overzicht staat klaar in een nieuw tabblad.'),
+    ].join(' ');
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(
+          bad ? Icons.error_outline : Icons.check_circle_outline,
+          size: 15,
+          color: bad ? Theme.of(context).colorScheme.error : AppTheme.slate600,
+        ),
+        const SizedBox(width: 6),
+        Expanded(
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: 11.5,
+              color: bad
+                  ? Theme.of(context).colorScheme.error
+                  : AppTheme.slate600,
+            ),
+          ),
         ),
       ],
     );

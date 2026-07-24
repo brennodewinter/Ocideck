@@ -734,6 +734,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Nu importeren': 'No ymportearje',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'It oersjoch stiet klear yn in nij ljepblêd.',
   'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
       'Ymportearjen lêst bestannen fan skiif en is allinnich beskikber yn de desktopferzje.',
   'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':

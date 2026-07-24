@@ -729,6 +729,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Nu importeren': 'Importa ora',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'La panoramica è pronta in una nuova scheda.',
   'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
       'L\'importazione legge file dal disco ed è disponibile solo nella versione desktop.',
   'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':

@@ -1786,6 +1786,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Nu importeren': 'Importuj teraz',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'Zestawienie czeka w nowej karcie.',
   'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
       'Import odczytuje pliki z dysku i jest dostępny tylko w wersji desktopowej.',
   'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':

@@ -1778,6 +1778,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Nu importeren': 'Importálás most',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'Az áttekintés készen áll egy új lapon.',
   'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
       'Az import fájlokat olvas be a lemezről, és csak az asztali változatban érhető el.',
   'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':

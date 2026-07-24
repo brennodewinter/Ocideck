@@ -1749,6 +1749,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Nu importeren': 'DaH yIkII\'',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      '\'echlet chu\'Daq Hoch poStaH.',
   'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
       'nagh HeHDaq De\'mey laDlaH nge\'wI\'; De\'wI\' tIn neH lo\'lu\'laH.',
   'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':

@@ -1809,6 +1809,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Nu importeren': 'Iompórtáil anois',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'Tá an forbhreathnú réidh i gcluaisín nua.',
   'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
       'Léann an t-iompórtáil comhaid ón diosca agus níl sé ar fáil ach sa leagan deisce.',
   'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
