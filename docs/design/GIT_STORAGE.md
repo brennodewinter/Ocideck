@@ -173,6 +173,25 @@ makes this design look harder than it is.
   **always provider-specific REST**, on every platform, no matter how the data
   plane works. A pull request cannot be expressed in the wire protocol.
 
+```mermaid
+flowchart TB
+    app["OciDeck — any platform"]
+
+    app --> forge{{"Forge plane — ALWAYS provider-specific REST<br/>pull requests · review · repo discovery · server-side search<br/>GitForge over hardened HTTP + PAT"}}
+    app --> qdata{"Data plane:<br/>is git present?"}
+
+    qdata -->|"desktop with git"| native["Native git data plane<br/>real local commits · true offline history · real merge · local search"]
+    qdata -->|"web, or no git"| rest["REST data plane<br/>draft + outbox · one commit per reconnect · non-fast-forward → reload"]
+
+    forge --> host[("Forgejo / GitHub / GitLab")]
+    native --> host
+    rest --> host
+```
+
+*The forge plane never changes; only the data plane does. Because web needs the
+REST data plane regardless, native git costs nothing to make optional — "no git"
+degrades to the web path, not a dead end.*
+
 So the forge plane is settled: `GitForge` over hardened HTTP with a PAT (§7).
 The only real question is the data plane.
 
@@ -275,35 +294,30 @@ limitation that it is the REST data plane only (§8.3).
 
 Five layers. The editor and state layer never see anything below `DeckMirror`.
 
-```
-   ┌────────────────────────────────────────────────────────────┐
-   │ Editor / state (deck_provider, tabs_provider)               │
-   │   save() / open() / search — unchanged surface              │
-   └───────────────┬────────────────────────────────────────────┘
-                   │ writes/reads a deck as files
-                   ▼
-   ┌────────────────────────────────────────────────────────────┐
-   │ DeckMirror (interface)  — the working copy, always available │
-   │   NativeGitMirror   desktop + `git` on PATH → a real clone   │
-   │   DraftMirror       web, or desktop without git → outbox     │
-   └───────────────┬────────────────────────────────────────────┘
-                   │ reconcile: push/pull, or drain the outbox
-                   ▼
-   ┌────────────────────────────────────────────────────────────┐
-   │ SyncEngine         — reconciles mirror ↔ forge              │
-   │   native: git push/fetch      REST: outbox, baseSha guard   │
-   └───────┬─────────────────────────────────┬──────────────────┘
-           │ data plane (native only)        │ forge plane (always)
-           ▼                                 ▼
-   ┌──────────────────────┐   ┌─────────────────────────────────┐
-   │ GitCli               │   │ GitForge (interface)            │
-   │  hardened Process.run │   │  tree · commit · branch · tag   │
-   │  argv, clean env      │   │  pull request · search          │
-   └───────┬──────────────┘   │  GiteaForge·GitHubForge·GitLab… │
-           │                  └───────────────┬─────────────────┘
-           │ https (git's own)                │ hardened HTTP (NetGuard, PAT)
-           ▼                                  ▼
-                     Forgejo / GitHub / GitLab
+```mermaid
+flowchart TB
+    subgraph L1["Editor / state — deck_provider · tabs_provider"]
+        ed["save() · open() · search — unchanged surface"]
+    end
+
+    subgraph mirror["DeckMirror (interface) — the working copy, always available"]
+        nm["NativeGitMirror — desktop + git on PATH (a real clone)"]
+        dm["DraftMirror — web, or desktop without git (outbox)"]
+    end
+
+    sync["SyncEngine — reconciles mirror ↔ forge<br/>native: git push / fetch · REST: outbox + baseSha guard"]
+    cli["GitCli<br/>hardened Process.run · argv · clean env"]
+    gf{{"GitForge (interface)<br/>tree · commit · branch · tag · pull request · search<br/>GiteaForge · GitHubForge · GitLabForge"}}
+    host[("Forgejo / GitHub / GitLab")]
+    pool[("AssetPool — content-addressed dedup<br/>resolves repo: refs · commits only new blobs")]
+
+    L1 -->|"reads/writes a deck as files"| mirror
+    mirror -->|"reconcile: push/pull, or drain the outbox"| sync
+    sync -->|"data plane (native only)"| cli
+    sync -->|"forge plane (always)"| gf
+    cli -->|"https — git's own"| host
+    gf -->|"hardened HTTP — NetGuard + PAT"| host
+    pool -.->|"cross-cutting, beside the mirror"| mirror
 ```
 
 Cross-cutting: `AssetPool` (content-addressed dedup, §6) sits beside the mirror
@@ -502,6 +516,18 @@ Editor ──writes──▶ DeckMirror ──SyncEngine──▶ forge (when co
                    (offline-capable)
 ```
 
+```mermaid
+flowchart TB
+    edit["author edits offline"] --> q{"DeckMirror.hasRealHistory?"}
+    q -->|"NativeGitMirror — true"| n["git add + commit locally<br/>ten commits stay ten commits<br/>sync = git fetch / push · rejected push → real merge, conflicts per file"]
+    q -->|"DraftMirror — false"| d["update one draft + enqueue a pending commit (carries baseSha)<br/>sync = drain outbox via GitForge.commitFiles<br/>conflict → baseSha mismatch → reload (no merge possible)"]
+    n --> f[("forge — when connectivity returns")]
+    d --> f
+```
+
+*`hasRealHistory` is the honest seam: the "commit" act is only offered where it
+is real. A queued draft is never presented as if it were history.*
+
 ### 8.1 `DeckMirror` — one interface, two implementations
 
 ```dart
@@ -635,6 +661,19 @@ pointers) to the `DeckMirror`, then checkpoints it. Message defaults to a concis
 auto-message (`Update <deck title>`), editable. Push is the SyncEngine — from the
 user's point of view, **save = commit, and it reaches the forge when the network
 does**.
+
+```mermaid
+flowchart TB
+    save["DeckNotifier.save()"] --> build["buildDeckRepoFiles → the file set, re-pathed to the §6 layout"]
+    build --> members["deck.md (assets → repo: pointers)<br/>new pool blobs only · linked chart data<br/>sidecars: user-notes · ink · dismissals · miauw · seal (all travel now)"]
+    members --> mirror["write to DeckMirror + checkpoint"]
+    mirror --> q{"which mirror?"}
+    q -->|"native"| commit["git commit — durable & offline;<br/>pushed by the SyncEngine when the network returns"]
+    q -->|"REST / draft"| outbox["draft + outbox: pending commit with baseSha,<br/>flushed as one commit on reconnect"]
+```
+
+*From the user's point of view, **save = commit, and it reaches the forge when
+the network does**.*
 
 > **What a commit actually carries today** (recorded 21-07-2026, because the
 > layout in §6 and the principle in P3 describe the intended set, not the built
@@ -777,6 +816,16 @@ Release is **two acts, both gated** (P8), and the distinction is the point:
    was actually presented. `v1.0` and `v2.0` of the same deck coexist and are
    both retrievable, which is what "releases van dezelfde presentatie" asks for.
 
+```mermaid
+flowchart LR
+    edit["editing round → fresh branch off main<br/>decks/NAAM/DATUM (generated, never typed)"] --> g1{{"TLP / classification gate — fail-closed<br/>BEFORE the PR opens"}}
+    g1 --> pr["openPullRequest(head → base)<br/>reviewers comment on a real deck.md diff"]
+    pr --> merge["mergePullRequest once approved"]
+    merge --> g2{{"TLP gate again — BEFORE the tag"}}
+    g2 --> tag["annotated tag decks/NAAM/v1.0<br/>the version actually presented"]
+    tag --> picker["version picker: open read-only · diff vs another · branch a revision"]
+```
+
 Both are fail-closed against the classification/TLP policy (`ExportService`
 enforcement), evaluated *before* the PR is opened and *before* the tag is
 created. A tag is a durable, advertised pointer — it must not be able to publish
@@ -851,6 +900,17 @@ whose participants share a repo), but neither doc depends on the other landing.
 > and why. The seal travels as a sidecar since 23-07-2026 and still needs no
 > merge *semantics*: the merge keeps the seal from whichever side carries one,
 > ours winning deterministically when both do (§14, D13).
+
+```mermaid
+flowchart TB
+    base["base — common ancestor"] --> merge["three-way merge<br/>mergeDeckVersions (serves both planes)"]
+    ours["ours"] --> merge
+    theirs["theirs"] --> merge
+    merge --> notes["user-notes → git's ordinary TEXT merge<br/>(works only because it is written one field per line)"]
+    merge --> ink["ink → union-with-tombstones (_mergedAnnotations)<br/>native driver merge=ocideck-ink"]
+    merge --> disp["dismissals · miauw → union per id, later wins, tombstones survive"]
+    merge --> seal["seal → no merge semantics: keep whichever side has one<br/>ours wins if both do (two seals = a mistake, not a conflict)"]
+```
 
 "Sidecars merge poorly" flattened a distinction worth keeping: the two sidecars
 are not the same kind of file, and each has its own right answer (§14, D7).
