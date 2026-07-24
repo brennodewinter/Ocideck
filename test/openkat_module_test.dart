@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/state/import_module_provider.dart';
 import 'package:ocideck/state/openkat_provider.dart';
@@ -217,6 +218,104 @@ void main() {
       );
       expect(find.text('Geen map gekozen'), findsOneWidget);
     });
+
+    testWidgets('zonder map is "Nu importeren" uitgeschakeld', (tester) async {
+      // Een knop die zichtbaar níets kan doen is beter dan een knop die stil
+      // een tweede mapkiezer opent naast de knop ernaast.
+      await open(
+        tester,
+        prefs: {'importModuleEnabled': true},
+        section: SettingsSection.integrations,
+      );
+      final knop = tester.widget<FilledButton>(
+        find.widgetWithText(FilledButton, 'Nu importeren'),
+      );
+      expect(knop.onPressed, isNull);
+    });
+
+    testWidgets('met een map importeert de knop en meldt hij het hier', (
+      tester,
+    ) async {
+      // Dit is de reden dat de knop bestaat: wie net een map heeft aangewezen
+      // wil zien dát het werkt, zonder eerst het venster te sluiten en het
+      // menu-item op te zoeken. En de melding hoort in het paneel te staan —
+      // een snackbar achter een modale dialoog leest niemand.
+      final tmp = Directory.systemTemp.createTempSync('ocikat-knop-');
+      addTearDown(() => tmp.deleteSync(recursive: true));
+      File(
+        p.join(tmp.path, 'org1_20240601000000.json'),
+      ).writeAsStringSync(jsonEncode(rapportage('org1')));
+
+      await open(
+        tester,
+        prefs: {
+          'importModuleEnabled': true,
+          'openkatReportDirectory': tmp.path,
+        },
+        section: SettingsSection.integrations,
+      );
+      await tester.tap(find.widgetWithText(FilledButton, 'Nu importeren'));
+
+      // De import doet echte bestands-I/O: die futures komen onder de
+      // testbinding alleen aan in een runAsync-beurt, en één pomp is te vroeg.
+      for (var i = 0; i < 40; i++) {
+        if (find.textContaining('geïmporteerd').evaluate().isNotEmpty) break;
+        await tester.runAsync(
+          () => Future<void>.delayed(const Duration(milliseconds: 20)),
+        );
+        await tester.pump();
+      }
+
+      expect(find.textContaining('geïmporteerd'), findsOneWidget);
+      expect(
+        find.textContaining('nieuw tabblad'),
+        findsOneWidget,
+        reason:
+            'vanuit een dialoog zie je de nieuwe tab er niet achter opengaan',
+      );
+      expect(
+        find.byType(SnackBar),
+        findsNothing,
+        reason: 'het paneel meldt het zelf; een snackbar erbij is dubbelop',
+      );
+    });
+  });
+
+  group('het openscherm', () {
+    Future<void> openscherm(
+      WidgetTester tester, {
+      Map<String, Object> prefs = const {},
+    }) async {
+      SharedPreferences.setMockInitialValues({
+        'app_consent_accepted': true,
+        ...prefs,
+      });
+      await tester.binding.setSurfaceSize(const Size(1400, 1100));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('met de module uit staat OpenKAT er niet', (tester) async {
+      await openscherm(tester);
+      expect(find.text('OpenKAT-rapportages importeren…'), findsNothing);
+    });
+
+    testWidgets('met de module aan begin je hier met een OpenKAT-uitdraai', (
+      tester,
+    ) async {
+      // Wie met OpenKAT werkt komt juist op dit scherm terug om het overzicht
+      // te verversen; dan is drie stappen door een menu er één te veel.
+      await openscherm(tester, prefs: {'importModuleEnabled': true});
+      expect(find.text('OpenKAT-rapportages importeren…'), findsOneWidget);
+    });
+
+    testWidgets('een ingestelde map houdt de ingang met de module uit', (
+      tester,
+    ) async {
+      await openscherm(tester, prefs: {'openkatReportDirectory': '/pad/kat'});
+      expect(find.text('OpenKAT-rapportages importeren…'), findsOneWidget);
+    });
   });
 
   testWidgets('de import gebruikt de ingestelde map zonder mapkiezer', (
@@ -227,43 +326,9 @@ void main() {
     // teruggeven; komt er tóch een deck uit, dan kwam de map uit de instelling.
     final tmp = Directory.systemTemp.createTempSync('ocikat-vaste-map-');
     addTearDown(() => tmp.deleteSync(recursive: true));
-    File(p.join(tmp.path, 'org1_20240601000000.json')).writeAsStringSync(
-      jsonEncode({
-        'organization_code': 'org1',
-        'organization_name': 'Organisatie 1',
-        'organization_tags': <String>[],
-        'data': {
-          'systems': {
-            'services': {
-              'Hostname|internet|example.com': {
-                'hostnames': ['example.com'],
-                'services': <dynamic>[],
-              },
-            },
-          },
-          'findings': {
-            'finding_types': [
-              {
-                'finding_type': {
-                  'id': 'KAT-001',
-                  'name': 'Open poort',
-                  'risk_severity': 'high',
-                },
-                'occurrences': [
-                  {
-                    'finding': {
-                      'primary_key': 'f1',
-                      'ooi': 'Hostname|internet|example.com',
-                    },
-                  },
-                ],
-              },
-            ],
-          },
-          'total_systems': 1,
-        },
-      }),
-    );
+    File(
+      p.join(tmp.path, 'org1_20240601000000.json'),
+    ).writeAsStringSync(jsonEncode(rapportage('org1')));
 
     SharedPreferences.setMockInitialValues({
       'app_consent_accepted': true,
@@ -314,3 +379,41 @@ void main() {
     );
   });
 }
+
+/// Eén organisatierapport in de envelop die de exportknop van OpenKAT
+/// werkelijk oplevert; de datum zit in de bestandsnaam, niet in de inhoud.
+Map<String, dynamic> rapportage(String code) => {
+  'organization_code': code,
+  'organization_name': 'Organisatie $code',
+  'organization_tags': <String>[],
+  'data': {
+    'systems': {
+      'services': {
+        'Hostname|internet|example.com': {
+          'hostnames': ['example.com'],
+          'services': <dynamic>[],
+        },
+      },
+    },
+    'findings': {
+      'finding_types': [
+        {
+          'finding_type': {
+            'id': 'KAT-001',
+            'name': 'Open poort',
+            'risk_severity': 'high',
+          },
+          'occurrences': [
+            {
+              'finding': {
+                'primary_key': 'f1',
+                'ooi': 'Hostname|internet|example.com',
+              },
+            },
+          ],
+        },
+      ],
+    },
+    'total_systems': 1,
+  },
+};
