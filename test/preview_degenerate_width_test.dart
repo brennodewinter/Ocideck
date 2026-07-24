@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/checklist_spec.dart';
+import 'package:ocideck/models/cockpit.dart';
+import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/models/timeline.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
 /// Een dia-preview die op nulbreedte wordt gemeten, hoort niets te tekenen —
@@ -27,13 +31,14 @@ void main() {
   /// meldt dat in debug. Wat hier bewaakt wordt is het verschil tussen "past
   /// niet" en "valt om" — een `ArgumentError` of een gefaalde assertie is het
   /// tweede, en dat is wat deze toets rood moet maken.
+  bool isHardFailure(Object? error) =>
+      error != null &&
+      !(error is FlutterError && '$error'.contains('overflowed by'));
+
   void expectNoHardFailure(Object? error, {required String what}) {
-    if (error == null) return;
-    final overflow =
-        error is FlutterError && '$error'.contains('overflowed by');
     expect(
-      overflow,
-      isTrue,
+      isHardFailure(error),
+      isFalse,
       reason: '$what viel om in plaats van simpelweg niet te passen: $error',
     );
   }
@@ -103,6 +108,123 @@ void main() {
       await renderAt(tester, 0, checklist),
       what: 'checklist met voortgang op 0',
     );
+  });
+
+  testWidgets('een checklist-dia overleeft nulbreedte', (tester) async {
+    // De voortgangsbalk geeft `LinearProgressIndicator` een `minHeight` die van
+    // de breedte is afgeleid, en die eist er een boven nul.
+    final checklist = Slide.create(SlideType.checklist).copyWith(
+      title: 'Checklist',
+      tableRows: const ChecklistSpec(
+        standardLabel: 'Checklist',
+        rows: [
+          ChecklistRow(id: 'A-1', test: 'Een', status: ChecklistStatus.tested),
+          ChecklistRow(id: 'A-2', test: 'Twee'),
+        ],
+      ).toTableRows(),
+    );
+    expectNoHardFailure(
+      await renderAt(tester, 0, checklist),
+      what: 'checklist-dia op 0',
+    );
+  });
+
+  testWidgets('een scopematrix overleeft nulbreedte', (tester) async {
+    // Dezelfde voortgangsbalk, tweede vindplaats.
+    final scope = Slide.create(SlideType.scopeMatrix).copyWith(
+      title: 'Scope',
+      tableRows: const ScopeMatrixSpec(
+        title: 'Scope',
+        rows: [
+          ScopeRow(object: 'https://app.example', type: ScopeObjectType.web),
+        ],
+      ).toTableRows(),
+    );
+    expectNoHardFailure(
+      await renderAt(tester, 0, scope),
+      what: 'scopematrix op 0',
+    );
+  });
+
+  // Nul alleen was hier niet genoeg. De rail verdeelt zijn verdiepingen met een
+  // deling waarvan de deler van de breedte is afgeleid — die levert op nul
+  // Infinity of NaN en het afronden daarvan gooit — maar de clamp van de
+  // verbindingslijn viel pas ómhoog om, bij een kaart die smaller is dan haar
+  // eigen marge. Elke breedte in deze lijst ving iets wat de andere lieten
+  // staan, dus ze blijven alle vier staan.
+  for (final layout in TimelineLayout.values) {
+    for (final width in const [0.0, 0.5, 1.0, 4.0]) {
+      testWidgets('tijdlijn ${layout.name} overleeft breedte $width', (
+        tester,
+      ) async {
+        expectNoHardFailure(
+          await renderAt(
+            tester,
+            width,
+            Slide.create(SlideType.timeline).copyWith(timelineLayout: layout),
+          ),
+          what: 'tijdlijn ${layout.name} op $width',
+        );
+      });
+    }
+  }
+
+  // De instrumentrand is één schilder die elk metertype doorloopt, en daar zat
+  // de fout: de hoekstraal is van de metergrootte afgeleid terwijl de randdikte
+  // een vaste pixel als vloer heeft, dus op een korte meter werd het verschil
+  // negatief en dat weigert `RRect`. Eén meter zou volstaan om dat te vangen;
+  // alle zeven staan er omdat de rand voor elk type opnieuw wordt getekend en
+  // een type dat straks zijn eigen rand meebrengt hier hoort af te gaan.
+  for (final type in CockpitMeterType.values) {
+    testWidgets('cockpitmeter ${type.name} overleeft nulbreedte', (
+      tester,
+    ) async {
+      final slide = Slide.create(SlideType.cockpit).copyWith(
+        customMarkdown: CockpitSpec(
+          meters: [CockpitMeterSpec(type: type)],
+        ).toBlock(),
+      );
+      expectNoHardFailure(
+        await renderAt(tester, 0, slide),
+        what: 'cockpitmeter ${type.name} op 0',
+      );
+    });
+  }
+
+  // De lege cockpit valt terug op de voorbeeldmeters en zet er vier naast
+  // elkaar; dat is het geval waarin één meter al kort wordt zonder dat de dia
+  // zelf ontaard is.
+  for (final width in const [0.0, 0.5, 1.0, 4.0]) {
+    testWidgets('een lege cockpit overleeft breedte $width', (tester) async {
+      expectNoHardFailure(
+        await renderAt(tester, width, Slide.create(SlideType.cockpit)),
+        what: 'lege cockpit op $width',
+      );
+    });
+  }
+
+  // Het vangnet onder de vier toetsen hierboven. Die noemen elk hun eigen
+  // oorzaak en zetten er de inhoud bij die hem uitlokt; deze doet het omgekeerde
+  // en loopt met de standaardinhoud van `Slide.create` alle types langs. Wat hij
+  // vangt is niet een oorzaak maar een verzuim: het volgende slidetype dat erbij
+  // komt en dezelfde deling of clamp opnieuw uitschrijft.
+  //
+  // Bewust één toets en geen 24, met alle omgevallen types in de melding: wie
+  // een type toevoegt wil weten wát er omvalt, niet 24 losse regels waarvan er
+  // één rood is.
+  testWidgets('geen enkel slidetype valt om op een ontaarde breedte', (
+    tester,
+  ) async {
+    final omgevallen = <String>[];
+    for (final type in SlideType.values) {
+      for (final width in const [0.0, 0.5, 1.0, 4.0]) {
+        final error = await renderAt(tester, width, Slide.create(type));
+        if (isHardFailure(error)) {
+          omgevallen.add('${type.name} op $width: $error');
+        }
+      }
+    }
+    expect(omgevallen, isEmpty, reason: omgevallen.join('\n'));
   });
 
   testWidgets('op een gewone breedte verandert er niets', (tester) async {

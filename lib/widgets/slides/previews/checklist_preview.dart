@@ -84,7 +84,7 @@ class _ChecklistPreview extends StatelessWidget {
             borderRadius: BorderRadius.circular(w * 0.006),
             child: LinearProgressIndicator(
               value: fraction,
-              minHeight: w * 0.014,
+              minHeight: _progressBarThickness(w),
               backgroundColor: AppTheme.checklistNotTested.withValues(
                 alpha: 0.2,
               ),
