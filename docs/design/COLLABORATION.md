@@ -116,22 +116,13 @@ description.
 
 ## 4. Architecture overview
 
-```
-                       ┌──────────────────────────────────────────┐
-                       │                 SESSION                   │
-                       │            (one Matrix room)              │
-   DATA PLANE  ────────┤  ops · locks · snapshot · presence · chat │
-   (always on,         │  presenter-sync (next/prev)               │
-    no extra infra)    │  → Matrix timeline events + room state    │
-                       ├──────────────────────────────────────────┤
-   MEDIA PLANE ────────┤  audio / video / screen                   │
-   (only when live A/V) │  small group → P2P WebRTC (homeserver TURN)│
-                       │  large group → SFU (BYO / ecosystem)      │
-                       └──────────────────────────────────────────┘
-                                        │
-                       room = transport │ (disposable, replayable)
-                                        ▼
-                          FILE = TRUTH: .md project / .ocideck
+```mermaid
+flowchart TB
+    subgraph session["SESSION — one Matrix room (transport: disposable, replayable)"]
+        data["DATA PLANE — always on, no infra beyond the homeserver account<br/>ops · locks · snapshot · presence · chat · presenter-sync (next/prev)<br/>→ Matrix timeline events + room state"]
+        media["MEDIA PLANE — only when live A/V<br/>small group → P2P WebRTC (homeserver TURN)<br/>large group → SFU (BYO / ecosystem — OciDeck runs none of it)"]
+    end
+    session -->|"room = transport"| truth[("FILE = TRUTH<br/>.md project / .ocideck")]
 ```
 
 - The **data plane** carries everything except live A/V. It needs no
@@ -195,6 +186,23 @@ The authority (owner, or a temporary stand-in) is the only writer of versions.
   original owner returns. Only the owner may `saveDeck` / end the session; a
   temporary authority keeps the session alive but does not persist.
 
+```mermaid
+stateDiagram-v2
+    [*] --> OwnerAuthority: session start (successor order agreed)
+    OwnerAuthority --> TempAuthority: owner drops
+    note right of TempAuthority
+        successor with the HIGHEST observed version takes over
+        (version wins; fixed order breaks ties)
+        keeps the session alive but does NOT persist
+    end note
+    TempAuthority --> OwnerAuthority: owner returns (hands back)
+    OwnerAuthority --> [*]: only the owner may saveDeck / end the session
+```
+
+*The authority is the only writer of versions: it receives intents, applies them
+in receive order, assigns the next monotonic `version`, and rebroadcasts the
+authoritative op.*
+
 ### 5.4 Locking
 
 Per-slide (optionally per-block) **soft locks** eliminate both conflict *and*
@@ -204,6 +212,24 @@ locally with no round-trip and broadcast ops for that slide.
 - Acquire on focus, release on blur / slide change.
 - `ForceUnlock` is an explicit authoritative op; the losing client receives an
   event ("your edit was ended by the owner") — never a silent drop.
+
+```mermaid
+sequenceDiagram
+    participant E as Editor (holds the slide lock)
+    participant A as Authority (owner / stand-in)
+    participant O as Other participants
+    E->>E: acquire lock on focus — sole writer, edit locally (no round-trip)
+    E->>A: sendOp — typed, field-level intent (SetSlideField, ReorderSlide, …)
+    A->>A: apply in receive order, assign next version (monotonic)
+    A->>O: rebroadcast authoritative op (ordered, gap-free)
+    A->>E: rebroadcast authoritative op
+    Note over E,O: applying ops in version order reproduces the authority's deck exactly
+    E->>A: release lock on blur / slide change
+```
+
+*Soft locks remove both conflict and edit latency: while you hold a slide's lock
+you are the sole writer, so you edit locally and only broadcast ops. Ops are
+typed fields, never Markdown diffs.*
 
 ### 5.5 Invariant: slide ids are session-scoped
 
