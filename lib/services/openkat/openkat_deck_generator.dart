@@ -410,7 +410,7 @@ class OpenKatDeckGenerator {
       title: 'Wat OpenKAT aanraadt',
       bullets: [
         for (final issue in withAdvice) ...[
-          '$kGroupHeadingMarker${issue.findingTypeName ?? issue.findingTypeId}',
+          groupHeadingBullet(issue.findingTypeName ?? issue.findingTypeId),
           issue.recommendation!.trim(),
         ],
       ],

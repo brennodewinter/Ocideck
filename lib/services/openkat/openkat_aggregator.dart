@@ -595,7 +595,17 @@ class OpenKatIssue {
   final Set<String> _affectedSystems = <String>{};
   final Set<String> _affectedOrganizations = <String>{};
   final List<DateTime> _openings = <DateTime>[];
-  String highestSeverity = 'low';
+
+  /// De zwaarste band die onder dit issue is gezien, of null zolang er nog
+  /// niets is toegevoegd.
+  ///
+  /// Was een veld dat op `'low'` begon, en dat loog: een niveau dat wij niet
+  /// kennen haalt het nooit van low, dus verscheen een issue met louter
+  /// `recommendation`-findings in de tabel als Low — een ernst die in de meting
+  /// nergens staat. Ongezet beginnen en op **band** vergelijken laat de eerste
+  /// finding de waarde bepalen, wat hij ook is.
+  String? _highestSeverity;
+  String get highestSeverity => _highestSeverity ?? openKatOtherSeverity;
   int occurrenceCount = 0;
   int deltaSincePrevious = 0;
   String? recommendation;
@@ -618,8 +628,10 @@ class OpenKatIssue {
     _affectedSystems.add(finding.systemId ?? 'onbekend');
     _affectedOrganizations.add(organizationCode);
     if (finding.openedAt != null) _openings.add(finding.openedAt!);
-    if (_severityRank(finding.severity) < _severityRank(highestSeverity)) {
-      highestSeverity = finding.severity;
+    final band = openKatSeverityBand(finding.severity);
+    if (_highestSeverity == null ||
+        _severityRank(band) < _severityRank(_highestSeverity!)) {
+      _highestSeverity = band;
     }
     recommendation ??= finding.recommendation;
     impact ??= finding.impact;

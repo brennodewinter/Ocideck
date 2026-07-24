@@ -4,6 +4,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/openkat/openkat_models.dart';
 import 'package:ocideck/models/scorecard_spec.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/openkat/openkat_deck_generator.dart';
 
 OpenKatFinding _finding({
@@ -342,6 +343,20 @@ void main() {
       expect(slide.bullets.first, startsWith(kGroupHeadingMarker));
       expect(isGroupHeading(slide.bullets.first), isTrue);
       expect(slide.bullets, contains('Zet de header aan.'));
+    });
+
+    test('de tussenkop overleeft de gang door het bestand', () {
+      // De tussenkop is een teken in de tekst van de bullet, geen eigen veld.
+      // Als het schrijven of lezen hem kwijtraakt, ziet niemand dat: de dia
+      // toont dan een lijst waarin advies en finding door elkaar lopen.
+      final deck = generator.generate([_orgMetVerloop('a')]);
+      final heen = MarkdownService().generateDeck(deck);
+      final terug = MarkdownService().parseDeck(heen)!;
+      final slide = _view(terug, 'portfolio.recommendations');
+
+      expect(isGroupHeading(slide.bullets.first), isTrue);
+      expect(groupHeadingText(slide.bullets.first), 'Type KAT-001');
+      expect(slide.bullets[1], 'Zet de header aan.');
     });
 
     test('zonder aanbevelingen is er geen dia', () {

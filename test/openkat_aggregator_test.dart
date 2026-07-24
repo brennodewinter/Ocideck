@@ -95,6 +95,50 @@ void main() {
     });
   });
 
+  group('een issue claimt geen ernst die er niet is', () {
+    OpenKatOrganization org(List<OpenKatFinding> findings) =>
+        OpenKatOrganization(
+          code: 'a',
+          name: 'A',
+          snapshots: [
+            _snapshot(date: DateTime.utc(2026, 6, 1), findings: findings),
+          ],
+        );
+
+    test('een issue met alleen aanbevelingen heet niet low', () {
+      // De teller begon op 'low' en een onbekend niveau won het daar nooit van,
+      // dus verscheen "Consider enabling RPKI" in de tabel als Low.
+      final issues = aggregator.topIssues([
+        org([
+          _finding(id: 'f1', severity: 'recommendation', type: 'KAT-RPKI'),
+          _finding(id: 'f2', severity: 'recommendation', type: 'KAT-RPKI'),
+        ]),
+      ]);
+      expect(issues.single.highestSeverity, openKatOtherSeverity);
+    });
+
+    test('de zwaarste finding bepaalt de ernst van het issue', () {
+      final issues = aggregator.topIssues([
+        org([
+          _finding(id: 'f1', severity: 'low', type: 'KAT-X'),
+          _finding(id: 'f2', severity: 'critical', type: 'KAT-X'),
+          _finding(id: 'f3', severity: 'medium', type: 'KAT-X'),
+        ]),
+      ]);
+      expect(issues.single.highestSeverity, 'critical');
+    });
+
+    test('een issue met alleen aanbevelingen sluit de rij', () {
+      final issues = aggregator.topIssues([
+        org([
+          _finding(id: 'f1', severity: 'recommendation', type: 'KAT-RPKI'),
+          _finding(id: 'f2', severity: 'low', type: 'KAT-CAA'),
+        ]),
+      ]);
+      expect(issues.map((i) => i.findingTypeId), ['KAT-CAA', 'KAT-RPKI']);
+    });
+  });
+
   group('het verloop over de tijd', () {
     OpenKatOrganization org(String code, List<OpenKatSnapshot> snapshots) =>
         OpenKatOrganization(code: code, name: code, snapshots: snapshots);
