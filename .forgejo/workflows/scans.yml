@@ -119,8 +119,8 @@ jobs:
           set -eu
           BASE="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}"
           ARCHIVE="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
-          curl -fsSLo --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
-          curl -fsSLo --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 /tmp/gitleaks_checksums.txt \
+          curl -fsSL --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 -o "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
+          curl -fsSL --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 -o /tmp/gitleaks_checksums.txt \
             "$BASE/gitleaks_${GITLEAKS_VERSION}_checksums.txt"
           SHA=$(awk -v f="$ARCHIVE" '$2 == f { print $1 }' /tmp/gitleaks_checksums.txt)
           test -n "$SHA"
@@ -134,8 +134,8 @@ jobs:
           set -eu
           BASE="https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}"
           ARCHIVE="trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz"
-          curl -fsSLo --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
-          curl -fsSLo --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 /tmp/trufflehog_checksums.txt \
+          curl -fsSL --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 -o "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
+          curl -fsSL --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 -o /tmp/trufflehog_checksums.txt \
             "$BASE/trufflehog_${TRUFFLEHOG_VERSION}_checksums.txt"
           SHA=$(awk -v f="$ARCHIVE" '$2 == f { print $1 }' /tmp/trufflehog_checksums.txt)
           test -n "$SHA"
