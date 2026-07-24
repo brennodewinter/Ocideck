@@ -70,8 +70,12 @@ extension _SettingsStandards on _SettingsDialogState {
               ],
             ),
             const SizedBox(height: 2),
+            // `d()` op de aanroepplaats, niet in de catalogus: die is `const`
+            // en lib/services hoort geen l10n te importeren. Dit is de erkende
+            // indirecte vorm — de literal in reference_standards.dart is
+            // daardoor een bronsleutel en valt onder de vertaalplicht (#809).
             Text(
-              standard.bundled,
+              l10n.d(standard.bundled),
               style: TextStyle(fontSize: 11.5, color: AppTheme.slate600),
             ),
             Row(
@@ -81,7 +85,7 @@ extension _SettingsStandards on _SettingsDialogState {
                 // hoort af te breken in plaats van buiten beeld te vallen.
                 Expanded(
                   child: Text(
-                    standard.licence,
+                    l10n.d(standard.licence),
                     style: TextStyle(fontSize: 11, color: AppTheme.slate400),
                   ),
                 ),

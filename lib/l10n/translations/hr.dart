@@ -1777,6 +1777,22 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Indeks kontrolne liste: po testu stabilni id, kanonski naslov i kategorija. Sadržaj samog vodiča nije uključen.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Indeks testova v2.0.0: po testu stabilni id, kanonski naslov, MASVS kategorija i MASWE slabost. Povučeni v1 testovi i rezervirana mjesta nisu uključeni; ni sadržaj vodiča.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Popis slabosti (117): id, naslov, MASVS kategorija, platforma i CWE poveznica. Tri četvrtine još nisu razrađene na izvoru; one jesu uključene, označene. Povučene slabosti nisu.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Cijeli popis (id, naziv, opis) plus vlastita odabrana jezgra s našim bilješkama za otklanjanje.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Cijela EIS shema (88 provjerljivih zahtjeva).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Nazivi bolesti na devet jezika kao zdravstveni leksikon za provjeru privatnosti (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Vlastita Dart implementacija javne specifikacije, uključujući tablicu MacroVector i objavljene raspone ozbiljnosti.',
+  'Specificatie van FIRST.Org — attributie':
+      'Specifikacija FIRST.Org — pripisivanje',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Uvezi prezentacije…',

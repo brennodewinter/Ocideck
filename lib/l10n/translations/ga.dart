@@ -1806,6 +1806,22 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Innéacs an tseicliosta: in aghaidh gach tástála, an t-aitheantóir seasmhach, an teideal canónta agus an chatagóir. Níl ábhar an treoraí féin faoi iamh.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Innéacs tástálacha v2.0.0: in aghaidh gach tástála, an t-aitheantóir seasmhach, an teideal canónta, an chatagóir MASVS agus an laige MASWE. Níl tástálacha v1 a tarraingíodh siar ná ionadchoinneálaithe san áireamh; ná ábhar an treoraí ach oiread.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Liosta na laigí (117): aitheantóir, teideal, catagóir MASVS, ardán agus an nasc CWE. Níl trí cheathrú díobh scríofa amach ag an bhfoinse fós; tá siad sin san áireamh, marcáilte. Níl laigí a tarraingíodh siar.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'An liosta iomlán (aitheantóir, ainm, cur síos) chomh maith le croí roghnaithe dár gcuid féin le nótaí leigheasta.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'An scéimre EIS iomlán (88 riachtanas intástála).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Ainmneacha riochtaí i naoi dteanga mar fhoclóir sláinte don seiceáil príobháideachais (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Ár bhfeidhmiú Dart féin ar an tsonraíocht phoiblí, lena n-áirítear an tábla MacroVector agus na bandaí déine foilsithe.',
+  'Specificatie van FIRST.Org — attributie':
+      'Sonraíocht FIRST.Org — aitreabúid',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Iompórtáil láithreoireachtaí…',

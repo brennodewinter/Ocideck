@@ -1774,6 +1774,22 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Rejstřík kontrolního seznamu: u každého testu stabilní id, kanonický název a kategorie. Obsah samotné příručky součástí není.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Rejstřík testů v2.0.0: u každého testu stabilní id, kanonický název, kategorie MASVS a slabina MASWE. Stažené testy v1 a zástupné položky obsaženy nejsou; obsah příručky rovněž ne.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Seznam slabin (117): id, název, kategorie MASVS, platforma a vazba na CWE. Tři čtvrtiny nejsou u zdroje dosud rozepsané; ty obsaženy jsou, označené. Stažené slabiny ne.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Úplný seznam (id, název, popis) plus vlastní vybrané jádro s našimi poznámkami k nápravě.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Úplné schéma EIS (88 ověřitelných požadavků).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Názvy onemocnění v devíti jazycích jako zdravotní lexikon pro kontrolu soukromí (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Vlastní implementace veřejné specifikace v Dartu, včetně tabulky MacroVector a zveřejněných pásem závažnosti.',
+  'Specificatie van FIRST.Org — attributie':
+      'Specifikace FIRST.Org — uvedení autora',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Importovat prezentace…',

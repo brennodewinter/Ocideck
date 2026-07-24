@@ -2748,6 +2748,21 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Kontrol listesi dizini: her test için kalıcı kimlik, kanonik başlık ve kategori. Kılavuzun kendi içeriği pakete dahil değil.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'v2.0.0 test dizini: her test için kalıcı kimlik, kanonik başlık, MASVS kategorisi ve MASWE zayıflığı. Geri çekilen v1 testleri ve yer tutucular dahil değil; kılavuzun içeriği de değil.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Zayıflık listesi (117): kimlik, başlık, MASVS kategorisi, platform ve CWE bağlantısı. Dörtte üçü kaynakta henüz yazılmadı; onlar işaretli olarak dahil. Geri çekilen zayıflıklar dahil değil.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Tam liste (kimlik, ad, açıklama) ve kendi seçtiğimiz çekirdek ile giderme notlarımız.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Tam EIS şeması (88 test edilebilir gereksinim).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Gizlilik denetimi için sağlık sözlüğü olarak dokuz dilde hastalık adları (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Genel şartnamenin kendi Dart uygulamamız; MacroVector tablosu ve yayımlanan önem dereceleri dahil.',
+  'Specificatie van FIRST.Org — attributie': 'FIRST.Org şartnamesi — atıf',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Sunumları içe aktar…',

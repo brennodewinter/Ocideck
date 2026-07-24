@@ -1775,6 +1775,22 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Az ellenőrzőlista indexe: tesztenként az állandó azonosító, a kanonikus cím és a kategória. Maga az útmutató tartalma nincs mellékelve.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'A v2.0.0 tesztindexe: tesztenként az állandó azonosító, a kanonikus cím, a MASVS-kategória és a MASWE-gyengeség. A visszavont v1-tesztek és a helykitöltők nincsenek benne; az útmutató tartalma sem.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'A gyengeséglista (117): azonosító, cím, MASVS-kategória, platform és a CWE-kapcsolat. Háromnegyedük a forrásnál még nincs kifejtve; azok benne vannak, megjelölve. A visszavont gyengeségek nem.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'A teljes lista (azonosító, név, leírás), valamint egy saját válogatott mag a javítási megjegyzéseinkkel.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'A teljes EIS-séma (88 tesztelhető követelmény).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Betegségnevek kilenc nyelven egészségügyi lexikonként az adatvédelmi ellenőrzéshez (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'A nyilvános specifikáció saját Dart-megvalósítása, a MacroVector táblázattal és a közzétett súlyossági sávokkal együtt.',
+  'Specificatie van FIRST.Org — attributie':
+      'A FIRST.Org specifikációja — forrásmegjelölés',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Prezentációk importálása…',

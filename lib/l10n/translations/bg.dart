@@ -1793,6 +1793,22 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Индексът на контролния списък: за всеки тест стабилният идентификатор, каноничното заглавие и категорията. Съдържанието на самото ръководство не е включено.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Индексът на тестовете от v2.0.0: за всеки тест стабилният идентификатор, каноничното заглавие, категорията MASVS и слабостта MASWE. Оттеглените тестове от v1 и запълващите елементи не са включени; съдържанието на ръководството също не.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Списъкът със слабости (117): идентификатор, заглавие, категория MASVS, платформа и връзката с CWE. Три четвърти още не са разписани в източника; те са включени, обозначени. Оттеглените слабости — не.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Пълният списък (идентификатор, име, описание) плюс собствено подбрано ядро с нашите бележки за отстраняване.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Пълната схема EIS (88 проверими изисквания).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Названия на заболявания на девет езика като здравен лексикон за проверката на поверителност (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Собствена реализация на публичната спецификация на Dart, включително таблицата MacroVector и публикуваните диапазони на сериозност.',
+  'Specificatie van FIRST.Org — attributie':
+      'Спецификация на FIRST.Org — признание',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Импортиране на презентации…',

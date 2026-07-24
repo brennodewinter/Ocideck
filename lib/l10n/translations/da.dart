@@ -1770,6 +1770,22 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Tjeklisteindekset: pr. test det stabile id, den kanoniske titel og kategorien. Selve vejledningens indhold er ikke med.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Testindekset for v2.0.0: pr. test det stabile id, den kanoniske titel, MASVS-kategorien og MASWE-svagheden. Tilbagetrukne v1-test og pladsholdere er ikke med; det er vejledningens indhold heller ikke.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Svaghedslisten (117): id, titel, MASVS-kategori, platform og CWE-koblingen. Tre fjerdedele er endnu ikke skrevet ud ved kilden; de er med, markeret. Tilbagetrukne svagheder er ikke.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Den fulde liste (id, navn, beskrivelse) plus en egen udvalgt kerne med vores udbedringsnoter.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Det fulde EIS-skema (88 testbare krav).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Sygdomsnavne på ni sprog som sundhedsleksikon til privatlivstjekket (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'En egen Dart-implementering af den offentlige specifikation, inklusive MacroVector-tabellen og de offentliggjorte alvorlighedsbånd.',
+  'Specificatie van FIRST.Org — attributie':
+      'Specifikation fra FIRST.Org — kreditering',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Importer præsentationer…',

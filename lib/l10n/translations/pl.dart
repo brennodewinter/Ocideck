@@ -1783,6 +1783,22 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Indeks listy kontrolnej: dla każdego testu stabilny identyfikator, tytuł kanoniczny i kategoria. Treść samego przewodnika nie jest dołączona.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Indeks testów v2.0.0: dla każdego testu stabilny identyfikator, tytuł kanoniczny, kategoria MASVS i słabość MASWE. Wycofane testy v1 i symbole zastępcze nie są dołączone; treść przewodnika również nie.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Lista słabości (117): identyfikator, tytuł, kategoria MASVS, platforma i powiązanie CWE. Trzy czwarte nie są jeszcze opisane u źródła; te są dołączone i oznaczone. Wycofane słabości nie.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Pełna lista (identyfikator, nazwa, opis) plus własny wybrany rdzeń z naszymi uwagami naprawczymi.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Pełny schemat EIS (88 sprawdzalnych wymagań).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Nazwy schorzeń w dziewięciu językach jako leksykon zdrowotny do kontroli prywatności (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Własna implementacja publicznej specyfikacji w języku Dart, wraz z tabelą MacroVector i opublikowanymi przedziałami istotności.',
+  'Specificatie van FIRST.Org — attributie':
+      'Specyfikacja FIRST.Org — uznanie autorstwa',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Importuj prezentacje…',

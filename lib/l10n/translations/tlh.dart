@@ -1746,6 +1746,21 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'chenmoHwI\' tetlh: Hoch waw\' luj pong nItebHa\', pong ngeb, je Segh. QaH nav nIvbogh ngoDmey tu\'lu\'be\'.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'v2.0.0 waw\'mey tetlh: Hoch waw\' luj pong nItebHa\', pong ngeb, MASVS Segh, je MASWE puj. v1 waw\'mey lonlu\'bogh je qawHaqHom tu\'lu\'be\'; QaH nav ngoDmey je tu\'lu\'be\'.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'puj tetlh (117): pong nItebHa\', pong, MASVS Segh, De\'wI\' Segh, je CWE rar. wej loS: qaStaHvIS mIw ghItlhlu\'be\'pu\'; tu\'lu\' \'ach per. pujmey lonlu\'bogh tu\'lu\'be\'.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'naQbogh tetlh (pong nItebHa\', pong, QIj) je maH wIwIvpu\'bogh \'ay\' potlh, DuHmey ghItlh tIq.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'naQbogh EIS chenmoHwI\' (88 poQmey wavlu\'laH).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Hoch Hutlh rop pongmey Hut Hol, peQ QaS ghom Hutlh lexicon (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'maH wIchenmoHpu\'bogh Dart mIw, Hoch nuvpu\' De\' chIch, MacroVector nav je \'ay\' Doghmey chuvmey je.',
+  'Specificatie van FIRST.Org — attributie': 'FIRST.Org De\' chIch — pong',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'presentationmey yIkII\'…',

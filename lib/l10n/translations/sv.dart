@@ -1770,6 +1770,22 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Checklisteindexet: per test det stabila id:t, den kanoniska titeln och kategorin. Själva guidens innehåll ingår inte.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Testindexet för v2.0.0: per test det stabila id:t, den kanoniska titeln, MASVS-kategorin och MASWE-svagheten. Tillbakadragna v1-test och platshållare ingår inte; inte heller guidens innehåll.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Svaghetslistan (117): id, titel, MASVS-kategori, plattform och CWE-kopplingen. Tre fjärdedelar är ännu inte utskrivna vid källan; de ingår, markerade. Tillbakadragna svagheter gör det inte.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Hela listan (id, namn, beskrivning) plus en egen utvald kärna med våra åtgärdsanteckningar.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Hela EIS-schemat (88 testbara krav).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Sjukdomsnamn på nio språk som hälsolexikon för integritetskontrollen (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'En egen Dart-implementation av den offentliga specifikationen, inklusive MacroVector-tabellen och de publicerade allvarlighetsbanden.',
+  'Specificatie van FIRST.Org — attributie':
+      'Specifikation från FIRST.Org — erkännande',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Importera presentationer…',

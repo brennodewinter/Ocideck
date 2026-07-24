@@ -730,6 +730,22 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Der Checklisten-Index: je Test die stabile ID, der kanonische Titel und die Kategorie. Der Inhalt des Leitfadens selbst ist nicht enthalten.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Der Test-Index von v2.0.0: je Test die stabile ID, der kanonische Titel, die MASVS-Kategorie und die MASWE-Schwäche. Zurückgezogene v1-Tests und Platzhalter fehlen; der Inhalt des Leitfadens ebenso.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Die Schwächenliste (117): ID, Titel, MASVS-Kategorie, Plattform und die CWE-Verknüpfung. Drei Viertel sind an der Quelle noch nicht ausformuliert; die sind enthalten, markiert. Zurückgezogene Schwächen nicht.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Die vollständige Liste (ID, Name, Beschreibung) plus ein eigener ausgewählter Kern mit unseren Behebungshinweisen.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Das vollständige EIS-Schema (88 prüfbare Anforderungen).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Krankheitsbezeichnungen in neun Sprachen als Gesundheitslexikon für die Datenschutzprüfung (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Eine eigene Dart-Implementierung der öffentlichen Spezifikation, samt MacroVector-Tabelle und den veröffentlichten Schweregrad-Bändern.',
+  'Specificatie van FIRST.Org — attributie':
+      'Spezifikation von FIRST.Org — Namensnennung',
   'Ctrl/Cmd': 'Strg/Cmd',
   'Shift': 'Umschalt',
   'Presentaties importeren…': 'Präsentationen importieren…',

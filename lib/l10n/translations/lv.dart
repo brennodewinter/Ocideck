@@ -1770,6 +1770,22 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Kontrolsaraksta rādītājs: katram testam stabilais id, kanoniskais nosaukums un kategorija. Pašas rokasgrāmatas saturs nav iekļauts.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'v2.0.0 testu rādītājs: katram testam stabilais id, kanoniskais nosaukums, MASVS kategorija un MASWE vājība. Atsauktie v1 testi un vietturi nav iekļauti; arī rokasgrāmatas saturs ne.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Vājību saraksts (117): id, nosaukums, MASVS kategorija, platforma un CWE saite. Trīs ceturtdaļas avotā vēl nav izvērstas; tās ir iekļautas, atzīmētas. Atsauktās vājības nav.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Pilns saraksts (id, nosaukums, apraksts) un pašu atlasīts kodols ar mūsu novēršanas piezīmēm.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Pilnā EIS shēma (88 pārbaudāmas prasības).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Slimību nosaukumi deviņās valodās kā veselības leksikons privātuma pārbaudei (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Pašu Dart implementācija publiskajai specifikācijai, ieskaitot MacroVector tabulu un publicētās smaguma joslas.',
+  'Specificatie van FIRST.Org — attributie':
+      'FIRST.Org specifikācija — atsauce uz autoru',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Importēt prezentācijas…',

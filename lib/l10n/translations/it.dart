@@ -726,6 +726,22 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'L\'indice della checklist: per ogni test l\'id stabile, il titolo canonico e la categoria. Il contenuto della guida non è incluso.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'L\'indice dei test di v2.0.0: per ogni test l\'id stabile, il titolo canonico, la categoria MASVS e la debolezza MASWE. I test v1 ritirati e i segnaposto non ci sono; nemmeno il contenuto della guida.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'La lista delle debolezze (117): id, titolo, categoria MASVS, piattaforma e il collegamento CWE. Tre quarti non sono ancora redatti alla fonte; quelli ci sono, contrassegnati. Le debolezze ritirate no.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'L\'elenco completo (id, nome, descrizione) più un nucleo selezionato da noi con le nostre note di rimedio.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Lo schema EIS completo (88 requisiti verificabili).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Nomi di patologie in nove lingue come lessico sanitario per il controllo della privacy (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Una nostra implementazione in Dart della specifica pubblica, compresa la tabella MacroVector e le fasce di gravità pubblicate.',
+  'Specificatie van FIRST.Org — attributie':
+      'Specifica di FIRST.Org — attribuzione',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Maiusc',
   'Presentaties importeren…': 'Importa presentazioni…',

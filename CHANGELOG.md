@@ -104,6 +104,40 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Fixed
+- **De vertaalpoort volgt nu ook een veldsprong, en dat bleek veertien
+  onvertaalde regels in het instellingenvenster te verbergen.** De analyse volgde
+  argumenten terug naar hun declaratie, maar verloor het spoor zodra een string
+  via een VELD reisde: `_shortcutHint(cmd.shortcut!)` heeft zijn put binnen de
+  helper, terwijl `cmd` een lokale variabele zonder opgelost type is (#809).
+  Gedicht langs dezelfde weg die al bestond voor een aanroep op een variabele —
+  declareert precies één klasse die veldnaam, dan is het eenduidig. Bewust
+  streng: `name` en `title` staan op tientallen klassen en blijven dus buiten
+  beeld, want een melding die naar het verkeerde bestand wijst kost meer dan een
+  gemiste.
+
+  Wat eronder vandaan kwam: de zeven catalogusbeschrijvingen in
+  `reference_standards.dart` — "De checklist-index: per test het stabiele id, de
+  canonieke titel en de categorie…" — werden met een kale `Text()` gerenderd. Wie
+  de app in het Duits gebruikte, kreeg een Duits instellingenvenster met daarin
+  zeven Nederlandse alinea's. Dat is interfaceproza, geen referentiedata: de
+  canonieke titels van MASTG en WSTG blijven onvertaald omdat vertalen ze
+  onvindbaar maakt, maar een zin die wíj schreven over wat we bundelen valt daar
+  niet onder. Acht bronstrings, 248 vertalingen. De licentie-aanduidingen
+  (CC-BY-SA-4.0, EUPL-1.2, MITRE Terms of Use, CC-BY-4.0) zijn wél identifiers en
+  staan op `unchangedInAllLanguages`.
+
+  `d()` staat op de renderplek en niet in de catalogus: die is `const`, en
+  lib/services hoort geen l10n te importeren. Dat is de erkende indirecte vorm,
+  dezelfde als `EditorField(label: …)`.
+
+  Dezelfde stap bracht negen kleurcodes boven die er niet thuishoorden.
+  `ThemeProfile` toont zijn hexwaarden naast het label, dus `#FFCC00` gold ineens
+  als zichtbare tekst — er staan letters in, dus de lettertoets hielp niet.
+  Onoplosbaar ook: de presets zijn `const` in lib/models, en een model importeert
+  geen l10n. Een kleurcode is nu geen tekst meer, in dezelfde categorie als `•`
+  en `%`. Een melding die niemand kán wegwerken is geen poort maar ruis.
+
+### Fixed
 - **Sneltoetsen worden overal op dezelfde manier geschreven, en de vertaalpoort
   kijkt niet langer langs een extension heen.** Er leefden twee patronen naast
   elkaar (#803). Het commandopalet droeg losse literals (`shortcut: 'Ctrl/Cmd+S'`)

@@ -1788,6 +1788,22 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Indexul listei de verificare: per test, id-ul stabil, titlul canonic și categoria. Conținutul ghidului în sine nu este inclus.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Indexul testelor din v2.0.0: per test, id-ul stabil, titlul canonic, categoria MASVS și slăbiciunea MASWE. Testele v1 retrase și substituenții nu sunt incluși; nici conținutul ghidului.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Lista slăbiciunilor (117): id, titlu, categorie MASVS, platformă și legătura CWE. Trei sferturi nu sunt încă redactate la sursă; acelea sunt incluse, marcate. Slăbiciunile retrase nu.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Lista completă (id, nume, descriere) plus un nucleu propriu selectat, cu notele noastre de remediere.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Schema EIS completă (88 de cerințe testabile).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Denumiri de afecțiuni în nouă limbi, ca lexicon medical pentru verificarea confidențialității (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'O implementare proprie în Dart a specificației publice, inclusiv tabelul MacroVector și intervalele de gravitate publicate.',
+  'Specificatie van FIRST.Org — attributie':
+      'Specificația FIRST.Org — atribuire',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Importă prezentări…',

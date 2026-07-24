@@ -730,6 +730,22 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'E indeks di checklist: pa kada test e id stabil, e título kanóniko i e kategoria. E kontenido di e guia mes no ta inkluí.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'E indeks di test di v2.0.0: pa kada test e id stabil, e título kanóniko, e kategoria MASVS i e debilidat MASWE. E testnan v1 retirá i e placeholdernan no ta aden; e kontenido di e guia tampoko.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'E lista di debilidat (117): id, título, kategoria MASVS, plataforma i e enlase CWE. Tres kuarto no ta skirbí kompletu na e fuente ainda; esakinan ta aden, marká. Debilidatnan retirá nò.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'E lista kompleto (id, nòmber, deskripshon) plus un núkleo selektá pa nos ku nos notanan di remediashon.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'E skema EIS kompleto (88 rekisito testabel).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Nòmber di kondishon den nuebe idioma komo leksikon di salú pa e kontrol di privasidat (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Un implementashon propio na Dart di e spesifikashon públiko, inkluyendo e tabel MacroVector i e bandanan di severidat publiká.',
+  'Specificatie van FIRST.Org — attributie':
+      'Spesifikashon di FIRST.Org — atribushon',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Importá presentashonnan…',

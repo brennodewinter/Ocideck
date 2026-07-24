@@ -1778,6 +1778,22 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Register kontrolného zoznamu: pri každom teste stabilné id, kanonický názov a kategória. Obsah samotnej príručky súčasťou nie je.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Register testov v2.0.0: pri každom teste stabilné id, kanonický názov, kategória MASVS a slabina MASWE. Stiahnuté testy v1 a zástupné položky nie sú zahrnuté; obsah príručky tiež nie.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Zoznam slabín (117): id, názov, kategória MASVS, platforma a väzba na CWE. Tri štvrtiny nie sú pri zdroji ešte rozpísané; tie zahrnuté sú, označené. Stiahnuté slabiny nie.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Úplný zoznam (id, názov, popis) plus vlastné vybrané jadro s našimi poznámkami k náprave.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Úplná schéma EIS (88 overiteľných požiadaviek).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Názvy ochorení v deviatich jazykoch ako zdravotný lexikón na kontrolu súkromia (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Vlastná implementácia verejnej špecifikácie v Darte vrátane tabuľky MacroVector a zverejnených pásiem závažnosti.',
+  'Specificatie van FIRST.Org — attributie':
+      'Špecifikácia FIRST.Org — uvedenie autora',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Importovať prezentácie…',

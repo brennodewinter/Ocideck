@@ -96,21 +96,29 @@
 //     dan telt hij niet mee. Een unieke methodenaam wél.
 //   * Cascades (`messenger..showSnackBar(…)`). De inhoud ervan bereikt de poort
 //     meestal alsnog via de `Text(…)` erbinnen.
-//   * Strings die via een lijst, een veld of een `Map` reizen waar geen
-//     [_mapValueSinks]-ingang voor is. De VELDSPRONG is de bekendste vorm:
-//     `_shortcutHint(cmd.shortcut!)` heeft zijn put binnen `_shortcutHint`, maar
-//     `cmd` is een lokale variabele zonder opgelost type, dus komt de analyse
-//     niet bij `PaletteCommand.shortcut` en blijft `shortcut: 'Ctrl/Cmd+S'` op de
-//     aanroepplaats onzichtbaar. Dichtbaar langs dezelfde weg als hierboven — één
-//     bezitter van de veldnaam is eenduidig — en gemeten tijdens #803: dat legt
-//     23 échte overtredingen bloot die er nu al staan (de catalogusbeschrijvingen
-//     in reference_standards.dart worden met een kale `Text()` gerenderd). Dat is
-//     eigen werk met een eigen afweging, dus staat het als apart issue.
+//   * Strings die via een lijst of een `Map` reizen waar geen
+//     [_mapValueSinks]-ingang voor is.
+//   * Een veldsprong naar een veldnaam die MEER dan één klasse declareert.
+//     `name` en `title` staan op tientallen klassen, dus `x.name` is niet te
+//     plaatsen. Bewust: liever een gemiste melding dan een melding die naar het
+//     verkeerde bestand wijst.
 //
-// Wat de poort sinds #803 wél ziet: een aanroep zonder doel binnen een
-// `extension _X on _YState`. Zie [extensionOwner] — die vlek was de reden dat
-// het achtervoegsel `(Ctrl/Cmd+K)` van het commandopalet er maanden onvertaald
-// in stond, en dat de VORM van de aanroeper besliste of de poort keek.
+// ── Wat de poort sinds #803/#809 wél ziet ────────────────────────────────────
+//
+//   * Een aanroep zonder doel binnen een `extension _X on _YState`. Zie
+//     [extensionOwner]. Die vlek was de reden dat het achtervoegsel
+//     `(Ctrl/Cmd+K)` van het commandopalet er maanden onvertaald in stond, en
+//     dat de VORM van de aanroeper besliste of de poort keek.
+//   * De VELDSPRONG: `_shortcutHint(cmd.shortcut!)` heeft zijn put binnen
+//     `_shortcutHint`, maar `cmd` is een lokale variabele zonder opgelost type.
+//     Zie [_Index.fieldOwners]. Dat legde veertien onvertaalde regels in het
+//     instellingenvenster bloot — de catalogusbeschrijvingen uit
+//     reference_standards.dart, met een kale `Text()` gerenderd.
+//
+//     Diezelfde stap bracht ook negen kleurcodes boven die er níét thuishoorden:
+//     `ThemeProfile` toont zijn hexwaarden als `'$label  $value'`. Een kleurcode
+//     is geen tekst om te vertalen, en de presets zijn `const` in lib/models —
+//     onoplosbaar dus, en daarmee ruis. Zie [_isColourHex] in [isVisibleText].
 //
 // ── Er is geen plafond meer ──────────────────────────────────────────────────
 //
@@ -336,8 +344,23 @@ final _notALetter = RegExp('[×÷]');
 /// sleutels te veel in de lijst dan één zichtbare string die stil wegvalt.
 bool isVisibleText(String text) {
   final trimmed = text.trim().replaceAll(_notALetter, '');
+  if (_isColourHex.hasMatch(trimmed)) return false;
   return trimmed.length >= 2 && _hasLetter.hasMatch(trimmed);
 }
+
+/// Een kleurcode (`#FFCC00`). Staat er wél letters in — `F`, `C` — maar er valt
+/// niets aan te vertalen, net als bij `'•'` en `'%'` hierboven.
+///
+/// Dit werd zichtbaar toen de veldsprong dichtging (#809): de kleurvelden van
+/// `ThemeProfile` worden als `'$label  $value'` getoond, dus de hexwaarden in de
+/// presets kwamen als overtreding boven. Die zijn niet op te lossen ook: het zijn
+/// `const` declaraties in lib/models, en een model hoort geen l10n te importeren
+/// (dat bewaakt make check-audience-boundary). Een melding die niemand kán
+/// wegwerken is geen poort maar ruis.
+final _isColourHex = RegExp(
+  r'^#(?:[0-9A-Fa-f]{3,4}|[0-9A-Fa-f]{6}|'
+  r'[0-9A-Fa-f]{8})$',
+);
 
 bool _isTranslationData(String path) =>
     path.replaceAll(r'\', '/').contains('lib/l10n/translations/');
@@ -707,6 +730,32 @@ class _Index {
   /// mag een aanroep op een variabele (`helper.foo(...)`) daaraan geknoopt
   /// worden; anders blijft die aanroep buiten beeld.
   final methodOwners = <String, Set<String>>{};
+
+  /// Veldnaam → de klassen die hem declareren; de tegenhanger van
+  /// [methodOwners] voor een VELDSPRONG.
+  ///
+  /// `_shortcutHint(cmd.shortcut!)` heeft zijn put binnen `_shortcutHint`, maar
+  /// `cmd` is een lokale variabele zonder opgelost type. Zonder deze stap kwam
+  /// de analyse dus niet bij `PaletteCommand.shortcut` en bleef
+  /// `shortcut: 'Ctrl/Cmd+S'` op de aanroepplaats onzichtbaar (#809).
+  ///
+  /// Precies één bezitter is de voorwaarde, en dat is bewust streng: `name` of
+  /// `title` declareren tientallen klassen, dus die blijven buiten beeld. Deze
+  /// poort meldt liever te weinig dan het verkeerde bestand — een valse melding
+  /// kost iemand een halve dag zoeken naar een fout die er niet is.
+  Map<String, Set<String>> get fieldOwners {
+    final cached = _fieldOwners;
+    if (cached != null) return cached;
+    final owners = <String, Set<String>>{};
+    for (final entry in fields.entries) {
+      for (final field in entry.value) {
+        owners.putIfAbsent(field, () => <String>{}).add(entry.key);
+      }
+    }
+    return _fieldOwners = owners;
+  }
+
+  Map<String, Set<String>>? _fieldOwners;
 }
 
 class _IndexVisitor extends RecursiveAstVisitor<void> {
@@ -1105,7 +1154,32 @@ class _UseVisitor extends RecursiveAstVisitor<void> {
     if (node is PropertyAccess && node.target is ThisExpression) {
       return _fieldOrigins(_class, node.propertyName.name);
     }
+    // `cmd.shortcut` / `cmd.shortcut!` — een veld van een object waarvan het
+    // type niet is opgelost. Zie [_Index.fieldOwners].
+    final field = _uniqueField(node);
+    if (field != null) return _fieldOrigins(field.$1, field.$2);
     return const [];
+  }
+
+  /// De klasse en de veldnaam achter [node], maar alleen als daar geen twijfel
+  /// over bestaat: precies één klasse declareert die veldnaam.
+  ///
+  /// De `!` telt mee: `cmd.shortcut!` is een [PostfixExpression] om een
+  /// [PrefixedIdentifier] heen, en juist die vorm staat op de plek waar een
+  /// nullable veld wordt getoond.
+  (String, String)? _uniqueField(Expression node) {
+    final target = node is PostfixExpression ? node.operand : node;
+    final String name;
+    if (target is PrefixedIdentifier) {
+      name = target.identifier.name;
+    } else if (target is PropertyAccess) {
+      name = target.propertyName.name;
+    } else {
+      return null;
+    }
+    final owners = index.fieldOwners[name];
+    if (owners == null || owners.length != 1) return null;
+    return (owners.single, name);
   }
 
   List<String> _fieldOrigins(String owner, String field) {

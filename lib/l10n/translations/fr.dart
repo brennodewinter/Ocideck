@@ -730,6 +730,22 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'L\'index de la liste de contrôle : par test, l\'identifiant stable, le titre canonique et la catégorie. Le contenu du guide lui-même n\'est pas inclus.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'L\'index des tests de v2.0.0 : par test, l\'identifiant stable, le titre canonique, la catégorie MASVS et la faiblesse MASWE. Les tests v1 retirés et les espaces réservés n\'y sont pas ; le contenu du guide non plus.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'La liste des faiblesses (117) : identifiant, titre, catégorie MASVS, plateforme et le lien CWE. Trois quarts ne sont pas encore rédigés à la source ; ceux-là y figurent, signalés. Les faiblesses retirées non.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'La liste complète (identifiant, nom, description) plus un noyau sélectionné par nos soins avec nos notes de remédiation.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Le schéma EIS complet (88 exigences vérifiables).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Noms de pathologies en neuf langues, en lexique santé pour le contrôle de confidentialité (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Une implémentation Dart maison de la spécification publique, y compris la table MacroVector et les plages de gravité publiées.',
+  'Specificatie van FIRST.Org — attributie':
+      'Spécification de FIRST.Org — attribution',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Maj',
   'Presentaties importeren…': 'Importer des présentations…',

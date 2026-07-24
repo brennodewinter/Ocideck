@@ -1778,6 +1778,22 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Kontrolinio sąrašo rodyklė: kiekvienam testui stabilus id, kanoninis pavadinimas ir kategorija. Paties vadovo turinys neįtrauktas.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'v2.0.0 testų rodyklė: kiekvienam testui stabilus id, kanoninis pavadinimas, MASVS kategorija ir MASWE silpnybė. Atšaukti v1 testai ir vietaženkliai neįtraukti; vadovo turinys taip pat ne.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Silpnybių sąrašas (117): id, pavadinimas, MASVS kategorija, platforma ir CWE sąsaja. Trys ketvirtadaliai šaltinyje dar neaprašyti; jie įtraukti ir pažymėti. Atšauktos silpnybės — ne.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Visas sąrašas (id, pavadinimas, aprašas) ir mūsų pačių atrinktas branduolys su taisymo pastabomis.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Visa EIS schema (88 tikrinami reikalavimai).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Ligų pavadinimai devyniomis kalbomis kaip sveikatos leksikonas privatumo patikrai (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Nuosava viešosios specifikacijos realizacija Dart kalba, įskaitant MacroVector lentelę ir paskelbtas sunkumo juostas.',
+  'Specificatie van FIRST.Org — attributie':
+      'FIRST.Org specifikacija — autorystės nurodymas',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Importuoti prezentacijas…',

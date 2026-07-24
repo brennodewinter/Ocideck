@@ -1788,6 +1788,22 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De checklist-index: per test het stabiele id, de canonieke titel en de categorie. De inhoud van de gids zelf is niet gebundeld.':
+      'Покажчик контрольного списку: для кожного тесту стабільний ідентифікатор, канонічна назва та категорія. Вміст самого посібника не входить.',
+  'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
+      'Покажчик тестів v2.0.0: для кожного тесту стабільний ідентифікатор, канонічна назва, категорія MASVS і слабкість MASWE. Відкликані тести v1 і заповнювачі не входять; вміст посібника також ні.',
+  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
+      'Список слабкостей (117): ідентифікатор, назва, категорія MASVS, платформа та зв’язок із CWE. Три чверті ще не описані в джерелі; вони входять, із позначкою. Відкликані слабкості — ні.',
+  'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
+      'Повний список (ідентифікатор, назва, опис) плюс власне дібране ядро з нашими нотатками щодо усунення.',
+  'Het volledige EIS-schema (88 toetsbare eisen).':
+      'Повна схема EIS (88 перевірюваних вимог).',
+  'Aandoeningsnamen in negen talen als gezondheidslexicon voor de privacycontrole (assets/privacy/health_lexicon.json).':
+      'Назви захворювань дев’ятьма мовами як медичний лексикон для перевірки приватності (assets/privacy/health_lexicon.json).',
+  'Een eigen Dart-implementatie van de publieke specificatie, inclusief de MacroVector-tabel en de gepubliceerde bandindeling.':
+      'Власна реалізація публічної специфікації на Dart, разом із таблицею MacroVector та опублікованими діапазонами критичності.',
+  'Specificatie van FIRST.Org — attributie':
+      'Специфікація FIRST.Org — зазначення авторства',
   'Ctrl/Cmd': 'Ctrl/Cmd',
   'Shift': 'Shift',
   'Presentaties importeren…': 'Імпортувати презентації…',
