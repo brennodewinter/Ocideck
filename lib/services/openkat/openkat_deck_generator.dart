@@ -133,7 +133,7 @@ class OpenKatDeckGenerator {
         '${c.totalFindings} findings in ${c.uniqueFindingTypes} types',
         '${c.affectedSystems} getroffen systemen',
         '${c.criticalHighSystems} systemen met critical/high',
-        'Critical: ${c.severityCounts['critical']}, High: ${c.severityCounts['high']}, Medium: ${c.severityCounts['medium']}, Low: ${c.severityCounts['low']}',
+        _severityLine(c.severityCounts),
       ],
       viewLimit: const DisplayWindowSpec(),
       notes: '<!-- ocideck_openkat_view: portfolio.summary -->',
@@ -255,7 +255,7 @@ class OpenKatDeckGenerator {
         bullets: [
           '${agg.totalSystems} systemen',
           '${agg.totalFindings} findings',
-          'Critical: ${agg.severityCounts['critical']}, High: ${agg.severityCounts['high']}, Medium: ${agg.severityCounts['medium']}, Low: ${agg.severityCounts['low']}',
+          _severityLine(agg.severityCounts),
         ],
         notes: '<!-- ocideck_openkat_view: org.${_safe(org.code)}.summary -->',
       ),
@@ -263,18 +263,10 @@ class OpenKatDeckGenerator {
         id: _id('openkat-org-${_safe(org.code)}-systems'),
         type: SlideType.table,
         title: 'Systemen met de meeste findings',
-        tableRows: [
-          ['#', 'Systeem', 'Totaal', 'Critical', 'High', 'Medium'],
-          for (var i = 0; i < systemStats.length; i++)
-            [
-              '${i + 1}',
-              systemStats[i].systemId,
-              '${systemStats[i].total}',
-              '${systemStats[i].critical}',
-              '${systemStats[i].high}',
-              '${systemStats[i].medium}',
-            ],
-        ],
+        tableRows: _systemsTable(
+          systemStats,
+          showOther: agg.hasOtherSeverities,
+        ),
         viewLimit: const DisplayWindowSpec(
           limit: 8,
           mode: DisplayWindowMode.top,
@@ -307,16 +299,70 @@ class OpenKatDeckGenerator {
     ];
   }
 
-  String _id(String seed) {
-    final input = 'ocideck-openkat-$seed';
-    final bytes = utf8.encode(input);
-    final hash = md5.convert(bytes);
-    return 'ocikat-${hash.toString().substring(0, 16)}';
-  }
+  String _id(String seed) => _slideId(seed);
 
-  String _safe(String value) =>
-      value.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '-');
+  String _safe(String value) => _safeCode(value);
 
-  String _iso(DateTime value) =>
-      '${value.year.toString().padLeft(4, '0')}-${value.month.toString().padLeft(2, '0')}-${value.day.toString().padLeft(2, '0')}';
+  String _iso(DateTime value) => _isoDate(value);
 }
+
+/// Een dia-id die alleen van [seed] afhangt, zodat opnieuw genereren dezelfde
+/// dia's oplevert en een herimport ze op hun plek terugvindt.
+String _slideId(String seed) {
+  final bytes = utf8.encode('ocideck-openkat-$seed');
+  final hash = md5.convert(bytes);
+  return 'ocikat-${hash.toString().substring(0, 16)}';
+}
+
+String _safeCode(String value) =>
+    value.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '-');
+
+String _isoDate(DateTime value) =>
+    '${value.year.toString().padLeft(4, '0')}-'
+    '${value.month.toString().padLeft(2, '0')}-'
+    '${value.day.toString().padLeft(2, '0')}';
+
+/// De ernstverdeling op één regel. De restcategorie staat er alleen als hij
+/// gevuld is, maar dán ook altijd: een uitsplitsing die het totaal niet
+/// verklaart laat de lezer met een gat achter dat hij niet kan thuisbrengen.
+String _severityLine(Map<String, int> counts) {
+  final parts = [
+    'Critical: ${counts['critical'] ?? 0}',
+    'High: ${counts['high'] ?? 0}',
+    'Medium: ${counts['medium'] ?? 0}',
+    'Low: ${counts['low'] ?? 0}',
+    if ((counts[openKatOtherSeverity] ?? 0) > 0)
+      'Overig: ${counts[openKatOtherSeverity]}',
+  ];
+  return parts.join(', ');
+}
+
+/// De tabel "Systemen met de meeste findings": alle banden, zodat de kolommen
+/// optellen tot het totaal. De restkolom verschijnt alleen als er findings in
+/// vallen — een kolom die overal nul is kost breedte en zegt niets.
+List<List<String>> _systemsTable(
+  List<OpenKatSystemStats> stats, {
+  required bool showOther,
+}) => [
+  [
+    '#',
+    'Systeem',
+    'Totaal',
+    'Critical',
+    'High',
+    'Medium',
+    'Low',
+    if (showOther) 'Overig',
+  ],
+  for (var i = 0; i < stats.length; i++)
+    [
+      '${i + 1}',
+      stats[i].systemId,
+      '${stats[i].total}',
+      '${stats[i].critical}',
+      '${stats[i].high}',
+      '${stats[i].medium}',
+      '${stats[i].low}',
+      if (showOther) '${stats[i].other}',
+    ],
+];

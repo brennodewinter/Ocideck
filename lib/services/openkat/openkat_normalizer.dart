@@ -2,6 +2,74 @@ import '../../models/openkat/openkat_models.dart';
 import 'openkat_directory_scanner.dart';
 import 'openkat_json_adapter.dart';
 
+/// Het systeem waar de OpenKAT-sleutel [ooi] bij hoort: een hostname als de
+/// sleutel er een draagt, anders een IP-adres.
+///
+/// Een primary key van OpenKAT is een `|`-gescheiden reeks die begint bij het
+/// objecttype en het *netwerk* waarin het object is gevonden
+/// (`Hostname|internet|underdark.nl`), en die voor samengestelde types de
+/// sleutels van zijn onderdelen achter elkaar plakt — een `Website` draagt zijn
+/// `IPService` én zijn `Hostname`, een `HTTPHeader` daarbovenop nog een pad en
+/// een headernaam.
+///
+/// Dus wordt hier niet op positie geteld maar op vórm gezocht: het laatste
+/// segment dat als host leest is waar het object hoort. Dat vouwt elk pad en
+/// elke header van één website samen tot dat ene systeem, en het is bestand
+/// tegen een samenstelling die dit bestand nog niet kent — precies wat een
+/// grammatica die per type een segmentnummer onthoudt niet is.
+///
+/// Een hostname wint van een IP-adres, want een website waarvan beide bekend
+/// zijn is de hostname. Levert de vorm niets op, dan tellen eerst de velden van
+/// [object] en pas daarna het laatste segment (`Network|internet` → `internet`);
+/// een sleutel zonder segmenten komt onveranderd terug. Nooit een gok die een
+/// bestaand systeem zou kunnen kapen.
+String openKatSystemAnchor(
+  String ooi, [
+  Map<String, dynamic> object = const {},
+]) {
+  final segments = ooi.split('|');
+  String? host;
+  String? address;
+  for (final segment in segments) {
+    final value = segment.trim();
+    if (value.isEmpty) continue;
+    final fromUri = value.contains('://') ? Uri.tryParse(value)?.host : null;
+    final candidate = (fromUri != null && fromUri.isNotEmpty) ? fromUri : value;
+    if (_looksLikeHostname(candidate)) {
+      host = candidate.toLowerCase();
+    } else if (_looksLikeIpv4(candidate) || _looksLikeIpv6(candidate)) {
+      address = candidate.toLowerCase();
+    }
+  }
+  final anchor = host ?? address;
+  if (anchor != null) return anchor;
+
+  for (final key in const ['hostname', 'ip', 'address', 'name']) {
+    final value = object[key];
+    if (value is String && value.trim().isNotEmpty) return value.trim();
+  }
+  return segments.length > 1 ? segments.last.trim() : ooi;
+}
+
+/// Een naam met minstens één punt, waarvan het laatste deel uit letters bestaat
+/// — genoeg om `underdark.nl` van `185.73.32.3`, `Strict-Transport-Security`,
+/// `tcp`, `443` en `/.well-known/security.txt` te scheiden.
+///
+/// Een hostname zonder punt (`intranet`) valt hier bewust buiten: hij is niet te
+/// onderscheiden van de losse woorden waar deze sleutels vol mee staan, en die
+/// verwarring maakt van een headernaam een systeem.
+bool _looksLikeHostname(String value) => RegExp(
+  r'^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*\.[a-z]{2,}$',
+  caseSensitive: false,
+).hasMatch(value);
+
+bool _looksLikeIpv4(String value) =>
+    RegExp(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$').hasMatch(value);
+
+bool _looksLikeIpv6(String value) =>
+    value.contains(':') &&
+    RegExp(r'^[0-9a-f:]+$', caseSensitive: false).hasMatch(value);
+
 /// Normalises the source JSON of a snapshot into the shared internal model.
 ///
 /// Keeps provenance (source file, hash, report date, report type) and does not
@@ -66,28 +134,8 @@ class OpenKatNormalizer {
     return byAnchor.values.toList();
   }
 
-  String _systemAnchor(String ooi, Map<String, dynamic> object) {
-    final lower = ooi.toLowerCase();
-    if (lower.startsWith('ipaddressv4|') || lower.startsWith('ipaddressv6|')) {
-      return ooi.split('|').skip(1).join('|');
-    }
-    if (lower.startsWith('ipport|')) {
-      final parts = ooi.split('|');
-      return parts.length >= 2 ? parts[1] : ooi;
-    }
-    if (lower.startsWith('hostname|')) {
-      return ooi.split('|').skip(1).join('|');
-    }
-    if (lower.startsWith('url|') || lower.startsWith('httpresource|')) {
-      final raw = ooi.split('|').skip(1).join('|');
-      // Uri.tryParse gooit niet — bij onzin komt er null en valt dit terug op
-      // de ruwe waarde. De try/bare-catch die hier stond ving dus niets.
-      final uri = Uri.tryParse(raw);
-      final host = uri?.host;
-      return (host == null || host.isEmpty) ? raw : host;
-    }
-    return _stringField(object, ['hostname', 'ip', 'address', 'name']) ?? ooi;
-  }
+  String _systemAnchor(String ooi, Map<String, dynamic> object) =>
+      openKatSystemAnchor(ooi, object);
 
   List<OpenKatFinding> _normalizeFindings(
     List<Map<String, dynamic>> objects, {
