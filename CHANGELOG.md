@@ -147,49 +147,6 @@ read a book to find out.
   boom, geen letter gewijzigd. De kostenpost is niet de storing maar de uren van
   wie een gezonde test gaat debuggen.
 
-  Er is nu `make clean-test-cache` (alleen `build/test_cache`, bewust niet
-  `flutter clean` — daaronder staan de platformbuilds waar `DARTCV_LIB` de
-  native OpenCV-bibliotheek vindt), en élke `flutter test` in de Makefile sluit
-  af met `$(ON_SUITE_FAILURE)`, dat bij een rode suite
-  `scripts/suite_failure_hint.sh` de foutsignatuur laat noemen. Die aanwijzing
-  praat eróver en niet erdoorheen: er wordt niets afgevangen of onderdrukt, de
-  uitvoer stroomt onveranderd door en de afloop blijft de afloop van de suite.
-  Hij zwijgt bovendien als er géén meegedragen cache lag — een aanwijzing die
-  onder élke rode test staat, leest niemand meer.
-
-  Wat het onderzoek *niet* opleverde staat er in dezelfde adem bij, in
-  `docs/CHECKS.md`. Drie manieren om die cache te bederven zijn tegen een echte
-  draai geprobeerd — halveren, bytes omklappen, vervangen door een geldige dill
-  uit een andere bronboom — en `flutter test` ving alle drie op en werd groen.
-  De voor de hand liggende lezing ("het bestand is stuk") houdt dus geen stand,
-  en niemand hoeft die drie proeven over te doen. Wat wél vaststaat is dat de
-  bestandsnaam van die cache alleen de dart-defines en de frontend-opties hasht
-  (`getDefaultCachedKernelPath` in de Flutter-SDK) en dus níét de SDK-versie of
-  de pakketresolutie: hetzelfde cachebestand overleeft een upgrade. Dat is een
-  mechanisme, geen bewijs, en het staat zo opgeschreven. Bovenstrooms staat
-  flutter/flutter#128563 nog open over precies deze klacht bij de zustercache
-  van `flutter test`.
-  `d()` staat op de renderplek en niet in de catalogus: die is `const`, en
-  lib/services hoort geen l10n te importeren. Dat is de erkende indirecte vorm,
-  dezelfde als `EditorField(label: …)`.
-
-  Dezelfde stap bracht negen kleurcodes boven die er niet thuishoorden.
-  `ThemeProfile` toont zijn hexwaarden naast het label, dus `#FFCC00` gold ineens
-  als zichtbare tekst — er staan letters in, dus de lettertoets hielp niet.
-  Onoplosbaar ook: de presets zijn `const` in lib/models, en een model importeert
-  geen l10n. Een kleurcode is nu geen tekst meer, in dezelfde categorie als `•`
-  en `%`. Een melding die niemand kán wegwerken is geen poort maar ruis.
-
-### Fixed
-- **Een omgevallen suite wijst niet langer naar een test die niets misdaan
-  heeft.** `make check` viel op 24-07-2026 twee keer om met `Failed to load
-  "test/<wisselend>_test.dart": type '_Map<String, dynamic>' is not a subtype of
-  type 'List<dynamic>' in type cast` (#798). Het is een fout bij het *laden* van
-  een testbestand; de genoemde test was los gedraaid allebei de keren groen, en
-  allebei de keren was het weg na het opruimen van `build/test_cache` — dezelfde
-  boom, geen letter gewijzigd. De kostenpost is niet de storing maar de uren van
-  wie een gezonde test gaat debuggen.
-
   **De cache was de verkeerde verdachte, en dat is tijdens dit werk gebleken.**
   Drie manieren om hem te bederven zijn tegen een echte draai geprobeerd —
   halveren, bytes omklappen, vervangen door een geldige dill uit een andere
