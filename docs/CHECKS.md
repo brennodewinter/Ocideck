@@ -1066,6 +1066,23 @@ So the naive reading — "the file got corrupted" — does not hold. Whatever th
 is, it is not a broken cache file that the compiler chokes on. Nobody needs to
 repeat these three experiments.
 
+**If it happens again, keep the evidence before you clear the cache.** The cause
+is *not* diagnosed, and `make clean-test-cache` destroys the only copy of the
+state it happened in. Four things, in this order, and none of them takes a
+minute:
+
+1. the full run output, not the tail — the suite position and the surrounding
+   test names are half the signal;
+2. `cp -R build/test_cache /tmp/test_cache-<datum>` — the cache as it was;
+3. `flutter test <the named file> -v` on its own, with the cache still in place,
+   so the load path is visible for a case that is failing rather than for one
+   that is not;
+4. `git status` and `flutter --version --machine` — the tree and the toolchain,
+   because a package or SDK change is the one mechanism that is on the table
+   (see below) and it is invisible afterwards.
+
+Only then clear the cache and get on with your day.
+
 **Upstream.** Two relevant reports, neither of them this bug:
 
 - [flutter/flutter#49351](https://github.com/flutter/flutter/issues/49351) —
