@@ -52,6 +52,16 @@ done
 
 log() { printf '\n== %s ==\n' "$1"; }
 
+# In CI mag ssh nergens op wachten. Zonder BatchMode blijft een onbekende
+# hostsleutel of een sleutel met wachtwoord staan wachten op een antwoord dat
+# in een container nooit komt — en dan hangt de job tot de timeout van drie uur
+# in plaats van meteen te zeggen wat er mis is. Met de hand juist níet: daar
+# hoort een sleutel met wachtwoord uit de ssh-agent gewoon te werken.
+SSH_OPTS=()
+if [[ -n "${CI:-}" ]]; then
+  SSH_OPTS=(-o BatchMode=yes -o StrictHostKeyChecking=yes)
+fi
+
 # --- 1. Is er iets te deployen, en klopt het? --------------------------------
 
 log "Bundel controleren"
@@ -78,8 +88,12 @@ fi
 
 STAMP="$(date -u +%Y%m%d-%H%M%S)"
 TARBALL="ocideck-web-$STAMP.tar.gz"
-TMP_TARBALL="$(mktemp -t ocideck-web-XXXXXX).tar.gz"
-trap 'rm -f "$TMP_TARBALL"' EXIT
+# Een eigen map en niet `mktemp`+achtervoegsel: dat laatste laat het bestand dat
+# mktemp werkelijk aanmaakt onopgeruimd achter, want de naam waar je mee verder
+# werkt is dan een andere.
+WERKMAP="$(mktemp -d -t ocideck-web-XXXXXX)"
+trap 'rm -rf "$WERKMAP"' EXIT
+TMP_TARBALL="$WERKMAP/$TARBALL"
 
 tar -C build/web -czf "$TMP_TARBALL" .
 echo "Tarball:    $(du -h "$TMP_TARBALL" | cut -f1)"
@@ -94,43 +108,48 @@ fi
 # --- 2. Uploaden ------------------------------------------------------------
 
 log "Uploaden naar $HOST"
-scp -q "$TMP_TARBALL" "$HOST:/tmp/$TARBALL"
+scp -q "${SSH_OPTS[@]}" "$TMP_TARBALL" "$HOST:/tmp/$TARBALL"
 
 # --- 3. Uitpakken náást de live map, dan ondeelbaar wisselen -----------------
 #
 # Alles in één ssh-sessie met `set -e`: breekt het uitpakken af, dan is er nog
 # niets gewisseld en staat de oude site er ongemoeid bij.
 
+# De waarden gaan als argumenten mee en niet als tekst in het script: een
+# aangehaalde heredoc (<<'REMOTE') wordt lokaal met rust gelaten, dus er is geen
+# tweede aanhalingslaag waar een pad met een spatie of een aanhalingsteken
+# doorheen kan breken. Ook wat ShellCheck met SC2087 bedoelt.
 log "Wisselen op de server"
-ssh "$HOST" "bash -seuo pipefail" <<REMOTE
-WEBROOT="$WEBROOT"
-OWNER="$OWNER"
-TARBALL="/tmp/$TARBALL"
-STAMP="$STAMP"
+ssh "${SSH_OPTS[@]}" "$HOST" bash -s -- "$WEBROOT" "$OWNER" "/tmp/$TARBALL" "$STAMP" <<'REMOTE'
+set -euo pipefail
+WEBROOT="$1"
+OWNER="$2"
+TARBALL="$3"
+STAMP="$4"
 
-NEW="\$WEBROOT.new"
-BAK="\$WEBROOT.bak-\$STAMP"
+NEW="$WEBROOT.new"
+BAK="$WEBROOT.bak-$STAMP"
 
-sudo rm -rf "\$NEW"
-sudo mkdir -p "\$NEW"
-sudo tar -C "\$NEW" -xzf "\$TARBALL"
-rm -f "\$TARBALL"
+sudo rm -rf "$NEW"
+sudo mkdir -p "$NEW"
+sudo tar -C "$NEW" -xzf "$TARBALL"
+rm -f "$TARBALL"
 
-# Bestandsrechten worden al door \`make build-web\` genormaliseerd (644/755);
+# Bestandsrechten worden al door `make build-web` genormaliseerd (644/755);
 # hier gaat het om het eigendom, want de tarball draagt de uid van de
 # bouwmachine mee en die bestaat op de server niet.
-sudo chown -R "\$OWNER" "\$NEW"
+sudo chown -R "$OWNER" "$NEW"
 
-if [ -d "\$WEBROOT" ]; then
-  sudo mv "\$WEBROOT" "\$BAK"
-  echo "Vorige versie bewaard als \$BAK"
+if [ -d "$WEBROOT" ]; then
+  sudo mv "$WEBROOT" "$BAK"
+  echo "Vorige versie bewaard als $BAK"
 fi
-sudo mv "\$NEW" "\$WEBROOT"
+sudo mv "$NEW" "$WEBROOT"
 
 # De topmap zelf hoort aan de webservergroep, anders leest nginx/Caddy er niet
 # in wanneer de eigenaar restrictiever staat dan de bestanden eronder.
-sudo chown "\${OWNER%%:*}:www-data" "\$WEBROOT"
-echo "Live: \$WEBROOT"
+sudo chown "${OWNER%%:*}:www-data" "$WEBROOT"
+echo "Live: $WEBROOT"
 REMOTE
 
 # --- 4. Liveverificatie -----------------------------------------------------
@@ -141,8 +160,7 @@ REMOTE
 # byte voor byte naast wat we net hebben neergezet.
 
 log "Liveverificatie op $LIVE_URL"
-REMOTE_INDEX="$(mktemp)"
-trap 'rm -f "$TMP_TARBALL" "$REMOTE_INDEX"' EXIT
+REMOTE_INDEX="$WERKMAP/index.html.live"
 
 if ! curl -fsSL --max-time 30 "$LIVE_URL/index.html" -o "$REMOTE_INDEX"; then
   echo "Kon $LIVE_URL/index.html niet ophalen. De wissel is wél gedaan;" >&2
@@ -178,7 +196,10 @@ if (( KEEP_BACKUP )); then
   echo "$WEBROOT.bak-$STAMP"
 else
   log "Backup opruimen"
-  ssh "$HOST" "sudo rm -rf '$WEBROOT.bak-$STAMP'"
+  ssh "${SSH_OPTS[@]}" "$HOST" bash -s -- "$WEBROOT.bak-$STAMP" <<'REMOTE'
+set -euo pipefail
+sudo rm -rf "$1"
+REMOTE
   echo "Opgeruimd: $WEBROOT.bak-$STAMP"
 fi
 
