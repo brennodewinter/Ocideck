@@ -102,9 +102,10 @@ jobs:
       # Ze installeren hun eigen gereedschap: het zijn externe binaries, en dat
       # is precies de reden dat ze niet in `make check` zitten — die poort mag
       # niets aannemen wat niet in de repo staat.
-      # Bewust géén marketplace-actions: die zouden gepind moeten worden en de
-      # stapnaam zou liegen — `make check-secrets` draait gitleaks én
-      # trufflehog. Dit installeert dezelfde binaries en roept dezelfde
+      # Bewust géén marketplace-actions: de stapnaam zou liegen — `make
+      # check-secrets` draait gitleaks én trufflehog. (Hier stond ook "die
+      # zouden gepind moeten worden"; dat argument is vervallen, want hieronder
+      # wordt sowieso gepind.) Dit installeert dezelfde binaries en roept dezelfde
       # make-doelen aan als lokaal, zodat CI en de werkbank niet uit elkaar
       # kunnen lopen.
       #
