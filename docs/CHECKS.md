@@ -1023,11 +1023,24 @@ For focused work, run only the relevant slice instead of the whole suite:
 - **What it actually costs in CI: about three minutes**, measured on the first
   runs (#778). Read that against the 19 seconds above and the difference is the
   point — nearly all of it is *installing* the scanners into a bare image, not
-  scanning. That is the lever if it ever needs to be faster: cache the two
-  binaries and the semgrep venv on the pinned versions, the way `linux-gate.yml`
-  already caches the toolchain. It is deliberately not done yet — three minutes
-  on a runner that has been idle since #797, for a job that blocks nothing, does
-  not yet justify a cache whose staleness is one more thing to reason about.
+  scanning. The obvious lever would be to cache the two binaries and the semgrep
+  venv on the pinned versions, the way `linux-gate.yml` caches the toolchain.
+  **That is deliberately not done, and the reason first recorded here — "three
+  minutes does not yet justify the staleness" — was the weaker one.** The real
+  objection is specific to this job: a cache restore would replace a
+  sha256-verified download *of a security scanner* with an artifact written by
+  an earlier run. `linux-gate.yml` accepts that trade for the toolchain because
+  `check-toolchain` re-checks the restored tree; there is no equivalent re-check
+  for a restored scanner binary, so caching here would quietly spend the very
+  property #778 was after — that green means the same thing over time.
+- **What does get fixed is the network, not the clock.** Three downloads on
+  every pull request and push is three chances per run at a failure that has
+  nothing to do with this repository, and on 2026-07-24 that happened twice in
+  one afternoon: `curl: (22) … error: 504`, half a second after checkout, with
+  `make check-secrets` and `make sast` green locally on the same commit. The
+  downloads therefore retry on 5xx with a backoff, and a superseded run cancels
+  instead of reporting failure. Both exist for one reason: a red tick on a
+  security gate that is not a finding teaches you to ignore the next one.
 - **Why on the Linux runner rather than the Mac.** The Mac has all three
   scanners installed already, so nothing would need downloading. But since #797
   that Mac is both the release gate and the committer's own working machine, and

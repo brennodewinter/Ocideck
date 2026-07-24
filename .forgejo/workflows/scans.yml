@@ -102,13 +102,25 @@ jobs:
       # de verificatie debuggen terwijl er in werkelijkheid een release-asset
       # hernoemd is. Eén regel om te voorkomen dat een correcte controle als een
       # kapotte controle overkomt.
+      #
+      # **De `--retry` is er niet voor de netheid.** Deze poort haalt drie
+      # scanners van het net, bij élke PR en élke push, en dat is precies zo vaak
+      # een kans op een storing die niets met deze repo te maken heeft. Op
+      # 24-07 gebeurde dat twee keer op één middag: `curl: (22) … error: 504`,
+      # een halve seconde na de checkout, en de poort stond rood terwijl
+      # `check-secrets` en `sast` op datzelfde commit lokaal groen waren.
+      #
+      # Een rood beveiligingsvinkje dat geen vondst is, is duurder dan geen
+      # vinkje: het leert je het volgende rode vinkje ook weg te klikken. Curl
+      # herhaalt op 5xx met een oplopende wachttijd, en dat is de goedkoopste
+      # manier om de storing van de bevinding te scheiden.
       - name: gitleaks volgens de pin
         run: |
           set -eu
           BASE="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}"
           ARCHIVE="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
-          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
-          curl -fsSLo /tmp/gitleaks_checksums.txt \
+          curl -fsSLo --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
+          curl -fsSLo --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 /tmp/gitleaks_checksums.txt \
             "$BASE/gitleaks_${GITLEAKS_VERSION}_checksums.txt"
           SHA=$(awk -v f="$ARCHIVE" '$2 == f { print $1 }' /tmp/gitleaks_checksums.txt)
           test -n "$SHA"
@@ -122,8 +134,8 @@ jobs:
           set -eu
           BASE="https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}"
           ARCHIVE="trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz"
-          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
-          curl -fsSLo /tmp/trufflehog_checksums.txt \
+          curl -fsSLo --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
+          curl -fsSLo --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 /tmp/trufflehog_checksums.txt \
             "$BASE/trufflehog_${TRUFFLEHOG_VERSION}_checksums.txt"
           SHA=$(awk -v f="$ARCHIVE" '$2 == f { print $1 }' /tmp/trufflehog_checksums.txt)
           test -n "$SHA"
