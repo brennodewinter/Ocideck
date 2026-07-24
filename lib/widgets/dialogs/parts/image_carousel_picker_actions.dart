@@ -489,10 +489,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
                   l10n.d(
                     'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.',
                   ),
-                  style: const TextStyle(
-                    color: ImagePickerPalette.textMuted,
-                    fontSize: 13,
-                  ),
+                  style: const TextStyle(color: _muted, fontSize: 13),
                 ),
                 const SizedBox(height: 12),
                 Flexible(
@@ -537,7 +534,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
                                     child: Text(
                                       p.basename(path),
                                       style: const TextStyle(
-                                        color: ImagePickerPalette.textMuted,
+                                        color: _muted,
                                         fontSize: 12,
                                       ),
                                       overflow: TextOverflow.ellipsis,
@@ -558,9 +555,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              style: TextButton.styleFrom(
-                foregroundColor: ImagePickerPalette.textMuted,
-              ),
+              style: TextButton.styleFrom(foregroundColor: _muted),
               child: Text(l10n.t('cancel')),
             ),
             ElevatedButton.icon(

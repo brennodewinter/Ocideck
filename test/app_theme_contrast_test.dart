@@ -215,6 +215,51 @@ void main() {
     );
   });
 
+  // ── Dia-inkt op een eigen tint, niet op het witte canvas ──────────────────
+  //
+  // De tabellen bovenaan meten tegen wit, want dat is waar dia-inkt meestal
+  // staat. De mediaplaatshouders zijn de uitzondering: die vullen hun eigen vlak
+  // met `slideRuleSoft` en zetten er tekst op. Daar werd tegen wit gemeten wat
+  // op grijs gelezen wordt, en het gat is groot — `slideInkFaint` haalt 4,4:1
+  // op wit en **2,08:1** op deze tint (#780).
+  //
+  // Wat er staat is bovendien een storingsmelding: "Bestand niet gevonden",
+  // "Online media staat uit". Het enige wat vertelt waarom er een grijs vlak op
+  // de dia zit, en het reist mee de export in.
+  test('de tekst van een mediaplaatshouder is leesbaar op zijn eigen tint', () {
+    const tint = AppTheme.slideRuleSoft;
+    expect(
+      contrastRatio(AppTheme.slideInkMuted, tint),
+      greaterThanOrEqualTo(kWcagAaNormalText),
+      reason: 'het label van de plaatshouder is bodytekst op deze tint',
+    );
+    expect(
+      contrastRatio(AppTheme.slideInkSoft, tint),
+      greaterThanOrEqualTo(kWcagAaLargeText),
+      reason: 'het pictogram ernaast is een grafisch object (WCAG 1.4.11)',
+    );
+    // De bronwacht: `slideInkFaint` is op deze tint 2,08:1 en hoort er dus niet
+    // te staan. Zonder deze regel bewaakt de test twee tokens die niemand meer
+    // hoeft te gebruiken.
+    final bron = File(
+      'lib/widgets/slides/previews/media_previews_image.dart',
+    ).readAsLinesSync();
+    final overtreders = <String>[];
+    for (var i = 0; i < bron.length; i++) {
+      if (bron[i].contains('AppTheme.slideInkFaint')) {
+        overtreders.add('regel ${i + 1}: ${bron[i].trim()}');
+      }
+    }
+    expect(
+      overtreders,
+      isEmpty,
+      reason:
+          'slideInkFaint haalt op slideRuleSoft 2,08:1; gebruik slideInkMuted '
+          'voor tekst en slideInkSoft voor een pictogram:\n'
+          '${overtreders.join('\n')}',
+    );
+  });
+
   // ── De dia volgt het thema niet ────────────────────────────────────────────
   //
   // De diepste vorm van wat #606 aanwees, en de enige die de gebruiker in zijn

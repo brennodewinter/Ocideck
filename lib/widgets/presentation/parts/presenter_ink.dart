@@ -150,7 +150,7 @@ extension _PresenterInk on _FullscreenPresenterState {
             context.l10n.d('Laser (X)'),
           ),
           const SizedBox(width: 8),
-          Container(width: 1, height: 22, color: PresenterPalette.surface4),
+          Container(width: 1, height: 22, color: PresenterPalette.outline),
           const SizedBox(width: 8),
           for (final c in palette)
             GestureDetector(
@@ -172,7 +172,7 @@ extension _PresenterInk on _FullscreenPresenterState {
               ),
             ),
           const SizedBox(width: 8),
-          Container(width: 1, height: 22, color: PresenterPalette.surface4),
+          Container(width: 1, height: 22, color: PresenterPalette.outline),
           IconButton(
             tooltip: context.l10n.d('Wis annotaties (C)'),
             onPressed: _clearCurrentInk,

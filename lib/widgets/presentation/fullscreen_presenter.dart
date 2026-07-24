@@ -93,6 +93,16 @@ enum _Blank { none, black, white }
 /// onderdelen die over `part`-bestanden zijn verdeeld erbij kunnen.
 const _questionTickMs = 100;
 
+/// Het tweede tekstniveau van de presentatiemodus, kort genoeg om in een
+/// `TextStyle` op één regel te passen.
+///
+/// De naam is geen verkorting om het verkorten: de plekken die hem gebruiken
+/// stonden er tot #780 als `Colors.white24`, `white30` en `white38` — drie
+/// dekkingen die niemand naast elkaar had gelegd, van 2,15 tot 3,60:1. Eén
+/// naam voor één niveau is precies waar dat aan ontbrak, en hij wordt gemeten
+/// in `test/fixed_dark_chrome_contrast_test.dart`.
+const _muted = PresenterPalette.textMuted;
+
 class FullscreenPresenter extends StatefulWidget {
   final List<Slide> slides;
   final String? projectPath;

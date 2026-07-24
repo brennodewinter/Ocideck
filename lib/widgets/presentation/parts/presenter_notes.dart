@@ -253,7 +253,7 @@ extension _PresenterNotes on _FullscreenPresenterState {
               child: Text(
                 '${l10n.d('Pagina')} ${_richTextPage + 1} / $pageCount',
                 style: const TextStyle(
-                  color: PresenterPalette.textMuted,
+                  color: _muted,
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                 ),
@@ -266,7 +266,7 @@ extension _PresenterNotes on _FullscreenPresenterState {
                     child: Text(
                       l10n.d('Geen notities voor deze slide.'),
                       style: const TextStyle(
-                        color: PresenterPalette.textMuted,
+                        color: _muted,
                         fontSize: 14,
                         fontStyle: FontStyle.italic,
                       ),

@@ -26,6 +26,15 @@ part 'parts/image_carousel_picker_chrome.dart';
 part 'parts/image_carousel_picker_grid.dart';
 part 'parts/image_carousel_picker_preview.dart';
 
+/// Het tweede tekstniveau van de kiezer, kort genoeg om in een `TextStyle` op
+/// één regel te passen.
+///
+/// Er zat tot #780 nog een niveau onder (`textDim`), en dat was de fout: op de
+/// oppervlakken van dit palet haalde het 3,31 tot 4,24:1 op vijftien plekken.
+/// Het is opgeheven in plaats van opgehoogd — onder #8B949E ís hier geen
+/// tekstniveau. Gemeten in `test/fixed_dark_chrome_contrast_test.dart`.
+const _muted = ImagePickerPalette.textMuted;
+
 /// Resultaat van de afbeeldingencarousel.
 class ImagePickResult {
   final String path;

@@ -121,10 +121,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
                   l10n.d(
                     'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.',
                   ),
-                  style: const TextStyle(
-                    color: ImagePickerPalette.textMuted,
-                    fontSize: 13,
-                  ),
+                  style: const TextStyle(color: _muted, fontSize: 13),
                 )
               else ...[
                 Text(
@@ -162,10 +159,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
                   l10n.d(
                     'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.',
                   ),
-                  style: const TextStyle(
-                    color: ImagePickerPalette.textMuted,
-                    fontSize: 13,
-                  ),
+                  style: const TextStyle(color: _muted, fontSize: 13),
                 ),
               ],
             ],
@@ -173,9 +167,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              style: TextButton.styleFrom(
-                foregroundColor: ImagePickerPalette.textMuted,
-              ),
+              style: TextButton.styleFrom(foregroundColor: _muted),
               child: Text(l10n.t('cancel')),
             ),
             ElevatedButton.icon(
