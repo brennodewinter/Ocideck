@@ -7,14 +7,11 @@ const _stringsDe = {
   'openEllipsis': 'Öffnen…',
   'recentPresentations': 'Zuletzt verwendete Präsentationen',
   'newTab': 'Neuer Tab',
-  'undo': 'Rückgängig (Strg/Cmd+Z)',
-  'redo': 'Wiederholen (Strg/Cmd+Shift+Z)',
   'imageLibrary': 'Bildbibliothek',
   'presentFullscreen': 'Vollbild präsentieren · P für Presenter-Ansicht',
   'visualMode': 'Visueller Modus',
   'markdownMode': 'Markdown-Modus',
   'save': 'Speichern',
-  'saveShortcut': 'Speichern (Strg/Cmd+S)',
   'more': 'Mehr',
   'export': 'Exportieren',
   'exportReady': 'Exportieren (PDF/PPTX/HTML)',
@@ -733,6 +730,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Ctrl/Cmd': 'Strg/Cmd',
+  'Shift': 'Umschalt',
   'Presentaties importeren…': 'Präsentationen importieren…',
   'Presentaties importeren': 'Präsentationen importieren',
   'Presentatie importeren': 'Präsentation importieren',

@@ -7,14 +7,11 @@ const _stringsTlh = {
   'openEllipsis': 'poSmoH…',
   'recentPresentations': '\'angmey ramwI\'',
   'newTab': 'per chu\'',
-  'undo': 'che\'lI\' (Ctrl/Cmd+Z)',
-  'redo': 'che\'qa\' (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'nagh beQ pa\'',
   'presentFullscreen': '\'ang (jIH naQ) · presenter view \'oH P',
   'visualMode': 'leghlu\'bogh mIw',
   'markdownMode': 'Markdown mIw',
   'save': 'choq',
-  'saveShortcut': 'choq (Ctrl/Cmd+S)',
   'more': 'law\'qu\'',
   'export': 'ngeH',
   'exportReady': 'ngeH (PDF/PPTX/HTML)',
@@ -1749,6 +1746,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'presentationmey yIkII\'…',
   'Presentaties importeren': 'presentationmey yIkII\'',
   'Presentatie importeren': 'presentation yIkII\'',

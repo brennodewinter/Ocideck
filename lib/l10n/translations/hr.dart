@@ -7,14 +7,11 @@ const _stringsHr = {
   'openEllipsis': 'Otvori…',
   'recentPresentations': 'Nedavne prezentacije',
   'newTab': 'Nova kartica',
-  'undo': 'Poništi (Ctrl/Cmd+Z)',
-  'redo': 'Ponovi (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Biblioteka slika',
   'presentFullscreen': 'Prezentiraj (cijeli zaslon) · P za prikaz voditelja',
   'visualMode': 'Vizualni način',
   'markdownMode': 'Markdown način',
   'save': 'Spremi',
-  'saveShortcut': 'Spremi (Ctrl/Cmd+S)',
   'more': 'Više',
   'export': 'Izvoz',
   'exportReady': 'Izvezi (PDF/PPTX/HTML)',
@@ -1780,6 +1777,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Uvezi prezentacije…',
   'Presentaties importeren': 'Uvezi prezentacije',
   'Presentatie importeren': 'Uvezi prezentaciju',

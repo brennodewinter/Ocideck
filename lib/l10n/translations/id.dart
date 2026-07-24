@@ -7,14 +7,11 @@ const _stringsId = {
   'openEllipsis': 'Buka…',
   'recentPresentations': 'Presentasi terkini',
   'newTab': 'Tab baru',
-  'undo': 'Urungkan (Ctrl/Cmd+Z)',
-  'redo': 'Ulangi (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Pustaka gambar',
   'presentFullscreen': 'Presentasikan (layar penuh) · P untuk tampilan penyaji',
   'visualMode': 'Mode visual',
   'markdownMode': 'Mode Markdown',
   'save': 'Simpan',
-  'saveShortcut': 'Simpan (Ctrl/Cmd+S)',
   'more': 'Lainnya',
   'export': 'Ekspor',
   'exportReady': 'Ekspor (PDF/PPTX/HTML)',
@@ -1774,6 +1771,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Impor presentasi…',
   'Presentaties importeren': 'Impor presentasi',
   'Presentatie importeren': 'Impor satu presentasi',

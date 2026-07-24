@@ -7,14 +7,11 @@ const _stringsLv = {
   'openEllipsis': 'Atvērt…',
   'recentPresentations': 'Nesenās prezentācijas',
   'newTab': 'Jauna cilne',
-  'undo': 'Atsaukt (Ctrl/Cmd+Z)',
-  'redo': 'Atkārtot (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Attēlu bibliotēka',
   'presentFullscreen': 'Rādīt (pilnekrāns) · P prezentētāja skatam',
   'visualMode': 'Vizuālais režīms',
   'markdownMode': 'Markdown režīms',
   'save': 'Saglabāt',
-  'saveShortcut': 'Saglabāt (Ctrl/Cmd+S)',
   'more': 'Vairāk',
   'export': 'Eksportēt',
   'exportReady': 'Eksportēt (PDF/PPTX/HTML)',
@@ -1773,6 +1770,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Importēt prezentācijas…',
   'Presentaties importeren': 'Importēt prezentācijas',
   'Presentatie importeren': 'Importēt prezentāciju',

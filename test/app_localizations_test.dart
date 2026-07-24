@@ -121,6 +121,13 @@ const unchangedInEnglish = {
   'Enter',
   'OK',
   'min',
+  // De twee vertaalbare helften van een sneltoetsaanduiding (zie
+  // lib/utils/shortcut_label.dart). Het Nederlandse toetsenbord draagt hier de
+  // Engelse opschriften, dus vallen bron en Engelse vertaling samen. Elders wel
+  // echt anders: Duits leest 'Strg/Cmd' en 'Umschalt', Frans 'Maj', Spaans
+  // 'Mayús', Italiaans 'Maiusc'.
+  'Ctrl/Cmd',
+  'Shift',
   // De teksten op de cockpitglazen. P/B (pitch/bank) en ACT/TGT zijn de
   // luchtvaartafkortingen zoals ze op een echt instrument staan, en dat is in
   // het Engels hetzelfde als in het Nederlands. Talen met een eigen

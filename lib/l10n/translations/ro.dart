@@ -7,15 +7,12 @@ const _stringsRo = {
   'openEllipsis': 'Deschide…',
   'recentPresentations': 'Prezentări recente',
   'newTab': 'Filă nouă',
-  'undo': 'Anulează (Ctrl/Cmd+Z)',
-  'redo': 'Refă (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Bibliotecă de imagini',
   'presentFullscreen':
       'Prezintă (ecran complet) · P pentru vizualizarea prezentatorului',
   'visualMode': 'Mod vizual',
   'markdownMode': 'Mod Markdown',
   'save': 'Salvează',
-  'saveShortcut': 'Salvează (Ctrl/Cmd+S)',
   'more': 'Mai multe',
   'export': 'Exportă',
   'exportReady': 'Exportă (PDF/PPTX/HTML)',
@@ -1791,6 +1788,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Importă prezentări…',
   'Presentaties importeren': 'Importă prezentări',
   'Presentatie importeren': 'Importă prezentare',

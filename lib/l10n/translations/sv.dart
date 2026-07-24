@@ -7,14 +7,11 @@ const _stringsSv = {
   'openEllipsis': 'Öppna…',
   'recentPresentations': 'Senaste presentationer',
   'newTab': 'Ny flik',
-  'undo': 'Ångra (Ctrl/Cmd+Z)',
-  'redo': 'Gör om (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Bildbibliotek',
   'presentFullscreen': 'Presentera (helskärm) · P för presentatörsvy',
   'visualMode': 'Visuellt läge',
   'markdownMode': 'Markdown-läge',
   'save': 'Spara',
-  'saveShortcut': 'Spara (Ctrl/Cmd+S)',
   'more': 'Mer',
   'export': 'Exportera',
   'exportReady': 'Exportera (PDF/PPTX/HTML)',
@@ -1773,6 +1770,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Importera presentationer…',
   'Presentaties importeren': 'Importera presentationer',
   'Presentatie importeren': 'Importera presentation',

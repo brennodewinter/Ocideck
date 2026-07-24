@@ -7,14 +7,11 @@ const _stringsTr = {
   'openEllipsis': 'Aç…',
   'recentPresentations': 'Son sunumlar',
   'newTab': 'Yeni sekme',
-  'undo': 'Geri al (Ctrl/Cmd+Z)',
-  'redo': 'Yinele (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Görsel kitaplığı',
   'presentFullscreen': 'Sunum yap (tam ekran) · sunucu görünümü için P',
   'visualMode': 'Görsel mod',
   'markdownMode': 'Markdown modu',
   'save': 'Kaydet',
-  'saveShortcut': 'Kaydet (Ctrl/Cmd+S)',
   'more': 'Daha fazla',
   'export': 'Dışa aktar',
   'exportReady': 'Dışa aktar (PDF/PPTX/HTML)',
@@ -2751,6 +2748,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Sunumları içe aktar…',
   'Presentaties importeren': 'Sunumları içe aktar',
   'Presentatie importeren': 'Sunumu içe aktar',

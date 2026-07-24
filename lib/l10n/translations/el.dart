@@ -7,14 +7,11 @@ const _stringsEl = {
   'openEllipsis': 'Άνοιγμα…',
   'recentPresentations': 'Πρόσφατες παρουσιάσεις',
   'newTab': 'Νέα καρτέλα',
-  'undo': 'Αναίρεση (Ctrl/Cmd+Z)',
-  'redo': 'Επανάληψη (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Βιβλιοθήκη εικόνων',
   'presentFullscreen': 'Παρουσίαση (πλήρης οθόνη) · P για προβολή παρουσιαστή',
   'visualMode': 'Οπτική λειτουργία',
   'markdownMode': 'Λειτουργία Markdown',
   'save': 'Αποθήκευση',
-  'saveShortcut': 'Αποθήκευση (Ctrl/Cmd+S)',
   'more': 'Περισσότερα',
   'export': 'Εξαγωγή',
   'exportReady': 'Εξαγωγή (PDF/PPTX/HTML)',
@@ -1801,6 +1798,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Εισαγωγή παρουσιάσεων…',
   'Presentaties importeren': 'Εισαγωγή παρουσιάσεων',
   'Presentatie importeren': 'Εισαγωγή παρουσίασης',

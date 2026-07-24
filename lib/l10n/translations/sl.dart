@@ -7,14 +7,11 @@ const _stringsSl = {
   'openEllipsis': 'Odpri …',
   'recentPresentations': 'Nedavne predstavitve',
   'newTab': 'Nov zavihek',
-  'undo': 'Razveljavi (Ctrl/Cmd+Z)',
-  'redo': 'Ponovi (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Knjižnica slik',
   'presentFullscreen': 'Predstavi (celozaslonsko) · P za predstavitveni pogled',
   'visualMode': 'Vizualni način',
   'markdownMode': 'Način Markdown',
   'save': 'Shrani',
-  'saveShortcut': 'Shrani (Ctrl/Cmd+S)',
   'more': 'Več',
   'export': 'Izvozi',
   'exportReady': 'Izvozi (PDF/PPTX/HTML)',
@@ -1776,6 +1773,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Uvozi predstavitve…',
   'Presentaties importeren': 'Uvozi predstavitve',
   'Presentatie importeren': 'Uvozi predstavitev',

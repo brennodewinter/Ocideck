@@ -7,14 +7,11 @@ const _stringsFi = {
   'openEllipsis': 'Avaa…',
   'recentPresentations': 'Viimeisimmät esitykset',
   'newTab': 'Uusi välilehti',
-  'undo': 'Kumoa (Ctrl/Cmd+Z)',
-  'redo': 'Tee uudelleen (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Kuvakirjasto',
   'presentFullscreen': 'Esitä koko näytöllä · P avaa esittäjänäkymän',
   'visualMode': 'Visuaalinen tila',
   'markdownMode': 'Markdown-tila',
   'save': 'Tallenna',
-  'saveShortcut': 'Tallenna (Ctrl/Cmd+S)',
   'more': 'Lisää',
   'export': 'Vie',
   'exportReady': 'Vie (PDF/PPTX/HTML)',
@@ -1774,6 +1771,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Tuo esityksiä…',
   'Presentaties importeren': 'Tuo esityksiä',
   'Presentatie importeren': 'Tuo esitys',

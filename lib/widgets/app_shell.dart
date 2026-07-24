@@ -15,6 +15,7 @@ import '../platform/platform_features.dart';
 import '../platform/unsaved_work_guard.dart';
 import '../utils/display_path.dart';
 import '../utils/log.dart';
+import '../utils/shortcut_label.dart';
 import '../models/asset_origin.dart';
 import '../models/deck.dart';
 import '../models/deck_template.dart';

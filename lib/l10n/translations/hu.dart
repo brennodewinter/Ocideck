@@ -7,14 +7,11 @@ const _stringsHu = {
   'openEllipsis': 'Megnyitás…',
   'recentPresentations': 'Legutóbbi bemutatók',
   'newTab': 'Új lap',
-  'undo': 'Visszavonás (Ctrl/Cmd+Z)',
-  'redo': 'Újra (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Képtár',
   'presentFullscreen': 'Bemutatás (teljes képernyő) · P az előadói nézethez',
   'visualMode': 'Vizuális mód',
   'markdownMode': 'Markdown mód',
   'save': 'Mentés',
-  'saveShortcut': 'Mentés (Ctrl/Cmd+S)',
   'more': 'Továbbiak',
   'export': 'Exportálás',
   'exportReady': 'Exportálás (PDF/PPTX/HTML)',
@@ -1778,6 +1775,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Prezentációk importálása…',
   'Presentaties importeren': 'Prezentációk importálása',
   'Presentatie importeren': 'Prezentáció importálása',

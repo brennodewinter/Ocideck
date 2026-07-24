@@ -34,6 +34,7 @@ import '../../utils/jaro_winkler.dart';
 import '../../utils/log.dart';
 import '../../utils/page_scoped_notes.dart';
 import '../../utils/project_path.dart';
+import '../../utils/shortcut_label.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/inline_markdown.dart';

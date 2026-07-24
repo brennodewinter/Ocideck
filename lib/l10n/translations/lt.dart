@@ -7,14 +7,11 @@ const _stringsLt = {
   'openEllipsis': 'Atverti…',
   'recentPresentations': 'Naujausios prezentacijos',
   'newTab': 'Naujas skirtukas',
-  'undo': 'Atšaukti (Ctrl/Cmd+Z)',
-  'redo': 'Pakartoti (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Paveikslėlių biblioteka',
   'presentFullscreen': 'Pristatyti (visas ekranas) · P – pranešėjo rodinys',
   'visualMode': 'Vaizdinis režimas',
   'markdownMode': 'Markdown režimas',
   'save': 'Įrašyti',
-  'saveShortcut': 'Įrašyti (Ctrl/Cmd+S)',
   'more': 'Daugiau',
   'export': 'Eksportuoti',
   'exportReady': 'Eksportuoti (PDF/PPTX/HTML)',
@@ -1781,6 +1778,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Importuoti prezentacijas…',
   'Presentaties importeren': 'Importuoti prezentacijas',
   'Presentatie importeren': 'Importuoti prezentaciją',

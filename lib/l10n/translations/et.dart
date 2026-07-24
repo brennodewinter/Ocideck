@@ -7,14 +7,11 @@ const _stringsEt = {
   'openEllipsis': 'Ava…',
   'recentPresentations': 'Hiljutised esitlused',
   'newTab': 'Uus vahekaart',
-  'undo': 'Võta tagasi (Ctrl/Cmd+Z)',
-  'redo': 'Tee uuesti (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Pildikogu',
   'presentFullscreen': 'Esitle (täisekraan) · P esitlejavaate jaoks',
   'visualMode': 'Visuaalne režiim',
   'markdownMode': 'Markdown-režiim',
   'save': 'Salvesta',
-  'saveShortcut': 'Salvesta (Ctrl/Cmd+S)',
   'more': 'Rohkem',
   'export': 'Ekspordi',
   'exportReady': 'Ekspordi (PDF/PPTX/HTML)',
@@ -1765,6 +1762,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Impordi esitlusi…',
   'Presentaties importeren': 'Impordi esitlusi',
   'Presentatie importeren': 'Impordi esitlus',

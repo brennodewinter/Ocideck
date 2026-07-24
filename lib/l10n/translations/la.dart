@@ -7,15 +7,12 @@ const _stringsLa = {
   'openEllipsis': 'Aperire…',
   'recentPresentations': 'Praesentationes recentes',
   'newTab': 'Nova scida',
-  'undo': 'Revocare (Ctrl/Cmd+Z)',
-  'redo': 'Iterare (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Bibliotheca imaginum',
   'presentFullscreen':
       'Praesentare (tota tabula) · P pro conspectu praesentantis',
   'visualMode': 'Modus visualis',
   'markdownMode': 'Modus Markdown',
   'save': 'Servare',
-  'saveShortcut': 'Servare (Ctrl/Cmd+S)',
   'more': 'Plura',
   'export': 'Exportare',
   'exportReady': 'Exportare (PDF/PPTX/HTML)',
@@ -1790,6 +1787,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Praesentationes importare…',
   'Presentaties importeren': 'Praesentationes importare',
   'Presentatie importeren': 'Praesentationem importare',

@@ -32,7 +32,7 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
       PaletteCommand(
         label: l10n.d('Opslaan'),
         icon: Icons.save_outlined,
-        shortcut: 'Ctrl/Cmd+S',
+        shortcut: shortcutLabel(l10n, 'S'),
         onInvoke: _saveDeck,
       ),
       ..._editCommands(l10n, deckNotifier),
@@ -49,7 +49,7 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
       PaletteCommand(
         label: l10n.t('findReplace'),
         icon: Icons.find_replace,
-        shortcut: 'Ctrl/Cmd+H',
+        shortcut: shortcutLabel(l10n, 'H'),
         onInvoke: _openFindReplace,
       ),
       PaletteCommand(
@@ -137,7 +137,7 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
     PaletteCommand(
       label: l10n.d('Ongedaan maken'),
       icon: Icons.undo,
-      shortcut: 'Ctrl/Cmd+Z',
+      shortcut: shortcutLabel(l10n, 'Z'),
       keywords: const ['undo', 'terug'],
       enabled: deckNotifier.currentState.canUndo,
       onInvoke: () => _undo(deckNotifier),
@@ -145,7 +145,7 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
     PaletteCommand(
       label: l10n.d('Opnieuw'),
       icon: Icons.redo,
-      shortcut: 'Ctrl/Cmd+Shift+Z',
+      shortcut: shortcutLabel(l10n, 'Z', shift: true),
       keywords: const ['redo', 'opnieuw'],
       enabled: deckNotifier.currentState.canRedo,
       onInvoke: () => _redo(deckNotifier),
@@ -153,7 +153,7 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
     PaletteCommand(
       label: l10n.d('Zoeken'),
       icon: Icons.search,
-      shortcut: 'Ctrl/Cmd+F',
+      shortcut: shortcutLabel(l10n, 'F'),
       onInvoke: _openFind,
     ),
     PaletteCommand(

@@ -97,7 +97,7 @@ extension _MainLayoutMenu on _MainLayoutState {
       _menuItem(
         'command_palette',
         Icons.keyboard_command_key,
-        '${l10n.d('Commandopalet')}  (Ctrl/Cmd+K)',
+        labelWithShortcut(l10n, 'Commandopalet', 'K'),
       ),
       const PopupMenuDivider(),
       // ── Openen ────────────────────────────────────────────────────

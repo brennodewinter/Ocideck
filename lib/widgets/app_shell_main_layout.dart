@@ -375,13 +375,17 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     final deckNotifier = ref.read(deckProvider.notifier);
     return [
       // ── Bewerken ────────────────────────────────────────────────
+      // De sneltoets stond tot #803 ín de vertaalde tekst gebakken, terwijl het
+      // commandopalet hem als losse literal droeg. Twee patronen naast elkaar
+      // betekende in het Duits twee spellingen in één app (Strg naast Ctrl);
+      // labelWithShortcut is nu de enige weg.
       IconButton(
-        tooltip: l10n.t('undo'),
+        tooltip: labelWithShortcut(l10n, 'Ongedaan maken', 'Z'),
         icon: const Icon(Icons.undo, size: 18),
         onPressed: deckState.canUndo ? () => _undo(deckNotifier) : null,
       ),
       IconButton(
-        tooltip: l10n.t('redo'),
+        tooltip: labelWithShortcut(l10n, 'Opnieuw', 'Z', shift: true),
         icon: const Icon(Icons.redo, size: 18),
         onPressed: deckState.canRedo ? () => _redo(deckNotifier) : null,
       ),
@@ -408,7 +412,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       // niets aan af dat een tweede poging stil werd genegeerd, en zag er dus
       // uit alsof er niets gebeurde.
       IconButton(
-        tooltip: l10n.t('saveShortcut'),
+        tooltip: labelWithShortcut(l10n, 'Opslaan', 'S'),
         icon: const Icon(Icons.save_outlined, size: 18),
         onPressed: ref.watch(saveProgressProvider) == null ? _saveDeck : null,
       ),

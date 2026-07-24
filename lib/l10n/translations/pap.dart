@@ -7,14 +7,11 @@ const _stringsPap = {
   'openEllipsis': 'Habri…',
   'recentPresentations': 'Presentashonnan resien',
   'newTab': 'Tab nobo',
-  'undo': 'Deshasí (Ctrl/Cmd+Z)',
-  'redo': 'Hasi atrobe (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Biblioteka di imágen',
   'presentFullscreen': 'Presentá na pantalla kompletu · P pa presenter view',
   'visualMode': 'Modo visual',
   'markdownMode': 'Modo Markdown',
   'save': 'Warda',
-  'saveShortcut': 'Warda (Ctrl/Cmd+S)',
   'more': 'Mas',
   'export': 'Eksportá',
   'exportReady': 'Eksportá (PDF/PPTX/HTML)',
@@ -733,6 +730,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Importá presentashonnan…',
   'Presentaties importeren': 'Importá presentashonnan',
   'Presentatie importeren': 'Importá presentashon',

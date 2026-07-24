@@ -7,15 +7,12 @@ const _stringsMt = {
   'openEllipsis': 'Iftaħ…',
   'recentPresentations': 'Preżentazzjonijiet reċenti',
   'newTab': 'Tab ġdida',
-  'undo': 'Ħассар (Ctrl/Cmd+Z)',
-  'redo': 'Erġa\' agħmel (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Librerija tal-immaġni',
   'presentFullscreen':
       'Ippreżenta (skrin sħiħ) · P għall-veduta tal-preżentatur',
   'visualMode': 'Modalità viżiva',
   'markdownMode': 'Modalità Markdown',
   'save': 'Issejvja',
-  'saveShortcut': 'Issejvja (Ctrl/Cmd+S)',
   'more': 'Aktar',
   'export': 'Esporta',
   'exportReady': 'Esporta (PDF/PPTX/HTML)',
@@ -1796,6 +1793,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Importa preżentazzjonijiet…',
   'Presentaties importeren': 'Importa preżentazzjonijiet',
   'Presentatie importeren': 'Importa preżentazzjoni',

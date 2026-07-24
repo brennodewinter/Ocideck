@@ -7,15 +7,12 @@ const _stringsUk = {
   'openEllipsis': 'Відкрити…',
   'recentPresentations': 'Нещодавні презентації',
   'newTab': 'Нова вкладка',
-  'undo': 'Скасувати (Ctrl/Cmd+Z)',
-  'redo': 'Повторити (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Бібліотека зображень',
   'presentFullscreen':
       'Презентувати на весь екран · P для перегляду доповідача',
   'visualMode': 'Візуальний режим',
   'markdownMode': 'Режим Markdown',
   'save': 'Зберегти',
-  'saveShortcut': 'Зберегти (Ctrl/Cmd+S)',
   'more': 'Більше',
   'export': 'Експорт',
   'exportReady': 'Експорт (PDF/PPTX/HTML)',
@@ -1791,6 +1788,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Імпортувати презентації…',
   'Presentaties importeren': 'Імпортувати презентації',
   'Presentatie importeren': 'Імпортувати презентацію',

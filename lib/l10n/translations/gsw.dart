@@ -7,14 +7,11 @@ const _stringsGsw = {
   'openEllipsis': 'Öffne…',
   'recentPresentations': 'Letschti Präsentatione',
   'newTab': 'Nöie Tab',
-  'undo': 'Rückgängig mache (Ctrl/Cmd+Z)',
-  'redo': 'Wiederhole (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Bildbibliothek',
   'presentFullscreen': 'Presentiere (Vollbild) · P für d Presenter-Ansicht',
   'visualMode': 'Visuelle Modus',
   'markdownMode': 'Markdown-Modus',
   'save': 'Speichere',
-  'saveShortcut': 'Speichere (Ctrl/Cmd+S)',
   'more': 'Mee',
   'export': 'Exportiere',
   'exportReady': 'Exportiere (PDF/PPTX/HTML)',
@@ -1777,6 +1774,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Präsentatione importiere…',
   'Presentaties importeren': 'Präsentatione importiere',
   'Presentatie importeren': 'Präsentation importiere',

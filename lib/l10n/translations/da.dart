@@ -7,14 +7,11 @@ const _stringsDa = {
   'openEllipsis': 'Åbn…',
   'recentPresentations': 'Seneste præsentationer',
   'newTab': 'Ny fane',
-  'undo': 'Fortryd (Ctrl/Cmd+Z)',
-  'redo': 'Annuller fortryd (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Billedbibliotek',
   'presentFullscreen': 'Præsentér (fuld skærm) · P for præsentervisning',
   'visualMode': 'Visuel tilstand',
   'markdownMode': 'Markdown-tilstand',
   'save': 'Gem',
-  'saveShortcut': 'Gem (Ctrl/Cmd+S)',
   'more': 'Mere',
   'export': 'Eksportér',
   'exportReady': 'Eksportér (PDF/PPTX/HTML)',
@@ -1773,6 +1770,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Importer præsentationer…',
   'Presentaties importeren': 'Importer præsentationer',
   'Presentatie importeren': 'Importer præsentation',

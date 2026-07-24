@@ -7,14 +7,11 @@ const _stringsBg = {
   'openEllipsis': 'Отваряне…',
   'recentPresentations': 'Скорошни презентации',
   'newTab': 'Нов раздел',
-  'undo': 'Отмяна (Ctrl/Cmd+Z)',
-  'redo': 'Повторение (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Библиотека с изображения',
   'presentFullscreen': 'Презентиране (цял екран) · P за изглед на водещия',
   'visualMode': 'Визуален режим',
   'markdownMode': 'Режим Markdown',
   'save': 'Запазване',
-  'saveShortcut': 'Запазване (Ctrl/Cmd+S)',
   'more': 'Още',
   'export': 'Експортиране',
   'exportReady': 'Експортиране (PDF/PPTX/HTML)',
@@ -1796,6 +1793,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Ctrl/Cmd': 'Ctrl/Cmd',
+  'Shift': 'Shift',
   'Presentaties importeren…': 'Импортиране на презентации…',
   'Presentaties importeren': 'Импортиране на презентации',
   'Presentatie importeren': 'Импортиране на презентация',
