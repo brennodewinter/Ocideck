@@ -124,6 +124,38 @@ read a book to find out.
 
   De diavormen rijden op wat er al was; het bestandsformaat is niet geraakt.
 
+### Changed
+- **De uitbrengpoort in CI meet geen dekking meer, en de runner draait nog één
+  taak tegelijk.** Een poortrun op de eigen runner duurde 46 minuten tegen 2,5
+  lokaal. Nagemeten waar die tijd zat, en het antwoord was niet waar het eerst
+  gezocht werd.
+
+  De machine is de factor, niet de stappen: een Xeon D-2123IT uit 2018 met vier
+  fysieke kernen, 3,8× trager per kern dan de bouwmachine (0,95 s tegen 0,25 s
+  op dezelfde rekenproef) en drie keer minder kernen. Samen ≈ 11×, precies de
+  waargenomen factor. Schijf en opslagstuurprogramma zijn nagekeken en vrijuit:
+  `overlayfs`, ~106 MB/s sequentieel. Het werk is CPU-gebonden.
+
+  Van die 46 minuten ging **33 min 49 s naar één fase**: `flutter test
+  --coverage`. Die instrumentatie houdt per test een VM-Service-verbinding open
+  tot het eind van de run en parallelliseert daarmee het slechtst van alles wat
+  we draaien. De tagpoort draait daarom `make check-no-coverage` — dezelfde
+  poort, dezelfde volledige testsuite in willekeurige volgorde, alleen zonder
+  die instrumentatie. De statische poorten staan in één gedeelde lijst, zodat
+  een nieuwe poort niet aan één van de twee doelen kan ontbreken.
+
+  Wat dat kost, hardop: de dekkingsvloer en de per-bestandsvloer draaien in CI
+  niet meer. Ze zijn onveranderd en onverkort verplicht in `make check`, op de
+  machine van de committer, vóór main — een verplaatsing, geen versoepeling, en
+  ze houdt alleen omdat de samenvoegpoort daar toch al lag.
+
+  En eerlijk over de opbrengst: die 74% is niet de winst. De suite moet nog
+  steeds draaien. Lokaal gemeten scheelt het weglaten van de instrumentatie 24%
+  wandklok en 39% CPU (112 s / 595 s tegen 147 s / 971 s); op vier kernen zit de
+  run tegen zijn CPU aan, dus verwacht ~13 minuten van de 46. Daarnaast staat de
+  runnercapaciteit nu op 1: drie gates tegelijk op vier kernen was wat de
+  wachttijd verergerde én de bron van de flakes onder last.
+
 ### Fixed
 - **Vier slidetypes vielen om als hun preview op een ontaarde breedte werd
   gemeten (#782).** Flutter meet een widget vaker dan hij hem tekent: een

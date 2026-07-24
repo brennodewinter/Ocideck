@@ -6,10 +6,14 @@ Every automated check OciDeck runs, what it covers, what a failure means, and ho
 to fix it. The **`Makefile` is the single entry point** and the **real gate**:
 `make check`, run by the committer before pushing, is what actually enforces
 these checks. The Forgejo remote has an Actions runner since 2026-07-23, and
-`.forgejo/workflows/ci.yml` runs this same `make check` **on a `v*` tag** — not
-per pull request (#741/#751/#790). Read that literally: nothing between your
-`make check` and `main` runs this gate for you. CI is the release gate; you are
-the merge gate. See [Continuous integration](#continuous-integration).
+`.forgejo/workflows/ci.yml` runs [`make check-no-coverage`](#make-check-no-coverage)
+**on a `v*` tag** — not per pull request (#741/#751/#790). That is `make check`
+with the full test suite intact but without the coverage instrumentation —
+worth roughly 13 minutes off a 46-minute gate on that runner. Read this literally, twice over:
+nothing between your `make check` and `main` runs this gate for you, and the
+**coverage floors run nowhere but on your own machine**. CI is the release gate;
+you are the merge gate. See
+[Continuous integration](#continuous-integration).
 Run `make help` for a one-line summary of every target.
 
 ## The one command
@@ -173,7 +177,7 @@ now the only passing state.
 not what runs. That workflow does not execute: Forgejo reads
 `.forgejo/workflows/` instead of `.github/workflows/` once the former exists
 (see [Continuous integration](#continuous-integration)). What *does* run in CI
-is `make check` itself, on a `v*` tag (#790).
+is [`make check-no-coverage`](#make-check-no-coverage), on a `v*` tag (#790/#796).
 Note that `make
 check` alone does **not** include `licenses`, `sbom-verify`, `deps-check` or
 `check-web` — those live in `check-full`. Run `make check-full` before a
@@ -568,6 +572,33 @@ also declares them, but see the [CI note](#continuous-integration).)
   number to adjust. The only escape is `uncoveredBaseline`, and that is a list
   with a reason per line — reserved for platform halves and files with no
   executable lines at all.
+
+### `make check-no-coverage`
+- **Runs:** every static gate that `make check` runs, then `make test` instead
+  of `make coverage` + `make coverage-per-file`. The full suite still runs, in
+  randomised order; only the instrumentation is gone.
+- **Covers:** exactly `make check` minus the two coverage floors.
+- **Where it is used:** `.forgejo/workflows/ci.yml`, on a `v*` tag. Nowhere
+  else — **do not use it in place of `make check` in your own working copy.**
+- **Why it exists:** `flutter test --coverage` keeps a VM-Service connection
+  open per test until the run ends, and that is both the slowest phase and the
+  one that parallelises worst. Measured on the runner (task 661): 33 min 49 s of
+  a 46-minute gate went to that single phase — on four cores of a 2018 Xeon. On
+  a developer machine the same difference is small enough not to notice, which
+  is exactly why it had to be measured on the runner rather than guessed at
+  here.
+- **How much it actually saves — less than that 74% suggests.** The suite still
+  has to run; only the instrumentation goes. Measured locally: `make test` is
+  112 s wall / 595 s CPU against `make coverage` at 147 s / 971 s — −24% wall,
+  −39% CPU. On four cores the run is CPU-bound, so the wall saving approaches
+  that −39%: an estimated 33 min 49 s → ~21 min, about **13 minutes off a
+  46-minute gate**. Real, but not a step change; the machine itself is the
+  factor of ten (see [Continuous integration](#continuous-integration)).
+- **What it gives up, stated plainly:** the coverage floor and the per-file
+  floor are not enforced in CI at all any more. They are unchanged and still
+  mandatory — in `make check`, on the committer's machine, before `main`. This
+  is a relocation, not a relaxation, and it only holds because the merge gate
+  was already local (see the top of this document).
 
 ---
 
