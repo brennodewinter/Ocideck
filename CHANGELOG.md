@@ -131,7 +131,10 @@ read a book to find out.
   hier gerepareerd) en de Windows-job strandt op `windows-latest` omdat het
   voorgebouwde OpenCV-pakket van dartcv4 niet samengaat met de nieuwste MSVC —
   de job is op het 2022-image gepind tot upstream bijtrekt. SBOM- en
-  web-jobs waren in één keer groen.
+  web-jobs waren in één keer groen. GitHubs secret scanning sloeg aan op het
+  testkorpus van OciWachts geheimen-detector — vijf bewust echt-ogende maar
+  verzonnen sleutels; de alerts zijn als "used in tests" gesloten en
+  `.github/secret_scanning.yml` sluit dat ene testbestand voortaan uit.
 
 ### Added
 - **De README-galerij verrijkt: risicomatrix en cockpit-dashboard erbij, en
