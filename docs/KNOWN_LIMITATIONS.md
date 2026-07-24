@@ -66,6 +66,15 @@ the result. Keynote is the weakest of the three: its content is a binary format
 whose meaning lives in Apple's application, so a `.key` that cannot be
 reconstructed falls back to its preview image plus salvaged text.
 
+Importing one file lets you decide per losing slide between carrying it over as
+completely as possible, keeping only the pictures it already contained, and
+skipping it with the note that says why; the queue for several files at once
+does not ask and always carries everything over. Note what "keeping only the
+pictures" is not: OciDeck cannot render a source slide to an image. That would
+mean driving an external office suite, which the import deliberately does not
+do, so a slide whose meaning lived in its layout cannot be preserved as a
+picture of itself. *(Added 2026-07-24.)*
+
 Separately: the importers have only ever been run against archives the test
 suite builds itself. No file written by PowerPoint, Impress or Keynote has been
 through them. → [USER_GUIDE.md](USER_GUIDE.md#importing-presentations-powerpoint-keynote-impress),

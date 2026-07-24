@@ -1866,6 +1866,49 @@ disappears quietly: you read the note, decide what to do, and delete it. The
 message after the import counts how many slides carried real loss, so you know
 whether there is anything to look at at all.
 
+**You decide per slide what a half conversion should become.** Importing a
+single file stops once, after reading the file and before building the deck, and
+asks — but only when there are slides that genuinely lose something. A slide
+that converts cleanly is never part of the question and is never touched by the
+answer, however you answer it: one choice may not empty a whole deck. Each
+problem slide is listed by its source number and title with the reasons
+underneath, because without knowing *what* went wrong the choice is a guess, and
+each offers:
+
+- **Zo volledig mogelijk** — the slide is carried over as completely as it can
+  be, with the "not carried over" note beside it. This is the behaviour
+  described above, and it stays the fallback wherever the question is not put:
+  in the queue, after *Niet meer vragen*, and for any slide the answer does not
+  mention.
+- **Alleen de afbeelding** — the pictures the slide already contained (one, or
+  two) become an image slide and the text is dropped. **This does not render the
+  source slide.** OciDeck starts no external program and takes no external
+  dependency to turn a slide into a bitmap; what you keep is what was in the
+  file as a picture, nothing more. Only offered for a slide that has an image —
+  and if you set it for everything at once, a slide without an image is skipped
+  instead, because an image slide without an image is nothing.
+- **Overslaan** — the slide itself is not created at all; what stays is the note
+  saying which slide this was and why it is gone. For a slide whose layout
+  carried the meaning, half a conversion can be worse than none.
+
+The note slide's heading follows the choice, so the deck itself says what
+happened: *Niet overgenomen van slide 7*, *Dia 7 overgeslagen*, or *Dia 7:
+alleen de afbeelding overgenomen*. Each slide starts on the import's own
+proposal — *Alleen de afbeelding* where the slide has a picture, *Zo volledig
+mogelijk* where it does not — and one row of buttons sets every slide at once,
+which is the only workable answer at twenty problem slides. *Niet meer vragen*
+skips the question from then on and takes *Zo volledig mogelijk* every time; it
+is remembered only when you go on to import, not when you cancel.
+
+**Cancelling cancels the import.** *Import afbreken*, or closing the dialog,
+produces no deck at all — not a silently best-effort one. A question you can
+answer with "no" and still get the thing anyway is not a question.
+
+**The queue does not ask.** Importing more than one file at once always carries
+everything over as completely as possible. Ten files times a question per slide
+is not a route, so the bulk path keeps the old, lossless-by-note behaviour
+without interruption.
+
 | Comes across | Left behind |
 | --- | --- |
 | Titles and subtitles; section slides. | Animations and slide transitions — OciDeck has neither. |
