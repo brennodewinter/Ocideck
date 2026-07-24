@@ -1433,7 +1433,13 @@ existing behaviour (show everything):
   bar/pie/donut-style charts and numeric table columns).
 - `show_count` — whether the slide renders an "N of total" indicator, in the
   app language. The indicator is ordinary slide content, so it travels into
-  every export the same way the rest of the slide does.
+  every export the same way the rest of the slide does. On a table it is
+  appended as a trailing row holding the text in the first cell and nothing in
+  the others — a Markdown table has no merged cells, so there is no other place
+  to put it. The renderer lifts that row back out and draws it as a caption
+  *below* the table: left in the grid it counted as content of the first
+  column, which widened a column of plain rank numbers to a quarter of the
+  slide.
 
 Ties are broken deterministically: value, then original source position, so a
 deck shows the same top-N on every reopen. The **saved** markdown always

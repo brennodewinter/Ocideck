@@ -62,7 +62,7 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
           twoColumn: false,
         );
       case SlideType.table:
-        _checkTableDensity(slide, index, issues);
+        issues.addAll(_tableDensityIssues(slide, index, font));
       case SlideType.code:
         _checkCodeDensity(slide, index, issues);
       case SlideType.freeMarkdown:
@@ -275,34 +275,6 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
             ? MarkdownValidationSeverity.error
             : MarkdownValidationSeverity.warning,
         args: {'percent': _percent(scale)},
-      ),
-    );
-  }
-
-  void _checkTableDensity(
-    Slide slide,
-    int index,
-    List<SlideQualityIssue> issues,
-  ) {
-    final rows = slide.tableRows.where((r) => r.isNotEmpty).toList();
-    if (rows.isEmpty) return;
-    final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
-    final w = kReferenceSlideWidth;
-    final cellSize = tableCellFontSize(
-      w,
-      rowCount: rows.length,
-      colCount: colCount,
-    );
-    final minimum = tableCellFontMinimum(w);
-    if (cellSize > minimum + 0.001) return;
-
-    issues.add(
-      SlideQualityIssue(
-        slideIndex: index,
-        kind: SlideQualityIssueKind.tableDensityMinimum,
-        category: SlideQualityCategory.textDensity,
-        severity: MarkdownValidationSeverity.warning,
-        args: {'rows': '${rows.length}', 'cols': '$colCount'},
       ),
     );
   }
@@ -527,4 +499,41 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
     _runScaleCache[slide] = _RunScaleMemo(font, theme, scale);
     return scale;
   }
+}
+
+/// Waarschuwt wanneer de celtekst op het minimumformaat uitkomt — dezelfde
+/// inpassing die de render doet, op een referentiedia. Niet meer de
+/// dichtheidsformule: die telt rijen en kolommen, terwijl de tabel sinds het
+/// verticaal vullen zijn letter uit de hoogte haalt. Achttien kolommen met
+/// enkele tekens rendert ruim, en daar hoorde geen "staat op het
+/// minimumformaat" bij.
+List<SlideQualityIssue> _tableDensityIssues(
+  Slide slide,
+  int index,
+  String font,
+) {
+  final rows = slide.tableRows.where((r) => r.isNotEmpty).toList();
+  if (rows.isEmpty) return const [];
+  final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
+  final w = kReferenceSlideWidth;
+  final cellSize = tableFit(
+    rows: rows,
+    colCount: colCount,
+    slideWidth: w,
+    tableWidth: tableReferenceWidth(w),
+    availH: tableReferenceAvailableHeight(w),
+    font: font,
+  ).cellSize;
+  final minimum = tableCellFontMinimum(w);
+  if (cellSize > minimum + 0.001) return const [];
+
+  return [
+    SlideQualityIssue(
+      slideIndex: index,
+      kind: SlideQualityIssueKind.tableDensityMinimum,
+      category: SlideQualityCategory.textDensity,
+      severity: MarkdownValidationSeverity.warning,
+      args: {'rows': '${rows.length}', 'cols': '$colCount'},
+    ),
+  ];
 }

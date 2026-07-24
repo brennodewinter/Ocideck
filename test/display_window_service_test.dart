@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/display_window_spec.dart';
+import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/display_window_service.dart';
 
 void main() {
@@ -217,6 +218,56 @@ void main() {
       );
       expect(result.items.x, ['d', 'c', 'Overig']);
       expect(result.items.series.first.data, [4.0, 3.0, 3.0]);
+    });
+  });
+
+  group('viewLimitCaptionRowIndex', () {
+    Slide tableWith(List<List<String>> rows, DisplayWindowSpec? spec) =>
+        Slide.create(
+          SlideType.table,
+        ).copyWith(tableRows: rows, viewLimit: spec);
+
+    final rows = <List<String>>[
+      const ['#', 'Naam'],
+      const ['1', 'Aap'],
+      const ['Eerste 1 van 9 regels', ''],
+    ];
+
+    test('finds the caption row a view limit appended', () {
+      expect(
+        viewLimitCaptionRowIndex(
+          tableWith(rows, const DisplayWindowSpec(limit: 1)),
+          rows,
+        ),
+        2,
+      );
+    });
+
+    test('finds nothing without an active limit or with the count off', () {
+      expect(viewLimitCaptionRowIndex(tableWith(rows, null), rows), isNull);
+      expect(
+        viewLimitCaptionRowIndex(
+          tableWith(rows, const DisplayWindowSpec(limit: 1, showCount: false)),
+          rows,
+        ),
+        isNull,
+      );
+    });
+
+    // Een gewone datarij mag nooit als bijschrift uit de tabel worden getild.
+    test('a filled last row is data, not a caption', () {
+      final filled = <List<String>>[
+        const ['#', 'Naam'],
+        const ['1', 'Aap'],
+        const ['2', 'Noot'],
+      ];
+      expect(
+        viewLimitCaptionRowIndex(
+          tableWith(filled, const DisplayWindowSpec(limit: 2)),
+          filled,
+        ),
+        isNull,
+      );
     });
   });
 }

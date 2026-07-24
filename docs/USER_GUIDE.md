@@ -1833,7 +1833,9 @@ highest or lowest by a chosen table column or chart series), and decide what
 happens to the rest — hidden but kept, or summed into one *Overig* bucket where
 that is honest (bar/pie-style charts, numeric columns). An optional "N of
 total" line tells the audience the slide is a selection; the same text feeds
-the accessibility label and every export.
+the accessibility label and every export. On a table it sits under the grid as
+a caption rather than in a cell of its own, so it neither reads as data nor
+pushes the columns out of proportion.
 
 The limit is a *projection*: preview, presenter, PDF, PPTX and HTML all show
 the same selection, while the file keeps the full data — save, reopen, and

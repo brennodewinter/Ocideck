@@ -122,7 +122,7 @@ void main() {
 
   group('tableFitCellSize', () {
     const w = kReferenceSlideWidth;
-    final base = tableCellFontSize(w, rowCount: 6, colCount: 4);
+    final base = tableCellFontMaximum(w);
     final min = tableCellFontMinimum(w);
 
     test('a sparse table keeps the density-based base size', () {

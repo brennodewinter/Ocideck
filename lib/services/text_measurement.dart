@@ -44,7 +44,35 @@ double measureTextWidth(
   bool bold = false,
   String? fontFamily,
 }) {
-  final painter = TextPainter(
+  return _painterFor(text, fontSize, bold: bold, fontFamily: fontFamily).width;
+}
+
+/// Breedte van het breedste ondeelbare woord in [text].
+///
+/// Onder deze breedte breekt de regel middenin een woord — en zakt de kolom
+/// onder haar eigen celmarge, dan tekent de tekst zelfs buiten de cel, dwars
+/// over de tabellijnen heen. Vandaar de ondergrens per tabelkolom.
+double measureTextWordWidth(
+  String text,
+  double fontSize, {
+  bool bold = false,
+  String? fontFamily,
+}) {
+  return _painterFor(
+    text,
+    fontSize,
+    bold: bold,
+    fontFamily: fontFamily,
+  ).minIntrinsicWidth;
+}
+
+TextPainter _painterFor(
+  String text,
+  double fontSize, {
+  required bool bold,
+  required String? fontFamily,
+}) {
+  return TextPainter(
     text: _measurementSpan(
       text,
       TextStyle(
@@ -55,5 +83,4 @@ double measureTextWidth(
     ),
     textDirection: TextDirection.ltr,
   )..layout();
-  return painter.width;
 }
