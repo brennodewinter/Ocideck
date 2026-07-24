@@ -7,7 +7,10 @@ import '../../l10n/app_localizations.dart';
 import '../../platform/platform_features.dart';
 import '../../services/file_service.dart';
 import '../../services/import/bulk_import_runner.dart';
+import '../../services/import/deck_builder.dart';
+import '../../services/import/presentation_import_service.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/user_facing_error.dart';
 
 /// De wachtrij voor een import van meer dan één presentatie (#772).
 ///
@@ -112,14 +115,22 @@ class _PresentationImportQueueDialogState
   Future<void> _start() async {
     final directory = _directory;
     if (directory == null) return;
+    // Vóór de eerste await vastgelegd; de translator wordt tijdens de async run
+    // aangeroepen en mag niet van een dan mogelijk verdwenen context afhangen.
+    final translate = context.l10n.d;
     setState(() {
       _running = true;
       _stopRequested = false;
       _finished.clear();
     });
+    // `translate: l10n.d` zet de notitiedia's in het document in de taal van de
+    // gebruiker (#806); de service geeft de naad door aan zijn `DeckBuilder`.
     final runner = BulkImportRunner(
       writeDeck: widget.fileService.saveDeck,
       pathExists: (path) => File(path).existsSync(),
+      service: PresentationImportService(
+        builder: DeckBuilder(translate: translate),
+      ),
     );
     final summary = await runner.run(
       _queue,
@@ -401,7 +412,11 @@ class _PresentationImportQueueDialogState
   }
 
   String _outcomeLine(AppLocalizations l10n, BulkImportOutcome outcome) {
-    if (!outcome.isSuccess) return outcome.error ?? l10n.d('mislukt');
+    if (!outcome.isSuccess) {
+      return outcome.failure == null
+          ? l10n.d('mislukt')
+          : importFailureText(l10n, outcome.failure!);
+    }
     final slides = '${outcome.slideCount} ${l10n.d('dia’s')}';
     if (outcome.problemSlides == 0) return slides;
     return '$slides · ${outcome.problemSlides} '
@@ -434,7 +449,11 @@ class _PresentationImportQueueDialogState
           Padding(
             padding: const EdgeInsets.only(top: 4),
             child: Text(
-              '${progress.name} · ${progress.message}',
+              // `progress.message` is een vaste Nederlandse voortgangsstring uit
+              // de servicelaag (die geen `BuildContext` heeft); `l10n.d` vertaalt
+              // hem hier. Bewaakt door `app_localizations_test`, die deze
+              // bronsleutels via `sourceKeysIn('lib')` meepakt (#806).
+              '${progress.name} · ${l10n.d(progress.message)}',
               style: TextStyle(fontSize: 11, color: AppTheme.slate400),
               overflow: TextOverflow.ellipsis,
             ),

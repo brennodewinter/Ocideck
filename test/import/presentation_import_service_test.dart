@@ -77,6 +77,12 @@ void main() {
     expect(result.isSuccess, isFalse);
     expect(result.deck, isNull);
     expect(result.failure!.message, contains('odp'));
+    // Deze payload is geen geldig zip-archief, dus de weigering valt al bij de
+    // integriteitscontrole (notAPresentation), vóór de importer-lookup. De
+    // reden-code en args dragen wat de UI nodig heeft om de melding vertaald en
+    // compleet te tonen (#806).
+    expect(result.failure!.reason, ImportFailureReason.notAPresentation);
+    expect(result.failure!.args['bestand'], 'deck.odp');
   });
 
   test('an unknown file is rejected before any parsing is attempted', () async {
@@ -89,6 +95,8 @@ void main() {
     );
     expect(result.isSuccess, isFalse);
     expect(result.failure!.message, contains('geen geldig zip-archief'));
+    expect(result.failure!.reason, ImportFailureReason.notAPresentation);
+    expect(result.failure!.args['bestand'], 'notes.txt');
   });
 
   test('een geldig archief zonder presentatiemarkering wordt geweigerd', () {
@@ -148,7 +156,11 @@ void main() {
   test('an importer failure is surfaced as the result failure', () async {
     final service = _serviceFor(
       const SourceDeck(slides: []),
-      failure: const ImportFailure('kapot archief'),
+      failure: const ImportFailure(
+        'kapot archief',
+        reason: ImportFailureReason.corrupt,
+        args: {'formaat': 'pptx'},
+      ),
     );
     final result = await service.importBytes(
       _pptxEnvelope(),
@@ -156,6 +168,11 @@ void main() {
     );
     expect(result.isSuccess, isFalse);
     expect(result.failure!.message, 'kapot archief');
+    // De importer kent de bestandsnaam niet; de service vult hem aan zodat de
+    // melding compleet is (#806).
+    expect(result.failure!.reason, ImportFailureReason.corrupt);
+    expect(result.failure!.args['bestand'], 'demo.pptx');
+    expect(result.failure!.args['formaat'], 'pptx');
   });
 
   test('problem slides propagate from the builder', () async {

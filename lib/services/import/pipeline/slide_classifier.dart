@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import '../models/body_block.dart';
+import '../models/conversion_issue.dart';
 import '../models/source_slide.dart';
 import '../../../models/slide.dart';
 
@@ -20,7 +21,12 @@ class ClassifiedSlide {
   /// Issues raised while classifying this slide (e.g. merged cells, free
   /// positioning, decorative shapes). The pipeline collects these and emits a
   /// note slide after this one.
-  final List<String> issues;
+  ///
+  /// [ConversionIssue] en niet een kale string: de tekst hierin belandt
+  /// vertaald in het document van de gebruiker (#806), en een aantal dat in de
+  /// zin gebakken zit vindt geen vertaling. Wat variabel is gaat door
+  /// [ConversionIssue.args].
+  final List<ConversionIssue> issues;
 }
 
 /// Decide which OciDeck [SlideType] best fits a [SourceSlide].
@@ -29,13 +35,18 @@ class ClassifiedSlide {
 /// fallback. The classifier is deterministic and side-effect-free so it is
 /// unit-testable in isolation.
 ClassifiedSlide classifySlide(SourceSlide s) {
-  final issues = <String>[];
+  final issues = <ConversionIssue>[];
 
   // Free-form positioning is always partially lost in OciDeck's fixed
   // layouts; record it once when present.
   if (s.positionedTexts.length > 1) {
     issues.add(
-      '${s.positionedTexts.length} vrij geplaatste tekstvakken — samengevoegd in leesvolgorde',
+      ConversionIssue(
+        slideIndex: s.index,
+        feature: '{n} vrij geplaatste tekstvakken',
+        description: 'samengevoegd in leesvolgorde',
+        args: {'n': '${s.positionedTexts.length}'},
+      ),
     );
   }
 

@@ -1774,6 +1774,110 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Alinea': 'Absatz',
+  'Audio "{bestand}"': 'Audio "{bestand}"',
+  'Deck opbouwen…': 'Deck wird erstellt…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'D Folie het mehreri Audioclips; OciDeck unterstützt nume eine pro Folie.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'D Folie het mehreri Diagramm; OciDeck unterstützt nume eis pro Folie.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'D Folie het mehreri Tabälle; OciDeck unterstützt nume eini pro Folie.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'D Folie het mehreri Videos; OciDeck unterstützt nume eis pro Folie.',
+  'Dia {n} overgeslagen': 'Folie {n} übersprunge',
+  'Dia {n}: alleen de afbeelding overgenomen': 'Folie {n}: nur s Bild übernoo',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'E nöd-textuelli Form, Linie oder es anders Objekt het nöd chöne konvertiert werde.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Fuesszile werded in Markdown nöd unterstützt.',
+  'Formaat herkennen…': 'Format wird erkennt…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Gruppierti Objekt sind ufglööst worde; Gruppierig und Reihefolg i de Gruppe gönd verlore.',
+  'Groepering': 'Gruppierig',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Chopfspalte werded in OciDeck nöd unterstützt.',
+  'IWA-objecten inlezen…': 'IWA-Objekt werded gläse…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'IWA-Struktur teilwiis parst — s Design (Thema, Farbe, Positione) isch nöd übernoo worde; Text, Folie-Reihefolg, Notize und, wo d Strukture erkennt worde sind, Tabälle, Diagramm und Medie scho.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'IWA-Struktur nöd vollständig parst — Formatierig, Tabälle, Diagramm, Medie und Folie-Reihefolg nöd übernoo',
+  'IWA-tekst salvage…': 'IWA-Text wird grettet…',
+  'Keynote IWA-intern': 'Keynote IWA-intern',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA-intern (~{n} Folie)',
+  'Keynote tabel footer': 'Keynote-Tabälle-Fuesszile',
+  'Keynote tabel header': 'Keynote-Tabälle-Chopf',
+  'Keynote tabel headerkolommen': 'Keynote-Tabälle-Chopfspalte',
+  'Klaar.': 'Fertig.',
+  'Koppeling “{tekst}”': 'Link "{tekst}"',
+  'Meerdere audio': 'Mehreri Audios',
+  'Meerdere grafieken': 'Mehreri Diagramm',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Mehreri Chopfzile werded in Markdown nöd unterstützt; nume di erst Zile wird als Tabälle-Chopf bruucht.',
+  'Meerdere tabellen': 'Mehreri Tabälle',
+  'Meerdere video\'s': 'Mehreri Videos',
+  'Metadata uitlezen…': 'Metadate werded gläse…',
+  'Niet overgenomen van dit document': 'Us dem Dokumänt nöd übernoo',
+  'Niet overgenomen van slide {n}': 'Us de Folie {n} nöd übernoo',
+  'Ondersteund grafiektype': 'Unterstützte Diagrammtyp',
+  'Samengevoegde cellen': 'Verbundeni Zälle',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Verbundeni Tabälle-Zälle werded in GFM-Tabälle nöd unterstützt; d Tabälle isch flach gmacht worde.',
+  'Scatter x-as': 'Streudiagramm-x-Achse',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'E Streudiagramm mit separate x-Wärt pro Reihe cha nöd vollständig dargstellt werde.',
+  'Slides classificeren…': 'Folie werded klassifiziert…',
+  'Slides reconstrueren…': 'Folie werded rekonstruiert…',
+  'Tabel naast grafiek': 'Tabälle näbed em Diagramm',
+  'Voorbeeldafbeelding zoeken…': 'Vorschaubild wird gsuecht…',
+  'Vorm of object': 'Form oder Objekt',
+  'de tekst blijft staan, de verwijzing niet': 'de Text bliibt, de Verwiis nöd',
+  'deels overgenomen': 'teilwiis übernoo',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'Ziel unschädlich gmacht; s het uf {url} zeigt',
+  'eerste audio overgenomen': 'erst Audio übernoo',
+  'eerste grafiek overgenomen': 'erst Diagramm übernoo',
+  'eerste rij als header': 'erst Zile als Chopf',
+  'eerste tabel overgenomen': 'erst Tabälle übernoo',
+  'eerste video overgenomen': 'erst Video übernoo',
+  'gedeelde x-as gebruikt': 'gmeinsami x-Achse bruucht',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'nöd übernoo (OciDeck het kei Audio-Folie)',
+  'niet overgenomen (deze dia werd een {type})':
+      'nöd übernoo (die Folie isch en {type} worde)',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'nöd übernoo (die Folie isch en {type} worde, wo kei Ufzelig treit)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'nöd übernoo (e {type}-Folie zeigt dervo {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'nöd übernoo (e {type}-Folie zeigt kein freie Absatztext)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'nöd übernoo (ei Diagramm oder ei Tabälle pro Folie)',
+  'objecten apart overgenomen': 'Objekt einzeln übernoo',
+  'samengevoegd in leesvolgorde': 'i de Läsreihefolg zämegfüegt',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'Text, Reihefolg, Notize und erkennti Tabälle, Diagramm und Medie',
+  '{n} afbeelding': '{n} Bild',
+  '{n} afbeeldingen': '{n} Bilder',
+  '{n} alinea’s': '{n} Absätz',
+  '{n} opsommingspunt': '{n} Ufzeligspunkt',
+  '{n} opsommingspunten': '{n} Ufzeligspünkt',
+  '{n} vrij geplaatste tekstvakken': '{n} frei platzierti Textfälder',
+  'voorbeeldafbeelding en tekst': 'Vorschaubild und Text',
+  'voorbeeldafbeelding': 'Vorschaubild',
+  'tekst': 'Text',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} isch grösser als s Limit vo {limiet} und wird nöd importiert.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} isch kei erkennti Präsentation. OciDeck liest PowerPoint (.pptx), OpenDocument (.odp) und Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} gseht beschädigt us: s Archiv cha nöd vollständig uspackt werde.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'S Format {formaat} wird no nöd unterstützt ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Kei Folie in {bestand} gfunde — isch das e gültigi {formaat}-Datei?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      '{bestand} het nöd als {formaat}-Präsentation chöne gläse werde.',
   'Wat doen we met deze dia’s?': 'Was mache mir mit dene Slides?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Die Slides hät me nöd ganz chöne umwandle. Wähl pro Slide, was passiere söll; was du nöd aalangsch, wird so vollständig wie möglich übernoh, mit ere Notiz drzue, was fählt.',

@@ -80,7 +80,7 @@ void main() {
 
     expect(summary.outcomes, hasLength(2));
     expect(summary.outcomes.first.isSuccess, isFalse);
-    expect(summary.outcomes.first.error, isNotNull);
+    expect(summary.outcomes.first.failure, isNotNull);
     expect(summary.outcomes.last.isSuccess, isTrue);
     expect(summary.succeeded, 1);
     expect(summary.failed, 1);
@@ -96,7 +96,10 @@ void main() {
 
     expect(summary.failed, 1);
     expect(summary.succeeded, 1);
-    expect(summary.outcomes.first.error, contains('schijf vol'));
+    // De schrijffout reist mee als een `other`-fout met de exception in `cause`;
+    // de technische message draagt de oorspronkelijke tekst voor het log.
+    expect(summary.outcomes.first.failure?.message, contains('schijf vol'));
+    expect(summary.outcomes.first.failure?.cause, isNotNull);
     expect(rec.paths, ['/uit/twee.md']);
   });
 

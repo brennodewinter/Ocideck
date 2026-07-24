@@ -37,7 +37,11 @@ class OdpImporter extends Importer {
       final pages = _pages(ctx);
       if (pages.isEmpty) {
         return const Err(
-          ImportFailure('Geen slides gevonden — is dit een geldig .odp?'),
+          ImportFailure(
+            'Geen slides gevonden — is dit een geldig .odp?',
+            reason: ImportFailureReason.noSlides,
+            args: {'formaat': 'odp'},
+          ),
         );
       }
 
@@ -68,11 +72,20 @@ class OdpImporter extends Importer {
         ImportFailure(
           'Dit bestand is geen geldig .odp (beschadigd zip-archief).',
           cause: e,
+          reason: ImportFailureReason.corrupt,
+          args: const {'formaat': 'odp'},
         ),
       );
     } on Exception catch (e) {
       logError('OdpImporter failed for ${path ?? 'bestand'}', e);
-      return Err(ImportFailure('Kon het .odp niet lezen.', cause: e));
+      return Err(
+        ImportFailure(
+          'Kon het .odp niet lezen.',
+          cause: e,
+          reason: ImportFailureReason.unreadable,
+          args: const {'formaat': 'odp'},
+        ),
+      );
     }
   }
 

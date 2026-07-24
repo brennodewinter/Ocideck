@@ -1788,6 +1788,111 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Alinea': 'Paragraf',
+  'Audio "{bestand}"': 'Audio "{bestand}"',
+  'Deck opbouwen…': 'Se construiește prezentarea…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'Diapozitivul conține mai multe clipuri audio; OciDeck acceptă doar unul per diapozitiv.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'Diapozitivul conține mai multe grafice; OciDeck acceptă doar unul per diapozitiv.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'Diapozitivul conține mai multe tabele; OciDeck acceptă doar unul per diapozitiv.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'Diapozitivul conține mai multe videoclipuri; OciDeck acceptă doar unul per diapozitiv.',
+  'Dia {n} overgeslagen': 'Diapozitivul {n} omis',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Diapozitivul {n}: a fost păstrată doar imaginea',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'O formă, o linie sau alt obiect non-textual nu a putut fi convertit.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Rândurile de subsol nu sunt acceptate în Markdown.',
+  'Formaat herkennen…': 'Se detectează formatul…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Obiectele grupate au fost degrupate; gruparea și ordinea din grup se pierd.',
+  'Groepering': 'Grupare',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Coloanele de antet nu sunt acceptate în OciDeck.',
+  'IWA-objecten inlezen…': 'Se citesc obiectele IWA…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'Structura IWA a fost analizată parțial — aspectul (tema, culorile, pozițiile) nu a fost preluat; textul, ordinea diapozitivelor, notele și, acolo unde structurile au fost recunoscute, tabelele, graficele și media au fost.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'Structura IWA nu a fost analizată complet — formatarea, tabelele, graficele, media și ordinea diapozitivelor nu au fost preluate',
+  'IWA-tekst salvage…': 'Se recuperează textul IWA…',
+  'Keynote IWA-intern': 'Keynote IWA intern',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA intern (~{n} diapozitive)',
+  'Keynote tabel footer': 'Subsol de tabel Keynote',
+  'Keynote tabel header': 'Antet de tabel Keynote',
+  'Keynote tabel headerkolommen': 'Coloane de antet de tabel Keynote',
+  'Klaar.': 'Gata.',
+  'Koppeling “{tekst}”': 'Legătură "{tekst}"',
+  'Meerdere audio': 'Mai multe fișiere audio',
+  'Meerdere grafieken': 'Mai multe grafice',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Rândurile de antet multiple nu sunt acceptate în Markdown; doar primul rând este folosit ca antet al tabelului.',
+  'Meerdere tabellen': 'Mai multe tabele',
+  'Meerdere video\'s': 'Mai multe videoclipuri',
+  'Metadata uitlezen…': 'Se citesc metadatele…',
+  'Niet overgenomen van dit document': 'Nepreluat din acest document',
+  'Niet overgenomen van slide {n}': 'Nepreluat din diapozitivul {n}',
+  'Ondersteund grafiektype': 'Tip de grafic acceptat',
+  'Samengevoegde cellen': 'Celule îmbinate',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Celulele de tabel îmbinate nu sunt acceptate în tabelele GFM; tabelul a fost aplatizat.',
+  'Scatter x-as': 'Axa x a graficului cu dispersie',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Un grafic cu dispersie cu valori x separate pentru fiecare serie nu poate fi reprezentat complet.',
+  'Slides classificeren…': 'Se clasifică diapozitivele…',
+  'Slides reconstrueren…': 'Se reconstruiesc diapozitivele…',
+  'Tabel naast grafiek': 'Tabel alături de grafic',
+  'Voorbeeldafbeelding zoeken…': 'Se caută imaginea de previzualizare…',
+  'Vorm of object': 'Formă sau obiect',
+  'de tekst blijft staan, de verwijzing niet': 'textul rămâne, referința nu',
+  'deels overgenomen': 'preluat parțial',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'destinație neutralizată; indica spre {url}',
+  'eerste audio overgenomen': 'primul fișier audio păstrat',
+  'eerste grafiek overgenomen': 'primul grafic păstrat',
+  'eerste rij als header': 'primul rând ca antet',
+  'eerste tabel overgenomen': 'primul tabel păstrat',
+  'eerste video overgenomen': 'primul videoclip păstrat',
+  'gedeelde x-as gebruikt': 's-a folosit o axă x comună',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'nepreluat (OciDeck nu are diapozitive audio)',
+  'niet overgenomen (deze dia werd een {type})':
+      'nepreluat (acest diapozitiv a devenit un {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'nepreluat (acest diapozitiv a devenit un {type}, care nu conține o listă cu marcatori)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'nepreluat (un diapozitiv {type} afișează {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'nepreluat (un diapozitiv {type} nu afișează text de paragraf liber)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'nepreluat (un grafic sau un tabel per diapozitiv)',
+  'objecten apart overgenomen': 'obiecte preluate separat',
+  'samengevoegd in leesvolgorde': 'îmbinate în ordinea citirii',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'text, ordine, note și tabele, grafice și media recunoscute',
+  '{n} afbeelding': '{n} imagine',
+  '{n} afbeeldingen': '{n} imagini',
+  '{n} alinea’s': '{n} paragrafe',
+  '{n} opsommingspunt': '{n} marcator',
+  '{n} opsommingspunten': '{n} marcatori',
+  '{n} vrij geplaatste tekstvakken': '{n} casete de text plasate liber',
+  'voorbeeldafbeelding en tekst': 'imagine de previzualizare și text',
+  'voorbeeldafbeelding': 'imagine de previzualizare',
+  'tekst': 'text',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} depășește limita de {limiet} și nu va fi importat.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} nu este o prezentare recunoscută. OciDeck citește PowerPoint (.pptx), OpenDocument (.odp) și Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} pare deteriorat: arhiva nu poate fi extrasă complet.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'Formatul {formaat} nu este încă acceptat ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Nu s-au găsit diapozitive în {bestand} — este acesta un fișier {formaat} valid?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      '{bestand} nu a putut fi citit ca prezentare {formaat}.',
   'Wat doen we met deze dia’s?': 'Ce facem cu aceste diapozitive?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Aceste diapozitive nu au putut fi convertite complet. Alege pentru fiecare diapozitiv ce trebuie să se întâmple; ceea ce nu modifici va fi preluat cât mai complet posibil, cu o notă despre ce lipsește.',

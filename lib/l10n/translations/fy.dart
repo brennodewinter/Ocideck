@@ -731,6 +731,112 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Alinea': 'Alinea',
+  'Audio "{bestand}"': 'Audio "{bestand}"',
+  'Deck opbouwen…': 'Deck opbouwe…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'De dia befettet meardere audiofragminten; OciDeck stipet der mar ien de dia.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'De dia befettet meardere grafiken; OciDeck stipet der mar ien de dia.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'De dia befettet meardere tabellen; OciDeck stipet der mar ien de dia.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'De dia befettet meardere video\'s; OciDeck stipet der mar ien de dia.',
+  'Dia {n} overgeslagen': 'Dia {n} oerslein',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Dia {n}: allinnich de ôfbylding oernommen',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'In net-tekstuele foarm, line of oar objekt koe net omset wurde.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Foeter-rigen wurde yn Markdown net stipe.',
+  'Formaat herkennen…': 'Formaat werkenne…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Groepearre objekten binne útinoar helle; groepearring en folchoarder binnen de groep gean ferlern.',
+  'Groepering': 'Groepearring',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Header-kolommen wurde yn OciDeck net stipe.',
+  'IWA-objecten inlezen…': 'IWA-objekten ynlêze…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'IWA-struktuer foar in part parseard — de foarmjouwing (tema, kleuren, posysjes) is net oernommen; tekst, dia-folchoarder, notysjes en, dêr\'t de struktueren werkend waarden, tabellen, grafiken en media al.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'IWA-struktuer net folslein parseard — opmaak, tabellen, grafiken, media en dia-folchoarder net oernommen',
+  'IWA-tekst salvage…': 'IWA-tekst rêde…',
+  'Keynote IWA-intern': 'Keynote IWA-yntern',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA-yntern (~{n} dia\'s)',
+  'Keynote tabel footer': 'Keynote-tabelfoeter',
+  'Keynote tabel header': 'Keynote-tabelheader',
+  'Keynote tabel headerkolommen': 'Keynote-tabelheaderkolommen',
+  'Klaar.': 'Klear.',
+  'Koppeling “{tekst}”': 'Keppeling "{tekst}"',
+  'Meerdere audio': 'Meardere audio',
+  'Meerdere grafieken': 'Meardere grafiken',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Meardere headerrigen wurde yn Markdown net stipe; allinnich de earste rige wurdt as tabelheader brûkt.',
+  'Meerdere tabellen': 'Meardere tabellen',
+  'Meerdere video\'s': 'Meardere video\'s',
+  'Metadata uitlezen…': 'Metadata útlêze…',
+  'Niet overgenomen van dit document': 'Net oernommen út dit dokumint',
+  'Niet overgenomen van slide {n}': 'Net oernommen út dia {n}',
+  'Ondersteund grafiektype': 'Stipe grafyktype',
+  'Samengevoegde cellen': 'Gearfoege sellen',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Gearfoege tabelsellen wurde yn GFM-tabellen net stipe; de tabel is platslein.',
+  'Scatter x-as': 'Scatter x-as',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'In scatter-grafyk mei aparte x-wearden per searje kin net folslein werjûn wurde.',
+  'Slides classificeren…': 'Dia\'s klassifisearje…',
+  'Slides reconstrueren…': 'Dia\'s rekonstruearje…',
+  'Tabel naast grafiek': 'Tabel njonken grafyk',
+  'Voorbeeldafbeelding zoeken…': 'Foarbyldôfbylding sykje…',
+  'Vorm of object': 'Foarm of objekt',
+  'de tekst blijft staan, de verwijzing niet':
+      'de tekst bliuwt stean, de ferwizing net',
+  'deels overgenomen': 'foar in part oernommen',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'doel ûnskealik makke; it wiisde nei {url}',
+  'eerste audio overgenomen': 'earste audio oernommen',
+  'eerste grafiek overgenomen': 'earste grafyk oernommen',
+  'eerste rij als header': 'earste rige as header',
+  'eerste tabel overgenomen': 'earste tabel oernommen',
+  'eerste video overgenomen': 'earste video oernommen',
+  'gedeelde x-as gebruikt': 'dielde x-as brûkt',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'net oernommen (OciDeck hat gjin audio-dia\'s)',
+  'niet overgenomen (deze dia werd een {type})':
+      'net oernommen (dizze dia waard in {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'net oernommen (dizze dia waard in {type}, en dy draacht gjin opsomming)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'net oernommen (in {type}-dia lit der {aantal} sjen)',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'net oernommen (in {type}-dia lit gjin losse alineatekst sjen)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'net oernommen (ien grafyk of tabel de dia)',
+  'objecten apart overgenomen': 'objekten apart oernommen',
+  'samengevoegd in leesvolgorde': 'gearfoege yn lêsfolchoarder',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'tekst, folchoarder, notysjes en werkende tabellen, grafiken en media',
+  '{n} afbeelding': '{n} ôfbylding',
+  '{n} afbeeldingen': '{n} ôfbyldings',
+  '{n} alinea’s': '{n} alinea\'s',
+  '{n} opsommingspunt': '{n} opsommingspunt',
+  '{n} opsommingspunten': '{n} opsommingspunten',
+  '{n} vrij geplaatste tekstvakken': '{n} frij pleatste tekstfakken',
+  'voorbeeldafbeelding en tekst': 'foarbyldôfbylding en tekst',
+  'voorbeeldafbeelding': 'foarbyldôfbylding',
+  'tekst': 'tekst',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} is grutter as de limyt fan {limiet} en wurdt net ymportearre.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} is gjin werkende presintaasje. OciDeck lêst PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} liket beskeadige: it argyf kin net folslein útpakt wurde.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'It {formaat}-formaat wurdt noch net stipe ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Gjin dia\'s fûn yn {bestand} — is dit in jildich {formaat}-bestân?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      '{bestand} koe net as {formaat}-presintaasje lêzen wurde.',
   'Wat doen we met deze dia’s?': 'Wat dogge we mei dizze slides?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Dizze slides koene net folslein omsetten wurde. Kies per slide wat der barre moat; wat jo net oanreitsje wurdt sa folslein mooglik oernommen, mei in notysje derby oer wat der ûntbrekt.',

@@ -1806,6 +1806,112 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Alinea': 'Alt',
+  'Audio "{bestand}"': 'Fuaim "{bestand}"',
+  'Deck opbouwen…': 'Deic á thógáil…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'Tá roinnt gearrthóg fuaime sa sleamhnán; ní thacaíonn OciDeck ach le ceann amháin in aghaidh an tsleamhnáin.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'Tá roinnt cairteacha sa sleamhnán; ní thacaíonn OciDeck ach le ceann amháin in aghaidh an tsleamhnáin.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'Tá roinnt táblaí sa sleamhnán; ní thacaíonn OciDeck ach le ceann amháin in aghaidh an tsleamhnáin.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'Tá roinnt físeán sa sleamhnán; ní thacaíonn OciDeck ach le ceann amháin in aghaidh an tsleamhnáin.',
+  'Dia {n} overgeslagen': 'Sleamhnán {n} scipeáilte',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Sleamhnán {n}: níor coinníodh ach an íomhá',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Níorbh fhéidir cruth, líne nó réad neamhthéacsúil eile a thiontú.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Ní thacaítear le sraitheanna buntáisc i Markdown.',
+  'Formaat herkennen…': 'Formáid á aithint…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Rinneadh na réada grúpáilte a dhíghrúpáil; cailltear an grúpáil agus an t-ord laistigh den ghrúpa.',
+  'Groepering': 'Grúpáil',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Ní thacaíonn OciDeck le colúin cheanntáisc.',
+  'IWA-objecten inlezen…': 'Réada IWA á léamh…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'Rinneadh anailís pháirteach ar struchtúr IWA — níor aistríodh an stíl (téama, dathanna, suíomhanna); aistríodh an téacs, ord na sleamhnán, na nótaí agus, san áit ar aithníodh na struchtúir, na táblaí, na cairteacha agus na meáin.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'Níor rinneadh anailís iomlán ar struchtúr IWA — níor aistríodh an fhormáidiú, na táblaí, na cairteacha, na meáin ná ord na sleamhnán',
+  'IWA-tekst salvage…': 'Téacs IWA á tharrtháil…',
+  'Keynote IWA-intern': 'Keynote IWA inmheánach',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA inmheánach (~{n} sleamhnán)',
+  'Keynote tabel footer': 'Buntásc tábla Keynote',
+  'Keynote tabel header': 'Ceanntásc tábla Keynote',
+  'Keynote tabel headerkolommen': 'Colúin cheanntáisc tábla Keynote',
+  'Klaar.': 'Déanta.',
+  'Koppeling “{tekst}”': 'Nasc "{tekst}"',
+  'Meerdere audio': 'Iltáille fuaime',
+  'Meerdere grafieken': 'Ilchairteacha',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Ní thacaítear le hilsraitheanna ceanntáisc i Markdown; ní úsáidtear ach an chéad sraith mar cheanntásc an tábla.',
+  'Meerdere tabellen': 'Iltáblaí',
+  'Meerdere video\'s': 'Ilfhíseáin',
+  'Metadata uitlezen…': 'Meiteashonraí á léamh…',
+  'Niet overgenomen van dit document': 'Níor aistríodh ón gcáipéis seo',
+  'Niet overgenomen van slide {n}': 'Níor aistríodh ó shleamhnán {n}',
+  'Ondersteund grafiektype': 'Cineál cairte a dtacaítear leis',
+  'Samengevoegde cellen': 'Cealla cumaiscthe',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Ní thacaítear le cealla tábla cumaiscthe i dtáblaí GFM; rinneadh an tábla a leacú.',
+  'Scatter x-as': 'X-ais scaipthe',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Ní féidir cairt scaipthe le luachanna x ar leith in aghaidh na sraithe a léiriú go hiomlán.',
+  'Slides classificeren…': 'Sleamhnáin á rangú…',
+  'Slides reconstrueren…': 'Sleamhnáin á n-athchruthú…',
+  'Tabel naast grafiek': 'Tábla in aice le cairt',
+  'Voorbeeldafbeelding zoeken…': 'Ag lorg íomhá réamhamhairc…',
+  'Vorm of object': 'Cruth nó réad',
+  'de tekst blijft staan, de verwijzing niet':
+      'fanann an téacs, ní fhanann an tagairt',
+  'deels overgenomen': 'aistríodh go páirteach',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'neodraíodh an sprioc; dhírigh sí ar {url}',
+  'eerste audio overgenomen': 'coinníodh an chéad fhuaim',
+  'eerste grafiek overgenomen': 'coinníodh an chéad chairt',
+  'eerste rij als header': 'an chéad sraith mar cheanntásc',
+  'eerste tabel overgenomen': 'coinníodh an chéad tábla',
+  'eerste video overgenomen': 'coinníodh an chéad fhíseán',
+  'gedeelde x-as gebruikt': 'úsáideadh x-ais roinnte',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'níor aistríodh (níl aon sleamhnáin fuaime ag OciDeck)',
+  'niet overgenomen (deze dia werd een {type})':
+      'níor aistríodh (rinneadh {type} den sleamhnán seo)',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'níor aistríodh (rinneadh {type} den sleamhnán seo, nach mbíonn liosta urchar ann)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'níor aistríodh (taispeánann sleamhnán {type} {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'níor aistríodh (ní thaispeánann sleamhnán {type} téacs ailt scaoilte)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'níor aistríodh (cairt amháin nó tábla amháin in aghaidh an tsleamhnáin)',
+  'objecten apart overgenomen': 'aistríodh na réada ceann ar cheann',
+  'samengevoegd in leesvolgorde': 'cumaiscthe in ord léitheoireachta',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'téacs, ord, nótaí agus táblaí, cairteacha agus meáin aitheanta',
+  '{n} afbeelding': '{n} íomhá',
+  '{n} afbeeldingen': '{n} íomhá',
+  '{n} alinea’s': '{n} alt',
+  '{n} opsommingspunt': '{n} urchar',
+  '{n} opsommingspunten': '{n} urchar',
+  '{n} vrij geplaatste tekstvakken': '{n} bosca téacs a socraíodh go saor',
+  'voorbeeldafbeelding en tekst': 'íomhá réamhamhairc agus téacs',
+  'voorbeeldafbeelding': 'íomhá réamhamhairc',
+  'tekst': 'téacs',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      'Tá {bestand} níos mó ná an teorainn {limiet} agus ní dhéanfar é a iompórtáil.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      'Ní cur i láthair aitheanta é {bestand}. Léann OciDeck PowerPoint (.pptx), OpenDocument (.odp) agus Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      'Dealraíonn sé go bhfuil {bestand} damáiste: ní féidir an chartlann a bhaint amach go hiomlán.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'Níl tacaíocht ann fós don fhormáid {formaat} ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Níor aimsíodh aon sleamhnán in {bestand} — an comhad {formaat} bailí é seo?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      'Níorbh fhéidir {bestand} a léamh mar chur i láthair {formaat}.',
   'Wat doen we met deze dia’s?': 'Cad a dhéanfaimid leis na sleamhnáin seo?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Níorbh fhéidir na sleamhnáin seo a thiontú go hiomlán. Roghnaigh do gach sleamhnán cad ba cheart a dhéanamh; rud ar bith nach mbaineann tú leis, tógfar chomh hiomlán agus is féidir é, le nóta faoina bhfuil ar iarraidh.',

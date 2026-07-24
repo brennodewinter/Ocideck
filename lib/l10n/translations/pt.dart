@@ -1800,6 +1800,113 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Alinea': 'Parágrafo',
+  'Audio "{bestand}"': 'Áudio "{bestand}"',
+  'Deck opbouwen…': 'A construir a apresentação…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'O slide contém vários clipes de áudio; o OciDeck só suporta um por slide.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'O slide contém vários gráficos; o OciDeck só suporta um por slide.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'O slide contém várias tabelas; o OciDeck só suporta uma por slide.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'O slide contém vários vídeos; o OciDeck só suporta um por slide.',
+  'Dia {n} overgeslagen': 'Slide {n} ignorado',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Slide {n}: apenas a imagem foi mantida',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Não foi possível converter uma forma, linha ou outro objeto não textual.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'As linhas de rodapé não são suportadas no Markdown.',
+  'Formaat herkennen…': 'A detetar o formato…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Os objetos agrupados foram desagrupados; o agrupamento e a ordem dentro do grupo perdem-se.',
+  'Groepering': 'Agrupamento',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'As colunas de cabeçalho não são suportadas no OciDeck.',
+  'IWA-objecten inlezen…': 'A ler objetos IWA…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'Estrutura IWA analisada parcialmente — o estilo (tema, cores, posições) não foi mantido; o texto, a ordem dos slides, as notas e, onde as estruturas foram reconhecidas, as tabelas, gráficos e multimédia foram.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'Estrutura IWA não analisada por completo — formatação, tabelas, gráficos, multimédia e ordem dos slides não mantidos',
+  'IWA-tekst salvage…': 'A recuperar texto IWA…',
+  'Keynote IWA-intern': 'Keynote IWA interno',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA interno (~{n} slides)',
+  'Keynote tabel footer': 'Rodapé de tabela do Keynote',
+  'Keynote tabel header': 'Cabeçalho de tabela do Keynote',
+  'Keynote tabel headerkolommen': 'Colunas de cabeçalho de tabela do Keynote',
+  'Klaar.': 'Concluído.',
+  'Koppeling “{tekst}”': 'Ligação "{tekst}"',
+  'Meerdere audio': 'Vários áudios',
+  'Meerdere grafieken': 'Vários gráficos',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Várias linhas de cabeçalho não são suportadas no Markdown; apenas a primeira linha é usada como cabeçalho da tabela.',
+  'Meerdere tabellen': 'Várias tabelas',
+  'Meerdere video\'s': 'Vários vídeos',
+  'Metadata uitlezen…': 'A ler metadados…',
+  'Niet overgenomen van dit document': 'Não incorporado deste documento',
+  'Niet overgenomen van slide {n}': 'Não incorporado do slide {n}',
+  'Ondersteund grafiektype': 'Tipo de gráfico suportado',
+  'Samengevoegde cellen': 'Células mescladas',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'As células de tabela mescladas não são suportadas em tabelas GFM; a tabela foi achatada.',
+  'Scatter x-as': 'Eixo x de dispersão',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Um gráfico de dispersão com valores x separados por série não pode ser totalmente representado.',
+  'Slides classificeren…': 'A classificar slides…',
+  'Slides reconstrueren…': 'A reconstruir slides…',
+  'Tabel naast grafiek': 'Tabela ao lado do gráfico',
+  'Voorbeeldafbeelding zoeken…': 'A procurar imagem de pré-visualização…',
+  'Vorm of object': 'Forma ou objeto',
+  'de tekst blijft staan, de verwijzing niet':
+      'o texto permanece, a referência não',
+  'deels overgenomen': 'parcialmente incorporado',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'destino neutralizado; apontava para {url}',
+  'eerste audio overgenomen': 'primeiro áudio mantido',
+  'eerste grafiek overgenomen': 'primeiro gráfico mantido',
+  'eerste rij als header': 'primeira linha como cabeçalho',
+  'eerste tabel overgenomen': 'primeira tabela mantida',
+  'eerste video overgenomen': 'primeiro vídeo mantido',
+  'gedeelde x-as gebruikt': 'usado eixo x partilhado',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'não incorporado (o OciDeck não tem slides de áudio)',
+  'niet overgenomen (deze dia werd een {type})':
+      'não incorporado (este slide tornou-se um {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'não incorporado (este slide tornou-se um {type}, que não comporta lista com marcadores)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'não incorporado (um slide {type} mostra {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'não incorporado (um slide {type} não mostra texto de parágrafo solto)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'não incorporado (um gráfico ou tabela por slide)',
+  'objecten apart overgenomen': 'objetos incorporados separadamente',
+  'samengevoegd in leesvolgorde': 'mesclados por ordem de leitura',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'texto, ordem, notas e tabelas, gráficos e multimédia reconhecidos',
+  '{n} afbeelding': '{n} imagem',
+  '{n} afbeeldingen': '{n} imagens',
+  '{n} alinea’s': '{n} parágrafos',
+  '{n} opsommingspunt': '{n} marcador',
+  '{n} opsommingspunten': '{n} marcadores',
+  '{n} vrij geplaatste tekstvakken':
+      '{n} caixas de texto posicionadas livremente',
+  'voorbeeldafbeelding en tekst': 'imagem de pré-visualização e texto',
+  'voorbeeldafbeelding': 'imagem de pré-visualização',
+  'tekst': 'texto',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} é maior do que o limite de {limiet} e não será importado.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} não é uma apresentação reconhecida. O OciDeck lê PowerPoint (.pptx), OpenDocument (.odp) e Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} parece estar danificado: não é possível extrair o arquivo por completo.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'O formato {formaat} ainda não é suportado ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Nenhum slide encontrado em {bestand} — este é um ficheiro {formaat} válido?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      'Não foi possível ler {bestand} como apresentação {formaat}.',
   'Wat doen we met deze dia’s?': 'O que fazer com estes slides?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Estes slides não puderam ser convertidos por completo. Escolha para cada slide o que deve acontecer; o que não alterar será importado da forma mais completa possível, com uma nota sobre o que falta.',

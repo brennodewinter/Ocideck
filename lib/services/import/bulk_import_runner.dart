@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:path/path.dart' as p;
 
 import '../../models/deck.dart';
+import 'importers/import_failure.dart';
 import 'presentation_import_service.dart';
 
 /// Eén bestand in de importwachtrij: de bytes plus de naam waaronder de
@@ -24,9 +25,9 @@ class BulkImportOutcome {
     required this.savedPath,
     required this.slideCount,
     required this.problemSlides,
-  }) : error = null;
+  }) : failure = null;
 
-  const BulkImportOutcome.failed(this.sourceName, {required this.error})
+  const BulkImportOutcome.failed(this.sourceName, {required this.failure})
     : savedPath = null,
       slideCount = 0,
       problemSlides = 0;
@@ -41,8 +42,11 @@ class BulkImportOutcome {
   /// vragen — hetzelfde getal dat de enkelvoudige import in de melding zet.
   final int problemSlides;
 
-  /// De reden van mislukken, in de bewoording van de importdienst.
-  final String? error;
+  /// De reden van mislukken, als een [ImportFailure] die de UI naar een
+  /// vertaalde melding omzet (#806). Een schrijffout (volle schijf, geen
+  /// rechten) reist mee als een `other`-fout met de gevangen exception in
+  /// [ImportFailure.cause], zodat de UI hem alsnog netjes kan benoemen.
+  final ImportFailure? failure;
 
   bool get isSuccess => savedPath != null;
 }
@@ -197,10 +201,7 @@ class BulkImportRunner {
       );
       final deck = result.deck;
       if (deck == null) {
-        return BulkImportOutcome.failed(
-          item.name,
-          error: result.failure?.message ?? item.name,
-        );
+        return BulkImportOutcome.failed(item.name, failure: result.failure);
       }
       final path = _allocatePath(
         targetDirectory,
@@ -217,8 +218,13 @@ class BulkImportRunner {
     } catch (e) {
       // Ook een schrijffout (volle schijf, geen rechten, map ondertussen weg)
       // hoort hier te landen: de rij loopt door, en de gebruiker leest per
-      // bestand wat er misging in plaats van één algemene mislukking.
-      return BulkImportOutcome.failed(item.name, error: '$e');
+      // bestand wat er misging in plaats van één algemene mislukking. De
+      // exception reist mee als `cause`, zodat de UI hem via `userFacingError`
+      // alsnog in de taal van de gebruiker kan benoemen.
+      return BulkImportOutcome.failed(
+        item.name,
+        failure: ImportFailure('$e', cause: e),
+      );
     }
   }
 

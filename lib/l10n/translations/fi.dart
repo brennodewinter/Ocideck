@@ -1771,6 +1771,110 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Alinea': 'Kappale',
+  'Audio "{bestand}"': 'Ääni "{bestand}"',
+  'Deck opbouwen…': 'Rakennetaan esitystä…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'Dia sisältää useita äänileikkeitä; OciDeck tukee vain yhtä dia kohti.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'Dia sisältää useita kaavioita; OciDeck tukee vain yhtä dia kohti.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'Dia sisältää useita taulukoita; OciDeck tukee vain yhtä dia kohti.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'Dia sisältää useita videoita; OciDeck tukee vain yhtä dia kohti.',
+  'Dia {n} overgeslagen': 'Dia {n} ohitettu',
+  'Dia {n}: alleen de afbeelding overgenomen': 'Dia {n}: vain kuva siirrettiin',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Ei-tekstimuotoista muotoa, viivaa tai muuta objektia ei voitu muuntaa.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Alatunnisterivejä ei tueta Markdownissa.',
+  'Formaat herkennen…': 'Tunnistetaan muotoa…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Ryhmitellyt objektit on purettu; ryhmittely ja järjestys ryhmän sisällä menetetään.',
+  'Groepering': 'Ryhmittely',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Otsikkosarakkeita ei tueta OciDeckissä.',
+  'IWA-objecten inlezen…': 'Luetaan IWA-objekteja…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'IWA-rakenne jäsennettiin osittain — ulkoasua (teema, värit, sijainnit) ei siirretty; teksti, diojen järjestys, muistiinpanot ja, missä rakenteet tunnistettiin, taulukot, kaaviot ja media siirrettiin.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'IWA-rakennetta ei jäsennetty kokonaan — muotoilua, taulukoita, kaavioita, mediaa ja diojen järjestystä ei siirretty',
+  'IWA-tekst salvage…': 'Pelastetaan IWA-tekstiä…',
+  'Keynote IWA-intern': 'Keynote IWA sisäinen',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA sisäinen (~{n} diaa)',
+  'Keynote tabel footer': 'Keynote-taulukon alatunniste',
+  'Keynote tabel header': 'Keynote-taulukon otsikko',
+  'Keynote tabel headerkolommen': 'Keynote-taulukon otsikkosarakkeet',
+  'Klaar.': 'Valmis.',
+  'Koppeling “{tekst}”': 'Linkki "{tekst}"',
+  'Meerdere audio': 'Useita äänitiedostoja',
+  'Meerdere grafieken': 'Useita kaavioita',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Useita otsikkorivejä ei tueta Markdownissa; vain ensimmäistä riviä käytetään taulukon otsikkona.',
+  'Meerdere tabellen': 'Useita taulukoita',
+  'Meerdere video\'s': 'Useita videoita',
+  'Metadata uitlezen…': 'Luetaan metatietoja…',
+  'Niet overgenomen van dit document': 'Ei siirretty tästä asiakirjasta',
+  'Niet overgenomen van slide {n}': 'Ei siirretty diasta {n}',
+  'Ondersteund grafiektype': 'Tuettu kaaviotyyppi',
+  'Samengevoegde cellen': 'Yhdistetyt solut',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Yhdistettyjä taulukon soluja ei tueta GFM-taulukoissa; taulukko on litistetty.',
+  'Scatter x-as': 'Hajontakaavion x-akseli',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Hajontakaaviota, jossa on erilliset x-arvot kutakin sarjaa kohti, ei voi esittää kokonaan.',
+  'Slides classificeren…': 'Luokitellaan dioja…',
+  'Slides reconstrueren…': 'Muodostetaan dioja uudelleen…',
+  'Tabel naast grafiek': 'Taulukko kaavion vieressä',
+  'Voorbeeldafbeelding zoeken…': 'Etsitään esikatselukuvaa…',
+  'Vorm of object': 'Muoto tai objekti',
+  'de tekst blijft staan, de verwijzing niet': 'teksti säilyy, viittaus ei',
+  'deels overgenomen': 'siirretty osittain',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'kohde tehty vaarattomaksi; se osoitti osoitteeseen {url}',
+  'eerste audio overgenomen': 'ensimmäinen ääni säilytetty',
+  'eerste grafiek overgenomen': 'ensimmäinen kaavio säilytetty',
+  'eerste rij als header': 'ensimmäinen rivi otsikkona',
+  'eerste tabel overgenomen': 'ensimmäinen taulukko säilytetty',
+  'eerste video overgenomen': 'ensimmäinen video säilytetty',
+  'gedeelde x-as gebruikt': 'käytettiin yhteistä x-akselia',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'ei siirretty (OciDeckissä ei ole äänidiä)',
+  'niet overgenomen (deze dia werd een {type})':
+      'ei siirretty (tästä diasta tuli {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'ei siirretty (tästä diasta tuli {type}, jossa ei ole luetteloa)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'ei siirretty ({type}-dia näyttää niitä {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'ei siirretty ({type}-dia ei näytä erillistä kappaletekstiä)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'ei siirretty (yksi kaavio tai taulukko dia kohti)',
+  'objecten apart overgenomen': 'objektit siirretty erikseen',
+  'samengevoegd in leesvolgorde': 'yhdistetty lukujärjestyksessä',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'teksti, järjestys, muistiinpanot ja tunnistetut taulukot, kaaviot ja media',
+  '{n} afbeelding': '{n} kuva',
+  '{n} afbeeldingen': '{n} kuvaa',
+  '{n} alinea’s': '{n} kappaletta',
+  '{n} opsommingspunt': '{n} luettelomerkki',
+  '{n} opsommingspunten': '{n} luettelomerkkiä',
+  '{n} vrij geplaatste tekstvakken': '{n} vapaasti sijoitettua tekstiruutua',
+  'voorbeeldafbeelding en tekst': 'esikatselukuva ja teksti',
+  'voorbeeldafbeelding': 'esikatselukuva',
+  'tekst': 'teksti',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} on suurempi kuin {limiet} raja, eikä sitä tuoda.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} ei ole tunnistettu esitys. OciDeck lukee PowerPoint (.pptx), OpenDocument (.odp) ja Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} vaikuttaa vaurioituneelta: arkistoa ei voi purkaa kokonaan.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'Muotoa {formaat} ei vielä tueta ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Tiedostosta {bestand} ei löytynyt dioja — onko tämä kelvollinen {formaat}-tiedosto?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      'Tiedostoa {bestand} ei voitu lukea {formaat}-esityksenä.',
   'Wat doen we met deze dia’s?': 'Mitä tehdään näille dioille?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Näitä dioja ei voitu muuntaa kokonaan. Valitse kullekin dialle, mitä tehdään; se mihin et koske siirretään mahdollisimman täydellisenä, ja mukaan tulee huomautus puuttuvista osista.',

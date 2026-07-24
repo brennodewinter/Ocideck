@@ -2748,6 +2748,112 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Alinea': 'Paragraf',
+  'Audio "{bestand}"': 'Ses "{bestand}"',
+  'Deck opbouwen…': 'Sunu oluşturuluyor…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'Slayt birden fazla ses klibi içeriyor; OciDeck slayt başına yalnızca birini destekler.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'Slayt birden fazla grafik içeriyor; OciDeck slayt başına yalnızca birini destekler.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'Slayt birden fazla tablo içeriyor; OciDeck slayt başına yalnızca birini destekler.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'Slayt birden fazla video içeriyor; OciDeck slayt başına yalnızca birini destekler.',
+  'Dia {n} overgeslagen': '{n}. slayt atlandı',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      '{n}. slayt: yalnızca görsel alındı',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Metin olmayan bir şekil, çizgi veya başka bir nesne dönüştürülemedi.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Alt bilgi satırları Markdown\'da desteklenmez.',
+  'Formaat herkennen…': 'Biçim algılanıyor…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Gruplanmış nesneler çözüldü; gruplama ve grup içindeki sıra kayboluyor.',
+  'Groepering': 'Gruplama',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Başlık sütunları OciDeck\'te desteklenmez.',
+  'IWA-objecten inlezen…': 'IWA nesneleri okunuyor…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'IWA yapısı kısmen ayrıştırıldı — biçimlendirme (tema, renkler, konumlar) alınmadı; metin, slayt sırası, notlar ve, yapıların tanındığı yerlerde tablolar, grafikler ve medya alındı.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'IWA yapısı tam olarak ayrıştırılmadı — biçimlendirme, tablolar, grafikler, medya ve slayt sırası alınmadı',
+  'IWA-tekst salvage…': 'IWA metni kurtarılıyor…',
+  'Keynote IWA-intern': 'Keynote IWA dâhilî',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA dâhilî (~{n} slayt)',
+  'Keynote tabel footer': 'Keynote tablo alt bilgisi',
+  'Keynote tabel header': 'Keynote tablo başlığı',
+  'Keynote tabel headerkolommen': 'Keynote tablo başlık sütunları',
+  'Klaar.': 'Tamam.',
+  'Koppeling “{tekst}”': 'Bağlantı "{tekst}"',
+  'Meerdere audio': 'Birden fazla ses',
+  'Meerdere grafieken': 'Birden fazla grafik',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Markdown\'da birden fazla başlık satırı desteklenmez; tablo başlığı olarak yalnızca ilk satır kullanılır.',
+  'Meerdere tabellen': 'Birden fazla tablo',
+  'Meerdere video\'s': 'Birden fazla video',
+  'Metadata uitlezen…': 'Meta veriler okunuyor…',
+  'Niet overgenomen van dit document': 'Bu belgeden alınmadı',
+  'Niet overgenomen van slide {n}': '{n}. slayttan alınmadı',
+  'Ondersteund grafiektype': 'Desteklenen grafik türü',
+  'Samengevoegde cellen': 'Birleştirilmiş hücreler',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Birleştirilmiş tablo hücreleri GFM tablolarında desteklenmez; tablo düzleştirildi.',
+  'Scatter x-as': 'Dağılım x ekseni',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Her seri için ayrı x değerleri olan bir dağılım grafiği tam olarak gösterilemez.',
+  'Slides classificeren…': 'Slaytlar sınıflandırılıyor…',
+  'Slides reconstrueren…': 'Slaytlar yeniden oluşturuluyor…',
+  'Tabel naast grafiek': 'Grafiğin yanında tablo',
+  'Voorbeeldafbeelding zoeken…': 'Önizleme görseli aranıyor…',
+  'Vorm of object': 'Şekil veya nesne',
+  'de tekst blijft staan, de verwijzing niet': 'metin kalır, bağlantı kalmaz',
+  'deels overgenomen': 'kısmen aktarıldı',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'hedef etkisiz hâle getirildi; {url} adresini gösteriyordu',
+  'eerste audio overgenomen': 'ilk ses alındı',
+  'eerste grafiek overgenomen': 'ilk grafik alındı',
+  'eerste rij als header': 'başlık olarak ilk satır',
+  'eerste tabel overgenomen': 'ilk tablo alındı',
+  'eerste video overgenomen': 'ilk video alındı',
+  'gedeelde x-as gebruikt': 'ortak x ekseni kullanıldı',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'aktarılmadı (OciDeck\'te ses slaytları yok)',
+  'niet overgenomen (deze dia werd een {type})':
+      'aktarılmadı (bu slayt bir {type} oldu)',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'aktarılmadı (bu slayt bir {type} oldu ve madde işaretli liste taşımaz)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'aktarılmadı ({type} slaytı {aantal} tanesini gösterir)',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'aktarılmadı ({type} slaytı serbest paragraf metni göstermez)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'aktarılmadı (slayt başına bir grafik veya tablo)',
+  'objecten apart overgenomen': 'nesneler ayrı ayrı alındı',
+  'samengevoegd in leesvolgorde': 'okuma sırasına göre birleştirildi',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'metin, sıra, notlar ve tanınan tablolar, grafikler ve medya',
+  '{n} afbeelding': '{n} görsel',
+  '{n} afbeeldingen': '{n} görsel',
+  '{n} alinea’s': '{n} paragraf',
+  '{n} opsommingspunt': '{n} madde işareti',
+  '{n} opsommingspunten': '{n} madde işareti',
+  '{n} vrij geplaatste tekstvakken':
+      '{n} serbestçe yerleştirilmiş metin kutusu',
+  'voorbeeldafbeelding en tekst': 'önizleme görseli ve metin',
+  'voorbeeldafbeelding': 'önizleme görseli',
+  'tekst': 'metin',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand}, {limiet} sınırından büyük ve içe aktarılmayacak.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} tanınan bir sunu değil. OciDeck; PowerPoint (.pptx), OpenDocument (.odp) ve Keynote (.key) biçimlerini okur.',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} bozuk görünüyor: arşiv tam olarak açılamıyor.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      '{formaat} biçimi henüz desteklenmiyor ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      '{bestand} içinde slayt bulunamadı — bu geçerli bir {formaat} dosyası mı?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      '{bestand}, {formaat} sunusu olarak okunamadı.',
   'Wat doen we met deze dia’s?': 'Bu slaytlarla ne yapalım?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Bu slaytlar tümüyle dönüştürülemedi. Her slayt için ne yapılacağını seçin; dokunmadıklarınız olabildiğince eksiksiz aktarılır ve eksik kalanlar için bir not eklenir.',

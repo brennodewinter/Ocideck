@@ -1,5 +1,6 @@
 import 'package:archive/archive.dart';
 
+import '../importers/import_failure.dart';
 import '../models/source_format.dart';
 import '../utils/archive_utils.dart';
 
@@ -18,12 +19,22 @@ SourceFormat detectFormatFromBytes(List<int> bytes, {String basename = ''}) {
 }
 
 /// Result of an integrity-aware format check.
+///
+/// [error] is a Dutch technical string for the log; [reason] is the stable
+/// code the UI turns into a localised message. The two travel together so the
+/// service can hand the reason on in the [ImportFailure] it builds (#806).
 class FormatValidation {
-  const FormatValidation(this.format, {this.isValid = true, this.error});
+  const FormatValidation(
+    this.format, {
+    this.isValid = true,
+    this.error,
+    this.reason,
+  });
 
   final SourceFormat format;
   final bool isValid;
   final String? error;
+  final ImportFailureReason? reason;
 }
 
 /// Validates already-read [bytes]: they must form a readable ZIP archive and
@@ -37,6 +48,7 @@ FormatValidation validateFormatFromBytes(
       SourceFormat.unknown,
       isValid: false,
       error: 'Bestand is te klein om een presentatie te zijn.',
+      reason: ImportFailureReason.notAPresentation,
     );
   }
   // ZIP local file header magic.
@@ -48,6 +60,7 @@ FormatValidation validateFormatFromBytes(
       _byExtension(basename),
       isValid: false,
       error: 'Dit bestand is geen geldig zip-archief (pptx/odp/key).',
+      reason: ImportFailureReason.notAPresentation,
     );
   }
 
@@ -75,6 +88,7 @@ FormatValidation validateFormatFromBytes(
       _byExtension(basename),
       isValid: false,
       error: 'Beschadigd zip-archief: het bestand kan niet worden uitgepakt.',
+      reason: ImportFailureReason.corrupt,
     );
   }
 
@@ -84,6 +98,7 @@ FormatValidation validateFormatFromBytes(
       fallback,
       isValid: false,
       error: 'Beschadigd of ongeldig ${fallback.name}-bestand.',
+      reason: ImportFailureReason.corrupt,
     );
   }
 
@@ -91,6 +106,7 @@ FormatValidation validateFormatFromBytes(
     SourceFormat.unknown,
     isValid: false,
     error: 'Onbekend of ongeldig zip-archief.',
+    reason: ImportFailureReason.notAPresentation,
   );
 }
 

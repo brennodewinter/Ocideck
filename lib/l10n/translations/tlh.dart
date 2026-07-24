@@ -1746,6 +1746,111 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Alinea': 'mu\'tlhegh',
+  'Audio "{bestand}"': 'wab "{bestand}"',
+  'Deck opbouwen…': 'nav chenmoHtaH…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'wab law\' ngaS nav; wa\' neH nav Sup OciDeck.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'HaSta law\' ngaS nav; wa\' neH nav Sup OciDeck.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'tabel law\' ngaS nav; wa\' neH nav Sup OciDeck.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'HaSta vIH law\' ngaS nav; wa\' neH nav Sup OciDeck.',
+  'Dia {n} overgeslagen': 'nav {n} lIjlu\'',
+  'Dia {n}: alleen de afbeelding overgenomen': 'nav {n}: mIllogh neH lo\'lu\'',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'pab ghajbe\'bogh Segh, tlhegh, latlh Doch je choHlaH\'be\'.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Markdown-Daq footer chevmey lorlu\'be\'.',
+  'Formaat herkennen…': 'Segh nujqu\'…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Doch tay\' ghomHa\'lu\'; ghom qet Doch mISlu\'.',
+  'Groepering': 'ghom',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'OciDeck-Daq header columns lorlu\'be\'.',
+  'IWA-objecten inlezen…': 'IWA Doch laDlu\'…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'IWA qach \'op parslu\' — \'IHtaHghach (tema, rItlh, Daq) lo\'lu\'be\'; mu\'mey, nav mIw, QIn, \'ej Segh tu\'lu\'DI\', tabelmey, HaSta, media je lo\'lu\'.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'IWA qach naQbe\' parslu\' — \'IHtaHghach, tabelmey, HaSta, media, nav mIw je lo\'lu\'be\'',
+  'IWA-tekst salvage…': 'IWA mu\'mey toDlu\'…',
+  'Keynote IWA-intern': 'Keynote IWA qoD',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA qoD (~{n} nav)',
+  'Keynote tabel footer': 'Keynote tabel footer',
+  'Keynote tabel header': 'Keynote tabel header',
+  'Keynote tabel headerkolommen': 'Keynote tabel header columns',
+  'Klaar.': 'rIn.',
+  'Koppeling “{tekst}”': 'rar "{tekst}"',
+  'Meerdere audio': 'wab law\'',
+  'Meerdere grafieken': 'HaSta law\'',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Markdown-Daq header ghItlh tlhoQmey law\' lorlu\'be\'; tabel header \'oH wa\'DIch tlhoQ neH.',
+  'Meerdere tabellen': 'tabel law\'',
+  'Meerdere video\'s': 'HaSta vIH law\'',
+  'Metadata uitlezen…': 'metadata laDlu\'…',
+  'Niet overgenomen van dit document': 'vam ghItlh vo\' lo\'lu\'be\'',
+  'Niet overgenomen van slide {n}': 'nav {n} vo\' lo\'lu\'be\'',
+  'Ondersteund grafiektype': 'HaSta Segh lo\'laH',
+  'Samengevoegde cellen': 'muvchuq cellmey',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'GFM tabelmey-Daq muvchuq tabel cellmey lorlu\'be\'; tabel HemHa\'lu\'.',
+  'Scatter x-as': 'scatter x-tlhegh',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'scatter HaSta, tlheghmey Hoch x-mey pImchugh, naQ \'anglu\'laHbe\'.',
+  'Slides classificeren…': 'navmey boqHa\'lu\'…',
+  'Slides reconstrueren…': 'navmey chenqa\'moHlu\'…',
+  'Tabel naast grafiek': 'HaSta retlh tabel',
+  'Voorbeeldafbeelding zoeken…': 'mIllogh nughantlhpu\' SammeH…',
+  'Vorm of object': 'Segh ghap Doch',
+  'de tekst blijft staan, de verwijzing niet':
+      'mu\'mey ratlh, \'ach rar ratlhbe\'',
+  'deels overgenomen': '\'op lo\'lu\'',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'ghob Qaw\'lu\'; {url} \'oS',
+  'eerste audio overgenomen': 'wab wa\'DIch lo\'lu\'',
+  'eerste grafiek overgenomen': 'HaSta wa\'DIch lo\'lu\'',
+  'eerste rij als header': 'header \'oH wa\'DIch tlhoQ',
+  'eerste tabel overgenomen': 'tabel wa\'DIch lo\'lu\'',
+  'eerste video overgenomen': 'HaSta vIH wa\'DIch lo\'lu\'',
+  'gedeelde x-as gebruikt': 'x-tlhegh Huvmey lo\'lu\'',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'lo\'lu\'be\' (OciDeck wab navmey ghajbe\')',
+  'niet overgenomen (deze dia werd een {type})':
+      'lo\'lu\'be\' (nav vam {type} moj)',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'lo\'lu\'be\' (nav vam {type} moj, tetlh ghajbe\'bogh)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'lo\'lu\'be\' ({type} nav {aantal} \'angtaH)',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'lo\'lu\'be\' ({type} nav paragraph ghItlh \'angbe\')',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'lo\'lu\'be\' (wa\' HaSta ghap tabel nav)',
+  'objecten apart overgenomen': 'Doch pa\' pa\' lo\'lu\'',
+  'samengevoegd in leesvolgorde': 'laDmeH mIw muvchuqlu\'',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'mu\'mey, mIw, QInmey, tu\'lu\'bogh tabelmey, HaSta, media je',
+  '{n} afbeelding': '{n} mIllogh',
+  '{n} afbeeldingen': '{n} mIllogh',
+  '{n} alinea’s': '{n} mu\'tlheghmey',
+  '{n} opsommingspunt': '{n} tetlh mem',
+  '{n} opsommingspunten': '{n} tetlh memmey',
+  '{n} vrij geplaatste tekstvakken': '{n} tlhab ghItlh box',
+  'voorbeeldafbeelding en tekst': 'mIllogh \'ej ghItlh',
+  'voorbeeldafbeelding': 'mIllogh',
+  'tekst': 'ghItlh',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} tIn law\' {limiet} veH; lI\'lu\'be\'.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} \'oH ngoDHom Sovbogh OciDeck \'oHbe\'. PowerPoint (.pptx), OpenDocument (.odp), Keynote (.key) je laD OciDeck.',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} QIHlu\'law\': naQ poSmoHlu\'laHbe\' ngaSwI\'.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'DaH {formaat} Segh Suplu\'be\' ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      '{bestand}-Daq nav tu\'be\'lu\' — {formaat} de\'wI\' ngoQ\'a\' vam?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      '{formaat} \'angmeH nav {bestand} laDlu\'laHbe\'.',
   'Wat doen we met deze dia’s?': '\'anghommeyvam nuq wIta\'?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       '\'anghommeyvam naQ mughlu\'laHbe\'pu\'. Hoch \'anghomvaD nuq qaSnIS yIwIv; DaHotbe\'bogh \'anghommey naQ law\' chellu\', \'ej Hutlhbogh Dochmey qonlu\'.',

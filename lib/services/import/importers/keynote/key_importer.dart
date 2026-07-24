@@ -68,6 +68,8 @@ class KeyImporter extends Importer {
       return const Err(
         ImportFailure(
           'Kon het .key niet lezen: dit bestand is geen zip-archief.',
+          reason: ImportFailureReason.notAPresentation,
+          args: {'formaat': 'key'},
         ),
       );
     }
@@ -129,6 +131,8 @@ class KeyImporter extends Importer {
           ImportFailure(
             'Geen voorbeeldafbeelding en geen IWA-tekst gevonden — dit .key '
             'kan (nog) niet worden geconverteerd.',
+            reason: ImportFailureReason.unreadable,
+            args: {'formaat': 'key'},
           ),
         );
       }
@@ -156,7 +160,14 @@ class KeyImporter extends Importer {
       );
     } on Exception catch (e) {
       logError('KeyImporter failed for ${path ?? 'bestand'}', e);
-      return Err(ImportFailure('Kon het .key niet lezen.', cause: e));
+      return Err(
+        ImportFailure(
+          'Kon het .key niet lezen.',
+          cause: e,
+          reason: ImportFailureReason.unreadable,
+          args: const {'formaat': 'key'},
+        ),
+      );
     }
   }
 
@@ -261,17 +272,23 @@ class KeyImporter extends Importer {
             'tekst, volgorde, notities en herkende tabellen, grafieken en media',
       );
     }
-    final salvagedBits = <String>[
-      if (previewSalvaged) 'voorbeeldafbeelding',
-      if (textSalvaged) 'tekst',
-    ];
+    // Eén vaste sleutel per combinatie, niet `bits.join(' + ')`: een
+    // samengestelde string is per taal onvindbaar, en de notitie wordt vertaald
+    // opgeslagen (#806). Drie combinaties zijn zinvol; geen enkele is null.
+    final salvaged = switch ((previewSalvaged, textSalvaged)) {
+      (true, true) => 'voorbeeldafbeelding en tekst',
+      (true, false) => 'voorbeeldafbeelding',
+      (false, true) => 'tekst',
+      (false, false) => null,
+    };
     return ConversionIssue(
       slideIndex: -1,
-      feature: 'Keynote IWA-intern (~$slideCount dia\'s)',
+      feature: 'Keynote IWA-intern (~{n} dia’s)',
       description:
           'IWA-structuur niet volledig geparseerd — opmaak, tabellen, '
           'grafieken, media en slide-volgorde niet overgenomen',
-      salvagedAs: salvagedBits.isEmpty ? null : salvagedBits.join(' + '),
+      salvagedAs: salvaged,
+      args: {'n': '$slideCount'},
     );
   }
 }

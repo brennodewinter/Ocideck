@@ -1770,6 +1770,111 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Alinea': 'Rindkopa',
+  'Audio "{bestand}"': 'Audio "{bestand}"',
+  'Deck opbouwen…': 'Prezentācijas veidošana…',
+  'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
+      'Slaidā ir vairāki audiofragmenti; OciDeck atbalsta tikai vienu vienā slaidā.',
+  'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
+      'Slaidā ir vairākas diagrammas; OciDeck atbalsta tikai vienu vienā slaidā.',
+  'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
+      'Slaidā ir vairākas tabulas; OciDeck atbalsta tikai vienu vienā slaidā.',
+  'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
+      'Slaidā ir vairāki video; OciDeck atbalsta tikai vienu vienā slaidā.',
+  'Dia {n} overgeslagen': 'Slaids {n} izlaists',
+  'Dia {n}: alleen de afbeelding overgenomen':
+      'Slaids {n}: pārnests tikai attēls',
+  'Een niet-tekstuele vorm, lijn of ander object kon niet worden omgezet.':
+      'Netekstuālu formu, līniju vai citu objektu nevarēja pārveidot.',
+  'Footerrijen worden in Markdown niet ondersteund.':
+      'Kājenes rindas Markdown netiek atbalstītas.',
+  'Formaat herkennen…': 'Formāta noteikšana…',
+  'Gegroepeerde objecten zijn uitgeklapt; groepering en volgorde binnen de groep gaan verloren.':
+      'Grupētie objekti ir atgrupēti; grupējums un secība grupā tiek zaudēti.',
+  'Groepering': 'Grupēšana',
+  'Headerkolommen worden in OciDeck niet ondersteund.':
+      'Galvenes kolonnas OciDeck netiek atbalstītas.',
+  'IWA-objecten inlezen…': 'Nolasa IWA objektus…',
+  'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
+      'IWA struktūra daļēji parsēta — noformējums (tēma, krāsas, pozīcijas) netika pārnests; teksts, slaidu secība, piezīmes un, kur struktūras tika atpazītas, tabulas, diagrammas un multivide gan.',
+  'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
+      'IWA struktūra nav pilnībā parsēta — formatējums, tabulas, diagrammas, multivide un slaidu secība netika pārnesti',
+  'IWA-tekst salvage…': 'IWA teksta glābšana…',
+  'Keynote IWA-intern': 'Keynote IWA iekšējais',
+  'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA iekšējais (~{n} slaidi)',
+  'Keynote tabel footer': 'Keynote tabulas kājene',
+  'Keynote tabel header': 'Keynote tabulas galvene',
+  'Keynote tabel headerkolommen': 'Keynote tabulas galvenes kolonnas',
+  'Klaar.': 'Gatavs.',
+  'Koppeling “{tekst}”': 'Saite "{tekst}"',
+  'Meerdere audio': 'Vairāki audio',
+  'Meerdere grafieken': 'Vairākas diagrammas',
+  'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
+      'Vairākas galvenes rindas Markdown netiek atbalstītas; kā tabulas galvene tiek izmantota tikai pirmā rinda.',
+  'Meerdere tabellen': 'Vairākas tabulas',
+  'Meerdere video\'s': 'Vairāki video',
+  'Metadata uitlezen…': 'Metadatu nolasīšana…',
+  'Niet overgenomen van dit document': 'Nav pārnests no šī dokumenta',
+  'Niet overgenomen van slide {n}': 'Nav pārnests no slaida {n}',
+  'Ondersteund grafiektype': 'Atbalstīts diagrammas veids',
+  'Samengevoegde cellen': 'Apvienotās šūnas',
+  'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
+      'Apvienotās tabulas šūnas GFM tabulās netiek atbalstītas; tabula ir saplacināta.',
+  'Scatter x-as': 'Izkliedes diagrammas x ass',
+  'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
+      'Izkliedes diagrammu ar atsevišķām x vērtībām katrai sērijai nevar attēlot pilnībā.',
+  'Slides classificeren…': 'Slaidu klasificēšana…',
+  'Slides reconstrueren…': 'Slaidu rekonstruēšana…',
+  'Tabel naast grafiek': 'Tabula līdzās diagrammai',
+  'Voorbeeldafbeelding zoeken…': 'Priekšskatījuma attēla meklēšana…',
+  'Vorm of object': 'Forma vai objekts',
+  'de tekst blijft staan, de verwijzing niet': 'teksts paliek, atsauce nē',
+  'deels overgenomen': 'daļēji pārnests',
+  'doel onschadelijk gemaakt; het wees naar {url}':
+      'mērķis padarīts nekaitīgs; tas norādīja uz {url}',
+  'eerste audio overgenomen': 'pārnests pirmais audio',
+  'eerste grafiek overgenomen': 'pārnesta pirmā diagramma',
+  'eerste rij als header': 'pirmā rinda kā galvene',
+  'eerste tabel overgenomen': 'pārnesta pirmā tabula',
+  'eerste video overgenomen': 'pārnests pirmais video',
+  'gedeelde x-as gebruikt': 'izmantota kopīga x ass',
+  'niet overgenomen (OciDeck heeft geen audio-slides)':
+      'nav pārnests (OciDeck nav audio slaidu)',
+  'niet overgenomen (deze dia werd een {type})':
+      'nav pārnests (šis slaids kļuva par {type})',
+  'niet overgenomen (deze dia werd een {type}, en die draagt geen opsomming)':
+      'nav pārnests (šis slaids kļuva par {type}, kas nesatur aizzīmju sarakstu)',
+  'niet overgenomen (een {type}-dia toont er {aantal})':
+      'nav pārnests ({type} slaids rāda {aantal})',
+  'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
+      'nav pārnests ({type} slaids nerāda atsevišķu rindkopas tekstu)',
+  'niet overgenomen (één grafiek of tabel per slide)':
+      'nav pārnests (viena diagramma vai tabula vienā slaidā)',
+  'objecten apart overgenomen': 'objekti pārnesti atsevišķi',
+  'samengevoegd in leesvolgorde': 'apvienoti lasīšanas secībā',
+  'tekst, volgorde, notities en herkende tabellen, grafieken en media':
+      'teksts, secība, piezīmes un atpazītas tabulas, diagrammas un multivide',
+  '{n} afbeelding': '{n} attēls',
+  '{n} afbeeldingen': '{n} attēli',
+  '{n} alinea’s': '{n} rindkopas',
+  '{n} opsommingspunt': '{n} aizzīme',
+  '{n} opsommingspunten': '{n} aizzīmes',
+  '{n} vrij geplaatste tekstvakken': '{n} brīvi novietoti teksta lodziņi',
+  'voorbeeldafbeelding en tekst': 'priekšskatījuma attēls un teksts',
+  'voorbeeldafbeelding': 'priekšskatījuma attēls',
+  'tekst': 'teksts',
+  '{bestand} is groter dan de limiet van {limiet} en wordt niet geïmporteerd.':
+      '{bestand} pārsniedz ierobežojumu {limiet} un netiks importēts.',
+  '{bestand} is geen herkende presentatie. OciDeck leest PowerPoint (.pptx), OpenDocument (.odp) en Keynote (.key).':
+      '{bestand} nav atpazīta prezentācija. OciDeck lasa PowerPoint (.pptx), OpenDocument (.odp) un Keynote (.key).',
+  '{bestand} lijkt beschadigd: het archief kan niet volledig worden uitgepakt.':
+      '{bestand} šķiet bojāts: arhīvu nevar pilnībā izpakot.',
+  'Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).':
+      'Formāts {formaat} vēl netiek atbalstīts ({bestand}).',
+  'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?':
+      'Failā {bestand} nav atrasti slaidi — vai šis ir derīgs {formaat} fails?',
+  'Kon {bestand} niet lezen als {formaat}-presentatie.':
+      '{bestand} nevarēja nolasīt kā {formaat} prezentāciju.',
   'Wat doen we met deze dia’s?': 'Ko darīt ar šiem slaidiem?',
   'Deze dia’s konden niet volledig worden omgezet. Kies per dia wat er moet gebeuren; wat u niet aanraakt wordt zo volledig mogelijk overgenomen, met een notitie erbij over wat er ontbreekt.':
       'Šos slaidus neizdevās pārveidot pilnībā. Izvēlies katram slaidam, kas jādara; tas, ko neaiztiec, tiks pārņemts pēc iespējas pilnīgāk, pievienojot piezīmi par to, kas trūkst.',

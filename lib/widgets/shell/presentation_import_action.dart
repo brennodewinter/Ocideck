@@ -6,12 +6,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../services/import/bulk_import_runner.dart';
+import '../../services/import/deck_builder.dart';
 import '../../services/import/presentation_import_service.dart';
 import '../../state/deck_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../utils/error_snackbar.dart';
 import '../../utils/log.dart';
+import '../../utils/user_facing_error.dart';
 import '../dialogs/import_presentation_warning_dialog.dart';
 import '../dialogs/import_decision_dialog.dart';
 import '../dialogs/presentation_import_queue_dialog.dart';
@@ -68,10 +70,12 @@ Future<void> importPresentation(
   // het bestand niet twee keer geparseerd te worden (#812).
   PreparedImportResult prep;
   try {
-    prep = await PresentationImportService().prepare(
-      chosen.bytes,
-      filename: chosen.name,
-    );
+    // `translate: l10n.d` maakt de notitiedia's — die in het document van de
+    // gebruiker worden opgeslagen — in zijn eigen taal (#806). De naad zit op
+    // de bouwer; de service geeft hem door.
+    prep = await PresentationImportService(
+      builder: DeckBuilder(translate: l10n.d),
+    ).prepare(chosen.bytes, filename: chosen.name);
   } catch (e, s) {
     logError('importPresentation', e, s);
     if (context.mounted) {
@@ -86,7 +90,9 @@ Future<void> importPresentation(
     showErrorSnackBar(
       messenger,
       l10n,
-      prep.failure?.message ?? l10n.d('Importeren mislukt.'),
+      prep.failure == null
+          ? l10n.d('Importeren mislukt.')
+          : importFailureText(l10n, prep.failure!),
     );
     return;
   }
