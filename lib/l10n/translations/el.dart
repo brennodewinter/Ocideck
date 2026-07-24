@@ -1801,6 +1801,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Nu importeren': 'Εισαγωγή τώρα',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'Η επισκόπηση είναι έτοιμη σε νέα καρτέλα.',
   'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
       'Η εισαγωγή διαβάζει αρχεία από τον δίσκο και είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
   'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':

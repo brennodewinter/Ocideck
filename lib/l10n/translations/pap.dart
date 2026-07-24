@@ -733,6 +733,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Nu importeren': 'Importá awor',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'E resúmen ta kla den un tab nobo.',
   'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
       'Importashon ta lesa dokumentonan for di disko i ta disponibel solamente den e vershon di desktop.',
   'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':

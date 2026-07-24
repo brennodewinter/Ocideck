@@ -1790,6 +1790,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Nu importeren': 'Nunc importare',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'Conspectus in nova tabula paratus est.',
   'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
       'Importatio fasciculos e disco legit et in versione mensali tantum praesto est.',
   'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':

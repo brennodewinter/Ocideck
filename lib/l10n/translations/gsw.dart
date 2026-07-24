@@ -1777,6 +1777,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Nu importeren': 'Jetz importiere',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'D’Übersicht isch parat imene nöie Tab.',
   'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
       'De Import liist Datei vo de Platte und isch nume i de Desktop-Version verfüegbar.',
   'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':

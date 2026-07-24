@@ -2751,6 +2751,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Nu importeren': 'Şimdi içe aktar',
+  'Het overzicht staat klaar in een nieuw tabblad.':
+      'Genel görünüm yeni bir sekmede hazır.',
   'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
       'İçe aktarma diskten dosya okur ve yalnızca masaüstü sürümünde kullanılabilir.',
   'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':

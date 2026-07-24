@@ -1762,6 +1762,14 @@ Switching the module off later does not take the entry point away as long as a
 report folder is set: an existing OpenKAT deck stays updatable. What goes away
 is the tab and the menu item for someone who never imports anything.
 
+There are three ways to start an import, all doing the same thing: **Nu
+importeren** in the Integrations tab (right under the folder you just pointed
+at — it reports what it loaded and skipped on the spot, and the settings window
+stays open so nothing you were editing there is lost), the **OpenKAT-rapportages
+importeren…** button on the opening screen, and the menu item below. The
+opening screen is where you land when no presentation is open, which is where
+you tend to be when you want yesterday's export turned into today's overview.
+
 **… → OpenKAT-rapportages importeren…** takes that folder of JSON exports from
 [OpenKAT](https://openkat.nl) and builds one management deck from it — totals,
 trends and top findings per organisation, using the view limits below as

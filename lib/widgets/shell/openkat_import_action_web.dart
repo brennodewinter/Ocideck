@@ -6,12 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
+import 'openkat_import_summary.dart';
 
-Future<void> importOpenKatReports(
+/// Webromp: er is niets geprobeerd, dus `null` — zie de desktophelft.
+Future<OpenKatImportOutcome?> importOpenKatReports(
   BuildContext context,
   WidgetRef ref, {
   String? directoryOverride,
-}) async {}
+  bool announce = true,
+}) async => null;
 
 /// Webromp; het menu-item bestaat daar niet.
 String openKatLabel(AppLocalizations l10n) => '';

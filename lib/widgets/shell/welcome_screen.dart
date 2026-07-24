@@ -157,6 +157,30 @@ class _WelcomeScreen extends ConsumerWidget {
           ),
         ),
       ],
+      // Beginnen met een OpenKAT-uitdraai is beginnen, net zo goed als
+      // beginnen met een sjabloon — en juist wie hiermee werkt, komt het
+      // vaakst op dit scherm terug om het overzicht te verversen. Zelfde poort
+      // als het menu-item: desktop, en de module aan (of er staat al een map).
+      // Zonder ingestelde map vraagt de actie er zelf om.
+      if (supportsLocalProjectFolders &&
+          ref.watch(importModuleRevealProvider)) ...[
+        const SizedBox(height: 12),
+        SizedBox(
+          width: 220,
+          child: OutlinedButton.icon(
+            onPressed: () => importOpenKatReports(context, ref),
+            icon: const Icon(Icons.radar_outlined, size: 18),
+            // Dezelfde bronstring als in het menu: twee bijna gelijke zinnen
+            // laten vertalen is hoe ze uit elkaar gaan lopen. Twee regels mag;
+            // hij past niet op één in een knop van 220.
+            label: Text(
+              openKatLabel(l10n),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+            ),
+          ),
+        ),
+      ],
       // Dezelfde ingang als in het menu: één knop voor alle
       // soorten opslag. Hier stond alleen WebDAV, waardoor
       // wie met S3 of git werkte vanaf dit scherm nergens
@@ -173,29 +197,38 @@ class _WelcomeScreen extends ConsumerWidget {
         ),
       ],
       const SizedBox(height: 8),
-      // De handleiding stond alleen achter Instellingen →
-      // Documentatie: drie klikken diep, precies daar waar
-      // iemand die nog niets weet niet gaat kijken.
-      Wrap(
-        alignment: WrapAlignment.center,
-        children: [
-          TextButton.icon(
-            onPressed: () => DocumentReaderScreen.open(
-              context,
-              title: l10n.d('Gebruikershandleiding'),
-              assetBase: 'docs/USER_GUIDE.md',
-            ),
-            icon: const Icon(Icons.menu_book_outlined, size: 17),
-            label: Text(l10n.d('Gebruikershandleiding')),
-          ),
-          TextButton.icon(
-            onPressed: () => SettingsDialog.show(context),
-            icon: const Icon(Icons.settings_outlined, size: 17),
-            label: Text(l10n.t('settings')),
-          ),
-        ],
-      ),
+      _footerLinks(context, l10n),
     ];
+  }
+
+  /// De twee tekstlinks onderaan: handleiding en instellingen.
+  ///
+  /// Losse methode om [_startColumn] onder de lengtegrens te houden — en het
+  /// is een afzonderlijk laagje: dit zijn geen manieren om te beginnen.
+  ///
+  /// De handleiding stond alleen achter Instellingen → Documentatie: drie
+  /// klikken diep, precies daar waar iemand die nog niets weet niet gaat
+  /// kijken.
+  Widget _footerLinks(BuildContext context, AppLocalizations l10n) {
+    return Wrap(
+      alignment: WrapAlignment.center,
+      children: [
+        TextButton.icon(
+          onPressed: () => DocumentReaderScreen.open(
+            context,
+            title: l10n.d('Gebruikershandleiding'),
+            assetBase: 'docs/USER_GUIDE.md',
+          ),
+          icon: const Icon(Icons.menu_book_outlined, size: 17),
+          label: Text(l10n.d('Gebruikershandleiding')),
+        ),
+        TextButton.icon(
+          onPressed: () => SettingsDialog.show(context),
+          icon: const Icon(Icons.settings_outlined, size: 17),
+          label: Text(l10n.t('settings')),
+        ),
+      ],
+    );
   }
 
   Widget _recentFilesPanel(
