@@ -203,10 +203,15 @@ jobs:
       # pas bij een platformbuild — zonder deze stap slaan de detectietests
       # zichzelf over en bewaken ze niets. De Makefile vindt de `.so` daarna
       # zelf in `build/` en zet DARTCV_LIB_PATH.
+      # libsecret-1-dev levert de pkg-config `libsecret-1` die
+      # flutter_secure_storage_linux in zijn CMakeLists hard opeist
+      # (`pkg_check_modules(LIBSECRET REQUIRED IMPORTED_TARGET libsecret-1>=0.18.4)`).
+      # Zonder dit pakket faalt `flutter build linux` al bij het genereren van de
+      # buildbestanden — nog vóór er iets gecompileerd wordt.
       - name: Linux-buildafhankelijkheden
         run: |
           sudo apt-get update
-          sudo apt-get install -y ninja-build libgtk-3-dev clang cmake pkg-config
+          sudo apt-get install -y ninja-build libgtk-3-dev clang cmake pkg-config libsecret-1-dev
 
       - name: Build Linux (levert de OpenCV-bibliotheek aan de beeldtests)
         run: |
@@ -337,6 +342,11 @@ jobs:
 
   # Validate internal Markdown links (relative file links) across the repo.
   # --offline skips external URLs so the check can't flake on third-party sites.
+  # --exclude-path third_party laat de vendored pakketten met rust: hun README's
+  # zijn byte-identiek aan upstream (bewaakt door hun MODIFICATIONS.md) en
+  # verwijzen soms naar mappen die wij bewust niet meevendorden (bv. `example`).
+  # Die links repareren zou de byte-identieke invariant breken; onze docs-poort
+  # hoort onze eigen documentatie te controleren, niet upstream-tekst.
   docs-links:
     name: Docs links
     runs-on: ubuntu-latest
@@ -349,7 +359,7 @@ jobs:
       - name: Check Markdown links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --offline --no-progress "./**/*.md"
+          args: --offline --no-progress --exclude-path third_party "./**/*.md"
           fail: true
 
   # Advisory supply-chain scan (Trivy): Dart-package CVEs from pubspec.lock plus

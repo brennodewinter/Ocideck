@@ -468,7 +468,7 @@ releases are tagged, fixes will target the latest release plus that branch.
 ## Finding this the standard way
 
 *Added 2026-07-22.* The web build serves its own
-[`/.well-known/security.txt`](../web/.well-known/security.txt) (RFC 9116), so a
+[`/.well-known/security.txt`](web/.well-known/security.txt) (RFC 9116), so a
 researcher who follows the standard discovery route lands on the same mailbox
 this file names. Delivery to that address was tested by the publisher on
 2026-07-22.
