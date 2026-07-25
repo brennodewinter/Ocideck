@@ -1,6 +1,6 @@
 /// Elke afbeelding waar een dia naar verwijst, ongeacht wáár de verwijzing
-/// staat — het aangewezen afbeeldingsveld óf een `![alt](pad)` midden in de
-/// vrije tekst.
+/// staat — het aangewezen afbeeldingsveld, een `![alt](pad)` midden in de
+/// vrije tekst, óf de antwoord-afbeeldingen van een imagePair-vraag.
 ///
 /// Dit bestand bestaat omdat het antwoord op "welke afbeeldingen gebruikt deze
 /// dia" op zo'n twintig plekken werd uitgeschreven als `slide.imagePath` en
@@ -12,6 +12,7 @@
 /// hem.
 library;
 
+import '../models/question.dart';
 import '../models/slide.dart';
 
 /// Markdown-afbeelding: `![alt of directive](pad)`. Dezelfde vorm als
@@ -30,6 +31,13 @@ enum SlideImageSlot {
 
   /// Een `![…](…)` in de vrije tekst ([Slide.customMarkdown]).
   inline,
+
+  /// Een antwoord-afbeelding van een imagePair-vraag, in het `question`-blok
+  /// ([Slide.customMarkdown]). Daar is de afbeelding *het antwoord*, niet een
+  /// illustratie — en ze zat tot #853 in geen enkele verwijzing, waardoor de
+  /// privacyscan een gezicht oversloeg, de asset-opruiming ze als wees zag en
+  /// de `mem:`-sweep op web de bytes weggooide.
+  questionImage,
 }
 
 /// Eén afbeeldingsverwijzing van een dia.
@@ -86,16 +94,34 @@ List<SlideImageRef> slideImageRefs(Slide slide) {
       ),
     );
   }
-  for (final match in _imageRef.allMatches(slide.customMarkdown)) {
-    final path = (match.group(2) ?? '').trim();
-    if (path.isEmpty) continue;
-    refs.add(
-      SlideImageRef(
-        path: path,
-        slot: SlideImageSlot.inline,
-        alt: (match.group(1) ?? '').trim(),
-      ),
-    );
+  // Een vraag-slide draagt zijn `question`-blok (JSON) in [Slide.customMarkdown],
+  // niet vrije Markdown; de imagePair-antwoorden staan daar als `image`-velden,
+  // niet als `![…](…)`. Daarom leest deze tak het blok in plaats van de inline
+  // regex — anders bleven de antwoord-afbeeldingen onzichtbaar (#853).
+  if (slide.type == SlideType.question) {
+    for (final answer in QuestionSpec.parse(slide.customMarkdown).answers) {
+      final image = answer.image.trim();
+      if (image.isEmpty) continue;
+      refs.add(
+        SlideImageRef(
+          path: image,
+          slot: SlideImageSlot.questionImage,
+          alt: answer.text,
+        ),
+      );
+    }
+  } else {
+    for (final match in _imageRef.allMatches(slide.customMarkdown)) {
+      final path = (match.group(2) ?? '').trim();
+      if (path.isEmpty) continue;
+      refs.add(
+        SlideImageRef(
+          path: path,
+          slot: SlideImageSlot.inline,
+          alt: (match.group(1) ?? '').trim(),
+        ),
+      );
+    }
   }
   return refs;
 }
@@ -133,6 +159,30 @@ String rewriteInlineImagePaths(
   });
 }
 
+/// De `image`-velden van de antwoorden in een `question`-blok herschreven via
+/// [map]. Blijft [markdown] letterlijk als geen enkel antwoord-pad verlegt —
+/// dan wordt het blok niet opnieuw geserialiseerd. De tegenhanger die
+/// [slideImageRefs] leest, zit in de `questionImage`-tak daar.
+String _rewriteQuestionAnswerImages(
+  String markdown,
+  String? Function(String path) map,
+) {
+  final spec = QuestionSpec.parse(markdown);
+  final answers = <QuestionAnswer>[];
+  var changed = false;
+  for (final answer in spec.answers) {
+    final image = answer.image.trim();
+    final replacement = image.isEmpty ? null : map(image);
+    if (replacement == null || replacement == image) {
+      answers.add(answer);
+    } else {
+      answers.add(answer.copyWith(image: replacement));
+      changed = true;
+    }
+  }
+  return changed ? spec.copyWith(answers: answers).toBlock() : markdown;
+}
+
 /// [slide] met élk afbeeldingspad vervangen door wat [map] ervan maakt — de
 /// velden én de verwijzingen in de tekst. `null` laat een pad staan.
 ///
@@ -145,7 +195,12 @@ Slide rewriteSlideImagePaths(Slide slide, String? Function(String path) map) {
   final image2 = slide.imagePath2.trim();
   final newImage = image.isEmpty ? null : map(image);
   final newImage2 = image2.isEmpty ? null : map(image2);
-  final newMarkdown = rewriteInlineImagePaths(slide.customMarkdown, map);
+  // Een vraag-slide draagt JSON, geen Markdown: de inline-regex zou de
+  // imagePair-antwoorden missen (#853). Herschrijf daar de `image`-velden in het
+  // blok; overal elders de `![…](…)` in de vrije tekst.
+  final newMarkdown = slide.type == SlideType.question
+      ? _rewriteQuestionAnswerImages(slide.customMarkdown, map)
+      : rewriteInlineImagePaths(slide.customMarkdown, map);
   if (newImage == null &&
       newImage2 == null &&
       newMarkdown == slide.customMarkdown) {

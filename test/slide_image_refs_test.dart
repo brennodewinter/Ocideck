@@ -1,6 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/package_asset_resolver.dart';
 import 'package:ocideck/services/slide_image_refs.dart';
+import 'package:ocideck/services/web_asset_store.dart';
 
 /// De centrale helper die de vraag "welke afbeeldingen gebruikt deze dia"
 /// beantwoordt. Hij is de enige plek waar het antwoord staat, dus een fout hier
@@ -98,6 +104,83 @@ void main() {
         identical(rewriteSlideImagePaths(slide, (_) => null), slide),
         true,
       );
+    });
+  });
+
+  group('imagePair-vraag (#853)', () {
+    tearDown(WebAssetStore.clear);
+
+    QuestionSpec imagePair(String a, String b) => QuestionSpec(
+      kind: QuestionKind.imagePair,
+      prompt: 'Welke?',
+      answers: [
+        QuestionAnswer(text: 'A', correct: true, image: a),
+        QuestionAnswer(text: 'B', correct: false, image: b),
+      ],
+    );
+    Slide questionSlide(QuestionSpec spec) => Slide.create(
+      SlideType.question,
+    ).copyWith(customMarkdown: spec.toBlock());
+
+    test(
+      'slideImageRefs geeft de antwoord-afbeeldingen (questionImage-slot)',
+      () {
+        final refs = slideImageRefs(
+          questionSlide(imagePair('images/kat.png', 'images/hond.png')),
+        );
+        expect(refs.map((r) => r.path), ['images/kat.png', 'images/hond.png']);
+        expect(refs.map((r) => r.slot), [
+          SlideImageSlot.questionImage,
+          SlideImageSlot.questionImage,
+        ]);
+        expect(refs.first.alt, 'A');
+      },
+    );
+
+    test('rewriteSlideImagePaths verlegt de antwoord-paden in het blok', () {
+      final slide = questionSlide(
+        imagePair('images/kat.png', 'images/hond.png'),
+      );
+      final out = rewriteSlideImagePaths(
+        slide,
+        (p) => p == 'images/kat.png' ? 'mem:xyz' : null,
+      );
+      final spec = QuestionSpec.parse(out.customMarkdown);
+      expect(spec.answers.map((a) => a.image), ['mem:xyz', 'images/hond.png']);
+    });
+
+    test('rewriteSlideImagePaths laat het blok met rust zonder treffer', () {
+      final slide = questionSlide(
+        imagePair('images/kat.png', 'images/hond.png'),
+      );
+      expect(
+        identical(rewriteSlideImagePaths(slide, (_) => null), slide),
+        true,
+      );
+    });
+
+    test('attachPackageAssetsToMem zet de antwoord-beelden in mem:', () {
+      final kat = Uint8List.fromList([0x89, 0x50, 0x4E, 0x47, 1, 2, 3, 4]);
+      final hond = Uint8List.fromList([0x89, 0x50, 0x4E, 0x47, 5, 6, 7, 8]);
+      final out = attachPackageAssetsToMem(
+        Deck(
+          title: 'demo',
+          slides: [
+            questionSlide(imagePair('images/kat.png', 'images/hond.png')),
+          ],
+        ),
+        <({String name, Uint8List bytes})>[
+          (name: 'images/kat.png', bytes: kat),
+          (name: 'images/hond.png', bytes: hond),
+        ],
+        'demo.md',
+      );
+      final paths = QuestionSpec.parse(
+        out.slides[0].customMarkdown,
+      ).answers.map((a) => a.image).toList();
+      expect(paths.every(WebAssetStore.isMemPath), isTrue);
+      expect(WebAssetStore.bytesFor(paths[0]), kat);
+      expect(WebAssetStore.bytesFor(paths[1]), hond);
     });
   });
 }

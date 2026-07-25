@@ -125,6 +125,15 @@ read a book to find out.
   geminificeerde `main.dart.js`, niet uit commentaar.
 
 ### Fixed
+- **imagePair-vraag toont weer beelden op web (#853).** De antwoord-afbeeldingen
+  van een imagePair-vraag zaten in geen enkele beeld-verwijzing: `slideImageRefs`
+  las de velden en de `![…](…)` in de vrije tekst, maar niet de `image`-velden in
+  het `question`-blok. Daardoor herschreef `attachPackageAssetsToMem` ze op web
+  niet naar `mem:` en bleven de tegels leeg. Nu leest `slideImageRefs` die
+  antwoorden (nieuwe `questionImage`-slot) en herschrijft `rewriteSlideImagePaths`
+  ze mee. Dat repareert meteen drie stille gaten die dezelfde bron deelden: de
+  privacyscan sloeg een gezicht in een antwoord-afbeelding over, de asset-opruiming
+  zag zo'n beeld als wees, en de git-opslag en dedup lieten het pad ongemoeid.
 - **Lokale video en audio uit een pakket spelen nu ook op web (#854).** Wie een
   presentatie via de `?deck=`-deeplink op ocideck.librekat.nl opende, zag een
   video-slide leeg blijven. `attachPackageAssetsToMem` zette alleen de
