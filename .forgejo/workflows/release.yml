@@ -92,15 +92,42 @@ jobs:
     container:
       image: ubuntu:24.04
     steps:
+      # Eerst kijken of de deploy-secrets er zijn. Zo niet, dan slaat deze job
+      # netjes over — hij faalt er NIET op. Dat is nu de bedoeling: de webversie
+      # wordt voorlopig met de hand gedeployd (`make deploy-web`). Een hard
+      # `exit 1` zou bij elke echte tag een rode job + faalmail geven terwijl de
+      # release verder compleet publiceert (de desktop-downloads hangen niet aan
+      # de webhost). Zet beide secrets zodra het automatisch mag; dan zet deze
+      # job de webversie weer vanzelf live. De check staat vooraan zodat we bij
+      # overslaan geen flutter-toolchain optuigen voor niets.
+      - name: Zijn de deploy-secrets aanwezig?
+        id: check
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          if [ -n "${DEPLOY_SSH_KEY:-}" ] && [ -n "${DEPLOY_KNOWN_HOSTS:-}" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            echo "Geen DEPLOY_SSH_KEY/DEPLOY_KNOWN_HOSTS ingesteld — de webversie wordt"
+            echo "niet automatisch live gezet. Dat is nu de bedoeling: deployen gebeurt"
+            echo "met de hand (make deploy-web, zie docs/HOSTING.md). De release zelf"
+            echo "publiceert hoe dan ook compleet; deze job slaat alleen de live-stap over."
+          fi
+
       - name: Gereedschap installeren
+        if: steps.check.outputs.deploy == 'true'
         run: |
           apt-get update
           apt-get install -y --no-install-recommends \
             nodejs make git curl ca-certificates xz-utils jq openssh-client
 
       - uses: actions/checkout@v4
+        if: steps.check.outputs.deploy == 'true'
 
       - uses: actions/download-artifact@v3
+        if: steps.check.outputs.deploy == 'true'
         with:
           name: ocideck-web
 
@@ -109,6 +136,7 @@ jobs:
       # aan de release hangt. Twee keer bouwen zou twee bundels opleveren die
       # niemand meer naast elkaar legt.
       - name: Bundel uitpakken op de plek waar het script hem verwacht
+        if: steps.check.outputs.deploy == 'true'
         run: |
           VERSIE="${GITHUB_REF_NAME#v}"
           mkdir -p build/web
@@ -118,36 +146,30 @@ jobs:
       # precies de bestanden beschrijft die er liggen — nu dus over de bundel
       # zoals hij door de artifactopslag is gekomen, niet zoals hij is gebouwd.
       - uses: ./.forgejo/actions/flutter
+        if: steps.check.outputs.deploy == 'true'
 
       - name: Afhankelijkheden ophalen
+        if: steps.check.outputs.deploy == 'true'
         run: flutter pub get
 
       - name: Sleutel klaarzetten
+        if: steps.check.outputs.deploy == 'true'
         env:
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
           DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
         run: |
           set -eu
-          if [ -z "${DEPLOY_SSH_KEY:-}" ]; then
-            echo "Secret DEPLOY_SSH_KEY ontbreekt — de webversie wordt NIET live gezet." >&2
-            echo "Zie docs/HOSTING.md voor het aanmaken en plaatsen van de deploysleutel." >&2
-            exit 1
-          fi
           mkdir -p ~/.ssh
           printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           # Geen ssh-keyscan: dat vertrouwt de sleutel die je op dat moment
           # krijgt, en dat is precies de aanname die een man-in-the-middle
           # nodig heeft. De hostsleutel hoort vooraf vast te liggen.
-          if [ -z "${DEPLOY_KNOWN_HOSTS:-}" ]; then
-            echo "Secret DEPLOY_KNOWN_HOSTS ontbreekt — zonder vastgelegde hostsleutel" >&2
-            echo "deployen we niet. Zie docs/HOSTING.md." >&2
-            exit 1
-          fi
           printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
       - name: Live zetten
+        if: steps.check.outputs.deploy == 'true'
         run: scripts/deploy_web.sh
 
   linux:
