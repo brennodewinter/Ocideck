@@ -9,9 +9,11 @@ truth. OciDeck has never tagged a release, so there is no version to which this
 description is fixed — it describes the default branch, and details may change;
 but the invariants below are enforced by the `make check` / `make check-full`
 gate, not just documented. (Since 2026-07-23 the Forgejo instance has an Actions
-runner, and since #751 it runs `make check` on every pull request and push to
-`main`; `make check-full` remains local. The workflows under `.github/` are
-reference definitions for a GitHub mirror and do not execute there.)
+runner. The release gate runs `make check-no-coverage` on a `v*` tag
+(#790/#796/#797); the secret and SAST scans run on every pull request
+(`scans.yml`, #778); `make check` and `make check-full` otherwise remain the
+committer's local run. The workflows under `.github/` are reference definitions
+for a GitHub mirror and do not execute there.)
 
 ## Overview
 

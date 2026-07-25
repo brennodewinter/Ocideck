@@ -125,6 +125,21 @@ read a book to find out.
   kaarttekst noemt nu eindelijk beide bronnen; hij sprak alleen nog over
   OpenKAT.
 
+### Changed
+- **De geheimen- en SAST-scan (`scans.yml`, #778) draait niet meer bij elke push
+  naar `main`, alleen nog bij elke pull request.** De run ná een merge scande
+  exact dezelfde volledige historie die de PR-run een paar minuten eerder al had
+  gezien — `gitleaks git` en `trufflehog git` kijken naar de hele geschiedenis,
+  niet naar de wijziging — en voegde dus geen enkel signaal toe. Wat die tweede
+  run wél deed, was ruis maken: snel opeenvolgende merges naar `main` (een avond
+  vol docs-PR's is al genoeg) annuleerden elkaars lopende run via de
+  `concurrency`-regel, en een afgebroken run meldt zich als `failure` en mailt.
+  Dat bleek de bron van de stroom "CI faalt"-mails van pawprint. Het
+  beveiligingssignaal zit vóór de merge, op de PR, en daar blijft het; wat
+  vervalt is dekking van een commit die rechtstreeks op `main` wordt gezet zónder
+  PR, en zo werkt deze repo niet. De `concurrency`-regel blijft staan voor het
+  zeldzamere geval van een PR die tijdens de scan een nieuwe commit krijgt.
+
 ### Added
 - **Bij een presentatie-import kiest de gebruiker nu zelf wat er met een half
   geslaagde dia gebeurt.** `SlideFailurePolicy` bestond sinds #772 en werd ook

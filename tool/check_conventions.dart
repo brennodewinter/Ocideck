@@ -447,7 +447,7 @@ List<String> _fixedDelayInRunAsync() {
 /// dáárvoor is sinds #778 een andere dan er stond. Het argument was dat `make
 /// sast` nergens automatisch draaide, dus dat een onderdrukking alleen
 /// zichtbaar zou zijn voor wie semgrep toevallig geïnstalleerd had; dat is niet
-/// meer zo, want `scans.yml` draait semgrep bij elke PR en elke push.
+/// meer zo, want `scans.yml` draait semgrep bij elke PR.
 ///
 /// Wat overblijft is het echte argument, en dat is sterker: semgrep telt zijn
 /// eigen onderdrukkingen niet. Een `// nosemgrep` maakt de bevinding weg én
