@@ -193,6 +193,7 @@ and it also indexes the design documents. The current-state documents:
 | --- | --- |
 | [API documentation](docs/API_DOCUMENTATION.md) | The internal APIs and seams a contributor works with to extend the app |
 | [Architecture](docs/ARCHITECTURE.md) | How the code fits together (for contributors) |
+| [Audit response](AUDIT_RESPONSE.md) | Point-by-point response to the external code audits, each verdict weighed against the code |
 | [Build & release](docs/BUILD.md) | Building from source and producing distributables |
 | [Changelog](CHANGELOG.md) | Notable changes (nothing is released yet) |
 | [Checks & CI](docs/CHECKS.md) | Every automated check, what it covers, and how each is enforced |
@@ -213,6 +214,7 @@ and it also indexes the design documents. The current-state documents:
 | [SBOM](docs/SBOM.md) | The machine-readable Software Bill of Materials and its CRA mapping |
 | [Security design](docs/SECURITY_DESIGN.md) | The security design principles and the concrete mechanisms that enforce them |
 | [Security policy](SECURITY.md) | How to report a vulnerability |
+| [Source availability](SOURCE.md) | The EUPL source indication shipped in the web build — where the source lives and how to build it |
 | [Source map](docs/SOURCE_MAP.md) | An index of the files under `lib/`, grouped per directory |
 | [Third-party notices](THIRD_PARTY_NOTICES.md) | Bundled components and their licences, and the owners of the trademarks OciDeck names |
 | [Troubleshooting](docs/TROUBLESHOOTING_GUIDE.md) | Fixes for common problems |
