@@ -466,8 +466,11 @@ secrets on the forge — see
   refuses to run `ssh-keyscan`: trusting whatever key answers is the assumption
   a man-in-the-middle needs.
 
-Without them the `deploy-web` job fails with that message; the release still
-publishes, because the desktop downloads do not depend on the web host.
+Without them the `deploy-web` job **skips** the live step — it does not fail, so
+a tag produces no red job and no failure mail. The release still publishes,
+because the desktop downloads do not depend on the web host; put the web version
+live by hand with `make deploy-web`. Set both secrets to have a tag deploy the
+web automatically again.
 
 ### The artifacts are not signed
 

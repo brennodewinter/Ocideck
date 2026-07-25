@@ -119,8 +119,10 @@ The account behind that key needs write access to the web root — on the
 reference deployment it is `ubuntu`, and the web root is owned by `brenno`, so
 the script uses `sudo` for the unpack and swap.
 
-Missing either secret fails the `deploy-web` job with that message. The release
-itself still publishes: the desktop downloads do not depend on the web host.
+Missing either secret makes the `deploy-web` job **skip** the live step — it does
+not fail, so a tag produces no red job or failure mail. The release itself still
+publishes: the desktop downloads do not depend on the web host. Put the web
+version live by hand with `make deploy-web` until both secrets are set.
 
 ### Enable compression — this is not optional in practice
 
