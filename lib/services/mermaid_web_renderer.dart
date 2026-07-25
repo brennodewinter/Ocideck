@@ -41,6 +41,21 @@ extension type _RenderResult(JSObject _) implements JSObject {
   external String get svg;
 }
 
+/// De gebundelde SVG-stijl-inliner (svg_style_inline.js, #862) op `window`, of
+/// null zolang die (nog) niet geladen is.
+@JS('__ocideckInlineSvgStyles')
+external JSFunction? get _inlineSvgStylesFn;
+
+/// Zet mermaids theme-styling (die in een `<style>`-blok zit dat flutter_svg
+/// negeert) als inline attributen op de SVG, of geef de SVG ongewijzigd terug
+/// als de inliner er niet is. Zie [_loadInliner].
+String _applyStyleInliner(String svg) {
+  final fn = _inlineSvgStylesFn;
+  if (fn == null) return svg;
+  final result = fn.callAsFunction(null, svg.toJS)?.dartify();
+  return result is String ? result : svg;
+}
+
 /// Laadt en initialiseert mermaid één keer per sessie.
 Future<void>? _loaded;
 
@@ -57,7 +72,7 @@ Future<void> _ensureLoaded() {
   // Al aanwezig (bijvoorbeeld na een hot restart): alleen (her)initialiseren.
   if (_mermaidGlobal != null) {
     _initialize();
-    completer.complete();
+    _loadInliner(completer);
     return completer.future;
   }
 
@@ -72,7 +87,7 @@ Future<void> _ensureLoaded() {
     (web.Event _) {
       try {
         _initialize();
-        completer.complete();
+        _loadInliner(completer);
       } catch (e) {
         logError('MermaidWebRenderer: init na load mislukt', e);
         _loaded = null;
@@ -97,6 +112,32 @@ void _initialize() {
   _mermaidGlobal!.initialize(kMermaidInitConfig.jsify() as JSObject);
 }
 
+/// Laadt de gebundelde stijl-inliner (#862) en voltooit dan [completer]. Een
+/// laadfout mag mermaid niet uitschakelen: zonder de inliner tekent flutter_svg
+/// het diagram nog steeds, alleen ongestyled — daarom completen we ook bij een
+/// fout (en niet met `completeError`).
+void _loadInliner(Completer<void> completer) {
+  if (_inlineSvgStylesFn != null) {
+    completer.complete();
+    return;
+  }
+  final script = web.HTMLScriptElement()..src = kSvgStyleInlineScriptUrl;
+  script.addEventListener(
+    'load',
+    (web.Event _) {
+      completer.complete();
+    }.toJS,
+  );
+  script.addEventListener(
+    'error',
+    (web.Event _) {
+      logWarning('MermaidWebRenderer: SVG-stijl-inliner kon niet laden (#862)');
+      completer.complete();
+    }.toJS,
+  );
+  web.document.head!.appendChild(script);
+}
+
 /// Rendert [source] naar SVG-opmaak, of `null` als dat niet lukt.
 ///
 /// De aanroepen worden door [MermaidRenderService] al geserialiseerd (één
@@ -108,7 +149,7 @@ Future<String?> renderMermaid(String source) async {
     if (mermaid == null) return null;
     final id = 'm${_counter++}';
     final result = _RenderResult(await mermaid.render(id, source).toDart);
-    return result.svg;
+    return _applyStyleInliner(result.svg);
   } catch (e) {
     // Ongeldige diagrambron of een render die faalt: terugval op de brontekst,
     // net als op desktop. Geen ruwe uitzondering naar de widgetboom.

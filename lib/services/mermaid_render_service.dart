@@ -77,6 +77,12 @@ class MermaidRenderService {
     final mermaidJs = await rootBundle.loadString(
       'assets/web_export/mermaid.min.js',
     );
+    // Dezelfde gebundelde SVG-stijl-inliner als de web-kant (#862): mermaid stopt
+    // zijn theme in een `<style>`-blok dat flutter_svg negeert; deze zet het als
+    // inline attributen vóór teruggave. Eén bron, twee renderpaden.
+    final inlinerJs = await rootBundle.loadString(
+      'assets/web_export/svg_style_inline.js',
+    );
     // Geen `eval()` meer — zie het commentaar in de pagina hieronder voor hoe
     // de bundel er wél in komt. Daarmee kan `'unsafe-eval'` uit de CSP van deze
     // pagina en is de enige `eval()` in het product weg.
@@ -85,6 +91,7 @@ class MermaidRenderService {
     // wezenlijk zwakkere ontheffing — er kan geen code meer ontstaan uit een
     // string die op dat moment wordt samengesteld.
     final escapedJs = jsonEncode(mermaidJs);
+    final escapedInlinerJs = jsonEncode(inlinerJs);
     await _controller!.loadHtmlString('''
 <!DOCTYPE html>
 <html>
@@ -104,6 +111,10 @@ class MermaidRenderService {
 var mermaidBundle = document.createElement('script');
 mermaidBundle.textContent = $escapedJs;
 document.head.appendChild(mermaidBundle);
+// De stijl-inliner (#862), op dezelfde manier ingebracht.
+var inlinerBundle = document.createElement('script');
+inlinerBundle.textContent = $escapedInlinerJs;
+document.head.appendChild(inlinerBundle);
 // Dezelfde instellingen als de web-kant — zie kMermaidInitConfig
 // (mermaid_config.dart) voor het waarom van elke sleutel (o.a. htmlLabels uit
 // per diagramsoort). Als JSON in de pagina gezet, zodat de config maar op één
@@ -112,7 +123,9 @@ mermaid.initialize(${jsonEncode(kMermaidInitConfig)});
 window.__renderMermaid = async function(source) {
   const id = 'm' + Math.abs(source.split('').reduce((h,c)=>((h<<5)-h+c.charCodeAt(0))|0,0));
   const out = await mermaid.render(id, source);
-  return out.svg;
+  // Mermaids theme zit in een <style>-blok dat flutter_svg negeert; inline het
+  // (#862) zodat de kleuren/tekst wél verschijnen.
+  return window.__ocideckInlineSvgStyles ? window.__ocideckInlineSvgStyles(out.svg) : out.svg;
 };
 </script>
 </body>
