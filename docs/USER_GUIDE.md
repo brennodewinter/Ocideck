@@ -2296,16 +2296,20 @@ expectations better.)* See
 countdown, `R` to reset the timing, `H` for the in-app cheatsheet.
 
 **Move the mouse and a small bar appears for three seconds**, at the bottom of
-the screen: where you are (`Slide 3 / 18`), an arrow each way, and a close
-button. It fades again by itself. That is deliberate — a projected image should
-not carry permanent buttons, because those end up in every photo of the room —
-but it means you never have to remember a key to get out. `Esc` does the same
-thing, and the close button says so.
+the screen: an arrow each way and a close button. It fades again by itself. That
+is deliberate — a projected image should not carry permanent buttons, because
+those end up in every photo of the room — but it means you never have to remember
+a key to get out. `Esc` does the same thing, and the close button says so.
 
-*Added 2026-07-22 (#607): there was no bar. Full screen, no slide number, no
-arrows, no way out that the screen mentioned. Someone presenting for the first
-time had to guess, in front of an audience, which is the worst possible moment
-to be guessing.*
+The bar deliberately shows **no slide number** (#864): the count is a distraction
+on the projected image and would end up in every photo of the room. You keep it —
+the audience does not. Switch to the presenter view (`P`) and the slide position
+is right there, on your own screen.
+
+*Added 2026-07-22 (#607): there was no bar. Full screen, no arrows, no way out
+that the screen mentioned. Someone presenting for the first time had to guess, in
+front of an audience, which is the worst possible moment to be guessing. (The bar
+originally also showed the slide number; that was removed in #864.)*
 
 ### Play-only decks
 

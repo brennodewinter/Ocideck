@@ -125,8 +125,6 @@ extension _PresenterViews on _FullscreenPresenterState {
     if (_blank != _Blank.none) return _blankFill();
 
     return AudienceSurface(
-      index: _index,
-      total: total,
       onPrev: _index > 0 ? _prev : null,
       onNext: _index < total - 1 ? _next : null,
       onExit: _exit,

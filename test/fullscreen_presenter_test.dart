@@ -1029,19 +1029,13 @@ void main() {
   // pijlen, geen sluitknop, en nergens stond dat Esc werkt. Wie voor het eerst
   // presenteert moest raden hoe hij eruit kwam, voor een zaal.
   group('bedieningsbalk in publieksweergave', () {
-    Finder positie() => find.textContaining(RegExp(r'1 / 2'));
+    List<Slide> tweeDias() => [
+      Slide.create(SlideType.bullets).copyWith(title: 'Een', bullets: ['a']),
+      Slide.create(SlideType.bullets).copyWith(title: 'Twee', bullets: ['b']),
+    ];
 
     testWidgets('staat er niet zolang de muis stilstaat', (tester) async {
-      await tester.pumpWidget(
-        _host([
-          Slide.create(
-            SlideType.bullets,
-          ).copyWith(title: 'Een', bullets: ['a']),
-          Slide.create(
-            SlideType.bullets,
-          ).copyWith(title: 'Twee', bullets: ['b']),
-        ]),
-      );
+      await tester.pumpWidget(_host(tweeDias()));
       await tester.pump();
 
       // Aanwezig maar volledig doorzichtig: een projectiebeeld hoort geen
@@ -1060,16 +1054,7 @@ void main() {
     testWidgets('verschijnt bij muisbeweging en verdwijnt weer', (
       tester,
     ) async {
-      await tester.pumpWidget(
-        _host([
-          Slide.create(
-            SlideType.bullets,
-          ).copyWith(title: 'Een', bullets: ['a']),
-          Slide.create(
-            SlideType.bullets,
-          ).copyWith(title: 'Twee', bullets: ['b']),
-        ]),
-      );
+      await tester.pumpWidget(_host(tweeDias()));
       await tester.pump();
 
       final pointer = TestPointer(1, PointerDeviceKind.mouse);
@@ -1078,7 +1063,6 @@ void main() {
       );
       await tester.pump();
 
-      expect(positie(), findsOneWidget, reason: 'waar ben ik in het deck');
       expect(
         find.byIcon(Icons.close),
         findsWidgets,
@@ -1105,17 +1089,31 @@ void main() {
       await tester.pumpWidget(const SizedBox());
     });
 
-    testWidgets('de pijl brengt je naar de volgende dia', (tester) async {
-      await tester.pumpWidget(
-        _host([
-          Slide.create(
-            SlideType.bullets,
-          ).copyWith(title: 'Een', bullets: ['a']),
-          Slide.create(
-            SlideType.bullets,
-          ).copyWith(title: 'Twee', bullets: ['b']),
-        ]),
+    testWidgets('toont geen slidenummer op het projectiebeeld (#864)', (
+      tester,
+    ) async {
+      await tester.pumpWidget(_host(tweeDias()));
+      await tester.pump();
+
+      // Balk volledig zichtbaar maken; zelfs dán hoort er geen "1 / 2" op de
+      // zaal te staan. Het nummer leidt af en belandt op iedere foto — het
+      // blijft in de presenter-cockpit, niet op het projectiebeeld.
+      final pointer = TestPointer(1, PointerDeviceKind.mouse);
+      await tester.sendEventToBinding(
+        pointer.hover(tester.getCenter(find.byType(FullscreenPresenter))),
       );
+      await tester.pump();
+
+      expect(find.textContaining(RegExp(r'\d\s*/\s*\d')), findsNothing);
+      // De knoppen om verder te komen en eruit te stappen blijven wél (#607).
+      expect(find.byIcon(Icons.chevron_right), findsOneWidget);
+      expect(find.byIcon(Icons.close), findsWidgets);
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('de pijl brengt je naar de volgende dia', (tester) async {
+      await tester.pumpWidget(_host(tweeDias()));
       await tester.pump();
 
       final pointer = TestPointer(1, PointerDeviceKind.mouse);
@@ -1124,9 +1122,12 @@ void main() {
       );
       await tester.pump();
 
+      expect(find.text('Een'), findsOneWidget);
       await tester.tap(find.byIcon(Icons.chevron_right));
       await tester.pump();
-      expect(find.textContaining(RegExp(r'2 / 2')), findsOneWidget);
+      // Zonder teller bewijst de dia-inhoud zelf de sprong naar de volgende dia.
+      expect(find.text('Twee'), findsOneWidget);
+      expect(find.text('Een'), findsNothing);
 
       await tester.pumpWidget(const SizedBox());
     });

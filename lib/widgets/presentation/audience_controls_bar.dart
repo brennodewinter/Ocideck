@@ -4,8 +4,14 @@ import 'package:flutter/material.dart';
 
 import '../../l10n/app_localizations.dart';
 
-/// De bedieningsbalk van de publieksweergave: waar ben ik, hoe kom ik verder,
-/// en hoe kom ik eruit.
+/// De bedieningsbalk van de publieksweergave: hoe kom ik verder, en hoe kom ik
+/// eruit.
+///
+/// Bewust géén slidenummer (#864). Een presentatie hoort zo clean mogelijk te
+/// zijn: het nummer op het projectiebeeld leidt af en staat straks op iedere
+/// foto van de zaal. De presenter hoort te weten waar hij is — de zaal niet, en
+/// de teller blijft dan ook staan in de presenter-cockpit
+/// (`_buildPresenterControls`), niet hier. Zet hem hier niet terug.
 ///
 /// Alleen zichtbaar op muisbeweging, en na drie seconden weer weg — de
 /// presenter regelt dat, deze widget toont alleen de toestand. Permanente
@@ -19,17 +25,12 @@ import '../../l10n/app_localizations.dart';
 class AudienceControlsBar extends StatelessWidget {
   const AudienceControlsBar({
     super.key,
-    required this.index,
-    required this.total,
     required this.visible,
     required this.onPrev,
     required this.onNext,
     required this.onExit,
   });
 
-  /// Nulgebaseerd; de balk toont `index + 1`.
-  final int index;
-  final int total;
   final bool visible;
 
   /// Null wanneer die kant er niet is — de knop staat er dan wel, gedimd.
@@ -67,17 +68,6 @@ class AudienceControlsBar extends StatelessWidget {
                       icon: const Icon(Icons.chevron_left),
                       color: Colors.white,
                       disabledColor: Colors.white24,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 6),
-                      child: Text(
-                        '${l10n.d('Slide')} ${index + 1} / $total',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
                     ),
                     IconButton(
                       tooltip: l10n.d('Volgende'),
@@ -118,16 +108,12 @@ class AudienceSurface extends StatefulWidget {
   const AudienceSurface({
     super.key,
     required this.child,
-    required this.index,
-    required this.total,
     required this.onPrev,
     required this.onNext,
     required this.onExit,
   });
 
   final Widget child;
-  final int index;
-  final int total;
   final VoidCallback? onPrev;
   final VoidCallback? onNext;
   final VoidCallback onExit;
@@ -169,8 +155,6 @@ class _AudienceSurfaceState extends State<AudienceSurface> {
       children: [
         widget.child,
         AudienceControlsBar(
-          index: widget.index,
-          total: widget.total,
           visible: _visible,
           onPrev: widget.onPrev,
           onNext: widget.onNext,

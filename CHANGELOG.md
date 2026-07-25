@@ -106,6 +106,15 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Changed
+- **De publieksweergave toont geen slidenummer meer op het projectiebeeld
+  (#864).** De bedieningsbalk die bij muisbeweging verschijnt (#607) liet naast
+  de vorige/volgende/afsluiten-knoppen ook "Slide 3 / 18" zien. Een presentatie
+  hoort zo clean mogelijk te zijn: dat nummer leidt de zaal af en belandt op
+  iedere foto. Het is weg uit de balk; de knoppen blijven, zodat je nog steeds
+  ziet hoe je verder komt en eruit stapt. De teller staat waar hij thuishoort —
+  in de presenter-cockpit (`P`), op je eigen scherm, niet op de zaal. Een test
+  in `fullscreen_presenter_test.dart` pint vast dat de balk geen "n / m" toont
+  terwijl de knoppen wél zichtbaar blijven.
 - **Online media die niet speelt, zegt nu wáárom — en biedt de weg terug
   (#852).** De placeholder onder een online video of afbeelding meldde altijd
   "Online media staat uit", ook als dat niet de oorzaak was. Nu zijn er drie
