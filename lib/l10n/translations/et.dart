@@ -1762,6 +1762,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
+      'Materjali toomine teistest süsteemidest. Kaks allikat: esitlused programmidest PowerPoint (.pptx), Keynote (.key) ja Impress (.odp) muutuvad muudetavaks deck\'iks ning OpenKAT-i aruanded (kaust JSON-iga) muutuvad üheks juhtimisülevaateks. Kus OpenKAT-i kaust asub, määratakse jaotises Integratsioonid.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
+      'Esitluste toomine programmidest PowerPoint (.pptx), Keynote (.key) ja Impress (.odp) muudetava deck\'ina. OpenKAT-i aruandekaustade lugemine on saadaval ainult lauaarvuti versioonis.',
   'Alinea': 'Lõik',
   'Audio "{bestand}"': 'Heli "{bestand}"',
   'Deck opbouwen…': 'Esitluse koostamine…',
@@ -1930,10 +1934,6 @@ const _dutchSourceAddEt = <String, String>{
   'Nu importeren': 'Impordi kohe',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Ülevaade on valmis uuel vahekaardil.',
-  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
-      'Import loeb faile kettalt ja on saadaval ainult lauaarvuti versioonis.',
-  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
-      'Materjali toomine teistest süsteemidest. Täna tähendab see OpenKAT-i: aruannete kaust (JSON) muutub üheks juhtimisülevaateks — süsteemid, leiud raskusastme järgi, kõige kauem lahtised punktid ja suundumus järjestikuste mõõtmiste lõikes. Kus failid asuvad, määratakse süsteemipõhiselt jaotises Integratsioonid.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Loeb OpenKAT-i aruannete kausta (JSON) ja koostab sellest ühe juhtimisülevaate: süsteemid, leiud raskusastme järgi, kõige kauem lahtised punktid ja suundumuse järjestikuste mõõtmiste lõikes. Sama toiming olemasoleval OpenKAT-esitlusel uuendab seda ja jätab teie enda slaidid alles.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

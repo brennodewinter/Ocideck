@@ -1775,6 +1775,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
+      'Anyag behozatala más rendszerekből. Két forrás: a PowerPoint (.pptx), Keynote (.key) és Impress (.odp) programból származó bemutatók szerkeszthető deckké válnak, az OpenKAT-jelentések (egy mappa JSON-nal) pedig egyetlen vezetői áttekintéssé. Hogy hol van az OpenKAT-mappa, az Integrációk alatt állítható be.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
+      'A PowerPoint (.pptx), Keynote (.key) és Impress (.odp) programból származó bemutatók behozatala szerkeszthető deckként. Az OpenKAT-jelentésmappák beolvasása csak az asztali változatban lehetséges.',
   'Alinea': 'Bekezdés',
   'Audio "{bestand}"': 'Hang "{bestand}"',
   'Deck opbouwen…': 'Prezentáció összeállítása…',
@@ -1943,10 +1947,6 @@ const _dutchSourceAddHu = <String, String>{
   'Nu importeren': 'Importálás most',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Az áttekintés készen áll egy új lapon.',
-  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
-      'Az import fájlokat olvas be a lemezről, és csak az asztali változatban érhető el.',
-  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
-      'Anyag behozatala más rendszerekből. Ma ez az OpenKAT: egy jelentéseket (JSON) tartalmazó mappából egyetlen vezetői áttekintés lesz — rendszerek, megállapítások súlyosság szerint, a legrégebben nyitott tételek és az egymást követő mérések trendje. Hogy hol vannak a fájlok, rendszerenként az Integrációk alatt állítható be.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Beolvas egy OpenKAT-jelentéseket (JSON) tartalmazó mappát, és egyetlen vezetői áttekintést épít belőle: rendszerek, megállapítások súlyosság szerint, a legrégebben nyitott tételek és az egymást követő mérések trendje. Ugyanez a művelet egy meglévő OpenKAT-bemutatón frissíti azt, és a saját diáit a helyükön hagyja.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

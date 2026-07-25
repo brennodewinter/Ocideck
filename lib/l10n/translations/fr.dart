@@ -730,6 +730,10 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
+      'Faire entrer du matériel provenant d\'autres systèmes. Deux sources : les présentations depuis PowerPoint (.pptx), Keynote (.key) et Impress (.odp) deviennent un deck modifiable, et les rapports OpenKAT (un dossier de JSON) deviennent une vue d\'ensemble unique pour la direction. L\'emplacement du dossier OpenKAT se définit sous Intégrations.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
+      'Faire entrer les présentations depuis PowerPoint (.pptx), Keynote (.key) et Impress (.odp) sous forme de deck modifiable. La lecture des dossiers de rapports OpenKAT n\'est disponible que dans la version bureau.',
   'Alinea': 'Paragraphe',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Construction du deck…',
@@ -898,10 +902,6 @@ const _dutchSourceAddFr = {
   'Nu importeren': 'Importer maintenant',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'La vue d’ensemble est prête dans un nouvel onglet.',
-  'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.':
-      'L\'import lit des fichiers sur le disque et n\'est disponible que dans la version bureau.',
-  'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.':
-      'Faire entrer du matériel provenant d\'autres systèmes. Aujourd\'hui il s\'agit d\'OpenKAT : un dossier de rapports (JSON) devient une vue d\'ensemble unique pour la direction — systèmes, constats par gravité, points ouverts depuis le plus longtemps et évolution sur les mesures successives. L\'emplacement des fichiers se définit par système sous Intégrations.',
   'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
       'Lit un dossier de rapports OpenKAT (JSON) et en construit une vue d\'ensemble unique pour la direction : systèmes, constats par gravité, points ouverts depuis le plus longtemps et évolution sur les mesures successives. La même action sur une présentation OpenKAT existante la met à jour et laisse vos propres diapositives en place.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':

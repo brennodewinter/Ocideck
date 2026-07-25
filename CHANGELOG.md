@@ -105,6 +105,26 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Fixed
+- **De presentatie-import was op web onbereikbaar — juist de bron die op web
+  hóórt te werken.** De module *Importeren* stond op web helemaal uit, met "de
+  mapkiezer bestaat hier niet" als reden. Die reden gold OpenKAT, dat een map
+  van schijf leest; hij is nooit herzien toen de presentatie-import (#772) als
+  tweede bron in dezelfde module kwam. Die import draait op bytes, zonder
+  `dart:io`, en werkt dus wél in de browser — de gebruikershandleiding beloofde
+  dat ook al — maar de schakelaar die de bron onthult, was op web dood. Gevonden
+  bij de laatste controle vóór de eerste tag.
+
+  De schakelaar werkt nu overal. Wat op web wegvalt is alleen de OpenKAT-helft:
+  de kaarttekst laat daar de OpenKAT-zin weg, de voettekst met de rapportagemap
+  verdwijnt, en het tabblad *Integraties* — dat volledig OpenKAT is — blijft op
+  web verborgen in plaats van als leeg tabblad te verschijnen
+  (`SettingsSection.navItems` op `openKatAvailable`). Ook de instellingenzoeker
+  vindt "openkat" niet meer waar dat tabblad niet bestaat (`integrationsOnly`) —
+  een treffer naar een tabblad dat er niet is, is erger dan geen treffer. En de
+  kaarttekst noemt nu eindelijk beide bronnen; hij sprak alleen nog over
+  OpenKAT.
+
 ### Added
 - **Bij een presentatie-import kiest de gebruiker nu zelf wat er met een half
   geslaagde dia gebeurt.** `SlideFailurePolicy` bestond sinds #772 en werd ook

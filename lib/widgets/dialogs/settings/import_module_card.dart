@@ -28,11 +28,15 @@ class ImportModuleCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    // Op web bestaat de mapkiezer niet en leest de scanner geen map van
-    // schijf. Een werkende schakelaar zonder effect is de knop die liegt —
-    // dus uitgeschakeld, met de reden ernaast, zoals de kaarten hiernaast.
-    final web = !supportsLocalProjectFolders;
-    final enabled = !web && ref.watch(importModuleEnabledProvider);
+    // OpenKAT leest een map van schijf, en die mapkiezer bestaat alleen op
+    // desktop; op web valt die bron dus weg. Maar de tweede bron van deze
+    // module — de presentatie-import — werkt op bytes (geen `dart:io`) en dus
+    // óók op web. De schakelaar hóórt op web dan ook te werken; alleen de
+    // OpenKAT-helft ontbreekt daar. Vroeger stond de hele schakelaar op web uit
+    // met "mapkiezer bestaat niet" als reden — die reden gold alleen toen
+    // OpenKAT de enige bron was.
+    final openKatAvailable = supportsLocalProjectFolders;
+    final enabled = ref.watch(importModuleEnabledProvider);
     final hasContent = ref.watch(importHasContentProvider);
     return Material(
       color: AppTheme.paper,
@@ -46,26 +50,27 @@ class ImportModuleCard extends ConsumerWidget {
         children: [
           SwitchListTile(
             value: enabled,
-            onChanged: web
-                ? null
-                : (v) => ref.read(importModuleProvider.notifier).setEnabled(v),
+            onChanged: (v) =>
+                ref.read(importModuleProvider.notifier).setEnabled(v),
             title: Text(
               l10n.d('Importeren'),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             subtitle: Text(
-              web
+              openKatAvailable
                   ? l10n.d(
-                      'Importeren leest bestanden van schijf en is alleen beschikbaar in de desktopversie.',
+                      'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.',
                     )
                   : l10n.d(
-                      'Materiaal uit andere systemen binnenhalen. Vandaag is dat OpenKAT: een map met rapportages (JSON) wordt één managementoverzicht — systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Waar de bestanden staan, stelt u per systeem in onder Integraties.',
+                      'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.',
                     ),
               style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),
             secondary: const Icon(Icons.move_to_inbox_outlined),
           ),
-          if (!web)
+          // De voettekst is OpenKAT: de ingestelde rapportagemap en de knop naar
+          // Integraties. Op web bestaat die bron niet, dus geen voettekst.
+          if (openKatAvailable)
             _footer(l10n, enabled: enabled, hasContent: hasContent, ref: ref),
         ],
       ),
