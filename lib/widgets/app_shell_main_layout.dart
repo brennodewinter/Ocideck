@@ -670,9 +670,13 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     deckNotifier.updateSlide(idx, updated);
   }
 
-  /// De gewone startknop presenteert vanaf dia 1 (#607); "presenteer vanaf hier"
-  /// in het diamenu is de bewuste uitzondering.
-  void _presentDeck() => presentDeck(context, ref, fromStart: true);
+  /// De startknop presenteert vanaf de dia waar je stond (#846): wie op dia 12
+  /// werkt en op afspelen drukt, wil daar beginnen. De verwachting is de
+  /// zichtbare dia, niet altijd het begin — dat verraste in de praktijk juist
+  /// méér dan het beschermde (#846 draait de #607-keuze terug). "Presenteer
+  /// vanaf hier" in het diamenu blijft voor wie een andere dia wil kiezen
+  /// zonder er eerst naartoe te navigeren; "alleen afspelen" begint bij dia 1.
+  void _presentDeck() => presentDeck(context, ref);
 
   Future<void> _exportDeck() async {
     final deckState = ref.read(deckProvider);
