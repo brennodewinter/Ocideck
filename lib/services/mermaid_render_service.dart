@@ -15,6 +15,13 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../utils/log.dart';
 import '../utils/lru_cache.dart';
 import '../utils/sanitize_svg.dart';
+import 'mermaid_config.dart';
+// Op web kan de WebView-renderer niet werken (webview_flutter_web mist
+// runJavaScriptReturningResult, #851); daar draait mermaid rechtstreeks in de
+// app-pagina via JS-interop. De stub op IO wordt nooit aangeroepen.
+import 'mermaid_web_renderer_stub.dart'
+    if (dart.library.js_interop) 'mermaid_web_renderer.dart'
+    as web_renderer;
 
 /// Renders Mermaid diagram source to inline SVG for preview, presenter, and
 /// raster export (WYSIWYG). Results are cached by trimmed source text.
@@ -97,25 +104,11 @@ class MermaidRenderService {
 var mermaidBundle = document.createElement('script');
 mermaidBundle.textContent = $escapedJs;
 document.head.appendChild(mermaidBundle);
-// htmlLabels moet ook PER DIAGRAMSOORT uit: mermaid tekent labels anders in een
-// <foreignObject>, en dat element haalt sanitizeMermaidSvg weg — dan houdt de
-// preview lege vakjes over zonder één woord erin.
-mermaid.initialize({
-  startOnLoad: false,
-  theme: 'neutral',
-  securityLevel: 'strict',
-  htmlLabels: false,
-  flowchart: { htmlLabels: false },
-  class: { htmlLabels: false },
-  // De onaantastbare sleutels. Mermaids eigen standaardlijst wordt hierdoor
-  // VERVANGEN, dus 'secure' en 'maxTextSize' moeten er zelf in: zonder 'secure'
-  // kan een diagramrichtlijn de lijst overschrijven en daarmee de rest van de
-  // beperkingen alsnog opheffen.
-  secure: [
-    'secure', 'securityLevel', 'startOnLoad', 'maxTextSize',
-    'suppressErrorRendering', 'htmlLabels'
-  ]
-});
+// Dezelfde instellingen als de web-kant — zie kMermaidInitConfig
+// (mermaid_config.dart) voor het waarom van elke sleutel (o.a. htmlLabels uit
+// per diagramsoort). Als JSON in de pagina gezet, zodat de config maar op één
+// plek staat en de twee renderpaden niet uiteen kunnen lopen.
+mermaid.initialize(${jsonEncode(kMermaidInitConfig)});
 window.__renderMermaid = async function(source) {
   const id = 'm' + Math.abs(source.split('').reduce((h,c)=>((h<<5)-h+c.charCodeAt(0))|0,0));
   const out = await mermaid.render(id, source);
@@ -133,7 +126,9 @@ window.__renderMermaid = async function(source) {
 
   /// Returns SVG markup or `null` when rendering fails.
   Future<String?> render(String source) {
-    requestHost();
+    // Op web is er geen WebView-host: het web-pad (JS-interop) draait mermaid
+    // rechtstreeks in de app-pagina, dus `hostNeeded` blijft daar bewust uit.
+    if (!kIsWeb) requestHost();
     final key = source.trim();
     if (key.isEmpty) return SynchronousFuture(null);
     final cached = _cache[key];
@@ -150,11 +145,16 @@ window.__renderMermaid = async function(source) {
   final LruCache<String, String> _cache = LruCache(128);
 
   void _pumpQueue() {
-    if (_busy || _queue.isEmpty || _controller == null) return;
-    if (!_bootstrapped) {
-      _bootstrapCompleter ??= Completer<void>();
-      _bootstrapCompleter!.future.then((_) => _pumpQueue());
-      return;
+    if (_busy || _queue.isEmpty) return;
+    // Web rendert zonder WebView: geen controller en geen bootstrap om op te
+    // wachten. Op IO blijft de oude voorwaarde staan.
+    if (!kIsWeb) {
+      if (_controller == null) return;
+      if (!_bootstrapped) {
+        _bootstrapCompleter ??= Completer<void>();
+        _bootstrapCompleter!.future.then((_) => _pumpQueue());
+        return;
+      }
     }
     _busy = true;
     final job = _queue.removeAt(0);
@@ -163,11 +163,19 @@ window.__renderMermaid = async function(source) {
 
   Future<void> _run(_PendingRender job) async {
     try {
-      final encoded = jsonEncode(job.source);
-      final raw = await _controller!.runJavaScriptReturningResult(
-        'window.__renderMermaid($encoded)',
-      );
-      final svg = sanitizeMermaidSvg(_unwrapJsString(raw) ?? '');
+      final String? raw;
+      if (kIsWeb) {
+        // De JS-interop-renderer geeft de SVG rechtstreeks terug (geen
+        // JSON-omhulsel zoals de WebView).
+        raw = await web_renderer.renderMermaid(job.source);
+      } else {
+        final encoded = jsonEncode(job.source);
+        final result = await _controller!.runJavaScriptReturningResult(
+          'window.__renderMermaid($encoded)',
+        );
+        raw = _unwrapJsString(result);
+      }
+      final svg = sanitizeMermaidSvg(raw ?? '');
       if (svg != null && svg.contains('<svg')) {
         _cache[job.source] = svg;
         job.completer.complete(svg);

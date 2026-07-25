@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/services/mermaid_config.dart';
 import 'package:ocideck/services/mermaid_render_service.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 // `PlatformWebViewController` wordt niet door webview_flutter doorgegeven,
@@ -108,9 +111,12 @@ void main() {
     // bundel. Zonder deze regels zou een diagram een uitgang kunnen worden.
     expect(html, contains("default-src 'none'"));
     expect(html, contains('img-src data:'));
-    // En mermaid zelf op zijn strengste stand, zonder HTML-labels.
-    expect(html, contains("securityLevel: 'strict'"));
-    expect(html, contains('htmlLabels: false'));
+    // En mermaid zelf op zijn strengste stand: de pagina wordt geïnitialiseerd
+    // met de gedeelde config (mermaid_config.dart), als JSON in de pagina gezet,
+    // zodat het web-pad en de WebView niet uiteen kunnen lopen. Dát die config
+    // strikt is (securityLevel strict, htmlLabels uit) bewaakt
+    // mermaid_web_render_test.
+    expect(html, contains(jsonEncode(kMermaidInitConfig)));
   });
 
   test(

@@ -109,6 +109,17 @@ const Set<String> uncoveredBaseline = {
   'lib/platform/presenter_fullscreen_web.dart',
   'lib/services/cve_transport_factory.dart',
   'lib/services/cve_transport_web.dart',
+  // NO EXECUTABLE LINES: `mermaid_config.dart` is één bron van waarheid voor de
+  // mermaid-instellingen — alleen const-declaraties, lcov schrijft er geen
+  // record voor. PLATFORM: `mermaid_web_renderer.dart` is de web-helft die
+  // mermaid via JS-interop draait (#851); die compileert alleen op web
+  // (dart:js_interop) en komt dus nooit in een VM-testrapport. De io-stub
+  // (mermaid_web_renderer_stub.dart) staat hier NIET: die compileert wél op de
+  // VM en wordt rechtstreeks gedekt door mermaid_web_render_test. Het echte
+  // web-renderen is visueel geverifieerd, want kIsWeb is onder flutter test
+  // altijd false.
+  'lib/services/mermaid_config.dart',
+  'lib/services/mermaid_web_renderer.dart',
   // PLATFORM: the git transport's conditional-export facade (its two halves are
   // exercised via the forge contract). A one-line `export … if …` barrel with
   // no statement to reach — the same seam as cve_transport_factory above.
