@@ -580,12 +580,14 @@ flowchart LR
     subgraph laptop["Laptop window"]
         pv["presenter view<br/>notes · next slide · timers · pen/highlighter/eraser/laser"]
     end
-    subgraph beamer["Audience window — borderless, fills the external screen"]
+    chan["method channels<br/>ocideck/presenter · ocideck/audience<br/>index · blank state · ink strokes · laser pointer"]
+    subgraph beamer["Audience window<br/>borderless, fills the external screen"]
         au["the slide<br/>media plays here only (no double audio)"]
     end
 
-    pv <-->|"method channels: ocideck/presenter · ocideck/audience<br/>index · blank state · ink strokes · laser pointer"| au
-    fork["vendored desktop_multi_window fork<br/>(a real 2nd OS window; window_manager cannot)"] -.->|"enables"| beamer
+    pv <--> chan
+    chan <--> au
+    fork["vendored desktop_multi_window fork<br/>a real 2nd OS window (window_manager cannot)"] -.->|"enables"| beamer
 ```
 
 When a second display is present (`shouldUseDualScreen` on macOS, Windows, or
