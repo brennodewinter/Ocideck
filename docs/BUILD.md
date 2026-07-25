@@ -180,10 +180,23 @@ response header rather than relying on the meta tag. Example snippets:
 
 - **nginx**: `add_header Content-Security-Policy "frame-ancestors 'none'" always; add_header X-Frame-Options "DENY" always; add_header Strict-Transport-Security "max-age=63072000; includeSubDomains" always;`
 - **Caddy**: `header Content-Security-Policy "frame-ancestors 'none'"`, `header X-Frame-Options "DENY"` and `header Strict-Transport-Security "max-age=63072000; includeSubDomains"`
-- **Apache**: `Header always set X-Frame-Options "DENY"`, `Header always set Content-Security-Policy "frame-ancestors 'none'"` and `Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"`
+- **Apache**: the bundle already **ships these** — see below.
+
+**Apache: shipped in the bundle.** `web/.htaccess` carries the full set (the
+entire CSP as a header, `X-Frame-Options: DENY`, `X-Content-Type-Options:
+nosniff`, `Referrer-Policy: no-referrer`, a `Permissions-Policy`, and HSTS).
+`flutter build web` copies it to `build/web/.htaccess`, so on an Apache host it
+takes effect with no extra step — **provided** `mod_headers` is enabled and
+`AllowOverride` for the web root permits `FileInfo` (or `All`). Where
+`AllowOverride` is `Off` (the hardened default), `.htaccess` is ignored; copy the
+same directives into the vhost/server config. `check_web_hardening.dart` fails
+the build if the shipped `.htaccess` loses a header or its CSP drifts from the
+`<meta>` one.
 
 See [`HOSTING.md`](HOSTING.md) §3 for what `preload` would additionally commit
-you to, and why it is not the default recommendation.
+you to, and why it is not the default recommendation. Cross-Origin-Embedder-Policy
+(`require-corp`) is deliberately **not** shipped — it can break cross-origin
+resources and needs testing first.
 
 > A plain `flutter build web` still works, but it falls back to the gstatic CDN
 > and an `unsafe-*` loader — use `make build-web` so the hardening stays pinned.
