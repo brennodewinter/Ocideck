@@ -105,6 +105,25 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Fixed
+- **Mermaid-diagrammen renderden niet in de webversie (#851).** Een
+  beslisboom-slide bleef op web een leeg vlak. De oorzaak zat een laag dieper
+  dan de CSP: de renderer tekent de diagrammen in een verborgen WebView en leest
+  de SVG terug met `runJavaScriptReturningResult` — en `webview_flutter_web`
+  implementeert die methode niet (het erft de `UnimplementedError` uit de
+  basisklasse). Elke render gaf daardoor stil `null` en de preview viel terug op
+  een leeg kader. Op desktop, met een echte WebView, werkte het wél, dus het
+  bleef web-specifiek.
+
+  Op web draait mermaid nu rechtstreeks in de app-pagina: de gebundelde
+  `mermaid.min.js` wordt als eigen-origin `<script src>` geladen (dat mag onder
+  de strikte app-CSP `script-src 'self'`; mermaid heeft geen `eval` nodig) en
+  `mermaid.render` wordt via `dart:js_interop` aangeroepen. Een conditional
+  import houdt de WebView op desktop/mobiel; de instellingen staan gedeeld in
+  `mermaid_config.dart` zodat de twee paden niet uiteen kunnen lopen — dezelfde
+  `securityLevel: 'strict'` en SVG-opschoning als voorheen. Visueel geverifieerd
+  in de echte webbouw: de diagrammen renderen onder de productie-CSP.
+
 ### Security
 - **De webbundel draagt zijn beveiligingsheaders nu zelf mee (#849).** Een
   ZAP-scan tegen de live host meldde zeven ontbrekende responseheaders met één
