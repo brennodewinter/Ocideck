@@ -186,24 +186,32 @@ package format — is documented in
 ## Documentation
 
 **Full documentation index: [`docs/README.md`](docs/README.md)** — the five
-reader paths (user, developer, host, auditor, assistive technology) start there.
-The most-used documents:
+reader paths (user, developer, host, auditor, assistive technology) start there,
+and it also indexes the design documents. The current-state documents:
 
 | Document | What it covers |
 | --- | --- |
+| [API documentation](docs/API_DOCUMENTATION.md) | The internal APIs and seams a contributor works with to extend the app |
 | [Architecture](docs/ARCHITECTURE.md) | How the code fits together (for contributors) |
 | [Build & release](docs/BUILD.md) | Building from source and producing distributables |
 | [Changelog](CHANGELOG.md) | Notable changes (nothing is released yet) |
 | [Checks & CI](docs/CHECKS.md) | Every automated check, what it covers, and how each is enforced |
 | [Compliance attestation](COMPLIANCE.md) | Voluntary security attestation (ORC WG light-weight checklist), including the rows we cannot tick |
 | [Contributing](CONTRIBUTING.md) | Setup, the quality gate, and how to propose changes |
+| [Contributing guidelines](docs/CONTRIBUTING_GUIDELINES.md) | The fuller contribution workflow: reporting issues, pull requests, and coding standards |
+| [Development setup](docs/DEVELOPMENT_SETUP_GUIDE.md) | Setting up a development environment from scratch, step by step |
 | [FAQ](docs/FAQ.md) | Common questions about features, security, and privacy |
 | [File format](docs/FILE_FORMAT.md) | The Marp Markdown, front matter, sidecars, the `.ocideck` package, and the `.ocideckstyle` style profile |
+| [Glossary](docs/GLOSSARY.md) | OciDeck-specific terms and the acronyms that recur in the code and docs |
+| [Hosting](docs/HOSTING.md) | Building and serving the web build safely — the desktop apps need no hosting |
 | [Keyboard shortcuts](docs/SHORTCUTS.md) | Editor and presenter shortcuts |
 | [Known limitations](docs/KNOWN_LIMITATIONS.md) | What this alpha does not do yet, in one place |
 | [Licence compliance](docs/LICENSE_COMPLIANCE.md) | Open-source policy and the `make licenses` check |
+| [Migration guide](docs/MIGRATION_GUIDE.md) | Moving between versions — currently nothing to migrate, as nothing is released |
+| [Performance](docs/PERFORMANCE_GUIDE.md) | Performance characteristics and the hard limits enforced in code |
 | [Privacy](docs/PRIVACY.md) | What stays local, what leaves, and on whose action |
 | [SBOM](docs/SBOM.md) | The machine-readable Software Bill of Materials and its CRA mapping |
+| [Security design](docs/SECURITY_DESIGN.md) | The security design principles and the concrete mechanisms that enforce them |
 | [Security policy](SECURITY.md) | How to report a vulnerability |
 | [Source map](docs/SOURCE_MAP.md) | An index of the files under `lib/`, grouped per directory |
 | [Third-party notices](THIRD_PARTY_NOTICES.md) | Bundled components and their licences, and the owners of the trademarks OciDeck names |
