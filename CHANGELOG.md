@@ -11,7 +11,7 @@ and the project aims to follow [Semantic Versioning](https://semver.org/) once i
 starts tagging releases. It has not yet: everything below is unreleased work on
 `main`.
 
-## [0.1.0] — unreleased
+## [0.1.0] — 2026-07-25
 
 The first release, when it is cut, is everything below. No tag carries it yet.
 This section is the short answer to "what is in it"; the **Development log**
