@@ -6,8 +6,10 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/widgets/slides/slide_thumbnail.dart';
 
-/// De twee keuzes uit #607: presenteren begint standaard bij dia 1, en de
-/// repetitiesamenvatting verschijnt niet meer vanzelf.
+/// Twee keuzes rond presenteren: de repetitiesamenvatting verschijnt niet meer
+/// vanzelf (#607), en het diamenu biedt "presenteer vanaf hier" om bewust een
+/// dia te kiezen. (De startknop zélf begint sinds #846 bij de dia waar je
+/// stond — zie shell_present_and_close_test.dart.)
 void main() {
   test('een nieuw deck toont de repetitiesamenvatting niet uit zichzelf', () {
     // De samenvatting is een repetitiehulp, geen rapportkaart die de

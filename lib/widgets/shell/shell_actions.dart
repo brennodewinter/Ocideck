@@ -894,9 +894,9 @@ Future<void> requestCloseTab(
 /// slide-filtering, annotatie-koppeling en fullscreen-overgang gebruiken.
 ///
 /// Met [fromStart] begint de presentatie bij de eerste zichtbare slide; anders
-/// bij de huidige selectie in de editor. Toont een melding en doet niets als er
-/// (na filtering) geen slides zijn.
-/// Presenteer vanaf een gekozen dia (#607): selecteer hem, dan [presentDeck].
+/// bij de huidige selectie — sinds #846 ook wat de gewone startknop doet.
+/// Toont een melding en doet niets als er (na filtering) geen slides zijn.
+/// Presenteer vanaf een gekozen dia: selecteer hem eerst, dan [presentDeck].
 void _presentFromSlide(BuildContext context, WidgetRef ref, int index) {
   ref.read(editorProvider.notifier).select(index);
   presentDeck(context, ref);

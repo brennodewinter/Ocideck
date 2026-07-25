@@ -110,13 +110,14 @@ void main() {
 
   // ── Presenteren ───────────────────────────────────────────────────────────
 
-  testWidgets('de startknop presenteert vanaf dia 1, niet bij de selectie', (
+  testWidgets('de startknop presenteert vanaf de dia waar je stond (#846)', (
     tester,
   ) async {
-    // Sinds #607: wie op dia drie werkte en op afspelen drukte, viel met de
-    // zaal middenin de presentatie. De knop begint nu bij het begin; wie tóch
-    // vanaf de selectie wil, kiest "presenteer vanaf hier" in het diamenu (zie
-    // present_from_slide_test.dart).
+    // #846 draait de #607-keuze terug: wie op dia drie werkt en op afspelen
+    // drukt, wil daar beginnen — de verwachting is de zichtbare dia, niet altijd
+    // het begin. Wie een ándere dia wil, kiest "presenteer vanaf hier" in het
+    // diamenu (zie present_from_slide_test.dart); "alleen afspelen" begint wél
+    // bij dia 1.
     final tab = await pumpShell(
       tester,
       deckOf([bullets('Eerste'), bullets('Tweede'), bullets('Derde')]),
@@ -126,14 +127,15 @@ void main() {
 
     await present(tester);
 
-    expect(presenter(tester).initialIndex, 0);
-    expect(find.text('Eerste'), findsWidgets);
+    expect(presenter(tester).initialIndex, 2);
+    expect(find.text('Derde'), findsWidgets);
   });
 
   testWidgets('een overgeslagen dia haalt de presentatie niet', (tester) async {
-    // De tweede dia is overgeslagen: die hoort niet in de presentatie, ongeacht
-    // waar de startknop begint. De knop begint sinds #607 bij dia 1, dus de
-    // startindex is 0 — de eerste zichtbare.
+    // De tweede dia is overgeslagen: die hoort niet in de presentatie. En de
+    // selectie staat er precies op — sinds #846 begint de knop bij de dia waar
+    // je stond, maar een overgeslagen dia bestaat niet in de zaal, dus de start
+    // schuift door naar de eerstvolgende zichtbare ('Derde', zaalindex 1).
     final tab = await pumpShell(
       tester,
       deckOf([
@@ -149,7 +151,7 @@ void main() {
 
     final shown = presenter(tester);
     expect(shown.slides.map((s) => s.title), ['Eerste', 'Derde']);
-    expect(shown.initialIndex, 0);
+    expect(shown.initialIndex, 1);
     expect(find.text('Overgeslagen'), findsNothing);
   });
 

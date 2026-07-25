@@ -106,6 +106,19 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Fixed
+- **De startknop presenteert weer vanaf de dia waar je stond, niet altijd vanaf
+  dia 1 (#846).** Sinds #607 begon de gewone afspeelknop bewust bij het begin, om
+  te voorkomen dat wie midden in een deck aan het werk was met de zaal middenin
+  viel. Die bescherming bleek in de praktijk juist andersom te werken: wie op dia
+  12 zit en op afspelen drukt, verwacht dáár te beginnen — niet teruggeworpen te
+  worden naar het begin. #846 draait de #607-keuze dus terug: de knop volgt weer
+  de zichtbare dia. Staat de selectie op een overgeslagen of achtergehouden dia,
+  dan schuift de start door naar de eerstvolgende dia die de zaal wél mag zien.
+  *Presenteer vanaf hier* in het diamenu blijft bestaan voor wie een andere dia
+  wil kiezen zonder er eerst naartoe te navigeren, en het *alleen afspelen*-scherm
+  begint nog steeds bij dia 1 — daar is geen editor met een selectie. De
+  regressietest die vroeger "vanaf dia 1" vastlegde, legt nu "vanaf de selectie"
+  vast.
 - **De presentatie-import was op web onbereikbaar — juist de bron die op web
   hóórt te werken.** De module *Importeren* stond op web helemaal uit, met "de
   mapkiezer bestaat hier niet" als reden. Die reden gold OpenKAT, dat een map

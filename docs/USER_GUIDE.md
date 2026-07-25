@@ -2272,12 +2272,15 @@ not mark is still found and still reported.
 
 ## Presenting
 
-Start the fullscreen presenter from the toolbar. **It begins at the first
-slide**, not at the one you happen to be editing — so hitting play while working
-on slide 12 does not drop your audience into the middle. To start somewhere
-else on purpose, right-click a slide in the strip and choose **Present from
-here**. *(Changed 2026-07-23, #607: play used to start at the selected slide,
-which surprised anyone who pressed it mid-edit.)* See
+Start the fullscreen presenter from the toolbar. **It begins at the slide you
+were on** — hit play while working on slide 12 and you present from slide 12, not
+from the start. If that slide is skipped or withheld it moves on to the next
+visible one. To present from a different slide without navigating to it first,
+right-click a slide in the strip and choose **Present from here**. The
+**play-only** screen always starts at the first slide, since there is no editing
+context there. *(Changed 2026-07-25, #846: the toolbar play button used to
+always start at slide 1 (#607); starting where you were turned out to match
+expectations better.)* See
 [`SHORTCUTS.md`](SHORTCUTS.md) for the full key list; highlights: arrows to move,
 `G` for the grid overview, `B`/`W` to blank, `P` for presenter view, `K` for the
 countdown, `R` to reset the timing, `H` for the in-app cheatsheet.
