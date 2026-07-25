@@ -205,3 +205,32 @@ fi
 
 log "Deploy voltooid"
 echo "$LIVE_URL — $DESCRIBE ($BUNDLE_SHA)"
+
+# --- 6. DAST na deploy (adviserend) -----------------------------------------
+#
+# Nu de nieuwe bundel écht live staat, scant OWASP ZAP de responseheaders die
+# de wereld terugkrijgt — precies het oppervlak waar de scan iets waard is (een
+# lokale wegwerpserver antwoordt met zijn eigen headers, een echte host met de
+# zijne). Zie `make dast` en zap/baseline.conf voor wat er zichtbaar blijft en
+# waarom.
+#
+# Nadrukkelijk adviserend: dit mag een geslaagde deploy nooit terugdraaien. De
+# wissel is hierboven al gebeurd en byte-voor-byte geverifieerd; een ZAP-
+# waarschuwing is iets om met de hand te lezen, geen reden om live oud te laten
+# staan. Daarom vangt de aanroep elke uitkomst op.
+#
+# Zonder een container-runtime (typisch in CI, waar geen docker/colima draait)
+# slaat de stap zichzelf over in plaats van de deploy te laten struikelen.
+# Handmatig overslaan kan met OCIDECK_DEPLOY_SKIP_DAST=1.
+if [[ "${OCIDECK_DEPLOY_SKIP_DAST:-0}" == 1 ]]; then
+  log "DAST overgeslagen (OCIDECK_DEPLOY_SKIP_DAST=1)"
+elif ! command -v docker >/dev/null 2>&1 || ! docker info >/dev/null 2>&1; then
+  log "DAST overgeslagen — geen container-runtime bereikbaar"
+  echo "Draai zelf 'make dast DAST_URL=$LIVE_URL' met een runtime aan (macOS: colima start)."
+else
+  log "DAST (OWASP ZAP baseline) op $LIVE_URL — adviserend"
+  if ! make dast DAST_URL="$LIVE_URL"; then
+    echo "ZAP meldde waarschuwingen of kon niet draaien — lees ze met de hand." >&2
+    echo "De deploy blijft staan; dit is een advies, geen poort." >&2
+  fi
+fi
