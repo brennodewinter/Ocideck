@@ -1112,6 +1112,16 @@ off by default for your privacy — until you turn it on, an online slide shows 
 placeholder with the URL instead of loading anything, and on export an online
 source is written as a clickable link.
 
+That placeholder now names the reason it is not playing, and — while you are
+editing — offers a one-click way out. If the **Online media** setting is off, it
+says so and shows an **Enable in settings** button that jumps straight to
+*Settings → Beveiliging*; that button appears only in the editor preview, not in
+the presenter, the slide rail, or an export, where the setting cannot be reached.
+In the **web version** the placeholder explains that the browser blocks external
+media regardless of the setting (open the presentation in the app to see it), and
+if the setting is on but the source URL was refused by the security check, it says
+that too.
+
 When an embedded video does not play, the slide now **says why** instead of
 showing a blank rectangle: the owner disabled embedding (by far the most common —
 the clip can only be watched on YouTube/Vimeo itself), the video was removed or is
