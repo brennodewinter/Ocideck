@@ -52,16 +52,23 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
   /// meldt altijd; video alleen tijdens autoplay.
   bool get reportsMediaCompletion => true;
 
-  /// Maakt de controller voor [source]. Een `http(s)`-bron wordt een
+  /// Maakt de controller voor [source]. Een `http(s)`- of `blob:`-bron wordt een
   /// netwerk-controller, anders een bestand-controller. Subklassen hoeven dit
   /// zelden te overschrijven.
   VideoPlayerController createMediaController(String source) {
-    final uri = Uri.tryParse(source);
+    // Web: een `mem:`-bron (pakket-media) wordt een `blob:`-URL die als
+    // netwerk-URL speelt. Op desktop komt `mem:` hier nooit langs (pakketten
+    // pakken naar schijf uit) en levert de helper null (#854).
+    final src = WebAssetStore.isMemPath(source)
+        ? (memAssetBlobUrl(source) ?? source)
+        : source;
+    final uri = Uri.tryParse(src);
     final scheme = uri?.scheme.toLowerCase();
-    if (uri != null && (scheme == 'http' || scheme == 'https')) {
+    if (uri != null &&
+        (scheme == 'http' || scheme == 'https' || scheme == 'blob')) {
       return VideoPlayerController.networkUrl(uri);
     }
-    return VideoPlayerController.file(File(source));
+    return VideoPlayerController.file(File(src));
   }
 
   /// Extra controller-instelling vóór play (bv. setLooping). Standaard niets.
@@ -214,8 +221,14 @@ class _AudioPlaybackState extends State<_AudioPlayback>
   }
 
   @override
-  String? resolveMediaPath() =>
-      _resolvePath(widget.audioPath, widget.projectPath);
+  String? resolveMediaPath() {
+    // Zelfde reden als bij video (#854): pakket-audio is op web een `mem:`-pad
+    // dat [createMediaController] tot een `blob:`-URL maakt. Zonder deze tak
+    // geeft resolveSlideAssetPath op web sowieso null.
+    final ap = widget.audioPath;
+    if (WebAssetStore.isMemPath(ap)) return ap;
+    return _resolvePath(ap, widget.projectPath);
+  }
 
   @override
   bool get mediaAutoplay => widget.autoplay;
