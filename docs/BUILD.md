@@ -418,7 +418,12 @@ working. That is why the forge needs no GitHub credentials to collect it — the
 
 ### Before you tag
 
-1. `make check` and `make check-full` green on `main`.
+1. `make check-release` green on `main`. This is the **ready-for-tagging** pass:
+   `make check-full` as a hard gate, then an advisory ZAP/DAST scan of the live
+   host. The DAST step never reddens the command — weigh its findings and, if
+   real, file them as an issue (this is how #849 was found) before you tag. It is
+   the last moment a finding can hold a release back instead of ending up live.
+   Also run `make linux-gate` and glance at open `security`/`privacy` issues.
 2. `make catalogs-outdated` — a release carries its bundled reference data for a
    year, so this is the moment to notice upstream moved.
 3. `CHANGELOG.md`: turn the `## [0.1.0] — unreleased` heading into the version

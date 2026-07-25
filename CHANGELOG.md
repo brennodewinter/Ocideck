@@ -139,20 +139,24 @@ read a book to find out.
   OpenKAT.
 
 ### Changed
-- **De DAST-scan (OWASP ZAP) draait nu adviserend na elke webdeploy, tegen de
-  live host.** `make dast` bestond al maar was nog nooit ergens ingehaakt; de
-  scan is alleen iets waard tegen een échte host, want een lokale wegwerpserver
-  antwoordt met zíjn headers, niet die van de bundel. `scripts/deploy_web.sh`
-  roept hem daarom als laatste stap aan met `DAST_URL` op de zojuist gezette
-  site. Nadrukkelijk adviserend: de wissel is dan al gebeurd en geverifieerd, dus
-  een ZAP-waarschuwing draait een deploy nooit terug — je leest hem met de hand.
-  Zonder container-runtime (typisch in CI) slaat de stap zichzelf over; met de
-  hand overslaan kan met `OCIDECK_DEPLOY_SKIP_DAST=1`. De eerste live-run vond
-  meteen iets echts: de Apache-host stuurt geen enkele beveiligingsheader
-  (CSP-als-header, `X-Frame-Options`, `X-Content-Type-Options`, HSTS,
-  `Permissions-Policy`, COEP) — vastgelegd als #849. De scan blijft bewust buiten
-  `check`/`check-full`: dat zijn poorten, en dit is een advies dat een draaiende
-  runtime nodig heeft.
+- **De DAST-scan (OWASP ZAP) hoort nu bij de kwaliteitsslag vóór een tag, via
+  `make check-release`.** `make dast` bestond al maar was nog nooit ergens
+  ingehaakt; de scan is alleen iets waard tegen een échte host, want een lokale
+  wegwerpserver antwoordt met zíjn headers, niet die van de bundel. De eerste
+  gedachte was hem ná de deploy te draaien (`deploy_web.sh`), maar dat is te laat:
+  ná de wissel staat de site al live en kan een bevinding een release niet meer
+  tegenhouden. Daarom zit hij nu in `make check-release` — de "ready for
+  tagging"-slag die je met de hand draait vóór `git push origin v*`. Dat doel is
+  `check-full` (blokkerend: analyse, tests, opmaak, secrets, SAST, licenties,
+  SBOM, deps, webharding) plus een **adviserende** ZAP-basisscan tegen de live
+  host (`DAST_LIVE_URL`). Adviserend met opzet: een ZAP-waarschuwing weeg je en
+  leg je zo nodig als issue vast, ze maakt het commando niet rood. Zonder
+  container-runtime slaat de DAST-stap zichzelf over. De scan blijft buiten
+  `check`/`check-full`: dat zijn poorten, en dit is een advies dat een runtime
+  nodig heeft. De eerste live-run vond meteen iets echts: de Apache-host stuurt
+  geen enkele beveiligingsheader (CSP-als-header, `X-Frame-Options`,
+  `X-Content-Type-Options`, HSTS, `Permissions-Policy`, COEP) — vastgelegd als
+  #849.
 - **De geheimen- en SAST-scan (`scans.yml`, #778) draait niet meer bij elke push
   naar `main`, alleen nog bij elke pull request.** De run ná een merge scande
   exact dezelfde volledige historie die de PR-run een paar minuten eerder al had

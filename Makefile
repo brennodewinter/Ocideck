@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release deploy-web check check-no-coverage check-full help servicenormen doorlooptijd ratchets clean-test-cache
+.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release deploy-web check check-no-coverage check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -55,6 +55,7 @@ help:
 	@echo "OciDeck quality targets:"
 	@echo "  make check           Format check + static analysis + full Flutter test suite + coverage floor."
 	@echo "  make check-full      make check + secrets + SAST + licences, SBOM, deps, web hardening."
+	@echo "  make check-release   Ready-for-tagging pass: make check-full + an advisory ZAP/DAST scan of the live host. Run before 'git push origin v*'."
 	@echo "  make check-no-coverage  make check zonder de dekkingsmeting (uitbrengpoort in CI; niet lokaal gebruiken)."
 	@echo "  make coverage        Test suite with coverage: enforce the floor AND that every lib/ file is in some test."
 	@echo "  make mutate          Mutation check for dead/untested branch operands (manual; FILE/TESTS overridable)."
@@ -377,11 +378,12 @@ check-secrets:
 
 # Advisory DAST: an OWASP ZAP baseline (passive) scan against a served build.
 #
-# ADVISORY, and not wired into any check aggregate (`check`/`check-full`). It
-# IS invoked, advisory and non-blocking, at the end of `scripts/deploy_web.sh`
-# with DAST_URL pointing at the just-deployed live host — the one place the
-# headers under test are the real host's and not a throwaway server's. Be
-# honest about what this can and cannot see:
+# ADVISORY, and not a gate. It runs, advisory and non-blocking, as part of
+# `make check-release` — the quality pass BEFORE cutting a `v*` tag — with
+# DAST_URL pointing at the live host, the one place the headers under test are
+# the real host's and not a throwaway server's. Pre-tag is deliberate: a finding
+# there can still hold back a release, whereas a post-deploy scan only speaks
+# after the site is already live. Be honest about what this can and cannot see:
 #   - The CSP is already pinned exactly by `make check-web`, from the meta tag
 #     in the built index.html. ZAP does not improve on that.
 #   - ZAP's spider cannot traverse the UI: CanvasKit paints into a canvas, so
@@ -953,3 +955,32 @@ check-no-coverage: $(STATIC_GATES) test
 check-full: check check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated
 	@echo "== OciDeck extended check complete =="
 	@echo "Validated: required quality gate, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, shell scripts, and dependency freshness."
+
+# The "ready for tagging" quality pass. Run this BY HAND before `git push origin
+# v*`: it is the last moment a finding can hold back a release instead of ending
+# up live. Pushing the tag is what triggers the whole release chain
+# (.forgejo/workflows/release.yml), so the slag belongs before it, not inside it.
+#
+#   = check-full (BLOCKING: analysis, tests, format, secrets, SAST, licences,
+#     SBOM, deps, web hardening)
+#   + a DAST scan (OWASP ZAP baseline) against the LIVE host — ADVISORY.
+#
+# DAST is deliberately non-blocking: a ZAP warning is something to weigh and, if
+# real, file as an issue (this is exactly how #849 came to be), not something
+# that reddens the command. The blocking assurance is check-full; the DAST step
+# is a prompt to look at the served surface one more time. Without a container
+# runtime the DAST step skips itself with a clear message rather than failing the
+# release pass. Also worth doing by hand before a tag and NOT automated here:
+# `make linux-gate` (the Linux half of the suite) and a look at open security/
+# privacy issues on the tracker.
+DAST_LIVE_URL ?= https://ocideck.librekat.nl/
+check-release: check-full
+	@echo "== OciDeck: DAST-kwaliteitsslag vóór de tag (adviserend, ready for tagging) =="
+	@echo "Command: make dast DAST_URL=$(DAST_LIVE_URL)"
+	@if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then \
+	  $(MAKE) dast DAST_URL="$(DAST_LIVE_URL)" || \
+	    echo "ZAP kon niet draaien — lees de uitvoer met de hand; leg echte bevindingen vast als issue."; \
+	else \
+	  echo "DAST overgeslagen — geen container-runtime (macOS: colima start), draai daarna 'make dast DAST_URL=$(DAST_LIVE_URL)'."; \
+	fi
+	@echo "== Klaar. Weeg de DAST-bevindingen; is alles vastgelegd of bewust aanvaard, dan is dit ready for tagging. =="
