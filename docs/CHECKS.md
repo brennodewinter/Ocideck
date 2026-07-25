@@ -808,7 +808,13 @@ also declares them, but see the [CI note](#continuous-integration).)
   open-source equivalent and is what this was built against. The ZAP Homebrew
   cask is *not* an option — it fails the macOS Gatekeeper check and is scheduled
   for removal.
-- **Advisory, in no aggregate target.** Findings are for a human to read.
+- **Advisory, in no check aggregate.** It stays out of `check`/`check-full`, but
+  [`scripts/deploy_web.sh`](../scripts/deploy_web.sh) runs it once — advisory and
+  non-blocking — right after a deploy, with `DAST_URL` pointing at the live host,
+  because that is the only run where the headers under test are the real host's.
+  A finding never rolls back a deploy; it is for a human to read. In CI (no
+  container runtime) the step skips itself; `OCIDECK_DEPLOY_SKIP_DAST=1` skips it
+  by hand.
 - **Be honest about what it can see.** The CSP is already pinned exactly by
   [`make check-web`](#make-check-web) from the meta tag, so ZAP does not improve
   on that. Its spider cannot traverse the UI — CanvasKit paints into a canvas,

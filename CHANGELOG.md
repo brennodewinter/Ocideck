@@ -139,6 +139,20 @@ read a book to find out.
   OpenKAT.
 
 ### Changed
+- **De DAST-scan (OWASP ZAP) draait nu adviserend na elke webdeploy, tegen de
+  live host.** `make dast` bestond al maar was nog nooit ergens ingehaakt; de
+  scan is alleen iets waard tegen een échte host, want een lokale wegwerpserver
+  antwoordt met zíjn headers, niet die van de bundel. `scripts/deploy_web.sh`
+  roept hem daarom als laatste stap aan met `DAST_URL` op de zojuist gezette
+  site. Nadrukkelijk adviserend: de wissel is dan al gebeurd en geverifieerd, dus
+  een ZAP-waarschuwing draait een deploy nooit terug — je leest hem met de hand.
+  Zonder container-runtime (typisch in CI) slaat de stap zichzelf over; met de
+  hand overslaan kan met `OCIDECK_DEPLOY_SKIP_DAST=1`. De eerste live-run vond
+  meteen iets echts: de Apache-host stuurt geen enkele beveiligingsheader
+  (CSP-als-header, `X-Frame-Options`, `X-Content-Type-Options`, HSTS,
+  `Permissions-Policy`, COEP) — vastgelegd als #849. De scan blijft bewust buiten
+  `check`/`check-full`: dat zijn poorten, en dit is een advies dat een draaiende
+  runtime nodig heeft.
 - **De geheimen- en SAST-scan (`scans.yml`, #778) draait niet meer bij elke push
   naar `main`, alleen nog bij elke pull request.** De run ná een merge scande
   exact dezelfde volledige historie die de PR-run een paar minuten eerder al had

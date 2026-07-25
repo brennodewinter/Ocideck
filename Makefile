@@ -377,8 +377,11 @@ check-secrets:
 
 # Advisory DAST: an OWASP ZAP baseline (passive) scan against a served build.
 #
-# ADVISORY, and not wired into any aggregate target. Be honest about what this
-# can and cannot see:
+# ADVISORY, and not wired into any check aggregate (`check`/`check-full`). It
+# IS invoked, advisory and non-blocking, at the end of `scripts/deploy_web.sh`
+# with DAST_URL pointing at the just-deployed live host — the one place the
+# headers under test are the real host's and not a throwaway server's. Be
+# honest about what this can and cannot see:
 #   - The CSP is already pinned exactly by `make check-web`, from the meta tag
 #     in the built index.html. ZAP does not improve on that.
 #   - ZAP's spider cannot traverse the UI: CanvasKit paints into a canvas, so
