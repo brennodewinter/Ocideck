@@ -16,12 +16,15 @@ nothing between your `make check` and `main` runs this gate for you, and the
 you are the merge gate.
 
 **One exception, and it is deliberate:** `.forgejo/workflows/scans.yml` runs the
-secret and SAST scans (`make check-secrets`, `make sast`) on **every pull request
-and every push to `main`** (#778). Those take 17 and 2 seconds locally against
-the 22 minutes per pull request that moved the gate to a tag, so the timing
-argument that moved the gate to a tag does not reach them — and for a secret the
-moment is not interchangeable. Found before the merge it is an edit; found after,
-it is in the history and revoking is the only real remedy. See
+secret and SAST scans (`make check-secrets`, `make sast`) on **every pull
+request** (#778). Those take 17 and 2 seconds locally against the 22 minutes per
+pull request that moved the gate to a tag, so the timing argument that moved the
+gate to a tag does not reach them — and for a secret the moment is not
+interchangeable. Found before the merge it is an edit; found after, it is in the
+history and revoking is the only real remedy. It scanned pushes to `main` as
+well until the redundant post-merge run — re-reading the same full history the
+pull request had just cleared — proved to be the one real source of failure
+mail; that trigger was dropped. See
 [Continuous integration](#continuous-integration).
 Run `make help` for a one-line summary of every target.
 
@@ -189,7 +192,7 @@ not what runs. That workflow does not execute: Forgejo reads
 is [`make check-no-coverage`](#make-check-no-coverage) on the Mac runner, on a
 `v*` tag (#790/#796/#797), plus
 [`make check-secrets`](#make-check-secrets) and [`make sast`](#make-sast) on
-every pull request and push to `main` (#778) — those two are the only checks in
+every pull request (#778) — those two are the only checks in
 this table that a forge actually runs before a merge.
 Note that `make
 check` alone does **not** include `licenses`, `sbom-verify`, `deps-check` or
@@ -1160,7 +1163,7 @@ that reaches beyond `build/test_cache`.
 > `make check-full` (the dependency/web checks) still runs only locally; run it
 > before a dependency or web-facing change. Its two *security* scans are the
 > exception since #778 —
-> see [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request-and-push).
+> see [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request).
 > Since #797 the release gate runs on a registered **Mac**
 > runner rather than on the server, and the Linux gate moved to an on-demand
 > workflow — see below for what that buys and what it costs. The sections below
@@ -1188,7 +1191,7 @@ that reaches beyond `build/test_cache`.
   Better than a gate nobody waits for, but this is not a server-class
   arrangement and should not be read as one.
 
-### `.forgejo/workflows/scans.yml` — secrets and SAST, per pull request and push
+### `.forgejo/workflows/scans.yml` — secrets and SAST, per pull request
 - **scans** — a bare `ubuntu:24.04` container that installs three pinned
   scanners and then runs [`make check-secrets`](#make-check-secrets) (gitleaks +
   trufflehog, working tree *and* full history) and [`make sast`](#make-sast)
@@ -1217,7 +1220,7 @@ that reaches beyond `build/test_cache`.
   for a restored scanner binary, so caching here would quietly spend the very
   property #778 was after — that green means the same thing over time.
 - **What does get fixed is the network, not the clock.** Three downloads on
-  every pull request and push is three chances per run at a failure that has
+  every pull request is three chances per run at a failure that has
   nothing to do with this repository, and on 2026-07-24 that happened twice in
   one afternoon: `curl: (22) … error: 504`, half a second after checkout, with
   `make check-secrets` and `make sast` green locally on the same commit. The
@@ -1227,7 +1230,7 @@ that reaches beyond `build/test_cache`.
 - **Why on the Linux runner rather than the Mac.** The Mac has all three
   scanners installed already, so nothing would need downloading. But since #797
   that Mac is both the release gate and the committer's own working machine, and
-  this is the one workflow that fires on every pull request and push — it would
+  this is the one workflow that fires on every pull request — it would
   take cores from the machine currently running `make check`. The server has
   been idle since that same move.
 - **Two things here are load-bearing and easy to lose.** It checks out with
@@ -1335,7 +1338,7 @@ plain `curl`, so no GitHub credential is stored on the self-hosted runner.
   gained `fetch-depth: 0`: two of the four passes in `make check-secrets` read
   *history*, and a one-commit clone lets them report green on almost nothing.
   Both were already right in
-  [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request-and-push)
+  [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request)
   (#799); only this mirror definition lagged.
 - **Test matrix (macOS + Windows)** — runs `flutter test
   --test-randomize-ordering-seed random` on the other two desktop OSes to catch

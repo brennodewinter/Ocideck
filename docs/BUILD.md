@@ -345,7 +345,7 @@ step anyway: a set nobody watches is how this went wrong the first time.
 > is already on `main`, and the assurance before `main` is — with one deliberate
 > exception — entirely the committer's local run. That exception is
 > `.forgejo/workflows/scans.yml` (#778): the secret and SAST scans do run on
-> every pull request and push, because they cost seconds rather than minutes and
+> every pull request, because they cost seconds rather than minutes and
 > because a credential found after the merge is in the history for good.
 >
 > Two later changes shaped what that gate is. It runs `make check-no-coverage`

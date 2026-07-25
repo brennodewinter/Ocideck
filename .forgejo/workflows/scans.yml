@@ -8,41 +8,51 @@
 # staat en er een tag omheen zit — precies te laat. Een eigen bestand is de
 # enige manier om deze scans op een ander moment te laten draaien dan de poort.
 #
-# **Waarom dit wél per PR en per push mag, terwijl de poort dat niet meer doet.**
-# De reden voor #790 was de klok: een poortrun kostte 22 minuten en `make check`
-# draaide toch al vóór elke push. Die redenering gaat over de dúúr, niet over
-# het principe — en deze scans duren lokaal 17 en 2 seconden. Voor een geheim is
-# het moment bovendien niet inwisselbaar: gevonden vóór de merge is een
-# wijziging, gevonden erna staat het in de historie en is intrekken de enige
-# echte remedie.
+# **Waarom dit per PR draait en niet meer per push naar main.** De reden voor
+# #790 was de klok: een poortrun kostte 22 minuten en `make check` draaide toch
+# al vóór elke push. Die redenering gaat over de dúúr, niet over het principe —
+# en deze scans duren lokaal 17 en 2 seconden. Voor een geheim is het moment
+# bovendien niet inwisselbaar: gevonden vóór de merge is een wijziging, gevonden
+# erna staat het in de historie en is intrekken de enige echte remedie. Daarom
+# draait dit op de PR, waar het geheim nog te keren is.
+#
+# **Waarom niet óók op `push: main`, zoals #778 het eerst opzette.** Omdat
+# gitleaks en trufflehog de héle historie scannen en niet de wijziging: de run ná
+# de merge herhaalt exact wat de PR-run een paar minuten eerder al zag. Die
+# tweede run voegde geen enkel signaal toe en was juist de enige bron van ruis —
+# snel opeenvolgende merges naar main annuleerden elkaars lopende run
+# (concurrency), en zo'n afgebroken run meldt zich als `failure` en mailt. Op één
+# drukke docs-avond in juli 2026 kwam de mailstroom vrijwel volledig hiervandaan.
+# Weggehaald: het beveiligingssignaal zit vóór de merge, de post-merge-run was
+# alleen kosten. Wat hiermee vervalt is dekking van een commit die rechtstreeks
+# op main wordt gezet zónder PR — en zo werkt deze repo niet.
 #
 # **Waarom op de Linux-runner en niet op de Mac.** De Mac heeft de drie
 # scanners staan, dus daar zou niets geïnstalleerd hoeven worden. Maar die Mac
 # is sinds #797 zowel de uitbrengpoort als de werkmachine van de committer, en
-# dit is de enige workflow die wél bij elke PR en elke push vuurt: dan vreet hij
-# kernen op de machine waar op dat moment `make check` draait. De server staat
-# sinds diezelfde verhuizing stil. Bijkomend voordeel: in een container bepaal
-# je zelf welke scannerversie erin zit, op een machine bepaalt Homebrew dat.
+# deze workflow vuurt bij elke PR: dan vreet hij kernen op de machine waar op dat
+# moment `make check` draait. De server staat sinds diezelfde verhuizing stil.
+# Bijkomend voordeel: in een container bepaal je zelf welke scannerversie erin
+# zit, op een machine bepaalt Homebrew dat.
 name: scans
 
 on:
   pull_request:
-  push:
-    branches: [main]
   workflow_dispatch:
 
-# **Waarom een superseded run mag worden afgebroken.** Twee merges naar main
-# binnen een paar minuten leverden op 24-07 een rode scan op die géén vondst
-# was: de lopende run werd opzij gezet door de volgende en meldde zich als
-# `failure`. Dat is de duurste faalvorm voor juist deze poort — een rood
-# beveiligingsvinkje dat niets betekent, leert je het volgende rode vinkje ook
-# weg te klikken.
-#
-# Afbreken kost hier niets, en dat is geen aanname over snelheid maar een
+# **Waarom een superseded run mag worden afgebroken.** Duwt iemand een nieuwe
+# commit op een PR terwijl de vorige scan nog loopt, dan zet die de lopende run
+# opzij. Afbreken kost hier niets, en dat is geen aanname over snelheid maar een
 # eigenschap van wat er gemeten wordt: `gitleaks git` en `trufflehog git`
 # scannen de héle historie, dus de latere run dekt onverkort alles wat de
 # afgebroken run zou hebben gezien. Bij een poort die alleen de wijziging bekijkt
 # zou dit fout zijn.
+#
+# De grootste bron van zulke afbrekingen — snel opeenvolgende merges naar main —
+# is met het schrappen van de `push`-trigger hierboven verdwenen; wat rest is het
+# zeldzamere geval van een PR die tijdens de run een nieuwe commit krijgt. Een
+# afgebroken run meldt zich als `failure` en kan mailen; dat het er nu bijna geen
+# meer zijn, is precies de bedoeling.
 concurrency:
   group: scans-${{ github.ref }}
   cancel-in-progress: true
@@ -104,8 +114,8 @@ jobs:
       # kapotte controle overkomt.
       #
       # **De `--retry` is er niet voor de netheid.** Deze poort haalt drie
-      # scanners van het net, bij élke PR en élke push, en dat is precies zo vaak
-      # een kans op een storing die niets met deze repo te maken heeft. Op
+      # scanners van het net, bij élke PR, en dat is precies zo vaak een kans op
+      # een storing die niets met deze repo te maken heeft. Op
       # 24-07 gebeurde dat twee keer op één middag: `curl: (22) … error: 504`,
       # een halve seconde na de checkout, en de poort stond rood terwijl
       # `check-secrets` en `sast` op datzelfde commit lokaal groen waren.
