@@ -51,6 +51,13 @@ const Set<String> uncoveredBaseline = {
   // (media_fetch_test.dart).
   'lib/utils/media_fetch.dart',
   'lib/utils/media_fetch_web.dart',
+  // NO EXECUTABLE LINES: `mem_asset_blob.dart` is een kale export-facade — één
+  // conditional export en verder niets. PLATFORM: `mem_asset_blob_web.dart` is
+  // de web-helft die een `blob:`-URL uit pakket-media-bytes maakt (#854); buiten
+  // de browser bestaat die API niet. De stub-helft (die null geeft) wordt wél
+  // getest (package_asset_resolver_media_test.dart).
+  'lib/utils/mem_asset_blob.dart',
+  'lib/utils/mem_asset_blob_web.dart',
   // NO EXECUTABLE LINES: `confirm_certificate.dart` bevat één typedef en verder
   // niets — de vorm waarin de drie netwerkpanelen de certificaatbevestiging
   // aanroepen. Het staat apart omdat het ophalen van een certificaat op

@@ -125,6 +125,17 @@ read a book to find out.
   geminificeerde `main.dart.js`, niet uit commentaar.
 
 ### Fixed
+- **Lokale video en audio uit een pakket spelen nu ook op web (#854).** Wie een
+  presentatie via de `?deck=`-deeplink op ocideck.librekat.nl opende, zag een
+  video-slide leeg blijven. `attachPackageAssetsToMem` zette alleen de
+  afbeeldingen van een `.ocideck`-pakket in de web-geheugenstore, dus een
+  `<video src="media/…">` wees naar een archief-intern pad dat in de browser geen
+  URL is. De resolver herschrijft video en audio nu net als beeld naar een
+  `mem:`-pad, en `createMediaController` maakt daar op web een `blob:`-URL van
+  (via `mem_asset_blob`, met het MIME-type uit de bestandsnaam) — de web-CSP
+  staat `media-src blob:` al toe. Op desktop verandert er niets; daar komt een
+  `mem:`-pad nooit langs. Online video's (YouTube/Vimeo of een remote URL) blijven
+  een aparte zaak (#852).
 - **De startknop presenteert weer vanaf de dia waar je stond, niet altijd vanaf
   dia 1 (#846).** Sinds #607 begon de gewone afspeelknop bewust bij het begin, om
   te voorkomen dat wie midden in een deck aan het werk was met de zaal middenin

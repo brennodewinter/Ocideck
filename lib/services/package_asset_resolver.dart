@@ -1,6 +1,7 @@
 import 'package:path/path.dart' as p;
 
 import '../models/deck.dart';
+import '../models/slide.dart';
 import 'file_service.dart' show PackageEntry;
 import 'image_service.dart';
 import 'slide_image_refs.dart';
@@ -44,11 +45,48 @@ Deck attachPackageAssetsToMem(
     return mem;
   }
 
+  // Video/audio krijgen dezelfde weg naar het geheugen, maar met de media-cap
+  // en zonder magic-byte-validatie (FILE_FORMAT §13, net als de desktop-import).
+  // Zonder dit bleef een pakket-video op web naar een archief-intern pad wijzen
+  // dat daar geen URL is (#854); [createMediaController] maakt van het
+  // resulterende `mem:`-pad een `blob:`-URL.
+  String? mediaMemPath(String ref) {
+    final clean = ref.split('#').first.trim();
+    if (clean.isEmpty || WebAssetStore.isMemPath(clean)) return null;
+    final scheme = Uri.tryParse(clean)?.scheme.toLowerCase();
+    if (scheme == 'http' || scheme == 'https') return null; // externe media
+    final resolved = p.posix.normalize(
+      mdDir == '.' ? clean : p.posix.join(mdDir, clean),
+    );
+    if (resolved.startsWith('..')) return null; // buiten het pakket
+    final cached = memFor[resolved];
+    if (cached != null) return cached;
+    final bytes = byName[resolved];
+    if (bytes == null ||
+        bytes.isEmpty ||
+        bytes.length > ImageService.maxMediaBytes) {
+      return null;
+    }
+    final mem = WebAssetStore.put(bytes, name: p.posix.basename(resolved));
+    memFor[resolved] = mem;
+    return mem;
+  }
+
+  Slide rewriteMedia(Slide s) {
+    var out = s;
+    final mv = mediaMemPath(s.videoPath);
+    if (mv != null) out = out.copyWith(videoPath: mv);
+    final ma = mediaMemPath(s.audioPath);
+    if (ma != null) out = out.copyWith(audioPath: ma);
+    return out;
+  }
+
   // Ook een `![…](…)` in de vrije tekst wijst naar een lid van het pakket, en
   // moet dus dezelfde weg naar het geheugen lopen — anders opent het deck met
   // een verwijzing naar een bestand dat alleen ín het archief bestaat.
   final slides = [
-    for (final s in deck.slides) rewriteSlideImagePaths(s, memPath),
+    for (final s in deck.slides)
+      rewriteMedia(rewriteSlideImagePaths(s, memPath)),
   ];
   return deck.copyWith(slides: slides);
 }

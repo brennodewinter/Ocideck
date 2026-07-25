@@ -51,6 +51,7 @@ export '../../services/split_run.dart'
 import '../../services/web_asset_store.dart';
 import '../../utils/bundled_asset.dart';
 import '../../utils/image_focal.dart';
+import '../../utils/mem_asset_blob.dart';
 import '../../utils/jaro_winkler.dart';
 import '../../utils/image_limits.dart';
 import '../../utils/media_fetch.dart';

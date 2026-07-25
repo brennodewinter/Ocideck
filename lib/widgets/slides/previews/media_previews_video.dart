@@ -59,7 +59,13 @@ class _VideoPreviewState extends State<_VideoPreview>
   String? resolveMediaPath() {
     switch (widget.source.kind) {
       case VideoSourceKind.localFile:
-        return _resolvePath(widget.slide.videoPath, widget.projectPath);
+        // Web: een pakket-video leeft als `mem:`-bytes ([WebAssetStore]);
+        // [createMediaController] maakt er een `blob:`-URL van. Zonder deze tak
+        // geeft resolveSlideAssetPath op web null en speelt lokale video nooit
+        // (#854).
+        final vp = widget.slide.videoPath;
+        if (WebAssetStore.isMemPath(vp)) return vp;
+        return _resolvePath(vp, widget.projectPath);
       case VideoSourceKind.remoteFile:
         // Live laden alleen als de gebruiker remote media heeft toegestaan én
         // de URL door de SSRF-gate komt; anders placeholder met de URL.
