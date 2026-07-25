@@ -1806,6 +1806,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Aanzetten in instellingen': 'Cumasaigh sna socruithe',
+  'Online media werkt niet in de webversie':
+      'Ní oibríonn meáin ar líne sa leagan gréasáin',
+  'De browser blokkeert media van een externe bron. Open deze presentatie in de app om online media te tonen.':
+      'Cuireann an brabhsálaí bac ar mheáin ó fhoinse sheachtrach. Oscail an láithreoireacht seo san aip chun meáin ar líne a thaispeáint.',
+  'Bron niet toegestaan': 'Foinse neamhcheadaithe',
+  'Deze URL is door de beveiliging geweigerd.':
+      'Dhiúltaigh an tslándáil don URL seo.',
   'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
       'Ábhar a thabhairt isteach ó chórais eile. Dhá fhoinse: déantar deck ineagarthóireachta as láithreoireachtaí ó PowerPoint (.pptx), Keynote (.key) agus Impress (.odp), agus déantar forbhreathnú bainistíochta amháin as tuairiscí OpenKAT (fillteán le JSON). Socraítear suíomh fhillteán OpenKAT faoi Chomhtháthuithe.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':

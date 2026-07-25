@@ -1798,6 +1798,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Aanzetten in instellingen': 'Ενεργοποίηση στις ρυθμίσεις',
+  'Online media werkt niet in de webversie':
+      'Τα διαδικτυακά μέσα δεν λειτουργούν στην έκδοση ιστού',
+  'De browser blokkeert media van een externe bron. Open deze presentatie in de app om online media te tonen.':
+      'Το πρόγραμμα περιήγησης αποκλείει τα μέσα από εξωτερική πηγή. Ανοίξτε αυτήν την παρουσίαση στην εφαρμογή για να εμφανιστούν τα διαδικτυακά μέσα.',
+  'Bron niet toegestaan': 'Μη επιτρεπτή πηγή',
+  'Deze URL is door de beveiliging geweigerd.':
+      'Αυτή η διεύθυνση URL απορρίφθηκε από την ασφάλεια.',
   'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
       'Εισαγωγή υλικού από άλλα συστήματα. Δύο πηγές: οι παρουσιάσεις από PowerPoint (.pptx), Keynote (.key) και Impress (.odp) γίνονται ένα επεξεργάσιμο deck και οι αναφορές OpenKAT (ένας φάκελος με JSON) γίνονται μία διοικητική επισκόπηση. Πού βρίσκεται ο φάκελος OpenKAT ορίζεται στις Ενσωματώσεις.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':

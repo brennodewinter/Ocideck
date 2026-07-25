@@ -2748,6 +2748,14 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Aanzetten in instellingen': 'Ayarlarda etkinleştir',
+  'Online media werkt niet in de webversie':
+      'Çevrimiçi medya web sürümünde çalışmıyor',
+  'De browser blokkeert media van een externe bron. Open deze presentatie in de app om online media te tonen.':
+      'Tarayıcı, harici bir kaynaktan gelen medyayı engelliyor. Çevrimiçi medyayı göstermek için bu sunuyu uygulamada açın.',
+  'Bron niet toegestaan': 'Kaynağa izin verilmiyor',
+  'Deze URL is door de beveiliging geweigerd.':
+      'Bu URL güvenlik tarafından reddedildi.',
   'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
       'Başka sistemlerden malzeme içeri alma. İki kaynak: PowerPoint (.pptx), Keynote (.key) ve Impress (.odp) sunumları düzenlenebilir bir deck olur, OpenKAT raporları (JSON içeren bir klasör) ise tek bir yönetim özetine dönüşür. OpenKAT klasörünün nerede olduğu Entegrasyonlar altında ayarlanır.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
