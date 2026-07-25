@@ -525,10 +525,10 @@ stateDiagram-v2
     connecting --> lobby: SDK reports InLobby
     connecting --> connected: admitted directly
     lobby --> connected: organiser admits
-    connected --> reconnecting: transient drop
-    reconnecting --> connected: recovered
     connected --> leaving: Leave
     leaving --> ended
+    connected --> reconnecting: transient drop
+    reconnecting --> connected: recovered
     validating --> failed: invalid / unsupported
     provisioning --> failed: broker unavailable / quota
     connecting --> failed: anonymous join disabled / locked
