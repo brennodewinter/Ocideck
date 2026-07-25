@@ -263,10 +263,75 @@ Widget _captionOverlay(
   );
 }
 
-/// Placeholder voor online media die niet live geladen wordt (de remote-media-
-/// gate staat uit, of de URL is afgekeurd). Toont de URL zodat de gebruiker ziet
-/// waar de media vandaan zou komen, plus een hint dat online media uit staat.
+/// Waaróm online media niet live geladen wordt — de drie gevallen die elk een
+/// eigen melding (en wel/geen instelling-sprong) verdienen.
+enum RemoteBlockedReason {
+  /// Op web blokkeert de browser externe media sowieso (de web-CSP), ongeacht de
+  /// instelling. Aanzetten helpt daar niet.
+  web,
+
+  /// De instelling 'online media' staat uit (de desktop-standaard). Hier hoort
+  /// de sprong naar Instellingen → Beveiliging.
+  settingOff,
+
+  /// De instelling staat aan, maar de bron-URL is door de beveiliging (de
+  /// SSRF-gate) afgewezen. Aanzetten is al gebeurd; het ligt aan de URL.
+  urlRejected,
+}
+
+/// Bepaalt de reden uit het platform en de instelling. Puur en publiek zodat een
+/// test de drie gevallen — inclusief het web-geval dat onder `flutter test` niet
+/// vanzelf ontstaat — kan vastpinnen zonder de widgetboom.
+@visibleForTesting
+RemoteBlockedReason remoteBlockedReasonFor({
+  required bool isWeb,
+  required bool allowRemoteMedia,
+}) {
+  if (isWeb) return RemoteBlockedReason.web;
+  if (!allowRemoteMedia) return RemoteBlockedReason.settingOff;
+  return RemoteBlockedReason.urlRejected;
+}
+
+/// Placeholder voor online media die niet live geladen wordt. Toont de URL zodat
+/// de gebruiker ziet waar de media vandaan zou komen, plus een reden die past
+/// bij wáárom het niet speelt — en, waar dat helpt, een sprong naar de
+/// instelling (#852).
+///
+/// Drie situaties, elk met een eigen eerlijke reden:
+///  * **web** — de browser blokkeert media van een externe bron, ongeacht de
+///    instelling (de web-CSP van `web/index.html`). Aanzetten helpt daar niet,
+///    dus geen knop; de melding benoemt het webspecifieke gedrag.
+///  * **de instelling staat uit** — de gewone desktop-standaard, bewust uit voor
+///    de privacy. Hier hoort de sprong naar Instellingen → Beveiliging, maar
+///    alleen in de editor-preview (daar zet [_SlideLinkScope.onEnableOnlineMedia]
+///    de callback; in presenter/thumbnails/export/play-only is hij null).
+///  * **de instelling staat aan maar de URL is geweigerd** — de SSRF-gate wees
+///    de bron af. Aanzetten is al gebeurd; het ligt aan de URL, dus geen knop.
 Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
+  final l10n = context.l10n;
+  final reason = remoteBlockedReasonFor(
+    isWeb: kIsWeb,
+    allowRemoteMedia: _SlideLinkScope.allowRemoteMediaOf(context),
+  );
+
+  final String title;
+  String? detail;
+  VoidCallback? onEnable;
+  switch (reason) {
+    case RemoteBlockedReason.web:
+      title = l10n.d('Online media werkt niet in de webversie');
+      detail = l10n.d(
+        'De browser blokkeert media van een externe bron. Open deze presentatie in de app om online media te tonen.',
+      );
+    case RemoteBlockedReason.settingOff:
+      title = l10n.d('Online media staat uit');
+      // De sprong naar de instelling bestaat alleen in de editor-preview.
+      onEnable = _SlideLinkScope.onEnableOnlineMediaOf(context);
+    case RemoteBlockedReason.urlRejected:
+      title = l10n.d('Bron niet toegestaan');
+      detail = l10n.d('Deze URL is door de beveiliging geweigerd.');
+  }
+
   return Container(
     color: AppTheme.slideRuleSoft,
     padding: const EdgeInsets.all(16),
@@ -281,7 +346,7 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
           ),
           const SizedBox(height: 8),
           Text(
-            context.l10n.d('Online media staat uit'),
+            title,
             style: TextStyle(
               color: AppTheme.slideInkMuted,
               fontSize: 12,
@@ -289,6 +354,14 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
             ),
             textAlign: TextAlign.center,
           ),
+          if (detail != null) ...[
+            const SizedBox(height: 4),
+            Text(
+              detail,
+              style: TextStyle(color: AppTheme.slideInkSoft, fontSize: 11),
+              textAlign: TextAlign.center,
+            ),
+          ],
           const SizedBox(height: 4),
           Text(
             url,
@@ -297,6 +370,31 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
+          if (onEnable != null) ...[
+            const SizedBox(height: 8),
+            TextButton.icon(
+              onPressed: onEnable,
+              icon: const Icon(Icons.settings_outlined, size: 16),
+              label: Text(l10n.d('Aanzetten in instellingen')),
+              // Const dia-inkt, geen mode-afhankelijke UI-accent: wat op een dia
+              // landt volgt het app-thema niet (zie slide_content_theme_
+              // independent_test). Het icoon maakt de knop herkenbaar zonder
+              // accentkleur.
+              style: TextButton.styleFrom(
+                foregroundColor: AppTheme.slideInk,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                textStyle: const TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
         ],
       ),
     ),

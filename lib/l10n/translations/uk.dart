@@ -1788,6 +1788,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Aanzetten in instellingen': 'Увімкнути в налаштуваннях',
+  'Online media werkt niet in de webversie':
+      'Онлайн-медіа не працюють у веб-версії',
+  'De browser blokkeert media van een externe bron. Open deze presentatie in de app om online media te tonen.':
+      'Браузер блокує медіа із зовнішнього джерела. Відкрийте цю презентацію в застосунку, щоб показати онлайн-медіа.',
+  'Bron niet toegestaan': 'Джерело не дозволено',
+  'Deze URL is door de beveiliging geweigerd.':
+      'Цю URL-адресу відхилила система безпеки.',
   'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
       'Втягування матеріалу з інших систем. Два джерела: презентації з PowerPoint (.pptx), Keynote (.key) та Impress (.odp) стають редагованою колодою, а звіти OpenKAT (тека з JSON) стають єдиним управлінським оглядом. Розташування теки OpenKAT задається в Інтеграціях.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':

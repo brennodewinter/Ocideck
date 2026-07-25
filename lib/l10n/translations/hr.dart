@@ -1777,6 +1777,13 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Aanzetten in instellingen': 'Omogući u postavkama',
+  'Online media werkt niet in de webversie':
+      'Mrežni mediji ne rade u web-verziji',
+  'De browser blokkeert media van een externe bron. Open deze presentatie in de app om online media te tonen.':
+      'Preglednik blokira medije iz vanjskog izvora. Otvorite ovu prezentaciju u aplikaciji za prikaz mrežnih medija.',
+  'Bron niet toegestaan': 'Izvor nije dopušten',
+  'Deze URL is door de beveiliging geweigerd.': 'Ovaj URL odbila je sigurnost.',
   'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
       'Unos materijala iz drugih sustava. Dva izvora: prezentacije iz PowerPoint (.pptx), Keynote (.key) i Impress (.odp) postaju uredljiv deck, a izvješća OpenKAT (mapa s JSON-om) postaju jedan upravljački pregled. Gdje se nalazi mapa OpenKAT postavlja se pod Integracije.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':

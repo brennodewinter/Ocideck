@@ -1793,6 +1793,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Aanzetten in instellingen': 'Активиране в настройките',
+  'Online media werkt niet in de webversie':
+      'Онлайн мултимедията не работи в уеб версията',
+  'De browser blokkeert media van een externe bron. Open deze presentatie in de app om online media te tonen.':
+      'Браузърът блокира мултимедия от външен източник. Отворете тази презентация в приложението, за да се покаже онлайн мултимедията.',
+  'Bron niet toegestaan': 'Източникът не е разрешен',
+  'Deze URL is door de beveiliging geweigerd.':
+      'Този URL адрес беше отхвърлен от защитата.',
   'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
       'Внасяне на материал от други системи. Два източника: презентациите от PowerPoint (.pptx), Keynote (.key) и Impress (.odp) стават редактируемо тесте, а отчетите OpenKAT (папка с JSON) стават един управленски преглед. Къде се намира папката OpenKAT се задава в Интеграции.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':

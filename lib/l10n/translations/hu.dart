@@ -1775,6 +1775,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Aanzetten in instellingen': 'Engedélyezés a beállításokban',
+  'Online media werkt niet in de webversie':
+      'Az online média nem működik a webes verzióban',
+  'De browser blokkeert media van een externe bron. Open deze presentatie in de app om online media te tonen.':
+      'A böngésző blokkolja a külső forrásból származó médiát. Nyissa meg ezt a bemutatót az alkalmazásban az online média megjelenítéséhez.',
+  'Bron niet toegestaan': 'A forrás nem engedélyezett',
+  'Deze URL is door de beveiliging geweigerd.':
+      'Ezt az URL-t a biztonság elutasította.',
   'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
       'Anyag behozatala más rendszerekből. Két forrás: a PowerPoint (.pptx), Keynote (.key) és Impress (.odp) programból származó bemutatók szerkeszthető deckké válnak, az OpenKAT-jelentések (egy mappa JSON-nal) pedig egyetlen vezetői áttekintéssé. Hogy hol van az OpenKAT-mappa, az Integrációk alatt állítható be.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':

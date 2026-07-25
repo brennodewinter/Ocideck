@@ -105,6 +105,21 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Changed
+- **Online media die niet speelt, zegt nu wáárom — en biedt de weg terug
+  (#852).** De placeholder onder een online video of afbeelding meldde altijd
+  "Online media staat uit", ook als dat niet de oorzaak was. Nu zijn er drie
+  eerlijke gevallen: in de webversie blokkeert de browser externe media sowieso
+  (de web-CSP), en aanzetten helpt daar niet — de melding zegt dat en verwijst
+  naar de app; staat de instelling uit, dan hoort daar een knop bij die
+  rechtstreeks naar *Instellingen → Beveiliging* springt; en staat de instelling
+  aan maar is de bron-URL door de SSRF-controle geweigerd, dan benoemt de melding
+  dát. De knop verschijnt alléén in de editor-preview, waar de instelling te
+  bereiken is — in de presentatiemodus, de slidestrook, de export en de
+  play-only-webdemo blijft hij weg (de `onEnableOnlineMedia`-callback is daar
+  null). De reden zelf komt uit `remoteBlockedReasonFor`, zodat een test de drie
+  gevallen kan vastpinnen.
+
 ### Fixed
 - **Mermaid-diagrammen renderden niet in de webversie (#851).** Een
   beslisboom-slide bleef op web een leeg vlak. De oorzaak zat een laag dieper

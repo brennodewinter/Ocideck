@@ -1793,6 +1793,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Aanzetten in instellingen': 'Attiva fis-settings',
+  'Online media werkt niet in de webversie':
+      'Il-midja online ma taħdimx fil-verżjoni tal-web',
+  'De browser blokkeert media van een externe bron. Open deze presentatie in de app om online media te tonen.':
+      'Il-browser jimblokka l-midja minn sors estern. Iftaħ din il-preżentazzjoni fl-app biex turi l-midja online.',
+  'Bron niet toegestaan': 'Sors mhux permess',
+  'Deze URL is door de beveiliging geweigerd.':
+      'Din l-URL ġiet miċħuda mis-sigurtà.',
   'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
       'Iddaħħal materjal minn sistemi oħra. Żewġ sorsi: il-preżentazzjonijiet minn PowerPoint (.pptx), Keynote (.key) u Impress (.odp) isiru deck editabbli, u r-rapporti OpenKAT (folder bl-JSON) isiru ħarsa ġenerali waħda għall-maniġment. Fejn jinsab il-folder OpenKAT jiġi ssettjat taħt Integrazzjonijiet.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':

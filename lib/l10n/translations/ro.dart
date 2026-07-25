@@ -1788,6 +1788,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Aanzetten in instellingen': 'Activează în setări',
+  'Online media werkt niet in de webversie':
+      'Mediile online nu funcționează în versiunea web',
+  'De browser blokkeert media van een externe bron. Open deze presentatie in de app om online media te tonen.':
+      'Browserul blochează media dintr-o sursă externă. Deschideți această prezentare în aplicație pentru a afișa media online.',
+  'Bron niet toegestaan': 'Sursă nepermisă',
+  'Deze URL is door de beveiliging geweigerd.':
+      'Această adresă URL a fost respinsă de securitate.',
   'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
       'Aducerea de material din alte sisteme. Două surse: prezentările din PowerPoint (.pptx), Keynote (.key) și Impress (.odp) devin un deck editabil, iar rapoartele OpenKAT (un folder cu JSON) devin o singură privire de ansamblu pentru conducere. Unde se află folderul OpenKAT se setează la Integrări.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':

@@ -1746,6 +1746,13 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Aanzetten in instellingen': 'cherlu\'boghDaq yIchu\'',
+  'Online media werkt niet in de webversie': 'web mIwDaq online media vumbe\'',
+  'De browser blokkeert media van een externe bron. Open deze presentatie in de app om online media te tonen.':
+      'Hur mungvo\' media bot browser. online media \'angmeH, appDaq cha\'nav vam yIpoSmoH.',
+  'Bron niet toegestaan': 'mung chaw\'be\'lu\'',
+  'Deze URL is door de beveiliging geweigerd.':
+      'Qan meqmo\' URL vam lajlu\'be\'.',
   'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
       'latlh patmeyvo\' De\' qem. cha\' De\' Daq: PowerPoint (.pptx), Keynote (.key), Impress (.odp) je nge\'wI\'mey deck choH laH moj, \'ej OpenKAT ja\'chuqmey (JSON ngaSbogh ngaSwI\') wa\' che\'wI\' Sovmey moj. OpenKAT ngaSwI\' Daq muvmoHmeHDaq wIvlu\'.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
