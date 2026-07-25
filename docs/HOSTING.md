@@ -175,6 +175,17 @@ one *is* honoured from a meta tag — so the header only reinforces what ships.
 For a publicly reachable deployment these stop being recommendations — see
 §4b.2 and the release conditions in the checklist.
 
+**Apache hosts: it already ships.** The bundle carries a `web/.htaccess` (copied
+to `build/web/.htaccess` by `flutter build web`) that sets the full CSP header,
+`X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy:
+no-referrer`, a `Permissions-Policy`, and HSTS. It takes effect automatically —
+**if** `mod_headers` is enabled and `AllowOverride` for the web root permits
+`FileInfo` (or `All`). Where `AllowOverride` is `Off`, Apache ignores the file
+silently; move the same directives into the vhost/server config. Non-Apache hosts
+ignore `.htaccess` entirely and still need the snippets above. The header CSP is
+kept byte-for-byte identical to the `<meta>` one by a test and the web-hardening
+check.
+
 ### `Strict-Transport-Security`
 
 Send it, and send it on every response:

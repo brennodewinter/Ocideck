@@ -1,0 +1,62 @@
+# OciDeck — HTTP security response headers for an Apache static host.
+#
+# WHY THIS FILE EXISTS
+# The web bundle ships a Content-Security-Policy and a Referrer-Policy as <meta>
+# tags inside index.html, but a browser ignores `frame-ancestors` (and
+# `sandbox`/`report-*`) unless the CSP arrives as a real HTTP response header —
+# see the long comment in web/index.html. Several hardening headers
+# (Strict-Transport-Security, X-Frame-Options, Permissions-Policy) have no <meta>
+# form at all. This file supplies the header form so those directives are
+# actually enforced, and it travels *with* the bundle: `flutter build web` copies
+# web/.htaccess to build/web/.htaccess, so the hardening ships next to the code
+# instead of living only in server config nobody re-checks.
+#
+# PRECONDITIONS ON THE HOST
+#   * mod_headers must be enabled (`a2enmod headers`).
+#   * `AllowOverride` for the web root must permit `FileInfo` (or `All`) so a
+#     per-directory .htaccess may set headers. Where AllowOverride is Off — the
+#     common hardened default — this file is ignored and the same directives must
+#     go in the vhost/server config. The exact block is in docs/HOSTING.md §3 and
+#     the per-server snippets in docs/BUILD.md.
+#   * Apache denies serving `.ht*` files by default, so this file is applied but
+#     never itself downloadable. The bundle's SHA256SUMS lists it for
+#     completeness; nothing fetches it.
+#
+# The CSP value below is a byte-for-byte copy of the <meta> CSP in
+# web/index.html. Delivered as a header it makes `frame-ancestors 'none'`
+# enforceable; the two policies are enforced cumulatively (per directive the
+# stricter one wins), so keeping them identical avoids any surprise. A test —
+# test/web_htaccess_headers_test.dart — fails the build if the two ever diverge.
+
+<IfModule mod_headers.c>
+  # Mirror the meta CSP exactly. The only practical difference is that
+  # frame-ancestors is now honoured (clickjacking control).
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https:; worker-src 'self' blob:; child-src 'self' blob: data:; frame-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'"
+
+  # Clickjacking control for browsers that predate frame-ancestors. Matches it.
+  Header always set X-Frame-Options "DENY"
+
+  # No MIME sniffing — a response is served as its declared Content-Type.
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Reinforces the <meta name="referrer"> the bundle already carries: the deck's
+  # own URL must not leak to a URL-import target in the Referer header.
+  Header always set Referrer-Policy "no-referrer"
+
+  # Powerful features the app never uses are switched off; the media-related ones
+  # stay `self` because the presenter goes fullscreen and video slides play/PiP
+  # first-party. (Remote embeds are blocked on web by the CSP frame-src anyway.)
+  Header always set Permissions-Policy "accelerometer=(), autoplay=(self), camera=(), display-capture=(), encrypted-media=(self), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(self), usb=()"
+
+  # HSTS. Conservative on purpose: two years + includeSubDomains, but NO preload.
+  # includeSubDomains here binds only *.<this-host>, not sibling subdomains of the
+  # parent domain; preload is the sticky, hard-to-undo commitment and is left out.
+  # The site is served over HTTPS only, so this costs nothing and closes the
+  # plaintext-downgrade window on the first schemeless request. See HOSTING.md §3.
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+
+  # Cross-Origin-Embedder-Policy (ZAP 90004) is deliberately NOT set. `require-corp`
+  # can break cross-origin resources and needs testing against the URL-import and
+  # any embed a permissive deployment re-enables; it is the weakest of the
+  # findings and not worth shipping blind. Revisit with a real cross-origin test.
+</IfModule>

@@ -105,6 +105,25 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Security
+- **De webbundel draagt zijn beveiligingsheaders nu zelf mee (#849).** Een
+  ZAP-scan tegen de live host meldde zeven ontbrekende responseheaders met één
+  oorzaak: de statische host stuurde er geen. De CSP en de Referrer-Policy zaten
+  al als `<meta>` in de pagina, maar `frame-ancestors`, HSTS, X-Frame-Options en
+  Permissions-Policy dwingt een browser alléén als échte header af — precies wat
+  een meta-tag niet kan. Er ligt nu een `web/.htaccess` naast `index.html` die
+  die headers zet; `flutter build web` kopieert hem mee naar `build/web`, dus de
+  hardening reist met de bundel in plaats van los in serverconfig te leven. Op
+  een Apache-host met `mod_headers` en `AllowOverride` werkt hij vanzelf; staat
+  `AllowOverride` uit, dan horen dezelfde regels in de vhost (docs/HOSTING.md §3,
+  docs/BUILD.md). De CSP-header is een byte-voor-byte kopie van de meta-CSP,
+  bewaakt door een test en de web-hardeningpoort zodat de twee niet uiteen
+  kunnen lopen. Bewust conservatief: HSTS met `includeSubDomains` maar zonder
+  `preload`, en Cross-Origin-Embedder-Policy blijft eraf — `require-corp` kan
+  cross-origin resources breken en vraagt eerst een test. De ZAP-baseline zet
+  daarnaast 10027 ("Suspicious Comments") op IGNORE: die woorden komen uit de
+  geminificeerde `main.dart.js`, niet uit commentaar.
+
 ### Fixed
 - **De presentatie-import was op web onbereikbaar — juist de bron die op web
   hóórt te werken.** De module *Importeren* stond op web helemaal uit, met "de

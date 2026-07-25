@@ -9,6 +9,9 @@
 //   * CanvasKit is self-hosted (local wasm + useLocalCanvasKit flag), so the
 //     engine never fetches it from the gstatic CDN.
 //   * The UI font is bundled, so text needs no fonts.gstatic.com fetch.
+//   * .htaccess ships next to the bundle and carries the header-form hardening
+//     (frame-ancestors/HSTS/X-Frame-Options/Permissions-Policy), with its CSP
+//     header mirroring the meta CSP (#849).
 
 import 'dart:io';
 
@@ -117,6 +120,45 @@ void main() {
       _extractReferrerPolicy(html) == 'no-referrer',
       'index.html must carry <meta name="referrer" content="no-referrer">.',
     );
+  }
+
+  // ── .htaccess ships the header-form hardening (#849) ────────────────────────
+  // The bundle carries an Apache .htaccess so a host with mod_headers +
+  // AllowOverride sends frame-ancestors/HSTS/X-Frame-Options/Permissions-Policy
+  // as real response headers — the directives a <meta> CSP can't enforce. This
+  // check doubles as proof that `flutter build web` actually copied the dotfile:
+  // its basename starts with '.', which the service-worker manifest step filters
+  // out, but the web-resource copy does not — a distinction worth pinning so a
+  // Flutter upgrade that changed it wouldn't ship a bundle missing its headers.
+  final htaccess = File('build/web/.htaccess');
+  if (!htaccess.existsSync()) {
+    failures.add(
+      'build/web/.htaccess is missing (header-form hardening, #849).',
+    );
+  } else if (indexHtml.existsSync()) {
+    final conf = htaccess.readAsStringSync();
+    final headerCsp = RegExp(
+      r'Header\s+always\s+set\s+Content-Security-Policy\s+"([^"]*)"',
+      caseSensitive: false,
+    ).firstMatch(conf)?.group(1);
+    // The header CSP must mirror the meta CSP byte-for-byte: they are enforced
+    // cumulatively, and a drift means the header stops covering what the page
+    // promises. test/web_htaccess_headers_test.dart guards the same invariant on
+    // the source files; this is the built-bundle end of it.
+    require(
+      headerCsp != null &&
+          headerCsp == _extractCsp(indexHtml.readAsStringSync()),
+      '.htaccess CSP header must mirror the index.html meta CSP (#849).',
+    );
+    for (final h in const [
+      'X-Frame-Options',
+      'X-Content-Type-Options',
+      'Referrer-Policy',
+      'Strict-Transport-Security',
+      'Permissions-Policy',
+    ]) {
+      require(conf.contains(h), '.htaccess must set $h (#849).');
+    }
   }
 
   // ── CanvasKit is self-hosted, not pulled from the gstatic CDN ───────────────
