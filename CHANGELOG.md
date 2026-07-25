@@ -121,6 +121,19 @@ read a book to find out.
   gevallen kan vastpinnen.
 
 ### Fixed
+- **Mermaid-diagrammen tonen weer kleur en tekst, in plaats van zwarte vlakken
+  (#862).** Nadat #851 het diagram op web weer liet verschijnen, bleek het een
+  laag dieper alsnog stuk: knopen kwamen als zwarte vlakken zonder leesbare tekst
+  en edges als zwarte wiggen. Oorzaak: het diagram wordt met `flutter_svg`
+  getekend, dat geen `<style>`/CSS-class-styling leest — en mermaid stopt zijn
+  hele theme (node-fill, stroke, `fill:none` op edges, tekstkleur) juist in zo'n
+  `<style>`-blok. `sanitize_svg.dart` verwijdert dat blok terecht (flutter_svg
+  negeert het toch), waarna alles op de SVG-standaard `fill:black` terugvalt. De
+  fix laat de browser die mermaid al rendert (de WebView op desktop, de app-pagina
+  op web) de CSS-cascade oplossen en zet de resulterende stijlen als inline
+  attributen — één gedeelde inliner (`assets/web_export/svg_style_inline.js`) voor
+  beide renderpaden. Raakt zowel web als desktop; het echte renderen is visueel
+  geverifieerd met de gebundelde mermaid.
 - **Mermaid-diagrammen renderden niet in de webversie (#851).** Een
   beslisboom-slide bleef op web een leeg vlak. De oorzaak zat een laag dieper
   dan de CSP: de renderer tekent de diagrammen in een verborgen WebView en leest

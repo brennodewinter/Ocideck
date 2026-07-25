@@ -65,6 +65,18 @@ void main() {
         reason: 'de gebundelde mermaid moet bestaan op $assetKey',
       );
     });
+
+    test('kSvgStyleInlineScriptUrl is assets/ + de assetsleutel en bestaat', () {
+      // Zelfde afleiding voor de stijl-inliner (#862): mermaids theme zit in een
+      // `<style>`-blok dat flutter_svg negeert, deze inliner zet het inline.
+      const assetKey = 'assets/web_export/svg_style_inline.js';
+      expect(kSvgStyleInlineScriptUrl, 'assets/$assetKey');
+      expect(
+        File(assetKey).existsSync(),
+        isTrue,
+        reason: 'de gebundelde stijl-inliner (#862) moet bestaan op $assetKey',
+      );
+    });
   });
 
   group('de service kiest het web-pad en houdt één config', () {
@@ -97,6 +109,13 @@ void main() {
         contains(r'mermaid.initialize(${jsonEncode(kMermaidInitConfig)})'),
       );
     });
+
+    test('de WebView bundelt en past de gedeelde stijl-inliner toe (#862)', () {
+      // Dezelfde inliner-asset als de web-kant, in de WebView-HTML gebundeld en
+      // op de render toegepast — zodat flutter_svg mermaids kleuren/tekst leest.
+      expect(service, contains('svg_style_inline.js'));
+      expect(service, contains('__ocideckInlineSvgStyles'));
+    });
   });
 
   test('de web-renderer laadt de bundel via de gedeelde URL en config', () {
@@ -109,6 +128,12 @@ void main() {
       contains('kMermaidInitConfig'),
       reason: 'de web-kant moet dezelfde instellingen gebruiken',
     );
+    expect(
+      web,
+      contains('kSvgStyleInlineScriptUrl'),
+      reason: 'de web-kant moet de stijl-inliner (#862) laden',
+    );
+    expect(web, contains('__ocideckInlineSvgStyles'));
   });
 
   test('de io-stub geeft null en wordt nooit voor het echt gebruikt', () async {

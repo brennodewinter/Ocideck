@@ -49,3 +49,10 @@ const Map<String, Object?> kMermaidInitConfig = {
 /// (geen 'unsafe-inline', geen blob: in script-src), daarom de URL en niet de
 /// tekst. Een test leidt deze waarde af uit pubspec en bewaakt dat hij klopt.
 const String kMermaidWebScriptUrl = 'assets/assets/web_export/mermaid.min.js';
+
+/// De URL van de gebundelde SVG-stijl-inliner (#862), op web geserveerd als
+/// `<script src>`. Zelfde dubbele-`assets/`-sleutel en CSP-reden als
+/// [kMermaidWebScriptUrl]: flutter_svg leest geen `<style>`, dus deze inliner
+/// zet mermaids theme-styling als inline attributen vóór het tekenen.
+const String kSvgStyleInlineScriptUrl =
+    'assets/assets/web_export/svg_style_inline.js';
