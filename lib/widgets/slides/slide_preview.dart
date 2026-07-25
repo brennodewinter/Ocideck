@@ -143,12 +143,20 @@ class _SlideLinkScope extends InheritedWidget {
   /// web valt de tab om — en web is de demo-route (#612).
   final int? decodeMaxEdge;
 
+  /// Wat er gebeurt als de gebruiker vanaf een geblokkeerde-online-media-
+  /// placeholder online media wil aanzetten: een sprong naar de instelling.
+  /// Alleen de editor-preview zet dit; in de presenter, thumbnails, export en de
+  /// play-only-webdemo is het null en verschijnt er geen knop — daar zijn de
+  /// instellingen niet te openen (#852).
+  final VoidCallback? onEnableOnlineMedia;
+
   const _SlideLinkScope({
     required this.onTapLink,
     this.hasBottomTlp = false,
     this.allowRemoteMedia = false,
     this.mediaRedacted = false,
     this.decodeMaxEdge,
+    this.onEnableOnlineMedia,
     required super.child,
   });
 
@@ -183,13 +191,18 @@ class _SlideLinkScope extends InheritedWidget {
       .dependOnInheritedWidgetOfExactType<_SlideLinkScope>()
       ?.decodeMaxEdge;
 
+  static VoidCallback? onEnableOnlineMediaOf(BuildContext context) => context
+      .dependOnInheritedWidgetOfExactType<_SlideLinkScope>()
+      ?.onEnableOnlineMedia;
+
   @override
   bool updateShouldNotify(_SlideLinkScope oldWidget) =>
       oldWidget.onTapLink != onTapLink ||
       oldWidget.hasBottomTlp != hasBottomTlp ||
       oldWidget.allowRemoteMedia != allowRemoteMedia ||
       oldWidget.mediaRedacted != mediaRedacted ||
-      oldWidget.decodeMaxEdge != decodeMaxEdge;
+      oldWidget.decodeMaxEdge != decodeMaxEdge ||
+      oldWidget.onEnableOnlineMedia != onEnableOnlineMedia;
 }
 
 /// Tekst met inline-markdown (**vet**, *cursief*, `code`, ~~door~~, [link](url)).
@@ -426,6 +439,11 @@ class SlidePreviewWidget extends StatelessWidget {
   /// client produces an English report from a Dutch UI.
   final String reportLanguage;
 
+  /// Sprong naar de online-media-instelling vanaf een geblokkeerde-media-
+  /// placeholder (#852). Alleen de editor-preview zet dit; elders (presenter,
+  /// thumbnails, export, play-only) blijft het null en verschijnt er geen knop.
+  final VoidCallback? onEnableOnlineMedia;
+
   const SlidePreviewWidget({
     super.key,
     required this.slide,
@@ -465,6 +483,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.scopeCia = const {},
     this.reportLanguage = '',
     this.decodeMaxEdge,
+    this.onEnableOnlineMedia,
   });
 
   @override
@@ -516,6 +535,7 @@ class SlidePreviewWidget extends StatelessWidget {
                 allowRemoteMedia: allowRemoteMedia,
                 mediaRedacted: slide.mediaRedacted,
                 decodeMaxEdge: decodeMaxEdge,
+                onEnableOnlineMedia: onEnableOnlineMedia,
                 child: _buildSlide(slide.projectionWithViewLimit()),
               ),
             ),

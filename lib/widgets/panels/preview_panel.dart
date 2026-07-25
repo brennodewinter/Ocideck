@@ -17,6 +17,7 @@ import '../../services/slide_layout_metrics.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
+import '../dialogs/settings_dialog.dart';
 import '../slides/slide_preview.dart';
 
 /// Of het preview-paneel ingeklapt is (UI-voorkeur, app-breed).
@@ -472,6 +473,15 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                   enableMedia: true,
                   autoplayMedia: false,
                   allowRemoteMedia: settings.allowRemoteMedia,
+                  // Alleen hier, in de editor-preview, is de instelling te
+                  // bereiken: een geblokkeerde-online-media-placeholder krijgt
+                  // dan een knop die rechtstreeks naar Beveiliging springt
+                  // (#852). Elders blijft de callback null en verschijnt er geen
+                  // knop.
+                  onEnableOnlineMedia: () => SettingsDialog.show(
+                    context,
+                    initialSection: SettingsSection.security,
+                  ),
                 ),
               ),
             ),
