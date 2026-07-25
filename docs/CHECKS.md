@@ -41,6 +41,27 @@ local sweep that also covers licences and dependency health:
 make check-full   # check + licenses + sbom-verify + deps-check + check-web + deps-outdated
 ```
 
+### `make check-release`
+
+The **ready-for-tagging** pass. Run it by hand right before `git push origin
+v*`, because pushing the tag is what triggers the whole release chain
+([`release.yml`](../.forgejo/workflows/release.yml)) — build, publish, live
+deploy — and this is the last moment a finding can hold a release back instead
+of ending up live.
+
+```sh
+make check-release   # check-full (blocking) + an advisory ZAP/DAST scan of the live host
+```
+
+It runs everything in `check-full` as a hard gate, then a
+[`make dast`](#make-dast-advisory) baseline against the live host
+(`DAST_LIVE_URL`, default `https://ocideck.librekat.nl/`) as an **advisory**
+step: a ZAP warning is something to weigh and, if real, file as an issue — not
+something that reddens the command. Without a container runtime the DAST step
+skips itself. Two more things belong in the same pre-tag ritual but are **not**
+automated here — run [`make linux-gate`](#continuous-integration) and glance at
+open `security`/`privacy` issues on the tracker before you tag.
+
 ## Localisation helpers
 
 Every translatable string must exist in all 32 languages, so adding one used to
@@ -808,13 +829,14 @@ also declares them, but see the [CI note](#continuous-integration).)
   open-source equivalent and is what this was built against. The ZAP Homebrew
   cask is *not* an option — it fails the macOS Gatekeeper check and is scheduled
   for removal.
-- **Advisory, in no check aggregate.** It stays out of `check`/`check-full`, but
-  [`scripts/deploy_web.sh`](../scripts/deploy_web.sh) runs it once — advisory and
-  non-blocking — right after a deploy, with `DAST_URL` pointing at the live host,
-  because that is the only run where the headers under test are the real host's.
-  A finding never rolls back a deploy; it is for a human to read. In CI (no
-  container runtime) the step skips itself; `OCIDECK_DEPLOY_SKIP_DAST=1` skips it
-  by hand.
+- **Advisory, not a gate — but part of the pre-tag pass.** It stays out of
+  `check`/`check-full`, but [`make check-release`](#make-check-release) runs it
+  once, advisory and non-blocking, against the live host — the quality slag you
+  run by hand before `git push origin v*`. That timing is the point: a finding
+  before the tag can still hold back a release, whereas a scan after deploy only
+  speaks once the site is already live. A finding is for a human to weigh and, if
+  real, file as an issue (this is how #849 came to be). Without a container
+  runtime the step skips itself with a clear message.
 - **Be honest about what it can see.** The CSP is already pinned exactly by
   [`make check-web`](#make-check-web) from the meta tag, so ZAP does not improve
   on that. Its spider cannot traverse the UI — CanvasKit paints into a canvas,
