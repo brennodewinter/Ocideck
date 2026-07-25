@@ -13,6 +13,7 @@ import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
+import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Discovery prompt: opening a deck that carries Informatieveiligheid slide
@@ -25,6 +26,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Beyond *when* it fires, the banner has to leave the user three ways out —
 /// look first, accept, decline — and it must not outlive the presentation it
 /// is talking about.
+/// Eén frame op de nep-klok, en hoeveel pomp-stappen we de klok vooruitzetten
+/// voordat we frames zonder tijdsverloop pompen. Zie de uitgebreide uitleg in
+/// `shell_present_and_close_test.dart`: zo hangt het meldingsbudget aan het
+/// aantal stappen en niet aan de klok.
+const _frame = Duration(milliseconds: 16);
+const _clockSteps = 100;
+
 void main() {
   const promptText =
       'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. '
@@ -87,6 +95,38 @@ void main() {
     expect(sec.loading, isFalse);
     expect(sec.enabled, isFalse);
     return (container, container.read(tabsProvider.notifier));
+  }
+
+  Finder presentButton() => find.descendant(
+    of: find.byType(AppBar),
+    matching: find.byIcon(Icons.play_circle_outline),
+  );
+
+  /// Start de presentatie door op de presenteerknop te tikken en pomp tot de
+  /// fullscreen-route er staat. Binnen [WidgetTester.runAsync] omdat het openen
+  /// het platform naar het aantal schermen vraagt — in de nep-async-zone komt
+  /// dat antwoord anders nooit terug. Zelfde patroon als
+  /// `shell_present_and_close_test.dart`.
+  Future<void> present(WidgetTester tester) async {
+    bool done() => find.byType(FullscreenPresenter).evaluate().isNotEmpty;
+    var reached = false;
+    await tester.runAsync(() async {
+      await tester.tap(presentButton());
+      for (var i = 0; i < 400; i++) {
+        if (done()) {
+          reached = true;
+          break;
+        }
+        await tester.pump(i < _clockSteps ? _frame : Duration.zero);
+        await Future<void>.delayed(const Duration(milliseconds: 5));
+      }
+      reached = reached || done();
+      for (var i = 0; i < 20; i++) {
+        await tester.pump(_frame);
+      }
+    });
+    await tester.pump();
+    expect(reached, isTrue, reason: 'de presentatie kwam niet op');
   }
 
   testWidgets('opening a security deck while the module is off shows the '
@@ -242,6 +282,24 @@ void main() {
       find.text(promptText),
       findsNothing,
       reason: 'the banner spoke about a presentation no longer in view',
+    );
+  });
+
+  testWidgets('starting the presentation takes the banner away', (
+    tester,
+  ) async {
+    final (_, tabs) = await pumpShell(tester);
+    await tabs.openDeckFromBytes(findingDeckBytes(), 'rapport.md');
+    await tester.pumpAndSettle();
+    expect(find.text(promptText), findsOneWidget);
+
+    await present(tester);
+
+    expect(find.byType(FullscreenPresenter), findsOneWidget);
+    expect(
+      find.text(promptText),
+      findsNothing,
+      reason: 'een blijvende balk mag niet over het scherm van de zaal hangen',
     );
   });
 
