@@ -106,6 +106,18 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Changed
+- **De OpenCV-afhankelijkheid migreert van `opencv_core` naar `dartcv4` 2.x
+  (#870).** `opencv_core` is teruggetrokken voor Flutter >= 3.38 (wij draaien
+  3.44.7) en het voorgebouwde OpenCV-pack gaat niet samen met de nieuwste MSVC,
+  waardoor `flutter build windows` afbrak op `find_package(OpenCV)`. `dartcv4`
+  2.x levert OpenCV via native-assets build-hooks (CMake) in plaats van een
+  FFI-plugin, zodat de Windows-CI op `windows-latest` bouwt en de
+  `windows-2022`-pin uit `release.yml` weg kan. De Dart-API is identiek
+  (`FaceDetectorYN`, `imdecode`, `resize`, `Mat`, `MatType`); alleen de import
+  in `image_face_scan_io.dart` wijzigt. De Makefile en CI zoeken de native
+  bibliotheek nu ook onder `build/native_assets/<os>/` (het nieuwe pad van de
+  hook) en het macOS-framework heet `dartcv` (was `DartCvMacOS`). SBOM
+  geregenereerd.
 - **De publieksweergave toont geen slidenummer meer op het projectiebeeld
   (#864).** De bedieningsbalk die bij muisbeweging verschijnt (#607) liet naast
   de vorige/volgende/afsluiten-knoppen ook "Slide 3 / 18" zien. Een presentatie

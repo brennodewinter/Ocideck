@@ -25,7 +25,17 @@ RAISE_FDS := ulimit -n 8192 2>/dev/null || true;
 #
 # Bewust gezocht op bestandsnaam en niet op een vast pad: dat verschilt per
 # platform (framework/`.so`/`.dll`) én per bouwmodus (Debug/Release/Profile).
-DARTCV_LIB := $(firstword $(wildcard   build/macos/Build/Products/*/DartCvMacOS/DartCvMacOS.framework/Versions/A/DartCvMacOS   build/linux/*/*/bundle/lib/libdartcv.so   build/windows/*/runner/*/dartcv.dll))
+# dartcv4 2.x levert OpenCV via native-assets build-hooks (CMake), waardoor de
+# bibliotheken onder `build/native_assets/<os>/` landen; de oude bundelpaden
+# blijven als terugval voor een platformbuild die ze in de app-bundel zet.
+DARTCV_LIB := $(firstword $(wildcard \
+  build/native_assets/macos/libdartcv.dylib \
+  build/native_assets/linux/libdartcv.so \
+  build/native_assets/windows/dartcv.dll \
+  build/macos/Build/Products/*/dartcv.framework/Versions/A/dartcv \
+  build/linux/*/*/bundle/lib/libdartcv.so \
+  build/windows/*/runner/*/dartcv.dll \
+))
 ifneq ($(DARTCV_LIB),)
 export DARTCV_LIB_PATH := $(abspath $(DARTCV_LIB))
 endif

@@ -7,7 +7,7 @@
 import 'dart:typed_data';
 
 import 'package:image/image.dart' as img;
-import 'package:opencv_core/opencv.dart' as cv;
+import 'package:dartcv4/dartcv.dart' as cv;
 
 import '../../utils/log.dart';
 

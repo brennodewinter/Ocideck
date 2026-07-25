@@ -2,16 +2,16 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.1.0+1** (licence EUPL-1.2) and every third-party component it ships (199 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.1.0+1** (licence EUPL-1.2) and every third-party component it ships (201 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **661 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **677 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
 | Licence | Components |
 | --- | ---: |
-| BSD-3-Clause | 127 |
-| MIT | 49 |
+| BSD-3-Clause | 128 |
+| MIT | 50 |
 | Apache-2.0 | 15 |
 | OFL-1.1 | 5 |
 | MPL-2.0 | 1 |
@@ -20,7 +20,7 @@ The JSON documents carry **661 dependency relations** between these components: 
 
 ## Components
 
-### Dart / Flutter packages (184)
+### Dart / Flutter packages (186)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -32,11 +32,12 @@ The JSON documents carry **661 dependency relations** between these components: 
 | barcode _(transitive)_ | 2.2.9 | Apache-2.0 | DavBfr | `pkg:pub/barcode@2.2.9` |
 | bidi _(transitive)_ | 2.0.13 | MIT | xclud | `pkg:pub/bidi@2.0.13` |
 | boolean_selector _(transitive)_ | 2.1.2 | BSD-3-Clause | dart-lang | `pkg:pub/boolean_selector@2.1.2` |
+| change_case _(transitive)_ | 2.2.0 | MIT | mrgnhnt96 | `pkg:pub/change_case@2.2.0` |
 | characters _(direct main)_ | 1.4.1 | BSD-3-Clause | dart-lang | `pkg:pub/characters@1.4.1` |
 | charcode _(transitive)_ | 1.4.0 | BSD-3-Clause | lrhn | `pkg:pub/charcode@1.4.0` |
 | cli_config _(transitive)_ | 0.2.0 | BSD-3-Clause | dart-lang | `pkg:pub/cli_config@0.2.0` |
 | clock _(transitive)_ | 1.1.2 | Apache-2.0 | dart-lang | `pkg:pub/clock@1.1.2` |
-| code_assets _(transitive)_ | 1.2.1 | BSD-3-Clause | dart-lang | `pkg:pub/code_assets@1.2.1` |
+| code_assets _(transitive)_ | 1.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/code_assets@1.0.0` |
 | collection _(transitive)_ | 1.19.1 | BSD-3-Clause | dart-lang | `pkg:pub/collection@1.19.1` |
 | convert _(transitive)_ | 3.1.2 | BSD-3-Clause | dart-lang | `pkg:pub/convert@3.1.2` |
 | coverage _(transitive)_ | 1.15.1 | BSD-3-Clause | dart-lang | `pkg:pub/coverage@1.15.1` |
@@ -45,7 +46,7 @@ The JSON documents carry **661 dependency relations** between these components: 
 | csslib _(transitive)_ | 1.0.2 | BSD-3-Clause | dart-lang | `pkg:pub/csslib@1.0.2` |
 | cupertino_icons _(direct main)_ | 1.0.9 | MIT | flutter | `pkg:pub/cupertino_icons@1.0.9` |
 | dart_quill_delta _(transitive)_ | 10.8.3 | MIT | FlutterQuill | `pkg:pub/dart_quill_delta@10.8.3` |
-| dartcv4 _(transitive)_ | 1.1.8 | Apache-2.0 | rainyl | `pkg:pub/dartcv4@1.1.8` |
+| dartcv4 _(direct main)_ | 2.2.1+4 | Apache-2.0 | rainyl | `pkg:pub/dartcv4@2.2.1+4` |
 | dbus _(transitive)_ | 0.7.13 | MPL-2.0 | canonical | `pkg:pub/dbus@0.7.13` |
 | desktop_drop _(direct main)_ | 0.7.1 | Apache-2.0 | MixinNetwork | `pkg:pub/desktop_drop@0.7.1` |
 | diff_match_patch _(transitive)_ | 0.4.1 | Apache-2.0 | jheyne | `pkg:pub/diff_match_patch@0.4.1` |
@@ -85,7 +86,7 @@ The JSON documents carry **661 dependency relations** between these components: 
 | frontend_server_client _(transitive)_ | 4.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/frontend_server_client@4.0.0` |
 | glob _(transitive)_ | 2.1.3 | BSD-3-Clause | dart-lang | `pkg:pub/glob@2.1.3` |
 | highlight _(direct main)_ | 0.7.0 | MIT | pd4d10 | `pkg:pub/highlight@0.7.0` |
-| hooks _(transitive)_ | 2.0.2 | BSD-3-Clause | dart-lang | `pkg:pub/hooks@2.0.2` |
+| hooks _(transitive)_ | 1.0.3 | BSD-3-Clause | dart-lang | `pkg:pub/hooks@1.0.3` |
 | html _(transitive)_ | 0.15.6 | MIT | dart-lang | `pkg:pub/html@0.15.6` |
 | http _(direct main)_ | 1.6.0 | BSD-3-Clause | dart-lang | `pkg:pub/http@1.6.0` |
 | http_multi_server _(transitive)_ | 3.2.2 | BSD-3-Clause | dart-lang | `pkg:pub/http_multi_server@3.2.2` |
@@ -107,10 +108,11 @@ The JSON documents carry **661 dependency relations** between these components: 
 | material_color_utilities _(transitive)_ | 0.13.0 | Apache-2.0 | material-foundation | `pkg:pub/material_color_utilities@0.13.0` |
 | meta _(transitive)_ | 1.18.0 | BSD-3-Clause | dart-lang | `pkg:pub/meta@1.18.0` |
 | mime _(transitive)_ | 2.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/mime@2.0.0` |
+| native_toolchain_c _(transitive)_ | 0.17.6 | BSD-3-Clause | dart-lang | `pkg:pub/native_toolchain_c@0.17.6` |
+| native_toolchain_cmake _(transitive)_ | 0.2.7 | Apache-2.0 | rainyl | `pkg:pub/native_toolchain_cmake@0.2.7` |
 | nested _(transitive)_ | 1.0.0 | MIT | rrousselGit | `pkg:pub/nested@1.0.0` |
 | node_preamble _(transitive)_ | 2.0.2 | MIT | mbullington | `pkg:pub/node_preamble@2.0.2` |
-| objective_c _(transitive)_ | 9.4.1 | BSD-3-Clause | dart-lang | `pkg:pub/objective_c@9.4.1` |
-| opencv_core _(direct main)_ | 1.4.5 | Apache-2.0 | rainyl | `pkg:pub/opencv_core@1.4.5` |
+| objective_c _(transitive)_ | 9.3.0 | BSD-3-Clause | dart-lang | `pkg:pub/objective_c@9.3.0` |
 | package_config _(transitive)_ | 2.2.0 | BSD-3-Clause | dart-lang | `pkg:pub/package_config@2.2.0` |
 | package_info_plus _(transitive)_ | 9.0.1 | BSD-3-Clause | fluttercommunity | `pkg:pub/package_info_plus@9.0.1` |
 | package_info_plus_platform_interface _(transitive)_ | 3.2.1 | BSD-3-Clause | fluttercommunity | `pkg:pub/package_info_plus_platform_interface@3.2.1` |

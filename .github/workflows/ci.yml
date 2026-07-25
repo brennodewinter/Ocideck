@@ -203,6 +203,10 @@ jobs:
       # pas bij een platformbuild — zonder deze stap slaan de detectietests
       # zichzelf over en bewaken ze niets. De Makefile vindt de `.so` daarna
       # zelf in `build/` en zet DARTCV_LIB_PATH.
+      #
+      # dartcv4 2.x levert OpenCV via native-assets build-hooks (CMake): de hook
+      # draait CMake bij élke flutter build, dus cmake moet op de runner staan.
+      #
       # libsecret-1-dev levert de pkg-config `libsecret-1` die
       # flutter_secure_storage_linux in zijn CMakeLists hard opeist
       # (`pkg_check_modules(LIBSECRET REQUIRED IMPORTED_TARGET libsecret-1>=0.18.4)`).
@@ -217,9 +221,9 @@ jobs:
         run: |
           flutter build linux --debug
           # Hard falen in plaats van stilletjes terugvallen op overslaan: als een
-          # nieuwe opencv_core dit pad verlegt, moet dat hier opvallen.
-          LIB=$(ls build/linux/*/*/bundle/lib/libdartcv.so 2>/dev/null | head -1)
-          test -n "$LIB" || { echo "::error::libdartcv.so niet gevonden onder build/linux — pad gewijzigd?"; exit 1; }
+          # nieuwe dartcv4 dit pad verlegt, moet dat hier opvallen.
+          LIB=$(ls build/native_assets/linux/libdartcv.so build/linux/*/*/bundle/lib/libdartcv.so 2>/dev/null | head -1)
+          test -n "$LIB" || { echo "::error::libdartcv.so niet gevonden — pad gewijzigd?"; exit 1; }
           echo "Gevonden: $LIB ($(du -h "$LIB" | cut -f1))"
 
       # Runs the full suite with coverage and enforces a line-coverage floor.
@@ -296,29 +300,32 @@ jobs:
       # verkeerde reden is erger dan rood.
       #
       # Op alle drie de leverplatforms, en dat is het punt van OCIWACHT §13.8:
-      # `opencv_core` declareert `ffiPlugin: true` voor linux/macos/windows en de
-      # voorwaardelijke import kiest overal de echte implementatie — maar alleen
-      # macOS was ooit aantoonbaar gedraaid. Linux gebeurt in de gate hierboven,
-      # Windows hieronder. Windows loopt via CMake in plaats van CocoaPods, dus
-      # een ander pad, maar dezelfde reden.
+      # dartcv4 levert OpenCV via native-assets build-hooks (CMake) voor
+      # linux/macos/windows en de voorwaardelijke import kiest overal de echte
+      # implementatie — maar alleen macOS was ooit aantoonbaar gedraaid. Linux
+      # gebeurt in de gate hierboven, Windows hieronder.
       - name: Build Windows (levert de OpenCV-bibliotheek aan de beeldtests)
         if: runner.os == 'Windows'
         shell: bash
         run: |
           flutter build windows --debug
-          LIB=$(ls build/windows/*/runner/*/dartcv.dll 2>/dev/null | head -1)
-          test -n "$LIB" || { echo "::error::dartcv.dll niet gevonden onder build/windows — pad gewijzigd?"; exit 1; }
+          LIB=$(ls build/native_assets/windows/dartcv.dll build/windows/*/runner/*/dartcv.dll 2>/dev/null | head -1)
+          test -n "$LIB" || { echo "::error::dartcv.dll niet gevonden — pad gewijzigd?"; exit 1; }
           echo "DARTCV_LIB_PATH=$(pwd)/$LIB" >> "$GITHUB_ENV"
 
       - name: Build macOS (levert de OpenCV-bibliotheek aan de beeldtests)
         if: runner.os == 'macOS'
         run: |
           flutter build macos --debug
-          LIB="$PWD/build/macos/Build/Products/Debug/DartCvMacOS/DartCvMacOS.framework/Versions/A/DartCvMacOS"
+          # dartcv4 2.x: het framework heet nu dartcv (was DartCvMacOS), en de
+          # native-assets hook landt onder build/native_assets/macos/. Beide paden
+          # worden geprobeerd — de hook produceert een .dylib, een platformbuild
+          # kan een .framework in de bundel zetten.
+          LIB=$(ls build/native_assets/macos/libdartcv.dylib build/macos/Build/Products/Debug/dartcv.framework/Versions/A/dartcv 2>/dev/null | head -1)
           # Hard falen in plaats van stilletjes terugvallen op overslaan: als een
-          # nieuwe opencv_core dit pad verlegt, moet dat hier opvallen en niet
+          # nieuwe dartcv4 dit pad verlegt, moet dat hier opvallen en niet
           # pas als iemand zich afvraagt waarom de detectietests nooit draaien.
-          test -f "$LIB" || { echo "::error::OpenCV-bibliotheek niet op $LIB — pad gewijzigd?"; exit 1; }
+          test -n "$LIB" || { echo "::error::dartcv-bibliotheek niet gevonden — pad gewijzigd?"; exit 1; }
           echo "DARTCV_LIB_PATH=$LIB" >> "$GITHUB_ENV"
 
       - name: Test
