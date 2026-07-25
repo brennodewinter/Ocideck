@@ -115,6 +115,15 @@ so they cost the ordinary user nothing.
 
 ## Getting started
 
+**Download OciDeck** for macOS, Windows, Linux or the web from the
+[releases page](https://pawprint.vigilis.online/LibreKAT/Ocideck/releases). Every
+release carries the app for all four platforms, both SBOM formats and a
+`SHA256SUMS` to verify what you downloaded. The binaries are unsigned, so macOS
+and Windows will warn on first launch — the release notes explain how to open
+them on each platform.
+
+Or build and run from source:
+
 ```sh
 make setup      # flutter pub get
 flutter run -d macos   # or -d windows / -d linux / -d chrome
