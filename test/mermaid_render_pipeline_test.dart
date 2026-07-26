@@ -31,6 +31,12 @@ class _FakeController extends PlatformWebViewController {
   @override
   Future<void> loadHtmlString(String html, {String? baseUrl}) async {
     this.html = html;
+    // Boots de echte pagina na (#882): zodra ze geladen is meldt ze via het
+    // channel 'setup-ok', waarna de dienst de wachtrij vrijgeeft. Zonder dit zou
+    // de bootstrap op de 10s-time-out moeten wachten.
+    _sharedChannel?.call(
+      JavaScriptMessage(message: jsonEncode({'diag': 'setup-ok'})),
+    );
   }
 
   @override
@@ -141,6 +147,12 @@ void main() {
     // strikt is (securityLevel strict, htmlLabels uit) bewaakt
     // mermaid_web_render_test.
     expect(html, contains(jsonEncode(kMermaidInitConfig)));
+    // De pagina meldt zichzelf klaar met 'setup-ok' zodra mermaid geladen en
+    // __renderMermaid gedefinieerd is (#882). De dienst wacht op dát signaal
+    // vóór het de wachtrij vrijgeeft — niet op het resolven van loadHtmlString,
+    // want dat resolvet vóór het pagina-script draait en een render in dat gaatje
+    // raakte FWFEvaluateJavaScriptError.
+    expect(html, contains("'setup-ok'"));
   });
 
   test(

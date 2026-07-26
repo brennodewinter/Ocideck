@@ -163,6 +163,20 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
 </body>
 </html>
 ''');
+    // NIET meteen als klaar markeren (#882): `loadHtmlString` resolvet zodra het
+    // laden STÁRT, niet zodra het pagina-script draaide. Een render in dat gaatje
+    // roept `runJavaScript('window.__renderMermaid(...)')` aan terwijl die functie
+    // nog niet bestaat → `FWFEvaluateJavaScriptError` → grijs vlak; dát was de
+    // bug. We wachten op het 'setup-ok'-bericht dat de pagina post zodra mermaid
+    // geladen en `__renderMermaid` gedefinieerd is (zie [_onMermaidMessage]). Een
+    // time-out markeert alsnog klaar, zodat een uitblijvend bericht de wachtrij
+    // niet eeuwig laat hangen (dan valt een render hooguit terug op de brontekst).
+    Future<void>.delayed(const Duration(seconds: 10), _markBootstrapReady);
+  }
+
+  /// Geef de wachtrij vrij zodra de pagina klaar is om te renderen (#882).
+  void _markBootstrapReady() {
+    if (_bootstrapped) return;
     _bootstrapped = true;
     _bootstrapCompleter?.complete();
     _bootstrapCompleter = null;
@@ -262,11 +276,17 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
     // uitkomst van het bootstrappen — loggen zodat de beeldkeuring ziet of de
     // setup draaide en of de bundel laadde op WKWebView.
     if (data.containsKey('diag')) {
-      logWarning(
-        'MermaidRender DIAG: ${data['diag']} '
-        'mermaid=${data['mermaid']} render=${data['render']} '
-        'inliner=${data['inliner']} error=${data['error']}',
-      );
+      // De pagina meldt dat de setup klaar is (of faalde): pas nú is
+      // `window.__renderMermaid` gedefinieerd, dus nú mag de wachtrij lopen
+      // (#882). Ook bij 'setup-error' vrijgeven — dan valt een render netjes
+      // terug op de brontekst i.p.v. eeuwig te wachten.
+      if (data['diag'] != 'setup-ok') {
+        logWarning(
+          'MermaidRender DIAG: ${data['diag']} '
+          'mermaid=${data['mermaid']} error=${data['error']}',
+        );
+      }
+      _markBootstrapReady();
       return;
     }
     final seq = (data['seq'] as num?)?.toInt();
