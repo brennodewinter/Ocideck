@@ -86,6 +86,13 @@ extension _PresenterViews on _FullscreenPresenterState {
                   enableMedia: !_dual,
                   autoplayMedia: !_dual,
                   allowRemoteMedia: widget.allowRemoteMedia,
+                  // Single-screen: de knop "Aanzetten in instellingen" mag op
+                  // de dia zelf verschijnen — er is geen apart privéscherm (#865).
+                  // Dual-screen: de dia staat op de beamer; de knop zit in de
+                  // presenter-cockpit (zie _buildPresenterView).
+                  onEnableOnlineMedia: !_dual
+                      ? () => _openSettingsFromPresenter(context)
+                      : null,
                   onAudioComplete: () => _onMediaCompleted(kind: 'audio'),
                   onVideoComplete: () => _onMediaCompleted(kind: 'video'),
                 ),
@@ -199,6 +206,18 @@ extension _PresenterViews on _FullscreenPresenterState {
                 ),
                 const SizedBox(height: 10),
                 _buildPresenterControls(total),
+                // Dual-screen: de dia staat op de beamer, dus de knop "Aanzetten
+                // in instellingen" mag niet op de dia zelf. In plaats daarvan
+                // staat hij hier, in de cockpit op het privéscherm van de
+                // presentator (#865). Alleen wanneer de huidige slide een online
+                // bron heeft en de instelling uit staat.
+                if (_dual &&
+                    !widget.allowRemoteMedia &&
+                    _slideHasRemoteMedia(slide))
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: _buildRemoteMediaHint(context),
+                  ),
               ],
             ),
           ),
@@ -262,6 +281,34 @@ extension _PresenterViews on _FullscreenPresenterState {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  /// Of [slide] een online afbeelding of video bevat die geblokkeerd wordt
+  /// wanneer `allowRemoteMedia` uit staat.
+  bool _slideHasRemoteMedia(Slide slide) {
+    if (VideoSource.looksLikeUrl(slide.imagePath)) return true;
+    if (VideoSource.looksLikeUrl(slide.imagePath2)) return true;
+    if (VideoSource.parse(slide.videoPath).isRemote) return true;
+    return false;
+  }
+
+  /// De hint-knop in de presenter-cockpit (dual-screen) die online media
+  /// aanzet via Instellingen → Beveiliging (#865).
+  Widget _buildRemoteMediaHint(BuildContext context) {
+    final l10n = context.l10n;
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: TextButton.icon(
+        onPressed: () => _openSettingsFromPresenter(context),
+        icon: const Icon(Icons.cloud_off_outlined, size: 16),
+        label: Text(l10n.d('Online media staat uit — aanzetten')),
+        style: TextButton.styleFrom(
+          foregroundColor: PresenterPalette.textMuted,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+        ),
       ),
     );
   }

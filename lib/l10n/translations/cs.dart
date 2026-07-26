@@ -1774,6 +1774,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Online media staat uit — aanzetten': 'Online média jsou vypnutá — zapnout',
   'Aanzetten in instellingen': 'Zapnout v nastavení',
   'Online media werkt niet in de webversie':
       'Online média ve webové verzi nefungují',

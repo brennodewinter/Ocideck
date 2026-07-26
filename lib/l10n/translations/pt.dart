@@ -1800,6 +1800,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Online media staat uit — aanzetten': 'Mídia online desativada — ativar',
   'Aanzetten in instellingen': 'Ativar nas definições',
   'Online media werkt niet in de webversie':
       'Os multimédia online não funcionam na versão web',

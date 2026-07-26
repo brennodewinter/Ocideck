@@ -1770,6 +1770,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Online media staat uit — aanzetten':
+      'Tiešsaistes multivide izslēgta — ieslēgt',
   'Aanzetten in instellingen': 'Iespējot iestatījumos',
   'Online media werkt niet in de webversie':
       'Tiešsaistes multivide nedarbojas tīmekļa versijā',

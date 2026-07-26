@@ -1777,6 +1777,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Online media staat uit — aanzetten': 'Online medija isključena — uključi',
   'Aanzetten in instellingen': 'Omogući u postavkama',
   'Online media werkt niet in de webversie':
       'Mrežni mediji ne rade u web-verziji',

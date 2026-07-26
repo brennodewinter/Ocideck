@@ -1778,6 +1778,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Online media staat uit — aanzetten': 'Online médiá sú vypnuté — zapnúť',
   'Aanzetten in instellingen': 'Zapnúť v nastaveniach',
   'Online media werkt niet in de webversie':
       'Online médiá vo webovej verzii nefungujú',

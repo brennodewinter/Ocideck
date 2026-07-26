@@ -1770,6 +1770,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Online media staat uit — aanzetten': 'Onlinemedier är av — slå på',
   'Aanzetten in instellingen': 'Aktivera i inställningarna',
   'Online media werkt niet in de webversie':
       'Onlinemedia fungerar inte i webbversionen',

@@ -1775,6 +1775,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Online media staat uit — aanzetten': 'Online média kikapcsolva — bekapcsol',
   'Aanzetten in instellingen': 'Engedélyezés a beállításokban',
   'Online media werkt niet in de webversie':
       'Az online média nem működik a webes verzióban',

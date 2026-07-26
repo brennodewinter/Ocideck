@@ -731,6 +731,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Online media staat uit — aanzetten': 'Online media steat út — oansette',
   'Aanzetten in instellingen': 'Oansette yn ynstellingen',
   'Online media werkt niet in de webversie':
       'Online media wurkje net yn de webferzje',

@@ -730,6 +730,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Online media staat uit — aanzetten': 'Media online ta apa — ké',
   'Aanzetten in instellingen': 'Aktivá den preferensianan',
   'Online media werkt niet in de webversie':
       'Media online no ta funshoná den e vershon web',

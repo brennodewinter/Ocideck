@@ -1793,6 +1793,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Online media staat uit — aanzetten': 'Онлайн медията е изключена — включи',
   'Aanzetten in instellingen': 'Активиране в настройките',
   'Online media werkt niet in de webversie':
       'Онлайн мултимедията не работи в уеб версията',

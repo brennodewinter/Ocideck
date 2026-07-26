@@ -1793,6 +1793,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Online media staat uit — aanzetten': 'Midja online mitfi — ixquq',
   'Aanzetten in instellingen': 'Attiva fis-settings',
   'Online media werkt niet in de webversie':
       'Il-midja online ma taħdimx fil-verżjoni tal-web',

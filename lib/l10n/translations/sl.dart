@@ -1773,6 +1773,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Online media staat uit — aanzetten': 'Spletni mediji izklopljeni — vklopi',
   'Aanzetten in instellingen': 'Omogoči v nastavitvah',
   'Online media werkt niet in de webversie':
       'Spletni mediji ne delujejo v spletni različici',
