@@ -117,14 +117,17 @@ class MermaidRenderService {
 </head>
 <body>
 <script>
+// DIAGNOSTIEK (#882): de hele setup in try/catch. Bij pageload meldt de pagina
+// via MermaidChannel of de setup slaagde en wat `typeof mermaid` is, of anders
+// wélke fout hem brak. Zo is (met één beeldkeuring-ronde) te zien of de
+// inline-setup draait en of de bundel laadt op WKWebView.
+try {
 // De bundel wordt als NIEUW script-element aan het document toegevoegd, niet
 // ge-eval'd. Twee redenen. De CSP hierboven hoeft daardoor geen 'unsafe-eval'
 // meer toe te staan. En een `var` op het hoogste niveau van een script wordt
 // een globale — in een strict-mode eval niet, en moderne mermaid-bundels
 // (esbuild, v11) hangen daarop: die zetten hun namespace met `var` en lezen
-// hem daarna terug van globalThis. Onder eval liep dat dood op "Cannot read
-// properties of undefined", zonder dat de app iets anders liet zien dan een
-// diagram dat nooit verscheen.
+// hem daarna terug van globalThis.
 var mermaidBundle = document.createElement('script');
 mermaidBundle.textContent = $escapedJs;
 document.head.appendChild(mermaidBundle);
@@ -132,6 +135,7 @@ document.head.appendChild(mermaidBundle);
 var inlinerBundle = document.createElement('script');
 inlinerBundle.textContent = $escapedInlinerJs;
 document.head.appendChild(inlinerBundle);
+var mermaidType = typeof window.mermaid;
 // Dezelfde instellingen als de web-kant — zie kMermaidInitConfig
 // (mermaid_config.dart) voor het waarom van elke sleutel (o.a. htmlLabels uit
 // per diagramsoort). Als JSON in de pagina gezet, zodat de config maar op één
@@ -151,6 +155,10 @@ window.__renderMermaid = function(source, seq) {
     MermaidChannel.postMessage(JSON.stringify({seq: seq, error: String(e)}));
   });
 };
+MermaidChannel.postMessage(JSON.stringify({diag: 'setup-ok', mermaid: mermaidType, render: typeof window.__renderMermaid, inliner: typeof window.__ocideckInlineSvgStyles}));
+} catch (e) {
+MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e), mermaid: typeof window.mermaid}));
+}
 </script>
 </body>
 </html>
@@ -248,6 +256,17 @@ window.__renderMermaid = function(source, seq) {
       data = jsonDecode(message.message) as Map<String, dynamic>;
     } catch (e) {
       logWarning('MermaidRender: onleesbaar channel-bericht', e);
+      return;
+    }
+    // Diagnostiek uit de pagina-setup (#882): geen render-antwoord, maar de
+    // uitkomst van het bootstrappen — loggen zodat de beeldkeuring ziet of de
+    // setup draaide en of de bundel laadde op WKWebView.
+    if (data.containsKey('diag')) {
+      logWarning(
+        'MermaidRender DIAG: ${data['diag']} '
+        'mermaid=${data['mermaid']} render=${data['render']} '
+        'inliner=${data['inliner']} error=${data['error']}',
+      );
       return;
     }
     final seq = (data['seq'] as num?)?.toInt();
