@@ -34,6 +34,17 @@ Run `make help` for a one-line summary of every target.
 make check        # format-check + analyze + conventions + method-length + dead-code + coverage + per-file floor
 ```
 
+> **Prerequisite: `cmake` on your `PATH`.** Since the move to `dartcv4` for
+> on-device face detection (#870), the native OpenCV binding is built through a
+> native-assets build hook, and that hook runs on **every** `dart run` and
+> `flutter test` — so on every `make check`. Without `cmake` the gate dies before
+> the first test with `Failed to find cmake with version=latest` (the Android
+> SDK's own cmake is deliberately rejected, so an Android toolchain alone is not
+> enough). Install it from your platform's package manager — `brew install cmake`
+> on macOS, `apt install cmake` on Debian/Ubuntu (see
+> [Development setup](DEVELOPMENT_SETUP_GUIDE.md)) — and confirm with
+> `cmake --version` before running the gate.
+
 Run this before every push — it is the enforced gate. For the extended
 local sweep that also covers licences and dependency health:
 
