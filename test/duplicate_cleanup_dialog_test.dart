@@ -96,6 +96,7 @@ void main() {
       // prullenbak, en die bestaat op Windows niet (zie trash_service_test).
       // Recycle Bin-integratie is een aparte feature, geen bug (#880).
     },
-    skip: Platform.isWindows ? 'geen prullenbak op Windows (feature)' : false,
+    // testWidgets' skip is bool; de reden staat in de comment hierboven.
+    skip: Platform.isWindows,
   );
 }
