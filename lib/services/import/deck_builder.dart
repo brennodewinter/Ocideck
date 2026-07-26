@@ -327,7 +327,14 @@ class DeckBuilder {
   String _videoPathFor(SourceVideo? v) {
     if (v == null) return '';
     final bytes = v.bytes;
-    if (bytes == null) return v.ref;
+    // Een URL-video (los bestand, YouTube, Vimeo) is aanvaller-data die rauw in
+    // `<video src="…">` / `<iframe data-src="…">` en (bij export) in een
+    // Markdown-link belandt. Door dezelfde breakout-encodering als een hyperlink
+    // (#876) kan een newline in de ref geen dia of beacon meer binnensmokkelen —
+    // de attribuut-escaper vouwt geen regeleinden, en de backstop ziet zo'n
+    // structurele injectie niet. Een schone URL heeft geen breekout-tekens en
+    // blijft ongewijzigd, dus de YouTube-/Vimeo-embed werkt gewoon.
+    if (bytes == null) return _safeUrl(v.ref);
     return _memPathBySha.putIfAbsent(
       'video:${crypto.sha256.convert(bytes)}',
       () => WebAssetStore.put(

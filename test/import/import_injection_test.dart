@@ -14,6 +14,7 @@ import 'package:ocideck/services/import/models/source_image.dart';
 import 'package:ocideck/services/import/models/source_format.dart';
 import 'package:ocideck/services/import/models/source_slide.dart';
 import 'package:ocideck/services/import/models/source_table.dart';
+import 'package:ocideck/services/import/models/source_video.dart';
 import 'package:ocideck/services/import/pipeline/importer_registry.dart';
 import 'package:ocideck/services/import/pipeline/slide_classifier.dart';
 import 'package:ocideck/services/import/presentation_import_service.dart';
@@ -131,6 +132,27 @@ void main() {
               caption: 'foto\n\n---\n\n# INGEBROKEN',
             ),
           ],
+        ),
+      ]);
+      final out = md(built.deck);
+      expect(MarkdownSafetyScanner.scan(out), isEmpty);
+      expect(MarkdownService().parseDeck(out)!.slides, hasLength(1));
+    });
+
+    test('een newline in een video-URL smokkelt geen extra dia', () {
+      // Regressie (security-architect #876, 2e ronde): de video-ref ging rauw
+      // door naar `<video src="…">`/`<iframe data-src="…">`; de attribuut-escaper
+      // vouwt geen newlines, dus een `\n\n---` in de ref sloot het HTML-blok en
+      // maakte een dia — backstop-blind.
+      final built = build([
+        SourceSlide(
+          index: 0,
+          title: 'T',
+          video: const SourceVideo(
+            kind: SourceVideoKind.url,
+            ref:
+                'https://evil/x\n\n---\n\n# VIDEO-PWNED\n\n![](http://t/p.png)',
+          ),
         ),
       ]);
       final out = md(built.deck);
