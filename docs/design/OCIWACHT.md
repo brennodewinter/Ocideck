@@ -2270,8 +2270,8 @@ het, want de native laag laadt niet onder `flutter test`.
 De native laag laadt **niet** onder `flutter test`: dartcv4 2.x bindt via
 `@Native`/`@DefaultAsset` code-assets, en Flutter 3.44 bouwt die niet voor de
 test-VM. `DARTCV_LIB_PATH` leest niemand meer — dat was de `opencv_core`-route, en
-de bijbehorende steiger in Makefile en CI is dode bedrading geworden (apart
-getrackt voor opschoning). `test/image_face_scan_test.dart` bewaakt daarom onder
+de bijbehorende steiger (een `wildcard` in de Makefile en de detectiestappen in
+ci.yml) is verwijderd (#899). `test/image_face_scan_test.dart` bewaakt daarom onder
 `flutter test` alleen het *contract*: draait de laag niet, dan moet `isSupported`
 dat zeggen en mag er geen stille nul komen.
 
@@ -2281,10 +2281,11 @@ en verifieert dat de detector beschikbaar is, dat katten en logo's nul gezichten
 geven en dat een verminkte JPEG fail-closed is. Precies deze test ving de kapotte
 `objdetect`-build hierboven.
 
-Wat nog niet is aangetoond: **alleen macOS is door een mens gedraaid gezien.** De
-integratietest op Linux en Windows automatisch in de CI laten draaien (Linux vraagt
-een `xvfb`-display) is apart getrackt; die eerste CI-run is dan tegelijk het bewijs
-dat de modulebuild op die platforms slaagt.
+De integratietest draait nu automatisch in de spiegel-CI (`.github/workflows/ci.yml`)
+op alle drie de desktopplatforms — Linux in de gate via `xvfb`, macOS en Windows in
+de matrix (#899). Die run is meteen de compile-rooktoets dat de OpenCV-modulebuild op
+elk platform slaagt. **Lokaal is tot nu toe alleen macOS door een mens gedraaid
+gezien;** Linux en Windows leunen op de CI-run.
 
 Android en iOS zijn geen leverplatform: de release-workflow bouwt web, macOS, Windows
 en Linux. De mappen bestaan, het product niet.

@@ -199,13 +199,14 @@ jobs:
       - name: SAST (make sast)
         run: make sast
 
-      # De beeldcontrole draait op OpenCV via FFI, en die bibliotheek ontstaat
-      # pas bij een platformbuild — zonder deze stap slaan de detectietests
-      # zichzelf over en bewaken ze niets. De Makefile vindt de `.so` daarna
-      # zelf in `build/` en zet DARTCV_LIB_PATH.
+      # De beeldcontrole (herkenbare gezichten op dia-afbeeldingen) draait op de
+      # native OpenCV-laag van dartcv4 2.x. Die laadt niet onder `flutter test` op
+      # de Dart-VM, dus de échte native-toets is de integratietest hieronder — die
+      # draait de app op een echt Linux-platform, waar de native-assets wél laden.
       #
       # dartcv4 2.x levert OpenCV via native-assets build-hooks (CMake): de hook
       # draait CMake bij élke flutter build, dus cmake moet op de runner staan.
+      # xvfb geeft de headless runner een X-display voor de desktop-app.
       #
       # libsecret-1-dev levert de pkg-config `libsecret-1` die
       # flutter_secure_storage_linux in zijn CMakeLists hard opeist
@@ -215,16 +216,14 @@ jobs:
       - name: Linux-buildafhankelijkheden
         run: |
           sudo apt-get update
-          sudo apt-get install -y ninja-build libgtk-3-dev clang cmake pkg-config libsecret-1-dev
+          sudo apt-get install -y ninja-build libgtk-3-dev clang cmake pkg-config libsecret-1-dev xvfb
 
-      - name: Build Linux (levert de OpenCV-bibliotheek aan de beeldtests)
-        run: |
-          flutter build linux --debug
-          # Hard falen in plaats van stilletjes terugvallen op overslaan: als een
-          # nieuwe dartcv4 dit pad verlegt, moet dat hier opvallen.
-          LIB=$(ls build/native_assets/linux/libdartcv.so build/linux/*/*/bundle/lib/libdartcv.so 2>/dev/null | head -1)
-          test -n "$LIB" || { echo "::error::libdartcv.so niet gevonden — pad gewijzigd?"; exit 1; }
-          echo "Gevonden: $LIB ($(du -h "$LIB" | cut -f1))"
+      # Bouwt de Linux-app (met de OpenCV-modules uit pubspec) én oefent de native
+      # gezichtsscan uit: de detector moet beschikbaar zijn, katten/logo's nul
+      # gezichten geven en een verminkte JPEG fail-closed zijn. Dit is de plek waar
+      # een regressie zoals de kapotte objdetect-build (#898) op Linux opvalt.
+      - name: Native-scan integratietest (Linux)
+        run: xvfb-run -a flutter test integration_test/native_face_scan_test.dart -d linux
 
       # Runs the full suite with coverage and enforces a line-coverage floor.
       - name: Test + coverage (make coverage)
@@ -289,44 +288,20 @@ jobs:
       - name: Install dependencies
         run: flutter pub get --enforce-lockfile
 
-      # De beeldcontrole (herkenbare gezichten op dia-afbeeldingen) draait op
-      # OpenCV via FFI. Die native bibliotheek zit in de app-bundel, niet in een
-      # kale `flutter test` op de Dart-VM — dus zonder deze stap slaan de
-      # detectietests zichzelf over en bewaken ze niets.
-      #
-      # Dat is geen theoretisch risico: tijdens de bouw stonden die tests één
-      # keer groen terwijl de bibliotheek niet laadde, elke aanroep in de
-      # foutafhandeling viel en de scanner nul gezichten meldde. Groen om de
-      # verkeerde reden is erger dan rood.
-      #
-      # Op alle drie de leverplatforms, en dat is het punt van OCIWACHT §13.8:
-      # dartcv4 levert OpenCV via native-assets build-hooks (CMake) voor
-      # linux/macos/windows en de voorwaardelijke import kiest overal de echte
-      # implementatie — maar alleen macOS was ooit aantoonbaar gedraaid. Linux
-      # gebeurt in de gate hierboven, Windows hieronder.
-      - name: Build Windows (levert de OpenCV-bibliotheek aan de beeldtests)
+      # De beeldcontrole draait op de native OpenCV-laag van dartcv4 2.x, en die
+      # laadt niet onder `flutter test` op de Dart-VM. De échte native-toets is de
+      # integratietest, die de app op dít platform draait — waar de native-assets
+      # wél laden. Zij ving de kapotte objdetect-build (#898) die de kale unit-test
+      # niet kon zien; zie OCIWACHT §13.8. De integratietest bouwt de app zelf, dus
+      # dit is meteen de compile-rooktoets voor macOS/Windows.
+      - name: Native-scan integratietest (macOS)
+        if: runner.os == 'macOS'
+        run: flutter test integration_test/native_face_scan_test.dart -d macos
+
+      - name: Native-scan integratietest (Windows)
         if: runner.os == 'Windows'
         shell: bash
-        run: |
-          flutter build windows --debug
-          LIB=$(ls build/native_assets/windows/dartcv.dll build/windows/*/runner/*/dartcv.dll 2>/dev/null | head -1)
-          test -n "$LIB" || { echo "::error::dartcv.dll niet gevonden — pad gewijzigd?"; exit 1; }
-          echo "DARTCV_LIB_PATH=$(pwd)/$LIB" >> "$GITHUB_ENV"
-
-      - name: Build macOS (levert de OpenCV-bibliotheek aan de beeldtests)
-        if: runner.os == 'macOS'
-        run: |
-          flutter build macos --debug
-          # dartcv4 2.x: het framework heet nu dartcv (was DartCvMacOS), en de
-          # native-assets hook landt onder build/native_assets/macos/. Beide paden
-          # worden geprobeerd — de hook produceert een .dylib, een platformbuild
-          # kan een .framework in de bundel zetten.
-          LIB=$(ls build/native_assets/macos/libdartcv.dylib build/macos/Build/Products/Debug/dartcv.framework/Versions/A/dartcv 2>/dev/null | head -1)
-          # Hard falen in plaats van stilletjes terugvallen op overslaan: als een
-          # nieuwe dartcv4 dit pad verlegt, moet dat hier opvallen en niet
-          # pas als iemand zich afvraagt waarom de detectietests nooit draaien.
-          test -n "$LIB" || { echo "::error::dartcv-bibliotheek niet gevonden — pad gewijzigd?"; exit 1; }
-          echo "DARTCV_LIB_PATH=$LIB" >> "$GITHUB_ENV"
+        run: flutter test integration_test/native_face_scan_test.dart -d windows
 
       - name: Test
         run: flutter test --test-randomize-ordering-seed random --exclude-tags golden

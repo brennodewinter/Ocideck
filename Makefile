@@ -8,37 +8,14 @@
 # lower than 8192 (there the limit simply stays where it was).
 RAISE_FDS := ulimit -n 8192 2>/dev/null || true;
 
-# De beeldcontrole (`image_face_scan_io.dart`) draait op OpenCV via FFI. Die
-# native bibliotheek zit in de app-bundel, niet in `flutter test`: een testrun op
-# de Dart-VM heeft haar dus niet, en de detectietests slaan zichzelf over.
-#
-# Dat is geen theoretisch probleem. Het is precies één keer misgegaan: de tests
-# stonden groen terwijl de bibliotheek niet laadde, elke aanroep in de
-# foutafhandeling viel en de scanner nul gezichten meldde. Groen om de verkeerde
-# reden is erger dan rood.
-#
-# `dartcv` leest het pad uit DARTCV_LIB_PATH. Heeft deze werkkopie ooit een
-# platformbuild gedaan, dan staat de bibliotheek in `build/` en zetten we hem
-# hier — dan draaien de detectietests echt, zonder dat iemand een variabele hoeft
-# te onthouden. Is er geen build, dan blijft alles zoals het was: de tests slaan
-# zichzelf over en zeggen dat ook.
-#
-# Bewust gezocht op bestandsnaam en niet op een vast pad: dat verschilt per
-# platform (framework/`.so`/`.dll`) én per bouwmodus (Debug/Release/Profile).
-# dartcv4 2.x levert OpenCV via native-assets build-hooks (CMake), waardoor de
-# bibliotheken onder `build/native_assets/<os>/` landen; de oude bundelpaden
-# blijven als terugval voor een platformbuild die ze in de app-bundel zet.
-DARTCV_LIB := $(firstword $(wildcard \
-  build/native_assets/macos/libdartcv.dylib \
-  build/native_assets/linux/libdartcv.so \
-  build/native_assets/windows/dartcv.dll \
-  build/macos/Build/Products/*/dartcv.framework/Versions/A/dartcv \
-  build/linux/*/*/bundle/lib/libdartcv.so \
-  build/windows/*/runner/*/dartcv.dll \
-))
-ifneq ($(DARTCV_LIB),)
-export DARTCV_LIB_PATH := $(abspath $(DARTCV_LIB))
-endif
+# De beeldcontrole (`image_face_scan_io.dart`) draait op OpenCV via de native laag
+# van dartcv4 2.x. Die laadt NIET onder `flutter test`: de `@Native`/`@DefaultAsset`
+# code-assets worden niet in de test-VM gebouwd, en dartcv4 2.x leest
+# `DARTCV_LIB_PATH` nergens meer. De env-var-steiger die hier stond (een `wildcard`
+# over build/ die DARTCV_LIB_PATH zette) deed sinds de migratie dus niets en is weg.
+# `test/image_face_scan_test.dart` bewaakt onder `make check` alleen het contract;
+# dat de native scan écht werkt, toont `integration_test/native_face_scan_test.dart`
+# op een echt platform (zie ci.yml en OCIWACHT.md §13.8).
 
 # Náást de gewone uitvoer schrijft elke suiteaanroep een machineleesbaar
 # rapport. Dat is het zijkanaal waar de verklaring hieronder uit leest: de
@@ -162,10 +139,10 @@ analyze:
 # was, en beide keren was het weg na precies dit — zonder verder een letter te
 # wijzigen. Het recept zat daarna in het hoofd van wie erbij was. Nu niet meer.
 #
-# **Waarom `build/test_cache` en niet `flutter clean`.** Onder `build/` staan ook
-# de platformbuilds, en daar hangt hierboven DARTCV_LIB aan: gooi je die weg,
-# dan slaan de gezichtsdetectietests zichzelf weer over en staat de suite groen
-# om de verkeerde reden. Dit doel raakt alleen de testcache.
+# **Waarom `build/test_cache` en niet `flutter clean`.** Onder `build/` staat ook
+# de gecompileerde native laag (dartcv4/OpenCV via de build-hooks) en de
+# platformbuilds; `flutter clean` gooit die weg en dwingt een dure herbouw af
+# (de OpenCV-modules compileren duurt minuten). Dit doel raakt alleen de testcache.
 #
 # **Wat het kost.** De eerstvolgende suite compileert van nul. Daarom is dit een
 # doel dat je aanroept en geen stap die vóór elke draai meeloopt — dat laatste

@@ -315,11 +315,12 @@ library had never loaded.
 **What is not covered, plainly.** There is no fuzzing corpus and no
 property-based campaign against the decode path; the tests above are hand-picked
 malformed inputs, not a search. `make check` runs them without the native library
-(it is not present on a bare test machine), in which case they assert the
-contract rather than exercise C++; the Makefile exports `DARTCV_LIB_PATH` when a
-platform build exists, and then they run for real — that is the run that proves
-the JPEG path. A crash inside `dartcv` takes the process down, and nothing here
-would catch it.
+(dartcv4 2.x's native layer does not load under `flutter test`), in which case
+they assert the contract rather than exercise C++. The run that proves the JPEG
+path against real C++ is the integration test
+(`integration_test/native_face_scan_test.dart`), which drives the app on a real
+desktop platform in CI, where the native assets load. A crash inside `dartcv`
+takes the process down, and nothing here would catch it.
 
 ## 7. AI egress control
 

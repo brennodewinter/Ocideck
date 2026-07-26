@@ -561,18 +561,20 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Failure means:** inspect the named failing test file and case in the output.
   If it only fails for some seeds, you have an order-dependent test — the seed is
   printed at the top of the run so you can reproduce it.
-- **One suite needs a platform build first.** The image privacy check (recognisable
-  faces on slide images) runs on OpenCV through FFI, and that native library lives
-  in the app bundle — a bare `flutter test` on the Dart VM does not have it, so
-  those tests skip themselves and report `~2`.
+- **The native face scan is tested separately, not under `make check`.** The image
+  privacy check (recognisable faces on slide images) runs on OpenCV through dartcv4
+  2.x's native layer, and that layer does **not** load under a bare `flutter test`
+  on the Dart VM (its `@Native` code-assets are not built for the test VM). So under
+  `make check` those tests assert the contract and skip the native detection,
+  reporting `~2`.
 
-  If this working copy has ever run `flutter build macos|linux|windows`, the
-  Makefile finds the library under `build/` and exports `DARTCV_LIB_PATH`
-  automatically; the tests then run for real. No variable to remember — but if you
-  are changing the detector, do a platform build first, or you are testing
-  nothing. In CI all three desktop jobs build first — Linux in the gate, macOS and
-  Windows in the matrix — and each fails loudly if the library is not where it
-  expects, rather than falling back to skipping.
+  The real native run is `integration_test/native_face_scan_test.dart`, which drives
+  the app on a real desktop platform where the native assets load. Locally:
+  `flutter test integration_test/native_face_scan_test.dart -d macos` (needs `cmake`
+  on your PATH; the Android SDK's cmake works). In CI it runs on all three desktop
+  platforms — Linux in the gate via `xvfb`, macOS and Windows in the matrix (#899) —
+  and fails loudly if the detector is unavailable, rather than skipping. That is the
+  test that caught the broken `objdetect` build in #898.
 
 ### `make coverage`
 - **Runs:** `flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden`
@@ -1001,9 +1003,8 @@ also declares them, but see the [CI note](#continuous-integration).)
     would fail expensively and in silence: the `||` branch must still `exit 1`
     (or a red suite turns green because printing the explanation succeeded), and
     `clean-test-cache` must not reach past `build/test_cache` (a `rm -rf build`
-    takes the platform builds with it, and with them the native OpenCV library
-    `DARTCV_LIB` points at — after which the face-detection tests skip
-    themselves and the suite is green for the wrong reason).
+    takes the compiled native layer that dartcv4's build hooks produced with it,
+    forcing a slow OpenCV recompile on the next platform build).
 
 ### Targeted test groups
 
@@ -1057,9 +1058,9 @@ For focused work, run only the relevant slice instead of the whole suite:
   project); this removes it, at the cost of one full recompile on the next
   suite run. Reach for it when a `Failed to load` survives a re-run — see
   [below](#when-the-gate-fails-on-something-that-is-not-your-change).
-  Deliberately *not* `flutter clean`: the platform builds under `build/` are
-  where `DARTCV_LIB` finds the native OpenCV library, and without it the face
-  detection tests skip themselves and the suite goes green for the wrong reason.
+  Deliberately *not* `flutter clean`: `build/` also holds the compiled native layer
+  (dartcv4/OpenCV, built through the native-assets hooks), and a clean forces a slow
+  recompile on the next platform build.
 
 ---
 
