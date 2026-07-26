@@ -106,6 +106,28 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Changed
+- **De presentatie-import draait niet langer op de UI-isolate (#875).** Het lezen
+  van een `.pptx`/`.odp`/`.key` — uitpakken, XML/IWA/Snappy parsen, reconstrueren
+  en classificeren — liep synchroon op de isolate die de UI tekent, ondanks de
+  async API. Bij een middelgroot, complex of vijandig bestand bevroor het venster
+  daardoor secondenlang: geen frames, geen invoer, geen betrouwbaar annuleren, en
+  geen verschil tussen "lang bezig" en "vastgelopen". Dat zware werk gaat nu via
+  een serialiseerbaar taakcontract (`ImportRequest` → `ImportTaskResult`) naar een
+  worker-isolate op desktop en mobiel; de UI-isolate blijft vrij. Alleen de lichte
+  deckbouw blijft op de hoofd-isolate, want die raakt de procesglobale
+  `WebAssetStore` en de l10n-vertaler, en geen van beide reist over een
+  isolategrens. Op web bestaat geen tweede isolate, dus draait dezelfde gedeelde
+  kern daar in-process, met yields die de event-loop tussen de werkeenheden een
+  beurt geven. Annuleren is coöperatief tussen begrensde eenheden en, op de
+  worker, een directe kill: het stopt binnen een gedocumenteerde tijd en laat
+  niets half af, want de deckbouw begint pas ná een geslaagde parse. De
+  enkelvoudige import krijgt daarvoor een klein annuleerbaar voortgangsvenster met
+  een *Stoppen*-knop; de wachtrij stopt nu ook midden in een bestand in plaats van
+  alleen tussen twee bestanden. Het `ImportBudget` uit #874 draagt hiervoor de
+  `maxDuration`-deadline (een overschrijding eindigt als `tooLarge`), zoals daar
+  al was voorzien; de annuleertoken leeft bewust buiten dat const, over de grens
+  gekopieerde object. Bestaande `ImportFailure`-redenen en de per-dia-resultaten
+  blijven ongewijzigd.
 - **De OpenCV-afhankelijkheid migreert van `opencv_core` naar `dartcv4` 2.x
   (#870).** `opencv_core` is teruggetrokken voor Flutter >= 3.38 (wij draaien
   3.44.7) en het voorgebouwde OpenCV-pack gaat niet samen met de nieuwste MSVC,
