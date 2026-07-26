@@ -114,28 +114,22 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
     final w = widget.width;
     final maxW = w * 0.84;
     final maxH = w * 0.32;
+    // Leesbaarheidsvloer voor de hoogte: een zeer breed diagram (bv. een gantt,
+    // viewBox ~1384×148) zou passend maar een dunne strip worden. Zakt de
+    // passende hoogte hieronder, dan tonen we het op volle hoogte en scrollen
+    // horizontaal (#895), spiegelbeeld van het te-hoge geval.
+    final minH = w * 0.16;
     final aspect = _diagramAspectRatio(safe);
     final naturalHeight = (aspect != null && aspect > 0) ? maxW / aspect : null;
     final scrollable = MermaidRenderScope.scrollableOf(context);
     // Een gedeelde controller (presentatie) wint van de eigen; zo kan de
-    // presentator de scrollpositie naar het publiek spiegelen (#872).
+    // presentator de scrollpositie naar het publiek spiegelen (#872). Werkt voor
+    // beide assen — de gedeelde offset gaat als fractie, richting-onafhankelijk.
     final controller =
         MermaidRenderScope.controllerOf(context) ?? _scrollController;
 
     final Widget content;
-    if (naturalHeight == null || naturalHeight <= maxH || !scrollable) {
-      // Past binnen het kader, of statisch oppervlak: passend (zoals #868).
-      final size = _fittedDiagramSize(safe, w);
-      content = Center(
-        heightFactor: 1.0,
-        child: SvgPicture.string(
-          safe,
-          fit: BoxFit.contain,
-          width: size.width,
-          height: size.height,
-        ),
-      );
-    } else {
+    if (scrollable && naturalHeight != null && naturalHeight > maxH) {
       // Te hoog én interactief: leesbaar op volle breedte, verticaal scrollen
       // binnen een vast-hoog venster. Zo blijft het kader even hoog als bij een
       // passend diagram en trekt de slide-FittedBox de rest niet mee omlaag.
@@ -153,6 +147,38 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
               height: naturalHeight,
             ),
           ),
+        ),
+      );
+    } else if (scrollable &&
+        naturalHeight != null &&
+        naturalHeight < minH &&
+        aspect != null) {
+      // Te breed/dun én interactief: leesbaar op volle hoogte (maxH), horizontaal
+      // scrollen. Het venster blijft even hoog als een passend diagram; de
+      // tekening loopt naar rechts en is af te scrollen.
+      content = SizedBox(
+        height: maxH,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          controller: controller,
+          child: SvgPicture.string(
+            safe,
+            fit: BoxFit.contain,
+            width: maxH * aspect,
+            height: maxH,
+          ),
+        ),
+      );
+    } else {
+      // Past binnen het kader, of statisch oppervlak: passend (zoals #868).
+      final size = _fittedDiagramSize(safe, w);
+      content = Center(
+        heightFactor: 1.0,
+        child: SvgPicture.string(
+          safe,
+          fit: BoxFit.contain,
+          width: size.width,
+          height: size.height,
         ),
       );
     }

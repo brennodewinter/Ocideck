@@ -253,4 +253,49 @@ void main() {
     expect(pic.width, closeTo(840, 0.5));
     expect(pic.height, closeTo(210, 0.5));
   });
+
+  testWidgets('een zeer breed diagram (gantt) wordt horizontaal scrollbaar op '
+      'leesbare hoogte (#895)', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1400, 1000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    // Breedte/hoogte = 9 (zoals een gantt, ~1384×148): passend zou een dunne
+    // strip zijn (hoogte 840/9 = 93, onder de leesbaarheidsvloer 0.16·1000 =
+    // 160). Interactief tonen we het daarom op volle hoogte (maxH = 320) en
+    // horizontaal scrollbaar → breedte 320·9 = 2880.
+    const veryWide =
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 100">'
+        '<rect width="10" height="10"/></svg>';
+    await pump(tester, 'gantt title X', returns(veryWide), width: 1000);
+
+    final scroll = tester.widget<SingleChildScrollView>(
+      find.byType(SingleChildScrollView),
+    );
+    expect(scroll.scrollDirection, Axis.horizontal);
+    final pic = tester.widget<SvgPicture>(find.byType(SvgPicture));
+    expect(pic.height, closeTo(320, 0.5));
+    expect(pic.width, closeTo(2880, 1));
+  });
+
+  testWidgets('een zeer breed diagram blijft passend op een statisch oppervlak '
+      '(#895)', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1400, 1000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    const veryWide =
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 100">'
+        '<rect width="10" height="10"/></svg>';
+    // Statisch (export/publiek): geen scroll, passend → volle breedte 840,
+    // natuurlijke (dunne) hoogte 93.
+    await pump(
+      tester,
+      'gantt title X',
+      returns(veryWide),
+      width: 1000,
+      scrollable: false,
+    );
+
+    expect(find.byType(SingleChildScrollView), findsNothing);
+    final pic = tester.widget<SvgPicture>(find.byType(SvgPicture));
+    expect(pic.width, closeTo(840, 0.5));
+    expect(pic.height, closeTo(93.3, 0.5));
+  });
 }
