@@ -4,6 +4,7 @@ import 'package:path/path.dart' as p;
 
 import '../../models/deck.dart';
 import 'importers/import_failure.dart';
+import 'pipeline/import_task.dart';
 import 'presentation_import_service.dart';
 
 /// Eén bestand in de importwachtrij: de bytes plus de naam waaronder de
@@ -146,12 +147,18 @@ class BulkImportRunner {
   /// [shouldStop] wordt vóór elk bestand gevraagd; wie stopt, stopt tussen twee
   /// bestanden — nooit halverwege een schrijfactie, want een half geschreven
   /// projectmap is geen uitkomst die iemand kan gebruiken.
+  ///
+  /// [cancel] gaat een stap verder: hij stopt óók midden in het lezen van één
+  /// bestand (#875). De worker breekt het parsen af, er wordt niets
+  /// weggeschreven, en de rij stopt — het lopende bestand telt dan als
+  /// niet-bereikt, niet als mislukt.
   Future<BulkImportSummary> run(
     List<BulkImportItem> items, {
     required String targetDirectory,
     void Function(BulkImportProgress progress)? onProgress,
     void Function(BulkImportOutcome outcome)? onFileDone,
     bool Function()? shouldStop,
+    ImportCancelToken? cancel,
   }) async {
     final outcomes = <BulkImportOutcome>[];
     // De namen die deze ronde zelf al uitgedeeld heeft. Het bestand bestaat pas
@@ -159,7 +166,9 @@ class BulkImportRunner {
     // genoemde bronbestanden allebei dezelfde vrije naam krijgen.
     final claimed = <String>{};
     for (var i = 0; i < items.length; i++) {
-      if (shouldStop?.call() ?? false) break;
+      final stop =
+          (shouldStop?.call() ?? false) || (cancel?.isCancelled ?? false);
+      if (stop) break;
       final item = items[i];
       void report(double fraction, String message) => onProgress?.call(
         BulkImportProgress(
@@ -176,7 +185,11 @@ class BulkImportRunner {
         targetDirectory: targetDirectory,
         claimed: claimed,
         report: report,
+        cancel: cancel,
       );
+      // Midden in dit bestand geannuleerd: geen uitkomst boeken en de rij
+      // stoppen. Het bestand telt daardoor als niet-bereikt.
+      if (outcome == null) break;
       outcomes.add(outcome);
       onFileDone?.call(outcome);
     }
@@ -187,18 +200,23 @@ class BulkImportRunner {
     );
   }
 
-  Future<BulkImportOutcome> _importOne(
+  /// Importeer één bestand, of `null` als de gebruiker het lezen midden in dit
+  /// bestand afbrak.
+  Future<BulkImportOutcome?> _importOne(
     BulkImportItem item, {
     required String targetDirectory,
     required Set<String> claimed,
     required void Function(double, String) report,
+    ImportCancelToken? cancel,
   }) async {
     try {
       final result = await _service.importBytes(
         item.bytes,
         filename: item.name,
         onProgress: report,
+        cancel: cancel,
       );
+      if (result.wasCancelled) return null;
       final deck = result.deck;
       if (deck == null) {
         return BulkImportOutcome.failed(item.name, failure: result.failure);

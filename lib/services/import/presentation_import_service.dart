@@ -1,21 +1,17 @@
 import 'dart:typed_data';
 
-import 'package:archive/archive.dart';
-
 import '../../models/deck.dart';
 import '../markdown_safety.dart';
 import '../markdown_service.dart';
-import 'core/result.dart';
 import 'deck_builder.dart';
 import 'importers/import_failure.dart';
 import 'models/source_deck.dart';
 import 'models/slide_failure_policy.dart';
-import 'models/source_format.dart';
+import 'pipeline/import_runner.dart';
+import 'pipeline/import_task.dart';
+import 'pipeline/importer_registry.dart';
 import 'pipeline/problem_slide.dart';
 import 'pipeline/slide_classifier.dart';
-import 'pipeline/format_detector.dart';
-import 'pipeline/importer_registry.dart';
-import 'utils/archive_utils.dart';
 import 'utils/import_budget.dart';
 
 /// The result of importing one presentation file.
@@ -29,15 +25,26 @@ class PresentationImportResult {
   const PresentationImportResult.success(
     this.deck, {
     this.problemSlides = const [],
-  }) : failure = null;
+  }) : failure = null,
+       wasCancelled = false;
 
   const PresentationImportResult.failed(this.failure)
     : deck = null,
-      problemSlides = const [];
+      problemSlides = const [],
+      wasCancelled = false;
+
+  /// De gebruiker heeft de import gestopt. Geen deck, geen fout — niets is half
+  /// af, want de deckbouw begint pas ná een geslaagde parse (#875).
+  const PresentationImportResult.cancelled()
+    : deck = null,
+      problemSlides = const [],
+      failure = null,
+      wasCancelled = true;
 
   final Deck? deck;
   final List<ProblemSlide> problemSlides;
   final ImportFailure? failure;
+  final bool wasCancelled;
 
   bool get isSuccess => deck != null;
 }
@@ -104,13 +111,25 @@ class PreparedImport {
 List<MarkdownSafetyFinding> scanDeckForUnsafeContent(Deck deck) =>
     MarkdownSafetyScanner.scan(MarkdownService().generateDeck(deck));
 
-/// De uitkomst van het voorbereiden: precies één van [prepared] of [failure].
+/// De uitkomst van het voorbereiden: precies één van geslaagd, mislukt of
+/// geannuleerd.
 class PreparedImportResult {
-  const PreparedImportResult.success(this.prepared) : failure = null;
-  const PreparedImportResult.failed(this.failure) : prepared = null;
+  const PreparedImportResult.success(this.prepared)
+    : failure = null,
+      wasCancelled = false;
+  const PreparedImportResult.failed(this.failure)
+    : prepared = null,
+      wasCancelled = false;
+
+  /// De gebruiker heeft het lezen gestopt vóór het deck er was (#875).
+  const PreparedImportResult.cancelled()
+    : prepared = null,
+      failure = null,
+      wasCancelled = true;
 
   final PreparedImport? prepared;
   final ImportFailure? failure;
+  final bool wasCancelled;
 
   bool get isSuccess => prepared != null;
 }
@@ -124,15 +143,27 @@ class PreparedImportResult {
 /// real OciDeck [Deck]. Nothing is written to disk here — materialising the
 /// slide images happens later, on save (see [DeckBuilder]).
 class PresentationImportService {
+  /// Zonder [registry] gaat het zware parsen naar het platform-uitvoeringspad
+  /// ([runImportTask]): een worker-isolate op desktop, in-process op web. Wórdt
+  /// er een registry geïnjecteerd (tests, met nep-importers), dan draait het
+  /// bewust in-process met díe registry — nep-importers zijn niet gegarandeerd
+  /// verzendbaar over de isolategrens (#875).
   PresentationImportService({
     ImporterRegistry? registry,
     DeckBuilder? builder,
     this._budget = ImportBudget.standard,
-  }) : _registry = registry ?? ImporterRegistry(),
-       _builder = builder ?? DeckBuilder();
+  }) : _builder = builder ?? DeckBuilder(),
+       _runTask = registry == null
+           ? runImportTask
+           : ((request, {onProgress, cancel}) => runImportTaskInline(
+               request,
+               registry: registry,
+               onProgress: onProgress,
+               cancel: cancel,
+             ));
 
-  final ImporterRegistry _registry;
   final DeckBuilder _builder;
+  final ImportTaskRunner _runTask;
 
   /// Het resourcebudget dat elke import begrenst (#874). Standaard
   /// [ImportBudget.standard]; een test geeft een piepklein budget mee om een
@@ -150,12 +181,15 @@ class PresentationImportService {
     required String filename,
     void Function(double progress, String message)? onProgress,
     Map<int, SlideFailurePolicy> policies = const {},
+    ImportCancelToken? cancel,
   }) async {
     final prep = await prepare(
       bytes,
       filename: filename,
       onProgress: onProgress,
+      cancel: cancel,
     );
+    if (prep.wasCancelled) return const PresentationImportResult.cancelled();
     final prepared = prep.prepared;
     if (prepared == null) {
       return PresentationImportResult.failed(prep.failure!);
@@ -179,114 +213,45 @@ class PresentationImportService {
 
   /// Lees en classificeer, maar bouw nog niet — zodat de aanroeper eerst kan
   /// vragen wat er met de probleemdia's moet gebeuren.
+  ///
+  /// Het zware werk (uitpakken, valideren, parsen, classificeren) gaat via
+  /// [_runTask] naar het worker-uitvoeringspad; hier op de hoofd-isolate blijft
+  /// alleen de lichte deckanalyse over, want die raakt de procesglobale
+  /// `WebAssetStore` en de l10n-`translate`-closure (#875). [cancel] stopt het
+  /// lezen onderweg; dan komt er een [PreparedImportResult.cancelled].
   Future<PreparedImportResult> prepare(
     Uint8List bytes, {
     required String filename,
     void Function(double progress, String message)? onProgress,
+    ImportCancelToken? cancel,
   }) async {
-    onProgress?.call(0.02, 'Formaat herkennen…');
-
-    // Decodeer het archief één keer. Zowel de formaatvalidatie als de importer
-    // werken daarna op ditzelfde [Archive]; zo wordt hetzelfde bestand nooit
-    // tweemaal uitgepakt (#874). Elke budgetoverschrijding — te groot, te veel
-    // onderdelen, te veel uitgepakt — eindigt hier gecontroleerd als tooLarge,
-    // vóórdat er iets zwaars gebeurt.
-    final Archive archive;
-    try {
-      archive = safeDecodeZip(bytes, budget: _budget);
-    } on ImportBudgetException catch (e) {
-      return PreparedImportResult.failed(
-        ImportFailure(
-          '$filename overschrijdt de importlimiet (${e.limitLabel}).',
-          reason: ImportFailureReason.tooLarge,
-          args: {'bestand': filename, 'limiet': e.limitLabel},
-        ),
-      );
-    } on FormatException {
-      // Geen zip-magie: dit is geen presentatie (en niet: beschadigd).
-      return PreparedImportResult.failed(
-        ImportFailure(
-          '$filename: dit bestand is geen geldig zip-archief (pptx/odp/key).',
-          reason: ImportFailureReason.notAPresentation,
-          args: {'bestand': filename},
-        ),
-      );
-    } on Exception catch (e) {
-      // Wel een zip-kop, maar het uitpakken struikelt: beschadigd archief. Dit
-      // pad bestaat omdat we niet meer óók valideren en toch parsen — een
-      // beschadigd bestand moet de echte reden krijgen, niet "geen dia's".
-      return PreparedImportResult.failed(
-        ImportFailure(
-          '$filename lijkt beschadigd: het archief kan niet worden uitgepakt.',
-          cause: e,
-          reason: ImportFailureReason.corrupt,
-          args: {'bestand': filename},
-        ),
-      );
-    }
-
-    final validation = validateFormatFromArchive(archive, basename: filename);
-    if (!validation.isValid) {
-      return PreparedImportResult.failed(
-        ImportFailure(
-          '$filename: ${validation.error}',
-          reason: validation.reason ?? ImportFailureReason.notAPresentation,
-          args: {'bestand': filename},
-        ),
-      );
-    }
-    final format = validation.format;
-    final importer = _registry.importerFor(format);
-    if (importer == null) {
-      return PreparedImportResult.failed(
-        format == SourceFormat.unknown
-            ? ImportFailure(
-                '$filename: dit bestand is geen herkende presentatie '
-                '(pptx/odp/key).',
-                reason: ImportFailureReason.notAPresentation,
-                args: {'bestand': filename},
-              )
-            : ImportFailure(
-                '$filename: het ${format.name}-formaat wordt nog niet '
-                'ondersteund.',
-                reason: ImportFailureReason.formatNotSupported,
-                args: {'bestand': filename, 'formaat': format.name},
-              ),
-      );
-    }
-
-    final imported = await importer.importBytes(
-      bytes,
-      path: filename,
-      budget: _budget,
-      preDecoded: archive,
-      onProgress: (f, m) => onProgress?.call(0.05 + 0.80 * f, m),
+    final task = await _runTask(
+      ImportRequest(bytes: bytes, filename: filename, budget: _budget),
+      onProgress: onProgress == null
+          ? null
+          : (p) => onProgress(p.fraction, p.message),
+      cancel: cancel,
     );
-    final SourceDeck sourceDeck;
-    switch (imported) {
-      case Err(:final f):
-        // De importer kent de bestandsnaam niet altijd; de service wel. Vul
-        // hem aan zodat de melding "Kon {bestand} niet lezen" compleet is.
-        return PreparedImportResult.failed(f.withArg('bestand', filename));
-      case Ok(:final v):
-        sourceDeck = v;
+
+    switch (task) {
+      case ImportTaskCancelled():
+        return const PreparedImportResult.cancelled();
+      case ImportTaskFailed(:final failure):
+        // De worker vult de bestandsnaam al aan; geen tweede keer nodig.
+        return PreparedImportResult.failed(failure);
+      case ImportTaskParsed(:final parsed):
+        onProgress?.call(0.94, 'Deck opbouwen…');
+        final sourceDeck = parsed.deck;
+        return PreparedImportResult.success(
+          PreparedImport(
+            _builder.analyse(parsed.classified),
+            sourceDeck,
+            parsed.classified,
+            sourceDeck.title.isNotEmpty ? sourceDeck.title : _stemOf(filename),
+            _builder,
+          ),
+        );
     }
-
-    onProgress?.call(0.88, 'Slides classificeren…');
-    final classified = [
-      for (final slide in sourceDeck.slides) classifySlide(slide),
-    ];
-
-    onProgress?.call(0.94, 'Deck opbouwen…');
-    return PreparedImportResult.success(
-      PreparedImport(
-        _builder.analyse(classified),
-        sourceDeck,
-        classified,
-        sourceDeck.title.isNotEmpty ? sourceDeck.title : _stemOf(filename),
-        _builder,
-      ),
-    );
   }
 
   /// The filename without its directory or extension — the deck-title fallback
