@@ -171,4 +171,38 @@ void main() {
     // dia een postzegel opleveren en een smalle dia zou overlopen.
     expect(tester.widget<SvgPicture>(find.byType(SvgPicture)).width, 840);
   });
+
+  testWidgets('een hoge flowchart schaalt omlaag i.p.v. onder de slide uit te '
+      'lopen (#868)', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1400, 2000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    // Sterk verticaal diagram (breedte/hoogte = 0.25): zonder plafond zou het op
+    // breedte 840 een hoogte van 3360 krijgen en ver onder de slide uitlopen.
+    const tall =
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 400">'
+        '<rect width="10" height="10"/></svg>';
+    await pump(tester, 'flowchart TD; A-->B', returns(tall), width: 1000);
+
+    final pic = tester.widget<SvgPicture>(find.byType(SvgPicture));
+    // Begrensd op maxH = 0.32·1000 = 320, met behoud van verhouding → breedte 80.
+    expect(pic.height, closeTo(320, 0.5));
+    expect(pic.width, closeTo(80, 0.5));
+  });
+
+  testWidgets('een breed, laag diagram houdt zijn natuurlijke maat (#868)', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1400, 1000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    // Breedte/hoogte = 4: natuurlijke hoogte op breedte 840 is 210, ruim onder
+    // het plafond, dus geen omlaagschaling.
+    const wide =
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100">'
+        '<rect width="10" height="10"/></svg>';
+    await pump(tester, 'flowchart LR; A-->B', returns(wide), width: 1000);
+
+    final pic = tester.widget<SvgPicture>(find.byType(SvgPicture));
+    expect(pic.width, closeTo(840, 0.5));
+    expect(pic.height, closeTo(210, 0.5));
+  });
 }
