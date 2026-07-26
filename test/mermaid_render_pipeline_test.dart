@@ -18,7 +18,14 @@ class _FakeController extends PlatformWebViewController {
   String? html;
   final scripts = <String>[];
 
-  /// Wat `window.__renderMermaid(...)` teruggeeft, of een fout om te gooien.
+  /// Statisch en gedeeld: de dienst is een singleton die precies één keer
+  /// bootstrapt en dáár het channel registreert, terwijl elke test een nieuwe
+  /// nep-controller aanhaakt. De callback is een stabiele methode op de
+  /// singleton, dus dezelfde gedeelde referentie werkt voor elke controller.
+  static void Function(JavaScriptMessage)? _sharedChannel;
+
+  /// Wat de render teruggeeft (een SVG-string), of een `Exception` om een fout
+  /// aan de JS-kant te simuleren.
   Object? Function(String script)? answer;
 
   @override
@@ -30,11 +37,27 @@ class _FakeController extends PlatformWebViewController {
   Future<void> setJavaScriptMode(JavaScriptMode mode) async {}
 
   @override
-  Future<Object> runJavaScriptReturningResult(String javaScript) async {
+  Future<void> addJavaScriptChannel(
+    JavaScriptChannelParams javaScriptChannelParams,
+  ) async {
+    _sharedChannel = javaScriptChannelParams.onMessageReceived;
+  }
+
+  @override
+  Future<void> runJavaScript(String javaScript) async {
     scripts.add(javaScript);
+    if (!javaScript.startsWith('window.__renderMermaid(')) return;
+    // De echte pagina rendert async en stuurt het resultaat via MermaidChannel
+    // terug (#882). Hier bootsen we dat na: haal de seq uit de aanroep en lever
+    // het door de test klaargezette antwoord op datzelfde kanaal.
+    final seq = int.parse(
+      RegExp(r',\s*(\d+)\s*\)\s*$').firstMatch(javaScript)!.group(1)!,
+    );
     final result = answer?.call(javaScript);
-    if (result is Exception) throw result;
-    return result ?? '';
+    final payload = result is Exception
+        ? {'seq': seq, 'error': result.toString()}
+        : {'seq': seq, 'svg': (result as String?) ?? ''};
+    _sharedChannel?.call(JavaScriptMessage(message: jsonEncode(payload)));
   }
 }
 
@@ -56,8 +79,9 @@ class _FakePlatform extends WebViewPlatform {
 /// Die is hier een dubbel, en daarmee is te tonen wat er werkelijk toe doet: de
 /// pagina waarin de opmaak wordt gebouwd is dichtgetimmerd, het antwoord gaat
 /// door de zeef vóór het de cache in mag, een fout aan de JS-kant wedgt de
-/// wachtrij niet, en de macOS-eigenaardigheid (een JSON-geciteerde string) komt
-/// er heel uit.
+/// wachtrij niet, en het resultaat komt via het MermaidChannel terug in plaats
+/// van als Promise via `runJavaScriptReturningResult` (#882), zodat het op
+/// macOS-WKWebView niet meer stukloopt.
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -158,16 +182,18 @@ void main() {
     );
   });
 
-  test('een JSON-geciteerd antwoord wordt uitgepakt', () async {
-    // macOS levert het resultaat als geciteerde JSON-string; Android niet.
-    // Zonder uitpakken komt er `"<svg …>"` uit en weigert de zeef het.
-    controller.answer = (_) =>
-        '"<svg xmlns=\\"http://www.w3.org/2000/svg\\"><rect id=\\"mac\\"/></svg>"';
-
+  test('het antwoord komt via het channel terug, niet als Promise', () async {
+    // De kern van #882: de render is async, dus we halen het resultaat NIET met
+    // runJavaScriptReturningResult op (dat marshalt een Promise niet op
+    // macOS-WKWebView) maar vuren met runJavaScript en wachten op het channel.
+    controller.answer = (_) => svgVoor('kanaal');
     final svg = await MermaidRenderService.instance.render(verseBron());
-    expect(svg, isNotNull);
-    expect(svg, contains('id="mac"'));
-    expect(svg, isNot(startsWith('"')));
+    expect(svg, contains('id="kanaal"'));
+    expect(
+      controller.scripts.last,
+      startsWith('window.__renderMermaid('),
+      reason: 'afgevuurd, niet als resultaat-teruggevende eval',
+    );
   });
 
   test('opmaak die geen SVG is haalt de cache niet', () async {

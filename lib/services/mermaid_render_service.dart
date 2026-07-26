@@ -44,6 +44,16 @@ class MermaidRenderService {
   final List<_PendingRender> _queue = [];
   bool _busy = false;
 
+  /// Correlatie voor de WebView-render (#882). `mermaid.render` is async en op
+  /// macOS-WKWebView kan `runJavaScriptReturningResult` het teruggegeven Promise
+  /// niet terugvertalen (FWFEvaluateJavaScriptError) — dan bleef elk diagram op
+  /// desktop leeg. Daarom vuren we de render af en wachten we op het resultaat
+  /// via een JS-channel; [_renderSeq] koppelt het antwoord aan het verzoek en
+  /// negeert late/verdwaalde berichten (er is er hooguit één tegelijk, want
+  /// [_run] serialiseert).
+  int _renderSeq = 0;
+  Completer<String?>? _renderCompleter;
+
   /// Ask the UI layer to mount the offstage WebView host.
   ///
   /// Ná het frame, niet erin. De aanroep komt uit `initState` van
@@ -92,6 +102,13 @@ class MermaidRenderService {
     // string die op dat moment wordt samengesteld.
     final escapedJs = jsonEncode(mermaidJs);
     final escapedInlinerJs = jsonEncode(inlinerJs);
+    // Kanaal waarlangs de pagina de klaar-gerenderde SVG terugstuurt (#882).
+    // Vóór het laden geregistreerd, zodat `MermaidChannel` bestaat wanneer de
+    // render later vuurt.
+    await _controller!.addJavaScriptChannel(
+      'MermaidChannel',
+      onMessageReceived: _onMermaidMessage,
+    );
     await _controller!.loadHtmlString('''
 <!DOCTYPE html>
 <html>
@@ -120,12 +137,19 @@ document.head.appendChild(inlinerBundle);
 // per diagramsoort). Als JSON in de pagina gezet, zodat de config maar op één
 // plek staat en de twee renderpaden niet uiteen kunnen lopen.
 mermaid.initialize(${jsonEncode(kMermaidInitConfig)});
-window.__renderMermaid = async function(source) {
-  const id = 'm' + Math.abs(source.split('').reduce((h,c)=>((h<<5)-h+c.charCodeAt(0))|0,0));
-  const out = await mermaid.render(id, source);
-  // Mermaids theme zit in een <style>-blok dat flutter_svg negeert; inline het
-  // (#862) zodat de kleuren/tekst wél verschijnen.
-  return window.__ocideckInlineSvgStyles ? window.__ocideckInlineSvgStyles(out.svg) : out.svg;
+// Async, dus we geven het resultaat NIET terug via runJavaScriptReturningResult
+// (dat marshalt een Promise niet op macOS-WKWebView, #882) maar sturen de
+// klaar-gerenderde SVG terug via het MermaidChannel, gekoppeld aan de meegegeven
+// seq. De aanroeper (_run) vuurt dit met runJavaScript en wacht op het bericht.
+window.__renderMermaid = function(source, seq) {
+  mermaid.render('m' + seq, source).then(function(out) {
+    // Mermaids theme zit in een <style>-blok dat flutter_svg negeert; inline het
+    // (#862) zodat de kleuren/tekst wél verschijnen.
+    var svg = window.__ocideckInlineSvgStyles ? window.__ocideckInlineSvgStyles(out.svg) : out.svg;
+    MermaidChannel.postMessage(JSON.stringify({seq: seq, svg: svg}));
+  }).catch(function(e) {
+    MermaidChannel.postMessage(JSON.stringify({seq: seq, error: String(e)}));
+  });
 };
 </script>
 </body>
@@ -182,11 +206,22 @@ window.__renderMermaid = async function(source) {
         // JSON-omhulsel zoals de WebView).
         raw = await web_renderer.renderMermaid(job.source);
       } else {
+        // Vuur de render en wacht op het antwoord via het MermaidChannel (#882):
+        // een Promise via runJavaScriptReturningResult marshalt niet op macOS.
+        final seq = ++_renderSeq;
+        final completer = Completer<String?>();
+        _renderCompleter = completer;
         final encoded = jsonEncode(job.source);
-        final result = await _controller!.runJavaScriptReturningResult(
-          'window.__renderMermaid($encoded)',
+        await _controller!.runJavaScript(
+          'window.__renderMermaid($encoded, $seq)',
         );
-        raw = _unwrapJsString(result);
+        raw = await completer.future.timeout(
+          const Duration(seconds: 15),
+          onTimeout: () {
+            logWarning('MermaidRender: WebView render timed out');
+            return null;
+          },
+        );
       }
       final svg = sanitizeMermaidSvg(raw ?? '');
       if (svg != null && svg.contains('<svg')) {
@@ -204,17 +239,33 @@ window.__renderMermaid = async function(source) {
     }
   }
 
-  String? _unwrapJsString(Object? raw) {
-    if (raw == null) return null;
-    var text = raw.toString();
-    if (text.startsWith('"') && text.endsWith('"') && text.length >= 2) {
-      try {
-        text = jsonDecode(text) as String;
-      } catch (e) {
-        logWarning('MermaidRender: JSON-string unwrap failed', e);
-      }
+  /// Ontvangt het render-antwoord van de WebView (#882) en lost de wachtende
+  /// render op. Een bericht met de verkeerde seq (laat/verdwaald) of zonder
+  /// wachtende render wordt genegeerd.
+  void _onMermaidMessage(JavaScriptMessage message) {
+    final Map<String, dynamic> data;
+    try {
+      data = jsonDecode(message.message) as Map<String, dynamic>;
+    } catch (e) {
+      logWarning('MermaidRender: onleesbaar channel-bericht', e);
+      return;
     }
-    return text;
+    final seq = (data['seq'] as num?)?.toInt();
+    final completer = _renderCompleter;
+    if (seq == null ||
+        seq != _renderSeq ||
+        completer == null ||
+        completer.isCompleted) {
+      return;
+    }
+    _renderCompleter = null;
+    final error = data['error'];
+    if (error != null) {
+      logWarning('MermaidRender: WebView render error: $error');
+      completer.complete(null);
+    } else {
+      completer.complete(data['svg'] as String?);
+    }
   }
 }
 
