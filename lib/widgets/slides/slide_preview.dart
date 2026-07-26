@@ -521,43 +521,45 @@ class SlidePreviewWidget extends StatelessWidget {
       controller: mermaidScrollController,
       child: MediaQuery.withNoTextScaling(
         child: _TableEditHost(
-        enabled:
-            presentationMode && slide.type == SlideType.table && tableEditMode,
-        selectedRow: tableEditRow,
-        selectedCol: tableEditCol,
-        onCellSelected: onTableCellSelected,
-        onCellChanged: onTableCellChanged,
-        child: _ChecklistInteractionHost(
-          // Op een geredigeerde slide is aanvinken uitgeschakeld: de presenter
-          // schrijft de hele (zwartgelakte) slide terug. Zie
-          // [Slide.contentRedacted].
           enabled:
               presentationMode &&
-              onChecklistItemToggle != null &&
-              !slide.contentRedacted,
-          onToggle: onChecklistItemToggle,
-          child: Directionality(
-            textDirection: TextDirection.ltr,
-            child: DefaultTextStyle(
-              style: TextStyle(
-                color: AppTheme.parseHexColor(themeProfile.textColor),
-                decoration: TextDecoration.none,
-                fontWeight: FontWeight.normal,
-                fontStyle: FontStyle.normal,
-              ),
-              child: _SlideLinkScope(
-                onTapLink: onLinkTap,
-                hasBottomTlp: hasBottomRightTlp,
-                allowRemoteMedia: allowRemoteMedia,
-                mediaRedacted: slide.mediaRedacted,
-                decodeMaxEdge: decodeMaxEdge,
-                onEnableOnlineMedia: onEnableOnlineMedia,
-                child: _buildSlide(slide.projectionWithViewLimit()),
+              slide.type == SlideType.table &&
+              tableEditMode,
+          selectedRow: tableEditRow,
+          selectedCol: tableEditCol,
+          onCellSelected: onTableCellSelected,
+          onCellChanged: onTableCellChanged,
+          child: _ChecklistInteractionHost(
+            // Op een geredigeerde slide is aanvinken uitgeschakeld: de presenter
+            // schrijft de hele (zwartgelakte) slide terug. Zie
+            // [Slide.contentRedacted].
+            enabled:
+                presentationMode &&
+                onChecklistItemToggle != null &&
+                !slide.contentRedacted,
+            onToggle: onChecklistItemToggle,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: DefaultTextStyle(
+                style: TextStyle(
+                  color: AppTheme.parseHexColor(themeProfile.textColor),
+                  decoration: TextDecoration.none,
+                  fontWeight: FontWeight.normal,
+                  fontStyle: FontStyle.normal,
+                ),
+                child: _SlideLinkScope(
+                  onTapLink: onLinkTap,
+                  hasBottomTlp: hasBottomRightTlp,
+                  allowRemoteMedia: allowRemoteMedia,
+                  mediaRedacted: slide.mediaRedacted,
+                  decodeMaxEdge: decodeMaxEdge,
+                  onEnableOnlineMedia: onEnableOnlineMedia,
+                  child: _buildSlide(slide.projectionWithViewLimit()),
+                ),
               ),
             ),
           ),
         ),
-      ),
       ),
     );
   }

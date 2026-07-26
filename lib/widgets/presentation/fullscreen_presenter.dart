@@ -103,6 +103,37 @@ const _questionTickMs = 100;
 /// in `test/standalone_palette_contrast_test.dart`.
 const _muted = PresenterPalette.textMuted;
 
+/// Berekent de mermaid-scrollfractie van [controller] en zendt die naar het
+/// publieksvenster (#872), zodat een groot schema daar meebeweegt. Best-effort
+/// en alleen bij een merkbare wijziging (≥ 0,5%), om het kanaal niet vol te
+/// sturen. Geeft de nieuw verzonden fractie terug, of [lastSentFraction] als er
+/// niets veranderde — de aanroeper onthoudt die voor de throttle.
+///
+/// Top-level zodat het gedrag buiten [_FullscreenPresenterState] leeft; de dia
+/// op het presentatiescherm en op de beamer verschillen van afmeting, dus wordt
+/// bewust een fractie (0..1) verstuurd en geen pixelwaarde.
+double _broadcastMermaidScrollFraction({
+  required AudienceWindowHandle? audience,
+  required ScrollController controller,
+  required int index,
+  required double lastSentFraction,
+}) {
+  if (audience?.controller == null) return lastSentFraction;
+  if (!controller.hasClients) return lastSentFraction;
+  final pos = controller.position;
+  final fraction = pos.maxScrollExtent > 0
+      ? (pos.pixels / pos.maxScrollExtent).clamp(0.0, 1.0)
+      : 0.0;
+  if ((fraction - lastSentFraction).abs() < 0.005) return lastSentFraction;
+  audienceChannel
+      .invokeMethod('mermaidScroll', {'index': index, 'fraction': fraction})
+      .catchError((Object e) {
+        logWarning('FullscreenPresenter: mermaid scroll sync failed', e);
+        return null;
+      });
+  return fraction;
+}
+
 class FullscreenPresenter extends StatefulWidget {
   final List<Slide> slides;
   final String? projectPath;
@@ -779,26 +810,16 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     if (indexChanged) _pushInk();
   }
 
-  /// Zend de scrollpositie van het presentatie-diagram naar het publieksvenster,
-  /// zodat een groot schema daar meebeweegt (#872). Best-effort en alleen bij een
-  /// merkbare wijziging (≥ 1px), om het kanaal niet vol te sturen.
+  /// Listener op [_mermaidScroll]: deelt de fractie met het publieksvenster en
+  /// onthoudt de laatst verzonden waarde voor de throttle. Zie
+  /// [_broadcastMermaidScrollFraction].
   void _broadcastMermaidScroll() {
-    if (widget.audience?.controller == null) return;
-    if (!_mermaidScroll.hasClients) return;
-    // Als fractie (0..1), niet als pixels: de dia op het presentatiescherm en op
-    // de beamer hebben verschillende afmetingen, dus verschillende scrollranges.
-    final pos = _mermaidScroll.position;
-    final fraction = pos.maxScrollExtent > 0
-        ? (pos.pixels / pos.maxScrollExtent).clamp(0.0, 1.0)
-        : 0.0;
-    if ((fraction - _lastSentMermaidFraction).abs() < 0.005) return;
-    _lastSentMermaidFraction = fraction;
-    audienceChannel
-        .invokeMethod('mermaidScroll', {'index': _index, 'fraction': fraction})
-        .catchError((Object e) {
-          logWarning('FullscreenPresenter: mermaid scroll sync failed', e);
-          return null;
-        });
+    _lastSentMermaidFraction = _broadcastMermaidScrollFraction(
+      audience: widget.audience,
+      controller: _mermaidScroll,
+      index: _index,
+      lastSentFraction: _lastSentMermaidFraction,
+    );
   }
 
   // ── Vraag-slides ───────────────────────────────────────────────────────────

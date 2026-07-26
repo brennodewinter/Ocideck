@@ -221,15 +221,15 @@ class MermaidRenderScope extends InheritedWidget {
   /// De dichtstbijzijnde waarde, of `false` als er geen scope boven staat —
   /// passend verkleinen is de veilige standaard.
   static bool scrollableOf(BuildContext context) {
-    final scope =
-        context.dependOnInheritedWidgetOfExactType<MermaidRenderScope>();
+    final scope = context
+        .dependOnInheritedWidgetOfExactType<MermaidRenderScope>();
     return scope?.scrollable ?? false;
   }
 
   /// De gedeelde scroll-controller voor dit oppervlak, of `null` als er geen is.
   static ScrollController? controllerOf(BuildContext context) {
-    final scope =
-        context.dependOnInheritedWidgetOfExactType<MermaidRenderScope>();
+    final scope = context
+        .dependOnInheritedWidgetOfExactType<MermaidRenderScope>();
     return scope?.controller;
   }
 

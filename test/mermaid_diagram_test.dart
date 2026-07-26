@@ -228,7 +228,10 @@ void main() {
     // De onderkant van het (te hoge) diagram zit vóór het scrollen ver onder de
     // rand; na omhoog slepen schuift de tekening zichtbaar mee omhoog.
     final before = tester.getTopLeft(find.byType(SvgPicture)).dy;
-    await tester.drag(find.byType(SingleChildScrollView), const Offset(0, -200));
+    await tester.drag(
+      find.byType(SingleChildScrollView),
+      const Offset(0, -200),
+    );
     await tester.pumpAndSettle();
     final after = tester.getTopLeft(find.byType(SvgPicture)).dy;
     expect(after, lessThan(before - 100));
