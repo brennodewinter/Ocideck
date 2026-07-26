@@ -26,11 +26,11 @@ void main() {
     test('allows project-contained relative and absolute paths', () {
       expect(
         resolveSlideAssetPath('images/cover.png', project),
-        '$project/images/cover.png',
+        p.normalize('$project/images/cover.png'),
       );
       expect(
         resolveSlideAssetPath('$project/images/cover.png', project),
-        '$project/images/cover.png',
+        p.normalize('$project/images/cover.png'),
       );
     });
   });
