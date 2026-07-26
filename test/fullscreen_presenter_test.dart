@@ -1136,7 +1136,7 @@ void main() {
   group('online-media-knop in presentatie (#865)', () {
     /// Dual-screen mode vereist een AudienceWindowHandle; we gebruiken de
     /// test-window-controller die ook de rest van deze suite gebruikt.
-    Widget _dualHost(List<Slide> slides, {bool allowRemoteMedia = false}) {
+    Widget dualHost(List<Slide> slides, {bool allowRemoteMedia = false}) {
       return MaterialApp(
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
@@ -1158,51 +1158,50 @@ void main() {
       );
     }
 
-    testWidgets('dual-screen: toont hint bij remote afbeelding en allowRemoteMedia uit', (
-      tester,
-    ) async {
-      tester.view.physicalSize = const Size(1280, 800);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
+    testWidgets(
+      'dual-screen: toont hint bij remote afbeelding en allowRemoteMedia uit',
+      (tester) async {
+        tester.view.physicalSize = const Size(1280, 800);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
 
-      final slides = [
-        Slide.create(SlideType.image).copyWith(
-          imagePath: 'https://example.com/photo.jpg',
-        ),
-      ];
+        final slides = [
+          Slide.create(
+            SlideType.image,
+          ).copyWith(imagePath: 'https://example.com/photo.jpg'),
+        ];
 
-      await tester.pumpWidget(_dualHost(slides));
-      await tester.pumpAndSettle();
+        await tester.pumpWidget(dualHost(slides));
+        await tester.pumpAndSettle();
 
-      expect(
-        find.textContaining('Online media staat uit'),
-        findsWidgets,
-      );
-    });
+        expect(find.textContaining('Online media staat uit'), findsWidgets);
+      },
+    );
 
-    testWidgets('dual-screen: toont geen hint wanneer allowRemoteMedia aan staat', (
-      tester,
-    ) async {
-      tester.view.physicalSize = const Size(1280, 800);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
+    testWidgets(
+      'dual-screen: toont geen hint wanneer allowRemoteMedia aan staat',
+      (tester) async {
+        tester.view.physicalSize = const Size(1280, 800);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
 
-      final slides = [
-        Slide.create(SlideType.image).copyWith(
-          imagePath: 'https://example.com/photo.jpg',
-        ),
-      ];
+        final slides = [
+          Slide.create(
+            SlideType.image,
+          ).copyWith(imagePath: 'https://example.com/photo.jpg'),
+        ];
 
-      await tester.pumpWidget(_dualHost(slides, allowRemoteMedia: true));
-      await tester.pumpAndSettle();
+        await tester.pumpWidget(dualHost(slides, allowRemoteMedia: true));
+        await tester.pumpAndSettle();
 
-      expect(
-        find.textContaining('Online media staat uit — aanzetten'),
-        findsNothing,
-      );
-    });
+        expect(
+          find.textContaining('Online media staat uit — aanzetten'),
+          findsNothing,
+        );
+      },
+    );
 
     testWidgets('dual-screen: toont geen hint bij lokale afbeelding', (
       tester,
@@ -1216,7 +1215,7 @@ void main() {
         Slide.create(SlideType.image).copyWith(imagePath: 'media/local.jpg'),
       ];
 
-      await tester.pumpWidget(_dualHost(slides));
+      await tester.pumpWidget(dualHost(slides));
       await tester.pumpAndSettle();
 
       expect(
