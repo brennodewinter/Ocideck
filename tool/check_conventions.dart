@@ -144,13 +144,17 @@ const int maxClassLines = 1000;
 /// het doel is minder en kleinere regels, niet meer.
 const Map<String, int> classSizeBaseline = {
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState': 5989,
-  // Opgetrokken 2026-07-26 van 3412: de parallel gemergede features #865
-  // (online media aanzetten vanuit de presentatie) en #872 (scrollbaar mermaid)
-  // groeiden deze klasse over het plafond, waardoor main's conventiepoort rood
-  // stond. Bewust opgerekt om main (en #876) te deblokkeren; de klasse hoort
-  // echt verkleind te worden — zie de aparte presenter-refactortaak.
+  // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
+  // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
+  // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
+  // is uit deze klasse gehaald naar `QuestionRoundBuilder`
+  // (lib/services/question_round_builder.dart). Dat is pure rekenkunde over het
+  // model (geen widget, geen setState, geen vensterkanaal) en dus nu op zichzelf
+  // te toetsen; de presenter houdt alleen nog de timer, het oefenlogboek en de
+  // vensters bij. De extractie brengt de klasse écht onder het plafond in plaats
+  // van het plafond op te rekken.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3465,
+      3310,
   'lib/services/file_service.dart#FileService': 2817,
   'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 2667,
   'lib/state/tabs_provider.dart#TabsNotifier': 2211,
