@@ -143,6 +143,18 @@ read a book to find out.
   attributen — één gedeelde inliner (`assets/web_export/svg_style_inline.js`) voor
   beide renderpaden. Raakt zowel web als desktop; het echte renderen is visueel
   geverifieerd met de gebundelde mermaid.
+- **Mermaid-tekstlabels staan weer ín hun knopen (#868).** Nadat #862 de vlakken
+  weer liet kleuren, bleek de tekst een laag dieper alsnog verkeerd geplaatst:
+  labels versprongen buiten hun knoop en overlapten, de knopen leken leeg.
+  Oorzaak: `flutter_svg` volgt mermaids tekstlayout niet — `text-anchor:middle`,
+  `em`-eenheden in `y`/`dy`, en per woord geneste `<tspan>`s. De gedeelde inliner
+  (`assets/web_export/svg_style_inline.js`) bakt nu, in de browser die mermaid al
+  rendert, elke tekstregel om naar de vorm die flutter_svg wél volgt: één platte
+  `<tspan>` met absolute px-`x`/`y` op de al berekende plek
+  (`getStartPositionOfChar`) en `text-anchor:start` — geen `middle`, geen `em`,
+  geen geneste tspans. Dezelfde slag repareerde een separator-bug in de inliner
+  (een bestaande `style` zonder afsluitende `;` smolt samen met de eerste
+  toevoeging). Raakt web en desktop; visueel geverifieerd op de live webdemo.
 - **Mermaid-diagrammen renderden niet in de webversie (#851).** Een
   beslisboom-slide bleef op web een leeg vlak. De oorzaak zat een laag dieper
   dan de CSP: de renderer tekent de diagrammen in een verborgen WebView en leest

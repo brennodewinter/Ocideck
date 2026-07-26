@@ -77,6 +77,33 @@ void main() {
         reason: 'de gebundelde stijl-inliner (#862) moet bestaan op $assetKey',
       );
     });
+
+    test('de inliner bakt de tekstlayout naar flutter_svg-veilige vorm (#868)', () {
+      // De JS draait niet onder `flutter test` (geen browser, geen
+      // getStartPositionOfChar), dus de werking is visueel op web/desktop
+      // geverifieerd. Wat deze poort vasthoudt is de structuur waar #868 in zat:
+      // zonder het bakken plaatst flutter_svg mermaids labels verkeerd
+      // (`text-anchor:middle` + `em` + geneste tspans), en zou een refactor die de
+      // bak-stap sloopt stil de tekst weer laten verspringen.
+      final inliner = File(
+        'assets/web_export/svg_style_inline.js',
+      ).readAsStringSync();
+      expect(
+        inliner,
+        contains('getStartPositionOfChar'),
+        reason: 'de al-berekende baseline moet gemeten en vastgelegd worden',
+      );
+      expect(
+        inliner,
+        contains("setAttribute('text-anchor', 'start')"),
+        reason: 'na het bakken moet elke regel op start-anchor staan',
+      );
+      expect(
+        inliner,
+        contains("removeAttribute('dy')"),
+        reason: 'em-`dy` moet weg; de y wordt absoluut in px gezet',
+      );
+    });
   });
 
   group('de service kiest het web-pad en houdt één config', () {
