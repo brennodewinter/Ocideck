@@ -157,6 +157,24 @@ read a book to find out.
   stuurt een `.ocideck`/`.zip` door het bestaande uitpakpad
   (`importPackageFile`). Gemeld door kwoot. Bewaakt door
   `test/open_package_by_path_test.dart`.
+- **Eén beschadigd onderdeel breekt niet langer de hele presentatie-import af
+  (#877).** De PPTX- en ODP-importers parsten alle dia's onder één brede
+  `try/catch`; één misvormde relatie, grafiek, tabel of media-part liet daardoor
+  de héle import als `ImportFailure` eindigen — in strijd met de
+  best-effort-plus-notitiedia-belofte. De import legt de foutgrens nu op het
+  kleinste zinvolle onderdeel: een dia, grafiek, tabel, afbeelding/media of
+  notitie die struikelt wordt overgeslagen en als getypeerde `ConversionIssue`
+  (mét onderdeel en oorzaakcategorie) op de notitiedia gemeld, terwijl de rest
+  van de dia en alle volgende dia's in volgorde behouden blijven. Alleen een
+  kapotte kern- of containerstructuur (geen geldig zip, geen
+  `spTree`/`content.xml`) eindigt nog het hele deck, met een stabiele
+  `ImportFailureReason`. De gedeelde `guardParse`-grens
+  (`lib/services/import/pipeline/parse_guard.dart`) maakt het PPTX-, ODP- en
+  Keynote-pad gelijkwaardig en logt bewust alléén de bewerking, het onderdeel,
+  de oorzaak en het *fouttype* — nooit het foutobject, want een XML-/formaatfout
+  draagt een stuk brontekst (mogelijk persoonsgegevens) in zijn boodschap.
+  Afgedekt door beschadigingstests per importer (misvormde XML, kapotte
+  relatie/grafiek/tabel, ontbrekende media).
 - **De privacy-gezichtsscan was sinds de `dartcv4` 2.x-migratie (#870/#873) stil
   kapot; nu hersteld en met een integratietest afgedekt.** `dartcv4` 2.x levert
   OpenCV modulair en sluit de meeste modules standaard uit — waaronder
