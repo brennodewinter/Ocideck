@@ -25,8 +25,13 @@
 /// Tijdbudget en annulering horen bij hetzelfde contract, maar krijgen pas
 /// betekenis zodra de import op een worker-isolate draait (#875): op de
 /// UI-isolate kan niemand het annuleervlag zetten terwijl het parsen loopt.
-/// Daarom draagt dit budget nu alleen de geheugen- en iteratiegrenzen; #875
-/// voegt de deadline en de annuleertoken aan ditzelfde object toe.
+/// Sinds #875 draagt dit budget daarom óók de [maxDuration]-deadline — een
+/// waarde die de worker zelf, binnen zijn eigen isolate, bij elke werkeenheid
+/// aftoetst. De *annuleertoken* leeft bewust níét hier: een const, over de
+/// isolategrens gekopieerd budget kan geen veranderlijke annuleerstaat dragen,
+/// en een isolate deelt geen geheugen. Annuleren wordt daarom buiten dit object
+/// om geleverd — de runner beëindigt de worker (desktop) of zet een coöperatief
+/// vlag dat de kern bij elke yield afleest (web). Zie `pipeline/import_task.dart`.
 library;
 
 const int _kib = 1024;
@@ -50,6 +55,7 @@ class ImportBudget {
     this.maxSnappyStreamBytes = 256 * _mib,
     this.maxSlides = 2000,
     this.maxIwaObjects = 500000,
+    this.maxDuration = const Duration(minutes: 2),
   });
 
   /// Het budget dat de app in productie gebruikt: ruim voor elk echt deck, maar
@@ -96,6 +102,22 @@ class ImportBudget {
   /// Begrenst de `objects`-map die tijdens het inlezen groeit.
   final int maxIwaObjects;
 
+  /// Maximale wandkloktijd voor één import. De worker toetst dit binnen zijn
+  /// eigen isolate bij elke werkeenheid (na het uitpakken, na het parsen, per
+  /// dia); een overschrijding eindigt de import als
+  /// [ImportFailureReason.tooLarge] met [durationLabel] als grens.
+  ///
+  /// Grof met opzet: de dominante eenheid — de importer die het hele deck in
+  /// één keer parseert — wordt niet ónderbroken maar wél afgetoetst zodra hij
+  /// terugkeert. De geheugen- en iteratiegrenzen hierboven binden ieder van die
+  /// eenheden; deze deadline is het bovenplafond dat een pathologisch geval
+  /// alsnog tot staan brengt, óók op web waar de worker niet gedood kan worden.
+  final Duration maxDuration;
+
+  /// Menselijk leesbare beschrijving van [maxDuration] voor de
+  /// gebruikersmelding, in het Nederlands (bv. "120 s verwerkingstijd").
+  String get durationLabel => '${maxDuration.inSeconds} s verwerkingstijd';
+
   /// Een piepklein budget voor tests, zodat elk overschrijdingspad met een paar
   /// bytes te raken is. Alleen de meegegeven velden wijken af; de rest houdt de
   /// standaardwaarde.
@@ -109,6 +131,7 @@ class ImportBudget {
     int maxSnappyStreamBytes = 8 * _kib,
     int maxSlides = 4,
     int maxIwaObjects = 16,
+    Duration maxDuration = const Duration(minutes: 2),
   }) => ImportBudget(
     maxSourceBytes: maxSourceBytes,
     maxArchiveEntries: maxArchiveEntries,
@@ -119,6 +142,7 @@ class ImportBudget {
     maxSnappyStreamBytes: maxSnappyStreamBytes,
     maxSlides: maxSlides,
     maxIwaObjects: maxIwaObjects,
+    maxDuration: maxDuration,
   );
 }
 

@@ -9,6 +9,8 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/import/bulk_import_runner.dart';
+import 'package:ocideck/services/import/pipeline/import_runner.dart';
+import 'package:ocideck/services/import/pipeline/import_task.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/state/deck_provider.dart';
@@ -57,6 +59,9 @@ void main() {
   setUp(() {
     AppLocalizations.setActiveLanguageCode('nl');
     WebAssetStore.clear();
+    // Widget-tests draaien onder een fake-async-klok en kunnen de echte
+    // worker-isolate niet aansturen; draai de import daarom in-process (#875).
+    debugImportTaskRunner = runImportTaskInline;
     SharedPreferences.setMockInitialValues({
       'presentationImportWarningDismissed': true,
     });
@@ -65,6 +70,7 @@ void main() {
   });
 
   tearDown(() {
+    debugImportTaskRunner = null;
     WebAssetStore.clear();
     if (target.existsSync()) target.deleteSync(recursive: true);
   });

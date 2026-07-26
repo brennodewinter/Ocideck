@@ -1859,6 +1859,17 @@ zip archive", "damaged zip archive") instead of the far more confusing "no
 slides found". The deck title comes from the source's own document properties,
 falling back to the file name.
 
+**The window stays responsive, and you can stop.** Reading a presentation —
+unzipping, parsing, decompressing, reconstructing, classifying — is real work,
+and a large or hostile file used to freeze the window for seconds with no way to
+tell a long import from a hung one. That work now runs on a background worker, so
+the interface keeps drawing and taking input while it goes. A single-file import
+shows a small progress window with a *Stoppen* button; stopping ends the read
+within a moment and produces nothing — no half-built deck, nothing written to
+disk. The browser version has no second thread, so there the same work runs in
+the page, still with the progress window and the *Stoppen* button and still
+bounded by the import's own size and time limits.
+
 **It is not a one-to-one copy, and it says so before it starts.** OciDeck's
 slide model is deliberately simpler than PowerPoint's — fixed layouts, one
 chart or one table per slide, no free positioning — so a conversion always
@@ -1959,7 +1970,9 @@ target folder, and watch the row run file by file. Each deck is saved there as
 its own `.md` with its own `images/` folder beside it, under a name that never
 overwrites anything — a second deck with the same title becomes `-2`. A file
 that fails does not stop the row; it is marked, named, and the next one starts.
-*Stoppen* takes effect between two files, never halfway through writing one.
+*Stoppen* takes effect immediately — it breaks off the file being read as well
+as the ones not yet started — and never leaves a half-written deck behind: the
+file it interrupts counts as not-reached, not as failed.
 Afterwards the dialog counts what succeeded, what failed, how many slides need
 attention and how many never came up, and — most importantly — names the folder,
 because these decks do not open in tabs and without that path nobody knows where
