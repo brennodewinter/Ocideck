@@ -93,7 +93,10 @@ void main() {
         recentFiles: [p.join(temp.path, 'decks', 'a.md')],
       );
 
-      expect(hits.map((h) => h.path), [oci.path, other.path]);
+      expect(hits.map((h) => p.normalize(h.path)), [
+        p.normalize(oci.path),
+        p.normalize(other.path),
+      ]);
       expect(hits.first.isOcideckTheme, isTrue);
       expect(hits.first.theme, 'ocideck');
       expect(hits[1].isOcideckTheme, isFalse);
