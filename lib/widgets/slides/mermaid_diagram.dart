@@ -55,6 +55,15 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.source != widget.source) {
       _svgFuture = _render(widget.source);
+      // Nieuwe inhoud: terug naar de bovenkant, ook bij een gedeelde
+      // presentatie-controller — anders begint een volgende dia op de oude
+      // scrollpositie (#872).
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        final controller =
+            MermaidRenderScope.controllerOf(context) ?? _scrollController;
+        if (controller.hasClients) controller.jumpTo(0);
+      });
     }
   }
 
@@ -108,6 +117,10 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
     final aspect = _diagramAspectRatio(safe);
     final naturalHeight = (aspect != null && aspect > 0) ? maxW / aspect : null;
     final scrollable = MermaidRenderScope.scrollableOf(context);
+    // Een gedeelde controller (presentatie) wint van de eigen; zo kan de
+    // presentator de scrollpositie naar het publiek spiegelen (#872).
+    final controller =
+        MermaidRenderScope.controllerOf(context) ?? _scrollController;
 
     final Widget content;
     if (naturalHeight == null || naturalHeight <= maxH || !scrollable) {
@@ -129,7 +142,7 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
       content = SizedBox(
         height: maxH,
         child: SingleChildScrollView(
-          controller: _scrollController,
+          controller: controller,
           child: Align(
             alignment: Alignment.topCenter,
             heightFactor: 1.0,
@@ -193,10 +206,17 @@ class MermaidRenderScope extends InheritedWidget {
   const MermaidRenderScope({
     super.key,
     required this.scrollable,
+    this.controller,
     required super.child,
   });
 
   final bool scrollable;
+
+  /// Optionele externe scroll-controller (#872). Zet de presentatie in om de
+  /// scrollpositie te delen: de presentator luistert erop en zendt de offset naar
+  /// het publieksvenster, dat zijn eigen controller op die offset zet. Zonder dit
+  /// gebruikt elk diagram zijn eigen interne controller (editor/losse preview).
+  final ScrollController? controller;
 
   /// De dichtstbijzijnde waarde, of `false` als er geen scope boven staat —
   /// passend verkleinen is de veilige standaard.
@@ -206,9 +226,16 @@ class MermaidRenderScope extends InheritedWidget {
     return scope?.scrollable ?? false;
   }
 
+  /// De gedeelde scroll-controller voor dit oppervlak, of `null` als er geen is.
+  static ScrollController? controllerOf(BuildContext context) {
+    final scope =
+        context.dependOnInheritedWidgetOfExactType<MermaidRenderScope>();
+    return scope?.controller;
+  }
+
   @override
   bool updateShouldNotify(MermaidRenderScope oldWidget) =>
-      scrollable != oldWidget.scrollable;
+      scrollable != oldWidget.scrollable || controller != oldWidget.controller;
 }
 
 /// De maat waarin het diagram binnen het slidekader past.

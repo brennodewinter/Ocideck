@@ -359,8 +359,13 @@ class SlidePreviewWidget extends StatelessWidget {
   /// Of een te groot mermaid-diagram op dit oppervlak mag scrollen (#872).
   /// Opt-in: standaard `false` (passend verkleinen, het hele diagram zichtbaar),
   /// net als thumbnails, dialogen en de export. Alleen de grote interactieve
-  /// previews (editor-previewpaneel, play-scherm) zetten het op `true`.
+  /// previews (presentatie) zetten het op `true`.
   final bool scrollableMermaid;
+
+  /// Optionele gedeelde scroll-controller voor een groot mermaid-diagram (#872).
+  /// De presentatie zet er één zodat de presentator zijn scrollpositie kan
+  /// spiegelen naar het publieksvenster; elders `null` (eigen controller).
+  final ScrollController? mermaidScrollController;
 
   /// Wijzigt tijdens het presenteren een checklistitem. [column] is 0 voor de
   /// eerste/enkele lijst en 1 voor de rechterkolom.
@@ -469,6 +474,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.allowRemoteMedia = false,
     this.presentationMode = false,
     this.scrollableMermaid = false,
+    this.mermaidScrollController,
     this.onChecklistItemToggle,
     this.tableEditMode = false,
     this.tableEditRow,
@@ -512,6 +518,7 @@ class SlidePreviewWidget extends StatelessWidget {
     // measuring assumes unscaled text), so the canvas opts out.
     return MermaidRenderScope(
       scrollable: scrollableMermaid,
+      controller: mermaidScrollController,
       child: MediaQuery.withNoTextScaling(
         child: _TableEditHost(
         enabled:

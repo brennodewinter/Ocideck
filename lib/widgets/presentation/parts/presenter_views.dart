@@ -56,6 +56,11 @@ extension _PresenterViews on _FullscreenPresenterState {
                   showClassificationWatermark:
                       widget.showClassificationWatermark,
                   presentationMode: true,
+                  // De presentatie-dia is groot genoeg om een fors diagram te
+                  // scrollen; de gedeelde controller spiegelt de positie naar het
+                  // publieksvenster (#872).
+                  scrollableMermaid: true,
+                  mermaidScrollController: _mermaidScroll,
                   onChecklistItemToggle: (column, itemIndex) =>
                       _toggleChecklistItem(
                         slideIndex: _index,
