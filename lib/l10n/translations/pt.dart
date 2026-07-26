@@ -1860,6 +1860,12 @@ const _dutchSourceAddPt = <String, String>{
       'Defina o nível GRIP, a estrutura de crise, os papéis e as decisões de escalonamento e desescalonamento.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Plano de travessia e acordos de ponte (appraisal, planning, execution, monitoring) com pontos críticos da rota.',
+  'Afbeelding of media': 'Imagem ou multimédia',
+  'Dia-inhoud': 'Conteúdo do slide',
+  'kon niet worden gelezen en is overgeslagen':
+      'não foi possível ler e foi ignorado',
+  'ontbrak in het bestand en is overgeslagen':
+      'faltava no ficheiro e foi ignorado',
   'Online media staat uit — aanzetten': 'Mídia online desativada — ativar',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} contém conteúdo executável e não será importado.',

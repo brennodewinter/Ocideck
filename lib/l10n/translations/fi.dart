@@ -1830,6 +1830,11 @@ const _dutchSourceAddFi = <String, String>{
       'Määritä GRIP-taso, kriisirakenne, roolit sekä ylös- ja alaspäin skaalauksen päätökset.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Reittisuunnitelma ja komentosillan sopimukset (appraisal, planning, execution, monitoring) sekä reitin kriittiset pisteet.',
+  'Afbeelding of media': 'Kuva tai media',
+  'Dia-inhoud': 'Dian sisältö',
+  'kon niet worden gelezen en is overgeslagen': 'ei voitu lukea ja ohitettiin',
+  'ontbrak in het bestand en is overgeslagen':
+      'puuttui tiedostosta ja ohitettiin',
   'Online media staat uit — aanzetten': 'Online-media pois — laita päälle',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} sisältää suoritettavaa sisältöä, eikä sitä tuoda.',

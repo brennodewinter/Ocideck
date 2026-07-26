@@ -1865,6 +1865,12 @@ const _dutchSourceAddGa = <String, String>{
       'Socraigh an leibhéal GRIP, an struchtúr géarchéime, na rólanna agus cinntí méadaithe agus laghdaithe.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Plean pasáiste agus comhaontuithe droichid (appraisal, planning, execution, monitoring) le pointí criticiúla bealaigh.',
+  'Afbeelding of media': 'Íomhá nó meáin',
+  'Dia-inhoud': 'Ábhar an tsleamhnáin',
+  'kon niet worden gelezen en is overgeslagen':
+      'níorbh fhéidir é a léamh agus fágadh ar lár é',
+  'ontbrak in het bestand en is overgeslagen':
+      'bhí sé ar iarraidh sa chomhad agus fágadh ar lár é',
   'Online media staat uit — aanzetten': 'Meáin ar líne as — cuir ar siúl',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       'Tá ábhar inrite i {bestand} agus ní dhéanfar é a iompórtáil.',

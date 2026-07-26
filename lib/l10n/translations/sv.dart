@@ -1829,6 +1829,12 @@ const _dutchSourceAddSv = <String, String>{
       'Fastställ GRIP-nivån, krisstrukturen, rollerna och beslut om upp- och nedtrappning.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Färdplan och bryggöverenskommelser (appraisal, planning, execution, monitoring) med kritiska ruttpunkter.',
+  'Afbeelding of media': 'Bild eller media',
+  'Dia-inhoud': 'Bildinnehåll',
+  'kon niet worden gelezen en is overgeslagen':
+      'kunde inte läsas och hoppades över',
+  'ontbrak in het bestand en is overgeslagen':
+      'saknades i filen och hoppades över',
   'Online media staat uit — aanzetten': 'Onlinemedier är av — slå på',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} innehåller körbart innehåll och importeras inte.',

@@ -1827,6 +1827,12 @@ const _dutchSourceAddDa = <String, String>{
       'Fastlæg GRIP-niveauet, krisestrukturen, rollerne og beslutninger om op- og nedskalering.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Sejladsplan og broaftaler (appraisal, planning, execution, monitoring) med kritiske rutepunkter.',
+  'Afbeelding of media': 'Billede eller medie',
+  'Dia-inhoud': 'Diasindhold',
+  'kon niet worden gelezen en is overgeslagen':
+      'kunne ikke læses og blev sprunget over',
+  'ontbrak in het bestand en is overgeslagen':
+      'manglede i filen og blev sprunget over',
   'Online media staat uit — aanzetten': 'Onlinemedier er slået fra — tænd',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} indeholder eksekverbart indhold og importeres ikke.',

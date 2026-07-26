@@ -1846,6 +1846,12 @@ const _dutchSourceAddLa = <String, String>{
       'GRIP gradum, structuram discriminis, partes et decreta de ascensu et descensu designa.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Consilium itineris et pacta pontis (appraisal, planning, execution, monitoring) cum punctis viae criticis.',
+  'Afbeelding of media': 'Imago vel instrumenta',
+  'Dia-inhoud': 'Contentum scidae',
+  'kon niet worden gelezen en is overgeslagen':
+      'legi non potuit et praetermissum est',
+  'ontbrak in het bestand en is overgeslagen':
+      'in plica deerat et praetermissum est',
   'Online media staat uit — aanzetten': 'Media in linea exstincta — activa',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} contentum exsecutabile continet neque importabitur.',

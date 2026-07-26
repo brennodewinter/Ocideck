@@ -3,10 +3,12 @@ import 'dart:typed_data';
 import 'package:xml/xml.dart';
 
 import '../../models/body_block.dart';
+import '../../models/conversion_issue.dart';
 import '../../models/source_chart.dart';
 import '../../models/source_image.dart';
 import '../../models/source_slide.dart';
 import '../../models/source_table.dart';
+import '../../pipeline/parse_guard.dart';
 import 'odp_chart.dart';
 import 'odp_context.dart';
 import 'odp_table.dart';
@@ -43,15 +45,63 @@ SourceSlide parsePage(
 }) {
   final (pageW, pageH) = ctx.pageSize(page);
 
+  final parts = _PageParts();
+  _readFrames(ctx, index, page, pageW, pageH, parts);
+
+  final notes =
+      guardParse<String>(
+        sink: parts.parseIssues,
+        slideIndex: index,
+        component: IssueComponent.notes,
+        feature: 'Sprekersnotities',
+        description: 'kon niet worden gelezen en is overgeslagen',
+        logOp: 'OdpImporter: dia ${index + 1} notities',
+        body: () => _readNotes(ctx, page),
+      ) ??
+      '';
+
+  return SourceSlide(
+    index: index,
+    title: parts.title.toString().trim(),
+    subtitle: parts.subtitle.toString().trim(),
+    bodyBlocks: parts.body,
+    images: parts.images,
+    chart: parts.chart,
+    table: parts.table,
+    hyperlinks: parts.links,
+    positionedTexts: parts.positioned,
+    notes: notes,
+    isHidden: isHidden,
+    parseIssues: parts.parseIssues,
+  );
+}
+
+/// De losse onderdelen die één `draw:page` oplevert, door [_readFrames] gevuld.
+/// Een verzamelaar in plaats van out-parameters, zodat [parsePage] leesbaar en
+/// onder de methodelengte-lat blijft (#877).
+class _PageParts {
   final title = StringBuffer();
   final subtitle = StringBuffer();
   final body = <BodyBlock>[];
   final links = <({String text, String url})>[];
   final positioned = <PositionedText>[];
   final images = <SourceImage>[];
+  final parseIssues = <ConversionIssue>[];
   SourceTable? table;
   SourceChart? chart;
+}
 
+/// Lees de directe `draw:frame`-kinderen van [page] in [parts], met per frame
+/// een foutgrens (#877): een onleesbaar tekstvak, afbeelding, tabel of grafiek
+/// wordt overgeslagen en genoteerd, de rest van de dia blijft.
+void _readFrames(
+  OdpContext ctx,
+  int index,
+  XmlElement page,
+  double pageW,
+  double pageH,
+  _PageParts parts,
+) {
   // Only consider direct child frames; this avoids speaker notes and animation
   // nodes that are also descendants of the page.
   for (final frame in page.children.whereType<XmlElement>()) {
@@ -62,87 +112,136 @@ SourceSlide parsePage(
 
     final textBox = descendantsLocal(frame, 'text-box').firstOrNull;
     if (textBox != null) {
-      final parsed = parseTextBox(textBox);
-      if (parsed.blocks.isEmpty) continue;
-
-      final text = parsed.blocks.map((b) => b.text).join(' ').trim();
-      final top = _cm(_attr(frame, 'y'));
-      final isFooter = top > pageH * 0.85;
-
-      if (isFooter) continue;
-
-      if (presClass == 'title') {
-        if (title.isEmpty) {
-          title.write(text);
-        } else {
-          title.write(' $text');
-        }
-      } else if (presClass == 'subtitle') {
-        if (subtitle.isEmpty) {
-          subtitle.write(text);
-        } else {
-          subtitle.write(' $text');
-        }
-      } else if (presClass == 'outline' ||
-          (presClass == null &&
-              (title.isNotEmpty || top >= pageH * 0.5 || text.isEmpty))) {
-        body.addAll(parsed.blocks);
-        if (presClass == null && text.isNotEmpty) {
-          positioned.add(_positionedText(frame, text, pageW, pageH));
-        }
-      } else if (presClass == null && title.isEmpty && top < pageH * 0.5) {
-        // Free-form text box at the top of the title slide: split the first
-        // paragraph(s) into title and subtitle.
-        for (var i = 0; i < parsed.blocks.length; i++) {
-          final block = parsed.blocks[i];
-          if (i == 0) {
-            title.write(block.text);
-          } else if (i == 1) {
-            subtitle.write(block.text);
-          } else {
-            body.add(block);
-          }
-        }
-      }
-      links.addAll(parsed.links);
+      // Isoleer een onleesbaar tekstvak tot dit frame (#877); de rest van de dia
+      // en de volgende dia's blijven intact.
+      final parsed = guardParse<OdpParsedText>(
+        sink: parts.parseIssues,
+        slideIndex: index,
+        component: IssueComponent.slide,
+        feature: 'Dia-inhoud',
+        description: 'kon niet worden gelezen en is overgeslagen',
+        logOp: 'OdpImporter: dia ${index + 1} tekstvak',
+        body: () => parseTextBox(textBox),
+      );
+      if (parsed == null || parsed.blocks.isEmpty) continue;
+      _applyTextFrame(frame, parsed, presClass, pageW, pageH, parts);
       continue;
     }
 
     final img = descendantsLocal(frame, 'image').firstOrNull;
     if (img != null) {
-      final source = _imageFromHref(ctx, img);
-      if (source != null) images.add(source);
+      final source = guardParse<SourceImage>(
+        sink: parts.parseIssues,
+        slideIndex: index,
+        component: IssueComponent.media,
+        feature: 'Afbeelding of media',
+        description: 'kon niet worden gelezen en is overgeslagen',
+        logOp: 'OdpImporter: dia ${index + 1} afbeelding',
+        body: () => _imageFromHref(ctx, img),
+      );
+      if (source != null) {
+        parts.images.add(source);
+      } else if (_imageHrefMissing(ctx, img)) {
+        parts.parseIssues.add(
+          ConversionIssue(
+            slideIndex: index,
+            component: IssueComponent.media,
+            cause: IssueCause.missingPart,
+            feature: 'Afbeelding of media',
+            description: 'ontbrak in het bestand en is overgeslagen',
+          ),
+        );
+      }
       continue;
     }
 
     final tbl = descendantsLocal(frame, 'table').firstOrNull;
     if (tbl != null) {
-      table ??= parseOdpTable(tbl);
+      parts.table ??= guardParse<SourceTable>(
+        sink: parts.parseIssues,
+        slideIndex: index,
+        component: IssueComponent.table,
+        feature: 'Tabel',
+        description: 'kon niet worden gelezen en is overgeslagen',
+        logOp: 'OdpImporter: dia ${index + 1} tabel',
+        body: () => parseOdpTable(tbl),
+      );
       continue;
     }
 
     // A draw:object xlink:href -> ObjectCharts/N is a chart sub-document.
     final obj = descendantsLocal(frame, 'object').firstOrNull;
     if (obj != null) {
-      chart ??= _chartFromObject(ctx, obj);
+      parts.chart ??= guardParse<SourceChart>(
+        sink: parts.parseIssues,
+        slideIndex: index,
+        component: IssueComponent.chart,
+        feature: 'Grafiek',
+        description: 'kon niet worden gelezen en is overgeslagen',
+        logOp: 'OdpImporter: dia ${index + 1} grafiek',
+        body: () => _chartFromObject(ctx, obj),
+      );
     }
   }
+}
 
-  final notes = _readNotes(ctx, page);
+/// Plaats de tekst van één `draw:text-box`-frame op titel, ondertitel, body of
+/// vrije positie in [parts], volgens `presentation:class` en de verticale plek.
+void _applyTextFrame(
+  XmlElement frame,
+  OdpParsedText parsed,
+  String? presClass,
+  double pageW,
+  double pageH,
+  _PageParts parts,
+) {
+  final text = parsed.blocks.map((b) => b.text).join(' ').trim();
+  final top = _cm(_attr(frame, 'y'));
+  if (top > pageH * 0.85) return; // footer
 
-  return SourceSlide(
-    index: index,
-    title: title.toString().trim(),
-    subtitle: subtitle.toString().trim(),
-    bodyBlocks: body,
-    images: images,
-    chart: chart,
-    table: table,
-    hyperlinks: links,
-    positionedTexts: positioned,
-    notes: notes,
-    isHidden: isHidden,
-  );
+  if (presClass == 'title') {
+    if (parts.title.isEmpty) {
+      parts.title.write(text);
+    } else {
+      parts.title.write(' $text');
+    }
+  } else if (presClass == 'subtitle') {
+    if (parts.subtitle.isEmpty) {
+      parts.subtitle.write(text);
+    } else {
+      parts.subtitle.write(' $text');
+    }
+  } else if (presClass == 'outline' ||
+      (presClass == null &&
+          (parts.title.isNotEmpty || top >= pageH * 0.5 || text.isEmpty))) {
+    parts.body.addAll(parsed.blocks);
+    if (presClass == null && text.isNotEmpty) {
+      parts.positioned.add(_positionedText(frame, text, pageW, pageH));
+    }
+  } else if (presClass == null && parts.title.isEmpty && top < pageH * 0.5) {
+    // Free-form text box at the top of the title slide: split the first
+    // paragraph(s) into title and subtitle.
+    for (var i = 0; i < parsed.blocks.length; i++) {
+      final block = parsed.blocks[i];
+      if (i == 0) {
+        parts.title.write(block.text);
+      } else if (i == 1) {
+        parts.subtitle.write(block.text);
+      } else {
+        parts.body.add(block);
+      }
+    }
+  }
+  parts.links.addAll(parsed.links);
+}
+
+/// True wanneer een `<draw:image>` naar een bestand verwijst dat niet in het
+/// archief zit — echt verlies dat gemeld moet worden (#877). Een `image` zónder
+/// href telt niet: dan is er niets om te missen.
+bool _imageHrefMissing(OdpContext ctx, XmlElement img) {
+  final href = xlinkHref(img);
+  if (href == null) return false;
+  return ctx.readPartBytes(ctx.resolveHref(href)) == null;
 }
 
 /// Resolve a `<draw:object>` chart reference to its `content.xml` and parse

@@ -791,6 +791,12 @@ const _dutchSourceAddFr = {
       'Définissez le niveau GRIP, la structure de crise, les rôles et les décisions de montée et de descente.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Plan de route et accords de passerelle (appraisal, planning, execution, monitoring) avec points critiques de la route.',
+  'Afbeelding of media': 'Image ou média',
+  'Dia-inhoud': 'Contenu de la diapositive',
+  'kon niet worden gelezen en is overgeslagen':
+      'n\'a pas pu être lu et a été ignoré',
+  'ontbrak in het bestand en is overgeslagen':
+      'était absent du fichier et a été ignoré',
   'Online media staat uit — aanzetten': 'Médias en ligne désactivés — activer',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} contient du contenu exécutable et ne sera pas importé.',

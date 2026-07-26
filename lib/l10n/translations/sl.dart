@@ -1832,6 +1832,12 @@ const _dutchSourceAddSl = <String, String>{
       'Določite raven GRIP, krizno strukturo, vloge ter odločitve o stopnjevanju in umirjanju.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Načrt plovbe in dogovori na mostu (appraisal, planning, execution, monitoring) s kritičnimi točkami poti.',
+  'Afbeelding of media': 'Slika ali medij',
+  'Dia-inhoud': 'Vsebina prosojnice',
+  'kon niet worden gelezen en is overgeslagen':
+      'ni bilo mogoče prebrati in je bilo preskočeno',
+  'ontbrak in het bestand en is overgeslagen':
+      'manjkalo je v datoteki in je bilo preskočeno',
   'Online media staat uit — aanzetten': 'Spletni mediji izklopljeni — vklopi',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} vsebuje izvršljivo vsebino in ne bo uvožen.',

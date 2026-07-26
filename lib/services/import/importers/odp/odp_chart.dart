@@ -11,59 +11,59 @@ import 'odp_context.dart';
 /// category label in column 0 and the numeric series values in the remaining
 /// columns. The chart type is read from `<chart:chart chart:class="...">`.
 SourceChart? parseOdpChartXml(String xml) {
-  try {
-    final doc = XmlDocument.parse(xml);
-    // `<chart:chart>` carries the class attribute; `<office:chart>` does not.
-    final chartEl = doc.descendants
-        .whereType<XmlElement>()
-        .where((e) => e.name.local == 'chart' && _attr(e, 'class') != null)
-        .firstOrNull;
-    if (chartEl == null) return null;
+  // Geen interne `try/catch`: een misvormde grafiek-XML mag opborrelen naar de
+  // `guardParse` in [parsePage], die hem als grafiekverlies noteert (#877) —
+  // gelijk aan het PPTX-pad. Een `null`-retour betekent "wel leesbaar, maar geen
+  // bruikbare grafiek", niet "onleesbaar"; dat verschil houdt de melding eerlijk.
+  final doc = XmlDocument.parse(xml);
+  // `<chart:chart>` carries the class attribute; `<office:chart>` does not.
+  final chartEl = doc.descendants
+      .whereType<XmlElement>()
+      .where((e) => e.name.local == 'chart' && _attr(e, 'class') != null)
+      .firstOrNull;
+  if (chartEl == null) return null;
 
-    final type = _chartType(_attr(chartEl, 'class') ?? '');
-    final stacked = _attr(chartEl, 'stacked') == 'true';
-    final title = _chartTitle(doc);
+  final type = _chartType(_attr(chartEl, 'class') ?? '');
+  final stacked = _attr(chartEl, 'stacked') == 'true';
+  final title = _chartTitle(doc);
 
-    final tbl = descendantsLocal(doc, 'table').firstOrNull;
-    if (tbl == null) {
-      return SourceChart(
-        type: type == SourceChartType.bar && stacked
-            ? SourceChartType.stackedBar
-            : type,
-        title: title,
-        x: const [],
-        series: const [],
-      );
-    }
-
-    final rows = _tableRows(tbl);
-    if (rows.length < 2) return null;
-
-    final header = rows.first;
-    final dataRows = rows.sublist(1);
-    final x = dataRows.map((r) => r.isEmpty ? '' : r.first).toList();
-    final series = <SourceChartSeries>[];
-    for (var col = 1; col < header.length; col++) {
-      final name = header[col];
-      final data = dataRows
-          .map((r) => col < r.length ? _asDouble(r[col]) : 0.0)
-          .toList();
-      if (name.isNotEmpty || data.any((v) => v != 0)) {
-        series.add(SourceChartSeries(name: name, data: data));
-      }
-    }
-
+  final tbl = descendantsLocal(doc, 'table').firstOrNull;
+  if (tbl == null) {
     return SourceChart(
       type: type == SourceChartType.bar && stacked
           ? SourceChartType.stackedBar
           : type,
       title: title,
-      x: x,
-      series: series,
+      x: const [],
+      series: const [],
     );
-  } on Exception {
-    return null;
   }
+
+  final rows = _tableRows(tbl);
+  if (rows.length < 2) return null;
+
+  final header = rows.first;
+  final dataRows = rows.sublist(1);
+  final x = dataRows.map((r) => r.isEmpty ? '' : r.first).toList();
+  final series = <SourceChartSeries>[];
+  for (var col = 1; col < header.length; col++) {
+    final name = header[col];
+    final data = dataRows
+        .map((r) => col < r.length ? _asDouble(r[col]) : 0.0)
+        .toList();
+    if (name.isNotEmpty || data.any((v) => v != 0)) {
+      series.add(SourceChartSeries(name: name, data: data));
+    }
+  }
+
+  return SourceChart(
+    type: type == SourceChartType.bar && stacked
+        ? SourceChartType.stackedBar
+        : type,
+    title: title,
+    x: x,
+    series: series,
+  );
 }
 
 List<List<String>> _tableRows(XmlElement tbl) {

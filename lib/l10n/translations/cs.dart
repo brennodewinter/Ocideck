@@ -1832,6 +1832,12 @@ const _dutchSourceAddCs = <String, String>{
       'Určete úroveň GRIP, krizovou strukturu, role a rozhodnutí o navýšení a snížení.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Plán plavby a dohody na můstku (appraisal, planning, execution, monitoring) s kritickými body trasy.',
+  'Afbeelding of media': 'Obrázek nebo média',
+  'Dia-inhoud': 'Obsah snímku',
+  'kon niet worden gelezen en is overgeslagen':
+      'nepodařilo se načíst a bylo přeskočeno',
+  'ontbrak in het bestand en is overgeslagen':
+      'chybělo v souboru a bylo přeskočeno',
   'Online media staat uit — aanzetten': 'Online média jsou vypnutá — zapnout',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} obsahuje spustitelný obsah a nebude importován.',

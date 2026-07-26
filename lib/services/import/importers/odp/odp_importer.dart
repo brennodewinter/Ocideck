@@ -2,9 +2,11 @@ import 'package:archive/archive.dart';
 import 'package:xml/xml.dart';
 
 import '../../core/result.dart';
+import '../../models/conversion_issue.dart';
 import '../../models/source_format.dart';
 import '../../models/source_deck.dart';
 import '../../models/source_slide.dart';
+import '../../pipeline/parse_guard.dart';
 import '../../utils/archive_utils.dart';
 import '../../utils/import_budget.dart';
 import '../../../../utils/log.dart';
@@ -57,7 +59,26 @@ class OdpImporter extends Importer {
       final slides = <SourceSlide>[];
       for (var i = 0; i < pages.length; i++) {
         final page = pages[i];
-        slides.add(parsePage(ctx, i, page, isHidden: _isHidden(page)));
+        // Isoleer een onverwachte fout tot déze pagina (#877): één beschadigde
+        // dia mag de rest van het deck niet meesleuren. De fallback houdt de
+        // volgorde intact en noteert het verlies.
+        final parseIssues = <ConversionIssue>[];
+        final slide =
+            guardParse<SourceSlide>(
+              sink: parseIssues,
+              slideIndex: i,
+              component: IssueComponent.slide,
+              feature: 'Dia-inhoud',
+              description: 'kon niet worden gelezen en is overgeslagen',
+              logOp: 'OdpImporter: dia ${i + 1}',
+              body: () => parsePage(ctx, i, page, isHidden: _isHidden(page)),
+            ) ??
+            SourceSlide(
+              index: i,
+              isHidden: _isHidden(page),
+              parseIssues: parseIssues,
+            );
+        slides.add(slide);
         onProgress?.call(
           (i + 1) / pages.length,
           'Slide ${i + 1}/${pages.length}',

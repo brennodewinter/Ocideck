@@ -1835,6 +1835,12 @@ const _dutchSourceAddHr = <String, String>{
       'Odredite razinu GRIP-a, kriznu strukturu, uloge te odluke o eskalaciji i deeskalaciji.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Plan plovidbe i dogovori na mostu (appraisal, planning, execution, monitoring) s kritičnim točkama rute.',
+  'Afbeelding of media': 'Slika ili medij',
+  'Dia-inhoud': 'Sadržaj slajda',
+  'kon niet worden gelezen en is overgeslagen':
+      'nije se moglo pročitati i preskočeno je',
+  'ontbrak in het bestand en is overgeslagen':
+      'nedostajalo je u datoteci i preskočeno je',
   'Online media staat uit — aanzetten': 'Online medija isključena — uključi',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} sadrži izvršni sadržaj i neće biti uvezen.',

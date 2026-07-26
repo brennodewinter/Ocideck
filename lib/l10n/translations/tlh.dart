@@ -1803,6 +1803,11 @@ const _dutchSourceAddTlh = <String, String>{
       'GRIP patlh, Qob QeH mIw, \'oSwI\'mey je tlhu\'moH pojmoH wuqmey yIngu\'.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'leng nab bIQ Duj chuqmey je (appraisal, planning, execution, monitoring), He Daqmey potlh tlhej.',
+  'Afbeelding of media': 'mIllogh media ghap',
+  'Dia-inhoud': 'nav De\'',
+  'kon niet worden gelezen en is overgeslagen': 'laDlu\'laHbe\' \'ej juSlu\'',
+  'ontbrak in het bestand en is overgeslagen':
+      'teywI\'Daq tu\'lu\'be\' \'ej juSlu\'',
   'Online media staat uit — aanzetten': 'online media mev — choq',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       'vangmeH De\' ngaS {bestand}; lI\'lu\'be\'.',
