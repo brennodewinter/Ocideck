@@ -1747,6 +1747,8 @@ const _dutchSourceTlh = {
 
 const _dutchSourceAddTlh = <String, String>{
   'Online media staat uit — aanzetten': 'online media mev — choq',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      'vangmeH De\' ngaS {bestand}; lI\'lu\'be\'.',
   'Aanzetten in instellingen': 'cherlu\'boghDaq yIchu\'',
   'Online media werkt niet in de webversie': 'web mIwDaq online media vumbe\'',
   'De browser blokkeert media van een externe bron. Open deze presentatie in de app om online media te tonen.':

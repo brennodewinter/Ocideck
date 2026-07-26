@@ -1779,6 +1779,8 @@ const _dutchSourceLt = {
 
 const _dutchSourceAddLt = <String, String>{
   'Online media staat uit — aanzetten': 'Internetinė medija išjungta — įjungti',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} turi vykdomojo turinio ir nebus importuotas.',
   'Aanzetten in instellingen': 'Įjungti nustatymuose',
   'Online media werkt niet in de webversie':
       'Internetinė medija neveikia žiniatinklio versijoje',

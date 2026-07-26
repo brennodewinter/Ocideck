@@ -731,6 +731,8 @@ const _dutchSourcePap = {
 
 const _dutchSourceAddPap = {
   'Online media staat uit — aanzetten': 'Media online ta apa — ké',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} ta kontené kontenido ehekutabel i lo no wòrdu importá.',
   'Aanzetten in instellingen': 'Aktivá den preferensianan',
   'Online media werkt niet in de webversie':
       'Media online no ta funshoná den e vershon web',

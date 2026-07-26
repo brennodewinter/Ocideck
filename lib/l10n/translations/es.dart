@@ -729,6 +729,8 @@ const _dutchSourceEs = {
 const _dutchSourceAddEs = {
   'Online media staat uit — aanzetten':
       'Medios en línea desactivados — activar',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} contiene contenido ejecutable y no se importará.',
   'Aanzetten in instellingen': 'Activar en la configuración',
   'Online media werkt niet in de webversie':
       'Los medios en línea no funcionan en la versión web',

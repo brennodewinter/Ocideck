@@ -1772,6 +1772,8 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'Online media staat uit — aanzetten':
       'Tiešsaistes multivide izslēgta — ieslēgt',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} satur izpildāmu saturu un netiks importēts.',
   'Aanzetten in instellingen': 'Iespējot iestatījumos',
   'Online media werkt niet in de webversie':
       'Tiešsaistes multivide nedarbojas tīmekļa versijā',

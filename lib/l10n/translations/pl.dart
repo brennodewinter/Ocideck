@@ -1784,6 +1784,8 @@ const _dutchSourcePl = {
 
 const _dutchSourceAddPl = <String, String>{
   'Online media staat uit — aanzetten': 'Media online wyłączone — włącz',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} zawiera treść wykonywalną i nie zostanie zaimportowany.',
   'Aanzetten in instellingen': 'Włącz w ustawieniach',
   'Online media werkt niet in de webversie':
       'Multimedia online nie działają w wersji internetowej',

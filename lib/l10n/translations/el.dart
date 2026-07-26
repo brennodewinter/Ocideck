@@ -1800,6 +1800,8 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'Online media staat uit — aanzetten':
       'Διαδικτυακά μέσα απενεργοποιημένα — ενεργοποίηση',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      'Το {bestand} περιέχει εκτελέσιμο περιεχόμενο και δεν θα εισαχθεί.',
   'Aanzetten in instellingen': 'Ενεργοποίηση στις ρυθμίσεις',
   'Online media werkt niet in de webversie':
       'Τα διαδικτυακά μέσα δεν λειτουργούν στην έκδοση ιστού',

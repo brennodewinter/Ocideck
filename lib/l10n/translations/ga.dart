@@ -1807,6 +1807,8 @@ const _dutchSourceGa = {
 
 const _dutchSourceAddGa = <String, String>{
   'Online media staat uit — aanzetten': 'Meáin ar líne as — cuir ar siúl',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      'Tá ábhar inrite i {bestand} agus ní dhéanfar é a iompórtáil.',
   'Aanzetten in instellingen': 'Cumasaigh sna socruithe',
   'Online media werkt niet in de webversie':
       'Ní oibríonn meáin ar líne sa leagan gréasáin',

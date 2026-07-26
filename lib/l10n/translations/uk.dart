@@ -1789,6 +1789,8 @@ const _dutchSourceUk = {
 
 const _dutchSourceAddUk = <String, String>{
   'Online media staat uit — aanzetten': 'Онлайн-медіа вимкнено — увімкнути',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} містить виконуваний вміст і не буде імпортований.',
   'Aanzetten in instellingen': 'Увімкнути в налаштуваннях',
   'Online media werkt niet in de webversie':
       'Онлайн-медіа не працюють у веб-версії',

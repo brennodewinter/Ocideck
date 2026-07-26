@@ -1771,6 +1771,8 @@ const _dutchSourceDa = {
 
 const _dutchSourceAddDa = <String, String>{
   'Online media staat uit — aanzetten': 'Onlinemedier er slået fra — tænd',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} indeholder eksekverbart indhold og importeres ikke.',
   'Aanzetten in instellingen': 'Aktivér i indstillinger',
   'Online media werkt niet in de webversie':
       'Onlinemedier virker ikke i webversionen',

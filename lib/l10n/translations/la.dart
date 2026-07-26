@@ -1788,6 +1788,8 @@ const _dutchSourceLa = {
 
 const _dutchSourceAddLa = <String, String>{
   'Online media staat uit — aanzetten': 'Media in linea exstincta — activa',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} contentum exsecutabile continet neque importabitur.',
   'Aanzetten in instellingen': 'In optionibus activa',
   'Online media werkt niet in de webversie':
       'Media online in versione interretiali non operantur',

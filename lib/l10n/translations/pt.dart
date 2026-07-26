@@ -1801,6 +1801,8 @@ const _dutchSourcePt = {
 
 const _dutchSourceAddPt = <String, String>{
   'Online media staat uit — aanzetten': 'Mídia online desativada — ativar',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} contém conteúdo executável e não será importado.',
   'Aanzetten in instellingen': 'Ativar nas definições',
   'Online media werkt niet in de webversie':
       'Os multimédia online não funcionam na versão web',

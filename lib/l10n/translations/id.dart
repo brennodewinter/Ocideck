@@ -1772,6 +1772,8 @@ const _dutchSourceId = {
 
 const _dutchSourceAddId = <String, String>{
   'Online media staat uit — aanzetten': 'Media daring nonaktif — aktifkan',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} berisi konten yang dapat dieksekusi dan tidak akan diimpor.',
   'Aanzetten in instellingen': 'Aktifkan di pengaturan',
   'Online media werkt niet in de webversie':
       'Media online tidak berfungsi di versi web',
