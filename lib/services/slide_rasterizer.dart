@@ -401,6 +401,10 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
         width: SlideRasterizer.logicalSize.width,
         height: SlideRasterizer.logicalSize.height,
         child: SlidePreviewWidget(
+          // Een gerasterde pagina (PDF/PPTX) kan niet scrollen: een groot
+          // mermaid-diagram valt hier terug op passend verkleinen i.p.v. een
+          // scrollvenster (#872), zodat het hele diagram op de pagina staat.
+          scrollableMermaid: false,
           slide: _slide,
           projectPath: widget.projectPath,
           themeProfile: widget.themeProfile,

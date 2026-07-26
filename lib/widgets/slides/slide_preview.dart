@@ -356,6 +356,17 @@ class SlidePreviewWidget extends StatelessWidget {
   /// Vergroot grafieklabels voor weergave op afstand in presentatiemodus.
   final bool presentationMode;
 
+  /// Of een te groot mermaid-diagram op dit oppervlak mag scrollen (#872).
+  /// Opt-in: standaard `false` (passend verkleinen, het hele diagram zichtbaar),
+  /// net als thumbnails, dialogen en de export. Alleen de grote interactieve
+  /// previews (presentatie) zetten het op `true`.
+  final bool scrollableMermaid;
+
+  /// Optionele gedeelde scroll-controller voor een groot mermaid-diagram (#872).
+  /// De presentatie zet er één zodat de presentator zijn scrollpositie kan
+  /// spiegelen naar het publieksvenster; elders `null` (eigen controller).
+  final ScrollController? mermaidScrollController;
+
   /// Wijzigt tijdens het presenteren een checklistitem. [column] is 0 voor de
   /// eerste/enkele lijst en 1 voor de rechterkolom.
   final void Function(int column, int itemIndex)? onChecklistItemToggle;
@@ -462,6 +473,8 @@ class SlidePreviewWidget extends StatelessWidget {
     this.autoplayMedia = false,
     this.allowRemoteMedia = false,
     this.presentationMode = false,
+    this.scrollableMermaid = false,
+    this.mermaidScrollController,
     this.onChecklistItemToggle,
     this.tableEditMode = false,
     this.tableEditRow,
@@ -503,40 +516,46 @@ class SlidePreviewWidget extends StatelessWidget {
     // The slide is a fixed 16:9 design surface whose sizes all derive from
     // its width; interface text scaling must not reflow it (the auto-fit
     // measuring assumes unscaled text), so the canvas opts out.
-    return MediaQuery.withNoTextScaling(
-      child: _TableEditHost(
-        enabled:
-            presentationMode && slide.type == SlideType.table && tableEditMode,
-        selectedRow: tableEditRow,
-        selectedCol: tableEditCol,
-        onCellSelected: onTableCellSelected,
-        onCellChanged: onTableCellChanged,
-        child: _ChecklistInteractionHost(
-          // Op een geredigeerde slide is aanvinken uitgeschakeld: de presenter
-          // schrijft de hele (zwartgelakte) slide terug. Zie
-          // [Slide.contentRedacted].
+    return MermaidRenderScope(
+      scrollable: scrollableMermaid,
+      controller: mermaidScrollController,
+      child: MediaQuery.withNoTextScaling(
+        child: _TableEditHost(
           enabled:
               presentationMode &&
-              onChecklistItemToggle != null &&
-              !slide.contentRedacted,
-          onToggle: onChecklistItemToggle,
-          child: Directionality(
-            textDirection: TextDirection.ltr,
-            child: DefaultTextStyle(
-              style: TextStyle(
-                color: AppTheme.parseHexColor(themeProfile.textColor),
-                decoration: TextDecoration.none,
-                fontWeight: FontWeight.normal,
-                fontStyle: FontStyle.normal,
-              ),
-              child: _SlideLinkScope(
-                onTapLink: onLinkTap,
-                hasBottomTlp: hasBottomRightTlp,
-                allowRemoteMedia: allowRemoteMedia,
-                mediaRedacted: slide.mediaRedacted,
-                decodeMaxEdge: decodeMaxEdge,
-                onEnableOnlineMedia: onEnableOnlineMedia,
-                child: _buildSlide(slide.projectionWithViewLimit()),
+              slide.type == SlideType.table &&
+              tableEditMode,
+          selectedRow: tableEditRow,
+          selectedCol: tableEditCol,
+          onCellSelected: onTableCellSelected,
+          onCellChanged: onTableCellChanged,
+          child: _ChecklistInteractionHost(
+            // Op een geredigeerde slide is aanvinken uitgeschakeld: de presenter
+            // schrijft de hele (zwartgelakte) slide terug. Zie
+            // [Slide.contentRedacted].
+            enabled:
+                presentationMode &&
+                onChecklistItemToggle != null &&
+                !slide.contentRedacted,
+            onToggle: onChecklistItemToggle,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: DefaultTextStyle(
+                style: TextStyle(
+                  color: AppTheme.parseHexColor(themeProfile.textColor),
+                  decoration: TextDecoration.none,
+                  fontWeight: FontWeight.normal,
+                  fontStyle: FontStyle.normal,
+                ),
+                child: _SlideLinkScope(
+                  onTapLink: onLinkTap,
+                  hasBottomTlp: hasBottomRightTlp,
+                  allowRemoteMedia: allowRemoteMedia,
+                  mediaRedacted: slide.mediaRedacted,
+                  decodeMaxEdge: decodeMaxEdge,
+                  onEnableOnlineMedia: onEnableOnlineMedia,
+                  child: _buildSlide(slide.projectionWithViewLimit()),
+                ),
               ),
             ),
           ),

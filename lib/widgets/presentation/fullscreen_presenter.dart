@@ -103,6 +103,37 @@ const _questionTickMs = 100;
 /// in `test/standalone_palette_contrast_test.dart`.
 const _muted = PresenterPalette.textMuted;
 
+/// Berekent de mermaid-scrollfractie van [controller] en zendt die naar het
+/// publieksvenster (#872), zodat een groot schema daar meebeweegt. Best-effort
+/// en alleen bij een merkbare wijziging (≥ 0,5%), om het kanaal niet vol te
+/// sturen. Geeft de nieuw verzonden fractie terug, of [lastSentFraction] als er
+/// niets veranderde — de aanroeper onthoudt die voor de throttle.
+///
+/// Top-level zodat het gedrag buiten [_FullscreenPresenterState] leeft; de dia
+/// op het presentatiescherm en op de beamer verschillen van afmeting, dus wordt
+/// bewust een fractie (0..1) verstuurd en geen pixelwaarde.
+double _broadcastMermaidScrollFraction({
+  required AudienceWindowHandle? audience,
+  required ScrollController controller,
+  required int index,
+  required double lastSentFraction,
+}) {
+  if (audience?.controller == null) return lastSentFraction;
+  if (!controller.hasClients) return lastSentFraction;
+  final pos = controller.position;
+  final fraction = pos.maxScrollExtent > 0
+      ? (pos.pixels / pos.maxScrollExtent).clamp(0.0, 1.0)
+      : 0.0;
+  if ((fraction - lastSentFraction).abs() < 0.005) return lastSentFraction;
+  audienceChannel
+      .invokeMethod('mermaidScroll', {'index': index, 'fraction': fraction})
+      .catchError((Object e) {
+        logWarning('FullscreenPresenter: mermaid scroll sync failed', e);
+        return null;
+      });
+  return fraction;
+}
+
 class FullscreenPresenter extends StatefulWidget {
   final List<Slide> slides;
   final String? projectPath;
@@ -523,6 +554,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   double _gridRowExtent = 220;
   final ScrollController _gridScroll = ScrollController();
 
+  /// Gedeelde scroll voor een te groot mermaid-diagram op de presentatie-dia
+  /// (#872). De presentator scrolt; via [_broadcastMermaidScroll] volgt het
+  /// publieksvenster. `null`-throttle: alleen zenden bij een merkbare wijziging.
+  final ScrollController _mermaidScroll = ScrollController();
+  double _lastSentMermaidFraction = -1;
+
   /// Oefenklok: verstreken tijd, aftelling en per-slide-tijd. Sessie-only,
   /// puur meten (geen pacing). Resetbaar met R.
   late RehearsalController _rehearsal;
@@ -641,6 +678,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   void initState() {
     super.initState();
     _index = widget.initialIndex;
+    _mermaidScroll.addListener(_broadcastMermaidScroll);
     _rehearsal = RehearsalController(target: widget.targetDuration);
     _focusNode = FocusNode();
     _userNotesFocusNode = FocusNode();
@@ -728,6 +766,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _typedTimer?.cancel();
     _questionTimer?.cancel();
     _gridScroll.dispose();
+    _mermaidScroll.dispose();
     _focusNode.dispose();
     _userNotesFocusNode.dispose();
     _userNoteCtrl?.dispose();
@@ -769,6 +808,18 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           return null;
         });
     if (indexChanged) _pushInk();
+  }
+
+  /// Listener op [_mermaidScroll]: deelt de fractie met het publieksvenster en
+  /// onthoudt de laatst verzonden waarde voor de throttle. Zie
+  /// [_broadcastMermaidScrollFraction].
+  void _broadcastMermaidScroll() {
+    _lastSentMermaidFraction = _broadcastMermaidScrollFraction(
+      audience: widget.audience,
+      controller: _mermaidScroll,
+      index: _index,
+      lastSentFraction: _lastSentMermaidFraction,
+    );
   }
 
   // ── Vraag-slides ───────────────────────────────────────────────────────────
