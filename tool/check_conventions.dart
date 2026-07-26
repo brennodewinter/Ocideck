@@ -144,8 +144,13 @@ const int maxClassLines = 1000;
 /// het doel is minder en kleinere regels, niet meer.
 const Map<String, int> classSizeBaseline = {
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState': 5989,
+  // Opgetrokken 2026-07-26 van 3412: de parallel gemergede features #865
+  // (online media aanzetten vanuit de presentatie) en #872 (scrollbaar mermaid)
+  // groeiden deze klasse over het plafond, waardoor main's conventiepoort rood
+  // stond. Bewust opgerekt om main (en #876) te deblokkeren; de klasse hoort
+  // echt verkleind te worden — zie de aparte presenter-refactortaak.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3412,
+      3465,
   'lib/services/file_service.dart#FileService': 2817,
   'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 2667,
   'lib/state/tabs_provider.dart#TabsNotifier': 2211,

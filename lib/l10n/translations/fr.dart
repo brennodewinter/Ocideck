@@ -731,6 +731,8 @@ const _dutchSourceFr = {
 
 const _dutchSourceAddFr = {
   'Online media staat uit — aanzetten': 'Médias en ligne désactivés — activer',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} contient du contenu exécutable et ne sera pas importé.',
   'Aanzetten in instellingen': 'Activer dans les paramètres',
   'Online media werkt niet in de webversie':
       'Les médias en ligne ne fonctionnent pas dans la version web',

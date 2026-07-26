@@ -1775,6 +1775,8 @@ const _dutchSourceGsw = {
 
 const _dutchSourceAddGsw = <String, String>{
   'Online media staat uit — aanzetten': 'Online-Media us — schalte y',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} enthaltet uusfüehrbare Inhalt und wird nöd importiert.',
   'Aanzetten in instellingen': 'I de Istellige iischalte',
   'Online media werkt niet in de webversie':
       'Online-Medie funktioniered i de Web-Version nöd',

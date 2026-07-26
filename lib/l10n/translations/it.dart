@@ -727,6 +727,8 @@ const _dutchSourceIt = {
 
 const _dutchSourceAddIt = {
   'Online media staat uit — aanzetten': 'Media online disattivati — attiva',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} contiene contenuto eseguibile e non verrà importato.',
   'Aanzetten in instellingen': 'Attiva nelle impostazioni',
   'Online media werkt niet in de webversie':
       'I media online non funzionano nella versione web',

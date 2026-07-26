@@ -92,6 +92,9 @@ String importFailureText(AppLocalizations l10n, pres.ImportFailure failure) {
     pres.ImportFailureReason.unreadable => fill(
       l10n.d('Kon {bestand} niet lezen als {formaat}-presentatie.'),
     ),
+    pres.ImportFailureReason.unsafeContent => fill(
+      l10n.d('{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.'),
+    ),
     // Geen bekende importreden. Draagt de fout een gevangen exception (een
     // schrijffout uit de bulk-rij: volle schijf, geen rechten), benoem die dan
     // netjes; anders een generieke melding.

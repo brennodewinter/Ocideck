@@ -1794,6 +1794,8 @@ const _dutchSourceBg = {
 
 const _dutchSourceAddBg = <String, String>{
   'Online media staat uit — aanzetten': 'Онлайн медията е изключена — включи',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} съдържа изпълнимо съдържание и няма да бъде импортиран.',
   'Aanzetten in instellingen': 'Активиране в настройките',
   'Online media werkt niet in de webversie':
       'Онлайн мултимедията не работи в уеб версията',

@@ -1794,6 +1794,8 @@ const _dutchSourceMt = {
 
 const _dutchSourceAddMt = <String, String>{
   'Online media staat uit — aanzetten': 'Midja online mitfi — ixquq',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} fih kontenut eżegwibbli u mhux se jiġi impurtat.',
   'Aanzetten in instellingen': 'Attiva fis-settings',
   'Online media werkt niet in de webversie':
       'Il-midja online ma taħdimx fil-verżjoni tal-web',

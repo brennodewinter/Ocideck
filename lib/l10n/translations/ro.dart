@@ -1789,6 +1789,8 @@ const _dutchSourceRo = {
 
 const _dutchSourceAddRo = <String, String>{
   'Online media staat uit — aanzetten': 'Media online dezactivată — activează',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} conține conținut executabil și nu va fi importat.',
   'Aanzetten in instellingen': 'Activează în setări',
   'Online media werkt niet in de webversie':
       'Mediile online nu funcționează în versiunea web',

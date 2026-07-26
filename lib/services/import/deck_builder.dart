@@ -5,6 +5,7 @@ import '../../models/deck.dart';
 import '../../models/display_window_spec.dart';
 import '../../models/slide.dart';
 import '../../models/timeline.dart';
+import '../markdown_safety.dart';
 import '../web_asset_store.dart';
 import 'models/body_block.dart';
 import 'models/conversion_issue.dart';
@@ -17,6 +18,7 @@ import 'models/source_video.dart';
 import 'pipeline/problem_slide.dart';
 import 'pipeline/slide_classifier.dart';
 import 'pipeline/unconverted_tracker.dart';
+import 'utils/import_text_sanitizer.dart';
 import 'utils/safe_extensions.dart';
 
 /// Hoeveel items een geïmporteerde dia standaard tóónt voordat de
@@ -29,10 +31,23 @@ const kImportedTableRowLimit = 12;
 /// deck itself plus the [ProblemSlide]s that carried real (non-salvaged) loss,
 /// which the UI surfaces for a per-slide decision.
 class BuiltDeck {
-  const BuiltDeck({required this.deck, required this.problemSlides});
+  const BuiltDeck({
+    required this.deck,
+    required this.problemSlides,
+    this.safetyFindings = const [],
+  });
 
   final Deck deck;
   final List<ProblemSlide> problemSlides;
+
+  /// De uitkomst van de fail-closed backstop: uitvoerbare inhoud die na het
+  /// bouwen tóch in het gegenereerde `.md` bleef staan (#876). Leeg = veilig.
+  /// Niet-leeg betekent dat de import geweigerd hoort te worden — de importbouw
+  /// neutraliseert brontekst, maar de definitieve serialisatie wordt hier nog
+  /// eens door dezelfde poort gehaald die ook een vreemd bestand bij het openen
+  /// tegenhoudt, zodat een geïmporteerd deck niet alsnog geweigerd wordt bij het
+  /// heropenen.
+  final List<MarkdownSafetyFinding> safetyFindings;
 }
 
 /// Turns a format-neutral [SourceDeck] plus its per-slide [ClassifiedSlide]s
@@ -171,12 +186,12 @@ class DeckBuilder {
       s.images.length >= 2 ? SlideType.twoImages : SlideType.image,
     );
     return base.copyWith(
-      title: s.title,
+      title: _safe(s.title),
       imagePath: _memPathFor(s.images.first),
       imagePath2: s.images.length >= 2 ? _memPathFor(s.images[1]) : null,
       imageCaption: _caption(s, 0),
       imageCaption2: s.images.length >= 2 ? _caption(s, 1) : null,
-      notes: s.notes.trim().isNotEmpty ? s.notes.trim() : null,
+      notes: _notes(s),
       skipped: s.isHidden ? true : null,
     );
   }
@@ -204,7 +219,7 @@ class DeckBuilder {
       _ => _freeMarkdown(base, s),
     };
     return built.copyWith(
-      notes: s.notes.trim().isNotEmpty ? s.notes.trim() : null,
+      notes: _notes(s),
       skipped: s.isHidden ? true : null,
       viewLimit: _viewLimitFor(built),
     );
@@ -236,51 +251,54 @@ class DeckBuilder {
   }
 
   Slide _title(Slide base, SourceSlide s) => base.copyWith(
-    title: s.title,
-    subtitle: s.subtitle,
+    title: _safe(s.title),
+    subtitle: _safe(s.subtitle),
     imagePath: s.images.isNotEmpty ? _memPathFor(s.images.first) : null,
   );
 
   Slide _section(Slide base, SourceSlide s) {
     final paragraphs = s.bodyBlocks
         .where((b) => b.kind == BodyBlockKind.paragraph)
-        .map((b) => b.text)
+        .map((b) => _safe(b.text))
         .toList();
     final links = _hyperlinkMarkdown(s);
     final subtitleParts = [
-      if (s.subtitle.isNotEmpty) s.subtitle,
+      if (s.subtitle.isNotEmpty) _safe(s.subtitle),
       ...paragraphs,
       ...links,
     ];
-    return base.copyWith(title: s.title, subtitle: subtitleParts.join('\n'));
+    return base.copyWith(
+      title: _safe(s.title),
+      subtitle: subtitleParts.join('\n'),
+    );
   }
 
   Slide _bullets(Slide base, SourceSlide s) => base.copyWith(
-    title: s.title,
-    subtitle: s.subtitle,
+    title: _safe(s.title),
+    subtitle: _safe(s.subtitle),
     bullets: _bulletItems(s),
   );
 
   Slide _twoBullets(Slide base, SourceSlide s) {
     final (left, right) = _twoColumns(s);
     return base.copyWith(
-      title: s.title,
-      subtitle: s.subtitle,
+      title: _safe(s.title),
+      subtitle: _safe(s.subtitle),
       bullets: left.isEmpty ? const [''] : left,
       bullets2: right.isEmpty ? const [''] : right,
     );
   }
 
   Slide _bulletsImage(Slide base, SourceSlide s) => base.copyWith(
-    title: s.title,
-    subtitle: s.subtitle,
+    title: _safe(s.title),
+    subtitle: _safe(s.subtitle),
     bullets: _bulletItems(s),
     imagePath: s.images.isNotEmpty ? _memPathFor(s.images.first) : null,
     imageCaption: _caption(s, 0),
   );
 
   Slide _twoImages(Slide base, SourceSlide s) => base.copyWith(
-    title: s.title,
+    title: _safe(s.title),
     imagePath: s.images.isNotEmpty ? _memPathFor(s.images[0]) : null,
     imagePath2: s.images.length >= 2 ? _memPathFor(s.images[1]) : null,
     imageCaption: _caption(s, 0),
@@ -288,14 +306,14 @@ class DeckBuilder {
   );
 
   Slide _image(Slide base, SourceSlide s) => base.copyWith(
-    title: s.title,
+    title: _safe(s.title),
     imagePath: s.images.isNotEmpty ? _memPathFor(s.images.first) : null,
     imageCaption: _caption(s, 0),
   );
 
   Slide _video(Slide base, SourceSlide s) {
     final v = s.video;
-    return base.copyWith(title: s.title, videoPath: _videoPathFor(v));
+    return base.copyWith(title: _safe(s.title), videoPath: _videoPathFor(v));
   }
 
   /// Het pad voor [v], of leeg als er geen video is.
@@ -309,7 +327,14 @@ class DeckBuilder {
   String _videoPathFor(SourceVideo? v) {
     if (v == null) return '';
     final bytes = v.bytes;
-    if (bytes == null) return v.ref;
+    // Een URL-video (los bestand, YouTube, Vimeo) is aanvaller-data die rauw in
+    // `<video src="…">` / `<iframe data-src="…">` en (bij export) in een
+    // Markdown-link belandt. Door dezelfde breakout-encodering als een hyperlink
+    // (#876) kan een newline in de ref geen dia of beacon meer binnensmokkelen —
+    // de attribuut-escaper vouwt geen regeleinden, en de backstop ziet zo'n
+    // structurele injectie niet. Een schone URL heeft geen breekout-tekens en
+    // blijft ongewijzigd, dus de YouTube-/Vimeo-embed werkt gewoon.
+    if (bytes == null) return _safeUrl(v.ref);
     return _memPathBySha.putIfAbsent(
       'video:${crypto.sha256.convert(bytes)}',
       () => WebAssetStore.put(
@@ -326,44 +351,52 @@ class DeckBuilder {
           orElse: () => const BodyBlock(kind: BodyBlockKind.quote, text: ''),
         )
         .text;
-    return base.copyWith(quote: quote, quoteAuthor: s.title);
+    return base.copyWith(quote: _safe(quote), quoteAuthor: _safe(s.title));
   }
 
   Slide _table(Slide base, SourceSlide s) {
     final t = s.table;
-    final rows = t == null ? const <List<String>>[] : [t.header, ...t.rows];
-    return base.copyWith(title: s.title, tableRows: rows);
+    // Elke cel inline geneutraliseerd: `encodeMarkdownTableCell` dekt de
+    // tabelstructuur (`|`/`\`/`<br>`), niet de HTML-/linkinjectie erin (#876).
+    final rows = t == null
+        ? const <List<String>>[]
+        : [_safeRow(t.header), ...t.rows.map(_safeRow)];
+    return base.copyWith(title: _safe(s.title), tableRows: rows);
   }
+
+  List<String> _safeRow(List<String> row) => [
+    for (final cell in row) sanitizeImportedInline(cell),
+  ];
 
   Slide _chart(Slide base, SourceSlide s) {
     final c = s.chart;
-    if (c == null) return base.copyWith(title: s.title);
+    if (c == null) return base.copyWith(title: _safe(s.title));
     final spec = ChartSpec(
       type: _chartType(c.type),
-      title: c.title,
-      x: c.x,
+      title: _safe(c.title),
+      x: [for (final label in c.x) _safe(label)],
       rowColors: c.rowColors,
       minBound: c.minBound,
       maxBound: c.maxBound,
       series: [
         for (final series in c.series)
           ChartSeries(
-            name: series.name,
+            name: _safe(series.name),
             data: series.data,
             color: series.color,
           ),
       ],
     );
-    return base.copyWith(title: s.title, customMarkdown: spec.toBlock());
+    return base.copyWith(title: _safe(s.title), customMarkdown: spec.toBlock());
   }
 
   Slide _timeline(Slide base, SourceSlide s) {
     final events = [
       for (final b in s.bodyBlocks)
-        if (b.kind == BodyBlockKind.bullet) _timelineEvent(singleLine(b.text)),
+        if (b.kind == BodyBlockKind.bullet) _timelineEvent(_safe(b.text)),
     ];
     return base.copyWith(
-      title: s.title,
+      title: _safe(s.title),
       bullets: events.isEmpty ? base.bullets : timelineEventsToBullets(events),
     );
   }
@@ -380,8 +413,7 @@ class DeckBuilder {
   List<String> _bulletItems(SourceSlide s) {
     final items = [
       for (final b in s.bodyBlocks)
-        if (b.kind == BodyBlockKind.bullet)
-          '${'\t' * b.level}${singleLine(b.text)}',
+        if (b.kind == BodyBlockKind.bullet) '${'\t' * b.level}${_safe(b.text)}',
       for (final link in _hyperlinkMarkdown(s)) link,
     ];
     return items.isEmpty ? const [''] : items;
@@ -398,13 +430,30 @@ class DeckBuilder {
   static String singleLine(String text) =>
       text.replaceAll(RegExp(r'\s*[\r\n]+\s*'), ' ').trim();
 
+  /// Brontekst voor een **rauw geserialiseerd** veld (titel, kop, bullet, quote,
+  /// vrije Markdown), veilig gemaakt tegen Markdown-/HTML-injectie (#876). De
+  /// volle sanitizer vouwt ook regels in, dus `singleLine` erbovenop is overbodig.
+  static String _safe(String text) => sanitizeImportedText(text);
+
+  /// De notitie van [s], inline geneutraliseerd en met regels behouden, of
+  /// `null` als er niets overblijft. Inline en niet vol: de notitie-serialisatie
+  /// heeft haar eigen `-->`-escaper en de notitie mag meerregelig blijven.
+  String? _notes(SourceSlide s) {
+    final trimmed = s.notes.trim();
+    return trimmed.isEmpty ? null : sanitizeImportedInline(trimmed);
+  }
+
   List<BodyBlock> _bulletBlocks(SourceSlide s) =>
       s.bodyBlocks.where((b) => b.kind == BodyBlockKind.bullet).toList();
 
-  /// Hyperlinks as inline Markdown link strings (`[text](url)`), skipping any
-  /// with a dangerous scheme so a source link cannot smuggle in `javascript:`.
+  /// Hyperlinks as inline Markdown link strings (`[text](url)`). The scheme is
+  /// neutralised via [_safeUrl] (no `javascript:`), and the link **text** is
+  /// inline-geneutraliseerd (#876): HTML uit de brontekst wordt inert en de
+  /// haakjes worden ontsnapt, zodat een linktekst geen `<script>` of een tweede
+  /// link kan binnensmokkelen.
   List<String> _hyperlinkMarkdown(SourceSlide s) => [
-    for (final link in s.hyperlinks) '[${link.text}](${_safeUrl(link.url)})',
+    for (final link in s.hyperlinks)
+      '[${sanitizeImportedInline(link.text)}](${_safeUrl(link.url)})',
   ];
 
   /// Schema's die een link in een geïmporteerd deck niet mag dragen.
@@ -420,8 +469,23 @@ class DeckBuilder {
     return _unsafeLinkSchemes.any(lower.startsWith);
   }
 
-  String _safeUrl(String url) =>
-      _isUnsafeUrl(url) ? 'https://invalid' : url.trim();
+  String _safeUrl(String url) {
+    final trimmed = url.trim();
+    if (_isUnsafeUrl(trimmed)) return 'https://invalid';
+    // Percent-encodeer de tekens die uit `[tekst](url)` kunnen breken (#876):
+    // witruimte en C0-controltekens — een ingesloten newline smokkelde anders een
+    // dia, een tracking-beacon `![](…)` of een directive het deck in, en de
+    // backstop zag dat niet (die zoekt alleen uitvoerbare inhoud) — plus `(`/`)`
+    // die de link vroegtijdig sluit en `<`/`>` van een autolink. Een echte URL
+    // heeft die tekens niet letterlijk; de encodering laat hem gewoon werken.
+    return trimmed.replaceAllMapped(_urlBreakoutChar, (m) {
+      final code = m[0]!.codeUnitAt(0);
+      return '%${code.toRadixString(16).toUpperCase().padLeft(2, '0')}';
+    });
+  }
+
+  /// Tekens die een link-URL uit `[tekst](url)` kunnen laten breken.
+  static final RegExp _urlBreakoutChar = RegExp('[\\s\u0000-\u001f()<>]');
 
   /// Links waarvan het doel is weggehaald, zodat de notitiedia ze kan noemen.
   ///
@@ -439,6 +503,10 @@ class DeckBuilder {
           feature: 'Koppeling “{tekst}”',
           description: 'doel onschadelijk gemaakt; het wees naar {url}',
           salvagedAs: 'de tekst blijft staan, de verwijzing niet',
+          // De linktekst en het doel belanden in de notitiedia; die wordt door
+          // `UnconvertedTracker._escMarkdown` al geneutraliseerd (HTML, de
+          // Markdown-metatekens en regeleinden), dus hier géén tweede escaping —
+          // dat leverde alleen `&amp;amp;lt;` op (#876).
           args: {'tekst': link.text, 'url': link.url.trim()},
         ),
   ];
@@ -473,18 +541,18 @@ class DeckBuilder {
 
   String _freeMarkdownBody(SourceSlide s) {
     final buf = StringBuffer();
-    if (s.title.isNotEmpty) buf.writeln('# ${s.title}');
+    if (s.title.isNotEmpty) buf.writeln('# ${_safe(s.title)}');
     for (final block in s.bodyBlocks) {
       buf.writeln();
       switch (block.kind) {
         case BodyBlockKind.heading:
-          buf.writeln('${'#' * (block.level + 1)} ${block.text}');
+          buf.writeln('${'#' * (block.level + 1)} ${_safe(block.text)}');
         case BodyBlockKind.paragraph:
-          buf.writeln(block.text);
+          buf.writeln(_safe(block.text));
         case BodyBlockKind.bullet:
-          buf.writeln('${'  ' * block.level}- ${block.text}');
+          buf.writeln('${'  ' * block.level}- ${_safe(block.text)}');
         case BodyBlockKind.quote:
-          buf.writeln('> ${block.text}');
+          buf.writeln('> ${_safe(block.text)}');
       }
     }
     for (final link in _hyperlinkMarkdown(s)) {
@@ -494,8 +562,15 @@ class DeckBuilder {
     return buf.toString().trim();
   }
 
+  /// Het bijschrift van afbeelding [index], tot één regel gevouwen (#876).
+  ///
+  /// De caption gaat via de HtmlEscape-serialisatie (HTML-veilig) en de
+  /// fail-closed backstop, maar geen enkele importer vult `caption` op dit
+  /// moment; `singleLine` sluit alvast het structurele newline-gat dat een
+  /// meerregelig bijschrift zou openen (een `---` op een eigen regel breekt uit,
+  /// en dat ziet de backstop niet — het is geen uitvoerbare inhoud).
   String _caption(SourceSlide s, int index) =>
-      index < s.images.length ? (s.images[index].caption ?? '') : '';
+      index < s.images.length ? singleLine(s.images[index].caption ?? '') : '';
 
   /// A stable `mem:` path for [img]'s bytes, reusing one entry per content hash.
   String _memPathFor(SourceImage img) => _memPathBySha.putIfAbsent(

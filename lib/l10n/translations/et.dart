@@ -1763,6 +1763,8 @@ const _dutchSourceEt = {
 
 const _dutchSourceAddEt = <String, String>{
   'Online media staat uit — aanzetten': 'Veebimeedia on väljas — lülita sisse',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} sisaldab käivitatavat sisu ja seda ei impordita.',
   'Aanzetten in instellingen': 'Luba seadetes',
   'Online media werkt niet in de webversie':
       'Võrgumeedia ei tööta veebiversioonis',

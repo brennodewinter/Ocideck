@@ -334,10 +334,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
   /// placeholder bestond voorheen alleen in de editor-preview. Nu kan de
   /// presentator online media aanzetten zonder de presentatie te verlaten.
   void _openSettingsFromPresenter(BuildContext context) {
-    SettingsDialog.show(
-      context,
-      initialSection: SettingsSection.security,
-    );
+    SettingsDialog.show(context, initialSection: SettingsSection.security);
   }
 
   Widget _buildPresenterControls(int total) {

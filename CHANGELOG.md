@@ -191,6 +191,29 @@ read a book to find out.
   in de echte webbouw: de diagrammen renderen onder de productie-CSP.
 
 ### Security
+- **Geïmporteerde presentatietekst kan geen Markdown- of HTML-injectie meer
+  binnensmokkelen (#876).** Tekst uit een `.pptx`/`.odp`/`.key` — data van wie het
+  bestand maakte — belandde rauw in het `.md`: een titel, bullet of quote met
+  `<script>`, een slide-separator (`---`), een `![](…)`-afbeelding of een
+  `javascript:`-link kreeg zo structurele of uitvoerbare betekenis in het
+  opgeslagen deck, en de fail-closed poort die een vreemd `.md` bij het openen
+  tegenhoudt werd op de importroute niet doorlopen. Nu wordt élk brontekstveld aan
+  de importgrens geneutraliseerd: HTML-metatekens worden inert, de link-/
+  afbeeldingssyntax gebroken, regeleinden gevouwen en een leidend blokteken
+  ontsnapt — per uitvoercontext, zodat het schoon componeert met de bestaande
+  tabelcel- en notitie-escapers en zonder dubbel te escapen. De keuze is bewust
+  *aan de importgrens*: alleen imports worden geraakt, het `.md`-formaat voor eigen
+  decks blijft ongewijzigd. Als vangnet gaat de definitieve serialisatie nog eens
+  door diezelfde `MarkdownSafetyScanner` — wat een per-veld-escaper toch zou missen
+  wordt fail-closed geweigerd (bulk/service als "bevat uitvoerbare inhoud", de
+  enkel-bestand-import met hetzelfde alarm als een vreemd bestand), en een
+  opgeslagen import wordt daardoor bij het heropenen niet alsnog geblokkeerd.
+  Daarnaast is de YAML-front-matter bestand gemaakt tegen type-verwarring: een
+  gereserveerd woord als titel (`true`/`null`/`~`) wordt gequote en een kale `\r`
+  splitst de front matter niet meer in twee sleutels — round-trip-neutraal, getallen
+  ongemoeid. Adversariële fixtures per context (scanner-als-orakel), een
+  backstop-test op het twee-koloms-residu, een service-weigering en de
+  YAML-round-trip bewaken het.
 - **De presentatie-import heeft nu één samenhangend resourcebudget (#874).** De
   import las een vreemd `.pptx`, `.odp` of `.key` — een bestand dat een aanvaller
   maakt — met losse, hoge grenzen: 2 GiB invoer, 4 GiB uitgepakt, 256/512 MiB

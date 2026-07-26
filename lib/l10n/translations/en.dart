@@ -912,6 +912,8 @@ const _dutchSourceEn = {
 
 const _dutchSourceAddEn = {
   'Online media staat uit — aanzetten': 'Online media is off — turn on',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand} contains executable content and will not be imported.',
   'Aanzetten in instellingen': 'Enable in settings',
   'Online media werkt niet in de webversie':
       'Online media doesn\'t work in the web version',

@@ -2749,6 +2749,8 @@ const _dutchSourceTr = {
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
   'Online media staat uit — aanzetten': 'Çevrimiçi medya kapalı — aç',
+  '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
+      '{bestand}, yürütülebilir içerik içeriyor ve içe aktarılmayacak.',
   'Aanzetten in instellingen': 'Ayarlarda etkinleştir',
   'Online media werkt niet in de webversie':
       'Çevrimiçi medya web sürümünde çalışmıyor',
