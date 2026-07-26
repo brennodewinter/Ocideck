@@ -91,7 +91,7 @@ same answer `make licenses` and the SBOM give.
 | `desktop_drop` | Drag-and-drop of files onto the deck | Apache-2.0 |
 | `image` | Image decoding, scaling and re-encoding | MIT |
 | `flutter_svg` | SVG rendering in slides and the UI | MIT |
-| `opencv_core` | On-device face **detection** for the privacy check — counts faces, never identifies | Apache-2.0 |
+| `dartcv4` | On-device face **detection** for the privacy check — counts faces, never identifies (native OpenCV binding, successor to the retired `opencv_core`) | Apache-2.0 |
 | `flutter_highlight`, `highlight` | Syntax highlighting in code slides | MIT |
 | `flutter_math_fork` | Math rendering in the app and PDF | Apache-2.0 |
 | `flutter_quill` | The rich-text slide editor | MIT |
