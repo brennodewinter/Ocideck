@@ -82,172 +82,17 @@ extension _PresenterQuestions on _FullscreenPresenterState {
   /// Trek een nieuwe willekeurige set antwoorden voor [slide] en start de timer.
   void _startQuestionRound(Slide slide) {
     final spec = QuestionSpec.parse(slide.customMarkdown);
-    final view = _drawQuestionRound(spec);
+    final view = QuestionRoundBuilder().draw(
+      spec,
+      trueLabel: context.l10n.d('Juist'),
+      falseLabel: context.l10n.d('Onjuist'),
+    );
     _rebuild(() => _questionViews[slide.id] = view);
     // De klok voor déze poging loopt vanaf nu; het tijdenoverzicht na afloop
     // toont elke poging apart.
     if (view.answerable) _rehearsal.startQuestion(slide.id, _index);
     _pushQuestion();
     if (view.hasTimer) _startQuestionTimer(slide.id);
-  }
-
-  QuestionView _drawQuestionRound(QuestionSpec spec) {
-    final view = _drawByKind(spec);
-    // Een vraag die niet te halen is, krijgt ook geen aftelling: die zou alleen
-    // maar aftikken naar een fout die nergens toe leidt.
-    return view.answerable
-        ? view
-        : view.copyWith(totalSeconds: 0, remainingMs: 0);
-  }
-
-  QuestionView _drawByKind(QuestionSpec spec) {
-    final base = QuestionView(
-      totalSeconds: spec.timeLimitSeconds,
-      remainingMs: spec.timeLimitSeconds * 1000,
-    );
-    switch (spec.kind) {
-      case QuestionKind.trueFalse:
-        return base.copyWith(
-          options: [context.l10n.d('Juist'), context.l10n.d('Onjuist')],
-          correctIndices: [spec.statementIsTrue ? 0 : 1],
-        );
-      case QuestionKind.multipleCorrect:
-        return _drawMultiCorrect(spec, base);
-      case QuestionKind.ordering:
-        return _drawOrdering(spec, base);
-      case QuestionKind.imagePair:
-        return _drawImagePair(spec, base);
-      case QuestionKind.openText:
-        return _drawOpenText(spec, base);
-      case QuestionKind.multipleChoice:
-        return _drawSingleChoice(spec, base);
-    }
-  }
-
-  /// Beeldpaar: twee afbeeldingen, één juiste. Het willekeurige zit in de kant
-  /// waarop de juiste belandt, zodat de kijker de vorige ronde niet kan
-  /// naspelen. De editor biedt twee plekken, maar wie er in de Markdown meer
-  /// neerzet krijgt hier elke ronde een vers paar — vandaar dat er één juiste
-  /// en één foute getrókken worden en niet simpelweg de eerste twee genomen.
-  QuestionView _drawImagePair(QuestionSpec spec, QuestionView base) {
-    final pool = spec.filledAnswers;
-    if (!spec.isPresentable) {
-      return QuestionView(
-        options: [for (final a in pool) a.text],
-        optionImages: [for (final a in pool) a.image],
-        correctIndices: [
-          for (var i = 0; i < pool.length; i++)
-            if (pool[i].correct) i,
-        ],
-        answerable: false,
-      );
-    }
-    final rng = math.Random();
-    final correct = spec.correctAnswers;
-    final wrong = spec.wrongAnswers;
-    final shown = <QuestionAnswer>[
-      correct[rng.nextInt(correct.length)],
-      wrong[rng.nextInt(wrong.length)],
-    ]..shuffle(rng);
-    return base.copyWith(
-      options: [for (final a in shown) a.text],
-      optionImages: [for (final a in shown) a.image],
-      correctIndices: [
-        for (var i = 0; i < shown.length; i++)
-          if (shown[i].correct) i,
-      ],
-    );
-  }
-
-  /// Getypt antwoord: er valt niets te tonen tot het antwoord binnen is. De
-  /// juiste antwoorden blijven bewust uit de [QuestionView] tot het onthullen —
-  /// dit is de weergavetoestand, dus wat erin staat komt op het scherm.
-  QuestionView _drawOpenText(QuestionSpec spec, QuestionView base) =>
-      base.copyWith(openText: true, answerable: spec.isPresentable);
-
-  /// Multiple choice: één willekeurig goed antwoord + een willekeurige greep
-  /// foute antwoorden, geschud. Eén juist antwoord.
-  QuestionView _drawSingleChoice(QuestionSpec spec, QuestionView base) {
-    final correct = spec.correctAnswers;
-    final wrong = spec.wrongAnswers;
-    if (correct.isEmpty || wrong.isEmpty) {
-      // Niet presenteerbaar: toon wat er is, zonder timer, en blokkeer niet.
-      final all = spec.filledAnswers;
-      return QuestionView(
-        options: all.map((a) => a.text).toList(),
-        correctIndices: [
-          for (var i = 0; i < all.length; i++)
-            if (all[i].correct) i,
-        ],
-        answerable: false,
-      );
-    }
-    final rng = math.Random();
-    final chosenCorrect = correct[rng.nextInt(correct.length)];
-    final wrongPool = [...wrong]..shuffle(rng);
-    final wrongCount = (spec.optionCount - 1).clamp(0, wrong.length);
-    final options = <QuestionAnswer>[
-      chosenCorrect,
-      ...wrongPool.take(wrongCount),
-    ]..shuffle(rng);
-    return base.copyWith(
-      options: options.map((a) => a.text).toList(),
-      correctIndices: [options.indexOf(chosenCorrect)],
-    );
-  }
-
-  /// Meerdere juiste antwoorden: álle antwoorden, geschud. De kijker moet hier
-  /// "alle juiste" aanwijzen, en dat is een onmogelijke opdracht in een set
-  /// waar er willekeurig een paar van weggelaten zijn — je kunt niet weten of
-  /// het er twee of vijf zijn, en een antwoord dat gisteren goed was ontbreekt
-  /// vandaag. Alleen de vólgorde is willekeurig; het aantal getoonde opties uit
-  /// de editor geldt hier dan ook niet.
-  QuestionView _drawMultiCorrect(QuestionSpec spec, QuestionView base) {
-    final all = spec.filledAnswers;
-    final shown = [...all]..shuffle(math.Random());
-    final indices = [
-      for (var i = 0; i < shown.length; i++)
-        if (shown[i].correct) i,
-    ];
-    return base.copyWith(
-      options: shown.map((a) => a.text).toList(),
-      correctIndices: indices,
-      multi: true,
-      answerable: indices.isNotEmpty,
-    );
-  }
-
-  /// Volgorde-vraag: trek een willekeurige greep van [QuestionSpec.optionCount]
-  /// antwoorden (hun onderlinge auteursvolgorde is de juiste volgorde) en toon
-  /// ze geschud — nooit toevallig al in de juiste volgorde.
-  QuestionView _drawOrdering(QuestionSpec spec, QuestionView base) {
-    final pool = spec.filledAnswers;
-    if (pool.length < 2) {
-      // Niet presenteerbaar: toon wat er is, zonder timer, en blokkeer niet.
-      return QuestionView(
-        options: pool.map((a) => a.text).toList(),
-        correctIndices: [for (var i = 0; i < pool.length; i++) i],
-        multi: true,
-        ordering: true,
-        answerable: false,
-      );
-    }
-    final rng = math.Random();
-    final count = spec.optionCount.clamp(2, pool.length);
-    // Greep uit de pool; sorteren herstelt de (juiste) auteursvolgorde.
-    final chosen = (([
-      for (var i = 0; i < pool.length; i++) i,
-    ]..shuffle(rng)).take(count).toList()..sort());
-    final display = [...chosen];
-    do {
-      display.shuffle(rng);
-    } while (listEquals(display, chosen));
-    return base.copyWith(
-      options: [for (final i in display) pool[i].text],
-      correctIndices: [for (final i in chosen) display.indexOf(i)],
-      multi: true,
-      ordering: true,
-    );
   }
 
   void _startQuestionTimer(String slideId) {

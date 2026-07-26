@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math' as math;
 
 import '../../platform/platform_features.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
-import 'package:flutter/foundation.dart' show kIsWeb, listEquals;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import '../../theme/presenter_palette.dart';
 import 'package:flutter/semantics.dart';
@@ -23,6 +22,7 @@ import '../../models/timeline.dart';
 import '../../models/video_source.dart';
 import '../../services/markdown_service.dart';
 import '../../services/privacy/privacy_projection.dart';
+import '../../services/question_round_builder.dart';
 import '../mermaid_render_host.dart';
 import '../../services/rehearsal_controller.dart';
 import '../../services/rich_text_layout.dart';
