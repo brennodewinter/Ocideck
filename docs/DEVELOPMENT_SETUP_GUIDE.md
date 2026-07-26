@@ -64,6 +64,10 @@ xcode-select --install
 
 # Install CocoaPods (required for iOS/Mac builds)
 sudo gem install cocoapods
+
+# Install cmake — the dartcv4 native-assets build hook needs it on every
+# `flutter test`/`make check`, not just for release builds (see docs/CHECKS.md)
+brew install cmake
 ```
 
 #### Windows Setup
