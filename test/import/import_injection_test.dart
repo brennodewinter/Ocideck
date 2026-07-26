@@ -10,6 +10,7 @@ import 'package:ocideck/services/import/importers/import_failure.dart';
 import 'package:ocideck/services/import/importers/importer.dart';
 import 'package:ocideck/services/import/models/body_block.dart';
 import 'package:ocideck/services/import/models/source_deck.dart';
+import 'package:ocideck/services/import/models/source_image.dart';
 import 'package:ocideck/services/import/models/source_format.dart';
 import 'package:ocideck/services/import/models/source_slide.dart';
 import 'package:ocideck/services/import/models/source_table.dart';
@@ -90,6 +91,51 @@ void main() {
       // dia (plus geen extra door de injectie).
       final reopened = MarkdownService().parseDeck(out)!;
       expect(reopened.slides, hasLength(1));
+    });
+
+    test('een newline in een hyperlink-URL smokkelt geen extra dia', () {
+      // Regressie (security-architect #876): de URL ging alleen door de
+      // schema-check, niet door de sanitizer. Een `\n\n---\n\n# X` in de URL
+      // brak uit `[tekst](url)` en maakte een dia — en de backstop zag het niet,
+      // want het is geen uitvoerbare inhoud.
+      final built = build([
+        SourceSlide(
+          index: 0,
+          title: 'T',
+          bodyBlocks: const [BodyBlock(kind: BodyBlockKind.bullet, text: 'x')],
+          hyperlinks: const [
+            (
+              text: 'klik',
+              url: 'https://x\n\n---\n\n# INGEBROKEN\n\n![](http://t/p.png)',
+            ),
+          ],
+        ),
+      ]);
+      final out = md(built.deck);
+      expect(MarkdownSafetyScanner.scan(out), isEmpty);
+      expect(MarkdownService().parseDeck(out)!.slides, hasLength(1));
+    });
+
+    test('een meerregelig bijschrift smokkelt geen extra dia', () {
+      // Latent (security-architect #876): een caption gaat in een HTML-`<div>`,
+      // maar een lege regel gevolgd door `---` sluit dat blok en maakt een
+      // thematische breuk — backstop-blind. `singleLine` vouwt dat weg.
+      final built = build([
+        SourceSlide(
+          index: 0,
+          title: 'Beeld',
+          images: [
+            SourceImage(
+              bytes: Uint8List.fromList(const [1, 2, 3]),
+              ext: 'png',
+              caption: 'foto\n\n---\n\n# INGEBROKEN',
+            ),
+          ],
+        ),
+      ]);
+      final out = md(built.deck);
+      expect(MarkdownSafetyScanner.scan(out), isEmpty);
+      expect(MarkdownService().parseDeck(out)!.slides, hasLength(1));
     });
 
     test(

@@ -462,8 +462,23 @@ class DeckBuilder {
     return _unsafeLinkSchemes.any(lower.startsWith);
   }
 
-  String _safeUrl(String url) =>
-      _isUnsafeUrl(url) ? 'https://invalid' : url.trim();
+  String _safeUrl(String url) {
+    final trimmed = url.trim();
+    if (_isUnsafeUrl(trimmed)) return 'https://invalid';
+    // Percent-encodeer de tekens die uit `[tekst](url)` kunnen breken (#876):
+    // witruimte en C0-controltekens — een ingesloten newline smokkelde anders een
+    // dia, een tracking-beacon `![](…)` of een directive het deck in, en de
+    // backstop zag dat niet (die zoekt alleen uitvoerbare inhoud) — plus `(`/`)`
+    // die de link vroegtijdig sluit en `<`/`>` van een autolink. Een echte URL
+    // heeft die tekens niet letterlijk; de encodering laat hem gewoon werken.
+    return trimmed.replaceAllMapped(_urlBreakoutChar, (m) {
+      final code = m[0]!.codeUnitAt(0);
+      return '%${code.toRadixString(16).toUpperCase().padLeft(2, '0')}';
+    });
+  }
+
+  /// Tekens die een link-URL uit `[tekst](url)` kunnen laten breken.
+  static final RegExp _urlBreakoutChar = RegExp('[\\s\u0000-\u001f()<>]');
 
   /// Links waarvan het doel is weggehaald, zodat de notitiedia ze kan noemen.
   ///
@@ -481,9 +496,11 @@ class DeckBuilder {
           feature: 'Koppeling “{tekst}”',
           description: 'doel onschadelijk gemaakt; het wees naar {url}',
           salvagedAs: 'de tekst blijft staan, de verwijzing niet',
-          // De linktekst en het doel belanden in de notitiedia (vrije Markdown),
-          // dus ook hier veilig maken (#876).
-          args: {'tekst': _safe(link.text), 'url': _safe(link.url.trim())},
+          // De linktekst en het doel belanden in de notitiedia; die wordt door
+          // `UnconvertedTracker._escMarkdown` al geneutraliseerd (HTML, de
+          // Markdown-metatekens en regeleinden), dus hier géén tweede escaping —
+          // dat leverde alleen `&amp;amp;lt;` op (#876).
+          args: {'tekst': link.text, 'url': link.url.trim()},
         ),
   ];
 
@@ -538,8 +555,15 @@ class DeckBuilder {
     return buf.toString().trim();
   }
 
+  /// Het bijschrift van afbeelding [index], tot één regel gevouwen (#876).
+  ///
+  /// De caption gaat via de HtmlEscape-serialisatie (HTML-veilig) en de
+  /// fail-closed backstop, maar geen enkele importer vult `caption` op dit
+  /// moment; `singleLine` sluit alvast het structurele newline-gat dat een
+  /// meerregelig bijschrift zou openen (een `---` op een eigen regel breekt uit,
+  /// en dat ziet de backstop niet — het is geen uitvoerbare inhoud).
   String _caption(SourceSlide s, int index) =>
-      index < s.images.length ? (s.images[index].caption ?? '') : '';
+      index < s.images.length ? singleLine(s.images[index].caption ?? '') : '';
 
   /// A stable `mem:` path for [img]'s bytes, reusing one entry per content hash.
   String _memPathFor(SourceImage img) => _memPathBySha.putIfAbsent(
