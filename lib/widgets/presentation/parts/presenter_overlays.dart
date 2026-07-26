@@ -328,6 +328,18 @@ extension _PresenterOverlays on _FullscreenPresenterState {
     );
   }
 
+  /// Opent Instellingen → Beveiliging vanuit de presenter (#865).
+  ///
+  /// De knop "Aanzetten in instellingen" op een geblokkeerde-online-media-
+  /// placeholder bestond voorheen alleen in de editor-preview. Nu kan de
+  /// presentator online media aanzetten zonder de presentatie te verlaten.
+  void _openSettingsFromPresenter(BuildContext context) {
+    SettingsDialog.show(
+      context,
+      initialSection: SettingsSection.security,
+    );
+  }
+
   Widget _buildPresenterControls(int total) {
     final l10n = context.l10n;
     final richTextPlan = _richTextPlanFor(_currentSlide);

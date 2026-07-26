@@ -730,6 +730,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Online media staat uit — aanzetten': 'Online-Media aus — einschalten',
   'Aanzetten in instellingen': 'In den Einstellungen aktivieren',
   'Online media werkt niet in de webversie':
       'Online-Medien funktionieren in der Webversion nicht',

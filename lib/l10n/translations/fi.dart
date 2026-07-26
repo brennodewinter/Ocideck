@@ -1771,6 +1771,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Online media staat uit — aanzetten': 'Online-media pois — laita päälle',
   'Aanzetten in instellingen': 'Ota käyttöön asetuksissa',
   'Online media werkt niet in de webversie':
       'Online-media ei toimi verkkoversiossa',

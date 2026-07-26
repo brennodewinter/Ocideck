@@ -1778,6 +1778,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Online media staat uit — aanzetten': 'Internetinė medija išjungta — įjungti',
   'Aanzetten in instellingen': 'Įjungti nustatymuose',
   'Online media werkt niet in de webversie':
       'Internetinė medija neveikia žiniatinklio versijoje',

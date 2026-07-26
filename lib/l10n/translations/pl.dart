@@ -1783,6 +1783,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Online media staat uit — aanzetten': 'Media online wyłączone — włącz',
   'Aanzetten in instellingen': 'Włącz w ustawieniach',
   'Online media werkt niet in de webversie':
       'Multimedia online nie działają w wersji internetowej',

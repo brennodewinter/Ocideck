@@ -1798,6 +1798,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Online media staat uit — aanzetten':
+      'Διαδικτυακά μέσα απενεργοποιημένα — ενεργοποίηση',
   'Aanzetten in instellingen': 'Ενεργοποίηση στις ρυθμίσεις',
   'Online media werkt niet in de webversie':
       'Τα διαδικτυακά μέσα δεν λειτουργούν στην έκδοση ιστού',

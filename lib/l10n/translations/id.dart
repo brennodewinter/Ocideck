@@ -1771,6 +1771,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Online media staat uit — aanzetten': 'Media daring nonaktif — aktifkan',
   'Aanzetten in instellingen': 'Aktifkan di pengaturan',
   'Online media werkt niet in de webversie':
       'Media online tidak berfungsi di versi web',
