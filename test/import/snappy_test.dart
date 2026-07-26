@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/import/importers/keynote/iwa/snappy.dart';
+import 'package:ocideck/services/import/utils/import_budget.dart';
 
 /// A raw Snappy block compressing [text] as a single literal.
 List<int> _literalBlock(String text) {
@@ -78,6 +79,47 @@ void main() {
     expect(
       () => dec.decompressIwaStream([0x69, 0x77, 0x61]),
       throwsFormatException,
+    );
+  });
+
+  test('een blok dat een buitensporige lengte declareert wordt geweigerd', () {
+    // Een ruw blok begint met een varint uncompressed-length. Een geconstrueerd
+    // bestand kan daar een absurd getal in zetten om een `Uint8List(outLen)` van
+    // gigabytes te laten alloceren. Het budget vangt dat vóór de allocatie.
+    final tiny = SnappyDecompressor(
+      budget: ImportBudget.forTest(maxSnappyBlockBytes: 8),
+    );
+    // Varint voor 1.000.000 (0xF4240) = [0xC0, 0x84, 0x3D].
+    expect(
+      () => tiny.decodeSnappyRawBlock([0xC0, 0x84, 0x3D]),
+      throwsA(
+        isA<FormatException>().having(
+          (e) => e.message,
+          'message',
+          contains('exceeds limit'),
+        ),
+      ),
+    );
+  });
+
+  test('een stroom die de streamgrens overschrijdt wordt geweigerd', () {
+    // Losse blokken blijven elk onder de blokgrens, maar samen overschrijden ze
+    // de streamgrens: de opgetelde uitgepakte omvang wordt begrensd, niet alleen
+    // die van één blok.
+    final tiny = SnappyDecompressor(
+      budget: ImportBudget.forTest(maxSnappyStreamBytes: 8),
+    );
+    expect(
+      () => tiny.decompressIwaStream(
+        _stream([_literalBlock('abcdefghijklmnop')]), // 16 bytes uitgepakt
+      ),
+      throwsA(
+        isA<FormatException>().having(
+          (e) => e.message,
+          'message',
+          contains('exceeds limit'),
+        ),
+      ),
     );
   });
 }

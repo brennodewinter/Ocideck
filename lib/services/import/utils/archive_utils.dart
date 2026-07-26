@@ -3,39 +3,34 @@ library;
 
 import 'package:archive/archive.dart';
 
-/// Maximum presentation file size we are willing to read into memory.
-const maxArchiveInputSize = 2 * 1024 * 1024 * 1024; // 2 GiB
+import 'import_budget.dart';
 
-/// Maximum total uncompressed size of all entries in a zip.
-const maxArchiveUncompressedTotal = 4 * 1024 * 1024 * 1024; // 4 GiB
-
-/// Maximum uncompressed size of a single zip entry.
-const maxArchiveUncompressedFile = 2 * 1024 * 1024 * 1024; // 2 GiB
-
-/// Decode a zip buffer after checking for oversized input and zip-bom
-/// declarations.
+/// Decode a zip buffer within the [budget]: input size, entry count, per-entry
+/// uncompressed size and total uncompressed size.
 ///
-/// The [ArchiveFile.size] values come from the central directory, so the check
-/// happens before any entry is decompressed. This prevents a small compressed
-/// file that claims a huge uncompressed size from causing an out-of-memory
-/// crash.
+/// The [ArchiveFile.size] values come from the central directory, so the size
+/// checks happen before any entry is decompressed. This prevents a small
+/// compressed file that claims a huge uncompressed size from causing an
+/// out-of-memory crash. The entry-count check bounds the decode loop itself: an
+/// archive with a million tiny entries is as harmful as one huge entry.
 ///
-/// De drie grenzen zijn parameters met de constanten als standaard. Niet omdat
-/// een aanroeper ze wil verzetten — dat doet niemand — maar omdat de
-/// zip-bom-beveiliging anders onbeproefbaar is: een echte 2 GiB-invoer maken om
-/// één `if` te raken kan geen test. Met een kleine grens is elk pad in twee
-/// regels te toetsen.
+/// Elke overschrijding gooit een [ImportBudgetException] met een leesbare
+/// grensbeschrijving; de importer vertaalt die naar een
+/// `ImportFailureReason.tooLarge`-melding. Een niet-zip of beschadigd archief
+/// gooit nog steeds een gewone [FormatException] — dat is een ander soort fout
+/// (kapot, niet te-groot) en de gebruiker verdient het onderscheid.
+///
+/// Het budget is een parameter met [ImportBudget.standard] als standaard. Niet
+/// omdat een aanroeper hem in productie wil verzetten — dat doet niemand — maar
+/// omdat de zip-bom-beveiliging anders onbeproefbaar is: een echte 2 GiB-invoer
+/// maken om één `if` te raken kan geen test. Met [ImportBudget.forTest] is elk
+/// pad in twee regels te toetsen.
 Archive safeDecodeZip(
   List<int> bytes, {
-  int maxInput = maxArchiveInputSize,
-  int maxFile = maxArchiveUncompressedFile,
-  int maxTotal = maxArchiveUncompressedTotal,
+  ImportBudget budget = ImportBudget.standard,
 }) {
-  if (bytes.length > maxInput) {
-    throw FormatException(
-      'ZIP input is ${bytes.length} bytes, which exceeds the '
-      '$maxInput byte limit.',
-    );
+  if (bytes.length > budget.maxSourceBytes) {
+    throw ImportBudgetException(_humanBytes(budget.maxSourceBytes));
   }
   // De local-file-header-magie, vóór het decoderen. Dit hoort hier en niet in
   // elke importer, want `archive` 4.x geeft op rommel géén fout meer maar een
@@ -54,20 +49,33 @@ Archive safeDecodeZip(
     );
   }
   final archive = ZipDecoder().decodeBytes(bytes);
+  if (archive.length > budget.maxArchiveEntries) {
+    throw ImportBudgetException('${budget.maxArchiveEntries} onderdelen');
+  }
   var total = 0;
   for (final file in archive) {
-    if (file.size > maxFile) {
-      throw FormatException(
-        'ZIP entry ${file.name} declares an uncompressed size of '
-        '${file.size} bytes, which exceeds the $maxFile byte limit.',
+    if (file.size > budget.maxUncompressedEntry) {
+      throw ImportBudgetException(
+        '${_humanBytes(budget.maxUncompressedEntry)} per onderdeel',
       );
     }
     total += file.size;
-    if (total > maxTotal) {
-      throw FormatException(
-        'ZIP total uncompressed size exceeds the $maxTotal byte limit.',
+    if (total > budget.maxUncompressedTotal) {
+      throw ImportBudgetException(
+        '${_humanBytes(budget.maxUncompressedTotal)} uitgepakt',
       );
     }
   }
   return archive;
+}
+
+/// A byte count as a short human string for the grens-beschrijving: MiB for the
+/// production budget (whole MiB throughout), KiB or bytes for the tiny values a
+/// test uses. Rounds down.
+String _humanBytes(int bytes) {
+  const mib = 1024 * 1024;
+  const kib = 1024;
+  if (bytes >= mib) return '${bytes ~/ mib} MiB';
+  if (bytes >= kib) return '${bytes ~/ kib} KiB';
+  return '$bytes bytes';
 }

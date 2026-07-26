@@ -1,5 +1,7 @@
 import 'dart:typed_data';
 
+import 'package:archive/archive.dart';
+
 import '../../models/deck.dart';
 import 'core/result.dart';
 import 'deck_builder.dart';
@@ -12,6 +14,7 @@ import 'pipeline/slide_classifier.dart';
 import 'pipeline/format_detector.dart';
 import 'pipeline/importer_registry.dart';
 import 'utils/archive_utils.dart';
+import 'utils/import_budget.dart';
 
 /// The result of importing one presentation file.
 ///
@@ -99,12 +102,20 @@ class PreparedImportResult {
 /// real OciDeck [Deck]. Nothing is written to disk here — materialising the
 /// slide images happens later, on save (see [DeckBuilder]).
 class PresentationImportService {
-  PresentationImportService({ImporterRegistry? registry, DeckBuilder? builder})
-    : _registry = registry ?? ImporterRegistry(),
-      _builder = builder ?? DeckBuilder();
+  PresentationImportService({
+    ImporterRegistry? registry,
+    DeckBuilder? builder,
+    this._budget = ImportBudget.standard,
+  }) : _registry = registry ?? ImporterRegistry(),
+       _builder = builder ?? DeckBuilder();
 
   final ImporterRegistry _registry;
   final DeckBuilder _builder;
+
+  /// Het resourcebudget dat elke import begrenst (#874). Standaard
+  /// [ImportBudget.standard]; een test geeft een piepklein budget mee om een
+  /// overschrijdingspad te raken.
+  final ImportBudget _budget;
 
   /// Import [bytes] (the raw file) named [filename] en bouw het deck in één
   /// stap. [onProgress] krijgt een 0..1-breuk plus een korte statusmelding.
@@ -143,22 +154,47 @@ class PresentationImportService {
     void Function(double progress, String message)? onProgress,
   }) async {
     onProgress?.call(0.02, 'Formaat herkennen…');
-    if (bytes.length > maxArchiveInputSize) {
-      final gib = maxArchiveInputSize ~/ (1024 * 1024 * 1024);
+
+    // Decodeer het archief één keer. Zowel de formaatvalidatie als de importer
+    // werken daarna op ditzelfde [Archive]; zo wordt hetzelfde bestand nooit
+    // tweemaal uitgepakt (#874). Elke budgetoverschrijding — te groot, te veel
+    // onderdelen, te veel uitgepakt — eindigt hier gecontroleerd als tooLarge,
+    // vóórdat er iets zwaars gebeurt.
+    final Archive archive;
+    try {
+      archive = safeDecodeZip(bytes, budget: _budget);
+    } on ImportBudgetException catch (e) {
       return PreparedImportResult.failed(
         ImportFailure(
-          '$filename is groter dan $gib GiB en wordt niet verwerkt.',
+          '$filename overschrijdt de importlimiet (${e.limitLabel}).',
           reason: ImportFailureReason.tooLarge,
-          args: {'bestand': filename, 'limiet': '$gib GiB'},
+          args: {'bestand': filename, 'limiet': e.limitLabel},
+        ),
+      );
+    } on FormatException {
+      // Geen zip-magie: dit is geen presentatie (en niet: beschadigd).
+      return PreparedImportResult.failed(
+        ImportFailure(
+          '$filename: dit bestand is geen geldig zip-archief (pptx/odp/key).',
+          reason: ImportFailureReason.notAPresentation,
+          args: {'bestand': filename},
+        ),
+      );
+    } on Exception catch (e) {
+      // Wel een zip-kop, maar het uitpakken struikelt: beschadigd archief. Dit
+      // pad bestaat omdat we niet meer óók valideren en toch parsen — een
+      // beschadigd bestand moet de echte reden krijgen, niet "geen dia's".
+      return PreparedImportResult.failed(
+        ImportFailure(
+          '$filename lijkt beschadigd: het archief kan niet worden uitgepakt.',
+          cause: e,
+          reason: ImportFailureReason.corrupt,
+          args: {'bestand': filename},
         ),
       );
     }
 
-    // Validéren, niet alleen herkennen: de integriteitsuitkomst zegt of dit
-    // überhaupt een leesbaar archief is. Die weggooien en toch gaan parsen
-    // leverde bij een beschadigd bestand de melding "geen dia's gevonden" op —
-    // niet te onderscheiden van een lege presentatie.
-    final validation = validateFormatFromBytes(bytes, basename: filename);
+    final validation = validateFormatFromArchive(archive, basename: filename);
     if (!validation.isValid) {
       return PreparedImportResult.failed(
         ImportFailure(
@@ -191,6 +227,8 @@ class PresentationImportService {
     final imported = await importer.importBytes(
       bytes,
       path: filename,
+      budget: _budget,
+      preDecoded: archive,
       onProgress: (f, m) => onProgress?.call(0.05 + 0.80 * f, m),
     );
     final SourceDeck sourceDeck;

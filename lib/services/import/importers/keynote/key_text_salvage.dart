@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../../utils/import_budget.dart';
 import 'iwa/iwa_archive.dart';
 import 'iwa/proto_wire.dart';
 import 'iwa/snappy.dart';
@@ -17,14 +18,18 @@ import 'key_context.dart';
 class KeyTextSalvage {
   KeyTextSalvage();
 
-  final _snappy = SnappyDecompressor();
   final _wire = ProtoWire();
   final _archive = IwaArchive(ProtoWire());
 
   /// Walk every `Index/*.iwa` part in [ctx] and return the ordered, de-duped
   /// text strings salvaged from the IWA protobufs. Returns `[]` when no IWA
-  /// parts parse.
-  List<String> salvage(KeyContext ctx) {
+  /// parts parse. [budget] caps each Snappy stream so a single crafted `.iwa`
+  /// cannot exhaust memory during the best-effort salvage.
+  List<String> salvage(
+    KeyContext ctx, {
+    ImportBudget budget = ImportBudget.standard,
+  }) {
+    final snappy = SnappyDecompressor(budget: budget);
     final seen = <String>{};
     final out = <String>[];
     for (final name in ctx.entryNames) {
@@ -32,7 +37,7 @@ class KeyTextSalvage {
       final bytes = ctx.readPartBytes(name);
       if (bytes == null) continue;
       try {
-        final decompressed = _snappy.decompressIwaStream(bytes);
+        final decompressed = snappy.decompressIwaStream(bytes);
         final objects = _archive.parse(decompressed);
         for (final obj in objects.values) {
           for (final s in _collectStrings(obj.message, 0)) {

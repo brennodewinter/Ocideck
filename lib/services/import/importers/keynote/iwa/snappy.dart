@@ -1,10 +1,6 @@
 import 'dart:typed_data';
 
-/// Maximum uncompressed size for a single Snappy raw block (256 MB).
-const _maxSnappyBlockSize = 256 * 1024 * 1024;
-
-/// Maximum total uncompressed size for a full `.iwa` framing stream (512 MB).
-const _maxSnappyStreamSize = 512 * 1024 * 1024;
+import '../../../utils/import_budget.dart';
 
 /// Pure-Dart Snappy decompressor for Apple iWork IWA streams.
 ///
@@ -15,6 +11,10 @@ const _maxSnappyStreamSize = 512 * 1024 * 1024;
 /// by the compressed byte stream). This decoder implements both the raw block
 /// format and the iWork framing layout, with no native dependencies.
 class SnappyDecompressor {
+  SnappyDecompressor({this._budget = ImportBudget.standard});
+
+  final ImportBudget _budget;
+
   /// Decompress a full `.iwa` framing stream into one byte buffer.
   ///
   /// Supports the standard Snappy stream-identifier chunk
@@ -22,8 +22,15 @@ class SnappyDecompressor {
   /// files often start with the first data chunk immediately. The
   /// concatenation of every decompressed data chunk is returned; unknown chunk
   /// types are skipped per the framing spec.
+  ///
+  /// De chunks gaan in een [BytesBuilder] (`copy: false`) en komen er met
+  /// [BytesBuilder.takeBytes] als één [Uint8List] uit. Dat spaart de dubbele
+  /// buffer die de vorige versie had: een groeiende `List<int>` die telkens
+  /// herallokeerde, plus een laatste volledige kopie naar `Uint8List`. Nu is er
+  /// hooguit één samenvoegende kopie aan het eind. De chunks worden na
+  /// toevoegen niet meer gemuteerd, dus `copy: false` is veilig.
   Uint8List decompressIwaStream(List<int> bytes) {
-    final out = <int>[];
+    final out = BytesBuilder(copy: false);
     var p = 0;
     while (p < bytes.length) {
       if (p + 4 > bytes.length) {
@@ -44,12 +51,11 @@ class SnappyDecompressor {
           }
           break;
         case 0x00: // Compressed data (iWork: raw Snappy block, no CRC).
-          final decompressed = decodeSnappyRawBlock(payload);
-          out.addAll(decompressed);
+          out.add(decodeSnappyRawBlock(payload));
           _checkStreamSize(out.length);
           break;
         case 0x01: // Uncompressed data (standard Snappy framing).
-          out.addAll(payload);
+          out.add(payload);
           _checkStreamSize(out.length);
           break;
         default:
@@ -60,7 +66,7 @@ class SnappyDecompressor {
     if (out.isEmpty) {
       throw const FormatException('No Snappy data chunks found.');
     }
-    return Uint8List.fromList(out);
+    return out.takeBytes();
   }
 
   /// Decompress one raw Snappy block: a leading varint uncompressed length,
@@ -68,9 +74,10 @@ class SnappyDecompressor {
   /// and exposed for direct block decoding.
   Uint8List decodeSnappyRawBlock(List<int> block) {
     final (outLen, p0) = _readVarint(block, 0);
-    if (outLen > _maxSnappyBlockSize) {
+    if (outLen > _budget.maxSnappyBlockBytes) {
       throw FormatException(
-        'Snappy block uncompressed size $outLen exceeds limit $_maxSnappyBlockSize.',
+        'Snappy block uncompressed size $outLen exceeds limit '
+        '${_budget.maxSnappyBlockBytes}.',
       );
     }
     final out = Uint8List(outLen);
@@ -142,9 +149,10 @@ class SnappyDecompressor {
   }
 
   void _checkStreamSize(int length) {
-    if (length > _maxSnappyStreamSize) {
+    if (length > _budget.maxSnappyStreamBytes) {
       throw FormatException(
-        'Snappy stream uncompressed size $length exceeds limit $_maxSnappyStreamSize.',
+        'Snappy stream uncompressed size $length exceeds limit '
+        '${_budget.maxSnappyStreamBytes}.',
       );
     }
   }

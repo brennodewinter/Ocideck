@@ -1,3 +1,4 @@
+import 'package:archive/archive.dart';
 import 'package:xml/xml.dart';
 
 import '../../core/result.dart';
@@ -6,6 +7,7 @@ import '../../models/source_deck.dart';
 import '../../models/source_slide.dart';
 import '../../models/source_theme.dart';
 import '../../utils/archive_utils.dart';
+import '../../utils/import_budget.dart';
 import '../../../../utils/log.dart';
 import '../import_failure.dart';
 import '../importer.dart';
@@ -34,9 +36,11 @@ class PptxImporter extends Importer {
     List<int> bytes, {
     String? path,
     void Function(double progress, String message)? onProgress,
+    ImportBudget budget = ImportBudget.standard,
+    Archive? preDecoded,
   }) async {
     try {
-      final archive = safeDecodeZip(bytes);
+      final archive = preDecoded ?? safeDecodeZip(bytes, budget: budget);
       final ctx = PptxContext(archive);
 
       final slideRefs = _orderedSlidePaths(ctx);
@@ -48,6 +52,11 @@ class PptxImporter extends Importer {
             args: {'formaat': 'pptx'},
           ),
         );
+      }
+      // Begrens vóór de dure per-dia parseerlus: het aantal `sldId`-knopen komt
+      // rechtstreeks uit de bron en mag de allocatie niet sturen.
+      if (slideRefs.length > budget.maxSlides) {
+        throw ImportBudgetException('${budget.maxSlides} dia\'s');
       }
 
       final sectionStarts = _sectionStartSlideIds(ctx);
@@ -75,6 +84,20 @@ class PptxImporter extends Importer {
           title: _coreProperty(ctx, 'title'),
           author: _coreProperty(ctx, 'creator'),
           theme: _deckTheme(ctx),
+        ),
+      );
+    } on ImportBudgetException catch (e) {
+      logError(
+        'PptxImporter: ${path ?? 'bestand'} overschrijdt het importbudget '
+        '(${e.limitLabel})',
+        e,
+      );
+      return Err(
+        ImportFailure(
+          'De presentatie overschrijdt de importlimiet (${e.limitLabel}).',
+          cause: e,
+          reason: ImportFailureReason.tooLarge,
+          args: {'formaat': 'pptx', 'limiet': e.limitLabel},
         ),
       );
     } on FormatException catch (e) {
