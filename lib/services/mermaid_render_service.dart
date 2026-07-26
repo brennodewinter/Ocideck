@@ -44,6 +44,16 @@ class MermaidRenderService {
   final List<_PendingRender> _queue = [];
   bool _busy = false;
 
+  /// Correlatie voor de WebView-render (#882). `mermaid.render` is async en op
+  /// macOS-WKWebView kan `runJavaScriptReturningResult` het teruggegeven Promise
+  /// niet terugvertalen (FWFEvaluateJavaScriptError) — dan bleef elk diagram op
+  /// desktop leeg. Daarom vuren we de render af en wachten we op het resultaat
+  /// via een JS-channel; [_renderSeq] koppelt het antwoord aan het verzoek en
+  /// negeert late/verdwaalde berichten (er is er hooguit één tegelijk, want
+  /// [_run] serialiseert).
+  int _renderSeq = 0;
+  Completer<String?>? _renderCompleter;
+
   /// Ask the UI layer to mount the offstage WebView host.
   ///
   /// Ná het frame, niet erin. De aanroep komt uit `initState` van
@@ -92,6 +102,13 @@ class MermaidRenderService {
     // string die op dat moment wordt samengesteld.
     final escapedJs = jsonEncode(mermaidJs);
     final escapedInlinerJs = jsonEncode(inlinerJs);
+    // Kanaal waarlangs de pagina de klaar-gerenderde SVG terugstuurt (#882).
+    // Vóór het laden geregistreerd, zodat `MermaidChannel` bestaat wanneer de
+    // render later vuurt.
+    await _controller!.addJavaScriptChannel(
+      'MermaidChannel',
+      onMessageReceived: _onMermaidMessage,
+    );
     await _controller!.loadHtmlString('''
 <!DOCTYPE html>
 <html>
@@ -100,14 +117,17 @@ class MermaidRenderService {
 </head>
 <body>
 <script>
+// DIAGNOSTIEK (#882): de hele setup in try/catch. Bij pageload meldt de pagina
+// via MermaidChannel of de setup slaagde en wat `typeof mermaid` is, of anders
+// wélke fout hem brak. Zo is (met één beeldkeuring-ronde) te zien of de
+// inline-setup draait en of de bundel laadt op WKWebView.
+try {
 // De bundel wordt als NIEUW script-element aan het document toegevoegd, niet
 // ge-eval'd. Twee redenen. De CSP hierboven hoeft daardoor geen 'unsafe-eval'
 // meer toe te staan. En een `var` op het hoogste niveau van een script wordt
 // een globale — in een strict-mode eval niet, en moderne mermaid-bundels
 // (esbuild, v11) hangen daarop: die zetten hun namespace met `var` en lezen
-// hem daarna terug van globalThis. Onder eval liep dat dood op "Cannot read
-// properties of undefined", zonder dat de app iets anders liet zien dan een
-// diagram dat nooit verscheen.
+// hem daarna terug van globalThis.
 var mermaidBundle = document.createElement('script');
 mermaidBundle.textContent = $escapedJs;
 document.head.appendChild(mermaidBundle);
@@ -115,22 +135,48 @@ document.head.appendChild(mermaidBundle);
 var inlinerBundle = document.createElement('script');
 inlinerBundle.textContent = $escapedInlinerJs;
 document.head.appendChild(inlinerBundle);
+var mermaidType = typeof window.mermaid;
 // Dezelfde instellingen als de web-kant — zie kMermaidInitConfig
 // (mermaid_config.dart) voor het waarom van elke sleutel (o.a. htmlLabels uit
 // per diagramsoort). Als JSON in de pagina gezet, zodat de config maar op één
 // plek staat en de twee renderpaden niet uiteen kunnen lopen.
 mermaid.initialize(${jsonEncode(kMermaidInitConfig)});
-window.__renderMermaid = async function(source) {
-  const id = 'm' + Math.abs(source.split('').reduce((h,c)=>((h<<5)-h+c.charCodeAt(0))|0,0));
-  const out = await mermaid.render(id, source);
-  // Mermaids theme zit in een <style>-blok dat flutter_svg negeert; inline het
-  // (#862) zodat de kleuren/tekst wél verschijnen.
-  return window.__ocideckInlineSvgStyles ? window.__ocideckInlineSvgStyles(out.svg) : out.svg;
+// Async, dus we geven het resultaat NIET terug via runJavaScriptReturningResult
+// (dat marshalt een Promise niet op macOS-WKWebView, #882) maar sturen de
+// klaar-gerenderde SVG terug via het MermaidChannel, gekoppeld aan de meegegeven
+// seq. De aanroeper (_run) vuurt dit met runJavaScript en wacht op het bericht.
+window.__renderMermaid = function(source, seq) {
+  mermaid.render('m' + seq, source).then(function(out) {
+    // Mermaids theme zit in een <style>-blok dat flutter_svg negeert; inline het
+    // (#862) zodat de kleuren/tekst wél verschijnen.
+    var svg = window.__ocideckInlineSvgStyles ? window.__ocideckInlineSvgStyles(out.svg) : out.svg;
+    MermaidChannel.postMessage(JSON.stringify({seq: seq, svg: svg}));
+  }).catch(function(e) {
+    MermaidChannel.postMessage(JSON.stringify({seq: seq, error: String(e)}));
+  });
 };
+MermaidChannel.postMessage(JSON.stringify({diag: 'setup-ok', mermaid: mermaidType, render: typeof window.__renderMermaid, inliner: typeof window.__ocideckInlineSvgStyles}));
+} catch (e) {
+MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e), mermaid: typeof window.mermaid}));
+}
 </script>
 </body>
 </html>
 ''');
+    // NIET meteen als klaar markeren (#882): `loadHtmlString` resolvet zodra het
+    // laden STÁRT, niet zodra het pagina-script draaide. Een render in dat gaatje
+    // roept `runJavaScript('window.__renderMermaid(...)')` aan terwijl die functie
+    // nog niet bestaat → `FWFEvaluateJavaScriptError` → grijs vlak; dát was de
+    // bug. We wachten op het 'setup-ok'-bericht dat de pagina post zodra mermaid
+    // geladen en `__renderMermaid` gedefinieerd is (zie [_onMermaidMessage]). Een
+    // time-out markeert alsnog klaar, zodat een uitblijvend bericht de wachtrij
+    // niet eeuwig laat hangen (dan valt een render hooguit terug op de brontekst).
+    Future<void>.delayed(const Duration(seconds: 10), _markBootstrapReady);
+  }
+
+  /// Geef de wachtrij vrij zodra de pagina klaar is om te renderen (#882).
+  void _markBootstrapReady() {
+    if (_bootstrapped) return;
     _bootstrapped = true;
     _bootstrapCompleter?.complete();
     _bootstrapCompleter = null;
@@ -182,11 +228,22 @@ window.__renderMermaid = async function(source) {
         // JSON-omhulsel zoals de WebView).
         raw = await web_renderer.renderMermaid(job.source);
       } else {
+        // Vuur de render en wacht op het antwoord via het MermaidChannel (#882):
+        // een Promise via runJavaScriptReturningResult marshalt niet op macOS.
+        final seq = ++_renderSeq;
+        final completer = Completer<String?>();
+        _renderCompleter = completer;
         final encoded = jsonEncode(job.source);
-        final result = await _controller!.runJavaScriptReturningResult(
-          'window.__renderMermaid($encoded)',
+        await _controller!.runJavaScript(
+          'window.__renderMermaid($encoded, $seq)',
         );
-        raw = _unwrapJsString(result);
+        raw = await completer.future.timeout(
+          const Duration(seconds: 15),
+          onTimeout: () {
+            logWarning('MermaidRender: WebView render timed out');
+            return null;
+          },
+        );
       }
       final svg = sanitizeMermaidSvg(raw ?? '');
       if (svg != null && svg.contains('<svg')) {
@@ -204,17 +261,50 @@ window.__renderMermaid = async function(source) {
     }
   }
 
-  String? _unwrapJsString(Object? raw) {
-    if (raw == null) return null;
-    var text = raw.toString();
-    if (text.startsWith('"') && text.endsWith('"') && text.length >= 2) {
-      try {
-        text = jsonDecode(text) as String;
-      } catch (e) {
-        logWarning('MermaidRender: JSON-string unwrap failed', e);
-      }
+  /// Ontvangt het render-antwoord van de WebView (#882) en lost de wachtende
+  /// render op. Een bericht met de verkeerde seq (laat/verdwaald) of zonder
+  /// wachtende render wordt genegeerd.
+  void _onMermaidMessage(JavaScriptMessage message) {
+    final Map<String, dynamic> data;
+    try {
+      data = jsonDecode(message.message) as Map<String, dynamic>;
+    } catch (e) {
+      logWarning('MermaidRender: onleesbaar channel-bericht', e);
+      return;
     }
-    return text;
+    // Diagnostiek uit de pagina-setup (#882): geen render-antwoord, maar de
+    // uitkomst van het bootstrappen — loggen zodat de beeldkeuring ziet of de
+    // setup draaide en of de bundel laadde op WKWebView.
+    if (data.containsKey('diag')) {
+      // De pagina meldt dat de setup klaar is (of faalde): pas nú is
+      // `window.__renderMermaid` gedefinieerd, dus nú mag de wachtrij lopen
+      // (#882). Ook bij 'setup-error' vrijgeven — dan valt een render netjes
+      // terug op de brontekst i.p.v. eeuwig te wachten.
+      if (data['diag'] != 'setup-ok') {
+        logWarning(
+          'MermaidRender DIAG: ${data['diag']} '
+          'mermaid=${data['mermaid']} error=${data['error']}',
+        );
+      }
+      _markBootstrapReady();
+      return;
+    }
+    final seq = (data['seq'] as num?)?.toInt();
+    final completer = _renderCompleter;
+    if (seq == null ||
+        seq != _renderSeq ||
+        completer == null ||
+        completer.isCompleted) {
+      return;
+    }
+    _renderCompleter = null;
+    final error = data['error'];
+    if (error != null) {
+      logWarning('MermaidRender: WebView render error: $error');
+      completer.complete(null);
+    } else {
+      completer.complete(data['svg'] as String?);
+    }
   }
 }
 
