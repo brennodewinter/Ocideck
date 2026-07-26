@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/import/bulk_import_runner.dart';
 import '../../services/import/deck_builder.dart';
+import '../../services/import/importers/import_failure.dart';
 import '../../services/import/presentation_import_service.dart';
 import '../../state/deck_provider.dart';
 import '../../state/settings_provider.dart';
@@ -17,6 +18,7 @@ import '../../utils/user_facing_error.dart';
 import '../dialogs/import_presentation_warning_dialog.dart';
 import '../dialogs/import_decision_dialog.dart';
 import '../dialogs/import_security_alarm_dialog.dart';
+import '../dialogs/presentation_import_progress_dialog.dart';
 import '../dialogs/presentation_import_queue_dialog.dart';
 
 /// Eén gekozen bestand: de bytes plus de naam waaronder het gekozen werd.
@@ -68,23 +70,38 @@ Future<void> importPresentation(
 
   // Twee fasen, met de vraag ertussen: lezen en classificeren, dán pas
   // beslissen wát er met de probleemdia's gebeurt, dán pas bouwen. Zo hoeft
-  // het bestand niet twee keer geparseerd te worden (#812).
-  PreparedImportResult prep;
-  try {
-    // `translate: l10n.d` maakt de notitiedia's — die in het document van de
-    // gebruiker worden opgeslagen — in zijn eigen taal (#806). De naad zit op
-    // de bouwer; de service geeft hem door.
-    prep = await PresentationImportService(
-      builder: DeckBuilder(translate: l10n.d),
-    ).prepare(chosen.bytes, filename: chosen.name);
-  } catch (e, s) {
-    logError('importPresentation', e, s);
-    if (context.mounted) {
-      showErrorSnackBar(messenger, l10n, l10n.d('Importeren mislukt.'));
-    }
-    return;
-  }
+  // het bestand niet twee keer geparseerd te worden (#812). Het lezen draait op
+  // een worker-isolate met een klein annuleerbaar voortgangsvenster (#875), dus
+  // de UI blijft reageren en de gebruiker kan een groot of vastgelopen bestand
+  // stoppen.
+  final prep = await PresentationImportProgressDialog.run(
+    context,
+    fileName: chosen.name,
+    task: (report, cancel) async {
+      try {
+        // `translate: l10n.d` maakt de notitiedia's — die in het document van de
+        // gebruiker worden opgeslagen — in zijn eigen taal (#806). De naad zit
+        // op de bouwer; de service geeft hem door.
+        return await PresentationImportService(
+          builder: DeckBuilder(translate: l10n.d),
+        ).prepare(
+          chosen.bytes,
+          filename: chosen.name,
+          onProgress: report,
+          cancel: cancel,
+        );
+      } catch (e, s) {
+        logError('importPresentation', e, s);
+        return const PreparedImportResult.failed(
+          ImportFailure('Importeren mislukt.'),
+        );
+      }
+    },
+  );
   if (!context.mounted) return;
+
+  // De gebruiker heeft het lezen gestopt: stil afbreken, er is niets gebouwd.
+  if (prep.wasCancelled) return;
 
   final prepared = prep.prepared;
   if (prepared == null) {

@@ -8,6 +8,7 @@ import '../../platform/platform_features.dart';
 import '../../services/file_service.dart';
 import '../../services/import/bulk_import_runner.dart';
 import '../../services/import/deck_builder.dart';
+import '../../services/import/pipeline/import_task.dart';
 import '../../services/import/presentation_import_service.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/user_facing_error.dart';
@@ -76,6 +77,11 @@ class _PresentationImportQueueDialogState
 
   bool _running = false;
   bool _stopRequested = false;
+
+  /// De annuleertoken van de lopende rij. Stoppen zet niet alleen
+  /// [_stopRequested] (tussen twee bestanden) maar cancelt ook deze token, zodat
+  /// de worker het lezen midden in het huidige bestand afbreekt (#875).
+  ImportCancelToken? _cancel;
   BulkImportProgress? _progress;
 
   /// De uitkomsten zoals ze binnenkomen, zodat elke regel tijdens het draaien
@@ -118,9 +124,11 @@ class _PresentationImportQueueDialogState
     // Vóór de eerste await vastgelegd; de translator wordt tijdens de async run
     // aangeroepen en mag niet van een dan mogelijk verdwenen context afhangen.
     final translate = context.l10n.d;
+    final cancel = ImportCancelToken();
     setState(() {
       _running = true;
       _stopRequested = false;
+      _cancel = cancel;
       _finished.clear();
     });
     // `translate: l10n.d` zet de notitiedia's in het document in de taal van de
@@ -142,11 +150,13 @@ class _PresentationImportQueueDialogState
         if (mounted) setState(() => _finished.add(outcome));
       },
       shouldStop: () => _stopRequested,
+      cancel: cancel,
     );
     if (!mounted) return;
     setState(() {
       _running = false;
       _progress = null;
+      _cancel = null;
       _summary = summary;
     });
   }
@@ -231,7 +241,10 @@ class _PresentationImportQueueDialogState
         TextButton(
           onPressed: _stopRequested
               ? null
-              : () => setState(() => _stopRequested = true),
+              : () {
+                  _cancel?.cancel();
+                  setState(() => _stopRequested = true);
+                },
           child: Text(l10n.d('Stoppen')),
         ),
       ];
