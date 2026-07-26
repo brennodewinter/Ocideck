@@ -38,8 +38,27 @@ const _uuid = Uuid();
 
 // Hoisted regexes (zie markdown_service_parse.dart voor het patroon): de
 // YAML-checks draaien per frontmatter-veld.
-final _reYamlSpecial = RegExp(r'[:#"\n]');
+//
+// `_reYamlSpecial` dekt naast `:`/`#`/`"` óók elk C0-controlteken (`\n`, `\r`,
+// `\t` en de rest): een kale `\r` in een waarde splitste bij het teruglezen in
+// twee regels — een extra sleutel uit het niets (#876).
+final _reYamlSpecial = RegExp('[:#"\u0000-\u001f]');
 final _reYamlLeadingSigil = RegExp(r'''^[\[\]{}>|*&!%@`,?-]''');
+
+// Woorden die een échte YAML-lezer (Marp, andere tooling) als boolean of null
+// interpreteert; als string bedoeld moeten ze gequote worden, anders leest een
+// geïmporteerde titel `true` als de waarde `true`. OciDeck's eigen parser las ze
+// altijd al als string, maar het bestand hoort ook buiten OciDeck te kloppen.
+final _reYamlReserved = RegExp(
+  r'^(?:true|false|null|yes|no|on|off|~)$',
+  caseSensitive: false,
+);
+
+// C0-controltekens die we niet als `\n`/`\r`/`\t` ontsnappen: die horen niet in
+// een frontmatter-waarde en zouden als rauwe bytes in het `.md` belanden.
+final _reYamlStrippableControl = RegExp(
+  '[\u0000-\u0008\u000b\u000c\u000e-\u001f]',
+);
 
 /// Converts between a [Deck] and the Marp Markdown on disk, in both directions.
 ///
@@ -261,15 +280,21 @@ class MarkdownService {
   /// Render a string as a YAML scalar, quoting/escaping only when needed so the
   /// front matter stays readable.
   String _yamlScalar(String v) {
+    // Strip eerst de controltekens die we niet ontsnappen (C0 behalve \t \n \r):
+    // ze horen niet in een frontmatter-waarde en zouden rauwe bytes worden.
+    final clean = v.replaceAll(_reYamlStrippableControl, '');
     final needsQuote =
-        v.isEmpty ||
-        v != v.trim() ||
-        _reYamlSpecial.hasMatch(v) ||
-        _reYamlLeadingSigil.hasMatch(v);
-    if (!needsQuote) return v;
-    final escaped = v
+        clean.isEmpty ||
+        clean != clean.trim() ||
+        _reYamlSpecial.hasMatch(clean) ||
+        _reYamlLeadingSigil.hasMatch(clean) ||
+        _reYamlReserved.hasMatch(clean);
+    if (!needsQuote) return clean;
+    final escaped = clean
         .replaceAll('\\', r'\\')
         .replaceAll('"', r'\"')
+        .replaceAll('\r', r'\r')
+        .replaceAll('\t', r'\t')
         .replaceAll('\n', r'\n');
     return '"$escaped"';
   }
@@ -290,6 +315,12 @@ class MarkdownService {
         final next = s[i + 1];
         if (next == 'n') {
           out.write('\n');
+          i++;
+        } else if (next == 'r') {
+          out.write('\r');
+          i++;
+        } else if (next == 't') {
+          out.write('\t');
           i++;
         } else if (next == '"') {
           out.write('"');

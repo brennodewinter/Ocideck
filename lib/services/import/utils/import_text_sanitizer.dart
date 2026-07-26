@@ -34,7 +34,9 @@ final RegExp _leadingBlockMarker = RegExp(r'^([#\-+*_|=~`])');
 /// Een leidende geordende-lijstmarkering (`1.` / `2)`).
 final RegExp _leadingOrderedList = RegExp(r'^(\d{1,9})([.)])(\s)');
 
-/// Maak [raw] veilig om als letterlijke tekst in het deck-`.md` te landen.
+/// Maak [raw] veilig om als letterlijke tekst in een **rauw geserialiseerd**
+/// veld (titel, kop, alinea, bullet, quote, vrije Markdown) te landen — een
+/// context zonder eigen escaper.
 ///
 /// De stappen, in deze volgorde:
 /// 1. **Eén regel.** Regeleinden (incl. `\r`) worden spaties, randruimte weg —
@@ -47,19 +49,14 @@ final RegExp _leadingOrderedList = RegExp(r'^(\d{1,9})([.)])(\s)');
 /// 4. **Link/afbeelding onschadelijk.** `[` wordt `\[` (geen link/afbeelding
 ///    vormt zich), en de reeks `](` wordt `]\(` (breekt de scanner-detectie van
 ///    `](javascript:` / `](data:text/html` zonder alle haakjes in proza te raken).
-/// 5. **Leidend blokteken** ontsnappen — een regel die met `#`, `>`, `-`, `|`,
-///    … of `1.` begint, wordt anders een kop/quote/lijst/breuk/tabel.
+/// 5. **Leidend blokteken** ontsnappen — een regel die met `#`, `-`, `|`,
+///    … of `1.` begint, wordt anders een kop/lijst/breuk/tabel.
 String sanitizeImportedText(String raw) {
   var s = raw.replaceAll(RegExp(r'\s*[\r\n]+\s*'), ' ').trim();
   if (s.isEmpty) return s;
 
   s = s.replaceAll(r'\', r'\\');
-  s = s
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;');
-
-  s = s.replaceAll('[', r'\[').replaceAll('](', r']\(');
+  s = _escapeHtmlAndLinks(s);
 
   s = s.replaceFirstMapped(_leadingBlockMarker, (m) => '\\${m[1]}');
   s = s.replaceFirstMapped(
@@ -67,4 +64,28 @@ String sanitizeImportedText(String raw) {
     (m) => '${m[1]}\\${m[2]}${m[3]}',
   );
   return s;
+}
+
+/// Neutraliseer [raw] voor een **inline** context die al een eigen structurele
+/// escaper heeft: een tabelcel (`encodeMarkdownTableCell` doet `|`/`\`/`<br>`)
+/// of een notitie (`_escapeNotes` doet `-->`). Die escaper dekt de structuur en
+/// de backslash; wat hij mist is precies de HTML-/scriptinjectie en de
+/// link-/afbeeldingssyntax — en dát doet deze variant.
+///
+/// Bewust *geen* backslash-verdubbeling (de cel-escaper doet dat al; verdubbelen
+/// zou dubbel escapen), *geen* regelinvouwen (een notitie is meerregelig, en een
+/// cel breekt regels zelf naar `<br>`), en *geen* leidend-blokteken-ontsnapping
+/// (een cel of notitie staat niet aan een regelbegin, dus een `-5` blijft `-5`
+/// in plaats van `\-5`). Componeert zo schoon met de bestaande escaper.
+String sanitizeImportedInline(String raw) => _escapeHtmlAndLinks(raw);
+
+/// De gedeelde kern van beide varianten: HTML-metatekens onschadelijk en de
+/// link-/afbeeldingssyntax gebroken. `&` eerst, zodat een bron-`&#60;` `&amp;#60;`
+/// wordt en de scanner hem niet meer als `<` terugleest.
+String _escapeHtmlAndLinks(String s) {
+  s = s
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;');
+  return s.replaceAll('[', r'\[').replaceAll('](', r']\(');
 }

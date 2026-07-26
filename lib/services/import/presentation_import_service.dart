@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:archive/archive.dart';
 
 import '../../models/deck.dart';
+import '../markdown_safety.dart';
+import '../markdown_service.dart';
 import 'core/result.dart';
 import 'deck_builder.dart';
 import 'importers/import_failure.dart';
@@ -73,14 +75,34 @@ class PreparedImport {
 
   /// Bouw het deck. [policies] is per bron-diaindex; wat er niet in staat
   /// krijgt best-effort.
-  BuiltDeck build({Map<int, SlideFailurePolicy> policies = const {}}) =>
-      _builder.build(
-        _sourceDeck,
-        _classified,
-        title: _title,
-        policies: policies,
-      );
+  ///
+  /// De definitieve serialisatie gaat nog eens door de fail-closed
+  /// [MarkdownSafetyScanner] — dezelfde poort die een vreemd `.md` bij het openen
+  /// bewaakt (#876). De uitkomst reist mee in [BuiltDeck.safetyFindings]; is die
+  /// niet leeg, dan hoort de aanroeper het deck te weigeren.
+  BuiltDeck build({Map<int, SlideFailurePolicy> policies = const {}}) {
+    final built = _builder.build(
+      _sourceDeck,
+      _classified,
+      title: _title,
+      policies: policies,
+    );
+    return BuiltDeck(
+      deck: built.deck,
+      problemSlides: built.problemSlides,
+      safetyFindings: scanDeckForUnsafeContent(built.deck),
+    );
+  }
 }
+
+/// Genereer de definitieve Markdown van [deck] en scan hem met de fail-closed
+/// [MarkdownSafetyScanner] — dezelfde poort die het openen van een vreemd `.md`
+/// bewaakt. Leeg betekent veilig (#876). De importbouw neutraliseert brontekst
+/// al aan de bron; dit is het vangnet dat bewijst dat de definitieve uitvoer
+/// geen uitvoerbare inhoud draagt, en dat een opgeslagen import dus bij het
+/// heropenen niet door diezelfde poort wordt tegengehouden.
+List<MarkdownSafetyFinding> scanDeckForUnsafeContent(Deck deck) =>
+    MarkdownSafetyScanner.scan(MarkdownService().generateDeck(deck));
 
 /// De uitkomst van het voorbereiden: precies één van [prepared] of [failure].
 class PreparedImportResult {
@@ -139,6 +161,15 @@ class PresentationImportService {
       return PresentationImportResult.failed(prep.failure!);
     }
     final built = prepared.build(policies: policies);
+    if (built.safetyFindings.isNotEmpty) {
+      return PresentationImportResult.failed(
+        ImportFailure(
+          '$filename bevat uitvoerbare inhoud en is niet geïmporteerd.',
+          reason: ImportFailureReason.unsafeContent,
+          args: {'bestand': filename},
+        ),
+      );
+    }
     onProgress?.call(1.0, 'Klaar.');
     return PresentationImportResult.success(
       built.deck,

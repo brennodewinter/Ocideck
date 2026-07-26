@@ -16,6 +16,7 @@ import '../../utils/log.dart';
 import '../../utils/user_facing_error.dart';
 import '../dialogs/import_presentation_warning_dialog.dart';
 import '../dialogs/import_decision_dialog.dart';
+import '../dialogs/import_security_alarm_dialog.dart';
 import '../dialogs/presentation_import_queue_dialog.dart';
 
 /// Eén gekozen bestand: de bytes plus de naam waaronder het gekozen werd.
@@ -105,6 +106,18 @@ Future<void> importPresentation(
   if (decisions == null || !context.mounted) return;
 
   final built = prepared.build(policies: decisions);
+  // Fail-closed backstop (#876): draagt de gebouwde import na neutralisatie tóch
+  // uitvoerbare inhoud, dan opent hij niet — hetzelfde alarm als bij een vreemd
+  // bestand, in plaats van een deck dat bij het volgende openen wordt geweigerd.
+  if (built.safetyFindings.isNotEmpty) {
+    if (context.mounted) {
+      await ImportSecurityAlarmDialog.show(
+        context,
+        ImportSecurityAlarm(path: chosen.name, findings: built.safetyFindings),
+      );
+    }
+    return;
+  }
   final deck = built.deck;
 
   final tabs = ref.read(tabsProvider.notifier);

@@ -28,6 +28,12 @@ enum ImportFailureReason {
   /// omzetten. args: `bestand`, `formaat`.
   unreadable,
 
+  /// Het gebouwde deck bevat na neutralisatie tóch uitvoerbare inhoud
+  /// (`<script>`, een `javascript:`-link) en wordt fail-closed geweigerd — de
+  /// import komt niet door dezelfde poort die een vreemd `.md` bij het openen
+  /// tegenhoudt (#876). args: `bestand`.
+  unsafeContent,
+
   /// Geen van de bovenstaande; de UI valt terug op een generieke melding en de
   /// vrije [ImportFailure.message] hoort in het log.
   other,
