@@ -3,21 +3,28 @@ library;
 
 import 'package:xml/xml.dart';
 
-/// Maximum XML string length we are willing to parse in one go.
-///
-/// This guards against XML "billion laughs" style payload that is a huge
-/// document even without entity expansion. 50 MiB is far beyond any normal
-/// presentation part.
-const _maxXmlLength = 50 * 1024 * 1024;
+import 'import_budget.dart';
 
 /// Parse [src] as XML after stripping any `<!DOCTYPE ...>` block and length
 /// checking.
 ///
 /// Removing the DOCTYPE prevents internal/external entity declarations from
 /// being processed at all, which blocks the `billion laughs` class of
-/// denial-of-service attacks.
-XmlDocument? parseXmlSafe(String src) {
-  if (src.length > _maxXmlLength) return null;
+/// denial-of-service attacks. The length check guards against a huge single
+/// part (a `slideN.xml` of tens of MiB) — far beyond any normal presentation
+/// part, and driven by the source, so it belongs in the [ImportBudget].
+///
+/// [budget] carries the per-part length limit; a test passes a tiny
+/// [ImportBudget.forTest] to hit the guard without building a 32 MiB string.
+/// The importers call this with the standard budget, which is exactly the
+/// production limit. Returns `null` when the part is over the limit or not
+/// well-formed — the caller treats a missing part as a recoverable loss, not a
+/// crash.
+XmlDocument? parseXmlSafe(
+  String src, {
+  ImportBudget budget = ImportBudget.standard,
+}) {
+  if (src.length > budget.maxXmlPartBytes) return null;
   final cleaned = _removeDoctype(src);
   try {
     return XmlDocument.parse(cleaned);

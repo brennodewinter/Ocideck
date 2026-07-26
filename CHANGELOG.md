@@ -179,6 +179,30 @@ read a book to find out.
   in de echte webbouw: de diagrammen renderen onder de productie-CSP.
 
 ### Security
+- **De presentatie-import heeft nu één samenhangend resourcebudget (#874).** De
+  import las een vreemd `.pptx`, `.odp` of `.key` — een bestand dat een aanvaller
+  maakt — met losse, hoge grenzen: 2 GiB invoer, 4 GiB uitgepakt, 256/512 MiB
+  Snappy, 50 MiB XML, verspreid over vijf bestanden, en géén grens op het aantal
+  onderdelen, dia's of IWA-objecten. Een geconstrueerd bestand kon zo een gewoon
+  werkstation uitputten *binnen* die grenzen. Nu is er één `ImportBudget` met
+  realistische waarden (512 MiB invoer, 1,5 GiB uitgepakt, 32768 onderdelen, 2000
+  dia's, 500k IWA-objecten, en de rest) op één plek, doorgevoerd op elk punt waar
+  de bron de allocatie kon sturen. Drie concrete lekken dicht: het archief werd
+  twee keer uitgepakt (valideren én importeren) — nu één keer, gedeeld met de
+  importer, zodat de piek geen tweede volledige kopie draagt; de Snappy-stroom
+  werd in een groeiende `List<int>` opgebouwd en dan nóg eens naar `Uint8List`
+  gekopieerd — nu één `BytesBuilder`; en het aantal dia's, onderdelen en
+  IWA-objecten was ongebonden — nu begrensd vóór de dure lus. Elke overschrijding
+  eindigt gecontroleerd als "te groot" met een leesbare reden, zonder half deck
+  of crash. Adversariële fixtures (zip-bom, veel onderdelen, extreme
+  Snappy-lengtes, te veel dia's, te veel IWA-objecten) en een
+  decodeer-één-keer-test bewaken het. Bewuste afweging: door een grens te stellen
+  weigert de import voortaan een *legitiem maar heel groot* deck (bron >512 MiB of
+  >2000 dia's) dat het vroeger traag misschien wél inlas — we kiezen robuustheid
+  boven die randgevallen, en de weigering laat het bronbestand ongemoeid, dus de
+  gebruiker raakt geen data kwijt en houdt zijn origineel bruikbaar in het
+  oorspronkelijke programma. Tijdbudget en annulering horen bij hetzelfde contract
+  maar krijgen pas betekenis op een worker-isolate (#875) en landen daar.
 - **De webbundel draagt zijn beveiligingsheaders nu zelf mee (#849).** Een
   ZAP-scan tegen de live host meldde zeven ontbrekende responseheaders met één
   oorzaak: de statische host stuurde er geen. De CSP en de Referrer-Policy zaten

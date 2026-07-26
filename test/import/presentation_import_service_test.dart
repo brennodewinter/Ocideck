@@ -12,6 +12,7 @@ import 'package:ocideck/services/import/models/source_deck.dart';
 import 'package:ocideck/services/import/models/source_format.dart';
 import 'package:ocideck/services/import/models/source_slide.dart';
 import 'package:ocideck/services/import/pipeline/importer_registry.dart';
+import 'package:ocideck/services/import/utils/import_budget.dart';
 import 'package:ocideck/services/import/presentation_import_service.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 
@@ -35,6 +36,8 @@ class _FakeImporter extends Importer {
     List<int> bytes, {
     String? path,
     void Function(double progress, String message)? onProgress,
+    ImportBudget budget = ImportBudget.standard,
+    Archive? preDecoded,
   }) async {
     final f = failure;
     return f != null ? Err(f) : Ok(_deck);

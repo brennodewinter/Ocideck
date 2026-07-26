@@ -1,5 +1,7 @@
 import 'dart:typed_data';
 
+import 'package:archive/archive.dart';
+
 import '../../core/result.dart';
 import '../../models/body_block.dart';
 import '../../models/conversion_issue.dart';
@@ -8,6 +10,7 @@ import '../../models/source_deck.dart';
 import '../../models/source_image.dart';
 import '../../models/source_slide.dart';
 import '../../utils/archive_utils.dart';
+import '../../utils/import_budget.dart';
 import '../../../../utils/log.dart';
 import '../import_failure.dart';
 import '../importer.dart';
@@ -54,8 +57,10 @@ class KeyImporter extends Importer {
     List<int> bytes, {
     String? path,
     void Function(double progress, String message)? onProgress,
+    ImportBudget budget = ImportBudget.standard,
+    Archive? preDecoded,
   }) async {
-    if (!_looksLikeZip(bytes)) {
+    if (preDecoded == null && !_looksLikeZip(bytes)) {
       // Zonder deze controle zou een niet-zip stilletjes doorlopen naar "geen
       // voorbeeldafbeelding en geen IWA-tekst gevonden": `ZipDecoder` geeft
       // sinds archive 4 een léég archief terug in plaats van te struikelen, en
@@ -74,14 +79,14 @@ class KeyImporter extends Importer {
       );
     }
     try {
-      final archive = safeDecodeZip(bytes);
+      final archive = preDecoded ?? safeDecodeZip(bytes, budget: budget);
       final ctx = KeyContext(archive);
 
       onProgress?.call(0.2, 'Voorbeeldafbeelding zoeken…');
       final preview = _readPreview(ctx);
 
       onProgress?.call(0.4, 'IWA-objecten inlezen…');
-      final doc = _loadDocument(ctx);
+      final doc = _loadDocument(ctx, budget);
 
       // Preferred path: schema-aware reconstruction (real slide text, ordered).
       onProgress?.call(0.6, 'Slides reconstrueren…');
@@ -90,6 +95,9 @@ class KeyImporter extends Importer {
           : SlideReconstructor(doc, ctx: ctx);
       final reconstructed =
           reconstructor?.reconstruct() ?? const <SourceSlide>[];
+      if (reconstructed.length > budget.maxSlides) {
+        throw ImportBudgetException('${budget.maxSlides} dia\'s');
+      }
 
       final slides = <SourceSlide>[];
       var schemaBased = false;
@@ -100,7 +108,7 @@ class KeyImporter extends Importer {
       } else {
         // Fallback: noisy UTF-8 text salvage + the preview render.
         onProgress?.call(0.6, 'IWA-tekst salvage…');
-        final salvagedText = textSalvage.salvage(ctx);
+        final salvagedText = textSalvage.salvage(ctx, budget: budget);
         fallbackTextFound = salvagedText.isNotEmpty;
         if (preview != null) {
           slides.add(
@@ -158,6 +166,20 @@ class KeyImporter extends Importer {
           ],
         ),
       );
+    } on ImportBudgetException catch (e) {
+      logError(
+        'KeyImporter: ${path ?? 'bestand'} overschrijdt het importbudget '
+        '(${e.limitLabel})',
+        e,
+      );
+      return Err(
+        ImportFailure(
+          'De presentatie overschrijdt de importlimiet (${e.limitLabel}).',
+          cause: e,
+          reason: ImportFailureReason.tooLarge,
+          args: {'formaat': 'key', 'limiet': e.limitLabel},
+        ),
+      );
     } on Exception catch (e) {
       logError('KeyImporter failed for ${path ?? 'bestand'}', e);
       return Err(
@@ -181,8 +203,14 @@ class KeyImporter extends Importer {
 
   /// Decompress and parse every `Index/*.iwa` into a single [IwaDocument].
   /// Returns `null` when no IWA parts could be parsed.
-  IwaDocument? _loadDocument(KeyContext ctx) {
-    final snappy = SnappyDecompressor();
+  ///
+  /// [budget] caps each Snappy stream and the total number of IWA objects: the
+  /// `objects` map grows with the source, so a crafted archive could otherwise
+  /// drive it without bound. The object-count check sits outside the per-part
+  /// `try` on purpose — inside it, the `on Object` clause would swallow the
+  /// [ImportBudgetException] and keep going.
+  IwaDocument? _loadDocument(KeyContext ctx, ImportBudget budget) {
+    final snappy = SnappyDecompressor(budget: budget);
     final wire = ProtoWire();
     final archive = IwaArchive(wire);
     final objects = <int, IwaObject>{};
@@ -196,6 +224,9 @@ class KeyImporter extends Importer {
       } on Object catch (e) {
         logError('KeyImporter: kon $name niet decoderen', e);
         continue;
+      }
+      if (objects.length > budget.maxIwaObjects) {
+        throw ImportBudgetException('${budget.maxIwaObjects} IWA-objecten');
       }
     }
     if (objects.isEmpty) return null;

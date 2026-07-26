@@ -3,17 +3,19 @@ import 'dart:convert';
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/import/utils/archive_utils.dart';
+import 'package:ocideck/services/import/utils/import_budget.dart';
 
-/// De zip-bom-beveiliging van de presentatie-import.
+/// De zip-bom-beveiliging van de presentatie-import, nu gedreven door één
+/// centraal [ImportBudget] (#874).
 ///
-/// De grenzen zelf staan in gibibytes, dus deze tests zetten ze omlaag; anders
-/// zou je twee gigabyte moeten aanmaken om één `if` te raken en bleef de hele
-/// beveiliging onbeproefd.
+/// De productiegrenzen staan in honderden mebibytes, dus deze tests zetten met
+/// [ImportBudget.forTest] een piepklein budget; anders zou je een halve gigabyte
+/// moeten aanmaken om één `if` te raken en bleef de hele beveiliging onbeproefd.
 ///
-/// De meldingen worden meegetoetst, en dat is geen pietluttigheid: ze droegen
-/// `'$bytes.length'` in plaats van `'${bytes.length}'`, waardoor de foutmelding
-/// bij een te grote invoer de héle bytelijst zou stringificeren — precies in het
-/// geval waarin het geheugen al krap is.
+/// Een budgetoverschrijding is een [ImportBudgetException] (niet meer een kale
+/// `FormatException`): de importer vertaalt die naar de echte reden "te groot",
+/// niet "beschadigd". Alleen een ontbrekende zip-kop blijft een `FormatException`
+/// — dat is een ander soort fout.
 void main() {
   List<int> zipOf(Map<String, String> entries) {
     final archive = Archive();
@@ -33,7 +35,8 @@ void main() {
     // `archive` 4.x geeft op rommel een *leeg* archief terug waar 3.x nog
     // gooide. Zonder deze controle leest een beschadigd bestand als een
     // presentatie zonder dia's — de gebruiker kreeg "geen dia's gevonden"
-    // terwijl zijn bestand kapot was.
+    // terwijl zijn bestand kapot was. Dit blijft een FormatException: geen zip,
+    // niet "te groot".
     expect(
       () => safeDecodeZip(utf8.encode('dit is geen zip')),
       throwsA(
@@ -46,38 +49,52 @@ void main() {
     );
   });
 
-  test('te grote invoer wordt geweigerd, met het échte aantal bytes', () {
+  test('te grote invoer wordt geweigerd als budgetoverschrijding', () {
     final bytes = zipOf({'a.txt': 'hallo'});
     expect(
-      () => safeDecodeZip(bytes, maxInput: 10),
+      () => safeDecodeZip(
+        bytes,
+        budget: ImportBudget.forTest(maxSourceBytes: 10),
+      ),
       throwsA(
-        isA<FormatException>().having(
-          (e) => e.message,
-          'message',
-          allOf(
-            contains('${bytes.length} bytes'),
-            contains('10 byte limit'),
-            // De bug: de bytelijst zelf in de melding.
-            isNot(contains('[')),
-          ),
+        isA<ImportBudgetException>().having(
+          (e) => e.limitLabel,
+          'limitLabel',
+          contains('10 bytes'),
         ),
       ),
     );
   });
 
-  test('een te grote losse entry wordt geweigerd, met naam en maat', () {
+  test('te veel onderdelen wordt geweigerd, los van de grootte', () {
+    // Drie piepkleine onderdelen, budget van twee: de telling begrenst de
+    // uitpaklus onafhankelijk van de bytegrootte.
     expect(
-      () => safeDecodeZip(zipOf({'groot.bin': 'abcdefghij'}), maxFile: 5),
+      () => safeDecodeZip(
+        zipOf({'a.txt': 'x', 'b.txt': 'y', 'c.txt': 'z'}),
+        budget: ImportBudget.forTest(maxArchiveEntries: 2),
+      ),
       throwsA(
-        isA<FormatException>().having(
-          (e) => e.message,
-          'message',
-          allOf(
-            contains('groot.bin'),
-            contains('10 bytes'),
-            contains('5 byte limit'),
-            isNot(contains('ArchiveFile')),
-          ),
+        isA<ImportBudgetException>().having(
+          (e) => e.limitLabel,
+          'limitLabel',
+          contains('2 onderdelen'),
+        ),
+      ),
+    );
+  });
+
+  test('een te grote losse entry wordt geweigerd', () {
+    expect(
+      () => safeDecodeZip(
+        zipOf({'groot.bin': 'abcdefghij'}),
+        budget: ImportBudget.forTest(maxUncompressedEntry: 5),
+      ),
+      throwsA(
+        isA<ImportBudgetException>().having(
+          (e) => e.limitLabel,
+          'limitLabel',
+          contains('per onderdeel'),
         ),
       ),
     );
@@ -87,13 +104,13 @@ void main() {
     expect(
       () => safeDecodeZip(
         zipOf({'a.txt': 'abcde', 'b.txt': 'fghij'}),
-        maxTotal: 6,
+        budget: ImportBudget.forTest(maxUncompressedTotal: 6),
       ),
       throwsA(
-        isA<FormatException>().having(
-          (e) => e.message,
-          'message',
-          contains('6 byte limit'),
+        isA<ImportBudgetException>().having(
+          (e) => e.limitLabel,
+          'limitLabel',
+          contains('uitgepakt'),
         ),
       ),
     );
