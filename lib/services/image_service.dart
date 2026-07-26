@@ -408,8 +408,11 @@ class ImageService {
           ),
         );
         await writeBytesAtomic(file, bytes);
+        // Altijd met '/': een verwijzing in het deck is portabel (net als de
+        // deck-serializer, die p.posix schrijft). Zonder de conversie zet
+        // p.relative op Windows `images\pasted_…png` in de dia — niet-portabel.
         return ImageImportOutcome.success(
-          p.relative(file.path, from: projectPath),
+          p.relative(file.path, from: projectPath).replaceAll(r'\', '/'),
         );
       }
       // Geen projectmap: de stagingmap, met dezelfde images/-indeling, zodat
@@ -474,7 +477,8 @@ class ImageService {
     await destDir.create(recursive: true);
     final normalized = p.normalize(sourcePath);
     if (p.isWithin(projectPath, normalized)) {
-      return p.relative(normalized, from: projectPath);
+      // Met '/' de deck in — zie de toelichting bij pasteImage hierboven.
+      return p.relative(normalized, from: projectPath).replaceAll(r'\', '/');
     }
     final src = File(sourcePath);
     if (!await src.exists()) return null;
