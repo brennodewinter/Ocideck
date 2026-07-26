@@ -33,7 +33,15 @@ void main() {
   });
 
   tearDown(() {
-    if (tmp.existsSync()) tmp.deleteSync(recursive: true);
+    // Windows houdt een net via de beeld-cache ingelezen bestand soms nog kort
+    // vast (errno 32, "used by another process"); OS-temp wordt sowieso
+    // opgeruimd en de test is dan al klaar. Op POSIX is dit een gewone delete.
+    if (!tmp.existsSync()) return;
+    try {
+      tmp.deleteSync(recursive: true);
+    } on FileSystemException {
+      // opzettelijk genegeerd: zie hierboven
+    }
   });
 
   /// Opent het venster en houdt vast wat het teruggaf.

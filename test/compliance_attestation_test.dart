@@ -16,7 +16,11 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final compliance = File('COMPLIANCE.md').readAsStringSync();
+  // Normaliseer CRLF → LF: git checkt op Windows met \r\n uit, en de
+  // inhoudscontroles hieronder zoeken op letterlijke \n.
+  final compliance = File(
+    'COMPLIANCE.md',
+  ).readAsStringSync().replaceAll('\r\n', '\n');
 
   test('COMPLIANCE.md bestaat en noemt zichzelf geen conformiteitsclaim', () {
     // De kop is de belangrijkste alinea van het document: hij bepaalt of een

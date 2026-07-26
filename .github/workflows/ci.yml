@@ -258,7 +258,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, windows-latest]
+        # Bewust windows-2022 en niet windows-latest, exact zoals de Windows-job
+        # in release.yml (#788): dartcv4 (de OpenCV-laag onder de privacyscanner)
+        # haalt een voorgebouwd OpenCV-Windows-pakket op waarvan de binaries niet
+        # samengaan met de nieuwste MSVC op het latest-image ("Found OpenCV
+        # Windows Pack but it has no binaries compatible with your
+        # configuration"). Op het 2022-image staat de MSVC waarvoor dat pakket
+        # gebouwd is. Los deze pin pas wanneer upstream dartcv een pakket voor
+        # nieuwere MSVC's uitbrengt — dat pad (migratie naar dartcv4 2.x) is
+        # afzonderlijk getrackt.
+        os: [macos-latest, windows-2022]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout

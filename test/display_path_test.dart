@@ -1,4 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:path/path.dart' as p;
+
 import 'package:ocideck/utils/display_path.dart';
 
 void main() {
@@ -22,13 +24,13 @@ void main() {
   test('displayFolder kort de OS-thuismap af tot ~', () {
     expect(
       displayFolder('/Users/u/Docs/deck.md', osHome: '/Users/u'),
-      '~/Docs',
+      p.normalize('~/Docs'),
     );
     expect(displayFolder('/Users/u/deck.md', osHome: '/Users/u'), '~');
   });
 
   test('displayFolder valt terug op het volledige mappad', () {
-    expect(displayFolder('/srv/decks/deck.md'), '/srv/decks');
+    expect(displayFolder('/srv/decks/deck.md'), p.normalize('/srv/decks'));
   });
 
   test('de presentatie-thuismap gaat vóór de OS-thuismap', () {
@@ -43,7 +45,13 @@ void main() {
   });
 
   test('een lege of witruimte-thuismap wordt genegeerd', () {
-    expect(displayFolder('/srv/decks/deck.md', homeDir: '  '), '/srv/decks');
-    expect(displayFolder('/srv/decks/deck.md', osHome: ''), '/srv/decks');
+    expect(
+      displayFolder('/srv/decks/deck.md', homeDir: '  '),
+      p.normalize('/srv/decks'),
+    );
+    expect(
+      displayFolder('/srv/decks/deck.md', osHome: ''),
+      p.normalize('/srv/decks'),
+    );
   });
 }

@@ -181,7 +181,10 @@ void main() {
     final overtreders = <String>[];
     for (final entity in Directory('lib').listSync(recursive: true)) {
       if (entity is! File || !entity.path.endsWith('.dart')) continue;
-      if (rendertEenDia(entity.path)) continue;
+      // Naar '/' zodat rendertEenDia (de preview-uitsluiting) ook op Windows
+      // matcht; anders worden de preview-bestanden ten onrechte gevlagd.
+      final pad = entity.path.replaceAll(r'\', '/');
+      if (rendertEenDia(pad)) continue;
       final regels = entity.readAsLinesSync();
       for (var i = 0; i < regels.length; i++) {
         final regel = regels[i];
@@ -200,7 +203,7 @@ void main() {
         }
         for (final token in vast) {
           if (RegExp('color:\\s*AppTheme\\.$token\\b').hasMatch(regel)) {
-            overtreders.add('${entity.path}:${i + 1}  $token');
+            overtreders.add('$pad:${i + 1}  $token');
           }
         }
       }

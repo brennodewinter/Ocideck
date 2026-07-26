@@ -34,11 +34,19 @@ void main() {
       expect(ids, hasLength(200));
     });
 
-    test('loopt ruwweg op met de tijd, zodat een diff leesbaar blijft', () {
-      final eerst = newStrokeId();
-      final later = newStrokeId();
-      expect(eerst.compareTo(later), lessThan(0));
-    });
+    test(
+      'loopt ruwweg op met de tijd, zodat een diff leesbaar blijft',
+      () async {
+        // Een meetbare tussenpoos, want het contract is "ruwweg" oplopend, niet
+        // strikt: twee dádelijk opeenvolgende id's kunnen dezelfde tijdstempel
+        // dragen (op Windows tikt de klok grover dan een microseconde), en dan
+        // beslist de random staart de volgorde. 25 ms ligt ruim boven die tik.
+        final eerst = newStrokeId();
+        await Future<void>.delayed(const Duration(milliseconds: 25));
+        final later = newStrokeId();
+        expect(eerst.compareTo(later), lessThan(0));
+      },
+    );
   });
 
   group('de rondgang', () {

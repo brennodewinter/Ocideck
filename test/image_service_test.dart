@@ -20,13 +20,16 @@ void main() {
     });
 
     test('returns absolute paths unchanged', () {
-      expect(service.resolve('/abs/pic.png', '/project'), '/abs/pic.png');
+      expect(
+        service.resolve('/abs/pic.png', '/project'),
+        p.normalize('/abs/pic.png'),
+      );
     });
 
     test('joins relative paths with the project path', () {
       expect(
         service.resolve('images/pic.png', '/project'),
-        p.join('/project', 'images/pic.png'),
+        p.normalize(p.join('/project', 'images/pic.png')),
       );
     });
   });

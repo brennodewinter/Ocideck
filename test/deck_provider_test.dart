@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:path/path.dart' as p;
+
 import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/checklist_spec.dart';
 import 'package:ocideck/models/deck.dart';
@@ -79,7 +81,7 @@ void main() {
 
     expect(notifier.state.filePath, isNull);
     expect(notifier.state.deck!.projectPath, isNull);
-    expect(notifier.state.deck!.themeProfile.logoPath, logo.path);
+    expect(notifier.state.deck!.themeProfile.logoPath, p.normalize(logo.path));
   });
 
   test('addSlide inserts right after the given index', () {

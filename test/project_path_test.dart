@@ -8,7 +8,7 @@ void main() {
       final project = p.join('/tmp', 'deck');
       expect(
         resolveProjectRelative(project, 'images/photo.png'),
-        p.join(project, 'images', 'photo.png'),
+        p.normalize(p.join(project, 'images', 'photo.png')),
       );
     });
 
@@ -36,11 +36,14 @@ void main() {
     test('allows absolute paths inside the project', () {
       final project = p.join('/tmp', 'deck');
       final inside = p.join(project, 'images', 'photo.png');
-      expect(resolveSlideAssetPath(inside, project), inside);
+      expect(resolveSlideAssetPath(inside, project), p.normalize(inside));
     });
 
     test('allows absolute paths when the deck is unsaved', () {
-      expect(resolveSlideAssetPath('/tmp/pasted.png', null), '/tmp/pasted.png');
+      expect(
+        resolveSlideAssetPath('/tmp/pasted.png', null),
+        p.normalize('/tmp/pasted.png'),
+      );
     });
 
     test('blocks relative traversal for saved decks', () {
@@ -55,14 +58,14 @@ void main() {
       // deck elsewhere must still resolve it (it is trusted app config).
       final project = p.join('/tmp', 'other-deck');
       final logo = p.join('/tmp', 'regular', 'logos', 'logo.png');
-      expect(resolveTrustedAssetPath(logo, project), logo);
+      expect(resolveTrustedAssetPath(logo, project), p.normalize(logo));
     });
 
     test('still resolves a relative logo inside the project', () {
       final project = p.join('/tmp', 'deck');
       expect(
         resolveTrustedAssetPath('logos/logo.png', project),
-        p.join(project, 'logos', 'logo.png'),
+        p.normalize(p.join(project, 'logos', 'logo.png')),
       );
     });
 
@@ -81,7 +84,7 @@ void main() {
       final project = p.join('/tmp', 'deck');
       expect(
         resolveEditorAssetPath('images/a.png', project),
-        p.join(project, 'images', 'a.png'),
+        p.normalize(p.join(project, 'images', 'a.png')),
       );
     });
 
@@ -89,7 +92,7 @@ void main() {
       final project = p.join('/tmp', 'deck');
       expect(
         resolveEditorAssetPath('/Users/me/photo.png', project),
-        '/Users/me/photo.png',
+        p.normalize('/Users/me/photo.png'),
       );
     });
   });

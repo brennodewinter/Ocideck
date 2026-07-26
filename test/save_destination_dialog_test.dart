@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:path/path.dart' as p;
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/widgets/dialogs/save_destination_dialog.dart';
@@ -58,7 +59,9 @@ void main() {
       // De samenvatting toont het pad van de eerste bibliotheek met de
       // veilige bestandsnaam plus de images/-submap.
       expect(
-        find.textContaining('/home/prive/Kwartaal_Update.md'),
+        // Zoals de dialoog het toont: p.join(map, bestandsnaam), dus op Windows
+        // met de OS-scheiding tussen map en bestand.
+        find.textContaining(p.join('/home/prive', 'Kwartaal_Update.md')),
         findsOneWidget,
       );
       expect(find.textContaining('/home/prive/images'), findsOneWidget);
