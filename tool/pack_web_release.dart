@@ -234,13 +234,22 @@ List<String> controleer(Directory bundel) {
 /// reproduceerbaarheid — en die is hier niet getoetst en wordt hier niet
 /// beweerd.
 List<String> bundelBestanden(Directory bundel) {
-  final voorvoegsel = '${bundel.path}/';
+  // Paden relatief aan de bundel, altijd met '/' als scheidingsteken. Twee
+  // redenen om hier te normaliseren en niet op de OS-scheiding te leunen: de
+  // checksumlijst is een portabel artefact (`sha256sum -c` draait op Linux) en
+  // moet op elk platform dezelfde regels geven; en op Windows levert `listSync`
+  // backslashes, waardoor een prefix-vergelijking met een '/'-achtervoegsel
+  // faalde en het hele absolute pad teruggaf — dat plakte verderop als
+  // `bundel/C:\...\bestand` en gooide een PathNotFoundException.
+  final wortel = bundel.path.replaceAll(r'\', '/');
+  final voorvoegsel = wortel.endsWith('/') ? wortel : '$wortel/';
   final paden = <String>[];
   for (final entiteit in bundel.listSync(recursive: true)) {
     if (entiteit is! File) continue;
-    final pad = entiteit.path.startsWith(voorvoegsel)
-        ? entiteit.path.substring(voorvoegsel.length)
-        : entiteit.path;
+    final genormaliseerd = entiteit.path.replaceAll(r'\', '/');
+    final pad = genormaliseerd.startsWith(voorvoegsel)
+        ? genormaliseerd.substring(voorvoegsel.length)
+        : genormaliseerd;
     if (pad == checksumBestand) continue;
     paden.add(pad);
   }
