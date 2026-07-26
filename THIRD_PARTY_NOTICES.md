@@ -110,7 +110,7 @@ same answer `make licenses` and the SBOM give.
 > when a direct dependency, a vendored JS bundle or a bundled font is missing
 > here, or when the licence in this table disagrees with the classifier. It was
 > added because twelve direct dependencies — including `webview_flutter`,
-> `flutter_secure_storage`, `http`, `opencv_core`, `crypto` and `flutter_quill` —
+> `flutter_secure_storage`, `http`, `crypto` and `flutter_quill` —
 > had accumulated in `pubspec.yaml` without ever reaching this list. The SBOM had
 > them all along; a hand-kept companion list is exactly the artefact that falls
 > behind, so it now has a gate instead of good intentions.
