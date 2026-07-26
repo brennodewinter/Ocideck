@@ -60,8 +60,40 @@ dependencies:
   flutter_secure_storage: ^10.3.1
   http: ^1.6.0
 
+# dartcv4 2.x levert OpenCV modulair en sluit de meeste modules standaard UIT.
+# De README waarschuwt: "even a module is excluded, its dart code is still
+# available, but throws a symbol not found exception when called" — precies wat
+# er misging na de opencv_core -> dartcv4-migratie (#870/#873): FaceDetectorYN
+# viel om op `cv_FaceDetectorYN_create_1 symbol not found`, waardoor de
+# privacy-gezichtsscan (OciWacht) op elk platform "niet gekeken" meldde i.p.v.
+# te scannen.
+#
+# De scanner in lib/services/privacy/image_face_scan_io.dart heeft nodig:
+# FaceDetectorYN (`objdetect`), het YuNet-model (`dnn`), imdecode (`imgcodecs`)
+# en resize (`imgproc`); `core` zit er altijd in. OpenCV's objdetect hangt echter
+# óók aan `calib3d`, en calib3d weer aan `features2d` + `flann` — laat je die weg,
+# dan bouwt OpenCV objdetect niet en faalt het linken op "library
+# 'opencv_objdetect' not found". Vandaar de hele keten hieronder. (`dnn` en
+# objdetect maken de OpenCV-binary groter; dat is de prijs van de scan.)
+#
+# Getoetst door integration_test/native_face_scan_test.dart, dat op een echt
+# platform draait — onder `flutter test` laadt de native laag niet.
+hooks:
+  user_defines:
+    dartcv4:
+      include_modules:
+        - imgproc
+        - imgcodecs
+        - flann
+        - features2d
+        - calib3d
+        - dnn
+        - objdetect
+
 dev_dependencies:
   flutter_test:
+    sdk: flutter
+  integration_test:
     sdk: flutter
   flutter_lints: ^6.0.0
   # Drives tool/check_method_length.dart — a syntactic AST measures method

@@ -2226,73 +2226,65 @@ open gelicentieerde applicatie is toegestaan — "kosteloos" is niet hetzelfde a
 
 #### Bundelgrootte: winst die nu blijft liggen
 
-**Eerst een correctie op wat hier eerder stond.** De voor de hand liggende
-configuratie is `include_modules`, en die doet **niets**. Lees `gen_cmake_vars.dart`
-in dartcv4:
+**Correctie, en nu gemeten.** Wat hier eerder stond ging uit van `opencv_core` en
+een oudere `dartcv4`; sinds de migratie naar `dartcv4` 2.x (#870/#873) klopt het
+niet meer, en het is inmiddels wél op een draaiende build getoetst.
 
-```dart
-final result = {
-  for (final e in defaultModuleSettings.keys)
-    e: exclude.contains(e) ? "OFF" : defaultModuleSettings[e]!,
-};
-```
+`dartcv4` 2.x levert OpenCV op **alle** native platforms via native-assets
+build-hooks (CMake) — geen voorgebouwde CocoaPod meer, ook op macOS niet. De
+moduleselectie gaat via `hooks: user_defines` in `pubspec.yaml`, en anders dan de
+oudere versie werkt `include_modules` hier wél: standaard staan alleen `core`,
+`imgproc` en `imgcodecs` AAN en de rest UIT, en `include_modules` noemt wat er
+extra bij moet.
 
-Alleen `exclude_modules` zet een module uit; `include_modules` dient uitsluitend om
-een module tégen uitsluiting te beschermen. Wie `include_modules: [core, imgproc,
-…]` opschrijft, krijgt een build die er geconfigureerd uitziet en niets uitsluit.
-
-De juiste vorm is dus omgekeerd — noem wat eruit mág:
+De beeldcontrole heeft nodig: `core`, `imgproc` (resize), `imgcodecs` (decode),
+`dnn` (het YuNet-model draait door de dnn-module) en `objdetect` (`FaceDetectorYN`).
+OpenCV's `objdetect` hangt zelf aan `calib3d`, en die weer aan `features2d` en
+`flann` — laat je die weg, dan bouwt OpenCV `objdetect` niet en faalt het linken op
+`library 'opencv_objdetect' not found`. De volledige lijst staat daarom in
+`pubspec.yaml`:
 
 ```yaml
 hooks:
   user_defines:
     dartcv4:
-      exclude_modules:
-        [calib3d, contrib, features2d, flann, photo, stitching, video, videoio]
+      include_modules:
+        [imgproc, imgcodecs, flann, features2d, calib3d, dnn, objdetect]
 ```
 
-De standaardwaarden staan in `defaultModuleSettings`: alles hierboven staat AAN,
-`freetype` en `highgui` staan al UIT, en `core` is niet configureerbaar. De
-beeldcontrole gebruikt `core`, `imgproc` (resize), `imgcodecs` (decode), `objdetect`
-(`FaceDetectorYN`) en `dnn` (het model draait door de dnn-module). De acht
-hierboven zijn de rest.
+Dit is meteen de kleinst werkende build: alles wat de scan niet gebruikt — `photo`,
+`stitching`, `video`, `videoio` en de hele contrib-set — blijft eruit. De
+macOS-binary weegt zo 22 MB (arm64, gemeten, was 11 MB met alleen de defaults); de
+`dnn`- en `objdetect`-modules zijn het leeuwendeel en zijn niet weg te snoeien
+zonder de scan te breken.
 
-**Het werkt alleen op Linux, Windows en Android.** Die drie lopen via
-`src/CMakeLists.txt`, dat `dart run dartcv4:gen_cmake_vars` aanroept. macOS en iOS
-krijgen een voorgebouwde CocoaPod (`DartCvMacOS` plus de `/dnn`-subspec) waar niets
-aan te snoeien valt — daar is 27 MB gemeten en dat blijft zo.
-
-**Niet aangezet, en dat is opzet.** Dit is nooit gemeten: er was geen Linux- of
-Windows-machine beschikbaar. En een uitgesloten module houdt zijn Dart-API maar
-gooit "symbol not found" bij aanroep — precies het soort stille runtimefout dat deze
-codebase elders al twee keer heeft opgeleverd. Blind aanzetten zou die val zelf
-zetten.
-
-Het experiment, in volgorde, op een Linux- of Windows-machine:
-
-1. `flutter build linux` zonder het blok, en meet `build/linux/*/*/bundle/lib/libdartcv.so`;
-2. voeg het blok toe, `flutter clean`, opnieuw bouwen, opnieuw meten;
-3. **verifieer dat de detector nog werkt** — bouwen is niet genoeg, want de fout
-   valt pas bij aanroep. Draai `flutter test test/image_face_scan_test.dart` met
-   `DARTCV_LIB_PATH` naar de nieuwe `.so`; de kattenfoto's moeten nul geven en
-   `isSupported` moet waar zijn;
-4. zakt er iets om, dan is de kortste weg één module tegelijk terugzetten —
-   `dnn` en `objdetect` hebben interne afhankelijkheden die niet gedocumenteerd zijn.
+**Waarom dit als bug binnenkwam.** De migratie liet dit blok weg, en een uitgesloten
+module houdt zijn Dart-API maar gooit "symbol not found" bij aanroep — precies het
+soort stille runtimefout dat deze codebase elders al eerder heeft opgeleverd.
+`FaceDetectorYN` viel daardoor om op `cv_FaceDetectorYN_create_1`, en de hele
+beeldcontrole meldde "niet gekeken" in plaats van te scannen. Geen unit-test ving
+het, want de native laag laadt niet onder `flutter test`.
 
 #### De detectietests en de platformdekking
 
-De Makefile vindt de OpenCV-bibliotheek zelf zodra er een platformbuild in `build/`
-staat (zie CHECKS.md). De CI bouwt inmiddels op alle drie de desktopplatforms —
-Linux in de gate, macOS en Windows in de matrix — zodat de detectietests daar echt
-draaien in plaats van zichzelf over te slaan.
+De native laag laadt **niet** onder `flutter test`: dartcv4 2.x bindt via
+`@Native`/`@DefaultAsset` code-assets, en Flutter 3.44 bouwt die niet voor de
+test-VM. `DARTCV_LIB_PATH` leest niemand meer — dat was de `opencv_core`-route, en
+de bijbehorende steiger in Makefile en CI is dode bedrading geworden (apart
+getrackt voor opschoning). `test/image_face_scan_test.dart` bewaakt daarom onder
+`flutter test` alleen het *contract*: draait de laag niet, dan moet `isSupported`
+dat zeggen en mag er geen stille nul komen.
 
-Wat daarmee nog niet is aangetoond: **alleen macOS is door een mens gedraaid gezien.**
-`opencv_core` declareert `ffiPlugin: true` voor android/ios/linux/macos/windows en de
-voorwaardelijke import kiest op elk native platform de echte implementatie, maar de
-Linux- en Windows-paden in de Makefile en de CI zijn op patroon geschreven en niet op
-een draaiende build geverifieerd. De eerste CI-run op die takken is dus tegelijk het
-bewijs — en faalt hard als een pad niet klopt, in plaats van stil terug te vallen op
-overslaan.
+Dat de laag écht werkt, toont `integration_test/native_face_scan_test.dart`. Die
+draait als een echte app op een desktopplatform — waar de native-assets wél laden —
+en verifieert dat de detector beschikbaar is, dat katten en logo's nul gezichten
+geven en dat een verminkte JPEG fail-closed is. Precies deze test ving de kapotte
+`objdetect`-build hierboven.
+
+Wat nog niet is aangetoond: **alleen macOS is door een mens gedraaid gezien.** De
+integratietest op Linux en Windows automatisch in de CI laten draaien (Linux vraagt
+een `xvfb`-display) is apart getrackt; die eerste CI-run is dan tegelijk het bewijs
+dat de modulebuild op die platforms slaagt.
 
 Android en iOS zijn geen leverplatform: de release-workflow bouwt web, macOS, Windows
 en Linux. De mappen bestaan, het product niet.
