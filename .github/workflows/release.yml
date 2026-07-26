@@ -34,14 +34,10 @@ permissions:
 jobs:
   windows:
     name: Build Windows
-    # Bewust niet windows-latest: dartcv4 (de OpenCV-laag onder de
-    # privacyscanner) haalt een voorgebouwd OpenCV-Windows-pakket op waarvan
-    # de binaries niet samengaan met de nieuwste MSVC op dat image
-    # ("Found OpenCV Windows Pack but it has no binaries compatible with
-    # your configuration"). Op het 2022-image staat de MSVC waarvoor dat
-    # pakket gebouwd is. Los deze pin pas wanneer upstream dartcv een pakket
-    # voor nieuwere MSVC's uitbrengt.
-    runs-on: windows-2022
+    # dartcv4 2.x levert OpenCV via native-assets build-hooks (CMake) in plaats
+    # van een voorgebouwd pack, dus de MSVC-compatibiliteit die de windows-2022
+    # pin noodzakelijk maakte is niet meer van toepassing (#870).
+    runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4

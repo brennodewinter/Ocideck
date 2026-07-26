@@ -1,33 +1,4 @@
 PODS:
-  - DartCvMacOS (4.12.0.2):
-    - DartCvMacOS/calib3d (= 4.12.0.2)
-    - DartCvMacOS/contrib (= 4.12.0.2)
-    - DartCvMacOS/core (= 4.12.0.2)
-    - DartCvMacOS/features2d (= 4.12.0.2)
-    - DartCvMacOS/imgproc (= 4.12.0.2)
-    - DartCvMacOS/objdetect (= 4.12.0.2)
-    - DartCvMacOS/photo (= 4.12.0.2)
-    - DartCvMacOS/stitching (= 4.12.0.2)
-    - DartCvMacOS/video (= 4.12.0.2)
-  - DartCvMacOS/calib3d (4.12.0.2):
-    - DartCvMacOS/core
-  - DartCvMacOS/contrib (4.12.0.2):
-    - DartCvMacOS/core
-  - DartCvMacOS/core (4.12.0.2)
-  - DartCvMacOS/dnn (4.12.0.2):
-    - DartCvMacOS/core
-  - DartCvMacOS/features2d (4.12.0.2):
-    - DartCvMacOS/core
-  - DartCvMacOS/imgproc (4.12.0.2):
-    - DartCvMacOS/core
-  - DartCvMacOS/objdetect (4.12.0.2):
-    - DartCvMacOS/core
-  - DartCvMacOS/photo (4.12.0.2):
-    - DartCvMacOS/core
-  - DartCvMacOS/stitching (4.12.0.2):
-    - DartCvMacOS/core
-  - DartCvMacOS/video (4.12.0.2):
-    - DartCvMacOS/core
   - desktop_drop (0.0.1):
     - FlutterMacOS
   - desktop_multi_window (0.0.1):
@@ -38,10 +9,6 @@ PODS:
     - Flutter
     - FlutterMacOS
   - FlutterMacOS (1.0.0)
-  - opencv_core (0.0.1):
-    - DartCvMacOS (= 4.12.0.2)
-    - DartCvMacOS/dnn (= 4.12.0.2)
-    - FlutterMacOS
   - package_info_plus (0.0.1):
     - FlutterMacOS
   - pasteboard (0.0.1):
@@ -72,7 +39,6 @@ DEPENDENCIES:
   - file_picker (from `Flutter/ephemeral/.symlinks/plugins/file_picker/macos`)
   - flutter_secure_storage_darwin (from `Flutter/ephemeral/.symlinks/plugins/flutter_secure_storage_darwin/darwin`)
   - FlutterMacOS (from `Flutter/ephemeral`)
-  - opencv_core (from `Flutter/ephemeral/.symlinks/plugins/opencv_core/macos`)
   - package_info_plus (from `Flutter/ephemeral/.symlinks/plugins/package_info_plus/macos`)
   - pasteboard (from `Flutter/ephemeral/.symlinks/plugins/pasteboard/macos`)
   - quill_native_bridge_macos (from `Flutter/ephemeral/.symlinks/plugins/quill_native_bridge_macos/macos`)
@@ -83,10 +49,6 @@ DEPENDENCIES:
   - wakelock_plus (from `Flutter/ephemeral/.symlinks/plugins/wakelock_plus/macos`)
   - webview_flutter_wkwebview (from `Flutter/ephemeral/.symlinks/plugins/webview_flutter_wkwebview/darwin`)
   - window_manager (from `Flutter/ephemeral/.symlinks/plugins/window_manager/macos`)
-
-SPEC REPOS:
-  trunk:
-    - DartCvMacOS
 
 EXTERNAL SOURCES:
   desktop_drop:
@@ -99,8 +61,6 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/flutter_secure_storage_darwin/darwin
   FlutterMacOS:
     :path: Flutter/ephemeral
-  opencv_core:
-    :path: Flutter/ephemeral/.symlinks/plugins/opencv_core/macos
   package_info_plus:
     :path: Flutter/ephemeral/.symlinks/plugins/package_info_plus/macos
   pasteboard:
@@ -123,13 +83,11 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/window_manager/macos
 
 SPEC CHECKSUMS:
-  DartCvMacOS: 10e8f6cd2d6e968a967cec0b5d67682a00f28c9e
   desktop_drop: 10a3e6a7fa9dbe350541f2574092fecfa345a07b
   desktop_multi_window: 93667594ccc4b88d91a97972fd3b1b89667fa80a
   file_picker: 7584aae6fa07a041af2b36a2655122d42f578c1a
   flutter_secure_storage_darwin: acdb3f316ed05a3e68f856e0353b133eec373a23
   FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
-  opencv_core: efc6e427be5f9e95171380917f473d6edaf3ea38
   package_info_plus: f0052d280d17aa382b932f399edf32507174e870
   pasteboard: b594eaf838d930b276d7a35a44a32b4f489170cb
   quill_native_bridge_macos: 2b005cb56902bb740e0cd9620aa399dfac6b4882
