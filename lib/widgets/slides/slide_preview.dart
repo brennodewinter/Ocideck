@@ -356,6 +356,12 @@ class SlidePreviewWidget extends StatelessWidget {
   /// Vergroot grafieklabels voor weergave op afstand in presentatiemodus.
   final bool presentationMode;
 
+  /// Of een te groot mermaid-diagram op dit oppervlak mag scrollen (#872).
+  /// Opt-in: standaard `false` (passend verkleinen, het hele diagram zichtbaar),
+  /// net als thumbnails, dialogen en de export. Alleen de grote interactieve
+  /// previews (editor-previewpaneel, play-scherm) zetten het op `true`.
+  final bool scrollableMermaid;
+
   /// Wijzigt tijdens het presenteren een checklistitem. [column] is 0 voor de
   /// eerste/enkele lijst en 1 voor de rechterkolom.
   final void Function(int column, int itemIndex)? onChecklistItemToggle;
@@ -462,6 +468,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.autoplayMedia = false,
     this.allowRemoteMedia = false,
     this.presentationMode = false,
+    this.scrollableMermaid = false,
     this.onChecklistItemToggle,
     this.tableEditMode = false,
     this.tableEditRow,
@@ -503,8 +510,10 @@ class SlidePreviewWidget extends StatelessWidget {
     // The slide is a fixed 16:9 design surface whose sizes all derive from
     // its width; interface text scaling must not reflow it (the auto-fit
     // measuring assumes unscaled text), so the canvas opts out.
-    return MediaQuery.withNoTextScaling(
-      child: _TableEditHost(
+    return MermaidRenderScope(
+      scrollable: scrollableMermaid,
+      child: MediaQuery.withNoTextScaling(
+        child: _TableEditHost(
         enabled:
             presentationMode && slide.type == SlideType.table && tableEditMode,
         selectedRow: tableEditRow,
@@ -541,6 +550,7 @@ class SlidePreviewWidget extends StatelessWidget {
             ),
           ),
         ),
+      ),
       ),
     );
   }

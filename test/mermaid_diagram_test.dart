@@ -25,14 +25,18 @@ void main() {
     String source,
     MermaidRenderer renderer, {
     double width = 800,
+    bool scrollable = true,
   }) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: MermaidDiagram(
-            source: source,
-            width: width,
-            renderer: renderer,
+          body: MermaidRenderScope(
+            scrollable: scrollable,
+            child: MermaidDiagram(
+              source: source,
+              width: width,
+              renderer: renderer,
+            ),
           ),
         ),
       ),
@@ -172,21 +176,62 @@ void main() {
     expect(tester.widget<SvgPicture>(find.byType(SvgPicture)).width, 840);
   });
 
-  testWidgets('een hoge flowchart schaalt omlaag i.p.v. onder de slide uit te '
-      'lopen (#868)', (tester) async {
+  const tall =
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 400">'
+      '<rect width="10" height="10"/></svg>';
+
+  testWidgets('op een statisch oppervlak schaalt een hoge flowchart passend '
+      'omlaag i.p.v. te scrollen (#868/#872)', (tester) async {
     await tester.binding.setSurfaceSize(const Size(1400, 2000));
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    // Sterk verticaal diagram (breedte/hoogte = 0.25): zonder plafond zou het op
-    // breedte 840 een hoogte van 3360 krijgen en ver onder de slide uitlopen.
-    const tall =
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 400">'
-        '<rect width="10" height="10"/></svg>';
-    await pump(tester, 'flowchart TD; A-->B', returns(tall), width: 1000);
+    // Sterk verticaal diagram (breedte/hoogte = 0.25). Op een niet-scrollbaar
+    // oppervlak (export/publiek) moet het hele diagram passen: begrensd op
+    // maxH = 0.32·1000 = 320, met behoud van verhouding → breedte 80. Geen
+    // scrollvenster.
+    await pump(
+      tester,
+      'flowchart TD; A-->B',
+      returns(tall),
+      width: 1000,
+      scrollable: false,
+    );
 
+    expect(find.byType(SingleChildScrollView), findsNothing);
     final pic = tester.widget<SvgPicture>(find.byType(SvgPicture));
-    // Begrensd op maxH = 0.32·1000 = 320, met behoud van verhouding → breedte 80.
     expect(pic.height, closeTo(320, 0.5));
     expect(pic.width, closeTo(80, 0.5));
+  });
+
+  testWidgets('op een interactief oppervlak wordt een hoge flowchart scrollbaar '
+      'op leesbare breedte (#872)', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1400, 2000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    // Zelfde hoge diagram, maar nu interactief (scrollable = true, de default).
+    // In plaats van tot een postzegel te verkleinen blijft het op leesbare volle
+    // breedte (maxW = 840) en krijgt het zijn natuurlijke hoogte (840/0.25 =
+    // 3360), scrollbaar binnen een vast-hoog venster.
+    await pump(tester, 'flowchart TD; A-->B', returns(tall), width: 1000);
+
+    expect(find.byType(SingleChildScrollView), findsOneWidget);
+    final pic = tester.widget<SvgPicture>(find.byType(SvgPicture));
+    expect(pic.width, closeTo(840, 0.5));
+    expect(pic.height, closeTo(3360, 1));
+  });
+
+  testWidgets('het scrollvenster scrolt het diagram ook echt (#872)', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1400, 2000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await pump(tester, 'flowchart TD; A-->B', returns(tall), width: 1000);
+
+    // De onderkant van het (te hoge) diagram zit vóór het scrollen ver onder de
+    // rand; na omhoog slepen schuift de tekening zichtbaar mee omhoog.
+    final before = tester.getTopLeft(find.byType(SvgPicture)).dy;
+    await tester.drag(find.byType(SingleChildScrollView), const Offset(0, -200));
+    await tester.pumpAndSettle();
+    final after = tester.getTopLeft(find.byType(SvgPicture)).dy;
+    expect(after, lessThan(before - 100));
   });
 
   testWidgets('een breed, laag diagram houdt zijn natuurlijke maat (#868)', (
