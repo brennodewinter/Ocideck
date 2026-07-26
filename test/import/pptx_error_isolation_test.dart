@@ -134,6 +134,31 @@ void main() {
     expect(issue.args, isEmpty);
   });
 
+  test(
+    'een ontbrekend slide-part wordt gemeld, niet stil overgeslagen',
+    () async {
+      // De sldIdLst verwijst naar drie dia's, maar slide2.xml zit niet in het
+      // archief — diepe corruptie. De dia houdt zijn plek en het verlies wordt
+      // genoteerd (bewaker-kanttekening bij #877).
+      final bytes = _zip({
+        'ppt/presentation.xml': _presXml(3),
+        'ppt/_rels/presentation.xml.rels': _presRels(3),
+        'ppt/slides/slide1.xml': _goodSlide('Een'),
+        // slide2.xml ontbreekt bewust.
+        'ppt/slides/slide3.xml': _goodSlide('Drie'),
+      });
+
+      final result = await PptxImporter().importBytes(bytes, path: 'deck.pptx');
+      final slides = result.okValue!.slides;
+      expect(slides, hasLength(3));
+      expect(slides[0].title, 'Een');
+      expect(slides[2].title, 'Drie');
+      final issue = slides[1].parseIssues.single;
+      expect(issue.component, IssueComponent.slide);
+      expect(issue.cause, IssueCause.missingPart);
+    },
+  );
+
   test('een onleesbare grafiek wordt overgeslagen, de dia blijft', () async {
     final bytes = _zip({
       'ppt/presentation.xml': _presXml(1),

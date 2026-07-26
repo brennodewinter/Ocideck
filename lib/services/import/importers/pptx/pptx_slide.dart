@@ -188,10 +188,13 @@ class _SlideParts {
   SourceTable? table;
 }
 
-/// Onderscheid het onschuldige van het echte verlies (#877): een ontbrekend
-/// slide-part levert een lege dia, maar een part dat er wél is en niet parseert
-/// is verlies dat op de notitiedia hoort — anders verdwijnt de hele dia-inhoud
-/// stil.
+/// Een dia die niet te lezen viel, met het verlies genoteerd (#877).
+///
+/// Twee gevallen, beide gemeld zodat niets stil verdwijnt: een part dat er wél
+/// is maar niet parseert ([IssueCause.malformedXml]), en een part waarnaar de
+/// `sldIdLst` verwijst maar dat niet in het archief zit ([IssueCause.missingPart]).
+/// De dia houdt zijn index als plek in de reeks; de notitiedia legt uit wat er
+/// verdween.
 SourceSlide _unreadableSlide(
   PptxContext ctx,
   String slidePath,
@@ -204,17 +207,17 @@ SourceSlide _unreadableSlide(
     index: index,
     isHidden: isHidden,
     isSection: isSection,
-    parseIssues: present
-        ? [
-            ConversionIssue(
-              slideIndex: index,
-              component: IssueComponent.slide,
-              cause: IssueCause.malformedXml,
-              feature: 'Dia-inhoud',
-              description: 'kon niet worden gelezen en is overgeslagen',
-            ),
-          ]
-        : const [],
+    parseIssues: [
+      ConversionIssue(
+        slideIndex: index,
+        component: IssueComponent.slide,
+        cause: present ? IssueCause.malformedXml : IssueCause.missingPart,
+        feature: 'Dia-inhoud',
+        description: present
+            ? 'kon niet worden gelezen en is overgeslagen'
+            : 'ontbrak in het bestand en is overgeslagen',
+      ),
+    ],
   );
 }
 

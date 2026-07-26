@@ -168,7 +168,10 @@ read a book to find out.
   van de dia en alle volgende dia's in volgorde behouden blijven. Alleen een
   kapotte kern- of containerstructuur (geen geldig zip, geen
   `spTree`/`content.xml`) eindigt nog het hele deck, met een stabiele
-  `ImportFailureReason`. De gedeelde `guardParse`-grens
+  `ImportFailureReason`. Ook een dia waarvan het XML-part volledig ontbreekt
+  (de `sldIdLst` verwijst ernaar, maar het bestand zit niet in het archief)
+  wordt nu gemeld in plaats van als een stille lege dia te verschijnen. De
+  gedeelde `guardParse`-grens
   (`lib/services/import/pipeline/parse_guard.dart`) maakt het PPTX-, ODP- en
   Keynote-pad gelijkwaardig en logt bewust alléén de bewerking, het onderdeel,
   de oorzaak en het *fouttype* — nooit het foutobject, want een XML-/formaatfout
