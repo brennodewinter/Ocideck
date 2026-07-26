@@ -72,7 +72,8 @@ void main() {
 ///  1. `feature:`/`description:`/`salvagedAs:` van elke `ConversionIssue`
 ///     (ook wanneer de waarde een ternary is: beide takken tellen).
 ///  2. `translate('…')` — de koppen en labels die de tracker/bouwer vertaalt.
-///  3. `onProgress?.call(x, '…')` / `report(x, '…')` — de voortgangsteksten.
+///  3. `onProgress?.call(x, '…')` / `report(x, '…')` / `ImportProgress(x, '…')`
+///     — de voortgangsteksten, sinds #875 ook als contractobject.
 ///
 /// `StringLiteral.stringValue` doet het zware werk goed: aangrenzende literals
 /// worden samengevoegd tot de string die `l10n.d` bij runtime krijgt, en een
@@ -137,6 +138,19 @@ class _NoteVisitor extends RecursiveAstVisitor<void> {
       _collect(node.argumentList.arguments[1]);
     }
     super.visitMethodInvocation(node);
+  }
+
+  @override
+  void visitInstanceCreationExpression(InstanceCreationExpression node) {
+    // `ImportProgress(x, '…')`: sinds #875 dragen de voortgangsstappen hun
+    // tekst als tweede positioneel argument van dit contractobject, in plaats
+    // van via een losse `onProgress`-aanroep. De literal-varianten horen even
+    // hard vertaald te zijn als de rest.
+    if (node.constructorName.type.toSource() == 'ImportProgress' &&
+        node.argumentList.arguments.length >= 2) {
+      _collect(node.argumentList.arguments[1]);
+    }
+    super.visitInstanceCreationExpression(node);
   }
 }
 

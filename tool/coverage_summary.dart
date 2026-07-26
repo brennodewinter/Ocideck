@@ -144,6 +144,13 @@ const Set<String> uncoveredBaseline = {
   'lib/services/cve/local_cve_database_web.dart',
   'lib/utils/file_download.dart',
   'lib/utils/file_download_web.dart',
+  // PLATFORM: de webhelft van de import-runner (#875). De browser heeft geen
+  // tweede isolate, dus draait het parsen daar in-process; onder `flutter test`
+  // kiest de conditional import altijd de io-helft, zodat deze nooit geladen
+  // wordt. De gevel (`import_runner.dart`) én de io-helft draaien wél op de VM
+  // en zijn gedekt door import_isolate_test; de gedeelde kern in
+  // `import_task.dart` dekt precies wat deze webromp aanroept.
+  'lib/services/import/pipeline/import_runner_web.dart',
   // PLATFORM: de webhelft van de rem op het sluiten van een tabblad. Dit is
   // `dart:js_interop`-code (`beforeunload`); de VM-runner kan haar niet laden.
   // De gevel én de io-helft worden wél uitgevoerd — zie

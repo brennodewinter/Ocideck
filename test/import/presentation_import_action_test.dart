@@ -6,6 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/services/import/pipeline/import_runner.dart';
+import 'package:ocideck/services/import/pipeline/import_task.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/shell/presentation_import_action.dart';
@@ -71,11 +73,17 @@ void main() {
   setUp(() {
     AppLocalizations.setActiveLanguageCode('nl');
     WebAssetStore.clear();
+    // Widget-tests draaien onder een fake-async-klok en kunnen de echte
+    // worker-isolate niet aansturen; draai de import daarom in-process (#875).
+    debugImportTaskRunner = runImportTaskInline;
     // De waarschuwing is elders getoetst; hier staat ze standaard uit zodat de
     // tests over de import zelf gaan.
     SharedPreferences.setMockInitialValues({dismissedKey: true});
   });
-  tearDown(WebAssetStore.clear);
+  tearDown(() {
+    debugImportTaskRunner = null;
+    WebAssetStore.clear();
+  });
 
   Future<(ProviderContainer, BuildContext, WidgetRef)> pump(
     WidgetTester tester,
@@ -109,17 +117,17 @@ void main() {
     tester,
   ) async {
     final (container, ctx, ref) = await pump(tester);
-    // runAsync: `TabsNotifier` start een periodieke autosave-timer, en een
-    // FakeTimer blijft na afloop van de test hangen. Zelfde route als de
-    // OpenKAT-actietest hiernaast.
-    await tester.runAsync(
-      () => importPresentation(
-        ctx,
-        ref,
-        fileOverride: (bytes: pptx(titel: 'Kwartaal'), name: 'kwartaal.pptx'),
-      ),
+    // De import draait in-process (debugImportTaskRunner uit setUp) en toont een
+    // modaal voortgangsvenster (#875). Dat venster vergt frame-pumps, dus hier
+    // niet via `runAsync` (dat pompt niet) maar via `pumpAndSettle`: het venster
+    // verschijnt, de inline-import loopt, en het venster sluit zichzelf.
+    final future = importPresentation(
+      ctx,
+      ref,
+      fileOverride: (bytes: pptx(titel: 'Kwartaal'), name: 'kwartaal.pptx'),
     );
     await tester.pumpAndSettle();
+    await future;
 
     final deck = container
         .read(tabsProvider)
@@ -135,24 +143,31 @@ void main() {
       reason: 'de titel van de brondia komt mee',
     );
     expect(find.textContaining('geïmporteerd'), findsOneWidget);
+
+    // De nieuwe tab startte een periodieke autosave-timer; ruim de container op
+    // binnen de fake-async-test zodat die timer niet als "pending" blijft staan.
+    container.dispose();
   });
 
   testWidgets('een onleesbaar bestand meldt de fout en opent geen tab', (
     tester,
   ) async {
     final (container, ctx, ref) = await pump(tester);
-    await tester.runAsync(
-      () => importPresentation(
-        ctx,
-        ref,
-        fileOverride: (
-          bytes: Uint8List.fromList([1, 2, 3, 4, 5]),
-          name: 'kapot.pptx',
-        ),
+    // Het voortgangsvenster (#875) verschijnt, de inline-import faalt op de
+    // onleesbare bytes, het venster sluit en de fout landt in een SnackBar.
+    final future = importPresentation(
+      ctx,
+      ref,
+      fileOverride: (
+        bytes: Uint8List.fromList([1, 2, 3, 4, 5]),
+        name: 'kapot.pptx',
       ),
     );
     await tester.pumpAndSettle();
+    await future;
 
+    // De leesstap zit in runAsync: het aanmaken van `TabsNotifier` start een
+    // periodieke timer, en een FakeTimer blijft na de test hangen.
     var opened = true;
     await tester.runAsync(() async {
       opened = _openDeck(container) != null;
