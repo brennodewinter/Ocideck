@@ -30,17 +30,27 @@ void main() {
         Slide.create(SlideType.image).copyWith(imagePath: 'images/foto.png'),
       ]);
 
-      expect(slideIndexesUsingImage(deck, '/deck/images/foto.png', resolve), [
-        1,
-      ]);
+      expect(
+        slideIndexesUsingImage(
+          deck,
+          p.normalize('/deck/images/foto.png'),
+          resolve,
+        ),
+        [1],
+      );
     });
 
     test('vindt er ook eentje in de vrije tekst', () {
       final deck = deckOf([text('Zie ![de foto](images/foto.png) hierboven.')]);
 
-      expect(slideIndexesUsingImage(deck, '/deck/images/foto.png', resolve), [
-        0,
-      ]);
+      expect(
+        slideIndexesUsingImage(
+          deck,
+          p.normalize('/deck/images/foto.png'),
+          resolve,
+        ),
+        [0],
+      );
     });
 
     test('noemt een dia die hem twee keer aanhaalt maar één keer', () {
@@ -51,9 +61,14 @@ void main() {
         ),
       ]);
 
-      expect(slideIndexesUsingImage(deck, '/deck/images/foto.png', resolve), [
-        0,
-      ]);
+      expect(
+        slideIndexesUsingImage(
+          deck,
+          p.normalize('/deck/images/foto.png'),
+          resolve,
+        ),
+        [0],
+      );
     });
 
     test('zwijgt over een pad dat niet op te lossen is', () {
@@ -62,7 +77,11 @@ void main() {
       // Een resolver die niets teruggeeft — zo gedraagt de insluitingswacht
       // zich bij een pad dat buiten de presentatie zou wijzen.
       expect(
-        slideIndexesUsingImage(deck, '/deck/images/foto.png', (_) => null),
+        slideIndexesUsingImage(
+          deck,
+          p.normalize('/deck/images/foto.png'),
+          (_) => null,
+        ),
         isEmpty,
       );
     });
@@ -74,7 +93,7 @@ void main() {
     test('zet een verwijzing in de vrije tekst om', () {
       final out = slideWithImageReplaced(
         text('Zie ![w:600 de foto](images/duplicaat.png) hierboven.'),
-        '/deck/images/duplicaat.png',
+        p.normalize('/deck/images/duplicaat.png'),
         resolve,
         vervang,
       );
@@ -93,7 +112,7 @@ void main() {
 
       final out = slideWithImageReplaced(
         slide,
-        '/deck/images/duplicaat.png',
+        p.normalize('/deck/images/duplicaat.png'),
         resolve,
         vervang,
       );
@@ -111,7 +130,7 @@ void main() {
         identical(
           slideWithImageReplaced(
             slide,
-            '/deck/images/duplicaat.png',
+            p.normalize('/deck/images/duplicaat.png'),
             resolve,
             vervang,
           ),
