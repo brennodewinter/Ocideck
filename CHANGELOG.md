@@ -155,6 +155,11 @@ read a book to find out.
   geen geneste tspans. Dezelfde slag repareerde een separator-bug in de inliner
   (een bestaande `style` zonder afsluitende `;` smolt samen met de eerste
   toevoeging). Raakt web en desktop; visueel geverifieerd op de live webdemo.
+  In dezelfde slag paste een groot diagram niet meer in de slide: `SvgPicture`
+  kreeg alleen een breedte en leidde de hoogte uit de verhouding af, zonder
+  plafond, waardoor een hoge flowchart onder het kader uit liep. Nu begrenst
+  `MermaidDiagram` beide maten (uit de `viewBox`-verhouding) en schaalt een hoog
+  diagram mét behoud van vorm omlaag tot het binnen de slide valt.
 - **Mermaid-diagrammen renderden niet in de webversie (#851).** Een
   beslisboom-slide bleef op web een leeg vlak. De oorzaak zat een laag dieper
   dan de CSP: de renderer tekent de diagrammen in een verborgen WebView en leest

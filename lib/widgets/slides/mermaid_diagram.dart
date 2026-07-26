@@ -63,6 +63,7 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
         if (svg != null) {
           final safe = sanitizeMermaidSvg(svg);
           if (safe != null) {
+            final size = _fittedDiagramSize(safe, widget.width);
             return Container(
               width: double.infinity,
               margin: EdgeInsets.symmetric(vertical: widget.width * 0.008),
@@ -72,10 +73,18 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
                 borderRadius: BorderRadius.circular(widget.width * 0.008),
                 border: Border.all(color: AppTheme.ghBorder),
               ),
-              child: SvgPicture.string(
-                safe,
-                fit: BoxFit.contain,
-                width: widget.width * 0.84,
+              // `heightFactor: 1.0` centreert het diagram horizontaal zonder het
+              // kader verticaal te laten uitzetten: de Container blijft even hoog
+              // als het (begrensde) diagram, zodat het kader zelf niet onder de
+              // slide uit groeit.
+              child: Center(
+                heightFactor: 1.0,
+                child: SvgPicture.string(
+                  safe,
+                  fit: BoxFit.contain,
+                  width: size.width,
+                  height: size.height,
+                ),
               ),
             );
           }
@@ -118,4 +127,48 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
       ),
     );
   }
+}
+
+/// De maat waarin het diagram binnen het slidekader past.
+///
+/// `SvgPicture` met alléén een breedte leidt de hoogte af uit de beeldverhouding
+/// en kent geen plafond: een hoge flowchart (veel niveaus) groeit dan onbeperkt
+/// door en loopt onder uit de slide (#868). Hier begrenzen we beide maten en
+/// schalen we het diagram zo groot mogelijk binnen `maxW × maxH`, met behoud van
+/// verhouding. Een breed, laag diagram houdt zijn natuurlijke maat; een hoog
+/// diagram schaalt mee omlaag in plaats van eruit te lopen. `maxH` is een
+/// fractie van de slidebreedte (net als alle maten hier), zodat de begrenzing
+/// meeschaalt met preview, thumbnail en presentatie.
+Size _fittedDiagramSize(String svg, double w) {
+  final maxW = w * 0.84;
+  // Ruim onder de 16:9-hoogte (0.5625·w) blijven: er staat meestal een titel
+  // boven het diagram, plus de rand en marge van het kader zelf. Empirisch op de
+  // beslisboom-slide teruggebracht tot 0.32, zodat ook de onderste rij knopen
+  // binnen het kader valt in plaats van eronder weg te vallen.
+  final maxH = w * 0.32;
+  final ratio = _diagramAspectRatio(svg);
+  if (ratio == null || ratio <= 0) return Size(maxW, maxH);
+  var width = maxW;
+  var height = width / ratio;
+  if (height > maxH) {
+    height = maxH;
+    width = height * ratio;
+  }
+  return Size(width, height);
+}
+
+/// Breedte/hoogte van het diagram, afgelezen uit de `viewBox`.
+///
+/// Mermaid zet de echte maten in de `viewBox` (`minX minY breedte hoogte`); de
+/// `width`/`height`-attributen zijn `100%` en zeggen niets. `null` als er geen
+/// bruikbare `viewBox` is — dan valt de aanroeper terug op het volle kader.
+double? _diagramAspectRatio(String svg) {
+  final match = RegExp(r'viewBox\s*=\s*"([^"]*)"').firstMatch(svg);
+  if (match == null) return null;
+  final parts = match.group(1)!.trim().split(RegExp(r'[\s,]+'));
+  if (parts.length != 4) return null;
+  final width = double.tryParse(parts[2]);
+  final height = double.tryParse(parts[3]);
+  if (width == null || height == null || height <= 0) return null;
+  return width / height;
 }
