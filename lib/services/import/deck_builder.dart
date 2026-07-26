@@ -602,10 +602,12 @@ class DeckBuilder {
 
   // ── Conversion-loss notes ──────────────────────────────────────────────────
 
-  /// The conversion issues to note after slide [c]: the classifier's own
-  /// per-slide issues plus the builder's structural salvage losses (audio, a
-  /// table beside a chart).
+  /// The conversion issues to note after slide [c]: the importer's own
+  /// parse-time losses (a chart/table/media/notes part or the whole slide that
+  /// could not be read — #877), the classifier's per-slide issues, and the
+  /// builder's structural salvage losses (audio, a table beside a chart).
   List<ConversionIssue> _conversionIssuesFor(ClassifiedSlide c) => [
+    ...c.source.parseIssues,
     ...c.issues,
     ..._salvageIssues(c.source),
     ..._droppedContentIssues(c),

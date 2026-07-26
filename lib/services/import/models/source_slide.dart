@@ -1,4 +1,5 @@
 import 'body_block.dart';
+import 'conversion_issue.dart';
 import 'source_chart.dart';
 import 'source_image.dart';
 import 'source_table.dart';
@@ -55,6 +56,7 @@ class SourceSlide {
     this.isHidden = false,
     this.isSection = false,
     this.positionedTexts = const [],
+    this.parseIssues = const [],
   });
 
   /// 0-based slide index in the source deck.
@@ -92,4 +94,12 @@ class SourceSlide {
 
   /// Raw positioned text boxes for free-form salvage.
   final List<PositionedText> positionedTexts;
+
+  /// Verlies dat de *importer* al bij het parsen vaststelde — een onderdeel
+  /// (grafiek, tabel, media, notities) of de hele dia die niet leesbaar bleek
+  /// (#877). Losstaand van de classifier-issues: die ontstaan pas ná het
+  /// parsen. De deckbouwer voegt beide samen tot één notitiedia, zodat een bij
+  /// het parsen mislukt onderdeel net zo zichtbaar wordt gemeld als een
+  /// onvertaalbaar onderdeel — niets verdwijnt stil.
+  final List<ConversionIssue> parseIssues;
 }
