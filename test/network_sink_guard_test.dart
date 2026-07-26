@@ -48,7 +48,11 @@ void main() {
       .whereType<File>()
       .where((f) => f.path.endsWith('.dart'));
 
-  String rel(File f) => f.path.replaceFirst(RegExp(r'^.*/lib/'), 'lib/');
+  // Normaliseer eerst naar '/': op Windows geeft listSync backslashes, waardoor
+  // de '/lib/'-regex niet matchte en rel het hele absolute pad teruggaf — dan
+  // klopt geen enkele vergelijking met de 'lib/…'-allowlist meer.
+  String rel(File f) =>
+      f.path.replaceAll(r'\', '/').replaceFirst(RegExp(r'^.*/lib/'), 'lib/');
 
   void scan({
     required RegExp sink,

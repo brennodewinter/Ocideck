@@ -91,10 +91,14 @@ void main() {
     final offenders = <String>[];
     for (final file in Directory('lib').listSync(recursive: true)) {
       if (file is! File || !file.path.endsWith('.dart')) continue;
+      // Naar '/' normaliseren: op Windows geeft listSync backslashes, waardoor
+      // de startsWith/endsWith-uitsluitingen hieronder niet matchten en de
+      // vertaaltabellen ten onrechte gescand werden.
+      final pad = file.path.replaceAll(r'\', '/');
       // De vertaaltabellen dragen de vertaalde opschriften, en de helper zelf
       // is per definitie de plek waar de notatie mag staan.
-      if (file.path.startsWith('lib/l10n/') ||
-          file.path.endsWith('utils/shortcut_label.dart')) {
+      if (pad.startsWith('lib/l10n/') ||
+          pad.endsWith('utils/shortcut_label.dart')) {
         continue;
       }
       for (final line in file.readAsLinesSync()) {
