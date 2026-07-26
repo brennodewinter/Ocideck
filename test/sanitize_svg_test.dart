@@ -253,5 +253,21 @@ void main() {
       expect(safe, isNot(contains('<marker')));
       expect(safe, contains('<path d="M0 0 L9 9"'));
     });
+
+    test('een style-deel zonder ":" gaat eruit — anders crasht de parser (#886)', () {
+      // Mermaid zet op ER-relatie-paden `style="undefined;;;undefined;fill:none"`.
+      // `vector_graphics` (achter flutter_svg) splitst een style op ";", splitst
+      // elk deel op ":" en pakt daarna blind deel[1]; een deel zónder ":" (zoals
+      // `undefined`) laat het met een RangeError crashen — en dan bleef het HÉLE
+      // diagram blanco. Die delen worden nu weggegooid, de geldige blijven.
+      const svg =
+          '<svg xmlns="http://www.w3.org/2000/svg">'
+          '<path d="M0 0 L9 9" style="undefined;;;undefined;fill:none;stroke:red"/>'
+          '</svg>';
+      final safe = sanitizeMermaidSvg(svg)!;
+      expect(safe, isNot(contains('undefined')));
+      expect(safe, contains('fill:none'));
+      expect(safe, contains('stroke:red'));
+    });
   });
 }

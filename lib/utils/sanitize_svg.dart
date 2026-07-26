@@ -144,8 +144,34 @@ void _keepOnlyAllowedAttributes(XmlElement element, _Dropped dropped) {
     if (_hasUnsafeUrl(attr.value.trim())) {
       dropped.attributes++;
       element.attributes.remove(attr);
+      continue;
+    }
+    // Een `style` opschonen tot enkel geldige `prop:waarde`-delen.
+    if (attr.name.local == 'style') {
+      final cleaned = _sanitizeStyleValue(attr.value);
+      if (cleaned != attr.value) attr.value = cleaned;
     }
   }
+}
+
+/// Houdt alleen de `prop:waarde`-delen van een `style` over.
+///
+/// `vector_graphics` (de parser achter flutter_svg) splitst een `style` op `;`,
+/// splitst elk deel op `:` en pakt daarna blind het tweede stuk. Een deel zónder
+/// `:` laat het crashen met een `RangeError` — en dan blijft het HÉLE diagram
+/// blanco, niet alleen dat ene stukje. Mermaid zet op ER-relatie-paden
+/// bijvoorbeeld `style="undefined;;;undefined;fill:none;…"` (een eigen bug in de
+/// relatie-styling); die `undefined`-delen zijn precies zulke crashers. We laten
+/// ze hier vallen — wat overblijft leest de renderer gewoon, en zonder de crash
+/// verschijnt het diagram weer.
+String _sanitizeStyleValue(String style) {
+  final kept = <String>[];
+  for (final part in style.split(';')) {
+    final trimmed = part.trim();
+    if (trimmed.isEmpty || !trimmed.contains(':')) continue;
+    kept.add(trimmed);
+  }
+  return kept.isEmpty ? '' : '${kept.join(';')};';
 }
 
 /// Whether [value] carries an unsafe URL **anywhere**, not just at its start.
