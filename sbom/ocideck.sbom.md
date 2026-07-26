@@ -2,25 +2,26 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.1.0+1** (licence EUPL-1.2) and every third-party component it ships (201 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.1.0+1** (licence EUPL-1.2) and every third-party component it ships (207 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **677 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **702 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
 | Licence | Components |
 | --- | ---: |
-| BSD-3-Clause | 128 |
+| BSD-3-Clause | 132 |
 | MIT | 50 |
-| Apache-2.0 | 15 |
+| Apache-2.0 | 16 |
 | OFL-1.1 | 5 |
 | MPL-2.0 | 1 |
+| NO | 1 |
 | BSL-1.0 | 1 |
 | BSD | 1 |
 
 ## Components
 
-### Dart / Flutter packages (186)
+### Dart / Flutter packages (192)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -61,6 +62,7 @@ The JSON documents carry **677 dependency relations** between these components: 
 | fl_chart _(direct main)_ | 1.2.0 | MIT | imaNNeo | `pkg:pub/fl_chart@1.2.0` |
 | flutter _(direct main)_ | 0.0.0 | BSD-3-Clause | flutter | Source: sdk. |
 | flutter_colorpicker _(transitive)_ | 1.1.0 | MIT | mchome | `pkg:pub/flutter_colorpicker@1.1.0` |
+| flutter_driver _(transitive)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | flutter_highlight _(direct main)_ | 0.7.0 | MIT | git-touch | `pkg:pub/flutter_highlight@0.7.0` |
 | flutter_keyboard_visibility_linux _(transitive)_ | 1.0.0 | MIT | MisterJimson | `pkg:pub/flutter_keyboard_visibility_linux@1.0.0` |
 | flutter_keyboard_visibility_macos _(transitive)_ | 1.0.0 | MIT | MisterJimson | `pkg:pub/flutter_keyboard_visibility_macos@1.0.0` |
@@ -84,6 +86,7 @@ The JSON documents carry **677 dependency relations** between these components: 
 | flutter_test _(direct dev)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | flutter_web_plugins _(transitive)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | frontend_server_client _(transitive)_ | 4.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/frontend_server_client@4.0.0` |
+| fuchsia_remote_debug_protocol _(transitive)_ | 0.0.0 | NO LICENSE FILE | flutter | Source: sdk. |
 | glob _(transitive)_ | 2.1.3 | BSD-3-Clause | dart-lang | `pkg:pub/glob@2.1.3` |
 | highlight _(direct main)_ | 0.7.0 | MIT | pd4d10 | `pkg:pub/highlight@0.7.0` |
 | hooks _(transitive)_ | 1.0.3 | BSD-3-Clause | dart-lang | `pkg:pub/hooks@1.0.3` |
@@ -92,6 +95,7 @@ The JSON documents carry **677 dependency relations** between these components: 
 | http_multi_server _(transitive)_ | 3.2.2 | BSD-3-Clause | dart-lang | `pkg:pub/http_multi_server@3.2.2` |
 | http_parser _(transitive)_ | 4.1.2 | BSD-3-Clause | dart-lang | `pkg:pub/http_parser@4.1.2` |
 | image _(direct main)_ | 4.9.1 | MIT | brendan-duncan | `pkg:pub/image@4.9.1` |
+| integration_test _(direct dev)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | intl _(transitive)_ | 0.20.2 | BSD-3-Clause | dart-lang | `pkg:pub/intl@0.20.2` |
 | io _(transitive)_ | 1.0.5 | BSD-3-Clause | dart-lang | `pkg:pub/io@1.0.5` |
 | jni _(transitive)_ | 1.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/jni@1.0.0` |
@@ -131,6 +135,7 @@ The JSON documents carry **677 dependency relations** between these components: 
 | plugin_platform_interface _(direct dev)_ | 2.1.8 | BSD-3-Clause | flutter | `pkg:pub/plugin_platform_interface@2.1.8` |
 | pool _(transitive)_ | 1.5.2 | BSD-3-Clause | dart-lang | `pkg:pub/pool@1.5.2` |
 | posix _(transitive)_ | 6.5.0 | MIT | onepub-dev | `pkg:pub/posix@6.5.0` |
+| process _(transitive)_ | 5.0.5 | BSD-3-Clause | dart-lang | `pkg:pub/process@5.0.5` |
 | provider _(transitive)_ | 6.1.5+1 | MIT | rrousselGit | `pkg:pub/provider@6.1.5+1` |
 | pub_semver _(transitive)_ | 2.2.0 | BSD-3-Clause | dart-lang | `pkg:pub/pub_semver@2.2.0` |
 | qr _(transitive)_ | 3.0.2 | BSD-3-Clause | kevmoo | `pkg:pub/qr@3.0.2` |
@@ -167,6 +172,7 @@ The JSON documents carry **677 dependency relations** between these components: 
 | state_notifier _(transitive)_ | 1.0.0 | MIT | rrousselGit | `pkg:pub/state_notifier@1.0.0` |
 | stream_channel _(transitive)_ | 2.1.4 | BSD-3-Clause | dart-lang | `pkg:pub/stream_channel@2.1.4` |
 | string_scanner _(transitive)_ | 1.4.1 | BSD-3-Clause | dart-lang | `pkg:pub/string_scanner@1.4.1` |
+| sync_http _(transitive)_ | 0.3.1 | BSD-3-Clause | google | `pkg:pub/sync_http@0.3.1` |
 | term_glyph _(transitive)_ | 1.2.2 | BSD-3-Clause | dart-lang | `pkg:pub/term_glyph@1.2.2` |
 | test _(transitive)_ | 1.31.0 | BSD-3-Clause | dart-lang | `pkg:pub/test@1.31.0` |
 | test_api _(transitive)_ | 0.7.11 | BSD-3-Clause | dart-lang | `pkg:pub/test_api@0.7.11` |
@@ -199,6 +205,7 @@ The JSON documents carry **677 dependency relations** between these components: 
 | web _(direct main)_ | 1.1.1 | BSD-3-Clause | dart-lang | `pkg:pub/web@1.1.1` |
 | web_socket _(transitive)_ | 1.0.1 | BSD-3-Clause | dart-lang | `pkg:pub/web_socket@1.0.1` |
 | web_socket_channel _(transitive)_ | 3.0.3 | BSD-3-Clause | dart-lang | `pkg:pub/web_socket_channel@3.0.3` |
+| webdriver _(transitive)_ | 3.1.0 | Apache-2.0 | google | `pkg:pub/webdriver@3.1.0` |
 | webkit_inspection_protocol _(transitive)_ | 1.2.1 | BSD-3-Clause | google | `pkg:pub/webkit_inspection_protocol@1.2.1` |
 | webview_flutter _(direct main)_ | 4.14.1 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter@4.14.1` |
 | webview_flutter_android _(transitive)_ | 4.13.0 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter_android@4.13.0` |

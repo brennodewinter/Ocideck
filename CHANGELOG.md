@@ -105,6 +105,26 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Fixed
+- **De privacy-gezichtsscan was sinds de `dartcv4` 2.x-migratie (#870/#873) stil
+  kapot; nu hersteld en met een integratietest afgedekt.** `dartcv4` 2.x levert
+  OpenCV modulair en sluit de meeste modules standaard uit — waaronder
+  `objdetect` (de `FaceDetectorYN`) en `dnn` (voor het YuNet-model). De README
+  waarschuwt dat een uitgesloten module "throws a symbol not found exception when
+  called", en dat gebeurde: `cv_FaceDetectorYN_create_1` zat niet in de build,
+  waardoor OciWacht na de eerste afbeelding omklapte naar "niet beschikbaar" en
+  op elke dia "niet gekeken" meldde in plaats van te scannen. Geen unit-test ving
+  dit, want de native laag laadt niet onder `flutter test` — de detectietests
+  sloegen zichzelf over. `pubspec.yaml` neemt de OpenCV-modules nu expliciet mee
+  via `hooks: user_defines`: `objdetect` hangt aan `calib3d`, en die weer aan
+  `features2d`/`flann`, dus de hele keten plus `dnn`. De scan werkt daardoor weer;
+  de OpenCV-binary wordt er wel groter van (macOS arm64: 11 → 22 MB), de prijs van
+  de detectie. Bewaakt door een nieuwe `integration_test/native_face_scan_test.dart`
+  die op een echt platform draait — waar de native-assets wél laden — en aantoont
+  dat de laag beschikbaar is, dat katten en logo's nul gezichten opleveren en dat
+  een verminkte JPEG fail-closed is. Onder `flutter test` blijft de bestaande
+  `test/image_face_scan_test.dart` het contract zonder native laag bewaken.
+
 ### Changed
 - **De OpenCV-afhankelijkheid migreert van `opencv_core` naar `dartcv4` 2.x
   (#870).** `opencv_core` is teruggetrokken voor Flutter >= 3.38 (wij draaien

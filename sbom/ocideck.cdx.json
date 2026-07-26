@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:cf8a8a76-f16a-534d-8e97-f960bbd627db",
+  "serialNumber": "urn:uuid:e357fdfa-caf5-5a0c-8dcd-bd47916d042c",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-26T08:58:47.251887Z",
+    "timestamp": "2026-07-26T15:16:15.915053Z",
     "tools": {
       "components": [
         {
@@ -1608,6 +1608,39 @@
       ]
     },
     {
+      "bom-ref": "sdk:flutter_driver@0.0.0",
+      "type": "library",
+      "supplier": {
+        "name": "flutter",
+        "url": [
+          "https://github.com/flutter"
+        ]
+      },
+      "name": "flutter_driver",
+      "version": "0.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Source: sdk."
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/flutter_highlight@0.7.0",
       "type": "library",
       "supplier": {
@@ -2547,6 +2580,39 @@
       ]
     },
     {
+      "bom-ref": "sdk:fuchsia_remote_debug_protocol@0.0.0",
+      "type": "library",
+      "supplier": {
+        "name": "flutter",
+        "url": [
+          "https://github.com/flutter"
+        ]
+      },
+      "name": "fuchsia_remote_debug_protocol",
+      "version": "0.0.0",
+      "licenses": [
+        {
+          "license": {
+            "name": "NO LICENSE FILE"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Source: sdk."
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/glob@2.1.3",
       "type": "library",
       "supplier": {
@@ -2879,6 +2945,39 @@
         {
           "name": "cdx:pub:scope",
           "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "sdk:integration_test@0.0.0",
+      "type": "library",
+      "supplier": {
+        "name": "flutter",
+        "url": [
+          "https://github.com/flutter"
+        ]
+      },
+      "name": "integration_test",
+      "version": "0.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct dev"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Source: sdk."
         }
       ]
     },
@@ -4521,6 +4620,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/process@5.0.5",
+      "type": "library",
+      "supplier": {
+        "name": "dart-lang",
+        "url": [
+          "https://github.com/dart-lang"
+        ]
+      },
+      "name": "process",
+      "version": "5.0.5",
+      "purl": "pkg:pub/process@5.0.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c6248e4526673988586e8c00bb22a49210c258dc91df5227d5da9748ecf79744"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/process/versions/5.0.5"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/provider@6.1.5+1",
       "type": "library",
       "supplier": {
@@ -6024,6 +6165,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/sync_http@0.3.1",
+      "type": "library",
+      "supplier": {
+        "name": "google",
+        "url": [
+          "https://github.com/google"
+        ]
+      },
+      "name": "sync_http",
+      "version": "0.3.1",
+      "purl": "pkg:pub/sync_http@0.3.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7f0cd72eca000d2e026bcd6f990b81d0ca06022ef4e32fb257b30d3d1014a961"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/sync_http/versions/0.3.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/term_glyph@1.2.2",
       "type": "library",
       "supplier": {
@@ -7368,6 +7551,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/webdriver@3.1.0",
+      "type": "library",
+      "supplier": {
+        "name": "google",
+        "url": [
+          "https://github.com/google"
+        ]
+      },
+      "name": "webdriver",
+      "version": "3.1.0",
+      "purl": "pkg:pub/webdriver@3.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2f3a14ca026957870cfd9c635b83507e0e51d8091568e90129fbf805aba7cade"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/webdriver/versions/3.1.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/webkit_inspection_protocol@1.2.1",
       "type": "library",
       "supplier": {
@@ -8456,7 +8681,8 @@
         "sdk:flutter@0.0.0",
         "sdk:flutter@3.44.7",
         "sdk:flutter_localizations@0.0.0",
-        "sdk:flutter_test@0.0.0"
+        "sdk:flutter_test@0.0.0",
+        "sdk:integration_test@0.0.0"
       ]
     },
     {
@@ -8728,6 +8954,20 @@
       ]
     },
     {
+      "ref": "sdk:flutter_driver@0.0.0",
+      "dependsOn": [
+        "pkg:pub/file@7.0.1",
+        "pkg:pub/matcher@0.12.19",
+        "pkg:pub/meta@1.18.0",
+        "pkg:pub/path@1.9.1",
+        "pkg:pub/vm_service@15.2.0",
+        "pkg:pub/webdriver@3.1.0",
+        "sdk:flutter@0.0.0",
+        "sdk:flutter_test@0.0.0",
+        "sdk:fuchsia_remote_debug_protocol@0.0.0"
+      ]
+    },
+    {
       "ref": "pkg:pub/flutter_highlight@0.7.0",
       "dependsOn": [
         "pkg:pub/highlight@0.7.0",
@@ -8939,6 +9179,14 @@
       ]
     },
     {
+      "ref": "sdk:fuchsia_remote_debug_protocol@0.0.0",
+      "dependsOn": [
+        "pkg:pub/meta@1.18.0",
+        "pkg:pub/process@5.0.5",
+        "pkg:pub/vm_service@15.2.0"
+      ]
+    },
+    {
       "ref": "pkg:pub/glob@2.1.3",
       "dependsOn": [
         "pkg:pub/async@2.13.1",
@@ -9002,6 +9250,16 @@
       "dependsOn": [
         "pkg:pub/archive@4.0.9",
         "pkg:pub/xml@7.0.1"
+      ]
+    },
+    {
+      "ref": "sdk:integration_test@0.0.0",
+      "dependsOn": [
+        "pkg:pub/path@1.9.1",
+        "pkg:pub/vm_service@15.2.0",
+        "sdk:flutter@0.0.0",
+        "sdk:flutter_driver@0.0.0",
+        "sdk:flutter_test@0.0.0"
       ]
     },
     {
@@ -9320,6 +9578,14 @@
       ]
     },
     {
+      "ref": "pkg:pub/process@5.0.5",
+      "dependsOn": [
+        "pkg:pub/file@7.0.1",
+        "pkg:pub/path@1.9.1",
+        "pkg:pub/platform@3.1.6"
+      ]
+    },
+    {
       "ref": "pkg:pub/provider@6.1.5+1",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
@@ -9611,6 +9877,10 @@
       ]
     },
     {
+      "ref": "pkg:pub/sync_http@0.3.1",
+      "dependsOn": []
+    },
+    {
       "ref": "pkg:pub/term_glyph@1.2.2",
       "dependsOn": []
     },
@@ -9891,6 +10161,15 @@
         "pkg:pub/stream_channel@2.1.4",
         "pkg:pub/web@1.1.1",
         "pkg:pub/web_socket@1.0.1"
+      ]
+    },
+    {
+      "ref": "pkg:pub/webdriver@3.1.0",
+      "dependsOn": [
+        "pkg:pub/matcher@0.12.19",
+        "pkg:pub/path@1.9.1",
+        "pkg:pub/stack_trace@1.12.1",
+        "pkg:pub/sync_http@0.3.1"
       ]
     },
     {
