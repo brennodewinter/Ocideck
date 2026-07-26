@@ -156,9 +156,15 @@ class ImageReferenceService {
       changed = true;
       // Blijf relatief schrijven als de verwijzing dat al was en het nieuwe
       // pad binnen de projectmap ligt; anders absoluut.
+      //
+      // Altijd met '/' als scheiding: een verwijzing in de `.md` is portabel
+      // (net als de deck-serializer, die `p.posix` schrijft). Zonder de
+      // conversie zet `p.relative` op Windows backslashes in het bestand
+      // (`images\foto.png`), en dan opent een op Windows bewerkt deck de
+      // afbeelding niet meer op macOS of Linux.
       final replacement =
           !p.isAbsolute(ref.trim()) && p.isWithin(mdDir, toAbsolute)
-          ? p.relative(toAbsolute, from: mdDir)
+          ? p.relative(toAbsolute, from: mdDir).replaceAll(r'\', '/')
           : toAbsolute;
       return '![${m.group(1)}]($replacement)';
     });

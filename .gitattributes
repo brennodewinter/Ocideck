@@ -35,3 +35,17 @@ lib/l10n/translations/*.dart merge=union
 # de CHANGELOG dus na na een merge die hem raakte, net zoals je `make l10n-check`
 # draait na een merge in de vertaalbestanden.
 CHANGELOG.md merge=union
+
+# ── Regeleindes ──────────────────────────────────────────────────────────────
+#
+# Forceer LF bij het uitchecken op elk platform. `text=auto` laat git zelf
+# binair van tekst onderscheiden; `eol=lf` zorgt dat tekstbestanden overal met
+# `\n` op schijf komen — ook op Windows, waar de standaard `\r\n` zou zijn.
+#
+# Waarom dit nodig is: de repo wordt op macOS/Linux ontwikkeld (alles LF), en de
+# SBOM in `sbom/` bevat inhouds-hashes van bronbestanden. Met een CRLF-checkout
+# op de Windows-CI verschillen die hashes van de gecommitte (LF-)waarden, en dan
+# valt `sbom_test`. Hetzelfde raakt tests die op letterlijke `\n` in gelezen
+# documenten toetsen. LF overal neemt die hele klasse verschillen weg bij de
+# bron, in plaats van hem test-voor-test te verdragen.
+* text=auto eol=lf
