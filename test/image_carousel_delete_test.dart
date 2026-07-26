@@ -40,7 +40,14 @@ void main() {
   });
 
   tearDown(() {
-    if (tmp.existsSync()) tmp.deleteSync(recursive: true);
+    // Windows houdt een net via de beeld-cache ingelezen bestand soms nog kort
+    // vast (errno 32); OS-temp wordt sowieso opgeruimd, de test is dan al klaar.
+    if (!tmp.existsSync()) return;
+    try {
+      tmp.deleteSync(recursive: true);
+    } on FileSystemException {
+      // opzettelijk genegeerd: zie hierboven
+    }
   });
 
   /// Schrijft een presentatie op schijf die [imageName] [times] keer gebruikt.

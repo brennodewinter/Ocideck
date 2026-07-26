@@ -36,7 +36,16 @@ void main() {
     }
   });
 
-  tearDown(() => tempDir.deleteSync(recursive: true));
+  tearDown(() {
+    // Windows houdt een net via de beeld-cache ingelezen bestand soms nog kort
+    // vast (errno 32); OS-temp wordt sowieso opgeruimd, de test is dan al klaar.
+    if (!tempDir.existsSync()) return;
+    try {
+      tempDir.deleteSync(recursive: true);
+    } on FileSystemException {
+      // opzettelijk genegeerd: zie hierboven
+    }
+  });
 
   // The scan and description load are real file I/O; runAsync lets the event
   // loop drain them, then a couple of pumps rebuild with the loaded images.
