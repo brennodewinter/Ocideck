@@ -43,7 +43,10 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
 - **New / Open**: use the welcome screen or `Ctrl/Cmd + O`. Multiple decks open in
   **tabs**. Opening a deck that is already open just jumps to its existing tab —
   the same file is never loaded into two tabs at once, so you can't accidentally
-  edit two out-of-sync copies.
+  edit two out-of-sync copies. **Open** accepts both a flat Marp `.md` and a
+  portable `.ocideck` package (a zip with the deck and its assets): pick either
+  and OciDeck unpacks the package for you — dragging the file onto the window
+  does the same.
 - **The welcome screen** answers the question you have before you have any of the
   others. Under the logo, one line says what OciDeck makes (presentations that
   stay ordinary Markdown files); under *New presentation*, how many templates are

@@ -128,6 +128,18 @@ read a book to find out.
   `test/deck_template_test.dart`.
 
 ### Fixed
+- **Een `.ocideck`-pakket openen via "Bestand → Openen" gaf "dit bestand is te
+  groot om te openen" in plaats van de presentatie te openen (#905, 2026-07-27).**
+  Een `.ocideck` is OciDeck's eigen formaat — een zip met de deck plus assets —
+  maar `openFileByPath` (het pad achter "Openen", de bibliotheekscan en het
+  welkomstscherm) behandelde élk gekozen bestand als platte markdown. Een pakket
+  is binair en groter dan de 32 MiB-markdowngrens, dus de gebruiker kreeg de
+  misleidende "te groot"-melding (een klein pakket zou "onleesbaar" hebben
+  gegeven). Slepen-en-neerzetten en de web-open herkenden een pakket al aan zijn
+  extensie respectievelijk zijn zip-kop; nu neemt "Openen" dezelfde afslag en
+  stuurt een `.ocideck`/`.zip` door het bestaande uitpakpad
+  (`importPackageFile`). Gemeld door kwoot. Bewaakt door
+  `test/open_package_by_path_test.dart`.
 - **De privacy-gezichtsscan was sinds de `dartcv4` 2.x-migratie (#870/#873) stil
   kapot; nu hersteld en met een integratietest afgedekt.** `dartcv4` 2.x levert
   OpenCV modulair en sluit de meeste modules standaard uit — waaronder
