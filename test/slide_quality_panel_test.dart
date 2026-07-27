@@ -151,10 +151,7 @@ void main() {
       await tester.tap(find.textContaining('Slidekwaliteit'));
       await tester.pump();
 
-      expect(
-        find.widgetWithText(TextButton, 'Splits slide'),
-        findsWidgets,
-      );
+      expect(find.widgetWithText(TextButton, 'Splits slide'), findsWidgets);
       expect(
         find.widgetWithText(TextButton, 'Uitleg naar notities'),
         findsNothing,
@@ -188,7 +185,10 @@ void main() {
     'geen Fix-alles-knop als er niets structureel op te lossen valt',
     (tester) async {
       // Een lege dia is een inhoudsmelding, geen structureel probleem.
-      final deck = Deck(title: 'Leeg', slides: [Slide.create(SlideType.bullets)]);
+      final deck = Deck(
+        title: 'Leeg',
+        slides: [Slide.create(SlideType.bullets)],
+      );
       await tester.pumpWidget(_host(deck));
       await tester.pump();
 

@@ -242,7 +242,9 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         // meegestuurde positie.
         final m = Map<String, dynamic>.from(call.arguments as Map);
         if (!mounted) return null;
-        final deck = MarkdownService().parseDeck(m['markdown'] as String? ?? '');
+        final deck = MarkdownService().parseDeck(
+          m['markdown'] as String? ?? '',
+        );
         final next = deck?.slides ?? const <Slide>[];
         final i = (m['index'] as num?)?.toInt() ?? _index;
         setState(() {

@@ -367,43 +367,41 @@ void main() {
     // in pagina's gevallen — met alle bullets nog aanwezig.
     expect(splitId, slide.id);
     expect(slides.length, greaterThan(1));
-    expect(
-      slides.fold<int>(0, (sum, s) => sum + s.bullets.length),
-      20,
-    );
+    expect(slides.fold<int>(0, (sum, s) => sum + s.bullets.length), 20);
 
     await tester.pumpWidget(const SizedBox());
   });
 
-  testWidgets('F op een prima dia meldt dat er niets op te lossen valt (#914)', (
-    tester,
-  ) async {
-    String? splitId;
-    final slides = <Slide>[
-      Slide.create(SlideType.bullets).copyWith(bullets: ['Kort', 'Bondig']),
-    ];
-    await tester.pumpWidget(
-      MaterialApp(
-        home: FullscreenPresenter(
-          slides: slides,
-          projectPath: null,
-          themeProfile: const ThemeProfile(),
-          initialIndex: 0,
-          onSlideSplit: (id) => splitId = id,
+  testWidgets(
+    'F op een prima dia meldt dat er niets op te lossen valt (#914)',
+    (tester) async {
+      String? splitId;
+      final slides = <Slide>[
+        Slide.create(SlideType.bullets).copyWith(bullets: ['Kort', 'Bondig']),
+      ];
+      await tester.pumpWidget(
+        MaterialApp(
+          home: FullscreenPresenter(
+            slides: slides,
+            projectPath: null,
+            themeProfile: const ThemeProfile(),
+            initialIndex: 0,
+            onSlideSplit: (id) => splitId = id,
+          ),
         ),
-      ),
-    );
-    await tester.pump();
+      );
+      await tester.pump();
 
-    await tester.sendKeyEvent(LogicalKeyboardKey.keyF);
-    await tester.pump();
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyF);
+      await tester.pump();
 
-    expect(splitId, isNull);
-    expect(slides.length, 1);
-    expect(find.text('Geen probleem om hier op te lossen.'), findsOneWidget);
+      expect(splitId, isNull);
+      expect(slides.length, 1);
+      expect(find.text('Geen probleem om hier op te lossen.'), findsOneWidget);
 
-    await tester.pumpWidget(const SizedBox());
-  });
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
 
   testWidgets('pencil toggle on a table slide turns edit mode on and off', (
     tester,

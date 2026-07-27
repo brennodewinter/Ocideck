@@ -14,15 +14,17 @@ void main() {
 
   Deck deckOf(List<Slide> slides) => Deck(title: 'T', slides: slides);
 
-  bool hasFixableIssue(Deck deck) =>
-      analyzer.analyze(deck).issues.any((i) => isStructurallyAutofixable(i.kind));
+  bool hasFixableIssue(Deck deck) => analyzer
+      .analyze(deck)
+      .issues
+      .any((i) => isStructurallyAutofixable(i.kind));
 
   group('fixAllStructuralQualityIssues', () {
     test('splitst een dia met veel te veel bullets tot alles past', () {
       final deck = deckOf([
-        Slide.create(SlideType.bullets).copyWith(
-          bullets: [for (var i = 0; i < 20; i++) 'Punt ${i + 1}'],
-        ),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(bullets: [for (var i = 0; i < 20; i++) 'Punt ${i + 1}']),
       ]);
       expect(hasFixableIssue(deck), isTrue);
 
@@ -88,9 +90,9 @@ void main() {
 
     test('is idempotent: een tweede keer draaien doet niets meer', () {
       final deck = deckOf([
-        Slide.create(SlideType.bullets).copyWith(
-          bullets: [for (var i = 0; i < 20; i++) 'Punt ${i + 1}'],
-        ),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(bullets: [for (var i = 0; i < 20; i++) 'Punt ${i + 1}']),
       ]);
       final once = fixAllStructuralQualityIssues(deck);
       final twice = fixAllStructuralQualityIssues(once.deck);
@@ -99,9 +101,9 @@ void main() {
     });
 
     test('safeFixForSlide splitst een te volle losse dia', () {
-      final slide = Slide.create(SlideType.bullets).copyWith(
-        bullets: [for (var i = 0; i < 20; i++) 'Punt ${i + 1}'],
-      );
+      final slide = Slide.create(
+        SlideType.bullets,
+      ).copyWith(bullets: [for (var i = 0; i < 20; i++) 'Punt ${i + 1}']);
       final pages = safeFixForSlide(slide, const ThemeProfile());
       expect(pages, isNotNull);
       expect(pages!.length, greaterThan(1));

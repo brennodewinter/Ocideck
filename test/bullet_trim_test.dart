@@ -39,7 +39,10 @@ void main() {
         bulletsWith(['Autorisatie: geregeld via de centrale IAM-oplossing']),
       );
       expect(out.bullets, ['Autorisatie']);
-      expect(out.notes, '- Autorisatie: geregeld via de centrale IAM-oplossing');
+      expect(
+        out.notes,
+        '- Autorisatie: geregeld via de centrale IAM-oplossing',
+      );
     });
 
     test('koppelstreepje splitst label en uitleg', () {
@@ -162,7 +165,10 @@ void main() {
           'Autorisatie: geregeld via de centrale IAM-oplossing',
         ]),
       );
-      expect(out.notes, '- Autorisatie: geregeld via de centrale IAM-oplossing');
+      expect(
+        out.notes,
+        '- Autorisatie: geregeld via de centrale IAM-oplossing',
+      );
     });
 
     test('de notitieregel houdt het inspring-niveau van zijn bullet', () {

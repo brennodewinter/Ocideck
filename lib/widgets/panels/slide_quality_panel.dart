@@ -223,8 +223,12 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
     if (!mounted) return;
     final l10n = context.l10n;
     final message = applied > 0
-        ? l10n.d('Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.')
-        : l10n.d('Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.');
+        ? l10n.d(
+            'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.',
+          )
+        : l10n.d(
+            'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.',
+          );
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
