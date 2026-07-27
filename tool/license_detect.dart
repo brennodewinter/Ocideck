@@ -37,6 +37,9 @@ const sdkNoLicense = <String>{
   'flutter_localizations',
   'flutter_web_plugins',
   'flutter_driver',
+  // Pulled in transitively by flutter_driver/flutter_test; lives under
+  // `<flutter>/packages/` and carries no LICENSE of its own.
+  'fuchsia_remote_debug_protocol',
   'integration_test',
   'sky_engine',
 };
