@@ -287,6 +287,9 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
         _loadEmbed();
       }
     } else {
+      // Online media net uitgezet: stop de lopende speler vóór we het view
+      // loslaten, anders speelt hij door (zie [_stopPlayback]).
+      _stopPlayback();
       setState(() => _controller = null);
     }
   }
@@ -309,6 +312,10 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
               return NavigationDecision.navigate;
             }
             final u = request.url;
+            // Onze eigen stop-navigatie bij het verlaten van de dia
+            // (zie [_stopPlayback]): een lege pagina sloopt de speler en dempt
+            // het geluid. Geen tracking-oorsprong, dus die mag altijd door.
+            if (u == 'about:blank') return NavigationDecision.navigate;
             final allowed = origin == 'youtube'
                 ? youTubePlayerNavigationAllowed(u)
                 : vimeoPlayerNavigationAllowed(u);
@@ -440,8 +447,24 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
 
   @override
   void dispose() {
+    _stopPlayback();
     VideoPlayheadBus.clearFor(widget.slide.id);
     super.dispose();
+  }
+
+  /// Stopt de speler wanneer de dia wordt verlaten.
+  ///
+  /// Alleen de widget uit de boom halen dempt het geluid niet: op macOS
+  /// (WKWebView) wordt het platform-view niet meteen vrijgegeven en speelt de
+  /// YouTube/Vimeo-embed dóór nadat je naar de volgende dia bent. We navigeren
+  /// de webview daarom naar een lege pagina; dat sloopt de speler en daarmee
+  /// zijn geluid, meteen — nog vóór het view wordt afgebroken. Fire-and-forget:
+  /// in `dispose` valt er niets te awaiten, en een fout betekent dat het view al
+  /// weg is, dus dan speelt er ook niets meer.
+  void _stopPlayback() {
+    final controller = _controller;
+    if (controller == null) return;
+    controller.loadRequest(Uri.parse('about:blank')).catchError((_) {});
   }
 
   @override
