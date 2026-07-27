@@ -2680,6 +2680,25 @@ issue to jump to that slide and focus the relevant editor field; click a **theme
 (entire presentation)** issue to open *Settings → Presentation style → Colours* with the matching
 colour field scrolled into view and highlighted.
 
+Many findings carry a **one-click fix** beside them. On an overfull bullet slide
+that is always **Split slide** first — spreading the bullets over pages keeps
+every word on screen. **Explanation to notes** (moving the text behind a
+*label: explanation* bullet into the speaker notes) only appears once the slide
+is down to **eight bullets or fewer**: while a slide still has too many bullets,
+moving text to the notes would not reduce their number, so splitting leads.
+Anything moved to the speaker notes is written as a dashed list, so it reads as
+bullet points there too.
+
+When you would rather not decide, **Fix all problems** — at the top of the panel,
+shown only when something can actually be fixed automatically — works through
+them in the safe order (split overfull slides, cut multi-sentence bullets apart,
+detach a page dragged small by its split run), always choosing the option that
+keeps every word visible and never removing content from a slide. It is a single
+undo step. What is left needs a human choice — alt text, theme contrast, a
+privacy finding — and stays in the list. The same safe fix is a keystroke away
+while presenting: press **`F`** to fix the slide on screen without interrupting
+(see [Keyboard shortcuts](SHORTCUTS.md)).
+
 Not every deck-wide finding is about the theme, and the panel no longer pretends
 it is. A privacy finding on a **front-matter field** — author, organisation,
 description, keywords, version, date, the standards and tools used, or a MIAUW
