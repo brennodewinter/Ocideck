@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/finding_spec.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/finding_pagination.dart';
 
@@ -102,6 +103,65 @@ void main() {
       );
       final expanded = expandFindingsForRender([finding]);
       expect(expanded, hasLength(1));
+    });
+  });
+
+  group('logo-bewuste paginering', () {
+    // Een bevinding die net op één pagina past zonder logo, moet splitsen
+    // wanneer een logo verticale ruimte opeist — anders loopt de tekst onder
+    // het logo door.
+    final profileWithLogo = const ThemeProfile(
+      logoPath: 'logo.png',
+      logoPosition: 'bottom-right',
+      logoSize: 160,
+    );
+
+    test('een bevinding die past zonder logo splitst met logo', () {
+      // Twee secties van ~8.4 line-cost elk (totaal ~16.8): passen op één
+      // pagina zonder logo (budget 18), maar niet met logo (budget ~12).
+      final finding = Slide.create(SlideType.finding).copyWith(
+        customMarkdown: FindingSpec(
+          heading: heading,
+          description: _lorem(23),
+          confirmation: _lorem(23),
+        ).toMarkdown(),
+      );
+
+      // Zonder logo: één pagina.
+      expect(expandFindingsForRender([finding]), hasLength(1));
+
+      // Met logo: meer dan één pagina.
+      final withLogo = expandFindingsForRender([
+        finding,
+      ], profile: profileWithLogo);
+      expect(withLogo.length, greaterThan(1));
+    });
+
+    test('een profiel zonder logo verandert de paginering niet', () {
+      final finding = Slide.create(
+        SlideType.finding,
+      ).copyWith(customMarkdown: bigFinding().toMarkdown());
+      final withoutProfile = expandFindingsForRender([finding]);
+      final withEmptyProfile = expandFindingsForRender([
+        finding,
+      ], profile: const ThemeProfile());
+      expect(withEmptyProfile.length, withoutProfile.length);
+    });
+
+    test('showLogo false neemt het logo niet mee in de begroting', () {
+      final finding = Slide.create(SlideType.finding).copyWith(
+        customMarkdown: FindingSpec(
+          heading: heading,
+          description: _lorem(23),
+          confirmation: _lorem(23),
+        ).toMarkdown(),
+        showLogo: false,
+      );
+
+      final withLogoProfile = expandFindingsForRender([
+        finding,
+      ], profile: profileWithLogo);
+      expect(withLogoProfile, hasLength(1));
     });
   });
 

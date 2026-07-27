@@ -58,9 +58,13 @@ void presentDeck(
   // (matching the export). Remap the start index into the expanded list. A
   // finding never fires onSlideChanged (only checklist/table live-edits do), so
   // the callback below still resolves page-slides to their deck slide by id.
-  final renderSlides = expandFindingsForRender(slides);
+  final renderSlides = expandFindingsForRender(
+    slides,
+    profile: deck.themeProfile,
+  );
   final renderInitial = expandFindingsForRender(
     slides.sublist(0, initial),
+    profile: deck.themeProfile,
   ).length.clamp(0, renderSlides.length - 1);
   // Live bewerkingen (tabelcellen, checklists) komen buiten de editorvelden om
   // binnen; die cachen hun tekst tot [DeckState.revision] verandert. Zonder de

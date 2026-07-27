@@ -65,7 +65,6 @@ class _FindingPreview extends StatelessWidget {
     Cvss4? ctxCvss,
   ) {
     return Container(
-      width: w,
       padding: EdgeInsets.all(w * 0.03),
       decoration: BoxDecoration(
         color: severity.withValues(alpha: 0.06),
