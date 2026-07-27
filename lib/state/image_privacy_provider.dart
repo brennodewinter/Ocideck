@@ -10,6 +10,8 @@
 // en apart — precies zoals `imageContrastIssuesProvider`, die om dezelfde reden
 // bestaat.
 
+import 'dart:io';
+
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,7 +20,11 @@ import '../models/markdown_validation.dart';
 import '../models/privacy_disposition.dart';
 import '../models/privacy_finding.dart';
 import '../models/slide_quality.dart';
+import '../services/image_service.dart';
 import '../services/privacy/image_face_scan.dart';
+import '../utils/log.dart';
+import '../utils/lru_cache.dart';
+import '../utils/project_path.dart';
 import 'deck_provider.dart';
 import 'settings_provider.dart';
 
@@ -64,6 +70,79 @@ final imagePrivacyIssuesProvider = FutureProvider<List<SlideQualityIssue>>(
   computeImagePrivacyIssues,
 );
 
+/// Gememoiseerde gezichtstelling per afbeelding, op **resolved pad + mtime +
+/// grootte** — precies de sleutel die [averageImageColor] voor de gemiddelde
+/// kleur gebruikt, en om dezelfde reden.
+///
+/// [imagePrivacyRawIssuesProvider] hangt aan het hele deck en draait dus opnieuw
+/// bij élke toetsaanslag. Zonder deze memo herleest en herdetecteert hij dán
+/// álle afbeeldingen, en `countFaces` (decode + YuNet op drie schalen) is een
+/// synchrone OpenCV-aanroep die de UI-thread vasthoudt — typen op een deck vol
+/// beeld wordt daardoor onwerkbaar traag. Met de memo blijft er van een
+/// wijziging die geen afbeelding raakt (een titel typen) niets te doen over;
+/// vergelijk [memoizedSlideScan], dat dit voor de tekstscan al deed.
+///
+/// Waarom de scanner — anders dan bij de tekstscan — níét in de sleutel zit: de
+/// detector is een vast ONNX-model met een const drempel, dus het getelde aantal
+/// hangt uitsluitend van de beeldpunten af. Verandert het bestand, dan verandert
+/// mtime of grootte en mist de sleutel vanzelf; een fail-closed `unreadable`
+/// (HEIC, te groot) is óók stabiel per bestand en mag dus mee de cache in.
+///
+/// LRU en begrensd zoals de tekst- en layoutmemo: een lange sessie met veel
+/// beeld houdt anders elk tussenresultaat vast.
+final LruCache<(String, int, int), ImageFaceScanResult> _faceScanCache =
+    LruCache(256);
+
+/// Leegt de beeldscan-memo. Alleen voor tests; in de app begrenst de LRU hem.
+void clearImageFaceScanMemo() => _faceScanCache.clear();
+
+/// De cachesleutel voor [path], of null wanneer we geen stabiele stempel kunnen
+/// nemen: een onbevindbaar pad, of een bestand dat er niet is. Null betekent
+/// "scan wel, maar cache niet" — dan blijft het gedrag exact als vóór de memo,
+/// óók voor een test met een neppe [ImageService] die geen echt bestand heeft.
+Future<(String, int, int)?> _faceScanKey(
+  String path,
+  String? projectPath,
+) async {
+  final resolved = resolveSlideAssetPath(path, projectPath);
+  if (resolved == null) return null;
+  try {
+    final stat = await File(resolved).stat();
+    if (stat.type == FileSystemEntityType.notFound) return null;
+    return (resolved, stat.modified.millisecondsSinceEpoch, stat.size);
+  } catch (e) {
+    // Een echt IO-probleem op een al opgelost pad (rechten, verbroken mount):
+    // zeldzaam. We scannen dan gewoon ongecachet verder, net als
+    // [averageImageColor] bij een mislukte stat.
+    logWarning('imageFaceScan: stat mislukt', e);
+    return null;
+  }
+}
+
+/// Scant één afbeelding op gezichten, uit de memo wanneer het bestand sinds de
+/// vorige scan niet is veranderd. Geeft null wanneer er niets te scannen valt
+/// (onbevindbaar pad of leesfout) — de aanroeper slaat de afbeelding dan over.
+Future<ImageFaceScanResult?> _memoizedFaceScan(
+  ImageFaceScanner scanner,
+  ImageService service,
+  String path, {
+  String? projectPath,
+}) async {
+  final key = await _faceScanKey(path, projectPath);
+  if (key != null) {
+    final cached = _faceScanCache[key];
+    if (cached != null) return cached;
+  }
+  final bytes = await service.readSlideImageBytes(
+    path,
+    projectPath: projectPath,
+  );
+  if (bytes == null) return null;
+  final result = await scanner.countFaces(bytes);
+  if (key != null) _faceScanCache[key] = result;
+  return result;
+}
+
 /// Top-level, zodat `AppShell` dezelfde berekening per tab kan overriden — zie
 /// `provider_scope_test.dart`.
 Future<List<SlideQualityIssue>> computeImagePrivacyRawIssues(Ref ref) async {
@@ -99,13 +178,15 @@ Future<List<SlideQualityIssue>> computeImagePrivacyRawIssues(Ref ref) async {
   for (final image in images) {
     // Bewust serieel. Parallel decoderen van twintig foto's tegelijk piekt het
     // geheugen van een presentatietool zonder dat iemand op de uitslag wacht:
-    // dit is een achtergrondcontrole, geen renderpad.
-    final bytes = await service.readSlideImageBytes(
+    // dit is een achtergrondcontrole, geen renderpad. De memo vangt de
+    // herhaling die deze provider bij élke toetsaanslag zou aanrichten.
+    final result = await _memoizedFaceScan(
+      scanner,
+      service,
       image.path,
       projectPath: deck.projectPath,
     );
-    if (bytes == null) continue;
-    final result = await scanner.countFaces(bytes);
+    if (result == null) continue;
     if (!result.readable) {
       // Niet kunnen kijken is iets anders dan niets vinden. HEIC is het
       // praktijkgeval: OpenCV leest het niet, en iPhone-foto's zijn standaard
