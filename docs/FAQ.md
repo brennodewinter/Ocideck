@@ -30,13 +30,15 @@ OciDeck supports information autonomy through several key principles:
 Yes. OciDeck is released under the EUPL-1.2 open-source licence, which costs
 nothing and lets you use, study, change and redistribute it.
 
-There is, however, **nothing to download yet**. No version has been tagged, no
-signed build is published, and there is no download page or installer. The only
-way to run OciDeck today is to build it from source — see
+There is, however, **no signed build**. Releases are tagged (latest `0.1.1`,
+2026-07-27) and every release carries the app for all four platforms, but the
+binaries are unsigned — macOS and Windows will warn on first launch. You can
+download a release build or build from source; either way, see
 [BUILD.md](BUILD.md) and the *Getting started* section of the
-[README](../README.md), which needs the pinned Flutter toolchain. *Corrected
-2026-07-21: this answer used to say OciDeck is "completely free to download and
-use", which described a distribution that does not exist.*
+[README](../README.md). *Corrected 2026-07-28: this said "nothing to download
+yet" and "no version has been tagged" — stale since `0.1.0` on 2026-07-25.
+The earlier correction (2026-07-21) about "completely free to download" is left
+standing per the house rule.*
 
 ## Security and Privacy
 
@@ -331,8 +333,9 @@ was fixed. The forge serves a releases feed you can subscribe to, and
 ### Where can I find more information?
 The documentation in this repository is all of it: the `docs/` directory and the
 source code itself. There is no separate documentation site, no community forum,
-and no release notes — nothing has been tagged as a release yet. Corrected
-2026-07-19.
+and no mailing list. Release notes are in [`CHANGELOG.md`](../CHANGELOG.md).
+*Corrected 2026-07-28: this said "no release notes — nothing has been tagged as
+a release yet" — stale since `0.1.0` on 2026-07-25.*
 
 ### How does OciDeck fit into professional information management?
 OciDeck is designed to support professional information management by:
