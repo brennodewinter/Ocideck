@@ -372,6 +372,33 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets(
+    'replaceDeck vervangt de reeks en springt naar de meegestuurde positie (#914)',
+    (tester) async {
+      // Een live-fix tijdens presenteren kan een dia splitsen; de beamer krijgt
+      // dan de verse markdown en moet vanaf de nieuwe positie herrenderen.
+      _mockBridge(tester);
+      await _pumpAudience(tester, <String, dynamic>{
+        'markdown': _deckMarkdown,
+        'index': 0,
+      });
+      await tester.pumpAndSettle();
+      expect(find.text('Welkom'), findsOneWidget);
+
+      await _fromPresenter(tester, 'replaceDeck', {
+        'markdown': _twoSlideMarkdown,
+        'index': 1,
+      });
+      await tester.pump();
+
+      expect(tester.takeException(), isNull);
+      expect(find.text('Tweede dia'), findsOneWidget);
+      expect(find.text('Eerste punt'), findsOneWidget);
+
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
+
   testWidgets('an unknown message from the presenter is ignored, not fatal', (
     tester,
   ) async {
