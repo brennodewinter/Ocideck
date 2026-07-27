@@ -1775,6 +1775,65 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'SBAR-overdracht': 'SBAR-átadás',
+  '(A)MIST traumaoverdracht': '(A)MIST trauma-átadás',
+  'Multidisciplinair overleg (MDO)': 'Multidiszciplináris megbeszélés (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Sebészeti biztonsági ellenőrzőlista (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Ápolói műszakátadás',
+  'Inwerkplan (30-60-90 dagen)': 'Beillesztési terv (30-60-90 nap)',
+  'Eerste dag / introductie': 'Első nap / bevezetés',
+  'Buddy- / mentorafspraak': 'Buddy-/mentorterv',
+  'Uitdiensttreding / offboarding': 'Offboarding / kilépés',
+  'IMSAFE fit-to-fly-check': 'IMSAFE repülésre való alkalmasság ellenőrzése',
+  'Crew- / departurebriefing': 'Legénységi / indulási eligazítás',
+  'Voorvalmelding (just culture)': 'Eseményjelentés (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / LMRA biztonsági ellenőrzés',
+  'Evenement- en crowd-safetybriefing':
+      'Rendezvény- és tömegbiztonsági eligazítás',
+  'Ontruimings- en BHV-oefening': 'Kiürítési és BHV-gyakorlat',
+  'Werkvergunning (permit to work)': 'Munkavégzési engedély (permit to work)',
+  'METHANE grootschalig-incidentmelding': 'METHANE tömeges esemény bejelentése',
+  'GRIP-opschaling': 'GRIP-szintemelés',
+  'Maritieme passage-/brugbriefing': 'Tengeri áthaladási / hídeligazítás',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Adjon át egy beteget vagy helyzetet strukturáltan: helyzet, háttér, értékelés és javaslat.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Kórház előtti átadás a sürgősségi osztálynak: életkor, mechanizmus, sérülések, tünetek és ellátás.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Beszéljenek meg egy esetet a szakterületek között: kép, kezelési cél, döntések és teendők.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out és sign out egy beavatkozás körül a WHO-ellenőrzőlista szerint.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Adja át az ellátást betegenként: állapot, figyelendő pontok és nyitott feladatok.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Határozzon meg elvárásokat, mérföldköveket és támogatást az első 30, 60 és 90 napra.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Emberek, rendszerek, házirend, valamint a biztonság és adatvédelem alapjai az új munkatárs számára.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Célok, ritmus és ellenőrzőpontok az újonc és a buddyja vagy mentora között.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Tudásátadás, hozzáférések visszavonása és rendes kilépő beszélgetés a távozáskor.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Személyes go/no-go: betegség, gyógyszer, stressz, alkohol, fáradtság és hangulat.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Feladatmegosztás, veszélyek és hibák (TEM), valamint eltérések indulás előtt a legénységgel.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Jelentse az eseményt tényszerűen és hibáztatás nélkül: mi, tényezők, kockázat és fejlesztés.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Feladat, veszélyek, intézkedések és jóváhagyás közvetlenül a munka megkezdése előtt.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Kapacitás, kockázatok, embertömeg mozgása és incidensszerepek egy rendezvényhez.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Forgatókönyv, feladatok, gyülekezőhely, megfigyelések és egy kiürítés értékelése.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Rögzítse a munkát, a leválasztásokat, az ellenőrzéseket és az engedélyt a magas kockázatú munkához.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Első jelentés tömeges eseménynél: tömeges esemény, pontos helyszín, típus, veszélyek, megközelítés, létszám és szolgálatok.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Határozza meg a GRIP-szintet, a válságstruktúrát, a szerepeket, valamint a fel- és leskálázási döntéseket.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Útvonalterv és hídmegállapodások (appraisal, planning, execution, monitoring) a kritikus útvonalpontokkal.',
   'Online media staat uit — aanzetten': 'Online média kikapcsolva — bekapcsol',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       'A(z) {bestand} végrehajtható tartalommal rendelkezik, ezért nem lesz importálva.',

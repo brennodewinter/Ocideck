@@ -1774,6 +1774,64 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'SBAR-overdracht': 'SBAR-Übergab',
+  '(A)MIST traumaoverdracht': '(A)MIST-Traumaübergab',
+  'Multidisciplinair overleg (MDO)': 'Multidisziplinäri Teambesprächig (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Chirurgischi Sicherheits-Checkliste (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Pfläg-Dienstübergab',
+  'Inwerkplan (30-60-90 dagen)': 'Iiarbeitigsplan (30-60-90 Täg)',
+  'Eerste dag / introductie': 'Erste Tag / Iiefüehrig',
+  'Buddy- / mentorafspraak': 'Buddy-/Mentor-Abmachig',
+  'Uitdiensttreding / offboarding': 'Offboarding / Uustritt',
+  'IMSAFE fit-to-fly-check': 'IMSAFE Flugtüechtigkeits-Check',
+  'Crew- / departurebriefing': 'Crew-/Abflug-Briefing',
+  'Voorvalmelding (just culture)': 'Ereignismäldig (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / LMRA-Sicherheitscheck',
+  'Evenement- en crowd-safetybriefing': 'Event- und Crowd-Safety-Briefing',
+  'Ontruimings- en BHV-oefening': 'Rüümigs- und BHV-Übig',
+  'Werkvergunning (permit to work)': 'Arbetsfreigab (permit to work)',
+  'METHANE grootschalig-incidentmelding': 'METHANE Grossschadensmäldig',
+  'GRIP-opschaling': 'GRIP-Hochstuefig',
+  'Maritieme passage-/brugbriefing': 'Maritims Passage-/Brügg-Briefing',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Übergib e Patiänt oder e Situation strukturiert: Situation, Hintergrund, Bewertig und Empfählig.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Vorchlinischi Übergab a d Notufnahm mit Alter, Mechanismus, Verletzige, Symptom und Behandlig.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Bespriich e Fall interdisziplinär: Bild, Behandligsziel, Entscheidige und Massnahme.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign In, Time-out und Sign Out um en Igriff ume nach de WHO-Checkliste.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Übergib d Pfläg pro Patiänt: Zuestand, Achtigspünkt und offni Ufgabe.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Leg Erwartige, Meilestei und Begleitig für di erste 30, 60 und 90 Täg fescht.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Lüt, Systeme, Huusregle und d Sicherheits- und Datenschutzgrundlage für en neue Mitarbeiter.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Ziel, Rhythmus und Checkpoints zwüsche Neuling und Buddy oder Mentor.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Wüssenstransfer, Zuegangs-Entzug und es aaständigs Uustrittsgspröch bim Wäggah.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Persönlichs Go/No-Go: Chrankheit, Medikamänt, Stress, Alkohol, Müedigkeit und Gmüetslag.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Ufgabeverteilig, Bedrohige und Fähler (TEM) und Abwiichige vor em Abflug mit dr Crew.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Mäld es Ereignis sachlich und ohni Schuldfrog: was, Faktore, Risiko und Verbesserig.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Ufgab, Gfahre, Massnahme und Freigab churz vor em Arbetsafang.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Kapazität, Risike, Personeström und Rolle bi Zwüschefäll für e Aalass.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Szenario, Ufgabe, Sammelplatz, Beobachtige und Uuswertig vo ere Rüümig.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Arbet, Isolierige, Kontrolle und Freigab für risikorychi Arbete festhalte.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Erschti Mäldig bimene Grossereignis: Grossereignis, gnaue Ort, Art, Gfahre, Zuegang, Aazahl und Dienscht.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Leg d GRIP-Stuefe, d Krisestruktur, d Rolle und d Uf- und Abstuefigsentscheid fescht.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Reiseplan und Brügg-Abmachige (appraisal, planning, execution, monitoring) mit kritische Wegpünkt.',
   'Online media staat uit — aanzetten': 'Online-Media us — schalte y',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} enthaltet uusfüehrbare Inhalt und wird nöd importiert.',

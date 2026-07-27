@@ -1793,6 +1793,65 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'SBAR-overdracht': 'Konsenja SBAR',
+  '(A)MIST traumaoverdracht': '(A)MIST konsenja ta\' trawma',
+  'Multidisciplinair overleg (MDO)': 'Laqgħa multidixxiplinari (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Lista ta\' kontroll għas-sigurtà kirurġika (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Konsenja tax-xift tal-infermerija',
+  'Inwerkplan (30-60-90 dagen)': 'Pjan ta\' introduzzjoni (30-60-90 jum)',
+  'Eerste dag / introductie': 'L-ewwel jum / introduzzjoni',
+  'Buddy- / mentorafspraak': 'Pjan ta\' buddy / mentor',
+  'Uitdiensttreding / offboarding': 'Offboarding / tluq',
+  'IMSAFE fit-to-fly-check': 'IMSAFE verifika tal-idoneità għat-titjira',
+  'Crew- / departurebriefing': 'Briefing tal-ekwipaġġ / tat-tluq',
+  'Voorvalmelding (just culture)': 'Rapport ta\' okkorrenza (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / verifika tas-sigurtà LMRA',
+  'Evenement- en crowd-safetybriefing':
+      'Briefing dwar avveniment u sigurtà tal-folla',
+  'Ontruimings- en BHV-oefening': 'Eżerċizzju ta\' evakwazzjoni u BHV',
+  'Werkvergunning (permit to work)': 'Permess tax-xogħol (permit to work)',
+  'METHANE grootschalig-incidentmelding': 'METHANE rapport ta\' inċident kbir',
+  'GRIP-opschaling': 'Eskalazzjoni GRIP',
+  'Maritieme passage-/brugbriefing': 'Briefing marittimu tal-passaġġ / pont',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Għaddi pazjent jew sitwazzjoni b\'mod strutturat: Sitwazzjoni, Sfond, Valutazzjoni u Rakkomandazzjoni.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Konsenja pre-ospitaljera lid-dipartiment tal-emerġenza b\'età, mekkaniżmu, korrimenti, sinjali u trattament.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Iddiskuti każ bejn id-dixxiplini: stampa, għan tal-kura, deċiżjonijiet u azzjonijiet.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out u sign out madwar proċedura skont il-lista ta\' kontroll tal-WHO.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Għaddi l-kura għal kull pazjent: kundizzjoni, punti ta\' attenzjoni u kompiti miftuħa.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Iddefinixxi aspettattivi, stadji importanti u appoġġ għall-ewwel 30, 60 u 90 jum.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Nies, sistemi, regoli interni u l-bażi tas-sigurtà u l-privatezza għal impjegat ġdid.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Miri, ritmu u punti ta\' kontroll bejn il-ġdid u l-buddy jew mentor tiegħu.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Trasferiment ta\' għarfien, revoka ta\' aċċess u intervista tat-tluq xierqa meta xi ħadd jitlaq.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Go/no-go personali: mard, mediċini, stress, alkoħol, għeja u burdata.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Tqassim tal-kompiti, theddid u żbalji (TEM) u devjazzjonijiet qabel it-tluq mal-ekwipaġġ.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Irrapporta okkorrenza b\'mod fattwali u mingħajr tfittxija ta\' ħtija: xiex, fatturi, riskju u titjib.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Kompitu, perikli, miżuri u approvazzjoni ftit qabel ma jibda x-xogħol.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Kapaċità, riskji, fluss tan-nies u rwoli f\'każ ta\' inċident għal avveniment.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Xenarju, kompiti, punt ta\' ġbir, osservazzjonijiet u evalwazzjoni ta\' evakwazzjoni.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Irreġistra x-xogħol, l-iżolamenti, il-kontrolli u l-awtorizzazzjoni għal xogħol ta\' riskju għoli.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'L-ewwel rapport f\'inċident kbir: inċident kbir, post eżatt, tip, perikli, aċċess, numru u servizzi.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Iddetermina l-livell GRIP, l-istruttura tal-kriżi, ir-rwoli u d-deċiżjonijiet ta\' skalar \'il fuq u \'l isfel.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Pjan tal-vjaġġ u ftehimiet tal-pont (appraisal, planning, execution, monitoring) b\'punti kritiċi tar-rotta.',
   'Online media staat uit — aanzetten': 'Midja online mitfi — ixquq',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} fih kontenut eżegwibbli u mhux se jiġi impurtat.',

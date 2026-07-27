@@ -1746,6 +1746,63 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'SBAR-overdracht': 'SBAR ja\'ghach',
+  '(A)MIST traumaoverdracht': '(A)MIST riQwI\' ja\'ghach',
+  'Multidisciplinair overleg (MDO)': 'MDT ghom qep',
+  'Chirurgische veiligheidscheck (WHO)': 'WHO Haq QobHa\' tetlh',
+  'Verpleegkundige dienstoverdracht': 'bejwI\' poH ja\'ghach',
+  'Inwerkplan (30-60-90 dagen)': 'ghojmoHmeH nab (30-60-90 jaj)',
+  'Eerste dag / introductie': 'wa\'DIch jaj / ghojmoH',
+  'Buddy- / mentorafspraak': 'buddy / DevwI\' nab',
+  'Uitdiensttreding / offboarding': 'mejmeH / offboarding',
+  'IMSAFE fit-to-fly-check': 'IMSAFE puvlaHghach waQ',
+  'Crew- / departurebriefing': 'beq / mejmeH briefing',
+  'Voorvalmelding (just culture)': 'qaSDI\' wanI\' ja\' (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / LMRA QobHa\' waQ',
+  'Evenement- en crowd-safetybriefing': 'lopno\' ghom QobHa\' briefing',
+  'Ontruimings- en BHV-oefening': 'narghmeH qeS BHV je',
+  'Werkvergunning (permit to work)': 'vum chaw\' (permit to work)',
+  'METHANE grootschalig-incidentmelding': 'METHANE wanI\' tInmey ja\'',
+  'GRIP-opschaling': 'GRIP tlhu\'moH',
+  'Maritieme passage-/brugbriefing': 'bIQ\'a\' leng / bIQ Duj briefing',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'SBAR mIw lo\': patient pagh ghu\' ghantoHchoHmoHlu\'DI\' ja\': ghu\', mung, noH, chup.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'qachDaq ghoSpa\' riQwI\' ja\': ben, meq, QIHmey, Deghmey, vaj Qan.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Hoch ghom SumDaq qab yaj: mIllogh, Qan ngoQ, wuqmey, vangmeH nab.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Haq retlh sign in, time-out, sign out je, WHO tetlh tlha\'.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'patient Hoch Qan nob: Dotlh, buSlu\'meH Deghmey, Qu\'mey poSbogh.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'wa\'DIch 30, 60, 90 jaj poQmey, DeghmeH DaqHommey, QaHmey je qon.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'vumwI\' chu\'vaD: nuvpu\', patmey, juH chutmey, chorgh QobHa\' je ngeb Qan.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'chu\'wI\', buddy pagh DevwI\' je joj ngoQmey, poH, nughmey je.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Sov jol, tlhignav Qaw\' \'ej vay\' mejDI\', exit ja\'chuq QaQ.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'go/no-go: rop, Hergh, \'ItmoHwI\', HIq, Doy\'qu\' je tIq.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'beq tlhej mejpa\': Qu\' boq, qaDmey QaghmeH je (TEM), mIwHa\'mey je.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'wanI\' teHchoHmoH \'ej pIchHa\' ja\': nuq, meqmey, Qob je DubmeH.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'vum taghpa\': Qu\', Qobmey, waQmey je chownaQ.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'lopno\' ghomvaD: tebmeH mI\', Qobmey, ghom vIH je qaSDI\' wanI\' \'oSmeH.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'narghmeH: wanI\'nab, Qu\'mey, ghommeH Daq, leghmey je noH.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Qob vum vaD: vum, chImmoHmey, waQmey, chaw\' je qon.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'wanI\' tIn wa\'DIch ja\': wanI\' tIn, Daq, Segh, Qobmey, \'el, mI\' je toy\'wI\'pu\'.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'GRIP patlh, Qob QeH mIw, \'oSwI\'mey je tlhu\'moH pojmoH wuqmey yIngu\'.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'leng nab bIQ Duj chuqmey je (appraisal, planning, execution, monitoring), He Daqmey potlh tlhej.',
   'Online media staat uit — aanzetten': 'online media mev — choq',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       'vangmeH De\' ngaS {bestand}; lI\'lu\'be\'.',

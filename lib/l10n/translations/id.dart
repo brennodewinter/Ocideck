@@ -1771,6 +1771,65 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'SBAR-overdracht': 'Serah terima SBAR',
+  '(A)MIST traumaoverdracht': 'Serah terima trauma (A)MIST',
+  'Multidisciplinair overleg (MDO)': 'Rapat tim multidisiplin (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Daftar periksa keselamatan bedah (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Serah terima jaga keperawatan',
+  'Inwerkplan (30-60-90 dagen)': 'Rencana orientasi (30-60-90 hari)',
+  'Eerste dag / introductie': 'Hari pertama / pengenalan',
+  'Buddy- / mentorafspraak': 'Rencana buddy / mentor',
+  'Uitdiensttreding / offboarding': 'Offboarding / keluar',
+  'IMSAFE fit-to-fly-check': 'IMSAFE pemeriksaan kelaikan terbang',
+  'Crew- / departurebriefing': 'Briefing kru / keberangkatan',
+  'Voorvalmelding (just culture)': 'Laporan kejadian (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / pemeriksaan keselamatan LMRA',
+  'Evenement- en crowd-safetybriefing':
+      'Briefing acara dan keselamatan kerumunan',
+  'Ontruimings- en BHV-oefening': 'Latihan evakuasi dan BHV',
+  'Werkvergunning (permit to work)': 'Izin kerja (permit to work)',
+  'METHANE grootschalig-incidentmelding': 'METHANE laporan insiden besar',
+  'GRIP-opschaling': 'Eskalasi GRIP',
+  'Maritieme passage-/brugbriefing': 'Briefing pelayaran / anjungan',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Serahkan pasien atau situasi secara terstruktur: Situasi, Latar belakang, Penilaian, dan Rekomendasi.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Serah terima prarumah sakit ke IGD dengan usia, mekanisme, cedera, tanda, dan penanganan.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Bahas sebuah kasus lintas disiplin: gambaran, tujuan terapi, keputusan, dan tindak lanjut.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out, dan sign out seputar prosedur sesuai daftar periksa WHO.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Serahkan perawatan per pasien: kondisi, hal yang perlu diperhatikan, dan tugas yang belum selesai.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Uraikan ekspektasi, tonggak, dan pendampingan selama 30, 60, dan 90 hari pertama.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Orang, sistem, aturan internal, serta dasar keamanan dan privasi untuk karyawan baru.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Tujuan, ritme, dan titik pemeriksaan antara pendatang baru dan buddy atau mentornya.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Transfer pengetahuan, pencabutan akses, dan wawancara keluar yang layak saat seseorang pergi.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Go/no-go pribadi: penyakit, obat, stres, alkohol, kelelahan, dan suasana hati.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Pembagian tugas, ancaman dan kesalahan (TEM), serta penyimpangan sebelum keberangkatan bersama kru.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Laporkan kejadian secara faktual dan tanpa menyalahkan: apa, faktor, risiko, dan perbaikan.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Tugas, bahaya, tindakan pengendalian, dan persetujuan tepat sebelum pekerjaan dimulai.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Kapasitas, risiko, arus keluar-masuk orang, dan peran saat insiden untuk sebuah acara.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Skenario, tugas, titik kumpul, pengamatan, dan evaluasi sebuah evakuasi.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Catat pekerjaan, isolasi, pemeriksaan, dan otorisasi untuk pekerjaan berisiko tinggi.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Laporan pertama pada insiden besar: insiden besar, lokasi tepat, jenis, bahaya, akses, jumlah, dan layanan.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Tetapkan tingkat GRIP, struktur krisis, peran, serta keputusan naik dan turun skala.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Rencana pelayaran dan kesepakatan anjungan (appraisal, planning, execution, monitoring) dengan titik rute kritis.',
   'Online media staat uit — aanzetten': 'Media daring nonaktif — aktifkan',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} berisi konten yang dapat dieksekusi dan tidak akan diimpor.',

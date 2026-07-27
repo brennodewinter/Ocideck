@@ -1788,6 +1788,66 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'SBAR-overdracht': 'Predare SBAR',
+  '(A)MIST traumaoverdracht': '(A)MIST predare traumă',
+  'Multidisciplinair overleg (MDO)': 'Ședință multidisciplinară (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Listă de verificare a siguranței chirurgicale (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Predarea turei de nursing',
+  'Inwerkplan (30-60-90 dagen)': 'Plan de integrare (30-60-90 zile)',
+  'Eerste dag / introductie': 'Prima zi / introducere',
+  'Buddy- / mentorafspraak': 'Plan buddy / mentor',
+  'Uitdiensttreding / offboarding': 'Offboarding / plecare',
+  'IMSAFE fit-to-fly-check': 'IMSAFE verificarea aptitudinii de zbor',
+  'Crew- / departurebriefing': 'Briefing de echipaj / plecare',
+  'Voorvalmelding (just culture)': 'Raportare de eveniment (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / verificare de siguranță LMRA',
+  'Evenement- en crowd-safetybriefing':
+      'Briefing de eveniment și siguranța mulțimii',
+  'Ontruimings- en BHV-oefening': 'Exercițiu de evacuare și BHV',
+  'Werkvergunning (permit to work)': 'Permis de lucru (permit to work)',
+  'METHANE grootschalig-incidentmelding': 'METHANE raportare de incident major',
+  'GRIP-opschaling': 'Escaladare GRIP',
+  'Maritieme passage-/brugbriefing':
+      'Briefing maritim de pasaj / punte de comandă',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Predați un pacient sau o situație structurat: situație, context, evaluare și recomandare.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Predare prespitalicească la urgențe cu vârstă, mecanism, leziuni, semne și tratament.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Discutați un caz între discipline: tablou, obiectiv terapeutic, decizii și acțiuni.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out și sign out în jurul unei intervenții conform listei WHO.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Predați îngrijirea per pacient: stare, puncte de atenție și sarcini deschise.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Stabiliți așteptări, repere și sprijin pentru primele 30, 60 și 90 de zile.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Oameni, sisteme, reguli interne și bazele de securitate și confidențialitate pentru un nou angajat.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Obiective, ritm și puncte de control între noul venit și buddy-ul sau mentorul său.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Transfer de cunoștințe, revocarea accesului și un interviu de plecare corect la părăsirea companiei.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Go/no-go personal: boală, medicație, stres, alcool, oboseală și dispoziție.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Împărțirea sarcinilor, amenințări și erori (TEM) și abateri înainte de plecare cu echipajul.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Raportați un eveniment factual și fără a căuta vinovați: ce, factori, risc și îmbunătățire.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Sarcină, pericole, măsuri și aprobare chiar înainte de începerea lucrului.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Capacitate, riscuri, fluxul de persoane și roluri în caz de incident pentru un eveniment.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Scenariu, sarcini, punct de adunare, observații și evaluarea unei evacuări.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Înregistrați lucrarea, izolările, verificările și autorizarea pentru lucrări cu risc ridicat.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Primul raport la un incident major: incident major, locație exactă, tip, pericole, acces, număr și servicii.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Stabiliți nivelul GRIP, structura de criză, rolurile și deciziile de escaladare și dezescaladare.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Planul de pasaj și înțelegeri pe punte (appraisal, planning, execution, monitoring) cu puncte critice ale rutei.',
   'Online media staat uit — aanzetten': 'Media online dezactivată — activează',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} conține conținut executabil și nu va fi importat.',

@@ -730,6 +730,66 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'SBAR-overdracht': 'Entrega SBAR',
+  '(A)MIST traumaoverdracht': '(A)MIST entrega di trauma',
+  'Multidisciplinair overleg (MDO)': 'Reunion multidisiplinario (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Lista di kontrol di siguridat kirúrgiko (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Entrega di turno di enfermeria',
+  'Inwerkplan (30-60-90 dagen)': 'Plan di introdukshon (30-60-90 dia)',
+  'Eerste dag / introductie': 'Promé dia / introdukshon',
+  'Buddy- / mentorafspraak': 'Plan di buddy / mentor',
+  'Uitdiensttreding / offboarding': 'Offboarding / salida',
+  'IMSAFE fit-to-fly-check': 'IMSAFE chèk di aptitut pa bula',
+  'Crew- / departurebriefing': 'Briefing di tripulashon / salida',
+  'Voorvalmelding (just culture)': 'Notifikashon di suseso (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / chèk di siguridat LMRA',
+  'Evenement- en crowd-safetybriefing':
+      'Briefing di evento i siguridat di multitut',
+  'Ontruimings- en BHV-oefening': 'Simulakro di evakuashon i BHV',
+  'Werkvergunning (permit to work)': 'Permit di trabou (permit to work)',
+  'METHANE grootschalig-incidentmelding':
+      'METHANE notifikashon di insidente mayor',
+  'GRIP-opschaling': 'Eskalashon GRIP',
+  'Maritieme passage-/brugbriefing': 'Briefing di pasashi / brùg marítimo',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Entregá un pashènt òf situashon strukturá: Situashon, Antesedente, Evaluashon i Rekomendashon.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Entrega prehospitalario na emergensia ku edat, mekanismo, lesionnan, síntoma i tratamentu.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Diskutí un kaso ku tur disiplina: imágen, meta di tratamentu, desishon i akuerdo.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out i sign out rònt un intervenshon segun e lista di WHO.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Entregá e kuido pa kada pashènt: kondishon, punto di atenshon i tareanan pendiente.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Stipulá ekspektativa, meta i akompañamentu pa e promé 30, 60 i 90 dia.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Hende, sistema, reglanan di kas i e base di siguridat i privasidat pa un empleado nobo.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Metanan, ritmo i punto di kontrol entre e resien yegá i su buddy òf mentor.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Transferensia di konosementu, kita akseso i un bon entrevista di salida ora ku un persona ta bai.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Go/no-go personal: malesa, medikashon, strès, alkohòl, kansansio i emoshon.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Divishon di tarea, menasa i eror (TEM) i desviashon promé di salida ku e tripulashon.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Notifiká un suseso den un manera faktual i sin buska kulpa: kiko, faktornan, riesgo i mehoramentu.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Tarea, peligernan, medidanan i akuerdo djis promé ku e trabou kuminsá.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Kapasidat, riesgonan, entrada i salida di hende i rolnan di insidente pa un evento.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Senario, tareanan, punto di reunion, observashonnan i evaluashon di un evakuashon.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Registrá trabou, isolashonnan, kontrolnan i aprobashon pa trabou di haltu riesgo.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Promé notifikashon na un insidente mayor: insidente mayor, lokashon eksakto, tipo, peligernan, akseso, kantidat i servisionan.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Determiná e nivel GRIP, e struktura di krisis, rolnan i desishonnan di eskalá i deseskalá.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Plan di biahe i akuerdonan di brùg (appraisal, planning, execution, monitoring) ku puntonan krítiko di ruta.',
   'Online media staat uit — aanzetten': 'Media online ta apa — ké',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} ta kontené kontenido ehekutabel i lo no wòrdu importá.',

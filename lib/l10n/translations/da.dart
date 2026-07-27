@@ -1770,6 +1770,63 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'SBAR-overdracht': 'SBAR-overdragelse',
+  '(A)MIST traumaoverdracht': '(A)MIST-traumaoverdragelse',
+  'Multidisciplinair overleg (MDO)': 'Tværfagligt teammøde (MDT)',
+  'Chirurgische veiligheidscheck (WHO)': 'Kirurgisk sikkerhedstjekliste (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Sygeplejefaglig vagtoverdragelse',
+  'Inwerkplan (30-60-90 dagen)': 'Onboarding-plan (30-60-90 dage)',
+  'Eerste dag / introductie': 'Første dag / introduktion',
+  'Buddy- / mentorafspraak': 'Buddy-/mentorplan',
+  'Uitdiensttreding / offboarding': 'Offboarding / fratrædelse',
+  'IMSAFE fit-to-fly-check': 'IMSAFE flyvegnethedstjek',
+  'Crew- / departurebriefing': 'Crew-/afgangsbriefing',
+  'Voorvalmelding (just culture)': 'Hændelsesrapport (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / LMRA-sikkerhedstjek',
+  'Evenement- en crowd-safetybriefing': 'Event- og crowd-safety-briefing',
+  'Ontruimings- en BHV-oefening': 'Evakuerings- og BHV-øvelse',
+  'Werkvergunning (permit to work)': 'Arbejdstilladelse (permit to work)',
+  'METHANE grootschalig-incidentmelding': 'METHANE-melding om større hændelse',
+  'GRIP-opschaling': 'GRIP-opskalering',
+  'Maritieme passage-/brugbriefing': 'Maritim passage-/brobriefing',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Overdrag en patient eller situation struktureret: Situation, Baggrund, Vurdering og Anbefaling.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Præhospital overdragelse til akutmodtagelsen med alder, mekanisme, skader, tegn og behandling.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Drøft en sag på tværs af fagområder: billede, behandlingsmål, beslutninger og aftaler.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out og sign out omkring et indgreb efter WHO-tjeklisten.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Overdrag plejen pr. patient: tilstand, opmærksomhedspunkter og åbne opgaver.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Fastlæg forventninger, milepæle og støtte over de første 30, 60 og 90 dage.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Mennesker, systemer, husregler og det grundlæggende om sikkerhed og privatliv for en ny medarbejder.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Mål, rytme og checkpoints mellem den nye og buddy eller mentor.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Vidensoverdragelse, inddragelse af adgange og en ordentlig exitsamtale ved fratrædelse.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Personlig go/no-go: sygdom, medicin, stress, alkohol, træthed og humør.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Opgavefordeling, trusler og fejl (TEM) og afvigelser før afgang med besætningen.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Meld en hændelse faktuelt og uden skyld: hvad, faktorer, risiko og forbedring.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Opgave, farer, foranstaltninger og godkendelse lige før arbejdet starter.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Kapacitet, risici, til- og frastrømning og roller ved hændelser for et event.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Scenarie, opgaver, samlingssted, observationer og evaluering af en evakuering.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Registrér arbejde, isolationer, kontroller og godkendelse til højrisikoarbejde.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Første melding ved en større hændelse: større hændelse, præcis placering, type, farer, adgang, antal og tjenester.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Fastlæg GRIP-niveauet, krisestrukturen, rollerne og beslutninger om op- og nedskalering.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Sejladsplan og broaftaler (appraisal, planning, execution, monitoring) med kritiske rutepunkter.',
   'Online media staat uit — aanzetten': 'Onlinemedier er slået fra — tænd',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} indeholder eksekverbart indhold og importeres ikke.',
