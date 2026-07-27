@@ -115,6 +115,12 @@ class _FakeController extends PlatformWebViewController {
   void Function(JavaScriptMessage)? jsChannel;
   String? loadedHtml;
   String? loadedBaseUrl;
+  String? lastRequestUrl;
+
+  @override
+  Future<void> loadRequest(LoadRequestParams params) async {
+    lastRequestUrl = params.uri.toString();
+  }
 
   @override
   Future<void> setJavaScriptMode(JavaScriptMode mode) async {}
@@ -607,9 +613,60 @@ void main() {
         ),
         NavigationDecision.prevent,
       );
+      // Onze eigen stop-navigatie bij het verlaten van de dia (about:blank) mag
+      // altijd door — die dooft de speler (#932). Zonder deze uitzondering zou
+      // de delegate hem weigeren en bleef het geluid doorlopen.
+      expect(
+        await nav(
+          const NavigationRequest(url: 'about:blank', isMainFrame: true),
+        ),
+        NavigationDecision.navigate,
+      );
       expect(tester.takeException(), isNull);
     },
   );
+
+  testWidgets(
+    'leaving the slide stops the embed by loading a blank page (#932)',
+    (tester) async {
+      await tester.pumpWidget(
+        _host(
+          _video(path: 'https://youtu.be/dQw4w9WgXcQ'),
+          allowRemoteMedia: true,
+        ),
+      );
+      await tester.pump(); // post-frame _initWebView
+      final controller = fakeWeb.lastController!;
+      // De speler is geladen als HTML, nog niet naar een lege pagina genavigeerd.
+      expect(controller.loadedHtml, isNotNull);
+      expect(controller.lastRequestUrl, isNull);
+
+      // Verlaat de dia: de embed-widget wordt uit de boom gehaald en disposed.
+      await tester.pumpWidget(const SizedBox());
+      await tester.pump();
+
+      // Kern van de "YouTube blijft doorspelen"-bug: bij het verlaten moet de
+      // webview naar een lege pagina, wat de speler en zijn geluid sloopt.
+      // Zonder de fix bleef dit null en speelde de video door.
+      expect(controller.lastRequestUrl, 'about:blank');
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets('turning online media off also stops the running embed (#932)', (
+    tester,
+  ) async {
+    final slide = _video(path: 'https://youtu.be/dQw4w9WgXcQ');
+    await tester.pumpWidget(_host(slide, allowRemoteMedia: true));
+    await tester.pump();
+    final controller = fakeWeb.lastController!;
+    expect(controller.lastRequestUrl, isNull);
+
+    await tester.pumpWidget(_host(slide, allowRemoteMedia: false));
+    await tester.pump();
+    expect(controller.lastRequestUrl, 'about:blank');
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets(
     'turning online media OFF on an existing embed drops the player',

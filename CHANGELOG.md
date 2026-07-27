@@ -192,6 +192,32 @@ read a book to find out.
   een momentopname van de run op 2026-07-23, geen actuele eis.
 
 ### Fixed
+- **Een YouTube/Vimeo-embed bleef doorspelen nadat je naar de volgende dia ging
+  (#932).** `_VideoEmbedPreview` ruimde bij het verlaten alleen de playhead-bus
+  op; de `WebViewController` kreeg geen opdracht om te stoppen. Op macOS
+  (WKWebView) wordt het platform-view niet meteen vrijgegeven, dus de speler
+  bleef geluid geven nadat de dia uit beeld was. Bij het verlaten (dispose, én
+  wanneer online media wordt uitgezet) navigeert de webview nu naar een lege
+  pagina; dat sloopt de speler en zijn geluid meteen. De navigatiepoort die
+  wegnavigeren naar de trackende oorsprong blokkeert, laat die ene lege pagina
+  bewust door. Het systeemvenster van een echte webview draait niet onder
+  `flutter test`, maar de bestaande nep-`WebViewPlatform` wél: die vangt nu de
+  `about:blank`-navigatie bij het verlaten en bij het uitzetten van online media.
+- **Een formule op een free-markdown-dia liep bij presentatiemaat door het logo,
+  terwijl hij in de kleine preview nog net paste (#931).** `_PreviewScaffold`
+  reserveerde de logo-ruimte als padding *binnen* de kolom die de
+  `FittedBox(scaleDown)` als geheel omlaagschaalt. Zodra de inhoud te hoog werd,
+  kromp die gereserveerde strook mee terwijl het logo-overlay op een vaste plek
+  bleef staan, en dan schoof de inhoud er alsnog onderdoor. Dat trof juist de
+  schermvullende presentatie: `Math.tex` schaalt niet lineair met de
+  lettergrootte (breukstrepen en `\left(\right)`-delimiters springen in discrete
+  maten), dus bij de grote maat ging een formule net over de grens die bij de
+  kleine preview nog paste. De logostrook wordt nu *buiten* de `FittedBox`
+  gereserveerd — het beschikbare vlak is al kleiner dan de dia, en de inhoud
+  blijft er schaalonafhankelijk boven, preview en presentatie gelijk. De
+  binnenmarges houden de oorspronkelijke totale ruimte aan, zodat inhoud die toch
+  al paste ongewijzigd blijft. `test/free_markdown_logo_clearance_test.dart`
+  meet dat de formule bij grote én kleine maat boven de logostrook blijft.
 - **`.ocideck`-pakketten (en `.ocideckstyle`-stijlprofielen) waren grijs en
   onaantikbaar in het systeemvenster op macOS (#927).** Wie een opgeslagen
   presentatie wilde openen via **Pakket importeren**, kon het `.ocideck`-bestand

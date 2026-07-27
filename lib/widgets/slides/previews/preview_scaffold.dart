@@ -60,25 +60,48 @@ class _PreviewScaffold extends StatelessWidget {
         ? _logoSafeInsets(width, profile)
         : EdgeInsets.zero;
 
+    // De logostrook reserveren we búiten de `FittedBox`, niet als padding in de
+    // kolom die de box omlaagschaalt. Zat de strook binnen die kolom, dan kromp
+    // hij mee zodra de inhoud te hoog werd om te passen, terwijl het logo-overlay
+    // op een vaste plek blijft — en dan schoof de inhoud er alsnog onderdoor. Dat
+    // trof juist de schermvullende presentatie: `Math.tex` schaalt niet lineair
+    // met de lettergrootte (breukstrepen en `\left(\right)`-delimiters springen in
+    // discrete maten), dus bij de grote maat ging een formule net over de grens
+    // die bij de kleine preview nog paste. Buiten de box is de strook vast, en
+    // blijft de inhoud er schaalonafhankelijk boven — preview en presentatie
+    // gelijk (#931).
+    //
+    // De binnenmarges houden de oorspronkelijke totale ruimte aan: de bovenmarge
+    // was `verticalPadding + safe.top` (nu: `safe.top` buiten + `verticalPadding`
+    // binnen), de ondermarge `max(verticalPadding, safe.bottom)` (nu: `safe.bottom`
+    // buiten + de rest binnen). Voor inhoud die toch al past verandert er niets.
+    final innerBottom = math.max(
+      0.0,
+      _logoAwareBottomPadding(verticalPadding, safe.bottom) - safe.bottom,
+    );
+
     return Container(
       color: background,
-      child: SizedBox.expand(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          alignment: Alignment.topLeft,
-          child: SizedBox(
-            width: width,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                horizontalPadding,
-                verticalPadding + safe.top,
-                horizontalPadding,
-                _logoAwareBottomPadding(verticalPadding, safe.bottom),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: children,
+      child: Padding(
+        padding: EdgeInsets.only(top: safe.top, bottom: safe.bottom),
+        child: SizedBox.expand(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.topLeft,
+            child: SizedBox(
+              width: width,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(
+                  horizontalPadding,
+                  verticalPadding,
+                  horizontalPadding,
+                  innerBottom,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: children,
+                ),
               ),
             ),
           ),
