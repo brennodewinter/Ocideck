@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:d009676f-0faf-5609-8982-4b25e5a5fe6a",
+  "serialNumber": "urn:uuid:4d4a7d2d-21de-5188-8779-ef36d1947c29",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-27T12:13:20.965799Z",
+    "timestamp": "2026-07-27T14:08:28.864589Z",
     "tools": {
       "components": [
         {
@@ -2136,7 +2136,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/flutter_riverpod@3.3.2",
+      "bom-ref": "pkg:pub/flutter_riverpod@3.4.1",
       "type": "library",
       "supplier": {
         "name": "rrousselGit",
@@ -2145,8 +2145,8 @@
         ]
       },
       "name": "flutter_riverpod",
-      "version": "3.3.2",
-      "purl": "pkg:pub/flutter_riverpod@3.3.2",
+      "version": "3.4.1",
+      "purl": "pkg:pub/flutter_riverpod@3.4.1",
       "licenses": [
         {
           "license": {
@@ -2157,13 +2157,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "9255e1e3ad6e38906a1b4f8287678f95f378744c5b46b1985588543f3f19046e"
+          "content": "a441fd079f11969f526ec04556ba9819fee7d981bdf50fab858066807b36cff9"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/flutter_riverpod/versions/3.3.2"
+          "url": "https://pub.dev/packages/flutter_riverpod/versions/3.4.1"
         }
       ],
       "properties": [
@@ -2304,7 +2304,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/flutter_secure_storage_platform_interface@2.0.1",
+      "bom-ref": "pkg:pub/flutter_secure_storage_platform_interface@2.0.2",
       "type": "library",
       "supplier": {
         "name": "mogol",
@@ -2313,8 +2313,8 @@
         ]
       },
       "name": "flutter_secure_storage_platform_interface",
-      "version": "2.0.1",
-      "purl": "pkg:pub/flutter_secure_storage_platform_interface@2.0.1",
+      "version": "2.0.2",
+      "purl": "pkg:pub/flutter_secure_storage_platform_interface@2.0.2",
       "licenses": [
         {
           "license": {
@@ -2325,13 +2325,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "8ceea1223bee3c6ac1a22dabd8feefc550e4729b3675de4b5900f55afcb435d6"
+          "content": "06686df417f34fe9f963ed217b7fdce250e2f637ddd6c374d7eb054549770633"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/flutter_secure_storage_platform_interface/versions/2.0.1"
+          "url": "https://pub.dev/packages/flutter_secure_storage_platform_interface/versions/2.0.2"
         }
       ],
       "properties": [
@@ -3066,7 +3066,49 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/jni@1.0.0",
+      "bom-ref": "pkg:pub/is_ios_simulator@1.0.1",
+      "type": "library",
+      "supplier": {
+        "name": "EchoEllet",
+        "url": [
+          "https://github.com/EchoEllet"
+        ]
+      },
+      "name": "is_ios_simulator",
+      "version": "1.0.1",
+      "purl": "pkg:pub/is_ios_simulator@1.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "01321f4f778ec931b5abc216e6922dccf51e3c5db8aef72b3874f6b4c5447374"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/is_ios_simulator/versions/1.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/jni@1.0.1",
       "type": "library",
       "supplier": {
         "name": "dart-lang",
@@ -3075,8 +3117,8 @@
         ]
       },
       "name": "jni",
-      "version": "1.0.0",
-      "purl": "pkg:pub/jni@1.0.0",
+      "version": "1.0.1",
+      "purl": "pkg:pub/jni@1.0.1",
       "licenses": [
         {
           "license": {
@@ -3087,13 +3129,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "c2230682d5bc2362c1c9e8d3c7f406d9cbba23ab3f2e203a025dd47e0fb2e68f"
+          "content": "ca1efa31ef27a0b8ecbb4f8dcf3785e5ad1b8a54c64af9b72d287ae81f93a4f4"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/jni/versions/1.0.0"
+          "url": "https://pub.dev/packages/jni/versions/1.0.1"
         }
       ],
       "properties": [
@@ -3136,6 +3178,48 @@
         {
           "type": "distribution",
           "url": "https://pub.dev/packages/jni_flutter/versions/1.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/jni_util@1.0.0",
+      "type": "library",
+      "supplier": {
+        "name": "dart-lang",
+        "url": [
+          "https://github.com/dart-lang"
+        ]
+      },
+      "name": "jni_util",
+      "version": "1.0.0",
+      "purl": "pkg:pub/jni_util@1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1ba86da04a5f2bf18fde2edb235587e70c5b0fc5bd4ba955f46b00942c3fc35f"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/jni_util/versions/1.0.0"
         }
       ],
       "properties": [
@@ -3346,6 +3430,48 @@
         {
           "type": "distribution",
           "url": "https://pub.dev/packages/lints/versions/6.1.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/listen@1.0.0-beta.4",
+      "type": "library",
+      "supplier": {
+        "name": "flutter",
+        "url": [
+          "https://github.com/flutter"
+        ]
+      },
+      "name": "listen",
+      "version": "1.0.0-beta.4",
+      "purl": "pkg:pub/listen@1.0.0-beta.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "cb0ad74d7453d8f83a7c1fae401828681ef5df21d41a3a26a04af590c985d085"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/listen/versions/1.0.0-beta.4"
         }
       ],
       "properties": [
@@ -4578,7 +4704,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/posix@6.5.0",
+      "bom-ref": "pkg:pub/posix@6.5.2",
       "type": "library",
       "supplier": {
         "name": "onepub-dev",
@@ -4587,8 +4713,8 @@
         ]
       },
       "name": "posix",
-      "version": "6.5.0",
-      "purl": "pkg:pub/posix@6.5.0",
+      "version": "6.5.2",
+      "purl": "pkg:pub/posix@6.5.2",
       "licenses": [
         {
           "license": {
@@ -4599,13 +4725,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "185ef7606574f789b40f289c233efa52e96dead518aed988e040a10737febb07"
+          "content": "bc1bad54ad2b735816e31f8d4600cfde6c7839975085ddfbca48b6c9f7c4044e"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/posix/versions/6.5.0"
+          "url": "https://pub.dev/packages/posix/versions/6.5.2"
         }
       ],
       "properties": [
@@ -4830,7 +4956,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/quill_native_bridge_android@0.0.1+2",
+      "bom-ref": "pkg:pub/quill_native_bridge_android@0.0.2",
       "type": "library",
       "supplier": {
         "name": "FlutterQuill",
@@ -4839,8 +4965,8 @@
         ]
       },
       "name": "quill_native_bridge_android",
-      "version": "0.0.1+2",
-      "purl": "pkg:pub/quill_native_bridge_android@0.0.1+2",
+      "version": "0.0.2",
+      "purl": "pkg:pub/quill_native_bridge_android@0.0.2",
       "licenses": [
         {
           "license": {
@@ -4851,13 +4977,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "b75c7e6ede362a7007f545118e756b1f19053994144ec9eda932ce5e54a57569"
+          "content": "763f2066d252a10c04cc66add7b7fa967bae8d25aefcd180d5ac808f5af4d143"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/quill_native_bridge_android/versions/0.0.1+2"
+          "url": "https://pub.dev/packages/quill_native_bridge_android/versions/0.0.2"
         }
       ],
       "properties": [
@@ -4872,7 +4998,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/quill_native_bridge_ios@0.0.1",
+      "bom-ref": "pkg:pub/quill_native_bridge_ios@0.0.3",
       "type": "library",
       "supplier": {
         "name": "FlutterQuill",
@@ -4881,8 +5007,8 @@
         ]
       },
       "name": "quill_native_bridge_ios",
-      "version": "0.0.1",
-      "purl": "pkg:pub/quill_native_bridge_ios@0.0.1",
+      "version": "0.0.3",
+      "purl": "pkg:pub/quill_native_bridge_ios@0.0.3",
       "licenses": [
         {
           "license": {
@@ -4893,13 +5019,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "d23de3cd7724d482fe2b514617f8eedc8f296e120fb297368917ac3b59d8099f"
+          "content": "31f9a0a955f85fbcd2576fdb6feb1879c70d770980d7f0118b7f2c0621c6b745"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/quill_native_bridge_ios/versions/0.0.1"
+          "url": "https://pub.dev/packages/quill_native_bridge_ios/versions/0.0.3"
         }
       ],
       "properties": [
@@ -5166,7 +5292,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/riverpod@3.3.2",
+      "bom-ref": "pkg:pub/riverpod@3.4.1",
       "type": "library",
       "supplier": {
         "name": "rrousselGit",
@@ -5175,8 +5301,8 @@
         ]
       },
       "name": "riverpod",
-      "version": "3.3.2",
-      "purl": "pkg:pub/riverpod@3.3.2",
+      "version": "3.4.1",
+      "purl": "pkg:pub/riverpod@3.4.1",
       "licenses": [
         {
           "license": {
@@ -5187,13 +5313,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "17100416c51db7810c71a7bb2c34d1f881faa0074fd452afb0c4db6f8f126c76"
+          "content": "ccd1d45f07d20f894a975eeaa64d14a0dbbcfd0825bb59c3cd89837c2c21b436"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/riverpod/versions/3.3.2"
+          "url": "https://pub.dev/packages/riverpod/versions/3.4.1"
         }
       ],
       "properties": [
@@ -5418,7 +5544,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/shared_preferences_android@2.4.26",
+      "bom-ref": "pkg:pub/shared_preferences_android@2.4.27",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -5427,8 +5553,8 @@
         ]
       },
       "name": "shared_preferences_android",
-      "version": "2.4.26",
-      "purl": "pkg:pub/shared_preferences_android@2.4.26",
+      "version": "2.4.27",
+      "purl": "pkg:pub/shared_preferences_android@2.4.27",
       "licenses": [
         {
           "license": {
@@ -5439,13 +5565,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "93ae5884a9df5d3bb696825bceb3a17590754548b5d740eba51500afc8d088f5"
+          "content": "0634e64bd719f89c012f392938e173521f535d3ecaf66558fa94a056d22b5cc7"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/shared_preferences_android/versions/2.4.26"
+          "url": "https://pub.dev/packages/shared_preferences_android/versions/2.4.27"
         }
       ],
       "properties": [
@@ -6837,7 +6963,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/uuid@4.5.3",
+      "bom-ref": "pkg:pub/uuid@4.6.0",
       "type": "library",
       "supplier": {
         "name": "Daegalus",
@@ -6846,8 +6972,8 @@
         ]
       },
       "name": "uuid",
-      "version": "4.5.3",
-      "purl": "pkg:pub/uuid@4.5.3",
+      "version": "4.6.0",
+      "purl": "pkg:pub/uuid@4.6.0",
       "licenses": [
         {
           "license": {
@@ -6858,13 +6984,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "1fef9e8e11e2991bb773070d4656b7bd5d850967a2456cfc83cf47925ba79489"
+          "content": "9b129329f58692f6e6578329498a8fe9fbe98f090beb764ffbb8ee2eadd01dcd"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/uuid/versions/4.5.3"
+          "url": "https://pub.dev/packages/uuid/versions/4.6.0"
         }
       ],
       "properties": [
@@ -7047,7 +7173,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/video_player@2.12.0",
+      "bom-ref": "pkg:pub/video_player@2.13.0",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -7056,8 +7182,8 @@
         ]
       },
       "name": "video_player",
-      "version": "2.12.0",
-      "purl": "pkg:pub/video_player@2.12.0",
+      "version": "2.13.0",
+      "purl": "pkg:pub/video_player@2.13.0",
       "licenses": [
         {
           "license": {
@@ -7068,13 +7194,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "0431179e1a7a2234a1148f64dde63c73167ca23829815169b24cc0bc6b9444a3"
+          "content": "20ef311160e2ced020a62f38e4cc399a1bf289e722fc5fe37c9d7b18e44c9e8d"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/video_player/versions/2.12.0"
+          "url": "https://pub.dev/packages/video_player/versions/2.13.0"
         }
       ],
       "properties": [
@@ -7089,7 +7215,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/video_player_android@2.11.0",
+      "bom-ref": "pkg:pub/video_player_android@2.12.0",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -7098,8 +7224,8 @@
         ]
       },
       "name": "video_player_android",
-      "version": "2.11.0",
-      "purl": "pkg:pub/video_player_android@2.11.0",
+      "version": "2.12.0",
+      "purl": "pkg:pub/video_player_android@2.12.0",
       "licenses": [
         {
           "license": {
@@ -7110,13 +7236,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "5121de08444d00363efdda630a69ad4d27a208a9f7586482d4909a44a1cdbc63"
+          "content": "e229676f8fade3e0124482495aaa2b548872cc4018b6268adfca4868be16aa74"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/video_player_android/versions/2.11.0"
+          "url": "https://pub.dev/packages/video_player_android/versions/2.12.0"
         }
       ],
       "properties": [
@@ -7341,7 +7467,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/wakelock_plus_platform_interface@1.5.1",
+      "bom-ref": "pkg:pub/wakelock_plus_platform_interface@1.6.0",
       "type": "library",
       "supplier": {
         "name": "fluttercommunity",
@@ -7350,8 +7476,8 @@
         ]
       },
       "name": "wakelock_plus_platform_interface",
-      "version": "1.5.1",
-      "purl": "pkg:pub/wakelock_plus_platform_interface@1.5.1",
+      "version": "1.6.0",
+      "purl": "pkg:pub/wakelock_plus_platform_interface@1.6.0",
       "licenses": [
         {
           "license": {
@@ -7362,13 +7488,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "b13f99e992e7ae6a152e16c5559d3c07ff445b13330192662494e614ca3e7d7b"
+          "content": "0618d1799f0b28bcf98255b4ee8313e6fc4d38589dc4ee5fe5840d57d1aff6da"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/wakelock_plus_platform_interface/versions/1.5.1"
+          "url": "https://pub.dev/packages/wakelock_plus_platform_interface/versions/1.6.0"
         }
       ],
       "properties": [
@@ -8650,7 +8776,7 @@
         "pkg:pub/flutter_lints@6.0.0",
         "pkg:pub/flutter_math_fork@0.7.4",
         "pkg:pub/flutter_quill@11.5.1",
-        "pkg:pub/flutter_riverpod@3.3.2",
+        "pkg:pub/flutter_riverpod@3.4.1",
         "pkg:pub/flutter_secure_storage@10.3.1",
         "pkg:pub/flutter_svg@2.3.0",
         "pkg:pub/highlight@0.7.0",
@@ -8667,8 +8793,8 @@
         "pkg:pub/shared_preferences@2.5.5",
         "pkg:pub/url_launcher@6.3.2",
         "pkg:pub/url_launcher_platform_interface@2.3.2",
-        "pkg:pub/uuid@4.5.3",
-        "pkg:pub/video_player@2.12.0",
+        "pkg:pub/uuid@4.6.0",
+        "pkg:pub/video_player@2.13.0",
         "pkg:pub/video_player_platform_interface@6.9.0",
         "pkg:pub/wakelock_plus@1.5.2",
         "pkg:pub/web@1.1.1",
@@ -8713,7 +8839,7 @@
       "ref": "pkg:pub/archive@4.0.9",
       "dependsOn": [
         "pkg:pub/path@1.9.1",
-        "pkg:pub/posix@6.5.0"
+        "pkg:pub/posix@6.5.2"
       ]
     },
     {
@@ -9075,11 +9201,11 @@
       ]
     },
     {
-      "ref": "pkg:pub/flutter_riverpod@3.3.2",
+      "ref": "pkg:pub/flutter_riverpod@3.4.1",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
         "pkg:pub/meta@1.18.0",
-        "pkg:pub/riverpod@3.3.2",
+        "pkg:pub/riverpod@3.4.1",
         "pkg:pub/state_notifier@1.0.0",
         "sdk:flutter@0.0.0",
         "sdk:flutter_test@0.0.0"
@@ -9090,7 +9216,7 @@
       "dependsOn": [
         "pkg:pub/flutter_secure_storage_darwin@0.3.2",
         "pkg:pub/flutter_secure_storage_linux@3.0.1",
-        "pkg:pub/flutter_secure_storage_platform_interface@2.0.1",
+        "pkg:pub/flutter_secure_storage_platform_interface@2.0.2",
         "pkg:pub/flutter_secure_storage_web@2.1.1",
         "pkg:pub/flutter_secure_storage_windows@4.1.0",
         "pkg:pub/meta@1.18.0",
@@ -9107,12 +9233,12 @@
     {
       "ref": "pkg:pub/flutter_secure_storage_linux@3.0.1",
       "dependsOn": [
-        "pkg:pub/flutter_secure_storage_platform_interface@2.0.1",
+        "pkg:pub/flutter_secure_storage_platform_interface@2.0.2",
         "sdk:flutter@0.0.0"
       ]
     },
     {
-      "ref": "pkg:pub/flutter_secure_storage_platform_interface@2.0.1",
+      "ref": "pkg:pub/flutter_secure_storage_platform_interface@2.0.2",
       "dependsOn": [
         "pkg:pub/plugin_platform_interface@2.1.8",
         "sdk:flutter@0.0.0"
@@ -9121,7 +9247,7 @@
     {
       "ref": "pkg:pub/flutter_secure_storage_web@2.1.1",
       "dependsOn": [
-        "pkg:pub/flutter_secure_storage_platform_interface@2.0.1",
+        "pkg:pub/flutter_secure_storage_platform_interface@2.0.2",
         "pkg:pub/web@1.1.1",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
@@ -9131,7 +9257,7 @@
       "ref": "pkg:pub/flutter_secure_storage_windows@4.1.0",
       "dependsOn": [
         "pkg:pub/ffi@2.2.0",
-        "pkg:pub/flutter_secure_storage_platform_interface@2.0.1",
+        "pkg:pub/flutter_secure_storage_platform_interface@2.0.2",
         "pkg:pub/path@1.9.1",
         "pkg:pub/path_provider@2.1.6",
         "pkg:pub/win32@5.15.0",
@@ -9279,11 +9405,19 @@
       ]
     },
     {
-      "ref": "pkg:pub/jni@1.0.0",
+      "ref": "pkg:pub/is_ios_simulator@1.0.1",
+      "dependsOn": [
+        "pkg:pub/meta@1.18.0",
+        "sdk:flutter@0.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:pub/jni@1.0.1",
       "dependsOn": [
         "pkg:pub/args@2.7.0",
         "pkg:pub/collection@1.19.1",
         "pkg:pub/ffi@2.2.0",
+        "pkg:pub/jni_util@1.0.0",
         "pkg:pub/meta@1.18.0",
         "pkg:pub/package_config@2.2.0",
         "pkg:pub/path@1.9.1",
@@ -9293,8 +9427,14 @@
     {
       "ref": "pkg:pub/jni_flutter@1.0.1",
       "dependsOn": [
-        "pkg:pub/jni@1.0.0",
+        "pkg:pub/jni@1.0.1",
         "sdk:flutter@0.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:pub/jni_util@1.0.0",
+      "dependsOn": [
+        "pkg:pub/path@1.9.1"
       ]
     },
     {
@@ -9334,6 +9474,12 @@
     {
       "ref": "pkg:pub/lints@6.1.0",
       "dependsOn": []
+    },
+    {
+      "ref": "pkg:pub/listen@1.0.0-beta.4",
+      "dependsOn": [
+        "pkg:pub/meta@1.18.0"
+      ]
     },
     {
       "ref": "pkg:pub/logging@1.3.0",
@@ -9458,7 +9604,7 @@
       "ref": "pkg:pub/pasteboard@0.5.0",
       "dependsOn": [
         "pkg:pub/path@1.9.1",
-        "pkg:pub/uuid@4.5.3",
+        "pkg:pub/uuid@4.6.0",
         "pkg:pub/web@1.1.1",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
@@ -9489,7 +9635,7 @@
     {
       "ref": "pkg:pub/path_provider_android@2.3.1",
       "dependsOn": [
-        "pkg:pub/jni@1.0.0",
+        "pkg:pub/jni@1.0.1",
         "pkg:pub/jni_flutter@1.0.1",
         "pkg:pub/path_provider_platform_interface@2.1.3",
         "sdk:flutter@0.0.0"
@@ -9570,7 +9716,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/posix@6.5.0",
+      "ref": "pkg:pub/posix@6.5.2",
       "dependsOn": [
         "pkg:pub/ffi@2.2.0",
         "pkg:pub/meta@1.18.0",
@@ -9608,8 +9754,8 @@
     {
       "ref": "pkg:pub/quill_native_bridge@11.1.0",
       "dependsOn": [
-        "pkg:pub/quill_native_bridge_android@0.0.1+2",
-        "pkg:pub/quill_native_bridge_ios@0.0.1",
+        "pkg:pub/quill_native_bridge_android@0.0.2",
+        "pkg:pub/quill_native_bridge_ios@0.0.3",
         "pkg:pub/quill_native_bridge_macos@0.0.1",
         "pkg:pub/quill_native_bridge_platform_interface@0.0.2+1",
         "pkg:pub/quill_native_bridge_web@0.0.2",
@@ -9618,15 +9764,17 @@
       ]
     },
     {
-      "ref": "pkg:pub/quill_native_bridge_android@0.0.1+2",
+      "ref": "pkg:pub/quill_native_bridge_android@0.0.2",
       "dependsOn": [
         "pkg:pub/quill_native_bridge_platform_interface@0.0.2+1",
         "sdk:flutter@0.0.0"
       ]
     },
     {
-      "ref": "pkg:pub/quill_native_bridge_ios@0.0.1",
+      "ref": "pkg:pub/quill_native_bridge_ios@0.0.3",
       "dependsOn": [
+        "pkg:pub/is_ios_simulator@1.0.1",
+        "pkg:pub/meta@1.18.0",
         "pkg:pub/quill_native_bridge_platform_interface@0.0.2+1",
         "sdk:flutter@0.0.0"
       ]
@@ -9680,16 +9828,17 @@
       ]
     },
     {
-      "ref": "pkg:pub/riverpod@3.3.2",
+      "ref": "pkg:pub/riverpod@3.4.1",
       "dependsOn": [
         "pkg:pub/async@2.13.1",
         "pkg:pub/clock@1.1.2",
         "pkg:pub/collection@1.19.1",
+        "pkg:pub/listen@1.0.0-beta.4",
         "pkg:pub/meta@1.18.0",
         "pkg:pub/stack_trace@1.12.1",
         "pkg:pub/state_notifier@1.0.0",
         "pkg:pub/test@1.31.0",
-        "pkg:pub/uuid@4.5.3"
+        "pkg:pub/uuid@4.6.0"
       ]
     },
     {
@@ -9727,7 +9876,7 @@
     {
       "ref": "pkg:pub/shared_preferences@2.5.5",
       "dependsOn": [
-        "pkg:pub/shared_preferences_android@2.4.26",
+        "pkg:pub/shared_preferences_android@2.4.27",
         "pkg:pub/shared_preferences_foundation@2.5.6",
         "pkg:pub/shared_preferences_linux@2.4.1",
         "pkg:pub/shared_preferences_platform_interface@2.4.2",
@@ -9737,7 +9886,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/shared_preferences_android@2.4.26",
+      "ref": "pkg:pub/shared_preferences_android@2.4.27",
       "dependsOn": [
         "pkg:pub/meta@1.18.0",
         "pkg:pub/shared_preferences_platform_interface@2.4.2",
@@ -10034,7 +10183,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/uuid@4.5.3",
+      "ref": "pkg:pub/uuid@4.6.0",
       "dependsOn": [
         "pkg:pub/crypto@3.0.7",
         "pkg:pub/fixnum@1.1.1"
@@ -10068,11 +10217,11 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:pub/video_player@2.12.0",
+      "ref": "pkg:pub/video_player@2.13.0",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
         "pkg:pub/html@0.15.6",
-        "pkg:pub/video_player_android@2.11.0",
+        "pkg:pub/video_player_android@2.12.0",
         "pkg:pub/video_player_avfoundation@2.11.0",
         "pkg:pub/video_player_platform_interface@6.9.0",
         "pkg:pub/video_player_web@2.4.0",
@@ -10080,7 +10229,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/video_player_android@2.11.0",
+      "ref": "pkg:pub/video_player_android@2.12.0",
       "dependsOn": [
         "pkg:pub/meta@1.18.0",
         "pkg:pub/video_player_platform_interface@6.9.0",
@@ -10121,7 +10270,7 @@
         "pkg:pub/dbus@0.7.13",
         "pkg:pub/meta@1.18.0",
         "pkg:pub/package_info_plus@9.0.1",
-        "pkg:pub/wakelock_plus_platform_interface@1.5.1",
+        "pkg:pub/wakelock_plus_platform_interface@1.6.0",
         "pkg:pub/web@1.1.1",
         "pkg:pub/win32@5.15.0",
         "sdk:flutter@0.0.0",
@@ -10129,7 +10278,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/wakelock_plus_platform_interface@1.5.1",
+      "ref": "pkg:pub/wakelock_plus_platform_interface@1.6.0",
       "dependsOn": [
         "pkg:pub/meta@1.18.0",
         "pkg:pub/plugin_platform_interface@2.1.8",

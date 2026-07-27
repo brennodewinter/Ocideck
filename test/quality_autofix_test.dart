@@ -133,6 +133,42 @@ void main() {
       expect(safeFixForSlide(slide, const ThemeProfile()), isNull);
     });
 
+    test('splitst niet bij ≤ 8 bullets ondanks te veel woorden', () {
+      // Vijf bullets met veel woorden: de woordtelling geeft een melding, maar
+      // splitsen lost niets op — er zijn ≤ 8 bullets, dus de motor laat de
+      // melding staan zodat de gebruiker "Uitleg naar notities" kan kiezen.
+      final deck = deckOf([
+        Slide.create(SlideType.bullets).copyWith(
+          bullets: [
+            'Een tamelijk lange bullet met flink wat woorden erin nummer een',
+            'Een tamelijk lange bullet met flink wat woorden erin nummer twee',
+            'Een tamelijk lange bullet met flink wat woorden erin nummer drie',
+            'Een tamelijk lange bullet met flink wat woorden erin nummer vier',
+            'Een tamelijk lange bullet met flink wat woorden erin nummer vijf',
+          ],
+        ),
+      ]);
+
+      final result = fixAllStructuralQualityIssues(deck);
+
+      // De motor past geen splitsing toe: één dia blijft één dia.
+      expect(result.deck.slides.length, 1);
+      expect(result.applied, 0);
+    });
+
+    test('safeFixForSlide geeft null bij ≤ 8 bullets met te veel woorden', () {
+      final slide = Slide.create(SlideType.bullets).copyWith(
+        bullets: [
+          'Een tamelijk lange bullet met flink wat woorden erin nummer een',
+          'Een tamelijk lange bullet met flink wat woorden erin nummer twee',
+          'Een tamelijk lange bullet met flink wat woorden erin nummer drie',
+          'Een tamelijk lange bullet met flink wat woorden erin nummer vier',
+          'Een tamelijk lange bullet met flink wat woorden erin nummer vijf',
+        ],
+      );
+      expect(safeFixForSlide(slide, const ThemeProfile()), isNull);
+    });
+
     test('maakt een meegesleepte pagina uit zijn reeks los', () {
       // Twee pagina's in één gesplitste reeks: een korte en een propvolle. De
       // gedeelde tekstgrootte sleept de korte mee omlaag (splitRunDragged); de

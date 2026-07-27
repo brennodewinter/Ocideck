@@ -105,8 +105,12 @@ List<Slide>? safeFixForSlide(
       canSplitSentenceBullets(slide)) {
     return [splitSentenceBullets(slide)];
   }
-  // 2. Te vol → splitsen; null wanneer de dia niet te splitsen valt.
-  if (issues.any((i) => _splitClearableKinds.contains(i.kind))) {
+  // 2. Te vol → splitsen; null wanneer de dia niet te splitsen valt. Maar
+  //    niet als de dia al binnen de bulletdrempel past: dan lost splitsen
+  //    niets op en resteren twee-bullet-pagina's. De melding blijft staan
+  //    zodat de gebruiker "Uitleg naar notities" kan kiezen.
+  if (issues.any((i) => _splitClearableKinds.contains(i.kind)) &&
+      visibleContentBulletCount(slide) > _splitThreshold(slide)) {
     return splitBulletSlidePages(slide);
   }
   return null;
@@ -129,13 +133,15 @@ Deck? _applyNextFix(Deck deck, SlideQualityAnalyzer analyzer) {
     return _replaceSlide(deck, issue.slideIndex, [splitSentenceBullets(slide)]);
   }
 
-  // 2. Te volle dia's: splitsen over pagina's. splitBulletSlidePages geeft null
-  //    voor een dia die niet te splitsen valt (geen bullettype, te weinig
-  //    bullets) — dan blijft de melding staan en pakt de gebruiker hem zelf op.
+  // 2. Te volle dia's: splitsen over pagina's. Maar alleen als de dia meer
+  //    bullets heeft dan de drempel: bij ≤ drempel bullets lost splitsen niets
+  //    op (rest van 1-2 bullets is geen slide) en blijft de melding staan
+  //    zodat de gebruiker "Uitleg naar notities" kan kiezen.
   for (final issue in result.issues) {
     if (!_splitClearableKinds.contains(issue.kind)) continue;
     final slide = _slideAt(deck, issue.slideIndex);
     if (slide == null) continue;
+    if (visibleContentBulletCount(slide) <= _splitThreshold(slide)) continue;
     final pages = splitBulletSlidePages(slide);
     if (pages == null) continue;
     return _replaceSlide(deck, issue.slideIndex, pages);
@@ -153,6 +159,16 @@ Deck? _applyNextFix(Deck deck, SlideQualityAnalyzer analyzer) {
 
   return null;
 }
+
+/// De paginadrempel waarboven splitsen zinvol is: het aantal bullets dat op
+/// één pagina past volgens de leesbaarheidsnorm. Alleen boven deze grens
+/// verdeelt "Splits slide" de inhoud; bij ≤ drempel blijft de melding staan
+/// en kiest de gebruiker "Uitleg naar notities".
+int _splitThreshold(Slide slide) => slide.type == SlideType.twoBullets
+    ? kTwoColumnBulletWarningCount
+    : (slide.listStyle == ListStyle.checklist
+          ? kChecklistBulletWarningCount
+          : kSingleColumnBulletWarningCount);
 
 Slide? _slideAt(Deck deck, int index) =>
     index >= 0 && index < deck.slides.length ? deck.slides[index] : null;

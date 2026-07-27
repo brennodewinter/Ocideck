@@ -225,7 +225,7 @@ final _labelPeriod = RegExp(r'\.(?:\s+|$)');
 
 /// Het minimum aantal woorden dat de uitleg moet tellen om het schrappen zinvol
 /// te maken. Anders zou "Q3: klaar" tot "Q3" verschrompelen — dat lost niets op.
-const int _minExplanationWords = 4;
+const int _minExplanationWords = 2;
 
 /// Het label voor een bullet die géén scheidingsteken heeft: gewoon de eerste
 /// zoveel woorden. Een volzin als bullet ("Wij hebben besloten de infrastructuur
