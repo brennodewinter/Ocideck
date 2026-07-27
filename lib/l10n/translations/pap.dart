@@ -730,6 +730,16 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Fix alle problemen': 'Drecha tur problema',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'A drecha e problemanan ku por a wòrdu drechá outomátikamente. Loke ta resta ta pidi un desishon.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Nada ku ta drecha su mes — esaki ta pidi un desishon.',
+  'Probleem op deze dia oplossen': 'Drecha e problema riba e slide aki',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'E slide aki ta redaktá i lo no wòrdu kambiá.',
+  'Geen probleem om hier op te lossen.':
+      'No tin ningun problema pa drecha aki.',
   'SBAR-overdracht': 'Entrega SBAR',
   '(A)MIST traumaoverdracht': '(A)MIST entrega di trauma',
   'Multidisciplinair overleg (MDO)': 'Reunion multidisiplinario (MDT)',

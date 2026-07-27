@@ -1774,6 +1774,15 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Fix alle problemen': 'Opravit všechny problémy',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Problémy, které šlo vyřešit automaticky, jsou vyřízené. Zbytek vyžaduje rozhodnutí.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Nic, co by se vyřešilo samo — tohle vyžaduje rozhodnutí.',
+  'Probleem op deze dia oplossen': 'Opravit problém na tomto snímku',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Tento snímek je začerněný a nebude se měnit.',
+  'Geen probleem om hier op te lossen.': 'Zde není žádný problém k opravě.',
   'SBAR-overdracht': 'Předání SBAR',
   '(A)MIST traumaoverdracht': '(A)MIST předání traumatu',
   'Multidisciplinair overleg (MDO)': 'Multidisciplinární porada (MDT)',

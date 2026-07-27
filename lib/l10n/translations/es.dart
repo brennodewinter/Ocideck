@@ -727,6 +727,16 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Fix alle problemen': 'Corregir todos los problemas',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Se han resuelto los problemas que podían corregirse automáticamente. Lo que queda requiere una decisión.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Nada que se resuelva solo: esto requiere una decisión.',
+  'Probleem op deze dia oplossen': 'Corregir el problema de esta diapositiva',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Esta diapositiva está redactada y no se modificará.',
+  'Geen probleem om hier op te lossen.':
+      'Aquí no hay ningún problema que corregir.',
   'SBAR-overdracht': 'Transferencia SBAR',
   '(A)MIST traumaoverdracht': '(A)MIST transferencia de trauma',
   'Multidisciplinair overleg (MDO)': 'Reunión multidisciplinar (MDT)',

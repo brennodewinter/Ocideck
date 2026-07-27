@@ -1806,6 +1806,15 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Fix alle problemen': 'Deisigh gach fadhb',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Réitíodh na fadhbanna in-réitithe go huathoibríoch. Éilíonn a bhfuil fágtha rogha.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Níl aon rud a réitíonn as féin — teastaíonn rogha anseo.',
+  'Probleem op deze dia oplossen': 'Deisigh an fhadhb ar an sleamhnán seo',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Tá an sleamhnán seo folaithe agus ní athrófar é.',
+  'Geen probleem om hier op te lossen.': 'Níl aon fhadhb le deisiú anseo.',
   'SBAR-overdracht': 'Seachadadh SBAR',
   '(A)MIST traumaoverdracht': '(A)MIST seachadadh tráma',
   'Multidisciplinair overleg (MDO)': 'Cruinniú foirne ildisciplíneach (MDT)',

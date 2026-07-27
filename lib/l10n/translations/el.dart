@@ -1798,6 +1798,17 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Fix alle problemen': 'Επιδιόρθωση όλων των προβλημάτων',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Τα προβλήματα που διορθώνονται αυτόματα αντιμετωπίστηκαν. Ό,τι απομένει απαιτεί μια επιλογή.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Τίποτα που να διορθώνεται αυτόματα — εδώ χρειάζεται μια επιλογή.',
+  'Probleem op deze dia oplossen':
+      'Επιδιόρθωση του προβλήματος σε αυτή τη διαφάνεια',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Αυτή η διαφάνεια είναι αποκρυμμένη και δεν θα τροποποιηθεί.',
+  'Geen probleem om hier op te lossen.':
+      'Δεν υπάρχει πρόβλημα να διορθωθεί εδώ.',
   'SBAR-overdracht': 'Παράδοση SBAR',
   '(A)MIST traumaoverdracht': '(A)MIST παράδοση τραύματος',
   'Multidisciplinair overleg (MDO)': 'Πολυεπιστημονική σύσκεψη (MDT)',

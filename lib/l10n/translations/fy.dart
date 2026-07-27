@@ -731,6 +731,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Fix alle problemen': 'Alle problemen oplosse',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'De problemen dy\'t fansels op te lossen wiene, binne oanpakt. Wat oerbliuwt freget om in kar.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Neat dat fansels op te lossen is — dit freget om in kar.',
+  'Probleem op deze dia oplossen': 'Probleem op dizze slide oplosse',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Dizze slide is redigearre en wurdt net oanpast.',
+  'Geen probleem om hier op te lossen.': 'Hjir is gjin probleem op te lossen.',
   'SBAR-overdracht': 'SBAR-oerdracht',
   '(A)MIST traumaoverdracht': '(A)MIST-trauma-oerdracht',
   'Multidisciplinair overleg (MDO)': 'Multydissiplinêr oerlis (MDT)',

@@ -1778,6 +1778,15 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Fix alle problemen': 'Opraviť všetky problémy',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Problémy, ktoré sa dali vyriešiť automaticky, sú vybavené. Zvyšok vyžaduje rozhodnutie.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Nič, čo by sa vyriešilo samo — toto vyžaduje rozhodnutie.',
+  'Probleem op deze dia oplossen': 'Opraviť problém na tejto snímke',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Táto snímka je začiernená a nebude sa meniť.',
+  'Geen probleem om hier op te lossen.': 'Tu nie je žiadny problém na opravu.',
   'SBAR-overdracht': 'Odovzdanie SBAR',
   '(A)MIST traumaoverdracht': '(A)MIST odovzdanie traumy',
   'Multidisciplinair overleg (MDO)': 'Multidisciplinárne stretnutie (MDT)',
