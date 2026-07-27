@@ -1762,6 +1762,66 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'SBAR-overdracht': 'SBAR üleandmine',
+  '(A)MIST traumaoverdracht': '(A)MIST trauma üleandmine',
+  'Multidisciplinair overleg (MDO)': 'Multidistsiplinaarne koosolek (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Kirurgilise ohutuse kontrollnimekiri (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Õendusvahetuse üleandmine',
+  'Inwerkplan (30-60-90 dagen)': 'Sisseelamiskava (30-60-90 päeva)',
+  'Eerste dag / introductie': 'Esimene päev / sissejuhatus',
+  'Buddy- / mentorafspraak': 'Buddy / mentori kava',
+  'Uitdiensttreding / offboarding': 'Offboarding / lahkumine',
+  'IMSAFE fit-to-fly-check': 'IMSAFE lennukõlblikkuse kontroll',
+  'Crew- / departurebriefing': 'Meeskonna / väljalennu briifing',
+  'Voorvalmelding (just culture)': 'Juhtumiteade (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / LMRA ohutuskontroll',
+  'Evenement- en crowd-safetybriefing':
+      'Ürituse ja rahvamassi ohutuse briifing',
+  'Ontruimings- en BHV-oefening': 'Evakuatsiooni- ja BHV-õppus',
+  'Werkvergunning (permit to work)': 'Tööluba (permit to work)',
+  'METHANE grootschalig-incidentmelding': 'METHANE suurõnnetuse teade',
+  'GRIP-opschaling': 'GRIP-eskaleerimine',
+  'Maritieme passage-/brugbriefing':
+      'Meresõidu ülesõidu / komandosilla briifing',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Anna patsient või olukord struktureeritult üle: olukord, taust, hinnang ja soovitus.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Haiglaeelne üleandmine erakorralise meditsiini osakonda: vanus, mehhanism, vigastused, tunnused ja ravi.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Arutage juhtumit erialade üleselt: pilt, ravieesmärk, otsused ja kokkulepped.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out ja sign out protseduuri ümber WHO kontrollnimekirja järgi.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Anna hooldus patsiendi kaupa üle: seisund, tähelepanupunktid ja lahtised ülesanded.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Sea ootused, verstapostid ja tugi esimeseks 30, 60 ja 90 päevaks.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Inimesed, süsteemid, majareeglid ning turvalisuse ja privaatsuse alused uuele töötajale.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Eesmärgid, rütm ja kontrollpunktid uustulnuka ning tema buddy või mentori vahel.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Teadmiste üleandmine, juurdepääsu tühistamine ja korralik lahkumisvestlus töölt lahkumisel.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Isiklik go/no-go: haigus, ravimid, stress, alkohol, väsimus ja meeleolu.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Ülesannete jaotus, ohud ja vead (TEM) ning kõrvalekalded enne väljalendu koos meeskonnaga.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Teata juhtumist asjalikult ja süüdistamata: mis, tegurid, risk ja parendus.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Ülesanne, ohud, meetmed ja kinnitus vahetult enne töö algust.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Mahutavus, riskid, inimvood ja rollid intsidendi korral ürituse jaoks.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Stsenaarium, ülesanded, kogunemiskoht, tähelepanekud ja evakuatsiooni hindamine.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Registreeri töö, isolatsioonid, kontrollid ja luba kõrge riskiga tööks.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Esimene teade suurõnnetusel: suurõnnetus, täpne asukoht, tüüp, ohud, juurdepääs, arv ja teenistused.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Määra GRIP-tase, kriisistruktuur, rollid ning üles- ja allaskaleerimise otsused.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Reisiplaan ja komandosilla kokkulepped (appraisal, planning, execution, monitoring) koos marsruudi kriitiliste punktidega.',
   'Online media staat uit — aanzetten': 'Veebimeedia on väljas — lülita sisse',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} sisaldab käivitatavat sisu ja seda ei impordita.',

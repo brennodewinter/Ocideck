@@ -1806,6 +1806,65 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'SBAR-overdracht': 'Seachadadh SBAR',
+  '(A)MIST traumaoverdracht': '(A)MIST seachadadh tráma',
+  'Multidisciplinair overleg (MDO)': 'Cruinniú foirne ildisciplíneach (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Seicliosta sábháilteachta máinliachta (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Seachadadh seal altranais',
+  'Inwerkplan (30-60-90 dagen)': 'Plean ionduchtaithe (30-60-90 lá)',
+  'Eerste dag / introductie': 'An chéad lá / ionduchtú',
+  'Buddy- / mentorafspraak': 'Plean buddy / meantóra',
+  'Uitdiensttreding / offboarding': 'Offboarding / imeacht',
+  'IMSAFE fit-to-fly-check': 'IMSAFE seiceáil oiriúnachta don eitilt',
+  'Crew- / departurebriefing': 'Faisnéisiú criú / imeachta',
+  'Voorvalmelding (just culture)': 'Tuairisc teagmhais (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / seiceáil sábháilteachta LMRA',
+  'Evenement- en crowd-safetybriefing':
+      'Faisnéisiú imeachta agus sábháilteachta sló',
+  'Ontruimings- en BHV-oefening': 'Cleachtadh aslonnaithe agus BHV',
+  'Werkvergunning (permit to work)': 'Ceadúnas oibre (permit to work)',
+  'METHANE grootschalig-incidentmelding': 'METHANE tuairisc mórtheagmhais',
+  'GRIP-opschaling': 'Géarú GRIP',
+  'Maritieme passage-/brugbriefing': 'Faisnéisiú muirí pasáiste / droichid',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Seachaid othar nó cás go struchtúrtha: Staid, Cúlra, Measúnú agus Moladh.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Seachadadh réamhospidéil don rannóg éigeandála le haois, meicníocht, gortuithe, comharthaí agus cóireáil.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Pléigh cás thar na disciplíní: léargas, sprioc chóireála, cinntí agus gníomhartha.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out agus sign out timpeall ar nós imeachta de réir seicliosta WHO.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Seachaid an cúram in aghaidh an othair: riocht, pointí airde agus tascanna oscailte.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Leag amach ionchais, clocha míle agus tacaíocht do na chéad 30, 60 agus 90 lá.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Daoine, córais, rialacha tí agus bunúsanna sábháilteachta agus príobháideachais d\'fhostaí nua.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Spriocanna, rithim agus seicphointí idir an nuatheachtaí agus a bhuddy nó a mheantóir.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Aistriú eolais, cúlghairm rochtana agus agallamh imeachta cuí nuair a fhágann duine.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Go/no-go pearsanta: tinneas, cógais, strus, alcól, tuirse agus mothúchán.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Roinnt tascanna, bagairtí agus earráidí (TEM) agus diallais roimh imeacht leis an gcriú.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Tuairiscigh teagmhas go fírinneach agus gan milleán: cad, tosca, riosca agus feabhsú.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Tasc, guaiseacha, bearta agus faomhadh díreach sula dtosaíonn an obair.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Toilleadh, rioscaí, sreabhadh sló agus rólanna teagmhais d\'imeacht.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Cás, tascanna, láthair chruinnithe, breathnuithe agus meastóireacht ar aslonnú.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Taifead obair, aonraithe, seiceálacha agus údarú d\'obair ardriosca.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'An chéad tuairisc ag mórtheagmhas: mórtheagmhas, suíomh cruinn, cineál, guaiseacha, rochtain, líon agus seirbhísí.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Socraigh an leibhéal GRIP, an struchtúr géarchéime, na rólanna agus cinntí méadaithe agus laghdaithe.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Plean pasáiste agus comhaontuithe droichid (appraisal, planning, execution, monitoring) le pointí criticiúla bealaigh.',
   'Online media staat uit — aanzetten': 'Meáin ar líne as — cuir ar siúl',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       'Tá ábhar inrite i {bestand} agus ní dhéanfar é a iompórtáil.',

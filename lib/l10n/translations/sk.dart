@@ -1778,6 +1778,65 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'SBAR-overdracht': 'Odovzdanie SBAR',
+  '(A)MIST traumaoverdracht': '(A)MIST odovzdanie traumy',
+  'Multidisciplinair overleg (MDO)': 'Multidisciplinárne stretnutie (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Kontrolný zoznam chirurgickej bezpečnosti (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Odovzdanie ošetrovateľskej zmeny',
+  'Inwerkplan (30-60-90 dagen)': 'Plán zaškolenia (30-60-90 dní)',
+  'Eerste dag / introductie': 'Prvý deň / uvedenie',
+  'Buddy- / mentorafspraak': 'Plán buddyho / mentora',
+  'Uitdiensttreding / offboarding': 'Offboarding / odchod',
+  'IMSAFE fit-to-fly-check': 'IMSAFE kontrola spôsobilosti na let',
+  'Crew- / departurebriefing': 'Briefing posádky / pred odletom',
+  'Voorvalmelding (just culture)': 'Hlásenie udalosti (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / bezpečnostná kontrola LMRA',
+  'Evenement- en crowd-safetybriefing':
+      'Briefing k podujatiu a bezpečnosti davu',
+  'Ontruimings- en BHV-oefening': 'Nácvik evakuácie a BHV',
+  'Werkvergunning (permit to work)': 'Povolenie na prácu (permit to work)',
+  'METHANE grootschalig-incidentmelding': 'METHANE hlásenie hromadnej udalosti',
+  'GRIP-opschaling': 'Eskalácia GRIP',
+  'Maritieme passage-/brugbriefing': 'Námorný briefing plavby / mostíka',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Odovzdajte pacienta alebo situáciu štruktúrovane: situácia, súvislosti, hodnotenie a odporúčanie.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Prednemocničné odovzdanie na urgentný príjem s vekom, mechanizmom, zraneniami, príznakmi a liečbou.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Preberte prípad naprieč odbormi: obraz, cieľ liečby, rozhodnutia a úlohy.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out a sign out okolo zákroku podľa kontrolného zoznamu WHO.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Odovzdajte starostlivosť za každého pacienta: stav, body pozornosti a otvorené úlohy.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Stanovte očakávania, míľniky a podporu na prvých 30, 60 a 90 dní.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Ľudia, systémy, interné pravidlá a základy bezpečnosti a súkromia pre nového zamestnanca.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Ciele, rytmus a kontrolné body medzi nováčikom a jeho buddym alebo mentorom.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Prenos znalostí, odobratie prístupov a poriadny výstupný rozhovor pri odchode.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Osobné go/no-go: choroba, lieky, stres, alkohol, únava a nálada.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Rozdelenie úloh, hrozby a chyby (TEM) a odchýlky pred odletom s posádkou.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Nahláste udalosť vecne a bez hľadania viny: čo, faktory, riziko a zlepšenie.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Úloha, nebezpečenstvá, opatrenia a schválenie tesne pred začatím práce.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Kapacita, riziká, pohyb osôb a roly pri incidente pre podujatie.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Scenár, úlohy, zhromaždisko, pozorovania a vyhodnotenie evakuácie.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Zaznamenajte prácu, izolácie, kontroly a povolenie na vysokorizikové práce.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Prvé hlásenie pri hromadnej udalosti: hromadná udalosť, presná poloha, typ, nebezpečenstvá, prístup, počet a služby.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Určte úroveň GRIP, krízovú štruktúru, roly a rozhodnutia o eskalácii a deeskalácii.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Plán plavby a dohody na mostíku (appraisal, planning, execution, monitoring) s kritickými bodmi trasy.',
   'Online media staat uit — aanzetten': 'Online médiá sú vypnuté — zapnúť',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} obsahuje spustiteľný obsah a nebude importovaný.',

@@ -1777,6 +1777,64 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'SBAR-overdracht': 'SBAR primopredaja',
+  '(A)MIST traumaoverdracht': '(A)MIST primopredaja traume',
+  'Multidisciplinair overleg (MDO)': 'Multidisciplinarni sastanak (MDT)',
+  'Chirurgische veiligheidscheck (WHO)': 'Kirurški sigurnosni popis (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Sestrinska primopredaja smjene',
+  'Inwerkplan (30-60-90 dagen)': 'Plan uvođenja (30-60-90 dana)',
+  'Eerste dag / introductie': 'Prvi dan / uvođenje',
+  'Buddy- / mentorafspraak': 'Plan buddyja / mentora',
+  'Uitdiensttreding / offboarding': 'Offboarding / odlazak',
+  'IMSAFE fit-to-fly-check': 'IMSAFE provjera sposobnosti za let',
+  'Crew- / departurebriefing': 'Brifing posade / prije polaska',
+  'Voorvalmelding (just culture)': 'Prijava događaja (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / LMRA sigurnosna provjera',
+  'Evenement- en crowd-safetybriefing':
+      'Brifing o događaju i sigurnosti mnoštva',
+  'Ontruimings- en BHV-oefening': 'Vježba evakuacije i BHV-a',
+  'Werkvergunning (permit to work)': 'Radna dozvola (permit to work)',
+  'METHANE grootschalig-incidentmelding': 'METHANE prijava velikog incidenta',
+  'GRIP-opschaling': 'GRIP eskalacija',
+  'Maritieme passage-/brugbriefing': 'Pomorski brifing prolaska / mosta',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Strukturirano predajte pacijenta ili situaciju: situacija, pozadina, procjena i preporuka.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Prehospitalna primopredaja hitnom prijmu s dobi, mehanizmom, ozljedama, znakovima i liječenjem.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Raspravite slučaj među strukama: slika, cilj liječenja, odluke i dogovori.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out i sign out oko zahvata prema WHO popisu.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Predajte skrb po pacijentu: stanje, točke pažnje i otvoreni zadaci.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Odredite očekivanja, prekretnice i podršku za prvih 30, 60 i 90 dana.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Ljudi, sustavi, kućna pravila te osnove sigurnosti i privatnosti za novog zaposlenika.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Ciljevi, ritam i kontrolne točke između novaka i njegova buddyja ili mentora.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Prijenos znanja, ukidanje pristupa i pristojan izlazni razgovor pri odlasku.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Osobni go/no-go: bolest, lijekovi, stres, alkohol, umor i raspoloženje.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Raspodjela zadataka, prijetnje i pogreške (TEM) te odstupanja prije polaska s posadom.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Prijavite događaj činjenično i bez traženja krivca: što, čimbenici, rizik i poboljšanje.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Zadatak, opasnosti, mjere i odobrenje neposredno prije početka rada.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Kapacitet, rizici, protok ljudi i uloge pri incidentu za događaj.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Scenarij, zadaci, zborno mjesto, opažanja i evaluacija evakuacije.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Zabilježite rad, izolacije, provjere i odobrenje za visokorizične radove.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Prva dojava kod velikog incidenta: veliki incident, točna lokacija, vrsta, opasnosti, pristup, broj i službe.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Odredite razinu GRIP-a, kriznu strukturu, uloge te odluke o eskalaciji i deeskalaciji.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Plan plovidbe i dogovori na mostu (appraisal, planning, execution, monitoring) s kritičnim točkama rute.',
   'Online media staat uit — aanzetten': 'Online medija isključena — uključi',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} sadrži izvršni sadržaj i neće biti uvezen.',

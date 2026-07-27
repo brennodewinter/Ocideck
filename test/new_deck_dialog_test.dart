@@ -169,10 +169,15 @@ void main() {
 
     // Reveal the Informatieveiligheid module → it appears.
     await _Harness(reveal: true).open(tester);
+    // Deze test scrolt in één keer van bovenaan door naar één ver sjabloon
+    // (MIAUW, sorteert onder de M). Met de bredere catalogus staat het dieper,
+    // dus een royaal scrollbudget zoals de rest van dit bestand (maxScrolls:
+    // 200); de standaard 50 reikt niet meer tot onderaan.
     await tester.scrollUntilVisible(
       find.text(miauw.title),
       60,
       scrollable: find.byType(Scrollable).last,
+      maxScrolls: 200,
     );
     expect(find.text(miauw.title), findsOneWidget);
   });

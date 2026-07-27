@@ -1787,6 +1787,65 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'SBAR-overdracht': 'Traditio SBAR',
+  '(A)MIST traumaoverdracht': '(A)MIST traditio traumatis',
+  'Multidisciplinair overleg (MDO)': 'Conventus multidisciplinaris (MDT)',
+  'Chirurgische veiligheidscheck (WHO)': 'Index securitatis chirurgicae (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Traditio custodiae curatricum',
+  'Inwerkplan (30-60-90 dagen)': 'Consilium initiationis (30-60-90 dies)',
+  'Eerste dag / introductie': 'Dies primus / introductio',
+  'Buddy- / mentorafspraak': 'Consilium socii / magistri',
+  'Uitdiensttreding / offboarding': 'Digressio / offboarding',
+  'IMSAFE fit-to-fly-check': 'IMSAFE probatio idoneitatis ad volandum',
+  'Crew- / departurebriefing': 'Praelocutio manus / profectionis',
+  'Voorvalmelding (just culture)': 'Nuntiatio eventus (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / probatio securitatis LMRA',
+  'Evenement- en crowd-safetybriefing':
+      'Praelocutio eventus et securitatis turbae',
+  'Ontruimings- en BHV-oefening': 'Exercitatio evacuationis et BHV',
+  'Werkvergunning (permit to work)': 'Licentia operis (permit to work)',
+  'METHANE grootschalig-incidentmelding':
+      'METHANE nuntiatio incidentis maioris',
+  'GRIP-opschaling': 'Ascensio GRIP',
+  'Maritieme passage-/brugbriefing': 'Praelocutio transitus / pontis maritimi',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Aegrum vel condicionem ordinate trade: Condicio, Antecedentia, Aestimatio et Commendatio.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Traditio ante hospitium ad sedem urgentiae cum aetate, mechanismo, laesionibus, signis et curatione.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Casum inter omnes disciplinas tractate: imago, propositum curationis, decreta et pacta.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out et sign out circa procedimentum secundum indicem WHO.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Curam pro singulis aegris trade: status, puncta attentionis et munera pendentia.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Exspectationes, metas et adiutorium per primos 30, 60 et 90 dies designa.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Homines, systemata, regulae domesticae et fundamenta securitatis et privati pro novo operario.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Proposita, tempus et stationes inter novum et socium vel magistrum.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Traditio scientiae, revocatio accessus et colloquium discessus decens cum quis abit.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Go/no-go personale: morbus, medicamenta, tensio, vinum, lassitudo et animus.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Distributio munerum, minae et errores (TEM) et aberrationes ante profectionem cum manu.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Eventum vere et sine culpa nuntia: quid, causae, periculum et emendatio.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Munus, pericula, remedia et assensus paulo ante initium operis.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Capacitas, pericula, fluxus hominum et partes in casu incidentis pro eventu.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Argumentum, munera, locus conveniendi, observationes et aestimatio evacuationis.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Opus, segregationes, inspectiones et licentiam pro opere periculoso registra.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Prima nuntiatio in incidenti maiore: incidens maius, locus exactus, genus, pericula, aditus, numerus et officia.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'GRIP gradum, structuram discriminis, partes et decreta de ascensu et descensu designa.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Consilium itineris et pacta pontis (appraisal, planning, execution, monitoring) cum punctis viae criticis.',
   'Online media staat uit — aanzetten': 'Media in linea exstincta — activa',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} contentum exsecutabile continet neque importabitur.',

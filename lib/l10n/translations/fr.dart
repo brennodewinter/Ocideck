@@ -730,6 +730,67 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'SBAR-overdracht': 'Transmission SBAR',
+  '(A)MIST traumaoverdracht': 'Transmission trauma (A)MIST',
+  'Multidisciplinair overleg (MDO)': 'Réunion pluridisciplinaire (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Checklist de sécurité chirurgicale (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Transmission de service infirmier',
+  'Inwerkplan (30-60-90 dagen)': 'Plan d\'intégration (30-60-90 jours)',
+  'Eerste dag / introductie': 'Premier jour / accueil',
+  'Buddy- / mentorafspraak': 'Plan buddy / mentor',
+  'Uitdiensttreding / offboarding': 'Offboarding / départ',
+  'IMSAFE fit-to-fly-check': 'IMSAFE contrôle d\'aptitude au vol',
+  'Crew- / departurebriefing': 'Briefing équipage / départ',
+  'Voorvalmelding (just culture)': 'Signalement d\'événement (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / contrôle de sécurité LMRA',
+  'Evenement- en crowd-safetybriefing':
+      'Briefing événement et sécurité des foules',
+  'Ontruimings- en BHV-oefening': 'Exercice d\'évacuation et BHV',
+  'Werkvergunning (permit to work)': 'Permis de travail (permit to work)',
+  'METHANE grootschalig-incidentmelding':
+      'METHANE signalement d\'incident majeur',
+  'GRIP-opschaling': 'Montée en puissance GRIP',
+  'Maritieme passage-/brugbriefing':
+      'Briefing de passage / passerelle maritime',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Transmettez un patient ou une situation de façon structurée : Situation, Contexte, Évaluation et Recommandation.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Transmission préhospitalière aux urgences avec âge, mécanisme, lésions, signes et traitement.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Discutez d\'un cas entre les disciplines : tableau, objectif de traitement, décisions et actions.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out et sign out autour d\'une intervention selon la checklist WHO.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Transmettez les soins par patient : état, points d\'attention et tâches en cours.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Définissez attentes, jalons et accompagnement sur les 30, 60 et 90 premiers jours.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Les personnes, les systèmes, le règlement intérieur et les bases de sécurité et de confidentialité pour un nouvel arrivant.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Objectifs, rythme et points de suivi entre le nouveau venu et son buddy ou mentor.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Transfert de connaissances, retrait des accès et un entretien de départ correct lors du départ.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Go/no-go personnel : maladie, médicaments, stress, alcool, fatigue et émotion.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Répartition des tâches, menaces et erreurs (TEM) et écarts avant le départ avec l\'équipage.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Signalez un événement de façon factuelle et sans recherche de faute : quoi, facteurs, risque et amélioration.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Tâche, dangers, mesures et validation juste avant le début du travail.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Capacité, risques, flux de personnes et rôles en cas d\'incident pour un événement.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Scénario, tâches, point de rassemblement, observations et évaluation d\'une évacuation.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Consignez travail, isolements, contrôles et autorisation pour les travaux à haut risque.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Premier message lors d\'un incident majeur : incident majeur, localisation exacte, type, dangers, accès, nombre et services.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Définissez le niveau GRIP, la structure de crise, les rôles et les décisions de montée et de descente.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Plan de route et accords de passerelle (appraisal, planning, execution, monitoring) avec points critiques de la route.',
   'Online media staat uit — aanzetten': 'Médias en ligne désactivés — activer',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} contient du contenu exécutable et ne sera pas importé.',

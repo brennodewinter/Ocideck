@@ -1798,6 +1798,65 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'SBAR-overdracht': 'Παράδοση SBAR',
+  '(A)MIST traumaoverdracht': '(A)MIST παράδοση τραύματος',
+  'Multidisciplinair overleg (MDO)': 'Πολυεπιστημονική σύσκεψη (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Λίστα ελέγχου χειρουργικής ασφάλειας (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Παράδοση βάρδιας νοσηλευτών',
+  'Inwerkplan (30-60-90 dagen)': 'Σχέδιο ένταξης (30-60-90 ημέρες)',
+  'Eerste dag / introductie': 'Πρώτη μέρα / υποδοχή',
+  'Buddy- / mentorafspraak': 'Πλάνο buddy / μέντορα',
+  'Uitdiensttreding / offboarding': 'Offboarding / αποχώρηση',
+  'IMSAFE fit-to-fly-check': 'IMSAFE έλεγχος καταλληλότητας για πτήση',
+  'Crew- / departurebriefing': 'Ενημέρωση πληρώματος / αναχώρησης',
+  'Voorvalmelding (just culture)': 'Αναφορά συμβάντος (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / έλεγχος ασφάλειας LMRA',
+  'Evenement- en crowd-safetybriefing':
+      'Ενημέρωση εκδήλωσης και ασφάλειας πλήθους',
+  'Ontruimings- en BHV-oefening': 'Άσκηση εκκένωσης και BHV',
+  'Werkvergunning (permit to work)': 'Άδεια εργασίας (permit to work)',
+  'METHANE grootschalig-incidentmelding': 'METHANE αναφορά μεγάλου συμβάντος',
+  'GRIP-opschaling': 'Κλιμάκωση GRIP',
+  'Maritieme passage-/brugbriefing': 'Ναυτικό briefing διέλευσης / γέφυρας',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Παραδώστε έναν ασθενή ή μια κατάσταση με δομή: Κατάσταση, Ιστορικό, Αξιολόγηση και Σύσταση.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Προνοσοκομειακή παράδοση στα επείγοντα με ηλικία, μηχανισμό, τραυματισμούς, σημεία και θεραπεία.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Συζητήστε ένα περιστατικό μεταξύ ειδικοτήτων: εικόνα, στόχος θεραπείας, αποφάσεις και ενέργειες.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out και sign out γύρω από μια επέμβαση σύμφωνα με τη λίστα ελέγχου WHO.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Παραδώστε τη φροντίδα ανά ασθενή: κατάσταση, σημεία προσοχής και εκκρεμείς εργασίες.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Καθορίστε προσδοκίες, ορόσημα και υποστήριξη για τις πρώτες 30, 60 και 90 ημέρες.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Άνθρωποι, συστήματα, εσωτερικοί κανόνες και οι βάσεις ασφάλειας και ιδιωτικότητας για έναν νέο εργαζόμενο.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Στόχοι, ρυθμός και σημεία ελέγχου μεταξύ του νεοεισερχόμενου και του buddy ή μέντορά του.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Μεταφορά γνώσης, ανάκληση προσβάσεων και μια σωστή συνέντευξη αποχώρησης όταν κάποιος φεύγει.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Προσωπικό go/no-go: ασθένεια, φάρμακα, άγχος, αλκοόλ, κόπωση και διάθεση.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Κατανομή εργασιών, απειλές και σφάλματα (TEM) και αποκλίσεις πριν την αναχώρηση με το πλήρωμα.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Αναφέρετε ένα συμβάν με βάση τα γεγονότα και χωρίς απόδοση ευθυνών: τι, παράγοντες, κίνδυνος και βελτίωση.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Εργασία, κίνδυνοι, μέτρα και έγκριση λίγο πριν ξεκινήσει η δουλειά.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Χωρητικότητα, κίνδυνοι, ροή πλήθους και ρόλοι σε περιστατικό για μια εκδήλωση.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Σενάριο, εργασίες, σημείο συγκέντρωσης, παρατηρήσεις και αξιολόγηση μιας εκκένωσης.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Καταγράψτε εργασία, απομονώσεις, ελέγχους και έγκριση για εργασίες υψηλού κινδύνου.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Πρώτη αναφορά σε μεγάλο συμβάν: μεγάλο συμβάν, ακριβής τοποθεσία, τύπος, κίνδυνοι, πρόσβαση, αριθμός και υπηρεσίες.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Καθορίστε το επίπεδο GRIP, τη δομή κρίσης, τους ρόλους και τις αποφάσεις κλιμάκωσης και αποκλιμάκωσης.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Σχέδιο πλου και συμφωνίες γέφυρας (appraisal, planning, execution, monitoring) με κρίσιμα σημεία διαδρομής.',
   'Online media staat uit — aanzetten':
       'Διαδικτυακά μέσα απενεργοποιημένα — ενεργοποίηση',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':

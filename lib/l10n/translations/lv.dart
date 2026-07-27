@@ -1770,6 +1770,65 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'SBAR-overdracht': 'SBAR nodošana',
+  '(A)MIST traumaoverdracht': '(A)MIST traumas nodošana',
+  'Multidisciplinair overleg (MDO)': 'Daudznozaru komandas sanāksme (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Ķirurģiskās drošības kontrolsaraksts (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Māsu maiņas nodošana',
+  'Inwerkplan (30-60-90 dagen)': 'Ievadīšanas plāns (30-60-90 dienas)',
+  'Eerste dag / introductie': 'Pirmā diena / ievads',
+  'Buddy- / mentorafspraak': 'Badija / mentora plāns',
+  'Uitdiensttreding / offboarding': 'Aiziešana / offboarding',
+  'IMSAFE fit-to-fly-check': 'IMSAFE lidojumderīguma pārbaude',
+  'Crew- / departurebriefing': 'Apkalpes / izlidošanas instruktāža',
+  'Voorvalmelding (just culture)': 'Notikuma ziņojums (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / LMRA drošības pārbaude',
+  'Evenement- en crowd-safetybriefing': 'Pasākuma un pūļa drošības instruktāža',
+  'Ontruimings- en BHV-oefening': 'Evakuācijas un BHV mācības',
+  'Werkvergunning (permit to work)': 'Darba atļauja (permit to work)',
+  'METHANE grootschalig-incidentmelding':
+      'METHANE ziņojums par lielu incidentu',
+  'GRIP-opschaling': 'GRIP eskalācija',
+  'Maritieme passage-/brugbriefing': 'Jūras pārejas / tiltiņa instruktāža',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Strukturēti nododiet pacientu vai situāciju: situācija, priekšvēsture, novērtējums un ieteikums.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Pirmshospitāla nodošana neatliekamās palīdzības nodaļā ar vecumu, mehānismu, traumām, pazīmēm un ārstēšanu.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Apspriediet gadījumu starp nozarēm: aina, ārstēšanas mērķis, lēmumi un vienošanās.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out un sign out ap procedūru saskaņā ar WHO kontrolsarakstu.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Nododiet aprūpi par katru pacientu: stāvoklis, uzmanības punkti un neizpildītie uzdevumi.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Nosakiet gaidas, atskaites punktus un atbalstu pirmajām 30, 60 un 90 dienām.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Cilvēki, sistēmas, iekšējie noteikumi un drošības un privātuma pamati jaunajam darbiniekam.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Mērķi, ritms un kontrolpunkti starp jaunpienācēju un viņa badiju vai mentoru.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Zināšanu nodošana, piekļuves atsaukšana un pienācīga aiziešanas saruna, kad kāds aiziet.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Personīgais go/no-go: slimība, medikamenti, stress, alkohols, nogurums un noskaņojums.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Uzdevumu sadale, draudi un kļūdas (TEM) un novirzes pirms izlidošanas ar apkalpi.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Ziņojiet par notikumu faktiski un bez vainošanas: kas, faktori, risks un uzlabojums.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Uzdevums, apdraudējumi, pasākumi un apstiprinājums tieši pirms darba sākuma.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Ietilpība, riski, cilvēku plūsma un incidenta lomas pasākumam.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Scenārijs, uzdevumi, pulcēšanās vieta, novērojumi un evakuācijas izvērtējums.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Reģistrējiet darbu, izolācijas, pārbaudes un atļauju augsta riska darbam.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Pirmais ziņojums lielā incidentā: liels incidents, precīza atrašanās vieta, veids, apdraudējumi, piekļuve, skaits un dienesti.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Nosakiet GRIP līmeni, krīzes struktūru, lomas un lēmumus par palielināšanu un samazināšanu.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Pārejas plāns un tiltiņa vienošanās (appraisal, planning, execution, monitoring) ar kritiskajiem maršruta punktiem.',
   'Online media staat uit — aanzetten':
       'Tiešsaistes multivide izslēgta — ieslēgt',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':

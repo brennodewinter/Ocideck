@@ -105,6 +105,28 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Added
+- **Negentien rolgerichte overdrachts- en veiligheidssjablonen erbij (2026-07-26).**
+  De sjablooncatalogus leunde op kantoor-, beveiligings- en gesprekswerk; deze
+  ronde verbreedt hem naar veiligheidskritische beroepen, elk gebouwd op een
+  erkende methode zodat het startpunt de vakman herkent in plaats van een lege
+  lijst te zijn. Zorg en medische overdracht: **SBAR**, **(A)MIST**-trauma, de
+  **WHO** chirurgische veiligheidscheck, de verpleegkundige dienstoverdracht en
+  het multidisciplinair overleg (MDO). Inwerken en HR-levenscyclus: een
+  **30-60-90**-inwerkplan, de eerste dag/introductie, een buddy-/mentorafspraak
+  en offboarding. Luchtvaart: de **IMSAFE** fit-to-fly-check, een
+  crew-/departurebriefing en een voorvalmelding volgens **just culture**. Fysieke
+  beveiliging en veiligheid: een **toolbox/LMRA**-check, een evenement- en
+  crowd-safetybriefing, een ontruimings-/BHV-oefening en een **werkvergunning**.
+  Hulpdiensten: de **METHANE**-grootschaligmelding en **GRIP**-opschaling. En de
+  maritieme **passage-/brugbriefing** (APEM + Bridge Resource Management), die de
+  drie veiligheidskritische transportdomeinen — lucht, land en zee — compleet
+  maakt. Elk sjabloon volgt de bestaande keten: een voorbeelddocument per taal
+  onder `assets/templates/` (Nederlands en Engels, met gelijke slidestructuur),
+  registratie in `models/deck_template.dart` met een semantische icoonsleutel, en
+  titel plus omschrijving vertaald in alle 31 interfacetalen. Bewaakt door
+  `test/deck_template_test.dart`.
+
 ### Fixed
 - **De privacy-gezichtsscan was sinds de `dartcv4` 2.x-migratie (#870/#873) stil
   kapot; nu hersteld en met een integratietest afgedekt.** `dartcv4` 2.x levert

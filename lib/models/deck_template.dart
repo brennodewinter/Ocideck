@@ -368,6 +368,162 @@ final List<DeckTemplate> deckTemplates = [
         'go/no-go checks.',
     icon: 'pplFlightPrep',
   ),
+  // ── Zorg en medische overdracht ─────────────────────────────────────────────
+  DeckTemplate(
+    id: 'sbarHandover',
+    title: 'SBAR-overdracht',
+    description:
+        'Draag een patiënt of situatie gestructureerd over: Situatie, '
+        'Achtergrond, Beoordeling en Aanbeveling.',
+    icon: 'sbarHandover',
+  ),
+  DeckTemplate(
+    id: 'mistHandover',
+    title: '(A)MIST traumaoverdracht',
+    description:
+        'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, '
+        'letsels, symptomen en behandeling.',
+    icon: 'mistHandover',
+  ),
+  DeckTemplate(
+    id: 'mdtMeeting',
+    title: 'Multidisciplinair overleg (MDO)',
+    description:
+        'Bespreek een casus met alle disciplines: beeld, behandeldoel, '
+        'besluiten en afspraken.',
+    icon: 'mdtMeeting',
+  ),
+  DeckTemplate(
+    id: 'surgicalChecklist',
+    title: 'Chirurgische veiligheidscheck (WHO)',
+    description:
+        'Sign in, time-out en sign out rond een ingreep volgens de '
+        'WHO-checklist.',
+    icon: 'surgicalChecklist',
+  ),
+  DeckTemplate(
+    id: 'nursingHandover',
+    title: 'Verpleegkundige dienstoverdracht',
+    description:
+        'Draag de zorg per patiënt over: toestand, aandachtspunten en '
+        'openstaande taken.',
+    icon: 'nursingHandover',
+  ),
+  // ── Inwerken en HR-levenscyclus ─────────────────────────────────────────────
+  DeckTemplate(
+    id: 'onboardingPlan',
+    title: 'Inwerkplan (30-60-90 dagen)',
+    description:
+        'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, '
+        '60 en 90 dagen.',
+    icon: 'onboardingPlan',
+  ),
+  DeckTemplate(
+    id: 'firstDayInduction',
+    title: 'Eerste dag / introductie',
+    description:
+        'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor '
+        'een nieuwe medewerker.',
+    icon: 'firstDayInduction',
+  ),
+  DeckTemplate(
+    id: 'buddyMentor',
+    title: 'Buddy- / mentorafspraak',
+    description:
+        'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.',
+    icon: 'buddyMentor',
+  ),
+  DeckTemplate(
+    id: 'offboarding',
+    title: 'Uitdiensttreding / offboarding',
+    description:
+        'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij '
+        'vertrek.',
+    icon: 'offboarding',
+  ),
+  // ── Luchtvaart ──────────────────────────────────────────────────────────────
+  DeckTemplate(
+    id: 'imsafeCheck',
+    title: 'IMSAFE fit-to-fly-check',
+    description:
+        'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, '
+        'vermoeidheid en gemoed.',
+    icon: 'imsafeCheck',
+  ),
+  DeckTemplate(
+    id: 'crewBriefing',
+    title: 'Crew- / departurebriefing',
+    description:
+        'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór '
+        'vertrek met de bemanning.',
+    icon: 'crewBriefing',
+  ),
+  DeckTemplate(
+    id: 'occurrenceReport',
+    title: 'Voorvalmelding (just culture)',
+    description:
+        'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, '
+        'risico en verbetering.',
+    icon: 'occurrenceReport',
+  ),
+  // ── Fysieke beveiliging en veiligheid ───────────────────────────────────────
+  DeckTemplate(
+    id: 'toolboxTalk',
+    title: 'Toolbox / LMRA veiligheidscheck',
+    description:
+        'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.',
+    icon: 'toolboxTalk',
+  ),
+  DeckTemplate(
+    id: 'eventSafety',
+    title: 'Evenement- en crowd-safetybriefing',
+    description:
+        "Capaciteit, risico's, in- en uitstroom en incidentrollen voor een "
+        'evenement.',
+    icon: 'eventSafety',
+  ),
+  DeckTemplate(
+    id: 'evacuationDrill',
+    title: 'Ontruimings- en BHV-oefening',
+    description:
+        'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een '
+        'ontruiming.',
+    icon: 'evacuationDrill',
+  ),
+  DeckTemplate(
+    id: 'permitToWork',
+    title: 'Werkvergunning (permit to work)',
+    description:
+        'Werk, isolaties, controles en vrijgave voor risicovol werk '
+        'vastleggen.',
+    icon: 'permitToWork',
+  ),
+  // ── Hulpdiensten en crisis ──────────────────────────────────────────────────
+  DeckTemplate(
+    id: 'methaneReport',
+    title: 'METHANE grootschalig-incidentmelding',
+    description:
+        'Eerste melding bij een groot incident: melding, locatie, type, '
+        'gevaren, toegang, aantal en diensten.',
+    icon: 'methaneReport',
+  ),
+  DeckTemplate(
+    id: 'gripEscalation',
+    title: 'GRIP-opschaling',
+    description:
+        'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en '
+        'afschalingsbesluiten.',
+    icon: 'gripEscalation',
+  ),
+  // ── Maritiem ────────────────────────────────────────────────────────────────
+  DeckTemplate(
+    id: 'bridgePassageBriefing',
+    title: 'Maritieme passage-/brugbriefing',
+    description:
+        'Reisplan en brugafspraken (appraisal, planning, execution, '
+        'monitoring) met kritieke routepunten.',
+    icon: 'bridgePassageBriefing',
+  ),
   DeckTemplate(
     id: 'miauwReport',
     title: 'MIAUW-pentestrapport',

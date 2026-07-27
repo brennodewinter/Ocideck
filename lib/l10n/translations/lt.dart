@@ -1778,6 +1778,66 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'SBAR-overdracht': 'SBAR perdavimas',
+  '(A)MIST traumaoverdracht': '(A)MIST traumos perdavimas',
+  'Multidisciplinair overleg (MDO)': 'Daugiadalykis komandos susitikimas (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Chirurginio saugumo kontrolinis sąrašas (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Slaugos pamainos perdavimas',
+  'Inwerkplan (30-60-90 dagen)': 'Įvedimo planas (30-60-90 dienų)',
+  'Eerste dag / introductie': 'Pirmoji diena / įvadas',
+  'Buddy- / mentorafspraak': 'Bičiulio / mentoriaus planas',
+  'Uitdiensttreding / offboarding': 'Offboarding / išėjimas',
+  'IMSAFE fit-to-fly-check': 'IMSAFE tinkamumo skristi patikra',
+  'Crew- / departurebriefing': 'Įgulos / išvykimo instruktažas',
+  'Voorvalmelding (just culture)': 'Įvykio pranešimas (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / LMRA saugos patikra',
+  'Evenement- en crowd-safetybriefing':
+      'Renginio ir minios saugumo instruktažas',
+  'Ontruimings- en BHV-oefening': 'Evakuacijos ir BHV pratybos',
+  'Werkvergunning (permit to work)': 'Leidimas dirbti (permit to work)',
+  'METHANE grootschalig-incidentmelding':
+      'METHANE pranešimas apie didelį incidentą',
+  'GRIP-opschaling': 'GRIP eskalavimas',
+  'Maritieme passage-/brugbriefing': 'Jūrinis perėjimo / tiltelio instruktažas',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Struktūruotai perduokite pacientą ar situaciją: situacija, aplinkybės, vertinimas ir rekomendacija.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Ikihospitalinis perdavimas priėmimo skyriui su amžiumi, mechanizmu, sužalojimais, požymiais ir gydymu.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Aptarkite atvejį tarp sričių: vaizdas, gydymo tikslas, sprendimai ir susitarimai.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out ir sign out aplink procedūrą pagal WHO kontrolinį sąrašą.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Perduokite priežiūrą kiekvienam pacientui: būklė, dėmesio taškai ir neatlikti darbai.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Nustatykite lūkesčius, etapus ir pagalbą pirmoms 30, 60 ir 90 dienų.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Žmonės, sistemos, vidaus taisyklės ir saugumo bei privatumo pagrindai naujam darbuotojui.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Tikslai, ritmas ir kontroliniai taškai tarp naujoko ir jo bičiulio ar mentoriaus.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Žinių perdavimas, prieigos panaikinimas ir tinkamas išėjimo pokalbis, kai kas nors išeina.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Asmeninis go/no-go: liga, vaistai, stresas, alkoholis, nuovargis ir nuotaika.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Užduočių paskirstymas, grėsmės ir klaidos (TEM) bei nukrypimai prieš išvykimą su įgula.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Praneškite apie įvykį faktiškai ir nekaltindami: kas, veiksniai, rizika ir tobulinimas.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Užduotis, pavojai, priemonės ir pritarimas prieš pat darbo pradžią.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Talpa, rizikos, žmonių srautai ir vaidmenys per incidentą renginiui.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Scenarijus, užduotys, susirinkimo vieta, stebėjimai ir evakuacijos vertinimas.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Užfiksuokite darbą, izoliavimus, patikras ir leidimą didelės rizikos darbams.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Pirmasis pranešimas per didelį incidentą: didelis incidentas, tiksli vieta, tipas, pavojai, priėjimas, skaičius ir tarnybos.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Nustatykite GRIP lygį, krizės struktūrą, vaidmenis ir sprendimus dėl didinimo bei mažinimo.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Perėjimo planas ir tiltelio susitarimai (appraisal, planning, execution, monitoring) su kritiniais maršruto taškais.',
   'Online media staat uit — aanzetten': 'Internetinė medija išjungta — įjungti',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} turi vykdomojo turinio ir nebus importuotas.',

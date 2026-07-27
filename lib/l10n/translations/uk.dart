@@ -1788,6 +1788,65 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'SBAR-overdracht': 'Передача за SBAR',
+  '(A)MIST traumaoverdracht': '(A)MIST передача травми',
+  'Multidisciplinair overleg (MDO)': 'Мультидисциплінарна нарада (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Контрольний список хірургічної безпеки (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Передача сестринської зміни',
+  'Inwerkplan (30-60-90 dagen)': 'План адаптації (30-60-90 днів)',
+  'Eerste dag / introductie': 'Перший день / знайомство',
+  'Buddy- / mentorafspraak': 'План бадді / наставника',
+  'Uitdiensttreding / offboarding': 'Офбординг / звільнення',
+  'IMSAFE fit-to-fly-check': 'IMSAFE перевірка придатності до польоту',
+  'Crew- / departurebriefing': 'Брифінг екіпажу / перед вильотом',
+  'Voorvalmelding (just culture)': 'Повідомлення про подію (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / перевірка безпеки LMRA',
+  'Evenement- en crowd-safetybriefing': 'Брифінг заходу та безпеки натовпу',
+  'Ontruimings- en BHV-oefening': 'Навчання з евакуації та BHV',
+  'Werkvergunning (permit to work)': 'Дозвіл на роботу (permit to work)',
+  'METHANE grootschalig-incidentmelding':
+      'METHANE повідомлення про велику подію',
+  'GRIP-opschaling': 'Ескалація GRIP',
+  'Maritieme passage-/brugbriefing': 'Морський брифінг переходу / містка',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Структуровано передайте пацієнта або ситуацію: ситуація, передумови, оцінка та рекомендація.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Догоспітальна передача до приймального відділення з віком, механізмом, ушкодженнями, ознаками та лікуванням.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Обговоріть випадок між дисциплінами: картина, мета лікування, рішення та домовленості.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'Sign in, time-out і sign out навколо втручання за контрольним списком WHO.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Передайте догляд за кожним пацієнтом: стан, точки уваги та невиконані завдання.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'Окресліть очікування, віхи та підтримку на перші 30, 60 і 90 днів.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Люди, системи, внутрішні правила та основи безпеки й приватності для нового працівника.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Цілі, ритм і контрольні точки між новачком та його бадді чи наставником.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Передача знань, відкликання доступів і належна вихідна співбесіда під час звільнення.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Особисте go/no-go: хвороба, ліки, стрес, алкоголь, втома та настрій.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Розподіл завдань, загрози та помилки (TEM) і відхилення перед вильотом з екіпажем.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Повідомте про подію фактично й без пошуку винних: що, чинники, ризик та покращення.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'Завдання, небезпеки, заходи та погодження безпосередньо перед початком роботи.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Місткість, ризики, потоки людей і ролі під час інциденту для заходу.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Сценарій, завдання, місце збору, спостереження та оцінка евакуації.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Зафіксуйте роботу, ізоляції, перевірки та дозвіл для робіт високого ризику.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Перше повідомлення про велику подію: велика подія, точне місце, тип, небезпеки, доступ, кількість і служби.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'Визначте рівень GRIP, кризову структуру, ролі та рішення про підвищення й зниження рівня.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'План переходу та домовленості на містку (appraisal, planning, execution, monitoring) з критичними точками маршруту.',
   'Online media staat uit — aanzetten': 'Онлайн-медіа вимкнено — увімкнути',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} містить виконуваний вміст і не буде імпортований.',

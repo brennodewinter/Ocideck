@@ -2748,6 +2748,65 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'SBAR-overdracht': 'SBAR devri',
+  '(A)MIST traumaoverdracht': '(A)MIST travma devri',
+  'Multidisciplinair overleg (MDO)': 'Multidisipliner ekip toplantısı (MDT)',
+  'Chirurgische veiligheidscheck (WHO)':
+      'Cerrahi güvenlik kontrol listesi (WHO)',
+  'Verpleegkundige dienstoverdracht': 'Hemşirelik vardiya devri',
+  'Inwerkplan (30-60-90 dagen)': 'Uyum planı (30-60-90 gün)',
+  'Eerste dag / introductie': 'İlk gün / oryantasyon',
+  'Buddy- / mentorafspraak': 'Buddy / mentor planı',
+  'Uitdiensttreding / offboarding': 'Offboarding / ayrılış',
+  'IMSAFE fit-to-fly-check': 'IMSAFE uçuşa uygunluk kontrolü',
+  'Crew- / departurebriefing': 'Ekip / kalkış brifingi',
+  'Voorvalmelding (just culture)': 'Olay bildirimi (just culture)',
+  'Toolbox / LMRA veiligheidscheck': 'Toolbox / LMRA güvenlik kontrolü',
+  'Evenement- en crowd-safetybriefing':
+      'Etkinlik ve kalabalık güvenliği brifingi',
+  'Ontruimings- en BHV-oefening': 'Tahliye ve BHV tatbikatı',
+  'Werkvergunning (permit to work)': 'Çalışma izni (permit to work)',
+  'METHANE grootschalig-incidentmelding': 'METHANE büyük olay bildirimi',
+  'GRIP-opschaling': 'GRIP tırmandırması',
+  'Maritieme passage-/brugbriefing': 'Denizcilik geçiş / köprüüstü brifingi',
+  'Draag een patiënt of situatie gestructureerd over: Situatie, Achtergrond, Beoordeling en Aanbeveling.':
+      'Bir hastayı veya durumu yapılandırılmış biçimde devredin: Durum, Arka plan, Değerlendirme ve Öneri.',
+  'Prehospitale overdracht naar de SEH met leeftijd, mechanisme, letsels, symptomen en behandeling.':
+      'Hastane öncesi acil servise devir: yaş, mekanizma, yaralanmalar, bulgular ve tedavi.',
+  'Bespreek een casus met alle disciplines: beeld, behandeldoel, besluiten en afspraken.':
+      'Bir vakayı disiplinler arası görüşün: tablo, tedavi hedefi, kararlar ve eylemler.',
+  'Sign in, time-out en sign out rond een ingreep volgens de WHO-checklist.':
+      'WHO kontrol listesine göre bir işlem çevresinde sign in, time-out ve sign out.',
+  'Draag de zorg per patiënt over: toestand, aandachtspunten en openstaande taken.':
+      'Bakımı hasta bazında devredin: durum, dikkat noktaları ve açık görevler.',
+  'Zet verwachtingen, mijlpalen en begeleiding uit over de eerste 30, 60 en 90 dagen.':
+      'İlk 30, 60 ve 90 gün için beklentileri, kilometre taşlarını ve desteği belirleyin.',
+  'Mensen, systemen, huisregels en de veiligheids- en privacybasis voor een nieuwe medewerker.':
+      'Yeni bir çalışan için insanlar, sistemler, ev kuralları ve güvenlik ile gizlilik temelleri.',
+  'Doelen, ritme en checkpoints tussen nieuwkomer en buddy of mentor.':
+      'Yeni gelen ile buddy\'si veya mentoru arasında hedefler, ritim ve kontrol noktaları.',
+  'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij vertrek.':
+      'Bilgi aktarımı, erişimlerin iptali ve ayrılırken düzgün bir çıkış görüşmesi.',
+  'Persoonlijke go/no-go: ziekte, medicatie, stress, alcohol, vermoeidheid en gemoed.':
+      'Kişisel go/no-go: hastalık, ilaç, stres, alkol, yorgunluk ve ruh hâli.',
+  'Taakverdeling, bedreigingen en fouten (TEM) en afwijkingen vóór vertrek met de bemanning.':
+      'Ekiple kalkıştan önce görev dağılımı, tehditler ve hatalar (TEM) ve sapmalar.',
+  'Meld een voorval feitelijk en zonder schuldvraag: wat, factoren, risico en verbetering.':
+      'Bir olayı gerçeklere dayalı ve suçlamadan bildirin: ne, etkenler, risk ve iyileştirme.',
+  'Taak, gevaren, maatregelen en akkoord vlak voordat het werk begint.':
+      'İş başlamadan hemen önce görev, tehlikeler, önlemler ve onay.',
+  'Capaciteit, risico\'s, in- en uitstroom en incidentrollen voor een evenement.':
+      'Bir etkinlik için kapasite, riskler, insan akışı ve olay rolleri.',
+  'Scenario, taken, verzamelplaats, waarnemingen en evaluatie van een ontruiming.':
+      'Bir tahliyenin senaryosu, görevleri, toplanma noktası, gözlemleri ve değerlendirmesi.',
+  'Werk, isolaties, controles en vrijgave voor risicovol werk vastleggen.':
+      'Yüksek riskli işler için işi, izolasyonları, kontrolleri ve yetkilendirmeyi kaydedin.',
+  'Eerste melding bij een groot incident: melding, locatie, type, gevaren, toegang, aantal en diensten.':
+      'Büyük bir olayda ilk bildirim: büyük olay, kesin konum, tür, tehlikeler, erişim, sayı ve hizmetler.',
+  'Bepaal het GRIP-niveau, de crisisstructuur, rollen en op- en afschalingsbesluiten.':
+      'GRIP seviyesini, kriz yapısını, rolleri ve tırmandırma ile azaltma kararlarını belirleyin.',
+  'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
+      'Seyir planı ve köprüüstü mutabakatları (appraisal, planning, execution, monitoring) ile kritik rota noktaları.',
   'Online media staat uit — aanzetten': 'Çevrimiçi medya kapalı — aç',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand}, yürütülebilir içerik içeriyor ve içe aktarılmayacak.',
