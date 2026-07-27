@@ -39,7 +39,7 @@ void main() {
         bulletsWith(['Autorisatie: geregeld via de centrale IAM-oplossing']),
       );
       expect(out.bullets, ['Autorisatie']);
-      expect(out.notes, 'Autorisatie: geregeld via de centrale IAM-oplossing');
+      expect(out.notes, '- Autorisatie: geregeld via de centrale IAM-oplossing');
     });
 
     test('koppelstreepje splitst label en uitleg', () {
@@ -104,7 +104,7 @@ void main() {
       );
       expect(
         out.notes,
-        'Bestaande notitie\nTerm: uitgebreide uitleg over het onderwerp',
+        'Bestaande notitie\n- Term: uitgebreide uitleg over het onderwerp',
       );
     });
 
@@ -123,9 +123,9 @@ void main() {
         out.notes,
         [
           'Techniek',
-          'Autorisatie: geregeld via de centrale IAM-oplossing',
+          '- Autorisatie: geregeld via de centrale IAM-oplossing',
           'Beleid',
-          'Naleving: jaarlijks getoetst door de interne auditdienst',
+          '- Naleving: jaarlijks getoetst door de interne auditdienst',
         ].join('\n'),
       );
     });
@@ -162,7 +162,7 @@ void main() {
           'Autorisatie: geregeld via de centrale IAM-oplossing',
         ]),
       );
-      expect(out.notes, 'Autorisatie: geregeld via de centrale IAM-oplossing');
+      expect(out.notes, '- Autorisatie: geregeld via de centrale IAM-oplossing');
     });
 
     test('de notitieregel houdt het inspring-niveau van zijn bullet', () {
@@ -171,7 +171,7 @@ void main() {
       );
       expect(
         out.notes,
-        '\tRisico: de sleutel staat in de repository geschreven',
+        '\t- Risico: de sleutel staat in de repository geschreven',
       );
     });
 
@@ -190,7 +190,7 @@ void main() {
         expect(out.bullets, ['Wij hebben besloten de infrastructuur']);
         expect(
           out.notes,
-          'Wij hebben besloten de infrastructuur te migreren omdat dat '
+          '- Wij hebben besloten de infrastructuur te migreren omdat dat '
           'goedkoper uitpakt',
         );
       },

@@ -75,8 +75,8 @@ void main() {
       final fixed = splitSentenceBullets(slide);
       expect(fixed.bullets, ['Blijft heel.', 'Eerste zin.', 'Tweede zin.']);
       // Bestaande notities blijven staan, de volzin komt eronder — alleen van
-      // de regel die daadwerkelijk is opgeknipt.
-      expect(fixed.notes, 'Bestaande notitie\nEerste zin. Tweede zin.');
+      // de regel die daadwerkelijk is opgeknipt, met een streepje ervoor (#913).
+      expect(fixed.notes, 'Bestaande notitie\n- Eerste zin. Tweede zin.');
     });
 
     test('de notities krijgen de tussenkop als context mee', () {
@@ -87,13 +87,14 @@ void main() {
           'Derde zin. Vierde zin.',
         ],
       );
-      // De kop staat er eenmaal boven, niet bij elke regel opnieuw.
+      // De kop staat er eenmaal boven (zonder streepje — het is context, geen
+      // punt), niet bij elke regel opnieuw; de punten eronder mét streepje.
       expect(
         splitSentenceBullets(slide).notes,
         [
           'Aanpak',
-          'Eerste zin. Tweede zin.',
-          'Derde zin. Vierde zin.',
+          '- Eerste zin. Tweede zin.',
+          '- Derde zin. Vierde zin.',
         ].join('\n'),
       );
     });

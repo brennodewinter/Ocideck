@@ -15,6 +15,12 @@ import '../services/slide_quality_analyzer.dart'
 final _sentenceEnd = RegExp(r'[.!?](?:\s+|$)');
 final _checklistPrefix = RegExp(r'^\[[ xX]\]\s*');
 
+/// Een naar de sprekersnotities verplaatste bulletregel: op zijn inspring-
+/// niveau en met een streepje ervoor (#913), zodat de spreker in de notities
+/// een opsomming ziet in plaats van een vlakke tekstregel. Tussenkoppen krijgen
+/// géén streepje — die zijn de context waaronder de punten vallen, geen punt.
+String _movedNoteLine(int level, String text) => '${'\t' * level}- $text';
+
 /// Of [slide] bullets heeft die [splitSentencesInBullets] daadwerkelijk zou
 /// opknippen — zodat de UI de actie alleen aanbiedt als die iets doet — én de
 /// slide daar niet te vol van wordt.
@@ -48,6 +54,19 @@ int _bulletWarningCount(Slide slide) => slide.type == SlideType.twoBullets
 /// analyse niet mee en hier dus ook niet.
 int _visibleBulletCount(List<String> bullets) =>
     bullets.where((b) => b.trimLeft().isNotEmpty && !isGroupHeading(b)).length;
+
+/// De bovengrens waaronder 'Uitleg naar notities' als vervolgstap verschijnt
+/// (#912). Bóven deze grens telt de dia als 'te veel bullets', en dan is
+/// splitsen de enige aangeboden remedie: uitleg naar de notities halen verandert
+/// het aantal bullets niet, dus lost 'te vol' niet op. Gelijk aan de enkelkoloms
+/// waarschuwingsdrempel — precies de grens waarboven 'te veel bullets' geldt.
+const int kMoveToNotesMaxBulletCount = kSingleColumnBulletWarningCount;
+
+/// Het aantal zichtbare inhouds-bullets op [slide], over beide kolommen en
+/// zonder de tussenkoppen (die zijn secties, geen punten). Dezelfde telling die
+/// de gate van 'Uitleg naar notities' tegen [kMoveToNotesMaxBulletCount] legt.
+int visibleContentBulletCount(Slide slide) =>
+    _visibleBulletCount(slide.bullets) + _visibleBulletCount(slide.bullets2);
 
 bool _isMultiSentence(String bullet) =>
     _splitSentences(_plainText(bullet)).length > 1;
@@ -115,7 +134,7 @@ List<String> _splitColumn(List<String> bullets, List<String> moved) {
       moved.add(heading);
       headingMoved = true;
     }
-    moved.add('${'\t' * level}$plain');
+    moved.add(_movedNoteLine(level, plain));
   }
   return result;
 }
@@ -233,7 +252,7 @@ List<String> _trimColumn(List<String> bullets, List<String> moved) {
       moved.add(heading);
       headingMoved = true;
     }
-    moved.add('${'\t' * level}$plain');
+    moved.add(_movedNoteLine(level, plain));
   }
   return result;
 }
