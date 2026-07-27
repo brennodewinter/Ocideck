@@ -1,4 +1,5 @@
 import '../models/slide.dart';
+import '../services/bullet_pagination.dart';
 import '../services/slide_quality_analyzer.dart'
     show
         kChecklistBulletWarningCount,
@@ -67,6 +68,51 @@ const int kMoveToNotesMaxBulletCount = kSingleColumnBulletWarningCount;
 /// de gate van 'Uitleg naar notities' tegen [kMoveToNotesMaxBulletCount] legt.
 int visibleContentBulletCount(Slide slide) =>
     _visibleBulletCount(slide.bullets) + _visibleBulletCount(slide.bullets2);
+
+/// De pagina's waarin "Splits slide" [slide] verdeelt — pagina's van hooguit de
+/// leesbaarheidsdrempel (acht bullets, twaalf voor een checklist, zeven per
+/// kolom), met de rest op een laatste, kortere pagina. `null` als splitsen niet
+/// kan (geen bullettype, of te weinig bullets).
+///
+/// De eerste pagina erft type/afbeelding en de continuesSplit-vlag van [slide]
+/// (want [Slide.duplicate] kopieert imagePath/-caption/-size); elke vervolgpagina
+/// is een continuation die de fontgrootte deelt.
+///
+/// Gedeeld door [DeckNotifier.splitSlide], de fix-alles-motor en de live-fix in
+/// de presenter, zodat "splitsen" overal exact hetzelfde doet. Het aantal
+/// bulletkolommen komt uit de registry naast de enum ([SlideTypeMeta.bulletColumns]),
+/// zodat een nieuw bullettype hier vanzelf splitsbaar wordt.
+List<Slide>? splitBulletSlidePages(Slide slide) {
+  List<Slide> build(List<(List<String>, List<String>)> pages) => [
+    for (var i = 0; i < pages.length; i++)
+      (i == 0 ? slide : Slide.duplicate(slide)).copyWith(
+        bullets: pages[i].$1,
+        bullets2: pages[i].$2,
+        continuesSplit: i == 0 ? slide.continuesSplit : true,
+      ),
+  ];
+  switch (slide.type.bulletColumns) {
+    case BulletColumns.none:
+      return null;
+    case BulletColumns.one:
+      if (slide.bullets.length < 2) return null;
+      // Checklists houden hun ruimere optimum aan (consistent met de
+      // waarschuwingsdrempel), zodat een lijst van 12 niet onnodig krimpt.
+      final size = slide.listStyle == ListStyle.checklist
+          ? kChecklistBulletWarningCount
+          : kSingleColumnBulletWarningCount;
+      return build([
+        for (final p in splitBulletsIntoPages(slide.bullets, size))
+          (p, const <String>[]),
+      ]);
+    case BulletColumns.two:
+      if (slide.bullets.length < 2 && slide.bullets2.length < 2) return null;
+      const perColumn = kTwoColumnBulletWarningCount ~/ 2;
+      return build(
+        splitTwoColumnsIntoPages(slide.bullets, slide.bullets2, perColumn),
+      );
+  }
+}
 
 bool _isMultiSentence(String bullet) =>
     _splitSentences(_plainText(bullet)).length > 1;

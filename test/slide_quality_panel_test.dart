@@ -162,6 +162,44 @@ void main() {
     },
   );
 
+  testWidgets(
+    'Fix alle problemen splitst een te volle dia in één klik (#915)',
+    (tester) async {
+      await tester.pumpWidget(_host(overfullDeck()));
+      await tester.pump();
+
+      final container = ProviderScope.containerOf(
+        tester.element(find.byType(SlideQualityPanel)),
+      );
+      expect(container.read(deckProvider).deck!.slides.length, 1);
+
+      final fixAll = find.widgetWithText(TextButton, 'Fix alle problemen');
+      expect(fixAll, findsOneWidget);
+      await tester.tap(fixAll);
+      await tester.pump();
+
+      // De dia is gesplitst en er verschijnt een terugkoppeling.
+      expect(container.read(deckProvider).deck!.slides.length, greaterThan(1));
+      expect(find.byType(SnackBar), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'geen Fix-alles-knop als er niets structureel op te lossen valt',
+    (tester) async {
+      // Een lege dia is een inhoudsmelding, geen structureel probleem.
+      final deck = Deck(title: 'Leeg', slides: [Slide.create(SlideType.bullets)]);
+      await tester.pumpWidget(_host(deck));
+      await tester.pump();
+
+      expect(find.textContaining('Slidekwaliteit'), findsOneWidget);
+      expect(
+        find.widgetWithText(TextButton, 'Fix alle problemen'),
+        findsNothing,
+      );
+    },
+  );
+
   testWidgets('green bar lists the checks that were performed', (tester) async {
     final cleanDeck = Deck(
       title: 'Schoon',

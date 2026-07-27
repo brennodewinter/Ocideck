@@ -99,13 +99,30 @@ extension DeckNotifierSlides on DeckNotifier {
   void splitSlide(int index) {
     final deck = currentState.deck;
     if (deck == null || index < 0 || index >= deck.slides.length) return;
-    final pages = _splitSlide(deck.slides[index]);
+    final pages = splitBulletSlidePages(deck.slides[index]);
     if (pages == null) return;
     final slides = List<Slide>.from(deck.slides)
       ..removeAt(index)
       ..insertAll(index, pages);
     // De huidige slide krijgt nieuwe inhoud, dus forceer een editor-refresh.
     _mutate(deck.copyWith(slides: slides), bumpRevision: true);
+  }
+
+  /// Werkt alle automatisch én veilig oplosbare kwaliteitsproblemen in één keer
+  /// weg (#915), met steeds de meest veilige oplossing: te volle dia's splitsen,
+  /// meerzins-bullets opknippen, meegesleepte pagina's losmaken. Nooit wordt
+  /// inhoud van een dia gehaald; wat menselijk oordeel vraagt blijft staan.
+  ///
+  /// Eén mutatie, dus één ongedaan-stap — wie de knop per ongeluk raakt draait
+  /// alles met één keer terug. Geeft terug hoeveel structurele fixes zijn
+  /// toegepast (0 = niets automatisch op te lossen; het deck blijft dan gelijk).
+  int fixAllStructuralIssues() {
+    final deck = currentState.deck;
+    if (deck == null) return 0;
+    final result = fixAllStructuralQualityIssues(deck);
+    if (result.applied == 0) return 0;
+    _mutate(result.deck, bumpRevision: true);
+    return result.applied;
   }
 
   /// Knipt de vrije-tekstslide op [index] op zijn `#`-koppen: één dia per
@@ -152,46 +169,6 @@ extension DeckNotifierSlides on DeckNotifier {
     }
     if (!changed) return;
     _mutate(deck.copyWith(slides: slides), bumpRevision: true);
-  }
-
-  /// Verdeelt de bulletslide [slide] over pagina's van hooguit de leesbaarheids-
-  /// drempel — acht bullets, twaalf voor een checklist, zeven per kolom — met de
-  /// rest op een laatste, kortere pagina. `null` als splitsen niet kan. De eerste
-  /// pagina erft type/afbeelding en de continuesSplit-vlag van [slide] (want
-  /// [Slide.duplicate] kopieert imagePath/-caption/-size); elke vervolgpagina is
-  /// een continuation die de fontgrootte deelt.
-  List<Slide>? _splitSlide(Slide slide) {
-    List<Slide> build(List<(List<String>, List<String>)> pages) => [
-      for (var i = 0; i < pages.length; i++)
-        (i == 0 ? slide : Slide.duplicate(slide)).copyWith(
-          bullets: pages[i].$1,
-          bullets2: pages[i].$2,
-          continuesSplit: i == 0 ? slide.continuesSplit : true,
-        ),
-    ];
-    // Het aantal bulletkolommen komt uit de registry naast de enum, zodat deze
-    // knip en [canSplitSlide] niet elk hun eigen typelijst bijhouden.
-    switch (slide.type.bulletColumns) {
-      case BulletColumns.none:
-        return null;
-      case BulletColumns.one:
-        if (slide.bullets.length < 2) return null;
-        // Checklists houden hun ruimere optimum aan (consistent met de
-        // waarschuwingsdrempel), zodat een lijst van 12 niet onnodig krimpt.
-        final size = slide.listStyle == ListStyle.checklist
-            ? kChecklistBulletWarningCount
-            : kSingleColumnBulletWarningCount;
-        return build([
-          for (final p in splitBulletsIntoPages(slide.bullets, size))
-            (p, const <String>[]),
-        ]);
-      case BulletColumns.two:
-        if (slide.bullets.length < 2 && slide.bullets2.length < 2) return null;
-        const perColumn = kTwoColumnBulletWarningCount ~/ 2;
-        return build(
-          splitTwoColumnsIntoPages(slide.bullets, slide.bullets2, perColumn),
-        );
-    }
   }
 
   /// Knip de videoslide op [index] op tijdstip [atMs]: het huidige segment

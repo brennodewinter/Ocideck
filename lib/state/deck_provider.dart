@@ -12,7 +12,6 @@ import '../models/slide.dart';
 import '../models/used_tool.dart';
 import '../services/ai_alt_text_cleanup.dart';
 import '../services/annotation_codec.dart';
-import '../services/bullet_pagination.dart';
 import '../services/checklist_templates.dart';
 import '../services/document_integrity.dart';
 import '../services/rich_text_chapters.dart';
@@ -22,13 +21,10 @@ import '../services/scope_coverage.dart';
 import '../services/file_service.dart';
 import '../services/image_service.dart';
 import '../services/markdown_service.dart';
-import '../services/slide_quality_analyzer.dart'
-    show
-        kChecklistBulletWarningCount,
-        kSingleColumnBulletWarningCount,
-        kTwoColumnBulletWarningCount;
+import '../services/quality_autofix.dart';
 import '../services/user_notes_codec.dart';
 import '../platform/platform_features.dart';
+import '../utils/bullet_fixes.dart';
 import '../utils/log.dart';
 import '../utils/page_scoped_notes.dart';
 import 'settings_provider.dart';
