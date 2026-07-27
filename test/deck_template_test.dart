@@ -603,6 +603,93 @@ void main() {
     });
   });
 
+  group('nieuwe rolsjablonen', () {
+    // De negentien rolgerichte overdrachts- en veiligheidssjablonen, elk gebouwd
+    // op een erkende methode. Ze vallen buiten de werkdeck- en gespreksgroepen,
+    // dus deze groep bewaakt hun eigen belofte: substantieel, live-invulbaar, en
+    // waar de vorm de methode draagt ook dát.
+    const roleTemplateIds = [
+      'sbarHandover',
+      'mistHandover',
+      'mdtMeeting',
+      'surgicalChecklist',
+      'nursingHandover',
+      'onboardingPlan',
+      'firstDayInduction',
+      'buddyMentor',
+      'offboarding',
+      'imsafeCheck',
+      'crewBriefing',
+      'occurrenceReport',
+      'toolboxTalk',
+      'eventSafety',
+      'evacuationDrill',
+      'permitToWork',
+      'methaneReport',
+      'gripEscalation',
+      'bridgePassageBriefing',
+    ];
+
+    test('all nineteen role templates are registered', () {
+      final ids = deckTemplates.map((t) => t.id).toSet();
+      expect(ids, containsAll(roleTemplateIds));
+      expect(roleTemplateIds.toSet(), hasLength(19));
+    });
+
+    test('every role template is substantial and starts with a title', () {
+      for (final id in roleTemplateIds) {
+        for (final language in contentLanguages) {
+          final slides = slidesOf(id, language: language);
+          expect(
+            slides.length,
+            greaterThanOrEqualTo(6),
+            reason: '$id.$language',
+          );
+          expect(slides.first.type, SlideType.title, reason: '$id.$language');
+        }
+      }
+    });
+
+    test('every role template is live-invulbaar: editable table or progress '
+        'checklist', () {
+      for (final id in roleTemplateIds) {
+        final slides = slidesOf(id);
+        final editable = slides.any(
+          (s) => s.type == SlideType.table && s.tableEditable,
+        );
+        final progress = slides.any(
+          (s) => s.listStyle == ListStyle.checklist && s.showChecklistProgress,
+        );
+        expect(editable || progress, isTrue, reason: id);
+      }
+    });
+
+    test('the onboarding plan lays out a 30-60-90 timeline', () {
+      for (final language in contentLanguages) {
+        expect(
+          slidesOf(
+            'onboardingPlan',
+            language: language,
+          ).any((s) => s.type == SlideType.timeline),
+          isTrue,
+          reason: language,
+        );
+      }
+    });
+
+    test('the WHO surgical check keeps its three sign-in/time-out/sign-out '
+        'lists', () {
+      for (final language in contentLanguages) {
+        final progressLists = slidesOf('surgicalChecklist', language: language)
+            .where(
+              (s) =>
+                  s.listStyle == ListStyle.checklist && s.showChecklistProgress,
+            );
+        expect(progressLists.length, greaterThanOrEqualTo(3), reason: language);
+      }
+    });
+  });
+
   group('MIAUW-pentestrapport', () {
     test('is registered as a module-only template', () {
       final template = deckTemplateById('miauwReport')!;
