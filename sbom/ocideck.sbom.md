@@ -10,12 +10,11 @@ The JSON documents carry **710 dependency relations** between these components: 
 
 | Licence | Components |
 | --- | ---: |
-| BSD-3-Clause | 134 |
+| BSD-3-Clause | 135 |
 | MIT | 51 |
 | Apache-2.0 | 16 |
 | OFL-1.1 | 5 |
 | MPL-2.0 | 1 |
-| NO | 1 |
 | BSL-1.0 | 1 |
 | BSD | 1 |
 
@@ -86,7 +85,7 @@ The JSON documents carry **710 dependency relations** between these components: 
 | flutter_test _(direct dev)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | flutter_web_plugins _(transitive)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | frontend_server_client _(transitive)_ | 4.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/frontend_server_client@4.0.0` |
-| fuchsia_remote_debug_protocol _(transitive)_ | 0.0.0 | NO LICENSE FILE | flutter | Source: sdk. |
+| fuchsia_remote_debug_protocol _(transitive)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | glob _(transitive)_ | 2.1.3 | BSD-3-Clause | dart-lang | `pkg:pub/glob@2.1.3` |
 | highlight _(direct main)_ | 0.7.0 | MIT | pd4d10 | `pkg:pub/highlight@0.7.0` |
 | hooks _(transitive)_ | 1.0.3 | BSD-3-Clause | dart-lang | `pkg:pub/hooks@1.0.3` |

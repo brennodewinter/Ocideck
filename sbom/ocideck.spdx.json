@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.1.1+2",
-  "documentNamespace": "https://ocideck.app/spdx/de7c7eaf-bba3-5716-8020-0ccefe05bb62",
+  "documentNamespace": "https://ocideck.app/spdx/8a3f371f-1e76-5baa-860c-3d30fd413a49",
   "creationInfo": {
-    "created": "2026-07-27T17:34:01.878619Z",
+    "created": "2026-07-27T18:06:37.076561Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -1380,8 +1380,8 @@
       "supplier": "Organization: flutter",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
-      "licenseConcluded": "NOASSERTION",
-      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "BSD-3-Clause",
+      "licenseDeclared": "BSD-3-Clause",
       "comment": "Source: sdk."
     },
     {
