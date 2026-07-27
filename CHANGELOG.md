@@ -7,15 +7,86 @@
 All notable changes to OciDeck are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and the project aims to follow [Semantic Versioning](https://semver.org/) once it
-starts tagging releases. It has not yet: everything below is unreleased work on
-`main`.
+and the project follows [Semantic Versioning](https://semver.org/). Tagging began
+with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
+newest first. The **Development log** further down is the entry-by-entry diary,
+in Dutch, and it keeps growing on `main` between releases.
+
+## [0.1.1] — 2026-07-27
+
+A follow-up to the first release, cut two days later. The file format does not
+change, so every deck written by `0.1.0` opens unchanged. This release sharpens
+Mermaid rendering on the web and desktop builds and in the presentation itself,
+brings more of the media and diagram experience to the web build, hardens and
+isolates the presentation importer, and
+repairs the on-device face scan after the native-library migration. It also adds
+nineteen role-oriented templates and a handful of presenter conveniences.
+
+As above, this is the short answer; the entry-by-entry rationale, in Dutch, is in
+the **Development log** below.
+
+### Added
+
+- Nineteen role-oriented handover and security templates (#908).
+- Very large Mermaid diagrams scroll during the presentation, with the audience
+  window following along; a very wide diagram such as a Gantt chart scrolls
+  horizontally at a readable height (#872, #885, #895, #896).
+- Turning online media on from within the presentation itself, and — in the
+  preview — a hint that says *why* online media is not playing, with a jump
+  straight to the setting (#852, #861, #865, #879).
+- Quality checks while presenting: split-first handling, dash normalisation, a
+  live "fix (F)" and a "fix all problems" action (#912–#915).
+
+### Fixed
+
+- Mermaid across surfaces: render on the web via JS-interop (#851); wait for the
+  page to be ready before rendering on the macOS WebView (#882, #887); inline the
+  theme styling so diagrams show their colour and text (#862, #866); normalise the
+  text layout to a `flutter_svg`-safe shape (#868, #871); strip invalid `style`
+  fragments so an `erDiagram` no longer renders blank (#886, #893).
+- Web build: play packaged video and audio (#854, #858) and show imagePair answer
+  images (#853, #859) on the web, matching the desktop build.
+- Open a `.ocideck` package directly through File → Open (#905, #910).
+- Presenting: remove the security banner when a presentation starts (#863), and
+  keep the slide number off the projection image while presenting (#864, #867).
+- Presentation import: isolate parse errors per slide and per component so one bad
+  slide no longer sinks the whole import (#877, #903); run validation and parsing
+  off the UI isolate (#875, #902); hold everything to one central resource budget
+  (#874, #884).
+- Privacy: repair the on-device face scan after the native migration (`dartcv4`
+  2.x shipped without `objdetect`/`dnn`) (#898), and memoise it per image so it no
+  longer re-runs on every keystroke (#911).
+- Windows: portability fixes for non-git use — posix image paths, an LF checkout,
+  and a trash-skip (#880, #883) — and a green Windows CI build on `windows-2022`
+  with roughly fifty test-portability fixes (#881).
+- Release packaging: distribution archives now unpack into a versioned
+  `ocideck-<version>/` directory instead of the current folder (#904, #909).
+
+### Changed
+
+- Toolchain pinned from Flutter 3.44.7 to 3.44.8 (#919).
+- Dependencies upgraded within the existing constraints — riverpod 3.4.1,
+  uuid 4.6.0, video_player 2.13.0 (#920); and the OpenCV binding migrated from
+  `opencv_core` to `dartcv4` 2.x native assets, which is what restores the Windows
+  build (#870, #873).
+- Internal refactors: the importer split along its responsibilities (#878, #918),
+  and the fullscreen presenter shrunk via a `QuestionRoundBuilder` (#894).
+
+### Security
+
+- The web build now ships its security headers as `web/.htaccess` (#849, #857).
+- Markdown and YAML injection from an imported presentation is neutralised
+  (#876, #889).
+- DAST (ZAP) moved into the pre-tag `make check-release` run and also runs
+  advisorily against the live host after each web deploy (#850, #856).
+
+---
 
 ## [0.1.0] — 2026-07-25
 
-The first release, when it is cut, is everything below. No tag carries it yet.
-This section is the short answer to "what is in it"; the **Development log**
-further down is the long one, entry by entry, in Dutch.
+The first release — tagged `v0.1.0` on 2026-07-25. This section is the short
+answer to "what is in it"; the **Development log** further down is the long one,
+entry by entry, in Dutch.
 
 ### Added
 

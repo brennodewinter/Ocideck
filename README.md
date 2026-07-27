@@ -2,11 +2,10 @@
 
 > **Status:** current-state project overview · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
 
-> **Unreleased alpha — no release has ever been tagged.** Every user builds from
-> source and runs whatever commit they built. `pubspec.yaml` says `0.1.0+1`, but
-> no tag carries that string and the app never shows it. The file format is the
-> part meant to be stable ([FILE_FORMAT.md](docs/FILE_FORMAT.md)); the
-> application is not. What is missing, rough or untested is collected in
+> **Alpha — releases are now tagged (latest: `0.1.1`, 2026-07-27).** You can
+> build from source, or download a release build; either way the file format is
+> the part meant to be stable ([FILE_FORMAT.md](docs/FILE_FORMAT.md)), while the
+> application is not yet. What is missing, rough or untested is collected in
 > [KNOWN_LIMITATIONS.md](docs/KNOWN_LIMITATIONS.md).
 
 A desktop and web application for building [Marp](https://marp.app/)-compatible
