@@ -2807,6 +2807,10 @@ const _dutchSourceAddTr = <String, String>{
       'GRIP seviyesini, kriz yapısını, rolleri ve tırmandırma ile azaltma kararlarını belirleyin.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Seyir planı ve köprüüstü mutabakatları (appraisal, planning, execution, monitoring) ile kritik rota noktaları.',
+  'Afbeelding of media': 'Görsel veya medya',
+  'Dia-inhoud': 'Slayt içeriği',
+  'kon niet worden gelezen en is overgeslagen': 'okunamadı ve atlandı',
+  'ontbrak in het bestand en is overgeslagen': 'dosyada eksikti ve atlandı',
   'Online media staat uit — aanzetten': 'Çevrimiçi medya kapalı — aç',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand}, yürütülebilir içerik içeriyor ve içe aktarılmayacak.',

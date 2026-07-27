@@ -1822,6 +1822,11 @@ const _dutchSourceAddEt = <String, String>{
       'Määra GRIP-tase, kriisistruktuur, rollid ning üles- ja allaskaleerimise otsused.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Reisiplaan ja komandosilla kokkulepped (appraisal, planning, execution, monitoring) koos marsruudi kriitiliste punktidega.',
+  'Afbeelding of media': 'Pilt või meedia',
+  'Dia-inhoud': 'Slaidi sisu',
+  'kon niet worden gelezen en is overgeslagen':
+      'ei õnnestunud lugeda ja jäeti vahele',
+  'ontbrak in het bestand en is overgeslagen': 'puudus failis ja jäeti vahele',
   'Online media staat uit — aanzetten': 'Veebimeedia on väljas — lülita sisse',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} sisaldab käivitatavat sisu ja seda ei impordita.',

@@ -1852,6 +1852,12 @@ const _dutchSourceAddBg = <String, String>{
       'Определете нивото по GRIP, кризисната структура, ролите и решенията за повишаване и понижаване.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'План на прехода и договорености на мостика (appraisal, planning, execution, monitoring) с критични точки от маршрута.',
+  'Afbeelding of media': 'Изображение или медия',
+  'Dia-inhoud': 'Съдържание на слайда',
+  'kon niet worden gelezen en is overgeslagen':
+      'не можа да се прочете и се пропусна',
+  'ontbrak in het bestand en is overgeslagen':
+      'липсваше във файла и се пропусна',
   'Online media staat uit — aanzetten': 'Онлайн медията е изключена — включи',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} съдържа изпълнимо съдържание и няма да бъде импортиран.',

@@ -1852,6 +1852,11 @@ const _dutchSourceAddMt = <String, String>{
       'Iddetermina l-livell GRIP, l-istruttura tal-kriżi, ir-rwoli u d-deċiżjonijiet ta\' skalar \'il fuq u \'l isfel.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Pjan tal-vjaġġ u ftehimiet tal-pont (appraisal, planning, execution, monitoring) b\'punti kritiċi tar-rotta.',
+  'Afbeelding of media': 'Immaġni jew midja',
+  'Dia-inhoud': 'Kontenut tas-slide',
+  'kon niet worden gelezen en is overgeslagen': 'ma setax jinqara u ġie maqbuż',
+  'ontbrak in het bestand en is overgeslagen':
+      'kien nieqes mill-fajl u ġie maqbuż',
   'Online media staat uit — aanzetten': 'Midja online mitfi — ixquq',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} fih kontenut eżegwibbli u mhux se jiġi impurtat.',

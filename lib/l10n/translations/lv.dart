@@ -1829,6 +1829,11 @@ const _dutchSourceAddLv = <String, String>{
       'Nosakiet GRIP līmeni, krīzes struktūru, lomas un lēmumus par palielināšanu un samazināšanu.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Pārejas plāns un tiltiņa vienošanās (appraisal, planning, execution, monitoring) ar kritiskajiem maršruta punktiem.',
+  'Afbeelding of media': 'Attēls vai multivide',
+  'Dia-inhoud': 'Slaida saturs',
+  'kon niet worden gelezen en is overgeslagen':
+      'nevarēja nolasīt un tika izlaists',
+  'ontbrak in het bestand en is overgeslagen': 'trūka failā un tika izlaists',
   'Online media staat uit — aanzetten':
       'Tiešsaistes multivide izslēgta — ieslēgt',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':

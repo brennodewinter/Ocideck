@@ -8,6 +8,7 @@ import '../../../models/source_image.dart';
 import '../../../models/source_slide.dart';
 import '../../../models/source_table.dart';
 import '../../../models/source_video.dart';
+import '../../../pipeline/parse_guard.dart';
 import '../key_context.dart';
 import '../key_text_salvage.dart';
 import 'chart_reconstructor.dart';
@@ -58,16 +59,29 @@ class SlideReconstructor {
     final slides = <SourceSlide>[];
     for (var pos = 0; pos < ordered.length; pos++) {
       final obj = ordered[pos];
-      final content = _slideContent(obj, pos);
-      if (content.text == null &&
-          content.images.isEmpty &&
-          content.table == null &&
-          content.chart == null &&
-          content.video == null &&
-          content.audioFileName == null) {
-        continue; // blank — nothing to salvage.
-      }
-      slides.add(_buildSlide(obj, pos, content));
+      // Isoleer een onverwachte fout tot déze dia (#877): één beschadigd
+      // slide-object mag de reconstructie van de rest niet afbreken. Het verlies
+      // gaat naar de deckbrede notitie via `issues`.
+      guardParseVoid(
+        sink: issues,
+        slideIndex: pos,
+        component: IssueComponent.slide,
+        feature: 'Dia-inhoud',
+        description: 'kon niet worden gelezen en is overgeslagen',
+        logOp: 'KeyImporter: dia ${pos + 1}',
+        body: () {
+          final content = _slideContent(obj, pos);
+          if (content.text == null &&
+              content.images.isEmpty &&
+              content.table == null &&
+              content.chart == null &&
+              content.video == null &&
+              content.audioFileName == null) {
+            return; // blank — nothing to salvage.
+          }
+          slides.add(_buildSlide(obj, pos, content));
+        },
+      );
     }
     return slides;
   }

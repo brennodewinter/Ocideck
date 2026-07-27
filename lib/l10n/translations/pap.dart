@@ -790,6 +790,12 @@ const _dutchSourceAddPap = {
       'Determiná e nivel GRIP, e struktura di krisis, rolnan i desishonnan di eskalá i deseskalá.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Plan di biahe i akuerdonan di brùg (appraisal, planning, execution, monitoring) ku puntonan krítiko di ruta.',
+  'Afbeelding of media': 'Imagen òf media',
+  'Dia-inhoud': 'Kontenido di slide',
+  'kon niet worden gelezen en is overgeslagen':
+      'no por a wòrdu lesá i a keda saltá',
+  'ontbrak in het bestand en is overgeslagen':
+      'tabata falta den e archivo i a keda saltá',
   'Online media staat uit — aanzetten': 'Media online ta apa — ké',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} ta kontené kontenido ehekutabel i lo no wòrdu importá.',

@@ -788,6 +788,12 @@ const _dutchSourceAddFy = {
       'Bepaal it GRIP-nivo, de krisisstruktuer, rollen en op- en ôfskalingsbeslissings.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Reisplan en brêgeôfspraken (appraisal, planning, execution, monitoring) mei kritike rûtepunten.',
+  'Afbeelding of media': 'Ôfbylding of media',
+  'Dia-inhoud': 'Dia-ynhâld',
+  'kon niet worden gelezen en is overgeslagen':
+      'koe net lêzen wurde en is oerslein',
+  'ontbrak in het bestand en is overgeslagen':
+      'ûntbriek yn it bestân en is oerslein',
   'Online media staat uit — aanzetten': 'Online media steat út — oansette',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} befettet útfierbere ynhâld en wurdt net ymportearre.',

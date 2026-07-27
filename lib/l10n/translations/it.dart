@@ -786,6 +786,12 @@ const _dutchSourceAddIt = {
       'Definisci il livello GRIP, la struttura di crisi, i ruoli e le decisioni di scala.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Piano di navigazione e accordi di plancia (appraisal, planning, execution, monitoring) con punti critici della rotta.',
+  'Afbeelding of media': 'Immagine o media',
+  'Dia-inhoud': 'Contenuto della diapositiva',
+  'kon niet worden gelezen en is overgeslagen':
+      'non è stato possibile leggere ed è stato saltato',
+  'ontbrak in het bestand en is overgeslagen':
+      'mancava nel file ed è stato saltato',
   'Online media staat uit — aanzetten': 'Media online disattivati — attiva',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} contiene contenuto eseguibile e non verrà importato.',

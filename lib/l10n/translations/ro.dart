@@ -1848,6 +1848,10 @@ const _dutchSourceAddRo = <String, String>{
       'Stabiliți nivelul GRIP, structura de criză, rolurile și deciziile de escaladare și dezescaladare.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Planul de pasaj și înțelegeri pe punte (appraisal, planning, execution, monitoring) cu puncte critice ale rutei.',
+  'Afbeelding of media': 'Imagine sau media',
+  'Dia-inhoud': 'Conținutul diapozitivului',
+  'kon niet worden gelezen en is overgeslagen': 'nu s-a putut citi și s-a omis',
+  'ontbrak in het bestand en is overgeslagen': 'lipsea din fișier și s-a omis',
   'Online media staat uit — aanzetten': 'Media online dezactivată — activează',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} conține conținut executabil și nu va fi importat.',

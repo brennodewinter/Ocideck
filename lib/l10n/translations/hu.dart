@@ -1834,6 +1834,12 @@ const _dutchSourceAddHu = <String, String>{
       'Határozza meg a GRIP-szintet, a válságstruktúrát, a szerepeket, valamint a fel- és leskálázási döntéseket.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Útvonalterv és hídmegállapodások (appraisal, planning, execution, monitoring) a kritikus útvonalpontokkal.',
+  'Afbeelding of media': 'Kép vagy média',
+  'Dia-inhoud': 'Dia tartalma',
+  'kon niet worden gelezen en is overgeslagen':
+      'nem sikerült beolvasni, ezért ki lett hagyva',
+  'ontbrak in het bestand en is overgeslagen':
+      'hiányzott a fájlból, ezért ki lett hagyva',
   'Online media staat uit — aanzetten': 'Online média kikapcsolva — bekapcsol',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       'A(z) {bestand} végrehajtható tartalommal rendelkezik, ezért nem lesz importálva.',

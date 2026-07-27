@@ -1832,6 +1832,12 @@ const _dutchSourceAddGsw = <String, String>{
       'Leg d GRIP-Stuefe, d Krisestruktur, d Rolle und d Uf- und Abstuefigsentscheid fescht.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Reiseplan und Brügg-Abmachige (appraisal, planning, execution, monitoring) mit kritische Wegpünkt.',
+  'Afbeelding of media': 'Bild oder Medie',
+  'Dia-inhoud': 'Folieninhalt',
+  'kon niet worden gelezen en is overgeslagen':
+      'het nöd chöne gläse wärde und isch übersprunge worde',
+  'ontbrak in het bestand en is overgeslagen':
+      'het im File gfäält und isch übersprunge worde',
   'Online media staat uit — aanzetten': 'Online-Media us — schalte y',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} enthaltet uusfüehrbare Inhalt und wird nöd importiert.',

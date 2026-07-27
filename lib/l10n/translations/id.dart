@@ -1830,6 +1830,12 @@ const _dutchSourceAddId = <String, String>{
       'Tetapkan tingkat GRIP, struktur krisis, peran, serta keputusan naik dan turun skala.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Rencana pelayaran dan kesepakatan anjungan (appraisal, planning, execution, monitoring) dengan titik rute kritis.',
+  'Afbeelding of media': 'Gambar atau media',
+  'Dia-inhoud': 'Isi slide',
+  'kon niet worden gelezen en is overgeslagen':
+      'tidak dapat dibaca dan dilewati',
+  'ontbrak in het bestand en is overgeslagen':
+      'tidak ada dalam berkas dan dilewati',
   'Online media staat uit — aanzetten': 'Media daring nonaktif — aktifkan',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} berisi konten yang dapat dieksekusi dan tidak akan diimpor.',

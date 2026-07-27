@@ -1857,6 +1857,12 @@ const _dutchSourceAddEl = <String, String>{
       'Καθορίστε το επίπεδο GRIP, τη δομή κρίσης, τους ρόλους και τις αποφάσεις κλιμάκωσης και αποκλιμάκωσης.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Σχέδιο πλου και συμφωνίες γέφυρας (appraisal, planning, execution, monitoring) με κρίσιμα σημεία διαδρομής.',
+  'Afbeelding of media': 'Εικόνα ή πολυμέσα',
+  'Dia-inhoud': 'Περιεχόμενο διαφάνειας',
+  'kon niet worden gelezen en is overgeslagen':
+      'δεν ήταν δυνατή η ανάγνωση και παραλείφθηκε',
+  'ontbrak in het bestand en is overgeslagen':
+      'έλειπε από το αρχείο και παραλείφθηκε',
   'Online media staat uit — aanzetten':
       'Διαδικτυακά μέσα απενεργοποιημένα — ενεργοποίηση',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':

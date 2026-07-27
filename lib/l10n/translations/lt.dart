@@ -1838,6 +1838,11 @@ const _dutchSourceAddLt = <String, String>{
       'Nustatykite GRIP lygį, krizės struktūrą, vaidmenis ir sprendimus dėl didinimo bei mažinimo.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Perėjimo planas ir tiltelio susitarimai (appraisal, planning, execution, monitoring) su kritiniais maršruto taškais.',
+  'Afbeelding of media': 'Vaizdas arba medija',
+  'Dia-inhoud': 'Skaidrės turinys',
+  'kon niet worden gelezen en is overgeslagen':
+      'nepavyko nuskaityti ir praleista',
+  'ontbrak in het bestand en is overgeslagen': 'trūko faile ir praleista',
   'Online media staat uit — aanzetten': 'Internetinė medija išjungta — įjungti',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} turi vykdomojo turinio ir nebus importuotas.',

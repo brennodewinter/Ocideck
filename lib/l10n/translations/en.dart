@@ -968,6 +968,12 @@ const _dutchSourceAddEn = {
       'Set the GRIP level, crisis structure, roles and scaling decisions.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'Passage plan and bridge agreements (appraisal, planning, execution, monitoring) with critical route points.',
+  'Afbeelding of media': 'Image or media',
+  'Dia-inhoud': 'Slide content',
+  'kon niet worden gelezen en is overgeslagen':
+      'could not be read and was skipped',
+  'ontbrak in het bestand en is overgeslagen':
+      'was missing from the file and was skipped',
   'Online media staat uit — aanzetten': 'Online media is off — turn on',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} contains executable content and will not be imported.',

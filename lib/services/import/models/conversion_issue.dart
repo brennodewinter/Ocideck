@@ -1,3 +1,42 @@
+/// Welk onderdeel van een brondia een [ConversionIssue] betreft.
+///
+/// **Diagnostisch, niet zichtbaar.** Deze categorie stuurt de logging en de
+/// groepering van probleemdia's; hij belandt níet in de vertaalde notitietekst
+/// (die blijft de vaste bronstrings in [ConversionIssue.feature]/[description],
+/// #806). Zo hoeft een nieuwe categorie geen 31 vertalingen — en tegelijk kan de
+/// foutgrens in de importers een verlies benoemen zonder broninhoud te lekken.
+enum IssueComponent {
+  /// De hele dia kon niet worden geparseerd.
+  slide,
+  chart,
+  table,
+
+  /// Een relatie (`.rels`, `r:id`) die niet oploste.
+  relation,
+
+  /// Ingesloten of gelinkte media (afbeelding, video, audio).
+  media,
+
+  /// Sprekersnotities.
+  notes,
+  theme,
+}
+
+/// Waaróm een onderdeel niet kon worden overgenomen — de oorzaakcategorie.
+///
+/// Net als [IssueComponent] diagnostisch: voor logging en groepering, niet voor
+/// de zichtbare notitietekst.
+enum IssueCause {
+  /// Onleesbare of ongeldige XML/structuur.
+  malformedXml,
+
+  /// Een verwacht onderdeel (part, relatie-doel) ontbrak.
+  missingPart,
+
+  /// Een onverwachte fout die geen van bovenstaande categorieën dekt.
+  unexpected,
+}
+
 /// A feature from a source slide that the import could not map to OciDeck.
 ///
 /// The pipeline collects these per slide and, after the converted slide,
@@ -25,6 +64,8 @@ class ConversionIssue {
     required this.description,
     this.salvagedAs,
     this.args = const {},
+    this.component,
+    this.cause,
   });
 
   /// 0-based index of the source slide this issue belongs to.
@@ -47,6 +88,15 @@ class ConversionIssue {
   /// bestandsnaam, de tekst van een koppeling. Dat laatste wordt bewust niet
   /// vertaald: het is van de gebruiker.
   final Map<String, String> args;
+
+  /// Welk brononderdeel dit betreft — diagnostisch, zie [IssueComponent].
+  /// `null` voor de klassieke classifier-/salvage-issues die geen parse-fout
+  /// zijn.
+  final IssueComponent? component;
+
+  /// De oorzaakcategorie — diagnostisch, zie [IssueCause]. `null` als het geen
+  /// parse-fout betreft.
+  final IssueCause? cause;
 
   /// Whether any part of the feature was salvaged.
   bool get isSalvaged => salvagedAs != null && salvagedAs!.isNotEmpty;

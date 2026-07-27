@@ -1847,6 +1847,11 @@ const _dutchSourceAddUk = <String, String>{
       'Визначте рівень GRIP, кризову структуру, ролі та рішення про підвищення й зниження рівня.',
   'Reisplan en brugafspraken (appraisal, planning, execution, monitoring) met kritieke routepunten.':
       'План переходу та домовленості на містку (appraisal, planning, execution, monitoring) з критичними точками маршруту.',
+  'Afbeelding of media': 'Зображення або медіа',
+  'Dia-inhoud': 'Вміст слайда',
+  'kon niet worden gelezen en is overgeslagen':
+      'не вдалося прочитати й пропущено',
+  'ontbrak in het bestand en is overgeslagen': 'бракувало у файлі й пропущено',
   'Online media staat uit — aanzetten': 'Онлайн-медіа вимкнено — увімкнути',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} містить виконуваний вміст і не буде імпортований.',

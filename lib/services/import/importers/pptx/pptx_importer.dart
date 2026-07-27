@@ -2,10 +2,12 @@ import 'package:archive/archive.dart';
 import 'package:xml/xml.dart';
 
 import '../../core/result.dart';
+import '../../models/conversion_issue.dart';
 import '../../models/source_format.dart';
 import '../../models/source_deck.dart';
 import '../../models/source_slide.dart';
 import '../../models/source_theme.dart';
+import '../../pipeline/parse_guard.dart';
 import '../../utils/archive_utils.dart';
 import '../../utils/import_budget.dart';
 import '../../../../utils/log.dart';
@@ -63,15 +65,34 @@ class PptxImporter extends Importer {
       final slides = <SourceSlide>[];
       for (var i = 0; i < slideRefs.length; i++) {
         final entry = slideRefs[i];
-        slides.add(
-          parseSlide(
-            ctx,
-            i,
-            entry.path,
-            isHidden: entry.isHidden,
-            isSection: sectionStarts.contains(entry.slideId),
-          ),
-        );
+        // Isoleer een onverwachte fout tot déze dia (#877): een misvormde
+        // slide-XML mag de rest van het deck niet meesleuren. De volgorde blijft
+        // kloppen doordat de fallback een lege dia op dezelfde index is, met het
+        // verlies genoteerd zodat het op de notitiedia komt.
+        final parseIssues = <ConversionIssue>[];
+        final slide =
+            guardParse<SourceSlide>(
+              sink: parseIssues,
+              slideIndex: i,
+              component: IssueComponent.slide,
+              feature: 'Dia-inhoud',
+              description: 'kon niet worden gelezen en is overgeslagen',
+              logOp: 'PptxImporter: dia ${i + 1}',
+              body: () => parseSlide(
+                ctx,
+                i,
+                entry.path,
+                isHidden: entry.isHidden,
+                isSection: sectionStarts.contains(entry.slideId),
+              ),
+            ) ??
+            SourceSlide(
+              index: i,
+              isHidden: entry.isHidden,
+              isSection: sectionStarts.contains(entry.slideId),
+              parseIssues: parseIssues,
+            );
+        slides.add(slide);
         onProgress?.call(
           (i + 1) / slideRefs.length,
           'Slide ${i + 1}/${slideRefs.length}',
