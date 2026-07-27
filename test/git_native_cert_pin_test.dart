@@ -249,5 +249,15 @@ void main() {
             'strandt is het git-protocol, niet de verbinding',
       );
     },
+    // Op de windows-2022-CI-runner komt de verbinding met de lokale
+    // HTTPS-testserver niet eens tot stand (git meldt direct "Could not connect
+    // to server"), en git gebruikt daar schannel in plaats van openssl. Of
+    // native git op Windows `http.sslCAInfo` als anker honoreert is daarmee een
+    // open vraag (#926) die een échte Windows-machine vraagt, niet enkel groen
+    // maken. De config die wíj meegeven is op Windows al gedekt door de
+    // zustertests hierboven (die de argv/omgeving controleren zonder verbinding).
+    skip: Platform.isWindows
+        ? 'lokale HTTPS-testserver onbereikbaar voor git op de Windows-CI (#926)'
+        : false,
   );
 }
