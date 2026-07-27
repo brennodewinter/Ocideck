@@ -26,7 +26,11 @@ lifeblood of open source, and we do not take a single one of them for granted.
 - Arre Zuurmond
 
 Have you contributed and would like to be listed here? You are warmly invited to
-add yourself — see [`CONTRIBUTING.md`](CONTRIBUTING.md).
+add yourself in your first pull request — see [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+And the other way round is just as welcome: if you are named here and would
+rather not be, write to stichting@librekat.nl and we will remove you — no reason
+needed.
 
 ---
 
