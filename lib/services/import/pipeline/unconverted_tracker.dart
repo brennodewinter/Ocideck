@@ -65,10 +65,6 @@ class UnconvertedTracker {
     return lines.join('\n');
   }
 
-  /// Whether [issues] contain any non-salvaged loss worth noting.
-  static bool hasLoss(List<ConversionIssue> issues) =>
-      issues.any((i) => !i.isSalvaged) || issues.isNotEmpty;
-
   static String _formatIssue(
     ConversionIssue issue,
     ImportTextTranslator translate,

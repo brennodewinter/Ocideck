@@ -38,16 +38,6 @@ void main() {
     expect(body, contains('(deels overgenomen: tekst als bullets)'));
   });
 
-  test('hasLoss is true when there are issues', () {
-    expect(
-      UnconvertedTracker.hasLoss([
-        const ConversionIssue(slideIndex: 0, feature: 'x', description: 'y'),
-      ]),
-      isTrue,
-    );
-    expect(UnconvertedTracker.hasLoss(const []), isFalse);
-  });
-
   test('buildDeckNoteBody uses a document-level heading', () {
     final body = UnconvertedTracker.buildDeckNoteBody([
       const ConversionIssue(
