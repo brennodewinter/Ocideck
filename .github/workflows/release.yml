@@ -53,7 +53,7 @@ jobs:
           # versionClaimPatterns in tool/check_toolchain.dart). Een tweede plek
           # om te vergeten is dit dus niet — het is een tweede plek die bewaakt
           # wordt.
-          flutter-version: 3.44.7
+          flutter-version: 3.44.8
           cache: true
 
       - name: Install dependencies
