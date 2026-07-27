@@ -6,6 +6,7 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:path/path.dart' as p;
 
 /// De import schrijft twee soorten Nederlandse tekst naar de gebruiker die de
 /// gewone vertaalpoort niet ziet (#806):
@@ -89,7 +90,11 @@ Set<String> _importNoteSources(String root) {
       .where((f) => f.path.endsWith('.dart'));
   for (final file in files) {
     final unit = parseFile(
-      path: file.absolute.path,
+      // `parseFile` eist een genormaliseerd pad. De hardgecodeerde root gebruikt
+      // `/`, maar `listSync` hangt op Windows de bestandsnaam met `\` aan —
+      // dat gemengde pad wijst de analyzer af. `p.normalize` maakt er één
+      // consistente scheiding van (#926).
+      path: p.normalize(file.absolute.path),
       featureSet: FeatureSet.latestLanguageVersion(),
       throwIfDiagnostics: false,
     ).unit;

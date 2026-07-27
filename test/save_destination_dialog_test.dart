@@ -64,13 +64,18 @@ void main() {
         find.textContaining(p.join('/home/prive', 'Kwartaal_Update.md')),
         findsOneWidget,
       );
-      expect(find.textContaining('/home/prive/images'), findsOneWidget);
+      // Zelfde reden als hierboven: de dialoog toont `p.join(map, 'images')`,
+      // dus op Windows met de OS-scheiding tussen map en submap.
+      expect(
+        find.textContaining(p.join('/home/prive', 'images')),
+        findsOneWidget,
+      );
 
       // Kies de tweede bibliotheek; de samenvatting verspringt mee.
       await tester.tap(find.text('Werk'));
       await tester.pumpAndSettle();
       expect(
-        find.textContaining('/home/werk/Kwartaal_Update.md'),
+        find.textContaining(p.join('/home/werk', 'Kwartaal_Update.md')),
         findsOneWidget,
       );
 

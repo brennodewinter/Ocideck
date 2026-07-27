@@ -15,6 +15,7 @@ import 'package:ocideck/widgets/dialogs/import_slides_dialog.dart';
 import 'package:ocideck/widgets/dialogs/slide_diff_dialog.dart';
 import 'package:ocideck/widgets/dialogs/slide_finder_dialog.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
+import 'package:path/path.dart' as p;
 
 import 'support/pump_until.dart';
 
@@ -302,7 +303,10 @@ void main() {
       expect(toegevoegd, isNotNull);
       expect(
         toegevoegd!.customMarkdown,
-        contains('![de foto](${tekstDir.path}/images/foto.png)'),
+        // De dialoog maakt het pad absoluut met `p.join`, dus tussen de map en
+        // `images/foto.png` staat de scheiding van het platform — op Windows
+        // `\`, niet de letterlijke `/` (#926).
+        contains('![de foto](${p.join(tekstDir.path, 'images/foto.png')})'),
       );
     });
 
@@ -336,7 +340,9 @@ void main() {
       expect(geimporteerd, hasLength(1));
       expect(
         geimporteerd!.single.customMarkdown,
-        contains('![de foto](${tekstDir.path}/images/foto.png)'),
+        // Zie hierboven: `p.join` gebruikt de platform-scheiding tussen de map
+        // en `images/foto.png` (#926).
+        contains('![de foto](${p.join(tekstDir.path, 'images/foto.png')})'),
       );
     });
   });
