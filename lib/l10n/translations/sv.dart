@@ -1770,6 +1770,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Met dank aan': 'Med tack',
   'Fix alle problemen': 'Åtgärda alla problem',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Problemen som kunde åtgärdas automatiskt är klara. Det som återstår kräver ett val.',

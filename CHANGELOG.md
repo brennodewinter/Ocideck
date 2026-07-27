@@ -176,6 +176,21 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Added
+- **Een dankwoord in de app: een hartje naast de OciDeck-naam in "Over
+  OciDeck".** Bijdragen en hulp zijn de kern van open source, en tot nu toe zei
+  de app dat nergens hardop. Er is nu een los, warm dankwoord in
+  [`CONTRIBUTORS.md`](CONTRIBUTORS.md) met de mensen die aan OciDeck hebben
+  bijgedragen, op achternaam gesorteerd. Het opent vanuit een hartje (`coral`)
+  direct naast de titel in **Instellingen → Over OciDeck**, in dezelfde
+  leesweergave als de overige documentatie. Het bestand is een root-`.md` zoals
+  `LICENSE.md`: gebundeld als asset en vanuit `README.md` gelinkt, maar bewust
+  níét als tegel in de documentatielijst — het enige aanknoppunt in de app is
+  het hartje. `AUTHORS.md` verwijst voortaan naar deze lijst als de ene plek
+  waar we bijdragers noemen. De reader toont de basisversie (Engels), met de
+  gebruikelijke taalmelding voor niet-Nederlandse interfacetalen; de titel
+  "Met dank aan" is in elke taal vertaald.
+
 ### Changed
 - **Toolchain-pin van Flutter 3.44.7 naar 3.44.8 (stable, 2026-07-27).** De
   laatste stable uit het officiële kanaal. 3.44.8 lost bovenstrooms twee dingen

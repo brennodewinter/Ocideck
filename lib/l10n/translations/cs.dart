@@ -1774,6 +1774,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Met dank aan': 'S poděkováním',
   'Fix alle problemen': 'Opravit všechny problémy',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Problémy, které šlo vyřešit automaticky, jsou vyřízené. Zbytek vyžaduje rozhodnutí.',

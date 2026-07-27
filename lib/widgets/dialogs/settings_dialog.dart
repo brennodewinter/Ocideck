@@ -51,6 +51,7 @@ import '../editors/advanced_section.dart';
 import '../language_flag.dart';
 import '../privacy_badge.dart';
 import '../privacy_statement_content.dart';
+import '../reader/document_reader_screen.dart';
 import '../reader/documentation_search_tab.dart';
 import '../slides/image_zoom_dialog.dart';
 import 'hex_color_dialog.dart';

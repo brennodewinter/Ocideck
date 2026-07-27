@@ -731,6 +731,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Met dank aan': 'Mei tank',
   'Fix alle problemen': 'Alle problemen oplosse',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'De problemen dy\'t fansels op te lossen wiene, binne oanpakt. Wat oerbliuwt freget om in kar.',

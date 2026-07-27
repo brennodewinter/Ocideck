@@ -1798,6 +1798,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Met dank aan': 'Με ευγνωμοσύνη',
   'Fix alle problemen': 'Επιδιόρθωση όλων των προβλημάτων',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Τα προβλήματα που διορθώνονται αυτόματα αντιμετωπίστηκαν. Ό,τι απομένει απαιτεί μια επιλογή.',

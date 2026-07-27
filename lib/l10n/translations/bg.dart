@@ -1793,6 +1793,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Met dank aan': 'С благодарност',
   'Fix alle problemen': 'Поправи всички проблеми',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Проблемите, които можеха да се решат автоматично, са решени. Останалото изисква избор.',

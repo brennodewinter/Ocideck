@@ -1770,6 +1770,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Met dank aan': 'Ar pateicību',
   'Fix alle problemen': 'Labot visas problēmas',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Automātiski risināmās problēmas ir novērstas. Pārējais prasa izvēli.',

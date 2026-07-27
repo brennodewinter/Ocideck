@@ -1806,6 +1806,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Met dank aan': 'Le buíochas',
   'Fix alle problemen': 'Deisigh gach fadhb',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Réitíodh na fadhbanna in-réitithe go huathoibríoch. Éilíonn a bhfuil fágtha rogha.',

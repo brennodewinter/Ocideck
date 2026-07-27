@@ -1770,6 +1770,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Met dank aan': 'Med tak',
   'Fix alle problemen': 'Løs alle problemer',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'De problemer, der kunne løses automatisk, er klaret. Resten kræver et valg.',

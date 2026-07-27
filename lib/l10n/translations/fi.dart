@@ -1771,6 +1771,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Met dank aan': 'Kiitokset',
   'Fix alle problemen': 'Korjaa kaikki ongelmat',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Automaattisesti korjattavat ongelmat on hoidettu. Loput vaativat valinnan.',

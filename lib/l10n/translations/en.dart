@@ -911,6 +911,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Met dank aan': 'With thanks',
   'Fix alle problemen': 'Fix all issues',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'The automatically fixable issues have been handled. What remains needs a choice.',

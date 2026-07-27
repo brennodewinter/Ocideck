@@ -1762,6 +1762,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Met dank aan': 'Tänuga',
   'Fix alle problemen': 'Paranda kõik probleemid',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Automaatselt lahendatavad probleemid on tehtud. Ülejäänu nõuab valikut.',

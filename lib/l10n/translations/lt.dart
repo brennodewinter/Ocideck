@@ -1778,6 +1778,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Met dank aan': 'Su padėka',
   'Fix alle problemen': 'Taisyti visas problemas',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Automatiškai išsprendžiamos problemos sutvarkytos. Kas lieka, reikalauja pasirinkimo.',

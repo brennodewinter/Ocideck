@@ -1778,6 +1778,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Met dank aan': 'S vďakou',
   'Fix alle problemen': 'Opraviť všetky problémy',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Problémy, ktoré sa dali vyriešiť automaticky, sú vybavené. Zvyšok vyžaduje rozhodnutie.',

@@ -1775,6 +1775,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Met dank aan': 'Köszönettel',
   'Fix alle problemen': 'Minden probléma javítása',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Az automatikusan javítható problémákat elintéztük. Ami marad, döntést kíván.',

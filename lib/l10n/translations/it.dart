@@ -726,6 +726,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Met dank aan': 'Con gratitudine',
   'Fix alle problemen': 'Correggi tutti i problemi',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Risolti i problemi correggibili in automatico. Il resto richiede una scelta.',

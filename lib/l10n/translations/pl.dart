@@ -1783,6 +1783,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Met dank aan': 'Z podziękowaniami',
   'Fix alle problemen': 'Napraw wszystkie problemy',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Problemy możliwe do automatycznego naprawienia zostały rozwiązane. Reszta wymaga decyzji.',

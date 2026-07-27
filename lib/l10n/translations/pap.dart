@@ -730,6 +730,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Met dank aan': 'Ku danki',
   'Fix alle problemen': 'Drecha tur problema',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'A drecha e problemanan ku por a wòrdu drechá outomátikamente. Loke ta resta ta pidi un desishon.',

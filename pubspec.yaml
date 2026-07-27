@@ -177,6 +177,7 @@ flutter:
     - assets/templates/
     # Full EUPL 1.2 licence text, shown verbatim in the consent screen.
     - LICENSE.md
+    - CONTRIBUTORS.md
     # User-facing documentation, shown in the in-app reader (Settings →
     # Documentation). Source-language files; translated variants (e.g.
     # docs/USER_GUIDE.de.md) can be added alongside and are picked up

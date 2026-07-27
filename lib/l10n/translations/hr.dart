@@ -1777,6 +1777,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Met dank aan': 'Sa zahvalnošću',
   'Fix alle problemen': 'Popravi sve probleme',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Problemi koji su se mogli automatski riješiti su obrađeni. Ono što preostaje traži odluku.',
