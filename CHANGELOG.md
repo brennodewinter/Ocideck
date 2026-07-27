@@ -105,6 +105,21 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Changed
+- **Toolchain-pin van Flutter 3.44.7 naar 3.44.8 (stable, 2026-07-27).** De
+  laatste stable uit het officiële kanaal. 3.44.8 lost bovenstrooms twee dingen
+  op die ons raken: een `lipo`-verificatiefout van Xcode bij het compileren van
+  de macOS- en iOS-build, en een bug in de Android-toegankelijkheidsbrug op
+  aangepaste Android 11-ROM's. De gebundelde Dart blijft 3.12.2, dus `dart
+  format` reflowt niet en de opmaakpoort had geen mechanische herformattering
+  nodig. Omdat `make check-toolchain` (#598/#721) eist dat de pin op élke plek
+  gelijk staat, schoven ze in één commit mee: `.tool-versions`, beide
+  workflows, `README.md`, `CONTRIBUTING.md` en de vier `docs/`-gidsen, plus de
+  "Toolchains of record"-tabel in `docs/CHECKS.md`. De SBOM is opnieuw
+  gegenereerd (`make sbom` leest de SDK-versie uit `.tool-versions`). Het
+  gedateerde meetrecord onder "Latest result" blijft op 3.44.7 staan — dat is
+  een momentopname van de run op 2026-07-23, geen actuele eis.
+
 ### Fixed
 - **De Linux- en Windows-distributiepakketten pakten los in de huidige map uit;
   nu in één versiemap `ocideck-<versie>/` (#904).** `tar -tzvf

@@ -32,7 +32,7 @@ dependencies:
   desktop_drop: ^0.7.1
   image: ^4.9.1
   # dartcv4 is de opvolger van het teruggetrokken opencv_core: dat pakket is
-  # retired voor Flutter >= 3.38 (wij draaien 3.44.7). De prebuilt OpenCV-pack
+  # retired voor Flutter >= 3.38 (wij draaien 3.44.8). De prebuilt OpenCV-pack
   # van opencv_core -> dartcv4 1.1.8 paste niet meer bij de Windows-toolchain,
   # waardoor `flutter build windows` afbrak op find_package(OpenCV). Alleen
   # gebruikt in lib/services/privacy/image_face_scan_io.dart (YuNet-detectie).
