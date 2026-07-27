@@ -192,6 +192,22 @@ read a book to find out.
   een momentopname van de run op 2026-07-23, geen actuele eis.
 
 ### Fixed
+- **`.ocideck`-pakketten (en `.ocideckstyle`-stijlprofielen) waren grijs en
+  onaantikbaar in het systeemvenster op macOS (#927).** Wie een opgeslagen
+  presentatie wilde openen via **Pakket importeren**, kon het `.ocideck`-bestand
+  niet kiezen: het stond grijs, net als `.md` in datzelfde venster. Oorzaak is
+  `file_picker`, dat op macOS juist de bestanden úitgrijst die op een
+  `FileType.custom` + `allowedExtensions`-filter matchen zodra de extensie geen
+  bij macOS geregistreerde UTI heeft — en `.ocideck`/`.ocideckstyle` zijn
+  zelfverzonnen extensies. Dat is precies het gedrag waarvoor `pickMarkdownFile`
+  (de gewone "Openen…") eerder al naar `FileType.any` ging; `pickPackageFile` en
+  `importStyleProfile` bleven achter. Beide kiezen nu zonder extensie-filter, en
+  de inhoud wordt ná het kiezen alsnog gevalideerd — een pakket aan zijn zip-kop,
+  een stijlprofiel aan zijn JSON-envelop met de `ocideck`-marker — dus een
+  verkeerd bestand faalt met een melding in plaats van stil. Het systeemvenster
+  laat zich onder `flutter test` niet aansturen, dus
+  `test/file_picker_extension_filter_test.dart` bewaakt op bronniveau dat deze
+  drie kiezers geen extensie-filter meer terugkrijgen.
 - **De Linux- en Windows-distributiepakketten pakten los in de huidige map uit;
   nu in één versiemap `ocideck-<versie>/` (#904).** `tar -tzvf
   ocideck-linux-x64-0.1.0.tar.gz` begon met `./ocideck`, `./lib/…` — pakte je
