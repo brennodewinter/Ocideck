@@ -105,6 +105,23 @@ rare. It stays, in full, under a heading that says what it is. The release
 summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
+### Fixed
+- **De Linux- en Windows-distributiepakketten pakten los in de huidige map uit;
+  nu in één versiemap `ocideck-<versie>/` (#904).** `tar -tzvf
+  ocideck-linux-x64-0.1.0.tar.gz` begon met `./ocideck`, `./lib/…` — pakte je
+  het bestand uit in je downloadmap, dan spatte de hele bundel daar los tussen
+  je andere bestanden (een "tarbomb"). De Windows-`.zip` had dezelfde vorm. De
+  inpakstappen zetten de bundel voortaan onder een enkele topmap
+  `ocideck-<versie>/`: Linux via `tar --transform "s,^bundle,ocideck-<versie>,"`
+  (het anker `^bundle` laat symlink-doelen ongemoeid), Windows via een
+  staging-map vóór `7z`. De macOS-`.zip` was al goed — `ditto --keepParent`
+  houdt de `.app` als enige topingang — en blijft ongewijzigd; de
+  web-deploytarball valt buiten scope, want die wordt server-side in een
+  doelmap uitgepakt. De echte archieven ontstaan pas bij een `v*`-tag en raken
+  geen `flutter test`; daarom bewaakt `test/release_package_layout_test.dart` de
+  verpakkingsstappen in beide release-workflows tegen terugval naar de
+  los-in-de-map-vorm.
+
 ### Added
 - **Negentien rolgerichte overdrachts- en veiligheidssjablonen erbij (2026-07-26).**
   De sjablooncatalogus leunde op kantoor-, beveiligings- en gesprekswerk; deze

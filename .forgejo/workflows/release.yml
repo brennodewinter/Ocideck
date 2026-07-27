@@ -197,9 +197,17 @@ jobs:
         run: make build-linux
 
       - name: Bundel inpakken
+        # In één versiemap ocideck-<versie>/, niet los in de huidige map: pakte
+        # je de tarball anders uit, dan spatte de hele bundel (./ocideck,
+        # ./lib/…) over de map waarin je stond (issue #904). --transform
+        # hernoemt de bovenste padcomponent `bundle` naar `ocideck-<versie>`;
+        # het anker ^bundle raakt geen symlink-doelen, want die beginnen daar
+        # nooit mee.
         run: |
           VERSIE="${GITHUB_REF_NAME#v}"
-          tar -C build/linux/x64/release/bundle -czf "ocideck-linux-x64-$VERSIE.tar.gz" .
+          tar -C build/linux/x64/release \
+            --transform "s,^bundle,ocideck-$VERSIE," \
+            -czf "ocideck-linux-x64-$VERSIE.tar.gz" bundle
           echo "VERSIE=$VERSIE" >> "$GITHUB_ENV"
 
       - name: Artifact bewaren

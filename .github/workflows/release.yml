@@ -76,8 +76,15 @@ jobs:
         run: |
           set -eu
           VERSIE="${GITHUB_REF_NAME#v}"
-          (cd build/windows/x64/runner/Release && \
-            7z a -tzip "$GITHUB_WORKSPACE/ocideck-windows-x64-$VERSIE.zip" ./*)
+          # In één versiemap ocideck-<versie>/, niet los in de huidige map:
+          # anders spatte de zip bij het uitpakken over de map waarin je stond
+          # (issue #904). 7z kent geen hernoem-bij-inpakken, dus eerst een
+          # staging-map vullen en die inpakken.
+          STAGE="ocideck-$VERSIE"
+          rm -rf "$STAGE"
+          mkdir "$STAGE"
+          cp -r build/windows/x64/runner/Release/* "$STAGE/"
+          7z a -tzip "$GITHUB_WORKSPACE/ocideck-windows-x64-$VERSIE.zip" "$STAGE"
           echo "VERSIE=$VERSIE" >> "$GITHUB_ENV"
 
       - name: Publish to the mirror's release
