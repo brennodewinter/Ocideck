@@ -965,12 +965,13 @@ class FileService {
   }
 
   Future<String?> pickPackageFile({String? initialDirectory}) async {
-    // Op web null (zie [_pickPathGated]); daar pakt `_openWithBytesPicker` een
-    // pakket in het geheugen uit.
+    // FileType.any, geen `allowedExtensions`: dat filter grijst de zelfverzonnen
+    // `.ocideck` juist úit op macOS (geen UTI) — zelfde reden als bij
+    // [pickMarkdownFile]; [importPackageFile] toetst daarna de zip-kop.
+    // Op web null (zie [_pickPathGated]); daar pakt `_openWithBytesPicker` uit.
     return _pickPathGated(
       dialogTitle: _d('Pakket importeren'),
-      type: FileType.custom,
-      allowedExtensions: [packageExtension, 'zip'],
+      type: FileType.any,
       initialDirectory: initialDirectory,
     );
   }

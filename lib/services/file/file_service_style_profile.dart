@@ -335,11 +335,15 @@ extension FileServiceStyleProfile on FileService {
 
   /// Kies een `.ocideckstyle`-bestand en lees het uit. `withData` levert op web
   /// én desktop bytes, zodat één pad volstaat (web kent geen bestandspad).
+  ///
+  /// FileType.any, geen `allowedExtensions`: dat filter grijst de zelfverzonnen
+  /// `.ocideckstyle` juist úit op macOS (geen UTI) — zelfde reden als bij
+  /// [FileService.pickPackageFile]. [importStyleProfileBytes] toetst daarna de
+  /// JSON-envelop met de `ocideck`-marker.
   Future<StyleProfileImportOutcome> importStyleProfile() async {
     final result = await FilePicker.pickFiles(
       dialogTitle: _d('Stijlprofiel importeren'),
-      type: FileType.custom,
-      allowedExtensions: [FileService.styleProfileExtension, 'json'],
+      type: FileType.any,
       withData: true,
     );
     final file = result?.files.single;
