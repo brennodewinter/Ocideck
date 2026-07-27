@@ -1,16 +1,20 @@
 # OciDeck — Migration Guide
 
-> **Status:** current-state — and there is nothing to migrate between yet · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** current-state — two releases, no breaking changes yet · **Status last reviewed:** 2026-07-28 · **Published by:** Stichting LibreKAT
 
-## There is nothing to migrate between yet
+## No migration steps between releases yet
 
-OciDeck has **never tagged a release**. The repository carries no release tag
-(the single tag that exists, `archive/git-mirror`, marks an archived branch),
-`pubspec.yaml` says `0.1.0+1`, and there is no versioning or release scheme.
-There are no numbered versions, so there are no migration paths between them, no
-release notes, and no conversion tooling. [SECURITY.md](../SECURITY.md) says the
-same under *Supported versions*; if the two ever disagree, that one is about
-which versions get fixes and this one is about file compatibility.
+Releases are tagged (latest `0.1.1`, 2026-07-27). The file format did not
+change between `0.1.0` and `0.1.1`, so every deck written by `0.1.0` opens
+unchanged. There are no migration paths to record yet — no breaking format
+changes, no conversion tooling. [SECURITY.md](../SECURITY.md) says the same
+under *Supported versions*; if the two ever disagree, that one is about which
+versions get fixes and this one is about file compatibility.
+
+*(Corrected 2026-07-28: this said "OciDeck has never tagged a release" and
+"there is no versioning or release scheme" — true until `0.1.0` on
+2026-07-25, stale since. The rules and the settings-migration section below
+are unchanged.)*
 
 Until that changes, this document records only what is true today: what the app
 migrates on its own, and the rules that migration follows.
@@ -74,15 +78,15 @@ is the point at which this project needs a real format version and a real
 migration path — and that decision belongs in
 [FILE_FORMAT.md](FILE_FORMAT.md), documented before it ships, not after.
 
-## When there is a release scheme
+## When a release breaks something
 
-Once versions are actually tagged, this document becomes the place to record,
-per release: what breaks, what the user must do, and how to go back. Written at
-the time the breaking change lands, not reconstructed later.
+Once a release introduces a breaking change, this document becomes the place to
+record, per release: what breaks, what the user must do, and how to go back.
+Written at the time the breaking change lands, not reconstructed later.
 
 Bugs and questions go to the project's issue tracker (Forgejo). There is no
 community forum, no support channel, and no mailing list.
 
-There *is* a releases feed on the forge to subscribe to — empty until the first
-release, which is exactly what this document is waiting for too. `SECURITY.md`
-names it and says what it carries. Corrected 2026-07-22.
+There *is* a releases feed on the forge to subscribe to — it carries the
+tagged releases. `SECURITY.md` names it and says what it carries. Corrected
+2026-07-28: this said the feed was empty, which was true before `0.1.0`.
