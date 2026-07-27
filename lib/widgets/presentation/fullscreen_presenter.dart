@@ -22,6 +22,7 @@ import '../../models/timeline.dart';
 import '../../models/video_source.dart';
 import '../../services/markdown_service.dart';
 import '../../services/privacy/privacy_projection.dart';
+import '../../services/quality_autofix.dart';
 import '../../services/question_round_builder.dart';
 import '../mermaid_render_host.dart';
 import '../../services/rehearsal_controller.dart';
@@ -61,32 +62,6 @@ part 'parts/presenter_overlays.dart';
 part 'parts/presenter_content.dart';
 part 'parts/presenter_views.dart';
 part 'parts/presenter_support.dart';
-
-/// Guards teardown of the secondary audience window so native close is only
-/// invoked once (double-close on Linux can crash the embedder).
-@visibleForTesting
-class AudienceWindowHandle {
-  AudienceWindowHandle(
-    this.controller, {
-    Future<void> Function(WindowController controller)? closeImpl,
-  }) : _closeImpl = closeImpl ?? ((c) => c.close());
-
-  final WindowController controller;
-  final Future<void> Function(WindowController controller) _closeImpl;
-  bool _closed = false;
-
-  bool get isClosed => _closed;
-
-  Future<void> close() async {
-    if (_closed) return;
-    _closed = true;
-    try {
-      await _closeImpl(controller);
-    } catch (e) {
-      logWarning('AudienceWindowHandle.close: audience window', e);
-    }
-  }
-}
 
 /// Blanco-schermstand tijdens het presenteren (zoals B/W in PowerPoint).
 enum _Blank { none, black, white }
@@ -181,6 +156,13 @@ class FullscreenPresenter extends StatefulWidget {
   final void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged;
   final ValueChanged<Slide>? onSlideChanged;
 
+  /// Splits de dia met dit id in het bewaarde deck. De live-fix tijdens
+  /// presenteren (#914) knipt een te volle dia lokaal al op; deze schrijft die
+  /// knip door naar de bron, zodat hij ná afloop blijft staan en met één stap
+  /// ongedaan te maken is. Anders dan [onSlideChanged] verandert dit het aantal
+  /// dia's, dus het is een eigen terugkoppeling.
+  final ValueChanged<String>? onSlideSplit;
+
   /// Recipient/course notes keyed by [Slide.id]; never shown on the audience
   /// display unless the presenter toggles the local notes panel (Ctrl+N).
   final Map<String, String> initialUserNotes;
@@ -205,6 +187,7 @@ class FullscreenPresenter extends StatefulWidget {
     this.initialAnnotations = const {},
     this.onAnnotationsChanged,
     this.onSlideChanged,
+    this.onSlideSplit,
     this.initialUserNotes = const {},
     this.onUserNotesChanged,
   });
@@ -229,6 +212,7 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
+    ValueChanged<String>? onSlideSplit,
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
   }) async {
@@ -275,6 +259,7 @@ class FullscreenPresenter extends StatefulWidget {
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
+        onSlideSplit: onSlideSplit,
         initialUserNotes: initialUserNotes,
         onUserNotesChanged: onUserNotesChanged,
       );
@@ -297,6 +282,7 @@ class FullscreenPresenter extends StatefulWidget {
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
+        onSlideSplit: onSlideSplit,
         initialUserNotes: initialUserNotes,
         onUserNotesChanged: onUserNotesChanged,
       );
@@ -321,6 +307,7 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
+    ValueChanged<String>? onSlideSplit,
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
   }) async {
@@ -353,6 +340,7 @@ class FullscreenPresenter extends StatefulWidget {
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
               onSlideChanged: onSlideChanged,
+              onSlideSplit: onSlideSplit,
               initialUserNotes: initialUserNotes,
               onUserNotesChanged: onUserNotesChanged,
             ),
@@ -389,6 +377,7 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
+    ValueChanged<String>? onSlideSplit,
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
   }) async {
@@ -462,6 +451,7 @@ class FullscreenPresenter extends StatefulWidget {
           annotations: annotations,
           onAnnotationsChanged: onAnnotationsChanged,
           onSlideChanged: onSlideChanged,
+          onSlideSplit: onSlideSplit,
           initialUserNotes: initialUserNotes,
           onUserNotesChanged: onUserNotesChanged,
         );
@@ -494,6 +484,7 @@ class FullscreenPresenter extends StatefulWidget {
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
               onSlideChanged: onSlideChanged,
+              onSlideSplit: onSlideSplit,
               initialUserNotes: initialUserNotes,
               onUserNotesChanged: onUserNotesChanged,
             ),
@@ -577,6 +568,13 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   /// Sneltoets-overzicht (cheatsheet) zichtbaar.
   bool _helpOpen = false;
+
+  /// Vluchtige melding na de live-fix (#914) — alléén wanneer er niets op te
+  /// lossen viel of de dia geredigeerd is. Een geslaagde fix hoeft geen melding:
+  /// die spreekt voor zich doordat de dia zichtbaar korter wordt. Verdwijnt
+  /// vanzelf via [_fixFlashTimer].
+  String? _fixFlash;
+  Timer? _fixFlashTimer;
 
   /// Gebruikersnotities-paneel (ontvanger/cursist); standaard uit.
   bool _userNotesMode = false;
@@ -766,6 +764,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _advanceTimer?.cancel();
     _clockTimer?.cancel();
     _typedTimer?.cancel();
+    _fixFlashTimer?.cancel();
     _questionTimer?.cancel();
     _gridScroll.dispose();
     _mermaidScroll.dispose();
@@ -931,14 +930,21 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                 left: 0,
                 right: 0,
                 bottom: 60,
-                child: Center(child: _buildTypedBadge(total)),
+                child: Center(child: _buildTypedBadge(context, _typed, total)),
               ),
             if (_targetInput)
               Positioned(
                 left: 0,
                 right: 0,
                 bottom: 60,
-                child: Center(child: _buildTargetBadge()),
+                child: Center(child: _buildTargetBadge(context, _targetTyped)),
+              ),
+            if (_fixFlash != null)
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 60,
+                child: Center(child: _buildFixBadge(context, _fixFlash!)),
               ),
             if (_helpOpen) Positioned.fill(child: _buildHelpOverlay()),
             if (_tableEditMode)

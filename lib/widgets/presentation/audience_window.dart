@@ -235,6 +235,20 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         setState(() {
           _slides[i] = _slides[i].copyWith(tableRows: rows);
         });
+      case 'replaceDeck':
+        // Een live-fix tijdens presenteren (#914) kan het aantal dia's
+        // veranderen (splitsen); de smalle bullet-/tabelkanalen volstaan dan
+        // niet. De beamer krijgt de verse markdown en herrendert vanaf de
+        // meegestuurde positie.
+        final m = Map<String, dynamic>.from(call.arguments as Map);
+        if (!mounted) return null;
+        final deck = MarkdownService().parseDeck(m['markdown'] as String? ?? '');
+        final next = deck?.slides ?? const <Slide>[];
+        final i = (m['index'] as num?)?.toInt() ?? _index;
+        setState(() {
+          _slides = next;
+          _index = next.isEmpty ? 0 : i.clamp(0, next.length - 1);
+        });
     }
     return null;
   }

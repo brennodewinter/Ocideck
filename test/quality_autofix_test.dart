@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/quality_autofix.dart';
 import 'package:ocideck/services/slide_quality_analyzer.dart';
@@ -95,6 +96,39 @@ void main() {
       final twice = fixAllStructuralQualityIssues(once.deck);
       expect(twice.applied, 0);
       expect(twice.deck.slides.length, once.deck.slides.length);
+    });
+
+    test('safeFixForSlide splitst een te volle losse dia', () {
+      final slide = Slide.create(SlideType.bullets).copyWith(
+        bullets: [for (var i = 0; i < 20; i++) 'Punt ${i + 1}'],
+      );
+      final pages = safeFixForSlide(slide, const ThemeProfile());
+      expect(pages, isNotNull);
+      expect(pages!.length, greaterThan(1));
+      final total = pages.fold<int>(0, (sum, s) => sum + s.bullets.length);
+      expect(total, 20);
+    });
+
+    test('safeFixForSlide knipt zinnen op één dia zonder te splitsen', () {
+      final slide = Slide.create(SlideType.bullets).copyWith(
+        bullets: [
+          'Eerste zin. Tweede zin.',
+          'Derde zin. Vierde zin.',
+          'Los een.',
+          'Los twee.',
+        ],
+      );
+      final pages = safeFixForSlide(slide, const ThemeProfile());
+      expect(pages, isNotNull);
+      expect(pages!.length, 1);
+      expect(pages.first.bullets.length, 6);
+    });
+
+    test('safeFixForSlide geeft null als er niets te doen is', () {
+      final slide = Slide.create(
+        SlideType.bullets,
+      ).copyWith(bullets: ['Eén korte bullet', 'Nog een korte']);
+      expect(safeFixForSlide(slide, const ThemeProfile()), isNull);
     });
 
     test('maakt een meegesleepte pagina uit zijn reeks los', () {

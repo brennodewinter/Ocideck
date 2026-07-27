@@ -2,6 +2,32 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../fullscreen_presenter.dart';
 
+/// Guards teardown of the secondary audience window so native close is only
+/// invoked once (double-close on Linux can crash the embedder).
+@visibleForTesting
+class AudienceWindowHandle {
+  AudienceWindowHandle(
+    this.controller, {
+    Future<void> Function(WindowController controller)? closeImpl,
+  }) : _closeImpl = closeImpl ?? ((c) => c.close());
+
+  final WindowController controller;
+  final Future<void> Function(WindowController controller) _closeImpl;
+  bool _closed = false;
+
+  bool get isClosed => _closed;
+
+  Future<void> close() async {
+    if (_closed) return;
+    _closed = true;
+    try {
+      await _closeImpl(controller);
+    } catch (e) {
+      logWarning('AudienceWindowHandle.close: audience window', e);
+    }
+  }
+}
+
 /// The markdown payload for the audience window: the slides and the TLP level.
 ///
 /// This payload never touches disk, so everything the beamer cannot look up for

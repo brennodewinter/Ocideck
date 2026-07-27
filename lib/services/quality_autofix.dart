@@ -1,4 +1,5 @@
 import '../models/deck.dart';
+import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
 import '../utils/bullet_fixes.dart';
@@ -72,6 +73,44 @@ int _totalBullets(Deck deck) => deck.slides.fold<int>(
   0,
   (sum, s) => sum + s.bullets.length + s.bullets2.length,
 );
+
+/// De veilige structurele fix voor één losse dia — de live-fix tijdens
+/// presenteren (#914). Geeft de nieuwe pagina('s) terug die deze ene dia
+/// vervangen, of `null` als er niets veiligs te doen valt:
+///
+///  * één dia terug → in-place opknippen (meerzins-bullets → losse bullets), de
+///    dia blijft één dia;
+///  * meer dan één dia → splitsen over pagina's.
+///
+/// Gebruikt dezelfde volgorde en drempels als [fixAllStructuralQualityIssues],
+/// zodat "fixen" tijdens presenteren precies zo werkt als in de editor. [slide]
+/// wordt op zichzelf beoordeeld ([theme] bepaalt de inpassing); een reeks-effect
+/// als meegesleepte tekstgrootte hoort niet bij het oplossen van één dia.
+List<Slide>? safeFixForSlide(
+  Slide slide,
+  ThemeProfile theme, {
+  String? projectPath,
+  SlideQualityAnalyzer analyzer = const SlideQualityAnalyzer(),
+}) {
+  final issues = analyzer
+      .analyzeSlides(
+        slides: [slide],
+        theme: theme,
+        font: theme.fontFamily,
+        projectPath: projectPath,
+      )
+      .forSlide(0);
+  // 1. Meerzins-bullets → opknippen (blijft op de dia).
+  if (issues.any((i) => i.kind == SlideQualityIssueKind.bulletMultiSentence) &&
+      canSplitSentenceBullets(slide)) {
+    return [splitSentenceBullets(slide)];
+  }
+  // 2. Te vol → splitsen; null wanneer de dia niet te splitsen valt.
+  if (issues.any((i) => _splitClearableKinds.contains(i.kind))) {
+    return splitBulletSlidePages(slide);
+  }
+  return null;
+}
 
 /// Past de eerste toepasbare structurele fix toe en geeft het nieuwe deck terug,
 /// of `null` als er niets meer te doen is. De volgorde is de "juiste volgorde"

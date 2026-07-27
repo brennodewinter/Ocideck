@@ -18,6 +18,7 @@ List<(String, String)> _helpOverlayRows(AppLocalizations l10n) => [
   ('Home · End', l10n.d('Eerste · laatste slide')),
   ('G', l10n.d('Slide-overzicht (pijltjes + Enter)')),
   ('P', l10n.d('Presenter view (notities, klok)')),
+  ('F', l10n.d('Probleem op deze dia oplossen')),
   // De binding is `control || meta` (presenter_keys.dart), dus stond hier
   // voor Mac-gebruikers het verkeerde: Cmd+N werkt ook. Nu uit dezelfde
   // bron als elke andere sneltoets in de app (#803).
@@ -36,6 +37,106 @@ List<(String, String)> _helpOverlayRows(AppLocalizations l10n) => [
   ('Esc · ${shortcutLabel(l10n, 'W')}', l10n.d('Terug / afsluiten')),
 ];
 
+/// Badge met het getypte slidenummer ("→ 12 / 28  · Enter"). Top-level, net als
+/// [_helpOverlayRows]: de klasse-plafondratchet telt élk lid van
+/// _FullscreenPresenterState mee, en dit is enkel opmaak.
+Widget _buildTypedBadge(BuildContext context, String typed, int total) {
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+    decoration: BoxDecoration(
+      color: Colors.black.withValues(alpha: 0.82),
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: AppTheme.blue400, width: 1.5),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Icon(Icons.south_east, color: AppTheme.blue400, size: 20),
+        const SizedBox(width: 10),
+        Text(
+          '$typed / $total',
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 26,
+            fontWeight: FontWeight.w700,
+            fontFeatures: [FontFeature.tabularFigures()],
+          ),
+        ),
+        const SizedBox(width: 12),
+        Text(
+          context.l10n.d('Enter'),
+          style: const TextStyle(color: _muted, fontSize: 13),
+        ),
+      ],
+    ),
+  );
+}
+
+/// Badge tijdens het invoeren van de doeltijd ("Doeltijd 20:00 · Enter").
+/// Cijfers schuiven van rechts in als MM:SS (zoals een magnetron). Top-level, om
+/// dezelfde reden als [_buildTypedBadge].
+Widget _buildTargetBadge(BuildContext context, String targetTyped) {
+  final padded = targetTyped.padLeft(4, '0');
+  final preview = '${padded.substring(0, 2)}:${padded.substring(2)}';
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+    decoration: BoxDecoration(
+      color: Colors.black.withValues(alpha: 0.82),
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: AppTheme.amber500, width: 1.5),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Icon(Icons.timer_outlined, color: AppTheme.amber500, size: 20),
+        const SizedBox(width: 10),
+        Text(
+          preview,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 26,
+            fontWeight: FontWeight.w700,
+            fontFeatures: [FontFeature.tabularFigures()],
+          ),
+        ),
+        const SizedBox(width: 12),
+        Text(
+          '${context.l10n.d('Doeltijd')} · ${context.l10n.d('Enter')} · '
+          '0 = ${context.l10n.d('uit')}',
+          style: const TextStyle(color: _muted, fontSize: 13),
+        ),
+      ],
+    ),
+  );
+}
+
+/// Badge voor de vluchtige live-fix-melding (#914). Top-level, net als
+/// [_helpOverlayRows]: de klasse-plafondratchet telt élk lid van
+/// _FullscreenPresenterState mee, en dit is enkel opmaak.
+Widget _buildFixBadge(BuildContext context, String message) {
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+    decoration: BoxDecoration(
+      color: Colors.black.withValues(alpha: 0.82),
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: AppTheme.blue400, width: 1.5),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Icon(Icons.auto_fix_high, color: AppTheme.blue400, size: 20),
+        const SizedBox(width: 10),
+        Flexible(
+          child: Text(
+            message,
+            style: const TextStyle(color: Colors.white, fontSize: 16),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
 extension _PresenterOverlays on _FullscreenPresenterState {
   String _fmtClock(DateTime t) {
     final h = t.hour.toString().padLeft(2, '0');
@@ -53,76 +154,6 @@ extension _PresenterOverlays on _FullscreenPresenterState {
   String _fmtRemaining(Duration d) {
     final body = _fmtElapsed(d.abs());
     return d.isNegative ? '-$body' : body;
-  }
-
-  /// Badge met het getypte slidenummer ("→ 12 / 28  · Enter").
-  Widget _buildTypedBadge(int total) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.82),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppTheme.blue400, width: 1.5),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.south_east, color: AppTheme.blue400, size: 20),
-          const SizedBox(width: 10),
-          Text(
-            '$_typed / $total',
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 26,
-              fontWeight: FontWeight.w700,
-              fontFeatures: [FontFeature.tabularFigures()],
-            ),
-          ),
-          const SizedBox(width: 12),
-          Text(
-            context.l10n.d('Enter'),
-            style: const TextStyle(color: _muted, fontSize: 13),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// Badge tijdens het invoeren van de doeltijd ("Doeltijd 20:00 · Enter").
-  /// Cijfers schuiven van rechts in als MM:SS (zoals een magnetron).
-  Widget _buildTargetBadge() {
-    final padded = _targetTyped.padLeft(4, '0');
-    final preview = '${padded.substring(0, 2)}:${padded.substring(2)}';
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.82),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppTheme.amber500, width: 1.5),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.timer_outlined, color: AppTheme.amber500, size: 20),
-          const SizedBox(width: 10),
-          Text(
-            preview,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 26,
-              fontWeight: FontWeight.w700,
-              fontFeatures: [FontFeature.tabularFigures()],
-            ),
-          ),
-          const SizedBox(width: 12),
-          Text(
-            '${context.l10n.d('Doeltijd')} · ${context.l10n.d('Enter')} · '
-            '0 = ${context.l10n.d('uit')}',
-            style: const TextStyle(color: _muted, fontSize: 13),
-          ),
-        ],
-      ),
-    );
   }
 
   /// Sneltoets-overzicht (cheatsheet).
