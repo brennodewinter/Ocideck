@@ -456,12 +456,7 @@ class SlideFactory {
 }
 
 /// Schema's die een link in een geïmporteerd deck niet mag dragen.
-const _unsafeLinkSchemes = [
-  'javascript:',
-  'data:',
-  'vbscript:',
-  'file:',
-];
+const _unsafeLinkSchemes = ['javascript:', 'data:', 'vbscript:', 'file:'];
 
 /// Of [url] een schema draagt dat in een geïmporteerd deck niet thuishoort.
 ///

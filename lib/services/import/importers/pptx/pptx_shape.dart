@@ -56,10 +56,7 @@ class ShapeText {
       }.contains(phType);
 }
 
-ShapeText? parseShape(
-  XmlElement sp,
-  String? Function(String rId) resolveLink,
-) {
+ShapeText? parseShape(XmlElement sp, String? Function(String rId) resolveLink) {
   final ph = descendantsLocal(sp, 'ph').firstOrNull;
   final phType = ph?.getAttribute('type') ?? 'body';
   final txBody = descendantsLocal(sp, 'txBody').firstOrNull;
