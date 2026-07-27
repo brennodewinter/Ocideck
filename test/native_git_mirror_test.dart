@@ -1,4 +1,11 @@
 @TestOn('vm')
+// Deze suite doet échte git-subprocessen (clone/commit/push/diff). Op de
+// Windows-CI zijn die onder gelijktijdige belasting fors trager dan de 30s die
+// het testframework standaard per test geeft, wat losstaande tests
+// intermitterend liet aflopen (#933). Alléén op Windows krijgen ze daarom ruimer
+// de tijd; elders blijft de strakke standaard staan, zodat een echte vastloper
+// lokaal snel opvalt.
+@OnPlatform(<String, dynamic>{'windows': Timeout(Duration(minutes: 3))})
 library;
 
 import 'dart:convert';
@@ -13,6 +20,7 @@ import 'package:ocideck/services/git/native_git_mirror_api.dart';
 import 'package:ocideck/services/git/native_git_mirror_io.dart';
 
 import 'git_deck_mirror_contract_test.dart' show runDeckMirrorContract;
+import 'support/temp_dir.dart';
 
 // NativeGitMirror over een échte lokale git-repo. De opslag-methodes moeten voor
 // exact hetzelfde DeckMirror-contract slagen als de REST-variant; de commit/push
@@ -64,7 +72,7 @@ void main() {
         baseDir: '${temp.path}/m',
       ))!;
     });
-    tearDown(() => temp.deleteSync(recursive: true));
+    tearDown(() => deleteTempDir(temp));
 
     runDeckMirrorContract(
       'NativeGitMirror',
@@ -114,7 +122,7 @@ void main() {
         baseDir: '${temp.path}/clone',
       ))!;
     });
-    tearDown(() => temp.deleteSync(recursive: true));
+    tearDown(() => deleteTempDir(temp));
 
     test('prepareForOpen kloont en leest het deck', () async {
       await mirror.prepareForOpen();
