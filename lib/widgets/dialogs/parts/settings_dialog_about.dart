@@ -86,6 +86,54 @@ Widget _publisherCardBody(
   );
 }
 
+/// De titelrij van de banner: de naam "OciDeck" met het dankwoord-hartje ernaast.
+///
+/// Top-level en geen lid van de extension: zo blijft de banner-methode klein en
+/// groeit het klasse-plafond van _SettingsDialogState niet mee met deze rij —
+/// dezelfde reden als [_publisherCardBody] en [_aboutKeyValue].
+Widget _aboutBannerTitle(BuildContext context, AppLocalizations l10n) {
+  return Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Text(
+        l10n.d('OciDeck'),
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.w800,
+          letterSpacing: 0.3,
+        ),
+      ),
+      const SizedBox(width: 6),
+      _thanksHeart(context, l10n),
+    ],
+  );
+}
+
+/// Het hartje naast de OciDeck-naam in de banner: opent het dankwoord
+/// ([CONTRIBUTORS.md]) in de leesweergave. Bijdragen en hulp zijn de kern van
+/// open source, en dit is de plek in de app die dat hardop zegt.
+///
+/// Top-level en geen lid van de extension, om dezelfde reden als
+/// [_publisherCardBody] en [_aboutKeyValue]: de klasse-plafondratchet telt élk
+/// extension-lid mee bij _SettingsDialogState, en dit knopje heeft niets van die
+/// state nodig — alleen de [context] om de lezer op de wortelnavigator te duwen.
+Widget _thanksHeart(BuildContext context, AppLocalizations l10n) {
+  final label = l10n.d('Met dank aan');
+  return IconButton(
+    icon: const Icon(Icons.favorite, size: 18, color: AppTheme.coral),
+    tooltip: label,
+    visualDensity: VisualDensity.compact,
+    padding: EdgeInsets.zero,
+    constraints: const BoxConstraints(minWidth: 34, minHeight: 34),
+    onPressed: () => DocumentReaderScreen.open(
+      context,
+      title: label,
+      assetBase: 'CONTRIBUTORS.md',
+    ),
+  );
+}
+
 /// Een label-waarderegel uit de contactkaart, eventueel als link.
 ///
 /// Top-level en geen lid van de extension, om dezelfde reden als
@@ -382,15 +430,7 @@ extension _SettingsAbout on _SettingsDialogState {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  l10n.d('OciDeck'),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: 0.3,
-                  ),
-                ),
+                _aboutBannerTitle(context, l10n),
                 const SizedBox(height: 4),
                 Text(
                   l10n.d(
