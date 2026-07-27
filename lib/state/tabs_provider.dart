@@ -399,6 +399,13 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // van hetzelfde bestand). De veiligheidsscan is bij het eerste openen al
     // gedaan, dus die hoeft hier niet opnieuw.
     _clearOpenFailure(_ref, mounted);
+    // Een `.ocideck`/zip-pakket gaat door het uitpakpad, niet de markdown-open —
+    // anders weigert die het als te grote of onleesbare tekst (#905).
+    if (_isPackagePath(path)) {
+      final homeDir = _ref.read(settingsProvider).homeDirectory;
+      final failure = await importPackageFile(path, homeDir: homeDir);
+      return _packageOpenResult(_ref, mounted, failure);
+    }
     final existing = _indexOfOpenPath(path);
     if (existing != null) {
       selectTab(existing);
@@ -770,6 +777,46 @@ OpenResult _openFailureResult(Ref ref, bool alive, OpenFailure? failure) {
 void _clearOpenFailure(Ref ref, bool alive) {
   if (alive) ref.read(openFailureProvider.notifier).state = null;
 }
+
+/// True als [path] op zijn extensie een `.ocideck`-pakket of losse `.zip` is:
+/// een zip met de deck plus assets, niet de platte markdown die de gewone open
+/// verwacht. Zelfde extensie-afslag als slepen-en-neerzetten
+/// ([AppShell._onFilesDropped]) en de web-bytes-open, zodat "Openen", drag-drop
+/// en web hetzelfde pakket op dezelfde manier behandelen.
+bool _isPackagePath(String path) {
+  final ext = p.extension(path).toLowerCase();
+  return ext == '.${FileService.packageExtension}' || ext == '.zip';
+}
+
+/// Vertaalt de uitkomst van [TabsImport.importPackageFile] — aangeroepen vanuit
+/// [TabsNotifier.openFileByPath] voor een `.ocideck`/zip via "Openen" — naar een
+/// [OpenResult], en legt waar mogelijk de [OpenFailure] vast zodat de schil
+/// dezelfde gerichte melding toont als bij een losse markdown-open. `null`
+/// betekent: afgehandeld (geopend, geblokkeerd met alarm, of wachtwoord
+/// afgebroken); dan valt er niets te melden.
+OpenResult _packageOpenResult(Ref ref, bool alive, ImportFailure? failure) =>
+    switch (failure) {
+      null => OpenResult.opened,
+      ImportFailure.needsPassword ||
+      ImportFailure.encryptedCancelled => OpenResult.passwordCancelled,
+      ImportFailure.tooLarge || ImportFailure.limitExceeded =>
+        _openFailureResult(ref, alive, OpenFailure.tooLarge),
+      ImportFailure.corrupt => _openFailureResult(
+        ref,
+        alive,
+        OpenFailure.corrupt,
+      ),
+      ImportFailure.unsupported => _openFailureResult(
+        ref,
+        alive,
+        OpenFailure.notPresentation,
+      ),
+      ImportFailure.network => _openFailureResult(
+        ref,
+        alive,
+        OpenFailure.unreadable,
+      ),
+    };
 
 /// Een zojuist geopend bestand blijkt elders een byte-identieke kopie te
 /// hebben. De shell toont hierop een snackbar met opruim-ingang (zelfde
