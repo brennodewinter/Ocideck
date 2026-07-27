@@ -38,6 +38,24 @@ class _Recorder {
   }
 }
 
+/// Het minimale milieu dat `debugSpawn` op Windows nodig heeft om echt git te
+/// starten. `_spawn` sluit het milieu (`includeParentEnvironment: false`); op
+/// Windows heeft `CreateProcess` dan SystemRoot/PATHEXT/PATH nodig om `git.exe`
+/// te vinden en de systeem-DLL's te laden — precies wat het echte app-pad via
+/// `_hardenedEnv` meegeeft. Zonder dat faalt de spawn met "The parameter is
+/// incorrect", en dat is een leeg-milieu-artefact, geen echt codepad (#926). Op
+/// POSIX volstaat een leeg (null) milieu: daar lost de spawn de executable via
+/// het ouderpad op.
+Map<String, String>? _smokeEnv() {
+  if (!Platform.isWindows) return null;
+  final env = <String, String>{};
+  for (final key in const ['PATH', 'PATHEXT', 'SystemRoot', 'SYSTEMROOT']) {
+    final value = Platform.environment[key];
+    if (value != null) env[key] = value;
+  }
+  return env;
+}
+
 void main() {
   group('GitVersion.parse', () {
     test('leest gangbare vormen', () {
@@ -284,7 +302,9 @@ void main() {
 
   group('echte git op deze machine', () {
     test('git --version draait en meldt zijn versie', () async {
-      final res = await debugSpawn('git', const ['--version']);
+      final res = await debugSpawn('git', const [
+        '--version',
+      ], environment: _smokeEnv());
       expect(res.ok, isTrue);
       expect(res.stdout, contains('git version'));
     });
