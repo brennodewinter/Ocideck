@@ -76,7 +76,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
             profile: deck.themeProfile,
             splitWithImage: slide.type.splitWithImage,
           )
-        : expandFindingsForRender([slide]).length;
+        : expandFindingsForRender([slide], profile: deck.themeProfile).length;
     if (pages > 1) {
       final page = ref.read(richTextPreviewPageProvider);
       if (delta > 0 && page < pages - 1) {
@@ -164,7 +164,9 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
     // A long finding previews across multiple full-size pages (render-time
     // pagination, mirroring the export); the preview shows the current page and
     // arrow keys / the page indicator step through them.
-    final findingPageSlides = expandFindingsForRender([slide]);
+    final findingPageSlides = expandFindingsForRender([
+      slide,
+    ], profile: deck.themeProfile);
     final isPagedFinding = findingPageSlides.length > 1;
     final pageCount = isPagedFinding ? findingPageSlides.length : richTextPages;
     final hasRichTextPages = pageCount > 1;

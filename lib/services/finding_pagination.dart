@@ -12,7 +12,10 @@
 library;
 
 import '../models/finding_spec.dart';
+import '../models/settings.dart';
 import '../models/slide.dart';
+import 'rich_text_layout.dart';
+import 'slide_layout_metrics.dart';
 
 /// A finding section, in the fixed §3.1 order.
 enum _Section { description, confirmation, impact, recommendation }
@@ -88,7 +91,13 @@ FindingSpec _page(
 
 /// Split [spec] into the finding pages that render at full size. Returns a
 /// single-element list (equal to [spec]) when it already fits one slide.
-List<FindingSpec> paginateFinding(FindingSpec spec) {
+///
+/// [linesPerSlide] is the body-line budget per page; it is reduced by the
+/// caller when a logo reserves vertical space (see [expandFindingsForRender]).
+List<FindingSpec> paginateFinding(
+  FindingSpec spec, {
+  double linesPerSlide = _linesPerSlide,
+}) {
   final present = [
     for (final s in _Section.values)
       if (_sectionCost(spec, s) > 0) s,
@@ -98,13 +107,13 @@ List<FindingSpec> paginateFinding(FindingSpec spec) {
   // Greedy pack: fill each page up to its budget, header card only on page 1.
   final pages = <List<_Section>>[];
   var current = <_Section>[];
-  var budget = _linesPerSlide - _headerCardCost;
+  var budget = linesPerSlide - _headerCardCost;
   for (final s in present) {
     final cost = _sectionCost(spec, s);
     if (current.isNotEmpty && cost > budget) {
       pages.add(current);
       current = <_Section>[];
-      budget = _linesPerSlide; // continuation pages have no header card
+      budget = linesPerSlide; // continuation pages have no header card
     }
     current.add(s);
     budget -= cost;
@@ -128,12 +137,24 @@ List<FindingSpec> paginateFinding(FindingSpec spec) {
 /// becomes several page-slides (via [paginateFinding]); every other slide — and
 /// a finding that fits one slide — passes through unchanged. Detail/evidence
 /// slides of a finding group are not the header and pass through as-is.
-List<Slide> expandFindingsForRender(List<Slide> slides) {
+///
+/// When [profile] is given and a finding slide shows its logo, the per-page
+/// line budget is reduced proportionally to the logo's vertical reserve — so a
+/// finding that fits without a logo still splits when the logo eats into the
+/// available height, instead of overflowing under it.
+List<Slide> expandFindingsForRender(
+  List<Slide> slides, {
+  ThemeProfile? profile,
+}) {
   final out = <Slide>[];
   for (final slide in slides) {
     if (slide.type == SlideType.finding &&
         slide.findingRole == FindingRole.header) {
-      final pages = paginateFinding(FindingSpec.parse(slide.customMarkdown));
+      final linesPerSlide = _linesPerSlideFor(slide, profile);
+      final pages = paginateFinding(
+        FindingSpec.parse(slide.customMarkdown),
+        linesPerSlide: linesPerSlide,
+      );
       if (pages.length <= 1) {
         out.add(slide);
       } else {
@@ -146,4 +167,14 @@ List<Slide> expandFindingsForRender(List<Slide> slides) {
     }
   }
   return out;
+}
+
+/// The per-page line budget for [slide], reduced when a shown logo reserves
+/// vertical space. Without a profile or logo, this is just [_linesPerSlide].
+double _linesPerSlideFor(Slide slide, ThemeProfile? profile) {
+  if (profile == null || !slide.showLogo) return _linesPerSlide;
+  final reserve = logoSafeReserve(kReferenceSlideWidth, profile);
+  if (reserve <= 0) return _linesPerSlide;
+  final slideH = kReferenceSlideWidth * 9 / 16;
+  return _linesPerSlide * (slideH - reserve) / slideH;
 }

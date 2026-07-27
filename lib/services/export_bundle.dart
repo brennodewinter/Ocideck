@@ -59,7 +59,10 @@ class ExportBundle {
 /// deck zelf ongemoeid, en omdat de voettekst zijn nummer uit de positie in
 /// deze lijst haalt, telt hij de pagina's nu vanzelf mee.
 List<Slide> _expandForExport(List<Slide> slides, Deck deck) =>
-    expandRichTextForRender(expandFindingsForRender(slides), deck.themeProfile);
+    expandRichTextForRender(
+      expandFindingsForRender(slides, profile: deck.themeProfile),
+      deck.themeProfile,
+    );
 
 /// Eén exportbundel: het geprojecteerde deck plus alles wat daaruit volgt.
 ///
