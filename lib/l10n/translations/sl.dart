@@ -1773,6 +1773,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Met dank aan': 'S hvaležnostjo',
   'Fix alle problemen': 'Odpravi vse težave',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Težave, ki jih je bilo mogoče rešiti samodejno, so urejene. Kar ostane, zahteva odločitev.',

@@ -1788,6 +1788,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Met dank aan': 'Cu recunoștință',
   'Fix alle problemen': 'Repară toate problemele',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Problemele care puteau fi rezolvate automat au fost tratate. Ce rămâne cere o alegere.',

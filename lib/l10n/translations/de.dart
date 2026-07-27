@@ -730,6 +730,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Met dank aan': 'Mit Dank',
   'Fix alle problemen': 'Alle Probleme beheben',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Automatisch behebbare Probleme wurden erledigt. Der Rest erfordert eine Entscheidung.',

@@ -1774,6 +1774,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Met dank aan': 'Mit Dank',
   'Fix alle problemen': 'Alli Probläm behebe',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'D Probläm wo sich automatisch löse länd, sind erledigt. Was übrig bliibt, verlangt e Entscheidig.',

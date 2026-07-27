@@ -1746,6 +1746,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Met dank aan': 'Satlho\'',
   'Fix alle problemen': 'Hoch Qaghmey yItI\'',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'tI\'laHlu\'bogh Qaghmey tI\'lu\'pu\'. wIv poQ ratlhtaHbogh Qaghmey.',

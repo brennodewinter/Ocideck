@@ -1793,6 +1793,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Met dank aan': 'Ringrazzjamenti',
   'Fix alle problemen': 'Irranġa l-problemi kollha',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Il-problemi li setgħu jissewwew awtomatikament ġew indirizzati. Dak li fadal jitlob għażla.',

@@ -1787,6 +1787,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Met dank aan': 'Gratias agimus',
   'Fix alle problemen': 'Omnia problemata corrigere',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Problemata quae per se corrigi poterant tractata sunt. Quod restat electionem poscit.',

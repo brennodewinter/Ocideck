@@ -1788,6 +1788,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Met dank aan': 'З подякою',
   'Fix alle problemen': 'Виправити всі проблеми',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Проблеми, які можна виправити автоматично, опрацьовано. Решта потребує вибору.',

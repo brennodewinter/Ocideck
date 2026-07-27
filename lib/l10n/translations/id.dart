@@ -1771,6 +1771,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Met dank aan': 'Ucapan terima kasih',
   'Fix alle problemen': 'Perbaiki semua masalah',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Masalah yang bisa diperbaiki otomatis sudah ditangani. Sisanya memerlukan pilihan.',
