@@ -1770,6 +1770,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Fix alle problemen': 'Labot visas problēmas',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Automātiski risināmās problēmas ir novērstas. Pārējais prasa izvēli.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Nekas, kas atrisinātos pats — tam vajadzīga izvēle.',
+  'Probleem op deze dia oplossen': 'Novērst problēmu šajā slaidā',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Šis slaids ir aizklāts un netiks mainīts.',
+  'Geen probleem om hier op te lossen.': 'Šeit nav problēmas, ko novērst.',
   'SBAR-overdracht': 'SBAR nodošana',
   '(A)MIST traumaoverdracht': '(A)MIST traumas nodošana',
   'Multidisciplinair overleg (MDO)': 'Daudznozaru komandas sanāksme (MDT)',

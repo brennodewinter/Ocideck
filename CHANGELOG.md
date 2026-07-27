@@ -123,6 +123,38 @@ read a book to find out.
   los-in-de-map-vorm.
 
 ### Added
+- **Kwaliteitssysteem: splitsen eerst bij te veel bullets, streepjes in de
+  notities, en één knop die alles veilig oplost (#912, #913, #915, 2026-07-27).**
+  Bij een dia met te veel bullets is **Splits slide** nu de eerste en enige
+  aangeboden remedie; **Uitleg naar notities** verschijnt pas wanneer de dia acht
+  bullets of minder telt (`kMoveToNotesMaxBulletCount`). Reden: naar de notities
+  halen verandert het aantal bullets niet, dus lost "te vol" niet op — splitsen
+  wel. Regels die naar de sprekersnotities verhuizen (via **Uitleg naar notities**
+  en **Zinnen naar losse bullets**) krijgen een `- ` ervoor, zodat ze daar als
+  opsomming lezen; een tussenkop blijft zonder streepje. En er is een knop **Fix
+  alle problemen** voor wie niet wil nadenken: die werkt in één klik alle
+  structureel en veilig oplosbare problemen in de juiste volgorde weg — te volle
+  dia's splitsen, meerzins-bullets opknippen, meegesleepte pagina's losmaken — met
+  steeds de veiligste keuze en zonder ooit inhoud van een dia te halen. Eén
+  ongedaan-stap. Wat menselijk oordeel vraagt (alt-tekst, themacontrast, privacy)
+  blijft staan en wordt gemeld. De knop verschijnt alleen als er echt iets
+  automatisch op te lossen valt. De split-in-pagina's logica is naar één gedeelde
+  functie getrokken (`splitBulletSlidePages`), zodat de paneelknop, de motor en de
+  live-fix hieronder overal hetzelfde doen. Bewaakt door `test/bullet_trim_test.dart`,
+  `test/bullet_fixes_test.dart`, `test/quality_autofix_test.dart` en
+  `test/slide_quality_panel_test.dart`.
+- **Presenteren: een probleem op de getoonde dia ter plekke oplossen met de
+  F-toets (#914, 2026-07-27).** Tijdens presenteren lost `F` het
+  kwaliteitsprobleem op de dia die je nu toont meteen op, zonder de presentatie te
+  onderbreken: een meerzins-dia wordt opgeknipt (blijft één dia), een te volle dia
+  wordt live gesplitst en de overloop komt als vervolgpagina('s) erachter. Werkt
+  in enkel- én dubbelscherm — de beamer krijgt de verse dia-reeks via een nieuw
+  `replaceDeck`-kanaal. De knip wordt op de bron doorgeschreven via het dia-id
+  (`onSlideSplit` → `DeckNotifier.splitSlide`), als één ongedaan-stap. Een
+  geredigeerde dia blijft ongemoeid — de zwartgelakte blokken mogen niet naar de
+  bron terug. Was er niets op te lossen of is de dia geredigeerd, dan verschijnt
+  een vluchtige melding in plaats van een stille no-op. Dezelfde beslissing als in
+  de editor, via `safeFixForSlide`. Bewaakt door `test/fullscreen_presenter_test.dart`.
 - **Negentien rolgerichte overdrachts- en veiligheidssjablonen erbij (2026-07-26).**
   De sjablooncatalogus leunde op kantoor-, beveiligings- en gesprekswerk; deze
   ronde verbreedt hem naar veiligheidskritische beroepen, elk gebouwd op een

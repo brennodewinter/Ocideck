@@ -1800,6 +1800,16 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Fix alle problemen': 'Corrigir todos os problemas',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Os problemas que podiam ser corrigidos automaticamente foram tratados. O que resta exige uma escolha.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Nada que se resolva sozinho — isto exige uma escolha.',
+  'Probleem op deze dia oplossen': 'Corrigir o problema neste diapositivo',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Este diapositivo está ocultado e não será alterado.',
+  'Geen probleem om hier op te lossen.':
+      'Não há nenhum problema para corrigir aqui.',
   'SBAR-overdracht': 'Transmissão SBAR',
   '(A)MIST traumaoverdracht': '(A)MIST passagem de trauma',
   'Multidisciplinair overleg (MDO)': 'Reunião multidisciplinar (MDT)',

@@ -1770,6 +1770,15 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Fix alle problemen': 'Løs alle problemer',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'De problemer, der kunne løses automatisk, er klaret. Resten kræver et valg.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Intet, der løser sig selv — det kræver et valg.',
+  'Probleem op deze dia oplossen': 'Løs problemet på denne slide',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Denne slide er redigeret og bliver ikke ændret.',
+  'Geen probleem om hier op te lossen.': 'Der er intet problem at løse her.',
   'SBAR-overdracht': 'SBAR-overdragelse',
   '(A)MIST traumaoverdracht': '(A)MIST-traumaoverdragelse',
   'Multidisciplinair overleg (MDO)': 'Tværfagligt teammøde (MDT)',

@@ -9,6 +9,7 @@ import '../../models/markdown_validation.dart';
 import '../../models/slide.dart';
 import '../../models/slide_quality.dart';
 import '../../services/privacy/privacy_lexicon_data.dart';
+import '../../services/quality_autofix.dart';
 import '../../state/deck_provider.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/editor_provider.dart';
@@ -212,6 +213,27 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
     navigateToSlideQualityIssue(context: context, ref: ref, issue: issue);
   }
 
+  /// De "wie niet wil nadenken"-knop (#915): werkt in één klik alle structureel
+  /// en veilig oplosbare problemen weg, met steeds de veiligste keuze. Wat
+  /// overblijft (alt-tekst, themacontrast, privacy) vraagt om een menselijke
+  /// keuze en blijft gewoon in de lijst staan — daarom een terugkoppeling die
+  /// dat ook zegt in plaats van "alles opgelost".
+  void _fixAllProblems() {
+    final applied = ref.read(deckProvider.notifier).fixAllStructuralIssues();
+    if (!mounted) return;
+    final l10n = context.l10n;
+    final message = applied > 0
+        ? l10n.d(
+            'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.',
+          )
+        : l10n.d(
+            'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.',
+          );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
   /// De assistent-acties die deze melding direct oplossen of de gebruiker
   /// naar de juiste plek brengen ("Splits slide", "Verhoog contrast",
   /// "Voeg alt-tekst toe", …).
@@ -259,23 +281,44 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
           if (result.hasIssues) ...[
             Padding(
               padding: const EdgeInsets.fromLTRB(12, 0, 12, 4),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: TextButton.icon(
-                  onPressed: () => showSlideQualityDetailsDialog(
-                    context,
-                    result: result,
-                    onIssueTap: _handleIssueTap,
-                    actionsFor: _actionsFor,
+              child: Wrap(
+                spacing: 12,
+                runSpacing: 0,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  TextButton.icon(
+                    onPressed: () => showSlideQualityDetailsDialog(
+                      context,
+                      result: result,
+                      onIssueTap: _handleIssueTap,
+                      actionsFor: _actionsFor,
+                    ),
+                    icon: const Icon(Icons.list_alt_outlined, size: 13),
+                    label: Text(l10n.d('Bekijk meldingen…')),
+                    style: TextButton.styleFrom(
+                      foregroundColor: iconColor,
+                      visualDensity: VisualDensity.compact,
+                      padding: EdgeInsets.zero,
+                    ),
                   ),
-                  icon: const Icon(Icons.list_alt_outlined, size: 13),
-                  label: Text(l10n.d('Bekijk meldingen…')),
-                  style: TextButton.styleFrom(
-                    foregroundColor: iconColor,
-                    visualDensity: VisualDensity.compact,
-                    padding: EdgeInsets.zero,
-                  ),
-                ),
+                  // Alleen aanbieden als er echt iets vanzelf op te lossen valt
+                  // (#915): een deck met enkel alt-tekst- of privacymeldingen
+                  // heeft geen structurele fix, en dan zou de knop een belofte
+                  // doen die hij niet waarmaakt.
+                  if (result.issues.any(
+                    (i) => isStructurallyAutofixable(i.kind),
+                  ))
+                    TextButton.icon(
+                      onPressed: _fixAllProblems,
+                      icon: const Icon(Icons.auto_fix_high, size: 13),
+                      label: Text(l10n.d('Fix alle problemen')),
+                      style: TextButton.styleFrom(
+                        foregroundColor: iconColor,
+                        visualDensity: VisualDensity.compact,
+                        padding: EdgeInsets.zero,
+                      ),
+                    ),
+                ],
               ),
             ),
           ],

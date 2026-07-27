@@ -43,14 +43,14 @@ Widget _host(Deck deck) {
 }
 
 void main() {
-  Deck overfullDeck() => Deck(
+  Deck denseBulletDeck(int count) => Deck(
     title: 'Demo',
     slides: [
       Slide.create(SlideType.bulletsImage).copyWith(
         title: 'blah blah blah',
         imagePath: 'images/pasted.png',
         bullets: List.generate(
-          13,
+          count,
           (i) =>
               'Controleer op een SPECI: Kijk of er tussentijds een speciaal '
               'weerrapport is uitgegeven vanwege plotseling veranderde '
@@ -59,6 +59,15 @@ void main() {
       ),
     ],
   );
+
+  // Dertien bullets: ruim boven [kMoveToNotesMaxBulletCount] (#912), dus 'te
+  // veel bullets' — splitsen is de enige remedie.
+  Deck overfullDeck() => denseBulletDeck(13);
+
+  // Zeven lange 'label: uitleg'-bullets: onder de bullet-drempel maar wél
+  // woord-dicht, zodat er een dichtheidsmelding is én 'Uitleg naar notities'
+  // mag verschijnen.
+  Deck denseFewDeck() => denseBulletDeck(7);
 
   testWidgets('shows quality issues for an overfull split bullet slide', (
     tester,
@@ -104,7 +113,7 @@ void main() {
   testWidgets(
     'offers an Uitleg naar notities action that trims dense bullets',
     (tester) async {
-      await tester.pumpWidget(_host(overfullDeck()));
+      await tester.pumpWidget(_host(denseFewDeck()));
       await tester.pump();
       await tester.tap(find.textContaining('Slidekwaliteit'));
       await tester.pump();
@@ -123,10 +132,71 @@ void main() {
       await tester.tap(trimButton.first);
       await tester.pump();
 
-      // The label stays on the slide; the explanation moves to the notes.
+      // The label stays on the slide; the explanation moves to the notes, with
+      // a dash in front of it (#913).
       final slide = container.read(deckProvider).deck!.slides.first;
       expect(slide.bullets.first, 'Controleer op een SPECI');
+      expect(slide.notes.contains('- Controleer op een SPECI'), isTrue);
       expect(slide.notes.contains('Kijk of er tussentijds'), isTrue);
+    },
+  );
+
+  testWidgets(
+    'te veel bullets: alleen Splits slide, geen Uitleg naar notities (#912)',
+    (tester) async {
+      // Boven [kMoveToNotesMaxBulletCount] hoort splitsen de enige remedie te
+      // zijn: naar de notities halen verandert het aantal bullets niet.
+      await tester.pumpWidget(_host(overfullDeck()));
+      await tester.pump();
+      await tester.tap(find.textContaining('Slidekwaliteit'));
+      await tester.pump();
+
+      expect(find.widgetWithText(TextButton, 'Splits slide'), findsWidgets);
+      expect(
+        find.widgetWithText(TextButton, 'Uitleg naar notities'),
+        findsNothing,
+      );
+    },
+  );
+
+  testWidgets(
+    'Fix alle problemen splitst een te volle dia in één klik (#915)',
+    (tester) async {
+      await tester.pumpWidget(_host(overfullDeck()));
+      await tester.pump();
+
+      final container = ProviderScope.containerOf(
+        tester.element(find.byType(SlideQualityPanel)),
+      );
+      expect(container.read(deckProvider).deck!.slides.length, 1);
+
+      final fixAll = find.widgetWithText(TextButton, 'Fix alle problemen');
+      expect(fixAll, findsOneWidget);
+      await tester.tap(fixAll);
+      await tester.pump();
+
+      // De dia is gesplitst en er verschijnt een terugkoppeling.
+      expect(container.read(deckProvider).deck!.slides.length, greaterThan(1));
+      expect(find.byType(SnackBar), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'geen Fix-alles-knop als er niets structureel op te lossen valt',
+    (tester) async {
+      // Een lege dia is een inhoudsmelding, geen structureel probleem.
+      final deck = Deck(
+        title: 'Leeg',
+        slides: [Slide.create(SlideType.bullets)],
+      );
+      await tester.pumpWidget(_host(deck));
+      await tester.pump();
+
+      expect(find.textContaining('Slidekwaliteit'), findsOneWidget);
+      expect(
+        find.widgetWithText(TextButton, 'Fix alle problemen'),
+        findsNothing,
+      );
     },
   );
 

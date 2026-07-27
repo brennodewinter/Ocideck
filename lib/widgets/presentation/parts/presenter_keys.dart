@@ -148,6 +148,11 @@ extension _PresenterKeys on _FullscreenPresenterState {
       case LogicalKeyboardKey.keyP:
         _togglePresenterView();
         return KeyEventResult.handled;
+      case LogicalKeyboardKey.keyF:
+        // Fix het kwaliteitsprobleem op de getoonde dia ter plekke (#914),
+        // zonder de presentatie te onderbreken.
+        _fixCurrentSlide();
+        return KeyEventResult.handled;
       case LogicalKeyboardKey.keyN:
         // Kale N opent de eigen notities, net als elke andere letter hier een
         // kale sneltoets is. Ctrl/Cmd+N blijft óók werken: binnen het

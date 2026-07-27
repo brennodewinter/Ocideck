@@ -1770,6 +1770,16 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Fix alle problemen': 'Åtgärda alla problem',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Problemen som kunde åtgärdas automatiskt är klara. Det som återstår kräver ett val.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Inget som löser sig av sig självt — det här kräver ett val.',
+  'Probleem op deze dia oplossen': 'Åtgärda problemet på den här bilden',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Den här bilden är maskad och ändras inte.',
+  'Geen probleem om hier op te lossen.':
+      'Det finns inget problem att åtgärda här.',
   'SBAR-overdracht': 'SBAR-överlämning',
   '(A)MIST traumaoverdracht': '(A)MIST-traumaöverlämning',
   'Multidisciplinair overleg (MDO)': 'Multidisciplinärt teammöte (MDT)',

@@ -1788,6 +1788,15 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Fix alle problemen': 'Виправити всі проблеми',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Проблеми, які можна виправити автоматично, опрацьовано. Решта потребує вибору.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Нічого, що вирішується саме — тут потрібен вибір.',
+  'Probleem op deze dia oplossen': 'Виправити проблему на цьому слайді',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Цей слайд відредаговано і не буде змінено.',
+  'Geen probleem om hier op te lossen.': 'Тут немає проблеми для виправлення.',
   'SBAR-overdracht': 'Передача за SBAR',
   '(A)MIST traumaoverdracht': '(A)MIST передача травми',
   'Multidisciplinair overleg (MDO)': 'Мультидисциплінарна нарада (MDT)',

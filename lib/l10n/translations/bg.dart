@@ -1793,6 +1793,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Fix alle problemen': 'Поправи всички проблеми',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Проблемите, които можеха да се решат автоматично, са решени. Останалото изисква избор.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Нищо, което да се реши от само себе си — това изисква избор.',
+  'Probleem op deze dia oplossen': 'Поправи проблема на този слайд',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Този слайд е заличен и няма да бъде променян.',
+  'Geen probleem om hier op te lossen.': 'Тук няма проблем за решаване.',
   'SBAR-overdracht': 'Предаване по SBAR',
   '(A)MIST traumaoverdracht': '(A)MIST предаване при травма',
   'Multidisciplinair overleg (MDO)': 'Мултидисциплинарна среща (MDT)',

@@ -1771,6 +1771,16 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Fix alle problemen': 'Perbaiki semua masalah',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Masalah yang bisa diperbaiki otomatis sudah ditangani. Sisanya memerlukan pilihan.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Tidak ada yang bisa diselesaikan otomatis — ini memerlukan pilihan.',
+  'Probleem op deze dia oplossen': 'Perbaiki masalah pada slide ini',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Slide ini telah diredaksi dan tidak akan diubah.',
+  'Geen probleem om hier op te lossen.':
+      'Tidak ada masalah untuk diperbaiki di sini.',
   'SBAR-overdracht': 'Serah terima SBAR',
   '(A)MIST traumaoverdracht': 'Serah terima trauma (A)MIST',
   'Multidisciplinair overleg (MDO)': 'Rapat tim multidisiplin (MDT)',

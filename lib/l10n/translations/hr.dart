@@ -1777,6 +1777,15 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Fix alle problemen': 'Popravi sve probleme',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Problemi koji su se mogli automatski riješiti su obrađeni. Ono što preostaje traži odluku.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Ništa što bi se riješilo samo — ovo traži odluku.',
+  'Probleem op deze dia oplossen': 'Riješi problem na ovom slajdu',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Ovaj slajd je redigiran i neće se mijenjati.',
+  'Geen probleem om hier op te lossen.': 'Ovdje nema problema za riješiti.',
   'SBAR-overdracht': 'SBAR primopredaja',
   '(A)MIST traumaoverdracht': '(A)MIST primopredaja traume',
   'Multidisciplinair overleg (MDO)': 'Multidisciplinarni sastanak (MDT)',

@@ -1778,6 +1778,16 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Fix alle problemen': 'Taisyti visas problemas',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Automatiškai išsprendžiamos problemos sutvarkytos. Kas lieka, reikalauja pasirinkimo.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Nieko, kas išsispręstų savaime — tam reikia pasirinkimo.',
+  'Probleem op deze dia oplossen': 'Išspręsti šios skaidrės problemą',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Ši skaidrė paslėpta ir nebus keičiama.',
+  'Geen probleem om hier op te lossen.':
+      'Čia nėra jokios problemos, kurią reikėtų spręsti.',
   'SBAR-overdracht': 'SBAR perdavimas',
   '(A)MIST traumaoverdracht': '(A)MIST traumos perdavimas',
   'Multidisciplinair overleg (MDO)': 'Daugiadalykis komandos susitikimas (MDT)',

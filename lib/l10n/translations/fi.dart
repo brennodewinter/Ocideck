@@ -1771,6 +1771,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Fix alle problemen': 'Korjaa kaikki ongelmat',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Automaattisesti korjattavat ongelmat on hoidettu. Loput vaativat valinnan.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Mikään ei ratkea itsestään — tämä vaatii valinnan.',
+  'Probleem op deze dia oplossen': 'Korjaa tämän dian ongelma',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Tämä dia on peitetty eikä sitä muuteta.',
+  'Geen probleem om hier op te lossen.': 'Täällä ei ole korjattavaa ongelmaa.',
   'SBAR-overdracht': 'SBAR-luovutus',
   '(A)MIST traumaoverdracht': '(A)MIST-traumaluovutus',
   'Multidisciplinair overleg (MDO)': 'Moniammatillinen kokous (MDT)',

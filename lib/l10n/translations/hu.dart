@@ -1775,6 +1775,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Fix alle problemen': 'Minden probléma javítása',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Az automatikusan javítható problémákat elintéztük. Ami marad, döntést kíván.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Semmi, ami magától megoldódna — ez döntést kíván.',
+  'Probleem op deze dia oplossen': 'A dia problémájának javítása',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Ez a dia ki van takarva, és nem módosul.',
+  'Geen probleem om hier op te lossen.': 'Itt nincs javítandó probléma.',
   'SBAR-overdracht': 'SBAR-átadás',
   '(A)MIST traumaoverdracht': '(A)MIST trauma-átadás',
   'Multidisciplinair overleg (MDO)': 'Multidiszciplináris megbeszélés (MDT)',

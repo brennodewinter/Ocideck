@@ -1793,6 +1793,16 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Fix alle problemen': 'Irranġa l-problemi kollha',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Il-problemi li setgħu jissewwew awtomatikament ġew indirizzati. Dak li fadal jitlob għażla.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Xejn li jissolva waħdu — dan jitlob għażla.',
+  'Probleem op deze dia oplossen': 'Irranġa l-problema f\'din l-islajd',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Din l-islajd hija rrediġuta u mhux se tinbidel.',
+  'Geen probleem om hier op te lossen.':
+      'M\'hemm ebda problema x\'tissewwa hawn.',
   'SBAR-overdracht': 'Konsenja SBAR',
   '(A)MIST traumaoverdracht': '(A)MIST konsenja ta\' trawma',
   'Multidisciplinair overleg (MDO)': 'Laqgħa multidixxiplinari (MDT)',

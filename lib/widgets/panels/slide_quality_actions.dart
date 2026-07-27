@@ -236,8 +236,14 @@ List<SlideQualityAction> buildSlideQualityActions({
   // af naar de notities, zodat alleen het label overblijft. De aanvulling op
   // "Splits slide" en "Zinnen naar losse bullets", die beide álle tekst op de
   // slide laten staan — deze haalt tekst wég.
+  //
+  // Maar niet zolang de dia te veel bullets heeft (#912): dan is splitsen de
+  // eerste en enige remedie, want naar de notities halen verandert het aantal
+  // bullets niet. Pas bij [kMoveToNotesMaxBulletCount] of minder verschijnt deze
+  // stap ernaast.
   if (issue.category == SlideQualityCategory.textDensity &&
       slide != null &&
+      visibleContentBulletCount(slide) <= kMoveToNotesMaxBulletCount &&
       canTrimBulletExplanations(slide)) {
     actions.add(
       SlideQualityAction(

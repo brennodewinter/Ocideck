@@ -96,6 +96,7 @@ View & timing:
 | Shortcut | Action |
 | --- | --- |
 | `P` | Toggle presenter view (notes, clock, countdown, per-slide timer, next slide) |
+| `F` | Fix the quality problem on the current slide in place — split an overfull slide (the overflow becomes continuation pages) or cut multi-sentence bullets apart. Works single- and dual-screen; a redacted slide is left untouched, and a slide with nothing to fix shows a brief note |
 | `N` · `Ctrl/Cmd + N` | Toggle **my notes** panel (recipient/course notes; local only, never on beamer). Inside the panel a bare `N` types a letter, so only `Ctrl/Cmd + N` (or `Esc`) closes it |
 | `S` | Move the presentation to another screen |
 | `B` · `W` | Black · white screen |

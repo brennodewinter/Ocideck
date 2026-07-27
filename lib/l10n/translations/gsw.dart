@@ -1774,6 +1774,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Fix alle problemen': 'Alli Probläm behebe',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'D Probläm wo sich automatisch löse länd, sind erledigt. Was übrig bliibt, verlangt e Entscheidig.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Nüt wo sich vo sälber löst — das verlangt e Entscheidig.',
+  'Probleem op deze dia oplossen': 'Probläm uf dere Slide behebe',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Die Slide isch gschwärzt und wird nöd gänderet.',
+  'Geen probleem om hier op te lossen.': 'Da gits kei Probläm zum behebe.',
   'SBAR-overdracht': 'SBAR-Übergab',
   '(A)MIST traumaoverdracht': '(A)MIST-Traumaübergab',
   'Multidisciplinair overleg (MDO)': 'Multidisziplinäri Teambesprächig (MDT)',

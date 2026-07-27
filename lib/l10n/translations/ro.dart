@@ -1788,6 +1788,16 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Fix alle problemen': 'Repară toate problemele',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Problemele care puteau fi rezolvate automat au fost tratate. Ce rămâne cere o alegere.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Nimic care să se rezolve de la sine — asta cere o alegere.',
+  'Probleem op deze dia oplossen': 'Rezolvă problema de pe acest slide',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Acest slide este redactat și nu va fi modificat.',
+  'Geen probleem om hier op te lossen.':
+      'Nu există nicio problemă de rezolvat aici.',
   'SBAR-overdracht': 'Predare SBAR',
   '(A)MIST traumaoverdracht': '(A)MIST predare traumă',
   'Multidisciplinair overleg (MDO)': 'Ședință multidisciplinară (MDT)',

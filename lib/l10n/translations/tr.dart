@@ -2748,6 +2748,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Fix alle problemen': 'Tüm sorunları düzelt',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Otomatik düzeltilebilen sorunlar halledildi. Kalanlar bir seçim gerektiriyor.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Kendiliğinden çözülecek bir şey yok — bu bir seçim gerektiriyor.',
+  'Probleem op deze dia oplossen': 'Bu slayttaki sorunu düzelt',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Bu slayt redakte edilmiş ve değiştirilmeyecek.',
+  'Geen probleem om hier op te lossen.': 'Burada düzeltilecek bir sorun yok.',
   'SBAR-overdracht': 'SBAR devri',
   '(A)MIST traumaoverdracht': '(A)MIST travma devri',
   'Multidisciplinair overleg (MDO)': 'Multidisipliner ekip toplantısı (MDT)',

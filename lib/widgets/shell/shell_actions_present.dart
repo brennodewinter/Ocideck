@@ -109,6 +109,18 @@ void presentDeck(
         liveEdited = true;
       }
     },
+    // Live-fix tijdens presenteren (#914): de presenter knipt een te volle dia
+    // lokaal al op; hier wordt de knip op de bron doorgeschreven, op dezelfde
+    // dia (via het id, net als onSlideChanged). Eén ongedaan-stap.
+    onSlideSplit: (slideId) {
+      final index = deckNotifier.currentState.deck?.slides.indexWhere(
+        (slide) => slide.id == slideId,
+      );
+      if (index != null && index >= 0) {
+        deckNotifier.splitSlide(index);
+        liveEdited = true;
+      }
+    },
   );
   // Pas ná afloop verversen: tijdens het presenteren staat de editor toch
   // achter de presentatie, en per toetsaanslag verversen zou elke aanslag een

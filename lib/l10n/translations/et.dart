@@ -1762,6 +1762,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Fix alle problemen': 'Paranda kõik probleemid',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Automaatselt lahendatavad probleemid on tehtud. Ülejäänu nõuab valikut.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Miski ei lahene iseenesest — see nõuab valikut.',
+  'Probleem op deze dia oplossen': 'Paranda selle slaidi probleem',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'See slaid on redigeeritud ega seda ei muudeta.',
+  'Geen probleem om hier op te lossen.': 'Siin pole probleemi, mida parandada.',
   'SBAR-overdracht': 'SBAR üleandmine',
   '(A)MIST traumaoverdracht': '(A)MIST trauma üleandmine',
   'Multidisciplinair overleg (MDO)': 'Multidistsiplinaarne koosolek (MDT)',

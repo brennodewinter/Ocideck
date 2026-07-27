@@ -1787,6 +1787,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Fix alle problemen': 'Omnia problemata corrigere',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Problemata quae per se corrigi poterant tractata sunt. Quod restat electionem poscit.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Nihil quod per se corrigatur — hoc electionem poscit.',
+  'Probleem op deze dia oplossen': 'Problema in hoc schemate corrigere',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Hoc schema obliteratum est neque mutabitur.',
+  'Geen probleem om hier op te lossen.': 'Nullum hic problema corrigendum.',
   'SBAR-overdracht': 'Traditio SBAR',
   '(A)MIST traumaoverdracht': '(A)MIST traditio traumatis',
   'Multidisciplinair overleg (MDO)': 'Conventus multidisciplinaris (MDT)',

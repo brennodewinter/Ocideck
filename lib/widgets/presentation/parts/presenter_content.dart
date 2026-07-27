@@ -4,6 +4,84 @@
 // extension — same library, same members, no behaviour change.
 part of '../fullscreen_presenter.dart';
 
+/// Berekent en past de live-fix (#914) toe op de getoonde dia. Muteert [slides]
+/// in-place — in-place opknippen vervangt één dia, splitsen voegt pagina's in —
+/// en schrijft de knip door via de callbacks. Geeft terug wat de presenter nog
+/// moet doen: een [flash]-melding tonen (niets veranderd), óf de weergave
+/// verversen ([changed]).
+///
+/// Top-level, niet als lid van de extension: de klasse-plafondratchet telt élk
+/// lid van _FullscreenPresenterState mee, en dit is puur rekenwerk over
+/// argumenten. Een geredigeerde dia blijft ongemoeid — de zwarte blokken mogen
+/// niet naar de bron terug (zie [Slide.contentRedacted]).
+({String? flash, bool changed}) planLiveFix({
+  required List<Slide> slides,
+  required int index,
+  required ThemeProfile theme,
+  required String? projectPath,
+  required AppLocalizations l10n,
+  required ValueChanged<Slide>? onSlideChanged,
+  required ValueChanged<String>? onSlideSplit,
+}) {
+  if (slides.isEmpty) return (flash: null, changed: false);
+  final idx = index.clamp(0, slides.length - 1);
+  final slide = slides[idx];
+  if (slide.contentRedacted) {
+    return (
+      flash: l10n.d('Deze dia is geredigeerd en wordt niet aangepast.'),
+      changed: false,
+    );
+  }
+  final pages = safeFixForSlide(slide, theme, projectPath: projectPath);
+  if (pages == null || pages.isEmpty) {
+    return (
+      flash: l10n.d('Geen probleem om hier op te lossen.'),
+      changed: false,
+    );
+  }
+  if (pages.length == 1) {
+    // In-place: opgeknipte bullets op dezelfde dia; terugschrijven per-dia.
+    slides[idx] = pages.first;
+    onSlideChanged?.call(pages.first);
+  } else {
+    // Splitsen: deze pagina wordt korter en de rest komt erachter; de knip gaat
+    // via het id op de bron (het aantal dia's verandert — eigen terugkoppeling).
+    slides
+      ..removeAt(idx)
+      ..insertAll(idx, pages);
+    onSlideSplit?.call(slide.id);
+  }
+  return (flash: null, changed: true);
+}
+
+/// Stuurt de (gewijzigde) dia-reeks als verse markdown naar het beamervenster en
+/// laat het vanaf [index] herrenderen — na een live-fix (#914). Top-level, om
+/// dezelfde reden als [planLiveFix]; spiegelt [buildBeamerMarkdown] naast zich.
+void sendDeckReplaceToAudience(
+  AudienceWindowHandle? audience, {
+  required List<Slide> slides,
+  required String? projectPath,
+  required TlpLevel tlp,
+  required String organization,
+  required String reportLanguage,
+  required int index,
+}) {
+  if (audience?.controller == null) return;
+  final markdown = buildBeamerMarkdown(
+    slides: slides,
+    projectPath: projectPath,
+    tlp: tlp,
+    organization: organization,
+    reportLanguage: reportLanguage,
+  );
+  audienceChannel
+      .invokeMethod('replaceDeck', {'markdown': markdown, 'index': index})
+      .catchError((Object e) {
+        logWarning('FullscreenPresenter: audience deck replace failed', e);
+        return null;
+      });
+}
+
 extension _PresenterContent on _FullscreenPresenterState {
   RichTextLayoutPlan? _richTextPlanFor(Slide slide) {
     if (!slideUsesRichText(slide)) return null;
@@ -140,4 +218,49 @@ extension _PresenterContent on _FullscreenPresenterState {
 
   Slide get _currentSlide =>
       widget.slides[_index.clamp(0, widget.slides.length - 1)];
+
+  /// Lost het kwaliteitsprobleem op de getoonde dia ter plekke op (#914), met de
+  /// veiligste structurele fix, zodat je niet hoeft te stoppen. Het rekenwerk zit
+  /// in de top-level [planLiveFix] (telt niet mee voor het klasse-plafond); hier
+  /// staat alleen wat state raakt: herbouwen, flashen, de beamer meewerken.
+  void _fixCurrentSlide() {
+    final outcome = planLiveFix(
+      slides: widget.slides,
+      index: _index,
+      theme: widget.themeProfile,
+      projectPath: widget.projectPath,
+      l10n: context.l10n,
+      onSlideChanged: widget.onSlideChanged,
+      onSlideSplit: widget.onSlideSplit,
+    );
+    if (outcome.flash != null) {
+      _flashFix(outcome.flash!);
+      return;
+    }
+    if (!outcome.changed) return;
+    // Het beamervenster rendert vanuit zijn eigen markdown-kopie: dat kanaal is
+    // te smal voor een gewijzigd aantal dia's, dus krijgt het de verse reeks.
+    _rebuild(() {});
+    if (_dual) {
+      _lastSentIndex = null; // dwing een verse positie-sync af na de herbouw
+      sendDeckReplaceToAudience(
+        widget.audience,
+        slides: widget.slides,
+        projectPath: widget.projectPath,
+        tlp: widget.tlp,
+        organization: widget.organization,
+        reportLanguage: widget.reportLanguage,
+        index: _index,
+      );
+    }
+  }
+
+  /// Toont een vluchtige melding onder in beeld en ruimt de vorige op.
+  void _flashFix(String message) {
+    _fixFlashTimer?.cancel();
+    _rebuild(() => _fixFlash = message);
+    _fixFlashTimer = Timer(const Duration(milliseconds: 1800), () {
+      if (mounted) _rebuild(() => _fixFlash = null);
+    });
+  }
 }

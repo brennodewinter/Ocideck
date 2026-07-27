@@ -1773,6 +1773,15 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Fix alle problemen': 'Odpravi vse težave',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'Težave, ki jih je bilo mogoče rešiti samodejno, so urejene. Kar ostane, zahteva odločitev.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'Nič, kar bi se rešilo samo — to zahteva odločitev.',
+  'Probleem op deze dia oplossen': 'Odpravi težavo na tej prosojnici',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'Ta prosojnica je prekrita in ne bo spremenjena.',
+  'Geen probleem om hier op te lossen.': 'Tu ni težave za odpraviti.',
   'SBAR-overdracht': 'Predaja SBAR',
   '(A)MIST traumaoverdracht': '(A)MIST predaja poškodbe',
   'Multidisciplinair overleg (MDO)': 'Multidisciplinarni sestanek (MDT)',

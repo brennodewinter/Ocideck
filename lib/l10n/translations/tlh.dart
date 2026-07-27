@@ -1746,6 +1746,16 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Fix alle problemen': 'Hoch Qaghmey yItI\'',
+  'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
+      'tI\'laHlu\'bogh Qaghmey tI\'lu\'pu\'. wIv poQ ratlhtaHbogh Qaghmey.',
+  'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
+      'pagh tI\'\'eghlaH — wIv poQ wanI\'vam.',
+  'Probleem op deze dia oplossen': '\'echletHomvam Qagh yItI\'',
+  'Deze dia is geredigeerd en wordt niet aangepast.':
+      'So\'lu\' \'echletHomvam. choHlu\'be\'.',
+  'Geen probleem om hier op te lossen.':
+      'naDev tI\'nISlu\'bogh Qagh tu\'lu\'be\'.',
   'SBAR-overdracht': 'SBAR ja\'ghach',
   '(A)MIST traumaoverdracht': '(A)MIST riQwI\' ja\'ghach',
   'Multidisciplinair overleg (MDO)': 'MDT ghom qep',
