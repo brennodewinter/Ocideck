@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/services/import/bulk_import_runner.dart';
 import 'package:ocideck/services/web_asset_store.dart';
+import 'package:path/path.dart' as p;
 
 import 'helpers/pptx_fixture.dart';
 
@@ -13,6 +14,13 @@ import 'helpers/pptx_fixture.dart';
 /// ander, ook niet wanneer twee bronbestanden dezelfde naam dragen of de map al
 /// een gelijknamig bestand bevat. Dat tweede is het gevaarlijkste geval van de
 /// hele functie: het gaat er niet van stuk, het maakt alleen werk weg.
+
+/// Een pad in de doelmap `/uit`, gebouwd zoals de runner het bouwt: via
+/// `p.join`, dus met de scheiding van het platform. Op Windows is dat `\`, en
+/// een verwachting met een letterlijke `/` zou daar stuklopen zonder dat er
+/// iets mis is met de code (#926).
+String inUit(String name) => p.join('/uit', name);
+
 void main() {
   setUp(WebAssetStore.clear);
   tearDown(WebAssetStore.clear);
@@ -50,7 +58,7 @@ void main() {
       ], targetDirectory: '/uit');
 
       expect(summary.succeeded, 2);
-      expect(rec.paths, ['/uit/plan.md', '/uit/plan-2.md']);
+      expect(rec.paths, [inUit('plan.md'), inUit('plan-2.md')]);
     },
   );
 
@@ -61,13 +69,13 @@ void main() {
       final summary =
           await runner(
             rec.write,
-            existing: {'/uit/plan.md', '/uit/plan-2.md'},
+            existing: {inUit('plan.md'), inUit('plan-2.md')},
           ).run([
             BulkImportItem(bytes: pptxFixture(), name: 'plan.pptx'),
           ], targetDirectory: '/uit');
 
       expect(summary.succeeded, 1);
-      expect(rec.paths, ['/uit/plan-3.md']);
+      expect(rec.paths, [inUit('plan-3.md')]);
     },
   );
 
@@ -84,11 +92,11 @@ void main() {
     expect(summary.outcomes.last.isSuccess, isTrue);
     expect(summary.succeeded, 1);
     expect(summary.failed, 1);
-    expect(rec.paths, ['/uit/goed.md']);
+    expect(rec.paths, [inUit('goed.md')]);
   });
 
   test('een schrijffout landt op dat ene bestand, niet op de rij', () async {
-    final rec = recorder(failOn: {'/uit/een.md'});
+    final rec = recorder(failOn: {inUit('een.md')});
     final summary = await runner(rec.write).run([
       BulkImportItem(bytes: pptxFixture(), name: 'een.pptx'),
       BulkImportItem(bytes: pptxFixture(), name: 'twee.pptx'),
@@ -100,7 +108,7 @@ void main() {
     // de technische message draagt de oorspronkelijke tekst voor het log.
     expect(summary.outcomes.first.failure?.message, contains('schijf vol'));
     expect(summary.outcomes.first.failure?.cause, isNotNull);
-    expect(rec.paths, ['/uit/twee.md']);
+    expect(rec.paths, [inUit('twee.md')]);
   });
 
   test('stoppen laat de rest ongemoeid en telt hem apart', () async {
@@ -117,7 +125,7 @@ void main() {
       shouldStop: () => done >= 1,
     );
 
-    expect(rec.paths, ['/uit/een.md']);
+    expect(rec.paths, [inUit('een.md')]);
     expect(summary.outcomes, hasLength(1));
     // Niet-gedaan is iets anders dan mislukt; de samenvatting mag ze niet op
     // één hoop gooien.

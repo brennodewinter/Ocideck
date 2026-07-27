@@ -291,7 +291,20 @@ void main() {
         call,
       ) async {
         calls.add(call);
-        if (call.method == 'image') return clipboardImage;
+        if (call.method == 'image') {
+          final content = clipboardImage;
+          // Het pasteboard-pakket kent per platform een ander contract voor
+          // `image`: op macOS/Linux zijn het de bytes rechtstreeks, op Windows
+          // een bestandspad dat het pakket zelf leest én verwijdert. De mock
+          // volgt dat contract, zodat dezelfde test op elk platform de echte
+          // service-weg beproeft in plaats van op de cast te stranden (#926).
+          if (content is Uint8List && Platform.isWindows) {
+            final file = File(p.join(tmp.path, 'clip_${calls.length}.png'));
+            file.writeAsBytesSync(content);
+            return file.path;
+          }
+          return content;
+        }
         return null; // writeImage etc.
       });
     });
