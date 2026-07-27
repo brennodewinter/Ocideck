@@ -203,17 +203,15 @@ void main() {
     );
 
     test('een korte regel zonder scheidingsteken blijft ongemoeid', () {
-      // Negen woorden is de ondergrens: vijf label plus vier uitleg.
-      final kort = bulletsWith(['Een bullet van maar acht woorden in totaal']);
+      // Zeven woorden is de ondergrens: vijf label plus twee uitleg.
+      final kort = bulletsWith(['Een bullet van maar zes woorden']);
       expect(canTrimBulletExplanations(kort), isFalse);
       expect(trimBulletExplanations(kort).bullets, kort.bullets);
 
-      final net = bulletsWith([
-        'Een bullet van precies negen woorden in totaal hier',
-      ]);
+      final net = bulletsWith(['Een bullet met precies zeven woorden hier']);
       expect(canTrimBulletExplanations(net), isTrue);
       expect(trimBulletExplanations(net).bullets, [
-        'Een bullet van precies negen',
+        'Een bullet met precies zeven',
       ]);
     });
 
