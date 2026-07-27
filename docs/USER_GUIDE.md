@@ -55,8 +55,19 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
   look.
 - **Start from a template**: the new-presentation dialog offers a searchable
   catalogue of starting points — from an empty deck to shift briefings, security
-  and privacy work decks, crisis and flight-prep sessions, and **conversation-
-  preparation** templates. The latter help you prepare for a difficult or
+  and privacy work decks, crisis and flight-prep sessions, **role-specific
+  handover and safety** templates, and **conversation-preparation** templates.
+  The role-specific set follows recognised methods from safety-critical work:
+  medical and care handovers (SBAR, (A)MIST trauma, the WHO surgical safety
+  check, nursing shift handover and the multidisciplinary team meeting), the
+  onboarding and HR lifecycle (a 30-60-90 onboarding plan, first-day induction,
+  buddy/mentor plan and offboarding), aviation (the IMSAFE fitness check, a
+  crew/departure briefing and a just-culture occurrence report), physical
+  security and workplace safety (a toolbox/LMRA check, event and crowd-safety
+  briefing, evacuation drill and permit to work), emergency services (the
+  METHANE major-incident report and GRIP escalation) and the maritime bridge
+  passage briefing. The **conversation-preparation** templates help you prepare
+  for a difficult or
   important talk (job interview, performance review, salary negotiation,
   resolving a conflict, giving or receiving criticism, delivering bad news,
   setting boundaries, a strained relationship, client and sales conversations,
