@@ -208,6 +208,7 @@ and it also indexes the design documents. The current-state documents:
 | [Compliance attestation](COMPLIANCE.md) | Voluntary security attestation (ORC WG light-weight checklist), including the rows we cannot tick |
 | [Contributing](CONTRIBUTING.md) | Setup, the quality gate, and how to propose changes |
 | [Contributing guidelines](docs/CONTRIBUTING_GUIDELINES.md) | The fuller contribution workflow: reporting issues, pull requests, and coding standards |
+| [Contributors](CONTRIBUTORS.md) | A word of thanks to the people who have helped shape OciDeck |
 | [Development setup](docs/DEVELOPMENT_SETUP_GUIDE.md) | Setting up a development environment from scratch, step by step |
 | [FAQ](docs/FAQ.md) | Common questions about features, security, and privacy |
 | [File format](docs/FILE_FORMAT.md) | The Marp Markdown, front matter, sidecars, the `.ocideck` package, and the `.ocideckstyle` style profile |

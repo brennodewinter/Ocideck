@@ -31,7 +31,10 @@ is short for a presentation deck.
 ## Contributors
 
 Thanks to everyone who has contributed code, translations, documentation, bug
-reports, and ideas. (Add yourself here in your first pull request.)
+reports, and ideas. The people we gratefully acknowledge are named in
+[`CONTRIBUTORS.md`](CONTRIBUTORS.md) — a word of thanks the app itself carries,
+reachable from the heart beside the OciDeck name in **Settings → About**. Add
+yourself there in your first pull request.
 
 ### About the machine
 
