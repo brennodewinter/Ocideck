@@ -15,12 +15,13 @@
 #   windows  → opgehaald van de spiegel
 #   publiceren → een Forgejo-release met alles eraan, plus SBOM en SHA256SUMS
 #
-# De artefacten zijn NIET ondertekend. Dat is een bewuste stand van zaken en
-# geen omissie: er is geen Apple Developer-account en geen codesigning-
-# certificaat. Gatekeeper en SmartScreen zullen dus klagen, en daarom staat de
-# openen-instructie in de releasetekst (.forgejo/release-body.md) in plaats van
-# dat een gebruiker hem zelf moet uitvogelen. Komt er ondertekening, dan
-# vervalt die tekst — niet eerder.
+# Ondertekening: de macOS-app wordt op de Mac-runner getekend en genotariseerd
+# (Developer ID + notarytool; zie de macos-job en docs/BUILD.md), mits het
+# certificaat en het notarytool-profiel daar in de keychain staan — anders valt
+# die job terug op een ongetekende build met een luide waarschuwing. Windows en
+# Linux worden (nog) niet getekend; voor Windows klaagt SmartScreen. Daarom
+# houdt de releasetekst (.forgejo/release-body.md) de openen-instructie per
+# platform aan, zolang dat platform ongetekend is.
 name: release
 
 on:
@@ -240,8 +241,24 @@ jobs:
       - name: Afhankelijkheden ophalen
         run: flutter pub get
 
-      - name: macOS-release bouwen
-        run: make build-macos
+      - name: macOS-release bouwen, tekenen en notariseren
+        # Op de aangemelde Mac (mac-brenno) staan een Developer ID-certificaat en
+        # het notarytool-profiel 'ocideck-notary' in de login-keychain. Staan ze
+        # er, dan tekent, notariseert en stapelt deze stap de app zodat hij op
+        # elke Mac opent zonder Gatekeeper-waarschuwing. Ontbreekt de identiteit
+        # (bijvoorbeeld een andere runner), dan valt hij terug op een ongetekende
+        # build met een luide waarschuwing — hetzelfde patroon als deploy-web bij
+        # missende secrets: een release blijft mogelijk, maar niemand denkt per
+        # ongeluk dat hij getekend is. Het certificaat verlaat de machine nooit;
+        # er is dus geen enkel signing-secret in deze repo nodig.
+        run: |
+          if security find-identity -v -p codesigning | grep -q "Developer ID Application"; then
+            echo "Developer ID gevonden — tekenen en notariseren."
+            scripts/notarize_macos.sh --no-package
+          else
+            echo "::warning title=Ongetekende macOS-build::Geen Developer ID op deze runner; er wordt een ONGETEKENDE app gepubliceerd. Richt voor een echte release het certificaat en het notarytool-profiel op de runner in (zie docs/BUILD.md)."
+            make build-macos
+          fi
 
       - name: Bundel inpakken
         # ditto bewaart symlinks en resource forks — een .app die door een

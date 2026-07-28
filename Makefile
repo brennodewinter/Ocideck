@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release deploy-web check check-no-coverage check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache
+.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -90,6 +90,7 @@ help:
 	@echo "  make build-linux     Build the Linux bundle (Linux only)."
 	@echo "  make build-all       Build web + this OS's native desktop target."
 	@echo "  make build-release   Build verified web + macOS release artifacts."
+	@echo "  make notarize-macos  Sign (Developer ID) + notarize + staple the macOS .app for distribution."
 	@echo "  make deploy-web      Put build/web live on the static host (atomic swap + verify)."
 
 # Install Flutter/Dart dependencies.
@@ -894,6 +895,15 @@ deploy-web:
 build-release:
 	@echo "== OciDeck release build: web + macOS =="
 	scripts/build_release.sh
+
+# Sign the macOS release app with Developer ID, notarize it with Apple, and
+# staple the ticket — the full chain that lets the .app open on other Macs
+# without a Gatekeeper warning. `make build-macos` alone signs ad-hoc, which
+# only runs on the machine that built it. Needs a Developer ID certificate and a
+# notarytool keychain profile; see docs/BUILD.md. macOS only.
+notarize-macos:
+	@echo "== OciDeck release: sign + notarize macOS app =="
+	scripts/notarize_macos.sh
 
 # Full local quality gate. Intended for humans, CI logs, and LLM-assisted debugging.
 # `coverage` rather than `test`: it runs the same suite (one run, instrumented)
