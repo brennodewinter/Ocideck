@@ -184,6 +184,66 @@ List<MarkdownBodyBlock> parseMarkdownBodyBlocks(String markdown) {
   return blocks;
 }
 
+/// De inner-TeX van een blok dat één display-formule is (`$$ … $$`), of null.
+///
+/// Een `$$`-blok is bij het splitsen altijd zijn eigen blok (zie
+/// [parseMarkdownBodyBlocks]), meerregelig (`$$` op eigen regels) of op één
+/// regel. Beide leveren dezelfde inner-TeX.
+String? displayMathTex(String blockMarkdown) {
+  final t = blockMarkdown.trim();
+  if (t.length > 4 && t.startsWith(r'$$') && t.endsWith(r'$$')) {
+    final inner = t.substring(2, t.length - 2).trim();
+    return inner.isEmpty ? null : inner;
+  }
+  return null;
+}
+
+/// De hoogte die een display-formule (`$$ … $$`) op de dia opeist.
+///
+/// De formule rendert op een vaste grootte (`refW * 0.032`, zie
+/// `_markdownMathBlock`) — niet meegeschaald met de tekst. Anders dan een
+/// tekstregel is een formule zelden één regel hoog: breukstrepen, wortels, grote
+/// operatoren met grenzen en gestapelde scripts maken hem twee à drie keer zo
+/// hoog. Hem als één regel meten reserveerde te weinig, en een hoge formule zakte
+/// bij presentatiemaat in de logo-/footerband (#947). We schatten de verticale
+/// omvang uit de constructies die hoogte toevoegen, ruim aan de veilige kant:
+/// overschatten pagineert hooguit iets eerder, onderschatten raakt het logo.
+///
+/// De factoren zijn geijkt tegen de werkelijke `Math.tex`-hoogte van een
+/// batterij formules (zie `math_block_height_test.dart`); elke schatting ligt
+/// daar boven de gemeten hoogte.
+double displayMathBlockHeight(String tex, double refW) {
+  // `(?![a-zA-Z])` in plaats van `\b`: een `\sum_`/`\int^` wordt gevolgd door `_`
+  // of `^`, en die tellen als word-char, dus `\b` zou daar juist níet grijpen.
+  var factor = 1.1; // een gewone regel, met wat marge boven de gemeten ~0.8×
+  // Gestapelde scripts (super-/subscript) maken een regel hoger.
+  if (RegExp(r'[_^]').hasMatch(tex)) {
+    factor += 0.5;
+  }
+  // Display-breuken (`\frac`, `\dfrac`, `\cfrac`, `\binom`) stapelen teller,
+  // streep en noemer; `\tfrac` is tekststijl en compacter.
+  factor +=
+      RegExp(
+        r'\\(?:d|c)?frac(?![a-zA-Z])|\\binom(?![a-zA-Z])',
+      ).allMatches(tex).length *
+      1.3;
+  factor += RegExp(r'\\tfrac(?![a-zA-Z])').allMatches(tex).length * 0.8;
+  // Het wortelteken voegt een dak boven zijn inhoud toe.
+  if (tex.contains(r'\sqrt')) {
+    factor += 0.5;
+  }
+  // Grote operatoren dragen hun grenzen erboven en eronder.
+  if (RegExp(
+    r'\\(?:sum|prod|coprod|iiint|iint|int|oint|bigcup|bigcap|bigvee'
+    r'|bigwedge|bigotimes|bigoplus|biguplus)(?![a-zA-Z])',
+  ).hasMatch(tex)) {
+    factor += 1.7;
+  }
+  final content = refW * 0.032 * factor;
+  final verticalPadding = refW * 0.012 * 2;
+  return content + verticalPadding;
+}
+
 double _measureBlock({
   required MarkdownBodyBlock block,
   required double scale,
@@ -207,6 +267,12 @@ double _measureBlock({
     ).height;
   }
 
+  // Een display-formule (`$$ … $$`) is bij het splitsen altijd zijn eigen blok,
+  // dus meten we hem hier met zijn eigen, hoogte-bewuste schatting in plaats van
+  // per regel als één tekstregel (#947).
+  final mathTex = displayMathTex(block.markdown);
+  if (mathTex != null) return displayMathBlockHeight(mathTex, refW);
+
   var height = 0.0;
   for (final line in lines) {
     final fence = RegExp(r'^\s*```(.*)$').firstMatch(line);
@@ -219,6 +285,8 @@ double _measureBlock({
     }
     if (line.trim() == r'$$' ||
         RegExp(r'^\s*\$\$(.+)\$\$\s*$').hasMatch(line)) {
+      // Vangnet voor een misvormd blok dat displayMathTex niet herkende: de oude,
+      // conservatieve één-regel-schatting.
       height += refW * 0.032 + refW * 0.012 * 2;
       return height;
     }
