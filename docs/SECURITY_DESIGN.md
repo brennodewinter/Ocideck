@@ -507,6 +507,21 @@ Because `badCertificateCallback` on the REST path only fires when normal
 validation fails, a pin means "trust this certificate *as well*", not "trust only
 this one" — the native path matches that.
 
+On **Windows** this needs one more turn of the key. Git for Windows defaults to
+the *schannel* TLS backend, which ignores `http.sslCAInfo` outright — the
+installer even unsets it, to avoid overriding the Windows certificate store. Left
+alone, the pin would be a paper measure there: git would validate the
+self-signed certificate against the system store instead of our anchor. So on the
+pinned path only, `native_git_mirror_io.dart` also sets `http.sslBackend=openssl`
+(`pinnedCertBackendConfig`), which validates against exactly the CA file we
+supply — the behaviour already proven on macOS/Linux. It is scoped to the pinned
+connection: a public-CA server sets no `sslCAInfo`, keeps schannel and the Windows
+store (including any corporate root), and is unaffected. The host-pin
+(`http.curloptResolve`) and redirect refusal are libcurl/git-level and
+backend-independent, so they hold on every platform without this. Both pins are
+exercised on the windows-2022 CI runner (`test/git_native_cert_pin_test.dart`,
+`test/git_network_guard_test.dart`), not assumed.
+
 ## 11. Offline reference data (MIAUW pentest module)
 
 The opt-in "Informatieveiligheid" (pentest reporting) module keeps all reference

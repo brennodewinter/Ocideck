@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -40,6 +41,32 @@ Future<NativeGitMirror?> createNativeGitMirror({
     worktree: worktree,
   );
 }
+
+/// De extra git-config die de certificaat-pin op Windows écht laat gelden.
+///
+/// Git-for-Windows kiest standaard de **schannel**-backend, en die négeert
+/// `http.sslCAInfo`: de installer haalt de sleutel er zelfs uit, om de
+/// Windows-certificaatlade niet te overrulen. Ons gepinde zelfondertekende
+/// certificaat zou daar dus stilzwijgend géén geldig anker zijn — de pin op de
+/// native git-weg was op Windows anders een papieren maatregel (#934). Door voor
+/// déze verbinding de openssl-backend te forceren, valideert git tegen precies
+/// het CA-bestand dat wij meegeven: exact het gedrag dat op macOS/Linux al met
+/// een echte server is getoetst (`git_native_cert_pin_test.dart`).
+///
+/// Alleen op de gepinde weg. Bij een gewone publieke-CA-server geven we geen
+/// `sslCAInfo` mee en komt deze config er niet bij; de gebruiker houdt dan
+/// schannel met de Windows-certificaatlade, inclusief een eventuele bedrijfsroot.
+/// De backend-onafhankelijke sleutels (`http.curloptResolve`,
+/// `http.followRedirects`) leunen niet op curl-vs-schannel en gelden op elk
+/// platform ongewijzigd.
+///
+/// Buiten Windows wordt niets geforceerd: Apple's git kan zonder openssl-backend
+/// gebouwd zijn, en macOS/Linux honoreren `sslCAInfo` al met de eigen backend.
+@visibleForTesting
+List<GitConfigOverride> pinnedCertBackendConfig({required bool isWindows}) =>
+    isWindows
+    ? const [GitConfigOverride('http.sslBackend', 'openssl')]
+    : const [];
 
 class _NativeGitMirror implements NativeGitMirror {
   _NativeGitMirror({
@@ -238,7 +265,10 @@ class _NativeGitMirror implements NativeGitMirror {
     final file = File('${_worktree.path}.pem');
     await file.parent.create(recursive: true);
     await writeStringAtomic(file, cert.pem);
-    return [GitConfigOverride('http.sslCAInfo', file.path)];
+    return [
+      GitConfigOverride('http.sslCAInfo', file.path),
+      ...pinnedCertBackendConfig(isWindows: Platform.isWindows),
+    ];
   }
 
   /// [network] hoort aan te staan voor alles wat de lijn op gaat — clone,
