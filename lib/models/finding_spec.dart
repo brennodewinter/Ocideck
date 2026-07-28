@@ -305,7 +305,15 @@ class FindingSpec {
   /// a line; the four sections are always emitted so the header reads as a
   /// complete template. The CVSS line's score/severity are recomputed here so
   /// they can never drift from the vector.
-  String toMarkdown() {
+  /// Serialise the finding.
+  ///
+  /// By default all four sections are emitted, empty or not — a finding on disk
+  /// reads like a report page with its full scaffold (guarded by a test). Set
+  /// [omitEmptySections] when serialising a *paginated* page: a continuation page
+  /// carries only one section, and a Markdown renderer that does not skip empty
+  /// `##` blocks itself (the Marp/HTML export, unlike the Flutter preview) would
+  /// otherwise print three stray, empty section headings under it.
+  String toMarkdown({bool omitEmptySections = false}) {
     final buf = StringBuffer();
     if (heading.isNotEmpty) {
       buf.writeln('# $heading');
@@ -336,10 +344,15 @@ class FindingSpec {
       }
       buf.writeln();
     }
-    _writeSection(buf, sectionDescription, description);
-    _writeSection(buf, sectionConfirmation, confirmation);
-    _writeSection(buf, sectionImpact, impact);
-    _writeSection(buf, sectionRecommendation, recommendation);
+    _writeSection(buf, sectionDescription, description, omitEmptySections);
+    _writeSection(buf, sectionConfirmation, confirmation, omitEmptySections);
+    _writeSection(buf, sectionImpact, impact, omitEmptySections);
+    _writeSection(
+      buf,
+      sectionRecommendation,
+      recommendation,
+      omitEmptySections,
+    );
     return buf.toString().trimRight();
   }
 
@@ -411,7 +424,13 @@ class FindingSpec {
     return url == null ? label : '[$label]($url)';
   }
 
-  void _writeSection(StringBuffer buf, String title, String text) {
+  void _writeSection(
+    StringBuffer buf,
+    String title,
+    String text,
+    bool omitEmpty,
+  ) {
+    if (omitEmpty && text.trim().isEmpty) return;
     buf.writeln('## $title');
     if (text.trim().isNotEmpty) {
       buf.writeln();

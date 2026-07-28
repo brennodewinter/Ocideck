@@ -20,17 +20,43 @@ import 'slide_layout_metrics.dart';
 /// A finding section, in the fixed §3.1 order.
 enum _Section { description, confirmation, impact, recommendation }
 
-/// Estimated full-size body lines that fit on one 16:9 slide, and the cost (in
-/// those line-units) of the header card and a section heading. Tuned against the
-/// live finding preview/presenter (a 16:9 finding fits roughly 22 body lines) so
-/// only a genuinely overflowing finding splits — a borderline one stays a single
-/// slide rather than being over-split. [_charsPerLine] tracks the finding
-/// preview's content width: the side margin was narrowed (0.07·w → 0.045·w →
-/// content 0.86·w → 0.91·w), so a line now holds ~94 chars — fewer pages.
-const double _linesPerSlide = 22.0;
-const double _headerCardCost = 4.0;
-const double _sectionHeadingCost = 1.4;
-const double _charsPerLine = 94.0;
+/// The page-budget model, in "line units" (one full-size body line of the
+/// finding preview). It exists so pagination — a pure, deck-non-mutating
+/// transform — can predict how tall a page renders WITHOUT a render context, and
+/// split a finding before the [FittedBox] in `_PreviewScaffold` has to scale it
+/// down (a too-tall finding scales down *uniformly*, so it also shrinks in width:
+/// the whole cause of "the finding only uses a third of the slide").
+///
+/// The numbers below are **measured** against the live `_FindingPreview` at
+/// `SlidePreviewWidget` — a 16:9 slide, no logo — not eyeballed. At that width a
+/// slide is [_linesPerSlide] line-units tall; the header card (severity band,
+/// CVSS gauge, wrapping heading, badges, scope) already spends [_headerCardCost]
+/// of them — *more than a whole slide* — which is why a paginated finding gets a
+/// header-only first page: nothing else fits beside it. A continuation page keeps
+/// the heading (its "(i/N)" marker) but drops the meta, costing [_contHeadingCost].
+/// A section adds [_sectionHeadingCost] for its `##` heading plus one unit per
+/// wrapped body line at [_charsPerLine] characters each.
+///
+/// The earlier values (22 / 4 / 1.4 / 94) modelled a slide holding ~22 body
+/// lines with a 4-line header. The real header is ~4× that, so nearly every
+/// multi-section finding overflowed yet the model thought it fit — it never
+/// split, and shrank to a third of the width instead. These are calibrated so a
+/// genuinely overflowing finding splits into (near-)full-width pages while one
+/// that already renders close to full width ([_minSinglePageScale]) stays single.
+const double _linesPerSlide = 19.5;
+const double _headerCardCost = 21.7;
+const double _contHeadingCost = 11.9;
+const double _sectionHeadingCost = 3.1;
+const double _charsPerLine = 40.0;
+
+/// The lowest render scale at which a finding is still left on one slide. A
+/// finding whose content fits [_linesPerSlide] / this ratio stays single: it
+/// renders at ≥ this fraction of full width, which reads as (near-)full and is
+/// not worth spending extra slides on. Below it a finding shrinks far enough to
+/// look broken (F-01 rendered at ~0.3), so it is paginated. Derived from the
+/// (possibly logo-reduced) per-page budget rather than a fixed constant, so a
+/// logo — which lowers the budget — also lowers the split threshold.
+const double _minSinglePageScale = 0.70;
 
 /// Estimated line-cost of a section's body text, honouring hard line breaks.
 double _bodyCost(String text) {
@@ -104,21 +130,35 @@ List<FindingSpec> paginateFinding(
   ];
   if (present.isEmpty) return [spec];
 
-  // Greedy pack: fill each page up to its budget, header card only on page 1.
+  // A finding that renders close enough to full width already: leave it whole
+  // rather than trade a small width gain for extra slides.
+  final total =
+      _headerCardCost +
+      present.fold<double>(0, (a, s) => a + _sectionCost(spec, s));
+  if (total <= linesPerSlide / _minSinglePageScale) return [spec];
+
+  // Greedy pack. Page 1 carries the header card, whose cost alone exceeds a
+  // slide — so its section budget is negative and it ends up header-only, the
+  // sections starting on page 2. Continuation pages carry the (meta-less)
+  // heading, so they too reserve room before any section. A section that on its
+  // own overflows a page still gets its own page (it renders slightly scaled
+  // rather than being dropped), but never shares an already-full page.
   final pages = <List<_Section>>[];
   var current = <_Section>[];
+  var isFirstPage = true;
   var budget = linesPerSlide - _headerCardCost;
   for (final s in present) {
     final cost = _sectionCost(spec, s);
-    if (current.isNotEmpty && cost > budget) {
-      pages.add(current);
+    if (cost > budget && (current.isNotEmpty || isFirstPage)) {
+      pages.add(current); // page 1 may be empty here → a header-only page
       current = <_Section>[];
-      budget = linesPerSlide; // continuation pages have no header card
+      isFirstPage = false;
+      budget = linesPerSlide - _contHeadingCost;
     }
     current.add(s);
     budget -= cost;
   }
-  if (current.isNotEmpty) pages.add(current);
+  pages.add(current);
   if (pages.length <= 1) return [spec];
 
   return [
@@ -159,7 +199,15 @@ List<Slide> expandFindingsForRender(
         out.add(slide);
       } else {
         for (final page in pages) {
-          out.add(slide.copyWith(customMarkdown: page.toMarkdown()));
+          // Omit the blanked sections: a continuation page holds one section, and
+          // the Marp/HTML export renders the Markdown verbatim (unlike the Flutter
+          // preview, which skips empty `##` blocks) — leaving them in printed
+          // three empty section headings under each page.
+          out.add(
+            slide.copyWith(
+              customMarkdown: page.toMarkdown(omitEmptySections: true),
+            ),
+          );
         }
       }
     } else {
