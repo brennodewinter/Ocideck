@@ -6,11 +6,12 @@ OciDeck is a privacy-first Marp presentation builder for desktop and web, with n
 application backend — everything runs locally. This folder holds the project
 documentation. Start here and jump to what you need.
 
-> **Status:** unreleased. No release has ever been tagged. `pubspec.yaml` says
-> `0.1.0+1`, but that string is not a version anyone can act on: no tag carries
-> it, the app never shows it, and every user runs whatever commit they built
-> from. See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) and
+> **Status:** alpha — releases are tagged (latest `0.1.1`, 2026-07-27). See
+> [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) and
 > [`../SECURITY.md`](../SECURITY.md) under *Supported versions*.
+>
+> *(Corrected 2026-07-28: this said "unreleased. No release has ever been
+> tagged" — true until `0.1.0` on 2026-07-25, stale since.)*
 >
 > *(Corrected 2026-07-22: this line read "pre-release (currently 0.1.0)", which
 > reads as a version claim and contradicted both documents named above.)*
@@ -39,7 +40,7 @@ documentation. Start here and jump to what you need.
 | [BUILD.md](BUILD.md) | Build targets and the version pin. |
 | [CHECKS.md](CHECKS.md) | The quality gates (`make check`) and what each enforces. |
 | [PERFORMANCE_GUIDE.md](PERFORMANCE_GUIDE.md) | Enforced limits, measured sizes, and optimisation tips. |
-| [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) | What the app migrates by itself (settings), and the rules for adding the next one. No releases are tagged yet. |
+| [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) | What the app migrates by itself (settings), and the rules for adding the next one. |
 
 ## For operators & compliance
 
@@ -56,7 +57,7 @@ documentation. Start here and jump to what you need.
 Design proposals, rationale and open work — historical or forward-looking, **not**
 current-state references. Where one disagrees with the code, the code wins. Each
 of these carries its own status banner saying how far it has been overtaken;
-read that banner first. All ten ship with the app.
+read that banner first. All eleven ship with the app.
 
 | Document | What it is |
 |---|---|
@@ -70,6 +71,7 @@ read that banner first. All ten ship with the app.
 | [PROCESS_IMPROVEMENT.md](design/PROCESS_IMPROVEMENT.md) | Design proposal, unbuilt: a Lean Six Sigma authoring module. Despite the name it is a product design, not a report about our process. |
 | [VERIFICATION.md](design/VERIFICATION.md) | A worklist, in Dutch: what has been built and passes its own tests but has never met a real server, a second operating system or a real report. |
 | [LEXICON_LICENTIENAVRAAG.md](design/LEXICON_LICENTIENAVRAAG.md) | A licensing dossier, in Dutch: three lexicon sources that would enrich the privacy check, and why none of them can be bundled yet. |
+| [OPENKAT_DISTRIBUTIE.md](design/OPENKAT_DISTRIBUTIE.md) | Design proposal, unbuilt: encrypted report distribution to a recipient who has minimal friction — double-click and view. The distribution side of the OpenKAT integration. |
 
 *(Corrected 2026-07-22: this list named seven of the then-nine documents in
 `design/`; `VERIFICATION.md` and `LEXICON_LICENTIENAVRAAG.md` were missing while

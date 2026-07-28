@@ -33,9 +33,10 @@ When reporting, please include as much of the following as you can:
 - A description of the issue and its impact.
 - Steps to reproduce (a minimal deck or input file if relevant).
 - The version shown under **Settings → Over OciDeck**, the commit you built
-  from, your operating system, and the Flutter version. (There is no released
-  version yet, so the number alone does not pin down which commit you ran — see
-  [Supported versions](#supported-versions) — the commit hash is what does that.)
+  from, your operating system, and the Flutter version. (The version number
+  alone does not pin down which commit you ran — see
+  [Supported versions](#supported-versions) — the commit hash is what does
+  that.)
 - Any proof-of-concept, logs, or screenshots.
 
 ## What to expect
@@ -93,7 +94,7 @@ component's own name, so a reader can see it rather than infer it.
 
 **This describes how the maintainers order their own work. It is not a service
 commitment, and no timeframe here is promised to anyone.** OciDeck is an
-open-source project with no release process (see [Supported
+open-source project with an alpha release process (see [Supported
 versions](#supported-versions)); a fixed remediation deadline is exactly the kind
 of promise that becomes untrue the first quiet month. What follows is the
 steering instrument, written down so it can be held to in behaviour.
@@ -454,16 +455,17 @@ OS-level process isolation. The `com.apple.security.cs.allow-jit` entitlement in
 
 ## Supported versions
 
-There is no released version yet. The repository carries no release tag (the one
-tag that exists, `archive/git-mirror`, marks an archived branch and is not a
-version), and `pubspec.yaml` says `0.1.0+1`. The app displays that version under
-**Settings → Over OciDeck** (*added 2026-07-22*), but it is not a release marker:
-it only changes when someone bumps `pubspec.yaml`, which does not happen on every
-commit, so many different commits on the default branch can show the same
-number. Quoting it narrows down roughly what you ran; it does not tell you
-whether a fix has landed since — for that, the commit is still what matters.
-Fixes land on the default development branch, which is what everyone runs. Once
-releases are tagged, fixes will target the latest release plus that branch.
+Releases are tagged (latest `0.1.1`, 2026-07-27). The app displays its version
+under **Settings → Over OciDeck**, but the version number only changes when
+someone bumps `pubspec.yaml`, which does not happen on every commit, so many
+different commits on the default branch can show the same number. Quoting it
+narrows down roughly what you ran; it does not tell you whether a fix has landed
+since — for that, the commit is still what matters. Fixes land on the default
+development branch. The latest release and the default branch are both
+supported; fixes target the latest release plus that branch.
+
+*(Corrected 2026-07-28: this said "There is no released version yet" and
+"There are no releases" — true until `0.1.0` on 2026-07-25, stale since.)*
 
 ## Finding this the standard way
 
@@ -491,10 +493,12 @@ about the reporting address or the licence.
 of a project's life, and that is the first thing an outsider checks. A quiet
 month should not have to be read as a signal.
 
-**What is supported, today.** The default development branch, and nothing else.
-There are no releases, so a support table with versions and dates would be
-theatre. A fix lands on that branch and nowhere else, and that is the whole
-policy — see [Supported versions](#supported-versions).
+**What is supported, today.** The latest tagged release and the default
+development branch. A fix lands on the default branch and is backported to the
+latest release where applicable — see [Supported versions](#supported-versions).
+
+*(Corrected 2026-07-28: this said "The default development branch, and nothing
+else" and "There are no releases" — stale since `0.1.0` on 2026-07-25.)*
 
 **What discontinuation would look like.** If this project stops, it will be said
 plainly rather than left to be inferred:
@@ -554,16 +558,20 @@ followed, stated with its limits (verified against the forge on 2026-07-22).
 
 | Feed | URL | What it carries today |
 |---|---|---|
-| **Releases** | `https://pawprint.vigilis.online/LibreKAT/Ocideck/releases.rss` | Nothing. It serves, and it is empty, because there are no releases yet |
-| **Tags** | `https://pawprint.vigilis.online/LibreKAT/Ocideck/tags.rss` | One entry, `archive/git-mirror`, which is an archived branch and not a version |
+| **Releases** | `https://pawprint.vigilis.online/LibreKAT/Ocideck/releases.rss` | Tagged releases (`0.1.0`, `0.1.1`, …) with notes, SBOM and `SHA256SUMS` |
+| **Tags** | `https://pawprint.vigilis.online/LibreKAT/Ocideck/tags.rss` | Release tags (`v0.1.0`, `v0.1.1`, …) plus `archive/git-mirror`, which is an archived branch and not a version |
 | **Repository activity** | `https://pawprint.vigilis.online/LibreKAT/Ocideck.rss` | Everything — pushes, comments, branch deletions. Real, and mostly noise |
 
-**The releases feed is the one to subscribe to**, precisely because it is empty:
-the day it carries an item, that item is a release, and a security fix will be in
-its notes. Subscribing to an empty feed costs nothing and is the only way to be
-told rather than to have to ask. Until then the activity feed is what exists, and
-it will not distinguish a security fix from a branch deletion — which is why it
-is listed here as available rather than recommended.
+**The releases feed is the one to subscribe to**: the day it carries a new
+item, that item is a release, and a security fix will be in
+its notes. Subscribing to a feed costs nothing and is the only way to be
+told rather than to have to ask. The activity feed is what exists for
+everything between releases, and it will not distinguish a security fix from a
+branch deletion — which is why it is listed here as available rather than
+recommended.
+
+*(Corrected 2026-07-28: this said the releases feed was empty "because there
+are no releases yet" — stale since `0.1.0` on 2026-07-25.)*
 
 There is deliberately **no mailing list**. A subscriber list is personal data we
 would then hold, protect and eventually have to delete; a feed is a file on a
@@ -581,8 +589,12 @@ under [What happens to your report](#what-happens-to-your-report-on-our-side)
 points you at the commit that closes it.
 
 What this means for a deployment that matters: pin the commit you built from and
-record it, because it is the only version identifier that exists, and decide
-yourself how often you refetch. The project cannot tell you that you are behind.
-When a release scheme does arrive, this section and
+record it, because the version number alone does not pin down the commit, and
+decide yourself how often you refetch. The project cannot tell you that you are
+behind. When a release introduces a breaking change, this section and
 [`docs/MIGRATION_GUIDE.md`](docs/MIGRATION_GUIDE.md) are where it gets written
 down.
+
+*(Corrected 2026-07-28: this said "the commit is the only version identifier
+that exists" — releases are tagged now, but the point about pinning the commit
+still stands because the version number is not bumped on every commit.)*

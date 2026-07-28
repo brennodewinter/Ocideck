@@ -217,7 +217,7 @@ and it also indexes the design documents. The current-state documents:
 | [Keyboard shortcuts](docs/SHORTCUTS.md) | Editor and presenter shortcuts |
 | [Known limitations](docs/KNOWN_LIMITATIONS.md) | What this alpha does not do yet, in one place |
 | [Licence compliance](docs/LICENSE_COMPLIANCE.md) | Open-source policy and the `make licenses` check |
-| [Migration guide](docs/MIGRATION_GUIDE.md) | Moving between versions — currently nothing to migrate, as nothing is released |
+| [Migration guide](docs/MIGRATION_GUIDE.md) | Moving between versions — no breaking changes between releases yet |
 | [Performance](docs/PERFORMANCE_GUIDE.md) | Performance characteristics and the hard limits enforced in code |
 | [Privacy](docs/PRIVACY.md) | What stays local, what leaves, and on whose action |
 | [SBOM](docs/SBOM.md) | The machine-readable Software Bill of Materials and its CRA mapping |
@@ -233,7 +233,7 @@ and it also indexes the design documents. The current-state documents:
 ### Design documents
 
 The design rationale and chosen architecture, kept separate from the
-current-state documents above. All nine are listed with their real status in
+current-state documents above. All eleven are listed with their real status in
 [`docs/README.md`](docs/README.md#design-notes-design) — each carries its own
 status banner, and where a design disagrees with the code, the code wins. That
 list is maintained in one place so it cannot go stale in two.
