@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_math_fork/flutter_math.dart';
 
 import '../../utils/inline_markdown.dart';
 
@@ -57,13 +58,31 @@ class _InlineMarkdownTextState extends State<InlineMarkdownText> {
     final onTapLink = widget.onTapLink;
     return [
       for (final run in parseInlineRuns(widget.text))
-        TextSpan(
-          text: run.text,
-          style: inlineRunStyle(run, widget.style, widget.linkColor),
-          recognizer: (run.link != null && onTapLink != null)
-              ? _recognizerFor(run.link!, onTapLink)
-              : null,
-        ),
+        if (run.math)
+          // Inline `$…$` als echte formule; op de tekstbaseline zodat hij mee
+          // op de regel staat. Faalt de TeX, dan valt hij terug op de kale bron
+          // tussen dollartekens — zichtbaar fout is beter dan stilweg leeg.
+          WidgetSpan(
+            alignment: PlaceholderAlignment.baseline,
+            baseline: TextBaseline.alphabetic,
+            child: Math.tex(
+              run.text,
+              textStyle: TextStyle(
+                fontSize: widget.style.fontSize,
+                color: widget.style.color,
+              ),
+              onErrorFallback: (_) =>
+                  Text('\$${run.text}\$', style: widget.style),
+            ),
+          )
+        else
+          TextSpan(
+            text: run.text,
+            style: inlineRunStyle(run, widget.style, widget.linkColor),
+            recognizer: (run.link != null && onTapLink != null)
+                ? _recognizerFor(run.link!, onTapLink)
+                : null,
+          ),
     ];
   }
 

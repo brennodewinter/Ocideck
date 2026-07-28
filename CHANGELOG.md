@@ -223,6 +223,21 @@ read a book to find out.
   een momentopname van de run op 2026-07-23, geen actuele eis.
 
 ### Fixed
+- **Inline-`$…$`-wiskunde werd letterlijk getoond in plaats van gerenderd
+  (#948).** De USER_GUIDE belooft dat een tekstregel `$…$`-LaTeX rendert, maar
+  alleen blok-`$$…$$` werd getekend; een zin als "een kat spint rond $f \approx
+  25\ \text{Hz}$" liet de kale bron zien. De inline-markdownparser markeert nu een
+  math-run tussen enkele dollartekens en de widgetlaag tekent die als `Math.tex`
+  in een baseline-uitgelijnde `WidgetSpan`, zodat de formule mee op de regel
+  staat — op elk tekst-oppervlak (bullets, richText, free-markdown; preview,
+  presentatie, thumbnails, export). Een guard houdt valse positieven tegen: `$…$`
+  telt alleen als wiskunde wanneer de inhoud een LaTeX-commando bevat, dus
+  bestaande decks met bedragen (`$5`, `$5 tot $10`), ontsnapte dollars (`\$`) en
+  `$$`-blokken blijven ongemoeid. De headless meetkant meet een inline-formule als
+  zijn kale bron-TeX (een veilige overschatting van de breedte); precieze
+  inline-meting bij mid-regel-breuken is een aparte verfijning.
+  `inline_math_test` toetst de parser en dat de widgetlaag een `Math`-widget
+  tekent.
 - **Een LaTeX-formule op een bullets/richText-dia liep bij presentatiemaat door
   het logo (#947).** Zusje van #931, maar in het andere formule-pad. Waar #931 de
   free-markdown-dia repareerde (die zijn inhoud omlaagschaalt in een `FittedBox`),

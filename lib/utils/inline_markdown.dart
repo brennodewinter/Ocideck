@@ -12,12 +12,17 @@ import 'markdown_paste_cleanup.dart';
 /// De klikbare, af te breken kant leeft in `widgets/slides/inline_markdown.dart`.
 
 /// Eén stuk tekst met de actieve opmaak.
+///
+/// [math] is de uitzondering: dan is [text] geen opgemaakte tekst maar de kale
+/// TeX tussen `$…$`, die de widgetlaag als inline-formule tekent. De opmaakvlaggen
+/// gelden er niet voor.
 class InlineRun {
   final String text;
   final bool bold;
   final bool italic;
   final bool code;
   final bool strike;
+  final bool math;
   final String? link;
 
   const InlineRun(
@@ -26,6 +31,7 @@ class InlineRun {
     this.italic = false,
     this.code = false,
     this.strike = false,
+    this.math = false,
     this.link,
   });
 
@@ -34,6 +40,7 @@ class InlineRun {
     bool? italic,
     bool? code,
     bool? strike,
+    bool? math,
     String? link,
   }) {
     return InlineRun(
@@ -42,12 +49,13 @@ class InlineRun {
       italic: italic ?? this.italic,
       code: code ?? this.code,
       strike: strike ?? this.strike,
+      math: math ?? this.math,
       link: link ?? this.link,
     );
   }
 }
 
-const _markers = r'*_~`[]()\';
+const _markers = r'*_~`[]()\$';
 
 bool _isEscapedPunctuation(String c) =>
     c.length == 1 && markdownEscapedPunctuation.contains(c);
@@ -62,6 +70,8 @@ List<InlineRun> parseInlineRuns(String text) {
   for (final r in out) {
     if (r.text.isEmpty) continue;
     if (merged.isNotEmpty &&
+        !merged.last.math &&
+        !r.math &&
         merged.last.bold == r.bold &&
         merged.last.italic == r.italic &&
         merged.last.code == r.code &&
@@ -188,6 +198,22 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
       }
     }
 
+    // $inline-formule$ — alleen als de inhoud een LaTeX-commando bevat, zodat
+    // gewone valuta (`$5`) en losse dollartekens tekst blijven. De inhoud gaat
+    // ongeparsed als TeX door; de opmaakcontext (`ctx`) geldt er niet voor.
+    if (c == r'$' && (i + 1 >= s.length || s[i + 1] != r'$')) {
+      final end = _findInlineMathClose(s, i + 1);
+      if (end != -1) {
+        final tex = s.substring(i + 1, end);
+        if (_looksLikeMath(tex)) {
+          flush();
+          out.add(const InlineRun('', math: true)._copyText(tex));
+          i = end + 1;
+          continue;
+        }
+      }
+    }
+
     buf.write(c);
     i++;
   }
@@ -208,6 +234,30 @@ int _findDelimiter(String s, int from, String delim) {
   }
   return -1;
 }
+
+/// De sluitende `$` van een inline-formule vanaf [from], escapes (`\$`)
+/// overslaand. Geeft -1 als er geen sluitteken is, of als het volgende teken óók
+/// een `$` is — dan is het `$$`-blokwiskunde en die hoort niet in een tekstregel.
+int _findInlineMathClose(String s, int from) {
+  var i = from;
+  while (i < s.length) {
+    if (s[i] == r'\') {
+      i += 2;
+      continue;
+    }
+    if (s[i] == r'$') {
+      if (i + 1 < s.length && s[i + 1] == r'$') return -1;
+      return i;
+    }
+    i++;
+  }
+  return -1;
+}
+
+/// Of [tex] eruitziet als een formule in plaats van valuta: minstens één
+/// LaTeX-commando (`\` gevolgd door een letter). Zo blijft `$5` of `$5 tot $10`
+/// gewoon tekst — alleen echte wiskunde wordt gerenderd.
+bool _looksLikeMath(String tex) => RegExp(r'\\[a-zA-Z]').hasMatch(tex);
 
 /// Vind de bijbehorende ']' voor de '[' op [open] (geneste haken meegerekend).
 int _matchClosingBracket(String s, int open) {
@@ -233,6 +283,7 @@ extension on InlineRun {
     italic: italic,
     code: code,
     strike: strike,
+    math: math,
     link: link,
   );
 }
