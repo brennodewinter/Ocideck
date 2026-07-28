@@ -10,6 +10,8 @@ import 'package:ocideck/services/git/git_forge.dart';
 import 'package:ocideck/services/git/native_git_mirror_api.dart';
 import 'package:ocideck/services/git/native_git_mirror_io.dart';
 
+import 'support/git_test_env.dart';
+
 // De guard om de native git-weg.
 //
 // Clone, fetch en push gebeuren in een echt `git`-subproces. Dat proces doet
@@ -261,12 +263,9 @@ void main() {
         });
         addTearDown(() => server.close(force: true));
 
-        final env = {
-          'GIT_TERMINAL_PROMPT': '0',
-          'GIT_CONFIG_NOSYSTEM': '1',
-          'GIT_CONFIG_GLOBAL': '/dev/null',
-          'PATH': Platform.environment['PATH'] ?? '/usr/bin:/bin',
-        };
+        final home = Directory.systemTemp.createTempSync('gitguard_home');
+        addTearDown(() => home.deleteSync(recursive: true));
+        final env = hermeticGitEnv(home: home.path);
 
         // Zonder pin: de naam bestaat niet, dus er valt niets te verbinden.
         final unpinned = await Process.run(
@@ -298,16 +297,15 @@ void main() {
               'git-weg is dan een papieren maatregel',
         );
       },
-      // Op de windows-2022-CI-runner bereikt git de lokale testserver niet
-      // (hits blijft 0: de verbinding komt niet tot stand), en git gebruikt
-      // daar een andere curl/TLS-achtergrond. Of native git op Windows
-      // `http.curloptResolve` honoreert is daarmee een open vraag (#926) die
-      // een échte Windows-machine vraagt. Wat wíj aan git meegeven — de
-      // guard-logica die de bestemming pint — is op Windows al gedekt door de
-      // zustertests in deze groep die geen echte verbinding nodig hebben.
-      skip: Platform.isWindows
-          ? 'lokale testserver onbereikbaar voor git op de Windows-CI (#926)'
-          : false,
+      // Draait nu óók op de windows-2022-CI-runner. Dat de verbinding daar eerder
+      // "niet tot stand kwam" lag niet aan git maar aan de omgeving van deze
+      // test: zonder `SystemRoot` laadt de socket-DLL op Windows niet, dus faalde
+      // élk netwerkverkeer — ongeacht de pin. `hermeticGitEnv` levert nu een
+      // Windows-correcte omgeving, zodat de CI empirisch toetst dat git
+      // `http.curloptResolve` óók op Windows honoreert (#934). De sleutel is een
+      // libcurl-optie (CURLOPT_RESOLVE) en staat los van de TLS-backend
+      // (schannel/openssl), dus er is geen extra config nodig zoals op de
+      // certificaat-weg.
     );
   });
 }

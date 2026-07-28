@@ -10,6 +10,8 @@ import 'package:ocideck/services/git/git_forge.dart';
 import 'package:ocideck/services/git/native_git_mirror_api.dart';
 import 'package:ocideck/services/git/native_git_mirror_io.dart';
 
+import 'support/git_test_env.dart';
+
 // Een zelfondertekend certificaat vertrouwen op de native git-weg.
 //
 // De REST-weg doet dit met een badCertificateCallback die de vingerafdruk
@@ -201,6 +203,21 @@ void main() {
     expect(git.calls, isEmpty, reason: 'er mag geen git gestart zijn');
   });
 
+  // Toetsbaar op elke machine, want de echt-server-toets hieronder draait alleen
+  // waar git én openssl staan — en de Windows-tak ervan alleen op de Windows-CI.
+  // Deze eenheidstest houdt de beslissing zelf vast: op Windows forceren we de
+  // openssl-backend zodat schannel `sslCAInfo` niet negeert (#934), elders niet.
+  group('pinnedCertBackendConfig', () {
+    test('forceert de openssl-backend op Windows', () {
+      final cfg = pinnedCertBackendConfig(isWindows: true);
+      expect(_valueOf(cfg, 'http.sslBackend'), 'openssl');
+    });
+
+    test('laat de backend elders ongemoeid', () {
+      expect(pinnedCertBackendConfig(isWindows: false), isEmpty);
+    });
+  });
+
   // ── En kan git er dan ook echt mee overweg? ────────────────────────────────
   //
   // De hele vertaalslag leunt erop dat `http.sslCAInfo` een zelfondertekend
@@ -215,17 +232,23 @@ void main() {
       ]).catchError((_) => ProcessResult(0, 1, '', ''));
       if (probe.exitCode != 0) return markTestSkipped('geen git');
 
-      final env = {
-        'GIT_TERMINAL_PROMPT': '0',
-        'GIT_CONFIG_NOSYSTEM': '1',
-        'GIT_CONFIG_GLOBAL': '/dev/null',
-        'PATH': Platform.environment['PATH'] ?? '/usr/bin:/bin',
-      };
+      final home = Directory.systemTemp.createTempSync('certpin_home');
+      addTearDown(() => home.deleteSync(recursive: true));
+      final env = hermeticGitEnv(home: home.path);
       final url = 'https://localhost:${server.port}/x.git';
+
+      // Op Windows kiest git standaard de schannel-backend, die `sslCAInfo`
+      // negeert; de app forceert daar de openssl-backend zodat de pin geldt
+      // (zie [pinnedCertBackendConfig]). Deze test spiegelt dat: dezelfde
+      // backend voor beide takken, zodat het verschil enkel de aanwezigheid van
+      // het anker is — niet de backend.
+      final backend = pinnedCertBackendConfig(
+        isWindows: Platform.isWindows,
+      ).expand((o) => ['-c', '${o.key}=${o.value}']).toList();
 
       final without = await Process.run(
         'git',
-        ['ls-remote', url],
+        [...backend, 'ls-remote', url],
         environment: env,
         includeParentEnvironment: false,
       );
@@ -237,7 +260,13 @@ void main() {
 
       final with_ = await Process.run(
         'git',
-        ['-c', 'http.sslCAInfo=${certDir.path}/cert.pem', 'ls-remote', url],
+        [
+          ...backend,
+          '-c',
+          'http.sslCAInfo=${certDir.path}/cert.pem',
+          'ls-remote',
+          url,
+        ],
         environment: env,
         includeParentEnvironment: false,
       );
@@ -249,15 +278,12 @@ void main() {
             'strandt is het git-protocol, niet de verbinding',
       );
     },
-    // Op de windows-2022-CI-runner komt de verbinding met de lokale
-    // HTTPS-testserver niet eens tot stand (git meldt direct "Could not connect
-    // to server"), en git gebruikt daar schannel in plaats van openssl. Of
-    // native git op Windows `http.sslCAInfo` als anker honoreert is daarmee een
-    // open vraag (#926) die een échte Windows-machine vraagt, niet enkel groen
-    // maken. De config die wíj meegeven is op Windows al gedekt door de
-    // zustertests hierboven (die de argv/omgeving controleren zonder verbinding).
-    skip: Platform.isWindows
-        ? 'lokale HTTPS-testserver onbereikbaar voor git op de Windows-CI (#926)'
-        : false,
+    // Draait nu óók op de windows-2022-CI-runner. Dat de verbinding daar eerder
+    // niet tot stand kwam, lag aan de omgeving van deze test (geen `SystemRoot`
+    // → geen socket-DLL, dus geen verbinding), niet aan git; `hermeticGitEnv`
+    // levert nu een Windows-correcte omgeving. En dat schannel `sslCAInfo`
+    // negeert, ondervangt de app door op Windows de openssl-backend te forceren
+    // — precies wat deze test met [pinnedCertBackendConfig] meestuurt. Zo toetst
+    // de CI empirisch dat de pin op de native git-weg óók op Windows geldt (#934).
   );
 }

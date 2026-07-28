@@ -73,6 +73,18 @@ flutter test test/git_cli_test.dart test/native_git_mirror_test.dart
 `probe()` op beide platforms daadwerkelijk *slaagt* — een groene suite met een
 falende probe zou betekenen dat het native pad nooit wordt gebruikt.
 
+**Deelvraag afgesplitst en onder CI-toezicht (#934).** Of git zich op Windows
+aan de TLS-pin houdt — `http.sslCAInfo` (certificaat) en `http.curloptResolve`
+(host) — was eerder overgeslagen omdat de echt-server-toetsen op de Windows-CI
+"niet verbonden". Dat lag aan de omgeving van die tests, niet aan git: zonder
+`SystemRoot` laadt de socket-DLL niet. Met een Windows-correcte omgeving
+(`hermeticGitEnv`) draaien `git_native_cert_pin_test.dart` en
+`git_network_guard_test.dart` nu óók op windows-2022, en de app forceert daar op
+de gepinde weg de openssl-backend zodat schannel `sslCAInfo` niet negeert. Dit
+dekt het *honoreren van de pin*; de bredere OQ-10 (token-levering, byte-scan via
+`native_git_mirror_test.dart`) blijft hierboven staan tot die suite op Windows
+groen draait.
+
 ## 3. Live Basic-auth-handshake per forge
 
 Geen enkele offline test staat hiervoor in. Draai één authenticated call tegen
