@@ -270,4 +270,25 @@ void main() {
       expect(safe, contains('stroke:red'));
     });
   });
+
+  // Pijlpunten (#941): flutter_svg rendert `<marker>` niet, dus zet
+  // svg_style_inline.js mermaids pijlen om in expliciete `<polygon>`-driehoeken.
+  // Die moeten door de opschoning heen komen — en de `<marker>` er juist uit,
+  // want die is precies waarom de pijlen weg waren.
+  test('houdt een polygon-pijlpunt, verwijdert de marker', () {
+    const svg =
+        '<svg xmlns="http://www.w3.org/2000/svg">'
+        '<defs><marker id="arrow"><path d="M0 0 L10 5 L0 10 z"/></marker></defs>'
+        '<path d="M0 0 L100 0" marker-end="url(#arrow)" stroke="#333"/>'
+        '<polygon points="100,0 92,4 92,-4" fill="#333"/>'
+        '</svg>';
+    final safe = sanitizeMermaidSvg(svg)!;
+    // De ingespoten pijlpunt overleeft, met zijn geometrie en kleur.
+    expect(safe, contains('<polygon'));
+    expect(safe, contains('points="100,0 92,4 92,-4"'));
+    expect(safe, contains('fill="#333"'));
+    // De marker en de verwijzing ernaar zijn weg (flutter_svg leest ze toch niet).
+    expect(safe, isNot(contains('<marker')));
+    expect(safe, isNot(contains('marker-end')));
+  });
 }
