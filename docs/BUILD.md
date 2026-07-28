@@ -290,9 +290,58 @@ release](#cutting-a-release)). Artifacts land under `build/<platform>/`.
   flutter build macos --release
   ```
 
-- **Distribution**: code-sign and notarize the `.app` for distribution outside
-  the App Store (Developer ID + `notarytool`). This is environment-specific and
-  not automated here.
+- **Distribution**: a `.app` that opens on *other* Macs without a Gatekeeper
+  warning must be Developer-ID-signed and notarised. That whole chain is
+  automated — run `make notarize-macos`. See [Signing and notarising the macOS
+  app](#signing-and-notarising-the-macos-app) below for the one-time setup.
+
+### Signing and notarising the macOS app
+
+`make build-macos` signs the app **ad-hoc** (`CODE_SIGN_IDENTITY = "-"`), which
+runs only on the machine that built it. To hand the app to anyone else it must be
+signed with a **Developer ID Application** certificate, built with the **hardened
+runtime**, and **notarised** by Apple with the ticket stapled into the bundle —
+otherwise Gatekeeper reports it as "damaged". `make notarize-macos` does the whole
+chain (`scripts/notarize_macos.sh`): clean build → inside-out sign of every
+embedded framework and then the bundle → local signature check → notarise →
+staple → verify the way Gatekeeper does.
+
+**One-time setup.**
+
+1. **Certificate.** In Xcode → *Settings → Accounts*, add the Apple ID of the
+   Developer Program membership, then *Manage Certificates… → + → Developer ID
+   Application*. Confirm it landed:
+
+   ```sh
+   security find-identity -v -p codesigning
+   # → Developer ID Application: <name> (<TEAMID>)
+   ```
+
+2. **Notary credentials.** `notarytool` must authenticate to Apple. The simplest
+   is an app-specific password (create one at <https://account.apple.com> →
+   *Sign-In and Security → App-Specific Passwords*), stored once in the keychain
+   under a profile name:
+
+   ```sh
+   xcrun notarytool store-credentials ocideck-notary \
+     --apple-id "<apple-id-email>" --team-id <TEAMID>
+   # paste the app-specific password when prompted
+   ```
+
+**Then, per release:**
+
+```sh
+make notarize-macos            # clean build + sign + notarise + staple + verify
+# → build/macos/Build/Products/Release/OciDeck.app   (stapled, distributable)
+# → build/macos/dist/OciDeck.zip                      (zipped for hand-off)
+```
+
+A successful run ends with `source=Notarized Developer ID`. The script defaults
+to the identity `Developer ID Application: Brenno de Winter (AMT83P4B3L)` and the
+profile `ocideck-notary`; override with `OCIDECK_SIGN_IDENTITY` /
+`OCIDECK_NOTARY_PROFILE` for another signer or CI.
+`scripts/notarize_macos.sh --skip-build` signs and notarises whatever is already
+in `build/` without rebuilding.
 
 ### Windows / Linux notes
 
@@ -490,11 +539,48 @@ because the desktop downloads do not depend on the web host; put the web version
 live by hand with `make deploy-web`. Set both secrets to have a tag deploy the
 web automatically again.
 
-### The artifacts are not signed
+### Signing the macOS release on the runner (one-time)
 
-There is no Apple Developer account and no code-signing certificate, so macOS
-reports the app as damaged and Windows shows a SmartScreen warning. The release
-notes (`.forgejo/release-body.md`) carry the per-platform instructions rather
-than leaving a user to work it out. `SHA256SUMS` proves you have the bytes that
-were published; it is not a signature and says nothing about who published them.
-Remove that section from the release notes only when signing actually exists.
+The `macos` job signs and notarises on `mac-brenno` using items already in that
+Mac's **login keychain** — nothing is exported into repository secrets, and the
+certificate never leaves the machine. Set it up once on the runner:
+
+1. **Developer ID certificate** — Xcode → *Settings → Accounts → Manage
+   Certificates → + → Developer ID Application*. Confirm with
+   `security find-identity -v -p codesigning`.
+2. **notarytool profile** `ocideck-notary`:
+
+   ```sh
+   xcrun notarytool store-credentials ocideck-notary \
+     --apple-id "<apple-id>" --team-id <TEAMID>
+   ```
+
+3. **Release the signing key for non-interactive use.** The runner is a
+   LaunchAgent with no terminal, so without this codesign blocks on a keychain
+   dialog no one is there to answer:
+
+   ```sh
+   security set-key-partition-list -S apple-tool:,apple:,codesign: -s \
+     ~/Library/Keychains/login.keychain-db
+   # enter the login password when prompted — do not put it on the command line
+   ```
+
+Rehearse before trusting it: push a pre-release tag (`v0.1.3-rc1`) — it runs the
+whole chain, publishes a **prerelease**, and skips the live web deploy (see
+[Rehearsing it safely](#rehearsing-it-safely)). Watch the `macos` job sign and
+notarise, then delete the tag and the rehearsal release.
+
+### Signing status of the published artifacts
+
+The macOS `.app` is signed and notarised **by the release workflow itself**: the
+`macos` job runs `scripts/notarize_macos.sh` when a Developer ID identity is
+present on the runner, and falls back to an ad-hoc build with a loud warning when
+it is not — so a misconfigured runner can never quietly ship something everyone
+assumes is signed. See the one-time setup above.
+
+Windows and Linux are **not** signed, so Windows shows a SmartScreen warning.
+`.forgejo/release-body.md` carries the per-platform open instructions; trim a
+platform's note only once its published artifact is actually signed (macOS once a
+tag has been seen producing a notarised `.app`). `SHA256SUMS` proves you have the
+bytes that were published; it is not a signature and says nothing about who
+published them.

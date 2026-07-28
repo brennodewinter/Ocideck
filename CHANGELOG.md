@@ -219,6 +219,26 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Added
+- **De macOS-app wordt nu getekend en genotariseerd — lokaal én in de
+  release-keten.** `make build-macos` tekent ad-hoc (`CODE_SIGN_IDENTITY =
+  "-"`), en zo'n app draait alleen op de Mac die 'm bouwde — elke andere Mac
+  meldt 'm als "beschadigd". Er is nu een Apple Developer-lidmaatschap
+  (Individual, Team `AMT83P4B3L`) met een Developer ID Application-certificaat,
+  en `scripts/notarize_macos.sh` (`make notarize-macos`) doet de hele keten in
+  één stap: schoon bouwen (incrementeel breekt stil het zegel van
+  App.framework), de ingebedde frameworks en de bundel van binnen naar buiten
+  tekenen met hardened runtime en tijdstempel, lokaal verifiëren, bij Apple
+  notariseren (`notarytool`), het ticket in de app stapelen, en controleren zoals
+  Gatekeeper het ziet (`spctl` → `source=Notarized Developer ID`). Lokaal levert
+  het een verspreidbaar `OciDeck-<versie>-macos.zip` met `SHA256SUMS`; in de
+  release-workflow tekent en notariseert de `macos`-job voortaan op de Mac-runner
+  (`mac-brenno`) via het certificaat in diens login-keychain — géén
+  signing-secret in de repo, en een luide terugval op een ongetekende build als
+  de identiteit ontbreekt. Windows en Linux blijven (nog) ongetekend. Identiteit
+  en profiel zijn overschrijfbaar via `OCIDECK_SIGN_IDENTITY` /
+  `OCIDECK_NOTARY_PROFILE`. Zie
+  [`BUILD.md`](docs/BUILD.md#signing-and-notarising-the-macos-app) en
+  [de ondertekenstatus](docs/BUILD.md#signing-status-of-the-published-artifacts).
 - **Een dankwoord in de app: een hartje naast de OciDeck-naam in "Over
   OciDeck".** Bijdragen en hulp zijn de kern van open source, en tot nu toe zei
   de app dat nergens hardop. Er is nu een los, warm dankwoord in
