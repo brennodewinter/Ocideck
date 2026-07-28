@@ -12,6 +12,48 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.1.2] — 2026-07-28
+
+A follow-up to `0.1.1`, cut the next day. The file format does not change, so
+every deck written by `0.1.0` or `0.1.1` opens unchanged. This release is about
+presenting rich content: a large Mermaid diagram can now be zoomed and panned
+live — mirrored to the audience window — and inline `$…$` mathematics finally
+renders on the text line. It also adds a thank-you page for contributors and
+finishes hardening the Windows test leg on the mirror CI.
+
+As with the previous releases, the short answer is here; the entry-by-entry
+rationale, in Dutch, is in the **Development log** below.
+
+### Added
+
+- Presenting a large Mermaid diagram is now interactive: pinch or scroll to zoom,
+  drag to pan, zoom with the − / + keys, and a "fit" that zooms out until the
+  whole diagram is visible — with the audience window following the zoom and
+  scroll position (#930, #944).
+- Inline `$…$` LaTeX mathematics renders on a text line, alongside the block
+  `$$…$$` that already worked — on every text surface and in preview,
+  presentation, thumbnails and export (#948).
+- A thank-you page for contributors, opened from a heart beside the OciDeck name
+  in **Settings → About OciDeck**, with a removal route for anyone who would
+  rather not be listed (#936).
+
+### Fixed
+
+- Mermaid arrowheads render as filled polygons, so the direction of an edge is
+  visible again (#941).
+- LaTeX formulas while presenting: reserve the formula's real height when
+  paginating so it no longer overlaps the line below, and keep it above the slide
+  logo; stop an embedded formula when its slide is left (#931, #932, #947).
+- Open a `.ocideck` package or a style profile through **File → Open** regardless
+  of the picker's extension filter (#927).
+- Windows: a green test leg on the mirror CI — platform-agnostic path handling, a
+  Windows spawn environment for the git smoke test, per-platform pasteboard and
+  clipboard contracts, and per-test timeouts instead of `@OnPlatform`; the
+  native-git certificate pin now forces the OpenSSL backend and its pin tests run
+  on Windows too (#928, #933, #934, #942).
+- Documentation: correct stale "nothing released yet" and "no download" claims
+  across six files now that tagged releases exist (#938).
+
 ## [0.1.1] — 2026-07-27
 
 A follow-up to the first release, cut two days later. The file format does not
