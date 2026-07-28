@@ -12,6 +12,24 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.1.3] — 2026-07-29
+
+A packaging release. The macOS app is now **signed with a Developer ID and
+notarised by Apple**, so it opens on any Mac without the "damaged" warning the
+earlier downloads triggered. The deck format and the app behaviour are unchanged
+from `0.1.2` — every deck opens exactly as before. Windows and Linux stay
+unsigned for now.
+
+As with the previous releases, the short answer is here; the entry-by-entry
+rationale, in Dutch, is in the **Development log** below.
+
+### Changed
+
+- macOS release builds are now signed (Developer ID) and notarised, with the
+  ticket stapled into the app so Gatekeeper accepts them offline. The release
+  workflow signs on every tag; `make notarize-macos` does the same locally. See
+  [BUILD.md](docs/BUILD.md#signing-and-notarising-the-macos-app).
+
 ## [0.1.2] — 2026-07-28
 
 A follow-up to `0.1.1`, cut the next day. The file format does not change, so
