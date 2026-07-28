@@ -14,14 +14,24 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ## [0.1.3] — 2026-07-29
 
-A packaging release. The macOS app is now **signed with a Developer ID and
-notarised by Apple**, so it opens on any Mac without the "damaged" warning the
-earlier downloads triggered. The deck format and the app behaviour are unchanged
-from `0.1.2` — every deck opens exactly as before. Windows and Linux stay
-unsigned for now.
+Signed macOS builds and a finding-slide layout fix. The macOS app is now
+**signed with a Developer ID and notarised by Apple**, so it opens on any Mac
+without the "damaged" warning the earlier downloads triggered. And a long
+security finding that used to shrink to about a third of the slide width now
+splits across full-width slides instead. The deck format is unchanged — every
+deck opens exactly as before, and the pagination is a pure render
+transformation. Windows and Linux stay unsigned for now.
 
 As with the previous releases, the short answer is here; the entry-by-entry
 rationale, in Dutch, is in the **Development log** below.
+
+### Fixed
+
+- A long `finding` slide (the full header card plus several prose sections)
+  shrank to roughly a third of the slide width instead of paginating; the
+  render-time height estimate was recalibrated against the real preview, so long
+  findings now split across slides that each fill (almost) the full width — in
+  preview, presentation and export (#950).
 
 ### Changed
 
