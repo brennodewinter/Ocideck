@@ -177,6 +177,22 @@ summary is above, so a reader looking for "what is in 0.1.0" no longer has to
 read a book to find out.
 
 ### Changed
+- **Een groot mermaid-diagram is tijdens het presenteren nu ook in- en uit te
+  zoomen, niet alleen te scrollen (#930).** Een detailrijke flowchart (zoals de
+  kat-beslisboom) kon je verticaal doorbladeren, maar niet uitvergroten om een
+  deel goed te tonen. Het diagram zit nu in een `InteractiveViewer`: knijpen op
+  de trackpad, scrollen met de muis, en drie toegankelijke knoppen (in, uit,
+  passend) — zodat zoomen ook zonder gebaar lukt. De vroegere scroll-spiegeling
+  naar het publieksvenster (#872) is verbreed naar de volledige kijkstand: de
+  presentator deelt zoom én scrollpositie, en de beamer volgt. Dat gaat over een
+  `MermaidViewController` met een *maat-onafhankelijke* stand (zoomfactor plus
+  kind-fracties), zodat het presentatiescherm en de beamer — met hun andere
+  pixelmaat — naar hetzelfde punt wijzen. De rekenkern (stand ↔ transform, en de
+  zoom-rond-het-midden) is puur en apart getoetst; `test/mermaid_zoom_test.dart`
+  toetst de knoppen, de klemming en de spiegeling, en `test/mermaid_diagram_test`
+  is meegetrokken van scroll- naar zoomgedrag. Alleen de presentatie is
+  interactief; thumbnails, de editor-preview en de export tonen het diagram
+  onveranderd passend.
 - **Toolchain-pin van Flutter 3.44.7 naar 3.44.8 (stable, 2026-07-27).** De
   laatste stable uit het officiële kanaal. 3.44.8 lost bovenstrooms twee dingen
   op die ons raken: een `lipo`-verificatiefout van Xcode bij het compileren van

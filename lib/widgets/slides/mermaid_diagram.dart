@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../services/mermaid_render_service.dart';
 import '../../utils/sanitize_svg.dart';
 
@@ -14,6 +15,116 @@ import '../../utils/sanitize_svg.dart';
 /// van de SVG, het kader eromheen, en de terugval op de brontekst wanneer de
 /// opmaak wordt geweigerd.
 typedef MermaidRenderer = Future<String?> Function(String source);
+
+/// De grootste zoomfactor voor een mermaid-diagram in de presentatie.
+const double kMermaidMaxZoom = 5.0;
+
+/// De genormaliseerde kijkstand van een groot mermaid-diagram: zoomfactor plus
+/// de fractie van het diagram die linksboven in beeld staat. Bewust
+/// *maat-onafhankelijk* (geen pixels): het presentatiescherm en de beamer hebben
+/// een andere pixelmaat, maar dezelfde fractie wijst op beide naar hetzelfde
+/// punt. Zo kan de presentator zijn zoom én scrollpositie naar het publieksscherm
+/// spiegelen (#930, opvolger van de scroll-only spiegeling van #872).
+class MermaidViewController extends ChangeNotifier {
+  double _scale = 1.0;
+  double _fx = 0.0;
+  double _fy = 0.0;
+
+  /// Zoomfactor, ≥ 1 (1 = passend/leesbaar, geen uitvergroting).
+  double get scale => _scale;
+
+  /// Kind-fractie (0..1) die aan de linkerrand van het venster staat.
+  double get fx => _fx;
+
+  /// Kind-fractie (0..1) die aan de bovenrand van het venster staat.
+  double get fy => _fy;
+
+  void set({required double scale, required double fx, required double fy}) {
+    final s = scale.isNaN ? 1.0 : scale.clamp(1.0, kMermaidMaxZoom);
+    final nx = fx.isNaN ? 0.0 : fx.clamp(0.0, 1.0);
+    final ny = fy.isNaN ? 0.0 : fy.clamp(0.0, 1.0);
+    if (s == _scale && nx == _fx && ny == _fy) return;
+    _scale = s;
+    _fx = nx;
+    _fy = ny;
+    notifyListeners();
+  }
+
+  void reset() => set(scale: 1.0, fx: 0.0, fy: 0.0);
+}
+
+/// De `Matrix4` voor een [InteractiveViewer] die het diagram op zoomfactor
+/// [scale] toont met kind-fractie ([fx], [fy]) linksboven, gegeven de
+/// ongeschaalde kindmaat. Puur, zodat de rekenkern los te toetsen is.
+///
+/// De transform beeldt een kindpunt `p` af op `scale·p + t`, met
+/// `t = -scale·fractie·kindmaat`; het kindpunt op `fractie·kindmaat` landt dan
+/// precies op de vensterrand (0).
+Matrix4 mermaidViewMatrix(
+  double scale,
+  double fx,
+  double fy,
+  double childW,
+  double childH,
+) {
+  final s = scale < 1.0 ? 1.0 : scale;
+  // Rechtstreeks gezet (kolom-major: schaal op de diagonaal, translatie in
+  // kolom 3), zodat we niet op de afgekeurde `translate`/`scale`-bouwers leunen.
+  return Matrix4.identity()
+    ..setEntry(0, 0, s)
+    ..setEntry(1, 1, s)
+    ..setEntry(2, 2, s)
+    ..setEntry(0, 3, -s * fx * childW)
+    ..setEntry(1, 3, -s * fy * childH);
+}
+
+/// De genormaliseerde kijkstand terug uit een [InteractiveViewer]-matrix. De
+/// inverse van [mermaidViewMatrix]; puur en los getoetst.
+({double scale, double fx, double fy}) mermaidViewNormalized(
+  Matrix4 m,
+  double childW,
+  double childH,
+) {
+  final s = m.getMaxScaleOnAxis();
+  final t = m.getTranslation();
+  final fx = (childW > 0 && s > 0) ? (-t.x / (s * childW)) : 0.0;
+  final fy = (childH > 0 && s > 0) ? (-t.y / (s * childH)) : 0.0;
+  return (scale: s, fx: fx, fy: fy);
+}
+
+/// Zoomt [view] met [factor] rond het midden van het venster en houdt de rest
+/// binnen het diagram. Puur, zodat de knop-zoom los te toetsen is. [vw]/[vh] is
+/// de venstermaat, [childW]/[childH] de ongeschaalde diagrammaat.
+({double scale, double fx, double fy}) mermaidZoomAroundCentre(
+  ({double scale, double fx, double fy}) view, {
+  required double factor,
+  required double vw,
+  required double vh,
+  required double childW,
+  required double childH,
+}) {
+  double visible(double scale, double viewport, double child) =>
+      (child <= 0 || scale <= 0)
+      ? 1.0
+      : (viewport / (scale * child)).clamp(0.0, 1.0);
+  double clampFraction(double f, double vis) =>
+      f.clamp(0.0, (1.0 - vis).clamp(0.0, 1.0));
+
+  final visX = visible(view.scale, vw, childW);
+  final visY = visible(view.scale, vh, childH);
+  // Kind-fractie in het midden van het venster; die houden we vast.
+  final centreX = view.fx + visX / 2;
+  final centreY = view.fy + visY / 2;
+
+  final target = (view.scale * factor).clamp(1.0, kMermaidMaxZoom);
+  final visX2 = visible(target, vw, childW);
+  final visY2 = visible(target, vh, childH);
+  return (
+    scale: target,
+    fx: clampFraction(centreX - visX2 / 2, visX2),
+    fy: clampFraction(centreY - visY2 / 2, visY2),
+  );
+}
 
 /// Renders a Mermaid diagram definition as inline SVG in slide previews.
 class MermaidDiagram extends StatefulWidget {
@@ -37,9 +148,10 @@ class MermaidDiagram extends StatefulWidget {
 class _MermaidDiagramState extends State<MermaidDiagram> {
   late Future<String?> _svgFuture;
 
-  /// Verticale scrolpositie voor een diagram dat te hoog is om leesbaar te passen
-  /// (#872). Blijft ongebruikt zolang het diagram gewoon past.
-  final ScrollController _scrollController = ScrollController();
+  /// Eigen kijk-controller wanneer er geen gedeelde boven staat (buiten de
+  /// presentatie): dan zoomt/scrollt het diagram nog steeds, alleen zonder
+  /// spiegeling naar een tweede scherm.
+  final MermaidViewController _localView = MermaidViewController();
 
   MermaidRenderer get _render =>
       widget.renderer ?? MermaidRenderService.instance.render;
@@ -55,21 +167,19 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.source != widget.source) {
       _svgFuture = _render(widget.source);
-      // Nieuwe inhoud: terug naar de bovenkant, ook bij een gedeelde
-      // presentatie-controller — anders begint een volgende dia op de oude
-      // scrollpositie (#872).
+      // Nieuwe inhoud: terug naar de bovenkant én naar zoomfactor 1, ook bij een
+      // gedeelde presentatie-controller — anders begint een volgende dia op de
+      // oude kijkstand (#872/#930).
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted) return;
-        final controller =
-            MermaidRenderScope.controllerOf(context) ?? _scrollController;
-        if (controller.hasClients) controller.jumpTo(0);
+        (MermaidRenderScope.viewControllerOf(context) ?? _localView).reset();
       });
     }
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _localView.dispose();
     super.dispose();
   }
 
@@ -102,14 +212,15 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
     );
   }
 
-  /// Kiest tussen passend tonen en scrollen (#868/#872).
+  /// Kiest tussen passend tonen, en zoombaar/scrollbaar tonen (#868/#872/#930).
   ///
   /// Past het diagram op volle breedte binnen het kader, dan tonen we het gewoon
-  /// passend. Is het daarvoor te hoog, dan hangt het van de context af: op een
-  /// interactief oppervlak (editor, presentatie) tonen we het op leesbare volle
-  /// breedte in een vast-hoog scrollvenster; op een statisch oppervlak (export,
-  /// rasteraar, publieksvenster) kan er niet gescrold worden, dus schalen we het
-  /// hele diagram passend omlaag — liever klein-maar-heel dan afgesneden.
+  /// passend. Is het te hoog of te breed, dan hangt het van de context af: op een
+  /// interactief oppervlak (presentatie) tonen we het op leesbare maat in een
+  /// zoombaar/verschuifbaar venster; op een statisch oppervlak (export,
+  /// rasteraar, publieksvenster zonder controller) kan er niet gezoomd worden,
+  /// dus schalen we het hele diagram passend omlaag — liever klein-maar-heel dan
+  /// afgesneden.
   Widget _buildDiagram(BuildContext context, String safe) {
     final w = widget.width;
     final maxW = w * 0.84;
@@ -122,52 +233,30 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
     final aspect = _diagramAspectRatio(safe);
     final naturalHeight = (aspect != null && aspect > 0) ? maxW / aspect : null;
     final scrollable = MermaidRenderScope.scrollableOf(context);
-    // Een gedeelde controller (presentatie) wint van de eigen; zo kan de
-    // presentator de scrollpositie naar het publiek spiegelen (#872). Werkt voor
-    // beide assen — de gedeelde offset gaat als fractie, richting-onafhankelijk.
-    final controller =
-        MermaidRenderScope.controllerOf(context) ?? _scrollController;
 
     final Widget content;
     if (scrollable && naturalHeight != null && naturalHeight > maxH) {
-      // Te hoog én interactief: leesbaar op volle breedte, verticaal scrollen
-      // binnen een vast-hoog venster. Zo blijft het kader even hoog als bij een
-      // passend diagram en trekt de slide-FittedBox de rest niet mee omlaag.
-      content = SizedBox(
-        height: maxH,
-        child: SingleChildScrollView(
-          controller: controller,
-          child: Align(
-            alignment: Alignment.topCenter,
-            heightFactor: 1.0,
-            child: SvgPicture.string(
-              safe,
-              fit: BoxFit.contain,
-              width: maxW,
-              height: naturalHeight,
-            ),
-          ),
-        ),
+      // Te hoog én interactief: leesbaar op volle breedte, verticaal zoombaar/
+      // verschuifbaar binnen een vast-hoog venster.
+      content = _zoomable(
+        context,
+        safe,
+        childW: maxW,
+        childH: naturalHeight,
+        viewportH: maxH,
       );
     } else if (scrollable &&
         naturalHeight != null &&
         naturalHeight < minH &&
         aspect != null) {
       // Te breed/dun én interactief: leesbaar op volle hoogte (maxH), horizontaal
-      // scrollen. Het venster blijft even hoog als een passend diagram; de
-      // tekening loopt naar rechts en is af te scrollen.
-      content = SizedBox(
-        height: maxH,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          controller: controller,
-          child: SvgPicture.string(
-            safe,
-            fit: BoxFit.contain,
-            width: maxH * aspect,
-            height: maxH,
-          ),
-        ),
+      // zoombaar/verschuifbaar.
+      content = _zoomable(
+        context,
+        safe,
+        childW: maxH * aspect,
+        childH: maxH,
+        viewportH: maxH,
       );
     } else {
       // Past binnen het kader, of statisch oppervlak: passend (zoals #868).
@@ -196,6 +285,28 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
     );
   }
 
+  Widget _zoomable(
+    BuildContext context,
+    String safe, {
+    required double childW,
+    required double childH,
+    required double viewportH,
+  }) {
+    // Een gedeelde controller (presentatie) wint van de eigen; zo kan de
+    // presentator de kijkstand naar het publiek spiegelen (#930). De beamer
+    // toont alleen mee: interactie staat daar uit.
+    final shared = MermaidRenderScope.viewControllerOf(context);
+    return _ZoomableMermaid(
+      svg: safe,
+      childW: childW,
+      childH: childH,
+      viewportH: viewportH,
+      controller: shared ?? _localView,
+      interactive: MermaidRenderScope.interactiveOf(context),
+      buttonSize: widget.width * 0.04,
+    );
+  }
+
   Widget _fallbackCode() {
     return Container(
       width: double.infinity,
@@ -219,30 +330,244 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
   }
 }
 
-/// Geeft aan een subboom door of een mermaid-diagram mag scrollen (#872).
+/// Het zoombare/verschuifbare venster om een groot diagram (#930). Houdt een
+/// eigen [TransformationController] voor de [InteractiveViewer] en
+/// synchroniseert die met de genormaliseerde [MermaidViewController] — beide
+/// kanten op, met een vlag tegen terugkoppeling — zodat de presentator zijn
+/// kijkstand deelt en de beamer meebeweegt.
+class _ZoomableMermaid extends StatefulWidget {
+  final String svg;
+  final double childW;
+  final double childH;
+  final double viewportH;
+  final MermaidViewController controller;
+  final bool interactive;
+  final double buttonSize;
+
+  const _ZoomableMermaid({
+    required this.svg,
+    required this.childW,
+    required this.childH,
+    required this.viewportH,
+    required this.controller,
+    required this.interactive,
+    required this.buttonSize,
+  });
+
+  @override
+  State<_ZoomableMermaid> createState() => _ZoomableMermaidState();
+}
+
+class _ZoomableMermaidState extends State<_ZoomableMermaid> {
+  final TransformationController _tc = TransformationController();
+  bool _applyingRemote = false;
+  Size _viewport = Size.zero;
+
+  @override
+  void initState() {
+    super.initState();
+    _tc.addListener(_onLocalChanged);
+    widget.controller.addListener(_onSharedChanged);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _applyShared());
+  }
+
+  @override
+  void didUpdateWidget(_ZoomableMermaid old) {
+    super.didUpdateWidget(old);
+    if (old.controller != widget.controller) {
+      old.controller.removeListener(_onSharedChanged);
+      widget.controller.addListener(_onSharedChanged);
+    }
+    // Een nieuwe kindmaat (andere dia/diagram) betekent een andere matrix voor
+    // dezelfde kijkstand: opnieuw toepassen.
+    if (old.childW != widget.childW || old.childH != widget.childH) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _applyShared());
+    }
+  }
+
+  @override
+  void dispose() {
+    _tc.removeListener(_onLocalChanged);
+    widget.controller.removeListener(_onSharedChanged);
+    _tc.dispose();
+    super.dispose();
+  }
+
+  void _onSharedChanged() {
+    if (!mounted) return;
+    _applyShared();
+  }
+
+  void _applyShared() {
+    final target = mermaidViewMatrix(
+      widget.controller.scale,
+      widget.controller.fx,
+      widget.controller.fy,
+      widget.childW,
+      widget.childH,
+    );
+    if (_tc.value == target) return;
+    _applyingRemote = true;
+    _tc.value = target;
+    _applyingRemote = false;
+  }
+
+  void _onLocalChanged() {
+    if (_applyingRemote) return;
+    final n = mermaidViewNormalized(_tc.value, widget.childW, widget.childH);
+    widget.controller.set(scale: n.scale, fx: n.fx, fy: n.fy);
+  }
+
+  void _zoomBy(double factor) {
+    final current = mermaidViewNormalized(
+      _tc.value,
+      widget.childW,
+      widget.childH,
+    );
+    final next = mermaidZoomAroundCentre(
+      current,
+      factor: factor,
+      vw: _viewport.width,
+      vh: _viewport.height,
+      childW: widget.childW,
+      childH: widget.childH,
+    );
+    widget.controller.set(scale: next.scale, fx: next.fx, fy: next.fy);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: widget.viewportH,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          _viewport = Size(constraints.maxWidth, widget.viewportH);
+          final viewer = ClipRect(
+            child: InteractiveViewer(
+              transformationController: _tc,
+              constrained: false,
+              panEnabled: widget.interactive,
+              scaleEnabled: widget.interactive,
+              minScale: 1.0,
+              maxScale: kMermaidMaxZoom,
+              boundaryMargin: EdgeInsets.zero,
+              child: SizedBox(
+                width: widget.childW,
+                height: widget.childH,
+                child: SvgPicture.string(
+                  widget.svg,
+                  fit: BoxFit.fill,
+                  width: widget.childW,
+                  height: widget.childH,
+                ),
+              ),
+            ),
+          );
+          if (!widget.interactive) return viewer;
+          return Stack(
+            children: [
+              Positioned.fill(child: viewer),
+              Positioned(
+                right: widget.buttonSize * 0.3,
+                bottom: widget.buttonSize * 0.3,
+                child: _ZoomControls(
+                  size: widget.buttonSize,
+                  onZoomIn: () => _zoomBy(1.25),
+                  onZoomOut: () => _zoomBy(0.8),
+                  onReset: widget.controller.reset,
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+/// De toegankelijke zoomknoppen op een groot diagram: groter, kleiner, en terug
+/// naar passend. Naast de knijp- en scrollbediening, zodat zoomen ook zonder
+/// trackpad-gebaar lukt (#930).
+class _ZoomControls extends StatelessWidget {
+  final double size;
+  final VoidCallback onZoomIn;
+  final VoidCallback onZoomOut;
+  final VoidCallback onReset;
+
+  const _ZoomControls({
+    required this.size,
+    required this.onZoomIn,
+    required this.onZoomOut,
+    required this.onReset,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Material(
+      color: AppTheme.nearWhite.withValues(alpha: 0.92),
+      borderRadius: BorderRadius.circular(size * 0.3),
+      elevation: 1,
+      child: Padding(
+        padding: EdgeInsets.all(size * 0.12),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _button(Icons.add, l10n.d('Inzoomen'), onZoomIn),
+            _button(Icons.remove, l10n.d('Uitzoomen'), onZoomOut),
+            _button(
+              Icons.center_focus_strong,
+              l10n.d('Zoom resetten'),
+              onReset,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _button(IconData icon, String tooltip, VoidCallback onTap) {
+    return IconButton(
+      icon: Icon(icon, size: size * 0.6),
+      color: AppTheme.ghInk,
+      tooltip: tooltip,
+      visualDensity: VisualDensity.compact,
+      constraints: BoxConstraints.tightFor(width: size, height: size),
+      padding: EdgeInsets.zero,
+      onPressed: onTap,
+    );
+  }
+}
+
+/// Geeft aan een subboom door of een mermaid-diagram interactief mag zijn
+/// (zoombaar/verschuifbaar), en deelt eventueel een kijk-controller (#872/#930).
 ///
-/// Scrollen is bewust *opt-in*: de standaard is passend verkleinen (het hele
+/// Interactie is bewust *opt-in*: de standaard is passend verkleinen (het hele
 /// diagram zichtbaar), zoals overal — thumbnails, de slidestrook, dialogen, de
-/// export-rasteraar. Alleen de grote interactieve previews (het editor-
-/// previewpaneel, het play-scherm) zetten het aan, zodat een te groot diagram
-/// dáár leesbaar op volle breedte in een scrollvenster komt in plaats van tot
-/// een postzegel te verkleinen. Zo kan een klein oppervlak nooit per ongeluk een
-/// half, weggescrold diagram tonen.
+/// export-rasteraar. Alleen de presentatie zet het aan, zodat een te groot
+/// diagram dáár leesbaar in een zoombaar venster komt in plaats van tot een
+/// postzegel te verkleinen. Zo kan een klein oppervlak nooit per ongeluk een
+/// half, weggeschoven diagram tonen.
 class MermaidRenderScope extends InheritedWidget {
   const MermaidRenderScope({
     super.key,
     required this.scrollable,
-    this.controller,
+    this.viewController,
+    this.interactive = true,
     required super.child,
   });
 
   final bool scrollable;
 
-  /// Optionele externe scroll-controller (#872). Zet de presentatie in om de
-  /// scrollpositie te delen: de presentator luistert erop en zendt de offset naar
-  /// het publieksvenster, dat zijn eigen controller op die offset zet. Zonder dit
-  /// gebruikt elk diagram zijn eigen interne controller (editor/losse preview).
-  final ScrollController? controller;
+  /// Optionele gedeelde kijk-controller (#930). De presentatie zet er één zodat
+  /// de presentator zijn zoom/scroll naar het publieksvenster spiegelt; de
+  /// beamer luistert erop en toont dezelfde kijkstand. Zonder dit gebruikt elk
+  /// diagram zijn eigen interne controller.
+  final MermaidViewController? viewController;
+
+  /// Of dit oppervlak gebaren aanneemt en zoomknoppen toont. De presentator: ja;
+  /// het publieksvenster: nee (het spiegelt alleen mee).
+  final bool interactive;
 
   /// De dichtstbijzijnde waarde, of `false` als er geen scope boven staat —
   /// passend verkleinen is de veilige standaard.
@@ -252,16 +577,25 @@ class MermaidRenderScope extends InheritedWidget {
     return scope?.scrollable ?? false;
   }
 
-  /// De gedeelde scroll-controller voor dit oppervlak, of `null` als er geen is.
-  static ScrollController? controllerOf(BuildContext context) {
+  /// De gedeelde kijk-controller voor dit oppervlak, of `null` als er geen is.
+  static MermaidViewController? viewControllerOf(BuildContext context) {
     final scope = context
         .dependOnInheritedWidgetOfExactType<MermaidRenderScope>();
-    return scope?.controller;
+    return scope?.viewController;
+  }
+
+  /// Of dit oppervlak gebaren/knoppen toont; standaard `true`.
+  static bool interactiveOf(BuildContext context) {
+    final scope = context
+        .dependOnInheritedWidgetOfExactType<MermaidRenderScope>();
+    return scope?.interactive ?? true;
   }
 
   @override
   bool updateShouldNotify(MermaidRenderScope oldWidget) =>
-      scrollable != oldWidget.scrollable || controller != oldWidget.controller;
+      scrollable != oldWidget.scrollable ||
+      viewController != oldWidget.viewController ||
+      interactive != oldWidget.interactive;
 }
 
 /// De maat waarin het diagram binnen het slidekader past.

@@ -60,7 +60,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                   // scrollen; de gedeelde controller spiegelt de positie naar het
                   // publieksvenster (#872).
                   scrollableMermaid: true,
-                  mermaidScrollController: _mermaidScroll,
+                  mermaidViewController: _mermaidView,
                   onChecklistItemToggle: (column, itemIndex) =>
                       _toggleChecklistItem(
                         slideIndex: _index,

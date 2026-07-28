@@ -356,16 +356,16 @@ class SlidePreviewWidget extends StatelessWidget {
   /// Vergroot grafieklabels voor weergave op afstand in presentatiemodus.
   final bool presentationMode;
 
-  /// Of een te groot mermaid-diagram op dit oppervlak mag scrollen (#872).
-  /// Opt-in: standaard `false` (passend verkleinen, het hele diagram zichtbaar),
-  /// net als thumbnails, dialogen en de export. Alleen de grote interactieve
-  /// previews (presentatie) zetten het op `true`.
+  /// Of een te groot mermaid-diagram hier zoombaar/scrollbaar is (#872/#930);
+  /// opt-in, alleen de presentatie zet het aan (elders passend verkleinen).
   final bool scrollableMermaid;
 
-  /// Optionele gedeelde scroll-controller voor een groot mermaid-diagram (#872).
-  /// De presentatie zet er één zodat de presentator zijn scrollpositie kan
-  /// spiegelen naar het publieksvenster; elders `null` (eigen controller).
-  final ScrollController? mermaidScrollController;
+  /// Gedeelde kijk-controller (zoom + scrollpositie) voor een groot mermaid-
+  /// diagram; de presentatie deelt er één met het publieksvenster (#930).
+  final MermaidViewController? mermaidViewController;
+
+  /// Gebaren + zoomknoppen aan (presentator) of alleen meespiegelen (beamer).
+  final bool mermaidInteractive;
 
   /// Wijzigt tijdens het presenteren een checklistitem. [column] is 0 voor de
   /// eerste/enkele lijst en 1 voor de rechterkolom.
@@ -474,7 +474,8 @@ class SlidePreviewWidget extends StatelessWidget {
     this.allowRemoteMedia = false,
     this.presentationMode = false,
     this.scrollableMermaid = false,
-    this.mermaidScrollController,
+    this.mermaidViewController,
+    this.mermaidInteractive = true,
     this.onChecklistItemToggle,
     this.tableEditMode = false,
     this.tableEditRow,
@@ -518,7 +519,8 @@ class SlidePreviewWidget extends StatelessWidget {
     // measuring assumes unscaled text), so the canvas opts out.
     return MermaidRenderScope(
       scrollable: scrollableMermaid,
-      controller: mermaidScrollController,
+      viewController: mermaidViewController,
+      interactive: mermaidInteractive,
       child: MediaQuery.withNoTextScaling(
         child: _TableEditHost(
           enabled:

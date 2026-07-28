@@ -202,36 +202,33 @@ void main() {
     expect(pic.width, closeTo(80, 0.5));
   });
 
-  testWidgets('op een interactief oppervlak wordt een hoge flowchart scrollbaar '
-      'op leesbare breedte (#872)', (tester) async {
+  testWidgets('op een interactief oppervlak wordt een hoge flowchart zoombaar '
+      'op leesbare breedte (#872/#930)', (tester) async {
     await tester.binding.setSurfaceSize(const Size(1400, 2000));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     // Zelfde hoge diagram, maar nu interactief (scrollable = true, de default).
     // In plaats van tot een postzegel te verkleinen blijft het op leesbare volle
     // breedte (maxW = 840) en krijgt het zijn natuurlijke hoogte (840/0.25 =
-    // 3360), scrollbaar binnen een vast-hoog venster.
+    // 3360), zoombaar/verschuifbaar binnen een vast-hoog venster.
     await pump(tester, 'flowchart TD; A-->B', returns(tall), width: 1000);
 
-    expect(find.byType(SingleChildScrollView), findsOneWidget);
+    expect(find.byType(InteractiveViewer), findsOneWidget);
     final pic = tester.widget<SvgPicture>(find.byType(SvgPicture));
     expect(pic.width, closeTo(840, 0.5));
     expect(pic.height, closeTo(3360, 1));
   });
 
-  testWidgets('het scrollvenster scrolt het diagram ook echt (#872)', (
+  testWidgets('het venster verschuift het diagram ook echt (#872/#930)', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(1400, 2000));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     await pump(tester, 'flowchart TD; A-->B', returns(tall), width: 1000);
 
-    // De onderkant van het (te hoge) diagram zit vóór het scrollen ver onder de
-    // rand; na omhoog slepen schuift de tekening zichtbaar mee omhoog.
+    // De onderkant van het (te hoge) diagram zit vóór het verschuiven ver onder
+    // de rand; na omhoog slepen schuift de tekening zichtbaar mee omhoog.
     final before = tester.getTopLeft(find.byType(SvgPicture)).dy;
-    await tester.drag(
-      find.byType(SingleChildScrollView),
-      const Offset(0, -200),
-    );
+    await tester.drag(find.byType(InteractiveViewer), const Offset(0, -200));
     await tester.pumpAndSettle();
     final after = tester.getTopLeft(find.byType(SvgPicture)).dy;
     expect(after, lessThan(before - 100));
@@ -267,10 +264,7 @@ void main() {
         '<rect width="10" height="10"/></svg>';
     await pump(tester, 'gantt title X', returns(veryWide), width: 1000);
 
-    final scroll = tester.widget<SingleChildScrollView>(
-      find.byType(SingleChildScrollView),
-    );
-    expect(scroll.scrollDirection, Axis.horizontal);
+    expect(find.byType(InteractiveViewer), findsOneWidget);
     final pic = tester.widget<SvgPicture>(find.byType(SvgPicture));
     expect(pic.height, closeTo(320, 0.5));
     expect(pic.width, closeTo(2880, 1));
