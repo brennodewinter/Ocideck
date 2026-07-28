@@ -3019,6 +3019,21 @@ else.
   the same finding group, so it moves and exports with the finding); the section
   lists them with a thumbnail and lets you jump to or remove each one. Give the
   finding an id first — evidence links to the finding by that id.
+
+  A finding is authored as **one** slide, but when its prose is too long for a
+  single slide it is **rendered** across several full-size slides — so the text
+  stays full-size and full-width instead of shrinking to fit. Page 1 keeps the
+  header card (with the meta) and the sections that fit; because that card on its
+  own is taller than a slide, when nothing fits beside it the sections start on
+  page 2. Each further page repeats the heading with a small "(i/N)" marker —
+  drawn as a plain line rather than the severity card, so the section fills the
+  slide width — and carries the next sections. You page through them with the
+  arrow keys and the page indicator reads "Pagina i / N", the presenter does the
+  same, and the PDF/PPTX export writes each page as its own slide. This is
+  render-time only: the finding is still edited as one slide and nothing about the
+  split is stored in the `.md`. *(Corrected 2026-07-28: a long finding used to
+  scale down to about a third of the slide width instead of splitting across
+  slides.)*
 - **Uitvoering testen conform standaard** (the checklist slide type; the file
   format keeps the `checklist` class) — a standard-driven test list with a MIAUW
   status per item, one of four

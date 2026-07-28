@@ -285,6 +285,30 @@ read a book to find out.
   een momentopname van de run op 2026-07-23, geen actuele eis.
 
 ### Fixed
+- **Een lange bevinding verkleinde tot ongeveer een derde van de diabreedte in
+  plaats van over meer dia's te splitsen.** Een `finding`-dia met de volle
+  kop-kaart plus vier prozasecties liep over één 16:9-dia heen; de `FittedBox` in
+  `_PreviewScaffold` schaalde de hele inhoud dan uniform omlaag — kleiner *én*
+  smaller, tot zo'n derde van de breedte. De render-tijd-paginering had dat moeten
+  voorkomen door de bevinding te splitsen, maar schatte de hoogte van een bevinding
+  ongeveer drie keer te laag: de kop-kaart alléén (severity-band, CVSS-meter,
+  koptekst, badges, scope) is al hoger dan een hele dia, terwijl het model uitging
+  van een kop van vier regels. Daardoor dacht het model dat vrijwel elke
+  meersectie-bevinding paste, splitste niet, en verkleinde. De hoogteschatting is
+  nu herijkt op gemeten deelhoogtes van de echte `_FindingPreview` (diacapaciteit,
+  kop-kaartkosten, sectiekop en tekens-per-regel, plus een aparte vervolgkopkost),
+  met een enkel-pagina-tolerantie afgeleid van een minimale renderschaal van 0,70
+  die meebeweegt met een logo — een logo verlaagt de paginabegroting en dus ook de
+  splitsdrempel. Twee dingen veranderen zichtbaar mee: de greedy-packer geeft nu
+  een kop-alleen eerste pagina wanneer de kop-kaart geen sectie naast zich laat
+  passen (de secties beginnen dan op pagina 2), en een vervolgpagina rendert de
+  koptekst met haar "(i/N)"-markering als een **platte regel** in plaats van de
+  zware severity-kaart, zodat de inhoudspagina's de volle diabreedte gebruiken —
+  pagina 1, met de meta, houdt de volledige kop-kaart. Een lange bevinding verdeelt
+  zich zo over meer dia's die elk (bijna) de volle breedte vullen, in preview,
+  presentatie en export. Het bestandsformaat verandert niet: paginering is een pure
+  render-transformatie en de `.md` blijft één finding-dia. `finding_pagination_test`
+  en `finding_preview_test` toetsen de nieuwe splitsing en de platte vervolgkop.
 - **Inline-`$…$`-wiskunde werd letterlijk getoond in plaats van gerenderd
   (#948).** De USER_GUIDE belooft dat een tekstregel `$…$`-LaTeX rendert, maar
   alleen blok-`$$…$$` werd getekend; een zin als "een kat spint rond $f \approx

@@ -38,12 +38,56 @@ void main() {
       expect(pages.length, greaterThan(1));
     });
 
-    test('the widened content budget keeps a borderline finding on one page', () {
-      // ~1450 chars fits one page at the narrowed side margin (content 0.91·w →
-      // ~94 chars/line); it would have split into two at the old 0.86·w
-      // (88 chars/line). Guards the width→pages retune (feedback #2).
-      final spec = FindingSpec(heading: heading, description: _lorem(54));
-      expect(paginateFinding(spec), hasLength(1));
+    test('a finding stays single until it would shrink past the scale floor', () {
+      // The header card alone already fills most of a slide, so "fits one page"
+      // means header + a short section that still renders at ≥0.70 width. That
+      // stays single; growing the body until the single slide would scale down
+      // past the floor splits it instead of shrinking it (the bug that made a
+      // finding render at a third of the width).
+      final small = FindingSpec(heading: heading, description: _lorem(2));
+      expect(paginateFinding(small), hasLength(1));
+
+      final big = FindingSpec(heading: heading, description: _lorem(24));
+      expect(paginateFinding(big).length, greaterThan(1));
+    });
+
+    test('an overflowing finding gets a header-only first page', () {
+      // The header card is taller than a slide, so nothing shares page 1 with
+      // it: page 1 carries the header (and its meta), the sections start on
+      // page 2. Without this the header + first section overflowed together and
+      // the whole page scaled down.
+      final pages = paginateFinding(bigFinding());
+      expect(pages.first.description, isEmpty);
+      expect(pages.first.confirmation, isEmpty);
+      expect(pages.first.impact, isEmpty);
+      expect(pages.first.recommendation, isEmpty);
+      // The meta still rides on page 1.
+      expect(pages.first.scopeObject, isNotEmpty);
+      expect(pages.first.cvssVector, isNotEmpty);
+      // Page 2 onward carries the sections.
+      expect(pages[1].description, isNotEmpty);
+    });
+
+    test('a paginated page serialises only its own section heading', () {
+      // The render markdown must not carry the blanked sections' `##` headings:
+      // the Marp/HTML export prints Markdown verbatim (the Flutter preview skips
+      // empty `##` blocks, so present/PDF are fine either way).
+      final pages = paginateFinding(bigFinding());
+      final headingRe = RegExp(r'^## ', multiLine: true);
+      // Header-only first page: no section heading at all.
+      expect(
+        headingRe.allMatches(pages.first.toMarkdown(omitEmptySections: true)),
+        isEmpty,
+      );
+      // Each continuation page: exactly the one section it carries.
+      for (final page in pages.skip(1)) {
+        final md = page.toMarkdown(omitEmptySections: true);
+        expect(
+          headingRe.allMatches(md).length,
+          1,
+          reason: 'one section heading expected, got:\n$md',
+        );
+      }
     });
 
     test('page 1 keeps the header card; continuations drop it and mark the '
@@ -117,13 +161,14 @@ void main() {
     );
 
     test('een bevinding die past zonder logo splitst met logo', () {
-      // Twee secties van ~8.4 line-cost elk (totaal ~16.8): passen op één
-      // pagina zonder logo (budget 18), maar niet met logo (budget ~12).
+      // Header + één korte sectie: zonder logo blijft dat net onder de
+      // enkel-pagina-drempel (≥0.70 breedte), maar een logo verkleint het
+      // budget genoeg om onder die drempel te zakken → splitsen, zodat de tekst
+      // niet onder het logo doorloopt.
       final finding = Slide.create(SlideType.finding).copyWith(
         customMarkdown: FindingSpec(
           heading: heading,
-          description: _lorem(23),
-          confirmation: _lorem(23),
+          description: _lorem(2),
         ).toMarkdown(),
       );
 
@@ -152,8 +197,7 @@ void main() {
       final finding = Slide.create(SlideType.finding).copyWith(
         customMarkdown: FindingSpec(
           heading: heading,
-          description: _lorem(23),
-          confirmation: _lorem(23),
+          description: _lorem(2),
         ).toMarkdown(),
         showLogo: false,
       );

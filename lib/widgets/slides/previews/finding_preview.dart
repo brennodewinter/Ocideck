@@ -44,6 +44,16 @@ class _FindingPreview extends StatelessWidget {
       profile: profile,
     );
 
+    // A continuation page (produced by [paginateFinding]) carries the finding's
+    // heading with an "(i/N)" marker but none of the meta — no CVSS, no scope,
+    // no badges. Rendering the full severity card there would wrap a lone
+    // heading in ~0.34·w of chrome, which is exactly what forced the page to
+    // shrink; a plain heading lets the section fill the slide width. Page 1 keeps
+    // its full card (it still has the meta), so the finding's own look is
+    // unchanged — continuation pages simply never existed before pagination
+    // started splitting overflowing findings.
+    final continuation = _isContinuationPage(spec);
+
     return _PreviewScaffold(
       width: w,
       slide: slide,
@@ -51,10 +61,46 @@ class _FindingPreview extends StatelessWidget {
       horizontalPadding: hPad,
       verticalPadding: pad,
       children: [
-        _headerCard(context, spec, severityColor, ctxCvss),
-        SizedBox(height: w * 0.03),
+        if (continuation)
+          _continuationHeading(spec)
+        else ...[
+          _headerCard(context, spec, severityColor, ctxCvss),
+          SizedBox(height: w * 0.03),
+        ],
         ..._sectionBlocks(context, spec),
       ],
+    );
+  }
+
+  /// The "(i/N)" page marker that [paginateFinding] appends to a split finding's
+  /// heading — the only place it is ever added.
+  static final RegExp _pageMarker = RegExp(r'\(\d+/\d+\)\s*$');
+
+  /// Whether this page is a paginated *continuation*: it carries the page marker
+  /// but no header meta (that all lives on page 1). Page 1 of a split finding
+  /// also carries the marker, but keeps its meta, so it is not matched here.
+  bool _isContinuationPage(FindingSpec spec) =>
+      _pageMarker.hasMatch(spec.heading) &&
+      !_hasBadges(spec) &&
+      spec.scopeObject.isEmpty;
+
+  /// A continuation page's heading: the same title (with its "(i/N)" marker), as
+  /// a plain line rather than the severity card, so the section below it uses the
+  /// full slide width.
+  Widget _continuationHeading(FindingSpec spec) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: w * 0.025),
+      child: Text(
+        spec.heading,
+        style: _applyFont(
+          font,
+          TextStyle(
+            fontSize: w * 0.032,
+            fontWeight: FontWeight.w700,
+            color: AppTheme.navy,
+          ),
+        ),
+      ),
     );
   }
 
