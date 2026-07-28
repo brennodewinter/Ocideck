@@ -223,6 +223,21 @@ read a book to find out.
   een momentopname van de run op 2026-07-23, geen actuele eis.
 
 ### Fixed
+- **Een Mermaid-flowchart toonde zijn lijnen zonder pijlpunten, dus de richting
+  was niet af te lezen (#941).** Mermaid tekent elke pijl met een SVG-`<marker>`,
+  en `flutter_svg` (vector_graphics) rendert `<marker>` niet — het negeert ze, en
+  `sanitize_svg.dart` haalt ze er dan ook uit (de allow-list spiegelt precies wat
+  de lezer aankan). De lijnen bleven, de pijlpunten verdwenen. Opgelost met
+  dezelfde aanpak als de stijl-inliner (`svg_style_inline.js`, #862): terwijl de
+  SVG in de DOM hangt, meet een nieuwe stap per edge het eindpunt en de richting
+  (`getPointAtLength`) en zet er een expliciete `<polygon>`-driehoek neer, in de
+  kleur van de lijn en in dezelfde groep (zodat een transform op die groep óók
+  voor de pijl geldt). flutter_svg tekent die driehoek wél, en de opschoning laat
+  `polygon`/`points`/`fill` staan. Werkt voor beide renderpaden (desktop-WebView
+  en web) omdat beide de inliner al aanroepen, en dus voor de presentatie, de
+  preview, de thumbnails en de PDF/PPTX-export; de offline-HTML-export rendert
+  mermaid native en had de pijlen al. `test/sanitize_svg_test.dart` houdt vast dat
+  een `<polygon>`-pijlpunt door de opschoning komt en de `<marker>` eruit.
 - **Een YouTube/Vimeo-embed bleef doorspelen nadat je naar de volgende dia ging
   (#932).** `_VideoEmbedPreview` ruimde bij het verlaten alleen de playhead-bus
   op; de `WebViewController` kreeg geen opdracht om te stoppen. Op macOS
