@@ -23,7 +23,11 @@ void main() {
     });
 
     test('laat valuta met rust', () {
-      for (final s in [r'dat kost $5', r'$5 tot $10 per stuk', r'prijs: $1000']) {
+      for (final s in [
+        r'dat kost $5',
+        r'$5 tot $10 per stuk',
+        r'prijs: $1000',
+      ]) {
         expect(
           parseInlineRuns(s).any((r) => r.math),
           isFalse,
@@ -43,11 +47,16 @@ void main() {
     });
 
     test('een onafgesloten dollar blijft tekst', () {
-      expect(parseInlineRuns(r'los teken $ en \alpha').any((r) => r.math), isFalse);
+      expect(
+        parseInlineRuns(r'los teken $ en \alpha').any((r) => r.math),
+        isFalse,
+      );
     });
   });
 
-  testWidgets('de widgetlaag tekent een inline-formule als Math', (tester) async {
+  testWidgets('de widgetlaag tekent een inline-formule als Math', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
