@@ -59,8 +59,9 @@ Future<void> _rawGit(List<String> args, String cwd) async {
 
 /// Windows-ruime tijdlimiet voor tests die echte git-subprocessen draaien.
 /// Op andere platforms null, zodat de strakke standaard (30s) geldt.
-final _windowsTimeout =
-    Platform.isWindows ? const Timeout(Duration(minutes: 3)) : null;
+final _windowsTimeout = Platform.isWindows
+    ? const Timeout(Duration(minutes: 3))
+    : null;
 
 /// test() met de Windows-ruime tijdlimiet — `@OnPlatform` op bibliotheekniveau
 /// wordt door `flutter test` niet verwerkt, dus per-test zetten (#933).
@@ -317,28 +318,31 @@ void main() {
       );
     });
 
-    _wtest('geen verbinding → committedOffline, commit blijft lokaal', () async {
-      await mirror.prepareForOpen();
-      // Maak de origin onbereikbaar.
-      Directory(bare).renameSync('$bare.weg');
+    _wtest(
+      'geen verbinding → committedOffline, commit blijft lokaal',
+      () async {
+        await mirror.prepareForOpen();
+        // Maak de origin onbereikbaar.
+        Directory(bare).renameSync('$bare.weg');
 
-      final result = await mirror.commitDeck(deckDir, {
-        '$deckDir/deck.md': _b('# Offline gemaakt\n'),
-      }, 'offline');
-      expect(result.outcome, GitCommitOutcome.committedOffline);
-      expect(result.sha, isNotNull);
+        final result = await mirror.commitDeck(deckDir, {
+          '$deckDir/deck.md': _b('# Offline gemaakt\n'),
+        }, 'offline');
+        expect(result.outcome, GitCommitOutcome.committedOffline);
+        expect(result.sha, isNotNull);
 
-      // Origin terug: sync duwt de lokale commit alsnog omhoog.
-      Directory('$bare.weg').renameSync(bare);
-      final synced = await mirror.sync();
-      expect(synced.outcome, GitCommitOutcome.pushed);
-      final verify = '${temp.path}/verify3';
-      await _rawGit(['clone', bare, verify], temp.path);
-      expect(
-        File('$verify/$deckDir/deck.md').readAsStringSync(),
-        contains('Offline gemaakt'),
-      );
-    });
+        // Origin terug: sync duwt de lokale commit alsnog omhoog.
+        Directory('$bare.weg').renameSync(bare);
+        final synced = await mirror.sync();
+        expect(synced.outcome, GitCommitOutcome.pushed);
+        final verify = '${temp.path}/verify3';
+        await _rawGit(['clone', bare, verify], temp.path);
+        expect(
+          File('$verify/$deckDir/deck.md').readAsStringSync(),
+          contains('Offline gemaakt'),
+        );
+      },
+    );
 
     // ── git grep als zoekversneller (§9.3) ──────────────────────────────────
     group('grepDeckDirs', () {
