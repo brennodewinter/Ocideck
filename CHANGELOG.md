@@ -223,6 +223,23 @@ read a book to find out.
   een momentopname van de run op 2026-07-23, geen actuele eis.
 
 ### Fixed
+- **Een LaTeX-formule op een bullets/richText-dia liep bij presentatiemaat door
+  het logo (#947).** Zusje van #931, maar in het andere formule-pad. Waar #931 de
+  free-markdown-dia repareerde (die zijn inhoud omlaagschaalt in een `FittedBox`),
+  betrof dit de gewone richText-dia — die niet schaalt maar zichzelf op gemeten
+  blokhoogtes *pagineert*. De paginering mat een `$$…$$`-blok als één tekstregel
+  (`refW * 0.032` plus wat padding), terwijl `Math.tex` op diezelfde vaste grootte
+  rendert maar zelden één regel hoog is: een breukstreep, een wortel, een grote
+  operator met grenzen of een gestapelde exponent maakt hem twee à drie keer zo
+  hoog. Voor de twee formules van de "kat van Schrödinger"-dia scheelde dat 27 en
+  43 pixels; op een volle dia zakte de onderste regel daardoor bij presentatiemaat
+  in de logostrook (empirisch bevestigd in de LibreKAT-stijl met EB Garamond; in
+  het compactere Arial paste het nog nét). De blokmeting schat de verticale omvang
+  nu uit de constructies die hoogte toevoegen (`displayMathBlockHeight`), ruim aan
+  de veilige kant — onderschatten raakt het logo, overschatten pagineert of schaalt
+  hooguit iets eerder. De dia klaart het logo nu netjes. `math_block_height_test`
+  ijkt elke schatting tegen de werkelijke `Math.tex`-hoogte van een batterij
+  formules, langs het volledige parse→meet-pad dat de paginering gebruikt.
 - **De zoom op een groot mermaid-diagram (#930) kon niet ver genoeg uitzoomen —
   juist waar het om ging (#944).** De ondergrens stond op zoomfactor 1, de
   leesbare volle-breedte-stand, terwijl een hoge flowchart daar nog groter is dan

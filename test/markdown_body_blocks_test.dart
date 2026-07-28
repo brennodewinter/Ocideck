@@ -95,4 +95,46 @@ void main() {
       expect(measureSmallBody('## Kop'), greaterThan(measureSmallBody('Kop')));
     });
   });
+
+  group('displayMathTex', () {
+    test('extracts the inner tex of a one-line display-math block', () {
+      expect(displayMathTex(r'$$E = mc^2$$'), 'E = mc^2');
+    });
+
+    test('extracts the inner tex of a multi-line display-math block', () {
+      expect(displayMathTex('\$\$\n  a + b  \n\$\$'), 'a + b');
+    });
+
+    test('is null for a non-math block', () {
+      expect(displayMathTex('gewone alinea'), isNull);
+      expect(displayMathTex(r'inline $x$ math'), isNull);
+    });
+
+    test('is null for an empty formula', () {
+      expect(displayMathTex(r'$$$$'), isNull);
+      expect(displayMathTex('\$\$\n\n\$\$'), isNull);
+    });
+  });
+
+  group('displayMathBlockHeight', () {
+    // De render (`_markdownMathBlock`) tekent op vaste `refW * 0.032`; een gewone
+    // regel is dus ~die grootte + padding, en hoogte-toevoegende constructies
+    // reserveren strikt méér. De exacte ijking tegen de echte `Math.tex`-hoogte
+    // staat in math_block_height_test.dart; hier alleen de monotonie.
+    const refW = 1280.0;
+
+    test('a fraction reserves more height than a plain line', () {
+      expect(
+        displayMathBlockHeight(r'\frac{a}{b}', refW),
+        greaterThan(displayMathBlockHeight('a = b', refW)),
+      );
+    });
+
+    test('a big operator with limits reserves the most', () {
+      expect(
+        displayMathBlockHeight(r'\sum_{i=0}^{n} i', refW),
+        greaterThan(displayMathBlockHeight(r'\frac{a}{b}', refW)),
+      );
+    });
+  });
 }
