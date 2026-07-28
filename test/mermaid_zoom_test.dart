@@ -96,6 +96,32 @@ void main() {
       expect(notifs, 2);
       expect(c.scale, 1.0);
     });
+
+    // De toetsenbord-zoom (#930) leunt op zoomBy: die zoomt rond het midden met
+    // de laatst doorgegeven maten, zodat een toets hetzelfde doet als de knop.
+    test('zoomBy zonder bekende maten doet niets', () {
+      final c = MermaidViewController();
+      // Vers, nog geen layout geweest: er is geen zoombaar diagram, dus de toets
+      // hoort niet als afgehandeld te tellen en de stand blijft ongemoeid.
+      expect(c.zoomBy(0.8), isFalse);
+      expect(c.zoomBy(1.25), isFalse);
+      expect(c.scale, 1.0);
+    });
+
+    test('zoomBy met maten zoomt in én weer uit, en klemt bij passend', () {
+      final c = MermaidViewController()
+        ..setMetrics(vw: 840, vh: 320, childW: 840, childH: 3360);
+      expect(c.zoomBy(2.0), isTrue);
+      expect(c.scale, closeTo(2.0, 1e-9));
+      // Uitzoomen brengt hem terug richting passend — dít was de klacht (#930):
+      // inzoomen werkte, uitzoomen deed niets omdat de toets nergens op zat.
+      expect(c.zoomBy(0.5), isTrue);
+      expect(c.scale, closeTo(1.0, 1e-9));
+      // Onder passend kan niet, maar op een zoombaar diagram telt de toets wél
+      // als afgehandeld (hij hoort niet stilletjes door te vallen).
+      expect(c.zoomBy(0.5), isTrue);
+      expect(c.scale, 1.0);
+    });
   });
 
   // Een sterk verticaal diagram raakt het interactieve (zoombare) pad.
@@ -150,6 +176,27 @@ void main() {
         expect(view.scale, 1.0);
       },
     );
+
+    testWidgets('na de layout zoomt de toetsenbord-zoom (zoomBy) mee', (
+      tester,
+    ) async {
+      final view = MermaidViewController();
+      addTearDown(view.dispose);
+      // Vóór enige layout kent de controller nog geen maten.
+      expect(view.zoomBy(1.25), isFalse);
+
+      await pumpDiagram(tester, controller: view, interactive: true);
+      // De layout heeft de venster- en kindmaat aan de controller doorgegeven,
+      // dus nu doet de toetsenbord-zoom hetzelfde als de knop.
+      expect(view.zoomBy(1.25), isTrue);
+      await tester.pumpAndSettle();
+      expect(view.scale, greaterThan(1.0));
+
+      final zoomedIn = view.scale;
+      expect(view.zoomBy(0.8), isTrue);
+      await tester.pumpAndSettle();
+      expect(view.scale, lessThan(zoomedIn));
+    });
 
     testWidgets('het publieksvenster toont geen knoppen en spiegelt de zoom', (
       tester,

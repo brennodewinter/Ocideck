@@ -51,6 +51,45 @@ class MermaidViewController extends ChangeNotifier {
   }
 
   void reset() => set(scale: 1.0, fx: 0.0, fy: 0.0);
+
+  // De laatst bekende venster- en (ongeschaalde) kindmaat van het zoombare
+  // venster. Puur geometrie, geen kijkstand — dit notificeert dus niet. Het
+  // zoombare venster zet ze bij elke layout; zo kan [zoomBy] hetzelfde
+  // midden-vasthoudend zoomen als de knoppen, óók vanaf een plek die die maten
+  // zelf niet kent (de toetsenbord-zoom in de presentatie, #930).
+  double _vw = 0, _vh = 0, _childW = 0, _childH = 0;
+
+  void setMetrics({
+    required double vw,
+    required double vh,
+    required double childW,
+    required double childH,
+  }) {
+    _vw = vw;
+    _vh = vh;
+    _childW = childW;
+    _childH = childH;
+  }
+
+  /// Zoomt met [factor] rond het midden van het venster, met de laatst bekende
+  /// maten. Geeft terug óf er een zoombaar diagram in beeld was: zonder maten
+  /// (geen groot diagram op de dia) gebeurt er niets en telt de toets niet als
+  /// afgehandeld, zodat hij niet stilletjes wordt opgeslokt. Bij de zoomgrens
+  /// verandert de stand niet, maar de toets geldt wél als afgehandeld — je
+  /// stáát dan immers op een zoombaar diagram.
+  bool zoomBy(double factor) {
+    if (_childW <= 0 || _childH <= 0 || _vw <= 0 || _vh <= 0) return false;
+    final next = mermaidZoomAroundCentre(
+      (scale: _scale, fx: _fx, fy: _fy),
+      factor: factor,
+      vw: _vw,
+      vh: _vh,
+      childW: _childW,
+      childH: _childH,
+    );
+    set(scale: next.scale, fx: next.fx, fy: next.fy);
+    return true;
+  }
 }
 
 /// De `Matrix4` voor een [InteractiveViewer] die het diagram op zoomfactor
@@ -376,6 +415,7 @@ class _ZoomableMermaidState extends State<_ZoomableMermaid> {
     super.didUpdateWidget(old);
     if (old.controller != widget.controller) {
       old.controller.removeListener(_onSharedChanged);
+      old.controller.setMetrics(vw: 0, vh: 0, childW: 0, childH: 0);
       widget.controller.addListener(_onSharedChanged);
     }
     // Een nieuwe kindmaat (andere dia/diagram) betekent een andere matrix voor
@@ -389,6 +429,10 @@ class _ZoomableMermaidState extends State<_ZoomableMermaid> {
   void dispose() {
     _tc.removeListener(_onLocalChanged);
     widget.controller.removeListener(_onSharedChanged);
+    // Geen zoombaar diagram meer in beeld: wis de maten, zodat een
+    // toetsenbord-zoom op een volgende dia zonder groot diagram niets doet in
+    // plaats van op een verdwenen diagram in te werken.
+    widget.controller.setMetrics(vw: 0, vh: 0, childW: 0, childH: 0);
     _tc.dispose();
     super.dispose();
   }
@@ -442,6 +486,15 @@ class _ZoomableMermaidState extends State<_ZoomableMermaid> {
       child: LayoutBuilder(
         builder: (context, constraints) {
           _viewport = Size(constraints.maxWidth, widget.viewportH);
+          // Deel de maten met de controller, zodat een zoom van elders — de
+          // toetsenbord-zoom in de presentatie (#930) — hetzelfde midden
+          // vasthoudt als de knoppen hier.
+          widget.controller.setMetrics(
+            vw: _viewport.width,
+            vh: _viewport.height,
+            childW: widget.childW,
+            childH: widget.childH,
+          );
           final viewer = ClipRect(
             child: InteractiveViewer(
               transformationController: _tc,
