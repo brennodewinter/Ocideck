@@ -248,6 +248,46 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('de zoom-toetsen bladeren niet en breken de navigatie niet (#930)', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _host([
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Eerste dia', bullets: ['x']),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Tweede dia', bullets: ['y']),
+      ]),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Eerste dia'), findsOneWidget);
+
+    // '-' en '=/+' zijn zoom-toetsen voor een groot diagram (#930). Staat er geen
+    // zoombaar diagram op de dia, dan doen ze niets — en ze mogen zéker niet
+    // vooruit/terug bladeren.
+    for (final key in const [
+      LogicalKeyboardKey.minus,
+      LogicalKeyboardKey.numpadSubtract,
+      LogicalKeyboardKey.equal,
+      LogicalKeyboardKey.numpadAdd,
+    ]) {
+      await tester.sendKeyEvent(key);
+      await tester.pumpAndSettle();
+    }
+    expect(find.text('Eerste dia'), findsOneWidget);
+    expect(find.text('Tweede dia'), findsNothing);
+
+    // Pijl-rechts bladert nog wél: de nieuwe toetsen hebben de afhandeling niet
+    // gebroken.
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await tester.pumpAndSettle();
+    expect(find.text('Tweede dia'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets('checklist changes during presenting are persisted', (
     tester,
   ) async {

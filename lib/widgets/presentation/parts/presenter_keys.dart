@@ -2,6 +2,34 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../fullscreen_presenter.dart';
 
+/// Zoom-toetsen voor een groot mermaid-diagram tijdens het presenteren (#930):
+/// `-` uit, `=`/`+` in, met de numpad-varianten. Top-level (niet in de extensie)
+/// zodat deze mapping niet meetelt in de toch al forse [_FullscreenPresenterState].
+///
+/// Geeft `null` bij een niet-zoom-toets, zodat de gewone afhandeling het overneemt.
+/// Staat er geen zoombaar diagram op de dia, dan doet [MermaidViewController.zoomBy]
+/// niets en laten we de toets doorvallen ([KeyEventResult.ignored]) — dezelfde
+/// factoren als de knoppen rechtsonder op het diagram (1.25 / 0.8).
+KeyEventResult? _handleZoomKey(
+  _FullscreenPresenterState state,
+  LogicalKeyboardKey key,
+) {
+  final double factor;
+  if (key == LogicalKeyboardKey.minus ||
+      key == LogicalKeyboardKey.numpadSubtract) {
+    factor = 0.8;
+  } else if (key == LogicalKeyboardKey.equal ||
+      key == LogicalKeyboardKey.add ||
+      key == LogicalKeyboardKey.numpadAdd) {
+    factor = 1.25;
+  } else {
+    return null;
+  }
+  return state._mermaidView.zoomBy(factor)
+      ? KeyEventResult.handled
+      : KeyEventResult.ignored;
+}
+
 extension _PresenterKeys on _FullscreenPresenterState {
   KeyEventResult _handleKey(FocusNode _, KeyEvent event) {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
@@ -111,6 +139,8 @@ extension _PresenterKeys on _FullscreenPresenterState {
 
   KeyEventResult _handleNavKey(LogicalKeyboardKey key, {bool shift = false}) {
     final last = widget.slides.length - 1;
+    final zoom = _handleZoomKey(this, key);
+    if (zoom != null) return zoom;
     switch (key) {
       case LogicalKeyboardKey.enter:
       case LogicalKeyboardKey.numpadEnter:
