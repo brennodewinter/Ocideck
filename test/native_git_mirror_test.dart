@@ -5,6 +5,10 @@
 // intermitterend liet aflopen (#933). Alléén op Windows krijgen ze daarom ruimer
 // de tijd; elders blijft de strakke standaard staan, zodat een echte vastloper
 // lokaal snel opvalt.
+//
+// `@OnPlatform` op bibliotheekniveau wordt door `flutter test` niet verwerkt
+// (alleen `dart test` doet dat). De per-test timeout via _wtest hieronder is de
+// werkelijke remedie; deze annotatie staat als documentatie van de bedoeling.
 @OnPlatform(<String, dynamic>{'windows': Timeout(Duration(minutes: 3))})
 library;
 
@@ -52,6 +56,16 @@ Future<void> _rawGit(List<String> args, String cwd) async {
     throw StateError('git ${args.join(' ')} → ${r.stderr}');
   }
 }
+
+/// Windows-ruime tijdlimiet voor tests die echte git-subprocessen draaien.
+/// Op andere platforms null, zodat de strakke standaard (30s) geldt.
+final _windowsTimeout =
+    Platform.isWindows ? const Timeout(Duration(minutes: 3)) : null;
+
+/// test() met de Windows-ruime tijdlimiet — `@OnPlatform` op bibliotheekniveau
+/// wordt door `flutter test` niet verwerkt, dus per-test zetten (#933).
+void _wtest(String description, dynamic Function() body) =>
+    test(description, body, timeout: _windowsTimeout);
 
 void main() {
   // ── Opslag-contract: gelijkwaardig aan DraftMirror ─────────────────────────
@@ -124,7 +138,7 @@ void main() {
     });
     tearDown(() => deleteTempDir(temp));
 
-    test('prepareForOpen kloont en leest het deck', () async {
+    _wtest('prepareForOpen kloont en leest het deck', () async {
       await mirror.prepareForOpen();
       final files = await mirror.readDeck(deckDir);
       expect(
@@ -134,7 +148,7 @@ void main() {
       expect(await mirror.headSha(), isNotNull);
     });
 
-    test('commitDeck landt op de forge, met de pool-blob', () async {
+    _wtest('commitDeck landt op de forge, met de pool-blob', () async {
       await mirror.prepareForOpen();
       final result = await mirror.commitDeck(deckDir, {
         '$deckDir/deck.md': _b('# Nieuwe titel\n'),
@@ -152,7 +166,7 @@ void main() {
       expect(File('$verify/assets/abc123.png').existsSync(), isTrue);
     });
 
-    test(
+    _wtest(
       'commitDeck met een werkbranch pusht die branch, niet main (D3)',
       () async {
         await mirror.prepareForOpen();
@@ -193,7 +207,7 @@ void main() {
       },
     );
 
-    test('niets veranderd → unchanged', () async {
+    _wtest('niets veranderd → unchanged', () async {
       await mirror.prepareForOpen();
       final result = await mirror.commitDeck(deckDir, {
         '$deckDir/deck.md': _b('# Kwartaalcijfers\n'),
@@ -201,7 +215,7 @@ void main() {
       expect(result.outcome, GitCommitOutcome.unchanged);
     });
 
-    test('een verzette branch → committedConflict, lokaal bewaard', () async {
+    _wtest('een verzette branch → committedConflict, lokaal bewaard', () async {
       await mirror.prepareForOpen();
 
       // Iemand anders pusht intussen een andere versie.
@@ -229,7 +243,7 @@ void main() {
       );
     });
 
-    test('history geeft de commits van het deck, nieuwste eerst', () async {
+    _wtest('history geeft de commits van het deck, nieuwste eerst', () async {
       await mirror.prepareForOpen();
       await mirror.commitDeck(deckDir, {
         '$deckDir/deck.md': _b('# Tweede versie\n'),
@@ -244,7 +258,7 @@ void main() {
       expect(log.any((e) => e.subject == 'init'), isTrue);
     });
 
-    test('een niet-gepushte commit is als zodanig gemarkeerd', () async {
+    _wtest('een niet-gepushte commit is als zodanig gemarkeerd', () async {
       await mirror.prepareForOpen();
       Directory(bare).renameSync('$bare.weg'); // origin onbereikbaar
       await mirror.commitDeck(deckDir, {
@@ -256,7 +270,7 @@ void main() {
       expect(log.first.pushed, isFalse); // wacht nog om gepusht te worden
     });
 
-    test('het token belandt nooit in .git/config (OQ-10)', () async {
+    _wtest('het token belandt nooit in .git/config (OQ-10)', () async {
       const secret = 'geheim-pat-abc123';
       final tokenMirror = (await createNativeGitMirror(
         git: NativeGitCli(),
@@ -303,7 +317,7 @@ void main() {
       );
     });
 
-    test('geen verbinding → committedOffline, commit blijft lokaal', () async {
+    _wtest('geen verbinding → committedOffline, commit blijft lokaal', () async {
       await mirror.prepareForOpen();
       // Maak de origin onbereikbaar.
       Directory(bare).renameSync('$bare.weg');
@@ -328,7 +342,7 @@ void main() {
 
     // ── git grep als zoekversneller (§9.3) ──────────────────────────────────
     group('grepDeckDirs', () {
-      test('vindt de deckmap waarvan de deck.md de term bevat', () async {
+      _wtest('vindt de deckmap waarvan de deck.md de term bevat', () async {
         await mirror.prepareForOpen();
         final dirs = await mirror.grepDeckDirs(
           'Kwartaalcijfers',
@@ -338,7 +352,7 @@ void main() {
         expect(dirs, [deckDir]);
       });
 
-      test('niets gevonden geeft een lege lijst, geen fout', () async {
+      _wtest('niets gevonden geeft een lege lijst, geen fout', () async {
         await mirror.prepareForOpen();
         final dirs = await mirror.grepDeckDirs(
           'bestaatnietinditdeck',
@@ -350,7 +364,7 @@ void main() {
         expect(dirs, <String>[]);
       });
 
-      test('is hoofdlettergevoelig op verzoek', () async {
+      _wtest('is hoofdlettergevoelig op verzoek', () async {
         await mirror.prepareForOpen();
         // De inhoud is '# Kwartaalcijfers' (hoofdletter K).
         expect(
@@ -371,7 +385,7 @@ void main() {
         );
       });
 
-      test('een term met een leidend streepje versnelt niet', () async {
+      _wtest('een term met een leidend streepje versnelt niet', () async {
         await mirror.prepareForOpen();
         // De gehardde runner weigert een operand met een streepje; grep valt dan
         // terug (null) in plaats van te proberen.
@@ -381,7 +395,7 @@ void main() {
         );
       });
 
-      test('een andere branch dan de uitgecheckte versnelt niet', () async {
+      _wtest('een andere branch dan de uitgecheckte versnelt niet', () async {
         await mirror.prepareForOpen();
         expect(
           await mirror.grepDeckDirs(
@@ -393,7 +407,7 @@ void main() {
         );
       });
 
-      test('zonder clone versnelt het niet', () async {
+      _wtest('zonder clone versnelt het niet', () async {
         // Een verse mirror, nooit geopend: er is niets om te doorzoeken, dus null
         // en de aanroeper valt terug op de volledige scan.
         final fresh = (await createNativeGitMirror(
@@ -408,7 +422,7 @@ void main() {
         );
       });
 
-      test('NativeGrepShortlister verpakt de treffers exhaustief', () async {
+      _wtest('NativeGrepShortlister verpakt de treffers exhaustief', () async {
         await mirror.prepareForOpen();
         final shortlister = NativeGrepShortlister(mirror);
 
