@@ -2414,6 +2414,16 @@ mirrored) display. Notes:
 - Clicking the beamer also advances.
 - On macOS the "external" screen is the one without the menu bar.
 
+### Zooming a large diagram
+
+A big Mermaid diagram (a detailed flowchart, a wide Gantt) shows at a readable
+size during the presentation and can be **zoomed and panned** to bring a part up
+close: pinch on the trackpad, scroll with the mouse, or use the three buttons on
+the diagram — **zoom in**, **zoom out**, and **fit** (back to the readable
+default). With a beamer connected, the audience window follows along: your zoom
+and scroll position are mirrored, so the room sees exactly the part you are
+looking at. Moving to another slide resets the zoom.
+
 ### Annotating while presenting
 
 Draw on the slide live with **D** pen, **T** highlighter, **⇧E** eraser, **X**

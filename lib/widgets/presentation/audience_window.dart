@@ -12,6 +12,7 @@ import '../mermaid_render_host.dart';
 import '../../services/finding_context_score.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../utils/url_launcher_util.dart';
+import '../slides/mermaid_diagram.dart';
 import '../slides/slide_preview.dart';
 import 'annotation_overlay.dart';
 
@@ -69,9 +70,10 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   int _timelineStep = 0;
   int _blank = 0; // 0 = none, 1 = black, 2 = white
 
-  /// Volgt de scrollpositie van een groot mermaid-diagram op de presentatie-dia
-  /// (#872): de presentator scrolt, hier zetten we dezelfde offset.
-  final ScrollController _mermaidScroll = ScrollController();
+  /// Volgt de kijkstand (zoom + scrollpositie) van een groot mermaid-diagram op
+  /// de presentatie-dia (#930): de presentator zoomt/scrolt, hier zetten we
+  /// dezelfde stand.
+  final MermaidViewController _mermaidView = MermaidViewController();
   // Hoogst verwerkte 'update'-sequencenummer; oudere berichten worden genegeerd.
   int _lastUpdateSeq = -1;
 
@@ -128,7 +130,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   @override
   void dispose() {
     audienceChannel.setMethodCallHandler(null);
-    _mermaidScroll.dispose();
+    _mermaidView.dispose();
     super.dispose();
   }
 
@@ -155,19 +157,19 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
           // _questionIndex matches and the overlay is kept.
           if (_questionIndex != _index) _questionView = null;
         });
-      case 'mermaidScroll':
-        // De presentator scrolt een groot diagram; volg dezelfde offset (#872).
-        // Alleen als dit venster op dezelfde slide staat en er echt een
-        // scrollbaar diagram hangt.
+      case 'mermaidView':
+        // De presentator zoomt/scrolt een groot diagram; volg dezelfde kijkstand
+        // (#930). Alleen als dit venster op dezelfde slide staat. De stand is
+        // maat-onafhankelijk (zoomfactor + kind-fracties), dus rechtstreeks toe
+        // te passen ondanks de andere pixelmaat.
         final m = Map<String, dynamic>.from(call.arguments as Map);
         if (!mounted) return null;
-        if ((m['index'] as num?)?.toInt() == _index &&
-            _mermaidScroll.hasClients) {
-          // De presentator stuurt een fractie (0..1); vertaal naar de eigen
-          // scrollrange, die hier een andere pixelmaat heeft.
-          final fraction = (m['fraction'] as num?)?.toDouble() ?? 0;
-          final max = _mermaidScroll.position.maxScrollExtent;
-          _mermaidScroll.jumpTo((fraction * max).clamp(0.0, max));
+        if ((m['index'] as num?)?.toInt() == _index) {
+          _mermaidView.set(
+            scale: (m['scale'] as num?)?.toDouble() ?? 1.0,
+            fx: (m['fx'] as num?)?.toDouble() ?? 0.0,
+            fy: (m['fy'] as num?)?.toDouble() ?? 0.0,
+          );
         }
       case 'question':
         final m = Map<String, dynamic>.from(call.arguments as Map);
@@ -375,10 +377,12 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                   organization: _organization,
                   showClassificationWatermark: _showClassificationWatermark,
                   presentationMode: true,
-                  // Volgt de scrollpositie van de presentator voor een groot
-                  // diagram (#872); de offset komt via 'mermaidScroll' binnen.
+                  // Volgt de kijkstand van de presentator voor een groot diagram
+                  // (#930); die komt via 'mermaidView' binnen. Het publieksvenster
+                  // toont alleen mee — geen eigen gebaren of zoomknoppen.
                   scrollableMermaid: true,
-                  mermaidScrollController: _mermaidScroll,
+                  mermaidViewController: _mermaidView,
+                  mermaidInteractive: false,
                   onChecklistItemToggle: (column, itemIndex) =>
                       _send('checklistToggle', {
                         'slideIndex': _index,
