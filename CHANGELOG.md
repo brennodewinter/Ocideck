@@ -223,6 +223,15 @@ read a book to find out.
   een momentopname van de run op 2026-07-23, geen actuele eis.
 
 ### Fixed
+- **De zoom op een groot mermaid-diagram (#930) kon niet ver genoeg uitzoomen —
+  juist waar het om ging (#944).** De ondergrens stond op zoomfactor 1, de
+  leesbare volle-breedte-stand, terwijl een hoge flowchart daar nog groter is dan
+  het venster; je kon dus wel inzoomen maar niet uitzoomen om het héle diagram in
+  één oogopslag te zien. De ondergrens is nu de passend-in-het-venster-factor
+  (`mermaidFitScale`, kleiner dan 1 voor een overlopend diagram), zodat knijpen en
+  de min-knop uitzoomen tot het hele diagram past. De passend-knop (het
+  focus-icoon) springt daar nu in één klik naartoe. `test/mermaid_zoom_test.dart`
+  toetst de passend-maat, het uitzoomen voorbij 1, en de passend-knop.
 - **Een Mermaid-flowchart toonde zijn lijnen zonder pijlpunten, dus de richting
   was niet af te lezen (#941).** Mermaid tekent elke pijl met een SVG-`<marker>`,
   en `flutter_svg` (vector_graphics) rendert `<marker>` niet — het negeert ze, en

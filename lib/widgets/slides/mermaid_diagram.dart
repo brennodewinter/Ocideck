@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,6 +21,21 @@ typedef MermaidRenderer = Future<String?> Function(String source);
 /// De grootste zoomfactor voor een mermaid-diagram in de presentatie.
 const double kMermaidMaxZoom = 5.0;
 
+/// Harde ondergrens voor de controller (voorkomt nul/negatief). De echte
+/// ondergrens is per diagram de passend-in-het-venster-factor ([mermaidFitScale]),
+/// die de widget afdwingt; deze is alleen een vangnet ver onder elk realistisch
+/// geval.
+const double kMermaidMinZoom = 0.02;
+
+/// De zoomfactor waarbij het héle diagram in het venster past — kleiner dan 1
+/// voor een diagram dat op leesbare maat groter is dan het venster (dan kun je
+/// uitzoomen tot het overzicht). Nooit boven 1: een diagram dat al past hoeft
+/// niet verkleind te worden. Puur, zodat het los te toetsen is.
+double mermaidFitScale(double vw, double vh, double childW, double childH) {
+  if (childW <= 0 || childH <= 0) return 1.0;
+  return math.min(1.0, math.min(vw / childW, vh / childH));
+}
+
 /// De genormaliseerde kijkstand van een groot mermaid-diagram: zoomfactor plus
 /// de fractie van het diagram die linksboven in beeld staat. Bewust
 /// *maat-onafhankelijk* (geen pixels): het presentatiescherm en de beamer hebben
@@ -30,7 +47,8 @@ class MermaidViewController extends ChangeNotifier {
   double _fx = 0.0;
   double _fy = 0.0;
 
-  /// Zoomfactor, ≥ 1 (1 = passend/leesbaar, geen uitvergroting).
+  /// Zoomfactor. 1 = leesbare volle breedte; groter = inzoomen; kleiner dan 1 =
+  /// uitzoomen tot het hele diagram past (#944).
   double get scale => _scale;
 
   /// Kind-fractie (0..1) die aan de linkerrand van het venster staat.
@@ -40,7 +58,9 @@ class MermaidViewController extends ChangeNotifier {
   double get fy => _fy;
 
   void set({required double scale, required double fx, required double fy}) {
-    final s = scale.isNaN ? 1.0 : scale.clamp(1.0, kMermaidMaxZoom);
+    // Ondergrens is de vangnet-factor; de widget klemt op de echte passend-maat
+    // (zodat je kunt uitzoomen tot het hele diagram past, #944).
+    final s = scale.isNaN ? 1.0 : scale.clamp(kMermaidMinZoom, kMermaidMaxZoom);
     final nx = fx.isNaN ? 0.0 : fx.clamp(0.0, 1.0);
     final ny = fy.isNaN ? 0.0 : fy.clamp(0.0, 1.0);
     if (s == _scale && nx == _fx && ny == _fy) return;
@@ -106,7 +126,9 @@ Matrix4 mermaidViewMatrix(
   double childW,
   double childH,
 ) {
-  final s = scale < 1.0 ? 1.0 : scale;
+  // Onder 1 mag: uitzoomen tot het hele diagram past (#944). Alleen nul/negatief
+  // en NaN vangen we af.
+  final s = (scale.isNaN || scale <= 0) ? 1.0 : scale;
   // Rechtstreeks gezet (kolom-major: schaal op de diagonaal, translatie in
   // kolom 3), zodat we niet op de afgekeurde `translate`/`scale`-bouwers leunen.
   return Matrix4.identity()
@@ -155,13 +177,41 @@ Matrix4 mermaidViewMatrix(
   final centreX = view.fx + visX / 2;
   final centreY = view.fy + visY / 2;
 
-  final target = (view.scale * factor).clamp(1.0, kMermaidMaxZoom);
+  // Ondergrens is de passend-maat (#944): uitzoomen mag tot het hele diagram
+  // in het venster past, niet slechts tot leesbare volle breedte.
+  final fit = mermaidFitScale(vw, vh, childW, childH);
+  final target = (view.scale * factor).clamp(fit, kMermaidMaxZoom);
   final visX2 = visible(target, vw, childW);
   final visY2 = visible(target, vh, childH);
   return (
     scale: target,
     fx: clampFraction(centreX - visX2 / 2, visX2),
     fy: clampFraction(centreY - visY2 / 2, visY2),
+  );
+}
+
+/// Klemt een kijkstand binnen het toelaatbare: zoom tussen de passend-maat en
+/// het maximum, en de fracties zo dat de inhoud in beeld blijft. Puur. Nodig
+/// omdat [InteractiveViewer] met een onbegrensde `boundaryMargin` zelf niet meer
+/// klemt (#944) — die grens bewaken we hier.
+({double scale, double fx, double fy}) mermaidClampView(
+  ({double scale, double fx, double fy}) view, {
+  required double vw,
+  required double vh,
+  required double childW,
+  required double childH,
+}) {
+  final fit = mermaidFitScale(vw, vh, childW, childH);
+  final scale = view.scale.clamp(fit, kMermaidMaxZoom);
+  double visible(double viewport, double child) => (child <= 0 || scale <= 0)
+      ? 1.0
+      : (viewport / (scale * child)).clamp(0.0, 1.0);
+  double clampFraction(double f, double vis) =>
+      f.clamp(0.0, (1.0 - vis).clamp(0.0, 1.0));
+  return (
+    scale: scale,
+    fx: clampFraction(view.fx, visible(vw, childW)),
+    fy: clampFraction(view.fy, visible(vh, childH)),
   );
 }
 
@@ -459,7 +509,16 @@ class _ZoomableMermaidState extends State<_ZoomableMermaid> {
   void _onLocalChanged() {
     if (_applyingRemote) return;
     final n = mermaidViewNormalized(_tc.value, widget.childW, widget.childH);
-    widget.controller.set(scale: n.scale, fx: n.fx, fy: n.fy);
+    // InteractiveViewer klemt zelf niet meer (onbegrensde marge, #944), dus
+    // houden we een gebaar hier binnen de grenzen.
+    final c = mermaidClampView(
+      n,
+      vw: _viewport.width,
+      vh: _viewport.height,
+      childW: widget.childW,
+      childH: widget.childH,
+    );
+    widget.controller.set(scale: c.scale, fx: c.fx, fy: c.fy);
   }
 
   void _zoomBy(double factor) {
@@ -479,6 +538,18 @@ class _ZoomableMermaidState extends State<_ZoomableMermaid> {
     widget.controller.set(scale: next.scale, fx: next.fx, fy: next.fy);
   }
 
+  /// Passend maken: het hele diagram in één klik in beeld (#944). Uitzoomen tot
+  /// de passend-maat, linksboven verankerd zodat alles zichtbaar is.
+  void _fitWhole() {
+    final fit = mermaidFitScale(
+      _viewport.width,
+      _viewport.height,
+      widget.childW,
+      widget.childH,
+    );
+    widget.controller.set(scale: fit, fx: 0, fy: 0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -495,15 +566,28 @@ class _ZoomableMermaidState extends State<_ZoomableMermaid> {
             childW: widget.childW,
             childH: widget.childH,
           );
+          // Ondergrens = passend in het venster, zodat knijpen/uitzoomen tot het
+          // hele diagram past (#944), niet slechts tot leesbare volle breedte.
+          final minScale = mermaidFitScale(
+            constraints.maxWidth,
+            widget.viewportH,
+            widget.childW,
+            widget.childH,
+          );
           final viewer = ClipRect(
             child: InteractiveViewer(
               transformationController: _tc,
               constrained: false,
               panEnabled: widget.interactive,
               scaleEnabled: widget.interactive,
-              minScale: 1.0,
+              minScale: minScale,
               maxScale: kMermaidMaxZoom,
-              boundaryMargin: EdgeInsets.zero,
+              // Onbegrensd: met `EdgeInsets.zero` klemt InteractiveViewer de
+              // minimale zoom stil terug op "diagram vult nog het venster" —
+              // dan kun je een hoog diagram niet kleiner maken dan volle breedte
+              // (#944). Wij bewaken de grenzen zelf in [_onLocalChanged] en de
+              // knop-zoom, dus laten we die van InteractiveViewer los.
+              boundaryMargin: const EdgeInsets.all(double.infinity),
               child: SizedBox(
                 width: widget.childW,
                 height: widget.childH,
@@ -527,7 +611,7 @@ class _ZoomableMermaidState extends State<_ZoomableMermaid> {
                   size: widget.buttonSize,
                   onZoomIn: () => _zoomBy(1.25),
                   onZoomOut: () => _zoomBy(0.8),
-                  onReset: widget.controller.reset,
+                  onReset: _fitWhole,
                 ),
               ),
             ],

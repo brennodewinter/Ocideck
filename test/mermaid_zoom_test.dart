@@ -72,15 +72,42 @@ void main() {
       expect(out.fx, inInclusiveRange(0.0, 1.0 - visX + 1e-9));
       expect(out.fy, inInclusiveRange(0.0, 1.0 - visY + 1e-9));
     });
+
+    test('passend-maat is de kleinste die het diagram in het venster legt', () {
+      // Hoog diagram: verticaal knijpt het, dus de passend-maat is vh/ch < 1.
+      expect(mermaidFitScale(840, 320, 840, 3360), closeTo(320 / 3360, 1e-9));
+      // Een diagram dat al past → nooit boven 1 (niet onnodig verkleinen).
+      expect(mermaidFitScale(840, 320, 200, 100), 1.0);
+    });
+
+    test('uitzoomen mag nu voorbij 1 tot de passend-maat (#944)', () {
+      const cw = 840.0, ch = 3360.0, vw = 840.0, vh = 320.0;
+      final fit = mermaidFitScale(vw, vh, cw, ch); // ≈ 0.095
+      // Vanaf leesbaar (1.0) fors uitzoomen mag onder 1, tot de passend-maat.
+      final out = mermaidZoomAroundCentre(
+        (scale: 1.0, fx: 0.0, fy: 0.0),
+        factor: 0.01, // ruim voorbij passend
+        vw: vw,
+        vh: vh,
+        childW: cw,
+        childH: ch,
+      );
+      expect(out.scale, closeTo(fit, 1e-9));
+      expect(out.scale, lessThan(1.0));
+    });
   });
 
   group('controller', () {
-    test('klemt zoom naar [1, max] en fracties naar [0, 1]', () {
+    test('laat uitzoomen onder 1 toe (#944), klemt op de vangnet-grenzen', () {
       final c = MermaidViewController();
-      c.set(scale: 0.2, fx: -1, fy: 5);
-      expect(c.scale, 1.0);
+      // Onder 1 mag nu: uitzoomen tot het hele diagram past.
+      c.set(scale: 0.3, fx: -1, fy: 5);
+      expect(c.scale, 0.3);
       expect(c.fx, 0.0);
       expect(c.fy, 1.0);
+      // Maar niet tot nul: de vangnet-ondergrens.
+      c.set(scale: 0.0001, fx: 0, fy: 0);
+      expect(c.scale, kMermaidMinZoom);
       c.set(scale: 999, fx: 0.5, fy: 0.5);
       expect(c.scale, kMermaidMaxZoom);
     });
@@ -108,7 +135,7 @@ void main() {
       expect(c.scale, 1.0);
     });
 
-    test('zoomBy met maten zoomt in én weer uit, en klemt bij passend', () {
+    test('zoomBy met maten zoomt in én weer uit, tot de passend-maat', () {
       final c = MermaidViewController()
         ..setMetrics(vw: 840, vh: 320, childW: 840, childH: 3360);
       expect(c.zoomBy(2.0), isTrue);
@@ -117,10 +144,14 @@ void main() {
       // inzoomen werkte, uitzoomen deed niets omdat de toets nergens op zat.
       expect(c.zoomBy(0.5), isTrue);
       expect(c.scale, closeTo(1.0, 1e-9));
-      // Onder passend kan niet, maar op een zoombaar diagram telt de toets wél
-      // als afgehandeld (hij hoort niet stilletjes door te vallen).
-      expect(c.zoomBy(0.5), isTrue);
-      expect(c.scale, 1.0);
+      // En verder uitzoomen mag nu ónder 1, tot het hele diagram past (#944) —
+      // niet slechts tot leesbare volle breedte. Onder passend kan niet, maar op
+      // een zoombaar diagram telt de toets wél als afgehandeld.
+      final fit = mermaidFitScale(840, 320, 840, 3360);
+      for (var i = 0; i < 20; i++) {
+        expect(c.zoomBy(0.5), isTrue);
+      }
+      expect(c.scale, closeTo(fit, 1e-6));
     });
   });
 
@@ -157,7 +188,7 @@ void main() {
 
   group('knoppen en spiegeling', () {
     testWidgets(
-      'de presentator ziet zoomknoppen; inzoomen en resetten werken',
+      'de presentator ziet zoomknoppen; inzoomen, uitzoomen en passend werken',
       (tester) async {
         final view = MermaidViewController();
         addTearDown(view.dispose);
@@ -171,9 +202,26 @@ void main() {
         await tester.pumpAndSettle();
         expect(view.scale, greaterThan(1.0));
 
+        // Uitzoomen mag nu voorbij 1 (het hoge diagram is op leesbare breedte
+        // groter dan het venster), tot onder 1 (#944).
+        await tester.tap(find.byTooltip('Uitzoomen'));
+        await tester.tap(find.byTooltip('Uitzoomen'));
+        await tester.tap(find.byTooltip('Uitzoomen'));
+        await tester.pumpAndSettle();
+        expect(view.scale, lessThan(1.0));
+
+        // Passend maken: in één klik naar de passend-maat, het hele diagram in
+        // beeld. Voor een diagram dat te hoog is, is die factor < 1.
         await tester.tap(find.byTooltip('Zoom resetten'));
         await tester.pumpAndSettle();
-        expect(view.scale, 1.0);
+        expect(
+          view.scale,
+          lessThan(1.0),
+          reason: 'passend maken toont het hele diagram, dus verkleind (#944)',
+        );
+        // En het hele diagram past nu verticaal: schaal · kindhoogte ≤ venster.
+        // (kindhoogte 3360 op breedte 1000, venster 320 → passend ≈ 0.095.)
+        expect(view.scale, closeTo(320 / 3360, 0.02));
       },
     );
 
@@ -213,6 +261,29 @@ void main() {
       final after = tester.getRect(find.byType(SvgPicture)).width;
       // De gespiegelde zoomfactor 2 verdubbelt de getekende breedte.
       expect(after, closeTo(before * 2, 2));
+    });
+
+    testWidgets('passend maken verkleint het diagram écht tot het past (#944)', (
+      tester,
+    ) async {
+      // Deze toets meet de gerénderde maat, niet slechts de opgeslagen zoom:
+      // dát was het gat waardoor de eerste poging "groen" was maar de app niet
+      // uitzoomde (InteractiveViewer klemde de min-zoom terug).
+      final view = MermaidViewController();
+      addTearDown(view.dispose);
+      await pumpDiagram(tester, controller: view, interactive: true);
+
+      // Op de leesbare standaard is het diagram hoger dan het venster (320).
+      final full = tester.getRect(find.byType(SvgPicture)).height;
+      expect(full, greaterThan(320));
+
+      await tester.tap(find.byTooltip('Zoom resetten'));
+      await tester.pumpAndSettle();
+      final fitted = tester.getRect(find.byType(SvgPicture)).height;
+
+      // Nu kleiner én binnen de vensterhoogte: het hele diagram past.
+      expect(fitted, lessThan(full));
+      expect(fitted, lessThanOrEqualTo(320 + 1));
     });
   });
 }
