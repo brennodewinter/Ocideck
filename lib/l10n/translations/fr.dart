@@ -735,7 +735,7 @@ const _dutchSourceAddFr = {
   'CTQ-boom': 'Arbre CTQ',
   'Visgraat (Ishikawa)': 'Diagramme d\'Ishikawa',
   'Proceskaart': 'Carte de processus',
-  'Impact / Inspanning': 'Impact / Effort',
+  'Impact / Inspanning': 'Impact / effort',
   'Vier lijsten — één per kwadrant.': 'Quatre listes — une par quadrant.',
   'Eén blad, zeven vakken — kort en leesbaar houden.':
       'Une page, sept cases — gardez-les courtes et lisibles.',
