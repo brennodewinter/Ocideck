@@ -1368,7 +1368,7 @@ plain `curl`, so no GitHub credential is stored on the self-hosted runner.
   [`.forgejo/workflows/scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request)
   already runs `check-secrets`/`sast` on every pull request there. Per PR, this
   mirror added load without adding signal. Brought in line with
-  [`.forgejo/workflows/ci.yml`](#forgejoworkflowsci--the-release-gate-on-a-v-tag)
+  [`.forgejo/workflows/ci.yml`](#forgejoworkflowsciyml--the-release-gate-on-a-v-tag)
   (#790): CI is a release gate, not a merge gate. `workflow_dispatch` stays, so
   a branch can still go through the full pipeline by hand without cutting a
   tag.
