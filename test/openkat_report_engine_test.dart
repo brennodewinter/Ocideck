@@ -300,6 +300,39 @@ void main() {
         contains(OpenKatReportBlockKind.monitoringChanges),
       );
     });
+
+    test('monitoring vereist het broncontract op beide meetmomenten', () {
+      const canonicalFeatures = {
+        OpenKatSourceFeature.stableAssetIdentity,
+        OpenKatSourceFeature.reliableMonitoringStatus,
+      };
+      final result = engine.generate(
+        [
+          _organization('alpha', [
+            _snapshot(
+              date: DateTime.utc(2026, 7, 6),
+              source: 'ordinary-previous.json',
+            ),
+            _snapshot(
+              date: DateTime.utc(2026, 7, 13),
+              source: 'canonical-current.json',
+              sourceFeatures: canonicalFeatures,
+            ),
+          ]),
+        ],
+        _request(
+          'monitoring-changes',
+          currentAsOf: DateTime.utc(2026, 7, 14),
+          previousAsOf: DateTime.utc(2026, 7, 7),
+        ),
+      );
+
+      expect(result.generated, isFalse);
+      expect(
+        result.missingCapabilities,
+        contains(OpenKatReportCapability.reliableMonitoringStatus),
+      );
+    });
   });
 
   group('meetkeuze en herleidbaarheid', () {

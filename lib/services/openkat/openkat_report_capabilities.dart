@@ -12,6 +12,12 @@ class OpenKatReportCapabilityService {
   ) {
     final selections = facts.selections(request);
     final current = [for (final selection in selections) ?selection.current];
+    final selectedSnapshots = [
+      for (final selection in selections) ...[
+        ?selection.current,
+        if (request.previousAsOf != null) ?selection.previous,
+      ],
+    ];
     final compared = selections
         .where(
           (selection) =>
@@ -35,18 +41,18 @@ class OpenKatReportCapabilityService {
       ),
       OpenKatReportCapability.reliableCveReferences: _sourceFeature(
         OpenKatReportCapability.reliableCveReferences,
-        current,
+        selectedSnapshots,
         OpenKatSourceFeature.reliableCveReferences,
       ),
       OpenKatReportCapability.reliableMonitoringStatus: _sourceFeature(
         OpenKatReportCapability.reliableMonitoringStatus,
-        current,
+        selectedSnapshots,
         OpenKatSourceFeature.reliableMonitoringStatus,
       ),
       OpenKatReportCapability.stableAssetIdentity: _binary(
         OpenKatReportCapability.stableAssetIdentity,
-        current.isNotEmpty &&
-            current.every(
+        selectedSnapshots.isNotEmpty &&
+            selectedSnapshots.every(
               (snapshot) =>
                   snapshot.sourceFeatures.contains(
                     OpenKatSourceFeature.stableAssetIdentity,
