@@ -141,7 +141,9 @@ class MeetingSessionNotifier extends Notifier<MeetingState> {
       startWithVideo: startWithVideo,
     );
     if (!request.isComplete) {
-      _fail(MeetingFailure(MeetingFailureKind.invalidLink, provider: provider.id));
+      _fail(
+        MeetingFailure(MeetingFailureKind.invalidLink, provider: provider.id),
+      );
       return;
     }
     try {
