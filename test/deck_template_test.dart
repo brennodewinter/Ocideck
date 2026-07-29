@@ -746,6 +746,114 @@ void main() {
     });
   });
 
+  group('uitbreidingssjablonen: besluitvorming, sectoren en gesprekken', () {
+    // De zeventien sjablonen van de catalogus-uitbreiding: de besluitvormende
+    // en financiële as (businesscase, begroting, besluitvormend overleg,
+    // sprint review, threat modeling), de sectoren die op nul stonden
+    // (publieke sector, onderwijs, vereniging, sociaal domein), en de twee
+    // generieke gespreksvoorbereidingen naast de scenario-specifieke familie.
+    const uitbreidingIds = [
+      'businessCase',
+      'budgetPresentation',
+      'decisionMeeting',
+      'sprintReview',
+      'threatModeling',
+      'conversationPrep',
+      'crucialConversation',
+      'familyCareConversation',
+      'socialCaseReview',
+      'worksCouncilRequest',
+      'fireServiceBriefing',
+      'afterActionReview',
+      'councilProposal',
+      'residentsMeeting',
+      'parentsEvening',
+      'internshipPresentation',
+      'membersAssembly',
+    ];
+
+    test('all seventeen expansion templates are registered', () {
+      final ids = deckTemplates.map((t) => t.id).toSet();
+      expect(ids, containsAll(uitbreidingIds));
+      expect(uitbreidingIds.toSet(), hasLength(17));
+    });
+
+    test('every expansion template is substantial in both languages', () {
+      for (final id in uitbreidingIds) {
+        for (final language in contentLanguages) {
+          expect(
+            slidesOf(id, language: language).length,
+            greaterThanOrEqualTo(9),
+            reason: '$id.$language',
+          );
+        }
+      }
+    });
+
+    test('every expansion template is live-invulbaar with a progress list', () {
+      for (final id in uitbreidingIds) {
+        final slides = slidesOf(id);
+        expect(
+          slides.any((s) => s.type == SlideType.table && s.tableEditable),
+          isTrue,
+          reason: '$id: editable table',
+        );
+        expect(
+          slides.any(
+            (s) =>
+                s.listStyle == ListStyle.checklist && s.showChecklistProgress,
+          ),
+          isTrue,
+          reason: '$id: progress checklist',
+        );
+      }
+    });
+
+    test('the generic crucial conversation carries the family method', () {
+      expect(
+        slidesOf('crucialConversation').any(
+          (s) =>
+              s.type == SlideType.section &&
+              s.title == 'De aanpak: een cruciaal gesprek voeren',
+        ),
+        isTrue,
+      );
+      // De lichte variant blijft licht: geen methodesectie.
+      expect(
+        slidesOf('conversationPrep').any((s) => s.type == SlideType.section),
+        isFalse,
+      );
+    });
+
+    test('the financial decks lead with figures', () {
+      final budget = slidesOf('budgetPresentation').map((s) => s.type).toList();
+      expect(budget, contains(SlideType.scorecard));
+      expect(budget, contains(SlideType.chart));
+      expect(
+        slidesOf('sprintReview').any((s) => s.type == SlideType.scorecard),
+        isTrue,
+      );
+    });
+
+    test('proposal and process decks carry a timeline', () {
+      const withTimeline = [
+        'businessCase',
+        'councilProposal',
+        'residentsMeeting',
+        'worksCouncilRequest',
+        'parentsEvening',
+        'internshipPresentation',
+      ];
+      for (final id in withTimeline) {
+        expect(
+          slidesOf(id).any((s) => s.type == SlideType.timeline),
+          isTrue,
+          reason: id,
+        );
+      }
+    });
+  });
+
   group('l10n coverage', () {
     // Titles/descriptions reach l10n.d() via the model, not as literals, so
     // the grep-based coverage test in app_localizations_test.dart cannot see

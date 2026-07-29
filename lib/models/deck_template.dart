@@ -192,6 +192,29 @@ final List<DeckTemplate> deckTemplates = [
     icon: 'steeringUpdate',
   ),
   DeckTemplate(
+    id: 'businessCase',
+    title: 'Businesscase / investeringsvoorstel',
+    description:
+        "Aanleiding, opties met kosten en baten, risico's en het gevraagde "
+        'besluit.',
+    icon: 'businessCase',
+  ),
+  DeckTemplate(
+    id: 'budgetPresentation',
+    title: 'Begroting / budgetpresentatie',
+    description:
+        "Uitgangspunten, posten met vergelijking, keuzeruimte, risico's en "
+        'beslispunten.',
+    icon: 'budgetPresentation',
+  ),
+  DeckTemplate(
+    id: 'decisionMeeting',
+    title: 'Besluitvormend overleg',
+    description:
+        'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.',
+    icon: 'decisionMeeting',
+  ),
+  DeckTemplate(
     id: 'auditFollowup',
     title: 'Auditbevindingen en opvolging',
     description: 'Bevindingen, root cause, maatregelen, bewijs en status.',
@@ -208,6 +231,14 @@ final List<DeckTemplate> deckTemplates = [
     title: 'Architectuurbesluit / ADR-presentatie',
     description: 'Context, opties, trade-offs, besluit en gevolgen.',
     icon: 'architectureDecision',
+  ),
+  DeckTemplate(
+    id: 'threatModeling',
+    title: 'Threat modeling-sessie',
+    description:
+        'Scope, datastromen, vertrouwensgrenzen, dreigingen per '
+        'STRIDE-categorie en maatregelen.',
+    icon: 'threatModeling',
   ),
   DeckTemplate(
     id: 'policyRollout',
@@ -228,6 +259,12 @@ final List<DeckTemplate> deckTemplates = [
     icon: 'retrospective',
   ),
   DeckTemplate(
+    id: 'sprintReview',
+    title: 'Sprint review / demo',
+    description: 'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.',
+    icon: 'sprintReview',
+  ),
+  DeckTemplate(
     id: 'research',
     title: 'Onderzoeksverhaal',
     description: 'Vraag, methode, tijdlijn van bevindingen en conclusies.',
@@ -246,6 +283,22 @@ final List<DeckTemplate> deckTemplates = [
     icon: 'quiz',
   ),
   // ── Gesprekssjablonen ──────────────────────────────────────────────────────
+  DeckTemplate(
+    id: 'conversationPrep',
+    title: 'Gesprek voorbereiden',
+    description:
+        'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je '
+        'goed wilt voorbereiden.',
+    icon: 'conversationPrep',
+  ),
+  DeckTemplate(
+    id: 'crucialConversation',
+    title: 'Cruciaal gesprek voorbereiden',
+    description:
+        'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale '
+        'gesprekken.',
+    icon: 'crucialConversation',
+  ),
   DeckTemplate(
     id: 'jobInterview',
     title: 'Sollicitatiegesprek',
@@ -416,6 +469,22 @@ final List<DeckTemplate> deckTemplates = [
         'openstaande taken.',
     icon: 'nursingHandover',
   ),
+  DeckTemplate(
+    id: 'familyCareConversation',
+    title: 'Familiegesprek zorg en mantelzorg',
+    description:
+        "Scenario's, wensen, taakverdeling en afspraken voor een zwaar "
+        'familiegesprek.',
+    icon: 'familyCareConversation',
+  ),
+  DeckTemplate(
+    id: 'socialCaseReview',
+    title: 'Casuïstiekbespreking sociaal domein',
+    description:
+        'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en '
+        'regie.',
+    icon: 'socialCaseReview',
+  ),
   // ── Inwerken en HR-levenscyclus ─────────────────────────────────────────────
   DeckTemplate(
     id: 'onboardingPlan',
@@ -447,6 +516,14 @@ final List<DeckTemplate> deckTemplates = [
         'Kennisoverdracht, intrekken van toegang en een net exitgesprek bij '
         'vertrek.',
     icon: 'offboarding',
+  ),
+  DeckTemplate(
+    id: 'worksCouncilRequest',
+    title: 'Adviesaanvraag OR / medezeggenschap',
+    description:
+        'Voorgenomen besluit, beweegredenen, personele gevolgen en het '
+        'adviestraject.',
+    icon: 'worksCouncilRequest',
   ),
   // ── Luchtvaart ──────────────────────────────────────────────────────────────
   DeckTemplate(
@@ -522,6 +599,22 @@ final List<DeckTemplate> deckTemplates = [
         'afschalingsbesluiten.',
     icon: 'gripEscalation',
   ),
+  DeckTemplate(
+    id: 'fireServiceBriefing',
+    title: 'Brandweerbriefing (inzet en oefening)',
+    description:
+        'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en '
+        'taakverdeling.',
+    icon: 'fireServiceBriefing',
+  ),
+  DeckTemplate(
+    id: 'afterActionReview',
+    title: 'Debriefing / after-action review',
+    description:
+        'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken '
+        'we.',
+    icon: 'afterActionReview',
+  ),
   // ── Maritiem ────────────────────────────────────────────────────────────────
   DeckTemplate(
     id: 'bridgePassageBriefing',
@@ -530,6 +623,48 @@ final List<DeckTemplate> deckTemplates = [
         'Reisplan en brugafspraken (appraisal, planning, execution, '
         'monitoring) met kritieke routepunten.',
     icon: 'bridgePassageBriefing',
+  ),
+  // ── Publieke sector ─────────────────────────────────────────────────────────
+  DeckTemplate(
+    id: 'councilProposal',
+    title: 'Raads- / collegevoorstel',
+    description:
+        'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en '
+        'vervolg.',
+    icon: 'councilProposal',
+  ),
+  DeckTemplate(
+    id: 'residentsMeeting',
+    title: 'Bewonersavond / participatiebijeenkomst',
+    description:
+        'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en '
+        'vervolg.',
+    icon: 'residentsMeeting',
+  ),
+  // ── Onderwijs en stage ──────────────────────────────────────────────────────
+  DeckTemplate(
+    id: 'parentsEvening',
+    title: 'Ouderavond / informatieavond',
+    description:
+        'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen '
+        'helpen.',
+    icon: 'parentsEvening',
+  ),
+  DeckTemplate(
+    id: 'internshipPresentation',
+    title: 'Stagepresentatie',
+    description:
+        'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.',
+    icon: 'internshipPresentation',
+  ),
+  // ── Vereniging ──────────────────────────────────────────────────────────────
+  DeckTemplate(
+    id: 'membersAssembly',
+    title: 'Ledenvergadering (ALV)',
+    description:
+        'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor '
+        'vereniging of VvE.',
+    icon: 'membersAssembly',
   ),
   DeckTemplate(
     id: 'miauwReport',
