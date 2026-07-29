@@ -55,8 +55,11 @@ void main() {
     // niet uit een hardgecodeerde tekst die veroudert.
     await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
     await tester.pumpAndSettle();
-    // Zonder de informatieveiligheidsmodule telt het MIAUW-sjabloon niet mee.
-    final expected = deckTemplates.where((t) => !t.requiresInfoSafety).length;
+    // Zonder module staan MIAUW en DMAIC niet in de kiezer — zelfde filter
+    // als welcome_screen._visibleTemplateCount.
+    final expected = deckTemplates
+        .where((t) => !t.requiresInfoSafety && !t.requiresProcesverbetering)
+        .length;
     expect(
       find.textContaining('$expected sjablonen om mee te beginnen'),
       findsOneWidget,

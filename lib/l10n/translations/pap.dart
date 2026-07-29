@@ -730,6 +730,48 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Nog geen specificatielimiet': 'Noch no tin límite di spesifikashon',
+  'USL (bovengrens)': 'USL (límite superior)',
+  'LSL (ondergrens)': 'LSL (límite inferior)',
+  'Optionele Y-01-velden': 'Kamponan Y-01 opsional',
+  'Procesdoel (target)': 'Meta di proseso (target)',
+  'Specificatielimieten van Y-01 (deck)':
+      'Límitenan di spesifikashon di Y-01 (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'E deck aki tin límite Y-01. Aktiva e switch ariba pa usa nan en bes di balornan lokal.',
+  'USL (bovengrens, optioneel)': 'USL (límite superior, opsional)',
+  'LSL (ondergrens, optioneel)': 'LSL (límite inferior, opsional)',
+  'Procesdoel (optioneel)': 'Meta di proseso (opsional)',
+  'Fasepoort': 'Phase gate',
+  'Berekenen': 'Calculate',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Slope',
+  'Hypothesetoets': 'Hypothesis test',
+  'Hypothesetoets…': 'Hypothesis test…',
+  'Hypothetisch gemiddelde': 'Hypothesized mean',
+  'Lineaire regressie': 'Linear regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Measurement data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (optional)',
+  'Eénsteeks t-toets': 'One-sample t-test',
+  'Twee-steeks t-toets (Welch)': 'Prueba t de dos muestras (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Un kolòm di number (mínimo 2 observashon).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Dos kolòm separá pa un linea blancu (mínimo 2 pa grupo).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Varios grupo, kada grupo un kolòm, separá pa un linea blancu (mínimo 2 grupo, 2 observashon pa grupo).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'pega Part, Operator i Value (tab òf kòma). repeti fila pa réplica. mínimo 2 parts, 2 operador, 2 midí pa selula.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'pega X i Y (un number pa linea). mínimo 3 par; e motor nenga si tin demasiado poko observashon.',
+  'Part × Operator interaction pooled into repeatability':
+      'Interakshon Part × Operator agrupá den repetibilidad',
+  'Part × Operator interaction kept separate':
+      'Interakshon Part × Operator mantene separá',
+  'Te weinig gegevens voor een probability plot':
+      'Masha poko data pa un gráfico di probabilidad',
   'Met dank aan': 'Ku danki',
   'Fix alle problemen': 'Drecha tur problema',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -807,6 +849,78 @@ const _dutchSourceAddPap = {
       'no por a wòrdu lesá i a keda saltá',
   'ontbrak in het bestand en is overgeslagen':
       'tabata falta den e archivo i a keda saltá',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Masha poko data pa un gráfico di efecto prinsipal',
+  'Te weinig gegevens voor een interactieplot':
+      'Masha poko data pa un gráfico di interakshon',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Generá un tabla di diseño ku faktornan kodifiká (−1/+1) i un kolòm Y bashí den e reja.',
+  'Aantal factoren': 'Número de factores',
+  'Volledig factorial (2^k)': 'Factorial completo (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'ensayos en orden Yates estándar',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Un serie pa faktor ku nivelnan kodifiká −1 i +1; e último serie ta e respuesta (Y). E filanan ta kòrsu experimental.',
+  'Golden-thread-id': 'Id golden thread',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'ta mencioná den un lugar pero no ta riba un diapositiva di árbol — definí\'é riba un árbol CTQ of Ishikawa.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'ta riba un diapositiva di árbol pero no ta usa den otro lugar — konektá\'é ku un matris, flujo of otro diapositiva.',
+  'Nieuw verbeteringsproject': 'Proyekto nobo di mehoramentu',
+  'Kader': 'Marco',
+  'Projecttitel': 'Título di proyekto',
+  'Primaire Y-metriek (Y-01)': 'Métrica Y primario (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Por ehèmpel: tempo di orderintake den dianan laboral',
+  'Project starten': 'Kuminsá proyekto',
+  'Procesverbetering: DMAIC-project': 'Mehoramentu di proseso: proyekto DMAIC',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'Eskeleto DMAIC ku charter, árbol CTQ (Y-01), SIPOC i sekshenan di fase.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Un checklist di fasepoort: konfirmá scope, stakeholders i go/no-go promé ku bo bai na e siguiente fase.',
+  'Stroom': 'Flujo',
+  'Zwembanen': 'Swimlanes',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Un flujo di proseso, swimlanes of VSM. Pasonan komo título :: tipo :: pt=…; lt=…. Totalnan (PCE, bottleneck) ta kalkulá i no ta wardá.',
+  'Boom': 'Árbol',
+  'Visgraat': 'Fishbone',
+  'Lay-out': 'Layout',
+  'Punten': 'Puntonan',
+  'Inspringen': 'Indentá',
+  'Uitspringen': 'Outdent',
+  'Punt toevoegen': 'Agregá punto',
+  'Punt verwijderen': 'Kita punto',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Un árbol of fishbone (5× Why, CTQ, Ishikawa). Profundidat ku tabs; marká kousa komo **X-01** inline.',
+  'Canvas': 'Kanvas',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Un kanvas di región (A3, charter, SWOT, buòrdu). Skohe un plantia; e ##-titulonan riba disk ta e kuadro.',
+  'Matrix': 'Matris',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Un rehá tipifiká (SIPOC, FMEA, RACI, …). Skohe un plantia; kolomnan derivá komo RPN ta kalkulá i no ta wardá.',
+  'Regelkaart': 'Grafiko di kontrol',
+  'Histogram': 'Histograma',
+  'Pareto': 'Pareto',
+  'Run chart': 'Grafiko di sekuensia',
+  'Boxplot': 'Diagrama di kaha',
+  'Plakken uit klembord': 'Pega for di klembord',
+  'Te weinig gegevens voor een regelkaart':
+      'Muy poko dato pa un grafiko di kontrol',
+  'Te weinig gegevens voor een histogram': 'Muy poko dato pa un histograma',
+  'Te weinig gegevens voor een boxplot': 'Muy poko dato pa un diagrama di kaha',
+  'Procesverbetering': 'Mehoramentu di proseso',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefaktonan pa mehoramentu di proseso i proyektonan Lean Six Sigma (DMAIC, Kaizen, A3). Standardmente apagá. E módulo ta disponibel; e artefaktonan lo bini den pasonan siguiente.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Módulo aktivá. Nukleo di kalkulashon disponibel lokalmente ({n} factor di control chart). Tiponan di slide i plantianan lo bini asina ku nan ta kla.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'E presentashon aki ta kontené elementonan di e módulo di Mehoramentu di proseso. Aktivá e módulo pa editá nan.',
   'Online media staat uit — aanzetten': 'Media online ta apa — ké',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} ta kontené kontenido ehekutabel i lo no wòrdu importá.',

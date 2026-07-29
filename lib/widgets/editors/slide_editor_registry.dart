@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/slide.dart';
+import '../../models/improvement_y01.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/image_service.dart';
 import 'asset_overview_editor.dart';
@@ -18,6 +19,10 @@ import 'image_slide_editor.dart';
 import 'question_editor.dart';
 import 'quote_editor.dart';
 import 'scope_matrix_editor.dart';
+import 'matrix_editor.dart';
+import 'canvas_editor.dart';
+import 'tree_editor.dart';
+import 'flow_editor.dart';
 import 'scorecard_editor.dart';
 import 'section_editor.dart';
 import 'signoff_editor.dart';
@@ -67,6 +72,9 @@ class SlideEditorContext {
   /// "refresh from deck" (see [deckRetestResolvedCount]); 0 for other editors.
   final int deckResolvedCount;
 
+  /// Primary Y metric from the deck, for histogram Y-01 limit linking.
+  final ImprovementY01Metric deckY01;
+
   const SlideEditorContext({
     required this.slide,
     required this.onUpdate,
@@ -82,6 +90,7 @@ class SlideEditorContext {
     this.onSplitChapters,
     this.deckFindingSeverities = const [],
     this.deckResolvedCount = 0,
+    this.deckY01 = ImprovementY01Metric.empty,
   });
 
   Key get _key => ValueKey(slide.id);
@@ -196,6 +205,7 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         projectPath: c.captionBasePath,
         themeAnimationDurationMs: c.themeAnimationDurationMs,
         nestedInScrollView: c.nestedInScrollView,
+        deckY01: c.deckY01,
       ),
       SlideType.cockpit: (c) => CockpitEditor(
         key: c._key,
@@ -270,6 +280,36 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.signOff: (c) => SignOffEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
+      SlideType.matrix: (c) => MatrixEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
+      SlideType.canvas: (c) => CanvasEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
+      SlideType.tree: (c) => TreeEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
+      SlideType.flow: (c) => FlowEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
+      SlideType.phaseGate: (c) => BulletsEditor(
         key: c._key,
         slide: c.slide,
         onUpdate: c.onUpdate,

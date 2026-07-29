@@ -137,10 +137,12 @@ void main() {
     await _Harness().open(tester);
     // In weergavevolgorde itereren zodat het scrollen monotoon omlaag gaat —
     // scrollUntilVisible scrolt maar één richting op. Module-only sjablonen
-    // (MIAUW) blijven verborgen tot Informatieveiligheid aanstaat en horen dus
+    // (MIAUW, DMAIC) blijven verborgen tot hun module aanstaat en horen dus
     // niet in deze standaardcatalogus.
     for (final template in sortTemplatesForDisplay(
-      deckTemplates.where((t) => !t.requiresInfoSafety),
+      deckTemplates.where(
+        (t) => !t.requiresInfoSafety && !t.requiresProcesverbetering,
+      ),
       (t) => t.title,
     )) {
       await tester.scrollUntilVisible(

@@ -3,6 +3,24 @@
 // knop-/labelwidgets); all imports live in the main library file.
 part of '../fullscreen_presenter.dart';
 
+@visibleForTesting
+bool shouldUseDualScreen({
+  required bool isDesktopNative,
+  required int displayCount,
+}) {
+  return isDesktopNative && displayCount >= 2;
+}
+
+@visibleForTesting
+bool autoAdvanceWaitsForMedia(Slide slide) {
+  final autoplayVideo =
+      slide.type == SlideType.video &&
+      slide.videoPath.isNotEmpty &&
+      slide.videoAutoplay;
+  final autoplayAudio = slide.audioPath.isNotEmpty && slide.audioAutoplay;
+  return autoplayVideo || autoplayAudio;
+}
+
 /// Cijfer (gewoon of numpad) → karakter, of null bij andere toetsen.
 /// Top-level zodat de toets-afhandeling in een `part`-bestand erbij kan.
 final Map<LogicalKeyboardKey, String> _digits = {

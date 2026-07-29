@@ -146,6 +146,21 @@ class _WelcomeScreen extends ConsumerWidget {
           label: Text(l10n.t('newPresentation')),
         ),
       ),
+      if (ref.watch(procesverbeteringRevealProvider)) ...[
+        const SizedBox(height: 8),
+        SizedBox(
+          width: 220,
+          child: OutlinedButton.icon(
+            onPressed: () => _createImprovementProjectFromWizard(
+              context,
+              ref,
+              inNewTab: false,
+            ),
+            icon: const Icon(Icons.trending_up, size: 18),
+            label: Text(l10n.d('Nieuw verbeteringsproject')),
+          ),
+        ),
+      ],
       // De sjablonen zijn het beste dat een nieuwkomer kan
       // overkomen en zaten één klik verstopt achter deze knop.
       // Het aantal komt uit de catalogus zelf, zodat het
@@ -356,8 +371,13 @@ class _WelcomeScreen extends ConsumerWidget {
   /// als Informatieveiligheid aan staat, anders belooft het openscherm er één
   /// te veel.
   int _visibleTemplateCount(WidgetRef ref) {
-    final revealed = ref.watch(infoSafetyRevealProvider);
-    return deckTemplates.where((t) => revealed || !t.requiresInfoSafety).length;
+    final secRevealed = ref.watch(infoSafetyRevealProvider);
+    final impRevealed = ref.watch(procesverbeteringRevealProvider);
+    return deckTemplates.where((t) {
+      if (t.requiresInfoSafety && !secRevealed) return false;
+      if (t.requiresProcesverbetering && !impRevealed) return false;
+      return true;
+    }).length;
   }
 
   Future<void> _newDeck(BuildContext context, WidgetRef ref) =>

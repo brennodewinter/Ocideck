@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import '../models/cvss_builder.dart';
 import '../models/deck.dart';
+import '../models/improvement_y01.dart';
 import '../models/document_signature.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
@@ -169,6 +170,7 @@ class SlideRasterizer {
           organization: organization,
           scopeCia: deckScopeCiaIndex(slides),
           reportLanguage: audience.deck.language,
+          improvementY01: deck.improvementY01Metric,
         ),
       ),
     );
@@ -338,6 +340,7 @@ class _RasterSlideHost extends StatefulWidget {
   final String organization;
   final String reportLanguage;
   final Map<String, CiaRating> scopeCia;
+  final ImprovementY01Metric improvementY01;
 
   const _RasterSlideHost({
     super.key,
@@ -354,6 +357,7 @@ class _RasterSlideHost extends StatefulWidget {
     required this.organization,
     required this.reportLanguage,
     required this.scopeCia,
+    this.improvementY01 = ImprovementY01Metric.empty,
   });
 
   @override
@@ -420,6 +424,7 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
           organization: widget.organization,
           scopeCia: widget.scopeCia,
           reportLanguage: widget.reportLanguage,
+          improvementY01: widget.improvementY01,
         ),
       ),
     );

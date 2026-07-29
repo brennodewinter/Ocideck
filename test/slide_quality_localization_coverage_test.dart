@@ -228,6 +228,8 @@ void main() {
         'rule': 'struct.user_path',
         'sample': 'u…r',
       },
+      SlideQualityIssueKind.improvementOrphanId: {'id': 'X-01'},
+      SlideQualityIssueKind.improvementUnusedId: {'id': 'Y-01'},
     };
 
     test('produces a non-empty message for each kind in both languages', () {

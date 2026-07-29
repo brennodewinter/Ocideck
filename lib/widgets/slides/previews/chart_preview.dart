@@ -9,6 +9,7 @@ class _ChartPreview extends StatefulWidget {
   final String font;
   final ThemeProfile profile;
   final bool presentationMode;
+  final ImprovementY01Metric y01;
 
   const _ChartPreview({
     required this.slide,
@@ -16,6 +17,7 @@ class _ChartPreview extends StatefulWidget {
     required this.font,
     required this.profile,
     required this.presentationMode,
+    this.y01 = ImprovementY01Metric.empty,
   });
 
   @override
@@ -197,6 +199,14 @@ class _ChartPreviewState extends State<_ChartPreview>
       ChartType.heatmap => l10n.d('Heatmap'),
       ChartType.horizontalStackedBar => l10n.d('Horizontale gestapelde staaf'),
       ChartType.bullet => l10n.d('Norm en prestatie'),
+      ChartType.controlChart => l10n.d('Regelkaart'),
+      ChartType.histogram => l10n.d('Histogram'),
+      ChartType.pareto => l10n.d('Pareto'),
+      ChartType.runChart => l10n.d('Run chart'),
+      ChartType.boxPlot => l10n.d('Boxplot'),
+      ChartType.probabilityPlot => l10n.d('Probability plot'),
+      ChartType.mainEffects => l10n.d('Hoofdeffecten'),
+      ChartType.interaction => l10n.d('Interactie'),
     };
     final buffer = StringBuffer('${l10n.d('Grafiek')} ($typeName)');
     if (spec.title.isNotEmpty) {
@@ -519,6 +529,22 @@ class _ChartPreviewState extends State<_ChartPreview>
         return _horizontalStackedBarChart(spec, textColor);
       case ChartType.bullet:
         return _bulletChart(spec, textColor);
+      case ChartType.controlChart:
+        return _controlChart(spec, textColor);
+      case ChartType.histogram:
+        return _histogramChart(spec, textColor);
+      case ChartType.pareto:
+        return _paretoChart(spec, textColor);
+      case ChartType.runChart:
+        return _runChart(spec, textColor);
+      case ChartType.boxPlot:
+        return _boxPlotChart(spec, textColor);
+      case ChartType.probabilityPlot:
+        return _probabilityPlotChart(spec, textColor);
+      case ChartType.mainEffects:
+        return _mainEffectsChart(spec, textColor);
+      case ChartType.interaction:
+        return _interactionChart(spec, textColor);
     }
   }
 

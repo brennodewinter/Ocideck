@@ -28,6 +28,12 @@ const _knownClassTokens = {
   'checklist',
   'scope-matrix',
   'sign-off',
+  // Procesverbetering-engines (PROCESS_IMPROVEMENT §6).
+  'matrix',
+  'canvas',
+  'tree',
+  'flow',
+  'phase-gate',
   'timeline-horizontal',
   'timeline-vertical',
   'timeline-steps',
@@ -98,4 +104,7 @@ const _supportedCommentDirectives = {
   // Per-slide kwaliteitsdispositie: accept. De tegenhanger van
   // `ocideck_privacy` voor contrast-, dichtheids- en alt-tekstmeldingen.
   'ocideck_quality',
+  // Welk verbetersjabloon een engine-dia volgt (PROCESS_IMPROVEMENT §3.1).
+  'ocideck_template',
+  'ocideck_layout',
 };

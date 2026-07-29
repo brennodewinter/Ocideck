@@ -1,4 +1,10 @@
 import 'package:uuid/uuid.dart';
+import '../services/improvement/canvas_spec.dart';
+import '../services/improvement/flow_spec.dart';
+import '../services/improvement/flow_slide.dart';
+import '../services/improvement/matrix_spec.dart';
+import '../services/improvement/tree_spec.dart';
+import '../services/improvement/tree_slide.dart';
 import 'asset_overview_spec.dart';
 import 'checklist_spec.dart';
 import 'cockpit.dart';
@@ -46,14 +52,25 @@ enum SlideType {
   checklist,
   scopeMatrix,
   signOff,
+  // Procesverbetering-module (PROCESS_IMPROVEMENT §2/§6). Geen type per
+  // LSS-artefact maar per *rendervorm*: `matrix` is een getypeerd raster, en
+  // welk artefact erin staat (SIPOC, FMEA, RACI, …) is sjabloongegeven in
+  // [Slide.improvementTemplateId]. Zo kost een artefact erbij geen Dart.
+  // `canvas` is hetzelfde idee voor regio's van Markdown (A3, charter, SWOT).
+  matrix,
+  canvas,
+  tree,
+  flow,
+  phaseGate,
 }
 
 /// Broad grouping a [SlideType] belongs to, used by the add-slide picker to
 /// offer category tabs. The pentest-reporting layouts carry
-/// [SlideCategory.informationSecurity]; the picker derives its tab bar from the
+/// [SlideCategory.informationSecurity]; Procesverbetering engines carry
+/// [SlideCategory.procesverbetering]. The picker derives its tab bar from the
 /// categories actually present, so a tab appears only once the module reveals
 /// its types.
-enum SlideCategory { general, informationSecurity }
+enum SlideCategory { general, informationSecurity, procesverbetering }
 
 /// Hoeveel kolommen *doorlopende* bullettekst een [SlideType] toont — de vorm
 /// die zich over pagina's laat verdelen.
@@ -276,6 +293,42 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     label: 'Ondertekening',
     marpClass: 'sign-off',
     category: SlideCategory.informationSecurity,
+  ),
+  // Procesverbetering-module. Het token is bewust domeinneutraal: een matrix is
+  // een getypeerd raster en leunt op geen enkele methodologie (§6). De inhoud
+  // is een gewone Markdown-tabel, dus [backedByTable].
+  SlideType.matrix: SlideTypeMeta(
+    label: 'Matrix',
+    marpClass: 'matrix',
+    category: SlideCategory.procesverbetering,
+    backedByTable: true,
+  ),
+  // Canvas: regio's zijn `##`-koppen in gewone Markdown (PROCESS_IMPROVEMENT
+  // §3.2). Geen tabel — de body leeft in [Slide.customMarkdown], zoals bij
+  // finding/freeMarkdown.
+  SlideType.canvas: SlideTypeMeta(
+    label: 'Canvas',
+    marpClass: 'canvas',
+    category: SlideCategory.procesverbetering,
+  ),
+  // Boom: geneste Markdown-lijst (PROCESS_IMPROVEMENT §3.3). Diepte = tabs in
+  // [Slide.bullets]; layout tree/fishbone via [Slide.improvementLayout].
+  SlideType.tree: SlideTypeMeta(
+    label: 'Boom',
+    marpClass: 'tree',
+    category: SlideCategory.procesverbetering,
+  ),
+  // Flow: stappenlijst met `::`-kenmerken (PROCESS_IMPROVEMENT §3.4).
+  SlideType.flow: SlideTypeMeta(
+    label: 'Stroom',
+    marpClass: 'flow',
+    category: SlideCategory.procesverbetering,
+  ),
+  SlideType.phaseGate: SlideTypeMeta(
+    label: 'Fasepoort',
+    marpClass: 'phase-gate',
+    category: SlideCategory.procesverbetering,
+    bulletColumns: BulletColumns.one,
   ),
 };
 
@@ -543,6 +596,24 @@ class Slide {
   /// Round-trips as `<!-- ocideck_checklist_scope: https://app.example/login -->`.
   final String checklistScope;
 
+  /// For a Procesverbetering engine slide (`matrix`, `canvas`, …): which
+  /// improvement template the body follows — `sipoc`, `a3`, `fmea`, …
+  ///
+  /// Dit is het enige wat een matrix bóven een gewone tabel bewaart, en het is
+  /// precies wat niet uit de inhoud te herleiden is: welke kolommen afgeleid
+  /// zijn en wat de invulhulp zegt. Het artefact zelf is dus gegeven, geen code
+  /// — een sjabloon erbij kost geen Dart en geen vertaling.
+  ///
+  /// Een onbekende id blijft staan en de dia leest als gewone tabel: een deck
+  /// uit een nieuwere versie (of met een eigen sjabloonpakket) hoort leesbaar te
+  /// blijven, niet leeg. Round-trips as `<!-- ocideck_template: fmea -->`.
+  final String improvementTemplateId;
+
+  /// Optional layout override for a Procesverbetering engine — e.g. `fishbone`
+  /// on a `tree`. Empty = template default. Round-trips as
+  /// `<!-- ocideck_layout: fishbone -->`.
+  final String improvementLayout;
+
   /// Which page of a paginated rich-text body this copy of the slide renders.
   ///
   /// Render-only, and deliberately absent from the file format: a long free-text
@@ -620,6 +691,8 @@ class Slide {
     this.findingRole = FindingRole.header,
     this.aiAssistedFields = const [],
     this.checklistScope = '',
+    this.improvementTemplateId = '',
+    this.improvementLayout = '',
     this.renderPage = 0,
   });
 
@@ -629,6 +702,16 @@ class Slide {
       type: type,
       bullets: type == SlideType.timeline
           ? timelineEventsToBullets(defaultTimelineEvents())
+          : type == SlideType.tree
+          ? treeStarterBullets(kDefaultTreeTemplateId)
+          : type == SlideType.flow
+          ? flowStarterBullets(kDefaultFlowTemplateId)
+          : type == SlideType.phaseGate
+          ? const [
+              'Scope en doel bevestigd',
+              'Stakeholders akkoord',
+              'Volgende fase vrijgegeven',
+            ]
           : (type == SlideType.bullets ||
                 type == SlideType.twoBullets ||
                 type == SlideType.bulletsImage)
@@ -665,13 +748,37 @@ class Slide {
           : type == SlideType.discoveries
           // Alleen de vaste kop; de editor deelt de eerste lege regel uit.
           ? const DiscoveriesSpec().toTableRows()
+          : type == SlideType.matrix
+          // De kop van het startsjabloon plus één lege regel, zodat de matrix
+          // meteen invulbaar is in plaats van als leeg raster te openen.
+          ? improvementTemplateStarterRows(kDefaultImprovementTemplateId)
           : const [],
+      improvementTemplateId: type == SlideType.matrix
+          ? kDefaultImprovementTemplateId
+          : type == SlideType.canvas
+          ? kDefaultCanvasTemplateId
+          : type == SlideType.tree
+          ? kDefaultTreeTemplateId
+          : type == SlideType.flow
+          ? kDefaultFlowTemplateId
+          : '',
+      improvementLayout: type == SlideType.tree
+          ? treeLayoutToken(
+              treeTemplateById(kDefaultTreeTemplateId)!.defaultLayout,
+            )
+          : type == SlideType.flow
+          ? flowLayoutToken(
+              flowTemplateById(kDefaultFlowTemplateId)!.defaultLayout,
+            )
+          : '',
       customMarkdown: type == SlideType.cockpit
           ? CockpitSpec.samplePreset().toBlock()
           : type == SlideType.question
           ? QuestionSpec.defaultMultipleChoice().toBlock()
           : type == SlideType.finding
           ? const FindingSpec().toMarkdown()
+          : type == SlideType.canvas
+          ? canvasTemplateStarterMarkdown(kDefaultCanvasTemplateId)
           : '',
     );
   }
@@ -736,6 +843,8 @@ class Slide {
       findingRole: src.findingRole,
       aiAssistedFields: src.aiAssistedFields,
       checklistScope: src.checklistScope,
+      improvementTemplateId: src.improvementTemplateId,
+      improvementLayout: src.improvementLayout,
     );
   }
 
@@ -804,6 +913,8 @@ class Slide {
     FindingRole? findingRole,
     List<String>? aiAssistedFields,
     String? checklistScope,
+    String? improvementTemplateId,
+    String? improvementLayout,
     int? renderPage,
   }) {
     return Slide(
@@ -875,6 +986,9 @@ class Slide {
       findingRole: findingRole ?? this.findingRole,
       aiAssistedFields: aiAssistedFields ?? this.aiAssistedFields,
       checklistScope: checklistScope ?? this.checklistScope,
+      improvementTemplateId:
+          improvementTemplateId ?? this.improvementTemplateId,
+      improvementLayout: improvementLayout ?? this.improvementLayout,
       renderPage: renderPage ?? this.renderPage,
     );
   }

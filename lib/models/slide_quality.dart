@@ -3,7 +3,14 @@ import 'markdown_validation.dart';
 /// Sentinel index for deck-wide issues (theme contrast, etc.).
 const int kDeckWideSlideIndex = -1;
 
-enum SlideQualityCategory { altText, contrast, textDensity, content, privacy }
+enum SlideQualityCategory {
+  altText,
+  contrast,
+  textDensity,
+  content,
+  privacy,
+  improvement,
+}
 
 enum SlideQualityIssueKind {
   missingAltCaption,
@@ -50,6 +57,10 @@ enum SlideQualityIssueKind {
   privacyStructural,
   privacyImage,
   privacyImageUnreadable,
+
+  // ── Procesverbetering golden thread ───────────────────────────────────
+  improvementOrphanId,
+  improvementUnusedId,
 }
 
 /// Waar binnen een veld een melding precies zit.

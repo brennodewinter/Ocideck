@@ -11,6 +11,7 @@ void main() {
   Future<SlideType?> Function() openDialog(
     WidgetTester tester, {
     bool reveal = false,
+    bool revealProcesverbetering = false,
   }) {
     SlideType? picked;
     return () async {
@@ -22,6 +23,7 @@ void main() {
                 onPressed: () async => picked = await AddSlideDialog.show(
                   context,
                   revealInfoSafety: reveal,
+                  revealProcesverbetering: revealProcesverbetering,
                 ),
                 child: const Text('open'),
               ),
@@ -43,9 +45,9 @@ void main() {
       .toList();
 
   testWidgets('every slide type shows a wireframe preview', (tester) async {
-    // Reveal the security module so every type is offered; the "Alle" tab drops
+    // Reveal both modules so every type is offered; the "Alle" tab drops
     // the category filter so all of them are visible at once.
-    await openDialog(tester, reveal: true)();
+    await openDialog(tester, reveal: true, revealProcesverbetering: true)();
     await tester.tap(find.text('Alle'));
     await tester.pumpAndSettle();
     expect(visibleTypes(tester).toSet(), SlideType.values.toSet());
@@ -56,7 +58,7 @@ void main() {
   ) async {
     // Derived from the single source of truth, so a newly added type shows up
     // automatically instead of having to be added to a second hand-kept list.
-    await openDialog(tester, reveal: true)();
+    await openDialog(tester, reveal: true, revealProcesverbetering: true)();
     await tester.tap(find.text('Alle'));
     await tester.pumpAndSettle();
     expect(visibleTypes(tester).toSet(), slideTypeMeta.keys.toSet());

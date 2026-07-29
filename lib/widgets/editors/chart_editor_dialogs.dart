@@ -6,16 +6,31 @@ part of 'chart_editor.dart';
 class _ChartVariantsDialog extends StatefulWidget {
   final ChartType currentType;
 
-  const _ChartVariantsDialog({required this.currentType});
+  /// Whether the Procesverbetering chart types may be offered — the same gate
+  /// the type dropdown uses, passed in because the list is built before the
+  /// first build has a context to read the provider from.
+  final bool revealProcesverbetering;
+
+  const _ChartVariantsDialog({
+    required this.currentType,
+    required this.revealProcesverbetering,
+  });
 
   @override
   State<_ChartVariantsDialog> createState() => _ChartVariantsDialogState();
 }
 
 class _ChartVariantsDialogState extends State<_ChartVariantsDialog> {
+  /// Every other type, minus the statistical ones while the module is hidden.
+  /// A chart that already *is* one of them keeps its family on offer, so a deck
+  /// carrying improvement slides stays workable with the module switched off.
   late final List<ChartType> _types = [
     for (final type in ChartType.values)
-      if (type != widget.currentType) type,
+      if (type != widget.currentType &&
+          (!chartTypeRequiresProcesverbetering(type) ||
+              widget.revealProcesverbetering ||
+              chartTypeRequiresProcesverbetering(widget.currentType)))
+        type,
   ];
 
   String _label(BuildContext context, ChartType type) {
@@ -35,6 +50,14 @@ class _ChartVariantsDialogState extends State<_ChartVariantsDialog> {
       ChartType.heatmap => l10n.d('Heatmap'),
       ChartType.horizontalStackedBar => l10n.d('Horizontale gestapelde staaf'),
       ChartType.bullet => l10n.d('Norm en prestatie'),
+      ChartType.controlChart => l10n.d('Regelkaart'),
+      ChartType.histogram => l10n.d('Histogram'),
+      ChartType.pareto => l10n.d('Pareto'),
+      ChartType.runChart => l10n.d('Run chart'),
+      ChartType.boxPlot => l10n.d('Boxplot'),
+      ChartType.probabilityPlot => l10n.d('Probability plot'),
+      ChartType.mainEffects => l10n.d('Hoofdeffecten'),
+      ChartType.interaction => l10n.d('Interactie'),
     };
   }
 
@@ -102,6 +125,14 @@ class _ChartVariantsDialogState extends State<_ChartVariantsDialog> {
                             ChartType.heatmap => Icons.grid_on,
                             ChartType.horizontalStackedBar =>
                               Icons.stacked_bar_chart,
+                            ChartType.controlChart => Icons.ssid_chart,
+                            ChartType.histogram => Icons.equalizer,
+                            ChartType.pareto => Icons.leaderboard,
+                            ChartType.runChart => Icons.timeline,
+                            ChartType.boxPlot => Icons.candlestick_chart,
+                            ChartType.probabilityPlot => Icons.show_chart,
+                            ChartType.mainEffects => Icons.trending_flat,
+                            ChartType.interaction => Icons.multiline_chart,
                           }),
                         ),
                         title: Text(_label(context, _types[i])),

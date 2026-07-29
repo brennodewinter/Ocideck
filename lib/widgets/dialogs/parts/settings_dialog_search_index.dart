@@ -459,6 +459,25 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
       'integratie',
     ],
   ),
+  // Wie "dmaic", "sipoc" of "six sigma" zoekt terwijl de module uit staat,
+  // moet uitkomen waar hij hem aanzet (PROCESS_IMPROVEMENT.md Phase 0).
+  SettingsSearchEntry(
+    tab: SettingsSection.modules,
+    label: 'Procesverbetering',
+    section: 'Uitbreidingen',
+    keywords: [
+      'procesverbetering',
+      'dmaic',
+      'dmadv',
+      'kaizen',
+      'a3',
+      'sipoc',
+      'fmea',
+      'lean',
+      'six sigma',
+      'module',
+    ],
+  ),
 
   // ── Integraties ───────────────────────────────────────────────────────────
   // `integrationsOnly`: het tabblad Integraties is OpenKAT (desktop, module

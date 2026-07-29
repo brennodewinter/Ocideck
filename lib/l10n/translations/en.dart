@@ -911,6 +911,47 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Nog geen specificatielimiet': 'No specification limit yet',
+  'USL (bovengrens)': 'USL (upper limit)',
+  'LSL (ondergrens)': 'LSL (lower limit)',
+  'Optionele Y-01-velden': 'Optional Y-01 fields',
+  'Procesdoel (target)': 'Process target',
+  'Specificatielimieten van Y-01 (deck)': 'Y-01 specification limits (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'This deck has Y-01 limits. Turn on the switch above to use those instead of local values.',
+  'USL (bovengrens, optioneel)': 'USL (upper limit, optional)',
+  'LSL (ondergrens, optioneel)': 'LSL (lower limit, optional)',
+  'Procesdoel (optioneel)': 'Process target (optional)',
+  'Fasepoort': 'Phase gate',
+  'Berekenen': 'Calculate',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Slope',
+  'Hypothesetoets': 'Hypothesis test',
+  'Hypothesetoets…': 'Hypothesis test…',
+  'Hypothetisch gemiddelde': 'Hypothesized mean',
+  'Lineaire regressie': 'Linear regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Measurement data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (optional)',
+  'Eénsteeks t-toets': 'One-sample t-test',
+  'Twee-steeks t-toets (Welch)': 'Two-sample t-test (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'One column of numbers (at least 2 observations).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Two columns separated by a blank line (at least 2 per group).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Multiple groups, each group a column, separated by a blank line (at least 2 groups, 2 observations per group).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Paste Part, Operator and Value (tab or comma). Repeat rows for replicates. At least 2 parts, 2 operators, 2 measurements per cell.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Paste X and Y (one number per line). At least 3 pairs; the engine refuses when there are too few observations.',
+  'Part × Operator interaction pooled into repeatability':
+      'Part × Operator interaction pooled into repeatability',
+  'Part × Operator interaction kept separate':
+      'Part × Operator interaction kept separate',
+  'Te weinig gegevens voor een probability plot':
+      'Too little data for a probability plot',
   'Met dank aan': 'With thanks',
   'Fix alle problemen': 'Fix all issues',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -984,6 +1025,78 @@ const _dutchSourceAddEn = {
       'could not be read and was skipped',
   'ontbrak in het bestand en is overgeslagen':
       'was missing from the file and was skipped',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Not enough data for a main-effects plot',
+  'Te weinig gegevens voor een interactieplot':
+      'Not enough data for an interaction plot',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Generates a design table with coded factors (−1/+1) and an empty Y column in the grid.',
+  'Aantal factoren': 'Number of factors',
+  'Volledig factorial (2^k)': 'Full factorial (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'runs in standard Yates order',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'One series per factor with coded levels −1 and +1; the last series is the response (Y). Rows are experimental runs.',
+  'Golden-thread-id': 'Golden-thread id',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'is referenced somewhere but is not on a tree slide — define it on a CTQ or Ishikawa tree.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'is on a tree slide but not used elsewhere — link it to a matrix, flow or other slide.',
+  'Nieuw verbeteringsproject': 'New improvement project',
+  'Kader': 'Framework',
+  'Projecttitel': 'Project title',
+  'Primaire Y-metriek (Y-01)': 'Primary Y metric (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'For example: order intake lead time in working days',
+  'Project starten': 'Start project',
+  'Procesverbetering: DMAIC-project': 'Process improvement: DMAIC project',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'DMAIC skeleton with charter, CTQ tree (Y-01), SIPOC and phase sections.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'A phase-gate checklist: confirm scope, stakeholders and go/no-go before moving to the next phase.',
+  'Stroom': 'Flow',
+  'Zwembanen': 'Swimlanes',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'A process flow, swimlanes or VSM. Steps as title :: kind :: pt=…; lt=…. Totals (PCE, bottleneck) are calculated, not stored.',
+  'Boom': 'Tree',
+  'Visgraat': 'Fishbone',
+  'Lay-out': 'Layout',
+  'Punten': 'Points',
+  'Inspringen': 'Indent',
+  'Uitspringen': 'Outdent',
+  'Punt toevoegen': 'Add point',
+  'Punt verwijderen': 'Remove point',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'A tree or fishbone (5× Why, CTQ, Ishikawa). Depth with tabs; mark causes as **X-01** inline.',
+  'Canvas': 'Canvas',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'A canvas of regions (A3, charter, SWOT, board). Choose a template; the ## headings on disk are the boxes.',
+  'Matrix': 'Matrix',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'A typed grid (SIPOC, FMEA, RACI, …). Choose a template; derived columns such as RPN are calculated and not stored.',
+  'Regelkaart': 'Control chart',
+  'Histogram': 'Histogram',
+  'Pareto': 'Pareto',
+  'Run chart': 'Run chart',
+  'Boxplot': 'Box plot',
+  'Plakken uit klembord': 'Paste from clipboard',
+  'Te weinig gegevens voor een regelkaart':
+      'Too little data for a control chart',
+  'Te weinig gegevens voor een histogram': 'Too little data for a histogram',
+  'Te weinig gegevens voor een boxplot': 'Too little data for a box plot',
+  'Procesverbetering': 'Process improvement',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefacts for process improvement and Lean Six Sigma projects (DMAIC, Kaizen, A3). Off by default. The module is available; the artefacts follow in later steps.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Module on. Calculation core available locally ({n} control-chart factors). Slide types and templates will appear when ready.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'This presentation contains parts of the Process improvement module. Turn the module on to edit them.',
   'Online media staat uit — aanzetten': 'Online media is off — turn on',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} contains executable content and will not be imported.',

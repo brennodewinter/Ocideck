@@ -1771,6 +1771,47 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Nog geen specificatielimiet': 'Belum ada batas spesifikasi',
+  'USL (bovengrens)': 'USL (batas atas)',
+  'LSL (ondergrens)': 'LSL (batas bawah)',
+  'Optionele Y-01-velden': 'Bidang Y-01 opsional',
+  'Procesdoel (target)': 'Target proses',
+  'Specificatielimieten van Y-01 (deck)': 'Batas spesifikasi Y-01 (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Deck ini memiliki batas Y-01. Nyalakan sakelar di atas untuk menggunakannya, bukan nilai lokal.',
+  'USL (bovengrens, optioneel)': 'USL (batas atas, opsional)',
+  'LSL (ondergrens, optioneel)': 'LSL (batas bawah, opsional)',
+  'Procesdoel (optioneel)': 'Target proses (opsional)',
+  'Fasepoort': 'Phase gate',
+  'Berekenen': 'Calculate',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Slope',
+  'Hypothesetoets': 'Hypothesis test',
+  'Hypothesetoets…': 'Hypothesis test…',
+  'Hypothetisch gemiddelde': 'Hypothesized mean',
+  'Lineaire regressie': 'Linear regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Measurement data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (optional)',
+  'Eénsteeks t-toets': 'One-sample t-test',
+  'Twee-steeks t-toets (Welch)': 'Zweistichproben-t-Test (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Satu kolom angka (setidaknya 2 observasi).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Dua kolom dipisah baris kosong (setidaknya 2 per kelompok).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Beberapa kelompok, tiap kelompok satu kolom, dipisah baris kosong (setidaknya 2 kelompok, 2 observasi per kelompok).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Tempel Part, Operator dan Value (tab atau koma). Ulangi baris untuk replikasi. Setidaknya 2 parts, 2 operator, 2 pengukuran per sel.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Tempel X dan Y (satu angka per baris). Setidaknya 3 pasangan; mesin menolak jika observasi terlalu sedikit.',
+  'Part × Operator interaction pooled into repeatability':
+      'Interaksi Part × Operator digabung ke dalam pengulangan',
+  'Part × Operator interaction kept separate':
+      'Interaksi Part × Operator tetap terpisah',
+  'Te weinig gegevens voor een probability plot':
+      'Data terlalu sedikit untuk plot probabilitas',
   'Met dank aan': 'Ucapan terima kasih',
   'Fix alle problemen': 'Perbaiki semua masalah',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1847,6 +1888,81 @@ const _dutchSourceAddId = <String, String>{
       'tidak dapat dibaca dan dilewati',
   'ontbrak in het bestand en is overgeslagen':
       'tidak ada dalam berkas dan dilewati',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Data tidak cukup untuk plot efek utama',
+  'Te weinig gegevens voor een interactieplot':
+      'Data tidak cukup untuk plot interaksi',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Membuat tabel desain dengan faktor berkode (−1/+1) dan kolom Y kosong di kisi.',
+  'Aantal factoren': 'Anzahl Faktoren',
+  'Volledig factorial (2^k)': 'Vollständiges faktorielles Design (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde':
+      'Läufe in standardmäßiger Yates-Reihenfolge',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Satu seri per faktor dengan level berkode −1 dan +1; seri terakhir adalah respons (Y). Baris adalah uji coba eksperimen.',
+  'Golden-thread-id': 'Id golden thread',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'dirujuk di suatu tempat tetapi tidak ada di slide pohon — definisikan pada pohon CTQ atau Ishikawa.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'ada di slide pohon tetapi tidak dipakai di tempat lain — hubungkan ke matriks, aliran atau slide lain.',
+  'Nieuw verbeteringsproject': 'Proyek peningkatan baru',
+  'Kader': 'Kerangka',
+  'Projecttitel': 'Judul proyek',
+  'Primaire Y-metriek (Y-01)': 'Metrik Y utama (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Misalnya: waktu tunggu order intake dalam hari kerja',
+  'Project starten': 'Mulai proyek',
+  'Procesverbetering: DMAIC-project': 'Peningkatan proses: proyek DMAIC',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'Kerangka DMAIC dengan charter, pohon CTQ (Y-01), SIPOC dan bagian fase.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Checklist gerbang fase: konfirmasi scope, stakeholder dan go/no-go sebelum pindah ke fase berikutnya.',
+  'Stroom': 'Aliran',
+  'Zwembanen': 'Swimlane',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Aliran proses, swimlane, atau VSM. Langkah sebagai judul :: jenis :: pt=…; lt=…. Total (PCE, bottleneck) dihitung dan tidak disimpan.',
+  'Boom': 'Pohon',
+  'Visgraat': 'Tulang ikan',
+  'Lay-out': 'Tata letak',
+  'Punten': 'Poin',
+  'Inspringen': 'Indentasi',
+  'Uitspringen': 'Kurangi indentasi',
+  'Punt toevoegen': 'Tambah poin',
+  'Punt verwijderen': 'Hapus poin',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Pohon atau tulang ikan (5× Why, CTQ, Ishikawa). Kedalaman dengan tab; tandai penyebab sebagai **X-01** inline.',
+  'Canvas': 'Kanvas',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Kanvas wilayah (A3, charter, SWOT, papan). Pilih templat; heading ## di disk adalah kotaknya.',
+  'Matrix': 'Matriks',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Kisi bertipe (SIPOC, FMEA, RACI, …). Pilih templat; kolom turunan seperti RPN dihitung dan tidak disimpan.',
+  'Regelkaart': 'Peta kendali',
+  'Histogram': 'Histogram',
+  'Pareto': 'Pareto',
+  'Run chart': 'Grafik urutan',
+  'Boxplot': 'Diagram kotak',
+  'Plakken uit klembord': 'Tempel dari papan klip',
+  'Te weinig gegevens voor een regelkaart':
+      'Data terlalu sedikit untuk peta kendali',
+  'Te weinig gegevens voor een histogram':
+      'Data terlalu sedikit untuk histogram',
+  'Te weinig gegevens voor een boxplot':
+      'Data terlalu sedikit untuk diagram kotak',
+  'Procesverbetering': 'Peningkatan proses',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefak untuk peningkatan proses dan proyek Lean Six Sigma (DMAIC, Kaizen, A3). Nonaktif secara default. Modul ini tersedia; artefaknya akan menyusul pada langkah berikutnya.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Modul aktif. Inti perhitungan tersedia secara lokal ({n} faktor control chart). Jenis slide dan templat akan ditambahkan begitu siap.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Presentasi ini berisi bagian dari modul Peningkatan proses. Aktifkan modul untuk mengeditnya.',
   'Online media staat uit — aanzetten': 'Media daring nonaktif — aktifkan',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} berisi konten yang dapat dieksekusi dan tidak akan diimpor.',
