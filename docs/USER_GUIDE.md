@@ -1851,6 +1851,37 @@ modification date. Never from "now": re-importing the same folder must produce
 the same deck, or the trend line becomes a graph of how often you pressed
 Import.
 
+#### Headless reporting API (not yet a user interface)
+
+The same canonical OpenKAT facts can now be given to a **headless** reporting
+API by another Dart caller. It has five named scenarios — management overview,
+weekly comparison, organisation overview, CVE exposure and monitoring changes —
+and takes explicit scope, as-of dates, language and table/age policy. It returns a
+normal OciDeck deck together with the actual measurements, source traces and
+typed warnings or errors.
+
+An explicit comparison date must precede the current date and must resolve to a
+genuinely older measurement. The configured table limit is a real construction
+budget for lifecycle, CVE and monitoring tables; if more rows exist, the final
+visible row says that results were omitted. A weekly lifecycle table is left out
+when the source cannot prove stable finding identities.
+
+There is deliberately **no scenario selector, wizard or other screen for this
+yet**. For normal desktop use, keep using **OpenKAT-rapportages importeren…**:
+that route still builds the management overview described above, and re-import
+still refreshes generated OpenKAT slides while preserving slides you added by
+hand.
+
+The CVE-exposure and monitoring-changes scenarios do not guess from fields that
+happen to be present. They remain unavailable until an adapter explicitly proves
+reliable CVE references or reliable monitoring status (and, for monitoring,
+stable asset identity and history). The adapters used by today's folder import
+do not make either reliability claim, so an API caller receives a typed
+missing-capability result rather than a potentially misleading report.
+Even with such a future adapter, a monitoring change is only reported for the
+same stable asset with two explicit, different statuses. A missing asset or
+unknown status never becomes an added/removed claim.
+
 ### Importing presentations (PowerPoint, Keynote, Impress)
 
 *(Added 2026-07-24.)*

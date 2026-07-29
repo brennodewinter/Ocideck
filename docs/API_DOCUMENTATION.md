@@ -219,6 +219,77 @@ value: whenever `audience` is present it recounts with
 therefore still declares, and a caller that hand-builds metadata can neither
 suppress the declaration nor keep it on a deck that has been reviewed.
 
+### OpenKatReportEngine
+
+`lib/services/openkat/openkat_report_engine.dart` is a synchronous, headless
+entry point for callers that already have canonical `List<OpenKatOrganization>`
+facts. It does not scan a folder and does not provide a UI:
+
+```dart
+OpenKatReportResult generate(
+  List<OpenKatOrganization> organizations,
+  OpenKatReportRequest request, {
+  String? outputPath,
+});
+```
+
+`OpenKatReportRequest` requires `scenarioId`, a typed
+`OpenKatReportScope.portfolio()` or `.organization(code)`, and `currentAsOf`.
+It optionally takes `previousAsOf`, `cveId`, `title`, a Dutch/English language,
+and `OpenKatReportPolicy(maximumSnapshotAge:, tableRowLimit:,
+historicalFindingWorkLimit:)`. An organisation scope rejects an empty code. The
+current scenarios are
+`management-overview`, `weekly-comparison`, `organization-overview`,
+`cve-exposure`, and `monitoring-changes`.
+
+The result is machine-readable whether generation succeeds or fails: `deck`,
+`plan`, selected `measurements`, typed `diagnostics`, `missingCapabilities` and
+`sourceTraces`. `generated` is false when an error prevents composition.
+Diagnostic codes include an unknown scenario/scope/organisation, missing current
+or previous snapshot, invalid snapshot chronology, malformed CVE ID, missing
+capability, an invalid report plan or policy, an exceeded resource budget, stale
+snapshot, incomplete portfolio and incomparable measurement coverage. A
+diagnostic has a warning or error severity plus string arguments; callers
+should key behaviour on the code, not display text.
+
+Snapshot selection is canonical: the latest *usable* snapshot on or before an
+as-of date. If `previousAsOf` is omitted, the previous snapshot is selected
+strictly before the selected current one. Each used measurement and trace names
+the exact source file/hash/schema, so a generated report remains auditable. If
+`previousAsOf` is present it must be strictly earlier than `currentAsOf`, and the
+historical capability additionally requires two actually different,
+chronological snapshots.
+
+Comparative management language is evidence-gated separately. Only snapshots
+that both declare `comparableMeasurementCoverage` with the same non-empty
+measurement-scope identity may produce directional conclusions, coloured
+deltas or “most improved” rankings. Otherwise the deck shows current values
+without normative comparison and includes a visible comparability warning; the
+typed result carries `incomparableMeasurementCoverage`.
+
+Report-block preconditions are intrinsic to the block kind and are checked after
+scenario composition. A custom registry cannot make CVE or monitoring evidence
+optional. The weekly lifecycle block is intentionally conditional: it is
+omitted, and its capability recorded as missing, when stable finding identity is
+not demonstrable.
+
+Capabilities are explicit source contracts, not deductions from a non-empty
+field. `cve-exposure` requires `reliableCveReferences`; `monitoring-changes`
+requires historical snapshots, stable asset identities and
+`reliableMonitoringStatus`. Current adapters do not declare the CVE or
+monitoring feature, therefore both scenarios fail closed with
+`missingCapability` until an adapter proves the relevant source fields.
+Monitoring transitions require the same stable asset in both snapshots and two
+explicit statuses; a missing asset or `null` status is unknown, not a mutation.
+
+For lifecycle, CVE-exposure and monitoring-change tables, `tableRowLimit`
+controls construction as well as presentation. It must be between 1 and 1,000.
+Queries stop after the configured budget plus one sentinel result, and a visible
+final row reports that more results were omitted. Lifecycle also refuses to
+build its historical identity index after `historicalFindingWorkLimit`
+inspections (default 250,000; supported maximum 1,000,000). Invalid policy
+values and exceeded work budgets return typed errors before composition.
+
 ### Privacy Projection API
 `lib/services/privacy/privacy_projection.dart` — applies redaction and audience
 scoping. The entry points are **static**:

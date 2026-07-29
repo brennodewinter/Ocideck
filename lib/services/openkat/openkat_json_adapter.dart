@@ -19,6 +19,12 @@ abstract class OpenKatJsonAdapter {
   /// De naam die als `schema` in het importmanifest terechtkomt.
   String get name;
 
+  /// Mogelijkheden die deze exportvorm als broncontract aantoonbaar draagt.
+  ///
+  /// Concrete adapters melden CVE- of monitoringsteun pas wanneer daar een
+  /// expliciet bronveld voor bestaat; een lege lijst betekent dus onbekend.
+  Set<OpenKatSourceFeature> get sourceFeatures => const {};
+
   bool recognizes(Map<String, dynamic> json);
   String? organizationCode(Map<String, dynamic> json);
   String? organizationName(Map<String, dynamic> json);

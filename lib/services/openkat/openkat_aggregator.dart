@@ -131,56 +131,83 @@ class OpenKatAggregator {
   ) {
     if (previous == null) {
       return const TrendConclusion(
-        label: 'Eerste meting',
-        lines: ['Eerste meting; nog geen trend beschikbaar'],
+        direction: OpenKatTrendDirection.firstMeasurement,
+        facts: [],
       );
     }
 
-    final lines = <String>[];
+    final facts = <OpenKatTrendFact>[];
     final worse = <bool>[];
     final better = <bool>[];
 
     final criticalDelta =
         current.severityCounts['critical']! -
         previous.severityCounts['critical']!;
-    _addDeltaLine(lines, 'kritieke findings', criticalDelta, worse, better);
+    _addDeltaFact(
+      facts,
+      OpenKatTrendMetric.criticalFindings,
+      criticalDelta,
+      worse,
+      better,
+    );
 
     final highDelta =
         current.severityCounts['high']! - previous.severityCounts['high']!;
-    _addDeltaLine(lines, 'hoge findings', highDelta, worse, better);
+    _addDeltaFact(
+      facts,
+      OpenKatTrendMetric.highFindings,
+      highDelta,
+      worse,
+      better,
+    );
 
     final mediumDelta =
         current.severityCounts['medium']! - previous.severityCounts['medium']!;
-    _addDeltaLine(lines, 'medium findings', mediumDelta, worse, better);
+    _addDeltaFact(
+      facts,
+      OpenKatTrendMetric.mediumFindings,
+      mediumDelta,
+      worse,
+      better,
+    );
 
     final affectedDelta = current.affectedSystems - previous.affectedSystems;
-    _addDeltaLine(lines, 'getroffen systemen', affectedDelta, worse, better);
+    _addDeltaFact(
+      facts,
+      OpenKatTrendMetric.affectedSystems,
+      affectedDelta,
+      worse,
+      better,
+    );
 
-    final controlChanges = <String>[];
+    final controlChanges = <OpenKatTrendFact>[];
     for (final key in {...current.controls.keys, ...previous.controls.keys}) {
       final c = current.controls[key]?.ratio;
       final p = previous.controls[key]?.ratio;
       if (c != null && p != null && (c - p).abs() > 0.01) {
-        final direction = c > p ? 'verbeterd' : 'verslechterd';
         controlChanges.add(
-          '$key-dekking $direction van ${_pct(p)} naar ${_pct(c)}',
+          OpenKatTrendFact.controlCoverage(
+            controlId: key,
+            previousRatio: p,
+            currentRatio: c,
+          ),
         );
       }
     }
-    if (controlChanges.isNotEmpty && lines.length < 3) {
-      lines.add(controlChanges.first);
+    if (controlChanges.isNotEmpty && facts.length < 3) {
+      facts.add(controlChanges.first);
     }
 
-    String label;
+    OpenKatTrendDirection direction;
     if (worse.isEmpty && better.isNotEmpty) {
-      label = 'Beter';
+      direction = OpenKatTrendDirection.improved;
     } else if (better.isEmpty && worse.isNotEmpty) {
-      label = 'Slechter';
+      direction = OpenKatTrendDirection.worsened;
     } else {
-      label = 'Gemengd';
+      direction = OpenKatTrendDirection.mixed;
     }
 
-    return TrendConclusion(label: label, lines: lines.take(3).toList());
+    return TrendConclusion(direction: direction, facts: facts.take(3).toList());
   }
 
   /// Alle issues gesorteerd; [limit] null betekent álles — de dia begrenst
@@ -395,9 +422,9 @@ class OpenKatAggregator {
 
   // ── Internals ──────────────────────────────────────────────────────────────
 
-  void _addDeltaLine(
-    List<String> lines,
-    String label,
+  void _addDeltaFact(
+    List<OpenKatTrendFact> facts,
+    OpenKatTrendMetric metric,
     int delta,
     List<bool> worse,
     List<bool> better,
@@ -405,14 +432,11 @@ class OpenKatAggregator {
     if (delta == 0) return;
     if (delta > 0) {
       worse.add(true);
-      lines.add('$delta meer $label');
     } else {
       better.add(true);
-      lines.add('${-delta} minder $label');
     }
+    facts.add(OpenKatTrendFact.delta(metric: metric, delta: delta));
   }
-
-  String _pct(double value) => '${(value * 100).round()}%';
 
   bool _isIpv4(String? value) =>
       value != null &&
@@ -582,12 +606,85 @@ class PortfolioAggregate {
   });
 }
 
-class TrendConclusion {
-  final String label;
-  final List<String> lines;
+enum OpenKatTrendDirection { firstMeasurement, improved, worsened, mixed }
 
-  const TrendConclusion({required this.label, required this.lines});
+enum OpenKatTrendMetric {
+  criticalFindings,
+  highFindings,
+  mediumFindings,
+  affectedSystems,
+  controlCoverage,
 }
+
+/// Eén getypept trendfeit; lokalisatie gebeurt pas in de rapportcomposer.
+class OpenKatTrendFact {
+  final OpenKatTrendMetric metric;
+  final int? delta;
+  final String? controlId;
+  final double? previousRatio;
+  final double? currentRatio;
+
+  const OpenKatTrendFact.delta({required this.metric, required int this.delta})
+    : controlId = null,
+      previousRatio = null,
+      currentRatio = null,
+      assert(metric != OpenKatTrendMetric.controlCoverage);
+
+  const OpenKatTrendFact.controlCoverage({
+    required String this.controlId,
+    required double this.previousRatio,
+    required double this.currentRatio,
+  }) : metric = OpenKatTrendMetric.controlCoverage,
+       delta = null;
+}
+
+class TrendConclusion {
+  final OpenKatTrendDirection direction;
+  final List<OpenKatTrendFact> facts;
+
+  const TrendConclusion({required this.direction, required this.facts});
+
+  /// Nederlandse compatibiliteitsprojectie voor bestaande aanroepers.
+  String get label => switch (direction) {
+    OpenKatTrendDirection.firstMeasurement => 'Eerste meting',
+    OpenKatTrendDirection.improved => 'Beter',
+    OpenKatTrendDirection.worsened => 'Slechter',
+    OpenKatTrendDirection.mixed => 'Gemengd',
+  };
+
+  /// Nederlandse compatibiliteitsprojectie; nieuwe UI gebruikt [facts].
+  List<String> get lines {
+    if (direction == OpenKatTrendDirection.firstMeasurement) {
+      return const ['Eerste meting; nog geen trend beschikbaar'];
+    }
+    return [for (final fact in facts) _dutchTrendFact(fact)];
+  }
+}
+
+String _dutchTrendFact(OpenKatTrendFact fact) {
+  if (fact.metric == OpenKatTrendMetric.controlCoverage) {
+    final direction = fact.currentRatio! > fact.previousRatio!
+        ? 'verbeterd'
+        : 'verslechterd';
+    return '${fact.controlId}-dekking $direction van '
+        '${_trendPercentage(fact.previousRatio!)} naar '
+        '${_trendPercentage(fact.currentRatio!)}';
+  }
+  final count = fact.delta!.abs();
+  final direction = fact.delta! > 0 ? 'meer' : 'minder';
+  final label = switch (fact.metric) {
+    OpenKatTrendMetric.criticalFindings => 'kritieke findings',
+    OpenKatTrendMetric.highFindings => 'hoge findings',
+    OpenKatTrendMetric.mediumFindings => 'medium findings',
+    OpenKatTrendMetric.affectedSystems => 'getroffen systemen',
+    OpenKatTrendMetric.controlCoverage => throw StateError(
+      'control coverage is handled above',
+    ),
+  };
+  return '$count $direction $label';
+}
+
+String _trendPercentage(double value) => '${(value * 100).round()}%';
 
 class OpenKatIssue {
   final String findingTypeId;

@@ -101,6 +101,7 @@ class OpenKatNormalizer {
       systems: systems,
       findings: _deduplicateFindings(findings),
       controls: controls,
+      sourceFeatures: adapter.sourceFeatures,
     );
   }
 
@@ -127,6 +128,7 @@ class OpenKatNormalizer {
             'ipv6',
           ]),
           oois: [ooi],
+          stableIdentity: ooi.isNotEmpty,
         );
       }
     }
@@ -183,6 +185,7 @@ class OpenKatNormalizer {
         'mitigation',
       ]);
       final impact = _stringField(object, ['impact', 'description', 'summary']);
+      final cveIds = _explicitCveIds(object);
 
       out.add(
         OpenKatFinding(
@@ -197,6 +200,8 @@ class OpenKatNormalizer {
           recommendation: recommendation,
           impact: impact,
           sourceReports: [sourceFile],
+          stableIdentity: primaryKey != null && primaryKey.isNotEmpty,
+          cveIds: cveIds,
         ),
       );
     }
@@ -230,10 +235,26 @@ class OpenKatNormalizer {
             ...existing.sourceReports,
             ...finding.sourceReports,
           }.toList(),
+          cveIds: {...existing.cveIds, ...finding.cveIds}.toList()..sort(),
         );
       }
     }
     return byId.values.toList();
+  }
+
+  List<String> _explicitCveIds(Map<String, dynamic> object) {
+    final raw = object['cve_ids'] ?? object['cves'];
+    if (raw is! List) return const [];
+    final ids = <String>{};
+    for (final value in raw) {
+      if (value is! String) continue;
+      final canonical = value.trim().toUpperCase();
+      if (RegExp(r'^CVE-[0-9]{4}-[0-9]{4,}$').hasMatch(canonical)) {
+        ids.add(canonical);
+      }
+    }
+    final sorted = ids.toList()..sort();
+    return sorted;
   }
 
   // ── Helpers ────────────────────────────────────────────────────────────────
