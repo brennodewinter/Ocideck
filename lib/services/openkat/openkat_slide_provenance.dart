@@ -1,3 +1,4 @@
+import '../../models/deck.dart';
 import '../../models/slide.dart';
 import '../../utils/content_hash.dart';
 import '../markdown_service.dart';

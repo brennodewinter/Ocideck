@@ -10,6 +10,17 @@ import 'settings.dart';
 import '../services/miauw_codec.dart';
 import '../services/privacy/dismissal_codec.dart';
 
+/// Naam van de OpenKAT-herkomstmarkering; de waarde erachter is een SHA-512.
+const openKatGeneratedOriginMarker = 'ocideck_openkat_generated_origin';
+
+/// Verwijdert OpenKAT-provenance wanneer een gebruiker een dia dupliceert.
+String withoutOpenKatGeneratedOrigin(String notes) => notes
+    .split('\n')
+    .where(
+      (line) => !line.trim().startsWith('<!-- $openKatGeneratedOriginMarker:'),
+    )
+    .join('\n');
+
 /// Traffic Light Protocol-classificatie (FIRST TLP 2.0) van een presentatie.
 ///
 /// De volgorde loopt van minst naar meest beperkend; [TlpLevel.index] is dus

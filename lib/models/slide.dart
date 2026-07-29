@@ -23,16 +23,6 @@ import 'timeline.dart';
 
 const _uuid = Uuid();
 
-/// Naam van de OpenKAT-herkomstmarkering; de waarde erachter is een SHA-512.
-const openKatGeneratedOriginMarker = 'ocideck_openkat_generated_origin';
-
-String _withoutOpenKatGeneratedOrigin(String notes) => notes
-    .split('\n')
-    .where(
-      (line) => !line.trim().startsWith('<!-- $openKatGeneratedOriginMarker:'),
-    )
-    .join('\n');
-
 enum SlideType {
   title,
   section,
@@ -828,7 +818,7 @@ class Slide {
       customMarkdown: src.customMarkdown,
       codeLanguage: src.codeLanguage,
       cssClass: src.cssClass,
-      notes: _withoutOpenKatGeneratedOrigin(src.notes),
+      notes: withoutOpenKatGeneratedOrigin(src.notes),
       advanceDuration: src.advanceDuration,
       imageSize: src.imageSize,
       titleImageOverlay: src.titleImageOverlay,
