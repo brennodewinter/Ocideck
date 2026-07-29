@@ -113,6 +113,13 @@ const Map<String, Surface> _registry = {
     'vertrekt hier niets naar een ontvanger; wat wél de deur uit gaat loopt '
     'via de export-oppervlakken hierboven, mét projectie.',
   ),
+  'lib/services/openkat/openkat_import_service.dart::_writeDeck': Surface(
+    SurfaceKind.source,
+    'Schrijft het gegenereerde deck als .md naar processed-data/ (volledig) '
+    'en presentations/ (ingekort) op de eigen machine. Beide zijn '
+    'bronbestanden voor de gebruiker; wat de deur uit gaat loopt via de '
+    'export-oppervlakken, mét projectie.',
+  ),
   'lib/services/file/file_service_package.dart::downloadPackage': Surface(
     SurfaceKind.source,
     'Dezelfde bytes als exportPackage, via de bestandskiezer in plaats van een '
