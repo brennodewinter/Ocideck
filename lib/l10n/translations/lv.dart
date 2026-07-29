@@ -1770,6 +1770,135 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bord': 'Tabula',
+  'Projectcharter': 'Projekta harta',
+  'CTQ-boom': 'CTQ koks',
+  'Visgraat (Ishikawa)': 'Zivs kauls (Išikava)',
+  'Proceskaart': 'Procesa karte',
+  'Impact / Inspanning': 'Ietekme / Pūliņi',
+  'Vier lijsten — één per kwadrant.': 'Četri saraksti — viens uz kvadrantu.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Viena lapa, septiņi lauki — īsi un salasāmi.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D tiek aprēķināts — neievadiet manuāli.',
+  'Eén R per rij.': 'Viens R uz rindu.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Aizpildiet no labās uz kreiso — sāciet ar klientu.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Kolonnas ir statusi; kartītes ir uzdevumi.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Tvērums un panākumu kritēriji vispirms — kā vēlāk.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'No klienta vajadzības (Y) uz mērāmiem CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Pieci līmeņi dziļi — beigt ar X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Seši M kā kauli — cēloņi zem tiem.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Soļi kā virsraksts :: veids :: atribūti.',
+  'Zet de rol in het lane=… kenmerk.': 'Lieciet lomu lane=… atribūtā.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT uz soli — kopsummas tiek aprēķinātas, neuzglabātas.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Saraksts uz kvadrantu — nezīmējiet koordinātes.',
+  'Intern': 'Iekšējs',
+  'Negatief': 'Negatīvs',
+  'Positief': 'Pozitīvs',
+  'Weinige inspanning': 'Zemi pūliņi',
+  'Veel inspanning': 'Augsti pūliņi',
+  'Lage impact': 'Zema ietekme',
+  'Hoge impact': 'Augsta ietekme',
+  'Sterktes': 'Stiprās puses',
+  'Zwaktes': 'Vājās puses',
+  'Kansen': 'Iespējas',
+  'Bedreigingen': 'Draudi',
+  'Achtergrond': 'Fons',
+  'Huidige situatie': 'Pašreizējā situācija',
+  'Oorzaakanalyse': 'Cēloņu analīze',
+  'Tegenmaatregelen': 'Pret pasākumi',
+  'Opvolging': 'Sekošana',
+  'Bezig': 'Notiek',
+  'Probleem': 'Problēma',
+  'Succescriteria': 'Panākumu kritēriji',
+  'Snelle winst': 'Ātri panākumi',
+  'Grote projecten': 'Lielie projekti',
+  'Opvullers': 'Aizpildītāji',
+  'Ondankbaar': 'Nepateicīgs',
+  'Processtap': 'Procesa solis',
+  'Faalwijze': 'Bojājuma veids',
+  'Oorzaak': 'Cēlonis',
+  'Beheersing': 'Kontrole',
+  'Activiteit': 'Aktivitāte',
+  'Leverancier': 'Piegādātājs',
+  'Klant': 'Klients',
+  'Plan': 'Plāns',
+  'Team': 'Komanda',
+  'Input': 'Ievade',
+  'Output': 'Izeja',
+  'Effect': 'Efekts',
+  'Businesscase / investeringsvoorstel':
+      'Biznesa pamatojums / investīciju priekšlikums',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Pamatojums, iespējas ar izmaksām un ieguvumiem, riski un pieprasītais lēmums.',
+  'Begroting / budgetpresentatie': 'Budžeta prezentācija',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Pieņēmumi, posteņi ar salīdzinājumu, izvēles iespējas, riski un lēmumu punkti.',
+  'Besluitvormend overleg': 'Lēmumu pieņemšanas sanāksme',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Darba kārtība, skaidrojums pie katra punkta, lēmumu saraksts un darbības ar atbildīgo.',
+  'Ledenvergadering (ALV)': 'Biedru kopsapulce',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Darba kārtība, gada pārskats, revīzijas komisija, budžets un balsojumi biedrībai vai dzīvokļu īpašnieku biedrībai.',
+  'Ouderavond / informatieavond': 'Vecāku sapulce / informatīvs vakars',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Gada programma, pieeja, praktiskas vienošanās un kā vecāki var palīdzēt.',
+  'Familiegesprek zorg en mantelzorg':
+      'Ģimenes saruna par aprūpi un tuvinieku aprūpi',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scenāriji, vēlmes, pienākumu sadale un vienošanās smagai ģimenes sarunai.',
+  'Raads- / collegevoorstel': 'Priekšlikums domei / valdei',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Pamatojums, lēmumu punkti, argumenti un iebildes, finansējums un turpmākie soļi.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Iedzīvotāju vakars / līdzdalības sanāksme',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Kas ir izlemts un kas atvērts, skaitļi, iespējas reaģēt un turpmākie soļi.',
+  'Sprint review / demo': 'Sprinta pārskats / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Sprinta mērķis, paveiktais darbs, demo, metrikas un skats uz priekšu.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Ugunsdzēsēju instruktāža (izsaukums un mācības)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objekts, piekļuve, bīstamības, kvadranti, ūdens ieguve un pienākumu sadale.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Atzinuma pieprasījums darbinieku padomei',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Paredzētais lēmums, motīvi, sekas personālam un atzinuma procedūra.',
+  'Stagepresentatie': 'Prakses prezentācija',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Uzņēmums, uzdevums, pieeja, rezultāts, mācību mērķi un refleksija.',
+  'Debriefing / after-action review': 'Debrīfings / analīze pēc darbības',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Kas bija plānots, kas notika, kāpēc — un kādas vienošanās mēs pieņemam.',
+  'Threat modeling-sessie': 'Draudu modelēšanas sesija',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Tvērums, datu plūsmas, uzticības robežas, draudi pa STRIDE kategorijām un pasākumi.',
+  'Casuïstiekbespreking sociaal domein': 'Gadījumu izskatīšana sociālajā jomā',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonimizēts gadījums: dzīves jomas, drošība, tiesiskais ietvars un koordinācija.',
+  'Gesprek voorbereiden': 'Sagatavot sarunu',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Mērķis, otra puse, uzbūve, jautājumi un vienošanās katrai sarunai, ko vēlies labi sagatavot.',
+  'Cruciaal gesprek voorbereiden': 'Sagatavot izšķirošu sarunu',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Augstas likmes un spēcīgas emocijas, saskaņā ar izšķirošo sarunu pieeju.',
+  'Vluchtdebriefing': 'Lidojuma debrīfings',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Pašnovērtējums, gaita pa fāzēm, TEM atskats un mācības pēc lidojuma vai nodarbības.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Pasažieru instruktāža (vispārējā aviācija)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Drošības jostas, durvis, avārijas procedūras un vienošanās uz klāja pirms manevrēšanas pa zemi.',
   'Onlinevergaderingen': 'Tiešsaistes sapulces',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Dalība cita pakalpojumu sniedzēja sapulcē, kopīgojot savu prezentāciju. Pēc noklusējuma izslēgts; ar izslēgtu moduli OciDeck nesazinās ne ar vienu sapulču pakalpojumu. Neviens pakalpojumu sniedzējs vēl nav pievienots, tāpēc pievienoties vēl nevar — tas liek pamatu.',

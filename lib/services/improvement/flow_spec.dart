@@ -2,6 +2,7 @@
 // Template *data* lives in assets/improvement/templates/ (see catalog).
 library;
 
+import '../../l10n/app_localizations.dart';
 import 'improvement_template_catalog.dart';
 
 enum FlowLayout { flow, swimlane, vsm }
@@ -52,9 +53,8 @@ class FlowTemplate {
   final String guidanceEn;
   final List<String> starterBullets;
 
-  String label(String lang) => lang.startsWith('nl') ? labelNl : labelEn;
-  String guidance(String lang) =>
-      lang.startsWith('nl') ? guidanceNl : guidanceEn;
+  String label(String lang) => AppLocalizations.sourceFor(lang, labelNl);
+  String guidance(String lang) => AppLocalizations.sourceFor(lang, guidanceNl);
 }
 
 /// One parsed flow step. Durations are minutes (derived at parse time).

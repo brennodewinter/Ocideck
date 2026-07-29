@@ -13,6 +13,20 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'SWOT',
+  'A3',
+  'FMEA',
+  'RACI',
+  'SIPOC',
+  '5× Why',
+  'S',
+  'O',
+  'D',
+  'R',
+  'A',
+  'C',
+  'I',
+  'Backlog',
   'Baseline',
   'Part × Operator interaction pooled into repeatability',
   'Part × Operator interaction kept separate',
@@ -177,6 +191,20 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'SWOT',
+  'A3',
+  'FMEA',
+  'RACI',
+  'SIPOC',
+  '5× Why',
+  'S',
+  'O',
+  'D',
+  'R',
+  'A',
+  'C',
+  'I',
+  'Backlog',
   'Baseline',
   'Probability plot',
   'Gage R&R (ANOVA)',

@@ -1778,6 +1778,134 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Bord': 'Tabuľa',
+  'Projectcharter': 'Projektová charta',
+  'CTQ-boom': 'Strom CTQ',
+  'Visgraat (Ishikawa)': 'Išikawov diagram',
+  'Proceskaart': 'Mapa procesu',
+  'Impact / Inspanning': 'Dopad / Úsilie',
+  'Vier lijsten — één per kwadrant.': 'Štyri zoznamy — jeden na kvadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Jedna strana, sedem polí — krátko a čitateľne.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D sa počíta — nezadávajte ručne.',
+  'Eén R per rij.': 'Jedno R na riadok.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Vyplňte sprava doľava — začnite zákazníkom.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Stĺpce sú stavy; karty sú úlohy.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope a kritériá úspechu najprv — ako neskôr.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Od potreby zákazníka (Y) k merateľným CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Päť úrovní hlboko — ukonči X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Šesť M ako kosti — príčiny pod nimi.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Kroky ako názov :: typ :: atribúty.',
+  'Zet de rol in het lane=… kenmerk.': 'Vložte rolu do atribútu lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT na krok — súčty sa počítajú, neukladajú.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Zoznam na kvadrant — nekreslite súradnice.',
+  'Intern': 'Interný',
+  'Negatief': 'Negatívny',
+  'Positief': 'Pozitívny',
+  'Weinige inspanning': 'Nízke úsilie',
+  'Veel inspanning': 'Vysoké úsilie',
+  'Lage impact': 'Nízky dopad',
+  'Hoge impact': 'Vysoký dopad',
+  'Sterktes': 'Silné stránky',
+  'Zwaktes': 'Slabé stránky',
+  'Kansen': 'Príležitosti',
+  'Bedreigingen': 'Hrozby',
+  'Achtergrond': 'Pozadie',
+  'Huidige situatie': 'Súčasná situácia',
+  'Oorzaakanalyse': 'Analýza príčin',
+  'Tegenmaatregelen': 'Protiopatrenia',
+  'Opvolging': 'Sledovanie',
+  'Bezig': 'Prebieha',
+  'Probleem': 'Problém',
+  'Succescriteria': 'Kritériá úspechu',
+  'Snelle winst': 'Rýchle výhry',
+  'Grote projecten': 'Veľké projekty',
+  'Opvullers': 'Výplne',
+  'Ondankbaar': 'Nevdäčné',
+  'Processtap': 'Krok procesu',
+  'Faalwijze': 'Spôsob poruchy',
+  'Oorzaak': 'Príčina',
+  'Beheersing': 'Kontrola',
+  'Activiteit': 'Aktivita',
+  'Leverancier': 'Dodávateľ',
+  'Klant': 'Zákazník',
+  'Plan': 'Plán',
+  'Team': 'Tím',
+  'Input': 'Vstup',
+  'Output': 'Výstup',
+  'Effect': 'Efekt',
+  'Businesscase / investeringsvoorstel': 'Business case / investičný návrh',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Dôvod, možnosti s nákladmi a prínosmi, riziká a požadované rozhodnutie.',
+  'Begroting / budgetpresentatie': 'Prezentácia rozpočtu',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Východiská, položky s porovnaním, priestor na voľbu, riziká a rozhodovacie body.',
+  'Besluitvormend overleg': 'Rozhodovacia porada',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Program, vysvetlenie ku každému bodu, zoznam rozhodnutí a úlohy s vlastníkom.',
+  'Ledenvergadering (ALV)': 'Členská schôdza (valné zhromaždenie)',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Program, výročná správa, revízna komisia, rozpočet a hlasovania pre spolok alebo spoločenstvo vlastníkov.',
+  'Ouderavond / informatieavond': 'Rodičovské združenie / informačný večer',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Ročný program, prístup, praktické dohody a ako môžu rodičia pomôcť.',
+  'Familiegesprek zorg en mantelzorg':
+      'Rodinný rozhovor o starostlivosti a opatrovaní',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scenáre, priania, rozdelenie úloh a dohody pre ťažký rodinný rozhovor.',
+  'Raads- / collegevoorstel': 'Návrh pre zastupiteľstvo / radu',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Dôvod, rozhodovacie body, argumenty aj výhrady, finančné krytie a ďalší postup.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Stretnutie s obyvateľmi / participačné stretnutie',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Čo je dané a čo otvorené, čísla, možnosti reakcie a ďalší postup.',
+  'Sprint review / demo': 'Sprint review / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Cieľ šprintu, dodaná práca, demo, metriky a výhľad.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Hasičský brífing (zásah a cvičenie)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objekt, prístup, nebezpečenstvá, kvadranty, zásobovanie vodou a rozdelenie úloh.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Žiadosť o vyjadrenie zamestnaneckej rady',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Zamýšľané rozhodnutie, dôvody, personálne dôsledky a proces vyjadrenia.',
+  'Stagepresentatie': 'Prezentácia zo stáže',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Firma, zadanie, prístup, výsledok, vzdelávacie ciele a reflexia.',
+  'Debriefing / after-action review': 'Debriefing / rozbor po akcii',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Čo bolo naplánované, čo sa stalo, prečo — a aké dohody uzatvárame.',
+  'Threat modeling-sessie': 'Modelovanie hrozieb (threat modeling)',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Rozsah, dátové toky, hranice dôvery, hrozby podľa kategórií STRIDE a opatrenia.',
+  'Casuïstiekbespreking sociaal domein': 'Prípadová porada v sociálnej oblasti',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonymizovaný prípad: životné oblasti, bezpečnosť, právny rámec a koordinácia.',
+  'Gesprek voorbereiden': 'Príprava rozhovoru',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Cieľ, náprotivok, štruktúra, otázky a dohody pre každý rozhovor, ktorý chcete dobre pripraviť.',
+  'Cruciaal gesprek voorbereiden': 'Príprava kľúčového rozhovoru',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Vysoké stávky a silné emócie, podľa metódy kľúčových rozhovorov.',
+  'Vluchtdebriefing': 'Rozbor po lete',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Sebahodnotenie, priebeh po fázach, spätný pohľad TEM a poučenia po lete alebo lekcii.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Brífing cestujúcich (všeobecné letectvo)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Pásy, dvere, núdzové postupy a dohody na palube pred rolovaním.',
   'Onlinevergaderingen': 'Online schôdzky',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Účasť na schôdzke iného poskytovateľa s vašou prezentáciou ako tým, čo zdieľate. Predvolene vypnuté; s vypnutým modulom OciDeck nekontaktuje žiadnu službu schôdzok. Zatiaľ nie je pripojený žiadny poskytovateľ, takže sa zatiaľ nedá pripojiť — toto kladie základ.',

@@ -3,6 +3,7 @@
 // Template *data* lives in assets/improvement/templates/ (see catalog).
 library;
 
+import '../../l10n/app_localizations.dart';
 import 'improvement_template_catalog.dart';
 
 /// How a canvas lays its regions on the slide.
@@ -29,7 +30,7 @@ class CanvasRegion {
   final String labelNl;
   final String labelEn;
 
-  String label(String lang) => lang.startsWith('nl') ? labelNl : labelEn;
+  String label(String lang) => AppLocalizations.sourceFor(lang, labelNl);
 }
 
 /// A filled region: the heading that was on disk plus its body text.
@@ -103,16 +104,13 @@ class CanvasTemplate {
   final String axisYLowEn;
   final String axisYHighEn;
 
-  String label(String lang) => lang.startsWith('nl') ? labelNl : labelEn;
-  String guidance(String lang) =>
-      lang.startsWith('nl') ? guidanceNl : guidanceEn;
+  String label(String lang) => AppLocalizations.sourceFor(lang, labelNl);
+  String guidance(String lang) => AppLocalizations.sourceFor(lang, guidanceNl);
 
-  String axisXLow(String lang) =>
-      lang.startsWith('nl') ? axisXLowNl : axisXLowEn;
+  String axisXLow(String lang) => AppLocalizations.sourceFor(lang, axisXLowNl);
   String axisXHigh(String lang) =>
-      lang.startsWith('nl') ? axisXHighNl : axisXHighEn;
-  String axisYLow(String lang) =>
-      lang.startsWith('nl') ? axisYLowNl : axisYLowEn;
+      AppLocalizations.sourceFor(lang, axisXHighNl);
+  String axisYLow(String lang) => AppLocalizations.sourceFor(lang, axisYLowNl);
   String axisYHigh(String lang) =>
-      lang.startsWith('nl') ? axisYHighNl : axisYHighEn;
+      AppLocalizations.sourceFor(lang, axisYHighNl);
 }

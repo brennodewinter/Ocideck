@@ -1800,6 +1800,135 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Bord': 'Quadro',
+  'Projectcharter': 'Carta do projeto',
+  'CTQ-boom': 'Árvore CTQ',
+  'Visgraat (Ishikawa)': 'Diagrama de espinha de peixe (Ishikawa)',
+  'Proceskaart': 'Mapa de processo',
+  'Impact / Inspanning': 'Impacto / Esforço',
+  'Vier lijsten — één per kwadrant.': 'Quatro listas — uma por quadrante.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Uma página, sete caixas — mantenha cada uma curta e legível.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D é calculado — não o digite você mesmo.',
+  'Eén R per rij.': 'Um R por linha.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Preencha da direita para a esquerda — comece pelo cliente.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'As colunas são estados; os cartões são tarefas.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Escopo e critérios de sucesso primeiro — o como vem depois.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Da necessidade do cliente (Y) para CTQ medíveis.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Cinco níveis de profundidade — termine com um X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Seis M como ossos — causas abaixo.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Passos como título :: tipo :: atributos.',
+  'Zet de rol in het lane=… kenmerk.': 'Coloque o papel no atributo lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT por passo — os totais são calculados, não armazenados.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Uma lista por quadrante — não plote coordenadas.',
+  'Intern': 'Interno',
+  'Negatief': 'Negativo',
+  'Positief': 'Positivo',
+  'Weinige inspanning': 'Esforço baixo',
+  'Veel inspanning': 'Esforço alto',
+  'Lage impact': 'Impacto baixo',
+  'Hoge impact': 'Impacto alto',
+  'Sterktes': 'Forças',
+  'Zwaktes': 'Fraquezas',
+  'Kansen': 'Oportunidades',
+  'Bedreigingen': 'Ameaças',
+  'Achtergrond': 'Contexto',
+  'Huidige situatie': 'Situação atual',
+  'Oorzaakanalyse': 'Análise de causa raiz',
+  'Tegenmaatregelen': 'Contramedidas',
+  'Opvolging': 'Acompanhamento',
+  'Bezig': 'Em andamento',
+  'Probleem': 'Problema',
+  'Succescriteria': 'Critérios de sucesso',
+  'Snelle winst': 'Vitórias rápidas',
+  'Grote projecten': 'Projetos importantes',
+  'Opvullers': 'Preenchedores',
+  'Ondankbaar': 'Ingrato',
+  'Processtap': 'Etapa do processo',
+  'Faalwijze': 'Modo de falha',
+  'Oorzaak': 'Causa',
+  'Beheersing': 'Controle',
+  'Activiteit': 'Atividade',
+  'Leverancier': 'Fornecedor',
+  'Klant': 'Cliente',
+  'Plan': 'Plano',
+  'Team': 'Equipe',
+  'Input': 'Entrada',
+  'Output': 'Saída',
+  'Effect': 'Efeito',
+  'Businesscase / investeringsvoorstel':
+      'Caso de negócio / proposta de investimento',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Motivo, opções com custos e benefícios, riscos e a decisão solicitada.',
+  'Begroting / budgetpresentatie': 'Apresentação do orçamento',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Pressupostos, rubricas com comparação, margem de escolha, riscos e pontos de decisão.',
+  'Besluitvormend overleg': 'Reunião de decisão',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Ordem de trabalhos, explicação por ponto, lista de decisões e ações com responsável.',
+  'Ledenvergadering (ALV)': 'Assembleia geral (AG)',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Ordem de trabalhos, relatório anual, conselho fiscal, orçamento e votações para associação ou condomínio.',
+  'Ouderavond / informatieavond': 'Reunião de pais / sessão informativa',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Programa anual, abordagem, acordos práticos e como os pais podem ajudar.',
+  'Familiegesprek zorg en mantelzorg':
+      'Conversa em família sobre cuidados e cuidadores',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Cenários, desejos, divisão de tarefas e acordos para uma conversa familiar difícil.',
+  'Raads- / collegevoorstel': 'Proposta à assembleia / ao executivo',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Motivo, pontos de decisão, argumentos e ressalvas, cobertura financeira e próximos passos.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Reunião de moradores / sessão participativa',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'O que está decidido e o que está em aberto, números, formas de reagir e próximos passos.',
+  'Sprint review / demo': 'Revisão de sprint / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Objetivo do sprint, trabalho entregue, demo, métricas e perspetivas.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Briefing dos bombeiros (intervenção e exercício)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Edifício, acessos, perigos, quadrantes, abastecimento de água e divisão de tarefas.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Pedido de parecer à comissão de trabalhadores',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Decisão prevista, motivos, consequências para o pessoal e o processo de parecer.',
+  'Stagepresentatie': 'Apresentação de estágio',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Empresa, missão, abordagem, resultado, objetivos de aprendizagem e reflexão.',
+  'Debriefing / after-action review': 'Debriefing / revisão pós-ação',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'O que estava planeado, o que aconteceu, porquê — e que acordos fazemos.',
+  'Threat modeling-sessie': 'Sessão de threat modeling',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Âmbito, fluxos de dados, fronteiras de confiança, ameaças por categoria STRIDE e medidas.',
+  'Casuïstiekbespreking sociaal domein': 'Discussão de casos na área social',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Caso anonimizado: domínios de vida, segurança, quadro legal e coordenação.',
+  'Gesprek voorbereiden': 'Preparar uma conversa',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Objetivo, o outro, estrutura, perguntas e acordos para qualquer conversa que queira preparar bem.',
+  'Cruciaal gesprek voorbereiden': 'Preparar uma conversa crucial',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Muito em jogo e emoções fortes, segundo a abordagem das conversas cruciais.',
+  'Vluchtdebriefing': 'Debriefing de voo',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Autoavaliação, decorrer por fase, retrospetiva TEM e pontos de aprendizagem após um voo ou uma lição.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Briefing de passageiros (aviação geral)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Cintos, portas, procedimentos de emergência e acordos a bordo antes da rolagem.',
   'Onlinevergaderingen': 'Reuniões online',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Participar numa reunião de outro fornecedor, com a sua apresentação como aquilo que partilha. Desativado por predefinição; com o módulo desativado, o OciDeck não contacta nenhum serviço de reuniões. Ainda não há nenhum fornecedor ligado, por isso ainda não é possível participar — isto lança as bases.',

@@ -1788,6 +1788,134 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bord': 'Дошка',
+  'Projectcharter': 'Статут проєкту',
+  'CTQ-boom': 'Дерево CTQ',
+  'Visgraat (Ishikawa)': 'Риб\'яча кістка (Ішікава)',
+  'Proceskaart': 'Карта процесу',
+  'Impact / Inspanning': 'Вплив / Зусилля',
+  'Vier lijsten — één per kwadrant.': 'Чотири списки — один на квадрант.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Одна сторінка, сім полів — коротко і читабельно.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D обчислюється — не вводьте вручну.',
+  'Eén R per rij.': 'Один R на рядок.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Заповнюйте справа наліво — почніть з клієнта.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Стовпці — це статуси; картки — це завдання.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Обсяг і критерії успіху спочатку — як пізніше.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Від потреби клієнта (Y) до вимірюваних CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'P\'ять рівнів углиб — закінчи X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Шість M як кістки — причини під ними.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Кроки як заголовок :: тип :: атрибути.',
+  'Zet de rol in het lane=… kenmerk.': 'Вкажіть роль у атрибуті lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT на крок — підсумки обчислюються, не зберігаються.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Список на квадрант — не малюйте координати.',
+  'Intern': 'Внутрішній',
+  'Negatief': 'Негативний',
+  'Positief': 'Позитивний',
+  'Weinige inspanning': 'Низькі зусилля',
+  'Veel inspanning': 'Високі зусилля',
+  'Lage impact': 'Низький вплив',
+  'Hoge impact': 'Високий вплив',
+  'Sterktes': 'Сильні сторони',
+  'Zwaktes': 'Слабкі сторони',
+  'Kansen': 'Можливості',
+  'Bedreigingen': 'Загрози',
+  'Achtergrond': 'Передумови',
+  'Huidige situatie': 'Поточна ситуація',
+  'Oorzaakanalyse': 'Аналіз першопричин',
+  'Tegenmaatregelen': 'Контрзаходи',
+  'Opvolging': 'Моніторинг',
+  'Bezig': 'В процесі',
+  'Probleem': 'Проблема',
+  'Succescriteria': 'Критерії успіху',
+  'Snelle winst': 'Швидкі перемоги',
+  'Grote projecten': 'Великі проєкти',
+  'Opvullers': 'Заповнювачі',
+  'Ondankbaar': 'Невдячні',
+  'Processtap': 'Крок процесу',
+  'Faalwijze': 'Режим відмови',
+  'Oorzaak': 'Причина',
+  'Beheersing': 'Контроль',
+  'Activiteit': 'Діяльність',
+  'Leverancier': 'Постачальник',
+  'Klant': 'Клієнт',
+  'Plan': 'План',
+  'Team': 'Команда',
+  'Input': 'Вхід',
+  'Output': 'Вихід',
+  'Effect': 'Ефект',
+  'Businesscase / investeringsvoorstel':
+      'Бізнес-кейс / інвестиційна пропозиція',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Підстава, варіанти з витратами й вигодами, ризики та рішення, що запитується.',
+  'Begroting / budgetpresentatie': 'Презентація бюджету',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Вихідні положення, статті з порівнянням, простір для вибору, ризики та точки рішень.',
+  'Besluitvormend overleg': 'Нарада для ухвалення рішень',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Порядок денний, пояснення до кожного пункту, перелік рішень і дії з відповідальними.',
+  'Ledenvergadering (ALV)': 'Загальні збори членів',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Порядок денний, річний звіт, ревізійна комісія, бюджет і голосування для товариства чи ОСББ.',
+  'Ouderavond / informatieavond': 'Батьківські збори / інформаційний вечір',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Річна програма, підхід, практичні домовленості та як батьки можуть допомогти.',
+  'Familiegesprek zorg en mantelzorg':
+      'Сімейна розмова про догляд і піклування',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Сценарії, побажання, розподіл завдань і домовленості для важкої сімейної розмови.',
+  'Raads- / collegevoorstel': 'Пропозиція для ради / виконавчого органу',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Підстава, точки рішень, аргументи та застереження, фінансове покриття й подальші кроки.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Зустріч мешканців / партисипативна зустріч',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Що вже вирішено і що відкрито, цифри, можливості відгуку та подальші кроки.',
+  'Sprint review / demo': 'Огляд спринту / демо',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Мета спринту, виконана робота, демо, метрики та погляд уперед.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Інструктаж пожежної служби (виїзд і навчання)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Об\'єкт, під\'їзд, небезпеки, квадранти, водопостачання та розподіл завдань.',
+  'Adviesaanvraag OR / medezeggenschap': 'Запит на висновок ради працівників',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Заплановане рішення, мотиви, наслідки для персоналу та процедура надання висновку.',
+  'Stagepresentatie': 'Презентація стажування',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Компанія, завдання, підхід, результат, навчальні цілі та рефлексія.',
+  'Debriefing / after-action review': 'Дебрифінг / аналіз після дій',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Що було заплановано, що сталося, чому — і які домовленості ми ухвалюємо.',
+  'Threat modeling-sessie': 'Сесія моделювання загроз',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Обсяг, потоки даних, межі довіри, загрози за категоріями STRIDE та заходи.',
+  'Casuïstiekbespreking sociaal domein': 'Розбір випадків у соціальній сфері',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Анонімізований випадок: сфери життя, безпека, правові рамки та координація.',
+  'Gesprek voorbereiden': 'Підготувати розмову',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Мета, співрозмовник, структура, запитання й домовленості для кожної розмови, яку ви хочете добре підготувати.',
+  'Cruciaal gesprek voorbereiden': 'Підготувати ключову розмову',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Високі ставки та сильні емоції, за підходом ключових розмов.',
+  'Vluchtdebriefing': 'Дебрифінг після польоту',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Самооцінка, перебіг кожної фази, огляд TEM і висновки після польоту чи заняття.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Інструктаж пасажирів (мала авіація)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Ремені, двері, аварійні процедури та домовленості на борту перед рулінням.',
   'Onlinevergaderingen': 'Онлайн-зустрічі',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Участь у зустрічі іншого постачальника, де ви ділитеся своєю презентацією. Типово вимкнено; коли модуль вимкнено, OciDeck не звертається до жодного сервісу зустрічей. Жодного постачальника ще не підключено, тож приєднатися поки неможливо — це закладає основу.',
