@@ -200,6 +200,7 @@ void main() {
         child: OpenKatUpdateConfirmation(
           controller: controller,
           update: () async {},
+          createNew: () async {},
         ),
       ),
     );
