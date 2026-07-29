@@ -393,6 +393,10 @@ dast:
 	@echo "Failure means: ZAP or the container runtime is missing. Findings are advisory;"
 	@echo "        read them by hand. See zap/baseline.conf for what is silenced and why."
 	@command -v docker >/dev/null 2>&1 || { echo "docker not found — install a runtime (macOS: brew install colima docker && colima start)"; exit 2; }
+	@if ! docker info >/dev/null 2>&1 && command -v colima >/dev/null 2>&1; then \
+	  echo "-- container runtime not reachable, starting colima --"; \
+	  colima start; \
+	fi
 	@docker info >/dev/null 2>&1 || { echo "no container runtime reachable — start it (macOS: colima start)"; exit 2; }
 ifeq ($(strip $(DAST_URL)),)
 	$(MAKE) build-web
@@ -972,19 +976,26 @@ check-full: check check-secrets sast shellcheck licenses sbom-verify deps-check 
 # DAST is deliberately non-blocking: a ZAP warning is something to weigh and, if
 # real, file as an issue (this is exactly how #849 came to be), not something
 # that reddens the command. The blocking assurance is check-full; the DAST step
-# is a prompt to look at the served surface one more time. Without a container
-# runtime the DAST step skips itself with a clear message rather than failing the
-# release pass. Also worth doing by hand before a tag and NOT automated here:
-# `make linux-gate` (the Linux half of the suite) and a look at open security/
-# privacy issues on the tracker.
+# is a prompt to look at the served surface one more time. If colima is
+# installed but stopped, this starts it rather than making the committer
+# remember a separate step before every tag (colima start is idempotent — a
+# no-op with a warning if it is already running). Only if no runtime is
+# reachable even after that does the DAST step skip itself, with a clear
+# message rather than failing the release pass. Also worth doing by hand
+# before a tag and NOT automated here: `make linux-gate` (the Linux half of
+# the suite) and a look at open security/privacy issues on the tracker.
 DAST_LIVE_URL ?= https://ocideck.librekat.nl/
 check-release: check-full
 	@echo "== OciDeck: DAST-kwaliteitsslag vóór de tag (adviserend, ready for tagging) =="
 	@echo "Command: make dast DAST_URL=$(DAST_LIVE_URL)"
+	@if ! docker info >/dev/null 2>&1 && command -v colima >/dev/null 2>&1; then \
+	  echo "-- container runtime not reachable, starting colima --"; \
+	  colima start; \
+	fi
 	@if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then \
 	  $(MAKE) dast DAST_URL="$(DAST_LIVE_URL)" || \
 	    echo "ZAP kon niet draaien — lees de uitvoer met de hand; leg echte bevindingen vast als issue."; \
 	else \
-	  echo "DAST overgeslagen — geen container-runtime (macOS: colima start), draai daarna 'make dast DAST_URL=$(DAST_LIVE_URL)'."; \
+	  echo "DAST overgeslagen — geen container-runtime (macOS: brew install colima docker && colima start), draai daarna 'make dast DAST_URL=$(DAST_LIVE_URL)'."; \
 	fi
 	@echo "== Klaar. Weeg de DAST-bevindingen; is alles vastgelegd of bewust aanvaard, dan is dit ready for tagging. =="

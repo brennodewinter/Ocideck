@@ -68,10 +68,13 @@ It runs everything in `check-full` as a hard gate, then a
 [`make dast`](#make-dast-advisory) baseline against the live host
 (`DAST_LIVE_URL`, default `https://ocideck.librekat.nl/`) as an **advisory**
 step: a ZAP warning is something to weigh and, if real, file as an issue — not
-something that reddens the command. Without a container runtime the DAST step
-skips itself. Two more things belong in the same pre-tag ritual but are **not**
-automated here — run [`make linux-gate`](#continuous-integration) and glance at
-open `security`/`privacy` issues on the tracker before you tag.
+something that reddens the command. If `colima` is installed but stopped, this
+starts it rather than requiring a separate step before every tag (it's
+idempotent — a no-op if already running); only if no container runtime is
+reachable even after that does the DAST step skip itself. Two more things
+belong in the same pre-tag ritual but are **not** automated here — run
+[`make linux-gate`](#continuous-integration) and glance at open
+`security`/`privacy` issues on the tracker before you tag.
 
 ## Localisation helpers
 
@@ -841,15 +844,19 @@ also declares them, but see the [CI note](#continuous-integration).)
   start`. Docker Desktop also works but is proprietary; colima is the
   open-source equivalent and is what this was built against. The ZAP Homebrew
   cask is *not* an option — it fails the macOS Gatekeeper check and is scheduled
-  for removal.
+  for removal. If colima is installed but its VM is stopped, both this target
+  and `make check-release` start it automatically (`colima start` is
+  idempotent — a no-op with a warning if it's already running) rather than
+  requiring a separate step before every tag.
 - **Advisory, not a gate — but part of the pre-tag pass.** It stays out of
   `check`/`check-full`, but [`make check-release`](#make-check-release) runs it
   once, advisory and non-blocking, against the live host — the quality slag you
   run by hand before `git push origin v*`. That timing is the point: a finding
   before the tag can still hold back a release, whereas a scan after deploy only
   speaks once the site is already live. A finding is for a human to weigh and, if
-  real, file as an issue (this is how #849 came to be). Without a container
-  runtime the step skips itself with a clear message.
+  real, file as an issue (this is how #849 came to be). Only if no container
+  runtime is reachable even after the auto-start attempt does the step skip
+  itself, with a clear message.
 - **Be honest about what it can see.** The CSP is already pinned exactly by
   [`make check-web`](#make-check-web) from the meta tag, so ZAP does not improve
   on that. Its spider cannot traverse the UI — CanvasKit paints into a canvas,
