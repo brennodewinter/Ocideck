@@ -75,7 +75,18 @@ class OpenKatReportEngine {
       return _failure(request, measurements, diagnostics, missing, traces);
     }
 
-    final plan = scenario.compose(facts, request);
+    final composedPlan = scenario.compose(facts, request);
+    final plan = _validatedPlan(
+      composedPlan,
+      descriptor,
+      request,
+      assessments,
+      diagnostics,
+      missing,
+    );
+    if (plan == null) {
+      return _failure(request, measurements, diagnostics, missing, traces);
+    }
     final deck = OpenKatReportComposer(
       facts,
       language: request.language,
@@ -130,6 +141,19 @@ class OpenKatReportEngine {
         ),
       );
     }
+    final previousAsOf = request.previousAsOf;
+    if (previousAsOf != null && !previousAsOf.isBefore(request.currentAsOf)) {
+      diagnostics.add(
+        OpenKatReportDiagnostic(
+          code: OpenKatReportDiagnosticCode.invalidSnapshotChronology,
+          severity: OpenKatReportDiagnosticSeverity.error,
+          arguments: {
+            'previousAsOf': previousAsOf.toIso8601String(),
+            'currentAsOf': request.currentAsOf.toIso8601String(),
+          },
+        ),
+      );
+    }
     if (descriptor.requiresCveId && !_isCanonicalCve(request.cveId)) {
       diagnostics.add(
         OpenKatReportDiagnostic(
@@ -144,6 +168,118 @@ class OpenKatReportEngine {
   bool _isCanonicalCve(String? value) =>
       value != null &&
       RegExp(r'^CVE-[0-9]{4}-[0-9]{4,}$').hasMatch(value.trim().toUpperCase());
+
+  OpenKatReportPlan? _validatedPlan(
+    OpenKatReportPlan plan,
+    OpenKatScenarioDescriptor descriptor,
+    OpenKatReportRequest request,
+    Map<OpenKatReportCapability, OpenKatCapabilityAssessment> assessments,
+    List<OpenKatReportDiagnostic> diagnostics,
+    Set<OpenKatReportCapability> missing,
+  ) {
+    if (plan.scenarioId != descriptor.id) {
+      _invalidPlan(
+        diagnostics,
+        reason: 'scenarioIdMismatch',
+        arguments: {
+          'expectedScenarioId': descriptor.id,
+          'actualScenarioId': plan.scenarioId,
+        },
+      );
+    }
+    if (plan.blocks.isEmpty) {
+      _invalidPlan(diagnostics, reason: 'emptyPlan');
+    }
+
+    final blockIds = <String>{};
+    final applicableBlocks = <OpenKatReportBlock>[];
+    for (final block in plan.blocks) {
+      if (block.id.trim().isEmpty) {
+        _invalidPlan(diagnostics, reason: 'emptyBlockId');
+      } else if (!blockIds.add(block.id)) {
+        _invalidPlan(
+          diagnostics,
+          reason: 'duplicateBlockId',
+          arguments: {'blockId': block.id},
+        );
+      }
+
+      final preconditions = block.preconditions;
+      if (preconditions.requiresPreviousAsOf && request.previousAsOf == null) {
+        diagnostics.add(
+          OpenKatReportDiagnostic(
+            code: OpenKatReportDiagnosticCode.previousSnapshotMissing,
+            severity: OpenKatReportDiagnosticSeverity.error,
+            arguments: {
+              'reason': 'blockRequiresPreviousAsOf',
+              'blockId': block.id,
+            },
+          ),
+        );
+      }
+      if (preconditions.requiresCveId && !_isCanonicalCve(request.cveId)) {
+        diagnostics.add(
+          OpenKatReportDiagnostic(
+            code: OpenKatReportDiagnosticCode.invalidCveId,
+            severity: OpenKatReportDiagnosticSeverity.error,
+            arguments: {'cveId': request.cveId ?? '', 'blockId': block.id},
+          ),
+        );
+      }
+
+      final unavailable = preconditions.capabilities
+          .where(
+            (capability) => !(assessments[capability]?.isAvailable ?? false),
+          )
+          .toSet();
+      missing.addAll(unavailable);
+      final optionalUnavailable = unavailable.every(
+        descriptor.optionalCapabilities.contains,
+      );
+      final mayOmit = preconditions.omitWhenUnavailable && optionalUnavailable;
+      if (unavailable.isNotEmpty && !mayOmit) {
+        for (final capability in unavailable) {
+          diagnostics.add(
+            OpenKatReportDiagnostic(
+              code: OpenKatReportDiagnosticCode.missingCapability,
+              severity: OpenKatReportDiagnosticSeverity.error,
+              arguments: {'capability': capability.name, 'blockId': block.id},
+            ),
+          );
+        }
+      } else if (unavailable.isEmpty) {
+        applicableBlocks.add(block);
+      }
+    }
+
+    if (applicableBlocks.isEmpty && plan.blocks.isNotEmpty) {
+      _invalidPlan(diagnostics, reason: 'noApplicableBlocks');
+    }
+    if (diagnostics.any(
+      (diagnostic) =>
+          diagnostic.severity == OpenKatReportDiagnosticSeverity.error,
+    )) {
+      return null;
+    }
+    return OpenKatReportPlan(
+      scenarioId: plan.scenarioId,
+      blocks: List.unmodifiable(applicableBlocks),
+    );
+  }
+
+  void _invalidPlan(
+    List<OpenKatReportDiagnostic> diagnostics, {
+    required String reason,
+    Map<String, String> arguments = const {},
+  }) {
+    diagnostics.add(
+      OpenKatReportDiagnostic(
+        code: OpenKatReportDiagnosticCode.invalidReportPlan,
+        severity: OpenKatReportDiagnosticSeverity.error,
+        arguments: {'reason': reason, ...arguments},
+      ),
+    );
+  }
 
   void _addSelectionDiagnostics(
     OpenKatReportRequest request,

@@ -111,8 +111,10 @@ enum OpenKatReportDiagnosticCode {
   organizationNotFound,
   currentSnapshotMissing,
   previousSnapshotMissing,
+  invalidSnapshotChronology,
   invalidCveId,
   missingCapability,
+  invalidReportPlan,
   snapshotTooOld,
   incompletePortfolio,
   incomparableMeasurementCoverage,
@@ -265,11 +267,59 @@ enum OpenKatReportBlockKind {
   monitoringChanges,
 }
 
+/// Voorwaarden die uit de betekenis van een blok volgen, onafhankelijk van
+/// wat een (eventueel geïnjecteerd) scenario erover declareert.
+class OpenKatReportBlockPreconditions {
+  final Set<OpenKatReportCapability> capabilities;
+  final bool requiresPreviousAsOf;
+  final bool requiresCveId;
+  final bool omitWhenUnavailable;
+
+  const OpenKatReportBlockPreconditions({
+    this.capabilities = const {},
+    this.requiresPreviousAsOf = false,
+    this.requiresCveId = false,
+    this.omitWhenUnavailable = false,
+  });
+}
+
+extension OpenKatReportBlockContract on OpenKatReportBlockKind {
+  OpenKatReportBlockPreconditions get preconditions => switch (this) {
+    OpenKatReportBlockKind.managementOverview ||
+    OpenKatReportBlockKind.measurementAvailability =>
+      const OpenKatReportBlockPreconditions(),
+    OpenKatReportBlockKind.findingLifecycle =>
+      const OpenKatReportBlockPreconditions(
+        capabilities: {
+          OpenKatReportCapability.historicalSnapshots,
+          OpenKatReportCapability.findingLifecycle,
+        },
+        requiresPreviousAsOf: true,
+        omitWhenUnavailable: true,
+      ),
+    OpenKatReportBlockKind.cveExposure => const OpenKatReportBlockPreconditions(
+      capabilities: {OpenKatReportCapability.reliableCveReferences},
+      requiresCveId: true,
+    ),
+    OpenKatReportBlockKind.monitoringChanges =>
+      const OpenKatReportBlockPreconditions(
+        capabilities: {
+          OpenKatReportCapability.historicalSnapshots,
+          OpenKatReportCapability.reliableMonitoringStatus,
+          OpenKatReportCapability.stableAssetIdentity,
+        },
+        requiresPreviousAsOf: true,
+      ),
+  };
+}
+
 class OpenKatReportBlock {
   final String id;
   final OpenKatReportBlockKind kind;
 
   const OpenKatReportBlock({required this.id, required this.kind});
+
+  OpenKatReportBlockPreconditions get preconditions => kind.preconditions;
 }
 
 class OpenKatReportPlan {

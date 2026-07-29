@@ -369,6 +369,11 @@ void main() {
             ],
             systems: const [
               OpenKatSystem(
+                id: 'added.example',
+                stableIdentity: true,
+                monitoringStatus: OpenKatMonitoringStatus.notMonitored,
+              ),
+              OpenKatSystem(
                 id: 'removed.example',
                 stableIdentity: true,
                 monitoringStatus: OpenKatMonitoringStatus.monitored,
@@ -386,6 +391,11 @@ void main() {
                 id: 'added.example',
                 stableIdentity: true,
                 monitoringStatus: OpenKatMonitoringStatus.monitored,
+              ),
+              OpenKatSystem(
+                id: 'removed.example',
+                stableIdentity: true,
+                monitoringStatus: OpenKatMonitoringStatus.notMonitored,
               ),
             ],
           ),

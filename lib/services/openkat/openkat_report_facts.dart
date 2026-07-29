@@ -91,9 +91,15 @@ class OpenKatReportFacts {
   ) {
     final current = snapshotOnOrBefore(organization, request.currentAsOf);
     final explicitPrevious = request.previousAsOf;
-    final previous = explicitPrevious == null
+    final previousCandidate = explicitPrevious == null
         ? _snapshotBefore(organization, current?.reportDate)
         : snapshotOnOrBefore(organization, explicitPrevious);
+    final previous =
+        current != null &&
+            previousCandidate != null &&
+            !previousCandidate.reportDate.isBefore(current.reportDate)
+        ? null
+        : previousCandidate;
     return OpenKatReportSelection(
       organization: organization,
       currentAsOf: request.currentAsOf,
@@ -181,8 +187,7 @@ class OpenKatReportFacts {
     OpenKatReportRequest request,
   ) => [
     for (final selection in selections(request))
-      if (selection.current != null &&
-          (request.previousAsOf == null || selection.previous != null))
+      if (selection.current != null)
         selection.organization.copyWith(
           snapshots: [
             if (selection.previous != null) selection.previous!,
@@ -209,41 +214,50 @@ class OpenKatReportFacts {
   }
 
   List<OpenKatFindingLifecycleItem> findingLifecycle(
-    OpenKatReportRequest request,
-  ) {
+    OpenKatReportRequest request, {
+    int? maxResults,
+  }) {
+    _validateMaxResults(maxResults);
+    if (maxResults == 0) return const [];
     final out = <OpenKatFindingLifecycleItem>[];
     for (final selection in selections(request)) {
       final current = selection.current;
       final previous = selection.previous;
       if (current == null || previous == null) continue;
-      final currentById = {
-        for (final finding in current.findings) finding.id: finding,
-      };
       final previousById = {
         for (final finding in previous.findings) finding.id: finding,
       };
       final comparable = hasComparableCoverage(selection);
+      final currentIds = <String>{};
+      Set<String>? earlierFindingIds;
 
-      for (final entry in currentById.entries) {
-        if (previousById.containsKey(entry.key)) continue;
+      for (final finding in current.findings) {
+        if (!currentIds.add(finding.id) ||
+            previousById.containsKey(finding.id)) {
+          continue;
+        }
+        // De index wordt pas gebouwd wanneer een nieuwe huidige ID hem nodig
+        // heeft, maar daarna voor alle volgende ID's hergebruikt.
+        earlierFindingIds ??= _findingIdsBefore(
+          selection.organization,
+          previous.reportDate,
+        );
         out.add(
           OpenKatFindingLifecycleItem(
             organizationCode: selection.organization.code,
-            finding: entry.value,
-            observation:
-                _wasSeenBefore(
-                  selection.organization,
-                  entry.key,
-                  previous.reportDate,
-                )
+            finding: finding,
+            observation: earlierFindingIds.contains(finding.id)
                 ? OpenKatFindingObservation.reobserved
                 : OpenKatFindingObservation.newlyObserved,
             comparableCoverage: comparable,
           ),
         );
+        if (_maxResultsReached(out.length, maxResults)) {
+          return List.unmodifiable(out);
+        }
       }
       for (final entry in previousById.entries) {
-        if (currentById.containsKey(entry.key)) continue;
+        if (currentIds.contains(entry.key)) continue;
         out.add(
           OpenKatFindingLifecycleItem(
             organizationCode: selection.organization.code,
@@ -252,21 +266,22 @@ class OpenKatReportFacts {
             comparableCoverage: comparable,
           ),
         );
+        if (_maxResultsReached(out.length, maxResults)) {
+          return List.unmodifiable(out);
+        }
       }
     }
     return List.unmodifiable(out);
   }
 
-  bool _wasSeenBefore(
+  Set<String> _findingIdsBefore(
     OpenKatOrganization organization,
-    String findingId,
     DateTime before,
-  ) => organization.snapshots.any(
-    (snapshot) =>
-        snapshot.usable &&
-        snapshot.reportDate.isBefore(before) &&
-        snapshot.findings.any((finding) => finding.id == findingId),
-  );
+  ) => {
+    for (final snapshot in organization.snapshots)
+      if (snapshot.usable && snapshot.reportDate.isBefore(before))
+        for (final finding in snapshot.findings) finding.id,
+  };
 
   List<OpenKatControlChange> controlChanges(OpenKatReportRequest request) {
     final out = <OpenKatControlChange>[];
@@ -349,68 +364,90 @@ class OpenKatReportFacts {
 
   List<OpenKatCveExposure> cveExposure(
     OpenKatReportRequest request,
-    String cveId,
-  ) {
+    String cveId, {
+    int? maxResults,
+  }) {
+    _validateMaxResults(maxResults);
+    if (maxResults == 0) return const [];
     final canonical = cveId.trim().toUpperCase();
-    return [
-      for (final selection in selections(request))
-        if (selection.current != null)
-          for (final finding in selection.current!.findings)
-            if (finding.cveIds.contains(canonical))
-              OpenKatCveExposure(
-                organizationCode: selection.organization.code,
-                finding: finding,
-              ),
-    ];
+    final out = <OpenKatCveExposure>[];
+    for (final selection in selections(request)) {
+      final current = selection.current;
+      if (current == null) continue;
+      for (final finding in current.findings) {
+        if (!finding.cveIds.contains(canonical)) continue;
+        out.add(
+          OpenKatCveExposure(
+            organizationCode: selection.organization.code,
+            finding: finding,
+          ),
+        );
+        if (_maxResultsReached(out.length, maxResults)) return out;
+      }
+    }
+    return out;
   }
 
   List<OpenKatMonitoringMutation> monitoringMutations(
-    OpenKatReportRequest request,
-  ) {
+    OpenKatReportRequest request, {
+    int? maxResults,
+  }) {
+    _validateMaxResults(maxResults);
+    if (maxResults == 0) return const [];
     final out = <OpenKatMonitoringMutation>[];
     for (final selection in selections(request)) {
       final current = selection.current;
       final previous = selection.previous;
       if (current == null || previous == null) continue;
-      final currentById = {
-        for (final system in current.systems) system.id: system,
-      };
       final previousById = {
         for (final system in previous.systems) system.id: system,
       };
-      for (final entry in currentById.entries) {
-        final wasMonitored =
-            previousById[entry.key]?.monitoringStatus ==
-            OpenKatMonitoringStatus.monitored;
-        if (entry.value.monitoringStatus == OpenKatMonitoringStatus.monitored &&
-            !wasMonitored) {
-          out.add(
-            OpenKatMonitoringMutation(
-              organizationCode: selection.organization.code,
-              system: entry.value,
-              kind: OpenKatMonitoringMutationKind.added,
-            ),
-          );
+      final seenSystemIds = <String>{};
+      for (final currentSystem in current.systems) {
+        if (!seenSystemIds.add(currentSystem.id)) continue;
+        final previousSystem = previousById[currentSystem.id];
+        if (previousSystem == null ||
+            !currentSystem.stableIdentity ||
+            !previousSystem.stableIdentity) {
+          continue;
         }
-      }
-      for (final entry in previousById.entries) {
-        final isMonitored =
-            currentById[entry.key]?.monitoringStatus ==
-            OpenKatMonitoringStatus.monitored;
-        if (entry.value.monitoringStatus == OpenKatMonitoringStatus.monitored &&
-            !isMonitored) {
-          out.add(
-            OpenKatMonitoringMutation(
-              organizationCode: selection.organization.code,
-              system: entry.value,
-              kind: OpenKatMonitoringMutationKind.removed,
-            ),
-          );
+        final currentStatus = currentSystem.monitoringStatus;
+        final previousStatus = previousSystem.monitoringStatus;
+        if (currentStatus == null ||
+            previousStatus == null ||
+            currentStatus == previousStatus) {
+          continue;
+        }
+        final added = currentStatus == OpenKatMonitoringStatus.monitored;
+        out.add(
+          OpenKatMonitoringMutation(
+            organizationCode: selection.organization.code,
+            system: added ? currentSystem : previousSystem,
+            kind: added
+                ? OpenKatMonitoringMutationKind.added
+                : OpenKatMonitoringMutationKind.removed,
+          ),
+        );
+        if (_maxResultsReached(out.length, maxResults)) {
+          return List.unmodifiable(out);
         }
       }
     }
     return List.unmodifiable(out);
   }
+
+  void _validateMaxResults(int? maxResults) {
+    if (maxResults != null && maxResults < 0) {
+      throw ArgumentError.value(
+        maxResults,
+        'maxResults',
+        'moet nul of positief zijn',
+      );
+    }
+  }
+
+  bool _maxResultsReached(int resultCount, int? maxResults) =>
+      maxResults != null && resultCount >= maxResults;
 
   List<OpenKatFinding> findingsBySeverity(
     OpenKatSnapshot snapshot,

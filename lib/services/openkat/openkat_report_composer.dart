@@ -9,6 +9,7 @@ import '../../models/openkat/openkat_models.dart';
 import '../../models/openkat/openkat_reporting_models.dart';
 import '../../models/scorecard_spec.dart';
 import '../../models/slide.dart';
+import '../import/utils/import_text_sanitizer.dart';
 import 'openkat_aggregator.dart';
 import 'openkat_report_facts.dart';
 
@@ -47,11 +48,15 @@ class OpenKatReportComposer {
     for (final block in plan.blocks) {
       switch (block.kind) {
         case OpenKatReportBlockKind.managementOverview:
-          deck = generate(
+          final management = generate(
             organizations,
             title: title,
             outputPath: outputPath,
-          ).copyWith(language: request.language.code);
+          );
+          deck = deck.copyWith(
+            language: request.language.code,
+            slides: [...deck.slides, ...management.slides.skip(1)],
+          );
         case OpenKatReportBlockKind.measurementAvailability:
           deck = deck.copyWith(
             slides: [...deck.slides, _measurementAvailabilitySlide(request)],
@@ -178,7 +183,9 @@ class OpenKatReportComposer {
 
   Slide _findingLifecycleSlide(OpenKatReportRequest request) {
     final english = request.language == OpenKatReportLanguage.english;
-    final lifecycle = facts.findingLifecycle(request);
+    final limit = request.policy.tableRowLimit;
+    final lifecycle = facts.findingLifecycle(request, maxResults: limit + 1);
+    final truncated = lifecycle.length > limit;
     return _slide(
       id: _id('openkat-${request.scenarioId}-lifecycle'),
       type: SlideType.table,
@@ -190,7 +197,7 @@ class OpenKatReportComposer {
           english ? 'Observation' : 'Waarneming',
           english ? 'Comparable coverage' : 'Vergelijkbare dekking',
         ],
-        for (final item in lifecycle)
+        for (final item in lifecycle.take(limit))
           [
             item.organizationCode,
             item.finding.findingTypeName ?? item.finding.findingTypeId,
@@ -199,8 +206,8 @@ class OpenKatReportComposer {
                 ? (english ? 'Yes' : 'Ja')
                 : (english ? 'Not demonstrated' : 'Niet aangetoond'),
           ],
+        if (truncated) _omittedRow(columns: 4, english: english, shown: limit),
       ],
-      viewLimit: DisplayWindowSpec(limit: request.policy.tableRowLimit),
       notes:
           '<!-- ocideck_openkat_view: report.${request.scenarioId}.lifecycle -->',
     );
@@ -221,7 +228,9 @@ class OpenKatReportComposer {
   Slide _cveExposureSlide(OpenKatReportRequest request) {
     final english = request.language == OpenKatReportLanguage.english;
     final cveId = request.cveId!.trim().toUpperCase();
-    final exposure = facts.cveExposure(request, cveId);
+    final limit = request.policy.tableRowLimit;
+    final exposure = facts.cveExposure(request, cveId, maxResults: limit + 1);
+    final truncated = exposure.length > limit;
     return _slide(
       id: _id('openkat-${request.scenarioId}-$cveId'),
       type: SlideType.table,
@@ -233,15 +242,15 @@ class OpenKatReportComposer {
           english ? 'System' : 'Systeem',
           english ? 'Severity' : 'Ernst',
         ],
-        for (final item in exposure)
+        for (final item in exposure.take(limit))
           [
             item.organizationCode,
             item.finding.findingTypeName ?? item.finding.findingTypeId,
             item.finding.systemId ?? '-',
             item.finding.severity,
           ],
+        if (truncated) _omittedRow(columns: 4, english: english, shown: limit),
       ],
-      viewLimit: DisplayWindowSpec(limit: request.policy.tableRowLimit),
       notes:
           '<!-- ocideck_openkat_view: report.${request.scenarioId}.exposure -->',
     );
@@ -249,7 +258,9 @@ class OpenKatReportComposer {
 
   Slide _monitoringChangesSlide(OpenKatReportRequest request) {
     final english = request.language == OpenKatReportLanguage.english;
-    final mutations = facts.monitoringMutations(request);
+    final limit = request.policy.tableRowLimit;
+    final mutations = facts.monitoringMutations(request, maxResults: limit + 1);
+    final truncated = mutations.length > limit;
     return _slide(
       id: _id('openkat-${request.scenarioId}-mutations'),
       type: SlideType.table,
@@ -260,7 +271,7 @@ class OpenKatReportComposer {
           english ? 'Asset' : 'Asset',
           english ? 'Change' : 'Verandering',
         ],
-        for (final mutation in mutations)
+        for (final mutation in mutations.take(limit))
           [
             mutation.organizationCode,
             mutation.system.id,
@@ -272,12 +283,23 @@ class OpenKatReportComposer {
                       ? 'Removed from monitoring'
                       : 'Verwijderd uit monitoring'),
           ],
+        if (truncated) _omittedRow(columns: 3, english: english, shown: limit),
       ],
-      viewLimit: DisplayWindowSpec(limit: request.policy.tableRowLimit),
       notes:
           '<!-- ocideck_openkat_view: report.${request.scenarioId}.monitoring -->',
     );
   }
+
+  List<String> _omittedRow({
+    required int columns,
+    required bool english,
+    required int shown,
+  }) => [
+    english
+        ? 'More results omitted after the configured limit of $shown'
+        : 'Meer resultaten weggelaten na de ingestelde limiet van $shown',
+    for (var i = 1; i < columns; i++) '',
+  ];
 
   /// Een scorecard-dia: titel plus de tabel waar het type op rijdt. Het aantal
   /// regels wordt door [ScorecardSpec] zelf op vijf gehouden, op lezen én
@@ -320,11 +342,6 @@ class OpenKatReportComposer {
 
   /// Waar het rapport op neerkomt, in woorden.
   ///
-  /// De aggregator maakt deze zinnen al ("42 meer medium findings") en trekt er
-  /// een conclusie uit; tot nu toe haalde alleen het label de dia, als
-  /// grafiektitel. Het zijn tellingen uit de meting zelf, geen bedachte
-  /// risicoscore — daarom mogen ze vooraan staan.
-  ///
   /// Alleen bij een tweede meting: zonder vorige meting valt er niets te zeggen
   /// over wat er veranderde, en een dia die dat alsnog probeert wordt een
   /// omschrijving van de cijfers die er twee dia's verderop staan.
@@ -336,8 +353,8 @@ class OpenKatReportComposer {
       title: _text('Wat dit rapport zegt', 'What this report says'),
       subtitle:
           '${_text('Ten opzichte van de vorige meting', 'Compared with the previous measurement')}: '
-          '${_trendLabel(conclusion.label)}',
-      bullets: [for (final line in conclusion.lines) _trendLine(line)],
+          '${_trendLabel(conclusion)}',
+      bullets: _trendLines(conclusion),
       notes: '<!-- ocideck_openkat_view: portfolio.key-message -->',
     );
   }
@@ -545,12 +562,12 @@ class OpenKatReportComposer {
                   ? _historyChart(
                       history,
                       title:
-                          '${_text('Verloop', 'Trend')}: ${_trendLabel(conclusion.label)}',
+                          '${_text('Verloop', 'Trend')}: ${_trendLabel(conclusion)}',
                       english: _english,
                     )
                   : _distributionChart(
                       portfolio.current.severityCounts,
-                      title: _trendLabel(conclusion.label),
+                      title: _trendLabel(conclusion),
                       english: _english,
                     ))
               .toBlock(),
@@ -560,13 +577,9 @@ class OpenKatReportComposer {
 
   /// Wat OpenKAT zelf aanraadt bij de zwaarste issues.
   ///
-  /// De aanbeveling wordt al uit de bron gehaald en per findingtype bewaard —
-  /// hij haalde alleen nooit een dia. Hier komt hij als tussenkop (de finding)
-  /// met de tekst eronder, zodat één dia meerdere adviezen kan dragen zonder
-  /// dat ze in elkaar overlopen.
-  ///
   /// Niets verzinnen: draagt geen enkel issue een aanbeveling, dan is er geen
-  /// dia. De tekst is die van OpenKAT, onbewerkt.
+  /// dia. Brontekst blijft inhoudelijk gelijk, maar wordt wel als letterlijke
+  /// tekst geneutraliseerd voordat zij in Markdown terechtkomt.
   Slide? _recommendationsSlide(PortfolioAggregate portfolio) {
     final withAdvice = facts
         .topIssues(portfolio.organizations)
@@ -581,8 +594,10 @@ class OpenKatReportComposer {
       title: _text('Wat OpenKAT aanraadt', 'OpenKAT recommendations'),
       bullets: [
         for (final issue in withAdvice) ...[
-          groupHeadingBullet(issue.findingTypeName ?? issue.findingTypeId),
-          issue.recommendation!.trim(),
+          groupHeadingBullet(
+            sanitizeImportedText(issue.findingTypeName ?? issue.findingTypeId),
+          ),
+          sanitizeImportedText(issue.recommendation!),
         ],
       ],
       notes: '<!-- ocideck_openkat_view: portfolio.recommendations -->',
@@ -759,43 +774,68 @@ class OpenKatReportComposer {
   String _severityLabel(String band) =>
       (_english ? _severityLabelsEnglish : _severityLabels)[band] ?? band;
 
-  String _trendLabel(String label) => switch (label) {
-    'Eerste meting' => _text('Eerste meting', 'First measurement'),
-    'Beter' => _text('Beter', 'Improved'),
-    'Slechter' => _text('Slechter', 'Worsened'),
-    'Gemengd' => _text('Gemengd', 'Mixed'),
-    _ => label,
-  };
-
-  String _trendLine(String line) {
-    if (!_english) return line;
-    if (line == 'Eerste meting; nog geen trend beschikbaar') {
-      return 'First measurement; no trend is available yet';
-    }
-    final delta = RegExp(
-      r'^([0-9]+) (meer|minder) (kritieke|hoge|medium) findings$',
-    ).firstMatch(line);
-    if (delta != null) {
-      final direction = delta.group(2) == 'meer' ? 'more' : 'fewer';
-      final severity = switch (delta.group(3)) {
-        'kritieke' => 'critical',
-        'hoge' => 'high',
-        _ => 'medium',
+  String _trendLabel(TrendConclusion conclusion) =>
+      switch (conclusion.direction) {
+        OpenKatTrendDirection.firstMeasurement => _text(
+          'Eerste meting',
+          'First measurement',
+        ),
+        OpenKatTrendDirection.improved => _text('Beter', 'Improved'),
+        OpenKatTrendDirection.worsened => _text('Slechter', 'Worsened'),
+        OpenKatTrendDirection.mixed => _text('Gemengd', 'Mixed'),
       };
-      return '${delta.group(1)} $direction $severity findings';
+
+  List<String> _trendLines(TrendConclusion conclusion) {
+    if (conclusion.direction == OpenKatTrendDirection.firstMeasurement) {
+      return [
+        _text(
+          'Eerste meting; nog geen trend beschikbaar',
+          'First measurement; no trend is available yet',
+        ),
+      ];
     }
-    final affected = RegExp(
-      r'^([0-9]+) (meer|minder) getroffen systemen$',
-    ).firstMatch(line);
-    if (affected != null) {
-      final direction = affected.group(2) == 'meer' ? 'more' : 'fewer';
-      return '${affected.group(1)} $direction affected systems';
-    }
-    return line
-        .replaceFirst('-dekking verbeterd van ', ' coverage improved from ')
-        .replaceFirst('-dekking verslechterd van ', ' coverage worsened from ')
-        .replaceFirst(' naar ', ' to ');
+    return [for (final fact in conclusion.facts) _trendFact(fact)];
   }
+
+  String _trendFact(OpenKatTrendFact fact) {
+    if (fact.metric == OpenKatTrendMetric.controlCoverage) {
+      final improved = fact.currentRatio! > fact.previousRatio!;
+      return _english
+          ? '${fact.controlId} coverage ${improved ? 'improved' : 'worsened'} '
+                'from ${_percent(fact.previousRatio!)} to '
+                '${_percent(fact.currentRatio!)}'
+          : '${fact.controlId}-dekking '
+                '${improved ? 'verbeterd' : 'verslechterd'} van '
+                '${_percent(fact.previousRatio!)} naar '
+                '${_percent(fact.currentRatio!)}';
+    }
+    final count = fact.delta!.abs();
+    final more = fact.delta! > 0;
+    final metric = switch (fact.metric) {
+      OpenKatTrendMetric.criticalFindings => _text(
+        'kritieke findings',
+        'critical findings',
+      ),
+      OpenKatTrendMetric.highFindings => _text(
+        'hoge findings',
+        'high findings',
+      ),
+      OpenKatTrendMetric.mediumFindings => 'medium findings',
+      OpenKatTrendMetric.affectedSystems => _text(
+        'getroffen systemen',
+        'affected systems',
+      ),
+      OpenKatTrendMetric.controlCoverage => throw StateError(
+        'control coverage is handled above',
+      ),
+    };
+    final direction = _english
+        ? (more ? 'more' : 'fewer')
+        : (more ? 'meer' : 'minder');
+    return '$count $direction $metric';
+  }
+
+  String _percent(double value) => '${(value * 100).round()}%';
 }
 
 /// Een dia-id die alleen van [seed] afhangt, zodat opnieuw genereren dezelfde

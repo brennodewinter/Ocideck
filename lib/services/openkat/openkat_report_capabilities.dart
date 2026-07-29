@@ -23,6 +23,11 @@ class OpenKatReportCapabilityService {
           (selection) =>
               selection.current != null && selection.previous != null,
         )
+        .where(
+          (selection) => selection.previous!.reportDate.isBefore(
+            selection.current!.reportDate,
+          ),
+        )
         .toList();
 
     return {
@@ -48,6 +53,8 @@ class OpenKatReportCapabilityService {
         OpenKatReportCapability.reliableMonitoringStatus,
         selectedSnapshots,
         OpenKatSourceFeature.reliableMonitoringStatus,
+        additionalEvidence: (snapshot) =>
+            snapshot.systems.every((system) => system.monitoringStatus != null),
       ),
       OpenKatReportCapability.stableAssetIdentity: _binary(
         OpenKatReportCapability.stableAssetIdentity,
@@ -100,12 +107,15 @@ class OpenKatReportCapabilityService {
   OpenKatCapabilityAssessment _sourceFeature(
     OpenKatReportCapability capability,
     List<OpenKatSnapshot> snapshots,
-    OpenKatSourceFeature feature,
-  ) => _binary(
+    OpenKatSourceFeature feature, {
+    bool Function(OpenKatSnapshot snapshot)? additionalEvidence,
+  }) => _binary(
     capability,
     snapshots.isNotEmpty &&
         snapshots.every(
-          (snapshot) => snapshot.sourceFeatures.contains(feature),
+          (snapshot) =>
+              snapshot.sourceFeatures.contains(feature) &&
+              (additionalEvidence?.call(snapshot) ?? true),
         ),
   );
 
