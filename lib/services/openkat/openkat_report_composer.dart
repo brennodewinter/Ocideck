@@ -12,6 +12,7 @@ import '../../models/slide.dart';
 import '../import/utils/import_text_sanitizer.dart';
 import 'openkat_aggregator.dart';
 import 'openkat_report_facts.dart';
+import 'openkat_slide_provenance.dart';
 
 /// Zet een gevalideerd rapportplan om in gewone OciDeck-dia's.
 ///
@@ -108,6 +109,8 @@ class OpenKatReportComposer {
         english ? 'OpenKAT CVE exposure' : 'OpenKAT CVE-blootstelling',
       'monitoring-changes' =>
         english ? 'OpenKAT monitoring changes' : 'OpenKAT-monitoringmutaties',
+      'data-quality' =>
+        english ? 'OpenKAT data quality' : 'OpenKAT-datakwaliteit',
       _ =>
         english ? 'OpenKAT management overview' : 'OpenKAT managementoverzicht',
     };
@@ -162,16 +165,18 @@ class OpenKatReportComposer {
     String customMarkdown = '',
     DisplayWindowSpec? viewLimit,
     String notes = '',
-  }) => Slide(
-    id: id,
-    type: type,
-    title: title,
-    subtitle: subtitle,
-    bullets: bullets,
-    tableRows: tableRows,
-    customMarkdown: customMarkdown,
-    viewLimit: viewLimit,
-    notes: notes,
+  }) => OpenKatSlideProvenance.markGeneratedOrigin(
+    Slide(
+      id: id,
+      type: type,
+      title: title,
+      subtitle: subtitle,
+      bullets: bullets,
+      tableRows: tableRows,
+      customMarkdown: customMarkdown,
+      viewLimit: viewLimit,
+      notes: notes,
+    ),
   );
 
   Slide _measurementAvailabilitySlide(OpenKatReportRequest request) {

@@ -1800,6 +1800,130 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Este relatório existente não pode ser atualizado com segurança. Crie o relatório como novo; o deck existente permanece inalterado.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Foram encontrados {reports} relatórios para {organizations} organizações. As medições vão de {firstDate} até {lastDate}, inclusive. Foram ignorados {skipped} ficheiros.',
+  'Dubbel bestand overgeslagen': 'Ficheiro duplicado ignorado',
+  'Conflicterende meting overgeslagen': 'Medição conflitante ignorada',
+  'Geen ondersteunde OpenKAT-rapportage': 'Relatório OpenKAT não suportado',
+  'Bestand kon niet worden gelezen': 'Não foi possível ler o ficheiro',
+  'Aanbevolen': 'Recomendado',
+  'Alleen wat nodig is': 'Somente o que é necessário',
+  'Alles blijft op dit apparaat': 'Tudo permanece neste dispositivo',
+  'Als nieuw rapport maken': 'Criar como novo relatório',
+  'Andere map kiezen': 'Escolha outra pasta',
+  'Bekijk importverslag': 'Ver relatório de importação',
+  'Bekijk verslag': 'Ver relatório',
+  'Bijvoorbeeld CVE-2026-12345': 'Por exemplo, CVE-2026-12345',
+  'Bruikbaar': 'Utilizável',
+  'CVE zoeken': 'Pesquisa CVE',
+  'Critical/high': 'Crítico/alto',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Qualidade dos dados, falta de medições e obsolescência.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Os relatórios selecionados não contêm dados confiáveis ​​suficientes para esta parte.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'O conteúdo aparecerá assim que todas as escolhas necessárias forem feitas.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'A cobertura da medição difere entre os momentos de medição escolhidos; as alterações são, portanto, apenas comparáveis ​​até certo ponto.',
+  'Dekking en actualiteit van metingen':
+      'Cobertura e oportunidade das medições',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Este CVE não foi encontrado nas medidas selecionadas.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Esta pasta não contém relatórios úteis',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Esta seleção contém muitos dados para serem incluídos com segurança em um relatório.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Esta seção não pode ser construída inteiramente a partir dos relatórios selecionados.',
+  'Dit rapport bevat': 'Este relatório contém',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Uma ou mais medições são mais antigas que o limite de atualidade selecionado.',
+  'Eerdere bruikbare meting': 'Medição útil anterior',
+  'Engels': 'Inglês',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Nenhuma medida útil foi encontrada.',
+  'Feitelijke gegevens': 'Dados factuais',
+  'Geen bruikbare meetdatum': 'Nenhuma data de medição utilizável',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Os slides gerados são atualizados. Seus próprios slides e cópias serão retidos.',
+  'Getroffen organisaties en systemen': 'Organizações e sistemas afetados',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Organizações e sistemas afetados em torno de uma vulnerabilidade.',
+  'Getroffen systemen': 'Sistemas afetados',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Não foi possível criar o relatório. Suas escolhas são preservadas; verifique os avisos e tente novamente.',
+  'Import': 'Importar',
+  'Importverslag bekijken': 'Ver relatório de importação',
+  'Kerncijfers en aandachtspunten': 'Principais números e pontos de interesse',
+  'Keuzes wijzigen…': 'Mude as escolhas…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Escolha a pasta na qual o OpenKAT colocou os relatórios. OciDeck apenas lê esta pasta; nada é alterado ou enviado.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Escolha a pergunta que o relatório deve responder. A OciDeck determina a estrutura apropriada.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Escolha um CVE encontrado nos relatórios.',
+  'Laatste bruikbare meting': 'Última medição utilizável',
+  'Live voorvertoning van de rapportopbouw':
+      'Visualização ao vivo da estrutura do relatório',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Gerenciar e controlar informações sobre múltiplas organizações.',
+  'Meer instellingen': 'Mais configurações',
+  'Nederlands': 'Holandês',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Nem toda organização escolhida possui uma medição para esse período.',
+  'Nieuwe en verdwenen bevindingen': 'Descobertas novas e ausentes',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Ainda não disponível: estes relatórios não contêm números CVE fiáveis.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck usa a mesma fonte e escolhas e faz as medições mais recentes e adequadas. Seus próprios slides e cópias serão retidos.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'A OciDeck não conseguiu encontrar nenhuma medição útil do OpenKAT. Escolha uma pasta diferente ou visualize o relatório de importação para ver quais arquivos foram ignorados.',
+  'OpenKAT-importverslag': 'Relatório de importação OpenKAT',
+  'OpenKAT-rapport': 'Relatório OpenKAT',
+  'OpenKAT-rapport bijwerken': 'Atualizar relatório OpenKAT',
+  'OpenKAT-rapport bijwerken…': 'Atualizar relatório OpenKAT…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'O relatório OpenKAT não pôde ser criado.',
+  'OpenKAT-rapport maken': 'Criar relatório OpenKAT',
+  'OpenKAT-rapport maken…': 'Criar relatório OpenKAT…',
+  'Organisaties': 'Organizações',
+  'Organisaties kiezen': 'Escolhendo organizações',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Relatório atualizado. Seus próprios slides foram mantidos.',
+  'Rapport bijwerken': 'Atualizar relatório',
+  'Rapport gemaakt.': 'Relatório criado.',
+  'Rapport maken': 'Criar relatório',
+  'Rapportages controleren…': 'Verifique os relatórios…',
+  'Rapportages voorbereiden': 'Preparar relatórios',
+  'Rapporttitel': 'Título do relatório',
+  'Stap': 'Etapa',
+  'Taal': 'Linguagem',
+  'Terug': 'Voltar',
+  'Veranderingen in monitoring': 'Mudanças no monitoramento',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Falta uma medição anterior útil para uma ou mais organizações.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Falta uma medição atual útil para uma ou mais organizações.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Dois momentos de medição são necessários para uma comparação. Uma medição foi encontrada agora.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Progresso comparado a um momento de medição anterior.',
+  'Waar staan de OpenKAT-rapportages?': 'Onde estão os relatórios do OpenKAT?',
+  'Wat veranderde er bij één organisatie?': 'O que mudou em uma organização?',
+  'Wat wilt u laten zien?': 'O que você quer mostrar?',
+  'Welke organisaties vragen aandacht?': 'Quais organizações requerem atenção?',
+  'Werkelijke meetdatums': 'Datas reais de medição',
+  'Wie is geraakt door een CVE?': 'Quem é afetado por um CVE?',
+  'Zijn de metingen compleet en actueel?':
+      'As medições estão completas e atualizadas?',
+  'bruikbaar': 'utilizável',
+  'metingen': 'medições',
+  'organisaties': 'organizações',
+  'organisaties geselecteerd': 'organizações selecionadas',
+  'rapportages gebruikt': 'relatórios usados',
+  'systemen': 'sistemas',
   'Nog geen specificatielimiet': 'Ainda sem limite de especificação',
   'USL (bovengrens)': 'USL (limite superior)',
   'LSL (ondergrens)': 'LSL (limite inferior)',

@@ -2468,6 +2468,8 @@ for presenter notes):
 | `<!-- ocideck_image_alt2: text -->` | Same, for the **second** image of a two-images slide. |
 | `<!-- ocideck_finding_id: F-03 -->` · `<!-- ocideck_finding_role: header\|detail\|evidence -->` | Finding-group link: ties a header card to its detail/evidence slides (§5). Written on any slide with a non-empty finding id. |
 | `<!-- ocideck_ai_assisted: field1, field2 -->` | The slide's fields whose text was drafted by AI and not yet human-reviewed. While any slide carries this marker the deck **cannot be finalised/sealed** (the EIS 1.6 attestation must cover human-verified text), and any PDF/PPTX/HTML export declares it in its document properties, its filename, and — in HTML — a banner (§11). Written only when non-empty; AI drafting sets it and clears it on review. |
+| `<!-- ocideck_openkat_view: view-id -->` | Stable OpenKAT report-view identity. Other Marp tools ignore the comment. |
+| `<!-- ocideck_openkat_generated_origin: <sha512> -->` | Marks the generated original of an OpenKAT view and fingerprints its canonical slide Markdown. A manual duplicate deliberately loses this marker; an external copy may keep it, but any content edit then invalidates the fingerprint. Legacy or changed decks without provable provenance stop the update instead of risking user-authored content. |
 | `<!-- advance: N.N -->` | Auto-advance after N.N seconds (0 = off). |
 | `<!-- ocideck_detail -->` | Verdiepingsslide: valt weg in de beknopte export, blijft in de volledige. Alleen geschreven als de vlag aanstaat. |
 | `<!-- skip -->` | Skip slide during both presenting and export. |

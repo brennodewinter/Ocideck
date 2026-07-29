@@ -1771,6 +1771,134 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Laporan yang ada ini tidak dapat diperbarui dengan aman. Buat laporan sebagai baru; deck yang ada tetap tidak berubah.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Ditemukan {reports} laporan untuk {organizations} organisasi. Pengukuran berlangsung dari {firstDate} hingga {lastDate}. {skipped} berkas dilewati.',
+  'Dubbel bestand overgeslagen': 'Berkas duplikat dilewati',
+  'Conflicterende meting overgeslagen': 'Pengukuran yang bertentangan dilewati',
+  'Geen ondersteunde OpenKAT-rapportage': 'Laporan OpenKAT tidak didukung',
+  'Bestand kon niet worden gelezen': 'Berkas tidak dapat dibaca',
+  'Aanbevolen': 'Direkomendasikan',
+  'Alleen wat nodig is': 'Hanya yang diperlukan saja',
+  'Alles blijft op dit apparaat': 'Semuanya tetap ada di perangkat ini',
+  'Als nieuw rapport maken': 'Buat sebagai laporan baru',
+  'Andere map kiezen': 'Pilih folder lain',
+  'Bekijk importverslag': 'Lihat laporan impor',
+  'Bekijk verslag': 'Lihat laporan',
+  'Bijvoorbeeld CVE-2026-12345': 'Misalnya, CVE-2026-12345',
+  'Bruikbaar': 'Dapat digunakan',
+  'CVE zoeken': 'pencarian CVE',
+  'Critical/high': 'Kritis/tinggi',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Kualitas data, pengukuran yang hilang, dan keusangan.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Laporan yang dipilih tidak berisi data yang cukup andal untuk bagian ini.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Konten akan muncul setelah semua pilihan yang diperlukan telah dibuat.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Cakupan pengukuran berbeda antara momen pengukuran yang dipilih; Oleh karena itu, perubahan hanya dapat dibandingkan pada tingkat yang terbatas.',
+  'Dekking en actualiteit van metingen':
+      'Cakupan dan ketepatan waktu pengukuran',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'CVE ini tidak ditemukan pada pengukuran yang dipilih.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Folder ini tidak berisi laporan berguna',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Pilihan ini berisi terlalu banyak data untuk disertakan dengan aman dalam satu laporan.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Bagian ini tidak dapat dibangun seluruhnya dari laporan yang dipilih.',
+  'Dit rapport bevat': 'Laporan ini berisi',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Satu atau lebih pengukuran lebih lama dari batas ketepatan waktu yang dipilih.',
+  'Eerdere bruikbare meting': 'Pengukuran berguna sebelumnya',
+  'Engels': 'Bahasa inggris',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Tidak ada pengukuran berguna yang ditemukan.',
+  'Feitelijke gegevens': 'Data faktual',
+  'Geen bruikbare meetdatum':
+      'Tidak ada tanggal pengukuran yang dapat digunakan',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Slide yang dihasilkan disegarkan. Slide dan salinan Anda sendiri disimpan.',
+  'Getroffen organisaties en systemen':
+      'Organisasi dan sistem yang terkena dampak',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Organisasi dan sistem yang terkena dampak berada pada satu kerentanan.',
+  'Getroffen systemen': 'Sistem yang terkena dampak',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Laporan tidak dapat dibuat. Pilihan Anda dipertahankan; periksa peringatannya dan coba lagi.',
+  'Import': 'Impor',
+  'Importverslag bekijken': 'Lihat laporan impor',
+  'Kerncijfers en aandachtspunten': 'Tokoh-tokoh penting dan tempat menarik',
+  'Keuzes wijzigen…': 'Ubah pilihan…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Pilih folder tempat OpenKAT meletakkan laporannya. OciDeck hanya membaca folder ini; tidak ada yang diubah atau dikirim.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Pilih pertanyaan yang harus dijawab oleh laporan. OciDeck menentukan struktur yang sesuai.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Pilih CVE yang ditemukan dalam laporan.',
+  'Laatste bruikbare meting': 'Pengukuran terakhir yang dapat digunakan',
+  'Live voorvertoning van de rapportopbouw':
+      'Pratinjau langsung dari struktur laporan',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Manajemen dan pengendalian informasi tentang berbagai organisasi.',
+  'Meer instellingen': 'Pengaturan lainnya',
+  'Nederlands': 'Belanda',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Tidak semua organisasi yang dipilih memiliki pengukuran untuk periode ini.',
+  'Nieuwe en verdwenen bevindingen': 'Temuan baru dan hilang',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Belum tersedia: laporan ini tidak berisi nomor CVE yang dapat diandalkan.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck menggunakan sumber dan pilihan yang sama serta melakukan pengukuran terbaru yang sesuai. Slide dan salinan Anda sendiri disimpan.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck tidak dapat menemukan pengukuran OpenKAT yang berguna. Pilih folder lain atau lihat laporan impor untuk melihat file mana yang dilewati.',
+  'OpenKAT-importverslag': 'Laporan impor OpenKAT',
+  'OpenKAT-rapport': 'laporan OpenKAT',
+  'OpenKAT-rapport bijwerken': 'Perbarui laporan OpenKAT',
+  'OpenKAT-rapport bijwerken…': 'Perbarui laporan OpenKAT…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'Laporan OpenKAT tidak dapat dibuat.',
+  'OpenKAT-rapport maken': 'Buat laporan OpenKAT',
+  'OpenKAT-rapport maken…': 'Buat laporan OpenKAT…',
+  'Organisaties': 'Organisasi',
+  'Organisaties kiezen': 'Memilih organisasi',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Laporan diperbarui. Slide Anda sendiri telah dipertahankan.',
+  'Rapport bijwerken': 'Perbarui laporan',
+  'Rapport gemaakt.': 'Laporan dibuat.',
+  'Rapport maken': 'Buat laporan',
+  'Rapportages controleren…': 'Periksa laporan…',
+  'Rapportages voorbereiden': 'Siapkan laporan',
+  'Rapporttitel': 'Judul laporan',
+  'Stap': 'Melangkah',
+  'Taal': 'Bahasa',
+  'Terug': 'Kembali',
+  'Veranderingen in monitoring': 'Perubahan dalam pemantauan',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Pengukuran sebelumnya yang berguna tidak ada pada satu atau lebih organisasi.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Pengukuran arus yang berguna tidak ada untuk satu atau lebih organisasi.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Dua momen pengukuran diperlukan untuk perbandingan. Satu pengukuran kini telah ditemukan.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Kemajuan dibandingkan momen pengukuran sebelumnya.',
+  'Waar staan de OpenKAT-rapportages?': 'Di mana laporan OpenKAT?',
+  'Wat veranderde er bij één organisatie?':
+      'Apa yang berubah di satu organisasi?',
+  'Wat wilt u laten zien?': 'Apa yang ingin Anda tunjukkan?',
+  'Welke organisaties vragen aandacht?':
+      'Organisasi mana yang memerlukan perhatian?',
+  'Werkelijke meetdatums': 'Tanggal pengukuran sebenarnya',
+  'Wie is geraakt door een CVE?': 'Siapa yang terkena dampak CVE?',
+  'Zijn de metingen compleet en actueel?':
+      'Apakah pengukurannya lengkap dan terkini?',
+  'bruikbaar': 'dapat digunakan',
+  'metingen': 'pengukuran',
+  'organisaties': 'organisasi',
+  'organisaties geselecteerd': 'organisasi yang dipilih',
+  'rapportages gebruikt': 'laporan yang digunakan',
+  'systemen': 'sistem',
   'Nog geen specificatielimiet': 'Belum ada batas spesifikasi',
   'USL (bovengrens)': 'USL (batas atas)',
   'LSL (ondergrens)': 'LSL (batas bawah)',

@@ -238,7 +238,7 @@ class _WelcomeScreen extends ConsumerWidget {
             // laten vertalen is hoe ze uit elkaar gaan lopen. Twee regels mag;
             // hij past niet op één in een knop van 220.
             label: Text(
-              openKatLabel(l10n),
+              openKatLabel(l10n, updating: false),
               textAlign: TextAlign.center,
               maxLines: 2,
             ),

@@ -242,7 +242,7 @@ and `OpenKatReportPolicy(maximumSnapshotAge:, tableRowLimit:,
 historicalFindingWorkLimit:)`. An organisation scope rejects an empty code. The
 current scenarios are
 `management-overview`, `weekly-comparison`, `organization-overview`,
-`cve-exposure`, and `monitoring-changes`.
+`cve-exposure`, `monitoring-changes`, and `data-quality`.
 
 The result is machine-readable whether generation succeeds or fails: `deck`,
 `plan`, selected `measurements`, typed `diagnostics`, `missingCapabilities` and
@@ -283,6 +283,18 @@ monitoring feature, therefore both scenarios fail closed with
 `missingCapability` until an adapter proves the relevant source fields.
 Monitoring transitions require the same stable asset in both snapshots and two
 explicit statuses; a missing asset or `null` status is unknown, not a mutation.
+
+### OpenKatWizardGateway
+
+`lib/services/openkat/openkat_wizard_service.dart` supplies the desktop
+wizard's injectable boundary. `prepare(directory)` uses the existing import
+service to read and normalise a directory without writing to it, then returns
+scenario availability, source-derived options and preview facts.
+`preview(scan, recipe)` and `build(scan, recipe, {existing})` translate the
+typed wizard recipe to `OpenKatReportRequest` and delegate report generation to
+`OpenKatReportEngine`. When `existing` is supplied, the deck generator replaces
+only marked generated OpenKAT views; manual slides remain. This is a frontend
+gateway, not part of the headless engine API.
 
 For lifecycle, CVE-exposure and monitoring-change tables, `tableRowLimit`
 controls construction as well as presentation. It must be between 1 and 1,000.

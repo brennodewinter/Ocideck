@@ -1746,6 +1746,128 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Qoylu\'be\'laH jupbogh reportvam. chu\' report chenmoH; qonta\'bogh deck choHbe\'.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      '{reports} ja\'chuqmey wI\' {organizations} ghompu\'vaD tu\'lu\'. {firstDate} vo\' {lastDate} mojDI\' mI\'ghachmey. {skipped} De\'wI\'mey juSlu\'.',
+  'Dubbel bestand overgeslagen': 'De\'wI\' rap juSlu\'',
+  'Conflicterende meting overgeslagen': 'mI\'ghach pIm juSlu\'',
+  'Geen ondersteunde OpenKAT-rapportage': 'OpenKAT ja\'chuq lo\'laHbe\'',
+  'Bestand kon niet worden gelezen': 'De\'wI\'vam laDlu\'laHbe\'',
+  'Aanbevolen': 'maQ',
+  'Alleen wat nodig is': 'poQbogh neH',
+  'Alles blijft op dit apparaat': 'De\'wI\'vamDaq Hoch ratlhtaH',
+  'Als nieuw rapport maken': 'ja\'chuq chu\' chenmoH',
+  'Andere map kiezen': 'ngaSwI\' latlh yIwIv',
+  'Bekijk importverslag': 'qem ja\'chuq yIlegh',
+  'Bekijk verslag': 'ja\'chuq yIlegh',
+  'Bijvoorbeeld CVE-2026-12345': 'ghantoH: CVE-2026-12345',
+  'Bruikbaar': 'lo\'laH',
+  'CVE zoeken': 'CVE yISam',
+  'Critical/high': 'Qobqu\'/Qob',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'De\' QaD, tI\'laHbe\'bogh mI\'ghachmey, qan je.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'ja\'chuqmey wIvwI\' ghaHbogh qaStaHvIS, De\'na\' poQbogh pagh.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Hoch wIvwI\' poQbogh rInDI\', \'oH \'anglu\'.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'wIvwI\' mI\'ghach poHmey pImmo\', choHmey qabDaq neH nIDlu\'laH.',
+  'Dekking en actualiteit van metingen': 'mI\'ghach qaD je DaHjajghach',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'wIvwI\' mI\'ghachmeyDaq CVEvam tu\'lu\'be\'.',
+  'Deze map bevat geen bruikbare rapportages':
+      'ngaSwI\'vamDaq ja\'chuq lo\'laH pagh',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'De\' law\'qu\' ngaS wIvwI\'; wa\' ja\'chuqDaq QobHa\'lu\'laHbe\'.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'wIvwI\' ja\'chuqmeyvo\' patvam chenmoHchu\'lu\'laHbe\'.',
+  'Dit rapport bevat': 'ja\'chuqvamDaq ngaS',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'wa\' pagh mI\'ghachmey qan; DaHjajghach vo\' jIHbe\'.',
+  'Eerdere bruikbare meting': 'mI\'ghach lo\'laH pa\'',
+  'Engels': 'DIvI\' Hol',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'mI\'ghach lo\'laH tu\'lu\'be\'.',
+  'Feitelijke gegevens': 'De\'na\'',
+  'Geen bruikbare meetdatum': 'mI\'ghach jaj lo\'laH pagh',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'navmey chenmoHlu\'bogh choHlu\'. navmeylIj je chenqa\'meylIj je pollu\'.',
+  'Getroffen organisaties en systemen': 'ghompu\' patmey je QobmoHlu\'bogh',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'wa\' QobmoHbogh mIwDaq ghompu\' patmey je QobmoHlu\'bogh.',
+  'Getroffen systemen': 'patmey QobmoHlu\'bogh',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'ja\'chuq chenmoHlu\'laHbe\'. wIvwI\'meylIj pollu\'; \'ach Qobmey yIlegh \'ej yInIDqa\'.',
+  'Import': 'qem',
+  'Importverslag bekijken': 'qem ja\'chuq yIlegh',
+  'Kerncijfers en aandachtspunten': 'mI\'mey potlh je buSmeH De\'mey',
+  'Keuzes wijzigen…': 'wIvwI\'mey yIchoH…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'OpenKAT ja\'chuqmey ngaSbogh ngaSwI\' yIwIv. ngaSwI\'vam neH laD OciDeck; choHlu\'be\' pagh qemlu\'be\'.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'ja\'chuq rInmoHmeH mu\'mey yIwIv. pat rapbogh wIv OciDeck.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'ja\'chuqmeyDaq tu\'lu\'bogh CVE yIwIv.',
+  'Laatste bruikbare meting': 'mI\'ghach lo\'laH Qav',
+  'Live voorvertoning van de rapportopbouw': 'ja\'chuq pat \'angqa\'',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'ghompu\' law\'vaD che\'wI\' De\' je.',
+  'Meer instellingen': 'chermeH De\' law\'',
+  'Nederlands': 'Holanda Hol',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'poHvamDaq Hoch ghompu\' wIvwI\' mI\'ghach ghajbe\'.',
+  'Nieuwe en verdwenen bevindingen': 'tu\'lu\'bogh chu\' je polHa\'lu\'bogh je',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'DaH lo\'laHbe\': ja\'chuqmeyvamDaq CVE mI\'mey De\'na\' pagh.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck mung rap wIvwI\'mey rap je lo\'; mI\'ghach Qav lo\'laH wIv. navmeylIj je chenqa\'meylIj je pollu\'.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OpenKAT mI\'ghach lo\'laH SamlaHbe\' OciDeck. ngaSwI\' latlh yIwIv pagh qem ja\'chuq yIlegh; chay\' De\'wI\'mey juSlu\' vaj Dalegh.',
+  'OpenKAT-importverslag': 'OpenKAT qem ja\'chuq',
+  'OpenKAT-rapport': 'OpenKAT ja\'chuq',
+  'OpenKAT-rapport bijwerken': 'OpenKAT ja\'chuq choH',
+  'OpenKAT-rapport bijwerken…': 'OpenKAT ja\'chuq choH…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'OpenKAT ja\'chuq chenmoHlu\'laHbe\'.',
+  'OpenKAT-rapport maken': 'OpenKAT ja\'chuq chenmoH',
+  'OpenKAT-rapport maken…': 'OpenKAT ja\'chuq chenmoH…',
+  'Organisaties': 'ghompu\'',
+  'Organisaties kiezen': 'ghompu\' yIwIv',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'ja\'chuq choHlu\'. navmeylIj pollu\'.',
+  'Rapport bijwerken': 'ja\'chuq choH',
+  'Rapport gemaakt.': 'ja\'chuq chenmoHlu\'.',
+  'Rapport maken': 'ja\'chuq chenmoH',
+  'Rapportages controleren…': 'ja\'chuqmey yIwaQ…',
+  'Rapportages voorbereiden': 'ja\'chuqmey yIghojmoH',
+  'Rapporttitel': 'ja\'chuq pong',
+  'Stap': 'mIw',
+  'Taal': 'Hol',
+  'Terug': 'yIleghqa\'',
+  'Veranderingen in monitoring': 'leghmeH choHmey',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'ghompu\' wa\' pagh law\'vaD mI\'ghach lo\'laH pa\' ghajbe\'.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'ghompu\' wa\' pagh law\'vaD mI\'ghach lo\'laH DaH ghajbe\'.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'rapmeH cha\' mI\'ghach poH poQlu\'. DaH wa\' mI\'ghach tu\'lu\'.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'mI\'ghach poH pa\'Daq rapmeH Qap.',
+  'Waar staan de OpenKAT-rapportages?': 'nuqDaq OpenKAT ja\'chuqmey?',
+  'Wat veranderde er bij één organisatie?': 'wa\' ghomDaq nuq choH?',
+  'Wat wilt u laten zien?': 'nuq \'ang DaneH?',
+  'Welke organisaties vragen aandacht?': 'nuq ghompu\'vaD buSlu\'nIS?',
+  'Werkelijke meetdatums': 'mI\'ghach jajmeyna\'',
+  'Wie is geraakt door een CVE?': 'CVE QobmoHlu\'bogh \'Iv?',
+  'Zijn de metingen compleet en actueel?':
+      'mI\'ghachmey naQ\'a\' \'ej DaH\'a\'?',
+  'bruikbaar': 'lo\'laH',
+  'metingen': 'mI\'ghachmey',
+  'organisaties': 'ghompu\'',
+  'organisaties geselecteerd': 'ghompu\' wIvwI\'',
+  'rapportages gebruikt': 'ja\'chuqmey lo\'lu\'',
+  'systemen': 'patmey',
   'Nog geen specificatielimiet': 'wej Segh HeH tu\'lu\'',
   'USL (bovengrens)': 'USL (Dung HeH)',
   'LSL (ondergrens)': 'LSL (bIng HeH)',

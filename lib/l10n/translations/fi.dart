@@ -1771,6 +1771,133 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Tätä olemassa olevaa raporttia ei voi päivittää turvallisesti. Luo raportti uutena; olemassa oleva esityspakka pysyy muuttumattomana.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      '{reports} raporttia löytyi {organizations} organisaatiolle. Mittaukset ulottuvat ajalta {firstDate}–{lastDate}. {skipped} tiedostoa ohitettiin.',
+  'Dubbel bestand overgeslagen': 'Kaksoistiedosto ohitettiin',
+  'Conflicterende meting overgeslagen': 'Ristiriitainen mittaus ohitettiin',
+  'Geen ondersteunde OpenKAT-rapportage': 'OpenKAT-raporttia ei tueta',
+  'Bestand kon niet worden gelezen': 'Tiedostoa ei voitu lukea',
+  'Aanbevolen': 'Suositeltava',
+  'Alleen wat nodig is': 'Vain se, mikä on välttämätöntä',
+  'Alles blijft op dit apparaat': 'Alles blijft op dit apparaat',
+  'Als nieuw rapport maken': 'Luo uutena raporttina',
+  'Andere map kiezen': 'Valitse toinen kansio',
+  'Bekijk importverslag': 'Näytä tuontiraportti',
+  'Bekijk verslag': 'Näytä raportti',
+  'Bijvoorbeeld CVE-2026-12345': 'Bijvoorbeeld CVE-2026-12345',
+  'Bruikbaar': 'Käyttökelpoinen',
+  'CVE zoeken': 'CVE-haku',
+  'Critical/high': 'Kriittinen/korkea',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Tietojen laatu, puuttuvat mittaukset ja vanhentuminen.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Valitut raportit eivät sisällä tarpeeksi luotettavaa tietoa tälle osalle.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Sisältö tulee näkyviin, kun kaikki tarvittavat valinnat on tehty.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Mittausalue vaihtelee valittujen mittaushetkien välillä; Muutokset ovat siksi vertailukelpoisia vain rajoitetusti.',
+  'Dekking en actualiteit van metingen':
+      'Mittausten kattavuus ja oikea-aikaisuus',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Tätä CVE:tä ei löytynyt valituista mittauksista.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Tämä kansio ei sisällä hyödyllisiä raportteja',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Tämä valinta sisältää liian paljon dataa, jotta se voidaan turvallisesti sisällyttää yhteen raporttiin.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Tätä osaa ei voida rakentaa kokonaan valituista raporteista.',
+  'Dit rapport bevat': 'Tämä raportti sisältää',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Yksi tai useampi mittaus on vanhempi kuin valittu aikaraja.',
+  'Eerdere bruikbare meting': 'Edellinen hyödyllinen mittaus',
+  'Engels': 'englanti',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Hyödyllisiä mittauksia ei löytynyt.',
+  'Feitelijke gegevens': 'Faktatietoa',
+  'Geen bruikbare meetdatum': 'Ei käyttökelpoista mittauspäivää',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Luodut diat päivitetään. Omat diasi ja kopiosi säilytetään.',
+  'Getroffen organisaties en systemen':
+      'Vaikuttavat organisaatiot ja järjestelmät',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Vaikuttavat organisaatiot ja järjestelmät yhden haavoittuvuuden ympärillä.',
+  'Getroffen systemen': 'Vaikuttavat järjestelmät',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Raporttia ei voitu luoda. Valintasi säilytetään; tarkista varoitukset ja yritä uudelleen.',
+  'Import': 'Tuoda',
+  'Importverslag bekijken': 'Näytä tuontiraportti',
+  'Kerncijfers en aandachtspunten': 'Avainluvut ja kiinnostavat kohteet',
+  'Keuzes wijzigen…': 'Muuta valintoja…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Valitse kansio, johon OpenKAT on sijoittanut raportit. OciDeck lukee vain tämän kansion; mitään ei muuteta tai lähetetä.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Valitse kysymys, johon raportin tulee vastata. OciDeck määrittää sopivan rakenteen.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Valitse raporteista löytyvä CVE.',
+  'Laatste bruikbare meting': 'Viimeinen käytössä oleva mitta',
+  'Live voorvertoning van de rapportopbouw':
+      'Raportin rakenteen live esikatselu',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Hallinta- ja ohjaustiedot useista organisaatioista.',
+  'Meer instellingen': 'Lisää asetuksia',
+  'Nederlands': 'hollantilainen',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Kaikilla valituilla organisaatioilla ei ole mittausta tälle ajanjaksolle.',
+  'Nieuwe en verdwenen bevindingen': 'Uusia ja puuttuvia löytöjä',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Ei vielä saatavilla: nämä raportit eivät sisällä luotettavia CVE-numeroita.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck käyttää samoja lähteitä ja valintoja ja tekee uusimmat sopivat mittaukset. Omat diasi ja kopiosi säilytetään.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck ei löytänyt hyödyllisiä OpenKAT-mittauksia. Valitse toinen kansio tai tarkastele tuontiraporttia nähdäksesi, mitkä tiedostot ohitettiin.',
+  'OpenKAT-importverslag': 'OpenKAT-tuontiraportti',
+  'OpenKAT-rapport': 'OpenKAT-raportti',
+  'OpenKAT-rapport bijwerken': 'Päivitä OpenKAT-raportti',
+  'OpenKAT-rapport bijwerken…': 'Päivitä OpenKAT-raportti…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'OpenKAT-raporttia ei voitu luoda.',
+  'OpenKAT-rapport maken': 'Luo OpenKAT-raportti',
+  'OpenKAT-rapport maken…': 'Luo OpenKAT-raportti…',
+  'Organisaties': 'Organisaatiot',
+  'Organisaties kiezen': 'Organisaatioiden valinta',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Raportti päivitetty. Omat diat on säilytetty.',
+  'Rapport bijwerken': 'Päivitä raportti',
+  'Rapport gemaakt.': 'Raportti luotu.',
+  'Rapport maken': 'Luo raportti',
+  'Rapportages controleren…': 'Tarkista raportit…',
+  'Rapportages voorbereiden': 'Valmistele raportteja',
+  'Rapporttitel': 'Raportin otsikko',
+  'Stap': 'Vaihe',
+  'Taal': 'Kieli',
+  'Terug': 'Takaisin',
+  'Veranderingen in monitoring': 'Muutoksia seurannassa',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Yhdeltä tai useammalta organisaatiolta puuttuu hyödyllinen aiempi mittaus.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Hyödyllinen virtamittaus puuttuu yhdestä tai useammasta organisaatiosta.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Vertailua varten tarvitaan kaksi mittausmomenttia. Yksi mitta on nyt löytynyt.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Edistyminen verrattuna edelliseen mittaushetkeen.',
+  'Waar staan de OpenKAT-rapportages?': 'Missä OpenKAT-raportit ovat?',
+  'Wat veranderde er bij één organisatie?':
+      'Mikä yhdessä organisaatiossa muuttui?',
+  'Wat wilt u laten zien?': 'Mitä haluat näyttää?',
+  'Welke organisaties vragen aandacht?':
+      'Mitkä organisaatiot vaativat huomiota?',
+  'Werkelijke meetdatums': 'Todelliset mittauspäivät',
+  'Wie is geraakt door een CVE?': 'Keneen CVE vaikuttaa?',
+  'Zijn de metingen compleet en actueel?':
+      'Ovatko mitat täydelliset ja ajan tasalla?',
+  'bruikbaar': 'käyttökelpoinen',
+  'metingen': 'mittaukset',
+  'organisaties': 'järjestöt',
+  'organisaties geselecteerd': 'valitut organisaatiot',
+  'rapportages gebruikt': 'käytettyjä raportteja',
+  'systemen': 'järjestelmät',
   'Nog geen specificatielimiet': 'Ei vielä spesifikaatiorajaa',
   'USL (bovengrens)': 'USL (yläraja)',
   'LSL (ondergrens)': 'LSL (alaraja)',

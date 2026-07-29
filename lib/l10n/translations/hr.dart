@@ -1777,6 +1777,129 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Ovo postojeće izvješće nije moguće sigurno ažurirati. Izradite izvješće kao novo; postojeći deck ostaje nepromijenjen.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Pronađeno je {reports} izvješća za {organizations} organizacija. Mjerenja obuhvaćaju razdoblje od {firstDate} do {lastDate} uključivo. Preskočeno je {skipped} datoteka.',
+  'Dubbel bestand overgeslagen': 'Dvostruka datoteka preskočena',
+  'Conflicterende meting overgeslagen': 'Sukobljeno mjerenje preskočeno',
+  'Geen ondersteunde OpenKAT-rapportage': 'Nepodržano izvješće OpenKAT',
+  'Bestand kon niet worden gelezen': 'Datoteku nije bilo moguće pročitati',
+  'Aanbevolen': 'Preporučeno',
+  'Alleen wat nodig is': 'Samo ono što je nužno',
+  'Alles blijft op dit apparaat': 'Sve ostaje na ovom uređaju',
+  'Als nieuw rapport maken': 'Stvori kao novo izvješće',
+  'Andere map kiezen': 'Odaberite drugu mapu',
+  'Bekijk importverslag': 'Pogledajte izvješće o uvozu',
+  'Bekijk verslag': 'Pogledaj izvješće',
+  'Bijvoorbeeld CVE-2026-12345': 'Na primjer, CVE-2026-12345',
+  'Bruikbaar': 'Upotrebljivo',
+  'CVE zoeken': 'CVE pretraga',
+  'Critical/high': 'Kritično/visoko',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Kvaliteta podataka, mjerenja koja nedostaju i zastarjelost.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Odabrana izvješća ne sadrže dovoljno pouzdanih podataka za ovaj dio.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Sadržaj će se pojaviti nakon što se izvrše sve potrebne odluke.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Pokrivenost mjerenja razlikuje se između odabranih trenutaka mjerenja; promjene su stoga usporedive samo u ograničenoj mjeri.',
+  'Dekking en actualiteit van metingen': 'Obuhvat i pravodobnost mjerenja',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Ovaj CVE nije pronađen u odabranim mjerenjima.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Ova mapa ne sadrži korisna izvješća',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Ovaj odabir sadrži previše podataka da bi se sigurno uključio u jedno izvješće.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Ovaj se odjeljak ne može u potpunosti sastaviti od odabranih izvješća.',
+  'Dit rapport bevat': 'Ovo izvješće sadrži',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Jedno ili više mjerenja starije je od odabranog vremenskog ograničenja.',
+  'Eerdere bruikbare meting': 'Prethodno korisno mjerenje',
+  'Engels': 'engleski',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Nisu pronađena korisna mjerenja.',
+  'Feitelijke gegevens': 'Činjenični podaci',
+  'Geen bruikbare meetdatum': 'Nema upotrebljivog datuma mjerenja',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Generirani slajdovi se osvježavaju. Vaši slajdovi i kopije se zadržavaju.',
+  'Getroffen organisaties en systemen': 'Pogođene organizacije i sustavi',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Pogođene organizacije i sustavi oko jedne ranjivosti.',
+  'Getroffen systemen': 'Pogođeni sustavi',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Izvješće nije bilo moguće izraditi. Vaši izbori su sačuvani; provjerite upozorenja i pokušajte ponovo.',
+  'Import': 'Uvoz',
+  'Importverslag bekijken': 'Pogledajte izvješće o uvozu',
+  'Kerncijfers en aandachtspunten': 'Ključne brojke i zanimljivosti',
+  'Keuzes wijzigen…': 'Promjena izbora...',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Odaberite mapu u koju je OpenKAT smjestio izvješća. OciDeck čita samo ovu mapu; ništa se ne mijenja niti šalje.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Odaberite pitanje na koje izvješće treba odgovoriti. OciDeck određuje odgovarajuću strukturu.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Odaberite CVE koji se nalazi u izvješćima.',
+  'Laatste bruikbare meting': 'Zadnje upotrebljivo mjerenje',
+  'Live voorvertoning van de rapportopbouw': 'Pregled uživo strukture izvješća',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Informacije o upravljanju i kontroli višestrukih organizacija.',
+  'Meer instellingen': 'Više postavki',
+  'Nederlands': 'nizozemski',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Nema svaka odabrana organizacija mjerenje za ovo razdoblje.',
+  'Nieuwe en verdwenen bevindingen': 'Novi i nedostajući nalazi',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Još nije dostupno: ova izvješća ne sadrže pouzdane CVE brojeve.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck koristi isti izvor i odabire te uzima najnovija prikladna mjerenja. Vaši slajdovi i kopije se zadržavaju.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck nije mogao pronaći korisna OpenKAT mjerenja. Odaberite drugu mapu ili pogledajte izvješće o uvozu da vidite koje su datoteke preskočene.',
+  'OpenKAT-importverslag': 'OpenKAT izvješće o uvozu',
+  'OpenKAT-rapport': 'OpenKAT izvješće',
+  'OpenKAT-rapport bijwerken': 'Ažurirajte OpenKAT izvješće',
+  'OpenKAT-rapport bijwerken…': 'Ažurirajte OpenKAT izvješće…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'Izvješće OpenKAT nije bilo moguće izraditi.',
+  'OpenKAT-rapport maken': 'Napravite OpenKAT izvješće',
+  'OpenKAT-rapport maken…': 'Napravi OpenKAT izvješće…',
+  'Organisaties': 'organizacije',
+  'Organisaties kiezen': 'Odabir organizacija',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Izvješće ažurirano. Vaši slajdovi su zadržani.',
+  'Rapport bijwerken': 'Ažurirajte izvješće',
+  'Rapport gemaakt.': 'Izvješće kreirano.',
+  'Rapport maken': 'Izradi izvješće',
+  'Rapportages controleren…': 'Provjerite izvješća…',
+  'Rapportages voorbereiden': 'Pripremite izvješća',
+  'Rapporttitel': 'Naslov izvješća',
+  'Stap': 'Korak',
+  'Taal': 'Jezik',
+  'Terug': 'Nazad',
+  'Veranderingen in monitoring': 'Promjene u praćenju',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Nedostaje korisno prethodno mjerenje za jednu ili više organizacija.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Nedostaje korisno trenutno mjerenje za jednu ili više organizacija.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Za usporedbu su potrebna dva mjerna momenta. Jedno mjerenje je sada pronađeno.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Napredak u usporedbi s prethodnim trenutkom mjerenja.',
+  'Waar staan de OpenKAT-rapportages?': 'Gdje su OpenKAT izvješća?',
+  'Wat veranderde er bij één organisatie?':
+      'Što se promijenilo u jednoj organizaciji?',
+  'Wat wilt u laten zien?': 'Što želite pokazati?',
+  'Welke organisaties vragen aandacht?':
+      'Koje organizacije zahtijevaju pozornost?',
+  'Werkelijke meetdatums': 'Stvarni datumi mjerenja',
+  'Wie is geraakt door een CVE?': 'Koga pogađa CVE?',
+  'Zijn de metingen compleet en actueel?': 'Jesu li mjerenja potpuna i ažurna?',
+  'bruikbaar': 'iskoristiv',
+  'metingen': 'mjerenja',
+  'organisaties': 'organizacije',
+  'organisaties geselecteerd': 'odabrane organizacije',
+  'rapportages gebruikt': 'korištena izvješća',
+  'systemen': 'sustava',
   'Nog geen specificatielimiet': 'Još nema specifikacijskog ograničenja',
   'USL (bovengrens)': 'USL (gornja granica)',
   'LSL (ondergrens)': 'LSL (donja granica)',

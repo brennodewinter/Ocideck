@@ -56,7 +56,7 @@ class OpenKatIntegrationPanel extends ConsumerWidget {
             Expanded(
               child: Text(
                 l10n.d(
-                  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.',
+                  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.',
                 ),
                 style: TextStyle(fontSize: 12, color: AppTheme.slate600),
               ),
@@ -124,8 +124,8 @@ class _ImportNowRowState extends ConsumerState<_ImportNowRow> {
                     height: 14,
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
-                : const Icon(Icons.play_arrow_outlined, size: 16),
-            label: Text(l10n.d('Nu importeren')),
+                : const Icon(Icons.fact_check_outlined, size: 16),
+            label: Text(l10n.d('Rapportages controleren…')),
           ),
         ),
         if (_outcome != null) ...[

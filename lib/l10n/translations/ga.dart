@@ -1806,6 +1806,133 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Ní féidir an tuarascáil reatha seo a nuashonrú go sábháilte. Cruthaigh an tuarascáil mar cheann nua; fanann an deck reatha gan athrú.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Fuarthas {reports} tuarascáil do {organizations} eagraíocht. Maireann na tomhais ó {firstDate} go dtí {lastDate}, san áireamh. Fágadh {skipped} comhad ar lár.',
+  'Dubbel bestand overgeslagen': 'Fágadh comhad dúblach ar lár',
+  'Conflicterende meting overgeslagen': 'Fágadh tomhas contrártha ar lár',
+  'Geen ondersteunde OpenKAT-rapportage':
+      'Tuarascáil OpenKAT nach dtacaítear léi',
+  'Bestand kon niet worden gelezen': 'Níorbh fhéidir an comhad a léamh',
+  'Aanbevolen': 'Molta',
+  'Alleen wat nodig is': 'Níl ach an méid is gá',
+  'Alles blijft op dit apparaat': 'Fanann gach rud ar an ngléas seo',
+  'Als nieuw rapport maken': 'Cruthaigh mar thuarascáil nua',
+  'Andere map kiezen': 'Roghnaigh fillteán eile',
+  'Bekijk importverslag': 'Féach ar an tuarascáil iompórtála',
+  'Bekijk verslag': 'Féach ar an tuarascáil',
+  'Bijvoorbeeld CVE-2026-12345': 'Mar shampla, CVE-2026-12345',
+  'Bruikbaar': 'Inúsáidte',
+  'CVE zoeken': 'Cuardach CVE',
+  'Critical/high': 'Criticiúil/ard',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Cáilíocht sonraí, tomhais in easnamh agus dífheidhmeacht.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Níl go leor sonraí iontaofa sna tuarascálacha roghnaithe don chuid seo.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Beidh an t-ábhar le feiceáil nuair a bheidh na roghanna riachtanacha go léir déanta.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Tá difríocht idir an clúdach tomhais idir na móimintí tomhais roghnaithe; mar sin ní féidir na hathruithe a chur i gcomparáid ach go pointe teoranta.',
+  'Dekking en actualiteit van metingen': 'Clúdach agus tráthúlacht na dtomhas',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Ní bhfuarthas an CVE seo sna tomhais roghnaithe.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Níl aon tuairiscí úsáideacha san fhillteán seo',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Tá an iomarca sonraí sa roghnú seo le cur san áireamh go sábháilte i dtuarascáil amháin.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Ní féidir an chuid seo a thógáil go hiomlán ó na tuarascálacha roghnaithe.',
+  'Dit rapport bevat': 'Tá sa tuarascáil seo',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Tá tomhas amháin nó níos mó níos sine ná an teorainn ama roghnaithe.',
+  'Eerdere bruikbare meting': 'Tomhas úsáideach roimhe seo',
+  'Engels': 'Béarla',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Ní bhfuarthas aon tomhais úsáideacha.',
+  'Feitelijke gegevens': 'Sonraí fíorasacha',
+  'Geen bruikbare meetdatum': 'Gan dáta tomhais inúsáidte',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Athnuachann sleamhnáin ginte. Coinnítear do shleamhnáin agus do chóipeanna féin.',
+  'Getroffen organisaties en systemen':
+      'Eagraíochtaí agus córais lena mbaineann',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Eagraíochtaí agus córais a bhfuil tionchar acu thart ar leochaileacht amháin.',
+  'Getroffen systemen': 'Córais a bhfuil tionchar orthu',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Níorbh fhéidir an tuarascáil a chruthú. Tá do roghanna caomhnaithe; seiceáil na rabhaidh agus bain triail eile as.',
+  'Import': 'Iompórtáil',
+  'Importverslag bekijken': 'Féach ar an tuarascáil iompórtála',
+  'Kerncijfers en aandachtspunten': 'Príomhfhigiúirí agus pointí spéise',
+  'Keuzes wijzigen…': 'Athraigh roghanna…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Roghnaigh an fillteán inar chuir OpenKAT na tuarascálacha. Ní léann OciDeck ach an fillteán seo; ní athraítear ná ní sheoltar aon rud.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Roghnaigh an cheist ba cheart don tuarascáil a fhreagairt. Cinneann OciDeck an struchtúr cuí.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Roghnaigh CVE a fhaightear sna tuarascálacha.',
+  'Laatste bruikbare meting': 'An tomhas is déanaí inúsáidte',
+  'Live voorvertoning van de rapportopbouw':
+      'Réamhamharc beo ar struchtúr na tuairisce',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Eolas bainistíochta agus rialaithe faoi eagraíochtaí iolracha.',
+  'Meer instellingen': 'Tuilleadh socruithe',
+  'Nederlands': 'Ollainnis',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Níl tomhas ag gach eagraíocht roghnaithe don tréimhse seo.',
+  'Nieuwe en verdwenen bevindingen': 'Torthaí nua agus in easnamh',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Níl sé ar fáil fós: níl uimhreacha iontaofa CVE sna tuarascálacha seo.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'Úsáideann OciDeck an fhoinse agus na roghanna céanna agus déanann sé na tomhais oiriúnacha is déanaí. Coinnítear do shleamhnáin agus do chóipeanna féin.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'Níorbh fhéidir le OciDeck aon tomhais úsáideacha OpenKAT a aimsiú. Roghnaigh fillteán eile nó féach ar an tuairisc iompórtála chun a fheiceáil cé na comhaid ar seachnaíodh iad.',
+  'OpenKAT-importverslag': 'Tuarascáil iompórtála OpenKAT',
+  'OpenKAT-rapport': 'Tuarascáil OpenKAT',
+  'OpenKAT-rapport bijwerken': 'Nuashonraigh an tuarascáil OpenKAT',
+  'OpenKAT-rapport bijwerken…': 'Nuashonraigh tuairisc OpenKAT…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'Níorbh fhéidir tuairisc OpenKAT a chruthú.',
+  'OpenKAT-rapport maken': 'Cruthaigh tuarascáil OpenKAT',
+  'OpenKAT-rapport maken…': 'Cruthaigh tuairisc OpenKAT…',
+  'Organisaties': 'Eagraíochtaí',
+  'Organisaties kiezen': 'Eagraíochtaí a roghnú',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Tuarascáil nuashonraithe. Coinníodh do shleamhnáin féin.',
+  'Rapport bijwerken': 'Tuairisc nuashonraithe',
+  'Rapport gemaakt.': 'Cruthaíodh an tuarascáil.',
+  'Rapport maken': 'Cruthaigh tuairisc',
+  'Rapportages controleren…': 'Seiceáil tuairiscí…',
+  'Rapportages voorbereiden': 'Tuarascálacha a ullmhú',
+  'Rapporttitel': 'Teideal na tuarascála',
+  'Stap': 'Céim',
+  'Taal': 'Teanga',
+  'Terug': 'Ar ais',
+  'Veranderingen in monitoring': 'Athruithe ar mhonatóireacht',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Tá tomhas úsáideach roimhe seo in easnamh i gcás eagraíocht amháin nó níos mó.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Tá tomhas reatha úsáideach in easnamh d’eagraíocht amháin nó níos mó.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Teastaíonn dhá nóiméad tomhais le haghaidh comparáide. Tá tomhas amháin aimsithe anois.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Dul chun cinn i gcomparáid le nóiméad tomhais roimhe seo.',
+  'Waar staan de OpenKAT-rapportages?': 'Cá bhfuil na tuarascálacha OpenKAT?',
+  'Wat veranderde er bij één organisatie?':
+      'Cad a d’athraigh ag eagraíocht amháin?',
+  'Wat wilt u laten zien?': 'Cad ba mhaith leat a thaispeáint?',
+  'Welke organisaties vragen aandacht?':
+      'Cé na heagraíochtaí a dteastaíonn aird uathu?',
+  'Werkelijke meetdatums': 'Dátaí tomhais iarbhír',
+  'Wie is geraakt door een CVE?': 'Cé air a bhfuil tionchar ag CVE?',
+  'Zijn de metingen compleet en actueel?':
+      'An bhfuil na tomhais iomlán agus cothrom le dáta?',
+  'bruikbaar': 'inúsáidte',
+  'metingen': 'tomhais',
+  'organisaties': 'eagraíochtaí',
+  'organisaties geselecteerd': 'eagraíochtaí roghnaithe',
+  'rapportages gebruikt': 'tuarascálacha a úsáideadh',
+  'systemen': 'córais',
   'Nog geen specificatielimiet': 'Níl teorainn sonraíochta fós',
   'USL (bovengrens)': 'USL (teorainn uachtarach)',
   'LSL (ondergrens)': 'LSL (teorainn íochtarach)',

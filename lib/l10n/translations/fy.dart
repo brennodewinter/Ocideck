@@ -731,6 +731,131 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Dit besteande rapport kin net feilich bywurke wurde. Meitsje it rapport as nij; it besteande deck bliuwt ûnferoare.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      '{reports} rapporten fûn foar {organizations} organisaasjes. De mjittingen rinne fan {firstDate} oant en mei {lastDate}. {skipped} bestannen binne oerslein.',
+  'Dubbel bestand overgeslagen': 'Dûbel bestân oerslein',
+  'Conflicterende meting overgeslagen': 'Tsjinstridige mjitting oerslein',
+  'Geen ondersteunde OpenKAT-rapportage': 'Net-stipe OpenKAT-rapport',
+  'Bestand kon niet worden gelezen': 'Bestân koe net lêzen wurde',
+  'Aanbevolen': 'Oanrikkemandearre',
+  'Alleen wat nodig is': 'Allinne wat nedich is',
+  'Alles blijft op dit apparaat': 'Alles bliuwt op dit apparaat',
+  'Als nieuw rapport maken': 'Meitsje as nij rapport',
+  'Andere map kiezen': 'Kies in oare map',
+  'Bekijk importverslag': 'Besjoch ymportrapport',
+  'Bekijk verslag': 'Besjoch rapport',
+  'Bijvoorbeeld CVE-2026-12345': 'Bygelyks, CVE-2026-12345',
+  'Bruikbaar': 'Brûkber',
+  'CVE zoeken': 'CVE sykje',
+  'Critical/high': 'Kritysk / heech',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Gegevenskwaliteit, ûntbrekkende mjittingen en ferâldering.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'De selektearre rapporten befetsje net genôch betroubere gegevens foar dit diel.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'De ynhâld sil ferskine as alle nedige karren binne makke.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'De mjitdekking ferskilt tusken de keazen mjitmominten; feroarings binne dêrom mar yn beheinde mjitte te fergelykjen.',
+  'Dekking en actualiteit van metingen':
+      'Dekking en aktualiteit fan mjittingen',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Dizze CVE waard net fûn yn \'e selekteare mjittingen.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Dizze map befettet gjin nuttige rapporten',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Dizze seleksje befettet tefolle gegevens om feilich op te nimmen yn ien rapport.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Dizze seksje kin net folslein opboud wurde fan de selektearre rapporten.',
+  'Dit rapport bevat': 'Dit rapport befettet',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Ien of mear mjittingen binne âlder dan de selektearre tiidlimyt.',
+  'Eerdere bruikbare meting': 'Foarige nuttige mjitting',
+  'Engels': 'Ingelsk',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Gjin nuttige mjittingen waarden fûn.',
+  'Feitelijke gegevens': 'Feitlike gegevens',
+  'Geen bruikbare meetdatum': 'Gjin brûkbere mjittingsdatum',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Generearre dia\'s wurde ferfarske. Jo eigen dia\'s en kopyen wurde bewarre.',
+  'Getroffen organisaties en systemen': 'Beynfloede organisaasjes en systemen',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Beynfloede organisaasjes en systemen om ien kwetsberens.',
+  'Getroffen systemen': 'Beynfloede systemen',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'It rapport koe net oanmakke wurde. Jo karren wurde bewarre; kontrolearje de warskôgings en besykje it nochris.',
+  'Import': 'Ymport',
+  'Importverslag bekijken': 'Besjoch ymportrapport',
+  'Kerncijfers en aandachtspunten': 'Key sifers en punten fan belang',
+  'Keuzes wijzigen…': 'Feroarje karren ...',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Kies de map wêryn OpenKAT de rapporten pleatst hat. OciDeck lêst allinich dizze map; neat wurdt feroare of ferstjoerd.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Kies de fraach dy\'t it rapport beantwurdzje moat. OciDeck bepaalt de passende struktuer.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Kies in CVE fûn yn \'e rapporten.',
+  'Laatste bruikbare meting': 'Lêste brûkbere mjitting',
+  'Live voorvertoning van de rapportopbouw':
+      'Live foarbyld fan it rapport struktuer',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Behear en kontrôle ynformaasje oer meardere organisaasjes.',
+  'Meer instellingen': 'Mear ynstellings',
+  'Nederlands': 'Nederlânsk',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Net elke keazen organisaasje hat in mjitting foar dizze perioade.',
+  'Nieuwe en verdwenen bevindingen': 'Nije en ûntbrekkende fynsten',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Noch net beskikber: dizze rapporten befetsje gjin betroubere CVE-nûmers.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck brûkt deselde boarne en karren en nimt de lêste geskikte mjittingen. Jo eigen dia\'s en kopyen wurde bewarre.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck koe gjin nuttige OpenKAT-mjittingen fine. Kies in oare map of besjoch it ymportrapport om te sjen hokker bestannen oerslein binne.',
+  'OpenKAT-importverslag': 'OpenKAT ymportrapport',
+  'OpenKAT-rapport': 'OpenKAT rapport',
+  'OpenKAT-rapport bijwerken': 'Update OpenKAT-rapport',
+  'OpenKAT-rapport bijwerken…': 'Update OpenKAT-rapport ...',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'OpenKAT-rapport koe net oanmakke wurde.',
+  'OpenKAT-rapport maken': 'Meitsje OpenKAT-rapport',
+  'OpenKAT-rapport maken…': 'OpenKAT-rapport meitsje ...',
+  'Organisaties': 'Organisaasjes',
+  'Organisaties kiezen': 'Kieze organisaasjes',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Ferslach bywurke. Jo eigen dia\'s binne bewarre bleaun.',
+  'Rapport bijwerken': 'Update rapport',
+  'Rapport gemaakt.': 'Rapport makke.',
+  'Rapport maken': 'Meitsje rapport',
+  'Rapportages controleren…': 'Kontrolearje rapporten ...',
+  'Rapportages voorbereiden': 'Meitsje rapporten',
+  'Rapporttitel': 'Rapport titel',
+  'Stap': 'Stap',
+  'Taal': 'Taal',
+  'Terug': 'Rêch',
+  'Veranderingen in monitoring': 'Feroarings yn tafersjoch',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'In nuttige foarige mjitting ûntbrekt foar ien of mear organisaasjes.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'In brûkbere aktuele mjitting ûntbrekt foar ien of mear organisaasjes.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Twa mjitmominten binne nedich foar in ferliking. Der is no ien mjitting fûn.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Foarútgong yn ferliking mei in earder mjitmomint.',
+  'Waar staan de OpenKAT-rapportages?': 'Wêr binne de OpenKAT-rapporten?',
+  'Wat veranderde er bij één organisatie?': 'Wat feroare by ien organisaasje?',
+  'Wat wilt u laten zien?': 'Wat wolle jo sjen litte?',
+  'Welke organisaties vragen aandacht?':
+      'Hokker organisaasjes freegje omtinken?',
+  'Werkelijke meetdatums': 'Eigentlike mjitting dates',
+  'Wie is geraakt door een CVE?': 'Wa wurdt beynfloede troch in CVE?',
+  'Zijn de metingen compleet en actueel?':
+      'Binne de mjittingen kompleet en bywurke?',
+  'bruikbaar': 'brûkber',
+  'metingen': 'mjittingen',
+  'organisaties': 'organisaasjes',
+  'organisaties geselecteerd': 'organisaasjes selektearre',
+  'rapportages gebruikt': 'rapporten brûkt',
+  'systemen': 'systemen',
   'Nog geen specificatielimiet': 'Noch gjin spesifikaasjelimyt',
   'USL (bovengrens)': 'USL (boppegrins)',
   'LSL (ondergrens)': 'LSL (ûndergrins)',

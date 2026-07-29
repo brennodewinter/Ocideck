@@ -144,7 +144,11 @@ extension _MainLayoutMenu on _MainLayoutState {
       // En het zit achter de module Importeren: `importModuleRevealProvider`
       // legt uit waarom dat de reveal is en niet de schakelaar.
       if (supportsLocalProjectFolders && ref.watch(importModuleRevealProvider))
-        _menuItem('import_openkat', Icons.radar_outlined, openKatLabel(l10n)),
+        _menuItem(
+          'import_openkat',
+          Icons.radar_outlined,
+          openKatLabel(l10n, updating: hasActiveOpenKatReport(ref)),
+        ),
       // De tweede bron van dezelfde module: presentaties uit PowerPoint,
       // Keynote en Impress. Werkt op bytes, dus anders dan OpenKAT ook op web.
       if (ref.watch(importModuleRevealProvider))

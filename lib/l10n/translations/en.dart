@@ -911,6 +911,131 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'This existing report cannot be updated safely. Create the report as new; the existing deck remains unchanged.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      '{reports} reports found for {organizations} organizations. The measurements run from {firstDate} through {lastDate}. {skipped} files were skipped.',
+  'Dubbel bestand overgeslagen': 'Duplicate file skipped',
+  'Conflicterende meting overgeslagen': 'Conflicting measurement skipped',
+  'Geen ondersteunde OpenKAT-rapportage': 'Unsupported OpenKAT report',
+  'Bestand kon niet worden gelezen': 'File could not be read',
+  'Aanbevolen': 'Recommended',
+  'Alleen wat nodig is': 'Only what is necessary',
+  'Alles blijft op dit apparaat': 'Everything stays on this device',
+  'Als nieuw rapport maken': 'Create as new report',
+  'Andere map kiezen': 'Choose another folder',
+  'Bekijk importverslag': 'View import report',
+  'Bekijk verslag': 'View report',
+  'Bijvoorbeeld CVE-2026-12345': 'For example, CVE-2026-12345',
+  'Bruikbaar': 'Usable',
+  'CVE zoeken': 'CVE search',
+  'Critical/high': 'Critical or high',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Data quality, missing measurements and obsolescence.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'The selected reports do not contain enough reliable data for this part.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'The content will appear once all necessary choices have been made.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'The measurement coverage differs between the chosen measurement moments; changes are therefore only comparable to a limited extent.',
+  'Dekking en actualiteit van metingen':
+      'Coverage and timeliness of measurements',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'This CVE was not found in the selected measurements.',
+  'Deze map bevat geen bruikbare rapportages':
+      'This folder contains no useful reports',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'This selection contains too much data to safely include in one report.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'This section cannot be built entirely from the selected reports.',
+  'Dit rapport bevat': 'This report contains',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'One or more measurements are older than the selected timeliness limit.',
+  'Eerdere bruikbare meting': 'Previous useful measurement',
+  'Engels': 'English',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'No useful measurements were found.',
+  'Feitelijke gegevens': 'Factual data',
+  'Geen bruikbare meetdatum': 'No usable measurement date',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Generated slides are refreshed. Your own slides and copies are retained.',
+  'Getroffen organisaties en systemen': 'Affected organizations and systems',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Affected organizations and systems around one vulnerability.',
+  'Getroffen systemen': 'Affected systems',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'The report could not be created. Your choices are preserved; check the warnings and try again.',
+  'Import': 'Import process',
+  'Importverslag bekijken': 'View import report',
+  'Kerncijfers en aandachtspunten': 'Key figures and points of interest',
+  'Keuzes wijzigen…': 'Change choices…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Choose the folder in which OpenKAT has placed the reports. OciDeck only reads this folder; nothing is changed or sent.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Choose the question the report should answer. OciDeck determines the appropriate structure.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Choose a CVE found in the reports.',
+  'Laatste bruikbare meting': 'Last usable measurement',
+  'Live voorvertoning van de rapportopbouw':
+      'Live preview of the report structure',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Management and control information about multiple organizations.',
+  'Meer instellingen': 'More settings',
+  'Nederlands': 'Dutch',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Not every chosen organization has a measurement for this period.',
+  'Nieuwe en verdwenen bevindingen': 'New and missing findings',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Not yet available: these reports do not contain reliable CVE numbers.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck uses the same source and choices and takes the latest suitable measurements. Your own slides and copies are retained.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck could not find any useful OpenKAT measurements. Choose a different folder or view the import report to see which files were skipped.',
+  'OpenKAT-importverslag': 'OpenKAT import report',
+  'OpenKAT-rapport': 'OpenKAT report',
+  'OpenKAT-rapport bijwerken': 'Update OpenKAT report',
+  'OpenKAT-rapport bijwerken…': 'Update OpenKAT report…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'OpenKAT report could not be created.',
+  'OpenKAT-rapport maken': 'Create OpenKAT report',
+  'OpenKAT-rapport maken…': 'Create OpenKAT report…',
+  'Organisaties': 'Organizations',
+  'Organisaties kiezen': 'Choosing organizations',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Report updated. Your own slides have been retained.',
+  'Rapport bijwerken': 'Update report',
+  'Rapport gemaakt.': 'Report created.',
+  'Rapport maken': 'Create report',
+  'Rapportages controleren…': 'Check reports…',
+  'Rapportages voorbereiden': 'Prepare reports',
+  'Rapporttitel': 'Report title',
+  'Stap': 'Step',
+  'Taal': 'Language',
+  'Terug': 'Back',
+  'Veranderingen in monitoring': 'Changes in monitoring',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'A useful previous measurement is missing for one or more organizations.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'A useful current measurement is missing for one or more organizations.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Two measuring moments are required for a comparison. One measurement has now been found.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Progress compared to a previous measurement moment.',
+  'Waar staan de OpenKAT-rapportages?': 'Where are the OpenKAT reports?',
+  'Wat veranderde er bij één organisatie?': 'What changed at one organization?',
+  'Wat wilt u laten zien?': 'What do you want to show?',
+  'Welke organisaties vragen aandacht?':
+      'Which organizations require attention?',
+  'Werkelijke meetdatums': 'Actual measurement dates',
+  'Wie is geraakt door een CVE?': 'Who is affected by a CVE?',
+  'Zijn de metingen compleet en actueel?':
+      'Are the measurements complete and up to date?',
+  'bruikbaar': 'usable',
+  'metingen': 'measurements',
+  'organisaties': 'organizations',
+  'organisaties geselecteerd': 'organizations selected',
+  'rapportages gebruikt': 'reports used',
+  'systemen': 'systems',
   'Nog geen specificatielimiet': 'No specification limit yet',
   'USL (bovengrens)': 'USL (upper limit)',
   'LSL (ondergrens)': 'LSL (lower limit)',

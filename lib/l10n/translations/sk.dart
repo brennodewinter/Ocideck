@@ -1778,6 +1778,129 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Túto existujúcu správu nemožno bezpečne aktualizovať. Vytvorte správu ako novú; existujúci deck zostane nezmenený.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Našlo sa {reports} správ pre {organizations} organizácií. Merania prebiehajú od {firstDate} do {lastDate} vrátane. Preskočených bolo {skipped} súborov.',
+  'Dubbel bestand overgeslagen': 'Duplicitný súbor preskočený',
+  'Conflicterende meting overgeslagen': 'Konfliktné meranie preskočené',
+  'Geen ondersteunde OpenKAT-rapportage': 'Nepodporovaná správa OpenKAT',
+  'Bestand kon niet worden gelezen': 'Súbor sa nepodarilo prečítať',
+  'Aanbevolen': 'Odporúčané',
+  'Alleen wat nodig is': 'Len to, čo je nevyhnutné',
+  'Alles blijft op dit apparaat': 'Všetko zostáva na tomto zariadení',
+  'Als nieuw rapport maken': 'Vytvoriť ako nový prehľad',
+  'Andere map kiezen': 'Vyberte iný priečinok',
+  'Bekijk importverslag': 'Zobraziť prehľad importu',
+  'Bekijk verslag': 'Zobraziť prehľad',
+  'Bijvoorbeeld CVE-2026-12345': 'Napríklad CVE-2026-12345',
+  'Bruikbaar': 'Použiteľné',
+  'CVE zoeken': 'vyhľadávanie CVE',
+  'Critical/high': 'Kritické/vysoké',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Kvalita údajov, chýbajúce merania a zastarávanie.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Vybrané prehľady neobsahujú dostatok spoľahlivých údajov pre túto časť.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Obsah sa zobrazí po vykonaní všetkých potrebných volieb.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Rozsah merania sa líši medzi zvolenými momentmi merania; zmeny sú preto porovnateľné len v obmedzenej miere.',
+  'Dekking en actualiteit van metingen': 'Pokrytie a aktuálnosť meraní',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Tento CVE sa vo vybraných meraniach nenašiel.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Tento priečinok neobsahuje žiadne užitočné prehľady',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Tento výber obsahuje príliš veľa údajov na bezpečné zahrnutie do jedného prehľadu.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Túto sekciu nemožno zostaviť úplne z vybratých prehľadov.',
+  'Dit rapport bevat': 'Táto správa obsahuje',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Jedno alebo viacero meraní je starších ako vybraný limit včasnosti.',
+  'Eerdere bruikbare meting': 'Predchádzajúce užitočné meranie',
+  'Engels': 'angličtina',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Nenašli sa žiadne užitočné merania.',
+  'Feitelijke gegevens': 'Faktické údaje',
+  'Geen bruikbare meetdatum': 'Žiadny použiteľný dátum merania',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Vygenerované snímky sa obnovia. Vaše vlastné snímky a kópie sa zachovajú.',
+  'Getroffen organisaties en systemen': 'Postihnuté organizácie a systémy',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Ovplyvnené organizácie a systémy okolo jednej zraniteľnosti.',
+  'Getroffen systemen': 'Ovplyvnené systémy',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Prehľad sa nepodarilo vytvoriť. Vaše voľby sú zachované; skontrolujte upozornenia a skúste to znova.',
+  'Import': 'Importovať',
+  'Importverslag bekijken': 'Zobraziť prehľad importu',
+  'Kerncijfers en aandachtspunten': 'Kľúčové postavy a zaujímavosti',
+  'Keuzes wijzigen…': 'Zmeniť voľby…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Vyberte priečinok, do ktorého OpenKAT umiestnil prehľady. OciDeck číta iba tento priečinok; nič sa nezmení ani neodošle.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Vyberte otázku, na ktorú by mala správa odpovedať. OciDeck určí vhodnú štruktúru.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Vyberte CVE, ktorý nájdete v prehľadoch.',
+  'Laatste bruikbare meting': 'Posledné použiteľné meranie',
+  'Live voorvertoning van de rapportopbouw': 'Živý náhľad štruktúry zostavy',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Správa a kontrola informácií o viacerých organizáciách.',
+  'Meer instellingen': 'Ďalšie nastavenia',
+  'Nederlands': 'holandský',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Nie každá vybraná organizácia má meranie pre toto obdobie.',
+  'Nieuwe en verdwenen bevindingen': 'Nové a chýbajúce zistenia',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Zatiaľ nie je k dispozícii: tieto správy neobsahujú spoľahlivé čísla CVE.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck používa rovnaký zdroj a voľby a vykonáva najnovšie vhodné merania. Vaše vlastné snímky a kópie sa zachovajú.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck nenašiel žiadne užitočné merania OpenKAT. Vyberte iný priečinok alebo si pozrite správu importu, aby ste videli, ktoré súbory boli preskočené.',
+  'OpenKAT-importverslag': 'Správa o importe OpenKAT',
+  'OpenKAT-rapport': 'Správa OpenKAT',
+  'OpenKAT-rapport bijwerken': 'Aktualizujte prehľad OpenKAT',
+  'OpenKAT-rapport bijwerken…': 'Aktualizovať prehľad OpenKAT…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'Prehľad OpenKAT sa nepodarilo vytvoriť.',
+  'OpenKAT-rapport maken': 'Vytvorte prehľad OpenKAT',
+  'OpenKAT-rapport maken…': 'Vytvoriť prehľad OpenKAT…',
+  'Organisaties': 'organizácie',
+  'Organisaties kiezen': 'Výber organizácií',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Správa bola aktualizovaná. Vaše vlastné snímky boli zachované.',
+  'Rapport bijwerken': 'Aktualizovať prehľad',
+  'Rapport gemaakt.': 'Správa bola vytvorená.',
+  'Rapport maken': 'Vytvorte prehľad',
+  'Rapportages controleren…': 'Skontrolujte prehľady…',
+  'Rapportages voorbereiden': 'Pripravte správy',
+  'Rapporttitel': 'Názov správy',
+  'Stap': 'Krok',
+  'Taal': 'Jazyk',
+  'Terug': 'Späť',
+  'Veranderingen in monitoring': 'Zmeny v monitorovaní',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Pre jednu alebo viacero organizácií chýba užitočné predchádzajúce meranie.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Chýba užitočné meranie prúdu pre jednu alebo viacero organizácií.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Na porovnanie sú potrebné dva meracie momenty. Jedno meranie sa teraz našlo.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Pokrok v porovnaní s predchádzajúcim momentom merania.',
+  'Waar staan de OpenKAT-rapportages?': 'Kde sú správy OpenKAT?',
+  'Wat veranderde er bij één organisatie?':
+      'Čo sa zmenilo v jednej organizácii?',
+  'Wat wilt u laten zien?': 'čo chceš ukázať?',
+  'Welke organisaties vragen aandacht?':
+      'Ktoré organizácie si vyžadujú pozornosť?',
+  'Werkelijke meetdatums': 'Skutočné dátumy merania',
+  'Wie is geraakt door een CVE?': 'Koho postihuje CVE?',
+  'Zijn de metingen compleet en actueel?': 'Sú merania úplné a aktuálne?',
+  'bruikbaar': 'použiteľné',
+  'metingen': 'merania',
+  'organisaties': 'organizácií',
+  'organisaties geselecteerd': 'vybraných organizácií',
+  'rapportages gebruikt': 'použité prehľady',
+  'systemen': 'systémov',
   'Nog geen specificatielimiet': 'Zatiaľ žiadny limit špecifikácie',
   'USL (bovengrens)': 'USL (horná medza)',
   'LSL (ondergrens)': 'LSL (dolná medza)',

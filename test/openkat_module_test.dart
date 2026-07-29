@@ -12,7 +12,6 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/state/import_module_provider.dart';
 import 'package:ocideck/state/openkat_provider.dart';
 import 'package:ocideck/state/settings_provider.dart';
-import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/dialogs/settings/import_module_card.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/shell/openkat_import_action.dart';
@@ -232,7 +231,9 @@ void main() {
       expect(find.text('Geen map gekozen'), findsOneWidget);
     });
 
-    testWidgets('zonder map is "Nu importeren" uitgeschakeld', (tester) async {
+    testWidgets('zonder map is rapportages controleren uitgeschakeld', (
+      tester,
+    ) async {
       // Een knop die zichtbaar níets kan doen is beter dan een knop die stil
       // een tweede mapkiezer opent naast de knop ernaast.
       await open(
@@ -241,18 +242,16 @@ void main() {
         section: SettingsSection.integrations,
       );
       final knop = tester.widget<FilledButton>(
-        find.widgetWithText(FilledButton, 'Nu importeren'),
+        find.widgetWithText(FilledButton, 'Rapportages controleren…'),
       );
       expect(knop.onPressed, isNull);
     });
 
-    testWidgets('met een map importeert de knop en meldt hij het hier', (
+    testWidgets('met een map opent de knop dezelfde rapportwizard', (
       tester,
     ) async {
-      // Dit is de reden dat de knop bestaat: wie net een map heeft aangewezen
-      // wil zien dát het werkt, zonder eerst het venster te sluiten en het
-      // menu-item op te zoeken. En de melding hoort in het paneel te staan —
-      // een snackbar achter een modale dialoog leest niemand.
+      // Instellingen, welkom en menu horen geen afwijkende importroutes te
+      // hebben: deze knop opent dezelfde wizard met de ingestelde map.
       final tmp = Directory.systemTemp.createTempSync('ocikat-knop-');
       addTearDown(() => tmp.deleteSync(recursive: true));
       Directory(p.join(tmp.path, 'raw-data')).createSync();
@@ -268,30 +267,32 @@ void main() {
         },
         section: SettingsSection.integrations,
       );
-      await tester.tap(find.widgetWithText(FilledButton, 'Nu importeren'));
+      await tester.tap(
+        find.widgetWithText(FilledButton, 'Rapportages controleren…'),
+      );
 
-      // De import doet echte bestands-I/O: die futures komen onder de
+      // De scan doet echte bestands-I/O: die futures komen onder de
       // testbinding alleen aan in een runAsync-beurt, en één pomp is te vroeg.
       for (var i = 0; i < 40; i++) {
-        if (find.textContaining('geïmporteerd').evaluate().isNotEmpty) break;
+        if (find
+            .text('Welke organisaties vragen aandacht?')
+            .evaluate()
+            .isNotEmpty) {
+          break;
+        }
         await tester.runAsync(
           () => Future<void>.delayed(const Duration(milliseconds: 20)),
         );
         await tester.pump();
       }
 
-      expect(find.textContaining('geïmporteerd'), findsOneWidget);
+      expect(find.text('OpenKAT-rapport maken'), findsOneWidget);
       expect(
-        find.textContaining('nieuw tabblad'),
-        findsOneWidget,
-        reason:
-            'vanuit een dialoog zie je de nieuwe tab er niet achter opengaan',
+        find.text('Welke organisaties vragen aandacht?'),
+        findsAtLeastNWidgets(1),
       );
-      expect(
-        find.byType(SnackBar),
-        findsNothing,
-        reason: 'het paneel meldt het zelf; een snackbar erbij is dubbelop',
-      );
+      await tester.tap(find.widgetWithText(TextButton, 'Annuleren').last);
+      await tester.pumpAndSettle();
     });
   });
 
@@ -312,7 +313,7 @@ void main() {
 
     testWidgets('met de module uit staat OpenKAT er niet', (tester) async {
       await openscherm(tester);
-      expect(find.text('OpenKAT-rapportages importeren…'), findsNothing);
+      expect(find.text('OpenKAT-rapport maken…'), findsNothing);
     });
 
     testWidgets('met de module aan begin je hier met een OpenKAT-uitdraai', (
@@ -321,23 +322,23 @@ void main() {
       // Wie met OpenKAT werkt komt juist op dit scherm terug om het overzicht
       // te verversen; dan is drie stappen door een menu er één te veel.
       await openscherm(tester, prefs: {'importModuleEnabled': true});
-      expect(find.text('OpenKAT-rapportages importeren…'), findsOneWidget);
+      expect(find.text('OpenKAT-rapport maken…'), findsOneWidget);
     });
 
     testWidgets('een ingestelde map houdt de ingang met de module uit', (
       tester,
     ) async {
       await openscherm(tester, prefs: {'openkatReportDirectory': '/pad/kat'});
-      expect(find.text('OpenKAT-rapportages importeren…'), findsOneWidget);
+      expect(find.text('OpenKAT-rapport maken…'), findsOneWidget);
     });
   });
 
-  testWidgets('de import gebruikt de ingestelde map zonder mapkiezer', (
+  testWidgets('de rapportwizard gebruikt de ingestelde map zonder mapkiezer', (
     tester,
   ) async {
     // Dit is het verschil dat de module bruikbaar maakt bij dagelijks gebruik.
     // De mapkiezer laat zich onder `flutter test` niet aansturen en zou null
-    // teruggeven; komt er tóch een deck uit, dan kwam de map uit de instelling.
+    // teruggeven; verschijnen de scenario's, dan kwam de map uit de instelling.
     final tmp = Directory.systemTemp.createTempSync('ocikat-vaste-map-');
     addTearDown(() => tmp.deleteSync(recursive: true));
     Directory(p.join(tmp.path, 'raw-data')).createSync();
@@ -354,7 +355,10 @@ void main() {
     late BuildContext ctx;
     late WidgetRef reff;
     final container = ProviderContainer();
-    addTearDown(container.dispose);
+    var containerDisposed = false;
+    addTearDown(() {
+      if (!containerDisposed) container.dispose();
+    });
     await tester.pumpWidget(
       UncontrolledProviderScope(
         container: container,
@@ -377,21 +381,32 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    // runAsync: de import doet echte bestands-I/O.
-    await tester.runAsync(() => importOpenKatReports(ctx, reff));
-    await tester.pumpAndSettle();
+    final wizard = importOpenKatReports(ctx, reff);
+    await tester.pump();
+    for (var i = 0; i < 40; i++) {
+      if (find
+          .text('Welke organisaties vragen aandacht?')
+          .evaluate()
+          .isNotEmpty) {
+        break;
+      }
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 20)),
+      );
+      await tester.pump();
+    }
 
-    final deck = container
-        .read(tabsProvider)
-        .current
-        ?.deckNotifier
-        .currentState
-        .deck;
     expect(
-      deck,
-      isNotNull,
-      reason: 'de map uit Integraties is gebruikt zonder ernaar te vragen',
+      find.text('Welke organisaties vragen aandacht?'),
+      findsAtLeastNWidgets(1),
+      reason: 'de ingestelde map is direct gescand zonder een mapkiezer',
     );
+    await tester.tap(find.widgetWithText(TextButton, 'Annuleren').last);
+    await tester.pumpAndSettle();
+    expect(await wizard, isNull);
+    await tester.pumpWidget(const SizedBox.shrink());
+    container.dispose();
+    containerDisposed = true;
   });
 }
 

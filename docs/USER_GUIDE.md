@@ -1789,26 +1789,56 @@ so the import does not ask for it every time. The import only reads that folder
 — nothing in it is changed or sent anywhere.
 
 Switching the module off later does not take the entry point away as long as a
-report folder is set: an existing OpenKAT deck stays updatable. What goes away
-is the tab and the menu item for someone who never imports anything.
+report folder is set: an existing OpenKAT deck can still be updated or safely
+recreated as a new report. What goes away is the tab and the menu item for
+someone who never imports anything.
 
-There are three ways to start an import, all doing the same thing: **Nu
-importeren** in the Integrations tab (right under the folder you just pointed
-at — it reports what it loaded and skipped on the spot, and the settings window
-stays open so nothing you were editing there is lost), the **OpenKAT-rapportages
-importeren…** button on the opening screen, and the menu item below. The
-opening screen is where you land when no presentation is open, which is where
-you tend to be when you want yesterday's export turned into today's overview.
+There are three ways to start the same desktop route: **Rapportages
+controleren…** in the Integrations tab, **OpenKAT-rapport maken…** on the
+opening screen, and the menu item. First choose (or reuse) the report folder.
+OciDeck checks it read-only — nothing in the folder is changed or sent — and
+then opens a short wizard. The opening screen is where you land when no
+presentation is open, which is often where you start with yesterday's export.
 
-**… → OpenKAT-rapportages importeren…** takes that folder of JSON exports from
-[OpenKAT](https://openkat.nl) and builds one management deck from it, using the
-view limits below as defaults so an import of thousands of reports still yields
-readable slides while every underlying number stays in the deck — nothing is
-cut, only displayed selectively. Run the same action while an OpenKAT deck is
-open and it **updates** that deck: generated slides are refreshed, slides you
-added by hand are preserved.
+The wizard asks one question first and derives the report layout from it:
 
-The deck leads with what changed and only then shows the detail:
+| Question | What you choose next |
+| --- | --- |
+| **Welke organisaties vragen aandacht?** | The earlier measurement (the newest is current); optionally the organisations, language and title. |
+| **Wat veranderde er bij één organisatie?** | The organisation and its earlier measurement (the newest is current); optionally language and title. |
+| **Wie is geraakt door een CVE?** | A CVE found in the reports; optionally language and title. |
+| **Zijn de metingen compleet en actueel?** | No required extra input; language and title remain optional. |
+
+The side-by-side preview and review step show the selected scenario and the
+facts OciDeck actually found. Review warnings identify the affected
+organisation; an outdated measurement also shows its age and the configured
+freshness limit. A question is unavailable rather than guessed when its
+evidence is missing: a comparison needs two measurements, and the CVE question
+needs reliable CVE references explicitly declared by the source. The
+concrete OpenKAT adapters currently do **not** declare that CVE reliability.
+Consequently the CVE card can correctly remain unavailable even when an export
+contains values that look like CVE IDs.
+
+With an OpenKAT report open, the wizard first asks whether to **update this
+report** or **make a new report**. Updating refreshes only generated OpenKAT
+views and keeps slides you added by hand; making a new report opens a new tab.
+OciDeck verifies the unchanged generated originals before replacing them. If a
+legacy deck or a slide copied and edited in another Markdown tool no longer
+proves which block is the generated original, the update stops and offers
+**Als nieuw rapport maken**; the existing deck remains unchanged.
+If building fails, the choices stay in place and the wizard offers **Opnieuw
+proberen**, **Keuzes wijzigen…**, and the import report instead of sending you
+back to the beginning.
+The resulting report is an ordinary deck, using the same view limits below so
+large sources stay readable. Most overview slides keep every row that was
+built into the deck and only show a selection. Lifecycle, CVE, and monitoring
+tables are deliberately different: the deck contains at most the configured
+number of rows plus a visible notice that results were omitted. The OpenKAT
+source directory remains complete and unchanged; Markdown and exports contain
+only the report data that was actually built for their audience.
+
+For the management question, the deck leads with what changed and only then
+shows the detail:
 
 | Slide | What it says |
 | --- | --- |
@@ -1852,26 +1882,23 @@ modification date. Never from "now": re-importing the same folder must produce
 the same deck, or the trend line becomes a graph of how often you pressed
 Import.
 
-#### Headless reporting API (not yet a user interface)
+#### Headless reporting API and wizard
 
-The same canonical OpenKAT facts can now be given to a **headless** reporting
-API by another Dart caller. It has five named scenarios — management overview,
-weekly comparison, organisation overview, CVE exposure and monitoring changes —
-and takes explicit scope, as-of dates, language and table/age policy. It returns a
-normal OciDeck deck together with the actual measurements, source traces and
-typed warnings or errors.
+The same canonical OpenKAT facts can be given to a **headless** reporting API by
+another Dart caller. It has six named scenarios — management overview, weekly
+comparison, organisation overview, CVE exposure, monitoring changes and data
+quality — and takes explicit scope, as-of dates, language and table/age policy.
+It returns a normal OciDeck deck together with the actual measurements, source
+traces and typed warnings or errors. The desktop wizard is a separate frontend:
+it prepares a local folder, offers its four user questions, and calls that
+engine through a gateway; the engine itself still has no picker, provider or
+widget dependency.
 
 An explicit comparison date must precede the current date and must resolve to a
 genuinely older measurement. The configured table limit is a real construction
 budget for lifecycle, CVE and monitoring tables; if more rows exist, the final
 visible row says that results were omitted. A weekly lifecycle table is left out
 when the source cannot prove stable finding identities.
-
-There is deliberately **no scenario selector, wizard or other screen for this
-yet**. For normal desktop use, keep using **OpenKAT-rapportages importeren…**:
-that route still builds the management overview described above, and re-import
-still refreshes generated OpenKAT slides while preserving slides you added by
-hand.
 
 The CVE-exposure and monitoring-changes scenarios do not guess from fields that
 happen to be present. They remain unavailable until an adapter explicitly proves

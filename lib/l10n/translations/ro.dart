@@ -1788,6 +1788,130 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Acest raport existent nu poate fi actualizat în siguranță. Creați raportul ca nou; deck-ul existent rămâne neschimbat.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Au fost găsite {reports} rapoarte pentru {organizations} organizații. Măsurătorile se desfășoară de la {firstDate} până la {lastDate}, inclusiv. Au fost omise {skipped} fișiere.',
+  'Dubbel bestand overgeslagen': 'Fișier duplicat omis',
+  'Conflicterende meting overgeslagen': 'Măsurătoare conflictuală omisă',
+  'Geen ondersteunde OpenKAT-rapportage': 'Raport OpenKAT neacceptat',
+  'Bestand kon niet worden gelezen': 'Fișierul nu a putut fi citit',
+  'Aanbevolen': 'Recomandat',
+  'Alleen wat nodig is': 'Doar ceea ce este necesar',
+  'Alles blijft op dit apparaat': 'Totul rămâne pe acest dispozitiv',
+  'Als nieuw rapport maken': 'Creați ca raport nou',
+  'Andere map kiezen': 'Alege alt folder',
+  'Bekijk importverslag': 'Vedeți raportul de import',
+  'Bekijk verslag': 'Vizualizați raportul',
+  'Bijvoorbeeld CVE-2026-12345': 'De exemplu, CVE-2026-12345',
+  'Bruikbaar': 'Utilizabil',
+  'CVE zoeken': 'căutare CVE',
+  'Critical/high': 'Critic/ridicat',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Calitatea datelor, măsurători lipsă și uzură.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Rapoartele selectate nu conțin suficiente date fiabile pentru această parte.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Conținutul va apărea după ce au fost făcute toate alegerile necesare.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Acoperirea măsurătorii diferă între momentele de măsurare alese; modificările sunt, prin urmare, comparabile doar într-o măsură limitată.',
+  'Dekking en actualiteit van metingen':
+      'Acoperirea și actualitatea măsurătorilor',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Acest CVE nu a fost găsit în măsurătorile selectate.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Acest folder nu conține rapoarte utile',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Această selecție conține prea multe date pentru a le include în siguranță într-un singur raport.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Această secțiune nu poate fi construită în întregime din rapoartele selectate.',
+  'Dit rapport bevat': 'Acest raport conține',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Una sau mai multe măsurători sunt mai vechi decât limita de actualitate selectată.',
+  'Eerdere bruikbare meting': 'Măsurare utilă anterioară',
+  'Engels': 'engleză',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Nu au fost găsite măsurători utile.',
+  'Feitelijke gegevens': 'Date faptice',
+  'Geen bruikbare meetdatum': 'Nu există o dată de măsurare utilizabilă',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Diapozitivele generate sunt reîmprospătate. Sunt păstrate propriile diapozitive și copii.',
+  'Getroffen organisaties en systemen': 'Organizațiile și sistemele afectate',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Organizațiile și sistemele afectate în jurul unei vulnerabilități.',
+  'Getroffen systemen': 'Sisteme afectate',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Raportul nu a putut fi creat. Alegerile tale sunt păstrate; verificați avertismentele și încercați din nou.',
+  'Import': 'Import',
+  'Importverslag bekijken': 'Vedeți raportul de import',
+  'Kerncijfers en aandachtspunten': 'Cifre cheie și puncte de interes',
+  'Keuzes wijzigen…': 'Schimbați alegerile...',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Alegeți folderul în care OpenKAT a plasat rapoartele. OciDeck citește doar acest folder; nimic nu este schimbat sau trimis.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Alegeți întrebarea la care trebuie să răspundă raportul. OciDeck determină structura adecvată.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Alegeți un CVE găsit în rapoarte.',
+  'Laatste bruikbare meting': 'Ultima măsurătoare utilizabilă',
+  'Live voorvertoning van de rapportopbouw':
+      'Previzualizare live a structurii raportului',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Informații de management și control despre mai multe organizații.',
+  'Meer instellingen': 'Mai multe setări',
+  'Nederlands': 'olandeză',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Nu fiecare organizație aleasă are o măsurătoare pentru această perioadă.',
+  'Nieuwe en verdwenen bevindingen': 'Descoperiri noi și lipsă',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Nu este încă disponibil: aceste rapoarte nu conțin numere CVE de încredere.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck folosește aceeași sursă și opțiuni și ia cele mai recente măsurători adecvate. Sunt păstrate propriile diapozitive și copii.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck nu a găsit nicio măsurătoare OpenKAT utile. Alegeți un alt dosar sau vizualizați raportul de import pentru a vedea ce fișiere au fost omise.',
+  'OpenKAT-importverslag': 'Raport de import OpenKAT',
+  'OpenKAT-rapport': 'Raport OpenKAT',
+  'OpenKAT-rapport bijwerken': 'Actualizați raportul OpenKAT',
+  'OpenKAT-rapport bijwerken…': 'Actualizați raportul OpenKAT...',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'Raportul OpenKAT nu a putut fi creat.',
+  'OpenKAT-rapport maken': 'Creați un raport OpenKAT',
+  'OpenKAT-rapport maken…': 'Creați raport OpenKAT...',
+  'Organisaties': 'Organizații',
+  'Organisaties kiezen': 'Alegerea organizațiilor',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Raport actualizat. Au fost păstrate propriile diapozitive.',
+  'Rapport bijwerken': 'Actualizați raportul',
+  'Rapport gemaakt.': 'Raport creat.',
+  'Rapport maken': 'Creați raport',
+  'Rapportages controleren…': 'Verificați rapoartele...',
+  'Rapportages voorbereiden': 'Pregătiți rapoarte',
+  'Rapporttitel': 'Titlul raportului',
+  'Stap': 'Pas',
+  'Taal': 'Limbă',
+  'Terug': 'Spate',
+  'Veranderingen in monitoring': 'Modificări în monitorizare',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'O măsurătoare anterioară utilă lipsește pentru una sau mai multe organizații.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'O măsurare utilă a curentului lipsește pentru una sau mai multe organizații.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Pentru o comparație sunt necesare două momente de măsurare. Acum a fost găsită o măsurătoare.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Progres comparativ cu un moment de măsurare anterior.',
+  'Waar staan de OpenKAT-rapportages?': 'Unde sunt rapoartele OpenKAT?',
+  'Wat veranderde er bij één organisatie?': 'Ce s-a schimbat la o organizație?',
+  'Wat wilt u laten zien?': 'Ce vrei să arăți?',
+  'Welke organisaties vragen aandacht?': 'Ce organizații necesită atenție?',
+  'Werkelijke meetdatums': 'Datele efective ale măsurătorilor',
+  'Wie is geraakt door een CVE?': 'Cine este afectat de un CVE?',
+  'Zijn de metingen compleet en actueel?':
+      'Sunt măsurătorile complete și la zi?',
+  'bruikbaar': 'utilizabil',
+  'metingen': 'măsurători',
+  'organisaties': 'organizatii',
+  'organisaties geselecteerd': 'organizațiile selectate',
+  'rapportages gebruikt': 'rapoartele utilizate',
+  'systemen': 'sisteme',
   'Nog geen specificatielimiet': 'Încă fără limită de specificație',
   'USL (bovengrens)': 'USL (limită superioară)',
   'LSL (ondergrens)': 'LSL (limită inferioară)',

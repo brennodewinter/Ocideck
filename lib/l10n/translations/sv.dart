@@ -1770,6 +1770,130 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Den här befintliga rapporten kan inte uppdateras på ett säkert sätt. Skapa rapporten som ny; det befintliga däcket förblir oförändrat.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      '{reports} rapporter hittades för {organizations} organisationer. Mätningarna sträcker sig från {firstDate} till och med {lastDate}. {skipped} filer hoppades över.',
+  'Dubbel bestand overgeslagen': 'Dubblettfil hoppades över',
+  'Conflicterende meting overgeslagen': 'Motstridig mätning hoppades över',
+  'Geen ondersteunde OpenKAT-rapportage': 'OpenKAT-rapport som inte stöds',
+  'Bestand kon niet worden gelezen': 'Filen kunde inte läsas',
+  'Aanbevolen': 'Rekommenderad',
+  'Alleen wat nodig is': 'Bara det som är nödvändigt',
+  'Alles blijft op dit apparaat': 'Allt finns kvar på den här enheten',
+  'Als nieuw rapport maken': 'Skapa som ny rapport',
+  'Andere map kiezen': 'Välj en annan mapp',
+  'Bekijk importverslag': 'Visa importrapport',
+  'Bekijk verslag': 'Visa rapport',
+  'Bijvoorbeeld CVE-2026-12345': 'Till exempel CVE-2026-12345',
+  'Bruikbaar': 'Användbar',
+  'CVE zoeken': 'CVE-sökning',
+  'Critical/high': 'Kritisk/hög',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Datakvalitet, saknade mått och inkurans.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'De valda rapporterna innehåller inte tillräckligt med tillförlitlig data för denna del.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Innehållet kommer att visas när alla nödvändiga val har gjorts.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Mättäckningen skiljer sig mellan de valda mätmomenten; förändringar är därför endast i begränsad omfattning jämförbara.',
+  'Dekking en actualiteit van metingen': 'Täckning och aktualitet av mätningar',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Denna CVE hittades inte i de valda mätningarna.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Den här mappen innehåller inga användbara rapporter',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Det här urvalet innehåller för mycket data för att säkert inkludera i en rapport.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Det här avsnittet kan inte byggas helt utifrån de valda rapporterna.',
+  'Dit rapport bevat': 'Denna rapport innehåller',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'En eller flera mätningar är äldre än den valda tidsgränsen.',
+  'Eerdere bruikbare meting': 'Tidigare användbar mätning',
+  'Engels': 'engelska',
+  'Er zijn geen bruikbare metingen gevonden.': 'Inga användbara mått hittades.',
+  'Feitelijke gegevens': 'Faktadata',
+  'Geen bruikbare meetdatum': 'Inget användbart mätdatum',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Genererade bilder uppdateras. Dina egna bilder och kopior behålls.',
+  'Getroffen organisaties en systemen': 'Berörda organisationer och system',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Berörda organisationer och system kring en sårbarhet.',
+  'Getroffen systemen': 'Berörda system',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Rapporten kunde inte skapas. Dina val är bevarade; kontrollera varningarna och försök igen.',
+  'Import': 'Importera',
+  'Importverslag bekijken': 'Visa importrapport',
+  'Kerncijfers en aandachtspunten': 'Nyckeltal och intressepunkter',
+  'Keuzes wijzigen…': 'Ändra val...',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Välj i vilken mapp OpenKAT har placerat rapporterna. OciDeck läser bara denna mapp; ingenting ändras eller skickas.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Välj den fråga rapporten ska besvara. OciDeck bestämmer lämplig struktur.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Välj en CVE som finns i rapporterna.',
+  'Laatste bruikbare meting': 'Sista användbara mått',
+  'Live voorvertoning van de rapportopbouw':
+      'Live förhandsvisning av rapportstrukturen',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Hanterings- och kontrollinformation om flera organisationer.',
+  'Meer instellingen': 'Fler inställningar',
+  'Nederlands': 'holländska',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Inte varje vald organisation har ett mått för denna period.',
+  'Nieuwe en verdwenen bevindingen': 'Nya och saknade fynd',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Inte tillgänglig ännu: dessa rapporter innehåller inte tillförlitliga CVE-nummer.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck använder samma källa och val och tar de senaste lämpliga mätningarna. Dina egna bilder och kopior behålls.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck kunde inte hitta några användbara OpenKAT-mätningar. Välj en annan mapp eller visa importrapporten för att se vilka filer som hoppades över.',
+  'OpenKAT-importverslag': 'OpenKAT-importrapport',
+  'OpenKAT-rapport': 'OpenKAT-rapport',
+  'OpenKAT-rapport bijwerken': 'Uppdatera OpenKAT-rapport',
+  'OpenKAT-rapport bijwerken…': 'Uppdatera OpenKAT-rapport...',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'Det gick inte att skapa OpenKAT-rapporten.',
+  'OpenKAT-rapport maken': 'Skapa OpenKAT-rapport',
+  'OpenKAT-rapport maken…': 'Skapa OpenKAT-rapport...',
+  'Organisaties': 'Organisationer',
+  'Organisaties kiezen': 'Att välja organisationer',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Rapport uppdaterad. Dina egna bilder har behållits.',
+  'Rapport bijwerken': 'Uppdatera rapport',
+  'Rapport gemaakt.': 'Rapport skapad.',
+  'Rapport maken': 'Skapa rapport',
+  'Rapportages controleren…': 'Kolla rapporter...',
+  'Rapportages voorbereiden': 'Förbered rapporter',
+  'Rapporttitel': 'Rapportens titel',
+  'Stap': 'Steg',
+  'Taal': 'Språk',
+  'Terug': 'Tillbaka',
+  'Veranderingen in monitoring': 'Förändringar i övervakningen',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'En användbar tidigare mätning saknas för en eller flera organisationer.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'En användbar strömmätning saknas för en eller flera organisationer.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Två mätmoment krävs för en jämförelse. En mätning har nu hittats.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Framsteg jämfört med ett tidigare mätmoment.',
+  'Waar staan de OpenKAT-rapportages?': 'Var finns OpenKAT-rapporterna?',
+  'Wat veranderde er bij één organisatie?':
+      'Vad förändrades i en organisation?',
+  'Wat wilt u laten zien?': 'Vad vill du visa?',
+  'Welke organisaties vragen aandacht?':
+      'Vilka organisationer kräver uppmärksamhet?',
+  'Werkelijke meetdatums': 'Faktiska mätdatum',
+  'Wie is geraakt door een CVE?': 'Vem påverkas av en CVE?',
+  'Zijn de metingen compleet en actueel?':
+      'Är mätningarna kompletta och uppdaterade?',
+  'bruikbaar': 'användbar',
+  'metingen': 'mätningar',
+  'organisaties': 'organisationer',
+  'organisaties geselecteerd': 'utvalda organisationer',
+  'rapportages gebruikt': 'rapporter som används',
+  'systemen': 'system',
   'Nog geen specificatielimiet': 'Ingen specifikationsgräns ännu',
   'USL (bovengrens)': 'USL (övre gräns)',
   'LSL (ondergrens)': 'LSL (nedre gräns)',

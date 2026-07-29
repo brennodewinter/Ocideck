@@ -205,7 +205,7 @@ composition. `OpenKatReportEngine.generate` accepts a fully typed
 `OpenKatReportRequest`: a scenario ID, portfolio or organisation scope, current
 and optional previous *as-of* dates, optional CVE ID, Dutch or English, an
 optional title, and policy (`maximumSnapshotAge` and a positive table-row
-limit). It has no picker, wizard, provider or widget yet.
+limit). It has no picker, wizard, provider or widget dependency.
 
 `OpenKatReportFacts` is the sole selection/query layer. For every organisation
 it chooses the latest usable snapshot on or before each requested date; an
@@ -217,9 +217,9 @@ An explicit previous as-of date must be strictly earlier than the current date,
 and a historical capability exists only when the selected previous snapshot is
 itself strictly older than the selected current snapshot.
 
-The registry currently supplies five plans: `management-overview`,
-`weekly-comparison`, `organization-overview`, `cve-exposure` and
-`monitoring-changes`. A plan is a small ordered list of management-overview,
+The registry currently supplies six plans: `management-overview`,
+`weekly-comparison`, `organization-overview`, `cve-exposure`,
+`monitoring-changes` and `data-quality`. A plan is a small ordered list of management-overview,
 measurement-availability, finding-lifecycle, CVE-exposure or
 monitoring-changes blocks. The composer turns those blocks into normal OciDeck
 slides; it does not introduce a new deck format or slide type. Each block kind
@@ -267,8 +267,32 @@ the Markdown boundary.
 
 `OpenKatDeckGenerator` remains the compatibility façade for directory import and
 re-import. It builds the legacy `management-overview` plan and preserves the
-existing `ocideck_openkat_view` marker semantics: generated views are refreshed,
-manual slides remain in place.
+existing `ocideck_openkat_view` marker semantics. A separate durable
+`ocideck_openkat_generated_origin: <sha512>` marker fingerprints the canonical
+Markdown of the generated original across save/reopen; `Slide.duplicate`
+removes only that origin marker. A copy made in another Marp tool may retain
+the marker, but an edit invalidates its fingerprint and therefore stops the
+update fail-closed. Proven generated originals are refreshed or removed when
+they are no longer in the selected scenario, while manual slides and copies
+remain in place. Legacy decks whose origin cannot be proven stop fail-closed.
+
+On desktop, `OpenKatReportWizard` is the UI boundary above this core. Its
+platform action owns the directory picker; `OpenKatWizardController` owns the
+three wizard stages and delegates to the injectable `OpenKatWizardGateway`.
+`OpenKatWizardService` is the concrete gateway: it prepares the directory via
+the import service, translates the four UI questions into typed report requests,
+uses the engine for preview and generation, and asks the deck generator to merge
+generated views when updating. Thus scanner/map access stays at the IO edge,
+the controller contains no OpenKAT calculation, and the registry, engine and
+composer remain UI-free. The web action is deliberately absent: this route
+requires a local directory.
+
+The wizard's scenario availability is a UI projection of source evidence, not a
+weaker policy: organisation progress needs an organisation with two usable
+measurements, while CVE exposure needs CVE options **and** every latest selected
+source to declare `reliableCveReferences`. The current concrete adapters do not
+make that declaration, so the CVE question is unavailable rather than inferred
+from incidental values.
 
 ## Data model
 

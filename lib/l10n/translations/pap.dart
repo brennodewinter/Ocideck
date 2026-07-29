@@ -730,6 +730,130 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'E informe existente aki no por wordo aktualisá di un manera sigur. Krea e informe komo nobo; e deck existente keda sin cambio.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'A haña {reports} informe pa {organizations} organisashon. E midimentonan ta bai di {firstDate} te ku {lastDate}. A salta {skipped} archivo.',
+  'Dubbel bestand overgeslagen': 'Archivo dòbel saltá',
+  'Conflicterende meting overgeslagen': 'Midimentu den conflicto saltá',
+  'Geen ondersteunde OpenKAT-rapportage': 'Informe OpenKAT no sostené',
+  'Bestand kon niet worden gelezen': 'No por lesa e archivo',
+  'Aanbevolen': 'A rekomendá',
+  'Alleen wat nodig is': 'Solamente loke ta nesesario',
+  'Alles blijft op dit apparaat': 'Tur kos ta keda riba e aparato aki',
+  'Als nieuw rapport maken': 'Krea komo un rapòrt nobo',
+  'Andere map kiezen': 'Skohe un otro map',
+  'Bekijk importverslag': 'Wak e rapòrt di importashon',
+  'Bekijk verslag': 'Wak e rapòrt',
+  'Bijvoorbeeld CVE-2026-12345': 'Por ehèmpel, CVE-2026-12345',
+  'Bruikbaar': 'Uzabel',
+  'CVE zoeken': 'Búskeda di CVE',
+  'Critical/high': 'Krítiko/haltu',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Kalidat di dato, midimentunan ku falta i obsolesensia.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'E rapòrtnan selektá no ta kontené sufisiente dato konfiabel pa e parti aki.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'E kontenido lo aparesé unabes ku tur eskoho nesesario a wòrdu hasí.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'E kobertura di midimentu ta diferensiá entre e momentunan di midimentu skohé; kambionan ta pues solamente komparábel na un grado limitá.',
+  'Dekking en actualiteit van metingen':
+      'Kobertura i oportunidat di midimentunan',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'E CVE aki no a wòrdu hañá den e midimentunan selektá.',
+  'Deze map bevat geen bruikbare rapportages':
+      'E map aki no ta kontené ningun rapòrt útil',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'E selekshon aki ta kontené muchu dato pa inkluí den un rapòrt di un manera sigur.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'E sekshon aki no por wòrdu konstruí kompletamente for di e rapòrtnan selektá.',
+  'Dit rapport bevat': 'E rapòrt aki ta kontené',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Un òf mas midimentu ta mas bieu ku e límite di oportunidat selektá.',
+  'Eerdere bruikbare meting': 'Midimentu útil anterior',
+  'Engels': 'Ingles',
+  'Er zijn geen bruikbare metingen gevonden.': 'No a haña midimentunan útil.',
+  'Feitelijke gegevens': 'Datonan faktual',
+  'Geen bruikbare meetdatum': 'No tin fecha di midimentu usabel',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Slides generá ta wòrdu refreská. Bo mes slides i kopianan ta wòrdu retené.',
+  'Getroffen organisaties en systemen': 'Organisashonnan i sistemanan afektá',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Organisashonnan i sistemanan afektá rònt di un vulnerabilidat.',
+  'Getroffen systemen': 'Sistemanan afektá',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'E rapòrt no por a wòrdu kreá. Bo eskohonan ta wòrdu konserbá; kontrolá e atvertensianan i purba atrobe.',
+  'Import': 'Importashon',
+  'Importverslag bekijken': 'Wak e rapòrt di importashon',
+  'Kerncijfers en aandachtspunten': 'Figuranan klave i puntonan di interes',
+  'Keuzes wijzigen…': 'Kambia eskohonan…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Skohe e map den kua OpenKAT a pone e rapòrtnan. OciDeck ta lesa solamente e map aki; nada no ta wordo cambia of manda.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Skohe e pregunta ku e rapòrt mester kontestá. OciDeck ta determiná e struktura apropiá.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Skohe un CVE ku bo ta haña den e rapòrtnan.',
+  'Laatste bruikbare meting': 'Ultimo midimentu usabel',
+  'Live voorvertoning van de rapportopbouw':
+      'Bista bibu di e struktura di rapòrt',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Maneho i informashon di kòntròl tokante vários organisashon.',
+  'Meer instellingen': 'Mas setting',
+  'Nederlands': 'Hulandes',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'No ta tur organisashon skohé tin un midi pa e periodo aki.',
+  'Nieuwe en verdwenen bevindingen': 'Deskubrimentunan nobo i ku falta',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'No ta disponibel ainda: e rapòrtnan aki no ta kontené numbernan di CVE konfiabel.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck ta usa e mesun fuente i eskohonan i ta tuma e último midimentunan adekuá. Bo mes slides i kopianan ta wòrdu retené.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck no por a haña ningun midimentu útil di OpenKAT. Skohe un map diferente òf wak e rapòrt di importashon pa wak kua archivonan a wòrdu saltá.',
+  'OpenKAT-importverslag': 'Rapòrt di importashon di OpenKAT',
+  'OpenKAT-rapport': 'Rapòrt di OpenKAT',
+  'OpenKAT-rapport bijwerken': 'Aktualisa e rapòrt di OpenKAT',
+  'OpenKAT-rapport bijwerken…': 'Aktualisa e rapòrt di OpenKAT…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'No por a krea e rapòrt di OpenKAT.',
+  'OpenKAT-rapport maken': 'Krea un rapòrt di OpenKAT',
+  'OpenKAT-rapport maken…': 'Krea un rapòrt di OpenKAT…',
+  'Organisaties': 'Organisashonnan',
+  'Organisaties kiezen': 'Skohementu di organisashonnan',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Rapòrt aktualisá. Bo mes slidenan a keda retené.',
+  'Rapport bijwerken': 'Rapòrt di aktualisashon',
+  'Rapport gemaakt.': 'Rapòrt kreá.',
+  'Rapport maken': 'Krea un rapòrt',
+  'Rapportages controleren…': 'Kontrolá e rapòrtnan…',
+  'Rapportages voorbereiden': 'Prepará rapòrtnan',
+  'Rapporttitel': 'Título di rapòrt',
+  'Stap': 'Paso',
+  'Taal': 'Idioma',
+  'Terug': 'Patras',
+  'Veranderingen in monitoring': 'Kambionan den monitoreo',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Un midimentu anterior útil ta falta pa un òf mas organisashon.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Un midimentu di koriente útil ta falta pa un òf mas organisashon.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Dos momentu di midimentu ta nesesario pa un komparashon. Un midimentu awor a wòrdu hañá.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Progreso kompará ku un momentu di midimentu anterior.',
+  'Waar staan de OpenKAT-rapportages?': 'Unda e rapòrtnan di OpenKAT ta?',
+  'Wat veranderde er bij één organisatie?': 'Kiko a kambia na un organisashon?',
+  'Wat wilt u laten zien?': 'Kiko bo ke mustra?',
+  'Welke organisaties vragen aandacht?':
+      'Kua organisashonnan ta rekerí atenshon?',
+  'Werkelijke meetdatums': 'Fechanan di midimentu real',
+  'Wie is geraakt door een CVE?': 'Ken ta wòrdu afektá pa un CVE?',
+  'Zijn de metingen compleet en actueel?':
+      'E midimentunan ta kompleto i na altura?',
+  'bruikbaar': 'usabel',
+  'metingen': 'midimentunan',
+  'organisaties': 'organisashonnan',
+  'organisaties geselecteerd': 'organisashonnan selektá',
+  'rapportages gebruikt': 'rapòrtnan usá',
+  'systemen': 'sistemanan',
   'Nog geen specificatielimiet': 'Noch no tin límite di spesifikashon',
   'USL (bovengrens)': 'USL (límite superior)',
   'LSL (ondergrens)': 'LSL (límite inferior)',

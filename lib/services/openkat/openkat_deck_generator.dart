@@ -6,6 +6,7 @@ import 'openkat_aggregator.dart';
 import 'openkat_report_composer.dart';
 import 'openkat_report_facts.dart';
 import 'openkat_report_scenarios.dart';
+import 'openkat_slide_provenance.dart';
 
 export 'openkat_report_engine.dart';
 
@@ -38,25 +39,79 @@ class OpenKatDeckGenerator {
 
   Deck update(Deck existing, List<OpenKatOrganization> organizations) {
     final fresh = generate(organizations, title: existing.title);
+    return updateGenerated(existing, fresh);
+  }
+
+  /// Vervangt alleen gegenereerde OpenKAT-views door een vers scenariodeck.
+  ///
+  /// De motor maakt bewust een nieuw deck. Deze façade bewaart bij bijwerken
+  /// handmatige dia's en kopieën van het geopende deck. Een gegenereerde dia
+  /// heeft een deterministische id; een handmatige kopie krijgt juist een
+  /// nieuwe. Daardoor blijft het oorspronkelijke blok herkenbaar als een kopie
+  /// met dezelfde view-marker ervoor is gezet of elders heen is verplaatst.
+  Deck updateGenerated(Deck existing, Deck fresh) {
     final freshByView = <String, Slide>{
       for (final slide in fresh.slides) ?_viewIdOf(slide): slide,
     };
-    final replaced = <String>{};
+    final originalByView = <String, Slide>{};
+    final existingByView = <String, List<Slide>>{};
+    for (final slide in existing.slides) {
+      final view = _viewIdOf(slide);
+      if (view != null) {
+        existingByView.putIfAbsent(view, () => []).add(slide);
+      }
+    }
+    for (final entry in existingByView.entries) {
+      final view = entry.key;
+      final candidates = entry.value;
+      final freshSlide = freshByView[view];
+      final markedOrigins = candidates.where(_isGeneratedOrigin).toList();
+      if (markedOrigins.length == 1) {
+        originalByView[view] = markedOrigins.single;
+        continue;
+      }
+      if (markedOrigins.length > 1) {
+        throw OpenKatUnsafeUpdateException(view);
+      }
+      if (freshSlide != null) {
+        final exact = candidates
+            .where((slide) => slide.id == freshSlide.id)
+            .toList();
+        if (exact.length == 1) {
+          // Een nog geopende legacygeneratie heeft dezelfde deterministische
+          // id als haar verse tegenhanger. De vervanging krijgt de duurzame
+          // origin-marker en is vanaf dan ook na heropenen herkenbaar.
+          originalByView[view] = exact.single;
+          continue;
+        }
+      }
+      throw OpenKatUnsafeUpdateException(view);
+    }
     final slides = <Slide>[];
     for (final slide in existing.slides) {
       final view = _viewIdOf(slide);
-      if (view == null || replaced.contains(view)) {
+      if (view == null || !identical(originalByView[view], slide)) {
         slides.add(slide);
         continue;
       }
-      replaced.add(view);
       final replacement = freshByView.remove(view);
-      if (replacement != null) slides.add(replacement);
+      if (replacement != null) {
+        slides.add(
+          replacement.copyWith(
+            privacy: slide.privacy,
+            clearPrivacy: slide.privacy == null,
+          ),
+        );
+      }
     }
     slides.addAll(
       fresh.slides.where((slide) => freshByView.containsKey(_viewIdOf(slide))),
     );
-    return existing.copyWith(slides: slides);
+    return existing.copyWith(
+      title: fresh.title,
+      language: fresh.language,
+      slides: slides,
+    );
   }
 
   static final RegExp _viewMarker = RegExp(
@@ -65,6 +120,9 @@ class OpenKatDeckGenerator {
 
   String? _viewIdOf(Slide slide) =>
       _viewMarker.firstMatch(slide.notes)?.group(1);
+
+  bool _isGeneratedOrigin(Slide slide) =>
+      OpenKatSlideProvenance.isUnchangedGeneratedOrigin(slide);
 
   DateTime _latestReportDate(List<OpenKatOrganization> organizations) {
     DateTime? latest;
@@ -78,4 +136,14 @@ class OpenKatDeckGenerator {
     }
     return latest ?? DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);
   }
+}
+
+/// Een bestaand deck waarvan het gegenereerde origineel niet bewijsbaar is.
+///
+/// De UI biedt in dit geval een nieuw rapport aan; de bestaande dia's blijven
+/// volledig ongewijzigd.
+class OpenKatUnsafeUpdateException implements Exception {
+  final String viewId;
+
+  const OpenKatUnsafeUpdateException(this.viewId);
 }

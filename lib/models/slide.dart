@@ -818,7 +818,7 @@ class Slide {
       customMarkdown: src.customMarkdown,
       codeLanguage: src.codeLanguage,
       cssClass: src.cssClass,
-      notes: src.notes,
+      notes: withoutOpenKatGeneratedOrigin(src.notes),
       advanceDuration: src.advanceDuration,
       imageSize: src.imageSize,
       titleImageOverlay: src.titleImageOverlay,

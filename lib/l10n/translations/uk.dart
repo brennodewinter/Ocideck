@@ -1788,6 +1788,128 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Цей наявний звіт неможливо безпечно оновити. Створіть звіт як новий; наявний deck залишиться без змін.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Знайдено {reports} звітів для {organizations} організацій. Вимірювання охоплюють період від {firstDate} до {lastDate} включно. Пропущено {skipped} файлів.',
+  'Dubbel bestand overgeslagen': 'Дублікат файлу пропущено',
+  'Conflicterende meting overgeslagen': 'Суперечливе вимірювання пропущено',
+  'Geen ondersteunde OpenKAT-rapportage': 'Непідтримуваний звіт OpenKAT',
+  'Bestand kon niet worden gelezen': 'Не вдалося прочитати файл',
+  'Aanbevolen': 'Рекомендовано',
+  'Alleen wat nodig is': 'Тільки те, що необхідно',
+  'Alles blijft op dit apparaat': 'Усе залишається на цьому пристрої',
+  'Als nieuw rapport maken': 'Створити як новий звіт',
+  'Andere map kiezen': 'Виберіть іншу папку',
+  'Bekijk importverslag': 'Переглянути звіт про імпорт',
+  'Bekijk verslag': 'Переглянути звіт',
+  'Bijvoorbeeld CVE-2026-12345': 'Наприклад, CVE-2026-12345',
+  'Bruikbaar': 'Можна використовувати',
+  'CVE zoeken': 'Пошук CVE',
+  'Critical/high': 'Критичний/високий',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Якість даних, відсутні вимірювання та застарілість.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Вибрані звіти не містять достатньо надійних даних для цієї частини.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Вміст з’явиться, коли буде зроблено всі необхідні налаштування.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Охоплення вимірювання різниться між вибраними моментами вимірювання; тому зміни можна порівняти лише в обмеженій мірі.',
+  'Dekking en actualiteit van metingen': 'Охоплення та своєчасність вимірювань',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Цей CVE не знайдено у вибраних вимірюваннях.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Ця папка не містить корисних звітів',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Цей вибір містить забагато даних, щоб безпечно включити його в один звіт.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Цей розділ неможливо створити повністю з вибраних звітів.',
+  'Dit rapport bevat': 'Цей звіт містить',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Одне чи кілька вимірювань старші за вибраний ліміт часу.',
+  'Eerdere bruikbare meting': 'Попереднє корисне вимірювання',
+  'Engels': 'англійська',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Жодних корисних вимірювань не знайдено.',
+  'Feitelijke gegevens': 'Фактичні дані',
+  'Geen bruikbare meetdatum': 'Немає придатної дати вимірювання',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Створені слайди оновлюються. Ваші власні слайди та копії зберігаються.',
+  'Getroffen organisaties en systemen': 'Постраждалі організації та системи',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Постраждали організації та системи навколо однієї вразливості.',
+  'Getroffen systemen': 'Уражені системи',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Не вдалося створити звіт. Ваш вибір збережено; перевірте попередження та повторіть спробу.',
+  'Import': 'Імпорт',
+  'Importverslag bekijken': 'Переглянути звіт про імпорт',
+  'Kerncijfers en aandachtspunten': 'Ключові цифри та цікаві місця',
+  'Keuzes wijzigen…': 'Змінити вибір…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Виберіть папку, до якої OpenKAT розмістив звіти. OciDeck читає лише цю папку; нічого не змінено і не відправлено.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Виберіть питання, на яке має відповісти звіт. OciDeck визначає відповідну структуру.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Виберіть CVE, знайдений у звітах.',
+  'Laatste bruikbare meting': 'Останнє придатне вимірювання',
+  'Live voorvertoning van de rapportopbouw':
+      'Попередній перегляд структури звіту',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Інформація про управління та контроль кількох організацій.',
+  'Meer instellingen': 'Більше налаштувань',
+  'Nederlands': 'голландська',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Не кожна обрана організація має вимірювання цього періоду.',
+  'Nieuwe en verdwenen bevindingen': 'Нові та відсутні знахідки',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Ще недоступно: ці звіти не містять надійних номерів CVE.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck використовує те саме джерело та вибір, а також проводить останні відповідні вимірювання. Ваші власні слайди та копії зберігаються.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck не знайшов жодних корисних вимірювань OpenKAT. Виберіть іншу папку або перегляньте звіт про імпорт, щоб побачити, які файли було пропущено.',
+  'OpenKAT-importverslag': 'Звіт про імпорт OpenKAT',
+  'OpenKAT-rapport': 'Звіт OpenKAT',
+  'OpenKAT-rapport bijwerken': 'Оновити звіт OpenKAT',
+  'OpenKAT-rapport bijwerken…': 'Оновити звіт OpenKAT…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'Не вдалося створити звіт OpenKAT.',
+  'OpenKAT-rapport maken': 'Створіть звіт OpenKAT',
+  'OpenKAT-rapport maken…': 'Створити звіт OpenKAT…',
+  'Organisaties': 'організації',
+  'Organisaties kiezen': 'Вибір організацій',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Звіт оновлено. Ваші власні слайди збережено.',
+  'Rapport bijwerken': 'Звіт про оновлення',
+  'Rapport gemaakt.': 'Звіт створено.',
+  'Rapport maken': 'Створити звіт',
+  'Rapportages controleren…': 'Перевірте звіти…',
+  'Rapportages voorbereiden': 'Готуйте звіти',
+  'Rapporttitel': 'Назва звіту',
+  'Stap': 'Крок',
+  'Taal': 'Мова',
+  'Terug': 'Назад',
+  'Veranderingen in monitoring': 'Зміни в моніторингу',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Відсутнє корисне попереднє вимірювання для однієї чи кількох організацій.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Відсутнє корисне поточне вимірювання для однієї чи кількох організацій.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Для порівняння потрібні два моменти вимірювання. Наразі знайдено одне вимірювання.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Прогрес порівняно з попереднім моментом вимірювання.',
+  'Waar staan de OpenKAT-rapportages?': 'Де звіти OpenKAT?',
+  'Wat veranderde er bij één organisatie?': 'Що змінилося в одній організації?',
+  'Wat wilt u laten zien?': 'Що ти хочеш показати?',
+  'Welke organisaties vragen aandacht?': 'Які організації потребують уваги?',
+  'Werkelijke meetdatums': 'Фактичні дати вимірювання',
+  'Wie is geraakt door een CVE?': 'Кого вражає CVE?',
+  'Zijn de metingen compleet en actueel?': 'Чи вимірювання повні та актуальні?',
+  'bruikbaar': 'придатний для використання',
+  'metingen': 'вимірювань',
+  'organisaties': 'організацій',
+  'organisaties geselecteerd': 'вибраних організацій',
+  'rapportages gebruikt': 'використаних звітів',
+  'systemen': 'системи',
   'Nog geen specificatielimiet': 'Ще немає межі специфікації',
   'USL (bovengrens)': 'USL (верхня межа)',
   'LSL (ondergrens)': 'LSL (нижня межа)',

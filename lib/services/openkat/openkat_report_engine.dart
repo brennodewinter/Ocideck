@@ -5,6 +5,12 @@ import 'openkat_report_composer.dart';
 import 'openkat_report_facts.dart';
 import 'openkat_report_scenarios.dart';
 
+typedef OpenKatScenarioCapabilityAssessment = ({
+  bool registered,
+  Map<OpenKatReportCapability, OpenKatCapabilityAssessment> assessments,
+  Set<OpenKatReportCapability> missingRequiredCapabilities,
+});
+
 /// Pure, headless toegangspunt van canonieke OpenKAT-feiten naar OciDeck.
 class OpenKatReportEngine {
   final OpenKatReportScenarioRegistry registry;
@@ -14,6 +20,14 @@ class OpenKatReportEngine {
     OpenKatReportScenarioRegistry? registry,
     this.capabilityService = const OpenKatReportCapabilityService(),
   }) : registry = registry ?? OpenKatReportScenarioRegistry();
+
+  /// Beoordeelt de capabilitypoorten van een scenario zonder een deck te
+  /// bouwen. De wizard en [generate] gebruiken zo exact dezelfde bronfeiten,
+  /// scenariodescriptor en vereisten.
+  OpenKatScenarioCapabilityAssessment assessScenarioCapabilities(
+    List<OpenKatOrganization> organizations,
+    OpenKatReportRequest request,
+  ) => _assessScenarioCapabilities(OpenKatReportFacts(organizations), request);
 
   OpenKatReportResult generate(
     List<OpenKatOrganization> organizations,
@@ -40,9 +54,14 @@ class OpenKatReportEngine {
 
     final descriptor = scenario.descriptor;
     _validateRequest(facts, request, descriptor, diagnostics);
-    final assessments = capabilityService.assess(facts, request);
+    final capabilityAssessment = _assessScenarioCapabilities(facts, request);
+    final assessments = capabilityAssessment.assessments;
     for (final capability in descriptor.requiredCapabilities) {
-      if (assessments[capability]?.isAvailable ?? false) continue;
+      if (!capabilityAssessment.missingRequiredCapabilities.contains(
+        capability,
+      )) {
+        continue;
+      }
       missing.add(capability);
       diagnostics.add(
         OpenKatReportDiagnostic(
@@ -101,6 +120,30 @@ class OpenKatReportEngine {
       diagnostics: List.unmodifiable(diagnostics),
       missingCapabilities: Set.unmodifiable(missing),
       sourceTraces: traces,
+    );
+  }
+
+  OpenKatScenarioCapabilityAssessment _assessScenarioCapabilities(
+    OpenKatReportFacts facts,
+    OpenKatReportRequest request,
+  ) {
+    final scenario = registry.find(request.scenarioId);
+    if (scenario == null) {
+      return (
+        registered: false,
+        assessments: const {},
+        missingRequiredCapabilities: const {},
+      );
+    }
+    final assessments = capabilityService.assess(facts, request);
+    final missing = {
+      for (final capability in scenario.descriptor.requiredCapabilities)
+        if (!(assessments[capability]?.isAvailable ?? false)) capability,
+    };
+    return (
+      registered: true,
+      assessments: Map.unmodifiable(assessments),
+      missingRequiredCapabilities: Set.unmodifiable(missing),
     );
   }
 

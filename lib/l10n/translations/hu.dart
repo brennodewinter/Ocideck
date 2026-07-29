@@ -1775,6 +1775,130 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Ez a meglévő jelentés nem frissíthető biztonságosan. Hozza létre a jelentést újként; a meglévő deck változatlan marad.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      '{reports} jelentés található {organizations} szervezethez. A mérések {firstDate} és {lastDate} közötti időszakot fedik le. {skipped} fájl kimaradt.',
+  'Dubbel bestand overgeslagen': 'Duplikált fájl kihagyva',
+  'Conflicterende meting overgeslagen': 'Ütköző mérés kihagyva',
+  'Geen ondersteunde OpenKAT-rapportage': 'Nem támogatott OpenKAT-jelentés',
+  'Bestand kon niet worden gelezen': 'A fájlt nem sikerült beolvasni',
+  'Aanbevolen': 'Ajánlott',
+  'Alleen wat nodig is': 'Csak ami szükséges',
+  'Alles blijft op dit apparaat': 'Alles blijft op dit apparaat',
+  'Als nieuw rapport maken': 'Hozzon létre új jelentésként',
+  'Andere map kiezen': 'Válasszon másik mappát',
+  'Bekijk importverslag': 'Importálási jelentés megtekintése',
+  'Bekijk verslag': 'Jelentés megtekintése',
+  'Bijvoorbeeld CVE-2026-12345': 'Bijvoorbeeld CVE-2026-12345',
+  'Bruikbaar': 'Használható',
+  'CVE zoeken': 'CVE keresés',
+  'Critical/high': 'Kritikus/magas',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Adatminőség, hiányzó mérések és elavulás.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'A kiválasztott jelentések nem tartalmaznak elegendő megbízható adatot ehhez a részhez.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'A tartalom akkor jelenik meg, ha az összes szükséges választást megtette.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'A mérési lefedettség a választott mérési pillanatok között eltérő; a változások ezért csak korlátozott mértékben hasonlíthatók össze.',
+  'Dekking en actualiteit van metingen':
+      'A mérések lefedettsége és időszerűsége',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Ez a CVE nem található a kiválasztott mérésekben.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Ez a mappa nem tartalmaz hasznos jelentéseket',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Ez a kijelölés túl sok adatot tartalmaz ahhoz, hogy biztonságosan szerepeljen egy jelentésben.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Ez a szakasz nem építhető fel teljes egészében a kiválasztott jelentésekből.',
+  'Dit rapport bevat': 'Ez a jelentés tartalmazza',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Egy vagy több mérés régebbi a kiválasztott időhatárnál.',
+  'Eerdere bruikbare meting': 'Előző hasznos mérés',
+  'Engels': 'angol',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Nem találtunk hasznos méréseket.',
+  'Feitelijke gegevens': 'Tényszerű adatok',
+  'Geen bruikbare meetdatum': 'Nincs használható mérési dátum',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'A generált diák frissül. A saját diák és másolat megmarad.',
+  'Getroffen organisaties en systemen': 'Érintett szervezetek és rendszerek',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Az érintett szervezetek és rendszerek egy sebezhetőség körül.',
+  'Getroffen systemen': 'Érintett rendszerek',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'A jelentést nem sikerült létrehozni. Választásai megmaradnak; ellenőrizze a figyelmeztetéseket, és próbálja újra.',
+  'Import': 'Importálás',
+  'Importverslag bekijken': 'Importálási jelentés megtekintése',
+  'Kerncijfers en aandachtspunten': 'Kulcsszámok és érdekességek',
+  'Keuzes wijzigen…': 'Választások módosítása…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Válassza ki azt a mappát, amelybe az OpenKAT elhelyezte a jelentéseket. Az OciDeck csak ezt a mappát olvassa; semmit nem változtatnak vagy küldenek el.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Válassza ki azt a kérdést, amelyre a jelentésnek meg kell válaszolnia. Az OciDeck meghatározza a megfelelő struktúrát.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Válassza ki a jelentésekben található CVE-t.',
+  'Laatste bruikbare meting': 'Utolsó használható mérés',
+  'Live voorvertoning van de rapportopbouw':
+      'A jelentés szerkezetének élő előnézete',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Kezelési és ellenőrzési információk több szervezetről.',
+  'Meer instellingen': 'További beállítások',
+  'Nederlands': 'holland',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Nem minden kiválasztott szervezet rendelkezik méréssel erre az időszakra.',
+  'Nieuwe en verdwenen bevindingen': 'Új és hiányzó leletek',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Még nem érhető el: ezek a jelentések nem tartalmaznak megbízható CVE-számokat.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'Az OciDeck ugyanazt a forrást és választási lehetőségeket használja, és a legújabb megfelelő méréseket végzi el. A saját diák és másolat megmarad.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'Az OciDeck nem talált hasznos OpenKAT méréseket. Válasszon másik mappát, vagy tekintse meg az importálási jelentést, hogy megtudja, mely fájlok kerültek kihagyásra.',
+  'OpenKAT-importverslag': 'OpenKAT importálási jelentés',
+  'OpenKAT-rapport': 'OpenKAT jelentés',
+  'OpenKAT-rapport bijwerken': 'OpenKAT jelentés frissítése',
+  'OpenKAT-rapport bijwerken…': 'OpenKAT jelentés frissítése…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'Az OpenKAT jelentést nem sikerült létrehozni.',
+  'OpenKAT-rapport maken': 'OpenKAT jelentés létrehozása',
+  'OpenKAT-rapport maken…': 'OpenKAT jelentés létrehozása…',
+  'Organisaties': 'Szervezetek',
+  'Organisaties kiezen': 'A szervezetek kiválasztása',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Jelentés frissítve. A saját diákja megmaradt.',
+  'Rapport bijwerken': 'Jelentés frissítése',
+  'Rapport gemaakt.': 'Jelentés létrehozva.',
+  'Rapport maken': 'Jelentés létrehozása',
+  'Rapportages controleren…': 'Jelentések ellenőrzése…',
+  'Rapportages voorbereiden': 'Készítsen jelentéseket',
+  'Rapporttitel': 'Jelentés címe',
+  'Stap': 'Lépés',
+  'Taal': 'Nyelv',
+  'Terug': 'Vissza',
+  'Veranderingen in monitoring': 'Változások a monitoringban',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Egy vagy több szervezetnél hiányzik egy hasznos korábbi mérés.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Egy vagy több szervezetnél hiányzik egy hasznos árammérés.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Az összehasonlításhoz két mérési nyomaték szükséges. Most egy mérést találtak.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Haladás az előző mérési pillanathoz képest.',
+  'Waar staan de OpenKAT-rapportages?': 'Hol vannak az OpenKAT jelentések?',
+  'Wat veranderde er bij één organisatie?': 'Mi változott egy szervezetnél?',
+  'Wat wilt u laten zien?': 'Mit akarsz megmutatni?',
+  'Welke organisaties vragen aandacht?':
+      'Mely szervezetek igényelnek figyelmet?',
+  'Werkelijke meetdatums': 'Valós mérési dátumok',
+  'Wie is geraakt door een CVE?': 'Kit érint a CVE?',
+  'Zijn de metingen compleet en actueel?': 'A mérések teljesek és naprakészek?',
+  'bruikbaar': 'használható',
+  'metingen': 'mérések',
+  'organisaties': 'szervezetek',
+  'organisaties geselecteerd': 'kiválasztott szervezetek',
+  'rapportages gebruikt': 'használt jelentések',
+  'systemen': 'rendszerek',
   'Nog geen specificatielimiet': 'Még nincs specifikációs határ',
   'USL (bovengrens)': 'USL (felső határ)',
   'LSL (ondergrens)': 'LSL (alsó határ)',

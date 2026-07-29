@@ -32,6 +32,22 @@ class OpenKatImportService {
     this.generator = const OpenKatDeckGenerator(),
   });
 
+  /// Leest en normaliseert een OpenKAT-map zonder er iets in te wijzigen.
+  ///
+  /// De huidige mappenstructuur zet exports onder `raw-data/`. Voor bestaande
+  /// installaties waar de gekozen map zelf de exports bevat, blijft die map de
+  /// bron. Deze voorbereidende stap maakt een feitelijke wizard mogelijk
+  /// zonder al een deck of sidecars te schrijven.
+  Future<({OpenKatManifest manifest, List<OpenKatOrganization> organizations})>
+  prepareDirectory(String directory) async {
+    final rawDirectory = Directory(p.join(directory, 'raw-data'));
+    final sourceDirectory = await rawDirectory.exists()
+        ? rawDirectory.path
+        : directory;
+    final (:manifest, :groups) = await scanner.scan(sourceDirectory);
+    return (manifest: manifest, organizations: _normalize(groups));
+  }
+
   /// Imports a directory into a fresh deck.
   ///
   /// The [directory] is the designated OpenKAT directory with three
@@ -51,8 +67,7 @@ class OpenKatImportService {
     await Directory(processedDir).create(recursive: true);
     await Directory(presentationsDir).create(recursive: true);
 
-    final (:manifest, :groups) = await scanner.scan(rawDir);
-    final organizations = _normalize(groups);
+    final (:manifest, :organizations) = await prepareDirectory(directory);
     final deck = generator.generate(
       organizations,
       title: title,
@@ -81,8 +96,7 @@ class OpenKatImportService {
     await Directory(processedDir).create(recursive: true);
     await Directory(presentationsDir).create(recursive: true);
 
-    final (:manifest, :groups) = await scanner.scan(rawDir);
-    final organizations = _normalize(groups);
+    final (:manifest, :organizations) = await prepareDirectory(directory);
     final deck = generator.update(existing, organizations);
     await _writeDeck(deck, processedDir);
     await _writeDeck(_trimDeck(deck), presentationsDir);

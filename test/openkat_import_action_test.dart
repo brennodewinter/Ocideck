@@ -1,78 +1,59 @@
 @TestOn('vm')
 library;
 
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/openkat/openkat_reporting_models.dart';
+import 'package:ocideck/models/openkat/openkat_wizard_models.dart';
+import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/openkat/openkat_directory_scanner.dart';
+import 'package:ocideck/state/openkat_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
-import 'package:ocideck/widgets/shell/openkat_import_action.dart';
+import 'package:ocideck/widgets/shell/openkat_import_action_io.dart';
 import 'package:ocideck/widgets/shell/openkat_import_summary.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Het invoerpunt van de OpenKAT-import (#767): mapkiezer → scanner → deck.
+import 'openkat_wizard_test_fakes.dart';
+
+class _RecordingGateway extends FakeOpenKatWizardGateway {
+  String? preparedDirectory;
+
+  _RecordingGateway();
+
+  @override
+  Future<OpenKatWizardScan> prepare(String directory) {
+    preparedDirectory = directory;
+    return super.prepare(directory);
+  }
+}
+
+/// Het invoerpunt van de OpenKAT-import: mapkeuze → wizard → deck.
 ///
 /// De mapkiezer zelf laat zich onder `flutter test` niet aansturen (statische
-/// FilePicker), dus de tests gaan door de `directoryOverride`-route — dat is
-/// dezelfde code op één regel na.
+/// FilePicker). De actie krijgt daarom de echte wizardroute met een fake
+/// headless gateway: alleen de IO-grens is vervangen.
 void main() {
   setUp(() {
     AppLocalizations.setActiveLanguageCode('nl');
     SharedPreferences.setMockInitialValues({'app_consent_accepted': true});
   });
 
-  /// Een OpenKAT-organisatierapport in de envelop die de exportknop werkelijk
-  /// oplevert. De datum zit in de bestandsnaam, niet in de inhoud — zo doet
-  /// OpenKAT dat ook.
-  Map<String, dynamic> rapport(String code) => {
-    'organization_code': code,
-    'organization_name': 'Organisatie $code',
-    'organization_tags': <String>[],
-    'data': {
-      'systems': {
-        'services': {
-          'Hostname|internet|example.com': {
-            'hostnames': ['example.com'],
-            'services': <dynamic>[],
-          },
-        },
-      },
-      'findings': {
-        'finding_types': [
-          {
-            'finding_type': {
-              'object_type': 'KATFindingType',
-              'id': 'KAT-001',
-              'name': 'Open poort',
-              'risk_severity': 'high',
-            },
-            'occurrences': [
-              {
-                'finding': {
-                  'primary_key': 'f1',
-                  'ooi': 'Hostname|internet|example.com',
-                },
-              },
-            ],
-          },
-        ],
-      },
-      'total_systems': 1,
-    },
-  };
-
   Future<(ProviderContainer, BuildContext, WidgetRef)> pump(
     WidgetTester tester,
   ) async {
+    tester.view.physicalSize = const Size(1280, 900);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
     late BuildContext ctx;
     late WidgetRef reff;
     final container = ProviderContainer();
-    addTearDown(container.dispose);
     await tester.pumpWidget(
       UncontrolledProviderScope(
         container: container,
@@ -94,23 +75,48 @@ void main() {
     return (container, ctx, reff);
   }
 
-  testWidgets('een map met rapportages opent als deck in een nieuwe tab', (
+  Future<void> closeHarness(
+    WidgetTester tester,
+    ProviderContainer container,
+  ) async {
+    await tester.pumpWidget(const SizedBox());
+    container.dispose();
+    await tester.pump();
+  }
+
+  Future<void> finishNewWizard(WidgetTester tester) async {
+    for (var index = 0; index < 4; index++) {
+      await tester.pump(const Duration(milliseconds: 50));
+    }
+    final dataQuality = find.byKey(
+      const ValueKey('openkat-scenario-dataQuality'),
+    );
+    await tester.ensureVisible(dataQuality);
+    await tester.pump(const Duration(milliseconds: 50));
+    await tester.tap(dataQuality);
+    await tester.pump(const Duration(milliseconds: 50));
+    await tester.tap(find.byKey(const ValueKey('openkat-primary-action')));
+    await tester.pump(const Duration(milliseconds: 50));
+    expect(find.text('Controleren'), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('openkat-primary-action')));
+    for (var index = 0; index < 4; index++) {
+      await tester.pump(const Duration(milliseconds: 50));
+    }
+  }
+
+  testWidgets('de wizarduitkomst opent als deck in een nieuwe tab', (
     tester,
   ) async {
-    final tmp = Directory.systemTemp.createTempSync('ocikat-actie-');
-    addTearDown(() => tmp.deleteSync(recursive: true));
-    Directory(p.join(tmp.path, 'raw-data')).createSync();
-    File(
-      p.join(tmp.path, 'raw-data', 'org1_20240601000000.json'),
-    ).writeAsStringSync(jsonEncode(rapport('org1')));
-
     final (container, ctx, ref) = await pump(tester);
-    // runAsync: de import doet echte bestands-I/O, en die futures komen onder
-    // de testbinding anders nooit aan (zelfde les als de schijfscan-dialogen).
-    await tester.runAsync(
-      () => importOpenKatReports(ctx, ref, directoryOverride: tmp.path),
+    final gateway = FakeOpenKatWizardGateway();
+    final future = importOpenKatReports(
+      ctx,
+      ref,
+      directoryOverride: '/rapportages',
+      gatewayOverride: gateway,
     );
-    await tester.pumpAndSettle();
+    await finishNewWizard(tester);
+    final outcome = await future;
 
     final deck = container
         .read(tabsProvider)
@@ -124,71 +130,202 @@ void main() {
       isTrue,
       reason: 'de gegenereerde dia\'s dragen de OpenKAT-markering',
     );
-    expect(find.textContaining('geïmporteerd'), findsOneWidget);
+    expect(outcome?.loaded, gateway.prepared.preview.reportCount);
+    expect(
+      container.read(openKatDirectoryProvider),
+      gateway.prepared.directory,
+      reason: 'pas de geslaagde build maakt de bron de nieuwe voorkeur',
+    );
+    final current = container.read(tabsProvider).current!;
+    expect(
+      container
+          .read(openKatProvider.notifier)
+          .sessionForDeck(current.recoveryId)
+          ?.directory,
+      gateway.prepared.directory,
+    );
+    await tester.pump();
+    expect(find.textContaining('Rapport gemaakt'), findsOneWidget);
+    await closeHarness(tester, container);
   });
 
-  testWidgets('een lege map meldt dat er niets gevonden is', (tester) async {
-    final tmp = Directory.systemTemp.createTempSync('ocikat-leeg-');
-    addTearDown(() => tmp.deleteSync(recursive: true));
-
+  testWidgets('annuleren bewaart een nieuw gekozen bronpad niet', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({
+      'app_consent_accepted': true,
+      'openkatReportDirectory': '/oude-bron',
+    });
     final (container, ctx, ref) = await pump(tester);
-    await tester.runAsync(
-      () => importOpenKatReports(ctx, ref, directoryOverride: tmp.path),
+    container.read(openKatProvider);
+    await tester.pump(const Duration(milliseconds: 50));
+    final future = importOpenKatReports(
+      ctx,
+      ref,
+      directoryOverride: '/nieuwe-bron',
+      gatewayOverride: FakeOpenKatWizardGateway(
+        prepared: wizardScan(reportCount: 0),
+      ),
     );
-    await tester.pumpAndSettle();
+    for (var index = 0; index < 4; index++) {
+      await tester.pump(const Duration(milliseconds: 50));
+    }
 
-    expect(find.textContaining('Geen OpenKAT-rapportages'), findsOneWidget);
+    await tester.tap(find.text('Annuleren'));
+    await tester.pump(const Duration(milliseconds: 50));
+
+    expect(await future, isNull);
+    expect(container.read(openKatDirectoryProvider), '/oude-bron');
+    final prefs = await SharedPreferences.getInstance();
+    expect(prefs.getString('openkatReportDirectory'), '/oude-bron');
+    await closeHarness(tester, container);
+  });
+
+  testWidgets('een lege scan opent geen deck en kan worden geannuleerd', (
+    tester,
+  ) async {
+    final (container, ctx, ref) = await pump(tester);
+    final future = importOpenKatReports(
+      ctx,
+      ref,
+      directoryOverride: '/leeg',
+      gatewayOverride: FakeOpenKatWizardGateway(
+        prepared: wizardScan(reportCount: 0),
+      ),
+    );
+    for (var index = 0; index < 4; index++) {
+      await tester.pump(const Duration(milliseconds: 50));
+    }
+
+    expect(
+      find.text('Deze map bevat geen bruikbare rapportages'),
+      findsOneWidget,
+    );
     expect(
       container.read(tabsProvider).current?.deckNotifier.currentState.deck,
       isNull,
       reason: 'geen deck openen om niets',
     );
+    await tester.tap(find.text('Annuleren'));
+    await tester.pump(const Duration(milliseconds: 50));
+    expect(await future, isNull);
+    await closeHarness(tester, container);
   });
 
-  testWidgets('een herimport werkt het actieve OpenKAT-deck bij', (
+  testWidgets('bijwerken houdt dezelfde tab en gebruikt de bevestigingsroute', (
     tester,
   ) async {
-    final tmp = Directory.systemTemp.createTempSync('ocikat-her-');
-    addTearDown(() => tmp.deleteSync(recursive: true));
-    Directory(p.join(tmp.path, 'raw-data')).createSync();
-    File(
-      p.join(tmp.path, 'raw-data', 'org1_20240601000000.json'),
-    ).writeAsStringSync(jsonEncode(rapport('org1')));
-
     final (container, ctx, ref) = await pump(tester);
-    await tester.runAsync(
-      () => importOpenKatReports(ctx, ref, directoryOverride: tmp.path),
-    );
-    await tester.pumpAndSettle();
-    final eerste = container
+    container.read(tabsProvider.notifier).newEmptyTab();
+    container
         .read(tabsProvider)
         .current!
         .deckNotifier
-        .currentState
-        .deck!;
+        .loadDeck(
+          const Deck(
+            title: 'Bestaand OpenKAT',
+            slides: [
+              Slide(
+                id: 'generated',
+                type: SlideType.title,
+                notes:
+                    '<!-- ocideck_openkat_view: report.management-overview.title -->',
+              ),
+            ],
+          ),
+        );
     final tabsVoor = container.read(tabsProvider).tabs.length;
-
-    // Tweede run met een extra maand: zelfde tab, bijgewerkt deck.
-    File(
-      p.join(tmp.path, 'raw-data', 'org1_20240701000000.json'),
-    ).writeAsStringSync(jsonEncode(rapport('org1')));
-    await tester.runAsync(
-      () => importOpenKatReports(ctx, ref, directoryOverride: tmp.path),
+    final gateway = FakeOpenKatWizardGateway();
+    final future = importOpenKatReports(
+      ctx,
+      ref,
+      directoryOverride: '/rapportages',
+      gatewayOverride: gateway,
     );
-    await tester.pumpAndSettle();
+    for (var index = 0; index < 4; index++) {
+      await tester.pump(const Duration(milliseconds: 50));
+    }
+    await tester.tap(find.widgetWithText(FilledButton, 'Rapport bijwerken'));
+    for (var index = 0; index < 4; index++) {
+      await tester.pump(const Duration(milliseconds: 50));
+    }
+    final outcome = await future;
 
     expect(container.read(tabsProvider).tabs.length, tabsVoor);
-    final tweede = container
-        .read(tabsProvider)
-        .current!
-        .deckNotifier
-        .currentState
-        .deck!;
-    expect(tweede.slides, isNot(equals(eerste.slides)));
-    // Geen snackbar-assert hier: de eerste melding draait op een échte timer
-    // (runAsync) en houdt de wachtrij bezet, dus 'bijgewerkt' komt binnen de
-    // testtijd niet aan de beurt. Het gedrag — zelfde tab, bijgewerkt deck —
-    // staat hierboven; de meldingsoppervlakken toetsen de andere twee tests.
+    expect(outcome?.updatedDeck, isTrue);
+    expect(gateway.lastExisting?.title, 'Bestaand OpenKAT');
+    await closeHarness(tester, container);
+  });
+
+  testWidgets('A naar B naar A gebruikt weer de bron en het recept van A', (
+    tester,
+  ) async {
+    final (container, ctx, ref) = await pump(tester);
+    final tabs = container.read(tabsProvider.notifier);
+    const generated = Deck(
+      title: 'OpenKAT',
+      slides: [
+        Slide(
+          id: 'generated',
+          type: SlideType.title,
+          notes:
+              '<!-- ocideck_openkat_view: report.management-overview.title -->',
+        ),
+      ],
+    );
+    final tabA = container.read(tabsProvider).current!;
+    tabA.deckNotifier.loadDeck(generated.copyWith(title: 'A'));
+    final recipeA = OpenKatWizardRecipe(
+      scenarioId: OpenKatWizardScenarioId.portfolio,
+      currentAsOf: DateTime.utc(2026, 7, 1),
+      language: OpenKatReportLanguage.dutch,
+      title: 'Recept A',
+    );
+    container
+        .read(openKatProvider.notifier)
+        .rememberDeckSession(
+          deckId: tabA.recoveryId,
+          directory: '/bron-a',
+          recipe: recipeA,
+        );
+    tabs.newEmptyTab();
+    final tabB = container.read(tabsProvider).current!;
+    tabB.deckNotifier.loadDeck(generated.copyWith(title: 'B'));
+    final recipeB = OpenKatWizardRecipe(
+      scenarioId: OpenKatWizardScenarioId.portfolio,
+      currentAsOf: DateTime.utc(2026, 7, 1),
+      language: OpenKatReportLanguage.english,
+      title: 'Recipe B',
+    );
+    container
+        .read(openKatProvider.notifier)
+        .rememberDeckSession(
+          deckId: tabB.recoveryId,
+          directory: '/bron-b',
+          recipe: recipeB,
+        );
+    tabs.selectTab(0);
+    final gateway = _RecordingGateway();
+
+    final future = importOpenKatReports(
+      ctx,
+      ref,
+      gatewayOverride: gateway,
+      announce: false,
+    );
+    for (var index = 0; index < 4; index++) {
+      await tester.pump(const Duration(milliseconds: 50));
+    }
+    await tester.tap(find.widgetWithText(FilledButton, 'Rapport bijwerken'));
+    for (var index = 0; index < 4; index++) {
+      await tester.pump(const Duration(milliseconds: 50));
+    }
+    await future;
+
+    expect(gateway.preparedDirectory, '/bron-a');
+    expect(gateway.lastRecipe?.title, 'Recept A');
+    expect(gateway.lastRecipe?.language, OpenKatReportLanguage.dutch);
+    await closeHarness(tester, container);
   });
 
   testWidgets('met announce uit meldt de actie niets en geeft ze de uitkomst', (
@@ -197,26 +334,19 @@ void main() {
     // De route van het instellingenvenster: daar is een snackbar achter een
     // modale dialoog geen melding, dus meldt het paneel zelf — en dan moet de
     // actie de tellingen wél teruggeven.
-    final tmp = Directory.systemTemp.createTempSync('ocikat-stil-');
-    addTearDown(() => tmp.deleteSync(recursive: true));
-    Directory(p.join(tmp.path, 'raw-data')).createSync();
-    File(
-      p.join(tmp.path, 'raw-data', 'org1_20240601000000.json'),
-    ).writeAsStringSync(jsonEncode(rapport('org1')));
-    File(
-      p.join(tmp.path, 'raw-data', 'geen-rapport.json'),
-    ).writeAsStringSync('{"a":1}');
-
     final (container, ctx, ref) = await pump(tester);
-    final uitkomst = await tester.runAsync(
-      () => importOpenKatReports(
-        ctx,
-        ref,
-        directoryOverride: tmp.path,
-        announce: false,
-      ),
+    final gateway = FakeOpenKatWizardGateway(
+      prepared: wizardScan(reportCount: 1, skippedCount: 1),
     );
-    await tester.pumpAndSettle();
+    final future = importOpenKatReports(
+      ctx,
+      ref,
+      directoryOverride: '/rapportages',
+      announce: false,
+      gatewayOverride: gateway,
+    );
+    await finishNewWizard(tester);
+    final uitkomst = await future;
 
     expect(uitkomst, isNotNull);
     expect(uitkomst!.loaded, 1);
@@ -229,6 +359,7 @@ void main() {
       isNotNull,
       reason: 'zwijgen is niet hetzelfde als niets doen',
     );
+    await closeHarness(tester, container);
   });
 
   test('de melding zegt per uitkomst iets anders', () {
@@ -239,7 +370,7 @@ void main() {
 
     expect(
       zin((loaded: 0, skipped: 0, updatedDeck: false, failed: true)),
-      contains('mislukt'),
+      contains('niet worden gemaakt'),
     );
     expect(
       zin((loaded: 0, skipped: 3, updatedDeck: false, failed: false)),
@@ -247,7 +378,7 @@ void main() {
     );
     expect(
       zin((loaded: 2, skipped: 1, updatedDeck: false, failed: false)),
-      allOf(contains('geïmporteerd'), contains('2'), contains('1')),
+      allOf(contains('Rapport gemaakt'), contains('2'), contains('1')),
     );
     expect(
       zin((loaded: 2, skipped: 0, updatedDeck: true, failed: false)),

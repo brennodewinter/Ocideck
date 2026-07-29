@@ -1774,6 +1774,131 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Dä bestehend Bèrìcht cha nìt sicher aktualisiert wärde. Erstell dä Bèrìcht neu; s bestehend Deck blibt unverändert.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      '{reports} Bricht für {organizations} Organisatione gfunde. D Messige gönd vom {firstDate} bis und mit em {lastDate}. {skipped} Dateie sind übersprunge worde.',
+  'Dubbel bestand overgeslagen': 'Doppleti Datei übersprunge',
+  'Conflicterende meting overgeslagen': 'Widersprüchlichi Messig übersprunge',
+  'Geen ondersteunde OpenKAT-rapportage': 'Nöd unterstütztä OpenKAT-Bricht',
+  'Bestand kon niet worden gelezen': 'Datei het nöd chöne gläse werde',
+  'Aanbevolen': 'Empfohle',
+  'Alleen wat nodig is': 'Nume was nötig isch',
+  'Alles blijft op dit apparaat': 'Alles bliibt uf däm Grät',
+  'Als nieuw rapport maken': 'Als nöie Bricht erstelle',
+  'Andere map kiezen': 'En andere Ordner wähle',
+  'Bekijk importverslag': 'Importbricht aluege',
+  'Bekijk verslag': 'Bricht aluege',
+  'Bijvoorbeeld CVE-2026-12345': 'Zum Bispil: CVE-2026-12345',
+  'Bruikbaar': 'Bruchbar',
+  'CVE zoeken': 'Nach ere CVE sueche',
+  'Critical/high': 'kritisch/hoch',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Datequalität, fählendi Messige und Veralterig.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'D usgwählte Bricht händ für dä Teil nöd gnueg verlässligi Date.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Dr Inhalt erschiint, sobald alli nötige Uswahle troffe sind.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'D Messabdeckig isch bi de usgwählte Messzytpünkt anders; Änderige sind drum nume beschränkt vergliichbar.',
+  'Dekking en actualiteit van metingen':
+      'Abdeckig und Aktualität vo de Messige',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Die CVE isch i de usgwählte Messige nöd gfunde worde.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Dä Ordner het kei bruchbare Bricht',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Die Uswahl het z vill Date, zum sie sicher i eim Bricht z verarbeite.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Dä Teil cha nöd vollständig us de usgwählte Bricht ufbaut werde.',
+  'Dit rapport bevat': 'Dä Bricht enthält',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Ei oder meh Messige sind älter als d usgwählti Aktualitätsgränze.',
+  'Eerdere bruikbare meting': 'Früehri bruchbari Messig',
+  'Engels': 'Änglisch',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Es sind kei bruchbare Messige gfunde worde.',
+  'Feitelijke gegevens': 'Faktischi Date',
+  'Geen bruikbare meetdatum': 'Kei bruchbars Messdatum',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Generierti Folie werded erneuert. Ihri eigete Folie und Kopie bliibed erhalte.',
+  'Getroffen organisaties en systemen': 'Betroffeni Organisatione und System',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Betroffeni Organisatione und System rund um e Schwachstell.',
+  'Getroffen systemen': 'Betroffeni System',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Dä Bricht het nöd chöne erstellt werde. Ihri Uswahle bliibed erhalte; prüefed Si d Warnige und versueched Si s nomal.',
+  'Import': 'Importvorgang',
+  'Importverslag bekijken': 'Importbricht aluege',
+  'Kerncijfers en aandachtspunten': 'Kennzahle und wichtigi Pünkt',
+  'Keuzes wijzigen…': 'Uswahle ändere…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Wähled Si de Ordner, wo OpenKAT d Bricht abgleit het. OciDeck list dä Ordner nume; es wird nüt gändert oder verschickt.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Wähled Si d Frog, wo dä Bricht söll beantworte. OciDeck bestimmt dr passendi Ufbau.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Wähled Si e CVE, wo i de Bricht gfunde worde isch.',
+  'Laatste bruikbare meting': 'Letschti bruchbari Messig',
+  'Live voorvertoning van de rapportopbouw': 'Live-Vorschau vom Brichtufbau',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Füehrigs- und Steuerigsinformatione über mehri Organisatione.',
+  'Meer instellingen': 'Meh Istellige',
+  'Nederlands': 'Niderländisch',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Nöd jedi usgwählti Organisation het e Messig für die Period.',
+  'Nieuwe en verdwenen bevindingen': 'Nöii und verschwundeni Befund',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'No nöd verfüegbar: Die Bricht enthalted kei verlässliche CVE-Nummer.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck bruucht die gliichi Quälle und Uswahle und nimmt d neuste passende Messige. Ihri eigete Folie und Kopie bliibed erhalte.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck het kei bruchbare OpenKAT-Messige gfunde. Wähled Si en andere Ordner oder lueged Si de Importbricht aa, zum z gseh, weli Dateie übersprunge worde sind.',
+  'OpenKAT-importverslag': 'OpenKAT-Importbricht',
+  'OpenKAT-rapport': 'OpenKAT-Bricht',
+  'OpenKAT-rapport bijwerken': 'OpenKAT-Bricht aktualisiere',
+  'OpenKAT-rapport bijwerken…': 'OpenKAT-Bricht aktualisiere…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'Dr OpenKAT-Bricht het nöd chöne erstellt werde.',
+  'OpenKAT-rapport maken': 'OpenKAT-Bricht erstelle',
+  'OpenKAT-rapport maken…': 'OpenKAT-Bricht erstelle…',
+  'Organisaties': 'Organisatione',
+  'Organisaties kiezen': 'Organisatione wähle',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Bricht aktualisiert. Ihri eigete Folie sind erhalte blibe.',
+  'Rapport bijwerken': 'Bricht aktualisiere',
+  'Rapport gemaakt.': 'Bricht erstellt.',
+  'Rapport maken': 'Bricht erstelle',
+  'Rapportages controleren…': 'Bricht prüefe…',
+  'Rapportages voorbereiden': 'Bricht vorbereite',
+  'Rapporttitel': 'Brichttitel',
+  'Stap': 'Schritt',
+  'Taal': 'Sproch',
+  'Terug': 'Zrugg',
+  'Veranderingen in monitoring': 'Änderige bim Monitoring',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Für eini oder mehri Organisatione fählt e bruchbari früehri Messig.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Für eini oder mehri Organisatione fählt e bruchbari aktuelli Messig.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Für en Vergliich bruchts zwei Messzytpünkt. Jetzt isch e Messig gfunde worde.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Fortschritt im Vergliich zu me früehere Messzytpunkt.',
+  'Waar staan de OpenKAT-rapportages?': 'Wo sind d OpenKAT-Bricht?',
+  'Wat veranderde er bij één organisatie?':
+      'Was het sich bi einere Organisation gändert?',
+  'Wat wilt u laten zien?': 'Was wänd Si zeige?',
+  'Welke organisaties vragen aandacht?':
+      'Weli Organisatione bruuched Ufmerksamkeit?',
+  'Werkelijke meetdatums': 'Tatsächlechi Messdate',
+  'Wie is geraakt door een CVE?': 'Wer isch vo ere CVE betroffen?',
+  'Zijn de metingen compleet en actueel?':
+      'Sind d Messige vollständig und aktuell?',
+  'bruikbaar': 'bruchbar',
+  'metingen': 'Messige',
+  'organisaties': 'Organisatione',
+  'organisaties geselecteerd': 'Organisatione usgwählt',
+  'rapportages gebruikt': 'Bricht bruucht',
+  'systemen': 'System',
   'Nog geen specificatielimiet': 'No kei Spezifikationsgränze',
   'USL (bovengrens)': 'USL (Obergränze)',
   'LSL (ondergrens)': 'LSL (Untergränze)',

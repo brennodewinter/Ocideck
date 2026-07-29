@@ -131,6 +131,28 @@ void main() {
     expect(find.text('Derde'), findsWidgets);
   });
 
+  testWidgets(
+    'presenteren verwijdert een zichtbare snackbar vóór de overgang',
+    (tester) async {
+      await pumpShell(tester, deckOf([bullets('Eerste')]));
+      final shellContext = tester.element(find.byType(AppShell));
+      ScaffoldMessenger.of(shellContext).showSnackBar(
+        const SnackBar(
+          duration: Duration(seconds: 8),
+          content: Text('Rapport gemaakt.'),
+        ),
+      );
+      await tester.pump();
+      expect(find.text('Rapport gemaakt.'), findsOneWidget);
+
+      await present(tester);
+
+      expect(find.byType(FullscreenPresenter), findsOneWidget);
+      expect(find.text('Rapport gemaakt.'), findsNothing);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
   testWidgets('een overgeslagen dia haalt de presentatie niet', (tester) async {
     // De tweede dia is overgeslagen: die hoort niet in de presentatie. En de
     // selectie staat er precies op — sinds #846 begint de knop bij de dia waar

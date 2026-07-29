@@ -2,6 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/openkat/openkat_models.dart';
+import 'package:ocideck/models/openkat/openkat_reporting_models.dart';
+import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/scorecard_spec.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -509,6 +511,19 @@ void main() {
   });
 
   group('de herimport vindt de gegenereerde dia terug', () {
+    test('de origin-marker overleeft opslaan maar niet dupliceren', () {
+      final eerste = generator.generate([_orgMetVerloop('a')]);
+      final terug = MarkdownService().parseDeck(
+        MarkdownService().generateDeck(eerste),
+      )!;
+      final origineel = _view(terug, 'portfolio.summary');
+      final kopie = Slide.duplicate(origineel);
+
+      expect(origineel.notes, contains(openKatGeneratedOriginMarker));
+      expect(kopie.notes, isNot(contains(openKatGeneratedOriginMarker)));
+      expect(kopie.notes, contains('ocideck_openkat_view: portfolio.summary'));
+    });
+
     test('een vervangen dia houdt zijn plek en zijn id', () {
       final eerste = generator.generate([_orgMetVerloop('a')]);
       final tweede = generator.update(eerste, [_orgMetVerloop('a')]);
@@ -518,6 +533,242 @@ void main() {
         eerste.slides.map((s) => s.id),
         reason: 'zelfde invoer, zelfde dia-ids — anders schuift een herimport',
       );
+    });
+
+    test(
+      'een verplaatste handmatige kopie blijft naast het origineel staan',
+      () {
+        final eerste = generator.generate([_orgMetVerloop('a')]);
+        final origineel = _view(eerste, 'portfolio.summary');
+        final kopie = Slide.duplicate(
+          origineel,
+        ).copyWith(title: 'Mijn handmatige kopie');
+        final zonderOrigineel = eerste.slides
+            .where((slide) => slide.id != origineel.id)
+            .toList();
+        final bestaand = eerste.copyWith(
+          slides: [kopie, ...zonderOrigineel, origineel],
+        );
+        final vers = generator.generate([_orgMetVerloop('a')]);
+
+        final bijgewerkt = generator.updateGenerated(bestaand, vers);
+
+        expect(
+          bijgewerkt.slides.where((slide) => slide.id == kopie.id).single.title,
+          'Mijn handmatige kopie',
+        );
+        expect(
+          bijgewerkt.slides.where((slide) => slide.id == origineel.id),
+          hasLength(1),
+          reason: 'alleen het deterministische origineel wordt vervangen',
+        );
+        expect(kopie.notes, isNot(contains(openKatGeneratedOriginMarker)));
+      },
+    );
+
+    test('de originele dia houdt haar privacykeuze bij vervanging', () {
+      final eerste = generator.generate([_orgMetVerloop('a')]);
+      final origineel = _view(eerste, 'portfolio.summary');
+      final bestaand = eerste.copyWith(
+        slides: [
+          for (final slide in eerste.slides)
+            slide.id == origineel.id
+                ? slide.copyWith(privacy: PrivacyDisposition.redact)
+                : slide,
+        ],
+      );
+
+      final bijgewerkt = generator.updateGenerated(
+        bestaand,
+        generator.generate([_orgMetVerloop('a')]),
+      );
+
+      expect(
+        _view(bijgewerkt, 'portfolio.summary').privacy,
+        PrivacyDisposition.redact,
+      );
+    });
+
+    test(
+      'scopeverkleining verwijdert vervallen en optionele views maar geen kopie',
+      () {
+        final eerste = generator.generate([
+          _orgMetVerloop('a'),
+          _orgMetVerloop('b'),
+        ]);
+        final origineel = _view(eerste, 'org.b.summary');
+        final kopie = Slide.duplicate(
+          origineel,
+        ).copyWith(title: 'Mijn bewaarde analyse');
+        final bestaand = eerste.copyWith(slides: [...eerste.slides, kopie]);
+        final vers = generator.generate([_orgMetVerloop('a')]);
+
+        final bijgewerkt = generator.updateGenerated(bestaand, vers);
+
+        expect(
+          bijgewerkt.slides.where((slide) => slide.id == origineel.id),
+          isEmpty,
+          reason: 'een niet meer gebouwde gegenereerde view is verouderd',
+        );
+        expect(
+          bijgewerkt.slides.where((slide) => slide.id == kopie.id).single.title,
+          'Mijn bewaarde analyse',
+        );
+        expect(
+          _hasView(bijgewerkt, 'portfolio.orgs-compared'),
+          isFalse,
+          reason: 'de optionele vergelijkingsview bestaat niet meer in vers',
+        );
+      },
+    );
+
+    test('een ambigu legacy-origineel stopt de update fail-closed', () {
+      final eerste = generator.generate([_orgMetVerloop('a')]);
+      final origineel = _view(eerste, 'org.a.summary');
+      final legacyEen = Slide.duplicate(origineel);
+      final legacyTwee = Slide.duplicate(origineel);
+      final bestaand = eerste.copyWith(
+        slides: [
+          for (final slide in eerste.slides)
+            if (slide.id != origineel.id) slide,
+          legacyEen,
+          legacyTwee,
+        ],
+      );
+      final vers = eerste.copyWith(
+        slides: [
+          for (final slide in eerste.slides)
+            if (slide.id != origineel.id) slide,
+        ],
+      );
+
+      expect(
+        () => generator.updateGenerated(bestaand, vers),
+        throwsA(
+          isA<OpenKatUnsafeUpdateException>().having(
+            (error) => error.viewId,
+            'viewId',
+            'org.a.summary',
+          ),
+        ),
+      );
+    });
+
+    test(
+      'een enige aangepaste kopie wordt niet voor het origineel aangezien',
+      () {
+        final eerste = generator.generate([_orgMetVerloop('a')]);
+        final origineel = _view(eerste, 'org.a.summary');
+        final kopie = Slide.duplicate(
+          origineel,
+        ).copyWith(title: 'Mijn enige aangepaste analyse');
+        final bestaand = eerste.copyWith(
+          slides: [
+            for (final slide in eerste.slides)
+              if (slide.id != origineel.id) slide,
+            kopie,
+          ],
+        );
+
+        expect(
+          () => generator.updateGenerated(
+            bestaand,
+            generator.generate([_orgMetVerloop('a')]),
+          ),
+          throwsA(isA<OpenKatUnsafeUpdateException>()),
+        );
+        expect(kopie.title, 'Mijn enige aangepaste analyse');
+      },
+    );
+
+    test(
+      'een enige aangepaste kopie van een vervallen view blijft fail-closed',
+      () {
+        final eerste = generator.generate([
+          _orgMetVerloop('a'),
+          _orgMetVerloop('b'),
+        ]);
+        final origineel = _view(eerste, 'org.b.summary');
+        final kopie = Slide.duplicate(
+          origineel,
+        ).copyWith(title: 'Mijn bewaarde analyse');
+        final bestaand = eerste.copyWith(
+          slides: [
+            for (final slide in eerste.slides)
+              if (slide.id != origineel.id) slide,
+            kopie,
+          ],
+        );
+
+        expect(
+          () => generator.updateGenerated(
+            bestaand,
+            generator.generate([_orgMetVerloop('a')]),
+          ),
+          throwsA(isA<OpenKatUnsafeUpdateException>()),
+        );
+        expect(kopie.title, 'Mijn bewaarde analyse');
+      },
+    );
+
+    test(
+      'een extern gekopieerde en bewerkte Markdown-dia stopt fail-closed',
+      () {
+        final eerste = generator.generate([_orgMetVerloop('a')]);
+        final origineel = _view(eerste, 'org.a.summary');
+        final bron = MarkdownService().generateDeck(
+          eerste.copyWith(slides: [origineel]),
+        );
+        // Een volledige diablock kopiëren, het origineel verwijderen en daarna
+        // de kop bewerken laat op schijf precies dit ene bewerkte block over,
+        // inclusief de meegereisde provenancecomment.
+        final externBewerkt = bron.replaceFirst(
+          origineel.title,
+          'Mijn externe analyse',
+        );
+        final heropend = MarkdownService().parseDeck(externBewerkt)!;
+
+        expect(
+          () => generator.updateGenerated(
+            heropend,
+            generator.generate([_orgMetVerloop('a')]),
+          ),
+          throwsA(isA<OpenKatUnsafeUpdateException>()),
+        );
+        expect(_view(heropend, 'org.a.summary').title, 'Mijn externe analyse');
+      },
+    );
+
+    test('een scenariowissel laat geen views van het oude scenario staan', () {
+      final organization = _orgMetVerloop('a');
+      final bestaand = generator.generate([organization]);
+      final vers = OpenKatReportEngine().generate(
+        [organization],
+        OpenKatReportRequest(
+          scenarioId: 'data-quality',
+          scope: const OpenKatReportScope.portfolio(),
+          currentAsOf: DateTime.utc(2026, 6, 1),
+        ),
+      ).deck!;
+
+      final bijgewerkt = generator.updateGenerated(bestaand, vers);
+
+      expect(_hasView(bijgewerkt, 'portfolio.summary'), isFalse);
+      expect(_hasView(bijgewerkt, 'report.data-quality.availability'), isTrue);
+    });
+
+    test('titel en rapporttaal komen uit het verse scenariodeck', () {
+      final bestaand = generator
+          .generate([_orgMetVerloop('a')])
+          .copyWith(title: 'Oude titel', language: 'nl');
+      final vers = generator
+          .generate([_orgMetVerloop('a')])
+          .copyWith(title: 'Fresh title', language: 'en');
+
+      final bijgewerkt = generator.updateGenerated(bestaand, vers);
+
+      expect(bijgewerkt.title, 'Fresh title');
+      expect(bijgewerkt.language, 'en');
     });
   });
 }

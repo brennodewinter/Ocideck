@@ -1762,6 +1762,130 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Seda olemasolevat aruannet ei saa turvaliselt ajakohastada. Looge aruanne uuena; olemasolev deck jääb muutmata.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Leiti {reports} aruannet {organizations} organisatsiooni kohta. Mõõtmised hõlmavad aega {firstDate} kuni {lastDate} kaasa arvatud. Vahele jäeti {skipped} faili.',
+  'Dubbel bestand overgeslagen': 'Duplikaatfail jäeti vahele',
+  'Conflicterende meting overgeslagen': 'Vastuoluline mõõtmine jäeti vahele',
+  'Geen ondersteunde OpenKAT-rapportage': 'Toetamata OpenKATi aruanne',
+  'Bestand kon niet worden gelezen': 'Faili ei saanud lugeda',
+  'Aanbevolen': 'Soovitatav',
+  'Alleen wat nodig is': 'Ainult seda, mis on vajalik',
+  'Alles blijft op dit apparaat': 'Alles blijft op dit apparaat',
+  'Als nieuw rapport maken': 'Loo uue aruandena',
+  'Andere map kiezen': 'Valige teine ​​kaust',
+  'Bekijk importverslag': 'Kuva impordiaruanne',
+  'Bekijk verslag': 'Vaata aruannet',
+  'Bijvoorbeeld CVE-2026-12345': 'Bijvoorbeeld CVE-2026-12345',
+  'Bruikbaar': 'Kasutatav',
+  'CVE zoeken': 'CVE otsing',
+  'Critical/high': 'Kriitiline/kõrge',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Andmete kvaliteet, puuduvad mõõtmised ja vananemine.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Valitud aruanded ei sisalda selle osa kohta piisavalt usaldusväärseid andmeid.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Sisu ilmub, kui kõik vajalikud valikud on tehtud.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Mõõtmisulatus on valitud mõõtehetkede vahel erinev; muutused on seetõttu võrreldavad vaid piiratud ulatuses.',
+  'Dekking en actualiteit van metingen': 'Mõõtmiste katvus ja õigeaegsus',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Seda CVE-d valitud mõõtmistes ei leitud.',
+  'Deze map bevat geen bruikbare rapportages':
+      'See kaust ei sisalda kasulikke aruandeid',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'See valik sisaldab liiga palju andmeid, et neid ohutult ühte aruannet lisada.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Seda jaotist ei saa täielikult valitud aruannetest üles ehitada.',
+  'Dit rapport bevat': 'See aruanne sisaldab',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Üks või mitu mõõtmist on valitud ajakohasuse piirangust vanemad.',
+  'Eerdere bruikbare meting': 'Eelmine kasulik mõõtmine',
+  'Engels': 'inglise keel',
+  'Er zijn geen bruikbare metingen gevonden.': 'Kasulikke mõõtmisi ei leitud.',
+  'Feitelijke gegevens': 'Faktilised andmed',
+  'Geen bruikbare meetdatum': 'Kasutatav mõõtmiskuupäev puudub',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Loodud slaide värskendatakse. Teie enda slaidid ja koopiad jäävad alles.',
+  'Getroffen organisaties en systemen':
+      'Mõjutatud organisatsioonid ja süsteemid',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Mõjutatud organisatsioonid ja süsteemid ühe haavatavuse ümber.',
+  'Getroffen systemen': 'Mõjutatud süsteemid',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Aruannet ei saanud luua. Teie valikud on säilinud; kontrollige hoiatusi ja proovige uuesti.',
+  'Import': 'Import',
+  'Importverslag bekijken': 'Kuva impordiaruanne',
+  'Kerncijfers en aandachtspunten': 'Võtmenumbrid ja huvipunktid',
+  'Keuzes wijzigen…': 'Muuda valikuid…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Valige kaust, kuhu OpenKAT on aruanded paigutanud. OciDeck loeb ainult seda kausta; midagi ei muudeta ega saadeta.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Valige küsimus, millele aruanne peaks vastama. OciDeck määrab sobiva struktuuri.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Valige aruannetest leitud CVE.',
+  'Laatste bruikbare meting': 'Viimane kasutatav mõõt',
+  'Live voorvertoning van de rapportopbouw':
+      'Aruande struktuuri reaalajas eelvaade',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Haldus- ja kontrolliteave mitme organisatsiooni kohta.',
+  'Meer instellingen': 'Rohkem seadeid',
+  'Nederlands': 'hollandi keel',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Mitte igal valitud organisatsioonil pole selle perioodi mõõtmist.',
+  'Nieuwe en verdwenen bevindingen': 'Uued ja puuduvad leiud',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Pole veel saadaval: need aruanded ei sisalda usaldusväärseid CVE numbreid.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck kasutab samu allikaid ja valikuid ning teeb uusimad sobivad mõõtmised. Teie enda slaidid ja koopiad jäävad alles.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck ei leidnud kasulikke OpenKAT-i mõõtmisi. Valige mõni muu kaust või vaadake impordiaruannet, et näha, millised failid vahele jäeti.',
+  'OpenKAT-importverslag': 'OpenKAT-i impordiaruanne',
+  'OpenKAT-rapport': 'OpenKAT aruanne',
+  'OpenKAT-rapport bijwerken': 'Värskendage OpenKAT-i aruannet',
+  'OpenKAT-rapport bijwerken…': 'OpenKAT-i aruande värskendamine…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'OpenKAT aruannet ei saanud luua.',
+  'OpenKAT-rapport maken': 'Loo OpenKAT aruanne',
+  'OpenKAT-rapport maken…': 'Loo OpenKAT aruanne…',
+  'Organisaties': 'Organisatsioonid',
+  'Organisaties kiezen': 'Organisatsioonide valimine',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Aruanne uuendatud. Teie enda slaidid on säilinud.',
+  'Rapport bijwerken': 'Värskenda aruannet',
+  'Rapport gemaakt.': 'Aruanne loodud.',
+  'Rapport maken': 'Loo aruanne',
+  'Rapportages controleren…': 'Kontrolli aruandeid…',
+  'Rapportages voorbereiden': 'Koostage aruanded',
+  'Rapporttitel': 'Aruande pealkiri',
+  'Stap': 'Samm',
+  'Taal': 'Keel',
+  'Terug': 'Tagasi',
+  'Veranderingen in monitoring': 'Muutused monitooringus',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Ühe või mitme organisatsiooni jaoks puudub kasulik eelmine mõõtmine.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Ühe või mitme organisatsiooni jaoks puudub kasulik voolumõõtmine.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Võrdluseks on vaja kahte mõõtemomenti. Nüüd on leitud üks mõõt.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Edenemine võrreldes eelmise mõõtmishetkega.',
+  'Waar staan de OpenKAT-rapportages?': 'Kus on OpenKAT-i aruanded?',
+  'Wat veranderde er bij één organisatie?': 'Mis ühes organisatsioonis muutus?',
+  'Wat wilt u laten zien?': 'Mida sa näidata tahad?',
+  'Welke organisaties vragen aandacht?':
+      'Millised organisatsioonid vajavad tähelepanu?',
+  'Werkelijke meetdatums': 'Tegelikud mõõtmiskuupäevad',
+  'Wie is geraakt door een CVE?': 'Keda CVE mõjutab?',
+  'Zijn de metingen compleet en actueel?':
+      'Kas mõõdud on täielikud ja ajakohased?',
+  'bruikbaar': 'kasutatav',
+  'metingen': 'mõõtmised',
+  'organisaties': 'organisatsioonid',
+  'organisaties geselecteerd': 'valitud organisatsioonid',
+  'rapportages gebruikt': 'kasutatud aruanded',
+  'systemen': 'süsteemid',
   'Nog geen specificatielimiet': 'Spetsifikatsioonipiiri veel pole',
   'USL (bovengrens)': 'USL (ülemine piir)',
   'LSL (ondergrens)': 'LSL (alumine piir)',

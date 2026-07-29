@@ -1787,6 +1787,128 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Haec relatio iam exsistens tuto renovari non potest. Relationem novam crea; fasciculus exsistens immutatus manet.',
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      '{reports} relationes pro {organizations} institutis inventae sunt. Mensurae a {firstDate} usque ad {lastDate} pertinent. {skipped} fasciculi praetermissi sunt.',
+  'Dubbel bestand overgeslagen': 'Fasciculus duplicatus praetermissus',
+  'Conflicterende meting overgeslagen': 'Mensura repugnans praetermissa',
+  'Geen ondersteunde OpenKAT-rapportage': 'Relatio OpenKAT non suffulta',
+  'Bestand kon niet worden gelezen': 'Fasciculus legi non potuit',
+  'Aanbevolen': 'Commendatur',
+  'Alleen wat nodig is': 'Tantum quod est necessarium',
+  'Alles blijft op dit apparaat': 'Omnia manet in hac fabrica',
+  'Als nieuw rapport maken': 'Create ut nova fama',
+  'Andere map kiezen': 'Elige aliud folder',
+  'Bekijk importverslag': 'Visum import fama',
+  'Bekijk verslag': 'Visum fama',
+  'Bijvoorbeeld CVE-2026-12345': 'Exempli gratia CVE-2026-12345',
+  'Bruikbaar': 'Usabilis',
+  'CVE zoeken': 'CVE quaerere',
+  'Critical/high': 'Critical/high',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Data qualitatis, desunt mensurae et obsolescentiae.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Renuntiationes selectae satis certae notitiae huic parti non continent.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Contentum semel apparebit omnes electiones necessariae factae.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Mensura coverage inter electos mensurae momenta differt; Mutationes ergo tantum ad parvum comparantur.',
+  'Dekking en actualiteit van metingen': 'Coverage et opportunitas mensurarum',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Hoc CVE non inveniebatur in delectis mensuris.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Hoc folder continet nihil utile tradit',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Haec lectio nimium notas continet, ut uno rumore tuto includantur.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Haec sectio ex relationibus selectis omnino aedificari non potest.',
+  'Dit rapport bevat': 'Haec fama continet',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Mensurae unus vel plures antiquiores sunt quam electae opportunitatis modus.',
+  'Eerdere bruikbare meting': 'Priorem utilem mensuram',
+  'Engels': 'Anglicus',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Mensurae utiles nullae inventae sunt.',
+  'Feitelijke gegevens': 'Res data',
+  'Geen bruikbare meetdatum': 'Nulla utilis mensura diem',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Generantur labitur reficiuntur. Pro- prium labitur et codices servantur.',
+  'Getroffen organisaties en systemen': 'Affectus organizations et systemata',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Institutiones et systemata affectata circa unum vulnerability.',
+  'Getroffen systemen': 'systemata affectata',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Fama creari non potuit. Tuae electiones conservatae sunt; monita reprehendo rursum.',
+  'Import': 'Import',
+  'Importverslag bekijken': 'Visum import fama',
+  'Kerncijfers en aandachtspunten': 'Key figuras et puncta interest',
+  'Keuzes wijzigen…': 'Mutare electiones…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Elige folder in quo OpenKAT relationes posuit. OciDeck solum hunc folder legit; nihil mutatur aut mittitur.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Elige quaestio fama respondere debet. OciDeck aptam structuram eflicit.',
+  'Kies een CVE die in de rapportages is aangetroffen.': 'Elige CVE in tradit.',
+  'Laatste bruikbare meting': 'Last utibile measurement',
+  'Live voorvertoning van de rapportopbouw':
+      'Vivamus preview of the report structure',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Procuratio et moderatio informationes circa plures consociationes.',
+  'Meer instellingen': 'Plures occasus',
+  'Nederlands': 'Batavica',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Non omnis ordinatio electa mensuram huius temporis habet.',
+  'Nieuwe en verdwenen bevindingen': 'Nova et absentis Inventiones',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Not yet available: hae relationes certos CVE numeros non continent.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck eodem fonte utitur et electionibus et mensuris ultimis idoneis sumit. Pro- prium labitur et codices servantur.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck invenire non poterat mensuras utiles OpenKAT. Folder alium elige vel inspicere importat famam ad videndum quae limae exsultaverunt.',
+  'OpenKAT-importverslag': 'OpenKAT import fama',
+  'OpenKAT-rapport': 'OpenKAT fama',
+  'OpenKAT-rapport bijwerken': 'Update OpenKAT fama',
+  'OpenKAT-rapport bijwerken…': 'Renova OpenKAT fama…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'OpenKAT fama creatum esse non potuit.',
+  'OpenKAT-rapport maken': 'Create OpenKAT fama',
+  'OpenKAT-rapport maken…': 'Create OpenKAT fama…',
+  'Organisaties': 'Institutiones',
+  'Organisaties kiezen': 'Instituta eligens',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Fama renovata est. Tua labitur retenta.',
+  'Rapport bijwerken': 'Update fama',
+  'Rapport gemaakt.': 'Fama creatus est.',
+  'Rapport maken': 'Crea fama',
+  'Rapportages controleren…': 'Reprehendo tradit…',
+  'Rapportages voorbereiden': 'Para tradit',
+  'Rapporttitel': 'Report title',
+  'Stap': 'Gradus',
+  'Taal': 'Linguae',
+  'Terug': 'Retro',
+  'Veranderingen in monitoring': 'Mutationes in magna',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Mensura prior utilis pro una vel pluribus Institutis deest.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Mensuratioris currentis utilis desit pro uno vel pluribus Institutis.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Ad comparationem requiruntur duo momenta mensurae. Mensura una nunc inventa est.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Progressus comparatur ad momentum praecedens mensurae.',
+  'Waar staan de OpenKAT-rapportages?': 'Ubi est OpenKAT tradit?',
+  'Wat veranderde er bij één organisatie?': 'Quid in uno ordine mutatum?',
+  'Wat wilt u laten zien?': 'Quid vis ostendere?',
+  'Welke organisaties vragen aandacht?': 'Quae institutiones operam requirunt?',
+  'Werkelijke meetdatums': 'Ipsa mensura dies',
+  'Wie is geraakt door een CVE?': 'CVE quis afficitur?',
+  'Zijn de metingen compleet en actueel?':
+      'Suntne mensurae integrae et recentes?',
+  'bruikbaar': 'utilis',
+  'metingen': 'mensurae',
+  'organisaties': 'organizations',
+  'organisaties geselecteerd': 'organizations electus',
+  'rapportages gebruikt': 'tradit usus',
+  'systemen': 'systems',
   'Nog geen specificatielimiet': 'Nondum limes specificationis',
   'USL (bovengrens)': 'USL (limes superior)',
   'LSL (ondergrens)': 'LSL (limes inferior)',
