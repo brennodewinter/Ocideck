@@ -9,22 +9,38 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../l10n/app_localizations.dart';
 import '../models/asset_overview_spec.dart';
 import '../models/chart.dart';
+import 'improvement/chart_derivation.dart';
 import '../models/checklist_spec.dart';
 import '../models/cockpit.dart';
 import '../models/discoveries_spec.dart';
 import '../models/findings_summary_spec.dart';
 import '../models/question.dart';
 import '../models/deck.dart';
+import '../models/improvement_y01.dart';
 import '../models/scope_matrix_spec.dart';
 import '../models/scorecard_spec.dart';
 import '../models/settings.dart';
+import '../models/slide.dart';
 import '../models/timeline.dart';
 import '../utils/log.dart';
 import '../models/document_signature.dart';
 import 'bundled_licenses.dart';
 import 'cvss/cvss4.dart';
 import 'export_metadata.dart';
+import 'improvement/matrix_layout.dart';
+import 'improvement/matrix_slide.dart';
+import 'improvement/matrix_spec.dart';
+import 'improvement/canvas_layout.dart';
+import 'improvement/canvas_slide.dart';
+import 'improvement/canvas_spec.dart';
+import 'improvement/tree_layout.dart';
+import 'improvement/tree_spec.dart';
+import 'improvement/flow_layout.dart';
+import 'improvement/flow_slide.dart';
+import 'improvement/flow_spec.dart';
 import 'markdown_table_codec.dart';
+import 'scene/scene.dart';
+import 'markdown_service.dart';
 
 part 'marp_html/marp_html_service_cockpit.dart';
 part 'marp_html/marp_html_service_charts.dart';
@@ -32,6 +48,10 @@ part 'marp_html/marp_html_service_charts_radial.dart';
 part 'marp_html/marp_html_service_charts_bullet.dart';
 part 'marp_html/marp_html_service_reporting.dart';
 part 'marp_html/marp_html_service_reporting_miauw.dart';
+part 'marp_html/marp_html_service_matrix.dart';
+part 'marp_html/marp_html_service_canvas.dart';
+part 'marp_html/marp_html_service_tree.dart';
+part 'marp_html/marp_html_service_flow.dart';
 part 'marp_html/marp_html_service_css.dart';
 part 'marp_html/marp_html_service_render_script.dart';
 part 'marp_html/marp_html_service_images.dart';
@@ -174,13 +194,18 @@ class MarpHtmlService {
     final signature = docMeta.signature != null
         ? signatureFieldsOf(docMeta.signature!, sealedAt: docMeta.sealedAt)
         : signatureFields(embedded.markdown);
+    final exportY01 = _y01FromExportMarkdown(embedded.markdown);
     final sections = StringBuffer();
     for (final slide in marpSlides(embedded.markdown)) {
       // De keten van omzettingen, van binnen naar buiten. Elke stap laat een
       // dia die haar niet aangaat onveranderd, dus de volgorde is vrij; het
       // rapportagetype gaat als eerste omdat het de hele body vervangt.
       var body = renderReportingSlide(slide, theme: theme);
-      body = renderChartBlocks(body, theme: theme);
+      body = renderMatrixSlide(body, theme: theme);
+      body = renderCanvasSlide(body, theme: theme);
+      body = renderTreeSlide(body, theme: theme);
+      body = renderFlowSlide(body, theme: theme);
+      body = renderChartBlocks(body, theme: theme, y01: exportY01);
       body = renderQuestionBlocks(body);
       body = renderMediaRedacted(body);
       body = renderVideoNotice(body);
@@ -385,12 +410,21 @@ class MarpHtmlService {
     multiLine: true,
   );
 
+  /// Y-01 uit de export-markdown (resolve-at-draw voor histogramlimieten).
+  static ImprovementY01Metric _y01FromExportMarkdown(String markdown) =>
+      MarkdownService().parseDeck(markdown)?.improvementY01Metric ??
+      ImprovementY01Metric.empty;
+
   /// Replace ```chart fenced blocks with a self-contained inline SVG, so the
   /// exported HTML renders charts without any JS chart library.
-  static String renderChartBlocks(String slideMarkdown, {ThemeProfile? theme}) {
+  static String renderChartBlocks(
+    String slideMarkdown, {
+    ThemeProfile? theme,
+    ImprovementY01Metric y01 = ImprovementY01Metric.empty,
+  }) {
     return slideMarkdown.replaceAllMapped(_chartFence, (m) {
       final spec = ChartSpec.parse(m.group(1)!);
-      return '\n<div class="chart">${_chartSvg(spec, theme)}</div>\n';
+      return '\n<div class="chart">${_chartSvg(spec, theme, y01: y01)}</div>\n';
     });
   }
 

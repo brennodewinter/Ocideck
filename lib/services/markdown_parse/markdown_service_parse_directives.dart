@@ -31,6 +31,8 @@ typedef _BlockDirectives = ({
   String columnTitle2,
   int styleImageWidth,
   DisplayWindowSpec? viewLimit,
+  String improvementTemplateId,
+  String improvementLayout,
 });
 
 /// Neemt [content] op in het notitieblok en haalt het uit de body.
@@ -104,6 +106,8 @@ extension _MarkdownParseDirectives on MarkdownService {
     // bulletsImage slides store their panel width in `<!-- _style:
     // --image-width: N%; -->`; capture it before the comment is stripped.
     int styleImageWidth = 0;
+    var improvementTemplateId = '';
+    var improvementLayout = '';
     final viewComments = <String, String>{};
     final source = remaining;
     remaining = source.replaceAllMapped(_reHtmlComment, (m) {
@@ -172,6 +176,21 @@ extension _MarkdownParseDirectives on MarkdownService {
       } else if (content.startsWith('ocideck_bullet_marker:')) {
         bulletMarkerOverride =
             _bulletMarkerFrom(content.substring(22)) ?? bulletMarkerOverride;
+      } else if (content.startsWith('ocideck_template:')) {
+        // Eerste vondst wint, zoals bij de groepskoppeling: de serialiser zet
+        // deze richtlijn bovenaan, dus een gelijknamige regel verderop staat in
+        // de tékst van de dia en mag de waarde niet overschrijven.
+        if (improvementTemplateId.isEmpty) {
+          improvementTemplateId = content
+              .substring('ocideck_template:'.length)
+              .trim();
+        }
+      } else if (content.startsWith('ocideck_layout:')) {
+        if (improvementLayout.isEmpty) {
+          improvementLayout = content
+              .substring('ocideck_layout:'.length)
+              .trim();
+        }
       } else if (content.startsWith('ocideck_view_')) {
         _collectViewComment(viewComments, content);
       } else if (!content.startsWith('_')) {
@@ -212,6 +231,8 @@ extension _MarkdownParseDirectives on MarkdownService {
       viewLimit: viewComments.isEmpty
           ? null
           : DisplayWindowSpec.fromComments(viewComments),
+      improvementTemplateId: improvementTemplateId,
+      improvementLayout: improvementLayout,
     );
   }
 

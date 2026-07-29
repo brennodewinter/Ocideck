@@ -46,6 +46,7 @@ import '../services/open_file_channel.dart';
 import '../services/export_service.dart';
 import '../services/file_service.dart';
 import '../services/template_content_service.dart';
+import '../services/improvement/improvement_project_scaffold.dart';
 import '../services/image_service.dart';
 import '../services/privacy/privacy_export_policy.dart';
 import '../services/privacy/privacy_own_identity.dart';
@@ -69,11 +70,13 @@ import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';
 import '../state/image_contrast_provider.dart';
 import '../state/image_privacy_provider.dart';
+import '../state/improvement_provider.dart';
 import '../state/privacy_provider.dart';
 import '../state/provider_warmup.dart';
 import '../state/save_progress_provider.dart';
 import '../state/info_safety_provider.dart';
 import '../state/import_module_provider.dart';
+import '../state/procesverbetering_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
 import '../state/tabs_provider.dart';
@@ -101,6 +104,7 @@ import 'dialogs/find_replace_dialog.dart';
 import 'dialogs/image_carousel_picker.dart';
 import 'dialogs/import_security_alarm_dialog.dart';
 import 'dialogs/new_deck_dialog.dart';
+import 'dialogs/improvement_project_wizard.dart';
 import 'dialogs/open_presentation_dialog.dart';
 import 'dialogs/package_encrypt_dialog.dart';
 import 'dialogs/package_password_dialog.dart';
@@ -170,6 +174,10 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   /// wat de gebruiker ziet. Zie [_syncSecurityBannerWithTabs].
   int? _securityPromptTabId;
 
+  /// Same role as [_securityPromptTabId] for the Procesverbetering discovery
+  /// banner (PROCESS_IMPROVEMENT.md Phase 0).
+  int? _improvementPromptTabId;
+
   @override
   void initState() {
     super.initState();
@@ -180,6 +188,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     // the discovery prompt (which only ever appears when the module is known
     // off). See the [securityModulePromptProvider] listener in [build].
     ref.read(infoSafetyProvider);
+    ref.read(procesverbeteringProvider);
     _openFileChannel = OpenFileChannel(_onFilesDropped);
     // De TabsNotifier kent geen BuildContext; de shell levert de dialoog die
     // om het wachtwoord van een versleuteld pakket vraagt (met retry-melding).
@@ -545,6 +554,9 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       imagePrivacyIssuesProvider.overrideWith(computeImagePrivacyIssues),
       privacyScanProvider.overrideWith(computePrivacyScan),
       privacyQualityIssuesProvider.overrideWith(computePrivacyQualityIssues),
+      improvementQualityIssuesProvider.overrideWith(
+        computeImprovementQualityIssues,
+      ),
       privacyExportSummaryProvider.overrideWith(computePrivacyExportSummary),
     ],
     child: const _TabContent(),
@@ -734,6 +746,82 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
   }
 
+  /// Discovery banner for Procesverbetering — same shape as
+  /// [_listenSecurityModulePrompt]. Fires when a deck already carries
+  /// engine slides (`matrix`, …) while the module is off.
+  void _listenImprovementModulePrompt(BuildContext context) {
+    ref.listen<ImprovementModulePrompt?>(improvementModulePromptProvider, (
+      _,
+      prompt,
+    ) {
+      if (prompt == null) return;
+      ref.read(improvementModulePromptProvider.notifier).state = null;
+      final mod = ref.read(procesverbeteringProvider);
+      if (mod.loading || mod.enabled) return;
+      final l10n = context.l10n;
+      final messenger = ScaffoldMessenger.of(context);
+      messenger.hideCurrentMaterialBanner();
+      _improvementPromptTabId = prompt.tabId;
+      messenger.showMaterialBanner(
+        MaterialBanner(
+          content: Text(
+            l10n.d(
+              'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.',
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: _showImprovementSlide,
+              child: Text(l10n.d('Naar de slide')),
+            ),
+            TextButton(
+              onPressed: () {
+                _hideImprovementBanner();
+                ref.read(procesverbeteringProvider.notifier).enable();
+              },
+              child: Text(l10n.d('Inschakelen')),
+            ),
+            IconButton(
+              tooltip: l10n.d('Sluiten'),
+              icon: const Icon(Icons.close),
+              onPressed: _hideImprovementBanner,
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
+  void _showImprovementSlide() {
+    final tab = ref.read(tabsProvider).current;
+    if (tab == null || tab.id != _improvementPromptTabId) return;
+    if (!tab.deckNotifier.mounted) return;
+    final index =
+        tab.deckNotifier.currentState.deck?.firstImprovementSlideIndex ?? -1;
+    if (index < 0) return;
+    tab.editorNotifier.select(index);
+  }
+
+  void _hideImprovementBanner() {
+    if (_improvementPromptTabId == null) return;
+    _improvementPromptTabId = null;
+    ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+  }
+
+  void _syncImprovementBannerWithTabs(TabsState tabs) {
+    if (_improvementPromptTabId == null) return;
+    final current = tabs.current;
+    if (current == null ||
+        current.id != _improvementPromptTabId ||
+        !current.isOpen ||
+        !current.deckNotifier.mounted) {
+      _hideImprovementBanner();
+      return;
+    }
+    final deck = current.deckNotifier.currentState.deck;
+    if (deck == null || !deck.hasImprovementSlides) _hideImprovementBanner();
+  }
+
   /// Haal de melding weg zodra ze niet meer waar is. Dat gebeurt op twee
   /// manieren, en allebei laten ze een blijvende balk iets beweren dat niet
   /// klopt:
@@ -767,6 +855,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     final tabsState = ref.watch(tabsProvider);
     ref.listen<TabsState>(tabsProvider, (_, next) {
       _syncSecurityBannerWithTabs(next);
+      _syncImprovementBannerWithTabs(next);
     });
 
     // A blocked import (executable content) raises the alarm from the state
@@ -807,6 +896,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     });
 
     _listenSecurityModulePrompt(context);
+    _listenImprovementModulePrompt(context);
 
     _listenChartDataWarning(context, ref);
     _listenSidecarSkipped(context, ref);

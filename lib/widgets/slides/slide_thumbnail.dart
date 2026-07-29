@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../models/cvss_builder.dart';
 import '../../models/deck.dart';
+import '../../models/improvement_y01.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/quality_disposition.dart';
 import '../../models/slide_quality.dart';
@@ -258,6 +259,11 @@ class SlideThumbnail extends ConsumerWidget {
     final showWatermark = ref.watch(
       settingsProvider.select((s) => s.classificationWatermarkEnabled),
     );
+    final improvementY01 = ref.watch(
+      deckProvider.select(
+        (s) => s.deck?.improvementY01Metric ?? ImprovementY01Metric.empty,
+      ),
+    );
     // "In tweeën splitsen" is beschikbaar op elke bulletslide met genoeg bullets
     // om te verdelen — óók bullets-met-afbeelding, waar het tekstvlak maar de
     // halve breedte heeft en een slide dus eerder vol oogt dan de algemene
@@ -318,6 +324,7 @@ class SlideThumbnail extends ConsumerWidget {
                 showWatermark: showWatermark,
                 qualityTone: qualityTone,
                 privacyTone: privacyTone,
+                improvementY01: improvementY01,
               ),
               // Footer: slide number, type label, action buttons
               _footer(
@@ -363,6 +370,22 @@ class SlideThumbnail extends ConsumerWidget {
     ),
   );
 
+  Widget _userNotesBadge(AppLocalizations l10n) => Tooltip(
+    message: l10n.d('Gebruikersnotities'),
+    child: Container(
+      padding: const EdgeInsets.all(3),
+      decoration: BoxDecoration(
+        color: AppTheme.accentOverlay,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: const Icon(
+        Icons.edit_note_outlined,
+        size: 10,
+        color: Colors.white,
+      ),
+    ),
+  );
+
   Widget _miniPreview(
     WidgetRef ref,
     AppLocalizations l10n, {
@@ -371,6 +394,7 @@ class SlideThumbnail extends ConsumerWidget {
     required bool showWatermark,
     required SlideBadgeTone qualityTone,
     required SlideBadgeTone privacyTone,
+    required ImprovementY01Metric improvementY01,
   }) {
     return ExcludeSemantics(
       child: ClipRRect(
@@ -411,6 +435,7 @@ class SlideThumbnail extends ConsumerWidget {
                     tlp: tlp,
                     organization: organization,
                     showClassificationWatermark: showWatermark,
+                    improvementY01: improvementY01,
                   ),
                 ),
               ),
@@ -445,25 +470,7 @@ class SlideThumbnail extends ConsumerWidget {
                   ),
                 ),
               if (hasUserNotes)
-                Positioned(
-                  bottom: 4,
-                  left: 4,
-                  child: Tooltip(
-                    message: l10n.d('Gebruikersnotities'),
-                    child: Container(
-                      padding: const EdgeInsets.all(3),
-                      decoration: BoxDecoration(
-                        color: AppTheme.accentOverlay,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: const Icon(
-                        Icons.edit_note_outlined,
-                        size: 10,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
+                Positioned(bottom: 4, left: 4, child: _userNotesBadge(l10n)),
               // Rechtsboven de twee badges naast elkaar, kwaliteit eerst.
               // Naast elkaar en niet gestapeld: de thumbnail is klein, en twee
               // markeringen boven elkaar in dezelfde hoek lezen als één brede.

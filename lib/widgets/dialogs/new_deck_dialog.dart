@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/deck_template.dart';
 import '../../models/settings.dart';
 import '../../state/info_safety_provider.dart';
+import '../../state/procesverbetering_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 
@@ -133,6 +134,7 @@ const Map<String, IconData> templatePickerIcons = {
   'gripEscalation': Icons.signal_cellular_alt,
   'bridgePassageBriefing': Icons.directions_boat_outlined,
   'miauwReport': Icons.bug_report_outlined,
+  'procesverbeteringDmaic': Icons.trending_up,
 };
 
 class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
@@ -190,10 +192,15 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
   /// term in either language finds the template.
   List<DeckTemplate> _filtered(AppLocalizations l10n) {
     final query = _searchCtrl.text.trim().toLowerCase();
-    // Module-only templates (MIAUW) stay hidden until Informatieveiligheid is
-    // provisioned, so the catalogue is unchanged for everyone else.
-    final revealed = ref.watch(infoSafetyRevealProvider);
-    bool visible(DeckTemplate t) => revealed || !t.requiresInfoSafety;
+    // Module-only templates stay hidden until their module is revealed.
+    final secRevealed = ref.watch(infoSafetyRevealProvider);
+    final impRevealed = ref.watch(procesverbeteringRevealProvider);
+    bool visible(DeckTemplate t) {
+      if (t.requiresInfoSafety && !secRevealed) return false;
+      if (t.requiresProcesverbetering && !impRevealed) return false;
+      return true;
+    }
+
     bool matches(DeckTemplate t) => [
       l10n.d(t.title),
       l10n.d(t.description),

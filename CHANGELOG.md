@@ -269,6 +269,17 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Procesverbetering: artefact-sjablonen als data, en Y-01-limieten die
+  meereizen.** Starters (SIPOC, FMEA, A3, 5× Why, …) staan als Markdown onder
+  `assets/improvement/templates/`; `tool/build_improvement_templates.dart`
+  schrijft `templates.json` plus een Dart-floor. De catalogus laadt die asset
+  (CweCatalog-patroon); een nieuw sjabloon is een bestand + rebuild, geen
+  handmatige Dart-lijst. Y-01 krijgt platte front-matter-sleutels
+  (`ocideck_improvement_y01_*`); histogram/regelkaart kunnen `"yRef": "Y-01"`
+  zetten zodat USL/LSL bij het tekenen van het deck komen — zonder write-through
+  in het chart-JSON. Oude decks met alleen een Y-naam of lokale chart-limieten
+  openen ongewijzigd; koppelen is opt-in.
+
 *Renamed 2026-07-22.* Everything below was under a single `## [Unreleased]`
 heading: 52,000 words in 455 entries, averaging 114 words each, with the
 `### Added` / `### Fixed` / `### Changed` subheadings repeating nine times over.
@@ -343,6 +354,150 @@ read a book to find out.
   gegenereerd (`make sbom` leest de SDK-versie uit `.tool-versions`). Het
   gedateerde meetrecord onder "Latest result" blijft op 3.44.7 staan — dat is
   een momentopname van de run op 2026-07-23, geen actuele eis.
+- **Procesverbetering Phase 10: AI-woordingshulp met strikte guardrails.** Op
+  canvas-, tree- en flow-slides verschijnt **Tekst voorstellen (AI)** alleen
+  wanneer zowel *AI-assistentie* als *Procesverbetering* aanstaan. Het model
+  mag alleen bewoordingen polijsten — geen oorzaken, conclusies of cijfers:
+  `improvement_ai_guard.dart` stript verzonnen **X-nn**/**Y-nn**-ids,
+  statistiekclaims (Cpk, RPN, %, metingen) en blokkeert oorzaaklijsten op
+  boom/visgraat. AI-concepten krijgen het bestaande `ocideck_ai_assisted`-merk
+  (zegel geblokkeerd tot **Nagekeken**).
+- **Procesverbetering Phase 9: DOE-hoofdeffecten- en interactieplots.** Het
+  `chart`-slidetype kent `mainEffects` en `interaction`. Het raster volgt de
+  DOE-conventie: één reeks per factor met gecodeerde niveaus −1/+1, laatste
+  reeks is Y; volledig of fractioneel 2^(k−p) wordt uit het aantal runs afgeleid.
+  Effecten en celgemiddelden worden bij het tekenen berekend en nooit opgeslagen.
+  De grafiek-editor biedt **DOE-proefopzet…** om een ontwerptabel (Yates-volgorde)
+  in het raster te zetten. Zelfde module-gate en MODUS-REGEL als de andere
+  statistische grafiektypes.
+- **Procesverbetering Phase 8: probability plot en analyse-dialogen (MSA, toetsen,
+  regressie).** Grafiekslide krijgt `probabilityPlot` — normale Q-Q uit de
+  eerste reeks, met optionele Anderson-Darling-p bij minstens acht punten;
+  afgeleide quantiles komen niet in het bestand. Drie read-only dialogen op de
+  lokale Phase-1-rekenkern: **Gage R&R…** (ANOVA, % study variation, ndc),
+  **Hypothesetoets…** (één-/twee-steeks t, eenweg-ANOVA) en **Regressie…**
+  (helling, intercept, R²). Invoer via plakken; te weinig waarnemingen levert
+  een `StatsRefusal`-tekst, geen getal. Bereikbaar via Instellingen →
+  Uitbreidingen (module aan) en Gage R&R ook vanuit de grafiek-editor.
+- **Procesverbetering Phase 7: projectkader, golden-thread lint, fasepoort en
+  projectwizard.** Deck-front matter krijgt `ocideck_improvement_framework`
+  (`dmaic|dmadv|kaizen|a3|8d`) en `ocideck_improvement_y01` (beschrijving van
+  **Y-01**). De golden-thread lint (`improvement_quality_bridge.dart`) meldt
+  wees-**X**/**Y**-ids (`improvementOrphanId`) en ongebruikte boom-ids
+  (`improvementUnusedId`) in het kwaliteitspaneel. Nieuw slidetype `phaseGate`
+  (`_class: phase-gate`): fasepoort-checklist als bullets. De
+  projectwizard opent vanaf het startscherm (module aan) of via het sjabloon
+  *Procesverbetering: DMAIC-project*; beide gebruiken
+  `improvement_project_scaffold.dart` (titel, fasesecties, charter-canvas,
+  CTQ-boom met **Y-01**, SIPOC-matrix).
+- **Het `flow`-slidetype voor Procesverbetering (Phase 6): proceskaart, zwembanen
+  en VSM.** Nieuw `_class: flow`, bewaard als bulletlijst met stappen
+  `titel :: soort :: pt=…; lt=…` plus `<!-- ocideck_template: … -->` en optioneel
+  `<!-- ocideck_layout: flow|swimlane|vsm -->`. Afgeleide totalen (PCE,
+  bottleneck) worden bij het tekenen berekend en **nooit** weggeschreven. De
+  flow-engine legt één `Scene` uit; preview en HTML-export tekenen diezelfde
+  scene als SVG. Staat alleen in de typekiezer zolang de module aanstaat; een deck
+  dat er al één draagt opent en rendert altijd (MODUS-REGEL).
+- **Het `tree`-slidetype voor Procesverbetering (Phase 5): 5× Why, CTQ-boom en
+  visgraat (Ishikawa).** Nieuw `_class: tree`, bewaard als geneste Markdown-lijst
+  (diepte = tabs) plus `<!-- ocideck_template: … -->` en optioneel
+  `<!-- ocideck_layout: tree|fishbone -->`. De tree-engine legt één `Scene` uit;
+  preview en HTML-export tekenen diezelfde scene als SVG. Gouden-draad-id's
+  (`**X-01**`, `**Y-01**`) staan inline in bullettekst. Staat alleen in de
+  typekiezer zolang de module aanstaat; een deck dat er al één draagt opent en
+  rendert altijd (MODUS-REGEL).
+- **Het `canvas`-slidetype voor Procesverbetering (Phase 4): A3, charter,
+  Impact/Effort, SWOT en bord als vaste regio's.** Nieuw `_class: canvas`,
+  bewaard als gewone Markdown met `#`-titel en `##`-koppen als vakken plus
+  `<!-- ocideck_template: … -->`. De canvas-engine legt één `Scene` uit
+  (regio's, kwadrant, bord); preview en HTML-export tekenen diezelfde scene als
+  SVG. Sjablonen: `a3`, `charter`, `impact-effort`, `swot`, `board`. Staat alleen
+  in de typekiezer zolang de module aanstaat; een deck dat er al één draagt opent
+  en rendert altijd (MODUS-REGEL).
+- **Het `matrix`-slidetype voor Procesverbetering (Phase 3b): SIPOC, FMEA en
+  RACI als één getypeerd raster.** Nieuw `_class: matrix`, bewaard als gewone
+  Markdown-tabel plus `<!-- ocideck_template: … -->`. Afgeleide kolommen
+  (RPN = S×O×D) worden bij het tekenen berekend en **nooit** weggeschreven —
+  dezelfde regel als de regelgrenzen van een control chart. De matrix-engine
+  legt één `Scene` uit; preview en HTML-export tekenen diezelfde scene. De
+  editor laat van sjabloon wisselen zonder gedeelde kolommen te wissen, en
+  sorteert FMEA-rijen in de weergave op hoogste RPN eerst. Staat alleen in de
+  typekiezer zolang de module aanstaat; een deck dat er al één draagt opent en
+  rendert altijd (MODUS-REGEL).
+- **Vijf statistische grafiektypen voor Procesverbetering (Phase 2), en niet
+  één afgeleide waarde die in het bestand achterblijft.** Het `chart`-slidetype
+  kent nu `controlChart` (regelkaart), `histogram`, `pareto`, `runChart` en
+  `boxPlot`. Ze tekenen in de editor, in presentatiemodus en in de
+  HTML/PDF-export, met dezelfde animatie en hetzelfde thema als de veertien
+  types die er al waren. **Wat er niet in het bestand komt is het punt van deze
+  wijziging**: regelgrenzen, de middellijn, welke punten buiten de grenzen
+  vallen, de klassegrenzen van het histogram, Cpk, de
+  Anderson-Darling-p-waarde, de Pareto-volgorde en de scharnieren van de
+  boxplot worden allemaal bij het tekenen berekend en nergens weggeschreven.
+  Een opgeslagen bovengrens is namelijk een bovengrens die het oneens kan raken
+  met de getallen ernaast: vervang het databestand en een genoteerde UCL is een
+  leugen die het bestand met droge ogen beweert. Opgeslagen wordt alleen wat de
+  *auteur* besloot en de data niet kan vertellen — welk Shewhart-paar het is
+  (`controlChart.kind`), en wat "binnen specificatie" betekent (`usl`, `lsl`,
+  `processTarget`). Dat laatste zijn specificatiegrenzen, geen regelgrenzen; ze
+  drukken een afspraak uit en volgen niet uit de meting. De rekenkern eronder
+  is die van Phase 1, inclusief zijn weigering: te weinig waarnemingen levert
+  geen kansberekende lijn maar een zin op de slide die zegt dat het niet kan.
+  De vijf types staan alleen in de typekiezer zolang de module aanstaat — óók
+  in het varianten-dialoog — maar een deck dat er al één draagt opent en
+  rendert altijd (MODUS-REGEL: het bestand is de waarheid, de schakelaar gaat
+  alleen over auteuren). In de grafiek-editor kunnen de getallen nu ook uit het
+  klembord worden geplakt, want een verbeterproject krijgt zijn metingen uit
+  een spreadsheet en niet uit een invoerraster.
+- **Een scenemodel als tekenlaag voor de Procesverbetering-motoren (Phase 3a).**
+  `lib/services/scene/scene.dart` is een klein, puur-Dart model van een
+  uitgetekende slide — rechthoeken, lijnen, paden, tekst en een
+  afbeeldingsverwijzing op expliciete posities, zonder stijlboom. Twee dunne
+  achterkanten tekenen het: een `CustomPainter` voor het scherm
+  (`scene_painter.dart`) en een SVG-serializer voor de export. Zo hoeft een
+  motor die straks een SIPOC of een A3 uittekent zijn plaatsingsrekenwerk maar
+  één keer te doen in plaats van twee keer, en kan het rekenwerk getoetst
+  worden zonder Flutter erbij te halen — daar is `TextMeasurer` voor, die het
+  meten van tekst achter een interface zet. De eerste motor die erop staat is
+  `matrix` (Phase 3b).
+- **De rekenkern van Procesverbetering (Phase 1): statistiek in eigen Dart, die
+  liever weigert dan gokt.** `lib/services/improvement/stats/` is nu compleet —
+  één library, elf `part`-bestanden, ~4.900 regels: beschrijvende maten,
+  regelkaarten (I-MR, X̄-R, X̄-s, p/np/c/u) met de Nelson- en Western
+  Electric-regelsets, procescapabiliteit (Cp/Cpk/Pp/Ppk/Cpm), toetsen (t, ANOVA,
+  Levene, chi-kwadraat, proporties, F), regressie, meetsysteemanalyse (Gage R&R
+  via ANOVA), proefopzetten (volledig en 2^(k−p) fractioneel) en
+  steekproefomvang/onderscheidend vermogen. Vier keuzes lopen door alles heen.
+  *Geen afhankelijkheid*: er is geen statistiekpakket dat de
+  toeleveringsketen-blootstelling waard is, dus alles staat er zelf — inclusief
+  de speciale functies onder de verdelingen. *Weigeren in plaats van gokken*:
+  een Cpk uit vier waarnemingen is rekenkundig mogelijk en methodisch waardeloos,
+  dus dat wordt een `StatsRefusal` met reden en niet een getal dat niemand kan
+  verdedigen. *De 1,5σ-verschuiving staat uit en wordt in élk sigmaresultaat
+  benoemd*, want "sigmaniveau" betekent in het veld twee verschillende getallen
+  en juist daar krijgen twee mensen een ander antwoord. En *Cp/Cpk reist nooit
+  alleen*: het Anderson-Darling-oordeel over normaliteit hangt er altijd naast,
+  omdat een capabiliteitsgetal op scheve data een verkeerd beeld geeft zonder dat
+  iets dat laat zien. Numeriek is er niet bezuinigd: variantie via Welford,
+  regressie via Householder-QR — de naïeve varianten verliezen alle precisie op
+  precies de data die een verbeterproject verzamelt, een krappe spreiding ver van
+  nul. De regelkaartfactoren (d2, d3, c4, A2, A3, B3/B4, D3/D4, E2) worden uit
+  hun integraaldefinitie berekend in plaats van uit een tabel overgetikt, zodat
+  de gepubliceerde waarden de *test* zijn en niet de bron. 235 tests dekken het
+  af (94–100% per bestand), waaronder de NIST StRD-referentiedatasets (NumAcc1
+  en Longley) als kleine fixtures onder `test/fixtures/nist/`. Die tests vonden
+  meteen hun eerste echte fout: Nelson-regel 5 en 6 ("twee van drie voorbij 2σ",
+  "vier van vijf voorbij 1σ") liepen pas vanaf het n-de punt, waardoor twee
+  meteen ontspoorde metingen aan het begin van een reeks nooit gemeld werden —
+  precies het geval waarvoor een regelkaart bestaat. Alleen de motor — de
+  artefacten en schermen volgen in latere fasen
+  (`docs/design/PROCESS_IMPROVEMENT.md` §4).
+- **Procesverbetering als vijfde uitbreiding (Phase 0).** Op *Instellingen →
+  Uitbreidingen* staat nu de modulekaart *Procesverbetering*: standaard uit,
+  zelfde reveal-contract als de andere modules. `SlideCategory.procesverbetering`
+  en discovery-banners zijn klaar voor de engines; de artefacten (SIPOC, FMEA,
+  control charts, …) volgen in latere fasen. Geen ISO- of certificeringsclaim —
+  de naam is bewust neutraal (zie `docs/design/PROCESS_IMPROVEMENT.md`).
 
 ### Fixed
 - **Een lange bevinding verkleinde tot ongeveer een derde van de diabreedte in

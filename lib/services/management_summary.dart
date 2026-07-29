@@ -57,7 +57,13 @@ List<String> deckStandardsUsed(Deck deck) {
           SlideType.discoveries ||
           SlideType.finding ||
           SlideType.findingsSummary ||
-          SlideType.signOff:
+          SlideType.signOff ||
+          // Een matrix draagt een verbetersjabloon, geen toetsnorm.
+          SlideType.matrix ||
+          SlideType.canvas ||
+          SlideType.tree ||
+          SlideType.flow ||
+          SlideType.phaseGate:
         break;
     }
   }

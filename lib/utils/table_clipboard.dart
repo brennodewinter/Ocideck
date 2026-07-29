@@ -51,6 +51,61 @@ List<List<String>>? parseClipboardTable(String text) {
   return best;
 }
 
+/// Rastermodel dat uit een geplakte tabel komt: labels, reeksnamen en cellen.
+///
+/// Buiten [ChartEditor] gehouden zodat de plaklogica te toetsen is zonder een
+/// State-widget op te starten, en zodat die State onder het klasseplafond blijft.
+class ChartClipboardGrid {
+  final List<String> xLabels;
+  final List<String> seriesNames;
+  final List<List<String>> values;
+
+  const ChartClipboardGrid({
+    required this.xLabels,
+    required this.seriesNames,
+    required this.values,
+  });
+}
+
+/// Zet een al-geparste klembordtabel om naar het chart-rastermodel.
+///
+/// Eerste rij = reekskoppen wanneer die niet-numeriek oogt; anders één
+/// synthetische reeks en elke rij is label + waarden. Lege tabellen geven
+/// `null` terug — dan hoort de paste in de cel te blijven.
+ChartClipboardGrid? chartGridFromClipboardTable(List<List<String>> table) {
+  if (table.isEmpty) return null;
+  final first = table.first;
+  final headerLooksNumeric = first
+      .skip(1)
+      .every((c) => double.tryParse(c.replaceAll(',', '.')) != null);
+  if (!headerLooksNumeric && table.length > 1) {
+    var seriesNames = [
+      for (var c = 1; c < first.length; c++)
+        first[c].trim().isEmpty ? 'Reeks $c' : first[c].trim(),
+    ];
+    if (seriesNames.isEmpty) seriesNames = ['Reeks 1'];
+    final body = table.skip(1).toList();
+    return ChartClipboardGrid(
+      seriesNames: seriesNames,
+      xLabels: [for (final row in body) row.isEmpty ? '' : row.first],
+      values: [
+        for (final row in body)
+          [
+            for (var c = 0; c < seriesNames.length; c++)
+              c + 1 < row.length ? row[c + 1] : '',
+          ],
+      ],
+    );
+  }
+  return ChartClipboardGrid(
+    seriesNames: const ['Reeks 1'],
+    xLabels: [for (final row in table) row.isEmpty ? '' : row.first],
+    values: [
+      for (final row in table) [row.length > 1 ? row[1] : ''],
+    ],
+  );
+}
+
 /// Een pijp die niet ontsnapt is — de scheiding tussen twee cellen.
 final _reUnescapedPipe = RegExp(r'(?<!\\)\|');
 

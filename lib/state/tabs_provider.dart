@@ -10,6 +10,7 @@ import 'package:uuid/uuid.dart';
 import '../models/asset_origin.dart';
 import '../models/chart.dart';
 import '../models/deck.dart';
+import '../models/improvement_y01.dart';
 import '../models/settings.dart';
 import '../models/seal_record.dart';
 import '../models/slide.dart';
@@ -339,18 +340,42 @@ class TabsNotifier extends StateNotifier<TabsState> {
     state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
   }
 
-  void newDeckInCurrentTab(String title, {List<Slide>? slides}) {
+  void newDeckInCurrentTab(
+    String title, {
+    List<Slide>? slides,
+    String improvementFramework = '',
+    String improvementY01 = '',
+    ImprovementY01Metric? improvementY01Metric,
+  }) {
     final tab = state.current;
     if (tab == null) return;
-    tab.deckNotifier.newDeck(title, slides: slides);
+    tab.deckNotifier.newDeck(
+      title,
+      slides: slides,
+      improvementFramework: improvementFramework,
+      improvementY01: improvementY01,
+      improvementY01Metric: improvementY01Metric,
+    );
     tab.editorNotifier.select(0);
     // Force rebuild by copying state (label may have changed)
     state = state.copyWith(tabs: List.from(state.tabs));
   }
 
-  void newDeckInNewTab(String title, {List<Slide>? slides}) {
+  void newDeckInNewTab(
+    String title, {
+    List<Slide>? slides,
+    String improvementFramework = '',
+    String improvementY01 = '',
+    ImprovementY01Metric? improvementY01Metric,
+  }) {
     final tab = _createTab();
-    tab.deckNotifier.newDeck(title, slides: slides);
+    tab.deckNotifier.newDeck(
+      title,
+      slides: slides,
+      improvementFramework: improvementFramework,
+      improvementY01: improvementY01,
+      improvementY01Metric: improvementY01Metric,
+    );
     tab.editorNotifier.select(0);
     final newTabs = [...state.tabs, tab];
     state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
@@ -521,6 +546,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
     }
     _maybePromptSecurityModule(deck);
+    _maybePromptImprovementModule(deck);
   }
 
   /// A just-opened deck carrying Informatieveiligheid slide types is worth a
@@ -539,6 +565,16 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (tab == null) return;
     _ref.read(securityModulePromptProvider.notifier).state =
         SecurityModulePrompt(tabId: tab.id);
+  }
+
+  /// Same chokepoint as [_maybePromptSecurityModule] for Procesverbetering
+  /// (PROCESS_IMPROVEMENT.md Phase 0). No-op until engine types exist.
+  void _maybePromptImprovementModule(Deck deck) {
+    if (!deck.hasImprovementSlides) return;
+    final tab = state.current;
+    if (tab == null) return;
+    _ref.read(improvementModulePromptProvider.notifier).state =
+        ImprovementModulePrompt(tabId: tab.id);
   }
 
   /// Open een deck uit in-memory bytes — het open-pad voor web, waar de
@@ -857,6 +893,19 @@ class SecurityModulePrompt {
 }
 
 final securityModulePromptProvider = StateProvider<SecurityModulePrompt?>(
+  (ref) => null,
+);
+
+/// One-shot signal that a deck carrying Procesverbetering slide types was
+/// just opened (see [Deck.hasImprovementSlides]). Same shape as
+/// [securityModulePromptProvider] (PROCESS_IMPROVEMENT.md Phase 0).
+class ImprovementModulePrompt {
+  final int tabId;
+
+  ImprovementModulePrompt({required this.tabId});
+}
+
+final improvementModulePromptProvider = StateProvider<ImprovementModulePrompt?>(
   (ref) => null,
 );
 

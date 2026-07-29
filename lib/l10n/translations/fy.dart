@@ -731,6 +731,48 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Nog geen specificatielimiet': 'Noch gjin spesifikaasjelimyt',
+  'USL (bovengrens)': 'USL (boppegrins)',
+  'LSL (ondergrens)': 'LSL (ûndergrins)',
+  'Optionele Y-01-velden': 'Opsjonele Y-01-fjilden',
+  'Procesdoel (target)': 'Prosesdoel (target)',
+  'Specificatielimieten van Y-01 (deck)':
+      'Spesifikaasjelimiten fan Y-01 (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Dit deck hat Y-01-limiten. Set de skeakel hjirboppe oan om dy te brûken ynstee fan lokale wearden.',
+  'USL (bovengrens, optioneel)': 'USL (boppegrins, opsjoneel)',
+  'LSL (ondergrens, optioneel)': 'LSL (ûndergrins, opsjoneel)',
+  'Procesdoel (optioneel)': 'Prosesdoel (opsjoneel)',
+  'Fasepoort': 'Fasepoarte',
+  'Berekenen': 'Calculate',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Slope',
+  'Hypothesetoets': 'Hypothesis test',
+  'Hypothesetoets…': 'Hypothesis test…',
+  'Hypothetisch gemiddelde': 'Hypothesized mean',
+  'Lineaire regressie': 'Linear regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Measurement data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (optional)',
+  'Eénsteeks t-toets': 'One-sample t-test',
+  'Twee-steeks t-toets (Welch)': 'Zweistichproben-t-Test (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Ien kolom sifers (minimaal 2 waarnimmingen).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Twa kolommen skieden troch in lege regel (minimaal 2 per groep).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Meardere groepen, elke groep in kolom, skieden troch in lege regel (minimaal 2 groepen, 2 waarnimmingen per groep).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Plak Part, Operator en Value (tab of komma). Werhelje rigen foar replikaten. Minimaal 2 parts, 2 operators, 2 mjittingen per sel.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Plak X en Y (ien getal per regel). Minimaal 3 pearen; de engine wegeret by te min waarnimmingen.',
+  'Part × Operator interaction pooled into repeatability':
+      'Part × Operator-ynteraksje gearfoege yn werhellingsfermogen',
+  'Part × Operator interaction kept separate':
+      'Part × Operator-ynteraksje apart hâlden',
+  'Te weinig gegevens voor een probability plot':
+      'Te min gegevens foar in probability plot',
   'Met dank aan': 'Mei tank',
   'Fix alle problemen': 'Alle problemen oplosse',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -804,6 +846,79 @@ const _dutchSourceAddFy = {
       'koe net lêzen wurde en is oerslein',
   'ontbrak in het bestand en is overgeslagen':
       'ûntbriek yn it bestân en is oerslein',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Te min gegevens foar in haadeffektenplot',
+  'Te weinig gegevens voor een interactieplot':
+      'Te min gegevens foar in ynteraksjeplot',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Makket in ûntwerptabel mei kodearre faktoaren (−1/+1) en in lege Y-kolom yn it raster.',
+  'Aantal factoren': 'Anzahl Faktoren',
+  'Volledig factorial (2^k)': 'Vollständiges faktorielles Design (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde':
+      'Läufe in standardmäßiger Yates-Reihenfolge',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Ien searje per faktor mei kodearre nivo\'s −1 en +1; de lêste searje is de respons (Y). Rigen binne eksperimintele rinnen.',
+  'Golden-thread-id': 'Golden-thread-id',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'wurdt ienris neamd mar stiet net op in beam-dia — definiearje him op in CTQ- of Ishikawa-beam.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'stiet op in beam-dia mar wurdt nêrens oars brûkt — kepple him oan in matrix, stream of oare dia.',
+  'Nieuw verbeteringsproject': 'Nij ferbetteringsprojekt',
+  'Kader': 'Kader',
+  'Projecttitel': 'Projekttitel',
+  'Primaire Y-metriek (Y-01)': 'Primaire Y-metriek (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Bygelyk: trochrinnendei orderintake yn wurkdagen',
+  'Project starten': 'Projekt starte',
+  'Procesverbetering: DMAIC-project': 'Prosesferbettering: DMAIC-projekt',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'DMAIC-skelet mei charter, CTQ-beam (Y-01), SIPOC en fase-seksjes.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'In fasepoort-checklist: befêstig scope, belanghawwers en go/no-go foardat jo nei de folgjende fase gean.',
+  'Stroom': 'Stream',
+  'Zwembanen': 'Swimbânen',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'In prosesstream, swimbânen of VSM. Stappen as titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) wurde berekend en net bewarre.',
+  'Boom': 'Beam',
+  'Visgraat': 'Fiskebein',
+  'Lay-out': 'Lay-out',
+  'Punten': 'Punten',
+  'Inspringen': 'Ynspringe',
+  'Uitspringen': 'Utspringe',
+  'Punt toevoegen': 'Punt tafoegje',
+  'Punt verwijderen': 'Punt fuortsmite',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'In beam of fiskebein (5× Why, CTQ, Ishikawa). Djipte mei tabs; markearje oarsaken as **X-01** inline.',
+  'Canvas': 'Canvas',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'In canvas fan regio\'s (A3, charter, SWOT, buord). Kies in sjabloan; de ##-koppen op skift binne de fakken.',
+  'Matrix': 'Matrix',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'In typisearre raster (SIPOC, FMEA, RACI, …). Kies in sjabloan; ôfleide kolommen lykas RPN wurde berekend en net bewarre.',
+  'Regelkaart': 'Regelkaart',
+  'Histogram': 'Histogram',
+  'Pareto': 'Pareto',
+  'Run chart': 'Ferrindiagram',
+  'Boxplot': 'Boksplot',
+  'Plakken uit klembord': 'Plakke út klamboerd',
+  'Te weinig gegevens voor een regelkaart':
+      'Te min gegevens foar in regelkaart',
+  'Te weinig gegevens voor een histogram': 'Te min gegevens foar in histogram',
+  'Te weinig gegevens voor een boxplot': 'Te min gegevens foar in boksplot',
+  'Procesverbetering': 'Prosesferbettering',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefakten foar prosesferbettering en Lean Six Sigma-projekten (DMAIC, Kaizen, A3). Standert út. De module is beskikber; de artefakten folgje yn folgjende stappen.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Module oan. Rekkenkearn lokaal beskikber ({n} control-chartfaktoaren). Slidetypen en sjabloanen komme derby sa gau as se klear binne.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Dizze presintaasje befettet ûnderdielen fan de Prosesferbettering-module. Set de module oan om se te bewurkjen.',
   'Online media staat uit — aanzetten': 'Online media steat út — oansette',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} befettet útfierbere ynhâld en wurdt net ymportearre.',

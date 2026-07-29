@@ -4,6 +4,7 @@ import 'package:uuid/uuid.dart';
 import '../models/chart.dart';
 import '../models/cockpit.dart';
 import '../models/deck.dart';
+import '../models/improvement_y01.dart';
 import '../models/privacy_disposition.dart';
 import '../models/quality_disposition.dart';
 import '../models/display_window_spec.dart';
@@ -211,6 +212,27 @@ class MarkdownService {
     if (deck.playOnly) {
       out.add('ocideck_play_only: true');
     }
+    if (deck.improvementFramework.isNotEmpty) {
+      out.add(
+        'ocideck_improvement_framework: ${_yamlScalar(deck.improvementFramework)}',
+      );
+    }
+    final y01 = deck.improvementY01Metric;
+    if (y01.name.isNotEmpty) {
+      out.add('ocideck_improvement_y01: ${_yamlScalar(y01.name)}');
+    }
+    if (y01.unit.isNotEmpty) {
+      out.add('ocideck_improvement_y01_unit: ${_yamlScalar(y01.unit)}');
+    }
+    void yNum(String key, double? v) {
+      if (v != null) out.add('$key: $v');
+    }
+
+    yNum('ocideck_improvement_y01_usl', y01.usl);
+    yNum('ocideck_improvement_y01_lsl', y01.lsl);
+    yNum('ocideck_improvement_y01_target', y01.target);
+    yNum('ocideck_improvement_y01_baseline', y01.baseline);
+    yNum('ocideck_improvement_y01_goal', y01.goal);
     // Het stijlprofiel, de MIAUW-dispositie, het zegel en de handtekening
     // stonden hier tot 0.1.0. Zie [kRetiredFrontMatterKeys]: wat ondoorzichtig
     // is of over het document gaat in plaats van erin, hoort ernaast. Voor het
@@ -494,11 +516,21 @@ class MarkdownService {
       case SlideType.checklist:
       case SlideType.scopeMatrix:
       case SlideType.findingsSummary:
+      // Een matrix is óók echt een Markdown-tabel (PROCESS_IMPROVEMENT §3.1):
+      // het sjabloon rijdt mee als commentaar, de afgeleide kolom (RPN) wordt
+      // niet geschreven — die staat niet in [Slide.tableRows].
+      case SlideType.matrix:
         _writeTableSlide(buf, slide);
       case SlideType.signOff:
         _writeSignOffSlide(buf, slide);
       case SlideType.finding:
         _writeScaffoldSlide(buf, slide);
+      case SlideType.canvas:
+        _writeCanvasSlide(buf, slide);
+      case SlideType.tree:
+      case SlideType.flow:
+      case SlideType.phaseGate:
+        _writeBulletsSlide(buf, slide, themeProfile, forExport);
     }
 
     if (slide.audioPath.isNotEmpty) {
@@ -685,6 +717,15 @@ void _writeSlideDirectives(
   if (slide.type == SlideType.checklist && slide.checklistScope.isNotEmpty) {
     buf.writeln('<!-- ocideck_checklist_scope: ${slide.checklistScope} -->');
   }
+  // Welk verbetersjabloon de tabel volgt (PROCESS_IMPROVEMENT §3.1). Alleen dit
+  // rijdt mee; de kolommen staan zichtbaar in de tabelkop en de afgeleide RPN
+  // staat er per ontwerp niet.
+  if (slide.improvementTemplateId.isNotEmpty) {
+    buf.writeln('<!-- ocideck_template: ${slide.improvementTemplateId} -->');
+  }
+  if (slide.improvementLayout.isNotEmpty) {
+    buf.writeln('<!-- ocideck_layout: ${slide.improvementLayout} -->');
+  }
   // Non-destructive view limit for data-driven slides.
   final viewComments = slide.viewLimit?.toComments() ?? const {};
   for (final entry in viewComments.entries) {
@@ -706,6 +747,8 @@ void _writeSlideDirectives(
       slide.findingId.isNotEmpty ||
       slide.aiAssistedFields.isNotEmpty ||
       slide.checklistScope.isNotEmpty ||
+      slide.improvementTemplateId.isNotEmpty ||
+      slide.improvementLayout.isNotEmpty ||
       viewComments.isNotEmpty ||
       mediaRedactedMarker) {
     buf.writeln();

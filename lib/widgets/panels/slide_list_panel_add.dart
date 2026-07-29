@@ -11,6 +11,7 @@ extension _SlideListPanelAddSlide on _SlideListPanelState {
     final type = await AddSlideDialog.show(
       context,
       revealInfoSafety: ref.read(infoSafetyRevealProvider),
+      revealProcesverbetering: ref.read(procesverbeteringRevealProvider),
     );
     if (type == null) return;
     final notifier = ref.read(deckProvider.notifier);

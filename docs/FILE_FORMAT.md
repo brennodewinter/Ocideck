@@ -229,6 +229,22 @@ over the file. See §6.6 for why that changed.)
 | `ocideck_target_seconds` | int | Target duration for the presenter countdown, in seconds. Written only when `> 0`. |
 | `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. Overruled by `ocideck_play_only`: a play-only deck never shows the summary, whatever this key says. |
 | `ocideck_play_only` | `true`/absent | Play-only lock. When `true`, the deck opens locked: no editor, toolbar, menus, or export — only the first slide with a play button, presented full screen. Closing the deck restores normal editing. Default (unlocked) stays out of the file; only `true` is written. Removing this key unlocks the deck. |
+| `ocideck_improvement_framework` | string/absent | Process-improvement framework for this deck: `dmaic`, `dmadv`, `kaizen`, `a3` or `8d`. Empty/absent = not set. |
+| `ocideck_improvement_framework` | string/absent | Process-improvement framework for this deck: `dmaic`, `dmadv`, `kaizen`, `a3` or `8d`. Empty/absent = not set. |
+| `ocideck_improvement_y01` | string/absent | Free-text name/description of the primary Y metric (**Y-01**). Empty/absent = not set. |
+| `ocideck_improvement_y01_unit` | string/absent | Unit for Y-01 (e.g. `days`). Empty/absent = not set. |
+| `ocideck_improvement_y01_usl` | number/absent | Upper specification limit for Y-01. Charts with `"yRef": "Y-01"` resolve this at draw time — it is not copied into the chart JSON. |
+| `ocideck_improvement_y01_lsl` | number/absent | Lower specification limit for Y-01. Same resolve-at-draw rule as USL. |
+| `ocideck_improvement_y01_target` | number/absent | Process target for Y-01. |
+| `ocideck_improvement_y01_baseline` | number/absent | Baseline value for Y-01 (project charter). |
+| `ocideck_improvement_y01_goal` | number/absent | Goal value for Y-01 (project charter). |
+
+**Migration (Y-01).** A deck that only has `ocideck_improvement_y01` (name, no
+limit keys) remains valid forever; missing limit keys mean `null`. Charts that
+store local `usl`/`lsl` without `yRef` keep using those local values. Setting
+`yRef: "Y-01"` is opt-in (or the default for *new* histogram/control charts when
+the deck already has Y-01 limits). Opening a file never rewrites chart JSON
+silently.
 | `ocideck_style_profile` · `ocideck_miauw_waivers` · `ocideck_miauw_confirmations` · `ocideck_finalized` · `ocideck_seal_hash` · `ocideck_seal_algo` · `ocideck_seal_at` · `ocideck_seal_tsr` · `ocideck_sig_name` · `ocideck_sig_role` · `ocideck_sig_cert` · `ocideck_sig_date` · `ocideck_sig_statement` · `ocideck_sig_typed` · `ocideck_sig_image` | *retired* | **No longer written** as of 0.1.0 (§3.6). Still read, so an older file opens correctly; removed from the file on the next save. The seal and signature blocks now live in `<name>.seal.json` (§6.6). |
 
 Metadata fields are written only when they are not empty. Text is written as a
@@ -556,6 +572,11 @@ The first class determines (together with the content) the **slide type**:
 | Checklist | `checklist` | — |
 | Scope matrix | `scope-matrix` | — |
 | Sign-off | `sign-off` | — |
+| Matrix (process improvement) | `matrix` | Markdown table + `ocideck_template` |
+| Canvas (process improvement) | `canvas` | Markdown with `##` regions + `ocideck_template` |
+| Tree (process improvement) | `tree` | Nested bullets + `ocideck_template` + `ocideck_layout` |
+| Flow (process improvement) | `flow` | Bullet steps + `ocideck_template` + `ocideck_layout` |
+| Phase gate (process improvement) | `phase-gate` | Gate checklist as bullets |
 | Bullets only | *(none)* | bullets present |
 | Two images | *(none)* | two background images |
 | Large image | *(none)* | one image, no bullets |
@@ -577,6 +598,13 @@ The first class determines (together with the content) the **slide type**:
 > dialog, only while the module is enabled. A slide that is already one of these
 > types can still be re-typed among them with the module off, so an imported
 > report is never a dead-end.
+
+> **Process-improvement classes and the module.** `matrix`, `canvas`, `tree`,
+> `flow` and `phase-gate` are the slide types of the optional
+> **Procesverbetering** module. Parsing and rendering are unconditional — a
+> deck that already carries them always opens. The module toggle governs
+> **authoring only**: these types appear in the add-slide and change-type
+> pickers only while the module is enabled.
 
 Additional behavior classes:
 
@@ -934,6 +962,47 @@ Fields:
     heat ramp (pale→red on a light slide, dark→bright on a dark one), so a
     heatmap reads as magnitude rather than as the theme. `rowColors` and the
     per-series `color` are therefore ignored for this type.
+  - `controlChart`, `histogram`, `pareto`, `runChart`, `boxPlot`,
+    `probabilityPlot`, `mainEffects`, `interaction` — the
+    statistical plots of the *Procesverbetering* module
+    (`docs/design/PROCESS_IMPROVEMENT.md`). They only appear in the editor's
+    type picker while that module is switched on, but a deck that already
+    carries one always opens and renders: the file is the source of truth, the
+    switch only governs authoring. `controlChart`, `histogram`, `runChart`,
+    `boxPlot` and `probabilityPlot` read the **first** series (`boxPlot` draws
+    one box per series that has at least four values); `pareto` reads the first
+    series and sorts the labels by descending value, colouring the vital few that
+    reach 80%. `mainEffects` and `interaction` expect one series per factor with
+    coded levels −1/+1 and a final **Y** response series; run count must match a
+    full or published fractional 2^(k−p) design (rows may be in any order).
+    A plot that cannot be computed from the data present says so on the slide
+    instead of drawing a misleading picture.
+
+  **Nothing statistical is ever stored.** Control limits, the centre line, the
+  out-of-control flags, bin edges, Cpk, the Anderson-Darling p-value, Pareto
+  ranks, box-plot hinges, factorial effects and interaction cell means are all
+  written to neither the block nor the data file. That is deliberate: a stored
+  limit is a limit that can disagree with the numbers beside it — replace the
+  data file and a written-down UCL becomes a lie the file states with a
+  straight face. What *is* stored is only what the author decided and the data
+  cannot tell you: which Shewhart pair to draw, and what "in spec" means.
+- `controlChart` — **`controlChart` only**: `{"kind": "imr"}`, the Shewhart pair
+  the author chose. One of `imr`, `xbarR`, `xbarS`, `p`, `np`, `c`, `u`;
+  anything else reads back as `imr`. Written for this type only, so switching a
+  chart to another type leaves no stray choice behind.
+- `usl` / `lsl` / `processTarget` — **`histogram` and `controlChart` only**: the
+  upper and lower specification limits and the process target. Specification
+  limits are *author intent* (what counts as in spec) and therefore stored when
+  they are **local** to the chart; they are not control limits, which follow from
+  the data and are not. Without at least one effective limit no capability figure
+  is shown at all.
+- `yRef` — **`histogram` and `controlChart` only**: when set to `"Y-01"`, the
+  chart resolves USL/LSL/target from the deck's flat
+  `ocideck_improvement_y01_*` keys at draw time (same idea as MIAUW CIA →
+  environmental CVSS). Local `usl`/`lsl`/`processTarget` then do not drive
+  capability or the preview. Absent `yRef` keeps the historical local-limits
+  behaviour. Limits are never write-through-copied from the deck into the chart
+  JSON on save.
 - `x` — labels; for `pie`/`donut`/`radar` these are the segments/axes (radar
   requires at least three); for `heatmap` they are the columns.
 - `series` — named series with `data` (aligned with `x`) and optionally a
@@ -1272,6 +1341,81 @@ Requirements (`CR`/`IR`/`AR`) and give every finding on this object a **context
 not in the finding. The `C`/`I`/`A` columns are **appended after `Note`**, so a
 matrix written by an older version (five columns, no rating) still parses: the
 missing cells simply read as "not rated".
+
+**Matrix** (`matrix`) — a typed grid for the optional **Procesverbetering**
+module (SIPOC, FMEA, RACI, …). Stored as a normal Markdown table; which
+artefact it is rides in a comment. Column headers on disk are the English
+contract of the template (they must not follow the UI language). Derived
+columns such as FMEA's RPN are **never written** — they are computed when the
+slide is drawn:
+
+```markdown
+<!-- _class: matrix -->
+<!-- ocideck_template: fmea -->
+# FMEA — Order intake
+| Process step | Failure mode | Effect | S | Cause | O | Control | D |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Intake | Missed lead | Delay | 7 | Rush | 6 | Dual check | 5 |
+```
+
+Unknown template ids still open: the stored header becomes the column list.
+Parsing and rendering do not depend on the module being enabled.
+
+**Canvas** (`canvas`) — fixed regions of Markdown for the optional
+**Procesverbetering** module (A3, project charter, Impact/Effort, SWOT, board,
+…). Stored as ordinary Markdown: a `#` title and `##` headings as regions; which
+artefact it is rides in a comment. Region headings on disk follow the English
+contract of the template (they must not follow the UI language). Parsing and
+rendering do not depend on the module being enabled:
+
+```markdown
+<!-- _class: canvas -->
+<!-- ocideck_template: a3 -->
+# A3 — Order intake
+## Background
+
+## Current situation
+Late leads from the web form.
+
+## Goal
+Same-day response.
+```
+
+Unknown template ids still open: each `##` heading becomes a region. Switching
+templates remaps regions by key so work that still belongs is kept.
+
+**Tree** (`tree`) — a nested list or Ishikawa fishbone for the optional
+**Procesverbetering** module (5× Why, CTQ tree, fishbone). Depth is leading
+tabs on each bullet line; layout (`tree` / `fishbone`) and template ride in
+comments. Golden-thread ids like `**X-01**` may appear inline in bullet text:
+
+```markdown
+<!-- _class: tree -->
+<!-- ocideck_template: five-whys -->
+<!-- ocideck_layout: tree -->
+# Why analysis
+
+- Problem
+	- Why 1
+		- Why 2 — **X-01**
+```
+
+**Flow** (`flow`) — a process map, swimlane or value-stream map for the optional
+**Procesverbetering** module. Each bullet is `title :: kind :: attrs` (e.g.
+`pt=12m; lt=2d; lane=Ops`); layout (`flow` / `swimlane` / `vsm`) and template
+ride in comments. Derived totals (PCE, bottleneck) are computed at render time,
+never stored:
+
+```markdown
+<!-- _class: flow -->
+<!-- ocideck_template: vsm -->
+<!-- ocideck_layout: vsm -->
+# Order flow
+
+- Enter order :: process :: pt=12m; lt=2d
+- :: inventory :: wip=45
+- Pick & pack :: process :: pt=35m; lt=3d
+```
 
 **Findings summary** (`findings-summary`) — a management overview of how many
 findings fall in each CVSS severity band, stored as a normal Markdown table (like
@@ -2428,7 +2572,7 @@ not model is not reported.
 | **Comment** | warning | Comment without `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:`, or `advance:`. |
 | **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
-| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `scorecard`, `actions` (read-only, migrates to `table`), `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`, `table-overdue`). |
+| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `scorecard`, `actions` (read-only, migrates to `table`), `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`, `table-overdue`). |
 | **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Two columns** | error | Invalid base64/JSON in a legacy `ocideck_two_bullets_*` comment (retired; §5). |
 | **Images** | error | `![...](...` without closing `)`. |

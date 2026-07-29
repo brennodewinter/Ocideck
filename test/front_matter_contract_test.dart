@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/document_signature.dart';
+import 'package:ocideck/models/improvement_y01.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/used_tool.dart';
@@ -332,6 +333,16 @@ style: |
           showRehearsalSummary:
               true, // #607: true is nu de niet-standaard, dus geschreven
           playOnly: true,
+          improvementFramework: 'dmaic',
+          improvementY01Metric: const ImprovementY01Metric(
+            name: 'Doorlooptijd orderintake',
+            unit: 'dagen',
+            usl: 10,
+            lsl: 2,
+            target: 5,
+            baseline: 8,
+            goal: 4,
+          ),
           finalized: true,
           sealHash: 'abc',
           sealAlgo: 'sha-512',

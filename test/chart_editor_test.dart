@@ -201,10 +201,12 @@ void main() {
     // Het dialoog biedt elk ánder type in enum-volgorde. Die volgorde afleiden
     // in plaats van uitschrijven: de opsomming brak bij elk nieuw grafiektype,
     // wat niets zegt over of het verplaatsen werkt — en dát is wat hier wordt
-    // getoetst.
+    // getoetst. De statistische types vallen weg: deze host heeft geen
+    // ProviderScope, dus Procesverbetering staat uit.
     final expected = [
       for (final type in ChartType.values)
-        if (type != ChartType.bar) type,
+        if (type != ChartType.bar && !chartTypeRequiresProcesverbetering(type))
+          type,
     ];
     // Item 0 één omlaag verwisselt de eerste twee.
     final swapped = [expected[1], expected[0], ...expected.skip(2)];

@@ -1788,6 +1788,47 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Nog geen specificatielimiet': 'Încă fără limită de specificație',
+  'USL (bovengrens)': 'USL (limită superioară)',
+  'LSL (ondergrens)': 'LSL (limită inferioară)',
+  'Optionele Y-01-velden': 'Câmpuri Y-01 opționale',
+  'Procesdoel (target)': 'Țintă de proces (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Limite de specificație Y-01 (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Acest deck are limite Y-01. Activați comutatorul de mai sus pentru a le folosi în locul valorilor locale.',
+  'USL (bovengrens, optioneel)': 'USL (limită superioară, opțional)',
+  'LSL (ondergrens, optioneel)': 'LSL (limită inferioară, opțional)',
+  'Procesdoel (optioneel)': 'Țintă de proces (opțional)',
+  'Fasepoort': 'Poartă de fază',
+  'Berekenen': 'Calculează',
+  'Gegevens': 'Date',
+  'Hellingscoëfficiënt': 'Pantă',
+  'Hypothesetoets': 'Test de ipoteză',
+  'Hypothesetoets…': 'Test de ipoteză…',
+  'Hypothetisch gemiddelde': 'Medie ipotetică',
+  'Lineaire regressie': 'Regresie liniară',
+  'Regressie…': 'Regresie…',
+  'Meetdata': 'Date de măsurare',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Toleranță (opțional)',
+  'Eénsteeks t-toets': 'Test t pe un eșantion',
+  'Twee-steeks t-toets (Welch)': 'Test t pe două eșantioane (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'O coloană de numere (cel puțin 2 observații).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Două coloane separate printr-o linie goală (cel puțin 2 pe grup).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Mai multe grupuri, fiecare grup o coloană, separate printr-o linie goală (cel puțin 2 grupuri, 2 observații pe grup).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Lipiți Part, Operator și Value (tab sau virgulă). Repetați rândurile pentru replici. Cel puțin 2 parts, 2 operatori, 2 măsurători pe celulă.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Lipiți X și Y (un număr pe linie). Cel puțin 3 perechi; motorul refuză dacă sunt prea puține observații.',
+  'Part × Operator interaction pooled into repeatability':
+      'Interacțiunea Part × Operator grupată în repetabilitate',
+  'Part × Operator interaction kept separate':
+      'Interacțiunea Part × Operator menținută separat',
+  'Te weinig gegevens voor een probability plot':
+      'Prea puține date pentru un grafic de probabilitate',
   'Met dank aan': 'Cu recunoștință',
   'Fix alle problemen': 'Repară toate problemele',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1863,6 +1904,80 @@ const _dutchSourceAddRo = <String, String>{
   'Dia-inhoud': 'Conținutul diapozitivului',
   'kon niet worden gelezen en is overgeslagen': 'nu s-a putut citi și s-a omis',
   'ontbrak in het bestand en is overgeslagen': 'lipsea din fișier și s-a omis',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Prea puține date pentru un grafic de efecte principale',
+  'Te weinig gegevens voor een interactieplot':
+      'Prea puține date pentru un grafic de interacțiune',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Generează un tabel de design cu factori codificați (−1/+1) și o coloană Y goală în grilă.',
+  'Aantal factoren': 'Număr de factori',
+  'Volledig factorial (2^k)': 'Factorial complet (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'rulări în ordinea Yates standard',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'O serie pe factor cu niveluri codificate −1 și +1; ultima serie este răspunsul (Y). Rândurile sunt rulări experimentale.',
+  'Golden-thread-id': 'Id golden thread',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'este menționat undeva, dar nu apare pe un slide de arbore — definiți-l pe un arbore CTQ sau Ishikawa.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'se află pe un slide de arbore, dar nu este folosit în altă parte — legați-l de o matrice, flux sau alt slide.',
+  'Nieuw verbeteringsproject': 'Proiect nou de îmbunătățire',
+  'Kader': 'Cadru',
+  'Projecttitel': 'Titlul proiectului',
+  'Primaire Y-metriek (Y-01)': 'Metrică Y principală (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'De exemplu: timp de order intake în zile lucrătoare',
+  'Project starten': 'Pornește proiectul',
+  'Procesverbetering: DMAIC-project': 'Îmbunătățirea proceselor: proiect DMAIC',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'Schelet DMAIC cu charter, arbore CTQ (Y-01), SIPOC și secțiuni de fază.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'O checklist de poartă de fază: confirmați scope, stakeholders și go/no-go înainte de a trece la faza următoare.',
+  'Stroom': 'Flux',
+  'Zwembanen': 'Benzi',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Un flux de proces, benzi sau VSM. Pași ca titlu :: tip :: pt=…; lt=…. Totalurile (PCE, bottleneck) sunt calculate și nu sunt stocate.',
+  'Boom': 'Arbore',
+  'Visgraat': 'Oase de pește',
+  'Lay-out': 'Aspect',
+  'Punten': 'Puncte',
+  'Inspringen': 'Indentare',
+  'Uitspringen': 'Anulare indentare',
+  'Punt toevoegen': 'Adaugă punct',
+  'Punt verwijderen': 'Elimină punct',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Arbore sau oase de pește (5× Why, CTQ, Ishikawa). Adâncime cu taburi; marcați cauzele ca **X-01** inline.',
+  'Canvas': 'Pânză',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'O pânză de regiuni (A3, charter, SWOT, tablă). Alegeți un șablon; titlurile ## de pe disc sunt casetele.',
+  'Matrix': 'Matrice',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'O grilă tipizată (SIPOC, FMEA, RACI, …). Alegeți un șablon; coloanele derivate precum RPN sunt calculate și nu sunt stocate.',
+  'Regelkaart': 'Fișă de control',
+  'Histogram': 'Histogramă',
+  'Pareto': 'Pareto',
+  'Run chart': 'Grafic de evoluție',
+  'Boxplot': 'Diagramă cutie',
+  'Plakken uit klembord': 'Lipește din clipboard',
+  'Te weinig gegevens voor een regelkaart':
+      'Prea puține date pentru o fișă de control',
+  'Te weinig gegevens voor een histogram':
+      'Prea puține date pentru o histogramă',
+  'Te weinig gegevens voor een boxplot':
+      'Prea puține date pentru o diagramă cutie',
+  'Procesverbetering': 'Îmbunătățirea proceselor',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefacte pentru îmbunătățirea proceselor și proiecte Lean Six Sigma (DMAIC, Kaizen, A3). Dezactivat implicit. Modulul este disponibil; artefactele vor urma în pașii următori.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Modul activat. Nucleul de calcul disponibil local ({n} factori control chart). Tipurile de diapozitive și șabloanele vor fi adăugate imediat ce sunt gata.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Această prezentare conține elemente ale modulului Îmbunătățirea proceselor. Activează modulul pentru a le edita.',
   'Online media staat uit — aanzetten': 'Media online dezactivată — activează',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} conține conținut executabil și nu va fi importat.',

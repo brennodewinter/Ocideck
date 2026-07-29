@@ -17,10 +17,25 @@ import 'mermaid_diagram.dart';
 import 'video_playhead_bus.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
+import '../../services/improvement/canvas_layout.dart';
+import '../../services/improvement/canvas_slide.dart';
+import '../../services/improvement/canvas_spec.dart';
+import '../../services/improvement/tree_layout.dart';
+import '../../services/improvement/tree_slide.dart';
+import '../../services/improvement/tree_spec.dart';
+import '../../services/improvement/flow_layout.dart';
+import '../../services/improvement/flow_slide.dart';
+import '../../services/improvement/flow_spec.dart';
+import '../../services/improvement/chart_derivation.dart';
+import '../../services/improvement/matrix_layout.dart';
+import '../../services/improvement/matrix_slide.dart';
+import '../../services/scene/scene.dart';
+import '../slides/previews/scene_painter.dart';
 import '../../models/checklist_spec.dart';
 import '../../models/cockpit.dart';
 import '../../models/cvss_builder.dart';
 import '../../models/deck.dart';
+import '../../models/improvement_y01.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/document_signature.dart';
 import '../../models/finding_spec.dart';
@@ -86,6 +101,7 @@ part 'previews/chart_preview_cartesian.dart';
 part 'previews/chart_preview_radar.dart';
 part 'previews/chart_preview_extra.dart';
 part 'previews/chart_preview_bullet.dart';
+part 'previews/chart_preview_improvement.dart';
 part 'previews/cockpit_preview.dart';
 part 'previews/question_preview.dart';
 part 'previews/question_preview_answers.dart';
@@ -99,6 +115,11 @@ part 'previews/finding_preview.dart';
 part 'previews/scope_matrix_preview.dart';
 part 'previews/findings_summary_preview.dart';
 part 'previews/signoff_preview.dart';
+part 'previews/matrix_preview.dart';
+part 'previews/canvas_preview.dart';
+part 'previews/tree_preview.dart';
+part 'previews/flow_preview.dart';
+part 'previews/improvement_dispatch.dart';
 part 'previews/overlays.dart';
 
 /// Returns a TextStyle with the correct font. 'EB Garamond' is bundled with the
@@ -450,6 +471,10 @@ class SlidePreviewWidget extends StatelessWidget {
   /// client produces an English report from a Dutch UI.
   final String reportLanguage;
 
+  /// Deck-level primary Y metric (**Y-01**) for chart limit resolution when
+  /// a chart slide sets `yRef: "Y-01"`. Empty when the preview has no deck.
+  final ImprovementY01Metric improvementY01;
+
   /// Sprong naar de online-media-instelling vanaf een geblokkeerde-media-
   /// placeholder (#852). Alleen de editor-preview zet dit; elders (presenter,
   /// thumbnails, export, play-only) blijft het null en verschijnt er geen knop.
@@ -496,6 +521,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.fitScaleOverride,
     this.scopeCia = const {},
     this.reportLanguage = '',
+    this.improvementY01 = ImprovementY01Metric.empty,
     this.decodeMaxEdge,
     this.onEnableOnlineMedia,
   });
@@ -789,6 +815,7 @@ class SlidePreviewWidget extends StatelessWidget {
           font: fontFamily,
           profile: themeProfile,
           presentationMode: presentationMode,
+          y01: improvementY01,
         );
       case SlideType.cockpit:
         return _CockpitPreview(
@@ -831,6 +858,12 @@ class SlidePreviewWidget extends StatelessWidget {
       case SlideType.scopeMatrix:
       case SlideType.signOff:
         return _securityPreview(slide, w);
+      case SlideType.matrix:
+      case SlideType.canvas:
+      case SlideType.tree:
+      case SlideType.flow:
+      case SlideType.phaseGate:
+        return _improvementPreview(slide, w);
     }
   }
 
@@ -957,6 +990,9 @@ String? _resolvePath(String path, String? projectPath) =>
 double _contentLeftInset(Slide slide, double w) {
   switch (slide.type) {
     case SlideType.bullets:
+    case SlideType.tree:
+    case SlideType.flow:
+    case SlideType.phaseGate:
     case SlideType.freeMarkdown:
       return w * 0.07;
     case SlideType.code:
@@ -993,7 +1029,11 @@ double _contentLeftInset(Slide slide, double w) {
         SlideType.findingsSummary ||
         SlideType.checklist ||
         SlideType.scopeMatrix ||
-        SlideType.signOff:
+        SlideType.signOff ||
+        SlideType.matrix ||
+        SlideType.canvas ||
+        SlideType.tree ||
+        SlideType.flow:
       return w * 0.04;
   }
 }

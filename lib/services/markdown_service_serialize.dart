@@ -315,6 +315,16 @@ extension _MarkdownSerialize on MarkdownService {
   void _writeScaffoldSlide(StringBuffer buf, Slide slide) =>
       _writeFreeMarkdownSlide(buf, slide);
 
+  /// Procesverbetering canvas: `#` title + `##` regions in customMarkdown
+  /// (PROCESS_IMPROVEMENT §3.2). The template id rides in the directives above.
+  void _writeCanvasSlide(StringBuffer buf, Slide slide) {
+    if (slide.title.isNotEmpty) {
+      buf.writeln('# ${slide.title}');
+      buf.writeln();
+    }
+    _writeFreeMarkdownSlide(buf, slide);
+  }
+
   void _writeCodeSlide(StringBuffer buf, Slide slide) {
     if (slide.title.isNotEmpty) {
       buf.writeln('# ${slide.title}');

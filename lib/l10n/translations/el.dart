@@ -1798,6 +1798,47 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Nog geen specificatielimiet': 'Δεν υπάρχει ακόμη όριο προδιαγραφής',
+  'USL (bovengrens)': 'USL (ανώτατο όριο)',
+  'LSL (ondergrens)': 'LSL (κατώτατο όριο)',
+  'Optionele Y-01-velden': 'Προαιρετικά πεδία Y-01',
+  'Procesdoel (target)': 'Στόχος διαδικασίας (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Όρια προδιαγραφής Y-01 (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Αυτό το deck έχει όρια Y-01. Ενεργοποιήστε τον διακόπτη παραπάνω για να τα χρησιμοποιήσετε αντί για τοπικές τιμές.',
+  'USL (bovengrens, optioneel)': 'USL (ανώτατο όριο, προαιρετικό)',
+  'LSL (ondergrens, optioneel)': 'LSL (κατώτατο όριο, προαιρετικό)',
+  'Procesdoel (optioneel)': 'Στόχος διαδικασίας (προαιρετικό)',
+  'Fasepoort': 'Πύλη φάσης',
+  'Berekenen': 'Calculate',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Slope',
+  'Hypothesetoets': 'Hypothesis test',
+  'Hypothesetoets…': 'Hypothesis test…',
+  'Hypothetisch gemiddelde': 'Hypothesized mean',
+  'Lineaire regressie': 'Linear regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Measurement data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (optional)',
+  'Eénsteeks t-toets': 'One-sample t-test',
+  'Twee-steeks t-toets (Welch)': 'Zweistichproben-t-Test (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Μία στήλη αριθμών (τουλάχιστον 2 παρατηρήσεις).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Δύο στήλες χωρισμένες με κενή γραμμή (τουλάχιστον 2 ανά ομάδα).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Πολλές ομάδες, κάθε ομάδα στήλη, χωρισμένες με κενή γραμμή (τουλάχιστον 2 ομάδες, 2 παρατηρήσεις ανά ομάδα).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Επικολλήστε Part, Operator και Value (στηλοθέτης ή κόμμα). Επαναλάβετε γραμμές για αντίγραφα. Τουλάχιστον 2 parts, 2 χειριστές, 2 μετρήσεις ανά κελί.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Επικολλήστε X και Y (ένας αριθμός ανά γραμμή). Τουλάχιστον 3 ζεύγη· η μηχανή αρνείται όταν υπάρχουν πολύ λίγες παρατηρήσεις.',
+  'Part × Operator interaction pooled into repeatability':
+      'Αλληλεπίδραση Part × Operator συγχωνευμένη στην επαναληψιμότητα',
+  'Part × Operator interaction kept separate':
+      'Αλληλεπίδραση Part × Operator διατηρημένη χωριστά',
+  'Te weinig gegevens voor een probability plot':
+      'Πολύ λίγα δεδομένα για διάγραμμα πιθανότητας',
   'Met dank aan': 'Με ευγνωμοσύνη',
   'Fix alle problemen': 'Επιδιόρθωση όλων των προβλημάτων',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1875,6 +1916,79 @@ const _dutchSourceAddEl = <String, String>{
       'δεν ήταν δυνατή η ανάγνωση και παραλείφθηκε',
   'ontbrak in het bestand en is overgeslagen':
       'έλειπε από το αρχείο και παραλείφθηκε',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Ανεπαρκή δεδομένα για διάγραμμα κύριων επιδράσεων',
+  'Te weinig gegevens voor een interactieplot':
+      'Ανεπαρκή δεδομένα για διάγραμμα αλληλεπίδρασης',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Δημιουργεί πίνακα σχεδίου με κωδικοποιημένους παράγοντες (−1/+1) και κενή στήλη Y στο πλέγμα.',
+  'Aantal factoren': 'Anzahl Faktoren',
+  'Volledig factorial (2^k)': 'Vollständiges faktorielles Design (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde':
+      'Läufe in standardmäßiger Yates-Reihenfolge',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Μία σειρά ανά παράγοντα με κωδικοποιημένα επίπεδα −1 και +1· η τελευταία σειρά είναι η απόκριση (Y). Οι γραμμές είναι πειραματικές εκτελέσεις.',
+  'Golden-thread-id': 'Αναγνωριστικό golden thread',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'αναφέρεται κάπου αλλά δεν βρίσκεται σε διαφάνεια δέντρου — ορίστε το σε δέντρο CTQ ή Ishikawa.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'βρίσκεται σε διαφάνεια δέντρου αλλά δεν χρησιμοποιείται αλλού — συνδέστε το με πίνακα, ροή ή άλλη διαφάνεια.',
+  'Nieuw verbeteringsproject': 'Νέο έργο βελτίωσης',
+  'Kader': 'Πλαίσιο',
+  'Projecttitel': 'Τίτλος έργου',
+  'Primaire Y-metriek (Y-01)': 'Κύρια μέτρηση Y (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Για παράδειγμα: χρόνος order intake σε εργάσιμες ημέρες',
+  'Project starten': 'Έναρξη έργου',
+  'Procesverbetering: DMAIC-project': 'Βελτίωση διεργασιών: έργο DMAIC',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'Σκελετός DMAIC με charter, δέντρο CTQ (Y-01), SIPOC και ενότητες φάσης.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Checklist πύλης φάσης: επιβεβαιώστε scope, stakeholders και go/no-go πριν περάσετε στην επόμενη φάση.',
+  'Stroom': 'Ροή',
+  'Zwembanen': 'Διαδρομές',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Ροή διαδικασίας, διαδρομές ή VSM. Βήματα ως τίτλος :: είδος :: pt=…; lt=…. Τα σύνολα (PCE, bottleneck) υπολογίζονται και δεν αποθηκεύονται.',
+  'Boom': 'Δέντρο',
+  'Visgraat': 'Ιχθυόκοκαλο',
+  'Lay-out': 'Διάταξη',
+  'Punten': 'Σημεία',
+  'Inspringen': 'Εσοχή',
+  'Uitspringen': 'Μείωση εσοχής',
+  'Punt toevoegen': 'Προσθήκη σημείου',
+  'Punt verwijderen': 'Αφαίρεση σημείου',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Δέντρο ή ιχθυόκοκαλο (5× Why, CTQ, Ishikawa). Βάθος με tabs· σημειώστε αιτίες ως **X-01** inline.',
+  'Canvas': 'Καμβάς',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Καμβάς περιοχών (A3, charter, SWOT, πίνακας). Επιλέξτε πρότυπο· οι επικεφαλίδες ## στο δίσκο είναι τα πλαίσια.',
+  'Matrix': 'Πίνακας',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Πλέγμα με τύπο (SIPOC, FMEA, RACI, …). Επιλέξτε πρότυπο· οι παράγωγες στήλες όπως RPN υπολογίζονται και δεν αποθηκεύονται.',
+  'Regelkaart': 'Διάγραμμα ελέγχου',
+  'Histogram': 'Ιστόγραμμα',
+  'Pareto': 'Παρέτο',
+  'Run chart': 'Διάγραμμα εξέλιξης',
+  'Boxplot': 'Θηκόγραμμα',
+  'Plakken uit klembord': 'Επικόλληση από το πρόχειρο',
+  'Te weinig gegevens voor een regelkaart':
+      'Πολύ λίγα δεδομένα για διάγραμμα ελέγχου',
+  'Te weinig gegevens voor een histogram': 'Πολύ λίγα δεδομένα για ιστόγραμμα',
+  'Te weinig gegevens voor een boxplot': 'Πολύ λίγα δεδομένα για θηκόγραμμα',
+  'Procesverbetering': 'Βελτίωση διεργασιών',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Παραδοτέα για τη βελτίωση διεργασιών και έργα Lean Six Sigma (DMAIC, Kaizen, A3). Απενεργοποιημένο από προεπιλογή. Η ενότητα είναι διαθέσιμη· τα παραδοτέα θα ακολουθήσουν σε επόμενα βήματα.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Η ενότητα είναι ενεργή. Ο πυρήνας υπολογισμού είναι διαθέσιμος τοπικά ({n} συντελεστές control chart). Οι τύποι διαφανειών και τα πρότυπα θα προστεθούν μόλις είναι έτοιμα.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Αυτή η παρουσίαση περιέχει στοιχεία της ενότητας Βελτίωση διεργασιών. Ενεργοποιήστε την ενότητα για να τα επεξεργαστείτε.',
   'Online media staat uit — aanzetten':
       'Διαδικτυακά μέσα απενεργοποιημένα — ενεργοποίηση',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':

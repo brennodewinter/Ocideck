@@ -15,6 +15,7 @@ import '../models/video_source.dart';
 import '../utils/color_contrast.dart';
 import '../utils/inline_markdown.dart';
 import '../utils/project_path.dart';
+import 'improvement/matrix_slide.dart';
 import 'slide_image_refs.dart';
 import 'slide_layout_metrics.dart';
 import 'split_run.dart';
@@ -480,7 +481,12 @@ class SlideQualityAnalyzer {
           SlideType.findingsSummary ||
           SlideType.checklist ||
           SlideType.scopeMatrix ||
-          SlideType.signOff:
+          SlideType.signOff ||
+          SlideType.matrix ||
+          SlideType.canvas ||
+          SlideType.tree ||
+          SlideType.flow ||
+          SlideType.phaseGate:
         break;
     }
   }
@@ -556,6 +562,12 @@ class SlideQualityAnalyzer {
       case SlideType.checklist:
       case SlideType.scopeMatrix:
       case SlideType.signOff:
+      // Een matrix draagt geen media; zijn cellen zijn de inhoud zelf.
+      case SlideType.matrix:
+      case SlideType.canvas:
+      case SlideType.tree:
+      case SlideType.flow:
+      case SlideType.phaseGate:
         break;
     }
   }
@@ -750,6 +762,11 @@ class SlideQualityAnalyzer {
       case SlideType.checklist:
       case SlideType.scopeMatrix:
       case SlideType.signOff:
+      case SlideType.matrix:
+      case SlideType.canvas:
+      case SlideType.tree:
+      case SlideType.flow:
+      case SlideType.phaseGate:
         break;
     }
   }

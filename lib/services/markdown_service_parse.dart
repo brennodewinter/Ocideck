@@ -150,6 +150,16 @@ extension _MarkdownParse on MarkdownService {
       presentationTargetSeconds: fm.presentationTargetSeconds.clamp(0, 86400),
       showRehearsalSummary: fm.showRehearsalSummary,
       playOnly: fm.playOnly,
+      improvementFramework: fm.improvementFramework,
+      improvementY01Metric: ImprovementY01Metric(
+        name: fm.improvementY01,
+        unit: fm.improvementY01Unit,
+        usl: fm.improvementY01Usl,
+        lsl: fm.improvementY01Lsl,
+        target: fm.improvementY01Target,
+        baseline: fm.improvementY01Baseline,
+        goal: fm.improvementY01Goal,
+      ),
       finalized: fm.finalized,
       sealHash: fm.sealHash,
       sealAlgo: fm.sealAlgo,
@@ -242,10 +252,18 @@ extension _MarkdownParse on MarkdownService {
     ListStyle listStyle,
     List<String> richTextLines,
   ) {
-    if (type == SlideType.freeMarkdown || type.usesScaffoldMarkdownBody) {
-      return normalizeRichTextMarkdownForStorage(
+    if (type == SlideType.freeMarkdown ||
+        type == SlideType.canvas ||
+        type.usesScaffoldMarkdownBody) {
+      var body = normalizeRichTextMarkdownForStorage(
         unescapeDeckMarkdownDashLines(remaining),
       );
+      // Canvas writes `#` title separately from `##` regions; strip a leading
+      // heading so it does not round-trip twice into customMarkdown.
+      if (type == SlideType.canvas) {
+        body = body.replaceFirst(RegExp(r'^#\s+[^\n]*\n*'), '');
+      }
+      return body;
     }
     if (listStyle == ListStyle.richText) {
       return normalizeRichTextMarkdownForStorage(
@@ -459,6 +477,14 @@ extension _MarkdownParse on MarkdownService {
       findingRole: link.findingRole,
       aiAssistedFields: link.aiAssistedFields,
       checklistScope: link.checklistScope,
+      // Alleen op een engine-dia betekenisvol; elders zou een meegelift
+      // sjabloon-id een gewone tabel als matrix laten heropenen.
+      improvementTemplateId: type.category == SlideCategory.procesverbetering
+          ? d.improvementTemplateId
+          : '',
+      improvementLayout: type.category == SlideCategory.procesverbetering
+          ? d.improvementLayout
+          : '',
     );
   }
 
