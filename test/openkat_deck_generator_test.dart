@@ -80,6 +80,10 @@ bool _hasView(Deck deck, String view) =>
 void main() {
   const generator = OpenKatDeckGenerator();
 
+  test('de headless rapportagemotor is via de publieke façade bereikbaar', () {
+    expect(OpenKatReportEngine(), isA<OpenKatReportEngine>());
+  });
+
   group('kerncijfers als scorecard', () {
     test('het portfolio toont elk getal naast wat het was', () {
       final deck = generator.generate([_orgMetVerloop('a')]);

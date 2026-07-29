@@ -7,6 +7,8 @@ import 'openkat_report_composer.dart';
 import 'openkat_report_facts.dart';
 import 'openkat_report_scenarios.dart';
 
+export 'openkat_report_engine.dart';
+
 /// Compatibiliteitsfaçade voor de bestaande import- en herimportketen.
 ///
 /// Nieuwe aanroepers gebruiken [OpenKatReportEngine]. Deze klasse behoudt het
