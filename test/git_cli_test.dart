@@ -329,6 +329,44 @@ void main() {
         throwsA(isA<GitCliException>()),
       );
     });
+
+    test(
+      'een kleinkind dat de pijp openhoudt laat de aanroep niet hangen',
+      () async {
+        // Git start hulpprocessen die dezelfde uitvoer-handles erven — een
+        // credential helper, `git-remote-https`. Blijft zo'n kleinkind na git
+        // zelf nog even leven, dan sluit de pijp niet mee, en dáár wachtte
+        // `_spawn` voorheen onbegrensd op: geen fout, geen resultaat, en de
+        // eigen tijdslimiet was al afgezegd omdat git wél klaar was. Op de
+        // Windows-CI liep daar per draai een willekeurig git-testgeval drie
+        // minuten op vast.
+        //
+        // Het geval is hier POSIX gevormd (`sh` met een achtergrondproces),
+        // omdat dat diezelfde erfenis in één regel nabootst. Het gerepareerde
+        // gedrag zit in `_spawn` en is niet platformgebonden.
+        if (Platform.isWindows) return;
+        final klok = Stopwatch()..start();
+        final res = await debugSpawn(
+          'sh',
+          const ['-c', 'echo hallo; sleep 10 &'],
+          // `sleep` wordt door de schil opgezocht, en het milieu van het
+          // kindproces is dicht; zonder PATH zou het kleinkind niet starten en
+          // bewees dit geval niets.
+          environment: {
+            'PATH': Platform.environment['PATH'] ?? '/usr/bin:/bin',
+          },
+        );
+        klok.stop();
+        expect(res.stdout.trim(), 'hallo');
+        expect(
+          klok.elapsed,
+          lessThan(const Duration(seconds: 8)),
+          reason:
+              'de aanroep wachtte het kleinkind af in plaats van de pijp '
+              'los te laten',
+        );
+      },
+    );
   });
 
   group('isPushRejection', () {

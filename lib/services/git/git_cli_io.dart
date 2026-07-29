@@ -40,6 +40,14 @@ class NativeGitCli implements GitCli {
   /// of losgeslagen `git` mag de app niet laten vollopen.
   static const int _maxOutputBytes = 8 * 1024 * 1024;
 
+  /// Hoe lang we ná het einde van git nog op zijn uitvoer-pijp wachten.
+  ///
+  /// Normaal is dit geen wachttijd: de pijp sluit op hetzelfde moment als het
+  /// proces. Deze grens bestaat voor het geval dat níét zo is — zie
+  /// [_spawn], waar hij wordt afgedwongen. Ruim genoeg dat een laatste
+  /// buffer altijd nog binnenkomt, kort genoeg dat niemand het merkt.
+  static const Duration _drainGrace = Duration(seconds: 2);
+
   @override
   bool get isSupported =>
       Platform.isMacOS || Platform.isWindows || Platform.isLinux;
@@ -348,8 +356,15 @@ class NativeGitCli implements GitCli {
     );
     final out = _CappedCollector(_maxOutputBytes);
     final err = _CappedCollector(_maxOutputBytes);
-    final outDone = process.stdout.listen(out.add).asFuture<void>();
-    final errDone = process.stderr.listen(err.add).asFuture<void>();
+    final outSub = process.stdout.listen(out.add);
+    final errSub = process.stderr.listen(err.add);
+    // Een fout op de pijp is hier niets om te melden — het proces is dan al
+    // weg. De vangst staat er zodat zo'n fout geen onbehandelde asynchrone
+    // fout wordt op het moment dat we niet meer op de stroom wachten.
+    final drained = Future.wait([
+      outSub.asFuture<void>().catchError((Object _) {}),
+      errSub.asFuture<void>().catchError((Object _) {}),
+    ]);
 
     var timedOut = false;
     final killer = Timer(timeout, () {
@@ -359,7 +374,28 @@ class NativeGitCli implements GitCli {
 
     final exitCode = await process.exitCode;
     killer.cancel();
-    await Future.wait([outDone, errDone]);
+    if (await drained
+        .then((_) => false)
+        .timeout(_drainGrace, onTimeout: () => true)) {
+      // De pijp sloot niet mee met het proces. Dat betekent dat iets ánders
+      // hem openhoudt: git start hulpprocessen die dezelfde uitvoer-handles
+      // erven (een credential helper, `git-remote-https`), en zo'n kleinkind
+      // overleeft zijn ouder — ook een kill, want die geldt alleen het
+      // proces dat wij startten.
+      //
+      // Hier eeuwig op wachten was de oude vorm, en dat is precies wat een
+      // vastloper maakt die niet meer te onderscheiden is van niets doen:
+      // geen fout, geen resultaat, geen tijdslimiet die nog kan vuren (de
+      // onze is al afgezegd zodra git zelf klaar was). Op de Windows-CI
+      // strandde daar per draai een willekeurig git-testgeval op. Wat we tot
+      // hier gelezen hebben is het antwoord; de rest laten we los.
+      logWarning(
+        'GitCliIo: de uitvoer-pijp bleef open na het einde van git — '
+        'waarschijnlijk houdt een hulpproces hem vast; verder met wat er is',
+      );
+      unawaited(outSub.cancel());
+      unawaited(errSub.cancel());
+    }
 
     if (timedOut) {
       throw GitCliException(
