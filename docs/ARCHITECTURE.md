@@ -197,6 +197,49 @@ Together those keep the core headless: runnable and testable without pumping a
 widget tree, and acyclic between layers. They held on discipline alone until
 2026-07-22, which is exactly the kind of invariant a reviewer eventually misses.
 
+## OpenKAT reporting engine
+
+The OpenKAT reporting engine is a pure, headless layer between canonical
+`OpenKatOrganization`/`OpenKatSnapshot` facts and ordinary `Deck`/`Slide`
+composition. `OpenKatReportEngine.generate` accepts a fully typed
+`OpenKatReportRequest`: a scenario ID, portfolio or organisation scope, current
+and optional previous *as-of* dates, optional CVE ID, Dutch or English, an
+optional title, and policy (`maximumSnapshotAge` and a positive table-row
+limit). It has no picker, wizard, provider or widget yet.
+
+`OpenKatReportFacts` is the sole selection/query layer. For every organisation
+it chooses the latest usable snapshot on or before each requested date; an
+implicit previous measurement is the latest usable snapshot before the selected
+current one. It also emits the measurements actually used and source traces
+(organisation, role, report date, source filename, hash and schema). Scenario
+code cannot silently substitute a different definition of “previous”.
+
+The registry currently supplies five plans: `management-overview`,
+`weekly-comparison`, `organization-overview`, `cve-exposure` and
+`monitoring-changes`. A plan is a small ordered list of management-overview,
+measurement-availability, finding-lifecycle, CVE-exposure or
+monitoring-changes blocks. The composer turns those blocks into normal OciDeck
+slides, including ordinary non-destructive `DisplayWindowSpec` limits; it does
+not introduce a new deck format or slide type.
+
+Capability assessment is deliberately separate from values that happen to be
+present in a snapshot. The engine records typed assessments and stable
+diagnostic codes, returns warnings for incomplete portfolios, stale snapshots
+and incomparable coverage, and returns no deck on an error. A scenario that
+requires a capability reports `missingCapability` and fails closed. In
+particular, `cve-exposure` requires an adapter-declared
+`reliableCveReferences`, and `monitoring-changes` requires historical
+snapshots, stable asset identity and adapter-declared
+`reliableMonitoringStatus`. Current import adapters do **not** declare reliable
+CVE references or monitoring status, so those two scenarios currently return an
+unavailable/missing-capability result rather than infer facts from incidental
+fields.
+
+`OpenKatDeckGenerator` remains the compatibility façade for directory import and
+re-import. It builds the legacy `management-overview` plan and preserves the
+existing `ocideck_openkat_view` marker semantics: generated views are refreshed,
+manual slides remain in place.
+
 ## Data model
 
 ```mermaid

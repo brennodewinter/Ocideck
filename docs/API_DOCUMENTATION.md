@@ -219,6 +219,49 @@ value: whenever `audience` is present it recounts with
 therefore still declares, and a caller that hand-builds metadata can neither
 suppress the declaration nor keep it on a deck that has been reviewed.
 
+### OpenKatReportEngine
+
+`lib/services/openkat/openkat_report_engine.dart` is a synchronous, headless
+entry point for callers that already have canonical `List<OpenKatOrganization>`
+facts. It does not scan a folder and does not provide a UI:
+
+```dart
+OpenKatReportResult generate(
+  List<OpenKatOrganization> organizations,
+  OpenKatReportRequest request, {
+  String? outputPath,
+});
+```
+
+`OpenKatReportRequest` requires `scenarioId`, a typed
+`OpenKatReportScope.portfolio()` or `.organization(code)`, and `currentAsOf`.
+It optionally takes `previousAsOf`, `cveId`, `title`, a Dutch/English language,
+and `OpenKatReportPolicy(maximumSnapshotAge:, tableRowLimit:)`. An organisation
+scope rejects an empty code. The current scenarios are
+`management-overview`, `weekly-comparison`, `organization-overview`,
+`cve-exposure`, and `monitoring-changes`.
+
+The result is machine-readable whether generation succeeds or fails: `deck`,
+`plan`, selected `measurements`, typed `diagnostics`, `missingCapabilities` and
+`sourceTraces`. `generated` is false when an error prevents composition.
+Diagnostic codes include an unknown scenario/scope/organisation, missing current
+or previous snapshot, malformed CVE ID, missing capability, stale snapshot,
+incomplete portfolio and incomparable measurement coverage. A diagnostic has a
+warning or error severity plus string arguments; callers should key behaviour on
+the code, not display text.
+
+Snapshot selection is canonical: the latest *usable* snapshot on or before an
+as-of date. If `previousAsOf` is omitted, the previous snapshot is selected
+strictly before the selected current one. Each used measurement and trace names
+the exact source file/hash/schema, so a generated report remains auditable.
+
+Capabilities are explicit source contracts, not deductions from a non-empty
+field. `cve-exposure` requires `reliableCveReferences`; `monitoring-changes`
+requires historical snapshots, stable asset identities and
+`reliableMonitoringStatus`. Current adapters do not declare the CVE or
+monitoring feature, therefore both scenarios fail closed with
+`missingCapability` until an adapter proves the relevant source fields.
+
 ### Privacy Projection API
 `lib/services/privacy/privacy_projection.dart` — applies redaction and audience
 scoping. The entry points are **static**:
