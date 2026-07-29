@@ -14,6 +14,19 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ## Unreleased
 
+### Fixed
+
+- Het OpenKAT-managementrapport geeft bij een portfolio met meer dan één
+  organisatie vroeg een tabel **Deze organisaties vragen aandacht**: transparant
+  gerangschikt op kritieke bevindingen, hoge bevindingen en getroffen systemen.
+  Bij niet-vergelijkbare meetdekking staat de beperking in gewone taal bij het
+  verloop zelf, niet op een afzonderlijke technische waarschuwing. Nederlandse
+  rapporten gebruiken Nederlandse labels voor ernst, bevindingen en
+  beveiligingscontroles; die controles tonen nu de teller, noemer en het
+  aandeel. De bestaande OpenKAT-wizardroute behoudt haar stappen, maar volgt
+  nu ook het gekozen app-appearance-profiel, de bijbehorende
+  thema-oppervlakken en OciDecks accent- en radiusstijl.
+
 ### Added
 
 - De desktoproute voor OpenKAT-rapportages is nu een scenario-wizard. Na een

@@ -730,6 +730,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Kritiek/hoog': 'Kritisch/hoch',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Dieser bestehende Bericht kann nicht sicher aktualisiert werden. Erstellen Sie den Bericht neu; das bestehende Deck bleibt unverändert.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':

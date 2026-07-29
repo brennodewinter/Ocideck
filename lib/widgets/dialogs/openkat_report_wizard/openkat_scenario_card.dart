@@ -3,7 +3,6 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../../models/openkat/openkat_wizard_models.dart';
-import '../../../theme/app_theme.dart';
 
 class OpenKatScenarioCard extends StatefulWidget {
   final OpenKatWizardScenarioAvailability scenario;
@@ -40,7 +39,8 @@ class _OpenKatScenarioCardState extends State<OpenKatScenarioCard> {
   @override
   Widget build(BuildContext context) {
     final available = widget.scenario.available;
-    final focusColor = Theme.of(context).colorScheme.primary;
+    final colors = Theme.of(context).colorScheme;
+    final focusColor = colors.primary;
     final duration = MediaQuery.disableAnimationsOf(context)
         ? const Duration(milliseconds: 1)
         : const Duration(milliseconds: 190);
@@ -76,9 +76,9 @@ class _OpenKatScenarioCardState extends State<OpenKatScenarioCard> {
           decoration: _cardDecoration(context, available, focusColor),
           child: Material(
             color: Colors.transparent,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(8),
             child: InkWell(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(8),
               onTap: available
                   ? () => widget.onSelected(widget.scenario.descriptor.id)
                   : null,
@@ -105,26 +105,24 @@ class _OpenKatScenarioCardState extends State<OpenKatScenarioCard> {
   ) => BoxDecoration(
     color: widget.selected
         ? Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.22)
-        : AppTheme.paper,
-    borderRadius: BorderRadius.circular(16),
+        : Theme.of(context).colorScheme.surface,
+    borderRadius: BorderRadius.circular(8),
     border: Border.all(
       color: widget.selected || _focused
           ? focusColor
           : _hovered && available
-          ? AppTheme.blue400
-          : AppTheme.slate300,
+          ? focusColor.withValues(alpha: 0.72)
+          : Theme.of(context).colorScheme.outlineVariant,
       width: widget.selected || _focused ? 2 : 1,
     ),
     boxShadow: [
       if (_focused)
         BoxShadow(color: focusColor, spreadRadius: 4, blurRadius: 0),
       if (_focused)
-        BoxShadow(color: AppTheme.paper, spreadRadius: 2, blurRadius: 0),
-      if (_hovered && available && !_focused)
         BoxShadow(
-          color: AppTheme.slate800.withValues(alpha: 0.12),
-          blurRadius: 14,
-          offset: const Offset(0, 5),
+          color: Theme.of(context).colorScheme.surface,
+          spreadRadius: 2,
+          blurRadius: 0,
         ),
     ],
   );
@@ -166,7 +164,7 @@ class _OpenKatScenarioCardState extends State<OpenKatScenarioCard> {
             Text(
               widget.title,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: AppTheme.ink,
+                color: Theme.of(context).colorScheme.onSurface,
                 fontWeight: FontWeight.w700,
                 height: 1.25,
               ),
@@ -175,7 +173,7 @@ class _OpenKatScenarioCardState extends State<OpenKatScenarioCard> {
             Text(
               widget.description,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppTheme.slate600,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 height: 1.35,
               ),
             ),
@@ -190,13 +188,17 @@ class _OpenKatScenarioCardState extends State<OpenKatScenarioCard> {
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(Icons.lock_outline, size: 18, color: AppTheme.slate600),
+        Icon(
+          Icons.lock_outline,
+          size: 18,
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+        ),
         const SizedBox(width: 8),
         Expanded(
           child: Text(
             widget.unavailableReason!,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: AppTheme.slate700,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -242,7 +244,8 @@ class _ScenarioVisual extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = available ? AppTheme.accent : AppTheme.slate400;
+    final colors = Theme.of(context).colorScheme;
+    final color = available ? colors.primary : colors.outline;
     return switch (id) {
       OpenKatWizardScenarioId.portfolio => _Heatmap(
         values: facts.findingsByOrganization.values.toList(),

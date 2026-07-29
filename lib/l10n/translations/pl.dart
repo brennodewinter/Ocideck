@@ -1783,6 +1783,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Kritiek/hoog': 'Krytyczny/wysoki',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Tego istniejącego raportu nie można bezpiecznie zaktualizować. Utwórz raport jako nowy; istniejący deck pozostanie niezmieniony.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':

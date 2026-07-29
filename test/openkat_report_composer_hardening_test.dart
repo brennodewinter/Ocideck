@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/openkat/openkat_models.dart';
 import 'package:ocideck/models/openkat/openkat_reporting_models.dart';
 import 'package:ocideck/models/scorecard_spec.dart';
@@ -79,6 +80,27 @@ OpenKatReportRequest _request(
 
 Slide _slideWithTitle(Iterable<Slide> slides, String title) =>
     slides.singleWhere((slide) => slide.title == title);
+
+String _visibleText(Iterable<Slide> slides) {
+  final parts = <String>[];
+  for (final slide in slides) {
+    parts.addAll([
+      slide.title,
+      slide.subtitle,
+      ...slide.bullets,
+      for (final row in slide.tableRows) ...row,
+    ]);
+    if (slide.type == SlideType.chart) {
+      final chart = ChartSpec.parse(slide.customMarkdown);
+      parts.addAll([
+        chart.title,
+        ...chart.x,
+        for (final series in chart.series) series.name,
+      ]);
+    }
+  }
+  return parts.join('\n');
+}
 
 void main() {
   test(
@@ -302,11 +324,15 @@ void main() {
       );
 
       expect(
-        _slideWithTitle(
-          deck.slides,
-          'Vergelijkbaarheid niet aangetoond',
-        ).bullets,
-        isNotEmpty,
+        deck.slides.any(
+          (slide) => slide.notes.contains(
+            'ocideck_openkat_view: portfolio.comparison-warning',
+          ),
+        ),
+        isFalse,
+        reason:
+            'de trendbeperking hoort bij de trend en niet op een losse '
+            'technische waarschuwingsdia',
       );
       expect(
         deck.slides.any(
@@ -325,12 +351,87 @@ void main() {
         scorecard.entries.every((entry) => entry.previous == null),
         isTrue,
       );
+      final trend = deck.slides.singleWhere(
+        (slide) =>
+            slide.notes.contains('ocideck_openkat_view: portfolio.trend'),
+      );
+      final trendText = [
+        trend.title,
+        trend.subtitle,
+        ...trend.bullets,
+        ChartSpec.parse(trend.customMarkdown).title,
+      ].join(' ').toLowerCase();
+      expect(trendText, contains('meetdekking'));
+      expect(trendText, contains('niet als trend'));
       expect(
         deck.slides
             .expand((slide) => [slide.title, slide.subtitle, ...slide.bullets])
             .join(' '),
         isNot(anyOf(contains('Beter'), contains('Slechter'))),
       );
+    },
+  );
+
+  test(
+    'een Nederlands managementdeck gebruikt begrijpelijke Nederlandse taal',
+    () {
+      final facts = OpenKatReportFacts([
+        _organization([
+          _snapshot(
+            DateTime.utc(2026, 7, 20),
+            source: 'alpha.json',
+            findings: [
+              _finding('kritiek', severity: 'critical', name: 'Onveilige bron'),
+              _finding('hoog', severity: 'high', name: 'Open beheerpoort'),
+              _finding(
+                'middel',
+                severity: 'medium',
+                name: 'Verouderd protocol',
+              ),
+              _finding('laag', severity: 'low', name: 'Ontbrekende koptekst'),
+            ],
+            controls: const {
+              'rpki-report': OpenKatControlScore(
+                name: 'rpki-report',
+                compliant: 1,
+                total: 2,
+              ),
+            },
+          ),
+        ], name: 'Voorbeeldorganisatie'),
+      ]);
+      final deck = OpenKatReportComposer(facts).compose(
+        _request('management-overview'),
+        const OpenKatReportPlan(
+          scenarioId: 'management-overview',
+          blocks: [
+            OpenKatReportBlock(
+              id: 'management',
+              kind: OpenKatReportBlockKind.managementOverview,
+            ),
+          ],
+        ),
+      );
+      final visible = _visibleText(deck.slides);
+      final lower = visible.toLowerCase();
+
+      expect(visible, contains('Kritiek'));
+      expect(visible, contains('Hoog'));
+      expect(visible, contains('Middel'));
+      expect(visible, contains('Laag'));
+      for (final forbidden in [
+        RegExp(r'\bfindings?\b'),
+        RegExp(r'\bcritical\b'),
+        RegExp(r'\bhigh\b'),
+        RegExp(r'\bernstband\b'),
+        RegExp(r'\bpercentage conform\b'),
+      ]) {
+        expect(
+          forbidden.hasMatch(lower),
+          isFalse,
+          reason: 'zichtbare rapporttekst bevat nog `$forbidden`:\n$visible',
+        );
+      }
     },
   );
 

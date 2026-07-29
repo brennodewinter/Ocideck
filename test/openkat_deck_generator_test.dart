@@ -98,7 +98,7 @@ void main() {
 
       expect(slide.type, SlideType.scorecard);
       final spec = ScorecardSpec.fromSlide(slide.title, slide.tableRows);
-      final medium = spec.entries.firstWhere((e) => e.label == 'Medium');
+      final medium = spec.entries.firstWhere((e) => e.label == 'Middel');
       expect(medium.value, 1);
       expect(medium.previous, 0);
       expect(
@@ -152,7 +152,90 @@ void main() {
     });
   });
 
-  group('organisaties vergeleken', () {
+  group('organisaties die aandacht vragen', () {
+    test(
+      'de eerste managementdia rangschikt welke organisaties aandacht vragen',
+      () {
+        OpenKatOrganization organization(
+          String code,
+          String name,
+          List<OpenKatFinding> findings,
+        ) => OpenKatOrganization(
+          code: code,
+          name: name,
+          snapshots: [
+            _snapshot(
+              date: DateTime.utc(2026, 6, 1),
+              findings: findings,
+              systems: [
+                for (final finding in findings)
+                  OpenKatSystem(
+                    id: finding.systemId!,
+                    hostname: finding.systemId,
+                  ),
+              ],
+            ),
+          ],
+        );
+
+        final deck = generator.generate([
+          organization('alpha', 'Alpha', [
+            _finding(id: 'alpha-1', severity: 'high', system: 'alpha-1.nl'),
+            _finding(id: 'alpha-2', severity: 'high', system: 'alpha-2.nl'),
+          ]),
+          organization('charlie', 'Charlie', [
+            _finding(id: 'charlie-1', severity: 'high', system: 'charlie.nl'),
+          ]),
+          organization('bravo', 'Bravo', [
+            _finding(id: 'bravo-1', severity: 'critical', system: 'bravo.nl'),
+          ]),
+        ]);
+
+        expect(
+          deck.slides.map((slide) => slide.title),
+          contains('Deze organisaties vragen aandacht'),
+          reason:
+              'een managementportfolio moet vroeg zeggen waar eerst actie '
+              'nodig is',
+        );
+        final attention = deck.slides.singleWhere(
+          (slide) => slide.title == 'Deze organisaties vragen aandacht',
+        );
+        expect(
+          deck.slides.indexOf(attention),
+          lessThanOrEqualTo(3),
+          reason:
+              'management moet de prioriteit zien vóór detailgrafieken en '
+              'inventarisatie',
+        );
+        expect(attention.type, SlideType.table);
+        expect(attention.tableRows.first, [
+          'Organisatie',
+          'Waarom aandacht',
+          'Kritiek',
+          'Hoog',
+          'Getroffen systemen',
+        ]);
+        expect(
+          attention.tableRows.skip(1).map((row) => row.first),
+          ['Bravo', 'Alpha', 'Charlie'],
+          reason:
+              'kritieke bevindingen wegen vóór hoge; getroffen systemen '
+              'maken de rangorde daarna transparant',
+        );
+        expect(attention.tableRows[1].sublist(2), ['1', '0', '1']);
+        expect(attention.tableRows[2].sublist(2), ['0', '2', '2']);
+        expect(attention.tableRows[3].sublist(2), ['0', '1', '1']);
+        expect(attention.tableRows[1][1], 'Kritiek: 1 bevinding');
+        expect(attention.tableRows[2][1].toLowerCase(), contains('hoog'));
+        expect(attention.tableRows[2][1].toLowerCase(), contains('getroffen'));
+        expect(
+          attention.tableRows[3][1],
+          'Hoog: 1 bevinding op 1 getroffen systeem',
+        );
+      },
+    );
+
     test('verschijnt zodra er meer dan één organisatie is', () {
       final een = generator.generate([_orgMetVerloop('a')]);
       final twee = generator.generate([
@@ -160,20 +243,43 @@ void main() {
         _orgMetVerloop('b'),
       ]);
 
-      expect(_hasView(een, 'portfolio.orgs-compared'), isFalse);
-      expect(_hasView(twee, 'portfolio.orgs-compared'), isTrue);
-      expect(_view(twee, 'portfolio.orgs-compared').type, SlideType.scorecard);
+      expect(_hasView(een, 'portfolio.orgs-attention'), isFalse);
+      expect(_hasView(twee, 'portfolio.orgs-attention'), isTrue);
+      expect(_view(twee, 'portfolio.orgs-attention').type, SlideType.table);
     });
 
-    test('meer dan vijf organisaties passen in de scorecard', () {
-      // De scorecard houdt zichzelf op vijf regels; de warmtekaart is het
-      // volledige beeld.
+    test('zonder kritieke of hoge bevindingen geeft de dia direct antwoord', () {
+      OpenKatOrganization organization(String code, String severity) =>
+          OpenKatOrganization(
+            code: code,
+            name: code.toUpperCase(),
+            snapshots: [
+              _snapshot(
+                date: DateTime.utc(2026, 6, 1),
+                findings: [_finding(id: code, severity: severity)],
+              ),
+            ],
+          );
+      final deck = generator.generate([
+        organization('alpha', 'medium'),
+        organization('bravo', 'low'),
+      ]);
+      final slide = _view(deck, 'portfolio.orgs-attention');
+
+      expect(slide.type, SlideType.bullets);
+      expect(
+        slide.bullets.single,
+        'Geen organisatie heeft in de huidige meting kritieke of hoge bevindingen.',
+      );
+    });
+
+    test('meer dan vijf organisaties blijven beschikbaar in de tabel', () {
       final deck = generator.generate([
         for (var i = 0; i < 8; i++) _orgMetVerloop('org$i'),
       ]);
-      final slide = _view(deck, 'portfolio.orgs-compared');
-      final spec = ScorecardSpec.fromSlide(slide.title, slide.tableRows);
-      expect(spec.entries.length, scorecardMaxEntries);
+      final slide = _view(deck, 'portfolio.orgs-attention');
+      expect(slide.tableRows, hasLength(9));
+      expect(slide.viewLimit?.limit, 8);
     });
   });
 
@@ -186,7 +292,7 @@ void main() {
 
       expect(chart.type, ChartType.line);
       expect(chart.x, ['2026-05-01', '2026-06-01']);
-      final medium = chart.series.firstWhere((s) => s.name == 'Medium');
+      final medium = chart.series.firstWhere((s) => s.name == 'Middel');
       expect(medium.data, [0, 1]);
     });
 
@@ -197,7 +303,7 @@ void main() {
       );
       final kleuren = {for (final s in chart.series) s.name: s.color};
 
-      expect(kleuren['Critical'], isNotNull);
+      expect(kleuren['Kritiek'], isNotNull);
       expect(
         kleuren.values.toSet().length,
         kleuren.length,
@@ -227,7 +333,7 @@ void main() {
         ChartType.bar,
         reason: 'een lijn van één punt is geen grafiek',
       );
-      expect(chart.x, ['Critical', 'High', 'Medium', 'Low']);
+      expect(chart.x, ['Kritiek', 'Hoog', 'Middel', 'Laag']);
     });
 
     test('de restband verschijnt alleen als er iets in valt', () {
@@ -293,7 +399,7 @@ void main() {
       final slide = _view(deck, 'portfolio.key-message');
 
       expect(slide.subtitle, contains('Slechter'));
-      expect(slide.bullets, contains('1 meer medium findings'));
+      expect(slide.bullets, contains('1 meer middelzware bevindingen'));
     });
 
     test('een eerste meting krijgt geen conclusie over verandering', () {
@@ -313,7 +419,7 @@ void main() {
     });
 
     test(
-      'zonder broncapability verschijnt alleen een vergelijkingswaarschuwing',
+      'zonder vergelijkbare dekking legt de trend zelf haar beperking uit',
       () {
         final org = _orgMetVerloop('a');
         final deck = generator.generate([
@@ -328,9 +434,33 @@ void main() {
           ),
         ]);
 
-        expect(_hasView(deck, 'portfolio.comparison-warning'), isTrue);
+        expect(
+          _hasView(deck, 'portfolio.comparison-warning'),
+          isFalse,
+          reason:
+              'een losse technische waarschuwingsdia helpt management niet '
+              'bij het lezen van de grafiek',
+        );
         expect(_hasView(deck, 'portfolio.key-message'), isFalse);
         expect(_hasView(deck, 'org.a.improved'), isFalse);
+        final trend = _view(deck, 'portfolio.trend');
+        final chartTitle = ChartSpec.parse(trend.customMarkdown).title;
+        final trendText = [
+          trend.title,
+          trend.subtitle,
+          ...trend.bullets,
+          chartTitle,
+        ].join(' ').toLowerCase();
+        expect(chartTitle.toLowerCase(), contains('meetdekking'));
+        expect(chartTitle.toLowerCase(), contains('niet als trend'));
+        expect(trendText, contains('meetdekking'));
+        expect(
+          trendText,
+          contains('niet als trend'),
+          reason:
+              'de beperking moet in gewone taal vertellen wat de lezer met '
+              'de meetreeks niet mag doen',
+        );
         final scorecard = ScorecardSpec.fromSlide(
           _view(deck, 'portfolio.summary').title,
           _view(deck, 'portfolio.summary').tableRows,
@@ -355,7 +485,7 @@ void main() {
 
       expect(chart.type, ChartType.heatmap);
       expect(chart.series.map((s) => s.name), ['A', 'B']);
-      expect(chart.x, ['Critical', 'High', 'Medium', 'Low']);
+      expect(chart.x, ['Kritiek', 'Hoog', 'Middel', 'Laag']);
       expect(chart.series.first.data, [0, 1, 1, 0]);
     });
 
@@ -418,7 +548,7 @@ void main() {
   });
 
   group('dekking per control', () {
-    test('het percentage komt uit de teller en de noemer', () {
+    test('controles tonen een begrijpelijke naam, teller en noemer', () {
       final deck = generator.generate([
         OpenKatOrganization(
           code: 'a',
@@ -428,28 +558,48 @@ void main() {
               date: DateTime.utc(2026, 6, 1),
               findings: [_finding(id: 'f1', severity: 'high')],
               controls: const {
-                'rpki': OpenKatControlScore(
-                  name: 'rpki',
+                'dnssec-report': OpenKatControlScore(
+                  name: 'dnssec-report',
+                  compliant: 4,
+                  total: 4,
+                ),
+                'hsts-report': OpenKatControlScore(
+                  name: 'hsts-report',
+                  compliant: 3,
+                  total: 4,
+                ),
+                'rpki-report': OpenKatControlScore(
+                  name: 'rpki-report',
                   compliant: 1,
                   total: 2,
+                ),
+                'safe-connections-report': OpenKatControlScore(
+                  name: 'safe-connections-report',
+                  compliant: 2,
+                  total: 4,
+                ),
+                'security-txt-report': OpenKatControlScore(
+                  name: 'security-txt-report',
+                  compliant: 1,
+                  total: 4,
                 ),
               },
             ),
           ],
         ),
       ]);
-      final chart = ChartSpec.parse(
-        _view(deck, 'portfolio.controls').customMarkdown,
-      );
+      final controls = _view(deck, 'portfolio.controls');
 
-      expect(chart.type, ChartType.horizontalBar);
-      expect(chart.x, ['rpki']);
-      expect(chart.series.first.data, [50]);
-      expect(
-        chart.bands,
-        isEmpty,
-        reason: 'welk percentage goed genoeg is staat niet in de meting',
-      );
+      expect(controls.type, SlideType.table);
+      expect(controls.title, 'Beveiligingscontroles');
+      expect(controls.tableRows, [
+        ['Controle', 'Voldoet', 'Onderzocht', 'Aandeel'],
+        ['DNSSEC', '4', '4', '100%'],
+        ['HSTS', '3', '4', '75%'],
+        ['RPKI', '1', '2', '50%'],
+        ['Veilige verbindingen', '2', '4', '50%'],
+        ['security.txt', '1', '4', '25%'],
+      ]);
     });
 
     test('zonder dekkingscijfers is er geen dia', () {
@@ -466,7 +616,7 @@ void main() {
       expect(slide.tableRows.first, [
         '#',
         'Systeem',
-        'Finding',
+        'Bevinding',
         'Ernst',
         'Open sinds',
         'Dagen',

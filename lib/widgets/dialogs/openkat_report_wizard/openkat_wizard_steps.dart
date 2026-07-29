@@ -47,7 +47,7 @@ class OpenKatSourceGate extends StatelessWidget {
                   size: 42,
                   color: failed
                       ? Theme.of(context).colorScheme.error
-                      : AppTheme.accent,
+                      : Theme.of(context).colorScheme.primary,
                 ),
                 const SizedBox(height: 18),
                 Text(
@@ -59,7 +59,7 @@ class OpenKatSourceGate extends StatelessWidget {
                               )
                       : l10n.d('Waar staan de OpenKAT-rapportages?'),
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: AppTheme.ink,
+                    color: Theme.of(context).colorScheme.onSurface,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -73,7 +73,7 @@ class OpenKatSourceGate extends StatelessWidget {
                           'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.',
                         ),
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: AppTheme.slate600,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                     height: 1.45,
                   ),
                 ),
@@ -83,7 +83,9 @@ class OpenKatSourceGate extends StatelessWidget {
                     icon: Icons.folder_outlined,
                     child: SelectableText(
                       directory!,
-                      style: TextStyle(color: AppTheme.slate700),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                     ),
                   ),
                 ],
@@ -147,7 +149,7 @@ class OpenKatScenarioStep extends StatelessWidget {
         Text(
           l10n.d('Wat wilt u laten zien?'),
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: AppTheme.ink,
+            color: Theme.of(context).colorScheme.onSurface,
             fontWeight: FontWeight.w800,
           ),
         ),
@@ -156,7 +158,9 @@ class OpenKatScenarioStep extends StatelessWidget {
           l10n.d(
             'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.',
           ),
-          style: TextStyle(color: AppTheme.slate600),
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
         ),
         const SizedBox(height: 16),
         _InfoSurface(
@@ -267,14 +271,16 @@ class OpenKatInputsStep extends StatelessWidget {
         Text(
           l10n.d('Alleen wat nodig is'),
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: AppTheme.ink,
+            color: Theme.of(context).colorScheme.onSurface,
             fontWeight: FontWeight.w800,
           ),
         ),
         const SizedBox(height: 8),
         Text(
           openKatScenarioTitle(l10n, id),
-          style: TextStyle(color: AppTheme.slate600),
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
         ),
         const SizedBox(height: 22),
         for (final input in primaryInputs) ...[
@@ -556,7 +562,7 @@ class _CveInputs extends StatelessWidget {
                   : Icons.radio_button_unchecked,
               color: controller.cveId == option.id
                   ? Theme.of(context).colorScheme.primary
-                  : AppTheme.slate500,
+                  : Theme.of(context).colorScheme.onSurfaceVariant,
             ),
             title: Text(option.id),
             subtitle: Text(
@@ -609,14 +615,16 @@ class OpenKatReviewStep extends StatelessWidget {
         Text(
           l10n.d('Controleren'),
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: AppTheme.ink,
+            color: Theme.of(context).colorScheme.onSurface,
             fontWeight: FontWeight.w800,
           ),
         ),
         const SizedBox(height: 8),
         Text(
           openKatScenarioTitle(l10n, controller.selectedScenarioId!),
-          style: TextStyle(color: AppTheme.slate600),
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
         ),
         const SizedBox(height: 20),
         _ReviewRow(
@@ -658,6 +666,8 @@ class OpenKatReviewStep extends StatelessWidget {
                 : Icons.warning_amber_outlined,
             text: openKatDiagnosticText(l10n, diagnostic),
             error: diagnostic.severity == OpenKatReportDiagnosticSeverity.error,
+            warning:
+                diagnostic.severity != OpenKatReportDiagnosticSeverity.error,
           ),
         if (controller.buildError != null)
           _Message(
@@ -682,7 +692,10 @@ class OpenKatReviewStep extends StatelessWidget {
           ListTile(
             contentPadding: EdgeInsets.zero,
             minTileHeight: 44,
-            leading: Icon(Icons.check, color: AppTheme.successFg),
+            leading: Icon(
+              Icons.check,
+              color: Theme.of(context).colorScheme.primary,
+            ),
             title: Text(openKatBlockTitle(l10n, block.kind)),
           ),
       ],
@@ -712,13 +725,17 @@ class OpenKatUpdateConfirmation extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.refresh, size: 48, color: AppTheme.accentFg),
+              Icon(
+                Icons.refresh,
+                size: 48,
+                color: Theme.of(context).colorScheme.primary,
+              ),
               const SizedBox(height: 16),
               Text(
                 l10n.d('OpenKAT-rapport bijwerken'),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: AppTheme.ink,
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -728,7 +745,10 @@ class OpenKatUpdateConfirmation extends StatelessWidget {
                   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.',
                 ),
                 textAlign: TextAlign.center,
-                style: TextStyle(color: AppTheme.slate600, height: 1.45),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  height: 1.45,
+                ),
               ),
               if (controller.buildError != null) ...[
                 const SizedBox(height: 16),
@@ -800,13 +820,13 @@ class _InfoSurface extends StatelessWidget {
     width: double.infinity,
     padding: const EdgeInsets.all(14),
     decoration: BoxDecoration(
-      color: AppTheme.slate50,
-      borderRadius: BorderRadius.circular(10),
-      border: Border.all(color: AppTheme.slate300),
+      color: Theme.of(context).colorScheme.surfaceContainerLow,
+      borderRadius: BorderRadius.circular(6),
+      border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
     ),
     child: Row(
       children: [
-        Icon(icon, color: AppTheme.slate600),
+        Icon(icon, color: Theme.of(context).colorScheme.onSurfaceVariant),
         const SizedBox(width: 10),
         Expanded(child: child),
       ],
@@ -840,9 +860,9 @@ class _ReviewRow extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.labelMedium?.copyWith(color: AppTheme.slate600),
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 const SizedBox(height: 3),
                 Text(
@@ -863,40 +883,57 @@ class _Message extends StatelessWidget {
   final IconData icon;
   final String text;
   final bool error;
+  final bool warning;
 
-  const _Message({required this.icon, required this.text, this.error = false});
+  const _Message({
+    required this.icon,
+    required this.text,
+    this.error = false,
+    this.warning = false,
+  });
 
   @override
-  Widget build(BuildContext context) => Semantics(
-    liveRegion: true,
-    child: Container(
-      width: double.infinity,
-      margin: const EdgeInsets.only(top: 10),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: error ? AppTheme.dangerBg : AppTheme.warningBg,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: error ? AppTheme.dangerFg : AppTheme.warningFg,
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final background = error
+        ? AppTheme.dangerBg
+        : warning
+        ? AppTheme.warningBg
+        : colors.surfaceContainerLow;
+    final foreground = error
+        ? AppTheme.dangerFg
+        : warning
+        ? AppTheme.warningFg
+        : colors.onSurfaceVariant;
+    final border = error
+        ? AppTheme.dangerBgSoft
+        : warning
+        ? AppTheme.warningBgSoft
+        : colors.outlineVariant;
+    return Semantics(
+      liveRegion: true,
+      child: Container(
+        width: double.infinity,
+        margin: const EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: background,
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(color: border),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon, color: foreground),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(text, style: TextStyle(color: foreground)),
+            ),
+          ],
         ),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, color: error ? AppTheme.dangerFg : AppTheme.warningFg),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              text,
-              style: TextStyle(
-                color: error ? AppTheme.dangerFg : AppTheme.warningFg,
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
+    );
+  }
 }
 
 Future<void> showOpenKatImportReport(

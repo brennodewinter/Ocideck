@@ -9,6 +9,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/openkat/openkat_reporting_models.dart';
 import 'package:ocideck/models/openkat/openkat_wizard_models.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/openkat/openkat_deck_generator.dart';
 import 'package:ocideck/services/openkat/openkat_wizard_service.dart';
@@ -72,6 +73,151 @@ void main() {
   tearDown(() => AppTheme.isDark = false);
 
   group('scenariokaart', () {
+    testWidgets('volgt alle kleurrollen van een afwijkend app-profiel', (
+      tester,
+    ) async {
+      _useViewport(tester, const Size(1280, 900));
+      const profile = AppAppearanceProfile(
+        name: 'Regressieprofiel',
+        primaryColor: '#6B2145',
+        accentColor: '#C47A00',
+        backgroundColor: '#EAF2ED',
+        surfaceColor: '#CFE8DD',
+        textColor: '#182B23',
+        mutedTextColor: '#405D50',
+        panelColor: '#203A2F',
+        panelTextColor: '#F4FFF9',
+      );
+      final theme = AppTheme.fromProfile(profile);
+      final scan = wizardScan();
+      final available = scan.scenarios.first;
+      final unavailableDescriptor = OpenKatWizardService.scenarioDescriptors
+          .firstWhere((item) => item.id == OpenKatWizardScenarioId.dataQuality);
+
+      await tester.pumpWidget(
+        _app(
+          Column(
+            children: [
+              SizedBox(
+                width: 340,
+                child: OpenKatScenarioCard(
+                  scenario: available,
+                  facts: scan.preview,
+                  title: 'Managementoverzicht',
+                  description: 'Vergelijk alle organisaties.',
+                  recommendedLabel: 'Aanbevolen',
+                  selectedLabel: 'Geselecteerd',
+                  selected: false,
+                  onSelected: (_) {},
+                ),
+              ),
+              SizedBox(
+                width: 340,
+                child: OpenKatScenarioCard(
+                  scenario: OpenKatWizardScenarioAvailability(
+                    descriptor: unavailableDescriptor,
+                    available: false,
+                    reason: OpenKatWizardUnavailableReason.noUsableMeasurements,
+                  ),
+                  facts: scan.preview,
+                  title: 'Datakwaliteit',
+                  description: 'Beoordeel de beschikbare metingen.',
+                  recommendedLabel: 'Aanbevolen',
+                  selectedLabel: 'Geselecteerd',
+                  unavailableReason: 'Geen bruikbare metingen',
+                  selected: false,
+                  onSelected: (_) {},
+                ),
+              ),
+            ],
+          ),
+          theme: theme,
+        ),
+      );
+
+      final availableCard = find.byKey(
+        const ValueKey('openkat-scenario-portfolio'),
+      );
+      final decoration =
+          tester.widget<AnimatedContainer>(availableCard).decoration!
+              as BoxDecoration;
+      final border = decoration.border! as Border;
+      expect(decoration.color, theme.colorScheme.surface);
+      expect(border.top.color, theme.colorScheme.outlineVariant);
+      expect(
+        tester.widget<Text>(find.text('Managementoverzicht')).style?.color,
+        theme.colorScheme.onSurface,
+      );
+      expect(
+        tester
+            .widget<Text>(find.text('Vergelijk alle organisaties.'))
+            .style
+            ?.color,
+        theme.colorScheme.onSurfaceVariant,
+      );
+
+      final badge = tester.widget<Container>(
+        find
+            .ancestor(
+              of: find.text('Aanbevolen'),
+              matching: find.byType(Container),
+            )
+            .first,
+      );
+      expect(
+        (badge.decoration! as BoxDecoration).color,
+        theme.colorScheme.primary,
+      );
+
+      final heatCells = tester
+          .widgetList<Container>(
+            find.descendant(
+              of: availableCard,
+              matching: find.byWidgetPredicate(
+                (widget) =>
+                    widget is Container &&
+                    widget.decoration is BoxDecoration &&
+                    (widget.decoration! as BoxDecoration).borderRadius ==
+                        BorderRadius.circular(3),
+              ),
+            ),
+          )
+          .toList();
+      expect(heatCells, isNotEmpty);
+      final heatColor = (heatCells.first.decoration! as BoxDecoration).color!;
+      expect(
+        heatColor.withValues(alpha: 1).toARGB32(),
+        theme.colorScheme.primary.toARGB32(),
+      );
+      expect(heatColor.a, closeTo(0.9, 0.01));
+
+      final unavailableCard = find.byKey(
+        const ValueKey('openkat-scenario-dataQuality'),
+      );
+      final statusDots = tester
+          .widgetList<Container>(
+            find.descendant(
+              of: unavailableCard,
+              matching: find.byWidgetPredicate(
+                (widget) =>
+                    widget is Container &&
+                    widget.decoration is BoxDecoration &&
+                    (widget.decoration! as BoxDecoration).shape ==
+                        BoxShape.circle,
+              ),
+            ),
+          )
+          .toList();
+      expect(statusDots, isNotEmpty);
+      final statusColor =
+          (statusDots.first.decoration! as BoxDecoration).color!;
+      expect(
+        statusColor.withValues(alpha: 1).toARGB32(),
+        theme.colorScheme.outline.toARGB32(),
+      );
+      expect(statusColor.a, closeTo(0.28, 0.01));
+    });
+
     testWidgets('geselecteerde kaart heeft naam, rol en aangevinkte toestand', (
       tester,
     ) async {

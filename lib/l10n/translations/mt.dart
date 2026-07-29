@@ -1793,6 +1793,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Kritiek/hoog': 'Kritika/għolja',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Dan ir-rapport eżistenti ma jistax jiġi aġġornat b\'mod sigur. Oħloq ir-rapport bħala ġdid; id-deck eżistenti jibqa\' mhux mibdul.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':

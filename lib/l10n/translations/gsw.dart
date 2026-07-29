@@ -1774,6 +1774,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Kritiek/hoog': 'kritisch/hoch',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Dä bestehend Bèrìcht cha nìt sicher aktualisiert wärde. Erstell dä Bèrìcht neu; s bestehend Deck blibt unverändert.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':

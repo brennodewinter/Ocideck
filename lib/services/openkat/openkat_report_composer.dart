@@ -14,6 +14,8 @@ import 'openkat_aggregator.dart';
 import 'openkat_report_facts.dart';
 import 'openkat_slide_provenance.dart';
 
+part 'openkat_report_composer_helpers.dart';
+
 /// Zet een gevalideerd rapportplan om in gewone OciDeck-dia's.
 ///
 /// Feiten en selectieregels komen uitsluitend uit [facts]. Dit bestand beslist
@@ -128,19 +130,16 @@ class OpenKatReportComposer {
     final hasComparison = portfolio.previous != null;
     final slides = <Slide>[
       _titleSlide(title, organizations),
-      if (hasComparison && !comparablePortfolio) _comparisonWarningSlide(),
+      if (organizations.length > 1) _organizationAttentionSlide(portfolio),
       if (hasComparison && comparablePortfolio) _keyMessageSlide(portfolio),
       _portfolioSummarySlide(portfolio, compare: comparablePortfolio),
       _trendSlide(portfolio, compare: comparablePortfolio),
       _portfolioSurfaceSlide(portfolio),
-      if (organizations.length > 1) ...[
-        _organizationsComparedSlide(portfolio, compare: comparablePortfolio),
-        _severityMatrixSlide(portfolio),
-      ],
+      if (organizations.length > 1) ...[_severityMatrixSlide(portfolio)],
       _topIssuesSlide(portfolio, compare: comparablePortfolio),
       ?_recommendationsSlide(portfolio),
       _longestOpenSlide(portfolio),
-      ?_controlsSlide(portfolio, compare: comparablePortfolio),
+      ?_controlsSlide(portfolio),
       for (final org in organizations)
         ..._organisationSlides(
           org,
@@ -219,11 +218,11 @@ class OpenKatReportComposer {
     return _slide(
       id: _id('openkat-${request.scenarioId}-lifecycle'),
       type: SlideType.table,
-      title: english ? 'Finding observations' : 'Waarnemingen van findings',
+      title: english ? 'Finding observations' : 'Waarnemingen van bevindingen',
       tableRows: [
         [
           english ? 'Organization' : 'Organisatie',
-          'Finding',
+          english ? 'Finding' : 'Bevinding',
           english ? 'Observation' : 'Waarneming',
           english ? 'Comparable coverage' : 'Vergelijkbare dekking',
         ],
@@ -268,7 +267,7 @@ class OpenKatReportComposer {
       tableRows: [
         [
           english ? 'Organization' : 'Organisatie',
-          'Finding',
+          english ? 'Finding' : 'Bevinding',
           english ? 'System' : 'Systeem',
           english ? 'Severity' : 'Ernst',
         ],
@@ -277,7 +276,7 @@ class OpenKatReportComposer {
             _inline(item.organizationCode),
             _inline(item.finding.findingTypeName ?? item.finding.findingTypeId),
             _inline(item.finding.systemId ?? '-'),
-            _inline(item.finding.severity),
+            _severityLabel(openKatSeverityBand(item.finding.severity)),
           ],
         if (truncated) _omittedRow(columns: 4, english: english, shown: limit),
       ],
@@ -366,24 +365,6 @@ class OpenKatReportComposer {
     );
   }
 
-  Slide _comparisonWarningSlide() => _slide(
-    id: _id('openkat-comparison-warning'),
-    type: SlideType.bullets,
-    title: _text(
-      'Vergelijkbaarheid niet aangetoond',
-      'Comparability not demonstrated',
-    ),
-    bullets: [
-      _text(
-        'De meetdekking kan tussen meetmomenten verschillen. Daarom toont dit '
-            'rapport geen normatieve vergelijking van de meetwaarden.',
-        'Measurement coverage may differ between measurements. This report '
-            'therefore makes no directional comparison of the measured values.',
-      ),
-    ],
-    notes: '<!-- ocideck_openkat_view: portfolio.comparison-warning -->',
-  );
-
   Slide _keyMessageSlide(PortfolioAggregate portfolio) {
     final conclusion = facts.compare(portfolio.current, portfolio.previous);
     return _slide(
@@ -411,7 +392,7 @@ class OpenKatReportComposer {
       title: _text('Ernst per organisatie', 'Severity by organization'),
       customMarkdown: ChartSpec(
         type: ChartType.heatmap,
-        title: _text('Findings per ernstband', 'Findings by severity'),
+        title: _text('Bevindingen naar ernst', 'Findings by severity'),
         x: [for (final band in bands) _severityLabel(band)],
         series: [
           for (final entry in perOrg.entries)
@@ -458,9 +439,11 @@ class OpenKatReportComposer {
       title: _text('Wat er in beeld is', 'Observed scope'),
       bullets: [
         '${c.totalSystems} ${_text('systemen', 'systems')}',
-        '${c.hostnames} hostnames, ${c.ipv4} IPv4, ${c.ipv6} IPv6',
-        '${c.totalFindings} findings ${_text('in', 'across')} ${c.uniqueFindingTypes} types',
-        '${c.criticalHighSystems} ${_text('systemen met critical/high', 'systems with critical/high')}',
+        '${c.hostnames} ${_text('hostnamen', 'hostnames')}, '
+            '${c.ipv4} IPv4, ${c.ipv6} IPv6',
+        '${c.totalFindings} ${_text('bevindingen in', 'findings across')} '
+            '${c.uniqueFindingTypes} ${_text('typen', 'types')}',
+        '${c.criticalHighSystems} ${_text('systemen met kritieke of hoge bevindingen', 'systems with critical/high findings')}',
         _severityLine(c.severityCounts, english: _english),
       ],
       viewLimit: const DisplayWindowSpec(),
@@ -468,27 +451,60 @@ class OpenKatReportComposer {
     );
   }
 
-  Slide _organizationsComparedSlide(
-    PortfolioAggregate portfolio, {
-    required bool compare,
-  }) {
-    final comparison = facts.organizationComparison(portfolio.organizations);
-    return _scorecardSlide(
-      id: _id('openkat-portfolio-orgs-compared'),
-      title: _text('Organisaties vergeleken', 'Organizations compared'),
-      entries: [
-        for (final org in comparison)
-          ScorecardEntry(
-            label: _literal(org.name),
-            value: org.findings.toDouble(),
-            previous: compare ? org.previousFindings?.toDouble() : null,
-            unit: 'findings',
-            polarity: compare
-                ? ScorecardPolarity.lowerBetter
-                : ScorecardPolarity.neutral,
+  Slide _organizationAttentionSlide(PortfolioAggregate portfolio) {
+    final organizations = facts
+        .organizationAttention(portfolio.organizations)
+        .where(
+          (organization) => organization.critical > 0 || organization.high > 0,
+        )
+        .toList();
+    if (organizations.isEmpty) {
+      return _slide(
+        id: _id('openkat-portfolio-orgs-attention'),
+        type: SlideType.bullets,
+        title: _text(
+          'Deze organisaties vragen aandacht',
+          'These organizations require attention',
+        ),
+        bullets: [
+          _text(
+            'Geen organisatie heeft in de huidige meting kritieke of hoge bevindingen.',
+            'No organization has critical or high findings in the current measurement.',
           ),
+        ],
+        notes: '<!-- ocideck_openkat_view: portfolio.orgs-attention -->',
+      );
+    }
+    return _slide(
+      id: _id('openkat-portfolio-orgs-attention'),
+      type: SlideType.table,
+      title: _text(
+        'Deze organisaties vragen aandacht',
+        'These organizations require attention',
+      ),
+      subtitle: _text(
+        'Gerangschikt op kritieke bevindingen, hoge bevindingen en getroffen systemen.',
+        'Ranked by critical findings, high findings, and affected systems.',
+      ),
+      tableRows: [
+        [
+          _text('Organisatie', 'Organization'),
+          _text('Waarom aandacht', 'Why attention is needed'),
+          _text('Kritiek', 'Critical'),
+          _text('Hoog', 'High'),
+          _text('Getroffen systemen', 'Affected systems'),
+        ],
+        for (final organization in organizations)
+          [
+            _literal(organization.name),
+            _attentionReason(organization),
+            '${organization.critical}',
+            '${organization.high}',
+            '${organization.affectedSystems}',
+          ],
       ],
-      view: 'portfolio.orgs-compared',
+      viewLimit: const DisplayWindowSpec(limit: 8),
+      notes: '<!-- ocideck_openkat_view: portfolio.orgs-attention -->',
     );
   }
 
@@ -499,10 +515,10 @@ class OpenKatReportComposer {
     final rows = <List<String>>[
       [
         '#',
-        'Finding',
+        _text('Bevinding', 'Finding'),
         _text('Ernst', 'Severity'),
         _text('Systemen', 'Systems'),
-        _text('Orgs', 'Orgs'),
+        _text('Organisaties', 'Organizations'),
         if (showNew) _text('Nieuw', 'New'),
       ],
       for (var i = 0; i < issues.length; i++)
@@ -518,7 +534,7 @@ class OpenKatReportComposer {
     return _slide(
       id: _id('openkat-portfolio-top-issues'),
       type: SlideType.table,
-      title: _text('Meest voorkomende issues', 'Most common issues'),
+      title: _text('Meest voorkomende bevindingen', 'Most common findings'),
       tableRows: rows,
       viewLimit: const DisplayWindowSpec(limit: 5),
       notes: '<!-- ocideck_openkat_view: portfolio.top-issues -->',
@@ -531,7 +547,7 @@ class OpenKatReportComposer {
       [
         '#',
         _text('Systeem', 'System'),
-        'Finding',
+        _text('Bevinding', 'Finding'),
         _text('Ernst', 'Severity'),
         _text('Open sinds', 'Observed since'),
         _text('Dagen', 'Days'),
@@ -554,7 +570,10 @@ class OpenKatReportComposer {
     return _slide(
       id: _id('openkat-portfolio-longest-open'),
       type: SlideType.table,
-      title: _text('Langst openstaande findings', 'Longest-observed findings'),
+      title: _text(
+        'Langst openstaande bevindingen',
+        'Longest-observed findings',
+      ),
       tableRows: rows,
       viewLimit: const DisplayWindowSpec(limit: 8),
       notes: '<!-- ocideck_openkat_view: portfolio.longest-open -->',
@@ -570,6 +589,12 @@ class OpenKatReportComposer {
       title: history.length > 1
           ? _text('Verloop over de tijd', 'Trend over time')
           : _text('Stand van nu', 'Current measurement'),
+      subtitle: history.length > 1 && !compare
+          ? _text(
+              'De meetdekking verschilt mogelijk. Lees deze meetreeks daarom niet als trend.',
+              'Measurement coverage may differ. Do not interpret this series as a trend.',
+            )
+          : '',
       customMarkdown:
           (history.length > 1
                   ? _historyChart(
@@ -578,8 +603,8 @@ class OpenKatReportComposer {
                           ? '${_text('Verloop', 'Trend')}: '
                                 '${_trendLabel(conclusion)}'
                           : _text(
-                              'Meetwaarden per periode',
-                              'Values by period',
+                              'Let op: meetdekking verschilt mogelijk — lees dit niet als trend',
+                              'Caution: measurement coverage may differ — do not read this as a trend',
                             ),
                       english: _english,
                     )
@@ -619,41 +644,36 @@ class OpenKatReportComposer {
     );
   }
 
-  Slide? _controlsSlide(PortfolioAggregate portfolio, {required bool compare}) {
-    final current = <String, double>{
-      for (final entry in portfolio.current.controls.entries)
-        if (entry.value.ratio != null)
-          _literal(entry.value.name): entry.value.ratio! * 100,
-    };
+  Slide? _controlsSlide(PortfolioAggregate portfolio) {
+    final current =
+        portfolio.current.controls.values
+            .where((control) => control.ratio != null)
+            .toList()
+          ..sort(
+            (a, b) => _controlLabel(a.name).compareTo(_controlLabel(b.name)),
+          );
     if (current.isEmpty) return null;
-
-    final previous = <String, double>{
-      for (final entry in (portfolio.previous?.controls ?? const {}).entries)
-        if (entry.value.ratio != null)
-          _literal(entry.value.name): entry.value.ratio! * 100,
-    };
-    final names = current.keys.toList()..sort();
 
     return _slide(
       id: _id('openkat-portfolio-controls'),
-      type: SlideType.chart,
-      title: _text('Dekking per control', 'Coverage by control'),
-      customMarkdown: ChartSpec(
-        type: ChartType.horizontalBar,
-        title: _text('Percentage conform', 'Percentage compliant'),
-        x: names,
-        series: [
-          ChartSeries(
-            name: _text('Huidig', 'Current'),
-            data: [for (final name in names) current[name] ?? 0],
-          ),
-          if (compare && previous.isNotEmpty)
-            ChartSeries(
-              name: _text('Vorige', 'Previous'),
-              data: [for (final name in names) previous[name] ?? 0],
-            ),
+      type: SlideType.table,
+      title: _text('Beveiligingscontroles', 'Security controls'),
+      tableRows: [
+        [
+          _text('Controle', 'Control'),
+          _text('Voldoet', 'Compliant'),
+          _text('Onderzocht', 'Assessed'),
+          _text('Aandeel', 'Share'),
         ],
-      ).toBlock(),
+        for (final control in current)
+          [
+            _controlLabel(control.name),
+            '${control.compliant}',
+            '${control.total}',
+            '${(control.ratio! * 100).round()}%',
+          ],
+      ],
+      viewLimit: const DisplayWindowSpec(limit: 8),
       notes: '<!-- ocideck_openkat_view: portfolio.controls -->',
     );
   }
@@ -693,7 +713,7 @@ class OpenKatReportComposer {
             polarity: ScorecardPolarity.neutral,
           ),
           ScorecardEntry(
-            label: 'Findings',
+            label: _text('Bevindingen', 'Findings'),
             value: agg.totalFindings.toDouble(),
             previous: previousAgg?.totalFindings.toDouble(),
             polarity: ScorecardPolarity.lowerBetter,
@@ -714,7 +734,7 @@ class OpenKatReportComposer {
           title: '${_literal(org.name)} — ${_text('verloop', 'trend')}',
           customMarkdown: _historyChart(
             orgHistory,
-            title: _text('Findings per meting', 'Findings by measurement'),
+            title: _text('Bevindingen per meting', 'Findings by measurement'),
             english: _english,
           ).toBlock(),
           notes:
@@ -724,7 +744,7 @@ class OpenKatReportComposer {
         id: _id('openkat-org-${_safe(org.code)}-systems'),
         type: SlideType.table,
         title: _text(
-          'Systemen met de meeste findings',
+          'Systemen met de meeste bevindingen',
           'Systems with the most findings',
         ),
         tableRows: _systemsTable(
@@ -784,6 +804,54 @@ class OpenKatReportComposer {
   String _severityLabel(String band) =>
       (_english ? _severityLabelsEnglish : _severityLabels)[band] ?? band;
 
+  String _attentionReason(OpenKatOrganizationAttention organization) {
+    if (organization.critical > 0) {
+      return _english
+          ? 'Critical: ${organization.critical} '
+                '${organization.critical == 1 ? 'finding' : 'findings'}'
+          : 'Kritiek: ${organization.critical} '
+                '${organization.critical == 1 ? 'bevinding' : 'bevindingen'}';
+    }
+    if (organization.high > 0) {
+      return _english
+          ? 'High: ${organization.high} '
+                '${organization.high == 1 ? 'finding' : 'findings'} across '
+                '${organization.affectedSystems} affected '
+                '${organization.affectedSystems == 1 ? 'system' : 'systems'}'
+          : 'Hoog: ${organization.high} '
+                '${organization.high == 1 ? 'bevinding' : 'bevindingen'} op '
+                '${organization.affectedSystems} getroffen '
+                '${organization.affectedSystems == 1 ? 'systeem' : 'systemen'}';
+    }
+    return _text(
+      'Geen kritieke of hoge bevindingen',
+      'No critical or high findings',
+    );
+  }
+
+  String _controlLabel(String value) {
+    final normalized = value.trim().toLowerCase();
+    if (normalized.startsWith('rpki')) return 'RPKI${_termSuffix(value)}';
+    if (normalized.startsWith('dnssec')) return 'DNSSEC${_termSuffix(value)}';
+    if (normalized.startsWith('hsts')) return 'HSTS${_termSuffix(value)}';
+    if (normalized.startsWith('security-txt') ||
+        normalized.startsWith('security_txt') ||
+        normalized.startsWith('security txt') ||
+        normalized.startsWith('security.txt')) {
+      return 'security.txt${_termSuffix(value)}';
+    }
+    if (normalized.startsWith('safe-connections')) {
+      return '${_text('Veilige verbindingen', 'Safe connections')}'
+          '${_termSuffix(value)}';
+    }
+    final words = value
+        .replaceFirst(RegExp(r'-report$', caseSensitive: false), '')
+        .replaceAll(RegExp('[-_]'), ' ')
+        .trim();
+    if (words.isEmpty) return _literal(value);
+    return _literal('${words[0].toUpperCase()}${words.substring(1)}');
+  }
+
   String _trendLabel(TrendConclusion conclusion) =>
       switch (conclusion.direction) {
         OpenKatTrendDirection.firstMeasurement => _text(
@@ -810,13 +878,13 @@ class OpenKatReportComposer {
   String _trendFact(OpenKatTrendFact fact) {
     if (fact.metric == OpenKatTrendMetric.controlCoverage) {
       final improved = fact.currentRatio! > fact.previousRatio!;
-      final controlId = _literal(fact.controlId ?? '');
+      final controlId = _controlLabel(fact.controlId ?? '');
       return _english
           ? '$controlId coverage ${improved ? 'improved' : 'worsened'} '
                 'from ${_percent(fact.previousRatio!)} to '
                 '${_percent(fact.currentRatio!)}'
-          : '$controlId-dekking '
-                '${improved ? 'verbeterd' : 'verslechterd'} van '
+          : '$controlId: aandeel dat voldoet '
+                '${improved ? 'gestegen' : 'gedaald'} van '
                 '${_percent(fact.previousRatio!)} naar '
                 '${_percent(fact.currentRatio!)}';
     }
@@ -824,14 +892,17 @@ class OpenKatReportComposer {
     final more = fact.delta! > 0;
     final metric = switch (fact.metric) {
       OpenKatTrendMetric.criticalFindings => _text(
-        'kritieke findings',
+        'kritieke bevindingen',
         'critical findings',
       ),
       OpenKatTrendMetric.highFindings => _text(
-        'hoge findings',
+        'hoge bevindingen',
         'high findings',
       ),
-      OpenKatTrendMetric.mediumFindings => 'medium findings',
+      OpenKatTrendMetric.mediumFindings => _text(
+        'middelzware bevindingen',
+        'medium findings',
+      ),
       OpenKatTrendMetric.affectedSystems => _text(
         'getroffen systemen',
         'affected systems',
@@ -848,139 +919,3 @@ class OpenKatReportComposer {
 
   String _percent(double value) => '${(value * 100).round()}%';
 }
-
-String _slideId(String seed) {
-  final bytes = utf8.encode('ocideck-openkat-$seed');
-  final hash = md5.convert(bytes);
-  return 'ocikat-${hash.toString().substring(0, 16)}';
-}
-
-String _safeCode(String value) =>
-    value.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '-');
-
-String _safeTableText(String value) => sanitizeImportedInline(
-  value.replaceAll('\r\n', '\n').replaceAll('\r', '\n'),
-);
-
-String _isoDate(DateTime value) =>
-    '${value.year.toString().padLeft(4, '0')}-'
-    '${value.month.toString().padLeft(2, '0')}-'
-    '${value.day.toString().padLeft(2, '0')}';
-
-const int _maxRecommendations = 5;
-
-const Map<String, String> _severityColors = {
-  'critical': '#B00020',
-  'high': '#EF4444',
-  'medium': '#F59E0B',
-  'low': '#2563EB',
-  openKatOtherSeverity: '#64748B',
-};
-
-List<String> _visibleBands(Iterable<Map<String, int>> counts) => [
-  ...openKatSeverityBands,
-  if (counts.any((c) => (c[openKatOtherSeverity] ?? 0) > 0))
-    openKatOtherSeverity,
-];
-
-ChartSpec _historyChart(
-  List<OpenKatHistoryPoint> history, {
-  required String title,
-  required bool english,
-}) {
-  final bands = _visibleBands([for (final p in history) p.severityCounts]);
-  final labels = english ? _severityLabelsEnglish : _severityLabels;
-  return ChartSpec(
-    type: ChartType.line,
-    title: title,
-    x: [for (final point in history) _isoDate(point.date)],
-    series: [
-      for (final band in bands)
-        ChartSeries(
-          name: labels[band] ?? band,
-          color: _severityColors[band],
-          data: [
-            for (final point in history)
-              (point.severityCounts[band] ?? 0).toDouble(),
-          ],
-        ),
-    ],
-  );
-}
-
-ChartSpec _distributionChart(
-  Map<String, int> counts, {
-  required String title,
-  required bool english,
-}) {
-  final bands = _visibleBands([counts]);
-  final labels = english ? _severityLabelsEnglish : _severityLabels;
-  return ChartSpec(
-    type: ChartType.bar,
-    title: title,
-    x: [for (final band in bands) labels[band] ?? band],
-    rowColors: [for (final band in bands) _severityColors[band]],
-    series: [
-      ChartSeries(
-        name: 'Findings',
-        data: [for (final band in bands) (counts[band] ?? 0).toDouble()],
-      ),
-    ],
-  );
-}
-
-const Map<String, String> _severityLabels = {
-  'critical': 'Critical',
-  'high': 'High',
-  'medium': 'Medium',
-  'low': 'Low',
-  openKatOtherSeverity: 'Overig',
-};
-
-const Map<String, String> _severityLabelsEnglish = {
-  'critical': 'Critical',
-  'high': 'High',
-  'medium': 'Medium',
-  'low': 'Low',
-  openKatOtherSeverity: 'Other',
-};
-
-String _severityLine(Map<String, int> counts, {required bool english}) {
-  final parts = [
-    'Critical: ${counts['critical'] ?? 0}',
-    'High: ${counts['high'] ?? 0}',
-    'Medium: ${counts['medium'] ?? 0}',
-    'Low: ${counts['low'] ?? 0}',
-    if ((counts[openKatOtherSeverity] ?? 0) > 0)
-      '${english ? 'Other' : 'Overig'}: ${counts[openKatOtherSeverity]}',
-  ];
-  return parts.join(', ');
-}
-
-List<List<String>> _systemsTable(
-  List<OpenKatSystemStats> stats, {
-  required bool showOther,
-  required bool english,
-}) => [
-  [
-    '#',
-    english ? 'System' : 'Systeem',
-    english ? 'Total' : 'Totaal',
-    'Critical',
-    'High',
-    'Medium',
-    'Low',
-    if (showOther) english ? 'Other' : 'Overig',
-  ],
-  for (var i = 0; i < stats.length; i++)
-    [
-      '${i + 1}',
-      _safeTableText(stats[i].systemId),
-      '${stats[i].total}',
-      '${stats[i].critical}',
-      '${stats[i].high}',
-      '${stats[i].medium}',
-      '${stats[i].low}',
-      if (showOther) '${stats[i].other}',
-    ],
-];

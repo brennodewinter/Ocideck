@@ -1746,6 +1746,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Kritiek/hoog': 'Qobqu\'/Qob',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Qoylu\'be\'laH jupbogh reportvam. chu\' report chenmoH; qonta\'bogh deck choHbe\'.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':

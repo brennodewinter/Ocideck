@@ -2748,6 +2748,7 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Kritiek/hoog': 'Kritik/yüksek',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Bu mevcut rapor güvenli şekilde güncellenemez. Raporu yeni olarak oluşturun; mevcut deck değişmeden kalır.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':

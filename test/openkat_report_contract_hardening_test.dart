@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/openkat/openkat_models.dart';
 import 'package:ocideck/models/openkat/openkat_reporting_models.dart';
 import 'package:ocideck/services/openkat/openkat_report_engine.dart';
@@ -170,7 +171,7 @@ void main() {
   });
 
   test(
-    'managementvergelijking zonder dekkingsbewijs waarschuwt ook getypept',
+    'managementvergelijking zonder dekkingsbewijs waarschuwt in diagnose en trend',
     () {
       final result = OpenKatReportEngine().generate(
         [
@@ -202,11 +203,18 @@ void main() {
         ),
         isTrue,
       );
+      final trend = result.deck!.slides.singleWhere(
+        (slide) =>
+            slide.notes.contains('ocideck_openkat_view: portfolio.trend'),
+      );
+      final chartTitle = ChartSpec.parse(trend.customMarkdown).title;
       expect(
-        result.deck!.slides.any(
-          (slide) => slide.title == 'Vergelijkbaarheid niet aangetoond',
-        ),
-        isTrue,
+        chartTitle,
+        allOf(contains('meetdekking'), contains('niet als trend')),
+      );
+      expect(
+        trend.subtitle,
+        allOf(contains('meetdekking'), contains('niet als trend')),
       );
     },
   );

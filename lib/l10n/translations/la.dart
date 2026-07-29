@@ -1787,6 +1787,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Kritiek/hoog': 'Critical/high',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Haec relatio iam exsistens tuto renovari non potest. Relationem novam crea; fasciculus exsistens immutatus manet.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':

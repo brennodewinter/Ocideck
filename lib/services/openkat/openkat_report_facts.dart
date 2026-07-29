@@ -528,6 +528,10 @@ class OpenKatReportFacts {
     List<OpenKatOrganization> organizations,
   ) => aggregator.organizationComparison(organizations);
 
+  List<OpenKatOrganizationAttention> organizationAttention(
+    List<OpenKatOrganization> organizations,
+  ) => aggregator.organizationAttention(organizations);
+
   List<OpenKatSystemChange> mostImprovedSystems(
     OpenKatOrganization organization,
   ) => aggregator.mostImprovedSystems(organization);
