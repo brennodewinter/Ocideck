@@ -1770,6 +1770,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Onlinevergaderingen': 'Tiešsaistes sapulces',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Dalība cita pakalpojumu sniedzēja sapulcē, kopīgojot savu prezentāciju. Pēc noklusējuma izslēgts; ar izslēgtu moduli OciDeck nesazinās ne ar vienu sapulču pakalpojumu. Neviens pakalpojumu sniedzējs vēl nav pievienots, tāpēc pievienoties vēl nevar — tas liek pamatu.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Notiek sapulce. Tāpēc sarunas logs paliek pieejams, līdz jūs to pametat.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Vēl nav pieejams neviens sapulču pakalpojums, kuram pievienoties. Kamēr tas tā ir, šis slēdzis neko nemaina un nekas netiek sūtīts uz āru.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Ielīmējiet sapulces saiti, lai pievienotos. Ar ko tiks sazināts un ko tas redzēs, ir redzams ekrānā, pirms jūs pievienojaties.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Plašs, bet faktisks pārvaldības pārskats ar izsekojamiem mērījumu momentiem.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

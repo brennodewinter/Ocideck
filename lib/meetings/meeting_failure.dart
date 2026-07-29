@@ -105,7 +105,7 @@ enum MeetingFailureKind {
 ///
 /// Wat hier bewust *niet* in zit: een melding, een uitzondering, de link, een
 /// naam of een token. De vertaalde uitleg hoort bij de schil (§18), die per
-/// [kind] een `l10n.d('…')` kiest; zo kan een adapter geen Engelse dienstnaam
+/// [kind] een `l10n.d`-tekst kiest; zo kan een adapter geen Engelse dienstnaam
 /// of servertekst op het scherm krijgen.
 class MeetingFailure {
   MeetingFailure(this.kind, {this.provider, String? code, String? subcode})

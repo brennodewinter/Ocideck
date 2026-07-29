@@ -2748,6 +2748,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Onlinevergaderingen': 'Çevrimiçi toplantılar',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Başka bir sağlayıcının toplantısına, paylaştığınız içerik sununuz olacak şekilde katılın. Varsayılan olarak kapalı; modül kapalıyken OciDeck hiçbir toplantı hizmetiyle iletişim kurmaz. Henüz bağlı bir sağlayıcı yok, bu yüzden katılmak henüz mümkün değil — bu, temeli atar.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Devam eden bir toplantı var. Bu yüzden görüşme penceresi, siz ayrılana kadar erişilebilir kalır.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Henüz katılabileceğiniz bir toplantı hizmeti yok. Bu böyle olduğu sürece bu anahtar hiçbir şeyi değiştirmez ve dışarıya hiçbir şey gitmez.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Katılmak için bir toplantı bağlantısı yapıştırın. Kiminle iletişim kurulacağı ve onun neyi göreceği, siz katılmadan önce ekranda gösterilir.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'İzlenebilir ölçüm anlarına sahip geniş ancak gerçeklere dayanan bir yönetime genel bakış.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

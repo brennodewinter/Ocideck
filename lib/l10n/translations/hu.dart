@@ -1775,6 +1775,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Onlinevergaderingen': 'Online értekezletek',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Részvétel egy másik szolgáltató értekezletén, az Ön előadásával mint megosztott tartalommal. Alapértelmezés szerint kikapcsolva; kikapcsolt modullal az OciDeck egyetlen értekezlet-szolgáltatással sem lép kapcsolatba. Még nincs csatlakoztatott szolgáltató, így a részvétel még nem lehetséges — ez teremti meg az alapot.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Értekezlet van folyamatban. A hívásablak ezért elérhető marad, amíg el nem hagyja.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Még nincs elérhető értekezlet-szolgáltatás, amelyhez csatlakozni lehetne. Amíg ez így van, ez a kapcsoló semmit sem változtat, és semmi sem megy kifelé.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Illesszen be egy értekezlet-hivatkozást a csatlakozáshoz. Hogy kivel jön létre kapcsolat és mit fog látni, a képernyőn olvasható, mielőtt csatlakozna.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Széles, de tényszerű menedzsment áttekintés nyomon követhető mérési pillanatokkal.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

@@ -1793,6 +1793,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Onlinevergaderingen': 'Онлайн срещи',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Участие в среща на друг доставчик, като споделяте своята презентация. Изключено по подразбиране; при изключен модул OciDeck не се свързва с нито една услуга за срещи. Все още няма свързан доставчик, така че участието още не е възможно — това полага основата.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'В момента тече среща. Затова прозорецът на разговора остава достъпен, докато не я напуснете.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Все още няма достъпна услуга за срещи, към която да се присъедините. Докато е така, този превключвател не променя нищо и нищо не излиза навън.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Поставете връзка към среща, за да се присъедините. Кой ще бъде потърсен и какво ще види, е показано на екрана, преди да се присъедините.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Широк, но фактологичен преглед на управлението с проследими моменти на измерване.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

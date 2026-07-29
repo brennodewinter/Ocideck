@@ -1788,6 +1788,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Onlinevergaderingen': 'Întâlniri online',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Participarea la o întâlnire a altui furnizor, cu prezentarea dumneavoastră drept ceea ce partajați. Dezactivat implicit; cu modulul dezactivat, OciDeck nu contactează niciun serviciu de întâlniri. Niciun furnizor nu este încă conectat, deci participarea nu este încă posibilă — aceasta pune temelia.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'O întâlnire este în desfășurare. De aceea fereastra convorbirii rămâne accesibilă până când o părăsiți.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Nu există încă niciun serviciu de întâlniri disponibil la care să participați. Cât timp este așa, acest comutator nu schimbă nimic și nimic nu iese în afară.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Lipiți un link de întâlnire pentru a participa. Cine va fi contactat și ce va vedea apare pe ecran înainte să participați.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'O privire de ansamblu a managementului amplă, dar reală, cu momente de măsurare urmăribile.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

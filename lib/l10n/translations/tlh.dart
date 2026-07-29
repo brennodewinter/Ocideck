@@ -1746,6 +1746,15 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Onlinevergaderingen': 'De\'wI\' qepmey',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'latlh qum qep DamuvlaH, \'ej qonwI\'lIj Da\'ang. motlh chu\'Ha\'lu\'; chu\'Ha\'lu\'chugh, pagh qep Qu\' rI\' OciDeck. wej qum rarlu\', vaj wej muvlaH vay\' — mung cher wanI\'vam.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'DaH qep tu\'lu\'. vaj qep Qorwagh SIQtaH, Damejpa\'.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'wej qep Qu\' DamuvlaHbogh tu\'lu\'. taHtaHvIS, pagh choH leQvam \'ej pagh mej.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'qep rarwI\' yIlan \'ej yImuv. \'Iv rI\'lu\' \'ej nuq legh, jIH cha\' bImuvpa\'.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'OpenKAT ja\'chuq: Ein umfassender, aber sachlicher Managementüberblick mit nachvollziehbaren Messmomenten.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

@@ -1787,6 +1787,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Onlinevergaderingen': 'Conventus interretiales',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Conventui alterius praebitoris interesse, praelectione tua ut eo quod communicas. Ex ordine exstinctum; modulo exstincto OciDeck nullum servitium conventuum contingit. Nullus praebitor adhuc coniunctus est, ergo interesse nondum licet — hoc fundamentum ponit.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Conventus agitur. Fenestra colloquii ideo accessibilis manet donec eum relinquas.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Nullum servitium conventuum adhuc praesto est cui intersis. Quamdiu ita est, hoc iugum nihil mutat et nihil foras exit.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Vinculum conventus insere ut intersis. Quis contingatur et quid visurus sit, in scrinio ante participationem tuam ostenditur.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Lata sed scientifica administratio perspicitur cum momentorum mensurarum deprauatione.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

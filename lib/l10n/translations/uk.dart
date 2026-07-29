@@ -1788,6 +1788,15 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Onlinevergaderingen': 'Онлайн-зустрічі',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Участь у зустрічі іншого постачальника, де ви ділитеся своєю презентацією. Типово вимкнено; коли модуль вимкнено, OciDeck не звертається до жодного сервісу зустрічей. Жодного постачальника ще не підключено, тож приєднатися поки неможливо — це закладає основу.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Триває зустріч. Тому вікно розмови залишається доступним, доки ви її не покинете.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Поки що немає жодного сервісу зустрічей, до якого можна приєднатися. Доки це так, цей перемикач нічого не змінює й назовні нічого не надсилається.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Вставте посилання на зустріч, щоб приєднатися. Хто отримає запит і що побачить, показано на екрані до того, як ви приєднаєтеся.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Широкий, але фактичний огляд управління з відстежуваними моментами вимірювання.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

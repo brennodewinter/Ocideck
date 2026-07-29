@@ -730,6 +730,15 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Onlinevergaderingen': 'Réunions en ligne',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Participer à une réunion d\'un autre fournisseur, avec votre présentation comme contenu partagé. Désactivé par défaut ; module désactivé, OciDeck ne contacte aucun service de réunion. Aucun fournisseur n\'est encore raccordé, participer n\'est donc pas encore possible — ceci pose les fondations.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Une réunion est en cours. La fenêtre d\'appel reste donc accessible jusqu\'à ce que vous la quittiez.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Aucun service de réunion n\'est encore disponible pour participer. Tant que c\'est le cas, cet interrupteur ne change rien et rien ne sort.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Collez un lien de réunion pour participer. Qui sera contacté et ce qu\'il verra s\'affiche à l\'écran avant que vous participiez.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Un aperçu de la gestion large mais factuel avec des moments de mesure traçables.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

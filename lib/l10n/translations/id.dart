@@ -1771,6 +1771,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Onlinevergaderingen': 'Rapat daring',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Mengikuti rapat dari penyedia lain, dengan presentasi Anda sebagai yang Anda bagikan. Nonaktif secara bawaan; dengan modul nonaktif, OciDeck tidak menghubungi layanan rapat mana pun. Belum ada penyedia yang terhubung, jadi bergabung belum bisa — ini meletakkan dasarnya.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Sebuah rapat sedang berlangsung. Karena itu jendela percakapan tetap dapat diakses sampai Anda meninggalkannya.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Belum ada layanan rapat yang tersedia untuk diikuti. Selama itu berlaku, sakelar ini tidak mengubah apa pun dan tidak ada yang keluar.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Tempel tautan rapat untuk bergabung. Siapa yang dihubungi dan apa yang akan mereka lihat ditampilkan di layar sebelum Anda bergabung.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Tinjauan manajemen yang luas namun faktual dengan momen pengukuran yang dapat ditelusuri.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

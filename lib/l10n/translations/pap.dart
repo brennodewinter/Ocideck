@@ -730,6 +730,15 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Onlinevergaderingen': 'Reunionnan online',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Partisipá na un reunion di un otro proveedor, ku bo presentashon komo loke bo ta kompartí. Standard pagá; ku e módulo pagá OciDeck no ta tuma kontakto ku ningun servisio di reunion. Ainda no tin proveedor konektá, pues partisipá no ta posibel ainda — esaki ta pone e base.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Tin un reunion andando. P\'esei e bentana di kombersashon ta keda alkansabel te ora bo sali for di dje.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Ainda no tin ningun servisio di reunion disponibel pa partisipá. Miéntras esei ta e kaso, e switch aki no ta kambia nada i nada no ta sali afó.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Pega un link di reunion pa partisipá. Ken ta haña kontakto i kiko e ta mira ta pará riba pantaya promé ku bo partisipá.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Un bista amplio pero faktual di maneho ku momentunan di midimentu trasabel.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
