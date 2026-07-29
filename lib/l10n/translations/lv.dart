@@ -1770,6 +1770,69 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Businesscase / investeringsvoorstel':
+      'Biznesa pamatojums / investīciju priekšlikums',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Pamatojums, iespējas ar izmaksām un ieguvumiem, riski un pieprasītais lēmums.',
+  'Begroting / budgetpresentatie': 'Budžeta prezentācija',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Pieņēmumi, posteņi ar salīdzinājumu, izvēles iespējas, riski un lēmumu punkti.',
+  'Besluitvormend overleg': 'Lēmumu pieņemšanas sanāksme',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Darba kārtība, skaidrojums pie katra punkta, lēmumu saraksts un darbības ar atbildīgo.',
+  'Ledenvergadering (ALV)': 'Biedru kopsapulce',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Darba kārtība, gada pārskats, revīzijas komisija, budžets un balsojumi biedrībai vai dzīvokļu īpašnieku biedrībai.',
+  'Ouderavond / informatieavond': 'Vecāku sapulce / informatīvs vakars',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Gada programma, pieeja, praktiskas vienošanās un kā vecāki var palīdzēt.',
+  'Familiegesprek zorg en mantelzorg':
+      'Ģimenes saruna par aprūpi un tuvinieku aprūpi',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scenāriji, vēlmes, pienākumu sadale un vienošanās smagai ģimenes sarunai.',
+  'Raads- / collegevoorstel': 'Priekšlikums domei / valdei',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Pamatojums, lēmumu punkti, argumenti un iebildes, finansējums un turpmākie soļi.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Iedzīvotāju vakars / līdzdalības sanāksme',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Kas ir izlemts un kas atvērts, skaitļi, iespējas reaģēt un turpmākie soļi.',
+  'Sprint review / demo': 'Sprinta pārskats / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Sprinta mērķis, paveiktais darbs, demo, metrikas un skats uz priekšu.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Ugunsdzēsēju instruktāža (izsaukums un mācības)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objekts, piekļuve, bīstamības, kvadranti, ūdens ieguve un pienākumu sadale.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Atzinuma pieprasījums darbinieku padomei',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Paredzētais lēmums, motīvi, sekas personālam un atzinuma procedūra.',
+  'Stagepresentatie': 'Prakses prezentācija',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Uzņēmums, uzdevums, pieeja, rezultāts, mācību mērķi un refleksija.',
+  'Debriefing / after-action review': 'Debrīfings / analīze pēc darbības',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Kas bija plānots, kas notika, kāpēc — un kādas vienošanās mēs pieņemam.',
+  'Threat modeling-sessie': 'Draudu modelēšanas sesija',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Tvērums, datu plūsmas, uzticības robežas, draudi pa STRIDE kategorijām un pasākumi.',
+  'Casuïstiekbespreking sociaal domein': 'Gadījumu izskatīšana sociālajā jomā',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonimizēts gadījums: dzīves jomas, drošība, tiesiskais ietvars un koordinācija.',
+  'Gesprek voorbereiden': 'Sagatavot sarunu',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Mērķis, otra puse, uzbūve, jautājumi un vienošanās katrai sarunai, ko vēlies labi sagatavot.',
+  'Cruciaal gesprek voorbereiden': 'Sagatavot izšķirošu sarunu',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Augstas likmes un spēcīgas emocijas, saskaņā ar izšķirošo sarunu pieeju.',
+  'Vluchtdebriefing': 'Lidojuma debrīfings',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Pašnovērtējums, gaita pa fāzēm, TEM atskats un mācības pēc lidojuma vai nodarbības.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Pasažieru instruktāža (vispārējā aviācija)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Drošības jostas, durvis, avārijas procedūras un vienošanās uz klāja pirms manevrēšanas pa zemi.',
   'Onlinevergaderingen': 'Tiešsaistes sapulces',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Dalība cita pakalpojumu sniedzēja sapulcē, kopīgojot savu prezentāciju. Pēc noklusējuma izslēgts; ar izslēgtu moduli OciDeck nesazinās ne ar vienu sapulču pakalpojumu. Neviens pakalpojumu sniedzējs vēl nav pievienots, tāpēc pievienoties vēl nevar — tas liek pamatu.',

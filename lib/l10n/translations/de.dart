@@ -730,6 +730,68 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Businesscase / investeringsvoorstel': 'Businesscase / Investitionsvorschlag',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Anlass, Optionen mit Kosten und Nutzen, Risiken und der erbetene Beschluss.',
+  'Begroting / budgetpresentatie': 'Budgetpräsentation',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Annahmen, Posten mit Vergleich, Spielräume, Risiken und Entscheidungspunkte.',
+  'Besluitvormend overleg': 'Entscheidungssitzung',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Agenda, Erläuterung je Punkt, Beschlussliste und Aktionen mit Verantwortlichen.',
+  'Ledenvergadering (ALV)': 'Mitgliederversammlung (MV)',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Agenda, Jahresbericht, Kassenprüfung, Haushalt und Abstimmungen für Verein oder Eigentümergemeinschaft.',
+  'Ouderavond / informatieavond': 'Elternabend / Informationsabend',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Jahresprogramm, Vorgehen, praktische Absprachen und wie Eltern helfen können.',
+  'Familiegesprek zorg en mantelzorg':
+      'Familiengespräch zu Pflege und Angehörigenpflege',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Szenarien, Wünsche, Aufgabenverteilung und Vereinbarungen für ein schweres Familiengespräch.',
+  'Raads- / collegevoorstel': 'Rats- / Verwaltungsvorlage',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Anlass, Entscheidungspunkte, Argumente samt Vorbehalten, Deckung und weiteres Vorgehen.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Anwohnerabend / Beteiligungsveranstaltung',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Was feststeht und was offen ist, Zahlen, Reaktionsmöglichkeiten und weiteres Vorgehen.',
+  'Sprint review / demo': 'Sprint-Review / Demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Sprintziel, gelieferte Arbeit, Demo, Metriken und Ausblick.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Feuerwehrbriefing (Einsatz und Übung)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objekt, Erreichbarkeit, Gefahren, Quadranten, Wasserversorgung und Aufgabenverteilung.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Beratungsanfrage Betriebsrat / Mitbestimmung',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Beabsichtigter Beschluss, Beweggründe, personelle Folgen und das Anhörungsverfahren.',
+  'Stagepresentatie': 'Praktikumspräsentation',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Unternehmen, Auftrag, Vorgehen, Ergebnis, Lernziele und Reflexion.',
+  'Debriefing / after-action review': 'Debriefing / After-Action-Review',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Was geplant war, was geschah, warum — und welche Vereinbarungen wir treffen.',
+  'Threat modeling-sessie': 'Threat-Modeling-Sitzung',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Scope, Datenflüsse, Vertrauensgrenzen, Bedrohungen je STRIDE-Kategorie und Maßnahmen.',
+  'Casuïstiekbespreking sociaal domein': 'Fallbesprechung im Sozialbereich',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonymisierter Fall: Lebensbereiche, Sicherheit, rechtlicher Rahmen und Fallregie.',
+  'Gesprek voorbereiden': 'Gespräch vorbereiten',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Ziel, das Gegenüber, Aufbau, Fragen und Vereinbarungen für jedes Gespräch, das du gut vorbereiten willst.',
+  'Cruciaal gesprek voorbereiden': 'Entscheidendes Gespräch vorbereiten',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Hohe Einsätze und starke Emotionen, nach dem Ansatz für entscheidende Gespräche.',
+  'Vluchtdebriefing': 'Flugnachbesprechung',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Selbsteinschätzung, Verlauf je Phase, TEM-Rückblick und Lernpunkte nach einem Flug oder einer Stunde.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Passagierbriefing (allgemeine Luftfahrt)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Gurte, Türen, Notverfahren und Absprachen an Bord vor dem Rollen.',
   'Onlinevergaderingen': 'Onlinebesprechungen',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'An einer Besprechung eines anderen Anbieters teilnehmen, mit Ihrer Präsentation als dem, was Sie teilen. Standardmäßig aus; ist das Modul aus, nimmt OciDeck mit keinem einzigen Besprechungsdienst Kontakt auf. Es ist noch kein Anbieter angebunden, teilnehmen geht also noch nicht — dies legt die Grundlage.',

@@ -1775,6 +1775,68 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Businesscase / investeringsvoorstel':
+      'Üzleti indoklás / beruházási javaslat',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Előzmények, lehetőségek költségekkel és hasznokkal, kockázatok és a kért döntés.',
+  'Begroting / budgetpresentatie': 'Költségvetés bemutatása',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Kiindulópontok, tételek összehasonlítással, mozgástér, kockázatok és döntési pontok.',
+  'Besluitvormend overleg': 'Döntéshozó megbeszélés',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Napirend, magyarázat pontonként, döntéslista és feladatok felelőssel.',
+  'Ledenvergadering (ALV)': 'Közgyűlés',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Napirend, éves beszámoló, számvizsgáló bizottság, költségvetés és szavazások egyesület vagy társasház számára.',
+  'Ouderavond / informatieavond': 'Szülői értekezlet / tájékoztató est',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Éves program, megközelítés, gyakorlati megállapodások és hogyan segíthetnek a szülők.',
+  'Familiegesprek zorg en mantelzorg':
+      'Családi beszélgetés a gondozásról és az ápolásról',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Forgatókönyvek, kívánságok, feladatmegosztás és megállapodások egy nehéz családi beszélgetéshez.',
+  'Raads- / collegevoorstel': 'Előterjesztés a testületnek / a vezetésnek',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Előzmények, döntési pontok, érvek és fenntartások, pénzügyi fedezet és a folytatás.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Lakossági fórum / részvételi találkozó',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Mi eldöntött és mi nyitott, számok, reagálási lehetőségek és a folytatás.',
+  'Sprint review / demo': 'Sprint review / demó',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Sprintcél, leszállított munka, demó, metrikák és kitekintés.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Tűzoltósági eligazítás (bevetés és gyakorlat)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objektum, megközelíthetőség, veszélyek, kvadránsok, vízszerzés és feladatmegosztás.',
+  'Adviesaanvraag OR / medezeggenschap': 'Véleménykérés az üzemi tanácstól',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Tervezett döntés, indokok, személyi következmények és a véleményezési folyamat.',
+  'Stagepresentatie': 'Szakmai gyakorlat bemutatása',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Cég, feladat, megközelítés, eredmény, tanulási célok és reflexió.',
+  'Debriefing / after-action review': 'Debriefing / akció utáni elemzés',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Mi volt a terv, mi történt, miért — és milyen megállapodásokat kötünk.',
+  'Threat modeling-sessie': 'Fenyegetésmodellezési ülés',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Hatókör, adatáramlások, bizalmi határok, fenyegetések STRIDE-kategóriánként és intézkedések.',
+  'Casuïstiekbespreking sociaal domein':
+      'Esetmegbeszélés a szociális területen',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonimizált eset: életterületek, biztonság, jogi keretek és esetkoordináció.',
+  'Gesprek voorbereiden': 'Beszélgetés előkészítése',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Cél, a másik fél, felépítés, kérdések és megállapodások minden beszélgetéshez, amelyre jól fel akarsz készülni.',
+  'Cruciaal gesprek voorbereiden': 'Sorsdöntő beszélgetés előkészítése',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Nagy tét és erős érzelmek, a sorsdöntő beszélgetések módszere szerint.',
+  'Vluchtdebriefing': 'Repülés utáni kiértékelés',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Önértékelés, a fázisok lefolyása, TEM-visszatekintés és tanulságok egy repülés vagy óra után.',
+  'Passagiersbriefing (kleine luchtvaart)': 'Utaseligazítás (kisgépes repülés)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Övek, ajtók, vészhelyzeti eljárások és megállapodások a fedélzeten a gurulás előtt.',
   'Onlinevergaderingen': 'Online értekezletek',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Részvétel egy másik szolgáltató értekezletén, az Ön előadásával mint megosztott tartalommal. Alapértelmezés szerint kikapcsolva; kikapcsolt modullal az OciDeck egyetlen értekezlet-szolgáltatással sem lép kapcsolatba. Még nincs csatlakoztatott szolgáltató, így a részvétel még nem lehetséges — ez teremti meg az alapot.',

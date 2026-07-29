@@ -1774,6 +1774,66 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Businesscase / investeringsvoorstel': 'Business case / investiční návrh',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Důvod, možnosti s náklady a přínosy, rizika a požadované rozhodnutí.',
+  'Begroting / budgetpresentatie': 'Prezentace rozpočtu',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Východiska, položky s porovnáním, prostor pro volbu, rizika a rozhodovací body.',
+  'Besluitvormend overleg': 'Rozhodovací porada',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Program, vysvětlení k jednotlivým bodům, seznam rozhodnutí a úkoly s vlastníkem.',
+  'Ledenvergadering (ALV)': 'Členská schůze (valná hromada)',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Program, výroční zpráva, revizní komise, rozpočet a hlasování pro spolek nebo společenství vlastníků.',
+  'Ouderavond / informatieavond': 'Třídní schůzka / informační večer',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Roční program, přístup, praktické dohody a jak mohou rodiče pomoci.',
+  'Familiegesprek zorg en mantelzorg': 'Rodinný rozhovor o péči a pečujících',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scénáře, přání, rozdělení úkolů a dohody pro těžký rodinný rozhovor.',
+  'Raads- / collegevoorstel': 'Návrh pro zastupitelstvo / radu',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Důvod, rozhodovací body, argumenty i výhrady, finanční krytí a další postup.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Setkání s obyvateli / participační setkání',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Co je dané a co otevřené, čísla, možnosti reakce a další postup.',
+  'Sprint review / demo': 'Sprint review / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Cíl sprintu, dodaná práce, demo, metriky a výhled.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Hasičský briefing (zásah a cvičení)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objekt, přístup, nebezpečí, kvadranty, zásobování vodou a rozdělení úkolů.',
+  'Adviesaanvraag OR / medezeggenschap': 'Žádost o vyjádření rady zaměstnanců',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Zamýšlené rozhodnutí, důvody, personální dopady a proces projednání.',
+  'Stagepresentatie': 'Prezentace ze stáže',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Firma, zadání, přístup, výsledek, vzdělávací cíle a reflexe.',
+  'Debriefing / after-action review': 'Debriefing / rozbor po akci',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Co bylo v plánu, co se stalo, proč — a jaké dohody uzavíráme.',
+  'Threat modeling-sessie': 'Modelování hrozeb (threat modeling)',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Rozsah, datové toky, hranice důvěry, hrozby podle kategorií STRIDE a opatření.',
+  'Casuïstiekbespreking sociaal domein': 'Případová porada v sociální oblasti',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonymizovaný případ: životní oblasti, bezpečnost, právní rámec a koordinace.',
+  'Gesprek voorbereiden': 'Příprava rozhovoru',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Cíl, protějšek, struktura, otázky a dohody pro každý rozhovor, který chcete dobře připravit.',
+  'Cruciaal gesprek voorbereiden': 'Příprava klíčového rozhovoru',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Vysoké sázky a silné emoce, podle metody klíčových rozhovorů.',
+  'Vluchtdebriefing': 'Poletový rozbor',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Sebehodnocení, průběh po fázích, ohlédnutí TEM a poznatky po letu nebo lekci.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Briefing cestujících (všeobecné letectví)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Pásy, dveře, nouzové postupy a dohody na palubě před pojížděním.',
   'Onlinevergaderingen': 'Online schůzky',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Účast na schůzce jiného poskytovatele, s vaší prezentací jako tím, co sdílíte. Ve výchozím stavu vypnuto; s vypnutým modulem OciDeck nekontaktuje žádnou službu schůzek. Zatím není připojen žádný poskytovatel, takže se zatím připojit nelze — toto pokládá základ.',

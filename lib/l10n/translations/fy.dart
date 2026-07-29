@@ -731,6 +731,67 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Businesscase / investeringsvoorstel':
+      'Businesscase / ynvestearringsfoarstel',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Oanlieding, opsjes mei kosten en baten, risiko\'s en it frege beslút.',
+  'Begroting / budgetpresentatie': 'Begrutting / budzjetpresintaasje',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Utgongspunten, posten mei ferliking, karromte, risiko\'s en beslútpunten.',
+  'Besluitvormend overleg': 'Beslútfoarmjend oerlis',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Wurklist, taljochting per punt, beslutelist en aksjes mei eigner.',
+  'Ledenvergadering (ALV)': 'Ledegearkomste (ALG)',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Wurklist, jierferslach, kaskommisje, begrutting en stimmingen foar feriening of VvE.',
+  'Ouderavond / informatieavond': 'Alderjûn / ynformaasjejûn',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Jierprogramma, oanpak, praktyske ôfspraken en hoe\'t âlden helpe kinne.',
+  'Familiegesprek zorg en mantelzorg': 'Famyljepetear soarch en mantelsoarch',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Senario\'s, winsken, taakferdieling en ôfspraken foar in swier famyljepetear.',
+  'Raads- / collegevoorstel': 'Rieds- / kolleezjefoarstel',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Oanlieding, beslútpunten, arguminten én kanttekeningen, dekking en ferfolch.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Bewennersjûn / partisipaasjegearkomste',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Wat fêststiet en wat iepen leit, sifers, reaksjemooglikheden en ferfolch.',
+  'Sprint review / demo': 'Sprint review / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Sprintdoel, oplevere wurk, demo, metriken en foarútblik.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Brânwachtbriefing (ynset en oefening)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objekt, berikberens, gefaren, kwadranten, wetterwinning en taakferdieling.',
+  'Adviesaanvraag OR / medezeggenschap': 'Advysoanfraach OR / meisizzenskip',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Foarnommen beslút, beweechredenen, personele gefolgen en it advystrajekt.',
+  'Stagepresentatie': 'Staazjepresintaasje',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Bedriuw, opdracht, oanpak, resultaat, leardoelen en refleksje.',
+  'Debriefing / after-action review': 'Debriefing / after-action review',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Wat wie pland, wat barde der, wêrom — en hokker ôfspraken meitsje wy.',
+  'Threat modeling-sessie': 'Threat modeling-sesje',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Scope, datastreamen, fertrouwensgrinzen, driigingen per STRIDE-kategory en maatregels.',
+  'Casuïstiekbespreking sociaal domein': 'Kasuïstykbesprek sosjaal domein',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonymisearre kasus: libbensdomeinen, feiligens, wetlik ramt en rezjy.',
+  'Gesprek voorbereiden': 'Petear tariede',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Doel, de oar, opbou, fragen en ôfspraken foar elk petear dat je goed tariede wolle.',
+  'Cruciaal gesprek voorbereiden': 'Krúsjaal petear tariede',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Hege belangen en sterke emoasjes, neffens de oanpak foar krúsjale petearen.',
+  'Vluchtdebriefing': 'Flechtdebriefing',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Selsevaluaasje, ferrin per faze, TEM-weromblik en learpunten nei in flecht of les.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Passazjiersbriefing (lytse loftfeart)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Gordels, doarren, needprosedueres en ôfspraken oan board foar it taksjen.',
   'Onlinevergaderingen': 'Onlinegearkomsten',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Meidwaan oan in gearkomste fan in oare oanbieder, mei jo presintaasje as wat jo diele. Standert út; mei de module út nimt OciDeck mei gjin inkelde gearkomstetsjinst kontakt op. Der is noch gjin oanbieder oansletten, dus meidwaan kin noch net — dit leit de basis.',

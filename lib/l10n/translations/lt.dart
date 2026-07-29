@@ -1778,6 +1778,69 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Businesscase / investeringsvoorstel':
+      'Verslo pagrindimas / investicijų pasiūlymas',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Pagrindas, variantai su sąnaudomis ir nauda, rizikos ir prašomas sprendimas.',
+  'Begroting / budgetpresentatie': 'Biudžeto pristatymas',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Prielaidos, straipsniai su palyginimu, pasirinkimo erdvė, rizikos ir sprendimų punktai.',
+  'Besluitvormend overleg': 'Sprendimų priėmimo posėdis',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Darbotvarkė, paaiškinimas prie kiekvieno punkto, sprendimų sąrašas ir veiksmai su atsakingu asmeniu.',
+  'Ledenvergadering (ALV)': 'Visuotinis narių susirinkimas',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Darbotvarkė, metinė ataskaita, revizijos komisija, biudžetas ir balsavimai asociacijai ar bendrijai.',
+  'Ouderavond / informatieavond': 'Tėvų susirinkimas / informacinis vakaras',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Metų programa, požiūris, praktiniai susitarimai ir kaip tėvai gali padėti.',
+  'Familiegesprek zorg en mantelzorg':
+      'Šeimos pokalbis apie priežiūrą ir artimųjų slaugą',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scenarijai, norai, užduočių pasidalijimas ir susitarimai sunkiam šeimos pokalbiui.',
+  'Raads- / collegevoorstel': 'Pasiūlymas tarybai / vykdomajai institucijai',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Pagrindas, sprendimų punktai, argumentai ir išlygos, finansavimas ir tolesni žingsniai.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Gyventojų vakaras / dalyvavimo susitikimas',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Kas jau nuspręsta ir kas dar atvira, skaičiai, galimybės reaguoti ir tolesni žingsniai.',
+  'Sprint review / demo': 'Sprinto apžvalga / demonstracija',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Sprinto tikslas, atliktas darbas, demonstracija, metrikos ir žvilgsnis į priekį.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Ugniagesių instruktažas (operacija ir pratybos)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objektas, privažiavimas, pavojai, kvadrantai, vandens tiekimas ir užduočių pasidalijimas.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Prašymas darbo tarybai pateikti nuomonę',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Numatomas sprendimas, motyvai, pasekmės darbuotojams ir nuomonės teikimo eiga.',
+  'Stagepresentatie': 'Praktikos pristatymas',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Įmonė, užduotis, požiūris, rezultatas, mokymosi tikslai ir refleksija.',
+  'Debriefing / after-action review': 'Debrifingas / analizė po veiksmų',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Kas buvo suplanuota, kas įvyko, kodėl — ir kokius susitarimus priimame.',
+  'Threat modeling-sessie': 'Grėsmių modeliavimo sesija',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Apimtis, duomenų srautai, pasitikėjimo ribos, grėsmės pagal STRIDE kategorijas ir priemonės.',
+  'Casuïstiekbespreking sociaal domein': 'Atvejų aptarimas socialinėje srityje',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Nuasmenintas atvejis: gyvenimo sritys, saugumas, teisinis pagrindas ir koordinavimas.',
+  'Gesprek voorbereiden': 'Pasiruošti pokalbiui',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Tikslas, pašnekovas, struktūra, klausimai ir susitarimai kiekvienam pokalbiui, kuriam nori gerai pasiruošti.',
+  'Cruciaal gesprek voorbereiden': 'Pasiruošti lemtingam pokalbiui',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Didelės svarbos ir stiprios emocijos, pagal lemtingų pokalbių metodą.',
+  'Vluchtdebriefing': 'Skrydžio aptarimas',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Įsivertinimas, eiga pagal fazes, TEM apžvalga ir išmoktos pamokos po skrydžio ar pamokos.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Keleivių instruktažas (bendroji aviacija)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Saugos diržai, durys, avarinės procedūros ir susitarimai orlaivyje prieš riedėjimą.',
   'Onlinevergaderingen': 'Internetiniai susitikimai',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Dalyvavimas kito teikėjo susitikime, dalijantis savo pateiktimi. Numatytai išjungta; kai modulis išjungtas, OciDeck nesikreipia į jokią susitikimų paslaugą. Kol kas neprijungtas joks teikėjas, todėl prisijungti dar negalima — tai padeda pagrindą.',

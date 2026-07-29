@@ -1777,6 +1777,68 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Businesscase / investeringsvoorstel': 'Poslovni slučaj / prijedlog ulaganja',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Povod, opcije s troškovima i koristima, rizici i tražena odluka.',
+  'Begroting / budgetpresentatie': 'Prezentacija proračuna',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Polazišta, stavke s usporedbom, prostor za izbor, rizici i točke odlučivanja.',
+  'Besluitvormend overleg': 'Sastanak za donošenje odluka',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Dnevni red, obrazloženje po točki, popis odluka i akcije s vlasnikom.',
+  'Ledenvergadering (ALV)': 'Skupština članova',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Dnevni red, godišnje izvješće, nadzorni odbor, proračun i glasovanja za udrugu ili suvlasničku zajednicu.',
+  'Ouderavond / informatieavond': 'Roditeljski sastanak / informativna večer',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Godišnji program, pristup, praktični dogovori i kako roditelji mogu pomoći.',
+  'Familiegesprek zorg en mantelzorg': 'Obiteljski razgovor o njezi i skrbi',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scenariji, želje, podjela zadataka i dogovori za težak obiteljski razgovor.',
+  'Raads- / collegevoorstel': 'Prijedlog vijeću / izvršnom tijelu',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Povod, točke odlučivanja, argumenti i ograde, financijsko pokriće i daljnji koraci.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Susret sa stanovnicima / participativni sastanak',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Što je utvrđeno, a što otvoreno, brojke, mogućnosti reagiranja i daljnji koraci.',
+  'Sprint review / demo': 'Pregled sprinta / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Cilj sprinta, isporučeni rad, demo, metrike i pogled unaprijed.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Vatrogasni brifing (intervencija i vježba)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objekt, pristup, opasnosti, kvadranti, opskrba vodom i podjela zadataka.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Zahtjev za mišljenje radničkog vijeća',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Namjeravana odluka, razlozi, posljedice za osoblje i savjetodavni postupak.',
+  'Stagepresentatie': 'Prezentacija stručne prakse',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Tvrtka, zadatak, pristup, rezultat, ciljevi učenja i refleksija.',
+  'Debriefing / after-action review': 'Debriefing / analiza nakon djelovanja',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Što je bilo planirano, što se dogodilo, zašto — i koje dogovore donosimo.',
+  'Threat modeling-sessie': 'Sesija modeliranja prijetnji',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Opseg, tokovi podataka, granice povjerenja, prijetnje po STRIDE kategoriji i mjere.',
+  'Casuïstiekbespreking sociaal domein':
+      'Rasprava o slučajevima u socijalnom području',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonimizirani slučaj: životna područja, sigurnost, pravni okvir i koordinacija.',
+  'Gesprek voorbereiden': 'Priprema razgovora',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Cilj, druga osoba, struktura, pitanja i dogovori za svaki razgovor koji želiš dobro pripremiti.',
+  'Cruciaal gesprek voorbereiden': 'Priprema ključnog razgovora',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Visoki ulozi i snažne emocije, prema pristupu ključnih razgovora.',
+  'Vluchtdebriefing': 'Debriefing leta',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Samoprocjena, tijek po fazama, TEM osvrt i naučene lekcije nakon leta ili sata.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Brifing putnika (generalna avijacija)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Pojasevi, vrata, postupci u nuždi i dogovori u zrakoplovu prije taksiranja.',
   'Onlinevergaderingen': 'Mrežni sastanci',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Sudjelovanje na sastanku drugog pružatelja, s vašom prezentacijom kao onim što dijelite. Zadano isključeno; s isključenim modulom OciDeck ne kontaktira nijednu uslugu sastanaka. Nijedan pružatelj još nije povezan, pa sudjelovanje još nije moguće — ovo postavlja temelje.',

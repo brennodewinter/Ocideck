@@ -1788,6 +1788,70 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Businesscase / investeringsvoorstel':
+      'Business case / propunere de investiție',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Context, opțiuni cu costuri și beneficii, riscuri și decizia solicitată.',
+  'Begroting / budgetpresentatie': 'Prezentarea bugetului',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Premise, poziții cu comparație, marjă de alegere, riscuri și puncte de decizie.',
+  'Besluitvormend overleg': 'Ședință decizională',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Ordine de zi, explicații pentru fiecare punct, lista deciziilor și acțiuni cu responsabil.',
+  'Ledenvergadering (ALV)': 'Adunarea generală (AGA)',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Ordine de zi, raport anual, comisie de cenzori, buget și voturi pentru o asociație sau o asociație de proprietari.',
+  'Ouderavond / informatieavond': 'Ședință cu părinții / seară de informare',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Programul anual, abordarea, înțelegeri practice și cum pot ajuta părinții.',
+  'Familiegesprek zorg en mantelzorg':
+      'Discuție de familie despre îngrijire și îngrijitori',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scenarii, dorințe, împărțirea sarcinilor și înțelegeri pentru o discuție de familie dificilă.',
+  'Raads- / collegevoorstel': 'Propunere pentru consiliu / executiv',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Context, puncte de decizie, argumente și rezerve, acoperire financiară și pașii următori.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Întâlnire cu locuitorii / întâlnire participativă',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Ce este stabilit și ce este deschis, cifre, posibilități de reacție și pașii următori.',
+  'Sprint review / demo': 'Revizuirea sprintului / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Obiectivul sprintului, lucrul livrat, demo, metrici și perspectiva.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Briefing al pompierilor (intervenție și exercițiu)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Obiectivul, accesul, pericolele, cadranele, alimentarea cu apă și împărțirea sarcinilor.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Cerere de aviz către consiliul salariaților',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Decizia preconizată, motivele, consecințele pentru personal și traseul de avizare.',
+  'Stagepresentatie': 'Prezentarea stagiului',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Compania, sarcina, abordarea, rezultatul, obiectivele de învățare și reflecția.',
+  'Debriefing / after-action review': 'Debriefing / analiză post-acțiune',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Ce era planificat, ce s-a întâmplat, de ce — și ce înțelegeri stabilim.',
+  'Threat modeling-sessie': 'Sesiune de threat modeling',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Domeniul, fluxurile de date, granițele de încredere, amenințări pe categorii STRIDE și măsuri.',
+  'Casuïstiekbespreking sociaal domein':
+      'Analiza cazurilor din domeniul social',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Caz anonimizat: domenii de viață, siguranță, cadrul legal și coordonare.',
+  'Gesprek voorbereiden': 'Pregătirea unei conversații',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Obiectivul, celălalt, structura, întrebările și înțelegerile pentru orice conversație pe care vrei să o pregătești bine.',
+  'Cruciaal gesprek voorbereiden': 'Pregătirea unei conversații cruciale',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Mize mari și emoții puternice, conform abordării conversațiilor cruciale.',
+  'Vluchtdebriefing': 'Debriefing de zbor',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Autoevaluare, desfășurarea pe faze, retrospectivă TEM și puncte de învățare după un zbor sau o lecție.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Briefing pentru pasageri (aviație generală)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Centuri, uși, proceduri de urgență și înțelegeri la bord înainte de rulare.',
   'Onlinevergaderingen': 'Întâlniri online',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Participarea la o întâlnire a altui furnizor, cu prezentarea dumneavoastră drept ceea ce partajați. Dezactivat implicit; cu modulul dezactivat, OciDeck nu contactează niciun serviciu de întâlniri. Niciun furnizor nu este încă conectat, deci participarea nu este încă posibilă — aceasta pune temelia.',

@@ -1774,6 +1774,68 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Businesscase / investeringsvoorstel': 'Businesscase / Investitionsvorschlag',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Aalass, Optione mit Köste und Nutze, Risike und dr verlangti Entscheid.',
+  'Begroting / budgetpresentatie': 'Budget-Präsentation',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Aanahme, Poschte mit Vergliich, Spielruum, Risike und Entscheidigspünkt.',
+  'Besluitvormend overleg': 'Entscheidigs-Sitzig',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Traktande, Erlüterig pro Punkt, Beschlussliste und Aktione mit Verantwortliche.',
+  'Ledenvergadering (ALV)': 'Mitgliederversammlig (GV)',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Traktande, Jahresbricht, Rechnigsrevisore, Budget und Abstimmige für Verein oder Stockwerkeigetümer.',
+  'Ouderavond / informatieavond': 'Elternabig / Informationsabig',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Jahresprogramm, Vorgehe, praktischi Abmachige und wie d Eltere chönd hälfe.',
+  'Familiegesprek zorg en mantelzorg':
+      'Familiegspröch über Pfleg und Aaghörigepfleg',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Szenarie, Wünsch, Ufgabeverteilig und Abmachige für es schwers Familiegspröch.',
+  'Raads- / collegevoorstel': 'Rats- / Regierigsvorlag',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Aalass, Entscheidigspünkt, Argumänt samt Vorbehält, Deckig und wiiters Vorgehe.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Aawohner-Abig / Mitwirkigs-Aalass',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Was feststaht und was offe isch, Zahle, Reaktionsmöglichkeite und wiiters Vorgehe.',
+  'Sprint review / demo': 'Sprint-Review / Demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Sprintziel, glieferti Arbet, Demo, Metrike und Usblick.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Füürwehr-Briefing (Iisatz und Üebig)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objekt, Erreichbarkeit, Gfahre, Quadrante, Wasserversorgig und Ufgabeverteilig.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Aafrag um Stellignahm a d Personalvertretig',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Beabsichtigte Entscheid, Beweggründ, personelli Folge und dr Aahörigswäg.',
+  'Stagepresentatie': 'Praktikumspräsentation',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Firma, Uftrag, Vorgehe, Ergebnis, Lernziel und Reflexion.',
+  'Debriefing / after-action review': 'Debriefing / After-Action-Review',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Was plant gsi isch, was passiert isch, warum — und weli Abmachige mir träffed.',
+  'Threat modeling-sessie': 'Threat-Modeling-Sitzig',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Scope, Dateflüss, Vertrauensgränze, Bedrohige pro STRIDE-Kategorie und Massnahme.',
+  'Casuïstiekbespreking sociaal domein': 'Fallbesprächig im Sozialberiich',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonymisierte Fall: Läbensberiich, Sicherheit, rächtliche Rahme und Fallführig.',
+  'Gesprek voorbereiden': 'Gspröch vorbereite',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Ziel, s Gegenüber, Ufbau, Frage und Abmachige für jedes Gspröch, wo du guet vorbereite willsch.',
+  'Cruciaal gesprek voorbereiden': 'Entscheidends Gspröch vorbereite',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Hochi Iisätz und starki Emotione, nach em Aasatz für entscheidendi Gspröch.',
+  'Vluchtdebriefing': 'Flug-Debriefing',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Sälbsiischätzig, Verlauf pro Phase, TEM-Rückblick und Lernpünkt nach eme Flug oder ere Lektion.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Passagier-Briefing (allgemeini Luftfahrt)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Gurte, Türe, Notverfahre und Abmachige a Bord vor em Rolle.',
   'Onlinevergaderingen': 'Online-Bsprechige',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'A menere Bsprechig vomene andere Aabieter teilnäh, mit Ihrere Presäntation als das, wo Sie teile. Standardmässig us; isch s Modul us, nimmt OciDeck mit keim einzige Bsprechigsdienscht Kontakt uf. Es isch no kei Aabieter aagschlosse, teilnäh gaht also no nid — das leit d Grundlag.',

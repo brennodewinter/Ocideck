@@ -1806,6 +1806,69 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Businesscase / investeringsvoorstel': 'Cás gnó / togra infheistíochta',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Cúlra, roghanna le costais agus tairbhí, rioscaí agus an cinneadh atá á iarraidh.',
+  'Begroting / budgetpresentatie': 'Cur i láthair buiséid',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Buntuiscintí, míreanna le comparáid, spás rogha, rioscaí agus pointí cinnidh.',
+  'Besluitvormend overleg': 'Cruinniú cinnteoireachta',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Clár oibre, míniú de réir míre, liosta cinntí agus gníomhartha le húinéir.',
+  'Ledenvergadering (ALV)': 'Cruinniú ginearálta (CGB)',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Clár oibre, tuarascáil bhliantúil, coiste iniúchta, buiséad agus vótálacha do chumann nó do chomhlachas úinéirí tí.',
+  'Ouderavond / informatieavond': 'Oíche tuismitheoirí / oíche eolais',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Clár na bliana, cur chuige, socruithe praiticiúla agus conas is féidir le tuismitheoirí cabhrú.',
+  'Familiegesprek zorg en mantelzorg':
+      'Comhrá teaghlaigh faoi chúram agus cúramóireacht',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Cásanna, mianta, roinnt na gcúraimí agus comhaontuithe le haghaidh comhrá crua teaghlaigh.',
+  'Raads- / collegevoorstel': 'Togra don chomhairle / don fheidhmeannas',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Cúlra, pointí cinnidh, argóintí agus fainicí, maoiniú agus na chéad chéimeanna eile.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Oíche cónaitheoirí / cruinniú rannpháirtíochta',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Cad atá socraithe agus cad atá oscailte, figiúirí, bealaí le freagairt agus na chéad chéimeanna eile.',
+  'Sprint review / demo': 'Athbhreithniú sprinte / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Sprioc na sprinte, obair seachadta, demo, méadrachtaí agus réamhamharc.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Faisnéisiú na seirbhíse dóiteáin (freagairt agus cleachtadh)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'An foirgneamh, rochtain, guaiseacha, ceathrúna, soláthar uisce agus roinnt na gcúraimí.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Iarratas comhairle ar chomhairle na n-oibrithe',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Cinneadh beartaithe, cúiseanna, iarmhairtí don fhoireann agus próiseas na comhairle.',
+  'Stagepresentatie': 'Cur i láthair intéirneachta',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Comhlacht, tasc, cur chuige, toradh, spriocanna foghlama agus machnamh.',
+  'Debriefing / after-action review': 'Debriefing / athbhreithniú iarghnímh',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Cad a bhí beartaithe, cad a tharla, cén fáth — agus cé na comhaontuithe a dhéanaimid.',
+  'Threat modeling-sessie': 'Seisiún samhaltaithe bagairtí',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Scóip, sreafaí sonraí, teorainneacha muiníne, bagairtí de réir chatagóir STRIDE agus bearta.',
+  'Casuïstiekbespreking sociaal domein':
+      'Athbhreithniú cásanna sa réimse sóisialta',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Cás anaithnidithe: réimsí saoil, sábháilteacht, creat dlíthiúil agus comhordú.',
+  'Gesprek voorbereiden': 'Comhrá a ullmhú',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Sprioc, an duine eile, struchtúr, ceisteanna agus comhaontuithe d\'aon chomhrá is mian leat a ullmhú go maith.',
+  'Cruciaal gesprek voorbereiden': 'Comhrá criticiúil a ullmhú',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Mórán i ngeall agus mothúcháin láidre, de réir chur chuige na gcomhráite criticiúla.',
+  'Vluchtdebriefing': 'Debriefing eitilte',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Féinmheasúnú, mar a chuaigh gach céim, athbhreithniú TEM agus ceachtanna tar éis eitilte nó ceachta.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Faisnéisiú paisinéirí (eitlíocht ghinearálta)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Criosanna, doirse, nósanna imeachta éigeandála agus comhaontuithe ar bord roimh an tacsáil.',
   'Onlinevergaderingen': 'Cruinnithe ar líne',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Páirt a ghlacadh i gcruinniú de chuid soláthraí eile, agus do chur i láthair mar a roinneann tú. Múchta de réir réamhshocraithe; agus an modúl múchta, ní dhéanann OciDeck teagmháil le seirbhís chruinnithe ar bith. Níl aon soláthraí ceangailte fós, mar sin ní féidir páirt a ghlacadh go fóill — leagann sé seo an bhunchloch.',

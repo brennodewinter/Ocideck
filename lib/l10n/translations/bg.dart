@@ -1793,6 +1793,70 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Businesscase / investeringsvoorstel':
+      'Бизнес обосновка / инвестиционно предложение',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Повод, варианти с разходи и ползи, рискове и исканото решение.',
+  'Begroting / budgetpresentatie': 'Представяне на бюджет',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Изходни положения, пера със сравнение, поле за избор, рискове и точки за решение.',
+  'Besluitvormend overleg': 'Съвещание за вземане на решения',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Дневен ред, пояснение по всяка точка, списък с решения и действия с отговорник.',
+  'Ledenvergadering (ALV)': 'Общо събрание на членовете',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Дневен ред, годишен отчет, ревизионна комисия, бюджет и гласувания за сдружение или етажна собственост.',
+  'Ouderavond / informatieavond': 'Родителска среща / информационна вечер',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Годишна програма, подход, практически уговорки и как родителите могат да помогнат.',
+  'Familiegesprek zorg en mantelzorg':
+      'Семеен разговор за грижите и полагането на грижи',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Сценарии, желания, разпределение на задачите и уговорки за тежък семеен разговор.',
+  'Raads- / collegevoorstel': 'Предложение до съвета / изпълнителния орган',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Повод, точки за решение, аргументи и резерви, финансово покритие и следващи стъпки.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Среща с жители / среща за гражданско участие',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Кое е решено и кое е отворено, числа, възможности за отговор и следващи стъпки.',
+  'Sprint review / demo': 'Преглед на спринта / демо',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Цел на спринта, предадена работа, демо, метрики и поглед напред.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Инструктаж на пожарната (намеса и учение)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Обект, достъп, опасности, квадранти, водоснабдяване и разпределение на задачите.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Искане за становище от съвета на работниците',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Планирано решение, мотиви, последици за персонала и процедурата по становище.',
+  'Stagepresentatie': 'Презентация от стаж',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Фирма, задача, подход, резултат, учебни цели и рефлексия.',
+  'Debriefing / after-action review': 'Дебрифинг / анализ след действие',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Какво беше планирано, какво се случи, защо — и какви уговорки правим.',
+  'Threat modeling-sessie': 'Сесия за моделиране на заплахи',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Обхват, потоци от данни, граници на доверие, заплахи по STRIDE категория и мерки.',
+  'Casuïstiekbespreking sociaal domein':
+      'Обсъждане на случаи в социалната сфера',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Анонимизиран случай: житейски сфери, безопасност, правна рамка и координация.',
+  'Gesprek voorbereiden': 'Подготовка на разговор',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Цел, другият, структура, въпроси и уговорки за всеки разговор, който искате да подготвите добре.',
+  'Cruciaal gesprek voorbereiden': 'Подготовка на ключов разговор',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Високи залози и силни емоции, според подхода за ключови разговори.',
+  'Vluchtdebriefing': 'Дебрифинг след полет',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Самооценка, протичане по фази, TEM преглед и изводи след полет или урок.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Инструктаж на пътниците (обща авиация)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Колани, врати, аварийни процедури и уговорки на борда преди рулиране.',
   'Onlinevergaderingen': 'Онлайн срещи',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Участие в среща на друг доставчик, като споделяте своята презентация. Изключено по подразбиране; при изключен модул OciDeck не се свързва с нито една услуга за срещи. Все още няма свързан доставчик, така че участието още не е възможно — това полага основата.',

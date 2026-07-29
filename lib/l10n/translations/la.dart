@@ -1787,6 +1787,69 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Businesscase / investeringsvoorstel':
+      'Ratio negotii / propositum collocandae pecuniae',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Causa, optiones cum sumptibus et fructibus, pericula et decretum petitum.',
+  'Begroting / budgetpresentatie': 'Praesentatio rationis sumptuum',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Principia, capita cum comparatione, spatium eligendi, pericula et puncta decernendi.',
+  'Besluitvormend overleg': 'Conventus decernendi',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Ordo diei, explicatio per punctum, index decretorum et actiones cum domino.',
+  'Ledenvergadering (ALV)': 'Conventus sodalium (conventus generalis)',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Ordo diei, relatio annua, commissio arcae, ratio sumptuum et suffragia pro societate aut communione dominorum.',
+  'Ouderavond / informatieavond': 'Vespera parentum / vespera informationis',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Programma anni, ratio agendi, pacta practica et quomodo parentes adiuvare possint.',
+  'Familiegesprek zorg en mantelzorg':
+      'Colloquium familiare de cura et curatione propinquorum',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scaenaria, vota, partitio munerum et pacta pro colloquio familiari gravi.',
+  'Raads- / collegevoorstel': 'Propositio ad concilium / ad magistratum',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Causa, puncta decernendi, argumenta cum notis, ratio pecuniae et sequentia.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Vespera incolarum / conventus participationis',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Quae certa sunt et quae aperta, numeri, viae respondendi et sequentia.',
+  'Sprint review / demo': 'Recensio sprint / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Meta sprint, opus traditum, demo, metra et prospectus.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Instructio vigilum ignis (missio et exercitatio)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Aedificium, aditus, pericula, quadrantes, aquatio et partitio munerum.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Petitio consilii ad concilium operariorum',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Decretum propositum, causae, consecutiones pro operariis et via consilii.',
+  'Stagepresentatie': 'Praesentatio tirocinii',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Societas, mandatum, ratio agendi, effectus, metae discendi et reflexio.',
+  'Debriefing / after-action review': 'Debriefing / recensio post actionem',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Quid provisum erat, quid accidit, cur — et quae pacta faciamus.',
+  'Threat modeling-sessie': 'Sessio threat modeling',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Ambitus, flumina datorum, fines fiduciae, minae per categoriam STRIDE et remedia.',
+  'Casuïstiekbespreking sociaal domein': 'Disputatio casuum in campo sociali',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Casus anonymus: campi vitae, securitas, forma legalis et gubernatio.',
+  'Gesprek voorbereiden': 'Colloquium praeparare',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Meta, alter, structura, quaestiones et pacta pro omni colloquio quod bene praeparare vis.',
+  'Cruciaal gesprek voorbereiden': 'Colloquium cardinale praeparare',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Magna momenta et affectus vehementes, secundum rationem colloquiorum cardinalium.',
+  'Vluchtdebriefing': 'Relatio post volatum',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Aestimatio sui, cursus per gradus, retrospectio TEM et puncta discendi post volatum aut lectionem.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Instructio vectorum (aviatio generalis)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Cingula, fores, rationes periculi et pacta in aeronavi ante cursum solo.',
   'Onlinevergaderingen': 'Conventus interretiales',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Conventui alterius praebitoris interesse, praelectione tua ut eo quod communicas. Ex ordine exstinctum; modulo exstincto OciDeck nullum servitium conventuum contingit. Nullus praebitor adhuc coniunctus est, ergo interesse nondum licet — hoc fundamentum ponit.',

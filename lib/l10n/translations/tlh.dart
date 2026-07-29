@@ -1746,6 +1746,66 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Businesscase / investeringsvoorstel': 'malja\' meq / Huch lanmeH chup',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'meq, DuHmey, Huch natlh chep je, Qobmey, wuqghach poQlu\'bogh je.',
+  'Begroting / budgetpresentatie': 'Huch nab muchghach',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'mung meqmey, Huch \'ay\'mey rurmoHlu\'bogh, wIv DuHmey, Qobmey, wuqmeH Daqmey je.',
+  'Besluitvormend overleg': 'wuqmeH qep',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'qep nab, Hoch potlhvaD QIjghach, wuqghach tetlh, ta\'mey ghajwI\' je.',
+  'Ledenvergadering (ALV)': 'ghom Hoch qep',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'qep nab, DIS ja\'ghach, Huch chovwI\' ghom, Huch nab, wIvghachmey je — ghomvaD juH ghomvaD joq.',
+  'Ouderavond / informatieavond': 'vavpu\' SoSpu\' qep / De\' qep',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'DIS nab, mIw, lo\'laH qeSmey, chay\' boQlaH vavpu\' SoSpu\' je.',
+  'Familiegesprek zorg en mantelzorg':
+      'qorDu\' ja\'chuq: Qorghghach, QorghwI\'pu\' je',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'ghantoHmey, neHmey, Qu\' HevmoHghach, qeSmey je — qorDu\' ja\'chuq \'ughvaD.',
+  'Raads- / collegevoorstel': 'yej chup / DevwI\' ghom chup',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'meq, wuqmeH Daqmey, meqmey qImmoHghachmey je, Huch Hal, veb mIwmey je.',
+  'Bewonersavond / participatiebijeenkomst': 'ngan qep / jeSmeH qep',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'ngaDbogh Dochmey poSbogh Dochmey je, mI\'mey, jangmeH DuHmey, veb mIwmey je.',
+  'Sprint review / demo': 'qet noHghach / \'aghghach',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'qet ngoQ, rInpu\'bogh Qu\', \'aghghach, juvmeH mI\'mey, \'eq leghghach je.',
+  'Brandweerbriefing (inzet en oefening)': 'qul mevwI\' ja\'chuq (Qu\' qeq je)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'qach, ghoSmeH Hemey, Qobmey, loS \'ay\'mey, bIQ Hal, Qu\' HevmoHghach je.',
+  'Adviesaanvraag OR / medezeggenschap': 'vumwI\' yej qeS tlhobghach',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'wuqghach Hechlu\'bogh, meqmey, vumwI\'pu\'vaD qaSbogh wanI\'mey, qeS mIw je.',
+  'Stagepresentatie': 'qeq Qu\' muchghach',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'malja\' ghom, Qu\', mIw, ta\'ghach, ghojmeH ngoQmey, qelghach je.',
+  'Debriefing / after-action review':
+      'Qu\' tlha\' ja\'chuq / vangghach tlha\' noHghach',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'nablu\'pu\'bogh, qaSpu\'bogh, meq je — \'ej qeSmey chu\' DIwuq.',
+  'Threat modeling-sessie': 'buQghach qelmeH qep',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Qu\' \'ay\', De\' bIQtIqmey, voq veHmey, STRIDE \'ay\'meyDaq buQghachmey, ta\'mey je.',
+  'Casuïstiekbespreking sociaal domein': 'nugh Qu\' wanI\' qelghach',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'pegh wanI\': yIn \'ay\'mey, Hung, chut velghach, Devghach je.',
+  'Gesprek voorbereiden': 'ja\'chuq ghuSmoH',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'ngoQ, latlh ghot, chenmoHghach, ghelghachmey, qeSmey je — Hoch ja\'chuq DaghuSmoHmeH.',
+  'Cruciaal gesprek voorbereiden': 'Sengqu\'ghach ja\'chuq ghuSmoH',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'potlhmey tIn, tIq HoSmey je, qaStaHvIS Sengqu\'ghach ja\'chuqmey mIw.',
+  'Vluchtdebriefing': 'puv tlha\' ja\'chuq',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'noH\'eghghach, Hoch \'ay\' qaSghach, TEM tlha\' leghghach, ghojghachmey je — puv pagh ghojmeH poH tlha\'.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'puv jeSwI\'pu\' ja\'chuq (mach puvghach)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'quS baghmey, lojmItmey, Seng mIwmey, DujDaq qeSmey je — ghoSchoHpa\' Duj.',
   'Onlinevergaderingen': 'De\'wI\' qepmey',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'latlh qum qep DamuvlaH, \'ej qonwI\'lIj Da\'ang. motlh chu\'Ha\'lu\'; chu\'Ha\'lu\'chugh, pagh qep Qu\' rI\' OciDeck. wej qum rarlu\', vaj wej muvlaH vay\' — mung cher wanI\'vam.',

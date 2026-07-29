@@ -1762,6 +1762,67 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Businesscase / investeringsvoorstel':
+      'Äripõhjendus / investeerimisettepanek',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Ajend, valikud koos kulude ja tuludega, riskid ja taotletav otsus.',
+  'Begroting / budgetpresentatie': 'Eelarve esitlus',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Lähtekohad, võrdlusega kirjed, valikuruum, riskid ja otsustuskohad.',
+  'Besluitvormend overleg': 'Otsustuskoosolek',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Päevakord, selgitus iga punkti juures, otsuste loetelu ja tegevused koos vastutajaga.',
+  'Ledenvergadering (ALV)': 'Üldkoosolek',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Päevakord, aastaaruanne, revisjonikomisjon, eelarve ja hääletused ühingule või korteriühistule.',
+  'Ouderavond / informatieavond': 'Lastevanemate koosolek / infoõhtu',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Aastaprogramm, lähenemine, praktilised kokkulepped ja kuidas vanemad saavad aidata.',
+  'Familiegesprek zorg en mantelzorg':
+      'Perevestlus hooldusest ja omastehooldusest',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Stsenaariumid, soovid, ülesannete jaotus ja kokkulepped raske perevestluse jaoks.',
+  'Raads- / collegevoorstel': 'Ettepanek volikogule / valitsusele',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Ajend, otsustuskohad, argumendid ja mööndused, rahaline kate ja edasised sammud.',
+  'Bewonersavond / participatiebijeenkomst': 'Elanike õhtu / kaasamiskoosolek',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Mis on kindel ja mis lahtine, arvud, võimalused kaasa rääkida ja edasised sammud.',
+  'Sprint review / demo': 'Sprindi ülevaatus / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Sprindi eesmärk, valminud töö, demo, mõõdikud ja tulevikuvaade.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Päästeteenistuse briifing (väljasõit ja õppus)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objekt, ligipääs, ohud, kvadrandid, veevõtt ja ülesannete jaotus.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Arvamuse taotlus töötajate esindusele',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Kavandatav otsus, põhjendused, mõju töötajatele ja arvamuse andmise käik.',
+  'Stagepresentatie': 'Praktika esitlus',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Ettevõte, ülesanne, lähenemine, tulemus, õpieesmärgid ja refleksioon.',
+  'Debriefing / after-action review': 'Debriifing / tegevusjärgne analüüs',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Mis oli plaanitud, mis juhtus, miks — ja millised kokkulepped teeme.',
+  'Threat modeling-sessie': 'Ohumodelleerimise sessioon',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Ulatus, andmevood, usalduspiirid, ohud STRIDE-kategooriate kaupa ja meetmed.',
+  'Casuïstiekbespreking sociaal domein': 'Juhtumiarutelu sotsiaalvaldkonnas',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonüümitud juhtum: eluvaldkonnad, turvalisus, õiguslik raamistik ja koordineerimine.',
+  'Gesprek voorbereiden': 'Vestluse ettevalmistamine',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Eesmärk, teine osapool, ülesehitus, küsimused ja kokkulepped iga vestluse jaoks, mida tahad hästi ette valmistada.',
+  'Cruciaal gesprek voorbereiden': 'Otsustava vestluse ettevalmistamine',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Suured panused ja tugevad emotsioonid, otsustavate vestluste lähenemise järgi.',
+  'Vluchtdebriefing': 'Lennu debriifing',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Enesehinnang, käik faaside kaupa, TEM-tagasivaade ja õppetunnid pärast lendu või tundi.',
+  'Passagiersbriefing (kleine luchtvaart)': 'Reisijate briifing (üldlennundus)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Turvavööd, uksed, hädaolukorra protseduurid ja kokkulepped pardal enne ruleerimist.',
   'Onlinevergaderingen': 'Veebikoosolekud',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Osalemine teise teenusepakkuja koosolekul, jagades oma esitlust. Vaikimisi väljas; kui moodul on väljas, ei võta OciDeck ühendust ühegi koosolekuteenusega. Ühtegi teenusepakkujat pole veel ühendatud, seega osaleda veel ei saa — see paneb aluse.',
