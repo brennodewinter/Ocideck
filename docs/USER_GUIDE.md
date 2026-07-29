@@ -1837,21 +1837,25 @@ number of rows plus a visible notice that results were omitted. The OpenKAT
 source directory remains complete and unchanged; Markdown and exports contain
 only the report data that was actually built for their audience.
 
-For the management question, the deck leads with what changed and only then
-shows the detail:
+For the management question, a portfolio with more than one organisation first
+shows where attention is needed, then what changed and the detail. Its
+**Deze organisaties vragen aandacht** table is transparently ranked by critical
+findings, high findings and the systems affected by those findings. Organisations
+without either are omitted; when none qualify, the slide says so directly.
+In a Dutch report, severity, finding and control terms are Dutch too:
 
 | Slide | What it says |
 | --- | --- |
-| Wat dit rapport zegt | The conclusion in words ("42 meer medium findings"), and better/worse/mixed. Only from the second measurement on — a first report has no change to report. |
+| Deze organisaties vragen aandacht | Organisations ranked by critical findings, high findings and affected systems. It is absent for one organisation. |
+| Wat dit rapport zegt | The conclusion in words ("42 meer middelzware bevindingen"), and better/worse/mixed. It appears only when the measurements are demonstrably comparable; a first report has no change to report. |
 | Kerncijfers | A scorecard: each severity band and the number of affected systems, next to what it was, with the change coloured. |
-| Verloop over de tijd | A line per severity band across every measurement date. With a single measurement it stays a bar chart of the current distribution. |
+| Verloop over de tijd | A line per severity band across every measurement date. With a single measurement it stays a bar chart of the current distribution. When measurement coverage is not comparable, this slide itself says not to read the series as a trend; no separate warning slide is added. |
 | Wat er in beeld is | The inventory — systems, hostnames, IPv4/IPv6, finding types. Kept apart from the figures that colour, because more systems in view is not bad news. |
-| Organisaties vergeleken | A scorecard of up to five organisations, biggest movers first. |
-| Ernst per organisatie | A heatmap, one row per organisation. This is where the full picture lives once there are more than five. |
-| Meest voorkomende issues | The finding types, worst first, with how many are new since the previous measurement. |
+| Ernst per organisatie | A heatmap, one row per organisation, showing the full severity distribution behind the attention ranking. |
+| Meest voorkomende bevindingen | The finding types, worst first, with how many are new since the previous measurement. |
 | Wat OpenKAT aanraadt | The recommendation OpenKAT itself gives for the heaviest issues, under a heading each. |
-| Langst openstaande findings | Oldest first, with severity and days open — counted against the report date, not today's clock, so the deck still shows the same numbers in six months. |
-| Dekking per control | Percentage compliant per control, current next to previous. |
+| Langst openstaande bevindingen | Oldest first, with severity and days open — counted against the report date, not today's clock, so the deck still shows the same numbers in six months. |
+| Beveiligingscontroles | Per control: the compliant count, assessed total and resulting share. The slide is absent when the source has no usable denominator. |
 
 Then, per organisation: a section slide, its own scorecard, its own trend line
 (from its second measurement on), the systems with the most findings, and the
@@ -1893,6 +1897,10 @@ traces and typed warnings or errors. The desktop wizard is a separate frontend:
 it prepares a local folder, offers its four user questions, and calls that
 engine through a gateway; the engine itself still has no picker, provider or
 widget dependency.
+
+The desktop wizard keeps that route and its choices, while its dialog, cards and
+preview follow the selected application appearance profile: its surfaces and
+colour roles, the OciDeck accent language, and the same compact rounded corners.
 
 An explicit comparison date must precede the current date and must resolve to a
 genuinely older measurement. The configured table limit is a real construction
