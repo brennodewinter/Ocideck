@@ -35,7 +35,9 @@ void main() {
     if (!tempDir.existsSync()) return;
     try {
       tempDir.deleteSync(recursive: true);
-    } on FileSystemException {}
+    } on FileSystemException {
+      // Opruimen van een tijdelijke map is nooit een testoordeel waard.
+    }
   });
 
   void clearLayoutNoise(WidgetTester tester) {
