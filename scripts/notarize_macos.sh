@@ -18,8 +18,12 @@ set -Eeuo pipefail
 # Vereisten (eenmalig op te zetten, zie docs/BUILD.md):
 #   - Een 'Developer ID Application'-certificaat in de keychain
 #     (Xcode → Settings → Accounts → Manage Certificates).
-#   - Een notarytool-keychain-profiel:
-#       xcrun notarytool store-credentials ocideck-notary \
+#   - Een notarytool-keychain-profiel in de FILE-based login-keychain. Let op:
+#     zónder --keychain bewaart notarytool in de sessie-gebonden data-protection
+#     ("Local Items") keychain, die na een sessie-/runnerherstart onvindbaar
+#     wordt (zo faalde v0.1.3-rc1). Forceer daarom de login-keychain:
+#       xcrun notarytool store-credentials \
+#         --keychain "$HOME/Library/Keychains/login.keychain-db" ocideck-notary \
 #         --apple-id "<apple-id>" --team-id <TEAM_ID>
 #
 # Overschrijfbaar via de omgeving (voor CI of een andere ondertekenaar):
@@ -37,6 +41,12 @@ cd "$ROOT_DIR"
 
 IDENTITY="${OCIDECK_SIGN_IDENTITY:-Developer ID Application: Brenno de Winter (AMT83P4B3L)}"
 PROFILE="${OCIDECK_NOTARY_PROFILE:-ocideck-notary}"
+# Lees het notary-profiel expliciet uit de FILE-based default keychain
+# (login.keychain-db), niet uit de sessie-gebonden data-protection keychain waar
+# notarytool standaard in kijkt — die is na een sessiewissel onvindbaar, zoals
+# v0.1.3-rc1 aantoonde. `security default-keychain` geeft het pad los van HOME.
+KEYCHAIN="${OCIDECK_NOTARY_KEYCHAIN:-$(security default-keychain -d user 2>/dev/null | sed -E 's/^[[:space:]]*"//; s/"[[:space:]]*$//')}"
+[ -n "$KEYCHAIN" ] || KEYCHAIN="$HOME/Library/Keychains/login.keychain-db"
 ENTITLEMENTS="macos/Runner/Release.entitlements"
 APP="build/macos/Build/Products/Release/OciDeck.app"
 DIST_DIR="build/macos/dist"
@@ -114,12 +124,12 @@ section "Notariseren bij Apple (wachten op uitslag)"
 mkdir -p "$DIST_DIR"
 rm -f "$ZIP"
 ditto -c -k --keepParent "$APP" "$ZIP"
-OUT="$(xcrun notarytool submit "$ZIP" --keychain-profile "$PROFILE" --wait 2>&1)" || true
+OUT="$(xcrun notarytool submit "$ZIP" --keychain "$KEYCHAIN" --keychain-profile "$PROFILE" --wait 2>&1)" || true
 echo "$OUT"
 if ! grep -q "status: Accepted" <<<"$OUT"; then
   SUBID="$(awk -F': ' '/^  id:/{print $2; exit}' <<<"$OUT")"
   echo "Notarisatie niet geaccepteerd." >&2
-  [[ -n "$SUBID" ]] && xcrun notarytool log "$SUBID" --keychain-profile "$PROFILE" >&2 || true
+  [[ -n "$SUBID" ]] && xcrun notarytool log "$SUBID" --keychain "$KEYCHAIN" --keychain-profile "$PROFILE" >&2 || true
   exit 1
 fi
 

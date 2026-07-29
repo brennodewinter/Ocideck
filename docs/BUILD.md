@@ -319,14 +319,20 @@ staple → verify the way Gatekeeper does.
 
 2. **Notary credentials.** `notarytool` must authenticate to Apple. The simplest
    is an app-specific password (create one at <https://account.apple.com> →
-   *Sign-In and Security → App-Specific Passwords*), stored once in the keychain
-   under a profile name:
+   *Sign-In and Security → App-Specific Passwords*), stored once in the
+   **file-based login keychain** under a profile name:
 
    ```sh
-   xcrun notarytool store-credentials ocideck-notary \
+   xcrun notarytool store-credentials \
+     --keychain "$HOME/Library/Keychains/login.keychain-db" ocideck-notary \
      --apple-id "<apple-id-email>" --team-id <TEAMID>
    # paste the app-specific password when prompted
    ```
+
+   The `--keychain` flag is not optional: without it `notarytool` saves into the
+   session-bound data-protection ("Local Items") keychain, which disappears
+   after a session or runner restart. The script reads the profile back from the
+   default file keychain.
 
 **Then, per release:**
 
@@ -548,10 +554,14 @@ certificate never leaves the machine. Set it up once on the runner:
 1. **Developer ID certificate** — Xcode → *Settings → Accounts → Manage
    Certificates → + → Developer ID Application*. Confirm with
    `security find-identity -v -p codesigning`.
-2. **notarytool profile** `ocideck-notary`:
+2. **notarytool profile** `ocideck-notary`, stored in the **file-based login
+   keychain** — the `--keychain` flag is mandatory. Without it `notarytool` saves
+   into the session-bound data-protection keychain, which vanishes after a runner
+   restart; that is exactly what failed the first rehearsal (`v0.1.3-rc1`).
 
    ```sh
-   xcrun notarytool store-credentials ocideck-notary \
+   xcrun notarytool store-credentials \
+     --keychain "$HOME/Library/Keychains/login.keychain-db" ocideck-notary \
      --apple-id "<apple-id>" --team-id <TEAMID>
    ```
 
