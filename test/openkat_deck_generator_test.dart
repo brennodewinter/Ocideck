@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/openkat/openkat_models.dart';
+import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/scorecard_spec.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -518,6 +519,73 @@ void main() {
         eerste.slides.map((s) => s.id),
         reason: 'zelfde invoer, zelfde dia-ids — anders schuift een herimport',
       );
+    });
+
+    test(
+      'een verplaatste handmatige kopie blijft naast het origineel staan',
+      () {
+        final eerste = generator.generate([_orgMetVerloop('a')]);
+        final origineel = _view(eerste, 'portfolio.summary');
+        final kopie = Slide.duplicate(
+          origineel,
+        ).copyWith(title: 'Mijn handmatige kopie');
+        final zonderOrigineel = eerste.slides
+            .where((slide) => slide.id != origineel.id)
+            .toList();
+        final bestaand = eerste.copyWith(
+          slides: [kopie, ...zonderOrigineel, origineel],
+        );
+        final vers = generator.generate([_orgMetVerloop('a')]);
+
+        final bijgewerkt = generator.updateGenerated(bestaand, vers);
+
+        expect(
+          bijgewerkt.slides.where((slide) => slide.id == kopie.id).single.title,
+          'Mijn handmatige kopie',
+        );
+        expect(
+          bijgewerkt.slides.where((slide) => slide.id == origineel.id),
+          hasLength(1),
+          reason: 'alleen het deterministische origineel wordt vervangen',
+        );
+      },
+    );
+
+    test('de originele dia houdt haar privacykeuze bij vervanging', () {
+      final eerste = generator.generate([_orgMetVerloop('a')]);
+      final origineel = _view(eerste, 'portfolio.summary');
+      final bestaand = eerste.copyWith(
+        slides: [
+          for (final slide in eerste.slides)
+            slide.id == origineel.id
+                ? slide.copyWith(privacy: PrivacyDisposition.redact)
+                : slide,
+        ],
+      );
+
+      final bijgewerkt = generator.updateGenerated(
+        bestaand,
+        generator.generate([_orgMetVerloop('a')]),
+      );
+
+      expect(
+        _view(bijgewerkt, 'portfolio.summary').privacy,
+        PrivacyDisposition.redact,
+      );
+    });
+
+    test('titel en rapporttaal komen uit het verse scenariodeck', () {
+      final bestaand = generator
+          .generate([_orgMetVerloop('a')])
+          .copyWith(title: 'Oude titel', language: 'nl');
+      final vers = generator
+          .generate([_orgMetVerloop('a')])
+          .copyWith(title: 'Fresh title', language: 'en');
+
+      final bijgewerkt = generator.updateGenerated(bestaand, vers);
+
+      expect(bijgewerkt.title, 'Fresh title');
+      expect(bijgewerkt.language, 'en');
     });
   });
 }

@@ -14,8 +14,21 @@ class OpenKatDirectoryScanner {
   /// Bovengrens per rapportbestand. Zelfde orde als de sidecar-grenzen
   /// elders: ruim voor élke echte OpenKAT-export, krap voor onzin.
   static const int maxReportBytes = 16 * 1024 * 1024; // 16 MiB
+  static const int defaultMaxEntryCount = 10000;
+  static const int defaultMaxDirectoryDepth = 12;
+  static const int defaultMaxTotalReportBytes = 256 * 1024 * 1024; // 256 MiB
 
-  const OpenKatDirectoryScanner();
+  final int maxEntryCount;
+  final int maxDirectoryDepth;
+  final int maxTotalReportBytes;
+
+  const OpenKatDirectoryScanner({
+    this.maxEntryCount = defaultMaxEntryCount,
+    this.maxDirectoryDepth = defaultMaxDirectoryDepth,
+    this.maxTotalReportBytes = defaultMaxTotalReportBytes,
+  }) : assert(maxEntryCount > 0),
+       assert(maxDirectoryDepth >= 0),
+       assert(maxTotalReportBytes > 0);
 
   Future<({OpenKatManifest manifest, List<OpenKatSnapshotGroup> groups})> scan(
     String directory, {
@@ -44,18 +57,15 @@ class OpenKatDirectoryScanner {
     final byOrgDate = <String, List<OpenKatSnapshotCandidate>>{};
     final seenHashes = <String, OpenKatManifestEntry>{};
 
-    // followLinks uit: een symlink in andermans exportmap mag de scan niet
-    // buiten de gekozen map laten lezen (bewaker-notitie #767).
-    await for (final entity in dir.list(recursive: true, followLinks: false)) {
-      if (entity is! File) continue;
-      if (!p.extension(entity.path).toLowerCase().endsWith('.json')) continue;
-
+    final reportFiles = await _collectReportFiles(dir);
+    for (final reportFile in reportFiles) {
+      final entity = reportFile.file;
       final relative = p.relative(entity.path, from: directory);
       // Invoerpoort (P5-lijn): de map komt van buiten, en jsonDecode kopieert
       // alles nog eens. Een rapportage van tientallen megabytes is geen
       // OpenKAT-export maar iets anders — begrenzen vóór het lezen, en het
       // manifest zegt eerlijk wat er overgeslagen is.
-      final size = await entity.length();
+      final size = reportFile.size;
       if (size > OpenKatDirectoryScanner.maxReportBytes) {
         entries.add(
           OpenKatManifestEntry(
@@ -163,6 +173,66 @@ class OpenKatDirectoryScanner {
     );
   }
 
+  /// Inventariseert de gekozen boom vóór het eerste rapport wordt gelezen.
+  ///
+  /// De gezamenlijke poorten gelden daardoor even hard voor `raw-data` als
+  /// voor een oudere exportmap zonder die submap. Bij overschrijding wordt
+  /// niets gedeeltelijk verwerkt: de gebruiker krijgt één begrijpelijke fout.
+  Future<List<({File file, int size})>> _collectReportFiles(
+    Directory root,
+  ) async {
+    final pending = <({Directory directory, int depth})>[
+      (directory: root, depth: 0),
+    ];
+    final reports = <({File file, int size})>[];
+    var visitedEntries = 0;
+    var totalReportBytes = 0;
+
+    while (pending.isNotEmpty) {
+      final current = pending.removeLast();
+      // followLinks uit: een symlink in andermans exportmap mag de scan niet
+      // buiten de gekozen map laten lezen (bewaker-notitie #767).
+      await for (final entity in current.directory.list(followLinks: false)) {
+        visitedEntries++;
+        if (visitedEntries > maxEntryCount) {
+          throw OpenKatScanLimitException(
+            'De OpenKAT-map bevat meer dan $maxEntryCount bestanden of '
+            'mappen. Verklein de export en probeer opnieuw.',
+          );
+        }
+        if (entity is Directory) {
+          final childDepth = current.depth + 1;
+          if (childDepth > maxDirectoryDepth) {
+            throw OpenKatScanLimitException(
+              'De OpenKAT-map is dieper dan $maxDirectoryDepth mapniveaus. '
+              'Kies de exportmap zelf of maak de mapstructuur vlakker.',
+            );
+          }
+          pending.add((directory: entity, depth: childDepth));
+          continue;
+        }
+        if (entity is! File ||
+            !p.extension(entity.path).toLowerCase().endsWith('.json')) {
+          continue;
+        }
+        final size = await entity.length();
+        if (size <= maxReportBytes) {
+          totalReportBytes += size;
+          if (totalReportBytes > maxTotalReportBytes) {
+            throw OpenKatScanLimitException(
+              'De OpenKAT-rapporten zijn samen groter dan '
+              '$maxTotalReportBytes bytes. Verdeel de export over kleinere '
+              'mappen en probeer opnieuw.',
+            );
+          }
+        }
+        reports.add((file: entity, size: size));
+      }
+    }
+    reports.sort((a, b) => a.file.path.compareTo(b.file.path));
+    return reports;
+  }
+
   /// Eén groep per organisatie/datum; extra kandidaten worden als conflict in
   /// het manifest gemeld en de eerste wint — deterministisch, want de sleutels
   /// zijn gesorteerd.
@@ -203,6 +273,15 @@ class OpenKatDirectoryScanner {
     }
     return null;
   }
+}
+
+class OpenKatScanLimitException implements IOException {
+  final String message;
+
+  const OpenKatScanLimitException(this.message);
+
+  @override
+  String toString() => message;
 }
 
 class OpenKatSnapshotCandidate {

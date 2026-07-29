@@ -213,6 +213,38 @@ class OpenKatMonitoringChangesScenario implements OpenKatReportScenario {
   );
 }
 
+/// Feitelijke dekking en actualiteit, zonder managementscore of risicomodel.
+class OpenKatDataQualityScenario implements OpenKatReportScenario {
+  const OpenKatDataQualityScenario();
+
+  @override
+  OpenKatScenarioDescriptor get descriptor => const OpenKatScenarioDescriptor(
+    id: 'data-quality',
+    scopes: {
+      OpenKatReportScopeKind.portfolio,
+      OpenKatReportScopeKind.organization,
+    },
+    optionalCapabilities: {
+      OpenKatReportCapability.historicalSnapshots,
+      OpenKatReportCapability.sufficientDataFreshness,
+    },
+  );
+
+  @override
+  OpenKatReportPlan compose(
+    OpenKatReportFacts facts,
+    OpenKatReportRequest request,
+  ) => const OpenKatReportPlan(
+    scenarioId: 'data-quality',
+    blocks: [
+      OpenKatReportBlock(
+        id: 'availability',
+        kind: OpenKatReportBlockKind.measurementAvailability,
+      ),
+    ],
+  );
+}
+
 /// Centraal, injecteerbaar register. Duplicaten zijn een programmeerfout.
 class OpenKatReportScenarioRegistry {
   final Map<String, OpenKatReportScenario> _byId;
@@ -226,6 +258,7 @@ class OpenKatReportScenarioRegistry {
               OpenKatOrganizationScenario(),
               OpenKatCveExposureScenario(),
               OpenKatMonitoringChangesScenario(),
+              OpenKatDataQualityScenario(),
             ],
       );
 

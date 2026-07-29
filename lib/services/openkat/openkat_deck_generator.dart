@@ -38,25 +38,62 @@ class OpenKatDeckGenerator {
 
   Deck update(Deck existing, List<OpenKatOrganization> organizations) {
     final fresh = generate(organizations, title: existing.title);
+    return updateGenerated(existing, fresh);
+  }
+
+  /// Vervangt alleen gegenereerde OpenKAT-views door een vers scenariodeck.
+  ///
+  /// De motor maakt bewust een nieuw deck. Deze façade bewaart bij bijwerken
+  /// handmatige dia's en kopieën van het geopende deck. Een gegenereerde dia
+  /// heeft een deterministische id; een handmatige kopie krijgt juist een
+  /// nieuwe. Daardoor blijft het oorspronkelijke blok herkenbaar als een kopie
+  /// met dezelfde view-marker ervoor is gezet of elders heen is verplaatst.
+  Deck updateGenerated(Deck existing, Deck fresh) {
     final freshByView = <String, Slide>{
       for (final slide in fresh.slides) ?_viewIdOf(slide): slide,
     };
-    final replaced = <String>{};
+    final originalByView = <String, Slide>{};
+    for (final freshSlide in fresh.slides) {
+      final view = _viewIdOf(freshSlide);
+      if (view == null) continue;
+      final candidates = existing.slides.where(
+        (slide) => _viewIdOf(slide) == view,
+      );
+      final exact = candidates.where((slide) => slide.id == freshSlide.id);
+      if (exact.isNotEmpty) {
+        originalByView[view] = exact.first;
+      } else if (candidates.length == 1) {
+        // Oudere gegenereerde decks hadden nog geen deterministische ids. Eén
+        // kandidaat is dan ondubbelzinnig; bij meerdere laten we de kopieën
+        // ongemoeid en voegen we de verse view toe.
+        originalByView[view] = candidates.first;
+      }
+    }
     final slides = <Slide>[];
     for (final slide in existing.slides) {
       final view = _viewIdOf(slide);
-      if (view == null || replaced.contains(view)) {
+      if (view == null || !identical(originalByView[view], slide)) {
         slides.add(slide);
         continue;
       }
-      replaced.add(view);
       final replacement = freshByView.remove(view);
-      if (replacement != null) slides.add(replacement);
+      if (replacement != null) {
+        slides.add(
+          replacement.copyWith(
+            privacy: slide.privacy,
+            clearPrivacy: slide.privacy == null,
+          ),
+        );
+      }
     }
     slides.addAll(
       fresh.slides.where((slide) => freshByView.containsKey(_viewIdOf(slide))),
     );
-    return existing.copyWith(slides: slides);
+    return existing.copyWith(
+      title: fresh.title,
+      language: fresh.language,
+      slides: slides,
+    );
   }
 
   static final RegExp _viewMarker = RegExp(

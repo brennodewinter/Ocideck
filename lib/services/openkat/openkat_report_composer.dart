@@ -108,6 +108,8 @@ class OpenKatReportComposer {
         english ? 'OpenKAT CVE exposure' : 'OpenKAT CVE-blootstelling',
       'monitoring-changes' =>
         english ? 'OpenKAT monitoring changes' : 'OpenKAT-monitoringmutaties',
+      'data-quality' =>
+        english ? 'OpenKAT data quality' : 'OpenKAT-datakwaliteit',
       _ =>
         english ? 'OpenKAT management overview' : 'OpenKAT managementoverzicht',
     };

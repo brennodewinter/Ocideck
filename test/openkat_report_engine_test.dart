@@ -80,13 +80,14 @@ void main() {
   final engine = OpenKatReportEngine();
 
   group('scenarioregister en verzoekvalidatie', () {
-    test('de vijf publieke scenario-id’s zijn aangesloten', () {
+    test('alle zes publieke scenario-id’s zijn aangesloten', () {
       const ids = {
         'management-overview',
         'weekly-comparison',
         'organization-overview',
         'cve-exposure',
         'monitoring-changes',
+        'data-quality',
       };
       expect(
         engine.registry.descriptors.map((descriptor) => descriptor.id).toSet(),
@@ -121,6 +122,35 @@ void main() {
         );
         expect(result.scenarioId, id);
       }
+    });
+
+    test('data-quality rendert uitsluitend de feitelijke beschikbaarheid', () {
+      final result = engine.generate([
+        _organization('alpha', [
+          _snapshot(date: DateTime.utc(2026, 7, 20), source: 'alpha.json'),
+        ]),
+      ], _request('data-quality'));
+
+      expect(result.generated, isTrue);
+      expect(result.scenarioId, 'data-quality');
+      expect(
+        result.plan!.blocks,
+        hasLength(1),
+        reason: 'datakwaliteit mag geen managementscore of risicomodel lenen',
+      );
+      expect(
+        result.plan!.blocks.single.kind,
+        OpenKatReportBlockKind.measurementAvailability,
+      );
+      expect(
+        result.deck!.slides.any(
+          (slide) => slide.notes.contains(
+            'ocideck_openkat_view: report.data-quality.',
+          ),
+        ),
+        isTrue,
+        reason: 'een geregistreerd plan moet ook werkelijk renderbaar zijn',
+      );
     });
 
     test('een onbekend scenario levert geen half rapport op', () {
@@ -227,6 +257,42 @@ void main() {
         contains(OpenKatReportCapability.reliableMonitoringStatus),
       );
     });
+
+    test(
+      'losse capabilitybeoordeling gebruikt dezelfde vereisten als generate',
+      () {
+        final organizations = [
+          _organization('alpha', [
+            _snapshot(
+              date: DateTime.utc(2026, 7, 20),
+              source: 'alpha.json',
+              findings: [
+                _finding(id: 'f1', cveIds: const ['CVE-2026-1234']),
+              ],
+            ),
+          ]),
+        ];
+        final request = _request('cve-exposure', cveId: 'CVE-2026-1234');
+
+        final assessment = engine.assessScenarioCapabilities(
+          organizations,
+          request,
+        );
+        final result = engine.generate(organizations, request);
+
+        expect(assessment.registered, isTrue);
+        expect(
+          assessment.missingRequiredCapabilities,
+          result.missingCapabilities,
+        );
+        expect(
+          assessment
+              .assessments[OpenKatReportCapability.reliableCveReferences]
+              ?.isAvailable,
+          isFalse,
+        );
+      },
+    );
 
     test('expliciete canonieke bronkenmerken openen het CVE-scenario', () {
       const canonicalFeatures = {
