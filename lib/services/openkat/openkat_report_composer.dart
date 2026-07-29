@@ -173,7 +173,9 @@ class OpenKatReportComposer {
     tableRows: tableRows,
     customMarkdown: customMarkdown,
     viewLimit: viewLimit,
-    notes: notes,
+    notes: notes.isEmpty
+        ? openKatGeneratedOriginMarker
+        : '$notes\n$openKatGeneratedOriginMarker',
   );
 
   Slide _measurementAvailabilitySlide(OpenKatReportRequest request) {

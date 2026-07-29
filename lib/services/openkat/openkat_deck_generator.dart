@@ -64,38 +64,33 @@ class OpenKatDeckGenerator {
       final view = entry.key;
       final candidates = entry.value;
       final freshSlide = freshByView[view];
-      if (freshSlide == null) {
-        final deterministic = candidates
-            .where((slide) => slide.id.startsWith('ocikat-'))
-            .toList();
-        if (deterministic.length == 1) {
-          originalByView[view] = deterministic.single;
-        } else if (deterministic.isEmpty && candidates.length == 1) {
-          // Een oud deck zonder deterministische ids is nog ondubbelzinnig
-          // zolang er maar één dia met deze marker bestaat.
-          originalByView[view] = candidates.single;
-        } else {
-          throw StateError(
-            'OpenKAT-view "$view" kan niet veilig worden bijgewerkt: '
-            'het gegenereerde origineel is niet ondubbelzinnig.',
-          );
-        }
+      final markedOrigins = candidates.where(_isGeneratedOrigin).toList();
+      if (markedOrigins.length == 1) {
+        originalByView[view] = markedOrigins.single;
         continue;
       }
-      final exact = candidates.where((slide) => slide.id == freshSlide.id);
-      if (exact.isNotEmpty) {
-        originalByView[view] = exact.first;
-      } else if (candidates.length == 1) {
-        // Oudere gegenereerde decks hadden nog geen deterministische ids. Eén
-        // kandidaat is dan ondubbelzinnig. Bij meerdere stoppen we: kopieën
-        // laten staan kan oude publieksdata behouden.
-        originalByView[view] = candidates.first;
-      } else {
+      if (markedOrigins.length > 1) {
         throw StateError(
           'OpenKAT-view "$view" kan niet veilig worden bijgewerkt: '
           'het gegenereerde origineel is niet ondubbelzinnig.',
         );
       }
+      if (freshSlide != null) {
+        final exact = candidates
+            .where((slide) => slide.id == freshSlide.id)
+            .toList();
+        if (exact.length == 1) {
+          // Een nog geopende legacygeneratie heeft dezelfde deterministische
+          // id als haar verse tegenhanger. De vervanging krijgt de duurzame
+          // origin-marker en is vanaf dan ook na heropenen herkenbaar.
+          originalByView[view] = exact.single;
+          continue;
+        }
+      }
+      throw StateError(
+        'OpenKAT-view "$view" kan niet veilig worden bijgewerkt: '
+        'het gegenereerde origineel is niet ondubbelzinnig.',
+      );
     }
     final slides = <Slide>[];
     for (final slide in existing.slides) {
@@ -130,6 +125,9 @@ class OpenKatDeckGenerator {
 
   String? _viewIdOf(Slide slide) =>
       _viewMarker.firstMatch(slide.notes)?.group(1);
+
+  bool _isGeneratedOrigin(Slide slide) =>
+      slide.notes.contains(openKatGeneratedOriginMarker);
 
   DateTime _latestReportDate(List<OpenKatOrganization> organizations) {
     DateTime? latest;

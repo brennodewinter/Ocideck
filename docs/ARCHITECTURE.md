@@ -267,8 +267,12 @@ the Markdown boundary.
 
 `OpenKatDeckGenerator` remains the compatibility façade for directory import and
 re-import. It builds the legacy `management-overview` plan and preserves the
-existing `ocideck_openkat_view` marker semantics: generated views are refreshed,
-manual slides remain in place.
+existing `ocideck_openkat_view` marker semantics. A separate durable
+`ocideck_openkat_generated_origin` marker distinguishes the generated original
+from a manual duplicate across save/reopen; `Slide.duplicate` removes only that
+origin marker. Generated originals are refreshed or removed when they are no
+longer in the selected scenario, while manual slides and copies remain in place.
+Legacy decks whose origin cannot be proven stop fail-closed.
 
 On desktop, `OpenKatReportWizard` is the UI boundary above this core. Its
 platform action owns the directory picker; `OpenKatWizardController` owns the
