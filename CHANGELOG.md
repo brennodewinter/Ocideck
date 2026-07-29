@@ -308,6 +308,24 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De Windows-leg van de spiegel staat met tussenpozen minuten stil, en dat is
+  een aanvaarde afweging in plaats van een oplossing.** Na de vier reparaties
+  hierónder was één draai volledig groen en strandde de volgende op precies één
+  geval: `GitCliException(git overschreed de tijdslimiet van 120s)` — voor het
+  eerst mét plaats en stack, waar het eerder drie minuten stil bleef. Gemeten in
+  diezelfde draai: de dertig git-gevallen deden er samen 5 min 32 s over
+  (lokaal: 4 s), en binnen die reeks ging één enkele aanroep over de twee
+  minuten terwijl zijn directe buren ~1 s duurden. Er is dus geen sprake van
+  gelijkmatige traagheid maar van stilstand, en waar die vandaan komt is niet
+  vast te stellen zonder een Windows-machine (#880). De marges gaan daarom
+  ruimer: per test 3 → 8 min, en de git-aanroep in de testhulp 120 → 300 s. Dat
+  is bewust geen fix — het aanvaardt dat de machine traag is, en de prijs is dat
+  een échte vastloper er nu acht minuten over doet voordat hij opvalt. Twee
+  alternatieven zijn gewogen en niet gekozen: de virusscanner van de
+  wegwerp-runner buiten de werkmap zetten (de standaardremedie voor dit beeld,
+  maar een bewuste versoepeling van diepteverdediging op die machine) en de
+  gelijktijdigheid halveren (raakt geen beveiliging, maar verlengt een leg van
+  46 minuten en gokt dat contentie de oorzaak is).
 - **De faalmails van de GitHub-spiegel kwamen van vier oorzaken, en drie ervan
   waren tests die op de klok gokten.** Veertien draaien teruggelezen: de
   Windows-leg viel bijna elke keer om, maar telkens op een ánder testgeval —

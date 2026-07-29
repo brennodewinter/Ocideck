@@ -6,10 +6,19 @@
 // de tijd; elders blijft de strakke standaard staan, zodat een echte vastloper
 // lokaal snel opvalt.
 //
+// **Waarom acht minuten en niet drie.** Nagemeten op de spiegel-CI: deze dertig
+// gevallen deden er samen 5 min 32 s over, waar ze lokaal in 4 s klaar zijn —
+// en binnen die reeks ging één enkele git-aanroep over de 120 s terwijl zijn
+// directe buren ~1 s duurden. De runner staat dus met tussenpozen minuten stil.
+// Dat is niet met een testwijziging op te lossen; het vergt een Windows-machine
+// om uit te zoeken (#880). Tot dan is de marge ruim genoeg dat een stilstand
+// hem niet meer haalt. Bewust een aanvaarde afweging en geen oplossing: een
+// échte vastloper doet er hierdoor acht minuten over voordat hij opvalt.
+//
 // `@OnPlatform` op bibliotheekniveau wordt door `flutter test` niet verwerkt
 // (alleen `dart test` doet dat). De per-test timeout via _wtest hieronder is de
 // werkelijke remedie; deze annotatie staat als documentatie van de bedoeling.
-@OnPlatform(<String, dynamic>{'windows': Timeout(Duration(minutes: 3))})
+@OnPlatform(<String, dynamic>{'windows': Timeout(Duration(minutes: 8))})
 library;
 
 import 'dart:convert';
@@ -66,7 +75,8 @@ const _erfelijkeOmgeving = [
 /// `debugSpawn` is de gerepareerde vorm: die laat de pijp los als hij na twee
 /// seconden nog openstaat. De tijdslimiet hieronder is het tweede vangnet, voor
 /// een git die zélf niet meer terugkomt — ruim, want dit draait ook op een
-/// zwaarbelaste CI-machine, en een aflopende limiet moet iets betekenen.
+/// zwaarbelaste CI-machine waar een enkele aanroep gemeten over de twee minuten
+/// ging, en een aflopende limiet moet iets betekenen.
 Future<void> _rawGit(List<String> args, String cwd) async {
   final r = await debugSpawn(
     'git',
@@ -87,7 +97,7 @@ Future<void> _rawGit(List<String> args, String cwd) async {
       'GIT_CONFIG_NOSYSTEM': '1',
       'GIT_CONFIG_GLOBAL': Platform.isWindows ? 'NUL' : '/dev/null',
     },
-    timeout: const Duration(seconds: 120),
+    timeout: const Duration(seconds: 300),
   );
   if (!r.ok) {
     throw StateError('git ${args.join(' ')} → ${r.stderr}');
@@ -96,8 +106,13 @@ Future<void> _rawGit(List<String> args, String cwd) async {
 
 /// Windows-ruime tijdlimiet voor tests die echte git-subprocessen draaien.
 /// Op andere platforms null, zodat de strakke standaard (30s) geldt.
+///
+/// Ruimer dan de 300 s die [_rawGit] een enkele git-aanroep geeft: liep die af,
+/// dan hoort het testgeval die fout te kunnen mélden (mét plaats en stack) in
+/// plaats van er zelf overheen af te lopen. Zie de toelichting bovenaan dit
+/// bestand voor waarom de marges zo ruim zijn.
 final _windowsTimeout = Platform.isWindows
-    ? const Timeout(Duration(minutes: 3))
+    ? const Timeout(Duration(minutes: 8))
     : null;
 
 /// test() met de Windows-ruime tijdlimiet — `@OnPlatform` op bibliotheekniveau
