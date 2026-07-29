@@ -3252,6 +3252,30 @@ there is no separate update, no cache to clean up and no pack to import. Upgrade
 OciDeck and you have the newer reference data; that is the only path, and the
 card no longer offers buttons suggesting otherwise.
 
+### Onlinevergaderingen (online meetings)
+
+A sixth optional module on **Settings → Uitbreidingen (Extensions)**, off by
+default. It is the switch for joining an online meeting run by another provider
+from within OciDeck, with your presentation as what you share — one switch for
+calling as a whole, not one per vendor (design:
+[`docs/design/TEAMS_GUEST_CLIENT.md`](design/TEAMS_GUEST_CLIENT.md) and
+[`docs/design/COLLABORATION.md`](design/COLLABORATION.md) §7.1).
+
+**What the switch does today: nothing outward, and it says so.** The current
+release carries only the provider-neutral foundation — the vocabulary of a
+meeting (phases, roles, capabilities, typed failures) and the module gate. No
+meeting service is connected yet, so the card's own footer tells you that
+joining is not possible yet. Off means off in the strong sense: with the module
+off there is no shell action and no code path that could contact a meeting
+service at all, and even with it on, this version of OciDeck sends nothing to
+any meeting provider.
+
+**Switching it off never strands a call.** Once real providers arrive, the
+project's fixed module rule applies literally here: a meeting that is running
+keeps its window and its *Leave* control even if the module is switched off
+mid-call; only starting a new one disappears. The card explains this whenever
+it applies.
+
 ### Starting from the MIAUW report template
 
 Once the module is on, the new-presentation dialog gains a
