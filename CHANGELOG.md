@@ -14,13 +14,15 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ## [0.1.3] — 2026-07-29
 
-Signed macOS builds and a finding-slide layout fix. The macOS app is now
-**signed with a Developer ID and notarised by Apple**, so it opens on any Mac
-without the "damaged" warning the earlier downloads triggered. And a long
-security finding that used to shrink to about a third of the slide width now
-splits across full-width slides instead. The deck format is unchanged — every
-deck opens exactly as before, and the pagination is a pure render
-transformation. Windows and Linux stay unsigned for now.
+Signed macOS builds, a finding-slide layout fix, and a tidier OpenKAT import. The
+macOS app is now **signed with a Developer ID and notarised by Apple**, so it
+opens on any Mac without the "damaged" warning the earlier downloads triggered. A
+long security finding that used to shrink to about a third of the slide width now
+splits across full-width slides instead. And the optional OpenKAT import now
+organises its output into `raw-data/`, `processed-data/` and `presentations/`
+subfolders. The deck format is unchanged — every deck opens exactly as before,
+and the pagination is a pure render transformation. Windows and Linux stay
+unsigned for now.
 
 As with the previous releases, the short answer is here; the entry-by-entry
 rationale, in Dutch, is in the **Development log** below.
@@ -39,6 +41,12 @@ rationale, in Dutch, is in the **Development log** below.
   ticket stapled into the app so Gatekeeper accepts them offline. The release
   workflow signs on every tag; `make notarize-macos` does the same locally. See
   [BUILD.md](docs/BUILD.md#signing-and-notarising-the-macos-app).
+- The optional OpenKAT import now writes into three subfolders of the chosen
+  directory — `raw-data/` (the JSON exports), `processed-data/` (the full deck
+  with all data and view limits), and `presentations/` (trimmed to what fits on a
+  slide) — instead of a single flat output; sidecars move under
+  `processed-data/data/openkat/`. Both import routes (initial import and update)
+  create the folders and scan `raw-data/`.
 
 ## [0.1.2] — 2026-07-28
 
