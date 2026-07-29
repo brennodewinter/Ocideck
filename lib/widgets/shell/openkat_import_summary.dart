@@ -30,7 +30,7 @@ String openKatImportSummary(
   AppLocalizations l10n,
   OpenKatImportOutcome outcome,
 ) {
-  if (outcome.failed) return l10n.d('OpenKAT-import mislukt.');
+  if (outcome.failed) return l10n.d('OpenKAT-rapport kon niet worden gemaakt.');
   final counts =
       '(${outcome.loaded} ${l10n.d('rapportages')}, '
       '${outcome.skipped} ${l10n.d('overgeslagen')})';
@@ -39,7 +39,7 @@ String openKatImportSummary(
         '(${outcome.skipped} ${l10n.d('overgeslagen')})';
   }
   return outcome.updatedDeck
-      ? '${l10n.d('OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.')} '
+      ? '${l10n.d('Rapport bijgewerkt. Uw eigen dia’s zijn behouden.')} '
             '$counts'
-      : '${l10n.d('OpenKAT-rapportages geïmporteerd.')} $counts';
+      : '${l10n.d('Rapport gemaakt.')} $counts';
 }

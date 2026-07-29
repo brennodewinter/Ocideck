@@ -71,15 +71,14 @@ void presentDeck(
   // verversing hieronder blijft de editor na afloop de oude tekst tonen — en
   // schrijft de eerstvolgende toetsaanslag daarin de live bewerking stil terug.
   var liveEdited = false;
-  // Een blijvende [MaterialBanner] — zoals het Informatieveiligheid-aanbod dat
-  // bij het openen verschijnt — hoort niet mee de zaal in. De gedeelde
-  // ScaffoldMessenger verhuist zijn huidige balk anders naar het Scaffold van de
-  // zojuist geduwde presenter-route, en dan hangt hij over de presentatie. Haal
-  // hem meteen weg nu we gaan presenteren; hij komt niet vanzelf terug (de
-  // melding vuurt alleen bij het openen). Direct verwijderen en niet uitanimeren:
-  // we knallen naar volledig scherm, dus een balk die nog staat weg te faden is
-  // fout — en zijn wegval-frames zouden anders door de route-overgang heen botsen.
-  ScaffoldMessenger.of(context).removeCurrentMaterialBanner();
+  // Een blijvende [MaterialBanner] of [SnackBar] hoort niet mee de zaal in. De
+  // gedeelde ScaffoldMessenger verhuist die anders naar het Scaffold van de
+  // zojuist geduwde presenter-route. Bij een snackbar kan dat bovendien twee
+  // Hero's met dezelfde tag in één overgang opleveren. Verwijder beide meteen,
+  // zonder uitanimatie, vóór de presenter-route wordt gemaakt.
+  final messenger = ScaffoldMessenger.of(context);
+  messenger.removeCurrentMaterialBanner();
+  messenger.removeCurrentSnackBar();
   final presenting = FullscreenPresenter.present(
     context,
     // De projectiegrens. Presenteren is het ontvangende oppervlak bij uitstek:

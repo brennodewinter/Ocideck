@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/deck.dart';
 import 'openkat_import_summary.dart';
 
 /// Webromp: er is niets geprobeerd, dus `null` — zie de desktophelft.
@@ -17,4 +18,8 @@ Future<OpenKatImportOutcome?> importOpenKatReports(
 }) async => null;
 
 /// Webromp; het menu-item bestaat daar niet.
-String openKatLabel(AppLocalizations l10n) => '';
+String openKatLabel(AppLocalizations l10n, {bool updating = false}) => '';
+
+bool isOpenKatGeneratedDeck(Deck deck) => false;
+
+bool hasActiveOpenKatReport(WidgetRef ref) => false;
