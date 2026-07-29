@@ -217,41 +217,63 @@ An explicit previous as-of date must be strictly earlier than the current date,
 and a historical capability exists only when the selected previous snapshot is
 itself strictly older than the selected current snapshot.
 
-The registry currently supplies six plans: `management-overview`,
-`weekly-comparison`, `organization-overview`, `cve-exposure`,
-`monitoring-changes` and `data-quality`. A plan is a small ordered list of management-overview,
-measurement-availability, finding-lifecycle, CVE-exposure or
-monitoring-changes blocks. The composer turns those blocks into normal OciDeck
-slides; it does not introduce a new deck format or slide type. Each block kind
-owns intrinsic request and capability preconditions, which the engine validates
-after scenario composition. Optional lifecycle blocks are omitted when stable
-finding identity is unavailable; a custom scenario cannot weaken the
-preconditions of CVE or monitoring blocks.
+`OpenKatReportScenarioRegistry` supplies 22 declarative recipes, grouped by the
+wizard into four families. `management-overview`, `weekly-comparison`,
+`organization-overview`, `cve-exposure`, `monitoring-changes` and `data-quality`
+remain stable compatibility IDs. The complete catalog is:
 
-`tableRowLimit` is also the construction budget for lifecycle, CVE-exposure and
-monitoring-change tables. Those queries stop after enough rows to prove that the
-limit was exceeded, and the deck adds an explicit omission row instead of
-materialising every result. Other deck views retain their ordinary
-non-destructive `DisplayWindowSpec` projection. The engine validates the limit
-at runtime against a fixed maximum. A separate
+| Family | Scenario IDs |
+| --- | --- |
+| Organisations and management | `management-overview`, `organization-comparison`, `portfolio-trend`, `finding-type-prevalence`, `critical-high-concentration`, `control-coverage`, `recommendations-overview` |
+| One organisation and progress | `organization-overview`, `weekly-comparison`, `finding-lifecycle`, `finding-age`, `system-hotspots`, `system-changes`, `control-changes`, `asset-inventory`, `monitoring-coverage`, `monitoring-changes` |
+| CVEs | `cve-exposure`, `cve-landscape`, `cve-changes` |
+| Data quality and accountability | `data-quality`, `measurement-accountability` |
+
+A recipe is an ordered list of registered blocks, not a class full of custom
+branching. The block registry contains portfolio summary, organisation
+comparison, severity concentration, portfolio trend, finding-type prevalence,
+measurement availability/accountability, finding lifecycle/age, system
+hotspots/changes, CVE exposure/landscape/changes, control coverage/changes,
+recommendations, asset inventory, monitoring coverage/changes and organisation
+overview. The composer turns the validated plan into normal OciDeck slides; it
+does not introduce a deck format or a slide type. Every block owns intrinsic
+scope, capability, previous-date/CVE, omission, construction-budget and
+view-limit conditions. The engine validates them after composition, so an
+injected scenario cannot weaken a CVE, monitoring or historical-data gate.
+
+Each block has a construction budget, bounded further by `tableRowLimit`;
+queries stop before materialising unlimited result rows and report an omission
+where applicable. Tables retain the ordinary non-destructive `DisplayWindowSpec`
+projection (normally seven rows; selected availability/accountability and
+system/control/asset blocks use eight). The engine validates the policy limit at
+runtime against a fixed maximum. A separate
 `historicalFindingWorkLimit` bounds the lifecycle identity scan before its set
 is materialised; exceeding it yields a typed error rather than a silently
 incomplete lifecycle classification.
 
 Capability assessment is deliberately separate from values that happen to be
-present in a snapshot. The engine records typed assessments and stable
+present in a snapshot. It assesses multiple organisations, chronological
+history, adapter-declared CVE/monitoring/opened-at reliability, stable asset and
+finding identity, comparable measurement coverage, control denominators and an
+optional freshness policy. The engine records typed assessments and stable
 diagnostic codes, returns warnings for incomplete portfolios, stale snapshots
-and incomparable coverage, and returns no deck on an error. A scenario that
-requires a capability reports `missingCapability` and fails closed. In
-particular, `cve-exposure` requires an adapter-declared
-`reliableCveReferences`, and `monitoring-changes` requires historical
-snapshots, stable asset identity and adapter-declared
-`reliableMonitoringStatus`. A monitoring mutation additionally requires the
-same stable asset in both snapshots and two explicit, different statuses;
-absence and `null` remain unknown. Current import adapters do **not** declare reliable
-CVE references or monitoring status, so those two scenarios currently return an
-unavailable/missing-capability result rather than infer facts from incidental
-fields.
+and incomparable coverage, and returns no deck on an error. A required
+capability yields `missingCapability` and fails closed; optional blocks can only
+be omitted under their registry contract.
+
+Thus CVE exposure/landscape require adapter-declared
+`reliableCveReferences`; CVE changes also require chronological snapshots and
+comparable coverage. Monitoring coverage requires
+`reliableMonitoringStatus`; monitoring changes also require history and stable
+asset identity. Finding age requires reliable `openedAt`; lifecycle requires
+stable finding identity; control changes require denominators and comparable
+coverage. A monitoring mutation needs the same stable asset in both snapshots
+and two explicit, different statuses. Missing assets, `null` statuses, absent
+dates and unproven identities remain unknown. “No longer observed” is a
+historical observation, never an automatic resolution. Current import adapters
+do **not** declare reliable CVE references or monitoring status, so the affected
+recipes are visible to the wizard but unavailable rather than inferred from
+incidental fields.
 
 Management comparisons are also projection-gated. A previous value, direction,
 delta colour or improvement ranking is composed only when both selected
@@ -259,6 +281,18 @@ snapshots declare comparable measurement coverage with the same scope identity.
 Without that evidence, the deck retains neutral current standings and adds a
 visible warning; raw source text is neutralised for its Markdown, table or chart
 context before any slide is composed.
+
+`OpenKatReportFacts` selects the latest usable snapshot on or before an as-of
+date and derives the implicit previous selection strictly before current. It is
+the single source of rankings and deduplication: organisation ranking is
+critical descending, high descending, affected systems descending, then name;
+finding-type and CVE rankings start with affected organisations and use stable
+ties; CVE landscape data is deduplicated by CVE, organisation, system and
+finding. Every result carries measurement usages and source traces (organisation,
+role, report date, source filename, hash and schema) for diagnostics and
+accountability blocks. Ordinary scenario decks show the used measurement dates;
+source filenames, hashes and schemas appear only where the selected
+accountability block calls for them.
 
 Trend conclusions carry typed direction and metric deltas. Dutch and English
 wording is projected from those facts in the composer; no locale is parsed back

@@ -1889,14 +1889,35 @@ Import.
 #### Headless reporting API and wizard
 
 The same canonical OpenKAT facts can be given to a **headless** reporting API by
-another Dart caller. It has six named scenarios — management overview, weekly
-comparison, organisation overview, CVE exposure, monitoring changes and data
-quality — and takes explicit scope, as-of dates, language and table/age policy.
+another Dart caller. It takes a stable scenario ID, portfolio or organisation
+scope, as-of dates, optional CVE ID, Dutch or English, title and bounded policy.
 It returns a normal OciDeck deck together with the actual measurements, source
-traces and typed warnings or errors. The desktop wizard is a separate frontend:
-it prepares a local folder, offers its four user questions, and calls that
-engine through a gateway; the engine itself still has no picker, provider or
-widget dependency.
+traces and typed warnings or errors; it does not create a report file format.
+The desktop wizard is a separate frontend: it prepares a local folder, offers
+four understandable starting questions, then asks **Welk rapport beantwoordt
+uw vraag?** The engine itself has no picker, provider or widget dependency.
+
+The four wizard families and their recipes are:
+
+| Starting question | Scenario IDs |
+| --- | --- |
+| **Welke organisaties vragen aandacht?** | `management-overview`, `organization-comparison`, `portfolio-trend`, `finding-type-prevalence`, `critical-high-concentration`, `control-coverage`, `recommendations-overview` |
+| **Wat veranderde er bij één organisatie?** | `organization-overview`, `weekly-comparison`, `finding-lifecycle`, `finding-age`, `system-hotspots`, `system-changes`, `control-changes`, `asset-inventory`, `monitoring-coverage`, `monitoring-changes` |
+| **Wie is geraakt door een CVE?** | `cve-exposure`, `cve-landscape`, `cve-changes` |
+| **Zijn de metingen compleet en actueel?** | `data-quality`, `measurement-accountability` |
+
+The first few recipes in each family are recommended; the rest are behind
+**Meer rapportvragen**. A card is either available or gives its concrete
+evidence-based reason. It is not enabled merely because a field happens to
+look useful.
+
+Every recipe is a declarative ordered selection of reusable report blocks,
+such as organisation comparison, portfolio trend, finding prevalence, lifecycle,
+age, system hotspots, CVE landscape, controls, recommendations, asset inventory,
+monitoring and measurement accountability. The block registry, not the wizard,
+owns each block's scope, required capability, previous-date/CVE requirement,
+omission behaviour and limits. This is why a new recipe does not require a new
+chain of UI conditionals and why an injected recipe cannot weaken a safety gate.
 
 The desktop wizard keeps that route and its choices, while its dialog, cards and
 preview follow the selected application appearance profile: its surfaces and
@@ -1908,15 +1929,43 @@ budget for lifecycle, CVE and monitoring tables; if more rows exist, the final
 visible row says that results were omitted. A weekly lifecycle table is left out
 when the source cannot prove stable finding identities.
 
-The CVE-exposure and monitoring-changes scenarios do not guess from fields that
-happen to be present. They remain unavailable until an adapter explicitly proves
-reliable CVE references or reliable monitoring status (and, for monitoring,
-stable asset identity and history). The adapters used by today's folder import
-do not make either reliability claim, so an API caller receives a typed
-missing-capability result rather than a potentially misleading report.
-Even with such a future adapter, a monitoring change is only reported for the
-same stable asset with two explicit, different statuses. A missing asset or
-unknown status never becomes an added/removed claim.
+The CVE recipes do not guess CVE IDs from incidental text: they require
+adapter-declared `reliableCveReferences`. Monitoring coverage requires
+adapter-declared `reliableMonitoringStatus`; monitoring changes also require
+history and stable asset identity. CVE changes additionally require comparable
+coverage. Finding age requires reliable `openedAt`; lifecycle requires stable
+finding identity; control changes require reliable denominators and comparable
+coverage. The two current folder-import adapters declare neither reliable CVE
+references nor reliable monitoring status. Those questions therefore stay
+visible but unavailable and return a typed missing-capability result, rather
+than inventing an answer. A missing asset or an unknown status is never called
+added, removed or monitored.
+
+“Absent”, “unknown” and “no longer observed” are deliberately different. A
+missing selected measurement is reported as missing; a null status, date or
+unproven identity is unknown; and a historical comparison may say **niet meer
+waargenomen** only for proven comparable observations. It never means solved.
+Likewise, few findings do not establish safety, an asset in an export does not
+establish monitoring, and a ratio is only shown where its numerator and
+denominator are both reliable.
+
+Selection uses the latest usable snapshot on or before each requested date.
+Recipes that ask for an earlier comparison date require you to choose that
+date explicitly; the engine then verifies that it resolves to a genuinely
+older snapshot. The report always records the requested and actually used
+dates, age and organisation. Source filename, hash and schema are carried for
+diagnostics and are shown only by the source-accountability block. Rankings have deterministic
+tie-breakers: organisation comparison is critical, high, affected systems,
+then name; finding types and CVEs start with affected organisations; CVEs are
+deduplicated per CVE, organisation, system and finding. The composer applies a
+construction budget before building rows and a non-destructive display window
+to tables; it shows a clear omission notice where rows were not built.
+
+Generated slides carry a stable scenario/block/view marker. Updating replaces
+only proven, unchanged generated originals; it removes obsolete generated views
+when the recipe changes, but preserves manual slides and copies. A changed or
+ambiguous generated origin stops the update fail-closed and leaves the existing
+deck unchanged.
 
 ### Importing presentations (PowerPoint, Keynote, Impress)
 

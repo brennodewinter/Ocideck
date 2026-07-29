@@ -38,10 +38,10 @@ in Dutch, and it keeps growing on `main` between releases.
 ### Added
 
 - De desktoproute voor OpenKAT-rapportages is nu een scenario-wizard. Na een
-  alleen-lezen controle van de gekozen map kiest de gebruiker één van vier
-  vragen: welke organisaties aandacht vragen, wat bij één organisatie
-  veranderde, wie door een CVE is geraakt, of de metingen compleet en actueel
-  zijn. De wizard toont alleen de invoer die voor die vraag nodig is en een
+  alleen-lezen controle van de gekozen map kiest de gebruiker eerst één van vier
+  vraagfamilies en daarna een gericht rapportrecept. De catalogus bevat 22
+  vragen over organisaties en management, organisatievoortgang, CVE's en
+  datakwaliteit. De wizard toont alleen de invoer die voor die vraag nodig is en een
   voorvertoning op basis van de werkelijk gevonden rapportages. Een bestaand
   OpenKAT-rapport kan worden bijgewerkt of als nieuw rapport worden gemaakt;
   bij bijwerken blijven handmatige dia's en kopieën behouden. Een SHA-512 over
@@ -60,11 +60,13 @@ in Dutch, and it keeps growing on `main` between releases.
   stabiele waarschuwing-/foutcodes. De bestaande mapimport blijft een
   managementoverzicht maken en kan dat overzicht opnieuw inlezen zonder
   handmatige dia's te vervangen.
-- Vijf scenario's: `management-overview`, `weekly-comparison`,
-  `organization-overview`, `cve-exposure` en `monitoring-changes`. CVE- en
-  monitoringrapporten falen gesloten als de gebruikte adapter die respectievelijk
-  betrouwbare CVE-verwijzingen of monitoringstatus niet expliciet garandeert;
-  de huidige adapters doen die belofte niet.
+- 22 declaratieve scenario's, opgebouwd uit herbruikbare rapportblokken. Naast
+  de zes bestaande scenario-ID's zijn gerichte recepten toegevoegd voor
+  organisatievergelijking, portfolioverloop, findingtypen en -levenscyclus,
+  systemen, controls, aanbevelingen, assets, monitoring, CVE-landschap en
+  meetverantwoording. CVE-, monitoring- en vergelijkingsrapporten falen
+  gesloten wanneer de gebruikte adapter hun bronsemantiek niet expliciet
+  garandeert.
 - Rapportblokken bewaken hun eigen capabilityvoorwaarden; vergelijkingsperioden
   en werkelijk gekozen snapshots moeten chronologisch zijn. Lifecycleclaims
   vereisen stabiele findingidentiteit en monitoringmutaties twee expliciete

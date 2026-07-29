@@ -240,9 +240,16 @@ OpenKatReportResult generate(
 It optionally takes `previousAsOf`, `cveId`, `title`, a Dutch/English language,
 and `OpenKatReportPolicy(maximumSnapshotAge:, tableRowLimit:,
 historicalFindingWorkLimit:)`. An organisation scope rejects an empty code. The
-current scenarios are
-`management-overview`, `weekly-comparison`, `organization-overview`,
-`cve-exposure`, `monitoring-changes`, and `data-quality`.
+The 22 registered scenarios are:
+
+- `management-overview`, `organization-comparison`, `portfolio-trend`,
+  `finding-type-prevalence`, `critical-high-concentration`,
+  `control-coverage`, and `recommendations-overview`;
+- `organization-overview`, `weekly-comparison`, `finding-lifecycle`,
+  `finding-age`, `system-hotspots`, `system-changes`, `control-changes`,
+  `asset-inventory`, `monitoring-coverage`, and `monitoring-changes`;
+- `cve-exposure`, `cve-landscape`, and `cve-changes`;
+- `data-quality` and `measurement-accountability`.
 
 The result is machine-readable whether generation succeeds or fails: `deck`,
 `plan`, selected `measurements`, typed `diagnostics`, `missingCapabilities` and
@@ -255,12 +262,14 @@ diagnostic has a warning or error severity plus string arguments; callers
 should key behaviour on the code, not display text.
 
 Snapshot selection is canonical: the latest *usable* snapshot on or before an
-as-of date. If `previousAsOf` is omitted, the previous snapshot is selected
-strictly before the selected current one. Each used measurement and trace names
-the exact source file/hash/schema, so a generated report remains auditable. If
-`previousAsOf` is present it must be strictly earlier than `currentAsOf`, and the
-historical capability additionally requires two actually different,
-chronological snapshots.
+as-of date. A comparison recipe requires an explicit `previousAsOf`; omitting it
+does not silently add a previous measurement. The compatibility management
+report may assess the immediately preceding usable measurement to decide
+whether historical blocks and a comparability warning apply. Each used
+measurement and trace names the exact source file/hash/schema, so a generated
+report remains auditable. If `previousAsOf` is present it must be strictly
+earlier than `currentAsOf`, and the historical capability additionally requires
+two actually different, chronological snapshots.
 
 Comparative management language is evidence-gated separately. Only snapshots
 that both declare `comparableMeasurementCoverage` with the same non-empty
