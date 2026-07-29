@@ -21,11 +21,20 @@
 
 name: CI
 
+# Draait op een tag, niet op elke push of PR (#958). Dit was ooit `push:
+# branches: ["**"]` + `pull_request:` — de hele zevendelige pijplijn op élke
+# commit, ongeacht wat er wijzigde. Dat maakte deze spiegel een tweede
+# faalmail-bron náást de forge, voor werk dat de forge al deed: de échte
+# samenvoegpoort is `make check` op de machine van de committer, en de
+# Forgejo-PR-poort (`.forgejo/workflows/scans.yml`) draait `check-secrets`/
+# `sast` al op elke PR. Deze spiegel voegt daar per PR niets aan toe, alleen
+# lasten. Zelfde keuze als `.forgejo/workflows/ci.yml` (#790): CI is een
+# uitbrengpoort, geen samenvoegpoort. `workflow_dispatch` blijft, zodat een tak
+# alsnog handmatig door de volledige pijplijn kan zonder een tag te zetten.
 on:
   push:
-    branches: ["**"]
     tags: ["v*"]
-  pull_request:
+  workflow_dispatch:
 
 # Least privilege: the default GITHUB_TOKEN grants far more than these jobs
 # need. They only read the repo and upload build artifacts (which use the
@@ -43,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           # Don't leave the auth token in .git/config after checkout, where a
           # later step (or a compromised action) could reuse it.
@@ -231,7 +240,7 @@ jobs:
 
       - name: Upload coverage report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: coverage-lcov
           path: coverage/lcov.info
@@ -274,7 +283,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 
@@ -314,7 +323,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 
@@ -343,7 +352,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 
@@ -362,7 +371,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 

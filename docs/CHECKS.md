@@ -1358,7 +1358,20 @@ asset** — not a build artifact, which would need a token even on a public
 repository and would expire after ninety days. The forge picks that URL up with
 plain `curl`, so no GitHub credential is stored on the self-hosted runner.
 
-### `.github/workflows/ci.yml` — declared for every push and pull request
+### `.github/workflows/ci.yml` — declared on a version tag (`v*`)
+- **On a `v*` tag, or `workflow_dispatch`** (#958) — until 2026-07-29 this
+  declared `push: branches: ["**"]` plus `pull_request:`, so the full
+  seven-job pipeline below fired on every commit to every branch and every
+  pull request on the mirror, regardless of what changed. That made the
+  mirror a **second failure-mail source** for work the forge already did: the
+  real merge gate is `make check` on the committer's own machine, and
+  [`.forgejo/workflows/scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request)
+  already runs `check-secrets`/`sast` on every pull request there. Per PR, this
+  mirror added load without adding signal. Brought in line with
+  [`.forgejo/workflows/ci.yml`](#forgejoworkflowsci--the-release-gate-on-a-v-tag)
+  (#790): CI is a release gate, not a merge gate. `workflow_dispatch` stays, so
+  a branch can still go through the full pipeline by hand without cutting a
+  tag.
 - **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get
   --enforce-lockfile`, then `make format-check`, `make analyze`,
   `make check-conventions`, `make check-audience-boundary`,
