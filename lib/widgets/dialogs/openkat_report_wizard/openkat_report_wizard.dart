@@ -115,15 +115,17 @@ class _OpenKatReportWizardState extends State<OpenKatReportWizard> {
   Widget build(BuildContext context) {
     final ready = controller.scanStatus == OpenKatWizardScanStatus.ready;
     final l10n = context.l10n;
+    final colors = Theme.of(context).colorScheme;
     return PopScope(
       canPop: !controller.busy,
       child: Dialog(
         insetPadding: const EdgeInsets.all(20),
         clipBehavior: Clip.antiAlias,
-        backgroundColor: AppTheme.paper,
+        backgroundColor:
+            Theme.of(context).dialogTheme.backgroundColor ?? colors.surface,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18),
-          side: BorderSide(color: AppTheme.slate300),
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(color: colors.outlineVariant),
         ),
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1220, maxHeight: 860),
@@ -192,6 +194,9 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final palette = AppPalette.of(theme);
     final ready = controller.scanStatus == OpenKatWizardScanStatus.ready;
     final number = switch (controller.step) {
       OpenKatWizardStep.scenario => 1,
@@ -217,7 +222,7 @@ class _Header extends StatelessWidget {
                     ? l10n.d('OpenKAT-rapport bijwerken')
                     : l10n.d('OpenKAT-rapport maken'),
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: AppTheme.ink,
+                  color: colors.onSurface,
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -227,7 +232,7 @@ class _Header extends StatelessWidget {
                     ? '${l10n.d('Stap')} $number ${l10n.d('van')} 3'
                     : l10n.d('Rapportages voorbereiden'),
                 style: TextStyle(
-                  color: AppTheme.accentFg,
+                  color: palette.accentInk,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -243,8 +248,8 @@ class _Header extends StatelessWidget {
         vertical: enlarged ? 10 : 18,
       ),
       decoration: BoxDecoration(
-        color: AppTheme.paper,
-        border: Border(bottom: BorderSide(color: AppTheme.slate300)),
+        color: colors.surface,
+        border: Border(bottom: BorderSide(color: colors.outlineVariant)),
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -278,31 +283,34 @@ class _PrivacyPill extends StatelessWidget {
   const _PrivacyPill();
 
   @override
-  Widget build(BuildContext context) => Container(
-    constraints: const BoxConstraints(minHeight: 44),
-    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
-    decoration: BoxDecoration(
-      color: AppTheme.successBg,
-      borderRadius: BorderRadius.circular(999),
-      border: Border.all(color: AppTheme.successFg),
-    ),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(Icons.lock_outline, size: 18, color: AppTheme.successFg),
-        const SizedBox(width: 7),
-        Flexible(
-          child: Text(
-            context.l10n.d('Alles blijft op dit apparaat'),
-            style: TextStyle(
-              color: AppTheme.successFg,
-              fontWeight: FontWeight.w700,
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return Container(
+      constraints: const BoxConstraints(minHeight: 44),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
+      decoration: BoxDecoration(
+        color: colors.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: colors.outlineVariant),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.lock_outline, size: 18, color: colors.onSurfaceVariant),
+          const SizedBox(width: 7),
+          Flexible(
+            child: Text(
+              context.l10n.d('Alles blijft op dit apparaat'),
+              style: TextStyle(
+                color: colors.onSurfaceVariant,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
-        ),
-      ],
-    ),
-  );
+        ],
+      ),
+    );
+  }
 }
 
 class _WizardBody extends StatefulWidget {
@@ -334,6 +342,7 @@ class _WizardBodyState extends State<_WizardBody> {
   @override
   Widget build(BuildContext context) => LayoutBuilder(
     builder: (context, constraints) {
+      final colors = Theme.of(context).colorScheme;
       final wide = constraints.maxWidth >= 900;
       final stepContent = switch (widget.controller.step) {
         OpenKatWizardStep.scenario => OpenKatScenarioStep(
@@ -371,10 +380,13 @@ class _WizardBodyState extends State<_WizardBody> {
         return Row(
           children: [
             Expanded(flex: 58, child: choices),
-            VerticalDivider(width: 1, color: AppTheme.slate300),
+            VerticalDivider(width: 1, color: colors.outlineVariant),
             Expanded(
               flex: 42,
-              child: ColoredBox(color: AppTheme.slate50, child: preview),
+              child: ColoredBox(
+                color: colors.surfaceContainerLow,
+                child: preview,
+              ),
             ),
           ],
         );
@@ -383,7 +395,7 @@ class _WizardBodyState extends State<_WizardBody> {
         child: Column(
           children: [
             SizedBox(height: constraints.maxHeight * 0.72, child: choices),
-            Divider(height: 1, color: AppTheme.slate300),
+            Divider(height: 1, color: colors.outlineVariant),
             SizedBox(height: 520, child: preview),
           ],
         ),
@@ -406,6 +418,7 @@ class _Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final colors = Theme.of(context).colorScheme;
     final scan = controller.scan;
     final review = controller.step == OpenKatWizardStep.review;
     final enlarged = MediaQuery.textScalerOf(context).scale(1) > 1.4;
@@ -415,8 +428,8 @@ class _Footer extends StatelessWidget {
         vertical: enlarged ? 7 : 14,
       ),
       decoration: BoxDecoration(
-        color: AppTheme.paper,
-        border: Border(top: BorderSide(color: AppTheme.slate300)),
+        color: colors.surface,
+        border: Border(top: BorderSide(color: colors.outlineVariant)),
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -427,14 +440,14 @@ class _Footer extends StatelessWidget {
                     Icon(
                       Icons.fact_check_outlined,
                       size: 20,
-                      color: AppTheme.slate600,
+                      color: colors.onSurfaceVariant,
                     ),
                     const SizedBox(width: 8),
                     Flexible(
                       child: Text(
                         '${scan.preview.reportCount} ${l10n.d('bruikbaar')} · '
                         '${scan.preview.skippedCount} ${l10n.d('overgeslagen')}',
-                        style: TextStyle(color: AppTheme.slate600),
+                        style: TextStyle(color: colors.onSurfaceVariant),
                       ),
                     ),
                   ],

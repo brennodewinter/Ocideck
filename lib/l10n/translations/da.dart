@@ -1770,6 +1770,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Kritiek/hoog': 'Kritisk/høj',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Denne eksisterende rapport kan ikke opdateres sikkert. Opret rapporten som ny; det eksisterende deck forbliver uændret.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':

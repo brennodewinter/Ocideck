@@ -1775,6 +1775,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Kritiek/hoog': 'Kritikus/magas',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Ez a meglévő jelentés nem frissíthető biztonságosan. Hozza létre a jelentést újként; a meglévő deck változatlan marad.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':

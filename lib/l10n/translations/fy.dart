@@ -731,6 +731,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Kritiek/hoog': 'Kritysk / heech',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Dit besteande rapport kin net feilich bywurke wurde. Meitsje it rapport as nij; it besteande deck bliuwt ûnferoare.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':

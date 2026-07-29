@@ -1773,6 +1773,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Kritiek/hoog': 'Kritično/visoko',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Tega obstoječega poročila ni mogoče varno posodobiti. Ustvarite poročilo kot novo; obstoječi deck ostane nespremenjen.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':

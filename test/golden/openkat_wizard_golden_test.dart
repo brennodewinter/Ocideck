@@ -7,6 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/openkat/openkat_wizard_models.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/openkat/openkat_wizard_service.dart';
 import 'package:ocideck/state/openkat_wizard_controller.dart';
 import 'package:ocideck/theme/app_theme.dart';
@@ -31,10 +32,11 @@ Future<void> _match(
   addTearDown(tester.view.resetDevicePixelRatio);
   addTearDown(() => AppTheme.isDark = false);
 
-  final theme = (dark ? ThemeData.dark() : ThemeData.light()).copyWith(
-    textTheme: (dark ? ThemeData.dark() : ThemeData.light()).textTheme.apply(
-      fontFamily: 'Ahem',
-    ),
+  final baseTheme = AppTheme.fromProfile(
+    dark ? AppAppearanceProfile.dark : AppAppearanceProfile.basic,
+  );
+  final theme = baseTheme.copyWith(
+    textTheme: baseTheme.textTheme.apply(fontFamily: 'Ahem'),
   );
   await tester.pumpWidget(
     MaterialApp(

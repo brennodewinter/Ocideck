@@ -1806,6 +1806,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Kritiek/hoog': 'Criticiúil/ard',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Ní féidir an tuarascáil reatha seo a nuashonrú go sábháilte. Cruthaigh an tuarascáil mar cheann nua; fanann an deck reatha gan athrú.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':

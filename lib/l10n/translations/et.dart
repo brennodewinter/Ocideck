@@ -1762,6 +1762,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Kritiek/hoog': 'Kriitiline/kõrge',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Seda olemasolevat aruannet ei saa turvaliselt ajakohastada. Looge aruanne uuena; olemasolev deck jääb muutmata.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':

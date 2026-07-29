@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../state/openkat_wizard_controller.dart';
-import '../../../theme/app_theme.dart';
 import 'openkat_wizard_strings.dart';
 
 class OpenKatWizardPreview extends StatelessWidget {
@@ -21,6 +20,7 @@ class OpenKatWizardPreview extends StatelessWidget {
     final facts = controller.selectedPreviewFacts ?? scan.preview;
     final plan = report?.plan;
     final scenario = controller.selectedScenarioId;
+    final colors = Theme.of(context).colorScheme;
     return Semantics(
       container: true,
       label: l10n.d('Live voorvertoning van de rapportopbouw'),
@@ -30,18 +30,18 @@ class OpenKatWizardPreview extends StatelessWidget {
             top: 16,
             left: 18,
             right: 0,
-            child: _Paper(shade: AppTheme.slate100),
+            child: _Paper(shade: colors.surfaceContainer),
           ),
           Positioned.fill(
             top: 8,
             left: 9,
             right: 9,
-            child: _Paper(shade: AppTheme.slate50),
+            child: _Paper(shade: colors.surfaceContainerLow),
           ),
           Positioned.fill(
             bottom: 8,
             child: _Paper(
-              shade: AppTheme.paper,
+              shade: colors.surface,
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(24),
                 child: Column(
@@ -55,7 +55,7 @@ class OpenKatWizardPreview extends StatelessWidget {
                           : openKatScenarioTitle(l10n, scenario),
                       style: Theme.of(context).textTheme.headlineSmall
                           ?.copyWith(
-                            color: AppTheme.ink,
+                            color: colors.onSurface,
                             fontWeight: FontWeight.w800,
                           ),
                     ),
@@ -69,7 +69,7 @@ class OpenKatWizardPreview extends StatelessWidget {
                           value: '${facts.organizationCount}',
                         ),
                         _Metric(
-                          label: l10n.d('Critical/high'),
+                          label: l10n.d('Kritiek/hoog'),
                           value: '${facts.criticalHighCount}',
                         ),
                         _Metric(
@@ -82,7 +82,7 @@ class OpenKatWizardPreview extends StatelessWidget {
                     Text(
                       l10n.d('Feitelijke gegevens'),
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: AppTheme.ink,
+                        color: colors.onSurface,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -101,7 +101,7 @@ class OpenKatWizardPreview extends StatelessWidget {
                     Text(
                       l10n.d('Dit rapport bevat'),
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: AppTheme.ink,
+                        color: colors.onSurface,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -111,7 +111,7 @@ class OpenKatWizardPreview extends StatelessWidget {
                         l10n.d(
                           'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.',
                         ),
-                        style: TextStyle(color: AppTheme.slate600),
+                        style: TextStyle(color: colors.onSurfaceVariant),
                       )
                     else
                       for (final block in plan.blocks)
@@ -122,14 +122,16 @@ class OpenKatWizardPreview extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.check_circle,
-                                color: AppTheme.successFg,
+                                color: colors.primary,
                                 size: 18,
                               ),
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
                                   openKatBlockTitle(l10n, block.kind),
-                                  style: TextStyle(color: AppTheme.slate700),
+                                  style: TextStyle(
+                                    color: colors.onSurfaceVariant,
+                                  ),
                                 ),
                               ),
                             ],
@@ -140,7 +142,7 @@ class OpenKatWizardPreview extends StatelessWidget {
                       '${facts.organizationCount} ${l10n.d('organisaties')} · '
                       '${facts.reportCount} ${l10n.d('rapportages')}',
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: AppTheme.slate600,
+                        color: colors.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -164,15 +166,8 @@ class _Paper extends StatelessWidget {
   Widget build(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(
       color: shade,
-      borderRadius: BorderRadius.circular(12),
-      border: Border.all(color: AppTheme.slate300),
-      boxShadow: [
-        BoxShadow(
-          color: AppTheme.slate800.withValues(alpha: 0.1),
-          blurRadius: 18,
-          offset: const Offset(0, 8),
-        ),
-      ],
+      borderRadius: BorderRadius.circular(8),
+      border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
     ),
     child: child,
   );
@@ -185,34 +180,37 @@ class _Metric extends StatelessWidget {
   const _Metric({required this.label, required this.value});
 
   @override
-  Widget build(BuildContext context) => Container(
-    constraints: const BoxConstraints(minWidth: 96),
-    padding: const EdgeInsets.all(12),
-    decoration: BoxDecoration(
-      color: AppTheme.slate50,
-      borderRadius: BorderRadius.circular(9),
-      border: Border.all(color: AppTheme.slate300),
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: Theme.of(
-            context,
-          ).textTheme.labelSmall?.copyWith(color: AppTheme.slate600),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          value,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color: AppTheme.ink,
-            fontWeight: FontWeight.w800,
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return Container(
+      constraints: const BoxConstraints(minWidth: 96),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: colors.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: colors.outlineVariant),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: Theme.of(
+              context,
+            ).textTheme.labelSmall?.copyWith(color: colors.onSurfaceVariant),
           ),
-        ),
-      ],
-    ),
-  );
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              color: colors.onSurface,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _FindingBar extends StatelessWidget {
@@ -227,61 +225,71 @@ class _FindingBar extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(bottom: 7),
-    child: Row(
-      children: [
-        SizedBox(
-          width: 96,
-          child: Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
-        ),
-        const SizedBox(width: 8),
-        Expanded(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(4),
-            child: LinearProgressIndicator(
-              minHeight: 9,
-              value: value / maximum,
-              backgroundColor: AppTheme.slate200,
-              color: AppTheme.tealFg,
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 7),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 96,
+            child: Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
-        ),
-        const SizedBox(width: 8),
-        Text('$value', style: Theme.of(context).textTheme.labelSmall),
-      ],
-    ),
-  );
+          const SizedBox(width: 8),
+          Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: LinearProgressIndicator(
+                minHeight: 9,
+                value: value / maximum,
+                backgroundColor: colors.surfaceContainerHighest,
+                color: colors.primary,
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Text('$value', style: Theme.of(context).textTheme.labelSmall),
+        ],
+      ),
+    );
+  }
 }
 
 class _PreviewSkeleton extends StatelessWidget {
   const _PreviewSkeleton();
 
   @override
-  Widget build(BuildContext context) => _Paper(
-    shade: AppTheme.paper,
-    child: Padding(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(width: 210, height: 24, color: AppTheme.slate200),
-          const SizedBox(height: 24),
-          for (var index = 0; index < 4; index++) ...[
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return _Paper(
+      shade: colors.surface,
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             Container(
-              height: 36,
-              width: double.infinity,
-              color: AppTheme.slate100,
+              width: 210,
+              height: 24,
+              color: colors.surfaceContainerHighest,
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 24),
+            for (var index = 0; index < 4; index++) ...[
+              Container(
+                height: 36,
+                width: double.infinity,
+                color: colors.surfaceContainerLow,
+              ),
+              const SizedBox(height: 12),
+            ],
           ],
-        ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

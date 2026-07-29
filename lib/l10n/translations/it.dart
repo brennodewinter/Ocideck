@@ -726,6 +726,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Kritiek/hoog': 'Critico/alto',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Questo rapporto esistente non può essere aggiornato in sicurezza. Crea il rapporto come nuovo; il deck esistente rimane invariato.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':

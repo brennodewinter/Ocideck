@@ -730,6 +730,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Kritiek/hoog': 'Krítiko/haltu',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'E informe existente aki no por wordo aktualisá di un manera sigur. Krea e informe komo nobo; e deck existente keda sin cambio.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
