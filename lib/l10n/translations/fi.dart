@@ -1771,6 +1771,179 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Laaja mutta asiallinen johtamisen yleiskatsaus jäljitettävillä mittaushetkillä.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Sijoitukset ilman kokonaispisteitä ja puuttuvat mitat näkyvät erikseen.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Näyttää vakavuuslaskelmat, tekijät ja siirretyt mittaukset hetken mukaan.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Järjestää hakutyypit vaikuttavien organisaatioiden, järjestelmien ja havaintojen mukaan.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Näyttää kriittiset/korkeat luvut ilman suunniteltua punnitusta.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Näyttää osoittajan, nimittäjän ja vain luotettavat prosenttiosuudet.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Ryhmittelee kirjaimellisia suosituksia OpenKATista ilman omaa prioriteettiaan.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Erottaa uuden, uuden ja ei enää havaittu.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Käyttää vain luotettavia ensimmäisiä havainnointipäiviä.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Luokittelee järjestelmät erillisillä vakavuuslaskurilla.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Näyttää yksittäiset delta-arvot ilman painotettuja pisteitä.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Vertaa osoittajaa ja nimittäjää todistettavasti vertailukelpoisella kattavuudella.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Varastoi lähdetestatut järjestelmät, isäntänimet ja IP-osoitteet.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Näyttää vain nimenomaisesti todistetut seurantamutaatiot.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Näyttää organisaatiot ja järjestelmät yhden luotettavan CVE-linkin ympärillä.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Luokittelee CVE:t nimenomaisella duplikoinnin poistamisella.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Erottaa uudet, uudet ja enää havaitsemattomat CVE:t.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Kirjaa avainpäivämäärät, lähdetiedostot, sovittimet ja lähdetiivisteet.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Vertaa organisaatioita ja tunnista portfolion kiinnostavia kohteita.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Tarkastele yhden organisaation nykyistä tilaa tai osoitettavia muutoksia.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Tutki valituissa mittauksissa luotettavia CVE-linkkejä.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Kirjaa ylös mitä mittauksia ja lähdetiedostoja raportti todella käyttää.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Mikä on valittujen organisaatioiden johdon näkemys?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Missä on eniten ja vähiten havaintoja?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Miten portfolio kehittyy ajan myötä?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Mitä ongelmia esiintyy useimmissa organisaatioissa?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Mihin vakavimmat löydökset keskittyvät?',
+  'Welke controls lopen achter?': 'Mitkä kontrollit ovat jäljessä?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Mitä toimenpiteitä OpenKAT suosittelee useimmin?',
+  'Hoe staat deze organisatie er nu voor?':
+      'Mikä on tämän organisaation nykyinen tila?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Mikä on muuttunut edellisestä mittauksesta?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Mitkä löydökset ovat uusia tai joita ei enää havaita?',
+  'Welke findings staan het langst open?':
+      'Mitkä löydöt ovat olleet auki pisimpään?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'Missä järjestelmissä havaintoja on eniten?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Mitkä järjestelmät ovat parantuneet tai huonontuneet?',
+  'Welke controls verbeterden of verslechterden?':
+      'Mitkä kontrollit paranivat tai heikkenivät?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Mitkä järjestelmät sisältyvät mittauksiin?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Mitkä omaisuuserät ovat osoitettavissa seurannassa?',
+  'Welke monitoringstatussen veranderden?': 'Mitkä valvontatilat muuttuivat?',
+  'Wie is geraakt door deze CVE?': 'Keneen tämä CVE vaikuttaa?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Mitkä CVE:t vaikuttavat useimpiin organisaatioihin?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Mitkä CVE:t ovat uusia tai joita ei enää havaita?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Mitkä mittaustiedot puuttuvat tai ovat vanhentuneita?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Mihin tietoihin tämä raportti perustuu?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'Laaja mutta asiallinen johtamisen yleiskatsaus jäljitettävillä mittaushetkillä.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Sijoitukset ilman kokonaispisteitä ja puuttuvat mitat näkyvät erikseen.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Näyttää vakavuuslaskelmat, tekijät ja siirretyt mittaukset hetken mukaan.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Järjestää hakutyypit vaikuttavien organisaatioiden, järjestelmien ja havaintojen mukaan.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Näyttää kriittiset/korkeat luvut ilman suunniteltua punnitusta.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Näyttää osoittajan, nimittäjän ja vain luotettavat prosenttiosuudet.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Ryhmittelee kirjaimellisia suosituksia OpenKATista ilman omaa prioriteettiaan.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Kohdennettu nykyinen kuva yhdestä organisaatiosta ja sen mittauspäivämäärä.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Vertaa kahta valittua mittaushetkeä yhden organisaation sisällä.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Erottaa uuden, uuden ja ei enää havaittu.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Käyttää vain luotettavia ensimmäisiä havainnointipäiviä.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Luokittelee järjestelmät erillisillä vakavuuslaskurilla.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Näyttää yksittäiset delta-arvot ilman painotettuja pisteitä.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Vertaa osoittajaa ja nimittäjää todistettavasti vertailukelpoisella kattavuudella.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Varastoi lähdetestatut järjestelmät, isäntänimet ja IP-osoitteet.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Erottelee valvotun, valvomattoman ja tuntemattoman.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Näyttää vain nimenomaisesti todistetut seurantamutaatiot.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Näyttää organisaatiot ja järjestelmät yhden luotettavan CVE-linkin ympärillä.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Luokittelee CVE:t nimenomaisella duplikoinnin poistamisella.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Erottaa uudet, uudet ja enää havaitsemattomat CVE:t.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Näyttää puuttuvat, vanhentuneet ja todella käytetyt mitat.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Kirjaa avainpäivämäärät, lähdetiedostot, sovittimet ja lähdetiivisteet.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Ei vielä saatavilla: lähde ei osoita kaikkien omaisuuserien seurantatilannetta.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Ei vielä saatavilla: jokaisella löydöllä ei ole luotettavaa ensimmäistä havainnointipäivää.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Ei vielä saatavilla: lähde ei todista pysyvää identiteettiä kaikille löydöksille.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Ei vielä saatavilla: vertailukelpoista mittauskattavuutta ei ole osoitettu.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Ei vielä saatavilla: luotettavat ohjausnimittäjät puuttuvat.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Ei vielä saatavilla: vakaata omaisuuden identiteettiä ei ole osoitettu.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'Tämä raportti ei tue valittua organisaation laajuutta.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'Valittu lähde ei sisällä tarpeeksi luotettavaa dataa tätä raporttia varten.',
+  'Kerncijfers en gemeten bereik': 'Tunnusluvut ja mitattu ulottuvuus',
+  'Organisaties vergelijken': 'Vertaa organisaatioita',
+  'Concentratie van critical/high findings':
+      'Kriittisten/korkeiden löydösten keskittyminen',
+  'Portfolioverloop per meetmoment':
+      'Portfolion yleiskatsaus mittaushetkeä kohti',
+  'Meest voorkomende findingtypen': 'Yleisimmät löydöstyypit',
+  'Bron- en meetverantwoording': 'Lähde- ja mittausvastuu',
+  'Nieuwe en niet meer waargenomen findings':
+      'Uusia löydöksiä, joita ei enää havaittu',
+  'Langst waargenomen findings': 'Pisin havaittu löydös',
+  'Systemen met de meeste findings': 'Järjestelmät, joissa on eniten löytöjä',
+  'Veranderingen per systeem': 'Muutokset järjestelmäkohtaisesti',
+  'Blootstelling aan één CVE': 'Altistuminen yhdelle CVE:lle',
+  'CVE’s over organisaties': 'CVE:t organisaatioista',
+  'Nieuwe en niet meer waargenomen CVE’s':
+      'Uudet ja enää havaitsemattomat CVE:t',
+  'Controldekking': 'Ohjaa kattavuutta',
+  'Controlveranderingen': 'Hallitse muutokset',
+  'Aanbevelingen uit OpenKAT': 'OpenKATin suositukset',
+  'Assetinventaris': 'Omaisuusluettelo',
+  'Monitoringdekking': 'Kattavuuden seuranta',
+  'Actueel organisatiebeeld': 'Nykyinen organisaatiokuva',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Valitse ensin aihe ja sitten kysymys, johon raportin pitäisi vastata.',
+  'Onderwerp': 'Aihe',
+  'Welk rapport beantwoordt uw vraag?': 'Mikä raportti vastaa kysymykseesi?',
+  'Meer rapportvragen': 'Lisää raporttikysymyksiä',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Mitkä järjestelmät ovat haavoittuvia CVE:lle?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

@@ -1806,6 +1806,181 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Forbhreathnú bainistíochta leathan ach fíorasach le chuimhneacháin tomhais inrianaithe.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Ranganna gan scór iomlán agus taispeánann siad tomhais ar iarraidh ar leithligh.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Léiríonn comhaireamh déine, rannchuiditheoirí, agus tomhais tugtha ar aghaidh de réir nóiméad.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Eagraíonn eagraíochtaí a aimsiú cineálacha, córais agus tuairimí....',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Léiríonn uimhreacha criticiúla/ard gan aon mheá ceaptha.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Taispeánann sé uimhreoir, ainmneoir agus gan ach céatadáin iontaofa.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Grúpaí moltaí litriúil ó OpenKAT gan a dtosaíocht féin.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Déanann sé idirdhealú idir nua, nua agus nach bhfeictear a thuilleadh.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Ní úsáideann sé ach dátaí céadbhreathnaithe iontaofa.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Córais céimeanna le cuntair déine ar leith.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Taispeánann sé luachanna deilt aonair gan scór ualaithe.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Cuirtear uimhreoir agus ainmneoir i gcomparáid le clúdach inchomparáide le feiceáil.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Fardail córais foinse-chruthaithe, óstainmneacha agus seoltaí IP.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Ní thaispeánann ach sócháin mhonatóireachta atá cruthaithe go sainráite.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Léiríonn eagraíochtaí agus córais timpeall ar nasc iontaofa CVE amháin.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Rangaítear CVEanna le dídúblú follasach.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Déanann sé idirdhealú idir CVEanna nua, CVEanna agus nach bhfeictear a thuilleadh.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Cuntais le haghaidh dátaí tábhachtacha, comhaid foinse, oiriúntóirí agus hashes foinse.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Déan comparáid idir eagraíochtaí agus sainaithin pointí spéise sa phunann.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Féach ar an stádas reatha nó ar na hathruithe inléirithe ag eagraíocht amháin.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Fiosraigh naisc iontaofa CVE sna tomhais roghnaithe.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Taifead na tomhais agus na comhaid foinse a úsáideann an tuarascáil i ndáiríre.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Cad é dearcadh bainistíochta na n-eagraíochtaí roghnaithe?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Cá bhfuil na torthaí is mó agus is lú tugtha faoi deara?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Conas a fhorbraíonn an phunann le himeacht ama?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Cad iad na fadhbanna a tharlaíonn i bhformhór na n-eagraíochtaí?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Cá bhfuil na torthaí is tromchúisí comhchruinnithe?',
+  'Welke controls lopen achter?': 'Cé na rialuithe atá tite ar gcúl?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Cé na bearta is minice a mholann OpenKAT?',
+  'Hoe staat deze organisatie er nu voor?':
+      'Cad é stádas reatha na heagraíochta seo?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Cad a d\'athraigh ón tomhas roimhe seo?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Cé na torthaí atá nua nó nach dtugtar faoi deara a thuilleadh?',
+  'Welke findings staan het langst open?':
+      'Cé na torthaí is faide a bhí oscailte?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'Cad iad na córais is mó a breathnaíodh?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Cé na córais a d\'fheabhsaigh nó a chuaigh in olcas?',
+  'Welke controls verbeterden of verslechterden?':
+      'Cé na rialuithe a tháinig chun feabhais nó a chuaigh in olcas?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Cé na córais atá san áireamh sna tomhais?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Cé na sócmhainní is féidir a léiriú le linn monatóireachta?',
+  'Welke monitoringstatussen veranderden?':
+      'Cad iad na stádais mhonatóireachta a d\'athraigh?',
+  'Wie is geraakt door deze CVE?': 'Cé air a bhfuil tionchar ag an CVE seo?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Cé na CVEanna a mbíonn tionchar acu ar fhormhór na n-eagraíochtaí?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Cé na CVEanna atá nua nó nach bhfeictear a thuilleadh?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Cé na sonraí tomhais atá in easnamh nó as dáta?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Cé na sonraí ar a bhfuil an tuarascáil seo bunaithe?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'Forbhreathnú bainistíochta leathan ach fíorasach le chuimhneacháin tomhais inrianaithe.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Ranganna gan scór iomlán agus taispeánann siad tomhais ar iarraidh ar leithligh.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Léiríonn comhaireamh déine, rannchuiditheoirí, agus tomhais tugtha ar aghaidh de réir nóiméad.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Eagraíonn eagraíochtaí a aimsiú cineálacha, córais agus tuairimí....',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Léiríonn uimhreacha criticiúla/ard gan aon mheá ceaptha.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Taispeánann sé uimhreoir, ainmneoir agus gan ach céatadáin iontaofa.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Grúpaí moltaí litriúil ó OpenKAT gan a dtosaíocht féin.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Íomhá reatha spriocdhírithe d\'eagraíocht amháin agus a dáta tomhais.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Comparáid a dhéanamh idir dhá mhóimint tomhais roghnaithe laistigh d’eagraíocht amháin.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Déanann sé idirdhealú idir nua, nua agus nach bhfeictear a thuilleadh.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Ní úsáideann sé ach dátaí céadbhreathnaithe iontaofa.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Córais céimeanna le cuntair déine ar leith.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Taispeánann sé luachanna deilt aonair gan scór ualaithe.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Cuirtear uimhreoir agus ainmneoir i gcomparáid le clúdach inchomparáide le feiceáil.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Fardail córais foinse-chruthaithe, óstainmneacha agus seoltaí IP.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Deighilteoirí monatóireachta, gan monatóireacht agus anaithnid.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Ní thaispeánann ach sócháin mhonatóireachta atá cruthaithe go sainráite.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Léiríonn eagraíochtaí agus córais timpeall ar nasc iontaofa CVE amháin.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Rangaítear CVEanna le dídúblú follasach.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Déanann sé idirdhealú idir CVEanna nua, CVEanna agus nach bhfeictear a thuilleadh.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Taispeánann sé tomhais atá in easnamh, atá as dáta agus a úsáidtear i ndáiríre.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Cuntais le haghaidh dátaí tábhachtacha, comhaid foinse, oiriúntóirí agus hashes foinse.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Níl sé ar fáil fós: ní chruthaíonn an fhoinse stádas monatóireachta do na sócmhainní go léir.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Níl sé ar fáil fós: níl dáta iontaofa céad breathnadóireachta ag gach toradh.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Níl sé ar fáil fós: ní chruthaíonn an fhoinse céannacht chobhsaí do na torthaí go léir.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Níl sé ar fáil fós: níl clúdach tomhais inchomparáide léirithe.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Níl sé ar fáil fós: tá ainmneoirí rialaithe iontaofa in easnamh.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Níl sé ar fáil fós: níl aitheantas cobhsaí sócmhainne léirithe.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'Ní thacaíonn an tuarascáil seo leis an raon feidhme eagraíochtúil a roghnaíodh.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'Níl go leor sonraí iontaofa san fhoinse roghnaithe don tuarascáil seo.',
+  'Kerncijfers en gemeten bereik': 'Príomhfhigiúirí agus raon tomhaiste',
+  'Organisaties vergelijken': 'Déan comparáid idir eagraíochtaí',
+  'Concentratie van critical/high findings':
+      'Tiúchan ar thorthaí criticiúla/arda',
+  'Portfolioverloop per meetmoment':
+      'Forbhreathnú ar an bpunann in aghaidh na huaire tomhais',
+  'Meest voorkomende findingtypen': 'Na cineálacha aimsithe is coitianta',
+  'Bron- en meetverantwoording': 'Cuntasacht foinse agus tomhais',
+  'Nieuwe en niet meer waargenomen findings':
+      'Torthaí nua agus torthaí nár breathnaíodh a thuilleadh',
+  'Langst waargenomen findings': 'Torthaí breathnaithe is faide',
+  'Systemen met de meeste findings': 'Córais leis na torthaí is mó',
+  'Veranderingen per systeem': 'Athruithe in aghaidh an chórais',
+  'Blootstelling aan één CVE': 'Nochtadh do CVE amháin',
+  'CVE’s over organisaties': 'CVEanna faoi eagraíochtaí',
+  'Nieuwe en niet meer waargenomen CVE’s':
+      'CVEanna nua agus nár breathnaíodh a thuilleadh',
+  'Controldekking': 'Clúdach rialaithe',
+  'Controlveranderingen': 'Athruithe rialaithe',
+  'Aanbevelingen uit OpenKAT': 'Moltaí ó OpenKAT',
+  'Assetinventaris': 'Fardal sócmhainní',
+  'Monitoringdekking': 'Clúdach monatóireachta',
+  'Actueel organisatiebeeld': 'Pictiúr eagraíochtúil reatha',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Roghnaigh an topaic ar dtús agus ansin an cheist ba cheart don tuairisc a fhreagairt.',
+  'Onderwerp': 'Ábhar',
+  'Welk rapport beantwoordt uw vraag?':
+      'Cén tuairisc a fhreagraíonn do cheist?',
+  'Meer rapportvragen': 'Tuilleadh ceisteanna tuairisce',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Cé na córais atá leochaileach do CVE?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

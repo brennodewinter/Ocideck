@@ -911,6 +911,179 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Summarizes the current status, measurements used, and key points of attention.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Shows where the most and fewest findings were found; missing measurements are listed separately.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Shows how finding counts changed and which organizations contributed to them.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Shows which types of problems occur in the most organizations and systems.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Shows the number of critical or high findings for each organization.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Shows the compliant share for each control, but only when the total is known.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Groups recommendations from OpenKAT without assigning its own priority.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Shows which findings are new, reobserved, or no longer observed.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Shows which findings have been open the longest when the start date is known.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Shows which systems have the most and most severe findings.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Shows whether the number of findings increased or decreased for each system.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Compares controls only when both measurements have the same scope.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Lists the systems, hostnames, and IP addresses from the selected measurement.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Shows only monitoring changes supported by the source.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Shows the organizations and systems where this CVE was found.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Shows which CVEs occur in the most organizations and systems.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Shows which CVEs are new, reobserved, or no longer observed.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Shows the measurement dates, source files, and technical source properties used.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Compare organizations and identify portfolio points of interest.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'View the current status or demonstrable changes at one organization.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Investigate reliable CVE links in the chosen measurements.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Record which measurements and source files the report actually uses.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'What is the management view of the chosen organizations?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Where are the most and least findings observed?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'How does the portfolio develop over time?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'What problems occur in most organizations?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Where are the most serious findings concentrated?',
+  'Welke controls lopen achter?': 'Which controls are lagging behind?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Which measures does OpenKAT recommend most often?',
+  'Hoe staat deze organisatie er nu voor?':
+      'What is the current status of this organization?',
+  'Wat veranderde er sinds de vorige meting?':
+      'What changed since the previous measurement?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Which findings are new or no longer observed?',
+  'Welke findings staan het langst open?':
+      'Which findings have been open the longest?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'On which systems are the most findings observed?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Which systems improved or deteriorated?',
+  'Welke controls verbeterden of verslechterden?':
+      'Which controls improved or deteriorated?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Which systems are included in the measurements?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Which assets are demonstrable in monitoring?',
+  'Welke monitoringstatussen veranderden?':
+      'Which monitoring statuses changed?',
+  'Wie is geraakt door deze CVE?': 'Who is affected by this CVE?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Which CVEs affect most organizations?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Which CVEs are new or no longer observed?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Which measurement data is missing or outdated?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'What data is this report based on?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'A broad but factual management overview with traceable measurement moments.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Ranks without total score and shows missing measurements separately.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Shows severity counts, contributors, and carried-forward measurements by moment.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Organizes finding types by affected organizations, systems and observations.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Shows critical/high numbers without any devised weighing.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Shows numerator, denominator and only reliable percentages.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Groups literal recommendations from OpenKAT without their own priority.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'A targeted current image of one organization and its measurement date.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Compares two chosen measurement moments within one organization.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Distinguishes new, new and no longer observed.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Uses only reliable first observation dates.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Ranks systems with separate severity counters.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Shows individual delta values ​​without weighted score.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Compares numerator and denominator with demonstrably comparable coverage.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Inventories source-proven systems, hostnames and IP addresses.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Separates monitored, unmonitored and unknown.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Only shows explicitly proven monitoring mutations.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Shows organizations and systems around one reliable CVE link.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Ranks CVEs with explicit deduplication.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Distinguishes new, new and no longer observed CVEs.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Shows missing, outdated and actually used measurements.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Accounts for key dates, source files, adapters and source hashes.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Not yet available: the source does not prove monitoring status for all assets.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Not yet available: not every finding has a reliable first observation date.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Not yet available: the source does not prove a stable identity for all findings.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Not yet available: comparable measurement coverage has not been demonstrated.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Not yet available: reliable control denominators are missing.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Not yet available: stable asset identity has not been demonstrated.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'This report does not support the chosen organizational scope.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'The selected source does not contain enough reliable data for this report.',
+  'Kerncijfers en gemeten bereik': 'Key figures and measured reach',
+  'Organisaties vergelijken': 'Compare organizations',
+  'Concentratie van critical/high findings':
+      'Concentration of critical/high findings',
+  'Portfolioverloop per meetmoment':
+      'Portfolio overview per measurement moment',
+  'Meest voorkomende findingtypen': 'Most common finding types',
+  'Bron- en meetverantwoording': 'Source and measurement accountability',
+  'Nieuwe en niet meer waargenomen findings':
+      'New and no longer observed findings',
+  'Langst waargenomen findings': 'Longest observed findings',
+  'Systemen met de meeste findings': 'Systems with the most findings',
+  'Veranderingen per systeem': 'Changes per system',
+  'Blootstelling aan één CVE': 'Exposure to one CVE',
+  'CVE’s over organisaties': 'CVEs about organizations',
+  'Nieuwe en niet meer waargenomen CVE’s': 'New and no longer observed CVEs',
+  'Controldekking': 'Control coverage',
+  'Controlveranderingen': 'Control changes',
+  'Aanbevelingen uit OpenKAT': 'Recommendations from OpenKAT',
+  'Assetinventaris': 'Asset inventory',
+  'Monitoringdekking': 'Monitoring coverage',
+  'Actueel organisatiebeeld': 'Current organizational picture',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'First choose the topic and then the question that the report should answer.',
+  'Onderwerp': 'Subject',
+  'Welk rapport beantwoordt uw vraag?': 'Which report answers your question?',
+  'Meer rapportvragen': 'More report questions',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Which systems are vulnerable to a CVE?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

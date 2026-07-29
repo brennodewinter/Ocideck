@@ -1793,6 +1793,178 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Широк, но фактологичен преглед на управлението с проследими моменти на измерване.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Класира се без общ резултат и показва отделно липсващите измервания.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Показва броя на сериозността, участниците и пренесените измервания по момент.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Организира видовете намиране по засегнати организации, системи и наблюдения.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Показва критични/високи числа без никакво измислено претегляне.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Показва числител, знаменател и само надеждни проценти.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Групира буквални препоръки от OpenKAT без собствен приоритет.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Разграничава нови, нови и вече ненаблюдавани.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Използва само надеждни първи дати за наблюдение.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Класира системите с отделни броячи на тежест.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Показва индивидуални делта стойности без претеглен резултат.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Сравнява числителя и знаменателя с видимо сравнимо покритие.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Инвентаризира системи с доказан източник, имена на хостове и IP адреси.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Показва само изрично доказани мониторингови мутации.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Показва организации и системи около една надеждна CVE връзка.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Класира CVE с изрична дедупликация.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Разграничава нови, нови и вече ненаблюдавани CVE.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Отчита ключови дати, изходни файлове, адаптери и изходни хешове.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Сравнете организациите и идентифицирайте точките на интерес в портфолиото.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Вижте текущото състояние или очевидни промени в една организация.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Проучете надеждни CVE връзки в избраните измервания.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Запишете кои измервания и изходни файлове действително използва докладът.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Какво е мнението на ръководството за избраните организации?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Къде се наблюдават най-много и най-малко открития?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Как се развива портфолиото във времето?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Какви проблеми възникват в повечето организации?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Къде са концентрирани най-сериозните находки?',
+  'Welke controls lopen achter?': 'Кои контроли изостават?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Кои мерки OpenKAT препоръчва най-често?',
+  'Hoe staat deze organisatie er nu voor?':
+      'Какъв е настоящият статус на тази организация?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Какво се промени от предишното измерване?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Кои констатации са нови или вече не се наблюдават?',
+  'Welke findings staan het langst open?': 'Кои находки са отворени най-дълго?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'При кои системи се наблюдават най-много констатации?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Кои системи се подобриха или влошиха?',
+  'Welke controls verbeterden of verslechterden?':
+      'Кои контроли се подобриха или влошиха?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Кои системи са включени в измерванията?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Кои активи са доказуеми при наблюдение?',
+  'Welke monitoringstatussen veranderden?':
+      'Кои състояния на наблюдение са променени?',
+  'Wie is geraakt door deze CVE?': 'Кой е засегнат от тази CVE?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Кои CVE засягат повечето организации?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Кои CVE са нови или вече не се наблюдават?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Кои данни от измерванията липсват или са остарели?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'На какви данни се основава този отчет?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'Широк, но фактологичен преглед на управлението с проследими моменти на измерване.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Класира се без общ резултат и показва отделно липсващите измервания.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Показва броя на сериозността, участниците и пренесените измервания по момент.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Организира видовете намиране по засегнати организации, системи и наблюдения.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Показва критични/високи числа без никакво измислено претегляне.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Показва числител, знаменател и само надеждни проценти.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Групира буквални препоръки от OpenKAT без собствен приоритет.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Насочен текущ имидж на една организация и нейната дата на измерване.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Сравнява два избрани момента на измерване в рамките на една организация.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Разграничава нови, нови и вече ненаблюдавани.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Използва само надеждни първи дати за наблюдение.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Класира системите с отделни броячи на тежест.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Показва индивидуални делта стойности без претеглен резултат.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Сравнява числителя и знаменателя с видимо сравнимо покритие.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Инвентаризира системи с доказан източник, имена на хостове и IP адреси.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Разделя наблюдаваните, ненаблюдаваните и неизвестните.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Показва само изрично доказани мониторингови мутации.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Показва организации и системи около една надеждна CVE връзка.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Класира CVE с изрична дедупликация.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Разграничава нови, нови и вече ненаблюдавани CVE.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Показва липсващи, остарели и действително използвани измервания.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Отчита ключови дати, изходни файлове, адаптери и изходни хешове.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Все още не е налично: източникът не доказва статус на мониторинг за всички активи.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Все още не е налично: не всяко откритие има надеждна дата на първо наблюдение.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Все още не е наличен: източникът не доказва стабилна идентичност за всички открития.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Все още не е налично: не е доказано сравнимо покритие на измерванията.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Все още не е налично: липсват надеждни контролни знаменатели.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Все още не е налично: стабилната идентичност на актива не е демонстрирана.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'Този отчет не поддържа избрания организационен обхват.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'Избраният източник не съдържа достатъчно надеждни данни за този отчет.',
+  'Kerncijfers en gemeten bereik': 'Ключови цифри и измерен обхват',
+  'Organisaties vergelijken': 'Сравнете организациите',
+  'Concentratie van critical/high findings':
+      'Концентрация на критични/високи резултати',
+  'Portfolioverloop per meetmoment':
+      'Преглед на портфолиото за момент на измерване',
+  'Meest voorkomende findingtypen': 'Най-често срещаните видове находки',
+  'Bron- en meetverantwoording': 'Отчетност на източника и измерването',
+  'Nieuwe en niet meer waargenomen findings':
+      'Нови и вече ненаблюдавани находки',
+  'Langst waargenomen findings': 'Най-дълго наблюдаваните открития',
+  'Systemen met de meeste findings': 'Системи с най-много открития',
+  'Veranderingen per systeem': 'Промени по система',
+  'Blootstelling aan één CVE': 'Експозиция на един CVE',
+  'CVE’s over organisaties': 'CVE за организации',
+  'Nieuwe en niet meer waargenomen CVE’s': 'Нови и вече ненаблюдавани CVE',
+  'Controldekking': 'Контролно покритие',
+  'Controlveranderingen': 'Контролни промени',
+  'Aanbevelingen uit OpenKAT': 'Препоръки от OpenKAT',
+  'Assetinventaris': 'Инвентаризация на активите',
+  'Monitoringdekking': 'Мониторинг на покритието',
+  'Actueel organisatiebeeld': 'Актуална организационна картина',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Първо изберете темата и след това въпроса, на който докладът трябва да отговори.',
+  'Onderwerp': 'Предмет',
+  'Welk rapport beantwoordt uw vraag?': 'Кой доклад отговаря на вашия въпрос?',
+  'Meer rapportvragen': 'Още въпроси за доклада',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Кои системи са уязвими към CVE?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

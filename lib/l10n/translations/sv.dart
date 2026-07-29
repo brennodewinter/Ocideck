@@ -1770,6 +1770,178 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'En bred men saklig förvaltningsöversikt med spårbara mätmoment.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Rangordnas utan totalpoäng och visar saknade mått separat.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Visar allvarlighetsräkningar, bidragsgivare och överförda mätningar per ögonblick.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Organiserar hitta typer efter berörda organisationer, system och observationer.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Visar kritiska/höga siffror utan någon uttänkt vägning.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Visar täljare, nämnare och endast pålitliga procentsatser.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Grupperar bokstavliga rekommendationer från OpenKAT utan egen prioritet.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Utmärker nytt, nytt och inte längre observerat.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Använder endast tillförlitliga första observationsdatum.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Rangordnar system med separata allvarlighetsräknare.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Visar individuella deltavärden utan viktad poäng.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Jämför täljare och nämnare med bevisligen jämförbar täckning.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Inventerar källbeprövade system, värdnamn och IP-adresser.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Visar endast explicit bevisade övervakningsmutationer.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Visar organisationer och system runt en pålitlig CVE-länk.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Rangordnar CVE:er med explicit deduplicering.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Skiljer på nya, nya och inte längre observerade CVE.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Justerar nyckeldatum, källfiler, adaptrar och källhashar.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Jämför organisationer och identifiera portföljpunkter av intresse.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Visa aktuell status eller påvisbara ändringar i en organisation.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Undersök tillförlitliga CVE-länkar i de valda mätningarna.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Registrera vilka mätningar och källfiler som rapporten faktiskt använder.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Vilken är ledningens syn på de valda organisationerna?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Var observeras flest och minst fynd?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Hur utvecklas portföljen över tid?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Vilka problem uppstår i de flesta organisationer?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Var är de allvarligaste fynden koncentrerade?',
+  'Welke controls lopen achter?': 'Vilka kontroller släpar efter?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Vilka åtgärder rekommenderar OpenKAT oftast?',
+  'Hoe staat deze organisatie er nu voor?':
+      'Vad är den aktuella statusen för denna organisation?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Vad har förändrats sedan föregående mätning?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Vilka fynd är nya eller observeras inte längre?',
+  'Welke findings staan het langst open?': 'Vilka fynd har varit öppna längst?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'På vilka system observeras flest fynd?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Vilka system har förbättrats eller försämrats?',
+  'Welke controls verbeterden of verslechterden?':
+      'Vilka kontroller förbättrades eller försämrades?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Vilka system ingår i mätningarna?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Vilka tillgångar är påvisbara vid övervakning?',
+  'Welke monitoringstatussen veranderden?':
+      'Vilka övervakningsstatusar har ändrats?',
+  'Wie is geraakt door deze CVE?': 'Vem påverkas av denna CVE?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Vilka CVEs påverkar de flesta organisationer?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Vilka CVE är nya eller observeras inte längre?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Vilka mätdata saknas eller är inaktuella?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Vilken data är den här rapporten baserad på?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'En bred men saklig förvaltningsöversikt med spårbara mätmoment.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Rangordnas utan totalpoäng och visar saknade mått separat.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Visar allvarlighetsräkningar, bidragsgivare och överförda mätningar per ögonblick.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Organiserar hitta typer efter berörda organisationer, system och observationer.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Visar kritiska/höga siffror utan någon uttänkt vägning.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Visar täljare, nämnare och endast pålitliga procentsatser.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Grupperar bokstavliga rekommendationer från OpenKAT utan egen prioritet.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'En riktad aktuell bild av en organisation och dess mätningsdatum.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Jämför två valda mätmoment inom en organisation.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Utmärker nytt, nytt och inte längre observerat.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Använder endast tillförlitliga första observationsdatum.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Rangordnar system med separata allvarlighetsräknare.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Visar individuella deltavärden utan viktad poäng.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Jämför täljare och nämnare med bevisligen jämförbar täckning.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Inventerar källbeprövade system, värdnamn och IP-adresser.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Separerar övervakade, oövervakade och okända.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Visar endast explicit bevisade övervakningsmutationer.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Visar organisationer och system runt en pålitlig CVE-länk.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Rangordnar CVE:er med explicit deduplicering.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Skiljer på nya, nya och inte längre observerade CVE.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Visar saknade, föråldrade och faktiskt använda mått.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Justerar nyckeldatum, källfiler, adaptrar och källhashar.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Inte tillgänglig ännu: källan bevisar inte övervakningsstatus för alla tillgångar.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Inte tillgängligt ännu: inte alla fynd har ett tillförlitligt första observationsdatum.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Inte tillgänglig ännu: källan bevisar inte en stabil identitet för alla fynd.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Ej tillgängligt ännu: jämförbar mättäckning har inte visats.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Inte tillgängligt ännu: pålitliga kontrollnämnare saknas.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Inte tillgänglig ännu: stabil tillgångsidentitet har inte visats.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'Denna rapport stöder inte den valda organisatoriska omfattningen.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'Den valda källan innehåller inte tillräckligt med tillförlitlig data för den här rapporten.',
+  'Kerncijfers en gemeten bereik': 'Nyckeltal och uppmätt räckvidd',
+  'Organisaties vergelijken': 'Jämför organisationer',
+  'Concentratie van critical/high findings':
+      'Koncentration av kritiska/höga fynd',
+  'Portfolioverloop per meetmoment': 'Portföljöversikt per mätmoment',
+  'Meest voorkomende findingtypen': 'De vanligaste fyndtyperna',
+  'Bron- en meetverantwoording': 'Käll- och mätansvar',
+  'Nieuwe en niet meer waargenomen findings':
+      'Nya och inte längre observerade fynd',
+  'Langst waargenomen findings': 'Längsta observerade fynd',
+  'Systemen met de meeste findings': 'System med flest fynd',
+  'Veranderingen per systeem': 'Ändringar per system',
+  'Blootstelling aan één CVE': 'Exponering för en CVE',
+  'CVE’s over organisaties': 'CVEs om organisationer',
+  'Nieuwe en niet meer waargenomen CVE’s':
+      'Nya och inte längre observerade CVEs',
+  'Controldekking': 'Kontrolltäckning',
+  'Controlveranderingen': 'Kontrollförändringar',
+  'Aanbevelingen uit OpenKAT': 'Rekommendationer från OpenKAT',
+  'Assetinventaris': 'Tillgångsinventering',
+  'Monitoringdekking': 'Övervakning av täckning',
+  'Actueel organisatiebeeld': 'Aktuell organisationsbild',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Välj först ämnet och sedan frågan som rapporten ska besvara.',
+  'Onderwerp': 'Ämne',
+  'Welk rapport beantwoordt uw vraag?': 'Vilken rapport svarar på din fråga?',
+  'Meer rapportvragen': 'Fler rapportfrågor',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Vilka system är sårbara för en CVE?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

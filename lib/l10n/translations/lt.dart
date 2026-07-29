@@ -1778,6 +1778,179 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Plati, bet faktinė valdymo apžvalga su atsekamomis matavimo akimirkomis.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Reitingai be bendro balo ir atskirai rodomi trūkstami matavimai.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Rodomi sunkumo skaičiai, pagalbininkai ir perkeliami matavimai pagal akimirką.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Organizuoja tipų paiešką pagal paveiktas organizacijas, sistemas ir stebėjimus.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Rodo kritinius / didelius skaičius be jokio svėrimo.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Rodo skaitiklį, vardiklį ir tik patikimus procentus.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Grupuoja pažodines OpenKAT rekomendacijas be savo prioriteto.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Išskiria naujus, naujus ir nebestebėtus.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Naudoja tik patikimas pirmojo stebėjimo datas.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Reitinguoja sistemas su atskirais sunkumo skaitikliais.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Rodo atskiras delta vertes be svertinio balo.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Lygina skaitiklį ir vardiklį su akivaizdžiai palyginama aprėptimi.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Atsargų šaltinio patikrintos sistemos, pagrindinio kompiuterio pavadinimai ir IP adresai.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Rodo tik aiškiai įrodytas stebėjimo mutacijas.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Rodo organizacijas ir sistemas aplink vieną patikimą CVE nuorodą.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'CVE reitinguoja aiškiai deduplikuojant.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Išskiria naujus, naujus ir nebestebėtus CVE.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Apskaitos pagrindinės datos, šaltinio failai, adapteriai ir šaltinio maišos.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Palyginkite organizacijas ir nustatykite aplanko dominančias vietas.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Peržiūrėkite dabartinę vienos organizacijos būseną arba įrodomus pakeitimus.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Ištirkite patikimas CVE nuorodas pasirinktuose matavimuose.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Įrašykite, kurie matavimai ir šaltinio failai iš tikrųjų naudojami ataskaitoje.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Koks yra pasirinktų organizacijų valdymo požiūris?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Kur pastebėta daugiausia ir mažiausiai radinių?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Kaip portfelis vystosi laikui bėgant?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Kokios problemos kyla daugumoje organizacijų?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Kur koncentruojasi rimčiausi radiniai?',
+  'Welke controls lopen achter?': 'Kurie valdikliai atsilieka?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Kokias priemones OpenKAT rekomenduoja dažniausiai?',
+  'Hoe staat deze organisatie er nu voor?':
+      'Kokia dabartinė šios organizacijos būklė?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Kas pasikeitė nuo ankstesnio matavimo?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Kokios išvados yra naujos arba nebestebimos?',
+  'Welke findings staan het langst open?':
+      'Kurios išvados buvo atviros ilgiausiai?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'Kokiose sistemose pastebėta daugiausia išvadų?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Kurios sistemos pagerėjo ar pablogėjo?',
+  'Welke controls verbeterden of verslechterden?':
+      'Kurios kontrolės priemonės pagerėjo ar pablogėjo?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Kokios sistemos įtraukiamos į matavimus?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Kuris turtas įrodomas stebint?',
+  'Welke monitoringstatussen veranderden?':
+      'Kurios stebėjimo būsenos pasikeitė?',
+  'Wie is geraakt door deze CVE?': 'Kam turi įtakos šis CVE?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Kurie CVE turi įtakos daugumai organizacijų?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Kurie CVE yra nauji arba nebestebimi?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Kurių matavimo duomenų trūksta arba kurie pasenę?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Kokiais duomenimis pagrįsta ši ataskaita?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'Plati, bet faktinė valdymo apžvalga su atsekamomis matavimo akimirkomis.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Reitingai be bendro balo ir atskirai rodomi trūkstami matavimai.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Rodomi sunkumo skaičiai, pagalbininkai ir perkeliami matavimai pagal akimirką.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Organizuoja tipų paiešką pagal paveiktas organizacijas, sistemas ir stebėjimus.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Rodo kritinius / didelius skaičius be jokio svėrimo.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Rodo skaitiklį, vardiklį ir tik patikimus procentus.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Grupuoja pažodines OpenKAT rekomendacijas be savo prioriteto.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Tikslinis dabartinis vienos organizacijos įvaizdis ir jo matavimo data.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Lygina du pasirinktus matavimo momentus vienoje organizacijoje.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Išskiria naujus, naujus ir nebestebėtus.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Naudoja tik patikimas pirmojo stebėjimo datas.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Reitinguoja sistemas su atskirais sunkumo skaitikliais.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Rodo atskiras delta vertes be svertinio balo.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Lygina skaitiklį ir vardiklį su akivaizdžiai palyginama aprėptimi.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Atsargų šaltinio patikrintos sistemos, pagrindinio kompiuterio pavadinimai ir IP adresai.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Atskiria stebimą, nestebimą ir nežinomą.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Rodo tik aiškiai įrodytas stebėjimo mutacijas.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Rodo organizacijas ir sistemas aplink vieną patikimą CVE nuorodą.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'CVE reitinguoja aiškiai deduplikuojant.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Išskiria naujus, naujus ir nebestebėtus CVE.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Rodo trūkstamus, pasenusius ir faktiškai naudotus matavimus.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Apskaitos pagrindinės datos, šaltinio failai, adapteriai ir šaltinio maišos.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Dar nepasiekiama: šaltinis neįrodo visų išteklių stebėjimo būsenos.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Dar nėra: ne kiekvienas radinys turi patikimą pirmojo stebėjimo datą.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Dar nepasiekiama: šaltinis neįrodo stabilios visų radinių tapatybės.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Dar nepasiekiama: palyginama matavimo apimtis neįrodyta.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Dar nėra: trūksta patikimų valdymo vardiklių.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Dar nepasiekiama: stabili turto tapatybė neįrodyta.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'Ši ataskaita nepalaiko pasirinktos organizacinės apimties.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'Pasirinktame šaltinyje nėra pakankamai patikimų duomenų šiai ataskaitai.',
+  'Kerncijfers en gemeten bereik':
+      'Pagrindiniai skaičiai ir išmatuotas pasiekiamumas',
+  'Organisaties vergelijken': 'Palyginkite organizacijas',
+  'Concentratie van critical/high findings':
+      'Kritinių/didelių išvadų koncentracija',
+  'Portfolioverloop per meetmoment': 'Portfelio apžvalga matavimo momentu',
+  'Meest voorkomende findingtypen': 'Dažniausiai pasitaikantys radinių tipai',
+  'Bron- en meetverantwoording': 'Šaltinio ir matavimo atskaitomybė',
+  'Nieuwe en niet meer waargenomen findings': 'Nauji ir nebestebėti radiniai',
+  'Langst waargenomen findings': 'Ilgiausiai pastebėti radiniai',
+  'Systemen met de meeste findings': 'Sistemos su daugiausiai radinių',
+  'Veranderingen per systeem': 'Pakeitimai pagal sistemą',
+  'Blootstelling aan één CVE': 'Vieno CVE poveikis',
+  'CVE’s over organisaties': 'CVE apie organizacijas',
+  'Nieuwe en niet meer waargenomen CVE’s': 'Nauji ir nebestebimi CVE',
+  'Controldekking': 'Kontrolės aprėptis',
+  'Controlveranderingen': 'Kontroliniai pakeitimai',
+  'Aanbevelingen uit OpenKAT': 'OpenKAT rekomendacijos',
+  'Assetinventaris': 'Turto inventorius',
+  'Monitoringdekking': 'Aprėpties stebėjimas',
+  'Actueel organisatiebeeld': 'Dabartinis organizacijos vaizdas',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Pirmiausia pasirinkite temą, o tada klausimą, į kurį turėtų atsakyti ataskaita.',
+  'Onderwerp': 'Tema',
+  'Welk rapport beantwoordt uw vraag?':
+      'Kuri ataskaita atsako į jūsų klausimą?',
+  'Meer rapportvragen': 'Daugiau pranešimų apie klausimus',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Kurios sistemos pažeidžiamos CVE?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

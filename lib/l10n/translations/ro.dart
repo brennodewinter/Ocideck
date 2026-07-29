@@ -1788,6 +1788,180 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'O privire de ansamblu a managementului amplă, dar reală, cu momente de măsurare urmăribile.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Clasează fără scor total și arată separat măsurătorile lipsă.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Afișează numărul de severitate, contributorii și măsurătorile reportate în funcție de moment.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Organizează tipurile de găsire de către organizațiile, sistemele și observațiile afectate.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Afișează numere critice/înalte fără nicio cântărire concepută.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Afișează numărătorul, numitorul și numai procentele de încredere.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Grupează recomandările literale de la OpenKAT fără propria lor prioritate.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Distinge nou, nou și nu mai observat.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Folosește numai date fiabile de primă observație.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Clasifică sistemele cu contoare separate de severitate.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Afișează valorile delta individuale fără scor ponderat.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Compară numărătorul și numitorul cu o acoperire care poate fi comparabilă.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Inventarează sisteme dovedite la sursă, nume de gazdă și adrese IP.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Afișează doar mutații de monitorizare dovedite explicit.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Afișează organizațiile și sistemele în jurul unei legături CVE de încredere.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Clasifică CVE-urile cu deduplicare explicită.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Distinge CVE noi, noi și nemai observate.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Conturi pentru date cheie, fișiere sursă, adaptoare și hash sursă.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Comparați organizațiile și identificați punctele de interes din portofoliu.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Vizualizați starea curentă sau modificările demonstrabile la o organizație.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Investigați legăturile CVE de încredere în măsurătorile alese.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Înregistrați ce măsurători și fișiere sursă le utilizează efectiv raportul.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Care este viziunea managerială a organizațiilor alese?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Unde sunt cele mai multe și cele mai puține constatări observate?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Cum se dezvoltă portofoliul în timp?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Ce probleme apar în majoritatea organizațiilor?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Unde sunt concentrate cele mai grave constatări?',
+  'Welke controls lopen achter?': 'Ce controale au rămas în urmă?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Ce măsuri recomandă OpenKAT cel mai des?',
+  'Hoe staat deze organisatie er nu voor?':
+      'Care este starea actuală a acestei organizații?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Ce s-a schimbat de la măsurarea anterioară?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Ce constatări sunt noi sau nu mai sunt observate?',
+  'Welke findings staan het langst open?':
+      'Care descoperiri au fost deschise cel mai mult timp?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'Pe ce sisteme sunt observate cele mai multe descoperiri?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Ce sisteme s-au îmbunătățit sau s-au deteriorat?',
+  'Welke controls verbeterden of verslechterden?':
+      'Ce controale s-au îmbunătățit sau s-au deteriorat?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Ce sisteme sunt incluse în măsurători?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Ce active sunt demonstrate în monitorizare?',
+  'Welke monitoringstatussen veranderden?':
+      'Ce stări de monitorizare s-au schimbat?',
+  'Wie is geraakt door deze CVE?': 'Cine este afectat de acest CVE?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Care CVE afectează majoritatea organizațiilor?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Ce CVE sunt noi sau nu mai sunt observate?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Ce date de măsurare lipsesc sau sunt învechite?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Pe ce date se bazează acest raport?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'O privire de ansamblu a managementului amplă, dar reală, cu momente de măsurare urmăribile.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Clasează fără scor total și arată separat măsurătorile lipsă.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Afișează numărul de severitate, contributorii și măsurătorile reportate în funcție de moment.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Organizează tipurile de găsire de către organizațiile, sistemele și observațiile afectate.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Afișează numere critice/înalte fără nicio cântărire concepută.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Afișează numărătorul, numitorul și numai procentele de încredere.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Grupează recomandările literale de la OpenKAT fără propria lor prioritate.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'O imagine curentă vizată a unei organizații și data măsurării acesteia.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Compară două momente alese de măsurare în cadrul unei singure organizații.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Distinge nou, nou și nu mai observat.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Folosește numai date fiabile de primă observație.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Clasifică sistemele cu contoare separate de severitate.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Afișează valorile delta individuale fără scor ponderat.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Compară numărătorul și numitorul cu o acoperire care poate fi comparabilă.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Inventarează sisteme dovedite la sursă, nume de gazdă și adrese IP.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Separă monitorizat, nemonitorizat și necunoscut.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Afișează doar mutații de monitorizare dovedite explicit.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Afișează organizațiile și sistemele în jurul unei legături CVE de încredere.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Clasifică CVE-urile cu deduplicare explicită.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Distinge CVE noi, noi și nemai observate.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Afișează măsurători lipsă, învechite și utilizate efectiv.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Conturi pentru date cheie, fișiere sursă, adaptoare și hash sursă.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Nu este încă disponibilă: sursa nu dovedește starea de monitorizare pentru toate activele.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Nu este încă disponibilă: nu toate descoperirile au o dată fiabilă a primei observații.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Nu este încă disponibilă: sursa nu dovedește o identitate stabilă pentru toate constatările.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Nu este încă disponibilă: acoperirea măsurătorilor comparabile nu a fost demonstrată.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Nu este încă disponibil: numitorii de control fiabili lipsesc.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Nu este încă disponibilă: identitatea activă stabilă nu a fost demonstrată.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'Acest raport nu sprijină domeniul organizațional ales.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'Sursa selectată nu conține suficiente date de încredere pentru acest raport.',
+  'Kerncijfers en gemeten bereik': 'Cifre cheie și acoperire măsurată',
+  'Organisaties vergelijken': 'Comparați organizațiile',
+  'Concentratie van critical/high findings':
+      'Concentrarea constatărilor critice/înalte',
+  'Portfolioverloop per meetmoment':
+      'Prezentare generală a portofoliului pe moment de măsurare',
+  'Meest voorkomende findingtypen': 'Cele mai comune tipuri de descoperiri',
+  'Bron- en meetverantwoording': 'Responsabilitate sursă și măsurare',
+  'Nieuwe en niet meer waargenomen findings':
+      'Constatări noi și nemai observate',
+  'Langst waargenomen findings': 'Cele mai lungi constatări observate',
+  'Systemen met de meeste findings': 'Sisteme cu cele mai multe constatări',
+  'Veranderingen per systeem': 'Modificări pe sistem',
+  'Blootstelling aan één CVE': 'Expunerea la un CVE',
+  'CVE’s over organisaties': 'CVE-uri despre organizații',
+  'Nieuwe en niet meer waargenomen CVE’s': 'CVE noi și nemai observate',
+  'Controldekking': 'Controlul acoperirii',
+  'Controlveranderingen': 'Modificări de control',
+  'Aanbevelingen uit OpenKAT': 'Recomandări de la OpenKAT',
+  'Assetinventaris': 'Inventarul activelor',
+  'Monitoringdekking': 'Monitorizarea acoperirii',
+  'Actueel organisatiebeeld': 'Imaginea organizatorică actuală',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Mai întâi alegeți subiectul și apoi întrebarea la care ar trebui să răspundă raportul.',
+  'Onderwerp': 'Subiect',
+  'Welk rapport beantwoordt uw vraag?':
+      'Care raport răspunde la întrebarea dvs.?',
+  'Meer rapportvragen': 'Mai multe întrebări despre raport',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Ce sisteme sunt vulnerabile la un CVE?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

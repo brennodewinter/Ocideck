@@ -1773,6 +1773,179 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Širok, a dejanski pregled upravljanja s sledljivimi merilnimi trenutki.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Uvršča se brez skupnega rezultata in ločeno prikazuje manjkajoče meritve.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Prikazuje število resnosti, udeležence in prenesene meritve glede na trenutek.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Organizira vrste iskanja po prizadetih organizacijah, sistemih in opazovanjih.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Prikazuje kritične/visoke številke brez načrtnega tehtanja.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Prikazuje števec, imenovalec in samo zanesljive odstotke.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Združuje dobesedna priporočila iz OpenKAT brez lastne prioritete.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Razlikuje novo, novo in neopaženo.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Uporablja le zanesljive datume prvih opazovanj.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Razvršča sisteme z ločenimi števci resnosti.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Prikazuje posamezne delta vrednosti brez tehtanega rezultata.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Primerja števec in imenovalec z dokazljivo primerljivo pokritostjo.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Popisuje preverjene sisteme, imena gostiteljev in naslove IP.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Prikazuje samo eksplicitno dokazane spremljajoče mutacije.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Prikazuje organizacije in sisteme okoli ene zanesljive povezave CVE.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Razvrsti CVE z eksplicitno deduplikacijo.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Razlikuje nove, nove in neopažene CVE.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Računi za ključne datume, izvorne datoteke, adapterje in izvorne zgoščene vrednosti.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Primerjajte organizacije in prepoznajte zanimivosti portfelja.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Oglejte si trenutno stanje ali dokazljive spremembe v eni organizaciji.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Raziščite zanesljive povezave CVE v izbranih meritvah.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Zabeležite, katere meritve in izvorne datoteke poročilo dejansko uporablja.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Kakšen je pogled vodstva na izbrane organizacije?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Kje je opaziti največ in najmanj ugotovitev?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Kako se portfelj razvija skozi čas?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Katere težave se pojavljajo v večini organizacij?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Kje so skoncentrirane najresnejše ugotovitve?',
+  'Welke controls lopen achter?': 'Katere kontrole zaostajajo?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Katere ukrepe OpenKAT najpogosteje priporoča?',
+  'Hoe staat deze organisatie er nu voor?':
+      'Kakšen je trenutni status te organizacije?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Kaj se je spremenilo od prejšnje meritve?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Katere ugotovitve so nove ali neopažene več?',
+  'Welke findings staan het langst open?':
+      'Katere ugotovitve so bile odprte najdlje?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'Na katerih sistemih je opaziti največ ugotovitev?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Kateri sistemi so se izboljšali ali poslabšali?',
+  'Welke controls verbeterden of verslechterden?':
+      'Katere kontrole so se izboljšale ali poslabšale?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Kateri sistemi so vključeni v meritve?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Katera sredstva so dokazljiva pri spremljanju?',
+  'Welke monitoringstatussen veranderden?':
+      'Katera stanja spremljanja so se spremenila?',
+  'Wie is geraakt door deze CVE?': 'Na koga vpliva ta CVE?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Kateri CVE vplivajo na večino organizacij?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Kateri CVE so novi ali jih ne opazimo več?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Kateri merilni podatki manjkajo ali so zastareli?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Na katerih podatkih temelji to poročilo?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'Širok, a dejanski pregled upravljanja s sledljivimi merilnimi trenutki.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Uvršča se brez skupnega rezultata in ločeno prikazuje manjkajoče meritve.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Prikazuje število resnosti, udeležence in prenesene meritve glede na trenutek.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Organizira vrste iskanja po prizadetih organizacijah, sistemih in opazovanjih.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Prikazuje kritične/visoke številke brez načrtnega tehtanja.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Prikazuje števec, imenovalec in samo zanesljive odstotke.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Združuje dobesedna priporočila iz OpenKAT brez lastne prioritete.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Ciljna trenutna podoba ene organizacije in njen datum merjenja.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Primerja dva izbrana merilna trenutka znotraj ene organizacije.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Razlikuje novo, novo in neopaženo.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Uporablja le zanesljive datume prvih opazovanj.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Razvršča sisteme z ločenimi števci resnosti.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Prikazuje posamezne delta vrednosti brez tehtanega rezultata.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Primerja števec in imenovalec z dokazljivo primerljivo pokritostjo.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Popisuje preverjene sisteme, imena gostiteljev in naslove IP.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Loči nadzorovano, nenadzorovano in neznano.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Prikazuje samo eksplicitno dokazane spremljajoče mutacije.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Prikazuje organizacije in sisteme okoli ene zanesljive povezave CVE.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Razvrsti CVE z eksplicitno deduplikacijo.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Razlikuje nove, nove in neopažene CVE.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Prikazuje manjkajoče, zastarele in dejansko uporabljene meritve.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Računi za ključne datume, izvorne datoteke, adapterje in izvorne zgoščene vrednosti.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Še ni na voljo: vir ne dokazuje statusa spremljanja za vsa sredstva.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Še ni na voljo: vsaka najdba nima zanesljivega datuma prvega opazovanja.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Še ni na voljo: vir ne dokazuje stabilne identitete za vse najdbe.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Še ni na voljo: primerljiva pokritost meritev ni bila dokazana.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Še ni na voljo: manjkajo zanesljivi kontrolni imenovalci.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Še ni na voljo: stabilna identiteta sredstva ni bila dokazana.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'To poročilo ne podpira izbranega organizacijskega obsega.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'Izbrani vir ne vsebuje dovolj zanesljivih podatkov za to poročilo.',
+  'Kerncijfers en gemeten bereik': 'Ključne številke in izmerjeni doseg',
+  'Organisaties vergelijken': 'Primerjajte organizacije',
+  'Concentratie van critical/high findings':
+      'Koncentracija kritičnih/visokih ugotovitev',
+  'Portfolioverloop per meetmoment': 'Pregled portfelja na trenutek merjenja',
+  'Meest voorkomende findingtypen': 'Najpogostejše vrste najdb',
+  'Bron- en meetverantwoording': 'Odgovornost vira in merjenja',
+  'Nieuwe en niet meer waargenomen findings':
+      'Nove in ne več opazovane ugotovitve',
+  'Langst waargenomen findings': 'Najdlje opažene ugotovitve',
+  'Systemen met de meeste findings': 'Sistemi z največ ugotovitvami',
+  'Veranderingen per systeem': 'Spremembe po sistemu',
+  'Blootstelling aan één CVE': 'Izpostavljenost enemu CVE',
+  'CVE’s over organisaties': 'CVE o organizacijah',
+  'Nieuwe en niet meer waargenomen CVE’s': 'Novi in ​​neopaženi CVE',
+  'Controldekking': 'Nadzor pokritosti',
+  'Controlveranderingen': 'Kontrolne spremembe',
+  'Aanbevelingen uit OpenKAT': 'Priporočila OpenKAT',
+  'Assetinventaris': 'Popis sredstev',
+  'Monitoringdekking': 'Spremljanje pokritosti',
+  'Actueel organisatiebeeld': 'Trenutna organizacijska slika',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Najprej izberite temo in nato vprašanje, na katerega naj poročilo odgovori.',
+  'Onderwerp': 'Predmet',
+  'Welk rapport beantwoordt uw vraag?':
+      'Katero poročilo odgovarja na vaše vprašanje?',
+  'Meer rapportvragen': 'Več vprašanj o poročilu',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Kateri sistemi so ranljivi za CVE?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

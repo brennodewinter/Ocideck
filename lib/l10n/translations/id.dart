@@ -1771,6 +1771,178 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Tinjauan manajemen yang luas namun faktual dengan momen pengukuran yang dapat ditelusuri.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Memberi peringkat tanpa skor total dan menunjukkan pengukuran yang hilang secara terpisah.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Menampilkan jumlah tingkat keparahan, kontributor, dan pengukuran lanjutan berdasarkan momen.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Mengatur jenis temuan berdasarkan organisasi, sistem, dan pengamatan yang terkena dampak.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Menampilkan angka kritis/tinggi tanpa rancangan penimbangan apa pun.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Menampilkan pembilang, penyebut, dan hanya persentase yang dapat diandalkan.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Mengelompokkan rekomendasi literal dari OpenKAT tanpa prioritasnya sendiri.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Membedakan baru, baru dan tidak lagi diamati.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Hanya menggunakan tanggal observasi pertama yang dapat diandalkan.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Memberi peringkat pada sistem dengan penghitung tingkat keparahan terpisah.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Menampilkan nilai delta individual tanpa skor tertimbang.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Membandingkan pembilang dan penyebut dengan cakupan yang terbukti sebanding.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Inventarisasi sistem, nama host, dan alamat IP yang terbukti sumbernya.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Hanya menunjukkan mutasi pemantauan yang terbukti secara eksplisit.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Menunjukkan organisasi dan sistem di sekitar satu tautan CVE yang andal.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Memberi peringkat CVE dengan deduplikasi eksplisit.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Membedakan CVE baru, baru, dan tidak lagi diamati.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Memperhitungkan tanggal-tanggal penting, file sumber, adaptor, dan hash sumber.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Bandingkan organisasi dan identifikasi tempat menarik portofolio.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Lihat status saat ini atau perubahan yang dapat dibuktikan di satu organisasi.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Selidiki tautan CVE yang andal dalam pengukuran yang dipilih.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Catat pengukuran dan file sumber mana yang sebenarnya digunakan dalam laporan.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Apa pandangan manajemen dari organisasi yang dipilih?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Di manakah temuan yang paling banyak dan paling sedikit diamati?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Bagaimana portofolio berkembang dari waktu ke waktu?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Masalah apa yang terjadi di sebagian besar organisasi?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Di manakah temuan paling serius terkonsentrasi?',
+  'Welke controls lopen achter?': 'Kontrol mana yang tertinggal?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Tindakan manakah yang paling sering direkomendasikan oleh OpenKAT?',
+  'Hoe staat deze organisatie er nu voor?':
+      'Bagaimana status organisasi ini saat ini?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Apa yang berubah sejak pengukuran sebelumnya?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Temuan mana yang baru atau sudah tidak teramati lagi?',
+  'Welke findings staan het langst open?':
+      'Temuan mana yang paling lama terungkap?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'Pada sistem manakah temuan yang paling banyak diamati?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Sistem mana yang membaik atau memburuk?',
+  'Welke controls verbeterden of verslechterden?':
+      'Pengendalian manakah yang membaik atau memburuk?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Sistem apa saja yang termasuk dalam pengukuran?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Aset apa saja yang dapat dibuktikan dalam pemantauan?',
+  'Welke monitoringstatussen veranderden?':
+      'Status pemantauan mana yang berubah?',
+  'Wie is geraakt door deze CVE?': 'Siapa yang terkena dampak CVE ini?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'CVE manakah yang mempengaruhi sebagian besar organisasi?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'CVE mana yang baru atau sudah tidak teramati lagi?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Data pengukuran mana yang hilang atau ketinggalan jaman?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Berdasarkan data apa laporan ini?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'Tinjauan manajemen yang luas namun faktual dengan momen pengukuran yang dapat ditelusuri.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Memberi peringkat tanpa skor total dan menunjukkan pengukuran yang hilang secara terpisah.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Menampilkan jumlah tingkat keparahan, kontributor, dan pengukuran lanjutan berdasarkan momen.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Mengatur jenis temuan berdasarkan organisasi, sistem, dan pengamatan yang terkena dampak.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Menampilkan angka kritis/tinggi tanpa rancangan penimbangan apa pun.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Menampilkan pembilang, penyebut, dan hanya persentase yang dapat diandalkan.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Mengelompokkan rekomendasi literal dari OpenKAT tanpa prioritasnya sendiri.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Gambar terkini yang ditargetkan dari suatu organisasi dan tanggal pengukurannya.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Membandingkan dua momen pengukuran yang dipilih dalam satu organisasi.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Membedakan baru, baru dan tidak lagi diamati.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Hanya menggunakan tanggal observasi pertama yang dapat diandalkan.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Memberi peringkat pada sistem dengan penghitung tingkat keparahan terpisah.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Menampilkan nilai delta individual tanpa skor tertimbang.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Membandingkan pembilang dan penyebut dengan cakupan yang terbukti sebanding.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Inventarisasi sistem, nama host, dan alamat IP yang terbukti sumbernya.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Memisahkan terpantau, tidak terpantau dan tidak diketahui.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Hanya menunjukkan mutasi pemantauan yang terbukti secara eksplisit.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Menunjukkan organisasi dan sistem di sekitar satu tautan CVE yang andal.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Memberi peringkat CVE dengan deduplikasi eksplisit.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Membedakan CVE baru, baru, dan tidak lagi diamati.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Menunjukkan pengukuran yang hilang, ketinggalan jaman, dan benar-benar digunakan.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Memperhitungkan tanggal-tanggal penting, file sumber, adaptor, dan hash sumber.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Belum tersedia: sumber tidak membuktikan status pemantauan seluruh aset.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Belum tersedia: tidak semua temuan memiliki tanggal observasi pertama yang dapat diandalkan.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Belum tersedia: sumber tidak membuktikan identitas yang stabil untuk semua temuan.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Belum tersedia: cakupan pengukuran yang sebanding belum terbukti.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Belum tersedia: penyebut kontrol yang dapat diandalkan tidak ada.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Belum tersedia: identitas aset yang stabil belum terbukti.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'Laporan ini tidak mendukung ruang lingkup organisasi yang dipilih.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'Sumber yang dipilih tidak berisi data yang cukup andal untuk laporan ini.',
+  'Kerncijfers en gemeten bereik': 'Angka-angka penting dan jangkauan terukur',
+  'Organisaties vergelijken': 'Bandingkan organisasi',
+  'Concentratie van critical/high findings': 'Konsentrasi temuan kritis/tinggi',
+  'Portfolioverloop per meetmoment': 'Ikhtisar portofolio per momen pengukuran',
+  'Meest voorkomende findingtypen': 'Jenis temuan yang paling umum',
+  'Bron- en meetverantwoording': 'Akuntabilitas sumber dan pengukuran',
+  'Nieuwe en niet meer waargenomen findings':
+      'Temuan baru dan tidak lagi diamati',
+  'Langst waargenomen findings': 'Temuan yang paling lama diamati',
+  'Systemen met de meeste findings': 'Sistem dengan temuan terbanyak',
+  'Veranderingen per systeem': 'Perubahan per sistem',
+  'Blootstelling aan één CVE': 'Paparan satu CVE',
+  'CVE’s over organisaties': 'CVE tentang organisasi',
+  'Nieuwe en niet meer waargenomen CVE’s': 'CVE baru dan tidak lagi teramati',
+  'Controldekking': 'Cakupan kontrol',
+  'Controlveranderingen': 'Kontrol perubahan',
+  'Aanbevelingen uit OpenKAT': 'Rekomendasi dari OpenKAT',
+  'Assetinventaris': 'Inventarisasi aset',
+  'Monitoringdekking': 'Cakupan pemantauan',
+  'Actueel organisatiebeeld': 'Gambaran organisasi saat ini',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Pertama-tama pilih topik dan kemudian pertanyaan yang harus dijawab oleh laporan tersebut.',
+  'Onderwerp': 'Subjek',
+  'Welk rapport beantwoordt uw vraag?':
+      'Laporan mana yang menjawab pertanyaan Anda?',
+  'Meer rapportvragen': 'Pertanyaan laporan lainnya',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Sistem mana yang rentan terhadap CVE?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

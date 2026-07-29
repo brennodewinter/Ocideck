@@ -1770,6 +1770,179 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Plašs, bet faktisks pārvaldības pārskats ar izsekojamiem mērījumu momentiem.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Sarindo bez kopvērtējuma un atsevišķi parāda trūkstošos mērījumus.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Rāda smaguma skaitļus, veicinātājus un pārnestos mērījumus pēc brīža.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Organizē tipu atrašanu pēc ietekmētajām organizācijām, sistēmām un novērojumiem.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Rāda kritiskos/augstos skaitļus bez izdomātas svēršanas.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Rāda skaitītāju, saucēju un tikai uzticamus procentus.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Sagrupē burtiskus OpenKAT ieteikumus bez savas prioritātes.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Atšķir jauno, jauno un vairs neievēroto.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Izmanto tikai uzticamus pirmo novērojumu datumus.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Sarindo sistēmas ar atsevišķiem smaguma pakāpes skaitītājiem.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Rāda atsevišķas delta vērtības bez svērtā rezultāta.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Salīdzina skaitītāju un saucēju ar uzskatāmi salīdzināmu pārklājumu.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Inventāra avota pārbaudītas sistēmas, resursdatora nosaukumi un IP adreses.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Parāda tikai skaidri pierādītas uzraudzības mutācijas.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Parāda organizācijas un sistēmas ap vienu uzticamu CVE saiti.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Sarindo CVE ar nepārprotamu dublēšanas atcelšanu.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Atšķir jaunus, jaunus un vairs neievērotus CVE.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Uzskaita galvenos datumus, avota failus, adapterus un avota jaucējus.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Salīdziniet organizācijas un nosakiet interešu punktus.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Skatiet pašreizējo statusu vai demonstrējamās izmaiņas vienā organizācijā.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Izpētiet uzticamas CVE saites izvēlētajos mērījumos.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Pierakstiet, kuri mērījumi un avota faili faktiski tiek izmantoti pārskatā.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Kāds ir izvēlēto organizāciju vadības skatījums?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Kur ir visvairāk un vismazāk konstatēto atradumu?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Kā portfelis laika gaitā attīstās?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Kādas problēmas rodas lielākajā daļā organizāciju?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Kur koncentrējas visnopietnākie atklājumi?',
+  'Welke controls lopen achter?': 'Kuras kontroles atpaliek?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Kādus pasākumus OpenKAT iesaka visbiežāk?',
+  'Hoe staat deze organisatie er nu voor?':
+      'Kāds ir šīs organizācijas pašreizējais statuss?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Kas mainījies kopš iepriekšējā mērījuma?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Kuri atklājumi ir jauni vai vairs nav novēroti?',
+  'Welke findings staan het langst open?':
+      'Kuri atklājumi ir bijuši atvērti visilgāk?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'Kurās sistēmās tiek novērots visvairāk konstatējumu?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Kuras sistēmas ir uzlabojušās vai pasliktinājušās?',
+  'Welke controls verbeterden of verslechterden?':
+      'Kuras kontroles ir uzlabojušās vai pasliktinājušās?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Kuras sistēmas ir iekļautas mērījumos?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Kādi aktīvi ir pierādāmi uzraudzībā?',
+  'Welke monitoringstatussen veranderden?':
+      'Kuri uzraudzības statusi mainījās?',
+  'Wie is geraakt door deze CVE?': 'Kurus ietekmē šis CVE?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Kuri CVE ietekmē lielāko daļu organizāciju?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Kuri CVE ir jauni vai vairs netiek ievēroti?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Kuru mērījumu datu trūkst vai tie ir novecojuši?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Uz kādiem datiem ir balstīts šis pārskats?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'Plašs, bet faktisks pārvaldības pārskats ar izsekojamiem mērījumu momentiem.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Sarindo bez kopvērtējuma un atsevišķi parāda trūkstošos mērījumus.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Rāda smaguma skaitļus, veicinātājus un pārnestos mērījumus pēc brīža.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Organizē tipu atrašanu pēc ietekmētajām organizācijām, sistēmām un novērojumiem.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Rāda kritiskos/augstos skaitļus bez izdomātas svēršanas.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Rāda skaitītāju, saucēju un tikai uzticamus procentus.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Sagrupē burtiskus OpenKAT ieteikumus bez savas prioritātes.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Mērķtiecīgs vienas organizācijas pašreizējais attēls un tā mērīšanas datums.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Salīdzina divus izvēlētos mērījumu momentus vienas organizācijas ietvaros.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Atšķir jauno, jauno un vairs neievēroto.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Izmanto tikai uzticamus pirmo novērojumu datumus.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Sarindo sistēmas ar atsevišķiem smaguma pakāpes skaitītājiem.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Rāda atsevišķas delta vērtības bez svērtā rezultāta.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Salīdzina skaitītāju un saucēju ar uzskatāmi salīdzināmu pārklājumu.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Inventāra avota pārbaudītas sistēmas, resursdatora nosaukumi un IP adreses.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Atdala uzraudzīto, neuzraudzīto un nezināmo.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Parāda tikai skaidri pierādītas uzraudzības mutācijas.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Parāda organizācijas un sistēmas ap vienu uzticamu CVE saiti.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Sarindo CVE ar nepārprotamu dublēšanas atcelšanu.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Atšķir jaunus, jaunus un vairs neievērotus CVE.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Parāda trūkstošos, novecojušos un faktiski izmantotos mērījumus.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Uzskaita galvenos datumus, avota failus, adapterus un avota jaucējus.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Vēl nav pieejams: avots nepierāda visu līdzekļu uzraudzības statusu.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Vēl nav pieejams: ne katram atradumam ir uzticams pirmā novērojuma datums.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Vēl nav pieejams: avots nepierāda stabilu identitāti visiem atradumiem.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Vēl nav pieejams: nav pierādīts salīdzināms mērījumu pārklājums.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Vēl nav pieejams: trūkst uzticamu vadības saucēju.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Vēl nav pieejams: stabila īpašuma identitāte nav pierādīta.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'Šis ziņojums neatbalsta izvēlēto organizatorisko darbības jomu.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'Atlasītajā avotā nav pietiekami daudz ticamu datu šim pārskatam.',
+  'Kerncijfers en gemeten bereik': 'Galvenie skaitļi un izmērītā sasniedzamība',
+  'Organisaties vergelijken': 'Salīdziniet organizācijas',
+  'Concentratie van critical/high findings':
+      'Kritisku/augstu atradumu koncentrācija',
+  'Portfolioverloop per meetmoment': 'Portfeļa pārskats par mērījumu brīdi',
+  'Meest voorkomende findingtypen': 'Visizplatītākie atradumu veidi',
+  'Bron- en meetverantwoording': 'Atbildība par avotu un mērījumiem',
+  'Nieuwe en niet meer waargenomen findings':
+      'Jauni un vairs neievēroti atradumi',
+  'Langst waargenomen findings': 'Visilgāk novērotie atradumi',
+  'Systemen met de meeste findings': 'Sistēmas ar visvairāk atradumiem',
+  'Veranderingen per systeem': 'Izmaiņas katrā sistēmā',
+  'Blootstelling aan één CVE': 'Viena CVE iedarbība',
+  'CVE’s over organisaties': 'CVE par organizācijām',
+  'Nieuwe en niet meer waargenomen CVE’s': 'Jauni un vairs neievēroti CVE',
+  'Controldekking': 'Kontrolēt pārklājumu',
+  'Controlveranderingen': 'Kontroles izmaiņas',
+  'Aanbevelingen uit OpenKAT': 'Ieteikumi no OpenKAT',
+  'Assetinventaris': 'Aktīvu uzskaite',
+  'Monitoringdekking': 'Pārraudzības pārklājums',
+  'Actueel organisatiebeeld': 'Pašreizējais organizatoriskais attēls',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Vispirms izvēlieties tēmu un pēc tam jautājumu, uz kuru jāatbild ziņojumā.',
+  'Onderwerp': 'Priekšmets',
+  'Welk rapport beantwoordt uw vraag?':
+      'Kurš pārskats atbild uz jūsu jautājumu?',
+  'Meer rapportvragen': 'Vairāk ziņojuma jautājumu',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Kuras sistēmas ir ievainojamas pret CVE?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

@@ -1798,6 +1798,179 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Μια ευρεία αλλά τεκμηριωμένη επισκόπηση διαχείρισης με ανιχνεύσιμες στιγμές μέτρησης.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Κατατάσσεται χωρίς συνολική βαθμολογία και εμφανίζει μετρήσεις που λείπουν ξεχωριστά.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Εμφανίζει μετρήσεις σοβαρότητας, συνεισφέροντες και μεταφερόμενες μετρήσεις ανά στιγμή.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Οργανώνει την εύρεση τύπων από επηρεαζόμενους οργανισμούς, συστήματα και παρατηρήσεις.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Εμφανίζει κρίσιμους/υψηλούς αριθμούς χωρίς καμία επινοημένη στάθμιση.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Εμφανίζει αριθμητή, παρονομαστή και μόνο αξιόπιστα ποσοστά.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Ομαδοποιεί κυριολεκτικές συστάσεις από το OpenKAT χωρίς τη δική τους προτεραιότητα.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Διακρίνει νέα, νέα και δεν παρατηρούνται πλέον.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Χρησιμοποιεί μόνο αξιόπιστες ημερομηνίες πρώτης παρατήρησης.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Ταξινομεί συστήματα με ξεχωριστούς μετρητές σοβαρότητας.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Εμφανίζει μεμονωμένες τιμές δέλτα χωρίς σταθμισμένη βαθμολογία.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Συγκρίνει αριθμητή και παρονομαστή με αποδεδειγμένα συγκρίσιμη κάλυψη.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Αποθέματα αποδεδειγμένα συστήματα, ονόματα κεντρικών υπολογιστών και διευθύνσεις IP.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Εμφανίζει μόνο ρητά αποδεδειγμένες μεταλλάξεις παρακολούθησης.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Δείχνει οργανισμούς και συστήματα γύρω από έναν αξιόπιστο σύνδεσμο CVE.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Κατατάσσει τα CVE με ρητή κατάργηση διπλότυπων.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Διακρίνει νέα, νέα και μη παρατηρούμενα πλέον CVE.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Λογαριασμοί για βασικές ημερομηνίες, αρχεία προέλευσης, προσαρμογείς και κατακερματισμούς πηγής.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Συγκρίνετε οργανισμούς και εντοπίστε σημεία ενδιαφέροντος χαρτοφυλακίου.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Δείτε την τρέχουσα κατάσταση ή τις αλλαγές που μπορούν να αποδειχθούν σε έναν οργανισμό.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Διερευνήστε αξιόπιστους συνδέσμους CVE στις επιλεγμένες μετρήσεις.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Καταγράψτε ποιες μετρήσεις και αρχεία πηγής χρησιμοποιεί πραγματικά η αναφορά.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Ποια είναι η άποψη της διοίκησης των επιλεγμένων οργανισμών;',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Πού παρατηρούνται τα περισσότερα και τα λιγότερα ευρήματα;',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Πώς εξελίσσεται το χαρτοφυλάκιο με την πάροδο του χρόνου;',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Ποια προβλήματα παρουσιάζονται στους περισσότερους οργανισμούς;',
+  'Waar concentreren de ernstigste findings zich?':
+      'Πού συγκεντρώνονται τα πιο σοβαρά ευρήματα;',
+  'Welke controls lopen achter?': 'Ποιοι έλεγχοι υστερούν;',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Ποια μέτρα συνιστά το OpenKAT πιο συχνά;',
+  'Hoe staat deze organisatie er nu voor?':
+      'Ποια είναι η τρέχουσα κατάσταση αυτού του οργανισμού;',
+  'Wat veranderde er sinds de vorige meting?':
+      'Τι άλλαξε από την προηγούμενη μέτρηση;',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Ποια ευρήματα είναι νέα ή δεν παρατηρούνται πλέον;',
+  'Welke findings staan het langst open?':
+      'Ποια ευρήματα ήταν ανοιχτά περισσότερο;',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'Σε ποια συστήματα παρατηρούνται τα περισσότερα ευρήματα;',
+  'Welke systemen verbeterden of verslechterden?':
+      'Ποια συστήματα βελτιώθηκαν ή επιδεινώθηκαν;',
+  'Welke controls verbeterden of verslechterden?':
+      'Ποιοι έλεγχοι βελτιώθηκαν ή επιδεινώθηκαν;',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Ποια συστήματα περιλαμβάνονται στις μετρήσεις;',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Ποια στοιχεία μπορούν να αποδειχθούν στην παρακολούθηση;',
+  'Welke monitoringstatussen veranderden?':
+      'Ποιες καταστάσεις παρακολούθησης άλλαξαν;',
+  'Wie is geraakt door deze CVE?': 'Ποιος επηρεάζεται από αυτό το CVE;',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Ποια CVE επηρεάζουν τους περισσότερους οργανισμούς;',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Ποια CVE είναι νέα ή δεν παρατηρούνται πλέον;',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Ποια δεδομένα μέτρησης λείπουν ή είναι παλιά;',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Σε ποια δεδομένα βασίζεται αυτή η αναφορά;',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'Μια ευρεία αλλά τεκμηριωμένη επισκόπηση διαχείρισης με ανιχνεύσιμες στιγμές μέτρησης.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Κατατάσσεται χωρίς συνολική βαθμολογία και εμφανίζει μετρήσεις που λείπουν ξεχωριστά.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Εμφανίζει μετρήσεις σοβαρότητας, συνεισφέροντες και μεταφερόμενες μετρήσεις ανά στιγμή.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Οργανώνει την εύρεση τύπων από επηρεαζόμενους οργανισμούς, συστήματα και παρατηρήσεις.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Εμφανίζει κρίσιμους/υψηλούς αριθμούς χωρίς καμία επινοημένη στάθμιση.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Εμφανίζει αριθμητή, παρονομαστή και μόνο αξιόπιστα ποσοστά.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Ομαδοποιεί κυριολεκτικές συστάσεις από το OpenKAT χωρίς τη δική τους προτεραιότητα.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Μια στοχευμένη τρέχουσα εικόνα ενός οργανισμού και η ημερομηνία μέτρησής του.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Συγκρίνει δύο επιλεγμένες στιγμές μέτρησης σε έναν οργανισμό.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Διακρίνει νέα, νέα και δεν παρατηρούνται πλέον.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Χρησιμοποιεί μόνο αξιόπιστες ημερομηνίες πρώτης παρατήρησης.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Ταξινομεί συστήματα με ξεχωριστούς μετρητές σοβαρότητας.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Εμφανίζει μεμονωμένες τιμές δέλτα χωρίς σταθμισμένη βαθμολογία.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Συγκρίνει αριθμητή και παρονομαστή με αποδεδειγμένα συγκρίσιμη κάλυψη.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Αποθέματα αποδεδειγμένα συστήματα, ονόματα κεντρικών υπολογιστών και διευθύνσεις IP.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Διαχωρίζει παρακολουθούμενο, μη ελεγχόμενο και άγνωστο.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Εμφανίζει μόνο ρητά αποδεδειγμένες μεταλλάξεις παρακολούθησης.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Δείχνει οργανισμούς και συστήματα γύρω από έναν αξιόπιστο σύνδεσμο CVE.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Κατατάσσει τα CVE με ρητή κατάργηση διπλότυπων.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Διακρίνει νέα, νέα και μη παρατηρούμενα πλέον CVE.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Εμφανίζει μετρήσεις που λείπουν, είναι ξεπερασμένες και όντως χρησιμοποιήθηκαν.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Λογαριασμοί για βασικές ημερομηνίες, αρχεία προέλευσης, προσαρμογείς και κατακερματισμούς πηγής.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Δεν είναι ακόμη διαθέσιμη: η πηγή δεν αποδεικνύει την κατάσταση παρακολούθησης για όλα τα στοιχεία.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Δεν είναι ακόμη διαθέσιμο: δεν έχουν όλα τα ευρήματα αξιόπιστη ημερομηνία πρώτης παρατήρησης.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Δεν είναι ακόμη διαθέσιμη: η πηγή δεν αποδεικνύει μια σταθερή ταυτότητα για όλα τα ευρήματα.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Δεν είναι ακόμη διαθέσιμο: δεν έχει αποδειχθεί συγκρίσιμη κάλυψη μετρήσεων.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Δεν είναι ακόμη διαθέσιμο: λείπουν αξιόπιστοι παρονομαστές ελέγχου.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Δεν είναι ακόμη διαθέσιμο: δεν έχει αποδειχθεί σταθερή ταυτότητα περιουσιακού στοιχείου.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'Αυτή η αναφορά δεν υποστηρίζει το επιλεγμένο οργανωτικό εύρος.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'Η επιλεγμένη πηγή δεν περιέχει αρκετά αξιόπιστα δεδομένα για αυτήν την αναφορά.',
+  'Kerncijfers en gemeten bereik': 'Βασικά στοιχεία και μετρημένη προσέγγιση',
+  'Organisaties vergelijken': 'Συγκρίνετε οργανισμούς',
+  'Concentratie van critical/high findings':
+      'Συγκέντρωση κρίσιμων/υψηλών ευρημάτων',
+  'Portfolioverloop per meetmoment':
+      'Επισκόπηση χαρτοφυλακίου ανά στιγμή μέτρησης',
+  'Meest voorkomende findingtypen': 'Οι πιο συνηθισμένοι τύποι ευρημάτων',
+  'Bron- en meetverantwoording': 'Λογοδοσία πηγής και μέτρησης',
+  'Nieuwe en niet meer waargenomen findings':
+      'Νέα και μη παρατηρούμενα ευρήματα',
+  'Langst waargenomen findings': 'Τα μακροβιότερα ευρήματα που παρατηρήθηκαν',
+  'Systemen met de meeste findings': 'Συστήματα με τα περισσότερα ευρήματα',
+  'Veranderingen per systeem': 'Αλλαγές ανά σύστημα',
+  'Blootstelling aan één CVE': 'Έκθεση σε ένα CVE',
+  'CVE’s over organisaties': 'CVE σχετικά με οργανισμούς',
+  'Nieuwe en niet meer waargenomen CVE’s': 'Νέα και μη παρατηρούμενα πλέον CVE',
+  'Controldekking': 'Έλεγχος κάλυψης',
+  'Controlveranderingen': 'Αλλαγές ελέγχου',
+  'Aanbevelingen uit OpenKAT': 'Συστάσεις από το OpenKAT',
+  'Assetinventaris': 'Απογραφή περιουσιακών στοιχείων',
+  'Monitoringdekking': 'Κάλυψη παρακολούθησης',
+  'Actueel organisatiebeeld': 'Τρέχουσα οργανωτική εικόνα',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Πρώτα επιλέξτε το θέμα και μετά την ερώτηση στην οποία πρέπει να απαντήσει η έκθεση.',
+  'Onderwerp': 'Θέμα',
+  'Welk rapport beantwoordt uw vraag?': 'Ποια αναφορά απαντά στην ερώτησή σας;',
+  'Meer rapportvragen': 'Περισσότερες ερωτήσεις αναφοράς',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Ποια συστήματα είναι ευάλωτα σε ένα CVE;',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
