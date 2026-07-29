@@ -394,6 +394,13 @@ void main() {
         ),
         isTrue,
       );
+      expect(
+        result.generated,
+        isTrue,
+        reason:
+            'een bruikbaar deel van het portfolio blijft rapporteerbaar; '
+            'de ontbrekende organisatie staat expliciet in de waarschuwing',
+      );
     });
 
     test('een ingestelde maximumleeftijd markeert een oude meting', () {

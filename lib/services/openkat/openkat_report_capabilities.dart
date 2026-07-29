@@ -27,7 +27,7 @@ class OpenKatReportCapabilityService {
       ),
       OpenKatReportCapability.historicalSnapshots: _binary(
         OpenKatReportCapability.historicalSnapshots,
-        selections.isNotEmpty && compared.length == selections.length,
+        compared.isNotEmpty,
         {
           'comparedOrganizations': '${compared.length}',
           'organizationCount': '${selections.length}',

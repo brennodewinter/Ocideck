@@ -22,6 +22,41 @@ class OpenKatReportFacts {
     return null;
   }
 
+  List<OpenKatReportSelection> portfolioAt(DateTime asOf) => selections(
+    OpenKatReportRequest(
+      scenarioId: 'facts.portfolio-at',
+      scope: const OpenKatReportScope.portfolio(),
+      currentAsOf: asOf,
+    ),
+  );
+
+  List<OpenKatSnapshot> organizationHistory(
+    String organizationCode, {
+    DateTime? through,
+  }) {
+    final snapshots =
+        organization(organizationCode)?.snapshots
+            .where(
+              (snapshot) =>
+                  snapshot.usable &&
+                  (through == null || !snapshot.reportDate.isAfter(through)),
+            )
+            .toList() ??
+        <OpenKatSnapshot>[];
+    snapshots.sort((a, b) => a.reportDate.compareTo(b.reportDate));
+    return List.unmodifiable(snapshots);
+  }
+
+  List<OpenKatHistoryPoint> portfolioHistory({DateTime? through}) {
+    final scoped = [
+      for (final organization in organizations)
+        organization.copyWith(
+          snapshots: organizationHistory(organization.code, through: through),
+        ),
+    ];
+    return aggregator.history(scoped);
+  }
+
   /// Laatste succesvolle, bruikbare meting op of vóór [asOf].
   OpenKatSnapshot? snapshotOnOrBefore(
     OpenKatOrganization organization,
@@ -146,7 +181,8 @@ class OpenKatReportFacts {
     OpenKatReportRequest request,
   ) => [
     for (final selection in selections(request))
-      if (selection.current != null)
+      if (selection.current != null &&
+          (request.previousAsOf == null || selection.previous != null))
         selection.organization.copyWith(
           snapshots: [
             if (selection.previous != null) selection.previous!,

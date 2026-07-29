@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/openkat/openkat_models.dart';
 import 'package:ocideck/models/openkat/openkat_reporting_models.dart';
+import 'package:ocideck/services/openkat/openkat_aggregator.dart';
 import 'package:ocideck/services/openkat/openkat_report_capabilities.dart';
 import 'package:ocideck/services/openkat/openkat_report_facts.dart';
 
@@ -9,11 +10,12 @@ OpenKatFinding _finding({
   String severity = 'high',
   bool stableIdentity = true,
   List<String> cveIds = const [],
+  String systemId = 'asset.example',
 }) => OpenKatFinding(
   id: id,
   findingTypeId: 'KAT-$id',
   severity: severity,
-  systemId: 'asset.example',
+  systemId: systemId,
   stableIdentity: stableIdentity,
   cveIds: cveIds,
 );
@@ -25,6 +27,7 @@ OpenKatSnapshot _snapshot({
   bool usable = true,
   Set<OpenKatSourceFeature> sourceFeatures = const {},
   String? measurementScopeId,
+  Map<String, OpenKatControlScore> controls = const {},
   List<OpenKatSystem> systems = const [
     OpenKatSystem(
       id: 'asset.example',
@@ -41,6 +44,7 @@ OpenKatSnapshot _snapshot({
   sourceFeatures: sourceFeatures,
   measurementScopeId: measurementScopeId,
   systems: systems,
+  controls: controls,
 );
 
 OpenKatOrganization _organization(
@@ -242,6 +246,167 @@ void main() {
         reason:
             'afwezigheid in een andere populatie mag geen vergelijkbaarheid '
             'suggereren',
+      );
+    });
+  });
+
+  group('centrale queries gebruiken dezelfde gekozen snapshots', () {
+    test('historie respecteert bruikbaarheid en een einddatum', () {
+      final facts = OpenKatReportFacts([
+        _organization('alpha', [
+          _snapshot(date: DateTime.utc(2026, 7, 1), source: 'alpha-01.json'),
+          _snapshot(
+            date: DateTime.utc(2026, 7, 8),
+            source: 'alpha-08-unusable.json',
+            usable: false,
+          ),
+          _snapshot(date: DateTime.utc(2026, 7, 15), source: 'alpha-15.json'),
+        ]),
+        _organization('beta', [
+          _snapshot(date: DateTime.utc(2026, 7, 5), source: 'beta-05.json'),
+        ]),
+      ]);
+
+      expect(
+        facts
+            .organizationHistory('alpha', through: DateTime.utc(2026, 7, 10))
+            .map((snapshot) => snapshot.sourceFile),
+        ['alpha-01.json'],
+      );
+      expect(
+        facts
+            .portfolioHistory(through: DateTime.utc(2026, 7, 10))
+            .map((point) => point.date),
+        [DateTime.utc(2026, 7, 1), DateTime.utc(2026, 7, 5)],
+      );
+    });
+
+    test('ernst, getroffen systemen en findingtypen delen één definitie', () {
+      final snapshot = _snapshot(
+        date: DateTime.utc(2026, 7, 13),
+        source: 'current.json',
+        findings: [
+          _finding(id: 'a', severity: 'critical', systemId: 'a.example'),
+          _finding(id: 'b', severity: 'high', systemId: 'b.example'),
+          _finding(id: 'c', severity: 'recommendation', systemId: 'a.example'),
+        ],
+      );
+      final facts = OpenKatReportFacts([
+        _organization('alpha', [snapshot]),
+      ]);
+
+      expect(facts.findingsBySeverity(snapshot, 'critical').length, 1);
+      expect(
+        facts.findingsBySeverity(snapshot, openKatOtherSeverity).length,
+        1,
+      );
+      expect(facts.affectedSystems(snapshot), {'a.example', 'b.example'});
+      expect(
+        facts
+            .findingTypesAcrossOrganizations(
+              _request(
+                currentAsOf: DateTime.utc(2026, 7, 14),
+                previousAsOf: null,
+              ),
+            )
+            .keys,
+        {'KAT-a', 'KAT-b', 'KAT-c'},
+      );
+    });
+
+    test('systeem- en controlmutaties tonen hun feitelijke richting', () {
+      final facts = OpenKatReportFacts([
+        _organization('alpha', [
+          _snapshot(
+            date: DateTime.utc(2026, 7, 6),
+            source: 'previous.json',
+            findings: [
+              _finding(id: 'a1', severity: 'critical', systemId: 'a.example'),
+              _finding(id: 'a2', severity: 'high', systemId: 'a.example'),
+              _finding(id: 'b1', severity: 'low', systemId: 'b.example'),
+            ],
+            controls: const {
+              'rpki': OpenKatControlScore(name: 'RPKI', compliant: 1, total: 2),
+            },
+          ),
+          _snapshot(
+            date: DateTime.utc(2026, 7, 13),
+            source: 'current.json',
+            findings: [
+              _finding(id: 'a2', severity: 'high', systemId: 'a.example'),
+              _finding(id: 'b1', severity: 'low', systemId: 'b.example'),
+              _finding(id: 'b2', severity: 'high', systemId: 'b.example'),
+            ],
+            controls: const {
+              'rpki': OpenKatControlScore(name: 'RPKI', compliant: 2, total: 2),
+            },
+          ),
+        ]),
+      ]);
+
+      expect(
+        {
+          for (final change in facts.systemChanges(_request()))
+            change.systemId: change.classification,
+        },
+        {'a.example': 'verbeterd', 'b.example': 'verslechterd'},
+      );
+      final control = facts.controlChanges(_request()).single;
+      expect(control.controlId, 'rpki');
+      expect(control.previousRatio, 0.5);
+      expect(control.currentRatio, 1);
+      expect(control.delta, 0.5);
+    });
+
+    test('CVE- en monitoringqueries gebruiken alleen canonieke velden', () {
+      final facts = OpenKatReportFacts([
+        _organization('alpha', [
+          _snapshot(
+            date: DateTime.utc(2026, 7, 6),
+            source: 'previous.json',
+            findings: [
+              _finding(id: 'cve', cveIds: const ['CVE-2026-1234']),
+            ],
+            systems: const [
+              OpenKatSystem(
+                id: 'removed.example',
+                stableIdentity: true,
+                monitoringStatus: OpenKatMonitoringStatus.monitored,
+              ),
+            ],
+          ),
+          _snapshot(
+            date: DateTime.utc(2026, 7, 13),
+            source: 'current.json',
+            findings: [
+              _finding(id: 'cve', cveIds: const ['CVE-2026-1234']),
+            ],
+            systems: const [
+              OpenKatSystem(
+                id: 'added.example',
+                stableIdentity: true,
+                monitoringStatus: OpenKatMonitoringStatus.monitored,
+              ),
+            ],
+          ),
+        ]),
+      ]);
+
+      expect(
+        facts
+            .cveExposure(_request(), 'cve-2026-1234')
+            .map((item) => item.finding.id),
+        ['cve'],
+      );
+      expect(
+        {
+          for (final mutation in facts.monitoringMutations(_request()))
+            mutation.system.id: mutation.kind,
+        },
+        {
+          'added.example': OpenKatMonitoringMutationKind.added,
+          'removed.example': OpenKatMonitoringMutationKind.removed,
+        },
       );
     });
   });
