@@ -433,6 +433,20 @@ abstract interface class MeetingSession {
 - a stable failure reason such as `guestDisabled`, `accountRequired`,
   `appApprovalRequired`, `meetingTypeUnsupported` or `providerUnavailable`.
 
+**One shell for every adapter.** The joining interface is provider-neutral and
+specified once, in `TEAMS_GUEST_CLIENT.md` §6 (invariant T14). An adapter
+supplies facts — display name, recognised link family, egress disclosure,
+capabilities, role — and never its own screens, wording style or control
+layout. Adding a provider must not change what the feature looks like for
+users of the
+providers already supported. A provider that seems to need a bespoke screen has
+found a gap in this contract; widen the contract instead.
+
+**One switch for all of them.** Calling as a whole is an optional module on the
+Uitbreidingen tab (T13), not a per-provider preference. Off means no shell
+action and no adapter code reached; the register below governs which providers a
+revealed module can then recognise.
+
 The UI renders controls only from `MeetingCapabilities`. It must not imitate a
 control that an adapter cannot perform. Both capabilities and role are live
 state: a host may promote an attendee to presenter, demote a moderator or revoke
