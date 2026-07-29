@@ -1,28 +1,33 @@
-# OciDeck — Procesverbetering: a product design for an unbuilt module
+# OciDeck — Procesverbetering: product design
 
-*The module that would support Lean Six Sigma methods — DMAIC, DMADV, Kaizen,
+*The module that supports Lean Six Sigma methods — DMAIC, DMADV, Kaizen,
 A3, 8D. The neutral name is deliberate; see §19.*
 
-> **Status:** design proposal — unbuilt; a product design, not a report about our own process · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** implemented (Phases 0–10) with the honesty notes below · **Status last reviewed:** 2026-07-29 · **Published by:** Stichting LibreKAT
 
 > **This is not a report about how OciDeck's own development process is
 > improved.** The title says "Procesverbetering" because that is the name of the
-> *product feature* being designed: a module in which a user authors Lean Six
-> Sigma work. Nothing here describes our own way of working, and nothing here
-> has been measured. *(Clarified 2026-07-22: the old heading, "Procesverbetering
-> (Design)", read to anyone scanning the folder as a process-improvement report,
-> which is the one thing it is not.)*
+> *product feature*: a module in which a user authors Lean Six Sigma
+> work. Nothing here describes our own way of working.
 >
-> **A design proposal — not yet implemented.**
-> This document describes a *future* capability (a Lean Six Sigma authoring
-> module) and the architecture chosen for it. It is deliberately kept separate
-> from the current-state contributor docs
+> **Implemented.** Behaviour lives in the contributor docs
 > ([`ARCHITECTURE.md`](../ARCHITECTURE.md), [`SOURCE_MAP.md`](../SOURCE_MAP.md),
-> [`FILE_FORMAT.md`](../FILE_FORMAT.md)) so that those keep describing what
-> exists. When (parts of) this lands, fold the relevant sections into those docs
-> and the [`USER_GUIDE.md`](../USER_GUIDE.md), and update the
-> [`CHANGELOG.md`](../../CHANGELOG.md).
+> [`FILE_FORMAT.md`](../FILE_FORMAT.md), [`USER_GUIDE.md`](../USER_GUIDE.md)) and
+> the [`CHANGELOG.md`](../../CHANGELOG.md). This design doc remains the *why*;
+> where shipping diverged deliberately, the notes in §3.6 and §8 win over older
+> sketches in this file.
 >
+> **Honesty vs earlier sketches in this document:**
+> - Artefact templates ship as Markdown sources under
+>   `assets/improvement/templates/` → `templates.json` via
+>   `tool/build_improvement_templates.dart` (drop-in file + rebuild). Not a
+>   nested `metrics:` YAML map.
+> - Y-01 limits use **flat** front-matter keys (`ocideck_improvement_y01_*`)
+>   because FILE_FORMAT forbids nested front matter; charts link with
+>   `yRef: "Y-01"` and resolve at draw time.
+> - Phase-gate **gates/waivers** maps from the early §3.6 sketch are not shipped
+>   yet; the phase-gate slide is a Markdown checklist.
+> - Multi-Y (Y-02+) is not shipped; only Y-01 propagates.
 > It is written to be **picked up cold**: exact file paths, integration points,
 > data shapes, invariants and open questions are spelled out so a later
 > implementation session has everything it needs without re-deriving context.
@@ -383,31 +388,27 @@ the numbers.** No database — a folder of CSVs and a Markdown file.
 
 ### 3.6 Deck-level metadata (front matter)
 
-Namespaced `ocideck_improvement_*`, alongside `ocideck_miauw_*`:
+Namespaced `ocideck_improvement_*`, alongside other `ocideck_*` keys. **Flat
+scalars only** — FILE_FORMAT §3 forbids nested front-matter maps, so the early
+sketch with nested `metrics:` / `gates:` is **not** how the file looks. Shipped
+shape:
 
 ```yaml
-ocideck_improvement_framework: dmaic          # dmaic | dmadv | kaizen | a3 | eight_d | pdca
-ocideck_improvement_project: Order intake lead time
-ocideck_improvement_metrics:
-  Y-01:
-    name: Lead time order intake
-    unit: days
-    usl: 7
-    target: 3.5
-    baseline: 14
-    goal: 7
-ocideck_improvement_gates:
-  define:  { passed: 2026-03-04, by: J. Jansen }
-  measure: { passed: 2026-04-11, by: J. Jansen }
-ocideck_improvement_waivers:
-  msa: Client accepted the existing gauge study
+ocideck_improvement_framework: dmaic
+ocideck_improvement_y01: Lead time order intake
+ocideck_improvement_y01_unit: days
+ocideck_improvement_y01_usl: 7
+ocideck_improvement_y01_lsl: 1
+ocideck_improvement_y01_target: 3.5
+ocideck_improvement_y01_baseline: 14
+ocideck_improvement_y01_goal: 7
 ```
 
-**A Y is defined once.** The histogram, the capability analysis and the control
-chart all resolve their spec limits *through the `Y-01` reference*, so LSL/USL
-cannot drift between slides. This is the direct analogue of MIAUW's CIA → CVSS
-environmental propagation (PENTEST_MIAUW §10.5): ask once, up front, propagate
-everywhere.
+**A Y is defined once.** Histogram and control-chart slides set `"yRef": "Y-01"`
+in the chart JSON; USL/LSL/target resolve from these deck keys at draw time so
+limits cannot drift between slides. Local chart `usl`/`lsl` remain valid when
+`yRef` is absent (migration / secondary charts). Phase-gate pass records and
+waivers from the earlier nested sketch are **not** shipped yet.
 
 ---
 

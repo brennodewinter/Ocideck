@@ -19,15 +19,27 @@ class AddSlideDialog extends StatefulWidget {
   /// PENTEST_MIAUW §6). Off by default; the caller passes the provider's value.
   final bool revealInfoSafety;
 
-  const AddSlideDialog({super.key, this.revealInfoSafety = false});
+  /// Whether the Procesverbetering module is revealed. Gates improvement slide
+  /// types and their picker tab (PROCESS_IMPROVEMENT.md Phase 0).
+  final bool revealProcesverbetering;
+
+  const AddSlideDialog({
+    super.key,
+    this.revealInfoSafety = false,
+    this.revealProcesverbetering = false,
+  });
 
   static Future<SlideType?> show(
     BuildContext context, {
     bool revealInfoSafety = false,
+    bool revealProcesverbetering = false,
   }) {
     return showDialog<SlideType>(
       context: context,
-      builder: (_) => AddSlideDialog(revealInfoSafety: revealInfoSafety),
+      builder: (_) => AddSlideDialog(
+        revealInfoSafety: revealInfoSafety,
+        revealProcesverbetering: revealProcesverbetering,
+      ),
     );
   }
 
@@ -62,6 +74,13 @@ class AddSlideDialog extends StatefulWidget {
     SlideType.checklist,
     SlideType.scopeMatrix,
     SlideType.signOff,
+    // Procesverbetering-module — eigen tabblad zodra de module de types
+    // onthult (PROCESS_IMPROVEMENT §6).
+    SlideType.matrix,
+    SlideType.canvas,
+    SlideType.tree,
+    SlideType.flow,
+    SlideType.phaseGate,
   ];
 
   @override
@@ -105,14 +124,20 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
     super.dispose();
   }
 
-  /// The types the picker may offer: every registered type, minus the
-  /// Informatieveiligheid types while the module is not revealed. Derived from
-  /// [slideTypeMeta] so a new type shows up automatically.
-  Iterable<SlideType> _availableTypes() => slideTypeMeta.keys.where(
-    (t) =>
-        widget.revealInfoSafety ||
-        t.category != SlideCategory.informationSecurity,
-  );
+  /// The types the picker may offer: every registered type, minus module-gated
+  /// types while their module is not revealed. Derived from [slideTypeMeta] so
+  /// a new type shows up automatically.
+  Iterable<SlideType> _availableTypes() => slideTypeMeta.keys.where((t) {
+    if (t.category == SlideCategory.informationSecurity &&
+        !widget.revealInfoSafety) {
+      return false;
+    }
+    if (t.category == SlideCategory.procesverbetering &&
+        !widget.revealProcesverbetering) {
+      return false;
+    }
+    return true;
+  });
 
   /// Available types in curated order, with any uncurated type appended in enum
   /// order.
@@ -151,6 +176,8 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
         return l10n.d('Algemeen');
       case SlideCategory.informationSecurity:
         return l10n.d('Informatieveiligheid');
+      case SlideCategory.procesverbetering:
+        return l10n.d('Procesverbetering');
     }
   }
 
@@ -722,6 +749,101 @@ class SlideTypePreviewPainter extends CustomPainter {
       case SlideType.scopeMatrix:
       case SlideType.signOff:
         _paintSecurityWireframe(canvas, type);
+      case SlideType.matrix:
+        _paintMatrixWireframe(canvas);
+      case SlideType.canvas:
+        _paintCanvasWireframe(canvas);
+      case SlideType.tree:
+        _paintTreeWireframe(canvas);
+      case SlideType.flow:
+        _paintFlowWireframe(canvas);
+      case SlideType.phaseGate:
+        _paintSecurityWireframe(canvas, SlideType.checklist);
+    }
+  }
+
+  /// Horizontal process chain off a title bar.
+  void _paintFlowWireframe(Canvas canvas) {
+    _bar(canvas, 14, 12, 72, 8, _ink);
+    for (var i = 0; i < 3; i++) {
+      final x = 14.0 + i * 44;
+      _bar(canvas, x, 32, 36, 22, _fill, radius: 3);
+      if (i < 2) {
+        canvas.drawLine(
+          Offset(x + 38, 43),
+          Offset(x + 44, 43),
+          _paint(_accent.withValues(alpha: 0.6))..strokeWidth = 1.5,
+        );
+      }
+    }
+    _bar(canvas, 14, 62, 100, 5, _soft);
+  }
+
+  /// Nested list / fishbone branches off a title bar.
+  void _paintTreeWireframe(Canvas canvas) {
+    _bar(canvas, 14, 12, 72, 8, _ink);
+    _bar(canvas, 14, 28, 48, 6, _soft);
+    _bar(canvas, 22, 40, 56, 5, _fill);
+    _bar(canvas, 30, 52, 44, 5, _fill);
+    canvas.drawLine(
+      const Offset(18, 34),
+      const Offset(18, 56),
+      _paint(_accent.withValues(alpha: 0.5))..strokeWidth = 1.5,
+    );
+    canvas.drawLine(
+      const Offset(26, 42),
+      const Offset(26, 56),
+      _paint(_accent.withValues(alpha: 0.35))..strokeWidth = 1.2,
+    );
+    canvas.drawLine(
+      const Offset(120, 48),
+      const Offset(146, 48),
+      _paint(_bone)..strokeWidth = 2,
+    );
+    canvas.drawLine(
+      const Offset(130, 48),
+      const Offset(124, 38),
+      _paint(_bone)..strokeWidth = 1.5,
+    );
+    canvas.drawLine(
+      const Offset(130, 48),
+      const Offset(124, 58),
+      _paint(_bone)..strokeWidth = 1.5,
+    );
+  }
+
+  static Color get _bone => AppTheme.slate600;
+
+  /// Typed grid: title bar plus a few cells, some accented (high RPN / focus).
+  void _paintMatrixWireframe(Canvas canvas) {
+    _bar(canvas, 14, 12, 72, 8, _ink);
+    final grid = _paint(_soft)..strokeWidth = 1.2;
+    const gLeft = 14.0, gTop = 28.0, gRight = 146.0, gBottom = 76.0;
+    for (var c = 0; c <= 5; c++) {
+      final x = gLeft + c * (gRight - gLeft) / 5;
+      canvas.drawLine(Offset(x, gTop), Offset(x, gBottom), grid);
+    }
+    for (var rr = 0; rr <= 3; rr++) {
+      final y = gTop + rr * (gBottom - gTop) / 3;
+      canvas.drawLine(Offset(gLeft, y), Offset(gRight, y), grid);
+    }
+    _bar(canvas, 16, 30, (gRight - gLeft) - 4, 12, _fill, radius: 1);
+    _bar(canvas, 42, 46, 18, 9, _accent, radius: 2);
+    _bar(canvas, 94, 62, 18, 9, _accent, radius: 2);
+  }
+
+  /// Named regions: title bar plus four boxes in a 2×2 grid.
+  void _paintCanvasWireframe(Canvas canvas) {
+    _bar(canvas, 14, 12, 72, 8, _ink);
+    const left = 14.0, top = 28.0, gap = 4.0;
+    const boxW = 66.0, boxH = 22.0;
+    for (var row = 0; row < 2; row++) {
+      for (var col = 0; col < 2; col++) {
+        final x = left + col * (boxW + gap);
+        final y = top + row * (boxH + gap);
+        _bar(canvas, x, y, boxW, boxH, _fill, radius: 2);
+        _bar(canvas, x + 4, y + 4, boxW * 0.45, 5, _soft, radius: 1);
+      }
     }
   }
 
@@ -871,7 +993,12 @@ class SlideTypePreviewPainter extends CustomPainter {
           SlideType.timeline ||
           SlideType.scorecard ||
           SlideType.assets ||
-          SlideType.discoveries:
+          SlideType.discoveries ||
+          SlideType.matrix ||
+          SlideType.canvas ||
+          SlideType.tree ||
+          SlideType.flow ||
+          SlideType.phaseGate:
         break;
     }
   }

@@ -16,6 +16,9 @@ class _EditorToolbar extends StatelessWidget {
   /// in de kiezer net als 'Slide toevoegen' (zie [AddSlideDialog]).
   final bool revealInfoSafety;
 
+  /// Of de Procesverbetering-module onthuld is.
+  final bool revealProcesverbetering;
+
   /// Extra items rechts in de kopregel (bijv. de hulp-toggle en de
   /// kwaliteits-samenvatting), zodat die op dezelfde regel als TYPE/STIJL staan.
   final List<Widget> trailing;
@@ -29,18 +32,26 @@ class _EditorToolbar extends StatelessWidget {
     required this.onProfileChanged,
     required this.onDefaultProfileRequested,
     required this.revealInfoSafety,
+    this.revealProcesverbetering = false,
     this.trailing = const [],
   });
 
   /// Open dezelfde visuele kiezer als 'Slide toevoegen' om het slide-type te
-  /// wijzigen. Is de huidige slide al een informatieveiligheid-type, dan tonen
-  /// we die categorie óók als de module uit staat — anders zit je vast en kun
-  /// je zo'n slide niet naar een ander security-type ombouwen.
+  /// wijzigen. Is de huidige slide al een module-type, dan tonen we die
+  /// categorie óók als de module uit staat — anders zit je vast en kun je
+  /// zo'n slide niet naar een ander type in dezelfde categorie ombouwen.
   Future<void> _pickType(BuildContext context) async {
-    final reveal =
+    final revealSec =
         revealInfoSafety ||
         slide.type.category == SlideCategory.informationSecurity;
-    final picked = await AddSlideDialog.show(context, revealInfoSafety: reveal);
+    final revealImp =
+        revealProcesverbetering ||
+        slide.type.category == SlideCategory.procesverbetering;
+    final picked = await AddSlideDialog.show(
+      context,
+      revealInfoSafety: revealSec,
+      revealProcesverbetering: revealImp,
+    );
     if (picked != null && picked != slide.type) onTypeChanged(picked);
   }
 
@@ -153,6 +164,7 @@ class _EditorHeaderBar extends StatefulWidget {
   final ValueChanged<ThemeProfile> onProfileChanged;
   final VoidCallback onDefaultProfileRequested;
   final bool revealInfoSafety;
+  final bool revealProcesverbetering;
 
   const _EditorHeaderBar({
     required this.slide,
@@ -163,6 +175,7 @@ class _EditorHeaderBar extends StatefulWidget {
     required this.onProfileChanged,
     required this.onDefaultProfileRequested,
     required this.revealInfoSafety,
+    this.revealProcesverbetering = false,
   });
 
   @override
@@ -187,6 +200,7 @@ class _EditorHeaderBarState extends State<_EditorHeaderBar> {
           onProfileChanged: widget.onProfileChanged,
           onDefaultProfileRequested: widget.onDefaultProfileRequested,
           revealInfoSafety: widget.revealInfoSafety,
+          revealProcesverbetering: widget.revealProcesverbetering,
           trailing: [
             const SizedBox(width: 8),
             SlideTypeHelpToggle(

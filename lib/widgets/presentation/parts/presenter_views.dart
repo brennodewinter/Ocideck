@@ -100,6 +100,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                       : null,
                   onAudioComplete: () => _onMediaCompleted(kind: 'audio'),
                   onVideoComplete: () => _onMediaCompleted(kind: 'video'),
+                  improvementY01: widget.improvementY01,
                 ),
                 // Annotatielaag bovenop de dia. Laat klikken door wanneer er
                 // geen gereedschap actief is (zodat tikken blijft doorbladeren).
@@ -263,6 +264,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                                 widget.themeProfile,
                                 widget.themeProfile.fontFamily,
                               ),
+                              improvementY01: widget.improvementY01,
                             ),
                           )
                         : Container(

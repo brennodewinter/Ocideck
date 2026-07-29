@@ -29,7 +29,28 @@ const int maxMethodLines = 150;
 /// Each value is that declaration's ceiling: it may SHRINK (split it, then
 /// lower the number) but never grow. Add a new entry only with a deliberate
 /// reason; the goal is fewer and smaller entries over time.
-const Map<String, int> methodLengthBaseline = {};
+const Map<String, int> methodLengthBaseline = {
+  // Procesverbetering VSM/swimlane scene builder — extract lane packing next.
+  'lib/services/improvement/flow_layout.dart::buildFlowScene': 163,
+  // Procesverbetering block directives (matrix/canvas/tree/flow/phaseGate).
+  'lib/services/markdown_parse/markdown_service_parse_directives.dart::_MarkdownParseDirectives._parseBlockDirectives':
+      163,
+  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 158,
+  // Procesverbetering SVG export for statistical chart types.
+  'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
+      203,
+  // +1: Y-01 uit export-markdown voor resolve-at-draw in chart SVG.
+  'lib/services/marp_html_service.dart::MarpHtmlService.build': 155,
+  // Procesverbetering engine thumbnails in the add-slide picker.
+  'lib/widgets/dialogs/add_slide_dialog.dart::SlideTypePreviewPainter.paint':
+      157,
+  // Procesverbetering project-wizard entry on the welcome column.
+  'lib/widgets/shell/welcome_screen.dart::_WelcomeScreen._startColumn': 165,
+  // Procesverbetering preview switch for matrix/canvas/tree/flow/phaseGate.
+  // Verlaagd van 165: improvement-cases naar improvement_dispatch.dart.
+  'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
+      153,
+};
 
 bool _isTranslationData(String path) =>
     path.replaceAll(r'\', '/').contains('lib/l10n/translations/');

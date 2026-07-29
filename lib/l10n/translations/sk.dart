@@ -1778,6 +1778,47 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Nog geen specificatielimiet': 'Zatiaľ žiadny limit špecifikácie',
+  'USL (bovengrens)': 'USL (horná medza)',
+  'LSL (ondergrens)': 'LSL (dolná medza)',
+  'Optionele Y-01-velden': 'Voliteľné polia Y-01',
+  'Procesdoel (target)': 'Cieľ procesu (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Limity špecifikácie Y-01 (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Tento deck má limity Y-01. Zapnite vyššie uvedený prepínač, aby ste ich použili namiesto miestnych hodnôt.',
+  'USL (bovengrens, optioneel)': 'USL (horná medza, voliteľné)',
+  'LSL (ondergrens, optioneel)': 'LSL (dolná medza, voliteľné)',
+  'Procesdoel (optioneel)': 'Cieľ procesu (voliteľné)',
+  'Fasepoort': 'Fázová brána',
+  'Berekenen': 'Calculate',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Slope',
+  'Hypothesetoets': 'Hypothesis test',
+  'Hypothesetoets…': 'Hypothesis test…',
+  'Hypothetisch gemiddelde': 'Hypothesized mean',
+  'Lineaire regressie': 'Linear regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Measurement data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (optional)',
+  'Eénsteeks t-toets': 'One-sample t-test',
+  'Twee-steeks t-toets (Welch)': 'Dvouvýběrový t-test (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Jeden stĺpec čísel (aspoň 2 pozorovania).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Dva stĺpce oddelené prázdnym riadkom (aspoň 2 na skupinu).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Viaceré skupiny, každá skupina stĺpec, oddelené prázdnym riadkom (aspoň 2 skupiny, 2 pozorovania na skupinu).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Vložte Part, Operator a Value (tabulátor alebo čiarka). Opakujte riadky pre repliky. Aspoň 2 parts, 2 operátory, 2 merania na bunku.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Vložte X a Y (jedno číslo na riadok). Aspoň 3 páry; engine odmietne príliš málo pozorovaní.',
+  'Part × Operator interaction pooled into repeatability':
+      'Interakcia Part × Operator zlúčená do opakovateľnosti',
+  'Part × Operator interaction kept separate':
+      'Interakcia Part × Operator udržaná oddelene',
+  'Te weinig gegevens voor een probability plot':
+      'Príliš málo dát pre pravdepodobnostný graf',
   'Met dank aan': 'S vďakou',
   'Fix alle problemen': 'Opraviť všetky problémy',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1853,6 +1894,79 @@ const _dutchSourceAddSk = <String, String>{
       'nepodarilo sa načítať a bolo preskočené',
   'ontbrak in het bestand en is overgeslagen':
       'chýbalo v súbore a bolo preskočené',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Príliš málo dát pre graf hlavných efektov',
+  'Te weinig gegevens voor een interactieplot':
+      'Príliš málo dát pre graf interakcie',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Vytvorí návrhovú tabuľku s kódovanými faktormi (−1/+1) a prázdnym stĺpcom Y v mriežke.',
+  'Aantal factoren': 'Počet faktorů',
+  'Volledig factorial (2^k)': 'Úplný faktoriál (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'běhy ve standardním Yatesově pořadí',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Jedna séria na faktor s kódovanými úrovňami −1 a +1; posledná séria je odozva (Y). Riadky sú experimentálne behy.',
+  'Golden-thread-id': 'Golden-thread id',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'je niekde spomenutý, ale nie je na snímke stromu — definujte ho na CTQ alebo Ishikawa strome.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'je na snímke stromu, ale inde sa nepoužíva — prepojte ho s maticou, tokom alebo iným snímkom.',
+  'Nieuw verbeteringsproject': 'Nový projekt zlepšovania',
+  'Kader': 'Rámec',
+  'Projecttitel': 'Názov projektu',
+  'Primaire Y-metriek (Y-01)': 'Primárna Y metrika (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Napríklad: čas order intake v pracovných dňoch',
+  'Project starten': 'Spustiť projekt',
+  'Procesverbetering: DMAIC-project': 'Zlepšovanie procesov: projekt DMAIC',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'DMAIC kostra s charterom, CTQ stromom (Y-01), SIPOC a fázovými sekciami.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Checklist fázovej brány: potvrďte scope, stakeholderov a go/no-go pred prechodom do ďalšej fázy.',
+  'Stroom': 'Tok',
+  'Zwembanen': 'Dráhy',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Tok procesu, dráhy alebo VSM. Kroky ako názov :: druh :: pt=…; lt=…. Súčty (PCE, bottleneck) sa počítajú a neukladajú.',
+  'Boom': 'Strom',
+  'Visgraat': 'Rybia kosť',
+  'Lay-out': 'Rozloženie',
+  'Punten': 'Body',
+  'Inspringen': 'Odsadiť',
+  'Uitspringen': 'Zmenšiť odsadenie',
+  'Punt toevoegen': 'Pridať bod',
+  'Punt verwijderen': 'Odstrániť bod',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Strom alebo rybia kosť (5× Why, CTQ, Ishikawa). Hĺbka tabulátormi; označte príčiny ako **X-01** inline.',
+  'Canvas': 'Plátno',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Plátno regiónov (A3, charter, SWOT, nástenka). Vyberte šablónu; nadpisy ## na disku sú polia.',
+  'Matrix': 'Matica',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Typovaná mriežka (SIPOC, FMEA, RACI, …). Vyberte šablónu; odvodené stĺpce, ako RPN, sa počítajú a neukladajú.',
+  'Regelkaart': 'Regulačný diagram',
+  'Histogram': 'Histogram',
+  'Pareto': 'Pareto',
+  'Run chart': 'Priebehový diagram',
+  'Boxplot': 'Krabicový graf',
+  'Plakken uit klembord': 'Vložiť zo schránky',
+  'Te weinig gegevens voor een regelkaart':
+      'Príliš málo údajov pre regulačný diagram',
+  'Te weinig gegevens voor een histogram': 'Príliš málo údajov pre histogram',
+  'Te weinig gegevens voor een boxplot':
+      'Príliš málo údajov pre krabicový graf',
+  'Procesverbetering': 'Zlepšovanie procesov',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefakty na zlepšovanie procesov a projekty Lean Six Sigma (DMAIC, Kaizen, A3). Predvolene vypnuté. Modul je k dispozícii; artefakty budú nasledovať v ďalších krokoch.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Modul zapnutý. Výpočtové jadro dostupné lokálne ({n} faktorov control chart). Typy snímok a šablóny pribudnú, keď budú pripravené.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Táto prezentácia obsahuje časti modulu Zlepšovanie procesov. Zapnite modul, aby ste ich mohli upravovať.',
   'Online media staat uit — aanzetten': 'Online médiá sú vypnuté — zapnúť',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} obsahuje spustiteľný obsah a nebude importovaný.',

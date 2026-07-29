@@ -47,6 +47,7 @@ String buildBeamerMarkdown({
   TlpLevel tlp = TlpLevel.none,
   String organization = '',
   String reportLanguage = '',
+  ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
 }) => MarkdownService().generateDeck(
   Deck(
     title: 'Presentatie',
@@ -55,6 +56,7 @@ String buildBeamerMarkdown({
     tlp: tlp,
     organization: organization,
     language: reportLanguage,
+    improvementY01Metric: improvementY01,
   ),
   inlineChartData: true,
 );

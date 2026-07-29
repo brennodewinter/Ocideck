@@ -34,6 +34,7 @@ extension _SettingsModules on _SettingsDialogState {
               onOpenIntegrations: () =>
                   _rebuild(() => _selectedTab = SettingsSection.integrations),
             ),
+            ModuleId.procesverbetering => const ProcesverbeteringModuleCard(),
           },
         ],
       ],

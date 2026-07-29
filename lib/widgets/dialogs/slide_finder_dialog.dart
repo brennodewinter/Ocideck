@@ -575,6 +575,7 @@ class _SlideHitCard extends StatelessWidget {
                         slide: hit.slide,
                         projectPath: deck.projectPath,
                         themeProfile: deck.themeProfile,
+                        improvementY01: deck.improvementY01Metric,
                       ),
                     ),
                   ),

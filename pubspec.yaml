@@ -165,6 +165,9 @@ flutter:
     # Full MITRE CWE weakness list (offline), merged over the curated floor in
     # lib/services/cwe_catalog.dart. Regenerate with tool/build_cwe_catalog.dart.
     - assets/cwe/cwe_full.json
+    # Procesverbetering artefact templates (MD sources → JSON). Rebuild with
+    # `dart run tool/build_improvement_templates.dart`.
+    - assets/improvement/templates.json
     # Het gebundelde gezondheidslexicon (Orphanet, CC BY 4.0) — zie
     # tool/build_privacy_lexicon.dart en docs/LICENSE_COMPLIANCE.md.
     - assets/privacy/health_lexicon.json

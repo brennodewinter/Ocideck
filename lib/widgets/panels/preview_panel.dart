@@ -448,6 +448,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                   numberStart: numberedListStartFor(deck.slides, idx),
                   scopeCia: deckScopeCiaIndex(deck.slides),
                   reportLanguage: deck.language,
+                  improvementY01: deck.improvementY01Metric,
                   fitScaleOverride: sharedSplitFitScale(
                     deck.slides,
                     idx,
@@ -645,6 +646,7 @@ class FullDeckPreview extends ConsumerWidget {
                     slideCount: deck.slides.length,
                     scopeCia: deckScopeCiaIndex(deck.slides),
                     reportLanguage: deck.language,
+                    improvementY01: deck.improvementY01Metric,
                     tlp: deck.tlp,
                     organization: deck.organization,
                     deckSignature: deck.signature,

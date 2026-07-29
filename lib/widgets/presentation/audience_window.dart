@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/annotation.dart';
 import '../../models/deck.dart';
+import '../../models/improvement_y01.dart';
 import '../../models/question.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
@@ -65,6 +66,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   bool _showClassificationWatermark = false;
   bool _allowRemoteMedia = false;
   String? _projectPath;
+  ImprovementY01Metric _improvementY01 = ImprovementY01Metric.empty;
   int _index = 0;
   int _richTextPage = 0;
   int _timelineStep = 0;
@@ -113,6 +115,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     }
     _tlp = deck?.tlp ?? TlpLevel.none;
     _organization = deck?.organization ?? '';
+    _improvementY01 = deck?.improvementY01Metric ?? ImprovementY01Metric.empty;
     _showClassificationWatermark =
         widget.args['classificationWatermarkEnabled'] as bool? ?? false;
     _allowRemoteMedia = widget.args['allowRemoteMedia'] as bool? ?? false;
@@ -252,6 +255,8 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         setState(() {
           _slides = next;
           _index = next.isEmpty ? 0 : i.clamp(0, next.length - 1);
+          _improvementY01 =
+              deck?.improvementY01Metric ?? ImprovementY01Metric.empty;
         });
     }
     return null;
@@ -408,6 +413,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                     'index': _index,
                     'kind': 'video',
                   }),
+                  improvementY01: _improvementY01,
                 ),
                 AnnotationLayer(
                   strokes: [

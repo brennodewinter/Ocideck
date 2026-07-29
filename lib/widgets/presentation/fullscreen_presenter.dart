@@ -15,6 +15,7 @@ import 'package:window_manager/window_manager.dart';
 import '../../platform/presenter_fullscreen.dart';
 import '../../models/annotation.dart';
 import '../../models/deck.dart';
+import '../../models/improvement_y01.dart';
 import '../../models/question.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
@@ -175,6 +176,9 @@ class FullscreenPresenter extends StatefulWidget {
   final Map<String, String> initialUserNotes;
   final void Function(Map<String, String>)? onUserNotesChanged;
 
+  /// Deck-level Y-01 metric for resolve-at-draw on improvement charts.
+  final ImprovementY01Metric improvementY01;
+
   const FullscreenPresenter({
     super.key,
     required this.slides,
@@ -197,6 +201,7 @@ class FullscreenPresenter extends StatefulWidget {
     this.onSlideSplit,
     this.initialUserNotes = const {},
     this.onUserNotesChanged,
+    this.improvementY01 = ImprovementY01Metric.empty,
   });
 
   /// Entry point used by the app: pick dual-screen mode when a second display is
@@ -269,6 +274,7 @@ class FullscreenPresenter extends StatefulWidget {
         onSlideSplit: onSlideSplit,
         initialUserNotes: initialUserNotes,
         onUserNotesChanged: onUserNotesChanged,
+        improvementY01: deck.improvementY01Metric,
       );
     } else {
       await show(
@@ -292,6 +298,7 @@ class FullscreenPresenter extends StatefulWidget {
         onSlideSplit: onSlideSplit,
         initialUserNotes: initialUserNotes,
         onUserNotesChanged: onUserNotesChanged,
+        improvementY01: deck.improvementY01Metric,
       );
     }
   }
@@ -317,6 +324,7 @@ class FullscreenPresenter extends StatefulWidget {
     ValueChanged<String>? onSlideSplit,
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
+    ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
   }) async {
     final hadWakeLock = await _wakeLockEnabled();
     await _enableWakeLock();
@@ -350,6 +358,7 @@ class FullscreenPresenter extends StatefulWidget {
               onSlideSplit: onSlideSplit,
               initialUserNotes: initialUserNotes,
               onUserNotesChanged: onUserNotesChanged,
+              improvementY01: improvementY01,
             ),
             transitionsBuilder: (context, animation, secondary, child) =>
                 FadeTransition(opacity: animation, child: child),
@@ -387,6 +396,7 @@ class FullscreenPresenter extends StatefulWidget {
     ValueChanged<String>? onSlideSplit,
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
+    ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
   }) async {
     final markdown = buildBeamerMarkdown(
       slides: slides,
@@ -394,6 +404,7 @@ class FullscreenPresenter extends StatefulWidget {
       tlp: tlp,
       organization: organization,
       reportLanguage: reportLanguage,
+      improvementY01: improvementY01,
     );
     // Pre-existing annotations re-keyed by index so the beamer shows them
     // immediately (the audience window has no stable slide ids of its own).
@@ -461,6 +472,7 @@ class FullscreenPresenter extends StatefulWidget {
           onSlideSplit: onSlideSplit,
           initialUserNotes: initialUserNotes,
           onUserNotesChanged: onUserNotesChanged,
+          improvementY01: improvementY01,
         );
       }
       return;
@@ -494,6 +506,7 @@ class FullscreenPresenter extends StatefulWidget {
               onSlideSplit: onSlideSplit,
               initialUserNotes: initialUserNotes,
               onUserNotesChanged: onUserNotesChanged,
+              improvementY01: improvementY01,
             ),
             transitionsBuilder: (context, animation, secondary, child) =>
                 FadeTransition(opacity: animation, child: child),
@@ -510,24 +523,6 @@ class FullscreenPresenter extends StatefulWidget {
 
   @override
   State<FullscreenPresenter> createState() => _FullscreenPresenterState();
-}
-
-@visibleForTesting
-bool shouldUseDualScreen({
-  required bool isDesktopNative,
-  required int displayCount,
-}) {
-  return isDesktopNative && displayCount >= 2;
-}
-
-@visibleForTesting
-bool autoAdvanceWaitsForMedia(Slide slide) {
-  final autoplayVideo =
-      slide.type == SlideType.video &&
-      slide.videoPath.isNotEmpty &&
-      slide.videoAutoplay;
-  final autoplayAudio = slide.audioPath.isNotEmpty && slide.audioAutoplay;
-  return autoplayVideo || autoplayAudio;
 }
 
 class _FullscreenPresenterState extends State<FullscreenPresenter> {

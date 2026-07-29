@@ -2,6 +2,7 @@ import '../services/front_matter_merge.dart';
 import 'privacy_disposition.dart';
 import 'annotation.dart';
 import 'document_signature.dart';
+import 'improvement_y01.dart';
 import 'seal_record.dart';
 import 'slide.dart';
 import 'used_tool.dart';
@@ -228,6 +229,18 @@ class Deck {
   /// front-matter-sleutel `ocideck_play_only` uit het bestand te halen.
   final bool playOnly;
 
+  /// LSS-/Lean-kader voor dit deck (`dmaic`, `dmadv`, `kaizen`, `a3`, `8d`).
+  /// Leeg wanneer geen kader gekozen. Round-trips als
+  /// `ocideck_improvement_framework` in de front matter.
+  final String improvementFramework;
+
+  /// Primaire Y-metriek (**Y-01**): naam + optionele limieten. Round-trips als
+  /// platte `ocideck_improvement_y01_*`-sleutels (FILE_FORMAT §3 — geen nesting).
+  final ImprovementY01Metric improvementY01Metric;
+
+  /// Vrije beschrijving van Y-01 — alias van [improvementY01Metric.name].
+  String get improvementY01 => improvementY01Metric.name;
+
   /// Documentintegriteit (§8 A1): is dit deck 'afgerond en verzegeld'? Een
   /// afgerond deck is bewust alleen-lezen — bekijken en exporteren kan, maar de
   /// inhoud is niet meer te bewerken.
@@ -377,6 +390,8 @@ class Deck {
     this.presentationTargetSeconds = 0,
     this.showRehearsalSummary = false,
     this.playOnly = false,
+    this.improvementFramework = '',
+    this.improvementY01Metric = ImprovementY01Metric.empty,
     this.finalized = false,
     this.sealHash = '',
     this.sealAlgo = '',
@@ -416,6 +431,9 @@ class Deck {
     int? presentationTargetSeconds,
     bool? showRehearsalSummary,
     bool? playOnly,
+    String? improvementFramework,
+    ImprovementY01Metric? improvementY01Metric,
+    String? improvementY01,
     bool? finalized,
     String? sealHash,
     String? sealAlgo,
@@ -455,6 +473,12 @@ class Deck {
           presentationTargetSeconds ?? this.presentationTargetSeconds,
       showRehearsalSummary: showRehearsalSummary ?? this.showRehearsalSummary,
       playOnly: playOnly ?? this.playOnly,
+      improvementFramework: improvementFramework ?? this.improvementFramework,
+      improvementY01Metric:
+          improvementY01Metric ??
+          (improvementY01 != null
+              ? this.improvementY01Metric.copyWith(name: improvementY01)
+              : this.improvementY01Metric),
       finalized: finalized ?? this.finalized,
       sealHash: sealHash ?? this.sealHash,
       sealAlgo: sealAlgo ?? this.sealAlgo,
@@ -487,4 +511,17 @@ class Deck {
   /// one-time "enable the module" discovery prompt when such a deck is opened
   /// while the module is off; the slides render regardless (MODUS-REGEL).
   bool get hasSecuritySlides => firstSecuritySlideIndex >= 0;
+
+  /// Index of the first Procesverbetering slide, or -1 when there is none.
+  /// Mirrors [firstSecuritySlideIndex] for the improvement-module discovery
+  /// banner (PROCESS_IMPROVEMENT.md Phase 0). Empty until Phase 3 ships
+  /// engine types tagged [SlideCategory.procesverbetering].
+  int get firstImprovementSlideIndex => slides.indexWhere(
+    (s) => s.type.category == SlideCategory.procesverbetering,
+  );
+
+  /// True when this deck carries any Procesverbetering slide type. Drives the
+  /// one-time "enable the module" discovery prompt; slides always render
+  /// (MODUS-REGEL).
+  bool get hasImprovementSlides => firstImprovementSlideIndex >= 0;
 }

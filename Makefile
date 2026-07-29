@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache
+.PHONY: l10n-export l10n-import dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -751,6 +751,13 @@ check-toolchain:
 	@echo "        ~/.zshrc — een regel vóór die van Homebrew verliest alsnog."
 	dart run tool/check_toolchain.dart
 
+check-improvement-templates:
+	@echo "== OciDeck check: improvement templates =="
+	@echo "Command: dart run tool/check_improvement_templates.dart"
+	@echo "Covers: assets/improvement/templates.json in sync with the generated floor."
+	@echo "Failure means: run dart run tool/build_improvement_templates.dart"
+	dart run tool/check_improvement_templates.dart
+
 # Add new d('…') source strings to every language's additions overlay from a
 # JSON spec (format documented in tool/add_l10n.dart). Inserts, dart-formats and
 # de-duplicates across all 30 language files in one step, and whitelists any
@@ -915,7 +922,7 @@ notarize-macos:
 # De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
 # lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
-STATIC_GATES := format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language
+STATIC_GATES := format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates
 
 check: $(STATIC_GATES) coverage coverage-per-file
 	@echo "== OciDeck check complete =="

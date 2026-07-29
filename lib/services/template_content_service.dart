@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart' show FlutterError;
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../models/slide.dart';
+import '../services/improvement/improvement_project_scaffold.dart';
 import '../utils/log.dart';
 import 'markdown_service.dart';
 
@@ -27,6 +28,14 @@ class TemplateContentService {
     required String languageCode,
     required String deckTitle,
   }) async {
+    if (templateId == 'procesverbetering-dmaic') {
+      return buildImprovementProjectSlides(
+        projectTitle: deckTitle,
+        framework: 'dmaic',
+        y01Description: '',
+      );
+    }
+
     final language = languageCode == 'nl' ? 'nl' : 'en';
     final Slide bareTitle = Slide.create(
       SlideType.title,

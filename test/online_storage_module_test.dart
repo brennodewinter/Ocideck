@@ -118,6 +118,7 @@ void main() {
         ModuleId.ai,
         ModuleId.onlineStorage,
         ModuleId.imports,
+        ModuleId.procesverbetering,
       ]);
     });
   });

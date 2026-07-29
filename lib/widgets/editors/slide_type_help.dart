@@ -107,6 +107,26 @@ String slideTypeHelpText(AppLocalizations l10n, SlideType type) {
       return l10n.d(
         'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.',
       );
+    case SlideType.matrix:
+      return l10n.d(
+        'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.',
+      );
+    case SlideType.canvas:
+      return l10n.d(
+        'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.',
+      );
+    case SlideType.tree:
+      return l10n.d(
+        'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.',
+      );
+    case SlideType.flow:
+      return l10n.d(
+        'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.',
+      );
+    case SlideType.phaseGate:
+      return l10n.d(
+        'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.',
+      );
   }
 }
 

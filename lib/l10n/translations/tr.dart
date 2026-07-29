@@ -2748,6 +2748,47 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Nog geen specificatielimiet': 'Henüz spesifikasyon sınırı yok',
+  'USL (bovengrens)': 'USL (üst sınır)',
+  'LSL (ondergrens)': 'LSL (alt sınır)',
+  'Optionele Y-01-velden': 'İsteğe bağlı Y-01 alanları',
+  'Procesdoel (target)': 'Süreç hedefi (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Y-01 spesifikasyon sınırları (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Bu deck\'te Y-01 sınırları var. Yerel değerler yerine bunları kullanmak için yukarıdaki anahtarı açın.',
+  'USL (bovengrens, optioneel)': 'USL (üst sınır, isteğe bağlı)',
+  'LSL (ondergrens, optioneel)': 'LSL (alt sınır, isteğe bağlı)',
+  'Procesdoel (optioneel)': 'Süreç hedefi (isteğe bağlı)',
+  'Fasepoort': 'Faz kapısı',
+  'Berekenen': 'Hesapla',
+  'Gegevens': 'Veriler',
+  'Hellingscoëfficiënt': 'Eğim',
+  'Hypothesetoets': 'Hipotez testi',
+  'Hypothesetoets…': 'Hipotez testi…',
+  'Hypothetisch gemiddelde': 'Varsayılan ortalama',
+  'Lineaire regressie': 'Doğrusal regresyon',
+  'Regressie…': 'Regresyon…',
+  'Meetdata': 'Ölçüm verileri',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerans (isteğe bağlı)',
+  'Eénsteeks t-toets': 'Tek örneklem t-testi',
+  'Twee-steeks t-toets (Welch)': 'İki örneklem t-testi (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Bir sütun sayı (en az 2 gözlem).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Boş satırla ayrılmış iki sütun (grup başına en az 2).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Birden fazla grup, her grup bir sütun, boş satırla ayrılmış (en az 2 grup, grup başına 2 gözlem).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Part, Operator ve Value yapıştırın (sekme veya virgül). Tekrarlar için satırları yineleyin. En az 2 part, 2 operatör, hücre başına 2 ölçüm.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'X ve Y yapıştırın (satır başına bir sayı). En az 3 çift; gözlem azsa motor reddeder.',
+  'Part × Operator interaction pooled into repeatability':
+      'Part × Operator etkileşimi tekrarlanabilirliğe birleştirildi',
+  'Part × Operator interaction kept separate':
+      'Part × Operator etkileşimi ayrı tutuldu',
+  'Te weinig gegevens voor een probability plot':
+      'Olasılık grafiği için yetersiz veri',
   'Met dank aan': 'Teşekkürle',
   'Fix alle problemen': 'Tüm sorunları düzelt',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -2821,6 +2862,78 @@ const _dutchSourceAddTr = <String, String>{
   'Dia-inhoud': 'Slayt içeriği',
   'kon niet worden gelezen en is overgeslagen': 'okunamadı ve atlandı',
   'ontbrak in het bestand en is overgeslagen': 'dosyada eksikti ve atlandı',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Ana etkiler grafiği için yetersiz veri',
+  'Te weinig gegevens voor een interactieplot':
+      'Etkileşim grafiği için yetersiz veri',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Kodlanmış faktörler (−1/+1) ve ızgarada boş bir Y sütunu içeren bir tasarım tablosu oluşturur.',
+  'Aantal factoren': 'Faktör sayısı',
+  'Volledig factorial (2^k)': 'Tam faktöriyel (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'standart Yates sırasıyla denemeler',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Faktör başına kodlanmış −1 ve +1 düzeyleriyle bir dizi; son dizi yanıttır (Y). Satırlar deneysel koşulardır.',
+  'Golden-thread-id': 'Golden thread kimliği',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'bir yerde geçiyor ama ağaç slaytında yok — CTQ veya Ishikawa ağacında tanımlayın.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'ağaç slaytında var ama başka yerde kullanılmıyor — matrise, akışa veya başka bir slayta bağlayın.',
+  'Nieuw verbeteringsproject': 'Yeni iyileştirme projesi',
+  'Kader': 'Çerçeve',
+  'Projecttitel': 'Proje başlığı',
+  'Primaire Y-metriek (Y-01)': 'Birincil Y metriği (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Örneğin: order intake süresi iş günü cinsinden',
+  'Project starten': 'Projeyi başlat',
+  'Procesverbetering: DMAIC-project': 'Süreç iyileştirme: DMAIC projesi',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'Charter, CTQ ağacı (Y-01), SIPOC ve faz bölümleri içeren DMAIC iskeleti.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Faz kapısı checklist: bir sonraki faza geçmeden önce scope, paydaşlar ve go/no-go kararını onaylayın.',
+  'Stroom': 'Akış',
+  'Zwembanen': 'Kulvarlar',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Bir süreç akışı, kulvarlar veya VSM. Adımlar başlık :: tür :: pt=…; lt=…. Toplamlar (PCE, bottleneck) hesaplanır ve kaydedilmez.',
+  'Boom': 'Ağaç',
+  'Visgraat': 'Balık kılçığı',
+  'Lay-out': 'Düzen',
+  'Punten': 'Noktalar',
+  'Inspringen': 'Girinti artır',
+  'Uitspringen': 'Girintiyi azalt',
+  'Punt toevoegen': 'Nokta ekle',
+  'Punt verwijderen': 'Noktayı kaldır',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Ağaç veya balık kılçığı (5× Why, CTQ, Ishikawa). Sekmelerle derinlik; nedenleri satır içinde **X-01** olarak işaretleyin.',
+  'Canvas': 'Tuval',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Bölgelerden oluşan bir tuval (A3, charter, SWOT, pano). Bir şablon seçin; diskteki ## başlıklar kutulardır.',
+  'Matrix': 'Matris',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Tipli bir ızgara (SIPOC, FMEA, RACI, …). Bir şablon seçin; RPN gibi türetilmiş sütunlar hesaplanır ve kaydedilmez.',
+  'Regelkaart': 'Kontrol grafiği',
+  'Histogram': 'Histogram',
+  'Pareto': 'Pareto',
+  'Run chart': 'Seyir grafiği',
+  'Boxplot': 'Kutu grafiği',
+  'Plakken uit klembord': 'Panodan yapıştır',
+  'Te weinig gegevens voor een regelkaart':
+      'Kontrol grafiği için veri yetersiz',
+  'Te weinig gegevens voor een histogram': 'Histogram için veri yetersiz',
+  'Te weinig gegevens voor een boxplot': 'Kutu grafiği için veri yetersiz',
+  'Procesverbetering': 'Süreç iyileştirme',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Süreç iyileştirme ve Lean Six Sigma projeleri (DMAIC, Kaizen, A3) için eserler. Varsayılan olarak kapalı. Modül kullanılabilir; eserler sonraki adımlarda gelecek.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Modül açık. Hesaplama çekirdeği yerel olarak kullanılabilir ({n} control chart faktörü). Slayt türleri ve şablonlar hazır olduklarında eklenecek.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Bu sunum, Süreç iyileştirme modülünün parçalarını içeriyor. Bunları düzenlemek için modülü açın.',
   'Online media staat uit — aanzetten': 'Çevrimiçi medya kapalı — aç',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand}, yürütülebilir içerik içeriyor ve içe aktarılmayacak.',

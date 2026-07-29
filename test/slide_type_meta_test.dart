@@ -67,6 +67,7 @@ void main() {
         SlideType.bullets: BulletColumns.one,
         SlideType.bulletsImage: BulletColumns.one,
         SlideType.twoBullets: BulletColumns.two,
+        SlideType.phaseGate: BulletColumns.one,
       },
     );
     // backedByTable verving `_tableBackedTypes` in de parser naast de
@@ -79,6 +80,7 @@ void main() {
       SlideType.checklist,
       SlideType.scopeMatrix,
       SlideType.findingsSummary,
+      SlideType.matrix,
     });
   });
 
