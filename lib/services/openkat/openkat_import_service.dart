@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 
 import '../../models/deck.dart';
+import '../../services/display_window_service.dart';
+import '../../services/markdown_service.dart';
 import '../../utils/atomic_file.dart';
 import '../../models/openkat/openkat_models.dart';
 import 'openkat_aggregator.dart';
@@ -31,39 +33,64 @@ class OpenKatImportService {
   });
 
   /// Imports a directory into a fresh deck.
+  ///
+  /// The [directory] is the designated OpenKAT directory with three
+  /// subdirectories: `raw-data` (JSON exports), `processed-data` (full deck)
+  /// and `presentations` (trimmed deck for distribution). All three are
+  /// created if absent.
   Future<({Deck deck, OpenKatManifest manifest, String sidecarDirectory})>
   importDirectory(
     String directory, {
     String? outputPath,
     String title = 'OpenKAT managementoverzicht',
   }) async {
-    final (:manifest, :groups) = await scanner.scan(directory);
+    final rawDir = p.join(directory, 'raw-data');
+    final processedDir = p.join(directory, 'processed-data');
+    final presentationsDir = p.join(directory, 'presentations');
+    await Directory(rawDir).create(recursive: true);
+    await Directory(processedDir).create(recursive: true);
+    await Directory(presentationsDir).create(recursive: true);
+
+    final (:manifest, :groups) = await scanner.scan(rawDir);
     final organizations = _normalize(groups);
     final deck = generator.generate(
       organizations,
       title: title,
-      outputPath: outputPath,
+      outputPath: p.join(processedDir, _safeFileName(title)),
     );
+    await _writeDeck(deck, processedDir);
+    await _writeDeck(_trimDeck(deck), presentationsDir);
     final sidecarDir = await _writeSidecars(
       deck: deck,
       manifest: manifest,
       organizations: organizations,
-      outputPath: outputPath,
+      processedDir: processedDir,
     );
     return (deck: deck, manifest: manifest, sidecarDirectory: sidecarDir);
   }
 
   /// Re-imports a directory and updates [existing], preserving manual slides.
+  ///
+  /// Same three-subdirectory structure as [importDirectory].
   Future<({Deck deck, OpenKatManifest manifest, String sidecarDirectory})>
   updateDeck(Deck existing, String directory) async {
-    final (:manifest, :groups) = await scanner.scan(directory);
+    final rawDir = p.join(directory, 'raw-data');
+    final processedDir = p.join(directory, 'processed-data');
+    final presentationsDir = p.join(directory, 'presentations');
+    await Directory(rawDir).create(recursive: true);
+    await Directory(processedDir).create(recursive: true);
+    await Directory(presentationsDir).create(recursive: true);
+
+    final (:manifest, :groups) = await scanner.scan(rawDir);
     final organizations = _normalize(groups);
     final deck = generator.update(existing, organizations);
+    await _writeDeck(deck, processedDir);
+    await _writeDeck(_trimDeck(deck), presentationsDir);
     final sidecarDir = await _writeSidecars(
       deck: deck,
       manifest: manifest,
       organizations: organizations,
-      outputPath: existing.projectPath,
+      processedDir: processedDir,
     );
     return (deck: deck, manifest: manifest, sidecarDirectory: sidecarDir);
   }
@@ -96,13 +123,9 @@ class OpenKatImportService {
     required Deck deck,
     required OpenKatManifest manifest,
     required List<OpenKatOrganization> organizations,
-    required String? outputPath,
+    required String processedDir,
   }) async {
-    if (outputPath == null || outputPath.isEmpty) {
-      return '';
-    }
-    final dir = p.dirname(outputPath);
-    final dataDir = p.join(dir, 'data', 'openkat');
+    final dataDir = p.join(processedDir, 'data', 'openkat');
     await Directory(dataDir).create(recursive: true);
 
     final manifestFile = File(p.join(dataDir, 'manifest.json'));
@@ -173,4 +196,24 @@ class OpenKatImportService {
 
   String _safe(String value) =>
       value.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '-');
+
+  /// Past de weergavelimiet per dia destructief toe: de volledige data in
+  /// `processed-data` blijft intact, maar de presentatie in `presentations`
+  /// draagt alleen wat op de dia past. De [DisplayWindowSpec] wordt gewist
+  /// want de onderliggende data is nu echt ingekort — een limiet op een
+  /// tabel die al gekort is zou dubbel tellen.
+  Deck _trimDeck(Deck deck) => deck.copyWith(
+    slides: [
+      for (final slide in deck.slides)
+        slide.projectionWithViewLimit().copyWith(clearViewLimit: true),
+    ],
+  );
+
+  Future<void> _writeDeck(Deck deck, String dir) async {
+    final file = File(p.join(dir, '${_safeFileName(deck.title)}.md'));
+    await writeStringAtomic(file, MarkdownService().generateDeck(deck));
+  }
+
+  String _safeFileName(String title) =>
+      title.replaceAll(RegExp(r'[^\w\s-]'), '').replaceAll(' ', '_');
 }
