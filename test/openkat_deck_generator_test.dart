@@ -8,6 +8,7 @@ import 'package:ocideck/models/scorecard_spec.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/openkat/openkat_deck_generator.dart';
+import 'package:ocideck/services/openkat/openkat_slide_provenance.dart';
 
 OpenKatFinding _finding({
   required String id,
@@ -77,12 +78,37 @@ OpenKatOrganization _orgMetVerloop(String code) => OpenKatOrganization(
   ],
 );
 
+String _currentView(String legacyView) => switch (legacyView) {
+  'portfolio.summary' => 'report.management-overview.portfolio-summary.summary',
+  'portfolio.key-message' =>
+    'report.management-overview.portfolio-summary.key-message',
+  'portfolio.surface' => 'report.management-overview.portfolio-summary.scope',
+  'portfolio.orgs-attention' =>
+    'report.management-overview.organization-comparison.most',
+  'portfolio.orgs-compared' =>
+    'report.management-overview.organization-comparison.most',
+  'portfolio.trend' => 'report.management-overview.portfolio-trend.severity',
+  'portfolio.severity-matrix' =>
+    'report.management-overview.severity-concentration.organizations',
+  'portfolio.recommendations' =>
+    'report.management-overview.recommendations.ranking',
+  'portfolio.controls' =>
+    'report.management-overview.control-coverage.coverage',
+  'portfolio.longest-open' => 'report.management-overview.finding-age.ranking',
+  'portfolio.top-issues' =>
+    'report.management-overview.finding-type-prevalence.ranking',
+  _ when legacyView.startsWith('org.') =>
+    'report.management-overview.system-hotspots.$legacyView',
+  _ => legacyView,
+};
+
 Slide _view(Deck deck, String view) => deck.slides.firstWhere(
-  (s) => s.notes.contains('ocideck_openkat_view: $view'),
+  (s) => s.notes.contains('ocideck_openkat_view: ${_currentView(view)}'),
 );
 
-bool _hasView(Deck deck, String view) =>
-    deck.slides.any((s) => s.notes.contains('ocideck_openkat_view: $view'));
+bool _hasView(Deck deck, String view) => deck.slides.any(
+  (s) => s.notes.contains('ocideck_openkat_view: ${_currentView(view)}'),
+);
 
 void main() {
   const generator = OpenKatDeckGenerator();
@@ -671,7 +697,10 @@ void main() {
 
       expect(origineel.notes, contains(openKatGeneratedOriginMarker));
       expect(kopie.notes, isNot(contains(openKatGeneratedOriginMarker)));
-      expect(kopie.notes, contains('ocideck_openkat_view: portfolio.summary'));
+      expect(
+        kopie.notes,
+        contains('ocideck_openkat_view: ${_currentView('portfolio.summary')}'),
+      );
     });
 
     test('een vervangen dia houdt zijn plek en zijn id', () {
@@ -739,6 +768,65 @@ void main() {
       );
     });
 
+    test('een vertrouwde oude view-id migreert met haar privacykeuze', () {
+      final eerste = generator.generate([_orgMetVerloop('a')]);
+      final huidig = _view(eerste, 'portfolio.summary');
+      final legacy = OpenKatSlideProvenance.markGeneratedOrigin(
+        huidig.copyWith(
+          notes: huidig.notes.replaceFirst(
+            'ocideck_openkat_view: ${_currentView('portfolio.summary')}',
+            'ocideck_openkat_view: portfolio.summary',
+          ),
+          privacy: PrivacyDisposition.redact,
+        ),
+      );
+      final bestaand = eerste.copyWith(
+        slides: [
+          for (final slide in eerste.slides)
+            slide.id == huidig.id ? legacy : slide,
+        ],
+      );
+
+      final bijgewerkt = generator.updateGenerated(
+        bestaand,
+        generator.generate([_orgMetVerloop('a')]),
+      );
+
+      expect(
+        _view(bijgewerkt, 'portfolio.summary').privacy,
+        PrivacyDisposition.redact,
+      );
+      expect(
+        _view(bijgewerkt, 'portfolio.summary').notes,
+        contains('ocideck_openkat_view: ${_currentView('portfolio.summary')}'),
+      );
+    });
+
+    test('een forgeable ongekeyde hash geeft geen vervangingsrecht', () {
+      final eerste = generator.generate([_orgMetVerloop('a')]);
+      final origineel = _view(eerste, 'portfolio.summary');
+      final vervalst = origineel.copyWith(
+        notes: origineel.notes.replaceFirst(
+          RegExp('$openKatGeneratedOriginMarker: [a-f0-9]{128}'),
+          '$openKatGeneratedOriginMarker: ${List.filled(128, '0').join()}',
+        ),
+      );
+      final bestaand = eerste.copyWith(
+        slides: [
+          for (final slide in eerste.slides)
+            slide.id == origineel.id ? vervalst : slide,
+        ],
+      );
+
+      expect(
+        () => generator.updateGenerated(
+          bestaand,
+          generator.generate([_orgMetVerloop('a')]),
+        ),
+        throwsA(isA<OpenKatUnsafeUpdateException>()),
+      );
+    });
+
     test(
       'scopeverkleining verwijdert vervallen en optionele views maar geen kopie',
       () {
@@ -798,7 +886,7 @@ void main() {
           isA<OpenKatUnsafeUpdateException>().having(
             (error) => error.viewId,
             'viewId',
-            'org.a.summary',
+            _currentView('org.a.summary'),
           ),
         ),
       );
@@ -904,7 +992,13 @@ void main() {
       final bijgewerkt = generator.updateGenerated(bestaand, vers);
 
       expect(_hasView(bijgewerkt, 'portfolio.summary'), isFalse);
-      expect(_hasView(bijgewerkt, 'report.data-quality.availability'), isTrue);
+      expect(
+        _hasView(
+          bijgewerkt,
+          'report.data-quality.measurement-availability.measurements',
+        ),
+        isTrue,
+      );
     });
 
     test('titel en rapporttaal komen uit het verse scenariodeck', () {

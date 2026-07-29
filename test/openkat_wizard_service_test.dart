@@ -15,6 +15,7 @@ import 'package:ocideck/services/openkat/openkat_directory_scanner.dart';
 import 'package:ocideck/services/openkat/openkat_import_service.dart';
 import 'package:ocideck/services/openkat/openkat_report_facts.dart';
 import 'package:ocideck/services/openkat/openkat_report_scenarios.dart';
+import 'package:ocideck/services/openkat/openkat_slide_provenance.dart';
 import 'package:ocideck/services/openkat/openkat_wizard_service.dart';
 import 'package:path/path.dart' as p;
 
@@ -106,11 +107,15 @@ void main() {
       expect(
         descriptors[OpenKatWizardScenarioId.portfolio]!.inputs,
         containsAll({
-          OpenKatWizardInputKind.period,
+          OpenKatWizardInputKind.currentAsOf,
           OpenKatWizardInputKind.organizations,
           OpenKatWizardInputKind.language,
           OpenKatWizardInputKind.title,
         }),
+      );
+      expect(
+        descriptors[OpenKatWizardScenarioId.portfolioTrend]!.inputs,
+        contains(OpenKatWizardInputKind.previousAsOf),
       );
       expect(
         descriptors[OpenKatWizardScenarioId.organizationProgress]!.inputs,
@@ -193,6 +198,45 @@ void main() {
           ),
         ),
       );
+    });
+
+    test('exacte scannergrenzen blijven toegestaan', () async {
+      final root = Directory.systemTemp.createTempSync('openkat-exact-limits-');
+      addTearDown(() => root.deleteSync(recursive: true));
+      final nested = Directory(p.join(root.path, 'nested'))..createSync();
+      File(p.join(nested.path, 'one.json')).writeAsStringSync('{}');
+
+      final result = await const OpenKatDirectoryScanner(
+        maxEntryCount: 2,
+        maxDirectoryDepth: 1,
+        maxTotalReportBytes: 2,
+      ).scan(root.path);
+
+      expect(result.manifest.entries, hasLength(1));
+      expect(result.manifest.entries.single.status, 'unrecognized');
+    });
+
+    test('exacte bestandsgrens wordt gelezen en één byte extra niet', () async {
+      final root = Directory.systemTemp.createTempSync(
+        'openkat-exact-file-limit-',
+      );
+      addTearDown(() => root.deleteSync(recursive: true));
+      final exact = File(p.join(root.path, 'exact.json'));
+      exact.writeAsBytesSync(
+        List<int>.filled(OpenKatDirectoryScanner.maxReportBytes, 0x20),
+      );
+      final over = File(p.join(root.path, 'over.json'));
+      over.writeAsBytesSync(
+        List<int>.filled(OpenKatDirectoryScanner.maxReportBytes + 1, 0x20),
+      );
+
+      final result = await const OpenKatDirectoryScanner().scan(root.path);
+      final statuses = {
+        for (final entry in result.manifest.entries) entry.path: entry.status,
+      };
+
+      expect(statuses['exact.json'], 'error: invalid json');
+      expect(statuses['over.json'], contains('too large'));
     });
 
     test(
@@ -319,17 +363,26 @@ void main() {
         expect(scan.cveOptions.single.id, 'CVE-2026-12345');
         expect(scan.cveOptions.single.organizationCount, 2);
         expect(scan.cveOptions.single.systemCount, 2);
+        final availability = {
+          for (final scenario in scan.scenarios)
+            scenario.descriptor.id: scenario,
+        };
+        expect(availability, hasLength(OpenKatWizardScenarioId.values.length));
         expect(
-          {
-            for (final scenario in scan.scenarios)
-              scenario.descriptor.id: scenario.available,
-          },
-          {
-            OpenKatWizardScenarioId.portfolio: true,
-            OpenKatWizardScenarioId.organizationProgress: true,
-            OpenKatWizardScenarioId.cveExposure: true,
-            OpenKatWizardScenarioId.dataQuality: true,
-          },
+          availability[OpenKatWizardScenarioId.portfolio]!.available,
+          isTrue,
+        );
+        expect(
+          availability[OpenKatWizardScenarioId.organizationProgress]!.available,
+          isTrue,
+        );
+        expect(
+          availability[OpenKatWizardScenarioId.cveExposure]!.available,
+          isTrue,
+        );
+        expect(
+          availability[OpenKatWizardScenarioId.dataQuality]!.available,
+          isTrue,
         );
       },
     );
@@ -370,6 +423,7 @@ void main() {
         expect(
           availability[OpenKatWizardScenarioId.portfolio]!.available,
           isTrue,
+          reason: '${availability[OpenKatWizardScenarioId.portfolio]!.reason}',
         );
         expect(
           availability[OpenKatWizardScenarioId.dataQuality]!.available,
@@ -391,11 +445,11 @@ void main() {
       () async {
         final engine = OpenKatReportEngine(
           registry: OpenKatReportScenarioRegistry(
-            scenarios: const [
-              _CapabilityRequiredManagementScenario(),
-              OpenKatWeeklyComparisonScenario(),
-              OpenKatCveExposureScenario(),
-              OpenKatDataQualityScenario(),
+            scenarios: [
+              const _CapabilityRequiredManagementScenario(),
+              for (final descriptor in OpenKatScenarioCatalog.recipes)
+                if (descriptor.id != 'management-overview')
+                  OpenKatDeclarativeScenario(descriptor),
             ],
           ),
         );
@@ -532,25 +586,24 @@ void main() {
         type: SlideType.bullets,
         title: 'Mijn analyse',
       );
-      const originalGenerated = Slide(
-        id: 'new',
-        type: SlideType.title,
-        title: 'Oud',
-        notes: generatedNotes,
+      final originalGenerated = OpenKatSlideProvenance.markGeneratedOrigin(
+        const Slide(
+          id: 'new',
+          type: SlideType.title,
+          title: 'Oud',
+          notes: generatedNotes,
+        ),
       );
-      const copiedGenerated = Slide(
-        id: 'copy',
-        type: SlideType.title,
-        title: 'Bewuste kopie',
-        notes: generatedNotes,
-      );
+      final copiedGenerated = Slide.duplicate(
+        originalGenerated,
+      ).copyWith(title: 'Bewuste kopie');
       const replacement = Slide(
         id: 'new',
         type: SlideType.title,
         title: 'Nieuw',
         notes: generatedNotes,
       );
-      const existing = Deck(
+      final existing = Deck(
         title: 'Bestaand',
         author: 'Auteur blijft',
         slides: [manual, originalGenerated, copiedGenerated],

@@ -307,10 +307,18 @@ void main() {
         const service = OpenKatImportService();
         final result = await service.importDirectory(tmp.path);
         final top = result.deck.slides.firstWhere(
-          (s) => s.notes.contains('portfolio.top-issues'),
+          (s) => s.notes.contains(
+            'report.management-overview.finding-type-prevalence.ranking',
+          ),
         );
         expect(top.tableRows.length, 7, reason: 'kopregel + zes datarijen');
-        expect(top.viewLimit?.limit, 5);
+        expect(
+          top.viewLimit?.limit,
+          5,
+          reason:
+              'de compatibele managementview houdt haar bestaande venster; '
+              'het gerichte findingtypenrapport gebruikt top 7',
+        );
       },
     );
   });

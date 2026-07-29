@@ -88,8 +88,12 @@ void main() {
     for (var index = 0; index < 4; index++) {
       await tester.pump(const Duration(milliseconds: 50));
     }
+    final family = find.byKey(const ValueKey('openkat-family-dataQuality'));
+    await tester.ensureVisible(family);
+    await tester.tap(family);
+    await tester.pump(const Duration(milliseconds: 50));
     final dataQuality = find.byKey(
-      const ValueKey('openkat-scenario-dataQuality'),
+      const ValueKey('openkat-recipe-dataQuality'),
     );
     await tester.ensureVisible(dataQuality);
     await tester.pump(const Duration(milliseconds: 50));
@@ -229,7 +233,7 @@ void main() {
                 id: 'generated',
                 type: SlideType.title,
                 notes:
-                    '<!-- ocideck_openkat_view: report.management-overview.title -->',
+                    '<!-- ocideck_openkat_view: report.weekly-comparison.org.org-a.title -->',
               ),
             ],
           ),
