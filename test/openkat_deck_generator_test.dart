@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/openkat/openkat_models.dart';
+import 'package:ocideck/models/openkat/openkat_reporting_models.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/scorecard_spec.dart';
 import 'package:ocideck/models/slide.dart';
@@ -572,6 +573,89 @@ void main() {
         _view(bijgewerkt, 'portfolio.summary').privacy,
         PrivacyDisposition.redact,
       );
+    });
+
+    test(
+      'scopeverkleining verwijdert vervallen en optionele views maar geen kopie',
+      () {
+        final eerste = generator.generate([
+          _orgMetVerloop('a'),
+          _orgMetVerloop('b'),
+        ]);
+        final origineel = _view(eerste, 'org.b.summary');
+        final kopie = Slide.duplicate(
+          origineel,
+        ).copyWith(title: 'Mijn bewaarde analyse');
+        final bestaand = eerste.copyWith(slides: [...eerste.slides, kopie]);
+        final vers = generator.generate([_orgMetVerloop('a')]);
+
+        final bijgewerkt = generator.updateGenerated(bestaand, vers);
+
+        expect(
+          bijgewerkt.slides.where((slide) => slide.id == origineel.id),
+          isEmpty,
+          reason: 'een niet meer gebouwde gegenereerde view is verouderd',
+        );
+        expect(
+          bijgewerkt.slides.where((slide) => slide.id == kopie.id).single.title,
+          'Mijn bewaarde analyse',
+        );
+        expect(
+          _hasView(bijgewerkt, 'portfolio.orgs-compared'),
+          isFalse,
+          reason: 'de optionele vergelijkingsview bestaat niet meer in vers',
+        );
+      },
+    );
+
+    test('een ambigu legacy-origineel stopt de update fail-closed', () {
+      final eerste = generator.generate([_orgMetVerloop('a')]);
+      final origineel = _view(eerste, 'org.a.summary');
+      final legacyEen = Slide.duplicate(origineel);
+      final legacyTwee = Slide.duplicate(origineel);
+      final bestaand = eerste.copyWith(
+        slides: [
+          for (final slide in eerste.slides)
+            if (slide.id != origineel.id) slide,
+          legacyEen,
+          legacyTwee,
+        ],
+      );
+      final vers = eerste.copyWith(
+        slides: [
+          for (final slide in eerste.slides)
+            if (slide.id != origineel.id) slide,
+        ],
+      );
+
+      expect(
+        () => generator.updateGenerated(bestaand, vers),
+        throwsA(
+          isA<StateError>().having(
+            (error) => error.message,
+            'message',
+            contains('niet ondubbelzinnig'),
+          ),
+        ),
+      );
+    });
+
+    test('een scenariowissel laat geen views van het oude scenario staan', () {
+      final organization = _orgMetVerloop('a');
+      final bestaand = generator.generate([organization]);
+      final vers = OpenKatReportEngine().generate(
+        [organization],
+        OpenKatReportRequest(
+          scenarioId: 'data-quality',
+          scope: const OpenKatReportScope.portfolio(),
+          currentAsOf: DateTime.utc(2026, 6, 1),
+        ),
+      ).deck!;
+
+      final bijgewerkt = generator.updateGenerated(bestaand, vers);
+
+      expect(_hasView(bijgewerkt, 'portfolio.summary'), isFalse);
+      expect(_hasView(bijgewerkt, 'report.data-quality.availability'), isTrue);
     });
 
     test('titel en rapporttaal komen uit het verse scenariodeck', () {

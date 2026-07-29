@@ -53,20 +53,48 @@ class OpenKatDeckGenerator {
       for (final slide in fresh.slides) ?_viewIdOf(slide): slide,
     };
     final originalByView = <String, Slide>{};
-    for (final freshSlide in fresh.slides) {
-      final view = _viewIdOf(freshSlide);
-      if (view == null) continue;
-      final candidates = existing.slides.where(
-        (slide) => _viewIdOf(slide) == view,
-      );
+    final existingByView = <String, List<Slide>>{};
+    for (final slide in existing.slides) {
+      final view = _viewIdOf(slide);
+      if (view != null) {
+        existingByView.putIfAbsent(view, () => []).add(slide);
+      }
+    }
+    for (final entry in existingByView.entries) {
+      final view = entry.key;
+      final candidates = entry.value;
+      final freshSlide = freshByView[view];
+      if (freshSlide == null) {
+        final deterministic = candidates
+            .where((slide) => slide.id.startsWith('ocikat-'))
+            .toList();
+        if (deterministic.length == 1) {
+          originalByView[view] = deterministic.single;
+        } else if (deterministic.isEmpty && candidates.length == 1) {
+          // Een oud deck zonder deterministische ids is nog ondubbelzinnig
+          // zolang er maar één dia met deze marker bestaat.
+          originalByView[view] = candidates.single;
+        } else {
+          throw StateError(
+            'OpenKAT-view "$view" kan niet veilig worden bijgewerkt: '
+            'het gegenereerde origineel is niet ondubbelzinnig.',
+          );
+        }
+        continue;
+      }
       final exact = candidates.where((slide) => slide.id == freshSlide.id);
       if (exact.isNotEmpty) {
         originalByView[view] = exact.first;
       } else if (candidates.length == 1) {
         // Oudere gegenereerde decks hadden nog geen deterministische ids. Eén
-        // kandidaat is dan ondubbelzinnig; bij meerdere laten we de kopieën
-        // ongemoeid en voegen we de verse view toe.
+        // kandidaat is dan ondubbelzinnig. Bij meerdere stoppen we: kopieën
+        // laten staan kan oude publieksdata behouden.
         originalByView[view] = candidates.first;
+      } else {
+        throw StateError(
+          'OpenKAT-view "$view" kan niet veilig worden bijgewerkt: '
+          'het gegenereerde origineel is niet ondubbelzinnig.',
+        );
       }
     }
     final slides = <Slide>[];
