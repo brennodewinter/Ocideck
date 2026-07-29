@@ -17,21 +17,14 @@ Also attached: the Software Bill of Materials in CycloneDX
 (`ocideck-@VERSIE@.cdx.json`) and SPDX (`ocideck-@VERSIE@.spdx.json`), and
 `SHA256SUMS` over every file above.
 
-## These binaries are not signed
+## Opening the download on each platform
 
-There is no Apple Developer account and no code-signing certificate behind this
-project, so macOS and Windows will both warn you. That is the honest state of
-affairs, not a glitch to click past — verify the checksum below, and then:
+The macOS build is signed and notarised; Windows and Linux are not, so those two
+warn on first launch. Verify the checksum below, then:
 
-**macOS.** The app is unsigned *and* un-notarised, so a double-click reports it
-as damaged. It is not. Remove the download quarantine flag:
-
-```
-xattr -d com.apple.quarantine /Applications/OciDeck.app
-```
-
-Or open **System Settings → Privacy & Security**, scroll to the bottom, and
-choose **Open Anyway** after the first blocked attempt.
+**macOS.** Signed with a Developer ID and notarised by Apple — it opens with a
+normal double-click, no workaround needed. (Check with `spctl -a -t exec
+OciDeck.app`: it reports `source=Notarized Developer ID`.)
 
 **Windows.** SmartScreen shows "Windows protected your PC". Choose **More
 info**, then **Run anyway**.
@@ -48,10 +41,11 @@ sha256sum --ignore-missing -c SHA256SUMS
 (macOS: `shasum -a 256 -c SHA256SUMS --ignore-missing`.)
 
 `SHA256SUMS` tells you that you have the bytes that were published here. It is
-**not** a signature: it proves nothing about who published them. If you need
-that guarantee, build from source — every artifact above comes from a workflow
-in this repository that you can read, and `make check-toolchain` pins the exact
-Flutter release used.
+**not** a signature: on its own it proves nothing about who published them. The
+macOS build additionally carries an Apple notarisation, which does attest the
+publisher; for Windows and Linux, if you need that guarantee, build from source
+— every artifact above comes from a workflow in this repository that you can
+read, and `make check-toolchain` pins the exact Flutter release used.
 
 ## What is in it
 
