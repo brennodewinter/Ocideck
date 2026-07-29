@@ -40,14 +40,24 @@ enum OpenKatReportLanguage {
 
 /// Expliciete beleidskeuzes die feitenselectie of presentatie begrenzen.
 class OpenKatReportPolicy {
+  static const int maximumTableRowLimit = 1000;
+  static const int defaultHistoricalFindingWorkLimit = 250000;
+  static const int maximumHistoricalFindingWorkLimit = 1000000;
+
   /// Alleen gezet wanneer de aanroeper zelf een versheidsgrens koos.
   final Duration? maximumSnapshotAge;
 
   /// Bovengrens voor tabelblokken die geen eigen OciDeck-weergavelimiet hebben.
   final int tableRowLimit;
 
-  const OpenKatReportPolicy({this.maximumSnapshotAge, this.tableRowLimit = 25})
-    : assert(tableRowLimit > 0);
+  /// Maximaal aantal historische findings dat lifecycle mag inspecteren.
+  final int historicalFindingWorkLimit;
+
+  const OpenKatReportPolicy({
+    this.maximumSnapshotAge,
+    this.tableRowLimit = 25,
+    this.historicalFindingWorkLimit = defaultHistoricalFindingWorkLimit,
+  });
 }
 
 /// Volledig getypept verzoek aan de rapportagemotor.
@@ -115,6 +125,8 @@ enum OpenKatReportDiagnosticCode {
   invalidCveId,
   missingCapability,
   invalidReportPlan,
+  invalidPolicy,
+  resourceLimitExceeded,
   snapshotTooOld,
   incompletePortfolio,
   incomparableMeasurementCoverage,

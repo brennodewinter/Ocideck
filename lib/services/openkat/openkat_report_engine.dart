@@ -77,6 +77,7 @@ class OpenKatReportEngine {
 
     final composedPlan = scenario.compose(facts, request);
     final plan = _validatedPlan(
+      facts,
       composedPlan,
       descriptor,
       request,
@@ -163,6 +164,46 @@ class OpenKatReportEngine {
         ),
       );
     }
+    _validatePolicy(request.policy, diagnostics);
+  }
+
+  void _validatePolicy(
+    OpenKatReportPolicy policy,
+    List<OpenKatReportDiagnostic> diagnostics,
+  ) {
+    _validatePolicyLimit(
+      diagnostics,
+      field: 'tableRowLimit',
+      value: policy.tableRowLimit,
+      maximum: OpenKatReportPolicy.maximumTableRowLimit,
+    );
+    _validatePolicyLimit(
+      diagnostics,
+      field: 'historicalFindingWorkLimit',
+      value: policy.historicalFindingWorkLimit,
+      maximum: OpenKatReportPolicy.maximumHistoricalFindingWorkLimit,
+    );
+  }
+
+  void _validatePolicyLimit(
+    List<OpenKatReportDiagnostic> diagnostics, {
+    required String field,
+    required int value,
+    required int maximum,
+  }) {
+    if (value > 0 && value <= maximum) return;
+    diagnostics.add(
+      OpenKatReportDiagnostic(
+        code: OpenKatReportDiagnosticCode.invalidPolicy,
+        severity: OpenKatReportDiagnosticSeverity.error,
+        arguments: {
+          'field': field,
+          'value': '$value',
+          'minimum': '1',
+          'maximum': '$maximum',
+        },
+      ),
+    );
   }
 
   bool _isCanonicalCve(String? value) =>
@@ -170,6 +211,7 @@ class OpenKatReportEngine {
       RegExp(r'^CVE-[0-9]{4}-[0-9]{4,}$').hasMatch(value.trim().toUpperCase());
 
   OpenKatReportPlan? _validatedPlan(
+    OpenKatReportFacts facts,
     OpenKatReportPlan plan,
     OpenKatScenarioDescriptor descriptor,
     OpenKatReportRequest request,
@@ -192,6 +234,7 @@ class OpenKatReportEngine {
     }
 
     final blockIds = <String>{};
+    final blockKinds = <OpenKatReportBlockKind>{};
     final applicableBlocks = <OpenKatReportBlock>[];
     for (final block in plan.blocks) {
       if (block.id.trim().isEmpty) {
@@ -201,6 +244,13 @@ class OpenKatReportEngine {
           diagnostics,
           reason: 'duplicateBlockId',
           arguments: {'blockId': block.id},
+        );
+      }
+      if (!blockKinds.add(block.kind)) {
+        _invalidPlan(
+          diagnostics,
+          reason: 'duplicateBlockKind',
+          arguments: {'blockKind': block.kind.name},
         );
       }
 
@@ -254,6 +304,24 @@ class OpenKatReportEngine {
 
     if (applicableBlocks.isEmpty && plan.blocks.isNotEmpty) {
       _invalidPlan(diagnostics, reason: 'noApplicableBlocks');
+    }
+    if (applicableBlocks.any(
+          (block) => block.kind == OpenKatReportBlockKind.findingLifecycle,
+        ) &&
+        facts.exceedsHistoricalFindingWorkLimit(
+          request,
+          request.policy.historicalFindingWorkLimit,
+        )) {
+      diagnostics.add(
+        OpenKatReportDiagnostic(
+          code: OpenKatReportDiagnosticCode.resourceLimitExceeded,
+          severity: OpenKatReportDiagnosticSeverity.error,
+          arguments: {
+            'resource': 'historicalFindings',
+            'maximum': '${request.policy.historicalFindingWorkLimit}',
+          },
+        ),
+      );
     }
     if (diagnostics.any(
       (diagnostic) =>
@@ -358,12 +426,13 @@ class OpenKatReportEngine {
       }
     }
 
+    final comparison =
+        assessments[OpenKatReportCapability.comparableMeasurementCoverage];
     if (descriptor.optionalCapabilities.contains(
           OpenKatReportCapability.comparableMeasurementCoverage,
         ) &&
-        assessments[OpenKatReportCapability.comparableMeasurementCoverage]
-                ?.status ==
-            OpenKatCapabilityStatus.unavailable) {
+        comparison?.status == OpenKatCapabilityStatus.unavailable &&
+        comparison?.arguments['comparedOrganizations'] != '0') {
       diagnostics.add(
         const OpenKatReportDiagnostic(
           code: OpenKatReportDiagnosticCode.incomparableMeasurementCoverage,

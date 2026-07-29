@@ -213,6 +213,28 @@ class OpenKatReportFacts {
         currentScope == previousScope;
   }
 
+  /// Controleert het lifecycle-werkbudget zonder een historische ID-set te
+  /// materialiseren. Zodra de grens is overschreden stopt de telling.
+  bool exceedsHistoricalFindingWorkLimit(
+    OpenKatReportRequest request,
+    int limit,
+  ) {
+    var visited = 0;
+    for (final selection in selections(request)) {
+      final previous = selection.previous;
+      if (previous == null) continue;
+      for (final snapshot in selection.organization.snapshots) {
+        if (!snapshot.usable ||
+            !snapshot.reportDate.isBefore(previous.reportDate)) {
+          continue;
+        }
+        visited += snapshot.findings.length;
+        if (visited > limit) return true;
+      }
+    }
+    return false;
+  }
+
   List<OpenKatFindingLifecycleItem> findingLifecycle(
     OpenKatReportRequest request, {
     int? maxResults,

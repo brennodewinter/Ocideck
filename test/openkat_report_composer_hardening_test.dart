@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/openkat/openkat_models.dart';
 import 'package:ocideck/models/openkat/openkat_reporting_models.dart';
+import 'package:ocideck/models/scorecard_spec.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_safety.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -12,16 +13,20 @@ OpenKatFinding _finding(
   String id, {
   String severity = 'high',
   String? name,
+  String? typeId,
+  String? systemId,
   String? recommendation,
   List<String> cveIds = const [],
+  bool stableIdentity = true,
 }) => OpenKatFinding(
   id: id,
-  findingTypeId: 'KAT-$id',
+  findingTypeId: typeId ?? 'KAT-$id',
   findingTypeName: name ?? 'Finding $id',
   severity: severity,
-  systemId: 'asset-$id.example',
+  systemId: systemId ?? 'asset-$id.example',
   recommendation: recommendation,
   cveIds: cveIds,
+  stableIdentity: stableIdentity,
 );
 
 OpenKatSnapshot _snapshot(
@@ -29,24 +34,34 @@ OpenKatSnapshot _snapshot(
   required String source,
   List<OpenKatFinding> findings = const [],
   Set<OpenKatSourceFeature> sourceFeatures = const {},
+  String? measurementScopeId,
+  Map<String, OpenKatControlScore> controls = const {},
+  List<OpenKatSystem>? systems,
 }) => OpenKatSnapshot(
   reportDate: date,
   sourceFile: source,
   sourceHash: 'sha256:$source',
-  systems: [
-    for (final finding in findings)
-      OpenKatSystem(
-        id: finding.systemId!,
-        hostname: finding.systemId,
-        stableIdentity: true,
-      ),
-  ],
+  systems:
+      systems ??
+      [
+        for (final finding in findings)
+          OpenKatSystem(
+            id: finding.systemId!,
+            hostname: finding.systemId,
+            stableIdentity: true,
+          ),
+      ],
   findings: findings,
   sourceFeatures: sourceFeatures,
+  measurementScopeId: measurementScopeId,
+  controls: controls,
 );
 
-OpenKatOrganization _organization(List<OpenKatSnapshot> snapshots) =>
-    OpenKatOrganization(code: 'alpha', name: 'Alpha', snapshots: snapshots);
+OpenKatOrganization _organization(
+  List<OpenKatSnapshot> snapshots, {
+  String code = 'alpha',
+  String name = 'Alpha',
+}) => OpenKatOrganization(code: code, name: name, snapshots: snapshots);
 
 OpenKatReportRequest _request(
   String scenarioId, {
@@ -141,6 +156,182 @@ void main() {
     expect(advice.bullets.join(' '), contains('&lt;script&gt;'));
   });
 
+  test('alle OpenKAT-bronvelden blijven data in geserialiseerde Markdown', () {
+    const attack = '<script>x()</script>\n---\n[x](javascript:alert(1))';
+    const systemId = '<iframe src=x>](javascript:alert(1))';
+    const features = {
+      OpenKatSourceFeature.comparableMeasurementCoverage,
+      OpenKatSourceFeature.reliableCveReferences,
+      OpenKatSourceFeature.reliableMonitoringStatus,
+      OpenKatSourceFeature.stableAssetIdentity,
+    };
+    final previousFinding = _finding(
+      'old-$attack',
+      name: 'old $attack',
+      typeId: 'type-old-$attack',
+      systemId: systemId,
+      severity: attack,
+    );
+    final currentFinding = _finding(
+      'current-$attack',
+      name: 'current $attack',
+      typeId: 'type-current-$attack',
+      systemId: systemId,
+      severity: attack,
+      recommendation: attack,
+      cveIds: const ['CVE-2026-1234'],
+    );
+    final facts = OpenKatReportFacts([
+      _organization(
+        [
+          _snapshot(
+            DateTime.utc(2026, 7, 13),
+            source: 'previous.json',
+            findings: [previousFinding],
+            sourceFeatures: features,
+            measurementScopeId: 'same-scope',
+            systems: const [
+              OpenKatSystem(
+                id: systemId,
+                stableIdentity: true,
+                monitoringStatus: OpenKatMonitoringStatus.notMonitored,
+              ),
+            ],
+            controls: const {
+              'control-$attack': OpenKatControlScore(
+                name: 'control name $attack',
+                compliant: 0,
+                total: 1,
+              ),
+            },
+          ),
+          _snapshot(
+            DateTime.utc(2026, 7, 20),
+            source: 'current.json',
+            findings: [currentFinding],
+            sourceFeatures: features,
+            measurementScopeId: 'same-scope',
+            systems: const [
+              OpenKatSystem(
+                id: systemId,
+                stableIdentity: true,
+                monitoringStatus: OpenKatMonitoringStatus.monitored,
+              ),
+            ],
+            controls: const {
+              'control-$attack': OpenKatControlScore(
+                name: 'control name $attack',
+                compliant: 1,
+                total: 1,
+              ),
+            },
+          ),
+        ],
+        code: 'org-$attack',
+        name: 'Organization $attack',
+      ),
+    ]);
+    final deck = OpenKatReportComposer(facts).compose(
+      _request('all-blocks', cveId: 'CVE-2026-1234'),
+      const OpenKatReportPlan(
+        scenarioId: 'all-blocks',
+        blocks: [
+          OpenKatReportBlock(
+            id: 'management',
+            kind: OpenKatReportBlockKind.managementOverview,
+          ),
+          OpenKatReportBlock(
+            id: 'availability',
+            kind: OpenKatReportBlockKind.measurementAvailability,
+          ),
+          OpenKatReportBlock(
+            id: 'lifecycle',
+            kind: OpenKatReportBlockKind.findingLifecycle,
+          ),
+          OpenKatReportBlock(
+            id: 'cve',
+            kind: OpenKatReportBlockKind.cveExposure,
+          ),
+          OpenKatReportBlock(
+            id: 'monitoring',
+            kind: OpenKatReportBlockKind.monitoringChanges,
+          ),
+        ],
+      ),
+    );
+    final markdown = MarkdownService().generateDeck(deck);
+
+    expect(MarkdownSafetyScanner.scan(markdown), isEmpty);
+    expect(markdown, isNot(contains('<script>')));
+    expect(markdown, isNot(contains('<iframe')));
+    expect(
+      MarkdownService().parseDeck(markdown)!.slides,
+      hasLength(deck.slides.length),
+    );
+  });
+
+  test(
+    'zonder vergelijkbare dekking blijven conclusies en delta-opmaak weg',
+    () {
+      final previous = _snapshot(
+        DateTime.utc(2026, 7, 13),
+        source: 'previous.json',
+        findings: [_finding('old', severity: 'critical')],
+      );
+      final current = _snapshot(
+        DateTime.utc(2026, 7, 20),
+        source: 'current.json',
+        findings: [_finding('new', severity: 'medium')],
+      );
+      final facts = OpenKatReportFacts([
+        _organization([previous, current]),
+      ]);
+      final deck = OpenKatReportComposer(facts).compose(
+        _request('management-overview'),
+        const OpenKatReportPlan(
+          scenarioId: 'management-overview',
+          blocks: [
+            OpenKatReportBlock(
+              id: 'management',
+              kind: OpenKatReportBlockKind.managementOverview,
+            ),
+          ],
+        ),
+      );
+
+      expect(
+        _slideWithTitle(
+          deck.slides,
+          'Vergelijkbaarheid niet aangetoond',
+        ).bullets,
+        isNotEmpty,
+      );
+      expect(
+        deck.slides.any(
+          (slide) =>
+              slide.title == 'Wat dit rapport zegt' ||
+              slide.title.contains('meest verbeterden'),
+        ),
+        isFalse,
+      );
+      final summary = _slideWithTitle(deck.slides, 'Kerncijfers');
+      final scorecard = ScorecardSpec.fromSlide(
+        summary.title,
+        summary.tableRows,
+      );
+      expect(
+        scorecard.entries.every((entry) => entry.previous == null),
+        isTrue,
+      );
+      expect(
+        deck.slides
+            .expand((slide) => [slide.title, slide.subtitle, ...slide.bullets])
+            .join(' '),
+        isNot(anyOf(contains('Beter'), contains('Slechter'))),
+      );
+    },
+  );
+
   test('de rijlimiet begrenst CVE-rijen vóór deckmaterialisatie', () {
     final findings = [
       for (var i = 0; i < 100; i++)
@@ -187,10 +378,18 @@ void main() {
       DateTime.utc(2026, 7, 13),
       source: 'previous.json',
       findings: [_finding('old', severity: 'critical')],
+      sourceFeatures: const {
+        OpenKatSourceFeature.comparableMeasurementCoverage,
+      },
+      measurementScopeId: 'same-scope',
     );
     final current = _snapshot(
       DateTime.utc(2026, 7, 20),
       source: 'current.json',
+      sourceFeatures: const {
+        OpenKatSourceFeature.comparableMeasurementCoverage,
+      },
+      measurementScopeId: 'same-scope',
     );
     final facts = OpenKatReportFacts([
       _organization([previous, current]),

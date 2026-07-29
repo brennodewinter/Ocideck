@@ -36,9 +36,24 @@ class OpenKatReportComposer {
     String? outputPath,
   }) {
     final organizations = facts.selectedOrganizations(request);
+    final selections = facts
+        .selections(request)
+        .where((selection) => selection.current != null)
+        .toList();
+    final comparableOrganizations = {
+      for (final selection in selections)
+        if (facts.hasComparableCoverage(selection)) selection.organization.code,
+    };
+    final comparablePortfolio =
+        selections.isNotEmpty &&
+        selections.every(
+          (selection) =>
+              selection.previous != null &&
+              comparableOrganizations.contains(selection.organization.code),
+        );
     final title = request.title ?? _defaultTitle(request);
     var deck = Deck(
-      title: title,
+      title: _literal(title),
       projectPath: outputPath ?? '',
       version: '1.0',
       language: request.language.code,
@@ -52,6 +67,8 @@ class OpenKatReportComposer {
             organizations,
             title: title,
             outputPath: outputPath,
+            comparablePortfolio: comparablePortfolio,
+            comparableOrganizations: comparableOrganizations,
           );
           deck = deck.copyWith(
             language: request.language.code,
@@ -101,27 +118,35 @@ class OpenKatReportComposer {
     List<OpenKatOrganization> organizations, {
     String title = 'OpenKAT managementoverzicht',
     String? outputPath,
+    bool comparablePortfolio = false,
+    Set<String> comparableOrganizations = const {},
   }) {
     final portfolio = facts.aggregatePortfolio(organizations);
+    final hasComparison = portfolio.previous != null;
     final slides = <Slide>[
       _titleSlide(title, organizations),
-      if (portfolio.previous != null) _keyMessageSlide(portfolio),
-      _portfolioSummarySlide(portfolio),
-      _trendSlide(portfolio),
+      if (hasComparison && !comparablePortfolio) _comparisonWarningSlide(),
+      if (hasComparison && comparablePortfolio) _keyMessageSlide(portfolio),
+      _portfolioSummarySlide(portfolio, compare: comparablePortfolio),
+      _trendSlide(portfolio, compare: comparablePortfolio),
       _portfolioSurfaceSlide(portfolio),
       if (organizations.length > 1) ...[
-        _organizationsComparedSlide(portfolio),
+        _organizationsComparedSlide(portfolio, compare: comparablePortfolio),
         _severityMatrixSlide(portfolio),
       ],
-      _topIssuesSlide(portfolio),
+      _topIssuesSlide(portfolio, compare: comparablePortfolio),
       ?_recommendationsSlide(portfolio),
       _longestOpenSlide(portfolio),
-      ?_controlsSlide(portfolio),
-      for (final org in organizations) ..._organisationSlides(org),
+      ?_controlsSlide(portfolio, compare: comparablePortfolio),
+      for (final org in organizations)
+        ..._organisationSlides(
+          org,
+          compare: comparableOrganizations.contains(org.code),
+        ),
     ];
 
     return Deck(
-      title: title,
+      title: _literal(title),
       projectPath: outputPath ?? '',
       version: '1.0',
     ).copyWith(slides: slides);
@@ -161,7 +186,7 @@ class OpenKatReportComposer {
       ],
       for (final usage in facts.measurementUsages(request))
         [
-          usage.organizationCode,
+          _inline(usage.organizationCode),
           usage.role == OpenKatMeasurementRole.current
               ? (english ? 'Current' : 'Huidig')
               : (english ? 'Previous' : 'Vorig'),
@@ -199,8 +224,8 @@ class OpenKatReportComposer {
         ],
         for (final item in lifecycle.take(limit))
           [
-            item.organizationCode,
-            item.finding.findingTypeName ?? item.finding.findingTypeId,
+            _inline(item.organizationCode),
+            _inline(item.finding.findingTypeName ?? item.finding.findingTypeId),
             _observationLabel(item.observation, english: english),
             item.comparableCoverage
                 ? (english ? 'Yes' : 'Ja')
@@ -244,10 +269,10 @@ class OpenKatReportComposer {
         ],
         for (final item in exposure.take(limit))
           [
-            item.organizationCode,
-            item.finding.findingTypeName ?? item.finding.findingTypeId,
-            item.finding.systemId ?? '-',
-            item.finding.severity,
+            _inline(item.organizationCode),
+            _inline(item.finding.findingTypeName ?? item.finding.findingTypeId),
+            _inline(item.finding.systemId ?? '-'),
+            _inline(item.finding.severity),
           ],
         if (truncated) _omittedRow(columns: 4, english: english, shown: limit),
       ],
@@ -273,8 +298,8 @@ class OpenKatReportComposer {
         ],
         for (final mutation in mutations.take(limit))
           [
-            mutation.organizationCode,
-            mutation.system.id,
+            _inline(mutation.organizationCode),
+            _inline(mutation.system.id),
             mutation.kind == OpenKatMonitoringMutationKind.added
                 ? (english
                       ? 'Added to monitoring'
@@ -301,9 +326,6 @@ class OpenKatReportComposer {
     for (var i = 1; i < columns; i++) '',
   ];
 
-  /// Een scorecard-dia: titel plus de tabel waar het type op rijdt. Het aantal
-  /// regels wordt door [ScorecardSpec] zelf op vijf gehouden, op lezen én
-  /// schrijven, dus dat wordt hier niet nog eens overgedaan.
   Slide _scorecardSlide({
     required String id,
     required String title,
@@ -317,7 +339,6 @@ class OpenKatReportComposer {
     notes: '<!-- ocideck_openkat_view: $view -->',
   );
 
-  /// Eén ernstband als scorecardregel, met de stand van de vorige meting.
   ScorecardEntry _severityEntry(
     String band,
     Map<String, int> current,
@@ -330,21 +351,34 @@ class OpenKatReportComposer {
   );
 
   Slide _titleSlide(String title, List<OpenKatOrganization> organizations) {
-    final orgNames = organizations.map((o) => o.name).join(', ');
+    final orgNames = organizations.map((o) => _literal(o.name)).join(', ');
     return _slide(
       id: _id('openkat-title'),
       type: SlideType.title,
-      title: title,
+      title: _literal(title),
       subtitle: '${_text('Organisaties', 'Organizations')}: $orgNames',
       notes: '<!-- ocideck_openkat_view: title -->',
     );
   }
 
-  /// Waar het rapport op neerkomt, in woorden.
-  ///
-  /// Alleen bij een tweede meting: zonder vorige meting valt er niets te zeggen
-  /// over wat er veranderde, en een dia die dat alsnog probeert wordt een
-  /// omschrijving van de cijfers die er twee dia's verderop staan.
+  Slide _comparisonWarningSlide() => _slide(
+    id: _id('openkat-comparison-warning'),
+    type: SlideType.bullets,
+    title: _text(
+      'Vergelijkbaarheid niet aangetoond',
+      'Comparability not demonstrated',
+    ),
+    bullets: [
+      _text(
+        'De meetdekking kan tussen meetmomenten verschillen. Daarom toont dit '
+            'rapport geen normatieve vergelijking van de meetwaarden.',
+        'Measurement coverage may differ between measurements. This report '
+            'therefore makes no directional comparison of the measured values.',
+      ),
+    ],
+    notes: '<!-- ocideck_openkat_view: portfolio.comparison-warning -->',
+  );
+
   Slide _keyMessageSlide(PortfolioAggregate portfolio) {
     final conclusion = facts.compare(portfolio.current, portfolio.previous);
     return _slide(
@@ -359,17 +393,11 @@ class OpenKatReportComposer {
     );
   }
 
-  /// De ernstverdeling per organisatie als warmtekaart.
-  ///
-  /// Waar de scorecard bij vijf regels ophoudt, schaalt dit door: één rij per
-  /// organisatie, één kolom per band, en de kleur zegt waar het zwaartepunt
-  /// ligt. Bij één organisatie is het hetzelfde plaatje als de verloopgrafiek
-  /// en blijft de dia weg.
   Slide _severityMatrixSlide(PortfolioAggregate portfolio) {
     final perOrg = <String, Map<String, int>>{
       for (final org in portfolio.organizations)
         if (org.current != null)
-          org.name: openKatSeverityCounts(org.current!.findings),
+          _literal(org.name): openKatSeverityCounts(org.current!.findings),
     };
     final bands = _visibleBands(perOrg.values);
     return _slide(
@@ -394,16 +422,12 @@ class OpenKatReportComposer {
     );
   }
 
-  /// De kerncijfers als scorecard: elk getal naast wat het was.
-  ///
-  /// Een managementoverzicht gaat over wat er veranderde, en dat is precies wat
-  /// een rij losse bullets niet laat zien. De scorecard rekent het verschil zelf
-  /// uit en kleurt het — vandaar dat hier de vórige waarde wordt meegegeven en
-  /// geen zelfgemaakt "+42". Meer findings is slecht nieuws, dus staat alles op
-  /// [ScorecardPolarity.lowerBetter].
-  Slide _portfolioSummarySlide(PortfolioAggregate portfolio) {
+  Slide _portfolioSummarySlide(
+    PortfolioAggregate portfolio, {
+    required bool compare,
+  }) {
     final c = portfolio.current;
-    final p = portfolio.previous;
+    final p = compare ? portfolio.previous : null;
     return _scorecardSlide(
       id: _id('openkat-portfolio-summary'),
       title: _text('Kerncijfers', 'Key figures'),
@@ -421,10 +445,6 @@ class OpenKatReportComposer {
     );
   }
 
-  /// Wat er in beeld is. Bewust los van de kerncijfers: dit zijn tellingen van
-  /// de inventarisatie, geen oordeel — meer systemen in beeld is goed nieuws
-  /// zolang je aan het inventariseren bent, en die dubbelzinnigheid hoort niet
-  /// tussen cijfers te staan die wél rood of groen kleuren.
   Slide _portfolioSurfaceSlide(PortfolioAggregate portfolio) {
     final c = portfolio.current;
     return _slide(
@@ -443,12 +463,10 @@ class OpenKatReportComposer {
     );
   }
 
-  /// De organisaties naast elkaar, grootste bewegers eerst.
-  ///
-  /// De scorecard toont er ten hoogste vijf (`scorecardMaxEntries`); bij meer
-  /// organisaties is de warmtekaart het volledige beeld. Dat is de reden dat
-  /// die dia er ook is.
-  Slide _organizationsComparedSlide(PortfolioAggregate portfolio) {
+  Slide _organizationsComparedSlide(
+    PortfolioAggregate portfolio, {
+    required bool compare,
+  }) {
     final comparison = facts.organizationComparison(portfolio.organizations);
     return _scorecardSlide(
       id: _id('openkat-portfolio-orgs-compared'),
@@ -456,22 +474,23 @@ class OpenKatReportComposer {
       entries: [
         for (final org in comparison)
           ScorecardEntry(
-            label: org.name,
+            label: _literal(org.name),
             value: org.findings.toDouble(),
-            previous: org.previousFindings?.toDouble(),
+            previous: compare ? org.previousFindings?.toDouble() : null,
             unit: 'findings',
-            polarity: ScorecardPolarity.lowerBetter,
+            polarity: compare
+                ? ScorecardPolarity.lowerBetter
+                : ScorecardPolarity.neutral,
           ),
       ],
       view: 'portfolio.orgs-compared',
     );
   }
 
-  Slide _topIssuesSlide(PortfolioAggregate portfolio) {
+  Slide _topIssuesSlide(PortfolioAggregate portfolio, {required bool compare}) {
     final issues = facts.topIssues(portfolio.organizations);
-    // Hoeveel er sinds de vorige meting bijkwamen wordt al geteld, maar zonder
-    // vorige meting is die kolom overal nul en zegt hij niets.
-    final showNew = portfolio.organizations.any((o) => o.previous != null);
+    final showNew =
+        compare && portfolio.organizations.any((o) => o.previous != null);
     final rows = <List<String>>[
       [
         '#',
@@ -484,7 +503,7 @@ class OpenKatReportComposer {
       for (var i = 0; i < issues.length; i++)
         [
           '${i + 1}',
-          issues[i].findingTypeName ?? issues[i].findingTypeId,
+          _inline(issues[i].findingTypeName ?? issues[i].findingTypeId),
           _severityLabel(openKatSeverityBand(issues[i].highestSeverity)),
           '${issues[i].affectedSystems}',
           '${issues[i].affectedOrganizations}',
@@ -494,13 +513,8 @@ class OpenKatReportComposer {
     return _slide(
       id: _id('openkat-portfolio-top-issues'),
       type: SlideType.table,
-      // Geen "Top-5" in de titel: de weergavelimiet zegt zelf al "5 van 22", en
-      // een getal in de titel dat de limiet tegenspreekt is een fout die
-      // niemand meer ziet als de limiet ooit verandert.
       title: _text('Meest voorkomende issues', 'Most common issues'),
       tableRows: rows,
-      // De aggregator sorteert al op zwaarte; 'first' toont die rangorde.
-      // ('top' op kolom 0 — het volgnummer — keerde de lijst juist om.)
       viewLimit: const DisplayWindowSpec(limit: 5),
       notes: '<!-- ocideck_openkat_view: portfolio.top-issues -->',
     );
@@ -520,9 +534,11 @@ class OpenKatReportComposer {
       for (var i = 0; i < findings.length; i++)
         [
           '${i + 1}',
-          findings[i].finding.systemId ?? '-',
-          findings[i].finding.findingTypeName ??
-              findings[i].finding.findingTypeId,
+          _inline(findings[i].finding.systemId ?? '-'),
+          _inline(
+            findings[i].finding.findingTypeName ??
+                findings[i].finding.findingTypeId,
+          ),
           _severityLabel(openKatSeverityBand(findings[i].finding.severity)),
           findings[i].finding.openedAt == null
               ? '-'
@@ -535,20 +551,12 @@ class OpenKatReportComposer {
       type: SlideType.table,
       title: _text('Langst openstaande findings', 'Longest-observed findings'),
       tableRows: rows,
-      // Datumkolommen zijn geen getallen; de aggregator sorteert al op
-      // langst-open, dus 'first' bewaart precies die volgorde.
       viewLimit: const DisplayWindowSpec(limit: 8),
       notes: '<!-- ocideck_openkat_view: portfolio.longest-open -->',
     );
   }
 
-  /// Het verloop over álle meetmomenten, niet alleen de laatste twee.
-  ///
-  /// De momentopnames staan er al — ze werden alleen nooit getoond. Met twee of
-  /// meer meetpunten is dat een lijn door de tijd; met één meetpunt valt er
-  /// niets te verlopen en blijft het een staafdiagram van de stand van nu, want
-  /// een lijn van één punt is geen grafiek.
-  Slide _trendSlide(PortfolioAggregate portfolio) {
+  Slide _trendSlide(PortfolioAggregate portfolio, {required bool compare}) {
     final conclusion = facts.compare(portfolio.current, portfolio.previous);
     final history = facts.history(portfolio.organizations);
     return _slide(
@@ -561,13 +569,20 @@ class OpenKatReportComposer {
           (history.length > 1
                   ? _historyChart(
                       history,
-                      title:
-                          '${_text('Verloop', 'Trend')}: ${_trendLabel(conclusion)}',
+                      title: compare
+                          ? '${_text('Verloop', 'Trend')}: '
+                                '${_trendLabel(conclusion)}'
+                          : _text(
+                              'Meetwaarden per periode',
+                              'Values by period',
+                            ),
                       english: _english,
                     )
                   : _distributionChart(
                       portfolio.current.severityCounts,
-                      title: _trendLabel(conclusion),
+                      title: compare
+                          ? _trendLabel(conclusion)
+                          : _text('Huidige meetwaarden', 'Current values'),
                       english: _english,
                     ))
               .toBlock(),
@@ -575,11 +590,6 @@ class OpenKatReportComposer {
     );
   }
 
-  /// Wat OpenKAT zelf aanraadt bij de zwaarste issues.
-  ///
-  /// Niets verzinnen: draagt geen enkel issue een aanbeveling, dan is er geen
-  /// dia. Brontekst blijft inhoudelijk gelijk, maar wordt wel als letterlijke
-  /// tekst geneutraliseerd voordat zij in Markdown terechtkomt.
   Slide? _recommendationsSlide(PortfolioAggregate portfolio) {
     final withAdvice = facts
         .topIssues(portfolio.organizations)
@@ -604,26 +614,18 @@ class OpenKatReportComposer {
     );
   }
 
-  /// De dekking per control, huidige meting naast de vorige.
-  ///
-  /// Liggende staven, want controlnamen zijn lang. Bewust zónder streefbanden:
-  /// welk percentage "goed genoeg" is staat niet in de meting, en die norm hier
-  /// invullen zou een oordeel zijn dat OpenKAT niet heeft geveld.
-  ///
-  /// Alleen als er dekkingscijfers mét noemer zijn — zonder noemer is er geen
-  /// percentage en valt er niets te tekenen.
-  Slide? _controlsSlide(PortfolioAggregate portfolio) {
+  Slide? _controlsSlide(PortfolioAggregate portfolio, {required bool compare}) {
     final current = <String, double>{
       for (final entry in portfolio.current.controls.entries)
         if (entry.value.ratio != null)
-          entry.value.name: entry.value.ratio! * 100,
+          _literal(entry.value.name): entry.value.ratio! * 100,
     };
     if (current.isEmpty) return null;
 
     final previous = <String, double>{
       for (final entry in (portfolio.previous?.controls ?? const {}).entries)
         if (entry.value.ratio != null)
-          entry.value.name: entry.value.ratio! * 100,
+          _literal(entry.value.name): entry.value.ratio! * 100,
     };
     final names = current.keys.toList()..sort();
 
@@ -640,7 +642,7 @@ class OpenKatReportComposer {
             name: _text('Huidig', 'Current'),
             data: [for (final name in names) current[name] ?? 0],
           ),
-          if (previous.isNotEmpty)
+          if (compare && previous.isNotEmpty)
             ChartSeries(
               name: _text('Vorige', 'Previous'),
               data: [for (final name in names) previous[name] ?? 0],
@@ -651,37 +653,38 @@ class OpenKatReportComposer {
     );
   }
 
-  List<Slide> _organisationSlides(OpenKatOrganization org) {
+  List<Slide> _organisationSlides(
+    OpenKatOrganization org, {
+    required bool compare,
+  }) {
     final current = org.current;
     if (current == null) return const [];
     final agg = facts.aggregateSnapshot(current);
     final previous = org.previous;
-    final previousAgg = previous == null
+    final previousAgg = previous == null || !compare
         ? null
         : facts.aggregateSnapshot(previous);
     final systemStats = facts.systemsWithMostFindings(current);
-    final improved = facts.mostImprovedSystems(org);
-    // Het verloop van déze organisatie op haar eigen meetmomenten: geen
-    // opvulling nodig, want er is er maar één die meet.
+    final improved = compare
+        ? facts.mostImprovedSystems(org)
+        : const <OpenKatSystemChange>[];
     final orgHistory = facts.history([org]);
 
     return [
       _slide(
         id: _id('openkat-org-${_safe(org.code)}-section'),
         type: SlideType.section,
-        title: org.name,
+        title: _literal(org.name),
         notes: '<!-- ocideck_openkat_view: org.${_safe(org.code)}.section -->',
       ),
       _scorecardSlide(
         id: _id('openkat-org-${_safe(org.code)}-summary'),
-        title: '${org.name} — ${_text('kerncijfers', 'key figures')}',
+        title: '${_literal(org.name)} — ${_text('kerncijfers', 'key figures')}',
         entries: [
           ScorecardEntry(
             label: _text('Systemen', 'Systems'),
             value: agg.totalSystems.toDouble(),
             previous: previousAgg?.totalSystems.toDouble(),
-            // Meer systemen in beeld is geen slecht nieuws: het verschil wordt
-            // getoond, het oordeel blijft achterwege.
             polarity: ScorecardPolarity.neutral,
           ),
           ScorecardEntry(
@@ -703,7 +706,7 @@ class OpenKatReportComposer {
         _slide(
           id: _id('openkat-org-${_safe(org.code)}-history'),
           type: SlideType.chart,
-          title: '${org.name} — ${_text('verloop', 'trend')}',
+          title: '${_literal(org.name)} — ${_text('verloop', 'trend')}',
           customMarkdown: _historyChart(
             orgHistory,
             title: _text('Findings per meting', 'Findings by measurement'),
@@ -731,7 +734,7 @@ class OpenKatReportComposer {
         ),
         notes: '<!-- ocideck_openkat_view: org.${_safe(org.code)}.systems -->',
       ),
-      if (org.previous != null && improved.isNotEmpty)
+      if (compare && org.previous != null && improved.isNotEmpty)
         _slide(
           id: _id('openkat-org-${_safe(org.code)}-improved'),
           type: SlideType.table,
@@ -750,14 +753,12 @@ class OpenKatReportComposer {
             for (var i = 0; i < improved.length; i++)
               [
                 '${i + 1}',
-                improved[i].systemId,
+                _inline(improved[i].systemId),
                 '${improved[i].oldStats.total}',
                 '${improved[i].newStats.total}',
-                improved[i].classification,
+                _inline(improved[i].classification),
               ],
           ],
-          // Alles blijft in de data; de dia toont de kop van de rangorde die
-          // de aggregator al maakte.
           viewLimit: const DisplayWindowSpec(limit: 8),
           notes:
               '<!-- ocideck_openkat_view: org.${_safe(org.code)}.improved -->',
@@ -768,6 +769,10 @@ class OpenKatReportComposer {
   String _id(String seed) => _slideId(seed);
 
   String _safe(String value) => _safeCode(value);
+
+  String _literal(String value) => sanitizeImportedText(value);
+
+  String _inline(String value) => sanitizeImportedInline(value);
 
   String _iso(DateTime value) => _isoDate(value);
 
@@ -800,11 +805,12 @@ class OpenKatReportComposer {
   String _trendFact(OpenKatTrendFact fact) {
     if (fact.metric == OpenKatTrendMetric.controlCoverage) {
       final improved = fact.currentRatio! > fact.previousRatio!;
+      final controlId = _literal(fact.controlId ?? '');
       return _english
-          ? '${fact.controlId} coverage ${improved ? 'improved' : 'worsened'} '
+          ? '$controlId coverage ${improved ? 'improved' : 'worsened'} '
                 'from ${_percent(fact.previousRatio!)} to '
                 '${_percent(fact.currentRatio!)}'
-          : '${fact.controlId}-dekking '
+          : '$controlId-dekking '
                 '${improved ? 'verbeterd' : 'verslechterd'} van '
                 '${_percent(fact.previousRatio!)} naar '
                 '${_percent(fact.currentRatio!)}';
@@ -838,8 +844,6 @@ class OpenKatReportComposer {
   String _percent(double value) => '${(value * 100).round()}%';
 }
 
-/// Een dia-id die alleen van [seed] afhangt, zodat opnieuw genereren dezelfde
-/// dia's oplevert en een herimport ze op hun plek terugvindt.
 String _slideId(String seed) {
   final bytes = utf8.encode('ocideck-openkat-$seed');
   final hash = md5.convert(bytes);
@@ -854,16 +858,8 @@ String _isoDate(DateTime value) =>
     '${value.month.toString().padLeft(2, '0')}-'
     '${value.day.toString().padLeft(2, '0')}';
 
-/// Hoeveel aanbevelingen er op de adviesdia passen. Vijf tussenkoppen met elk
-/// een alinea vult een dia; meer wordt een lijst die niemand voorleest.
 const int _maxRecommendations = 5;
 
-/// Vaste kleuren per ernstband, zodat critical op élke dia dezelfde kleur
-/// heeft. Zonder deze afspraak deelt elke grafiek zijn kleuren uit op volgorde
-/// van reeks, en betekent dezelfde kleur op de volgende dia iets anders.
-///
-/// Aflopend van diep rood naar blauw: de volgorde is ook zonder kleur te zien,
-/// wat het voor een lezer die kleuren niet onderscheidt leesbaar houdt.
 const Map<String, String> _severityColors = {
   'critical': '#B00020',
   'high': '#EF4444',
@@ -872,16 +868,12 @@ const Map<String, String> _severityColors = {
   openKatOtherSeverity: '#64748B',
 };
 
-/// Welke banden een grafiek toont: de vier vaste banden altijd (ook op nul, zo
-/// blijft de as tussen twee rapportages hetzelfde), de restband alleen als er
-/// iets in valt.
 List<String> _visibleBands(Iterable<Map<String, int>> counts) => [
   ...openKatSeverityBands,
   if (counts.any((c) => (c[openKatOtherSeverity] ?? 0) > 0))
     openKatOtherSeverity,
 ];
 
-/// Het verloop als lijngrafiek: één punt per meetmoment, één lijn per band.
 ChartSpec _historyChart(
   List<OpenKatHistoryPoint> history, {
   required String title,
@@ -907,8 +899,6 @@ ChartSpec _historyChart(
   );
 }
 
-/// De stand van nu als staafdiagram — wat er te tonen valt zolang er maar één
-/// meting is.
 ChartSpec _distributionChart(
   Map<String, int> counts, {
   required String title,
@@ -930,8 +920,6 @@ ChartSpec _distributionChart(
   );
 }
 
-/// De ernstbanden zoals ze op een dia komen te staan. De sleutels blijven de
-/// Engelse tokens van OpenKAT, want dát is wat er in de data staat.
 const Map<String, String> _severityLabels = {
   'critical': 'Critical',
   'high': 'High',
@@ -948,9 +936,6 @@ const Map<String, String> _severityLabelsEnglish = {
   openKatOtherSeverity: 'Other',
 };
 
-/// De ernstverdeling op één regel. De restcategorie staat er alleen als hij
-/// gevuld is, maar dán ook altijd: een uitsplitsing die het totaal niet
-/// verklaart laat de lezer met een gat achter dat hij niet kan thuisbrengen.
 String _severityLine(Map<String, int> counts, {required bool english}) {
   final parts = [
     'Critical: ${counts['critical'] ?? 0}',
@@ -963,9 +948,6 @@ String _severityLine(Map<String, int> counts, {required bool english}) {
   return parts.join(', ');
 }
 
-/// De tabel "Systemen met de meeste findings": alle banden, zodat de kolommen
-/// optellen tot het totaal. De restkolom verschijnt alleen als er findings in
-/// vallen — een kolom die overal nul is kost breedte en zegt niets.
 List<List<String>> _systemsTable(
   List<OpenKatSystemStats> stats, {
   required bool showOther,
@@ -984,7 +966,7 @@ List<List<String>> _systemsTable(
   for (var i = 0; i < stats.length; i++)
     [
       '${i + 1}',
-      stats[i].systemId,
+      sanitizeImportedInline(stats[i].systemId),
       '${stats[i].total}',
       '${stats[i].critical}',
       '${stats[i].high}',

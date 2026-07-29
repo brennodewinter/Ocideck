@@ -41,6 +41,7 @@ class OpenKatManagementScenario implements OpenKatReportScenario {
     optionalCapabilities: {
       OpenKatReportCapability.multipleOrganizations,
       OpenKatReportCapability.historicalSnapshots,
+      OpenKatReportCapability.comparableMeasurementCoverage,
       OpenKatReportCapability.controlsWithDenominator,
       OpenKatReportCapability.sufficientDataFreshness,
     },
@@ -117,6 +118,7 @@ class OpenKatOrganizationScenario implements OpenKatReportScenario {
     scopes: {OpenKatReportScopeKind.organization},
     optionalCapabilities: {
       OpenKatReportCapability.historicalSnapshots,
+      OpenKatReportCapability.comparableMeasurementCoverage,
       OpenKatReportCapability.controlsWithDenominator,
       OpenKatReportCapability.sufficientDataFreshness,
     },

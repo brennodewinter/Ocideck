@@ -169,6 +169,48 @@ void main() {
     });
   });
 
+  test(
+    'managementvergelijking zonder dekkingsbewijs waarschuwt ook getypept',
+    () {
+      final result = OpenKatReportEngine().generate(
+        [
+          _organization([
+            _snapshot(
+              date: DateTime.utc(2026, 7, 5),
+              source: 'alpha-previous.json',
+              findings: [_finding(id: 'old')],
+            ),
+            _snapshot(
+              date: DateTime.utc(2026, 7, 15),
+              source: 'alpha-current.json',
+              findings: [_finding(id: 'new')],
+            ),
+          ]),
+        ],
+        OpenKatReportRequest(
+          scenarioId: 'management-overview',
+          scope: const OpenKatReportScope.portfolio(),
+          currentAsOf: DateTime.utc(2026, 7, 20),
+        ),
+      );
+
+      expect(result.generated, isTrue);
+      expect(
+        _hasDiagnostic(
+          result,
+          OpenKatReportDiagnosticCode.incomparableMeasurementCoverage,
+        ),
+        isTrue,
+      );
+      expect(
+        result.deck!.slides.any(
+          (slide) => slide.title == 'Vergelijkbaarheid niet aangetoond',
+        ),
+        isTrue,
+      );
+    },
+  );
+
   test('monitoringcapability sluit bij een onbekende assetstatus', () {
     const features = {
       OpenKatSourceFeature.stableAssetIdentity,
@@ -205,6 +247,60 @@ void main() {
   });
 
   group('fail-closed custom scenario', () {
+    test('weigert twee blokken met dezelfde soort', () {
+      const scenario = _CustomScenario(
+        descriptor: OpenKatScenarioDescriptor(
+          id: 'custom-duplicate-kind',
+          scopes: {OpenKatReportScopeKind.portfolio},
+        ),
+        plan: OpenKatReportPlan(
+          scenarioId: 'custom-duplicate-kind',
+          blocks: [
+            OpenKatReportBlock(
+              id: 'management-a',
+              kind: OpenKatReportBlockKind.managementOverview,
+            ),
+            OpenKatReportBlock(
+              id: 'management-b',
+              kind: OpenKatReportBlockKind.managementOverview,
+            ),
+          ],
+        ),
+      );
+      final result =
+          OpenKatReportEngine(
+            registry: OpenKatReportScenarioRegistry(
+              scenarios: const [scenario],
+            ),
+          ).generate(
+            [
+              _organization([
+                _snapshot(
+                  date: DateTime.utc(2026, 7, 15),
+                  source: 'alpha.json',
+                ),
+              ]),
+            ],
+            OpenKatReportRequest(
+              scenarioId: 'custom-duplicate-kind',
+              scope: const OpenKatReportScope.portfolio(),
+              currentAsOf: DateTime.utc(2026, 7, 20),
+            ),
+          );
+
+      expect(result.generated, isFalse);
+      expect(
+        result.diagnostics
+            .singleWhere(
+              (diagnostic) =>
+                  diagnostic.code ==
+                  OpenKatReportDiagnosticCode.invalidReportPlan,
+            )
+            .arguments['reason'],
+        'duplicateBlockKind',
+      );
+    });
+
     test('een blok kan zijn intrinsieke capability niet omzeilen', () {
       const scenario = _CustomScenario(
         descriptor: OpenKatScenarioDescriptor(
@@ -363,5 +459,111 @@ void main() {
         'scenarioIdMismatch',
       );
     });
+  });
+
+  group('runtime rapportbeleid', () {
+    test('weigert ongeldige en buitensporige tabelgrenzen getypept', () {
+      for (final value in [
+        0,
+        -1,
+        OpenKatReportPolicy.maximumTableRowLimit + 1,
+      ]) {
+        final result = OpenKatReportEngine().generate(
+          [
+            _organization([
+              _snapshot(date: DateTime.utc(2026, 7, 15), source: 'alpha.json'),
+            ]),
+          ],
+          OpenKatReportRequest(
+            scenarioId: 'management-overview',
+            scope: const OpenKatReportScope.portfolio(),
+            currentAsOf: DateTime.utc(2026, 7, 20),
+            policy: OpenKatReportPolicy(tableRowLimit: value),
+          ),
+        );
+
+        expect(result.generated, isFalse);
+        final diagnostic = result.diagnostics.singleWhere(
+          (item) => item.code == OpenKatReportDiagnosticCode.invalidPolicy,
+        );
+        expect(diagnostic.arguments['field'], 'tableRowLimit');
+        expect(diagnostic.arguments['value'], '$value');
+      }
+    });
+
+    test('weigert een ongeldige historische werkgrens getypept', () {
+      final result = OpenKatReportEngine().generate(
+        [
+          _organization([
+            _snapshot(date: DateTime.utc(2026, 7, 15), source: 'alpha.json'),
+          ]),
+        ],
+        OpenKatReportRequest(
+          scenarioId: 'management-overview',
+          scope: const OpenKatReportScope.portfolio(),
+          currentAsOf: DateTime.utc(2026, 7, 20),
+          policy: const OpenKatReportPolicy(historicalFindingWorkLimit: 0),
+        ),
+      );
+
+      expect(result.generated, isFalse);
+      expect(
+        result.diagnostics
+            .singleWhere(
+              (item) => item.code == OpenKatReportDiagnosticCode.invalidPolicy,
+            )
+            .arguments['field'],
+        'historicalFindingWorkLimit',
+      );
+    });
+
+    test(
+      'stopt lifecycle getypept vóór de historische index te groot wordt',
+      () {
+        final result = OpenKatReportEngine().generate(
+          [
+            _organization([
+              _snapshot(
+                date: DateTime.utc(2026, 7, 1),
+                source: 'alpha-history.json',
+                findings: [
+                  _finding(id: 'history-a'),
+                  _finding(id: 'history-b'),
+                ],
+              ),
+              _snapshot(
+                date: DateTime.utc(2026, 7, 5),
+                source: 'alpha-previous.json',
+                findings: [_finding(id: 'previous')],
+              ),
+              _snapshot(
+                date: DateTime.utc(2026, 7, 15),
+                source: 'alpha-current.json',
+                findings: [_finding(id: 'current')],
+              ),
+            ]),
+          ],
+          OpenKatReportRequest(
+            scenarioId: 'weekly-comparison',
+            scope: const OpenKatReportScope.portfolio(),
+            currentAsOf: DateTime.utc(2026, 7, 20),
+            previousAsOf: DateTime.utc(2026, 7, 10),
+            policy: const OpenKatReportPolicy(historicalFindingWorkLimit: 1),
+          ),
+        );
+
+        expect(result.generated, isFalse);
+        expect(
+          result.diagnostics
+              .singleWhere(
+                (item) =>
+                    item.code ==
+                    OpenKatReportDiagnosticCode.resourceLimitExceeded,
+              )
+              .arguments,
+          containsPair('resource', 'historicalFindings'),
+        );
+      },
+    );
   });
 }

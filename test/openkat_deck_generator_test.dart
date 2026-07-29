@@ -30,6 +30,7 @@ OpenKatSnapshot _snapshot({
   required List<OpenKatFinding> findings,
   List<OpenKatSystem> systems = const [],
   Map<String, OpenKatControlScore> controls = const {},
+  bool comparable = true,
 }) => OpenKatSnapshot(
   reportDate: date,
   sourceFile: 'rapport-${date.year}${date.month}${date.day}.json',
@@ -37,6 +38,10 @@ OpenKatSnapshot _snapshot({
   systems: systems,
   findings: findings,
   controls: controls,
+  sourceFeatures: comparable
+      ? const {OpenKatSourceFeature.comparableMeasurementCoverage}
+      : const {},
+  measurementScopeId: comparable ? 'fixture-scope' : null,
 );
 
 /// Eén organisatie met twee metingen, zodat elk verschil op de dia's te zien
@@ -304,6 +309,36 @@ void main() {
       ]);
       expect(_hasView(deck, 'portfolio.key-message'), isFalse);
     });
+
+    test(
+      'zonder broncapability verschijnt alleen een vergelijkingswaarschuwing',
+      () {
+        final org = _orgMetVerloop('a');
+        final deck = generator.generate([
+          org.copyWith(
+            snapshots: [
+              for (final snapshot in org.snapshots)
+                snapshot.copyWith(
+                  sourceFeatures: const {},
+                  clearMeasurementScopeId: true,
+                ),
+            ],
+          ),
+        ]);
+
+        expect(_hasView(deck, 'portfolio.comparison-warning'), isTrue);
+        expect(_hasView(deck, 'portfolio.key-message'), isFalse);
+        expect(_hasView(deck, 'org.a.improved'), isFalse);
+        final scorecard = ScorecardSpec.fromSlide(
+          _view(deck, 'portfolio.summary').title,
+          _view(deck, 'portfolio.summary').tableRows,
+        );
+        expect(
+          scorecard.entries.every((entry) => entry.previous == null),
+          isTrue,
+        );
+      },
+    );
   });
 
   group('ernst per organisatie', () {

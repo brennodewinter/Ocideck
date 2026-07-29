@@ -161,6 +161,25 @@ void main() {
   });
 
   group('findinglevenscyclus schaalt lineair en begrensd', () {
+    test(
+      'controleert het historische werkbudget zonder volledige ID-index',
+      () {
+        final facts = OpenKatReportFacts([
+          _organization([
+            _snapshot(
+              day: 1,
+              findings: [_finding('history-a'), _finding('history-b')],
+            ),
+            _snapshot(day: 6),
+            _snapshot(day: 13, findings: [_finding('current')]),
+          ]),
+        ]);
+
+        expect(facts.exceedsHistoricalFindingWorkLimit(_request(), 1), isTrue);
+        expect(facts.exceedsHistoricalFindingWorkLimit(_request(), 2), isFalse);
+      },
+    );
+
     test('indexeert oudere finding-ID’s precies eenmaal', () {
       final older = _CountingList([
         for (var index = 0; index < 2000; index++) _finding('older-$index'),
