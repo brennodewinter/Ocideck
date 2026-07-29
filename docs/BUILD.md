@@ -82,6 +82,16 @@ HTML export, and presenting in a single window. Dual-screen presenter mode and
 direct filesystem project folders are desktop-only; use **Open** / **Save** via
 the browser file picker on web.
 
+**Loading splash.** The CanvasKit build takes roughly ten seconds before it
+paints anything; without something on screen in the meantime, that reads as a
+plain white page — "it's broken", not "please wait" (#589). `web/index.html`
+ships a static `#splash` layer under the app surface (`z-index: -1`) that
+Flutter's own painting covers once it starts, so nothing needs to remove it. It
+carries no `<script>` — the CSP's `script-src` has no `'unsafe-inline'`, so an
+inline script would silently fail to run. `test/web_index_splash_test.dart` guards
+both the layer's presence and its script-free body without needing a full web
+build.
+
 ### What travels with the bundle
 
 A bundle you hand to someone else is not just the app. `make build-web` finishes

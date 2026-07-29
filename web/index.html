@@ -1,108 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
+  <!-- Replaced by `flutter build`'s --base-href at build time. -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
 
-  <!--
-    Content-Security-Policy hardening for the web build.
-
-    - script-src is locked to first-party plus 'wasm-unsafe-eval' (CanvasKit must
-      compile a WebAssembly module; this narrow token does NOT re-enable JS
-      eval()/Function()). Build with `make build-web` (flutter build web --csp)
-      so the Flutter loader needs no 'unsafe-inline'/'unsafe-eval' either.
-    - style-src keeps 'unsafe-inline' because the Flutter engine injects styles
-      at runtime; there is no way around this for a CanvasKit app.
-    - img-src/media-src are first-party only (data:/blob:). Remote deck media is
-      therefore blocked on web by design — on web there is no net_guard SSRF
-      check, so this closes that hole. To allow remote media, add `https:` to
-      img-src AND media-src.
-    - connect-src additionally allows https: for the user-initiated URL-import
-      (fetching a deck the user pastes a link to). The browser's CORS policy
-      gates every cross-origin READ, so a non-cooperating (e.g. internal) host
-      cannot be read through this; keep it https:-only so plaintext hosts stay
-      unreachable.
-      Be precise about what that does NOT cover: CORS does not stop a `no-cors`
-      POST. Such a request is sent, the response is merely opaque — so this
-      directive leaves a one-way write channel to any https host. That is an
-      exfiltration path, not a read path, and CORS was never the control for it.
-      It is accepted deliberately, because closing it means removing URL-import
-      on web (a feature the user asked for and initiates), and because reaching
-      it requires script execution in this origin — which `script-src 'self'`
-      plus the absence of 'unsafe-inline'/'unsafe-eval' is what actually
-      prevents. In other words the control here is script-src, not connect-src;
-      connect-src narrows the blast radius if script-src ever fails, and
-      `no-referrer` below keeps the deck's own URL out of the request.
-      Revisit if URL-import ever moves behind a fixed set of hosts: then
-      connect-src can name them instead of allowing https: wholesale.
-    - child-src/frame-src allow blob:/data: for the offscreen render/embed
-      WebViews (an iframe on web). On desktop this covers both the Mermaid
-      renderer and the video embed. On web the Mermaid renderer no longer uses a
-      WebView — since #851 it renders in-page via JS-interop — but the video
-      embed still loads its player through a data:-URI iframe, so the exemption
-      stays needed for that consumer.
-    - base-uri is 'self' (NOT 'none') because Flutter relies on <base href>.
-    - form-action is 'none': the app renders into a canvas and submits no HTML
-      forms, so nothing legitimate needs it. It is spelled out rather than left
-      out because form-action does NOT fall back to default-src — omitting it
-      leaves form submission unrestricted even with default-src 'self'. Unlike
-      frame-ancestors, this one IS enforced from a <meta> tag.
-    - frame-ancestors is present below but a <meta>-delivered CSP CANNOT enforce
-      it — browsers ignore frame-ancestors (and sandbox/report-*) outside an
-      HTTP header. It is kept here only as documentation of intent. To actually
-      stop clickjacking the STATIC HOST must send the CSP (and ideally
-      `X-Frame-Options: DENY`) as a response header. See docs/BUILD.md. When
-      embedding this bundle inside Nextcloud, set frame-ancestors to the host
-      origin in that header.
-  -->
+  <!-- CSP hardening: rationale for each directive in docs/SECURITY_DESIGN.md §1 and docs/BUILD.md. -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https:; worker-src 'self' blob:; child-src 'self' blob: data:; frame-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'">
 
-  <!--
-    Referrer-Policy, delivered from the document itself.
-
-    Unlike frame-ancestors, `no-referrer` IS honoured from a <meta> tag, so this
-    one does not depend on the static host cooperating — it ships inside the
-    bundle. It matters because connect-src permits `https:`: a URL-import
-    fetches a host the user pasted, and without this the deck's own URL would
-    travel to that host in the Referer header. The path of a deck link can
-    itself be the sensitive part.
-
-    Kept as a companion header in docs/HOSTING.md too; the header wins where
-    both are present, and they say the same thing.
-  -->
+  <!-- Companion HTTP header and rationale: docs/HOSTING.md, docs/SECURITY_DESIGN.md §1. -->
   <meta name="referrer" content="no-referrer">
 
   <meta name="description" content="Feline and human friendly presentations">
 
-  <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="OciDeck">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
   <title>OciDeck — Feline and human friendly presentations</title>
   <link rel="manifest" href="manifest.json">
 
-  <!-- Zie het laadscherm in de body. Inline mag: het CSP staat
-       `style-src 'self' 'unsafe-inline'` toe, scripts nadrukkelijk niet. -->
   <style>
     html, body { margin: 0; height: 100%; background: transparent; }
     #splash {
@@ -128,34 +49,13 @@
   </style>
 </head>
 <body>
-  <!--
-    Laadscherm. De webbouw is CanvasKit, dus het duurt ongeveer tien seconden
-    voordat er iets staat — en dat waren tien seconden wit, zonder enig teken
-    van leven. Voor een bezoeker die dit product voor het eerst ziet is dat de
-    conclusie "stuk", niet "even geduld" (#589).
-
-    Geen JavaScript, met opzet: het CSP van deze pagina staat geen inline
-    script toe (`script-src 'self' 'wasm-unsafe-eval'`), en een los .js-bestand
-    erbij om een div te verwijderen is meer bewegende delen dan de taak vraagt.
-    Dit laagje ligt eronder (`z-index: -1`) en wordt door het app-oppervlak
-    bedekt zodra Flutter verft. Het hoeft dus nooit opgeruimd te worden — en
-    als Flutter nooit komt, blijft er iets staan dat uitlegt wat je ziet, wat
-    beter is dan wit.
-  -->
+  <!-- Loading splash, no inline script (CSP): rationale in docs/BUILD.md, #589. -->
   <div id="splash" role="status" aria-live="polite">
     <img src="icons/Icon-192.png" alt="" width="72" height="72">
     <p>OciDeck</p>
     <p class="sub">Laden… · Loading…</p>
   </div>
 
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
-
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
