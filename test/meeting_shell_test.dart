@@ -150,7 +150,10 @@ void main() {
       );
       await tester.pumpAndSettle();
       // Meteen een oordeel, zonder knop en zonder netwerk…
-      expect(find.textContaining('Herkend als een vergadering'), findsOneWidget);
+      expect(
+        find.textContaining('Herkend als een vergadering'),
+        findsOneWidget,
+      );
       // …en de sessie staat nog op niets: een halve link is geen mislukte
       // vergadering, en de wachtstrip hoort dus niet te verschijnen.
       expect(container.read(meetingSessionProvider).phase, MeetingPhase.idle);
@@ -235,10 +238,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(
         find.text(
-          meetingFailureText(
-            l10n,
-            MeetingFailureKind.anonymousJoinDisabled,
-          ),
+          meetingFailureText(l10n, MeetingFailureKind.anonymousJoinDisabled),
         ),
         findsOneWidget,
       );
@@ -333,9 +333,7 @@ void main() {
     ) async {
       final container = await pump(tester, const MeetingWaitingStrip());
       const l10n = AppLocalizations(Locale('nl'));
-      container
-          .read(meetingSessionProvider.notifier)
-          .resolveLink('geen link');
+      container.read(meetingSessionProvider.notifier).resolveLink('geen link');
       await tester.pumpAndSettle();
       expect(
         find.text(meetingFailureText(l10n, MeetingFailureKind.invalidLink)),
