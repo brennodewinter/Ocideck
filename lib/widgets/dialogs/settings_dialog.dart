@@ -60,6 +60,7 @@ import 'settings/ai_module_card.dart';
 import 'settings/online_storage_module_card.dart';
 import 'settings/openkat_integration_panel.dart';
 import 'settings/import_module_card.dart';
+import 'settings/meetings_module_card.dart';
 import 'settings/procesverbetering_module_card.dart';
 import 'settings/appearance_legibility.dart';
 import 'settings/git_form.dart';
