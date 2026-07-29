@@ -19,7 +19,7 @@ part of '../settings_dialog.dart';
 /// WCAG 1.4.11 (niet-tekstcontrast ≥ 3:1) tegen *beide* uiteinden van het
 /// verloop — geborgd in `settings_sidebar_scroll_affordance_test.dart`.
 @visibleForTesting
-const Color settingsSidebarThumbColor = Color(0x73FFFFFF);
+final Color settingsSidebarThumbColor = Colors.white.withValues(alpha: 0.45);
 
 /// Hoeveel pixels inhoud er hoogstens vervagen aan een rand waar meer achter
 /// ligt. Klein genoeg om geen leesruimte te kosten, groot genoeg om een item
@@ -109,14 +109,17 @@ class _OverflowHintsState extends State<_OverflowHints> {
         : (_fadeBottom / bounds.height).clamp(0.0, 0.45);
     // Een rand zonder vervaging krijgt géén doorzichtige stop op positie 0 of
     // 1: twee stops op hetzelfde punt maken de uiterste pixelrij dubbelzinnig.
+    // Alleen de alpha telt (dstIn-masker); wit is hier dus geen kleurkeuze.
+    const dekkend = Colors.white;
+    final doorzichtig = Colors.white.withValues(alpha: 0);
     return LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        if (top > 0) const Color(0x00FFFFFF),
-        const Color(0xFFFFFFFF),
-        const Color(0xFFFFFFFF),
-        if (bottom > 0) const Color(0x00FFFFFF),
+        if (top > 0) doorzichtig,
+        dekkend,
+        dekkend,
+        if (bottom > 0) doorzichtig,
       ],
       stops: [if (top > 0) 0, top, 1 - bottom, if (bottom > 0) 1],
     ).createShader(bounds);
@@ -163,6 +166,95 @@ class _OverflowHintsState extends State<_OverflowHints> {
       crossAxisMargin: 2,
       mainAxisMargin: 2,
       child: child,
+    );
+  }
+}
+
+/// Eén navigatieknop in de zijbalk. Een losse widget en geen methode op de
+/// dialoogstaat: hij heeft aan een sectie, een selectievlag en een tik-callback
+/// genoeg, en alles wat hij verder zou aanraken hoort hem niet aan te gaan.
+class _NavItem extends StatelessWidget {
+  const _NavItem({
+    required this.section,
+    required this.selected,
+    required this.label,
+    required this.onTap,
+  });
+
+  final SettingsSection section;
+  final bool selected;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(11),
+          onTap: onTap,
+          child: Tooltip(
+            message: label,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 150),
+              padding: const EdgeInsets.fromLTRB(12, 11, 14, 11),
+              decoration: BoxDecoration(
+                color: selected
+                    ? Colors.white.withValues(alpha: 0.13)
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(11),
+              ),
+              child: Row(
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 150),
+                    width: 3,
+                    height: 18,
+                    margin: const EdgeInsets.only(right: 11),
+                    decoration: BoxDecoration(
+                      color: selected ? AppTheme.blue400 : Colors.transparent,
+                      borderRadius: BorderRadius.circular(3),
+                    ),
+                  ),
+                  Icon(
+                    section.icon,
+                    size: 19,
+                    color: selected
+                        ? Colors.white
+                        : Colors.white.withValues(alpha: 0.62),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    // Twee regels in plaats van afkappen. Bij 200% — een schaal
+                    // die dit product zelf aanbiedt als WCAG 1.4.4-instelling —
+                    // werden de labels "Einste…", "App-De…", "Präsent…": een
+                    // navigatie waar je niet meer op kunt navigeren. Een tooltip
+                    // eromheen vangt het uiterste geval, maar de tooltip is het
+                    // vangnet en niet de oplossing; die moet je immers eerst
+                    // ontdekken.
+                    child: Text(
+                      label,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: selected
+                            ? Colors.white
+                            : Colors.white.withValues(alpha: 0.72),
+                        fontSize: 13.5,
+                        fontWeight: selected
+                            ? FontWeight.w600
+                            : FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -275,7 +367,12 @@ extension _SettingsChrome on _SettingsDialogState {
                       // module wél, maar zonder OpenKAT-tabblad.
                       openKatAvailable: supportsLocalProjectFolders,
                     ))
-                      _navItem(section, l10n),
+                      _NavItem(
+                        section: section,
+                        selected: _selectedTab == section,
+                        label: section.label(l10n),
+                        onTap: () => _rebuild(() => _selectedTab = section),
+                      ),
                   ],
                 ),
               ),
@@ -346,80 +443,6 @@ extension _SettingsChrome on _SettingsDialogState {
                     color: selected
                         ? Colors.white
                         : Colors.white.withValues(alpha: 0.5),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _navItem(SettingsSection section, AppLocalizations l10n) {
-    final selected = _selectedTab == section;
-    final icon = section.icon;
-    final label = section.label(l10n);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(11),
-          onTap: () => _rebuild(() => _selectedTab = section),
-          child: Tooltip(
-            message: label,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 150),
-              padding: const EdgeInsets.fromLTRB(12, 11, 14, 11),
-              decoration: BoxDecoration(
-                color: selected
-                    ? Colors.white.withValues(alpha: 0.13)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(11),
-              ),
-              child: Row(
-                children: [
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 150),
-                    width: 3,
-                    height: 18,
-                    margin: const EdgeInsets.only(right: 11),
-                    decoration: BoxDecoration(
-                      color: selected ? AppTheme.blue400 : Colors.transparent,
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                  ),
-                  Icon(
-                    icon,
-                    size: 19,
-                    color: selected
-                        ? Colors.white
-                        : Colors.white.withValues(alpha: 0.62),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    // Twee regels in plaats van afkappen. Bij 200% — een schaal
-                    // die dit product zelf aanbiedt als WCAG 1.4.4-instelling —
-                    // werden de labels "Einste…", "App-De…", "Präsent…": een
-                    // navigatie waar je niet meer op kunt navigeren. Een tooltip
-                    // eromheen vangt het uiterste geval, maar de tooltip is het
-                    // vangnet en niet de oplossing; die moet je immers eerst
-                    // ontdekken.
-                    child: Text(
-                      label,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: selected
-                            ? Colors.white
-                            : Colors.white.withValues(alpha: 0.72),
-                        fontSize: 13.5,
-                        fontWeight: selected
-                            ? FontWeight.w600
-                            : FontWeight.w500,
-                      ),
-                    ),
                   ),
                 ],
               ),
