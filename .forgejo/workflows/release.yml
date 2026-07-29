@@ -14,6 +14,7 @@
 #   macos    → .app als zip (op de Mac-runner)
 #   windows  → opgehaald van de spiegel
 #   publiceren → een Forgejo-release met alles eraan, plus SBOM en SHA256SUMS
+#   website  → de downloads op librekat.nl bijgewerkt naar deze release
 #
 # Ondertekening: de macOS-app wordt op de Mac-runner getekend en genotariseerd
 # (Developer ID + notarytool; zie de macos-job en docs/BUILD.md), mits het
@@ -469,3 +470,35 @@ jobs:
 
           echo
           echo "Klaar: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/tag/${GITHUB_REF_NAME}"
+
+  website-downloads:
+    name: Website-downloads bijwerken
+    # Op de aangemelde Mac (mac-brenno): die heeft hugo, de deploy-SSH-sleutel en
+    # SSH-toegang tot de website-repo. Draait ná 'publiceren', want het
+    # bump-script haalt de verificatiehash en de datum uit de zojuist
+    # gepubliceerde release. Geen prereleases (zoals deploy-web) — een -rc zet de
+    # productiesite niet live. Faalt deze job, dan is de release al gepubliceerd:
+    # de website valt terug op de handmatige route (scripts/bump-ocideck.sh +
+    # ./publiceersite in de website-repo).
+    needs: publiceren
+    if: ${{ !contains(github.ref_name, '-') }}
+    runs-on: macos
+    steps:
+      - name: Website naar deze release bijwerken en live zetten
+        run: |
+          set -Eeuo pipefail
+          export GIT_SSH_COMMAND="ssh -o BatchMode=yes -o IdentitiesOnly=yes -i $HOME/.ssh/id_rsa"
+          VERSIE="${GITHUB_REF_NAME#v}"
+          WT="$(mktemp -d)"
+          git clone ssh://git@pawprint.vigilis.online:2222/LibreKAT/website.git "$WT"
+          cd "$WT"
+          git config user.name "OciDeck release"
+          git config user.email "release@librekat.nl"
+          scripts/bump-ocideck.sh "$VERSIE"
+          if git diff --quiet; then
+            echo "Website staat al op $VERSIE — niets te publiceren."
+            exit 0
+          fi
+          git commit -aqm "OciDeck $VERSIE: downloads bijwerken (automatisch bij release)"
+          git push origin main
+          ./publiceersite

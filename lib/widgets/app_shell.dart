@@ -40,6 +40,7 @@ import '../services/management_summary.dart';
 import '../services/scope_coverage.dart';
 import '../services/classification_policy.dart';
 import '../services/document_integrity.dart';
+import '../services/export_metadata.dart' show kOciDeckVersion;
 import '../services/export_readiness.dart';
 import '../services/open_file_channel.dart';
 import '../services/export_service.dart';
