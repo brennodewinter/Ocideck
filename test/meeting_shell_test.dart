@@ -96,6 +96,47 @@ void main() {
     });
   });
 
+  group('de gast-waarschuwing volgt de adapter, niet een vaste zin', () {
+    test('zonder feiten van een adapter is de gastaanname eerlijk', () {
+      expect(showsUnverifiedNameHint(null), isTrue);
+      expect(
+        showsUnverifiedNameHint(MeetingIdentityKind.anonymousDisplayName),
+        isTrue,
+      );
+      expect(
+        showsUnverifiedNameHint(MeetingIdentityKind.ephemeralGuest),
+        isTrue,
+      );
+    });
+
+    test('bij een echte identiteit verdwijnt de waarschuwing', () {
+      // Anders staan er twee elkaar tegensprekende beweringen boven dezelfde
+      // Meedoen-knop: "de anderen zien u als gast" naast "meedoen gaat met uw
+      // eigen account bij deze aanbieder".
+      for (final identity in [
+        MeetingIdentityKind.serviceAppGuest,
+        MeetingIdentityKind.hostSponsored,
+        MeetingIdentityKind.account,
+      ]) {
+        expect(
+          showsUnverifiedNameHint(identity),
+          isFalse,
+          reason:
+              'bij $identity is "niemand controleert deze naam" niet waar; de '
+              'bekendmaking hoort dat te zeggen, niet een vaste zin',
+        );
+      }
+    });
+
+    test('elke identiteitssoort heeft een antwoord', () {
+      // De switch is gesloten: een nieuwe identiteitssoort dwingt een keuze in
+      // plaats van stil in de gast-tak te vallen.
+      for (final identity in MeetingIdentityKind.values) {
+        expect(() => showsUnverifiedNameHint(identity), returnsNormally);
+      }
+    });
+  });
+
   group('de deelnamedialoog', () {
     testWidgets('herkennen gebeurt tijdens het typen en raakt de sessie niet '
         'aan', (tester) async {

@@ -104,14 +104,16 @@ class _MeetingJoinDialogState extends ConsumerState<MeetingJoinDialog> {
                 ),
                 onChanged: (_) => setState(() {}),
               ),
-              const SizedBox(height: 4),
-              Text(
-                // T2, eerlijk en vooraf: deze naam is niet geverifieerd.
-                l10n.d(
-                  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.',
+              if (_showsUnverifiedNameHint) ...[
+                const SizedBox(height: 4),
+                Text(
+                  // T2, eerlijk en vooraf: deze naam is niet geverifieerd.
+                  l10n.d(
+                    'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.',
+                  ),
+                  style: TextStyle(fontSize: 11, color: AppTheme.slate500),
                 ),
-                style: TextStyle(fontSize: 11, color: AppTheme.slate500),
-              ),
+              ],
               if (_preflight != null) ...[
                 const SizedBox(height: 16),
                 _EgressNotice(preflight: _preflight!),
@@ -166,6 +168,9 @@ class _MeetingJoinDialogState extends ConsumerState<MeetingJoinDialog> {
           : meetingLinkResolver.resolve(trimmed);
     });
   }
+
+  bool get _showsUnverifiedNameHint =>
+      showsUnverifiedNameHint(_preflight?.identity);
 
   /// Of er iets aan de adapter te vragen valt. Alleen bij een link die lokaal
   /// al herkend is — een onbekende of afgewezen link hoeft geen dienst lastig
@@ -259,6 +264,38 @@ class _MeetingJoinDialogState extends ConsumerState<MeetingJoinDialog> {
     Navigator.of(context).pop();
   }
 }
+
+/// Of de waarschuwing "deze naam controleert niemand, u doet mee als gast" nog
+/// waar is bij [identity].
+///
+/// `null` betekent: de adapter heeft nog niets gemeld. Dan is de gastaanname de
+/// eerlijke stand — de hele functie bestaat om als gast bij andermans
+/// vergadering aan te schuiven (T2), en dat is het enige wat de schil zonder
+/// feiten van een adapter over zichzelf mag zeggen. Zodra er een ándere
+/// identiteit gemeld wordt — een dienstaccount, een door de organisator
+/// klaargezette identiteit, of een echt account — is de waarschuwing niet langer
+/// waar en verdwijnt ze; de bekendmaking zegt dan wat er wél geldt.
+///
+/// Een losse functie en geen getter op de dialoog, om dezelfde reden als
+/// `meetingFailureText`: het is pure tekstkeuze, dus toetsbaar zonder een
+/// venster te openen — en dat is nodig, want geen enkele bestaande adapter
+/// meldt een van de andere vier identiteiten.
+///
+/// Dit was een bevinding van de kernwaardenbewaker, en een terechte. De kop van
+/// dit bestand eist dat de bekendmaking uit de feiten van de adapter komt en
+/// niet uit een hier verzonnen zin; de vaste variant van deze regel overtrad
+/// die eigen regel. Vandaag onschadelijk — er is alleen de nep-adapter — maar
+/// het gat zat in dezelfde wijziging als het identiteitsmodel dat het zichtbaar
+/// maakt.
+bool showsUnverifiedNameHint(MeetingIdentityKind? identity) =>
+    switch (identity) {
+      null ||
+      MeetingIdentityKind.anonymousDisplayName ||
+      MeetingIdentityKind.ephemeralGuest => true,
+      MeetingIdentityKind.serviceAppGuest ||
+      MeetingIdentityKind.hostSponsored ||
+      MeetingIdentityKind.account => false,
+    };
 
 /// De bekendmaking van §6.2 stap 4: wie krijgt contact, en wat ziet die.
 ///
