@@ -16,6 +16,19 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- De desktoproute voor OpenKAT-rapportages is nu een scenario-wizard. Na een
+  alleen-lezen controle van de gekozen map kiest de gebruiker één van vier
+  vragen: welke organisaties aandacht vragen, wat bij één organisatie
+  veranderde, wie door een CVE is geraakt, of de metingen compleet en actueel
+  zijn. De wizard toont alleen de invoer die voor die vraag nodig is en een
+  voorvertoning op basis van de werkelijk gevonden rapportages. Een bestaand
+  OpenKAT-rapport kan worden bijgewerkt of als nieuw rapport worden gemaakt;
+  bij bijwerken blijven handmatige dia's behouden. De route is niet aanwezig in
+  de webversie, omdat zij een lokale rapportagemap leest.
+- De CVE-vraag is fail-closed: zij blijft niet beschikbaar zonder door de bron
+  expliciet verklaarde betrouwbare CVE-verwijzingen. De huidige concrete
+  OpenKAT-adapters verklaren die betrouwbaarheid niet, dus ook rapportages met
+  velden die op CVE's lijken kunnen de kaart terecht onbeschikbaar maken.
 - Een headless, getypepte OpenKAT-rapportagemotor naast de bestaande
   importketen. Aanroepers kiezen expliciet scenario, scope, peildata, taal en
   weergavebeleid; de uitkomst bevat naast een gewoon OciDeck-deck ook het
