@@ -35,7 +35,6 @@ class _LocalRedirectClient implements HttpClient {
   dynamic noSuchMethod(Invocation i) => _real.noSuchMethod(i);
 }
 
-
 /// De SSRF-poort vóór de CVE-opzoeking. `network_sink_guard_test` bewijst dat
 /// dit bestand een netwerkuitgang *is* en dat de recepten erin staan; hier
 /// wordt bewezen dat de poort ook dichtgaat.
@@ -132,10 +131,10 @@ void main() {
     });
 
     Future<String> fetch(String uri) => HttpOverrides.runZoned(
-          () => transport.getBody(Uri.parse(uri)),
-          createHttpClient: (_) =>
-              _LocalRedirectClient(realClient, '127.0.0.1', server.port),
-        );
+      () => transport.getBody(Uri.parse(uri)),
+      createHttpClient: (_) =>
+          _LocalRedirectClient(realClient, '127.0.0.1', server.port),
+    );
 
     test('200 OK levert de body als tekst', () async {
       server.listen((req) {
@@ -157,11 +156,13 @@ void main() {
 
       await expectLater(
         fetch('http://8.8.8.8/missing'),
-        throwsA(isA<CveTransportException>().having(
-          (e) => e.reason,
-          'reason',
-          contains('404'),
-        )),
+        throwsA(
+          isA<CveTransportException>().having(
+            (e) => e.reason,
+            'reason',
+            contains('404'),
+          ),
+        ),
       );
     });
 
@@ -174,11 +175,13 @@ void main() {
 
       await expectLater(
         fetch('http://8.8.8.8/redirect'),
-        throwsA(isA<CveTransportException>().having(
-          (e) => e.reason,
-          'reason',
-          contains('302'),
-        )),
+        throwsA(
+          isA<CveTransportException>().having(
+            (e) => e.reason,
+            'reason',
+            contains('302'),
+          ),
+        ),
       );
     });
 
@@ -196,11 +199,13 @@ void main() {
 
       await expectLater(
         fetch('http://8.8.8.8/huge'),
-        throwsA(isA<CveTransportException>().having(
-          (e) => e.reason,
-          'reason',
-          'too large',
-        )),
+        throwsA(
+          isA<CveTransportException>().having(
+            (e) => e.reason,
+            'reason',
+            'too large',
+          ),
+        ),
       );
     });
   });

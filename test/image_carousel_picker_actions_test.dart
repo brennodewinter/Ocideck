@@ -35,7 +35,9 @@ void main() {
     if (!tempDir.existsSync()) return;
     try {
       tempDir.deleteSync(recursive: true);
-    } on FileSystemException {}
+    } on FileSystemException {
+      // Opruimen van een tijdelijke map is nooit een testoordeel waard.
+    }
   });
 
   void clearLayoutNoise(WidgetTester tester) {
@@ -75,8 +77,9 @@ void main() {
     clearLayoutNoise(tester);
   }
 
-  testWidgets('untagged-only filter toont alle afbeeldingen (niets getagd)',
-      (tester) async {
+  testWidgets('untagged-only filter toont alle afbeeldingen (niets getagd)', (
+    tester,
+  ) async {
     await pumpPicker(tester);
 
     // Er zijn geen beschrijvingen opgeslagen, dus alle drie zijn "untagged".
@@ -112,15 +115,18 @@ void main() {
     expect(find.byType(ErrorWidget), findsNothing);
   });
 
-  testWidgets('zoek met beschrijvingen dekt de description-relevance paden',
-      (tester) async {
+  testWidgets('zoek met beschrijvingen dekt de description-relevance paden', (
+    tester,
+  ) async {
     // Pre-populate descriptions: alpha has "klm vliegtuig", beta has "klm logo".
     final descFile = File('${tempDir.path}/.ocideck_descriptions.json');
-    descFile.writeAsStringSync(jsonEncode({
-      'alpha.png': 'klm vliegtuig',
-      'beta.png': 'klm logo',
-      'gamma.png': 'onverwante tekst',
-    }));
+    descFile.writeAsStringSync(
+      jsonEncode({
+        'alpha.png': 'klm vliegtuig',
+        'beta.png': 'klm logo',
+        'gamma.png': 'onverwante tekst',
+      }),
+    );
 
     await pumpPicker(tester);
 
@@ -134,11 +140,13 @@ void main() {
 
   testWidgets('zoek naar een woord-prefix in de beschrijving', (tester) async {
     final descFile = File('${tempDir.path}/.ocideck_descriptions.json');
-    descFile.writeAsStringSync(jsonEncode({
-      'alpha.png': 'vliegtuig foto',
-      'beta.png': 'onverwant',
-      'gamma.png': 'onverwant',
-    }));
+    descFile.writeAsStringSync(
+      jsonEncode({
+        'alpha.png': 'vliegtuig foto',
+        'beta.png': 'onverwant',
+        'gamma.png': 'onverwant',
+      }),
+    );
 
     await pumpPicker(tester);
 
@@ -152,11 +160,13 @@ void main() {
 
   testWidgets('zoek naar een substring in de beschrijving', (tester) async {
     final descFile = File('${tempDir.path}/.ocideck_descriptions.json');
-    descFile.writeAsStringSync(jsonEncode({
-      'alpha.png': 'luchtvaart',
-      'beta.png': 'onverwant',
-      'gamma.png': 'onverwant',
-    }));
+    descFile.writeAsStringSync(
+      jsonEncode({
+        'alpha.png': 'luchtvaart',
+        'beta.png': 'onverwant',
+        'gamma.png': 'onverwant',
+      }),
+    );
 
     await pumpPicker(tester);
 
@@ -168,8 +178,9 @@ void main() {
     expect(find.byType(ErrorWidget), findsNothing);
   });
 
-  testWidgets('beschrijving invoeren en selectie wijzigen persisteert',
-      (tester) async {
+  testWidgets('beschrijving invoeren en selectie wijzigen persisteert', (
+    tester,
+  ) async {
     await pumpPicker(tester);
 
     // Selecteer de eerste afbeelding en typ een beschrijving.
