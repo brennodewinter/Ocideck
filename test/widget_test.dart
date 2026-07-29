@@ -5,6 +5,7 @@ import 'package:ocideck/app.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:ocideck/widgets/panels/slide_list_panel.dart';
@@ -59,6 +60,24 @@ void main() {
       findsOneWidget,
     );
   });
+
+  testWidgets(
+    'het openscherm toont het versienummer, en een tik erop opent Over OciDeck',
+    (tester) async {
+      // Vóór deze tag stond het versienummer nergens op het openscherm — een
+      // melder moest drie klikken diep in Instellingen om op te zoeken welke
+      // versie SECURITY.md vraagt te vermelden.
+      await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+      await tester.pumpAndSettle();
+
+      expect(find.text('v$kOciDeckVersion'), findsOneWidget);
+
+      await tester.tap(find.text('v$kOciDeckVersion'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Over OciDeck'), findsOneWidget);
+    },
+  );
 
   testWidgets('recent list marks remote-fetched files with a cloud badge', (
     tester,
