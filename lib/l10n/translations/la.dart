@@ -1787,6 +1787,177 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Lata sed scientifica administratio perspicitur cum momentorum mensurarum deprauatione.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Ordines sine summa score et singulas mensuras absentis ostendit.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Comites, contributores, et mensuras momento ferri, severitatem ostendit.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Typi inventio ordinat cum affectata institutiones, systemata et observationes.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Monstrat criticam/altum numerum sine ullo excogitato pondere.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Numeratorem, denominatorem et solum certas percentages ostendit.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Commendationes litterariae sodalitates ab OpenKAT sine sua prioritate.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Distinguit nova, nova et non iam observata.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Sola observatione certa utitur primis temporibus.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Ordinum ratio cum severitate separata calculis.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Ostendit singula valores della sine score ponderati.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Numeratorem et denominatorem comparat cum comparabili coverage demonstrabili.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Inventaria systemata principia probata, hostnames et inscriptiones IP.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Tantum ostendit magnas mutationes explicite probatas.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Monstrat instituta et systemata circa unum certum vinculum CVE.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'ORDINIS CVEs cum expressa deduplicatione.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Distinguit nova, nova et non amplius observata CVEs.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Rationes praecipuarum temporum, fontium fasciculorum, adaptorum et fontium hashes.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Confer instituta et pervidere librarium puncta quae intersunt.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Videre praesentem statum vel demonstrabiles mutationes in una ordinatione.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Certos CVE nexus in mensuris electis investiga.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Recordatio quae mensurae et principium limat relationem actu utitur.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Quae est procuratio institutorum electorum?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Ubi plurimae et minimae inventiones observantur?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Quomodo portfolio auget tempus?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Quae problemata in plerisque consociationibus occurrunt?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Ubi gravissimae inventiones attenti?',
+  'Welke controls lopen achter?': 'Quae moderantur pigri?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Quod consilium OpenKAT plerumque commendare?',
+  'Hoe staat deze organisatie er nu voor?':
+      'Quid est status current huius organizationis?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Quid mutatum cum mensura priore?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Quae inventa sunt nova vel non observata?',
+  'Welke findings staan het langst open?':
+      'Quae inventa sunt apertissima longissima?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'In quibus systemata inventa maxime observantur?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Quod systems melius vel deterioratus?',
+  'Welke controls verbeterden of verslechterden?':
+      'Quae moderatur melius vel deterioratus?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Quae systemata in mensuris comprehenduntur?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Quae res demonstrabiles in magna?',
+  'Welke monitoringstatussen veranderden?': 'Quod status magna mutata?',
+  'Wie is geraakt door deze CVE?': 'Quis hoc CVE afficitur?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Quod maxime afficit CVEs organizations?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Quae CVEs nova aut non observata sunt?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Quae mensurae notitia desit vel evasissent?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Quae data est haec fama fundatur?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'Lata sed scientifica administratio perspicitur cum momentorum mensurarum deprauatione.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Ordines sine summa score et singulas mensuras absentis ostendit.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Comites, contributores, et mensuras momento ferri, severitatem ostendit.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Typi inventio ordinat cum affectata institutiones, systemata et observationes.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Monstrat criticam/altum numerum sine ullo excogitato pondere.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Numeratorem, denominatorem et solum certas percentages ostendit.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Commendationes litterariae sodalitates ab OpenKAT sine sua prioritate.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Imago currentis iaculis unius organizationis ac mensurae date.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Electa duo momenta mensurae intra unam ordinationem comparat.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Distinguit nova, nova et non iam observata.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Sola observatione certa utitur primis temporibus.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Ordinum ratio cum severitate separata calculis.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Ostendit singula valores della sine score ponderati.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Numeratorem et denominatorem comparat cum comparabili coverage demonstrabili.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Inventaria systemata principia probata, hostnames et inscriptiones IP.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'viverra disiungit, unmonitored et ignotus.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Tantum ostendit magnas mutationes explicite probatas.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Monstrat instituta et systemata circa unum certum vinculum CVE.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'ORDINIS CVEs cum expressa deduplicatione.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Distinguit nova, nova et non amplius observata CVEs.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Desunt, outdated et usi sunt mensuras ostendit.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Rationes praecipuarum temporum, fontium fasciculorum, adaptorum et fontium hashes.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Nondum in promptu est: fons status vigilantiae omnium bonorum non probat.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Nondum praesto est: non omnis inventio certam primam observationem habet.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Nondum in promptu est: fons identitatem stabilem omnibus inventis non probat.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Nondum praesto: comparabilis mensurae coverage non demonstrata est.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Not yet available: denominatores certa potestate carent.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Nondum in promptu est: res stabilis identitatis non demonstrata est.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'Haec relatio scopum normae electum non sustinet.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'Fons electus non satis certas notitias pro hac relatione continet.',
+  'Kerncijfers en gemeten bereik': 'Clavis figurarum et mensurarum positum',
+  'Organisaties vergelijken': 'Compare organizations',
+  'Concentratie van critical/high findings':
+      'Retrahitur critica / altum Inventiones',
+  'Portfolioverloop per meetmoment': 'Portfolio Overview per mensuram temporis',
+  'Meest voorkomende findingtypen': 'Typi frequentissimum inventum',
+  'Bron- en meetverantwoording': 'Fons et mensura accountability',
+  'Nieuwe en niet meer waargenomen findings':
+      'Nova et non observata Inventiones',
+  'Langst waargenomen findings': 'Observata longissima Inventiones',
+  'Systemen met de meeste findings': 'Systems cum maxime inventis',
+  'Veranderingen per systeem': 'Mutationes per systema',
+  'Blootstelling aan één CVE': 'Patefacio uni CVE',
+  'CVE’s over organisaties': 'CVEs de organizationibus',
+  'Nieuwe en niet meer waargenomen CVE’s': 'Nova et non amplius observata CVEs',
+  'Controldekking': 'Imperium coverage',
+  'Controlveranderingen': 'Imperium mutationes',
+  'Aanbevelingen uit OpenKAT': 'Suasiones ab OpenKAT',
+  'Assetinventaris': 'Asset inventory',
+  'Monitoringdekking': 'Cras coverage',
+  'Actueel organisatiebeeld': 'Current norma picturae',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Primum eligite locum, et deinde quaestionem, ut fama respondeat.',
+  'Onderwerp': 'Subiectum',
+  'Welk rapport beantwoordt uw vraag?': 'Quae fama respondet quaeris?',
+  'Meer rapportvragen': 'More fama quaestiones',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Quae systemata ad CVE vulnerabilia sunt?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

@@ -140,7 +140,8 @@ void main() {
       expect(
         result.plan!.blocks.map((block) => block.kind),
         containsAll([
-          OpenKatReportBlockKind.managementOverview,
+          OpenKatReportBlockKind.portfolioSummary,
+          OpenKatReportBlockKind.portfolioTrend,
           OpenKatReportBlockKind.measurementAvailability,
         ]),
       );
@@ -153,11 +154,13 @@ void main() {
             date: DateTime.utc(2026, 7, 5),
             source: 'alpha-previous.json',
             findings: [_finding(id: 'old')],
+            sourceFeatures: const {OpenKatSourceFeature.stableFindingIdentity},
           ),
           _snapshot(
             date: DateTime.utc(2026, 7, 15),
             source: 'alpha-current.json',
             findings: [_finding(id: 'new')],
+            sourceFeatures: const {OpenKatSourceFeature.stableFindingIdentity},
           ),
         ]),
       ], _weeklyRequest());
@@ -204,8 +207,10 @@ void main() {
         isTrue,
       );
       final trend = result.deck!.slides.singleWhere(
-        (slide) =>
-            slide.notes.contains('ocideck_openkat_view: portfolio.trend'),
+        (slide) => slide.notes.contains(
+          'ocideck_openkat_view: '
+          'report.management-overview.portfolio-trend.severity',
+        ),
       );
       final chartTitle = ChartSpec.parse(trend.customMarkdown).title;
       expect(
@@ -538,16 +543,25 @@ void main() {
                   _finding(id: 'history-a'),
                   _finding(id: 'history-b'),
                 ],
+                sourceFeatures: const {
+                  OpenKatSourceFeature.stableFindingIdentity,
+                },
               ),
               _snapshot(
                 date: DateTime.utc(2026, 7, 5),
                 source: 'alpha-previous.json',
                 findings: [_finding(id: 'previous')],
+                sourceFeatures: const {
+                  OpenKatSourceFeature.stableFindingIdentity,
+                },
               ),
               _snapshot(
                 date: DateTime.utc(2026, 7, 15),
                 source: 'alpha-current.json',
                 findings: [_finding(id: 'current')],
+                sourceFeatures: const {
+                  OpenKatSourceFeature.stableFindingIdentity,
+                },
               ),
             ]),
           ],

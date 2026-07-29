@@ -1775,6 +1775,179 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Széles, de tényszerű menedzsment áttekintés nyomon követhető mérési pillanatokkal.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Rangsorok összpontszám nélkül, és a hiányzó méréseket külön mutatják.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Megjeleníti a súlyossági értékeket, a közreműködőket és az átvitt méréseket pillanatok szerint.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Az érintett szervezetek, rendszerek és megfigyelések szerint rendszerezi a keresési típusokat.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Kritikus/magas számokat jelenít meg tervezett mérlegelés nélkül.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Mutatja a számlálót, a nevezőt és csak a megbízható százalékokat.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Az OpenKAT szó szerinti ajánlásait csoportosítja saját prioritás nélkül.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Megkülönbözteti az újat, az újat és a már nem megfigyelt.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Csak megbízható első megfigyelési dátumot használ.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'A rendszereket külön súlyossági számlálókkal rangsorolja.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Egyedi delta értékeket jelenít meg súlyozott pontszám nélkül.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Összehasonlítja a számlálót és a nevezőt kimutathatóan összehasonlítható lefedettséggel.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Leltár a forrás által bevált rendszereket, gazdagépneveket és IP-címeket.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Csak a kifejezetten bizonyított megfigyelési mutációkat mutatja.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Megmutatja a szervezeteket és a rendszereket egyetlen megbízható CVE-link körül.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'A CVE-ket explicit deduplikációval rangsorolja.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Megkülönbözteti az új, új és már nem megfigyelt CVE-ket.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Igazolja a kulcsdátumokat, a forrásfájlokat, az adaptereket és a forráskivonatokat.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Hasonlítsa össze a szervezeteket, és azonosítsa a portfólió érdekes pontjait.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Tekintse meg az aktuális állapotot vagy a kimutatható változásokat egy szervezetnél.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Vizsgálja meg a megbízható CVE kapcsolatokat a kiválasztott mérésekben.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Jegyezze fel, hogy a jelentés mely méréseket és forrásfájlokat használja ténylegesen.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Mi a menedzsment véleménye a kiválasztott szervezetekről?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Hol található a legtöbb és a legkevesebb lelet?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Hogyan alakul a portfólió az idő múlásával?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Milyen problémák merülnek fel a legtöbb szervezetben?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Hol koncentrálódnak a legsúlyosabb leletek?',
+  'Welke controls lopen achter?': 'Mely vezérlések vannak lemaradva?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Milyen intézkedéseket javasol az OpenKAT leggyakrabban?',
+  'Hoe staat deze organisatie er nu voor?':
+      'Mi a jelenlegi állapota ennek a szervezetnek?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Mi változott az előző mérés óta?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Mely megállapítások újak vagy már nem figyelhetők meg?',
+  'Welke findings staan het langst open?':
+      'Mely leletek voltak nyitva a leghosszabb ideig?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'Mely rendszereken figyelhető meg a legtöbb megállapítás?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Mely rendszerek javultak vagy romlottak?',
+  'Welke controls verbeterden of verslechterden?':
+      'Mely ellenőrzések javultak vagy romlottak?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Mely rendszerek szerepelnek a mérésekben?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Mely eszközök kimutathatók a monitoring során?',
+  'Welke monitoringstatussen veranderden?':
+      'Mely megfigyelési állapotok változtak?',
+  'Wie is geraakt door deze CVE?': 'Kit érint ez a CVE?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Mely CVE-k érintik a legtöbb szervezetet?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Mely CVE-k újak vagy már nem figyeltek meg?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Melyik mérési adat hiányzik vagy elavult?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Milyen adatokon alapul ez a jelentés?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'Széles, de tényszerű menedzsment áttekintés nyomon követhető mérési pillanatokkal.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Rangsorok összpontszám nélkül, és a hiányzó méréseket külön mutatják.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Megjeleníti a súlyossági értékeket, a közreműködőket és az átvitt méréseket pillanatok szerint.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Az érintett szervezetek, rendszerek és megfigyelések szerint rendszerezi a keresési típusokat.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Kritikus/magas számokat jelenít meg tervezett mérlegelés nélkül.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Mutatja a számlálót, a nevezőt és csak a megbízható százalékokat.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Az OpenKAT szó szerinti ajánlásait csoportosítja saját prioritás nélkül.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Egy szervezet célzott aktuális képe és mérési dátuma.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Összehasonlít két kiválasztott mérési pillanatot egy szervezeten belül.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Megkülönbözteti az újat, az újat és a már nem megfigyelt.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Csak megbízható első megfigyelési dátumot használ.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'A rendszereket külön súlyossági számlálókkal rangsorolja.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Egyedi delta értékeket jelenít meg súlyozott pontszám nélkül.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Összehasonlítja a számlálót és a nevezőt kimutathatóan összehasonlítható lefedettséggel.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Leltár a forrás által bevált rendszereket, gazdagépneveket és IP-címeket.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Elválasztja a megfigyelt, nem felügyelt és ismeretlen.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Csak a kifejezetten bizonyított megfigyelési mutációkat mutatja.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Megmutatja a szervezeteket és a rendszereket egyetlen megbízható CVE-link körül.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'A CVE-ket explicit deduplikációval rangsorolja.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Megkülönbözteti az új, új és már nem megfigyelt CVE-ket.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Hiányzó, elavult és ténylegesen használt méréseket mutat.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Igazolja a kulcsdátumokat, a forrásfájlokat, az adaptereket és a forráskivonatokat.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Még nem érhető el: a forrás nem igazolja az összes eszköz megfigyelési állapotát.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Még nem elérhető: nem minden leletnek van megbízható első megfigyelési dátuma.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Még nem elérhető: a forrás nem igazolja az összes lelet stabil azonosságát.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Még nem elérhető: összehasonlítható mérési lefedettséget nem mutattak ki.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Még nem elérhető: hiányoznak a megbízható vezérlő nevezők.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Még nem elérhető: a stabil eszközazonosság nem bizonyított.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'Ez a jelentés nem támogatja a választott szervezeti hatókört.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'A kiválasztott forrás nem tartalmaz elegendő megbízható adatot ehhez a jelentéshez.',
+  'Kerncijfers en gemeten bereik': 'Kulcsadatok és mért hatótáv',
+  'Organisaties vergelijken': 'Hasonlítsa össze a szervezeteket',
+  'Concentratie van critical/high findings':
+      'A kritikus/magas leletek koncentrációja',
+  'Portfolioverloop per meetmoment':
+      'Portfólió áttekintés mérési pillanatonként',
+  'Meest voorkomende findingtypen': 'A leggyakoribb lelettípusok',
+  'Bron- en meetverantwoording': 'Forrás és mérés elszámoltathatóság',
+  'Nieuwe en niet meer waargenomen findings':
+      'Új és már nem megfigyelt leletek',
+  'Langst waargenomen findings': 'Leghosszabb ideig megfigyelt leletek',
+  'Systemen met de meeste findings': 'A legtöbb leletet tartalmazó rendszerek',
+  'Veranderingen per systeem': 'Változások rendszerenként',
+  'Blootstelling aan één CVE': 'Egy CVE-nek való kitettség',
+  'CVE’s over organisaties': 'CVE-k a szervezetekről',
+  'Nieuwe en niet meer waargenomen CVE’s': 'Új és már nem megfigyelt CVE-k',
+  'Controldekking': 'Lefedettség ellenőrzése',
+  'Controlveranderingen': 'Vezérlési változások',
+  'Aanbevelingen uit OpenKAT': 'Az OpenKAT ajánlásai',
+  'Assetinventaris': 'Eszközleltár',
+  'Monitoringdekking': 'Lefedettség figyelése',
+  'Actueel organisatiebeeld': 'Jelenlegi szervezeti kép',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Először válassza ki a témát, majd azt a kérdést, amelyre a jelentésnek meg kell válaszolnia.',
+  'Onderwerp': 'Téma',
+  'Welk rapport beantwoordt uw vraag?': 'Melyik jelentés válaszol a kérdésére?',
+  'Meer rapportvragen': 'További jelentési kérdések',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Mely rendszerek sebezhetők egy CVE által?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

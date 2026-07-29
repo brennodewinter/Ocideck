@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/openkat/openkat_reporting_models.dart';
 import 'package:ocideck/models/openkat/openkat_wizard_models.dart';
@@ -26,6 +27,7 @@ void main() {
   late OpenKatWizardController controller;
 
   setUp(() {
+    AppLocalizations.setActiveLanguageCode('nl');
     gateway = FakeOpenKatWizardGateway();
     controller = OpenKatWizardController(gateway: gateway);
     addTearDown(() => controller.dispose());
@@ -39,10 +41,24 @@ void main() {
     expect(controller.selectedOrganizationCode, 'org-a');
     expect(controller.selectedOrganizationCodes, {'org-a', 'org-b'});
     expect(controller.currentAsOf, DateTime.utc(2026, 7, 1));
-    expect(controller.previousAsOf, DateTime.utc(2026, 6, 1));
+    expect(
+      controller.previousAsOf,
+      isNull,
+      reason: 'het managementrecept vraagt geen eerdere peildatum',
+    );
     expect(controller.cveId, 'CVE-2026-12345');
     expect(controller.language, OpenKatReportLanguage.dutch);
     expect(controller.canContinue, isTrue);
+  });
+
+  test('rapporttaal volgt de actieve app-taal met Engels als uitweg', () async {
+    AppLocalizations.setActiveLanguageCode('de');
+    controller.dispose();
+    controller = OpenKatWizardController(gateway: gateway);
+
+    await controller.prepare('/reports');
+
+    expect(controller.language, OpenKatReportLanguage.english);
   });
 
   test(
@@ -200,6 +216,32 @@ void main() {
     expect(controller.updateConfirmationVisible, isTrue);
   });
 
+  test(
+    'legacy portfolio zonder opgeslagen scope slaat snelle update over',
+    () async {
+      controller.dispose();
+      controller = OpenKatWizardController(
+        gateway: gateway,
+        existingDeck: const Deck(
+          title: 'Legacy portfolio',
+          slides: [
+            Slide(
+              id: 'generated',
+              type: SlideType.title,
+              notes:
+                  '<!-- ocideck_openkat_view: report.management-overview.title -->',
+            ),
+          ],
+        ),
+      );
+
+      await controller.prepare('/reports');
+
+      expect(controller.selectedScenarioId, OpenKatWizardScenarioId.portfolio);
+      expect(controller.updateConfirmationVisible, isFalse);
+    },
+  );
+
   test('scan- en bouwfouten laten keuzes staan voor herstel', () async {
     gateway.prepareError = StateError('kapotte map');
     await controller.prepare('/reports');
@@ -266,10 +308,7 @@ void main() {
 
       final request = controller.recipe!.toRequest();
       expect(request.currentAsOf, now);
-      expect(
-        request.policy.maximumSnapshotAge,
-        OpenKatWizardController.dataQualityMaximumSnapshotAge,
-      );
+      expect(request.policy.maximumSnapshotAge, const Duration(days: 30));
     },
   );
 

@@ -1,14 +1,19 @@
+import 'dart:convert';
+import 'dart:math';
+
+import 'package:crypto/crypto.dart';
+
 import '../../models/deck.dart';
 import '../../models/slide.dart';
-import '../../utils/content_hash.dart';
 import '../markdown_service.dart';
 
-/// Bewijst of een OpenKAT-dia nog bytegelijk is aan het gegenereerde origineel.
+/// Authenticeert een OpenKAT-dia als ongewijzigd origineel uit deze appsessie.
 ///
-/// De fingerprint is SHA-512 over de canonieke Markdown van de dia zonder de
-/// provenancecomment. Daardoor blijft een ongewijzigd origineel herkenbaar na
-/// opslaan en heropenen, maar stopt een extern gekopieerde en bewerkte dia
-/// fail-closed in plaats van gebruikerswerk te vervangen.
+/// De marker is een HMAC-SHA-512 over de canonieke Markdown van de dia zonder
+/// provenancecomment. De willekeurige sleutel verlaat het proces niet. Daardoor
+/// kan tekst uit een deck nooit zelf vervangingsrecht fabriceren. Na een
+/// appherstart is die sleutel bewust weg en stopt bijwerken fail-closed; een
+/// ongekeyde legacyhash is alleen tekst en wordt nooit als autorisatie gezien.
 class OpenKatSlideProvenance {
   OpenKatSlideProvenance._();
 
@@ -17,10 +22,15 @@ class OpenKatSlideProvenance {
   );
 
   static final MarkdownService _markdown = MarkdownService();
+  static final Random _random = Random.secure();
+  static final Hmac _authenticator = Hmac(
+    sha512,
+    List<int>.generate(64, (_) => _random.nextInt(256)),
+  );
 
   static Slide markGeneratedOrigin(Slide slide) {
     final clean = slide.copyWith(notes: _withoutOriginMarker(slide.notes));
-    final fingerprint = _fingerprint(clean);
+    final fingerprint = _authenticationCode(clean);
     final notes = clean.notes.isEmpty
         ? '<!-- $openKatGeneratedOriginMarker: $fingerprint -->'
         : '${clean.notes}\n'
@@ -32,15 +42,22 @@ class OpenKatSlideProvenance {
     final match = _marker.firstMatch(slide.notes);
     if (match == null) return false;
     final clean = slide.copyWith(notes: _withoutOriginMarker(slide.notes));
-    return match.group(1) == _fingerprint(clean);
+    return match.group(1) == _authenticationCode(clean);
   }
 
-  static String _fingerprint(Slide slide) => sha512HexOfText(
-    _markdown.generateSlide(
-      slide.copyWith(clearPrivacy: true),
-      themeProfile: null,
-    ),
-  );
+  static bool hasGeneratedOriginMarker(Slide slide) =>
+      _marker.hasMatch(slide.notes);
+
+  static String _authenticationCode(Slide slide) => _authenticator
+      .convert(
+        utf8.encode(
+          _markdown.generateSlide(
+            slide.copyWith(clearPrivacy: true),
+            themeProfile: null,
+          ),
+        ),
+      )
+      .toString();
 
   static String _withoutOriginMarker(String notes) => notes
       .split('\n')

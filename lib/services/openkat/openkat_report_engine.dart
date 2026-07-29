@@ -1,8 +1,10 @@
 import '../../models/openkat/openkat_models.dart';
 import '../../models/openkat/openkat_reporting_models.dart';
+import 'openkat_aggregator.dart';
 import 'openkat_report_capabilities.dart';
 import 'openkat_report_composer.dart';
 import 'openkat_report_facts.dart';
+import 'openkat_report_rankings.dart';
 import 'openkat_report_scenarios.dart';
 
 typedef OpenKatScenarioCapabilityAssessment = ({
@@ -15,10 +17,12 @@ typedef OpenKatScenarioCapabilityAssessment = ({
 class OpenKatReportEngine {
   final OpenKatReportScenarioRegistry registry;
   final OpenKatReportCapabilityService capabilityService;
+  final OpenKatAggregator aggregator;
 
   OpenKatReportEngine({
     OpenKatReportScenarioRegistry? registry,
     this.capabilityService = const OpenKatReportCapabilityService(),
+    this.aggregator = const OpenKatAggregator(),
   }) : registry = registry ?? OpenKatReportScenarioRegistry();
 
   /// Beoordeelt de capabilitypoorten van een scenario zonder een deck te
@@ -27,16 +31,19 @@ class OpenKatReportEngine {
   OpenKatScenarioCapabilityAssessment assessScenarioCapabilities(
     List<OpenKatOrganization> organizations,
     OpenKatReportRequest request,
-  ) => _assessScenarioCapabilities(OpenKatReportFacts(organizations), request);
+  ) => _assessScenarioCapabilities(
+    OpenKatReportFacts(organizations, aggregator: aggregator),
+    request,
+  );
 
   OpenKatReportResult generate(
     List<OpenKatOrganization> organizations,
     OpenKatReportRequest request, {
     String? outputPath,
   }) {
-    final facts = OpenKatReportFacts(organizations);
+    final facts = OpenKatReportFacts(organizations, aggregator: aggregator);
     final measurements = facts.measurementUsages(request);
-    final traces = facts.sourceTraces(request);
+    final initialTraces = facts.sourceTraces(request);
     final diagnostics = <OpenKatReportDiagnostic>[];
     final missing = <OpenKatReportCapability>{};
     final scenario = registry.find(request.scenarioId);
@@ -49,7 +56,13 @@ class OpenKatReportEngine {
           arguments: {'scenarioId': request.scenarioId},
         ),
       );
-      return _failure(request, measurements, diagnostics, missing, traces);
+      return _failure(
+        request,
+        measurements,
+        diagnostics,
+        missing,
+        initialTraces,
+      );
     }
 
     final descriptor = scenario.descriptor;
@@ -91,7 +104,13 @@ class OpenKatReportEngine {
       (diagnostic) =>
           diagnostic.severity == OpenKatReportDiagnosticSeverity.error,
     )) {
-      return _failure(request, measurements, diagnostics, missing, traces);
+      return _failure(
+        request,
+        measurements,
+        diagnostics,
+        missing,
+        initialTraces,
+      );
     }
 
     final composedPlan = scenario.compose(facts, request);
@@ -105,7 +124,13 @@ class OpenKatReportEngine {
       missing,
     );
     if (plan == null) {
-      return _failure(request, measurements, diagnostics, missing, traces);
+      return _failure(
+        request,
+        measurements,
+        diagnostics,
+        missing,
+        initialTraces,
+      );
     }
     final deck = OpenKatReportComposer(
       facts,
@@ -119,7 +144,7 @@ class OpenKatReportEngine {
       measurements: measurements,
       diagnostics: List.unmodifiable(diagnostics),
       missingCapabilities: Set.unmodifiable(missing),
-      sourceTraces: traces,
+      sourceTraces: facts.sourceTraces(request),
     );
   }
 
@@ -136,10 +161,23 @@ class OpenKatReportEngine {
       );
     }
     final assessments = capabilityService.assess(facts, request);
-    final missing = {
+    final missing = <OpenKatReportCapability>{
       for (final capability in scenario.descriptor.requiredCapabilities)
         if (!(assessments[capability]?.isAvailable ?? false)) capability,
     };
+    final plan = scenario.compose(facts, request);
+    for (final block in plan.blocks) {
+      final preconditions = block.preconditions;
+      final unavailable = preconditions.capabilities
+          .where(
+            (capability) => !(assessments[capability]?.isAvailable ?? false),
+          )
+          .toSet();
+      final mayOmit =
+          preconditions.omitWhenUnavailable &&
+          unavailable.every(scenario.descriptor.optionalCapabilities.contains);
+      if (!mayOmit) missing.addAll(unavailable);
+    }
     return (
       registered: true,
       assessments: Map.unmodifiable(assessments),
@@ -298,6 +336,15 @@ class OpenKatReportEngine {
       }
 
       final preconditions = block.preconditions;
+      if (!preconditions.scopes.contains(request.scope.kind)) {
+        diagnostics.add(
+          OpenKatReportDiagnostic(
+            code: OpenKatReportDiagnosticCode.unsupportedScope,
+            severity: OpenKatReportDiagnosticSeverity.error,
+            arguments: {'scope': request.scope.kind.name, 'blockId': block.id},
+          ),
+        );
+      }
       if (preconditions.requiresPreviousAsOf && request.previousAsOf == null) {
         diagnostics.add(
           OpenKatReportDiagnostic(
@@ -348,7 +395,26 @@ class OpenKatReportEngine {
     if (applicableBlocks.isEmpty && plan.blocks.isNotEmpty) {
       _invalidPlan(diagnostics, reason: 'noApplicableBlocks');
     }
-    if (applicableBlocks.any(
+    _addResourceLimitDiagnostics(facts, applicableBlocks, request, diagnostics);
+    if (diagnostics.any(
+      (diagnostic) =>
+          diagnostic.severity == OpenKatReportDiagnosticSeverity.error,
+    )) {
+      return null;
+    }
+    return OpenKatReportPlan(
+      scenarioId: plan.scenarioId,
+      blocks: List.unmodifiable(applicableBlocks),
+    );
+  }
+
+  void _addResourceLimitDiagnostics(
+    OpenKatReportFacts facts,
+    List<OpenKatReportBlock> blocks,
+    OpenKatReportRequest request,
+    List<OpenKatReportDiagnostic> diagnostics,
+  ) {
+    if (blocks.any(
           (block) => block.kind == OpenKatReportBlockKind.findingLifecycle,
         ) &&
         facts.exceedsHistoricalFindingWorkLimit(
@@ -366,15 +432,18 @@ class OpenKatReportEngine {
         ),
       );
     }
-    if (diagnostics.any(
-      (diagnostic) =>
-          diagnostic.severity == OpenKatReportDiagnosticSeverity.error,
-    )) {
-      return null;
-    }
-    return OpenKatReportPlan(
-      scenarioId: plan.scenarioId,
-      blocks: List.unmodifiable(applicableBlocks),
+    final recommendationBlock = blocks
+        .where((block) => block.kind == OpenKatReportBlockKind.recommendations)
+        .firstOrNull;
+    if (recommendationBlock == null) return;
+    final limit = recommendationBlock.preconditions.constructionBudget;
+    if (!facts.exceedsRecommendationGroupLimit(request, limit)) return;
+    diagnostics.add(
+      OpenKatReportDiagnostic(
+        code: OpenKatReportDiagnosticCode.resourceLimitExceeded,
+        severity: OpenKatReportDiagnosticSeverity.error,
+        arguments: {'resource': 'recommendationGroups', 'maximum': '$limit'},
+      ),
     );
   }
 

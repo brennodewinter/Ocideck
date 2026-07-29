@@ -726,6 +726,182 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Una panoramica gestionale ampia ma fattuale con momenti di misurazione tracciabili.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Classifica senza punteggio totale e mostra separatamente le misurazioni mancanti.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Mostra i conteggi della gravità, i contributori e le misurazioni riportate per momento.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Organizza i tipi di ricerca in base alle organizzazioni, ai sistemi e alle osservazioni interessati.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Mostra numeri critici/alti senza alcuna pesatura ideata.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Mostra numeratore, denominatore e solo percentuali affidabili.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Raggruppa i consigli letterali di OpenKAT senza la propria priorità.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Distingue nuovo, nuovo e non più osservato.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Utilizza solo date affidabili della prima osservazione.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Classifica i sistemi con contatori di gravità separati.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Mostra i valori delta individuali senza punteggio ponderato.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Confronta numeratore e denominatore con una copertura dimostrabilmente comparabile.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Inventaria sistemi, nomi host e indirizzi IP comprovati.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Mostra solo le mutazioni di monitoraggio esplicitamente provate.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Mostra organizzazioni e sistemi attorno a un collegamento CVE affidabile.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Classifica i CVE con deduplicazione esplicita.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Distingue CVE nuovi, nuovi e non più osservati.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Tiene conto delle date chiave, dei file di origine, degli adattatori e degli hash di origine.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Confronta le organizzazioni e identifica i punti di interesse del portfolio.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Visualizza lo stato attuale o le modifiche dimostrabili in un\'organizzazione.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Esaminare collegamenti CVE affidabili nelle misurazioni scelte.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Registrare quali misurazioni e file di origine vengono effettivamente utilizzati dal rapporto.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Qual è la visione gestionale delle organizzazioni scelte?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Dove sono i risultati più e meno osservati?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Come si sviluppa il portafoglio nel tempo?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Quali problemi si verificano nella maggior parte delle organizzazioni?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Dove si concentrano i risultati più gravi?',
+  'Welke controls lopen achter?': 'Quali controlli sono in ritardo?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Quali misure consiglia OpenKAT più spesso?',
+  'Hoe staat deze organisatie er nu voor?':
+      'Qual è lo stato attuale di questa organizzazione?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Cosa è cambiato rispetto alla misurazione precedente?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Quali risultati sono nuovi o non più osservati?',
+  'Welke findings staan het langst open?':
+      'Quali reperti sono rimasti aperti più a lungo?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'Su quali sistemi si osserva il maggior numero di risultati?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Quali sistemi sono migliorati o peggiorati?',
+  'Welke controls verbeterden of verslechterden?':
+      'Quali controlli sono migliorati o peggiorati?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Quali sistemi sono inclusi nelle misurazioni?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Quali asset sono dimostrabili nel monitoraggio?',
+  'Welke monitoringstatussen veranderden?':
+      'Quali stati di monitoraggio sono cambiati?',
+  'Wie is geraakt door deze CVE?': 'Chi è interessato da questo CVE?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Quali CVE interessano la maggior parte delle organizzazioni?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Quali CVE sono nuovi o non più osservati?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Quali dati di misurazione mancano o sono obsoleti?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Su quali dati si basa questo rapporto?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'Una panoramica gestionale ampia ma fattuale con momenti di misurazione tracciabili.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Classifica senza punteggio totale e mostra separatamente le misurazioni mancanti.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Mostra i conteggi della gravità, i contributori e le misurazioni riportate per momento.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Organizza i tipi di ricerca in base alle organizzazioni, ai sistemi e alle osservazioni interessati.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Mostra numeri critici/alti senza alcuna pesatura ideata.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Mostra numeratore, denominatore e solo percentuali affidabili.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Raggruppa i consigli letterali di OpenKAT senza la propria priorità.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Un\'immagine attuale mirata di un\'organizzazione e la relativa data di misurazione.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Confronta due momenti di misurazione scelti all\'interno di un\'organizzazione.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Distingue nuovo, nuovo e non più osservato.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Utilizza solo date affidabili della prima osservazione.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Classifica i sistemi con contatori di gravità separati.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Mostra i valori delta individuali senza punteggio ponderato.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Confronta numeratore e denominatore con una copertura dimostrabilmente comparabile.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Inventaria sistemi, nomi host e indirizzi IP comprovati.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Separa monitorato, non monitorato e sconosciuto.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Mostra solo le mutazioni di monitoraggio esplicitamente provate.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Mostra organizzazioni e sistemi attorno a un collegamento CVE affidabile.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Classifica i CVE con deduplicazione esplicita.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Distingue CVE nuovi, nuovi e non più osservati.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Mostra le misurazioni mancanti, obsolete e effettivamente utilizzate.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Tiene conto delle date chiave, dei file di origine, degli adattatori e degli hash di origine.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Non ancora disponibile: la fonte non dimostra lo stato di monitoraggio per tutte le risorse.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Non ancora disponibile: non tutti i reperti hanno una data affidabile della prima osservazione.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Non ancora disponibile: la fonte non dimostra un\'identità stabile per tutti i ritrovamenti.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Non ancora disponibile: non è stata dimostrata una copertura di misurazione comparabile.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Non ancora disponibile: mancano denominatori di controllo affidabili.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Non ancora disponibile: l\'identità stabile della risorsa non è stata dimostrata.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'Questo report non supporta l\'ambito organizzativo scelto.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'La fonte selezionata non contiene dati affidabili sufficienti per questo rapporto.',
+  'Kerncijfers en gemeten bereik': 'Cifre chiave e portata misurata',
+  'Organisaties vergelijken': 'Confronta le organizzazioni',
+  'Concentratie van critical/high findings':
+      'Concentrazione di risultati critici/alti',
+  'Portfolioverloop per meetmoment':
+      'Panoramica del portafoglio per momento di misurazione',
+  'Meest voorkomende findingtypen': 'Tipi di risultati più comuni',
+  'Bron- en meetverantwoording':
+      'Responsabilità della fonte e della misurazione',
+  'Nieuwe en niet meer waargenomen findings':
+      'Ritrovamenti nuovi e non più osservati',
+  'Langst waargenomen findings': 'Risultati osservati più a lungo',
+  'Systemen met de meeste findings':
+      'Sistemi con il maggior numero di risultati',
+  'Veranderingen per systeem': 'Modifiche per sistema',
+  'Blootstelling aan één CVE': 'Esposizione a un CVE',
+  'CVE’s over organisaties': 'CVE sulle organizzazioni',
+  'Nieuwe en niet meer waargenomen CVE’s': 'CVE nuovi e non più osservati',
+  'Controldekking': 'Controllare la copertura',
+  'Controlveranderingen': 'Controllare i cambiamenti',
+  'Aanbevelingen uit OpenKAT': 'Raccomandazioni da OpenKAT',
+  'Assetinventaris': 'Inventario delle risorse',
+  'Monitoringdekking': 'Copertura del monitoraggio',
+  'Actueel organisatiebeeld': 'Quadro organizzativo attuale',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Scegli prima l’argomento e poi la domanda a cui il report dovrà rispondere.',
+  'Onderwerp': 'Soggetto',
+  'Welk rapport beantwoordt uw vraag?':
+      'Quale rapporto risponde alla tua domanda?',
+  'Meer rapportvragen': 'Altre domande sul rapporto',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Quali sistemi sono vulnerabili a una CVE?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

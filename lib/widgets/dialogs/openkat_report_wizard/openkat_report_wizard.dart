@@ -198,10 +198,11 @@ class _Header extends StatelessWidget {
     final colors = theme.colorScheme;
     final palette = AppPalette.of(theme);
     final ready = controller.scanStatus == OpenKatWizardScanStatus.ready;
+    final total = controller.hasPrimaryInputs ? 3 : 2;
     final number = switch (controller.step) {
       OpenKatWizardStep.scenario => 1,
       OpenKatWizardStep.inputs => 2,
-      OpenKatWizardStep.review => 3,
+      OpenKatWizardStep.review => total,
     };
     final title = Row(
       children: [
@@ -229,7 +230,7 @@ class _Header extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 ready
-                    ? '${l10n.d('Stap')} $number ${l10n.d('van')} 3'
+                    ? '${l10n.d('Stap')} $number ${l10n.d('van')} $total'
                     : l10n.d('Rapportages voorbereiden'),
                 style: TextStyle(
                   color: palette.accentInk,

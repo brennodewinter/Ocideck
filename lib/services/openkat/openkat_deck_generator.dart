@@ -4,8 +4,7 @@ import '../../models/openkat/openkat_reporting_models.dart';
 import '../../models/slide.dart';
 import 'openkat_aggregator.dart';
 import 'openkat_report_composer.dart';
-import 'openkat_report_facts.dart';
-import 'openkat_report_scenarios.dart';
+import 'openkat_report_engine.dart';
 import 'openkat_slide_provenance.dart';
 
 export 'openkat_report_engine.dart';
@@ -24,17 +23,17 @@ class OpenKatDeckGenerator {
     String title = 'OpenKAT managementoverzicht',
     String? outputPath,
   }) {
-    final facts = OpenKatReportFacts(organizations, aggregator: aggregator);
     final request = OpenKatReportRequest(
       scenarioId: 'management-overview',
       scope: const OpenKatReportScope.portfolio(),
       currentAsOf: _latestReportDate(organizations),
       title: title,
     );
-    final plan = const OpenKatManagementScenario().compose(facts, request);
-    return OpenKatReportComposer(
-      facts,
-    ).compose(request, plan, outputPath: outputPath);
+    final result = OpenKatReportEngine(
+      aggregator: aggregator,
+    ).generate(organizations, request, outputPath: outputPath);
+    return result.deck ??
+        (throw StateError('management report generation failed'));
   }
 
   Deck update(Deck existing, List<OpenKatOrganization> organizations) {
@@ -45,14 +44,19 @@ class OpenKatDeckGenerator {
   /// Vervangt alleen gegenereerde OpenKAT-views door een vers scenariodeck.
   ///
   /// De motor maakt bewust een nieuw deck. Deze façade bewaart bij bijwerken
-  /// handmatige dia's en kopieën van het geopende deck. Een gegenereerde dia
-  /// heeft een deterministische id; een handmatige kopie krijgt juist een
-  /// nieuwe. Daardoor blijft het oorspronkelijke blok herkenbaar als een kopie
-  /// met dezelfde view-marker ervoor is gezet of elders heen is verplaatst.
+  /// handmatige dia's en kopieën van het geopende deck. Alleen een ongewijzigde
+  /// dia met een in deze appsessie geauthenticeerde origin-marker geldt als
+  /// vervangbaar origineel. Een handmatige kopie verliest die marker.
   Deck updateGenerated(Deck existing, Deck fresh) {
-    final freshByView = <String, Slide>{
-      for (final slide in fresh.slides) ?_viewIdOf(slide): slide,
-    };
+    final freshByView = <String, Slide>{};
+    for (final slide in fresh.slides) {
+      final view = _viewIdOf(slide);
+      if (view == null) continue;
+      if (freshByView.containsKey(view)) {
+        throw OpenKatUnsafeUpdateException(view);
+      }
+      freshByView[view] = slide;
+    }
     final originalByView = <String, Slide>{};
     final existingByView = <String, List<Slide>>{};
     for (final slide in existing.slides) {
@@ -64,7 +68,6 @@ class OpenKatDeckGenerator {
     for (final entry in existingByView.entries) {
       final view = entry.key;
       final candidates = entry.value;
-      final freshSlide = freshByView[view];
       final markedOrigins = candidates.where(_isGeneratedOrigin).toList();
       if (markedOrigins.length == 1) {
         originalByView[view] = markedOrigins.single;
@@ -72,18 +75,6 @@ class OpenKatDeckGenerator {
       }
       if (markedOrigins.length > 1) {
         throw OpenKatUnsafeUpdateException(view);
-      }
-      if (freshSlide != null) {
-        final exact = candidates
-            .where((slide) => slide.id == freshSlide.id)
-            .toList();
-        if (exact.length == 1) {
-          // Een nog geopende legacygeneratie heeft dezelfde deterministische
-          // id als haar verse tegenhanger. De vervanging krijgt de duurzame
-          // origin-marker en is vanaf dan ook na heropenen herkenbaar.
-          originalByView[view] = exact.single;
-          continue;
-        }
       }
       throw OpenKatUnsafeUpdateException(view);
     }
@@ -118,8 +109,12 @@ class OpenKatDeckGenerator {
     r'<!--\s*ocideck_openkat_view:\s*([^\s>]+)\s*-->',
   );
 
-  String? _viewIdOf(Slide slide) =>
-      _viewMarker.firstMatch(slide.notes)?.group(1);
+  String? _viewIdOf(Slide slide) {
+    final raw = _viewMarker.firstMatch(slide.notes)?.group(1);
+    return raw == null
+        ? null
+        : OpenKatReportComposer.canonicalManagementViewId(raw);
+  }
 
   bool _isGeneratedOrigin(Slide slide) =>
       OpenKatSlideProvenance.isUnchangedGeneratedOrigin(slide);

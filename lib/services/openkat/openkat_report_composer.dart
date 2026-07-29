@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math' as math;
 
 import 'package:crypto/crypto.dart';
 
@@ -7,14 +8,111 @@ import '../../models/deck.dart';
 import '../../models/display_window_spec.dart';
 import '../../models/openkat/openkat_models.dart';
 import '../../models/openkat/openkat_reporting_models.dart';
+import '../../models/privacy_disposition.dart';
 import '../../models/scorecard_spec.dart';
 import '../../models/slide.dart';
 import '../import/utils/import_text_sanitizer.dart';
 import 'openkat_aggregator.dart';
 import 'openkat_report_facts.dart';
+import 'openkat_report_rankings.dart';
 import 'openkat_slide_provenance.dart';
 
 part 'openkat_report_composer_helpers.dart';
+part 'openkat_report_composer_context.dart';
+part 'openkat_report_composer_blocks.dart';
+part 'openkat_report_composer_assets.dart';
+part 'openkat_report_composer_security.dart';
+
+const _openKatReportTitles = <String, ({String dutch, String english})>{
+  'management-overview': (
+    dutch: 'OpenKAT managementoverzicht',
+    english: 'OpenKAT management overview',
+  ),
+  'weekly-comparison': (
+    dutch: 'OpenKAT-weekvergelijking',
+    english: 'OpenKAT weekly comparison',
+  ),
+  'organization-overview': (
+    dutch: 'OpenKAT-organisatieoverzicht',
+    english: 'OpenKAT organization overview',
+  ),
+  'cve-exposure': (
+    dutch: 'OpenKAT CVE-blootstelling',
+    english: 'OpenKAT CVE exposure',
+  ),
+  'monitoring-changes': (
+    dutch: 'OpenKAT-monitoringmutaties',
+    english: 'OpenKAT monitoring changes',
+  ),
+  'data-quality': (
+    dutch: 'OpenKAT-datakwaliteit',
+    english: 'OpenKAT data quality',
+  ),
+  'organization-comparison': (
+    dutch: 'OpenKAT-organisatievergelijking',
+    english: 'OpenKAT organization comparison',
+  ),
+  'portfolio-trend': (
+    dutch: 'OpenKAT-portfolioverloop',
+    english: 'OpenKAT portfolio trend',
+  ),
+  'finding-type-prevalence': (
+    dutch: 'OpenKAT-veelvoorkomende findingtypen',
+    english: 'OpenKAT common finding types',
+  ),
+  'critical-high-concentration': (
+    dutch: 'OpenKAT-concentratie critical/high',
+    english: 'OpenKAT critical/high concentration',
+  ),
+  'cve-landscape': (
+    dutch: 'OpenKAT-CVE-landschap',
+    english: 'OpenKAT CVE landscape',
+  ),
+  'cve-changes': (
+    dutch: 'OpenKAT-CVE-veranderingen',
+    english: 'OpenKAT CVE changes',
+  ),
+  'finding-lifecycle': (
+    dutch: 'OpenKAT-findingveranderingen',
+    english: 'OpenKAT finding changes',
+  ),
+  'finding-age': (
+    dutch: 'OpenKAT-langst waargenomen findings',
+    english: 'OpenKAT longest-observed findings',
+  ),
+  'system-hotspots': (
+    dutch: 'OpenKAT-systeemaandacht',
+    english: 'OpenKAT system hotspots',
+  ),
+  'system-changes': (
+    dutch: 'OpenKAT-systeemveranderingen',
+    english: 'OpenKAT system changes',
+  ),
+  'control-coverage': (
+    dutch: 'OpenKAT-controldekking',
+    english: 'OpenKAT control coverage',
+  ),
+  'control-changes': (
+    dutch: 'OpenKAT-controlveranderingen',
+    english: 'OpenKAT control changes',
+  ),
+  'recommendations-overview': (
+    dutch: 'OpenKAT-aanbevelingenoverzicht',
+    english: 'OpenKAT recommendations',
+  ),
+  'asset-inventory': (
+    dutch: 'OpenKAT-assetinventaris',
+    english: 'OpenKAT asset inventory',
+  ),
+  'monitoring-coverage': (
+    dutch: 'OpenKAT-monitoringdekking',
+    english: 'OpenKAT monitoring coverage',
+  ),
+  'measurement-accountability': (
+    dutch: 'OpenKAT-meetverantwoording',
+    english: 'OpenKAT measurement accountability',
+  ),
+};
 
 /// Zet een gevalideerd rapportplan om in gewone OciDeck-dia's.
 ///
@@ -33,16 +131,56 @@ class OpenKatReportComposer {
 
   String _text(String dutch, String english) => _english ? english : dutch;
 
+  static const _legacyManagementViewAliases = <String, String>{
+    'portfolio.summary': 'report.management-overview.portfolio-summary.summary',
+    'portfolio.key-message':
+        'report.management-overview.portfolio-summary.key-message',
+    'portfolio.surface': 'report.management-overview.portfolio-summary.scope',
+    'portfolio.orgs-attention':
+        'report.management-overview.organization-comparison.most',
+    'portfolio.orgs-compared':
+        'report.management-overview.organization-comparison.most',
+    'portfolio.trend': 'report.management-overview.portfolio-trend.severity',
+    'portfolio.severity-matrix':
+        'report.management-overview.severity-concentration.organizations',
+    'portfolio.recommendations':
+        'report.management-overview.recommendations.ranking',
+    'portfolio.controls':
+        'report.management-overview.control-coverage.coverage',
+    'portfolio.longest-open': 'report.management-overview.finding-age.ranking',
+    'portfolio.top-issues':
+        'report.management-overview.finding-type-prevalence.ranking',
+  };
+
+  static String canonicalManagementViewId(String view) {
+    final alias = _legacyManagementViewAliases[view];
+    if (alias != null) return alias;
+    if (view.startsWith('org.')) {
+      return 'report.management-overview.system-hotspots.$view';
+    }
+    return view;
+  }
+
   Deck compose(
     OpenKatReportRequest request,
     OpenKatReportPlan plan, {
     String? outputPath,
   }) {
-    final organizations = facts.selectedOrganizations(request);
-    final selections = facts
-        .selections(request)
-        .where((selection) => selection.current != null)
-        .toList();
+    final selections =
+        (request.scenarioId == 'management-overview'
+                ? facts.comparisonSelections(request)
+                : facts.selections(request))
+            .where((selection) => selection.current != null)
+            .toList();
+    final organizations = [
+      for (final selection in selections)
+        selection.organization.copyWith(
+          snapshots: [
+            if (selection.previous != null) selection.previous!,
+            selection.current!,
+          ],
+        ),
+    ];
     final comparableOrganizations = {
       for (final selection in selections)
         if (facts.hasComparableCoverage(selection)) selection.organization.code,
@@ -55,103 +193,96 @@ class OpenKatReportComposer {
               comparableOrganizations.contains(selection.organization.code),
         );
     final title = request.title ?? _defaultTitle(request);
+    final blocks = _OpenKatReportBlockRenderer(this);
     var deck = Deck(
       title: _literal(title),
       projectPath: outputPath ?? '',
       version: '1.0',
       language: request.language.code,
-      slides: [_titleSlide(title, organizations)],
+      slides: [blocks.reportTitle(request, title, organizations)],
     );
 
+    final security = _OpenKatReportSecurityRenderer(this);
+    final assets = _OpenKatReportAssetRenderer(this);
+    final renderers =
+        <OpenKatReportBlockKind, List<Slide> Function(OpenKatReportBlock)>{
+          OpenKatReportBlockKind.managementOverview: (block) =>
+              blocks.legacyManagement(
+                request,
+                block,
+                organizations: organizations,
+                comparablePortfolio: comparablePortfolio,
+                comparableOrganizations: comparableOrganizations,
+              ),
+          OpenKatReportBlockKind.portfolioSummary: (block) =>
+              blocks.portfolioSummary(request, block),
+          OpenKatReportBlockKind.organizationComparison: (block) =>
+              blocks.organizationComparison(request, block),
+          OpenKatReportBlockKind.severityConcentration: (block) =>
+              blocks.severityConcentration(request, block),
+          OpenKatReportBlockKind.portfolioTrend: (block) =>
+              blocks.portfolioTrend(request, block),
+          OpenKatReportBlockKind.findingTypePrevalence: (block) =>
+              blocks.findingTypePrevalence(request, block),
+          OpenKatReportBlockKind.measurementAvailability: (block) =>
+              blocks.measurementAvailability(request, block),
+          OpenKatReportBlockKind.measurementAccountability: (block) =>
+              blocks.measurementAccountability(request, block),
+          OpenKatReportBlockKind.findingLifecycle: (block) =>
+              blocks.findingLifecycle(request, block),
+          OpenKatReportBlockKind.findingAge: (block) =>
+              blocks.findingAge(request, block),
+          OpenKatReportBlockKind.systemHotspots: (block) =>
+              blocks.systemHotspots(request, block),
+          OpenKatReportBlockKind.systemChanges: (block) =>
+              blocks.systemChanges(request, block),
+          OpenKatReportBlockKind.cveExposure: (block) =>
+              security.cveExposure(request, block),
+          OpenKatReportBlockKind.cveLandscape: (block) =>
+              security.cveLandscape(request, block),
+          OpenKatReportBlockKind.cveChanges: (block) =>
+              security.cveChanges(request, block),
+          OpenKatReportBlockKind.controlCoverage: (block) =>
+              security.controlCoverage(request, block),
+          OpenKatReportBlockKind.controlChanges: (block) =>
+              security.controlChanges(request, block),
+          OpenKatReportBlockKind.recommendations: (block) =>
+              security.recommendations(request, block),
+          OpenKatReportBlockKind.assetInventory: (block) =>
+              assets.assetInventory(request, block),
+          OpenKatReportBlockKind.monitoringCoverage: (block) =>
+              assets.monitoringCoverage(request, block),
+          OpenKatReportBlockKind.monitoringChanges: (block) =>
+              assets.monitoringChanges(request, block),
+          OpenKatReportBlockKind.organizationOverview: (block) =>
+              assets.organizationOverview(request, block),
+        };
     for (final block in plan.blocks) {
-      switch (block.kind) {
-        case OpenKatReportBlockKind.managementOverview:
-          final management = generate(
-            organizations,
-            title: title,
-            outputPath: outputPath,
-            comparablePortfolio: comparablePortfolio,
-            comparableOrganizations: comparableOrganizations,
-          );
-          deck = deck.copyWith(
-            language: request.language.code,
-            slides: [...deck.slides, ...management.slides.skip(1)],
-          );
-        case OpenKatReportBlockKind.measurementAvailability:
-          deck = deck.copyWith(
-            slides: [...deck.slides, _measurementAvailabilitySlide(request)],
-          );
-        case OpenKatReportBlockKind.findingLifecycle:
-          deck = deck.copyWith(
-            slides: [...deck.slides, _findingLifecycleSlide(request)],
-          );
-        case OpenKatReportBlockKind.cveExposure:
-          deck = deck.copyWith(
-            slides: [...deck.slides, _cveExposureSlide(request)],
-          );
-        case OpenKatReportBlockKind.monitoringChanges:
-          deck = deck.copyWith(
-            slides: [...deck.slides, _monitoringChangesSlide(request)],
-          );
-      }
+      final legacySlides = request.scenarioId == 'management-overview'
+          ? blocks.declarativeManagement(
+              request,
+              block,
+              organizations: organizations,
+              comparablePortfolio: comparablePortfolio,
+              comparableOrganizations: comparableOrganizations,
+            )
+          : null;
+      final slides = legacySlides ?? renderers[block.kind]!(block);
+      deck = deck.copyWith(
+        language: request.language.code,
+        slides: [...deck.slides, ...slides],
+      );
     }
     return deck;
   }
 
   String _defaultTitle(OpenKatReportRequest request) {
-    final english = request.language == OpenKatReportLanguage.english;
-    return switch (request.scenarioId) {
-      'weekly-comparison' =>
-        english ? 'OpenKAT weekly comparison' : 'OpenKAT-weekvergelijking',
-      'organization-overview' =>
-        english
-            ? 'OpenKAT organization overview'
-            : 'OpenKAT-organisatieoverzicht',
-      'cve-exposure' =>
-        english ? 'OpenKAT CVE exposure' : 'OpenKAT CVE-blootstelling',
-      'monitoring-changes' =>
-        english ? 'OpenKAT monitoring changes' : 'OpenKAT-monitoringmutaties',
-      'data-quality' =>
-        english ? 'OpenKAT data quality' : 'OpenKAT-datakwaliteit',
-      _ =>
-        english ? 'OpenKAT management overview' : 'OpenKAT managementoverzicht',
-    };
-  }
-
-  /// Generates a fresh deck from the scanned organisations.
-  Deck generate(
-    List<OpenKatOrganization> organizations, {
-    String title = 'OpenKAT managementoverzicht',
-    String? outputPath,
-    bool comparablePortfolio = false,
-    Set<String> comparableOrganizations = const {},
-  }) {
-    final portfolio = facts.aggregatePortfolio(organizations);
-    final hasComparison = portfolio.previous != null;
-    final slides = <Slide>[
-      _titleSlide(title, organizations),
-      if (organizations.length > 1) _organizationAttentionSlide(portfolio),
-      if (hasComparison && comparablePortfolio) _keyMessageSlide(portfolio),
-      _portfolioSummarySlide(portfolio, compare: comparablePortfolio),
-      _trendSlide(portfolio, compare: comparablePortfolio),
-      _portfolioSurfaceSlide(portfolio),
-      if (organizations.length > 1) ...[_severityMatrixSlide(portfolio)],
-      _topIssuesSlide(portfolio, compare: comparablePortfolio),
-      ?_recommendationsSlide(portfolio),
-      _longestOpenSlide(portfolio),
-      ?_controlsSlide(portfolio),
-      for (final org in organizations)
-        ..._organisationSlides(
-          org,
-          compare: comparableOrganizations.contains(org.code),
-        ),
-    ];
-
-    return Deck(
-      title: _literal(title),
-      projectPath: outputPath ?? '',
-      version: '1.0',
-    ).copyWith(slides: slides);
+    final titles =
+        _openKatReportTitles[request.scenarioId] ??
+        _openKatReportTitles['management-overview']!;
+    return request.language == OpenKatReportLanguage.english
+        ? titles.english
+        : titles.dutch;
   }
 
   Slide _slide({
@@ -164,6 +295,7 @@ class OpenKatReportComposer {
     String customMarkdown = '',
     DisplayWindowSpec? viewLimit,
     String notes = '',
+    PrivacyDisposition? privacy,
   }) => OpenKatSlideProvenance.markGeneratedOrigin(
     Slide(
       id: id,
@@ -175,72 +307,9 @@ class OpenKatReportComposer {
       customMarkdown: customMarkdown,
       viewLimit: viewLimit,
       notes: notes,
+      privacy: privacy,
     ),
   );
-
-  Slide _measurementAvailabilitySlide(OpenKatReportRequest request) {
-    final english = request.language == OpenKatReportLanguage.english;
-    final rows = <List<String>>[
-      [
-        english ? 'Organization' : 'Organisatie',
-        english ? 'Period' : 'Periode',
-        english ? 'Cut-off' : 'Peildatum',
-        english ? 'Measurement' : 'Meting',
-        english ? 'Age (days)' : 'Ouderdom (dagen)',
-      ],
-      for (final usage in facts.measurementUsages(request))
-        [
-          _inline(usage.organizationCode),
-          usage.role == OpenKatMeasurementRole.current
-              ? (english ? 'Current' : 'Huidig')
-              : (english ? 'Previous' : 'Vorig'),
-          _iso(usage.requestedAsOf),
-          usage.measuredAt == null ? '-' : _iso(usage.measuredAt!),
-          usage.age == null ? '-' : '${usage.age!.inDays}',
-        ],
-    ];
-    return _slide(
-      id: _id('openkat-${request.scenarioId}-availability'),
-      type: SlideType.table,
-      title: english ? 'Measurements used' : 'Gebruikte meetmomenten',
-      tableRows: rows,
-      viewLimit: DisplayWindowSpec(limit: request.policy.tableRowLimit),
-      notes:
-          '<!-- ocideck_openkat_view: report.${request.scenarioId}.availability -->',
-    );
-  }
-
-  Slide _findingLifecycleSlide(OpenKatReportRequest request) {
-    final english = request.language == OpenKatReportLanguage.english;
-    final limit = request.policy.tableRowLimit;
-    final lifecycle = facts.findingLifecycle(request, maxResults: limit + 1);
-    final truncated = lifecycle.length > limit;
-    return _slide(
-      id: _id('openkat-${request.scenarioId}-lifecycle'),
-      type: SlideType.table,
-      title: english ? 'Finding observations' : 'Waarnemingen van bevindingen',
-      tableRows: [
-        [
-          english ? 'Organization' : 'Organisatie',
-          english ? 'Finding' : 'Bevinding',
-          english ? 'Observation' : 'Waarneming',
-          english ? 'Comparable coverage' : 'Vergelijkbare dekking',
-        ],
-        for (final item in lifecycle.take(limit))
-          [
-            _inline(item.organizationCode),
-            _inline(item.finding.findingTypeName ?? item.finding.findingTypeId),
-            _observationLabel(item.observation, english: english),
-            item.comparableCoverage
-                ? (english ? 'Yes' : 'Ja')
-                : (english ? 'Not demonstrated' : 'Niet aangetoond'),
-          ],
-        if (truncated) _omittedRow(columns: 4, english: english, shown: limit),
-      ],
-      notes:
-          '<!-- ocideck_openkat_view: report.${request.scenarioId}.lifecycle -->',
-    );
-  }
 
   String _observationLabel(
     OpenKatFindingObservation observation, {
@@ -254,71 +323,6 @@ class OpenKatReportComposer {
       english ? 'Observed again' : 'Opnieuw waargenomen',
   };
 
-  Slide _cveExposureSlide(OpenKatReportRequest request) {
-    final english = request.language == OpenKatReportLanguage.english;
-    final cveId = request.cveId!.trim().toUpperCase();
-    final limit = request.policy.tableRowLimit;
-    final exposure = facts.cveExposure(request, cveId, maxResults: limit + 1);
-    final truncated = exposure.length > limit;
-    return _slide(
-      id: _id('openkat-${request.scenarioId}-$cveId'),
-      type: SlideType.table,
-      title: english ? 'Exposure to $cveId' : 'Blootstelling aan $cveId',
-      tableRows: [
-        [
-          english ? 'Organization' : 'Organisatie',
-          english ? 'Finding' : 'Bevinding',
-          english ? 'System' : 'Systeem',
-          english ? 'Severity' : 'Ernst',
-        ],
-        for (final item in exposure.take(limit))
-          [
-            _inline(item.organizationCode),
-            _inline(item.finding.findingTypeName ?? item.finding.findingTypeId),
-            _inline(item.finding.systemId ?? '-'),
-            _severityLabel(openKatSeverityBand(item.finding.severity)),
-          ],
-        if (truncated) _omittedRow(columns: 4, english: english, shown: limit),
-      ],
-      notes:
-          '<!-- ocideck_openkat_view: report.${request.scenarioId}.exposure -->',
-    );
-  }
-
-  Slide _monitoringChangesSlide(OpenKatReportRequest request) {
-    final english = request.language == OpenKatReportLanguage.english;
-    final limit = request.policy.tableRowLimit;
-    final mutations = facts.monitoringMutations(request, maxResults: limit + 1);
-    final truncated = mutations.length > limit;
-    return _slide(
-      id: _id('openkat-${request.scenarioId}-mutations'),
-      type: SlideType.table,
-      title: english ? 'Monitoring changes' : 'Monitoringmutaties',
-      tableRows: [
-        [
-          english ? 'Organization' : 'Organisatie',
-          english ? 'Asset' : 'Asset',
-          english ? 'Change' : 'Verandering',
-        ],
-        for (final mutation in mutations.take(limit))
-          [
-            _inline(mutation.organizationCode),
-            _inline(mutation.system.id),
-            mutation.kind == OpenKatMonitoringMutationKind.added
-                ? (english
-                      ? 'Added to monitoring'
-                      : 'Toegevoegd aan monitoring')
-                : (english
-                      ? 'Removed from monitoring'
-                      : 'Verwijderd uit monitoring'),
-          ],
-        if (truncated) _omittedRow(columns: 3, english: english, shown: limit),
-      ],
-      notes:
-          '<!-- ocideck_openkat_view: report.${request.scenarioId}.monitoring -->',
-    );
-  }
-
   List<String> _omittedRow({
     required int columns,
     required bool english,
@@ -327,6 +331,14 @@ class OpenKatReportComposer {
     english
         ? 'More results omitted after the configured limit of $shown'
         : 'Meer resultaten weggelaten na de ingestelde limiet van $shown',
+    for (var i = 1; i < columns; i++) '',
+  ];
+
+  List<String> _emptyResultRow({required int columns}) => [
+    _text(
+      'Geen betrouwbare resultaten binnen de gekozen metingen',
+      'No reliable results within the selected measurements',
+    ),
     for (var i = 1; i < columns; i++) '',
   ];
 
@@ -353,17 +365,6 @@ class OpenKatReportComposer {
     previous: previous == null ? null : (previous[band] ?? 0).toDouble(),
     polarity: ScorecardPolarity.lowerBetter,
   );
-
-  Slide _titleSlide(String title, List<OpenKatOrganization> organizations) {
-    final orgNames = organizations.map((o) => _literal(o.name)).join(', ');
-    return _slide(
-      id: _id('openkat-title'),
-      type: SlideType.title,
-      title: _literal(title),
-      subtitle: '${_text('Organisaties', 'Organizations')}: $orgNames',
-      notes: '<!-- ocideck_openkat_view: title -->',
-    );
-  }
 
   Slide _keyMessageSlide(PortfolioAggregate portfolio) {
     final conclusion = facts.compare(portfolio.current, portfolio.previous);

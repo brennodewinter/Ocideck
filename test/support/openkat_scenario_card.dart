@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import '../../../models/openkat/openkat_wizard_models.dart';
+import 'package:ocideck/models/openkat/openkat_wizard_models.dart';
 
 class OpenKatScenarioCard extends StatefulWidget {
   final OpenKatWizardScenarioAvailability scenario;
@@ -154,7 +154,7 @@ class _OpenKatScenarioCardState extends State<OpenKatScenarioCard> {
                 height: 72,
                 width: double.infinity,
                 child: _ScenarioVisual(
-                  id: widget.scenario.descriptor.id,
+                  kind: widget.scenario.descriptor.previewKind,
                   facts: widget.facts,
                   available: available,
                 ),
@@ -232,12 +232,12 @@ class _Badge extends StatelessWidget {
 }
 
 class _ScenarioVisual extends StatelessWidget {
-  final OpenKatWizardScenarioId id;
+  final OpenKatWizardPreviewKind kind;
   final OpenKatWizardPreviewFacts facts;
   final bool available;
 
   const _ScenarioVisual({
-    required this.id,
+    required this.kind,
     required this.facts,
     required this.available,
   });
@@ -246,26 +246,41 @@ class _ScenarioVisual extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final color = available ? colors.primary : colors.outline;
-    return switch (id) {
-      OpenKatWizardScenarioId.portfolio => _Heatmap(
+    final registry = <OpenKatWizardPreviewKind, Widget Function()>{
+      OpenKatWizardPreviewKind.summary: () => _Heatmap(
         values: facts.findingsByOrganization.values.toList(),
         color: color,
       ),
-      OpenKatWizardScenarioId.organizationProgress => CustomPaint(
+      OpenKatWizardPreviewKind.comparison: () => _Heatmap(
+        values: facts.findingsByOrganization.values.toList(),
+        color: color,
+      ),
+      OpenKatWizardPreviewKind.trend: () => CustomPaint(
         painter: _TrendPainter(
           values: facts.findingTrend.map((value) => value.toDouble()).toList(),
           color: color,
         ),
       ),
-      OpenKatWizardScenarioId.cveExposure => _NetworkVisual(
+      OpenKatWizardPreviewKind.findings: () => _Heatmap(
+        values: facts.findingsByOrganization.values.toList(),
+        color: color,
+      ),
+      OpenKatWizardPreviewKind.systems: () => _NetworkVisual(
         count: math.max(3, math.min(8, facts.organizationCount)),
         color: color,
       ),
-      OpenKatWizardScenarioId.dataQuality => _StatusPoints(
-        dates: facts.measurementDates,
+      OpenKatWizardPreviewKind.controls: () =>
+          _StatusPoints(dates: facts.measurementDates, color: color),
+      OpenKatWizardPreviewKind.cve: () => _NetworkVisual(
+        count: math.max(3, math.min(8, facts.organizationCount)),
         color: color,
       ),
+      OpenKatWizardPreviewKind.monitoring: () =>
+          _StatusPoints(dates: facts.measurementDates, color: color),
+      OpenKatWizardPreviewKind.accountability: () =>
+          _StatusPoints(dates: facts.measurementDates, color: color),
     };
+    return registry[kind]!();
   }
 }
 

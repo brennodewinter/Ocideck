@@ -730,6 +730,180 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Un bista amplio pero faktual di maneho ku momentunan di midimentu trasabel.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Rango sin puntuashon total i ta mustra midimentunan ku falta separadamente.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Ta mustra kantidat di severidat, kontribuyentenan, i midimentunan hibá dilanti pa momentu.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Organisá tiponan di hañamentu pa organisashonnan, sistemanan i opservashonnan afektá.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Ta mustra sifranan krítiko/haltu sin ningun pesahe diseñá.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Ta mustra numerador, denominador i solamente porsentahenan konfiabel.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Gruponan rekomendashonnan literal di OpenKAT sin nan propio prioridat.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Ta distinguí nobo, nobo i no ta wòrdu opservá mas.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Ta usa solamente fechanan di promé opservashon konfiabel.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Ta ranka sistemanan ku kontadónan di severidat separá.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Ta mustra balornan di delta individual sin puntuashon ponderá.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Kompará numerador i denominador ku kobertura demostrabelmente komparábel.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Inventarisá sistemanan probá pa fuente, nòmbernan di anfitrion i adrèsnan IP.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Ta mustra solamente mutashonnan di monitoreo probá eksplísitamente.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Ta mustra organisashonnan i sistemanan rònt di un link di CVE konfiabel.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Ranking CVEs ku deduplikashon eksplísito.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Ta distinguí CVEnan nobo, nobo i ku no ta wòrdu opservá mas.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Ta konta pa fechanan klave, archivonan di fuente, adaptadornan i hashnan di fuente.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Kompará organisashonnan i identifiká puntonan di interes di kartera.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Wak e status aktual òf kambionan demostrabel na un organisashon.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Investigá linknan konfiabel di CVE den e midimentunan skohé.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Registra kua midimentu i archivonan di fuente e rapòrt ta usa realmente.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Kiko ta e punto di bista di maneho di e organisashonnan skohé?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Unda ta e resultadonan mas i ménos opservá?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Kon e kartera ta desaroyá den transkurso di tempu?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Ki problemanan ta sosodé den mayoria organisashon?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Unda e resultadonan mas serio ta konsentrá?',
+  'Welke controls lopen achter?': 'Kua kontrolnan ta kedando atras?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Kua medidanan OpenKAT ta rekomendá mas tantu?',
+  'Hoe staat deze organisatie er nu voor?':
+      'Kico ta e status actual di e organisacion aki?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Kiko a kambia for di e midimentu anterior?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Kua resultadonan ta nobo òf no ta wòrdu opservá mas?',
+  'Welke findings staan het langst open?':
+      'Kua resultadonan a keda habrí mas largu?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'Riba kua sistemanan ta wòrdu opservá mas resultado?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Kua sistemanan a mehorá òf a deteriorá?',
+  'Welke controls verbeterden of verslechterden?':
+      'Kua kòntròlnan a mehorá òf a deteriorá?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Kua sistemanan ta inkluí den e midimentunan?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Kua aktivonan ta demostrabel den monitoreo?',
+  'Welke monitoringstatussen veranderden?':
+      'Kua statusnan di monitoreo a kambia?',
+  'Wie is geraakt door deze CVE?': 'Ken ta wòrdu afektá pa e CVE aki?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Kua CVE ta afektá mayoria organisashon?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Kua CVE ta nobo òf no ta wòrdu opservá mas?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Kua dato di midimentu ta falta òf antikuá?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Riba ki dato e rapòrt aki ta basá?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'Un bista amplio pero faktual di maneho ku momentunan di midimentu trasabel.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Rango sin puntuashon total i ta mustra midimentunan ku falta separadamente.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Ta mustra kantidat di severidat, kontribuyentenan, i midimentunan hibá dilanti pa momentu.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Organisá tiponan di hañamentu pa organisashonnan, sistemanan i opservashonnan afektá.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Ta mustra sifranan krítiko/haltu sin ningun pesahe diseñá.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Ta mustra numerador, denominador i solamente porsentahenan konfiabel.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Gruponan rekomendashonnan literal di OpenKAT sin nan propio prioridat.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Un imágen aktual dirigí di un organisashon i su fecha di midimentu.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Kompará dos momentu di midimentu skohé denter di un organisashon.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Ta distinguí nobo, nobo i no ta wòrdu opservá mas.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Ta usa solamente fechanan di promé opservashon konfiabel.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Ta ranka sistemanan ku kontadónan di severidat separá.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Ta mustra balornan di delta individual sin puntuashon ponderá.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Kompará numerador i denominador ku kobertura demostrabelmente komparábel.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Inventarisá sistemanan probá pa fuente, nòmbernan di anfitrion i adrèsnan IP.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Ta separá monitoriá, no monitoriá i deskonosí.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Ta mustra solamente mutashonnan di monitoreo probá eksplísitamente.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Ta mustra organisashonnan i sistemanan rònt di un link di CVE konfiabel.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Ranking CVEs ku deduplikashon eksplísito.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Ta distinguí CVEnan nobo, nobo i ku no ta wòrdu opservá mas.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Ta mustra midimentunan ku falta, antikuá i realmente usá.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Ta konta pa fechanan klave, archivonan di fuente, adaptadornan i hashnan di fuente.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'No ta disponibel ainda: e fuente no ta proba status di monitoreo pa tur aktivo.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'No ta disponibel ainda: no ta tur resultado tin un fecha di promé opservashon konfiabel.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'No ta disponibel ainda: e fuente no ta proba un identidat stabil pa tur e resultadonan.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'No ta disponibel ainda: no a demostrá kobertura di midimentu komparábel.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'No ta disponibel ainda: falta denominadónan di kòntròl konfiabel.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'No ta disponibel ainda: identidat di aktivo stabil no a wòrdu demostrá.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'E rapòrt aki no ta sostené e alkanse organisatorio skohé.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'E fuente selektá no ta kontené sufisiente dato konfiabel pa e rapòrt aki.',
+  'Kerncijfers en gemeten bereik': 'Sifranan klave i alkanse midi',
+  'Organisaties vergelijken': 'Kompará organisashonnan',
+  'Concentratie van critical/high findings':
+      'Konsentrashon di resultadonan krítiko/haltu',
+  'Portfolioverloop per meetmoment':
+      'Bista general di kartera pa momentu di midimentu',
+  'Meest voorkomende findingtypen': 'Tiponan di hañamentu mas komun',
+  'Bron- en meetverantwoording': 'Responsabilidat di fuente i midimentu',
+  'Nieuwe en niet meer waargenomen findings':
+      'Resultadonan nobo i ku no ta wòrdu opservá mas',
+  'Langst waargenomen findings': 'E resultadonan opservá mas largu',
+  'Systemen met de meeste findings': 'Sistemanan ku mas resultado',
+  'Veranderingen per systeem': 'Kambionan pa sistema',
+  'Blootstelling aan één CVE': 'Eksposishon na un CVE',
+  'CVE’s over organisaties': 'CVEs tokante organisashonnan',
+  'Nieuwe en niet meer waargenomen CVE’s':
+      'CVEnan nobo i no ta wòrdu opservá mas',
+  'Controldekking': 'Kobertura di kòntròl',
+  'Controlveranderingen': 'Kambionan di kòntròl',
+  'Aanbevelingen uit OpenKAT': 'Rekomendashonnan di OpenKAT',
+  'Assetinventaris': 'Inventario di aktivo',
+  'Monitoringdekking': 'Monitoreo di kobertura',
+  'Actueel organisatiebeeld': 'Imágen organisatorio aktual',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Promé skohe e tópiko i despues e pregunta ku e rapòrt mester kontestá.',
+  'Onderwerp': 'Tópiko',
+  'Welk rapport beantwoordt uw vraag?': 'Kua rapòrt ta kontestá bo pregunta?',
+  'Meer rapportvragen': 'Mas pregunta pa rapòrt',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Ki sistemanan ta vulnerabel pa un CVE?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

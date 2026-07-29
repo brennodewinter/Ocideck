@@ -5,8 +5,10 @@
 /// wanneer de exportvorm CVE-verwijzingen überhaupt betrouwbaar levert.
 enum OpenKatSourceFeature {
   stableAssetIdentity,
+  stableFindingIdentity,
   reliableCveReferences,
   reliableMonitoringStatus,
+  reliableOpenedAt,
   comparableMeasurementCoverage,
 }
 

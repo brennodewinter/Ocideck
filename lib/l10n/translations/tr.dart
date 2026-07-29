@@ -2748,6 +2748,177 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'İzlenebilir ölçüm anlarına sahip geniş ancak gerçeklere dayanan bir yönetime genel bakış.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Toplam puan olmadan sıralanır ve eksik ölçümleri ayrı ayrı gösterir.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Önemlilik sayımlarını, katkıda bulunanları ve anlık ölçümleri gösterir.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Bulgu türlerini etkilenen kuruluşlara, sistemlere ve gözlemlere göre düzenler.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Herhangi bir tartım yapılmadan kritik/yüksek sayıları gösterir.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Pay, payda ve yalnızca güvenilir yüzdeleri gösterir.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'OpenKAT\'tan gelen gerçek önerileri kendi öncelikleri olmadan gruplandırır.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Yeni, yeni ve artık gözlenmeyenleri ayırt eder.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Yalnızca güvenilir ilk gözlem tarihlerini kullanır.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Sistemleri ayrı şiddet sayaçlarıyla sıralar.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Ağırlıklı puan olmadan bireysel delta değerlerini gösterir.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Pay ve paydayı açıkça karşılaştırılabilir kapsam ile karşılaştırır.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Kaynağı kanıtlanmış sistemlerin, ana bilgisayar adlarının ve IP adreslerinin envanterleri.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Yalnızca açıkça kanıtlanmış izleme mutasyonlarını gösterir.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Kuruluşları ve sistemleri tek bir güvenilir CVE bağlantısı etrafında gösterir.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Açık veri tekilleştirme ile CVE\'leri sıralar.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Yeni, yeni ve artık gözlemlenmeyen CVE\'leri ayırt eder.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Anahtar tarihler, kaynak dosyalar, bağdaştırıcılar ve kaynak karmaları için hesaplar.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Organizasyonları karşılaştırın ve portföyün ilgi çekici noktalarını belirleyin.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Bir kuruluştaki mevcut durumu veya kanıtlanabilir değişiklikleri görüntüleyin.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Seçilen ölçümlerde güvenilir CVE bağlantılarını araştırın.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Raporun gerçekte hangi ölçümleri ve kaynak dosyalarını kullandığını kaydedin.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Seçilen kuruluşların yönetim görüşü nedir?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'En çok ve en az bulgu nerede gözleniyor?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Portföy zaman içinde nasıl gelişir?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Çoğu kuruluşta hangi sorunlar ortaya çıkıyor?',
+  'Waar concentreren de ernstigste findings zich?':
+      'En ciddi bulgular nerede yoğunlaşıyor?',
+  'Welke controls lopen achter?': 'Hangi kontroller geride kalıyor?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'OpenKAT en sık hangi önlemleri önerir?',
+  'Hoe staat deze organisatie er nu voor?': 'Bu örgütün şu anki durumu nedir?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Önceki ölçümden bu yana ne değişti?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Hangi bulgular yeni veya artık gözlemlenmiyor?',
+  'Welke findings staan het langst open?':
+      'Hangi bulgular en uzun süre açık kaldı?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'Bulgular en çok hangi sistemlerde görülüyor?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Hangi sistemler iyileşti veya kötüleşti?',
+  'Welke controls verbeterden of verslechterden?':
+      'Hangi kontroller iyileşti veya kötüleşti?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Ölçümlere hangi sistemler dahildir?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'İzlemede hangi varlıklar kanıtlanabilir?',
+  'Welke monitoringstatussen veranderden?': 'Hangi izleme durumları değişti?',
+  'Wie is geraakt door deze CVE?': 'Bu CVE\'den kimler etkileniyor?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Hangi CVE\'ler çoğu kuruluşu etkiler?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Hangi CVE\'ler yenidir veya artık gözlemlenmemektedir?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Hangi ölçüm verileri eksik veya güncel değil?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Bu rapor hangi verilere dayanıyor?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'İzlenebilir ölçüm anlarına sahip geniş ancak gerçeklere dayanan bir yönetime genel bakış.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Toplam puan olmadan sıralanır ve eksik ölçümleri ayrı ayrı gösterir.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Önemlilik sayımlarını, katkıda bulunanları ve anlık ölçümleri gösterir.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Bulgu türlerini etkilenen kuruluşlara, sistemlere ve gözlemlere göre düzenler.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Herhangi bir tartım yapılmadan kritik/yüksek sayıları gösterir.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Pay, payda ve yalnızca güvenilir yüzdeleri gösterir.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'OpenKAT\'tan gelen gerçek önerileri kendi öncelikleri olmadan gruplandırır.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Bir kuruluşun hedeflenen güncel görüntüsü ve ölçüm tarihi.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Bir kuruluşta seçilen iki ölçüm anını karşılaştırır.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Yeni, yeni ve artık gözlenmeyenleri ayırt eder.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Yalnızca güvenilir ilk gözlem tarihlerini kullanır.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Sistemleri ayrı şiddet sayaçlarıyla sıralar.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Ağırlıklı puan olmadan bireysel delta değerlerini gösterir.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Pay ve paydayı açıkça karşılaştırılabilir kapsam ile karşılaştırır.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Kaynağı kanıtlanmış sistemlerin, ana bilgisayar adlarının ve IP adreslerinin envanterleri.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'İzlenen, izlenmeyen ve bilinmeyenleri ayırır.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Yalnızca açıkça kanıtlanmış izleme mutasyonlarını gösterir.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Kuruluşları ve sistemleri tek bir güvenilir CVE bağlantısı etrafında gösterir.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Açık veri tekilleştirme ile CVE\'leri sıralar.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Yeni, yeni ve artık gözlemlenmeyen CVE\'leri ayırt eder.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Eksik, güncelliğini kaybetmiş ve gerçekten kullanılmış ölçümleri gösterir.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Anahtar tarihler, kaynak dosyalar, bağdaştırıcılar ve kaynak karmaları için hesaplar.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Henüz mevcut değil: Kaynak, tüm varlıklar için izleme durumunu kanıtlamıyor.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Henüz mevcut değil: Her bulgunun güvenilir bir ilk gözlem tarihi yoktur.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Henüz mevcut değil: Kaynak, tüm bulgular için istikrarlı bir kimlik kanıtlamıyor.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Henüz mevcut değil: karşılaştırılabilir ölçüm kapsamı gösterilmemiştir.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Henüz mevcut değil: güvenilir kontrol paydaları eksik.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Henüz mevcut değil: Stabil varlık kimliği gösterilmemiştir.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'Bu rapor seçilen organizasyonel kapsamı desteklemiyor.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'Seçilen kaynak bu rapor için yeterli güvenilir veri içermiyor.',
+  'Kerncijfers en gemeten bereik': 'Önemli rakamlar ve ölçülen erişim',
+  'Organisaties vergelijken': 'Kuruluşları karşılaştırın',
+  'Concentratie van critical/high findings':
+      'Kritik/yüksek bulguların konsantrasyonu',
+  'Portfolioverloop per meetmoment': 'Ölçüm anı başına portföye genel bakış',
+  'Meest voorkomende findingtypen': 'En yaygın bulma türleri',
+  'Bron- en meetverantwoording': 'Kaynak ve ölçüm sorumluluğu',
+  'Nieuwe en niet meer waargenomen findings':
+      'Yeni ve artık gözlemlenmeyen bulgular',
+  'Langst waargenomen findings': 'En uzun gözlemlenen bulgular',
+  'Systemen met de meeste findings': 'En çok bulguya sahip sistemler',
+  'Veranderingen per systeem': 'Sistem başına değişiklikler',
+  'Blootstelling aan één CVE': 'Bir CVE\'ye maruz kalma',
+  'CVE’s over organisaties': 'Kuruluşlarla ilgili CVE\'ler',
+  'Nieuwe en niet meer waargenomen CVE’s':
+      'Yeni ve artık gözlemlenmeyen CVE\'ler',
+  'Controldekking': 'Kontrol kapsamı',
+  'Controlveranderingen': 'Kontrol değişiklikleri',
+  'Aanbevelingen uit OpenKAT': 'OpenKAT\'tan öneriler',
+  'Assetinventaris': 'Varlık envanteri',
+  'Monitoringdekking': 'İzleme kapsamı',
+  'Actueel organisatiebeeld': 'Güncel organizasyon resmi',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Önce konuyu, ardından raporun cevaplaması gereken soruyu seçin.',
+  'Onderwerp': 'Ders',
+  'Welk rapport beantwoordt uw vraag?': 'Sorunuzu hangi rapor yanıtlıyor?',
+  'Meer rapportvragen': 'Daha fazla rapor sorusu',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Hangi sistemler bir CVE\'ye karşı savunmasızdır?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

@@ -1762,6 +1762,177 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Lai, kuid faktiline juhtimisülevaade koos jälgitavate mõõtmishetkedega.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Auastmed ilma koondhindeta ja puuduvad mõõtmised kuvatakse eraldi.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Kuvab raskusastme loendeid, panustajaid ja edasikantud mõõtmisi hetkede kaupa.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Korraldab tüüpide otsimist mõjutatud organisatsioonide, süsteemide ja vaatluste järgi.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Näitab kriitilisi/kõrgeid numbreid ilma kaalumiseta.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Näitab lugejat, nimetajat ja ainult usaldusväärseid protsente.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Rühmitab OpenKATi sõnasõnalised soovitused ilma oma prioriteedita.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Eristab uut, uut ja enam mitte vaadeldavat.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Kasutab ainult usaldusväärseid esmavaatluse kuupäevi.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Järjestab süsteeme eraldi raskusastme loenduritega.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Näitab individuaalseid deltaväärtusi ilma kaalutud skoorita.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Võrdleb lugejat ja nimetajat tõestatavalt võrreldava ulatusega.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Varude allikas tõestatud süsteemid, hostinimed ja IP-aadressid.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Näitab ainult selgelt tõestatud jälgimismutatsioone.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Näitab organisatsioone ja süsteeme ühe usaldusväärse CVE-lingi ümber.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Järjestab CVE-d selgesõnalise dubleerimisega.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Eristab uusi, uusi ja enam jälgimata CVE-sid.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Arvestab võtmekuupäevi, lähtefaile, adaptereid ja lähteräsi.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Võrrelge organisatsioone ja tuvastage portfelli huvipakkuvad punktid.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Vaadake ühe organisatsiooni praegust olekut või demonstreeritavaid muudatusi.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Uurige valitud mõõtmistes usaldusväärseid CVE linke.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Pange kirja, milliseid mõõtmisi ja lähtefaile aruanne tegelikult kasutab.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'Milline on valitud organisatsioonide juhtimisvaade?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Kus täheldatakse kõige rohkem ja kõige vähem leide?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Kuidas portfell aja jooksul areneb?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Milliseid probleeme esineb enamikus organisatsioonides?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Kuhu on koondunud kõige tõsisemad leiud?',
+  'Welke controls lopen achter?': 'Millised kontrollid on maha jäänud?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'Milliseid meetmeid OpenKAT kõige sagedamini soovitab?',
+  'Hoe staat deze organisatie er nu voor?':
+      'Milline on selle organisatsiooni praegune seis?',
+  'Wat veranderde er sinds de vorige meting?':
+      'Mis on võrreldes eelmise mõõtmisega muutunud?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Millised leiud on uued või mida enam ei täheldata?',
+  'Welke findings staan het langst open?':
+      'Millised leiud on olnud kõige kauem avatud?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'Millistes süsteemides täheldatakse kõige rohkem leide?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Millised süsteemid paranesid või halvenesid?',
+  'Welke controls verbeterden of verslechterden?':
+      'Millised kontrollid paranesid või halvenesid?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Milliseid süsteeme mõõtmised hõlmavad?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Millised varad on seire käigus tõendatavad?',
+  'Welke monitoringstatussen veranderden?': 'Millised seireolekud muutusid?',
+  'Wie is geraakt door deze CVE?': 'Keda see CVE mõjutab?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Millised CVE-d mõjutavad enamikku organisatsioone?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Millised CVE-d on uued või mida enam ei täheldata?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Millised mõõtmisandmed puuduvad või on aegunud?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Millistel andmetel see aruanne põhineb?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'Lai, kuid faktiline juhtimisülevaade koos jälgitavate mõõtmishetkedega.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Auastmed ilma koondhindeta ja puuduvad mõõtmised kuvatakse eraldi.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Kuvab raskusastme loendeid, panustajaid ja edasikantud mõõtmisi hetkede kaupa.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Korraldab tüüpide otsimist mõjutatud organisatsioonide, süsteemide ja vaatluste järgi.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Näitab kriitilisi/kõrgeid numbreid ilma kaalumiseta.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Näitab lugejat, nimetajat ja ainult usaldusväärseid protsente.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Rühmitab OpenKATi sõnasõnalised soovitused ilma oma prioriteedita.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Sihitud hetkekujutis ühest organisatsioonist ja selle mõõtmiskuupäev.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Võrdleb kahte valitud mõõtmismomenti ühes organisatsioonis.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Eristab uut, uut ja enam mitte vaadeldavat.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Kasutab ainult usaldusväärseid esmavaatluse kuupäevi.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Järjestab süsteeme eraldi raskusastme loenduritega.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Näitab individuaalseid deltaväärtusi ilma kaalutud skoorita.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Võrdleb lugejat ja nimetajat tõestatavalt võrreldava ulatusega.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Varude allikas tõestatud süsteemid, hostinimed ja IP-aadressid.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Eraldab jälgitava, jälgimata ja tundmatu.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Näitab ainult selgelt tõestatud jälgimismutatsioone.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Näitab organisatsioone ja süsteeme ühe usaldusväärse CVE-lingi ümber.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Järjestab CVE-d selgesõnalise dubleerimisega.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Eristab uusi, uusi ja enam jälgimata CVE-sid.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Näitab puuduvaid, aegunud ja tegelikult kasutatud mõõte.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Arvestab võtmekuupäevi, lähtefaile, adaptereid ja lähteräsi.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Pole veel saadaval: allikas ei tõenda kõigi varade jälgimise olekut.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Pole veel saadaval: igal leiul pole usaldusväärset esimest vaatluskuupäeva.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Pole veel saadaval: allikas ei tõesta kõigi leidude stabiilset identiteeti.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Pole veel saadaval: võrreldavat mõõtmise ulatust ei ole tõestatud.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Pole veel saadaval: puuduvad usaldusväärsed juhtnimetajad.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Pole veel saadaval: varade stabiilset identiteeti pole tõestatud.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'See aruanne ei toeta valitud organisatsioonilist ulatust.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'Valitud allikas ei sisalda selle aruande jaoks piisavalt usaldusväärseid andmeid.',
+  'Kerncijfers en gemeten bereik': 'Võtmenäitajad ja mõõdetud ulatus',
+  'Organisaties vergelijken': 'Võrrelge organisatsioone',
+  'Concentratie van critical/high findings':
+      'Kriitiliste/kõrgete leidude kontsentratsioon',
+  'Portfolioverloop per meetmoment': 'Portfelli ülevaade mõõtmishetke kohta',
+  'Meest voorkomende findingtypen': 'Levinumad leidutüübid',
+  'Bron- en meetverantwoording': 'Allika ja mõõtmise vastutus',
+  'Nieuwe en niet meer waargenomen findings': 'Uued ja enam jälgimata leiud',
+  'Langst waargenomen findings': 'Pikimad täheldatud leiud',
+  'Systemen met de meeste findings': 'Süsteemid, millel on kõige rohkem leide',
+  'Veranderingen per systeem': 'Muudatused süsteemi kaupa',
+  'Blootstelling aan één CVE': 'Kokkupuude ühe CVE-ga',
+  'CVE’s over organisaties': 'CVEd organisatsioonide kohta',
+  'Nieuwe en niet meer waargenomen CVE’s': 'Uued ja enam jälgimata CVE-d',
+  'Controldekking': 'Kontrolli katvust',
+  'Controlveranderingen': 'Kontrolli muudatusi',
+  'Aanbevelingen uit OpenKAT': 'OpenKATi soovitused',
+  'Assetinventaris': 'Varade laoseisu',
+  'Monitoringdekking': 'Katvuse jälgimine',
+  'Actueel organisatiebeeld': 'Praegune organisatsioonipilt',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'Esmalt valige teema ja seejärel küsimus, millele aruanne peaks vastama.',
+  'Onderwerp': 'Teema',
+  'Welk rapport beantwoordt uw vraag?':
+      'Milline aruanne vastab teie küsimusele?',
+  'Meer rapportvragen': 'Rohkem aruandeküsimusi',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Millised süsteemid on CVE suhtes haavatavad?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

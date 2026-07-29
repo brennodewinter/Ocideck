@@ -9,38 +9,195 @@ enum OpenKatWizardBuildStatus { idle, building, succeeded, failed }
 
 enum OpenKatWizardInputKind {
   organization,
-  period,
+  organizations,
+  currentAsOf,
+  previousAsOf,
   cve,
   language,
   title,
-  organizations,
 }
 
-enum OpenKatWizardScenarioId {
-  portfolio('management-overview'),
-  organizationProgress('weekly-comparison'),
-  cveExposure('cve-exposure'),
-  dataQuality('data-quality');
+enum OpenKatReportFamilyId {
+  organizationsManagement,
+  organizationProgress,
+  cves,
+  dataQuality,
+}
 
+enum OpenKatWizardPreviewKind {
+  summary,
+  comparison,
+  trend,
+  findings,
+  systems,
+  controls,
+  cve,
+  monitoring,
+  accountability,
+}
+
+/// Stabiele, getypepte scenariocode zonder enum-switchketen in de frontend.
+class OpenKatWizardScenarioId {
+  final String name;
   final String reportScenarioId;
-  const OpenKatWizardScenarioId(this.reportScenarioId);
+
+  const OpenKatWizardScenarioId._(this.name, this.reportScenarioId);
+
+  static const portfolio = OpenKatWizardScenarioId._(
+    'portfolio',
+    'management-overview',
+  );
+  static const organizationProgress = OpenKatWizardScenarioId._(
+    'organizationProgress',
+    'weekly-comparison',
+  );
+  static const cveExposure = OpenKatWizardScenarioId._(
+    'cveExposure',
+    'cve-exposure',
+  );
+  static const dataQuality = OpenKatWizardScenarioId._(
+    'dataQuality',
+    'data-quality',
+  );
+  static const organizationComparison = OpenKatWizardScenarioId._(
+    'organizationComparison',
+    'organization-comparison',
+  );
+  static const portfolioTrend = OpenKatWizardScenarioId._(
+    'portfolioTrend',
+    'portfolio-trend',
+  );
+  static const findingTypePrevalence = OpenKatWizardScenarioId._(
+    'findingTypePrevalence',
+    'finding-type-prevalence',
+  );
+  static const severityConcentration = OpenKatWizardScenarioId._(
+    'severityConcentration',
+    'critical-high-concentration',
+  );
+  static const cveLandscape = OpenKatWizardScenarioId._(
+    'cveLandscape',
+    'cve-landscape',
+  );
+  static const cveChanges = OpenKatWizardScenarioId._(
+    'cveChanges',
+    'cve-changes',
+  );
+  static const organizationOverview = OpenKatWizardScenarioId._(
+    'organizationOverview',
+    'organization-overview',
+  );
+  static const findingLifecycle = OpenKatWizardScenarioId._(
+    'findingLifecycle',
+    'finding-lifecycle',
+  );
+  static const findingAge = OpenKatWizardScenarioId._(
+    'findingAge',
+    'finding-age',
+  );
+  static const systemHotspots = OpenKatWizardScenarioId._(
+    'systemHotspots',
+    'system-hotspots',
+  );
+  static const systemChanges = OpenKatWizardScenarioId._(
+    'systemChanges',
+    'system-changes',
+  );
+  static const controlCoverage = OpenKatWizardScenarioId._(
+    'controlCoverage',
+    'control-coverage',
+  );
+  static const controlChanges = OpenKatWizardScenarioId._(
+    'controlChanges',
+    'control-changes',
+  );
+  static const recommendations = OpenKatWizardScenarioId._(
+    'recommendations',
+    'recommendations-overview',
+  );
+  static const assetInventory = OpenKatWizardScenarioId._(
+    'assetInventory',
+    'asset-inventory',
+  );
+  static const monitoringCoverage = OpenKatWizardScenarioId._(
+    'monitoringCoverage',
+    'monitoring-coverage',
+  );
+  static const monitoringChanges = OpenKatWizardScenarioId._(
+    'monitoringChanges',
+    'monitoring-changes',
+  );
+  static const measurementAccountability = OpenKatWizardScenarioId._(
+    'measurementAccountability',
+    'measurement-accountability',
+  );
+
+  static const values = [
+    portfolio,
+    organizationComparison,
+    portfolioTrend,
+    findingTypePrevalence,
+    severityConcentration,
+    controlCoverage,
+    recommendations,
+    organizationOverview,
+    organizationProgress,
+    findingLifecycle,
+    findingAge,
+    systemHotspots,
+    systemChanges,
+    controlChanges,
+    assetInventory,
+    monitoringCoverage,
+    monitoringChanges,
+    cveExposure,
+    cveLandscape,
+    cveChanges,
+    dataQuality,
+    measurementAccountability,
+  ];
+
+  static OpenKatWizardScenarioId? fromReportScenarioId(String id) {
+    for (final value in values) {
+      if (value.reportScenarioId == id) return value;
+    }
+    return null;
+  }
 }
 
 enum OpenKatWizardUnavailableReason {
   noUsableMeasurements,
   oneMeasurement,
   noReliableCveReferences,
+  noReliableMonitoringStatus,
+  noReliableOpenedAt,
+  noStableFindingIdentity,
+  noComparableCoverage,
+  noControlDenominators,
+  noStableAssetIdentity,
+  unsupportedScope,
+  missingRequiredData,
 }
 
 class OpenKatWizardScenarioDescriptor {
   final OpenKatWizardScenarioId id;
+  final OpenKatReportFamilyId family;
   final Set<OpenKatWizardInputKind> inputs;
+  final OpenKatWizardPreviewKind previewKind;
   final bool recommended;
+  final int order;
+  final bool currentAsOfUsesClock;
+  final Duration? maximumSnapshotAge;
 
   const OpenKatWizardScenarioDescriptor({
     required this.id,
+    required this.family,
     required this.inputs,
+    required this.previewKind,
     this.recommended = false,
+    required this.order,
+    this.currentAsOfUsesClock = false,
+    this.maximumSnapshotAge,
   });
 }
 

@@ -16,11 +16,11 @@ import 'package:ocideck/services/openkat/openkat_wizard_service.dart';
 import 'package:ocideck/state/openkat_wizard_controller.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/dialogs/openkat_report_wizard/openkat_report_wizard.dart';
-import 'package:ocideck/widgets/dialogs/openkat_report_wizard/openkat_scenario_card.dart';
 import 'package:ocideck/widgets/dialogs/openkat_report_wizard/openkat_wizard_preview.dart';
 import 'package:ocideck/widgets/dialogs/openkat_report_wizard/openkat_wizard_steps.dart';
 
 import 'openkat_wizard_test_fakes.dart';
+import 'support/openkat_scenario_card.dart';
 
 Future<void> _pumpFrames(
   WidgetTester tester, {
@@ -398,6 +398,7 @@ void main() {
         );
         addTearDown(controller.dispose);
         await controller.prepare('/reports');
+        controller.chooseFamily(descriptor.family);
         controller.chooseScenario(descriptor.id);
         final cve = TextEditingController(text: controller.cveId);
         final title = TextEditingController(text: controller.reportTitle);
@@ -421,8 +422,11 @@ void main() {
         for (final input in descriptor.inputs) {
           final finder = switch (input) {
             OpenKatWizardInputKind.organization => find.text('Organisatie'),
-            OpenKatWizardInputKind.period => find.textContaining(
+            OpenKatWizardInputKind.currentAsOf => find.textContaining(
               'Laatste bruikbare meting',
+            ),
+            OpenKatWizardInputKind.previousAsOf => find.textContaining(
+              'Eerdere bruikbare meting',
             ),
             OpenKatWizardInputKind.cve => find.byKey(
               const ValueKey('openkat-cve-search'),
@@ -527,7 +531,7 @@ void main() {
       expect(find.text('/kapot'), findsOneWidget);
     });
 
-    testWidgets('nieuw rapport toont alle geregistreerde scenario’s', (
+    testWidgets('iedere familie toont al haar geregistreerde recepten', (
       tester,
     ) async {
       _useViewport(tester, const Size(1280, 900));
@@ -546,13 +550,6 @@ void main() {
       );
       await _pumpFrames(tester);
 
-      for (final id in OpenKatWizardScenarioId.values) {
-        expect(
-          find.byKey(ValueKey('openkat-scenario-${id.name}')),
-          findsOneWidget,
-          reason: '${id.name} moet vanuit het register renderen',
-        );
-      }
       expect(find.text('OpenKAT-rapport maken'), findsOneWidget);
       final choices = tester.widget<SingleChildScrollView>(
         find.byKey(const ValueKey('openkat-wizard-choices')),
@@ -563,9 +560,280 @@ void main() {
         tester.getTopLeft(find.text('Wat wilt u laten zien?')).dy,
         greaterThan(tester.getBottomLeft(find.text('Stap 1 van 3')).dy),
       );
+      for (final family in OpenKatReportFamilyId.values) {
+        controller.chooseFamily(family);
+        await tester.pump();
+        final more = find.byKey(const ValueKey('openkat-more-recipes'));
+        final hidden = OpenKatWizardService.scenarioDescriptors
+            .where(
+              (descriptor) =>
+                  descriptor.family == family && !descriptor.recommended,
+            )
+            .firstOrNull;
+        if (hidden != null &&
+            find
+                .byKey(ValueKey('openkat-recipe-${hidden.id.name}'))
+                .evaluate()
+                .isEmpty) {
+          await tester.ensureVisible(more);
+          await tester.tap(more);
+          await tester.pumpAndSettle();
+        }
+        for (final descriptor in OpenKatWizardService.scenarioDescriptors.where(
+          (descriptor) => descriptor.family == family,
+        )) {
+          expect(
+            find.byKey(ValueKey('openkat-recipe-${descriptor.id.name}')),
+            findsOneWidget,
+            reason:
+                '${descriptor.id.name} moet vanuit het familieregister renderen',
+          );
+        }
+      }
     });
 
-    testWidgets('bijwerken vraagt eerst bevestiging en biedt keuzes wijzigen', (
+    testWidgets(
+      'receptkaart heeft één duidelijke keuzerol en werkt met Enter',
+      (tester) async {
+        _useViewport(tester, const Size(1280, 900));
+        final controller = OpenKatWizardController(
+          gateway: FakeOpenKatWizardGateway(),
+        );
+        await tester.pumpWidget(
+          _app(
+            OpenKatReportWizard(
+              controller: controller,
+              initialDirectory: '/reports',
+              chooseDirectory: () async => null,
+              onDirectorySelected: (_) {},
+            ),
+          ),
+        );
+        await _pumpFrames(tester);
+
+        final portfolio = find.byKey(
+          const ValueKey('openkat-recipe-portfolio'),
+        );
+        final semantics = tester.widget<Semantics>(
+          find.descendant(
+            of: portfolio,
+            matching: find.byWidgetPredicate(
+              (widget) =>
+                  widget is Semantics &&
+                  widget.properties.inMutuallyExclusiveGroup == true,
+            ),
+          ),
+        );
+        expect(semantics.properties.button, isTrue);
+        expect(semantics.properties.selected, isTrue);
+        expect(semantics.properties.inMutuallyExclusiveGroup, isTrue);
+
+        final comparison = find.byKey(
+          const ValueKey('openkat-recipe-organizationComparison'),
+        );
+        var focused = false;
+        for (var index = 0; index < 20 && !focused; index++) {
+          await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+          await tester.pump();
+          focused = Focus.of(tester.element(comparison)).hasFocus;
+        }
+        expect(focused, isTrue);
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.pump();
+
+        expect(
+          controller.selectedScenarioId,
+          OpenKatWizardScenarioId.organizationComparison,
+        );
+      },
+    );
+
+    testWidgets('organisatiescope bouwt lui en elke zichtbare keuze werkt', (
+      tester,
+    ) async {
+      _useViewport(tester, const Size(1280, 900));
+      final organizations = [
+        for (var index = 0; index < 500; index++)
+          wizardOrganization(
+            code: 'org-$index',
+            name: 'Organisatie $index',
+            snapshots: [
+              wizardSnapshot(
+                date: DateTime.utc(2026, 7, 1),
+                source: 'org-$index.json',
+              ),
+            ],
+          ),
+      ];
+      final controller = OpenKatWizardController(
+        gateway: FakeOpenKatWizardGateway(
+          prepared: wizardScan(organizations: organizations),
+        ),
+      );
+      addTearDown(controller.dispose);
+      await controller.prepare('/reports');
+      final cve = TextEditingController();
+      final title = TextEditingController();
+      addTearDown(cve.dispose);
+      addTearDown(title.dispose);
+
+      await tester.pumpWidget(
+        _app(
+          SingleChildScrollView(
+            child: OpenKatInputsStep(
+              controller: controller,
+              cveController: cve,
+              titleController: title,
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      expect(
+        find.byType(CheckboxListTile).evaluate().length,
+        lessThan(20),
+        reason: 'alleen zichtbare organisaties mogen widgets worden',
+      );
+      expect(controller.selectedOrganizationCodes, contains('org-0'));
+      await tester.tap(
+        find.byKey(const ValueKey('openkat-organization-org-0')),
+      );
+      await tester.pump();
+      expect(controller.selectedOrganizationCodes, isNot(contains('org-0')));
+    });
+
+    testWidgets('recept zonder invoer toont eerlijk twee stappen', (
+      tester,
+    ) async {
+      _useViewport(tester, const Size(1280, 900));
+      final controller = OpenKatWizardController(
+        gateway: FakeOpenKatWizardGateway(),
+      );
+      await tester.pumpWidget(
+        _app(
+          OpenKatReportWizard(
+            controller: controller,
+            initialDirectory: '/reports',
+            chooseDirectory: () async => null,
+            onDirectorySelected: (_) {},
+          ),
+        ),
+      );
+      await _pumpFrames(tester);
+
+      controller.chooseFamily(OpenKatReportFamilyId.dataQuality);
+      controller.chooseScenario(OpenKatWizardScenarioId.dataQuality);
+      await tester.pump();
+      expect(find.text('Stap 1 van 2'), findsOneWidget);
+
+      controller.next();
+      await tester.pump();
+      expect(find.text('Stap 2 van 2'), findsOneWidget);
+    });
+
+    testWidgets('onbeschikbaar recept biedt direct het importverslag', (
+      tester,
+    ) async {
+      _useViewport(tester, const Size(1280, 900));
+      final prepared = wizardScan(
+        scenarios: [
+          for (final descriptor in OpenKatWizardService.scenarioDescriptors)
+            OpenKatWizardScenarioAvailability(
+              descriptor: descriptor,
+              available: descriptor.id != OpenKatWizardScenarioId.cveExposure,
+              reason: descriptor.id == OpenKatWizardScenarioId.cveExposure
+                  ? OpenKatWizardUnavailableReason.noReliableCveReferences
+                  : null,
+            ),
+        ],
+      );
+      final controller = OpenKatWizardController(
+        gateway: FakeOpenKatWizardGateway(prepared: prepared),
+      );
+      await tester.pumpWidget(
+        _app(
+          OpenKatReportWizard(
+            controller: controller,
+            initialDirectory: '/reports',
+            chooseDirectory: () async => null,
+            onDirectorySelected: (_) {},
+          ),
+        ),
+      );
+      await _pumpFrames(tester);
+
+      controller.chooseFamily(OpenKatReportFamilyId.cves);
+      await tester.pump();
+      final unavailable = find.byKey(
+        const ValueKey('openkat-recipe-cveExposure'),
+      );
+      final recovery = find.descendant(
+        of: unavailable,
+        matching: find.widgetWithText(TextButton, 'Bekijk importverslag'),
+      );
+      expect(recovery, findsOneWidget);
+
+      await tester.ensureVisible(recovery);
+      await tester.tap(recovery);
+      await tester.pumpAndSettle();
+      expect(find.text('OpenKAT-importverslag'), findsOneWidget);
+    });
+
+    testWidgets('CVE-controle noemt alleen werkelijk geraakte organisaties', (
+      tester,
+    ) async {
+      _useViewport(tester, const Size(820, 900));
+      final controller = OpenKatWizardController(
+        gateway: FakeOpenKatWizardGateway(),
+      );
+      await tester.pumpWidget(
+        _app(
+          OpenKatReportWizard(
+            controller: controller,
+            initialDirectory: '/reports',
+            chooseDirectory: () async => null,
+            onDirectorySelected: (_) {},
+          ),
+          size: const Size(820, 900),
+        ),
+      );
+      await _pumpFrames(tester);
+
+      controller.chooseFamily(OpenKatReportFamilyId.cves);
+      controller.chooseScenario(OpenKatWizardScenarioId.cveExposure);
+      controller.next();
+      controller.next();
+      await tester.pump();
+
+      final organizations = find.byKey(
+        const ValueKey('openkat-review-organizations'),
+      );
+      expect(
+        find.descendant(
+          of: organizations,
+          matching: find.text('Een organisatie met een bijzonder lange naam'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: organizations,
+          matching: find.text('Tweede organisatie'),
+        ),
+        findsNothing,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(const ValueKey('openkat-review-language')),
+          matching: find.text('Nederlands'),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('legacy portfolioscope moet eerst bewust worden gecontroleerd', (
       tester,
     ) async {
       _useViewport(tester, const Size(1280, 900));
@@ -596,14 +864,12 @@ void main() {
       await _pumpFrames(tester);
 
       expect(
-        find.textContaining('Uw eigen dia’s en kopieën blijven behouden'),
+        find.byKey(const ValueKey('openkat-recipe-portfolio')),
         findsOneWidget,
       );
-      await tester.tap(find.text('Keuzes wijzigen…'));
-      await _pumpFrames(tester, count: 2);
       expect(
-        find.byKey(const ValueKey('openkat-scenario-portfolio')),
-        findsOneWidget,
+        find.textContaining('Uw eigen dia’s en kopieën blijven behouden'),
+        findsNothing,
       );
     });
 
@@ -623,7 +889,7 @@ void main() {
               id: 'generated',
               type: SlideType.title,
               notes:
-                  '<!-- ocideck_openkat_view: report.management-overview.title -->',
+                  '<!-- ocideck_openkat_view: report.weekly-comparison.org.org-a.title -->',
             ),
           ],
         ),
@@ -667,7 +933,8 @@ void main() {
             Slide(
               id: 'legacy',
               type: SlideType.title,
-              notes: '<!-- ocideck_openkat_view: legacy.view -->',
+              notes:
+                  '<!-- ocideck_openkat_view: report.weekly-comparison.org.org-a.title -->',
             ),
           ],
         ),

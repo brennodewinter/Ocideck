@@ -48,38 +48,198 @@ class OpenKatWizardService implements OpenKatWizardGateway {
     }
   }
 
+  static const _portfolioInputs = {
+    OpenKatWizardInputKind.organizations,
+    OpenKatWizardInputKind.currentAsOf,
+    OpenKatWizardInputKind.language,
+    OpenKatWizardInputKind.title,
+  };
+  static const _portfolioComparisonInputs = {
+    ..._portfolioInputs,
+    OpenKatWizardInputKind.previousAsOf,
+  };
+  static const _organizationInputs = {
+    OpenKatWizardInputKind.organization,
+    OpenKatWizardInputKind.currentAsOf,
+    OpenKatWizardInputKind.language,
+    OpenKatWizardInputKind.title,
+  };
+  static const _organizationComparisonInputs = {
+    ..._organizationInputs,
+    OpenKatWizardInputKind.previousAsOf,
+  };
+
   static const scenarioDescriptors = [
     OpenKatWizardScenarioDescriptor(
       id: OpenKatWizardScenarioId.portfolio,
-      inputs: {
-        OpenKatWizardInputKind.period,
-        OpenKatWizardInputKind.organizations,
-        OpenKatWizardInputKind.language,
-        OpenKatWizardInputKind.title,
-      },
+      family: OpenKatReportFamilyId.organizationsManagement,
+      inputs: _portfolioInputs,
+      previewKind: OpenKatWizardPreviewKind.summary,
       recommended: true,
+      order: 0,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.organizationComparison,
+      family: OpenKatReportFamilyId.organizationsManagement,
+      inputs: _portfolioInputs,
+      previewKind: OpenKatWizardPreviewKind.comparison,
+      recommended: true,
+      order: 1,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.portfolioTrend,
+      family: OpenKatReportFamilyId.organizationsManagement,
+      inputs: _portfolioComparisonInputs,
+      previewKind: OpenKatWizardPreviewKind.trend,
+      recommended: true,
+      order: 2,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.findingTypePrevalence,
+      family: OpenKatReportFamilyId.organizationsManagement,
+      inputs: _portfolioInputs,
+      previewKind: OpenKatWizardPreviewKind.findings,
+      order: 3,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.severityConcentration,
+      family: OpenKatReportFamilyId.organizationsManagement,
+      inputs: _portfolioInputs,
+      previewKind: OpenKatWizardPreviewKind.findings,
+      order: 4,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.controlCoverage,
+      family: OpenKatReportFamilyId.organizationsManagement,
+      inputs: _portfolioInputs,
+      previewKind: OpenKatWizardPreviewKind.controls,
+      order: 5,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.recommendations,
+      family: OpenKatReportFamilyId.organizationsManagement,
+      inputs: _portfolioInputs,
+      previewKind: OpenKatWizardPreviewKind.findings,
+      order: 6,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.organizationOverview,
+      family: OpenKatReportFamilyId.organizationProgress,
+      inputs: _organizationInputs,
+      previewKind: OpenKatWizardPreviewKind.summary,
+      recommended: true,
+      order: 0,
     ),
     OpenKatWizardScenarioDescriptor(
       id: OpenKatWizardScenarioId.organizationProgress,
-      inputs: {
-        OpenKatWizardInputKind.organization,
-        OpenKatWizardInputKind.period,
-        OpenKatWizardInputKind.language,
-        OpenKatWizardInputKind.title,
-      },
+      family: OpenKatReportFamilyId.organizationProgress,
+      inputs: _organizationComparisonInputs,
+      previewKind: OpenKatWizardPreviewKind.trend,
+      recommended: true,
+      order: 1,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.findingLifecycle,
+      family: OpenKatReportFamilyId.organizationProgress,
+      inputs: _organizationComparisonInputs,
+      previewKind: OpenKatWizardPreviewKind.findings,
+      recommended: true,
+      order: 2,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.findingAge,
+      family: OpenKatReportFamilyId.organizationProgress,
+      inputs: _organizationInputs,
+      previewKind: OpenKatWizardPreviewKind.findings,
+      order: 3,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.systemHotspots,
+      family: OpenKatReportFamilyId.organizationProgress,
+      inputs: _organizationInputs,
+      previewKind: OpenKatWizardPreviewKind.systems,
+      order: 4,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.systemChanges,
+      family: OpenKatReportFamilyId.organizationProgress,
+      inputs: _organizationComparisonInputs,
+      previewKind: OpenKatWizardPreviewKind.systems,
+      order: 5,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.controlChanges,
+      family: OpenKatReportFamilyId.organizationProgress,
+      inputs: _organizationComparisonInputs,
+      previewKind: OpenKatWizardPreviewKind.controls,
+      order: 6,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.assetInventory,
+      family: OpenKatReportFamilyId.organizationProgress,
+      inputs: _organizationInputs,
+      previewKind: OpenKatWizardPreviewKind.systems,
+      order: 7,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.monitoringCoverage,
+      family: OpenKatReportFamilyId.organizationProgress,
+      inputs: _organizationInputs,
+      previewKind: OpenKatWizardPreviewKind.monitoring,
+      order: 8,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.monitoringChanges,
+      family: OpenKatReportFamilyId.organizationProgress,
+      inputs: _organizationComparisonInputs,
+      previewKind: OpenKatWizardPreviewKind.monitoring,
+      order: 9,
     ),
     OpenKatWizardScenarioDescriptor(
       id: OpenKatWizardScenarioId.cveExposure,
+      family: OpenKatReportFamilyId.cves,
       inputs: {
         OpenKatWizardInputKind.cve,
-        OpenKatWizardInputKind.period,
+        OpenKatWizardInputKind.currentAsOf,
         OpenKatWizardInputKind.language,
         OpenKatWizardInputKind.title,
       },
+      previewKind: OpenKatWizardPreviewKind.cve,
+      recommended: true,
+      order: 0,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.cveLandscape,
+      family: OpenKatReportFamilyId.cves,
+      inputs: _portfolioInputs,
+      previewKind: OpenKatWizardPreviewKind.cve,
+      recommended: true,
+      order: 1,
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.cveChanges,
+      family: OpenKatReportFamilyId.cves,
+      inputs: _portfolioComparisonInputs,
+      previewKind: OpenKatWizardPreviewKind.cve,
+      order: 2,
     ),
     OpenKatWizardScenarioDescriptor(
       id: OpenKatWizardScenarioId.dataQuality,
+      family: OpenKatReportFamilyId.dataQuality,
       inputs: {OpenKatWizardInputKind.language, OpenKatWizardInputKind.title},
+      previewKind: OpenKatWizardPreviewKind.accountability,
+      recommended: true,
+      order: 0,
+      currentAsOfUsesClock: true,
+      maximumSnapshotAge: Duration(days: 30),
+    ),
+    OpenKatWizardScenarioDescriptor(
+      id: OpenKatWizardScenarioId.measurementAccountability,
+      family: OpenKatReportFamilyId.dataQuality,
+      inputs: _portfolioInputs,
+      previewKind: OpenKatWizardPreviewKind.accountability,
+      recommended: true,
+      order: 1,
     ),
   ];
 
@@ -204,36 +364,110 @@ class OpenKatWizardService implements OpenKatWizardGateway {
     DateTime currentAsOf,
     List<OpenKatWizardCveOption> cves,
   ) {
+    final engineDescriptor = engine.registry.descriptors.firstWhere(
+      (item) => item.id == descriptor.id.reportScenarioId,
+    );
+    final organizationScope = descriptor.inputs.contains(
+      OpenKatWizardInputKind.organization,
+    );
+    final requiresPrevious = descriptor.inputs.contains(
+      OpenKatWizardInputKind.previousAsOf,
+    );
+    final organization = organizationScope
+        ? organizations
+                  .where(
+                    (item) =>
+                        item.snapshots
+                            .where((snapshot) => snapshot.usable)
+                            .length >=
+                        (requiresPrevious ? 2 : 1),
+                  )
+                  .firstOrNull ??
+              organizations
+                  .where(
+                    (item) => item.snapshots.any((snapshot) => snapshot.usable),
+                  )
+                  .firstOrNull
+        : null;
+    final scope = organization == null
+        ? const OpenKatReportScope.portfolio()
+        : OpenKatReportScope.organization(organization.code);
+    final previousAsOf = requiresPrevious
+        ? _previousAsOf(organizations, organization, currentAsOf)
+        : null;
     final assessment = engine.assessScenarioCapabilities(
       organizations,
       OpenKatReportRequest(
         scenarioId: descriptor.id.reportScenarioId,
-        scope: const OpenKatReportScope.portfolio(),
+        scope: scope,
         currentAsOf: currentAsOf,
+        previousAsOf: previousAsOf,
         cveId: cves.isEmpty ? null : cves.first.id,
       ),
     );
     final missing = assessment.missingRequiredCapabilities;
     final inputAvailable =
-        descriptor.id != OpenKatWizardScenarioId.cveExposure || cves.isNotEmpty;
+        !descriptor.inputs.contains(OpenKatWizardInputKind.cve) ||
+        cves.isNotEmpty;
+    final scopeAvailable = engineDescriptor.scopes.contains(scope.kind);
+    final previousAvailable = !requiresPrevious || previousAsOf != null;
     final available =
-        assessment.registered && missing.isEmpty && inputAvailable;
-    final reason = switch (descriptor.id) {
-      OpenKatWizardScenarioId.organizationProgress
-          when missing.contains(OpenKatReportCapability.historicalSnapshots) =>
-        OpenKatWizardUnavailableReason.oneMeasurement,
-      OpenKatWizardScenarioId.cveExposure
-          when cves.isEmpty ||
-              missing.contains(OpenKatReportCapability.reliableCveReferences) =>
-        OpenKatWizardUnavailableReason.noReliableCveReferences,
-      _ => null,
-    };
+        assessment.registered &&
+        missing.isEmpty &&
+        inputAvailable &&
+        scopeAvailable &&
+        previousAvailable;
+    final reason = !scopeAvailable
+        ? OpenKatWizardUnavailableReason.unsupportedScope
+        : !previousAvailable
+        ? OpenKatWizardUnavailableReason.oneMeasurement
+        : !inputAvailable
+        ? OpenKatWizardUnavailableReason.noReliableCveReferences
+        : missing.isEmpty
+        ? null
+        : _unavailableReason(missing.first);
     return OpenKatWizardScenarioAvailability(
       descriptor: descriptor,
       available: available,
       reason: reason,
     );
   }
+
+  DateTime? _previousAsOf(
+    List<OpenKatOrganization> organizations,
+    OpenKatOrganization? organization,
+    DateTime currentAsOf,
+  ) {
+    final dates = [
+      for (final item in organization == null ? organizations : [organization])
+        for (final snapshot in item.snapshots)
+          if (snapshot.usable && snapshot.reportDate.isBefore(currentAsOf))
+            snapshot.reportDate,
+    ]..sort();
+    return dates.lastOrNull;
+  }
+
+  OpenKatWizardUnavailableReason _unavailableReason(
+    OpenKatReportCapability capability,
+  ) => switch (capability) {
+    OpenKatReportCapability.historicalSnapshots =>
+      OpenKatWizardUnavailableReason.oneMeasurement,
+    OpenKatReportCapability.reliableCveReferences =>
+      OpenKatWizardUnavailableReason.noReliableCveReferences,
+    OpenKatReportCapability.reliableMonitoringStatus =>
+      OpenKatWizardUnavailableReason.noReliableMonitoringStatus,
+    OpenKatReportCapability.reliableOpenedAt =>
+      OpenKatWizardUnavailableReason.noReliableOpenedAt,
+    OpenKatReportCapability.findingLifecycle =>
+      OpenKatWizardUnavailableReason.noStableFindingIdentity,
+    OpenKatReportCapability.comparableMeasurementCoverage =>
+      OpenKatWizardUnavailableReason.noComparableCoverage,
+    OpenKatReportCapability.controlsWithDenominator =>
+      OpenKatWizardUnavailableReason.noControlDenominators,
+    OpenKatReportCapability.stableAssetIdentity =>
+      OpenKatWizardUnavailableReason.noStableAssetIdentity,
+    _ => OpenKatWizardUnavailableReason.missingRequiredData,
+  };
 
   /// Bouwt één gebeurtenisindex en past per meting alleen het veranderde
   /// organisatietotaal aan. De eerdere implementatie doorliep op iedere datum

@@ -1793,6 +1793,181 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
+      'Ħarsa ġenerali tal-ġestjoni wiesgħa iżda fattwali b\'mumenti ta\' kejl traċċabbli.',
+  'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
+      'Jikklassifika mingħajr punteġġ totali u juri kejl nieqes separatament.',
+  'Laat zien hoe aantallen findings veranderden en welke organisaties daaraan bijdroegen.':
+      'Juri l-għadd tas-severità, il-kontributuri, u l-kejl \'il quddiem bil-mument.',
+  'Laat zien welke soorten problemen bij de meeste organisaties en systemen voorkomen.':
+      'Jorganizza sejba ta\' tipi minn organizzazzjonijiet, sistemi u osservazzjonijiet affettwati.',
+  'Laat per organisatie zien hoeveel findings critical of high zijn.':
+      'Juri numri kritiċi/għoli mingħajr ebda użin imfassal.',
+  'Laat per control zien welk deel voldoet, maar alleen als het totaal bekend is.':
+      'Juri numeratur, denominatur u perċentwali affidabbli biss.',
+  'Bundelt de aanbevelingen uit OpenKAT zonder er zelf prioriteit aan te geven.':
+      'Gruppi rakkomandazzjonijiet letterali minn OpenKAT mingħajr il-prijorità tagħhom stess.',
+  'Laat zien welke findings nieuw, terug of niet meer gezien zijn.':
+      'Tiddistingwi ġodda, ġodda u li m\'għadhomx osservati.',
+  'Laat zien welke findings het langst openstaan als de begindatum bekend is.':
+      'Juża biss dati affidabbli tal-ewwel osservazzjoni.',
+  'Laat zien op welke systemen de meeste en ernstigste findings staan.':
+      'Jikklassifika sistemi b\'meters separati tas-severità.',
+  'Laat per systeem zien of het aantal findings steeg of daalde.':
+      'Juri valuri delta individwali mingħajr punteġġ peżat.',
+  'Vergelijkt controls alleen als beide metingen dezelfde reikwijdte hebben.':
+      'Iqabbel in-numeratur u d-denominatur b\'kopertura komparabbli b\'mod dimostrabbli.',
+  'Geeft de systemen, hostnamen en IP-adressen uit de gekozen meting weer.':
+      'Inventarji ta\' sistemi ppruvati mis-sors, ismijiet tal-hosts u indirizzi IP.',
+  'Laat alleen monitoringveranderingen zien die de bron bewijst.':
+      'Juri biss mutazzjonijiet ta\' monitoraġġ ippruvati b\'mod espliċitu.',
+  'Laat zien bij welke organisaties en systemen deze CVE is aangetroffen.':
+      'Juri organizzazzjonijiet u sistemi madwar link CVE wieħed affidabbli.',
+  'Laat zien welke CVE’s bij de meeste organisaties en systemen voorkomen.':
+      'Jikklassifika CVEs b\'deduplikazzjoni espliċita.',
+  'Laat zien welke CVE’s nieuw, terug of niet meer gezien zijn.':
+      'Tiddistingwi CVEs ġodda, ġodda u li ma għadhomx osservati.',
+  'Toont de gebruikte meetdatums, bronbestanden en technische bronkenmerken.':
+      'Kontijiet għal dati ewlenin, fajls tas-sors, adapters u hashes tas-sors.',
+  'Vergelijk organisaties en breng portfolio-aandachtspunten in beeld.':
+      'Qabbel l-organizzazzjonijiet u identifika l-punti tal-portafoll ta \'interess.',
+  'Bekijk de actuele stand of aantoonbare veranderingen bij één organisatie.':
+      'Ara l-istatus attwali jew il-bidliet li jistgħu jintwerew f\'organizzazzjoni waħda.',
+  'Onderzoek betrouwbare CVE-koppelingen in de gekozen metingen.':
+      'Investiga links CVE affidabbli fil-kejl magħżul.',
+  'Leg vast welke metingen en bronbestanden het rapport werkelijk gebruikt.':
+      'Irreġistra liema kejl u fajls tas-sors ir-rapport fil-fatt juża.',
+  'Wat is het managementbeeld over de gekozen organisaties?':
+      'X\'inhi l-fehma tal-ġestjoni tal-organizzazzjonijiet magħżula?',
+  'Waar worden de meeste en minste findings waargenomen?':
+      'Fejn huma l-aktar u l-inqas sejbiet osservati?',
+  'Hoe ontwikkelt het portfolio zich over de tijd?':
+      'Kif jiżviluppa l-portafoll maż-żmien?',
+  'Welke problemen komen bij de meeste organisaties voor?':
+      'Liema problemi jseħħu fil-biċċa l-kbira tal-organizzazzjonijiet?',
+  'Waar concentreren de ernstigste findings zich?':
+      'Fejn huma kkonċentrati l-aktar sejbiet serji?',
+  'Welke controls lopen achter?': 'Liema kontrolli għadhom lura?',
+  'Welke maatregelen adviseert OpenKAT het vaakst?':
+      'OpenKAT liema miżuri jirrakkomanda l-aktar spiss?',
+  'Hoe staat deze organisatie er nu voor?':
+      'X\'inhu l-istatus attwali ta\' din l-organizzazzjoni?',
+  'Wat veranderde er sinds de vorige meting?':
+      'X\'inbidel mill-kejl preċedenti?',
+  'Welke findings zijn nieuw of niet meer waargenomen?':
+      'Liema sejbiet huma ġodda jew m\'għadhomx osservati?',
+  'Welke findings staan het langst open?':
+      'Liema sejbiet ilhom miftuħa l-itwal?',
+  'Op welke systemen worden de meeste findings waargenomen?':
+      'Fuq liema sistemi huma osservati l-aktar sejbiet?',
+  'Welke systemen verbeterden of verslechterden?':
+      'Liema sistemi tjiebu jew iddeterjoraw?',
+  'Welke controls verbeterden of verslechterden?':
+      'Liema kontrolli tjiebu jew iddeterjoraw?',
+  'Welke systemen zijn in de metingen opgenomen?':
+      'Liema sistemi huma inklużi fil-kejl?',
+  'Welke assets zijn aantoonbaar in monitoring?':
+      'Liema assi jistgħu jintwerew fil-monitoraġġ?',
+  'Welke monitoringstatussen veranderden?':
+      'Liema status ta\' monitoraġġ inbidlu?',
+  'Wie is geraakt door deze CVE?': 'Min hu affettwat minn dan is-CVE?',
+  'Welke CVE’s raken de meeste organisaties?':
+      'Liema CVEs jaffettwaw il-biċċa l-kbira tal-organizzazzjonijiet?',
+  'Welke CVE’s zijn nieuw of niet meer waargenomen?':
+      'Liema CVEs huma ġodda jew m\'għadhomx osservati?',
+  'Welke meetgegevens ontbreken of zijn verouderd?':
+      'Liema data tal-kejl hija nieqsa jew skaduta?',
+  'Op welke gegevens is dit rapport gebaseerd?':
+      'Fuq liema data huwa bbażat dan ir-rapport?',
+  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
+      'Ħarsa ġenerali tal-ġestjoni wiesgħa iżda fattwali b\'mumenti ta\' kejl traċċabbli.',
+  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
+      'Jikklassifika mingħajr punteġġ totali u juri kejl nieqes separatament.',
+  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
+      'Juri l-għadd tas-severità, il-kontributuri, u l-kejl \'il quddiem bil-mument.',
+  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
+      'Jorganizza sejba ta\' tipi minn organizzazzjonijiet, sistemi u osservazzjonijiet affettwati.',
+  'Toont critical/high-aantallen zonder zelfbedachte weging.':
+      'Juri numri kritiċi/għoli mingħajr ebda użin imfassal.',
+  'Toont teller, noemer en alleen betrouwbare percentages.':
+      'Juri numeratur, denominatur u perċentwali affidabbli biss.',
+  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
+      'Gruppi rakkomandazzjonijiet letterali minn OpenKAT mingħajr il-prijorità tagħhom stess.',
+  'Een gericht actueel beeld van één organisatie en haar meetdatum.':
+      'Immaġni attwali mmirata ta\' organizzazzjoni waħda u d-data tal-kejl tagħha.',
+  'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
+      'Tqabbel żewġ mumenti ta \'kejl magħżula fi ħdan organizzazzjoni waħda.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
+      'Tiddistingwi ġodda, ġodda u li m\'għadhomx osservati.',
+  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
+      'Juża biss dati affidabbli tal-ewwel osservazzjoni.',
+  'Rangschikt systemen met afzonderlijke severitytellers.':
+      'Jikklassifika sistemi b\'meters separati tas-severità.',
+  'Toont afzonderlijke deltawaarden zonder gewogen score.':
+      'Juri valuri delta individwali mingħajr punteġġ peżat.',
+  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
+      'Iqabbel in-numeratur u d-denominatur b\'kopertura komparabbli b\'mod dimostrabbli.',
+  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
+      'Inventarji ta\' sistemi ppruvati mis-sors, ismijiet tal-hosts u indirizzi IP.',
+  'Scheidt gemonitord, niet gemonitord en onbekend.':
+      'Tissepara mmonitorjati, mhux immonitorjati u mhux magħrufa.',
+  'Toont alleen expliciet bewezen monitoringmutaties.':
+      'Juri biss mutazzjonijiet ta\' monitoraġġ ippruvati b\'mod espliċitu.',
+  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
+      'Juri organizzazzjonijiet u sistemi madwar link CVE wieħed affidabbli.',
+  'Rangschikt CVE’s met expliciete deduplicatie.':
+      'Jikklassifika CVEs b\'deduplikazzjoni espliċita.',
+  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
+      'Tiddistingwi CVEs ġodda, ġodda u li ma għadhomx osservati.',
+  'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
+      'Juri kejl nieqes, skadut u attwalment użat.',
+  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
+      'Kontijiet għal dati ewlenin, fajls tas-sors, adapters u hashes tas-sors.',
+  'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
+      'Għadu mhux disponibbli: is-sors ma jipprovax l-istatus ta\' monitoraġġ għall-assi kollha.',
+  'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
+      'Għadu mhux disponibbli: mhux kull sejba għandha data affidabbli tal-ewwel osservazzjoni.',
+  'Nog niet beschikbaar: de bron bewijst geen stabiele identiteit voor alle findings.':
+      'Għadu mhux disponibbli: is-sors ma jipprovax identità stabbli għas-sejbiet kollha.',
+  'Nog niet beschikbaar: vergelijkbare meetdekking is niet aangetoond.':
+      'Għadu mhux disponibbli: kopertura ta\' kejl komparabbli ma ġietx murija.',
+  'Nog niet beschikbaar: betrouwbare controlnoemers ontbreken.':
+      'Għadu mhux disponibbli: denominaturi ta\' kontroll affidabbli huma neqsin.',
+  'Nog niet beschikbaar: stabiele assetidentiteit is niet aangetoond.':
+      'Għadu mhux disponibbli: identità stabbli tal-assi ma ġietx murija.',
+  'Dit rapport ondersteunt de gekozen organisatiescope niet.':
+      'Dan ir-rapport ma jappoġġjax l-ambitu organizzattiv magħżul.',
+  'De gekozen bron bevat niet genoeg betrouwbare gegevens voor dit rapport.':
+      'Is-sors magħżul ma fihx biżżejjed dejta affidabbli għal dan ir-rapport.',
+  'Kerncijfers en gemeten bereik': 'Iċ-ċifri ewlenin u l-firxa mkejla',
+  'Organisaties vergelijken': 'Qabbel organizzazzjonijiet',
+  'Concentratie van critical/high findings':
+      'Konċentrazzjoni ta\' sejbiet kritiċi/għoli',
+  'Portfolioverloop per meetmoment':
+      'Ħarsa ġenerali tal-portafoll għal kull mument tal-kejl',
+  'Meest voorkomende findingtypen': 'Tipi ta \'sejba l-aktar komuni',
+  'Bron- en meetverantwoording': 'Responsabbiltà tas-sors u tal-kejl',
+  'Nieuwe en niet meer waargenomen findings':
+      'Sejbiet ġodda u mhux aktar osservati',
+  'Langst waargenomen findings': 'L-itwal sejbiet osservati',
+  'Systemen met de meeste findings': 'Sistemi bl-aktar sejbiet',
+  'Veranderingen per systeem': 'Bidliet għal kull sistema',
+  'Blootstelling aan één CVE': 'Espożizzjoni għal CVE wieħed',
+  'CVE’s over organisaties': 'CVEs dwar organizzazzjonijiet',
+  'Nieuwe en niet meer waargenomen CVE’s':
+      'CVEs ġodda u li m\'għadhomx osservati',
+  'Controldekking': 'Kopertura tal-kontroll',
+  'Controlveranderingen': 'Tibdil tal-kontroll',
+  'Aanbevelingen uit OpenKAT': 'Rakkomandazzjonijiet minn OpenKAT',
+  'Assetinventaris': 'Inventarju tal-assi',
+  'Monitoringdekking': 'Monitoraġġ ta\' kopertura',
+  'Actueel organisatiebeeld': 'Stampa organizzattiva attwali',
+  'Kies eerst het onderwerp en daarna de vraag die het rapport moet beantwoorden.':
+      'L-ewwel agħżel is-suġġett u mbagħad il-mistoqsija li r-rapport għandu jwieġeb.',
+  'Onderwerp': 'Suġġett',
+  'Welk rapport beantwoordt uw vraag?':
+      'Liema rapport iwieġeb il-mistoqsija tiegħek?',
+  'Meer rapportvragen': 'Aktar mistoqsijiet dwar ir-rapport',
   'Welke systemen zijn kwetsbaar voor een CVE?':
       'Liema sistemi huma vulnerabbli għal CVE?',
   'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':

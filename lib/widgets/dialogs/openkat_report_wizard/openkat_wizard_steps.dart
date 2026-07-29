@@ -1,12 +1,38 @@
 import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../../models/openkat/openkat_models.dart';
 import '../../../models/openkat/openkat_reporting_models.dart';
 import '../../../models/openkat/openkat_wizard_models.dart';
 import '../../../state/openkat_wizard_controller.dart';
 import '../../../theme/app_theme.dart';
-import 'openkat_scenario_card.dart';
+import 'openkat_recipe_picker.dart';
 import 'openkat_wizard_strings.dart';
+
+typedef OpenKatWizardInputRenderer =
+    Widget Function(
+      OpenKatWizardController controller,
+      TextEditingController cveController,
+      TextEditingController titleController,
+    );
+
+final Map<OpenKatWizardInputKind, OpenKatWizardInputRenderer>
+openKatWizardInputRenderers = {
+  OpenKatWizardInputKind.organization: (controller, _, _) =>
+      _OrganizationInputs(controller: controller),
+  OpenKatWizardInputKind.organizations: (controller, _, _) =>
+      _OrganizationsInputs(controller: controller),
+  OpenKatWizardInputKind.currentAsOf: (controller, _, _) =>
+      _CurrentDateInput(controller: controller),
+  OpenKatWizardInputKind.previousAsOf: (controller, _, _) =>
+      _PreviousDateInput(controller: controller),
+  OpenKatWizardInputKind.cve: (controller, cveController, _) =>
+      _CveInputs(controller: controller, textController: cveController),
+  OpenKatWizardInputKind.language: (controller, _, _) =>
+      _LanguageInput(controller: controller),
+  OpenKatWizardInputKind.title: (controller, _, titleController) =>
+      _TitleInput(controller: controller, textController: titleController),
+};
 
 class OpenKatSourceGate extends StatelessWidget {
   final OpenKatWizardController controller;
@@ -140,101 +166,10 @@ class OpenKatScenarioStep extends StatelessWidget {
   const OpenKatScenarioStep({super.key, required this.controller});
 
   @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final scan = controller.scan!;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          l10n.d('Wat wilt u laten zien?'),
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
-            fontWeight: FontWeight.w800,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          l10n.d(
-            'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.',
-          ),
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
-        ),
-        const SizedBox(height: 16),
-        _InfoSurface(
-          icon: Icons.fact_check_outlined,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(_scanSummary(context, scan)),
-              const SizedBox(height: 4),
-              TextButton(
-                onPressed: () => showOpenKatImportReport(context, scan),
-                child: Text(l10n.d('Bekijk importverslag')),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 20),
-        LayoutBuilder(
-          builder: (context, constraints) {
-            final columns = constraints.maxWidth >= 620 ? 2 : 1;
-            final width = (constraints.maxWidth - (columns - 1) * 12) / columns;
-            return Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: [
-                for (final scenario in scan.scenarios)
-                  SizedBox(
-                    width: width,
-                    child: OpenKatScenarioCard(
-                      scenario: scenario,
-                      facts: scan.preview,
-                      title: openKatScenarioTitle(l10n, scenario.descriptor.id),
-                      description: openKatScenarioDescription(
-                        l10n,
-                        scenario.descriptor.id,
-                      ),
-                      recommendedLabel: l10n.d('Aanbevolen'),
-                      selectedLabel: l10n.d('Geselecteerd'),
-                      unavailableReason: scenario.reason == null
-                          ? null
-                          : openKatUnavailableReason(l10n, scenario.reason!),
-                      selected:
-                          controller.selectedScenarioId ==
-                          scenario.descriptor.id,
-                      onSelected: controller.chooseScenario,
-                    ),
-                  ),
-              ],
-            );
-          },
-        ),
-      ],
-    );
-  }
-
-  String _scanSummary(BuildContext context, OpenKatWizardScan scan) {
-    final l10n = context.l10n;
-    final dates = MaterialLocalizations.of(context);
-    return l10n
-        .d(
-          '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.',
-        )
-        .replaceAll('{reports}', '${scan.preview.reportCount}')
-        .replaceAll('{organizations}', '${scan.preview.organizationCount}')
-        .replaceAll(
-          '{firstDate}',
-          dates.formatMediumDate(scan.earliestMeasurement!),
-        )
-        .replaceAll(
-          '{lastDate}',
-          dates.formatMediumDate(scan.latestMeasurement!),
-        )
-        .replaceAll('{skipped}', '${scan.preview.skippedCount}');
-  }
+  Widget build(BuildContext context) => OpenKatRecipePicker(
+    controller: controller,
+    inspectImport: () => showOpenKatImportReport(context, controller.scan!),
+  );
 }
 
 class OpenKatInputsStep extends StatelessWidget {
@@ -254,17 +189,17 @@ class OpenKatInputsStep extends StatelessWidget {
     final l10n = context.l10n;
     final id = controller.selectedScenarioId!;
     final descriptor = controller.selectedScenario!.descriptor;
-    final inputRegistry = <OpenKatWizardInputKind, Widget>{
-      OpenKatWizardInputKind.organization: _OrganizationInputs(
-        controller: controller,
-      ),
-      OpenKatWizardInputKind.period: _PeriodInputs(controller: controller),
-      OpenKatWizardInputKind.cve: _CveInputs(
-        controller: controller,
-        textController: cveController,
-      ),
-    };
-    final primaryInputs = descriptor.inputs.where(inputRegistry.containsKey);
+    Widget render(OpenKatWizardInputKind input) =>
+        openKatWizardInputRenderers[input]!(
+          controller,
+          cveController,
+          titleController,
+        );
+    final primaryInputs = descriptor.inputs.where(
+      (input) =>
+          input != OpenKatWizardInputKind.language &&
+          input != OpenKatWizardInputKind.title,
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -284,7 +219,7 @@ class OpenKatInputsStep extends StatelessWidget {
         ),
         const SizedBox(height: 22),
         for (final input in primaryInputs) ...[
-          inputRegistry[input]!,
+          render(input),
           const SizedBox(height: 14),
         ],
         const SizedBox(height: 18),
@@ -299,58 +234,15 @@ class OpenKatInputsStep extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 16),
               child: Column(
                 children: [
-                  DropdownButtonFormField<OpenKatReportLanguage>(
-                    initialValue: controller.language,
-                    decoration: InputDecoration(labelText: l10n.d('Taal')),
-                    items: [
-                      DropdownMenuItem(
-                        value: OpenKatReportLanguage.dutch,
-                        child: Text(l10n.d('Nederlands')),
-                      ),
-                      DropdownMenuItem(
-                        value: OpenKatReportLanguage.english,
-                        child: Text(l10n.d('Engels')),
-                      ),
-                    ],
-                    onChanged: (value) {
-                      if (value != null) controller.chooseLanguage(value);
-                    },
-                  ),
-                  const SizedBox(height: 14),
-                  TextField(
-                    controller: titleController,
-                    onChanged: controller.setTitle,
-                    decoration: InputDecoration(
-                      labelText: l10n.d('Rapporttitel'),
-                      hintText: openKatScenarioTitle(l10n, id),
-                    ),
-                  ),
                   if (descriptor.inputs.contains(
-                    OpenKatWizardInputKind.organizations,
+                    OpenKatWizardInputKind.language,
+                  ))
+                    render(OpenKatWizardInputKind.language),
+                  if (descriptor.inputs.contains(
+                    OpenKatWizardInputKind.title,
                   )) ...[
-                    const SizedBox(height: 18),
-                    Align(
-                      alignment: AlignmentDirectional.centerStart,
-                      child: Text(
-                        l10n.d('Organisaties kiezen'),
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    for (final option in controller.scan!.organizationOptions)
-                      CheckboxListTile(
-                        contentPadding: EdgeInsets.zero,
-                        controlAffinity: ListTileControlAffinity.leading,
-                        value: controller.selectedOrganizationCodes.contains(
-                          option.code,
-                        ),
-                        onChanged: (_) =>
-                            controller.toggleOrganization(option.code),
-                        title: Text(option.name),
-                        subtitle: Text(
-                          '${option.measurementCount} ${l10n.d('metingen')}',
-                        ),
-                      ),
+                    const SizedBox(height: 14),
+                    render(OpenKatWizardInputKind.title),
                   ],
                 ],
               ),
@@ -362,40 +254,50 @@ class OpenKatInputsStep extends StatelessWidget {
   }
 }
 
-class _PeriodInputs extends StatelessWidget {
+class _OrganizationsInputs extends StatelessWidget {
   final OpenKatWizardController controller;
 
-  const _PeriodInputs({required this.controller});
+  const _OrganizationsInputs({required this.controller});
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return switch (controller.selectedScenarioId!) {
-      OpenKatWizardScenarioId.portfolio => Column(
-        children: [
-          _InfoSurface(
-            icon: Icons.groups_outlined,
-            child: Text(
-              '${controller.selectedOrganizationCodes.length} '
-              '${l10n.d('organisaties geselecteerd')}',
-            ),
-          ),
-          const SizedBox(height: 12),
-          _DatePair(controller: controller),
-        ],
-      ),
-      OpenKatWizardScenarioId.organizationProgress => _DatePair(
-        controller: controller,
-      ),
-      OpenKatWizardScenarioId.cveExposure => _InfoSurface(
-        icon: Icons.event_available_outlined,
-        child: Text(
-          '${l10n.d('Laatste bruikbare meting')}: '
-          '${MaterialLocalizations.of(context).formatMediumDate(controller.currentAsOf!)}',
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.d('Organisaties kiezen'),
+          style: Theme.of(context).textTheme.titleSmall,
         ),
-      ),
-      OpenKatWizardScenarioId.dataQuality => const SizedBox.shrink(),
-    };
+        const SizedBox(height: 6),
+        SizedBox(
+          height: controller.scan!.organizationOptions.length < 6
+              ? controller.scan!.organizationOptions.length * 64
+              : 320,
+          child: ListView.builder(
+            key: const ValueKey('openkat-organizations-list'),
+            itemCount: controller.scan!.organizationOptions.length,
+            itemExtent: 64,
+            itemBuilder: (context, index) {
+              final option = controller.scan!.organizationOptions[index];
+              return CheckboxListTile(
+                key: ValueKey('openkat-organization-${option.code}'),
+                contentPadding: EdgeInsets.zero,
+                controlAffinity: ListTileControlAffinity.leading,
+                value: controller.selectedOrganizationCodes.contains(
+                  option.code,
+                ),
+                onChanged: (_) => controller.toggleOrganization(option.code),
+                title: Text(option.name),
+                subtitle: Text(
+                  '${option.measurementCount} ${l10n.d('metingen')}',
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
   }
 }
 
@@ -409,6 +311,8 @@ class _OrganizationInputs extends StatelessWidget {
     final l10n = context.l10n;
     final scan = controller.scan!;
     final dates = MaterialLocalizations.of(context);
+    final requiresPrevious = controller.selectedScenario!.descriptor.inputs
+        .contains(OpenKatWizardInputKind.previousAsOf);
     return DropdownButtonFormField<String>(
       initialValue: controller.selectedOrganizationCode,
       decoration: InputDecoration(labelText: l10n.d('Organisatie')),
@@ -417,7 +321,7 @@ class _OrganizationInputs extends StatelessWidget {
         for (final option in scan.organizationOptions)
           DropdownMenuItem(
             value: option.code,
-            enabled: option.measurementCount > 1,
+            enabled: !requiresPrevious || option.measurementCount > 1,
             child: Text(
               '${option.name} · '
               '${dates.formatMediumDate(option.latestMeasurement)} · '
@@ -432,19 +336,45 @@ class _OrganizationInputs extends StatelessWidget {
   }
 }
 
-class _DatePair extends StatelessWidget {
+class _CurrentDateInput extends StatelessWidget {
   final OpenKatWizardController controller;
 
-  const _DatePair({required this.controller});
+  const _CurrentDateInput({required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final formatter = MaterialLocalizations.of(context);
+    return _InfoSurface(
+      icon: Icons.event_available_outlined,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(l10n.d('Laatste bruikbare meting')),
+          const SizedBox(height: 3),
+          Text(
+            formatter.formatMediumDate(controller.currentAsOf!),
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PreviousDateInput extends StatelessWidget {
+  final OpenKatWizardController controller;
+
+  const _PreviousDateInput({required this.controller});
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final formatter = MaterialLocalizations.of(context);
     final scan = controller.scan!;
-    final selected =
-        controller.selectedScenarioId ==
-            OpenKatWizardScenarioId.organizationProgress
+    final organizationInput = controller.selectedScenario!.descriptor.inputs
+        .contains(OpenKatWizardInputKind.organization);
+    final selected = organizationInput
         ? controller.selectedOrganizationCode
         : null;
     final dates = selected == null
@@ -457,52 +387,69 @@ class _DatePair extends StatelessWidget {
               .toSet()
               .toList();
     dates.sort();
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final current = _InfoSurface(
-          icon: Icons.event_available_outlined,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(l10n.d('Laatste bruikbare meting')),
-              const SizedBox(height: 3),
-              Text(
-                formatter.formatMediumDate(controller.currentAsOf!),
-                style: const TextStyle(fontWeight: FontWeight.w700),
-              ),
-            ],
+    return DropdownButtonFormField<DateTime>(
+      initialValue: controller.previousAsOf,
+      decoration: InputDecoration(
+        labelText: l10n.d('Eerdere bruikbare meting'),
+      ),
+      items: [
+        for (final date in dates.where(
+          (date) => date.isBefore(controller.currentAsOf!),
+        ))
+          DropdownMenuItem(
+            value: date,
+            child: Text(formatter.formatMediumDate(date)),
           ),
-        );
-        final previous = DropdownButtonFormField<DateTime>(
-          initialValue: controller.previousAsOf,
-          decoration: InputDecoration(
-            labelText: l10n.d('Eerdere bruikbare meting'),
-          ),
-          items: [
-            for (final date in dates.where(
-              (date) => date.isBefore(controller.currentAsOf!),
-            ))
-              DropdownMenuItem(
-                value: date,
-                child: Text(formatter.formatMediumDate(date)),
-              ),
-          ],
-          onChanged: controller.choosePreviousDate,
-        );
-        if (constraints.maxWidth < 560 ||
-            MediaQuery.textScalerOf(context).scale(1) > 1.4) {
-          return Column(
-            children: [current, const SizedBox(height: 12), previous],
-          );
-        }
-        return Row(
-          children: [
-            Expanded(child: current),
-            const SizedBox(width: 12),
-            Expanded(child: previous),
-          ],
-        );
+      ],
+      onChanged: controller.choosePreviousDate,
+    );
+  }
+}
+
+class _LanguageInput extends StatelessWidget {
+  final OpenKatWizardController controller;
+
+  const _LanguageInput({required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return DropdownButtonFormField<OpenKatReportLanguage>(
+      initialValue: controller.language,
+      decoration: InputDecoration(labelText: l10n.d('Taal')),
+      items: [
+        DropdownMenuItem(
+          value: OpenKatReportLanguage.dutch,
+          child: Text(l10n.d('Nederlands')),
+        ),
+        DropdownMenuItem(
+          value: OpenKatReportLanguage.english,
+          child: Text(l10n.d('Engels')),
+        ),
+      ],
+      onChanged: (value) {
+        if (value != null) controller.chooseLanguage(value);
       },
+    );
+  }
+}
+
+class _TitleInput extends StatelessWidget {
+  final OpenKatWizardController controller;
+  final TextEditingController textController;
+
+  const _TitleInput({required this.controller, required this.textController});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return TextField(
+      controller: textController,
+      onChanged: controller.setTitle,
+      decoration: InputDecoration(
+        labelText: l10n.d('Rapporttitel'),
+        hintText: openKatScenarioTitle(l10n, controller.selectedScenarioId!),
+      ),
     );
   }
 }
@@ -598,17 +545,7 @@ class OpenKatReviewStep extends StatelessWidget {
             .toSet()
             .toList()
           ..sort();
-    final includedOrganizations = scan.organizationOptions
-        .where(
-          (item) =>
-              controller.selectedScenarioId ==
-                  OpenKatWizardScenarioId.organizationProgress
-              ? item.code == controller.selectedOrganizationCode
-              : controller.selectedOrganizationCodes.isEmpty ||
-                    controller.selectedOrganizationCodes.contains(item.code),
-        )
-        .map((item) => item.name)
-        .join(', ');
+    final includedOrganizations = _includedOrganizationNames(scan);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -627,10 +564,13 @@ class OpenKatReviewStep extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        _ReviewRow(
-          icon: Icons.groups_outlined,
-          title: l10n.d('Organisaties'),
-          value: includedOrganizations,
+        KeyedSubtree(
+          key: const ValueKey('openkat-review-organizations'),
+          child: _ReviewRow(
+            icon: Icons.groups_outlined,
+            title: l10n.d('Organisaties'),
+            value: includedOrganizations,
+          ),
         ),
         _ReviewRow(
           icon: Icons.calendar_month_outlined,
@@ -638,6 +578,16 @@ class OpenKatReviewStep extends StatelessWidget {
           value: dates.isEmpty
               ? l10n.d('Geen bruikbare meetdatum')
               : dates.map(formatter.formatMediumDate).join(' · '),
+        ),
+        KeyedSubtree(
+          key: const ValueKey('openkat-review-language'),
+          child: _ReviewRow(
+            icon: Icons.language_outlined,
+            title: l10n.d('Taal'),
+            value: controller.language == OpenKatReportLanguage.dutch
+                ? l10n.d('Nederlands')
+                : l10n.d('Engels'),
+          ),
         ),
         _ReviewRow(
           icon: Icons.description_outlined,
@@ -700,6 +650,42 @@ class OpenKatReviewStep extends StatelessWidget {
           ),
       ],
     );
+  }
+
+  String _includedOrganizationNames(OpenKatWizardScan scan) {
+    final inputs = controller.selectedScenario!.descriptor.inputs;
+    final scoped = scan.organizationOptions.where(
+      (item) => inputs.contains(OpenKatWizardInputKind.organization)
+          ? item.code == controller.selectedOrganizationCode
+          : controller.selectedOrganizationCodes.isEmpty ||
+                controller.selectedOrganizationCodes.contains(item.code),
+    );
+    final cveId = controller.cveId;
+    if (!inputs.contains(OpenKatWizardInputKind.cve) || cveId == null) {
+      return scoped.map((item) => item.name).join(', ');
+    }
+    return scoped
+        .where((option) {
+          final organization = scan.organizations
+              .where((item) => item.code == option.code)
+              .firstOrNull;
+          final snapshots =
+              organization?.snapshots
+                  .where(
+                    (snapshot) =>
+                        snapshot.usable &&
+                        !snapshot.reportDate.isAfter(controller.currentAsOf!),
+                  )
+                  .toList() ??
+              <OpenKatSnapshot>[];
+          snapshots.sort((a, b) => a.reportDate.compareTo(b.reportDate));
+          return snapshots.lastOrNull?.findings.any(
+                (finding) => finding.cveIds.contains(cveId),
+              ) ??
+              false;
+        })
+        .map((item) => item.name)
+        .join(', ');
   }
 }
 
