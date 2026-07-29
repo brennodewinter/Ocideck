@@ -1,5 +1,73 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/openkat/openkat_models.dart';
+import 'package:ocideck/services/openkat/openkat_directory_scanner.dart';
+import 'package:ocideck/services/openkat/openkat_json_adapter.dart';
 import 'package:ocideck/services/openkat/openkat_normalizer.dart';
+
+class _ExplicitReferencesAdapter extends OpenKatJsonAdapter {
+  final Map<String, dynamic> finding;
+
+  const _ExplicitReferencesAdapter(this.finding);
+
+  @override
+  String get name => 'test-expliciete-verwijzingen';
+
+  @override
+  Set<OpenKatSourceFeature> get sourceFeatures => const {
+    OpenKatSourceFeature.stableAssetIdentity,
+    OpenKatSourceFeature.reliableCveReferences,
+  };
+
+  @override
+  bool recognizes(Map<String, dynamic> json) => true;
+
+  @override
+  String? organizationCode(Map<String, dynamic> json) => 'alpha';
+
+  @override
+  String? organizationName(Map<String, dynamic> json) => 'Alpha';
+
+  @override
+  DateTime? reportDate(Map<String, dynamic> json) => DateTime.utc(2026, 7, 20);
+
+  @override
+  List<Map<String, dynamic>> systemObjects(Map<String, dynamic> json) => const [
+    {'ooi': 'Hostname|internet|example.com', 'hostname': 'example.com'},
+  ];
+
+  @override
+  List<Map<String, dynamic>> findingObjects(Map<String, dynamic> json) => [
+    finding,
+  ];
+
+  @override
+  Map<String, OpenKatControlScore> controlScores(Map<String, dynamic> json) =>
+      const {};
+}
+
+OpenKatSnapshot _normalizeFinding(Map<String, dynamic> finding) {
+  final adapter = _ExplicitReferencesAdapter(finding);
+  final date = DateTime.utc(2026, 7, 20);
+  final candidate = OpenKatSnapshotCandidate(
+    path: 'alpha.json',
+    hash: 'sha256:alpha',
+    organizationCode: 'alpha',
+    organizationName: 'Alpha',
+    reportDate: date,
+    schema: adapter.name,
+    adapter: adapter,
+    json: const {},
+  );
+  return const OpenKatNormalizer().normalize(
+    OpenKatSnapshotGroup(
+      organizationCode: 'alpha',
+      organizationName: 'Alpha',
+      reportDate: date,
+      candidate: candidate,
+    ),
+    olderSnapshots: const [],
+  );
+}
 
 /// De sleutelgrammatica van OpenKAT: elke primary key is een `|`-gescheiden
 /// reeks die begint bij het objecttype en het *netwerk* waarin het object is
@@ -126,6 +194,44 @@ void main() {
         }),
         'echte-host.nl',
       );
+    });
+  });
+
+  group('expliciete bronsemantiek', () {
+    test('CVE-ID’s komen alleen uit het daarvoor bestemde bronveld', () {
+      final snapshot = _normalizeFinding({
+        'finding_type': {'id': 'KAT-X', 'name': 'Finding X'},
+        'primary_key': 'KATFinding|alpha|1',
+        'ooi': 'Hostname|internet|example.com',
+        'description': 'Vrije tekst noemt CVE-2099-9999 maar bewijst niets.',
+        'cve_ids': [
+          'cve-2026-1234',
+          'CVE-2026-1234',
+          'CVE-2026-76543',
+          'geen-cve',
+        ],
+      });
+
+      expect(snapshot.findings.single.cveIds, [
+        'CVE-2026-1234',
+        'CVE-2026-76543',
+      ]);
+      expect(snapshot.findings.single.stableIdentity, isTrue);
+      expect(
+        snapshot.sourceFeatures,
+        contains(OpenKatSourceFeature.reliableCveReferences),
+      );
+    });
+
+    test('vrije tekst wordt nooit als CVE-koppeling geïnterpreteerd', () {
+      final snapshot = _normalizeFinding({
+        'finding_type': {'id': 'KAT-X', 'name': 'CVE-2026-1234'},
+        'ooi': 'Hostname|internet|example.com',
+        'description': 'Zie CVE-2026-5678.',
+      });
+
+      expect(snapshot.findings.single.cveIds, isEmpty);
+      expect(snapshot.findings.single.stableIdentity, isFalse);
     });
   });
 }

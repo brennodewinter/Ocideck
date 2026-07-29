@@ -156,6 +156,12 @@ class OpenKatImportService {
           'sourceFile': s.sourceFile,
           'sourceHash': s.sourceHash,
           if (s.schema != null) 'schema': s.schema,
+          'usable': s.usable,
+          'sourceFeatures': [
+            for (final feature in s.sourceFeatures) feature.name,
+          ],
+          if (s.measurementScopeId != null)
+            'measurementScopeId': s.measurementScopeId,
           'systems': [
             for (final sys in s.systems)
               {
@@ -163,6 +169,9 @@ class OpenKatImportService {
                 if (sys.hostname != null) 'hostname': sys.hostname,
                 if (sys.ip != null) 'ip': sys.ip,
                 'oois': sys.oois,
+                'stableIdentity': sys.stableIdentity,
+                if (sys.monitoringStatus != null)
+                  'monitoringStatus': sys.monitoringStatus!.name,
               },
           ],
           'findings': [
@@ -180,6 +189,8 @@ class OpenKatImportService {
                   'recommendation': f.recommendation,
                 if (f.impact != null) 'impact': f.impact,
                 'sourceReports': f.sourceReports,
+                'stableIdentity': f.stableIdentity,
+                'cveIds': f.cveIds,
               },
           ],
           'controls': {

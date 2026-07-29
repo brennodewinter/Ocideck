@@ -30,6 +30,11 @@ import 'openkat_json_adapter.dart';
 abstract class OpenKatEnvelopeAdapter extends OpenKatJsonAdapter {
   const OpenKatEnvelopeAdapter();
 
+  @override
+  Set<OpenKatSourceFeature> get sourceFeatures => const {
+    OpenKatSourceFeature.stableAssetIdentity,
+  };
+
   /// De inhoud van `data`, of een lege map wanneer die ontbreekt.
   Map<String, dynamic> payload(Map<String, dynamic> json) =>
       OpenKatJsonAdapter.asMap(json['data']);
