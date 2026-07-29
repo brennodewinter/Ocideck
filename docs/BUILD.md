@@ -522,16 +522,21 @@ deployment**. Use that to exercise the pipeline end to end without touching
 `ocideck.librekat.nl` or making the download button point at a rehearsal. Delete
 the tag and the release afterwards; the real tag then behaves normally.
 
-### After the first release is published
+### The website downloads update themselves
 
-Two things deliberately wait until a release actually exists, because both would
-otherwise point at an empty page:
+The OciDeck page on **librekat.nl** carries a per-platform download panel
+(version, date, size, and the Linux verification hash) pointing at this release's
+assets. The `website-downloads` job keeps it current automatically: after
+`publiceren`, on the Mac runner, it clones the website repository, runs
+`scripts/bump-ocideck.sh <version>` there — which reads the new verification hash
+and the release date straight from the published release, so nothing is retyped —
+then commits, pushes, and runs `./publiceersite` to put it live. Prereleases are
+skipped, and a failure here cannot affect the already-published release: it only
+means the site needs the manual fallback, `scripts/bump-ocideck.sh <version>`
+followed by `./publiceersite` in the website repository.
 
-1. **README** — add a download line under *Getting started*; today that section
-   only tells you how to build from source, which was the only option.
-2. **librekat.nl** — the OciDeck page has a **Download** button prepared on
-   branch `feat/ocideck-download` in the website repository, pointing at the
-   releases page. Merge and run `./publiceersite` once the release is live.
+The README download line and the librekat.nl download panel themselves were added
+when the first release (`0.1.0`) existed; nothing one-time is left here.
 
 ### The two secrets it needs
 
