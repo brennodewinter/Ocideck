@@ -115,11 +115,12 @@ void main() {
         ],
       );
 
+      Directory(p.join(tmp.path, 'raw-data')).createSync();
       File(
-        p.join(tmp.path, _reportFileName('org1', '20240601000000')),
+        p.join(tmp.path, 'raw-data', _reportFileName('org1', '20240601000000')),
       ).writeAsStringSync(jsonEncode(reportA));
       File(
-        p.join(tmp.path, _reportFileName('org1', '20240701000000')),
+        p.join(tmp.path, 'raw-data', _reportFileName('org1', '20240701000000')),
       ).writeAsStringSync(jsonEncode(reportB));
 
       const service = OpenKatImportService();
@@ -139,9 +140,19 @@ void main() {
       expect(katSlideIds, greaterThan(0));
 
       final manifestFile = File(
-        p.join(tmp.path, 'data', 'openkat', 'manifest.json'),
+        p.join(tmp.path, 'processed-data', 'data', 'openkat', 'manifest.json'),
       );
       expect(manifestFile.existsSync(), true);
+
+      final processedDeck = File(
+        p.join(tmp.path, 'processed-data', 'OpenKAT_managementoverzicht.md'),
+      );
+      expect(processedDeck.existsSync(), true);
+
+      final presentationDeck = File(
+        p.join(tmp.path, 'presentations', 'OpenKAT_managementoverzicht.md'),
+      );
+      expect(presentationDeck.existsSync(), true);
     } finally {
       tmp.deleteSync(recursive: true);
     }
@@ -165,8 +176,13 @@ void main() {
           ],
         );
 
+        Directory(p.join(tmp.path, 'raw-data')).createSync();
         File(
-          p.join(tmp.path, _reportFileName('org1', '20240801000000')),
+          p.join(
+            tmp.path,
+            'raw-data',
+            _reportFileName('org1', '20240801000000'),
+          ),
         ).writeAsStringSync(jsonEncode(report));
 
         const service = OpenKatImportService();
@@ -192,8 +208,9 @@ void main() {
     vers() async {
       final tmp = Directory.systemTemp.createTempSync('ocikat-plek-');
       addTearDown(() => tmp.deleteSync(recursive: true));
+      Directory(p.join(tmp.path, 'raw-data')).createSync();
       File(
-        p.join(tmp.path, _reportFileName('org1', '20240601000000')),
+        p.join(tmp.path, 'raw-data', _reportFileName('org1', '20240601000000')),
       ).writeAsStringSync(
         jsonEncode(
           _sampleReport(
@@ -263,8 +280,13 @@ void main() {
         // weergavelimiet (#672) toont er vijf. Niets wordt weggegooid.
         final tmp = Directory.systemTemp.createTempSync('ocikat-vol-');
         addTearDown(() => tmp.deleteSync(recursive: true));
+        Directory(p.join(tmp.path, 'raw-data')).createSync();
         File(
-          p.join(tmp.path, _reportFileName('org1', '20240601000000')),
+          p.join(
+            tmp.path,
+            'raw-data',
+            _reportFileName('org1', '20240601000000'),
+          ),
         ).writeAsStringSync(
           jsonEncode(
             _sampleReport(
