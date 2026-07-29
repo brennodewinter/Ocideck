@@ -1798,6 +1798,128 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Βρέθηκαν {reports} αναφορές για {organizations} οργανισμούς. Οι μετρήσεις εκτείνονται από {firstDate} έως και {lastDate}. Παραλείφθηκαν {skipped} αρχεία.',
+  'Dubbel bestand overgeslagen': 'Το διπλό αρχείο παραλείφθηκε',
+  'Conflicterende meting overgeslagen': 'Η αντικρουόμενη μέτρηση παραλείφθηκε',
+  'Geen ondersteunde OpenKAT-rapportage': 'Μη υποστηριζόμενη αναφορά OpenKAT',
+  'Bestand kon niet worden gelezen': 'Δεν ήταν δυνατή η ανάγνωση του αρχείου',
+  'Aanbevolen': 'Συνιστάται',
+  'Alleen wat nodig is': 'Μόνο ότι είναι απαραίτητο',
+  'Alles blijft op dit apparaat': 'Όλα παραμένουν σε αυτή τη συσκευή',
+  'Als nieuw rapport maken': 'Δημιουργία ως νέα αναφορά',
+  'Andere map kiezen': 'Επιλέξτε άλλο φάκελο',
+  'Bekijk importverslag': 'Προβολή αναφοράς εισαγωγής',
+  'Bekijk verslag': 'Προβολή αναφοράς',
+  'Bijvoorbeeld CVE-2026-12345': 'Για παράδειγμα, CVE-2026-12345',
+  'Bruikbaar': 'Χρησιμοποιήσιμος',
+  'CVE zoeken': 'Αναζήτηση CVE',
+  'Critical/high': 'Κρίσιμο/υψηλό',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Ποιότητα δεδομένων, μετρήσεις που λείπουν και απαξίωση.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Οι επιλεγμένες αναφορές δεν περιέχουν αρκετά αξιόπιστα δεδομένα για αυτό το τμήμα.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Το περιεχόμενο θα εμφανιστεί μόλις γίνουν όλες οι απαραίτητες επιλογές.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Η κάλυψη μέτρησης διαφέρει μεταξύ των επιλεγμένων ροπών μέτρησης. Οι αλλαγές είναι επομένως συγκρίσιμες μόνο σε περιορισμένο βαθμό.',
+  'Dekking en actualiteit van metingen': 'Κάλυψη και επικαιρότητα μετρήσεων',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Αυτό το CVE δεν βρέθηκε στις επιλεγμένες μετρήσεις.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Αυτός ο φάκελος δεν περιέχει χρήσιμες αναφορές',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Αυτή η επιλογή περιέχει πάρα πολλά δεδομένα για να συμπεριληφθούν με ασφάλεια σε μία αναφορά.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Αυτή η ενότητα δεν μπορεί να δημιουργηθεί εξ ολοκλήρου από τις επιλεγμένες αναφορές.',
+  'Dit rapport bevat': 'Αυτή η έκθεση περιέχει',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Μία ή περισσότερες μετρήσεις είναι παλαιότερες από το επιλεγμένο όριο επικαιρότητας.',
+  'Eerdere bruikbare meting': 'Προηγούμενη χρήσιμη μέτρηση',
+  'Engels': 'αγγλικός',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Δεν βρέθηκαν χρήσιμες μετρήσεις.',
+  'Feitelijke gegevens': 'Πραγματικά δεδομένα',
+  'Geen bruikbare meetdatum': 'Δεν χρησιμοποιήσιμη ημερομηνία μέτρησης',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Οι δημιουργημένες διαφάνειες ανανεώνονται. Οι δικές σας διαφάνειες και αντίγραφα διατηρούνται.',
+  'Getroffen organisaties en systemen':
+      'Οργανισμοί και συστήματα που επηρεάζονται',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Επηρεασμένοι οργανισμοί και συστήματα γύρω από μια ευπάθεια.',
+  'Getroffen systemen': 'Συστήματα που επηρεάζονται',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Δεν ήταν δυνατή η δημιουργία της αναφοράς. Οι επιλογές σας διατηρούνται. ελέγξτε τις προειδοποιήσεις και δοκιμάστε ξανά.',
+  'Import': 'Εισαγωγή',
+  'Importverslag bekijken': 'Προβολή αναφοράς εισαγωγής',
+  'Kerncijfers en aandachtspunten': 'Βασικά στοιχεία και σημεία ενδιαφέροντος',
+  'Keuzes wijzigen…': 'Αλλαγή επιλογών…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Επιλέξτε το φάκελο στον οποίο το OpenKAT έχει τοποθετήσει τις αναφορές. Το OciDeck διαβάζει μόνο αυτόν τον φάκελο. τίποτα δεν αλλάζει ή αποστέλλεται.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Επιλέξτε την ερώτηση που πρέπει να απαντήσει η αναφορά. Το OciDeck καθορίζει την κατάλληλη δομή.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Επιλέξτε ένα CVE που βρίσκεται στις αναφορές.',
+  'Laatste bruikbare meting': 'Τελευταία χρησιμοποιήσιμη μέτρηση',
+  'Live voorvertoning van de rapportopbouw':
+      'Ζωντανή προεπισκόπηση της δομής της αναφοράς',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Πληροφορίες διαχείρισης και ελέγχου για πολλούς οργανισμούς.',
+  'Meer instellingen': 'Περισσότερες ρυθμίσεις',
+  'Nederlands': 'Ολλανδός',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Δεν έχει κάθε επιλεγμένος οργανισμός μέτρηση για αυτήν την περίοδο.',
+  'Nieuwe en verdwenen bevindingen': 'Νέα ευρήματα που λείπουν',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Δεν είναι ακόμη διαθέσιμο: αυτές οι αναφορές δεν περιέχουν αξιόπιστους αριθμούς CVE.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'Το OciDeck χρησιμοποιεί την ίδια πηγή και επιλογές και λαμβάνει τις πιο πρόσφατες κατάλληλες μετρήσεις. Οι δικές σας διαφάνειες και αντίγραφα διατηρούνται.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'Το OciDeck δεν μπόρεσε να βρει χρήσιμες μετρήσεις OpenKAT. Επιλέξτε διαφορετικό φάκελο ή προβάλετε την αναφορά εισαγωγής για να δείτε ποια αρχεία παραλείφθηκαν.',
+  'OpenKAT-importverslag': 'Αναφορά εισαγωγής OpenKAT',
+  'OpenKAT-rapport': 'Αναφορά OpenKAT',
+  'OpenKAT-rapport bijwerken': 'Ενημέρωση αναφοράς OpenKAT',
+  'OpenKAT-rapport bijwerken…': 'Ενημέρωση αναφοράς OpenKAT…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'Δεν ήταν δυνατή η δημιουργία της αναφοράς OpenKAT.',
+  'OpenKAT-rapport maken': 'Δημιουργία αναφοράς OpenKAT',
+  'OpenKAT-rapport maken…': 'Δημιουργία αναφοράς OpenKAT…',
+  'Organisaties': 'Οργανώσεις',
+  'Organisaties kiezen': 'Επιλογή οργανισμών',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Η αναφορά ενημερώθηκε. Οι δικές σας διαφάνειες έχουν διατηρηθεί.',
+  'Rapport bijwerken': 'Ενημέρωση αναφοράς',
+  'Rapport gemaakt.': 'Η αναφορά δημιουργήθηκε.',
+  'Rapport maken': 'Δημιουργία αναφοράς',
+  'Rapportages controleren…': 'Ελέγξτε τις αναφορές…',
+  'Rapportages voorbereiden': 'Ετοιμάστε αναφορές',
+  'Rapporttitel': 'Τίτλος αναφοράς',
+  'Stap': 'Βήμα',
+  'Taal': 'Γλώσσα',
+  'Terug': 'Πίσω',
+  'Veranderingen in monitoring': 'Αλλαγές στην παρακολούθηση',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Λείπει μια χρήσιμη προηγούμενη μέτρηση για έναν ή περισσότερους οργανισμούς.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Λείπει μια χρήσιμη μέτρηση ρεύματος για έναν ή περισσότερους οργανισμούς.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Για μια σύγκριση απαιτούνται δύο ροπές μέτρησης. Βρέθηκε τώρα μία μέτρηση.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Πρόοδος σε σύγκριση με προηγούμενη στιγμή μέτρησης.',
+  'Waar staan de OpenKAT-rapportages?': 'Πού είναι οι αναφορές OpenKAT;',
+  'Wat veranderde er bij één organisatie?': 'Τι άλλαξε σε έναν οργανισμό;',
+  'Wat wilt u laten zien?': 'Τι θέλετε να δείξετε;',
+  'Welke organisaties vragen aandacht?': 'Ποιοι οργανισμοί απαιτούν προσοχή;',
+  'Werkelijke meetdatums': 'Πραγματικές ημερομηνίες μέτρησης',
+  'Wie is geraakt door een CVE?': 'Ποιος επηρεάζεται από ένα CVE;',
+  'Zijn de metingen compleet en actueel?':
+      'Είναι οι μετρήσεις πλήρεις και ενημερωμένες;',
+  'bruikbaar': 'χρησιμοποιήσιμος',
+  'metingen': 'μετρήσεις',
+  'organisaties': 'οργανώσεις',
+  'organisaties geselecteerd': 'οργανώσεις που έχουν επιλεγεί',
+  'rapportages gebruikt': 'χρησιμοποιήθηκαν αναφορές',
+  'systemen': 'συστήματα',
   'Met dank aan': 'Με ευγνωμοσύνη',
   'Fix alle problemen': 'Επιδιόρθωση όλων των προβλημάτων',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':

@@ -1793,6 +1793,128 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Instabu {reports} rapporti għal {organizations} organizzazzjonijiet. Il-kejl jestendi minn {firstDate} sa {lastDate} inkluż. Inqabżu {skipped} fajls.',
+  'Dubbel bestand overgeslagen': 'Fajl duplikat inqabeż',
+  'Conflicterende meting overgeslagen': 'Kejl konfliġġenti nqabżet',
+  'Geen ondersteunde OpenKAT-rapportage': 'Rapport OpenKAT mhux appoġġat',
+  'Bestand kon niet worden gelezen': 'Il-fajl ma setax jinqara',
+  'Aanbevolen': 'Rakkomandat',
+  'Alleen wat nodig is': 'Biss dak li hu meħtieġ',
+  'Alles blijft op dit apparaat': 'Kollox jibqa\' fuq dan l-apparat',
+  'Als nieuw rapport maken': 'Oħloq bħala rapport ġdid',
+  'Andere map kiezen': 'Agħżel folder ieħor',
+  'Bekijk importverslag': 'Ara r-rapport tal-importazzjoni',
+  'Bekijk verslag': 'Ara r-rapport',
+  'Bijvoorbeeld CVE-2026-12345': 'Pereżempju, CVE-2026-12345',
+  'Bruikbaar': 'Użabbli',
+  'CVE zoeken': 'Tfittxija CVE',
+  'Critical/high': 'Kritika/għolja',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Kwalità tad-dejta, kejl nieqes u obsolexxenza.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Ir-rapporti magħżula ma fihomx biżżejjed dejta affidabbli għal din il-parti.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Il-kontenut se jidher ladarba jkunu saru l-għażliet kollha meħtieġa.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Il-kopertura tal-kejl tvarja bejn il-mumenti tal-kejl magħżula; il-bidliet huma għalhekk komparabbli biss sa ċertu punt.',
+  'Dekking en actualiteit van metingen': 'Kopertura u puntwalità tal-kejl',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Dan is-CVE ma nstabx fil-kejl magħżul.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Dan il-folder ma fih l-ebda rapporti utli',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Din l-għażla fiha wisq dejta biex tkun inkluża b\'mod sikur f\'rapport wieħed.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Din it-taqsima ma tistax tinbena kompletament mir-rapporti magħżula.',
+  'Dit rapport bevat': 'Dan ir-rapport fih',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Kejl wieħed jew aktar huma eqdem mil-limitu ta\' puntwalità magħżul.',
+  'Eerdere bruikbare meting': 'Kejl utli preċedenti',
+  'Engels': 'Ingliż',
+  'Er zijn geen bruikbare metingen gevonden.': 'Ma nstab l-ebda kejl utli.',
+  'Feitelijke gegevens': 'Data fattwali',
+  'Geen bruikbare meetdatum': 'L-ebda data ta \'kejl li tista\' tintuża',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Slajds iġġenerati huma aggornati. Is-slajds u l-kopji tiegħek jinżammu.',
+  'Getroffen organisaties en systemen':
+      'Organizzazzjonijiet u sistemi affettwati',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Organizzazzjonijiet u sistemi affettwati madwar vulnerabbiltà waħda.',
+  'Getroffen systemen': 'Sistemi affettwati',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Ir-rapport ma setax jinħoloq. L-għażliet tiegħek huma ppreservati; iċċekkja t-twissijiet u erġa\' pprova.',
+  'Import': 'Importazzjoni',
+  'Importverslag bekijken': 'Ara r-rapport tal-importazzjoni',
+  'Kerncijfers en aandachtspunten': 'Ċifri ewlenin u punti ta\' interess',
+  'Keuzes wijzigen…': 'Ibdel l-għażliet...',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Agħżel il-folder li fih OpenKAT poġġa r-rapporti. OciDeck jaqra biss dan il-folder; xejn ma jinbidel jew jintbagħat.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Agħżel il-mistoqsija li r-rapport għandu jwieġeb. OciDeck jiddetermina l-istruttura xierqa.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Agħżel CVE misjub fir-rapporti.',
+  'Laatste bruikbare meting': 'L-aħħar kejl li jista\' jintuża',
+  'Live voorvertoning van de rapportopbouw':
+      'Preview live tal-istruttura tar-rapport',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Informazzjoni ta \'ġestjoni u kontroll dwar organizzazzjonijiet multipli.',
+  'Meer instellingen': 'Aktar settings',
+  'Nederlands': 'Olandiż',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Mhux kull organizzazzjoni magħżula għandha kejl għal dan il-perjodu.',
+  'Nieuwe en verdwenen bevindingen': 'Sejbiet ġodda u neqsin',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Għadu mhux disponibbli: dawn ir-rapporti ma fihomx numri CVE affidabbli.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck juża l-istess sors u għażliet u jieħu l-aħħar kejl adattat. Is-slajds u l-kopji tiegħek jinżammu.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck ma setax isib l-ebda kejl OpenKAT utli. Agħżel folder differenti jew ara r-rapport tal-importazzjoni biex tara liema fajls inqabżu.',
+  'OpenKAT-importverslag': 'Rapport ta\' importazzjoni ta\' OpenKAT',
+  'OpenKAT-rapport': 'Rapport OpenKAT',
+  'OpenKAT-rapport bijwerken': 'Aġġorna r-rapport OpenKAT',
+  'OpenKAT-rapport bijwerken…': 'Aġġorna r-rapport OpenKAT...',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'Rapport OpenKAT ma setax jinħoloq.',
+  'OpenKAT-rapport maken': 'Oħloq rapport OpenKAT',
+  'OpenKAT-rapport maken…': 'Oħloq rapport OpenKAT...',
+  'Organisaties': 'Organizzazzjonijiet',
+  'Organisaties kiezen': 'Għażla ta\' organizzazzjonijiet',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Rapport aġġornat. Il-pjastri tiegħek inżammu.',
+  'Rapport bijwerken': 'Aġġorna rapport',
+  'Rapport gemaakt.': 'Rapport maħluq.',
+  'Rapport maken': 'Oħloq rapport',
+  'Rapportages controleren…': 'Iċċekkja r-rapporti...',
+  'Rapportages voorbereiden': 'Ipprepara rapporti',
+  'Rapporttitel': 'Titolu tar-rapport',
+  'Stap': 'Pass',
+  'Taal': 'Lingwa',
+  'Terug': 'Lura',
+  'Veranderingen in monitoring': 'Bidliet fil-monitoraġġ',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Kejl preċedenti utli huwa nieqes għal organizzazzjoni waħda jew aktar.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Kejl kurrenti utli huwa nieqes għal organizzazzjoni waħda jew aktar.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Żewġ mumenti tal-kejl huma meħtieġa għal paragun. Issa nstab kejl wieħed.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Progress meta mqabbel ma \'mument ta\' kejl preċedenti.',
+  'Waar staan de OpenKAT-rapportages?': 'Fejn huma r-rapporti tal-OpenKAT?',
+  'Wat veranderde er bij één organisatie?':
+      'X\'inbidel f\'organizzazzjoni waħda?',
+  'Wat wilt u laten zien?': 'Xi trid turi?',
+  'Welke organisaties vragen aandacht?':
+      'Liema organizzazzjonijiet jeħtieġu attenzjoni?',
+  'Werkelijke meetdatums': 'Dati tal-kejl attwali',
+  'Wie is geraakt door een CVE?': 'Min hu affettwat minn CVE?',
+  'Zijn de metingen compleet en actueel?': 'Il-kejl huma kompluti u aġġornati?',
+  'bruikbaar': 'użabbli',
+  'metingen': 'kejl',
+  'organisaties': 'organizzazzjonijiet',
+  'organisaties geselecteerd': 'organizzazzjonijiet magħżula',
+  'rapportages gebruikt': 'rapporti użati',
+  'systemen': 'sistemi',
   'Met dank aan': 'Ringrazzjamenti',
   'Fix alle problemen': 'Irranġa l-problemi kollha',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':

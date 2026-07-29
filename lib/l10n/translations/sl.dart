@@ -1773,6 +1773,129 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Najdenih je {reports} poročil za {organizations} organizacij. Meritve potekajo od {firstDate} do vključno {lastDate}. Preskočenih je bilo {skipped} datotek.',
+  'Dubbel bestand overgeslagen': 'Podvojena datoteka preskočena',
+  'Conflicterende meting overgeslagen': 'Nasprotujoča meritev preskočena',
+  'Geen ondersteunde OpenKAT-rapportage': 'Nepodprto poročilo OpenKAT',
+  'Bestand kon niet worden gelezen': 'Datoteke ni bilo mogoče prebrati',
+  'Aanbevolen': 'Priporočeno',
+  'Alleen wat nodig is': 'Samo tisto, kar je nujno',
+  'Alles blijft op dit apparaat': 'Vse ostane na tej napravi',
+  'Als nieuw rapport maken': 'Ustvari kot novo poročilo',
+  'Andere map kiezen': 'Izberite drugo mapo',
+  'Bekijk importverslag': 'Oglejte si poročilo o uvozu',
+  'Bekijk verslag': 'Ogled poročila',
+  'Bijvoorbeeld CVE-2026-12345': 'Na primer CVE-2026-12345',
+  'Bruikbaar': 'Uporabno',
+  'CVE zoeken': 'CVE iskanje',
+  'Critical/high': 'Kritično/visoko',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Kakovost podatkov, manjkajoče meritve in zastarelost.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Izbrana poročila ne vsebujejo dovolj zanesljivih podatkov za ta del.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Vsebina se bo prikazala, ko bodo opravljene vse potrebne izbire.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Pokritost meritev se med izbranimi merilnimi trenutki razlikuje; spremembe so zato primerljive le v omejenem obsegu.',
+  'Dekking en actualiteit van metingen': 'Pokritost in pravočasnost meritev',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Ta CVE ni bil najden v izbranih meritvah.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Ta mapa ne vsebuje uporabnih poročil',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Ta izbor vsebuje preveč podatkov, da bi jih lahko varno vključili v eno poročilo.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Tega razdelka ni mogoče v celoti sestaviti iz izbranih poročil.',
+  'Dit rapport bevat': 'To poročilo vsebuje',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Ena ali več meritev je starejših od izbrane časovne omejitve.',
+  'Eerdere bruikbare meting': 'Prejšnja uporabna meritev',
+  'Engels': 'angleščina',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Uporabne meritve niso bile najdene.',
+  'Feitelijke gegevens': 'Dejanski podatki',
+  'Geen bruikbare meetdatum': 'Ni uporabnega datuma meritve',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Ustvarjeni diapozitivi se osvežijo. Vaši lastni diapozitivi in ​​kopije se ohranijo.',
+  'Getroffen organisaties en systemen': 'Prizadete organizacije in sistemi',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Prizadete organizacije in sistemi okoli ene ranljivosti.',
+  'Getroffen systemen': 'Prizadeti sistemi',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Poročila ni bilo mogoče ustvariti. Vaše izbire so ohranjene; preverite opozorila in poskusite znova.',
+  'Import': 'Uvozi',
+  'Importverslag bekijken': 'Oglejte si poročilo o uvozu',
+  'Kerncijfers en aandachtspunten': 'Ključne številke in zanimivosti',
+  'Keuzes wijzigen…': 'Spremeni izbire ...',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Izberite mapo, v katero je OpenKAT postavil poročila. OciDeck bere samo to mapo; nič se ne spremeni ali pošlje.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Izberite vprašanje, na katero naj poročilo odgovori. OciDeck določi ustrezno strukturo.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Izberite CVE, ki ga najdete v poročilih.',
+  'Laatste bruikbare meting': 'Zadnja uporabna meritev',
+  'Live voorvertoning van de rapportopbouw':
+      'Predogled strukture poročila v živo',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Informacije o upravljanju in nadzoru več organizacij.',
+  'Meer instellingen': 'Več nastavitev',
+  'Nederlands': 'nizozemščina',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Vsaka izbrana organizacija nima meritev za to obdobje.',
+  'Nieuwe en verdwenen bevindingen': 'Nove in manjkajoče ugotovitve',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Še ni na voljo: ta poročila ne vsebujejo zanesljivih številk CVE.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck uporablja isti vir in izbire ter izvaja najnovejše ustrezne meritve. Vaši lastni diapozitivi in ​​kopije se ohranijo.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck ni našel uporabnih meritev OpenKAT. Izberite drugo mapo ali si oglejte poročilo o uvozu, da vidite, katere datoteke so bile preskočene.',
+  'OpenKAT-importverslag': 'Poročilo o uvozu OpenKAT',
+  'OpenKAT-rapport': 'Poročilo OpenKAT',
+  'OpenKAT-rapport bijwerken': 'Posodobite poročilo OpenKAT',
+  'OpenKAT-rapport bijwerken…': 'Posodobi poročilo OpenKAT ...',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'Poročila OpenKAT ni bilo mogoče ustvariti.',
+  'OpenKAT-rapport maken': 'Ustvari poročilo OpenKAT',
+  'OpenKAT-rapport maken…': 'Ustvari poročilo OpenKAT ...',
+  'Organisaties': 'Organizacije',
+  'Organisaties kiezen': 'Izbira organizacij',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Poročilo posodobljeno. Vaši diapozitivi so bili ohranjeni.',
+  'Rapport bijwerken': 'Posodobi poročilo',
+  'Rapport gemaakt.': 'Poročilo ustvarjeno.',
+  'Rapport maken': 'Ustvari poročilo',
+  'Rapportages controleren…': 'Preverite poročila ...',
+  'Rapportages voorbereiden': 'Pripravite poročila',
+  'Rapporttitel': 'Naslov poročila',
+  'Stap': 'korak',
+  'Taal': 'Jezik',
+  'Terug': 'Nazaj',
+  'Veranderingen in monitoring': 'Spremembe v spremljanju',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Za eno ali več organizacij manjka uporabna predhodna meritev.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Za eno ali več organizacij manjka uporabna trenutna meritev.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Za primerjavo sta potrebna dva merilna momenta. Zdaj je bila najdena ena meritev.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Napredek v primerjavi s prejšnjim trenutkom merjenja.',
+  'Waar staan de OpenKAT-rapportages?': 'Kje so poročila OpenKAT?',
+  'Wat veranderde er bij één organisatie?':
+      'Kaj se je spremenilo v eni organizaciji?',
+  'Wat wilt u laten zien?': 'Kaj želite pokazati?',
+  'Welke organisaties vragen aandacht?':
+      'Katere organizacije potrebujejo pozornost?',
+  'Werkelijke meetdatums': 'Dejanski datumi meritev',
+  'Wie is geraakt door een CVE?': 'Koga prizadene CVE?',
+  'Zijn de metingen compleet en actueel?':
+      'Ali so meritve popolne in posodobljene?',
+  'bruikbaar': 'uporaben',
+  'metingen': 'meritve',
+  'organisaties': 'organizacije',
+  'organisaties geselecteerd': 'izbranih organizacij',
+  'rapportages gebruikt': 'uporabljenih poročil',
+  'systemen': 'sistemi',
   'Met dank aan': 'S hvaležnostjo',
   'Fix alle problemen': 'Odpravi vse težave',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':

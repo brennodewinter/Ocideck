@@ -1793,6 +1793,130 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Намерени са {reports} отчета за {organizations} организации. Измерванията са от {firstDate} до {lastDate} включително. Пропуснати са {skipped} файла.',
+  'Dubbel bestand overgeslagen': 'Дублираният файл е пропуснат',
+  'Conflicterende meting overgeslagen':
+      'Противоречивото измерване е пропуснато',
+  'Geen ondersteunde OpenKAT-rapportage': 'Неподдържан отчет на OpenKAT',
+  'Bestand kon niet worden gelezen': 'Файлът не можа да бъде прочетен',
+  'Aanbevolen': 'Препоръчва се',
+  'Alleen wat nodig is': 'Само необходимото',
+  'Alles blijft op dit apparaat': 'Всичко остава на това устройство',
+  'Als nieuw rapport maken': 'Създаване като нов отчет',
+  'Andere map kiezen': 'Изберете друга папка',
+  'Bekijk importverslag': 'Вижте отчета за импортиране',
+  'Bekijk verslag': 'Вижте отчета',
+  'Bijvoorbeeld CVE-2026-12345': 'Например CVE-2026-12345',
+  'Bruikbaar': 'Използваема',
+  'CVE zoeken': 'CVE търсене',
+  'Critical/high': 'Критично/високо',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Качество на данните, липсващи измервания и остаряване.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Избраните отчети не съдържат достатъчно надеждни данни за тази част.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Съдържанието ще се появи, след като бъдат направени всички необходими избори.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Обхватът на измерване се различава между избраните моменти на измерване; следователно промените са сравними само в ограничена степен.',
+  'Dekking en actualiteit van metingen':
+      'Обхват и своевременност на измерванията',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Този CVE не беше намерен в избраните измервания.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Тази папка не съдържа полезни отчети',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Тази селекция съдържа твърде много данни за безопасно включване в един отчет.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Този раздел не може да бъде изграден изцяло от избраните отчети.',
+  'Dit rapport bevat': 'Този доклад съдържа',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Едно или повече измервания са по-стари от избрания лимит на време.',
+  'Eerdere bruikbare meting': 'Предишно полезно измерване',
+  'Engels': 'английски',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Не бяха намерени полезни измервания.',
+  'Feitelijke gegevens': 'Фактически данни',
+  'Geen bruikbare meetdatum': 'Няма използваема дата на измерване',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Генерираните слайдове се обновяват. Вашите собствени слайдове и копия се запазват.',
+  'Getroffen organisaties en systemen': 'Засегнати организации и системи',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Засегнати организации и системи около една уязвимост.',
+  'Getroffen systemen': 'Засегнати системи',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Отчетът не можа да бъде създаден. Вашите избори се запазват; проверете предупрежденията и опитайте отново.',
+  'Import': 'Импортиране',
+  'Importverslag bekijken': 'Вижте отчета за импортиране',
+  'Kerncijfers en aandachtspunten': 'Ключови фигури и забележителности',
+  'Keuzes wijzigen…': 'Промяна на избора...',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Изберете папката, в която OpenKAT е поставил отчетите. OciDeck чете само тази папка; нищо не се променя или изпраща.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Изберете въпроса, на който докладът трябва да отговори. OciDeck определя подходящата структура.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Изберете CVE, намерен в отчетите.',
+  'Laatste bruikbare meting': 'Последно използваемо измерване',
+  'Live voorvertoning van de rapportopbouw':
+      'Преглед на живо на структурата на отчета',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Информация за управление и контрол на множество организации.',
+  'Meer instellingen': 'Още настройки',
+  'Nederlands': 'холандски',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Не всяка избрана организация има измерване за този период.',
+  'Nieuwe en verdwenen bevindingen': 'Нови и липсващи открития',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Все още не е налично: тези отчети не съдържат надеждни CVE числа.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck използва същия източник и избор и прави най-новите подходящи измервания. Вашите собствени слайдове и копия се запазват.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck не можа да намери полезни измервания на OpenKAT. Изберете друга папка или прегледайте отчета за импортиране, за да видите кои файлове са пропуснати.',
+  'OpenKAT-importverslag': 'Отчет за импортиране на OpenKAT',
+  'OpenKAT-rapport': 'Доклад на OpenKAT',
+  'OpenKAT-rapport bijwerken': 'Актуализирайте отчета OpenKAT',
+  'OpenKAT-rapport bijwerken…': 'Актуализиране на отчета OpenKAT...',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'OpenKAT отчет не може да бъде създаден.',
+  'OpenKAT-rapport maken': 'Създайте OpenKAT отчет',
+  'OpenKAT-rapport maken…': 'Създаване на OpenKAT отчет...',
+  'Organisaties': 'организации',
+  'Organisaties kiezen': 'Избор на организации',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Докладът е актуализиран. Вашите собствени слайдове са запазени.',
+  'Rapport bijwerken': 'Доклад за актуализация',
+  'Rapport gemaakt.': 'Докладът е създаден.',
+  'Rapport maken': 'Създаване на отчет',
+  'Rapportages controleren…': 'Проверете отчетите...',
+  'Rapportages voorbereiden': 'Подгответе доклади',
+  'Rapporttitel': 'Заглавие на доклада',
+  'Stap': 'стъпка',
+  'Taal': 'език',
+  'Terug': 'Назад',
+  'Veranderingen in monitoring': 'Промени в мониторинга',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Липсва полезно предишно измерване за една или повече организации.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Липсва полезно текущо измерване за една или повече организации.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'За сравнение са необходими два момента на измерване. Вече е намерено едно измерване.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Напредък в сравнение с предишен момент на измерване.',
+  'Waar staan de OpenKAT-rapportages?': 'Къде са отчетите на OpenKAT?',
+  'Wat veranderde er bij één organisatie?':
+      'Какво се промени в една организация?',
+  'Wat wilt u laten zien?': 'какво искаш да покажеш',
+  'Welke organisaties vragen aandacht?': 'Кои организации изискват внимание?',
+  'Werkelijke meetdatums': 'Действителни дати на измерване',
+  'Wie is geraakt door een CVE?': 'Кой е засегнат от CVE?',
+  'Zijn de metingen compleet en actueel?':
+      'Измерванията пълни и актуални ли са?',
+  'bruikbaar': 'използваем',
+  'metingen': 'измервания',
+  'organisaties': 'организации',
+  'organisaties geselecteerd': 'избрани организации',
+  'rapportages gebruikt': 'използвани отчети',
+  'systemen': 'системи',
   'Met dank aan': 'С благодарност',
   'Fix alle problemen': 'Поправи всички проблеми',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':

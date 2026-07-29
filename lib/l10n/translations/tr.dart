@@ -2748,6 +2748,125 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      '{organizations} kuruluş için {reports} rapor bulundu. Ölçümler {firstDate} tarihinden {lastDate} tarihine kadar sürüyor. {skipped} dosya atlandı.',
+  'Dubbel bestand overgeslagen': 'Yinelenen dosya atlandı',
+  'Conflicterende meting overgeslagen': 'Çakışan ölçüm atlandı',
+  'Geen ondersteunde OpenKAT-rapportage': 'Desteklenmeyen OpenKAT raporu',
+  'Bestand kon niet worden gelezen': 'Dosya okunamadı',
+  'Aanbevolen': 'Tavsiye edilen',
+  'Alleen wat nodig is': 'Sadece gerekli olan',
+  'Alles blijft op dit apparaat': 'Her şey bu cihazda kalır',
+  'Als nieuw rapport maken': 'Yeni rapor olarak oluştur',
+  'Andere map kiezen': 'Başka bir klasör seçin',
+  'Bekijk importverslag': 'İçe aktarma raporunu görüntüle',
+  'Bekijk verslag': 'Raporu görüntüle',
+  'Bijvoorbeeld CVE-2026-12345': 'Örneğin, CVE-2026-12345',
+  'Bruikbaar': 'Kullanılabilir',
+  'CVE zoeken': 'CVE araması',
+  'Critical/high': 'Kritik/yüksek',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Veri kalitesi, eksik ölçümler ve eskime.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Seçilen raporlar bu bölüm için yeterli güvenilir veri içermiyor.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Gerekli tüm seçimler yapıldıktan sonra içerik görünecektir.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Ölçüm kapsamı seçilen ölçüm anlarına göre farklılık gösterir; bu nedenle değişiklikler yalnızca sınırlı ölçüde karşılaştırılabilir.',
+  'Dekking en actualiteit van metingen': 'Ölçümlerin kapsamı ve zamanlılığı',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Bu CVE seçilen ölçümlerde bulunamadı.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Bu klasör yararlı rapor içermiyor',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Bu seçim, tek bir rapora güvenli bir şekilde dahil edilemeyecek kadar fazla veri içeriyor.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Bu bölüm tamamen seçilen raporlardan oluşturulamaz.',
+  'Dit rapport bevat': 'Bu rapor şunları içerir:',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Bir veya daha fazla ölçüm, seçilen zamanlama sınırından daha eski.',
+  'Eerdere bruikbare meting': 'Önceki yararlı ölçüm',
+  'Engels': 'İngilizce',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Kullanışlı hiçbir ölçüm bulunamadı.',
+  'Feitelijke gegevens': 'Gerçek veriler',
+  'Geen bruikbare meetdatum': 'Kullanılabilir ölçüm tarihi yok',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Oluşturulan slaytlar yenilenir. Kendi slaytlarınız ve kopyalarınız korunur.',
+  'Getroffen organisaties en systemen': 'Etkilenen kuruluşlar ve sistemler',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Bir güvenlik açığı etrafında etkilenen kuruluşlar ve sistemler.',
+  'Getroffen systemen': 'Etkilenen sistemler',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Rapor oluşturulamadı. Seçimleriniz korunur; uyarıları kontrol edip tekrar deneyin.',
+  'Import': 'İçe aktarmak',
+  'Importverslag bekijken': 'İçe aktarma raporunu görüntüle',
+  'Kerncijfers en aandachtspunten': 'Önemli rakamlar ve ilgi çekici yerler',
+  'Keuzes wijzigen…': 'Seçimleri değiştir…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'OpenKAT\'in raporları yerleştirdiği klasörü seçin. OciDeck yalnızca bu klasörü okur; hiçbir şey değiştirilmez veya gönderilmez.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Raporun cevaplaması gereken soruyu seçin. OciDeck uygun yapıyı belirler.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Raporlarda bulunan bir CVE\'yi seçin.',
+  'Laatste bruikbare meting': 'Kullanılabilir son ölçüm',
+  'Live voorvertoning van de rapportopbouw': 'Rapor yapısının canlı önizlemesi',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Birden fazla kuruluş hakkında yönetim ve kontrol bilgileri.',
+  'Meer instellingen': 'Daha fazla ayar',
+  'Nederlands': 'Flemenkçe',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Seçilen her kuruluşun bu döneme ilişkin bir ölçümü yoktur.',
+  'Nieuwe en verdwenen bevindingen': 'Yeni ve eksik bulgular',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Henüz mevcut değil: Bu raporlar güvenilir CVE numaraları içermemektedir.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck aynı kaynağı ve seçenekleri kullanır ve en son uygun ölçümleri alır. Kendi slaytlarınız ve kopyalarınız korunur.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck herhangi bir yararlı OpenKAT ölçümü bulamadı. Hangi dosyaların atlandığını görmek için farklı bir klasör seçin veya içe aktarma raporunu görüntüleyin.',
+  'OpenKAT-importverslag': 'OpenKAT içe aktarma raporu',
+  'OpenKAT-rapport': 'OpenKAT raporu',
+  'OpenKAT-rapport bijwerken': 'OpenKAT raporunu güncelleyin',
+  'OpenKAT-rapport bijwerken…': 'OpenKAT raporunu güncelleyin…',
+  'OpenKAT-rapport kon niet worden gemaakt.': 'OpenKAT raporu oluşturulamadı.',
+  'OpenKAT-rapport maken': 'OpenKAT raporu oluştur',
+  'OpenKAT-rapport maken…': 'OpenKAT raporu oluştur…',
+  'Organisaties': 'Organizasyonlar',
+  'Organisaties kiezen': 'Organizasyon seçimi',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Rapor güncellendi. Kendi slaytlarınız tutuldu.',
+  'Rapport bijwerken': 'Raporu güncelle',
+  'Rapport gemaakt.': 'Rapor oluşturuldu.',
+  'Rapport maken': 'Rapor oluştur',
+  'Rapportages controleren…': 'Raporları kontrol edin…',
+  'Rapportages voorbereiden': 'Raporları hazırlayın',
+  'Rapporttitel': 'Rapor başlığı',
+  'Stap': 'Adım',
+  'Taal': 'Dil',
+  'Terug': 'Geri',
+  'Veranderingen in monitoring': 'İzlemedeki değişiklikler',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Bir veya daha fazla kuruluş için yararlı bir önceki ölçüm eksik.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Bir veya daha fazla kuruluş için yararlı bir akım ölçümü eksik.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Karşılaştırma için iki ölçüm momenti gereklidir. Artık bir ölçüm bulunmuştur.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Önceki ölçüm anına kıyasla ilerleme.',
+  'Waar staan de OpenKAT-rapportages?': 'OpenKAT raporları nerede?',
+  'Wat veranderde er bij één organisatie?': 'Bir kuruluşta ne değişti?',
+  'Wat wilt u laten zien?': 'Ne göstermek istiyorsun?',
+  'Welke organisaties vragen aandacht?':
+      'Hangi kuruluşlar dikkat gerektiriyor?',
+  'Werkelijke meetdatums': 'Gerçek ölçüm tarihleri',
+  'Wie is geraakt door een CVE?': 'CVE\'den kimler etkilenir?',
+  'Zijn de metingen compleet en actueel?': 'Ölçümler tam ve güncel mi?',
+  'bruikbaar': 'kullanılabilir',
+  'metingen': 'ölçümler',
+  'organisaties': 'kuruluşlar',
+  'organisaties geselecteerd': 'seçilen kuruluşlar',
+  'rapportages gebruikt': 'kullanılan raporlar',
+  'systemen': 'sistemler',
   'Met dank aan': 'Teşekkürle',
   'Fix alle problemen': 'Tüm sorunları düzelt',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':

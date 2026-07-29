@@ -1770,6 +1770,128 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Atrasti {reports} pārskati par {organizations} organizācijām. Mērījumi ir no {firstDate} līdz {lastDate} ieskaitot. Tika izlaisti {skipped} faili.',
+  'Dubbel bestand overgeslagen': 'Dublikāta fails izlaists',
+  'Conflicterende meting overgeslagen': 'Pretrunīgs mērījums izlaists',
+  'Geen ondersteunde OpenKAT-rapportage': 'Neatbalstīts OpenKAT pārskats',
+  'Bestand kon niet worden gelezen': 'Failu nevarēja nolasīt',
+  'Aanbevolen': 'Ieteicams',
+  'Alleen wat nodig is': 'Tikai to, kas ir nepieciešams',
+  'Alles blijft op dit apparaat': 'Alles blijft op dit apparaat',
+  'Als nieuw rapport maken': 'Izveidot kā jaunu pārskatu',
+  'Andere map kiezen': 'Izvēlieties citu mapi',
+  'Bekijk importverslag': 'Skatīt importēšanas pārskatu',
+  'Bekijk verslag': 'Skatīt pārskatu',
+  'Bijvoorbeeld CVE-2026-12345': 'Bijvoorbeeld CVE-2026-12345',
+  'Bruikbaar': 'Izmantojams',
+  'CVE zoeken': 'CVE meklēšana',
+  'Critical/high': 'Kritisks/augsts',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Datu kvalitāte, trūkstošie mērījumi un novecošanās.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Atlasītajos pārskatos nav pietiekami daudz ticamu datu par šo daļu.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Saturs parādīsies, kad būs izdarītas visas nepieciešamās izvēles.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Mērījumu pārklājums atšķiras starp izvēlētajiem mērījumu momentiem; tāpēc izmaiņas ir salīdzināmas tikai ierobežotā mērā.',
+  'Dekking en actualiteit van metingen': 'Mērījumu pārklājums un savlaicīgums',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Šis CVE netika atrasts atlasītajos mērījumos.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Šajā mapē nav noderīgu pārskatu',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Šajā atlasē ir pārāk daudz datu, lai tos droši iekļautu vienā pārskatā.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Šo sadaļu nevar pilnībā izveidot no atlasītajiem pārskatiem.',
+  'Dit rapport bevat': 'Šis ziņojums satur',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Viens vai vairāki mērījumi ir vecāki par atlasīto savlaicīguma ierobežojumu.',
+  'Eerdere bruikbare meting': 'Iepriekšējais noderīgais mērījums',
+  'Engels': 'angļu valoda',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Noderīgi mērījumi netika atrasti.',
+  'Feitelijke gegevens': 'Faktiskie dati',
+  'Geen bruikbare meetdatum': 'Nav izmantojama mērījumu datuma',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Ģenerētie slaidi tiek atsvaidzināti. Jūsu pašu slaidi un kopijas tiek saglabāti.',
+  'Getroffen organisaties en systemen': 'Ietekmētās organizācijas un sistēmas',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Ietekmētās organizācijas un sistēmas ap vienu ievainojamību.',
+  'Getroffen systemen': 'Ietekmētās sistēmas',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Pārskatu nevarēja izveidot. Jūsu izvēles tiek saglabātas; pārbaudiet brīdinājumus un mēģiniet vēlreiz.',
+  'Import': 'Importēt',
+  'Importverslag bekijken': 'Skatīt importēšanas pārskatu',
+  'Kerncijfers en aandachtspunten': 'Galvenie skaitļi un interesējošie punkti',
+  'Keuzes wijzigen…': 'Mainīt izvēli…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Izvēlieties mapi, kurā OpenKAT ir ievietojis atskaites. OciDeck lasa tikai šo mapi; nekas netiek mainīts vai nosūtīts.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Izvēlieties jautājumu, uz kuru jāatbild ziņojumā. OciDeck nosaka atbilstošo struktūru.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Izvēlieties pārskatos atrasto CVE.',
+  'Laatste bruikbare meting': 'Pēdējais izmantojamais mērījums',
+  'Live voorvertoning van de rapportopbouw':
+      'Pārskata struktūras tiešraides priekšskatījums',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Pārvaldības un kontroles informācija par vairākām organizācijām.',
+  'Meer instellingen': 'Vairāk iestatījumu',
+  'Nederlands': 'holandiešu valoda',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Ne katrai izvēlētajai organizācijai ir mērījums šim periodam.',
+  'Nieuwe en verdwenen bevindingen': 'Jauni un trūkstošie atradumi',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Vēl nav pieejams: šajos pārskatos nav uzticamu CVE numuru.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck izmanto to pašu avotu un izvēles iespējas un veic jaunākos piemērotos mērījumus. Jūsu pašu slaidi un kopijas tiek saglabāti.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck nevarēja atrast nevienu noderīgu OpenKAT mērījumu. Izvēlieties citu mapi vai skatiet importēšanas pārskatu, lai redzētu, kuri faili tika izlaisti.',
+  'OpenKAT-importverslag': 'OpenKAT importēšanas pārskats',
+  'OpenKAT-rapport': 'OpenKAT pārskats',
+  'OpenKAT-rapport bijwerken': 'Atjauniniet OpenKAT pārskatu',
+  'OpenKAT-rapport bijwerken…': 'Atjaunināt OpenKAT pārskatu…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'OpenKAT pārskatu nevarēja izveidot.',
+  'OpenKAT-rapport maken': 'Izveidojiet OpenKAT pārskatu',
+  'OpenKAT-rapport maken…': 'Izveidot OpenKAT pārskatu…',
+  'Organisaties': 'Organizācijas',
+  'Organisaties kiezen': 'Organizāciju izvēle',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Pārskats atjaunināts. Jūsu pašu slaidi ir saglabāti.',
+  'Rapport bijwerken': 'Atjaunināt pārskatu',
+  'Rapport gemaakt.': 'Pārskats izveidots.',
+  'Rapport maken': 'Izveidot atskaiti',
+  'Rapportages controleren…': 'Pārbaudiet pārskatus…',
+  'Rapportages voorbereiden': 'Sagatavot atskaites',
+  'Rapporttitel': 'Ziņojuma nosaukums',
+  'Stap': 'Solis',
+  'Taal': 'Valoda',
+  'Terug': 'Atpakaļ',
+  'Veranderingen in monitoring': 'Izmaiņas monitoringā',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Vienai vai vairākām organizācijām trūkst noderīga iepriekšēja mērījuma.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Vienai vai vairākām organizācijām trūkst noderīga strāvas mērījuma.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Salīdzināšanai nepieciešami divi mērīšanas momenti. Tagad ir atrasts viens mērījums.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Progress salīdzinājumā ar iepriekšējo mērījumu brīdi.',
+  'Waar staan de OpenKAT-rapportages?': 'Kur ir OpenKAT pārskati?',
+  'Wat veranderde er bij één organisatie?': 'Kas mainījās vienā organizācijā?',
+  'Wat wilt u laten zien?': 'Ko jūs vēlaties parādīt?',
+  'Welke organisaties vragen aandacht?':
+      'Kurām organizācijām jāpievērš uzmanība?',
+  'Werkelijke meetdatums': 'Faktiskie mērījumu datumi',
+  'Wie is geraakt door een CVE?': 'Kurus ietekmē CVE?',
+  'Zijn de metingen compleet en actueel?':
+      'Vai mērījumi ir pilnīgi un atjaunināti?',
+  'bruikbaar': 'lietojams',
+  'metingen': 'mērījumi',
+  'organisaties': 'organizācijām',
+  'organisaties geselecteerd': 'atlasītās organizācijas',
+  'rapportages gebruikt': 'izmantotās atskaites',
+  'systemen': 'sistēmas',
   'Met dank aan': 'Ar pateicību',
   'Fix alle problemen': 'Labot visas problēmas',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':

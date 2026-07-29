@@ -1778,6 +1778,129 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Rasta {reports} ataskaitų, skirtų {organizations} organizacijoms. Matavimai apima laikotarpį nuo {firstDate} iki {lastDate} imtinai. Praleista {skipped} failų.',
+  'Dubbel bestand overgeslagen': 'Pasikartojantis failas praleistas',
+  'Conflicterende meting overgeslagen': 'Prieštaringas matavimas praleistas',
+  'Geen ondersteunde OpenKAT-rapportage': 'Nepalaikoma OpenKAT ataskaita',
+  'Bestand kon niet worden gelezen': 'Nepavyko perskaityti failo',
+  'Aanbevolen': 'Rekomenduojama',
+  'Alleen wat nodig is': 'Tik tai, kas būtina',
+  'Alles blijft op dit apparaat': 'Alles blijft op dit apparaat',
+  'Als nieuw rapport maken': 'Sukurti kaip naują ataskaitą',
+  'Andere map kiezen': 'Pasirinkite kitą aplanką',
+  'Bekijk importverslag': 'Peržiūrėti importavimo ataskaitą',
+  'Bekijk verslag': 'Žiūrėti ataskaitą',
+  'Bijvoorbeeld CVE-2026-12345': 'Bijvoorbeeld CVE-2026-12345',
+  'Bruikbaar': 'Naudoti',
+  'CVE zoeken': 'CVE paieška',
+  'Critical/high': 'Kritinis/aukštas',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Duomenų kokybė, trūkstami matavimai ir pasenimas.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'Pasirinktose ataskaitose nėra pakankamai patikimų šios dalies duomenų.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Turinys bus rodomas, kai bus atlikti visi būtini pasirinkimai.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Matavimo aprėptis skiriasi pasirinktais matavimo momentais; todėl pokyčius galima palyginti tik ribotai.',
+  'Dekking en actualiteit van metingen': 'Matavimų aprėptis ir savalaikiškumas',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Pasirinktuose matavimuose šio CVE nerasta.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Šiame aplanke nėra naudingų ataskaitų',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Šiame pasirinkime yra per daug duomenų, kad juos būtų galima saugiai įtraukti į vieną ataskaitą.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Šios dalies negalima sukurti tik iš pasirinktų ataskaitų.',
+  'Dit rapport bevat': 'Šioje ataskaitoje yra',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'Vienas ar daugiau matavimų yra senesni nei pasirinkta laiko riba.',
+  'Eerdere bruikbare meting': 'Ankstesnis naudingas matavimas',
+  'Engels': 'anglų kalba',
+  'Er zijn geen bruikbare metingen gevonden.': 'Naudingų matavimų nerasta.',
+  'Feitelijke gegevens': 'Faktiniai duomenys',
+  'Geen bruikbare meetdatum': 'Nėra tinkamos naudoti matavimo datos',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Sugeneruotos skaidrės atnaujinamos. Jūsų skaidrės ir kopijos išsaugomos.',
+  'Getroffen organisaties en systemen': 'Paveiktos organizacijos ir sistemos',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Paveiktos organizacijos ir sistemos aplink vieną pažeidžiamumą.',
+  'Getroffen systemen': 'Paveiktos sistemos',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Nepavyko sukurti ataskaitos. Jūsų pasirinkimai išsaugomi; patikrinkite įspėjimus ir bandykite dar kartą.',
+  'Import': 'Importuoti',
+  'Importverslag bekijken': 'Peržiūrėti importavimo ataskaitą',
+  'Kerncijfers en aandachtspunten':
+      'Pagrindiniai skaičiai ir lankytinos vietos',
+  'Keuzes wijzigen…': 'Keisti pasirinkimus…',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Pasirinkite aplanką, kuriame OpenKAT įdėjo ataskaitas. OciDeck skaito tik šį aplanką; niekas nekeičiama ir nesiunčiama.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Pasirinkite klausimą, į kurį turėtų atsakyti ataskaita. OciDeck nustato tinkamą struktūrą.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Pasirinkite ataskaitose rastą CVE.',
+  'Laatste bruikbare meting': 'Paskutinis naudoti matavimas',
+  'Live voorvertoning van de rapportopbouw':
+      'Tiesioginė ataskaitos struktūros peržiūra',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Valdymo ir kontrolės informacija apie kelias organizacijas.',
+  'Meer instellingen': 'Daugiau nustatymų',
+  'Nederlands': 'olandų',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Ne kiekviena pasirinkta organizacija turi šio laikotarpio matavimus.',
+  'Nieuwe en verdwenen bevindingen': 'Nauji ir trūkstami radiniai',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Dar nepasiekiama: šiose ataskaitose nėra patikimų CVE numerių.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck naudoja tą patį šaltinį ir pasirinkimus bei atlieka naujausius tinkamus matavimus. Jūsų skaidrės ir kopijos išsaugomos.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck nepavyko rasti jokių naudingų OpenKAT matavimų. Pasirinkite kitą aplanką arba peržiūrėkite importavimo ataskaitą, kad sužinotumėte, kurie failai buvo praleisti.',
+  'OpenKAT-importverslag': 'OpenKAT importo ataskaita',
+  'OpenKAT-rapport': 'OpenKAT ataskaita',
+  'OpenKAT-rapport bijwerken': 'Atnaujinkite OpenKAT ataskaitą',
+  'OpenKAT-rapport bijwerken…': 'Atnaujinti OpenKAT ataskaitą…',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'Nepavyko sukurti OpenKAT ataskaitos.',
+  'OpenKAT-rapport maken': 'Sukurkite OpenKAT ataskaitą',
+  'OpenKAT-rapport maken…': 'Sukurti OpenKAT ataskaitą…',
+  'Organisaties': 'Organizacijos',
+  'Organisaties kiezen': 'Renkantis organizacijas',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Ataskaita atnaujinta. Jūsų skaidrės buvo išsaugotos.',
+  'Rapport bijwerken': 'Atnaujinti ataskaitą',
+  'Rapport gemaakt.': 'Sukurta ataskaita.',
+  'Rapport maken': 'Sukurti ataskaitą',
+  'Rapportages controleren…': 'Patikrinkite ataskaitas…',
+  'Rapportages voorbereiden': 'Ruošti ataskaitas',
+  'Rapporttitel': 'Pranešimo pavadinimas',
+  'Stap': 'Žingsnis',
+  'Taal': 'Kalba',
+  'Terug': 'Atgal',
+  'Veranderingen in monitoring': 'Stebėjimo pokyčiai',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'Vienai ar kelioms organizacijoms trūksta naudingo ankstesnio matavimo.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'Vienai ar kelioms organizacijoms trūksta naudingo srovės matavimo.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'Palyginimui reikalingi du matavimo momentai. Dabar rastas vienas matavimas.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Pažanga, palyginti su ankstesniu matavimo momentu.',
+  'Waar staan de OpenKAT-rapportages?': 'Kur yra OpenKAT ataskaitos?',
+  'Wat veranderde er bij één organisatie?':
+      'Kas pasikeitė vienoje organizacijoje?',
+  'Wat wilt u laten zien?': 'Ką nori parodyti?',
+  'Welke organisaties vragen aandacht?':
+      'Kurioms organizacijoms reikia dėmesio?',
+  'Werkelijke meetdatums': 'Faktinės matavimo datos',
+  'Wie is geraakt door een CVE?': 'Kas turi įtakos CVE?',
+  'Zijn de metingen compleet en actueel?':
+      'Ar išmatavimai baigti ir atnaujinti?',
+  'bruikbaar': 'tinkamas naudoti',
+  'metingen': 'matavimai',
+  'organisaties': 'organizacijose',
+  'organisaties geselecteerd': 'atrinktos organizacijos',
+  'rapportages gebruikt': 'panaudotos ataskaitos',
+  'systemen': 'sistemos',
   'Met dank aan': 'Su padėka',
   'Fix alle problemen': 'Taisyti visas problemas',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':

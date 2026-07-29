@@ -1770,6 +1770,129 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
+      'Der blev fundet {reports} rapporter for {organizations} organisationer. Målingerne går fra {firstDate} til og med {lastDate}. {skipped} filer blev sprunget over.',
+  'Dubbel bestand overgeslagen': 'Dobbelt fil sprunget over',
+  'Conflicterende meting overgeslagen': 'Modstridende måling sprunget over',
+  'Geen ondersteunde OpenKAT-rapportage': 'Ikke-understøttet OpenKAT-rapport',
+  'Bestand kon niet worden gelezen': 'Filen kunne ikke læses',
+  'Aanbevolen': 'Anbefales',
+  'Alleen wat nodig is': 'Kun det nødvendige',
+  'Alles blijft op dit apparaat': 'Alt forbliver på denne enhed',
+  'Als nieuw rapport maken': 'Opret som ny rapport',
+  'Andere map kiezen': 'Vælg en anden mappe',
+  'Bekijk importverslag': 'Se importrapport',
+  'Bekijk verslag': 'Se rapport',
+  'Bijvoorbeeld CVE-2026-12345': 'For eksempel CVE-2026-12345',
+  'Bruikbaar': 'Brugbar',
+  'CVE zoeken': 'CVE-søgning',
+  'Critical/high': 'Kritisk/høj',
+  'Datakwaliteit, ontbrekende metingen en veroudering.':
+      'Datakvalitet, manglende mål og forældelse.',
+  'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
+      'De valgte rapporter indeholder ikke nok pålidelige data til denne del.',
+  'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
+      'Indholdet vises, når alle nødvendige valg er foretaget.',
+  'De meetdekking verschilt tussen de gekozen meetmomenten; veranderingen zijn daardoor beperkt vergelijkbaar.':
+      'Måledækningen er forskellig mellem de valgte målemomenter; ændringer er derfor kun sammenlignelige i begrænset omfang.',
+  'Dekking en actualiteit van metingen': 'Dækning og rettidighed af målinger',
+  'Deze CVE is niet aangetroffen in de gekozen metingen.':
+      'Denne CVE blev ikke fundet i de valgte målinger.',
+  'Deze map bevat geen bruikbare rapportages':
+      'Denne mappe indeholder ingen nyttige rapporter',
+  'Deze selectie bevat te veel gegevens om veilig in één rapport te verwerken.':
+      'Dette valg indeholder for mange data til sikkert at inkludere i én rapport.',
+  'Dit onderdeel kan niet volledig uit de gekozen rapportages worden opgebouwd.':
+      'Dette afsnit kan ikke bygges helt ud fra de valgte rapporter.',
+  'Dit rapport bevat': 'Denne rapport indeholder',
+  'Een of meer metingen zijn ouder dan de gekozen actualiteitsgrens.':
+      'En eller flere målinger er ældre end den valgte tidsgrænse.',
+  'Eerdere bruikbare meting': 'Tidligere nyttig måling',
+  'Engels': 'engelsk',
+  'Er zijn geen bruikbare metingen gevonden.':
+      'Der blev ikke fundet nogen brugbare målinger.',
+  'Feitelijke gegevens': 'Faktiske data',
+  'Geen bruikbare meetdatum': 'Ingen brugbar måledato',
+  'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
+      'Genererede dias opdateres. Dine egne dias og kopier bevares.',
+  'Getroffen organisaties en systemen': 'Berørte organisationer og systemer',
+  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
+      'Berørte organisationer og systemer omkring én sårbarhed.',
+  'Getroffen systemen': 'Berørte systemer',
+  'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
+      'Rapporten kunne ikke oprettes. Dine valg er bevaret; tjek advarslerne og prøv igen.',
+  'Import': 'Importere',
+  'Importverslag bekijken': 'Se importrapport',
+  'Kerncijfers en aandachtspunten': 'Nøgletal og interessepunkter',
+  'Keuzes wijzigen…': 'Skift valg...',
+  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
+      'Vælg den mappe, hvor OpenKAT har placeret rapporterne. OciDeck læser kun denne mappe; intet ændres eller sendes.',
+  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
+      'Vælg det spørgsmål, rapporten skal besvare. OciDeck bestemmer den passende struktur.',
+  'Kies een CVE die in de rapportages is aangetroffen.':
+      'Vælg en CVE fundet i rapporterne.',
+  'Laatste bruikbare meting': 'Sidste brugbare måling',
+  'Live voorvertoning van de rapportopbouw':
+      'Live preview af rapportstrukturen',
+  'Management- en stuurinformatie over meerdere organisaties.':
+      'Ledelses- og kontroloplysninger om flere organisationer.',
+  'Meer instellingen': 'Flere indstillinger',
+  'Nederlands': 'hollandsk',
+  'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
+      'Ikke alle udvalgte organisationer har en måling for denne periode.',
+  'Nieuwe en verdwenen bevindingen': 'Nye og manglende fund',
+  'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
+      'Endnu ikke tilgængelig: disse rapporter indeholder ikke pålidelige CVE-numre.',
+  'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
+      'OciDeck bruger samme kilde og valg og tager de seneste passende målinger. Dine egne dias og kopier bevares.',
+  'OciDeck kon geen bruikbare OpenKAT-metingen vinden. Kies een andere map of bekijk het importverslag om te zien welke bestanden zijn overgeslagen.':
+      'OciDeck kunne ikke finde nogen nyttige OpenKAT-målinger. Vælg en anden mappe, eller se importrapporten for at se, hvilke filer der blev sprunget over.',
+  'OpenKAT-importverslag': 'OpenKAT import rapport',
+  'OpenKAT-rapport': 'OpenKAT rapport',
+  'OpenKAT-rapport bijwerken': 'Opdater OpenKAT-rapport',
+  'OpenKAT-rapport bijwerken…': 'Opdater OpenKAT-rapport...',
+  'OpenKAT-rapport kon niet worden gemaakt.':
+      'OpenKAT-rapporten kunne ikke oprettes.',
+  'OpenKAT-rapport maken': 'Opret OpenKAT-rapport',
+  'OpenKAT-rapport maken…': 'Opret OpenKAT-rapport...',
+  'Organisaties': 'Organisationer',
+  'Organisaties kiezen': 'Valg af organisationer',
+  'Rapport bijgewerkt. Uw eigen dia’s zijn behouden.':
+      'Rapport opdateret. Dine egne dias er blevet bevaret.',
+  'Rapport bijwerken': 'Opdater rapport',
+  'Rapport gemaakt.': 'Rapport oprettet.',
+  'Rapport maken': 'Opret rapport',
+  'Rapportages controleren…': 'Tjek rapporter...',
+  'Rapportages voorbereiden': 'Udarbejde rapporter',
+  'Rapporttitel': 'Rapportens titel',
+  'Stap': 'Trin',
+  'Taal': 'Sprog',
+  'Terug': 'Tilbage',
+  'Veranderingen in monitoring': 'Ændringer i overvågningen',
+  'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
+      'En nyttig tidligere måling mangler for en eller flere organisationer.',
+  'Voor een of meer organisaties ontbreekt een bruikbare huidige meting.':
+      'En nyttig strømmåling mangler for en eller flere organisationer.',
+  'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
+      'To målemomenter er nødvendige for en sammenligning. En måling er nu fundet.',
+  'Voortgang ten opzichte van een eerder meetmoment.':
+      'Fremskridt sammenlignet med et tidligere målemoment.',
+  'Waar staan de OpenKAT-rapportages?': 'Hvor er OpenKAT-rapporterne?',
+  'Wat veranderde er bij één organisatie?':
+      'Hvad ændrede sig i én organisation?',
+  'Wat wilt u laten zien?': 'Hvad vil du vise?',
+  'Welke organisaties vragen aandacht?':
+      'Hvilke organisationer kræver opmærksomhed?',
+  'Werkelijke meetdatums': 'Faktiske måledatoer',
+  'Wie is geraakt door een CVE?': 'Hvem er berørt af en CVE?',
+  'Zijn de metingen compleet en actueel?':
+      'Er målingerne fuldstændige og opdaterede?',
+  'bruikbaar': 'brugbar',
+  'metingen': 'målinger',
+  'organisaties': 'organisationer',
+  'organisaties geselecteerd': 'udvalgte organisationer',
+  'rapportages gebruikt': 'anvendte rapporter',
+  'systemen': 'systemer',
   'Met dank aan': 'Med tak',
   'Fix alle problemen': 'Løs alle problemer',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
