@@ -101,6 +101,9 @@ void main() {
   /// zodra ze er is, en niet uit de controller van dít geval gelezen.
   String? geladenPagina;
 
+  /// Of de bootstrap-wachtlus al een keer gelopen heeft — zie [setUp].
+  var bootstrapAfgewacht = false;
+
   /// Elke test een eigen bron: de dienst is een singleton met een cache, en
   /// een gedeelde bron zou de tweede test op het antwoord van de eerste laten
   /// leunen.
@@ -122,14 +125,27 @@ void main() {
     // Écht wachten, niet alleen microtaken. `AssetBundle.loadString` decodeert
     // alles boven 10 kB in een eigen isolate, en de mermaid-bundel is ruim
     // groter. Een isolate-heenweg komt niet terug op een `Duration.zero` —
-    // die pompt alleen de microtaakrij van dit isolate leeg. Met tweehonderd
-    // van die rondes bleef `controller.html` dus altijd null en faalde deze
-    // toets op "er is geen pagina geladen", nog vóór er iets over de CSP werd
-    // beweerd. Vijf milliseconden per ronde geeft de isolate de kans om te
-    // antwoorden; hij breekt af zodra de pagina er is, dus het kost niets.
-    for (var i = 0; i < 200; i++) {
-      await Future<void>.delayed(const Duration(milliseconds: 5));
-      if (geladenPagina != null || controller.html != null) break;
+    // die pompt alleen de microtaakrij van dit isolate leeg. Vijf
+    // milliseconden per ronde geeft de isolate de kans om te antwoorden.
+    //
+    // De grens is een wandklok en geen aantal rondes: tweehonderd rondes zijn
+    // één seconde, en dat is een gok op de snelheid van de machine. Op de
+    // Windows-CI, waar de hele suite tegelijk om vier kernen vecht, was die
+    // seconde soms te krap en faalde deze toets op "er is geen pagina
+    // geladen" — nog vóór er iets over de CSP was beweerd. De lus breekt af
+    // zodra de pagina er is, dus op een gezonde machine kost de ruimere grens
+    // niets.
+    if (!bootstrapAfgewacht) {
+      final klok = Stopwatch()..start();
+      while (geladenPagina == null &&
+          controller.html == null &&
+          klok.elapsed < const Duration(seconds: 60)) {
+        await Future<void>.delayed(const Duration(milliseconds: 5));
+      }
+      // Eén keer wachten is genoeg: bootstrappen gebeurt precies één keer per
+      // proces, dus komt de pagina hier niet, dan ook in geen volgend geval —
+      // en dan hoeft de suite die wachttijd niet nog eens te betalen.
+      bootstrapAfgewacht = true;
     }
     geladenPagina ??= controller.html;
   });
