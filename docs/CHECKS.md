@@ -206,7 +206,7 @@ now the only passing state.
 | [`make check-toolchain`](#make-check-toolchain) | The running Flutter is the pinned official stable, and is recorded here | ✅ | ✅ | — |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
-| [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 20% of its own lines | ✅ | ✅ | — |
+| [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
 | [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
@@ -605,8 +605,9 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Runs:** `dart run tool/coverage_summary.dart --per-file-floor`, over the
   report `make coverage` just wrote — no second test run.
 - **Covers:** the worst case *per file* instead of the average: how many `lib/`
-  files execute less than `perFileFloorPercent` (currently **20%**) of their own
-  lines.
+  files execute less than `perFileFloorPercent` (currently **34%**) of their own
+  lines. *(Raised 2026-07-29 (#972); this floor is a ratchet, and the document
+  follows the code — not the other way around.)*
 - **Failure means:** at least one file sits below that floor. Write a test for
   it, or — only when it is a platform half or has no executable lines — put it
   in `uncoveredBaseline` with a reason.
