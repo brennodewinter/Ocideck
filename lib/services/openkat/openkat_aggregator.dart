@@ -356,6 +356,53 @@ class OpenKatAggregator {
   /// stilstond, want "onbekend" is minder nieuws dan "gemeten en gelijk".
   int _movement(OpenKatOrganizationComparison c) => c.delta?.abs() ?? -1;
 
+  /// Organisaties gerangschikt voor de actuele managementvraag.
+  ///
+  /// Dit is bewust geen samengestelde risicoscore: eerst telt de zwaarste
+  /// feitelijke ernst, daarna het aantal getroffen systemen en pas daarna het
+  /// totaal. De presentatie kan daardoor precies uitleggen waarom een
+  /// organisatie bovenaan staat.
+  List<OpenKatOrganizationAttention> organizationAttention(
+    List<OpenKatOrganization> organizations,
+  ) {
+    final out = <OpenKatOrganizationAttention>[];
+    for (final organization in organizations) {
+      final current = organization.current;
+      if (current == null) continue;
+      final counts = openKatSeverityCounts(current.findings);
+      final urgentFindings = current.findings.where((finding) {
+        final band = openKatSeverityBand(finding.severity);
+        return band == 'critical' || band == 'high';
+      });
+      out.add(
+        OpenKatOrganizationAttention(
+          code: organization.code,
+          name: organization.name,
+          critical: counts['critical'] ?? 0,
+          high: counts['high'] ?? 0,
+          affectedSystems: urgentFindings
+              .map((finding) => finding.systemId)
+              .whereType<String>()
+              .toSet()
+              .length,
+          totalFindings: current.findings.length,
+        ),
+      );
+    }
+    out.sort((a, b) {
+      var comparison = b.critical.compareTo(a.critical);
+      if (comparison != 0) return comparison;
+      comparison = b.high.compareTo(a.high);
+      if (comparison != 0) return comparison;
+      comparison = b.affectedSystems.compareTo(a.affectedSystems);
+      if (comparison != 0) return comparison;
+      comparison = b.totalFindings.compareTo(a.totalFindings);
+      if (comparison != 0) return comparison;
+      return a.name.compareTo(b.name);
+    });
+    return out;
+  }
+
   /// De jongste momentopname van [org] op of vóór [date], of null als er toen
   /// nog niet gemeten was.
   OpenKatSnapshot? _latestUpTo(OpenKatOrganization org, DateTime date) {
@@ -592,6 +639,25 @@ class OpenKatOrganizationComparison {
 
   int? get delta =>
       previousFindings == null ? null : findings - previousFindings!;
+}
+
+/// Eén actuele organisatie in de uitlegbare managementrangorde.
+class OpenKatOrganizationAttention {
+  final String code;
+  final String name;
+  final int critical;
+  final int high;
+  final int affectedSystems;
+  final int totalFindings;
+
+  const OpenKatOrganizationAttention({
+    required this.code,
+    required this.name,
+    required this.critical,
+    required this.high,
+    required this.affectedSystems,
+    required this.totalFindings,
+  });
 }
 
 class PortfolioAggregate {
