@@ -1358,20 +1358,20 @@ asset** — not a build artifact, which would need a token even on a public
 repository and would expire after ninety days. The forge picks that URL up with
 plain `curl`, so no GitHub credential is stored on the self-hosted runner.
 
-### `.github/workflows/ci.yml` — declared for every push and pull request
-- **Changes (Linux)** — a `git diff` between the base and head commit (the PR's
-  base/head SHAs, or the push's before/after SHA), read by every job below
-  except `gate`. Skips `test-matrix`, `web-hardening` and `supply-chain` when
-  nothing outside `*.md`/`docs/**` changed, and skips `docs-links` when nothing
-  *inside* `*.md`/`docs/**` changed. `gate` is deliberately exempt — it carries
-  [`make check-secrets`](#make-check-secrets) and [`make sast`](#make-sast), and
-  a docs-only PR must not get a weaker security signal than a code PR. A tag
-  push, `workflow_dispatch`, or a diff the script can't compute (new branch, a
-  force-push whose old commit is gone) all fail **open** to running everything —
-  a missed skip costs a few CI minutes, a wrongly-skipped job costs the signal
-  itself. No marketplace action (`dorny/paths-filter` et al.): three lines of
-  shell need no third-party dependency and no new
-  [`pinned-ci-versions.json`](../.github/pinned-ci-versions.json) entry.
+### `.github/workflows/ci.yml` — declared on a version tag (`v*`)
+- **On a `v*` tag, or `workflow_dispatch`** (#958) — until 2026-07-29 this
+  declared `push: branches: ["**"]` plus `pull_request:`, so the full
+  seven-job pipeline below fired on every commit to every branch and every
+  pull request on the mirror, regardless of what changed. That made the
+  mirror a **second failure-mail source** for work the forge already did: the
+  real merge gate is `make check` on the committer's own machine, and
+  [`.forgejo/workflows/scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request)
+  already runs `check-secrets`/`sast` on every pull request there. Per PR, this
+  mirror added load without adding signal. Brought in line with
+  [`.forgejo/workflows/ci.yml`](#forgejoworkflowsci--the-release-gate-on-a-v-tag)
+  (#790): CI is a release gate, not a merge gate. `workflow_dispatch` stays, so
+  a branch can still go through the full pipeline by hand without cutting a
+  tag.
 - **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get
   --enforce-lockfile`, then `make format-check`, `make analyze`,
   `make check-conventions`, `make check-audience-boundary`,
@@ -1393,21 +1393,19 @@ plain `curl`, so no GitHub credential is stored on the self-hosted runner.
   Both were already right in
   [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request)
   (#799); only this mirror definition lagged.
-- **Test matrix (macOS + Windows)**, skipped on a docs-only diff — runs `flutter
-  test --test-randomize-ordering-seed random` on the other two desktop OSes to
-  catch platform-specific (path, `Platform.isX`) regressions the Linux gate
-  would miss. `make` is not reliably present on the Windows runner, so this job
-  calls Flutter directly.
-- **Web hardening (Linux)**, skipped on a docs-only diff — `make check-web`:
-  builds the web bundle and asserts its hardening invariants, plus that the
-  release artefacts travel with it and `SHA256SUMS` still matches.
-- **Docs links (Linux)**, skipped when no `*.md`/`docs/**` file changed —
-  `lychee --offline` validates internal Markdown links across the repo
-  (external URLs are skipped so it can't flake).
-- **Supply-chain (Linux, advisory)**, skipped on a docs-only diff — the
-  [`trivy-action`](https://github.com/aquasecurity/trivy-action) runs the same
-  `make trivy` scan (Dart-dep CVEs + committed secrets) with `exit-code: 0`, so
-  it surfaces findings without blocking merges.
+- **Test matrix (macOS + Windows)** — runs `flutter test
+  --test-randomize-ordering-seed random` on the other two desktop OSes to catch
+  platform-specific (path, `Platform.isX`) regressions the Linux gate would miss.
+  `make` is not reliably present on the Windows runner, so this job calls Flutter
+  directly.
+- **Web hardening (Linux)** — `make check-web`: builds the web bundle and asserts
+  its hardening invariants, plus that the release artefacts travel with it and
+  `SHA256SUMS` still matches.
+- **Docs links (Linux)** — `lychee --offline` validates internal Markdown links
+  across the repo (external URLs are skipped so it can't flake).
+- **Supply-chain (Linux, advisory)** — the [`trivy-action`](https://github.com/aquasecurity/trivy-action)
+  runs the same `make trivy` scan (Dart-dep CVEs + committed secrets) with
+  `exit-code: 0`, so it surfaces findings without blocking merges.
 
 CI does **not** build native binaries here; it validates formatting, analysis,
 tests, and the web bundle's hardening, which are platform-independent.

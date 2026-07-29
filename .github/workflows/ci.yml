@@ -21,11 +21,20 @@
 
 name: CI
 
+# Draait op een tag, niet op elke push of PR (#958). Dit was ooit `push:
+# branches: ["**"]` + `pull_request:` — de hele zevendelige pijplijn op élke
+# commit, ongeacht wat er wijzigde. Dat maakte deze spiegel een tweede
+# faalmail-bron náást de forge, voor werk dat de forge al deed: de échte
+# samenvoegpoort is `make check` op de machine van de committer, en de
+# Forgejo-PR-poort (`.forgejo/workflows/scans.yml`) draait `check-secrets`/
+# `sast` al op elke PR. Deze spiegel voegt daar per PR niets aan toe, alleen
+# lasten. Zelfde keuze als `.forgejo/workflows/ci.yml` (#790): CI is een
+# uitbrengpoort, geen samenvoegpoort. `workflow_dispatch` blijft, zodat een tak
+# alsnog handmatig door de volledige pijplijn kan zonder een tag te zetten.
 on:
   push:
-    branches: ["**"]
     tags: ["v*"]
-  pull_request:
+  workflow_dispatch:
 
 # Least privilege: the default GITHUB_TOKEN grants far more than these jobs
 # need. They only read the repo and upload build artifacts (which use the
@@ -36,86 +45,6 @@ permissions:
   contents: read
 
 jobs:
-  # Wat de PR of push wijzigt bepaalt welke van de losse jobs hieronder nog
-  # iets toevoegen. Een docs-only wijziging trok tot nu toe dezelfde
-  # driedelige testmatrix, webbuild en supply-chain-scan als een wijziging in
-  # `lib/` — vier keer Flutter optuigen voor een `.md`-bestand dat geen van die
-  # jobs raakt. `gate` staat hier bewust buiten: die bevat naast de zware
-  # testsuite ook `check-secrets`/`sast`, en een docs-only PR mag nooit minder
-  # beveiligingssignaal krijgen dan een PR die code wijzigt — zie
-  # `docs/CHECKS.md` ("Docs zijn een privacycorpus"). Alleen de jobs die
-  # *uitsluitend* code- of docs-gedreven zijn, gaan hieronder aan een filter.
-  #
-  # Eigen `git diff` in plaats van een marketplace-action als
-  # `dorny/paths-filter`: dezelfde reden als hierboven bij gitleaks/trufflehog
-  # — geen extra derde partij in de keten, en geen nieuwe regel in
-  # `pinned-ci-versions.json` voor iets dat drie regels shell ook kan.
-  #
-  # Faalt de diff-logica zelf (nieuwe branch zonder vergelijkbare voorganger,
-  # force-push waarvan het oude object al weg is, een event-vorm die hier niet
-  # in voorzien is) dan valt dit open naar "alles draait" — nooit stil dicht
-  # naar "sla maar over". Een gemiste besparing kost een paar minuten CI; een
-  # job die stil overgeslagen werd terwijl hij hoorde te draaien, kost het
-  # signaal zelf.
-  changes:
-    name: Detect changed paths
-    runs-on: ubuntu-latest
-    outputs:
-      code: ${{ steps.diff.outputs.code }}
-      docs: ${{ steps.diff.outputs.docs }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          persist-credentials: false
-          # Dezelfde reden als bij de geheimenscan: zonder de volledige
-          # historie is er niets om de PR/push-diff tegen af te zetten.
-          fetch-depth: 0
-
-      - name: Gewijzigde paden bepalen
-        id: diff
-        run: |
-          set -euo pipefail
-
-          full_run() {
-            echo "code=true" >> "$GITHUB_OUTPUT"
-            echo "docs=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          }
-
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            base="${{ github.event.pull_request.base.sha }}"
-            head="${{ github.event.pull_request.head.sha }}"
-          elif [ "${{ github.event_name }}" = "push" ] && [ "${{ github.ref_type }}" = "branch" ]; then
-            base="${{ github.event.before }}"
-            head="${{ github.sha }}"
-          else
-            # Een tag-push of een handmatige workflow_dispatch: precies het
-            # geval waarin deze poort al bewust alles draait (zie de
-            # dossieropmerking hierboven over #790/#796).
-            full_run
-          fi
-
-          if [ -z "$base" ] || ! git cat-file -e "$base" 2>/dev/null; then
-            full_run
-          fi
-
-          files="$(git diff --name-only "$base" "$head")"
-          echo "$files"
-
-          code=false
-          docs=false
-          while IFS= read -r f; do
-            [ -z "$f" ] && continue
-            case "$f" in
-              *.md|docs/*) docs=true ;;
-              *) code=true ;;
-            esac
-          done <<< "$files"
-
-          echo "code=$code" >> "$GITHUB_OUTPUT"
-          echo "docs=$docs" >> "$GITHUB_OUTPUT"
-
   # Canonical gate on Linux: formatting, analysis, the full suite with coverage,
   # licence compliance and the bundled-JS security check.
   gate:
@@ -338,8 +267,6 @@ jobs:
   # Windows runner, so this calls Flutter directly.
   test-matrix:
     name: Test (${{ matrix.os }})
-    needs: changes
-    if: needs.changes.outputs.code == 'true'
     strategy:
       fail-fast: false
       matrix:
@@ -393,8 +320,6 @@ jobs:
   # re-introduce a third-party origin or weaken the CSP.
   web-hardening:
     name: Web hardening
-    needs: changes
-    if: needs.changes.outputs.code == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -424,8 +349,6 @@ jobs:
   # hoort onze eigen documentatie te controleren, niet upstream-tekst.
   docs-links:
     name: Docs links
-    needs: changes
-    if: needs.changes.outputs.docs == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -445,8 +368,6 @@ jobs:
   # Dart/pub advisory coverage is still thin. Mirrors `make trivy` locally.
   supply-chain:
     name: Supply-chain (Trivy · advisory)
-    needs: changes
-    if: needs.changes.outputs.code == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
