@@ -550,6 +550,22 @@ final List<DeckTemplate> deckTemplates = [
         'risico en verbetering.',
     icon: 'occurrenceReport',
   ),
+  DeckTemplate(
+    id: 'flightDebrief',
+    title: 'Vluchtdebriefing',
+    description:
+        'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een '
+        'vlucht of les.',
+    icon: 'flightDebrief',
+  ),
+  DeckTemplate(
+    id: 'passengerBriefing',
+    title: 'Passagiersbriefing (kleine luchtvaart)',
+    description:
+        'Gordels, deuren, noodprocedures en afspraken aan boord vóór het '
+        'taxiën.',
+    icon: 'passengerBriefing',
+  ),
   // ── Fysieke beveiliging en veiligheid ───────────────────────────────────────
   DeckTemplate(
     id: 'toolboxTalk',

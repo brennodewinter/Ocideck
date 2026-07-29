@@ -747,11 +747,12 @@ void main() {
   });
 
   group('uitbreidingssjablonen: besluitvorming, sectoren en gesprekken', () {
-    // De zeventien sjablonen van de catalogus-uitbreiding: de besluitvormende
+    // De negentien sjablonen van de catalogus-uitbreiding: de besluitvormende
     // en financiële as (businesscase, begroting, besluitvormend overleg,
     // sprint review, threat modeling), de sectoren die op nul stonden
-    // (publieke sector, onderwijs, vereniging, sociaal domein), en de twee
-    // generieke gespreksvoorbereidingen naast de scenario-specifieke familie.
+    // (publieke sector, onderwijs, vereniging, sociaal domein), de twee
+    // generieke gespreksvoorbereidingen naast de scenario-specifieke familie,
+    // en de sluitstukken van de luchtvaartketen (debriefing en paxbriefing).
     const uitbreidingIds = [
       'businessCase',
       'budgetPresentation',
@@ -770,12 +771,14 @@ void main() {
       'parentsEvening',
       'internshipPresentation',
       'membersAssembly',
+      'flightDebrief',
+      'passengerBriefing',
     ];
 
-    test('all seventeen expansion templates are registered', () {
+    test('all nineteen expansion templates are registered', () {
       final ids = deckTemplates.map((t) => t.id).toSet();
       expect(ids, containsAll(uitbreidingIds));
-      expect(uitbreidingIds.toSet(), hasLength(17));
+      expect(uitbreidingIds.toSet(), hasLength(19));
     });
 
     test('every expansion template is substantial in both languages', () {

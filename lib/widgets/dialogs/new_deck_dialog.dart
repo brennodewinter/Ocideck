@@ -150,6 +150,8 @@ const Map<String, IconData> templatePickerIcons = {
   'parentsEvening': Icons.escalator_warning,
   'internshipPresentation': Icons.co_present_outlined,
   'membersAssembly': Icons.groups_3_outlined,
+  'flightDebrief': Icons.flight_land,
+  'passengerBriefing': Icons.airline_seat_recline_normal,
   'miauwReport': Icons.bug_report_outlined,
   'procesverbeteringDmaic': Icons.trending_up,
 };
