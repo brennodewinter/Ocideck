@@ -421,7 +421,7 @@ class OpenKatReportComposer {
         for (final band in openKatSeverityBands)
           _severityEntry(band, c.severityCounts, p?.severityCounts),
         ScorecardEntry(
-          label: _text('Getroffen systemen', 'Affected systems'),
+          label: _text('Kwetsbare systemen', 'Vulnerable systems'),
           value: c.affectedSystems.toDouble(),
           previous: p?.affectedSystems.toDouble(),
           polarity: ScorecardPolarity.lowerBetter,
@@ -483,8 +483,8 @@ class OpenKatReportComposer {
         'These organizations require attention',
       ),
       subtitle: _text(
-        'Gerangschikt op kritieke bevindingen, hoge bevindingen en getroffen systemen.',
-        'Ranked by critical findings, high findings, and affected systems.',
+        'Gerangschikt op kritieke bevindingen, hoge bevindingen en kwetsbare systemen.',
+        'Ranked by critical findings, high findings, and vulnerable systems.',
       ),
       tableRows: [
         [
@@ -492,7 +492,7 @@ class OpenKatReportComposer {
           _text('Waarom aandacht', 'Why attention is needed'),
           _text('Kritiek', 'Critical'),
           _text('Hoog', 'High'),
-          _text('Getroffen systemen', 'Affected systems'),
+          _text('Kwetsbare systemen', 'Vulnerable systems'),
         ],
         for (final organization in organizations)
           [
@@ -816,12 +816,12 @@ class OpenKatReportComposer {
       return _english
           ? 'High: ${organization.high} '
                 '${organization.high == 1 ? 'finding' : 'findings'} across '
-                '${organization.affectedSystems} affected '
-                '${organization.affectedSystems == 1 ? 'system' : 'systems'}'
+                '${organization.affectedSystems} '
+                '${organization.affectedSystems == 1 ? 'vulnerable system' : 'vulnerable systems'}'
           : 'Hoog: ${organization.high} '
                 '${organization.high == 1 ? 'bevinding' : 'bevindingen'} op '
-                '${organization.affectedSystems} getroffen '
-                '${organization.affectedSystems == 1 ? 'systeem' : 'systemen'}';
+                '${organization.affectedSystems} '
+                '${organization.affectedSystems == 1 ? 'kwetsbaar systeem' : 'kwetsbare systemen'}';
     }
     return _text(
       'Geen kritieke of hoge bevindingen',
@@ -904,8 +904,8 @@ class OpenKatReportComposer {
         'medium findings',
       ),
       OpenKatTrendMetric.affectedSystems => _text(
-        'getroffen systemen',
-        'affected systems',
+        'kwetsbare systemen',
+        'vulnerable systems',
       ),
       OpenKatTrendMetric.controlCoverage => throw StateError(
         'control coverage is handled above',

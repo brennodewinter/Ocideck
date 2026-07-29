@@ -317,7 +317,7 @@ void main() {
                 scenario: scenario,
                 facts: wizardScan().preview,
                 title: 'CVE-blootstelling',
-                description: 'Laat getroffen systemen zien.',
+                description: 'Laat kwetsbare systemen zien.',
                 recommendedLabel: 'Aanbevolen',
                 selectedLabel: 'Geselecteerd',
                 unavailableReason: 'Geen betrouwbare CVE-verwijzingen',
@@ -774,6 +774,8 @@ void main() {
         findsNothing,
       );
       expect(find.text('1 organisaties · 1 rapportages'), findsOneWidget);
+      expect(find.text('Kwetsbare systemen'), findsOneWidget);
+      expect(find.text('Getroffen systemen'), findsNothing);
     });
 
     testWidgets('smalle wizard met 200% tekst blijft zonder renderfout', (

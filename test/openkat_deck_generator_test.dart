@@ -214,13 +214,13 @@ void main() {
           'Waarom aandacht',
           'Kritiek',
           'Hoog',
-          'Getroffen systemen',
+          'Kwetsbare systemen',
         ]);
         expect(
           attention.tableRows.skip(1).map((row) => row.first),
           ['Bravo', 'Alpha', 'Charlie'],
           reason:
-              'kritieke bevindingen wegen vóór hoge; getroffen systemen '
+              'kritieke bevindingen wegen vóór hoge; kwetsbare systemen '
               'maken de rangorde daarna transparant',
         );
         expect(attention.tableRows[1].sublist(2), ['1', '0', '1']);
@@ -228,10 +228,10 @@ void main() {
         expect(attention.tableRows[3].sublist(2), ['0', '1', '1']);
         expect(attention.tableRows[1][1], 'Kritiek: 1 bevinding');
         expect(attention.tableRows[2][1].toLowerCase(), contains('hoog'));
-        expect(attention.tableRows[2][1].toLowerCase(), contains('getroffen'));
+        expect(attention.tableRows[2][1].toLowerCase(), contains('kwetsbare'));
         expect(
           attention.tableRows[3][1],
-          'Hoog: 1 bevinding op 1 getroffen systeem',
+          'Hoog: 1 bevinding op 1 kwetsbaar systeem',
         );
       },
     );

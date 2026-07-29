@@ -425,6 +425,7 @@ void main() {
         RegExp(r'\bhigh\b'),
         RegExp(r'\bernstband\b'),
         RegExp(r'\bpercentage conform\b'),
+        RegExp(r'\bgetroffen system(?:en)?\b'),
       ]) {
         expect(
           forbidden.hasMatch(lower),

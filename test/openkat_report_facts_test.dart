@@ -281,7 +281,7 @@ void main() {
       );
     });
 
-    test('ernst, getroffen systemen en findingtypen delen één definitie', () {
+    test('ernst, kwetsbare systemen en findingtypen delen één definitie', () {
       final snapshot = _snapshot(
         date: DateTime.utc(2026, 7, 13),
         source: 'current.json',
