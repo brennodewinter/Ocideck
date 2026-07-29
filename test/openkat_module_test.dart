@@ -18,6 +18,9 @@ import 'package:ocideck/widgets/shell/openkat_import_action.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'support/pump_until.dart';
+import 'support/temp_dir.dart';
+
 /// De module Importeren (#772, besluit B1): materiaal uit andere systemen
 /// binnenhalen als uitbreiding, standaard uit. OpenKAT is de eerste importeur;
 /// zijn rapportagemap staat onder Integraties.
@@ -253,7 +256,7 @@ void main() {
       // Instellingen, welkom en menu horen geen afwijkende importroutes te
       // hebben: deze knop opent dezelfde wizard met de ingestelde map.
       final tmp = Directory.systemTemp.createTempSync('ocikat-knop-');
-      addTearDown(() => tmp.deleteSync(recursive: true));
+      addTearDown(() => deleteTempDir(tmp));
       Directory(p.join(tmp.path, 'raw-data')).createSync();
       File(
         p.join(tmp.path, 'raw-data', 'org1_20240601000000.json'),
@@ -273,18 +276,14 @@ void main() {
 
       // De scan doet echte bestands-I/O: die futures komen onder de
       // testbinding alleen aan in een runAsync-beurt, en één pomp is te vroeg.
-      for (var i = 0; i < 40; i++) {
-        if (find
+      await pumpUntil(
+        tester,
+        () => find
             .text('Welke organisaties vragen aandacht?')
             .evaluate()
-            .isNotEmpty) {
-          break;
-        }
-        await tester.runAsync(
-          () => Future<void>.delayed(const Duration(milliseconds: 20)),
-        );
-        await tester.pump();
-      }
+            .isNotEmpty,
+        reason: 'de wizard opende niet na een tik op de knop',
+      );
 
       expect(find.text('OpenKAT-rapport maken'), findsOneWidget);
       expect(
@@ -340,7 +339,7 @@ void main() {
     // De mapkiezer laat zich onder `flutter test` niet aansturen en zou null
     // teruggeven; verschijnen de scenario's, dan kwam de map uit de instelling.
     final tmp = Directory.systemTemp.createTempSync('ocikat-vaste-map-');
-    addTearDown(() => tmp.deleteSync(recursive: true));
+    addTearDown(() => deleteTempDir(tmp));
     Directory(p.join(tmp.path, 'raw-data')).createSync();
     File(
       p.join(tmp.path, 'raw-data', 'org1_20240601000000.json'),
@@ -383,18 +382,14 @@ void main() {
 
     final wizard = importOpenKatReports(ctx, reff);
     await tester.pump();
-    for (var i = 0; i < 40; i++) {
-      if (find
+    await pumpUntil(
+      tester,
+      () => find
           .text('Welke organisaties vragen aandacht?')
           .evaluate()
-          .isNotEmpty) {
-        break;
-      }
-      await tester.runAsync(
-        () => Future<void>.delayed(const Duration(milliseconds: 20)),
-      );
-      await tester.pump();
-    }
+          .isNotEmpty,
+      reason: 'de wizard opende niet vanuit de ingestelde map',
+    );
 
     expect(
       find.text('Welke organisaties vragen aandacht?'),
