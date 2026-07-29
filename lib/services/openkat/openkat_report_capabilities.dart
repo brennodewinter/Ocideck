@@ -18,7 +18,8 @@ class OpenKatReportCapabilityService {
         if (request.previousAsOf != null) ?selection.previous,
       ],
     ];
-    final compared = selections
+    final compared = facts
+        .comparisonSelections(request)
         .where(
           (selection) =>
               selection.current != null && selection.previous != null,
@@ -56,6 +57,18 @@ class OpenKatReportCapabilityService {
         additionalEvidence: (snapshot) =>
             snapshot.systems.every((system) => system.monitoringStatus != null),
       ),
+      OpenKatReportCapability.reliableOpenedAt: _sourceFeature(
+        OpenKatReportCapability.reliableOpenedAt,
+        current,
+        OpenKatSourceFeature.reliableOpenedAt,
+        additionalEvidence: (snapshot) =>
+            snapshot.findings.isNotEmpty &&
+            snapshot.findings.every(
+              (finding) =>
+                  finding.openedAt != null &&
+                  !finding.openedAt!.isAfter(snapshot.reportDate),
+            ),
+      ),
       OpenKatReportCapability.stableAssetIdentity: _binary(
         OpenKatReportCapability.stableAssetIdentity,
         selectedSnapshots.isNotEmpty &&
@@ -64,12 +77,15 @@ class OpenKatReportCapabilityService {
                   snapshot.sourceFeatures.contains(
                     OpenKatSourceFeature.stableAssetIdentity,
                   ) &&
+                  snapshot.systems.isNotEmpty &&
                   snapshot.systems.every((system) => system.stableIdentity),
             ),
       ),
       OpenKatReportCapability.comparableMeasurementCoverage: _binary(
         OpenKatReportCapability.comparableMeasurementCoverage,
-        compared.isNotEmpty && compared.every(facts.hasComparableCoverage),
+        selections.isNotEmpty &&
+            compared.length == selections.length &&
+            compared.every(facts.hasComparableCoverage),
         {
           'comparableOrganizations':
               '${compared.where(facts.hasComparableCoverage).length}',
@@ -78,9 +94,16 @@ class OpenKatReportCapabilityService {
       ),
       OpenKatReportCapability.findingLifecycle: _binary(
         OpenKatReportCapability.findingLifecycle,
-        compared.isNotEmpty &&
+        selections.isNotEmpty &&
+            compared.length == selections.length &&
             compared.every(
               (selection) =>
+                  selection.current!.sourceFeatures.contains(
+                    OpenKatSourceFeature.stableFindingIdentity,
+                  ) &&
+                  selection.previous!.sourceFeatures.contains(
+                    OpenKatSourceFeature.stableFindingIdentity,
+                  ) &&
                   selection.current!.findings.every(
                     (finding) => finding.stableIdentity,
                   ) &&
@@ -91,11 +114,28 @@ class OpenKatReportCapabilityService {
       ),
       OpenKatReportCapability.controlsWithDenominator: _binary(
         OpenKatReportCapability.controlsWithDenominator,
-        current.any(
-          (snapshot) =>
-              snapshot.controls.isNotEmpty &&
-              snapshot.controls.values.every((score) => score.ratio != null),
-        ),
+        current.isNotEmpty &&
+            current.every(
+              (snapshot) =>
+                  snapshot.controls.isNotEmpty &&
+                  snapshot.controls.values.every(
+                    (score) => score.ratio != null,
+                  ),
+            ),
+      ),
+      OpenKatReportCapability.comparableControlsWithDenominator: _binary(
+        OpenKatReportCapability.comparableControlsWithDenominator,
+        selections.isNotEmpty &&
+            compared.length == selections.length &&
+            compared.every(
+              (selection) =>
+                  _hasControlDenominators(selection.current!) &&
+                  _hasControlDenominators(selection.previous!),
+            ),
+        {
+          'comparedOrganizations': '${compared.length}',
+          'organizationCount': '${selections.length}',
+        },
       ),
       OpenKatReportCapability.sufficientDataFreshness: _freshness(
         facts,
@@ -103,6 +143,10 @@ class OpenKatReportCapabilityService {
       ),
     };
   }
+
+  bool _hasControlDenominators(OpenKatSnapshot snapshot) =>
+      snapshot.controls.isNotEmpty &&
+      snapshot.controls.values.every((score) => score.ratio != null);
 
   OpenKatCapabilityAssessment _sourceFeature(
     OpenKatReportCapability capability,

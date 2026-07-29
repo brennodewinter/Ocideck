@@ -55,7 +55,7 @@ class OpenKatReportPolicy {
 
   const OpenKatReportPolicy({
     this.maximumSnapshotAge,
-    this.tableRowLimit = 25,
+    this.tableRowLimit = maximumTableRowLimit,
     this.historicalFindingWorkLimit = defaultHistoricalFindingWorkLimit,
   });
 }
@@ -89,10 +89,12 @@ enum OpenKatReportCapability {
   historicalSnapshots,
   reliableCveReferences,
   reliableMonitoringStatus,
+  reliableOpenedAt,
   stableAssetIdentity,
   comparableMeasurementCoverage,
   findingLifecycle,
   controlsWithDenominator,
+  comparableControlsWithDenominator,
   sufficientDataFreshness,
 }
 
@@ -144,7 +146,7 @@ class OpenKatReportDiagnostic {
   });
 }
 
-enum OpenKatMeasurementRole { current, previous }
+enum OpenKatMeasurementRole { current, previous, historical }
 
 /// Werkelijk gebruikt meetmoment, inclusief ouderdom op de gevraagde peildatum.
 class OpenKatMeasurementUsage {
@@ -233,17 +235,145 @@ class OpenKatFindingLifecycleItem {
 class OpenKatControlChange {
   final String organizationCode;
   final String controlId;
+  final int previousCompliant;
+  final int previousTotal;
+  final int currentCompliant;
+  final int currentTotal;
   final double previousRatio;
   final double currentRatio;
 
   const OpenKatControlChange({
     required this.organizationCode,
     required this.controlId,
+    required this.previousCompliant,
+    required this.previousTotal,
+    required this.currentCompliant,
+    required this.currentTotal,
     required this.previousRatio,
     required this.currentRatio,
   });
 
   double get delta => currentRatio - previousRatio;
+}
+
+class OpenKatOrganizationRanking {
+  final String code;
+  final String name;
+  final DateTime measuredAt;
+  final int critical;
+  final int high;
+  final int affectedSystems;
+  final int totalFindings;
+
+  const OpenKatOrganizationRanking({
+    required this.code,
+    required this.name,
+    required this.measuredAt,
+    required this.critical,
+    required this.high,
+    required this.affectedSystems,
+    required this.totalFindings,
+  });
+}
+
+class OpenKatPortfolioHistoryPoint {
+  final DateTime date;
+  final Map<String, int> severityCounts;
+  final int contributingOrganizations;
+  final int carriedForwardOrganizations;
+
+  const OpenKatPortfolioHistoryPoint({
+    required this.date,
+    required this.severityCounts,
+    required this.contributingOrganizations,
+    required this.carriedForwardOrganizations,
+  });
+}
+
+class OpenKatSystemHotspot {
+  final String organizationCode;
+  final String systemId;
+  final String? hostname;
+  final String? ip;
+  final Map<String, int> severityCounts;
+  final bool unknownSystem;
+
+  const OpenKatSystemHotspot({
+    required this.organizationCode,
+    required this.systemId,
+    required this.hostname,
+    required this.ip,
+    required this.severityCounts,
+    required this.unknownSystem,
+  });
+
+  int get total => severityCounts.values.fold(0, (sum, count) => sum + count);
+}
+
+enum OpenKatSystemChangeKind { moreObserved, fewerObserved, mixed }
+
+class OpenKatSystemChangeItem {
+  final String organizationCode;
+  final String systemId;
+  final OpenKatSystemChangeKind kind;
+  final Map<String, int> severityDeltas;
+
+  const OpenKatSystemChangeItem({
+    required this.organizationCode,
+    required this.systemId,
+    required this.kind,
+    required this.severityDeltas,
+  });
+}
+
+class OpenKatCveLandscapeItem {
+  final String cveId;
+  final int organizationCount;
+  final int systemCount;
+  final int observationCount;
+  final Map<String, int> severityCounts;
+
+  const OpenKatCveLandscapeItem({
+    required this.cveId,
+    required this.organizationCount,
+    required this.systemCount,
+    required this.observationCount,
+    required this.severityCounts,
+  });
+}
+
+enum OpenKatCveObservation { newlyObserved, reobserved, noLongerObserved }
+
+class OpenKatCveChangeItem {
+  final String cveId;
+  final OpenKatCveObservation observation;
+  final Set<String> organizationCodes;
+  final Set<String> systemIds;
+
+  const OpenKatCveChangeItem({
+    required this.cveId,
+    required this.observation,
+    required this.organizationCodes,
+    required this.systemIds,
+  });
+}
+
+class OpenKatRecommendationItem {
+  final String findingTypeId;
+  final String findingTypeName;
+  final String recommendation;
+  final int organizationCount;
+  final int systemCount;
+  final String highestSeverity;
+
+  const OpenKatRecommendationItem({
+    required this.findingTypeId,
+    required this.findingTypeName,
+    required this.recommendation,
+    required this.organizationCount,
+    required this.systemCount,
+    required this.highestSeverity,
+  });
 }
 
 class OpenKatCveExposure {
@@ -273,56 +403,155 @@ class OpenKatMonitoringMutation {
 /// Kleine, herbruikbare bouwstenen waaruit scenario's een plan samenstellen.
 enum OpenKatReportBlockKind {
   managementOverview,
+  portfolioSummary,
+  organizationComparison,
+  severityConcentration,
+  portfolioTrend,
+  findingTypePrevalence,
   measurementAvailability,
+  measurementAccountability,
   findingLifecycle,
+  findingAge,
+  systemHotspots,
+  systemChanges,
   cveExposure,
+  cveLandscape,
+  cveChanges,
+  controlCoverage,
+  controlChanges,
+  recommendations,
+  assetInventory,
+  monitoringCoverage,
   monitoringChanges,
+  organizationOverview,
 }
 
 /// Voorwaarden die uit de betekenis van een blok volgen, onafhankelijk van
 /// wat een (eventueel geïnjecteerd) scenario erover declareert.
 class OpenKatReportBlockPreconditions {
   final Set<OpenKatReportCapability> capabilities;
+  final Set<OpenKatReportScopeKind> scopes;
   final bool requiresPreviousAsOf;
   final bool requiresCveId;
   final bool omitWhenUnavailable;
+  final int constructionBudget;
+  final int viewLimit;
 
   const OpenKatReportBlockPreconditions({
     this.capabilities = const {},
+    this.scopes = const {
+      OpenKatReportScopeKind.portfolio,
+      OpenKatReportScopeKind.organization,
+    },
     this.requiresPreviousAsOf = false,
     this.requiresCveId = false,
     this.omitWhenUnavailable = false,
+    this.constructionBudget = OpenKatReportPolicy.maximumTableRowLimit,
+    this.viewLimit = 7,
   });
 }
 
-extension OpenKatReportBlockContract on OpenKatReportBlockKind {
-  OpenKatReportBlockPreconditions get preconditions => switch (this) {
-    OpenKatReportBlockKind.managementOverview ||
-    OpenKatReportBlockKind.measurementAvailability =>
-      const OpenKatReportBlockPreconditions(),
-    OpenKatReportBlockKind.findingLifecycle =>
-      const OpenKatReportBlockPreconditions(
-        capabilities: {
-          OpenKatReportCapability.historicalSnapshots,
-          OpenKatReportCapability.findingLifecycle,
-        },
-        requiresPreviousAsOf: true,
-        omitWhenUnavailable: true,
-      ),
-    OpenKatReportBlockKind.cveExposure => const OpenKatReportBlockPreconditions(
+/// Intrinsieke blokcontracten. Een geïnjecteerd scenario kan deze voorwaarden
+/// niet verzwakken, omdat de motor uitsluitend dit register raadpleegt.
+abstract final class OpenKatReportBlockRegistry {
+  static const Map<OpenKatReportBlockKind, OpenKatReportBlockPreconditions>
+  definitions = {
+    OpenKatReportBlockKind.managementOverview:
+        OpenKatReportBlockPreconditions(),
+    OpenKatReportBlockKind.portfolioSummary: OpenKatReportBlockPreconditions(),
+    OpenKatReportBlockKind.organizationComparison:
+        OpenKatReportBlockPreconditions(
+          capabilities: {OpenKatReportCapability.multipleOrganizations},
+          omitWhenUnavailable: true,
+        ),
+    OpenKatReportBlockKind.severityConcentration:
+        OpenKatReportBlockPreconditions(),
+    OpenKatReportBlockKind.portfolioTrend: OpenKatReportBlockPreconditions(
+      capabilities: {OpenKatReportCapability.historicalSnapshots},
+      omitWhenUnavailable: true,
+    ),
+    OpenKatReportBlockKind.findingTypePrevalence:
+        OpenKatReportBlockPreconditions(),
+    OpenKatReportBlockKind.measurementAvailability:
+        OpenKatReportBlockPreconditions(viewLimit: 8),
+    OpenKatReportBlockKind.measurementAccountability:
+        OpenKatReportBlockPreconditions(viewLimit: 8),
+    OpenKatReportBlockKind.findingLifecycle: OpenKatReportBlockPreconditions(
+      capabilities: {
+        OpenKatReportCapability.historicalSnapshots,
+        OpenKatReportCapability.findingLifecycle,
+      },
+      requiresPreviousAsOf: true,
+      omitWhenUnavailable: true,
+    ),
+    OpenKatReportBlockKind.findingAge: OpenKatReportBlockPreconditions(
+      capabilities: {OpenKatReportCapability.reliableOpenedAt},
+      omitWhenUnavailable: true,
+      viewLimit: 8,
+    ),
+    OpenKatReportBlockKind.systemHotspots: OpenKatReportBlockPreconditions(
+      viewLimit: 8,
+    ),
+    OpenKatReportBlockKind.systemChanges: OpenKatReportBlockPreconditions(
+      capabilities: {
+        OpenKatReportCapability.historicalSnapshots,
+        OpenKatReportCapability.stableAssetIdentity,
+        OpenKatReportCapability.comparableMeasurementCoverage,
+      },
+      requiresPreviousAsOf: true,
+    ),
+    OpenKatReportBlockKind.cveExposure: OpenKatReportBlockPreconditions(
       capabilities: {OpenKatReportCapability.reliableCveReferences},
       requiresCveId: true,
     ),
-    OpenKatReportBlockKind.monitoringChanges =>
-      const OpenKatReportBlockPreconditions(
-        capabilities: {
-          OpenKatReportCapability.historicalSnapshots,
-          OpenKatReportCapability.reliableMonitoringStatus,
-          OpenKatReportCapability.stableAssetIdentity,
-        },
-        requiresPreviousAsOf: true,
-      ),
+    OpenKatReportBlockKind.cveLandscape: OpenKatReportBlockPreconditions(
+      capabilities: {OpenKatReportCapability.reliableCveReferences},
+    ),
+    OpenKatReportBlockKind.cveChanges: OpenKatReportBlockPreconditions(
+      capabilities: {
+        OpenKatReportCapability.reliableCveReferences,
+        OpenKatReportCapability.historicalSnapshots,
+        OpenKatReportCapability.comparableMeasurementCoverage,
+      },
+      requiresPreviousAsOf: true,
+    ),
+    OpenKatReportBlockKind.controlCoverage: OpenKatReportBlockPreconditions(
+      viewLimit: 8,
+    ),
+    OpenKatReportBlockKind.controlChanges: OpenKatReportBlockPreconditions(
+      capabilities: {
+        OpenKatReportCapability.historicalSnapshots,
+        OpenKatReportCapability.comparableControlsWithDenominator,
+        OpenKatReportCapability.comparableMeasurementCoverage,
+      },
+      requiresPreviousAsOf: true,
+      viewLimit: 8,
+    ),
+    OpenKatReportBlockKind.recommendations: OpenKatReportBlockPreconditions(),
+    OpenKatReportBlockKind.assetInventory: OpenKatReportBlockPreconditions(
+      viewLimit: 8,
+    ),
+    OpenKatReportBlockKind.monitoringCoverage: OpenKatReportBlockPreconditions(
+      capabilities: {OpenKatReportCapability.reliableMonitoringStatus},
+      viewLimit: 8,
+    ),
+    OpenKatReportBlockKind.monitoringChanges: OpenKatReportBlockPreconditions(
+      capabilities: {
+        OpenKatReportCapability.historicalSnapshots,
+        OpenKatReportCapability.reliableMonitoringStatus,
+        OpenKatReportCapability.stableAssetIdentity,
+      },
+      requiresPreviousAsOf: true,
+    ),
+    OpenKatReportBlockKind.organizationOverview:
+        OpenKatReportBlockPreconditions(
+          scopes: {OpenKatReportScopeKind.organization},
+        ),
   };
+
+  static OpenKatReportBlockPreconditions definition(
+    OpenKatReportBlockKind kind,
+  ) => definitions[kind]!;
 }
 
 class OpenKatReportBlock {
@@ -331,7 +560,8 @@ class OpenKatReportBlock {
 
   const OpenKatReportBlock({required this.id, required this.kind});
 
-  OpenKatReportBlockPreconditions get preconditions => kind.preconditions;
+  OpenKatReportBlockPreconditions get preconditions =>
+      OpenKatReportBlockRegistry.definition(kind);
 }
 
 class OpenKatReportPlan {

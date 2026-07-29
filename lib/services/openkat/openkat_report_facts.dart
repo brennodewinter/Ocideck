@@ -9,6 +9,8 @@ import 'openkat_aggregator.dart';
 class OpenKatReportFacts {
   final List<OpenKatOrganization> organizations;
   final OpenKatAggregator aggregator;
+  final Map<String, ({String organizationCode, OpenKatSnapshot snapshot})>
+  _historicalSourceUsage = {};
 
   OpenKatReportFacts(
     List<OpenKatOrganization> organizations, {
@@ -85,6 +87,49 @@ class OpenKatReportFacts {
     ];
   }
 
+  /// Selecties voor een capabilitybeoordeling van bestaand historisch gedrag.
+  ///
+  /// Gerichte vergelijkingsscenario's eisen een expliciete vorige peildatum.
+  /// Het compatibele managementrapport mag daarnaast signaleren dat historie
+  /// bestaat. De centrale feitenlaag kiest daarvoor uitsluitend de meting
+  /// direct vóór de huidige, zodat geen scenario een eigen definitie maakt.
+  List<OpenKatReportSelection> comparisonSelections(
+    OpenKatReportRequest request,
+  ) {
+    if (request.previousAsOf != null) return selections(request);
+    final currentSelections = selections(request);
+    return [
+      for (final selection in currentSelections)
+        OpenKatReportSelection(
+          organization: selection.organization,
+          currentAsOf: request.currentAsOf,
+          previousAsOf: selection.current?.reportDate,
+          current: selection.current,
+          previous: selection.current == null
+              ? null
+              : _snapshotBefore(
+                  selection.organization,
+                  selection.current!.reportDate,
+                ),
+        ),
+    ];
+  }
+
+  OpenKatSnapshot? _snapshotBefore(
+    OpenKatOrganization organization,
+    DateTime before,
+  ) {
+    OpenKatSnapshot? selected;
+    for (final snapshot in organization.snapshots) {
+      if (!snapshot.usable || !snapshot.reportDate.isBefore(before)) continue;
+      if (selected == null ||
+          snapshot.reportDate.isAfter(selected.reportDate)) {
+        selected = snapshot;
+      }
+    }
+    return selected;
+  }
+
   OpenKatReportSelection _selectionFor(
     OpenKatOrganization organization,
     OpenKatReportRequest request,
@@ -92,7 +137,7 @@ class OpenKatReportFacts {
     final current = snapshotOnOrBefore(organization, request.currentAsOf);
     final explicitPrevious = request.previousAsOf;
     final previousCandidate = explicitPrevious == null
-        ? _snapshotBefore(organization, current?.reportDate)
+        ? null
         : snapshotOnOrBefore(organization, explicitPrevious);
     final previous =
         current != null &&
@@ -103,26 +148,10 @@ class OpenKatReportFacts {
     return OpenKatReportSelection(
       organization: organization,
       currentAsOf: request.currentAsOf,
-      previousAsOf: explicitPrevious ?? current?.reportDate,
+      previousAsOf: explicitPrevious,
       current: current,
       previous: previous,
     );
-  }
-
-  OpenKatSnapshot? _snapshotBefore(
-    OpenKatOrganization organization,
-    DateTime? before,
-  ) {
-    if (before == null) return null;
-    OpenKatSnapshot? selected;
-    for (final snapshot in organization.snapshots) {
-      if (!snapshot.usable || !snapshot.reportDate.isBefore(before)) continue;
-      if (selected == null ||
-          snapshot.reportDate.isAfter(selected.reportDate)) {
-        selected = snapshot;
-      }
-    }
-    return selected;
   }
 
   List<OpenKatMeasurementUsage> measurementUsages(
@@ -149,22 +178,62 @@ class OpenKatReportFacts {
     ],
   ];
 
-  List<OpenKatSourceTrace> sourceTraces(OpenKatReportRequest request) => [
-    for (final selection in selections(request)) ...[
-      if (selection.current != null)
-        _trace(
+  List<OpenKatSourceTrace> sourceTraces(OpenKatReportRequest request) {
+    final traces = <String, OpenKatSourceTrace>{};
+    void add(
+      String organizationCode,
+      OpenKatMeasurementRole role,
+      OpenKatSnapshot snapshot,
+    ) {
+      traces.putIfAbsent(
+        _sourceKey(organizationCode, snapshot),
+        () => _trace(organizationCode, role, snapshot),
+      );
+    }
+
+    for (final selection in selections(request)) {
+      final current = selection.current;
+      final previous = selection.previous;
+      if (current != null) {
+        add(
           selection.organization.code,
           OpenKatMeasurementRole.current,
-          selection.current!,
-        ),
-      if (selection.previous != null)
-        _trace(
+          current,
+        );
+      }
+      if (previous != null) {
+        add(
           selection.organization.code,
           OpenKatMeasurementRole.previous,
-          selection.previous!,
-        ),
-    ],
-  ];
+          previous,
+        );
+      }
+    }
+    for (final usage in _historicalSourceUsage.values) {
+      add(
+        usage.organizationCode,
+        OpenKatMeasurementRole.historical,
+        usage.snapshot,
+      );
+    }
+    return List.unmodifiable(traces.values);
+  }
+
+  /// Registreert een oudere bron uitsluitend wanneer een feitenquery haar
+  /// inhoud werkelijk bij de rapportberekening betrekt.
+  void recordHistoricalSnapshot(
+    String organizationCode,
+    OpenKatSnapshot snapshot,
+  ) {
+    _historicalSourceUsage.putIfAbsent(
+      _sourceKey(organizationCode, snapshot),
+      () => (organizationCode: organizationCode, snapshot: snapshot),
+    );
+  }
+
+  String _sourceKey(String organizationCode, OpenKatSnapshot snapshot) =>
+      '$organizationCode\u0000${snapshot.reportDate.toIso8601String()}'
+      '\u0000${snapshot.sourceFile}\u0000${snapshot.sourceHash}';
 
   OpenKatSourceTrace _trace(
     String organizationCode,
@@ -299,11 +368,17 @@ class OpenKatReportFacts {
   Set<String> _findingIdsBefore(
     OpenKatOrganization organization,
     DateTime before,
-  ) => {
-    for (final snapshot in organization.snapshots)
-      if (snapshot.usable && snapshot.reportDate.isBefore(before))
-        for (final finding in snapshot.findings) finding.id,
-  };
+  ) {
+    final ids = <String>{};
+    for (final snapshot in organization.snapshots) {
+      if (!snapshot.usable || !snapshot.reportDate.isBefore(before)) continue;
+      recordHistoricalSnapshot(organization.code, snapshot);
+      for (final finding in snapshot.findings) {
+        ids.add(finding.id);
+      }
+    }
+    return ids;
+  }
 
   List<OpenKatControlChange> controlChanges(OpenKatReportRequest request) {
     final out = <OpenKatControlChange>[];
@@ -312,8 +387,10 @@ class OpenKatReportFacts {
       final previous = selection.previous;
       if (current == null || previous == null) continue;
       for (final id in {...current.controls.keys, ...previous.controls.keys}) {
-        final currentRatio = current.controls[id]?.ratio;
-        final previousRatio = previous.controls[id]?.ratio;
+        final currentScore = current.controls[id];
+        final previousScore = previous.controls[id];
+        final currentRatio = currentScore?.ratio;
+        final previousRatio = previousScore?.ratio;
         if (currentRatio == null ||
             previousRatio == null ||
             currentRatio == previousRatio) {
@@ -323,6 +400,10 @@ class OpenKatReportFacts {
           OpenKatControlChange(
             organizationCode: selection.organization.code,
             controlId: id,
+            previousCompliant: previousScore!.compliant!,
+            previousTotal: previousScore.total!,
+            currentCompliant: currentScore!.compliant!,
+            currentTotal: currentScore.total!,
             previousRatio: previousRatio,
             currentRatio: currentRatio,
           ),

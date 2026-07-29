@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/openkat/openkat_models.dart';
 import 'package:ocideck/models/openkat/openkat_reporting_models.dart';
+import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/scorecard_spec.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_safety.dart';
@@ -69,6 +70,7 @@ OpenKatReportRequest _request(
   OpenKatReportLanguage language = OpenKatReportLanguage.dutch,
   OpenKatReportPolicy policy = const OpenKatReportPolicy(),
   String? cveId,
+  DateTime? previousAsOf,
 }) => OpenKatReportRequest(
   scenarioId: scenarioId,
   scope: const OpenKatReportScope.portfolio(),
@@ -76,6 +78,7 @@ OpenKatReportRequest _request(
   language: language,
   policy: policy,
   cveId: cveId,
+  previousAsOf: previousAsOf,
 );
 
 Slide _slideWithTitle(Iterable<Slide> slides, String title) =>
@@ -361,8 +364,8 @@ void main() {
         ...trend.bullets,
         ChartSpec.parse(trend.customMarkdown).title,
       ].join(' ').toLowerCase();
-      expect(trendText, contains('meetdekking'));
-      expect(trendText, contains('niet als trend'));
+      expect(trendText, isNot(contains('verbeter')));
+      expect(trendText, isNot(contains('verslechter')));
       expect(
         deck.slides
             .expand((slide) => [slide.title, slide.subtitle, ...slide.bullets])
@@ -477,6 +480,191 @@ void main() {
     expect(exposure.viewLimit, isNull);
   });
 
+  test('assetinventaris kapt zichtbaar af en is standaard weggelaten', () {
+    final facts = OpenKatReportFacts([
+      _organization([
+        _snapshot(
+          DateTime.utc(2026, 7, 20),
+          source: 'assets.json',
+          systems: [
+            for (var i = 0; i < 4; i++)
+              OpenKatSystem(
+                id: 'asset-$i.example',
+                hostname: 'asset-$i.example',
+                ip: '192.0.2.${i + 1}',
+              ),
+          ],
+        ),
+      ]),
+    ]);
+    final deck = OpenKatReportComposer(facts).compose(
+      _request(
+        'asset-inventory',
+        policy: const OpenKatReportPolicy(tableRowLimit: 2),
+      ),
+      const OpenKatReportPlan(
+        scenarioId: 'asset-inventory',
+        blocks: [
+          OpenKatReportBlock(
+            id: 'assets',
+            kind: OpenKatReportBlockKind.assetInventory,
+          ),
+        ],
+      ),
+    );
+    final inventory = _slideWithTitle(
+      deck.slides,
+      'Systemen in de gekozen metingen',
+    );
+
+    expect(inventory.privacy, PrivacyDisposition.redact);
+    expect(inventory.tableRows, hasLength(4));
+    expect(inventory.tableRows.last.first, contains('Meer resultaten'));
+    expect(inventory.viewLimit, isNull);
+  });
+
+  test('severityconcentratie begrenst grafiek en tabellen zichtbaar', () {
+    final facts = OpenKatReportFacts([
+      for (var i = 0; i < 4; i++)
+        _organization(
+          [
+            _snapshot(
+              DateTime.utc(2026, 7, 20),
+              source: 'org-$i.json',
+              findings: [
+                _finding(
+                  '$i',
+                  severity: 'critical',
+                  typeId: 'TYPE-$i',
+                  systemId: 'asset-$i.example',
+                ),
+              ],
+            ),
+          ],
+          code: 'org-$i',
+          name: 'Organisatie $i',
+        ),
+    ]);
+    final deck = OpenKatReportComposer(facts).compose(
+      _request(
+        'critical-high-concentration',
+        policy: const OpenKatReportPolicy(tableRowLimit: 2),
+      ),
+      const OpenKatReportPlan(
+        scenarioId: 'critical-high-concentration',
+        blocks: [
+          OpenKatReportBlock(
+            id: 'concentration',
+            kind: OpenKatReportBlockKind.severityConcentration,
+          ),
+        ],
+      ),
+    );
+    final chart = _slideWithTitle(deck.slides, 'Critical/high per organisatie');
+    final systems = _slideWithTitle(
+      deck.slides,
+      'Systemen met de meeste critical/high findings',
+    );
+    final types = _slideWithTitle(
+      deck.slides,
+      'Findingtypen achter de concentratie',
+    );
+
+    expect(ChartSpec.parse(chart.customMarkdown).x, hasLength(2));
+    expect(chart.subtitle, contains('Meer organisaties weggelaten'));
+    for (final table in [systems, types]) {
+      expect(table.tableRows.last.first, contains('Meer resultaten'));
+      expect(table.viewLimit, isNull);
+    }
+  });
+
+  test('minste organisaties gebruikt dezelfde critical-high-rangschikking', () {
+    OpenKatOrganization organization(
+      String code, {
+      int critical = 0,
+      int high = 0,
+    }) => _organization(
+      [
+        _snapshot(
+          DateTime.utc(2026, 7, 20),
+          source: '$code.json',
+          findings: [
+            for (var i = 0; i < critical; i++)
+              _finding('$code-c$i', severity: 'critical'),
+            for (var i = 0; i < high; i++)
+              _finding('$code-h$i', severity: 'high'),
+          ],
+        ),
+      ],
+      code: code,
+      name: code.toUpperCase(),
+    );
+
+    final deck =
+        OpenKatReportComposer(
+          OpenKatReportFacts([
+            organization('alpha', critical: 2),
+            organization('beta', high: 1),
+            organization('gamma'),
+          ]),
+        ).compose(
+          _request(
+            'organization-comparison',
+            policy: const OpenKatReportPolicy(tableRowLimit: 2),
+          ),
+          const OpenKatReportPlan(
+            scenarioId: 'organization-comparison',
+            blocks: [
+              OpenKatReportBlock(
+                id: 'organizations',
+                kind: OpenKatReportBlockKind.organizationComparison,
+              ),
+            ],
+          ),
+        );
+    final least = _slideWithTitle(
+      deck.slides,
+      'Minste waargenomen critical/high findings',
+    );
+
+    expect(least.tableRows[1].first, 'GAMMA');
+    expect(least.tableRows[2].first, 'BETA');
+    expect(least.tableRows.last.first, contains('Meer resultaten'));
+    expect(least.viewLimit, isNull);
+  });
+
+  test('trenddekking gebruikt de viewlimiet uit het blokregister', () {
+    final facts = OpenKatReportFacts([
+      _organization([
+        _snapshot(DateTime.utc(2026, 7, 13), source: 'previous.json'),
+        _snapshot(DateTime.utc(2026, 7, 20), source: 'current.json'),
+      ]),
+    ]);
+    final deck = OpenKatReportComposer(facts).compose(
+      _request('portfolio-trend'),
+      const OpenKatReportPlan(
+        scenarioId: 'portfolio-trend',
+        blocks: [
+          OpenKatReportBlock(
+            id: 'trend',
+            kind: OpenKatReportBlockKind.portfolioTrend,
+          ),
+        ],
+      ),
+    );
+    final coverage = _slideWithTitle(
+      deck.slides,
+      'Bijdrage en carried-forward metingen',
+    );
+
+    expect(
+      coverage.viewLimit?.limit,
+      OpenKatReportBlockRegistry.definition(
+        OpenKatReportBlockKind.portfolioTrend,
+      ).viewLimit,
+    );
+  });
+
   test('Engelse trendtekst wordt uit getypepte feiten opgebouwd', () {
     final previous = _snapshot(
       DateTime.utc(2026, 7, 13),
@@ -506,6 +694,7 @@ void main() {
           _request(
             'management-overview',
             language: OpenKatReportLanguage.english,
+            previousAsOf: DateTime.utc(2026, 7, 13),
           ),
           const OpenKatReportPlan(
             scenarioId: 'management-overview',

@@ -63,6 +63,13 @@ class OpenKatAggregateReportAdapter extends OpenKatEnvelopeAdapter {
   const OpenKatAggregateReportAdapter();
 
   @override
+  Set<OpenKatSourceFeature> get sourceFeatures => const {
+    OpenKatSourceFeature.stableAssetIdentity,
+    OpenKatSourceFeature.stableFindingIdentity,
+    OpenKatSourceFeature.reliableOpenedAt,
+  };
+
+  @override
   String get name => 'openkat-organisatierapport';
 
   @override

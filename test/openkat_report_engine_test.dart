@@ -80,7 +80,7 @@ void main() {
   final engine = OpenKatReportEngine();
 
   group('scenarioregister en verzoekvalidatie', () {
-    test('alle zes publieke scenario-id’s zijn aangesloten', () {
+    test('alle 22 publieke scenario-id’s zijn aangesloten', () {
       const ids = {
         'management-overview',
         'weekly-comparison',
@@ -88,6 +88,22 @@ void main() {
         'cve-exposure',
         'monitoring-changes',
         'data-quality',
+        'organization-comparison',
+        'portfolio-trend',
+        'finding-type-prevalence',
+        'critical-high-concentration',
+        'cve-landscape',
+        'cve-changes',
+        'finding-lifecycle',
+        'finding-age',
+        'system-hotspots',
+        'system-changes',
+        'control-coverage',
+        'control-changes',
+        'recommendations-overview',
+        'asset-inventory',
+        'monitoring-coverage',
+        'measurement-accountability',
       };
       expect(
         engine.registry.descriptors.map((descriptor) => descriptor.id).toSet(),
@@ -600,7 +616,8 @@ void main() {
         result.deck!.slides
             .firstWhere(
               (slide) => slide.notes.contains(
-                'ocideck_openkat_view: portfolio.summary',
+                'ocideck_openkat_view: '
+                'report.management-overview.portfolio-summary.summary',
               ),
             )
             .title,
@@ -610,7 +627,9 @@ void main() {
         result.deck!.slides
             .firstWhere(
               (slide) => slide.notes.contains(
-                'ocideck_openkat_view: report.management-overview.availability',
+                'ocideck_openkat_view: '
+                'report.management-overview.measurement-availability.'
+                'measurements',
               ),
             )
             .title,
