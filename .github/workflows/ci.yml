@@ -149,15 +149,29 @@ jobs:
       # niet in één blok bovenaan de taak — die taak scant hier niet alléén, en
       # een pin tachtig regels van zijn download vandaan wordt bij een bump de
       # ene helft die je vergeet.
+      # `haal`: dezelfde curl, maar met een paar herkansingen. Deze twee stappen
+      # halen een release van github.com, en die verbinding valt af en toe om —
+      # de poort strandde er twee keer op met curl-code 35 (TLS-handshake), tien
+      # minuten werk verderop en zonder dat er iets met de code mis was. Een
+      # faalmail voor een netwerkhikje leert niemand iets, en het maakt de mails
+      # die er wél toe doen minder geloofwaardig.
+      #
+      # Dit verzwakt de pin niet: wát er binnenkomt wordt onveranderd tegen de
+      # sha256 uit het checksums-bestand gelegd. Alleen het aantal pogingen om
+      # het binnen te krijgen verandert.
       - name: gitleaks volgens de pin
         env:
           GITLEAKS_VERSION: 8.30.1
         run: |
           set -euo pipefail
+          haal() {
+            curl -fsSL --retry 5 --retry-all-errors --retry-delay 3 \
+              --connect-timeout 30 -o "$1" "$2"
+          }
           BASE="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}"
           ARCHIVE="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
-          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
-          curl -fsSLo /tmp/gitleaks_checksums.txt \
+          haal "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
+          haal /tmp/gitleaks_checksums.txt \
             "$BASE/gitleaks_${GITLEAKS_VERSION}_checksums.txt"
           SHA=$(awk -v f="$ARCHIVE" '$2 == f { print $1 }' /tmp/gitleaks_checksums.txt)
           test -n "$SHA"
@@ -166,15 +180,20 @@ jobs:
           rm "/tmp/$ARCHIVE"
           gitleaks version
 
+      # `haal`: zie de toelichting bij de gitleaks-stap hierboven.
       - name: trufflehog volgens de pin
         env:
           TRUFFLEHOG_VERSION: 3.95.9
         run: |
           set -euo pipefail
+          haal() {
+            curl -fsSL --retry 5 --retry-all-errors --retry-delay 3 \
+              --connect-timeout 30 -o "$1" "$2"
+          }
           BASE="https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}"
           ARCHIVE="trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz"
-          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
-          curl -fsSLo /tmp/trufflehog_checksums.txt \
+          haal "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
+          haal /tmp/trufflehog_checksums.txt \
             "$BASE/trufflehog_${TRUFFLEHOG_VERSION}_checksums.txt"
           SHA=$(awk -v f="$ARCHIVE" '$2 == f { print $1 }' /tmp/trufflehog_checksums.txt)
           test -n "$SHA"
