@@ -490,6 +490,26 @@ void main() {
       expect(result.generated, isTrue);
       expect(result.deck!.language, 'en');
       expect(result.deck!.title, 'OpenKAT management overview');
+      expect(
+        result.deck!.slides
+            .firstWhere(
+              (slide) => slide.notes.contains(
+                'ocideck_openkat_view: portfolio.summary',
+              ),
+            )
+            .title,
+        'Key figures',
+      );
+      expect(
+        result.deck!.slides
+            .firstWhere(
+              (slide) => slide.notes.contains(
+                'ocideck_openkat_view: report.management-overview.availability',
+              ),
+            )
+            .title,
+        'Measurements used',
+      );
     });
   });
 }

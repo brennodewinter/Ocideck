@@ -78,6 +78,7 @@ class OpenKatReportEngine {
     final plan = scenario.compose(facts, request);
     final deck = OpenKatReportComposer(
       facts,
+      language: request.language,
     ).compose(request, plan, outputPath: outputPath);
     return OpenKatReportResult(
       deck: deck,
